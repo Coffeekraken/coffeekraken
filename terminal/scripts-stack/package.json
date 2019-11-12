@@ -1,6 +1,6 @@
 {
   "name": "@coffeekraken/scripts-stack",
-  "version": "1.0.1",
+  "version": "0.0.0",
   "bin": {
     "coffeekraken-scripts-stack": "./bin/coffeekraken-scripts-stack"
   },

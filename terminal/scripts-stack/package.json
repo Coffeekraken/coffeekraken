@@ -32,5 +32,6 @@
     "remove-blank-lines": "^1.0.8",
     "strip-ansi": "^4.0.0",
     "terminate": "^2.1.2"
-  }
+  },
+  "gitHead": "884836737f46f91c8c681a995caaed9c8b18e268"
 }

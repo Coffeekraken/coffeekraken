@@ -1,0 +1,31 @@
+#!/usr/bin/env node
+
+const program = require('commander')
+const packageJson = require('../package.json')
+
+function collect (val, memo) {
+  memo.push(val)
+  return memo
+}
+
+program
+  .version(packageJson.version)
+  .option('-c, --color [value]', 'Main UI color [yellow]', 'yellow')
+  .option('--no-watch [value]', 'Do not watch at start [false]', false)
+  .option('--no-switch [value]', 'Do not switch between scripts when they start [false]', false)
+  .option('--no-notifications [value]', 'Do not display any notifications [false]', false)
+  .option('-i, --ignore [value]>', 'Do not list the specified script [null]', collect, [])
+  .parse(process.argv)
+
+process.title = 'coffeekraken-scripts-stack'
+
+const ScriptsStack = require('../dist/index').default
+const scriptsStackInstance = new ScriptsStack({
+  scripts: program.args,
+  watch: program.watch,
+  switch: program.switch,
+  notifications: program.notifications,
+  color: program.color || null,
+  ignore: program.ignore
+})
+scriptsStackInstance.start()

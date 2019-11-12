@@ -1,6 +1,6 @@
 {
   "name": "@coffeekraken/scripts-stack",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "bin": {
     "coffeekraken-scripts-stack": "./bin/coffeekraken-scripts-stack"
   },
@@ -33,5 +33,5 @@
     "strip-ansi": "^4.0.0",
     "terminate": "^2.1.2"
   },
-  "gitHead": "b514515bd720a29bb91871962fceeac2621d0b2c"
+  "gitHead": "ecde03282c46c5533b2d1e536a73e98beda783a3"
 }

@@ -1,7 +1,0 @@
-{
-  "packages": [
-    "terminal/*",
-    "layout/*"
-  ],
-  "version": "independent"
-}

@@ -31,5 +31,8 @@
   "license": "MIT",
   "devDependencies": {
     "@coffeekraken/scripts-stack": "^0.0.4"
+  },
+  "dependencies": {
+    "@coffeekraken/gridle": "0.0.4"
   }
 }

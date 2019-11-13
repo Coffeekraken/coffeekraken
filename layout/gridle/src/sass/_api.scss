@@ -1,0 +1,72 @@
+/**
+ * Generate custom class using gridle states
+ */
+@mixin g-custom-class(
+	$classname,
+	$statesNames: g-states-names()
+) {
+
+	@each $stateName in $statesNames {
+		@include g-state($stateName) {
+			$sel : "#{$classname}\\@#{$stateName}";
+			@if $stateName == default {
+				$sel : "#{$classname}";
+			}
+			.#{$sel} {
+				@content;
+			}
+		}
+	}
+}
+
+/*
+ * Gridle state
+ *
+ * @param 	string|map|list 	$states 		A list of states, a state name or a state map
+ * @param 	boolean 			$has-parent 	Mostly always true, mean that the mixin is used in a css selector and not in css root level
+ */
+@mixin g-state(
+	$statesNames
+) {
+	@each $stateName in $statesNames {
+		@include _g-state($stateName) {
+			@content;
+		}
+	}
+}
+@mixin _g-state(
+	$stateName : default
+) {
+	// variables :
+	$state : g-state($stateName);
+
+	// manage previous state
+	$previous_state : null;
+	$previous_stateName : null;
+
+	// check if need to tack the current state
+  @if $_g-current-state {
+    $previous_state : $_g-current-state;
+    $previous_stateName : $_g-current-stateName;
+  }
+  $_g-current-state : $state !global;
+  $_g-current-stateName : $stateName !global;
+
+	// get the media query :
+	$q : g-media-query($stateName);
+
+	// make the media query if a query exist :
+	@if $q {
+		@media #{$q} {
+			@content;
+		}
+	} @else {
+		@content;
+	}
+
+	// reset current state to default
+	@if $previous_state and $previous_stateName {
+		$_g-current-state : $previous_state !global;
+		$_g-current-stateName : $previous_stateName !global;
+	}
+}

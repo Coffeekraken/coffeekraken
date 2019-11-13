@@ -1,0 +1,29 @@
+{
+  "name": "@coffeekraken/gridle",
+  "version": "0.0.0",
+  "description": "Gridle grid system",
+  "homepage": "https://coffeekraken.io",
+  "scripts": {
+  },
+  "keywords": [
+    "coffee",
+    "kraken",
+    "coffeekraken",
+    "gridle",
+    "grid",
+    "system",
+    "sass",
+    "responsive"
+  ],
+  "author": "Coffeekraken <hello@coffeekraken.io>",
+  "contributors": [
+    {
+      "name": "Olivier Bossel",
+      "email": "olivier.bossel@gmail.com",
+      "url": "http://olivierbossel.com"
+    }
+  ],
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {}
+}

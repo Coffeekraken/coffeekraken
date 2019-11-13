@@ -1,12 +1,35 @@
 {
   "name": "@coffeekraken/scripts-stack",
   "version": "0.0.1",
+  "description": "Nice terminal interface to handle npm/yarn scripts execution as well as watch and run automatically the wanted ones",
+  "homepage": "https://coffeekraken.io",
   "bin": {
     "coffeekraken-scripts-stack": "./bin/coffeekraken-scripts-stack"
   },
   "scripts": {
     "start": "nps start"
   },
+  "keywords": [
+    "coffee",
+    "kraken",
+    "coffeekraken",
+    "terminal",
+    "scripts",
+    "npm",
+    "interface",
+    "UI",
+    "watch",
+    "command"
+  ],
+  "author": "Coffeekraken <hello@coffeekraken.io>",
+  "contributors": [
+    {
+      "name": "Olivier Bossel",
+      "email": "olivier.bossel@gmail.com",
+      "url": "http://olivierbossel.com"
+    }
+  ],
+  "license": "MIT",
   "devDependencies": {
     "@babel/preset-env": "^7.0.0-beta.36",
     "git-changelog": "^1.1.2",

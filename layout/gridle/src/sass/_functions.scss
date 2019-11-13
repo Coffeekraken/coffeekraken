@@ -1,0 +1,232 @@
+/**
+ * Get states count
+ * @return 	{Integer} 	The number of states defined
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+ @function g-states-count() {
+	@return length($_g-states);
+}
+
+
+/**
+ * Get the current state map
+ * @return 		{Map} 	The current state map
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+@function g-current-state() {
+	@return $_g-current-state;
+}
+
+
+/**
+ * Get the current state name
+ * @return 		{String} 	The current state name
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+@function g-current-state-name() {
+	@return $_g-current-stateName;
+}
+
+
+/*
+ * Get a state map
+ *
+ * @param 	{String} 		[$state=current] 		The name of the state to get
+ * @return 	{Map} 				A state map object
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+@function g-state(
+	$stateName : current
+) {
+
+	// check if need to return the current state
+	@if $stateName == current {
+		@return g-current-state();
+	}
+
+	// check if has a state named like this
+	@if (type-of($stateName) == string
+		and  map-has-key($_g-states, unquote("#{$stateName}")))
+	{
+		@return map-get($_g-states, unquote("#{$stateName}"));
+	}
+
+	// return the default one if exist
+	@if map-has-key($_g-states, default)
+	{
+		@return map-get($_g-states, default);
+	}
+
+	// nothing finded, return the default state
+	@return $_gridle-settings;
+}
+
+
+/**
+ * Check if a state exist :
+ * @param 	{String} 		$name 		The name of the state to check
+ * @return 	{Boolean} 					true if exist
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+@function g-has-state(
+	$stateName
+) {
+	@if $stateName == current {
+		@return true;
+	}
+	@if map-has-key($_g-states, unquote("#{$stateName}")) {
+		@return true;
+	} @else {
+		@return false;
+	}
+}
+
+
+/**
+ * Get a state variable
+ *
+ * @param 	{String} 		$varName 								The variable name
+ * @param  	{String} 		[$stateMap-or-stateName=current] 	 	The state name or a map state value
+ * @return 	{Mixed} 												The finded value
+ */
+@function g-state-var(
+	$varName,
+	$stateName : current
+) {
+	// if is a state :
+	$state : null;
+
+	// get the state (if no state find, return the current one) :
+	$state : g-state($stateName);
+
+	// check if has key
+	@if map-has-key($state, unquote("#{$varName}")) {
+		@return map-get($state, unquote("#{$varName}"));
+	}
+
+	// nothing finded :
+	@return null;
+}
+
+
+/**
+ * get the registered gridle states
+ * @return 	{Map} 		All the registered states
+ * @author 	Olivier Bossel <olivier.bossel@gmail.com>
+ */
+@function g-states() {
+	@return $_g-states;
+}
+
+
+
+/**
+ * get the registered gridle states names
+ * @return 	{List} 		All the registered states names
+ * @author 	Olivier Bossel <olivier.bossel@gmail.com>
+ */
+@function g-states-names() {
+	$list : ();
+	@each $stateName, $state in $_g-states {
+		$list : append($list, $stateName);
+	}
+	@return $list;
+}
+
+/**
+ * Return a multiple of the gutter-unit variable
+ * @param    {Number}    $miltiplicator    The multiplicator to use
+ * @return    {String}    The calc representation of the multiplied value
+ */
+@function g-gutters($multiplicator) {
+	@return calc(var(--g-gutter-unit) * #{$multiplicator});
+}
+
+/**
+ * Return a multiple of the column-unit variable
+ * @param    {Number}    $miltiplicator    The multiplicator to use
+ * @return    {String}    The calc representation of the multiplied value
+ */
+@function g-columns($multiplicator) {
+	@return calc(var(--g-column-unit) * #{$multiplicator});
+}
+
+/**
+ * Return a multiple of the gutter AND column unit variables
+ * @param    {Number}    $miltiplicator    The multiplicator to use
+ * @return    {String}    The calc representation of the multiplied value
+ */
+@function g-columns-gutters($multiplicator) {
+	@return calc((var(--g-column-unit) + var(--g-gutter-unit)) * #{$multiplicator});
+}
+
+/**
+ * Get the media query for a particular state, or width, etc...
+ *
+ * @param 	{Mixed} 		[$stateName=current] 		The state name to generate the media query for
+ * @return 	{String} 												The media query string without the @media
+ */
+@function g-media-query(
+	$stateName : current
+) {
+	// check if is a string :
+	$state : null;
+	@if type-of($stateName) == string
+	{
+		$state : g-state($stateName);
+	}
+	@else if type-of($stateName) == map {
+		$state : $stateName;
+	}
+	@else if $stateName == null
+	{
+		$state : $_gridle-settings;
+	}
+
+	// if it's some settings or a state :
+	@if $state {
+
+		// get vars :
+		$name : map-get($state, name);
+		$min-width : map-get($state, min-width);
+		$max-width : map-get($state, max-width);
+		$query : map-get($state, query);
+
+		// direct query :
+		@if $query
+		{
+			@return $query;
+		}
+		@else if $min-width and $max-width
+		{
+			@return "screen and (min-width: #{$min-width}) and (max-width: #{$max-width})";
+		}
+		@else if $min-width
+		{
+			@return "screen and (min-width: #{$min-width})";
+		}
+		@else if $max-width
+		{
+			@return "screen and (max-width: #{$max-width})";
+		}
+		@else
+		{
+			@return null;
+		}
+
+	}
+	@else
+	{
+		@return null;
+	}
+}
+
+/**
+ * Process a selector by:
+ * 1. replacing @default with ''
+ * @param    {String}    $selector    The selector to process
+ * @return    {String}    The processed selector
+ */
+@function g-process-selector($selector) {
+	@return str_replace($selector, '\\@default', '');
+}

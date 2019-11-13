@@ -1,0 +1,35 @@
+{
+  "name": "@coffeekraken/starter-kit",
+  "version": "1.0.0",
+  "description": "Base HTML files and folder structure with complete build process (js, sass, image compression, etc...) built in",
+  "homepage": "https://coffeekraken.io",
+  "scripts": {
+    "dist": "babel src -d dist",
+    "start": "coffeekraken-scripts-stack -i start"
+  },
+  "keywords": [
+    "coffee",
+    "kraken",
+    "coffeekraken",
+    "starter",
+    "kit",
+    "sass",
+    "css",
+    "html",
+    "js",
+    "npm"
+  ],
+  "author": "Coffeekraken <hello@coffeekraken.io>",
+  "contributors": [
+    {
+      "name": "Olivier Bossel",
+      "email": "olivier.bossel@gmail.com",
+      "url": "http://olivierbossel.com"
+    }
+  ],
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@coffeekraken/scripts-stack": "0.0.1"
+  }
+}

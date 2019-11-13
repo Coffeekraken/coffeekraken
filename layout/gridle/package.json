@@ -1,6 +1,6 @@
 {
   "name": "@coffeekraken/gridle",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Gridle grid system",
   "homepage": "https://coffeekraken.io",
   "scripts": {},
@@ -22,5 +22,6 @@
       "url": "http://olivierbossel.com"
     }
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "gitHead": "439d0eac5d23f6337d3a6afda31f42cefe3ae0ba"
 }

@@ -1,6 +1,6 @@
 {
   "name": "@coffeekraken/scripts-stack",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Nice terminal interface to handle npm/yarn scripts execution as well as watch and run automatically the wanted ones",
   "homepage": "https://coffeekraken.io",
   "bin": {
@@ -56,5 +56,5 @@
     "strip-ansi": "^4.0.0",
     "terminate": "^2.1.2"
   },
-  "gitHead": "c1f0b063eb94ddce51f5f8f3ffcd0683d018a693"
+  "gitHead": "439d0eac5d23f6337d3a6afda31f42cefe3ae0ba"
 }

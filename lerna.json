@@ -1,8 +1,7 @@
 {
   "packages": [
     "terminal/*",
-    "layout/*",
-    "!layout/starter-kit"
+    "layout/*"
   ],
   "version": "independent"
 }

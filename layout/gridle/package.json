@@ -1,10 +1,9 @@
 {
   "name": "@coffeekraken/gridle",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Gridle grid system",
   "homepage": "https://coffeekraken.io",
-  "scripts": {
-  },
+  "scripts": {},
   "keywords": [
     "coffee",
     "kraken",
@@ -23,7 +22,5 @@
       "url": "http://olivierbossel.com"
     }
   ],
-  "license": "MIT",
-  "dependencies": {},
-  "devDependencies": {}
+  "license": "MIT"
 }

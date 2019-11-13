@@ -1,7 +1,7 @@
 {
   "name": "@coffeekraken/starter-kit",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Base HTML files and folder structure with complete build process (js, sass, image compression, etc...) built in",
   "homepage": "https://coffeekraken.io",
   "scripts": {
@@ -30,6 +30,6 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "@coffeekraken/scripts-stack": "^0.0.2"
+    "@coffeekraken/scripts-stack": "^0.0.3"
   }
 }

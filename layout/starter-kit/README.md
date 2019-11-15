@@ -1,1 +1,22 @@
 # Coffeekraken Starter Kit
+
+Base HTML files and folder structure with complete build process (js, scss, image compression, etc...) built in
+
+## Features
+
+Here's the list of features that are built-in the starter kit:
+
+- [NPM](https://www.npmjs.com/) : Package manager
+- [Babel](https://babeljs.io/) : Javascript compiler
+- [Webpack](https://www.npmjs.com/package/webpack) : Build and compress JS files
+- [Sass](https://www.npmjs.com/package/sass) : Process and build SCSS files into a style.css one
+- [Imagemin](https://www.npmjs.com/package/imagemin) : Compress images
+- [Prettier](https://prettier.io/) : Format the code source files
+  - [Pretty-quick](https://www.npmjs.com/package/pretty-quick) : Runs Prettier on your changed files
+- [Browserslist](https://github.com/browserslist/browserslist) : Share target browsers between different front-end tools, like Autoprefixer, Stylelint and babel-preset-env
+- [Editorconfig](https://editorconfig.org/) : Helps developers maintain consistent coding styles between different editors
+- [ESLint](https://eslint.org/) : Find and fix problems in your JavaScript code
+  - [eslint-config-airbnb](https://www.npmjs.com/package/eslint-config-airbnb) : This package provides Airbnb's .eslintrc as an extensible shared config
+  - [eslint-config-prettier](https://github.com/prettier/eslint-config-prettier) : Turns off all rules that are unnecessary or might conflict with Prettier
+- [Coffeekraken-scripts-stack](https://www.npmjs.com/package/@coffeekraken/scripts-stack) : Nice terminal interface to handle npm/yarn scripts execution as well as watch and run automatically the wanted ones
+- [Gridle](https://www.npmjs.com/package/@coffeekraken/gridle) : Gridle is a simple but powerful and convenient grid that make use of the CSS grid model

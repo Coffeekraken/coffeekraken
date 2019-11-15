@@ -1,0 +1,19 @@
+/**
+ * Gridle setup
+ * For documentation : https://www.npmjs.com/package/@coffeekraken/gridle
+ */
+@include g-setup(
+  (
+    columns: 12,
+    column-width: 60,
+    // unitless value
+      width: 1200,
+    // unitless value
+      container-width: 85vw,
+    // absolute value
+      container-max-width: 1440px
+  )
+);
+
+// states registration
+@include g-register-mobile-first-states();

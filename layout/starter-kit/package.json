@@ -1,14 +1,32 @@
 {
   "name": "@coffeekraken/starter-kit",
-  "private": true,
-  "version": "0.0.3",
-  "description": "Base HTML files and folder structure with complete build process (js, sass, image compression, etc...) built in",
+  "version": "1.0.0",
+  "description": "Base HTML files and folder structure with complete build process (js, scss, image compression, etc...) built in",
   "homepage": "https://coffeekraken.io",
   "scripts": {
-    "dist": "npm run dist.js",
+    "dist": "npm run dist.js && npm run dist.scss && npm run dist.img && npm run dist.fonts",
     "dist.js": "webpack",
+    "dist.scss": "sass src/scss/style.scss dist/css/style.css",
+    "dist.img": "imagemin src/img/**/* --out-dir=dist/img",
+    "dist.fonts": "rm -rf dist/fonts && cp -R src/fonts dist/fonts",
     "pretty-quick": "pretty-quick",
-    "start": "coffeekraken-scripts-stack -i start"
+    "open-browser": "open http://0.0.0.0:8080",
+    "server": "php -S 0.0.0.0:8080 -t .",
+    "start": "coffeekraken-scripts-stack server open-browser -i start -i dist"
+  },
+  "watch": {
+    "dist.js": {
+      "paths": "src/js/**/*.js"
+    },
+    "dist.scss": {
+      "paths": "src/scss/**/*.scss"
+    },
+    "dist.img": {
+      "paths": "src/img/**/*"
+    },
+    "dist.fonts": {
+      "paths": "src/fonts/**/*"
+    }
   },
   "husky": {
     "hooks": {
@@ -50,9 +68,13 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-react-hooks": "^1.7.0",
+    "http-server": "^0.11.1",
     "husky": "^3.0.9",
+    "imagemin": "^7.0.1",
+    "imagemin-cli": "^5.0.0",
     "prettier": "^1.19.1",
     "pretty-quick": "^2.0.1",
+    "sass": "^1.23.3",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
   },

@@ -1,0 +1,20 @@
+// 0 : mixin
+/**
+ * Hello world
+ */
+@mixin hello-world() {
+}
+
+// 1 : function
+/**
+ * Hello World
+ */
+@function hello-world() {
+}
+
+// 2 : variable
+/**
+ * Hello World
+ * @type    {String}
+ */
+$helloWorld: 'Hello World';

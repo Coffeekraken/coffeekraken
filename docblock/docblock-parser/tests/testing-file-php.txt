@@ -1,0 +1,25 @@
+// 0 : next line analyzer
+/**
+ * Hello world
+ */
+function helloWorld() {}
+
+// 1 : static keyword
+/**
+ * Hello world
+ */
+static function helloWorld() {}
+
+// 2 : property with equal sign
+/**
+ * Hello World Property
+ * @type    {String}
+ */
+var $hello = 'world';
+
+// 3 : extends and implements
+/**
+ * Hello World Extends And Implements
+ */
+class HelloWorld extends Hello implements Hello, World {
+}

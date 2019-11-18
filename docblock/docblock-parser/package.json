@@ -1,0 +1,61 @@
+{
+  "name": "@coffeekraken/docblock-parser",
+  "version": "1.0.0",
+  "description": "Simple, powerfull and extensible docblock parser that return a JSON representation to work with",
+  "main": "dist/index.js",
+  "watch": {
+    "doc:js": {
+      "paths": "src/**/*.js"
+    }
+  },
+  "scripts": {
+    "dist": "babel src -d dist --watch",
+    "doc": "rm -rf doc && npm run doc:js",
+    "doc:js": "coffeekraken-docblock-to-markdown -f 'src/**/*.js' -d doc --remove-path src/",
+    "start": "coffeekraken-scripts-stack dist -i start",
+    "test": "jest"
+  },
+  "keywords": [
+    "coffee",
+    "kraken",
+    "coffeekraken",
+    "docblock",
+    "parser",
+    "JSON",
+    "doc",
+    "block",
+    "extensible"
+  ],
+  "author": "Coffeekraken <hello@coffeekraken.io>",
+  "contributors": [
+    {
+      "name": "Olivier Bossel",
+      "email": "olivier.bossel@gmail.com",
+      "url": "http://olivierbossel.com"
+    }
+  ],
+  "license": "MIT",
+  "jest": {
+    "roots": [
+      "tests"
+    ],
+    "transform": {
+      "\\.txt$": "jest-raw-loader"
+    }
+  },
+  "devDependencies": {
+    "@coffeekraken/scripts-stack": "^0.0.4",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.18.2",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-polyfill": "^6.16.0",
+    "babel-preset-env": "^1.7.0",
+    "coffeekraken-docblock-to-markdown": "^1.0.0",
+    "jest": "^23.3.0",
+    "jest-raw-loader": "^1.0.1",
+    "lodash": "^4.17.2",
+    "pre-commit": "^1.2.2",
+    "webpack": "^4.41.2"
+  }
+}

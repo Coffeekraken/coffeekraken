@@ -1,0 +1,34 @@
+{
+  "name": "@coffeekraken/favicons",
+  "version": "1.0.0",
+  "description": "Simply and quickly generate all your favicons using the amazing favicons npm package.",
+  "homepage": "http://coffeekraken.io",
+  "bin": {
+    "coffeekraken-favicons": "./bin/coffeekraken-favicons.js"
+  },
+  "scripts": {
+    "start": "./bin/coffeekraken-favicons.js  --source data/src/favicon.png --output data/dist --html-output data/dist/favicons.html --path '/data/dist' --theme '#fff' --background '#fff'"
+  },
+  "keywords": [
+    "coffee",
+    "kraken",
+    "coffeekraken",
+    "terminal",
+    "favicons"
+  ],
+  "author": "Coffeekraken <hello@coffeekraken.io>",
+  "contributors": [
+    {
+      "name": "Olivier Bossel",
+      "email": "olivier.bossel@gmail.com",
+      "url": "http://olivierbossel.com"
+    }
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^2.20.3",
+    "favicons": "^5.4.1"
+  },
+  "devDependencies": {
+  }
+}

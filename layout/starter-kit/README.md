@@ -11,6 +11,8 @@ Here's the list of features that are built-in the starter kit:
 - [Webpack](https://www.npmjs.com/package/webpack) : Build and compress JS files
   - [webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer) : Visualize size of webpack output files with an interactive zoomable treemap
 - [Sass](https://www.npmjs.com/package/sass) : Process and build SCSS files into a style.css one
+- [PostCSS](https://github.com/postcss/postcss-cli) : Transforming styles with JS plugins
+  - [postcss-preset-env](https://github.com/csstools/postcss-preset-env) : Convert modern CSS into something browsers understand
 - [Prettier](https://prettier.io/) : Format the code source files
   - [Pretty-quick](https://www.npmjs.com/package/pretty-quick) : Runs Prettier on your changed files
 - [Browserslist](https://github.com/browserslist/browserslist) : Share target browsers between different front-end tools, like Autoprefixer, Stylelint and babel-preset-env
@@ -23,3 +25,4 @@ Here's the list of features that are built-in the starter kit:
 - [Coffeekraken-imagemin](https://www.npmjs.com/package/@coffeekraken/imagemin) : Compress images
 - [Coffeekraken-scripts-stack](https://www.npmjs.com/package/@coffeekraken/scripts-stack) : Nice terminal interface to handle npm/yarn scripts execution as well as watch and run automatically the wanted ones
 - [Gridle](https://www.npmjs.com/package/@coffeekraken/gridle) : Gridle is a simple but powerful and convenient grid that make use of the CSS grid model
+- [Browsersync](https://www.browsersync.io/#install) : Time-saving synchronised browser testing

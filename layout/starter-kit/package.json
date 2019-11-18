@@ -5,7 +5,8 @@
   "homepage": "https://coffeekraken.io",
   "scripts": {
     "dist": "npm run dist.js && npm run dist.scss && npm run dist.img && npm run dist.fonts",
-    "dist.js": "webpack",
+    "dist.js": "rm -rf dist/js && webpack",
+    "dist.js.analyzer": "rm -rf dist/js && webpack --config webpack.analyzer.config.js",
     "dist.scss": "sass src/scss/style.scss dist/css/style.css",
     "dist.img": "imagemin src/img/**/* --out-dir=dist/img",
     "dist.fonts": "rm -rf dist/fonts && cp -R src/fonts dist/fonts",
@@ -59,6 +60,7 @@
     "@babel/core": "^7.7.2",
     "@babel/preset-env": "^7.7.1",
     "@coffeekraken/scripts-stack": "^0.0.4",
+    "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
     "eslint": "^6.1.0",
     "eslint-config-airbnb": "^18.0.1",
@@ -75,12 +77,15 @@
     "prettier": "^1.19.1",
     "pretty-quick": "^2.0.1",
     "sass": "^1.23.3",
+    "stylelint": "^12.0.0",
     "webpack": "^4.41.2",
+    "webpack-bundle-analyzer": "^3.6.0",
     "webpack-cli": "^3.3.10"
   },
   "dependencies": {
     "@babel/polyfill": "^7.7.0",
     "@coffeekraken/gridle": "0.0.4",
-    "core-js": "^3.4.1"
+    "core-js": "^3.4.1",
+    "lodash": "^4.17.15"
   }
 }

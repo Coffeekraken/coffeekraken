@@ -1,0 +1,50 @@
+{
+  "name": "@coffeekraken/run",
+  "version": "0.0.1",
+  "description": "Run commands with a nice output display",
+  "bin": {
+    "coffeekraken-run": "./bin/coffeekraken-run"
+  },
+  "homepage": "http://coffeekraken.io",
+  "scripts": {
+    "start": "./bin/coffeekraken-run 'rm -rf dist && rm -rf dist && rm -rf dist'"
+  },
+  "keywords": [
+    "coffee",
+    "kraken",
+    "coffeekraken",
+    "command",
+    "terminal",
+    "run",
+    "pretty",
+    "output"
+  ],
+  "author": "Coffeekraken <hello@coffeekraken.io>",
+  "contributors": [
+    {
+      "name": "Olivier Bossel",
+      "email": "olivier.bossel@gmail.com",
+      "url": "http://olivierbossel.com"
+    }
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "coffeekraken-sugar": "^1.0.49",
+    "commander": "^2.20.3",
+    "remove-blank-lines": "^1.1.1",
+    "terminate": "^2.1.2"
+  },
+  "devDependencies": {
+    "eslint": "^5.7.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^3.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-react": "^7.11.1",
+    "jest": "^23.6.0",
+    "pre-commit": "^1.2.2",
+    "prettier": "^1.14.3",
+    "pretty-quick": "^1.8.0"
+  }
+}

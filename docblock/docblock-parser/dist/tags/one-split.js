@@ -4,6 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = oneSplitTag;
+
 /**
  * Set the one split tag data
  * @param 		{String} 		name 			The one split tag name to process
@@ -14,4 +15,5 @@ exports.default = oneSplitTag;
 function oneSplitTag(name, splits, data) {
   data[name] = splits[0];
 }
-module.exports = exports["default"];
+
+module.exports = exports.default;

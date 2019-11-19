@@ -1,9 +1,10 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = typeTag;
+
 /**
  * Set the type data
  * @param 		{String} 		name 			The type name to process
@@ -17,8 +18,10 @@ function typeTag(name, splits, data) {
     // invalid tag
     return;
   }
-  data.types = splits[0].replace('{', '').replace('}', '').split(/\||,/).map(function (type) {
+
+  data.types = splits[0].replace("{", "").replace("}", "").split(/\||,/).map(function (type) {
     return type.trim();
   });
 }
-module.exports = exports['default'];
+
+module.exports = exports.default;

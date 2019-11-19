@@ -1,9 +1,10 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = exampleTag;
+
 /**
  * Set the example data
  * @param 		{String} 		name 			The example name to process
@@ -12,10 +13,10 @@ exports.default = exampleTag;
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
 function exampleTag(name, splits, data) {
-  var language = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'js';
-
+  var language = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "js";
   data.example = {
     language: splits[0] || language
   };
 }
-module.exports = exports['default'];
+
+module.exports = exports.default;

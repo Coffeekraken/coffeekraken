@@ -4,6 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = booleanTag;
+
 /**
  * Set the tag data
  * @param 		{String} 		name 			The tag name to process
@@ -14,4 +15,5 @@ exports.default = booleanTag;
 function booleanTag(name, splits, data) {
   data[name] = true;
 }
-module.exports = exports["default"];
+
+module.exports = exports.default;

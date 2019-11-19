@@ -1,49 +1,23 @@
-# Coffeekraken Docblock Parser <img src=".resources/coffeekraken-logo.jpg" height="25px" />
+# Coffeekraken docblock parser <img src=".resources/coffeekraken-logo.jpg" height="25px" />
 
-<p>
-	<!-- <a href="https://travis-ci.org/Coffeekraken/docblock-parser">
-		<img src="https://img.shields.io/travis/Coffeekraken/docblock-parser.svg?style=flat-square" />
-	</a> -->
-	<a href="https://www.npmjs.com/package/coffeekraken-docblock-parser">
-		<img src="https://img.shields.io/npm/v/coffeekraken-docblock-parser.svg?style=flat-square" />
-	</a>
-	<a href="https://github.com/coffeekraken/docblock-parser/blob/master/LICENSE.txt">
-		<img src="https://img.shields.io/npm/l/coffeekraken-docblock-parser.svg?style=flat-square" />
-	</a>
-	<!-- <a href="https://github.com/coffeekraken/docblock-parser">
-		<img src="https://img.shields.io/npm/dt/coffeekraken-docblock-parser.svg?style=flat-square" />
-	</a>
-	<a href="https://github.com/coffeekraken/docblock-parser">
-		<img src="https://img.shields.io/github/forks/coffeekraken/docblock-parser.svg?style=social&label=Fork&style=flat-square" />
-	</a>
-	<a href="https://github.com/coffeekraken/docblock-parser">
-		<img src="https://img.shields.io/github/stars/coffeekraken/docblock-parser.svg?style=social&label=Star&style=flat-square" />
-	</a> -->
-	<a href="https://twitter.com/coffeekrakenio">
-		<img src="https://img.shields.io/twitter/url/http/coffeekrakenio.svg?style=social&style=flat-square" />
-	</a>
-	<a href="http://coffeekraken.io">
-		<img src="https://img.shields.io/twitter/url/http/shields.io.svg?style=flat-square&label=coffeekraken.io&colorB=f2bc2b&style=flat-square" />
-	</a>
-</p>
+![npm](https://img.shields.io/npm/l/@coffeekraken/docblock-parser?style=flat-square)
+![npm](https://img.shields.io/npm/v/@coffeekraken/docblock-parser?style=flat-square)
+![npm](https://img.shields.io/npm/dw/@coffeekraken/docblock-parser?style=flat-square)
 
-<p class="lead">Simple, powerfull and extensible docblock parser that return a JSON representation to work with</p>
+Simple, powerfull and extensible docblock parser that return a JSON representation to work with
 
 ## Table of content
 
 1. [Install](#readme-install)
 2. [Get Started](#readme-get-started)
 3. [Documentation](#readme-documentation)
-4. [Contribute](#readme-contribute)
-5. [Who are Coffeekraken?](#readme-who-are-coffeekraken)
-6. [Licence](#readme-license)
 
 <a name="readme-install"></a>
 
 ## Install
 
 ```
-npm install coffeekraken-docblock-parser --save-dev
+npm install @coffeekraken/docblock-parser --save-dev
 ```
 
 <a name="readme-get-started"></a>
@@ -53,7 +27,7 @@ npm install coffeekraken-docblock-parser --save-dev
 First, require the package in your javascript node file like so:
 
 ```js
-const docblockParser = require("coffeekraken-docblock-parser");
+const docblockParser = require("@offeekraken/docblock-parser");
 const json = docblockParser(config).parse(myStringToParse);
 ```
 
@@ -161,29 +135,11 @@ your code here...
 @values    Hello|World
 ```
 
-<a id="readme-contribute"></a>
+<a name="readme-coffeekraken"></a>
 
-## Contribute
+# Coffeekraken
 
-This is an open source project and will ever be! You are more that welcomed to contribute to his development and make it more awesome every day.
-To do so, you have several possibilities:
+We are a young collective of front-end creative developers with one goal in mind. Build tools to make every team working day life better. This is our first and only concern. All our tools are build around that purpose.
+All what we provide are some cool tools that you can use the way you want. These tools features cover a large scope of the front-end workflow (styleguide generation, colors/fonts management, etc...). You can use only the parts that you need and let the rest aside...
 
-1. [Share the love ❤️](https://github.com/Coffeekraken/coffeekraken/blob/master/contribute.md#contribute-share-the-love)
-2. [Declare issues](https://github.com/Coffeekraken/coffeekraken/blob/master/contribute.md#contribute-declare-issues)
-3. [Fix issues](https://github.com/Coffeekraken/coffeekraken/blob/master/contribute.md#contribute-fix-issues)
-4. [Add features](https://github.com/Coffeekraken/coffeekraken/blob/master/contribute.md#contribute-add-features)
-5. [Build web component](https://github.com/Coffeekraken/coffeekraken/blob/master/contribute.md#contribute-build-web-component)
-
-<a id="readme-who-are-coffeekraken"></a>
-
-## Who are Coffeekraken
-
-We try to be **some cool guys** that build **some cool tools** to make our (and yours hopefully) **every day life better**.
-
-#### [More on who we are](https://github.com/Coffeekraken/coffeekraken/blob/master/who-are-we.md)
-
-<a id="readme-license"></a>
-
-## License
-
-The code is available under the [MIT license](LICENSE.txt). This mean that you can use, modify, or do whatever you want with it. This mean also that it is shipped to you for free, so don't be a hater and if you find some issues, etc... feel free to [contribute](https://github.com/Coffeekraken/coffeekraken/blob/master/contribute.md) instead of sharing your frustrations on social networks like an asshole...
+[![Coffeekraken](.resources/coffeekraken-logo.jpg)](https://coffeekraken.io)

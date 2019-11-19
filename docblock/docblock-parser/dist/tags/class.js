@@ -4,6 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = classTag;
+
 /**
  * Set the class data
  * @param 		{String} 		name 			The class name to process
@@ -19,4 +20,5 @@ function classTag(name, splits, data) {
     data.class = splits[0];
   }
 }
-module.exports = exports["default"];
+
+module.exports = exports.default;

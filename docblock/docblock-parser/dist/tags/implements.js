@@ -4,6 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = implementsTag;
+
 /**
  * Set the implements tag data
  * @param 		{String} 		name 			The one split tag name to process
@@ -17,4 +18,5 @@ function implementsTag(name, splits, data) {
     return item.trim();
   });
 }
-module.exports = exports["default"];
+
+module.exports = exports.default;

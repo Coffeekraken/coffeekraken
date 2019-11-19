@@ -1,13 +1,11 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 exports.default = returnTag;
 
-var _upperFirst = require('../utils/upper-first');
-
-var _upperFirst2 = _interopRequireDefault(_upperFirst);
+var _upperFirst = _interopRequireDefault(require("../utils/upper-first"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -19,16 +17,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
 function returnTag(name, splits, data) {
-	// protect
-	if (!splits || splits.length < 2) {
-		// invalid tag
-		return;
-	}
-	data.return = {
-		types: splits[0].replace('{', '').replace('}', '').split(/\||,/).map(function (type) {
-			return type.trim();
-		}),
-		description: splits[1]
-	};
+  // protect
+  if (!splits || splits.length < 2) {
+    // invalid tag
+    return;
+  }
+
+  data.return = {
+    types: splits[0].replace("{", "").replace("}", "").split(/\||,/).map(function (type) {
+      return type.trim();
+    }),
+    description: splits[1]
+  };
 }
-module.exports = exports['default'];
+
+module.exports = exports.default;

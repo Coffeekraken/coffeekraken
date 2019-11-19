@@ -1,33 +1,10 @@
-# Coffeekraken Docblock to Markdown <img src=".resources/coffeekraken-logo.jpg" height="25px" />
+# Coffeekraken docblock parser <img src=".resources/coffeekraken-logo.jpg" height="25px" />
 
-<p>
-	<a href="https://travis-ci.org/Coffeekraken/docblock-to-markdown">
-		<img src="https://img.shields.io/travis/Coffeekraken/docblock-to-markdown.svg?style=flat-square" />
-	</a>
-	<a href="https://www.npmjs.com/package/coffeekraken-docblock-to-markdown">
-		<img src="https://img.shields.io/npm/v/coffeekraken-docblock-to-markdown.svg?style=flat-square" />
-	</a>
-	<a href="https://github.com/coffeekraken/docblock-to-markdown/blob/master/LICENSE.txt">
-		<img src="https://img.shields.io/npm/l/coffeekraken-docblock-to-markdown.svg?style=flat-square" />
-	</a>
-	<!-- <a href="https://github.com/coffeekraken/docblock-to-markdown">
-		<img src="https://img.shields.io/npm/dt/coffeekraken-docblock-to-markdown.svg?style=flat-square" />
-	</a> 
-	<a href="https://github.com/coffeekraken/docblock-to-markdown">
-		<img src="https://img.shields.io/github/forks/coffeekraken/docblock-to-markdown.svg?style=social&label=Fork&style=flat-square" />
-	</a>
-	<a href="https://github.com/coffeekraken/docblock-to-markdown">
-		<img src="https://img.shields.io/github/stars/coffeekraken/docblock-to-markdown.svg?style=social&label=Star&style=flat-square" />
-	</a> -->
-	<a href="https://twitter.com/coffeekrakenio">
-		<img src="https://img.shields.io/twitter/url/http/coffeekrakenio.svg?style=social&style=flat-square" />
-	</a>
-	<a href="http://coffeekraken.io">
-		<img src="https://img.shields.io/twitter/url/http/shields.io.svg?style=flat-square&label=coffeekraken.io&colorB=f2bc2b&style=flat-square" />
-	</a>
-</p>
+![npm](https://img.shields.io/npm/l/@coffeekraken/docblock-to-markdown?style=flat-square)
+![npm](https://img.shields.io/npm/v/@coffeekraken/docblock-to-markdown?style=flat-square)
+![npm](https://img.shields.io/npm/dw/@coffeekraken/docblock-to-markdown?style=flat-square)
 
-<p class="lead">This package gives you the ability to parse a file of any languages and return a markdown version of it.</p>
+This package gives you the ability to parse a file of any languages and return a markdown version of it.
 
 ## Table of content
 
@@ -35,16 +12,11 @@
 2. [Get Started](#readme-get-started)
 3. [Configuration](#readme-configuration)
 4. [CLI](#readme-cli)
-5. [Contribute](#readme-contribute)
-6. [Who are Coffeekraken?](#readme-who-are-coffeekraken)
-7. [Licence](#readme-license)
 
 <a name="readme-install"></a>
 
-## Install
-
 ```
-npm install coffeekraken-docblock-to-markdown --save-dev
+npm install @coffeekraken/docblock-to-markdown --save-dev
 ```
 
 <a name="readme-get-started"></a>
@@ -54,7 +26,7 @@ npm install coffeekraken-docblock-to-markdown --save-dev
 First, require the package in your javascript node file like so:
 
 ```js
-const docblockParserToMarkdown = require("coffeekraken-docblock-to-markdown");
+const docblockParserToMarkdown = require("@coffeekraken/docblock-to-markdown");
 // parse files
 docblockParserToMarkdown(config).filesToMarkdown("src/**/*.js");
 // parse string
@@ -82,8 +54,9 @@ config = {
 };
 ```
 
-> **[coffeekraken-docblock-parser](https://github.com/coffeekraken/docblock-parser)** : Docblock parser package
-> **[coffeekraken-docblock-to-markdown](https://github.com/coffeekraken/docblock-to-markdown)** : Docblock JSON to markdown package
+> **[@coffeekraken/docblock-parser](https://www.npmjs.com/package/@coffeekraken/docblock-parser)** : Docblock parser package
+
+> **[@coffeekraken/docblock-json-to-markdown](https://www.npmjs.com/package/@coffeekraken/docblock-json-to-markdown)** : Docblock JSON to markdown package
 
 <a id="readme-cli"></a>
 
@@ -105,29 +78,11 @@ coffeekraken-docblock-to-markdown -f 'js/**/*.js' -d doc
 - -c (--config) : Js config file to load
 - --remove-path : Part of each files path to remove before saving to destination
 
-<a id="readme-contribute"></a>
+<a name="readme-coffeekraken"></a>
 
-## Contribute
+# Coffeekraken
 
-This is an open source project and will ever be! You are more that welcomed to contribute to his development and make it more awesome every day.
-To do so, you have several possibilities:
+We are a young collective of front-end creative developers with one goal in mind. Build tools to make every team working day life better. This is our first and only concern. All our tools are build around that purpose.
+All what we provide are some cool tools that you can use the way you want. These tools features cover a large scope of the front-end workflow (styleguide generation, colors/fonts management, etc...). You can use only the parts that you need and let the rest aside...
 
-1. [Share the love ❤️](https://github.com/Coffeekraken/coffeekraken/blob/master/contribute.md#contribute-share-the-love)
-2. [Declare issues](https://github.com/Coffeekraken/coffeekraken/blob/master/contribute.md#contribute-declare-issues)
-3. [Fix issues](https://github.com/Coffeekraken/coffeekraken/blob/master/contribute.md#contribute-fix-issues)
-4. [Add features](https://github.com/Coffeekraken/coffeekraken/blob/master/contribute.md#contribute-add-features)
-5. [Build web component](https://github.com/Coffeekraken/coffeekraken/blob/master/contribute.md#contribute-build-web-component)
-
-<a id="readme-who-are-coffeekraken"></a>
-
-## Who are Coffeekraken
-
-We try to be **some cool guys** that build **some cool tools** to make our (and yours hopefully) **every day life better**.
-
-#### [More on who we are](https://github.com/Coffeekraken/coffeekraken/blob/master/who-are-we.md)
-
-<a id="readme-license"></a>
-
-## License
-
-The code is available under the [MIT license](LICENSE.txt). This mean that you can use, modify, or do whatever you want with it. This mean also that it is shipped to you for free, so don't be a hater and if you find some issues, etc... feel free to [contribute](https://github.com/Coffeekraken/coffeekraken/blob/master/contribute.md) instead of sharing your frustrations on social networks like an asshole...
+[![Coffeekraken](.resources/coffeekraken-logo.jpg)](https://coffeekraken.io)

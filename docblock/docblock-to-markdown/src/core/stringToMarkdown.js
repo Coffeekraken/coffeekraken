@@ -1,6 +1,6 @@
 import _merge from "lodash/merge";
-import __docblockParser from "coffeekraken-docblock-parser";
-import __docblockJsonToMarkdown from "coffeekraken-docblock-json-to-markdown";
+import __docblockParser from "@coffeekraken/docblock-parser";
+import __docblockJsonToMarkdown from "@coffeekraken/docblock-json-to-markdown";
 export default function stringToMarkdown(stringToTransform, language = "js") {
   // parse the string
   const json = __docblockParser(

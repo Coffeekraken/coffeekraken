@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 process.title = 'coffeekraken-docblock-to-markdown';
-const __docblockToMarkdown = require('../src/index');
+const __docblockToMarkdown = require('../dist/index');
 const __fs = require('fs');
 const __path = require('path');
 const _merge = require('lodash/merge');

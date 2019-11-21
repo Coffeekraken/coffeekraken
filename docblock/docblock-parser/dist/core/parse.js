@@ -1,9 +1,41 @@
 "use strict";
 
+require("core-js/modules/es.symbol");
+
+require("core-js/modules/es.symbol.description");
+
+require("core-js/modules/es.symbol.iterator");
+
+require("core-js/modules/es.array.for-each");
+
+require("core-js/modules/es.array.iterator");
+
+require("core-js/modules/es.array.join");
+
+require("core-js/modules/es.array.map");
+
+require("core-js/modules/es.object.to-string");
+
+require("core-js/modules/es.regexp.exec");
+
+require("core-js/modules/es.string.iterator");
+
+require("core-js/modules/es.string.match");
+
+require("core-js/modules/es.string.replace");
+
+require("core-js/modules/es.string.split");
+
+require("core-js/modules/es.string.trim");
+
+require("core-js/modules/web.dom-collections.for-each");
+
+require("core-js/modules/web.dom-collections.iterator");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = parse;
+exports["default"] = parse;
 
 var _fs = _interopRequireDefault(require("fs"));
 
@@ -13,7 +45,9 @@ var _size2 = _interopRequireDefault(require("lodash/size"));
 
 var _processExample = _interopRequireDefault(require("../utils/processExample"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 /**
  * Parse the given string to extract the docblock in JSON format
@@ -73,10 +107,10 @@ function parse(stringToParse) {
           // for the currentTag
           // to add it has a body
           if (currentTagValue.length) {
-            if (typeof data[currentTag] === "object") {
+            if (_typeof(data[currentTag]) === "object") {
               if (currentTag === "example") {
                 // process example
-                data[currentTag].body = (0, _processExample.default)(currentTagValue.join("\n"));
+                data[currentTag].body = (0, _processExample["default"])(currentTagValue.join("\n"));
               } else {
                 data[currentTag].body = currentTagValue.join("\n");
               }
@@ -92,7 +126,7 @@ function parse(stringToParse) {
         // and reset some variables
 
 
-        if ((0, _size2.default)(data)) {
+        if ((0, _size2["default"])(data)) {
           res.push(data);
         }
 
@@ -129,10 +163,10 @@ function parse(stringToParse) {
           // check if we have a currentTagValue
           // for the currentTag
           // to add it has a body
-          if (typeof data[currentTag] === "object") {
+          if (_typeof(data[currentTag]) === "object") {
             if (currentTag === "example") {
               // process example
-              data[currentTag].body = (0, _processExample.default)(currentTagValue.join("\n"));
+              data[currentTag].body = (0, _processExample["default"])(currentTagValue.join("\n"));
             } else {
               data[currentTag].body = currentTagValue.join("\n");
             }

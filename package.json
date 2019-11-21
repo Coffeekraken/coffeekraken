@@ -1,0 +1,53 @@
+{
+  "name": "coffeekraken",
+  "version": "1.0.0",
+  "description": "We are a young collectve of front-end creative developers with one goal in mind. Build tools to make every team working day life better",
+  "scripts": {
+    "test": "jest --config ../../jest.config.js",
+    "dist": "ck run dist.js",
+    "dist.js": "babel src --root-mode upward -d dist",
+    "doc": "rm -rf doc && ck run doc.js && ck run doc.scss",
+    "doc.js": "ck-docblock-to-markdown -f 'src/**/*.js' -d doc --remove-path src/",
+    "doc.scss": "ck-docblock-to-markdown -f 'src/**/*.scss' -d doc --remove-path src/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Coffeekraken/coffeekraken.git"
+  },
+  "keywords": [
+    "coffee",
+    "kraken",
+    "coffeekraken"
+  ],
+  "author": "Coffeekraken <hello@coffeekraken.io>",
+  "contributors": [
+    {
+      "name": "Olivier Bossel",
+      "email": "olivier.bossel@gmail.com",
+      "url": "http://olivierbossel.com"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Coffeekraken/coffeekraken/issues"
+  },
+  "homepage": "https://github.com/Coffeekraken/coffeekraken#readme",
+  "dependencies": {
+    "@babel/cli": "^7.7.0",
+    "@babel/core": "^7.7.2",
+    "@babel/plugin-proposal-class-properties": "^7.7.0",
+    "@babel/plugin-proposal-export-default-from": "^7.5.2",
+    "@babel/polyfill": "^7.7.0",
+    "@babel/preset-env": "^7.7.1",
+    "babel-jest": "^24.9.0",
+    "babel-plugin-add-module-exports": "^1.0.2",
+    "core-js": "^3.4.2",
+    "jest": "^24.9.0",
+    "jest-raw-loader": "^1.0.1",
+    "pkg-up": "^3.1.0"
+  },
+  "globalDependencies": {
+    "@coffeekraken/docblock-to-markdown": "0.0.2",
+    "@coffeekraken/monorepo": "0.0.6"
+  }
+}

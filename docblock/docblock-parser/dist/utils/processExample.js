@@ -1,9 +1,15 @@
 "use strict";
 
+require("core-js/modules/es.regexp.exec");
+
+require("core-js/modules/es.string.replace");
+
+require("core-js/modules/es.string.trim");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = processExample;
+exports["default"] = processExample;
 
 function processExample(example) {
   // replace the \@ used in certain languages

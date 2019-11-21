@@ -1,9 +1,21 @@
 "use strict";
 
+require("core-js/modules/es.function.name");
+
+require("core-js/modules/es.regexp.exec");
+
+require("core-js/modules/es.string.match");
+
+require("core-js/modules/es.string.replace");
+
+require("core-js/modules/es.string.split");
+
+require("core-js/modules/es.string.trim");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = analyzeScssLine;
+exports["default"] = analyzeScssLine;
 
 /**
  * Analyze the next scss line and set some tag properties if needed
@@ -22,7 +34,7 @@ function analyzeScssLine(line, data) {
 
 
   if (line.match("@function")) {
-    data.function = true;
+    data["function"] = true;
   }
 
   if (!data.name) {
@@ -43,8 +55,8 @@ function analyzeScssLine(line, data) {
   } // protected, private, etc...
 
 
-  if (data.name.substr(0, 1) === "_" && data.public === undefined && data.protected === undefined && data.private === undefined) {
-    data.private = true;
+  if (data.name.substr(0, 1) === "_" && data["public"] === undefined && data["protected"] === undefined && data["private"] === undefined) {
+    data["private"] = true;
   } // default
 
 
@@ -57,8 +69,8 @@ function analyzeScssLine(line, data) {
     } // default variable
 
 
-    if (!data.default) {
-      data.default = defaultSplits[3].trim().replace(/^('|")/, "").replace(/(;|,)?$/, "").replace(/('|")?$/, "");
+    if (!data["default"]) {
+      data["default"] = defaultSplits[3].trim().replace(/^('|")/, "").replace(/(;|,)?$/, "").replace(/('|")?$/, "");
     }
   }
 }

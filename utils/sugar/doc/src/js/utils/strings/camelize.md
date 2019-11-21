@@ -1,3 +1,0 @@
-# camelize
-
-Camelize a string

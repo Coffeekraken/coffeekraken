@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = oneSplitTag;
+exports["default"] = oneSplitTag;
 
 /**
  * Set the one split tag data

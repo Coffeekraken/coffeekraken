@@ -1,9 +1,11 @@
 "use strict";
 
+require("core-js/modules/es.function.bind");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _merge2 = _interopRequireDefault(require("lodash/merge"));
 
@@ -13,7 +15,7 @@ var _getVersion = _interopRequireDefault(require("./utils/getVersion"));
 
 var _config = _interopRequireDefault(require("./core/config"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -27,7 +29,7 @@ var DocblockParser = function DocblockParser() {
 
   _classCallCheck(this, DocblockParser);
 
-  this._config = (0, _merge2.default)({}, _config.default, config); // bind all methods in config with the good context
+  this._config = (0, _merge2["default"])({}, _config["default"], config); // bind all methods in config with the good context
 
   for (var key in this._config.tags) {
     this._config.tags[key] = this._config.tags[key].bind(this);
@@ -37,8 +39,8 @@ var DocblockParser = function DocblockParser() {
     this._config.nextLineAnalyzer[_key] = this._config.nextLineAnalyzer[_key].bind(this);
   }
 
-  this._getVersion = _getVersion.default.bind(this);
-  this.parse = _parse.default.bind(this);
+  this._getVersion = _getVersion["default"].bind(this);
+  this.parse = _parse["default"].bind(this);
 };
 /**
  * Factory function that gives back a docblock parser instance.
@@ -54,5 +56,5 @@ var DocblockParser = function DocblockParser() {
 
 
 var _default = _docblockParser;
-exports.default = _default;
+exports["default"] = _default;
 module.exports = exports.default;

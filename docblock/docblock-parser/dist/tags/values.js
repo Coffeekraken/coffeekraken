@@ -1,9 +1,23 @@
 "use strict";
 
+require("core-js/modules/es.array.iterator");
+
+require("core-js/modules/es.array.map");
+
+require("core-js/modules/es.object.to-string");
+
+require("core-js/modules/es.regexp.exec");
+
+require("core-js/modules/es.string.split");
+
+require("core-js/modules/es.string.trim");
+
+require("core-js/modules/web.dom-collections.iterator");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = typeTag;
+exports["default"] = typeTag;
 
 /**
  * Set the values data

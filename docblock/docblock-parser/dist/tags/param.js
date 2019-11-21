@@ -1,13 +1,23 @@
 "use strict";
 
+require("core-js/modules/es.array.map");
+
+require("core-js/modules/es.regexp.exec");
+
+require("core-js/modules/es.string.replace");
+
+require("core-js/modules/es.string.split");
+
+require("core-js/modules/es.string.trim");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = paramTag;
+exports["default"] = paramTag;
 
 var _upperFirst = _interopRequireDefault(require("../utils/upper-first"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 /**
  * Set the param data
@@ -50,7 +60,7 @@ function paramTag(name, splits, data) {
   };
 
   if (def !== undefined) {
-    _param.default = def;
+    _param["default"] = def;
   }
 
   data.params.push(_param);

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = seeTag;
+exports["default"] = seeTag;
 
 /**
  * Set the see data

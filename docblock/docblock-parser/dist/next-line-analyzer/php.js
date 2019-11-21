@@ -1,9 +1,23 @@
 "use strict";
 
+require("core-js/modules/es.array.index-of");
+
+require("core-js/modules/es.function.name");
+
+require("core-js/modules/es.regexp.exec");
+
+require("core-js/modules/es.string.match");
+
+require("core-js/modules/es.string.replace");
+
+require("core-js/modules/es.string.split");
+
+require("core-js/modules/es.string.trim");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = analyzePhpLine;
+exports["default"] = analyzePhpLine;
 
 /**
  * Analyze the next php line and set some tag properties if needed
@@ -17,22 +31,22 @@ function analyzePhpLine(line, data) {
   if (!line) return; // private
 
   if (line.match("private ")) {
-    data.private = true;
+    data["private"] = true;
   } // protected
 
 
   if (line.match("protected ")) {
-    data.protected = true;
+    data["protected"] = true;
   } // public
 
 
   if (line.match("public ")) {
-    data.public = true;
+    data["public"] = true;
   } // static
 
 
   if (line.match("static ")) {
-    data.static = true;
+    data["static"] = true;
   } // constructor
 
 
@@ -47,19 +61,19 @@ function analyzePhpLine(line, data) {
 
   if (line.match("class ")) {
     // extends
-    if (typeof data.extends === "undefined") {
+    if (typeof data["extends"] === "undefined") {
       var extendsIdx = splits.indexOf("extends");
 
       if (extendsIdx != -1) {
         // get the extend name
         if (splits[extendsIdx + 1]) {
-          data.extends = splits[extendsIdx + 1];
+          data["extends"] = splits[extendsIdx + 1];
         }
       }
     } // implements
 
 
-    if (typeof data.implements === "undefined") {
+    if (typeof data["implements"] === "undefined") {
       var implementsIdx = splits.indexOf("implements");
 
       if (implementsIdx != -1) {
@@ -71,7 +85,7 @@ function analyzePhpLine(line, data) {
         }
 
         if (implementsStack.length) {
-          data.implements = implementsStack;
+          data["implements"] = implementsStack;
         }
       }
     }
@@ -101,8 +115,8 @@ function analyzePhpLine(line, data) {
     } // default variable
 
 
-    if (!data.default) {
-      data.default = defaultSplits[3].trim().replace(/^('|")/, "").replace(/(;|,)?$/, "").replace(/('|")?$/, "");
+    if (!data["default"]) {
+      data["default"] = defaultSplits[3].trim().replace(/^('|")/, "").replace(/(;|,)?$/, "").replace(/('|")?$/, "");
     }
   }
 }

@@ -1,9 +1,19 @@
 "use strict";
 
+require("core-js/modules/es.array.map");
+
+require("core-js/modules/es.regexp.exec");
+
+require("core-js/modules/es.string.replace");
+
+require("core-js/modules/es.string.split");
+
+require("core-js/modules/es.string.trim");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = propertyTag;
+exports["default"] = propertyTag;
 
 /**
  * Set the property data
@@ -41,7 +51,7 @@ function propertyTag(name, splits, data) {
   };
 
   if (def !== undefined) {
-    _property.default = def;
+    _property["default"] = def;
   }
 
   data.properties.push(_property);

@@ -1,0 +1,35 @@
+{
+  "name": "@coffeekraken/monorepo",
+  "version": "0.0.11",
+  "description": "Manage easily monorepo scripts, tests, etc...",
+  "bin": {
+    "ck": "./bin/coffeekraken-monorepo.js",
+    "ck-monorepo": "./bin/coffeekraken-monorepo.js",
+    "coffeekraken-monorepo": "./bin/coffeekraken-monorepo.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coffeekraken/coffeekraken.git"
+  },
+  "keywords": [
+    "coffee",
+    "kraken",
+    "coffeekraken",
+    "monorepo",
+    "scripts",
+    "tests"
+  ],
+  "author": "Olivier Bossel <olivier.bossel@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/coffeekraken/coffeekraken/issues"
+  },
+  "homepage": "https://github.com/coffeekraken/coffeekraken#readme",
+  "dependencies": {
+    "commander": "^4.0.1",
+    "config": "^3.2.4",
+    "exec-sh": "^0.3.4",
+    "find-up": "^4.1.0",
+    "pkg-up": "^3.1.0"
+  }
+}

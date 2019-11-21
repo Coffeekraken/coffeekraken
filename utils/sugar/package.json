@@ -20,21 +20,6 @@
       "paths": "demo/src/**/*.scss"
     }
   },
-  "scripts": {
-    "dist": "rm -rf dist && npm run dist:js",
-    "dist:js": "babel src -d . --watch",
-    "install": "node ./scripts/install.js",
-    "doc": "rm -rf doc/src && npm run doc:scss && npm run doc:js",
-    "doc:scss": "coffeekraken-docblock-to-markdown -f 'src/**/*.scss' -d doc",
-    "doc:js": "coffeekraken-docblock-to-markdown -f 'src/**/*.js' -d doc",
-    "demo": "rm -rf demo/dist && npm run demo:js && npm run demo:css && run demo:server",
-    "demo:js": "webpack",
-    "demo:css": "node-sass demo/src/sass/style.scss demo/dist/css/style.css  --include-path node_modules --output-style expanded",
-    "demo:server": "http-server demo",
-    "test": "jest --watch",
-    "start": "coffeekraken-scripts-stack dist:js demo:server  -i dist -i install -i start",
-    "changelog": "git-changelog --version_name $npm_package_version  --app_name $npm_package_name --intro \"$npm_package_description\" --logo \".resources/coffeekraken-logo.jpg\""
-  },
   "repository": {
     "type": "git",
     "url": "git@github.com:coffeekraken/sugar.git"
@@ -48,46 +33,29 @@
     }
   ],
   "license": "MIT",
-  "jest": {
-    "roots": [
-      "tests"
-    ]
-  },
   "dependencies": {
     "@ungap/custom-elements-builtin": "^0.1.2",
-    "custom-event": "^1.0.0",
-    "document-register-element": "^1.13.1",
+    "custom-event": "^1.0.1",
+    "document-register-element": "^1.14.3",
     "domready": "^1.0.8",
     "es6-object-assign": "^1.1.0",
-    "fastdom": "^1.0.5",
-    "form-serialize": "^0.7.1",
+    "fastdom": "^1.0.9",
+    "form-serialize": "^0.7.2",
     "fs-extra": "^6.0.1",
-    "lodash": "^4.17.11",
-    "mobile-detect": "^1.4.3",
-    "on-change": "^1.2.0",
+    "lodash": "^4.17.15",
+    "mobile-detect": "^1.4.4",
+    "on-change": "^1.6.2",
     "rxjs": "^5.5.12",
     "simple-ajax": "^2.6.0",
     "sprintf-js": "^1.1.2",
-    "url-parse": "^1.4.6"
+    "url-parse": "^1.4.7"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-jest": "^23.6.0",
-    "babel-loader": "^7.1.4",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-custom-element-classes": "^0.1.0",
-    "babel-plugin-transform-export-default": "^7.0.0-alpha.20",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-polyfill": "^6.23.0",
-    "babel-preset-env": "^1.7.0",
-    "coffeekraken-docblock-to-markdown": "^1.0.0",
-    "coffeekraken-scripts-stack": "^1.0.3",
+    "coffeekraken-scripts-stack": "^1.0.4",
     "git-changelog": "^1.1.2",
     "http-server": "^0.11.1",
-    "jest": "^23.6.0",
-    "node-sass": "^4.0.0",
-    "webpack": "^4.29.3",
-    "webpack-cli": "^3.2.3"
+    "node-sass": "^4.13.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
   }
 }

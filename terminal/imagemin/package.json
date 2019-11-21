@@ -4,7 +4,8 @@
   "description": "Simply and quickly minify your images by passing a source, a destination and a target quality as parameters",
   "homepage": "http://coffeekraken.io",
   "bin": {
-    "coffeekraken-imagemin": "./bin/coffeekraken-imagemin.js"
+    "coffeekraken-imagemin": "./bin/coffeekraken-imagemin.js",
+    "ck-imagemin": "./bin/coffeekraken-imagemin.js"
   },
   "scripts": {
     "start": "./bin/coffeekraken-imagemin.js -s data/src -o data/dist -q 80"

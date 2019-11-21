@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = classTag;
+exports["default"] = classTag;
 
 /**
  * Set the class data
@@ -15,9 +15,9 @@ exports.default = classTag;
 function classTag(name, splits, data) {
   // protect
   if (!splits.length) {
-    data.class = true;
+    data["class"] = true;
   } else {
-    data.class = splits[0];
+    data["class"] = splits[0];
   }
 }
 

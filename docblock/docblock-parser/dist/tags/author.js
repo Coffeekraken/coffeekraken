@@ -1,9 +1,11 @@
 "use strict";
 
+require("core-js/modules/es.regexp.exec");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = authorTag;
+exports["default"] = authorTag;
 
 /**
  * Set the author data

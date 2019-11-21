@@ -4,7 +4,8 @@
   "description": "Nice terminal interface to handle npm/yarn scripts execution as well as watch and run automatically the wanted ones",
   "homepage": "https://coffeekraken.io",
   "bin": {
-    "coffeekraken-scripts-stack": "./bin/coffeekraken-scripts-stack"
+    "coffeekraken-scripts-stack": "./bin/coffeekraken-scripts-stack",
+    "ck-scripts-stack": "./bin/coffeekraken-scripts-stack"
   },
   "scripts": {
     "start": "nps start"

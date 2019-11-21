@@ -3,11 +3,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = getVersion;
+exports["default"] = getVersion;
 
 var _fs = _interopRequireDefault(require("fs"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 /**
  * Return the version specified in config or try to get the version from the package.json file
@@ -21,8 +21,8 @@ function getVersion() {
   } // try to get it from the package.json
 
 
-  if (_fs.default.existsSync(process.env.PWD + "/package.json")) {
-    var packageJson = JSON.parse(_fs.default.readFileSync(process.env.PWD + "/package.json", "utf8"));
+  if (_fs["default"].existsSync(process.env.PWD + "/package.json")) {
+    var packageJson = JSON.parse(_fs["default"].readFileSync(process.env.PWD + "/package.json", "utf8"));
 
     if (packageJson.version) {
       return packageJson.version;

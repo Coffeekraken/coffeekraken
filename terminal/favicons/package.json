@@ -4,7 +4,8 @@
   "description": "Simply and quickly generate all your favicons using the amazing favicons npm package.",
   "homepage": "http://coffeekraken.io",
   "bin": {
-    "coffeekraken-favicons": "./bin/coffeekraken-favicons.js"
+    "coffeekraken-favicons": "./bin/coffeekraken-favicons.js",
+    "ck-favicons": "./bin/coffeekraken-favicons.js"
   },
   "scripts": {
     "start": "./bin/coffeekraken-favicons.js  --source data/src/favicon.png --output data/dist --html-output data/dist/favicons.html --path '/data/dist' --theme '#fff' --background '#fff'"

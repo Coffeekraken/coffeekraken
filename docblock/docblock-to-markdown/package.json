@@ -1,13 +1,10 @@
 {
   "name": "@coffeekraken/docblock-to-markdown",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Parse and transform docblocks from your codebase into nice markdown files with ease.",
   "bin": {
+    "ck-docblock-to-markdown": "./bin/coffeekraken-docblock-to-markdown",
     "coffeekraken-docblock-to-markdown": "./bin/coffeekraken-docblock-to-markdown"
-  },
-  "scripts": {
-    "dist": "rm -rf dist && babel src -d dist",
-    "test": "./bin/coffeekraken-docblock-to-markdown -f 'tests-files/*' -d doc"
   },
   "keywords": [
     "coffee",

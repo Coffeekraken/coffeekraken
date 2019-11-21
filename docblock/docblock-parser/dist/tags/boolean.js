@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = booleanTag;
+exports["default"] = booleanTag;
 
 /**
  * Set the tag data

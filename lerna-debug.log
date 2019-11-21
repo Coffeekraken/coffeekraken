@@ -1,8 +1,0 @@
-29 error Error: Command failed: git commit -F /private/var/folders/fz/gt85wygs0jv6zfp35s95vmr80000gn/T/b4b4962f-1aa1-4152-9a70-54a7f6393822/lerna-commit.txt
-29 error On branch master
-29 error Your branch is up to date with 'origin/master'.
-29 error
-29 error nothing to commit, working tree clean
-29 error
-29 error     at makeError (/usr/local/lib/node_modules/lerna/node_modules/execa/index.js:174:9)
-29 error     at Promise.all.then.arr (/usr/local/lib/node_modules/lerna/node_modules/execa/index.js:278:16)

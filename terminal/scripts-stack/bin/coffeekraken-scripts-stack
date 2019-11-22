@@ -19,7 +19,7 @@ program
 
 process.title = 'coffeekraken-scripts-stack'
 
-const ScriptsStack = require('../dist/index').default
+const ScriptsStack = require('../dist/index')
 const scriptsStackInstance = new ScriptsStack({
   scripts: program.args,
   watch: program.watch,

@@ -29,7 +29,9 @@ const pad = require('pad');
 
 const flatten = require('flat');
 
-const Script = require('./Script').default;
+const pkgUp = require('pkg-up');
+
+const Script = require('./Script');
 
 class scriptsStack {
   constructor(config) {
@@ -44,20 +46,43 @@ class scriptsStack {
 
     this._packageJson = this._loadPackageJson(); // check if we have a package-scripts.js file
 
-    if (fs.existsSync(`${process.env.PWD}/package-scripts.js`)) {
-      this._packageScripts = require(`${process.env.PWD}/package-scripts.js`);
+    this._packageScripts;
+
+    if (fs.existsSync("".concat(process.env.PWD, "/package-scripts.js"))) {
+      this._packageScripts = require("".concat(process.env.PWD, "/package-scripts.js"));
+    } // check if we have a packageJson in an upper folder
+
+
+    this._packageUpJson;
+    const pkgUpPath = pkgUp.sync({
+      cwd: process.cwd() + "/../"
+    });
+
+    if (pkgUpPath) {
+      const packageUp = require(pkgUpPath);
+
+      if (packageUp) {
+        this._packageUpJson = packageUp;
+      }
     } // set the process name
 
 
-    process.title = `scripts-stack.${this._packageJson.name}`;
+    process.title = "scripts-stack.".concat(this._packageJson.name); // save the scripts in a global variable
+
+    this._scriptsObj = {};
+    if (this._packageScripts && this._packageScripts.scripts) this._scriptsObj = this._packageScripts.scripts;
+    if (this._packageJson && this._packageJson.scripts) this._scriptsObj = this._packageJson.scripts;
+    if (this._packageUpJson && this._packageUpJson.scripts) this._scriptsObj = this._packageUpJson.scripts;
   }
 
   start() {
     // list all scripts
     if (this._packageScripts) {
       this._scriptsIds = Object.keys(flatten(this._packageScripts.scripts));
-    } else {
+    } else if (this._packageJson.scripts) {
       this._scriptsIds = Object.keys(this._packageJson.scripts);
+    } else if (this._packageUpJson.scripts) {
+      this._scriptsIds = Object.keys(this._packageUpJson.scripts);
     } // remove the ignored scripts
 
 
@@ -113,9 +138,11 @@ class scriptsStack {
         watchObj = this._packageScripts.watch[scriptId];
       } else if (this._packageJson.watch && this._packageJson.watch[scriptId]) {
         watchObj = this._packageJson.watch[scriptId];
+      } else if (this._packageUpJson.watch && this._packageUpJson.watch[scriptId]) {
+        watchObj = this._packageUpJson.watch[scriptId];
       }
 
-      stack[scriptId] = new Script(scriptId, watchObj, this._packageScripts ? 'nps' : 'npm');
+      stack[scriptId] = new Script(scriptId, this._scriptsObj[scriptId], watchObj, 'npm');
 
       if (this._config.watch) {
         stack[scriptId].watch();
@@ -169,14 +196,14 @@ class scriptsStack {
     const headerContent = [];
 
     if (this._packageJson.license) {
-      headerContent.push(chalk.bold.white.bgBlack(` ${this._packageJson.license} `));
+      headerContent.push(chalk.bold.white.bgBlack(" ".concat(this._packageJson.license, " ")));
     }
 
-    headerContent.push(`${chalk.black.bold(this._packageJson.name)} ${chalk.bgWhite.black(' ' + this._packageJson.version + ' ')}`);
+    headerContent.push("".concat(chalk.black.bold(this._packageJson.name), " ").concat(chalk.bgWhite.black(' ' + this._packageJson.version + ' ')));
     screen.$headerBox = blessed.box({
       parent: screen.$container,
       width: '100%',
-      content: `\n ${headerContent.join(' ')}`,
+      content: "\n ".concat(headerContent.join(' ')),
       height: 3,
       style: {
         bg: this._config.color
@@ -245,7 +272,7 @@ class scriptsStack {
     screen.$footerBox = blessed.box({
       parent: screen.$container,
       width: '100%',
-      content: ``,
+      content: "",
       height: 2,
       bottom: 0,
       style: {
@@ -325,7 +352,7 @@ class scriptsStack {
     let keyTimeout = null;
     let keys = '';
     ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].forEach(key => {
-      this.screen.key([`${key}`], (ch, key) => {
+      this.screen.key(["".concat(key)], (ch, key) => {
         keys += key.full;
         clearTimeout(keyTimeout);
         keyTimeout = setTimeout(() => {
@@ -357,24 +384,24 @@ class scriptsStack {
     const currentScript = this._getCurrentScriptInstance();
 
     const watchColorFn = currentScript.isWatched() ? chalk.bgBlue.black : chalk.bgWhite.black;
-    footerContent.push(`${chalk.bgWhite.black(' Run (r) ')}`);
-    footerContent.push(`${chalk.bgWhite.black(' Exit (e) ')}`);
-    footerContent.push(`${chalk.bgWhite.black(' Copy (c) ')}`);
+    footerContent.push("".concat(chalk.bgWhite.black(' Run (r) ')));
+    footerContent.push("".concat(chalk.bgWhite.black(' Exit (e) ')));
+    footerContent.push("".concat(chalk.bgWhite.black(' Copy (c) ')));
 
     if (currentScript.isWatchable()) {
-      footerContent.push(`${watchColorFn(' Watch (w) ')}`);
+      footerContent.push("".concat(watchColorFn(' Watch (w) ')));
     }
 
-    footerContent.push(`${switchColorFn(' Switch (s) ')}`); // footerContent.push(`${chalk.bgWhite.black(' Exit ')} ${chalk.bold.black('ctrl-c')} `)
+    footerContent.push("".concat(switchColorFn(' Switch (s) '))); // footerContent.push(`${chalk.bgWhite.black(' Exit ')} ${chalk.bold.black('ctrl-c')} `)
 
-    footerContent.push(`\n`);
+    footerContent.push("\n");
 
     if (this._packageJson.homepage) {
-      footerContent.push(`${chalk.bgBlack.white(' Homepage ')} ${chalk.bold.black(this._packageJson.homepage)} `);
+      footerContent.push("".concat(chalk.bgBlack.white(' Homepage '), " ").concat(chalk.bold.black(this._packageJson.homepage), " "));
     }
 
     if (this._packageJson.author) {
-      footerContent.push(`${chalk.bgBlack.white(' Author ')} ${chalk.bold.black(this._packageJson.author)}`);
+      footerContent.push("".concat(chalk.bgBlack.white(' Author '), " ").concat(chalk.bold.black(this._packageJson.author)));
     }
 
     this.screen.$footerBox.setContent(footerContent.join(''));
@@ -405,7 +432,7 @@ class scriptsStack {
     let iconToDisplay = watched;
 
     if (icon) {
-      iconToDisplay = `${icon} `;
+      iconToDisplay = "".concat(icon, " ");
     }
 
     let readedIcon = '';
@@ -415,7 +442,7 @@ class scriptsStack {
     }
 
     let idx = pad(2, Object.keys(this._scriptsStack).indexOf(scriptId) + 1, '0');
-    return ` ${idx}. ${iconToDisplay}${readedIcon}${scriptId}`;
+    return " ".concat(idx, ". ").concat(iconToDisplay).concat(readedIcon).concat(scriptId);
   }
 
   _initScriptsList(blessedList, scriptsStack) {
@@ -506,14 +533,14 @@ class scriptsStack {
           const icons = ['css', 'fonts', 'icons', 'img', 'js'];
           const splitedScript = script.id.split(':');
           const lastSplit = splitedScript[splitedScript.length - 1];
-          const icon = icons.indexOf(lastSplit) !== -1 ? `icon-${lastSplit}` : null;
+          const icon = icons.indexOf(lastSplit) !== -1 ? "icon-".concat(lastSplit) : null;
 
           if (this._config.notifications) {
             nodeNotifier.notify({
               title: this._packageJson.name,
               subtitle: script.id,
               message: 'Completed successfuly',
-              icon: icon ? path.join(__dirname, `../.resources/${icon}.png`) : null,
+              icon: icon ? path.join(__dirname, "../.resources/".concat(icon, ".png")) : null,
               sound: true,
               timeout: 4
             });
@@ -564,3 +591,4 @@ class scriptsStack {
 
 var _default = scriptsStack;
 exports.default = _default;
+module.exports = exports.default;

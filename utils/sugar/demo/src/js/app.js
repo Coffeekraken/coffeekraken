@@ -1,4 +1,4 @@
-import "babel-polyfill";
+import "@babel/polyfill";
 import "../../../js/features/all";
 
 import autoScrollAnchorLinks from "../../../js/dom/autoScrollAnchorLinks";

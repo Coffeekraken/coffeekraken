@@ -1,29 +1,8 @@
 {
   "name": "@coffeekraken/sugar",
   "description": "A little sugar in your codebase",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "homepage": "http://coffekraken.io",
-  "watch": {
-    "doc:js": {
-      "paths": "src/**/*.js"
-    },
-    "doc:scss": {
-      "paths": "src/**/*.scss"
-    },
-    "demo:js": {
-      "paths": [
-        "demo/src/**/*.js",
-        "src/**/*.js"
-      ]
-    },
-    "demo:css": {
-      "paths": "demo/src/**/*.scss"
-    }
-  },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:coffeekraken/sugar.git"
-  },
   "author": "Coffeekraken <hello@coffeekraken.io>",
   "contributors": [
     {
@@ -51,11 +30,6 @@
     "url-parse": "^1.4.7"
   },
   "devDependencies": {
-    "coffeekraken-scripts-stack": "^1.0.4",
-    "git-changelog": "^1.1.2",
-    "http-server": "^0.11.1",
-    "node-sass": "^4.13.0",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10"
+    "node-sass": "^4.13.0"
   }
 }

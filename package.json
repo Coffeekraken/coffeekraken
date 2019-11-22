@@ -8,7 +8,36 @@
     "dist.js": "babel src --root-mode upward -d dist",
     "doc": "rm -rf doc && ck run doc.js && ck run doc.scss",
     "doc.js": "ck-docblock-to-markdown -f 'src/**/*.js' -d doc --remove-path src/",
-    "doc.scss": "ck-docblock-to-markdown -f 'src/**/*.scss' -d doc --remove-path src/"
+    "doc.scss": "ck-docblock-to-markdown -f 'src/**/*.scss' -d doc --remove-path src/",
+    "demo": "ck run demo.dist && ck run demo.server",
+    "demo.dist": "ck run demo.dist.js && demo.dist.scss",
+    "demo.dist.js": "webpack --config ../../webpack.config.js",
+    "demo.dist.scss": "node-sass demo/src/scss/style.scss demo/dist/css/style.css",
+    "demo.server": "open http://127.0.0.1:8080 && http-server ./demo",
+    "start": "ck-scripts-stack -i start"
+  },
+  "watch": {
+    "test": {
+      "paths": "tests/**/*.js"
+    },
+    "dist.js": {
+      "paths": "src/**/*.js"
+    },
+    "dist.scss": {
+      "paths": "src/**/*.scss"
+    },
+    "demo.dist.js": {
+      "paths": [
+        "src/js/**/*.js",
+        "demo/src/js/**/*.js"
+      ]
+    },
+    "demo.dist.scss": {
+      "paths": [
+        "src/scss/**/*.scss",
+        "demo/src/scss/**/*.scss"
+      ]
+    }
   },
   "repository": {
     "type": "git",
@@ -35,19 +64,25 @@
   "dependencies": {
     "@babel/cli": "^7.7.0",
     "@babel/core": "^7.7.2",
+    "@babel/helper-create-class-features-plugin": "^7.7.0",
     "@babel/plugin-proposal-class-properties": "^7.7.0",
     "@babel/plugin-proposal-export-default-from": "^7.5.2",
     "@babel/polyfill": "^7.7.0",
     "@babel/preset-env": "^7.7.1",
     "babel-jest": "^24.9.0",
+    "babel-loader": "^8.0.6",
     "babel-plugin-add-module-exports": "^1.0.2",
     "core-js": "^3.4.2",
     "jest": "^24.9.0",
-    "jest-raw-loader": "^1.0.1",
-    "pkg-up": "^3.1.0"
+    "jest-raw-loader": "^1.0.1"
   },
   "globalDependencies": {
     "@coffeekraken/docblock-to-markdown": "0.0.2",
-    "@coffeekraken/monorepo": "0.0.6"
+    "@coffeekraken/monorepo": "0.0.6",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "http-server": "^0.11.1",
+    "@coffeekraken/scripts-stack": "0.0.6",
+    "node-sass": "^4.13.0"
   }
 }

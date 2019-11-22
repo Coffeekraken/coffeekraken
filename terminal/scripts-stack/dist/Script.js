@@ -17,9 +17,12 @@ const removeBlankLines = require('remove-blank-lines');
 
 const terminate = require('terminate');
 
+const commandExistsSync = require('command-exists').sync;
+
 class Script {
-  constructor(id, watchOpts = null, runner = 'npm') {
+  constructor(id, script, watchOpts = null, runner = 'npm') {
     this._id = id;
+    this._script = script;
     this._runner = runner;
     this._stack = [];
     this._on = {};
@@ -34,7 +37,7 @@ class Script {
 
   _resetStack() {
     // reset the stack
-    this._stack = [`press ${chalk.yellow.bold('r')} to run or ${chalk.red.bold('e')} to exit the ${chalk.bold(this.id)} script`];
+    this._stack = ["press ".concat(chalk.yellow.bold('r'), " to run or ").concat(chalk.red.bold('e'), " to exit the ").concat(chalk.bold(this.id), " script")];
   }
 
   markAsRead() {
@@ -49,9 +52,9 @@ class Script {
 
     const startTime = new Date().getTime(); // append that the script has been launched
 
-    this._stack.push(chalk.yellow(`${logSymbols.warning} Start ${chalk.bold(this.id)}\n`));
+    this._stack.push(chalk.yellow("".concat(logSymbols.warning, " Start ").concat(chalk.bold(this.id), "\n")));
 
-    this._stack.push(chalk.yellow(`----------------------------------------\n`)); // dispatch new data
+    this._stack.push(chalk.yellow("----------------------------------------\n")); // dispatch new data
 
 
     this._dispatchData(null); // dispatch start
@@ -60,15 +63,17 @@ class Script {
     this._dispatchStart(); // flag the script as running
 
 
-    this._isRunning = true; // build command stack
+    this._isRunning = true; // manage runner
+
+    if (commandExistsSync('ck')) this._runner = 'ck'; // build command stack
 
     const commandArgs = [];
-    if (this._runner === 'npm') commandArgs.push('run');
-    commandArgs.push(this.id);
-    commandArgs.push('--silent'); // spawn a new process with the runner and commandArgs
+    if (this._runner === 'npm' || this._runner === 'ck') commandArgs.push('run');
+    commandArgs.push(this.id); // spawn a new process with the runner and commandArgs
 
     this._childScript = spawn(this._runner, commandArgs, {
-      detached: true
+      detached: true,
+      cwd: process.cwd()
     });
 
     this._childScript.stdout.on('data', data => {
@@ -101,14 +106,14 @@ class Script {
 
       if (code === 0) {
         // append that the script has been launched
-        this._stack.push(chalk.green(`----------------------------------------\n`));
+        this._stack.push(chalk.green("----------------------------------------\n"));
 
-        this._stack.push(chalk.green(`${logSymbols.success} Completed ${chalk.bold(this.id)} in ${(endTime - startTime) / 1000}s\n`));
+        this._stack.push(chalk.green("".concat(logSymbols.success, " Completed ").concat(chalk.bold(this.id), " in ").concat((endTime - startTime) / 1000, "s\n")));
       } else {
         // append that the script has been launched
-        this._stack.push(chalk.red(`----------------------------------------\n`));
+        this._stack.push(chalk.red("----------------------------------------\n"));
 
-        this._stack.push(chalk.red(`${logSymbols.error} Error in ${chalk.bold(this.id)} after ${(endTime - startTime) / 1000}s\n`));
+        this._stack.push(chalk.red("".concat(logSymbols.error, " Error in ").concat(chalk.bold(this.id), " after ").concat((endTime - startTime) / 1000, "s\n")));
       } // dispatch new data
 
 
@@ -240,6 +245,10 @@ class Script {
     return this._id;
   }
 
+  get script() {
+    return this._script;
+  }
+
   get stack() {
     this.markAsRead();
     return this._stack;
@@ -248,3 +257,4 @@ class Script {
 }
 
 exports.default = Script;
+module.exports = exports.default;

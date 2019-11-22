@@ -9,30 +9,30 @@ function scssTemplate(data) {
   return [this.renderBlocks(data.filter((block, index) => {
     return index === 0;
   }), {
-    title: '@[0].name',
+    title: "@[0].name",
     titleLevelAdd: 1,
-    doNotRender: ['name']
+    doNotRender: ["name"]
   }), this.renderBlocks(data.filter(block => {
     return block.constructor === true;
   }), {
-    title: 'Constructor',
-    doNotRender: ['name']
+    title: "Constructor",
+    doNotRender: ["name"]
   }), this.renderBlocks(data.filter(function (block) {
     return !block.return && block.types !== undefined && !block.private && !block.protected;
   }), {
-    title: 'Public properties'
+    title: "Public properties"
   }), this.renderBlocks(data.filter(block => {
     return block.static === true && block.public;
   }), {
-    title: 'Static methods'
+    title: "Static methods"
   }), this.renderBlocks(data.filter(block => {
     return block.public === true;
   }), {
-    title: 'Public methods'
+    title: "Public methods"
   }), this.renderBlocks(data.filter(block => {
     return block.protected === true;
   }), {
-    title: 'Protected methods'
+    title: "Protected methods"
   })].join("\n");
 }
 

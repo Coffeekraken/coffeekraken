@@ -17,7 +17,7 @@ function renderTypes(types) {
     return type;
   }); // return the rendered types
 
-  return `{ ${types.join(' , ')} }`;
+  return `{ ${types.join(" , ")} }`;
 }
 
 module.exports = exports.default;

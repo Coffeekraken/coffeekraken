@@ -72,7 +72,7 @@ var _php = _interopRequireDefault(require("../templates/php"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _default = {
-  language: 'js',
+  language: "js",
   tags: {
     abstract: _abstract.default,
     category: _category.default,
@@ -112,46 +112,46 @@ var _default = {
   },
   types: {
     js: {
-      HTMLElement: 'https://developer.mozilla.org/fr/docs/Web/API/HTMLElement',
-      HTMLLinkElement: 'https://developer.mozilla.org/fr/docs/Web/API/HTMLLinkElement',
-      String: 'https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/String',
-      Array: 'https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Array',
-      Object: 'https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Object',
-      Function: 'https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function',
-      Boolean: 'https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Boolean',
-      Date: 'https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Date',
-      Error: 'https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Error',
-      JSON: 'https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/JSON',
-      Map: 'https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Map',
-      Math: 'https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Math',
-      NaN: 'https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/NaN',
-      Number: 'https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Number',
-      Promise: 'https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Promise',
-      Proxy: 'https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Proxy',
-      RegExp: 'https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/RegExp'
+      HTMLElement: "https://developer.mozilla.org/fr/docs/Web/API/HTMLElement",
+      HTMLLinkElement: "https://developer.mozilla.org/fr/docs/Web/API/HTMLLinkElement",
+      String: "https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/String",
+      Array: "https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Array",
+      Object: "https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Object",
+      Function: "https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function",
+      Boolean: "https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Boolean",
+      Date: "https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Date",
+      Error: "https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Error",
+      JSON: "https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/JSON",
+      Map: "https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Map",
+      Math: "https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Math",
+      NaN: "https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/NaN",
+      Number: "https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Number",
+      Promise: "https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Promise",
+      Proxy: "https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Proxy",
+      RegExp: "https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/RegExp"
     },
     scss: {
-      List: 'http://www.sass-lang.com/documentation/file.SASS_REFERENCE.html#lists',
-      String: 'http://www.sass-lang.com/documentation/file.SASS_REFERENCE.html#sass-script-strings',
-      Map: 'http://www.sass-lang.com/documentation/file.SASS_REFERENCE.html#maps',
-      Color: 'http://www.sass-lang.com/documentation/file.SASS_REFERENCE.html#colors',
-      Function: 'http://www.sass-lang.com/documentation/file.SASS_REFERENCE.html#functions',
-      Mixin: 'http://www.sass-lang.com/documentation/file.SASS_REFERENCE.html#mixins'
+      List: "http://www.sass-lang.com/documentation/file.SASS_REFERENCE.html#lists",
+      String: "http://www.sass-lang.com/documentation/file.SASS_REFERENCE.html#sass-script-strings",
+      Map: "http://www.sass-lang.com/documentation/file.SASS_REFERENCE.html#maps",
+      Color: "http://www.sass-lang.com/documentation/file.SASS_REFERENCE.html#colors",
+      Function: "http://www.sass-lang.com/documentation/file.SASS_REFERENCE.html#functions",
+      Mixin: "http://www.sass-lang.com/documentation/file.SASS_REFERENCE.html#mixins"
     },
     php: {
-      String: 'http://php.net/manual/en/language.types.string.php',
-      Boolean: 'http://php.net/manual/en/language.types.boolean.php',
-      Integer: 'http://php.net/manual/en/language.types.integer.php',
-      Float: 'http://php.net/manual/en/language.types.float.php',
-      Double: 'http://php.net/manual/en/language.types.float.php',
-      Array: 'http://php.net/manual/en/language.types.array.php',
-      Object: 'http://php.net/manual/en/language.types.object.php',
-      Callable: 'http://php.net/manual/en/language.types.callable.php',
-      Resource: 'http://php.net/manual/en/language.types.resource.php',
-      NULL: 'http://php.net/manual/en/language.types.null.php',
-      Mixed: 'http://php.net/manual/en/language.pseudo-types.php#language.types.mixed',
-      Number: 'http://php.net/manual/en/language.pseudo-types.php#language.types.number',
-      Callback: 'http://php.net/manual/en/language.pseudo-types.php#language.types.callback'
+      String: "http://php.net/manual/en/language.types.string.php",
+      Boolean: "http://php.net/manual/en/language.types.boolean.php",
+      Integer: "http://php.net/manual/en/language.types.integer.php",
+      Float: "http://php.net/manual/en/language.types.float.php",
+      Double: "http://php.net/manual/en/language.types.float.php",
+      Array: "http://php.net/manual/en/language.types.array.php",
+      Object: "http://php.net/manual/en/language.types.object.php",
+      Callable: "http://php.net/manual/en/language.types.callable.php",
+      Resource: "http://php.net/manual/en/language.types.resource.php",
+      NULL: "http://php.net/manual/en/language.types.null.php",
+      Mixed: "http://php.net/manual/en/language.pseudo-types.php#language.types.mixed",
+      Number: "http://php.net/manual/en/language.pseudo-types.php#language.types.number",
+      Callback: "http://php.net/manual/en/language.pseudo-types.php#language.types.callback"
     }
   }
 };

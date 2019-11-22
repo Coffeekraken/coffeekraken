@@ -9,41 +9,41 @@ function jsTemplate(data) {
   return [this.renderBlocks(data.filter((block, index) => {
     return index === 0 && block.name && !block.private && !block.protected;
   }), {
-    title: '@[0].name',
+    title: "@[0].name",
     titleLevelAdd: 1,
-    doNotRender: ['name']
+    doNotRender: ["name"]
   }), this.renderBlocks(data.filter(block => {
     return block.constructor === true;
   }), {
-    doNotRender: ['name'],
-    title: 'Constructor'
+    doNotRender: ["name"],
+    title: "Constructor"
   }), this.renderBlocks(data.filter(block => {
     return !block.event && block.styleguide !== undefined;
   }), {
-    title: 'Examples',
+    title: "Examples",
     description: "Here's some usage examples."
   }), this.renderBlocks(data.filter(block => {
     return !block.event && (block.prop !== undefined || block.attribute !== undefined);
   }), {
-    title: 'Attributes',
+    title: "Attributes",
     description: "Here's the list of available attribute(s)."
   }), this.renderBlocks(data.filter(block => {
     return !block.event && block.setting !== undefined;
   }), {
-    title: 'Settings',
+    title: "Settings",
     description: "Here's the list of available setting(s)."
   }), this.renderBlocks(data.filter(block => {
     return !block.event && !block.return && block.types !== undefined && !block.private && !block.protected;
   }), {
-    title: 'Properties'
+    title: "Properties"
   }), this.renderBlocks(data.filter(block => {
     return !block.event && !block.types && !block.private && !block.protected;
   }), {
-    title: 'Methods'
+    title: "Methods"
   }), this.renderBlocks(data.filter(block => {
     return block.event && !block.private && !block.protected;
   }), {
-    title: 'Events'
+    title: "Events"
   })].join("\n");
 }
 

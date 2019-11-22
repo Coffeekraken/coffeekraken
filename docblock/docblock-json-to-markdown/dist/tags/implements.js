@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = implementsTag;
 
 function implementsTag(implementsStack) {
-  return `Implements **${implementsStack.join(', ')}**\n`;
+  return `Implements **${implementsStack.join(", ")}**\n`;
 }
 
 module.exports = exports.default;

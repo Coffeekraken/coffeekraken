@@ -1,36 +1,13 @@
 ![Sugar](.resources/doc-header.jpg)
 
-# Sugar <img src=".resources/coffeekraken-logo.jpg" height="25px" />
+# Coffeekraken Sugar <img src=".resources/coffeekraken-logo.jpg" height="25px" />
 
-<p>
-	<!-- <a href="https://travis-ci.org/Coffeekraken/sugar">
-		<img src="https://img.shields.io/travis/Coffeekraken/sugar.svg?style=flat-square" />
-	</a> -->
-	<a href="https://www.npmjs.com/package/coffeekraken-sugar">
-		<img src="https://img.shields.io/npm/v/coffeekraken-sugar.svg?style=flat-square" />
-	</a>
-	<a href="https://github.com/Coffeekraken/sugar/blob/master/LICENSE.txt">
-		<img src="https://img.shields.io/npm/l/coffeekraken-sugar.svg?style=flat-square" />
-	</a>
-	<!-- <a href="https://github.com/coffeekraken/sugar">
-		<img src="https://img.shields.io/npm/dt/coffeekraken-sugar.svg?style=flat-square" />
-	</a>
-	<a href="https://github.com/coffeekraken/sugar">
-		<img src="https://img.shields.io/github/forks/coffeekraken/sugar.svg?style=social&label=Fork&style=flat-square" />
-	</a>
-	<a href="https://github.com/coffeekraken/sugar">
-		<img src="https://img.shields.io/github/stars/coffeekraken/sugar.svg?style=social&label=Star&style=flat-square" />
-	</a>-->
-	<a href="https://twitter.com/coffeekrakenio">
-		<img src="https://img.shields.io/twitter/url/http/coffeekrakenio.svg?style=social&style=flat-square" />
-	</a>
-	<a href="http://coffeekraken.io">
-		<img src="https://img.shields.io/twitter/url/http/shields.io.svg?style=flat-square&label=coffeekraken.io&colorB=f2bc2b&style=flat-square" />
-	</a>
-</p>
+![npm](https://img.shields.io/npm/l/@coffeekraken/sugar?style=flat-square)
+![npm](https://img.shields.io/npm/v/@coffeekraken/sugar?style=flat-square)
+![npm](https://img.shields.io/npm/dw/@coffeekraken/sugar?style=flat-square)
 
-<p class="lead">Sugar gives you a lot of cool stuff to enhance your codebase.
-It basically does nothing by default but let you grab what you want from it. It can be the colors management feature, as well as the spaces management, helper classes, etc...</p>
+Sugar gives you a lot of cool stuff to enhance your codebase.
+It basically does nothing by default but let you grab what you want from it. It can be the colors management feature, as well as the spaces management, helper classes, etc...
 
 We like to think about this toolkit as
 
@@ -44,12 +21,6 @@ We like to think about this toolkit as
 4. [Sass features](#readme-sass-features)
 5. [JS features](#readme-js-features)
 6. [What sugar does not](#readme-does-not)
-7. [Other tools integration](#readme-tools-integration)
-8. **[Some components demos](http://components.coffeekraken.io)**
-9. [Contribute](#readme-contribute)
-10. [Browsers support](#readme-browsers-support)
-11. [License](#readme-license)
-12. [Who are Coffeekraken](#readme-who-are-coffeekraken)
 
 <a id="readme-goals"></a>
 
@@ -91,17 +62,16 @@ The primary goal of this toolkit is to cover these needs:
    - [STimer](doc/src/js/classes/SBinder.md) : Nice little class to handle timers (start, stop, pause, onTick, etc...)
    - [And many more...](doc/src/js/classes)
 6. Plenty web components based on the `SWebComponent` class
-   - These web components are separated into outside repositories
-   - Official sugar web components are published on the [Coffeekraken github organisation](https://github.com/coffeekraken)
+   - These web components are separated into outside packages
+   - Official sugar web components are published on the [Coffeekraken NPM organisation](http://npmjs.org/org/coffeekraken)
    - Well tested components
-   - Open source so don't be afraid to [contribute](doc/contribute.md)!
 
 <a id="readme-install"></a>
 
 ## Install
 
 ```
-npm install coffeekraken-sugar --save
+npm install @coffeekraken/sugar --save
 ```
 
 Release the kraken !!! 🦑
@@ -116,7 +86,7 @@ Here's how to get started quickly:
 
 ```scss
 // import sugar
-@import "node_modules/coffeekraken-sugar/index";
+@import "node_modules/@coffeekraken/sugar/index";
 
 // configure your sugar
 @include s-setup((// configuration here...));
@@ -133,7 +103,7 @@ Here's how to get started quickly:
 In javascript, you just need to import what you want from the toolkit like so:
 
 ```js
-import STimer from "coffeekraken-sugar/js/classes/STimer";
+import STimer from "@coffeekraken/sugar/js/classes/STimer";
 // etc...
 ```
 
@@ -163,14 +133,14 @@ The main goal sugar try to achieve is to give you some cool tools that you can o
 All the javascript capabilities of sugar are well structured and splited inside the repository so **you will be able to grab only what you want from it**. Here's some examples of functions and classes you might load in your project:
 
 ```js
-import whenAttribute from "coffeekraken-sugar/js/dom/whenAttribute";
-import closest from "coffeekraken-sugar/js/dom/closest";
-import whenInViewport from "coffeekraken-sugar/js/dom/whenInViewport";
-import whenAttribute from "coffeekraken-sugar/js/dom/whenAttribute";
-import closestNotVisible from "coffeekraken-sugar/js/dom/closestNotVisible";
-import SColor from "coffeekraken-sugar/js/classes/SColor";
-import STimer from "coffeekraken-sugar/js/classes/STimer";
-import SWebComponent from "coffeekraken-sugar/js/core/SWebComponent";
+import whenAttribute from "@coffeekraken/sugar/js/dom/whenAttribute";
+import closest from "@coffeekraken/sugar/js/dom/closest";
+import whenInViewport from "@coffeekraken/sugar/js/dom/whenInViewport";
+import whenAttribute from "@coffeekraken/sugar/js/dom/whenAttribute";
+import closestNotVisible from "@coffeekraken/sugar/js/dom/closestNotVisible";
+import SColor from "@coffeekraken/sugar/js/classes/SColor";
+import STimer from "@coffeekraken/sugar/js/classes/STimer";
+import SWebComponent from "@coffeekraken/sugar/js/core/SWebComponent";
 // etc...
 ```
 
@@ -180,23 +150,6 @@ import SWebComponent from "coffeekraken-sugar/js/core/SWebComponent";
 - **[Filters](doc/js/filters.md)** : Cool js filters like: - [SGooeySvgFilter](doc/src/js/filters/SGooeySvgFilter.md) : Make a gooey effect like in [this demo](https://tympanus.net/Development/CreativeGooeyEffects) - [SGradientSvgFilter](doc/src/js/filters/SGradientSvgFilter.md) : Apply an SVG gradient filter on top of any HTMLElement - [SMotionblurSvgFilter](doc/src/js/filters/SMotionblurSvgFilter.md) : Monitor an HTMLElement movement and apply a nice motion blur accordingly
 - **[Features](doc/js/features.md)** : Additional auto-applied DOM behaviors
 - **[Utils](doc/src/js/utils)** : Utils function for strings, colors, objects, etc... like: - [throttle](doc/src/js/utils/functions/throttle.md) : Throttle a function call - [isColor](doc/src/js/utils/is/color.md) : Check if is a valid color - [isEmail](doc/src/js/utils/is/email.md) : Check if is a valid email - [whenProperty](doc/src/js/utils/objects/whenProperty.md) : Be notified when a property exist or match a certain check function - [And more...](doc/src/js/utils)
-- **[Web Components](doc/js/webcomponents.md)** : Powerful web components library like: - [s-read-more](https://github.com/coffeekraken/s-read-more-component) : Simply create toggleable read more component - [s-datepicker-component](https://github.com/coffeekraken/s-datepicker-component) : Clean and fully featured datepicker - [s-ripple-component](https://github.com/coffeekraken/s-ripple-component) : Fully customizable ripple component - [s-share-component](https://github.com/coffeekraken/s-share-component) : Create customizable sharing buttons with ease - [s-drawer-component](https://github.com/coffeekraken/s-drawer-component) : Elegant and powefull component to create fully customizable components. - And [many more](https://github.com/coffeekraken)...
-
-<a id="readme-tools-integration"></a>
-
-## Other tools integration
-
-Sugar is also focused on being a good friend with other tools. Here's some tools that you can use with:
-
-1. **[Carpenter](https://github.com/coffeekraken/carpenter)** : Styleguide and documentation aggregator interface for your projects
-   - Generate styleguide from your css codebase
-   - Aggregate documentations from used modules inside 1 interface
-   - Freaking cool to work in team
-   - And more...
-2. **[Docblock parser](https://github.com/coffeekraken/docblock-parser)** : Parse docblocks to JSON
-   - Sugar is all documented with clean docblocks inside source files
-3. **[Webpack](https://webpack.github.io/docs/)** : Build final package JS file from ES6 modules codebase
-4. Let us know if you have other cool ideas around some Sugar integrations...
 
 <a id="readme-does-not"></a>
 
@@ -211,39 +164,11 @@ Sugar has some goals it try to achieve, and have also **some things that it does
 3. Force you to use his features
    - Grab what you want from the toolkit, keep the rest aside...
 
-<a id="readme-contribute"></a>
+<a name="readme-coffeekraken"></a>
 
-## Contribute
+# Coffeekraken
 
-Sugar is an open source project and will ever be! You are more that welcomed to contribute to his development and make it more awesome every day.
-To do so, you have several possibilities:
+We are a young collective of front-end creative developers with one goal in mind. Build tools to make every team working day life better. This is our first and only concern. All our tools are build around that purpose.
+All what we provide are some cool tools that you can use the way you want. These tools features cover a large scope of the front-end workflow (styleguide generation, colors/fonts management, etc...). You can use only the parts that you need and let the rest aside...
 
-1. [Share the love ❤️](https://github.com/Coffeekraken/coffeekraken/blob/master/contribute.md#contribute-share-the-love)
-2. [Declare issues](https://github.com/Coffeekraken/coffeekraken/blob/master/contribute.md#contribute-declare-issues)
-3. [Fix issues](https://github.com/Coffeekraken/coffeekraken/blob/master/contribute.md#contribute-fix-issues)
-4. [Add features](https://github.com/Coffeekraken/coffeekraken/blob/master/contribute.md#contribute-add-features)
-5. [Build web component](https://github.com/Coffeekraken/coffeekraken/blob/master/contribute.md#contribute-build-web-component)
-
-<a id="readme-browsers-support"></a>
-
-## Browsers support
-
-| [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/edge.png" alt="IE / Edge" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>IE / Edge | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/firefox.png" alt="Firefox" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/chrome.png" alt="Chrome" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/safari.png" alt="Safari" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Safari |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| IE11+                                                                                                                                                                                                                  | last 2 versions                                                                                                                                                                                                       | last 2 versions                                                                                                                                                                                                    | last 2 versions                                                                                                                                                                                                    |
-
-> As browsers are automatically updated, we will keep as reference the last two versions of each but this component can work on older ones as well.
-
-<a id="readme-license"></a>
-
-## License
-
-The code is available under the [MIT license](LICENSE.txt). This mean that you can use, modify, or do whatever you want with it. This mean also that it is shipped to you for free, so don't be a hater and if you find some issues, etc... feel free to [contribute](https://github.com/Coffeekraken/coffeekraken/blob/master/contribute.md) instead of sharing your frustrations on social networks like an asshole...
-
-<a id="readme-who-are-coffeekraken"></a>
-
-## Who are Coffeekraken
-
-We try to be **some cool guys** that build **some cool tools** to make our (and yours hopefully) **every day life better**.
-
-#### [More on who we are](https://github.com/Coffeekraken/coffeekraken/blob/master/who-are-we.md)
+[![Coffeekraken](.resources/coffeekraken-logo.jpg)](https://coffeekraken.io)

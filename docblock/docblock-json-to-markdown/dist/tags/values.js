@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = values;
 
 function values(values) {
-  return `Values : **${values.join(',')}**\n`;
+  return `Values : **${values.join(",")}**\n`;
 }
 
 module.exports = exports.default;

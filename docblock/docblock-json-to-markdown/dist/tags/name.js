@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = name;
 
 function name(name) {
-  return `\n${Array(this._titleLevel() + 1).join('#')} ${name}\n`;
+  return `\n${Array(this._titleLevel() + 1).join("#")} ${name}\n`;
 }
 
 module.exports = exports.default;

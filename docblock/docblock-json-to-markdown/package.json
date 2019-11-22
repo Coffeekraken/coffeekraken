@@ -4,9 +4,7 @@
   "description": "Transform with ease a coffeekraken-docblock-parser resulting JSON into a beautiful markdown file",
   "main": "dist/index.js",
   "scripts": {
-    "dist": "rm -rf dist && babel src -d dist",
-    "demo": "rm -rf demo/*.md && node demo/parse-js.js && node demo/parse-php.js && node demo/parse-scss.js",
-    "test": "npm run dist && jest"
+    "demo": "rm -rf demo/*.md && node demo/parse-js.js && node demo/parse-php.js && node demo/parse-scss.js"
   },
   "keywords": [
     "coffee",

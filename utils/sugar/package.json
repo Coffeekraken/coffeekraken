@@ -28,8 +28,5 @@
     "simple-ajax": "^2.6.0",
     "sprintf-js": "^1.1.2",
     "url-parse": "^1.4.7"
-  },
-  "devDependencies": {
-    "node-sass": "^4.13.0"
   }
 }

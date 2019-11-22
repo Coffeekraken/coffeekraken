@@ -22,7 +22,7 @@ function renderBlock(block) {
 
     if (!tagRendered) continue;
 
-    if (key === 'name') {
+    if (key === "name") {
       ret.unshift(tagRendered);
     } else {
       ret.push(tagRendered);

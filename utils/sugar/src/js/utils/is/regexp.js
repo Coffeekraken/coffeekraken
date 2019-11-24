@@ -4,7 +4,7 @@
  * @return   {Regexp}   true if it's a Regexp, false if not
  *
  * @example    js
- * import isRegexp from 'coffeekraken-sugar/js/utils/is/regexp'
+ * import isRegexp from '@coffeekraken/sugar/js/utils/is/regexp'
  * if (isRegexp(/^hello$/g) {
  *   // do something
  * }

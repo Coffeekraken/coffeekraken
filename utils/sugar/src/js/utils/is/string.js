@@ -4,7 +4,7 @@
  * @return   {Boolean}   true if it's a String, false if not
  *
  * @example    js
- * import isString from 'coffeekraken-sugar/js/utils/is/String'
+ * import isString from '@coffeekraken/sugar/js/utils/is/String'
  * if (isString({}) {
  *   // do something
  * }

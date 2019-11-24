@@ -6,7 +6,7 @@ import linkLoaded from "./linkLoaded";
  * @return    {Promise}    A promise when the stylesheet is loaded with the link element as parameter
  *
  * @example    js
- * import appendStylesheetLink from 'coffeekraken-sugar/js/dom/appendStylesheetLink'
+ * import appendStylesheetLink from '@coffeekraken/sugar/js/dom/appendStylesheetLink'
  * appendStylesheetLink('/dist/css/style.css')
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

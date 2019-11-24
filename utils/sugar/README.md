@@ -30,7 +30,7 @@ The primary goal of this toolkit is to cover these needs:
 
 1. Give you a way to **organize your codebase (colors, fonts, etc...)**
    - Sugar **does not tells you how your folders need to be layed out**
-   - Help you to stay organized inside your code - [Colors](doc/sass/colors.md) - [Fonts](doc/sass/fonts.md) - [Etc...](doc/sass)
+   - Help you to stay organized inside your code - [Colors](doc/scss/colors.md) - [Fonts](doc/scss/fonts.md) - [Etc...](doc/scss)
    - **Help a lot when you need to work in team**
 2. Give you access to a large number of useful mixins like:
    - [s-font](doc/src/sass/core/mixins/_s-font.md) : Apply font property quickly
@@ -113,14 +113,14 @@ import STimer from "@coffeekraken/sugar/js/classes/STimer";
 
 Here's a list of features that the toolkit will offer you. **Don't worry**, it seems like a lot, but you don't need to use all of them to start. Just pick what you need and let the rest aside...
 
-- **[Colors](doc/sass/colors.md)** : Manage, organize and use colors easily - Named colors - Easy modifiers - Helper classes (optional) - [And more...](doc/sass/colors.md)
-- **[Fonts](doc/sass/fonts.md)** : Keep your fonts really organized - Names fonts - Helper mixins - Helper classes (optional) - [And more...](doc/sass/fonts.md)
-- **[Typography](doc/sass/typography.md)** : Full stack typography management - Helper mixins - Helper classes (optional) (lowercase, uppercase, aligns, etc...) - [And more...](doc/sass/typography.md)
-- **[Sizes](doc/sass/sizes.md)** : Manage sizes ratios to keep consistent margins, etc... - Named sizes (smaller, small, default, etc...) - Fully customizable - Ratio based - [And more...](doc/sass/sizes.md)
-- **[Spaces](doc/sass/spaces.md)** : Full stack spaces management - Named spaces (share sizes names) - Helper classes (optional) - `.m-b-small` : Margin bottom small - `.m-t-big` : Margin top big - `.p-l` : Padding left (default) - Etc... - Helper mixins - [And more...](doc/sass/spaces.md)
-- **[Look and feel](doc/sass/look-and-feel.md)** : Handle how your components (atoms) looks across your site - **em** unit based - Helper mixins - Ensure a consistent feel across your website - [And more...](doc/sass/look-and-feel.md)
-- **[Filters](doc/sass/filters.md)** : Manage and keep your filters organized - Named filters - Helper mixins - Helper classes (optional) - [And more...](doc/sass/filters.md)
-- **[Transitions](doc/sass/transitions.md)** : Manage and keep your transitions organized - Named transitions - Helper mixins - Helper classes (optional) - [And more...](doc/sass/transitions.md)
+- **[Colors](doc/scss/colors.md)** : Manage, organize and use colors easily - Named colors - Easy modifiers - Helper classes (optional) - [And more...](doc/scss/colors.md)
+- **[Fonts](doc/scss/fonts.md)** : Keep your fonts really organized - Names fonts - Helper mixins - Helper classes (optional) - [And more...](doc/scss/fonts.md)
+- **[Typography](doc/scss/typography.md)** : Full stack typography management - Helper mixins - Helper classes (optional) (lowercase, uppercase, aligns, etc...) - [And more...](doc/scss/typography.md)
+- **[Sizes](doc/scss/sizes.md)** : Manage sizes ratios to keep consistent margins, etc... - Named sizes (smaller, small, default, etc...) - Fully customizable - Ratio based - [And more...](doc/scss/sizes.md)
+- **[Spaces](doc/scss/spaces.md)** : Full stack spaces management - Named spaces (share sizes names) - Helper classes (optional) - `.m-b-small` : Margin bottom small - `.m-t-big` : Margin top big - `.p-l` : Padding left (default) - Etc... - Helper mixins - [And more...](doc/scss/spaces.md)
+- **[Look and feel](doc/scss/look-and-feel.md)** : Handle how your components (atoms) looks across your site - **em** unit based - Helper mixins - Ensure a consistent feel across your website - [And more...](doc/scss/look-and-feel.md)
+- **[Filters](doc/scss/filters.md)** : Manage and keep your filters organized - Named filters - Helper mixins - Helper classes (optional) - [And more...](doc/scss/filters.md)
+- **[Transitions](doc/scss/transitions.md)** : Manage and keep your transitions organized - Named transitions - Helper mixins - Helper classes (optional) - [And more...](doc/scss/transitions.md)
 - And many more cool stuffs like: - A bunch of cool mixins to discover - Utils functions like : - [s-convert](doc/src/sass/core/functions/_s-convert.md) : Convert from a unit to another - [s-is](doc/src/sass/core/functions/_s-is.md) : Easily advanced variables type checking - And more... - We let you discover the rest by yourself...
 
 <a id="readme-js-features"></a>

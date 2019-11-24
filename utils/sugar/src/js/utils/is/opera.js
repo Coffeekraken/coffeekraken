@@ -1,7 +1,7 @@
 /**
  * Detect if is opera
  * @example 	js
- * import isOpera from 'coffeekraken-sugar/js/utils/is/opera'
+ * import isOpera from '@coffeekraken/sugar/js/utils/is/opera'
  * if (isOpera()) {
  *   // do something cool
  * }

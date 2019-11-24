@@ -3,7 +3,7 @@
  * @param 		{Object} 		obj 		The object to serialize
  * @return 		{String} 					The query string
  * @example 	js
- * import __objectToQueryString from 'coffeekraken-sugar/js/utils/object/objectToQueryString'
+ * import __objectToQueryString from '@coffeekraken/sugar/js/utils/object/objectToQueryString'
  * console.log(__objectToQueryString({
  * 	value1 : 'coco',
  * 	value1 : 'plop'

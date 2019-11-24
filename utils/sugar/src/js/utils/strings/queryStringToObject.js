@@ -6,7 +6,7 @@ import ltrim from "./ltrim";
  * @return 	{Object} 					The object representation of the query string
  *
  * @example    js
- * import queryStringToObject from 'coffeekraken-sugar/js/utils/strings/queryStringToObject'
+ * import queryStringToObject from '@coffeekraken/sugar/js/utils/strings/queryStringToObject'
  * queryStringToObject('?var1=value1&var2=value2') // { var1: 'value1', var2: 'value2' }
  *
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

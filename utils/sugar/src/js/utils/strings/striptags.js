@@ -14,7 +14,7 @@ var STATE_OUTPUT = 0,
  * @return    {String}    The processed string without tags
  *
  * @example    js
- * import striptags from 'coffeekraken-sugar/js/utils/strings/striptags'
+ * import striptags from '@coffeekraken/sugar/js/utils/strings/striptags'
  * striptags('<p><span>Hello</span> world</p>', '<span>') // <span>Hello</span> world
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

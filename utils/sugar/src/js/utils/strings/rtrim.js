@@ -5,7 +5,7 @@
  * @return    {String}    The trimed string
  *
  * @example    js
- * import rtrim from 'coffeekraken-sugar/js/utils/strings/rtrim'
+ * import rtrim from '@coffeekraken/sugar/js/utils/strings/rtrim'
  * rtrim('Hello World', 'ld') // Hello Wor
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

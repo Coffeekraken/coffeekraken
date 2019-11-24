@@ -4,7 +4,7 @@
  * @return    {String}    The html without any tags
  *
  * @example    js
- * import stripTags from 'coffeekraken-sugar/js/dom/stripTags'
+ * import stripTags from '@coffeekraken/sugar/js/dom/stripTags'
  * stripTags('<h1>Hello World</h1>') // => Hello World
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

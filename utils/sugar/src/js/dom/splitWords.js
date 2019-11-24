@@ -11,7 +11,7 @@ import _map from "lodash/map";
  * ```
  *
  * @example 	js
- * import __splitWords from 'coffeekraken-sugar/js/dom/splitLines'
+ * import __splitWords from '@coffeekraken/sugar/js/dom/splitLines'
  * const myCoolElement = document.querySelector('.my-cool-element');
  * __splitWords(myCoolElement);
  *

@@ -6,7 +6,7 @@ import imageLoaded from "./imageLoaded";
  * @return    {Promise}    A promise resolved when all images are loaded properly
  *
  * @example    js
- * import imagesLoaded from 'coffeekraken-sugar/js/dom/imagesLoaded'
+ * import imagesLoaded from '@coffeekraken/sugar/js/dom/imagesLoaded'
  * imagesLoaded([
  * 	$img1, $img2, $img3
  * ]).then(() => {

@@ -4,7 +4,7 @@
  * @return    {Promise}    The promise that will be resolved when the script is fully loaded
  *
  * @example    js
- * import scriptLoaded from 'coffeekraken-sugar/js/dom/scriptLoaded'
+ * import scriptLoaded from '@coffeekraken/sugar/js/dom/scriptLoaded'
  * scriptLoaded($script).then(($script) => {
  *   // do something here
  * })

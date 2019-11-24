@@ -4,7 +4,7 @@
  * @return    {Promise}   Returns a Promise which is resolved once full-screen mode has been activated.
  *
  * @example    js
- * import requestFullescreen from 'coffeekraken-sugar/js/dom/requestFullscreen'
+ * import requestFullescreen from '@coffeekraken/sugar/js/dom/requestFullscreen'
  * requestFullscreen(myDomElm)
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

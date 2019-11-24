@@ -49,13 +49,20 @@ commander
   )
   .action(script => {
     let shellScript =
-      localPackageJson && localPackageJson.scripts
+      localPackageJson &&
+      localPackageJson.scripts &&
+      localPackageJson.scripts[script]
         ? localPackageJson.scripts[script]
         : null;
     // check that the script exist either in the local package.json file or in the global config file
-    if (!shellScript && generalPackageJson.scripts[script]) {
+    if (
+      !shellScript &&
+      generalPackageJson.scripts &&
+      generalPackageJson.scripts[script]
+    ) {
       shellScript = generalPackageJson.scripts[script];
-    } else {
+    }
+    if (!shellScript) {
       console.log(
         `The script "${script}" that you want to run does not exist either in the local "package.json" file and in the general "${commander.config}" file...`
       );

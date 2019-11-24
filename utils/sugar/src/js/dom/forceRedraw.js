@@ -6,7 +6,7 @@ import getStyleProperty from "./getStyleProperty";
  * @return    {HTMLElement}    The HTMLElement to maintain chainability
  *
  * @example    js
- * import forceRedraw from 'coffeekraken-sugar/js/dom/forceRedraw'
+ * import forceRedraw from '@coffeekraken/sugar/js/dom/forceRedraw'
  * forceRedraw($elm)
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

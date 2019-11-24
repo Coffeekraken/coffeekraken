@@ -1,7 +1,7 @@
 /**
  * Detect if is edge
  * @example 	js
- * import isEdge from 'coffeekraken-sugar/js/utils/is/edge'
+ * import isEdge from '@coffeekraken/sugar/js/utils/is/edge'
  * if (isEdge()) {
  *   // do something cool
  * }

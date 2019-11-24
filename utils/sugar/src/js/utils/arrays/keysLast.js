@@ -7,7 +7,7 @@ import uniq from "lodash/uniq";
  * @return    {Array}    The processed array
  *
  * @example    js
- * import keysLast from 'coffeekraken-sugar/js/utils/arrays/keysLast'
+ * import keysLast from '@coffeekraken/sugar/js/utils/arrays/keysLast'
  * keysLast(['a','b','d','g','c'], ['d','g'])
  * // ['a','b','c','d','g']
  *

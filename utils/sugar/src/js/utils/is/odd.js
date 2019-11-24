@@ -4,7 +4,7 @@
  * @return    {Boolean}    true if odd, false if not
  *
  * @example    js
- * import isOdd from 'coffeekraken-sugar/js/utils/is/odd'
+ * import isOdd from '@coffeekraken/sugar/js/utils/is/odd'
  * isOdd(1) // true
  * isOdd(2) // false
  */

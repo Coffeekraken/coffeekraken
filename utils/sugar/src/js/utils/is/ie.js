@@ -1,7 +1,7 @@
 /**
  * Detect if is ie (internet explorer)
  * @example 	js
- * import isIe from 'coffeekraken-sugar/js/utils/is/ie'
+ * import isIe from '@coffeekraken/sugar/js/utils/is/ie'
  * if (isIe()) {
  *   // do something cool
  * }

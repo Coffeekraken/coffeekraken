@@ -13,7 +13,7 @@ import isNumber from "../is/number";
  * @return    {String}    The resulting string
  *
  * @example    js
- * import toString from 'coffeekraken-sugar/js/utils/strings/toString'
+ * import toString from '@coffeekraken/sugar/js/utils/strings/toString'
  * toString({
  * 	id:'hello'
  * }) // '{"id":"hello"}'

@@ -4,7 +4,7 @@
  * @return   {Boolean}   true if it's a Boolean, false if not
  *
  * @example    js
- * import isBoolean from 'coffeekraken-sugar/js/utils/is/boolean'
+ * import isBoolean from '@coffeekraken/sugar/js/utils/is/boolean'
  * if (isBoolean(true) {
  *   // do something
  * }

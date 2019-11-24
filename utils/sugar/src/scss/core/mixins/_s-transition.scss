@@ -17,13 +17,13 @@
  *
  * // registered transition
  * .my-cool-element {
- * 		\@include s-transition(fast>);
+ * 		\@include s-transition(fast);
  * 		// transition : all .2s ease-in-out 0s;
  * }
  *
  * // custom transition
  * .my-cool-element {
- * 		\@include s-transition(fast -delay .5s, fase width ease-in);
+ * 		\@include s-transition(fast -delay .5s, fast width ease-in);
  *  	// transition : all .2s ease-in-out .5s, width .2s ease-in 0s;
  * }
  *

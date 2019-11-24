@@ -4,7 +4,7 @@
  * @return    {String}    The processed string with first letter uppercase
  *
  * @example    js
- * import upperFirst from 'coffeekraken-sugar/js/utils/strings/upperFirst'
+ * import upperFirst from '@coffeekraken/sugar/js/utils/strings/upperFirst'
  * upperFirst('hello world') // Hello world
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

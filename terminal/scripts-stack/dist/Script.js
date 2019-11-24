@@ -5,22 +5,22 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-const spawn = require('child_process').spawn;
+const spawn = require("child_process").spawn;
 
-const chalk = require('chalk');
+const chalk = require("chalk");
 
-const chokidar = require('chokidar');
+const chokidar = require("chokidar");
 
-const logSymbols = require('log-symbols');
+const logSymbols = require("log-symbols");
 
-const removeBlankLines = require('remove-blank-lines');
+const removeBlankLines = require("remove-blank-lines");
 
-const terminate = require('terminate');
+const terminate = require("terminate");
 
-const commandExistsSync = require('command-exists').sync;
+const commandExistsSync = require("command-exists").sync;
 
 class Script {
-  constructor(id, script, watchOpts = null, runner = 'npm') {
+  constructor(id, script, watchOpts = null, runner = "npm") {
     this._id = id;
     this._script = script;
     this._runner = runner;
@@ -37,7 +37,7 @@ class Script {
 
   _resetStack() {
     // reset the stack
-    this._stack = ["press ".concat(chalk.yellow.bold('r'), " to run or ").concat(chalk.red.bold('e'), " to exit the ").concat(chalk.bold(this.id), " script")];
+    this._stack = ["press ".concat(chalk.yellow.bold("r"), " to run or ").concat(chalk.red.bold("e"), " to exit the ").concat(chalk.bold(this.id), " script")];
   }
 
   markAsRead() {
@@ -65,10 +65,10 @@ class Script {
 
     this._isRunning = true; // manage runner
 
-    if (commandExistsSync('ck')) this._runner = 'ck'; // build command stack
+    if (commandExistsSync("ck")) this._runner = "ck"; // build command stack
 
     const commandArgs = [];
-    if (this._runner === 'npm' || this._runner === 'ck') commandArgs.push('run');
+    if (this._runner === "npm" || this._runner === "ck") commandArgs.push("run");
     commandArgs.push(this.id); // spawn a new process with the runner and commandArgs
 
     this._childScript = spawn(this._runner, commandArgs, {
@@ -76,7 +76,7 @@ class Script {
       cwd: process.cwd()
     });
 
-    this._childScript.stdout.on('data', data => {
+    this._childScript.stdout.on("data", data => {
       // new data
       this._readed = false; // push new data to the stack
 
@@ -86,7 +86,7 @@ class Script {
       this._dispatchData(data);
     });
 
-    this._childScript.stderr.on('data', data => {
+    this._childScript.stderr.on("data", data => {
       // new data
       this._readed = false; // push new data to the stack
 
@@ -99,7 +99,7 @@ class Script {
       this._dispatchWarning(data);
     });
 
-    this._childScript.on('exit', (code, signal) => {
+    this._childScript.on("exit", (code, signal) => {
       this._isRunning = false; // end time
 
       const endTime = new Date().getTime();
@@ -134,11 +134,11 @@ class Script {
     const watchObj = this._watchOpts;
     this._watcher = chokidar.watch(watchObj.paths, Object.assign({}, watchObj.options));
 
-    this._watcher.on('add', path => {
+    this._watcher.on("add", path => {
       this.run();
-    }).on('change', path => {
+    }).on("change", path => {
       this.run();
-    }).on('unlink', path => {
+    }).on("unlink", path => {
       this.run();
     });
   }
@@ -151,40 +151,40 @@ class Script {
   }
 
   _dispatchStart() {
-    if (this._on['start']) {
-      this._on['start'].forEach(cb => {
+    if (this._on["start"]) {
+      this._on["start"].forEach(cb => {
         cb();
       });
     }
   }
 
   _dispatchWarning(data) {
-    if (this._on['warning']) {
-      this._on['warning'].forEach(cb => {
+    if (this._on["warning"]) {
+      this._on["warning"].forEach(cb => {
         cb(data);
       });
     }
   }
 
   _dispatchExit() {
-    if (this._on['exit']) {
-      this._on['exit'].forEach(cb => {
+    if (this._on["exit"]) {
+      this._on["exit"].forEach(cb => {
         cb();
       });
     }
   }
 
   _dispatchData(data) {
-    if (this._on['data']) {
-      this._on['data'].forEach(cb => {
+    if (this._on["data"]) {
+      this._on["data"].forEach(cb => {
         cb(data);
       });
     }
   }
 
   _dispatchError(data) {
-    if (this._on['error']) {
-      this._on['error'].forEach(cb => {
+    if (this._on["error"]) {
+      this._on["error"].forEach(cb => {
         cb(data);
       });
     }

@@ -4,7 +4,7 @@
  * @return    {HTMLElement}    The dom nodes representation of the passed string
  *
  * @example    js
- * import strToHtml from 'coffeekraken-sugar/js/utils/strings/strToHtml'
+ * import strToHtml from '@coffeekraken/sugar/js/utils/strings/strToHtml'
  * const myString = '<p>Hello World</p>'
  * strToHtml(myString) // <p>Hello World</p>
  *

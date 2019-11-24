@@ -9,7 +9,7 @@ import __autoCast from "../utils/strings/autoCast";
  * @return 		(Object) 								The string object representation
  *
  * @example 	js
- * import styleString2Object from 'coffeekraken-sugar/js/dom/styleString2Object'
+ * import styleString2Object from '@coffeekraken/sugar/js/dom/styleString2Object'
  * const styleString = styleString2Object('padding-left:20px; display:block;');
  * // output => {
  * //		paddingLeft : '20px',

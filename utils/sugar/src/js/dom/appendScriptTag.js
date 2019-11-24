@@ -6,7 +6,7 @@ import scriptLoaded from "./scriptLoaded";
  * @return    {Promise}    A promise resolved with the script tag when it has fully loaded
  *
  * @example    js
- * import appendScriptTag from 'coffeekraken-sugar/js/dom/appendScriptTag'
+ * import appendScriptTag from '@coffeekraken/sugar/js/dom/appendScriptTag'
  * appendScriptTag('dist/js/app.js')
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

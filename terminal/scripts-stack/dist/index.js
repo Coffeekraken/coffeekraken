@@ -5,38 +5,38 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-const path = require('path');
+const path = require("path");
 
-const fs = require('fs');
+const fs = require("fs");
 
-const blessed = require('blessed');
+const blessed = require("blessed");
 
-const logSymbols = require('log-symbols');
+const logSymbols = require("log-symbols");
 
-const chalk = require('chalk');
+const chalk = require("chalk");
 
-const clipboardy = require('clipboardy');
+const clipboardy = require("clipboardy");
 
-const stripAnsi = require('strip-ansi');
+const stripAnsi = require("strip-ansi");
 
-const nodeNotifier = require('node-notifier');
+const nodeNotifier = require("node-notifier");
 
-const terminate = require('terminate');
+const terminate = require("terminate");
 
-const clear = require('clear');
+const clear = require("clear");
 
-const pad = require('pad');
+const pad = require("pad");
 
-const flatten = require('flat');
+const flatten = require("flat");
 
-const pkgUp = require('pkg-up');
+const pkgUp = require("pkg-up");
 
-const Script = require('./Script');
+const Script = require("./Script");
 
 class scriptsStack {
   constructor(config) {
     this._config = Object.assign({}, {
-      color: 'yellow'
+      color: "yellow"
     }, config);
     this._scriptsIds = [];
     this._scriptsStack = {};
@@ -70,9 +70,22 @@ class scriptsStack {
     process.title = "scripts-stack.".concat(this._packageJson.name); // save the scripts in a global variable
 
     this._scriptsObj = {};
-    if (this._packageScripts && this._packageScripts.scripts) this._scriptsObj = this._packageScripts.scripts;
-    if (this._packageJson && this._packageJson.scripts) this._scriptsObj = this._packageJson.scripts;
-    if (this._packageUpJson && this._packageUpJson.scripts) this._scriptsObj = this._packageUpJson.scripts;
+
+    if (this._packageUpJson && this._packageUpJson.scripts) {
+      this._scriptsObj = this._packageUpJson.scripts;
+    }
+
+    if (this._packageScripts && this._packageScripts.scripts) {
+      this._scriptsObj = { ...this._scriptsObj,
+        ...this._packageScripts.scripts
+      };
+    }
+
+    if (this._packageJson && this._packageJson.scripts) {
+      this._scriptsObj = { ...this._scriptsObj,
+        ...this._packageJson.scripts
+      };
+    }
   }
 
   start() {
@@ -142,7 +155,7 @@ class scriptsStack {
         watchObj = this._packageUpJson.watch[scriptId];
       }
 
-      stack[scriptId] = new Script(scriptId, this._scriptsObj[scriptId], watchObj, 'npm');
+      stack[scriptId] = new Script(scriptId, this._scriptsObj[scriptId], watchObj, "npm");
 
       if (this._config.watch) {
         stack[scriptId].watch();
@@ -152,7 +165,7 @@ class scriptsStack {
   }
 
   _loadPackageJson() {
-    const packageJson = require(process.env.PWD + '/package.json');
+    const packageJson = require(process.env.PWD + "/package.json");
 
     if (!packageJson) {
       throw new Error('Scripts Stack : It seems that you don\'t have any "package.json" file...');
@@ -162,11 +175,11 @@ class scriptsStack {
   }
 
   _getScriptInstance(key) {
-    if (typeof key === 'number') {
+    if (typeof key === "number") {
       return this._scriptsStack[Object.keys(this._scriptsStack)[parseInt(key) - 1]];
     } else if (key instanceof Script) {
       return key;
-    } else if (typeof key === 'string') {
+    } else if (typeof key === "string") {
       return this._scriptsStack[this._getScriptIdFromListLine(key)];
     }
   }
@@ -179,18 +192,18 @@ class scriptsStack {
     const screen = blessed.screen({
       smartCSR: true,
       autoPadding: true,
-      ignoreLocked: ['C-c'],
+      ignoreLocked: ["C-c"],
       style: {
-        bg: 'black'
+        bg: "black"
       }
     });
     screen.title = this._packageJson.name;
     screen.$container = blessed.box({
       parent: screen,
-      width: '100%',
-      height: '100%',
+      width: "100%",
+      height: "100%",
       style: {
-        bg: 'black'
+        bg: "black"
       }
     });
     const headerContent = [];
@@ -199,11 +212,11 @@ class scriptsStack {
       headerContent.push(chalk.bold.white.bgBlack(" ".concat(this._packageJson.license, " ")));
     }
 
-    headerContent.push("".concat(chalk.black.bold(this._packageJson.name), " ").concat(chalk.bgWhite.black(' ' + this._packageJson.version + ' ')));
+    headerContent.push("".concat(chalk.black.bold(this._packageJson.name), " ").concat(chalk.bgWhite.black(" " + this._packageJson.version + " ")));
     screen.$headerBox = blessed.box({
       parent: screen.$container,
-      width: '100%',
-      content: "\n ".concat(headerContent.join(' ')),
+      width: "100%",
+      content: "\n ".concat(headerContent.join(" ")),
       height: 3,
       style: {
         bg: this._config.color
@@ -211,7 +224,7 @@ class scriptsStack {
     });
     screen.$scriptsList = blessed.list({
       parent: screen.$container,
-      width: '25%',
+      width: "25%",
       top: 4,
       bottom: 2,
       keys: true,
@@ -223,14 +236,14 @@ class scriptsStack {
         selected: {
           bold: true,
           fg: this._config.color,
-          bg: 'black'
+          bg: "black"
         },
-        fg: 'white',
-        bg: 'black'
+        fg: "white",
+        bg: "black"
       }
     });
     screen.$scriptsList.focus();
-    screen.$scriptsList.on('select', (item, index) => {
+    screen.$scriptsList.on("select", (item, index) => {
       // get the script instance of the selected script and run it
       const script = this._getScriptInstance(item.getContent());
 
@@ -240,21 +253,21 @@ class scriptsStack {
     });
     screen.$separationLine = blessed.line({
       parent: screen.$container,
-      orientation: 'vertical',
+      orientation: "vertical",
       top: 4,
-      left: '26%',
+      left: "26%",
       width: 1,
       bottom: 3,
       style: {
         fg: this._config.color,
-        bg: 'black'
+        bg: "black"
       }
     });
     screen.$consoleBox = blessed.box({
       parent: screen.$container,
       top: 4,
       bottom: 3,
-      left: '28%',
+      left: "28%",
       keys: true,
       mouse: true,
       tags: true,
@@ -262,8 +275,8 @@ class scriptsStack {
       scrollable: true,
       alwaysScroll: true,
       style: {
-        bg: 'black',
-        fg: 'white'
+        bg: "black",
+        fg: "white"
       },
       scrollbar: {
         bg: this._config.color
@@ -271,7 +284,7 @@ class scriptsStack {
     });
     screen.$footerBox = blessed.box({
       parent: screen.$container,
-      width: '100%',
+      width: "100%",
       content: "",
       height: 2,
       bottom: 0,
@@ -285,7 +298,7 @@ class scriptsStack {
 
   _addKeyboardListeners() {
     // Quit on Escape, q, or Control-C.
-    this.screen.key(['escape', 'q', 'C-c'], (ch, key) => {
+    this.screen.key(["escape", "q", "C-c"], (ch, key) => {
       // unwatch files
       Object.keys(this._watchers).forEach(watchKey => {
         this._watchers[watchKey].close();
@@ -301,7 +314,7 @@ class scriptsStack {
         process.exit(0);
       }
     });
-    this.screen.key(['r'], (ch, key) => {
+    this.screen.key(["r"], (ch, key) => {
       // run the selected script
       const script = this._getCurrentScriptInstance();
 
@@ -309,13 +322,13 @@ class scriptsStack {
 
       this._runScript(script);
     });
-    this.screen.key(['s'], (ch, key) => {
+    this.screen.key(["s"], (ch, key) => {
       // run the selected script
       this._config.switch = !this._config.switch; // update the footer content
 
       this._updateFooterContent();
     });
-    this.screen.key(['w'], (ch, key) => {
+    this.screen.key(["w"], (ch, key) => {
       // run the selected script
       const script = this._getCurrentScriptInstance();
 
@@ -335,14 +348,14 @@ class scriptsStack {
 
       this._renderScreen();
     });
-    this.screen.key(['c'], (ch, key) => {
+    this.screen.key(["c"], (ch, key) => {
       // run the selected script
       const script = this._getCurrentScriptInstance();
 
       if (!script) return;
-      clipboardy.writeSync(stripAnsi(script.stack.join('')));
+      clipboardy.writeSync(stripAnsi(script.stack.join("")));
     });
-    this.screen.key(['e'], (ch, key) => {
+    this.screen.key(["e"], (ch, key) => {
       // run the selected script
       const script = this._getCurrentScriptInstance();
 
@@ -350,14 +363,14 @@ class scriptsStack {
       script.kill();
     });
     let keyTimeout = null;
-    let keys = '';
-    ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].forEach(key => {
+    let keys = "";
+    ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"].forEach(key => {
       this.screen.key(["".concat(key)], (ch, key) => {
         keys += key.full;
         clearTimeout(keyTimeout);
         keyTimeout = setTimeout(() => {
           if (parseInt(keys) > Object.keys(this._scriptsStack).length) {
-            keys = '';
+            keys = "";
             return;
           } // select the script
 
@@ -371,7 +384,7 @@ class scriptsStack {
           this._renderScreen(); // reset keys
 
 
-          keys = '';
+          keys = "";
         }, 150);
       });
     });
@@ -384,27 +397,27 @@ class scriptsStack {
     const currentScript = this._getCurrentScriptInstance();
 
     const watchColorFn = currentScript.isWatched() ? chalk.bgBlue.black : chalk.bgWhite.black;
-    footerContent.push("".concat(chalk.bgWhite.black(' Run (r) ')));
-    footerContent.push("".concat(chalk.bgWhite.black(' Exit (e) ')));
-    footerContent.push("".concat(chalk.bgWhite.black(' Copy (c) ')));
+    footerContent.push("".concat(chalk.bgWhite.black(" Run (r) ")));
+    footerContent.push("".concat(chalk.bgWhite.black(" Exit (e) ")));
+    footerContent.push("".concat(chalk.bgWhite.black(" Copy (c) ")));
 
     if (currentScript.isWatchable()) {
-      footerContent.push("".concat(watchColorFn(' Watch (w) ')));
+      footerContent.push("".concat(watchColorFn(" Watch (w) ")));
     }
 
-    footerContent.push("".concat(switchColorFn(' Switch (s) '))); // footerContent.push(`${chalk.bgWhite.black(' Exit ')} ${chalk.bold.black('ctrl-c')} `)
+    footerContent.push("".concat(switchColorFn(" Switch (s) "))); // footerContent.push(`${chalk.bgWhite.black(' Exit ')} ${chalk.bold.black('ctrl-c')} `)
 
     footerContent.push("\n");
 
     if (this._packageJson.homepage) {
-      footerContent.push("".concat(chalk.bgBlack.white(' Homepage '), " ").concat(chalk.bold.black(this._packageJson.homepage), " "));
+      footerContent.push("".concat(chalk.bgBlack.white(" Homepage "), " ").concat(chalk.bold.black(this._packageJson.homepage), " "));
     }
 
     if (this._packageJson.author) {
-      footerContent.push("".concat(chalk.bgBlack.white(' Author '), " ").concat(chalk.bold.black(this._packageJson.author)));
+      footerContent.push("".concat(chalk.bgBlack.white(" Author "), " ").concat(chalk.bold.black(this._packageJson.author)));
     }
 
-    this.screen.$footerBox.setContent(footerContent.join(''));
+    this.screen.$footerBox.setContent(footerContent.join(""));
   }
 
   _renderScreen() {
@@ -416,17 +429,17 @@ class scriptsStack {
   }
 
   _getScriptIdFromListLine(line) {
-    const splits = line.split(' ');
+    const splits = line.split(" ");
     return splits[splits.length - 1];
   }
 
   _listScriptName(scriptId, icon = null) {
     const script = this._getScriptInstance(scriptId);
 
-    let watched = script.isWatchable() ? chalk.blue('-') + ' ' : '';
+    let watched = script.isWatchable() ? chalk.blue("-") + " " : "";
 
     if (script.isWatched()) {
-      watched = chalk.blue('w') + ' ';
+      watched = chalk.blue("w") + " ";
     }
 
     let iconToDisplay = watched;
@@ -435,13 +448,13 @@ class scriptsStack {
       iconToDisplay = "".concat(icon, " ");
     }
 
-    let readedIcon = '';
+    let readedIcon = "";
 
     if (!script.isReaded()) {
-      readedIcon = logSymbols.info + ' ';
+      readedIcon = logSymbols.info + " ";
     }
 
-    let idx = pad(2, Object.keys(this._scriptsStack).indexOf(scriptId) + 1, '0');
+    let idx = pad(2, Object.keys(this._scriptsStack).indexOf(scriptId) + 1, "0");
     return " ".concat(idx, ". ").concat(iconToDisplay).concat(readedIcon).concat(scriptId);
   }
 
@@ -479,7 +492,7 @@ class scriptsStack {
     // set the current script id
     this._currentScriptId = script.id; // set the console content to the selected script
 
-    this.screen.$consoleBox.setContent(script.stack.join(''));
+    this.screen.$consoleBox.setContent(script.stack.join(""));
     this.screen.$consoleBox.scroll(99999999999); // mark the script as read
     // script.markAsRead()
 
@@ -500,8 +513,8 @@ class scriptsStack {
       const scr = scriptsStack[scriptId];
 
       (script => {
-        script.on('start', data => {
-          const chars = ['⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷'];
+        script.on("start", data => {
+          const chars = ["⣾", "⣽", "⣻", "⢿", "⡿", "⣟", "⣯", "⣷"];
           let current = 0;
 
           const listItemIdx = this._getScriptIdxInList(script.id);
@@ -515,7 +528,7 @@ class scriptsStack {
 
           this._switchToScript(script);
         });
-        script.on('exit', data => {
+        script.on("exit", data => {
           clearInterval(script._updateInterval);
 
           const listItemIdx = this._getScriptIdxInList(script.id);
@@ -530,8 +543,8 @@ class scriptsStack {
           this._renderScreen(); // notification
 
 
-          const icons = ['css', 'fonts', 'icons', 'img', 'js'];
-          const splitedScript = script.id.split(':');
+          const icons = ["css", "fonts", "icons", "img", "js"];
+          const splitedScript = script.id.split(":");
           const lastSplit = splitedScript[splitedScript.length - 1];
           const icon = icons.indexOf(lastSplit) !== -1 ? "icon-".concat(lastSplit) : null;
 
@@ -539,23 +552,23 @@ class scriptsStack {
             nodeNotifier.notify({
               title: this._packageJson.name,
               subtitle: script.id,
-              message: 'Completed successfuly',
+              message: "Completed successfuly",
               icon: icon ? path.join(__dirname, "../.resources/".concat(icon, ".png")) : null,
               sound: true,
               timeout: 4
             });
           }
         });
-        script.on('data', data => {
+        script.on("data", data => {
           if (this._currentScriptId === scriptId) {
-            this.screen.$consoleBox.setContent(script.stack.join(''));
+            this.screen.$consoleBox.setContent(script.stack.join(""));
           }
 
           this.screen.$consoleBox.scroll(99999999999);
 
           this._renderScreen();
         });
-        script.on('error', data => {
+        script.on("error", data => {
           // set the error icon on the item
           clearInterval(script._updateInterval);
 

@@ -5,7 +5,7 @@ import __formSerialize from "form-serialize";
  * Send a form through an ajax call and return back a promise resolved with the server response
  *
  * @example 	js
- * import __sendForm from 'coffeekraken-sugar/js/dom/sendForm'
+ * import __sendForm from '@coffeekraken/sugar/js/dom/sendForm'
  * const myCoolForm = document.querySelector('.my-cool-form')
  * __sentForm(myCoolForm).then((response) => {
  * 	// do something with the response

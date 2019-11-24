@@ -6,7 +6,7 @@
  * - `empty`: When the input is has no value in it
  * - `dirty`: When the input has been touched
  * @example 	js
- * import 'coffeekraken-sugar/js/features/inputAdditionalAttributes'
+ * import '@coffeekraken/sugar/js/features/inputAdditionalAttributes'
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 

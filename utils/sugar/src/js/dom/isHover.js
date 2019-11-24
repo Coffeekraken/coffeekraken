@@ -3,7 +3,7 @@
  * @param    {HTMLElement}    $elm    The HTMLElement to check
  *
  * @example    js
- * import isHover from 'coffeekraken-sugar/js/dom/isHover'
+ * import isHover from '@coffeekraken/sugar/js/dom/isHover'
  * const $myElm = document.querySelector('.my-elm')
  * if (isHover($myElm)) {
  *   // do something

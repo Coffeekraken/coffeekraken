@@ -1,7 +1,7 @@
 /**
  * Detect if is the UC stock browser that is running the page
  * @example    js
- * import isUcBrowser from 'coffeekraken-sugar/js/utils/is/ucBrowser'
+ * import isUcBrowser from '@coffeekraken/sugar/js/utils/is/ucBrowser'
  * if (isUcBrowser()) {
  *   // do something
  * }

@@ -54,12 +54,18 @@ class scriptsStack {
 
     // save the scripts in a global variable
     this._scriptsObj = {};
-    if (this._packageScripts && this._packageScripts.scripts)
-      this._scriptsObj = this._packageScripts.scripts;
-    if (this._packageJson && this._packageJson.scripts)
-      this._scriptsObj = this._packageJson.scripts;
-    if (this._packageUpJson && this._packageUpJson.scripts)
+    if (this._packageUpJson && this._packageUpJson.scripts) {
       this._scriptsObj = this._packageUpJson.scripts;
+    }
+    if (this._packageScripts && this._packageScripts.scripts) {
+      this._scriptsObj = {
+        ...this._scriptsObj,
+        ...this._packageScripts.scripts
+      };
+    }
+    if (this._packageJson && this._packageJson.scripts) {
+      this._scriptsObj = { ...this._scriptsObj, ...this._packageJson.scripts };
+    }
   }
 
   start() {

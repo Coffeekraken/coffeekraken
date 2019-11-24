@@ -11,7 +11,7 @@ import matches from "./matches";
  * @param 	{Object} 		[settings={}] 	An optional settings object to specify things like the rootNode to monitor, etc...
  *
  * @example 	js
- * import querySelectorLive from 'coffeekraken-sugar/js/dom/querySelectorLive'
+ * import querySelectorLive from '@coffeekraken/sugar/js/dom/querySelectorLive'
  * querySelectorLive('.my-cool-item', (node) => {
  * 	// do something here with the detected node
  * });

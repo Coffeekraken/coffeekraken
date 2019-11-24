@@ -11,7 +11,7 @@ import __autoCast from "../utils/strings/autoCast";
  * @return 		(Promise) 										The promise that will be resolved when the attribute exist on the element (and that it passes the checkFn)
  *
  * @example 	js
- * import whenAttribute from 'coffeekraken-sugar/js/dom/whenAttribute'
+ * import whenAttribute from '@coffeekraken/sugar/js/dom/whenAttribute'
  * whenAttribute(myCoolHTMLElement, 'value').then((value) => {
  * 		// the value attribute exist on the element
  * });

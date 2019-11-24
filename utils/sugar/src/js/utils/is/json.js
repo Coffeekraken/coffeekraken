@@ -4,7 +4,7 @@
  * @return   {Boolean}   true if it's a valid json, false if not
  *
  * @example    js
- * import isJson from 'coffeekraken-sugar/js/utils/is/json'
+ * import isJson from '@coffeekraken/sugar/js/utils/is/json'
  * if (isJson('[{id:10}]')) {
  *   // do something
  * }

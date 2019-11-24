@@ -9,7 +9,7 @@ import { sprintf as _sprintf } from "sprintf-js";
  * @return    {String}    The processed string
  *
  * @example    js
- * import sprintf from 'coffeekraken-sugar/js/utils/strings/sprintf'
+ * import sprintf from '@coffeekraken/sugar/js/utils/strings/sprintf'
  * sprintf('Hello %s', 'world') // Hello World
  * const user = { name: 'Dolly' }
  * sprintf('Hello %(name)s', user) // Hello Dolly

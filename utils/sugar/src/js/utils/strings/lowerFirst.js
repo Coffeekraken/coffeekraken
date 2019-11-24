@@ -4,7 +4,7 @@
  * @return    {String}    The string with the first letter lowered
  *
  * @example    js
- * import lowerFirst from 'coffeekraken-sugar/js/utils/strings/lowerFirst'
+ * import lowerFirst from '@coffeekraken/sugar/js/utils/strings/lowerFirst'
  * lowerFirst('Hello world') // hello world
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

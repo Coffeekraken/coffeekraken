@@ -3,7 +3,7 @@
  * @return    {Promise}    Returns a Promise which is resolved once full-screen mode has been desactivated.
  *
  * @example    js
- * import exitFullscreen from 'coffeekraken-sugar/js/dom/exitFullscreen'
+ * import exitFullscreen from '@coffeekraken/sugar/js/dom/exitFullscreen'
  * exitFullscreen()
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

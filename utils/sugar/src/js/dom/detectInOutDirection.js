@@ -8,7 +8,7 @@
  * @return    {HTMLElement}    The elm to maintain chainability
  *
  * @example     js
- * import detectInOutDirection from 'coffeekraken-sugar/js/dom/detectInOutDirection'
+ * import detectInOutDirection from '@coffeekraken/sugar/js/dom/detectInOutDirection'
  * detectInOutDirection(myElm, (direction, elm) => {
  *     // do something on in
  * }, (direction, elm) => {

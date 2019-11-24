@@ -9,7 +9,7 @@
  * @return    {Function}    The remove event listener function
  *
  * @example    js
- * import addEventListener from 'coffeekraken-sugar/js/dom/addEventListener'
+ * import addEventListener from '@coffeekraken/sugar/js/dom/addEventListener'
  * const removeEventListener = addEventListener($myCoolElm, 'click', this._myCoolFunction, this)
  * // remove the event listener
  * removeEventListener()

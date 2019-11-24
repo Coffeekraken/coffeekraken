@@ -8,7 +8,7 @@ import addEventListenerOnce from "./addEventListenerOnce";
  * @return    {HTMLElement}    The element to mainain chainability
  *
  * @example    js
- * import removeClassesOnAnimationEnd from 'coffeekraken-sugar/js/dom/removeClassesOnAnimationEnd'
+ * import removeClassesOnAnimationEnd from '@coffeekraken/sugar/js/dom/removeClassesOnAnimationEnd'
  * removeClassesOnAnimationEnd(myCoolElm, ['my-class'])
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

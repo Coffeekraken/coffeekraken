@@ -10,7 +10,7 @@
  * @return    {Function}    The remove event listener function
  *
  * @example    js
- * import addEventListenerOnce from 'coffeekraken-sugar/js/dom/addEventListenerOnce'
+ * import addEventListenerOnce from '@coffeekraken/sugar/js/dom/addEventListenerOnce'
  * const removeEventListener = addEventListenerOnce(myElm, 'click', (e) => {
  *     // do something on click
  * })

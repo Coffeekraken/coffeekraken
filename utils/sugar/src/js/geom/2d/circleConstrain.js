@@ -8,7 +8,7 @@ import distanceBetween from "./distanceBetween";
  * @return    {Vector2}    The new constrained value for the point
  *
  * @example    js
- * import circleConstrain from 'coffeekraken-sugar/js/geom/2d/circleConstrain'
+ * import circleConstrain from '@coffeekraken/sugar/js/geom/2d/circleConstrain'
  * circleConstrain({
  * 	x: 10, y: 10
  * }, 10, {

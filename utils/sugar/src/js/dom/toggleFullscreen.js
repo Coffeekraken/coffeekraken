@@ -7,7 +7,7 @@ import exitFullscreen from "./exitFullscreen";
  * @return    {Promise}   Returns a Promise which is resolved once full-screen mode has been des/activated.
  *
  * @example   js
- * import toggleFullscreen from 'coffeekraken-sugar/js/dom/toggleFullscreen'
+ * import toggleFullscreen from '@coffeekraken/sugar/js/dom/toggleFullscreen'
  * toggleFullscreen(myDomElm)
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

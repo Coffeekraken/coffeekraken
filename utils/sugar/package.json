@@ -2,7 +2,7 @@
   "name": "@coffeekraken/sugar",
   "description": "A little sugar in your codebase",
   "version": "0.0.1",
-  "homepage": "http://coffekraken.io",
+  "homepage": "http://coffeekraken.io",
   "author": "Coffeekraken <hello@coffeekraken.io>",
   "contributors": [
     {
@@ -12,6 +12,9 @@
     }
   ],
   "license": "MIT",
+  "scripts": {
+    "postinstall": "node ./scripts/postinstall.js"
+  },
   "dependencies": {
     "@ungap/custom-elements-builtin": "^0.1.2",
     "custom-event": "^1.0.1",

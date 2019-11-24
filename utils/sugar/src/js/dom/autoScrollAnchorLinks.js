@@ -11,7 +11,7 @@ import scrollTo from "./scrollTo";
  * @param    {Boolean}    [checkPathnames=true]    Specify if need to check the pathnames correspondance or not
  *
  * @example    js
- * import autoScrollAnchorLinks from 'coffeekraken-sugar/js/autoScrollAnchorLinks'
+ * import autoScrollAnchorLinks from '@coffeekraken/sugar/js/autoScrollAnchorLinks'
  * autoScrollAnchorLinks()
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

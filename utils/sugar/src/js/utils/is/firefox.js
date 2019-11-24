@@ -1,7 +1,7 @@
 /**
  * Detect if is firefox
  * @example 	js
- * import isFirefox from 'coffeekraken-sugar/js/utils/is/firefox'
+ * import isFirefox from '@coffeekraken/sugar/js/utils/is/firefox'
  * if (isFirefox()) {
  *   // do something cool
  * }

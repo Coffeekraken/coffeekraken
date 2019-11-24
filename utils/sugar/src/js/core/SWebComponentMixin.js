@@ -36,7 +36,7 @@ import __onchange from "on-change";
  * - **Mount dependencies** : This will allows you to set some promises that have to be resolved before mounting the component
  *
  * @example 	js
- * import SWebComponent from 'coffeekraken-sugar/js/core/SWebComponent'
+ * import SWebComponent from '@coffeekraken/sugar/js/core/SWebComponent'
  * class MyCoolComponent extends SWebComponent {
  *
  *	\/**

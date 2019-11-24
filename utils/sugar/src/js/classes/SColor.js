@@ -29,7 +29,7 @@ import __sSettings from "../core/sSettings";
  * 	- ```new SColor('primary')```
  *
  * @example 	js
- * import SColor from 'coffeekraken-sugar/js/classes/SColor'
+ * import SColor from '@coffeekraken/sugar/js/classes/SColor'
  * let myColor = new SColor(#ff0000);
  * // get a lighter color
  * let ligtherColor = myColor.lighten(20);

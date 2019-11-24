@@ -8,7 +8,7 @@
  * @return    {String}    The ms representation of the passed string
  *
  * @example    js
- * import toMs from 'coffeekraken-sugar/js/utils/strings/toMs'
+ * import toMs from '@coffeekraken/sugar/js/utils/strings/toMs'
  * toMs('1.2s') // 1200
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

@@ -5,7 +5,7 @@
  * @return    {String}    The uncamelized string
  *
  * @example    js
- * import uncamelize from 'coffeekraken-sugar/js/utils/strings/uncamelize'
+ * import uncamelize from '@coffeekraken/sugar/js/utils/strings/uncamelize'
  * uncamelize('helloWorldAndUniverse') // hello-world-and-universe
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

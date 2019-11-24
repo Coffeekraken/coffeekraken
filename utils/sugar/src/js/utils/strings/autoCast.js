@@ -4,7 +4,7 @@
  * @return    {Mixed}    The casted value
  *
  * @example    js
- * import autoCast from 'coffeekraken-sugar/js/utils/strings/autoCast'
+ * import autoCast from '@coffeekraken/sugar/js/utils/strings/autoCast'
  * autoCast('12') // => 12
  * autoCast('window.HTMLElement') // => HTMLElement
  * autoCast('{"hello":"world"}') // {hello:'world'}

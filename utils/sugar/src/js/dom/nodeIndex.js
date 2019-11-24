@@ -4,7 +4,7 @@
  * @return    {Integer}    The index of the node inside the html
  *
  * @example    js
- * import nodeIndex from 'coffeekraken-sugar/js/dom/nodeIndex'
+ * import nodeIndex from '@coffeekraken/sugar/js/dom/nodeIndex'
  * // assuming:
  * // <li>item #1</li>
  * // <li class="match">item #2</li>

@@ -8,7 +8,7 @@ import unquote from "../utils/strings/unquote";
  * @return    {Promise}    A promise that will be resolved when the background image has been loaded
  *
  * @example    js
- * import backgroundImageLoaded from 'coffeekraken-sugar/js/dom/backgroundImageLoaded'
+ * import backgroundImageLoaded from '@coffeekraken/sugar/js/dom/backgroundImageLoaded'
  * backgroundImageLoaded($myElm).then(() => {
  *   // do something when loaded
  * })

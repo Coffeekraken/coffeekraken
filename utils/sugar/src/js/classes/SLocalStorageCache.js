@@ -5,7 +5,7 @@ import SCache from "./SCache";
  * @extends 	SCache
  * Create a simple localStorage cache
  * @example 	js
- * import SLocalStorageCache from 'coffeekraken-sugar/js/classes/SLocalStorageCache'
+ * import SLocalStorageCache from '@coffeekraken/sugar/js/classes/SLocalStorageCache'
  * const myCache = new SLocalStorageCache('my-cache', {
  * 	lifetime: 3600
  * });

@@ -4,7 +4,7 @@
  * @param    {String}    date    The date to check
  * @return    {Boolean}    true if is valid, false if not
  * @example    js
- * import isDdmmyyyyDate from 'coffeekraken-sugar/js/utils/is/ddmmyyyyDate'
+ * import isDdmmyyyyDate from '@coffeekraken/sugar/js/utils/is/ddmmyyyyDate'
  * if (isDdmmyyyyDate('20.12.2018')) {
  *     // do something cool
  * }

@@ -4,7 +4,7 @@
  * @param    {HTMLElement}    $wrapper    The wrapper element
  *
  * @example    js
- * import wrapInner from 'coffeekraken-sugar/js/dom/wrapInner'
+ * import wrapInner from '@coffeekraken/sugar/js/dom/wrapInner'
  * const $myWrapper = document.createElement('div')
  * // assuming
  * // <div class="container">

@@ -3,7 +3,7 @@
  * Add some events on some DOM Elements. Here's the list:
  * **input/textarea**: `onenter`, `onescape`
  * @example 	js
- * import 'coffeekraken-sugar/js/features/inputAdditionalEvents'
+ * import '@coffeekraken/sugar/js/features/inputAdditionalEvents'
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 

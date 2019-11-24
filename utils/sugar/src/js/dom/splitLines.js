@@ -13,7 +13,7 @@ import __throttle from "../utils/functions/throttle";
  * ```
  *
  * @example 	js
- * import __splitLines from 'coffeekraken-sugar/js/dom/splitLines'
+ * import __splitLines from '@coffeekraken/sugar/js/dom/splitLines'
  * const myCoolElement = document.querySelector('.my-cool-element');
  * __splitLines(myCoolElement);
  *

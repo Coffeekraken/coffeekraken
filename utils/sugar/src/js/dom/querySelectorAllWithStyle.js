@@ -8,7 +8,7 @@ import getStyleProperty from "./getStyleProperty";
  * @return    [Array<HTMLElement>]    An array of HTMLElement that matches the style object
  *
  * @example    js
- * import querySelectorAllWithStyle from 'coffeekraken-sugar/js/dom/querySelectorAllWithStyle'
+ * import querySelectorAllWithStyle from '@coffeekraken/sugar/js/dom/querySelectorAllWithStyle'
  * querySelectorAllWithStyle('*', {
  * 	backgroundImage: true
  * })

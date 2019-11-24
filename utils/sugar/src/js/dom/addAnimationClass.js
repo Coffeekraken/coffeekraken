@@ -7,7 +7,7 @@ import removeClassesOnAnimationEnd from "./removeClassesOnAnimationEnd";
  * @return    {HTMLElement}    The elm to maintain chainability
  *
  * @example    js
- * import addAnimationClass from 'coffeekraken-sugar/js/dom/addAnimationClass'
+ * import addAnimationClass from '@coffeekraken/sugar/js/dom/addAnimationClass'
  * addAnimationClass(myElm, 'my-cool-class')
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

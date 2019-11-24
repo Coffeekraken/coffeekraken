@@ -5,7 +5,7 @@
  * @return    {String}    The string version of the dom node
  *
  * @example    js
- * import htmlToStr from 'coffeekraken-sugar/js/utils/strings/htmlToStr'
+ * import htmlToStr from '@coffeekraken/sugar/js/utils/strings/htmlToStr'
  * const myDomNode = document.querySelector('.my-dom-node')
  * htmlToStr(myDomNode, false) // <div class="my-dom-node"></div>
  *

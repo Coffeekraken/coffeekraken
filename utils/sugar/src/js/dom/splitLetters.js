@@ -50,7 +50,7 @@ function _decodeHtml(html) {
  * ```
  *
  * @example 	js
- * import __splitLetters from 'coffeekraken-sugar/js/dom/splitLetters'
+ * import __splitLetters from '@coffeekraken/sugar/js/dom/splitLetters'
  * const myCoolElement = document.querySelector('.my-cool-element');
  * __splitLetters(myCoolElement);
  *

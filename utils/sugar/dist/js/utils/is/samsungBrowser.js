@@ -12,7 +12,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 /**
  * Detect if is the samsung stock browser that is running the page
  * @example    js
- * import isSamsumgBrowser from 'coffeekraken-sugar/js/utils/is/samsungBrowser'
+ * import isSamsumgBrowser from '@coffeekraken/sugar/js/utils/is/samsungBrowser'
  * if (isSamsumgBrowser()) {
  *   // do something
  * }

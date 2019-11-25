@@ -26,7 +26,11 @@ class SGooeySvgFilter extends _SSvgFilter.default {
    * @param 		{Number} 		amount 		The amount of effect to apply
    */
   constructor(amount = 8) {
-    super("\n\t\t\t<feGaussianBlur in=\"SourceGraphic\" stdDeviation=\"".concat(amount, "\" result=\"blur\" />\n\t\t\t<feColorMatrix in=\"blur\" mode=\"matrix\" values=\"1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 ").concat(parseInt(amount) + 9, " -9\" result=\"gooey\" />\n\t\t\t<feComposite in=\"SourceGraphic\" in2=\"gooey\" operator=\"atop\"/>\n\t\t"));
+    super(`
+			<feGaussianBlur in="SourceGraphic" stdDeviation="${amount}" result="blur" />
+			<feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 ${parseInt(amount) + 9} -9" result="gooey" />
+			<feComposite in="SourceGraphic" in2="gooey" operator="atop"/>
+		`);
     this._blur = this.filter.querySelector("feGaussianBlur");
     this._color_matrix = this.filter.querySelector("feColorMatrix");
   }
@@ -80,7 +84,7 @@ class SGooeySvgFilter extends _SSvgFilter.default {
   set amount(value) {
     this._blur.setAttribute("stdDeviation", value);
 
-    this._color_matrix.setAttribute("values", "1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 ".concat(parseInt(value) + 9, " -9"));
+    this._color_matrix.setAttribute("values", `1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 ${parseInt(value) + 9} -9`);
   }
 
 } // export modules

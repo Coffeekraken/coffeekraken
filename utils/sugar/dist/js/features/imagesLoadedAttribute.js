@@ -9,7 +9,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * Add on every images the attribute "loaded" when it has been fully loaded. This is useful
  * for styling purposes and for others thinks as well.
  * @example 	js
- * import 'coffeekraken-sugar/js/features/imagesLoadedAttribute'
+ * import '@coffeekraken/sugar/js/features/imagesLoadedAttribute'
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 document.addEventListener("load", e => {

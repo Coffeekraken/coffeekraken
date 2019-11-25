@@ -45,7 +45,9 @@ class SMotionblurSvgFilter extends _SSvgFilter.default {
    * @param 		{Number} 		amount 			The motion blur amount
    */
   constructor(amount = 0.5) {
-    super("\n\t\t\t<feGaussianBlur in=\"SourceGraphic\" stdDeviation=\"0,0\" />\n\t\t"); // settings
+    super(`
+			<feGaussianBlur in="SourceGraphic" stdDeviation="0,0" />
+		`); // settings
 
     _defineProperty(this, "amount", 0.5);
 

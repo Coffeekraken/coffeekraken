@@ -10,7 +10,7 @@ exports.default = onSwipe;
  * Detect swipes gestures on touch devices.
  *
  * @example 	js
- * import onSwipe from 'coffeekraken-sugar/js/dom/onSwipe'
+ * import onSwipe from '@coffeekraken/sugar/js/dom/onSwipe'
  * onSwipe(myCoolElm, (swipe) => {
  * 	// check the swipe direction
  * 	if (swipe.left) {

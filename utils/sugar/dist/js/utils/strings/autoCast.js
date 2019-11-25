@@ -11,7 +11,7 @@ exports.default = autoCast;
  * @return    {Mixed}    The casted value
  *
  * @example    js
- * import autoCast from 'coffeekraken-sugar/js/utils/strings/autoCast'
+ * import autoCast from '@coffeekraken/sugar/js/utils/strings/autoCast'
  * autoCast('12') // => 12
  * autoCast('window.HTMLElement') // => HTMLElement
  * autoCast('{"hello":"world"}') // {hello:'world'}
@@ -45,7 +45,7 @@ function autoCast(string) {
 
 
   try {
-    const obj = eval("(".concat(string, ")"));
+    const obj = eval(`(${string})`);
     return obj;
   } catch (e) {
     // assume that the string passed is a string

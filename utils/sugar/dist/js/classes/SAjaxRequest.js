@@ -113,7 +113,7 @@ class SAjaxRequest {
     // loop on each params
     for (let key in params) {
       if (!this.hasOwnProperty(key)) {
-        throw "The SAjaxRequest does not support the passed \"".concat(key, "\" parameter...");
+        throw `The SAjaxRequest does not support the passed "${key}" parameter...`;
         return false;
       }
     } // all ok

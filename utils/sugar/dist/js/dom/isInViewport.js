@@ -14,7 +14,7 @@ exports.default = isInViewport;
  * @return 		{Boolean									If the element is in the viewport or not
  *
  * @example  	js
- * import isInViewport from 'coffeekraken-sugar/js/dom/isInViewport'
+ * import isInViewport from '@coffeekraken/sugar/js/dom/isInViewport'
  * if (isInViewport(myCoolHTMLElement) {
  * 		// i'm in the viewport
  * }

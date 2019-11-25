@@ -12,7 +12,7 @@ exports.default = distanceBetween;
  * @return    {Number}    The distance between the two points
  *
  * @example    js
- * import distanceBetween from 'coffeekraken-sugar/js/geom/2d/distanceBetween'
+ * import distanceBetween from '@coffeekraken/sugar/js/geom/2d/distanceBetween'
  * distanceBetween({
  * 	x: 10, y: 20
  * }, {

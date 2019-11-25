@@ -7,7 +7,7 @@ require("core-js/modules/es.string.replace");
  * To use it, just require this file in your codebase
  *
  * @example 	js
- * require('coffeekraken-sugar/js/polyfill/queryselector-scope');
+ * require('@coffeekraken/sugar/js/polyfill/queryselector-scope');
  *
  * @see 		http://stackoverflow.com/questions/6481612/queryselector-search-immediate-children
  */

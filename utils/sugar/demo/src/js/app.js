@@ -1,42 +1,42 @@
 import "@babel/polyfill";
-import "../../../js/features/all";
+import "../../../dist/js/features/all";
 
-import autoScrollAnchorLinks from "../../../js/dom/autoScrollAnchorLinks";
+import autoScrollAnchorLinks from "../../../dist/js/dom/autoScrollAnchorLinks";
 
-import native from "../../../js/core/sNativeWebComponent";
-import SWebComponent from "../../../js/core/SWebComponent";
-import toggleFullscreen from "../../../js/dom/toggleFullscreen";
-import detectInOutDirection from "../../../js/dom/detectInOutDirection";
-import addAnimationClass from "../../../js/dom/addAnimationClass";
-import imagesLoaded from "../../../js/dom/imagesLoaded";
-import appendStylesheetLink from "../../../js/dom/appendStylesheetLink";
-import linkLoaded from "../../../js/dom/linkLoaded";
-import querySelectorAllWithStyle from "../../../js/dom/querySelectorAllWithStyle";
-import backgroundImageLoaded from "../../../js/dom/backgroundImageLoaded";
-import unquote from "../../../js/utils/strings/unquote";
+import native from "../../../dist/js/core/sNativeWebComponent";
+import SWebComponent from "../../../dist/js/core/SWebComponent";
+import toggleFullscreen from "../../../dist/js/dom/toggleFullscreen";
+import detectInOutDirection from "../../../dist/js/dom/detectInOutDirection";
+import addAnimationClass from "../../../dist/js/dom/addAnimationClass";
+import imagesLoaded from "../../../dist/js/dom/imagesLoaded";
+import appendStylesheetLink from "../../../dist/js/dom/appendStylesheetLink";
+import linkLoaded from "../../../dist/js/dom/linkLoaded";
+import querySelectorAllWithStyle from "../../../dist/js/dom/querySelectorAllWithStyle";
+import backgroundImageLoaded from "../../../dist/js/dom/backgroundImageLoaded";
+import unquote from "../../../dist/js/utils/strings/unquote";
 
 import wrap from "../../../src/js/dom/wrap";
 import wrapInner from "../../../src/js/dom/wrapInner";
 
-import STimer from "../../../js/classes/STimer";
+import STimer from "../../../dist/js/classes/STimer";
 
-import appendScriptTag from "../../../js/dom/appendScriptTag";
-import scriptLoaded from "../../../js/dom/scriptLoaded";
+import appendScriptTag from "../../../dist/js/dom/appendScriptTag";
+import scriptLoaded from "../../../dist/js/dom/scriptLoaded";
 
-import ltrim from "../../../js/utils/strings/ltrim";
-import rtrim from "../../../js/utils/strings/rtrim";
-import queryStringToObject from "../../../js/utils/strings/queryStringToObject";
+import ltrim from "../../../dist/js/utils/strings/ltrim";
+import rtrim from "../../../dist/js/utils/strings/rtrim";
+import queryStringToObject from "../../../dist/js/utils/strings/queryStringToObject";
 
-import keysFirst from "../../../js/utils/arrays/keysFirst";
-import keysLast from "../../../js/utils/arrays/keysLast";
+import keysFirst from "../../../dist/js/utils/arrays/keysFirst";
+import keysLast from "../../../dist/js/utils/arrays/keysLast";
 
-import isSamsumgBrowser from "../../../js/utils/is/samsungBrowser";
+import isSamsumgBrowser from "../../../dist/js/utils/is/samsungBrowser";
 
-import sprintf from "../../../js/utils/strings/sprintf";
+import sprintf from "../../../dist/js/utils/strings/sprintf";
 
-import isOdd from "../../../js/utils/is/odd";
+import isOdd from "../../../dist/js/utils/is/odd";
 
-import toString from "../../../js/utils/strings/toString";
+import toString from "../../../dist/js/utils/strings/toString";
 
 autoScrollAnchorLinks();
 

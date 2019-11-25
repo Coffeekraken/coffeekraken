@@ -11,7 +11,7 @@ exports.default = isArray;
  * @return   {Boolean}   true if it's a Array, false if not
  *
  * @example    js
- * import isArray from 'coffeekraken-sugar/js/utils/is/array'
+ * import isArray from '@coffeekraken/sugar/js/utils/is/array'
  * if (isArray([]) {
  *   // do something
  * }

@@ -13,7 +13,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * Detect if is a tablet device
  * @return    {Boolean}    true if is a tablet, false if not
  * @example 	js
- * import isTablet from 'coffeekraken-sugar/js/utils/is/tablet'
+ * import isTablet from '@coffeekraken/sugar/js/utils/is/tablet'
  * if (isTablet()) {
  *   // do something cool...
  * }

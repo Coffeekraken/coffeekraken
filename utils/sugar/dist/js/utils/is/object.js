@@ -11,7 +11,7 @@ exports.default = isObject;
  * @return   {Boolean}   true if it's a object, false if not
  *
  * @example    js
- * import isObject from 'coffeekraken-sugar/js/utils/is/object'
+ * import isObject from '@coffeekraken/sugar/js/utils/is/object'
  * if (isObject({}) {
  *   // do something
  * }

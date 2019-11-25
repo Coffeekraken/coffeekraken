@@ -23,7 +23,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * ```
  *
  * @example 	js
- * import __splitLines from 'coffeekraken-sugar/js/dom/splitLines'
+ * import __splitLines from '@coffeekraken/sugar/js/dom/splitLines'
  * const myCoolElement = document.querySelector('.my-cool-element');
  * __splitLines(myCoolElement);
  *
@@ -56,7 +56,7 @@ function _splitLines(elm, tag, tagClass) {
 
   let words = string.match(/<\s*(\w+\b)(?:(?!<\s*\/\s*\1\b)[\s\S])*<\s*\/\s*\1\s*>|\S+/g);
   words = (0, _map2.default)(words, word => {
-    return "<span class=\"s-split-lines\">".concat(word, "</span>");
+    return `<span class="s-split-lines">${word}</span>`;
   }).join(" ");
   elm.innerHTML = words;
   const spans = elm.querySelectorAll("span.s-split-lines");
@@ -76,7 +76,7 @@ function _splitLines(elm, tag, tagClass) {
   });
   lines.push(line.join(" "));
   elm.innerHTML = lines.map(lineStr => {
-    return "<".concat(tag, " class=\"").concat(tagClass, "__line\">").concat(lineStr, "</").concat(tag, ">");
+    return `<${tag} class="${tagClass}__line">${lineStr}</${tag}>`;
   }).join("");
 }
 

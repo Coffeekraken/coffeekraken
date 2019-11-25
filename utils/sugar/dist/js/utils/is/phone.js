@@ -13,7 +13,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * Detect if is a phone device
  * @return    {Boolean}    true if is a phone, false if not
  * @example 	js
- * import isPhone from 'coffeekraken-sugar/js/utils/is/phone'
+ * import isPhone from '@coffeekraken/sugar/js/utils/is/phone'
  * if (isPhone()) {
  *   // do something cool...
  * }

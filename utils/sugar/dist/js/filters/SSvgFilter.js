@@ -83,7 +83,12 @@ class SSvgFilter {
 
 
   _insertFilter() {
-    let svg = "\n\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\">\n\t\t\t\t<defs>\n\t\t\t\t</defs>\n\t\t\t</svg>\n\t\t";
+    let svg = `
+			<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+				<defs>
+				</defs>
+			</svg>
+		`;
     let div = document.createElement("div");
     div.innerHTML = svg;
     let defs = div.querySelector("defs"); // add the filter to the svg

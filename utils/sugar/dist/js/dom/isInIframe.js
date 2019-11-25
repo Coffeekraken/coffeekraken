@@ -11,7 +11,7 @@ exports.default = isInIframe;
  * @return    {Boolean}    true if in iframe, false if not
  *
  * @example    js
- * import isInIframe from 'coffeekraken-sugar/js/dom/isInIframe'
+ * import isInIframe from '@coffeekraken/sugar/js/dom/isInIframe'
  * if (isInIframe()) {
  *   // do something
  * }

@@ -11,7 +11,7 @@ exports.default = isFunction;
  * @return   {Boolean}   true if it's a function, false if not
  *
  * @example    js
- * import isFunction from 'coffeekraken-sugar/js/utils/is/function'
+ * import isFunction from '@coffeekraken/sugar/js/utils/is/function'
  * if (isFunction(function() {})) {
  *   // do something
  * }

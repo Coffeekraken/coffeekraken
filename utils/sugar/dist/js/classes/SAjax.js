@@ -185,7 +185,7 @@ class SAjax extends _SObject.default {
         start = "&";
       }
 
-      this._requestSettings.url += "".concat(start).concat(this._requestSettings.data);
+      this._requestSettings.url += `${start}${this._requestSettings.data}`;
     } // create the new simple ajax instance
 
 
@@ -212,7 +212,7 @@ class SAjax extends _SObject.default {
             if (html.id === urlParts[1]) {
               response = (0, _htmlToStr.default)(html);
             } else {
-              const part = html.querySelector("#".concat(urlParts[1]));
+              const part = html.querySelector(`#${urlParts[1]}`);
 
               if (part) {
                 response = (0, _htmlToStr.default)(part);

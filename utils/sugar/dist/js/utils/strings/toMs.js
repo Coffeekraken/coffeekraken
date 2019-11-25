@@ -15,7 +15,7 @@ exports.default = toMs;
  * @return    {String}    The ms representation of the passed string
  *
  * @example    js
- * import toMs from 'coffeekraken-sugar/js/utils/strings/toMs'
+ * import toMs from '@coffeekraken/sugar/js/utils/strings/toMs'
  * toMs('1.2s') // 1200
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -24,7 +24,7 @@ function toMs(string) {
   // parse the string to int to get the lenght of the suffix
   // if (string.substr(0,1) === '.') string = '0${string}';
   const value = parseFloat(string);
-  const valueLength = "".concat(value).length;
+  const valueLength = `${value}`.length;
   const suffix = string.substr(valueLength); // switch on suffix
 
   switch (suffix) {

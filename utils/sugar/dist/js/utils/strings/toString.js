@@ -29,7 +29,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @return    {String}    The resulting string
  *
  * @example    js
- * import toString from 'coffeekraken-sugar/js/utils/strings/toString'
+ * import toString from '@coffeekraken/sugar/js/utils/strings/toString'
  * toString({
  * 	id:'hello'
  * }) // '{"id":"hello"}'

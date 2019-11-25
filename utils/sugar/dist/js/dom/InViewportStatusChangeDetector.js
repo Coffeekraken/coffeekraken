@@ -136,7 +136,7 @@ class InViewportStatusChangeDetector {
 
 
   on(status, cb) {
-    if (!this._cbStack[status]) throw "The status \"".concat(status, "\" that you want to track is not supported...");
+    if (!this._cbStack[status]) throw `The status "${status}" that you want to track is not supported...`;
 
     this._cbStack[status].push(cb);
 

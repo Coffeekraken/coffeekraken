@@ -21,7 +21,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @param 	{Object} 		[settings={}] 	An optional settings object to specify things like the rootNode to monitor, etc...
  *
  * @example 	js
- * import querySelectorLive from 'coffeekraken-sugar/js/dom/querySelectorLive'
+ * import querySelectorLive from '@coffeekraken/sugar/js/dom/querySelectorLive'
  * querySelectorLive('.my-cool-item', (node) => {
  * 	// do something here with the detected node
  * });
@@ -29,7 +29,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function querySelectorLive(selector, cb, settings = {}) {
-  const id = "".concat(selector, " - ").concat((0, _uniqid.default)()); // extend settings
+  const id = `${selector} - ${(0, _uniqid.default)()}`; // extend settings
 
   settings = Object.assign({}, {
     rootNode: document,

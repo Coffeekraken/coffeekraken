@@ -100,7 +100,7 @@ commander
         globalDependenciesString += ` ${globaldep}@${globalDependencies[globaldep]}`;
       });
       console.log(
-        execSync(`sudo npm i -g ${globalDependenciesString}`, {
+        execSync(`npm i -g ${globalDependenciesString}`, {
           stdio: "inherit"
         })
       );

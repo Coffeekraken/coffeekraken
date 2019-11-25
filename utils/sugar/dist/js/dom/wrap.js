@@ -11,7 +11,7 @@ exports.default = wrap;
  * @param    {HTMLElement}    $wrapper    The wrapper element
  *
  * @example    js
- * import wrap from 'coffeekraken-sugar/js/dom/wrap'
+ * import wrap from '@coffeekraken/sugar/js/dom/wrap'
  * const $wrapper = document.createElement('div')
  * // assuming:
  * // <div>

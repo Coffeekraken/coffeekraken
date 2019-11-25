@@ -58,7 +58,7 @@ function _decodeHtml(html) {
  * ```
  *
  * @example 	js
- * import __splitLetters from 'coffeekraken-sugar/js/dom/splitLetters'
+ * import __splitLetters from '@coffeekraken/sugar/js/dom/splitLetters'
  * const myCoolElement = document.querySelector('.my-cool-element');
  * __splitLetters(myCoolElement);
  *
@@ -83,7 +83,7 @@ function splitLetters(elm, tag = "span", tagClass = "split-letters") {
   let words = string.match(/<\s*(\w+\b)(?:(?!<\s*\/\s*\1\b)[\s\S])*<\s*\/\s*\1\s*>|\S+/g); // split words
 
   words = (0, _map2.default)(words, word => {
-    return "<".concat(tag, " style=\"white-space:nowrap\">").concat(word, "</").concat(tag, ">");
+    return `<${tag} style="white-space:nowrap">${word}</${tag}>`;
   }).join(" ");
 
   let letters = _decodeHtml(words).split("");
@@ -97,7 +97,7 @@ function splitLetters(elm, tag = "span", tagClass = "split-letters") {
     }
     if (hasTagOpened) return letter;
     if (letter === " ") letter = "&nbsp;";
-    return "<".concat(tag, " class=\"").concat(tagClass, "__letter-container\"><").concat(tag, " class=\"").concat(tagClass, "__letter\">").concat(letter, "</").concat(tag, "></").concat(tag, ">");
+    return `<${tag} class="${tagClass}__letter-container"><${tag} class="${tagClass}__letter">${letter}</${tag}></${tag}>`;
   });
   elm.innerHTML = letters.join("");
   return elm;

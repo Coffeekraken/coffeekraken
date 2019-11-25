@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @return 		(String) 								The string style representation
  *
  * @example 	js
- * import styleObject2String from 'coffeekraken-sugar/js/dom/styleObject2String'
+ * import styleObject2String from '@coffeekraken/sugar/js/dom/styleObject2String'
  * const styleString = styleObject2String({
  * 		paddingLeft : '20px',
  * 		display : 'block'
@@ -37,7 +37,7 @@ function styleObject2String(styleObj) {
     if (value === undefined || value === "") {
       delete styleObj[key];
     } else {
-      propertiesArray.push("".concat((0, _uncamelize.default)(key), ":").concat(value, ";"));
+      propertiesArray.push(`${(0, _uncamelize.default)(key)}:${value};`);
     }
   } // return the css text
 

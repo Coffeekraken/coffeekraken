@@ -110,11 +110,11 @@ class SGoogleSearch {
     let queryString = "";
 
     for (let key in this._settings) {
-      queryString += "&".concat(key, "=").concat(this._settings[key]);
+      queryString += `&${key}=${this._settings[key]}`;
     }
 
     queryString = queryString.substr(1);
-    queryString = "?".concat(queryString); // process the url
+    queryString = `?${queryString}`; // process the url
 
     return this._searchUrl + queryString;
   }

@@ -16,7 +16,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * This function will try to get the target element from the hash and scroll to it
  *
  * @example 	js
- * import __scrollToLocationHash from 'coffeekraken-sugar/js/dom/scrollToLocationHash'
+ * import __scrollToLocationHash from '@coffeekraken/sugar/js/dom/scrollToLocationHash'
  * __scrollToLocationHash(500, 0)
  *
  * @param    {Integer}    [duration=500]    The scroll duration

@@ -15,7 +15,7 @@ exports.default = unquote;
  * @return    {String}    The unquoted string
  *
  * @example    js
- * import unquote from 'coffeekraken-sugar/js/utils/strings/unquote'
+ * import unquote from '@coffeekraken/sugar/js/utils/strings/unquote'
  * unquote("'Hello world'") // "Hello world"
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

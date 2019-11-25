@@ -10,7 +10,7 @@ if (!window.sugar._uniqid) window.sugar._uniqid = 0;
 /**
  * Generate a uniq id
  * @example    js
- * import uniqid from 'coffeekraken-sugar/js/utils/uniqid'
+ * import uniqid from '@coffeekraken/sugar/js/utils/uniqid'
  * uniqid() // s2
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -19,7 +19,7 @@ if (!window.sugar._uniqid) window.sugar._uniqid = 0;
 function uniqid() {
   // update uniqid idx
   window.sugar._uniqid++;
-  return "s".concat(window.sugar._uniqid.toString());
+  return `s${window.sugar._uniqid.toString()}`;
 }
 
 module.exports = exports.default;

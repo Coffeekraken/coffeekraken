@@ -8,7 +8,7 @@ exports.default = isSafari;
 /**
  * Detect if is safari
  * @example 	js
- * import isSafari from 'coffeekraken-sugar/js/utils/is/safari'
+ * import isSafari from '@coffeekraken/sugar/js/utils/is/safari'
  * if (isSafari()) {
  *   // do something cool
  * }

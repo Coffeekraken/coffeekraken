@@ -93,15 +93,15 @@ class SBinder {
 
   bindElementAttribute2ObjectPath(elm, attribute, object, path) {
     // generate an bindId in the object if not already exist
-    if (!object._binderId) object._binderId = "s-binder-".concat((0, _uniqid.default)()); // observe the element
+    if (!object._binderId) object._binderId = `s-binder-${(0, _uniqid.default)()}`; // observe the element
 
     this._observeDomElement(elm); // attr2obj
 
 
     if (!this._bindStack.attr2obj[attribute]) this._bindStack.attr2obj[attribute] = {};
 
-    if (!this._bindStack.attr2obj[attribute]["".concat(object._binderId, ":").concat(path)]) {
-      this._bindStack.attr2obj[attribute]["".concat(object._binderId, ":").concat(path)] = {
+    if (!this._bindStack.attr2obj[attribute][`${object._binderId}:${path}`]) {
+      this._bindStack.attr2obj[attribute][`${object._binderId}:${path}`] = {
         object: object,
         path: path
       };
@@ -121,12 +121,12 @@ class SBinder {
 
   bindObjectPath2ElementAttribute(object, path, elm, attribute) {
     // generate an bindId in the object if not already exist
-    if (!object._binderId) object._binderId = "s-binder-".concat((0, _uniqid.default)()); // obj2attr
+    if (!object._binderId) object._binderId = `s-binder-${(0, _uniqid.default)()}`; // obj2attr
 
-    if (!this._bindStack.obj2attr["".concat(object._binderId, ":").concat(path)]) this._bindStack.obj2attr["".concat(object._binderId, ":").concat(path)] = {};
+    if (!this._bindStack.obj2attr[`${object._binderId}:${path}`]) this._bindStack.obj2attr[`${object._binderId}:${path}`] = {};
 
-    if (!this._bindStack.obj2attr["".concat(object._binderId, ":").concat(path)][attribute]) {
-      this._bindStack.obj2attr["".concat(object._binderId, ":").concat(path)][attribute] = {
+    if (!this._bindStack.obj2attr[`${object._binderId}:${path}`][attribute]) {
+      this._bindStack.obj2attr[`${object._binderId}:${path}`][attribute] = {
         elm: elm,
         attribute: attribute
       };
@@ -140,9 +140,8 @@ class SBinder {
       if (digest && digest[attribute]) return;
       if (newVal === oldVal) return; // loop on all attributes to update
 
-      for (const attribute in this._bindStack.obj2attr["".concat(object._binderId, ":").concat(path)]) {
-        const watch = this._bindStack.obj2attr["".concat(object._binderId, ":").concat(path)][attribute]; // prevent from multiple same attribute assignement in the same digest process
-
+      for (const attribute in this._bindStack.obj2attr[`${object._binderId}:${path}`]) {
+        const watch = this._bindStack.obj2attr[`${object._binderId}:${path}`][attribute]; // prevent from multiple same attribute assignement in the same digest process
 
         if (digest && digest[watch.attribute]) continue;
         if (!digest) digest = {};

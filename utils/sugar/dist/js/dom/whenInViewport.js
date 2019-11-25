@@ -24,7 +24,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @return 		(Promise) 											The promise that will be resolved when the element is in the viewport
  *
  * @example 	js
- * import whenInViewport from 'coffeekraken-sugar/js/dom/whenInViewport'
+ * import whenInViewport from '@coffeekraken/sugar/js/dom/whenInViewport'
  * whenInViewport(myCoolHTMLElement).then((elm) => {
  * 		// do something with your element that has entered the viewport...
  * });
@@ -57,7 +57,7 @@ function whenInViewport(elm, offset = 50) {
       }, {
         root: null,
         // viewport
-        rootMargin: "".concat(offset, "px"),
+        rootMargin: `${offset}px`,
         threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
       });
       observer.observe(elm); // detect when visible

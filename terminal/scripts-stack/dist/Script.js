@@ -37,7 +37,7 @@ class Script {
 
   _resetStack() {
     // reset the stack
-    this._stack = ["press ".concat(chalk.yellow.bold("r"), " to run or ").concat(chalk.red.bold("e"), " to exit the ").concat(chalk.bold(this.id), " script")];
+    this._stack = [`press ${chalk.yellow.bold("r")} to run or ${chalk.red.bold("e")} to exit the ${chalk.bold(this.id)} script`];
   }
 
   markAsRead() {
@@ -52,9 +52,9 @@ class Script {
 
     const startTime = new Date().getTime(); // append that the script has been launched
 
-    this._stack.push(chalk.yellow("".concat(logSymbols.warning, " Start ").concat(chalk.bold(this.id), "\n")));
+    this._stack.push(chalk.yellow(`${logSymbols.warning} Start ${chalk.bold(this.id)}\n`));
 
-    this._stack.push(chalk.yellow("----------------------------------------\n")); // dispatch new data
+    this._stack.push(chalk.yellow(`----------------------------------------\n`)); // dispatch new data
 
 
     this._dispatchData(null); // dispatch start
@@ -106,14 +106,14 @@ class Script {
 
       if (code === 0) {
         // append that the script has been launched
-        this._stack.push(chalk.green("----------------------------------------\n"));
+        this._stack.push(chalk.green(`----------------------------------------\n`));
 
-        this._stack.push(chalk.green("".concat(logSymbols.success, " Completed ").concat(chalk.bold(this.id), " in ").concat((endTime - startTime) / 1000, "s\n")));
+        this._stack.push(chalk.green(`${logSymbols.success} Completed ${chalk.bold(this.id)} in ${(endTime - startTime) / 1000}s\n`));
       } else {
         // append that the script has been launched
-        this._stack.push(chalk.red("----------------------------------------\n"));
+        this._stack.push(chalk.red(`----------------------------------------\n`));
 
-        this._stack.push(chalk.red("".concat(logSymbols.error, " Error in ").concat(chalk.bold(this.id), " after ").concat((endTime - startTime) / 1000, "s\n")));
+        this._stack.push(chalk.red(`${logSymbols.error} Error in ${chalk.bold(this.id)} after ${(endTime - startTime) / 1000}s\n`));
       } // dispatch new data
 
 

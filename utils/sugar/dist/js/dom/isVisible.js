@@ -14,7 +14,7 @@ exports.default = isVisible;
  * @return 		{Boolean}								If the element is visible or not
  *
  * @example  	js
- * import isVisible from 'coffeekraken-sugar/js/dom/isVisible'
+ * import isVisible from '@coffeekraken/sugar/js/dom/isVisible'
  * if (isVisible(myCoolHTMLElement) {
  * 		// i'm visible
  * }

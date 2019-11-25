@@ -8,7 +8,7 @@ exports.default = isChrome;
 /**
  * Detect if is chrome
  * @example 	js
- * import isChrome from 'coffeekraken-sugar/js/utils/is/chrome'
+ * import isChrome from '@coffeekraken/sugar/js/utils/is/chrome'
  * if (isChrome()) {
  *   // do something cool
  * }

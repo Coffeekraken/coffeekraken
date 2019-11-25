@@ -13,7 +13,7 @@ exports.default = insertAfter;
  * @param 		{HTMLElement} 				refElm 		The element after which to insert the passed element
  *
  * @example  	js
- * import insertAfter from 'coffeekraken-sugar/js/dom/insertAfter'
+ * import insertAfter from '@coffeekraken/sugar/js/dom/insertAfter'
  * insertAfter(myElementToInsert, theReferenceElement);
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

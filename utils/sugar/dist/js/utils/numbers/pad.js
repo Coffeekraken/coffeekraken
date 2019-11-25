@@ -12,7 +12,7 @@ exports.default = pad;
  * @param    {String}    [character="0"]    The character to use
  *
  * @example    js
- * import pad from 'coffeekraken-sugar/js/utils/numbers/pad'
+ * import pad from '@coffeekraken/sugar/js/utils/numbers/pad'
  * pad(123, 4) // 0123
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

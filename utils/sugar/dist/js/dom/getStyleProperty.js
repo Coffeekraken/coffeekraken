@@ -39,7 +39,7 @@ function getStyleProperty(elm, property) {
 
   for (let i = 0; i < prefixes.length; i++) {
     const prefix = prefixes[i];
-    const value = computed[(0, _camelize.default)("".concat(prefix).concat(property))];
+    const value = computed[(0, _camelize.default)(`${prefix}${property}`)];
     if (value && value.trim() !== "") return (0, _autoCast.default)(value);
   }
 

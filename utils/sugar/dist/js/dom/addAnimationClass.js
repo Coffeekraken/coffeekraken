@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @return    {HTMLElement}    The elm to maintain chainability
  *
  * @example    js
- * import addAnimationClass from 'coffeekraken-sugar/js/dom/addAnimationClass'
+ * import addAnimationClass from '@coffeekraken/sugar/js/dom/addAnimationClass'
  * addAnimationClass(myElm, 'my-cool-class')
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

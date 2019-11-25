@@ -15,7 +15,7 @@ exports.default = offset;
  * @return 		{Object} 									The offset top and left object
  *
  * @example  	js
- * import offset from 'coffeekraken-sugar/js/dom/offset'
+ * import offset from '@coffeekraken/sugar/js/dom/offset'
  * const offsetElm = offset(myCoolElement);
  * // output : { top : 200, left : 300 }
  *

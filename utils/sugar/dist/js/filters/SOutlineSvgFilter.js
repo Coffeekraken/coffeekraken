@@ -26,7 +26,11 @@ class SOutlineSvgFilter extends _SSvgFilter.default {
    * @param 		{Number} 		amount 		The amount of effect to apply
    */
   constructor(radius = 8) {
-    super("\n\t\t\t<feMorphology operator=\"dilate\" radius=\"".concat(radius, "\"\n\t\t\tin=\"SourceGraphic\" result=\"THICKNESS\" />\n\t\t\t<feComposite operator=\"out\" in=\"THICKNESS\" in2=\"SourceGraphic\" ></feComposite>\n\t\t"));
+    super(`
+			<feMorphology operator="dilate" radius="${radius}"
+			in="SourceGraphic" result="THICKNESS" />
+			<feComposite operator="out" in="THICKNESS" in2="SourceGraphic" ></feComposite>
+		`);
     this._$morphology = this.filter.querySelector("feMorphology");
   }
   /**

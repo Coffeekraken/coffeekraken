@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @return    {Integer}    The animation/transition duration in ms
  *
  * @example    js
- * import getTransmationDuration from 'coffeekraken-sugar/js/dom/getTransmationDuration'
+ * import getTransmationDuration from '@coffeekraken/sugar/js/dom/getTransmationDuration'
  * getTransmationDuration($myElm) // 200
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

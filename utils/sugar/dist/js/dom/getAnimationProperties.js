@@ -54,9 +54,9 @@ function getAnimationProperties(elm) {
   const props = {
     name: name.split(","),
     duration: duration.split(",").map(value => (0, _toMs.default)(value)),
-    delay: "".concat(delay).split(",").map(value => (0, _toMs.default)(value)),
+    delay: `${delay}`.split(",").map(value => (0, _toMs.default)(value)),
     timingFunction: timingFunction.split(","),
-    iterationCount: "".concat(iterationCount).split(","),
+    iterationCount: `${iterationCount}`.split(","),
     direction: direction.split(",")
   };
   let totalDuration = 0;

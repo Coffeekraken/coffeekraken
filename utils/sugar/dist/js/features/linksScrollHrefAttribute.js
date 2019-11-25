@@ -19,7 +19,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 (0, _querySelectorLive.default)('[href^="scroll:#"]', $scrollElm => {
   $scrollElm.addEventListener("click", e => {
     e.preventDefault();
-    const $target = document.querySelector("".concat($scrollElm.getAttribute("href").substr(7)));
+    const $target = document.querySelector(`${$scrollElm.getAttribute("href").substr(7)}`);
     if (!$target) return;
     (0, _scrollTo.default)($target, 400, _easeInOutQuint.default);
   });

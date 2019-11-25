@@ -12,7 +12,7 @@ exports.default = ltrim;
  * @return    {String}    The trimed string
  *
  * @example    js
- * import ltrim from 'coffeekraken-sugar/js/utils/strings/ltrim'
+ * import ltrim from '@coffeekraken/sugar/js/utils/strings/ltrim'
  * ltrim('Hello World', 'Hello') // World
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

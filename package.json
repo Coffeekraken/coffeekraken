@@ -62,27 +62,26 @@
   },
   "homepage": "https://github.com/Coffeekraken/coffeekraken#readme",
   "dependencies": {
-    "@babel/cli": "^7.7.0",
-    "@babel/core": "^7.7.2",
-    "@babel/helper-create-class-features-plugin": "^7.7.0",
-    "@babel/plugin-proposal-class-properties": "^7.7.0",
-    "@babel/plugin-proposal-export-default-from": "^7.5.2",
+    "@babel/helper-create-class-features-plugin": "^7.7.4",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/plugin-proposal-export-default-from": "^7.7.4",
     "@babel/polyfill": "^7.7.0",
-    "@babel/preset-env": "^7.7.1",
+    "@babel/preset-env": "^7.7.4",
     "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.6",
     "babel-plugin-add-module-exports": "^1.0.2",
-    "core-js": "^3.4.2",
-    "jest": "^24.9.0",
     "jest-raw-loader": "^1.0.1"
   },
   "globalDependencies": {
-    "@coffeekraken/docblock-to-markdown": "0.0.2",
-    "@coffeekraken/monorepo": "0.0.6",
+    "@babel/core": "^7.7.4",
+    "@babel/cli": "^7.7.4",
+    "@coffeekraken/docblock-to-markdown": "^0.0.2",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
     "http-server": "^0.11.1",
-    "@coffeekraken/scripts-stack": "0.0.6",
-    "node-sass": "^4.13.0"
+    "@coffeekraken/scripts-stack": "^0.0.11",
+    "node-sass": "^4.13.0",
+    "core-js": "^3.4.2",
+    "jest": "^24.9.0"
   }
 }

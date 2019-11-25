@@ -63,7 +63,7 @@ require("es6-object-assign").polyfill();
  * - **Mount dependencies** : This will allows you to set some promises that have to be resolved before mounting the component
  *
  * @example 	js
- * import SWebComponent from 'coffeekraken-sugar/js/core/SWebComponent'
+ * import SWebComponent from '@coffeekraken/sugar/js/core/SWebComponent'
  * class MyCoolComponent extends SWebComponent {
  *
  *	\/**
@@ -167,7 +167,7 @@ const SWebComponentMixin = (0, _mixwith.Mixin)(superclass => {
           extends: ext
         });
       } else {
-        throw "Your browser does not support either document.registerElement or window.customElements.define webcomponents specification...";
+        throw `Your browser does not support either document.registerElement or window.customElements.define webcomponents specification...`;
       } // create a proxy factory
 
 
@@ -667,7 +667,7 @@ const SWebComponentMixin = (0, _mixwith.Mixin)(superclass => {
 
       this.requiredProps.forEach(prop => {
         if (!this.props[prop]) {
-          throw "The \"".concat(this.componentNameDash, "\" component need the \"").concat(prop, "\" property in order to work");
+          throw `The "${this.componentNameDash}" component need the "${prop}" property in order to work`;
         }
       }); // component will mount only if part of the active document
 
@@ -942,7 +942,7 @@ const SWebComponentMixin = (0, _mixwith.Mixin)(superclass => {
 
     dispatchComponentEvent(name, data = null, fromElm = this) {
       (0, _dispatchEvent.default)(fromElm, name, data);
-      (0, _dispatchEvent.default)(fromElm, "".concat(this.tagName.toLowerCase(), ".").concat(name), data);
+      (0, _dispatchEvent.default)(fromElm, `${this.tagName.toLowerCase()}.${name}`, data);
     }
     /**
      * Set a bunch of properties at once
@@ -1257,15 +1257,15 @@ const SWebComponentMixin = (0, _mixwith.Mixin)(superclass => {
       let sel = this.componentNameDash;
 
       if (element) {
-        sel += "__".concat(element);
+        sel += `__${element}`;
       }
 
       if (modifier) {
-        sel += "--".concat(modifier);
+        sel += `--${modifier}`;
       }
 
       if (state) {
-        sel += "--".concat(state);
+        sel += `--${state}`;
       }
 
       return sel;
@@ -1281,7 +1281,7 @@ const SWebComponentMixin = (0, _mixwith.Mixin)(superclass => {
 
     componentSelector(element = null, modifier = null, state = null) {
       let sel = this.componentClassName(element, modifier, state);
-      sel = ".".concat(sel).replace(" ", ".");
+      sel = `.${sel}`.replace(" ", ".");
       return sel;
     }
     /**

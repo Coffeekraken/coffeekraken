@@ -15,7 +15,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * Send a form through an ajax call and return back a promise resolved with the server response
  *
  * @example 	js
- * import __sendForm from 'coffeekraken-sugar/js/dom/sendForm'
+ * import __sendForm from '@coffeekraken/sugar/js/dom/sendForm'
  * const myCoolForm = document.querySelector('.my-cool-form')
  * __sentForm(myCoolForm).then((response) => {
  * 	// do something with the response
@@ -28,7 +28,7 @@ function sendForm(form) {
   // protect
   if (!form.tagName || form.tagName.toLowerCase() !== "form") {
     console.error("passed arguments", form);
-    throw "The \"form\" parameter passed to the \"sendForm\" function is not a form";
+    throw `The "form" parameter passed to the "sendForm" function is not a form`;
   } // get the enctype
 
 

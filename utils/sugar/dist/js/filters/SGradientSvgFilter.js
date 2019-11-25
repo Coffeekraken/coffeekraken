@@ -29,7 +29,10 @@ class SGradientSvgFilter extends _SSvgFilter.default {
    * @constructor
    */
   constructor() {
-    super("\n\t\t\t<feImage xlink:href=\"\" x=\"0\" y=\"0\" result=\"IMAGEFILL\" preserveAspectRatio=\"none\" />\n\t\t\t<feComposite operator=\"in\" in=\"IMAGEFILL\" in2=\"SourceAlpha\" />\n\t\t");
+    super(`
+			<feImage xlink:href="" x="0" y="0" result="IMAGEFILL" preserveAspectRatio="none" />
+			<feComposite operator="in" in="IMAGEFILL" in2="SourceAlpha" />
+		`);
     this._image = this.filter.querySelector("feImage");
     this._tile = this.filter.querySelector("feTile");
   }

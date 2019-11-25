@@ -70,12 +70,24 @@ class scriptsStack {
 
   start() {
     // list all scripts
+    this._scriptsIds = [];
     if (this._packageScripts) {
-      this._scriptsIds = Object.keys(flatten(this._packageScripts.scripts));
-    } else if (this._packageJson.scripts) {
-      this._scriptsIds = Object.keys(this._packageJson.scripts);
-    } else if (this._packageUpJson.scripts) {
-      this._scriptsIds = Object.keys(this._packageUpJson.scripts);
+      this._scriptsIds = [
+        ...this._scriptsIds,
+        ...Object.keys(flatten(this._packageScripts.scripts))
+      ];
+    }
+    if (this._packageJson.scripts) {
+      this._scriptsIds = [
+        ...this._scriptsIds,
+        ...Object.keys(this._packageJson.scripts)
+      ];
+    }
+    if (this._packageUpJson.scripts) {
+      this._scriptsIds = [
+        ...this._scriptsIds,
+        ...Object.keys(this._packageUpJson.scripts)
+      ];
     }
 
     // remove the ignored scripts
@@ -131,14 +143,22 @@ class scriptsStack {
         this._packageScripts.watch &&
         this._packageScripts.watch[scriptId]
       ) {
-        watchObj = this._packageScripts.watch[scriptId];
-      } else if (this._packageJson.watch && this._packageJson.watch[scriptId]) {
-        watchObj = this._packageJson.watch[scriptId];
-      } else if (
-        this._packageUpJson.watch &&
-        this._packageUpJson.watch[scriptId]
-      ) {
-        watchObj = this._packageUpJson.watch[scriptId];
+        watchObj = {
+          ...(watchObj || {}),
+          ...this._packageScripts.watch[scriptId]
+        };
+      }
+      if (this._packageJson.watch && this._packageJson.watch[scriptId]) {
+        watchObj = {
+          ...(watchObj || {}),
+          ...this._packageJson.watch[scriptId]
+        };
+      }
+      if (this._packageUpJson.watch && this._packageUpJson.watch[scriptId]) {
+        watchObj = {
+          ...(watchObj || {}),
+          ...this._packageUpJson.watch[scriptId]
+        };
       }
       stack[scriptId] = new Script(
         scriptId,

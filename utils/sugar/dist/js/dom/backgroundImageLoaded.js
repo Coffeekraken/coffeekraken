@@ -19,7 +19,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @return    {Promise}    A promise that will be resolved when the background image has been loaded
  *
  * @example    js
- * import backgroundImageLoaded from 'coffeekraken-sugar/js/dom/backgroundImageLoaded'
+ * import backgroundImageLoaded from '@coffeekraken/sugar/js/dom/backgroundImageLoaded'
  * backgroundImageLoaded($myElm).then(() => {
  *   // do something when loaded
  * })

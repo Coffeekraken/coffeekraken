@@ -43,7 +43,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * 	- ```new SColor('primary')```
  *
  * @example 	js
- * import SColor from 'coffeekraken-sugar/js/classes/SColor'
+ * import SColor from '@coffeekraken/sugar/js/classes/SColor'
  * let myColor = new SColor(#ff0000);
  * // get a lighter color
  * let ligtherColor = myColor.lighten(20);
@@ -836,7 +836,7 @@ class SColor {
 
 
   toRgbaString() {
-    return "rgba(".concat(this._r, ",").concat(this._g, ",").concat(this._b, ",").concat(this._a, ")");
+    return `rgba(${this._r},${this._g},${this._b},${this._a})`;
   }
   /**
    * To hsl string
@@ -846,7 +846,7 @@ class SColor {
 
   toHslString() {
     const hsl = this.convert2("hsl");
-    return "hsl(".concat(hsl.h, ",").concat(hsl.s, ",").concat(hsl.l, ")");
+    return `hsl(${hsl.h},${hsl.s},${hsl.l})`;
   }
   /**
    * To hsv string
@@ -856,7 +856,7 @@ class SColor {
 
   toHsvString() {
     const hsv = this.convert2("hsv");
-    return "hsv(".concat(hsv.h, ",").concat(hsv.s, ",").concat(hsv.v, ")");
+    return `hsv(${hsv.h},${hsv.s},${hsv.v})`;
   }
   /**
    * To string
@@ -1054,7 +1054,7 @@ _defineProperty(SColor, "toStringFormat", "rgba");
       // loop on modifiers
       for (let modifierName in color.modifiers) {
         const modifierColor = color.modifiers[modifierName];
-        SColor.colors["".concat(colorName, "--").concat(modifierName)] = modifierColor;
+        SColor.colors[`${colorName}--${modifierName}`] = modifierColor;
       }
     }
   }

@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @return    {Promise}    A promise resolved when all images are loaded properly
  *
  * @example    js
- * import imagesLoaded from 'coffeekraken-sugar/js/dom/imagesLoaded'
+ * import imagesLoaded from '@coffeekraken/sugar/js/dom/imagesLoaded'
  * imagesLoaded([
  * 	$img1, $img2, $img3
  * ]).then(() => {

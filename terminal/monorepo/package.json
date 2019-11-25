@@ -1,6 +1,6 @@
 {
   "name": "@coffeekraken/monorepo",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "Manage easily monorepo scripts, tests, etc...",
   "bin": {
     "ck": "./bin/coffeekraken-monorepo.js",

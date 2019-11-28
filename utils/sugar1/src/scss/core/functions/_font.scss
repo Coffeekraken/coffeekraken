@@ -1,6 +1,13 @@
 @use "sass:map";
 @use "sass:math";
 @use "sass:meta";
+@use 'setting' as *;
+@use 'test-argument' as *;
+@use '../../map/map-get-or' as *;
+@use '../../map/map-set' as *;
+@use 'color' as *;
+@use 'rem' as *;
+
 /**
  * Return the font {Map} that correspond to the passed arguments
  *
@@ -23,7 +30,7 @@
  * @return 		{Map} 										The corresponding font map
  *
  * @example
- * s-font(
+ * sugar.font(
  * 		$family : 'Helvetica Neue',
  * 		$size : 12px,
  * 		$wrap : norwap
@@ -36,7 +43,7 @@
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@function s-font(
+@function font(
   $family: null,
   $color: null,
   $size: null,
@@ -54,48 +61,48 @@
   $break: null,
   $wrap: null
 ) {
-  @if $_sugar-test-arguments {
-    $family: s-test-argument(
-      "s-font",
+  @if setting('debug.test-arguments') {
+    $family: test-argument(
+      "sugar.font",
       "family",
-      map.keys(s-setting("fonts")),
+      map.keys(setting("fonts")),
       $family
     );
-    $color: s-test-argument("s-font", "color", color, $color);
-    $size: s-test-argument("s-font", "size", number, $size);
-    $style: s-test-argument(
-      "s-font",
+    $color: test-argument("sugar.font", "color", color, $color);
+    $size: test-argument("sugar.font", "size", number, $size);
+    $style: test-argument(
+      "sugar.font",
       "style",
       (normal, italic, oblique, initial, inherit),
       $style
     );
-    $variant: s-test-argument(
-      "s-font",
+    $variant: test-argument(
+      "sugar.font",
       "variant",
       (normal, small-caps, initial, inherit),
       $variant
     );
-    $weight: s-test-argument("s-font", "weight", "string|number", $weight);
-    $decoration: s-test-argument(
-      "s-font",
+    $weight: test-argument("sugar.font", "weight", "string|number", $weight);
+    $decoration: test-argument(
+      "sugar.font",
       "decoration",
       (none, underline, overline, line-through, initial, inherit),
       $decoration
     );
-    $align: s-test-argument(
-      "s-font",
+    $align: test-argument(
+      "sugar.font",
       "align",
       (left, right, center, justify, initial, inherit),
       $align
     );
-    $transform: s-test-argument(
-      "s-font",
+    $transform: test-argument(
+      "sugar.font",
       "transform",
       (none, capitalize, uppercase, lowercase, initial, inherit),
       $transform
     );
-    $stretch: s-test-argument(
-      "s-font",
+    $stretch: test-argument(
+      "sugar.font",
       "stretch",
       (
         ultra-condensed,
@@ -112,23 +119,23 @@
       ),
       $stretch
     );
-    $white-space: s-test-argument(
-      "s-font",
+    $white-space: test-argument(
+      "sugar.font",
       "white-space",
       (normal, nowrap, pre, pre-line, pre-wrap, initial, inherit),
       $white-space
     );
-    $height: s-test-argument("s-font", "height", number, $height);
-    $spacing: s-test-argument("s-font", "spacing", number, $spacing);
-    $indent: s-test-argument("s-font", "indent", number, $indent);
-    $break: s-test-argument(
-      "s-font",
+    $height: test-argument("sugar.font", "height", number, $height);
+    $spacing: test-argument("sugar.font", "spacing", number, $spacing);
+    $indent: test-argument("sugar.font", "indent", number, $indent);
+    $break: test-argument(
+      "sugar.font",
       "break",
       (normal, break-all, keep-all, initial, inherit),
       $break
     );
-    $wrap: s-test-argument(
-      "s-font",
+    $wrap: test-argument(
+      "sugar.font",
       "wrap",
       (normal, break-word, initial, inherit),
       $wrap
@@ -136,8 +143,8 @@
   }
 
   // get the font object
-  $fonts: s-setting("fonts");
-  $f: map.get($fonts, s-setting("typography.font-family"));
+  $fonts: setting("fonts");
+  $f: map.get($fonts, setting("typography.font-family"));
   @if meta.type-of($f) == string {
     $f: map.get($fonts, $f);
   }
@@ -173,13 +180,13 @@
 
   // color
   @if $color {
-    $return: map-set($return, color, s-color($color));
+    $return: map-set($return, color, color($color));
   }
 
   // font-size
   @if $size {
     @if math.is-unitless($size) or math.unit($size) == px {
-      $size: s-rem($size);
+      $size: rem($size);
     }
     $return: map-set($return, font-size, $size);
   }

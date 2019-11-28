@@ -1,5 +1,6 @@
+@use 'look-and-feel' as *;
 /**
- * Alias to the [./_s-look-and-feel.scss] function
+ * Alias to the [./_look-and-feel.scss] function
  *
  * Return a settings.look-and-feel stack value
  *
@@ -8,11 +9,11 @@
  *
  * @example
  * .my-cool-element {
- * 		padding : s-lnf(padding-horizontal) s-lnf(padding-vertical);
+ * 		padding : sugar.lnf(padding-horizontal) sugar.lnf(padding-vertical);
  * }
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@function s-lnf($name) {
-  @return s-look-and-feel($name);
+@function lnf($name) {
+  @return look-and-feel($name);
 }

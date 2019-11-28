@@ -1,3 +1,6 @@
+@use 'setting' as *;
+@use '../../vendors/modularscale-sass/mdl-scale' as mdl-scale;
+
 /**
  * Return the modular scale value based on the settings ```modular-scale.base``` and ```modular-scale.ratio```.
  *
@@ -7,12 +10,9 @@
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@function s-modular-scale($scale, $base: null) {
+@function modular-scale($scale, $base: null) {
   @if not $base {
-    $base: s-setting("modular-scale.base");
+    $base: setting("modular-scale.base");
   }
-  @return ms($scale, $base);
-}
-@function s-ms($scale, $base: null) {
-  @return s-modular-scale($scale, $base);
+  @return mdl-scale.ms($scale, $base);
 }

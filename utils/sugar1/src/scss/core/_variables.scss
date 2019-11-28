@@ -1,9 +1,31 @@
 /**
-* This file contains all the default settings that can be overrided by the [s-setup mixin](./mixins/_s-setup.scss).
-*
-* @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-*/
+ * Store the current context
+ * @type      {String}
+ */
+$current-context: default !default;
+
+/**
+ * Store the component name setted by the sugar.component-name mixin
+ * @type      {String}
+ */
+$component-name: null !default;
+
+/**
+ * Store the current registered font size
+ * @type      {Number}
+ */
+$font-size: null !default;
+
+/**
+ * Stpre aéé the classes in their namespaces
+ * @type      (Map)
+ */
 $classes: () !default; // store all the classes in their namespaces
+
+/**
+ * Store all the settings
+ * @type      {Map}
+ */
 $settings: (
   // store all the settings
   unit: rem,
@@ -145,5 +167,8 @@ $settings: (
     fast: all 0.1s ease-in-out 0s,
     default: all 0.2s ease-in-out 0s, // default transition
     slow: all 0.5s ease-in-out 0s
+  ),
+  debug: (
+    test-arguments: true
   )
 ) !default;

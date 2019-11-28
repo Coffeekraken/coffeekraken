@@ -1,0 +1,22 @@
+@use 'sass:map';
+/**
+ * Return the property name
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function get-property-name($property, $keywords: ()) {
+  @if not $keywords {
+    $keywords: ();
+  }
+
+  // check if exist
+  $type: map.get($keywords, $property);
+  // if we have a type, mean a property names like this
+  // exist, return it
+  @if $type {
+    @return $property;
+  }
+
+  // nothing found
+  @return null;
+}

@@ -1,4 +1,4 @@
-@use 'convert' as sugar;
+@use 'convert' as *;
 
 /**
  * Convert the passed value to em
@@ -9,5 +9,5 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function em($value) {
-  @return sugar.convert($value, em);
+  @return convert($value, em);
 }

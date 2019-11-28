@@ -1,0 +1,15 @@
+@use 'sass:map';
+/**
+ * Get the property type
+ */
+@function get-property-type($property, $keywords: ()) {
+  @if not $keywords {
+    $keywords: ();
+  }
+
+  // check if exist
+  $type: map.get($keywords, $property);
+
+  // return the type
+  @return $type;
+}

@@ -1,37 +1,41 @@
 @use "sass:list";
 @use "sass:meta";
 @use "sass:string";
+@use '../../map/map-set' as *;
+@use 'has-color' as *;
+@use 'color' as *;
+
 /**
  * Search and replace tokens like colors #primary in a passed string, list or map
  * Supported tokens types :
  * 1. Colors : #{colorName}
  *
  * @example
- * s-replace-tokens(12px #primary hello #secondary); // > 12px #ddd hello #fff;
+ * sugar.replace-tokens(12px #primary hello #secondary); // > 12px #ddd hello #fff;
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@function s-replace-tokens($in) {
+@function replace-tokens($in) {
   @if meta.type-of($in) == list {
     $idx: 1;
     @each $item in $in {
-      $in: list.set-nth($in, $idx, s-replace-tokens($item));
+      $in: list.set-nth($in, $idx, replace-tokens($item));
       $idx: $idx + 1;
     }
   } @else if meta.type-of($in) == map {
     @each $idx, $item in $in {
-      $in: map-set($in, $idx, s-replace-tokens($item));
+      $in: map-set($in, $idx, replace-tokens($item));
     }
   } @else if meta.type-of($in) == string and string.slice($in, 1, 1) == "#" {
     $color: string.slice($in, 2);
-    @if s-has-color($color) {
+    @if has-color($color) {
       $mod-idx: string.index($color, "--");
       $mod: null;
       @if $mod-idx {
         $mod: string.slice($color, $mod-idx + 2);
         $color: string.slice($color, 1, $mod-idx - 1);
       }
-      $in: s-color($color, $mod);
+      $in: color($color, $mod);
     }
   }
   @return $in;

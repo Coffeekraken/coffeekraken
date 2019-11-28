@@ -3,6 +3,12 @@
 @use "sass:math";
 @use "sass:meta";
 
+@use 'setting' as *;
+@use 'test-argument' as *;
+@use 'dash-to-map' as *;
+@use 'is' as *;
+@use 'strip-units' as *;
+
 /**
  * Get a registered color by name or wrap a new color into a sugar.color call
  * to manipulate it with ease.
@@ -39,31 +45,16 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function color($name, $actions: null) {
-  // handle (name, actions) name formating
-  // @if type-of($name) == list and length($name) == 2 {
-  // 	$actions : nth($name, 2);
-  // 	$name : nth($name, 1);
-  // 	@return sugar.color($name, $actions);
-  // }
-
-  // handle string color name that are another registered one
-  // @if sugar.is($name, string) and not sugar.is($name, color) and sugar.setting('colors.#{$name}') {
-  // 	$color : sugar.setting('colors.#{$name}');
-  // 	@if sugar.is($color, map) {
-  // 		$color : map-get($color, color);
-  // 	}
-  // 	@return sugar.color($color, $actions);
-  // }
 
   // dash syntax
   @if $actions and meta.type-of($actions) == list {
-    @return sugar.color($name, sugar.dash-to-map($actions));
+    @return sugar.color($name, dash-to-map($actions));
   }
 
   // test parameters
-  @if $_sugar-test-arguments {
-    $name: sugar.test-argument("color", "name", "color|string", $name);
-    $actions: sugar.test-argument(
+  @if setting('debug.test-arguments') {
+    $name: test-argument("color", "name", "color|string", $name);
+    $actions: test-argument(
       "color",
       "actions",
       "map|string|color",
@@ -72,13 +63,13 @@
   }
 
   // grab the colors
-  $colors: sugar.setting("colors");
-  $color: sugar.setting("colors.#{$name}");
+  $colors: setting("colors");
+  $color: setting("colors.#{$name}");
   $modifiers: null;
 
   // check that we have the color
   @if $color == null {
-    @if sugar.is($name, color) {
+    @if is($name, color) {
       $color: $name;
     } @else {
       @error ('The color "#{$name}" does not exist...');
@@ -92,9 +83,9 @@
   }
 
   // if the color is a string
-  @if sugar.is($color, string) or sugar.is($color, color) {
-    @if $color != $name and sugar.setting("colors.#{$color}") {
-      @return sugar.color($color, $actions);
+  @if is($color, string) or is($color, color) {
+    @if $color != $name and setting("colors.#{$color}") {
+      @return color($color, $actions);
     }
   }
 
@@ -120,86 +111,86 @@
   // check action to do
   @if $actions {
     // check arguments
-    @if $_sugar-test-arguments {
+    @if setting('debug.test-arguments') {
       @if meta.type-of($actions) == map {
-        $hue: sugar.test-argument(
+        $hue: test-argument(
           "color",
           "actions.hue",
           number,
           map.get($actions, hue)
         );
-        $lighten: sugar.test-argument(
+        $lighten: test-argument(
           "color",
           "actions.lighten",
           number,
           map.get($actions, lighten)
         );
-        $darken: sugar.test-argument(
+        $darken: test-argument(
           "color",
           "actions.darken",
           number,
           map.get($actions, darken)
         );
-        $saturate: sugar.test-argument(
+        $saturate: test-argument(
           "color",
           "actions.saturate",
           number,
           map.get($actions, saturate)
         );
-        $desaturate: sugar.test-argument(
+        $desaturate: test-argument(
           "color",
           "actions.desaturate",
           number,
           map.get($actions, desaturate)
         );
-        $grayscale: sugar.test-argument(
+        $grayscale: test-argument(
           "color",
           "actions.grayscale",
           boolean,
           map.get($actions, grayscale)
         );
-        $complement: sugar.test-argument(
+        $complement: test-argument(
           "color",
           "actions.complement",
           boolean,
           map.get($actions, complement)
         );
-        $invert: sugar.test-argument(
+        $invert: test-argument(
           "color",
           "actions.invert",
           boolean,
           map.get($actions, invert)
         );
-        $opacity: sugar.test-argument(
+        $opacity: test-argument(
           "color",
           "actions.opacity",
           number,
           map.get($actions, opacity)
         );
-        $mix: sugar.test-argument(
+        $mix: test-argument(
           "color",
           "actions.mix",
           color,
           map.get($actions, mix)
         );
-        $saturation: sugar.test-argument(
+        $saturation: test-argument(
           "color",
           "actions.saturation",
           number,
           map.get($actions, saturation)
         );
-        $lightness: sugar.test-argument(
+        $lightness: test-argument(
           "color",
           "actions.lightness",
           number,
           map.get($actions, lightness)
         );
       } @else if meta.type-of($actions) == string {
-        $modifiers: sugar.setting("colors.#{$name}.modifiers");
+        $modifiers: setting("colors.#{$name}.modifiers");
         @if not $modifiers {
           @error ('The color "#{$name}" does not have any "#{$actions}" modifier...');
         }
-        $actions: sugar.test-argument(
+        $actions: test-argument(
           "color",
           "actions",
           map.keys(sugar.setting("colors.#{$name}.modifiers")),
@@ -244,9 +235,9 @@
       }
       // opacity
       @if $action == opacity and meta.type-of($value) == number {
-        $transparentize: 1 - sugar.strip-units($value);
+        $transparentize: 1 - strip-units($value);
         @if math.unit($value) == "%" {
-          $transparentize: (100 - sugar.strip-units($value)) / 100;
+          $transparentize: (100 - strip-units($value)) / 100;
         }
         $color: color.adjust($color, $alpha: -$transparentize);
       }

@@ -1,4 +1,5 @@
-@use 'setting';
+@use 'sass:map';
+@use '../variables' as sugar;
 
 /**
  * Return the unit context if has been set by the [s-unit-context mixin](../mixins/_s-unit-context.scss)
@@ -8,7 +9,7 @@
  */
 @function unit-context() {
   @if not $_s-unit-context {
-    $_s-unit-context: setting("unit") !global;
+    $_s-unit-context: map.get(sugar.$settings, unit) !global;
   }
   @return $_s-unit-context;
 }

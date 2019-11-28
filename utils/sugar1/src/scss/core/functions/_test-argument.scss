@@ -1,6 +1,9 @@
 @use "sass:list";
 @use "sass:math";
 @use "sass:meta";
+@use 'is' as *;
+
+
 /**
  * Test an argument passed to a function or a mixin to ensure his type, value, etc...
  * If the argument does not pass the test, an error will be thrown, unless the $check-only argument is true
@@ -14,8 +17,8 @@
  *
  * @example
  * \@mixin my-cool-mixin($argument1, $argument2) {
- *        $argument1 : s-test-argument(my-cool-mixin, argument1, string, $argument1);
- *        $argument2 : s-test-argument(my-cool-mixin, argument2, (hello,world,12), $argument2);
+ *        $argument1 : sugar.test-argument(my-cool-mixin, argument1, string, $argument1);
+ *        $argument2 : sugar.test-argument(my-cool-mixin, argument2, (hello,world,12), $argument2);
  * }
  * \@mixin my-cool-mixin(hello, world); // ok
  * \@mixin my-cool-mixin(hello, universe); // throw an error
@@ -23,7 +26,7 @@
  *
  * @author 				Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@function s-test-argument(
+@function test-argument(
   $method,
   $argument,
   $type-or-values,
@@ -37,7 +40,7 @@
   // check explicit values
   @if meta.type-of($type-or-values) == string {
     // check the type
-    @if not s-is($value, $type-or-values) {
+    @if not is($value, $type-or-values) {
       @if $check-only {
         @return false;
       }

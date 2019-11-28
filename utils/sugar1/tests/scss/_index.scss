@@ -1,0 +1,11 @@
+@use '../../index' as sugar;
+@use 'sass:meta';
+
+
+@error(sugar.parse-properties(10px hello -delay 20s, (
+ 	myNumber : number,
+ 	myOtherNumber : Number,
+ 	myString : String,
+ 	myCoolVar : String,
+ 	delay : second
+)));

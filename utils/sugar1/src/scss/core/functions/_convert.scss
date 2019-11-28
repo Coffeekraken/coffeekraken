@@ -1,10 +1,10 @@
 @use "sass:map";
 @use "sass:math";
-@use "../settings";
+@use "../variables" as sugar;
 @use 'strip-units' as *;
 @use 'unit-context' as *;
 
-$_s-font-size: null;
+
 /**
  * Convert a passed value to the wanted unit
  * The conversion between some units that depends on a font-size will take the settings.typography.font-size value as reference.
@@ -56,7 +56,7 @@ $_s-font-size: null;
     @if unit-context() {
       $convertUnit: unit-context();
     } @else {
-      $convertUnit: map.get(settings.$settings, unit);
+      $convertUnit: map.get(sugar.$settings, unit);
     }
   }
 
@@ -65,12 +65,12 @@ $_s-font-size: null;
 
   // put font size in cache to avoid
   // unit conversion recursion
-  @if not $_s-font-size {
-    $fs: map.get(settings.$settings, typography);
+  @if not sugar.$font-size {
+    $fs: map.get(sugar.$settings, typography);
     $fs: map.get($fs, font-size);
-    $_s-font-size: $fs !global;
+    sugar.$font-size: $fs;
   }
-  $font-size: strip-units($_s-font-size);
+  $font-size: strip-units(sugar.$font-size);
 
   // return the value if same units
   @if $unit and $unit == $convertUnit {

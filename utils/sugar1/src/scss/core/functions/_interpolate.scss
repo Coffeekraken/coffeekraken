@@ -1,5 +1,7 @@
 @use "sass:math";
 @use "sass:meta";
+@use 'setting' as *;
+
 /**
  * Return the specified or calculated value of the given stack and size
  * depending on the settings.sizes ratios stack
@@ -11,7 +13,7 @@
  * @example
  *
  * // settings.sizes
- * \@include s-setup((
+ * \@include sugar.setup((
  * 		sizes : (
  * 			small : 0.5,
  * 			default : 1, // default is ALWAYS 1
@@ -24,12 +26,12 @@
  * 		big : 6rem
  * )
  *
- * s-interpolate($myStack, big) // 6rem cause specified in the $myStack value
- * s-interpolate($myStack, small) // 1.5rem => calculated like : 3rem * 0.5 = 1.5rem
+ * sugar.interpolate($myStack, big) // 6rem cause specified in the $myStack value
+ * sugar.interpolate($myStack, small) // 1.5rem => calculated like : 3rem * 0.5 = 1.5rem
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@function s-interpolate($stack, $size) {
+@function interpolate($stack, $size) {
   @if not $stack or meta.type-of($stack) != string {
     @error ('The value "#{$stack}" is not a settings path');
   }
@@ -43,7 +45,7 @@
   }
 
   // get what we need to interpolate the value
-  $ratio: s-setting("sizes.#{$size}");
+  $ratio: setting("sizes.#{$size}");
   $default-size: s("#{$stack}.default");
 
   // if the getted value is a unitless one, mean that it's the ratio to use

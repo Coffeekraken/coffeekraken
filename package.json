@@ -70,7 +70,9 @@
     "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.6",
     "babel-plugin-add-module-exports": "^1.0.2",
-    "jest-raw-loader": "^1.0.1"
+    "glob": "^7.1.6",
+    "jest-raw-loader": "^1.0.1",
+    "node-sass": "^4.13.0"
   },
   "globalDependencies": {
     "@babel/core": "^7.7.4",
@@ -80,9 +82,9 @@
     "webpack-cli": "^3.3.10",
     "http-server": "^0.11.1",
     "@coffeekraken/scripts-stack": "^0.0.11",
-    "node-sass": "^4.13.0",
     "core-js": "^3.4.2",
     "jest": "^24.9.0",
     "sass": "^1.23.7"
-  }
+  },
+  "devDependencies": {}
 }

@@ -1,5 +1,8 @@
 @use 'sass:list';
 @use 'sass:map';
+@use 'is' as *;
+@use 'setting' as *;
+
 // @use '../../sugar' as sugar;
 /**
  * Return the color in a modifier list
@@ -13,9 +16,9 @@
  */
 @function color-modifier($modifiers, $default: null) {
   // get the colors registered as list
-  $colors: map.keys(sugar.setting("colors"));
+  $colors: map.keys(setting("colors"));
   @each $modifier in $modifiers {
-    @if sugar.is($modifier, color) {
+    @if is($modifier, color) {
       @return $modifier;
     }
     @if list.index($colors, $modifier) {

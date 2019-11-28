@@ -13,7 +13,8 @@
   ],
   "license": "MIT",
   "scripts": {
-    "postinstall": "node ./scripts/postinstall.js"
+    "postinstall": "node ./scripts/postinstall.js",
+    "test": "sass tests/scss/_index.scss --color --stop-on-error"
   },
   "dependencies": {
     "@ungap/custom-elements-builtin": "^0.1.2",
@@ -34,6 +35,5 @@
     "url-parse": "^1.4.7"
   },
   "devDependencies": {
-    "sass-true": "^5.0.0"
   }
 }

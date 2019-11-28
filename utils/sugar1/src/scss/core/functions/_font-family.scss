@@ -1,4 +1,6 @@
 @use "sass:map";
+@use 'font' as *;
+
 /**
  * Return the font-family string or a registered font
  *
@@ -7,7 +9,7 @@
  *
  * @example
  * // register a font
- * \@include s-setup((
+ * \@include sugar.setup((
  * 		fonts : (
  * 			myCoolFont : (
  * 				font-family : 'Helvetica Neue',
@@ -20,12 +22,12 @@
  *
  * // apply the font
  * .my-cool-element {
- * 		font-family : s-font-family(myCoolFont);
- * 		// font-family : 'Helvetica Neue';
+ * 		font-family : sugar.font-family(myCoolFont);
+ * 		// 'Helvetica Neue';
  * }
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@function s-font-family($name) {
-  @return map.get(s-font($name), font-family);
+@function font-family($name) {
+  @return map.get(font($name), font-family);
 }

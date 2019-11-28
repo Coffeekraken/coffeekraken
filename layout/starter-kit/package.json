@@ -34,11 +34,6 @@
       "paths": "src/fonts/**/*"
     }
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pretty-quick --staged"
-    }
-  },
   "keywords": [
     "coffee",
     "kraken",

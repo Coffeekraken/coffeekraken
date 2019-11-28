@@ -1,0 +1,40 @@
+{
+  "name": "@coffeekraken/s-form-style",
+  "version": "0.0.1",
+  "description": "Full stack form styling with support of form-input, form-textarea, form-select, form-group and form-addon as well as colored versions of them...",
+  "main": "dist/index.js",
+  "homepage": "http://coffeekraken.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Coffeekraken/coffeekraken/tree/master/styles/s-form-style"
+  },
+  "keywords": [
+    "coffee",
+    "kraken",
+    "coffeekraken",
+    "form",
+    "input",
+    "select",
+    "textarea",
+    "addon",
+    "group",
+    "webcomponent",
+    "component",
+    "html",
+    "sugar"
+  ],
+  "author": "Coffeekraken <hello@coffeekraken.io>",
+  "contributors": [
+    {
+      "name": "Olivier Bossel",
+      "email": "olivier.bossel@gmail.com",
+      "url": "http://olivierbossel.com"
+    }
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@coffeekraken/sugar": "^0.0.1"
+  },
+  "devDependencies": {
+  }
+}

@@ -1,34 +1,34 @@
 //
 // Vendors
 //
-@import "vendors/all";
+@use "vendors/all" as *;
 
 //
 // Styleguide
 //
-@import "styleguide/all";
+@use "styleguide/all" as *;
 
 //
 // Functions
 //
-@import "functions/all";
+@use "functions/all" as *;
 
 //
 // Mixins
 //
-@import "mixins/all";
+@use "mixins/all" as *;
 
 //
 // Tools
 //
-@import "utils/all";
+@use "utils/all" as *;
 
 //
 // Core
 //
-@import "core/all";
+@use "core/all" as *;
 
 //
 // Effects
 //
-@import "effects/all";
+@use "effects/all" as *;

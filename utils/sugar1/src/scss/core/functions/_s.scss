@@ -1,0 +1,44 @@
+@use "sass:meta";
+@use "sass:string";
+/**
+ * Generic sugar function can return multiple settings types like:
+ * - any settings : s('settings.{path}')
+ * - look and feel : s('look-and-feel.{property}', $size)
+ *  	- s('lnf.{property}', $size)
+ * - space : s('space.{size}')
+ * - color : s('color.{name}', $modifier)
+ * - transition : s('transition.{name}')
+ * - filter : s('filter.{name}')
+ *
+ * @example
+ * $my-color : s('color.primary');
+ * $my-transition : s('transition.fast');
+ * $my-font-size : s('settings.typography.font.size')
+ * // etc...
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function s($what, $param2: null, $param3: null) {
+  @if meta.type-of($what) == string and string.index($what, "settings.") {
+    // get a configuration
+    @return s-setting(string.slice($what, 10), $param2);
+  } @else if meta.type-of($what) == string and string.index($what, "look-and-feel.") {
+    // get a look and feel
+    @return s-look-and-feel(string.slice($what, 15), $param2);
+  } @else if meta.type-of($what) == string and string.index($what, "lnf.") {
+    // get a look and feel
+    @return s-look-and-feel(string.slice($what, 5), $param2);
+  } @else if meta.type-of($what) == string and string.index($what, "space.") {
+    // get a space
+    @return s-space(string.slice($what, 7));
+  } @else if meta.type-of($what) == string and string.index($what, "color.") {
+    // get a color
+    @return s-color(string.slice($what, 7), $param2);
+  } @else if meta.type-of($what) == string and string.index($what, "transition.") {
+    // get a transition
+    @return s-transition(string.slice($what, 12));
+  } @else if meta.type-of($what) == string and string.index($what, "filter.") {
+    // get a filter
+    @return s-filter(string.slice($what, 8));
+  }
+}

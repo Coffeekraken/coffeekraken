@@ -10,9 +10,9 @@
     "doc.js": "ck-docblock-to-markdown -f 'src/**/*.js' -d doc",
     "doc.scss": "ck-docblock-to-markdown -f 'src/**/*.scss' -d doc",
     "demo": "ck run demo.dist && ck run demo.server",
-    "demo.dist": "ck run demo.dist.js && demo.dist.scss",
+    "demo.dist": "ck run demo.dist.js && ck run demo.dist.scss",
     "demo.dist.js": "webpack --config ../../webpack.config.js",
-    "demo.dist.scss": "node-sass demo/src/scss/style.scss demo/dist/css/style.css",
+    "demo.dist.scss": "sass demo/src/scss/style.scss demo/dist/css/style.css",
     "demo.server": "open http://127.0.0.1:8080 && http-server ./demo",
     "start": "ck-scripts-stack -i start"
   },
@@ -82,6 +82,7 @@
     "@coffeekraken/scripts-stack": "^0.0.11",
     "node-sass": "^4.13.0",
     "core-js": "^3.4.2",
-    "jest": "^24.9.0"
+    "jest": "^24.9.0",
+    "sass": "^1.23.7"
   }
 }

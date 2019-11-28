@@ -1,0 +1,13 @@
+@use 'convert' as sugar;
+
+/**
+ * Convert the passed value to em
+ *
+ * @param 			{Number} 		$value 		The value to convert
+ * @return 			{Number} 					The em converted value
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function em($value) {
+  @return sugar.convert($value, em);
+}

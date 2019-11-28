@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="dist/css/style.css" />
+  </head>
+  <body>
+    <select is="s-select">
+      <option s-select-option-elm="#custom-option-1" value="item-1"
+        >Item #1</option
+      >
+      <option s-select-option-elm="#custom-option-2" value="item-2"
+        >Item #2</option
+      >
+      <option s-select-option-elm="#custom-option-3" value="item-3"
+        >Item #3</option
+      >
+    </select>
+    <select
+      is="s-select"
+      multiple
+      placeholder="Choose some options..."
+      color="secondary"
+    >
+      <option s-select-option-elm="#custom-option-1" value="item-1"
+        >Item #1</option
+      >
+      <option s-select-option-elm="#custom-option-2" value="item-2"
+        >Item #2</option
+      >
+      <option s-select-option-elm="#custom-option-3" value="item-3"
+        >Item #3</option
+      >
+    </select>
+    <select is="s-select">
+      <option value="value1">Hello</option>
+      <option value="value2">World</option>
+      <optgroup label="My Cool Group">
+        <option value="value3">My Cool Option</option>
+      </optgroup>
+    </select>
+    <select is="s-select" color="success">
+      <option value="value1">Hello</option>
+      <option value="value2">World</option>
+      <optgroup label="My Cool Group">
+        <option value="value3">My Cool Option</option>
+      </optgroup>
+    </select>
+    <select is="s-select" color="info">
+      <option value="value1">Hello</option>
+      <option value="value2">World</option>
+      <optgroup label="My Cool Group">
+        <option value="value3">My Cool Option</option>
+      </optgroup>
+    </select>
+    <select is="s-select" multiple placeholder="Choose some options...">
+      <option value="value1">Hello</option>
+      <option value="value2">World</option>
+      <optgroup label="My Cool Group">
+        <option value="value3">My Cool Option</option>
+      </optgroup>
+    </select>
+    <select
+      is="s-select"
+      multiple
+      placeholder="Choose some options..."
+      color="primary"
+    >
+      <option value="value1" selected>Hello</option>
+      <option value="value2">World</option>
+      <optgroup label="My Cool Group">
+        <option value="value3">My Cool Option</option>
+      </optgroup>
+    </select>
+    <select is="s-select" disabled>
+      <option value="value1">Hello</option>
+      <option value="value2">World</option>
+      <optgroup label="My Cool Group">
+        <option value="value3">My Cool Option</option>
+      </optgroup>
+    </select>
+    <div class="option-source" id="custom-option-1">
+      <img src="http://graph.facebook.com/622487880/picture?type=large" />
+      <div class="option-source__meta">
+        <h4 class="h5 m-b-smaller">Item #1</h4>
+        <p class="p">
+          Aenean arcu ante, ullamcorper vitae nisl a, convallis tempor magna.
+        </p>
+      </div>
+    </div>
+    <div class="option-source" id="custom-option-2">
+      <img src="http://graph.facebook.com/622487880/picture?type=large" />
+      <div class="option-source__meta">
+        <h4 class="h5 m-b-smaller">Item #2</h4>
+        <p class="p">
+          Aenean arcu ante, ullamcorper vitae nisl a, convallis tempor magna.
+        </p>
+      </div>
+    </div>
+    <div class="option-source" id="custom-option-3">
+      <img src="http://graph.facebook.com/622487880/picture?type=large" />
+      <div class="option-source__meta">
+        <h4 class="h5 m-b-smaller">Item #3</h4>
+        <p class="p">
+          Aenean arcu ante, ullamcorper vitae nisl a, convallis tempor magna.
+        </p>
+      </div>
+    </div>
+
+    <script src="dist/js/app.js"></script>
+  </body>
+</html>

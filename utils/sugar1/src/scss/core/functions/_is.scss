@@ -1,0 +1,156 @@
+@use "sass:math";
+@use "sass:meta";
+@use "sass:string";
+/**
+ * Check if the passed value is of a certain type
+ *
+ * Here's the available types that you can check
+ * - mixed => mean anything
+ * - null
+ * - url
+ * - px
+ * - pt
+ * - rem
+ * - em
+ * - percent | %
+ * - vw
+ * - vh
+ * - ex
+ * - ch
+ * - cm
+ * - mm
+ * - in
+ * - pc
+ * - s | second
+ * - boolean | bool
+ * - function
+ * - number
+ * - int | integer
+ * - string
+ * - color
+ * - list
+ * - map
+ * - deg | degree
+ * - list-{type} => check if is a list of the specified type
+ * - map-{type} => check if is a map of the specified type
+ *
+ * @param 			{Mixed} 			$value 			The value to check
+ * @param 			{String} 			$type 			The type to check
+ * @return 			{Boolean} 							true if match the type, false if not
+ *
+ * @example
+ * s-is(hello, string) // => true
+ * s-is('hello', string) // => true
+ * s-is(#fff, color) // => true
+ * s-is(hello #fff, list-color) // => false
+ * s-is(#fff #ddd, list-color) // => true
+ * // etc...
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function s-is($value, $type) {
+  @if meta.type-of($type) == string and string.index($type, "|") {
+    $type: _split($type, "|");
+  }
+
+  @if meta.type-of($type) == list {
+    $ok: false;
+    @each $t in $type {
+      @if s-is($value, $t) {
+        $ok: true;
+      }
+    }
+    @return $ok;
+  } @else {
+    @if $type == mixed {
+      @return true;
+    } @else if $type == null or $type == "null" {
+      @return _is-null($value);
+    } @else if $type == url {
+      @return str-is-url($value);
+    } @else if string.index($type, "map-") {
+      $idx: string.index($type, "-");
+      $type: string.slice($type, $idx + 1);
+      @each $prop, $val in $value {
+        @if $val and not s-is($val, $type) {
+          @return false;
+        }
+      }
+      @return true;
+    } @else if string.index($type, "list-") {
+      $idx: string.index($type, "-");
+      $type: string.slice($type, $idx + 1);
+      @each $item in $value {
+        @if $item and not s-is($item, $type) {
+          @return false;
+        }
+      }
+      @return true;
+    } @else if $type == px {
+      @return meta.type-of($value) == number and not math.is-unitless($value) and
+        math.unit($value) == px;
+    } @else if $type == rem {
+      @return meta.type-of($value) == number and not math.is-unitless($value) and
+        math.unit($value) == rem;
+    } @else if $type == em {
+      @return meta.type-of($value) == number and not math.is-unitless($value) and
+        math.unit($value) == em;
+    } @else if $type == pt {
+      @return meta.type-of($value) == number and not math.is-unitless($value) and
+        math.unit($value) == pt;
+    } @else if $type == percent or $type == "%" {
+      @return meta.type-of($value) == number and not math.is-unitless($value) and
+        math.unit($value) == "%";
+    } @else if $type == vw {
+      @return meta.type-of($value) == number and not math.is-unitless($value) and
+        math.unit($value) == vw;
+    } @else if $type == vh {
+      @return meta.type-of($value) == number and not math.is-unitless($value) and
+        math.unit($value) == vh;
+    } @else if $type == ex {
+      @return meta.type-of($value) == number and not math.is-unitless($value) and
+        math.unit($value) == ex;
+    } @else if $type == ch {
+      @return meta.type-of($value) == number and not math.is-unitless($value) and
+        math.unit($value) == ch;
+    } @else if $type == cm {
+      @return meta.type-of($value) == number and not math.is-unitless($value) and
+        math.unit($value) == cm;
+    } @else if $type == mm {
+      @return meta.type-of($value) == number and not math.is-unitless($value) and
+        math.unit($value) == mm;
+    } @else if $type == in {
+      @return meta.type-of($value) == number and not math.is-unitless($value) and
+        math.unit($value) == in;
+    } @else if $type == pc {
+      @return meta.type-of($value) == number and not math.is-unitless($value) and
+        math.unit($value) == pc;
+    } @else if $type == s or $type == second {
+      @return meta.type-of($value) == number and not math.is-unitless($value) and
+        math.unit($value) == s;
+    } @else if $type == boolean or $type == bool {
+      @return _is-boolean($value);
+    } @else if $type == function {
+      @return _is-function($value);
+    } @else if $type == number {
+      @return meta.type-of($value) == number;
+    } @else if $type == integer or $type == int {
+      @if meta.type-of($value) != number {
+        @return false;
+      }
+      @return math.round($value) == $value;
+    } @else if $type == string {
+      @return meta.type-of($value) == string;
+    } @else if $type == color {
+      @return meta.type-of($value) == color;
+    } @else if $type == list {
+      @return meta.type-of($value) == list;
+    } @else if $type == map {
+      @return meta.type-of($value) == map;
+    } @else if $type == degree or $type == deg {
+      @return math.unit($value) == deg;
+    }
+  }
+  // default return
+  @return false;
+}

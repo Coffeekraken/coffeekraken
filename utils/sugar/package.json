@@ -1,7 +1,7 @@
 {
   "name": "@coffeekraken/sugar",
   "description": "A little sugar in your codebase",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "http://coffeekraken.io",
   "author": "Coffeekraken <hello@coffeekraken.io>",
   "contributors": [

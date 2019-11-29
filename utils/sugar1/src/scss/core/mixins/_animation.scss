@@ -1,3 +1,8 @@
+@use 'sass:list';
+@use 'sass:string';
+@use 'sass:meta';
+@use '../functions/parse-properties' as *;
+@use '../../map/map-get-or' as *;
 /**
  * Print out the animation property calculated with the passed arguments
  * This mixin support all the standard css animation properties like name, duration, delay, ease, direction and fill-mode.
@@ -9,21 +14,21 @@
  *
  * @example
  * .my-cool-element {
- * 		@include s-animation(my-animation 1s ease-in-out, another-animation 4s);
+ * 		@include sugar.animation(my-animation 1s ease-in-out, another-animation 4s);
  * 		// animation : my-animation 1s 0s ease-in-out 1 normal forwards, another-animation 4s 1s ease-in-out 1 normal forwards;
  * }
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@mixin s-animation($animations...) {
+@mixin animation($animations...) {
   // loop on animations
   $anims: ();
   $current_delay: 0s;
   $current_duration: 0s;
   $previous_duration: 0s;
-  @for $i from 1 through length($animations) {
-    $animation: nth($animations, $i);
-    $animation: s-parse-properties(
+  @for $i from 1 through list.length($animations) {
+    $animation: list.nth($animations, $i);
+    $animation: parse-properties(
       $animation,
       (
         iteration:
@@ -76,16 +81,16 @@
     @extend %#{$name} !optional;
 
     // create the animations list
-    $anims: append(
+    $anims: list.append(
       $anims,
-      unquote(
+      string.unquote(
         "#{$name $duration $current_delay $ease $iteration $direction $fill-mode}"
       ),
       comma
     );
 
     // manage if animation is parallel with next one
-    @if type-of($iteration) == number {
+    @if meta.type-of($iteration) == number {
       @if $parallel == false {
         $current_delay: $current_delay + $duration * $iteration;
       }

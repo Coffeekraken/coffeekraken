@@ -1,4 +1,7 @@
-$_sugar-component-name: null;
+@use '../functions/setting' as *;
+@use '../functions/test-argument' as *;
+@use '../variables' as sugar;
+@use 'context' as *;
 /**
  * Set the name of the component that will be handled inside the mixin
  *
@@ -6,25 +9,39 @@ $_sugar-component-name: null;
  * @param 			{String|Map} 		[$context=null] 		A context name or map to use inside the mixin
  *
  * @example
- * \@include s-component('my-component') {
- * 		s-component('hello') // => 'my-component'
- * 		\@include s-component('another-component') {
- * 			s-component('hello') // => 'my-component'
+ * \@include sugar.component('my-component') {
+ * 		sugar.component('hello') // => 'my-component'
+ * 		\@include sugar.component('another-component') {
+ * 			sugar.component('hello') // => 'my-component'
  * 		}
  * }
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com);
  */
-@mixin s-component($name: null, $context: null) {
+@mixin component($name: null, $context: null) {
+  @if (setting('debug.test-arguments')) {
+    $name: test-argument(
+      'sugar.component',
+      'name',
+      string,
+      $name
+    );
+    $context: test-argument(
+      'sugar.component',
+      'context',
+      'string|map',
+      $context
+    );
+  }
   $is-root: true;
-  @if $_sugar-component-name {
+  @if sugar.$component-name {
     $is-root: false;
   } @else if $name {
-    $_sugar-component-name: $name !global;
+    sugar.$component-name: $name;
   }
 
   @if $context {
-    @include s-context($context) {
+    @include context($context) {
       @content;
     }
   } @else {
@@ -32,6 +49,6 @@ $_sugar-component-name: null;
   }
 
   @if $is-root {
-    $_sugar-component-name: null !global;
+    sugar.$component-name: null;
   }
 }

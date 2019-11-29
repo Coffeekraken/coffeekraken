@@ -1,6 +1,8 @@
 @use 'sass:map' as map;
-$_sugar-classes: () !default;
-$_sugar-test-arguments: true !default;
+@use '../variables' as sugar;
+@use '../functions/setting' as *;
+@use '../functions/test-argument' as *;
+@use '../../string/str-split' as *;
 /**
  * Register a helper class under a certain namespace
  *
@@ -8,28 +10,28 @@ $_sugar-test-arguments: true !default;
  * @param 			{String} 		$namespace 		The dots separated namespace under which the class will live
  *
  * @example
- * \@include s-register-helper-class(my-cool-class, 'my.cool.namespace') {
+ * \@include sugar.register-helper-class(my-cool-class, 'my.cool.namespace') {
  * 		background : pink;
  * }
- * \@include s-register-helper-class(another-cool-class, 'my.another.namespace') {
+ * \@include sugar.register-helper-class(another-cool-class, 'my.another.namespace') {
  * 		background : red;
  * }
  *
  * // print out my helpers classes
- * \@include s-classes('my');
+ * \@include sugar.classes('my');
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@mixin s-register-helper-class($classname, $namespace) {
-  @if $_sugar-test-arguments {
-    $classname: s-test-argument(
-      "s-register-helper-class",
+@mixin register-helper-class($classname, $namespace) {
+  @if setting('debug.test-arguments') {
+    $classname: test-argument(
+      "register-helper-class",
       "classname",
       string,
       $classname
     );
-    $namespace: s-test-argument(
-      "s-register-helper-class",
+    $namespace: test-argument(
+      "register-helper-class",
       "namespace",
       string,
       $namespace
@@ -37,11 +39,10 @@ $_sugar-test-arguments: true !default;
   }
 
   // register the class
-  $split: _split($namespace, ".");
-  $_sugar-classes: map.merge($_sugar-classes, (
-    $split: $classname
-  )) !global;
-  // $_sugar-classes: _set($_sugar-classes, $split, $classname) !global;
+  // $split: str-split($namespace, ".");
+  sugar.$classes: map.merge(sugar.$classes, (
+    $namespace: $classname
+  ));
   %#{$classname} {
     @content;
   }

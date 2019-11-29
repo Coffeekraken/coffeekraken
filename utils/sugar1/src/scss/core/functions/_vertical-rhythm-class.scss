@@ -1,11 +1,14 @@
+@use 'setting' as *;
 /**
  * Return the vertical-rhythm setting scope class
+ *
  * @return 		{String} 		The vertical-rhythm scope class from settings.vertical-rhythm.scope-class
+ *
+ * @example
+ * sugar.vertical-rhythm-class(); // vr
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@function s-vertical-rhythm-class() {
-  @return s-setting("vertical-rhythm.scope-class");
-}
-@function s-vertical-rhythme-class() {
-  @return s-vertical-rhythm-class();
+@function vertical-rhythm-class() {
+  @return setting("vertical-rhythm.scope-class");
 }

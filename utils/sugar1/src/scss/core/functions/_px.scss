@@ -1,15 +1,15 @@
-@use "sass:string";
+@use 'convert' as *;
 /**
  * Convert the passed value to px
  *
  * @param 			{Number} 		$value 		The value to convert
  * @return 			{Number} 					The px converted value
  *
+ * @example
+ * sugar.px(10rem);
+ *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@function s-px($value) {
-  @return s-convert($value, px);
-}
-@function s-Px($value) {
-  @return string.unquote("#{s-strip-units(s-px($value))}Px");
+@function px($value) {
+  @return convert($value, px);
 }

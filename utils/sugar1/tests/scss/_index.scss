@@ -1,11 +1,21 @@
 @use '../../index' as sugar;
 @use 'sass:meta';
 
+@include sugar.context-setup(my-cool-context, (
+ 		look-and-feel : (
+ 			padding-vertical : (
+ 				default : 500em
+ 			)
+ 		)
+));
 
-@error(sugar.parse-properties(10px hello -delay 20s, (
- 	myNumber : number,
- 	myOtherNumber : Number,
- 	myString : String,
- 	myCoolVar : String,
- 	delay : second
-)));
+@include sugar.context(my-cool-context) {
+ 		@debug(sugar.look-and-feel(padding-vertical)); // => 500em
+}
+
+@include sugar.component('my-component') {
+  @debug(sugar.component('hello'));
+	@include sugar.component('another-component') {
+	   @debug(sugar.component('hello'));
+  }
+}

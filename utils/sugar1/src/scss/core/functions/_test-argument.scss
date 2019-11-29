@@ -44,7 +44,8 @@
       @if $check-only {
         @return false;
       }
-      @error ('The property "#{$argument}" of the mixin/function "#{$method}" need to be a "#{$type-or-values}" but it seems that you pass a "#{meta.type-of($value)}" : #{$value}');
+      @debug('The property "#{$argument}" of the mixin/function "#{$method}" need to be a "#{$type-or-values}" but it seems that you pass a "#{meta.type-of($value)}"');
+      @error($value);
     }
     @return $value;
   } @else if meta.type-of($type-or-values) == list {
@@ -66,7 +67,8 @@
         $idx: list.index($type-or-values, $value);
         @if not $idx {
           @if not $check-only {
-            @error ('The property "#{$argument}" or the mixin/function "#{$method}" has to be one of these values "#{$type-or-values}" and not "#{$value}"');
+            @debug('The property "#{$argument}" or the mixin/function "#{$method}" has to be one of these values "#{$type-or-values}" and not:');
+            @error($value);
           }
           @return false;
         }
@@ -75,7 +77,8 @@
           @if meta.type-of($v) == number {
             @if math.unit($v) == math.unit($value) {
               @if not $check-only {
-                @error ('The property "#{$argument}" or the mixin/function "#{$method}" has to be one of these values "#{$type-or-values}" and not "#{$value}"');
+                @debug('The property "#{$argument}" or the mixin/function "#{$method}" has to be one of these values "#{$type-or-values}" and not:');
+                @error($value);
               }
               @return $value;
             } @else {
@@ -86,7 +89,8 @@
           }
         } @else {
           @if not $check-only {
-            @error ('The property "#{$argument}" or the mixin/function "#{$method}" has to be one of these values "#{$type-or-values}" and not "#{$value}"');
+            @debug('The property "#{$argument}" or the mixin/function "#{$method}" has to be one of these values "#{$type-or-values}" and not:');
+            @error($value);
           }
           @return false;
         }
@@ -97,7 +101,7 @@
     @return $value;
   }
   @if not $check-only {
-    @error ('The property "#{$argument}" or the mixin/function "#{$method}" is wrong');
+    @error('The property "#{$argument}" or the mixin/function "#{$method}" is wrong');
   }
   @return false;
 }

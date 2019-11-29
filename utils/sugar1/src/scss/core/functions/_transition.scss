@@ -1,16 +1,18 @@
 @use "sass:list";
 @use "sass:map";
+@use 'transition-map' as *;
+@use 'setting' as *;
 /**
  * Take a transition as parameter and parse it to return the {List} corresponding
  * The $transitions parameter can be either a registered transition name or a custom css transition like : all .2s ease-in-out 2s
- * The $transitions argument will be parsed with the [./_s-parse-properties.scss] function.
+ * The $transitions argument will be parsed with the [./_parse-properties.scss] function.
  *
  * @param 			{List} 				$transitions 			The registered transition(s) name(s) or the transition(s) strings(s) to transform into list
  * @return 			{List} 										The corresponding transition list properties
  *
  * @example
  * // register a transition
- * \@include s-setup((
+ * \@include sugar.setup((
  * 		transitions : (
  * 			fast : all .2s ease-in-out 0s,
  * 			// other transitions...
@@ -19,28 +21,28 @@
  *
  * // registered transition
  * .my-cool-element {
- * 		transition : s-transition(fast);
+ * 		transition : sugar.transition(fast);
  * 		// transition : all .2s ease-in-out 0s;
  * }
  *
  * // custom transition
  * .my-cool-element {
- *  	transition : s-transition(fast -delay .5s, fast width ease-in);
+ *  	transition : sugar.transition(fast -delay .5s, fast width ease-in);
  *  	// transition : all .2s ease-in-out .5s, width .2s ease-in 0s;
  * }
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@function s-transition($transitions...) {
+@function transition($transitions...) {
   $trans: ();
-  $available-transitions: map.keys(s-setting("transitions"));
+  $available-transitions: map.keys(setting("transitions"));
   @if list.length($transitions) == 0 {
-    $trans: s-setting("transitions.default");
+    $trans: setting("transitions.default");
   } @else {
-    $transitions-settings: s-setting("transitions");
+    $transitions-settings: setting("transitions");
     @each $transition in $transitions {
       // get the transition map
-      $t-map: s-transition-map($transition);
+      $t-map: transition-map($transition);
       // add the transition into list
       $trans: list.append(
         $trans,

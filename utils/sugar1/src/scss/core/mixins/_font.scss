@@ -1,3 +1,4 @@
+@use '../functions/font' as *;
 /**
  * Print all the fonts properties that correspond to the passed arguments
  *
@@ -21,7 +22,7 @@
  *
  * @example
  * .my-cool-elememt {
- * 		\@include s-font(
+ * 		\@include sugar.font(
  * 			$family : 'Helvetica Neue',
  * 		 	$size : 12px,
  * 		  	$wrap : norwap
@@ -34,7 +35,7 @@
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@mixin s-font(
+@mixin font(
   $family: null,
   $color: null,
   $size: null,
@@ -52,7 +53,7 @@
   $break: null,
   $wrap: null
 ) {
-  $font-map: s-font(
+  $font-map: font(
     $family: $family,
     $color: $color,
     $size: $size,

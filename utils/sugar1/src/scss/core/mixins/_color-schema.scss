@@ -1,10 +1,12 @@
+@use '../functions/setting' as *;
+@use '../functions/test-argument' as *;
 /**
  * Print out the scoped color schema css
  *
  * @param 		{String} 			$name 			The color schema name
  *
  * @example
- * \@include s-color-schema(light) {
+ * \@include sugar.color-schema(light) {
  * 		h1, h2 {
  * 			color : white;
  * 		}
@@ -16,7 +18,7 @@
  * }
  *
  * h1, h2 {
- * 		\@include s-color-schema(light) {
+ * 		\@include sugar.color-schema(light) {
  * 			color : white;
  * 		}
  * }
@@ -28,7 +30,15 @@
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@mixin s-color-schema($name) {
+@mixin color-schema($name) {
+  @if (setting('debug.test-arguments')) {
+    $name: test-argument(
+      'sugar.color-schema',
+      'name',
+      string,
+      $name
+    );
+  }
   $root: #{&};
   @if $root != "" {
     .cs-#{$name} &,

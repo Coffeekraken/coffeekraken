@@ -5,6 +5,9 @@
  * @param 			{Number} 		$value 		The value to convert
  * @return 			{Number} 					The rem converted value
  *
+ * @example
+ * sugar.rem(10px);
+ *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function rem($value) {

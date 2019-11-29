@@ -1,4 +1,10 @@
-$_sugar-current-context: null;
+@use '../functions/setting' as *;
+@use '../functions/test-argument' as *;
+@use '../variables' as sugar;
+@use 'context-setup' as *;
+@use 'sass:meta';
+@use 'sass:string';
+@use 'sass:map';
 /**
  * Set a context to be used inside the mixin
  *
@@ -6,7 +12,7 @@ $_sugar-current-context: null;
  *
  * @example
  * // register a context
- * \@include s-context-setup(my-cool-context, (
+ * \@include sugar.context-setup(my-cool-context, (
  * 		look-and-feel : (
  * 			padding-vertical : (
  * 				default : 0.6em
@@ -15,12 +21,12 @@ $_sugar-current-context: null;
  * ));
  *
  * // registered context
- * \@include s-context(my-cool-context) {
+ * \@include sugar.context(my-cool-context) {
  * 		// your code here...
  * }
  *
  * // inline context
- * \@include s-context((
+ * \@include sugar.context((
  * 		look-and-feel : (
  * 			padding-vertical : (
  * 				default : .3em
@@ -32,25 +38,33 @@ $_sugar-current-context: null;
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@mixin s-context($name-or-map) {
+@mixin context($name-or-map) {
+  @if (setting('debug.test-arguments')) {
+    $name-or-map: test-argument(
+      'sugar.context',
+      'name-or-map',
+      'string|map',
+      $name-or-map
+    );
+  }
   $name: $name-or-map;
 
   // if the passes argument is a context map
   // register this context as new one
-  @if type-of($name-or-map) == "map" {
-    $name: unique-id();
-    @include s-context-setup($name, $name-or-map);
+  @if meta.type-of($name-or-map) == "map" {
+    $name: string.unique-id();
+    @include context-setup($name, $name-or-map);
   }
 
   // check if the context exist
-  $cont: map-get($_sugar-settings, contexts);
-  $cont: map-get($cont, $name);
+  $cont: map.get(sugar.$settings, contexts);
+  $cont: map.get($cont, $name);
   @if not $cont {
     @error ("The context #{$name} does not exist. Please use the s-context-setup mixin to register your new context or pass directly a context map to this mixin...");
   }
   // $_sugar-previous-context : $_sugar-current-context !global;
-  $previous-context: $_sugar-current-context;
-  $_sugar-current-context: $name !global;
+  $previous-context: sugar.$current-context;
+  sugar.$current-context: $name;
   @content;
-  $_sugar-current-context: $previous-context !global;
+  sugar.$current-context: $previous-context;
 }

@@ -1,3 +1,14 @@
+@use '../variables' as sugar;
+@use 'init-classes' as *;
+@use '../../map/map-deep-values' as *;
+@use '../functions/setting' as *;
+@use '../functions/test-argument' as *;
+@use 'sass:meta';
+@use 'sass:map';
+@use 'sass:string';
+@use '../../string/str-split' as *;
+@use '../../map/map-filter-by-namespace' as *;
+
 /**
  * Print out all wanted registered classes like padding helpers, margin helpers, font helpers, etc...
  * Available namespaces
@@ -86,34 +97,38 @@
  * @param 			{List}<string> 			$namespaces 		The classes namespaces wanted
  *
  * @example
- * \@include s-classes(); // will print out all the classes
- * \@include s-classes('sugar.font'); // will print all the font classes
- * \@include s-classes('sugar.clearfix' 'sugar.pull'); // the clearfixes and the pull classes
+ * \@include sugar.classes(); // will print out all the classes
+ * \@include sugar.classes('sugar.font'); // will print all the font classes
+ * \@include sugar.classes('sugar.clearfix' 'sugar.pull'); // the clearfixes and the pull classes
  * // etc...
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@mixin s-classes($namespaces: "sugar") {
+@mixin classes($namespaces: "sugar") {
+  @if (setting('debug.test-arguments')) {
+    $namespaces: test-argument(
+      'sugar.classes',
+      'namespaces',
+      'string|list-string',
+      $namespaces
+    );
+  }
+
   // init classes
-  @include s-init-classes();
+  @include init-classes();
 
   // classes
   @if $namespaces {
     @each $namespace in $namespaces {
-      // get values
-      $values: _get($_sugar-classes, _split($namespace, "."));
-      // get values
-      @if type-of($values) == map {
-        $values: map-deep-values($values);
-        // loop to create each classes
-        @each $value in $values {
-          .#{$value} {
-            @extend %#{$value} !optional;
-          }
-        }
-      } @else if type-of($values) == string {
-        .#{$values} {
-          @extend %#{$values} !optional;
+      // filter the classes map with the wanted namespace
+      $wanted-classes-map: map-filter-by-namespace(sugar.$classes, $namespace);
+
+      // loop on each wanted classes namespace
+      @each $wanted-namespace in map.keys($wanted-classes-map) {
+        // get the classname
+        $classname: map.get($wanted-classes-map, $wanted-namespace);
+        .#{$classname} {
+          @extend %#{$classname} !optional;
         }
       }
     }

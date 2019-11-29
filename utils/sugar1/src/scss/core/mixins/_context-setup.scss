@@ -1,3 +1,9 @@
+@use '../functions/setting' as *;
+@use '../functions/test-argument' as *;
+@use '../../map/map-set' as *;
+@use '../../map/map-extend' as *;
+@use 'sass:map';
+@use '../variables' as sugar;
 /**
  * Register a context with a name to use it later
  *
@@ -5,7 +11,7 @@
  * @param 			{Map} 			$settings 		The settings to override for this context
  *
  * @example
- * \@include s-context-setup(my-cool-context, (
+ * \@include sugar.context-setup(my-cool-context, (
  * 		look-and-feel : (
  * 			padding-vertical : (
  * 				default : 0.6em
@@ -14,21 +20,35 @@
  * ));
  *
  * // using your context
- * \@include s-context(my-cool-context) {
- * 		s-look-and-feel(padding-vertical); // => 0.6em
+ * \@include sugar.context(my-cool-context) {
+ * 		sugar.look-and-feel(padding-vertical); // => 0.6em
  * }
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@mixin s-context-setup($contextName, $settings) {
-  $current-settings: map-get($settings, $contextName);
+@mixin context-setup($contextName, $settings) {
+  @if (setting('debug.test-arguments')) {
+    $contextName: test-argument(
+      'sugar.context-setup',
+      'contextName',
+      string,
+      $contextName
+    );
+    $settings: test-argument(
+      'sugar.context-setup',
+      'settings',
+      map,
+      $settings
+    );
+  }
+  $current-settings: map.get($settings, $contextName);
   @if $current-settings {
     $settings: map-extend($current-settings, $settings);
   }
-  @if not map-get($_sugar-settings, contexts) {
-    $_sugar-settings: map-set($_sugar-settings, contexts, ()) !global;
+  @if not map.get(sugar.$settings, contexts) {
+    sugar.$settings: map-set(sugar.$settings, contexts, ());
   }
-  $contexts: map-get($_sugar-settings, contexts);
+  $contexts: map.get(sugar.$settings, contexts);
   $contexts: map-set($contexts, $contextName, $settings);
-  $_sugar-settings: map-set($_sugar-settings, contexts, $contexts) !global;
+  sugar.$settings: map-set(sugar.$settings, contexts, $contexts);
 }

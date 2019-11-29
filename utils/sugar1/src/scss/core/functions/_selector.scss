@@ -1,13 +1,18 @@
+@use '../../string/str-replace' as *;
 /**
  * Process selector to avoid having --default, etc...
+ *
  * @param 		{String} 		$selector 		The selector to process
  * @return 		{String} 						The processed selector
+ *
  * @example 	scss
- * s-selector('.input--default'); // => .input
- * s-selector('.input-default'); // => .input
- * s-selector('.input.default'); // => .input
+ * sugar.selector('.input--default'); // => .input
+ * sugar.selector('.input-default'); // => .input
+ * sugar.selector('.input.default'); // => .input
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@function s-selector($selector) {
+@function selector($selector) {
   $selector: str-replace($selector, "--default", "");
   $selector: str-replace($selector, "-default", "");
   $selector: str-replace($selector, ".default", "");

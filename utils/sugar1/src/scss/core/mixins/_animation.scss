@@ -1,8 +1,6 @@
 @use 'sass:list';
 @use 'sass:string';
 @use 'sass:meta';
-@use '../functions/parse-properties' as *;
-@use '../../map/map-get-or' as *;
 /**
  * Print out the animation property calculated with the passed arguments
  * This mixin support all the standard css animation properties like name, duration, delay, ease, direction and fill-mode.

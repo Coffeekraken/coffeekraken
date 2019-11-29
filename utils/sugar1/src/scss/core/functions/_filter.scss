@@ -1,7 +1,5 @@
 @use "sass:list";
 @use "sass:string";
-@use 'filter-map' as *;
-
 /**
  * Return a list with all the filters that are passed as argument
  * This will use the [./_s-filter-map.scss] function to parse the filters

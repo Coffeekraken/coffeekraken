@@ -3,12 +3,6 @@
 @use "sass:math";
 @use "sass:meta";
 
-@use 'setting' as *;
-@use 'test-argument' as *;
-@use 'dash-to-map' as *;
-@use 'is' as *;
-@use 'strip-units' as *;
-
 /**
  * Get a registered color by name or wrap a new color into a sugar.color call
  * to manipulate it with ease.

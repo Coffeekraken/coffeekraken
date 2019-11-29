@@ -2,10 +2,6 @@
 @use "sass:math";
 @use "sass:meta";
 @use '../variables' as sugar;
-@use 'convert' as *;
-@use '../../map/map-get-path' as *;
-@use '../../map/map-set' as *;
-
 /**
  * Get a settings from the global settings stack
  *
@@ -20,7 +16,6 @@
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-$_sugar-settings-cache: ();
 @function setting($path, $context: sugar.$current-context, $default: null) {
   $base_path: $path;
   @if $context == default {
@@ -32,31 +27,12 @@ $_sugar-settings-cache: ();
     $path: "contexts.#{$context}.#{$path}";
   }
 
-  // check in cache
-  $cache: map.get($_sugar-settings-cache, $path);
-  @if $cache {
-    @return $cache;
-  }
-
   $value: map-get-path(sugar.$settings, $path);
 
   @if not $value and $context {
     // try to get the value from the base component
     $value: setting($base_path, default, $default);
   }
-
-  @if meta.type-of($value) == number and not math.is-unitless($value) {
-    @if math.unit($value) == px or math.unit($value) == pt or math.unit($value) == rem {
-      $value: convert($value);
-    }
-  }
-
-  // save the value in cache
-  $_sugar-settings-cache: map-set(
-    $_sugar-settings-cache,
-    $path,
-    $value
-  ) !global;
 
   // if no value
   @if not $value {

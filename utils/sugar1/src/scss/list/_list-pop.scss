@@ -1,0 +1,15 @@
+@use 'sass:list';
+/**
+ * Remove the last item of the passed list
+ *
+ * @param       {List}        $list         The list to process
+ * @return      {List}                      The processed list
+ *
+ * @example
+ * sugar.list-pop(('hello', 'world')); // ('hello')
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function list-pop($list) {
+  @return list-remove-nth($list, list.length($list));
+}

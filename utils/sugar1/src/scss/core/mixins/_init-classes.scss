@@ -2,16 +2,6 @@
 @use 'sass:list';
 @use 'sass:map';
 @use 'sass:meta';
-@use '../functions/setting' as *;
-@use '../functions/selector' as *;
-@use 'register-helper-class' as *;
-@use 'filter' as *;
-@use 'transition' as *;
-@use 'font' as *;
-@use '../functions/space' as *;
-@use '../functions/rem' as *;
-@use '../functions/em' as *;
-@use '../functions/color' as *;
 $_sugar-classes-inited: false;
 /**
  * Register all the dynamic helper classes that depends on the settings, etc...
@@ -266,7 +256,7 @@ $_sugar-classes-inited: false;
 			 * </div>
 			 */
       @include register-helper-class(selector('s-#{$size}'), "sugar.size.#{$size}") {
-        font-size: rem($value);
+        font-size: to-rem($value);
       }
       /**
 			 * @name 	```.s-#{$size}-rel```
@@ -280,7 +270,7 @@ $_sugar-classes-inited: false;
         selector('s-#{$size}-rel'),
         "sugar.size.rel.#{$size}"
       ) {
-        font-size: em($value);
+        font-size: to-em($value);
       }
     }
 
@@ -444,7 +434,7 @@ $_sugar-classes-inited: false;
           $classname: $cls,
           $namespace: "sugar.border.#{$name}.all"
         ) {
-          border: rem(1px) solid color($name);
+          border: to-rem(1px) solid color($name);
         }
 
         $cls: string.unquote(selector("b-t-#{$name}"));
@@ -461,7 +451,7 @@ $_sugar-classes-inited: false;
           $classname: $cls,
           $namespace: "sugar.border.#{$name}.top"
         ) {
-          border-top: rem(1px) solid color($name);
+          border-top: to-rem(1px) solid color($name);
         }
 
         $cls: string.unquote(selector("b-r-#{$name}"));
@@ -478,7 +468,7 @@ $_sugar-classes-inited: false;
           $classname: $cls,
           $namespace: "sugar.border.#{$name}.right"
         ) {
-          border-right: rem(1px) solid color($name);
+          border-right: to-rem(1px) solid color($name);
         }
 
         $cls: string.unquote(selector("b-b-#{$name}"));
@@ -495,7 +485,7 @@ $_sugar-classes-inited: false;
           $classname: $cls,
           $namespace: "sugar.border.#{$name}.bottom"
         ) {
-          border-bottom: rem(1px) solid color($name);
+          border-bottom: to-rem(1px) solid color($name);
         }
 
         $cls: string.unquote(selector("b-l-#{$name}"));
@@ -512,7 +502,7 @@ $_sugar-classes-inited: false;
           $classname: $cls,
           $namespace: "sugar.border.#{$name}.left"
         ) {
-          border-left: rem(1px) solid color($name);
+          border-left: to-rem(1px) solid color($name);
         }
 
         $cls: string.unquote(selector("b-s-#{$name}"));
@@ -529,8 +519,8 @@ $_sugar-classes-inited: false;
           $classname: $cls,
           $namespace: "sugar.border.#{$name}.side"
         ) {
-          border-left: rem(1px) solid color($name);
-          border-right: rem(1px) solid color($name);
+          border-left: to-rem(1px) solid color($name);
+          border-right: to-rem(1px) solid color($name);
         }
 
         // modifiers
@@ -583,7 +573,7 @@ $_sugar-classes-inited: false;
               $classname: $cls,
               $namespace: "sugar.border.#{$name}.modifier.#{$mod-name}.all"
             ) {
-              border: rem(1px) solid color($name, $mod-name);
+              border: to-rem(1px) solid color($name, $mod-name);
             }
             $cls: string.unquote(selector("b-t-#{$name}--#{$mod-name}"));
             /**
@@ -599,7 +589,7 @@ $_sugar-classes-inited: false;
               $classname: $cls,
               $namespace: "sugar.border.#{$name}.modifier.#{$mod-name}.top"
             ) {
-              border-top: rem(1px) solid color($name, $mod-name);
+              border-top: to-rem(1px) solid color($name, $mod-name);
             }
             $cls: string.unquote(selector("b-r-#{$name}--#{$mod-name}"));
             /**
@@ -615,7 +605,7 @@ $_sugar-classes-inited: false;
               $classname: $cls,
               $namespace: "sugar.border.#{$name}.modifier.#{$mod-name}.right"
             ) {
-              border: rem(1px) solid color($name, $mod-name);
+              border: to-rem(1px) solid color($name, $mod-name);
             }
             $cls: string.unquote(selector("b-b-#{$name}--#{$mod-name}"));
             /**
@@ -631,7 +621,7 @@ $_sugar-classes-inited: false;
               $classname: $cls,
               $namespace: "sugar.border.#{$name}.modifier.#{$mod-name}.bottom"
             ) {
-              border: rem(1px) solid color($name, $mod-name);
+              border: to-rem(1px) solid color($name, $mod-name);
             }
             $cls: string.unquote(selector("b-l-#{$name}--#{$mod-name}"));
             /**
@@ -647,7 +637,7 @@ $_sugar-classes-inited: false;
               $classname: $cls,
               $namespace: "sugar.border.#{$name}.modifier.#{$mod-name}.left"
             ) {
-              border-left: rem(1px) solid color($name, $mod-name);
+              border-left: to-rem(1px) solid color($name, $mod-name);
             }
             $cls: string.unquote(selector("b-s-#{$name}--#{$mod-name}"));
             /**
@@ -663,8 +653,8 @@ $_sugar-classes-inited: false;
               $classname: $cls,
               $namespace: "sugar.border.#{$name}.modifier.#{$mod-name}.side"
             ) {
-              border-left: rem(1px) solid color($name, $mod-name);
-              border-right: rem(1px) solid color($name, $mod-name);
+              border-left: to-rem(1px) solid color($name, $mod-name);
+              border-right: to-rem(1px) solid color($name, $mod-name);
             }
           }
         }

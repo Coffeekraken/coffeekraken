@@ -88,12 +88,12 @@ $_sugar-inited: false;
     html {
       $base-font-size: s-setting("typography.font-size");
       $base-font-sizes: s-setting("typography.font-sizes");
-      font-size: s-Px($base-font-size);
+      font-size: to-px($base-font-size);
       color: s-color(text);
       @if type-of($base-font-sizes) == map {
         @each $size, $media in $base-font-sizes {
           @include s-media($media...) {
-            font-size: s-Px($size);
+            font-size: to-px($size);
           }
         }
       }

@@ -1,6 +1,4 @@
-@use 'setting' as *;
 @use '../../vendors/modularscale-sass/mdl-scale' as mdl-scale;
-
 /**
  * Return the modular scale value based on the settings ```modular-scale.base``` and ```modular-scale.ratio```.
  *

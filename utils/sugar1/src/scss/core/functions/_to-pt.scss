@@ -1,4 +1,3 @@
-@use 'convert' as *;
 /**
  * Convert the passed value to pt
  *
@@ -6,10 +5,10 @@
  * @return 			{Number} 					The pt converted value
  *
  * @example
- * sugar.pt(10px);
+ * sugar.to-pt(10px);
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@function pt($value) {
+@function to-pt($value) {
   @return convert($value, pt);
 }

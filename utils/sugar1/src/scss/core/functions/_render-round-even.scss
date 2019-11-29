@@ -1,11 +1,5 @@
 @use "sass:math";
 @use "sass:meta";
-@use 'even' as *;
-@use 'px' as *;
-@use 'pt' as *;
-@use 'rem' as *;
-@use 'em' as *;
-@use 'percent' as *;
 /**
  * Return the passed values in the same unit but that has been even rounded on the corresponding px value
  * This ensure that your passed value will be a round px value for final rander in the viewport
@@ -23,6 +17,6 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function render-round-even($value) {
-  $value: meta.call("#{math.unit($value)}", even(px($value)));
+  $value: meta.call("#{math.unit($value)}", even(to-px($value)));
   @return $value;
 }

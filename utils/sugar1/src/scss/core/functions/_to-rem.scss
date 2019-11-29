@@ -1,4 +1,3 @@
-@use 'convert' as *;
 /**
  * Convert the passed value to rem
  *
@@ -6,10 +5,10 @@
  * @return 			{Number} 					The rem converted value
  *
  * @example
- * sugar.rem(10px);
+ * sugar.to-rem(10px);
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@function rem($value) {
+@function to-rem($value) {
   @return convert($value, rem);
 }

@@ -1,10 +1,6 @@
 @use "sass:list";
 @use "sass:meta";
 @use "sass:string";
-@use '../../map/map-set' as *;
-@use 'has-color' as *;
-@use 'color' as *;
-
 /**
  * Search and replace tokens like colors #primary in a passed string, list or map
  * Supported tokens types :

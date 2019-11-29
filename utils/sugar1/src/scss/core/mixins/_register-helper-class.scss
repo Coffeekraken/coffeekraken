@@ -1,8 +1,5 @@
 @use 'sass:map' as map;
 @use '../variables' as sugar;
-@use '../functions/setting' as *;
-@use '../functions/test-argument' as *;
-@use '../../string/str-split' as *;
 /**
  * Register a helper class under a certain namespace
  *

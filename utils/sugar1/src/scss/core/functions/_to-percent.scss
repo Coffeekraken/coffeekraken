@@ -1,4 +1,3 @@
-@use 'convert' as *;
 /**
  * Convert the passed value to %
  *
@@ -6,10 +5,10 @@
  * @return 			{Number} 					The % converted value
  *
  * @example
- * sugar.percent(10px);
+ * sugar.to-percent(10px);
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@function percent($value) {
+@function to-percent($value) {
   @return convert($value, "%");
 }

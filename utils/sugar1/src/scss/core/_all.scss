@@ -1,7 +1,7 @@
 //
 // Imports core
 //
-@forward 'variables';
-@forward 'functions/all';
-@forward 'mixins/all';
-// @forward 'helper-classes';
+@import 'variables';
+@import 'functions/all';
+@import 'mixins/all';
+// @import 'helper-classes';

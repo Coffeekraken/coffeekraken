@@ -1,14 +1,7 @@
 @use '../variables' as sugar;
-@use 'init-classes' as *;
-@use '../../map/map-deep-values' as *;
-@use '../functions/setting' as *;
-@use '../functions/test-argument' as *;
 @use 'sass:meta';
 @use 'sass:map';
 @use 'sass:string';
-@use '../../string/str-split' as *;
-@use '../../map/map-filter-by-namespace' as *;
-
 /**
  * Print out all wanted registered classes like padding helpers, margin helpers, font helpers, etc...
  * Available namespaces

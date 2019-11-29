@@ -1,8 +1,8 @@
-@use "s-base64-icon" as *;
-@use "s-border-map" as *;
-@use "s-columns-map" as *;
-@use "s-margin-map" as *;
-@use "s-position-map" as *;
-@use "s-rhythm-width" as *;
-@use "s-encode-inline-svg" as *;
-@use "s-translate-map" as *;
+@import "base64-icon";
+@import "border-map";
+@import "columnmap";
+@import "margin-map";
+@import "position-map";
+@import "rhythm-width";
+@import "encode-inline-svg";
+@import "translate-map";

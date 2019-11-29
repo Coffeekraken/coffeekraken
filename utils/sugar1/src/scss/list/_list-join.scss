@@ -1,0 +1,18 @@
+/**
+ * Return a string representing all the list items
+ *
+ * @param         {List}        $list         The list to process
+ * @return        {String}                    The string representing all the list items
+ *
+ * @example
+ * sugar.list-join(('hello','-','world')); // hello-world
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function list-join($list) {
+  $res: '';
+  @each $item in $list {
+    $res: '#{$res}#{$item}';
+  }
+  @return $res;
+}

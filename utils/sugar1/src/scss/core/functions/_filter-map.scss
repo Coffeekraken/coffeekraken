@@ -2,13 +2,6 @@
 @use "sass:map";
 @use "sass:meta";
 @use "sass:string";
-@use 'setting' as *;
-@use 'replace-tokens' as *;
-@use '../../string/str-split' as *;
-@use '../../map/map-set' as *;
-
-
-
 /**
  * Take a filter as parameter and parse it to return the {Map} corresponding
  * The $filter parameter can be either a registered filter name or a filter formated like `filterName(filterValue)`

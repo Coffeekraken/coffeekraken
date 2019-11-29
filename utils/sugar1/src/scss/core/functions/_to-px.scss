@@ -1,4 +1,3 @@
-@use 'convert' as *;
 /**
  * Convert the passed value to px
  *
@@ -6,10 +5,10 @@
  * @return 			{Number} 					The px converted value
  *
  * @example
- * sugar.px(10rem);
+ * sugar.to-px(10rem);
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@function px($value) {
+@function to-px($value) {
   @return convert($value, px);
 }

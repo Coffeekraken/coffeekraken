@@ -3,13 +3,6 @@
 @use "sass:math";
 @use "sass:meta";
 @use "sass:string";
-
-@use '../../map/map-set' as *;
-
-@use 'get-property-name' as *;
-@use 'get-property-type' as *;
-@use 'check-property' as *;
-
 /**
  * Parse a given string/list properties and return the Map corresponding to the Map description
  *

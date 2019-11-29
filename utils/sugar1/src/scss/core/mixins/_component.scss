@@ -1,7 +1,4 @@
-@use '../functions/setting' as *;
-@use '../functions/test-argument' as *;
 @use '../variables' as sugar;
-@use 'context' as *;
 /**
  * Set the name of the component that will be handled inside the mixin
  *

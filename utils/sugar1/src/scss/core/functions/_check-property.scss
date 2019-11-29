@@ -1,8 +1,6 @@
 @use 'sass:meta';
 @use 'sass:list';
 @use 'sass:map';
-@use '../../map/map-get-or' as *;
-@use 'is' as *;
 
 /**
  * Check a property types and values

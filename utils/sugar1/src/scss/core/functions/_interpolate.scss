@@ -1,7 +1,5 @@
 @use "sass:math";
 @use "sass:meta";
-@use 'setting' as *;
-
 /**
  * Return the specified or calculated value of the given stack and size
  * depending on the settings.sizes ratios stack

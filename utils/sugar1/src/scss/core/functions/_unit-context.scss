@@ -1,8 +1,7 @@
 @use 'sass:map';
 @use '../variables' as sugar;
-
 /**
- * Return the unit context if has been set by the [s-unit-context mixin](../mixins/_s-unit-context.scss)
+ * Return the unit context if has been set by the [unit-context mixin](../mixins/unit-context.scss)
  *
  * @return 		{String} 				The unit context setted
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

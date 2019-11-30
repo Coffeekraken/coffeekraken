@@ -1,4 +1,3 @@
-@use '../functions/font' as *;
 /**
  * Print all the fonts properties that correspond to the passed arguments
  *
@@ -25,12 +24,12 @@
  * 		\@include sugar.font(
  * 			$family : 'Helvetica Neue',
  * 		 	$size : 12px,
- * 		  	$wrap : norwap
- *      );
- *      // print
+ * 		  $wrap : normal
+ *    );
+ *    // print
  * 		font-family : 'Helvetica Neue',
  * 		font-size : 12px,
- * 		word-wrap : nowrap
+ * 		word-wrap : normal
  * }
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

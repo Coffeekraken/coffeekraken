@@ -1,0 +1,26 @@
+@use 'sass:map';
+/**
+ * @name     map-has-key
+ * Check if the passed map has the passed key. Return true if has, false if not
+ *
+ * @param           {Map}         $map        The map to check
+ * @param           {String}      $key        The key to check in the map
+ * @return          {Boolean}                 true if has the key, false if not
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function map-has-key($map, $key) {
+  $map: test-argument(
+    'sugar.map-has-key',
+    'map',
+    map,
+    $map
+  );
+  $key: test-argument(
+    'sugar.map-has-key',
+    'key',
+    string,
+    $key
+  );
+  @return map.has-key($map, $key);
+}

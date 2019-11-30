@@ -1,0 +1,18 @@
+@use 'sass:map';
+/**
+ * Get a value in the passed map using the passed key
+ *
+ * @param         {Map}         $map        The map to get the value from
+ * @param         {String}      $key        The key to get the value in the map
+ * @param         {Mixed}                   The getted value
+ *
+ * @example
+ * sugar.map-get((
+ *  hello: 'world'
+ * ), hello); // => 'world'
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function map-get($map, $key) {
+  @return map.get($map, $key);
+}

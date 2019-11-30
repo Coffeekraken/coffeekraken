@@ -1,0 +1,23 @@
+@use 'sass:map';
+/**
+ * Remove one or multiple keys from the passed map
+ *
+ * @param           {Map}         $map          The map to process
+ * @param           {String}      $keys...      The key(s) to remove
+ * @return          {Map}                       The processed map
+ *
+ * @example
+ * sugar.map-remove((
+ *  hello: 'world',
+ *  coco: 'plop'
+ * ), coco);
+ * // returned map:
+ * (
+ *  hello: 'world'
+ * )
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function map-remove($map, $keys...) {
+  @return map.remove($map, $keys);
+}

@@ -1,3 +1,5 @@
+@use '../variables' as sugar;
+@use 'sass:meta';
 $_sugar-inited: false;
 /**
  * Init the sugar toolkit.
@@ -5,42 +7,41 @@ $_sugar-inited: false;
  * and **BEFORE** all the others sugar mixins and functions calls
  *
  * @example
- * \@include s-init();
+ * \@include sugar.init();
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@mixin s-init() {
+@mixin init() {
   // do that only if not already inited
   @if not $_sugar-inited {
     // update inited status
     $_sugar-inited: true !global;
 
     // reset
-    @if s-setting("reset") == true {
-      @include s-reset();
+    @if setting("reset") == true {
+      @include reset();
     }
 
     // styleguide
-    @include s-styleguide-colors();
+    @include styleguide-colors();
 
     // settings
     .s-settings:after {
       // process colors
-      $settings-to-process: _extend((), $_sugar-settings);
+      $settings-to-process: map-extend((), sugar.$settings);
       // get colors
-      $colors: s-setting("colors");
+      $colors: setting("colors");
       @each $color-name, $color in $colors {
-        // @warn($color);
-        $modifiers: _get($color, modifiers);
+        $modifiers: map-get($color, modifiers);
         @if $modifiers {
           $new-modifiers: ();
           @each $modifier-name, $modifier in $modifiers {
             // @warn(s-color($color-name, $modifier));
             // @warn("#{$color-name} modifiers #{$modifier-name}");
-            $settings-to-process: _set(
+            $settings-to-process: map-set(
               $settings-to-process,
               colors "#{$color-name}"modifiers"#{$modifier-name}",
-              s-color($color-name, $modifier)
+              color($color-name, $modifier)
             );
           }
         }
@@ -50,7 +51,7 @@ $_sugar-inited: false;
     }
 
     // border box
-    @if s-setting("border-box") == true {
+    @if setting("border-box") == true {
       html {
         box-sizing: border-box;
       }
@@ -67,15 +68,15 @@ $_sugar-inited: false;
     }
 
     // check settings
-    $base-font-family: s-setting("typography.font-family");
-    $fonts: s-setting("fonts");
+    $base-font-family: setting("typography.font-family");
+    $fonts: setting("fonts");
     @if $base-font-family and not map-get($fonts, $base-font-family) {
       @error ("Your typography.font-family setting has to be a registered font...");
     }
 
     // set the base font family if not defined
     @if not $base-font-family {
-      @include s-setup(
+      @include setup(
         (
           typo: (
             font-family: default
@@ -86,32 +87,32 @@ $_sugar-inited: false;
 
     // font
     html {
-      $base-font-size: s-setting("typography.font-size");
-      $base-font-sizes: s-setting("typography.font-sizes");
+      $base-font-size: setting("typography.font-size");
+      $base-font-sizes: setting("typography.font-sizes");
       font-size: to-px($base-font-size);
-      color: s-color(text);
-      @if type-of($base-font-sizes) == map {
+      color: color(text);
+      @if meta.type-of($base-font-sizes) == map {
         @each $size, $media in $base-font-sizes {
-          @include s-media($media...) {
+          @include media($media...) {
             font-size: to-px($size);
           }
         }
       }
       // try to get the font family from fonts
-      @include s-font(s-setting("typography.font-family"));
+      @include font(setting("typography.font-family"));
     }
 
     // default color and stuffs on the body
     body {
-      color: s-color(text);
+      color: color(text);
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
 
     // font faces
-    $fonts: s-setting("fonts");
+    $fonts: setting("fonts");
     @each $font-name, $font in $fonts {
-      @if type-of($font) == string {
+      @if meta.type-of($font) == string {
         $font: map-get($fonts, $font);
       }
       @if not map-get($font, font-family) {
@@ -119,7 +120,7 @@ $_sugar-inited: false;
       }
       $font: map-remove($font, cap-height);
       @if map-get($font, src) {
-        @include s-font-face($font...);
+        @include font-face($font...);
       } @else {
         $ff: map-get($font, font-family);
         $fs: map-get($font, font-style);
@@ -138,7 +139,7 @@ $_sugar-inited: false;
     }
 
     // modular scale
-    $ms-base: s-setting("modular-scale.base") !global;
-    $ms-ratio: s-setting("modular-scale.ratio") !global;
+    $ms-base: setting("modular-scale.base") !global;
+    $ms-ratio: setting("modular-scale.ratio") !global;
   }
 }

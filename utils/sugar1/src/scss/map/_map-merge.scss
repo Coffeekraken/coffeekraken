@@ -1,0 +1,37 @@
+@use 'sass:map';
+/**
+ * Merge the first passed map with the second passed one and return the result
+ *
+ * @param           {Map}         $map1         The first map to extend
+ * @param           {Map}         $map2         The second map to extend the first one with
+ * @return          {Map}                       The extended map
+ *
+ * @example
+ * sugar.map-merge((
+ *  hello: 'world'
+ * ), (
+ *  coco: 'plop'
+ * ));
+ * // returned map:
+ * (
+ *  hello: 'world',
+ *  coco: 'plop'
+ * )
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function map-merge($map1, $map2) {
+  $map1: test-argument(
+    'sugar.map-merge',
+    'map1',
+    'map|list',
+    $map1
+  );
+  $map2: test-argument(
+    'sugar.map-merge',
+    'map2',
+    'map|list',
+    $map2
+  );
+  @return map.merge($map1, $map2);
+}

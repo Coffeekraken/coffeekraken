@@ -1,16 +1,22 @@
 /**
  * Display the vertical rhythme
  *
- * @param 			{Color} 		The color wanted
+ * @param 			{Color}      [$color=#0ff] 		The color wanted
  *
  * @example
  * body {
- * 		@include s-show-vertical-rhythm();
+ * 		@include sugar.show-vertical-rhythm();
  * }
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@mixin s-show-vertical-rhythm($color: #0ff) {
+@mixin show-vertical-rhythm($color: #0ff) {
+  $color: test-argument(
+    'sugar.show-vertical-rhythm',
+    'color',
+    color,
+    $color
+  );
   // overflow: hidden;
   position: relative;
   &:after {

@@ -1,21 +1,30 @@
-@mixin s-styleguide-colors() {
-  $colors: s-setting("colors");
+@use 'sass:map';
+/**
+ * Print the styleguide docblocks for the registered sugar colors
+ *
+ * @example
+ * @include sugar.styleguide-colors();
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@mixin styleguide-colors() {
+  $colors: setting("colors");
   @each $name, $color in $colors {
     /**
 		 * @styleguide 	Colors / Swatches
 		 * @name 		#{$name}
-		 * @color 		#{s-color($name)}
+		 * @color 		#{color($name)}
 		 * @display 	color
 		 */
 
-    $modifiers: map-get($color, modifiers);
+    $modifiers: map.get($color, modifiers);
     // modifiers
     @if $modifiers {
       @each $mod-name, $mod in $modifiers {
         /**
 				 * @styleguide 	Colors / Swatches
 				 * @name 		#{$name}--#{$mod-name}
-				 * @color 		#{s-color($name, $mod-name)}
+				 * @color 		#{color($name, $mod-name)}
 				 * @display 	color
 				 */
       }

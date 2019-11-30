@@ -1,0 +1,21 @@
+/**
+ * @name      math-deg
+ * Convert the passed unitless angle to degree
+ *
+ * @param         {Number}        $angle      The angle to convert to degree
+ * @return        {Number}                    The degree version of the angle
+ *
+ * @example     scss
+ * sugar.math-deg(10); // => 572.9577951308deg
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function math-deg($angle) {
+  $angle: test-argument(
+    'sugar.math-deg',
+    'angle',
+    number,
+    $angle
+  );
+  @return math-convert-angle($angle, deg);
+}

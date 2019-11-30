@@ -1,0 +1,35 @@
+@use 'sass:list';
+/**
+ * Append a value to the passed list
+ *
+ * @param           {List}        $list               The list to append the value to
+ * @param           {Mixed}       $value              The value to append to the list
+ * @param           {String}      [$separator=auto]   The separator to use. Can be auto, space or comma
+ * @return          {List}                            The new list with the appended value
+ *
+ * @example
+ * sugar.list-append(hello world, coco, comma); // hello, world, coco
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function list-append($list, $value, $separator: auto) {
+  $list: test-argument(
+    'sugar.list-append',
+    'list',
+    'list|string',
+    $list
+  );
+  $value: test-argument(
+    'sugar.list-append',
+    'value',
+    mixed,
+    $value
+  );
+  $separator: test-argument(
+    'sugar.list-append',
+    'separator',
+    (auto,space,comma),
+    $separator
+  );
+  @return list.append($list, $value, $separator);
+}

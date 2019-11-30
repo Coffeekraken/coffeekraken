@@ -18,9 +18,16 @@ $font-size: null !default;
 
 /**
  * Stpre aéé the classes in their namespaces
- * @type      (List)
+ * @type      (Map)
  */
 $classes: () !default; // store all the classes in their namespaces
+
+/**
+ * Some variables used in the math functions
+ */
+$math-pi: 3.14159265359;
+$math-default-threshold: $math-pi/180/20;
+$math-precision: 10;
 
 /**
  * Store all the settings

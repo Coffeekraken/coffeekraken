@@ -1,0 +1,119 @@
+/**
+ * @name      corner
+ * Apply some border radius
+ * @param 		{Number} 		[$radius=null] 			The radius to apply globally
+ * @param 		{Number} 		[$top=null] 			The radius to apply on top corners
+ * @param 		{Number} 		[$right=null] 			The radius to apply on right corners
+ * @param 		{Number} 		[$bottom=null] 			The radius to apply on bottom corners
+ * @param 		{Number} 		[$left=null] 			The radius to apply on left corners
+ * @param 		{Number} 		[$top-left=null] 		The radius to apply on top-left corners
+ * @param 		{Number} 		[$top-right=null] 		The radius to apply on top-right corners
+ * @param 		{Number} 		[$bottom-left=null] 	The radius to apply on bottom-left corners
+ * @param 		{Number} 		[$bottom-right=null] 	The radius to apply on bottom-right corners
+ *
+ * @example 	scss
+ * .my-cool-item {
+ * 	// apply on top left and right corners
+ * 	\@include sugar.corner(
+ * 		$top : 10px;
+ * 	);
+ * 	// apply on each corners
+ * 	\@include sugar.corner(10px);
+ * 	// etc...
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@mixin corner(
+  $radius: null,
+  $top: null,
+  $right: null,
+  $bottom: null,
+  $left: null,
+  $top-left: null,
+  $top-right: null,
+  $bottom-left: null,
+  $bottom-right: null
+) {
+  $radius: test-argument(
+    "sugar.corner",
+    "radius",
+    "number|list-number",
+    $radius
+  );
+  $top: test-argument("sugar.corner", "top", "number|list-number", $top);
+  $right: test-argument("sugar.corner", "right", "number|list-number", $right);
+  $bottom: test-argument(
+    "sugar.corner",
+    "bottom",
+    "number|list-number",
+    $bottom
+  );
+  $left: test-argument("sugar.corner", "left", "number|list-number", $left);
+  $top-left: test-argument(
+    "sugar.corner",
+    "top-left",
+    "number|list-number",
+    $top-left
+  );
+  $top-right: test-argument(
+    "sugar.corner",
+    "top-right",
+    "number|list-number",
+    $top-right
+  );
+  $bottom-left: test-argument(
+    "sugar.corner",
+    "bottom-left",
+    "number|list-number",
+    $bottom-left
+  );
+  $bottom-right: test-argument(
+    "sugar.corner",
+    "bottom-right",
+    "number|list-number",
+    $bottom-right
+  );
+
+  @if list-length($radius) == 1 and type-of($radius) == number {
+    border-radius: $radius;
+    $radius: list-remove-nth($radius, 1);
+  }
+
+  // top
+  @if $top {
+    border-top-left-radius: $top;
+    border-top-right-radius: $top;
+  }
+  // right
+  @if $right {
+    border-top-right-radius: $right;
+    border-bottom-right-radius: $right;
+  }
+  // bottom
+  @if $bottom {
+    border-bottom-left-radius: $bottom;
+    border-bottom-right-radius: $bottom;
+  }
+  // left
+  @if $left {
+    border-top-left-radius: $left;
+    border-bottom-left-radius: $left;
+  }
+  // top left
+  @if $top-left {
+    border-top-left-radius: $top-left;
+  }
+  // top-right
+  @if $top-right {
+    border-top-right-radius: $top-right;
+  }
+  // bottom-left
+  @if $bottom-left {
+    border-bottom-left-radius: $bottom-left;
+  }
+  // bottom-right
+  @if $bottom-right {
+    border-bottom-right-radius: $bottom-right;
+  }
+}

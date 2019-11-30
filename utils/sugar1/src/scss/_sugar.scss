@@ -1,49 +1,12 @@
-// //
-// // Vendors
-// //
-// @import 'vendors/all';
-//
-// //
-// // Styleguide
-// //
-// @use 'styleguide/all' as *;
-//
-// //
-// // Functions
-// //
-// @use 'functions/all' as *;
-//
-
-//
-// List
-//
+@import 'vendors/all';
+@import 'styleguide/all';
+@import 'functions/all';
 @import 'list/all';
-//
-// Map
-//
+@import 'math/all';
+@import 'meta/all';
 @import 'map/all';
-//
-// // //
-// // // Mixins
-// // //
-// // @use 'mixins/all' as *;
-// //
-//
-// Strings
-//
+@import 'mixins/all';
 @import 'string/all';
-//
-// //
-// // Tools
-// //
-// @use 'utils/all' as *;
-
-//
-// Core
-//
+@import 'utils/all';
 @import 'core/all';
-
-// //
-// // Effects
-// //
-// @use 'effects/all' as *;
+@import 'effects/all';

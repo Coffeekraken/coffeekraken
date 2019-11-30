@@ -1,0 +1,21 @@
+@use 'sass:string';
+/**
+ * Return an unquoted version of the passed string
+ *
+ * @param         {String}        $string           The string to unquote
+ * @return        {String}                          The unquoted string
+ *
+ * @example
+ * sugar.str-unquote('hello world'); // => hello world
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function str-unquote($string) {
+  $string: test-argument(
+    'sugar.str-unquote',
+    'string',
+    string,
+    $string
+  );
+  @return string.unquote($string);
+}

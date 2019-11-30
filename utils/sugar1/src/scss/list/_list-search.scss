@@ -1,0 +1,22 @@
+@use 'sass:list';
+/**
+ * Search for the passed value in the passed list and return true if exist, false if not
+ *
+ * @param           {List}          $list           The list in which to search for the passed value
+ * @param           {Mixed}         $value          The value to search in the List
+ * @return          {Boolean}                       true if the value exist in the list, false if not
+ *
+ * @example   scss
+ * sugar.list-search(('hello', 'world'), 'hello'); // => true
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function list-search($list, $value) {
+  $list: test-argument(
+    'sugar.list-search',
+    'list',
+    list,
+    $list
+  );
+  @return list.index($list, $value) != null;
+}

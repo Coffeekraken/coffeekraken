@@ -259,13 +259,29 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /**
+ * @name    list-index
+ * Return the index of the wanted value in the passed list.
+ *
+ * @param       {List}      $list       The list to process
+ * @param       {Mixed}     $value      The value to search in the list
+ * @return      {Number}                The index of the founded value or null
+ *
+ * @example     scss
+ * sugar.list-index(('hello','world'), 'world'); // => 2
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
  * Return a string representing all the list items
  *
- * @param         {List}        $list         The list to process
- * @return        {String}                    The string representing all the list items
+ * @param         {List}        $list1         The list to process
+ * @param         {List}        $list2         The list to join with the first one
+ * @param         {String}      [$separator=auto]     The separator to use for the list. Can be auto, comma or space
+ * @param         {String|Boolean}    [$bracketed=auto]     If true is passed, the list will be bracketed
+ * @return        {String}                    The new list
  *
- * @example
- * sugar.list-join(('hello','-','world')); // hello-world
+ * @example     scss
+ * sugar.list-join(('hello','world'), ('coco'), space); // ('hello' 'world' 'coco')
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
@@ -289,6 +305,20 @@
  *
  * @example     scss
  * sugar.list-length(('hello','world')); // => 2
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      list-set-nth
+ * Set a value in the passed list at the passed index. The original value at the passed index will be replaced with the passed value
+ *
+ * @param       {List}      $list       The list to process
+ * @param       {Number}    $index      The index to set the value in the list
+ * @param       {Mixed}     $value      The value to set in the list
+ * @return      {List}                  The new processed list
+ *
+ * @example       scss
+ * sugar.list-set-nth(('hello','world'), 1, 'coco'); // => ('coco','world')
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
@@ -403,6 +433,114 @@
  *    @include sugar.loader-circle(
  *      $color: sugar.color(primary)
  *    );
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      loader-couch-potato
+ * Generate a full animated, single element, couch-potato style loader
+ *
+ * @param 		{Number} 		[$size=1em] 				The size of the loader
+ * @param 		{Color} 		[$color=primary] 			The color of the loader
+ * @param 		{Second} 		[$a-duration=1s] 			The overall animation duration
+ * @param 		{Second} 		[$a-delay=0s] 				The delay between two animation cycle
+ * @param 		{String} 		[$a-ease=ease-in-out]		The ease to use for the animation
+ * @param 		{Degree}		[$a-rotate=360deg] 			The animation rotation
+ * @param 		{Number} 		[$a-scale=.7] 				The animation scale
+ *
+ * @example     scss
+ * .my-cool-loader {
+ * 		\@include sugar.loader-couch-potato();
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      loader-flip-ball
+ * Generate a full animated, single element, flip ball style loader
+ *
+ * @param 		{String} 		[$shape=circle] 			The shape of the loader (circle,rect)
+ * @param 		{Number} 		[$size=1em] 				The size of the loader
+ * @param 		{Color} 		[$color=primary] 			The color of the loader. Can be a list of colors
+ * @param 		{Second} 		[$a-duration=1s] 			The overall animation duration
+ * @param 		{Second} 		[$a-delay=0s] 				The delay between two animation cycle
+ * @param 		{String} 		[$a-ease=ease-in-out]		The ease to use for the animation
+ *
+ * @example
+ * .my-cool-loader {
+ * 		\@include sugar.loader-flip-ball();
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      loader-grid
+ * Generate a grid style loader
+ *
+ * @param       {String}      [$shape=rect]             The shape of the grid items. Can be rect or circle
+ * @param       {Color}       [$color=color(primary)]   The color to use for the grid items
+ * @param       {Number}      [$cols=5]                 How many columns the grid must have
+ * @param       {Number}      [$rows=5]                 How many rows must have the grid
+ * @param       {Number}      [$size=10px]              The size of each grid items
+ * @param       {Number}      [$gap=5px]                The size of the gaps between the grid items
+ * @param       {Number}      [$offset=200px]           The offset used for the grid
+ * @param       {Number}      [$rotate=0deg]            Apply a rotation to the grid items
+ * @param       {String}      [$a-shape=null]           The animation shape to apply to the grid items. Can be rect or circle
+ * @param       {Number}      [$a-steps=5]              How many steps must have the animation
+ * @param       {Number}      [$a-spread=null]          How much must the grid items spread during the animation
+ * @param       {Number}      [$a-rotate=null]          How many degrees must the grid items rotate during the animation
+ * @param       {Number}      [$a-scale=null]           Apply a scale for the animation of the grid items
+ * @param       {Number}      [$a-opacity=null]         Apply an opacity to the grid items during the animation
+ * @param       {Second}      [$a-duration=1s]          The duration of the animation
+ * @param       {Second}      [$a-delay=0s]             How many seconds to wait between each animations
+ * @param       {String}      [$a-ease=ease-in-out]     The easing to use for the animation
+ *
+ * @example     scss
+ * .my-cool-loader {
+ *    @include sugar.loader-grid();
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      loader-radial
+ * Generate a radial styled loader
+ *
+ * @param       {String}      [$shape=circle]       The shape of the items that make the circle. Can be rect or circle
+ * @param       {Number}      [$size=1em]           The size of the items
+ * @param       {Number}      [$width=0.2em]        The width of the circle loader
+ * @param       {String}      [$style=solid]        The style of the items that form the loader. Can be none, hidden, dotted, dashed, solid, double, groove, ridge, inset, outset, initial or inherit
+ * @param       {Color}       [$color=color(primary)]     The color to use for the loader
+ * @param       {Second}      [$a-duration=2s]      How many time will be the animation
+ * @param       {Second}      [$a-delay=0s]         How many time to wait between two animation
+ * @param       {Number}      [$a-count=2]          How many circles will be animated
+ * @param       {Number}      [$a-spread=0]         Specify a spread value for the animation of each circles
+ * @param       {String}      [$a-ease=linear]      Specify the ease to use for the animation
+ *
+ * @example       scss
+ * .my-cool-loader {
+ *    @include sugar.loader-radial();
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      loader-spinner
+ * Generate a spinner loader
+ *
+ * @param         {String}        [$type=linear]          Specify the type of spinner loader that you want. Can be elastic, linear, fade-in, fade-out or fade-in-out
+ * @param         {Number}        [$size=1em]             Specify the size of the spinner loader
+ * @param         {Number}        [$width=0.3em]          Specify the width of the spinner loader
+ * @param         {Color}         [$color=color(primary)]   Specify the color of the spinner loader
+ * @param         {Color}         [$bgcolor=inherit]        Specify the background color of the spinner loader
+ * @param         {Number}        [$length=3/4]           The length of the spinner loader
+ * @param         {Second}        [$a-duration=1s]        The duration of the spinner loader animation
+ * @param         {String}        [$a-ease=null]          Specify an ease to use for the spinner loader animation
+ *
+ * @example     scss
+ * .my-cool-loader {
+ *    @include sugar.loader-spinner();
  * }
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -837,6 +975,18 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /**
+ * @name    unit
+ * Return the unit of the passed number
+ *
+ * @param       {Number}      $number       The number to get the unit from
+ * @return      {String}                    The unit
+ *
+ * @example     scss
+ * sugar.unit(10px); // => px
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
  * Get values of a map even if it is deep
  *
  * @param       {Map}       $map        The map to get values from
@@ -1073,6 +1223,37 @@
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /**
+ * @name      background
+ * Helper mixin to set a background image
+ *
+ * @param 			{String} 				[$repeat=null] 				The background-repeat property
+ * @param 			{String} 				[$size=null] 				The background-size property
+ * @param 			{String} 				[$attachment=null] 			The background-attachment property
+ * @param 			{String} 				[$blend-mode=null] 			The background-blend-mode property
+ * @param 			{String} 				[$clip=null] 				The background-clip property
+ * @param 			{String} 				[$url=null] 				The background-image url property
+ * @param 			{Number} 				[$width=null] 				The background-size width property
+ * @param 			{Number} 				[$height=null] 				The background-size height property
+ * @param 			{Number} 				[$top=null] 				The background-position top property
+ * @param 			{Number} 				[$left=null] 				The background-position left property
+ * @param 			{String} 				[$suffix2x=@2x] 			The suffix to add the the url if the 2x resolution if wanted
+ * @param 			{String} 				[$suffix3x=@3x] 			The suffix to add the the url if the 3x resolution if wanted
+ * @param 			{String} 				[$suffix4x=@4x] 			The suffix to add the the url if the 4x resolution if wanted
+ * @param 			{List} 					[$resolution=null] 			The resolution wanted like 2x, 3x and 4x
+ * @param 			{List} 					[$position=null] 			The background-position property
+ *
+ * @example
+ * .my-cool-element {
+ * 		\@include sugar.background(
+ * 			$url : 'img/my-cool-image.jpg',
+ * 			$size : cover,
+ * 			$resolution : 2x 3x 4x
+ * 		);
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
  * @name 	clearfix
  * Apply a clearfix on the element.
  * Supported methods:
@@ -1122,6 +1303,39 @@
  * @example 	scss
  * .my-cool-container {
  * 	\@include sugar.text-hide();
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      media
+ * Easy to use media query mixin that support cssua classes to target specific browsers
+ *
+ * @param 		{String} 		[$screen=null] 			Any of the @media screen type property like "screen, handheld, print, etc..."
+ * @param 		{Number} 		[$min-width=null] 		The min width to target
+ * @param 		{Number} 		[$max-width=null] 		The max width to target
+ * @param 		{Number} 		[$min-height=null] 		The min height to target
+ * @param 		{Number} 		[$max-height=null] 		The max height to target
+ * @param 		{String} 		[$orientation=null] 	The orientation to target. Can be portrait or landscape
+ * @param 		{String} 		[$resolution=null] 		The resolution to target. Can be 2x, 3x, 4x, etc...
+ * @param 		{String} 		[$engine=null] 			The engine that powers the display. Can be gecko, webkit, trident, blink or presto
+ * @param 		{String} 		[$device=null] 			The device to target. Can be mobile, tablet, desktop, iphone or ipad
+ * @param 		{String} 		[$browser=null] 		The browser(s) to target. Can be chrome, safari, firefox, opera, ie, ie6-20
+ * @param 		{String} 		[$system=null] 			The system(s) to target. Can be ios, osx, windows, linux, android, webos or blackberry
+ *
+ * @example 	scss
+ * // simple min width
+ * \@include sugar.media(
+ * 	$min-width : 200px
+ * ) {
+ * 	// custom css here...
+ * }
+ *
+ * // target a specific engine
+ * \@include sugar.media(
+ * 	$engine : gecko webkit
+ * ) {
+ * 	// custom css here
  * }
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -2864,46 +3078,24 @@
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-.my-cool-loader {
-  transform: translateX(-50%) translateY(-50%) rotate(-90deg);
+.my-cool-element {
+  background-size: cover;
+  background-image: url("img/my-cool-image.jpg");
 }
-@keyframes circle-u05245p {
-  0% {
-    box-shadow: 1em 0em 0 0em #f2bc2b, 0.7071067812em 0.7071067812em 0 0em #f2bc2b, 0em 1em 0 0em #f2bc2b, -0.7071067812em 0.7071067812em 0 0em #f2bc2b, -0.9999999999em 1.0140913578em 0 0em #f2bc2b, -0.707106771em -0.7071067794em 0 0em #f2bc2b, 5.5374483386em -0.9999998862em 0 0em #f2bc2b, 0.7071230006em -0.7071028877em 0 0em #f2bc2b;
-  }
-  12.5% {
-    box-shadow: 1em 0em 0 0em #f2bc2b, 0.7071067812em 0.7071067812em 0 0em #f2bc2b, 0em 1em 0 0em #f2bc2b, -0.7071067812em 0.7071067812em 0 0em #f2bc2b, -0.9999999999em 1.0140913578em 0 0em #f2bc2b, -0.707106771em -0.7071067794em 0 0em #f2bc2b, 5.5374483386em -0.9999998862em 0 0em #f2bc2b, 0.7071230006em -0.7071028877em 0 0em #f2bc2b;
-  }
-  25% {
-    box-shadow: 1em 0em 0 0em #f2bc2b, 0.7071067812em 0.7071067812em 0 0em #f2bc2b, 0em 1em 0 0em #f2bc2b, -0.7071067812em 0.7071067812em 0 0em #f2bc2b, -0.9999999999em 1.0140913578em 0 0em #f2bc2b, -0.707106771em -0.7071067794em 0 0em #f2bc2b, 5.5374483386em -0.9999998862em 0 0em #f2bc2b, 0.7071230006em -0.7071028877em 0 0em #f2bc2b;
-  }
-  37.5% {
-    box-shadow: 1em 0em 0 0em #f2bc2b, 0.7071067812em 0.7071067812em 0 0em #f2bc2b, 0em 1em 0 0em #f2bc2b, -0.7071067812em 0.7071067812em 0 0em #f2bc2b, -0.9999999999em 1.0140913578em 0 0em #f2bc2b, -0.707106771em -0.7071067794em 0 0em #f2bc2b, 5.5374483386em -0.9999998862em 0 0em #f2bc2b, 0.7071230006em -0.7071028877em 0 0em #f2bc2b;
-  }
-  50% {
-    box-shadow: 1em 0em 0 0em #f2bc2b, 0.7071067812em 0.7071067812em 0 0em #f2bc2b, 0em 1em 0 0em #f2bc2b, -0.7071067812em 0.7071067812em 0 0em #f2bc2b, -0.9999999999em 1.0140913578em 0 0em #f2bc2b, -0.707106771em -0.7071067794em 0 0em #f2bc2b, 5.5374483386em -0.9999998862em 0 0em #f2bc2b, 0.7071230006em -0.7071028877em 0 0em #f2bc2b;
-  }
-  62.5% {
-    box-shadow: 1em 0em 0 0em #f2bc2b, 0.7071067812em 0.7071067812em 0 0em #f2bc2b, 0em 1em 0 0em #f2bc2b, -0.7071067812em 0.7071067812em 0 0em #f2bc2b, -0.9999999999em 1.0140913578em 0 0em #f2bc2b, -0.707106771em -0.7071067794em 0 0em #f2bc2b, 5.5374483386em -0.9999998862em 0 0em #f2bc2b, 0.7071230006em -0.7071028877em 0 0em #f2bc2b;
-  }
-  75% {
-    box-shadow: 1em 0em 0 0em #f2bc2b, 0.7071067812em 0.7071067812em 0 0em #f2bc2b, 0em 1em 0 0em #f2bc2b, -0.7071067812em 0.7071067812em 0 0em #f2bc2b, -0.9999999999em 1.0140913578em 0 0em #f2bc2b, -0.707106771em -0.7071067794em 0 0em #f2bc2b, 5.5374483386em -0.9999998862em 0 0em #f2bc2b, 0.7071230006em -0.7071028877em 0 0em #f2bc2b;
-  }
-  87.5% {
-    box-shadow: 1em 0em 0 0em #f2bc2b, 0.7071067812em 0.7071067812em 0 0em #f2bc2b, 0em 1em 0 0em #f2bc2b, -0.7071067812em 0.7071067812em 0 0em #f2bc2b, -0.9999999999em 1.0140913578em 0 0em #f2bc2b, -0.707106771em -0.7071067794em 0 0em #f2bc2b, 5.5374483386em -0.9999998862em 0 0em #f2bc2b, 0.7071230006em -0.7071028877em 0 0em #f2bc2b;
-  }
-  100% {
-    box-shadow: 1em 0em 0 0em #f2bc2b, 0.7071067812em 0.7071067812em 0 0em #f2bc2b, 0em 1em 0 0em #f2bc2b, -0.7071067812em 0.7071067812em 0 0em #f2bc2b, -0.9999999999em 1.0140913578em 0 0em #f2bc2b, -0.707106771em -0.7071067794em 0 0em #f2bc2b, 5.5374483386em -0.9999998862em 0 0em #f2bc2b, 0.7071230006em -0.7071028877em 0 0em #f2bc2b;
+@media all and (-webkit-min-device-pixel-ratio: 2), (min-resolution: 320dpi) {
+  .my-cool-element {
+    background-image: url("img/my-cool-image@2x.jpg");
   }
 }
-.my-cool-loader:after {
-  border-radius: 50%;
-  width: 0.33em;
-  height: 0.33em;
-  display: block;
-  content: "";
-  box-shadow: #f2bc2b 1em 0em 0 0, #f2bc2b 0.7071067812em 0.7071067812em 0 0, #f2bc2b 0em 1em 0 0, #f2bc2b -0.7071067812em 0.7071067812em 0 0, #f2bc2b -0.9999999999em 1.0140913578em 0 0, #f2bc2b -0.707106771em -0.7071067794em 0 0, #f2bc2b 5.5374483386em -0.9999998862em 0 0, #f2bc2b 0.7071230006em -0.7071028877em 0 0, #f2bc2b 1.000301224em 0.000082741em 0 0;
-  animation: circle-u05245p 1s ease-in-out 0s infinite;
+@media all and (-webkit-min-device-pixel-ratio: 3), (min-resolution: 480dpi) {
+  .my-cool-element {
+    background-image: url("img/my-cool-image@3x.jpg");
+  }
+}
+@media all and (-webkit-min-device-pixel-ratio: 4), (min-resolution: 640dpi) {
+  .my-cool-element {
+    background-image: url("img/my-cool-image@4x.jpg");
+  }
 }
 
 /*# sourceMappingURL=_coco.css.map */

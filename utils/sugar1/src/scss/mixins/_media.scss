@@ -24,23 +24,17 @@ $media-keywords: (
   android: ".ua-android",
   webos: ".ua-webos",
   blackberry: ".ua-blackberry"
-    // 2x : '(-webkit-min-device-pixel-ratio: 2), (min-resolution: 320dpi)',
-    // 3x : '(-webkit-min-device-pixel-ratio: 3), (min-resolution: 480dpi)',
-    // 4x : '(-webkit-min-device-pixel-ratio: 4), (min-resolution: 640dpi)',
-    // 5x : '(-webkit-min-device-pixel-ratio: 5), (min-resolution: 800dpi)',
-    // 6x : '(-webkit-min-device-pixel-ratio: 6), (min-resolution: 960dpi)'
 );
 @for $idx from 6 through 20 {
-  $media-keywords: map-merge(
-    $media-keywords,
-    (
-      "ie#{$idx}": ".ua-ie-#{$idx}"
-    )
-  );
+  $media-keywords: map-merge($media-keywords, (
+    "ie#{$idx}": ".ua-ie-#{$idx}"
+  ));
 }
 
 /**
+ * @name      media
  * Easy to use media query mixin that support cssua classes to target specific browsers
+ *
  * @param 		{String} 		[$screen=null] 			Any of the @media screen type property like "screen, handheld, print, etc..."
  * @param 		{Number} 		[$min-width=null] 		The min width to target
  * @param 		{Number} 		[$max-width=null] 		The max width to target
@@ -55,14 +49,14 @@ $media-keywords: (
  *
  * @example 	scss
  * // simple min width
- * \@include s-media(
+ * \@include sugar.media(
  * 	$min-width : 200px
  * ) {
  * 	// custom css here...
  * }
  *
  * // target a specific engine
- * \@include s-media(
+ * \@include sugar.media(
  * 	$engine : gecko webkit
  * ) {
  * 	// custom css here
@@ -70,7 +64,7 @@ $media-keywords: (
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@mixin s-media(
+@mixin media(
   $screen: null,
   $min-width: null,
   $max-width: null,
@@ -83,95 +77,94 @@ $media-keywords: (
   $browser: null,
   $system: null
 ) {
-  @if $_sugar-test-arguments {
-    $screen: s-test-argument(
-      "s-media",
-      "screen",
-      (
-        screen,
-        handheld,
-        print,
-        aural,
-        braille,
-        embossed,
-        projection,
-        tty,
-        tv,
-        all
-      ),
-      $screen
-    );
-    $min-width: s-test-argument("s-media", "min-width", number, $min-width);
-    $max-width: s-test-argument("s-media", "max-width", number, $max-width);
-    $min-height: s-test-argument("s-media", "min-height", number, $min-height);
-    $max-height: s-test-argument("s-media", "max-height", number, $max-height);
-    $orientation: s-test-argument(
-      "s-media",
-      "orientation",
-      (landscape, portrait),
-      $orientation
-    );
-    $resolution: s-test-argument(
-      "s-media",
-      "resolution",
-      "string|list-string",
-      $resolution
-    );
-    $engine: s-test-argument(
-      "s-media",
-      "engine",
-      "string|list-string",
-      $engine
-    );
-    $device: s-test-argument(
-      "s-media",
-      "device",
-      "string|list-string",
-      $device
-    );
-    $browser: s-test-argument(
-      "s-media",
-      "browser",
-      "string|list-string",
-      $browser
-    );
-    $system: s-test-argument(
-      "s-media",
-      "system",
-      "string|list-string",
-      $system
-    );
-  }
+  $screen: test-argument(
+    "sugar.media",
+    "screen",
+    (
+      screen,
+      handheld,
+      print,
+      aural,
+      braille,
+      embossed,
+      projection,
+      tty,
+      tv,
+      all
+    ),
+    $screen
+  );
+  $min-width: test-argument("sugar.media", "min-width", number, $min-width);
+  $max-width: test-argument("sugar.media", "max-width", number, $max-width);
+  $min-height: test-argument("sugar.media", "min-height", number, $min-height);
+  $max-height: test-argument("sugar.media", "max-height", number, $max-height);
+  $orientation: test-argument(
+    "sugar.media",
+    "orientation",
+    (landscape, portrait),
+    $orientation
+  );
+  $resolution: test-argument(
+    "sugar.media",
+    "resolution",
+    "number|list-number|list",
+    $resolution
+  );
+  $engine: test-argument(
+    "sugar.media",
+    "engine",
+    "string|list-string",
+    $engine
+  );
+  $device: test-argument(
+    "sugar.media",
+    "device",
+    "string|list-string",
+    $device
+  );
+  $browser: test-argument(
+    "sugar.media",
+    "browser",
+    "string|list-string",
+    $browser
+  );
+  $system: test-argument(
+    "sugar.media",
+    "system",
+    "string|list-string",
+    $system
+  );
 
   $media: ("all");
   @if $screen {
-    $media: append($media, $screen);
+    $media: list-append($media, $screen);
   }
   @if $orientation {
-    $media: append($media, "(orientation : #{$orientation})");
+    $media: list-append($media, "(orientation : #{$orientation})");
   }
   @if $min-width {
-    $media: append($media, "(min-width : #{$min-width})");
+    $media: list-append($media, "(min-width : #{$min-width})");
   }
   @if $max-width {
-    $media: append($media, "(max-width : #{$max-width})");
+    $media: list-append($media, "(max-width : #{$max-width})");
   }
   @if $min-height {
-    $media: append($media, "(min-height : #{$min-height})");
+    $media: list-append($media, "(min-height : #{$min-height})");
   }
   @if $max-height {
-    $media: append($media, "(max-height : #{$max-height})");
+    $media: list-append($media, "(max-height : #{$max-height})");
   }
 
   // resolution
   @if $resolution {
     $res: ();
     @each $r in $resolution {
-      $r: _replace($r, "x");
+      $r: '#{$r}';
+      $r: str-replace($r, "x");
       $r: to-number($r);
       // check that the $r is now a proper integer
-      @if s-is($r, integer) {
-        $res: append(
+      @if is($r, integer) {
+        $res: list-append(
           $res,
           "(-webkit-min-device-pixel-ratio: #{$r}), (min-resolution: #{160 * $r}dpi)"
         );
@@ -183,70 +176,60 @@ $media-keywords: (
     // 		$res : append($res, map-get($media-keywords,$m));
     // 	}
     // }
-    $media: append($media, _join($res, ","));
+    $media: list-append($media, list-implode($res, ","));
   }
 
   // construct media querie
-  $med: _join($media, " and ");
-  $this: "#{&}";
+  $med: list-implode($media, " and ");
 
   // construct refine
   $refine: ();
   @if $engine {
     $engines: (blink, gecko, trident, webkit, presto);
     @each $e in $engine {
-      @if index($engines, $e) {
-        $refine: append($refine, map-get($media-keywords, $e), comma);
+      @if list-index($engines, $e) {
+        $refine: list-append($refine, map-get($media-keywords, $e), comma);
       }
     }
   }
   @if $browser {
     $browsers: (chrome, safari, opera, firefox, ie);
     @for $idx from 6 through 20 {
-      $browsers: append($browsers, "ie#{$idx}");
+      $browsers: list-append($browsers, "ie#{$idx}");
     }
     @each $b in $browser {
-      @if index($browsers, $b) {
-        $refine: append($refine, map-get($media-keywords, $b), comma);
+      @if list-index($browsers, $b) {
+        $refine: list-append($refine, map-get($media-keywords, $b), comma);
       }
     }
   }
   @if $device {
     $devices: (mobile, tablet, desktop, iphone, ipad);
     @each $d in $device {
-      @if index($devices, $d) {
-        $refine: append($refine, map-get($media-keywords, $d), comma);
+      @if list-index($devices, $d) {
+        $refine: list-append($refine, map-get($media-keywords, $d), comma);
       }
     }
   }
   @if $system {
     $systems: (ios, android, blackberry, windows, osx, linux, webos);
     @each $s in $system {
-      @if index($systems, $s) {
-        $refine: append($refine, map-get($media-keywords, $s), comma);
+      @if list-index($systems, $s) {
+        $refine: list-append($refine, map-get($media-keywords, $s), comma);
       }
     }
   }
 
-  @if length($refine) <= 0 {
+  @if list-length($refine) <= 0 {
     @media #{$med} {
-      @if $this != "" {
-        & {
-          @content;
-        }
-      } @else {
-        @content;
-      }
+      @content;
     }
   } @else {
-    @each $ref in $refine {
-      @media #{$med} {
-        @if $this != "" {
-          #{$ref} & {
-            @content;
-          }
-        } @else {
-          #{$ref} {
+    $this: #{&};
+    @media #{$med} {
+      @at-root {
+        #{list-implode($refine, ', ')} {
+          #{$this} {
             @content;
           }
         }

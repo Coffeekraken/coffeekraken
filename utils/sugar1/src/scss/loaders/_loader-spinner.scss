@@ -1,36 +1,53 @@
-// @TODO : documentation
-@mixin s-loader-spinner(
+/**
+ * @name      loader-spinner
+ * Generate a spinner loader
+ *
+ * @param         {String}        [$type=linear]          Specify the type of spinner loader that you want. Can be elastic, linear, fade-in, fade-out or fade-in-out
+ * @param         {Number}        [$size=1em]             Specify the size of the spinner loader
+ * @param         {Number}        [$width=0.3em]          Specify the width of the spinner loader
+ * @param         {Color}         [$color=color(primary)]   Specify the color of the spinner loader
+ * @param         {Color}         [$bgcolor=inherit]        Specify the background color of the spinner loader
+ * @param         {Number}        [$length=3/4]           The length of the spinner loader
+ * @param         {Second}        [$a-duration=1s]        The duration of the spinner loader animation
+ * @param         {String}        [$a-ease=null]          Specify an ease to use for the spinner loader animation
+ *
+ * @example     scss
+ * .my-cool-loader {
+ *    @include sugar.loader-spinner();
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@mixin loader-spinner(
   $type: linear,
   $size: 1em,
   $width: 0.3em,
-  $color: s-color(primary),
+  $color: color(primary),
   $bgcolor: inherit,
   $length: 3/4,
   $a-duration: 1s,
   $a-ease: null
 ) {
-  @if $_sugar-test-arguments {
-    $type: s-test-argument(
-      "s-loader-spinner",
-      "type",
-      (elastic, linear, fade-in, fade-out, fade-in-out),
-      $type
-    );
-    $size: s-test-argument("s-loader-spinner", "size", number, $size);
-    $width: s-test-argument("s-loader-spinner", "width", number, $width);
-    $color: s-test-argument("s-loader-spinner", "color", color, $color);
-    @if $bgcolor != inherit {
-      $bgcolor: s-test-argument("s-loader-spinner", "bgcolor", color, $bgcolor);
-    }
-    $length: s-test-argument("s-loader-spinner", "length", number, $length);
-    $a-duration: s-test-argument(
-      "s-loader-spinner",
-      "a-duration",
-      second,
-      $a-duration
-    );
-    $a-ease: s-test-argument("s-loader-spinner", "a-ease", string, $a-ease);
+  $type: test-argument(
+    "sugar.loader-spinner",
+    "type",
+    (elastic, linear, fade-in, fade-out, fade-in-out),
+    $type
+  );
+  $size: test-argument("sugar.loader-spinner", "size", number, $size);
+  $width: test-argument("sugar.loader-spinner", "width", number, $width);
+  $color: test-argument("sugar.loader-spinner", "color", color, $color);
+  @if $bgcolor != inherit {
+    $bgcolor: test-argument("sugar.loader-spinner", "bgcolor", color, $bgcolor);
   }
+  $length: test-argument("sugar.loader-spinner", "length", number, $length);
+  $a-duration: test-argument(
+    "sugar.loader-spinner",
+    "a-duration",
+    second,
+    $a-duration
+  );
+  $a-ease: test-argument("sugar.loader-spinner", "a-ease", string, $a-ease);
 
   @if $type == elastic and not $a-ease {
     $a-ease: ease;
@@ -38,7 +55,7 @@
     $a-ease: linear;
   }
 
-  $a-name: unquote("spinner-#{unique-id()}");
+  $a-name: str-unquote("spinner-#{str-unique-id()}");
   $p-step: 1 / $a-duration;
 
   @if $type == linear {
@@ -46,10 +63,10 @@
       font-size: $size;
       position: relative;
       text-indent: -9999em;
-      border-top: $width solid transparentize($color, 0.8);
-      border-right: $width solid transparentize($color, 0.8);
-      border-bottom: $width solid transparentize($color, 0.8);
-      border-left: $width solid transparentize($color, 0);
+      border-top: $width solid color-transparentize($color, 0.8);
+      border-right: $width solid color-transparentize($color, 0.8);
+      border-bottom: $width solid color-transparentize($color, 0.8);
+      border-left: $width solid color-transparentize($color, 0);
       transform: translateZ(0);
       animation: $a-name $a-duration $a-ease 0s infinite;
     }
@@ -126,8 +143,8 @@
       background: $color;
       background: linear-gradient(
         to right,
-        transparentize($color, 0) 10%,
-        transparentize($color, 1) 42%
+        color-transparentize($color, 0) 10%,
+        color-transparentize($color, 1) 42%
       );
       position: relative;
       animation: $a-name $a-duration $a-ease 0s infinite;
@@ -175,8 +192,8 @@
       background: $color;
       background: linear-gradient(
         to left,
-        transparentize($color, 1) 52%,
-        transparentize($color, 0) 90%
+        color-transparentize($color, 1) 52%,
+        color-transparentize($color, 0) 90%
       );
       position: relative;
       animation: $a-name $a-duration $a-ease 0s infinite;
@@ -226,7 +243,7 @@
       width: 100%;
       height: 100%;
       border-radius: 50%;
-      background: linear-gradient($color, transparentize($color, 1) 60%);
+      background: linear-gradient($color, color-transparentize($color, 1) 60%);
       animation: $a-name $a-duration infinite linear;
     }
     $width: $size - $width * 2;

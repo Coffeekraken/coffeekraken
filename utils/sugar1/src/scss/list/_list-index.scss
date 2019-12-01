@@ -1,0 +1,29 @@
+@use 'sass:list';
+/**
+ * @name    list-index
+ * Return the index of the wanted value in the passed list.
+ *
+ * @param       {List}      $list       The list to process
+ * @param       {Mixed}     $value      The value to search in the list
+ * @return      {Number}                The index of the founded value or null
+ *
+ * @example     scss
+ * sugar.list-index(('hello','world'), 'world'); // => 2
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function list-index($list, $value) {
+  $list: test-argument(
+    'sugar.list-index',
+    'list',
+    list,
+    $list
+  );
+  $index: test-argument(
+    'sugar.list-index',
+    'value',
+    mixed,
+    $value
+  );
+  @return list.index($list, $value);
+}

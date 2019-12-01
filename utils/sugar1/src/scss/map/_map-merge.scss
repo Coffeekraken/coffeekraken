@@ -21,17 +21,5 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function map-merge($map1, $map2) {
-  $map1: test-argument(
-    'sugar.map-merge',
-    'map1',
-    'map|list',
-    $map1
-  );
-  $map2: test-argument(
-    'sugar.map-merge',
-    'map2',
-    'map|list',
-    $map2
-  );
   @return map.merge($map1, $map2);
 }

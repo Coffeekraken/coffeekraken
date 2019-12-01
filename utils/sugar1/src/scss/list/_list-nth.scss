@@ -16,7 +16,7 @@
   $list: test-argument(
     'sugar.list-nth',
     'list',
-    list,
+    mixed,
     $list
   );
   $index: test-argument(

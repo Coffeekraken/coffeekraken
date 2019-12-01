@@ -1,9 +1,10 @@
 @use '../../index' as sugar;
 @use 'sass:meta';
 
-
-.my-cool-loader {
-    @include sugar.loader-circle(
-      $color: sugar.color(primary)
-    );
+.my-cool-element {
+ 		@include sugar.background(
+ 			$url : 'img/my-cool-image.jpg',
+ 			$size : cover,
+ 			$resolution : 2x 3x 4x
+ 		);
  }

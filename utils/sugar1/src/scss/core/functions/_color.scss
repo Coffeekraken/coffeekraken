@@ -42,7 +42,7 @@
 
   // dash syntax
   @if $actions and meta.type-of($actions) == list {
-    @return sugar.color($name, dash-to-map($actions));
+    @return color($name, dash-to-map($actions));
   }
 
   // test parameters

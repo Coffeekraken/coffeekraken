@@ -1,4 +1,5 @@
 /**
+ * @name      loader-couch-potato
  * Generate a full animated, single element, couch-potato style loader
  *
  * @param 		{Number} 		[$size=1em] 				The size of the loader
@@ -9,84 +10,83 @@
  * @param 		{Degree}		[$a-rotate=360deg] 			The animation rotation
  * @param 		{Number} 		[$a-scale=.7] 				The animation scale
  *
- * @example
+ * @example     scss
  * .my-cool-loader {
- * 		\@include s-loader-couch-potato();
+ * 		\@include sugar.loader-couch-potato();
  * }
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@mixin s-loader-couch-potato(
+@mixin loader-couch-potato(
   $size: 1em,
-  $color: s-color(primary),
+  $color: color(primary),
   $a-duration: 1s,
   $a-delay: 0s,
   $a-ease: ease-in-out,
   $a-rotate: 360deg,
   $a-scale: 0.7
 ) {
-  @if $_sugar-test-arguments {
-    $size: s-test-argument("s-loader-couch-potato", "size", number, $size);
-    $color: s-test-argument(
-      "s-loader-couch-potato",
-      "color",
-      "color|list-color",
-      $color
-    );
-    $a-duration: s-test-argument(
-      "s-loader-couch-potato",
-      "a-duration",
-      second,
-      $a-duration
-    );
-    $a-delay: s-test-argument(
-      "s-loader-couch-potato",
-      "a-delay",
-      second,
-      $a-delay
-    );
-    $a-ease: s-test-argument(
-      "s-loader-couch-potato",
-      "a-ease",
-      string,
-      $a-ease
-    );
-    $a-rotate: s-test-argument(
-      "s-loader-couch-potato",
-      "a-rotate",
-      degree,
-      $a-rotate
-    );
-    $a-scale: s-test-argument(
-      "s-loader-couch-potato",
-      "a-scale",
-      number,
-      $a-scale
-    );
-  }
 
-  $color: s-color($color);
+  $color: color($color);
+
+  $size: test-argument("sugar.loader-couch-potato", "size", number, $size);
+  $color: test-argument(
+    "sugar.loader-couch-potato",
+    "color",
+    "color|list-color",
+    $color
+  );
+  $a-duration: test-argument(
+    "sugar.loader-couch-potato",
+    "a-duration",
+    second,
+    $a-duration
+  );
+  $a-delay: test-argument(
+    "sugar.loader-couch-potato",
+    "a-delay",
+    second,
+    $a-delay
+  );
+  $a-ease: test-argument(
+    "sugar.loader-couch-potato",
+    "a-ease",
+    string,
+    $a-ease
+  );
+  $a-rotate: test-argument(
+    "sugar.loader-couch-potato",
+    "a-rotate",
+    degree,
+    $a-rotate
+  );
+  $a-scale: test-argument(
+    "sugar.loader-couch-potato",
+    "a-scale",
+    number,
+    $a-scale
+  );
 
   // handle colors
   $colors: null;
-  @if s-is($color, list-color) and length($color) > 1 {
+  @if is($color, list-color) and list-length($color) > 1 {
     $colors: $color;
   }
 
   $a-duration: $a-duration + $a-delay;
 
-  $a-name: unquote("couch-potato-#{unique-id()}");
+  $a-name: str-unquote("couch-potato-#{str-unique-id()}");
 
   $c: $color;
-  @if $colors and length($colors) == 2 {
-    $c: nth($colors, 1);
+  @if $colors and list-length($colors) == 2 {
+    $c: list-nth($colors, 1);
   }
   &:before {
     display: block;
     width: $size;
     height: $size;
     content: "";
-    @include s-translate(-50%, -50%);
+    @include translate(-50%, -50%);
     background: $c;
     transform-origin: $size/2 $size/2;
     animation: $a-name $a-duration $a-ease 0s infinite;
@@ -101,19 +101,19 @@
       border-radius: 0;
       transform: rotate(0deg) scale(1);
     }
-    #{(100% - percentage($p-delay)) / 2} {
+    #{(100% - math-percentage($p-delay)) / 2} {
       border-radius: 50%;
       transform: rotate($a-rotate / 2) scale($a-scale);
-      @if $colors and length($colors) == 2 {
-        $c: nth($colors, 2);
+      @if $colors and list-length($colors) == 2 {
+        $c: list-nth($colors, 2);
       }
       background: $c;
     }
-    #{100% - percentage($p-delay)} {
+    #{100% - math-percentage($p-delay)} {
       border-radius: 0;
       transform: rotate($a-rotate) scale(1);
-      @if $colors and length($colors) == 2 {
-        $c: nth($colors, 1);
+      @if $colors and list-length($colors) == 2 {
+        $c: list-nth($colors, 1);
       }
       background: $c;
     }

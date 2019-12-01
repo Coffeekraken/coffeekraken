@@ -1,4 +1,5 @@
 /**
+ * @name      background
  * Helper mixin to set a background image
  *
  * @param 			{String} 				[$repeat=null] 				The background-repeat property
@@ -19,7 +20,7 @@
  *
  * @example
  * .my-cool-element {
- * 		\@include s-background(
+ * 		\@include sugar.background(
  * 			$url : 'img/my-cool-image.jpg',
  * 			$size : cover,
  * 			$resolution : 2x 3x 4x
@@ -28,7 +29,7 @@
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@mixin s-background(
+@mixin background(
   $repeat: null,
   $size: null,
   $attachment: null,
@@ -46,74 +47,75 @@
   $resolution: null,
   $position: null
 ) {
-  @if $_sugar-test-arguments {
-    $repeat: s-test-argument(
-      "s-background",
-      "repeat",
-      (repeat, repeat-x, repeat-y, no-repeat),
-      $repeat
-    );
-    $size: s-test-argument(
-      "s-background",
-      "size",
-      (auto, length, cover, contain, initial, inherit),
-      $size
-    );
-    $attachment: s-test-argument(
-      "s-background",
-      "attachment",
-      (scroll, fixed, local, initial, inherit),
-      $attachment
-    );
-    $blend-mode: s-test-argument(
-      "s-background",
-      "blend-mode",
-      (
-        normal,
-        multiply,
-        screen,
-        overlay,
-        darken,
-        lighten,
-        color-dodge,
-        saturation,
-        color,
-        luminosity
-      ),
-      $blend-mode
-    );
-    $clip: s-test-argument(
-      "s-background",
-      "clip",
-      (border-box, padding-box, content-box, initial, inherit),
-      $clip
-    );
-    $origin: s-test-argument(
-      "s-background",
-      "origin",
-      (padding-box, border-box, content-box, initial, inherit),
-      $origin
-    );
-    $url: s-test-argument("s-background", "url", string, $url);
-    $width: s-test-argument("s-background", "width", number, $width);
-    $height: s-test-argument("s-background", "height", number, $height);
-    $resolution: s-test-argument(
-      "s-background",
-      "resolution",
-      "string|list-string",
-      $resolution
-    );
-    $position: s-test-argument("s-background", "position", mixed, $position);
-  }
+  $repeat: test-argument(
+    "sugar.background",
+    "repeat",
+    (repeat, repeat-x, repeat-y, no-repeat),
+    $repeat
+  );
+  $size: test-argument(
+    "sugar.background",
+    "size",
+    (auto, length, cover, contain, initial, inherit),
+    $size
+  );
+  $attachment: test-argument(
+    "sugar.background",
+    "attachment",
+    (scroll, fixed, local, initial, inherit),
+    $attachment
+  );
+  $blend-mode: test-argument(
+    "sugar.background",
+    "blend-mode",
+    (
+      normal,
+      multiply,
+      screen,
+      overlay,
+      darken,
+      lighten,
+      color-dodge,
+      saturation,
+      color,
+      luminosity
+    ),
+    $blend-mode
+  );
+  $clip: test-argument(
+    "sugar.background",
+    "clip",
+    (border-box, padding-box, content-box, initial, inherit),
+    $clip
+  );
+  $origin: test-argument(
+    "sugar.background",
+    "origin",
+    (padding-box, border-box, content-box, initial, inherit),
+    $origin
+  );
+  $url: test-argument("sugar.background", "url", string, $url);
+  $width: test-argument("sugar.background", "width", number, $width);
+  $height: test-argument("sugar.background", "height", number, $height);
+  $resolution: test-argument(
+    "sugar.background",
+    "resolution",
+    "string|list-string|list",
+    $resolution
+  );
+  $position: test-argument("sugar.background", "position", mixed, $position);
 
   // manage resolutions
-  @if index($resolution, "2x") {
+  $x2: false;
+  @if list-index($resolution, 2x) {
     $x2: true;
   }
-  @if index($resolution, "3x") {
+  $x3: false;
+  @if list-index($resolution, 3x) {
     $x3: true;
   }
-  @if index($resolution, "4x") {
+  $x4: false;
+  @if list-index($resolution, 4x) {
     $x4: true;
   }
 
@@ -149,26 +151,26 @@
   }
 
   // resolutions
-  $split: _split($url, ".");
-  $name: nth($split, length($split)-1);
-  @if index($resolution, "2x") and $url {
-    $split: set-nth($split, length($split)-1, #{$name}#{$suffix2x});
-    $url: _join($split, ".");
-    @include s-media($resolution: 2x) {
+  $split: str-split($url, ".");
+  $name: list-nth($split, list-length($split)-1);
+  @if $x2 and $url {
+    $split: list-set-nth($split, list-length($split)-1, #{$name}#{$suffix2x});
+    $url: list-implode($split, ".");
+    @include media($resolution: 2x) {
       background-image: url("#{$url}");
     }
   }
   @if $x3 and $url {
-    $split: set-nth($split, length($split)-1, #{$name}#{$x3});
-    $url: _join($split, ".");
-    @include s-media($resolution: 3x) {
+    $split: list-set-nth($split, list-length($split)-1, #{$name}#{$suffix3x});
+    $url: list-implode($split, ".");
+    @include media($resolution: 3x) {
       background-image: url("#{$url}");
     }
   }
   @if $x4 and $url {
-    $split: set-nth($split, length($split)-1, #{$name}#{$x4});
-    $url: _join($split, ".");
-    @include s-media($resolution: 4x) {
+    $split: list-set-nth($split, list-length($split)-1, #{$name}#{$suffix4x});
+    $url: list-implode($split, ".");
+    @include media($resolution: 4x) {
       background-image: url("#{$url}");
     }
   }

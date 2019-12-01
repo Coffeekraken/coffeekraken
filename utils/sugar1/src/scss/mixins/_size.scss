@@ -13,18 +13,18 @@
  */
 @mixin size($size-width, $height: null, $position: absolute) {
     @if type-of($size-width) != number {
-      $size-width: s-test-argument(
-        "s-size",
+      $size-width: test-argument(
+        "sugar.size",
         "size-width",
         (cover, contain, fit),
         $size-width
       );
     } @else {
-      $size-width: s-test-argument("s-size", "size-width", number, $size-width);
+      $size-width: test-argument("sugar.size", "size-width", number, $size-width);
     }
-    $height: s-test-argument("s-size", "height", "number|null", $height);
-    $position: s-test-argument(
-      "s-size",
+    $height: test-argument("sugar.size", "height", "number|null", $height);
+    $position: test-argument(
+      "sugar.size",
       "position",
       (relative, absolute),
       $position
@@ -51,11 +51,7 @@
       left: 0;
     }
   } @else if
-    type-of($size-width) ==
-    number and
-    unitless($size-width) and
-    $size-width <
-    1
+    type-of($size-width) == number and unitless($size-width) and $size-width < 1
   {
     @include s-ratio($size-width);
   } @else {

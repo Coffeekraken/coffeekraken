@@ -1,5 +1,7 @@
 /**
+ * @name      columns-map
  * Return the Map representation of a columns properties
+ *
  * @param  		{Interger} 			[$count=null] 			The number of columns
  * @param 		{Number} 			[$gap=null] 			The gap width between each columns
  * @param 		{String} 			[$fill=null] 			The fill property (balance,auto,initial,inherit)
@@ -12,7 +14,7 @@
  * @return 		{Map} 										The map representation or the columns properties
  *
  * @example
- * s-columns-map(2, 20px);
+ * sugar.columns-map(2, 20px);
  * // return
  * // (
  * // 	column-count : 2,
@@ -21,7 +23,7 @@
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@function s-columns-map(
+@function columns-map(
   $count: null,
   $gap: null,
   $fill: null,
@@ -32,50 +34,48 @@
   $rule-color: null,
   $rule-width: null
 ) {
-  @if $_sugar-test-arguments {
-    $fill: s-test-argument(
-      "s-columns-map",
-      "fill",
-      (balance, auto, initial, inherit),
-      $fill
-    );
-    $rule-style: s-test-argument(
-      "s-columns-map",
-      "rule-style",
-      (
-        none,
-        hidden,
-        dotted,
-        dashed,
-        solid,
-        double,
-        groove,
-        ridge,
-        inset,
-        outset,
-        initial,
-        inherit
-      ),
-      $rule-style
-    );
-    $count: s-test-argument("s-columns-map", "count", integer, $count);
-    $gap: s-test-argument("s-columns-map", "gap", number, $gap);
-    $width: s-test-argument("s-columns-map", "width", number, $width);
-    $span: s-test-argument("s-columns-map", "span", number, $span);
-    $rule-color: s-test-argument(
-      "s-columns-map",
-      "rule-color",
-      color,
-      $rule-color
-    );
-    $rule-width: s-test-argument(
-      "s-columns-map",
-      "rule-width",
-      number,
-      $rule-width
-    );
-    $rule: s-test-argument("s-columns-map", "rule", mixed, $rule);
-  }
+  $fill: test-argument(
+    "sugar.columns-map",
+    "fill",
+    (balance, auto, initial, inherit),
+    $fill
+  );
+  $rule-style: test-argument(
+    "sugar.columns-map",
+    "rule-style",
+    (
+      none,
+      hidden,
+      dotted,
+      dashed,
+      solid,
+      double,
+      groove,
+      ridge,
+      inset,
+      outset,
+      initial,
+      inherit
+    ),
+    $rule-style
+  );
+  $count: test-argument("sugar.columns-map", "count", integer, $count);
+  $gap: test-argument("sugar.columns-map", "gap", number, $gap);
+  $width: test-argument("sugar.columns-map", "width", number, $width);
+  $span: test-argument("sugar.columns-map", "span", number, $span);
+  $rule-color: test-argument(
+    "sugar.columns-map",
+    "rule-color",
+    color,
+    $rule-color
+  );
+  $rule-width: test-argument(
+    "sugar.columns-map",
+    "rule-width",
+    number,
+    $rule-width
+  );
+  $rule: test-argument("sugar.columns-map", "rule", mixed, $rule);
 
   $return: ();
 

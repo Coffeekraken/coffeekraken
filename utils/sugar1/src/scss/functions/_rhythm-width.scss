@@ -1,12 +1,13 @@
 /**
+ * @name      rhythm-width
  * Return the Map properties representation for the rhythme width
  * The rhythme width is the width of an element that target a certain number of letters by line
  *
  * @param 			{Integer} 			[$letters-count=settings.typography.line-letters-count] 		The number of letters to target by line
  * @return 			{Map} 																		The Map properties representation
  *
- * @example
- * s-rhythm-width(50);
+ * @example     scss
+ * sugar.rhythm-width(50);
  * // return
  * // (
  * // 	display : block,
@@ -15,8 +16,8 @@
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@function s-rhythm-width(
-  $letters-count: s-setting("typography.line-letters-count")
+@function rhythm-width(
+  $letters-count: setting("typography.line-letters-count")
 ) {
   @if unitless($letters-count) {
     @return (display: block, max-width: $letters-count + ex);

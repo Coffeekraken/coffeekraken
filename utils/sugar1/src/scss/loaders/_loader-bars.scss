@@ -1,4 +1,5 @@
 /**
+ * @name      loader-bars
  * Generate a full animated, single element, bars loader
  *
  * @param 			{String} 			[$shape=rect] 				The shape of the bars (rect,circle)
@@ -19,7 +20,7 @@
  *
  * @example
  * .my-cool-loader {
- * 		\@include s-loader-bars(
+ * 		\@include sugar.loader-bars(
  * 			$color : primary,
  * 			$a-offset : .5em
  * 		);
@@ -27,7 +28,7 @@
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@mixin s-loader-bars(
+@mixin loader-bars(
   $shape: rect,
   $color: s-color(primary),
   $width: 0.5em,
@@ -44,51 +45,49 @@
   $a-direction: both,
   $a-continuous: true
 ) {
-  @if $_sugar-test-arguments {
-    $shape: s-test-argument("s-loader-bars", "shape", (circle, rect), $shape);
-    $color: s-test-argument(
-      "s-loader-bars",
-      "color",
-      "color|list-color",
-      $color
-    );
-    $width: s-test-argument("s-loader-bars", "width", number, $width);
-    $height: s-test-argument("s-loader-bars", "height", number, $height);
-    $count: s-test-argument("s-loader-bars", "count", integer, $count);
-    $gap: s-test-argument("s-loader-bars", "gap", number, $gap);
-    $opacity: s-test-argument("s-loader-bars", "opacity", number, $opacity);
-    $a-opacity: s-test-argument(
-      "s-loader-bars",
-      "a-opacity",
-      number,
-      $a-opacity
-    );
-    $a-duration: s-test-argument(
-      "s-loader-bars",
-      "a-duration",
-      second,
-      $a-duration
-    );
-    $a-delay: s-test-argument("s-loader-bars", "a-delay", second, $a-delay);
-    $a-near: s-test-argument("s-loader-bars", "a-near", integer, $a-near);
-    $a-ease: s-test-argument("s-loader-bars", "a-ease", string, $a-ease);
-    $a-direction: s-test-argument(
-      "s-loader-bars",
-      "a-direction",
-      (up, down, both),
-      $a-direction
-    );
-    $a-continuous: s-test-argument(
-      "s-loader-bars",
-      "a-continuous",
-      boolean,
-      $a-continuous
-    );
-  }
+  $shape: test-argument("sugar.loader-bars", "shape", (circle, rect), $shape);
+  $color: test-argument(
+    "sugar.loader-bars",
+    "color",
+    "color|list-color",
+    $color
+  );
+  $width: test-argument("sugar.loader-bars", "width", number, $width);
+  $height: test-argument("sugar.loader-bars", "height", number, $height);
+  $count: test-argument("sugar.loader-bars", "count", integer, $count);
+  $gap: test-argument("sugar.loader-bars", "gap", number, $gap);
+  $opacity: test-argument("sugar.loader-bars", "opacity", number, $opacity);
+  $a-opacity: test-argument(
+    "sugar.loader-bars",
+    "a-opacity",
+    number,
+    $a-opacity
+  );
+  $a-duration: test-argument(
+    "sugar.loader-bars",
+    "a-duration",
+    second,
+    $a-duration
+  );
+  $a-delay: test-argument("sugar.loader-bars", "a-delay", second, $a-delay);
+  $a-near: test-argument("sugar.loader-bars", "a-near", integer, $a-near);
+  $a-ease: test-argument("sugar.loader-bars", "a-ease", string, $a-ease);
+  $a-direction: test-argument(
+    "sugar.loader-bars",
+    "a-direction",
+    (up, down, both),
+    $a-direction
+  );
+  $a-continuous: test-argument(
+    "sugar.loader-bars",
+    "a-continuous",
+    boolean,
+    $a-continuous
+  );
 
   // handle colors
   $colors: null;
-  @if s-is($color, list-color) and length($color) > 1 {
+  @if is($color, list-color) and list-length($color) > 1 {
     $colors: $color;
   }
 
@@ -108,7 +107,7 @@
   // position grid
   $_width: $width * ($count - 1) + $gap * ($count - 1);
 
-  $a-name: unquote("bars-#{unique-id()}");
+  $a-name: str-unquote("bars-#{str-unique-id()}");
 
   // calculate box shadows
   $shadows: ();
@@ -119,12 +118,12 @@
       $y: $height / 2 + $offset;
       $c: $color;
       @if $colors {
-        $c: nth($colors, $i + 1);
+        $c: list-nth($colors, $i + 1);
       }
       @if $a-opacity {
-        $c: transparentize($color, 1 - $opacity);
+        $c: color-transparentize($color, 1 - $opacity);
       }
-      $shadows: append($shadows, $c $x $y 0 0, comma);
+      $shadows: list-append($shadows, $c $x $y 0 0, comma);
     }
   }
   @if $a-direction == both or $a-direction == down {
@@ -133,12 +132,12 @@
       $y: $height / 2 + $offset;
       $c: $color;
       @if $colors {
-        $c: nth($colors, $i + 1);
+        $c: list-nth($colors, $i + 1);
       }
       @if $a-opacity {
-        $c: transparentize($color, 1 - $opacity);
+        $c: color-transparentize($color, 1 - $opacity);
       }
-      $shadows: append($shadows, $c $x $y 0 0, comma);
+      $shadows: list-append($shadows, $c $x $y 0 0, comma);
     }
   }
   $base-shadows: $shadows;
@@ -153,7 +152,7 @@
     display: block;
     animation: $a-name $a-duration $a-ease 0s infinite;
     box-shadow: $shadows;
-    @include s-translate(
+    @include translate(
       (-$_width / 2 - $width - $gap - $offset),
       (-$height / 2 - $offset)
     );
@@ -172,9 +171,9 @@
   $step: 1 / $count;
   @keyframes #{$a-name} {
     @for $j from 0 through $count {
-      $p: percentage($j * $p-step);
+      $p: math-percentage($j * $p-step);
       @if $a-delay > 0 {
-        $p: percentage($j * $p-step) + percentage($p-step);
+        $p: math-percentage($j * $p-step) + math-percentage($p-step);
       }
       #{$p} {
         // loop on each box shadows
@@ -185,13 +184,13 @@
             $x: ($width * $i + $gap * $i) + $width + $gap + $offset;
             $y: $height / 2 + $offset;
 
-            $diff: abs($j - $i);
+            $diff: math-abs($j - $i);
 
             @if $a-continuous {
               @if $j + $a-near > $count and $i - $a-near < 0 {
-                $diff: abs($i - ($j - $count));
+                $diff: math-abs($i - ($j - $count));
               } @else if $j - $a-near < 0 and $i + $a-near > $count {
-                $diff: abs($j + ($count - $i));
+                $diff: math-abs($j + ($count - $i));
               }
             }
 
@@ -205,7 +204,7 @@
 
             $c: $color;
             @if $colors {
-              $c: nth($colors, $i + 1);
+              $c: list-nth($colors, $i + 1);
             }
             $_opacity: 1;
             @if $a-opacity {
@@ -215,14 +214,14 @@
                   ($a-near - $diff);
                 $o: $opacity + $_opacity;
                 // $transparentize : $_opacity;
-                $c: transparentize($c, 1 - $o);
+                $c: color-transparentize($c, 1 - $o);
               } @else if $opacity {
-                $c: transparentize($c, 1 - $opacity);
+                $c: color-transparentize($c, 1 - $opacity);
               }
             } @else if $opacity {
-              $c: transparentize($c, 1 - $opacity);
+              $c: color-transparentize($c, 1 - $opacity);
             }
-            $shadows: append($shadows, $c $x $y 0 0, comma);
+            $shadows: list-append($shadows, $c $x $y 0 0, comma);
           }
         }
 
@@ -231,12 +230,12 @@
             $x: ($width * $i + $gap * $i) + $width + $gap + $offset;
             $y: $height / 2 + $offset;
 
-            $diff: abs($j - $i);
+            $diff: math-abs($j - $i);
             @if $a-continuous {
               @if $j + $a-near > $count and $i - $a-near < 0 {
-                $diff: abs($i - ($j - $count));
+                $diff: math-abs($i - ($j - $count));
               } @else if $j - $a-near < 0 and $i + $a-near > $count {
-                $diff: abs($j + ($count - $i));
+                $diff: math-abs($j + ($count - $i));
               }
             }
 
@@ -247,7 +246,7 @@
             }
             $c: $color;
             @if $colors {
-              $c: nth($colors, $i + 1);
+              $c: list-nth($colors, $i + 1);
             }
             $_opacity: 1;
             @if $a-opacity {
@@ -257,14 +256,14 @@
                   ($a-near - $diff);
                 $o: $opacity + $_opacity;
                 // $transparentize : $_opacity;
-                $c: transparentize($c, 1 - $o);
+                $c: color-transparentize($c, 1 - $o);
               } @else if $opacity {
-                $c: transparentize($c, 1 - $opacity);
+                $c: color-transparentize($c, 1 - $opacity);
               }
             } @else if $opacity {
-              $c: transparentize($c, 1 - $opacity);
+              $c: color-transparentize($c, 1 - $opacity);
             }
-            $shadows: append($shadows, $c $x $y 0 0, comma);
+            $shadows: list-append($shadows, $c $x $y 0 0, comma);
           }
         }
 
@@ -274,11 +273,11 @@
     }
     @if $a-delay >
       0 and
-      percentage($count * $p-step) +
-      percentage($p-step) <
+      math-percentage($count * $p-step) +
+      math-percentage($p-step) <
       100
     {
-      #{percentage($count * $p-step) + percentage($p-step) * 2} {
+      #{math-percentage($count * $p-step) + math-percentage($p-step) * 2} {
         box-shadow: $base-shadows;
       }
     }

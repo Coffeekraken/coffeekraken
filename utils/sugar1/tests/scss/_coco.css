@@ -1,9 +1,129 @@
 @charset "UTF-8";
 /**
+ * @name    color-hue
+ * Return the hue of the passed color
+ *
+ * @param       {Color}     $color      The color to process
+ * @return      {Number}                The color hue
+ *
+ * @example   scss
+ * sugar.color-hue(#e1d7d2); // => 20deg
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      color-lightness
+ * Return the lightness of the passed color
+ *
+ * @param         {Color}       $color      The color to check
+ * @return        {Number}                  The color lightness
+ *
+ * @example     scss
+ * sugar.color-lightness(#e1d7d2); // => 85.2941176471%
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    color-opacity
+ * Return the opacity of the passed color
+ *
+ * @param       {Color}       $color        The color to prcess
+ * @return      {Number}                    The color opacity
+ *
+ * @example     scss
+ * sugar.color-opacity(#e1d7d2); // => 1
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    color-saturation
+ * Return the saturation of the passed color
+ *
+ * @param       {Color}     $color      The color to process
+ * @return      {Number}                The color saturation
+ *
+ * @example   scss
+ * sugar.color-saturation(#e1d7d2); // => 20%
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    color-transparentize
+ * Makes $color more transparent.
+ * The $amount must be a number between 0 and 1 (inclusive). Decreases the alpha channel of $color by that amount.
+ *
+ * @param       {Color}       $color        The color to process
+ * @param       {Number}      $amount       The amount to transparentize the color. Must be between 0 and 1
+ *
+ * @example       scss
+ * sugar.color-transparentize(rgba(#036, 0.3), 0.3); // => rgba(0, 51, 102, 0)
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
  * Print the styleguide docblocks for the registered sugar colors
  *
  * @example
  * @include sugar.styleguide-colors();
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    border-map
+ * Parse and return the Map respresentation of a border property
+ * The $border argument will be parsed with the [s-parse-properties](../core/functions/_s-parse-properties.scss) function.
+ *
+ * @param 		{List} 			$border 			The border property to parse
+ * @return 		{Map} 								The Map represenration of the border
+ *
+ * @example
+ * sugar.border-map(1px solid white);
+ * // return
+ * // (
+ * // 	width : 1px,
+ * // 	color : white,
+ * // 	style : solid
+ * // )
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      columns-map
+ * Return the Map representation of a columns properties
+ *
+ * @param  		{Interger} 			[$count=null] 			The number of columns
+ * @param 		{Number} 			[$gap=null] 			The gap width between each columns
+ * @param 		{String} 			[$fill=null] 			The fill property (balance,auto,initial,inherit)
+ * @param 		{Number} 			[$width=null] 			The width of the columns
+ * @param 		{Integer|String} 	[$span=null] 			The column-span property (1,all,initial,inherit)
+ * @param 		{List} 				[$rule=null] 			The column-rule property
+ * @param 		{String} 			[$rule-style=null]  	The column-rule-style property
+ * @param 		{Color} 			[$rule-color=null] 		The column-rule-color property
+ * @param 		{Number} 			[$rule-width=null] 		The column-rule-width property
+ * @return 		{Map} 										The map representation or the columns properties
+ *
+ * @example
+ * sugar.columns-map(2, 20px);
+ * // return
+ * // (
+ * // 	column-count : 2,
+ * // 	column-gap : 20px
+ * // )
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      margin-map
+ * Parse and return the Map respresentation of a margin property
+ * The $margin argument will be parsed with the [s-parse-properties](../core/functions/_s-parse-properties.scss) function.
+ *
+ * @param 			{List|Number} 			$margin 			The margin property to parse
+ * @return 			{Map} 										The map representation
+ *
+ * @example   scss
+ * sugar.margin-map(10px); // => ( top:10px, right:10px, bottom:10px, left:10px )
+ * sugar.margin-map(10px 20px); // => ( top:10px, right:20px, bottom:10px, left:20px )
+ * sugar.margin-map(5px 10px 15px 20px); // => ( top:5px, right:10px, bottom:15px, left:20px )
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
@@ -21,12 +141,30 @@
  * @param 		{Number} 			[$left=null] 					The left property wanted
  * @return 		{Map} 												The map representation of the position wanted
  *
- * @example
+ * @example   scss
  * sugar.position-map(absolute, top, right);
  * sugar.position-map(absolute, middle, center);
  * sugar.position-map(relative, bottom, right);
  * sugar.position-map(absolute, bottom, center);
  * // etc...
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      rhythm-width
+ * Return the Map properties representation for the rhythme width
+ * The rhythme width is the width of an element that target a certain number of letters by line
+ *
+ * @param 			{Integer} 			[$letters-count=settings.typography.line-letters-count] 		The number of letters to target by line
+ * @return 			{Map} 																		The Map properties representation
+ *
+ * @example     scss
+ * sugar.rhythm-width(50);
+ * // return
+ * // (
+ * // 	display : block,
+ * // 	max-width : 50ex
+ * // )
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
@@ -47,6 +185,42 @@
  * // )
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      icon-base64
+ * Get an icon in base64 url encoded format
+ * Available icons:
+ * - search
+ * - arrow-down
+ * - arrow-left
+ * - arrow-up
+ * - arrow-right
+ * - angle-down
+ * - angle-up
+ * - angle-left
+ * - angle-right
+ * - check
+ * - cross
+ * - menu
+ * - gear
+ * - list
+ * - refresh
+ * - trash
+ * - share
+ * - edit
+ * - save
+ * - grid
+ * - filter
+ *
+ * @param    {String}    $icon    The icon name wanted
+ * @param    {String}    [$color="default"]    The color wanted
+ *
+ * @example       scss
+ * .my-cool-div {
+ *  background: url(sugar.icon-base64(search));
+ * }
+ *
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /**
  * Append a value to the passed list
@@ -119,6 +293,19 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /**
+ * @name    list-nth
+ * Return the item of the list at the passed index
+ *
+ * @param         {List}        $list         The list to process
+ * @param         {Number}      $index        The index of the element to get in the list
+ * @return        {Mixed}                     The value at the passed index
+ *
+ * @example     scss
+ * sugar.list-nth(('hello','world'), 2); // => 'world'
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
  * Remove the last item of the passed list
  *
  * @param       {List}        $list         The list to process
@@ -163,6 +350,72 @@
  *
  * @example   scss
  * sugar.list-search(('hello', 'world'), 'hello'); // => true
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      loader-bars
+ * Generate a full animated, single element, bars loader
+ *
+ * @param 			{String} 			[$shape=rect] 				The shape of the bars (rect,circle)
+ * @param 			{Color} 			[$color=primary] 			The color(s) of the loader. Can be a list of colors
+ * @param 			{Number} 			[$width=.5em] 				The width of each bars
+ * @param 			{Number} 			[$height=2em] 				The height of each bars
+ * @param 			{Integer} 			[$count=5] 					How many bars you want
+ * @param 			{Number} 			[$gap=.5em] 				The gap between each bars
+ * @param 			{Number} 			[$opacity=1] 				The initial opacity of each bars
+ * @param 			{Number} 			[$a-opacity=null] 			The opacity of the animated bars
+ * @param 			{Second} 			[$a-duration=1s] 			The overall animation duration
+ * @param 			{Second} 			[$a-delay=0s] 				The delay between two animation cycle
+ * @param 			{Integer} 			[$a-near=1] 				How many bars are affected by the animated one
+ * @param 			{String} 			[$a-ease=ease-in-out] 		The ease to use to animate each bars
+ * @param 			{Number} 			[$a-offset=null] 			The offset to move the animated bar
+ * @param 			{String} 			[$a-direction=both] 		The direction in which to move the bars (up,down,both)
+ * @param 			{Boolean} 			[$a-continuous=true] 		If true, the first bars will be animated at same time at the last ones
+ *
+ * @example
+ * .my-cool-loader {
+ * 		\@include sugar.loader-bars(
+ * 			$color : primary,
+ * 			$a-offset : .5em
+ * 		);
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      loader-circle
+ * Generate a full animated, single element, circle loader
+ *
+ * @param 			{Color} 			[$color=primary] 			The color(s) of the loader. Can be a list of colors
+ * @param 			{Number} 			[$size=.33em] 				The size of each dot
+ * @param 			{Number} 			[$radius=1em] 				The distance of each dot from the center of the loader
+ * @param 			{Integer} 			[$count=5] 					How many bars you want
+ * @param 			{Number} 			[$opacity=1] 				The initial opacity of each bars
+ * @param 			{Number} 			[$a-opacity=null] 			The opacity of the animated bars
+ * @param 			{Second} 			[$a-duration=1s] 			The overall animation duration
+ * @param 			{Second} 			[$a-delay=0s] 				The delay between two animation cycle
+ * @param 			{Integer} 			[$a-near=1] 				How many bars are affected by the animated one
+ * @param 			{String} 			[$a-ease=ease-in-out] 		The ease to use to animate each bars
+ *
+ * @example     scss
+ * .my-cool-loader {
+ *    @include sugar.loader-circle(
+ *      $color: sugar.color(primary)
+ *    );
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      math-abs
+ * Return the absolute version of the passed number
+ *
+ * @param         {Number}        $number       The number to process
+ * @return        {Number}                      The absolute version of the number
+ *
+ * @example     scss
+ * sugar.math-abs(-10); // => 10
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
@@ -248,6 +501,18 @@
  *
  * @example       scss
  * sugar.math-atan(10, deg); // => 84.2988568542deg
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    math-ceil
+ * Rounds $number up to the next highest whole number
+ *
+ * @param       {Number}      $number       The number to process
+ * @return      {Number}                    The up rounded number
+ *
+ * @example     scss
+ * sugar.math-ceil(4.2); // => 5
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
@@ -395,6 +660,30 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /**
+ * @name    math-random
+ * If $limit is null, returns a random decimal number between 0 and 1.
+ *
+ * @param       {Number}      [$limit:null]     The limit to generate a number under that
+ * @return      {Number}                        The generated number
+ *
+ * @example     scss
+ * sugar.math-random(); // => 0.2821251858
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    math-round
+ * Rounds $number to the nearest whole number.
+ *
+ * @param       {Number}      $number       The number to round
+ * @return      {Number}                    The rounded number
+ *
+ * @example     scss
+ * sugar.math-round(4.2); // => 4
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
  * Store the current context
  * @type      {String}
  */
@@ -474,6 +763,65 @@
  * @example
  * sugar.is-unitless(20); // => true
  * sugar.is-unitless(10px); // => false
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * Check if the passed value is of a certain type
+ *
+ * Here's the available types that you can check
+ * - mixed => mean anything
+ * - null
+ * - url
+ * - px
+ * - pt
+ * - rem
+ * - em
+ * - percent | %
+ * - vw
+ * - vh
+ * - ex
+ * - ch
+ * - cm
+ * - mm
+ * - in
+ * - pc
+ * - s | second
+ * - boolean | bool
+ * - function
+ * - number
+ * - int | integer
+ * - string
+ * - color
+ * - list
+ * - map
+ * - deg | degree
+ * - list-{type} => check if is a list of the specified type
+ * - map-{type} => check if is a map of the specified type
+ *
+ * @param 			{Mixed} 			$value 			The value to check
+ * @param 			{String} 			$type 			The type to check
+ * @return 			{Boolean} 							true if match the type, false if not
+ *
+ * @example
+ * sugar.is(hello, string) // => true
+ * sugar.is('hello', string) // => true
+ * sugar.is(#fff, color) // => true
+ * sugar.is(hello #fff, list-color) // => false
+ * sugar.is(#fff #ddd, list-color) // => true
+ * // etc...
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * Return a number without any units
+ *
+ * @param 			{Number} 		$number 		The number to process
+ * @return 			{Number} 						The number without units
+ *
+ * @example
+ * sugar.strip-units(12px); // => 12
+ * sugar.strip-units(30rem); // => 30
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
@@ -658,6 +1006,21 @@
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /**
+ * @name  map-keys
+ * Return a comma separated list of the map keys
+ *
+ * @param       {Map}       $map      The map to process
+ * @return      {List}                The list of map keys
+ *
+ * @example     scss
+ * sugar.map-keys((
+ *  'hello': 'world',
+ *  'coco': 'plop'
+ * )); // => ('hello','coco')
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
  * Merge the first passed map with the second passed one and return the result
  *
  * @param           {Map}         $map1         The first map to extend
@@ -809,6 +1172,20 @@
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /**
+ * @name    translate
+ * Quicky set some translates
+ * @param 		{Number} 		[$x=0] 		The x translate value
+ * @param 		{Number} 		[$y=0] 		The y translate value
+ * @param 		{Number} 		[$z=0] 		The z translate value
+ *
+ * @example     scss
+ * .my-cool-element {
+ * 	\@include sugar.translate(50%, 20px);
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
  * Print out the style to truncate the text if needed
  *
  * @example 	scss
@@ -819,6 +1196,19 @@
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /**
+ * @name      str-index
+ * Returns the first index of $substring in $string, or null if $string doesn’t contain $substring.
+ *
+ * @param       {String}      $string       The string to process
+ * @param       {String}      $substring    The string to search
+ * @return      {Number}                    The index of the finded substring or null if not exist...
+ *
+ * @example      scss
+ * sugar.str-index('Hello world', 'world'); // => 7
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
  * Check if a string is a url or not
  *
  * @param 			{String} 				$url 			The string to check
@@ -826,6 +1216,18 @@
  *
  * @example
  * sugar.str-is-url('Hello world') // false
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    str-length
+ * Return the number of characters in the passed string
+ *
+ * @param       {String}      $string       The string to process
+ * @return      {Number}                    The number of characters that compose the string
+ *
+ * @example     scss
+ * sugar.str-length('hello'); // => 4
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
@@ -843,6 +1245,19 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /**
+ * @name    str-slice
+ * Returns the slice of $string starting at index $start-at and ending at index $end-at (both inclusive).
+ *
+ * @param         {String}        $string         The string to slice
+ * @param         {Number}        $start-at       Where to start slice the string
+ * @param         {Number}        [$end-at=-1]    Where to end to slice the string
+ *
+ * @param       scss
+ * sugar.str-slice('Hello world', 1, 4); // => Hell
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
  * Split a string using a delimiter
  *
  * @param         {String}          $string             The string to split
@@ -851,6 +1266,17 @@
  *
  * @example
  * sugar.str-split('hello.world', '.'); // ('hello', 'world')
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    str-unique-id
+ * Generate a unique id in string format
+ *
+ * @return        {String}          The generated unique id
+ *
+ * @example     scss
+ * sugar.str-unique-id(); // => uabtrnzug
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
@@ -1311,53 +1737,6 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /**
- * Check if the passed value is of a certain type
- *
- * Here's the available types that you can check
- * - mixed => mean anything
- * - null
- * - url
- * - px
- * - pt
- * - rem
- * - em
- * - percent | %
- * - vw
- * - vh
- * - ex
- * - ch
- * - cm
- * - mm
- * - in
- * - pc
- * - s | second
- * - boolean | bool
- * - function
- * - number
- * - int | integer
- * - string
- * - color
- * - list
- * - map
- * - deg | degree
- * - list-{type} => check if is a list of the specified type
- * - map-{type} => check if is a map of the specified type
- *
- * @param 			{Mixed} 			$value 			The value to check
- * @param 			{String} 			$type 			The type to check
- * @return 			{Boolean} 							true if match the type, false if not
- *
- * @example
- * sugar.is(hello, string) // => true
- * sugar.is('hello', string) // => true
- * sugar.is(#fff, color) // => true
- * sugar.is(hello #fff, list-color) // => false
- * sugar.is(#fff #ddd, list-color) // => true
- * // etc...
- *
- * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-/**
  * Alias to the [./_look-and-feel.scss] function
  *
  * Return a settings.look-and-feel stack value
@@ -1587,18 +1966,6 @@
  * .my-cool-section {
  * 		padding : sugar.space(big);
  * }
- *
- * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-/**
- * Return a number without any units
- *
- * @param 			{Number} 		$number 		The number to process
- * @return 			{Number} 						The number without units
- *
- * @example
- * sugar.strip-units(12px); // => 12
- * sugar.strip-units(30rem); // => 30
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
@@ -2449,41 +2816,94 @@
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-.my-cool-element {
-  position: relative;
+/**
+ * Generate a long shadow effect like [this](https://www.google.ch/search?q=long+shadow&espv=2&biw=2560&bih=1316&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjjne6x49LPAhVBHRQKHat8AW8Q_AUIBigB)
+ *
+ * @param 		{Color} 		[$color=rgba(0,0,0,.3)] 			The shadow color
+ * @param 		{String} 		[$type=text] 						The shadow type (text,box)
+ * @param 		{Degree} 		[$angle=135deg] 					The shadow angle
+ * @param 		{Integer} 		[$depth=20] 						The shadow depth
+ * @param 		{Boolean} 		[$fade=false] 						If true, the shadow will fade itself
+ * @param 		{Number} 		[$blur=0] 							The blur amount of the shadow
+ * @param 		{Number} 		[$blur-ratio=0] 					The ratio to blur each depth more
+ *
+ * @example
+ * .my-cool-title {
+ * 		\@include sugar.effect-long-shadow(
+ * 			$depth : 10
+ * 		);
+ * }
+ * .my-cool-box {
+ * 		\@include sugar.effect-long-shadow(
+ * 			$type : box
+ * 		);
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      effect-side-lined
+ * Create side lines around an item
+ *
+ * @param 			{String} 		[$style=solid] 			The line style, same possible values as the border-style property
+ * @param 			{String} 		[$side=both] 			The side where to put lines (left,right,both)
+ * @param 			{Number} 		[$height=1px] 			The lines height
+ * @param 			{Number} 		[$width=50%] 			The width of the lines
+ * @param 			{Color} 		[$color=text]			The color of the lines
+ * @param 			{Number} 		[$padding=0] 			The padding between the lines and the content
+ * @param 			{Number} 		[$offset-top=null] 		The line offset top
+ *
+ * @example
+ * h1 {
+ * 		\@include sugar.effect-side-lined(
+ * 			$padding : 20px,
+ * 			$side : right,
+ * 			$width : 100%
+ * 		);
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+.my-cool-loader {
+  transform: translateX(-50%) translateY(-50%) rotate(-90deg);
 }
-@keyframes s-hey {
-  from {
-    opacity: 1;
+@keyframes circle-u05245p {
+  0% {
+    box-shadow: 1em 0em 0 0em #f2bc2b, 0.7071067812em 0.7071067812em 0 0em #f2bc2b, 0em 1em 0 0em #f2bc2b, -0.7071067812em 0.7071067812em 0 0em #f2bc2b, -0.9999999999em 1.0140913578em 0 0em #f2bc2b, -0.707106771em -0.7071067794em 0 0em #f2bc2b, 5.5374483386em -0.9999998862em 0 0em #f2bc2b, 0.7071230006em -0.7071028877em 0 0em #f2bc2b;
   }
-  to {
-    opacity: 0;
+  12.5% {
+    box-shadow: 1em 0em 0 0em #f2bc2b, 0.7071067812em 0.7071067812em 0 0em #f2bc2b, 0em 1em 0 0em #f2bc2b, -0.7071067812em 0.7071067812em 0 0em #f2bc2b, -0.9999999999em 1.0140913578em 0 0em #f2bc2b, -0.707106771em -0.7071067794em 0 0em #f2bc2b, 5.5374483386em -0.9999998862em 0 0em #f2bc2b, 0.7071230006em -0.7071028877em 0 0em #f2bc2b;
+  }
+  25% {
+    box-shadow: 1em 0em 0 0em #f2bc2b, 0.7071067812em 0.7071067812em 0 0em #f2bc2b, 0em 1em 0 0em #f2bc2b, -0.7071067812em 0.7071067812em 0 0em #f2bc2b, -0.9999999999em 1.0140913578em 0 0em #f2bc2b, -0.707106771em -0.7071067794em 0 0em #f2bc2b, 5.5374483386em -0.9999998862em 0 0em #f2bc2b, 0.7071230006em -0.7071028877em 0 0em #f2bc2b;
+  }
+  37.5% {
+    box-shadow: 1em 0em 0 0em #f2bc2b, 0.7071067812em 0.7071067812em 0 0em #f2bc2b, 0em 1em 0 0em #f2bc2b, -0.7071067812em 0.7071067812em 0 0em #f2bc2b, -0.9999999999em 1.0140913578em 0 0em #f2bc2b, -0.707106771em -0.7071067794em 0 0em #f2bc2b, 5.5374483386em -0.9999998862em 0 0em #f2bc2b, 0.7071230006em -0.7071028877em 0 0em #f2bc2b;
+  }
+  50% {
+    box-shadow: 1em 0em 0 0em #f2bc2b, 0.7071067812em 0.7071067812em 0 0em #f2bc2b, 0em 1em 0 0em #f2bc2b, -0.7071067812em 0.7071067812em 0 0em #f2bc2b, -0.9999999999em 1.0140913578em 0 0em #f2bc2b, -0.707106771em -0.7071067794em 0 0em #f2bc2b, 5.5374483386em -0.9999998862em 0 0em #f2bc2b, 0.7071230006em -0.7071028877em 0 0em #f2bc2b;
+  }
+  62.5% {
+    box-shadow: 1em 0em 0 0em #f2bc2b, 0.7071067812em 0.7071067812em 0 0em #f2bc2b, 0em 1em 0 0em #f2bc2b, -0.7071067812em 0.7071067812em 0 0em #f2bc2b, -0.9999999999em 1.0140913578em 0 0em #f2bc2b, -0.707106771em -0.7071067794em 0 0em #f2bc2b, 5.5374483386em -0.9999998862em 0 0em #f2bc2b, 0.7071230006em -0.7071028877em 0 0em #f2bc2b;
+  }
+  75% {
+    box-shadow: 1em 0em 0 0em #f2bc2b, 0.7071067812em 0.7071067812em 0 0em #f2bc2b, 0em 1em 0 0em #f2bc2b, -0.7071067812em 0.7071067812em 0 0em #f2bc2b, -0.9999999999em 1.0140913578em 0 0em #f2bc2b, -0.707106771em -0.7071067794em 0 0em #f2bc2b, 5.5374483386em -0.9999998862em 0 0em #f2bc2b, 0.7071230006em -0.7071028877em 0 0em #f2bc2b;
+  }
+  87.5% {
+    box-shadow: 1em 0em 0 0em #f2bc2b, 0.7071067812em 0.7071067812em 0 0em #f2bc2b, 0em 1em 0 0em #f2bc2b, -0.7071067812em 0.7071067812em 0 0em #f2bc2b, -0.9999999999em 1.0140913578em 0 0em #f2bc2b, -0.707106771em -0.7071067794em 0 0em #f2bc2b, 5.5374483386em -0.9999998862em 0 0em #f2bc2b, 0.7071230006em -0.7071028877em 0 0em #f2bc2b;
+  }
+  100% {
+    box-shadow: 1em 0em 0 0em #f2bc2b, 0.7071067812em 0.7071067812em 0 0em #f2bc2b, 0em 1em 0 0em #f2bc2b, -0.7071067812em 0.7071067812em 0 0em #f2bc2b, -0.9999999999em 1.0140913578em 0 0em #f2bc2b, -0.707106771em -0.7071067794em 0 0em #f2bc2b, 5.5374483386em -0.9999998862em 0 0em #f2bc2b, 0.7071230006em -0.7071028877em 0 0em #f2bc2b;
   }
 }
-.my-cool-element:before {
+.my-cool-loader:after {
+  border-radius: 50%;
+  width: 0.33em;
+  height: 0.33em;
+  display: block;
   content: "";
-  position: absolute;
-  height: 5px;
-  width: 5px;
-  border-radius: 5px;
-  background-color: #2b3438;
-  top: calc(0% + 2.5px + -10px - 0);
-  right: calc(0% + 2.5px + -10px - 0);
-}
-.my-cool-element:after {
-  content: "";
-  position: absolute;
-  height: 8px;
-  width: 8px;
-  border-radius: 5px;
-  background-color: transparent;
-  border: solid #2b3438;
-  border-width: 1px;
-  boz-sizing: border-box;
-  animation: s-hey 1s 0s ease-in-out infinite normal forwards;
-  position: calc(absolute);
-  top: calc(0% + -10px - 0);
-  right: calc(0% + -10px - 0);
+  box-shadow: #f2bc2b 1em 0em 0 0, #f2bc2b 0.7071067812em 0.7071067812em 0 0, #f2bc2b 0em 1em 0 0, #f2bc2b -0.7071067812em 0.7071067812em 0 0, #f2bc2b -0.9999999999em 1.0140913578em 0 0, #f2bc2b -0.707106771em -0.7071067794em 0 0, #f2bc2b 5.5374483386em -0.9999998862em 0 0, #f2bc2b 0.7071230006em -0.7071028877em 0 0, #f2bc2b 1.000301224em 0.000082741em 0 0;
+  animation: circle-u05245p 1s ease-in-out 0s infinite;
 }
 
 /*# sourceMappingURL=_coco.css.map */

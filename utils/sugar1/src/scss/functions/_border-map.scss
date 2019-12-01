@@ -1,4 +1,5 @@
 /**
+ * @name    border-map
  * Parse and return the Map respresentation of a border property
  * The $border argument will be parsed with the [s-parse-properties](../core/functions/_s-parse-properties.scss) function.
  *
@@ -6,7 +7,7 @@
  * @return 		{Map} 								The Map represenration of the border
  *
  * @example
- * s-border-map(1px solid white);
+ * sugar.border-map(1px solid white);
  * // return
  * // (
  * // 	width : 1px,
@@ -16,8 +17,8 @@
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@function s-border-map($border) {
-  $border: s-parse-properties(
+@function border-map($border) {
+  $border: parse-properties(
     $border,
     (
       width: number,

@@ -1,0 +1,22 @@
+@use 'sass:string';
+/**
+ * @name    str-length
+ * Return the number of characters in the passed string
+ *
+ * @param       {String}      $string       The string to process
+ * @return      {Number}                    The number of characters that compose the string
+ *
+ * @example     scss
+ * sugar.str-length('hello'); // => 4
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function str-length($string) {
+  $string: test-argument(
+    'sugar.str-length',
+    'string',
+    string,
+    $string
+  );
+  @return string.length($string);
+}

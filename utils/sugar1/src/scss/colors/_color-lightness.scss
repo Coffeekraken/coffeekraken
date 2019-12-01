@@ -1,0 +1,22 @@
+@use 'sass:color';
+/**
+ * @name      color-lightness
+ * Return the lightness of the passed color
+ *
+ * @param         {Color}       $color      The color to check
+ * @return        {Number}                  The color lightness
+ *
+ * @example     scss
+ * sugar.color-lightness(#e1d7d2); // => 85.2941176471%
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function color-lightness($color) {
+  $color: test-argument(
+    'sugar.color-lightness',
+    'color',
+    color,
+    $color
+  );
+  @return color.lightness($color);
+}

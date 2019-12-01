@@ -1,4 +1,5 @@
 /**
+ * @name      effect-side-lined
  * Create side lines around an item
  *
  * @param 			{String} 		[$style=solid] 			The line style, same possible values as the border-style property
@@ -11,7 +12,7 @@
  *
  * @example
  * h1 {
- * 		\@include s-side-lined(
+ * 		\@include sugar.effect-side-lined(
  * 			$padding : 20px,
  * 			$side : right,
  * 			$width : 100%
@@ -20,7 +21,7 @@
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@mixin s-side-lined(
+@mixin effect-side-lined(
   $style: solid,
   $side: both,
   $height: 1px,
@@ -29,38 +30,36 @@
   $padding: 0,
   $offset-top: null
 ) {
-  $color: s-color($color);
+  $color: color($color);
 
-  @if $_sugar-test-arguments {
-    $style: s-test-argument(
-      "s-side-lined",
-      "style",
-      none
-        hidden
-        dotted
-        dashed
-        solid
-        double
-        groove
-        ridge
-        inset
-        outset
-        initial
-        inherit,
-      $style
-    );
-    $side: s-test-argument("s-side-lined", "side", left right both, $side);
-    $height: s-test-argument("s-side-lined", "height", number, $height);
-    $width: s-test-argument("s-side-lined", "width", number, $width);
-    $color: s-test-argument("s-side-lined", "color", color, $color);
-    $padding: s-test-argument("s-side-lined", "padding", number, $padding);
-    $offset-top: s-test-argument(
-      "s-side-lined",
-      "offset-top",
-      number,
-      $offset-top
-    );
-  }
+  $style: test-argument(
+    "sugar.effect-side-lined",
+    "style",
+    none
+      hidden
+      dotted
+      dashed
+      solid
+      double
+      groove
+      ridge
+      inset
+      outset
+      initial
+      inherit,
+    $style
+  );
+  $side: test-argument("sugar.effect-side-lined", "side", left right both, $side);
+  $height: test-argument("sugar.effect-side-lined", "height", number, $height);
+  $width: test-argument("sugar.effect-side-lined", "width", number, $width);
+  $color: test-argument("sugar.effect-side-lined", "color", color, $color);
+  $padding: test-argument("sugar.effect-side-lined", "padding", number, $padding);
+  $offset-top: test-argument(
+    "sugar.effect-side-lined",
+    "offset-top",
+    number,
+    $offset-top
+  );
 
   display: block;
   overflow: hidden;

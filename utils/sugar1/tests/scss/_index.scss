@@ -1,12 +1,9 @@
 @use '../../index' as sugar;
 @use 'sass:meta';
 
-.my-cool-element {
- 		@include sugar.effect-hey(
- 			$align : right,
- 			$color : secondary,
- 			$size : 10px,
- 			$offset-top : -10px,
- 			$offset-right : -10px
- 		);
+
+.my-cool-loader {
+    @include sugar.loader-circle(
+      $color: sugar.color(primary)
+    );
  }

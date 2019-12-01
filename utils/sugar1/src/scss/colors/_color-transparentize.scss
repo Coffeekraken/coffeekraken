@@ -1,0 +1,28 @@
+/**
+ * @name    color-transparentize
+ * Makes $color more transparent.
+ * The $amount must be a number between 0 and 1 (inclusive). Decreases the alpha channel of $color by that amount.
+ *
+ * @param       {Color}       $color        The color to process
+ * @param       {Number}      $amount       The amount to transparentize the color. Must be between 0 and 1
+ *
+ * @example       scss
+ * sugar.color-transparentize(rgba(#036, 0.3), 0.3); // => rgba(0, 51, 102, 0)
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function color-transparentize($color, $amount) {
+  $color: test-argument(
+    'sugar.color-transparentize',
+    'color',
+    color,
+    $color
+  );
+  $amount: test-argument(
+    'sugar.color-transparentize',
+    'amount',
+    number,
+    $amount
+  );
+  @return transparentize($color, $amount);
+}

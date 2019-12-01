@@ -12,7 +12,7 @@
  * @param 		{Number} 			[$left=null] 					The left property wanted
  * @return 		{Map} 												The map representation of the position wanted
  *
- * @example
+ * @example   scss
  * sugar.position-map(absolute, top, right);
  * sugar.position-map(absolute, middle, center);
  * sugar.position-map(relative, bottom, right);

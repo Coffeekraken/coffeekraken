@@ -1,5 +1,7 @@
 /**
+ * @name      border-radius
  * Apply some border radius
+ *
  * @param 		{Number} 		[$radius=null] 			The radius to apply globally
  * @param 		{Number} 		[$top=null] 			The radius to apply on top corners
  * @param 		{Number} 		[$right=null] 			The radius to apply on right corners
@@ -13,17 +15,17 @@
  * @example 	scss
  * .my-cool-item {
  * 	// apply on top left and right corners
- * 	\@include s-border-radius(
+ * 	\@include sugar.border-radius(
  * 		$top : 10px;
  * 	);
  * 	// apply on each corners
- * 	\@include s-border-radius(10px);
+ * 	\@include sugar.border-radius(10px);
  * 	// etc...
  * }
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@mixin s-border-radius(
+@mixin border-radius(
   $radius: null,
   $top: null,
   $right: null,
@@ -34,7 +36,7 @@
   $bottom-left: null,
   $bottom-right: null
 ) {
-  @include s-corner(
+  @include corner(
     $radius: $radius,
     $top: $top,
     $right: $right,

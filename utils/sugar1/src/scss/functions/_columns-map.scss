@@ -62,7 +62,7 @@
   $count: test-argument("sugar.columns-map", "count", integer, $count);
   $gap: test-argument("sugar.columns-map", "gap", number, $gap);
   $width: test-argument("sugar.columns-map", "width", number, $width);
-  $span: test-argument("sugar.columns-map", "span", number, $span);
+  $span: test-argument("sugar.columns-map", "span", (none,all,initial,inherit), $span);
   $rule-color: test-argument(
     "sugar.columns-map",
     "rule-color",

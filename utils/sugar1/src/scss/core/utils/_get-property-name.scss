@@ -2,9 +2,12 @@
 /**
  * Return the property name
  *
+ * @param       {String}        $property         The property name to get
+ * @param       {Map}           [$keywords=()]    The
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@function get-property-name($property, $keywords: ()) {
+@function _get-property-name($property, $keywords: ()) {
   @if not $keywords {
     $keywords: ();
   }

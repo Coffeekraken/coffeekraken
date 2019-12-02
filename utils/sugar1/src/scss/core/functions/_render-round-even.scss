@@ -17,6 +17,6 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function render-round-even($value) {
-  $value: meta.call("#{math.unit($value)}", even(to-px($value)));
+  $value: meta.call("#{math.unit($value)}", math-even(to-px($value)));
   @return $value;
 }

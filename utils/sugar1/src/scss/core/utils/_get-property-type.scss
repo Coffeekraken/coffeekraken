@@ -2,7 +2,7 @@
 /**
  * Get the property type
  */
-@function get-property-type($property, $keywords: ()) {
+@function _get-property-type($property, $keywords: ()) {
   @if not $keywords {
     $keywords: ();
   }

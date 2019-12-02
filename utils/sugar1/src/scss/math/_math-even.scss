@@ -1,14 +1,18 @@
 @use "sass:math";
 
 /**
+ * @name      math-even
  * Convert the passed value to the closest even value
  *
  * @param 			{Number} 		$value 		The value to convert
  * @return 			{Number} 					The closest even converted value
  *
+ * @example     scss
+ * sugar.math-even(9); // => 10
+ *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@function even($value) {
+@function math-even($value) {
   $d: strip-units($value % 2);
   $value: math.round($value);
   @if strip-units($value) % 2 != 0 {

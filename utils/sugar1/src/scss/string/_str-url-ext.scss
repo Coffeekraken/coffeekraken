@@ -22,7 +22,7 @@
    // split
    $split: str-split($url, ".");
    // get the last item
-   $last: last-nth($split);
+   $last: list-last-nth($split);
    @if string.length($last) <= 5 and list.length($split) >= 2 {
      @return $last;
    } @else {

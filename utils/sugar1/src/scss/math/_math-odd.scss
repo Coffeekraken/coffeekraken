@@ -1,13 +1,17 @@
 @use "sass:math";
 /**
+ * @name      math-odd
  * Convert the passed value to the closest odd value
  *
  * @param 			{Number} 		$value 		The value to convert
  * @return 			{Number} 					The closest odd converted value
  *
+ * @example     scss
+ * sugar.math-odd(10); // => 9
+ *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@function odd($value) {
+@function math-odd($value) {
   $dec: strip-units($value % 2);
   $value: math.round($value);
   @if strip-units($value) % 2 == 0 {

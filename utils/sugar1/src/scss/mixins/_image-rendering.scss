@@ -1,15 +1,23 @@
 /**
+ * @name      image-rendering
  * Set how to render the image
+ *
  * @param 		{String} 		[$mode=auto] 		The mode to use to render the image
  *
  * @example 	scss
  * img {
- * 	\@include s-image-rendering(crips-edges);
+ * 	\@include sugar.mage-rendering(crips-edges);
  * }
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@mixin s-image-rendering($mode: auto) {
+@mixin image-rendering($mode: auto) {
+  $mode: test-argument(
+    'sugar.image-rendering',
+    'mode',
+    (crisp-edges, auto),
+    $mode
+  );
   @if ($mode == crisp-edges) {
     -ms-interpolation-mode: nearest-neighbor; // IE8+
     image-rendering: -moz-crisp-edges;

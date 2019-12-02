@@ -562,12 +562,12 @@
  * @type      {String}
  */
 /**
- * Store the component name setted by the sugar.component-name mixin
- * @type      {String}
- */
-/**
  * Store the current registered font size
  * @type      {Number}
+ */
+/**
+ * Store all the registered svg icons
+ * @type      {Map}
  */
 /**
  * Stpre aéé the classes in their namespaces
@@ -598,12 +598,12 @@
  * @type      {String}
  */
 /**
- * Store the component name setted by the sugar.component-name mixin
- * @type      {String}
- */
-/**
  * Store the current registered font size
  * @type      {Number}
+ */
+/**
+ * Store all the registered svg icons
+ * @type      {Map}
  */
 /**
  * Stpre aéé the classes in their namespaces
@@ -659,12 +659,12 @@
  * @type      {String}
  */
 /**
- * Store the component name setted by the sugar.component-name mixin
- * @type      {String}
- */
-/**
  * Store the current registered font size
  * @type      {Number}
+ */
+/**
+ * Store all the registered svg icons
+ * @type      {Map}
  */
 /**
  * Stpre aéé the classes in their namespaces
@@ -695,12 +695,12 @@
  * @type      {String}
  */
 /**
- * Store the component name setted by the sugar.component-name mixin
- * @type      {String}
- */
-/**
  * Store the current registered font size
  * @type      {Number}
+ */
+/**
+ * Store all the registered svg icons
+ * @type      {Map}
  */
 /**
  * Stpre aéé the classes in their namespaces
@@ -738,6 +738,18 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /**
+ * @name      math-even
+ * Convert the passed value to the closest even value
+ *
+ * @param 			{Number} 		$value 		The value to convert
+ * @return 			{Number} 					The closest even converted value
+ *
+ * @example     scss
+ * sugar.math-even(9); // => 10
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
  * @name      math-fact
  * Returns the factorial of desired number
  *
@@ -758,6 +770,18 @@
  *
  * @example     scss
  * sugar.math-grad(10); // => 636.6197723675grad
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      math-odd
+ * Convert the passed value to the closest odd value
+ *
+ * @param 			{Number} 		$value 		The value to convert
+ * @return 			{Number} 					The closest odd converted value
+ *
+ * @example     scss
+ * sugar.math-odd(10); // => 9
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
@@ -826,12 +850,12 @@
  * @type      {String}
  */
 /**
- * Store the component name setted by the sugar.component-name mixin
- * @type      {String}
- */
-/**
  * Store the current registered font size
  * @type      {Number}
+ */
+/**
+ * Store all the registered svg icons
+ * @type      {Map}
  */
 /**
  * Stpre aéé the classes in their namespaces
@@ -889,6 +913,71 @@
  *
  * @example     scss
  * sugar.math-turn(10); // => 1.5915494309turn
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * Store the current context
+ * @type      {String}
+ */
+/**
+ * Store the current registered font size
+ * @type      {Number}
+ */
+/**
+ * Store all the registered svg icons
+ * @type      {Map}
+ */
+/**
+ * Stpre aéé the classes in their namespaces
+ * @type      (Map)
+ */
+/**
+ * Some variables used in the math functions
+ */
+/**
+ * Store all the settings
+ * @type      {Map}
+ */
+/**
+ * @name      convert
+ * Convert a passed value to the wanted unit
+ * The conversion between some units that depends on a font-size will take the settings.typography.font-size value as reference.
+ *
+ * Available conversions
+ * - from px
+ * 	- to em
+ * 	- to rem
+ * 	- to pt
+ * 	- to %
+ *
+ * - from em
+ * 	- to rem
+ * 	- to px
+ * 	- to pt
+ * 	- to %
+ *
+ * - from pt
+ * 	- to em
+ * 	- to rem
+ * 	- to px
+ * 	- to pt
+ * 	- to %
+ *
+ * - from rem
+ * 	- to em
+ * 	- to px
+ * 	- to pt
+ * 	- to %
+ *
+ * @param 			{Number} 		$value 			The value to convert
+ * @param 			{String} 		$unit 			The unit in which to convert the value
+ * @return 			{Number} 						The converted value
+ *
+ * @example
+ * // if the settings.typography.font-size === 16px
+ * sugar.convert(24px, rem) // 1.5rem
+ * sugar.convert(3rem, pt) // 36pt
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
@@ -964,6 +1053,84 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /**
+ * @name    to-base64-url
+ * Convert the passed svg code to an embadable base64 url
+ *
+ * @param       {String}        $svg        The svg code to convert
+ * @return      {String}                    The embedable converted base64 url
+ *
+ * @example       scss
+ * sugar.to-base64-url('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.822 18.096c-3.439-.794-6.641-1.49-5.09-4.418 4.719-8.912 1.251-13.678-3.732-13.678-5.081 0-8.464 4.949-3.732 13.678 1.597 2.945-1.725 3.641-5.09 4.418-2.979.688-3.178 2.143-3.178 4.663l.005 1.241h10.483l.704-3h1.615l.704 3h10.483l.005-1.241c.001-2.52-.198-3.975-3.177-4.663zm-8.231 1.904h-1.164l-.91-2h2.994l-.92 2z"/></svg>');
+ * // url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M20.822 18.096c-3.439-.794-6.641-1.49-5.09-4.418 4.719-8.912 1.251-13.678-3.732-13.678-5.081 0-8.464 4.949-3.732 13.678 1.597 2.945-1.725 3.641-5.09 4.418-2.979.688-3.178 2.143-3.178 4.663l.005 1.241h10.483l.704-3h1.615l.704 3h10.483l.005-1.241c.001-2.52-.198-3.975-3.177-4.663zm-8.231 1.904h-1.164l-.91-2h2.994l-.92 2z'/%3E%3C/svg%3E")
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      to-base64
+ * Convert the passed svg code to base64 embedable url
+ *
+ * @param       {String}        $svg        The svg code to convert
+ * @return      {String}                    The base64 converted url code
+ *
+ * @example     scss
+ * sugar.to-base64('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.822 18.096c-3.439-.794-6.641-1.49-5.09-4.418 4.719-8.912 1.251-13.678-3.732-13.678-5.081 0-8.464 4.949-3.732 13.678 1.597 2.945-1.725 3.641-5.09 4.418-2.979.688-3.178 2.143-3.178 4.663l.005 1.241h10.483l.704-3h1.615l.704 3h10.483l.005-1.241c.001-2.52-.198-3.975-3.177-4.663zm-8.231 1.904h-1.164l-.91-2h2.994l-.92 2z"/></svg>');
+ * // url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M20.822 18.096c-3.439-.794-6.641-1.49-5.09-4.418 4.719-8.912 1.251-13.678-3.732-13.678-5.081 0-8.464 4.949-3.732 13.678 1.597 2.945-1.725 3.641-5.09 4.418-2.979.688-3.178 2.143-3.178 4.663l.005 1.241h10.483l.704-3h1.615l.704 3h10.483l.005-1.241c.001-2.52-.198-3.975-3.177-4.663zm-8.231 1.904h-1.164l-.91-2h2.994l-.92 2z'/%3E%3C/svg%3E")
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * Convert the passed value to em
+ *
+ * @param 			{Number} 		$value 		The value to convert
+ * @return 			{Number} 					The em converted value
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * Convert the passed value to %
+ *
+ * @param 			{Number} 		$value 		The value to convert
+ * @return 			{Number} 					The % converted value
+ *
+ * @example
+ * sugar.to-percent(10px);
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * Convert the passed value to pt
+ *
+ * @param 			{Number} 		$value 		The value to convert
+ * @return 			{Number} 					The pt converted value
+ *
+ * @example
+ * sugar.to-pt(10px);
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * Convert the passed value to px
+ *
+ * @param 			{Number} 		$value 		The value to convert
+ * @return 			{Number} 					The px converted value
+ *
+ * @example
+ * sugar.to-px(10rem);
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * Convert the passed value to rem
+ *
+ * @param 			{Number} 		$value 		The value to convert
+ * @return 			{Number} 					The rem converted value
+ *
+ * @example
+ * sugar.to-rem(10px);
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
  * Get the type of the passed variable
  *
  * @param           {Mixed}         $variable       The variable to get the type of
@@ -1020,12 +1187,12 @@
  * @type      {String}
  */
 /**
- * Store the component name setted by the sugar.component-name mixin
- * @type      {String}
- */
-/**
  * Store the current registered font size
  * @type      {Number}
+ */
+/**
+ * Store all the registered svg icons
+ * @type      {Map}
  */
 /**
  * Stpre aéé the classes in their namespaces
@@ -1254,6 +1421,44 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /**
+ * @name      border-radius
+ * Apply some border radius
+ *
+ * @param 		{Number} 		[$radius=null] 			The radius to apply globally
+ * @param 		{Number} 		[$top=null] 			The radius to apply on top corners
+ * @param 		{Number} 		[$right=null] 			The radius to apply on right corners
+ * @param 		{Number} 		[$bottom=null] 			The radius to apply on bottom corners
+ * @param 		{Number} 		[$left=null] 			The radius to apply on left corners
+ * @param 		{Number} 		[$top-left=null] 		The radius to apply on top-left corners
+ * @param 		{Number} 		[$top-right=null] 		The radius to apply on top-right corners
+ * @param 		{Number} 		[$bottom-left=null] 	The radius to apply on bottom-left corners
+ * @param 		{Number} 		[$bottom-right=null] 	The radius to apply on bottom-right corners
+ *
+ * @example 	scss
+ * .my-cool-item {
+ * 	// apply on top left and right corners
+ * 	\@include sugar.border-radius(
+ * 		$top : 10px;
+ * 	);
+ * 	// apply on each corners
+ * 	\@include sugar.border-radius(10px);
+ * 	// etc...
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name  center-block
+ * Center a block element using margins etc...
+ *
+ * @example 	scss
+ * .my-cool-block-element {
+ * 	\@include sugar.center-block();
+ * }
+ *
+ * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
  * @name 	clearfix
  * Apply a clearfix on the element.
  * Supported methods:
@@ -1267,6 +1472,45 @@
  * @example 	scss
  * .my-cool-element {
  *  \@include sugar.clearfix();
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      coffeekraken-logo
+ * Display a coffeekraken logo with two specified colors
+ *
+ * @param 		{Color} 		[$color=default] 	The base color to use
+ * @param 		{Color} 		[$accent=primary] 	The accent color to use
+ *
+ * @example 	scss
+ * .my-cool-coffeekraken-logo {
+ * 	\@include sugar.coffeekraken-logo();
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    columns
+ * Create a column layout my setting each columns properties at once
+ *
+ * @param 		{Integer} 		[$count=null] 		The number of columns wanted
+ * @param 		{Number} 		[$gap=null] 		The column-gap width wanted
+ * @param 		{String} 		[$fill=null] 		The column-fill wanted
+ * @param 		{Number} 		[$width=null] 		THe width of each columns wanted
+ * @param 		{String} 		[$span=null] 		Specify on how many columns the element has to span across
+ * @param 		{List} 			[$rule=null] 		Specify the shorthand version of the column-rule-color, column-rule-style and column-rule-width
+ * @param 		{String} 		[$rule-style=null] 	Specify the column-rule-style wanted
+ * @param 		{Color} 		[$rule-color=null] 	Specify the column-rule-color wanted
+ * @param 		{Number} 		[$rule-width=null] 	Specify the column-rule-width wanted
+ *
+ * @example 	scss
+ * .my-cool-container {
+ * 	\@include sugar.columns(
+ * 		$count : 3,
+ * 		$gap : 30px,
+ * 		$span : all
+ * 	);
  * }
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -1298,11 +1542,207 @@
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /**
+ * @name      fit
+ * Make the element fit his container.
+ *
+ * @param 	{String} 			[$position=null] 		The position how to fit the element.
+ *
+ * @example 	scss
+ * .my-cool-element {
+ * 	\@include sugar.fit(absolute);
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
  * Hide the contained text
  *
  * @example 	scss
  * .my-cool-container {
  * 	\@include sugar.text-hide();
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/*!
+ * Font Awesome Free 5.11.2 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
+.fa,
+.fas,
+.far,
+.fal,
+.fad,
+.fab,
+.fa-icon {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1;
+}
+
+.fa-icon {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  line-height: 1;
+}
+
+/*!
+ * Font Awesome Free 5.11.2 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
+@font-face {
+  font-family: "Font Awesome 5 Brands";
+  font-style: normal;
+  font-weight: normal;
+  font-display: auto;
+  src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-brands-400.eot");
+  src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-brands-400.eot?#iefix") format("embedded-opentype"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-brands-400.woff2") format("woff2"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-brands-400.woff") format("woff"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-brands-400.ttf") format("truetype"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-brands-400.svg#fontawesome") format("svg");
+}
+.fab, .fa-icon {
+  font-family: "Font Awesome 5 Brands";
+}
+
+/*!
+ * Font Awesome Free 5.11.2 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
+@font-face {
+  font-family: "Font Awesome 5 Free";
+  font-style: normal;
+  font-weight: 400;
+  font-display: auto;
+  src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-regular-400.eot");
+  src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-regular-400.eot?#iefix") format("embedded-opentype"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-regular-400.woff2") format("woff2"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-regular-400.woff") format("woff"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-regular-400.ttf") format("truetype"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-regular-400.svg#fontawesome") format("svg");
+}
+.far {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 400;
+}
+
+/*!
+ * Font Awesome Free 5.11.2 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
+@font-face {
+  font-family: "Font Awesome 5 Free";
+  font-style: normal;
+  font-weight: 900;
+  font-display: auto;
+  src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-solid-900.eot");
+  src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-solid-900.eot?#iefix") format("embedded-opentype"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-solid-900.woff2") format("woff2"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-solid-900.woff") format("woff"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-solid-900.ttf") format("truetype"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-solid-900.svg#fontawesome") format("svg");
+}
+.fa,
+.fas {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+
+/**
+ * Store the current context
+ * @type      {String}
+ */
+/**
+ * Store the current registered font size
+ * @type      {Number}
+ */
+/**
+ * Store all the registered svg icons
+ * @type      {Map}
+ */
+/**
+ * Stpre aéé the classes in their namespaces
+ * @type      (Map)
+ */
+/**
+ * Some variables used in the math functions
+ */
+/**
+ * Store all the settings
+ * @type      {Map}
+ */
+/**
+ * @name      icon
+ * Apply an icon on the element. This mixin support font-awesome and custom icons systems that have an icon name formated like "icon-{name}"
+ * The custom icon style if you pass as name "user" will extend %icon, %icon-user, .icon and .icon-user classes
+ *
+ * @param 		{String} 		$name 		The icon name to apply
+ * @param     {Color}     [$color=null]    The color wanted for the icon
+ *
+ * @example 	scss
+ * .my-cool-icon {
+ * 	\@include s-icon(fa-user, primary);
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      input-placeholder
+ * Set the placeholder style for inputs, etc...
+ *
+ * @example 	scss
+ * input, textarea {
+ * 	\@include sugar.input-placeholder() {
+ * 		color : red;
+ * 	}
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      image-rendering
+ * Set how to render the image
+ *
+ * @param 		{String} 		[$mode=auto] 		The mode to use to render the image
+ *
+ * @example 	scss
+ * img {
+ * 	\@include sugar.mage-rendering(crips-edges);
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      list-bullet
+ * Set how the list bullet has to be displayed.
+ *
+ * @param 		{String} 		[$type=null] 				The list type to use. Can be all the list-style-type values
+ * @param 		{Url} 			[$image=null] 				An image url to use as bullet
+ * @param 		{String} 		[$icon=null] 				An icon name to use as bullet. Will use the s-icon mixin under the hood
+ * @param 		{Color} 		[$color=s-color(default)] 	The color to use for the bullet
+ * @param 		{Number} 		[$size=null] 				The size to use for the bullet
+ * @param 		{Number|List<Number>} 	[$offset=null] 		A number that represent the top offset, or a list of two numbers that represent the top, left offset
+ * @param 		{String} 		[$font=null] 				The font name to use for the bullet
+ * @param 		{Number} 		[$space=null] 				The space between the bullet and the content
+ *
+ * @example 	scss
+ * .my-cool-list__item {
+ * 	@\include sugar.list-bullet(
+ * 		$image : '../img/my-cool-bullet.svg',
+ * 		$offset : 5px 10px,
+ * 		$size : 1em,
+ * 		$space : 2em
+ * 	);
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    list
+ * Start a new list
+ *
+ * @param 		{String} 		[$counter-reset=s-list] 		A counter name to reset
+ *
+ * @example     scss
+ * .my-cool-list {
+ *    sugar.list();
  * }
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -1341,6 +1781,35 @@
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /**
+ * @name      position
+ * Set a complexe position styling like position:absolute; top:0; left:100%; etc...
+ * This mixin gives you some shortcuts to align your element top, bottom, middle, center, etc...
+ *
+ * @param 		{String} 			[$position=absolute] 			The position css property
+ * @param 		{String} 			[$vertical-align=top] 			The vertical alignement wanted (top,middle,bottom)
+ * @param 		{String} 			[$align=left] 					The horizontal alignement wanted (left,center,right)
+ * @param 		{Number} 			[$top=null] 					The top property wanted
+ * @param 		{Number} 			[$right=null] 					The right property wanted
+ * @param 		{Number} 			[$bottom=null] 					The bottom property wanted
+ * @param 		{Number} 			[$left=null] 					The left property wanted
+ * @return 		{Map} 												The map representation of the position wanted
+ *
+ * @example
+ * .my-cool-element {
+ * 	// absolute top right
+ * 	\@include sugar.position(absolute, top, right);
+ * 	// custom right and bottom values
+ * 	\@include sugar.position(absolute,
+ * 		$bottom : 20px,
+ * 		$right : 20px
+ * 	);
+ * 	// etc...
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    ratio
  * Apply a ratio css styling. This will apply a before or after content that will make the element keep the specified ratio.
  * The content need to be displayed as absolute top left and fit in size.
  *
@@ -1352,6 +1821,42 @@
  * }
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * Store the current context
+ * @type      {String}
+ */
+/**
+ * Store the current registered font size
+ * @type      {Number}
+ */
+/**
+ * Store all the registered svg icons
+ * @type      {Map}
+ */
+/**
+ * Stpre aéé the classes in their namespaces
+ * @type      (Map)
+ */
+/**
+ * Some variables used in the math functions
+ */
+/**
+ * Store all the settings
+ * @type      {Map}
+ */
+/**
+ * @name register-svg-icon
+ * Register a new icon to be used as base64 encoded url.
+ * If you want your icon to be colorable, you need to specify this code on your paths: `style="fill:%color"`
+ *
+ * @param    {String}    $name    The icon name
+ * @param    {String}    $svgCode    The icons svg code
+ *
+ * @example     scss
+ * @include sugar.register-svg-icon(user, 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjwhRE9DVFlQRSBzdmcgIFBVQkxJQyAnLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4nICAnaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkJz48c3ZnIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDUwIDUwIiBoZWlnaHQ9IjUwcHgiIGlkPSJMYXllcl8xIiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA1MCA1MCIgd2lkdGg9IjUwcHgiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxjaXJjbGUgY3g9IjI1IiBjeT0iMjUiIGZpbGw9Im5vbmUiIHI9IjI0IiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBzdHJva2Utd2lkdGg9IjIiLz48cmVjdCBmaWxsPSJub25lIiBoZWlnaHQ9IjUwIiB3aWR0aD0iNTAiLz48cGF0aCBkPSJNMjkuOTMzLDM1LjUyOGMtMC4xNDYtMS42MTItMC4wOS0yLjczNy0wLjA5LTQuMjFjMC43My0wLjM4MywyLjAzOC0yLjgyNSwyLjI1OS00Ljg4OGMwLjU3NC0wLjA0NywxLjQ3OS0wLjYwNywxLjc0NC0yLjgxOCAgYzAuMTQzLTEuMTg3LTAuNDI1LTEuODU1LTAuNzcxLTIuMDY1YzAuOTM0LTIuODA5LDIuODc0LTExLjQ5OS0zLjU4OC0xMi4zOTdjLTAuNjY1LTEuMTY4LTIuMzY4LTEuNzU5LTQuNTgxLTEuNzU5ICBjLTguODU0LDAuMTYzLTkuOTIyLDYuNjg2LTcuOTgxLDE0LjE1NmMtMC4zNDUsMC4yMS0wLjkxMywwLjg3OC0wLjc3MSwyLjA2NWMwLjI2NiwyLjIxMSwxLjE3LDIuNzcxLDEuNzQ0LDIuODE4ICBjMC4yMiwyLjA2MiwxLjU4LDQuNTA1LDIuMzEyLDQuODg4YzAsMS40NzMsMC4wNTUsMi41OTgtMC4wOTEsNC4yMWMtMS4yNjEsMy4zOS03LjczNywzLjY1NS0xMS40NzMsNi45MjQgIGMzLjkwNiwzLjkzMywxMC4yMzYsNi43NDYsMTYuOTE2LDYuNzQ2czE0LjUzMi01LjI3NCwxNS44MzktNi43MTNDMzcuNjg4LDM5LjE4NiwzMS4xOTcsMzguOTMsMjkuOTMzLDM1LjUyOHoiLz48L3N2Zz4=');
+ *
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /**
  * Hide an element only visually. This ensure that the element is still correctly displayed in the page for SEO
@@ -1533,12 +2038,12 @@
  * @type      {String}
  */
 /**
- * Store the component name setted by the sugar.component-name mixin
- * @type      {String}
- */
-/**
  * Store the current registered font size
  * @type      {Number}
+ */
+/**
+ * Store all the registered svg icons
+ * @type      {Map}
  */
 /**
  * Stpre aéé the classes in their namespaces
@@ -1562,6 +2067,17 @@
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /**
+ * Return the property name
+ *
+ * @param       {String}        $property         The property name to get
+ * @param       {Map}           [$keywords=()]    The
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * Get the property type
+ */
+/**
  * Return the color in a modifier list
  * @param 			{List} 			$modifiers 		The modifiers list
  * @return 			{String} 						The color name
@@ -1576,52 +2092,12 @@
  * @type      {String}
  */
 /**
- * Store the component name setted by the sugar.component-name mixin
- * @type      {String}
- */
-/**
  * Store the current registered font size
  * @type      {Number}
  */
 /**
- * Stpre aéé the classes in their namespaces
- * @type      (Map)
- */
-/**
- * Some variables used in the math functions
- */
-/**
- * Store all the settings
+ * Store all the registered svg icons
  * @type      {Map}
- */
-/**
- * Return the name of the top level component setted with the [../mixins/_component.scss] mixin
- *
- * @param 			{String} 			[$default=null] 		The name to return if no top component name exist
- * @return 			{String} 									The component name
- *
- * @example
- * sugar.component('hello') // => 'hello'
- * \@include sugar.component('my-component') {
- * 		sugar.component('hello') // => 'my-component'
- * 		\@include sugar.component('another-component') {
- * 			sugar.component('hello') // => 'my-component'
- * 		}
- * }
- *
- * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com);
- */
-/**
- * Store the current context
- * @type      {String}
- */
-/**
- * Store the component name setted by the sugar.component-name mixin
- * @type      {String}
- */
-/**
- * Store the current registered font size
- * @type      {Number}
  */
 /**
  * Stpre aéé the classes in their namespaces
@@ -1654,70 +2130,6 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com);
  */
 /**
- * Store the current context
- * @type      {String}
- */
-/**
- * Store the component name setted by the sugar.component-name mixin
- * @type      {String}
- */
-/**
- * Store the current registered font size
- * @type      {Number}
- */
-/**
- * Stpre aéé the classes in their namespaces
- * @type      (Map)
- */
-/**
- * Some variables used in the math functions
- */
-/**
- * Store all the settings
- * @type      {Map}
- */
-/**
- * Convert a passed value to the wanted unit
- * The conversion between some units that depends on a font-size will take the settings.typography.font-size value as reference.
- *
- * Available conversions
- * - from px
- * 	- to em
- * 	- to rem
- * 	- to pt
- * 	- to %
- *
- * - from em
- * 	- to rem
- * 	- to px
- * 	- to pt
- * 	- to %
- *
- * - from pt
- * 	- to em
- * 	- to rem
- * 	- to px
- * 	- to pt
- * 	- to %
- *
- * - from rem
- * 	- to em
- * 	- to px
- * 	- to pt
- * 	- to %
- *
- * @param 			{Number} 		$value 			The value to convert
- * @param 			{String} 		$unit 			The unit in which to convert the value
- * @return 			{Number} 						The converted value
- *
- * @example
- * // if the settings.typography.font-size === 16px
- * sugar.convert(24px, rem) // 1.5rem
- * sugar.convert(3rem, pt) // 36pt
- *
- * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-/**
  * Transform a dash notation value into a map
  * Dash notation value is : -key1 value1 -key2 value2
  *
@@ -1731,22 +2143,6 @@
  * // 	hello : world,
  * // 	coco : universe
  * // )
- *
- * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-/**
- * Convert the passed value to em
- *
- * @param 			{Number} 		$value 		The value to convert
- * @return 			{Number} 					The em converted value
- *
- * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-/**
- * Convert the passed value to the closest even value
- *
- * @param 			{Number} 		$value 		The value to convert
- * @return 			{Number} 					The closest even converted value
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
@@ -1874,14 +2270,6 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /**
- * Return the property name
- *
- * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-/**
- * Get the property type
- */
-/**
  * Check if the provided color is a registered one or not
  * @param 		{String} 		$color 		The color nane to check
  * @return 		{Boolean} 					True if exists, false if not
@@ -1988,14 +2376,6 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /**
- * Convert the passed value to the closest odd value
- *
- * @param 			{Number} 		$value 		The value to convert
- * @return 			{Number} 					The closest odd converted value
- *
- * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-/**
  * Parse a given string/list properties and return the Map corresponding to the Map description
  *
  * @param 				{List} 				$properties 			The properties to parse
@@ -2015,50 +2395,6 @@
  * // 	myString : hello,
  * // 	delay : 20s
  * // )
- *
- * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-/**
- * Convert the passed value to %
- *
- * @param 			{Number} 		$value 		The value to convert
- * @return 			{Number} 					The % converted value
- *
- * @example
- * sugar.to-percent(10px);
- *
- * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-/**
- * Convert the passed value to pt
- *
- * @param 			{Number} 		$value 		The value to convert
- * @return 			{Number} 					The pt converted value
- *
- * @example
- * sugar.to-pt(10px);
- *
- * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-/**
- * Convert the passed value to px
- *
- * @param 			{Number} 		$value 		The value to convert
- * @return 			{Number} 					The px converted value
- *
- * @example
- * sugar.to-px(10rem);
- *
- * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-/**
- * Convert the passed value to rem
- *
- * @param 			{Number} 		$value 		The value to convert
- * @return 			{Number} 					The rem converted value
- *
- * @example
- * sugar.to-rem(10px);
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
@@ -2138,12 +2474,12 @@
  * @type      {String}
  */
 /**
- * Store the component name setted by the sugar.component-name mixin
- * @type      {String}
- */
-/**
  * Store the current registered font size
  * @type      {Number}
+ */
+/**
+ * Store all the registered svg icons
+ * @type      {Map}
  */
 /**
  * Stpre aéé the classes in their namespaces
@@ -2283,35 +2619,6 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /**
- * Store the current context
- * @type      {String}
- */
-/**
- * Store the component name setted by the sugar.component-name mixin
- * @type      {String}
- */
-/**
- * Store the current registered font size
- * @type      {Number}
- */
-/**
- * Stpre aéé the classes in their namespaces
- * @type      (Map)
- */
-/**
- * Some variables used in the math functions
- */
-/**
- * Store all the settings
- * @type      {Map}
- */
-/**
- * Return the unit context if has been set by the [unit-context mixin](../mixins/unit-context.scss)
- *
- * @return 		{String} 				The unit context setted
- * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-/**
  * Return the vertical-rhythm setting scope class
  *
  * @return 		{String} 		The vertical-rhythm scope class from settings.vertical-rhythm.scope-class
@@ -2343,12 +2650,12 @@
  * @type      {String}
  */
 /**
- * Store the component name setted by the sugar.component-name mixin
- * @type      {String}
- */
-/**
  * Store the current registered font size
  * @type      {Number}
+ */
+/**
+ * Store all the registered svg icons
+ * @type      {Map}
  */
 /**
  * Stpre aéé the classes in their namespaces
@@ -2491,51 +2798,12 @@
  * @type      {String}
  */
 /**
- * Store the component name setted by the sugar.component-name mixin
- * @type      {String}
- */
-/**
  * Store the current registered font size
  * @type      {Number}
  */
 /**
- * Stpre aéé the classes in their namespaces
- * @type      (Map)
- */
-/**
- * Some variables used in the math functions
- */
-/**
- * Store all the settings
+ * Store all the registered svg icons
  * @type      {Map}
- */
-/**
- * Set the name of the component that will be handled inside the mixin
- *
- * @param 			{String} 			[$name=null] 			The name of the component to set
- * @param 			{String|Map} 		[$context=null] 		A context name or map to use inside the mixin
- *
- * @example
- * \@include sugar.component('my-component') {
- * 		sugar.component('hello') // => 'my-component'
- * 		\@include sugar.component('another-component') {
- * 			sugar.component('hello') // => 'my-component'
- * 		}
- * }
- *
- * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com);
- */
-/**
- * Store the current context
- * @type      {String}
- */
-/**
- * Store the component name setted by the sugar.component-name mixin
- * @type      {String}
- */
-/**
- * Store the current registered font size
- * @type      {Number}
  */
 /**
  * Stpre aéé the classes in their namespaces
@@ -2575,12 +2843,12 @@
  * @type      {String}
  */
 /**
- * Store the component name setted by the sugar.component-name mixin
- * @type      {String}
- */
-/**
  * Store the current registered font size
  * @type      {Number}
+ */
+/**
+ * Store all the registered svg icons
+ * @type      {Map}
  */
 /**
  * Stpre aéé the classes in their namespaces
@@ -2716,12 +2984,12 @@
  * @type      {String}
  */
 /**
- * Store the component name setted by the sugar.component-name mixin
- * @type      {String}
- */
-/**
  * Store the current registered font size
  * @type      {Number}
+ */
+/**
+ * Store all the registered svg icons
+ * @type      {Map}
  */
 /**
  * Stpre aéé the classes in their namespaces
@@ -2758,12 +3026,12 @@
  * @type      {String}
  */
 /**
- * Store the component name setted by the sugar.component-name mixin
- * @type      {String}
- */
-/**
  * Store the current registered font size
  * @type      {Number}
+ */
+/**
+ * Store all the registered svg icons
+ * @type      {Map}
  */
 /**
  * Stpre aéé the classes in their namespaces
@@ -2800,12 +3068,12 @@
  * @type      {String}
  */
 /**
- * Store the component name setted by the sugar.component-name mixin
- * @type      {String}
- */
-/**
  * Store the current registered font size
  * @type      {Number}
+ */
+/**
+ * Store all the registered svg icons
+ * @type      {Map}
  */
 /**
  * Stpre aéé the classes in their namespaces
@@ -3078,24 +3346,15 @@
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-.my-cool-element {
-  background-size: cover;
-  background-image: url("img/my-cool-image.jpg");
+.icon {
+  background: url("data:image/svg+xml;charset=utf8,%3Csvg style='fill:%23f2bc2b' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M20.822 18.096c-3.439-.794-6.641-1.49-5.09-4.418 4.719-8.912 1.251-13.678-3.732-13.678-5.081 0-8.464 4.949-3.732 13.678 1.597 2.945-1.725 3.641-5.09 4.418-2.979.688-3.178 2.143-3.178 4.663l.005 1.241h10.483l.704-3h1.615l.704 3h10.483l.005-1.241c.001-2.52-.198-3.975-3.177-4.663zm-8.231 1.904h-1.164l-.91-2h2.994l-.92 2z'/%3E%3C/svg%3E");
 }
-@media all and (-webkit-min-device-pixel-ratio: 2), (min-resolution: 320dpi) {
-  .my-cool-element {
-    background-image: url("img/my-cool-image@2x.jpg");
-  }
+
+.fa-icon {
+  color: #f00;
 }
-@media all and (-webkit-min-device-pixel-ratio: 3), (min-resolution: 480dpi) {
-  .my-cool-element {
-    background-image: url("img/my-cool-image@3x.jpg");
-  }
-}
-@media all and (-webkit-min-device-pixel-ratio: 4), (min-resolution: 640dpi) {
-  .my-cool-element {
-    background-image: url("img/my-cool-image@4x.jpg");
-  }
+.fa-icon:before {
+  content: "";
 }
 
 /*# sourceMappingURL=_coco.css.map */

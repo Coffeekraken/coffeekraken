@@ -34,17 +34,17 @@
     // loop on each properties to
     @each $prop, $value in $properties {
       // get the real name
-      $prop: get-property-name($prop, $keywords);
+      $prop: _get-property-name($prop, $keywords);
 
       // if we have a property
       @if $prop {
         // get the type
-        $type: get-property-type($prop, $keywords);
+        $type: _get-property-type($prop, $keywords);
 
         // if we have found, check the type
         @if $type {
           // check the property type with the value
-          @if check-property($prop, $type, $value) {
+          @if _check-property($prop, $type, $value) {
             $new-map: map-set($new-map, $prop, $value);
           }
         }
@@ -65,7 +65,7 @@
         $prop: string.slice($prop, 2);
 
         // get the real name
-        $prop: get-property-name($prop, $keywords);
+        $prop: _get-property-name($prop, $keywords);
 
         // we have a new property
         // need to check if we have already one in memory
@@ -76,10 +76,10 @@
           } @else if list.length($values) == 1 and meta.type-of($values) == list {
             $values: list.nth($values, 1);
           }
-          $type: get-property-type($current_prop, $keywords);
+          $type: _get-property-type($current_prop, $keywords);
 
           // check the property type with the value
-          @if check-property($prop, $type, $values) {
+          @if _check-property($prop, $type, $values) {
             $map: map-set($map, $current_prop, $values);
           }
         }
@@ -94,7 +94,7 @@
           $found: false;
           @each $name, $type in $keywords {
             @if $found == false {
-              @if check-property($name, $type, $prop, true) {
+              @if _check-property($name, $type, $prop, true) {
                 $map: map-set($map, $name, $prop);
                 $keywords: map.remove($keywords, $name);
                 $found: true;
@@ -111,10 +111,10 @@
           } @else if list.length($values) == 1 and meta.type-of($values) == list {
             $values: list.nth($values, 1);
           }
-          $type: get-property-type($current_prop, $keywords);
+          $type: _get-property-type($current_prop, $keywords);
 
           // check the property type with the value
-          @if check-property($current_prop, $type, $values) {
+          @if _check-property($current_prop, $type, $values) {
             $map: map-set($map, $current_prop, $values);
           }
         }
@@ -126,10 +126,10 @@
       } @else if list.length($values) == 1 and meta.type-of($values) == list {
         $values: list.nth($values, 1);
       }
-      $type: get-property-type($current_prop, $keywords);
+      $type: _get-property-type($current_prop, $keywords);
 
       // check the property type with the value
-      @if check-property($current_prop, $type, $values) {
+      @if _check-property($current_prop, $type, $values) {
         $map: map-set($map, $current_prop, $values);
       }
     }

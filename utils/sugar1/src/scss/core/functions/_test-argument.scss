@@ -55,7 +55,7 @@
       // if its a list of values, check each values
       @if meta.type-of($value) == list {
         @each $v in $value {
-          @if not _s-check-property($argument, $type-or-values, $v, true) {
+          @if not _check-property($argument, $type-or-values, $v, true) {
             @return false;
           }
         }

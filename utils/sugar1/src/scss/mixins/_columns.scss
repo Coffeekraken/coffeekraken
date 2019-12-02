@@ -1,5 +1,7 @@
 /**
+ * @name    columns
  * Create a column layout my setting each columns properties at once
+ *
  * @param 		{Integer} 		[$count=null] 		The number of columns wanted
  * @param 		{Number} 		[$gap=null] 		The column-gap width wanted
  * @param 		{String} 		[$fill=null] 		The column-fill wanted
@@ -12,16 +14,16 @@
  *
  * @example 	scss
  * .my-cool-container {
- * 	\@include s-columns(
+ * 	\@include sugar.columns(
  * 		$count : 3,
  * 		$gap : 30px,
- * 		$span : solid s-color(primary) 20px
+ * 		$span : all
  * 	);
  * }
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@mixin s-columns(
+@mixin columns(
   $count: null,
   $gap: null,
   $fill: null,
@@ -33,7 +35,7 @@
   $rule-width: null
 ) {
   // get columns props
-  $columns: s-columns-map(
+  $columns: columns-map(
     $count: $count,
     $gap: $gap,
     $fill: $fill,

@@ -1,16 +1,17 @@
 /**
+ * @name      input-placeholder
  * Set the placeholder style for inputs, etc...
  *
  * @example 	scss
  * input, textarea {
- * 	\@include s-placeholder() {
+ * 	\@include sugar.input-placeholder() {
  * 		color : red;
  * 	}
  * }
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@mixin s-placeholder {
+@mixin input-placeholder {
   &::-webkit-input-placeholder {
     @content;
   }

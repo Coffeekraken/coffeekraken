@@ -1,9 +1,10 @@
 @use "sass:map";
 @use "sass:math";
-@use "../variables" as sugar;
+@use "../core/variables" as sugar;
 
 
 /**
+ * @name      convert
  * Convert a passed value to the wanted unit
  * The conversion between some units that depends on a font-size will take the settings.typography.font-size value as reference.
  *
@@ -44,22 +45,17 @@
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@function convert($value, $convertUnit: null) {
+@function convert($value, $unit) {
   // get the unit
-  $unit: null;
+  $baseUnit: null;
 
   // get the default unit if not specified
-  @if not $convertUnit {
-    // check if is a unit context
-    @if unit-context() {
-      $convertUnit: unit-context();
-    } @else {
-      $convertUnit: map.get(sugar.$settings, unit);
-    }
+  @if not $unit {
+    $unit: map.get(sugar.$settings, unit);
   }
 
   // get the unit
-  $unit: math.unit($value);
+  $baseUnit: math.unit($value);
 
   // put font size in cache to avoid
   // unit conversion recursion
@@ -71,100 +67,100 @@
   $font-size: strip-units(sugar.$font-size);
 
   // return the value if same units
-  @if $unit and $unit == $convertUnit {
+  @if $baseUnit and $baseUnit == $unit {
     @return $value;
   }
 
   // strip unit of value
   $value: strip-units($value);
 
-  @if $unit == null or $unit == "" {
-    @if $convertUnit == px {
+  @if $baseUnit == null or $baseUnit == "" {
+    @if $unit == px {
       @return $value + 0px;
-    } @else if $convertUnit == em {
+    } @else if $unit == em {
       @return $value + 0em;
-    } @else if $convertUnit == rem {
+    } @else if $unit == rem {
       @return $value + 0rem;
-    } @else if $convertUnit == pt {
+    } @else if $unit == pt {
       @return $value + 0pt;
-    } @else if $convertUnit == "%" or $convertUnit == percent {
+    } @else if $unit == "%" or $unit == percent {
       @return math.percentage($values / 100);
     }
-  } @else if $unit == px {
+  } @else if $baseUnit == px {
     // px => em
-    @if $convertUnit == em {
+    @if $unit == em {
       @return $value / $font-size + 0em;
       // px => %
-    } @else if $convertUnit == percent or $convertUnit == "%" {
+    } @else if $unit == percent or $unit == "%" {
       @return math.percentage($value / $font-size);
       // px => rem
-    } @else if $convertUnit == rem {
+    } @else if $unit == rem {
       @return $value / $font-size + 0rem;
       // px => px
-    } @else if $convertUnit == px {
+    } @else if $unit == px {
       @return $value + 0px;
       // px => pt
-    } @else if $convertUnit == pt {
+    } @else if $unit == pt {
       @return $value * 0.75 + 0pt;
     } @else {
-      @error ("The value #{$value}#{$unit} cannot be converted to #{$convertUnit}");
+      @error ("The value #{$value}#{$baseUnit} cannot be converted to #{$unit}");
     }
-  } @else if $unit == em {
+  } @else if $baseUnit == em {
     // em => em
-    @if $convertUnit == em {
+    @if $unit == em {
       @return $value + 0em;
       // em => %
-    } @else if $convertUnit == "%" or $convertUnit == percent {
+    } @else if $unit == "%" or $unit == percent {
       @return math.percentage($value);
       // em => rem
-    } @else if $convertUnit == rem {
+    } @else if $unit == rem {
       @return strip-units($value) + 0rem;
       // em => px
-    } @else if $convertUnit == px {
+    } @else if $unit == px {
       @return $value * $font-size + 0px;
       // em => pt
-    } @else if $convertUnit == pt {
+    } @else if $unit == pt {
       @return $value * $font-size * 0.75 + 0pt;
     } @else {
-      @error ("The value #{$value}#{$unit} cannot be converted to #{$convertUnit}");
+      @error ("The value #{$value}#{$baseUnit} cannot be converted to #{$unit}");
     }
-  } @else if $unit == pt {
+  } @else if $baseUnit == pt {
     // pt => em
-    @if $convertUnit == em {
+    @if $unit == em {
       @return $value / 12 + 0em;
       // pt => %
-    } @else if $convertUnit == "%" or $convertUnit == percent {
+    } @else if $unit == "%" or $unit == percent {
       @return math.percentage($value / 12);
       // pt => rem
-    } @else if $convertUnit == rem {
+    } @else if $unit == rem {
       @return $value * 1.3333 / $font-size + 0rem;
       // pt => px
-    } @else if $convertUnit == px {
+    } @else if $unit == px {
       @return $value * 1.3333 + 0px;
       // pt => pt
-    } @else if $convertUnit == pt {
+    } @else if $unit == pt {
       @return $value + 0pt;
     } @else {
-      @error ("The value #{$value}#{$unit} cannot be converted to #{$convertUnit}");
+      @error ("The value #{$value}#{$baseUnit} cannot be converted to #{$unit}");
     }
-  } @else if $unit == rem {
+  } @else if $baseUnit == rem {
     // rem => em
-    @if $convertUnit == em {
+    @if $unit == em {
       @return $value + 0em;
       // rem => %
-    } @else if $convertUnit == "%" or $convertUnit == percent {
+    } @else if $unit == "%" or $unit == percent {
       @return math.percentage($value);
       // rem => rem
-    } @else if $convertUnit == rem {
+    } @else if $unit == rem {
       @return $value + 0rem;
       // rem => px
-    } @else if $convertUnit == px {
+    } @else if $unit == px {
       @return $value * $font-size + 0px;
       // rem => pt
-    } @else if $convertUnit == pt {
+    } @else if $unit == pt {
       @return $value * $font-size * 0.75 + 0pt;
     } @else {
-      @error ("The value #{$value}#{$unit} cannot be converted to #{$convertUnit}");
+      @error ("The value #{$value}#{$baseUnit} cannot be converted to #{$unit}");
     }
   }
 }

@@ -6,7 +6,12 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = isHover;
 
 /**
+ * @name      isHover
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Check if the mouse is hover the passed HTMLElement
+ *
  * @param    {HTMLElement}    $elm    The HTMLElement to check
  *
  * @example    js

@@ -1,10 +1,15 @@
-import __easing from "../easings/easeInOutQuint";
+import __easing from "../easing/easeInOutQuint";
 import querySelectorLive from "./querySelectorLive";
 import urlParse from "url-parse";
 import scrollTo from "./scrollTo";
 
 /**
+ * @name        autoScrollAnchorLinks
+ * @namespace       sugar.js.dom
+ * @type      Function
+ *
  * Listen for links contains an hash to init them for scroll to target on click
+ *
  * @param    {Integer}    [duration=500]    The scroll duration in ms
  * @param    {Integer}    [offset=0]    A scroll offset to apply
  * @param    {Function}    [easing=__easing]    An easing function used to scroll

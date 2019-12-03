@@ -6,6 +6,10 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = addEventListenerOnce;
 
 /**
+ * @name        addEventListenerOnce
+ * @namespace       sugar.js.dom
+ * @type      Function
+ *
  * Add an event listener that will be trigerred only once
  *
  * @param    {HTMLElement}    elm    The element to add the event listener on

@@ -2,6 +2,10 @@
 @use "sass:meta";
 @use "sass:string";
 /**
+ * @name      is
+ * @namespace     sugar.scss.meta
+ * @type      function
+ *
  * Check if the passed value is of a certain type
  *
  * Here's the available types that you can check
@@ -38,7 +42,7 @@
  * @param 			{String} 			$type 			The type to check
  * @return 			{Boolean} 							true if match the type, false if not
  *
- * @example
+ * @example       scss
  * sugar.is(hello, string) // => true
  * sugar.is('hello', string) // => true
  * sugar.is(#fff, color) // => true

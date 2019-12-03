@@ -1,5 +1,9 @@
 @use 'sass:list';
 /**
+ * @name      list-search
+ * @namespace     sugar.scss.list
+ * @type      function
+ *
  * Search for the passed value in the passed list and return true if exist, false if not
  *
  * @param           {List}          $list           The list in which to search for the passed value

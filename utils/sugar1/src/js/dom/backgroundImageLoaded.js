@@ -1,9 +1,14 @@
 import getStyleProperty from "./getStyleProperty";
 import imageLoaded from "./imageLoaded";
-import unquote from "../utils/strings/unquote";
+import unquote from "../string/unquote";
 
 /**
+ * @name        backgroundImageLoaded
+ * @namespace       sugar.js.dom
+ * @type      Function
+ *
  * Detect when a background image has been loaded on an HTMLElement
+ *
  * @param    {HTMLElement}    $elm    The HTMLElement on which to detect the background image load
  * @return    {Promise}    A promise that will be resolved when the background image has been loaded
  *

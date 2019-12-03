@@ -1,6 +1,9 @@
 @use 'sass:math';
 /**
  * @name    math-random
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
  * If $limit is null, returns a random decimal number between 0 and 1.
  *
  * @param       {Number}      [$limit:null]     The limit to generate a number under that

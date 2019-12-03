@@ -1,0 +1,31 @@
+@use '../variables' as sugar;
+
+/**
+ * @name      context
+ * @namespace     sugar.scss.core.function
+ * @type      function
+ * Return the name of the context setted with the [../mixins/_context.scss] mixin
+ *
+ * @param 			{String} 			[$default=null] 		The name to return if no context exist
+ * @return 			{String} 									The context name
+ *
+ * @example
+ * // register a context
+ * \@include sugar.context-setup('my-context', (
+ * 		// override some settings here...
+ * ));
+ *
+ * sugar.context('hello') // => 'hello'
+ * \@include sugar.context('my-context') {
+ * 		sugar.context('hello') // => 'my-context'
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com);
+ */
+@function context($default: null) {
+  @if not sugar.$current-context {
+    @return $default;
+  } @else {
+    @return sugar.$current-context;
+  }
+}

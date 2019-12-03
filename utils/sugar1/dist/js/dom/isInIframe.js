@@ -6,6 +6,10 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = isInIframe;
 
 /**
+ * @name      isInIframe
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Check if the page is loaded inside an iframe
  *
  * @return    {Boolean}    true if in iframe, false if not

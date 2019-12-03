@@ -1,8 +1,12 @@
 @use 'sass:map';
 /**
+ * @name      styleguide-colors
+ * @namespace     sugar.scss.styleguide
+ * @type      mixin
+ *
  * Print the styleguide docblocks for the registered sugar colors
  *
- * @example
+ * @example     scss
  * @include sugar.styleguide-colors();
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

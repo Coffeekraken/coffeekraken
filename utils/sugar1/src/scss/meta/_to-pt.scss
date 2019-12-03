@@ -1,10 +1,14 @@
 /**
+ * @name      to-pt
+ * @namespace     sugar.scss.meta
+ * @type      function
+ *
  * Convert the passed value to pt
  *
  * @param 			{Number} 		$value 		The value to convert
  * @return 			{Number} 					The pt converted value
  *
- * @example
+ * @example       scss
  * sugar.to-pt(10px);
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

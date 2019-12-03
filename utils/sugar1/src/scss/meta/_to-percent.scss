@@ -1,10 +1,14 @@
 /**
+ * @name    to-percent
+ * @namespace     sugar.scss.meta
+ * @type      function
+ *
  * Convert the passed value to %
  *
  * @param 			{Number} 		$value 		The value to convert
  * @return 			{Number} 					The % converted value
  *
- * @example
+ * @example     scss
  * sugar.to-percent(10px);
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

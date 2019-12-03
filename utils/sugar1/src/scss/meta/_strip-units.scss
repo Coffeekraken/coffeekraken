@@ -1,10 +1,14 @@
 /**
+ * @name    strip-units
+ * @namespace     sugar.scss.meta
+ * @type      function
+ *
  * Return a number without any units
  *
  * @param 			{Number} 		$number 		The number to process
  * @return 			{Number} 						The number without units
  *
- * @example
+ * @example       scss
  * sugar.strip-units(12px); // => 12
  * sugar.strip-units(30rem); // => 30
  *

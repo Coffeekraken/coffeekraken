@@ -1,0 +1,58 @@
+/**
+ * @name      show-vertical-rhythm
+ * @namespace     sugar.scss.core.mixin
+ * @type      mixin
+ *
+ * Display the vertical rhythme
+ *
+ * @param 			{Color}      [$color=#0ff] 		The color wanted
+ *
+ * @example     scss
+ * body {
+ * 		@include sugar.show-vertical-rhythm();
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@mixin show-vertical-rhythm($color: #0ff) {
+  $color: test-argument(
+    'sugar.show-vertical-rhythm',
+    'color',
+    color,
+    $color
+  );
+  // overflow: hidden;
+  position: relative;
+  &:after {
+    pointer-events: none;
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: -webkit-linear-gradient(
+      top,
+      $color 0,
+      rgba(255, 255, 255, 0) 1px
+    );
+    background-image: -moz-linear-gradient(
+      top,
+      $color 0,
+      rgba(255, 255, 255, 0) 1px
+    );
+    background-image: -o-linear-gradient(
+      top,
+      $color 0,
+      rgba(255, 255, 255, 0) 1px
+    );
+    background-image: linear-gradient(
+      to bottom,
+      $color 0,
+      rgba(255, 255, 255, 0) 1px
+    );
+    background-repeat: repeat-y;
+    background-size: 100% 1rem;
+  }
+}

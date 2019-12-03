@@ -9,12 +9,17 @@ var _getStyleProperty = _interopRequireDefault(require("./getStyleProperty"));
 
 var _imageLoaded = _interopRequireDefault(require("./imageLoaded"));
 
-var _unquote = _interopRequireDefault(require("../utils/strings/unquote"));
+var _unquote = _interopRequireDefault(require("../string/unquote"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
+ * @name        backgroundImageLoaded
+ * @namespace       sugar.js.dom
+ * @type      Function
+ *
  * Detect when a background image has been loaded on an HTMLElement
+ *
  * @param    {HTMLElement}    $elm    The HTMLElement on which to detect the background image load
  * @return    {Promise}    A promise that will be resolved when the background image has been loaded
  *

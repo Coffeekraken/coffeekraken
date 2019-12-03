@@ -1,6 +1,9 @@
 @use 'sass:list';
 /**
  * @name    list-index
+ * @namespace     sugar.scss.list
+ * @type      function
+ *
  * Return the index of the wanted value in the passed list.
  *
  * @param       {List}      $list       The list to process

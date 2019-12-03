@@ -1,16 +1,17 @@
-@use '../core/functions/setting' as *;
-@use '../core/functions/test-argument' as *;
-@use 'map-set' as *;
 @use 'sass:map';
 @use 'sass:string';
 /**
+ * @name      map-filter-by-namespace
+ * @namespace     sugar.scss.map
+ * @type      function
+ *
  * Return all the map values that have a key that match the passed namespace
  *
  * @param           {Map}         $map          The map to process
  * @param           {String}      $namespace    The namespace to search like (something.another.thing)
  * @return          {Map}                       The filtered map
  *
- * @example
+ * @example     scss
  * sugar.map-filter-by-namespace((
  *  'hello.world': 'Hello',
  *  'coco.world': 'Coco',

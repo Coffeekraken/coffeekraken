@@ -10,9 +10,12 @@ var _offset = _interopRequireDefault(require("./offset"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
+ * @name      offsetParent
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Get the offset top and left of the passed element from his parent top left point
  *
- * @name 		offset
  * @param 		{HTMLElement} 					elm  		The element to get the offset from
  * @return 		{Object} 									The offset top and left object
  *

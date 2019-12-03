@@ -8,9 +8,12 @@ exports.default = _default;
 var _Observable = require("rxjs/Observable");
 
 /**
+ * @name        attributesObservable
+ * @namespace       sugar.js.dom
+ * @type      Function
+ *
  * Observe attributes on an HTMLElement and get mutations through the observable subscription
  *
- * @name 		attributesObservable
  * @param 		{HTMLElement} 					target 		The element to observe
  * @param 		{MutationObserverInit} 			settings 	The mutation observer settings
  * @return 		{Observable} 								The mutation observable

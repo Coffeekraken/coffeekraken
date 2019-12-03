@@ -2,7 +2,12 @@ import requestFullscreen from "./requestFullscreen";
 import exitFullscreen from "./exitFullscreen";
 
 /**
+ * @name      toggleFullscreen
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Toggle the fullscreen mode
+ *
  * @param    {HTMLElement}    elm    The element on which to request the fullscreen
  * @return    {Promise}   Returns a Promise which is resolved once full-screen mode has been des/activated.
  *

@@ -10,7 +10,12 @@ var _scriptLoaded = _interopRequireDefault(require("./scriptLoaded"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
+ * @name        appendScriptTag
+ * @namespace       sugar.js.dom
+ * @type      Function
+ *
  * Append a script tag either to the head or the body
+ *
  * @param    {String}    src    The script src to load
  * @return    {Promise}    A promise resolved with the script tag when it has fully loaded
  *

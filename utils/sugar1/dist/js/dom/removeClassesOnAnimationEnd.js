@@ -10,6 +10,10 @@ var _addEventListenerOnce = _interopRequireDefault(require("./addEventListenerOn
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
+ * @name      removeClassesOnAnimationEnd
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Remove some classes on animation end
  *
  * @param    {HTMLElement}    elm    The element to take care of

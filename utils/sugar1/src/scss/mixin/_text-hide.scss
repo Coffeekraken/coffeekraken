@@ -1,0 +1,19 @@
+/**
+ * @name      text-hide
+ * @namespace     sugar.scss.mixin
+ * @type      mixin
+ *
+ * Hide the contained text
+ *
+ * @example 	scss
+ * .my-cool-container {
+ * 	\@include sugar.text-hide();
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@mixin text-hide() {
+  overflow: hidden;
+  text-indent: -9000px;
+  display: block;
+}

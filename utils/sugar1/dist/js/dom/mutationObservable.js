@@ -16,9 +16,12 @@ var _Observable = require("rxjs/Observable");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
+ * @name      mutationObservable
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Observe mutations on an HTMLElement and get them through the observable subscription
  *
- * @name 		mutationObservable
  * @param 		{HTMLElement} 					target 		The element to observe
  * @param 		{MutationObserverInit} 			settings 	The mutation observer settings
  * @return 		{Observable} 								The mutation observable

@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = style;
 
-var _uncamelize = _interopRequireDefault(require("../utils/strings/uncamelize"));
+var _uncamelize = _interopRequireDefault(require("../string/uncamelize"));
 
 var _styleString2Object = _interopRequireDefault(require("./styleString2Object"));
 
@@ -14,15 +14,18 @@ var _styleObject2String = _interopRequireDefault(require("./styleObject2String")
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
+ * @name      style
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Set or remove a css style property on an HTMLElement
  *
- * @name 		style
  * @param 		{HTMLElement} 			elm 			The element to process
  * @param 		{Object} 				styleObj 		An object of style to apply
  * @return 		(Object) 								The element applied style
  *
  * @example 	js
- * import style from 'sugarcss/js/dom/style'
+ * import style from '@coffeekraken/sugar/js/dom/style'
  * style(myCoolHTMLElement, {
  * 		paddingLeft : 20,
  * 		display : null

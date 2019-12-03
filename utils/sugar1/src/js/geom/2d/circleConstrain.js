@@ -1,7 +1,12 @@
 import distanceBetween from "./distanceBetween";
 
 /**
+ * @name 		circleConstrain
+ * @namespace       sugar.js.geom.2d
+ * @type      Function
+ *
  * Take as parameter a central point, a radius and a points to constrain inside the circle defined by the radius
+ *
  * @param    {Vector2}    center    The center point of the circle
  * @param    {Number}    radius    The radius to constrain the point in
  * @param    {Vector2}    point    The point to constrain

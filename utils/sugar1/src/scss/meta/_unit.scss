@@ -1,6 +1,9 @@
 @use 'sass:math';
 /**
  * @name    unit
+ * @namespace     sugar.scss.meta
+ * @type      function
+ *
  * Return the unit of the passed number
  *
  * @param       {Number}      $number       The number to get the unit from

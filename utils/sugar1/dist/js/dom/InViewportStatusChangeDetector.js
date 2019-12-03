@@ -16,10 +16,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 /**
- * @name 		InViewportStatusChangeDetector
+ * @name      InViewportStatusChangeDetector
+ * @namespace     sugar.js.dom
+ * @type      Class
+ *
  * This class allows you to monitor an HTMLElement and be notified when it enters or exit the viewport.
  *
  * @example 	js
+ * import InViewportStatusChangeDetector from '@coffeekraken/sugar/js/dom/InViewportStatusChangeDetector';
  * const detector = new InViewportStatusChangeDetector(myCoolHTMLElement);
  * detector.on('enter', (elm) => {
  * 		// the element has entered the viewport

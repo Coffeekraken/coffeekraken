@@ -1,8 +1,11 @@
 /**
+ * @name      isVisible
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Check if the passed HTMLElement is visible or not.
  * Visible mean that it has not an opacity of 0, not a visibility of hidden and not a display of none
  *
- * @name 		isVisible
  * @param 		{HTMLElement} 				elm  		The element to check
  * @return 		{Boolean}								If the element is visible or not
  *

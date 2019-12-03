@@ -9,16 +9,19 @@ var _whenVisible = _interopRequireDefault(require("./whenVisible"));
 
 var _isInViewport = _interopRequireDefault(require("./isInViewport"));
 
-var _throttle = _interopRequireDefault(require("../utils/functions/throttle"));
+var _throttle = _interopRequireDefault(require("../function/throttle"));
 
 var _closest = _interopRequireDefault(require("./closest"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
+ * @name      whenInViewport
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Monitor an HTMLElement to be notified when it is in the viewport
  *
- * @name 		whenInViewport
  * @param 		{HTMLElement} 				elm 					The element to monitor
  * @param 		{Number} 					[offset=50] 			An offset that represent the distance before entering the viewport for the detection
  * @return 		(Promise) 											The promise that will be resolved when the element is in the viewport

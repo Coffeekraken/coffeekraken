@@ -1,18 +1,23 @@
+import easeInOutQuad from '../easing/easeInOutQuad';
+import requestAnimationFrame from './requestAnimationFrame';
 /**
+ * @name      scrollTo
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Function that let you make a smooth page scroll to a specific element in the page
  *
  * @param 		{HTMLElement} 				target 			The element to scroll to
- * @param 		{Number} 					duration 		The animation duration
- * @param 		{Function} 					easing 			An easing Function
- * @param 		{Number} 					offset 			The destination offset
- * @param 		{String} 					align 			The destination align (top, center, bottom)
- * @param 		{Function} 					onFinish 		A callback to call when the animation if finished
+ * @param 		{Number} 					[duration=1000] 		The animation duration
+ * @param 		{Function} 					[easing=easeInOutQuad] 			An easing Function
+ * @param 		{Number} 					[offset=0] 			The destination offset
+ * @param 		{String} 					[align='top'] 			The destination align (top, center, bottom)
+ * @param 		{Function} 					[onFinish=null] 		A callback to call when the animation if finished
  *
- * @name 		scrollTo
  * @example 	js
  * import scrollTop from '@coffeekraken/sugar/js/dom/scrollTo'
  * import easeInOutQuad from '@coffeekraken/sugar/js/easings/easeInOutQuad'
- * scrollTo(myCoolHTMLElement, 2000, easeInOutQuad);
+ * scrollTo(myCoolHTMLElement);
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
@@ -28,8 +33,14 @@ document.addEventListener("mousewheel", e => {
   }, 200);
 });
 
-function scrollTo(target, duration, easing, offset, align, onFinish) {
-  offset = offset ? offset : 0;
+function scrollTo(
+  target,
+  duration = 1000,
+  easing = easeInOutQuad,
+  offset = 0,
+  align = 'top',
+  onFinish = null
+) {
   var docElem = document.documentElement; // to facilitate minification better
   var windowHeight = docElem.clientHeight;
   var maxScroll =
@@ -63,18 +74,14 @@ function scrollTo(target, duration, easing, offset, align, onFinish) {
   var obj = {
     targetY: targetY,
     deltaY: deltaY,
-    duration: duration ? duration : 0,
-    easing:
-      easing ||
-      function(t) {
-        return t;
-      },
+    duration: duration,
+    easing: easing,
     onFinish: onFinish,
     startTime: Date.now(),
     lastY: currentY,
     step: scrollTo.step
   };
-  window.requestAnimationFrame(obj.step.bind(obj));
+  requestAnimationFrame(obj.step.bind(obj));
 }
 
 scrollTo.step = function() {
@@ -94,7 +101,7 @@ scrollTo.step = function() {
   // Continue animation as long as duration hasn't surpassed
   if (t !== 1 && !isUserScrolling) {
     this.lastY = window.pageYOffset;
-    window.requestAnimationFrame(this.step.bind(this));
+    requestAnimationFrame(this.step.bind(this));
   } else {
     isScrollingHappening = false;
     if (this.onFinish) this.onFinish();

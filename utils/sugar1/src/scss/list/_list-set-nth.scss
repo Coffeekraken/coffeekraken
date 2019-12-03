@@ -1,6 +1,9 @@
 @use 'sass:list';
 /**
  * @name      list-set-nth
+ * @namespace     sugar.scss.list
+ * @type      function
+ *
  * Set a value in the passed list at the passed index. The original value at the passed index will be replaced with the passed value
  *
  * @param       {List}      $list       The list to process

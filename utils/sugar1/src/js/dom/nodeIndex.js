@@ -1,5 +1,10 @@
 /**
+ * @name      nodeIndex
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Return the inde of the passed node inside the html
+ *
  * @param    {HTMLElement}    node    The node to get the index for
  * @return    {Integer}    The index of the node inside the html
  *

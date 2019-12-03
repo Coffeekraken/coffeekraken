@@ -7,30 +7,35 @@ exports.default = splitLines;
 
 var _map2 = _interopRequireDefault(require("lodash/map"));
 
-var _throttle = _interopRequireDefault(require("../utils/functions/throttle"));
+var _throttle = _interopRequireDefault(require("../function/throttle"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
+ * @name      splitLines
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Split each lines inside an HTMLElement by scoping them inside some tags.
  * Here's an result sample for :
  * Hello
  * World
  *
  * ```html
- * <p class="split-lines">Hello</p>
- * <p class="split-lins">World</p>
+ * <p class="s-split-lines">Hello</p>
+ * <p class="s-split-lines">World</p>
  * ```
- *
- * @example 	js
- * import __splitLines from '@coffeekraken/sugar/js/dom/splitLines'
- * const myCoolElement = document.querySelector('.my-cool-element');
- * __splitLines(myCoolElement);
  *
  * @param 	{HTMLElement} 		elm 		 	The HTMLElement to split lines in
  * @param 	{String} 			[tag="p"] 		The tag to use to split the lines
  * @param 	{String} 			[tagClass="s-split-lines"] 		The class to apply on the tags
  * @return 	{HTMLElement} 						The HTMLElement processed
+ *
+ * @example 	js
+ * import splitLines from '@coffeekraken/sugar/js/dom/splitLines'
+ * const myCoolElement = document.querySelector('.my-cool-element');
+ * splitLines(myCoolElement);
+ *
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function splitLines(elm, tag = "p", tagClass = "split-lines") {

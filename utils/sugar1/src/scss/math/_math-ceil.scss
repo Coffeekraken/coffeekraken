@@ -1,6 +1,9 @@
 @use 'sass:math';
 /**
  * @name    math-ceil
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
  * Rounds $number up to the next highest whole number
  *
  * @param       {Number}      $number       The number to process

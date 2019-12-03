@@ -10,9 +10,12 @@ var _getTransitionProperties = _interopRequireDefault(require("./getTransitionPr
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
+ * @name      whenTransitionEnd
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Monitor an HTMLElement to be notified when his transition has ended
  *
- * @name 		whenTransitionEnd
  * @param 		{HTMLElement} 				elm 		The element to monitor
  * @param 		{Function} 					[cb=null] 	An optional callback to call when the element transition has ended
  * @return 		(Promise) 								The promise that will be resolved when the element transition has ended

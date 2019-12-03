@@ -1,6 +1,9 @@
 @use 'sass:math';
 /**
  * @name  math-sqrt
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
  * Return the square root of the passed number
  *
  * @param         {Number}        $number       The number to process

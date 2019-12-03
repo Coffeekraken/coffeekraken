@@ -1,6 +1,9 @@
 @use 'sass:map';
 /**
  * @name  map-keys
+ * @namespace     sugar.scss.map
+ * @type      function
+ *
  * Return a comma separated list of the map keys
  *
  * @param       {Map}       $map      The map to process

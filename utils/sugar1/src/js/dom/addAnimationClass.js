@@ -1,5 +1,9 @@
 import removeClassesOnAnimationEnd from "./removeClassesOnAnimationEnd";
 /**
+ * @name        addAnimationClass
+ * @namespace       sugar.js.dom
+ * @type      Function
+ *
  * Add a class that trigger an animation and remove it at the end
  *
  * @param    {HTMLElement}    elm    The element to take care of

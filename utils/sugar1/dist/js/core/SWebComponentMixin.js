@@ -9,17 +9,17 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _mixwith = require("../vendors/mixwith");
+var _mixwith = require("../vendor/mixwith");
 
-var _autoCast = _interopRequireDefault(require("../utils/strings/autoCast"));
+var _autoCast = _interopRequireDefault(require("../string/autoCast"));
 
 var _extend2 = _interopRequireDefault(require("lodash/extend"));
 
-var _camelize = _interopRequireDefault(require("../utils/strings/camelize"));
+var _camelize = _interopRequireDefault(require("../string/camelize"));
 
-var _uncamelize = _interopRequireDefault(require("../utils/strings/uncamelize"));
+var _uncamelize = _interopRequireDefault(require("../string/uncamelize"));
 
-var _upperFirst = _interopRequireDefault(require("../utils/strings/upperFirst"));
+var _upperFirst = _interopRequireDefault(require("../string/upperFirst"));
 
 var _fastdom = _interopRequireDefault(require("fastdom"));
 
@@ -31,7 +31,7 @@ var _whenVisible = _interopRequireDefault(require("../dom/whenVisible"));
 
 var _prependChild = _interopRequireDefault(require("../dom/prependChild"));
 
-var _propertyProxy = _interopRequireDefault(require("../utils/objects/propertyProxy"));
+var _propertyProxy = _interopRequireDefault(require("../object/propertyProxy"));
 
 var _onChange = _interopRequireDefault(require("on-change"));
 
@@ -41,96 +41,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 require("es6-object-assign").polyfill();
 
-/**
- * @name 		SWebComponent
- * @extends 	HTMLElement
- * Base class that abstract a lot of dirty work in order to create nice and clean webcomponents.
- * Features:
- * - Listen for attributes changes
- * - Mount the component at a certain point in time (inViewport, visible, etc...)
- * - **Automatically cast the attributes** to their proper js variable types (Array, Object, String, etc...)
- * - **Physical props** : Specify some props that will ALWAYS be present as attribute on the component for styling purpose
- * - Define some **default CSS** that will be injected in the head automatically
- * - Specify some **required props**
- * - **Full lifecycle management**:
- * 	- componentCreated
- * 	- componentWillMount
- * 	- componentMount
- * 	- componentWillReceiveProp
- * 	- componentWillReceiveProps
- * 	- render
- * 	- componentUnmount
- * - **Mount dependencies** : This will allows you to set some promises that have to be resolved before mounting the component
- *
- * @example 	js
- * import SWebComponent from '@coffeekraken/sugar/js/core/SWebComponent'
- * class MyCoolComponent extends SWebComponent {
- *
- *	\/**
- * 	 * Default props
- * 	 * @definition 		SWebComponent.defaultProps
- * 	 * @protected
- * 	 *\/
- * 	static get defaultProps() {
- * 		return {
- * 		};
- * 	}
- *
- * 	\/**
- * 	 * Css
- * 	 * @protected
- * 	 *\/
- * 	static defaultCss(componentName, componentNameDash) {
- * 		return `
- * 			${componentNameDash} {
- * 				display : block;
- * 			}
- * 		`;
- * 	}
- *
- * 	\/**
- * 	 * Component will mount
- *  	 * @definition 		SWebComponent.componentWillMount
- * 	 * @protected
- * 	 *\/
- * 	componentWillMount() {
- * 		super.componentWillMount();
- * 	}
- *
- * 	\/**
- * 	 * Mount component
- * 	 * @definition 		SWebComponent.componentMount
- * 	 * @protected
- * 	 *\/
- * 	componentMount() {
- * 		super.componentMount();
- * 	}
- *
- * 	\/**
- * 	 * Component unmount
- * 	 * @definition 		SWebComponent.componentUnmount
- * 	 * @protected
- * 	 *\/
- * 	componentUnmount() {
- * 		super.componentUnmount();
- * 	}
- *
- * 	\/**
- * 	 * Component will receive prop
- * 	 * @definition 		SWebComponent.componentWillReceiveProp
- * 	 * @protected
- * 	 *\/
- * 	componentWillReceiveProp(name, newVal, oldVal) {
- * 		switch(name) {
- * 		}
- * 	}
- * }
- *
- * // define your component
- * MyCoolComponent.define('my-cool-component', MyCoolComponent);
- *
- * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
 if (!window.sugar) window.sugar = {};
 if (!window.sugar._webComponentsClasses) window.sugar._webComponentsClasses = {};
 if (!window.sugar._webComponentsDefaultProps) window.sugar._webComponentsDefaultProps = {};

@@ -6,14 +6,17 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = getTranslateProperties;
 
 /**
+ * @name      dataset
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Get a translate properties of an HTMLElement
  *
- * @name 		getTranslateProperties
  * @param 		{HTMLElement} 					elm  		The element to get the properties from
  * @return 		{Object} 									The translate x,y and z properties
  *
  * @example  	js
- * import getTranslateProperties from 'sugarcss/js/dom/getTranslateProperties'
+ * import getTranslateProperties from '@coffeekraken/sugar/js/dom/getTranslateProperties'
  * const props = getTranslateProperties(myCoolHTMLElement);
  * // output format
  * // {

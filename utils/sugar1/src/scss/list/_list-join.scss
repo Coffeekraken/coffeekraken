@@ -1,5 +1,9 @@
 @use 'sass:list';
 /**
+ * @name      list-join
+ * @namespace     sugar.scss.list
+ * @type      function
+ *
  * Return a string representing all the list items
  *
  * @param         {List}        $list1         The list to process

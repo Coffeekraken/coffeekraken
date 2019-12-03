@@ -1,10 +1,13 @@
 import __attributesObservable from "./attributesObservable";
-import __autoCast from "../utils/strings/autoCast";
+import __autoCast from "../string/autoCast";
 
 /**
+ * @name      whenAttribute
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Resolve a promise when the wanted attribute on the passed HTMLElement exist or pass the check function provided
  *
- * @name 		whenAttribute
  * @param 		{HTMLElement} 				elm 				The HTMLElement on which to monitor the property
  * @param 		{String} 					attribute 			The attribute to monitor
  * @param 		{Function} 					[checkFn=null] 		An optional function to check the attribute. The promise is resolved when this function return true

@@ -1,6 +1,9 @@
 @use 'sass:math';
 /**
  * @name    math-round
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
  * Rounds $number to the nearest whole number.
  *
  * @param       {Number}      $number       The number to round

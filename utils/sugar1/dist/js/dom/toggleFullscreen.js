@@ -12,7 +12,12 @@ var _exitFullscreen = _interopRequireDefault(require("./exitFullscreen"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
+ * @name      toggleFullscreen
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Toggle the fullscreen mode
+ *
  * @param    {HTMLElement}    elm    The element on which to request the fullscreen
  * @return    {Promise}   Returns a Promise which is resolved once full-screen mode has been des/activated.
  *

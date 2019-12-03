@@ -1,16 +1,19 @@
 import getStyleProperty from "./getStyleProperty";
-import autoCast from "../utils/strings/autoCast";
-import toMs from "../utils/strings/toMs";
+import autoCast from "../string/autoCast";
+import toMs from "../string/toMs";
 
 /**
+ * @name      getTransitionProperties
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Get the css transition properties from an HTMLElement in an object format
  *
- * @name 		getTransitionProperties
  * @param 		{HTMLElement} 					elm  		The element to get the properties from
  * @return 		{Object} 									The animation properties
  *
  * @example  	js
- * import getTransitionProperties from 'sugarcss/js/dom/getTransitionProperties'
+ * import getTransitionProperties from '@coffeekraken/sugar/js/dom/getTransitionProperties'
  * const props = getTransitionProperties(myCoolHTMLElement);
  * // output format
  * // {

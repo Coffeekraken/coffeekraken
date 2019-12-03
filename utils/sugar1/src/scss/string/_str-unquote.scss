@@ -1,11 +1,15 @@
 @use 'sass:string';
 /**
+ * @name      str-unquote
+ * @namespace     sugar.scss.string
+ * @type      function
+ *
  * Return an unquoted version of the passed string
  *
  * @param         {String}        $string           The string to unquote
  * @return        {String}                          The unquoted string
  *
- * @example
+ * @example       scss
  * sugar.str-unquote('hello world'); // => hello world
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

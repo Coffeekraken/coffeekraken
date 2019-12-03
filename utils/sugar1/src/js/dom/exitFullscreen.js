@@ -1,5 +1,10 @@
 /**
+ * @name      exitFullscreen
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Exit the fullscreen mode
+ *
  * @return    {Promise}    Returns a Promise which is resolved once full-screen mode has been desactivated.
  *
  * @example    js

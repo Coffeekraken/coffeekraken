@@ -2,6 +2,9 @@
 @use '../core/variables' as sugar;
 /**
  * @name      math-asin
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
  * Calculate the sinus inverse
  *
  * @param         {Number}        $value        The value to use

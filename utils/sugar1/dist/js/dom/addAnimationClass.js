@@ -10,6 +10,10 @@ var _removeClassesOnAnimationEnd = _interopRequireDefault(require("./removeClass
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
+ * @name        addAnimationClass
+ * @namespace       sugar.js.dom
+ * @type      Function
+ *
  * Add a class that trigger an animation and remove it at the end
  *
  * @param    {HTMLElement}    elm    The element to take care of

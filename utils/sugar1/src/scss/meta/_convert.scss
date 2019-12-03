@@ -5,6 +5,9 @@
 
 /**
  * @name      convert
+ * @namespace     sugar.scss.meta
+ * @type      function
+ *
  * Convert a passed value to the wanted unit
  * The conversion between some units that depends on a font-size will take the settings.typography.font-size value as reference.
  *
@@ -38,7 +41,7 @@
  * @param 			{String} 		$unit 			The unit in which to convert the value
  * @return 			{Number} 						The converted value
  *
- * @example
+ * @example     scss
  * // if the settings.typography.font-size === 16px
  * sugar.convert(24px, rem) // 1.5rem
  * sugar.convert(3rem, pt) // 36pt

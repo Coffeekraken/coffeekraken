@@ -1,7 +1,10 @@
 /**
+ * @name      linkLoaded
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Wait until the passed HTMLLinkElement is fully loaded
  *
- * @name 		linkLoaded
  * @param 		{HTMLLinkElement} 			link  		The link tag to check the loading state
  * @param 		{Function}					[cb=null] 	An optional callback to call
  * @return 		{Promise} 								The promise that will be resolved

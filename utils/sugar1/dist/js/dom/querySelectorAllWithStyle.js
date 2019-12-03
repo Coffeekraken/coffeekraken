@@ -10,7 +10,12 @@ var _getStyleProperty = _interopRequireDefault(require("./getStyleProperty"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
+ * @name      querySelectorAllWithStyle
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Select all node that match the style object passed as parameter
+ *
  * @param    {String}    selector    The css selector to use as base filter
  * @param    {Object}    style    The style that has to match
  * @param    {Object}    [settings={}]    A setting object

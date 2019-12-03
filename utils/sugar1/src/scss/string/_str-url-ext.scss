@@ -4,12 +4,16 @@
 @use 'str-split' as *;
 
 /**
+ * @name        str-url-ext
+ * @namespace     sugar.scss.string
+ * @type      function
+ *
  * Check if a string is a url or not
  *
  * @param 			{String} 				$url 			The string to check
  * @return 			{Boolean} 								true if is a url, false if not
  *
- * @example
+ * @example       scss
  * sugar.str-is-url('Hello world') // false
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

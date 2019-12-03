@@ -1,6 +1,9 @@
 @use 'sass:string';
 /**
  * @name    str-length
+ * @namespace     sugar.scss.string
+ * @type      function
+ *
  * Return the number of characters in the passed string
  *
  * @param       {String}      $string       The string to process

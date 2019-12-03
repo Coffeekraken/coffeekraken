@@ -10,10 +10,13 @@ var _isVisible = _interopRequireDefault(require("./isVisible"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
+ * @name        closestNotVisible
+ * @namespace       sugar.js.dom
+ * @type      Function
+ *
  * Go up the dom three to find the first element that is not visible.
  * Not visible mean that has either an opacity to 0, a visibility to hidden or a display to none
  *
- * @name 		closestNotVisible
  * @param 		{HTMLElement} 					elm  		The element to start on
  * @return 		{HTMLElement} 								The element found or null
  *

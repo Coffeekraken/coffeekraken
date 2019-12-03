@@ -1,6 +1,9 @@
 @use 'sass:math';
 /**
  * @name      math-abs
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
  * Return the absolute version of the passed number
  *
  * @param         {Number}        $number       The number to process

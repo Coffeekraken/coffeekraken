@@ -1,6 +1,9 @@
 @use 'sass:string';
 /**
  * @name      str-index
+ * @namespace     sugar.scss.string
+ * @type      function
+ *
  * Returns the first index of $substring in $string, or null if $string doesn’t contain $substring.
  *
  * @param       {String}      $string       The string to process

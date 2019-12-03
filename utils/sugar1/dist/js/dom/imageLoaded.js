@@ -6,15 +6,18 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = imageLoaded;
 
 /**
+ * @name      imageLoaded
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Wait until the passed image is fully loaded
  *
- * @name 		imageLoaded
  * @param 		{HTMLImageElement} 			img  		The image to check the loading state
  * @param 		{Function}					[cb=null] 	An optional callback to call
  * @return 		{Promise} 								The promise that will be resolved
  *
  * @example  	js
- * import imageLoaded from 'sugarcss/js/dom/imageLoaded'
+ * import imageLoaded from '@coffeekraken/sugar/js/dom/imageLoaded'
  * imageLoaded(myCoolHTMLImageElement).then((img) => {
  * 		// do something when the image is loaded
  * });

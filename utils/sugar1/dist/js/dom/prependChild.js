@@ -6,11 +6,15 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = prependChild;
 
 /**
+ * @name      prependChild
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Prepend an HTMLElement into another HTMLElement
  *
- * @name 		prependChild
  * @param 		{HTMLElement} 				elm  		The element to prepend
  * @param 		{HTMLElement} 				refElm 		The element in which to prepend the new element
+ *
  * @example  	js
  * import prependChild from '@coffeekraken/sugar/js/dom/prependChild'
  * prependChild(myElementToInsert, theReferenceElement);

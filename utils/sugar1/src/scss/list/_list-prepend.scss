@@ -1,5 +1,9 @@
 @use 'sass:list';
 /**
+ * @name    list-prepend
+ * @namespace     sugar.scss.list
+ * @type      function
+ *
  * Prepend a value in the passed list
  *
  * @param         {List}        $list           The list to process

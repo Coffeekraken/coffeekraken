@@ -2,6 +2,9 @@
 @use '../core/variables' as sugar;
 /**
  * @name    math-sin
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
  * Calculate the sinus of the passed angle
  *
  * @param       {Number}      $angle        The angle to calculate the sinus from

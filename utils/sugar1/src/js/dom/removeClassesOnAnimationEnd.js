@@ -1,6 +1,10 @@
 import addEventListenerOnce from "./addEventListenerOnce";
 
 /**
+ * @name      removeClassesOnAnimationEnd
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Remove some classes on animation end
  *
  * @param    {HTMLElement}    elm    The element to take care of

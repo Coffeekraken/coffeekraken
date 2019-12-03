@@ -1,15 +1,18 @@
-import SEvent from "../classes/SEvent";
+import SEvent from "../class/SEvent";
 
 /**
+ * @name      dispatchEvent
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Helper to quickly display an event with some optional data attached to it
  *
- * @name 		dispatchEvent
  * @param 		{HTMLElement} 					target  		The element to dispatch the event from
  * @param 		{String} 						name 			The event name to dispatch
  * @param 		{Mixed} 						data 			The data to attache to the event
  *
  * @example  	js
- * import dispatchEvent from 'sugarcss/js/dom/dispatchEvent'
+ * import dispatchEvent from '@coffeekraken/sugar/js/dom/dispatchEvent'
  * dispatchEvent(myCoolHTMLElement, 'myCoolEventName', {
  * 		var1 : 'value1'
  * });

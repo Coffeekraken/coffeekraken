@@ -1,7 +1,12 @@
 import imageLoaded from "./imageLoaded";
 
 /**
+ * @name      imagesLoaded
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Detect when some images are loaded
+ *
  * @param    {Array<HTMLImageElement>}    $imgs    An array (or nodeList) of HTMLImageElement to detect the load
  * @return    {Promise}    A promise resolved when all images are loaded properly
  *

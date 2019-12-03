@@ -10,9 +10,12 @@ var _InViewportStatusChangeDetector = _interopRequireDefault(require("./InViewpo
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
+ * @name      inViewportStatusChange
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Monitor when the passed element enter or exit the viewport
  *
- * @name 		inViewportStatusChange
  * @param 		{HTMLElement} 						elm  		The element to monitor
  * @param 		{Function} 							onEnter 	Callback when the element enter the viewport
  * @param 		{Function} 							onExit 		Callback when the element exit the viewport

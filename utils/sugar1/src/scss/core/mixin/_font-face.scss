@@ -1,0 +1,125 @@
+@use 'sass:meta';
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:string';
+/**
+ * @name    font-face
+ * @namespace     sugar.scss.core.mixin
+ * @type      mixin
+ *
+ * Helper to print a font-face
+ *
+ * @param 			{String} 		$font-family 			The font-family
+ * @param 			{String} 		$src 					The source url (only 1 extension)
+ * @param 			{List} 			[$extensions=woff2] 	The extensions list that you have available
+ * @param 			{String} 		[$font-weight=normal] 	The font-weight property
+ * @param 			{String} 		[$font-style=normal] 	The font-style property
+ * @param       {String}    [$font-display=auto]    The font-display property
+ *
+ * @example     scss
+ * // if you have these extensions files : .woff .eot .woff2
+ * \@include sugar.font-face(
+ * 		$name : my-cool-font,
+ * 		$src : '/fonts/my-font.eot',
+ * 		$extensions : eot woff woff2
+ * )
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@mixin font-face(
+  $font-family,
+  $src,
+  $extensions: woff2,
+  $font-weight: normal,
+  $font-style: normal,
+  $font-display: auto
+) {
+  @if (setting('debug.test-arguments')) {
+    $font-family: test-argument(
+      "sugar.font-face",
+      "font-family",
+      string,
+      $font-family
+    );
+    $src : test-argument(
+      'sugar.font-face',
+      'src',
+      mixed,
+      $src
+    );
+    $extensions: test-argument(
+      "sugar.font-face",
+      "extensions",
+      "string|list",
+      $extensions
+    );
+    $font-weight: test-argument(
+      "sugar.font-face",
+      "font-weight",
+      (normal, bold, bolder, lighter, number, initial, inherit),
+      $font-weight
+    );
+    $font-style: test-argument(
+      "sugar.font-face",
+      "font-style",
+      (normal, italic, oblique, initial, inherit),
+      $font-style
+    );
+    $font-display: test-argument(
+      "sugar.font-face",
+      "font-display",
+      (auto, block, swap, fallback, optional),
+      $font-display
+    );
+  }
+
+  // get font format from settings
+  $font-format: setting("typography.font-format");
+
+  // if the src is a string
+  // mean that's a url
+  $srcs: $src;
+  @if meta.type-of($src) == "string" {
+    // process url
+    $split: str-split($src, ".");
+    $e: list-last-nth($split);
+    $split: list-pop($split);
+    $path: list-implode($split, ".");
+
+    // add extention in list
+    @if list.index($extensions, $e) == null {
+      $extensions: list.append($extensions, $e);
+    }
+
+    // loop on each extensions
+    $srcs: ();
+    @each $e in $extensions {
+      // get the format
+      $format: map.get($font-format, $e);
+      $srcs: list.append($srcs, url("#{$path}.#{$e}") format("#{$format}"), comma);
+    }
+  }
+
+  /**
+	 * @name   			#{$font-family}
+	 * @styleguide 		Fonts / Faces
+	 * @display 		font
+	 * @font-family 	#{$font-family}
+	 * @font-style 		#{$font-style}
+	 * @font-weight 	#{$font-weight}
+	 */
+  // declare font
+  @font-face {
+    font-family: "#{$font-family}";
+    src: $srcs;
+    @if $font-style {
+      font-style: $font-style;
+    }
+    @if $font-weight {
+      font-weight: $font-weight;
+    }
+    @if $font-display {
+      font-display: $font-display;
+    }
+  }
+}

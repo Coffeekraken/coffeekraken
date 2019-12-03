@@ -1,6 +1,9 @@
 @use "sass:math";
 /**
  * @name      math-odd
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
  * Convert the passed value to the closest odd value
  *
  * @param 			{Number} 		$value 		The value to convert

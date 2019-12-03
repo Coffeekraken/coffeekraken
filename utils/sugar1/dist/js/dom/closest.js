@@ -10,9 +10,12 @@ var _matches = _interopRequireDefault(require("./matches"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
+ * @name        closest
+ * @namespace       sugar.js.dom
+ * @type      Function
+ *
  * Go up the dom three to find the first element that matches the passed selector
  *
- * @name 		closest
  * @param 		{HTMLElement} 					elm  		The element to start on
  * @param 		{String|Function} 				selector 	A css selector to search for or a check function that will be used
  * @return 		{HTMLElement} 								The element found or null

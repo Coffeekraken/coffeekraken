@@ -33,20 +33,20 @@ The primary goal of this toolkit is to cover these needs:
    - Help you to stay organized inside your code - [Colors](doc/scss/colors.md) - [Fonts](doc/scss/fonts.md) - [Etc...](doc/scss)
    - **Help a lot when you need to work in team**
 2. Give you access to a large number of useful mixins like:
-   - [s-font](doc/src/sass/core/mixins/_s-font.md) : Apply font property quickly
-   - [s-clearfix](doc/src/sass/mixins/_s-clearfix.md) : Apply any clearfix (standard, overflow, float, etc...) type quickly
-   - [s-placeholder](doc/src/sass/mixins/_s-placeholder.md) : Apply the input placeholder styling
-   - [s-list-bullet](doc/src/sass/mixins/_s-list-bullet.md) : Create fully customized list bullets (icons, images, decimal, etc...)
-   - [s-vertical-rhythme](doc/src/sass/core/mixins/_s-vertical-rhythme.md) : Set your vertical rhythme rules
-   - [s-truncate-text](doc/src/sass/mixins/_s-truncate-text.md) : Truncate a text when to wide
-   - [And many many more...](doc/src/sass)
+   - [font](doc/src/scss/core/mixin/_font.md) : Apply font property quickly
+   - [clearfix](doc/src/scss/mixin/_clearfix.md) : Apply any clearfix (standard, overflow, float, etc...) type quickly
+   - [placeholder](doc/src/scss/mixin/_placeholder.md) : Apply the input placeholder styling
+   - [list-bullet](doc/src/scss/mixin/_list-bullet.md) : Create fully customized list bullets (icons, images, decimal, etc...)
+   - [vertical-rhythme](doc/src/scss/core/mixins/_vertical-rhythme.md) : Set your vertical rhythme rules
+   - [truncate-text](doc/src/scss/mixins/_truncate-text.md) : Truncate a text when to wide
+   - [And many many more...](doc/src/scss)
 3. Give you access to some cool effects that you can tweak like:
-   - [s-depth](doc/src/sass/effects/_s-depth.md) : Material design depth shadows
-   - [s-bubble](doc/src/sass/effects/_s-bubble.md) : Customizable speach bubbles
-   - [s-side-lined](doc/src/sass/effects/_s-side-lined.md) : Simple side lines to apply on titles or whatever
-   - [s-long-shadow](doc/src/sass/effects/_s-long-shadow.md) : Create a nice long shadow effect
+   - [depth](doc/src/scss/effect/_depth.md) : Material design depth shadows
+   - [bubble](doc/src/scss/effect/_bubble.md) : Customizable speach bubbles
+   - [side-lined](doc/src/scss/effect/_side-lined.md) : Simple side lines to apply on titles or whatever
+   - [long-shadow](doc/src/scss/effect/_long-shadow.md) : Create a nice long shadow effect
    - Fully customizable one div loaders
-   - [And many more...](doc/src/sass/effects)
+   - [And many more...](doc/src/scss/effect)
 4. Provide some useful daily use javascript functions like:
    - [closest](doc/src/js/dom/closest.md) : Equivalent of the jQuery **closest** functions
    - [whenInViewport](doc/src/js/dom/whenInViewport.md) : Let you know when an element enter the viewport the first time
@@ -57,10 +57,10 @@ The primary goal of this toolkit is to cover these needs:
    - [And many, many, many more...](doc/src/js)
 5. Provide some powerful javascript classes like:
    - [SWebComponent](doc/src/js/core/SWebComponentMixin.md) : Base class to create webcomponent based on **react** methods naming (componentWillMount, componentMount, etc...)
-   - [SBinder](doc/src/js/classes/SBinder.md) : Allows you to bind object properties to another object
-   - [SWatcher](doc/src/js/classes/SWatcher.md) : Allows you to monitor object properties
-   - [STimer](doc/src/js/classes/SBinder.md) : Nice little class to handle timers (start, stop, pause, onTick, etc...)
-   - [And many more...](doc/src/js/classes)
+   - [SBinder](doc/src/js/class/SBinder.md) : Allows you to bind object properties to another object
+   - [SWatcher](doc/src/js/class/SWatcher.md) : Allows you to monitor object properties
+   - [STimer](doc/src/js/class/SBinder.md) : Nice little class to handle timers (start, stop, pause, onTick, etc...)
+   - [And many more...](doc/src/js/class)
 6. Plenty web components based on the `SWebComponent` class
    - These web components are separated into outside packages
    - Official sugar web components are published on the [Coffeekraken NPM organisation](http://npmjs.org/org/coffeekraken)
@@ -86,16 +86,16 @@ Here's how to get started quickly:
 
 ```scss
 // import sugar
-@import "node_modules/@coffeekraken/sugar/index";
+@use "node_modules/@coffeekraken/sugar/index" as sugar;
 
 // configure your sugar
-@include s-setup((// configuration here...));
+@include sugar.setup((// configuration here...));
 
-// init (required to be just after s-setup calls)
-@include s-init();
+// init (required to be just after sugar.setup calls)
+@include sugar.init();
 
 // generate the classes if you want
-@include s-classes();
+@include sugar.classes();
 ```
 
 #### JS
@@ -103,7 +103,7 @@ Here's how to get started quickly:
 In javascript, you just need to import what you want from the toolkit like so:
 
 ```js
-import STimer from "@coffeekraken/sugar/js/classes/STimer";
+import STimer from "@coffeekraken/sugar/js/class/STimer";
 // etc...
 ```
 
@@ -121,7 +121,7 @@ Here's a list of features that the toolkit will offer you. **Don't worry**, it s
 - **[Look and feel](doc/scss/look-and-feel.md)** : Handle how your components (atoms) looks across your site - **em** unit based - Helper mixins - Ensure a consistent feel across your website - [And more...](doc/scss/look-and-feel.md)
 - **[Filters](doc/scss/filters.md)** : Manage and keep your filters organized - Named filters - Helper mixins - Helper classes (optional) - [And more...](doc/scss/filters.md)
 - **[Transitions](doc/scss/transitions.md)** : Manage and keep your transitions organized - Named transitions - Helper mixins - Helper classes (optional) - [And more...](doc/scss/transitions.md)
-- And many more cool stuffs like: - A bunch of cool mixins to discover - Utils functions like : - [s-convert](doc/src/sass/core/functions/_s-convert.md) : Convert from a unit to another - [s-is](doc/src/sass/core/functions/_s-is.md) : Easily advanced variables type checking - And more... - We let you discover the rest by yourself...
+- And many more cool stuffs like: - A bunch of cool mixins to discover - Utils functions like : - [convert](doc/src/scss/core/function/_convert.md) : Convert from a unit to another - [is](doc/src/scss/core/function/_is.md) : Easily advanced variables type checking - And more... - We let you discover the rest by yourself...
 
 <a id="readme-js-features"></a>
 
@@ -138,18 +138,18 @@ import closest from "@coffeekraken/sugar/js/dom/closest";
 import whenInViewport from "@coffeekraken/sugar/js/dom/whenInViewport";
 import whenAttribute from "@coffeekraken/sugar/js/dom/whenAttribute";
 import closestNotVisible from "@coffeekraken/sugar/js/dom/closestNotVisible";
-import SColor from "@coffeekraken/sugar/js/classes/SColor";
-import STimer from "@coffeekraken/sugar/js/classes/STimer";
+import SColor from "@coffeekraken/sugar/js/class/SColor";
+import STimer from "@coffeekraken/sugar/js/class/STimer";
 import SWebComponent from "@coffeekraken/sugar/js/core/SWebComponent";
 // etc...
 ```
 
-- **[Classes](doc/js/classes.md)** : Set of useful classes like: - [STimer](doc/src/js/classes/STimer.md) : Handle times with nice control like start, stop, pause, etc... - [SColor](doc/src/js/classes/SColor.md) : Manipulate colors and access your sass registered colors - [And more...](doc/js/classes.md)
+- **[Classes](doc/js/class.md)** : Set of useful classes like: - [STimer](doc/src/js/class/STimer.md) : Handle times with nice control like start, stop, pause, etc... - [SColor](doc/src/js/class/SColor.md) : Manipulate colors and access your sass registered colors - [And more...](doc/js/class.md)
 - **[DOM Helpers](doc/js/dom.md)** : Set of useful DOM related functions like: - [closest](doc/src/js/dom/closest.md) : Equivalent of the jQuery **closest** functions - [whenInViewport](doc/src/js/dom/whenInViewport.md) : Let you know when an element enter the viewport the first time - [whenAttribute](doc/src/js/dom/whenAttribute.md) : Let you know when an element has a specifiy attribute (or that an attribute is a string, etc...) - [scrollTo](doc/src/js/dom/scrollTo.md) : Animate the scroll to a certain element in the page - [And more](doc/js/dom.md)
-- **[Easings](doc/src/js/easings)** : Set of easings functions
-- **[Filters](doc/js/filters.md)** : Cool js filters like: - [SGooeySvgFilter](doc/src/js/filters/SGooeySvgFilter.md) : Make a gooey effect like in [this demo](https://tympanus.net/Development/CreativeGooeyEffects) - [SGradientSvgFilter](doc/src/js/filters/SGradientSvgFilter.md) : Apply an SVG gradient filter on top of any HTMLElement - [SMotionblurSvgFilter](doc/src/js/filters/SMotionblurSvgFilter.md) : Monitor an HTMLElement movement and apply a nice motion blur accordingly
-- **[Features](doc/js/features.md)** : Additional auto-applied DOM behaviors
-- **[Utils](doc/src/js/utils)** : Utils function for strings, colors, objects, etc... like: - [throttle](doc/src/js/utils/functions/throttle.md) : Throttle a function call - [isColor](doc/src/js/utils/is/color.md) : Check if is a valid color - [isEmail](doc/src/js/utils/is/email.md) : Check if is a valid email - [whenProperty](doc/src/js/utils/objects/whenProperty.md) : Be notified when a property exist or match a certain check function - [And more...](doc/src/js/utils)
+- **[Easings](doc/src/js/easing)** : Set of easings functions
+- **[Filters](doc/js/filter.md)** : Cool js filters like: - [SGooeySvgFilter](doc/src/js/filter/SGooeySvgFilter.md) : Make a gooey effect like in [this demo](https://tympanus.net/Development/CreativeGooeyEffects) - [SGradientSvgFilter](doc/src/js/filter/SGradientSvgFilter.md) : Apply an SVG gradient filter on top of any HTMLElement - [SMotionblurSvgFilter](doc/src/js/filter/SMotionblurSvgFilter.md) : Monitor an HTMLElement movement and apply a nice motion blur accordingly
+- **[Features](doc/js/feature.md)** : Additional auto-applied DOM behaviors
+- **[Utils](doc/src/js/util)** : Utils function for strings, colors, objects, etc... like: - [throttle](doc/src/js/util/functions/throttle.md) : Throttle a function call - [isColor](doc/src/js/util/is/color.md) : Check if is a valid color - [isEmail](doc/src/js/util/is/email.md) : Check if is a valid email - [whenProperty](doc/src/js/util/objects/whenProperty.md) : Be notified when a property exist or match a certain check function - [And more...](doc/src/js/util)
 
 <a id="readme-does-not"></a>
 

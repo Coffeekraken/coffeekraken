@@ -1,47 +1,70 @@
 /**
+ * @name    states-count
+ * @namespace     gridle.function
+ * @type    Function
+ *
  * Get states count
+ *
  * @return 	{Integer} 	The number of states defined
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com>
  */
- @function g-states-count() {
+ @function states-count() {
 	@return length($_g-states);
 }
 
 
 /**
+ * @name  current-state
+ * @namespace   gridle.function
+ * @type      Function
+ *
  * Get the current state map
+ *
  * @return 		{Map} 	The current state map
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com>
  */
-@function g-current-state() {
+@function current-state() {
 	@return $_g-current-state;
 }
 
 
 /**
+ * @name      current-state-name
+ * @namespace     gridle.function
+ * @type      Function
+ *
  * Get the current state name
+ *
  * @return 		{String} 	The current state name
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com>
  */
-@function g-current-state-name() {
+@function current-state-name() {
 	@return $_g-current-stateName;
 }
 
 
 /*
+ * @name      state
+ * @namespace     gridle.function
+ * @type    Function
+ *
  * Get a state map
  *
  * @param 	{String} 		[$state=current] 		The name of the state to get
  * @return 	{Map} 				A state map object
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com>
  */
-@function g-state(
+@function state(
 	$stateName : current
 ) {
 
 	// check if need to return the current state
 	@if $stateName == current {
-		@return g-current-state();
+		@return current-state();
 	}
 
 	// check if has a state named like this
@@ -63,12 +86,18 @@
 
 
 /**
+ * @name      has-state
+ * @namespace     gridle.function
+ * @type    Function
+ *
  * Check if a state exist :
+ *
  * @param 	{String} 		$name 		The name of the state to check
  * @return 	{Boolean} 					true if exist
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com>
  */
-@function g-has-state(
+@function has-state(
 	$stateName
 ) {
 	@if $stateName == current {
@@ -83,13 +112,19 @@
 
 
 /**
+ * @name      state-var
+ * @namespace     gridle.function
+ * @type      Function
+ *
  * Get a state variable
  *
  * @param 	{String} 		$varName 								The variable name
  * @param  	{String} 		[$stateMap-or-stateName=current] 	 	The state name or a map state value
  * @return 	{Mixed} 												The finded value
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
  */
-@function g-state-var(
+@function state-var(
 	$varName,
 	$stateName : current
 ) {
@@ -97,7 +132,7 @@
 	$state : null;
 
 	// get the state (if no state find, return the current one) :
-	$state : g-state($stateName);
+	$state : state($stateName);
 
 	// check if has key
 	@if map-has-key($state, unquote("#{$varName}")) {
@@ -110,22 +145,34 @@
 
 
 /**
+ * @name      states
+ * @namespace     gridle.function
+ * @type      Function
+ *
  * get the registered gridle states
+ *
  * @return 	{Map} 		All the registered states
+ *
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
-@function g-states() {
+@function states() {
 	@return $_g-states;
 }
 
 
 
 /**
+ * name       states-names
+ * @namespace     gridle.function
+ * @type    Function
+ *
  * get the registered gridle states names
+ *
  * @return 	{List} 		All the registered states names
+ *
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
-@function g-states-names() {
+@function states-names() {
 	$list : ();
 	@each $stateName, $state in $_g-states {
 		$list : append($list, $stateName);
@@ -134,46 +181,73 @@
 }
 
 /**
+ * @name      gutters
+ * @namespace     gridle.function
+ * @type    Function
+ *
  * Return a multiple of the gutter-unit variable
+ *
  * @param    {Number}    $miltiplicator    The multiplicator to use
  * @return    {String}    The calc representation of the multiplied value
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
  */
-@function g-gutters($multiplicator) {
+@function gutters($multiplicator) {
 	@return calc(var(--g-gutter-unit) * #{$multiplicator});
 }
 
 /**
+ * @name      columns
+ * @namespace     gridle.function
+ * @type      Function
+ *
  * Return a multiple of the column-unit variable
+ *
  * @param    {Number}    $miltiplicator    The multiplicator to use
  * @return    {String}    The calc representation of the multiplied value
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
  */
-@function g-columns($multiplicator) {
+@function columns($multiplicator) {
 	@return calc(var(--g-column-unit) * #{$multiplicator});
 }
 
 /**
+ * @name      columns-gutters
+ * @namespace     gridle.function
+ * @type    Function
+ *
  * Return a multiple of the gutter AND column unit variables
+ *
  * @param    {Number}    $miltiplicator    The multiplicator to use
  * @return    {String}    The calc representation of the multiplied value
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
  */
-@function g-columns-gutters($multiplicator) {
+@function columns-gutters($multiplicator) {
 	@return calc((var(--g-column-unit) + var(--g-gutter-unit)) * #{$multiplicator});
 }
 
 /**
+ * @name    media-query
+ * @namespace     gridle.function
+ * @type    Function
+ *
  * Get the media query for a particular state, or width, etc...
  *
  * @param 	{Mixed} 		[$stateName=current] 		The state name to generate the media query for
  * @return 	{String} 												The media query string without the @media
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
  */
-@function g-media-query(
+@function media-query(
 	$stateName : current
 ) {
 	// check if is a string :
 	$state : null;
 	@if type-of($stateName) == string
 	{
-		$state : g-state($stateName);
+		$state : state($stateName);
 	}
 	@else if type-of($stateName) == map {
 		$state : $stateName;
@@ -222,11 +296,18 @@
 }
 
 /**
+ * @name      process-selector
+ * @namespace       gridle.function
+ * @type      Function
+ *
  * Process a selector by:
  * 1. replacing @default with ''
+ *
  * @param    {String}    $selector    The selector to process
  * @return    {String}    The processed selector
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
  */
-@function g-process-selector($selector) {
-	@return str_replace($selector, '\\@default', '');
+@function process-selector($selector) {
+	@return _g-str-replace($selector, '\\@default', '');
 }

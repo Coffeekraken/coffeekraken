@@ -1,13 +1,30 @@
 /**
+ * @name      custom-class
+ * @namespace     gridle
+ * @type      Mixin
+ *
  * Generate custom class using gridle states
+ *
+ * @param       {String}    $classname      The classname to generate
+ * @param       {List}      [$statesNames:states-names()]     The states to generate
+ *
+ * @example       scss
+ * @include gridle.custom-class(
+ *  my-cool-class,
+ *  default tablet mobile
+ * ) {
+ *    background: red;
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
  */
-@mixin g-custom-class(
+@mixin custom-class(
 	$classname,
-	$statesNames: g-states-names()
+	$statesNames: states-names()
 ) {
 
 	@each $stateName in $statesNames {
-		@include g-state($stateName) {
+		@include state($stateName) {
 			$sel : "#{$classname}\\@#{$stateName}";
 			@if $stateName == default {
 				$sel : "#{$classname}";
@@ -20,25 +37,36 @@
 }
 
 /*
- * Gridle state
+ * @name      state
+ * @namespace     gridle
+ * @type      Mixin
+ *
+ * Print some contents inside gridle states media queries
  *
  * @param 	string|map|list 	$states 		A list of states, a state name or a state map
  * @param 	boolean 			$has-parent 	Mostly always true, mean that the mixin is used in a css selector and not in css root level
+ *
+ * @example       scss
+ * @include gridle.state(default mobile tablet) {
+ *    background: red;
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
  */
-@mixin g-state(
+@mixin state(
 	$statesNames
 ) {
 	@each $stateName in $statesNames {
-		@include _g-state($stateName) {
+		@include _state($stateName) {
 			@content;
 		}
 	}
 }
-@mixin _g-state(
+@mixin _state(
 	$stateName : default
 ) {
 	// variables :
-	$state : g-state($stateName);
+	$state : state($stateName);
 
 	// manage previous state
 	$previous_state : null;
@@ -53,7 +81,7 @@
   $_g-current-stateName : $stateName !global;
 
 	// get the media query :
-	$q : g-media-query($stateName);
+	$q : media-query($stateName);
 
 	// make the media query if a query exist :
 	@if $q {

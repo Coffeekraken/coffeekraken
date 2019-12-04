@@ -1,6 +1,12 @@
 /**
+ * @name    setup
+ * @namespace     gridle
+ * @type    Mixin
+ *
  * Setting up your grid
+ *
  * @param 		{Map} 		$settings 		Your default grid settings
+ *
  * @example 	scss
  * // default settings
  * $_gridle-settings : (
@@ -18,14 +24,14 @@
  * );
  *
  * // setting up your grid
- * \@include g-setup((
+ * \@include gridle.setup((
  * 	columns : 12
  * 	// other settings
  * ));
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com>
  */
- @mixin g-setup(
+ @mixin setup(
 	$settings : ()
 ) {
 	// extend default settings
@@ -44,7 +50,7 @@
 	), $settings) !global;
 
 	// register default state :
-	@include g-register-state(default, $_gridle-settings);
+	@include register-state(default, $_gridle-settings);
 
 	// set current state to default
 	$_g-current-state : $_gridle-settings !global;
@@ -52,9 +58,15 @@
 }
 
 /**
+ * @name    register-state
+ * @namespace     gridle
+ * @type      Mixin
+ *
  * Register a new state with some settings
+ *
  * @param 		{String} 		$name 		The new state name
  * @param 		{Map} 			$settings 	The state settings
+ *
  * @example 	scss
  * \@include g-register-state(mobile, (
  * 	max-width : 600px
@@ -62,7 +74,7 @@
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com>
  */
-@mixin g-register-state(
+@mixin register-state(
 	$name,
 	$settings : ()
 ) {
@@ -70,10 +82,10 @@
 	$settings : map-merge($_gridle-settings, $settings);
 
 	// set name :
-	$settings : map-set($settings, name, $name);
+	$settings : _g-map-set($settings, name, $name);
 
 	// add state in maps :
-	$_g-states : map-set($_g-states, $name, $settings) !global;
+	$_g-states : _g-map-set($_g-states, $name, $settings) !global;
 
 	/**
 	 * @name 	#{g-state-var(name, $name)} State
@@ -95,6 +107,10 @@
 }
 
 /**
+ * @name    register-mobile-first-states
+ * @namespace     gridle
+ * @type    Mixin
+ *
  * Register some basics mobile first states:
  *
  * - tablet : 640px to infinite
@@ -102,18 +118,18 @@
  * - large : 1200px to infinite
  *
  * @example 	scss
- * \@include g-register-mobile-first-states();
+ * \@include gridle.register-mobile-first-states();
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com>
  */
- @mixin g-register-mobile-first-states() {
-	@include g-register-state(tablet, (
+ @mixin register-mobile-first-states() {
+	@include register-state(tablet, (
 		min-width : 640px
 	));
-	@include g-register-state(desktop, (
+	@include register-state(desktop, (
 		min-width : 992px
 	));
-	@include g-register-state(large, (
+	@include register-state(large, (
 		min-width : 1200px
 	));
 }

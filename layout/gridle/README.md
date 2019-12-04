@@ -28,13 +28,13 @@ npm i @coffeekraken/gridle --save
 Importing gridle
 
 ```scss
-import 'node_modules/@coffeekraken/gridle/index';
+@use 'node_modules/@coffeekraken/gridle/index' as gridle;
 ```
 
 Configure your grid :
 
 ```scss
-@include g-setup((
+@include gridle.setup((
 	columns: 12,
 	column-width: 60, // unitless value
 	width: 1200, // unitless value
@@ -46,15 +46,15 @@ Configure your grid :
 Register states (media queries) (optional) :
 
 ```scss
-@include g-register-state(tablet, (
+@include gridle.register-state(tablet, (
 	min-width : 640px
 ));
-@include g-register-state(desktop, (
+@include gridle.register-state(desktop, (
 	min-width : 992px
 ));
 
 // even with full custom queries :
-@include g-register-state (landscape, (
+@include gridle.register-state (landscape, (
 	query : "(orientation : landscape)"
 ));
 ```
@@ -62,7 +62,7 @@ Register states (media queries) (optional) :
 Generate all classes :
 
 ```scss
-@include g-classes();
+@include gridle.classes();
 ```
 
 Use your grid in html :
@@ -87,7 +87,7 @@ Customize your content look and feel with Gridle mixins
 #sidebar {
 	background : red;
 
-	@include g-state(tablet) {
+	@include gridle.state(tablet) {
 		background : green;
 	}
 }
@@ -98,7 +98,7 @@ Customize your content look and feel with Gridle mixins
 Gridle allows you to generate custom classes that will be available for each of your states. Here's an exemple
 
 ```scss
-@include g-custom-class('center') {
+@include gridle.custom-class('center') {
 	text-align : center;
 }
 ```

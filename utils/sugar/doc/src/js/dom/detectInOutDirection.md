@@ -1,5 +1,10 @@
 # detectInOutDirection
 
+<!-- @namespace: sugar.js.dom.detectInOutDirection -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Detect the mouse direction when entered on the passed element. The direction can be up, down, left or right and will be passed to the two callbacks available.
 The first one is the `onIn` callback, and the second one is the `onOut`.
 

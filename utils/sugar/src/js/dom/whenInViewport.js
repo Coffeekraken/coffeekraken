@@ -1,12 +1,15 @@
 import whenVisible from "./whenVisible";
 import __isInViewport from "./isInViewport";
-import __throttle from "../utils/functions/throttle";
+import __throttle from "../function/throttle";
 import __closest from "./closest";
 
 /**
+ * @name      whenInViewport
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Monitor an HTMLElement to be notified when it is in the viewport
  *
- * @name 		whenInViewport
  * @param 		{HTMLElement} 				elm 					The element to monitor
  * @param 		{Number} 					[offset=50] 			An offset that represent the distance before entering the viewport for the detection
  * @return 		(Promise) 											The promise that will be resolved when the element is in the viewport

@@ -1,5 +1,10 @@
 # whenAttribute
 
+<!-- @namespace: sugar.js.dom.whenAttribute -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Resolve a promise when the wanted attribute on the passed HTMLElement exist or pass the check function provided
 
 

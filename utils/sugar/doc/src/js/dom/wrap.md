@@ -1,6 +1,12 @@
 # wrap
 
+<!-- @namespace: sugar.js.dom.wrap -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Wrap an HTMLElement inside another `$wrapper` one
+
 
 
 ### Parameters

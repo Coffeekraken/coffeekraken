@@ -1,5 +1,10 @@
 # previous
 
+<!-- @namespace: sugar.js.dom.previous -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Browse the passed element previous siblings to find the first element that matches the passed selector
 
 

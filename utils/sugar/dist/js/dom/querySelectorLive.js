@@ -5,13 +5,17 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = querySelectorLive;
 
-var _uniqid = _interopRequireDefault(require("../utils/uniqid"));
+var _uniqid = _interopRequireDefault(require("../util/uniqid"));
 
 var _matches = _interopRequireDefault(require("./matches"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
+ * @name      querySelectorLive
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Observe the dom to get all the elements that matches a passed css selector at any point in time.
  * Be warned that this use the mutation observer API and will monitor all the document for new nodes. Make sure to use it
  * when you don't have the chance to use the custom elements API instead

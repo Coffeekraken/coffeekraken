@@ -1,6 +1,12 @@
 # autoScrollAnchorLinks
 
+<!-- @namespace: sugar.js.dom.autoScrollAnchorLinks -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Listen for links contains an hash to init them for scroll to target on click
+
 
 
 ### Parameters

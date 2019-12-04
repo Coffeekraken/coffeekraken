@@ -1,5 +1,10 @@
 # querySelector
 
+<!-- @namespace: sugar.js.dom.querySelector -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Enhanced proxy of the Element.querySelector function that let you specify
 if you want an element that is visible, or even that is in the viewport
 
@@ -15,7 +20,8 @@ Return **{ [HTMLElement](https://developer.mozilla.org/fr/docs/Web/API/HTMLEleme
 
 ### Example
 ```js
-	// simple query
+	import querySelector from '@coffeekraken/sugar/js/dom/querySelector';
+// simple query
 const elm = querySelector('.a-cool-css-selector');
 
 // get an element that is in the viewport

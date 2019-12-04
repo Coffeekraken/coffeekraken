@@ -1,6 +1,12 @@
 # querySelectorAllWithStyle
 
+<!-- @namespace: sugar.js.dom.querySelectorAllWithStyle -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Select all node that match the style object passed as parameter
+
 
 
 ### Parameters

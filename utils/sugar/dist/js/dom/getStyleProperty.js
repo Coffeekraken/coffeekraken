@@ -5,24 +5,27 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = getStyleProperty;
 
-var _camelize = _interopRequireDefault(require("../utils/strings/camelize"));
+var _camelize = _interopRequireDefault(require("../string/camelize"));
 
-var _autoCast = _interopRequireDefault(require("../utils/strings/autoCast"));
+var _autoCast = _interopRequireDefault(require("../string/autoCast"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
+ * @name      getStyleProperty
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Get a style property on the passed element through the computed style.
  * This function try to store the actual style to not trigger more that 1 redraw
  * each js execution loop.
  *
- * @name 		getStyleProperty
  * @param 		{HTMLElement} 					elm  		The element to get style from
  * @param 		{String} 						property 	The css property to get
  * @return 		{Mixed} 									The style value
  *
  * @example  	js
- * import getStyleProperty from 'sugarcss/js/dom/getStyleProperty'
+ * import getStyleProperty from '@coffeekraken/sugar/js/dom/getStyleProperty'
  * const opacity = getStyleProperty(myCoolHTMLElement, 'opacity');
  *
  * @see 		https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle

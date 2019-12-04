@@ -10,14 +10,17 @@ var _domready = _interopRequireDefault(require("domready"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
+ * @name      domReady
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Wait that the dom is ready before resolving the promise
  *
- * @name 		domReady
  * @param 		{Function} 		cb 			An optional callback that will be called when the dom is ready
  * @return 		{Promise} 					A promise that will be resolved when the dom is ready
  *
  * @example  	js
- * import domReady from 'sugarcss/js/dom/domReady'
+ * import domReady from '@coffeekraken/sugar/js/dom/domReady'
  * // using callback
  * domReady(() => {
  * 		// do something

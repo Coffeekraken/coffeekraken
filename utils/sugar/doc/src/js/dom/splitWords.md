@@ -1,21 +1,20 @@
 # splitWords
 
+<!-- @namespace: sugar.js.dom.splitWords -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Split each words inside an HTMLElement by scoping them inside some tags.
 Here's an result sample for :
 Hello World
 
 ```html
-<span class="split-words">Hello</span>
-<span class="split-words">World</span>
+<span class="s-split-words">Hello</span>
+<span class="s-split-words">World</span>
 ```
 
 
-### Example
-```js
-	import __splitWords from '@coffeekraken/sugar/js/dom/splitLines'
-const myCoolElement = document.querySelector('.my-cool-element');
-__splitWords(myCoolElement);
-```
 
 ### Parameters
 Name  |  Type  |  Description  |  Status  |  Default
@@ -26,4 +25,10 @@ tagClass  |  **{ [String](https://developer.mozilla.org/fr/docs/Web/JavaScript/R
 
 Return **{ [HTMLElement](https://developer.mozilla.org/fr/docs/Web/API/HTMLElement) }** The HTMLElement processed
 
+### Example
+```js
+	import splitWords from '@coffeekraken/sugar/js/dom/splitLines'
+const myCoolElement = document.querySelector('.my-cool-element');
+splitWords(myCoolElement);
+```
 Author : Olivier Bossel [olivier.bossel@gmail.com](mailto:olivier.bossel@gmail.com) [https://olivierbossel.com](https://olivierbossel.com)

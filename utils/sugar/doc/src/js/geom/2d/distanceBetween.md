@@ -1,6 +1,12 @@
 # distanceBetween
 
+<!-- @namespace: sugar.js.geom.2d.distanceBetween -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Get the distance between two points
+
 
 
 ### Parameters

@@ -1,5 +1,10 @@
 # whenTransitionEnd
 
+<!-- @namespace: sugar.js.dom.whenTransitionEnd -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Monitor an HTMLElement to be notified when his transition has ended
 
 

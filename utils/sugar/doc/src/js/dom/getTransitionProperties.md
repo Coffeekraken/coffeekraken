@@ -1,5 +1,10 @@
 # getTransitionProperties
 
+<!-- @namespace: sugar.js.dom.getTransitionProperties -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Get the css transition properties from an HTMLElement in an object format
 
 
@@ -13,7 +18,7 @@ Return **{ [Object](https://developer.mozilla.org/fr/docs/Web/JavaScript/Referen
 
 ### Example
 ```js
-	import getTransitionProperties from 'sugarcss/js/dom/getTransitionProperties'
+	import getTransitionProperties from '@coffeekraken/sugar/js/dom/getTransitionProperties'
 const props = getTransitionProperties(myCoolHTMLElement);
 // output format
 // {

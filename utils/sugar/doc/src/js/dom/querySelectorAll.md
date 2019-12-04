@@ -1,5 +1,10 @@
 # querySelectorAll
 
+<!-- @namespace: sugar.js.dom.querySelectorAll -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Enhanced proxy of the Element.querySelectorAll function that let you specify
 if you want elements that are visible, or even that are in the viewport
 
@@ -15,7 +20,8 @@ Return **{ Array<HTMLElement> }** The founded elements
 
 ### Example
 ```js
-	// simple query
+	import querySelectorAll from '@coffeekraken/sugar/js/dom/querySelectorAll';
+// simple query
 const elms = querySelectorAll('.a-cool-css-selector');
 
 // get elements that are in the viewport

@@ -1,6 +1,12 @@
 # backgroundImageLoaded
 
+<!-- @namespace: sugar.js.dom.backgroundImageLoaded -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Detect when a background image has been loaded on an HTMLElement
+
 
 
 ### Parameters

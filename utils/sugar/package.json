@@ -1,7 +1,7 @@
 {
   "name": "@coffeekraken/sugar",
   "description": "A little sugar in your codebase",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "homepage": "http://coffeekraken.io",
   "author": "Coffeekraken <hello@coffeekraken.io>",
   "contributors": [
@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@ungap/custom-elements-builtin": "^0.1.2",
-    "core-js": "^3.4.2",
+    "core-js": "^3.4.7",
     "custom-event": "^1.0.1",
     "document-register-element": "^1.14.3",
     "domready": "^1.0.8",
@@ -32,5 +32,6 @@
     "simple-ajax": "^2.6.0",
     "sprintf-js": "^1.1.2",
     "url-parse": "^1.4.7"
-  }
+  },
+  "devDependencies": {}
 }

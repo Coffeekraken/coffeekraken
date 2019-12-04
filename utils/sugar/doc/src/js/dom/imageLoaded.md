@@ -1,5 +1,10 @@
 # imageLoaded
 
+<!-- @namespace: sugar.js.dom.imageLoaded -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Wait until the passed image is fully loaded
 
 
@@ -14,7 +19,7 @@ Return **{ [Promise](https://developer.mozilla.org/fr/docs/Web/JavaScript/Refere
 
 ### Example
 ```js
-	import imageLoaded from 'sugarcss/js/dom/imageLoaded'
+	import imageLoaded from '@coffeekraken/sugar/js/dom/imageLoaded'
 imageLoaded(myCoolHTMLImageElement).then((img) => {
 		// do something when the image is loaded
 });

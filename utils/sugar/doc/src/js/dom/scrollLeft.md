@@ -1,5 +1,10 @@
 # scrollLeft
 
+<!-- @namespace: sugar.js.dom.scrollLeft -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Get the amount of scroll left
 
 

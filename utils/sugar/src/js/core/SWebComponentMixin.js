@@ -1,109 +1,18 @@
 require("es6-object-assign").polyfill();
 
-import { Mixin } from "../vendors/mixwith";
-import __autoCast from "../utils/strings/autoCast";
+import { Mixin } from "../vendor/mixwith";
+import __autoCast from "../string/autoCast";
 import _extend from "lodash/extend";
-import __camelize from "../utils/strings/camelize";
-import __uncamelize from "../utils/strings/uncamelize";
-import __upperFirst from "../utils/strings/upperFirst";
+import __camelize from "../string/camelize";
+import __uncamelize from "../string/uncamelize";
+import __upperFirst from "../string/upperFirst";
 import __fastdom from "fastdom";
 import __dispatchEvent from "../dom/dispatchEvent";
 import __whenInViewport from "../dom/whenInViewport";
 import __whenVisible from "../dom/whenVisible";
 import __prependChild from "../dom/prependChild";
-import __propertyProxy from "../utils/objects/propertyProxy";
+import __propertyProxy from "../object/propertyProxy";
 import __onchange from "on-change";
-
-/**
- * @name 		SWebComponent
- * @extends 	HTMLElement
- * Base class that abstract a lot of dirty work in order to create nice and clean webcomponents.
- * Features:
- * - Listen for attributes changes
- * - Mount the component at a certain point in time (inViewport, visible, etc...)
- * - **Automatically cast the attributes** to their proper js variable types (Array, Object, String, etc...)
- * - **Physical props** : Specify some props that will ALWAYS be present as attribute on the component for styling purpose
- * - Define some **default CSS** that will be injected in the head automatically
- * - Specify some **required props**
- * - **Full lifecycle management**:
- * 	- componentCreated
- * 	- componentWillMount
- * 	- componentMount
- * 	- componentWillReceiveProp
- * 	- componentWillReceiveProps
- * 	- render
- * 	- componentUnmount
- * - **Mount dependencies** : This will allows you to set some promises that have to be resolved before mounting the component
- *
- * @example 	js
- * import SWebComponent from '@coffeekraken/sugar/js/core/SWebComponent'
- * class MyCoolComponent extends SWebComponent {
- *
- *	\/**
- * 	 * Default props
- * 	 * @definition 		SWebComponent.defaultProps
- * 	 * @protected
- * 	 *\/
- * 	static get defaultProps() {
- * 		return {
- * 		};
- * 	}
- *
- * 	\/**
- * 	 * Css
- * 	 * @protected
- * 	 *\/
- * 	static defaultCss(componentName, componentNameDash) {
- * 		return `
- * 			${componentNameDash} {
- * 				display : block;
- * 			}
- * 		`;
- * 	}
- *
- * 	\/**
- * 	 * Component will mount
- *  	 * @definition 		SWebComponent.componentWillMount
- * 	 * @protected
- * 	 *\/
- * 	componentWillMount() {
- * 		super.componentWillMount();
- * 	}
- *
- * 	\/**
- * 	 * Mount component
- * 	 * @definition 		SWebComponent.componentMount
- * 	 * @protected
- * 	 *\/
- * 	componentMount() {
- * 		super.componentMount();
- * 	}
- *
- * 	\/**
- * 	 * Component unmount
- * 	 * @definition 		SWebComponent.componentUnmount
- * 	 * @protected
- * 	 *\/
- * 	componentUnmount() {
- * 		super.componentUnmount();
- * 	}
- *
- * 	\/**
- * 	 * Component will receive prop
- * 	 * @definition 		SWebComponent.componentWillReceiveProp
- * 	 * @protected
- * 	 *\/
- * 	componentWillReceiveProp(name, newVal, oldVal) {
- * 		switch(name) {
- * 		}
- * 	}
- * }
- *
- * // define your component
- * MyCoolComponent.define('my-cool-component', MyCoolComponent);
- *
- * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
 
 if (!window.sugar) window.sugar = {};
 if (!window.sugar._webComponentsClasses)

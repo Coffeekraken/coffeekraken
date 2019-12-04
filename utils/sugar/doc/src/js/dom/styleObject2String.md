@@ -1,5 +1,10 @@
 # styleObject2String
 
+<!-- @namespace: sugar.js.dom.styleObject2String -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Transform a style object to inline string separated by ;
 
 

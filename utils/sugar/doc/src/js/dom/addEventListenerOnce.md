@@ -1,5 +1,10 @@
 # addEventListenerOnce
 
+<!-- @namespace: sugar.js.dom.addEventListenerOnce -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Add an event listener that will be trigerred only once
 
 

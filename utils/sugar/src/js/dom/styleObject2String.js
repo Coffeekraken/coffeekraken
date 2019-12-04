@@ -1,9 +1,12 @@
-import __uncamelize from "../utils/strings/uncamelize";
+import __uncamelize from "../string/uncamelize";
 
 /**
+ * @name      styleObject2String
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Transform a style object to inline string separated by ;
  *
- * @name 		styleObject2String
  * @param 		{Object} 				styleObj 		An object of style to apply
  * @return 		(String) 								The string style representation
  *

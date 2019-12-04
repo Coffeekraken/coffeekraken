@@ -15,6 +15,10 @@ function _decodeHtml(html) {
   return txt.value;
 }
 /**
+ * @name      splitLetters
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Split each letters inside an HTMLElement by scoping them inside multiple tags.
  * Here's an result sample for : Hello World
  * ```html
@@ -57,15 +61,16 @@ function _decodeHtml(html) {
  * </span>
  * ```
  *
+ * @param 	{HTMLElement} 		elm 		 	The HTMLElement to split letters in
+ * @param 	{String} 			[tag="span"] 	The tag to use to split the letters
+ * @param 	{String} 			[tagClass="s-split-letters"] 		The class to apply on the tags
+ * @return 	{HTMLElement} 						The HTMLElement processed
+ *
  * @example 	js
  * import __splitLetters from '@coffeekraken/sugar/js/dom/splitLetters'
  * const myCoolElement = document.querySelector('.my-cool-element');
  * __splitLetters(myCoolElement);
  *
- * @param 	{HTMLElement} 		elm 		 	The HTMLElement to split letters in
- * @param 	{String} 			[tag="span"] 	The tag to use to split the letters
- * @param 	{String} 			[tagClass="s-split-letters"] 		The class to apply on the tags
- * @return 	{HTMLElement} 						The HTMLElement processed
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 

@@ -1,5 +1,10 @@
 # inViewportPercentage
 
+<!-- @namespace: sugar.js.dom.inViewportPercentage -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Return how many percent the passed element is visible in the viewport
 
 

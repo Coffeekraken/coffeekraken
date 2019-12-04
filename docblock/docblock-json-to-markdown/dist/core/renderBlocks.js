@@ -28,21 +28,10 @@ function renderBlocks(blocks, settings = {}) {
     } else {
       ret.push(settings.description);
     }
-  } // handle doNotRender
-
-
-  if (settings.doNotRender) {
-    settings.doNotRender.forEach(doNotRenderProperty => {
-      blocks.forEach(block => {
-        settings.doNotRender.forEach(property => {
-          delete block[property];
-        });
-      });
-    });
   }
 
   blocks.forEach(block => {
-    ret.push(this._renderBlock(block));
+    ret.push(this._renderBlock(block, settings));
   }); // if we have an titleLevelAdd in settings,
   // increase the title level by this value
 

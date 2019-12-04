@@ -1,5 +1,10 @@
 # insertAfter
 
+<!-- @namespace: sugar.js.dom.insertAfter -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Insert an HTMLElement after another HTMLElement
 
 

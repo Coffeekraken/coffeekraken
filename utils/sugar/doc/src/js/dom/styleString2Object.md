@@ -1,5 +1,10 @@
 # styleString2Object
 
+<!-- @namespace: sugar.js.dom.styleString2Object -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Transform a style string to an object representation
 
 

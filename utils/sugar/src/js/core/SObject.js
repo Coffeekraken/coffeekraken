@@ -1,5 +1,8 @@
 /**
  * @name 		SObject
+ * @namespace     sugar.js.core
+ * @type    Class
+ *
  * This is the main class that will be the base one for all the others.
  * One class to rule them all...
  *

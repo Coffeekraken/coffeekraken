@@ -1,6 +1,12 @@
 # nodeIndex
 
+<!-- @namespace: sugar.js.dom.nodeIndex -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Return the inde of the passed node inside the html
+
 
 
 ### Parameters

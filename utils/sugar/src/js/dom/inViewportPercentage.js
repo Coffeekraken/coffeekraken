@@ -1,9 +1,12 @@
 import __isVisible from "./isVisible";
 
 /**
+ * @name      inViewportPercentage
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Return how many percent the passed element is visible in the viewport
  *
- * @name 		inViewportPercentage
  * @param 		{HTMLElement} 				elm  		The element to get the in viewport percentage from
  * @return 		{Number} 								The percentage visible in the viewport
  *

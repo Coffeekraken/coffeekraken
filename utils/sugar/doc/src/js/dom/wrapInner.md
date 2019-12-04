@@ -1,6 +1,12 @@
 # wrapInner
 
-Wrapp the content of the passed `$parent` inside a the passed HTMLElement `$wrapper`
+<!-- @namespace: sugar.js.dom.wrapInner -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
+Wrap the content of the passed `$parent` inside a the passed HTMLElement `$wrapper`
+
 
 
 ### Parameters

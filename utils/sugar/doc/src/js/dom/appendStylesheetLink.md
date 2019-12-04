@@ -1,6 +1,12 @@
 # appendStylesheetLink
 
+<!-- @namespace: sugar.js.dom.appendStylesheetLink -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Append a stylesheet link to the page head
+
 
 
 ### Parameters

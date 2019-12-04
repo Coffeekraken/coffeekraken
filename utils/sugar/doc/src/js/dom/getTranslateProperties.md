@@ -1,4 +1,9 @@
-# getTranslateProperties
+# dataset
+
+<!-- @namespace: sugar.js.dom.dataset -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
 
 Get a translate properties of an HTMLElement
 
@@ -13,7 +18,7 @@ Return **{ [Object](https://developer.mozilla.org/fr/docs/Web/JavaScript/Referen
 
 ### Example
 ```js
-	import getTranslateProperties from 'sugarcss/js/dom/getTranslateProperties'
+	import getTranslateProperties from '@coffeekraken/sugar/js/dom/getTranslateProperties'
 const props = getTranslateProperties(myCoolHTMLElement);
 // output format
 // {

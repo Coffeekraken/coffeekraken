@@ -12,7 +12,12 @@ var _getTransitionProperties = _interopRequireDefault(require("./getTransitionPr
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
+ * @name      getTransmationDuration
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Get the animation or the transition duration
+ *
  * @param    {HTMLElement}    $elm    The element to get the animation/transition duration from
  * @return    {Integer}    The animation/transition duration in ms
  *

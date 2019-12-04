@@ -1,8 +1,11 @@
 import linkLoaded from "./linkLoaded";
 /**
+ * @name      stylesheetsReady
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Wait until all the HTMLLinkElement's are properly loaded
  *
- * @name 		stylesheetsReady
  * @param 		{Array}<HTMLLinkElement> 		links 			The HTMLLinkElement tags to process
  * @param 		{Function} 						[cb=null] 		An optional callback function to call when all the links are loaded
  * @return 		{Promise} 										The promise that will be resolved when all the links are loaded

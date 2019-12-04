@@ -11,6 +11,7 @@ export default function stringToMarkdown(stringToTransform, language = "js") {
       this._config.docblockParser
     )
   ).parse(stringToTransform);
+
   // transform to markdown
   const markdown = __docblockJsonToMarkdown(
     _merge(

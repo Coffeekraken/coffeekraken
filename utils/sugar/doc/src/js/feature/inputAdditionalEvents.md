@@ -1,0 +1,16 @@
+# handleInputAttributes
+
+<!-- @namespace: sugar.js.feature.handleInputAttributes -->
+
+Type : **{ Feature }**
+
+
+Add some events on some DOM Elements. Here's the list:
+**input/textarea**: `onenter`, `onescape`
+
+
+### Example
+```js
+	import '@coffeekraken/sugar/js/features/inputAdditionalEvents'
+```
+Author : Olivier Bossel [olivier.bossel@gmail.com](mailto:olivier.bossel@gmail.com) [https://olivierbossel.com](https://olivierbossel.com)

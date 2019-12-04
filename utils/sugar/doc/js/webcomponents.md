@@ -258,10 +258,10 @@ You can now use your input component using the **is** notation like so:
 <input type="text" is="my-cool-input" />
 ```
 
-<a name="boilerplate"></a>
+<!-- <a name="boilerplate"></a>
 
 ## Boilerplate for quick start
 
 We provide a nice boilerplate to dive right into your component development without the trouble of configuring anything.
 
-#### [Check it out here](https://github.com/coffeekraken/s-boilerplate-component)
+#### [Check it out here](https://github.com/coffeekraken/s-boilerplate-component) -->

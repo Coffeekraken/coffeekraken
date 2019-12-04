@@ -1,5 +1,10 @@
 # mutationObservable
 
+<!-- @namespace: sugar.js.dom.mutationObservable -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Observe mutations on an HTMLElement and get them through the observable subscription
 
 

@@ -1,5 +1,10 @@
 # inViewportStatusChange
 
+<!-- @namespace: sugar.js.dom.inViewportStatusChange -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Monitor when the passed element enter or exit the viewport
 
 

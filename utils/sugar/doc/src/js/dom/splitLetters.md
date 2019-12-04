@@ -1,5 +1,10 @@
 # splitLetters
 
+<!-- @namespace: sugar.js.dom.splitLetters -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Split each letters inside an HTMLElement by scoping them inside multiple tags.
 Here's an result sample for : Hello World
 ```html
@@ -43,12 +48,6 @@ Here's an result sample for : Hello World
 ```
 
 
-### Example
-```js
-	import __splitLetters from '@coffeekraken/sugar/js/dom/splitLetters'
-const myCoolElement = document.querySelector('.my-cool-element');
-__splitLetters(myCoolElement);
-```
 
 ### Parameters
 Name  |  Type  |  Description  |  Status  |  Default
@@ -59,4 +58,10 @@ tagClass  |  **{ [String](https://developer.mozilla.org/fr/docs/Web/JavaScript/R
 
 Return **{ [HTMLElement](https://developer.mozilla.org/fr/docs/Web/API/HTMLElement) }** The HTMLElement processed
 
+### Example
+```js
+	import __splitLetters from '@coffeekraken/sugar/js/dom/splitLetters'
+const myCoolElement = document.querySelector('.my-cool-element');
+__splitLetters(myCoolElement);
+```
 Author : Olivier Bossel [olivier.bossel@gmail.com](mailto:olivier.bossel@gmail.com) [https://olivierbossel.com](https://olivierbossel.com)

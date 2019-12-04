@@ -7,19 +7,22 @@ exports.default = getAnimationProperties;
 
 var _getStyleProperty = _interopRequireDefault(require("./getStyleProperty"));
 
-var _toMs = _interopRequireDefault(require("../utils/strings/toMs"));
+var _toMs = _interopRequireDefault(require("../string/toMs"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
+ * @name      getAnimationProperties
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Get the css animation properties from an HTMLElement in an object format
  *
- * @name 		getAnimationProperties
  * @param 		{HTMLElement} 					elm  		The element to get the properties from
  * @return 		{Object} 									The animation properties
  *
  * @example  	js
- * import getAnimationProperties from 'sugarcss/js/dom/getAnimationProperties'
+ * import getAnimationProperties from '@coffeekraken/sugar/js/dom/getAnimationProperties'
  * const props = getAnimationProperties(myCoolHTMLElement);
  * // output format
  * // {

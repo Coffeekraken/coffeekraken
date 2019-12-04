@@ -2,9 +2,12 @@ import __isVisible from "./isVisible";
 import __closestNotVisible from "./closestNotVisible";
 
 /**
+ * @name      whenVisible
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Monitor an HTMLElement to be notified when it is visible
  *
- * @name 		whenVisible
  * @param 		{HTMLElement} 				elm 		The element to monitor
  * @param 		{Function} 					[cb=null] 	An optional callback to call when the element is visible
  * @return 		(Promise) 								The promise that will be resolved when the element is visible

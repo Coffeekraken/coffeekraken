@@ -7,21 +7,25 @@ exports.default = scrollToLocationHash;
 
 var _scrollTo = _interopRequireDefault(require("./scrollTo"));
 
-var _easeInOutQuint = _interopRequireDefault(require("../easings/easeInOutQuint"));
+var _easeInOutQuint = _interopRequireDefault(require("../easing/easeInOutQuint"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
+ * @name      scrollToLocationHash
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Scroll to the location hash if an hash is present.
  * This function will try to get the target element from the hash and scroll to it
- *
- * @example 	js
- * import __scrollToLocationHash from '@coffeekraken/sugar/js/dom/scrollToLocationHash'
- * __scrollToLocationHash(500, 0)
  *
  * @param    {Integer}    [duration=500]    The scroll duration
  * @param    {Integer}    [offset=0]    A pixel value to offset the scroll with
  * @param    {Function}    [easing=__easeing]    An easing function to use to scroll
+ *
+ * @example 	js
+ * import __scrollToLocationHash from '@coffeekraken/sugar/js/dom/scrollToLocationHash'
+ * __scrollToLocationHash(500, 0)
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com) (https://olivierbossel.com)
  */

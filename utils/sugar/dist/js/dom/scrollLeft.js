@@ -6,6 +6,10 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = scrollLeft;
 
 /**
+ * @name      scrollLeft
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Get the amount of scroll left
  *
  * @example    js

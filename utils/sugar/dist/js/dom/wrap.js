@@ -6,7 +6,12 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = wrap;
 
 /**
+ * @name      wrap
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Wrap an HTMLElement inside another `$wrapper` one
+ *
  * @param    {HTMLElement}    $toWrap    The element to wrap
  * @param    {HTMLElement}    $wrapper    The wrapper element
  *

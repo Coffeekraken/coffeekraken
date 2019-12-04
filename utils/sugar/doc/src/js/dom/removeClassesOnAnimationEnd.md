@@ -1,5 +1,10 @@
 # removeClassesOnAnimationEnd
 
+<!-- @namespace: sugar.js.dom.removeClassesOnAnimationEnd -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Remove some classes on animation end
 
 

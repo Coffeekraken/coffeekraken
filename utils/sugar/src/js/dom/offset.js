@@ -1,9 +1,12 @@
 // import __getTranslateProperties from './getTranslateProperties'
 
 /**
+ * @name      offset
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Get the offset top and left of the passed element from the document top left point
  *
- * @name 		offset
  * @param 		{HTMLElement} 					elm  		The element to get the offset from
  * @return 		{Object} 									The offset top and left object
  *

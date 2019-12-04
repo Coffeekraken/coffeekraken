@@ -6,7 +6,12 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = distanceBetween;
 
 /**
+ * @name 		distanceBetween
+ * @namespace       sugar.js.geom.2d
+ * @type      Function
+ *
  * Get the distance between two points
+ *
  * @param    {Point}    point1    The point 1, x and y value
  * @param    {Point}    point2    The point 2, x and y value
  * @return    {Number}    The distance between the two points

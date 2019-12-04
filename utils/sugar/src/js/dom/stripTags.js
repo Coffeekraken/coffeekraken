@@ -1,5 +1,10 @@
 /**
+ * @name      stripTags
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Strip the tags of the passed text
+ *
  * @param    {String}    html    the html to process
  * @return    {String}    The html without any tags
  *

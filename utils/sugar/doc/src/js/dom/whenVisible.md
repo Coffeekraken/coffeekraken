@@ -1,5 +1,10 @@
 # whenVisible
 
+<!-- @namespace: sugar.js.dom.whenVisible -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Monitor an HTMLElement to be notified when it is visible
 
 

@@ -6,7 +6,12 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = loadScript;
 
 /**
+ * @name      scriptLoaded
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Detect when a script has been fully loaded
+ *
  * @param    {HTMLScriptElement}    $script    The script element to detect the loading state
  * @return    {Promise}    The promise that will be resolved when the script is fully loaded
  *

@@ -1,11 +1,17 @@
 # InViewportStatusChangeDetector
 
+<!-- @namespace: sugar.js.dom.InViewportStatusChangeDetector -->
+
+Type : **{ Class }**
+
+
 This class allows you to monitor an HTMLElement and be notified when it enters or exit the viewport.
 
 
 ### Example
 ```js
-	const detector = new InViewportStatusChangeDetector(myCoolHTMLElement);
+	import InViewportStatusChangeDetector from '@coffeekraken/sugar/js/dom/InViewportStatusChangeDetector';
+const detector = new InViewportStatusChangeDetector(myCoolHTMLElement);
 detector.on('enter', (elm) => {
 		// the element has entered the viewport
 });

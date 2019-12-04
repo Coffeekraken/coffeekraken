@@ -1,5 +1,10 @@
 # textWidth
 
+<!-- @namespace: sugar.js.dom.textWidth -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Get the text width in px of a passed string or the passed HTMLElement
 
 

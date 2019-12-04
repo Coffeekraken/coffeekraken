@@ -10,7 +10,12 @@ var _distanceBetween = _interopRequireDefault(require("./distanceBetween"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
+ * @name 		circleConstrain
+ * @namespace       sugar.js.geom.2d
+ * @type      Function
+ *
  * Take as parameter a central point, a radius and a points to constrain inside the circle defined by the radius
+ *
  * @param    {Vector2}    center    The center point of the circle
  * @param    {Number}    radius    The radius to constrain the point in
  * @param    {Vector2}    point    The point to constrain

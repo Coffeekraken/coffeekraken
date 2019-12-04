@@ -5,14 +5,17 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = styleObject2String;
 
-var _uncamelize = _interopRequireDefault(require("../utils/strings/uncamelize"));
+var _uncamelize = _interopRequireDefault(require("../string/uncamelize"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
+ * @name      styleObject2String
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Transform a style object to inline string separated by ;
  *
- * @name 		styleObject2String
  * @param 		{Object} 				styleObj 		An object of style to apply
  * @return 		(String) 								The string style representation
  *

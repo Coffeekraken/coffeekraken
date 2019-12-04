@@ -1,6 +1,12 @@
 # circleConstrain
 
+<!-- @namespace: sugar.js.geom.2d.circleConstrain -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Take as parameter a central point, a radius and a points to constrain inside the circle defined by the radius
+
 
 
 ### Parameters

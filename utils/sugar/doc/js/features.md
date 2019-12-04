@@ -1,6 +1,6 @@
 # Features
 
-> Stored in `@coffeekraken/sugar/js/features/...`
+> Stored in `@coffeekraken/sugar/js/feature/...`
 
 The goal of the features are to ad some features around certain element types like inputs, etc...
 They don't expose any API, classes or functions. They're just files that add some behaviors to certain elements.
@@ -17,10 +17,10 @@ They don't expose any API, classes or functions. They're just files that add som
 Simply require the features you want into your codebase and that's it
 
 ```js
-import "@coffeekraken/sugar/js/features/imagesLazySrcAttribute";
-import "@coffeekraken/sugar/js/features/imagesLoadedAttribute";
-import "@coffeekraken/sugar/js/features/inputAdditionalAttributes";
-import "@coffeekraken/sugar/js/features/inputAdditionalEvents";
-import "@coffeekraken/sugar/js/features/linksScrollHrefAttribute";
-import "@coffeekraken/sugar/js/features/videosLazySrcAttribute";
+import "@coffeekraken/sugar/js/feature/imagesLazySrcAttribute";
+import "@coffeekraken/sugar/js/feature/imagesLoadedAttribute";
+import "@coffeekraken/sugar/js/feature/inputAdditionalAttributes";
+import "@coffeekraken/sugar/js/feature/inputAdditionalEvents";
+import "@coffeekraken/sugar/js/feature/linksScrollHrefAttribute";
+import "@coffeekraken/sugar/js/feature/videosLazySrcAttribute";
 ```

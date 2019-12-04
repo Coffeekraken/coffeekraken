@@ -1,5 +1,10 @@
 # addAnimationClass
 
+<!-- @namespace: sugar.js.dom.addAnimationClass -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Add a class that trigger an animation and remove it at the end
 
 

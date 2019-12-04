@@ -1,6 +1,12 @@
 # getTransmationDuration
 
+<!-- @namespace: sugar.js.dom.getTransmationDuration -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Get the animation or the transition duration
+
 
 
 ### Parameters

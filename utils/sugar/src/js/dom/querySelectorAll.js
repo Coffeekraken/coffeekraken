@@ -3,15 +3,19 @@ import __isInViewport from "./isInViewport";
 import __closestNotVisible from "./closestNotVisible";
 
 /**
+ * @name      querySelectorAll
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Enhanced proxy of the Element.querySelectorAll function that let you specify
  * if you want elements that are visible, or even that are in the viewport
  *
- * @name 		querySelectorAll
  * @param 		{String} 				selector 			The css selector to search
  * @param 		{Object} 				settings	 		The settings of the query
  * @return 		{Array}<HTMLElement> 						The founded elements
  *
  * @example 	js
+ * import querySelectorAll from '@coffeekraken/sugar/js/dom/querySelectorAll';
  * // simple query
  * const elms = querySelectorAll('.a-cool-css-selector');
  *

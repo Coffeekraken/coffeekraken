@@ -1,6 +1,12 @@
 # stripTags
 
+<!-- @namespace: sugar.js.dom.stripTags -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Strip the tags of the passed text
+
 
 
 ### Parameters

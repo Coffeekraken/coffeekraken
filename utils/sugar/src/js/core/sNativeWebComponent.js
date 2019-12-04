@@ -1,13 +1,27 @@
 import "document-register-element";
 import "@ungap/custom-elements-builtin";
-// import isSafari from "../utils/is/safari";
-import { mix } from "../vendors/mixwith";
+import { mix } from "../vendor/mixwith";
 import SWebComponentMixin from "./SWebComponentMixin";
-// import isSamsumgBrowser from "../utils/is/samsungBrowser";
-// import isUcBrowser from "../utils/is/ucBrowser";
+/**
+ * @name    sNativeWebComponent
+ * @namespace     sugar.js.core
+ * @type      Function
+ *
+ * Extend a native web element to create a new web component
+ *
+ * @param       {HTMLElement}       HTMLElementToExtend         The HTML element to use as web component base
+ * @return      {Class}                                         The extended base class to create the new web component with
+ *
+ * @example     js
+ * import native from "@coffeekraken/sugar/js/core/sNativeWebComponent";
+ * export default class MyCoolComponent extends native(HTMLVideoElement) {
+ *    // your component integration...
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
 const extendsStack = {};
 export default function sNativeWebComponent(HTMLElementToExtend) {
-  // if (!isSafari() && !isSamsumgBrowser() && !isUcBrowser()) {
   HTMLElementToExtend = (function(OriginalHTMLElement) {
     if (!window[OriginalHTMLElement.name]) return OriginalHTMLElement;
     if (extendsStack[OriginalHTMLElement.name])
@@ -24,7 +38,5 @@ export default function sNativeWebComponent(HTMLElementToExtend) {
     extendsStack[HTMLElementToExtend.name] = BabelHTMLElement;
     return BabelHTMLElement;
   })(HTMLElementToExtend);
-  // }
-
   return mix(HTMLElementToExtend).with(SWebComponentMixin);
 }

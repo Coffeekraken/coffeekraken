@@ -2,7 +2,12 @@ import getAnimationProperties from "./getAnimationProperties";
 import getTransitionProperties from "./getTransitionProperties";
 
 /**
+ * @name      getTransmationDuration
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Get the animation or the transition duration
+ *
  * @param    {HTMLElement}    $elm    The element to get the animation/transition duration from
  * @return    {Integer}    The animation/transition duration in ms
  *

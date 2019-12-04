@@ -1,3 +1,0 @@
-# scrollTop
-
-document.scrollTop polyfill

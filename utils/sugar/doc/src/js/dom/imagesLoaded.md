@@ -1,6 +1,12 @@
 # imagesLoaded
 
+<!-- @namespace: sugar.js.dom.imagesLoaded -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Detect when some images are loaded
+
 
 
 ### Parameters

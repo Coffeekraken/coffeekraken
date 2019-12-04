@@ -1,5 +1,10 @@
 # linkLoaded
 
+<!-- @namespace: sugar.js.dom.linkLoaded -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Wait until the passed HTMLLinkElement is fully loaded
 
 

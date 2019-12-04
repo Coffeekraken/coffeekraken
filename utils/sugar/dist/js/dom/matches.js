@@ -6,9 +6,12 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = matches;
 
 /**
+ * @name      matches
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Polyfill for the Element.matches function
  *
- * @name 		matches
  * @param 		{HTMLElement} 			elm  			The element to check
  * @param 		{String} 				selector 		The selector to check on the element
  * @return 		{Boolean} 								If the element match the selector or not

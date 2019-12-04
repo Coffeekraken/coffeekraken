@@ -1,5 +1,10 @@
 # isVisible
 
+<!-- @namespace: sugar.js.dom.isVisible -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Check if the passed HTMLElement is visible or not.
 Visible mean that it has not an opacity of 0, not a visibility of hidden and not a display of none
 

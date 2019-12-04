@@ -1,17 +1,20 @@
-import __uncamelize from "../utils/strings/uncamelize";
+import __uncamelize from "../string/uncamelize";
 import __styleString2Object from "./styleString2Object";
 import __styleObject2String from "./styleObject2String";
 
 /**
+ * @name      style
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Set or remove a css style property on an HTMLElement
  *
- * @name 		style
  * @param 		{HTMLElement} 			elm 			The element to process
  * @param 		{Object} 				styleObj 		An object of style to apply
  * @return 		(Object) 								The element applied style
  *
  * @example 	js
- * import style from 'sugarcss/js/dom/style'
+ * import style from '@coffeekraken/sugar/js/dom/style'
  * style(myCoolHTMLElement, {
  * 		paddingLeft : 20,
  * 		display : null

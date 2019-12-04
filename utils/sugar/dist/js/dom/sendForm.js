@@ -5,23 +5,29 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = sendForm;
 
-var _SAjax = _interopRequireDefault(require("../classes/SAjax"));
+var _SAjax = _interopRequireDefault(require("../class/SAjax"));
 
 var _formSerialize = _interopRequireDefault(require("form-serialize"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
+ * @name      sendForm
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Send a form through an ajax call and return back a promise resolved with the server response
  *
+ * @param 		{HTMLFormElement} 		form 		The form to send
+ * @return     {Promise}                    A promise resolved when the forn has been sent
+ *
  * @example 	js
- * import __sendForm from '@coffeekraken/sugar/js/dom/sendForm'
+ * import sendForm from '@coffeekraken/sugar/js/dom/sendForm'
  * const myCoolForm = document.querySelector('.my-cool-form')
- * __sentForm(myCoolForm).then((response) => {
+ * sentForm(myCoolForm).then((response) => {
  * 	// do something with the response
  * })
  *
- * @param 		{HTMLFormElement} 		form 		The form to send
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function sendForm(form) {

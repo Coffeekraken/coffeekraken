@@ -1,6 +1,12 @@
 # appendScriptTag
 
+<!-- @namespace: sugar.js.dom.appendScriptTag -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Append a script tag either to the head or the body
+
 
 
 ### Parameters

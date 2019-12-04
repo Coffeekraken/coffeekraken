@@ -1,6 +1,12 @@
 # addEventListener
 
+<!-- @namespace: sugar.js.dom.addEventListener -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Add an event listener on an element and return the function to remove the event listener
+
 
 
 ### Parameters

@@ -1,5 +1,10 @@
 # style
 
+<!-- @namespace: sugar.js.dom.style -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Set or remove a css style property on an HTMLElement
 
 
@@ -14,7 +19,7 @@ Return **{ (Object) }** The element applied style
 
 ### Example
 ```js
-	import style from 'sugarcss/js/dom/style'
+	import style from '@coffeekraken/sugar/js/dom/style'
 style(myCoolHTMLElement, {
 		paddingLeft : 20,
 		display : null

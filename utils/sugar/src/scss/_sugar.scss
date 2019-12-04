@@ -1,34 +1,15 @@
-//
-// Vendors
-//
-@use "vendors/all" as *;
-
-//
-// Styleguide
-//
-@use "styleguide/all" as *;
-
-//
-// Functions
-//
-@use "functions/all" as *;
-
-//
-// Mixins
-//
-@use "mixins/all" as *;
-
-//
-// Tools
-//
-@use "utils/all" as *;
-
-//
-// Core
-//
-@use "core/all" as *;
-
-//
-// Effects
-//
-@use "effects/all" as *;
+@import 'color/all';
+@import 'vendor/all';
+@import 'styleguide/all';
+@import 'function/all';
+@import 'icon/all';
+@import 'list/all';
+@import 'loader/all';
+@import 'math/all';
+@import 'meta/all';
+@import 'map/all';
+@import 'mixin/all';
+@import 'string/all';
+@import 'util/all';
+@import 'core/all';
+@import 'effect/all';

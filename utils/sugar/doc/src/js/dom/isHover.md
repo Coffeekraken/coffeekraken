@@ -1,6 +1,12 @@
 # isHover
 
+<!-- @namespace: sugar.js.dom.isHover -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Check if the mouse is hover the passed HTMLElement
+
 
 
 ### Parameters

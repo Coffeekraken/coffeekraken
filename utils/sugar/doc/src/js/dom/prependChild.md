@@ -1,5 +1,10 @@
 # prependChild
 
+<!-- @namespace: sugar.js.dom.prependChild -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Prepend an HTMLElement into another HTMLElement
 
 

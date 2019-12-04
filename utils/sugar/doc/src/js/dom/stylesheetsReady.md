@@ -1,5 +1,10 @@
 # stylesheetsReady
 
+<!-- @namespace: sugar.js.dom.stylesheetsReady -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Wait until all the HTMLLinkElement's are properly loaded
 
 

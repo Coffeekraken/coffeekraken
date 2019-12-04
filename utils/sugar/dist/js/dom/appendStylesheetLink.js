@@ -10,7 +10,12 @@ var _linkLoaded = _interopRequireDefault(require("./linkLoaded"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
+ * @name        appendStylesheetLink
+ * @namespace       sugar.js.dom
+ * @type      Function
+ *
  * Append a stylesheet link to the page head
+ *
  * @param    {String}    href    THe url to the stylesheet
  * @return    {Promise}    A promise when the stylesheet is loaded with the link element as parameter
  *

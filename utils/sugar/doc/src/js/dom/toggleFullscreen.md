@@ -1,6 +1,12 @@
 # toggleFullscreen
 
+<!-- @namespace: sugar.js.dom.toggleFullscreen -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Toggle the fullscreen mode
+
 
 
 ### Parameters

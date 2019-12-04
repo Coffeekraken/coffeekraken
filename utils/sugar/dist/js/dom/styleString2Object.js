@@ -7,16 +7,19 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = styleString2Object;
 
-var _camelize = _interopRequireDefault(require("../utils/strings/camelize"));
+var _camelize = _interopRequireDefault(require("../string/camelize"));
 
-var _autoCast = _interopRequireDefault(require("../utils/strings/autoCast"));
+var _autoCast = _interopRequireDefault(require("../string/autoCast"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
+ * @name      styleString2Object
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Transform a style string to an object representation
  *
- * @name 		styleString2Object
  * @param 		{String} 				style 			The style string
  * @return 		(Object) 								The string object representation
  *

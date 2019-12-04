@@ -1,10 +1,13 @@
-import __camelize from "../utils/strings/camelize";
-import __autoCast from "../utils/strings/autoCast";
+import __camelize from "../string/camelize";
+import __autoCast from "../string/autoCast";
 
 /**
+ * @name      styleString2Object
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Transform a style string to an object representation
  *
- * @name 		styleString2Object
  * @param 		{String} 				style 			The style string
  * @return 		(Object) 								The string object representation
  *

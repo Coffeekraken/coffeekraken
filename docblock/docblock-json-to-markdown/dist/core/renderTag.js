@@ -5,9 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = renderTag;
 
-function renderTag(name, value) {
+function renderTag(name, value, block) {
   if (this._config.tags[name] && name !== "constructor") {
-    return this._config.tags[name](value);
+    return this._config.tags[name](value, block);
   }
 
   return "";

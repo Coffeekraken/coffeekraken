@@ -1,15 +1,18 @@
 import getStyleProperty from "./getStyleProperty";
-import toMs from "../utils/strings/toMs";
+import toMs from "../string/toMs";
 
 /**
+ * @name      getAnimationProperties
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Get the css animation properties from an HTMLElement in an object format
  *
- * @name 		getAnimationProperties
  * @param 		{HTMLElement} 					elm  		The element to get the properties from
  * @return 		{Object} 									The animation properties
  *
  * @example  	js
- * import getAnimationProperties from 'sugarcss/js/dom/getAnimationProperties'
+ * import getAnimationProperties from '@coffeekraken/sugar/js/dom/getAnimationProperties'
  * const props = getAnimationProperties(myCoolHTMLElement);
  * // output format
  * // {

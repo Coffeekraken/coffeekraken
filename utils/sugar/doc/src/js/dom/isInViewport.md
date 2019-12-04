@@ -1,5 +1,10 @@
 # isInViewport
 
+<!-- @namespace: sugar.js.dom.isInViewport -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Check if the passed HTMLElement is in the viewport or not
 
 

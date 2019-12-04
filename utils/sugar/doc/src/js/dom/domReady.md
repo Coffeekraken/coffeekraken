@@ -1,5 +1,10 @@
 # domReady
 
+<!-- @namespace: sugar.js.dom.domReady -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Wait that the dom is ready before resolving the promise
 
 
@@ -13,7 +18,7 @@ Return **{ [Promise](https://developer.mozilla.org/fr/docs/Web/JavaScript/Refere
 
 ### Example
 ```js
-	import domReady from 'sugarcss/js/dom/domReady'
+	import domReady from '@coffeekraken/sugar/js/dom/domReady'
 // using callback
 domReady(() => {
 		// do something

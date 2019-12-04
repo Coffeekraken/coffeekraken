@@ -1,6 +1,12 @@
-# loadScript
+# scriptLoaded
+
+<!-- @namespace: sugar.js.dom.scriptLoaded -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
 
 Detect when a script has been fully loaded
+
 
 
 ### Parameters

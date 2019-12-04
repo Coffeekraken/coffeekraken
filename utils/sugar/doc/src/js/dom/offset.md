@@ -1,5 +1,10 @@
 # offset
 
+<!-- @namespace: sugar.js.dom.offset -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Get the offset top and left of the passed element from the document top left point
 
 

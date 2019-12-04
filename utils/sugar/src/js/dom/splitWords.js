@@ -1,24 +1,29 @@
 import _map from "lodash/map";
 
 /**
+ * @name      splitWords
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Split each words inside an HTMLElement by scoping them inside some tags.
  * Here's an result sample for :
  * Hello World
  *
  * ```html
- * <span class="split-words">Hello</span>
- * <span class="split-words">World</span>
+ * <span class="s-split-words">Hello</span>
+ * <span class="s-split-words">World</span>
  * ```
- *
- * @example 	js
- * import __splitWords from '@coffeekraken/sugar/js/dom/splitLines'
- * const myCoolElement = document.querySelector('.my-cool-element');
- * __splitWords(myCoolElement);
  *
  * @param 	{HTMLElement} 		elm 		 	The HTMLElement to split words in
  * @param 	{String} 			[tag="p"] 		The tag to use to split the words
  * @param 	{String} 			[tagClass="s-split-lines"] 		The class to apply on the tags
  * @return 	{HTMLElement} 						The HTMLElement processed
+ *
+ * @example 	js
+ * import splitWords from '@coffeekraken/sugar/js/dom/splitLines'
+ * const myCoolElement = document.querySelector('.my-cool-element');
+ * splitWords(myCoolElement);
+ *
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function splitWords(

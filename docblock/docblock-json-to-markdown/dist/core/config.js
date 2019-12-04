@@ -45,6 +45,8 @@ var _author = _interopRequireDefault(require("../tags/author"));
 
 var _name = _interopRequireDefault(require("../tags/name"));
 
+var _namespace = _interopRequireDefault(require("../tags/namespace"));
+
 var _body = _interopRequireDefault(require("../tags/body"));
 
 var _params = _interopRequireDefault(require("../tags/params"));
@@ -94,6 +96,7 @@ var _default = {
     implements: _implements.default,
     author: _author.default,
     name: _name.default,
+    namespace: _namespace.default,
     body: _body.default,
     params: _params.default,
     type: _types.default,

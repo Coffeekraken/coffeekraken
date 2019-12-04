@@ -18,6 +18,7 @@ import __extendsTag from "../tags/extends";
 import __implementsTag from "../tags/implements";
 import __authorTag from "../tags/author";
 import __nameTag from "../tags/name";
+import __namespaceTag from "../tags/namespace";
 import __bodyTag from "../tags/body";
 import __paramsTag from "../tags/params";
 import __typesTag from "../tags/types";
@@ -55,6 +56,7 @@ export default {
     implements: __implementsTag,
     author: __authorTag,
     name: __nameTag,
+    namespace: __namespaceTag,
     body: __bodyTag,
     params: __paramsTag,
     type: __typesTag,

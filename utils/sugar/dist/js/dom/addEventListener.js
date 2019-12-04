@@ -6,7 +6,12 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = addEventListener;
 
 /**
+ * @name        addEventListener
+ * @namespace       sugar.js.dom
+ * @type      Function
+ *
  * Add an event listener on an element and return the function to remove the event listener
+ *
  * @param    {HTMLElement}    $elm    The HTMLElement on which to add the event listener
  * @param    {String}    eventName    THe event name to listen to
  * @param    {Function}    callback    The callback function to call on event

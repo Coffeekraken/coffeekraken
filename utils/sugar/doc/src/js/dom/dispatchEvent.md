@@ -1,5 +1,10 @@
 # dispatchEvent
 
+<!-- @namespace: sugar.js.dom.dispatchEvent -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Helper to quickly display an event with some optional data attached to it
 
 
@@ -13,7 +18,7 @@ data  |  **{ Mixed }**  |  The data to attache to the event  |  required  |
 
 ### Example
 ```js
-	import dispatchEvent from 'sugarcss/js/dom/dispatchEvent'
+	import dispatchEvent from '@coffeekraken/sugar/js/dom/dispatchEvent'
 dispatchEvent(myCoolHTMLElement, 'myCoolEventName', {
 		var1 : 'value1'
 });

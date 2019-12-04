@@ -1,6 +1,12 @@
 # requestFullscreen
 
+<!-- @namespace: sugar.js.dom.requestFullscreen -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Request fullscreen on the passed DOM element
+
 
 
 ### Parameters
@@ -12,7 +18,7 @@ Return **{ [Promise](https://developer.mozilla.org/fr/docs/Web/JavaScript/Refere
 
 ### Example
 ```js
-	import requestFullescreen from '@coffeekraken/sugar/js/dom/requestFullscreen'
+	import requestFullscreen from '@coffeekraken/sugar/js/dom/requestFullscreen'
 requestFullscreen(myDomElm)
 ```
 Author : Olivier Bossel [olivier.bossel@gmail.com](mailto:olivier.bossel@gmail.com) [https://olivierbossel.com](https://olivierbossel.com)

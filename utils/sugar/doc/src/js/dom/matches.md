@@ -1,5 +1,10 @@
 # matches
 
+<!-- @namespace: sugar.js.dom.matches -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Polyfill for the Element.matches function
 
 

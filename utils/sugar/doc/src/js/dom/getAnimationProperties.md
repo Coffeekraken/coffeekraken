@@ -1,5 +1,10 @@
 # getAnimationProperties
 
+<!-- @namespace: sugar.js.dom.getAnimationProperties -->
+
+Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
+
+
 Get the css animation properties from an HTMLElement in an object format
 
 
@@ -13,7 +18,7 @@ Return **{ [Object](https://developer.mozilla.org/fr/docs/Web/JavaScript/Referen
 
 ### Example
 ```js
-	import getAnimationProperties from 'sugarcss/js/dom/getAnimationProperties'
+	import getAnimationProperties from '@coffeekraken/sugar/js/dom/getAnimationProperties'
 const props = getAnimationProperties(myCoolHTMLElement);
 // output format
 // {

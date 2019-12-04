@@ -7,21 +7,24 @@ exports.default = getTransitionProperties;
 
 var _getStyleProperty = _interopRequireDefault(require("./getStyleProperty"));
 
-var _autoCast = _interopRequireDefault(require("../utils/strings/autoCast"));
+var _autoCast = _interopRequireDefault(require("../string/autoCast"));
 
-var _toMs = _interopRequireDefault(require("../utils/strings/toMs"));
+var _toMs = _interopRequireDefault(require("../string/toMs"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
+ * @name      getTransitionProperties
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Get the css transition properties from an HTMLElement in an object format
  *
- * @name 		getTransitionProperties
  * @param 		{HTMLElement} 					elm  		The element to get the properties from
  * @return 		{Object} 									The animation properties
  *
  * @example  	js
- * import getTransitionProperties from 'sugarcss/js/dom/getTransitionProperties'
+ * import getTransitionProperties from '@coffeekraken/sugar/js/dom/getTransitionProperties'
  * const props = getTransitionProperties(myCoolHTMLElement);
  * // output format
  * // {

@@ -7,14 +7,17 @@ exports.default = whenAttribute;
 
 var _attributesObservable = _interopRequireDefault(require("./attributesObservable"));
 
-var _autoCast = _interopRequireDefault(require("../utils/strings/autoCast"));
+var _autoCast = _interopRequireDefault(require("../string/autoCast"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
+ * @name      whenAttribute
+ * @namespace     sugar.js.dom
+ * @type      Function
+ *
  * Resolve a promise when the wanted attribute on the passed HTMLElement exist or pass the check function provided
  *
- * @name 		whenAttribute
  * @param 		{HTMLElement} 				elm 				The HTMLElement on which to monitor the property
  * @param 		{String} 					attribute 			The attribute to monitor
  * @param 		{Function} 					[checkFn=null] 		An optional function to check the attribute. The promise is resolved when this function return true

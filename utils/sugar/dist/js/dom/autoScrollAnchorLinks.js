@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = autoScrollAnchorLinks;
 
-var _easeInOutQuint = _interopRequireDefault(require("../easings/easeInOutQuint"));
+var _easeInOutQuint = _interopRequireDefault(require("../easing/easeInOutQuint"));
 
 var _querySelectorLive = _interopRequireDefault(require("./querySelectorLive"));
 
@@ -16,7 +16,12 @@ var _scrollTo = _interopRequireDefault(require("./scrollTo"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
+ * @name        autoScrollAnchorLinks
+ * @namespace       sugar.js.dom
+ * @type      Function
+ *
  * Listen for links contains an hash to init them for scroll to target on click
+ *
  * @param    {Integer}    [duration=500]    The scroll duration in ms
  * @param    {Integer}    [offset=0]    A scroll offset to apply
  * @param    {Function}    [easing=__easing]    An easing function used to scroll

@@ -1,0 +1,14 @@
+@use 'sugar/index' as sugar;
+@use 'select-webcomponent/index' as select-webcomponent;
+
+// configure your sugar
+@include sugar.setup(());
+
+// init (required to be just after sugar.setup calls)
+@include sugar.init();
+
+// generate the classes if you want
+@include sugar.classes();
+
+
+@include select-webcomponent.classes($colors: default primary secondary);

@@ -14,7 +14,7 @@
     "demo": "ck run demo.dist && ck run demo.server",
     "demo.dist": "ck run demo.dist.js && ck run demo.dist.scss",
     "demo.dist.js": "webpack --config ../../webpack.config.js",
-    "demo.dist.scss": "sass demo/src/scss/style.scss demo/dist/css/style.css",
+    "demo.dist.scss": "sass demo/src/scss/style.scss demo/dist/css/style.css --load-path=../../docblock --load-path=../../layout --load-path=../../style --load-path=../../terminal --load-path=../../util --load-path=../../webcomponent",
     "demo.server": "open http://127.0.0.1:8080 && http-server ./demo",
     "start": "ck-scripts-stack -i start"
   },
@@ -73,8 +73,7 @@
     "babel-loader": "^8.0.6",
     "babel-plugin-add-module-exports": "^1.0.2",
     "glob": "^7.1.6",
-    "jest-raw-loader": "^1.0.1",
-    "node-sass": "^4.13.0"
+    "jest-raw-loader": "^1.0.1"
   },
   "globalDependencies": {
     "@babel/core": "^7.7.4",
@@ -86,7 +85,8 @@
     "@coffeekraken/scripts-stack": "^0.0.11",
     "core-js": "^3.4.2",
     "jest": "^24.9.0",
-    "sass": "^1.23.7"
+    "sass": "^1.23.7",
+    "node-sass": "^4.13.0"
   },
   "devDependencies": {}
 }

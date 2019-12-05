@@ -1,0 +1,35 @@
+{
+  "name": "@coffeekraken/select-webcomponent",
+  "version": "0.0.1",
+  "description": "Provide a nice and fully customizable select webcomponent that use a real select as source of truth",
+  "main": "dist/index.js",
+  "homepage": "http://coffeekraken.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Coffeekraken/coffeekraken/tree/master/webcomponent/select-webcomponent"
+  },
+  "keywords": [
+    "coffee",
+    "kraken",
+    "coffeekraken",
+    "select",
+    "webcomponent",
+    "component",
+    "html",
+    "sugar"
+  ],
+  "author": "Coffeekraken <hello@coffeekraken.io>",
+  "contributors": [
+    {
+      "name": "Olivier Bossel",
+      "email": "olivier.bossel@gmail.com",
+      "url": "http://olivierbossel.com"
+    }
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@coffeekraken/form-style": "^0.0.2",
+    "@coffeekraken/sugar": "1.0.1"
+  },
+  "devDependencies": {}
+}

@@ -8,6 +8,11 @@ module.exports = {
     path: require("path").resolve("."),
     filename: "[name]"
   },
+  resolve: {
+    alias: {
+      // '@coffeekraken/sugar': path.resolve(__dirname, 'util/sugar/dist')
+    }
+  },
   module: {
     rules: [
       {

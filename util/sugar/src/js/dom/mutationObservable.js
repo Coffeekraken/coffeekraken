@@ -11,7 +11,7 @@ import { Observable } from "rxjs/Observable";
  *
  * @param 		{HTMLElement} 					target 		The element to observe
  * @param 		{MutationObserverInit} 			settings 	The mutation observer settings
- * @return 		{Observable} 								The mutation observable
+ * @return 		{Observable} 								The rxjs mutation observable
  *
  * @example  	js
  * import mutationObservable from '@coffeekraken/sugar/js/dom/mutationObservable'

@@ -1,46 +1,79 @@
-import __next from "@coffeekraken/sugar/js/dom/next";
-import __previous from "@coffeekraken/sugar/js/dom/previous";
-import __offset from "@coffeekraken/sugar/js/dom/offset";
-import __offsetParent from "@coffeekraken/sugar/js/dom/offsetParent";
-import __scrollTop from "@coffeekraken/sugar/js/dom/scrollTop";
-import __insertAfter from "@coffeekraken/sugar/js/dom/insertAfter";
-import __dispatchEvent from "@coffeekraken/sugar/js/dom/dispatchEvent";
-import SEvent from "@coffeekraken/sugar/js/classes/SEvent";
-import __style from "@coffeekraken/sugar/js/dom/style";
-import native from "@coffeekraken/sugar/js/core/sNativeWebComponent";
-import __mutationObservable from "@coffeekraken/sugar/js/dom/mutationObservable";
+"use strict";
 
-require("@coffeekraken/sugar/js/polyfills/queryselector-scope");
-require("@coffeekraken/sugar/js/utils/rxjs/operators/groupByTimeout");
+require("core-js/modules/es.string.replace");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _next = _interopRequireDefault(require("@coffeekraken/sugar/js/dom/next"));
+
+var _previous = _interopRequireDefault(require("@coffeekraken/sugar/js/dom/previous"));
+
+var _offset = _interopRequireDefault(require("@coffeekraken/sugar/js/dom/offset"));
+
+var _offsetParent = _interopRequireDefault(require("@coffeekraken/sugar/js/dom/offsetParent"));
+
+var _scrollTop = _interopRequireDefault(require("@coffeekraken/sugar/js/dom/scrollTop"));
+
+var _insertAfter = _interopRequireDefault(require("@coffeekraken/sugar/js/dom/insertAfter"));
+
+var _dispatchEvent = _interopRequireDefault(require("@coffeekraken/sugar/js/dom/dispatchEvent"));
+
+var _SEvent = _interopRequireDefault(require("@coffeekraken/sugar/js/class/SEvent"));
+
+var _style = _interopRequireDefault(require("@coffeekraken/sugar/js/dom/style"));
+
+var _sNativeWebComponent = _interopRequireDefault(require("@coffeekraken/sugar/js/core/sNativeWebComponent"));
+
+var _mutationObservable = _interopRequireDefault(require("@coffeekraken/sugar/js/dom/mutationObservable"));
+
+require("@coffeekraken/sugar/js/polyfill/queryselector-scope");
+
+require("@coffeekraken/sugar/js/rxjs/operator/groupByTimeout");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
- * @name 		SSelectComponent
+ * @name 		SelectWebcomponent
+ * @namespace     select-webcomponent
+ * @type      Class
  * @extends  	SWebComponent
+ *
  * Provide a nice and fully customizable select webcomponent that use a real select as source of truth
  * ### Features
  * - Fully based on standard select
  * - Optional internal search
- * - Custom option element through the "s-select-option-elm" attribute
+ * - Custom option element through the "ck-select-option-elm" attribute
  * - Fully customizable
  * - Support multiple selected options through "tags" display
  * - Any more...
  *
  * @example 	html
- * <select is="s-select" name="my-cool-select">
+ * <select is="ck-select" name="my-cool-select">
  * 	<option value="value1">Hello</option>
  * 	<option value="value2">World</option>
  * 	<optgroup label="My Cool Group">
  *  	<option value="value3">My Cool Option</option>
  * 	</optgroup>
  * </select>
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com>
  */
-
-export default class SSelectComponent extends native(HTMLSelectElement) {
+class SelectWebcomponent extends (0, _sNativeWebComponent.default)(HTMLSelectElement) {
   /**
    * Default css
+   *
+   * @param       {String}        componentName       The component name
+   * @param       {String}        componentNameDash     The component name dashed
+   * @return      {String}                            The default css for the component
+   *
    * @definition 		SWebComponent.defaultCss
    * @protected
+   * @static
+   *
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   static defaultCss(componentName, componentNameDash) {
     return `
@@ -133,12 +166,19 @@ export default class SSelectComponent extends native(HTMLSelectElement) {
 			}
 		`;
   }
-
   /**
    * Default props
+   *
+   * @return    {Object}        The object of the default props for the component
+   *
    * @definition 		SWebComponent.defaultProps
    * @protected
+   * @static
+   *
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
+
+
   static get defaultProps() {
     return {
       /**
@@ -222,67 +262,73 @@ export default class SSelectComponent extends native(HTMLSelectElement) {
       dropupLimit: 200
     };
   }
-
   /**
    * Mount component
+   *
    * @definition 		SWebComponent.componentMount
    * @protected
+   *
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  componentMount() {
-    super.componentMount();
 
-    // utils variables
+
+  componentMount() {
+    super.componentMount(); // utils variables
+
     this._openOnFocus = false;
     this._currentActiveOption = null; // save the current keyboard selected item
-
     // build html structure
-    this._buildHTML();
 
-    // display or not the search
+    this._buildHTML(); // display or not the search
+
+
     if (!this.props.searchField) {
       this._searchContainerElm.style.position = "absolute";
       this._searchContainerElm.style.left = "-120vw";
-    }
+    } // make sure when we click that we focus on the search field
 
-    // make sure when we click that we focus on the search field
+
     this._containerElm.addEventListener("click", e => {
       if (this.props.searchField) {
         this._searchFieldElm.focus();
       }
-    });
+    }); // prevent default behavior on click in options container
 
-    // prevent default behavior on click in options container
+
     this.optionsContainerElm.addEventListener("click", e => {
       e.preventDefault();
-    });
+    }); // open on click
 
-    // open on click
     this._containerElm.addEventListener("click", e => {
       // do not open when the click is on an option
-      if (this.hasComponentClass(e.target, "option")) return;
-      // open
+      if (this.hasComponentClass(e.target, "option")) return; // open
+
       if (!this.isOpened()) {
         this.open();
       }
-    });
+    }); // prevent scroll into the options
 
-    // prevent scroll into the options
+
     this.optionsContainerElm.addEventListener("mousewheel", ev => {
       let _this = ev.currentTarget;
       let scrollTop = _this.scrollTop;
       let scrollHeight = _this.scrollHeight;
       let height = _this.offsetHeight;
       let delta = ev.wheelDelta;
+
       if (ev.type == "DOMMouseScroll") {
         delta = ev.originalEvent.details * -40;
       }
+
       let up = delta > 0;
+
       let prevent = () => {
         ev.stopPropagation();
         ev.preventDefault();
         ev.returnValue = false;
         return false;
       };
+
       if (!up && -delta > scrollHeight - height - scrollTop) {
         // Scrolling down, but this will take us past the bottom.
         _this.scrollTop = scrollHeight;
@@ -292,9 +338,8 @@ export default class SSelectComponent extends native(HTMLSelectElement) {
         _this.scrollTop = 0;
         prevent();
       }
-    });
+    }); // manage the mouse and keyboard events
 
-    // manage the mouse and keyboard events
     this._handlers = {
       onKeyDown: e => {
         this._onKeyDown(e);
@@ -325,83 +370,79 @@ export default class SSelectComponent extends native(HTMLSelectElement) {
       window.removeEventListener("scroll", this._handlers.onScrollResize);
       window.removeEventListener("resize", this._handlers.onScrollResize);
       document.removeEventListener("mousemove", this._handlers.onMouseMove);
-    });
+    }); // listen for keyup
 
-    // listen for keyup
-    document.addEventListener("keyup", this._handlers.onKeyUp);
-
-    // listen for change on base select
+    document.addEventListener("keyup", this._handlers.onKeyUp); // listen for change on base select
     // to set the selected items
+
     this.addEventListener("change", e => {
       console.log("CHANGE", e.target.value);
-      this._setSelected();
-    });
 
-    // listen for focus in search field to activate the field
+      this._setSelected();
+    }); // listen for focus in search field to activate the field
+
     this._searchFieldElm.addEventListener("focus", e => {
       this._openOnFocus = true;
       this.open();
       setTimeout(() => {
         this._openOnFocus = false;
       }, 200);
-    });
+    }); // listen for keyup on search field
 
-    // listen for keyup on search field
+
     let internalSearch = this.props.internalSearch;
     let search = this.props.searchField;
+
     const searchFieldFn = e => {
       // check if the key is up or down to avoid searching again
-      if (
-        e.keyCode === 38 || // up
-        e.keyCode === 40 || // down
-        e.keyCode === 13 || // enter
-        e.keyCode === 27 // escape
-      )
-        return;
+      if (e.keyCode === 38 || // up
+      e.keyCode === 40 || // down
+      e.keyCode === 13 || // enter
+      e.keyCode === 27 // escape
+      ) return; // trigger custom event
 
-      // trigger custom event
-      let event = new SEvent("search");
-      this.dispatchEvent(event);
-      // on search callback
-      if (
-        e.target.value &&
-        e.target.value.length >= this.props.minCharactersForSearch
-      ) {
+      let event = new _SEvent.default("search");
+      this.dispatchEvent(event); // on search callback
+
+      if (e.target.value && e.target.value.length >= this.props.minCharactersForSearch) {
         this.props.onSearch && this.props.onSearch(e.target.value, this);
-      }
-      // check if internal search
+      } // check if internal search
+
+
       this._internalSearch();
     };
+
     if (internalSearch && search) {
       this._searchFieldElm.addEventListener("keyup", searchFieldFn);
+
       this._searchFieldElm.addEventListener("search", searchFieldFn);
-    }
-
-    // observe all changes into the select
+    } // observe all changes into the select
     // to refresh our custom one
-    __mutationObservable(this, {
+
+
+    (0, _mutationObservable.default)(this, {
       childList: true
-    })
-      .groupByTimeout()
-      .subscribe(mutation => {
-        this.refresh();
-      });
+    }).groupByTimeout().subscribe(mutation => {
+      this.refresh();
+    }); // first refresh
 
-    // first refresh
-    this.refresh();
+    this.refresh(); // hide the select
 
-    // hide the select
-    this._hideRealSelect();
+    this._hideRealSelect(); // append the element right after the real select
 
-    // append the element right after the real select
-    __insertAfter(this._containerElm, this);
+
+    (0, _insertAfter.default)(this._containerElm, this);
   }
-
   /**
    * Component unmount
+   *
    * @definition 		SWebComponent.componentUnmount
    * @protected
+   *
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
+
+
   componentUnmount() {
     document.removeEventListener("keyup", this._handlers.onKeyUp);
     document.removeEventListener("keydown", this._handlers.onKeyDown);
@@ -409,308 +450,259 @@ export default class SSelectComponent extends native(HTMLSelectElement) {
     window.removeEventListener("scroll", this._handlers.onScrollResize);
     window.removeEventListener("resize", this._handlers.onScrollResize);
     document.removeEventListener("mousemove", this._handlers.onMouseMove);
+
     this._destroy();
   }
-
   /**
    * Destroy
    */
+
+
   _destroy() {
     if (this._refreshObserver) {
       this._refreshObserver.unsubscribe();
     }
   }
-
   /**
    * On mouse move on document
    */
+
+
   _onMouseMove(e) {
     // let the mouse events flows inside the optionsContainerElm
     this.optionsContainerElm.style.pointerEvents = "all";
   }
-
   /**
    * Process to internal search
    */
+
+
   _internalSearch() {
     // reset the scroll position of the options
-    this.optionsContainerElm.scrollTop = 0;
+    this.optionsContainerElm.scrollTop = 0; // loop on each options
 
-    // loop on each options
-    [].forEach.call(
-      this.optionsContainerElm.querySelectorAll(
-        this.componentSelector("option")
-      ),
-      option => {
-        this.removeComponentClass(option, "option", null, "active");
-        option.classList.remove("active");
+    [].forEach.call(this.optionsContainerElm.querySelectorAll(this.componentSelector("option")), option => {
+      this.removeComponentClass(option, "option", null, "active");
+      option.classList.remove("active"); // check if is a value in the search field
 
-        // check if is a value in the search field
-        if (
-          this._searchFieldElm.value &&
-          this._searchFieldElm.value.length >= this.props.minCharactersForSearch
-        ) {
-          // check if we find the text in the option
-          let regexp = new RegExp(
-            "(" + this._searchFieldElm.value + ")(?!([^<]+)?>)",
-            "gi"
-          );
-          // search the tokens in html
-          let replace = option._s_innerHTML.replace(
-            regexp,
-            `<span class="${this.componentClassName(
-              "search-result"
-            )}">$1</span>`
-          );
-          if (option._s_innerHTML.match(regexp)) {
-            this.removeComponentClass(option, "option", null, "hidden");
-            option.innerHTML = replace;
-          } else {
-            // reset the activate item if need to be hided
-            if (option == this._currentActiveOption) {
-              this._currentActiveOption = null;
-            }
-            this.addComponentClass(option, "option", null, "hidden");
-          }
-        } else {
-          option.innerHTML = option._s_innerHTML;
+      if (this._searchFieldElm.value && this._searchFieldElm.value.length >= this.props.minCharactersForSearch) {
+        // check if we find the text in the option
+        let regexp = new RegExp("(" + this._searchFieldElm.value + ")(?!([^<]+)?>)", "gi"); // search the tokens in html
+
+        let replace = option._s_innerHTML.replace(regexp, `<span class="${this.componentClassName("search-result")}">$1</span>`);
+
+        if (option._s_innerHTML.match(regexp)) {
           this.removeComponentClass(option, "option", null, "hidden");
-        }
-      }
-    );
+          option.innerHTML = replace;
+        } else {
+          // reset the activate item if need to be hided
+          if (option == this._currentActiveOption) {
+            this._currentActiveOption = null;
+          }
 
-    // activate the first option in the list
+          this.addComponentClass(option, "option", null, "hidden");
+        }
+      } else {
+        option.innerHTML = option._s_innerHTML;
+        this.removeComponentClass(option, "option", null, "hidden");
+      }
+    }); // activate the first option in the list
+
     this.mutate(() => {
       this._activateFirst();
-    });
+    }); // set position
 
-    // set position
     this._setPosition();
   }
-
   /**
    * On scroll or resize
    */
+
+
   _onScrollResize(e) {
     this._setPosition();
   }
-
   /**
    * When the user click outside of the select
    */
+
+
   _onDocumentClick(e) {
     if (!this._containerElm.contains(e.target)) {
       this.close();
     }
   }
-
   /**
    * Check the keyboard actions
    */
+
+
   _onKeyUp(e) {
-    if (
-      (e.keyCode === 40 || e.keyCode === 38) &&
-      !this.isOpened() &&
-      document.activeElement === this._searchFieldElm
-    ) {
+    if ((e.keyCode === 40 || e.keyCode === 38) && !this.isOpened() && document.activeElement === this._searchFieldElm) {
       this.open();
-    } else if (
-      (e.keyCode === 9 || // tab
-        e.keyCode === 27) && // escape
-      this.isOpened()
-    ) {
+    } else if ((e.keyCode === 9 || // tab
+    e.keyCode === 27) && // escape
+    this.isOpened()) {
       if (!this._openOnFocus) {
         this.close();
       }
     }
   }
-
   /**
    * On key down
    */
+
+
   _onKeyDown(e) {
     // prevent the mouse interactions to avoid conflict between mouse and keyboard
-    this.optionsContainerElm.style.pointerEvents = "none";
+    this.optionsContainerElm.style.pointerEvents = "none"; // check which key has been pressed
 
-    // check which key has been pressed
     switch (e.keyCode) {
-      case 40: // down
+      case 40:
+        // down
         this._activateNext();
+
         e.preventDefault();
         break;
-      case 38: // up
+
+      case 38:
+        // up
         this._activatePrevious();
+
         e.preventDefault();
         break;
-      case 13: // enter
+
+      case 13:
+        // enter
         this._selectActivated();
+
         e.preventDefault();
         break;
-      case 8: // backspace
+
+      case 8:
+        // backspace
         if (this._searchFieldElm.focus && this._searchFieldElm.value == "") {
           // remove the last item
           this.unselectLast();
         }
+
         break;
     }
   }
-
   /**
    * Select the first option available
    */
+
+
   _activateFirst() {
     // remove active class if exist
     if (this._currentActiveOption) {
-      this.removeComponentClass(
-        this._currentActiveOption,
-        "option",
-        null,
-        "active"
-      );
-      this._currentActiveOption.classList.remove("active");
-    }
+      this.removeComponentClass(this._currentActiveOption, "option", null, "active");
 
-    // set the current active option to the first available one
-    const findedOpts = this.optionsContainerElm.querySelectorAll(
-      `${this.componentSelector("option")}:not(${this.componentSelector(
-        "option",
-        "disabled"
-      )}):not(${this.componentSelector("option", "hidden")})`
-    );
+      this._currentActiveOption.classList.remove("active");
+    } // set the current active option to the first available one
+
+
+    const findedOpts = this.optionsContainerElm.querySelectorAll(`${this.componentSelector("option")}:not(${this.componentSelector("option", "disabled")}):not(${this.componentSelector("option", "hidden")})`);
+
     if (findedOpts.length) {
       this._currentActiveOption = findedOpts[0];
-    }
+    } // activate the element
 
-    // activate the element
+
     if (this._currentActiveOption) {
-      this.addComponentClass(
-        this._currentActiveOption,
-        "option",
-        null,
-        "active"
-      );
+      this.addComponentClass(this._currentActiveOption, "option", null, "active");
+
       this._currentActiveOption.classList.add("active");
     }
   }
-
   /**
    * Select next with keyboard
    */
+
+
   _activateNext() {
     // if no option already selected by keyboard, activate the first.
     // this will make the second item to be selected as expected
     if (!this._currentActiveOption) {
       this._activateFirst();
-    }
+    } // remove active class if exist
 
-    // remove active class if exist
+
     if (this._currentActiveOption) {
-      this.removeComponentClass(
-        this._currentActiveOption,
-        "option",
-        null,
-        "active"
-      );
+      this.removeComponentClass(this._currentActiveOption, "option", null, "active");
+
       this._currentActiveOption.classList.remove("active");
-    }
-    // check if already an item is selected
+    } // check if already an item is selected
+
+
     if (!this._currentActiveOption) {
-      const findedOpts = this.optionsContainerElm.querySelectorAll(
-        `${this.componentSelector("option")}:not(${this.componentSelector(
-          "option",
-          "disabled"
-        )}):not(${this.componentSelector("option", "hidden")})`
-      );
+      const findedOpts = this.optionsContainerElm.querySelectorAll(`${this.componentSelector("option")}:not(${this.componentSelector("option", "disabled")}):not(${this.componentSelector("option", "hidden")})`);
+
       if (findedOpts.length) {
         this._currentActiveOption = findedOpts[0];
       }
     } else {
       // try to get the next sibling
-      const next = __next(
-        this._currentActiveOption,
-        `${this.componentSelector("option")}:not(${this.componentSelector(
-          "option",
-          "disabled"
-        )}):not(${this.componentSelector("option", "hidden")})`
-      );
+      const next = (0, _next.default)(this._currentActiveOption, `${this.componentSelector("option")}:not(${this.componentSelector("option", "disabled")}):not(${this.componentSelector("option", "hidden")})`);
       if (next) this._currentActiveOption = next;
-    }
+    } // activate the element
 
-    // activate the element
+
     if (this._currentActiveOption) {
-      this.addComponentClass(
-        this._currentActiveOption,
-        "option",
-        null,
-        "active"
-      );
-      this._currentActiveOption.classList.add("active");
-      // scroll view
+      this.addComponentClass(this._currentActiveOption, "option", null, "active");
+
+      this._currentActiveOption.classList.add("active"); // scroll view
+
+
       const optionHeight = this._currentActiveOption.offsetHeight;
-      const optionOffest = __offsetParent(this._currentActiveOption);
-      // if need to scroll the view
-      if (
-        optionOffest.top >
-        this.optionsContainerElm.offsetHeight - optionHeight
-      ) {
+      const optionOffest = (0, _offsetParent.default)(this._currentActiveOption); // if need to scroll the view
+
+      if (optionOffest.top > this.optionsContainerElm.offsetHeight - optionHeight) {
         this._currentActiveOption.parentNode.scrollTop += optionHeight;
       } else if (optionOffest.top < 0) {
         this.optionsContainerElm.scrollTop = optionOffest.top;
       }
     }
   }
-
   /**
    * Select previous with keyboard
    */
+
+
   _activatePrevious() {
     // do not allow to activate a previous item if their's no active one already
-    if (!this._currentActiveOption) return;
+    if (!this._currentActiveOption) return; // remove active class if exist
 
-    // remove active class if exist
     if (this._currentActiveOption) {
-      this.removeComponentClass(
-        this._currentActiveOption,
-        "option",
-        null,
-        "active"
-      );
+      this.removeComponentClass(this._currentActiveOption, "option", null, "active");
+
       this._currentActiveOption.classList.remove("active");
-    }
-    // check if already an item is selected
+    } // check if already an item is selected
+
+
     if (!this._currentActiveOption) {
-      const findedOpts = this.optionsContainerElm.querySelectorAll(
-        `${this.componentSelector("option")}:not(${this.componentSelector(
-          "option",
-          "disabled"
-        )}):not(${this.componentSelector("option", "hidden")})`
-      );
+      const findedOpts = this.optionsContainerElm.querySelectorAll(`${this.componentSelector("option")}:not(${this.componentSelector("option", "disabled")}):not(${this.componentSelector("option", "hidden")})`);
+
       if (findedOpts.length) {
         this._currentActiveOption = findedOpts[findedOpts.length - 1];
       }
     } else {
       // try to get the next sibling
-      const previous = __previous(
-        this._currentActiveOption,
-        `${this.componentSelector("option")}:not(${this.componentSelector(
-          "option",
-          "disabled"
-        )}):not(${this.componentSelector("option", "hidden")})`
-      );
+      const previous = (0, _previous.default)(this._currentActiveOption, `${this.componentSelector("option")}:not(${this.componentSelector("option", "disabled")}):not(${this.componentSelector("option", "hidden")})`);
       if (previous) this._currentActiveOption = previous;
-    }
-    // activate the element
+    } // activate the element
+
+
     if (this._currentActiveOption) {
-      this.addComponentClass(
-        this._currentActiveOption,
-        "option",
-        null,
-        "active"
-      );
-      this._currentActiveOption.classList.add("active");
-      // scroll to item
+      this.addComponentClass(this._currentActiveOption, "option", null, "active");
+
+      this._currentActiveOption.classList.add("active"); // scroll to item
+
+
       const optionHeight = this._currentActiveOption.offsetHeight;
-      const optionOffest = __offsetParent(this._currentActiveOption);
+      const optionOffest = (0, _offsetParent.default)(this._currentActiveOption);
+
       if (optionOffest.top < 0) {
         this._currentActiveOption.parentNode.scrollTop -= optionHeight;
       } else if (optionOffest.top > this.optionsContainerElm.offsetHeight) {
@@ -719,56 +711,55 @@ export default class SSelectComponent extends native(HTMLSelectElement) {
       }
     }
   }
-
   /**
    * Select activated item
    */
+
+
   _selectActivated() {
     // check if an activated element exist
     if (this._currentActiveOption) {
-      this.select(this._currentActiveOption._s_select_source_option);
+      this.select(this._currentActiveOption._ck_select_source_option);
     }
   }
-
   /**
    * Create html structure
    */
+
+
   _buildHTML() {
     let container = document.createElement("div");
     container.setAttribute("class", this.getAttribute("class") || "");
     this.className = "";
-    this.addComponentClass(container);
+    this.addComponentClass(container); // multiple class
 
-    // multiple class
     if (this.getAttribute("multiple") != null) {
       this.addComponentClass(container, null, "multiple");
     }
 
     let selection_container = document.createElement("div");
     this.addComponentClass(selection_container, "selection-container");
-
     let selection_aligner = document.createElement("div");
     this.addComponentClass(selection_aligner, "selection-aligner");
-
     let dropdown = document.createElement("div");
     this.addComponentClass(dropdown, "dropdown");
-    dropdown.style.fontSize = "1rem";
+    dropdown.style.fontSize = "1rem"; // search
 
-    // search
     let search_container = document.createElement("div");
-    this.addComponentClass(search_container, "search-container");
+    this.addComponentClass(search_container, "search-container"); // search field
 
-    // search field
     let search_field = document.createElement("input");
     search_field.setAttribute("type", "search");
+
     if (search_field.type != "search") {
       search_field.type = "text";
     }
-    search_field.setAttribute("placeholder", this.props.searchPlaceholder);
-    this.addComponentClass(search_field, "search-field");
 
-    // reset
+    search_field.setAttribute("placeholder", this.props.searchPlaceholder);
+    this.addComponentClass(search_field, "search-field"); // reset
+
     let resetElm = null;
+
     if (this.props.resetAllowed) {
       resetElm = document.createElement("button");
       resetElm.setAttribute("type", "button");
@@ -777,29 +768,27 @@ export default class SSelectComponent extends native(HTMLSelectElement) {
         this.reset();
       });
       this.addComponentClass(resetElm, "reset");
-    }
+    } // options
 
-    // options
+
     let options_container = document.createElement("div");
-    this.addComponentClass(options_container, "options");
+    this.addComponentClass(options_container, "options"); // append to document
 
-    // append to document
     search_container.appendChild(search_field);
-
     dropdown.appendChild(search_container);
-    dropdown.appendChild(options_container);
+    dropdown.appendChild(options_container); // container.appendChild(open_checkbox);
 
-    // container.appendChild(open_checkbox);
     container.appendChild(selection_container);
+
     if (resetElm) {
       container.appendChild(resetElm);
     }
-    container.appendChild(dropdown);
 
-    // hide the real select
-    this._hideRealSelect();
+    container.appendChild(dropdown); // hide the real select
 
-    // save into object
+    this._hideRealSelect(); // save into object
+
+
     this._containerElm = container;
     this._dropdownElm = dropdown;
     this._searchContainerElm = search_container;
@@ -807,10 +796,11 @@ export default class SSelectComponent extends native(HTMLSelectElement) {
     this._searchFieldElm = search_field;
     this.optionsContainerElm = options_container;
   }
-
   /**
    * Hide the select
    */
+
+
   _hideRealSelect() {
     // keep it in the viewport to avoid issues
     // when trying to get the select that is in the viewport,
@@ -826,27 +816,25 @@ export default class SSelectComponent extends native(HTMLSelectElement) {
     // });
     this.tabIndex = -1;
   }
-
   /**
    * Handle click on option
    */
+
+
   _handleOptionClick(_s_option, e) {
     // check if is a multiple
     if (!this.isMultiple()) {
       // select the element in the source select
-      _s_option._s_select_source_option.selected = true;
-      // close
+      _s_option._ck_select_source_option.selected = true; // close
+
       this.mutate(() => {
         this.close();
       });
     } else {
-      _s_option._s_select_source_option.selected = !_s_option
-        ._s_select_source_option.selected;
-
-      // // check if the alt key is pressed
+      _s_option._ck_select_source_option.selected = !_s_option._ck_select_source_option.selected; // // check if the alt key is pressed
       // if (e.metaKey) {
       // 	// toggle selection
-      // 	_s_option._s_select_source_option.selected = ! _s_option._s_select_source_option.selected;
+      // 	_s_option._ck_select_source_option.selected = ! _s_option._ck_select_source_option.selected;
       // } else if (e.shiftKey) {
       // 	// get the index of the last selected option
       // 	if (this.options.selectedIndex) {
@@ -854,13 +842,12 @@ export default class SSelectComponent extends native(HTMLSelectElement) {
       // 		let current_option_idx = 0,
       // 			found = false;
       // 		[].forEach.call(this.options, (opt) => {
-      // 			if ( ! found && opt != _s_option._s_select_source_option) {
+      // 			if ( ! found && opt != _s_option._ck_select_source_option) {
       // 				current_option_idx++;
       // 			} else {
       // 				found = true;
       // 			}
       // 		});
-
       // 		// select all the options inbetween
       // 		let first = this.options.selectedIndex;
       // 		let last = current_option_idx;
@@ -876,7 +863,7 @@ export default class SSelectComponent extends native(HTMLSelectElement) {
       // 		}
       // 	} else {
       // 		// telection
-      // 		_s_option._s_select_source_option.selected = ! _s_option._s_select_source_option.selected;
+      // 		_s_option._ck_select_source_option.selected = ! _s_option._ck_select_source_option.selected;
       // 	}
       // } else {
       // 	// unactive all the options
@@ -884,67 +871,60 @@ export default class SSelectComponent extends native(HTMLSelectElement) {
       // 		opt.selected = false;
       // 	});
       // 	// activate the item
-      // 	_s_option._s_select_source_option.selected = true;
+      // 	_s_option._ck_select_source_option.selected = true;
       // }
-    }
+    } // trigger change event
 
-    // trigger change event
-    __dispatchEvent(this, "change");
+
+    (0, _dispatchEvent.default)(this, "change");
   }
-
   /**
    * Set selected elements
    */
+
+
   _setSelected() {
     // loop on selected option to activate them
     let areSomeSelectedItems = false;
     [].forEach.call(this.options, option => {
       // apply the active class
-      if (option._s_select_option) {
+      if (option._ck_select_option) {
         if (option.selected) {
           if (option.innerHTML != "") {
             areSomeSelectedItems = true;
           }
-          this.addComponentClass(
-            option._s_select_option,
-            "option",
-            null,
-            "selected"
-          );
+
+          this.addComponentClass(option._ck_select_option, "option", null, "selected");
         } else {
-          this.removeComponentClass(
-            option._s_select_option,
-            "option",
-            null,
-            "selected"
-          );
+          this.removeComponentClass(option._ck_select_option, "option", null, "selected");
         }
       }
-    });
-    // set the selection
+    }); // set the selection
+
     this.selectionContainerElm.innerHTML = "";
+
     if (this.isMultiple()) {
       // loop on each selected items
       [].forEach.call(this.options, option => {
         if (option.selected) {
           // get the content
-          let content = option.innerHTML;
-          // create the tag
+          let content = option.innerHTML; // create the tag
+
           let tag = document.createElement("div");
           this.addComponentClass(tag, "selection-tag");
           tag.innerHTML = content;
           let close = document.createElement("span");
           this.addComponentClass(close, "selection-tag-close");
           close.addEventListener("click", e => {
-            option.selected = false;
-            // trigger change event
-            let event = new SEvent("change");
+            option.selected = false; // trigger change event
+
+            let event = new _SEvent.default("change");
             this.dispatchEvent(event);
           });
           tag.addEventListener("dblclick", e => {
-            option.selected = false;
-            // trigger change event
-            let event = new SEvent("change");
+            option.selected = false; // trigger change event
+
+            let event = new _SEvent.default("change");
             this.dispatchEvent(event);
           });
           tag.appendChild(close);
@@ -954,6 +934,7 @@ export default class SSelectComponent extends native(HTMLSelectElement) {
     } else {
       // get the selected one
       let selected_idx = this.options.selectedIndex;
+
       if (selected_idx != -1) {
         // set the selected
         let selection = document.createElement("div");
@@ -965,9 +946,11 @@ export default class SSelectComponent extends native(HTMLSelectElement) {
 
     if (!areSomeSelectedItems) {
       let placeholder = this.getAttribute("placeholder");
+
       if (!placeholder && this.isMultiple()) {
         placeholder = "&nbsp;";
       }
+
       if (placeholder) {
         let selection = document.createElement("div");
         this.addComponentClass(selection, "selection");
@@ -980,87 +963,62 @@ export default class SSelectComponent extends native(HTMLSelectElement) {
       this.removeComponentClass(this._containerElm, null, "placeholder");
     }
   }
-
   /**
    * Set position
    */
+
+
   _setPosition() {
     // get the position of the container
-    let dropdownOffset = __offset(this._dropdownElm);
-    let dropdownTop = dropdownOffset.top - __scrollTop();
-    let containerTop = __offset(this._containerElm).top - __scrollTop();
-    let dropdownFullHeight =
-      this.optionsContainerElm.scrollHeight +
-      this._searchContainerElm.offsetHeight;
+    let dropdownOffset = (0, _offset.default)(this._dropdownElm);
+    let dropdownTop = dropdownOffset.top - (0, _scrollTop.default)();
+    let containerTop = (0, _offset.default)(this._containerElm).top - (0, _scrollTop.default)();
+    let dropdownFullHeight = this.optionsContainerElm.scrollHeight + this._searchContainerElm.offsetHeight;
     let optionsFullHeight = this.optionsContainerElm.scrollHeight;
     let optionsHeight = this.optionsContainerElm.offsetHeight;
     let screenMarginTop = this.props.screenMarginTop;
     let screenMarginBottom = this.props.screenMarginBottom;
-    let optionsMinHeight = parseInt(
-      window
-        .getComputedStyle(this.optionsContainerElm)
-        .getPropertyValue("min-height")
-    );
+    let optionsMinHeight = parseInt(window.getComputedStyle(this.optionsContainerElm).getPropertyValue("min-height")); // check if the min-height has been reached
 
-    // check if the min-height has been reached
-    if (
-      containerTop +
-        this._containerElm.offsetHeight +
-        this._searchContainerElm.offsetHeight +
-        optionsMinHeight +
-        screenMarginBottom +
-        this.props.dropupLimit >
-      window.innerHeight
-    ) {
+    if (containerTop + this._containerElm.offsetHeight + this._searchContainerElm.offsetHeight + optionsMinHeight + screenMarginBottom + this.props.dropupLimit > window.innerHeight) {
       // if (optionsHeight < optionsFullHeight && optionsHeight <= optionsMinHeight ) {
-      this.addComponentClass(this._containerElm, null, "dropup");
-      // console.log(top + h, window.innerHeight);
+      this.addComponentClass(this._containerElm, null, "dropup"); // console.log(top + h, window.innerHeight);
+
       if (containerTop - dropdownFullHeight - screenMarginTop < 0) {
-        this.optionsContainerElm.style.height =
-          window.innerHeight -
-          (window.innerHeight - containerTop) -
-          this._searchContainerElm.offsetHeight -
-          screenMarginTop +
-          "px";
+        this.optionsContainerElm.style.height = window.innerHeight - (window.innerHeight - containerTop) - this._searchContainerElm.offsetHeight - screenMarginTop + "px";
       } else {
         this.optionsContainerElm.style.height = "auto";
       }
     } else {
-      this.removeComponentClass(this._containerElm, null, "dropup");
-      // console.log(top + h, window.innerHeight);
-      if (
-        dropdownTop + dropdownFullHeight + screenMarginBottom >
-        window.innerHeight
-      ) {
-        this.optionsContainerElm.style.height =
-          window.innerHeight -
-          dropdownTop -
-          this._searchContainerElm.offsetHeight -
-          screenMarginBottom +
-          "px";
+      this.removeComponentClass(this._containerElm, null, "dropup"); // console.log(top + h, window.innerHeight);
+
+      if (dropdownTop + dropdownFullHeight + screenMarginBottom > window.innerHeight) {
+        this.optionsContainerElm.style.height = window.innerHeight - dropdownTop - this._searchContainerElm.offsetHeight - screenMarginBottom + "px";
       } else {
         this.optionsContainerElm.style.height = "auto";
       }
     }
   }
-
   /**
    * Handle optgroup
    * @param 		{HTMLElement} 		_optgroup 		The optgroup to handle
    */
+
+
   _handleOptgroup(_optgroup) {
     // create the choice
     let option = document.createElement("div");
-    this.addComponentClass(option, "optgroup");
+    this.addComponentClass(option, "optgroup"); // get the content
 
-    // get the content
-    let content = _optgroup.getAttribute("label");
+    let content = _optgroup.getAttribute("label"); // get the content
 
-    // get the content
+
     let source = _optgroup.getAttribute(`${this.componentNameDash}-option-elm`);
+
     if (source) {
       // try to get into document
       source = document.querySelector(source);
+
       if (source) {
         option.appendChild(source);
         this.addComponentClass(option, "optgroup", "custom");
@@ -1069,56 +1027,56 @@ export default class SSelectComponent extends native(HTMLSelectElement) {
       }
     } else {
       option.innerHTML = content;
-    }
+    } // append new choice
 
-    // append new choice
+
     this.optionsContainerElm.appendChild(option);
   }
-
   /**
    * Handle option
    */
+
+
   _handleOption(_option, in_optgroup = false) {
     // check if is an optiongroup
     if (_option.nodeName.toLowerCase() == "optgroup") {
       this._handleOptgroup(_option);
+
       [].forEach.call(_option.querySelectorAll(":scope > option"), option => {
         this._handleOption(option, true);
       });
       return;
-    }
+    } // create the choice
 
-    // create the choice
+
     let option = document.createElement("div");
-    this.addComponentClass(option, "option");
+    this.addComponentClass(option, "option"); // check if in optgroup
 
-    // check if in optgroup
     if (in_optgroup) {
       this.addComponentClass(option, "option", "in-optgroup");
-    }
+    } // check if disabled
 
-    // check if disabled
+
     if (_option.disabled) {
       this.addComponentClass(option, "option", null, "disabled");
-    }
-
-    // save the option reference into html element
+    } // save the option reference into html element
     // to be able to activate it in the base select
-    option._s_select_source_option = _option;
 
-    // save the s_option into the base option
+
+    option._ck_select_source_option = _option; // save the s_option into the base option
     // to be able to activate the s_option later
-    _option._s_select_option = option;
 
-    // get the content
-    let content = _option.innerHTML;
+    _option._ck_select_option = option; // get the content
 
-    // get the content
+    let content = _option.innerHTML; // get the content
+
     let source = _option.getAttribute(`${this.componentNameDash}-option-elm`);
+
     if (source) {
       // try to get into document
       source = document.querySelector(source);
       this.addComponentClass(source, "option-source");
+
       if (source) {
         option.innerHTML = source.outerHTML;
         this.addComponentClass(option, "option", "custom");
@@ -1128,63 +1086,57 @@ export default class SSelectComponent extends native(HTMLSelectElement) {
     } else {
       if (!content) return;
       option.innerHTML = content;
-    }
+    } // save the html to restore later on search
 
-    // save the html to restore later on search
-    option._s_innerHTML = option.innerHTML;
 
-    // add a click event on the option
+    option._s_innerHTML = option.innerHTML; // add a click event on the option
+
     option.addEventListener("click", e => {
       this._handleOptionClick(e.currentTarget, e);
-    });
+    }); // add the listener for the hover
 
-    // add the listener for the hover
     option.addEventListener("mouseover", e => {
       if (this._currentActiveOption) {
-        this.removeComponentClass(
-          this._currentActiveOption,
-          "option",
-          null,
-          "active"
-        );
+        this.removeComponentClass(this._currentActiveOption, "option", null, "active");
+
         this._currentActiveOption.classList.remove("active");
       }
 
       this._currentActiveOption = option;
-    });
+    }); // append new choice
 
-    // append new choice
     this.optionsContainerElm.appendChild(option);
   }
-
   /**
+   * @name          refresh
+   * @namespace       select-webcomponent
+   * @type        Function
+   *
    * Sync the custom select with his source or truth.
    * This is in most cases called automatically but if you need it, it's here...
-   * @return 	{SSelectComponent} 		Return the component to maintain chainability
+   *
+   * @return 	{SelectWebcomponent} 		Return the component to maintain chainability
+   *
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
+
+
   refresh() {
     // empty the options
     let options_parent = this.optionsContainerElm.parentNode;
     options_parent.removeChild(this.optionsContainerElm);
-    this.optionsContainerElm.innerHTML = "";
+    this.optionsContainerElm.innerHTML = ""; // create the options tree
 
-    // create the options tree
-    [].forEach.call(
-      this.querySelectorAll(":scope > option, :scope > optgroup"),
-      elm => {
-        // handle option
-        this._handleOption(elm);
-      },
-      this
-    );
+    [].forEach.call(this.querySelectorAll(":scope > option, :scope > optgroup"), elm => {
+      // handle option
+      this._handleOption(elm);
+    }, this); // set selected the first time
 
-    // set selected the first time
-    this._setSelected();
+    this._setSelected(); // append again in dom the options
 
-    // append again in dom the options
-    options_parent.appendChild(this.optionsContainerElm);
 
-    // set position
+    options_parent.appendChild(this.optionsContainerElm); // set position
+
     if (this.isOpened()) {
       setTimeout(() => {
         this._setPosition();
@@ -1193,141 +1145,223 @@ export default class SSelectComponent extends native(HTMLSelectElement) {
 
     return this;
   }
-
   /**
+   * @name        select
+   * @namespace     select-webcomponent
+   * @type      Function
+   *
    * Select an option in source select
+   *
    * @param 		{HTMLOptionElement} 		option 		The option element to select
-   * @return 	{SSelectComponent} 		Return the component to maintain chainability
+   * @return 	{SelectWebcomponent} 		Return the component to maintain chainability
+   *
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
+
+
   select(option) {
     // check if we have the s-select option targer
-    if (option._s_select_option) {
-      this._handleOptionClick(option._s_select_option);
-    } else if (option._s_select_source_option) {
+    if (option._ck_select_option) {
+      this._handleOptionClick(option._ck_select_option);
+    } else if (option._ck_select_source_option) {
       this._handleOptionClick(option);
     }
+
     return this;
   }
-
   /**
+   * @name      reset
+   * @namespace     select-webcomponent
+   * @type      Function
+   *
    * Reset the select. This will deselect all selected items, etc...
-   * @return 	{SSelectComponent} 		Return the component to maintain chainability
+   *
+   * @return 	{SelectWebcomponent} 		Return the component to maintain chainability
+   *
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
+
+
   reset() {
     this.selectedIndex = -1;
     this.refresh();
-    __dispatchEvent(this, "change");
-    __dispatchEvent(this, "reset");
+    (0, _dispatchEvent.default)(this, "change");
+    (0, _dispatchEvent.default)(this, "reset");
     return this;
   }
-
   /**
+   * @name      unselectLast
+   * @namespace     select-webcomponent
+   * @type      Function
+   *
    * Unselect the last selected option
+   *
    * @return 		{HTMLOptionElement} 			The deselected option, null if none
+   *
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
+
+
   unselectLast() {
     let last = null;
     [].forEach.call(this.options, option => {
       if (option.selected) {
         last = option;
       }
-    });
-    // unselect the last
+    }); // unselect the last
+
     if (last) {
-      last.selected = false;
-      // trigger change event
-      let event = new SEvent("change");
+      last.selected = false; // trigger change event
+
+      let event = new _SEvent.default("change");
       this.dispatchEvent(event);
-    }
-    // return the deselected option
+    } // return the deselected option
+
+
     return last;
   }
-
   /**
+   * @name      isMultiple
+   * @namespace       select-webcomponent
+   * @type      Function
+   *
    * Check if the select is a multiple one
+   *
    * @return 		{Boolean} 			True is select is a multiple one, false if not
+   *
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
+
+
   isMultiple() {
     return this.hasAttribute("multiple");
   }
-
   /**
+   * @name        isDisabled
+   * @namespace     select-webcomponent
+   * @type      Function
+   *
    * Check if the select is a disabled
+   *
    * @return 		{Boolean} 			True is select is disabled, false if not
+   *
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
+
+
   isDisabled() {
     return this.hasAttribute("disabled");
   }
-
   /**
+   * @name      isOpened
+   * @namespace     select-webcomponent
+   * @type      Function
+   *
    * Is opened
+   *
    * @return 		{Boolean} 			True if select is opened, false if not
+   *
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
+
+
   isOpened() {
     return this.hasComponentClass(this._containerElm, null, null, "opened");
   }
-
   /**
+   * @name      close
+   * @namespace     select-webcomponent
+   * @type      Function
+   *
    * Close the select dropdown
-   * @return 	{SSelectComponent} 		Return the component to maintain chainability
+   *
+   * @return 	{SelectWebcomponent} 		Return the component to maintain chainability
+   *
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
+
+
   close() {
     if (!this._isOpened) return this;
     this._isOpened = false;
-
-    this.removeComponentClass(this._containerElm, null, null, "opened");
-
-    // unactivate the option if one exist
+    this.removeComponentClass(this._containerElm, null, null, "opened"); // unactivate the option if one exist
     // if (this._currentActiveOption) {
     // 	this.removeComponentClass(this._currentActiveOption, 'option', null, 'active');
     // 	this._currentActiveOption.classList.remove('active');
     // 	this._currentActiveOption = null;
     // }
     // remove the dropup class
+
     this._clearDropupTimeout = setTimeout(() => {
       this.removeComponentClass(this._containerElm, null, "dropup");
-    }, 500);
-    // dispatch close event
-    let event = new SEvent("close");
-    this.dispatchEvent(event);
-    // handle onClose callback
+    }, 500); // dispatch close event
+
+    let event = new _SEvent.default("close");
+    this.dispatchEvent(event); // handle onClose callback
+
     let onClose = this.props.onClose;
+
     if (onClose) {
       onClose();
     }
+
     return this;
   }
-
   /**
+   * @name      open
+   * @namespace     select-webcomponent
+   * @type      Function
+   *
    * Open the select dropdown
-   * @return 	{SSelectComponent} 		Return the component to maintain chainability
+   *
+   * @return 	{SelectWebcomponent} 		Return the component to maintain chainability
+   *
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
+
+
   open() {
     if (this.isDisabled()) return this;
     if (this._isOpened) return this;
     this._isOpened = true;
+    this.addComponentClass(this._containerElm, null, null, "opened"); // set position
 
-    this.addComponentClass(this._containerElm, null, null, "opened");
-    // set position
     clearTimeout(this._clearDropupTimeout);
-    this._setPosition();
-    // dispatch open event
-    let event = new SEvent("open");
-    this.dispatchEvent(event);
-    // manage onOpen callback
+
+    this._setPosition(); // dispatch open event
+
+
+    let event = new _SEvent.default("open");
+    this.dispatchEvent(event); // manage onOpen callback
+
     let onOpen = this.props.onOpen;
+
     if (onOpen) {
       onOpen();
     }
+
+    return this;
+  }
+  /**
+   * @name      focus
+   * @namespace     select-webcomponent
+   * @type      Function
+   *
+   * Set focus
+   *
+   * @return 	{SelectWebcomponent} 		Return the component to maintain chainability
+   *
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+
+
+  focus() {
+    this._searchFieldElm.focus();
+
     return this;
   }
 
-  /**
-   * Set focus
-   * @return 	{SSelectComponent} 		Return the component to maintain chainability
-   */
-  focus() {
-    this._searchFieldElm.focus();
-    return this;
-  }
 }
+
+exports.default = SelectWebcomponent;
+module.exports = exports.default;

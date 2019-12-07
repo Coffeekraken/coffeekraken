@@ -29,7 +29,7 @@
   "license": "MIT",
   "dependencies": {
     "@coffeekraken/form-style": "^0.0.2",
-    "@coffeekraken/sugar": "1.0.1"
+    "@coffeekraken/sugar": "^1.0.2"
   },
   "devDependencies": {}
 }

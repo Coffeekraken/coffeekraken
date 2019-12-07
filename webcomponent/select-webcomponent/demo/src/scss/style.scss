@@ -11,4 +11,4 @@
 @include sugar.classes();
 
 
-@include select-webcomponent.classes($colors: default primary secondary);
+@include select-webcomponent.classes-bare();

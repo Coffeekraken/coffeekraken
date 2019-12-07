@@ -1,2 +1,2 @@
-import "@coffeekraken/sugar/js/features/all";
-import SSelectComponent from "../../../dist/index";
+import "@coffeekraken/sugar/js/feature/all";
+import SelectWebcomponent from "../../../dist/index";

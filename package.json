@@ -4,8 +4,10 @@
   "description": "We are a young collectve of front-end creative developers with one goal in mind. Build tools to make every team working day life better",
   "scripts": {
     "test": "jest --config ../../jest.config.js",
-    "dist": "ck run dist.js",
-    "dist.js": "babel src --root-mode upward -d dist",
+    "dist": "ck run dist.js && ck run dist.js.bundle && ck run dist.scss",
+    "dist.js": "babel src --root-mode upward -d dist --ignore '**/*.bundle.js'",
+    "dist.js.bundle": "webpack --config ../../webpack.config.js --env.script='dist.js.bundle'",
+    "dist.scss": "sass src/scss:dist/css --load-path=../../docblock --load-path=../../layout --load-path=../../style --load-path=../../terminal --load-path=../../util --load-path=../../webcomponent",
     "doc": "rm -rf doc/src && ck run doc.js && ck run doc.scss",
     "_doc.js": "ck-docblock-to-markdown -f 'src/**/*.js' -d doc",
     "_doc.scss": "ck-docblock-to-markdown -f 'src/**/*.scss' -d doc",
@@ -13,25 +15,35 @@
     "doc.scss": "../../docblock/docblock-to-markdown/bin/coffeekraken-docblock-to-markdown -f 'src/**/*.scss' -d doc",
     "demo": "ck run demo.dist && ck run demo.server",
     "demo.dist": "ck run demo.dist.js && ck run demo.dist.scss",
-    "demo.dist.js": "webpack --config ../../webpack.config.js",
+    "demo.dist.js": "babel demo/src --root-mode upward -d demo/dist --ignore '**/*.bundle.js'",
+    "demo.dist.js.bundle": "webpack --config ../../webpack.config.js --env.script='demo.dist.js.bundle'",
     "demo.dist.scss": "sass demo/src/scss/style.scss demo/dist/css/style.css --load-path=../../docblock --load-path=../../layout --load-path=../../style --load-path=../../terminal --load-path=../../util --load-path=../../webcomponent",
     "demo.server": "open http://127.0.0.1:8080 && http-server ./demo",
-    "start": "ck-scripts-stack -i start"
+    "start": "ck-scripts-stack -i start -i _doc.js -i _doc.scss"
   },
   "watch": {
     "test": {
       "paths": "tests/**/*.js"
     },
     "dist.js": {
-      "paths": "src/**/*.js"
+      "paths": "src/**/*!(.bundle).js"
+    },
+    "dist.js.bundle": {
+      "paths": "src/**/*.bundle.js"
     },
     "dist.scss": {
       "paths": "src/**/*.scss"
     },
     "demo.dist.js": {
       "paths": [
+        "src/js/**/*!(.bundle).js",
+        "demo/src/js/**/*!(.bundle).js"
+      ]
+    },
+    "demo.dist.js.bundle": {
+      "paths": [
         "src/js/**/*.js",
-        "demo/src/js/**/*.js"
+        "demo/src/js/**/*.bundle.js"
       ]
     },
     "demo.dist.scss": {

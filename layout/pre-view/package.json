@@ -1,0 +1,42 @@
+{
+  "name": "@coffeekraken/pre-view",
+  "version": "0.0.1",
+  "description": "Simple command line interface that let you preview your blade or twig views in your favorite browser",
+  "homepage": "https://coffeekraken.io",
+  "bin": {
+    "coffeekraken-pre-view": "./bin/coffeekraken-pre-view",
+    "ck-pre-view": "./bin/coffeekraken-pre-view"
+  },
+  "scripts": {
+    "test-bin": "./bin/coffeekraken-pre-view"
+  },
+  "keywords": [
+    "coffee",
+    "kraken",
+    "coffeekraken",
+    "preview",
+    "view",
+    "blade",
+    "twig",
+    "php"
+  ],
+  "author": "Coffeekraken <hello@coffeekraken.io>",
+  "contributors": [
+    {
+      "name": "Olivier Bossel",
+      "email": "olivier.bossel@gmail.com",
+      "url": "http://olivierbossel.com"
+    }
+  ],
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {
+    "@coffeekraken/form-style": "0.0.2",
+    "@coffeekraken/select-webcomponent": "0.0.1",
+    "@coffeekraken/sugar": "^1.0.4",
+    "commander": "^4.0.1",
+    "get-bin-path": "^4.0.0",
+    "npm-which": "^3.0.1",
+    "php-server": "^0.2.1"
+  }
+}

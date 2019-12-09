@@ -1,0 +1,19 @@
+@use 'sugar/index' as sugar;
+
+.ck-preview__views-selector {
+  position: fixed;
+  top: 30px;
+  left: 100px;
+  right: 100px;
+  @include sugar.effect-depth(10);
+  padding: sugar.lnf(padding-horizontal) sugar.lnf(padding-vertical);
+  background-color: sugar.color(dark-grey);
+  opacity: 0;
+  pointer-events: none;
+
+  &--opened {
+    top: 50px;
+    opacity: 1;
+    pointer-events: all;
+  }
+}

@@ -15,7 +15,7 @@ Name  |  Type  |  Description  |  Status  |  Default
 target  |  **{ [HTMLElement](https://developer.mozilla.org/fr/docs/Web/API/HTMLElement) }**  |  The element to observe  |  required  |
 settings  |  **{ MutationObserverInit }**  |  The mutation observer settings  |  required  |
 
-Return **{ Observable }** The mutation observable
+Return **{ Observable }** The rxjs mutation observable
 
 ### Example
 ```js

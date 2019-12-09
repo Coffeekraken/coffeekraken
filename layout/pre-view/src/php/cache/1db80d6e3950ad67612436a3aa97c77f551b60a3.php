@@ -1,0 +1,1 @@
+<?php /**PATH /Users/olivierbossel/data/web/coffeekraken/coffeekraken/layout/pre-view/views/atoms/buttons.blade.php ENDPATH**/ ?>

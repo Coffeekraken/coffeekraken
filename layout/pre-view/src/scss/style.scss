@@ -1,0 +1,23 @@
+@use 'select-webcomponent/index' as select-webcomponent;
+@use 'sugar/index' as sugar;
+
+// configure your sugar
+@include sugar.setup((
+  colors: (
+    dark-grey: (
+      color: #000
+    )
+  )
+));
+
+// init (required to be just after sugar.setup calls)
+@include sugar.init();
+
+// generate the classes if you want
+@include sugar.classes();
+
+// generate the classes for the ck-select webcomponent
+@include select-webcomponent.classes();
+
+// import some sections
+@import 'section/ck-preview__views-selector';

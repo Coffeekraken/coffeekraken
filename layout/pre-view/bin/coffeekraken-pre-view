@@ -1,0 +1,29 @@
+#!/usr/bin/env node
+
+const program = require('commander')
+const packageJson = require('../package.json')
+
+process.title = 'coffeekraken-pre-view'
+
+program
+  .version(packageJson.version)
+  .option('-f --folder [value]', 'Specify the folder to serve with the php server', `${process.cwd()}/views`)
+  .option('-p --port [value]', 'Specify the port to use for the php server', 8080)
+  .option('-h --hostname [value]', 'Specify the hostname to use for the php server', '127.0.0.1')
+  .option('-o --open', 'Open the browser at the server url', false)
+  .option('-b --binary [value]', 'Specify the path the the php binary', null)
+  .option('-i --ini [value]', 'Specify a path to a custom php.ini file', null)
+  .option('--hotkey [value]', 'Specify a hotkey that will display the view select module', 'command+1')
+  .parse(process.argv)
+
+const PreView = require('../dist/js/PreView');
+const preViewInstance = new PreView({
+  folder: program.folder,
+  port: program.port,
+  hostname: program.hostname,
+  open: program.open,
+  binary: program.binary,
+  ini: program.ini,
+  hotkey: program.hotkey
+});
+preViewInstance.start();

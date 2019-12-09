@@ -1,17 +1,25 @@
 const path = require("path");
-module.exports = {
-  mode: "production",
-  entry: {
-    "./demo/dist/js/app.js": "./demo/src/js/app.js"
-  },
+const glob = require('glob');
+
+const globStringSrc = './src/js/**/*.bundle.js';
+const globStringDemo = './demo/src/js/**/*.bundle.js';
+const rawSrcEntries = glob.sync(globStringSrc);
+const rawDemoEntries = glob.sync(globStringDemo);
+const srcEntries = {};
+const demoEntries = {};
+rawSrcEntries.forEach(entry => {
+  srcEntries[entry.split('/').slice(-1)[0]] = entry;
+});
+rawDemoEntries.forEach(entry => {
+  demoEntries[entry.split('/').slice(-1)[0]] = entry;
+});
+
+module.exports = env => ({
+  // mode: "production",
+  entry: env.script === 'dist.js.bundle' ? srcEntries : demoEntries,
   output: {
-    path: require("path").resolve("."),
+    path: env.script === 'demo.dist.js.bundle' ? path.resolve('./demo/dist/js') : path.resolve('./dist/js'),
     filename: "[name]"
-  },
-  resolve: {
-    alias: {
-      // '@coffeekraken/sugar': path.resolve(__dirname, 'util/sugar/dist')
-    }
   },
   module: {
     rules: [
@@ -22,4 +30,4 @@ module.exports = {
       }
     ]
   }
-};
+});

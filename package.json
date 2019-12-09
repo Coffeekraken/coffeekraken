@@ -68,7 +68,7 @@
     "@babel/plugin-proposal-class-properties": "^7.7.4",
     "@babel/plugin-proposal-export-default-from": "^7.7.4",
     "@babel/polyfill": "^7.7.0",
-    "@babel/preset-env": "^7.7.4",
+    "@babel/preset-env": "^7.7.6",
     "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.6",
     "babel-plugin-add-module-exports": "^1.0.2",
@@ -88,5 +88,6 @@
     "sass": "^1.23.7",
     "node-sass": "^4.13.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+  }
 }

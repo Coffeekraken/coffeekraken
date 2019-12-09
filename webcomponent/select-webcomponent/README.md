@@ -43,6 +43,51 @@ Then simply use it inside your html like so:
 </select>
 ```
 
+The generated html will look like that:
+
+```html
+<!-- multiple -->
+<div class="ck-select ck-select--multiple">
+  <div class="ck-select__selection-container">
+    <div class="ck-select__selection-tag">
+      Hello
+      <span class="ck-select__selection-tag-close"></span>
+    </div>
+  </div>
+  <button type="button" class="ck-select__reset"></button>
+  <div class="ck-select__dropdown" style="font-size: 1rem;">
+    <div class="ck-select__search-container">
+      <input type="search" placeholder="Search..." class="ck-select__search-field" empty="true">
+    </div>
+    <div class="ck-select__options">
+      <div class="ck-select__option ck-select__option--selected">Hello</div>
+      <div class="ck-select__option">World</div>
+      <div class="ck-select__optgroup">My Cool Group</div>
+      <div class="ck-select__option ck-select__option--in-optgroup">My Cool Option</div>
+    </div>
+  </div>
+</div>
+
+<!-- default -->
+<div class="ck-select ck-select--opened">
+  <div class="ck-select__selection-container">
+    <div class="ck-select__selection">Hello</div>
+  </div>
+  <button type="button" class="ck-select__reset"></button>
+  <div class="ck-select__dropdown" style="font-size: 1rem;">
+    <div class="ck-select__search-container">
+      <input type="search" placeholder="Search..." class="ck-select__search-field" empty="true">
+    </div>
+    <div class="ck-select__options" style="height: auto; pointer-events: all;">
+      <div class="ck-select__option ck-select__option--selected">Hello</div>
+      <div class="ck-select__option">World</div>
+      <div class="ck-select__optgroup">My Cool Group</div>
+      <div class="ck-select__option ck-select__option--in-optgroup">My Cool Option</div>
+    </div>
+  </div>
+</div>
+```
+
 If you need some styling to start with, you can generate it like so:
 
 ```scss

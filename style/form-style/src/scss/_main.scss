@@ -158,7 +158,7 @@
 }
 
 /**
- * @name      textarea-field-size
+ * @name      textarea-size
  * @namespace     form-style
  * @type      Mixin
  *
@@ -166,7 +166,7 @@
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com>
  */
-@mixin textarea-field-size() {
+@mixin textarea-size() {
   padding: s-lnf(padding-horizontal) s-lnf(padding-vertical);
   display: inline-block;
 }
@@ -183,7 +183,7 @@
 @mixin textarea-bare() {
   @extend %field-bare;
   @include sugar.font(sugar.setting("typography.font-family"));
-  @include textarea-field-size();
+  @include textarea-size();
 }
 
 /**
@@ -233,7 +233,7 @@
 }
 
 /**
- * @name      select-field-color
+ * @name      select-color
  * @namespace       form-style
  * @type        Mixin
  *
@@ -241,7 +241,7 @@
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com>
  */
-@mixin select-field-color($color) {
+@mixin select-color($color) {
 
   &[dirty]:invalid,
   &[dirty][invalid] {
@@ -295,7 +295,7 @@
   }
   @if $color {
     @include field-color($color);
-    @include select-field-color($color);
+    @include select-color($color);
   }
   &[dirty]:invalid,
   &[dirty][invalid] {

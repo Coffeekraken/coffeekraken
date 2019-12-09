@@ -62,10 +62,16 @@
 }
 
 /**
+ * @name      classes
+ * @namespace     select-webcomponent
+ * @type        Mixin
+ *
  * Provide all the classes of the s-select component for a default style
  * Styling options:
  * - ```[color="{$color}"]``` : apply a color to the select component
+ *
  * @param 		{List<Color>} 		[$colors=default primary secondary] 		The colors to generate
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com>
  */
 @mixin classes($colors: default primary secondary) {
@@ -74,7 +80,12 @@
 }
 
 /**
+ * @name      classes-bare
+ * @namespace     select-webcomponent
+ * @type        Mixin
+ *
  * Provide the bare styling for the s-select classes
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com>
  */
 @mixin classes-bare() {
@@ -107,9 +118,6 @@
   .ck-select__option--hidden {
     @extend %select__option--hidden !optional;
   }
-  // #{s-component-selector('_selection {
-  // 	@extend %select__selection;
-  // }
   .ck-select__selection-tag {
     @extend %select__selection-tag !optional;
   }
@@ -123,7 +131,7 @@
   }
   .ck-select__reset {
     @extend %select__reset !optional;
-    right: sugar.lnf(padding-vertical) * 2.5;
+    right: sugar.lnf(padding-vertical);
     top: 50%;
     transform: translateY(-50%);
     height: 1em;
@@ -141,7 +149,6 @@
   }
 
   .ck-select {
-    // @include s-input-component-select-field-bare();
     @include form-style.select-bare();
     $paddingTag: sugar.lnf(padding-horizontal);
     $padding: sugar.lnf(padding-horizontal) * 0.6;
@@ -162,7 +169,6 @@
       padding: sugar.lnf(padding-horizontal);
     }
     .ck-select__search-field {
-      // @include s-input-component-field-size();
       @include form-style.input-bare();
       border-radius: sugar.lnf(border-radius);
     }
@@ -177,8 +183,6 @@
       line-height: calc(#{$paddingTag} + 0.9em + 0.1em);
 
       padding: 0 sugar.lnf(padding-vertical) / 2;
-      // padding-top:calc(#{$paddingTag / 2} + .1em);
-      // padding-bottom:calc(#{$paddingTag / 2} - .1em);
       position: relative;
       left: - sugar.lnf(padding-vertical) / 2;
     }
@@ -196,10 +200,16 @@
 }
 
 /**
+ * @name      classes-style
+ * @namespace     select-webcomponent
+ * @type        Mixin
+ *
  * Provide all the style classes of the s-select component for a default style
  * Styling options:
  * - ```[color="{$color}"]``` : apply a color to the select component
+ *
  * @param 		{List<Color>} 		[$colors=default primary secondary] 		The colors to generate
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com>
  */
 @mixin classes-style($colors: default primary secondary) {

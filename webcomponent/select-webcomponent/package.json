@@ -1,6 +1,6 @@
 {
   "name": "@coffeekraken/select-webcomponent",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Provide a nice and fully customizable select webcomponent that use a real select as source of truth",
   "main": "dist/index.js",
   "homepage": "http://coffeekraken.io",

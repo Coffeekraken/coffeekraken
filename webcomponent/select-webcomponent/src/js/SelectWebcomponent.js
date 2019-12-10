@@ -143,6 +143,9 @@ export default class SelectWebcomponent extends native(HTMLSelectElement) {
 			}
 			.${componentNameDash}__selection-tag-close {
 			}
+      .${componentNameDash}__search-field {
+        box-sizing: border-box !important;
+      }
 		`;
   }
 

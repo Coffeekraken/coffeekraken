@@ -164,6 +164,9 @@ class SelectWebcomponent extends (0, _sNativeWebComponent.default)(HTMLSelectEle
 			}
 			.${componentNameDash}__selection-tag-close {
 			}
+      .${componentNameDash}__search-field {
+        box-sizing: border-box !important;
+      }
 		`;
   }
   /**

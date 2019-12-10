@@ -1,0 +1,25 @@
+<html>
+ <head>
+ <title>App Name - <?php echo $this->yieldContent('title'); ?></title>
+ <link rel="stylesheet" href="/dist/css/style.css" type="text/css">
+ <script>
+ window.ck_states = [];
+ <?php $__currentLoopData = $states; $this->addLoop($__currentLoopData); foreach($__currentLoopData as $state): $this->incrementLoopIndices(); $loop = $this->getFirstLoop(); ?>
+ window.ck_states.push('<?php echo static::e($state); ?>');
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </script>
+ </head>
+ <body>
+ <div class="ck-preview__iframe-container">
+ <iframe src="http://<?php echo static::e($_SERVER[HTTP_HOST]); ?><?php echo static::e($_SERVER[REQUEST_URI]); ?>?iframe=true" class="ck-preview__iframe"></iframe>
+ </div>
+ <section class="ck-preview__views-selector">
+ <select is="ck-select">
+ <?php $__currentLoopData = $views; $this->addLoop($__currentLoopData); foreach($__currentLoopData as $view): $this->incrementLoopIndices(); $loop = $this->getFirstLoop(); ?>
+ <option value="<?php echo static::e($view); ?>"><?php echo static::e($view); ?></option>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </select>
+ </section>
+ <script src="/dist/js/app.bundle.js"></script>
+ </body>
+</html>

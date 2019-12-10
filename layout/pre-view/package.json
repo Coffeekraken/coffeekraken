@@ -32,7 +32,7 @@
   "devDependencies": {},
   "dependencies": {
     "@coffeekraken/form-style": "0.0.2",
-    "@coffeekraken/select-webcomponent": "0.0.1",
+    "@coffeekraken/select-webcomponent": "0.0.3",
     "@coffeekraken/sugar": "^1.0.4",
     "commander": "^4.0.1",
     "get-bin-path": "^4.0.0",

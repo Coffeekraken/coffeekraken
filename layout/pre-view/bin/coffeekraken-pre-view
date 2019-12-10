@@ -1,29 +1,50 @@
 #!/usr/bin/env node
 
 const program = require('commander')
+const fs = require('fs')
 const packageJson = require('../package.json')
 
 process.title = 'coffeekraken-pre-view'
 
 program
   .version(packageJson.version)
+  .option('-c --config [value]', 'Specify the config file path to load', `${process.cwd()}/pre-view.config.js`)
   .option('-f --folder [value]', 'Specify the folder to serve with the php server', `${process.cwd()}/views`)
   .option('-p --port [value]', 'Specify the port to use for the php server', 8080)
   .option('-h --hostname [value]', 'Specify the hostname to use for the php server', '127.0.0.1')
-  .option('-o --open', 'Open the browser at the server url', false)
+  .option('-o --open', 'Open the browser at the server url', true)
   .option('-b --binary [value]', 'Specify the path the the php binary', null)
   .option('-i --ini [value]', 'Specify a path to a custom php.ini file', null)
-  .option('--hotkey [value]', 'Specify a hotkey that will display the view select module', 'command+1')
+  .option('--hotkeys.selector [value]', 'Specify a hotkey that will display the view select module', 'alt+enter')
+  .option('--hotkeys.states [value]', 'Specify a hotkey that will switch between the preview states', 'alt+shift')
+  .option('--js [value]', 'Specify some javascript files pathes to load in the preview', [])
+  .option('--css [value]', 'Specify some css files pathes to load in the preview', [])
   .parse(process.argv)
+
+program.hotkeys = {
+  selector: program['hotkeys.selector'],
+  states: program['hotkeys.states']
+}
+
+// load the config file if exist
+let config = {};
+if (fs.lstatSync(program.config).isFile()) {
+  config = require(program.config);
+}
+
 
 const PreView = require('../dist/js/PreView');
 const preViewInstance = new PreView({
+  config: program.config,
   folder: program.folder,
   port: program.port,
   hostname: program.hostname,
   open: program.open,
   binary: program.binary,
   ini: program.ini,
-  hotkey: program.hotkey
+  hotkeys: program.hotkeys,
+  js: program.js,
+  css: program.css,
+  ...config
 });
 preViewInstance.start();

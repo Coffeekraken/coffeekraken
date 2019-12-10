@@ -15,6 +15,9 @@ export default class ViewsSelector {
 
     // add the hotkeys
     this._addHotkeys();
+
+    // add events listeners
+    this._addEventListeners();
   }
 
   /**
@@ -38,6 +41,28 @@ export default class ViewsSelector {
   _removeHotkeys() {
     if (this._deleteHotkey) this._deleteHotkey();
     if (this._deleteEscapeHotkey) this._deleteEscapeHotkey();
+  }
+
+  /**
+   * Add event listeners
+   */
+  _addEventListeners() {
+    if (this._$domElm) {
+      this._$domElm.addEventListener('change', this._onChange);
+    }
+    window.addEventListener('message', (e) => {
+      if (e.data === 'views-selector--open') {
+        this.open();
+      }
+    });
+  }
+
+  /**
+   * On change
+   */
+  _onChange(e) {
+    // change the url with the passed e
+    window.location.href = e.target.value;
   }
 
   /**

@@ -36,19 +36,16 @@
     },
     "demo.dist.js": {
       "paths": [
-        "src/js/**/*!(.bundle).js",
         "demo/src/js/**/*!(.bundle).js"
       ]
     },
     "demo.dist.js.bundle": {
       "paths": [
-        "src/js/**/*.js",
         "demo/src/js/**/*.bundle.js"
       ]
     },
     "demo.dist.scss": {
       "paths": [
-        "src/scss/**/*.scss",
         "demo/src/scss/**/*.scss"
       ]
     }

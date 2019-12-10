@@ -1,4 +1,10 @@
 /**
+ * Views
+ * Import all the scss files found in the views folder
+ */
+@import "../../views/**/*.scss";
+
+/**
  * Vendors
  * All external libraries needed in the project.
  */

@@ -10,6 +10,7 @@ const phpServer = require('php-server');
 class PreView {
   constructor(config) {
     this._config = config;
+    console.log(config);
   }
   /**
    * Start the server
@@ -22,12 +23,15 @@ class PreView {
         port: this._config.port,
         hostname: this._config.hostname,
         folder: this._config.folder,
-        base: `${process.env.INIT_CWD}/src/php/`,
-        router: `${process.env.INIT_CWD}/src/php/index.php`,
+        base: process.PWD,
+        router: `${__dirname}/../../src/php/index.php`,
         open: this._config.open,
         env: {
           folder: this._config.folder,
-          hotkey: this._config.hotkey
+          hotkeys: this._config.hotkeys,
+          js: this._config.js.charAt(0) !== '/' ? `/${this._config.js}` : this._config.js,
+          css: this._config.css.charAt(0) !== '/' ? `/${this._config.css}` : this._config.css,
+          states: JSON.stringify(this._config.states)
         }
       });
       console.log(`PHP server running at ${this._phpServer.url}`);

@@ -21,3 +21,9 @@
 
 // import some sections
 @import 'section/ck-preview__views-selector';
+@import 'section/ck-preview__iframe';
+
+// apply base styling for the body
+body {
+  background-color: sugar.color(primary);
+}

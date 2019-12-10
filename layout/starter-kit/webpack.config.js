@@ -1,7 +1,22 @@
+const glob = require('glob');
+const path = require('path');
+
+const rawEntries = glob.sync("./src/js/**/*.bundle.js");
+const entries = {};
+rawEntries.forEach(entry => {
+  entries[entry.split('/').slice(-1)[0]] = entry;
+});
+
 module.exports = {
-  entry: "./src/js/app.js",
+  entry: entries,
   module: {
     rules: [
+      {
+        enforce: 'pre',
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'import-glob',
+      },
       {
         test: /\.(js)$/,
         exclude: /node_modules/,
@@ -10,8 +25,8 @@ module.exports = {
     ]
   },
   output: {
-    path: __dirname + "/dist/js",
-    filename: "app.js"
+    path: path.resolve('./dist/js'),
+    filename: "[name]"
   },
   mode: "production"
 };

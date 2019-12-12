@@ -1,24 +1,27 @@
 <?php
 
+// } else if (preg_match('/^\/dist\//', $request) && $_GET['iframe']) {
+//   $path = $_SERVER['DOCUMENT_ROOT'] . $request;
+//   $path = explode('?', $path)[0];
+//   $content = file_get_contents($path);
+//   echo $content;
+// } else if (preg_match('/^\/dist\//', $request)) {
+//   $content = file_get_contents(__DIR__ . '/../../' . $request);
+//   echo $content;
+
 require(__DIR__ . '/../../vendor/autoload.php');
 
 Use eftec\bladeone\BladeOne;
 
 $request = $_SERVER["REQUEST_URI"];
 
-
-
-// router.php
-if (preg_match('/\.(?:png|jpg|jpeg|gif)$/', $request)) {
-    return false; // Serve the requested resource as-is
-} else if (preg_match('/^\/dist\//', $request) && $_GET['iframe']) {
-  $path = $_SERVER['DOCUMENT_ROOT'] . $request;
-  $path = explode('?', $path)[0];
-  $content = file_get_contents($path);
-  echo $content;
-} else if (preg_match('/^\/dist\//', $request)) {
-  $content = file_get_contents(__DIR__ . '/../../' . $request);
-  echo $content;
+if (explode('/', $request)[1] === 'pre-view' ) {
+  $path = __DIR__ . '/../..' . str_replace('/pre-view', '', $request);
+  echo file_get_contents($path);
+} else if (is_file($_SERVER['DOCUMENT_ROOT'] . explode('?',$request)[0])) {
+  $path = $_SERVER['DOCUMENT_ROOT'] . explode('?', $request)[0];
+  header('Content-Type: ' . mime_content_type($path));
+  echo file_get_contents($path);
 } else if ($_GET['iframe']) {
 
   // process the request to get the view path
@@ -49,6 +52,12 @@ if (preg_match('/\.(?:png|jpg|jpeg|gif)$/', $request)) {
     $content = $blade->runString($viewString, $jsonData);
   } else if (preg_match('/\.twig\.php/', $request)) {
     // twig engine
+    $loader = new \Twig\Loader\ArrayLoader([
+        'index' => $viewString,
+    ]);
+    $twig = new \Twig\Environment($loader);
+
+    echo $twig->render('index', $jsonData);
   }
 
   // render the iframe layout with the rendered view content
@@ -69,7 +78,7 @@ if (preg_match('/\.(?:png|jpg|jpeg|gif)$/', $request)) {
   foreach ($rawViews as $view) {
     array_push($viewsPaths, str_replace($_ENV['folder'], '', $view));
   }
-  
+
   $views = __DIR__ . '/views';
   $cache = __DIR__ . '/cache';
   $blade = new BladeOne($views,$cache,BladeOne::MODE_AUTO);

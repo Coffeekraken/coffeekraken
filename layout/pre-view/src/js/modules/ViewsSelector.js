@@ -29,7 +29,7 @@ export default class ViewsSelector {
       this.close();
     });
     // listen for the hotkey to open the view selection module
-    this._deleteHotkey = _hotkey('command+enter', (event, handler) => {
+    this._deleteHotkey = _hotkey(window.ck_hotkey_selector || 'command+enter', (event, handler) => {
       // open the views selector
       this.open();
     });

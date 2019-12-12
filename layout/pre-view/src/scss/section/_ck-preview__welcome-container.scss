@@ -1,0 +1,25 @@
+@use 'sugar/index' as sugar;
+
+.ck-preview__welcome-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -70%);
+  background: sugar.color(dark-grey);
+  @include sugar.effect_depth(10);
+  padding: sugar.space(big);
+  opacity: 0;
+  pointer-events: none;
+  transition: all .4s ease-in-out;
+
+  &, * {
+    color: white;
+  }
+
+  &--open {
+    opacity: 1;
+    pointer-events: all;
+    transform: translate(-50%, -50%);
+  }
+
+}

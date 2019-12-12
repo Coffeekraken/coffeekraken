@@ -7,6 +7,6 @@
     {!! $html !!}
 
     <script src="{{ $js }}"></script>
-    <script src="/dist/js/iframe.bundle.js"></script>
+    <script src="/pre-view/dist/js/iframe.bundle.js"></script>
   </body>
 </html>

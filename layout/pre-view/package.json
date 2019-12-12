@@ -34,8 +34,10 @@
     "@coffeekraken/form-style": "0.0.2",
     "@coffeekraken/select-webcomponent": "0.0.3",
     "@coffeekraken/sugar": "^1.0.4",
+    "@coffeekraken/typography-style": "0.0.1",
     "commander": "^4.0.1",
     "get-bin-path": "^4.0.0",
+    "livereload": "^0.8.2",
     "npm-which": "^3.0.1",
     "php-server": "^0.2.1"
   }

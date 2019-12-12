@@ -7,7 +7,7 @@
     "dist": "ck run dist.js && ck run dist.js.bundle && ck run dist.scss",
     "dist.js": "babel src --root-mode upward -d dist --ignore '**/*.bundle.js'",
     "dist.js.bundle": "webpack --config ../../webpack.config.js --env.script='dist.js.bundle'",
-    "dist.scss": "sass src/scss:dist/css --load-path=../../docblock --load-path=../../layout --load-path=../../style --load-path=../../terminal --load-path=../../util --load-path=../../webcomponent",
+    "dist.scss": "sass src/scss:dist/css --load-path=node_modules --load-path=node_modules/@coffeekraken",
     "doc": "rm -rf doc/src && ck run doc.js && ck run doc.scss",
     "_doc.js": "ck-docblock-to-markdown -f 'src/**/*.js' -d doc",
     "_doc.scss": "ck-docblock-to-markdown -f 'src/**/*.scss' -d doc",
@@ -17,7 +17,7 @@
     "demo.dist": "ck run demo.dist.js && ck run demo.dist.scss",
     "demo.dist.js": "babel demo/src --root-mode upward -d demo/dist --ignore '**/*.bundle.js'",
     "demo.dist.js.bundle": "webpack --config ../../webpack.config.js --env.script='demo.dist.js.bundle'",
-    "demo.dist.scss": "sass demo/src/scss/style.scss demo/dist/css/style.css --load-path=../../docblock --load-path=../../layout --load-path=../../style --load-path=../../terminal --load-path=../../util --load-path=../../webcomponent",
+    "demo.dist.scss": "sass demo/src/scss/style.scss demo/dist/css/style.css --load-path=node_modules --load-path=node_modules/@coffeekraken",
     "demo.server": "open http://127.0.0.1:8080 && http-server ./demo",
     "start": "ck-scripts-stack -i start -i _doc.js -i _doc.scss"
   },

@@ -38,7 +38,7 @@ class ViewsSelector {
       this.close();
     }); // listen for the hotkey to open the view selection module
 
-    this._deleteHotkey = (0, _hotkey2.default)('command+enter', (event, handler) => {
+    this._deleteHotkey = (0, _hotkey2.default)(window.ck_hotkey_selector || 'command+enter', (event, handler) => {
       // open the views selector
       this.open();
     });

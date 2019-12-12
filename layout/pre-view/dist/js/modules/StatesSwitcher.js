@@ -24,7 +24,10 @@ class StatesSwitcher {
     this._addHotkeys(); // add events listeners
 
 
-    this._addEventListeners();
+    this._addEventListeners(); // restore the state from localstorage
+
+
+    this._restoreState();
   }
   /**
    * Add the hotkey getted from the settings object
@@ -32,7 +35,7 @@ class StatesSwitcher {
 
 
   _addHotkeys() {
-    this._deleteHotkey = (0, _hotkey2.default)('ctrl+enter', (event, handler) => {
+    this._deleteHotkey = (0, _hotkey2.default)(window.ck_hotkey_states || 'ctrl+enter', (event, handler) => {
       this.switchState();
     });
   }
@@ -57,6 +60,17 @@ class StatesSwitcher {
     });
   }
   /**
+   * Apply a state by passing the state index
+   */
+
+
+  applyState(stateIndex) {
+    // get the state size
+    const stateWidth = window.ck_states[stateIndex]; // apply the width to the iframe
+
+    this._$domElm.style.width = stateWidth;
+  }
+  /**
    * Switch between the registered states
    */
 
@@ -67,12 +81,28 @@ class StatesSwitcher {
 
     if (this._currentStateIndex >= window.ck_states.length) {
       this._currentStateIndex = 0;
-    } // get the state size
+    } // save the state in localstorage
 
 
-    const stateWidth = window.ck_states[this._currentStateIndex]; // apply the width to the iframe
+    localStorage.setItem('ck-pre-view-state', this._currentStateIndex); // apply the state
 
-    this._$domElm.style.width = stateWidth;
+    this.applyState(this._currentStateIndex);
+  }
+  /**
+   * Restore the state from localstorage
+   */
+
+
+  _restoreState() {
+    // try to get the state from localStorage
+    const state = parseInt(localStorage.getItem('ck-pre-view-state')); // check if we have a states
+
+    if (state !== null) {
+      // set the state in instance
+      this._currentStateIndex = state; // apply the state
+
+      this.applyState(this._currentStateIndex);
+    }
   }
 
 }

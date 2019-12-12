@@ -1,4 +1,5 @@
 @use 'select-webcomponent/index' as select-webcomponent;
+@use 'typography-style/index' as typography-style;
 @use 'sugar/index' as sugar;
 
 // configure your sugar
@@ -7,6 +8,9 @@
     dark-grey: (
       color: #000
     )
+  ),
+  look-and-feel: (
+    border-radius: 0.5em
   )
 ));
 
@@ -19,11 +23,15 @@
 // generate the classes for the ck-select webcomponent
 @include select-webcomponent.classes();
 
+// generate typography styles
+@include typography-style.classes();
+
+// import some atoms
+@import 'atom/button';
+
 // import some sections
 @import 'section/ck-preview__views-selector';
 @import 'section/ck-preview__iframe';
+@import 'section/ck-preview__welcome-container';
 
 // apply base styling for the body
-body {
-  background-color: sugar.color(primary);
-}

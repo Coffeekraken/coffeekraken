@@ -11,6 +11,8 @@ const phpServer = require('php-server');
 
 const livereload = require('livereload');
 
+const chalk = require('chalk');
+
 class PreView {
   constructor(config) {
     this._config = config;
@@ -39,9 +41,9 @@ class PreView {
           states: JSON.stringify(this._config.states)
         }
       });
-      console.log(`PHP server running at ${this._phpServer.url}`);
+      console.log(chalk(`PHP server running at ${chalk.green.bold(this._phpServer.url)}`));
     } catch (err) {
-      console.log('error', err);
+      console.log(chalk.red.bold(err));
     }
   }
   /**
@@ -55,6 +57,7 @@ class PreView {
       delay: 1000
     });
     server.watch([this._config.folder, ...this._config.watch.split(',')]);
+    console.log(chalk(`Livereload server started at ${chalk.green.bold('http://127.0.0.1:35729')}`));
   }
 
 }

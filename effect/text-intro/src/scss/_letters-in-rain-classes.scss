@@ -1,0 +1,112 @@
+/**
+ * @name 	text-intro.letters-in-rain-classes
+ * @namespace       text-intro
+ * @type        Mixin
+ *
+ * Provide the classes for the intro="letters-in-rain" intro
+ * - `[intro="letters-in-rain"]`
+ * - [intro="letters-in-rain"].active, [intro="letters-in-rain"][active]`
+ * - [intro-activator] [intro="letters-in-rain"], [intro-activator].active [intro="letters-in-rain"], [intro-activator][active] [intro="letters-in-rain"]`
+ *
+ * @param 		{Integer} 		[$words-letters-count=100] 		The max letters count of words that the animation will handle
+ * @param    {Integer}    [$max-offset=100]    The maximum offset of each letters
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+ @mixin letters-in-rain-classes(
+   $words-letters-count : 100,
+   $max-offset : 100
+ ) {
+	@include letters-in-rain-bare();
+	@include letters-in-rain-style($words-letters-count, $max-offset);
+}
+
+/**
+ * @name      letters-in-rain-bare
+ * @namespace       text-intro
+ * @type      Mixin
+ *
+ * Provide the bare styling for the anim="letters-in-rain" classes
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+@mixin letters-in-rain-bare() {
+
+}
+
+/**
+ * @name      letters-in-rain-style
+ * @namespace       text-intro
+ * @type        Mixin
+ *
+ * Provide the style styling for the anim="letters-in-rain" classes
+ * - `[intro="letters-in-rain"]`
+ * - [intro="letters-in-rain"].active, [intro="letters-in-rain"][active]`
+ * - [intro-activator] [intro="letters-in-rain"], [intro-activator].active [intro="letters-in-rain"], [intro-activator][active] [intro="letters-in-rain"]`
+ *
+ * @param 		{Integer} 		[$words-letters-count=100] 		The max letters count of words that the animation will handle
+ * @param    {Integer}    [$max-offset=100]    The maximum offset of each letters
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+@mixin letters-in-rain-style(
+  $words-letters-count : 100,
+  $max-offset : 100
+) {
+	[intro="letters-in-rain"] {
+		opacity:0.001;
+    transition:opacity .4s cubic-bezier(0.570, 0.000, 0.000, 1) 0s;
+    will-change: opacity;
+    pointer-events: none;
+
+		&.active,
+		&[active] {
+      opacity:1;
+      pointer-events: all;
+
+			.split-letters__letter-container {
+        transform: translateY(0) !important;
+      }
+    }
+
+    .split-letters__letter-container {
+      transition: transform .4s cubic-bezier(0.570, 0.000, 0.000, 1) 0s;
+      will-change: transform;
+    }
+
+		[intro-activator] & {
+      pointer-events: none !important;
+      opacity: 0 !important;
+
+      @for $i from 0 through $words-letters-count {
+        & > span:nth-child(#{$i}) {
+          @for $j from 0 through $words-letters-count {
+            .split-letters__letter-container:nth-child(#{$j}) {
+              transform: translateY(random($max-offset) * -1 + px) !important;
+            }
+          }
+        }
+      }
+		}
+		[intro-activator].active &,
+		[intro-activator][active] & {
+      opacity: 1 !important;
+      pointer-events: all !important;
+
+			& > span:nth-child(1n) .split-letters__letter-container:nth-child(1n) {
+        transform: translateY(0) !important;
+      }
+		}
+
+    @for $i from 0 through $words-letters-count {
+      & > span:nth-child(#{$i}) {
+        @for $j from 0 through $words-letters-count {
+          .split-letters__letter-container:nth-child(#{$j}) {
+            display: inline-block;
+            transform: translateY(random($max-offset) * -1 + px);
+          }
+        }
+      }
+    }
+	}
+}

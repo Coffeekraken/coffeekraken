@@ -1,0 +1,104 @@
+/**
+ * @name        letters-in-reveal-classes
+ * @namespace       text-intro
+ * @type        Mixin
+ *
+ * Provide the classes for the intro="letters-in-reveal" intro
+ * - `[intro="letters-in-reveal"]`
+ * - [intro="letters-in-reveal"].active, [intro="letters-in-reveal"][active]`
+ * - [intro-activator] [intro="letters-in-reveal"], [intro-activator].active [intro="letters-in-reveal"], [intro-activator][active] [intro="letters-in-reveal"]`
+ *
+ * @param 		{Integer} 		[$words-letters-count=100] 		The max letters count of words that the animation will handle
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+ @mixin letters-in-reveal-classes(
+	 $words-letters-count : 100
+ ) {
+	@include letters-in-reveal-bare();
+	@include letters-in-reveal-style($words-letters-count);
+}
+
+/**
+ * @name        letters-in-reveal-bare
+ * @namespace       text-intro
+ * @type        Mixin
+ *
+ * Provide the bare styling for the anim="letters-in-reveal" classes
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+@mixin letters-in-reveal-bare() {
+
+}
+
+/**
+ * @name      letters-in-reveal-style
+ * @namespace       text-intro
+ * @type        Mixin
+ *
+ * Provide the style styling for the anim="letters-in-reveal" classes
+ * - `[intro="letters-in-reveal"]`
+ * - [intro="letters-in-reveal"].active, [intro="letters-in-reveal"][active]`
+ * - [intro-activator] [intro="letters-in-reveal"], [intro-activator].active [intro="letters-in-reveal"], [intro-activator][active] [intro="letters-in-reveal"]`
+ *
+ * @param 		{Integer} 		[$words-letters-count=100] 		The max letters count of words that the animation will handle
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+@mixin letters-in-reveal-style(
+	$words-letters-count : 100
+) {
+	[intro="letters-in-reveal"] {
+		opacity:0.001;
+		transition:opacity .2s linear .2s;
+		pointer-events: none;
+
+		&.active,
+		&[active] {
+			opacity:1;
+			transition:opacity 0s linear 0s;
+			pointer-events: all;
+
+			.split-letters__letter {
+        transform: translate(0,0);
+			}
+		}
+
+		[intro-activator] & {
+			pointer-events: none;
+
+			.split-letters__letter {
+				transform:translateX(-110%) !important;
+			}
+		}
+		[intro-activator].active &,
+		[intro-activator][active] & {
+			opacity:1;
+			pointer-events: all;
+
+			.split-letters__letter {
+				transform:translateX(0) !important;
+			}
+		}
+
+		.split-letters__letter-container {
+			position:relative;
+			display:inline-block;
+			overflow: hidden;
+			min-height:1.1em;
+
+			@for $i from 0 through $words-letters-count {
+				&:nth-child(#{$i}) .split-letters__letter {
+					transition-delay:(.01s * $i) !important;
+				}
+			}
+		}
+			.split-letters__letter {
+				display:inline-block;
+        transform: translate(-110%, 0);
+        transition: all .4s cubic-bezier(0.380, 0.010, 0.000, 1) .1s;
+			}
+
+	}
+}

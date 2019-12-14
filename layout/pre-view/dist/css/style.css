@@ -52391,4 +52391,8 @@ blockquote.vr:last-child,
   transform: translate(-50%, -50%);
 }
 
+body {
+  background-color: #000;
+}
+
 /*# sourceMappingURL=style.css.map */

@@ -35,3 +35,6 @@
 @import 'section/ck-preview__welcome-container';
 
 // apply base styling for the body
+body {
+  background-color: sugar.color(dark-grey);
+}

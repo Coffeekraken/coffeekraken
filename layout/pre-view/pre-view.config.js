@@ -1,14 +1,11 @@
 module.exports = {
-  folder: './views',
-  port: 8080,
+  folder: `${process.cwd()}/views`,
+  watch: `${process.cwd()}/dist`,
   hostname: '127.0.0.1',
   open: true,
-  binary: null,
-  ini: null,
-  hotkeys: {
-    selector: 'alt+enter',
-    states: 'alt+shift'
-  },
-  js: [],
-  css: []
+  hotkey_selector: 'command+enter',
+  hotkey_states: 'ctrl+enter',
+  js: 'dist/js/app.bundle.js',
+  css: 'dist/css/style.css',
+  states: '100%,768px,480px'
 }

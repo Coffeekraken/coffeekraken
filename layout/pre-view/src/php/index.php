@@ -1,19 +1,16 @@
 <?php
 
-// } else if (preg_match('/^\/dist\//', $request) && $_GET['iframe']) {
-//   $path = $_SERVER['DOCUMENT_ROOT'] . $request;
-//   $path = explode('?', $path)[0];
-//   $content = file_get_contents($path);
-//   echo $content;
-// } else if (preg_match('/^\/dist\//', $request)) {
-//   $content = file_get_contents(__DIR__ . '/../../' . $request);
-//   echo $content;
-
 require(__DIR__ . '/../../vendor/autoload.php');
 
 Use eftec\bladeone\BladeOne;
 
 $request = $_SERVER["REQUEST_URI"];
+$rawViews = glob($_ENV['folder'] . '/{,*/,*/*/,*/*/*/}*.{blade.php,twig.php}', GLOB_BRACE);
+
+if ($request == '/' && count($rawViews) > 0) {
+  $redirectTo = str_replace($_ENV['folder'], '', $rawViews[0]);
+  header('Location: ' . $redirectTo);
+}
 
 if (explode('/', $request)[1] === 'pre-view' ) {
   $path = __DIR__ . '/../..' . str_replace('/pre-view', '', $request);
@@ -56,7 +53,6 @@ if (explode('/', $request)[1] === 'pre-view' ) {
         'index' => $viewString,
     ]);
     $twig = new \Twig\Environment($loader);
-
     echo $twig->render('index', $jsonData);
   }
 
@@ -73,12 +69,10 @@ if (explode('/', $request)[1] === 'pre-view' ) {
   echo $content;
 } else {
   // list the views folder
-  $rawViews = glob($_ENV['folder'] . '/{,*/,*/*/,*/*/*/}*.{blade.php,twig.php}', GLOB_BRACE);
   $viewsPaths = [];
   foreach ($rawViews as $view) {
     array_push($viewsPaths, str_replace($_ENV['folder'], '', $view));
   }
-
   $views = __DIR__ . '/views';
   $cache = __DIR__ . '/cache';
   $blade = new BladeOne($views,$cache,BladeOne::MODE_AUTO);

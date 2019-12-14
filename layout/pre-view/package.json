@@ -7,9 +7,6 @@
     "coffeekraken-pre-view": "./bin/coffeekraken-pre-view",
     "ck-pre-view": "./bin/coffeekraken-pre-view"
   },
-  "scripts": {
-    "test-bin": "./bin/coffeekraken-pre-view"
-  },
   "keywords": [
     "coffee",
     "kraken",

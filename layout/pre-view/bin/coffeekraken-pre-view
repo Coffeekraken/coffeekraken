@@ -18,8 +18,8 @@ program
   .option('-i --ini [value]', 'Specify a path to a custom php.ini file', null)
   .option('--hotkey_selector [value]', 'Specify a hotkey that will display the view select module', 'alt+enter')
   .option('--hotkey_states [value]', 'Specify a hotkey that will switch between the preview states', 'alt+shift')
-  .option('--js [value]', 'Specify some javascript files pathes to load in the preview', [])
-  .option('--css [value]', 'Specify some css files pathes to load in the preview', [])
+  .option('--js [value]', 'Specify a javascript file path to load in the preview', [])
+  .option('--css [value]', 'Specify a css file path to load in the preview', [])
   .parse(process.argv)
 
 // load the config file if exist

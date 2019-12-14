@@ -9,6 +9,8 @@ var _hotkey2 = _interopRequireDefault(require("@coffeekraken/sugar/js/keyboard/h
 
 var _querySelector2 = _interopRequireDefault(require("@coffeekraken/sugar/js/dom/querySelector"));
 
+var _lettersInReveal2 = _interopRequireDefault(require("@coffeekraken/text-intro/js/lettersInReveal"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 class ViewsSelector {
@@ -25,7 +27,12 @@ class ViewsSelector {
     this._addHotkeys(); // add events listeners
 
 
-    this._addEventListeners();
+    this._addEventListeners(); // init intro listener
+
+
+    setTimeout(() => {
+      (0, _lettersInReveal2.default)();
+    }, 500);
   }
   /**
    * Add the hotkey getted from the settings object
@@ -101,6 +108,8 @@ class ViewsSelector {
     if (this._$domElm) {
       this._$domElm.classList.add('ck-preview__views-selector--opened');
 
+      this._$domElm.querySelector('.h3').classList.add('active');
+
       this.focus();
     }
   }
@@ -112,6 +121,8 @@ class ViewsSelector {
   close() {
     if (this._$domElm) {
       this._$domElm.classList.remove('ck-preview__views-selector--opened');
+
+      this._$domElm.querySelector('.h3').classList.remove('active');
     }
   }
 

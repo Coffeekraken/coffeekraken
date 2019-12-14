@@ -25,6 +25,7 @@ class PreView {
   async start() {
     try {
       this._phpServer = await phpServer({
+        title: this._config.title,
         port: this._config.port,
         hostname: this._config.hostname,
         folder: this._config.folder,
@@ -32,6 +33,7 @@ class PreView {
         router: `${__dirname}/../../src/php/index.php`,
         open: this._config.open,
         env: {
+          title: this._config.title,
           folder: this._config.folder,
           watch: this._config.watch,
           hotkey_selector: this._config.hotkey_selector,

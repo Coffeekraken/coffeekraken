@@ -1,4 +1,5 @@
 @use 'sugar/index' as sugar;
+@use '@coffeekraken/text-intro/index' as text-intro;
 
 .ck-preview__views-selector {
   position: fixed;
@@ -10,10 +11,26 @@
   background-color: sugar.color(dark-grey);
   opacity: 0;
   pointer-events: none;
+  transition: all ease-in-out 0.2s;
 
   &--opened {
     top: 50px;
     opacity: 1;
     pointer-events: all;
   }
+
+  .h3 {
+    color: white;
+    margin-bottom: 10px;
+  }
+
+  .coffeekraken-logo {
+    height: 40px;
+    position: absolute;
+    top: sugar.lnf(padding-horizontal);
+    right: sugar.lnf(padding-vertical);
+  }
 }
+
+// init text-intro classes
+@include text-intro.letters-in-reveal-classes();

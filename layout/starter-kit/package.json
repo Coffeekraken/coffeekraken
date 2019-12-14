@@ -15,6 +15,7 @@
     "dist.favicons": "rm -rf dist/favicons && coffeekraken-favicons -s src/img/favicon.png -o dist/favicons -h dist/favicons/favicons.html",
     "pretty-quick": "pretty-quick",
     "pre-view": "ck-pre-view",
+    "pre": "../pre-view/bin/coffeekraken-pre-view",
     "browsersync": "browser-sync start --proxy '127.0.0.1:8080' --serveStatic 'dist' --files 'dist' --port 3000",
     "browsersync.chrome": "open-cli http://127.0.0.1:3000 -- 'google chrome'",
     "browsersync.firefox": "open-cli http://127.0.0.1:3000 -- 'firefox'",

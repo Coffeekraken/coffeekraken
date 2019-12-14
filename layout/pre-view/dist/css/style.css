@@ -42833,6 +42833,127 @@ blockquote.vr:last-child,
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+/**
+ * @name        letters-in-reveal-classes
+ * @namespace       text-intro
+ * @type        Mixin
+ *
+ * Provide the classes for the intro="letters-in-reveal" intro
+ * - `[intro="letters-in-reveal"]`
+ * - [intro="letters-in-reveal"].active, [intro="letters-in-reveal"][active]`
+ * - [intro-activator] [intro="letters-in-reveal"], [intro-activator].active [intro="letters-in-reveal"], [intro-activator][active] [intro="letters-in-reveal"]`
+ *
+ * @param 		{Integer} 		[$words-letters-count=100] 		The max letters count of words that the animation will handle
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * @name        letters-in-reveal-bare
+ * @namespace       text-intro
+ * @type        Mixin
+ *
+ * Provide the bare styling for the anim="letters-in-reveal" classes
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * @name      letters-in-reveal-style
+ * @namespace       text-intro
+ * @type        Mixin
+ *
+ * Provide the style styling for the anim="letters-in-reveal" classes
+ * - `[intro="letters-in-reveal"]`
+ * - [intro="letters-in-reveal"].active, [intro="letters-in-reveal"][active]`
+ * - [intro-activator] [intro="letters-in-reveal"], [intro-activator].active [intro="letters-in-reveal"], [intro-activator][active] [intro="letters-in-reveal"]`
+ *
+ * @param 		{Integer} 		[$words-letters-count=100] 		The max letters count of words that the animation will handle
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * @name 	text-intro.letters-in-rain-classes
+ * @namespace       text-intro
+ * @type        Mixin
+ *
+ * Provide the classes for the intro="letters-in-rain" intro
+ * - `[intro="letters-in-rain"]`
+ * - [intro="letters-in-rain"].active, [intro="letters-in-rain"][active]`
+ * - [intro-activator] [intro="letters-in-rain"], [intro-activator].active [intro="letters-in-rain"], [intro-activator][active] [intro="letters-in-rain"]`
+ *
+ * @param 		{Integer} 		[$words-letters-count=100] 		The max letters count of words that the animation will handle
+ * @param    {Integer}    [$max-offset=100]    The maximum offset of each letters
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * @name      letters-in-rain-bare
+ * @namespace       text-intro
+ * @type      Mixin
+ *
+ * Provide the bare styling for the anim="letters-in-rain" classes
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * @name      letters-in-rain-style
+ * @namespace       text-intro
+ * @type        Mixin
+ *
+ * Provide the style styling for the anim="letters-in-rain" classes
+ * - `[intro="letters-in-rain"]`
+ * - [intro="letters-in-rain"].active, [intro="letters-in-rain"][active]`
+ * - [intro-activator] [intro="letters-in-rain"], [intro-activator].active [intro="letters-in-rain"], [intro-activator][active] [intro="letters-in-rain"]`
+ *
+ * @param 		{Integer} 		[$words-letters-count=100] 		The max letters count of words that the animation will handle
+ * @param    {Integer}    [$max-offset=100]    The maximum offset of each letters
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * @name      slide-in-classes
+ * @namespace       text-intro
+ * @type        Mixin
+ *
+ * Provide the classes for the intro="slide-in-{direction}" intro
+ * - `[intro="slide-in-up"]`
+ * - `[intro="slide-in-right"]`
+ * - `[intro="slide-in-bottom"]`
+ * - `[intro="slide-in-left"]`
+ * - `[intro="slide-in-{direction}"].active, [intro="slide-in-{direction}"][active]`
+ * - `[intro-activator] [intro="slide-in-{direction}"], [intro-activator].active [intro="slide-in-{direction}"], [intro-activator][active] [intro="slide-in-{direction}"]`
+ *
+ * @param 	{Number} 	[$offset=50px] 							Specify the distance that the element is gonna slide
+ * @param 	{List} 		[$directions=up right down left]		Specify the directions to generate the classes for
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * @name      slide-in-bare
+ * @namespace       text-intro
+ * @type        Mixin
+ *
+ * Provide the bare styling for the anim="slide-in-{direction}" classes
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+*/
+/**
+ * @name      slide-in-style
+ * @namespace       text-intro
+ * @type        Mixin
+ *
+ * Provide the style styling for the anim="slide-in-{direction}" classes
+ * - `[intro="slide-in-up"]`
+ * - `[intro="slide-in-right"]`
+ * - `[intro="slide-in-bottom"]`
+ * - `[intro="slide-in-left"]`
+ * - `[intro="slide-in-{direction}"].active, [intro="slide-in-{direction}"][active]`
+ * - `[intro-activator] [intro="slide-in-{direction}"], [intro-activator].active [intro="slide-in-{direction}"], [intro-activator][active] [intro="slide-in-{direction}"]`
+ *
+ * @param 	{Number} 	[$offset=50px] 							Specify the distance that the element is gonna slide
+ * @param 	{List} 		[$directions=up right down left]		Specify the directions to generate the classes for
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
 .ck-preview__views-selector {
   position: fixed;
   top: 30px;
@@ -42843,11 +42964,363 @@ blockquote.vr:last-child,
   background-color: #000;
   opacity: 0;
   pointer-events: none;
+  transition: all ease-in-out 0.2s;
 }
 .ck-preview__views-selector--opened {
   top: 50px;
   opacity: 1;
   pointer-events: all;
+}
+.ck-preview__views-selector .h3 {
+  color: white;
+  margin-bottom: 10px;
+}
+.ck-preview__views-selector .coffeekraken-logo {
+  height: 40px;
+  position: absolute;
+  top: 0.8em;
+  right: 1.4em;
+}
+
+[intro=letters-in-reveal] {
+  opacity: 0.001;
+  transition: opacity 0.2s linear 0.2s;
+  pointer-events: none;
+}
+[intro=letters-in-reveal].active, [intro=letters-in-reveal][active] {
+  opacity: 1;
+  transition: opacity 0s linear 0s;
+  pointer-events: all;
+}
+[intro=letters-in-reveal].active .split-letters__letter, [intro=letters-in-reveal][active] .split-letters__letter {
+  transform: translate(0, 0);
+}
+[intro-activator] [intro=letters-in-reveal] {
+  pointer-events: none;
+}
+[intro-activator] [intro=letters-in-reveal] .split-letters__letter {
+  transform: translateX(-110%) !important;
+}
+[intro-activator].active [intro=letters-in-reveal], [intro-activator][active] [intro=letters-in-reveal] {
+  opacity: 1;
+  pointer-events: all;
+}
+[intro-activator].active [intro=letters-in-reveal] .split-letters__letter, [intro-activator][active] [intro=letters-in-reveal] .split-letters__letter {
+  transform: translateX(0) !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  min-height: 1.1em;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(0) .split-letters__letter {
+  transition-delay: 0s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(1) .split-letters__letter {
+  transition-delay: 0.01s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(2) .split-letters__letter {
+  transition-delay: 0.02s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(3) .split-letters__letter {
+  transition-delay: 0.03s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(4) .split-letters__letter {
+  transition-delay: 0.04s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(5) .split-letters__letter {
+  transition-delay: 0.05s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(6) .split-letters__letter {
+  transition-delay: 0.06s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(7) .split-letters__letter {
+  transition-delay: 0.07s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(8) .split-letters__letter {
+  transition-delay: 0.08s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(9) .split-letters__letter {
+  transition-delay: 0.09s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(10) .split-letters__letter {
+  transition-delay: 0.1s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(11) .split-letters__letter {
+  transition-delay: 0.11s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(12) .split-letters__letter {
+  transition-delay: 0.12s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(13) .split-letters__letter {
+  transition-delay: 0.13s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(14) .split-letters__letter {
+  transition-delay: 0.14s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(15) .split-letters__letter {
+  transition-delay: 0.15s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(16) .split-letters__letter {
+  transition-delay: 0.16s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(17) .split-letters__letter {
+  transition-delay: 0.17s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(18) .split-letters__letter {
+  transition-delay: 0.18s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(19) .split-letters__letter {
+  transition-delay: 0.19s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(20) .split-letters__letter {
+  transition-delay: 0.2s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(21) .split-letters__letter {
+  transition-delay: 0.21s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(22) .split-letters__letter {
+  transition-delay: 0.22s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(23) .split-letters__letter {
+  transition-delay: 0.23s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(24) .split-letters__letter {
+  transition-delay: 0.24s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(25) .split-letters__letter {
+  transition-delay: 0.25s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(26) .split-letters__letter {
+  transition-delay: 0.26s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(27) .split-letters__letter {
+  transition-delay: 0.27s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(28) .split-letters__letter {
+  transition-delay: 0.28s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(29) .split-letters__letter {
+  transition-delay: 0.29s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(30) .split-letters__letter {
+  transition-delay: 0.3s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(31) .split-letters__letter {
+  transition-delay: 0.31s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(32) .split-letters__letter {
+  transition-delay: 0.32s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(33) .split-letters__letter {
+  transition-delay: 0.33s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(34) .split-letters__letter {
+  transition-delay: 0.34s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(35) .split-letters__letter {
+  transition-delay: 0.35s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(36) .split-letters__letter {
+  transition-delay: 0.36s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(37) .split-letters__letter {
+  transition-delay: 0.37s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(38) .split-letters__letter {
+  transition-delay: 0.38s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(39) .split-letters__letter {
+  transition-delay: 0.39s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(40) .split-letters__letter {
+  transition-delay: 0.4s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(41) .split-letters__letter {
+  transition-delay: 0.41s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(42) .split-letters__letter {
+  transition-delay: 0.42s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(43) .split-letters__letter {
+  transition-delay: 0.43s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(44) .split-letters__letter {
+  transition-delay: 0.44s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(45) .split-letters__letter {
+  transition-delay: 0.45s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(46) .split-letters__letter {
+  transition-delay: 0.46s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(47) .split-letters__letter {
+  transition-delay: 0.47s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(48) .split-letters__letter {
+  transition-delay: 0.48s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(49) .split-letters__letter {
+  transition-delay: 0.49s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(50) .split-letters__letter {
+  transition-delay: 0.5s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(51) .split-letters__letter {
+  transition-delay: 0.51s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(52) .split-letters__letter {
+  transition-delay: 0.52s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(53) .split-letters__letter {
+  transition-delay: 0.53s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(54) .split-letters__letter {
+  transition-delay: 0.54s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(55) .split-letters__letter {
+  transition-delay: 0.55s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(56) .split-letters__letter {
+  transition-delay: 0.56s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(57) .split-letters__letter {
+  transition-delay: 0.57s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(58) .split-letters__letter {
+  transition-delay: 0.58s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(59) .split-letters__letter {
+  transition-delay: 0.59s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(60) .split-letters__letter {
+  transition-delay: 0.6s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(61) .split-letters__letter {
+  transition-delay: 0.61s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(62) .split-letters__letter {
+  transition-delay: 0.62s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(63) .split-letters__letter {
+  transition-delay: 0.63s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(64) .split-letters__letter {
+  transition-delay: 0.64s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(65) .split-letters__letter {
+  transition-delay: 0.65s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(66) .split-letters__letter {
+  transition-delay: 0.66s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(67) .split-letters__letter {
+  transition-delay: 0.67s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(68) .split-letters__letter {
+  transition-delay: 0.68s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(69) .split-letters__letter {
+  transition-delay: 0.69s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(70) .split-letters__letter {
+  transition-delay: 0.7s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(71) .split-letters__letter {
+  transition-delay: 0.71s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(72) .split-letters__letter {
+  transition-delay: 0.72s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(73) .split-letters__letter {
+  transition-delay: 0.73s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(74) .split-letters__letter {
+  transition-delay: 0.74s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(75) .split-letters__letter {
+  transition-delay: 0.75s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(76) .split-letters__letter {
+  transition-delay: 0.76s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(77) .split-letters__letter {
+  transition-delay: 0.77s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(78) .split-letters__letter {
+  transition-delay: 0.78s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(79) .split-letters__letter {
+  transition-delay: 0.79s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(80) .split-letters__letter {
+  transition-delay: 0.8s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(81) .split-letters__letter {
+  transition-delay: 0.81s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(82) .split-letters__letter {
+  transition-delay: 0.82s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(83) .split-letters__letter {
+  transition-delay: 0.83s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(84) .split-letters__letter {
+  transition-delay: 0.84s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(85) .split-letters__letter {
+  transition-delay: 0.85s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(86) .split-letters__letter {
+  transition-delay: 0.86s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(87) .split-letters__letter {
+  transition-delay: 0.87s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(88) .split-letters__letter {
+  transition-delay: 0.88s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(89) .split-letters__letter {
+  transition-delay: 0.89s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(90) .split-letters__letter {
+  transition-delay: 0.9s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(91) .split-letters__letter {
+  transition-delay: 0.91s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(92) .split-letters__letter {
+  transition-delay: 0.92s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(93) .split-letters__letter {
+  transition-delay: 0.93s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(94) .split-letters__letter {
+  transition-delay: 0.94s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(95) .split-letters__letter {
+  transition-delay: 0.95s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(96) .split-letters__letter {
+  transition-delay: 0.96s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(97) .split-letters__letter {
+  transition-delay: 0.97s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(98) .split-letters__letter {
+  transition-delay: 0.98s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(99) .split-letters__letter {
+  transition-delay: 0.99s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter-container:nth-child(100) .split-letters__letter {
+  transition-delay: 1s !important;
+}
+[intro=letters-in-reveal] .split-letters__letter {
+  display: inline-block;
+  transform: translate(-110%, 0);
+  transition: all 0.4s cubic-bezier(0.38, 0.01, 0, 1) 0.1s;
 }
 
 /**

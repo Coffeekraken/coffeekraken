@@ -16,6 +16,11 @@
  <iframe src="http://<?php echo static::e($_SERVER[HTTP_HOST]); ?><?php echo static::e($_SERVER[REQUEST_URI]); ?>?iframe=true" class="ck-preview__iframe"></iframe>
  </div>
  <section class="ck-preview__views-selector">
+ <h1 class="h3" intro="letters-in-reveal">
+ <?php echo static::e($env['title']); ?>
+
+ </h1>
+ <img class="coffeekraken-logo" src="/pre-view/dist/img/coffeekraken-logo.png" />
  <select is="ck-select">
  <?php $__currentLoopData = $views; $this->addLoop($__currentLoopData); foreach($__currentLoopData as $view): $this->incrementLoopIndices(); $loop = $this->getFirstLoop(); ?>
  <option value="<?php echo static::e($view); ?>"><?php echo static::e($view); ?></option>

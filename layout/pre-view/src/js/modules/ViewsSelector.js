@@ -1,5 +1,6 @@
 import _hotkey from '@coffeekraken/sugar/js/keyboard/hotkey';
 import _querySelector from '@coffeekraken/sugar/js/dom/querySelector';
+import _lettersInReveal from '@coffeekraken/text-intro/js/lettersInReveal';
 
 export default class ViewsSelector {
 
@@ -18,6 +19,11 @@ export default class ViewsSelector {
 
     // add events listeners
     this._addEventListeners();
+
+    // init intro listener
+    setTimeout(() => {
+      _lettersInReveal();
+    }, 500);
   }
 
   /**
@@ -85,6 +91,7 @@ export default class ViewsSelector {
   open() {
     if (this._$domElm) {
       this._$domElm.classList.add('ck-preview__views-selector--opened');
+      this._$domElm.querySelector('.h3').classList.add('active');
       this.focus();
     }
   }
@@ -95,6 +102,7 @@ export default class ViewsSelector {
   close() {
     if (this._$domElm) {
       this._$domElm.classList.remove('ck-preview__views-selector--opened');
+      this._$domElm.querySelector('.h3').classList.remove('active');
     }
   }
 

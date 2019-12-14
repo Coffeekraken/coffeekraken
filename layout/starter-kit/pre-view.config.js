@@ -1,4 +1,5 @@
 module.exports = {
+  title: require(`${process.cwd()}/package.json`).name,
   folder: `${process.cwd()}/views`,
   watch: `${process.cwd()}/dist`,
   hostname: '127.0.0.1',

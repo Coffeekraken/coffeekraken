@@ -16,6 +16,10 @@
       <iframe src="http://{{ $_SERVER[HTTP_HOST] }}{{$_SERVER[REQUEST_URI] }}?iframe=true" class="ck-preview__iframe"></iframe>
     </div>
     <section class="ck-preview__views-selector">
+      <h1 class="h3" intro="letters-in-reveal">
+        {{ $env['title'] }}
+      </h1>
+      <img class="coffeekraken-logo" src="/pre-view/dist/img/coffeekraken-logo.png" />
       <select is="ck-select">
         @foreach ($views as $view)
           <option value="{{ $view }}">{{ $view }}</option>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" href="dist/css/style.css" />
+</head>
+<body>
+
+	<ck-codemirror language="html" copy-enabled="false">
+		<template>
+			<h1>Hello World</h1>
+			<p>Nulla eget facilisis lacus. Morbi porta a lorem a pellentesque.</p>
+		</template>
+	</ck-codemirror>
+
+	<ck-codemirror line-numbers="false" language="typescript" theme="material" display-actions="always">
+		<template>
+				class Greeter {
+					greeting: string;
+					constructor (message: string) {
+					  this.greeting = message;
+					}
+					greet() {
+					  return "Hello, " + this.greeting;
+					}
+				  }
+
+				  var greeter = new Greeter("world");
+
+				  var button = document.createElement('button')
+				  button.innerText = "Say Hello"
+				  button.onclick = function() {
+					alert(greeter.greet())
+				  }
+
+				  document.body.appendChild(button)
+		</template>
+	</ck-codemirror>
+
+	<ck-codemirror language="scss" theme="dracula" update-on="run" processugar.code-at-start="false">
+		<template>
+		@use 'node_modules/@coffeekraken/sugar/index' as sugar;
+@include sugar.init();
+    @include sugar.classes();
+            body {
+                background: linear-gradient(to left, #f46b45 , #eea849);
+                }
+            .container {
+                @include sugar.position(absolute, middle, center);
+                    }
+                .card {
+                    max-width : 400px;
+                    @include sugar.effect_depth(2);
+                        background: white;
+                        &:hover {
+                            @include sugar.effect_depth(20);
+                                }
+                            }
+                        .card__content {
+                            padding: sugar.to_rem(40px);
+                            transform:translate3d(0,0,20px);
+                            }
+		</template>
+	</ck-codemirror>
+
+	<script src="dist/js/app.bundle.js"></script>
+</body>
+</html>

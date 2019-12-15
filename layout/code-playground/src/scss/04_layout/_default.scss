@@ -1,0 +1,25 @@
+/**
+ * Default layout
+ */
+html, body {
+	width:100%; height:100%;
+
+}
+body {
+	display:flex;
+	overflow:hidden;
+	flex-flow: column nowrap;
+}
+div[s-drawer-content] {
+	display: flex;
+	flex-flow: column nowrap;
+	height: 100vh;
+}
+	.footer,
+	.header {
+		flex:0 0 auto;
+	}
+	s-interactive-demo {
+		display:flex;
+		flex:1 0 auto;
+	}

@@ -1,0 +1,13 @@
+@import 'node_modules/coffeekraken-s-dropdown-component/index';
+
+@include s-dropdown-classes(
+	$colors : default primary secondary
+);
+.dropdown__menu {
+	overflow-y: auto;
+	max-height: 90vh;
+
+	a {
+		text-decoration: none;
+	}
+}

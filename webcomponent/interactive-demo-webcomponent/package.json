@@ -1,0 +1,43 @@
+{
+  "name": "@coffeekraken/interactive-demo-webcomponent",
+  "version": "0.0.1",
+  "description": "Provide a simple, powerful and nice way to display interactive html demo",
+  "main": "dist/index.js",
+  "homepage": "http://coffeekraken.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/coffeekraken/coffeekraken/tree/master/webcomponent/interactive-demo-webcomponent"
+  },
+  "scripts": {
+    "postinstall": "node ./scripts/postinstall.js"
+  },
+  "keywords": [
+    "html",
+    "demo",
+    "interactive",
+    "editor",
+    "codemirror",
+    "coffee",
+    "kraken",
+    "coffeekraken"
+  ],
+  "author": "Coffeekraken <hello@coffeekraken.io>",
+  "contributors": [
+    {
+      "name": "Olivier Bossel",
+      "email": "olivier.bossel@gmail.com",
+      "url": "http://olivierbossel.com"
+    }
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@coffeekraken/sugar": "^1.0.5",
+    "clipboard": "^1.5.16",
+    "lodash": "^4.17.3"
+  },
+  "devDependencies": {
+    "@coffeekraken/codemirror-webcomponent": "^1.0.1",
+    "@coffeekraken/compile-server": "0.0.2",
+    "fs-extra": "^8.1.0"
+  }
+}

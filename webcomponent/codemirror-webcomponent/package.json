@@ -1,0 +1,42 @@
+{
+  "name": "@coffeekraken/codemirror-webcomponent",
+  "version": "1.0.1",
+  "description": "Webcomponent wrapper for the codemirror editor library.",
+  "main": "js/index.js",
+  "homepage": "http://coffeekraken.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/coffeekraken/coffeekraken/tree/master/webcomponent/codemirror-webcomponent"
+  },
+  "scripts": {
+    "postinstall": "node ./scripts/postinstall.js"
+  },
+  "keywords": [
+    "webcomponent",
+    "sugar",
+    "editor",
+    "codemirror",
+    "coffee",
+    "kraken",
+    "coffeekraken"
+  ],
+  "author": "Coffeekraken <hello@coffeekraken.io>",
+  "contributors": [
+    {
+      "name": "Olivier Bossel",
+      "email": "olivier.bossel@gmail.com",
+      "url": "http://olivierbossel.com"
+    }
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@coffeekraken/sugar": "^1.0.5",
+    "clipboard": "^1.5.16",
+    "codemirror": "^5.42.2",
+    "codemirror-formatting": "^1.0.0",
+    "mousetrap": "^1.6.0"
+  },
+  "devDependencies": {
+    "fs-extra": "^8.1.0"
+  }
+}

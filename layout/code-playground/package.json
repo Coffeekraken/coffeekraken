@@ -1,0 +1,57 @@
+{
+  "name": "@coffeekraken/code-playground",
+  "version": "0.0.1",
+  "description": "Provide a nice code playground that let you play with some html, javascript (coffee, typescript, etc...) and css (sass, scss, stylus, etc...)",
+  "homepage": "http://coffeekraken.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/coffeekraken/coffeekraken/tree/master/layout/code-playground"
+  },
+  "main": "index.js",
+  "bin": {
+    "coffeekraken-code-playground": "./bin/coffeekraken-code-playground",
+    "ck-code-playground": "./bin/coffeekraken-code-playground"
+  },
+  "scripts": {
+    "demo": "./bin/coffeekraken-code-playground"
+  },
+  "keywords": [
+    "code",
+    "playground",
+    "interface",
+    "web",
+    "node",
+    "js",
+    "npm",
+    "express",
+    "doc",
+    "customize",
+    "sugar",
+    "coffeekraken",
+    "coffee",
+    "kraken"
+  ],
+  "author": "Coffeekraken <hello@coffeekraken.io>",
+  "contributors": [
+    {
+      "name": "Olivier Bossel",
+      "email": "olivier.bossel@gmail.com",
+      "url": "http://olivierbossel.com"
+    }
+  ],
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {
+    "@coffeekraken/compile-server": "^0.0.1",
+    "@coffeekraken/gridle": "0.0.5",
+    "@coffeekraken/sugar": "^1.0.5",
+    "codemirror": "^5.42.2",
+    "cookie-session": "^2.0.0-beta.1",
+    "cryptr": "^2.0.0",
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.0",
+    "golden-layout": "^1.5.9",
+    "lodash": "^4.17.11",
+    "md5": "^2.2.1"
+  }
+}

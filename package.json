@@ -4,22 +4,22 @@
   "description": "We are a young collectve of front-end creative developers with one goal in mind. Build tools to make every team working day life better",
   "scripts": {
     "test": "jest --config ../../jest.config.js",
-    "dist": "ck run dist.js && ck run dist.js.bundle && ck run dist.scss",
+    "dist": "ck run dist.js && ck run dist.js.bundle && ck run dist.scss && ck run dist.img",
     "dist.js": "babel src --root-mode upward -d dist --ignore '**/*.bundle.js'",
     "dist.js.bundle": "webpack --config ../../webpack.config.js --env.script='dist.js.bundle'",
     "dist.scss": "sass src/scss:dist/css --load-path=node_modules --load-path=node_modules/@coffeekraken",
+    "dist.img": "coffeekraken-imagemin -s src/img -o dist/img -q 80",
     "doc": "rm -rf doc/src && ck run doc.js && ck run doc.scss",
-    "_doc.js": "ck-docblock-to-markdown -f 'src/**/*.js' -d doc",
-    "_doc.scss": "ck-docblock-to-markdown -f 'src/**/*.scss' -d doc",
     "doc.js": "../../docblock/docblock-to-markdown/bin/coffeekraken-docblock-to-markdown -f 'src/**/*.js' -d doc",
     "doc.scss": "../../docblock/docblock-to-markdown/bin/coffeekraken-docblock-to-markdown -f 'src/**/*.scss' -d doc",
     "demo": "ck run demo.dist && ck run demo.server",
-    "demo.dist": "ck run demo.dist.js && ck run demo.dist.scss",
+    "demo.dist": "ck run demo.dist.js && ck run demo.dist.scss && ck run demo.dist.img",
     "demo.dist.js": "babel demo/src --root-mode upward -d demo/dist --ignore '**/*.bundle.js'",
     "demo.dist.js.bundle": "webpack --config ../../webpack.config.js --env.script='demo.dist.js.bundle'",
     "demo.dist.scss": "sass demo/src/scss/style.scss demo/dist/css/style.css --load-path=node_modules --load-path=node_modules/@coffeekraken",
+    "demo.dist.img": "coffeekraken-imagemin -s demo/src/img -o demo/dist/img -q 80",
     "demo.server": "open http://127.0.0.1:8080 && http-server ./demo",
-    "start": "ck-scripts-stack -i start -i _doc.js -i _doc.scss"
+    "start": "ck-scripts-stack -i start"
   },
   "watch": {
     "test": {
@@ -34,6 +34,11 @@
     "dist.scss": {
       "paths": "src/**/*.scss"
     },
+    "dist.img": {
+      "paths": [
+        "src/**/*.{jpg,jpeg,png,gif,svg}"
+      ]
+    },
     "demo.dist.js": {
       "paths": [
         "demo/src/js/**/*!(.bundle).js"
@@ -47,6 +52,11 @@
     "demo.dist.scss": {
       "paths": [
         "demo/src/scss/**/*.scss"
+      ]
+    },
+    "demo.dist.img": {
+      "paths": [
+        "demo/src/**/*.{jpg,jpeg,png,gif,svg}"
       ]
     }
   },
@@ -92,6 +102,7 @@
     "webpack-cli": "^3.3.10",
     "http-server": "^0.11.1",
     "@coffeekraken/scripts-stack": "^0.0.11",
+    "@coffeekraken/imagemin": "^1.0.0",
     "core-js": "^3.4.2",
     "jest": "^24.9.0",
     "sass": "^1.23.7",

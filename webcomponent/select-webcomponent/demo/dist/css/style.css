@@ -14326,7 +14326,7 @@
  * @author 		Olivier Bossel <olivier.bossel@gmail.com>
  */
 /**
- * @name      textarea-size
+ * @name      textarea-field-size
  * @namespace     form-style
  * @type      Mixin
  *
@@ -14366,7 +14366,7 @@
  * @author 		Olivier Bossel <olivier.bossel@gmail.com>
  */
 /**
- * @name      select-color
+ * @name      select-field-color
  * @namespace       form-style
  * @type        Mixin
  *

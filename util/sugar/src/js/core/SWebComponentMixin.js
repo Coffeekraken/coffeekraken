@@ -29,9 +29,10 @@ const SWebComponentMixin = Mixin(
        * Define the new web component
        * @param 			{String} 			name 		The name of the component
        * @param 			{Object|String} 	[componentClassOrExt=null] 	The component class or the HTML tag to extend like "input", "button", etc...
-       * @param 			{Object|String}		ext 		The HTML tag to extend like "input", "button", etc...
+       * @param 			{Object|String}		[ext=null] 		The HTML tag to extend like "input", "button", etc...
+       * @param       {Object}          [defaultProps={}]     The default props for the webcomponents
        */
-      static define(name, componentOrExt = null, ext = null) {
+      static define(name, componentOrExt = null, ext = null, defaultProps = {}) {
         const component =
           componentOrExt && typeof componentOrExt !== "string"
             ? componentOrExt
@@ -43,6 +44,12 @@ const SWebComponentMixin = Mixin(
 
         if (window.sugar._webComponentsClasses[componentName]) return;
         window.sugar._webComponentsClasses[componentName] = component;
+
+        const tag = __upperFirst(__camelize(name));
+        window.sugar._webComponentsDefaultProps[tag] = {
+          ...(window.sugar._webComponentsDefaultProps[tag] || {}),
+          ...defaultProps
+        };
 
         // register the webcomponent
         if (window.customElements) {

@@ -1,0 +1,46 @@
+{
+  "name": "@coffeekraken/icon-webcomponent",
+  "version": "1.0.0",
+  "description": "Easily integrate icons using various driver like \"img\", \"fonticon\", \"svg\", \"fontawesome\", \"material\" and \"foundation\"",
+  "main": "js/index.js",
+  "homepage": "http://coffeekraken.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/coffeekraken/coffeekraken"
+  },
+  "scripts": {
+    "postinstall": "node ./scripts/postinstall.js"
+  },
+  "keywords": [
+    "icon",
+    "font",
+    "img",
+    "svg",
+    "fontawesome",
+    "material",
+    "foundation",
+    "webcomponent",
+    "component",
+    "html",
+    "sugar",
+    "coffee",
+    "kraken",
+    "coffeekraken"
+  ],
+  "author": "Coffeekraken <hello@coffeekraken.io>",
+  "contributors": [
+    {
+      "name": "Olivier Bossel",
+      "email": "olivier.bossel@gmail.com",
+      "url": "http://olivierbossel.com"
+    }
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@coffeekraken/sugar": "^1.0.5",
+    "axios": "^0.19.0"
+  },
+  "devDependencies": {
+    "fs-extra": "^8.1.0"
+  }
+}

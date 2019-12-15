@@ -1,5 +1,5 @@
 @use 'sugar/index' as sugar;
-@use 'select-webcomponent/index' as select-webcomponent;
+@use '../../../index' as select-webcomponent;
 
 // configure your sugar
 @include sugar.setup(());

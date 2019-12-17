@@ -95,13 +95,15 @@ class StatesSwitcher {
 
   _restoreState() {
     // try to get the state from localStorage
-    const state = parseInt(localStorage.getItem('ck-pre-view-state')); // check if we have a states
+    const state = localStorage.getItem('ck-pre-view-state'); // check if we have a states
 
-    if (state !== null) {
+    if (state !== 'NaN') {
       // set the state in instance
       this._currentStateIndex = state; // apply the state
 
       this.applyState(this._currentStateIndex);
+    } else {
+      this._currentStateIndex = 0;
     }
   }
 

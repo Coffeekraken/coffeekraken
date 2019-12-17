@@ -39,7 +39,7 @@ First, [import and init sugar](https://github.com/coffeekraken/coffeekraken/tree
 Then, import the component into your scss file like so:
 
 ```scss
-@use '@coffeekraken/button-style/index' as button-style;
+@use 'node_modules/@coffeekraken/button-style/index' as button-style;
 ```
 
 Then simply use it using the mixins like so to generate the classes:

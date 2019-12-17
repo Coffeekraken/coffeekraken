@@ -1,0 +1,58 @@
+@use '@coffeekraken/sugar/index' as sugar;
+@use '@coffeekraken/typography-style/index' as typography-style;
+@use '@coffeekraken/button-style/index' as button-style;
+@use '../../../index' as drawer-webcomponent;
+@include sugar.init();
+@include sugar.classes();
+@include typography-style.classes();
+@include button-style.classes(
+	$colors : default primary secondary
+);
+body {
+	overflow-x: hidden;
+}
+main {
+	padding: sugar.space(big);
+}
+ck-drawer * {
+	color: white !important;
+}
+
+// define drawers
+@include drawer-webcomponent.classes(
+	$name : menu,
+	$side : right
+);
+@include drawer-webcomponent.classes(
+	$name : other-menu,
+	$side : left
+) {
+	@include drawer-webcomponent.element(drawer) {
+		background-color: sugar.color(primary);
+	}
+};
+@include drawer-webcomponent.classes(
+	$name : bottom-menu,
+	$side : bottom,
+	$type : slide
+) {
+	@include drawer-webcomponent.element(drawer) {
+		background-color: sugar.color(primary);
+		@include sugar.filter(box-shadow(rgba(0,0,0,.1) 0 0 200px));
+	}
+
+	@include drawer-webcomponent.element(content) {
+		@include drawer-webcomponent.opened() {
+			transform: scale(.9);
+		}
+	}
+};
+
+// style drawer elements
+@include drawer-webcomponent.element(drawer) {
+	background: sugar.color(secondary);
+	padding: sugar.space(big);
+}
+@include drawer-webcomponent.element(overlay) {
+	background: sugar.color(secondary, -opacity .5);
+}

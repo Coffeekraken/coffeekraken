@@ -3,11 +3,13 @@
   "version": "1.0.0",
   "description": "Powerful, fully featured and easy to use dialog component",
   "homepage": "http://coffeekraken.io",
+  "main": "js/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/coffeekraken/coffeekraken/tree/master/webcomponent/dialog-webcomponent"
   },
   "scripts": {
+    "postinstall": "node ./scripts/postinstall.js"
   },
   "keywords": [
     "dialog",
@@ -30,10 +32,11 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "coffeekraken-s-button-component": "^1.0.1",
-    "coffeekraken-s-typography-component": "^1.0.1",
-    "coffeekraken-sugar": "^1.0.36"
+    "@coffeekraken/sugar": "^1.0.5"
   },
   "devDependencies": {
+    "@coffeekraken/button-style": "^1.0.0",
+    "@coffeekraken/typography-style": "0.0.1",
+    "fs-extra": "^8.1.0"
   }
 }

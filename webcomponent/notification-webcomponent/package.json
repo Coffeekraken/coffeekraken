@@ -1,0 +1,41 @@
+{
+  "name": "@coffeekraken/notification-webcomponent",
+  "version": "1.0.0",
+  "description": "Display nice and fully customizable toast like notification.",
+  "homepage": "http://coffeekraken.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/coffeekraken/coffeekraken/tree/master/webcomponent/notification-webcomponent"
+  },
+  "main": "js/index.js",
+  "scripts": {
+    "postinstall": "node ./scripts/postinstall.js"
+  },
+  "keywords": [
+    "notification",
+    "webcomponent",
+    "component",
+    "html",
+    "sugar",
+    "coffee",
+    "kraken",
+    "coffeekraken"
+  ],
+  "author": "Coffeekraken <hello@coffeekraken.io>",
+  "contributors": [
+    {
+      "name": "Olivier Bossel",
+      "email": "olivier.bossel@gmail.com",
+      "url": "http://olivierbossel.com"
+    }
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@coffeekraken/sugar": "^1.0.5"
+  },
+  "devDependencies": {
+    "@coffeekraken/button-style": "^1.0.1",
+    "@coffeekraken/typography-style": "0.0.1",
+    "fs-extra": "^8.1.0"
+  }
+}

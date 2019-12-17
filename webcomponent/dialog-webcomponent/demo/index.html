@@ -7,7 +7,7 @@
 
 	<a href="#my-cool-dialog" class="btn btn--primary">Open dialog</a>
 	<div class="hidden">
-		<s-dialog id="my-cool-dialog" modal>
+		<ck-dialog id="my-cool-dialog" modal>
 			<template>
 				<h1 class="h1 m-b">
 					Hello world
@@ -15,12 +15,12 @@
 				<p class="p m-b">
 					Vivamus vestibulum ultrices eros nec bibendum. In sit amet ultrices mi. Etiam nunc ante, efficitur ac aliquam eget, iaculis quis massa. Duis quis molestie orci. Sed ultricies sem ante, in.
 				</p>
-				<a class="btn btn--secondary" s-dialog-ok>
+				<a class="btn btn--secondary" ck-dialog-ok>
 					Close dialog
 				</a>
 			</template>
-		</s-dialog>
-		<s-dialog opened>
+		</ck-dialog>
+		<ck-dialog opened>
 			<template>
 				<h1 class="h1 m-b">
 					Automatically opened dialog
@@ -29,9 +29,9 @@
 					Vivamus vestibulum ultrices eros nec bibendum. In sit amet ultrices mi. Etiam nunc ante, efficitur ac aliquam eget, iaculis quis massa. Duis quis molestie orci. Sed ultricies sem ante, in.
 				</p>
 			</template>
-		</s-dialog>
+		</ck-dialog>
 	</div>
 
-	<script src="dist/js/app.js"></script>
+	<script src="dist/js/app.bundle.js"></script>
 </body>
 </html>

@@ -1,0 +1,10 @@
+@use '@coffeekraken/sugar/index' as sugar;
+@use '@coffeekraken/typography-style/index' as typography-style;
+@use '@coffeekraken/button-style/index' as button-style;
+@include sugar.init();
+@include sugar.classes();
+@include typography-style.classes();
+@include button-style.classes();
+body {
+	padding: sugar.space(big)
+}

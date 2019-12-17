@@ -6,6 +6,8 @@ Base HTML files and folder structure with complete build process (server, js, sc
 
 To start using the starter kit, here's the command line starting point:
 
+#### Download the starter kit by clicking [HERE](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/Coffeekraken/coffeekraken/tree/master/layout/starter-kit)
+
 #### Make sure you have PHP installed on your device
 
 ```
@@ -46,9 +48,10 @@ Here's the list of features that are built-in the starter kit:
   - [eslint-config-prettier](https://github.com/prettier/eslint-config-prettier) : Turns off all rules that are unnecessary or might conflict with Prettier
 - [Stylelint](https://www.npmjs.com/package/stylelint) : A mighty, modern linter that helps you avoid errors and enforce conventions in your styles
   - [stylelint-config-standard](https://www.npmjs.com/package/stylelint-config-standard?activeTab=dependents) : The standard shareable config for stylelint
+- [Coffeekraken-pre-view](https://www.npmjs.com/package/@coffeekraken/pre-view) : Quickly start working on your views by using this simple CLI that will create for you a PHP server with the support for `blade` and `twig` render engine
 - [Coffeekraken-imagemin](https://www.npmjs.com/package/@coffeekraken/imagemin) : Compress images
 - [Coffeekraken-scripts-stack](https://www.npmjs.com/package/@coffeekraken/scripts-stack) : Nice terminal interface to handle npm/yarn scripts execution as well as watch and run automatically the wanted ones
-- [Gridle](https://www.npmjs.com/package/@coffeekraken/gridle) : Gridle is a simple but powerful and convenient grid that make use of the CSS grid model
+- [Coffeekraken-gridle](https://www.npmjs.com/package/@coffeekraken/gridle) : Gridle is a simple but powerful and convenient grid that make use of the CSS grid model
 - [Browsersync](https://www.browsersync.io/#install) : Time-saving synchronised browser testing
 - [Cssuseragent](http://cssuseragent.org/) : Add some browsers specific classes to the HTML tag
 - [Fastclick](https://github.com/ftlabs/fastclick) : Polyfill to remove click delays on browsers with touch UIs

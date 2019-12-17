@@ -1,0 +1,39 @@
+{
+  "name": "@coffeekraken/dialog-webcomponent",
+  "version": "1.0.0",
+  "description": "Powerful, fully featured and easy to use dialog component",
+  "homepage": "http://coffeekraken.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/coffeekraken/coffeekraken/tree/master/webcomponent/dialog-webcomponent"
+  },
+  "scripts": {
+  },
+  "keywords": [
+    "dialog",
+    "modal",
+    "webcomponent",
+    "component",
+    "html",
+    "sugar",
+    "coffee",
+    "kraken",
+    "coffeekraken"
+  ],
+  "author": "Coffeekraken <hello@coffeekraken.io>",
+  "contributors": [
+    {
+      "name": "Olivier Bossel",
+      "email": "olivier.bossel@gmail.com",
+      "url": "http://olivierbossel.com"
+    }
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "coffeekraken-s-button-component": "^1.0.1",
+    "coffeekraken-s-typography-component": "^1.0.1",
+    "coffeekraken-sugar": "^1.0.36"
+  },
+  "devDependencies": {
+  }
+}

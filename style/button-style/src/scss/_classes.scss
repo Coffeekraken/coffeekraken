@@ -1,0 +1,179 @@
+@use '@coffeekraken/sugar/index' as sugar;
+
+/**
+ * @name        classes
+ * @namespace       button-webcomponent
+ * @type        Mixin
+ *
+ * Provide all the classes of the button component like .btn, .btn--outline, etc...
+ * - ```.btn```
+ * - ```.btn--{color}```
+ * - ```.btn--outline```
+ * - ```.btn--link```
+ * - ```.btn--block```
+ *
+ * @param 		{List<Color>} 		[$colors=default primary secondary] 		The colors to generate
+ * @param 		{List<String>} 		[$types=default outline link block hover disabled] 	 The button types to generate. Available: default outline link block hover disabled
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+ @mixin classes(
+	$colors : default primary secondary,
+	$types: default outline link block hover disabled
+) {
+	@include classes-bare($types);
+	@include classes-style($colors, $types);
+}
+
+/**
+ * @name        classes-bare
+ * @namespace       button-webcomponent
+ * @type        Mixin
+ *
+ * Provide the bare styling for the buttons classes
+ * - ```.btn```
+ * - ```.btn--block```
+ *
+ * @param 		{List<String>} 		[$types=default outline link block hover disabled] 	 The button types to generate. Available: default outline link block hover disabled
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+@mixin classes-bare(
+	$types: default outline link block hover disabled
+) {
+
+	/**
+	 * @name 	```.btn```
+	 * Lead paragraph styling
+	 * @styleguide 	Atoms / Buttons
+	 * @example 	html
+	 * <a class="btn">
+	 * 	Default button
+	 * </a>
+	 */
+	.btn {
+		@include button-bare();
+	}
+
+	@if index($types, block) {
+		/**
+		* @name 	```.btn--block```
+		* Lead paragraph styling
+		* @styleguide 	Atoms / Buttons
+		* @example 	html
+		* <a class="btn btn--block">
+		* 	Block button
+		* </a>
+		*/
+		.btn--block {
+			@include button-bare('block');
+		}
+	}
+}
+
+/**
+ * @name      classes-style
+ * @namespace       button-webcomponent
+ * @type        Mixin
+ *
+ * Provide the style styling for the buttons classes
+ * - ```.button--{color}```
+ * - ```.button--outline```
+ * - ```.button--link```
+ * - ```.button:disabled```
+ * - ```.button--hover-{$color}```
+ *
+ * @param 		{List<Color>} 		[$colors=default primary secondary] 		The colors to generate
+ * @param 		{List<String>} 		[$types=default outline link block hover disabled] 	 The button types to generate. Available: default outline link block hover disabled
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+@mixin classes-style(
+	$colors : default primary secondary,
+	$types: default outline link block hover disabled
+) {
+
+	// base
+	.btn {
+		@include sugar.transition(fast);
+		@include button-style(default);
+	}
+
+	@if index($types, link) {
+		.btn--link {
+			@include button-style('link');
+		}
+	}
+
+	// generate each colors
+	@each $color in $colors {
+		$sel : unquote('.btn--#{$color}');
+		@if $color == default {
+			$sel : unquote('.btn');
+		}
+		/**
+		 * @name 	<span class="c-#{$color}">#{$color}</span> ```.btn```
+		 * #{$color} button
+		 * @styleguide 	Atoms / Buttons
+		 * @example 	html
+		 * <a class="btn btn--#{$color}">
+		 * 	#{$color} button
+		 * </a>
+		 */
+		#{$sel} {
+			@include button-style($color);
+
+			@if index($types, outline) {
+				/**
+				* @name 	<span class="c-#{$color}">#{$color}</span> ```.btn--outline```
+				* Outline #{$color} button
+				* @styleguide 	Atoms / Buttons
+				* @example 	html
+				* <a class="btn btn--outline btn--#{$color}">
+				* 	#{$color} outlined button
+				* </a>
+				*/
+				&.btn--outline {
+					@include button-style($color 'outline');
+				}
+			}
+
+			@if index($types, link) {
+				/**
+				* @name 	<span class="c-#{$color}">#{$color}</span> ```.btn--link```
+				* Link #{$color} button
+				* @styleguide 	Atoms / Buttons
+				* @example 	html
+				* <a class="btn btn--link btn--#{$color}">
+				* 	#{$color} link button
+				* </a>
+				*/
+				&.btn--link {
+					@include button-style($color 'link');
+				}
+			}
+
+			@if index($types, disabled) {
+				/**
+				* @name 	<span class="c-#{$color}">#{$color}</span> ```.btn:disabled```
+				* Disabled #{$color} button
+				* @styleguide 	Atoms / Buttons
+				* @example 	html
+				* <button disabled class="btn btn--#{$color}">
+				* 	#{$color} disabled button
+				* </button>
+				*/
+				&.btn--disabled,
+				&.btn:disabled {
+					@include button-style($color, 'disabled');
+				}
+			}
+		}
+
+		@if index($types, hover) {
+			.btn--hover-#{$color}:hover {
+				@include button-style($color);
+			}
+		}
+	}
+}

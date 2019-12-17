@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" href="dist/css/style.css" />
+</head>
+<body>
+
+	<a href="#my-cool-dialog" class="btn btn--primary">Open dialog</a>
+	<div class="hidden">
+		<s-dialog id="my-cool-dialog" modal>
+			<template>
+				<h1 class="h1 m-b">
+					Hello world
+				</h1>
+				<p class="p m-b">
+					Vivamus vestibulum ultrices eros nec bibendum. In sit amet ultrices mi. Etiam nunc ante, efficitur ac aliquam eget, iaculis quis massa. Duis quis molestie orci. Sed ultricies sem ante, in.
+				</p>
+				<a class="btn btn--secondary" s-dialog-ok>
+					Close dialog
+				</a>
+			</template>
+		</s-dialog>
+		<s-dialog opened>
+			<template>
+				<h1 class="h1 m-b">
+					Automatically opened dialog
+				</h1>
+				<p class="p">
+					Vivamus vestibulum ultrices eros nec bibendum. In sit amet ultrices mi. Etiam nunc ante, efficitur ac aliquam eget, iaculis quis massa. Duis quis molestie orci. Sed ultricies sem ante, in.
+				</p>
+			</template>
+		</s-dialog>
+	</div>
+
+	<script src="dist/js/app.js"></script>
+</body>
+</html>

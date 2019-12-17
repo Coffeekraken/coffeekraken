@@ -22,7 +22,7 @@ const app = require('commander');
 	if (app.config) {
 		app.config = __path.resolve(app.config);
 		if ( ! __fs.existsSync(app.config)) {
-			throw 'Compile Server : the configuration file "' + app.config + '" does not exist...';
+			throw 'Code Playground : the configuration file "' + app.config + '" does not exist...';
 		}
 		// load the config file
 		config = require(app.config);

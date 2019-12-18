@@ -1,0 +1,16 @@
+@use '@coffeekraken/sugar/index' as sugar;
+@use '@coffeekraken/typography-style/index' as typography-style;
+@use '@coffeekraken/button-style/index' as button-style;
+@use '../../../index' as drawer-webcomponent;
+@include sugar.init();
+@include sugar.classes();
+@include typography-style.classes();
+@include button-style.classes(
+	$colors : default primary secondary
+);
+
+
+ck-shape {
+  background: rgb(2,0,36);
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+}

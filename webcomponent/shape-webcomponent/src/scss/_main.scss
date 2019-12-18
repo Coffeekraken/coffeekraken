@@ -1,0 +1,104 @@
+@use '@coffeekraken/sugar/index' as sugar;
+
+/**
+ * @name 			opened
+ * @namespace 			drawer-webcomponent
+ * @type 				Mixin
+ *
+ * Target an opened drawer
+ *
+ * @param 	{String} 		[$name=s-drawer-current-name()] 		The name of the drawer to target
+ *
+ * @example 	scss
+ * \@use 'node_modules/@coffeekraken/drawer-webcomponent/index' as drawer-webcomponent;
+ * \@include drawer-webcomponent.opened(menu) {
+ *  	\@include drawer-webcomponent.element(content) {
+ *  	 	transform: scale(.5);
+ *  	}
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+@mixin opened(
+	$name : current-name()
+) {
+	$drawer-toggle-sel : 'input[ck-drawer-toggle][name]';
+	@if $name {
+		$drawer-toggle-sel : 'input[ck-drawer-toggle][name="#{$name}"]';
+	}
+	#{$drawer-toggle-sel}:checked ~ & {
+		@content;
+	}
+}
+
+/**
+ * @name 				element
+ * @namespace 			drawer-webcomponent
+ * @type 				Mixin
+ *
+ * Specify a drawer element to style
+ * Here's the list of available elements:
+ * - ```drawer``` : the drawer itself
+ * - ```overlay``` : the overlay that will be displayed over the content
+ * - ```toggle``` : the toggle input
+ * - ```bkg``` : the background
+ * - ```content``` : the element that has the s-drawer-content" attribute
+ *
+ * @param 	{String} 		[$element=drawer] 						The element to style. Can be drawer, overlay, toggle, bkg or content
+ * @param 	{String} 		[$name=s-drawer-current-name()] 		The name of the drawer to target
+ *
+ * @example 	scss
+ * \@use 'node_modules/@coffeekraken/drawer-webcomponent/index' as drawer-webcomponent;
+ * \@include drawer-webcomponent.element(drawer) {
+ *  	background: sugar.color(secondary);
+ *  	color: white;
+ * }
+ * \@include drawer-webcomponent.element(overlay) {
+ * 		background: sugar.color(secondary, -opacity .5);
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+@mixin element(
+	$element : drawer,
+	$name : current-name()
+) {
+	#{selector($element, $name)} {
+		@content;
+	}
+}
+
+@function selector(
+	$element : drawer,
+	$name : current-name()
+) {
+	$sel : '';
+	@if $element == 'content' {
+		$sel : '[ck-drawer-content]';
+	} @else if $element == 'bkg' {
+		@if $name {
+			$sel : '[ck-drawer-bkg][for="#{$name}"]';
+		} @else {
+			$sel : '[ck-drawer-bkg][for]';
+		}
+	} @else if $element == 'overlay' {
+		@if $name {
+			$sel : 'label[ck-drawer-overlay][for="#{$name}"]';
+		} @else {
+			$sel : 'label[ck-drawer-overlay][for]';
+		}
+	} @else if $element == 'toggle' {
+		@if $name {
+			$sel : 'input[ck-drawer-toggle][name="#{$name}"]';
+		} @else {
+			$sel : 'input[ck-drawer-toggle]';
+		}
+	} @else {
+		@if $name {
+			$sel : 'ck-drawer[name="#{$name}"]';
+		} @else {
+			$sel : 'ck-drawer';
+		}
+	}
+	@return $sel;
+}

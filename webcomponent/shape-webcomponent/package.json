@@ -1,0 +1,42 @@
+{
+  "name": "@coffeekraken/shape-webcomponent",
+  "version": "1.0.0",
+  "description": "Easily create custom shaped sections",
+  "main": "js/index.js",
+  "homepage": "http://coffeekraken.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/coffeekraken/coffeekraken/tree/master/webcomponent/shape-webcomponent"
+  },
+  "scripts": {
+    "postinstall": "node ./scripts/postinstall.js"
+  },
+  "keywords": [
+    "shape",
+    "webcomponent",
+    "component",
+    "html",
+    "sugar",
+    "coffee",
+    "kraken",
+    "coffeekraken"
+  ],
+  "author": "Coffeekraken <hello@coffeekraken.io>",
+  "contributors": [
+    {
+      "name": "Olivier Bossel",
+      "email": "olivier.bossel@gmail.com",
+      "url": "http://olivierbossel.com"
+    }
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@coffeekraken/sugar": "^1.0.5",
+    "css-element-queries": "^1.2.2"
+  },
+  "devDependencies": {
+    "@coffeekraken/button-style": "^1.0.1",
+    "@coffeekraken/typography-style": "0.0.1",
+    "fs-extra": "^8.1.0"
+  }
+}

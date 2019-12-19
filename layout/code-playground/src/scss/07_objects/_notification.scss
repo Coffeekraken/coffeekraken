@@ -1,5 +1,5 @@
-@import 'node_modules/coffeekraken-s-notification-component/index';
+@use '@coffeekraken/notification-webcomponent/index' as notification-webcomponent;
 
-@include s-notification-classes(
+@include notification-webcomponent.classes(
 	$colors : default primary secondary success error
 );

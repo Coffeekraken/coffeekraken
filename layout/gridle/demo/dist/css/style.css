@@ -2008,5 +2008,15 @@
 coco {
   background: red;
 }
+@media screen and (min-width: 992px) {
+  coco {
+    content: "hello";
+  }
+}
+@media screen and (max-width: 900px) {
+  coco {
+    content: "plop";
+  }
+}
 
 /*# sourceMappingURL=style.css.map */

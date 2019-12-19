@@ -1,19 +1,28 @@
+@use '@coffeekraken/sugar/index' as sugar;
+
 /**
  * Header styling
  */
 .header {
-	background: s-color(secondary, -darken 5%);
+	background: sugar.color(secondary, -darken 5%);
 	color:white;
 	position: relative;
 	z-index:100;
 
-	.row {
-		margin-left:0;
-	}
-	[class*="gr-"] {
-		height: s-rem(50px);
+	[class*="col--"] {
+		height: sugar.to-rem(50px);
 	}
 }
+
+	.header__title,
+	.header__logo {
+		padding: 10px 10px;
+	}
+
+	.header__demos {
+		padding: 17px 10px;
+	}
+
 	.header__title {
 		color: white;
 	}

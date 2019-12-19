@@ -21,4 +21,14 @@
 
 coco {
   background: red;
+
+  @include gridle.state(desktop) {
+    content: 'hello';
+  }
+  @include gridle.state((
+    max-width: 900px
+  )) {
+    content: 'plop';
+  }
+
 }

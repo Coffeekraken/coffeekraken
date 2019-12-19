@@ -1,6 +1,6 @@
-@import 'node_modules/coffeekraken-s-dropdown-component/index';
+@use '@coffeekraken/dropdown-style/index' as dropdown-style;
 
-@include s-dropdown-classes(
+@include dropdown-style.classes(
 	$colors : default primary secondary
 );
 .dropdown__menu {

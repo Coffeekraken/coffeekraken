@@ -11,13 +11,14 @@ const app = require('commander');
 	app
 		.version(require('../package.json').version)
 		.option('-p --port [port]', 'Port on which to start the server', /^\S+$/i)
+		.option('-r --repositories [repositories]', 'Specify the repositories that are allowed to load some code-playground.config.js files from. Comma separated Github urls', /^\S+$/i)
 		.option('-d --cwd [cwd]', 'Change the working directory', /^\S+$/i)
 		.option('-c --config [config]', 'Configuration file to load', /^\S+$/i)
 		.parse(process.argv);
 
 	// extend config
 	const defaultConfig = require(__dirname + '/../code-playground.config');
-	delete defaultConfig.demos // delete the demos properties cause it's a per app prop and does not have to be merged
+	// delete defaultConfig.demos // delete the demos properties cause it's a per app prop and does not have to be merged
 	let config = {};
 	if (app.config) {
 		app.config = __path.resolve(app.config);
@@ -68,7 +69,7 @@ const app = require('commander');
 	});
 
 	// launch the playground
-	require(__dirname + '/../public/app.js')(finalConfig);
+	require(__dirname + '/../dist/js/server/index.js')(finalConfig);
 
 	process.on( 'SIGINT', function() {
 		console.log('Code Playground : stopped');

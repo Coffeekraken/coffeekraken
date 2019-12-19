@@ -77,11 +77,11 @@
  * @type        Mixin
  *
  * Provide the style styling for the buttons classes
- * - ```.button--{color}```
- * - ```.button--outline```
- * - ```.button--link```
- * - ```.button:disabled```
- * - ```.button--hover-{$color}```
+ * - ```.btn--{color}```
+ * - ```.btn--outline```
+ * - ```.btn--link```
+ * - ```.btn:disabled```
+ * - ```.btn--hover-{$color}```
  *
  * @param 		{List<Color>} 		[$colors=default primary secondary] 		The colors to generate
  * @param 		{List<String>} 		[$types=default outline link block hover disabled] 	 The button types to generate. Available: default outline link block hover disabled

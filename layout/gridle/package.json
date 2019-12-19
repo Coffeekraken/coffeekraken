@@ -1,8 +1,12 @@
 {
   "name": "@coffeekraken/gridle",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Gridle grid system",
   "homepage": "https://coffeekraken.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/coffeekraken/coffeekraken/tree/master/layout/gridle"
+  },
   "keywords": [
     "coffee",
     "kraken",

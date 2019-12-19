@@ -1,3 +1,5 @@
+@use '@coffeekraken/sugar/index' as sugar;
+
 .list {
 
 }
@@ -13,14 +15,14 @@
 		a {
 			border-radius: 50%;
 			overflow:hidden;
-			width: s-rem(36px);
-			height: s-rem(36px);
-			border: 1px solid s-color(primary);
+			width: sugar.to-rem(36px);
+			height: sugar.to-rem(36px);
+			border: 1px solid sugar.color(primary);
 			display:block;
 		}
 
 		img {
-			@include s-fit;
+			@include sugar.fit;
 		}
 	}
 }

@@ -114,7 +114,7 @@ module.exports = function(config) {
 			outputStyle: 'compressed'
 		}, req.body.options || {});
 		// include paths
-		options.includePaths = [].concat(options.includePaths, req.config.pwd);
+		options.includePaths = [].concat(options.includePaths || [], req.config.pwd, req.config.pwd + '/node_modules');
 		// compile using sass
     __sass.render(options, (error, result) => {
       if ( ! error) {

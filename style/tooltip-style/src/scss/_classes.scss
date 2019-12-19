@@ -1,0 +1,646 @@
+@use '@coffeekraken/sugar/index' as sugar;
+
+/**
+ * @name          classes
+ * @namespace       tooltip-style
+ * @type          Mixin
+ *
+ * Print out the bare and style tooltip css
+ * Generated classes:
+ * - `.tooltip`
+ * - `.tooltip--tl`
+ * - `.tooltip--t`
+ * - `.tooltip--tr`
+ * - `.tooltip--l`
+ * - `.tooltip--r`
+ * - `.tooltip--bl`
+ * - `.tooltip--b`
+ * - `.tooltip--br`
+ * - `.tooltip--c`
+ * - `.tooltip--{color}`
+ * - `.tooltip--active, .tooltip.active, .tooltip[active], :hover > .tooltip, .active > .tooltip, [active] > .tooltip`
+ *
+ * @param 	{List<Color>} 		[$color=default primary secondary] 		The colors to generate
+ * @param 	{List<String>} 		[$sides=tl t tr l r bl b br c] 			The sides to generate
+ *
+ * @author  	Olivier Bossel <olivier.bossel@gmail.com>
+ */
+ @mixin classes(
+	$colors : default primary secondary,
+	$sides : tl t tr l r bl b br c
+) {
+	@include classes-bare(
+		$sides: $sides
+	);
+	@include classes-style(
+		$colors: $colors,
+		$sides: $sides
+	);
+}
+
+/**
+ * @name        classes-bare
+ * @namespace       tooltip-style
+ * @type          Mixin
+ *
+ * Print out the bare tooltip css
+ * Generated classed
+ * - `.tooltip`
+ * - `.tooltip--tl`
+ * - `.tooltip--t`
+ * - `.tooltip--tr`
+ * - `.tooltip--l`
+ * - `.tooltip--r`
+ * - `.tooltip--bl`
+ * - `.tooltip--b`
+ * - `.tooltip--br`
+ * - `.tooltip--c`
+ * - `.tooltip.active, .tooltip[active], :hover > .tooltip, .active > .tooltip, [active] > .tooltip`
+ *
+ * @param 	{List<String>} 		[$sides=tl t tr l r bl b br c] 			The sides to generate
+ *
+ * @author  	Olivier Bossel <olivier.bossel@gmail.com>
+ */
+@mixin classes-bare(
+	$sides : tl t tr l r bl b br c
+) {
+	.tooltip {
+		position: absolute !important;
+		pointer-events:none;
+		opacity:0;
+		padding: sugar.lnf(padding-horizontal) sugar.lnf(padding-vertical);
+		line-height: sugar.lnf(line-height);
+
+		&.tooltip--active,
+		:hover > &,
+		[active] > &,
+		.active > &,
+		&.active,
+		&[active] {
+			opacity:1;
+			z-index:1;
+		}
+
+  	@if index($sides, c) {
+  		/**
+  		 * @name 		```.tooltip--c```
+  		 * Display a centered tooltip
+  		 * @styleguide 		Atoms / Tooltip
+  		 * @example 	html
+  		 * <div class="active bkg-primary" style="display: block; width: 10px; height: 10px; position: relative; margin: 50px auto;">
+  		 * 	<div class="tooltip tooltip--c">
+  		 * 		I'm a cool tooltip
+  		 * 	</div>
+  		 * </div>
+  		 */
+  		&.tooltip--c {
+  			left:50%; top:50%;
+  			bottom: auto; right: auto;
+  			transform-origin: 0 0;
+  			@include sugar.translate(-50%,-50%);
+  		}
+  	}
+
+  	@if index($sides, t) {
+  		/**
+  		 * @name 		```.tooltip--t```
+  		 * Display a top centered tooltip
+  		 * @styleguide 		Atoms / Tooltip
+  		 * @example 	html
+  		 * <div class="active bkg-primary" style="display: block; width: 10px; height: 10px; position: relative; margin: 50px auto;">
+  		 * 	<div class="tooltip tooltip--t">
+  		 * 		I'm a cool tooltip
+  		 * 	</div>
+  		 * </div>
+  		 */
+  		&.tooltip:not(.tooltip--tr):not(.tooltip--tl):not(.tooltip--l):not(.tooltip--r):not(.tooltip--bl):not(.tooltip--b):not(.tooltip--br):not(.tooltip--c),
+  		&.tooltip--t {
+  			transform-origin:0 calc(100% + 0.5em);
+  			left:50%; bottom:calc(100% + 1em);
+  			top: auto; right: auto;
+  			@include sugar.translate(-50%,0);
+  		}
+  	}
+  	@if index($sides, tl) {
+  		/**
+  		 * @name 		```.tooltip--tl```
+  		 * Display a top left tooltip
+  		 * @styleguide 		Atoms / Tooltip
+  		 * @example 	html
+  		 * <div class="active bkg-primary" style="display: block; width: 10px; height: 10px; position: relative; margin: 50px auto;">
+  		 * 	<div class="tooltip tooltip--tl">
+  		 * 		I'm a cool tooltip
+  		 * 	</div>
+  		 * </div>
+  		 */
+  		&.tooltip--tl {
+  			transform-origin:0 calc(100% + 0.5em);
+  			left:0; bottom:calc(100% + 1em);
+  			top: auto; right: auto;
+  		}
+  	}
+  	@if index($sides, tr) {
+  		/**
+  		 * @name 		```.tooltip--tr```
+  		 * Display a top right tooltip
+  		 * @styleguide 		Atoms / Tooltip
+  		 * @example 	html
+  		 * <div class="active bkg-primary" style="display: block; width: 10px; height: 10px; position: relative; margin: 50px auto;">
+  		 * 	<div class="tooltip tooltip--tr">
+  		 * 		I'm a cool tooltip
+  		 * 	</div>
+  		 * </div>
+  		 */
+  		&.tooltip--tr {
+  			transform-origin:100% 100%;
+  			right:0; bottom:calc(100% + 1em);
+  			left: auto; top: auto;
+  		}
+  	}
+
+  	@if index($sides, l) {
+  		/**
+  		 * @name 		```.tooltip--l```
+  		 * Display a left tooltip
+  		 * @styleguide 		Atoms / Tooltip
+  		 * @example 	html
+  		 * <div class="active bkg-primary" style="display: block; width: 10px; height: 10px; position: relative; margin: 50px auto;">
+  		 * 	<div class="tooltip tooltip--l">
+  		 * 		I'm a cool tooltip
+  		 * 	</div>
+  		 * </div>
+  		 */
+  		&.tooltip--l {
+  			transform-origin:calc(100% + 0.5em) 50%;
+  			right:calc(100% + 1em); top:50%;
+  			left: auto; bottom: auto;
+  			@include sugar.translate(0,-50%);
+  		}
+  	}
+  	@if index($sides, r) {
+  		/**
+  		 * @name 		```.tooltip--r```
+  		 * Display a right tooltip
+  		 * @styleguide 		Atoms / Tooltip
+  		 * @example 	html
+  		 * <div class="active bkg-primary" style="display: block; width: 10px; height: 10px; position: relative; margin: 50px auto;">
+  		 * 	<div class="tooltip tooltip--r">
+  		 * 		I'm a cool tooltip
+  		 * 	</div>
+  		 * </div>
+  		 */
+  		&.tooltip--r {
+  			transform-origin:-.5em 50%;
+  			left:calc(100% + 1em); top:50%;
+  			bottom: auto; right: auto;
+  			@include sugar.translate(0,-50%);
+  		}
+  	}
+  	@if index($sides, bl) {
+  		/**
+  		 * @name 		```.tooltip--bl```
+  		 * Display a bottom left tooltip
+  		 * @styleguide 		Atoms / Tooltip
+  		 * @example 	html
+  		 * <div class="active bkg-primary" style="display: block; width: 10px; height: 10px; position: relative; margin: 50px auto;">
+  		 * 	<div class="tooltip tooltip--bl">
+  		 * 		I'm a cool tooltip
+  		 * 	</div>
+  		 * </div>
+  		 */
+  		&.tooltip--bl {
+  			transform-origin:1em -1em;
+  			left:0; top:calc(100% + 1em);
+  			bottom: auto; right: auto;
+  		}
+  	}
+  	@if index($sides, b) {
+  		/**
+  		 * @name 		```.tooltip--b```
+  		 * Display a bottom tooltip
+  		 * @styleguide 		Atoms / Tooltip
+  		 * @example 	html
+  		 * <div class="active bkg-primary" style="display: block; width: 10px; height: 10px; position: relative; margin: 50px auto;">
+  		 * 	<div class="tooltip tooltip--b">
+  		 * 		I'm a cool tooltip
+  		 * 	</div>
+  		 * </div>
+  		 */
+  		&.tooltip--b {
+  			transform-origin:0 -1em;
+  			left:50%; top:calc(100% + 1em);
+  			bottom: auto; right: auto;
+  			@include sugar.translate(-50%, 0);
+  		}
+  	}
+  	@if index($sides, br) {
+  		/**
+  		 * @name 		```.tooltip--br```
+  		 * Display a bottom right tooltip
+  		 * @styleguide 		Atoms / Tooltip
+  		 * @example 	html
+  		 * <div class="active bkg-primary" style="display: block; width: 10px; height: 10px; position: relative; margin: 50px auto;">
+  		 * 	<div class="tooltip tooltip--br">
+  		 * 		I'm a cool tooltip
+  		 * 	</div>
+  		 * </div>
+  		 */
+  		&.tooltip--br {
+  			transform-origin:calc(100% - 1em) -1em;
+  			right:0; top:calc(100% + 1em);
+  			left: auto; bottom: auto;
+  		}
+  	}
+  }
+}
+
+/**
+ * Print out the style tooltip css
+ * Generated classes:
+ * - `.tooltip`
+ * - `.tooltip--tl`
+ * - `.tooltip--t`
+ * - `.tooltip--tr`
+ * - `.tooltip--l`
+ * - `.tooltip--r`
+ * - `.tooltip--bl`
+ * - `.tooltip--b`
+ * - `.tooltip--br`
+ * - `.tooltip--c`
+ * - `.tooltip--{color}`
+ * - `.tooltip--active, .tooltip.active, .tooltip[active], :hover > .tooltip, .active > .tooltip, [active] > .tooltip`
+ * @param 	{List<Color>} 		[$color=default primary secondary] 		The colors to generate
+ * @param 	{List<String>} 		[$sides=tl t tr l r bl b br c] 			The sides to generate
+ */
+@mixin classes-style(
+	$colors : default primary secondary,
+	$sides : tl t tr l r bl b br c
+) {
+	.tooltip {
+		@include sugar.effect-depth(5);
+		border-radius: sugar.lnf(border-radius);
+		@include sugar.transition(fast);
+	}
+	@keyframes ck-tooltip-component {
+		0% {
+			transform: scale(0.9,0.9);
+		}
+		100% {
+			transform: scale(1,1);
+		}
+	}
+	@if index($sides, c) {
+		@keyframes ck-tooltip-component--c {
+			0% {
+				transform: scale(0.9,0.9) translateX(-50%) translateY(-50%);
+			}
+			100% {
+				transform: scale(1,1) translateX(-50%) translateY(-50%);
+			}
+		}
+	}
+	@if index($sides, b) {
+		@keyframes ck-tooltip-component--b {
+			0% {
+				transform: scale(0.9,0.9) translateX(-50%);
+			}
+			100% {
+				transform: scale(1,1) translateX(-50%);
+			}
+		}
+	}
+	@if index($sides, t) {
+		@keyframes ck-tooltip-component--t {
+			0% {
+				transform: scale(0.9,0.9) translateX(-50%);
+			}
+			100% {
+				transform: scale(1,1) translateX(-50%);
+			}
+		}
+	}
+	@if index($sides, l) {
+		@keyframes ck-tooltip-component--l {
+			0% {
+				transform: scale(0.9,0.9) translateY(-50%);
+			}
+			100% {
+				transform: scale(1,1) translateY(-50%);
+			}
+		}
+	}
+	@if index($sides, r) {
+		@keyframes ck-tooltip-component--r {
+			0% {
+				transform: scale(0.9,0.9) translateY(-50%);
+			}
+			100% {
+				transform: scale(1,1) translateY(-50%);
+			}
+		}
+	}
+
+	@each $color in $colors {
+		$sel : ".tooltip--#{$color}";
+		#{sugar.selector($sel)} {
+			background-color: sugar.color($color);
+			@if lightness(sugar.color($color)) > 70 {
+				color : sugar.color($color, -darken 30%);
+			} @else {
+				color : white;
+			}
+
+			@if index($sides, c) {
+				/**
+				 * @name 		<span class="c-#{$color}">#{$color}</span> ```.tooltip--c.tooltip--#{$color}```
+				 * Display a #{$color} centered tooltip
+				 * @styleguide 		Atoms / Tooltip
+				 * @example 	html
+				 * <div class="active bkg-primary" style="display: block; width: 10px; height: 10px; position: relative; margin: 50px auto;">
+				 * 	<div class="tooltip tooltip--#{$color} tooltip--c">
+				 * 		I'm a cool tooltip
+				 * 	</div>
+				 * </div>
+				 */
+				&.tooltip--c {
+
+					&.tooltip--active,
+					&.active,
+					&[active]
+					[active] > &,
+					.active > &,
+					:hover > & {
+						@include sugar.animation(ck-tooltip-component--c .1s);
+					}
+				}
+			}
+
+			@if index($sides, t) {
+				/**
+				 * @name 		<span class="c-#{$color}">#{$color}</span> ```.tooltip--t.tooltip--#{$color}```
+				 * Display a #{$color} top centered tooltip
+				 * @styleguide 		Atoms / Tooltip
+				 * @example 	html
+				 * <div class="active bkg-primary" style="display: block; width: 10px; height: 10px; position: relative; margin: 50px auto;">
+				 * 	<div class="tooltip tooltip--#{$color} tooltip--t">
+				 * 		I'm a cool tooltip
+				 * 	</div>
+				 * </div>
+				 */
+				&.tooltip:not(.tooltip--tr):not(.tooltip--tl):not(.tooltip--l):not(.tooltip--r):not(.tooltip--bl):not(.tooltip--b):not(.tooltip--br):not(.tooltip--c),
+				&.tooltip--t {
+					@include sugar.effect-bubble(
+						$side : bottom,
+						$align : center,
+						$size : .5em,
+						$color : sugar.color($color),
+						$arrow-offset : .5em,
+						$border-width : 0,
+						$border-color : null
+					);
+
+					&.tooltip--active,
+					&.active,
+					&[active]
+					[active] > &,
+					.active > &,
+					:hover > & {
+						@include sugar.animation(ck-tooltip-component--t .1s);
+					}
+				}
+			}
+			@if index($sides, tl) {
+				/**
+				 * @name 		<span class="c-#{$color}">#{$color}</span> ```.tooltip--tl.tooltip--#{$color}```
+				 * Display a #{$color} top left tooltip
+				 * @styleguide 		Atoms / Tooltip
+				 * @example 	html
+				 * <div class="active bkg-primary" style="display: block; width: 10px; height: 10px; position: relative; margin: 50px auto;">
+				 * 	<div class="tooltip tooltip--#{$color} tooltip--tl">
+				 * 		I'm a cool tooltip
+				 * 	</div>
+				 * </div>
+				 */
+				&.tooltip--tl {
+					@include sugar.effect-bubble(
+						$side : bottom,
+						$align : left,
+						$size : .5em,
+						$color : sugar.color($color),
+						$arrow-offset : .5em,
+						$border-width : 0,
+						$border-color : null
+					);
+
+					&.tooltip--active,
+					&.active,
+					&[active]
+					[active] > &,
+					.active > &,
+					:hover > & {
+						@include sugar.animation(ck-tooltip-component .1s);
+					}
+				}
+			}
+			@if index($sides, tr) {
+				/**
+				 * @name 		<span class="c-#{$color}">#{$color}</span> ```.tooltip--tr.tooltip--#{$color}```
+				 * Display a #{$color} top right tooltip
+				 * @styleguide 		Atoms / Tooltip
+				 * @example 	html
+				 * <div class="active bkg-primary" style="display: block; width: 10px; height: 10px; position: relative; margin: 50px auto;">
+				 * 	<div class="tooltip tooltip--#{$color} tooltip--tr">
+				 * 		I'm a cool tooltip
+				 * 	</div>
+				 * </div>
+				 */
+				&.tooltip--tr {
+					@include sugar.effect-bubble(
+						$side : bottom,
+						$align : right,
+						$size : .5em,
+						$color : sugar.color($color),
+						$arrow-offset : .5em,
+						$border-width : 0,
+						$border-color : null
+					);
+
+					&.tooltip--active,
+					&.active,
+					&[active]
+					[active] > &,
+					.active > &,
+					:hover > & {
+						@include sugar.animation(ck-tooltip-component .1s);
+					}
+				}
+			}
+
+			@if index($sides, l) {
+				/**
+				 * @name 		<span class="c-#{$color}">#{$color}</span> ```.tooltip--l.tooltip--#{$color}```
+				 * Display a #{$color} left tooltip
+				 * @styleguide 		Atoms / Tooltip
+				 * @example 	html
+				 * <div class="active bkg-primary" style="display: block; width: 10px; height: 10px; position: relative; margin: 50px auto;">
+				 * 	<div class="tooltip tooltip--#{$color} tooltip--l">
+				 * 		I'm a cool tooltip
+				 * 	</div>
+				 * </div>
+				 */
+				&.tooltip--l {
+					@include sugar.effect-bubble(
+						$side : right,
+						$align : center,
+						$size : .5em,
+						$color : sugar.color($color),
+						$arrow-offset : .5em,
+						$border-width : 0,
+						$border-color : null
+					);
+
+					&.tooltip--active,
+					&.active,
+					&[active]
+					[active] > &,
+					.active > &,
+					:hover > & {
+						@include sugar.animation(ck-tooltip-component--l .1s);
+					}
+				}
+			}
+			@if index($sides, r) {
+				/**
+				 * @name 		<span class="c-#{$color}">#{$color}</span> ```.tooltip--r.tooltip--#{$color}```
+				 * Display a #{$color} right tooltip
+				 * @styleguide 		Atoms / Tooltip
+				 * @example 	html
+				 * <div class="active bkg-primary" style="display: block; width: 10px; height: 10px; position: relative; margin: 50px auto;">
+				 * 	<div class="tooltip tooltip--#{$color} tooltip--r">
+				 * 		I'm a cool tooltip
+				 * 	</div>
+				 * </div>
+				 */
+				&.tooltip--r {
+					@include sugar.effect-bubble(
+						$side : left,
+						$align : center,
+						$size : .5em,
+						$color : sugar.color($color),
+						$arrow-offset : .5em,
+						$border-width : 0,
+						$border-color : null
+					);
+
+					&.tooltip--active,
+					&.active,
+					&[active]
+					[active] > &,
+					.active > &,
+					:hover > & {
+						@include sugar.animation(ck-tooltip-component--r .1s);
+					}
+				}
+			}
+			@if index($sides, bl) {
+				/**
+				 * @name 		<span class="c-#{$color}">#{$color}</span> ```.tooltip--bl.tooltip--#{$color}```
+				 * Display a #{$color} bottom left tooltip
+				 * @styleguide 		Atoms / Tooltip
+				 * @example 	html
+				 * <div class="active bkg-primary" style="display: block; width: 10px; height: 10px; position: relative; margin: 50px auto;">
+				 * 	<div class="tooltip tooltip--#{$color} tooltip--bl">
+				 * 		I'm a cool tooltip
+				 * 	</div>
+				 * </div>
+				 */
+				&.tooltip--bl {
+					@include sugar.effect-bubble(
+						$side : top,
+						$align : left,
+						$size : .5em,
+						$color : sugar.color($color),
+						$arrow-offset : .5em,
+						$border-width : 0,
+						$border-color : null
+					);
+
+					&.tooltip--active,
+					&.active,
+					&[active]
+					[active] > &,
+					.active > &,
+					:hover > & {
+						@include sugar.animation(ck-tooltip-component .1s);
+					}
+				}
+			}
+			@if index($sides, b) {
+				/**
+				 * @name 		<span class="c-#{$color}">#{$color}</span> ```.tooltip--b.tooltip--#{$color}```
+				 * Display a #{$color} bottom tooltip
+				 * @styleguide 		Atoms / Tooltip
+				 * @example 	html
+				 * <div class="active bkg-primary" style="display: block; width: 10px; height: 10px; position: relative; margin: 50px auto;">
+				 * 	<div class="tooltip tooltip--#{$color} tooltip--b">
+				 * 		I'm a cool tooltip
+				 * 	</div>
+				 * </div>
+				 */
+				&.tooltip--b {
+					@include sugar.effect-bubble(
+						$side : top,
+						$align : center,
+						$size : .5em,
+						$color : sugar.color($color),
+						$arrow-offset : .5em,
+						$border-width : 0,
+						$border-color : null
+					);
+
+					&.tooltip--active,
+					&.active,
+					&[active]
+					[active] > &,
+					.active > &,
+					:hover > & {
+						@include sugar.animation(ck-tooltip-component--b .1s);
+					}
+				}
+			}
+			@if index($sides, br) {
+				/**
+				 * @name 		<span class="c-#{$color}">#{$color}</span> ```.tooltip--br.tooltip--#{$color}```
+				 * Display a #{$color} bottom right tooltip
+				 * @styleguide 		Atoms / Tooltip
+				 * @example 	html
+				 * <div class="active bkg-primary" style="display: block; width: 10px; height: 10px; position: relative; margin: 50px auto;">
+				 * 	<div class="tooltip tooltip--#{$color} tooltip--br">
+				 * 		I'm a cool tooltip
+				 * 	</div>
+				 * </div>
+				 */
+				&.tooltip--br {
+					@include sugar.effect-bubble(
+						$side : top,
+						$align : right,
+						$size : .5em,
+						$color : sugar.color($color),
+						$arrow-offset : .5em,
+						$border-width : 0,
+						$border-color : null
+					);
+
+					&.tooltip--active,
+					&.active,
+					&[active]
+					[active] > &,
+					.active > &,
+					:hover > & {
+						@include sugar.animation(ck-tooltip-component .1s);
+					}
+				}
+			}
+		}
+	}
+}

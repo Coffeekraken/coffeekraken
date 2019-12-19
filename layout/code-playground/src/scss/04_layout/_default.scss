@@ -10,7 +10,7 @@ body {
 	overflow:hidden;
 	flex-flow: column nowrap;
 }
-div[s-drawer-content] {
+div[ck-drawer-content] {
 	display: flex;
 	flex-flow: column nowrap;
 	height: 100vh;
@@ -19,7 +19,7 @@ div[s-drawer-content] {
 	.header {
 		flex:0 0 auto;
 	}
-	s-interactive-demo {
+	ck-interactive-demo {
 		display:flex;
 		flex:1 0 auto;
 	}

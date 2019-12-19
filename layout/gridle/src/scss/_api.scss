@@ -56,9 +56,20 @@
 @mixin state(
 	$statesNames
 ) {
-	@each $stateName in $statesNames {
-		@include _state($stateName) {
-			@content;
+	@if (type-of($statesNames) == map) {
+		$q : media-query($statesNames);
+		@if $q {
+			@media #{$q} {
+				@content;
+			}
+		} @else {
+			@warn('Your state map #{$statesNames} is not a valid gridle state map...');
+		}
+	} @else {
+		@each $stateName in $statesNames {
+			@include _state($stateName) {
+				@content;
+			}
 		}
 	}
 }

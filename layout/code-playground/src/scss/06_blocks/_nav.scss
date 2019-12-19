@@ -1,3 +1,6 @@
+@use '@coffeekraken/gridle/index' as gridle;
+@use '@coffeekraken/sugar/index' as sugar;
+
 /**
  * Navigation styling
  */
@@ -37,19 +40,19 @@
 			font-size:13px;
 
 			&:hover {
-				background: s-color(secondary, -lighten 10%);
+				background: sugar.color(secondary, -lighten 10%);
 			}
 		}
 	}
 
-	@include g-state((
+	@include gridle.state((
 		max-width: 800px
 	)) {
 		.nav__item--about {
 			display: none;
 		}
 	}
-	@include g-state((
+	@include gridle.state((
 		max-width: 700px
 	)) {
 		.nav__item--website {

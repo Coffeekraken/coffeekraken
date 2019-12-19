@@ -8,14 +8,14 @@ const rawDemoEntries = glob.sync(globStringDemo);
 const srcEntries = {};
 const demoEntries = {};
 rawSrcEntries.forEach(entry => {
-  srcEntries[entry.split('/').slice(-1)[0]] = entry;
+  srcEntries[entry.split('/').slice(3).join('/')] = entry;
 });
 rawDemoEntries.forEach(entry => {
-  demoEntries[entry.split('/').slice(-1)[0]] = entry;
+  demoEntries[entry.split('/').slice(4).join('/')] = entry;
 });
 
 module.exports = env => ({
-  // mode: "production",
+  mode: "development",
   entry: env.script === 'dist.js.bundle' ? srcEntries : demoEntries,
   output: {
     path: env.script === 'demo.dist.js.bundle' ? path.resolve('./demo/dist/js') : path.resolve('./dist/js'),

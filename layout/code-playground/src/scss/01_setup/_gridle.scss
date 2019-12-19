@@ -1,5 +1,7 @@
+@use "@coffeekraken/gridle/index" as gridle;
+
 // setup
-@include g-setup((
+@include gridle.setup((
 	context : 12,
 	gutter-width : 20px
 ));

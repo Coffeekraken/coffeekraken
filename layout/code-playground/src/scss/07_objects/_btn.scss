@@ -1,5 +1,5 @@
-@import 'node_modules/coffeekraken-s-button-component/index';
+@use '@coffeekraken/button-style/index' as button-style;
 
-@include s-button-classes(
+@include button-style.classes(
 	$colors : default primary secondary
 );

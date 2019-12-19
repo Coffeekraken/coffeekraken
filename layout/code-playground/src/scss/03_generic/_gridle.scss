@@ -1,5 +1,7 @@
+@use "@coffeekraken/gridle/index" as gridle;
+
 // generate classes
-@include g-classes();
+@include gridle.classes();
 
 // container
 .container {

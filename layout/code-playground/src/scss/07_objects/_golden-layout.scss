@@ -1,9 +1,11 @@
+@use '@coffeekraken/sugar/index' as sugar;
+
 .lm_goldenlayout{
-	background: s-color(secondary, -darken 5%);
+	background: sugar.color(secondary, -darken 5%);
 }
 
 .lm_content{
-	background: s-color(secondary);
+	background: sugar.color(secondary);
 }
 
 .lm_dragProxy .lm_content{
@@ -17,17 +19,17 @@
 }
 
 .lm_dropTargetIndicator .lm_inner{
-	background: s-color(secondary) !important;
+	background: sugar.color(secondary) !important;
 }
 
 .lm_splitter{
-	background: s-color(secondary, -darken 5%) !important;
+	background: sugar.color(secondary, -darken 5%) !important;
 	transition: opacity 200ms ease;
 }
 
 .lm_splitter:hover{
 	opacity: 1;
-	background: s-color(primary) !important;
+	background: sugar.color(primary) !important;
 	z-index:100;
 }
 

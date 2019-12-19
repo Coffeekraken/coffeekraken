@@ -1,6 +1,7 @@
-@import 'node_modules/coffeekraken-s-drawer-component/index';
+@use '@coffeekraken/drawer-webcomponent/index' as drawer-webcomponent;
+@use '@coffeekraken/sugar/index' as sugar;
 
-@include s-drawer-classes(
+@include drawer-webcomponent.classes(
 	$name: 'apps',
 	$side: 'left',
 	$type: push
@@ -13,10 +14,10 @@ label[for="apps"] {
 
 }
 .drawer--sidemenu {
-	background-color: s-color(secondary);
+	background-color: sugar.color(secondary);
 
-	s-custom-scrollbar {
+	ck-scrollbar {
 		height: 100%;
-		padding-bottom: s-space(bigger) * 2;
+		padding-bottom: sugar.space(bigger) * 2;
 	}
 }

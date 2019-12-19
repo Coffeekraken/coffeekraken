@@ -1,7 +1,7 @@
-@import 'node_modules/coffeekraken-s-typography-component/index';
+@use '@coffeekraken/typography-style/index' as typography-style;
 
-@include s-typography-title-classes();
-@include s-typography-paragraph-classes();
-@include s-typography-link-classes();
-@include s-typography-inline-text-classes();
-@include s-typography-list-classes();
+@include typography-style.title-classes();
+@include typography-style.paragraph-classes();
+@include typography-style.link-classes();
+@include typography-style.inline-text-classes();
+@include typography-style.list-classes();

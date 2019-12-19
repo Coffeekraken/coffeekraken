@@ -1,6 +1,6 @@
-@import 'node_modules/coffeekraken-s-tooltip-component/index';
+@use '@coffeekraken/tooltip-style/index' as tooltip-style;
 
-@include s-tooltip-classes(
+@include tooltip-style.classes(
 	$colors : default primary secondary
 );
 .tooltip {

@@ -1,0 +1,40 @@
+{
+  "name": "@coffeekraken/tooltip-style",
+  "version": "1.0.0",
+  "description": "Full stack tooltip styling supporting multiple sides and colors. Fully customizable as well.",
+  "homepage": "http://coffeekraken.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/coffeekraken/coffeekraken/tree/master/style/tooltip-style"
+  },
+  "scripts": {
+    "postinstall": "node ./scripts/postinstall.js"
+  },
+  "keywords": [
+    "tooltip",
+    "customizable",
+    "style",
+    "component",
+    "html",
+    "sugar",
+    "coffee",
+    "kraken",
+    "coffeekraken"
+  ],
+  "author": "Coffeekraken <hello@coffeekraken.io>",
+  "contributors": [
+    {
+      "name": "Olivier Bossel",
+      "email": "olivier.bossel@gmail.com",
+      "url": "http://olivierbossel.com"
+    }
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@coffeekraken/sugar": "^1.0.5"
+  },
+  "devDependencies": {
+    "@coffeekraken/button-style": "^1.0.1",
+    "@coffeekraken/typography-style": "0.0.1"
+  }
+}

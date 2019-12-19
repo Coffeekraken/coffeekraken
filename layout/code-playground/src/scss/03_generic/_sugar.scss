@@ -1,4 +1,6 @@
+@use "@coffeekraken/sugar/index" as sugar;
+
 // init
-@include s-init();
+@include sugar.init();
 // classes
-@include s-classes();
+@include sugar.classes();

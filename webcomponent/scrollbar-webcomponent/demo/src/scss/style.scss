@@ -1,0 +1,13 @@
+@use '@coffeekraken/sugar/index' as sugar;
+@use '@coffeekraken/typography-style/index' as typography-style;
+@use '../../../index' as scrollbar-webcomponent;
+@include sugar.init();
+@include sugar.classes();
+@include typography-style.classes();
+@include scrollbar-webcomponent.classes();
+body {
+	padding: sugar.space(big);
+}
+ck-scrollbar {
+	padding-right: 30px !important;
+}

@@ -1,0 +1,37 @@
+{
+  "name": "@coffeekraken/scrollbar-webcomponent",
+  "version": "1.0.0",
+  "description": "Simple webcomponent that let you skin the scrollbar as you want. It use internally the nice \"simplebar\" library",
+  "main": "js/index.js",
+  "scripts": {
+    "postinstall": "node ./scripts/postinstall.js"
+  },
+  "keywords": [
+    "custom",
+    "scrollbar",
+    "webcomponent",
+    "simplebar",
+    "component",
+    "html",
+    "sugar",
+    "coffee",
+    "kraken",
+    "coffeekraken"
+  ],
+  "author": "Coffeekraken <hello@coffeekraken.io>",
+  "contributors": [
+    {
+      "name": "Olivier Bossel",
+      "email": "olivier.bossel@gmail.com",
+      "url": "http://olivierbossel.com"
+    }
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@coffeekraken/sugar": "^1.0.5",
+    "simplebar": "^3.1.1"
+  },
+  "devDependencies": {
+    "@coffeekraken/typography-style": "0.0.1"
+  }
+}

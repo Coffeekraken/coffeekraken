@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _sNativeWebComponent = _interopRequireDefault(require("coffeekraken-sugar/js/core/sNativeWebComponent"));
+var _sNativeWebComponent = _interopRequireDefault(require("@coffeekraken/sugar/js/core/sNativeWebComponent"));
 
 var _sharerNpm = _interopRequireDefault(require("sharer.npm.js"));
 

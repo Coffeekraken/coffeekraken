@@ -1,7 +1,8 @@
 @use '@coffeekraken/typography-style/index' as typography-style;
 
-@include typography-style.title-classes();
-@include typography-style.paragraph-classes();
-@include typography-style.link-classes();
-@include typography-style.inline-text-classes();
-@include typography-style.list-classes();
+@include typography-style.classes();
+// @include typography-style.title-classes();
+// @include typography-style.paragraph-classes();
+// @include typography-style.link-classes();
+// @include typography-style.inline-text-classes();
+// @include typography-style.list-classes();

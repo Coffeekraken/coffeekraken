@@ -581,7 +581,7 @@
  * @param 			{Second} 			[$a-delay=0s] 				The delay between two animation cycle
  * @param 			{Integer} 			[$a-near=1] 				How many bars are affected by the animated one
  * @param 			{String} 			[$a-ease=ease-in-out] 		The ease to use to animate each bars
- * @param 			{Number} 			[$a-offset=null] 			The offset to move the animated bar
+ * @param 			{Number} 			[$a-offset=1em] 			The offset to move the animated bar in em
  * @param 			{String} 			[$a-direction=both] 		The direction in which to move the bars (up,down,both)
  * @param 			{Boolean} 			[$a-continuous=true] 		If true, the first bars will be animated at same time at the last ones
  *
@@ -598,20 +598,23 @@
 /**
  * @name      loader-circle
  * @namespace     sugar.scss.loader
- * @type      function
+ * @type      Mixin
  *
  * Generate a full animated, single element, circle loader
  *
  * @param 			{Color} 			[$color=primary] 			The color(s) of the loader. Can be a list of colors
  * @param 			{Number} 			[$size=.33em] 				The size of each dot
- * @param 			{Number} 			[$radius=1em] 				The distance of each dot from the center of the loader
- * @param 			{Integer} 			[$count=5] 					How many bars you want
+ * @param 			{Number} 			[$radius=2em] 				The distance of each dot from the center of the loader
+ * @param 			{Integer} 			[$count=8] 					How many bars you want
  * @param 			{Number} 			[$opacity=1] 				The initial opacity of each bars
  * @param 			{Number} 			[$a-opacity=null] 			The opacity of the animated bars
  * @param 			{Second} 			[$a-duration=1s] 			The overall animation duration
  * @param 			{Second} 			[$a-delay=0s] 				The delay between two animation cycle
- * @param 			{Integer} 			[$a-near=1] 				How many bars are affected by the animated one
+ * @param 			{Integer} 			[$a-near=2] 				How many bars are affected by the animated one
  * @param 			{String} 			[$a-ease=ease-in-out] 		The ease to use to animate each bars
+ * @param       {Number}       [$a-spread=2em]        How many distance the points have to be animated
+ * @param       {Number}        [$a-rotate=null]      How many degrees have the points to be animated
+ * @param       {Number}        [$a-scale=1em]        How many scale have the points to be animated
  *
  * @example     scss
  * .my-cool-loader {
@@ -635,7 +638,7 @@
  * @param 		{Second} 		[$a-delay=0s] 				The delay between two animation cycle
  * @param 		{String} 		[$a-ease=ease-in-out]		The ease to use for the animation
  * @param 		{Degree}		[$a-rotate=360deg] 			The animation rotation
- * @param 		{Number} 		[$a-scale=.7] 				The animation scale
+ * @param 		{Number} 		[$a-scale=2] 				The animation scale
  *
  * @example     scss
  * .my-cool-loader {
@@ -647,13 +650,13 @@
 /**
  * @name      loader-flip-ball
  * @namespace     sugar.scss.loader
- * @type      function
+ * @type      Mixin
  *
  * Generate a full animated, single element, flip ball style loader
  *
  * @param 		{String} 		[$shape=circle] 			The shape of the loader (circle,rect)
- * @param 		{Number} 		[$size=1em] 				The size of the loader
- * @param 		{Color} 		[$color=primary] 			The color of the loader. Can be a list of colors
+ * @param 		{Number} 		[$size=2em] 				The size of the loader
+ * @param 		{Color} 		[$colors=(primary,success,warning,error,info)] 			The colors of the loader. Can be a list of colors
  * @param 		{Second} 		[$a-duration=1s] 			The overall animation duration
  * @param 		{Second} 		[$a-delay=0s] 				The delay between two animation cycle
  * @param 		{String} 		[$a-ease=ease-in-out]		The ease to use for the animation
@@ -674,15 +677,15 @@
  *
  * @param       {String}      [$shape=rect]             The shape of the grid items. Can be rect or circle
  * @param       {Color}       [$color=color(primary)]   The color to use for the grid items
- * @param       {Number}      [$cols=5]                 How many columns the grid must have
- * @param       {Number}      [$rows=5]                 How many rows must have the grid
+ * @param       {Number}      [$cols=3]                 How many columns the grid must have
+ * @param       {Number}      [$rows=3]                 How many rows must have the grid
  * @param       {Number}      [$size=10px]              The size of each grid items
  * @param       {Number}      [$gap=5px]                The size of the gaps between the grid items
- * @param       {Number}      [$offset=200px]           The offset used for the grid
+ * @param       {Number}      [$offset=0]               The offset used for the grid
  * @param       {Number}      [$rotate=0deg]            Apply a rotation to the grid items
  * @param       {String}      [$a-shape=null]           The animation shape to apply to the grid items. Can be rect or circle
  * @param       {Number}      [$a-steps=5]              How many steps must have the animation
- * @param       {Number}      [$a-spread=null]          How much must the grid items spread during the animation
+ * @param       {Number}      [$a-spread=15px]          How much must the grid items spread during the animation
  * @param       {Number}      [$a-rotate=null]          How many degrees must the grid items rotate during the animation
  * @param       {Number}      [$a-scale=null]           Apply a scale for the animation of the grid items
  * @param       {Number}      [$a-opacity=null]         Apply an opacity to the grid items during the animation
@@ -705,14 +708,14 @@
  * Generate a radial styled loader
  *
  * @param       {String}      [$shape=circle]       The shape of the items that make the circle. Can be rect or circle
- * @param       {Number}      [$size=1em]           The size of the items
+ * @param       {Number}      [$size=3em]           The size of the items
  * @param       {Number}      [$width=0.2em]        The width of the circle loader
  * @param       {String}      [$style=solid]        The style of the items that form the loader. Can be none, hidden, dotted, dashed, solid, double, groove, ridge, inset, outset, initial or inherit
- * @param       {Color}       [$color=color(primary)]     The color to use for the loader
+ * @param       {Color}       [$color=primary]     The color to use for the loader
  * @param       {Second}      [$a-duration=2s]      How many time will be the animation
  * @param       {Second}      [$a-delay=0s]         How many time to wait between two animation
  * @param       {Number}      [$a-count=2]          How many circles will be animated
- * @param       {Number}      [$a-spread=0]         Specify a spread value for the animation of each circles
+ * @param       {Number}      [$a-spread=1em]         Specify a spread value for the animation of each circles
  * @param       {String}      [$a-ease=linear]      Specify the ease to use for the animation
  *
  * @example       scss
@@ -729,14 +732,13 @@
  *
  * Generate a spinner loader
  *
- * @param         {String}        [$type=linear]          Specify the type of spinner loader that you want. Can be elastic, linear, fade-in, fade-out or fade-in-out
- * @param         {Number}        [$size=1em]             Specify the size of the spinner loader
+ * @param         {Number}        [$size=2em]             Specify the size of the spinner loader
  * @param         {Number}        [$width=0.3em]          Specify the width of the spinner loader
- * @param         {Color}         [$color=color(primary)]   Specify the color of the spinner loader
+ * @param         {Color}         [$color=primary]        Specify the color of the spinner loader
  * @param         {Color}         [$bgcolor=inherit]        Specify the background color of the spinner loader
  * @param         {Number}        [$length=3/4]           The length of the spinner loader
  * @param         {Second}        [$a-duration=1s]        The duration of the spinner loader animation
- * @param         {String}        [$a-ease=null]          Specify an ease to use for the spinner loader animation
+ * @param         {String}        [$a-ease=linear]          Specify an ease to use for the spinner loader animation
  *
  * @example     scss
  * .my-cool-loader {

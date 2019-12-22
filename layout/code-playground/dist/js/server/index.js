@@ -22,13 +22,24 @@ const __Cryptr = require('cryptr');
 
 const __cookieSession = require('cookie-session');
 
-const __https = require('https');
+const __request = require('request');
+
+const __aes = require('@coffeekraken/sugar/js/crypt/aes');
+
+const __queryString = require('querystring'); // console.log(__aes.encrypt('Coffeekraken/coffeekraken/style/button-style'));
+// console.log(__aes.decrypt('U2FsdGVkX1+VeRFKXOzQW18DGDsh3FBuR38rr4m0DTUZ2c1//QRMz/fb4XAYT0RLwhC6wQo2o6gmqaIt8omBOQ=='));
+
 
 module.exports = function (config) {
   // creating the app
   const app = __express();
 
-  let request = null; // handlebars
+  let request = null;
+  handlerbarsEngine = __expressHandlebars.create({
+    layoutsDir: __dirname + '/../../../src/views/layouts',
+    partialsDir: __dirname + '/../../../src/views',
+    defaultLayout: 'main'
+  }); // handlebars
 
   app.engine('handlebars', __expressHandlebars({
     layoutsDir: __dirname + '/../../../src/views/layouts',
@@ -55,7 +66,7 @@ module.exports = function (config) {
   app.use((req, res, next) => {
     request = req;
     next();
-  }); // // protect
+  }); // protect
 
   app.use((req, res, next) => {
     if (/^\/dist\//.test(req.url)) return;
@@ -68,283 +79,201 @@ module.exports = function (config) {
     req.config = __clone(config);
     next();
   });
+
+  const server = require('http').Server(app);
+
+  const io = require('socket.io')(server);
+
+  io.on('connection', socket => {
+    socket.on('SSocketDom.noAppSpecified', () => {
+      handlerbarsEngine.render("src/views/noAppSpecified.handlebars").then(renderedHtml => {
+        socket.emit('SSocketDom.body', {
+          data: renderedHtml
+        });
+      });
+    });
+    console.log('a user is connected');
+  });
   app.use((req, res, next) => {
     if (!req.query.github) {
       next();
       return;
-    }
+    } // decrypt the github url
 
-    console.log('GITHUB');
 
-    __https.get({
-      hostname: 'api.github.com',
-      path: req.query.github,
+    const url = __aes.decrypt(req.query.github.replace(' ', '+'));
+
+    const repo = url.split('/').slice(0, 2).join('/');
+    const path = url.split('/').slice(-2).join('/');
+    const options = {
+      url: `https://api.github.com/repos/${repo}/contents/${path}`,
       headers: {
-        'User-Agent': 'Coffeekraken-code-playground'
+        'User-Agent': 'coffeekraken-code-playground'
       }
-    }, resp => {
-      let data = ''; // A chunk of data has been recieved.
+    }; // __request(options, (error, response, body) => {
+    //   const files = JSON.parse(body);
+    //   const packageJson = files.find(file => file.name === 'package.json');
+    //   const codePlaygroundConfig = files.find(file => file.name === 'code-playground.config.js');
+    //
+    //   console.log(packageJson);
+    //   console.log(codePlaygroundConfig);
+    //
+    //   // download the package.json content and the code-playground.config.js content
+    //   __request(packageJson.download_url, (error, response, body) => {
+    //     console.log(body);
+    //   });
+    //   __request(codePlaygroundConfig.download_url, (error, response, body) => {
+    //
+    //   });
+    //
+    // });
+    // __https.get({
+    // 	hostname: 'api.github.com',
+    // 	path: req.query.github,
+    // 	headers: {
+    // 		'User-Agent': 'Coffeekraken-code-playground'
+    // 	}
+    // }, (resp) => {
+    // 	let data = '';
+    //
+    //   // A chunk of data has been recieved.
+    //   resp.on('data', (chunk) => {
+    //     data += chunk;
+    //   });
+    //
+    //   // The whole response has been received. Print out the result.
+    //   resp.on('end', () => {
+    //
+    // 		// loop on each files to find "package.json" and "code-playground.config.js"
+    // 		let packageJson, codePlaygroundConfig;
+    // 		JSON.parse(data).forEach((resource) => {
+    // 			if (resource.name === 'package.json') {
+    // 				console.log('PACKAGE', resource.download_url);
+    // 				__https.get(resource.download_url, (res) => {
+    // 					let d = '';
+    // 					res.on('data', (chunk) => {
+    // 						d += chunk;
+    // 				  });
+    // 					res.on('end', () => {
+    // 						console.log('re', d);
+    // 					});
+    // 				});
+    // 			}
+    // 		});
+    //
+    //   });
+    //
+    // 	// next
+    // 	next();
+    // });
 
-      resp.on('data', chunk => {
-        data += chunk;
-      }); // The whole response has been received. Print out the result.
-
-      resp.on('end', () => {
-        // loop on each files to find "package.json" and "code-playground.config.js"
-        let packageJson, codePlaygroundConfig;
-        JSON.parse(data).forEach(resource => {
-          if (resource.name === 'package.json') {
-            console.log('PACKAGE', resource.download_url);
-
-            __https.get(resource.download_url, res => {
-              let d = '';
-              res.on('data', chunk => {
-                d += chunk;
-              });
-              res.on('end', () => {
-                console.log('re', d);
-              });
-            });
-          }
-        });
-      }); // next
-
-      next();
-    });
+    next();
   }); // pwd
 
-  app.use((req, res, next) => {
-    let pwd = process.env.PWD;
-    const isApp = req.path.split('/').length >= 2 && req.path.split('/')[1] === 'app';
-    let app = req.path.split('/')[2] || req.query.app; // if an app query parameter is found
+  app.use(require('./middleware/pwd')); // static files
 
-    if (isApp && app) {
-      // check if the node env exist
-      let apps = req.config.apps;
+  app.use(require('./middleware/staticFiles')); // apps
 
-      if (process.env.NODE_ENV && req.config.apps[process.env.NODE_ENV]) {
-        apps = req.config.apps[process.env.NODE_ENV];
-      }
-
-      if (!apps[app]) {
-        throw `The app ${app} is not defined in the code-playground.config.js file...`;
-      }
-
-      pwd = apps[app]; // } else if (req.session.pwd) {
-      // 	pwd = req.session.pwd;
-    } else if (req.config.cwd) {
-      pwd = req.config.cwd;
-    } // resolve path
-
-
-    pwd = pwd.replace('~', process.env.HOME); // save in session
-
-    req.session.pwd = pwd; // check that the PWD is valid
-
-    if (!__fs.existsSync(pwd) || !__fs.existsSync(`${pwd}/code-playground.config.js`)) {
-      // either the pwd passed does not exist, or no code-playground.config.js file
-      // has been found at this emplacement...
-      throw `The passed pwd "${pwd}" parameter is not a valid one...`;
-    } // set pwd in config
-
-
-    req.config.pwd = pwd; // next
-
-    next();
-  }); // static files
-
-  app.use((req, res, next) => {
-    if (req.url === '/') {
-      next();
-      return;
-    }
-
-    const url = __url.parse(req.url).pathname;
-
-    if (url && url !== '/') {
-      if (__fs.existsSync(req.config.pwd + url)) {
-        return res.sendFile(req.config.pwd + url);
-      } else if (__fs.existsSync(__path.resolve(__dirname + '/../') + url)) {
-        return res.sendFile(__path.resolve(__dirname + '/../') + url);
-      }
-    }
-
-    next();
-  }); // apps
-
-  app.use((req, res, next) => {
-    if (!req.config.apps) {
-      next();
-      return;
-    } // check if the node env exist
-
-
-    let apps = req.config.apps;
-
-    if (process.env.NODE_ENV && req.config.apps[process.env.NODE_ENV]) {
-      apps = req.config.apps[process.env.NODE_ENV];
-    }
-
-    for (let key in apps) {
-      if (!req.apps) req.apps = {};
-      const appPath = apps[key].replace('~', process.env.HOME);
-      ;
-      const appObj = {}; // check if a package json exist
-
-      if (__fs.existsSync(`${appPath}/package.json`)) {
-        appObj.packageJson = require(`${appPath}/package.json`);
-      } // check if a package json exist
-
-
-      if (__fs.existsSync(`${appPath}/code-playground.config.js`)) {
-        appObj.config = require(`${appPath}/code-playground.config.js`);
-      }
-
-      req.apps[key] = appObj;
-    }
-
-    next();
-  }); // read config if an app is passed
+  app.use(require('./middleware/apps')); // read config if an app is passed
   // and merge this config with the one that we have already
 
-  app.use((req, res, next) => {
-    if (!req.query.app && !req.path.split('/')[1]) {
-      next();
-      return;
-    } // read the config file
-
-
-    const _config = require(`${req.config.pwd}/code-playground.config.js`); // remove some settings that can not be overrided like port, etc...
-
-
-    delete _config.port;
-    delete _config.apps;
-    delete _config.compileServer.port;
-    delete req.config.demos; // merge configs
-
-    req.config = __merge(req.config, _config); // next
-
-    next();
-  }); // if is a demo to display, we merge the config.editors with the
+  app.use(require('./middleware/appConfig')); // if is a demo to display, we merge the config.editors with the
   // config.demos[demo].editors
 
-  app.use((req, res, next) => {
-    if (!req.query.demo) {
-      next();
-      return;
-    }
-
-    const demo = req.query.demo;
-    const demoObj = req.config.demos[demo];
-
-    if (!demoObj) {
-      throw `The demo requested "${demo}" does not exist...`;
-    } // merge this with the editors
-
-
-    req.config.editors = __merge({}, req.config.editors, demoObj.editors); // next
-
-    next();
-  }); // read the package.json file of the pwd
+  app.use(require('./middleware/demo')); // read the package.json file of the pwd
   // and set it in the request object to pass it
   // to the next handler
 
-  app.use((req, res, next) => {
-    let packageJson; // load package.json
+  app.use(require('./middleware/packageJson')); // set the layout in the config if passed as query param
 
-    if (__fs.existsSync(req.config.pwd + '/package.json')) {
-      packageJson = require(req.config.pwd + '/package.json');
-
-      if (packageJson.contributors) {
-        packageJson.contributors = packageJson.contributors.map(contributor => {
-          contributor.gravatar = `https://www.gravatar.com/avatar/${__md5(contributor.email)}`;
-          return contributor;
-        });
-      } // attach packageJson to req
-
-
-      req.packageJson = packageJson;
-    } // next
-
-
-    next();
-  });
-  app.use(function (req, res, next) {
-    // layout parameter
-    if (req.query.layout) {
-      req.config.layout = req.query.layout;
-    }
-
-    next();
-  }); // global route
-
+  app.use(require('./middleware/layout'));
   app.get(/.*/, function (req, res) {
-    // editors
-    if (req.config.editors.html) {
-      req.config.editors.html.language = req.config.editors.html.language || 'html';
-      req.config.editors.html.title = req.config.editors.html.title || req.config.editors.html.language;
-
-      if (req.config.editors.html.file && __fs.existsSync(req.config.pwd + '/' + req.config.editors.html.file)) {
-        req.config.editors.html.data = __fs.readFileSync(req.config.pwd + '/' + req.config.editors.html.file, 'utf8');
-      }
-
-      req.config.editors.html.updateOn = req.config.editors.html.updateOn || req.config.editors.html.language !== 'html' ? 'run' : null;
-    }
-
-    if (req.config.editors.css) {
-      req.config.editors.css.language = req.config.editors.css.language || 'css';
-      req.config.editors.css.title = req.config.editors.css.title || req.config.editors.css.language;
-
-      if (req.config.editors.css.file && __fs.existsSync(req.config.pwd + '/' + req.config.editors.css.file)) {
-        req.config.editors.css.data = __fs.readFileSync(req.config.pwd + '/' + req.config.editors.css.file, 'utf8');
-      }
-
-      req.config.editors.css.updateOn = req.config.editors.css.updateOn || req.config.editors.css.language !== 'css' ? 'run' : null;
-    }
-
-    if (req.config.editors.js) {
-      req.config.editors.js.language = req.config.editors.js.language || 'js';
-      req.config.editors.js.title = req.config.editors.js.title || req.config.editors.js.language;
-
-      if (req.config.editors.js.file && __fs.existsSync(req.config.pwd + '/' + req.config.editors.js.file)) {
-        req.config.editors.js.data = __fs.readFileSync(req.config.pwd + '/' + req.config.editors.js.file, 'utf8');
-      }
-
-      req.config.editors.js.updateOn = req.config.editors.js.updateOn || 'run';
-    } // delete the secret from the compileServerSettings to not expose sensible infos
-
-
-    delete req.config.compileServer.secret; // render the page
-
-    res.render('home', {
+    // render the page
+    res.render('loading', {
       title: req.config.title || 'Code Playground',
-      logo: req.config.logo,
-      config: req.config,
-      apps: req.apps,
       pwd: cryptr ? cryptr.encrypt(req.config.pwd) : req.config.pwd,
       packageJson: req.packageJson,
       compileServerSettings: JSON.stringify(req.config.compileServer),
-      demos: req.config.demos || null,
-      editors: {
-        html: req.config.editors.html,
-        css: req.config.editors.css,
-        js: req.config.editors.js
-      },
-      gtm: req.config.gtm,
-      helpers: {
-        isCurrentUrl: function (url, options) {
-          if (req.url === `/app/${url}`) {
-            return options.fn(this);
-          }
+      gtm: req.config.gtm // logo : req.config.logo,
+      // config : req.config,
+      // apps : req.apps,
+      // demos: req.config.demos || null,
+      // editors : {
+      // 	html : req.config.editors.html,
+      // 	css : req.config.editors.css,
+      // 	js : req.config.editors.js
+      // },
+      // helpers: {
+      // 	isCurrentUrl: function (url, options) {
+      // 		if (req.url === `/app/${url}`) {
+      // 			return options.fn(this);
+      // 		}
+      // 		return options.inverse(this);
+      // 	 }
+      // }
 
-          return options.inverse(this);
-        }
-      }
     });
-  });
+  }); // // global route
+  // app.get(/.*/, function (req, res) {
+  // 	// editors
+  // 	if (req.config.editors.html) {
+  // 		req.config.editors.html.language = req.config.editors.html.language || 'html';
+  // 		req.config.editors.html.title = req.config.editors.html.title || req.config.editors.html.language;
+  // 		if (req.config.editors.html.file && __fs.existsSync(req.config.pwd + '/' + req.config.editors.html.file)) {
+  // 			req.config.editors.html.data = __fs.readFileSync(req.config.pwd + '/' + req.config.editors.html.file, 'utf8');
+  // 		}
+  // 		req.config.editors.html.updateOn = req.config.editors.html.updateOn || (req.config.editors.html.language !== 'html') ? 'run' : null;
+  // 	}
+  // 	if (req.config.editors.css) {
+  // 		req.config.editors.css.language = req.config.editors.css.language || 'css';
+  // 		req.config.editors.css.title = req.config.editors.css.title || req.config.editors.css.language;
+  // 		if (req.config.editors.css.file && __fs.existsSync(req.config.pwd + '/' + req.config.editors.css.file)) {
+  // 			req.config.editors.css.data = __fs.readFileSync(req.config.pwd + '/' + req.config.editors.css.file, 'utf8');
+  // 		}
+  // 		req.config.editors.css.updateOn = req.config.editors.css.updateOn || (req.config.editors.css.language !== 'css') ? 'run' : null;
+  // 	}
+  // 	if (req.config.editors.js) {
+  // 		req.config.editors.js.language = req.config.editors.js.language || 'js';
+  // 		req.config.editors.js.title = req.config.editors.js.title || req.config.editors.js.language;
+  // 		if (req.config.editors.js.file && __fs.existsSync(req.config.pwd + '/' + req.config.editors.js.file)) {
+  // 			req.config.editors.js.data = __fs.readFileSync(req.config.pwd + '/' + req.config.editors.js.file, 'utf8');
+  // 		}
+  // 		req.config.editors.js.updateOn = req.config.editors.js.updateOn || 'run';
+  // 	}
+  //
+  // 	// delete the secret from the compileServerSettings to not expose sensible infos
+  // 	delete req.config.compileServer.secret;
+  //
+  // 	// render the page
+  // 	res.render('home', {
+  // 		title : req.config.title || 'Code Playground',
+  // 		logo : req.config.logo,
+  // 		config : req.config,
+  // 		apps : req.apps,
+  // 		pwd : (cryptr) ? cryptr.encrypt(req.config.pwd) : req.config.pwd,
+  // 		packageJson : req.packageJson,
+  // 		compileServerSettings : JSON.stringify(req.config.compileServer),
+  // 		demos: req.config.demos || null,
+  // 		editors : {
+  // 			html : req.config.editors.html,
+  // 			css : req.config.editors.css,
+  // 			js : req.config.editors.js
+  // 		},
+  // 		gtm : req.config.gtm,
+  // 		helpers: {
+  // 			isCurrentUrl: function (url, options) {
+  // 				if (req.url === `/app/${url}`) {
+  // 					return options.fn(this);
+  // 				}
+  // 				return options.inverse(this);
+  // 			 }
+  // 		}
+  // 	});
+  // });
+
   console.log(`Code Playground : ...starting on port ${config.port}...`); // start demo server
 
-  app.listen(config.port, function () {
+  server.listen(config.port, function () {
     console.log('Code Playground : ✓ running on port ' + config.port + '!');
     console.log(`Code Playground : access interface on http://localhost:${config.port}`);
   });

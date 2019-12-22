@@ -17,7 +17,7 @@
  * @param 			{Second} 			[$a-delay=0s] 				The delay between two animation cycle
  * @param 			{Integer} 			[$a-near=1] 				How many bars are affected by the animated one
  * @param 			{String} 			[$a-ease=ease-in-out] 		The ease to use to animate each bars
- * @param 			{Number} 			[$a-offset=null] 			The offset to move the animated bar
+ * @param 			{Number} 			[$a-offset=1em] 			The offset to move the animated bar in em
  * @param 			{String} 			[$a-direction=both] 		The direction in which to move the bars (up,down,both)
  * @param 			{Boolean} 			[$a-continuous=true] 		If true, the first bars will be animated at same time at the last ones
  *
@@ -33,7 +33,7 @@
  */
 @mixin loader-bars(
   $shape: rect,
-  $color: s-color(primary),
+  $color: primary,
   $width: 0.5em,
   $height: 2em,
   $count: 5,
@@ -44,7 +44,7 @@
   $a-delay: 0s,
   $a-near: 1,
   $a-ease: ease-in-out,
-  $a-offset: null,
+  $a-offset: 1em,
   $a-direction: both,
   $a-continuous: true
 ) {
@@ -52,7 +52,7 @@
   $color: test-argument(
     "sugar.loader-bars",
     "color",
-    "color|list-color",
+    "color|list-color|list-string",
     $color
   );
   $width: test-argument("sugar.loader-bars", "width", number, $width);
@@ -91,7 +91,10 @@
   // handle colors
   $colors: null;
   @if is($color, list-color) and list-length($color) > 1 {
+    @warn($color);
     $colors: $color;
+  } @else {
+    $color: color($color);
   }
 
   // manage duration
@@ -144,6 +147,11 @@
     }
   }
   $base-shadows: $shadows;
+
+  display: inline-block;
+  position: relative;
+  top: $height / 2 * -1;
+  left: $width / 2 * -1;
 
   &:before {
     @if $shape == circle {

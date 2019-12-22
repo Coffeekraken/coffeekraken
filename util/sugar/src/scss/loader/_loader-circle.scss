@@ -1,20 +1,23 @@
 /**
  * @name      loader-circle
  * @namespace     sugar.scss.loader
- * @type      function
+ * @type      Mixin
  *
  * Generate a full animated, single element, circle loader
  *
  * @param 			{Color} 			[$color=primary] 			The color(s) of the loader. Can be a list of colors
  * @param 			{Number} 			[$size=.33em] 				The size of each dot
- * @param 			{Number} 			[$radius=1em] 				The distance of each dot from the center of the loader
- * @param 			{Integer} 			[$count=5] 					How many bars you want
+ * @param 			{Number} 			[$radius=2em] 				The distance of each dot from the center of the loader
+ * @param 			{Integer} 			[$count=8] 					How many bars you want
  * @param 			{Number} 			[$opacity=1] 				The initial opacity of each bars
  * @param 			{Number} 			[$a-opacity=null] 			The opacity of the animated bars
  * @param 			{Second} 			[$a-duration=1s] 			The overall animation duration
  * @param 			{Second} 			[$a-delay=0s] 				The delay between two animation cycle
- * @param 			{Integer} 			[$a-near=1] 				How many bars are affected by the animated one
+ * @param 			{Integer} 			[$a-near=2] 				How many bars are affected by the animated one
  * @param 			{String} 			[$a-ease=ease-in-out] 		The ease to use to animate each bars
+ * @param       {Number}       [$a-spread=2em]        How many distance the points have to be animated
+ * @param       {Number}        [$a-rotate=null]      How many degrees have the points to be animated
+ * @param       {Number}        [$a-scale=1em]        How many scale have the points to be animated
  *
  * @example     scss
  * .my-cool-loader {
@@ -28,25 +31,22 @@
 @mixin loader-circle(
   $color: primary,
   $size: 0.33em,
-  $radius: 1em,
+  $radius: 2em,
   $count: 8,
   $opacity: 1,
   $a-opacity: null,
   $a-duration: 1s,
   $a-delay: 0s,
   $a-ease: ease-in-out,
-  $a-near: null,
-  $a-spread: null,
+  $a-near: 2,
+  $a-spread: 2em,
   $a-rotate: null,
-  $a-scale: null
+  $a-scale: 1em
 ) {
-
-  $color: color($color);
-
   $color: test-argument(
     "sugar.loader-circle",
     "color",
-    "color|list-color",
+    "color|list-color|list-string",
     $color
   );
   $size: test-argument("sugar.loader-circle", "size", number, $size);
@@ -86,6 +86,8 @@
   $colors: null;
   @if is($color, list-color) and list-length($color) > 1 {
     $colors: $color;
+  } @else {
+    $color: color($color);
   }
 
   // manage near
@@ -98,9 +100,10 @@
   $a-duration: $a-duration + $a-delay;
 
   $base-shadows: ();
-  @for $i from 0 through $count {
-    $x: $radius * math-cos(360deg / $count * $i);
-    $y: $radius * math-sin(360deg / $count * $i);
+  @for $i from 0 through $count - 1 {
+    $angle: 359.9deg / $count * $i;
+    $x: $radius * math-cos($angle);
+    $y: $radius * math-sin($angle);
     $c: $color;
     @if $colors {
       $c: list-nth($colors, $i + 1);
@@ -128,9 +131,9 @@
       }
       #{$p} {
         $shadows: ();
-        @for $count-idx from 0 through $count {
-          $x: $radius * math-cos(360deg / $count * $count-idx);
-          $y: $radius * math-sin(360deg / $count * $count-idx);
+        @for $count-idx from 0 through $count - 1 {
+          $x: $radius * math-cos(359.9deg / $count * $count-idx);
+          $y: $radius * math-sin(359.9deg / $count * $count-idx);
 
           $diff: math-abs($step-idx - $count-idx);
           @if $step-idx + $a-near > $count and $count-idx - $a-near < 0 {
@@ -221,7 +224,5 @@
     box-shadow: $base-shadows;
     animation: $a-name $a-duration $a-ease 0s infinite;
   }
-  // @include s-translate(-50% -50%);
-  // transform: rotate(- 360deg / $count / 2);
-  transform: translateX(-50%) translateY(-50%) rotate(-90deg);
+  // transform: translateX(-50%) translateY(-50%) rotate(-90deg);
 }

@@ -69,7 +69,7 @@ const app = require('commander');
 	});
 
 	// launch the playground
-	require(__dirname + '/../dist/js/server/index.js')(finalConfig);
+	require(__dirname + '/../src/js/server/index.js')(finalConfig);
 
 	process.on( 'SIGINT', function() {
 		console.log('Code Playground : stopped');

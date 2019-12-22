@@ -7,15 +7,15 @@
  *
  * @param       {String}      [$shape=rect]             The shape of the grid items. Can be rect or circle
  * @param       {Color}       [$color=color(primary)]   The color to use for the grid items
- * @param       {Number}      [$cols=5]                 How many columns the grid must have
- * @param       {Number}      [$rows=5]                 How many rows must have the grid
+ * @param       {Number}      [$cols=3]                 How many columns the grid must have
+ * @param       {Number}      [$rows=3]                 How many rows must have the grid
  * @param       {Number}      [$size=10px]              The size of each grid items
  * @param       {Number}      [$gap=5px]                The size of the gaps between the grid items
- * @param       {Number}      [$offset=200px]           The offset used for the grid
+ * @param       {Number}      [$offset=0]               The offset used for the grid
  * @param       {Number}      [$rotate=0deg]            Apply a rotation to the grid items
  * @param       {String}      [$a-shape=null]           The animation shape to apply to the grid items. Can be rect or circle
  * @param       {Number}      [$a-steps=5]              How many steps must have the animation
- * @param       {Number}      [$a-spread=null]          How much must the grid items spread during the animation
+ * @param       {Number}      [$a-spread=15px]          How much must the grid items spread during the animation
  * @param       {Number}      [$a-rotate=null]          How many degrees must the grid items rotate during the animation
  * @param       {Number}      [$a-scale=null]           Apply a scale for the animation of the grid items
  * @param       {Number}      [$a-opacity=null]         Apply an opacity to the grid items during the animation
@@ -32,16 +32,16 @@
  */
 @mixin loader-grid(
   $shape: rect,
-  $color: color(primary),
-  $cols: 5,
-  $rows: 5,
+  $color: primary,
+  $cols: 3,
+  $rows: 3,
   $size: 10px,
   $gap: 5px,
-  $offset: 200px,
+  $offset: 0,
   $rotate: 0deg,
   $a-shape: null,
   $a-steps: 5,
-  $a-spread: null,
+  $a-spread: 15px,
   $a-rotate: null,
   $a-scale: null,
   $a-opacity: null,
@@ -53,7 +53,7 @@
   $color: test-argument(
     "sugar.loader-grid",
     "color",
-    "color|list-color",
+    "color|list-color|list-string",
     $color
   );
   $cols: test-argument("sugar.loader-grid", "cols", integer, $cols);
@@ -91,26 +91,32 @@
   $colors: null;
   @if is($color, list-color) and list-length($color) > 1 {
     $colors: $color;
+  } @else {
+    $color: color($color);
   }
 
   // manage duration :
   $a-duration: $a-duration + $a-delay;
+
+  // position grid
+  $width: $size * $cols + $gap * ($cols - 1);
+  $height: $size * $rows + $gap * ($rows - 1);
 
   width: $size;
   height: $size;
   @if $shape == circle {
     border-radius: 50%;
   }
-
-  // position grid
-  $width: $size * $cols + $gap * ($cols - 1);
-  $height: $size * $rows + $gap * ($rows - 1);
+  position: relative;
+  top: $height / 2 * -1;
+  left: $width / 2 * -1;
+  display: inline-block;
 
   // @include s-translate((-$width / 2 - $size - $gap - $offset) (-$height / 2 - $size - $gap - $offset));
-  transform: translateX(-$width / 2 - $size - $gap - $offset)
-    translateY(-$height / 2 - $size - $gap - $offset) rotate($rotate);
-  transform-origin: ($offset + $width / 2 + $gap + $size)
-    ($offset + $height / 2 + $gap + $size);
+  // transform: translateX(-$width / 2 - $size - $gap - $offset)
+  //   translateY(-$height / 2 - $size - $gap - $offset) rotate($rotate);
+  // transform-origin: ($offset + $width / 2 + $gap + $size)
+  //   ($offset + $height / 2 + $gap + $size);
 
   $a-name: str-unquote("grid-#{str-unique-id()}");
 
@@ -147,6 +153,7 @@
     height: $size;
     animation: $a-name $a-duration $a-ease 0s infinite;
     box-shadow: $shadows;
+    transform: translateX(($size + $gap) * -1) translateY(($size + $gap) * -1);
     transform-origin: ($offset + $width / 2 + $gap + $size)
       ($offset + $height / 2 + $gap + $size);
   }
@@ -193,8 +200,8 @@
               }
             }
             @if $a-spread and $i < $a-steps {
-              $randX: math-random($a-spread / 2);
-              $randY: math-random($a-spread / 2);
+              $randX: math-random(math-round($a-spread / 2));
+              $randY: math-random(math-round($a-spread / 2));
               @if math-random(10) < 5 {
                 $randX: $randX * -1;
               }
@@ -212,13 +219,13 @@
           }
         }
         @if $a-rotate and $i < $a-steps {
-          $randX: math-random($a-rotate / 2);
+          $randX: math-random(math-round($a-rotate / 2));
           @if math-random(10) < 5 {
             $randX: $randX * -1;
           }
-          transform: rotateZ($randX + 0deg);
+          transform: translateX(($size + $gap) * -1) translateY(($size + $gap) * -1) rotateZ($randX + 0deg);
         } @else {
-          transform: rotateZ(0);
+          transform: translateX(($size + $gap) * -1) translateY(($size + $gap) * -1) rotateZ(0);
         }
         @if $i < $a-steps - 1 {
           @if $a-shape == circle {

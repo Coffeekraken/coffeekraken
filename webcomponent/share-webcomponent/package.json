@@ -1,6 +1,6 @@
 {
   "name": "@coffeekraken/share-webcomponent",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Easily create some share buttons to target facebook, twitter, linkedin, google+, etc...",
   "main": "js/index.js",
   "homepage": "http://coffeekraken.io",

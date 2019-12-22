@@ -34,7 +34,7 @@
       $value: $value * $base;
     }
   }
-  @if $exponent < 1 {
+  @if $exponent < 1{
     @for $i from 0 through -$exponent {
       $value: $value / $base;
     }

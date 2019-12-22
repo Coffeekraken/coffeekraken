@@ -6,14 +6,14 @@
  * Generate a radial styled loader
  *
  * @param       {String}      [$shape=circle]       The shape of the items that make the circle. Can be rect or circle
- * @param       {Number}      [$size=1em]           The size of the items
+ * @param       {Number}      [$size=3em]           The size of the items
  * @param       {Number}      [$width=0.2em]        The width of the circle loader
  * @param       {String}      [$style=solid]        The style of the items that form the loader. Can be none, hidden, dotted, dashed, solid, double, groove, ridge, inset, outset, initial or inherit
- * @param       {Color}       [$color=color(primary)]     The color to use for the loader
+ * @param       {Color}       [$color=primary]     The color to use for the loader
  * @param       {Second}      [$a-duration=2s]      How many time will be the animation
  * @param       {Second}      [$a-delay=0s]         How many time to wait between two animation
  * @param       {Number}      [$a-count=2]          How many circles will be animated
- * @param       {Number}      [$a-spread=0]         Specify a spread value for the animation of each circles
+ * @param       {Number}      [$a-spread=1em]         Specify a spread value for the animation of each circles
  * @param       {String}      [$a-ease=linear]      Specify the ease to use for the animation
  *
  * @example       scss
@@ -25,14 +25,14 @@
  */
 @mixin loader-radial(
   $shape: circle,
-  $size: 1em,
+  $size: 3em,
   $width: 0.2em,
   $style: solid,
-  $color: color(primary),
+  $color: primary,
   $a-duration: 2s,
   $a-delay: 0s,
   $a-count: 2,
-  $a-spread: 0,
+  $a-spread: 1em,
   $a-ease: linear
 ) {
   $shape: test-argument("sugar.loader-radial", "shape", (circle, rect), $shape);
@@ -60,7 +60,7 @@
   $color: test-argument(
     "sugar.loader-radial",
     "color",
-    "color|list-color",
+    "color|list-color|list-string",
     $color
   );
   $a-duration: test-argument(
@@ -83,6 +83,8 @@
   $colors: null;
   @if is($color, list-color) and list-length($color) > 1 {
     $colors: $color;
+  } @else {
+    $color: color($color);
   }
 
   // manage duration

@@ -1,32 +1,7 @@
-require('codemirror/mode/sass/sass.js');
-require('codemirror/mode/css/css.js');
-require('codemirror/mode/coffeescript/coffeescript.js');
-require('codemirror/mode/haml/haml.js');
-require('codemirror/mode/htmlmixed/htmlmixed.js');
-require('codemirror/mode/javascript/javascript.js');
-require('codemirror/mode/stylus/stylus.js');
-require('./golden-layout.js');
-require('./webcomponent.props.js');
-require('./webcomponent.imports.js');
-import NotificationWebcomponent from '@coffeekraken/notification-webcomponent/js/class'
+import CodePlayground from './class/CodePlayground';
+import './feature/codemirror';
+import './webcomponent.props'
+import './webcomponent.imports'
 
-// clear transmations on body
-setTimeout(() => {
-	document.body.classList.remove('clear-transmations')
-}, 500)
-
-// codemirror aliases
-const CodeMirror = require('codemirror');
-CodeMirror.modes.js = CodeMirror.modes.javascript;
-CodeMirror.modes.html = CodeMirror.modes.htmlmixed;
-CodeMirror.modes.coffee = CodeMirror.modes.coffeescript;
-
-// listen for compilation error
-document.body.addEventListener('compileError', (e) => {
-	NotificationWebcomponent.notify({
-		type : 'error',
-		title : 'Woups...',
-		body : e.detail.error,
-		timeout : 20000
-	});
-});
+// init a new code playground instance
+const _codePlayground = new CodePlayground();

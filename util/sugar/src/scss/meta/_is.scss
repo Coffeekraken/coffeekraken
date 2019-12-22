@@ -146,7 +146,11 @@
     } @else if $type == string or $type == String or $type == 'string' or $type == 'String' {
       @return meta.type-of($value) == string;
     } @else if $type == color or $type == 'color' or $type == Color or $type == 'Color' {
-      @return meta.type-of($value) == color;
+      @if meta.type-of($value) == color or (meta.type-of($value) == string and setting("colors.#{$value}") != null) {
+        @return true;
+      } @else {
+        @return false;
+      }
     } @else if $type == list or $type == 'list' or $type == List or $type == 'List' {
       @return meta.type-of($value) == list;
     } @else if $type == map or $type == 'map' or $type == Map or $type == 'Map' {

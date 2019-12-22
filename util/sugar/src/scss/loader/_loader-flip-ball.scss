@@ -1,13 +1,13 @@
 /**
  * @name      loader-flip-ball
  * @namespace     sugar.scss.loader
- * @type      function
+ * @type      Mixin
  *
  * Generate a full animated, single element, flip ball style loader
  *
  * @param 		{String} 		[$shape=circle] 			The shape of the loader (circle,rect)
- * @param 		{Number} 		[$size=1em] 				The size of the loader
- * @param 		{Color} 		[$color=primary] 			The color of the loader. Can be a list of colors
+ * @param 		{Number} 		[$size=2em] 				The size of the loader
+ * @param 		{Color} 		[$colors=(primary,success,warning,error,info)] 			The colors of the loader. Can be a list of colors
  * @param 		{Second} 		[$a-duration=1s] 			The overall animation duration
  * @param 		{Second} 		[$a-delay=0s] 				The delay between two animation cycle
  * @param 		{String} 		[$a-ease=ease-in-out]		The ease to use for the animation
@@ -21,14 +21,12 @@
  */
 @mixin loader-flip-ball(
   $shape: circle,
-  $size: 1em,
-  $color: primary,
-  $a-duration: 1s,
+  $size: 2em,
+  $colors: (primary,success,warning,error,info),
+  $a-duration: 2s,
   $a-delay: 0s,
   $a-ease: ease-in-out
 ) {
-
-  $color: color($color);
 
   $shape: test-argument(
     "sugar.loader-flip-ball",
@@ -37,11 +35,11 @@
     $shape
   );
   $size: test-argument("sugar.loader-flip-ball", "size", number, $size);
-  $color: test-argument(
+  $colors: test-argument(
     "sugar.loader-flip-ball",
-    "color",
-    "color|list-color",
-    $color
+    "colors",
+    "color|list-color|list-string",
+    $colors
   );
   $a-duration: test-argument(
     "sugar.loader-flip-ball",
@@ -57,25 +55,18 @@
   );
   $a-ease: test-argument("sugar.loader-flip-ball", "a-ease", string, $a-ease);
 
-  // handle colors
-  $colors: $color;
-  @if is($color, list-color) and list-length($color) > 1 {
-    $colors: $color;
-  }
-
   $a-duration: $a-duration + $a-delay;
 
   $a-name: str-unquote("google-ball-#{str-unique-id()}");
 
-  $c: $color;
-  @if $colors {
-    $c: list-nth($colors, list-length($colors));
-  }
+  $c: list-nth($colors, list-length($colors));
 
   display: inline-block;
-  background: $c;
+  background: color($c);
   width: $size;
   height: $size;
+  top: $size / 2 * -1;
+  left: $size / 2 * -1;
   @if $shape == circle {
     border-radius: 50%;
   }

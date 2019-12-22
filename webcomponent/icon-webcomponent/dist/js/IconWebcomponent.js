@@ -148,7 +148,7 @@ class IconWebcomponent extends _SWebComponent.default {
         return Promise.resolve(`<img src="${this.props.iconsPath}/${this.props.icon}.svg" alt="${this.props.title}">`);
 
       case 'fontawesome':
-        return Promise.resolve(`<i class="${this.props.icon}" aria-hidden></i>`);
+        return Promise.resolve(`<i class="fa ${this.props.icon}" aria-hidden></i>`);
 
       case 'material':
         return Promise.resolve(`<i class="material-icons" aria-hidden>${this.props.icon}</i>`);

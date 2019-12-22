@@ -1,4 +1,4 @@
-import native from 'coffeekraken-sugar/js/core/sNativeWebComponent'
+import native from '@coffeekraken/sugar/js/core/sNativeWebComponent'
 import Sharer from 'sharer.npm.js'
 
 /**

@@ -22,21 +22,11 @@
     number,
     $angle
   );
-  $a: _s_to_unitless_rad_for_cos($angle);
+
+  $a: math-to-unitless-rad($angle);
   $cos: 1;
   @for $n from 1 through sugar.$math-precision {
-    $cos: $cos + (math-pow(-1, $n) / math-fact(2 * $n)) * math-pow($a, 2 * $n);
+    $cos: $cos + ( math-pow(-1,$n) / math-fact(2*$n) ) * math-pow($a,2*$n);
   }
   @return $cos;
-}
-
-
-@function _s_to_unitless_rad_for_cos($angle) {
-  @if math.unit($angle) == "deg" {
-    $angle: $angle / 180deg * sugar.$math-pi;
-  }
-  @if math.unit($angle) == "rad" {
-    $angle: $angle / 1rad;
-  }
-  @return $angle;
 }

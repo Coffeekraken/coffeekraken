@@ -1,6 +1,6 @@
 {
   "name": "@coffeekraken/icon-webcomponent",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Easily integrate icons using various driver like \"img\", \"fonticon\", \"svg\", \"fontawesome\", \"material\" and \"foundation\"",
   "main": "js/index.js",
   "homepage": "http://coffeekraken.io",

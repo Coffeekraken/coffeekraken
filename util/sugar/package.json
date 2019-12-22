@@ -1,7 +1,7 @@
 {
   "name": "@coffeekraken/sugar",
   "description": "A little sugar in your codebase",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "homepage": "http://coffeekraken.io",
   "author": "Coffeekraken <hello@coffeekraken.io>",
   "contributors": [
@@ -18,6 +18,7 @@
   "dependencies": {
     "@ungap/custom-elements-builtin": "^0.1.2",
     "core-js": "^3.4.7",
+    "crypto-js": "^3.1.9-1",
     "custom-event": "^1.0.1",
     "document-register-element": "^1.14.3",
     "domready": "^1.0.8",

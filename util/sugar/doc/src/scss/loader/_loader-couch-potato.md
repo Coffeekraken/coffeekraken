@@ -18,7 +18,7 @@ $a-duration  |  **{ Second }**  |  The overall animation duration  |  optional  
 $a-delay  |  **{ Second }**  |  The delay between two animation cycle  |  optional  |  0s
 $a-ease  |  **{ [String](http://www.sass-lang.com/documentation/file.SASS_REFERENCE.html#sass-script-strings) }**  |  The ease to use for the animation  |  optional  |  ease-in-out
 $a-rotate  |  **{ Degree }**  |  The animation rotation  |  optional  |  360deg
-$a-scale  |  **{ Number }**  |  The animation scale  |  optional  |  .7
+$a-scale  |  **{ Number }**  |  The animation scale  |  optional  |  2
 
 ### Example
 ```scss

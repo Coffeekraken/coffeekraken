@@ -38963,12 +38963,12 @@ ck-interactive-demo {
   height: 2em;
   content: "";
   display: block;
-  animation: bars-u6bx2qq 1s ease-in-out 0s infinite;
+  animation: bars-ugjw8ha 1s ease-in-out 0s infinite;
   box-shadow: #f2bc2b 1.5em 1.5em 0 0, #f2bc2b 2.5em 1.5em 0 0, #f2bc2b 3.5em 1.5em 0 0, #f2bc2b 4.5em 1.5em 0 0, #f2bc2b 5.5em 1.5em 0 0, #f2bc2b 1.5em 1.5em 0 0, #f2bc2b 2.5em 1.5em 0 0, #f2bc2b 3.5em 1.5em 0 0, #f2bc2b 4.5em 1.5em 0 0, #f2bc2b 5.5em 1.5em 0 0;
   transform: translateX(-3.5em) translateY(-1.5em) translateZ(0);
   transform-origin: 3.5em 1.5em;
 }
-@keyframes bars-u6bx2qq {
+@keyframes bars-ugjw8ha {
   0% {
     box-shadow: #f2bc2b 1.5em -0.5em 0 0, #f2bc2b 2.5em 0.5em 0 0, #f2bc2b 3.5em 1.5em 0 0, #f2bc2b 4.5em 1.5em 0 0, #f2bc2b 5.5em 0.5em 0 0, #f2bc2b 1.5em 3.5em 0 0, #f2bc2b 2.5em 2.5em 0 0, #f2bc2b 3.5em 1.5em 0 0, #f2bc2b 4.5em 1.5em 0 0, #f2bc2b 5.5em 2.5em 0 0;
   }

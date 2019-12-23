@@ -9,7 +9,7 @@ exports.default = void 0;
 
 var _domReady = _interopRequireDefault(require("../dom/domReady"));
 
-var _sSettings = _interopRequireDefault(require("../core/sSettings"));
+var _settings = _interopRequireDefault(require("../core/settings"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1042,10 +1042,10 @@ _defineProperty(SColor, "toStringFormat", "rgba");
 
 (0, _domReady.default)(() => {
   // get settings
-  if (!_sSettings.default || !_sSettings.default.colors) return; // loop on each colors
+  if (!_settings.default || !_settings.default.colors) return; // loop on each colors
 
-  for (let colorName in _sSettings.default.colors) {
-    const color = _sSettings.default.colors[colorName];
+  for (let colorName in _settings.default.colors) {
+    const color = _settings.default.colors[colorName];
     if (!color) return;
 
     if (color.color) {

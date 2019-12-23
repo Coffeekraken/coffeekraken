@@ -1,5 +1,4 @@
 import __uniqid from '../string/uniqid';
-import __jss from '../vendor/jss';
 import __injectStyle from '../css/injectStyle';
 
 /**
@@ -22,12 +21,12 @@ import __injectStyle from '../css/injectStyle';
  * @example       js
  * import innerHtml from '@coffeekraken/sugar/js/dom/innerHtml'
  * innerHtml(myCoolNode, 'Hello World', {
- *    animIn: 'fade',
- *    animOut: 'fadeUp',
- *    animInDuration: 2000,
- *    animOutDuration: 1000,
- *    animInDistance: 100,
- *    animOutDistance: 100,
+ *    animIn: 'fade', // fade, fadeUp, fadeDown, fadeLeft, fadeRight
+ *    animOut: 'fadeUp', // fade, fadeUp, fadeDown, fadeLeft, fadeRight
+ *    animInDuration: 600, // in ms
+ *    animOutDuration: 300, // in ms
+ *    animInDistance: 25, // in px
+ *    animOutDistance: 25, // in px
  *    animInEasing: 'ease-in-out',
  *    animOutEasing: 'ease-in-out'
  * }).then(() => {
@@ -43,10 +42,10 @@ export default function innerHtml(node, content, settings = {}) {
     settings = {
       animIn: 'fade',
       animOut: 'fade',
-      animInDuration: 5000,
-      animOutDuration: 5000,
-      animInDistance: 100,
-      animOutDistance: 100,
+      animInDuration: 600,
+      animOutDuration: 300,
+      animInDistance: 25,
+      animOutDistance: 25,
       animInEasing: 'ease-in-out',
       animOutEasing: 'ease-in-out',
       ...settings
@@ -60,11 +59,11 @@ export default function innerHtml(node, content, settings = {}) {
     // generate the animation styles
     switch(settings.animIn) {
       case 'fade':
-        const sheet = `
+        const sheetAnimIn = `
           @keyframes animIn-${_uniqid} {
             from {
               opacity: 0;
-            },
+            }
             to {
               opacity: 1;
             }
@@ -73,28 +72,88 @@ export default function innerHtml(node, content, settings = {}) {
               animation: animIn-${_uniqid} ${settings.animInDuration}ms ${settings.animInEasing};
           }
         `;
-        __injectStyle(sheet);
+        __injectStyle(sheetAnimIn);
       break;
       case 'fadeUp':
-
+        const sheetAnimInFadeUp = `
+          @keyframes animIn-${_uniqid} {
+            from {
+              opacity: 0;
+              transform: translateY(-${settings.animInDistance}px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+          .${_animInClassName} {
+              animation: animIn-${_uniqid} ${settings.animInDuration}ms ${settings.animInEasing};
+          }
+        `;
+        __injectStyle(sheetAnimInFadeUp);
       break;
       case 'fadeDown':
-
+        const sheetAnimInFadeDown = `
+          @keyframes animIn-${_uniqid} {
+            from {
+              opacity: 0;
+              transform: translateY(${settings.animInDistance}px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+          .${_animInClassName} {
+              animation: animIn-${_uniqid} ${settings.animInDuration}ms ${settings.animInEasing};
+          }
+        `;
+        __injectStyle(sheetAnimInFadeDown);
       break;
       case 'fadeLeft':
-
+        const sheetAnimInFadeLeft = `
+          @keyframes animIn-${_uniqid} {
+            from {
+              opacity: 0;
+              transform: translateX(-${settings.animInDistance}px);
+            }
+            to {
+              opacity: 1;
+              transform: translateX(0);
+            }
+          }
+          .${_animInClassName} {
+              animation: animIn-${_uniqid} ${settings.animInDuration}ms ${settings.animInEasing};
+          }
+        `;
+        __injectStyle(sheetAnimInFadeLeft);
       break;
       case 'fadeRight':
-
+        const sheetAnimInFadeRight = `
+          @keyframes animIn-${_uniqid} {
+            from {
+              opacity: 0;
+              transform: translateX(${settings.animInDistance}px);
+            }
+            to {
+              opacity: 1;
+              transform: translateX(0);
+            }
+          }
+          .${_animInClassName} {
+              animation: animIn-${_uniqid} ${settings.animInDuration}ms ${settings.animInEasing};
+          }
+        `;
+        __injectStyle(sheetAnimInFadeRight);
       break;
     }
     switch(settings.animOut) {
       case 'fade':
-        const sheet = `
+        const sheetAnimOutFade = `
           @keyframes animOut-${_uniqid} {
             0% {
               opacity: 1;
-            },
+            }
             100% {
               opacity: 0;
             }
@@ -103,19 +162,79 @@ export default function innerHtml(node, content, settings = {}) {
             animation: animOut-${_uniqid} ${settings.animOutDuration}ms ${settings.animOutEasing};
           }
         `;
-        __injectStyle(sheet);
+        __injectStyle(sheetAnimOutFade);
       break;
       case 'fadeUp':
-
+        const sheetAnimOutFadeUp = `
+          @keyframes animOut-${_uniqid} {
+            from {
+              opacity: 1;
+              transform: translateY(0);
+            }
+            to {
+              opacity: 0;
+              transform: translateY(-${settings.animOutDistance}px);
+            }
+          }
+          .${_animOutClassName} {
+              animation: animOut-${_uniqid} ${settings.animOutDuration}ms ${settings.animOutEasing};
+          }
+        `;
+        __injectStyle(sheetAnimOutFadeUp);
       break;
       case 'fadeDown':
-
+        const sheetAnimOutFadeDown = `
+          @keyframes animOut-${_uniqid} {
+            from {
+              opacity: 1;
+              transform: translateY(0);
+            }
+            to {
+              opacity: 0;
+              transform: translateY(${settings.animOutDistance}px);
+            }
+          }
+          .${_animOutClassName} {
+              animation: animOut-${_uniqid} ${settings.animOutDuration}ms ${settings.animOutEasing};
+          }
+        `;
+        __injectStyle(sheetAnimOutFadeDown);
       break;
       case 'fadeLeft':
-
+        const sheetAnimOutFadeLeft = `
+          @keyframes animOut-${_uniqid} {
+            from {
+              opacity: 1;
+              transform: translateX(0);
+            }
+            to {
+              opacity: 0;
+              transform: translateX(-${settings.animOutDistance}px);
+            }
+          }
+          .${_animOutClassName} {
+              animation: animOut-${_uniqid} ${settings.animOutDuration}ms ${settings.animOutEasing};
+          }
+        `;
+        __injectStyle(sheetAnimOutFadeLeft);
       break;
       case 'fadeRight':
-
+        const sheetAnimOutFadeRight = `
+          @keyframes animOut-${_uniqid} {
+            from {
+              opacity: 1;
+              transform: translateX(0);
+            }
+            to {
+              opacity: 0;
+              transform: translateX(${settings.animOutDistance}px);
+            }
+          }
+          .${_animOutClassName} {
+              animation: animOut-${_uniqid} ${settings.animOutDuration}ms ${settings.animOutEasing};
+          }
+        `;
+        __injectStyle(sheetAnimOutFadeRight);
       break;
     }
 
@@ -133,6 +252,11 @@ export default function innerHtml(node, content, settings = {}) {
 
       // anim in the content by adding the corresponding class
       node.classList.add(_animInClassName);
+
+      // wait until the animation is finished to resolve the promise
+      setTimeout(() => {
+        resolve();
+      }, settings.animInDuration);
 
     }, settings.animOutDuration);
 

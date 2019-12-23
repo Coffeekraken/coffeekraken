@@ -1,7 +1,8 @@
 export default {
-  settings: require('./settings'),
-  sNativeWebComponent: require('./sNativeWebComponent'),
-  SObject: require('SObject'),
-  SWebComponent: require('SWebComponent'),
-  SWebComponentMixin: require('SWebComponentMixin')
-};
+    'SObject': require('./SObject'),
+    'SWebComponent': require('./SWebComponent'),
+    'SWebComponentMixin': require('./SWebComponentMixin'),
+    'sNativeWebComponent': require('./sNativeWebComponent'),
+    'settings': require('./settings'),
+  };
+  

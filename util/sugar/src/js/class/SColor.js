@@ -1,5 +1,5 @@
 import __domReady from "../dom/domReady";
-import __sSettings from "../core/sSettings";
+import __settings from "../core/settings";
 
 /**
  * @name 		SColor
@@ -970,11 +970,11 @@ class SColor {
 // inject sugar css colors into class
 __domReady(() => {
   // get settings
-  if (!__sSettings || !__sSettings.colors) return;
+  if (!__settings || !__settings.colors) return;
 
   // loop on each colors
-  for (let colorName in __sSettings.colors) {
-    const color = __sSettings.colors[colorName];
+  for (let colorName in __settings.colors) {
+    const color = __settings.colors[colorName];
     if (!color) return;
 
     if (color.color) {

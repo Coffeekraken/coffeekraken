@@ -14,13 +14,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @namespace       sugar.js.string
  * @type          Function
  *
- * Generate a uniqid string of 18 bytes. Work using the [uniqid](https://www.npmjs.com/package/uniqid) npm package under the hood.
+ * Generate a uniqid string of 8 bytes. Work using the [uniqid](https://www.npmjs.com/package/uniqid) npm package under the hood.
  *
- * @return          {String}                A 18 bytes uniqid string
+ * @return          {String}                A 8 bytes uniqid string
  *
  * @example       js
  * import uniqid from '@coffeekraken/sugar/js/string/uniqid';
- * console.log(uniqid()); // => 4n5pxq24kpiob12og9
+ * console.log(uniqid()); // => 4n5pxq24
  *
  * @see       https://www.npmjs.com/package/uniqid
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

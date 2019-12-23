@@ -7,7 +7,7 @@ exports.default = whenProperty;
 
 var _get2 = _interopRequireDefault(require("lodash/get"));
 
-var _SWatcher = _interopRequireDefault(require("../../class/SWatcher"));
+var _SWatcher = _interopRequireDefault(require("../class/SWatcher"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

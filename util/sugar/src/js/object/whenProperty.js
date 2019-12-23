@@ -1,5 +1,5 @@
 import _get from "lodash/get";
-import SWatcher from "../../class/SWatcher";
+import SWatcher from "../class/SWatcher";
 
 /**
  * @name        whenProperty

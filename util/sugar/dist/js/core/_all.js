@@ -5,11 +5,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _default = {
-  settings: require('./settings'),
-  sNativeWebComponent: require('./sNativeWebComponent'),
-  SObject: require('SObject'),
-  SWebComponent: require('SWebComponent'),
-  SWebComponentMixin: require('SWebComponentMixin')
+  'SObject': require('./SObject'),
+  'SWebComponent': require('./SWebComponent'),
+  'SWebComponentMixin': require('./SWebComponentMixin'),
+  'sNativeWebComponent': require('./sNativeWebComponent'),
+  'settings': require('./settings')
 };
 exports.default = _default;
 module.exports = exports.default;

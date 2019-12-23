@@ -1,4 +1,5 @@
 export default {
-  keysFirst: require('./keysFirst'),
-  keysLast: require('./keysLast')
-};
+    'keysFirst': require('./keysFirst'),
+    'keysLast': require('./keysLast'),
+  };
+  

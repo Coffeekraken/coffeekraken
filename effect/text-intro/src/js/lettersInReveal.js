@@ -21,7 +21,7 @@ import __querySelectorLive from '@coffeekraken/sugar/js/dom/querySelectorLive'
 export default function lettersInReveal(offset = -window.innerHeight*.2, delay = 300) {
 	__querySelectorLive('[intro="letters-in-reveal"]', (elm) => {
 		__splitLetters(elm);
-		__whenInViewport(elm, offset).then((elm) => {
+		__whenInViewport(elm, elm.getAttribute('intro-offset') || offset).then((elm) => {
 			setTimeout(() => {
 				elm.classList.add('active');
 			}, delay);

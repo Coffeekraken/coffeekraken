@@ -42,6 +42,8 @@ const __getGithubAuthToken = require('@coffeekraken/sugar/node/github/getAuthTok
 
 const __downloadFolder = require('@coffeekraken/sugar/node/github/downloadFolder');
 
+const __decodeBase64 = require('@coffeekraken/sugar/node/string/decodeBase64');
+
 module.exports = function (config) {
   // creating the app
   const app = __express();
@@ -60,7 +62,8 @@ module.exports = function (config) {
   app.set('views', __dirname + '/../../../src/views');
   app.set('view engine', 'handlebars'); // static files
 
-  app.use('/dist', __express.static(__dirname + '/../../../dist')); // cookie session
+  app.use('/dist', __express.static(__dirname + '/../../../dist'));
+  app.use(__httpContext.middleware); // cookie session
 
   app.set('trust proxy', 1);
   app.use(__cookieSession({
@@ -75,9 +78,25 @@ module.exports = function (config) {
   }); // protect
 
   app.use((req, res, next) => {
-    if (/^\/dist\//.test(req.url)) return;
-    if (req.url.match('favicon.ico')) return;
-    if (req.url.match('.js.map')) return;
+    // console.log(req.url);
+    //
+    // try {
+    // 	const stats = __fs.lstatSync(req.url);
+    // 	console.log(stats);
+    // 	if (stats.isFile()) {
+    // 		console.log('IS FILE', req.url);
+    // 		res.sendFile(req.url);
+    // 		next();
+    // 		return;
+    // 	}
+    // } catch(e) {
+    // 	console.log(e);
+    // 	next();
+    // 	return;
+    // }
+    // if (/^\/dist\//.test(req.url)) return;
+    // if (req.url.match('favicon.ico')) return;
+    // if (req.url.match('.js.map')) return;
     next();
   });
 
@@ -86,7 +105,7 @@ module.exports = function (config) {
   const io = require('socket.io')(server); // github auth token
 
 
-  __setGithubAuthToken('olivierbossel', '465d345594f5715bdb2df0211cdd60df9cd10af5');
+  __setGithubAuthToken('olivierbossel', __decodeBase64('MTFkOGM5ZjAwODJmN2JlY2M0OGU3YTBmNjhhZDRiNWJiZGFkOGQyZg=='));
 
   const authToken = __getGithubAuthToken();
 

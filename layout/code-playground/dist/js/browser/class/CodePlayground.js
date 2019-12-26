@@ -9,21 +9,21 @@ var _goldenLayout = _interopRequireDefault(require("../golden-layout"));
 
 var _class = _interopRequireDefault(require("@coffeekraken/notification-webcomponent/js/class"));
 
-var _SSocketDom = _interopRequireDefault(require("../../../../../../util/sugar/dist/js/class/SSocketDom"));
+var _SSocketDom = _interopRequireDefault(require("@coffeekraken/sugar/js/class/SSocketDom"));
 
-var _SUrl = _interopRequireDefault(require("../../../../../../util/sugar/dist/js/class/SUrl"));
+var _SUrl = _interopRequireDefault(require("@coffeekraken/sugar/js/class/SUrl"));
 
-var _aes = _interopRequireDefault(require("../../../../../../util/sugar/dist/js/crypt/aes"));
+var _aes = _interopRequireDefault(require("@coffeekraken/sugar/js/crypt/aes"));
 
-var _innerHtml = _interopRequireDefault(require("../../../../../../util/sugar/dist/js/dom/innerHtml"));
+var _innerHtml = _interopRequireDefault(require("@coffeekraken/sugar/js/dom/innerHtml"));
 
-var _strToHtml = _interopRequireDefault(require("../../../../../../util/sugar/dist/js/string/strToHtml"));
+var _strToHtml = _interopRequireDefault(require("@coffeekraken/sugar/js/string/strToHtml"));
 
-var _style = _interopRequireDefault(require("../../../../../../util/sugar/dist/js/dom/style"));
+var _style = _interopRequireDefault(require("@coffeekraken/sugar/js/dom/style"));
 
 var _lettersInReveal = _interopRequireDefault(require("@coffeekraken/text-intro/js/lettersInReveal"));
 
-var _whenInViewport = _interopRequireDefault(require("../../../../../../util/sugar/dist/js/dom/whenInViewport"));
+var _whenInViewport = _interopRequireDefault(require("@coffeekraken/sugar/js/dom/whenInViewport"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

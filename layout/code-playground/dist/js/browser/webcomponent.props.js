@@ -26,8 +26,6 @@ _SWebComponent.default.setDefaultProps({
   }]
 }, ['ck-codemirror', 'ck-interactive-demo']);
 
-console.log(_compileServer.default);
-
 _SWebComponent.default.setDefaultProps({
   theme: 'material',
   compile: _compileServer.default.compile

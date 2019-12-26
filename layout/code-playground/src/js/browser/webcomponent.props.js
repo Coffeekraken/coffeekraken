@@ -23,8 +23,6 @@ SWebComponent.setDefaultProps({
 	'ck-interactive-demo'
 ]);
 
-console.log(compileServer);
-
 SWebComponent.setDefaultProps({
 	theme : 'material',
 	compile: compileServer.compile

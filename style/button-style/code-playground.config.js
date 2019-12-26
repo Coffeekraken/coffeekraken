@@ -5,13 +5,14 @@ module.exports = {
 
 	// assets folders that need to be
 	// replicated in the app working directory
-	assetsDir : ['src'],
+	assetsDir : ['src','dist'],
 
 	// editors
 	editors : {
 		html : {
 			language : 'html',
 			data : `
+				<img src="dist/img/coffeekraken-logo.jpg" class="m-b" />
 				<div class="tf vr">
 					<h5>Default buttons</h5>
 					<p>
@@ -59,8 +60,8 @@ module.exports = {
 		css : {
 			language : 'scss',
 			data : `
-				@use 'node_modules/@coffeekraken/sugar/index' as sugar;
-				@use 'node_modules/@coffeekraken/typography-style/index' as typography-style;
+				@use '@coffeekraken/sugar/index' as sugar;
+				@use '@coffeekraken/typography-style/index' as typography-style;
 				@use 'src/scss/index' as button-style;
 				@include sugar.init();
 				@include sugar.classes();
@@ -73,12 +74,6 @@ module.exports = {
 				);
 			`
 		},
-		js : {
-			language : 'js',
-			data : `
-				import __isBase64 from '@coffeekraken/sugar/js/is/base64';
-				console.log(__isBase64('Hello World'));
-			`
-		}
+		js : null
 	}
 }

@@ -1,6 +1,6 @@
 {
   "name": "@coffeekraken/compile-server",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Provide a simple rest API for compiling js, coffee, sass, scss, etc... files through a node server",
   "main": "js/index.js",
   "bin": {

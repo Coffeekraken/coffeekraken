@@ -187,6 +187,8 @@ module.exports = function(config) {
 			}
 		}, req.body.options || {});
 
+		delete options.pwd;
+
 		// compile using sass
 		__webpack(options, (error, result) => {
 			if ( ! error) {

@@ -1,13 +1,13 @@
 import __goldenLayout from '../golden-layout';
 import NotificationWebcomponent from '@coffeekraken/notification-webcomponent/js/class'
-import SSocketDom from '../../../../../../util/sugar/dist/js/class/SSocketDom'
-import SUrl from '../../../../../../util/sugar/dist/js/class/SUrl'
-import aes from '../../../../../../util/sugar/dist/js/crypt/aes'
-import __innerHtml from '../../../../../../util/sugar/dist/js/dom/innerHtml'
-import __strToHtml from '../../../../../../util/sugar/dist/js/string/strToHtml'
-import __style from '../../../../../../util/sugar/dist/js/dom/style'
+import SSocketDom from '@coffeekraken/sugar/js/class/SSocketDom'
+import SUrl from '@coffeekraken/sugar/js/class/SUrl'
+import aes from '@coffeekraken/sugar/js/crypt/aes'
+import __innerHtml from '@coffeekraken/sugar/js/dom/innerHtml'
+import __strToHtml from '@coffeekraken/sugar/js/string/strToHtml'
+import __style from '@coffeekraken/sugar/js/dom/style'
 import __lettersInReveal from '@coffeekraken/text-intro/js/lettersInReveal'
-import __whenInViewport from '../../../../../../util/sugar/dist/js/dom/whenInViewport'
+import __whenInViewport from '@coffeekraken/sugar/js/dom/whenInViewport'
 
 
 class CodePlayground {

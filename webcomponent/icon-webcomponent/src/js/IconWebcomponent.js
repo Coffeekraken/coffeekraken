@@ -141,7 +141,7 @@ export default class IconWebcomponent extends SWebComponent {
           }">`
         )
       case 'fontawesome':
-        return Promise.resolve(`<i class="fa ${this.props.icon}" aria-hidden></i>`)
+        return Promise.resolve(`<i class="${!this.props.icon.match(/^fa(s|r|b|l|d)\sfa-[a-z]+/gs) ? 'fa ' : ''}${this.props.icon}" aria-hidden></i>`)
       case 'material':
         return Promise.resolve(
           `<i class="material-icons" aria-hidden>${this.props.icon}</i>`

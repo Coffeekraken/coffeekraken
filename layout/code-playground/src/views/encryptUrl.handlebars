@@ -1,0 +1,15 @@
+<div class="encrypt-url">
+  <div class="encrypt-url__container">
+    <form name="encrypt-url">
+      <div class="form-group m-b">
+        <input type="text" name="url" class="form-input" placeholder="url to encrypt" id="encrypt-url-input" />
+      </div>
+      <button class="btn btn--block btn--primary m-b" dispatch-event="click:encryptUrl" dispatch-event-data='{ "target": "#encrypt-url-input" }'>
+        Encrypt!
+      </button>
+      <p class="p" id="encrypt-url-result">
+
+      </p>
+    </form>
+  </div>
+</div>

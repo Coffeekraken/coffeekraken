@@ -1,5 +1,10 @@
 module.exports = {
 
+	// layout (horizontal, vertical, top, left, bottom, right, embed)
+	layout: 'right',
+
+	// assets folders that need to be
+	// replicated in the app working directory
 	assetsDir : ['src'],
 
 	// editors

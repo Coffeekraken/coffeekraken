@@ -12,7 +12,7 @@ module.exports = {
 		html : {
 			language : 'html',
 			data : `
-				<img src="dist/img/coffeekraken-logo.jpg" class="m-b" />
+				<img src="/dist/img/coffeekraken-logo.jpg" class="m-b" />
 				<div class="tf vr">
 					<h5>Default buttons</h5>
 					<p>

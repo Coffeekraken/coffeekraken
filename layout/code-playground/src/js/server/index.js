@@ -13,6 +13,7 @@ const __aes = require('@coffeekraken/sugar/js/crypt/aes');
 const __queryString = require('querystring');
 const { spawn } = require('child_process');
 const __sleep = require('@coffeekraken/sugar/js/function/sleep');
+const __gravatarUrl = require('../../../../../util/sugar/dist/js/util/gravatarUrl');
 
 const __setGithubAuthToken = require('@coffeekraken/sugar/node/github/setAuthToken');
 const __getGithubAuthToken = require('@coffeekraken/sugar/node/github/getAuthToken');
@@ -66,7 +67,7 @@ module.exports = function(config) {
   const io = require('socket.io')(server);
 
 	// github auth token
-	__setGithubAuthToken('olivierbossel', '3a182619e6cf6dd2bc1ec2ca98f80a9ee8e7eaf2');
+	__setGithubAuthToken('olivierbossel', '465d345594f5715bdb2df0211cdd60df9cd10af5');
 	const authToken = __getGithubAuthToken();
 
   io.on('connection', (socket) => {
@@ -114,6 +115,7 @@ module.exports = function(config) {
 			await __sleep(1000);
 
 			__request(options, async (error, response, body) => {
+
 	      const files = JSON.parse(body);
 	      const packageJson = files.find(file => file.name === 'package.json');
 	      const codePlaygroundConfig = files.find(file => file.name === 'code-playground.config.js');
@@ -130,6 +132,11 @@ module.exports = function(config) {
 
 					// parse the package json data
 					const packageJson = JSON.parse(packageJsonBody);
+
+					// process contributors avatars
+					packageJson.contributors.forEach((contributor) => {
+						contributor.gravatar = __gravatarUrl(contributor.email);
+					});
 
 					// creating the app directory on the server
 					socket.emit('SSocketDom.loading', {
@@ -193,15 +200,11 @@ module.exports = function(config) {
 
 							await __sleep(1000);
 
-							console.log(codePlaygroundConfig.download_url);
-
 							// download the package.json content and the code-playground.config.js content
 				      __request(codePlaygroundConfig.download_url, async (error, response, codePlaygroundConfigBody) => {
 
 								// parse the package json data
 								const codePlaygroundConfig = eval(codePlaygroundConfigBody);
-
-								console.log(codePlaygroundConfig);
 
 								// downloading the assets d irectories
 								socket.emit('SSocketDom.loading', {

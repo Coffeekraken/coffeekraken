@@ -1,6 +1,6 @@
 module.exports = {
 
-	assetsDir : ['doc'],
+	assetsDir : ['src'],
 
 	// editors
 	editors : {
@@ -52,11 +52,11 @@ module.exports = {
 			`
 		},
 		css : {
-			language : 'sass',
+			language : 'scss',
 			data : `
 				@use 'node_modules/@coffeekraken/sugar/index' as sugar;
 				@use 'node_modules/@coffeekraken/typography-style/index' as typography-style;
-				@use 'index' as button-style;
+				@use 'src/scss/index' as button-style;
 				@include sugar.init();
 				@include sugar.classes();
 				@include typography-style.classes();

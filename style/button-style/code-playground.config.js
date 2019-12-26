@@ -1,20 +1,6 @@
 module.exports = {
-	// server port
-	port : 3000,
 
-	// title
-	title : 's-button-component',
-
-	// layout
-	layout : 'right',
-
-	// compile server
-	compileServer : {
-
-		// compile server port
-		port : 4000
-
-	},
+	assetsDir : ['doc'],
 
 	// editors
 	editors : {
@@ -68,17 +54,16 @@ module.exports = {
 		css : {
 			language : 'sass',
 			data : `
-				@import 'node_modules/coffeekraken-sugar/index';
-				@import 'node_modules/coffeekraken-s-typography-component/index';
-				@include s-init();
-				@include s-classes();
-				@include s-typography-classes();
+				@use 'node_modules/@coffeekraken/sugar/index' as sugar;
+				@use 'node_modules/@coffeekraken/typography-style/index' as typography-style;
+				@include sugar.init();
+				@include sugar.classes();
+				@include typography-style.classes();
 				body {
-					padding: s-space(medium);
+					padding: sugar.space(medium);
 				}
-				@import 'index';
-				// @import 'node_modules/coffeekraken-button-component/index';
-				@include s-button-classes(
+				@use 'index' as button-style;
+				@include button-style.classes(
 					$colors: default primary secondary success error warning info
 				);
 			`

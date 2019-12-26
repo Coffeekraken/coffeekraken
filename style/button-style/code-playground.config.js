@@ -56,13 +56,13 @@ module.exports = {
 			data : `
 				@use 'node_modules/@coffeekraken/sugar/index' as sugar;
 				@use 'node_modules/@coffeekraken/typography-style/index' as typography-style;
+				@use 'index' as button-style;
 				@include sugar.init();
 				@include sugar.classes();
 				@include typography-style.classes();
 				body {
 					padding: sugar.space(medium);
 				}
-				@use 'index' as button-style;
 				@include button-style.classes(
 					$colors: default primary secondary success error warning info
 				);

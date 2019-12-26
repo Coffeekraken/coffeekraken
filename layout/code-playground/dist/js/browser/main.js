@@ -8,6 +8,8 @@ require("./webcomponent.props");
 
 require("./webcomponent.imports");
 
+require("../../../../../util/sugar/dist/js/feature/all");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // init a new code playground instance

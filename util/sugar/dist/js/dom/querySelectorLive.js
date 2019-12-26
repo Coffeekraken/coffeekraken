@@ -32,6 +32,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+let _observer,
+    _selectors = {};
+
 function querySelectorLive(selector, cb, settings = {}) {
   const id = `${selector} - ${(0, _uniqid.default)()}`; // extend settings
 
@@ -40,45 +43,74 @@ function querySelectorLive(selector, cb, settings = {}) {
     once: true
   }, settings);
 
-  function pushNewNode(node) {
-    if (settings.once) {
-      if (!node._querySelectorLive) {
-        node._querySelectorLive = {};
+  if (!_selectors[selector]) {
+    _selectors[selector] = [{
+      id: id,
+      selector: selector,
+      cb: cb,
+      settings: settings
+    }];
+  } else {
+    _selectors[selector].push({
+      id: id,
+      selector: selector,
+      cb: cb,
+      settings: settings
+    });
+  }
+
+  function pushNewNode(node, sel) {
+    const objs = _selectors[sel];
+    if (!objs) return;
+    objs.forEach(obj => {
+      if (obj.settings.once) {
+        if (!node._querySelectorLive) {
+          node._querySelectorLive = {};
+        }
+
+        if (node._querySelectorLive[obj.id]) return;
+        node._querySelectorLive[obj.id] = true;
       }
 
-      if (node._querySelectorLive[id]) return;
-      node._querySelectorLive[id] = true;
-    }
-
-    cb && cb(node);
+      obj.cb && obj.cb(node);
+    });
   } // listen for updates in document
 
 
-  const mutationObserver = new MutationObserver(mutations => {
-    mutations.forEach(mutation => {
-      if (mutation.addedNodes) {
-        [].forEach.call(mutation.addedNodes, node => {
-          if ((0, _matches.default)(node, selector)) {
-            pushNewNode(node);
-          } // search for new nodes inside the added one
+  if (!_observer) {
+    _observer = new MutationObserver(mutations => {
+      mutations.forEach(mutation => {
+        if (mutation.addedNodes) {
+          [].forEach.call(mutation.addedNodes, node => {
+            // get all the selectors registered
+            const selectors = Object.keys(_selectors); // loop on each selectors
 
-
-          if (!node.querySelectorAll) return;
-          const nestedNodes = node.querySelectorAll(selector);
-          [].forEach.call(nestedNodes, nestedNode => {
-            pushNewNode(nestedNode);
+            selectors.forEach(sel => {
+              if ((0, _matches.default)(node, sel)) {
+                pushNewNode(node, sel);
+              }
+            });
+            if (!node.querySelectorAll) return;
+            selectors.forEach(sel => {
+              const nestedNodes = node.querySelectorAll(sel);
+              [].forEach.call(nestedNodes, nestedNode => {
+                pushNewNode(nestedNode, sel);
+              });
+            });
           });
-        });
-      }
+        }
+      });
     });
-  });
-  mutationObserver.observe(settings.rootNode, {
-    childList: true,
-    subtree: true
-  }); // first search
+
+    _observer.observe(settings.rootNode, {
+      childList: true,
+      subtree: true
+    });
+  } // first search
+
 
   [].forEach.call(settings.rootNode.querySelectorAll(selector), node => {
-    pushNewNode(node);
+    pushNewNode(node, selector);
   });
 }
 /**

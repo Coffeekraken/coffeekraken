@@ -73,6 +73,12 @@ module.exports = {
 				);
 			`
 		},
-		js : null
+		js : {
+			language : 'js',
+			data : `
+				import __isBase64 from '@coffeekraken/sugar/js/is/base64';
+				console.log(__isBase64('Hello World'));
+			`
+		}
 	}
 }

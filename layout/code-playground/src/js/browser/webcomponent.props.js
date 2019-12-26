@@ -7,9 +7,6 @@ const port = compileServerSettings.port || 4000;
 compileServerSettings = Object.assign({
 	apiUrl : `${document.location.protocol}//${document.location.hostname}:${port}`
 }, compileServerSettings);
-if (window.app.pwd) {
-	compileServerSettings.queryString = `cwd=${window.app.pwd}`;
-}
 compileServer.setup(compileServerSettings);
 
 // default properties
@@ -25,6 +22,9 @@ SWebComponent.setDefaultProps({
 	'ck-codemirror',
 	'ck-interactive-demo'
 ]);
+
+console.log(compileServer);
+
 SWebComponent.setDefaultProps({
 	theme : 'material',
 	compile: compileServer.compile

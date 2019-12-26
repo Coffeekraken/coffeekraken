@@ -1,5 +1,6 @@
 export default {
     'array': require('./array'),
+    'base64': require('./base64'),
     'boolean': require('./boolean'),
     'chrome': require('./chrome'),
     'color': require('./color'),

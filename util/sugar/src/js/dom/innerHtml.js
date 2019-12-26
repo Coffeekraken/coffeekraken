@@ -1,5 +1,6 @@
 import __uniqid from '../string/uniqid';
 import __injectStyle from '../css/injectStyle';
+import __emptyNode from './emptyNode';
 
 /**
  * @name            innerHtml
@@ -12,6 +13,7 @@ import __injectStyle from '../css/injectStyle';
  * - fadeDown
  * - fadeLeft
  * - fadeRight
+ * You can also choose between 3 actions which are: replace, append and prepend
  *
  * @param           {HTMLElement}            node           The node to change to content of
  * @param           {String}                 content        The new content of the node
@@ -21,6 +23,7 @@ import __injectStyle from '../css/injectStyle';
  * @example       js
  * import innerHtml from '@coffeekraken/sugar/js/dom/innerHtml'
  * innerHtml(myCoolNode, 'Hello World', {
+ *    action: 'replace', // replace, append, prepend
  *    animIn: 'fade', // fade, fadeUp, fadeDown, fadeLeft, fadeRight
  *    animOut: 'fadeUp', // fade, fadeUp, fadeDown, fadeLeft, fadeRight
  *    animInDuration: 600, // in ms
@@ -40,10 +43,11 @@ export default function innerHtml(node, content, settings = {}) {
 
     // process the settings
     settings = {
+      action: 'replace',
       animIn: 'fade',
       animOut: 'fade',
-      animInDuration: 600,
-      animOutDuration: 300,
+      animInDuration: 300,
+      animOutDuration: 150,
       animInDistance: 25,
       animOutDistance: 25,
       animInEasing: 'ease-in-out',
@@ -55,6 +59,9 @@ export default function innerHtml(node, content, settings = {}) {
     const _uniqid = __uniqid();
     const _animInClassName = `s-innerHtml-animIn-${_uniqid}`;
     const _animOutClassName = `s-innerHtml-animOut-${_uniqid}`;
+
+    // some html elements references
+    let $styleAnimIn, $styleAnimOut, $div;
 
     // generate the animation styles
     switch(settings.animIn) {
@@ -72,9 +79,9 @@ export default function innerHtml(node, content, settings = {}) {
               animation: animIn-${_uniqid} ${settings.animInDuration}ms ${settings.animInEasing};
           }
         `;
-        __injectStyle(sheetAnimIn);
+        $styleAnimIn = __injectStyle(sheetAnimIn);
       break;
-      case 'fadeUp':
+      case 'fadeDown':
         const sheetAnimInFadeUp = `
           @keyframes animIn-${_uniqid} {
             from {
@@ -90,9 +97,9 @@ export default function innerHtml(node, content, settings = {}) {
               animation: animIn-${_uniqid} ${settings.animInDuration}ms ${settings.animInEasing};
           }
         `;
-        __injectStyle(sheetAnimInFadeUp);
+        $styleAnimIn = __injectStyle(sheetAnimInFadeUp);
       break;
-      case 'fadeDown':
+      case 'fadeUp':
         const sheetAnimInFadeDown = `
           @keyframes animIn-${_uniqid} {
             from {
@@ -108,9 +115,9 @@ export default function innerHtml(node, content, settings = {}) {
               animation: animIn-${_uniqid} ${settings.animInDuration}ms ${settings.animInEasing};
           }
         `;
-        __injectStyle(sheetAnimInFadeDown);
+        $styleAnimIn = __injectStyle(sheetAnimInFadeDown);
       break;
-      case 'fadeLeft':
+      case 'fadeRight':
         const sheetAnimInFadeLeft = `
           @keyframes animIn-${_uniqid} {
             from {
@@ -126,9 +133,9 @@ export default function innerHtml(node, content, settings = {}) {
               animation: animIn-${_uniqid} ${settings.animInDuration}ms ${settings.animInEasing};
           }
         `;
-        __injectStyle(sheetAnimInFadeLeft);
+        $styleAnimIn = __injectStyle(sheetAnimInFadeLeft);
       break;
-      case 'fadeRight':
+      case 'fadeLeft':
         const sheetAnimInFadeRight = `
           @keyframes animIn-${_uniqid} {
             from {
@@ -144,7 +151,7 @@ export default function innerHtml(node, content, settings = {}) {
               animation: animIn-${_uniqid} ${settings.animInDuration}ms ${settings.animInEasing};
           }
         `;
-        __injectStyle(sheetAnimInFadeRight);
+        $styleAnimIn = __injectStyle(sheetAnimInFadeRight);
       break;
     }
     switch(settings.animOut) {
@@ -162,7 +169,7 @@ export default function innerHtml(node, content, settings = {}) {
             animation: animOut-${_uniqid} ${settings.animOutDuration}ms ${settings.animOutEasing};
           }
         `;
-        __injectStyle(sheetAnimOutFade);
+        $styleAnimOut = __injectStyle(sheetAnimOutFade);
       break;
       case 'fadeUp':
         const sheetAnimOutFadeUp = `
@@ -180,7 +187,7 @@ export default function innerHtml(node, content, settings = {}) {
               animation: animOut-${_uniqid} ${settings.animOutDuration}ms ${settings.animOutEasing};
           }
         `;
-        __injectStyle(sheetAnimOutFadeUp);
+        $styleAnimOut = __injectStyle(sheetAnimOutFadeUp);
       break;
       case 'fadeDown':
         const sheetAnimOutFadeDown = `
@@ -198,7 +205,7 @@ export default function innerHtml(node, content, settings = {}) {
               animation: animOut-${_uniqid} ${settings.animOutDuration}ms ${settings.animOutEasing};
           }
         `;
-        __injectStyle(sheetAnimOutFadeDown);
+        $styleAnimOut = __injectStyle(sheetAnimOutFadeDown);
       break;
       case 'fadeLeft':
         const sheetAnimOutFadeLeft = `
@@ -216,7 +223,7 @@ export default function innerHtml(node, content, settings = {}) {
               animation: animOut-${_uniqid} ${settings.animOutDuration}ms ${settings.animOutEasing};
           }
         `;
-        __injectStyle(sheetAnimOutFadeLeft);
+        $styleAnimOut = __injectStyle(sheetAnimOutFadeLeft);
       break;
       case 'fadeRight':
         const sheetAnimOutFadeRight = `
@@ -234,31 +241,104 @@ export default function innerHtml(node, content, settings = {}) {
               animation: animOut-${_uniqid} ${settings.animOutDuration}ms ${settings.animOutEasing};
           }
         `;
-        __injectStyle(sheetAnimOutFadeRight);
+        $styleAnimOut = __injectStyle(sheetAnimOutFadeRight);
       break;
     }
 
-    // anim out the content by adding the corresponding class
-    node.classList.add(_animOutClassName);
+    // switch on the action to execute
+    switch(settings.action) {
+      case 'replace':
+        // anim out the content by adding the corresponding class
+        node.classList.add(_animOutClassName);
 
-    // waiting the animation out to be finished
-    setTimeout(() => {
+        // waiting the animation out to be finished
+        setTimeout(() => {
 
-      // removing the animation out class
-      node.classList.remove(_animOutClassName);
+          // removing the animation out class
+          node.classList.remove(_animOutClassName);
 
-      // change the content
-      node.innerHTML = content;
+          // change the content
+          if (typeof content === 'string') {
+            node.innerHTML = content;
+          } else {
+            __emptyNode(node).append(content);
+          }
 
-      // anim in the content by adding the corresponding class
-      node.classList.add(_animInClassName);
+          // anim in the content by adding the corresponding class
+          node.classList.add(_animInClassName);
 
-      // wait until the animation is finished to resolve the promise
-      setTimeout(() => {
-        resolve();
-      }, settings.animInDuration);
+          // wait until the animation is finished to resolve the promise
+          setTimeout(() => {
+            resolve();
 
-    }, settings.animOutDuration);
+            // removing the classes
+            node.classList.remove(_animInClassName);
+
+            // removing the styles elements
+            $styleAnimIn.parentNode.removeChild($styleAnimIn);
+            $styleAnimOut.parentNode.removeChild($styleAnimOut);
+
+          }, settings.animInDuration);
+
+        }, settings.animOutDuration);
+      break;
+      case 'append':
+
+        // append the new content inside a simple div to animate it
+        $div = document.createElement('div');
+        $div.classList.add(_animInClassName);
+        if (typeof content === 'string') {
+          $div.innerHTML = content;
+        } else {
+          $div.append(content);
+        }
+
+        // append the content
+        node.appendChild($div);
+
+        // wait until the animation is finished to resolve the promise
+        setTimeout(() => {
+          resolve();
+
+          // removing the classes
+          $div.classList.remove(_animInClassName);
+
+          // removing the styles elements
+          $styleAnimIn.parentNode.removeChild($styleAnimIn);
+          $styleAnimOut.parentNode.removeChild($styleAnimOut);
+
+        }, settings.animInDuration);
+
+      break;
+      case 'prepend':
+
+        // append the new content inside a simple div to animate it
+        $div = document.createElement('div');
+        $div.classList.add(_animInClassName);
+        if (typeof content === 'string') {
+          $div.innerHTML = content;
+        } else {
+          $div.append(content);
+        }
+
+        // append the content
+        node.insertBefore($div, node.firstChild);
+
+        // wait until the animation is finished to resolve the promise
+        setTimeout(() => {
+          resolve();
+
+          // removing the classes
+          $div.classList.remove(_animInClassName);
+
+          // removing the styles elements
+          $styleAnimIn.parentNode.removeChild($styleAnimIn);
+          $styleAnimOut.parentNode.removeChild($styleAnimOut);
+
+        }, settings.animInDuration);
+
+      break;
+    }
 
   });
 }

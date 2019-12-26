@@ -6,6 +6,7 @@ if (process.env.PWD.match(/node_modules/)) {
   // move sources
   fse.moveSync("src/scss", "scss");
   fse.moveSync("dist/js", "js");
+  fse.moveSync("src/node", "node");
 
   // clean repo
   fse.removeSync("_toMigrate");

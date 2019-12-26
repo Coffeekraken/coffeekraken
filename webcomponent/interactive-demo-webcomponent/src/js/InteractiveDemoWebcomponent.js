@@ -1,5 +1,5 @@
 import SWebComponent from '@coffeekraken/sugar/js/core/SWebComponent'
-import __throttle from '@coffeekraken/sugar/js/util/function/throttle'
+import __throttle from '@coffeekraken/sugar/js/function/throttle'
 import __prependChild from '@coffeekraken/sugar/js/dom/prependChild'
 import _find from 'lodash/find';
 

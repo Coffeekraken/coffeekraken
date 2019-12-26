@@ -7,6 +7,8 @@ exports.default = void 0;
 
 var _appendScriptTag = _interopRequireDefault(require("../dom/appendScriptTag"));
 
+var _innerHtml = _interopRequireDefault(require("../dom/innerHtml"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -45,7 +47,7 @@ class SSocketDom {
 
     _defineProperty(this, "_settings", {
       /**
-       * @name      settings.rootNode
+       * @name      settings.node
        * @namespace     sugar.js.class
        * @type        HTMLElement
        *
@@ -54,7 +56,7 @@ class SSocketDom {
        * @setting
        * @default       document.body
        */
-      rootNode: document.body,
+      node: document.body,
 
       /**
        * @name        settings.action
@@ -104,9 +106,11 @@ class SSocketDom {
     // init the socket.io connection
     return this._initSocketIo().then(() => {
       // register the default events
-      this.registerEvent('html', this._eventHtml); // register the 'body' event
+      this.registerEvent('innerHtml', this._eventInnerHtml); // register the 'body' event
 
-      this.registerEvent('body', this._eventBody);
+      this.registerEvent('body', this._eventBody); // register the 'content' event
+
+      this.registerEvent('content', this._eventContent);
     });
   }
   /**
@@ -133,17 +137,26 @@ class SSocketDom {
    */
 
 
-  _eventHtml(data, settings) {
-    // switch on the action to execute
+  _eventInnerHtml(data, settings) {
+    // try to get the node inside the document
+    let $node = settings.node;
+    if (typeof $node === 'string') $node = document.querySelector($node); // switch on the action to execute
+
     switch (settings.action) {
       case 'append':
+        (0, _innerHtml.default)($node, data, { ...(settings.innerHtml || {}),
+          action: 'append'
+        });
         break;
 
       case 'replace':
-        settings.rootNode.innerHTML = data;
+        (0, _innerHtml.default)($node, data, settings.innerHtml);
         break;
 
       case 'prepend':
+        (0, _innerHtml.default)($node, data, { ...(settings.innerHtml || {}),
+          action: 'prepend'
+        });
         break;
     }
   }
@@ -151,14 +164,29 @@ class SSocketDom {
    * Handle the 'body' event
    *
    * @param         {String}          data        The data passed with the event
-   * @param         {Object}          settings    Tge settubgs oassed with the event
+   * @param         {Object}          settings    Tge settubgs passed with the event
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
 
 
   _eventBody(data, settings) {
-    document.body.innerHTML = data;
+    (0, _innerHtml.default)(document.body, data, settings.innerHtml || {});
+  }
+  /**
+   * Handle the 'content' event
+   *
+   * @param         {String}          data        The data passed with the event
+   * @param         {Object}          settings    Tge settubgs passed with the event
+   *
+   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   */
+
+
+  _eventContent(data, settings) {
+    let $content = document.getElementById('content') || document.querySelector('[content]');
+    if (!$content) return;
+    (0, _innerHtml.default)($content, data, settings.innerHtml || {});
   }
   /**
    * @name          emit
@@ -207,11 +235,15 @@ class SSocketDom {
     // save the event scoped settings in the global settings:
     this._settings.events[event] = settings; // listen for the event from the server:
 
-    this._socket.on(`SSocketDom.${event}`, data => {
-      // call the handler function with the data from the server and the settings
-      handlerFn(data.data, { ...this._settings,
+    this._socket.on(`SSocketDom.${event}`, (data = {}) => {
+      // grab the data from the event
+      const d = data.data; // delete the data from the event
+
+      delete data.data; // call the handler function with the data from the server and the settings
+
+      handlerFn(d, { ...this._settings,
         ...this._settings.events[event],
-        ...(data.settings || {})
+        ...(data || {})
       });
     }); // maintain chainability
 

@@ -12,6 +12,9 @@ const __HtmlEntities = require('html-entities').AllHtmlEntities;
 const __stylus = require('stylus');
 const __Cryptr = require('cryptr');
 
+const __isBase64 = require('@coffeekraken/sugar/js/is/base64');
+const __decodeBase64 = require('@coffeekraken/sugar/node/string/decodeBase64');
+
 module.exports = function(config) {
 
 	// creating the app
@@ -40,17 +43,16 @@ module.exports = function(config) {
 
 	// pwd
 	app.use((req, res, next) => {
-		// environment
-		let pwd;
-		if (req.query.cwd) {
-			if (cryptr) {
-				pwd = cryptr.decrypt(req.query.cwd);
-			} else {
-				pwd = req.query.cwd;
-			}
-		} else {
+
+		// pwd
+		let pwd = null;
+		if (req.query.pwd || req.body.options.pwd) {
+			pwd = req.query.pwd || req.body.options.pwd;
+		} else {
 			pwd = process.env.PWD;
 		}
+		if (__isBase64(pwd)) pwd = __decodeBase64(pwd);
+
 		// set pwd in config
 		req.config.pwd = pwd;
 
@@ -115,6 +117,7 @@ module.exports = function(config) {
 		}, req.body.options || {});
 		// include paths
 		options.includePaths = [].concat(options.includePaths || [], req.config.pwd, req.config.pwd + '/node_modules');
+
 		// compile using sass
     __sass.render(options, (error, result) => {
       if ( ! error) {

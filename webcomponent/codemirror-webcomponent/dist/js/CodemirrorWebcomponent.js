@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _SWebComponent = _interopRequireDefault(require("@coffeekraken/sugar/js/core/SWebComponent"));
 
-var _throttle = _interopRequireDefault(require("@coffeekraken/sugar/js/util/function/throttle"));
+var _throttle = _interopRequireDefault(require("@coffeekraken/sugar/js/function/throttle"));
 
 var _codemirror = _interopRequireDefault(require("codemirror"));
 
@@ -685,7 +685,8 @@ class InteractiveDemoWebcomponent extends _SWebComponent.default {
       let compileOptions = {};
 
       if (this.props.compileOptions) {
-        compileOptions = compileOptions[this.props.language] || compileOptions;
+        compileOptions = { ...this.props.compileOptions
+        };
       } // check if need to compile
 
 
@@ -699,9 +700,9 @@ class InteractiveDemoWebcomponent extends _SWebComponent.default {
         this.addComponentClass(this, null, 'compiling'); // compile
 
         const fn = this.props.compile.bind(this);
-        resolve(fn(this.value, this.language, compileOptions));
+        resolve(fn(this.value, this.props.language, compileOptions));
       } else {
-        resolve(this.value, this.language, compileOptions);
+        resolve(this.value, this.props.language, compileOptions);
       }
     });
     promise.then(code => {

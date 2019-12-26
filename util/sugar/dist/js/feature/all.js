@@ -1,5 +1,7 @@
 "use strict";
 
+require("./dispatchEventAttribute");
+
 require("./imagesLazySrcAttribute");
 
 require("./imagesLoadedAttribute");

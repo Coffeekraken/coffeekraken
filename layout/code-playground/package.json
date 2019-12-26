@@ -13,7 +13,7 @@
     "ck-code-playground": "./bin/coffeekraken-code-playground"
   },
   "scripts": {
-    "demo": "./bin/coffeekraken-code-playground"
+    "demo": "./bin/coffeekraken-code-playground --compile-server-port 10"
   },
   "keywords": [
     "code",
@@ -44,18 +44,20 @@
   "dependencies": {
     "@babel/core": "^7.7.7",
     "@coffeekraken/button-style": "^1.0.1",
-    "@coffeekraken/codemirror-webcomponent": "^1.0.1",
+    "@coffeekraken/codemirror-webcomponent": "^1.0.5",
     "@coffeekraken/compile-server": "0.0.3",
     "@coffeekraken/dialog-webcomponent": "^1.0.0",
     "@coffeekraken/drawer-webcomponent": "^1.0.0",
     "@coffeekraken/dropdown-style": "^1.0.1",
+    "@coffeekraken/form-style": "0.0.2",
     "@coffeekraken/gridle": "0.0.6",
     "@coffeekraken/icon-webcomponent": "^1.0.1",
-    "@coffeekraken/interactive-demo-webcomponent": "0.0.2",
+    "@coffeekraken/interactive-demo-webcomponent": "0.0.3",
     "@coffeekraken/notification-webcomponent": "^1.0.0",
     "@coffeekraken/scrollbar-webcomponent": "^1.0.0",
     "@coffeekraken/share-webcomponent": "^1.0.1",
-    "@coffeekraken/sugar": "^1.0.6",
+    "@coffeekraken/sugar": "^1.0.8",
+    "@coffeekraken/text-intro": "^1.0.0",
     "@coffeekraken/tooltip-style": "^1.0.0",
     "@coffeekraken/typography-style": "0.0.1",
     "codemirror": "^5.42.2",
@@ -68,7 +70,9 @@
     "jquery": "^3.4.1",
     "lodash": "^4.17.11",
     "md5": "^2.2.1",
+    "mousetrap": "^1.6.3",
     "request": "^2.88.0",
-    "socket.io": "^2.3.0"
+    "socket.io": "^2.3.0",
+    "uniqid": "^5.2.0"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@coffeekraken/interactive-demo-webcomponent",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Provide a simple, powerful and nice way to display interactive html demo",
   "main": "js/index.js",
   "homepage": "http://coffeekraken.io",

@@ -5,6 +5,7 @@
  * import '@coffeekraken/sugar/js/features/all'
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+import "./dispatchEventAttribute";
 import "./imagesLazySrcAttribute";
 import "./imagesLoadedAttribute";
 import "./inputAdditionalAttributes";

@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _default = {
   'all': require('./all'),
+  'dispatchEventAttribute': require('./dispatchEventAttribute'),
   'imagesLazySrcAttribute': require('./imagesLazySrcAttribute'),
   'imagesLoadedAttribute': require('./imagesLoadedAttribute'),
   'inputAdditionalAttributes': require('./inputAdditionalAttributes'),

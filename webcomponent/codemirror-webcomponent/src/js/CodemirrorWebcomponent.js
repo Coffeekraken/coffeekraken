@@ -1,5 +1,5 @@
 import SWebComponent from '@coffeekraken/sugar/js/core/SWebComponent'
-import __throttle from '@coffeekraken/sugar/js/util/function/throttle'
+import __throttle from '@coffeekraken/sugar/js/function/throttle'
 import Codemirror from 'codemirror'
 import Clipboard from 'clipboard';
 import __mousetrap from 'mousetrap';
@@ -628,7 +628,9 @@ export default class InteractiveDemoWebcomponent extends SWebComponent {
 			// compile options
 			let compileOptions = {};
 			if (this.props.compileOptions) {
-				compileOptions = compileOptions[this.props.language] || compileOptions;
+				compileOptions = {
+          ...this.props.compileOptions
+        };
 			}
 			// check if need to compile
 			if (this.props.compile) {
@@ -641,9 +643,9 @@ export default class InteractiveDemoWebcomponent extends SWebComponent {
 				this.addComponentClass(this, null, 'compiling');
 				// compile
 				const fn = this.props.compile.bind(this);
-				resolve(fn(this.value, this.language, compileOptions));
+				resolve(fn(this.value, this.props.language, compileOptions));
 			} else {
-				resolve(this.value, this.language, compileOptions);
+				resolve(this.value, this.props.language, compileOptions);
 			}
 		});
 		promise.then((code) => {

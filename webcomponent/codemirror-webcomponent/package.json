@@ -1,6 +1,6 @@
 {
   "name": "@coffeekraken/codemirror-webcomponent",
-  "version": "1.0.1",
+  "version": "1.0.5",
   "description": "Webcomponent wrapper for the codemirror editor library.",
   "main": "js/index.js",
   "homepage": "http://coffeekraken.io",

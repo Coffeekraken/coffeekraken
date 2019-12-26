@@ -32,7 +32,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function lettersInReveal(offset = -window.innerHeight * .2, delay = 300) {
   (0, _querySelectorLive.default)('[intro="letters-in-reveal"]', elm => {
     (0, _splitLetters.default)(elm);
-    (0, _whenInViewport.default)(elm, offset).then(elm => {
+    (0, _whenInViewport.default)(elm, elm.getAttribute('intro-offset') || offset).then(elm => {
       setTimeout(() => {
         elm.classList.add('active');
       }, delay);

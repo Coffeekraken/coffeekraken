@@ -20,6 +20,7 @@ var _default = {
   'detectInOutDirection': require('./detectInOutDirection'),
   'dispatchEvent': require('./dispatchEvent'),
   'domReady': require('./domReady'),
+  'emptyNode': require('./emptyNode'),
   'exitFullscreen': require('./exitFullscreen'),
   'forceRedraw': require('./forceRedraw'),
   'getAnimationProperties': require('./getAnimationProperties'),

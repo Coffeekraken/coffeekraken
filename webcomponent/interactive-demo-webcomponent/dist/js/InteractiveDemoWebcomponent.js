@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _SWebComponent = _interopRequireDefault(require("@coffeekraken/sugar/js/core/SWebComponent"));
 
-var _throttle = _interopRequireDefault(require("@coffeekraken/sugar/js/util/function/throttle"));
+var _throttle = _interopRequireDefault(require("@coffeekraken/sugar/js/function/throttle"));
 
 var _prependChild = _interopRequireDefault(require("@coffeekraken/sugar/js/dom/prependChild"));
 

@@ -2,7 +2,6 @@
 
 .loading {
   @include sugar.fit();
-  background-color: sugar.color(secondary);
 }
 
 .loading__container {

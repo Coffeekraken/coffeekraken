@@ -11,56 +11,15 @@ const app = require('commander');
 	app
 		.version(require('../package.json').version)
 		.option('-p --port [port]', 'Port on which to start the server', /^\S+$/i)
-		.option('-r --repositories [repositories]', 'Specify the repositories that are allowed to load some code-playground.config.js files from. Comma separated Github urls', /^\S+$/i)
 		.option('-d --cwd [cwd]', 'Change the working directory', /^\S+$/i)
-		.option('-c --config [config]', 'Configuration file to load', /^\S+$/i)
+		.option('--compile-server-port [port]', 'Specify a port to use for the compile server', /^\S+$/i)
 		.parse(process.argv);
 
-	// extend config
-	const defaultConfig = require(__dirname + '/../code-playground.config');
-	// delete defaultConfig.demos // delete the demos properties cause it's a per app prop and does not have to be merged
-	let config = {};
-	if (app.config) {
-		app.config = __path.resolve(app.config);
-		if ( ! __fs.existsSync(app.config)) {
-			throw 'Code Playground : the configuration file "' + app.config + '" does not exist...';
-		}
-		// load the config file
-		config = require(app.config);
-	} else {
-		if (__fs.existsSync(process.env.PWD + '/code-playground.config.js')) {
-			config = require(process.env.PWD + '/code-playground.config.js');
-		}
-	}
-	const finalConfig = __merge({}, defaultConfig, config);
 
-	for(let key in app._events) {
-		key = key.replace('option:','')
-		if (app[key] !== undefined) {
-			if (typeof(app[key]) === 'function') {
-				finalConfig[key] = app[key]();
-			} else {
-				finalConfig[key] = app[key];
-			}
-		}
-	}
-
-	if ( ! finalConfig.port) {
-		console.error('Code Playground : you have to specify at least a port to run the server on...');
-		return;
-	}
-
-	let inlineCompileServerArgs = [];
-	// share secret
-	if (finalConfig.secret && ! finalConfig.compileServer.secret) {
-		finalConfig.compileServer.secret = finalConfig.secret;
-	}
-	for(let key in finalConfig.compileServer) {
-		inlineCompileServerArgs.push(`--${key}`);
-		inlineCompileServerArgs.push(`${finalConfig.compileServer[key]}`);
-	}
-
-	const ls = spawn(`coffeekraken-compile-server`, inlineCompileServerArgs);
+	// const ls = spawn(`coffeekraken-compile-server`, {
+	const ls = spawn('../../terminal/compile-server/bin/coffeekraken-compile-server', {
+			port: app.compileServerPort || 4000
+	});
 	ls.stdout.on('data', (data) => {
 	  console.log(data.toString());
 	});
@@ -69,12 +28,15 @@ const app = require('commander');
 	});
 
 	// launch the playground
-	require(__dirname + '/../src/js/server/index.js')(finalConfig);
+	require(__dirname + '/../src/js/server/index.js')({
+		port: app.port || 3000,
+		cwd: app.cwd || process.cwd()
+	});
 
 	process.on( 'SIGINT', function() {
 		console.log('Code Playground : stopped');
 		// some other closing procedures go here
-		process.exit( );
+		process.exit();
 	})
 
 })();

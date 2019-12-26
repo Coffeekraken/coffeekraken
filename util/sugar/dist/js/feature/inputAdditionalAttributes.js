@@ -18,7 +18,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * - `dirty`: When the input has been touched
  *
  * @example 	js
- * import '@coffeekraken/sugar/js/features/inputAdditionalAttributes'
+ * import '@coffeekraken/sugar/js/feature/inputAdditionalAttributes'
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */

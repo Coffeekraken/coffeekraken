@@ -1,3 +1,5 @@
+@use '@coffeekraken/sugar/index' as sugar;
+
 /**
  * Default layout
  */
@@ -6,14 +8,16 @@ html, body {
 
 }
 body {
+	color: white;
 	display:flex;
 	overflow:hidden;
 	flex-flow: column nowrap;
+	background-color: sugar.color(secondary);
 }
-div[ck-drawer-content] {
+div#content {
 	display: flex;
 	flex-flow: column nowrap;
-	height: 100vh;
+	height: calc(100vh - 90px);
 }
 	.footer,
 	.header {
@@ -22,4 +26,5 @@ div[ck-drawer-content] {
 	ck-interactive-demo {
 		display:flex;
 		flex:1 0 auto;
+		height: calc(100vh - 90px);
 	}

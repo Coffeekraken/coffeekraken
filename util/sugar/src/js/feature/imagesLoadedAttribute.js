@@ -7,7 +7,7 @@
  * for styling purposes and for others thinks as well.
  *
  * @example 	js
- * import '@coffeekraken/sugar/js/features/imagesLoadedAttribute'
+ * import '@coffeekraken/sugar/js/feature/imagesLoadedAttribute'
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */

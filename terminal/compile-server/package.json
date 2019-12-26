@@ -39,7 +39,7 @@
     "fs-extra": "^8.1.0"
   },
   "dependencies": {
-    "@coffeekraken/sugar": "^1.0.5",
+    "@coffeekraken/sugar": "^1.0.8",
     "ajax-request": "^1.2.1",
     "babel-loader": "^8.0.6",
     "body-parser": "^1.18.3",

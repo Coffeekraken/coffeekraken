@@ -2,7 +2,7 @@ import __goldenLayout from '../golden-layout';
 import NotificationWebcomponent from '@coffeekraken/notification-webcomponent/js/class'
 import SSocketDom from '@coffeekraken/sugar/js/class/SSocketDom'
 import SUrl from '@coffeekraken/sugar/js/class/SUrl'
-import aes from '@coffeekraken/sugar/js/crypt/aes'
+import __base64 from '@coffeekraken/sugar/js/crypt/base64'
 import __innerHtml from '@coffeekraken/sugar/js/dom/innerHtml'
 import __strToHtml from '@coffeekraken/sugar/js/string/strToHtml'
 import __style from '@coffeekraken/sugar/js/dom/style'
@@ -31,7 +31,7 @@ class CodePlayground {
         this._socketDom.emit('encryptUrl');
         return;
       } else if (_url.pathname) {
-        const appUrl = aes.decrypt(_url.pathname.slice(1));
+        const appUrl = __base64.decrypt(_url.pathname.slice(1));
         if (appUrl.indexOf('github.com') > -1) {
           this._socketDom.emit('githubApp', appUrl);
         } else {
@@ -45,7 +45,7 @@ class CodePlayground {
     document.addEventListener('encryptUrl', (e) => {
       const $input = document.querySelector(e.detail.target);
       const url = $input.value;
-      const crypted = aes.encrypt(url);
+      const crypted = __base64.encrypt(url);
       document.querySelector('#encrypt-url-result').innerHTML = crypted;
     });
 

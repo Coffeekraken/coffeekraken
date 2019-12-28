@@ -1,5 +1,6 @@
 export default {
     'aes': require('./aes'),
+    'base64': require('./base64'),
     'evpkdf': require('./evpkdf'),
     'md5': require('./md5'),
     'pbkdf2': require('./pbkdf2'),

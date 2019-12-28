@@ -1,7 +1,7 @@
 {
   "name": "@coffeekraken/sugar",
   "description": "A little sugar in your codebase",
-  "version": "1.0.8",
+  "version": "1.0.12",
   "homepage": "http://coffeekraken.io",
   "author": "Coffeekraken <hello@coffeekraken.io>",
   "contributors": [
@@ -31,6 +31,7 @@
     "fs-extra": "^6.0.1",
     "hotkeys-js": "^3.7.3",
     "inline-style-prefixer": "^5.1.0",
+    "is-base64": "^1.0.0",
     "jss": "^10.0.0",
     "jss-plugin-global": "^10.0.0",
     "jss-plugin-vendor-prefixer": "^10.0.0",
@@ -42,7 +43,8 @@
     "simple-ajax": "^2.6.0",
     "sprintf-js": "^1.1.2",
     "uniqid": "^5.2.0",
-    "url-parse": "^1.4.7"
+    "url-parse": "^1.4.7",
+    "winston": "^3.2.1"
   },
   "devDependencies": {}
 }

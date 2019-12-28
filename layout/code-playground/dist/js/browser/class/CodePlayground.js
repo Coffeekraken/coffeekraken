@@ -13,7 +13,7 @@ var _SSocketDom = _interopRequireDefault(require("@coffeekraken/sugar/js/class/S
 
 var _SUrl = _interopRequireDefault(require("@coffeekraken/sugar/js/class/SUrl"));
 
-var _aes = _interopRequireDefault(require("@coffeekraken/sugar/js/crypt/aes"));
+var _base = _interopRequireDefault(require("@coffeekraken/sugar/js/crypt/base64"));
 
 var _innerHtml = _interopRequireDefault(require("@coffeekraken/sugar/js/dom/innerHtml"));
 
@@ -46,7 +46,7 @@ class CodePlayground {
 
         return;
       } else if (_url.pathname) {
-        const appUrl = _aes.default.decrypt(_url.pathname.slice(1));
+        const appUrl = _base.default.decrypt(_url.pathname.slice(1));
 
         if (appUrl.indexOf('github.com') > -1) {
           this._socketDom.emit('githubApp', appUrl);
@@ -63,7 +63,7 @@ class CodePlayground {
       const $input = document.querySelector(e.detail.target);
       const url = $input.value;
 
-      const crypted = _aes.default.encrypt(url);
+      const crypted = _base.default.encrypt(url);
 
       document.querySelector('#encrypt-url-result').innerHTML = crypted;
     });

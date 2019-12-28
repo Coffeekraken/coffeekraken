@@ -9,11 +9,18 @@ const __md5 = require('md5');
 const __Cryptr = require('cryptr');
 const __cookieSession = require('cookie-session');
 const __request = require('request');
+const __packageJson = require('../../../package.json');
 const __aes = require('@coffeekraken/sugar/js/crypt/aes');
+const __base64 = require('@coffeekraken/sugar/js/crypt/base64');
+const __isBase64 = require('@coffeekraken/sugar/node/is/base64');
 const __queryString = require('querystring');
 const { spawn } = require('child_process');
 const __sleep = require('@coffeekraken/sugar/js/function/sleep');
+const __uniqid = require('@coffeekraken/sugar/js/string/uniqid');
 
+
+const __log = require('../../../../../util/sugar/dist/node/log/log');
+const __logHeader = require('../../../../../util/sugar/dist/node/log/header');
 const __gravatarUrl = require('../../../../../util/sugar/dist/js/util/gravatarUrl');
 
 
@@ -23,6 +30,11 @@ const __downloadFolder = require('@coffeekraken/sugar/node/github/downloadFolder
 const __decodeBase64 = require('@coffeekraken/sugar/node/string/decodeBase64');
 
 module.exports = function(config) {
+
+  __logHeader('Coffeekraken Code Playground', 'Provide a nice code playground that let you play with some html, javascript (coffee, typescript, etc...) and css (sass, scss, stylus, etc...)', {
+    version: __packageJson.version,
+    name: __packageJson.name
+  });
 
 	// creating the app
 	const app = __express();
@@ -44,13 +56,12 @@ module.exports = function(config) {
 	// static files
 	app.use('/dist', __express.static(__dirname + '/../../../dist'));
 
-	app.use(__httpContext.middleware);
-
 	// cookie session
 	app.set('trust proxy', 1)
 	app.use(__cookieSession({
 		name : 'code-playground-'+__md5(config.cwd),
-		secret : 'coffeekraken-code-playground'
+		secret : 'coffeekraken-code-playground',
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
 	}));
 
 	// expose the request to the global scope
@@ -62,26 +73,17 @@ module.exports = function(config) {
 
 	// protect
 	app.use((req, res, next) => {
-		// console.log(req.url);
-		//
-		// try {
-		// 	const stats = __fs.lstatSync(req.url);
-		// 	console.log(stats);
-		// 	if (stats.isFile()) {
-		// 		console.log('IS FILE', req.url);
-		// 		res.sendFile(req.url);
-		// 		next();
-		// 		return;
-		// 	}
-		// } catch(e) {
-		// 	console.log(e);
-		// 	next();
-		// 	return;
-		// }
-
-		// if (/^\/dist\//.test(req.url)) return;
-		// if (req.url.match('favicon.ico')) return;
-		// if (req.url.match('.js.map')) return;
+    if (req.session.appId && req.url) {
+      try {
+        const filePath = `${process.cwd()}/appsRoot/${req.session.appId}${req.url}`;
+        const stats = __fs.lstatSync(filePath);
+        if (stats.isFile()) {
+          res.sendFile(filePath);
+          return;
+        }
+      } catch(e) {
+      }
+    }
 		next();
 	});
 
@@ -296,6 +298,13 @@ module.exports = function(config) {
 
 	// layout rendering
   app.get(/.*/, function(req, res) {
+
+    const arrUrl = req.url.split('/');
+    const appId = arrUrl[1];
+    if (__isBase64(appId) && Buffer.from(appId, 'base64').toString('ascii').match(/https?:\/\/(github\.com)\/.+/gs)) {
+      req.session.appId = appId;
+    }
+
     // render the page
 		res.render('loading', {
 			compileServer: JSON.stringify({

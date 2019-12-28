@@ -26,6 +26,10 @@ const __request = require('request');
 
 const __aes = require('@coffeekraken/sugar/js/crypt/aes');
 
+const __base64 = require('@coffeekraken/sugar/js/crypt/base64');
+
+const __isBase64 = require('@coffeekraken/sugar/node/is/base64');
+
 const __queryString = require('querystring');
 
 const {
@@ -33,6 +37,8 @@ const {
 } = require('child_process');
 
 const __sleep = require('@coffeekraken/sugar/js/function/sleep');
+
+const __uniqid = require('@coffeekraken/sugar/js/string/uniqid');
 
 const __gravatarUrl = require('../../../../../util/sugar/dist/js/util/gravatarUrl');
 
@@ -62,13 +68,14 @@ module.exports = function (config) {
   app.set('views', __dirname + '/../../../src/views');
   app.set('view engine', 'handlebars'); // static files
 
-  app.use('/dist', __express.static(__dirname + '/../../../dist'));
-  app.use(__httpContext.middleware); // cookie session
+  app.use('/dist', __express.static(__dirname + '/../../../dist')); // cookie session
 
   app.set('trust proxy', 1);
   app.use(__cookieSession({
     name: 'code-playground-' + __md5(config.cwd),
-    secret: 'coffeekraken-code-playground'
+    secret: 'coffeekraken-code-playground',
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+
   })); // expose the request to the global scope
 
   app.use((req, res, next) => {
@@ -78,7 +85,23 @@ module.exports = function (config) {
   }); // protect
 
   app.use((req, res, next) => {
-    // console.log(req.url);
+    if (req.session.appId && req.url) {
+      try {
+        const filePath = `${process.cwd()}/appsRoot/${req.session.appId}${req.url}`;
+
+        const stats = __fs.lstatSync(filePath);
+
+        if (stats.isFile()) {
+          console.log('is file', filePath);
+          res.sendFile(filePath);
+          next();
+          return;
+        }
+      } catch (e) {
+        next();
+        return;
+      }
+    } // console.log(req.url);
     //
     // try {
     // 	const stats = __fs.lstatSync(req.url);
@@ -97,6 +120,8 @@ module.exports = function (config) {
     // if (/^\/dist\//.test(req.url)) return;
     // if (req.url.match('favicon.ico')) return;
     // if (req.url.match('.js.map')) return;
+
+
     next();
   });
 
@@ -277,7 +302,15 @@ module.exports = function (config) {
   app.use(require('./middleware/layout')); // layout rendering
 
   app.get(/.*/, function (req, res) {
-    // render the page
+    const arrUrl = req.url.split('/');
+    const appId = arrUrl[1];
+
+    if (__isBase64(appId)) {
+      console.log('base64 url', appId);
+      req.session.appId = appId;
+    } // render the page
+
+
     res.render('loading', {
       compileServer: JSON.stringify({
         port: config.compileServerPort || 4000

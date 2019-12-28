@@ -25,8 +25,16 @@ exports.default = isBase64;
  */
 function isBase64(value) {
   if (typeof value !== 'string') return false;
-  const reg = new RegExp('^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$');
-  return reg.test(value);
+
+  if (value === '' || value.trim() === '') {
+    return false;
+  }
+
+  try {
+    return btoa(atob(value)) == value;
+  } catch (err) {
+    return false;
+  }
 }
 
 module.exports = exports.default;

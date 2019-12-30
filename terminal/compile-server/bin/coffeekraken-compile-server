@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+
+const __log = require('../../../util/sugar/dist/node/log/log');
+
 process.title = 'coffeekraken-compile-server';
 const __compileServer = require(__dirname + '/../server/server');
 const __fs = require('fs');
@@ -7,6 +10,8 @@ const __merge = require('lodash/merge');
 const app = require('commander');
 
 (function() {
+
+  __log('Compile Server : Hello World', 'info');
 
 	app
 		.version(require('../package.json').version)

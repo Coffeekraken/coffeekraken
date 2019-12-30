@@ -21,8 +21,14 @@ const __uniqid = require('@coffeekraken/sugar/js/string/uniqid');
 
 const __log = require('../../../../../util/sugar/dist/node/log/log');
 const __logHeader = require('../../../../../util/sugar/dist/node/log/header');
+const __setupMailTransport = require('../../../../../util/sugar/dist/node/log/setupMailTransport');
+
+const __env = require('../../../../../util/sugar/dist/node/app/env');
+
+
 const __gravatarUrl = require('../../../../../util/sugar/dist/js/util/gravatarUrl');
 
+const __setAppMeta = require('../../../../../util/sugar/dist/node/app/setMeta');
 
 const __setGithubAuthToken = require('@coffeekraken/sugar/node/github/setAuthToken');
 const __getGithubAuthToken = require('@coffeekraken/sugar/node/github/getAuthToken');
@@ -31,10 +37,22 @@ const __decodeBase64 = require('@coffeekraken/sugar/node/string/decodeBase64');
 
 module.exports = function(config) {
 
+  // set app metas
+  __setAppMeta(__packageJson);
+
+  // load the env variables
+  __env();
+
+  // application header
   __logHeader('Coffeekraken Code Playground', 'Provide a nice code playground that let you play with some html, javascript (coffee, typescript, etc...) and css (sass, scss, stylus, etc...)', {
     version: __packageJson.version,
     name: __packageJson.name
   });
+
+  // setup mail transport
+  __setupMailTransport('olivier.bossel@gmail.com', 'info error');
+
+  __log('COCO', 'error');
 
 	// creating the app
 	const app = __express();
@@ -313,12 +331,12 @@ module.exports = function(config) {
 		});
   });
 
-	console.log(`Code Playground : ...starting on port ${config.port}...`);
+  __log(`Code Playground : starting on port ${config.port}...`, 'info');
 
 	// start demo server
 	server.listen(config.port, function () {
-		console.log('Code Playground : ✓ running on port ' + config.port + '!');
-		console.log(`Code Playground : access interface on http://localhost:${config.port}`);
+		__log('Code Playground : ✓ running on port ' + config.port + '!', 'info');
+		__log(`Code Playground : access interface on http://localhost:${config.port}`, 'info');
 	});
 
 	process.on('exit', function() {

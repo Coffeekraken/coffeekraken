@@ -16,8 +16,8 @@ const app = require('commander');
 		.parse(process.argv);
 
 
-	// const ls = spawn('../../terminal/compile-server/bin/coffeekraken-compile-server', {
-	const ls = spawn(`coffeekraken-compile-server`, {
+	const ls = spawn('../../terminal/compile-server/bin/coffeekraken-compile-server', {
+	// const ls = spawn(`coffeekraken-compile-server`, {
 			port: app.compileServerPort || 4000
 	});
 	ls.stdout.on('data', (data) => {

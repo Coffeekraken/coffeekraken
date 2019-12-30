@@ -23,6 +23,7 @@
     "custom-event": "^1.0.1",
     "document-register-element": "^1.14.3",
     "domready": "^1.0.8",
+    "dotenv": "^8.2.0",
     "download-file": "^0.1.5",
     "downloads-folder": "^1.0.2",
     "es6-object-assign": "^1.1.0",
@@ -36,6 +37,7 @@
     "jss-plugin-global": "^10.0.0",
     "jss-plugin-vendor-prefixer": "^10.0.0",
     "lodash": "^4.17.15",
+    "merge-deep": "^3.0.2",
     "mkdirp": "^0.5.1",
     "mobile-detect": "^1.4.4",
     "on-change": "^1.6.2",
@@ -44,7 +46,8 @@
     "sprintf-js": "^1.1.2",
     "uniqid": "^5.2.0",
     "url-parse": "^1.4.7",
-    "winston": "^3.2.1"
+    "winston": "^3.2.1",
+    "winston-mail": "^2.0.0"
   },
   "devDependencies": {}
 }

@@ -2,14 +2,26 @@
 
 const __log = require('./log');
 
+const __splitEveryNChars = require('../../js/string/splitEveryNChars');
+
 module.exports = function header(title, description = null, infos = {}) {
+  let descriptionArray = [];
+
+  if (description) {
+    descriptionArray = __splitEveryNChars(description, 60);
+  }
+
+  let descriptionFormated = '';
+  descriptionArray.forEach(line => {
+    descriptionFormated += '# ' + line + '\n';
+  });
   let message = '#######################################################################\n';
   message += '#\n';
   message += `# ${title} \n`;
   message += '#\n';
 
-  if (description) {
-    message += `# ${description}\n`;
+  if (descriptionFormated) {
+    message += descriptionFormated;
     message += '#\n';
   } // loop on each infos
 
@@ -22,7 +34,8 @@ module.exports = function header(title, description = null, infos = {}) {
     message += `#\n`;
   }
 
-  message += '#######################################################################'; // log the message
+  message += '#######################################################################';
+  message += `#\n`; // log the message
 
   __log(message, 'header');
 };

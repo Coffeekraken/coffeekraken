@@ -36,6 +36,7 @@ module.exports = function initLogger(winstonSettings = {}, logsPath = process.cw
         debug: 4,
         silly: 5,
         header: 6,
+        success: 7,
         ...(winstonSettings.levels || {})
       },
       colors: {
@@ -44,6 +45,7 @@ module.exports = function initLogger(winstonSettings = {}, logsPath = process.cw
         info: 'yellow',
         verbose: 'blue',
         header: 'bold green',
+        success: 'green',
         ...(winstonSettings.colors || {})
       }
     };

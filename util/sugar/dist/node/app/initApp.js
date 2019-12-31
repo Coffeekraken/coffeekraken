@@ -6,6 +6,10 @@ const __setAppMeta = require('./setAppMeta');
 
 const __getAppMeta = require('./getAppMeta');
 
+const __getAppCwd = require('./getAppCwd');
+
+const __setAppCwd = require('./setAppCwd');
+
 const __fs = require('fs');
 
 const __logHeader = require('../log/logHeader');
@@ -24,7 +28,8 @@ const __logHeader = require('../log/logHeader');
  * '''js
  * {
  *    meta: { }, // object passed to the 'setAppMeta' function
- *    env: { } // object that will be setted in the 'process.env' stack
+ *    env: { }, // object that will be setted in the 'process.env' stack
+ *    cwd: getAppCwd() // the "current working directory" where the application lives. Can be different that the `process.cwd()`
  * }
  * '''
  *
@@ -39,11 +44,15 @@ const __logHeader = require('../log/logHeader');
 
 
 module.exports = function initApp(settings = {}) {
+  if (settings.cwd) __setAppCwd(settings.cwd);
+
+  const cwd = settings.cwd || __getAppCwd();
+
   let packageJson = null;
 
   try {
-    if (__fs.existsSync(process.cwd() + '/package.json')) {
-      packageJson = require(process.cwd() + '/package.json');
+    if (__fs.existsSync(cwd + '/package.json')) {
+      packageJson = require(cwd + '/package.json');
     }
   } catch (e) {} // init env stack
 
@@ -56,7 +65,11 @@ module.exports = function initApp(settings = {}) {
 
   __setAppMeta(packageJson || {});
 
-  __setAppMeta(settings.meta || {}); // get the current app meta
+  __setAppMeta(settings.meta || {});
+
+  __setAppMeta({
+    cwd: cwd
+  }); // get the current app meta
 
 
   const appMeta = __getAppMeta(); // log the app header

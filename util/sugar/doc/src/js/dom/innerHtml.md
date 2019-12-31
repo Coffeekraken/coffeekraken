@@ -11,6 +11,7 @@ Change the content of a Node with the possibility to animate the change using on
 - fadeDown
 - fadeLeft
 - fadeRight
+You can also choose between 3 actions which are: replace, append and prepend
 
 
 
@@ -27,6 +28,7 @@ Return **{ [Promise](https://developer.mozilla.org/fr/docs/Web/JavaScript/Refere
 ```js
 	import innerHtml from '@coffeekraken/sugar/js/dom/innerHtml'
 innerHtml(myCoolNode, 'Hello World', {
+   action: 'replace', // replace, append, prepend
    animIn: 'fade', // fade, fadeUp, fadeDown, fadeLeft, fadeRight
    animOut: 'fadeUp', // fade, fadeUp, fadeDown, fadeLeft, fadeRight
    animInDuration: 600, // in ms

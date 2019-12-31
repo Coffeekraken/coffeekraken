@@ -30,9 +30,9 @@ Author : Olivier Bossel [olivier.bossel@gmail.com](mailto:olivier.bossel@gmail.c
 
 Here's the list of available setting(s).
 
-### settings.rootNode
+### settings.node
 
-<!-- @namespace: sugar.js.class.settings.rootNode -->
+<!-- @namespace: sugar.js.class.settings.node -->
 
 Type : **{ [HTMLElement](https://developer.mozilla.org/fr/docs/Web/API/HTMLElement) }**
 

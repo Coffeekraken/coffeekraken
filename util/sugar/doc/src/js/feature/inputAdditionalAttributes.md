@@ -14,6 +14,6 @@ Here's the attributes added:
 
 ### Example
 ```js
-	import '@coffeekraken/sugar/js/features/inputAdditionalAttributes'
+	import '@coffeekraken/sugar/js/feature/inputAdditionalAttributes'
 ```
 Author : Olivier Bossel [olivier.bossel@gmail.com](mailto:olivier.bossel@gmail.com) [https://olivierbossel.com](https://olivierbossel.com)

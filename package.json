@@ -12,6 +12,7 @@
     "doc": "rm -rf doc/src && ck run doc.js && ck run doc.scss",
     "doc.js": "../../docblock/docblock-to-markdown/bin/coffeekraken-docblock-to-markdown -f 'src/**/*.js' -d doc",
     "doc.scss": "../../docblock/docblock-to-markdown/bin/coffeekraken-docblock-to-markdown -f 'src/**/*.scss' -d doc",
+    "doc": "node ../../terminal/monorepo/bin/coffeekraken-monorepo.js doc",
     "demo": "ck run demo.dist && ck run demo.server",
     "demo.dist": "ck run demo.dist.js && ck run demo.dist.scss && ck run demo.dist.img",
     "demo.dist.js": "babel demo/src --root-mode upward -d demo/dist --ignore '**/*.bundle.js'",

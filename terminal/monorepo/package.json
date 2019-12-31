@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/coffeekraken/coffeekraken.git"
+    "url": "https://github.com/Coffeekraken/coffeekraken/tree/master/terminal/monorepo"
   },
   "keywords": [
     "coffee",
@@ -19,17 +19,27 @@
     "scripts",
     "tests"
   ],
-  "author": "Olivier Bossel <olivier.bossel@gmail.com>",
+  "author": "Coffeekraken <hello@coffeekraken.io>",
+  "contributors": [
+    {
+      "name": "Olivier Bossel",
+      "email": "olivier.bossel@gmail.com",
+      "url": "http://olivierbossel.com"
+    }
+  ],
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/coffeekraken/coffeekraken/issues"
-  },
-  "homepage": "https://github.com/coffeekraken/coffeekraken#readme",
+  "homepage": "https://coffeekraken.io",
   "dependencies": {
     "commander": "^4.0.1",
     "config": "^3.2.4",
     "exec-sh": "^0.3.4",
-    "find-up": "^4.1.0",
     "pkg-up": "^3.1.0"
+  },
+  "devDependencies": {
+    "@coffeekraken/docblock-to-markdown": "0.0.4",
+    "@coffeekraken/sugar": "^1.0.19",
+    "app-root-path": "^3.0.0",
+    "find-up": "^4.1.0",
+    "glob": "^7.1.6"
   }
 }

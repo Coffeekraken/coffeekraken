@@ -11,6 +11,6 @@ Add some events on some DOM Elements. Here's the list:
 
 ### Example
 ```js
-	import '@coffeekraken/sugar/js/features/inputAdditionalEvents'
+	import '@coffeekraken/sugar/js/feature/inputAdditionalEvents'
 ```
 Author : Olivier Bossel [olivier.bossel@gmail.com](mailto:olivier.bossel@gmail.com) [https://olivierbossel.com](https://olivierbossel.com)

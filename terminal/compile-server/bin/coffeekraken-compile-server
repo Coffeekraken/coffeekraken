@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 
-const __log = require('../../../util/sugar/dist/node/log/log');
+const __initApp = require('@coffeekraken/sugar/node/app/initApp');
+const __log = require('@coffeekraken/sugar/node/log/log');
+const __setupMailTransport = require('@coffeekraken/sugar/node/log/setupMailTransport');
+const __setupSlackTransport = require('@coffeekraken/sugar/node/log/setupSlackTransport');
 
 process.title = 'coffeekraken-compile-server';
 const __compileServer = require(__dirname + '/../server/server');
@@ -11,7 +14,14 @@ const app = require('commander');
 
 (function() {
 
-  __log('Compile Server : Hello World', 'info');
+  // init app
+  __initApp();
+
+  // setup mail transport
+  if (process.env.ENV === 'production') {
+    if (process.env.LOG_MAIL) __setupMailTransport(process.env.LOG_MAIL);
+    __setupSlackTransport();
+  }
 
 	app
 		.version(require('../package.json').version)
@@ -54,7 +64,7 @@ const app = require('commander');
 		return;
 	}
 
-	console.log(`Compile Server : ...starting on port ${finalConfig.port}...`);
+	__log(`Compile Server : ...starting on port ${finalConfig.port}...`, 'info');
 
 	// launch the server
 	__compileServer(finalConfig);
@@ -63,7 +73,7 @@ const app = require('commander');
 
 // clear the process properly
 process.on( 'SIGINT', function() {
-	console.log('Compile server : stopped');
+	__log('Compile server : stopped', 'info');
 	// some other closing procedures go here
 	process.exit( );
 });

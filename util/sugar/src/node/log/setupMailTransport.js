@@ -1,6 +1,6 @@
 const __winston = require('winston');
 const __winstonMail = require('winston-mail');
-const __getAppMeta = require('../app/getMeta');
+const __getAppMeta = require('../app/getAppMeta');
 
 /**
  * @name                    setupMailTransport
@@ -24,6 +24,33 @@ module.exports = function setupMailTransport(emails, level = 'error', winstonMai
   // get the app meta
   const appMeta = __getAppMeta();
 
+  let contributorsArray = null;
+  if (appMeta.contributors) {
+    contributorsArray = [];
+    appMeta.contributors.forEach((cont) => {
+      contributorsArray.push(`<a href="mailto:${cont.email}">${cont.name}</a>`);
+    });
+  }
+  let list = '';
+  if (appMeta.version) {
+    list += `<li><strong>Version:</strong> ${appMeta.version}</li>`;
+  }
+  if (appMeta.homepage) {
+    list += `<li><strong>Homepage:</strong> <a href="${appMeta.homepage}">${appMeta.homepage}</a></li>`;
+  }
+  if (appMeta.license) {
+    list += `<li><strong>License:</strong> ${appMeta.license}</li>`;
+  }
+  if (appMeta.keywords) {
+    list += `<li><strong>Keywords:</strong> ${appMeta.keywords.join(',')}</li>`;
+  }
+  if (appMeta.author) {
+    list += `<li><strong>Author:</strong> ${appMeta.author}</li>`;
+  }
+  if (contributorsArray) {
+    list += `<li><strong>Contributors:</strong> ${contributorsArray.join(', ')}</li>`;
+  }
+
   const settings = {
     to: emails,
     from: appMeta.author || 'logger@coffeekraken.io',
@@ -37,7 +64,19 @@ module.exports = function setupMailTransport(emails, level = 'error', winstonMai
     level: level,
     unique: false,
     silent: false,
-    html: false,
+    html: true,
+    formatter: ({level, message, meta}) => {
+      return `
+      <h1>${appMeta.name || 'Coffeekraken Logger'}</h1>
+      <br />
+      <p>${message}</p>
+      <br />
+      <ol>
+        <li><strong>Level:</strong> ${level}</li>
+        ${list}
+      </ol>
+      `;
+    },
     ...winstonMailSettings
   };
 

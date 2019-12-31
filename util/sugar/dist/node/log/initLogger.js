@@ -63,16 +63,15 @@ module.exports = function initLogger(winstonSettings = {}, logsPath = process.cw
     const finalSettings = __deepMerge({
       levels: myCustomLevels.levels,
       exitOnError: false,
-      format: __winston.format.combine(__winston.format.colorize({
+      format: __winston.format.combine(process.env.ENV !== 'production' ? __winston.format.colorize({
         all: true
-      }), __winston.format.timestamp(), myFormat),
+      }) : __winston.format.timestamp(), myFormat),
       exceptionHandlers: [new __winston.transports.Console(), new __winston.transports.File({
         filename: logsPath + '/exceptions.log'
       })],
       transports: [new __winston.transports.Console({
         timestamp: false,
         json: false,
-        colorize: true,
         level: 'header'
       }), new __winston.transports.File({
         filename: logsPath + '/errors.log',

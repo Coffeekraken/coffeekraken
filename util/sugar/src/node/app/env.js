@@ -10,6 +10,7 @@ const __dotEnv = require('dotenv');
  * Sources:
  * - `.env` file at `process.cwd()` path
  * - `package.json` file at `process.cwd()` path
+ * - Setting the 'package.json' content inside the 'process.env.PACKAGE' variable
  *
  * @return          {Object}                    Return the `process.env` object stack
  *
@@ -28,7 +29,7 @@ module.exports = function env() {
   if (__fs.existsSync(`${process.cwd()}/package.json`)) {
     const packageJson = require(`${process.cwd()}/package.json`);
     // set the packageJson into the process.env stack
-    process.env.packageJson = packageJson;
+    process.env.PACKAGE = packageJson;
   }
 
   // return the env stack

@@ -19,16 +19,14 @@ const __sleep = require('@coffeekraken/sugar/js/function/sleep');
 const __uniqid = require('@coffeekraken/sugar/js/string/uniqid');
 
 
-const __log = require('../../../../../util/sugar/dist/node/log/log');
-const __logHeader = require('../../../../../util/sugar/dist/node/log/header');
-const __setupMailTransport = require('../../../../../util/sugar/dist/node/log/setupMailTransport');
+const __log = require('@coffeekraken/sugar/node/log/log');
+const __setupMailTransport = require('@coffeekraken/sugar/node/log/setupMailTransport');
+const __setupSlackTransport = require('@coffeekraken/sugar/node/log/setupSlackTransport');
 
-const __env = require('../../../../../util/sugar/dist/node/app/env');
+const __initApp = require('@coffeekraken/sugar/node/app/initApp');
 
 
-const __gravatarUrl = require('../../../../../util/sugar/dist/js/util/gravatarUrl');
-
-const __setAppMeta = require('../../../../../util/sugar/dist/node/app/setMeta');
+const __gravatarUrl = require('@coffeekraken/sugar/js/util/gravatarUrl');
 
 const __setGithubAuthToken = require('@coffeekraken/sugar/node/github/setAuthToken');
 const __getGithubAuthToken = require('@coffeekraken/sugar/node/github/getAuthToken');
@@ -37,22 +35,14 @@ const __decodeBase64 = require('@coffeekraken/sugar/node/string/decodeBase64');
 
 module.exports = function(config) {
 
-  // set app metas
-  __setAppMeta(__packageJson);
-
-  // load the env variables
-  __env();
-
-  // application header
-  __logHeader('Coffeekraken Code Playground', 'Provide a nice code playground that let you play with some html, javascript (coffee, typescript, etc...) and css (sass, scss, stylus, etc...)', {
-    version: __packageJson.version,
-    name: __packageJson.name
-  });
+  // init app
+  __initApp();
 
   // setup mail transport
-  __setupMailTransport('olivier.bossel@gmail.com', 'info error');
-
-  __log('COCO', 'error');
+  if (process.env.ENV === 'production') {
+    if (process.env.LOG_MAIL) __setupMailTransport(process.env.LOG_MAIL);
+    __setupSlackTransport();
+  }
 
 	// creating the app
 	const app = __express();
@@ -101,6 +91,16 @@ module.exports = function(config) {
         }
       } catch(e) {
       }
+    } else if (req.url) {
+      try {
+        const filePath = `${process.cwd()}${req.url}`;
+        const stats = __fs.lstatSync(filePath);
+        if (stats.isFile()) {
+          res.sendFile(filePath);
+          return;
+        }
+      } catch(e) {
+      }
     }
 		next();
 	});
@@ -139,7 +139,7 @@ module.exports = function(config) {
 			const appsCwd = process.cwd() + '/appsRoot';
 			const appCwd = process.cwd() + '/appsRoot/' + encryptedAppUrl;
 
-			await __sleep(1000);
+			await __sleep(500);
 
 			const options = {
 	      url: `https://api.github.com/repos/${repo}/contents/${path}`,
@@ -154,7 +154,7 @@ module.exports = function(config) {
 				data: 'Initializing Github based app...'
 			});
 
-			await __sleep(1000);
+			await __sleep(500);
 
 			__request(options, async (error, response, body) => {
 
@@ -167,7 +167,7 @@ module.exports = function(config) {
 					data: 'Getting "package.json" application content...'
 				});
 
-				await __sleep(1000);
+				await __sleep(500);
 
 	      // download the package.json content and the code-playground.config.js content
 	      __request(packageJson.download_url, async (error, response, packageJsonBody) => {
@@ -198,7 +198,7 @@ module.exports = function(config) {
 						});
 					});
 
-					await __sleep(1000);
+					await __sleep(500);
 
 					// create the app folder
 					spawn(`mkdir "${encryptedAppUrl}"`, null, {
@@ -240,7 +240,7 @@ module.exports = function(config) {
 								data: `Getting the "code-playground.config.js" file content...`
 							});
 
-							await __sleep(1000);
+							await __sleep(500);
 
 							// download the package.json content and the code-playground.config.js content
 				      __request(codePlaygroundConfig.download_url, async (error, response, codePlaygroundConfigBody) => {
@@ -253,7 +253,7 @@ module.exports = function(config) {
 									data: `Downloading the assets directories...`
 								});
 
-								await __sleep(1000);
+								await __sleep(500);
 
 								// download all the listed assets folders in the config
 								const assetsDirDownloadPromises = [];
@@ -286,30 +286,65 @@ module.exports = function(config) {
 		});
 
 		socket.on('SSocketDom.noAppSpecified', () => {
-      handlerbarsEngine.render("src/views/error.handlebars", {
-				error: 'No app specified... Please try again...'
-			}).then((renderedHtml) => {
-          socket.emit('SSocketDom.content', {
-            data: renderedHtml,
-						innerHtml: {
-							animIn: 'fadeUp',
-							animOut: 'fadeDown'
-						}
+
+      // try to load a 'code-playground.config.js' file at the process root
+      if (__fs.existsSync(process.cwd() + '/code-playground.config.js')) {
+
+        // load the config file
+        const codePlaygroundConfig = require(process.cwd() + '/code-playground.config.js');
+
+        if (__fs.existsSync(process.cwd() + '/package.json')) {
+
+          const packageJson = require(process.cwd() + '/package.json');
+
+          // process contributors avatars
+					packageJson.contributors.forEach((contributor) => {
+						contributor.gravatar = __gravatarUrl(contributor.email);
+					});
+
+          socket.emit('SSocketDom.packageJson', {
+						data: packageJson
+					});
+
+          // rendering toplinks and send them to the interface
+          handlerbarsEngine.render("src/views/topLinks.handlebars", {
+            packageJson
+          }).then((renderedHtml) => {
+            socket.emit('SSocketDom.topLinks', {
+              data: renderedHtml
+            });
           });
-      });
+
+        }
+
+        // render the page
+        handlerbarsEngine.render("src/views/home.handlebars", {
+          pwd: Buffer.from(process.cwd()).toString('base64'),
+          ...codePlaygroundConfig
+        }).then((renderedHtml) => {
+          socket.emit('SSocketDom.editors', {
+            data: renderedHtml
+          });
+        });
+
+      } else {
+
+        handlerbarsEngine.render("src/views/error.handlebars", {
+          error: 'No app specified... Please try again...'
+        }).then((renderedHtml) => {
+            socket.emit('SSocketDom.content', {
+              data: renderedHtml,
+              innerHtml: {
+                animIn: 'fadeUp',
+                animOut: 'fadeDown'
+              }
+            });
+        });
+
+      }
     });
 
  });
-
-	// pwd
-  // app.use(require('./middleware/pwd'));
-
-	// static files
-	// app.use(require('./middleware/staticFiles'));
-
-	// if is a demo to display, we merge the config.editors with the
-	// config.demos[demo].editors
-	// app.use(require('./middleware/demo'));
 
   // set the layout in the config if passed as query param
 	app.use(require('./middleware/layout'));

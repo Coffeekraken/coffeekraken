@@ -1,7 +1,7 @@
 {
   "name": "@coffeekraken/sugar",
   "description": "A little sugar in your codebase",
-  "version": "1.0.12",
+  "version": "1.0.15",
   "homepage": "http://coffeekraken.io",
   "author": "Coffeekraken <hello@coffeekraken.io>",
   "contributors": [
@@ -47,7 +47,8 @@
     "uniqid": "^5.2.0",
     "url-parse": "^1.4.7",
     "winston": "^3.2.1",
-    "winston-mail": "^2.0.0"
+    "winston-mail": "^2.0.0",
+    "winston-slack-webhook-transport": "^1.1.0"
   },
   "devDependencies": {}
 }

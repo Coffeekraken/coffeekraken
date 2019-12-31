@@ -12,8 +12,10 @@ const __HtmlEntities = require('html-entities').AllHtmlEntities;
 const __stylus = require('stylus');
 const __Cryptr = require('cryptr');
 
-const __isBase64 = require('@coffeekraken/sugar/js/is/base64');
+const __isBase64 = require('@coffeekraken/sugar/node/is/base64');
 const __decodeBase64 = require('@coffeekraken/sugar/node/string/decodeBase64');
+const __log = require('@coffeekraken/sugar/node/log/log');
+
 
 module.exports = function(config) {
 
@@ -217,6 +219,6 @@ module.exports = function(config) {
 
 	// start demo server
 	app.listen(config.port, function () {
-		console.log('Compile Server : ✓ running on port ' + config.port + '!');
+		__log('Compile Server : ✓ running on port ' + config.port + '!', 'info');
 	});
 }

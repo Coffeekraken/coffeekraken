@@ -57,10 +57,9 @@ module.exports = function initLogger(winstonSettings = {}, logsPath = process.cw
       levels: myCustomLevels.levels,
       exitOnError: false,
       format: __winston.format.combine(
-        __winston.format.colorize({
+        process.env.ENV !== 'production' ? __winston.format.colorize({
           all: true
-        }),
-        __winston.format.timestamp(),
+        }) : __winston.format.timestamp(),
         myFormat
       ),
       exceptionHandlers: [
@@ -73,7 +72,6 @@ module.exports = function initLogger(winstonSettings = {}, logsPath = process.cw
         new __winston.transports.Console({
           timestamp: false,
           json: false,
-          colorize: true,
           level: 'header'
         }),
         new __winston.transports.File({

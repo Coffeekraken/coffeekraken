@@ -2,7 +2,7 @@
  * Gridle setup
  * For documentation : https://www.npmjs.com/package/@coffeekraken/gridle
  */
-@include g-setup(
+@include gridle.setup(
   (
     columns: 12,
     column-width: 60,
@@ -16,4 +16,4 @@
 );
 
 // states registration
-@include g-register-mobile-first-states();
+@include gridle.register-mobile-first-states();

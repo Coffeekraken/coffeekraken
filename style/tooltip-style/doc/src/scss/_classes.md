@@ -1,5 +1,7 @@
 # classes
 
+<!-- @namespace: tooltip-style.classes -->
+
 Type : **{ [Mixin](http://www.sass-lang.com/documentation/file.SASS_REFERENCE.html#mixins) }**
 
 
@@ -33,6 +35,8 @@ Author : Olivier Bossel [olivier.bossel@gmail.com](mailto:olivier.bossel@gmail.c
 
 
 ### classes-bare
+
+<!-- @namespace: tooltip-style.classes-bare -->
 
 Type : **{ [Mixin](http://www.sass-lang.com/documentation/file.SASS_REFERENCE.html#mixins) }**
 

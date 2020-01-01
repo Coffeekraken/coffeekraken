@@ -6,13 +6,20 @@ const __path = require('path');
 const _merge = require('lodash/merge');
 const app = require('commander');
 app
-	.version(require(process.cwd()+'/package.json').version)
 	.option('-f --files [files]', 'Files to process (glob pattern)', process.cwd()+'/src/**/*.js')
 	.option('-s --string [string]', 'String to process', /^\S+$/i)
 	.option('-d --destination [destination]', 'Output directory', 'doc')
 	.option('-c --config [config]', 'Configuration file to load', /^\S+$/i)
 	.option('--remove-path [removePath]', 'Part to remove from destination path', /^\S+$/i)
 	.parse(process.argv);
+
+try {
+  if (__fs.existsSync(process.cwd()+'/package.json')) {
+    app.version(require(process.cwd()+'/package.json').version);
+  } else {
+    app.version('1.0.0');
+  }
+} catch(e) {}
 
 // load configuration file if needed
 let config = {};

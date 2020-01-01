@@ -1,6 +1,6 @@
 {
   "name": "@coffeekraken/docblock-to-markdown",
-  "version": "0.0.4",
+  "version": "0.0.8",
   "description": "Parse and transform docblocks from your codebase into nice markdown files with ease.",
   "bin": {
     "ck-docblock-to-markdown": "./bin/coffeekraken-docblock-to-markdown",

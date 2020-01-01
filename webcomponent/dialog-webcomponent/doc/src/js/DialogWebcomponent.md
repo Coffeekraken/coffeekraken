@@ -171,6 +171,8 @@ Default : **0**
 
 ### close
 
+<!-- @namespace: dialog-webcomponent.close -->
+
 Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
 
 
@@ -188,6 +190,8 @@ Author : Olivier Bossel [olivier.bossel@gmail.com](mailto:olivier.bossel@gmail.c
 
 ### ok
 
+<!-- @namespace: dialog-webcomponent.ok -->
+
 Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
 
 
@@ -204,6 +208,8 @@ Author : Olivier Bossel [olivier.bossel@gmail.com](mailto:olivier.bossel@gmail.c
 
 
 ### dismiss
+
+<!-- @namespace: dialog-webcomponent.dismiss -->
 
 Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
 

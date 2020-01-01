@@ -1,5 +1,7 @@
 # ShareWebcomponent
 
+<!-- @namespace: share-webcomponent.ShareWebcomponent -->
+
 Type : **{ Class }**
 
 Extends **native(HTMLAnchorElement)**

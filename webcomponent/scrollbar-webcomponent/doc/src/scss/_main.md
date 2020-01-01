@@ -1,5 +1,7 @@
 # component
 
+<!-- @namespace: scrollbar-webcomponent.component -->
+
 Type : **{ [Mixin](http://www.sass-lang.com/documentation/file.SASS_REFERENCE.html#mixins) }**
 
 
@@ -19,6 +21,8 @@ Author : Olivier Bossel [olivier.bossel@gmail.com](mailto:olivier.bossel@gmail.c
 
 ### scrollbar
 
+<!-- @namespace: scrollbar-webcomponent.scrollbar -->
+
 Type : **{ [Mixin](http://www.sass-lang.com/documentation/file.SASS_REFERENCE.html#mixins) }**
 
 
@@ -35,6 +39,8 @@ Author : Olivier Bossel [olivier.bossel@gmail.com](mailto:olivier.bossel@gmail.c
 
 
 ### track
+
+<!-- @namespace: scrollbar-webcomponent.track -->
 
 Type : **{ [Mixin](http://www.sass-lang.com/documentation/file.SASS_REFERENCE.html#mixins) }**
 

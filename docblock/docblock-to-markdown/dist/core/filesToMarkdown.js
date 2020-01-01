@@ -19,10 +19,31 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function filesToMarkdown(pattern) {
   // find files
-  const filesPaths = _glob.default.sync(pattern); // loop on each files
+  let filesPaths = [];
+  let finalFilesPaths = [];
+
+  try {
+    filesPaths = _glob.default.sync(pattern, {
+      nodir: true
+    }); // filter the files to generate documentation only on
+    // files that have some docblock tags etc...
+
+    filesPaths.forEach((filePath, index, array) => {
+      const fileContent = _fs.default.readFileSync(filePath, 'utf8');
+
+      const docblockReg = /\/\*{2}([\s\S]+?)\*\//gm;
+      const result = docblockReg.exec(fileContent);
+      if (!result) return;
+      const docblock = result[0];
+      const docblockTagsReg = /\s\*\s@[a-zA-Z0-9]+\s+(.*)\n/g;
+      const resultTags = docblockTagsReg.exec(result[0]);
+      if (!resultTags || !resultTags[0]) return;
+      finalFilesPaths.push(filePath);
+    });
+  } catch (e) {} // loop on each files
 
 
-  filesPaths.forEach(filePath => {
+  finalFilesPaths.forEach(filePath => {
     // makesure it's a file
     if (!_fs.default.lstatSync(filePath).isFile()) {
       return;

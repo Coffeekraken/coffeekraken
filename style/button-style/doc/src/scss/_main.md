@@ -1,5 +1,7 @@
 # button
 
+<!-- @namespace: button-webcomponent.button -->
+
 Type : **{ [Mixin](http://www.sass-lang.com/documentation/file.SASS_REFERENCE.html#mixins) }**
 
 
@@ -21,6 +23,8 @@ Author : Olivier Bossel [olivier.bossel@gmail.com](mailto:olivier.bossel@gmail.c
 
 ### button-bare
 
+<!-- @namespace: button-webcomponent.button-bare -->
+
 Type : **{ [Mixin](http://www.sass-lang.com/documentation/file.SASS_REFERENCE.html#mixins) }**
 
 
@@ -38,6 +42,8 @@ Author : Olivier Bossel [olivier.bossel@gmail.com](mailto:olivier.bossel@gmail.c
 
 
 ### button-style
+
+<!-- @namespace: button-webcomponent.button-style -->
 
 Type : **{ [Mixin](http://www.sass-lang.com/documentation/file.SASS_REFERENCE.html#mixins) }**
 

@@ -2,6 +2,8 @@
 
 Extends **SWebComponent**
 
+<!-- @namespace: scrollbar-webcomponent.ScrollbarWebcomponent -->
+
 Type : **{ Class }**
 
 

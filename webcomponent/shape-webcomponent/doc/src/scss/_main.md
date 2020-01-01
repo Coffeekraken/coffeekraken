@@ -1,5 +1,7 @@
 # opened
 
+<!-- @namespace: drawer-webcomponent.opened -->
+
 Type : **{ [Mixin](http://www.sass-lang.com/documentation/file.SASS_REFERENCE.html#mixins) }**
 
 
@@ -28,6 +30,8 @@ Author : Olivier Bossel [olivier.bossel@gmail.com](mailto:olivier.bossel@gmail.c
 
 
 ### element
+
+<!-- @namespace: drawer-webcomponent.element -->
 
 Type : **{ [Mixin](http://www.sass-lang.com/documentation/file.SASS_REFERENCE.html#mixins) }**
 

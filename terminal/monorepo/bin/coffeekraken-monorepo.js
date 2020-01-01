@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+const __fs = require('fs');
 const __path = require('path');
 const __initApp = require('@coffeekraken/sugar/node/app/initApp');
 const __log = require('@coffeekraken/sugar/node/log/log');
@@ -110,23 +111,60 @@ commander
 
     if (all === 'all') {
 
-      const rootPath = __findUp.sync('.git', {
+      let rootPath = __findUp.sync('.git', {
         type : 'directory'
       });
-
-      console.log(rootPath);
 
       if ( ! rootPath) {
         __log('We cannot find a ".git" folder that indicate the root of the repository...', 'error');
         process.exit();
       }
 
-      console.log(__path.resolve(rootPath + '/..'));
+      rootPath = __path.resolve(rootPath + '/..');
 
-      console.log(__glob.sync('*/*/src', {
-        cwd: __path.resolve(rootPath + '/..') + '/',
-        root: __path.resolve(rootPath + '/..') + '/'
-      }));
+      __log('Searching for each packages inside the monorepo that have a "src" folder to generate the documentation files...', 'info');
+
+      const srcFolders = __glob.sync('**/src', {
+        cwd: rootPath + '/',
+        root: rootPath + '/',
+        ignore: [
+          '**/node_modules/**',
+          '**/vendor/**',
+          '**/doc/**',
+          '**/demo/**',
+          '**/appsRoot/**'
+        ]
+      });
+
+      if ( ! srcFolders.length) {
+        __log('No "src" folders finded...', 'error');
+        process.exit(0);
+      }
+
+      // loop on each finded "src" folders to generate the documentation for it
+      srcFolders.forEach((srcFolder) => {
+
+        const packageRoot = __path.resolve(srcFolder + '/..');
+
+        __log(`- Generating the documentation for the package "${__path.resolve(srcFolder + '/..')}"`, 'info');
+
+        // generate the docuentation files for the current srcFolder
+        const { execSync } = require("child_process");
+        try {
+          const error = execSync(`coffeekraken-docblock-to-markdown -f 'src/**/*' -d doc`, {
+            stdio: "inherit",
+            cwd: packageRoot
+          });
+
+          if (error) {
+            __log(error, 'error');
+            process.exit();
+          }
+        } catch(e) {}
+
+      });
+
+
       process.exit(0);
 
     }
@@ -135,16 +173,79 @@ commander
     __log(`Executing the documentation generation for the app "${localPackageJson.name || 'unknown'}"...`, 'info');
 
     const { execSync } = require("child_process");
-    const error = execSync(`coffeekraken-docblock-to-markdown -f 'src/**/*.js' -d doc`, { stdio: "inherit" })
 
-    if (error) {
-      __log(error, 'error');
-      process.exit();
+    try {
+      spawnSync(`coffeekraken-docblock-to-markdown -f 'src/**/*.js' -d doc`, {
+        // stdio: "inherit"
+      });
+    } catch (e) {
+      console.log('eror');
+      // if (e) {
+      //   __log(e, 'error');
+      //   process.exit();
+      // }
     }
+
     __log(`The documentation generation has been made successfully for the app "${localPackageJson.name || 'unknown'}".`, 'success');
     process.exit(0);
 
   });
+
+  commander
+    .command('docMap')
+    .description(
+      'Generate the "docMap.json" file at the application root folder by searching for the namespaces inside the documentation files'
+    )
+    .action(() => {
+
+      let rootPath = __findUp.sync('.git', {
+        type : 'directory'
+      });
+
+      if ( ! rootPath) {
+        __log('- We cannot find a ".git" folder that indicate the root of the repository...', 'error');
+        process.exit();
+      }
+
+      rootPath = __path.resolve(rootPath + '/..');
+
+      __log('- Searching for the documentation files in markdown format...', 'info');
+
+      const docFiles = __glob.sync('**/*.md', {
+        cwd: rootPath + '/',
+        root: rootPath + '/',
+        ignore: ['**/node_modules/**']
+      });
+
+      // init the docMap object
+      let docMap = {};
+
+      __log('- Searching for namespace inside each documentation files and building docMap object...', 'info');
+
+      // loop on each files fi find the ones that have "namespace" specified
+      docFiles.forEach((docFile) => {
+
+        // read the doc file content
+        const docFileContent = __fs.readFileSync(`${rootPath}/${docFile}`, 'utf8');
+
+        // search for the namespace tag in the doc
+        const reg = /<!--\s@namespace:\s(.+)\s-->/g;
+        const result = reg.exec(docFileContent);
+        if ( ! result || ! result[1]) return;
+
+        // save in the docMap
+        docMap[result[1]] = docFile;
+
+      });
+
+      // saving the docMap at the appRoot folder
+      __log('- Saving the "docMap.json" file at the application root folder...', 'info');
+      try { __fs.unlinkSync(`${rootPath}/docMap.json`) } catch(e) {}
+      __fs.writeFileSync(`${rootPath}/docMap.json`, JSON.stringify(docMap, null, 4), 'utf8');
+
+      __log('- "docMap.json" generation made successfully.', 'success');
+
+    });
 
 commander
   .command("install")

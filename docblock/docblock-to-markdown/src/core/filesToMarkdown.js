@@ -5,9 +5,29 @@ import __fsExtra from "fs-extra";
 import __replaceExt from "replace-ext";
 export default function filesToMarkdown(pattern) {
   // find files
-  const filesPaths = __glob.sync(pattern);
+  let filesPaths = [];
+  let finalFilesPaths = [];
+  try {
+    filesPaths = __glob.sync(pattern, {
+      nodir: true
+    });
+    // filter the files to generate documentation only on
+    // files that have some docblock tags etc...
+    filesPaths.forEach((filePath, index, array) => {
+      const fileContent = __fs.readFileSync(filePath, 'utf8');
+      const docblockReg = /\/\*{2}([\s\S]+?)\*\//gm;
+      const result = docblockReg.exec(fileContent);
+      if (!result) return;
+
+      const docblock = result[0];
+      const docblockTagsReg = /\s\*\s@[a-zA-Z0-9]+\s+(.*)\n/g;
+      const resultTags = docblockTagsReg.exec(result[0]);
+      if ( ! resultTags || ! resultTags[0]) return;
+      finalFilesPaths.push(filePath);
+    });
+  } catch(e) {}
   // loop on each files
-  filesPaths.forEach(filePath => {
+  finalFilesPaths.forEach(filePath => {
     // makesure it's a file
     if (!__fs.lstatSync(filePath).isFile()) {
       return;

@@ -1,5 +1,7 @@
 # classes
 
+<!-- @namespace: drawer-webcomponent.classes -->
+
 Type : **{ [Mixin](http://www.sass-lang.com/documentation/file.SASS_REFERENCE.html#mixins) }**
 
 

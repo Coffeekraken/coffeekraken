@@ -36,7 +36,7 @@
     "pkg-up": "^3.1.0"
   },
   "devDependencies": {
-    "@coffeekraken/docblock-to-markdown": "0.0.4",
+    "@coffeekraken/docblock-to-markdown": "0.0.8",
     "@coffeekraken/sugar": "^1.0.19",
     "app-root-path": "^3.0.0",
     "find-up": "^4.1.0",

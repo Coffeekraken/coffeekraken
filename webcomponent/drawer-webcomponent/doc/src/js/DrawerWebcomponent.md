@@ -1,5 +1,7 @@
 # DrawerWebcomponent
 
+<!-- @namespace: drawer-webcomponent.DrawerWebcomponent -->
+
 Type : **{ Class }**
 
 Extends **SWebComponent**
@@ -88,6 +90,8 @@ Default : **false**
 
 ### open
 
+<!-- @namespace: drawer-webcomponent.open -->
+
 Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
 
 
@@ -98,6 +102,8 @@ Author : Olivier Bossel [olivier.bossel@gmail.com](mailto:olivier.bossel@gmail.c
 
 
 ### close
+
+<!-- @namespace: drawer-webcomponent.close -->
 
 Type : **{ [Function](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function) }**
 

@@ -1,5 +1,7 @@
 # classes
 
+<!-- @namespace: button-webcomponent.classes -->
+
 Type : **{ [Mixin](http://www.sass-lang.com/documentation/file.SASS_REFERENCE.html#mixins) }**
 
 
@@ -26,6 +28,8 @@ Author : Olivier Bossel [olivier.bossel@gmail.com](mailto:olivier.bossel@gmail.c
 
 ### classes-bare
 
+<!-- @namespace: button-webcomponent.classes-bare -->
+
 Type : **{ [Mixin](http://www.sass-lang.com/documentation/file.SASS_REFERENCE.html#mixins) }**
 
 
@@ -45,15 +49,17 @@ Author : Olivier Bossel [olivier.bossel@gmail.com](mailto:olivier.bossel@gmail.c
 
 ### classes-style
 
+<!-- @namespace: button-webcomponent.classes-style -->
+
 Type : **{ [Mixin](http://www.sass-lang.com/documentation/file.SASS_REFERENCE.html#mixins) }**
 
 
 Provide the style styling for the buttons classes
-- ```.button--{color}```
-- ```.button--outline```
-- ```.button--link```
-- ```.button:disabled```
-- ```.button--hover-{$color}```
+- ```.btn--{color}```
+- ```.btn--outline```
+- ```.btn--link```
+- ```.btn:disabled```
+- ```.btn--hover-{$color}```
 
 
 

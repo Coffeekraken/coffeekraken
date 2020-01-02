@@ -1,4 +1,4 @@
-import autoCast from "../../../../dist/js/utils/strings/autoCast";
+import autoCast from "../../../dist/js/string/autoCast";
 
 describe("autoCast", () => {
   it('Should understand "true" boolean', () => {

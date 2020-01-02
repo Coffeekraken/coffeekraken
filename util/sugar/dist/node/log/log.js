@@ -22,7 +22,22 @@ const __initLogger = require('./initLogger');
 
 module.exports = function log(message, level = 'info') {
   // get the logger instance
-  const logger = __initLogger(); // logging
+  const logger = __initLogger();
+
+  const symbols = {
+    error: '✘',
+    warn: '⚠',
+    info: 'ⓘ',
+    verbose: '＠',
+    debug: '¶',
+    silly: '★',
+    header: null,
+    success: '✔'
+  };
+
+  if (symbols[level]) {
+    message = symbols[level] + ' ' + message;
+  } // logging
 
 
   logger[level](message);

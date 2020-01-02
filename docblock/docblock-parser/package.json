@@ -24,8 +24,9 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "@coffeekraken/scripts-stack": "^0.0.4",
     "@coffeekraken/docblock-to-markdown": "^0.0.3",
+    "@coffeekraken/scripts-stack": "^0.0.4",
+    "core-js": "^3.6.1",
     "lodash": "^4.17.2"
   }
 }

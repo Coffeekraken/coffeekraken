@@ -9,9 +9,9 @@
     "dist.js.bundle": "webpack --config ../../webpack.config.js --env.script='dist.js.bundle'",
     "dist.scss": "sass src/scss:dist/css --load-path=node_modules --load-path=node_modules/@coffeekraken",
     "dist.img": "coffeekraken-imagemin -s src/img -o dist/img -q 80",
-    "doc": "node ../../terminal/monorepo/bin/coffeekraken-monorepo.js doc",
-    "doc.js": "../../docblock/docblock-to-markdown/bin/coffeekraken-docblock-to-markdown -f 'src/**/*.js' -d doc",
-    "doc.scss": "../../docblock/docblock-to-markdown/bin/coffeekraken-docblock-to-markdown -f 'src/**/*.scss' -d doc",
+    "doc": "coffeekraken-monorepo doc",
+    "doc.all": "coffeekraken-monorepo doc all",
+    "doc.map": "coffeekraken-monorepo docMap",
     "demo": "ck run demo.dist && ck run demo.server",
     "demo.dist": "ck run demo.dist.js && ck run demo.dist.scss && ck run demo.dist.img",
     "demo.dist.js": "babel demo/src --root-mode upward -d demo/dist --ignore '**/*.bundle.js'",
@@ -60,6 +60,9 @@
       ]
     }
   },
+  "pre-commit": [
+    
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Coffeekraken/coffeekraken.git"
@@ -108,6 +111,7 @@
     "node-sass": "^4.13.0"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.7.4"
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "pre-commit": "^1.2.2"
   }
 }

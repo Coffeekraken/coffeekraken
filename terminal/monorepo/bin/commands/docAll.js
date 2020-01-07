@@ -27,7 +27,7 @@ module.exports = () => {
     // generate the docuentation files for the current srcFolder
     const { execSync } = require("child_process");
     try {
-      const error = execSync(`coffeekraken-docblock-to-markdown -f '${__config.doc.filesPattern}' -d '${__config.doc.outputFolder}'`, {
+      const error = execSync(`${__path.resolve(__dirname + '/../../node_modules/@coffeekraken/docblock-to-markdown/bin/coffeekraken-docblock-to-markdown')} -f '${__config.doc.filesPattern}' -d '${__config.doc.outputFolder}'`, {
         stdio: "inherit",
         cwd: packageRoot
       });

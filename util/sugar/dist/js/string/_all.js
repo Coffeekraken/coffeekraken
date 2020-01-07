@@ -14,6 +14,7 @@ var _default = {
   'printf': require('./printf'),
   'queryStringToObject': require('./queryStringToObject'),
   'rtrim': require('./rtrim'),
+  'splitEveryNChars': require('./splitEveryNChars'),
   'sprintf': require('./sprintf'),
   'strToHtml': require('./strToHtml'),
   'striptags': require('./striptags'),

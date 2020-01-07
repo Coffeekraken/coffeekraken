@@ -1,5 +1,4 @@
 const __winston = require('winston');
-const __deepMerge = require('../../js/object/deepMerge');
 
 /**
  * @name                    initLogger
@@ -55,7 +54,7 @@ module.exports = function initLogger(winstonSettings = {}, logsPath = process.cw
     });
 
     // init and merge the settings
-    const finalSettings = __deepMerge({
+    const finalSettings = {
       levels: myCustomLevels.levels,
       exitOnError: false,
       format: __winston.format.combine(
@@ -103,8 +102,9 @@ module.exports = function initLogger(winstonSettings = {}, logsPath = process.cw
         new __winston.transports.File({
           filename: logsPath + '/combined.log'
         })
-      ]
-    }, winstonSettings);
+      ],
+      ...winstonSettings
+    };
 
     // init and save globally the logger instance
     global._sLogger = __winston.createLogger(finalSettings);

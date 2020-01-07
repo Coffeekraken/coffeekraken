@@ -6,7 +6,7 @@ const removeBlankLines = require("remove-blank-lines");
 const terminate = require("terminate");
 const commandExistsSync = require("command-exists").sync;
 
-export default class Script {
+module.exports = class Script {
   constructor(id, script, watchOpts = null, runner = "npm") {
     this._id = id;
     this._script = script;

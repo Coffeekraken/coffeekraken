@@ -1,4 +1,4 @@
-import __mergeDeep from 'merge-deep';
+import __deepMerge from 'deepmerge';
 
 /**
  * @name                deepMerge
@@ -7,8 +7,7 @@ import __mergeDeep from 'merge-deep';
  *
  * Deep merge one object with another and return the merged object result
  *
- * @param           {Object}            object1           The object 1 to merge
- * @param           {Object}            object2           The object 2 to merge
+ * @param           {Object}            objects...        Pass all the objects you want to merge
  * @return          {Object}                              The merged object result
  *
  * @example           js
@@ -18,6 +17,7 @@ import __mergeDeep from 'merge-deep';
  *
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function deepMerge(object1, object2) {
-  return __mergeDeep(object1, object2);
+export default function deepMerge() {
+  // merge all the passed objects
+  return __deepMerge.all(Array.prototype.slice.call(arguments));
 }

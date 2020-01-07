@@ -37,8 +37,6 @@ rawSrcEntries.forEach(entry => {
   srcEntries[entry.split('/').slice(-1)] = entry;
 });
 
-console.log(__path.resolve(__config.dist.js.bundle.outputFolder.replace('<rootDir>', process.env.ROOT_DIR || '').replace('//','/')));
-
 module.exports = env => ({
   mode: "production",
   entry: srcEntries,

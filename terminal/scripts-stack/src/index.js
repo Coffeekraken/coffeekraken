@@ -11,6 +11,7 @@ const clear = require("clear");
 const pad = require("pad");
 const flatten = require("flat");
 const pkgUp = require("pkg-up");
+const deepMerge = require('@coffeekraken/sugar/js/object/deepMerge');
 const Script = require("./Script");
 
 class scriptsStack {
@@ -31,12 +32,6 @@ class scriptsStack {
     // load package json
     this._packageJson = this._loadPackageJson();
 
-    // check if we have a package-scripts.js file
-    this._packageScripts;
-    if (fs.existsSync(`${process.env.PWD}/package-scripts.js`)) {
-      this._packageScripts = require(`${process.env.PWD}/package-scripts.js`);
-    }
-
     // check if we have a packageJson in an upper folder
     this._packageUpJson;
     const pkgUpPath = pkgUp.sync({
@@ -52,31 +47,40 @@ class scriptsStack {
     // set the process name
     process.title = `scripts-stack.${this._packageJson.name}`;
 
+    if (this._config.config && this._config.config.length > 0) {
+      this._config.config.forEach((configFile) => {
+        if (fs.existsSync(configFile)) {
+          this._config = deepMerge(this._config, require(configFile));
+        }
+      });
+    }
+
     // save the scripts in a global variable
     this._scriptsObj = {};
     if (this._packageUpJson && this._packageUpJson.scripts) {
       this._scriptsObj = this._packageUpJson.scripts;
     }
-    if (this._packageScripts && this._packageScripts.scripts) {
+    if (this._packageJson && this._packageJson.scripts) {
       this._scriptsObj = {
         ...this._scriptsObj,
-        ...this._packageScripts.scripts
+        ...this._packageJson.scripts
       };
     }
-    if (this._packageJson && this._packageJson.scripts) {
-      this._scriptsObj = { ...this._scriptsObj, ...this._packageJson.scripts };
+    if (this._config.config && this._config.config.length > 0) {
+      this._config.config.forEach((configFile) => {
+        if (fs.existsSync(configFile)) {
+          this._scriptsObj = {
+            ...this._scriptsObj,
+            ...require(configFile).scripts || {}
+          };
+        }
+      });
     }
   }
 
   start() {
     // list all scripts
     this._scriptsIds = [];
-    if (this._packageScripts) {
-      this._scriptsIds = [
-        ...this._scriptsIds,
-        ...Object.keys(flatten(this._packageScripts.scripts))
-      ];
-    }
     if (this._packageJson.scripts) {
       this._scriptsIds = [
         ...this._scriptsIds,
@@ -89,9 +93,19 @@ class scriptsStack {
         ...Object.keys(this._packageUpJson.scripts)
       ];
     }
+    if (this._config.config && this._config.config.length > 0) {
+      this._config.config.forEach((configFile) => {
+        if (fs.existsSync(configFile)) {
+          this._scriptsIds = [
+            ...this._scriptsIds,
+            ...Object.keys(require(configFile).scripts || {})
+          ];
+        }
+      });
+    }
 
     // remove the ignored scripts
-    this._config.ignore.forEach(ignoreScript => {
+    (this._config.ignore || []).forEach(ignoreScript => {
       const startScriptIdx = this._scriptsIds.indexOf(ignoreScript);
       if (startScriptIdx !== -1) {
         this._scriptsIds.splice(startScriptIdx, 1);
@@ -138,16 +152,6 @@ class scriptsStack {
     const stack = {};
     scriptsIds.forEach(scriptId => {
       let watchObj = null;
-      if (
-        this._packageScripts &&
-        this._packageScripts.watch &&
-        this._packageScripts.watch[scriptId]
-      ) {
-        watchObj = {
-          ...(watchObj || {}),
-          ...this._packageScripts.watch[scriptId]
-        };
-      }
       if (this._packageJson.watch && this._packageJson.watch[scriptId]) {
         watchObj = {
           ...(watchObj || {}),
@@ -159,6 +163,16 @@ class scriptsStack {
           ...(watchObj || {}),
           ...this._packageUpJson.watch[scriptId]
         };
+      }
+      if (this._config.config && this._config.config.length > 0) {
+        this._config.config.forEach((configFile) => {
+          if (fs.existsSync(configFile)) {
+            watchObj = {
+              ...(watchObj || {}),
+              ...require(configFile).watch || {}
+            };
+          }
+        });
       }
       stack[scriptId] = new Script(
         scriptId,
@@ -631,4 +645,4 @@ class scriptsStack {
   }
 }
 
-export default scriptsStack;
+module.exports = scriptsStack;

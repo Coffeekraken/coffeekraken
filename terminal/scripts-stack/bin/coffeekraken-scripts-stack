@@ -1,31 +1,54 @@
 #!/usr/bin/env node
 
-const program = require('commander')
-const packageJson = require('../package.json')
+const __program = require('commander')
+const __packageJson = require('../package.json')
+const __findUp = require('find-up')
+const __fs = require('fs')
+const __path = require('path');
+const __deepMerge = require('@coffeekraken/sugar/js/object/deepMerge')
+const ScriptsStack = require(__path.resolve(__dirname + '/../src/index.js'))
 
 function collect (val, memo) {
   memo.push(val)
   return memo
 }
 
-program
-  .version(packageJson.version)
-  .option('-c, --color [value]', 'Main UI color [yellow]', 'yellow')
-  .option('--no-watch [value]', 'Do not watch at start [false]', false)
-  .option('--no-switch [value]', 'Do not switch between scripts when they start [false]', false)
-  .option('--no-notifications [value]', 'Do not display any notifications [false]', false)
-  .option('-i, --ignore [value]>', 'Do not list the specified script [null]', collect, [])
-  .parse(process.argv)
+let configLocal = {};
+if (__fs.existsSync(`${process.cwd()}/scripts-stack.config.js`)) {
+  configLocal = require(`${process.cwd()}/scripts-stack.config.js`);
+}
+const configUpPath = __findUp.sync('scripts-stack.config.js');
+let configUp = {};
+if (configUpPath) {
+  configUp = require(`${configUpPath}/scripts-stack.config.js`);
+}
 
 process.title = 'coffeekraken-scripts-stack'
 
-const ScriptsStack = require('../dist/index')
-const scriptsStackInstance = new ScriptsStack({
-  scripts: program.args,
-  watch: program.watch,
-  switch: program.switch,
-  notifications: program.notifications,
-  color: program.color || null,
-  ignore: program.ignore
-})
+__program
+  .version(__packageJson.version)
+  .option('-c, --color [value]', 'Main UI color [yellow]', 'yellow')
+  .option('--config [value]', 'Define the javascript config files to load separated by spaces [null]', collect, [])
+  .option('--no-watch [value]', 'Do not watch at start [false]', false)
+  .option('--no-switch [value]', 'Do not switch between scripts when they start [false]', false)
+  .option('--no-notifications [value]', 'Do not display any notifications [false]', false)
+  .option('-i, --ignore [value]', 'Do not list the specified script [null]', collect, [])
+  .parse(process.argv)
+
+const configInline = {};
+if (__program.args.length > 0) configInline.scripts = __program.args;
+if (__program.watch) configInline.watch = __program.watch;
+if (__program.switch) configInline.switch = __program.switch;
+if (__program.config.length > 0) configInline.config = __program.config;
+if (__program.notifications) configInline.notifications = __program.notifications;
+if (__program.color) configInline.color = __program.color;
+if (__program.ignore.length > 0) configInline.ignore = __program.ignore;
+
+const set = __deepMerge(
+  configUp,
+  configLocal,
+  configInline
+);
+
+const scriptsStackInstance = new ScriptsStack(set);
 scriptsStackInstance.start()

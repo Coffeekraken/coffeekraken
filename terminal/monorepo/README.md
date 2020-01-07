@@ -162,6 +162,10 @@ In order to configure your monorepo, you just need to create a ```monorepo.confi
 Here's a ```monorepo.config.js``` config file sample:
 
 ```js
+const __pkgUp = require("pkg-up");
+const __findUp = require('find-up');
+let repositoryRootPath = __findUp.sync(['.git', 'monorepo.config.js']);
+let generalPackageJsonPath = __pkgUp.sync({ cwd: process.cwd() + "/../" });
 module.exports = {
 
   /**
@@ -182,6 +186,12 @@ module.exports = {
    * @type      JSON
    */
   generalPackageJson: require(generalPackageJsonPath),
+
+  /**
+   * This define the repository root folder path
+   * In the default config file, it is defined by searching for a ".git" folder and a "monorepo.config.js" file
+   * @type        String
+   */
   repositoryRootPath: repositoryRootPath,
 
   dist: {
@@ -224,28 +234,87 @@ module.exports = {
         outputFolder: '<rootDir>/dist/js'
       }
     },
+
     css: {
+
+      /**
+       * This define the css source folder
+       * The "<rootDir>" will be replaced by the "--rootDir <value>" command option
+       * @type        String
+       */
       sourceFolder: '<rootDir>/src/scss',
+
+      /**
+       * This define the css output folder
+       * The "<rootDir>" will be replaced by the "--rootDir <value>" command option
+       * @type        String
+       */
       outputFolder: '<rootDir>/dist/css',
+
+      /**
+       * This define the folders to lookup when compiling the sources files
+       * @type        String
+       */
       loadPaths: [
         'node_modules',
         'node_modules/@coffeekraken'
       ],
+
+      /**
+       * This define the output style of the css files
+       * This can be "compressed, nested, expanded, compact"
+       * @type        String
+       */
       style: 'compressed'
+
     },
+
     img: {
+
+      /**
+       * This define the source folder that hold the images to optimize
+       * The "<rootDir>" will be replaced by the "--rootDir <value>" command option
+       * @type        String
+       */
       sourceFolder: '<rootDir>/src/img',
+
+      /**
+       * This define the output folder for the optimized images
+       * The "<rootDir>" will be replaced by the "--rootDir <value>" command option
+       * @type        String
+       */
       outputFolder: '<rootDir>/dist/img',
+
+      /**
+       * This define the output quality for the images. This can be between 100 and 0
+       * @type        Integer
+       */
       quality: 80
     }
   },
 
   demo: {
+
+    /**
+     * This define the demo folder where you can find a "src" one and a "dist" one
+     * @type          String
+     */
     folder: 'demo'
+
   },
 
   doc: {
+
+    /**
+     * This definethe glob pattern to find the sources folders in the monorepo
+     * @type          String
+     */
     srcFoldersPattern: '**/src',
+
+    /**
+     * This define the folders glob patterns of the folders to ignore when searching for the documentation docblocks
+     * @type          Array<String>
+     */
     srcFoldersIgnore: [
       '**/node_modules/**',
       '**/vendor/**',
@@ -253,21 +322,61 @@ module.exports = {
       '**/demo/**',
       '**/appsRoot/**'
     ],
+
+    /**
+     * This define the glob pattern to search for files in the doc source folder
+     * @type          String
+     */
     filesPattern: 'src/**/*',
+
+    /**
+     * This define the output folder where to generate all the documentations markdown files from the docblocks
+     * @type        String
+     */
     outputFolder: 'doc'
+
   },
+
   docMap: {
+
+    /**
+     * This define the glob pattern to find for the markdown (.md) documentation files
+     * @type            String
+     */
     srcFilesPattern: '**/*.md',
+
+    /**
+     * This define the glob patterns of the folders to avoid when searching for the documentation markdown files
+     * @type          Array<String>
+     */
     srcFilesIgnore: ['**/node_modules/**'],
+
+    /**
+     * This define the name of the docMap file that will be generated at the monorepo root folder
+     * @type          String
+     */
     outputFilename: 'docMap.json'
+
   },
+
   tests: {
+
+    /**
+     * This define the glob patterns to find the tests files
+     * @type      String
+     */
     testMatch: ['**/?(*.)+(spec|test).[jt]s?(x)'],
+
+    /**
+     * This define the loaders to execute depending on the regex that define the object key
+     * @type          Object<String|Array>
+     */
     transform: {
       "\\.txt$": "jest-raw-loader",
       "\\.js$": ["babel-jest", { rootMode: "upward" }]
     }
-  },
+  }
+
 };
 ```
 

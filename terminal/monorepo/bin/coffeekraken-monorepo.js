@@ -21,6 +21,11 @@ commander
 
 // register the CLI commands
 commander
+  .command("start")
+  .description('Launch the scripts-stack interface listing the scripts defined by the monorepo package as well as your scripts listed in the "scripts-stack.config.js" files at the the monorepo root folder and at the "process.cwd()" directory...')
+  .action(require('./commands/start'));
+
+commander
   .command("run <script>")
   .description(`Run a script registered in the local package.json file or in the global "monorepo.config.js" file`)
   .action(require('./commands/run'));
@@ -57,6 +62,7 @@ commander
       case 'images':
         require('./commands/img')();
       break;
+      case 'all':
       default:
         require('./commands/js')();
         require('./commands/jsBundle')();
@@ -67,19 +73,23 @@ commander
   });
 
 commander
-  .command('doc [all]')
+  .command('doc [what]')
   .description(
-    'Generate the "doc/src/**" folders and markdown files from the sources files'
+    'Generate the "doc/src/**" folders and markdown files from the sources files as well as the "docMap.json" file if wanted'
   )
-  .action((all) => {
-    if (all === 'all') require('./commands/docAll')();
-    else require('./commands/doc')();
+  .action((what) => {
+    switch(what) {
+      case 'all':
+        require('./commands/docAll')();
+      break;
+      case 'map':
+        require('./commands/docMap')();
+      break;
+      default:
+        require('./commands/doc')();
+      break;
+    }
   });
-
-commander
-  .command('docMap')
-  .description('Generate the "docMap.json" file at the application root folder by searching for the namespaces inside the documentation files')
-  .action(require('./commands/docMap'));
 
 commander
   .command("install")

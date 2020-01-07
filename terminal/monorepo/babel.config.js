@@ -1,5 +1,6 @@
 const __findUp = require('find-up');
 const __fs = require('fs');
+const __deepMerge = require('@coffeekraken/sugar/js/object/deepMerge');
 
 let localPackageJson = {};
 if (__fs.existsSync(`${process.cwd()}/package.json`)) {
@@ -28,7 +29,7 @@ if (generalBabelConfigPath) {
 
 module.exports = function(api) {
   api.cache(false);
-  return {
+  return __deepMerge({
     presets: [
       [
         "@babel/env",
@@ -42,10 +43,10 @@ module.exports = function(api) {
       "add-module-exports",
       "@babel/plugin-proposal-class-properties",
       "@babel/plugin-proposal-export-default-from"
-    ],
-    ...(generalPackageJson.babel || {}),
-    ...generalBabelConfig,
-    ...(localPackageJson.babel || {}),
-    ...localBabelConfig
-  };
+    ]
+  },
+  generalPackageJson.babel || {},
+  generalBabelConfig,
+  localPackageJson.babel || {},
+  localBabelConfig);
 };

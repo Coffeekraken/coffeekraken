@@ -8,7 +8,7 @@ module.exports = () => {
   const { execSync } = require("child_process");
 
   try {
-    execSync(`coffeekraken-docblock-to-markdown -f '${__config.doc.filesPattern}' -d '${__config.doc.outputFolder}'`, {
+    execSync(`${__path.resolve(__dirname + '/../../node_modules/@coffeekraken/docblock-to-markdown/bin/coffeekraken-docblock-to-markdown')} -f '${__config.doc.filesPattern}' -d '${__config.doc.outputFolder}'`, {
       // stdio: "inherit"
     });
   } catch (e) {

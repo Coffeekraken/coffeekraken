@@ -1,6 +1,6 @@
 {
   "name": "@coffeekraken/pre-view",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Simple command line interface that let you preview your blade or twig views in your favorite browser",
   "homepage": "https://coffeekraken.io",
   "bin": {
@@ -33,7 +33,7 @@
     "@coffeekraken/form-style": "0.0.2",
     "@coffeekraken/select-webcomponent": "0.0.3",
     "@coffeekraken/sugar": "^1.0.4",
-    "@coffeekraken/text-intro": "^1.0.0",
+    "@coffeekraken/text-intro": "^1.0.1",
     "@coffeekraken/typography-style": "0.0.1",
     "commander": "^4.0.1",
     "get-bin-path": "^4.0.0",

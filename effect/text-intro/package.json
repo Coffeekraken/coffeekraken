@@ -1,6 +1,6 @@
 {
   "name": "@coffeekraken/text-intro",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Provide some cool animations to display your titles, etc... with style. They are all triggered when the element appear in viewport.",
   "main": "dist/index.js",
   "homepage": "http://coffeekraken.io",
@@ -31,9 +31,9 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@coffeekraken/sugar": "^1.0.4"
+    "@coffeekraken/sugar": "^1.0.4",
+    "fs-extra": "^8.1.0"
   },
   "devDependencies": {
-    "fs-extra": "^8.1.0"
   }
 }

@@ -1,0 +1,64 @@
+{
+  "name": "@coffeekraken/starter-kit-2",
+  "version": "2.0.0",
+  "description": "Base HTML files and folder structure with complete build process (js, scss, image compression, etc...) built in",
+  "homepage": "https://coffeekraken.io",
+  "scripts": {
+    "start": "coffeekraken-webkit start"
+  },
+  "keywords": [
+    "coffee",
+    "kraken",
+    "coffeekraken",
+    "starter",
+    "kit",
+    "sass",
+    "css",
+    "html",
+    "js",
+    "npm"
+  ],
+  "author": "Coffeekraken <hello@coffeekraken.io>",
+  "contributors": [
+    {
+      "name": "Olivier Bossel",
+      "email": "olivier.bossel@gmail.com",
+      "url": "http://olivierbossel.com"
+    }
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@coffeekraken/favicons": "^1.0.0",
+    "babel-eslint": "^10.0.3",
+    "babel-loader": "^8.0.6",
+    "browser-sync": "^2.26.7",
+    "eslint": "^6.1.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.5.0",
+    "eslint-loader": "^3.0.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.16.0",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "husky": "^3.0.9",
+    "open-cli": "^5.0.0",
+    "postcss-cli": "^6.1.3",
+    "postcss-preset-env": "^6.7.0",
+    "prettier": "^1.19.1",
+    "pretty-quick": "^2.0.1",
+    "stylelint": "^12.0.0",
+    "webpack-bundle-analyzer": "^3.6.0"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.7.0",
+    "@coffeekraken/gridle": "0.0.6",
+    "@coffeekraken/sugar": "^1.0.15",
+    "@coffeekraken/webkit": "0.0.2",
+    "core-js": "^3.4.1",
+    "cssuseragent": "^2.1.31",
+    "fastclick": "^1.0.6",
+    "glob": "^7.1.6",
+    "import-glob": "^1.5.0",
+    "lodash": "^4.17.15",
+    "require-glob": "^3.2.0"
+  }
+}

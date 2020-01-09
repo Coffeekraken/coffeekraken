@@ -1,0 +1,72 @@
+{
+  "name": "@coffeekraken/webkit",
+  "version": "0.0.2",
+  "description": "Create easily website without the issues of configuring preprocessors like babel, webpack, imagemin, handlebars, etc...",
+  "bin": {
+    "ck-webkit": "./bin/coffeekraken-webkit.js",
+    "coffeekraken-webkit": "./bin/coffeekraken-webkit.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Coffeekraken/coffeekraken/tree/master/terminal/webkit"
+  },
+  "keywords": [
+    "coffee",
+    "kraken",
+    "coffeekraken",
+    "webkit",
+    "webpack",
+    "babel",
+    "imagemin",
+    "sass",
+    "scripts",
+    "tests"
+  ],
+  "author": "Coffeekraken <hello@coffeekraken.io>",
+  "contributors": [
+    {
+      "name": "Olivier Bossel",
+      "email": "olivier.bossel@gmail.com",
+      "url": "http://olivierbossel.com"
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://coffeekraken.io",
+  "dependencies": {
+    "@babel/cli": "^7.7.7",
+    "@babel/core": "^7.7.7",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/plugin-proposal-export-default-from": "^7.7.4",
+    "@babel/preset-env": "^7.7.7",
+    "@coffeekraken/docblock-to-markdown": "0.0.8",
+    "@coffeekraken/imagemin": "^1.0.3",
+    "@coffeekraken/pre-view": "0.0.6",
+    "@coffeekraken/scripts-stack": "0.0.20",
+    "@coffeekraken/sugar": "^1.0.22",
+    "@symfony/webpack-encore": "github:symfony/webpack-encore",
+    "app-root-path": "^3.0.0",
+    "babel": "^6.23.0",
+    "babel-jest": "^24.9.0",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-add-module-exports": "^1.0.2",
+    "commander": "^4.1.0",
+    "config": "^3.2.4",
+    "core-js": "^3.6.2",
+    "exec-sh": "^0.3.4",
+    "find-up": "^4.1.0",
+    "get-folder-size": "^2.0.1",
+    "glob": "^7.1.6",
+    "http-server": "^0.12.0",
+    "import-glob": "^1.5.0",
+    "jest": "^24.9.0",
+    "jest-raw-loader": "^1.0.1",
+    "pkg-up": "^3.1.0",
+    "sass": "^1.24.3",
+    "sass-glob-importer": "^1.0.1",
+    "scss-bundle": "^3.0.2",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-import-glob": "^2.0.0"
+  },
+  "devDependencies": {}
+}

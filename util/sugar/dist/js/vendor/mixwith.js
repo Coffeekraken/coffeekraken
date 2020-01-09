@@ -1,7 +1,5 @@
 "use strict";
 
-require("core-js/modules/web.dom-collections.iterator");
-
 var _createClass = function () {
   function defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {

@@ -68,6 +68,7 @@ module.exports = __deepMerge({
   },
   ignore: [
     'start',
+    'preinstall',
     'postinstall'
   ]
 }, generalScriptsStackConfig, localScriptsStackConfig);

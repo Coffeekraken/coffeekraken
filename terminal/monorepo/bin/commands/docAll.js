@@ -1,6 +1,7 @@
 const __config = require('./config');
 const __log = require('@coffeekraken/sugar/node/log/log');
 const __glob = require('glob');
+const __path = require('path');
 
 module.exports = () => {
 

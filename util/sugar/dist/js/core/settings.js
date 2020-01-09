@@ -1,7 +1,5 @@
 "use strict";
 
-require("core-js/modules/es.string.replace");
-
 var _domReady = _interopRequireDefault(require("../dom/domReady"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }

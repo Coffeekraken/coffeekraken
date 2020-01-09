@@ -27,7 +27,6 @@
   },
   "homepage": "https://github.com/Coffeekraken/coffeekraken#readme",
   "dependencies": {
-    "@coffeekraken/monorepo": "0.0.16",
     "glob": "^7.1.6"
   },
   "globalDependencies": {},

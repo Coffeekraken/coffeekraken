@@ -51,5 +51,7 @@
     "winston-mail": "^2.0.0",
     "winston-slack-webhook-transport": "^1.1.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "webpack-cli": "^3.3.10"
+  }
 }

@@ -4,8 +4,9 @@ const __path = require('path');
 const __glob = require('glob');
 const { execSync } = require('child_process');
 const __processPath = require('./processPath');
+const execSh = require('exec-sh').promise;
 
-module.exports = () => {
+module.exports = async () => {
 
   // searching for .bundle.js files
   const bundleFiles = __glob.sync(__processPath(__config.dist.js.bundle.sourceFilesPattern), {
@@ -21,7 +22,7 @@ module.exports = () => {
 
   try {
 
-    execSync(`webpack --config ${__path.resolve(__dirname + '/../../webpack.config.js')}`, {
+    await execSh(`${__path.resolve(__dirname + '/../../node_modules/webpack/bin/webpack.js')} --config ${__path.resolve(__dirname + '/../../webpack.config.js')}`, {
         cwd: process.cwd()
     });
 

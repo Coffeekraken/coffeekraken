@@ -2,6 +2,7 @@ const __config = require('./config');
 const __log = require('@coffeekraken/sugar/node/log/log');
 const __glob = require('glob');
 const __fs = require('fs');
+const __path = require('path');
 
 module.exports = () => {
 
@@ -51,7 +52,7 @@ module.exports = () => {
       ...jestConfigJs
     };
     try {
-      execSync(`jest --passWithNoTests --config '${JSON.stringify(c)}'`, {
+      execSync(`${__path.resolve(__dirname + '/../../node_modules/jest/bin/jest.js')} --passWithNoTests --config '${JSON.stringify(c)}'`, {
         stdio: "inherit",
         cwd: __config.repositoryRootPath + '/' + packageFolder
       });

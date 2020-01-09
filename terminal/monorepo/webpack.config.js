@@ -33,28 +33,38 @@ const globStringSrc = __config.dist.js.bundle.sourceFilesPattern.replace('<rootD
 const rawSrcEntries = __glob.sync(globStringSrc);
 const srcEntries = {};
 rawSrcEntries.forEach(entry => {
-  // srcEntries[entry.split('/').slice(3).join('/')] = entry;
   srcEntries[entry.split('/').slice(-1)] = entry;
 });
 
-module.exports = env => ({
-  mode: "production",
+const settings = {
+  mode: 'production',
   entry: srcEntries,
   output: {
     path: __path.resolve(__config.dist.js.bundle.outputFolder.replace('<rootDir>', process.env.ROOT_DIR || '').replace('//','/')),
-    filename: "[name]"
+    filename: '[name]'
+  },
+  resolve: {
+    modules: [__path.resolve(__dirname, 'node_modules'), 'node_modules']
+  },
+  resolveLoader: {
+    modules: [__path.resolve(__dirname, 'node_modules'), 'node_modules'],
+    extensions: ['.js', '.json'],
+    mainFields: ['loader', 'main']
   },
   module: {
     rules: [
       {
         test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
-        loader: "babel-loader"
+        exclude: /(node_modules)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        }
       }
     ]
-  },
-  ...(generalPackageJson.webpack || {}),
-  ...generalWebpackConfig,
-  ...(localPackageJson.webpack || {}),
-  ...localWebpackConfig
-});
+  }
+};
+
+module.exports = settings;

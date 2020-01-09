@@ -13,7 +13,7 @@ module.exports = (rootDir) => {
     let sourceFolder = __processPath(__config.dist.js.sourceFolder);
     let outputFolder = __processPath(__config.dist.js.outputFolder);
 
-    execSync(`babel ${sourceFolder} -d ${outputFolder} --ignore '${__config.dist.js.ignorePattern}' --config-file '${__path.resolve(__dirname + '/../../babel.config.js')}'`, {
+    execSync(`${__path.resolve(__dirname + '/../../node_modules/@babel/cli/bin/babel.js')} ${sourceFolder} -d ${outputFolder} --ignore '${__config.dist.js.ignorePattern}' --config-file '${__path.resolve(__dirname + '/../../babel.config.js')}'`, {
         cwd: process.cwd()
     });
 

@@ -1,4 +1,4 @@
-import "@babel/polyfill";
+// import "@babel/polyfill";
 import "../../../dist/js/feature/all";
 
 import innerHtml from '../../../dist/js/dom/innerHtml';

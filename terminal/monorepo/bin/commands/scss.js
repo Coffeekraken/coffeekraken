@@ -2,6 +2,7 @@ const __config = require('./config');
 const __log = require('@coffeekraken/sugar/node/log/log');
 const { execSync } = require('child_process');
 const __processPath = require('./processPath');
+const __path = require('path');
 
 module.exports = (cwd = process.cwd()) => {
 
@@ -10,7 +11,7 @@ module.exports = (cwd = process.cwd()) => {
   const loadPaths = '--load-path=' + __config.dist.css.loadPaths.join(' --load-path=');
 
   try {
-    execSync(`sass ${__processPath(__config.dist.css.sourceFolder)}:${__processPath(__config.dist.css.outputFolder)} ${loadPaths} --style=${__config.dist.css.style} --no-source-map`, {
+    execSync(`${__path.resolve(__dirname + '/../../node_modules/sass/sass.js')} ${__processPath(__config.dist.css.sourceFolder)}:${__processPath(__config.dist.css.outputFolder)} ${loadPaths} --style=${__config.dist.css.style} --no-source-map`, {
         cwd: cwd
     });
   } catch(error) {

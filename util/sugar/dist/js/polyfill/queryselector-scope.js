@@ -1,7 +1,5 @@
 "use strict";
 
-require("core-js/modules/es.string.replace");
-
 /**
  * @name 		queryselector-scope
  * @namespace       sugar.js.polyfill

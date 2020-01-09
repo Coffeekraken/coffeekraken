@@ -5,6 +5,7 @@ const __log = require('@coffeekraken/sugar/node/log/log');
 const __getSize = require('get-folder-size');
 const { execSync } = require('child_process');
 const __processPath = require('./processPath');
+const __path = require('path');
 
 module.exports = (cwd = process.cwd()) => {
 
@@ -18,7 +19,7 @@ module.exports = (cwd = process.cwd()) => {
     __log(`Compressing images from folder "${sourceFolder}"...`, 'info');
 
     try {
-      execSync(`coffeekraken-imagemin -s ${sourceFolder} -o ${outputFolder} -q ${__config.dist.img.quality}`, {
+      execSync(`${__path.resolve(__dirname + '/../../node_modules/@coffeekraken/imagemin/bin/coffeekraken-imagemin.js')} -s ${sourceFolder} -o ${outputFolder} -q ${__config.dist.img.quality}`, {
           cwd: cwd
       });
     } catch(error) {

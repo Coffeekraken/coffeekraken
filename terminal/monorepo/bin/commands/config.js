@@ -33,8 +33,8 @@ if ( ! repositoryRootPath) {
 repositoryRootPath = repositoryRootPath.split('/').slice(0,-1).join('/');
 
 module.exports = {
-  packagesPattern: '**/package.json',
 
+  packagesPattern: '**/package.json',
   localPackageJson: require(process.cwd() + "/package.json"),
   generalPackageJson: require(generalPackageJsonPath),
   repositoryRootPath: repositoryRootPath,
@@ -81,11 +81,13 @@ module.exports = {
     filesPattern: 'src/**/*',
     outputFolder: 'doc'
   },
+
   docMap: {
     srcFilesPattern: '**/*.md',
     srcFilesIgnore: ['**/node_modules/**'],
     outputFilename: 'docMap.json'
   },
+
   tests: {
     testMatch: ['**/?(*.)+(spec|test).[jt]s?(x)'],
     transform: {
@@ -93,5 +95,6 @@ module.exports = {
       "\\.js$": ["babel-jest", { rootMode: "upward" }]
     }
   },
+
   ...config
 };

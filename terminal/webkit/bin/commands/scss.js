@@ -6,6 +6,13 @@ const __fs = require('fs');
 const __path = require('path');
 const __Bundler = require("scss-bundle").Bundler;
 const __glob = require('glob');
+const __writeFileSync = require('@coffeekraken/sugar/node/fs/writeFileSync');
+const __autoprefixer = require('autoprefixer');
+const __postcss = require('postcss');
+const __precss = require('precss');
+const __postcssPresetEnv = require('postcss-preset-env');
+const __cssnano = require('cssnano');
+const __rucksack = require('rucksack-css');
 
 module.exports = async () => {
 
@@ -47,13 +54,36 @@ module.exports = async () => {
         if(!error){
 
           const outputFilePath = srcFile.replace(__config.dist.css.sourceFolder, __config.dist.css.outputFolder).replace('scss','css').replace('sass','css');
+          const css = result.css.toString();
 
           try {
             __fs.unlinkSync(outputFilePath);
           } catch(e) {}
 
+          __log('Writing the output raw css file...', 'info');
           // No errors during the compilation, write this result on the disk
-          __fs.writeFileSync(outputFilePath, result.css.toString());
+          try {
+            __writeFileSync(outputFilePath, css);
+          } catch(e) {
+            __log(e, 'error');
+          }
+
+          __log('Processing the output css using PostCSS and some plugins (precss, autoprefixer, postcss-preset-env, cssnext, cssnano and rucksack-css)...', 'info');
+
+          // pass postcss with some useful plugins
+          __postcss([
+            __precss,
+            __autoprefixer,
+            __postcssPresetEnv,
+            __cssnano,
+            __rucksack
+          ]).process(css, {
+            from: outputFilePath,
+            to: outputFilePath
+          }).then(result => {
+            __log('Writing the output processed css file...', 'info');
+            __writeFileSync(outputFilePath, result.css);
+          });
 
           __log(`The "${outputFilePath.replace(process.cwd(), '')}" file has been successfully compiled.`, 'success');
         } else {

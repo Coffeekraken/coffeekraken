@@ -8,7 +8,7 @@ module.exports = () => {
   __log(`Launch the "@coffeekraken/pre-view" web server to allow you a quick and simple local development workflow...`, 'info');
 
   try {
-    __execSh(`coffeekraken-pre-view' --config ${__path.resolve(__dirname + '/../../pre-view.config.js')}`, {
+    __execSh(`coffeekraken-pre-view --config ${__path.resolve(__dirname + '/../../pre-view.config.js')}`, {
       // stdio: "inherit"
     });
   } catch (e) {

@@ -45,11 +45,13 @@ commander
   .command('dist [what]')
   .description('Build/generate/compress the sources files like js, scss, images, etc...')
   .option('-b, --bundle', 'Use webpack instead of babel to bundler all the files names "*.bundle.js"')
+  .option('-a, --analyze', 'Use webpak to generate the bundle and open an interface to analyze this generated bundle')
   .action((what, cmdObj) => {
 
     switch(what) {
       case 'js':
-        if (cmdObj.bundle) require('./commands/jsBundle.js')();
+        if (cmdObj.analyze) require('./commands/jsAnalyze.js')();
+        else if (cmdObj.bundle) require('./commands/jsBundle.js')();
         else require('./commands/js')();
       break;
       case 'css':

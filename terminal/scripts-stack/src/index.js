@@ -45,7 +45,7 @@ class scriptsStack {
     }
 
     // set the process name
-    process.title = `scripts-stack.${this._packageJson.name}`;
+    process.title = `coffeekraken-scripts-stack.${this._packageJson.name}`;
 
     if (this._config.config && this._config.config.length > 0) {
       this._config.config.forEach((configFile) => {
@@ -169,7 +169,7 @@ class scriptsStack {
           if (fs.existsSync(configFile)) {
             watchObj = {
               ...(watchObj || {}),
-              ...require(configFile).watch || {}
+              ...require(configFile).watch[scriptId] || {}
             };
           }
         });
@@ -177,8 +177,7 @@ class scriptsStack {
       stack[scriptId] = new Script(
         scriptId,
         this._scriptsObj[scriptId],
-        watchObj,
-        "npm"
+        Object.keys(watchObj).length > 0 ? watchObj : null
       );
       if (this._config.watch) {
         stack[scriptId].watch();

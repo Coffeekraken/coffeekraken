@@ -42,14 +42,6 @@ module.exports = __deepMerge({
   },
 
   doc: {
-    srcFoldersPattern: '**/src',
-    srcFoldersIgnore: [
-      '**/node_modules/**',
-      '**/vendor/**',
-      '**/doc/**',
-      '**/demo/**',
-      '**/appsRoot/**'
-    ],
     filesPattern: 'src/**/*',
     outputFolder: 'doc'
   },

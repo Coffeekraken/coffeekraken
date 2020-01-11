@@ -1,45 +1,10 @@
 {
   "name": "@coffeekraken/starter-kit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Base HTML files and folder structure with complete build process (js, scss, image compression, etc...) built in",
   "homepage": "https://coffeekraken.io",
   "scripts": {
-    "dist": "npm run dist.js && dist.js.bundle && npm run dist.scss && npm run dist.img && npm run dist.fonts",
-    "dist.js": "rm -rf dist/js && babel src --root-mode upward -d dist --ignore '**/*.bundle.js'",
-    "dist.js.bundle": "webpack --config webpack.config.js",
-    "dist.js.analyzer": "rm -rf dist/js && webpack --config webpack.analyzer.config.js",
-    "dist.scss": "node .scripts/sass.js && npm run dist.scss.postcss",
-    "dist.scss.postcss": "postcss dist/css/style.css -o dist/css/style.css -u postcss-preset-env --map false",
-    "dist.img": "coffeekraken-imagemin -s src/img -o dist/img -q 80",
-    "dist.fonts": "rm -rf dist/fonts && cp -R src/fonts dist/fonts",
-    "dist.favicons": "rm -rf dist/favicons && coffeekraken-favicons -s src/img/favicon.png -o dist/favicons -h dist/favicons/favicons.html",
-    "pretty-quick": "pretty-quick",
-    "pre-view": "ck-pre-view",
-    "browsersync": "browser-sync start --proxy '127.0.0.1:8080' --serveStatic 'dist' --files 'dist' --port 3000",
-    "browsersync.chrome": "open-cli http://127.0.0.1:3000 -- 'google chrome'",
-    "browsersync.firefox": "open-cli http://127.0.0.1:3000 -- 'firefox'",
-    "browsersync.safari": "open-cli http://127.0.0.1:3000 -- 'safari'",
-    "start": "coffeekraken-scripts-stack pre-view -i start -i dist"
-  },
-  "watch": {
-    "dist.js": {
-      "paths": "src/js/**/*!(.bundle).js"
-    },
-    "dist.js.bundle": {
-      "paths": "src/js/**/*.bundle.js"
-    },
-    "dist.scss": {
-      "paths": [
-        "src/scss/**/*.scss",
-        "views/**/*.scss"
-      ]
-    },
-    "dist.img": {
-      "paths": "src/img/**/*"
-    },
-    "dist.fonts": {
-      "paths": "src/fonts/**/*"
-    }
+    "start": "coffeekraken-webkit start"
   },
   "keywords": [
     "coffee",
@@ -62,49 +27,13 @@
     }
   ],
   "license": "MIT",
-  "devDependencies": {
-    "@babel/cli": "^7.7.0",
-    "@babel/core": "^7.7.2",
-    "@babel/preset-env": "^7.7.1",
-    "@coffeekraken/favicons": "^1.0.0",
-    "@coffeekraken/imagemin": "^1.0.0",
-    "@coffeekraken/pre-view": "0.0.5",
-    "@coffeekraken/scripts-stack": "^0.0.4",
-    "babel-eslint": "^10.0.3",
-    "babel-loader": "^8.0.6",
-    "browser-sync": "^2.26.7",
-    "eslint": "^6.1.0",
-    "eslint-config-airbnb": "^18.0.1",
-    "eslint-config-prettier": "^6.5.0",
-    "eslint-loader": "^3.0.2",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.16.0",
-    "eslint-plugin-react-hooks": "^1.7.0",
-    "http-server": "^0.11.1",
-    "husky": "^3.0.9",
-    "import-glob": "^1.5.0",
-    "open-cli": "^5.0.0",
-    "postcss-cli": "^6.1.3",
-    "postcss-preset-env": "^6.7.0",
-    "prettier": "^1.19.1",
-    "pretty-quick": "^2.0.1",
-    "sass": "^1.23.3",
-    "sass-glob-importer": "^1.0.1",
-    "scss-bundle": "^3.0.2",
-    "stylelint": "^12.0.0",
-    "webpack": "^4.41.2",
-    "webpack-bundle-analyzer": "^3.6.0",
-    "webpack-cli": "^3.3.10"
-  },
+  "devDependencies": {},
   "dependencies": {
     "@babel/polyfill": "^7.7.0",
     "@coffeekraken/gridle": "0.0.6",
-    "@coffeekraken/sugar": "^1.0.15",
-    "core-js": "^3.4.1",
+    "@coffeekraken/sugar": "^1.0.23",
+    "@coffeekraken/webkit": "0.0.10",
     "cssuseragent": "^2.1.31",
-    "fastclick": "^1.0.6",
-    "glob": "^7.1.6",
-    "lodash": "^4.17.15",
-    "require-glob": "^3.2.0"
+    "fastclick": "^1.0.6"
   }
 }

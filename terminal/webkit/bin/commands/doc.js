@@ -5,7 +5,7 @@ const __execSh = require('exec-sh');
 
 module.exports = () => {
 
-  __log(`Executing the documentation generation for the app "${__config.localPackageJson.name || 'unknown'}"...`, 'info');
+  __log(`Executing the documentation generation...`, 'info');
 
   try {
     __execSh(`coffeekraken-docblock-to-markdown -f '${__config.doc.filesPattern}' -d '${__config.doc.outputFolder}'`);
@@ -16,6 +16,6 @@ module.exports = () => {
     }
   }
 
-  __log(`The documentation generation has been made successfully for the app "${__config.localPackageJson.name || 'unknown'}".`, 'success');
+  __log(`The documentation generation has been made successfully.`, 'success');
 
 };

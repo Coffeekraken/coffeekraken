@@ -12,6 +12,7 @@ module.exports = __deepMerge({
   scripts: {
     "dist.js": "ck-webkit dist js",
     "dist.js.bundle": "ck-webkit dist js --bundle",
+    "dist.js.analyze": "ck-webkit dist js --analyze",
     "dist.css": "ck-webkit dist css",
     "dist.img": "ck-webkit dist img",
     "dist.doc": "ck-webkit doc",

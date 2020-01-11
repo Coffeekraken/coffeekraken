@@ -6,20 +6,11 @@ const __execSh = require('exec-sh');
 
 module.exports = () => {
 
-  __log('Executing the tests inside the package "' + process.cwd().replace(__config.repositoryRootPath + '/', '') + '"...', 'info');
+  __log('Executing the tests inside the package...', 'info');
 
   // try to get custom configurations
   let jestPackageJsonConfig = {};
   let jestConfigJs = {};
-  let globalJestPackageJson = {};
-  let globalJestConfigJs = {};
-  if (__fs.existsSync(`${__config.repositoryRootPath}/package.json`)) {
-    const pJson = require(`${__config.repositoryRootPath}/package.json`);
-    globalJestPackageJson = pJson.jest || {};
-  }
-  if (__fs.existsSync(`${__config.repositoryRootPath}/jest.config.js`)) {
-    globalJestConfigJs = require(`${__config.repositoryRootPath}/jest.config.js`);
-  }
   if (__fs.existsSync(`${process.cwd()}/package.json`)) {
     const pJson = require(`${process.cwd()}/package.json`);
     jestPackageJsonConfig = pJson.jest || {};
@@ -32,8 +23,6 @@ module.exports = () => {
   const c = {
     rootDir: process.cwd(),
     ...__config.tests,
-    ...globalJestPackageJson,
-    ...globalJestConfigJs,
     ...jestPackageJsonConfig,
     ...jestConfigJs
   };
@@ -47,6 +36,6 @@ module.exports = () => {
     process.exit();
   }
 
-  __log('Successfully executed tests inside the package "' + process.cwd().replace(__config.repositoryRootPath + '/', '') + '"...', 'success');
+  __log('Successfully executed tests inside the package...', 'success');
 
 };

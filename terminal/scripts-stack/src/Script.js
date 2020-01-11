@@ -1,4 +1,4 @@
-const spawn = require("child_process").spawn;
+const exec = require("child_process").exec;
 const chalk = require("chalk");
 const chokidar = require("chokidar");
 const logSymbols = require("log-symbols");
@@ -7,10 +7,9 @@ const terminate = require("terminate");
 const commandExistsSync = require("command-exists").sync;
 
 module.exports = class Script {
-  constructor(id, script, watchOpts = null, runner = "npm") {
+  constructor(id, script, watchOpts = null) {
     this._id = id;
     this._script = script;
-    this._runner = runner;
     this._stack = [];
     this._on = {};
     this._readed = true;
@@ -56,16 +55,9 @@ module.exports = class Script {
     this._dispatchStart();
     // flag the script as running
     this._isRunning = true;
-    // manage runner
-    if (commandExistsSync("ck")) this._runner = "ck";
-    // build command stack
-    const commandArgs = [];
-    if (this._runner === "npm" || this._runner === "ck")
-      commandArgs.push("run");
-    commandArgs.push(this.id);
-    // spawn a new process with the runner and commandArgs
-    this._childScript = spawn(this._runner, commandArgs, {
-      detached: true,
+    // exec a new process
+    this._childScript = exec(this._script, {
+      stdio: 'inherit',
       cwd: process.cwd()
     });
     this._childScript.stdout.on("data", data => {

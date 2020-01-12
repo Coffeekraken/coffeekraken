@@ -75,7 +75,7 @@ commander
   });
 
 commander
-  .command('doc')
+  .command('doc [what]')
   .description(
     'Generate the "doc/src/**" folders and markdown files from the sources files as well as the "docMap.json" file if wanted'
   )

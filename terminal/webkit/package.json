@@ -1,6 +1,6 @@
 {
   "name": "@coffeekraken/webkit",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Create easily website without the issues of configuring preprocessors like babel, webpack, imagemin, handlebars, etc...",
   "bin": {
     "ck-webkit": "./bin/coffeekraken-webkit.js",

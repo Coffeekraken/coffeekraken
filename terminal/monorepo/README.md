@@ -10,6 +10,10 @@
 Coffeekraken monorepo package is made to help you manage a repository that contain multiple "projects/packages".
 To help you understand a little bit more the goal of this package, here's a list of features that's covered:
 
+<a name="readme-goals"></a>
+
+# Goals
+
 - Define some scripts in the "package.json" root file and launch them in your subfolders using "ck run \<script\>"
   - Check inside the "local" package.json file if the wanted script exist
   - If not exist in the "local" package.json, will check in the "global" package.json file at the repository root folder
@@ -35,10 +39,9 @@ To help you understand a little bit more the goal of this package, here's a list
 
 1. [Goals](#readme-goals)
 2. [Install](#readme-install)
-3. [Quick start](#readme-quick-start)
-4. [Sass features](#readme-sass-features)
-5. [JS features](#readme-js-features)
-6. [What sugar does not](#readme-does-not)
+3. [CLI](#readme-cli)
+4. [Config](#readme-config)
+5. [Coffeekraken](#readme-coffeekraken)
 
 <a name="readme-install"></a>
 
@@ -109,7 +112,7 @@ This command will search docblocks inside your source files inside the ```src```
 
 This command is the same as the ```ck doc``` one with the difference that it will generate documentation for every "project/package" of your repository.
 
-## ```ck docMap```
+#### ```ck doc map```
 
 This command will parse every markdown files from your ```doc``` folder and generate a ```docMap.json``` file at the repository root.
 
@@ -154,6 +157,8 @@ This command is the same as the ```npm install``` one with the difference that t
 - ```dependencies```: All the standard dependencies of your package
 - ```devDependencies```: All the dependencies that are only for the development purpose
 - ```globalDependencies```: All the dependencies that need to be installed globally on your system
+
+<a name="readme-config"></a>
 
 # Config
 

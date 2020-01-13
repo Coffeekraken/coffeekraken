@@ -1,5 +1,16 @@
 module.exports = {
 
+  dist: {
+
+    js: {
+
+      bundleFiles: '{views,src}/**/*.bundle.js',
+      outputFolder: 'dist/js'
+
+    }
+
+  },
+
   express: {
 
     engines: {

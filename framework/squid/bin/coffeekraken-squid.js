@@ -18,5 +18,16 @@ commander
   .description('Launch the Squid application. This will start a nodeJS http server and all the services needed to handle your routes, etc...')
   .action(require('./commands/start'));
 
+commander
+  .command("dist [what]")
+  .description('Handle the generation/compilation/optimization of javascript, stylesheets and images files')
+  .action(what => {
+    switch(what) {
+      case 'js':
+        require('./commands/js')();
+      break;
+    }
+  });
+
 // parse the arguments
 commander.parse(process.argv);

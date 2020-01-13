@@ -1,0 +1,91 @@
+const __webpack = require('webpack');
+const __glob = require('glob');
+const __getConfig = require('../../src/node/functions/getConfig');
+const __fs = require('fs');
+const __path = require('path');
+const __deepMerge = require('@coffeekraken/sugar/js/object/deepMerge');
+const __log = require('@coffeekraken/sugar/node/log/log');
+const __emptyDirSync = require('@coffeekraken/sugar/node/fs/emptyDirSync');
+const __filesize = require('file-size');
+const __UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const __CompressionPlugin = require('compression-webpack-plugin');
+
+module.exports = () => {
+
+  // load the config
+  const config = __getConfig();
+
+  // find for the js files to bundle
+  const bundleFiles = __glob.sync(config.dist.js.bundleFiles);
+
+  // build the entry property
+  const entryObj = {};
+  bundleFiles.forEach(bundleFilePath => {
+    const parts = bundleFilePath.split('/');
+    const bundleName = parts[parts.length - 1];
+    entryObj[bundleName] = './' + bundleFilePath;
+  });
+
+  __log(`Emptying the current javascript dist folder "${config.dist.js.outputFolder}"...`, 'info');
+  __emptyDirSync(config.dist.js.outputFolder);
+
+  __log('Compiling/compressing the javascript bundle files...', 'info');
+  // Object.keys(entryObj).forEach(key => {
+  //   __log(`- ${key}: ${entryObj[key]}`, 'warn');
+  // });
+
+  let webpackConfig = {
+    mode: 'production',
+    entry: entryObj,
+    context: process.cwd(),
+    output: {
+      filename: '[name]',
+      path: __path.resolve(process.cwd(), config.dist.js.outputFolder),
+    },
+    plugins: [new __CompressionPlugin()],
+    optimization: {
+      minimizer: [new __UglifyJsPlugin()],
+      splitChunks: {
+        chunks: 'all',
+        name: 'common.bundle.js',
+        minSize: 0
+      }
+    },
+    module: {
+      rules: [
+        {
+          test: /\.m?js$/,
+          exclude: /(node_modules|bower_components)/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env']
+            }
+          }
+        }
+      ]
+    }
+  };
+
+  if (__fs.existsSync(process.cwd() + '/webpack.config.js')) {
+    webpackConfig = __deepMerge(webpackConfig, require(process.cwd() + '/webpack.config.js'));
+  }
+
+  // process the files
+  __webpack(webpackConfig, (err, stats) => {
+    if (err || stats.hasErrors()) {
+      __log(err, 'error');
+      return;
+    }
+    __log('The javascript bundle files have been builded successfuly:', 'success');
+
+    const generatedFiles = __glob.sync(config.dist.js.outputFolder + '/**/*.{js,js.gz}');
+    generatedFiles.forEach(filePath => {
+      const stats = __fs.statSync(filePath);
+      const size = __filesize(stats.size);
+      __log(`--- ${filePath}: ${size.human()}`, 'warn');
+    });
+
+  });
+
+};

@@ -4,7 +4,8 @@
   "version": "0.0.1",
   "homepage": "http://coffeekraken.io",
   "scripts": {
-    "start": "node ../squid/bin/coffeekraken-squid.js start"
+    "start": "node ../squid/bin/coffeekraken-squid.js start",
+    "dist.js": "node ../squid/bin/coffeekraken-squid.js dist js"
   },
   "author": "Coffeekraken <hello@coffeekraken.io>",
   "contributors": [
@@ -16,6 +17,7 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "@coffeekraken/sugar": "^1.0.23"
   },
   "devDependencies": {}
 }

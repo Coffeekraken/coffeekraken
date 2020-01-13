@@ -14,10 +14,20 @@
   "license": "MIT",
   "scripts": {},
   "dependencies": {
+    "@babel/core": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
     "@coffeekraken/node-blade-php": "^1.0.0",
     "@coffeekraken/sugar": "^1.0.23",
+    "babel-loader": "^8.0.6",
     "commander": "^4.1.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "glob": "^7.1.6",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "compression-webpack-plugin": "^3.1.0",
+    "file-size": "^1.0.0",
+    "uglifyjs-webpack-plugin": "^2.2.0"
+  }
 }

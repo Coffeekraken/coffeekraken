@@ -1,0 +1,23 @@
+{
+  "name": "@coffeekraken/squid",
+  "description": "All you need to create/serve web based applications with the elegance of a swimming squid",
+  "version": "0.0.1",
+  "homepage": "http://coffeekraken.io",
+  "author": "Coffeekraken <hello@coffeekraken.io>",
+  "contributors": [
+    {
+      "name": "Olivier Bossel",
+      "email": "olivier.bossel@gmail.com",
+      "url": "http://olivierbossel.com"
+    }
+  ],
+  "license": "MIT",
+  "scripts": {},
+  "dependencies": {
+    "@coffeekraken/node-blade-php": "^1.0.0",
+    "@coffeekraken/sugar": "^1.0.23",
+    "commander": "^4.1.0",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {}
+}

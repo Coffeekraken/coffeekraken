@@ -1,0 +1,21 @@
+{
+  "name": "@coffeekraken/squid-sample",
+  "description": "A sample application based on the @coffeekraken/squid framework",
+  "version": "0.0.1",
+  "homepage": "http://coffeekraken.io",
+  "scripts": {
+    "start": "node ../squid/bin/coffeekraken-squid.js start"
+  },
+  "author": "Coffeekraken <hello@coffeekraken.io>",
+  "contributors": [
+    {
+      "name": "Olivier Bossel",
+      "email": "olivier.bossel@gmail.com",
+      "url": "http://olivierbossel.com"
+    }
+  ],
+  "license": "MIT",
+  "dependencies": {
+  },
+  "devDependencies": {}
+}

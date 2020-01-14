@@ -1,4 +1,5 @@
 const __fs = require('fs');
+const __glob = require('glob');
 const __deepMerge = require('@coffeekraken/sugar/js/object/deepMerge');
 
 /**
@@ -24,14 +25,14 @@ module.exports = () => {
     const squidConfig = require(process.cwd() + '/squid.config.js');
     config = __deepMerge(config, squidConfig || {});
   }
-  if (__fs.existsSync(process.cwd() + '/squid/routes.js')) {
-    const squidRoutes = require(process.cwd() + '/squid/routes.js');
-    config.routes = __deepMerge(config.routes, squidRoutes || {});
-  }
-  if (__fs.existsSync(process.cwd() + '/squid/server.js')) {
-    const squidServer = require(process.cwd() + '/squid/server.js');
-    config.server = __deepMerge(config.server, squidServer || {});
-  }
+  const configFiles = __glob.sync(process.cwd() + '/squid/*.js');
+
+  configFiles.forEach(configFilePath => {
+    const configObj = require(configFilePath);
+    const configName = configFilePath.split('/').slice(-1)[0].replace('.js','');
+    config[configName] = __deepMerge(config[configName] || {}, configObj);
+  });
+  // console.log(config);
 
   // return the final config
   return config;

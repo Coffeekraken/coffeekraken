@@ -1,9 +1,7 @@
 module.exports = {
-
   server: {
-    port: 3000
-  },
 
+  },
   routes: {
     'GET /home': {
       controller: 'HomeController'

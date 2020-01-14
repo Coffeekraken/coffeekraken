@@ -107,6 +107,9 @@ module.exports = class SquidApp {
       this.addRoute(route, routeConfig);
     });
 
+    // add the internal squid routes
+    this._expressApp.get('/squid/js', require('./express/controllers/SquidJsController').index);
+
   }
 
   /**

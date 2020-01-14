@@ -1,4 +1,6 @@
 @extends('layouts.default')
 @section('content')
-  {!! $coco !!}
+
+  @squid('view home.header #header')
+
 @stop

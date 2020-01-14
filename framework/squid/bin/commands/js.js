@@ -7,7 +7,7 @@ const __deepMerge = require('@coffeekraken/sugar/js/object/deepMerge');
 const __log = require('@coffeekraken/sugar/node/log/log');
 const __emptyDirSync = require('@coffeekraken/sugar/node/fs/emptyDirSync');
 const __filesize = require('file-size');
-const __UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const __TerserPlugin = require('terser-webpack-plugin');
 const __CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = () => {
@@ -16,14 +16,24 @@ module.exports = () => {
   const config = __getConfig();
 
   // find for the js files to bundle
-  const bundleFiles = __glob.sync(config.dist.js.bundleFiles);
+  let bundleFiles = __glob.sync(config.dist.js.bundleFiles);
+  bundleFiles = bundleFiles.concat(__glob.sync(`${__dirname}/../../src/js/**/*.bundle.js`));
 
   // build the entry property
   const entryObj = {};
   bundleFiles.forEach(bundleFilePath => {
     const parts = bundleFilePath.split('/');
     const bundleName = parts[parts.length - 1];
-    entryObj[bundleName] = './' + bundleFilePath;
+
+    let finalBundleFilePath = bundleFilePath.replace('src/js/','');
+
+    if ( ! finalBundleFilePath.includes(__path.resolve(__dirname, '../../'))) {
+      finalBundleFilePath = process.cwd() + '/' + config.dist.js.outputFolder + '/' + finalBundleFilePath;
+    } else {
+      finalBundleFilePath = finalBundleFilePath.replace(__path.resolve(__dirname, '../../'), `${__path.resolve(__dirname, '../../')}/dist/js/`);
+    }
+
+    entryObj[finalBundleFilePath] = (bundleFilePath.charAt(0) === '/') ? bundleFilePath : './' + bundleFilePath;
   });
 
   __log(`Emptying the current javascript dist folder "${config.dist.js.outputFolder}"...`, 'info');
@@ -40,14 +50,15 @@ module.exports = () => {
     context: process.cwd(),
     output: {
       filename: '[name]',
-      path: __path.resolve(process.cwd(), config.dist.js.outputFolder),
+      path: '/',
     },
     plugins: [new __CompressionPlugin()],
     optimization: {
-      minimizer: [new __UglifyJsPlugin()],
+      minimize: true,
+      minimizer: [new __TerserPlugin()],
       splitChunks: {
         chunks: 'all',
-        name: 'common.bundle.js',
+        name: `${process.cwd()}/${config.dist.js.outputFolder}/common.bundle.js`,
         minSize: 0
       }
     },

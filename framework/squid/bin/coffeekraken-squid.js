@@ -14,7 +14,7 @@ commander
 
 // register the CLI commands
 commander
-  .command("start")
+  .command("start [env]")
   .description('Launch the Squid application. This will start a nodeJS http server and all the services needed to handle your routes, etc...')
   .action(require('./commands/start'));
 

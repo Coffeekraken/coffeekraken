@@ -1,5 +1,6 @@
 const __fs = require('fs');
 const __nodeBladePhp = require('@coffeekraken/node-blade-php');
+const __SquidViewPreprocessor = require('../../classes/SquidViewPreprocessor');
 
 /**
  * @name            blade
@@ -12,7 +13,11 @@ const __nodeBladePhp = require('@coffeekraken/node-blade-php');
  */
 module.exports = function(filePath, options, callback) {
   __nodeBladePhp.setViewsFolder(options.settings.views);
-  __nodeBladePhp.compile(filePath.replace(options.settings.views, ''), options).then(result => {
-    return callback(null, result);
+  __nodeBladePhp.compile(filePath.replace(options.settings.views, ''), options).then(async result => {
+    // preprocess the view
+    const viewPreprocessor = new __SquidViewPreprocessor(result);
+    result = await viewPreprocessor.process().then(values => {
+      callback(null, values[0]);
+    });
   });
 }

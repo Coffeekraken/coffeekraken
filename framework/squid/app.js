@@ -1,6 +1,9 @@
-const __SquidApp = require('./src/node/SquidApp');
+const __SquidApp = require('./src/node/classes/SquidApp');
 const __getConfig = require('./src/node/functions/getConfig');
 const { killPortProcess } = require('kill-port-process');
+const __path = require('path');
+
+require('./env');
 
 /**
  * Entry point of the squid framework.

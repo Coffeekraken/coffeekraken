@@ -20,6 +20,7 @@
     "@coffeekraken/sugar": "^1.0.23",
     "babel-loader": "^8.0.6",
     "commander": "^4.1.0",
+    "compression": "^1.7.4",
     "express": "^4.17.1",
     "express-nunjucks": "^2.2.3",
     "glob": "^7.1.6",
@@ -34,6 +35,7 @@
     "file-size": "^1.0.0",
     "kill-port-process": "^2.2.0",
     "terser-webpack-plugin": "^2.3.2",
-    "uglifyjs-webpack-plugin": "^2.2.0"
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack-concat-plugin": "^3.0.0"
   }
 }

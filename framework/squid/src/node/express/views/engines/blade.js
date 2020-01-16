@@ -1,6 +1,6 @@
 const __fs = require('fs');
 const __nodeBladePhp = require('@coffeekraken/node-blade-php');
-const __SquidViewPreprocessor = require('../../classes/SquidViewPreprocessor');
+const __SquidViewPreprocessor = require('../../../classes/SquidViewPreprocessor');
 
 /**
  * @name            blade
@@ -17,7 +17,7 @@ module.exports = function(filePath, options, callback) {
     // preprocess the view
     const viewPreprocessor = new __SquidViewPreprocessor(result);
     result = await viewPreprocessor.process().then(values => {
-      callback(null, values[0]);
+      callback(null, values[values.length-1]);
     });
   });
 }

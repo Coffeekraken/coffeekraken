@@ -1,3 +1,5 @@
+const __uniqid = require('@coffeekraken/sugar/js/string/uniqid');
+
 /**
  * @name                  SquidViewPreprocessor
  * @namespace             squid.node.classes
@@ -89,6 +91,7 @@ module.exports = class SquidViewPreprocessor {
   _processSquidToken() {
     return new Promise((resolve, reject) => {
 
+      const tokenHash = __uniqid();
       const tokenReg = /\@squid\(('|")([^\r\n]*)('|")\)/gm;
       let matches;
       const qualities = [];
@@ -100,8 +103,13 @@ module.exports = class SquidViewPreprocessor {
 
         // parse the squid token content
         const tokenObject = this._parseSquidTokenContent(content);
+        if ( ! tokenObject.id) tokenObject.id = tokenHash;
 
-        this._viewContent = this._viewContent.replace(token, 'YPYPYP');
+        this._viewContent = this._viewContent.replace(token, `
+          <script>
+            window.Squid.view(${JSON.stringify(tokenObject)});
+          </script>
+        `);
 
       }
 
@@ -160,7 +168,7 @@ module.exports = class SquidViewPreprocessor {
    * {
    *  action: 'view',
    *  view: 'home.header',
-   *  id: '#header'
+   *  id: 'header'
    * }
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -178,8 +186,6 @@ module.exports = class SquidViewPreprocessor {
       action: action
     };
 
-    console.log(parts);
-
     // parse differently depending on the action
     switch(action) {
       case 'view':
@@ -191,7 +197,7 @@ module.exports = class SquidViewPreprocessor {
     parts.forEach(part => {
 
       // ids that begin with a #
-      if (part.charAt(0) === '#') tokenObject.id = part;
+      if (part.charAt(0) === '#') tokenObject.id = part.slice(1);
 
     });
 

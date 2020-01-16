@@ -16,8 +16,7 @@ module.exports = () => {
   const config = __getConfig();
 
   // find for the js files to bundle
-  let bundleFiles = __glob.sync(config.dist.js.bundleFiles);
-  // bundleFiles = bundleFiles.concat(__glob.sync(`${__dirname}/../../src/js/**/*.bundle.js`));
+  let bundleFiles = __glob.sync(`${__dirname}/../../src/js/**/*.bundle.js`);
 
   // build the entry property
   const entryObj = {};
@@ -26,13 +25,12 @@ module.exports = () => {
     const bundleName = parts[parts.length - 1];
 
     let finalBundleFilePath = bundleFilePath.replace('src/js/','');
-    finalBundleFilePath = process.cwd() + '/' + config.dist.js.outputFolder + '/' + finalBundleFilePath;
-
+    finalBundleFilePath = finalBundleFilePath.replace(__path.resolve(__dirname, '../../'), `${__path.resolve(__dirname, '../../')}/dist/js/`);
     entryObj[finalBundleFilePath] = (bundleFilePath.charAt(0) === '/') ? bundleFilePath : './' + bundleFilePath;
   });
 
   __log(`Emptying the current javascript dist folder "${config.dist.js.outputFolder}"...`, 'info');
-  __emptyDirSync(config.dist.js.outputFolder);
+  __emptyDirSync(__squid.rootPath + '/' + config.dist.js.outputFolder);
   __log('Compiling/compressing the javascript bundle files...', 'info');
 
   let webpackConfig = {
@@ -52,12 +50,7 @@ module.exports = () => {
         terserOptions: {
 
         }
-      })],
-      splitChunks: {
-        chunks: 'all',
-        name: `${process.cwd()}/${config.dist.js.outputFolder}/common.bundle.js`,
-        minSize: 0
-      }
+      })]
     },
     module: {
       rules: [
@@ -88,11 +81,11 @@ module.exports = () => {
     }
     __log('The javascript bundle files have been builded successfuly:', 'success');
 
-    const generatedFiles = __glob.sync(config.dist.js.outputFolder + '/**/*.{js,js.gz}');
+    const generatedFiles = __glob.sync(__dirname + '/../../dist/js/**/*.{js,js.gz}');
     generatedFiles.forEach(filePath => {
       const stats = __fs.statSync(filePath);
       const size = __filesize(stats.size);
-      __log(`--- ${filePath}: ${size.human()}`, 'warn');
+      __log(`--- ${filePath.replace(__path.resolve(__dirname, '../..') + '/', '')}: ${size.human()}`, 'warn');
     });
 
   });

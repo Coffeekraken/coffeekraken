@@ -1,6 +1,7 @@
 const __express = require('express');
 const __fs = require('fs');
 const __log = require('@coffeekraken/sugar/node/log/log');
+const __compression = require('compression');
 
 /**
  * @name          SquidApp
@@ -50,6 +51,9 @@ module.exports = class SquidApp {
     // create the express app
     this._createExpressApp();
 
+    // set some app middlewares
+    this._setExpressAppMiddlewares();
+
     // Init the routes of the application founded in the config object
     this._initRoutes();
 
@@ -81,6 +85,23 @@ module.exports = class SquidApp {
   }
 
   /**
+   * @name               _setExpressAppMiddlewares
+   * @namespace          squid.node.SquidApp
+   * @type              function
+   * @private
+   *
+   * Register some express application middlewares like compression, etc...
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _setExpressAppMiddlewares() {
+
+    // compression middleware
+    this._expressApp.use(__compression());
+
+  }
+
+  /**
    * @name              _initRoutes
    * @namespace         squid.node.SquidApp
    * @type              Function
@@ -108,7 +129,10 @@ module.exports = class SquidApp {
     });
 
     // add the internal squid routes
-    this._expressApp.get('/squid/js', require('./express/controllers/SquidJsController').index);
+    this._expressApp.get('/squid/js', require('../express/controllers/SquidJsController').index);
+
+    // add the "view" internal squid route
+    this._expressApp.get('/view/:viewPath/:viewId', require('../express/controllers/SquidViewController').index);
 
   }
 
@@ -195,11 +219,11 @@ module.exports = class SquidApp {
     */
   _registerExpressTemplateEngines() {
 
-    this._expressApp.set('views', process.cwd() + '/views');
+    this._expressApp.set('views', process.cwd() + '/' + this._config.views.folder);
     this._expressApp.set('view engine', 'blade.php');
 
-    Object.keys(this._config.express.engines).forEach(extension => {
-      this._expressApp.engine(extension, this._config.express.engines[extension]);
+    Object.keys(this._config.views.engines).forEach(extension => {
+      this._expressApp.engine(extension, this._config.views.engines[extension]);
     });
 
   }

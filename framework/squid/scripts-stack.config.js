@@ -2,7 +2,8 @@ module.exports = {
   scripts: {
     "start": `node ${__dirname}/bin/coffeekraken-squid.js start squid`,
     "dist": `node ${__dirname}/bin/coffeekraken-squid.js dist all`,
-    "dist.js": `node ${__dirname}/bin/coffeekraken-squid.js dist js`
+    "dist.js": `node ${__dirname}/bin/coffeekraken-squid.js dist js`,
+    "squid.js": `node ${__dirname}/bin/coffeekraken-squid.js squid js`
   },
   watch: {
     "start": {
@@ -17,9 +18,13 @@ module.exports = {
     },
     "dist.js": {
       paths: [
-        `${__dirname}/src/js/**/*.js`,
         `${process.cwd()}/src/js/**/*.js`,
         `${process.cwd()}/views/**/*.js`
+      ]
+    },
+    "squid.js": {
+      paths: [
+        `${__dirname}/src/js/**/*.js`
       ]
     }
   }

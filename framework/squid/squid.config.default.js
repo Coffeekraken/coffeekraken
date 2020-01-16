@@ -1,5 +1,21 @@
 module.exports = {
 
+  views: {
+
+    folder: 'views',
+
+    engines: {
+      'blade.php': require('./src/node/express/views/engines/blade')
+    },
+
+    defaultDataAdapter: 'viewsFolderJson',
+
+    dataAdapters: {
+      'viewsFolderJson': require('./src/node/express/views/dataAdapters/viewsFolderJson')
+    }
+
+  },
+
   dist: {
 
     js: {
@@ -12,10 +28,6 @@ module.exports = {
   },
 
   express: {
-
-    engines: {
-      'blade.php': require('./src/node/express/templateEngines/blade')
-    }
 
   },
 

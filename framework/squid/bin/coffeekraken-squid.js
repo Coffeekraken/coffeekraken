@@ -5,6 +5,8 @@ const __path = require('path');
 const commander = require("commander");
 const packageJson = require(__path.resolve(__dirname, '../package.json'));
 
+require(__dirname + '/../env.js');
+
 // init the app
 __initApp();
 
@@ -17,6 +19,17 @@ commander
   .command("start [env]")
   .description('Launch the Squid application. This will start a nodeJS http server and all the services needed to handle your routes, etc...')
   .action(require('./commands/start'));
+
+commander
+  .command('squid [what]')
+  .description('Handle the generation/compilation/optimization of javascript, stylesheets and images files inside the Squid framework folder')
+  .action(what => {
+    switch(what) {
+      case 'js':
+        require('./commands/squidJs')();
+      break;
+    }
+  });
 
 commander
   .command("dist [what]")

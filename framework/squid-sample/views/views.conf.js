@@ -1,5 +1,5 @@
 module.exports = {
   'home.header': {
-    'adapter': 'plop'
+    'dataAdapter': 'plop'
   }
 }

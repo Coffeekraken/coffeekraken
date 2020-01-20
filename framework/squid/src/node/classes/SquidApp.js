@@ -63,8 +63,6 @@ module.exports = class SquidApp {
     // start the express http server
     this._startExpressServer();
 
-    // console.log(this._config);
-
   }
 
   /**
@@ -129,10 +127,10 @@ module.exports = class SquidApp {
     });
 
     // add the internal squid routes
-    this._expressApp.get('/squid/js', require('../express/controllers/SquidJsController').index);
+    this._expressApp.get('/squid/js', require('../express/controllers/JsController').index);
 
     // add the "view" internal squid route
-    this._expressApp.get('/view/:viewPath/:viewId', require('../express/controllers/SquidViewController').index);
+    this._expressApp.get('/view/:viewPath/:viewId', require('../express/controllers/ViewController').index);
 
   }
 

@@ -1,5 +1,6 @@
 const __glob = require('glob');
-const __viewExist = require('../../../functions/viewExist');
+const __viewExist = require('../../../express/views/viewExist');
+const __deepMerge = require('@coffeekraken/sugar/js/object/deepMerge');
 
 /**
  * @name                          viewsFolderJson
@@ -10,27 +11,44 @@ const __viewExist = require('../../../functions/viewExist');
  *
  * @param             {String}                  viewPath                The dot view path that you want the data for
  * @param             {String}                  [viewId = null]         The view id to specify which view data you want if the view file is used for multiple display...
- * @return            {Object}                                          The data object that will be passed to the view file on render
+ * @param             {Object}                  viewConfig              The view config
+ * @param             {Object}                  req                     The req express controller object
+ * @return            {Promise}                                         A promise that need to be resolved with the view data retreived passed as parameter
  *
  * @example         js
  * // admit you have a folder like this:
  * // -- views/home
  * // --------- header.blade.php
  * // --------- header.myCoolId.data.json
- * viewsFolderJson('home.header', 'myCoolId');
+ * viewsFolderJson('home.header', 'myCoolId').then(data => { //... });
  * // This will return the content of the "header.myCoolId.data.json" file...
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = (viewPath, viewId = null) => {
+module.exports = (viewPath, viewId = null, viewConfig, req) => {
+  return new Promise((resolve, reject) => {
 
-  // check first that the view exist
-  // if ( ! __viewExist()) return false;
+    // check first that the view exist
+    if ( ! __viewExist(viewPath)) return reject(`No ${viewPath.replace('.','/')}${(viewId) ? '.' + viewId : ''}.data.json exists...`);
 
-  // list all the .data.json of the current folder
-  console.log(`${process.cwd()}/${__squid.config.views.folder}/${viewPath.replace('.','/')}.*`);
-  const dataFiles = __glob.sync(`${process.cwd()}/${__squid.config.views.folder}/${viewPath.replace('.','/')}.*`);
+    let dataFiles, viewData = {};
 
-  console.log(dataFiles);
+    const viewPathJsonPath = `${process.cwd()}/${__squid.config.views.folder}/${viewPath.replace('.','/')}.data.json`;
+    dataFiles = __glob.sync(viewPathJsonPath);
+    if (dataFiles.length) {
+      viewData = require(dataFiles[0]);
+    }
 
+    if (viewId) {
+      const viewPathWithIdJsonPath = `${process.cwd()}/${__squid.config.views.folder}/${viewPath.replace('.','/')}.${viewId}.data.json`;
+      dataFiles = __glob.sync(viewPathWithIdJsonPath);
+      if (dataFiles.length) {
+        viewData = __deepMerge(dataView, require(dataFiles[0]));
+      }
+    }
+
+    // resolve the promise passing the data as parameter
+    resolve(viewData);
+
+  });
 };

@@ -1,5 +1,5 @@
 const __path = require('path');
-const __getConfig = require('../../functions/getConfig');
+const __getConfig = require('../../getConfig');
 const __fs = require('fs');
 const __zlib = require('zlib');
 

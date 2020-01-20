@@ -2,11 +2,18 @@ module.exports = {
 
   express: {
     controllers: {
-      SquidJsController: require('./express/controllers/SquidJsController'),
-      SquidViewController: require('./express/controllers/SquidViewController')
+      JsController: require('./express/controllers/JsController'),
+      ViewController: require('./express/controllers/ViewController')
     },
-    engines: {
-      blade: require('./express/views/engines/blade')
+    views: {
+      engines: {
+        blade: require('./express/views/engines/blade')
+      },
+      dataAdapters: {
+        viewsFolderJson: require('./express/views/dataAdapters/viewsFolderJson')
+      },
+      getViewMetas: require('./express/views/getViewMetas'),
+      viewExist: require('./express/views/viewExist')
     }
   },
 
@@ -15,9 +22,6 @@ module.exports = {
     SquidViewPreprocessor: require('./classes/SquidViewPreprocessor')
   },
 
-  getConfig: require('./functions/getConfig'),
-  getViewMetas: require('./functions/getViewMetas'),
-  viewExist: require('./functions/viewExist')
-
+  getConfig: require('./getConfig')
 
 };

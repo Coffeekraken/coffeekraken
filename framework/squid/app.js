@@ -1,5 +1,5 @@
 const __SquidApp = require('./src/node/classes/SquidApp');
-const __getConfig = require('./src/node/functions/getConfig');
+const __getConfig = require('./src/node/getConfig');
 const { killPortProcess } = require('kill-port-process');
 const __path = require('path');
 

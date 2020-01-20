@@ -1,4 +1,7 @@
+const __fs = require('fs');
 const __viewExist = require('./viewExist');
+const __getViewConfig = require('./getViewConfig');
+const __getViewPath = require('./getViewPath');
 
 /**
  * @name                            getViewMetas
@@ -30,17 +33,16 @@ const __viewExist = require('./viewExist');
  */
 module.exports = (viewPath, viewId = null) => {
 
-  let filePath = __viewExist(viewPath);
+  // get the view config
+  const viewConfig = __getViewConfig(viewPath, viewId);
 
-  // check that the asked view exist
-  if ( ! filePath ) {
-    return false;
-  }
+  // get the view path
+  const viewFilePath = __getViewPath(viewPath, viewId);
 
-  // try to find the data from the views folder
+  // return the metas
+  return {
+    path: viewFilePath,
+    config: viewConfig
+  };
 
-
-  console.log(filePath);
-
-  // find
 }

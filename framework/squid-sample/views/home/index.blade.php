@@ -3,8 +3,4 @@
 
   @squid('view home.header #header')
 
-
-
-  @squid('view home.header #coco')
-
 @stop

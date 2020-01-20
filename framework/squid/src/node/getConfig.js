@@ -15,7 +15,7 @@ const __deepMerge = require('@coffeekraken/sugar/js/object/deepMerge');
  */
 module.exports = () => {
 
-  const defaultConfig = require('../../../squid.config.default.js');
+  const defaultConfig = require('../../squid.config.default.js');
   let config = defaultConfig;
   if (__fs.existsSync(process.cwd() + '/package.json')) {
     const packageJson = require(process.cwd() + '/package.json');
@@ -32,7 +32,6 @@ module.exports = () => {
     const configName = configFilePath.split('/').slice(-1)[0].replace('.js','');
     config[configName] = __deepMerge(config[configName] || {}, configObj);
   });
-  // console.log(config);
 
   // return the final config
   return config;

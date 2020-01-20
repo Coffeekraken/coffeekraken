@@ -4,28 +4,34 @@ const __glob = require('glob');
 
 /**
  * @name            viewExist
- * @namespace       squid.node.function
+ * @namespace       squid.node.functions
  * @type            Function
  *
  * Check if a view exist depending on the registered engines in the config
  *
  * @param             {String}              viewPath                The dot path to the wanted view without extension
+ * @param             {String}              [viewId=null]           A specific view id to check
  * @param             {String}              [extension=null]        A specific extension to check. If set to null, will check every registered template engines extensions
  * @return            {Boolean}                                     true if the view exist, false if not...
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = (viewPath, extension = null) => {
+module.exports = (viewPath, viewId = null, extension = null) => {
 
   // get the views folder path
-  const viewsPath = `${process.cwd()}/${__squid.config.views.folder}`;
+  let viewFilePath = `${process.cwd()}/${__squid.config.views.folder}/${viewPath.replace('.','/')}`;
+
+  // append the viewId if passed
+  if (viewId) {
+    viewFilePath += `.${viewId}`;
+  }
 
   // list all files in the asked view path
-  let files = __glob.sync(`${viewsPath}/${viewPath.replace('.','/')}.*`);
+  let files = __glob.sync(`${viewFilePath}.*`);
 
   // if no files have been found, check if the "index" one exist
   if ( ! files.length) {
-    files = __glob.sync(`${viewsPath}/${viewPath.replace('.','/')}/index.*`);
+    files = __glob.sync(`${viewFilePath}/index.*`);
   }
 
   // now if no files have been found, this mean that the view does not exist...

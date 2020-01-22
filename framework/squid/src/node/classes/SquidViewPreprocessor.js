@@ -70,10 +70,9 @@ module.exports = class SquidViewPreprocessor {
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   process() {
-    return Promise.all([
-      this._injectScriptTags(), // inject the common squid script tag in the header
-      this._processSquidToken() // process the @squid token
-    ]);
+    this._injectScriptTags(); // inject the common squid script tag in the header
+    this._processSquidToken(); // process the @squid token
+    return this._viewContent;
   }
 
   /**
@@ -89,32 +88,35 @@ module.exports = class SquidViewPreprocessor {
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _processSquidToken() {
-    return new Promise((resolve, reject) => {
 
-      const tokenHash = __uniqid();
-      const tokenReg = /\@squid\(('|")([^\r\n]*)('|")\)/gm;
-      let matches;
-      const qualities = [];
+    const tokenHash = __uniqid();
+    const tokenReg = /\@squid\(('|")([^\r\n]*)('|")\)/gm;
+    let matches;
+    const qualities = [];
 
-      while (matches = tokenReg.exec(this._viewContent)) {
+    while (matches = tokenReg.exec(this._viewContent)) {
 
-        const token = matches[0];
-        const content = matches[2];
+      const token = matches[0];
+      const content = matches[2];
 
-        // parse the squid token content
-        const tokenObject = this._parseSquidTokenContent(content);
-        if ( ! tokenObject.id) tokenObject.id = tokenHash;
+      // parse the squid token content
+      const tokenObject = this._parseSquidTokenContent(content);
+      if ( ! tokenObject.id) tokenObject.id = tokenHash;
 
-        this._viewContent = this._viewContent.replace(token, `
+      const htmlId = tokenObject.id === tokenHash ? tokenHash : tokenObject.id + '-' + tokenHash;
+
+      this._viewContent = this._viewContent.replace(token, `
+        <div id="${htmlId}">
           <script>
-            window.Squid.view(${JSON.stringify(tokenObject)});
+            window.Squid.view(${JSON.stringify(tokenObject)}, '${htmlId}');
           </script>
-        `);
+        </div>
+      `);
 
-      }
+    }
 
-      resolve(this._viewContent);
-    });
+    return this._viewContent;
+
   }
 
   /**
@@ -128,27 +130,24 @@ module.exports = class SquidViewPreprocessor {
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _injectScriptTags() {
-    return new Promise((resolve, reject) => {
 
-      // search for the <head> tag and replace it if founded
-      if ( ! this._viewContent.includes('</head>')) {
-        resolve(this._viewContent);
-        return;
-      }
+    // search for the <head> tag and replace it if founded
+    if ( ! this._viewContent.includes('</head>')) {
+      return this._viewContent;
+    }
 
-      // create the script html content
-      const html = `
-        <script src="/squid/js"></script>
-        </head>
-      `;
+    // create the script html content
+    const html = `
+      <script src="/squid/js"></script>
+      </head>
+    `;
 
-      // inject the script tag to load the global squid javascript
-      this._viewContent = this._viewContent.replace('</head>', html);
+    // inject the script tag to load the global squid javascript
+    this._viewContent = this._viewContent.replace('</head>', html);
 
-      // resolve the promise
-      resolve(this._viewContent);
+    // resolve the promise
+    return this._viewContent;
 
-    });
   }
 
 
@@ -198,6 +197,14 @@ module.exports = class SquidViewPreprocessor {
 
       // ids that begin with a #
       if (part.charAt(0) === '#') tokenObject.id = part.slice(1);
+
+      // animation in
+      if (part.startsWith('in:')) tokenObject.animationIn = part.slice(3);
+      else if (__squid.config.animations.defaultIn) tokenObject.animationIn = __squid.config.animations.defaultIn;
+
+      // animation out
+      if (part.startsWith('out:')) tokenObject.animationOut = part.slice(4);
+      else if (__squid.config.animations.defaultOut) tokenObject.animationOut = __squid.config.animations.defaultOut;
 
     });
 

@@ -13,11 +13,7 @@ const __SquidViewPreprocessor = require('../../../classes/SquidViewPreprocessor'
  */
 module.exports = function(filePath, options, callback) {
   __nodeBladePhp.setViewsFolder(options.settings.views);
-  __nodeBladePhp.compile(filePath.replace(options.settings.views, ''), options).then(async result => {
-    // preprocess the view
-    const viewPreprocessor = new __SquidViewPreprocessor(result);
-    result = await viewPreprocessor.process().then(values => {
-      callback(null, values[values.length-1]);
-    });
+  __nodeBladePhp.compile(filePath.replace(options.settings.views, ''), options).then(result => {
+    callback(null, result);
   });
 }

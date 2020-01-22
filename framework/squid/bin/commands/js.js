@@ -1,6 +1,6 @@
 const __webpack = require('webpack');
 const __glob = require('glob');
-const __getConfig = require('../../src/node/functions/getConfig');
+const __getConfig = require('../../src/node/getConfig');
 const __fs = require('fs');
 const __path = require('path');
 const __deepMerge = require('@coffeekraken/sugar/js/object/deepMerge');
@@ -57,6 +57,13 @@ module.exports = () => {
         chunks: 'all',
         name: `${process.cwd()}/${config.dist.js.outputFolder}/common.bundle.js`,
         minSize: 0
+      }
+    },
+    resolve: {
+      alias: {
+        '@squid': __path.resolve(__dirname, '../../src/js'),
+        '@app': process.cwd() + '/' + config.dist.js.sourcesFolder,
+        '@coffeekraken/sugar/js': __dirname + '/../../../../util/sugar/dist/js'
       }
     },
     module: {

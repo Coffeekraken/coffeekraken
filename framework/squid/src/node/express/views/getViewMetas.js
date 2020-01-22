@@ -39,9 +39,24 @@ module.exports = (viewPath, viewId = null) => {
   // get the view path
   const viewFilePath = __getViewPath(viewPath, viewId);
 
+  // get the view extension
+  let viewExtension = viewFilePath.split('/');
+  viewExtension.shift();
+  viewExtension = viewExtension[viewExtension.length - 1];
+  viewExtension = viewExtension.split('.');
+  viewExtension.shift();
+  if (viewExtension[0] === viewId) viewExtension.shift();
+  viewExtension = viewExtension.join('.');
+
   // return the metas
   return {
-    path: viewFilePath,
+    id: viewId,
+    path: viewPath,
+    renderPath: (viewPath + (viewId ? `#${viewId}` : '')).replace('.','/'),
+    extension: viewExtension,
+    enginePath: __squid.config.views.engines[viewExtension],
+    dataAdapterPath: __squid.config.views.dataAdapters[viewConfig.dataAdapter],
+    filePath: viewFilePath,
     config: viewConfig
   };
 

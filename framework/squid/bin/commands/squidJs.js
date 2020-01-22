@@ -1,6 +1,6 @@
 const __webpack = require('webpack');
 const __glob = require('glob');
-const __getConfig = require('../../src/node/functions/getConfig');
+const __getConfig = require('../../src/node/getConfig');
 const __fs = require('fs');
 const __path = require('path');
 const __deepMerge = require('@coffeekraken/sugar/js/object/deepMerge');
@@ -21,11 +21,8 @@ module.exports = () => {
   // build the entry property
   const entryObj = {};
   bundleFiles.forEach(bundleFilePath => {
-    const parts = bundleFilePath.split('/');
-    const bundleName = parts[parts.length - 1];
-
     let finalBundleFilePath = bundleFilePath.replace('src/js/','');
-    finalBundleFilePath = finalBundleFilePath.replace(__path.resolve(__dirname, '../../'), `${__path.resolve(__dirname, '../../')}/dist/js/`);
+    finalBundleFilePath = finalBundleFilePath.replace(__path.resolve(__dirname, '../../') + '/', '');
     entryObj[finalBundleFilePath] = (bundleFilePath.charAt(0) === '/') ? bundleFilePath : './' + bundleFilePath;
   });
 
@@ -36,10 +33,12 @@ module.exports = () => {
   let webpackConfig = {
     mode: 'production',
     entry: entryObj,
-    context: process.cwd(),
+    context: __path.resolve(__dirname, '../../'),
     output: {
       filename: '[name]',
-      path: '/',
+      path: __squid.rootPath + '/' + config.dist.js.outputFolder,
+      publicPath: '/squid/js/',
+      chunkFilename: 'chunks/[name].[chunkhash].js'
     },
     plugins: [
       new __CompressionPlugin()
@@ -51,6 +50,13 @@ module.exports = () => {
 
         }
       })]
+    },
+    resolve: {
+      alias: {
+        '@squid': __path.resolve(__dirname, '../../src/js'),
+        '@app': process.cwd() + '/' + config.dist.js.sourcesFolder,
+        '@coffeekraken/sugar/js': __dirname + '/../../../../util/sugar/dist/js'
+      }
     },
     module: {
       rules: [
@@ -76,7 +82,7 @@ module.exports = () => {
   // process the files
   __webpack(webpackConfig, (err, stats) => {
     if (err || stats.hasErrors()) {
-      __log(err, 'error');
+      __log(err || stats, 'error');
       return;
     }
     __log('The javascript bundle files have been builded successfuly:', 'success');

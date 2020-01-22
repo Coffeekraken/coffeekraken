@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[2],{36:function(o,n,w){"use strict";w.r(n),n.default=(o,n="info")=>new Promise((n,w)=>{console.warn("coco",o),n()})}}]);

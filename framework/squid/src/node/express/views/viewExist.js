@@ -21,17 +21,15 @@ module.exports = (viewPath, viewId = null, extension = null) => {
   // get the views folder path
   let viewFilePath = `${process.cwd()}/${__squid.config.views.folder}/${viewPath.replace('.','/')}`;
 
-  // append the viewId if passed
-  if (viewId) {
-    viewFilePath += `.${viewId}`;
-  }
-
-  // list all files in the asked view path
   let files = __glob.sync(`${viewFilePath}.*`);
 
-  // if no files have been found, check if the "index" one exist
-  if ( ! files.length) {
-    files = __glob.sync(`${viewFilePath}/index.*`);
+  // append the viewId if passed
+  if (viewId) {
+    viewFilePath += `#${viewId}`;
+
+    // list all files in the asked view path
+    files = [...__glob.sync(`${viewFilePath}.*`), ...files];
+
   }
 
   // now if no files have been found, this mean that the view does not exist...

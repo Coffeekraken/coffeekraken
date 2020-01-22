@@ -20,7 +20,7 @@ if (__fs.existsSync(`${process.cwd()}/scripts-stack.config.js`)) {
 const configUpPath = __findUp.sync('scripts-stack.config.js');
 let configUp = {};
 if (configUpPath) {
-  configUp = require(`${configUpPath}/scripts-stack.config.js`);
+  configUp = require(configUpPath);
 }
 
 process.title = 'coffeekraken-scripts-stack'

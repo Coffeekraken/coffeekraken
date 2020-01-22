@@ -2,6 +2,7 @@ const __express = require('express');
 const __fs = require('fs');
 const __log = require('@coffeekraken/sugar/node/log/log');
 const __compression = require('compression');
+const __SquidViewPreprocessor = require('./SquidViewPreprocessor');
 
 /**
  * @name          SquidApp
@@ -80,6 +81,8 @@ module.exports = class SquidApp {
     // init the express application
     this._expressApp = __express();
 
+    global.__squid.app = this._expressApp;
+
   }
 
   /**
@@ -118,6 +121,50 @@ module.exports = class SquidApp {
       return;
     }
 
+    // const render = __express.response.render;
+    // __express.response.render = function(viewPath, viewData, callback) {
+    //
+    //   render.call(this, viewPath, viewData, (error, html) => {
+    //     try {
+    //       const viewPreprocessor = new __SquidViewPreprocessor(html);
+    //       const processedHtml = viewPreprocessor.process();
+    //       // this.res.send(values[values.length-1]);
+    //       if (callback) {
+    //         return callback.apply(this, error, values[values.length-1]);
+    //       } else {
+    //         console.log(this);
+    //       }
+    //     } catch(e) {
+    //       console.log(e);
+    //       __log(`An error has occured during the rendering process of the view "${viewPath}"... Please try again later...`);
+    //     }
+    //   });
+    // }
+
+    this._expressApp.use((req, res, next) => {
+      const originalRender = res.render;
+      res.render = function(renderPath, viewData, callback) {
+        originalRender.call(this, renderPath, viewData, (error, html) => {
+          if (error) {
+            __log(`An error has occured during the rendering process of the view "${renderPath}"... Please try again later`, 'error');
+            return;
+          }
+          try {
+            const viewPreprocessor = new __SquidViewPreprocessor(html);
+            const processedHtml = viewPreprocessor.process();
+            if (callback) {
+              return callback.call(this, error, processedHtml);
+            } else {
+              res.send(processedHtml);
+            }
+          } catch(e) {
+            __log(`An error has occured during the rendering process of the view "${renderPath}"... Please try again later...`, 'error');
+          }
+        })
+      };
+      next();
+    });
+
     // loop on each routes
     Object.keys(this._config.routes).forEach(route => {
       // get the route config
@@ -127,7 +174,9 @@ module.exports = class SquidApp {
     });
 
     // add the internal squid routes
-    this._expressApp.get('/squid/js', require('../express/controllers/JsController').index);
+    const JsController = require('../express/controllers/JsController');
+    this._expressApp.get('/squid/js', JsController.squidIndex);
+    this._expressApp.get(`/squid/js/*`, JsController.squidJs);
 
     // add the "view" internal squid route
     this._expressApp.get('/view/:viewPath/:viewId', require('../express/controllers/ViewController').index);
@@ -221,7 +270,7 @@ module.exports = class SquidApp {
     this._expressApp.set('view engine', 'blade.php');
 
     Object.keys(this._config.views.engines).forEach(extension => {
-      this._expressApp.engine(extension, this._config.views.engines[extension]);
+      this._expressApp.engine(extension, require(this._config.views.engines[extension]));
     });
 
   }

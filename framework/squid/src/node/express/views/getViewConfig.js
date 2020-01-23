@@ -48,7 +48,7 @@ module.exports = (viewPath, viewId = null) => {
       generalIdViewConfig = {};
 
 
-  let confFilePath = `${process.cwd()}/${__squid.config.views.folder}/${viewPath.replace('.','/')}`;
+  let confFilePath = `${process.cwd()}/${Squid.config.views.folder}/${viewPath.replace('.','/')}`;
   if (__fs.existsSync(`${confFilePath}.config.js`)) {
     fileViewConfig = require(`${confFilePath}.config.js`);
   }
@@ -56,8 +56,8 @@ module.exports = (viewPath, viewId = null) => {
     fileIdViewConfig = require(`${confFilePath}.${viewId}.config.js`);
   }
 
-  if (__fs.existsSync(`${process.cwd()}/${__squid.config.views.folder}/views.conf.js`)) {
-    const generalViewsConfig = require(`${process.cwd()}/${__squid.config.views.folder}/views.conf.js`);
+  if (__fs.existsSync(`${process.cwd()}/${Squid.config.views.folder}/views.conf.js`)) {
+    const generalViewsConfig = require(`${process.cwd()}/${Squid.config.views.folder}/views.conf.js`);
     if (generalViewConfig[viewPath]) {
       generalViewConfig = generalViewConfig[viewPath];
     }
@@ -74,8 +74,8 @@ module.exports = (viewPath, viewId = null) => {
 
   // check that an adapter is specified for the view, or if it's not defined or that it not exist in the registered
   // adapters, set the view adapter using the defaultViewAdapter defined in the general config
-  if ( ! finalViewConfig.dataAdapter || ! __squid.config.views.dataAdapters[finalViewConfig.dataAdapter]) {
-    finalViewConfig.dataAdapter = __squid.config.views.defaultDataAdapter;
+  if ( ! finalViewConfig.dataAdapter || ! Squid.config.views.dataAdapters[finalViewConfig.dataAdapter]) {
+    finalViewConfig.dataAdapter = Squid.config.views.defaultDataAdapter;
   }
 
   // return the config object

@@ -40,7 +40,7 @@ module.exports = {
     const viewMetas = __getViewMetas(req.params.viewPath, req.params.viewId);
 
     // call the dataAdapter the receive the data back and wait until the dataAdapter promise is resolved
-    const viewData = await require(__squid.config.views.dataAdapters[viewMetas.config.dataAdapter])(req.params.viewPath, req.params.viewId, viewMetas.config, req);
+    const viewData = await require(Squid.config.views.dataAdapters[viewMetas.config.dataAdapter])(req.params.viewPath, req.params.viewId, viewMetas.config, req);
 
     // render the view and send it back
     res.render(viewMetas.renderPath, viewData);

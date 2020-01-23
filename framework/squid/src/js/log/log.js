@@ -1,7 +1,3 @@
-import __log from '@coffeekraken/sugar/js/log/log';
-import __isTransportRegistered from '@coffeekraken/sugar/js/log/isTransportRegistered';
-import __getRegisteredTransports from '@coffeekraken/sugar/js/log/getRegisteredTransports';
-import __registerTransport from '@coffeekraken/sugar/js/log/registerTransport';
 import __ensureExist from '@coffeekraken/sugar/js/object/ensureExist';
 
 /**
@@ -28,37 +24,51 @@ export default (message, type = 'info', transports = null) => {
 
     __ensureExist('window.Squid._log');
 
-    // get the transports needed for this type
-    const configTransports = Squid.config.log.transports.transportsByType[type] ? Squid.config.log.transports.transportsByType[type].split(' ') : [];
-    let transp = transports ? transports : configTransports;
+    Promise.all([
+      import('@coffeekraken/sugar/js/log/log'),
+      import('@coffeekraken/sugar/js/log/isTransportRegistered'),
+      import('@coffeekraken/sugar/js/log/getRegisteredTransports'),
+      import('@coffeekraken/sugar/js/log/registerTransport')
+    ]).then((modules) => {
 
-    if ( ! Squid._log.squidTransports) {
-      Squid._log.squidTransports = require.context('./transports', true, /\.js$/, 'lazy');
-      Squid._log.appTransports = require.context(`@app/logTransports`, true, /\.js$/, 'lazy');
-      Squid._log.sugarTransports = require.context(`@coffeekraken/sugar/js/log/transports`, true, /\.js$/, 'lazy');
-    }
+      const __log = modules[0],
+            __isTransportRegistered = modules[1],
+            __getRegisteredTransports = modules[2],
+            __registerTransport = modules[3];
 
-    const transportsImportPromises = [];
-    transp.forEach(t => {
-      if (Squid._log.squidTransports.keys().indexOf(`./${t}.js`) !== -1) {
-        transportsImportPromises.push(Squid._log.squidTransports(`./${t}.js`).then(m => {
-          if ( ! __isTransportRegistered(t)) __registerTransport(t, m.default || m);
-        }));
-      } else if (Squid._log.appTransports.keys().indexOf(`./${t}.js`) !== -1) {
-        transportsImportPromises.push(Squid._log.appTransports(`./${t}.js`).then(m => {
-          if ( ! __isTransportRegistered(t)) __registerTransport(t, m.default || m);
-        }));
-      } else if (Squid._log.sugarTransports.keys().indexOf(`./${t}.js`) !== -1) {
-        transportsImportPromises.push(Squid._log.sugarTransports(`./${t}.js`).then(m => {
-          if ( ! __isTransportRegistered(t)) __registerTransport(t, m.default || m);
-        }));
+      // get the transports needed for this type
+      const configTransports = Squid.config.log.frontend.transportsByType[type] ? Squid.config.log.frontend.transportsByType[type].split(' ') : [];
+      let transp = transports ? transports : configTransports;
+
+      if ( ! Squid._log.squidTransports) {
+        Squid._log.squidTransports = require.context('./transports', true, /\.js$/, 'lazy');
+        Squid._log.appTransports = require.context(`@app/logTransports`, true, /\.js$/, 'lazy');
+        Squid._log.sugarTransports = require.context(`@coffeekraken/sugar/js/log/transports`, true, /\.js$/, 'lazy');
       }
-    });
 
-    Promise.all(transportsImportPromises).then(() => {
+      const transportsImportPromises = [];
+      transp.forEach(t => {
+        if (Squid._log.squidTransports.keys().indexOf(`./${t}.js`) !== -1) {
+          transportsImportPromises.push(Squid._log.squidTransports(`./${t}.js`).then(m => {
+            if ( ! __isTransportRegistered.default(t)) __registerTransport.default(t, m.default || m);
+          }));
+        } else if (Squid._log.appTransports.keys().indexOf(`./${t}.js`) !== -1) {
+          transportsImportPromises.push(Squid._log.appTransports(`./${t}.js`).then(m => {
+            if ( ! __isTransportRegistered.default(t)) __registerTransport.default(t, m.default || m);
+          }));
+        } else if (Squid._log.sugarTransports.keys().indexOf(`./${t}.js`) !== -1) {
+          transportsImportPromises.push(Squid._log.sugarTransports(`./${t}.js`).then(m => {
+            if ( ! __isTransportRegistered.default(t)) __registerTransport.default(t, m.default || m);
+          }));
+        }
+      });
 
-      __log(message, type, transp).then(() => {
-        resolve();
+      Promise.all(transportsImportPromises).then(() => {
+
+        __log.default(message, type, transp).then(() => {
+          resolve();
+        });
+
       });
 
     });

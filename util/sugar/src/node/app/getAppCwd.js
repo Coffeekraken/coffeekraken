@@ -1,3 +1,6 @@
+const __existDeep = require('../../../dist/js/object/existDeep');
+
+
 /**
  * @name                  getAppCwd
  * @namespace             sugar.node.app
@@ -14,5 +17,6 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function getAppCwd() {
-  return global._sAppCwd || process.cwd();
+  if ( ! __existDeep('global.Sugar._app.cwd')) return process.cwd();
+  return Sugar._app.cwd;
 }

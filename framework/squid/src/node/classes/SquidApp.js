@@ -1,6 +1,8 @@
 const __express = require('express');
 const __fs = require('fs');
+const __path = require('path');
 const __log = require('@coffeekraken/sugar/node/log/log');
+const __setupLog = require('@coffeekraken/sugar/node/log/setup');
 const __compression = require('compression');
 const __SquidViewPreprocessor = require('./SquidViewPreprocessor');
 
@@ -28,13 +30,19 @@ module.exports = class SquidApp {
    * Store the application configuration object
    * @type      Object
    */
-  _config = {};
+  config = {};
 
   /**
    * Store the express application instance
    * @type      Object
    */
-  _expressApp = null;
+  expressApp = null;
+
+  /**
+   * Store the rootPath of the Squid framework
+   * @type       String
+   */
+  rootPath = __path.resolve(__dirname, '../../../');
 
   /**
    * Constructor
@@ -47,13 +55,16 @@ module.exports = class SquidApp {
   constructor(config) {
 
     // save the configuration
-    this._config = config;
+    this.config = config;
 
     // create the express app
     this._createExpressApp();
 
     // set some app middlewares
     this._setExpressAppMiddlewares();
+
+    // init the log system
+    this._initLogSystem();
 
     // Init the routes of the application founded in the config object
     this._initRoutes();
@@ -79,9 +90,7 @@ module.exports = class SquidApp {
   _createExpressApp() {
 
     // init the express application
-    this._expressApp = __express();
-
-    global.__squid.app = this._expressApp;
+    this.expressApp = __express();
 
   }
 
@@ -98,7 +107,7 @@ module.exports = class SquidApp {
   _setExpressAppMiddlewares() {
 
     // compression middleware
-    this._expressApp.use(__compression());
+    this.expressApp.use(__compression());
 
   }
 
@@ -115,33 +124,13 @@ module.exports = class SquidApp {
   _initRoutes() {
 
     // check that we have some routes to init
-    if ( ! this._config.routes || Object.keys(this._config.routes).length <= 0) {
+    if ( ! this.config.routes || Object.keys(this.config.routes).length <= 0) {
       __log('No routes are configurated for your application...', 'error');
       __log('You can specify your routes either inside the "squid.config.js" file, in the "squid/routes.js" file or in your "package.json" file under the "squid" property...', 'info');
       return;
     }
 
-    // const render = __express.response.render;
-    // __express.response.render = function(viewPath, viewData, callback) {
-    //
-    //   render.call(this, viewPath, viewData, (error, html) => {
-    //     try {
-    //       const viewPreprocessor = new __SquidViewPreprocessor(html);
-    //       const processedHtml = viewPreprocessor.process();
-    //       // this.res.send(values[values.length-1]);
-    //       if (callback) {
-    //         return callback.apply(this, error, values[values.length-1]);
-    //       } else {
-    //         console.log(this);
-    //       }
-    //     } catch(e) {
-    //       console.log(e);
-    //       __log(`An error has occured during the rendering process of the view "${viewPath}"... Please try again later...`);
-    //     }
-    //   });
-    // }
-
-    this._expressApp.use((req, res, next) => {
+    this.expressApp.use((req, res, next) => {
       const originalRender = res.render;
       res.render = function(renderPath, viewData, callback) {
         originalRender.call(this, renderPath, viewData, (error, html) => {
@@ -166,20 +155,20 @@ module.exports = class SquidApp {
     });
 
     // loop on each routes
-    Object.keys(this._config.routes).forEach(route => {
+    Object.keys(this.config.routes).forEach(route => {
       // get the route config
-      const routeConfig = this._config.routes[route];
+      const routeConfig = this.config.routes[route];
       // init the route in the express app
       this.addRoute(route, routeConfig);
     });
 
     // add the internal squid routes
     const JsController = require('../express/controllers/JsController');
-    this._expressApp.get('/squid/js', JsController.squidIndex);
-    this._expressApp.get(`/squid/js/*`, JsController.squidJs);
+    this.expressApp.get('/squid/js', JsController.squidIndex);
+    this.expressApp.get(`/squid/js/*`, JsController.squidJs);
 
     // add the "view" internal squid route
-    this._expressApp.get('/view/:viewPath/:viewId', require('../express/controllers/ViewController').index);
+    this.expressApp.get('/view/:viewPath/:viewId', require('../express/controllers/ViewController').index);
 
   }
 
@@ -251,7 +240,7 @@ module.exports = class SquidApp {
      __log(`Registering the route "${route}" with the controller "${controllerString}"...`, 'info');
 
      // register the new route in the express app
-     this._expressApp[method.toLowerCase()](path, controller[controllerFunctionString]);
+     this.expressApp[method.toLowerCase()](path, controller[controllerFunctionString]);
 
    }
 
@@ -266,11 +255,11 @@ module.exports = class SquidApp {
     */
   _registerExpressTemplateEngines() {
 
-    this._expressApp.set('views', process.cwd() + '/' + this._config.views.folder);
-    this._expressApp.set('view engine', 'blade.php');
+    this.expressApp.set('views', process.cwd() + '/' + this.config.views.folder);
+    this.expressApp.set('view engine', 'blade.php');
 
-    Object.keys(this._config.views.engines).forEach(extension => {
-      this._expressApp.engine(extension, require(this._config.views.engines[extension]));
+    Object.keys(this.config.views.engines).forEach(extension => {
+      this.expressApp.engine(extension, require(this.config.views.engines[extension]));
     });
 
   }
@@ -286,8 +275,84 @@ module.exports = class SquidApp {
     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com
     */
   _startExpressServer() {
-    __log(`Starting the express server on port ${this._config.server.port}...`, 'info');
-    this._expressApp.listen(this._config.server.port);
+    __log(`Starting the express server on port ${this.config.server.port}...`, 'info');
+    this.expressApp.listen(this.config.server.port);
+  }
+
+  /**
+   * @name                  _initLogSystem
+   * @namespace             squid.node.SquidApp
+   * @type                  Function
+   * @private
+   *
+   * Init the log system by setting up it using the Squid.config.log settings
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com
+   */
+  _initLogSystem() {
+
+    // get the log config
+    const logConfig = this.config.log;
+    if ( ! logConfig) return;
+
+    // setup backend log system
+    this.setupLog('backend', logConfig.backend);
+
+  }
+
+  /**
+   * @name                  log
+   * @namespace             squid.node.SquidApp
+   * @type                  Function
+   *
+   * Log a message using the squid log system. The types can be 'error','warning','info','verbose','debug' or 'silly'
+   *
+   * @param                 {String}                message                 Your log message
+   * @param                 {String}                [type='info']           Your log type
+   * @param                 {String}                [transports=null]       The log transports you want to use for this particular log process. If not specified, will take the settings.log.transportsByType option to resolve this
+   *
+   * @example             js
+   * Squid.log('Hello world', 'error');
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com
+   */
+  log(message, type = 'info', transports = null) {
+    return __log(message, type, transports);
+  }
+
+  /**
+   * @name                    setupLog
+   * @namespace               squid.node.SquidApp
+   * @type                    Function
+   *
+   * Setup the log system or a log transport
+   *
+   * @param                   {String}                env                     The log environment you want to set. Can be "frontend" or "backend"
+   * @param                   {Object}                settings                The settings you want for the log system or for the passed transport
+   * @param                   {String}                [transport=null]        The name of the log transport that you want to configure
+   * @return                  {Object}                                        The new settings that you have set
+   *
+   * @example         js
+   * Squid.setupLog('backend', {
+   *    transportsByType: {
+   *      error: 'console mail',
+   *      warn: 'console files',
+   *      // etc...
+   *    }
+   * });
+   * Squid.setupLog('backend', {
+   *    smtpServer: 'mail.infomaniak.com',
+   *    // etc...
+   * }, 'mail');
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com
+   */
+  setupLog(env, settings, transport=null) {
+    switch(env) {
+      case 'backend':
+        return __setupLog(settings, transport);
+      break;
+    }
   }
 
 

@@ -32,7 +32,7 @@ module.exports = () => {
     const configName = configFilePath.split('/').slice(-1)[0].replace('.js','');
     config[configName] = __deepMerge(config[configName] || {}, configObj);
   });
-
+  
   // return the final config
   return config;
 

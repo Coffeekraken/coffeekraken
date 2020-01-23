@@ -1,3 +1,6 @@
+const __existDeep = require('../../../dist/js/object/existDeep');
+
+
 /**
  * @name                  getAppMeta
  * @namespace             sugar.node.app
@@ -14,5 +17,6 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function getAppMeta() {
-  return global._sAppMeta || {};
+  if ( ! __existDeep('global.Sugar._app.metas')) return {};
+  return Sugar._app.metas;
 }

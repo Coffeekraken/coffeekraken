@@ -27,7 +27,7 @@ module.exports = () => {
   });
 
   __log(`Emptying the current javascript dist folder "${config.dist.js.outputFolder}"...`, 'info');
-  __emptyDirSync(__squid.rootPath + '/' + config.dist.js.outputFolder);
+  __emptyDirSync(__dirname + '/../../' + config.dist.js.outputFolder);
   __log('Compiling/compressing the javascript bundle files...', 'info');
 
   let webpackConfig = {
@@ -36,7 +36,7 @@ module.exports = () => {
     context: __path.resolve(__dirname, '../../'),
     output: {
       filename: '[name]',
-      path: __squid.rootPath + '/' + config.dist.js.outputFolder,
+      path: __dirname + '/../../' + config.dist.js.outputFolder,
       publicPath: '/squid/js/',
       chunkFilename: 'chunks/[name].[chunkhash].js'
     },
@@ -55,7 +55,8 @@ module.exports = () => {
       alias: {
         '@squid': __path.resolve(__dirname, '../../src/js'),
         '@app': process.cwd() + '/' + config.dist.js.sourcesFolder,
-        '@coffeekraken/sugar/js': __dirname + '/../../../../util/sugar/dist/js'
+        '@coffeekraken/sugar/js': __dirname + '/../../../../util/sugar/dist/js',
+        '@coffeekraken/sugar/node': __dirname + '/../../../../util/sugar/src/node'
       }
     },
     module: {

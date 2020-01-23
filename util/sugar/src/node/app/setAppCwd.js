@@ -1,3 +1,5 @@
+const __ensureExist = require('../../../dist/js/object/ensureExist');
+
 /**
  * @name                  setAppCwd
  * @namespace             sugar.node.app
@@ -15,6 +17,7 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function setAppCwd(cwd) {
-  global._sAppCwd = cwd;
-  return global._sAppCwd;
+  __ensureExist('global.Sugar._app');
+  Sugar._app.cwd = cwd;
+  return Sugar._app.cwd;
 }

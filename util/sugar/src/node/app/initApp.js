@@ -79,5 +79,4 @@ module.exports = function initApp(settings = {}) {
   }
   __logHeader(appMeta.name || 'Coffeekraken', appMeta.description || 'Coffeekraken sugar based application', metas);
 
-
 }

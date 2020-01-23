@@ -54,8 +54,8 @@ module.exports = (viewPath, viewId = null) => {
     path: viewPath,
     renderPath: (viewPath + (viewId ? `#${viewId}` : '')).replace('.','/'),
     extension: viewExtension,
-    enginePath: __squid.config.views.engines[viewExtension],
-    dataAdapterPath: __squid.config.views.dataAdapters[viewConfig.dataAdapter],
+    enginePath: Squid.config.views.engines[viewExtension],
+    dataAdapterPath: Squid.config.views.dataAdapters[viewConfig.dataAdapter],
     filePath: viewFilePath,
     config: viewConfig
   };

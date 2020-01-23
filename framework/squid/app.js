@@ -3,8 +3,6 @@ const __getConfig = require('./src/node/getConfig');
 const { killPortProcess } = require('kill-port-process');
 const __path = require('path');
 
-require('./env');
-
 /**
  * Entry point of the squid framework.
  * This file will load the squid config(s) and init
@@ -19,6 +17,6 @@ require('./env');
   await killPortProcess(config.server.port); // takes a number, number[], string or string[]
 
   // create a squid application instance
-  const squidApp = new __SquidApp(config);
+  global.Squid = new __SquidApp(config);
 
 })();

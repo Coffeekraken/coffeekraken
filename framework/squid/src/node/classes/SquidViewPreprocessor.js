@@ -200,11 +200,11 @@ module.exports = class SquidViewPreprocessor {
 
       // animation in
       if (part.startsWith('in:')) tokenObject.animationIn = part.slice(3);
-      else if (__squid.config.animations.defaultIn) tokenObject.animationIn = __squid.config.animations.defaultIn;
+      else if (Squid.config.animations.defaultIn) tokenObject.animationIn = Squid.config.animations.defaultIn;
 
       // animation out
       if (part.startsWith('out:')) tokenObject.animationOut = part.slice(4);
-      else if (__squid.config.animations.defaultOut) tokenObject.animationOut = __squid.config.animations.defaultOut;
+      else if (Squid.config.animations.defaultOut) tokenObject.animationOut = Squid.config.animations.defaultOut;
 
     });
 

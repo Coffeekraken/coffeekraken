@@ -19,7 +19,7 @@ const __glob = require('glob');
 module.exports = (viewPath, viewId = null, extension = null) => {
 
   // get the views folder path
-  let viewFilePath = `${process.cwd()}/${__squid.config.views.folder}/${viewPath.replace('.','/')}`;
+  let viewFilePath = `${process.cwd()}/${Squid.config.views.folder}/${viewPath.replace('.','/')}`;
 
   let files = __glob.sync(`${viewFilePath}.*`);
 
@@ -36,7 +36,7 @@ module.exports = (viewPath, viewId = null, extension = null) => {
   if ( ! files.length) return false;
 
   // get the engines enxtensions from the config
-  const enginesExtensions = Object.keys(__squid.config.views.engines);
+  const enginesExtensions = Object.keys(Squid.config.views.engines);
 
   // check that at least 1 found file has one of the registered engines extension...
   for (let i = 0; i < files.length; i++) {

@@ -29,18 +29,45 @@ module.exports = {
 
   log: {
 
-    transports: {
-
-      sourcesFolder: 'logTransports',
+    frontend: {
 
       transportsByType: {
-        error: process.env.ENV === 'prod' ? 'squid' : 'console squid',
-        warn: process.env.ENV === 'prod' ? 'squid' : 'console squid',
-        info: process.env.ENV === 'prod' ? 'squid' : 'console squid',
-        http: process.env.ENV === 'prod' ? 'squid' : 'console squid',
-        verbose: process.env.ENV === 'prod' ? 'squid' : 'console squid',
-        debug: process.env.ENV === 'prod' ? 'squid' : 'console squid',
-        silly: process.env.ENV === 'prod' ? 'squid' : 'console squid'
+        error: process.env.NODE_ENV === 'production' ? 'squid' : 'console',
+        warn: process.env.NODE_ENV === 'production' ? 'squid' : 'console',
+        info: process.env.NODE_ENV === 'production' ? '' : 'console',
+        verbose: process.env.NODE_ENV === 'production' ? '' : 'console',
+        debug: process.env.NODE_ENV === 'production' ? '' : 'console',
+        silly: process.env.NODE_ENV === 'production' ? '' : 'console',
+        success: process.env.NODE_ENV === 'production' ? '' : 'console'
+      },
+
+      transports: {
+
+      }
+
+    },
+
+    backend: {
+
+      transportsByType: {
+        error: process.env.NODE_ENV === 'production' ? 'mail' : 'console files',
+        warn: process.env.NODE_ENV === 'production' ? 'mail' : 'console files',
+        info: process.env.NODE_ENV === 'production' ? '' : 'console files',
+        verbose: process.env.NODE_ENV === 'production' ? '' : 'console files',
+        debug: process.env.NODE_ENV === 'production' ? '' : 'console files',
+        silly: process.env.NODE_ENV === 'production' ? '' : 'console files',
+        success: process.env.NODE_ENV === 'production' ? '' : 'console files'
+      },
+
+      transports: {
+        mail: {
+          to: 'olivier.bossel@gmail.com',
+          service: 'SendinBlue',
+          auth: {
+            user: 'olivier.bossel@gmail.com',
+            pass: 'L8XrfE4WABpMkhHN'
+          }
+        }
       }
 
     }

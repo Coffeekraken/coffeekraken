@@ -28,13 +28,13 @@ module.exports = {
    */
   squidIndex: (req, res) => {
     // read the common squid framework file
-    const squidCommon = __fs.readFileSync(`${__dirname}/../../../../${__squid.config.dist.js.outputFolder}/common.bundle.js`);
+    const squidCommon = __fs.readFileSync(`${__dirname}/../../../../${Squid.config.dist.js.outputFolder}/common.bundle.js`);
     // read the common project file
-    const projectCommon = __fs.readFileSync(`${process.cwd()}/${__squid.config.dist.js.outputFolder}/common.bundle.js`);
+    const projectCommon = __fs.readFileSync(`${process.cwd()}/${Squid.config.dist.js.outputFolder}/common.bundle.js`);
 
     let resultingScript = `${squidCommon}${projectCommon}`;
     resultingScript += `
-      Squid.config = ${JSON.stringify(__squid.config)};
+      Squid.config = ${JSON.stringify(Squid.config)};
     `;
 
     // send gziped javascript files Content
@@ -55,12 +55,12 @@ module.exports = {
    */
   squidJs: (req, res) => {
     // check if the file exist
-    if ( ! __fs.existsSync(__squid.rootPath + '/' + __squid.config.dist.js.outputFolder + '/' + req.params[0])) {
-      __log(`A client has requested the file "${__squid.config.dist.js.outputFolder}/${req.params[0]}" but this file does not exist...`, 'error');
+    if ( ! __fs.existsSync(Squid.rootPath + '/' + Squid.config.dist.js.outputFolder + '/' + req.params[0])) {
+      __log(`A client has requested the file "${Squid.config.dist.js.outputFolder}/${req.params[0]}" but this file does not exist...`, 'error');
       return res.sendStatus(404);
     }
     // send the file back
-    res.sendFile(__squid.rootPath + '/' + __squid.config.dist.js.outputFolder + '/' + req.params[0]);
+    res.sendFile(Squid.rootPath + '/' + Squid.config.dist.js.outputFolder + '/' + req.params[0]);
   }
 
 };

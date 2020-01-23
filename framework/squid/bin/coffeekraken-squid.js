@@ -1,11 +1,10 @@
 #!/usr/bin/env node
+require('module-alias/register');
 const __initApp = require('@coffeekraken/sugar/node/app/initApp');
 const __log = require('@coffeekraken/sugar/node/log/log');
 const __path = require('path');
 const commander = require("commander");
 const packageJson = require(__path.resolve(__dirname, '../package.json'));
-
-require(__dirname + '/../env.js');
 
 // init the app
 __initApp();

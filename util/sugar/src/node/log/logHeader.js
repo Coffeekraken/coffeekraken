@@ -1,5 +1,5 @@
 const __log = require('./log');
-const __splitEveryNChars = require('../../js/string/splitEveryNChars');
+const __splitEveryNChars = require('../../../dist/js/string/splitEveryNChars');
 
 /**
  * @name                logHeader
@@ -49,6 +49,6 @@ module.exports = function logHeader(title, description=null, infos={}) {
   message += `#\n`;
 
   // log the message
-  __log(message, 'header');
+  __log(message, 'success');
 
 }

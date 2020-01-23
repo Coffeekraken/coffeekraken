@@ -33,14 +33,14 @@ module.exports = (viewPath, viewId = null, viewConfig, req) => {
 
     let dataFiles, viewData = {};
 
-    const viewPathJsonPath = `${process.cwd()}/${__squid.config.views.folder}/${viewPath.replace('.','/')}.data.json`;
+    const viewPathJsonPath = `${process.cwd()}/${Squid.config.views.folder}/${viewPath.replace('.','/')}.data.json`;
     dataFiles = __glob.sync(viewPathJsonPath);
     if (dataFiles.length) {
       viewData = require(dataFiles[0]);
     }
 
     if (viewId) {
-      const viewPathWithIdJsonPath = `${process.cwd()}/${__squid.config.views.folder}/${viewPath.replace('.','/')}.${viewId}.data.json`;
+      const viewPathWithIdJsonPath = `${process.cwd()}/${Squid.config.views.folder}/${viewPath.replace('.','/')}.${viewId}.data.json`;
       dataFiles = __glob.sync(viewPathWithIdJsonPath);
       if (dataFiles.length) {
         viewData = __deepMerge(dataView, require(dataFiles[0]));

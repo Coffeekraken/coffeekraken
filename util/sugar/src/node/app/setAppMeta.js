@@ -1,3 +1,5 @@
+const __ensureExist = require('../../../dist/js/object/ensureExist');
+
 /**
  * @name                  setAppMeta
  * @namespace             sugar.node.app
@@ -16,14 +18,28 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function setAppMeta(meta, override = false) {
-  if ( ! global._sAppMeta) global._sAppMeta = {};
+
+  __ensureExist('global.Sugar._app.metas');
   if (override) {
-    global._sAppMeta = meta;
+    Sugar._app.metas = meta
   } else {
-    global._sAppMeta = {
-      ...global._sAppMeta,
+    Sugar._app.metas = {
+      ...Sugar._app.metas,
       ...meta
     };
   }
-  return global._sAppMeta;
+
+  // check if a "domain" meta exist
+  if ( ! Sugar._app.metas.domain) {
+    if (Sugar._app.metas.homepage) {
+      const domain = Sugar._app.metas.homepage.replace('https://','').replace('http://','').split('/')[0];
+      Sugar._app.metas.domain = domain;
+    } else if (process.env.DOMAIN) {
+      Sugar._app.metas.domain = process.env.DOMAIN;
+    } else {
+      Sugar._app.metas.domain = 'coffeekraken.io';
+    }
+  }
+
+  return Sugar._app.metas;
 }

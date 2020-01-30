@@ -28,6 +28,8 @@ import isNumber from "../is/number";
 export default function toString(value) {
   if (isString(value)) {
     return value;
+  } else if (typeof value === 'symbol' || typeof value === 'typedArray' || typeof value === 'date' || typeof value === 'color') {
+    return value.toString();
   } else if (isObject(value) || isArray(value) || isJson(value)) {
     return JSON.stringify(value);
   } else if (isBoolean(value)) {

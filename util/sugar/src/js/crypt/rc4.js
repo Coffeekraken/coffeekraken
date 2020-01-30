@@ -1,5 +1,7 @@
 import RC4 from 'crypto-js/rc4';
 import utf8 from 'crypto-js/enc-utf8';
+import toString from '../string/toString';
+import parse from '../string/parse';
 
 export default {
 
@@ -17,6 +19,7 @@ export default {
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   encrypt: function(message, key = 'coffeekraken.sugar.crypt.rc4') {
+    if (typeof message !== 'string') message = toString(message);
     return RC4.encrypt(message, key).toString();
   },
 
@@ -34,7 +37,7 @@ export default {
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   decrypt: function(message, key = 'coffeekraken.sugar.crypt.rc4') {
-    return RC4.decrypt(message, key).toString(utf8);
+    return parse(RC4.decrypt(message, key).toString(utf8));
   }
 
 }

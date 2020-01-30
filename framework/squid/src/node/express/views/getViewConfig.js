@@ -31,7 +31,7 @@ const __deepMerge = require('@coffeekraken/sugar/js/object/deepMerge');
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = (viewPath, viewId = null) => {
+module.exports = async (viewPath, viewId = null) => {
 
   let filePath = __viewExist(viewPath);
 
@@ -48,7 +48,7 @@ module.exports = (viewPath, viewId = null) => {
       generalIdViewConfig = {};
 
 
-  let confFilePath = `${process.cwd()}/${Squid.config.views.folder}/${viewPath.replace('.','/')}`;
+  let confFilePath = `${process.cwd()}/${await Squid.config('views.folder')}/${viewPath.replace('.','/')}`;
   if (__fs.existsSync(`${confFilePath}.config.js`)) {
     fileViewConfig = require(`${confFilePath}.config.js`);
   }
@@ -56,8 +56,8 @@ module.exports = (viewPath, viewId = null) => {
     fileIdViewConfig = require(`${confFilePath}.${viewId}.config.js`);
   }
 
-  if (__fs.existsSync(`${process.cwd()}/${Squid.config.views.folder}/views.conf.js`)) {
-    const generalViewsConfig = require(`${process.cwd()}/${Squid.config.views.folder}/views.conf.js`);
+  if (__fs.existsSync(`${process.cwd()}/${await Squid.config('views.folder')}/views.conf.js`)) {
+    const generalViewsConfig = require(`${process.cwd()}/${await Squid.config('views.folder')}/views.conf.js`);
     if (generalViewConfig[viewPath]) {
       generalViewConfig = generalViewConfig[viewPath];
     }
@@ -74,8 +74,8 @@ module.exports = (viewPath, viewId = null) => {
 
   // check that an adapter is specified for the view, or if it's not defined or that it not exist in the registered
   // adapters, set the view adapter using the defaultViewAdapter defined in the general config
-  if ( ! finalViewConfig.dataAdapter || ! Squid.config.views.dataAdapters[finalViewConfig.dataAdapter]) {
-    finalViewConfig.dataAdapter = Squid.config.views.defaultDataAdapter;
+  if ( ! finalViewConfig.dataAdapter || ! (await Squid.config('views.dataAdapters'))[finalViewConfig.dataAdapter]) {
+    finalViewConfig.dataAdapter = await Squid.config('views.defaultDataAdapter');
   }
 
   // return the config object

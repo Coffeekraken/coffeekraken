@@ -1,4 +1,6 @@
 import evpkdf from 'crypto-js/evpkdf';
+import toString from '../string/toString';
+import parse from '../string/parse';
 
 const __encryptedMessages = {};
 
@@ -18,6 +20,7 @@ export default {
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   encrypt: function(message, salt = 'coffeekraken.sugar.crypt.evpkdf') {
+    if (typeof message !== 'string') message = toString(message);
     const string = evpkdf(message, salt).toString();
     __encryptedMessages[string] = message;
     return string;
@@ -42,7 +45,7 @@ export default {
     }
     const string = __encryptedMessages[message];
     delete __encryptedMessages[message];
-    return string;
+    return parse(string);
   }
 
 };

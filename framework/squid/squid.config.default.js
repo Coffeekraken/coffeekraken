@@ -1,6 +1,14 @@
-module.exports = {
+const __deepMerge = require('@coffeekraken/sugar/js/object/deepMerge');
+const __fs = require('fs');
+const __base64 = require('@coffeekraken/sugar/node/crypt/base64');
 
-  views: {
+let __projectConfig = {};
+if (__fs.existsSync(process.cwd() + '/squid.config.js')) {
+	__projectConfig = require(process.cwd() + '/squid.config.js');
+}
+
+module.exports = __deepMerge({
+	views: {
 
     folder: 'views',
 
@@ -15,6 +23,24 @@ module.exports = {
 
   },
 
+	app: {
+
+		serve: {
+
+			js: [
+				`${__dirname}/dist/js/common.bundle.js`,
+				`${process.cwd()}/dist/js/common.bundle.js`
+			],
+
+			css: [
+				`${__dirname}/dist/css/style.bundle.css`,
+				`${process.cwd()}/dist/css/style.bundle.css`
+			]
+
+		}
+
+	},
+
   dist: {
 
     js: {
@@ -22,6 +48,14 @@ module.exports = {
       bundleFiles: '{views,src}/**/*.bundle.js',
       sourcesFolder: 'src/js',
       outputFolder: 'dist/js'
+
+    },
+
+		css: {
+
+      bundleFiles: '{views,src}/**/*.bundle.scss',
+      sourcesFolder: 'src/css',
+      outputFolder: 'dist/css'
 
     }
 
@@ -32,7 +66,7 @@ module.exports = {
     frontend: {
 
       transportsByType: {
-        error: process.env.NODE_ENV === 'production' ? 'squid' : 'console',
+        error: process.env.NODE_ENV === 'production' ? 'squid' : 'console mail',
         warn: process.env.NODE_ENV === 'production' ? 'squid' : 'console',
         info: process.env.NODE_ENV === 'production' ? '' : 'console',
         verbose: process.env.NODE_ENV === 'production' ? '' : 'console',
@@ -42,7 +76,10 @@ module.exports = {
       },
 
       transports: {
-
+        mail: {
+          secureToken: 'fb2f09bb-5089-46e6-ba22-148516477f65',
+          to: 'olivier.bossel@gmail.com'
+        }
       }
 
     },
@@ -65,7 +102,7 @@ module.exports = {
           service: 'SendinBlue',
           auth: {
             user: 'olivier.bossel@gmail.com',
-            pass: 'L8XrfE4WABpMkhHN'
+            pass: __base64.decrypt('TDhYcmZFNFdBQnBNa2hITg==')
           }
         }
       }
@@ -90,5 +127,4 @@ module.exports = {
   },
 
   routes: {}
-
-};
+}, __projectConfig);

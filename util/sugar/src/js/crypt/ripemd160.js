@@ -1,4 +1,6 @@
 import ripemd160 from 'crypto-js/ripemd160';
+import toString from '../string/toString';
+import parse from '../string/parse';
 
 const __encryptedMessages = {};
 
@@ -17,6 +19,7 @@ export default {
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   encrypt: function(message) {
+    if (typeof message !== 'string') message = toString(message);
     const string = ripemd160(message).toString();
     __encryptedMessages[string] = message;
     return string;
@@ -41,7 +44,7 @@ export default {
     }
     const string = __encryptedMessages[message];
     delete __encryptedMessages[message];
-    return string;
+    return parse(string);
   }
 
 };

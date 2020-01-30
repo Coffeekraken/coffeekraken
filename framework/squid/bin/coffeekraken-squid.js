@@ -27,6 +27,9 @@ commander
       case 'js':
         require('./commands/squidJs')();
       break;
+      case 'css':
+        require('./commands/squidCss')();
+      break;
     }
   });
 
@@ -37,6 +40,9 @@ commander
     switch(what) {
       case 'js':
         require('./commands/js')();
+      break;
+      case 'css':
+        require('./commands/css')();
       break;
     }
   });

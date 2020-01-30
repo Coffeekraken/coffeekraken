@@ -14,28 +14,41 @@
   "license": "MIT",
   "scripts": {},
   "_moduleAliases": {
-    "@coffeekraken/sugar/node"      : "../../util/sugar/src/node"
+    "@coffeekraken/sugar/node": "../../util/sugar/src/node"
   },
   "dependencies": {
     "@babel/core": "^7.8.3",
     "@babel/preset-env": "^7.8.3",
+    "@coffeekraken/gridle": "0.0.6",
     "@coffeekraken/node-blade-php": "^1.0.0",
     "@coffeekraken/sugar": "^1.0.23",
+    "autoprefixer": "^9.7.4",
     "babel-loader": "^8.0.6",
     "commander": "^4.1.0",
     "compression": "^1.7.4",
+    "cssnano": "^4.1.10",
     "exec-sh": "^0.3.4",
     "express": "^4.17.1",
     "express-nunjucks": "^2.2.3",
+    "forever": "^2.0.0",
     "glob": "^7.1.6",
     "nunjucks": "^3.2.0",
+    "postcss": "^7.0.26",
+    "postcss-preset-env": "^6.7.0",
+    "precss": "^4.0.0",
+    "rucksack-css": "^1.0.2",
+    "sass": "^1.25.0",
+    "sass-glob-importer": "^1.0.1",
+    "scss-bundle": "^3.0.2",
     "webpack": "^4.41.5",
-    "webpack-cli": "^3.3.10"
+    "webpack-cli": "^3.3.10",
+    "webpack-import-glob-loader": "^1.6.3"
   },
   "devDependencies": {
     "@coffeekraken/scripts-stack": "0.0.25",
     "compression-webpack-plugin": "^3.1.0",
     "file-size": "^1.0.0",
+    "import-glob-loader": "^1.1.0",
     "kill-port-process": "^2.2.0",
     "module-alias": "^2.2.2",
     "string-replace-loader": "^2.2.0",

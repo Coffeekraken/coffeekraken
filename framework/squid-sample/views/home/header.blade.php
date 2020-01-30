@@ -1,5 +1,63 @@
-<h1>Coffeekraken Squid</h1>
-
-<p>
-  Magnis primis morbi dignissim sapien euismod arcu per senectus eleifend montes tellus ullamcorper duis dictumst velit, praesent imperdiet porta habitasse est nascetur viverra amet in lacus orci et vulputate commodo. Varius dui pharetra himenaeos lacinia pulvinar lacus enim sollicitudin class fusce, nec mus semper sociosqu praesent proin morbi aliquam. Luctus lacinia pulvinar risus tempor montes praesent, viverra gravida auctor taciti aptent, quisque sociis sed habitasse fringilla. Turpis vestibulum convallis eu risus hac aenean phasellus, mi quam ullamcorper mauris auctor porttitor eros, quis facilisis placerat vel dignissim ornare. Vulputate odio iaculis varius augue cras, sociis justo urna himenaeos, eros cubilia turpis massa. Sem habitant natoque auctor sociosqu integer porta pharetra semper congue parturient, morbi rhoncus elit interdum fermentum dictumst habitasse cursus eleifend sociis, ligula aliquet inceptos aliquam dis sapien odio lorem volutpat. Curabitur semper maecenas turpis ligula mattis egestas dolor taciti dictumst justo, donec dui aptent elementum inceptos velit in rutrum consequat cursus hac, primis dictum felis convallis fringilla odio ridiculus lacinia laoreet. Elementum massa dolor habitasse justo vitae conubia donec phasellus morbi sollicitudin tellus egestas, integer arcu mi facilisis non lectus tortor metus aliquet gravida. Tortor hendrerit taciti inceptos litora commodo dictumst aliquet odio magna, nulla lobortis suscipit cursus volutpat eros iaculis nam, nascetur facilisi bibendum felis pretium adipiscing maecenas enim.
-</p>
+<section class="header" slide-in="100 -100 --delay 4000">
+			<div class="container">
+				<div class="gr gr--middle">
+					<div class="col col--12 col--4@tablet hide show@tablet" style="min-height:1px;">
+						<img class="header__img-kraken" src="/dist/img/kraken.png" alt="Coffeekraken Kraken" slide-in="200" />
+					</div>
+					<div class="col col--12 col--7@tablet col--start-0 col--start-6@tablet header__content">
+						<div anim="slide-in-up">
+							<!-- <div class="coffeekraken-logo m-b" style="width:200px" anim="slide-in-down"></div> -->
+							<s-bodymovin slide-in="200" src="/data/logo-white.json" class="m-b m-t" style="display: inline-block; width:200px; height:62px" autoplay autoplay-delay="1000"></s-bodymovin>
+							<h1 class="h1 m-b-smaller">
+								<s-characters-slideshow slide-in="200" class="c-secondary" values="['Workflow','Styleguide','Documentation','Layout','Webcomponents']">Workflow</s-characters-slideshow><br>
+								made right!
+							</h1>
+							<p class="p p--lead m-b" slide-in="200">
+								Working smoothly in team is as hard as working alone on a big project. <br>
+								<span class="c-secondary">We think that the right tool at the right place can solve this once and for all...</span>
+							</p>
+							<ul class="nav nav--pills" slide-in="200">
+								<li class="nav__item m-r-smaller">
+									<div class="tooltip tooltip--t tf t-center">
+										Carpenter is a tool that let you generate a styleguide directly from your codebase,<br>
+										as well as aggregating all the needed documentation in the same place.<br>
+										<strong>Very useful to work on the same project as one</strong>.
+									</div>
+									<span class="pill pill--secondary">Styleguide / Documentation</span>
+								</li>
+								<li class="nav__item m-r-smaller">
+									<div class="tooltip tooltip--t tf t-center">
+										A collection of powerful daily use SASS & Javscript<br>
+										mixins, functions and classes.
+									</div>
+									<span class="pill pill--secondary">JS/SCSS</span>
+								</li>
+								<li class="nav__item m-r-smaller">
+									<div class="tooltip tooltip--t tf t-center">
+										Gridle has been out there for quite a while now and<br>
+										is more and more used for his poweful features and highly<br>
+										customizable capabilities.
+									</div>
+									<span class="pill pill--secondary">Grid system</span>
+								</li>
+								<li class="nav__item m-r-smaller">
+									<div class="tooltip tooltip--t tf t-center">
+										All the basics that you need for your websites are<br>
+										here. Choose which components you need and leave the rest aside...
+									</div>
+									<span class="pill pill--secondary">CSS Components</span>
+								</li>
+								<li class="nav__item">
+									<div class="tooltip tooltip--t tf t-center">
+										Webcomponents are the future. But guess what?<br>
+										<strong>The future is NOW!</strong>
+									</div>
+									<span class="pill pill--secondary">Webcomponents</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<s-layers-transition></s-layers-transition>
+		</section>

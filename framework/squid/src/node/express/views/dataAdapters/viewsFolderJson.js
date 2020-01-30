@@ -26,21 +26,21 @@ const __deepMerge = require('@coffeekraken/sugar/js/object/deepMerge');
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = (viewPath, viewId = null, viewConfig, req) => {
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
 
     // check first that the view exist
     if ( ! __viewExist(viewPath)) return reject(`No ${viewPath.replace('.','/')}${(viewId) ? '.' + viewId : ''}.data.json exists...`);
 
     let dataFiles, viewData = {};
 
-    const viewPathJsonPath = `${process.cwd()}/${Squid.config.views.folder}/${viewPath.replace('.','/')}.data.json`;
+    const viewPathJsonPath = `${process.cwd()}/${await Squid.config('views.folder')}/${viewPath.replace('.','/')}.data.json`;
     dataFiles = __glob.sync(viewPathJsonPath);
     if (dataFiles.length) {
       viewData = require(dataFiles[0]);
     }
 
     if (viewId) {
-      const viewPathWithIdJsonPath = `${process.cwd()}/${Squid.config.views.folder}/${viewPath.replace('.','/')}.${viewId}.data.json`;
+      const viewPathWithIdJsonPath = `${process.cwd()}/${await Squid.config('views.folder')}/${viewPath.replace('.','/')}.${viewId}.data.json`;
       dataFiles = __glob.sync(viewPathWithIdJsonPath);
       if (dataFiles.length) {
         viewData = __deepMerge(dataView, require(dataFiles[0]));

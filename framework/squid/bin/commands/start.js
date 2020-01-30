@@ -1,13 +1,29 @@
 const __log = require('@coffeekraken/sugar/node/log/log');
 const __execSh = require('exec-sh');
 const __path = require('path');
+const __forever = require('forever');
+const { killPortProcess } = require('kill-port-process');
+const __getConfig = require('../../src/node/getConfig');
 
-module.exports = (env = 'dev') => {
+module.exports = async (env = 'dev') => {
 
   switch(env) {
     case 'squid':
       try {
-        require('../../app.js');
+
+        const config = __getConfig();
+
+        // this.log(`Make sure theirs no processes left running on port ${await this.config('server.port')}...`, 'info');
+        await killPortProcess(config.server.port || '8080');
+
+        __forever.start(`app.js`, {
+          "uid": "app1",
+          "append": true,
+          "watch": true,
+          "script": `app.js`,
+          "sourceDir": `${__dirname}/../..`
+        });
+        // require('../../app.js');
       } catch(error) {
         __log(error, 'error');
         process.exit();

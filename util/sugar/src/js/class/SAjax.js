@@ -189,7 +189,7 @@ export default class SAjax extends SObject {
       let response = e.target.response;
 
       // get the content type
-      const contentType = simpleAjax.request.getResponseHeader("content-type");
+      const contentType = simpleAjax.request.getResponseHeader("content-type") || 'text/plain';
 
       // switch on content type
       switch (true) {

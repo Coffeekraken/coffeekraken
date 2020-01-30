@@ -1,4 +1,5 @@
 const __fs = require('fs');
+const __path = require('path');
 const __viewExist = require('./viewExist');
 const __getViewConfig = require('./getViewConfig');
 const __getViewPath = require('./getViewPath');
@@ -31,13 +32,13 @@ const __getViewPath = require('./getViewPath');
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = (viewPath, viewId = null) => {
+module.exports = async (viewPath, viewId = null) => {
 
   // get the view config
-  const viewConfig = __getViewConfig(viewPath, viewId);
+  const viewConfig = await __getViewConfig(viewPath, viewId);
 
   // get the view path
-  const viewFilePath = __getViewPath(viewPath, viewId);
+  const viewFilePath = await __getViewPath(viewPath, viewId);
 
   // get the view extension
   let viewExtension = viewFilePath.split('/');
@@ -52,10 +53,10 @@ module.exports = (viewPath, viewId = null) => {
   return {
     id: viewId,
     path: viewPath,
-    renderPath: (viewPath + (viewId ? `#${viewId}` : '')).replace('.','/'),
+    renderPath: __path.resolve(viewFilePath.replace(process.cwd(), '').replace(await Squid.config('views.folder'), '')).replace(viewExtension, '').slice(1).slice(0, -1),
     extension: viewExtension,
-    enginePath: Squid.config.views.engines[viewExtension],
-    dataAdapterPath: Squid.config.views.dataAdapters[viewConfig.dataAdapter],
+    enginePath: (await Squid.config('views.engines'))[viewExtension],
+    dataAdapterPath: (await Squid.config('views.dataAdapters'))[viewConfig.dataAdapter],
     filePath: viewFilePath,
     config: viewConfig
   };

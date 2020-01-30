@@ -108,7 +108,7 @@ module.exports = class SquidViewPreprocessor {
       this._viewContent = this._viewContent.replace(token, `
         <div id="${htmlId}">
           <script>
-            window.Squid.view(${JSON.stringify(tokenObject)}, '${htmlId}');
+            window.Squid.view.call(${JSON.stringify(tokenObject)}, '${htmlId}');
           </script>
         </div>
       `);
@@ -138,7 +138,8 @@ module.exports = class SquidViewPreprocessor {
 
     // create the script html content
     const html = `
-      <script src="/squid/js"></script>
+      <script src="/app/js"></script>
+      <link rel="stylesheet" type="text/css" href="/app/css">
       </head>
     `;
 
@@ -193,18 +194,18 @@ module.exports = class SquidViewPreprocessor {
     }
 
     // get the global parameters like id, etc...
-    parts.forEach(part => {
+    parts.forEach(async part => {
 
       // ids that begin with a #
       if (part.charAt(0) === '#') tokenObject.id = part.slice(1);
 
       // animation in
       if (part.startsWith('in:')) tokenObject.animationIn = part.slice(3);
-      else if (Squid.config.animations.defaultIn) tokenObject.animationIn = Squid.config.animations.defaultIn;
+      else if (await Squid.config('animations.defaultIn')) tokenObject.animationIn = await Squid.config('animations.defaultIn');
 
       // animation out
       if (part.startsWith('out:')) tokenObject.animationOut = part.slice(4);
-      else if (Squid.config.animations.defaultOut) tokenObject.animationOut = Squid.config.animations.defaultOut;
+      else if (await Squid.config('animations.defaultOut')) tokenObject.animationOut = await Squid.config('animations.defaultOut');
 
     });
 

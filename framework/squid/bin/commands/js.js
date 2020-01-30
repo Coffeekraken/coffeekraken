@@ -43,9 +43,9 @@ module.exports = () => {
       filename: '[name]',
       path: '/',
     },
-    plugins: [
-      new __CompressionPlugin()
-    ],
+    // plugins: [
+    //   new __CompressionPlugin()
+    // ],
     optimization: {
       minimize: true,
       minimizer: [new __TerserPlugin({

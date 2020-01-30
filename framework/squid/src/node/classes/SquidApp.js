@@ -5,6 +5,7 @@ const __log = require('@coffeekraken/sugar/node/log/log');
 const __setupLog = require('@coffeekraken/sugar/node/log/setup');
 const __compression = require('compression');
 const __SquidViewPreprocessor = require('./SquidViewPreprocessor');
+const __SExpressApp = require('@coffeekraken/sugar/node/class/SExpressApp');
 
 /**
  * @name          SquidApp
@@ -24,13 +25,7 @@ const __SquidViewPreprocessor = require('./SquidViewPreprocessor');
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SquidApp {
-
-  /**
-   * Store the application configuration object
-   * @type      Object
-   */
-  config = {};
+module.exports = class SquidApp extends __SExpressApp {
 
   /**
    * Store the express application instance
@@ -52,13 +47,16 @@ module.exports = class SquidApp {
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(config) {
+  constructor() {
 
-    // save the configuration
-    this.config = config;
-
-    // create the express app
-    this._createExpressApp();
+    super({}, {
+      name: 'Squid',
+      config: {
+        js: {
+          filename: __dirname + '/../../../squid.config.default.js'
+        }
+      }
+    }, __express());
 
     // set some app middlewares
     this._setExpressAppMiddlewares();
@@ -71,26 +69,6 @@ module.exports = class SquidApp {
 
     // register new template engines
     this._registerExpressTemplateEngines();
-
-    // start the express http server
-    this._startExpressServer();
-
-  }
-
-  /**
-   * @name            _createExpressApp
-   * @namespace       squid.node.SquidApp
-   * @type            Function
-   * @private
-   *
-   * Create the express application
-   *
-   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _createExpressApp() {
-
-    // init the express application
-    this.expressApp = __express();
 
   }
 
@@ -107,7 +85,7 @@ module.exports = class SquidApp {
   _setExpressAppMiddlewares() {
 
     // compression middleware
-    this.expressApp.use(__compression());
+    this.express.use(__compression());
 
   }
 
@@ -121,16 +99,16 @@ module.exports = class SquidApp {
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _initRoutes() {
+  async _initRoutes() {
 
     // check that we have some routes to init
-    if ( ! this.config.routes || Object.keys(this.config.routes).length <= 0) {
+    if ( ! await this.config('routes') || Object.keys(await this.config('routes')).length <= 0) {
       __log('No routes are configurated for your application...', 'error');
       __log('You can specify your routes either inside the "squid.config.js" file, in the "squid/routes.js" file or in your "package.json" file under the "squid" property...', 'info');
       return;
     }
 
-    this.expressApp.use((req, res, next) => {
+    this.express.use((req, res, next) => {
       const originalRender = res.render;
       res.render = function(renderPath, viewData, callback) {
         originalRender.call(this, renderPath, viewData, (error, html) => {
@@ -155,20 +133,15 @@ module.exports = class SquidApp {
     });
 
     // loop on each routes
-    Object.keys(this.config.routes).forEach(route => {
+    Object.keys(await this.config('routes')).forEach(async route => {
       // get the route config
-      const routeConfig = this.config.routes[route];
+      const routeConfig = (await this.config('routes'))[route];
       // init the route in the express app
       this.addRoute(route, routeConfig);
     });
 
-    // add the internal squid routes
-    const JsController = require('../express/controllers/JsController');
-    this.expressApp.get('/squid/js', JsController.squidIndex);
-    this.expressApp.get(`/squid/js/*`, JsController.squidJs);
-
     // add the "view" internal squid route
-    this.expressApp.get('/view/:viewPath/:viewId', require('../express/controllers/ViewController').index);
+    this.express.get('/view/:viewPath/:viewId', require('../express/controllers/ViewController').index);
 
   }
 
@@ -240,7 +213,7 @@ module.exports = class SquidApp {
      __log(`Registering the route "${route}" with the controller "${controllerString}"...`, 'info');
 
      // register the new route in the express app
-     this.expressApp[method.toLowerCase()](path, controller[controllerFunctionString]);
+     this.express[method.toLowerCase()](path, controller[controllerFunctionString]);
 
    }
 
@@ -253,30 +226,15 @@ module.exports = class SquidApp {
     *
     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com
     */
-  _registerExpressTemplateEngines() {
+  async _registerExpressTemplateEngines() {
 
-    this.expressApp.set('views', process.cwd() + '/' + this.config.views.folder);
-    this.expressApp.set('view engine', 'blade.php');
+    this.express.set('views', process.cwd() + '/' + await this.config('views.folder'));
+    this.express.set('view engine', 'blade.php');
 
-    Object.keys(this.config.views.engines).forEach(extension => {
-      this.expressApp.engine(extension, require(this.config.views.engines[extension]));
+    Object.keys(await this.config('views.engines')).forEach(async extension => {
+      this.express.engine(extension, require((await this.config('views.engines'))[extension]));
     });
 
-  }
-
-   /**
-    * @name                 _startExpressServer
-    * @namespace            squid.node.SquidApp
-    * @type                 Function
-    * @private
-    *
-    * Start the express http server
-    *
-    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com
-    */
-  _startExpressServer() {
-    __log(`Starting the express server on port ${this.config.server.port}...`, 'info');
-    this.expressApp.listen(this.config.server.port);
   }
 
   /**
@@ -289,10 +247,10 @@ module.exports = class SquidApp {
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com
    */
-  _initLogSystem() {
+  async _initLogSystem() {
 
     // get the log config
-    const logConfig = this.config.log;
+    const logConfig = await this.config('log');
     if ( ! logConfig) return;
 
     // setup backend log system

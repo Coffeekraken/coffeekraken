@@ -1,3 +1,7 @@
+import __isJson from '../is/json';
+import toString from '../string/toString';
+import parse from '../string/parse';
+
 export default {
 
   /**
@@ -13,6 +17,7 @@ export default {
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   encrypt: function(message) {
+    if (typeof message !== 'string') message = toString(message);
     return btoa(message);
   },
 
@@ -29,7 +34,8 @@ export default {
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   decrypt: function(message) {
-    return atob(message);
+    message = atob(message);
+    return parse(message);
   }
 
 }

@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[5],{35:function(e,o,a){"use strict";Object.defineProperty(o,"__esModule",{value:!0}),o.default=void 0;var r,s=(r=a(0))&&r.__esModule?r:{default:r};o.default=()=>((0,s.default)("window.Sugar._logTransports"),Sugar._logTransports?Sugar._logTransports:{}),e.exports=o.default}}]);

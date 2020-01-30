@@ -37,12 +37,12 @@ module.exports = () => {
     output: {
       filename: '[name]',
       path: __dirname + '/../../' + config.dist.js.outputFolder,
-      publicPath: '/squid/js/',
+      publicPath: '/app/js/',
       chunkFilename: 'chunks/[name].[chunkhash].js'
     },
-    plugins: [
-      new __CompressionPlugin()
-    ],
+    // plugins: [
+    //   new __CompressionPlugin()
+    // ],
     optimization: {
       minimize: true,
       minimizer: [new __TerserPlugin({
@@ -70,6 +70,10 @@ module.exports = () => {
               presets: ['@babel/preset-env']
             }
           }
+        },
+        {
+            test: /\.js$/,
+            use: 'webpack-import-glob-loader'
         }
       ]
     }

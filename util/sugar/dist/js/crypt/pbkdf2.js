@@ -7,6 +7,10 @@ exports.default = void 0;
 
 var _pbkdf = _interopRequireDefault(require("crypto-js/pbkdf2"));
 
+var _toString = _interopRequireDefault(require("../string/toString"));
+
+var _parse = _interopRequireDefault(require("../string/parse"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const __encryptedMessages = {};
@@ -25,6 +29,7 @@ var _default = {
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   encrypt: function (message, salt = 'coffeekraken.sugar.crypt.pbkdf2') {
+    if (typeof message !== 'string') message = (0, _toString.default)(message);
     const string = (0, _pbkdf.default)(message, salt).toString();
     __encryptedMessages[string] = message;
     return string;
@@ -50,7 +55,7 @@ var _default = {
 
     const string = __encryptedMessages[message];
     delete __encryptedMessages[message];
-    return string;
+    return (0, _parse.default)(string);
   }
 };
 exports.default = _default;

@@ -203,7 +203,7 @@ class SAjax extends _SObject.default {
       // grab response
       let response = e.target.response; // get the content type
 
-      const contentType = simpleAjax.request.getResponseHeader("content-type"); // switch on content type
+      const contentType = simpleAjax.request.getResponseHeader("content-type") || 'text/plain'; // switch on content type
 
       switch (true) {
         case contentType.indexOf("text/html") === 0:

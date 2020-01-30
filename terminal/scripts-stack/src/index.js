@@ -529,7 +529,7 @@ class scriptsStack {
     this._currentScriptId = script.id;
 
     // set the console content to the selected script
-    this.screen.$consoleBox.setContent(script.stack.join(""));
+    this.screen.$consoleBox.setContent(script.stack.join("") || '');
     this.screen.$consoleBox.scroll(99999999999);
 
     // mark the script as read

@@ -1,6 +1,6 @@
 @extends('layouts.default')
 @section('content')
 
-  @squid('view home.header #header in:plop')
+  @squid('view home.header in:slide')
 
 @stop

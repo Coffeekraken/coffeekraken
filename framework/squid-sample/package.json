@@ -2,6 +2,7 @@
   "name": "@coffeekraken/squid-sample",
   "description": "A sample application based on the @coffeekraken/squid framework",
   "version": "0.0.1",
+  "domain": "coffeekraken.io",
   "homepage": "http://coffeekraken.io",
   "scripts": {
     "start": "node ../squid/bin/coffeekraken-squid.js start dev"

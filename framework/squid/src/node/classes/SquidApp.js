@@ -111,20 +111,21 @@ module.exports = class SquidApp extends __SExpressApp {
     this.express.use((req, res, next) => {
       const originalRender = res.render;
       res.render = function(renderPath, viewData, callback) {
-        originalRender.call(this, renderPath, viewData, (error, html) => {
+        originalRender.call(this, renderPath, viewData, async (error, html) => {
           if (error) {
             __log(`An error has occured during the rendering process of the view "${renderPath}"... Please try again later`, 'error');
             return;
           }
           try {
             const viewPreprocessor = new __SquidViewPreprocessor(html);
-            const processedHtml = viewPreprocessor.process();
+            const processedHtml = await viewPreprocessor.process();
             if (callback) {
               return callback.call(this, error, processedHtml);
             } else {
               res.send(processedHtml);
             }
           } catch(e) {
+            console.log(e);
             __log(`An error has occured during the rendering process of the view "${renderPath}"... Please try again later...`, 'error');
           }
         })

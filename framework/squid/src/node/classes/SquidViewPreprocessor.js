@@ -1,4 +1,5 @@
 const __uniqid = require('@coffeekraken/sugar/js/string/uniqid');
+const __parseArgs = require('@coffeekraken/sugar/js/string/parseArgs');
 
 /**
  * @name                  SquidViewPreprocessor
@@ -69,9 +70,9 @@ module.exports = class SquidViewPreprocessor {
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  process() {
-    this._injectScriptTags(); // inject the common squid script tag in the header
-    this._processSquidToken(); // process the @squid token
+  async process() {
+    await this._injectScriptTags(); // inject the common squid script tag in the header
+    await this._processSquidToken(); // process the @squid token
     return this._viewContent;
   }
 
@@ -87,30 +88,29 @@ module.exports = class SquidViewPreprocessor {
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _processSquidToken() {
+  async _processSquidToken() {
 
-    const tokenHash = __uniqid();
     const tokenReg = /\@squid\(('|")([^\r\n]*)('|")\)/gm;
     let matches;
     const qualities = [];
 
     while (matches = tokenReg.exec(this._viewContent)) {
 
+      const tokenHash = __uniqid();
       const token = matches[0];
       const content = matches[2];
 
       // parse the squid token content
-      const tokenObject = this._parseSquidTokenContent(content);
+      const tokenObject = await this._parseSquidTokenContent(content);
       if ( ! tokenObject.id) tokenObject.id = tokenHash;
 
-      const htmlId = tokenObject.id === tokenHash ? tokenHash : tokenObject.id + '-' + tokenHash;
+      // const htmlId = tokenObject.id === tokenHash ? tokenHash : tokenObject.id + '-' + tokenHash;
 
       this._viewContent = this._viewContent.replace(token, `
-        <div id="${htmlId}">
-          <script>
-            window.Squid.view.call(${JSON.stringify(tokenObject)}, '${htmlId}');
-          </script>
-        </div>
+        <div id="${tokenObject.id}" class="view"></div>
+        <script>
+          window.Squid.view.call(${JSON.stringify(tokenObject)}, '${tokenObject.id}');
+        </script>
       `);
 
     }
@@ -129,7 +129,7 @@ module.exports = class SquidViewPreprocessor {
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _injectScriptTags() {
+  async _injectScriptTags() {
 
     // search for the <head> tag and replace it if founded
     if ( ! this._viewContent.includes('</head>')) {
@@ -173,41 +173,41 @@ module.exports = class SquidViewPreprocessor {
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _parseSquidTokenContent(content) {
+  async _parseSquidTokenContent(content) {
 
-    // split by spaces
-    const parts = content.split(' ');
+    // get the action wanted
+    const action = content.split(' ')[0];
 
-    // get the action that is the first part
-    const action = parts[0];
+    // init the args object
+    let args = {};
 
-    // init the token object
-    const tokenObject = {
-      action: action
-    };
+    // console.log({
+    //   action: 'String -a --action',
+    //   view: 'String -v --view',
+    //   id: `String -i --id /^#([\\S]+)$/`,
+    //   in: `String --in ${await Squid.config('animation.defaultIn') || ''}`,
+    //   out: `String --out ${await Squid.config('animation.defaultOut') || ''}`
+    // });
 
-    // parse differently depending on the action
+    // parse differenctly depending on action
     switch(action) {
       case 'view':
-        tokenObject.view = parts[1];
+        args = __parseArgs(content, {
+          action: 'String -a --action',
+          view: 'String -v --view',
+          id: `String -i --id /^#([\\S]+)$/`,
+          in: `String --in "${await Squid.config('animation.defaultIn') || ''}"`,
+          out: `String --out "${await Squid.config('animation.defaultOut' || '')}"`,
+          when: 'String -w --when "inViewport"'
+        });
       break;
     }
 
-    // get the global parameters like id, etc...
-    parts.forEach(async part => {
-
-      // ids that begin with a #
-      if (part.charAt(0) === '#') tokenObject.id = part.slice(1);
-
-      // animation in
-      if (part.startsWith('in:')) tokenObject.animationIn = part.slice(3);
-      else if (await Squid.config('animations.defaultIn')) tokenObject.animationIn = await Squid.config('animations.defaultIn');
-
-      // animation out
-      if (part.startsWith('out:')) tokenObject.animationOut = part.slice(4);
-      else if (await Squid.config('animations.defaultOut')) tokenObject.animationOut = await Squid.config('animations.defaultOut');
-
-    });
+    // init the token object
+    const tokenObject = {
+      action: action,
+      ...args
+    };
 
     // return the token object
     return tokenObject;

@@ -16,8 +16,10 @@ import matches from "./matches";
  *
  * @example 	js
  * import querySelectorLive from '@coffeekraken/sugar/js/dom/querySelectorLive'
- * querySelectorLive('.my-cool-item', (node) => {
+ * querySelectorLive('.my-cool-item', (node, clearFn) => {
  * 	// do something here with the detected node
+ *  // call clearFn if you want to stop listening for this selector
+ *  clearFn();
  * });
  *
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -67,7 +69,9 @@ export default function querySelectorLive(selector, cb, settings = {}) {
         if (node._querySelectorLive[obj.id]) return;
         node._querySelectorLive[obj.id] = true;
       }
-      obj.cb && obj.cb(node);
+      obj.cb && obj.cb(node, () => {
+        delete _selectors[obj.selector];
+      });
     })
   }
 

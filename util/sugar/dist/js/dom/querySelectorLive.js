@@ -26,8 +26,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @example 	js
  * import querySelectorLive from '@coffeekraken/sugar/js/dom/querySelectorLive'
- * querySelectorLive('.my-cool-item', (node) => {
+ * querySelectorLive('.my-cool-item', (node, clearFn) => {
  * 	// do something here with the detected node
+ *  // call clearFn if you want to stop listening for this selector
+ *  clearFn();
  * });
  *
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -72,7 +74,9 @@ function querySelectorLive(selector, cb, settings = {}) {
         node._querySelectorLive[obj.id] = true;
       }
 
-      obj.cb && obj.cb(node);
+      obj.cb && obj.cb(node, () => {
+        delete _selectors[obj.selector];
+      });
     });
   } // listen for updates in document
 

@@ -29,7 +29,9 @@ var _default = value => {
       "use strict";
       return (${value});
     `)();
-  } catch (e) {}
+  } catch (e) {
+    return value;
+  }
 };
 
 exports.default = _default;

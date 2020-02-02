@@ -1,4 +1,7 @@
 import __SApp from '@coffeekraken/sugar/js/class/SApp';
+import __querySelectorLive from '@coffeekraken/sugar/js/dom/querySelectorLive';
+import __appendScriptTag from '@coffeekraken/sugar/js/dom/appendScriptTag';
+import __base64 from '@coffeekraken/sugar/js/crypt/base64';
 
 export default class Squid extends __SApp {
 
@@ -11,6 +14,9 @@ export default class Squid extends __SApp {
 
     // register animations
     this._registerAnimations();
+
+    // init the lazyload listener
+    this._initLazyloadListeners();
 
   }
 
@@ -36,7 +42,6 @@ export default class Squid extends __SApp {
 
     const sugarInAnimations = require.context('@coffeekraken/sugar/js/animation/in', false, /\.js$/);
     sugarInAnimations.keys().forEach(key => {
-      console.log(key);
       const name = key.split('/')[key.split('/').length - 1].replace('.js', '');
       this.animation.register('in', name, sugarInAnimations );
     });
@@ -48,6 +53,28 @@ export default class Squid extends __SApp {
     //   this.animation.register('in', name, a);
     // });
 
+  }
+
+  /**
+   * @name                      _initLazyloadListeners
+   * @namespace                 squid.js.class.Squid
+   * @type                      Function
+   * @private
+   *
+   * Add the querySelectorLive listeners depending on the config.lazyload list of modules
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _initLazyloadListeners() {
+    setTimeout(() => {
+      const lazyload = window.Squid.config('lazyload');
+      Object.keys(lazyload).forEach((selector) => {
+        __querySelectorLive(selector, ($elm, clearFn) => {
+          __appendScriptTag(`/app/js/lazyload/${__base64.encrypt(selector)}.js`);
+          clearFn();
+        });
+      });
+    });
   }
 
 };

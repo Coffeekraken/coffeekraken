@@ -115,7 +115,7 @@ module.exports = __deepMerge({
 
   },
 
-  animations: {
+  animation: {
     defaultIn: null,
     defaultOut: 'ccccc'
   },
@@ -126,5 +126,10 @@ module.exports = __deepMerge({
 
   },
 
-  routes: {}
+  routes: {},
+
+  lazyload: {
+    '[slide-in]': '@coffeekraken/sugar/js/animation/in/slide'
+  }
+
 }, __projectConfig);

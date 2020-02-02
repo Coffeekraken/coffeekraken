@@ -2,7 +2,8 @@ const __log = require('@coffeekraken/sugar/node/log/log');
 const __execSh = require('exec-sh');
 const __path = require('path');
 const __forever = require('forever');
-const { killPortProcess } = require('kill-port-process');
+// const { killPortProcess } = require('kill-port-process');
+const __killPort = require('kill-port');
 const __getConfig = require('../../src/node/getConfig');
 
 module.exports = async (env = 'dev') => {
@@ -13,8 +14,8 @@ module.exports = async (env = 'dev') => {
 
         const config = __getConfig();
 
-        // this.log(`Make sure theirs no processes left running on port ${await this.config('server.port')}...`, 'info');
-        await killPortProcess(config.server.port || '8080');
+        __log(`Make sure theirs no processes left running on port ${await config.server.port || 8080}...`, 'info');
+        await __killPort(config.server.port || 8080, 'tcp');
 
         __forever.start(`app.js`, {
           "uid": "app1",

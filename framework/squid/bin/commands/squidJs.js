@@ -9,6 +9,7 @@ const __emptyDirSync = require('@coffeekraken/sugar/node/fs/emptyDirSync');
 const __filesize = require('file-size');
 const __TerserPlugin = require('terser-webpack-plugin');
 const __CompressionPlugin = require('compression-webpack-plugin');
+const __base64 = require('@coffeekraken/sugar/node/crypt/base64');
 
 module.exports = () => {
 
@@ -19,11 +20,15 @@ module.exports = () => {
   let bundleFiles = __glob.sync(`${__dirname}/../../src/js/**/*.bundle.js`);
 
   // build the entry property
-  const entryObj = {};
+  let entryObj = {};
   bundleFiles.forEach(bundleFilePath => {
     let finalBundleFilePath = bundleFilePath.replace('src/js/','');
     finalBundleFilePath = finalBundleFilePath.replace(__path.resolve(__dirname, '../../') + '/', '');
     entryObj[finalBundleFilePath] = (bundleFilePath.charAt(0) === '/') ? bundleFilePath : './' + bundleFilePath;
+  });
+
+  Object.keys(config.lazyload).forEach((selector) => {
+    entryObj[`lazyload/${__base64.encrypt(selector)}.js`] = config.lazyload[selector];
   });
 
   __log(`Emptying the current javascript dist folder "${config.dist.js.outputFolder}"...`, 'info');

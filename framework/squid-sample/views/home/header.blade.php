@@ -1,22 +1,21 @@
-<section class="header" slide-in="100 -100 --delay 4000">
+<section class="header">
 			<div class="container">
 				<div class="gr gr--middle">
 					<div class="col col--12 col--4@tablet hide show@tablet" style="min-height:1px;">
-						<img class="header__img-kraken" src="/dist/img/kraken.png" alt="Coffeekraken Kraken" slide-in="200" />
+						<img class="header__img-kraken" src="/dist/img/kraken.png" alt="Coffeekraken Kraken" slide-in="0 -200 --delay 1000" />
 					</div>
 					<div class="col col--12 col--7@tablet col--start-0 col--start-6@tablet header__content">
-						<div anim="slide-in-up">
+						<div>
 							<!-- <div class="coffeekraken-logo m-b" style="width:200px" anim="slide-in-down"></div> -->
-							<s-bodymovin slide-in="200" src="/data/logo-white.json" class="m-b m-t" style="display: inline-block; width:200px; height:62px" autoplay autoplay-delay="1000"></s-bodymovin>
-							<h1 class="h1 m-b-smaller">
-								<s-characters-slideshow slide-in="200" class="c-secondary" values="['Workflow','Styleguide','Documentation','Layout','Webcomponents']">Workflow</s-characters-slideshow><br>
+							<h1 class="h1 m-b-smaller" slide-in="0 -200 --delay 1000">
+								<s-characters-slideshow class="c-secondary" values="['Workflow','Styleguide','Documentation','Layout','Webcomponents']">Workflow</s-characters-slideshow><br>
 								made right!
 							</h1>
-							<p class="p p--lead m-b" slide-in="200">
+							<p class="p p--lead m-b" slide-in="0 -200 --delay 1000">
 								Working smoothly in team is as hard as working alone on a big project. <br>
 								<span class="c-secondary">We think that the right tool at the right place can solve this once and for all...</span>
 							</p>
-							<ul class="nav nav--pills" slide-in="200">
+							<ul class="nav nav--pills" slide-in="0 -200 --delay 1000">
 								<li class="nav__item m-r-smaller">
 									<div class="tooltip tooltip--t tf t-center">
 										Carpenter is a tool that let you generate a styleguide directly from your codebase,<br>

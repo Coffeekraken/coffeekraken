@@ -1,6 +1,4 @@
-const __fs = require('fs');
 const __nodeBladePhp = require('@coffeekraken/node-blade-php');
-const __SquidViewPreprocessor = require('../../../classes/SquidViewPreprocessor');
 
 /**
  * @name            blade

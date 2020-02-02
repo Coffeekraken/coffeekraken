@@ -21,5 +21,7 @@ export default (value) => {
       "use strict";
       return (${value});
     `)();
-  } catch(e) {}
+  } catch(e) {
+    return value;
+  }
 }

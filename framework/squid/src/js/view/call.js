@@ -6,8 +6,6 @@ export default async function squidViewToken(tokenObject, htmlId) {
   // grab the node HTMLElement using the specified id
   const $node = document.querySelector(`#${htmlId}`);
 
-  console.log('LLL', $node);
-
   // load the view only when wanted
   switch (tokenObject.when) {
     case 'inViewport':

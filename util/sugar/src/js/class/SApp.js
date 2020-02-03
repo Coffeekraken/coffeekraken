@@ -61,18 +61,23 @@ export default class SApp {
 
  /**
   * @constructor
-  * @param               {Object}                      data                 The application data that you want to set like version, name, etc...
-  * @param                {Object}                    [settings={}]          An object to configure your SApp instance.
+  * @param                {Object}                [settings={}]         The application settings
   * @return              {SApp}                                           An SApp instance pn which you will have access to all the application data
   *
-  * @setting              {Array}                 [sources=[process.cwd()]]         Tell the class instance where to search for files like package.json, app.config.js, etc...
+  * @setting            {String}                  [name='SApp']         The application name that you want. This will gives you access to your app instance through window.{settings.name}
   *
   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
   */
- constructor() {
+ constructor(settings = {}) {
+
+   // store the settings
+   this.__settings = {
+     name: 'SApp',
+     ...settings
+   };
 
    // expose this instance in the "window" scope
-   window[window._sAppName || 'sApp'] = this;
+   window[this.__settings.name] = this;
 
  }
 
@@ -92,7 +97,7 @@ export default class SApp {
   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
   */
   config(path = null) {
-   let config = window['_' + window._sAppName + 'Data' || '_sAppData'].config || {};
+   let config = window['_' + this.__settings.name + 'Data'].config || {};
    if (__isBase64(config) && ! __decryptedConfig) {
      __decryptedConfig = __base64.decrypt(config);
    }
@@ -115,7 +120,7 @@ export default class SApp {
   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
   */
  meta(path = null) {
-   let meta = window['_' + window._sAppName + 'Data' || '_sAppData'].meta || {};
+   let meta = window['_' + this.__settings.name + 'Data'].meta || {};
    if (__isBase64(meta) && ! __decryptedMeta) {
      __decryptedMeta = __base64.decrypt(meta);
    }

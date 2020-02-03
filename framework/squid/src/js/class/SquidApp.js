@@ -7,7 +7,9 @@ export default class Squid extends __SApp {
 
   constructor() {
 
-    super();
+    super({
+      name: 'Squid'
+    });
 
     this._importAll(require.context('../animation', false, /\.js$/), 'animation');
     this._importAll(require.context('../view', false, /\.js$/), 'view');

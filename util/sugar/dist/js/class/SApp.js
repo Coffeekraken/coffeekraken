@@ -73,15 +73,14 @@ class SApp {
 
   /**
    * @constructor
-   * @param               {Object}                      data                 The application data that you want to set like version, name, etc...
-   * @param                {Object}                    [settings={}]          An object to configure your SApp instance.
+   * @param                {Object}                [settings={}]         The application settings
    * @return              {SApp}                                           An SApp instance pn which you will have access to all the application data
    *
-   * @setting              {Array}                 [sources=[process.cwd()]]         Tell the class instance where to search for files like package.json, app.config.js, etc...
+   * @setting            {String}                  [name='SApp']         The application name that you want. This will gives you access to your app instance through window.{settings.name}
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor() {
+  constructor(settings = {}) {
     _defineProperty(this, "__settings", {});
 
     _defineProperty(this, "__meta", {});
@@ -92,8 +91,13 @@ class SApp {
 
     _defineProperty(this, "__log", {});
 
-    // expose this instance in the "window" scope
-    window[window._sAppName || 'sApp'] = this;
+    // store the settings
+    this.__settings = {
+      name: 'SApp',
+      ...settings
+    }; // expose this instance in the "window" scope
+
+    window[this.__settings.name] = this;
   }
   /**
    * @name                            config
@@ -113,7 +117,7 @@ class SApp {
 
 
   config(path = null) {
-    let config = window['_' + window._sAppName + 'Data' || '_sAppData'].config || {};
+    let config = window['_' + this.__settings.name + 'Data'].config || {};
 
     if ((0, _base.default)(config) && !__decryptedConfig) {
       __decryptedConfig = _base2.default.decrypt(config);
@@ -139,7 +143,7 @@ class SApp {
 
 
   meta(path = null) {
-    let meta = window['_' + window._sAppName + 'Data' || '_sAppData'].meta || {};
+    let meta = window['_' + this.__settings.name + 'Data'].meta || {};
 
     if ((0, _base.default)(meta) && !__decryptedMeta) {
       __decryptedMeta = _base2.default.decrypt(meta);

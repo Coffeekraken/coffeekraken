@@ -63,8 +63,6 @@ class LazyDomLoadPlugin {
       __fs.writeFileSync(`${__tmpDir()}/lazydomload.js`, script);
       entry[`_lazydomload.js`] = `${__tmpDir()}/lazydomload.js`;
 
-      console.log(script);
-
     });
 
     compiler.hooks.done.tap('LazyDomLoadPlugin', (stats) => {

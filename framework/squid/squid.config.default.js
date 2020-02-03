@@ -129,8 +129,7 @@ module.exports = __deepMerge({
   routes: {},
 
   lazyload: {
-    '[slide-in]': '@coffeekraken/sugar/js/animation/in/slide',
-    '[slide-out]:inViewport': '@coffeekraken/sugar/js/animation/in/slide'
+    '[slide-in]': '@coffeekraken/sugar/js/animation/in/slide'
   }
 
 }, __projectConfig);

@@ -1,6 +1,6 @@
 require('module-alias/register');
 
-const __SquidApp = require('./src/node/classes/SquidApp');
+const __SquidApp = require('./src/node/class/SquidApp');
 
 /**
  * Entry point of the squid framework.

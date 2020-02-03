@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[15],{47:function(e,o,s){"use strict";s.r(o),o.default=(e,o="info")=>new Promise((s,r)=>{let a="log";switch(o){case"error":a="error";break;case"warn":a="warn";break;case"info":a="info";break;case"verbose":case"debug":case"silly":a="log"}console[a](e),s()})}}]);

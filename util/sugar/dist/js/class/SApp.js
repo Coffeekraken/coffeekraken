@@ -5,25 +5,19 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _get = _interopRequireDefault(require("../object/get"));
+
+var _base = _interopRequireDefault(require("../is/base64"));
+
+var _base2 = _interopRequireDefault(require("../crypt/base64"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-const __log = require('../log/log');
-
-const __deepMerge = require('../object/deepMerge');
-
-const __get = require('../object/get');
-
-const __set = require('../object/set');
-
-const __SAjax = require('./SAjax');
-
-const __isBase64 = require('../is/base64');
-
-const __base64 = require('../crypt/base64');
 
 let __decryptedConfig, __decryptedMeta;
 /**
@@ -121,11 +115,11 @@ class SApp {
   config(path = null) {
     let config = window['_' + window._sAppName + 'Data' || '_sAppData'].config || {};
 
-    if (__isBase64(config) && !__decryptedConfig) {
-      __decryptedConfig = __base64.decrypt(config);
+    if ((0, _base.default)(config) && !__decryptedConfig) {
+      __decryptedConfig = _base2.default.decrypt(config);
     }
 
-    return __get(__decryptedConfig, path);
+    return (0, _get.default)(__decryptedConfig, path);
   }
   /**
    * @name                            meta
@@ -147,11 +141,11 @@ class SApp {
   meta(path = null) {
     let meta = window['_' + window._sAppName + 'Data' || '_sAppData'].meta || {};
 
-    if (__isBase64(meta) && !__decryptedMeta) {
-      __decryptedMeta = __base64.decrypt(meta);
+    if ((0, _base.default)(meta) && !__decryptedMeta) {
+      __decryptedMeta = _base2.default.decrypt(meta);
     }
 
-    return __get(__decryptedMeta, path);
+    return (0, _get.default)(__decryptedMeta, path);
   }
   /**
    * @name                                  log
@@ -176,14 +170,16 @@ class SApp {
 
   log(message, type = 'info', transports = null) {
     return new Promise((resolve, reject) => {
-      // __ensureExist('window.Squid._log');
-      Promise.all([Promise.resolve().then(() => _interopRequireWildcard(require('@coffeekraken/sugar/js/log/log'))), Promise.resolve().then(() => _interopRequireWildcard(require('@coffeekraken/sugar/js/log/isTransportRegistered'))), Promise.resolve().then(() => _interopRequireWildcard(require('@coffeekraken/sugar/js/log/getRegisteredTransports'))), Promise.resolve().then(() => _interopRequireWildcard(require('@coffeekraken/sugar/js/log/registerTransport')))]).then(async modules => {
+      const _this = this; // __ensureExist('window.Squid._log');
+
+
+      Promise.all([Promise.resolve().then(() => _interopRequireWildcard(require('../log/log'))), Promise.resolve().then(() => _interopRequireWildcard(require('../log/isTransportRegistered'))), Promise.resolve().then(() => _interopRequireWildcard(require('../log/getRegisteredTransports'))), Promise.resolve().then(() => _interopRequireWildcard(require('../log/registerTransport')))]).then(modules => {
         const __log = modules[0],
               __isTransportRegistered = modules[1],
               __getRegisteredTransports = modules[2],
               __registerTransport = modules[3]; // get the transports needed for this type
 
-        const configTransports = (await this.config('log.frontend.transportsByType'))[type] ? (await this.config('log.frontend.transportsByType'))[type].split(' ') : [];
+        const configTransports = this.config('log.frontend.transportsByType')[type] ? this.config('log.frontend.transportsByType')[type].split(' ') : [];
         let transp = transports ? transports : configTransports;
 
         if (!this.__log.sugarTransports) {

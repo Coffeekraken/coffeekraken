@@ -16,15 +16,25 @@
  */
 module.exports = function(value) {
   // if (typeof value !== 'string') return value;
-  return Function(`
-    "use strict";
-    try {
-      if (typeof ${value} == undefined) {
-        return '${value}';
-      }
-      return ${value};
-    } catch(e) {
-      // console.error(e);
-    }
-  `)();
+  if (typeof value !== 'string') return value;
+  try {
+    return Function(`
+      "use strict";
+      return (${value});
+    `)();
+  } catch(e) {
+    return value;
+  }
+
+  // return Function(`
+  //   "use strict";
+  //   try {
+  //     if (typeof ${value} == undefined) {
+  //       return '${value}';
+  //     }
+  //     return ${value};
+  //   } catch(e) {
+  //     // console.error(e);
+  //   }
+  // `)();
 }

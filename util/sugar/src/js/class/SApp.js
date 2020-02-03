@@ -1,10 +1,6 @@
-const __log = require('../log/log');
-const __deepMerge = require('../object/deepMerge');
-const __get = require('../object/get');
-const __set = require('../object/set');
-const __SAjax = require('./SAjax');
-const __isBase64 = require('../is/base64');
-const __base64 = require('../crypt/base64');
+import __get from '../object/get';
+import __isBase64 from '../is/base64';
+import __base64 from '../crypt/base64';
 
 let __decryptedConfig, __decryptedMeta;
 
@@ -95,7 +91,7 @@ export default class SApp {
   *
   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
   */
- config(path = null) {
+  config(path = null) {
    let config = window['_' + window._sAppName + 'Data' || '_sAppData'].config || {};
    if (__isBase64(config) && ! __decryptedConfig) {
      __decryptedConfig = __base64.decrypt(config);
@@ -148,14 +144,16 @@ export default class SApp {
  log(message, type = 'info', transports = null) {
    return new Promise((resolve, reject) => {
 
+     const _this = this;
+
      // __ensureExist('window.Squid._log');
 
      Promise.all([
-       import('@coffeekraken/sugar/js/log/log'),
-       import('@coffeekraken/sugar/js/log/isTransportRegistered'),
-       import('@coffeekraken/sugar/js/log/getRegisteredTransports'),
-       import('@coffeekraken/sugar/js/log/registerTransport')
-     ]).then(async (modules) => {
+       import(/* webpackChunkName: "log" */ /* webpackMode: "lazy" */ '../log/log'),
+       import(/* webpackChunkName: "isTransportRegistered" */ /* webpackMode: "lazy" */ '../log/isTransportRegistered'),
+       import(/* webpackChunkName: "getRegisteredTransports" */ /* webpackMode: "lazy" */ '../log/getRegisteredTransports'),
+       import(/* webpackChunkName: "registerTransport" */ /* webpackMode: "lazy" */ '../log/registerTransport')
+     ]).then((modules) => {
 
        const __log = modules[0],
              __isTransportRegistered = modules[1],
@@ -163,7 +161,7 @@ export default class SApp {
              __registerTransport = modules[3];
 
        // get the transports needed for this type
-       const configTransports = (await this.config('log.frontend.transportsByType'))[type] ? (await this.config('log.frontend.transportsByType'))[type].split(' ') : [];
+       const configTransports = (this.config('log.frontend.transportsByType'))[type] ? (this.config('log.frontend.transportsByType'))[type].split(' ') : [];
        let transp = transports ? transports : configTransports;
 
        if ( ! this.__log.sugarTransports) {

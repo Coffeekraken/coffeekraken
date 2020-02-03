@@ -10,6 +10,9 @@ const __filesize = require('file-size');
 const __TerserPlugin = require('terser-webpack-plugin');
 const __CompressionPlugin = require('compression-webpack-plugin');
 const __base64 = require('@coffeekraken/sugar/node/crypt/base64');
+const __LazyDomLoadPlugin = require('./LazyDomLoadPlugin');
+
+const projectPackageJson = require(process.cwd() + '/package.json');
 
 module.exports = () => {
 
@@ -43,11 +46,16 @@ module.exports = () => {
       filename: '[name]',
       path: __dirname + '/../../' + config.dist.js.outputFolder,
       publicPath: '/app/js/',
-      chunkFilename: 'chunks/[name].[chunkhash].js'
+      chunkFilename: `chunks/[name]-[chunkhash]-${projectPackageJson.version}.js`
     },
-    // plugins: [
-    //   new __CompressionPlugin()
-    // ],
+    plugins: [
+      new __LazyDomLoadPlugin({
+        outputEntry: 'common.bundle.js',
+        entryRegexp: '^lazyload\/(.*).js$',
+        scriptSrc: '/app/js/[name]',
+        decryptSelectorFn: __base64.decrypt
+      })
+    ],
     optimization: {
       minimize: true,
       minimizer: [new __TerserPlugin({
@@ -60,7 +68,7 @@ module.exports = () => {
       alias: {
         '@squid': __path.resolve(__dirname, '../../src/js'),
         '@app': process.cwd() + '/' + config.dist.js.sourcesFolder,
-        '@coffeekraken/sugar/js': __dirname + '/../../../../util/sugar/dist/js',
+        '@coffeekraken/sugar/js': __dirname + '/../../../../util/sugar/src/js',
         '@coffeekraken/sugar/node': __dirname + '/../../../../util/sugar/src/node'
       }
     },
@@ -72,6 +80,10 @@ module.exports = () => {
           use: {
             loader: 'babel-loader',
             options: {
+              plugins: [
+                '@babel/plugin-syntax-dynamic-import',
+                ["@babel/plugin-proposal-class-properties", { "loose": true }]
+              ],
               presets: ['@babel/preset-env']
             }
           }

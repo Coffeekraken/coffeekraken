@@ -3,8 +3,8 @@
 
   @squid('view home.header --in slide')
 
-  @squid('view home.header #header --in slide')
-
   @squid('view home.header --in slide')
+
+  @squid('view home.header #header --in slide')
 
 @stop

@@ -1,4 +1,4 @@
-<section class="header">
+<section class="header" slide-out>
 			<div class="container">
 				<div class="gr gr--middle">
 					<div class="col col--12 col--4@tablet hide show@tablet" style="min-height:1px;">

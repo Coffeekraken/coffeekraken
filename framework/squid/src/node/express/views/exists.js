@@ -3,8 +3,8 @@ const __fs = require('fs');
 const __glob = require('glob');
 
 /**
- * @name            viewExist
- * @namespace       squid.node.functions
+ * @name            exists
+ * @namespace       squid.node.express.views
  * @type            Function
  *
  * Check if a view exist depending on the registered engines in the config

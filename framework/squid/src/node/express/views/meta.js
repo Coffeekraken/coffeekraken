@@ -1,8 +1,5 @@
 const __fs = require('fs');
 const __path = require('path');
-const __viewExist = require('./viewExist');
-const __getViewConfig = require('./getViewConfig');
-const __getViewPath = require('./getViewPath');
 
 /**
  * @name                            getViewMetas
@@ -35,10 +32,10 @@ const __getViewPath = require('./getViewPath');
 module.exports = async (viewPath, viewId = null) => {
 
   // get the view config
-  const viewConfig = await __getViewConfig(viewPath, viewId);
+  const viewConfig = await Squid.express.views.config(viewPath, viewId);
 
   // get the view path
-  const viewFilePath = await __getViewPath(viewPath, viewId);
+  const viewFilePath = await Squid.express.views.path(viewPath, viewId);
 
   // get the view extension
   let viewExtension = viewFilePath.split('/');

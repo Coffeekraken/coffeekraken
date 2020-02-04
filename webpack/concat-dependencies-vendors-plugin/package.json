@@ -1,0 +1,34 @@
+{
+  "name": "@coffeekraken/webpack-concat-dependencies-vendors-plugin",
+  "version": "0.0.1",
+  "description": "Allow to concatene all the imported dependencies files that have the same name (but another extension) in a configurated output file",
+  "main": "src/ConcatDependenciesVendorsPlugin.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Coffeekraken/coffeekraken/tree/master/webpack/concat-dependencies-vendors-plugin"
+  },
+  "keywords": [
+    "coffee",
+    "kraken",
+    "coffeekraken",
+    "webpack",
+    "concat",
+    "dependencies",
+    "vendors",
+    "plugin"
+  ],
+  "author": "Coffeekraken <hello@coffeekraken.io>",
+  "contributors": [
+    {
+      "name": "Olivier Bossel",
+      "email": "olivier.bossel@gmail.com",
+      "url": "http://olivierbossel.com"
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://coffeekraken.io",
+  "dependencies": {
+    "@coffeekraken/sugar": "^1.0.23"
+  },
+  "devDependencies": {}
+}

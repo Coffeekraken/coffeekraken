@@ -11,6 +11,8 @@ const __TerserPlugin = require('terser-webpack-plugin');
 const __CompressionPlugin = require('compression-webpack-plugin');
 const __base64 = require('@coffeekraken/sugar/node/crypt/base64');
 const __LazyDomLoadPlugin = require('./LazyDomLoadPlugin');
+const __ConcatDependenciesVendorsPlugin = require('./ConcatDependenciesVendorsPlugin');
+const __MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const projectPackageJson = require(process.cwd() + '/package.json');
 
@@ -44,11 +46,14 @@ module.exports = () => {
     context: __path.resolve(__dirname, '../../'),
     output: {
       filename: '[name]',
-      path: __dirname + '/../../' + config.dist.js.outputFolder,
+      path: __path.resolve(__dirname + '/../../' + config.dist.js.outputFolder),
       publicPath: '/app/js/',
       chunkFilename: `chunks/[name]-[chunkhash]-${projectPackageJson.version}.js`
     },
     plugins: [
+      new __ConcatDependenciesVendorsPlugin({
+        outputFilePath: __path.resolve(`${__dirname}/../../src/css/03_generic/_js.scss`)
+      }),
       new __LazyDomLoadPlugin({
         outputEntry: 'common.bundle.js',
         entryRegexp: '^lazyload\/(.*).js$',
@@ -59,9 +64,7 @@ module.exports = () => {
     optimization: {
       minimize: true,
       minimizer: [new __TerserPlugin({
-        terserOptions: {
-
-        }
+        terserOptions: {}
       })]
     },
     resolve: {
@@ -89,8 +92,8 @@ module.exports = () => {
           }
         },
         {
-            test: /\.js$/,
-            use: 'webpack-import-glob-loader'
+          test: /\.js$/,
+          use: 'webpack-import-glob-loader'
         }
       ]
     }

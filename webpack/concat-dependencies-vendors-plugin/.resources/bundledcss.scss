@@ -6,7 +6,7 @@
  * Vendors
  * All external librarie needed in the project.
  */
-@use '@coffeekraken/sugar/index' as sugar;
+@use '@coffeekraken/gridle/index' as gridle;
 
 
 /**
@@ -17,6 +17,26 @@
  * Setup
  * Setup all the different parts/modules/libraries.
  */
+/**
+ * Gridle setup
+ * For documentation : https://www.npmjs.com/package/@coffeekraken/gridle
+ */
+@include gridle.setup(
+  (
+    columns: 12,
+    column-width: 60,
+    // unitless value
+      width: 1200,
+    // unitless value
+      container-width: 85vw,
+    // absolute value
+      container-max-width: 1440px
+  )
+);
+
+// states registration
+@include gridle.register-mobile-first-states();
+
 
 
 /**
@@ -37,9 +57,11 @@
  * Generic
  * All the generic codebase for the project like typography, resets, etc...
  */
-[slide-in]:not(.in) {
-  opacity: 0;
-}
+/**
+ * Gridle classes generation
+ * For documentation : https://www.npmjs.com/package/@coffeekraken/gridle
+ */
+@include gridle.classes();
 
 
 
@@ -77,40 +99,6 @@
  * An organism can contain other molecules or atoms and does not have to relay on his ancestors
  * to be properly displayed.
  */
-.view {
-  min-height: 50vh;
-  transition: all .5s ease-in-out;
-  position: relative;
-}
-
-.view--loaded {
-  min-height: 0;
-  opacity: 1;
-}
-
-.view__content {
-  opacity: 1;
-
-  .view--loading & {
-    opacity: 0;
-  }
-}
-
-.view__loader {
-  @include sugar.loader-couch-potato();
-  @include sugar.position(absolute, middle, center);
-  opacity: 0;
-  transition: all .5s ease-in-out;
-
-  .view--loading & {
-    opacity: 1;
-    transform: scale(1);
-  }
-  .view--loaded & {
-    transform: scale(2);
-  }
-}
-
 
 
 /**
@@ -156,3 +144,10 @@
 
 
 // DO NOT UPDATE OR ADD CONTENT TO THIS FILE...
+
+        /**
+         * Glob import
+         * Import some files defines in the __config.dist.css.importGlobPattern
+         */
+        @import 'views/**/!(_)*.scss';
+      

@@ -25,8 +25,9 @@ var _default = (() => {
       y: 'Number -y --y "0"',
       duration: 'Number -d --duration "500"',
       delay: 'Number --delay "0"',
-      when: 'String -w --when'
-    }); // generate the animation css
+      when: 'String -w --when "inViewport"'
+    });
+    console.log(args); // generate the animation css
 
     const css = `
 

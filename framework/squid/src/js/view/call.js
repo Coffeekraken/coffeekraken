@@ -1,17 +1,20 @@
 import SAjax from '@coffeekraken/sugar/js/class/SAjax';
-import __whenInViewport from '@coffeekraken/sugar/js/dom/whenInViewport';
+import __when from '@coffeekraken/sugar/js/dom/when';
+import __toDomNodes from '@coffeekraken/sugar/js/dom/toDomNodes';
 
-export default async function squidViewToken(tokenObject, htmlId) {
+function timeout(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+export default async function squidViewToken(tokenObject) {
 
   // grab the node HTMLElement using the specified id
-  const $node = document.querySelector(`#${htmlId}`);
+  const $node = document.querySelector(`#${tokenObject.id}`);
+  const $loader = $node.querySelector('.view__loader');
+  const $content = $node.querySelector('.view__content');
 
   // load the view only when wanted
-  switch (tokenObject.when) {
-    case 'inViewport':
-      await __whenInViewport($node);
-    break;
-  }
+  if (tokenObject.when) await __when($node, tokenObject.when);
 
   // appending the class "view--loading"
   $node.classList.add('view--loading');
@@ -26,39 +29,16 @@ export default async function squidViewToken(tokenObject, htmlId) {
   // send the request
   ajx.send().then(async data => {
 
-    // removing the class view--loading
-    $node.classList.remove('view--loading');
-
-    // // check if an "out" animation is defined
-    // if (tokenObject.out && Squid.animation.exist('out', tokenObject.out)) {
-    //
-    //   // add the class view--in
-    //   $node.classList.add('view--out');
-    //
-    //   // execute the in animation
-    //   await Squid.animation.call('out', tokenObject.out, $node);
-    //
-    //   // removing the class view--in
-    //   $node.classList.remove('view--out');
-    //
-    // }
-
     // insert the view inside the document
-    $node.innerHTML = data;
+    const $newContent = __toDomNodes(data);
+    $content.appendChild($newContent);
 
-    // // check if an "out" animation is defined
-    // if (tokenObject.in && Squid.animation.exist('in', tokenObject.in)) {
-    //
-    //   // add the class view--in
-    //   $node.classList.add('view--in');
-    //
-    //   // execute the in animation
-    //   await Squid.animation.call('in', tokenObject.in, $node);
-    //
-    //   // removing the class view--in
-    //   $node.classList.remove('view--in');
-    //
-    // }
+    // tell the view is loaded
+    setTimeout(() => {
+      // removing the class view--loading
+      $node.classList.remove('view--loading');
+      $node.classList.add('view--loaded');
+    }, 100);
 
   });
 

@@ -1,6 +1,4 @@
 const __path = require('path');
-const __viewExist = require('../../express/views/viewExist');
-const __getViewMetas = require('../../express/views/getViewMetas');
 const __fs = require('fs');
 const __zlib = require('zlib');
 const __log = require('@coffeekraken/sugar/node/log/log');
@@ -30,14 +28,14 @@ module.exports = {
    */
   index: async (req, res) => {
 
-    if ( ! __viewExist(req.params.viewPath)) {
+    if ( ! Squid.express.views.exists(req.params.viewPath)) {
       __log(`The view "${req.params.viewPath + (req.params.viewId ? '#' + req.params.viewId : '')}" has been called but seems to not exist on the filesystem...`, 'error');
       res.send('The wanted content seems to not exist or another issue has occured... Please try again later...');
       return;
     }
 
     // get the view metas
-    const viewMetas = await __getViewMetas(req.params.viewPath, req.params.viewId);
+    const viewMetas = await Squid.express.views.meta(req.params.viewPath, req.params.viewId);
 
     // call the dataAdapter the receive the data back and wait until the dataAdapter promise is resolved
     const viewData = await require((await Squid.config('views.dataAdapters'))[viewMetas.config.dataAdapter])(req.params.viewPath, req.params.viewId, viewMetas.config, req);

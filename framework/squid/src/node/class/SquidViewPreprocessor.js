@@ -104,14 +104,28 @@ module.exports = class SquidViewPreprocessor {
       const tokenObject = await this._parseSquidTokenContent(content);
       if ( ! tokenObject.id) tokenObject.id = tokenHash;
 
-      // const htmlId = tokenObject.id === tokenHash ? tokenHash : tokenObject.id + '-' + tokenHash;
-
-      this._viewContent = this._viewContent.replace(token, `
-        <div id="${tokenObject.id}" class="view"></div>
-        <script>
-          window.Squid.view.call(${JSON.stringify(tokenObject)}, '${tokenObject.id}');
-        </script>
-      `);
+      switch(tokenObject.when) {
+        case 'inViewport':
+        case 'visible':
+        case 'ajax':
+          this._viewContent = this._viewContent.replace(token, `
+            <div id="${tokenObject.id}" class="view">
+              <div class="view__content"></div>
+              <div class="view__loader"></div>
+            </div>
+            <script>
+              window.Squid.view.call(${JSON.stringify(tokenObject)});
+            </script>
+          `);
+        break;
+        case 'backend':
+        case 'html':
+        default:
+          this._viewContent = this._viewContent.replace(token, `
+            ${await Squid.express.views.render(tokenObject.view, tokenObject.id)}
+          `);
+        break;
+      }
 
     }
 
@@ -196,9 +210,7 @@ module.exports = class SquidViewPreprocessor {
           action: 'String -a --action',
           view: 'String -v --view',
           id: `String -i --id /^#([\\S]+)$/`,
-          in: `String --in "${await Squid.config('animation.defaultIn') || ''}"`,
-          out: `String --out "${await Squid.config('animation.defaultOut' || '')}"`,
-          when: 'String -w --when "inViewport"'
+          when: 'String -w --when "backend"'
         });
       break;
     }

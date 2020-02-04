@@ -1,9 +1,8 @@
-const __viewExist = require('./viewExist');
 const __fs = require('fs');
 const __deepMerge = require('@coffeekraken/sugar/js/object/deepMerge');
 
 /**
- * @name                    getViewConfig
+ * @name                    config
  * @namespace               squid.node.express.views
  * @type                    Function
  *
@@ -27,13 +26,13 @@ const __deepMerge = require('@coffeekraken/sugar/js/object/deepMerge');
  * @return              {Object}                                          The final view config object
  *
  * @example           js
- * squid.express.views.getViewConfig('home.header'); // return the view config object
+ * squid.express.views.config('home.header'); // return the view config object
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = async (viewPath, viewId = null) => {
 
-  let filePath = __viewExist(viewPath);
+  let filePath = Squid.express.views.exists(viewPath);
 
   // check that the asked view exist
   if ( ! filePath ) {

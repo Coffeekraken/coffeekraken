@@ -37,7 +37,7 @@ module.exports = class SExpressApp extends __SApp {
    super(data, settings);
 
    // save the express instance
-   this.express = expressInstance;
+   this._express = expressInstance;
 
    // register the usefull routes
    this._registerRoutes();
@@ -62,20 +62,20 @@ module.exports = class SExpressApp extends __SApp {
  _registerRoutes() {
 
    // add the "config" internal squid route
-   // this.express.get('/app/config', this._configController.bind(this));
-   // this.express.get('/app/config/*', this._configController.bind(this));
+   // this._express.get('/app/config', this._configController.bind(this));
+   // this._express.get('/app/config/*', this._configController.bind(this));
    //
    // // add the "app" internal squid route
-   // this.express.get('/app/meta', this._metaController.bind(this));
-   // this.express.get('/app/meta/*', this._metaController.bind(this));
+   // this._express.get('/app/meta', this._metaController.bind(this));
+   // this._express.get('/app/meta/*', this._metaController.bind(this));
 
    // add the "app" js internal squid route
-   this.express.get('/app/js', this._jsController.bind(this));
-   this.express.get('/app/js/*', this._jsController.bind(this));
+   this._express.get('/app/js', this._jsController.bind(this));
+   this._express.get('/app/js/*', this._jsController.bind(this));
 
    // add the "app" css internal squid route
-   this.express.get('/app/css', this._cssController.bind(this));
-   this.express.get('/app/css/*', this._cssController.bind(this));
+   this._express.get('/app/css', this._cssController.bind(this));
+   this._express.get('/app/css/*', this._cssController.bind(this));
 
  }
 
@@ -91,7 +91,7 @@ module.exports = class SExpressApp extends __SApp {
   */
  async _startExpressServer() {
    this.log(`Starting the express server on port ${await this.config('server.port')}...`, 'info');
-   this.express.listen(await this.config('server.port'));
+   this._express.listen(await this.config('server.port'));
  }
 
  // /**

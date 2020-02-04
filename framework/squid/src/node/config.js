@@ -3,8 +3,8 @@ const __glob = require('glob');
 const __deepMerge = require('@coffeekraken/sugar/js/object/deepMerge');
 
 /**
- * @name              getConfig
- * @namespace         squid.node.functions
+ * @name              config
+ * @namespace         squid.node
  * @type              Function
  *
  * Load and process the multiple configurations sources like the "squid.config.default.js" file, the "squid.config.js" one, the "squid/*.js" files as well as the "package.json" squid property
@@ -32,7 +32,7 @@ module.exports = () => {
     const configName = configFilePath.split('/').slice(-1)[0].replace('.js','');
     config[configName] = __deepMerge(config[configName] || {}, configObj);
   });
-  
+
   // return the final config
   return config;
 

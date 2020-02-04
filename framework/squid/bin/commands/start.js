@@ -4,7 +4,7 @@ const __path = require('path');
 const __forever = require('forever');
 // const { killPortProcess } = require('kill-port-process');
 const __killPort = require('kill-port');
-const __getConfig = require('../../src/node/getConfig');
+const __config = require('../../src/node/config');
 
 module.exports = async (env = 'dev') => {
 
@@ -12,7 +12,7 @@ module.exports = async (env = 'dev') => {
     case 'squid':
       try {
 
-        const config = __getConfig();
+        const config = __config();
 
         __log(`Make sure theirs no processes left running on port ${await config.server.port || 8080}...`, 'info');
         await __killPort(config.server.port || 8080, 'tcp');

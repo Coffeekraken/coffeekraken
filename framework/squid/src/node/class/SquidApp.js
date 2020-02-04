@@ -6,7 +6,8 @@ const __setupLog = require('@coffeekraken/sugar/node/log/setup');
 const __compression = require('compression');
 const __SquidViewPreprocessor = require('./SquidViewPreprocessor');
 const __SExpressApp = require('@coffeekraken/sugar/node/class/SExpressApp');
-
+const __set = require('@coffeekraken/sugar/js/object/set');
+const __glob = require('glob');
 /**
  * @name          SquidApp
  * @namespace     squid.node
@@ -26,12 +27,6 @@ const __SExpressApp = require('@coffeekraken/sugar/node/class/SExpressApp');
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = class SquidApp extends __SExpressApp {
-
-  /**
-   * Store the express application instance
-   * @type      Object
-   */
-  expressApp = null;
 
   /**
    * Store the rootPath of the Squid framework
@@ -58,6 +53,10 @@ module.exports = class SquidApp extends __SExpressApp {
       }
     }, __express());
 
+
+    // require the Squid dependencies
+    this._requirePrototypeDependencies();
+
     // set some app middlewares
     this._setExpressAppMiddlewares();
 
@@ -73,6 +72,30 @@ module.exports = class SquidApp extends __SExpressApp {
   }
 
   /**
+   * @name                _requirePrototypeDependencies
+   * @namespace           squid.node.class.SquidApp
+   * @type                Function
+   * @private
+   *
+   * Require all the files that are in the "node" folder and structure them corresponding to the folder structure
+   * "/express/views/render.js" will became "global.Squid.express.views.render"
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _requirePrototypeDependencies() {
+    __glob.sync(__path.resolve(`${__dirname}/../**/*.js`), {
+      ignore: [
+        __path.resolve(`${__dirname}/../class/**/*.js`),
+        __path.resolve(`${__dirname}/../config.js`)
+      ]
+    }).forEach((filePath) => {
+      const objectPath = filePath.replace(__path.resolve(__dirname, '../'), '').replace('.js', '').slice(1).split('/').join('.');
+      filePath = filePath.replace(__path.resolve(__dirname, '../'), '');
+      __set(global.Squid, objectPath, require('..' + filePath));
+    });
+  }
+
+  /**
    * @name               _setExpressAppMiddlewares
    * @namespace          squid.node.SquidApp
    * @type              function
@@ -85,7 +108,7 @@ module.exports = class SquidApp extends __SExpressApp {
   _setExpressAppMiddlewares() {
 
     // compression middleware
-    this.express.use(__compression());
+    this._express.use(__compression());
 
   }
 
@@ -108,7 +131,7 @@ module.exports = class SquidApp extends __SExpressApp {
       return;
     }
 
-    this.express.use((req, res, next) => {
+    this._express.use((req, res, next) => {
       const originalRender = res.render;
       res.render = function(renderPath, viewData, callback) {
         originalRender.call(this, renderPath, viewData, async (error, html) => {
@@ -142,7 +165,7 @@ module.exports = class SquidApp extends __SExpressApp {
     });
 
     // add the "view" internal squid route
-    this.express.get('/view/:viewPath/:viewId', require('../express/controllers/ViewController').index);
+    this._express.get('/view/:viewPath/:viewId', require('../express/controllers/ViewController').index);
 
   }
 
@@ -214,7 +237,7 @@ module.exports = class SquidApp extends __SExpressApp {
      __log(`Registering the route "${route}" with the controller "${controllerString}"...`, 'info');
 
      // register the new route in the express app
-     this.express[method.toLowerCase()](path, controller[controllerFunctionString]);
+     this._express[method.toLowerCase()](path, controller[controllerFunctionString]);
 
    }
 
@@ -229,11 +252,11 @@ module.exports = class SquidApp extends __SExpressApp {
     */
   async _registerExpressTemplateEngines() {
 
-    this.express.set('views', process.cwd() + '/' + await this.config('views.folder'));
-    this.express.set('view engine', 'blade.php');
+    this._express.set('views', process.cwd() + '/' + await this.config('views.folder'));
+    this._express.set('view engine', 'blade.php');
 
     Object.keys(await this.config('views.engines')).forEach(async extension => {
-      this.express.engine(extension, require((await this.config('views.engines'))[extension]));
+      this._express.engine(extension, require((await this.config('views.engines'))[extension]));
     });
 
   }

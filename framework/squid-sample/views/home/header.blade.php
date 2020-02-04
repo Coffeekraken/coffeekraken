@@ -1,21 +1,21 @@
 <section class="header">
-			<div class="container">
+			<div class="container" slide-in="0 -100 -d 500">
 				<div class="gr gr--middle">
 					<div class="col col--12 col--4@tablet hide show@tablet" style="min-height:1px;">
-						<img class="header__img-kraken" src="/dist/img/kraken.png" alt="Coffeekraken Kraken" slide-in="0 -200 --delay 1000" />
+						<img class="header__img-kraken" src="/dist/img/kraken.png" alt="Coffeekraken Kraken" />
 					</div>
 					<div class="col col--12 col--7@tablet col--start-0 col--start-6@tablet header__content">
 						<div>
 							<!-- <div class="coffeekraken-logo m-b" style="width:200px" anim="slide-in-down"></div> -->
-							<h1 class="h1 m-b-smaller" slide-in="0 -200 --delay 1000">
+							<h1 class="h1 m-b-smaller">
 								<s-characters-slideshow class="c-secondary" values="['Workflow','Styleguide','Documentation','Layout','Webcomponents']">Workflow</s-characters-slideshow><br>
 								made right!
 							</h1>
-							<p class="p p--lead m-b" slide-in="0 -200 --delay 1000">
+							<p class="p p--lead m-b">
 								Working smoothly in team is as hard as working alone on a big project. <br>
 								<span class="c-secondary">We think that the right tool at the right place can solve this once and for all...</span>
 							</p>
-							<ul class="nav nav--pills" slide-in="0 -200 --delay 1000">
+							<ul class="nav nav--pills">
 								<li class="nav__item m-r-smaller">
 									<div class="tooltip tooltip--t tf t-center">
 										Carpenter is a tool that let you generate a styleguide directly from your codebase,<br>

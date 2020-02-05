@@ -59,6 +59,10 @@ export default function when($node, state, settings = {}) {
         importPromise = import(/* webpackChunkName: "whenVisible" */ /* webpackMode: "lazy" */ './whenVisible');
         args = [$node, settings.callback];
       break;
+      default:
+        resolve($node);
+        return;
+      break;
     }
 
     // wait until the module is loaded

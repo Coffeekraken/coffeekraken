@@ -104,7 +104,7 @@ module.exports = class SquidViewPreprocessor {
       const tokenObject = await this._parseSquidTokenContent(content);
       if ( ! tokenObject.id) tokenObject.id = tokenHash;
 
-      switch(tokenObject.when) {
+      switch(tokenObject.render) {
         case 'inViewport':
         case 'visible':
         case 'ajax':
@@ -150,10 +150,19 @@ module.exports = class SquidViewPreprocessor {
       return this._viewContent;
     }
 
+    const cssContent = await Squid._cssContent();
+    const jsContent = await Squid._jsContent();
+
     // create the script html content
     const html = `
-      <script src="/app/js"></script>
-      <link rel="stylesheet" type="text/css" href="/app/css">
+      <!-- <script src="/app/js"></script> -->
+      <!-- <link rel="stylesheet" type="text/css" href="/app/css"> -->
+      <script>
+        ${jsContent}
+      </script>
+      <style>
+        ${cssContent}
+      </style>
       </head>
     `;
 
@@ -210,7 +219,7 @@ module.exports = class SquidViewPreprocessor {
           action: 'String -a --action',
           view: 'String -v --view',
           id: `String -i --id /^#([\\S]+)$/`,
-          when: 'String -w --when "backend"'
+          render: 'String -r --render "backend"'
         });
       break;
     }

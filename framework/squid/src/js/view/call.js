@@ -14,7 +14,7 @@ export default async function squidViewToken(tokenObject) {
   const $content = $node.querySelector('.view__content');
 
   // load the view only when wanted
-  if (tokenObject.when) await __when($node, tokenObject.when);
+  if (tokenObject.render) await __when($node, tokenObject.render);
 
   // appending the class "view--loading"
   $node.classList.add('view--loading');

@@ -16,6 +16,8 @@ module.exports = __deepMerge({
       'blade.php': __dirname + '/src/node/express/views/engines/blade'
     },
 
+		defaultRenderType: 'backend',
+
     defaultDataAdapter: 'viewsFolderJson',
     dataAdapters: {
       'viewsFolderJson': __dirname + '/src/node/express/views/dataAdapters/viewsFolderJson'

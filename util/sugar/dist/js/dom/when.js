@@ -75,6 +75,11 @@ function when($node, state, settings = {}) {
         importPromise = Promise.resolve().then(() => _interopRequireWildcard(require('./whenVisible')));
         args = [$node, settings.callback];
         break;
+
+      default:
+        resolve($node);
+        return;
+        break;
     } // wait until the module is loaded
 
 

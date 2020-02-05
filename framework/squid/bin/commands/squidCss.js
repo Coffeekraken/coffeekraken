@@ -12,7 +12,7 @@ const __precss = require('precss');
 const __postcssPresetEnv = require('postcss-preset-env');
 const __cssnano = require('cssnano');
 const __rucksack = require('rucksack-css');
-const __getConfig = require('../../src/node/getConfig');
+const __getConfig = require('../../src/node/config');
 
 module.exports = async () => {
 

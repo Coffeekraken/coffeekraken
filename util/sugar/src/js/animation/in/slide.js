@@ -20,23 +20,21 @@ export default (() => {
       when: 'String -w --when "inViewport"'
     });
 
-    console.log(args);
-
     // generate the animation css
     const css = `
-
       [slide-in].${uniqClass} {
         opacity: 0;
         transform: translate(${(args.x || 0)}px, ${(args.y || 0)}px);
 
       }
+    `;
+    const cssIn = `
       [slide-in].${uniqClass}.in {
         transition: all ${(args.duration / 1000) || '0.5'}s;
         opacity: 1;
         transform: translate(0, 0);
       }
-
-    `;
+    `
 
     // append the css into the section
     document.head.innerHTML += `
@@ -44,6 +42,13 @@ export default (() => {
         ${css}
       </style>
     `;
+    setTimeout(() => {
+      document.head.innerHTML += `
+        <style id="${uniqClass}-in">
+          ${cssIn}
+        </style>
+      `;
+    }, 100);
 
     // add the "in" class
     setTimeout(() => {
@@ -53,6 +58,8 @@ export default (() => {
     setTimeout(() => {
       const $style = document.querySelector(`style#${uniqClass}`);
       if ($style) $style.parentNode.removeChild($style);
+      const $styleIn = document.querySelector(`style#${uniqClass}-in`);
+      if ($styleIn) $styleIn.parentNode.removeChild($styleIn);
     }, args.delay + args.duration);
 
   });

@@ -3,7 +3,9 @@ const __glob = require('glob');
 const __getConfig = require('../../src/node/config');
 const __fs = require('fs');
 const __path = require('path');
+const __tmpDir = require('@coffeekraken/sugar/node/fs/tmpDir');
 const __deepMerge = require('@coffeekraken/sugar/js/object/deepMerge');
+const __getExtension = require('@coffeekraken/sugar/js/string/getExtension');
 const __log = require('@coffeekraken/sugar/node/log/log');
 const __emptyDirSync = require('@coffeekraken/sugar/node/fs/emptyDirSync');
 const __filesize = require('file-size');
@@ -12,30 +14,26 @@ const __CompressionPlugin = require('compression-webpack-plugin');
 const __base64 = require('@coffeekraken/sugar/node/crypt/base64');
 const __LazyDomLoadPlugin = require('./LazyDomLoadPlugin');
 const __ConcatDependenciesVendorsPlugin = require('./ConcatDependenciesVendorsPlugin');
-const __BuildSpeedOptimizationPlugin = require('./BuildSpeedOptimizationPlugin');
+const __coffeeLoader = require('./coffeeLoader');
 const __MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const projectPackageJson = require(process.cwd() + '/package.json');
 
-module.exports = () => {
+module.exports = (compile = ['js']) => {
 
   // load the config
   const config = __getConfig();
+  const entryObj = {};
 
-  // find for the js files to bundle
-  let bundleFiles = __glob.sync(`${__dirname}/../../src/js/**/*.bundle.js`);
-
-  // build the entry property
-  let entryObj = {};
-  bundleFiles.forEach(bundleFilePath => {
-    let finalBundleFilePath = bundleFilePath.replace('src/js/','');
-    finalBundleFilePath = finalBundleFilePath.replace(__path.resolve(__dirname, '../../') + '/', '');
-    entryObj[finalBundleFilePath] = (bundleFilePath.charAt(0) === '/') ? bundleFilePath : './' + bundleFilePath;
+  __coffeeLoader.options({
+    compile: compile
   });
+  __coffeeLoader.entry(entryObj);
 
-  Object.keys(config.lazyload).forEach((selector) => {
-    entryObj[`lazyload/${__base64.encrypt(selector)}.js`] = config.lazyload[selector];
-  });
+  // add the lazyload resources
+  // Object.keys(config.lazyload).forEach((selector) => {
+  //   entryObj[`${config.dist.js.outputFolder}/lazyload/${__base64.encrypt(selector)}.js`] = config.lazyload[selector];
+  // });
 
   __log(`Emptying the current javascript dist folder "${config.dist.js.outputFolder}"...`, 'info');
   __emptyDirSync(__dirname + '/../../' + config.dist.js.outputFolder);
@@ -48,9 +46,9 @@ module.exports = () => {
     output: {
       filename: '[name]',
       pathinfo: false,
-      path: __path.resolve(__dirname + '/../../' + config.dist.js.outputFolder),
+      path: __path.resolve(__dirname + '/../../'),
       publicPath: '/app/js/',
-      chunkFilename: `chunks/[name]-[chunkhash]-${projectPackageJson.version}.js`
+      chunkFilename: config.dist.js.outputFolder + `/chunks/[name]-[chunkhash]-${projectPackageJson.version}.js`
     },
     plugins: [
       new __ConcatDependenciesVendorsPlugin({
@@ -79,35 +77,16 @@ module.exports = () => {
         '@coffeekraken/sugar/node': __dirname + '/../../../../util/sugar/src/node'
       }
     },
-    // cache: {
-    //   type: 'filesystem',
-    //   name: 'AppBuildCache'
-    // },
     module: {
       rules: [
-        // {
-        //   test: /\.m?js$/,
-        //   exclude: /(node_modules|bower_components)/,
-        //   use: {
-        //     loader: 'babel-loader',
-        //     options: {
-        //       plugins: [
-        //         '@babel/plugin-syntax-dynamic-import',
-        //         ["@babel/plugin-proposal-class-properties", { "loose": true }]
-        //       ],
-        //       presets: ['@babel/preset-env']
-        //     }
-        //   }
-        // },
         {
           test: /\.*$/,
           use: [{
-            loader: './bin/commands/BuildSpeedOptimizationPlugin.js',
+            loader: './bin/commands/coffeeLoader.js',
             options: {
-              coco: 'hello',
               file: {
                 name: '[path][name].[ext]',
-                outputPath: 'images'
+                outputFolder: config.dist.images.outputFolder,
               }
             }
           }]

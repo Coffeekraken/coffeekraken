@@ -36,15 +36,14 @@
 /******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 	// Promise = chunk loading, 0 = chunk loaded
 /******/ 	var installedChunks = {
-/******/ 		0: 0,
-/******/ 		1: 0
+/******/ 		2: 0
 /******/ 	};
 /******/
 /******/
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "chunks/" + ({}[chunkId]||chunkId) + "-" + {"2":"0d389f5a6c3bd25af12b","3":"a9f5097b557ceaf9e9ed","4":"150a5a81a824ec96853a","5":"5dda841d20cd8ace6e11"}[chunkId] + "-0.0.1.js"
+/******/ 		return __webpack_require__.p + "dist/js/chunks/" + ({}[chunkId]||chunkId) + "-" + {"4":"e621667ffd27a2cd2cfc","5":"0189d0b33081ef6386d9","6":"99b99dcf7d3a75f44029","7":"1bbad7d4977fd6d51ef6"}[chunkId] + "-0.0.1.js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -197,11 +196,240 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 26);
+/******/ 	return __webpack_require__(__webpack_require__.s = 20);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = autoCast;
+
+/**
+ * @name        autoCast
+ * @namespace       sugar.js.string
+ * @type      Function
+ *
+ * Auto cast the string into the correct variable type
+ *
+ * @param    {String}    string    The string to auto cast
+ * @return    {Mixed}    The casted value
+ *
+ * @example    js
+ * import autoCast from '@coffeekraken/sugar/js/strings/autoCast'
+ * autoCast('12') // => 12
+ * autoCast('window.HTMLElement') // => HTMLElement
+ * autoCast('{"hello":"world"}') // {hello:'world'}
+ *
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+function autoCast(string) {
+  // if the passed string is not a string, return the value
+  if (typeof string !== "string") return string; // handle the single quotes strings like '"hello world"'
+
+  if (string.substr(0, 1) === "'" && string.substr(-1) === "'") {
+    return string.substr(1, string.length - 2);
+  } // number
+  // before the window check cause window['0'] correspond to something
+
+
+  const presumedNumber = parseFloat(string);
+
+  if (!isNaN(presumedNumber)) {
+    if (presumedNumber.toString() === string) {
+      return presumedNumber;
+    }
+  } // avoid getting item from the window object
+
+
+  if (window[string]) {
+    return string;
+  } // try to eval the passed string
+  // if no exception, mean that it's a valid
+  // js variable type
+
+
+  try {
+    const obj = eval(`(${string})`);
+    return obj;
+  } catch (e) {
+    // assume that the string passed is a string
+    return string;
+  }
+}
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+/**
+ * @name                        ensureExist
+ * @namespace                   sugar.js.object
+ * @type                        Function
+ *
+ * Pass a string like "my.cool.object" and the value it has to be and this function will ensure that this deep object exist
+ *
+ * @param           {String}            objectPath                    The object path to check
+ * @param           {Mixed}             value                         The value to set to the object path created if not already exist
+ *
+ * @example           js
+ * import ensureExist from '@coffeekraken/sugar/js/object/ensureExist';
+ * ensureExist('my.cool.object', {});
+ *
+ * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+var _default = (objectPath, value = {}) => {
+  const objectPathSplited = objectPath.split('.');
+  let path = '';
+  objectPathSplited.forEach((part, i) => {
+    path += path === '' ? part : '.' + part;
+    if (!eval(path)) i >= objectPathSplited.length - 1 ? eval(`${path} = ${JSON.stringify(value)};`) : eval(`${path} = {};`);
+  });
+};
+
+exports.default = _default;
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(global) { // CommonJS / Node have global context exposed as "global" variable.
+// We don't want to include the whole node.d.ts this this compilation unit so we'll just fake
+// the global "global" var for now.
+
+var __window = typeof window !== 'undefined' && window;
+
+var __self = typeof self !== 'undefined' && typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope && self;
+
+var __global = typeof global !== 'undefined' && global;
+
+var _root = __window || __global || __self;
+
+exports.root = _root; // Workaround Closure Compiler restriction: The body of a goog.module cannot use throw.
+// This is needed when used with angular/tsickle which inserts a goog.module statement.
+// Wrap in IIFE
+
+(function () {
+  if (!_root) {
+    throw new Error('RxJS could not find any global context (window, self, global)');
+  }
+})();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(11)))
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _json = _interopRequireDefault(__webpack_require__(4));
+
+var _toString = _interopRequireDefault(__webpack_require__(25));
+
+var _parse = _interopRequireDefault(__webpack_require__(5));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _default = {
+  /**
+   * @name        encrypt
+   * @namespace     sugar.js.crypt.base64
+   * @type        Function
+   *
+   * Encrypt
+   *
+   * @param       {String}       message        The message to encrypt
+   * @return      {String}                       The encrypted message
+   *
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  encrypt: function (message) {
+    if (typeof message !== 'string') message = (0, _toString.default)(message);
+    return btoa(message);
+  },
+
+  /**
+   * @name        decrypt
+   * @namespace       sugar.js.crypt.base64
+   * @type        Function
+   *
+   * Decrypt
+   *
+   * @param       {String}      message         The message to decrypt
+   * @return      {String}                      The decrypted message
+   *
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  decrypt: function (message) {
+    message = atob(message);
+    return (0, _parse.default)(message);
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = isJson;
+
+/**
+ * @name        isJson
+ * @namespace       sugar.js.is
+ * @type      Function
+ *
+ * Check if the passed value is a valid json
+ *
+ * @param    {Mixed}    value    The value to check
+ * @return   {Boolean}   true if it's a valid json, false if not
+ *
+ * @example    js
+ * import isJson from '@coffeekraken/sugar/js/is/json'
+ * if (isJson('[{id:10}]')) {
+ *   // do something
+ * }
+ *
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+function isJson(value) {
+  try {
+    JSON.parse(value);
+  } catch (e) {
+    return false;
+  }
+
+  return true;
+}
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -244,7 +472,84 @@ var _default = value => {
 exports.default = _default;
 
 /***/ }),
-/* 1 */
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _ensureExist = _interopRequireDefault(__webpack_require__(1));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name                              getRegisteredTransports
+ * @namespace                         sugar.js.log
+ * @type                              Function
+ *
+ * Return an object with all the registered transports functions stored by transport name
+ *
+ * @return                      {Object}                                    An object in which keys are transports names and values transports functions
+ *
+ * @example                   js
+ * import getRegisteredTransports from '@coffeekraken/sugar/js/log/getRegisteredTransports';
+ * getRegisteredTransports(); // => { console: ... }
+ *
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+var _default = () => {
+  (0, _ensureExist.default)('window.Sugar._logTransports');
+  return Sugar._logTransports ? Sugar._logTransports : {};
+};
+
+exports.default = _default;
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _ensureExist = _interopRequireDefault(__webpack_require__(1));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name                                  isTransportRegistered
+ * @namespace                             sugar.js.log
+ * @type                                  Function
+ *
+ * Check if the passed transport is already registered
+ *
+ * @param             {String}                name                    The transport name to check
+ * @return            {Boolean}                                       true if already registered, false if not
+ *
+ * @example           js
+ * import isTransportRegistered from '@coffeekraken/sugar/js/log/isTransportRegistered';
+ * isTransportRegistered('console'); // => true
+ *
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+var _default = name => {
+  (0, _ensureExist.default)('window.Sugar._logTransports');
+  return Sugar._logTransports[name] ? true : false;
+};
+
+exports.default = _default;
+
+/***/ }),
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -255,9 +560,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = querySelectorLive;
 
-var _uniqid = _interopRequireDefault(__webpack_require__(6));
+var _uniqid = _interopRequireDefault(__webpack_require__(36));
 
-var _matches = _interopRequireDefault(__webpack_require__(2));
+var _matches = _interopRequireDefault(__webpack_require__(9));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -384,7 +689,7 @@ function querySelectorLive(selector, cb, settings = {}) {
  */
 
 /***/ }),
-/* 2 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -430,1091 +735,19 @@ function matches(el, selector) {
 }
 
 /***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = autoCast;
-
-/**
- * @name        autoCast
- * @namespace       sugar.js.string
- * @type      Function
- *
- * Auto cast the string into the correct variable type
- *
- * @param    {String}    string    The string to auto cast
- * @return    {Mixed}    The casted value
- *
- * @example    js
- * import autoCast from '@coffeekraken/sugar/js/strings/autoCast'
- * autoCast('12') // => 12
- * autoCast('window.HTMLElement') // => HTMLElement
- * autoCast('{"hello":"world"}') // {hello:'world'}
- *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-function autoCast(string) {
-  // if the passed string is not a string, return the value
-  if (typeof string !== "string") return string; // handle the single quotes strings like '"hello world"'
-
-  if (string.substr(0, 1) === "'" && string.substr(-1) === "'") {
-    return string.substr(1, string.length - 2);
-  } // number
-  // before the window check cause window['0'] correspond to something
-
-
-  const presumedNumber = parseFloat(string);
-
-  if (!isNaN(presumedNumber)) {
-    if (presumedNumber.toString() === string) {
-      return presumedNumber;
-    }
-  } // avoid getting item from the window object
-
-
-  if (window[string]) {
-    return string;
-  } // try to eval the passed string
-  // if no exception, mean that it's a valid
-  // js variable type
-
-
-  try {
-    const obj = eval(`(${string})`);
-    return obj;
-  } catch (e) {
-    // assume that the string passed is a string
-    return string;
-  }
-}
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = uniqid;
-
-var _uniqid = _interopRequireDefault(__webpack_require__(8));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/**
- * @name          uniqid
- * @namespace       sugar.js.string
- * @type          Function
- *
- * Generate a uniqid string of 8 bytes. Work using the [uniqid](https://www.npmjs.com/package/uniqid) npm package under the hood.
- *
- * @return          {String}                A 8 bytes uniqid string
- *
- * @example       js
- * import uniqid from '@coffeekraken/sugar/js/string/uniqid';
- * console.log(uniqid()); // => 4n5pxq24
- *
- * @see       https://www.npmjs.com/package/uniqid
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-function uniqid() {
-  return (0, _uniqid.default)();
-}
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-/**
- * @name                        ensureExist
- * @namespace                   sugar.js.object
- * @type                        Function
- *
- * Pass a string like "my.cool.object" and the value it has to be and this function will ensure that this deep object exist
- *
- * @param           {String}            objectPath                    The object path to check
- * @param           {Mixed}             value                         The value to set to the object path created if not already exist
- *
- * @example           js
- * import ensureExist from '@coffeekraken/sugar/js/object/ensureExist';
- * ensureExist('my.cool.object', {});
- *
- * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-var _default = (objectPath, value = {}) => {
-  const objectPathSplited = objectPath.split('.');
-  let path = '';
-  objectPathSplited.forEach((part, i) => {
-    path += path === '' ? part : '.' + part;
-    if (!eval(path)) i >= objectPathSplited.length - 1 ? eval(`${path} = ${JSON.stringify(value)};`) : eval(`${path} = {};`);
-  });
-};
-
-exports.default = _default;
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = uniqid;
-let uniqidIdx = 0;
-if (!window.sugar) window.sugar = {};
-if (!window.sugar._uniqid) window.sugar._uniqid = 0;
-/**
- * @name        uniqid
- * @namespace       sugar.js.util
- * @type      Function
- *
- * Generate a uniq id
- *
- * @example    js
- * import uniqid from '@coffeekraken/sugar/js/util/uniqid'
- * uniqid() // s2
- *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-
-function uniqid() {
-  // update uniqid idx
-  window.sugar._uniqid++;
-  return `s${window.sugar._uniqid.toString()}`;
-}
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(global) { // CommonJS / Node have global context exposed as "global" variable.
-// We don't want to include the whole node.d.ts this this compilation unit so we'll just fake
-// the global "global" var for now.
-
-var __window = typeof window !== 'undefined' && window;
-
-var __self = typeof self !== 'undefined' && typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope && self;
-
-var __global = typeof global !== 'undefined' && global;
-
-var _root = __window || __global || __self;
-
-exports.root = _root; // Workaround Closure Compiler restriction: The body of a goog.module cannot use throw.
-// This is needed when used with angular/tsickle which inserts a goog.module statement.
-// Wrap in IIFE
-
-(function () {
-  if (!_root) {
-    throw new Error('RxJS could not find any global context (window, self, global)');
-  }
-})();
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(18)))
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-/* 
-(The MIT License)
-Copyright (c) 2014-2019 Halász Ádám <mail@adamhalasz.com>
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-*/
-//  Unique Hexatridecimal ID Generator
-// ================================================
-//  Dependencies
-// ================================================
-var pid = process && process.pid ? process.pid.toString(36) : '';
-var address = '';
-
-if (false) { var i, mac, networkInterfaces; } //  Exports
-// ================================================
-
-
-module.exports = module.exports.default = function (prefix, suffix) {
-  return (prefix ? prefix : '') + address + pid + now().toString(36) + (suffix ? suffix : '');
-};
-
-module.exports.process = function (prefix, suffix) {
-  return (prefix ? prefix : '') + pid + now().toString(36) + (suffix ? suffix : '');
-};
-
-module.exports.time = function (prefix, suffix) {
-  return (prefix ? prefix : '') + now().toString(36) + (suffix ? suffix : '');
-}; //  Helpers
-// ================================================
-
-
-function now() {
-  var time = Date.now();
-  var last = now.last || time;
-  return now.last = time > last ? time : last + 1;
-}
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(9)))
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-// shim for using process in browser
-var process = module.exports = {}; // cached from whatever global is present so that test runners that stub it
-// don't break things.  But we need to wrap it in a try catch in case it is
-// wrapped in strict mode code which doesn't define any globals.  It's inside a
-// function because try/catches deoptimize in certain engines.
-
-var cachedSetTimeout;
-var cachedClearTimeout;
-
-function defaultSetTimout() {
-  throw new Error('setTimeout has not been defined');
-}
-
-function defaultClearTimeout() {
-  throw new Error('clearTimeout has not been defined');
-}
-
-(function () {
-  try {
-    if (typeof setTimeout === 'function') {
-      cachedSetTimeout = setTimeout;
-    } else {
-      cachedSetTimeout = defaultSetTimout;
-    }
-  } catch (e) {
-    cachedSetTimeout = defaultSetTimout;
-  }
-
-  try {
-    if (typeof clearTimeout === 'function') {
-      cachedClearTimeout = clearTimeout;
-    } else {
-      cachedClearTimeout = defaultClearTimeout;
-    }
-  } catch (e) {
-    cachedClearTimeout = defaultClearTimeout;
-  }
-})();
-
-function runTimeout(fun) {
-  if (cachedSetTimeout === setTimeout) {
-    //normal enviroments in sane situations
-    return setTimeout(fun, 0);
-  } // if setTimeout wasn't available but was latter defined
-
-
-  if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-    cachedSetTimeout = setTimeout;
-    return setTimeout(fun, 0);
-  }
-
-  try {
-    // when when somebody has screwed with setTimeout but no I.E. maddness
-    return cachedSetTimeout(fun, 0);
-  } catch (e) {
-    try {
-      // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-      return cachedSetTimeout.call(null, fun, 0);
-    } catch (e) {
-      // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-      return cachedSetTimeout.call(this, fun, 0);
-    }
-  }
-}
-
-function runClearTimeout(marker) {
-  if (cachedClearTimeout === clearTimeout) {
-    //normal enviroments in sane situations
-    return clearTimeout(marker);
-  } // if clearTimeout wasn't available but was latter defined
-
-
-  if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-    cachedClearTimeout = clearTimeout;
-    return clearTimeout(marker);
-  }
-
-  try {
-    // when when somebody has screwed with setTimeout but no I.E. maddness
-    return cachedClearTimeout(marker);
-  } catch (e) {
-    try {
-      // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-      return cachedClearTimeout.call(null, marker);
-    } catch (e) {
-      // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-      // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-      return cachedClearTimeout.call(this, marker);
-    }
-  }
-}
-
-var queue = [];
-var draining = false;
-var currentQueue;
-var queueIndex = -1;
-
-function cleanUpNextTick() {
-  if (!draining || !currentQueue) {
-    return;
-  }
-
-  draining = false;
-
-  if (currentQueue.length) {
-    queue = currentQueue.concat(queue);
-  } else {
-    queueIndex = -1;
-  }
-
-  if (queue.length) {
-    drainQueue();
-  }
-}
-
-function drainQueue() {
-  if (draining) {
-    return;
-  }
-
-  var timeout = runTimeout(cleanUpNextTick);
-  draining = true;
-  var len = queue.length;
-
-  while (len) {
-    currentQueue = queue;
-    queue = [];
-
-    while (++queueIndex < len) {
-      if (currentQueue) {
-        currentQueue[queueIndex].run();
-      }
-    }
-
-    queueIndex = -1;
-    len = queue.length;
-  }
-
-  currentQueue = null;
-  draining = false;
-  runClearTimeout(timeout);
-}
-
-process.nextTick = function (fun) {
-  var args = new Array(arguments.length - 1);
-
-  if (arguments.length > 1) {
-    for (var i = 1; i < arguments.length; i++) {
-      args[i - 1] = arguments[i];
-    }
-  }
-
-  queue.push(new Item(fun, args));
-
-  if (queue.length === 1 && !draining) {
-    runTimeout(drainQueue);
-  }
-}; // v8 likes predictible objects
-
-
-function Item(fun, array) {
-  this.fun = fun;
-  this.array = array;
-}
-
-Item.prototype.run = function () {
-  this.fun.apply(null, this.array);
-};
-
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-process.version = ''; // empty string to avoid regexp issues
-
-process.versions = {};
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-process.prependListener = noop;
-process.prependOnceListener = noop;
-
-process.listeners = function (name) {
-  return [];
-};
-
-process.binding = function (name) {
-  throw new Error('process.binding is not supported');
-};
-
-process.cwd = function () {
-  return '/';
-};
-
-process.chdir = function (dir) {
-  throw new Error('process.chdir is not supported');
-};
-
-process.umask = function () {
-  return 0;
-};
-
-/***/ }),
 /* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
+var root_1 = __webpack_require__(2);
 
-var _uniqid = _interopRequireDefault(__webpack_require__(4));
+var toSubscriber_1 = __webpack_require__(50);
 
-var _parseArgs = _interopRequireDefault(__webpack_require__(11));
+var observable_1 = __webpack_require__(57);
 
-var _querySelectorLive = _interopRequireDefault(__webpack_require__(1));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var _default = (() => {
-  (0, _querySelectorLive.default)('[slide-in]', $item => {
-    // generate a unique id for this node
-    const uniqClass = `slide-in-${(0, _uniqid.default)()}`;
-    $item.classList.add(uniqClass); // parse the slide-in value
-
-    const slideInValue = $item.getAttribute('slide-in');
-    const args = (0, _parseArgs.default)(slideInValue, {
-      x: 'Number -x --x "0"',
-      y: 'Number -y --y "0"',
-      duration: 'Number -d --duration "500"',
-      delay: 'Number --delay "0"',
-      when: 'String -w --when "inViewport"'
-    }); // generate the animation css
-
-    const css = `
-      [slide-in].${uniqClass} {
-        opacity: 0;
-        transform: translate(${args.x || 0}px, ${args.y || 0}px);
-
-      }
-    `;
-    const cssIn = `
-      [slide-in].${uniqClass}.in {
-        transition: all ${args.duration / 1000 || '0.5'}s;
-        opacity: 1;
-        transform: translate(0, 0);
-      }
-    `; // append the css into the section
-
-    document.head.innerHTML += `
-      <style id="${uniqClass}">
-        ${css}
-      </style>
-    `;
-    setTimeout(() => {
-      document.head.innerHTML += `
-        <style id="${uniqClass}-in">
-          ${cssIn}
-        </style>
-      `;
-    }, 100); // add the "in" class
-
-    setTimeout(() => {
-      $item.classList.add('in');
-    }, args.delay);
-    setTimeout(() => {
-      const $style = document.querySelector(`style#${uniqClass}`);
-      if ($style) $style.parentNode.removeChild($style);
-      const $styleIn = document.querySelector(`style#${uniqClass}-in`);
-      if ($styleIn) $styleIn.parentNode.removeChild($styleIn);
-    }, args.delay + args.duration);
-  });
-})();
-
-exports.default = _default;
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _parse = _interopRequireDefault(__webpack_require__(0));
-
-var _unquote = _interopRequireDefault(__webpack_require__(12));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/**
- * @name                        parseArgs
- * @namespace                   sugar.js.string
- * @type                        Function
- *
- * Parse a string to find the provided arguments into the list and return a corresponding object.
- *
- * @param             {String}                    string                      The string to parse
- * @param             {Object}                    arguments                   The arguments object description
- * @return            {Object}                                                The object of funded arguments
- *
- * @example         js
- * import parseArgs from '@coffeekraken/sugar/js/string/parseArgs';
- * parseArgs('hello -w 10 --help "coco yep" #blop', {
- *    action: 'String -a --action /^\\S$/',
- *    world: 'Integer -w --world',
- *    help: 'String -h --help',
- *    id: 'String -i --id /^#([\\S]+)$/',
- *    yop: 'String -y --yop "Default value"'
- * });
- * // {
- * //   action: 'hello',
- * //   world: 10,
- * //   help: 'coco yep',
- * //   id: 'blop',
- * //   yop: 'Default value'
- * // }
- *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-var _default = (string, args) => {
-  string = ' ' + string + ' ';
-  const keys = Object.keys(args);
-  const resultObject = {}; // search for the "-a 'something cool'" style
-
-  const regSmallArg = /\s-[a-z]\s(?![-])[\S]+\s/g;
-  const regBigArg = /\s--[a-z]+\s(?![-])[\S]+\s/g;
-  const regRestArg = /(?![-])[\S]+/g;
-  const smallArgs = string.match(regSmallArg);
-
-  if (smallArgs) {
-    smallArgs.forEach((item, i) => {
-      string = string.replace(item, ' ');
-    });
-  }
-
-  const bigArgs = string.match(regBigArg);
-
-  if (bigArgs) {
-    bigArgs.forEach((item, i) => {
-      string = string.replace(item, ' ');
-    });
-  }
-
-  const restArgs = string.match(regRestArg);
-
-  if (restArgs) {
-    restArgs.forEach((item, i) => {
-      string = string.replace(item, ' ');
-    });
-  } // loop on each keys to search for corresponding value
-
-
-  for (let _i = 0; _i < keys.length; _i++) {
-    const k = keys[_i];
-    let keyArgs = args[k];
-    let keyString = null;
-    let keyPreprocess = null;
-
-    if (typeof keyArgs === 'object') {
-      if (keyArgs.args === undefined || typeof keyArgs.args !== 'string') {
-        console.error('sugar.js.string.parseArgs', `You have passed an object as argument for the key "${k}" but this object has to have an "args" property of type "String" and here's your object passed...`, keyArgs);
-        return {};
-      }
-
-      if (keyArgs.preprocess === undefined || typeof keyArgs.preprocess !== 'function') {
-        console.error('sugar.js.string.parseArgs', `You have passed an object as argument for the key "${k}" but this object has to have an "preprocess" property of type "Function" and here's your object passed...`, keyArgs);
-        return {};
-      }
-
-      keyString = ' ' + keyArgs.args + ' ';
-      keyPreprocess = keyArgs.preprocess;
-    } else {
-      keyString = ' ' + keyArgs + ' ';
-    }
-
-    const regKeyArgsType = /\s[a-zA-Z]+/g;
-    const regKeyArgsSmallName = /\s-[a-zA-Z]\s/g;
-    const regKeyArgsBigName = /\s--[a-zA-Z]+\s/g;
-    const regKeyArgsRegex = /\s\/[\S]+\/\s/g;
-    const regKeyArgsDefault = /['|"|`](.*)['|"|`]/g;
-    let type = keyString.match(regKeyArgsType);
-    if (type && type.length) type = type[0].trim();
-    let smallName = keyString.match(regKeyArgsSmallName);
-    if (smallName && smallName.length) smallName = smallName[0].trim();
-    let bigName = keyString.match(regKeyArgsBigName);
-    if (bigName && bigName.length) bigName = bigName[0].trim();
-    let regex = keyString.match(regKeyArgsRegex);
-    if (regex && regex.length) regex = regex[0].trim().slice(1, -1);
-    let defaultValue = keyString.match(regKeyArgsDefault);
-    if (defaultValue && defaultValue.length === 1) defaultValue = (0, _unquote.default)(defaultValue[0]);
-
-    if (smallArgs && smallName && resultObject[k] === undefined) {
-      for (let i = 0; i < smallArgs.length; i++) {
-        let item = smallArgs[i];
-        item = item.trim();
-        const key = item.slice(0, 2);
-        if (key !== smallName) continue;
-        let value = item.slice(2).trim();
-        value = (0, _unquote.default)(value); // check that the value match the args
-
-        if (type && typeof (0, _parse.default)(value) !== type.toLowerCase()) continue;
-
-        if (regex) {
-          const r = new RegExp(regex);
-          if (!r.test(value)) continue; // check if some parentheses exists
-
-          const matches = value.match(regex);
-
-          if (matches[1] !== undefined) {
-            value = matches[1];
-          }
-        }
-
-        smallArgs.splice(i, 1);
-
-        if (keyPreprocess) {
-          resultObject[k] = keyPreprocess((0, _parse.default)(value));
-        } else {
-          resultObject[k] = (0, _parse.default)(value);
-        }
-
-        break;
-      }
-    }
-
-    if (bigArgs && bigName && resultObject[k] === undefined) {
-      for (let i = 0; i < bigArgs.length; i++) {
-        let item = bigArgs[i];
-        item = item.trim();
-        const argKey = item.match(/--[\S]+/g)[0];
-        if (argKey !== bigName) continue;
-        item = item.replace(argKey, '').trim();
-        let value = item;
-        value = (0, _unquote.default)(value); // check that the value match the args
-
-        if (type && typeof (0, _parse.default)(value) !== type.toLowerCase()) continue;
-
-        if (regex) {
-          const r = new RegExp(regex);
-          if (!r.test(value)) continue; // check if some parentheses exists
-
-          const matches = value.match(regex);
-
-          if (matches[1] !== undefined) {
-            value = matches[1];
-          }
-        }
-
-        bigArgs.splice(i, 1);
-
-        if (keyPreprocess) {
-          resultObject[k] = keyPreprocess((0, _parse.default)(value));
-        } else {
-          resultObject[k] = (0, _parse.default)(value);
-        }
-
-        break;
-      }
-    }
-
-    if (restArgs && resultObject[k] === undefined) {
-      for (let i = 0; i < restArgs.length; i++) {
-        let item = restArgs[i];
-        item = item.trim();
-        let value = item;
-        value = (0, _unquote.default)(value); // check that the value match the args
-
-        if (type && typeof (0, _parse.default)(value) !== type.toLowerCase()) {
-          continue;
-        }
-
-        if (regex) {
-          const r = new RegExp(regex);
-          if (!r.test(value)) continue; // check if some parentheses exists
-
-          const matches = value.match(regex);
-
-          if (matches[1] !== undefined) {
-            value = matches[1];
-          }
-        }
-
-        restArgs.splice(i, 1);
-
-        if (keyPreprocess) {
-          resultObject[k] = keyPreprocess((0, _parse.default)(value));
-        } else {
-          resultObject[k] = (0, _parse.default)(value);
-        }
-
-        break;
-      }
-    }
-
-    if (resultObject[k] === undefined && defaultValue !== undefined) {
-      resultObject[k] = (0, _parse.default)(defaultValue);
-    }
-  }
-
-  return resultObject; // // split the string without the quotes
-  // const parts = string.match(/(('|").*?('|")|[^('|")\s]+)+(?=\s*|\s*$)/g);
-  //
-  // // init the resulting object
-  // const resultObject = {};
-  //
-  // let argsSettings = {};
-  // Object.keys(args).forEach(key => {
-  //   const arg = args[key];
-  //   let smallName, bigName, type;
-  //   // parse the argument definition
-  //   const argParts = arg.split(' ');
-  //   // loop on the args parts
-  //   for (let i=0; i<argParts.length; i++) {
-  //     const p = argParts[i];
-  //     if (p.slice(0,2) === '--') {
-  //       bigName = p.slice(2);
-  //     } else if (p.slice(0,1) === '-' && p.length === 2) {
-  //       smallName = p.slice(1);
-  //     } else {
-  //       type = p;
-  //     }
-  //   }
-  //   argsSettings[key] = {
-  //     smallName, bigName, type
-  //   };
-  // });
-  //
-  // // loop on the parts
-  // for (let i=0; i<parts.length; i++) {
-  //   const p = parts[i];
-  //
-  //   let smallName, bigName;
-  //   if (p.slice(0,2) === '--') {
-  //     bigName = p.slice(2);
-  //   } else if (p.slice(0,1) === '-' && p.length === 2) {
-  //     smallName = p.slice(1);
-  //   }
-  //
-  //   for (let j=0; j<Object.keys(argsSettings).length; j++) {
-  //
-  //     const k = Object.keys(argsSettings)[j];
-  //
-  //     if (resultObject[k] !== undefined) {
-  //       delete argsSettings[k];
-  //       // console.log(argsSettings);
-  //       break;
-  //     }
-  //
-  //     const set = argsSettings[k];
-  //
-  //     if (smallName && set.smallName === smallName) {
-  //       resultObject[k] = __parse(parts[i+1]);
-  //       i++;
-  //       delete argsSettings[k];
-  //       // console.log(argsSettings);
-  //       break;
-  //     }
-  //     if (bigName && set.bigName === bigName) {
-  //       resultObject[k] = __parse(parts[i+1]);
-  //       i++;
-  //       delete argsSettings[k];
-  //       // console.log(argsSettings);
-  //       break;
-  //     }
-  //
-  //     const type = typeof __parse(p);
-  //     // console.log(p, type.charAt(0).toUpperCase() + type.slice(1));
-  //     if (type.charAt(0).toUpperCase() + type.slice(1) === set.type) {
-  //       delete argsSettings[k];
-  //       // console.log(argsSettings);
-  //       resultObject[k] = __parse(p);
-  //       break;
-  //     }
-  //   }
-  //
-  // }
-  // return resultObject;
-};
-
-exports.default = _default;
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = unquote;
-
-/**
- * @name        unquote
- * @namespace       sugar.js.string
- * @type      Function
- *
- * Remove the quotes of a string
- * Types of quotes removed :
- * - `"`, `'`, `”`
- *
- * @param    {String}    string    The string to process
- * @param    {Array<String>}    [quotesToRemove=['"','\'','”']]    The quotes to removes
- * @return    {String}    The unquoted string
- *
- * @example    js
- * import unquote from '@coffeekraken/sugar/js/string/unquote'
- * unquote("'Hello world'") // "Hello world"
- *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-function unquote(string, quotesToRemove = ['"', "'", "”"]) {
-  // trim the string just in case
-  string = string.trim(); // loop on each quotes to remove
-
-  quotesToRemove.forEach(quote => {
-    if (string.substr(0, 1) === quote && string.substr(-1) === quote) {
-      string = string.substr(1);
-      string = string.substr(0, string.length - 1); // break the loop to avoid unquoting multiple levels
-
-      return;
-    }
-  }); // return the processed string
-
-  return string;
-}
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _json = _interopRequireDefault(__webpack_require__(14));
-
-var _toString = _interopRequireDefault(__webpack_require__(31));
-
-var _parse = _interopRequireDefault(__webpack_require__(0));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var _default = {
-  /**
-   * @name        encrypt
-   * @namespace     sugar.js.crypt.base64
-   * @type        Function
-   *
-   * Encrypt
-   *
-   * @param       {String}       message        The message to encrypt
-   * @return      {String}                       The encrypted message
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  encrypt: function (message) {
-    if (typeof message !== 'string') message = (0, _toString.default)(message);
-    return btoa(message);
-  },
-
-  /**
-   * @name        decrypt
-   * @namespace       sugar.js.crypt.base64
-   * @type        Function
-   *
-   * Decrypt
-   *
-   * @param       {String}      message         The message to decrypt
-   * @return      {String}                      The decrypted message
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  decrypt: function (message) {
-    message = atob(message);
-    return (0, _parse.default)(message);
-  }
-};
-exports.default = _default;
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = isJson;
-
-/**
- * @name        isJson
- * @namespace       sugar.js.is
- * @type      Function
- *
- * Check if the passed value is a valid json
- *
- * @param    {Mixed}    value    The value to check
- * @return   {Boolean}   true if it's a valid json, false if not
- *
- * @example    js
- * import isJson from '@coffeekraken/sugar/js/is/json'
- * if (isJson('[{id:10}]')) {
- *   // do something
- * }
- *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-function isJson(value) {
-  try {
-    JSON.parse(value);
-  } catch (e) {
-    return false;
-  }
-
-  return true;
-}
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _ensureExist = _interopRequireDefault(__webpack_require__(5));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/**
- * @name                              getRegisteredTransports
- * @namespace                         sugar.js.log
- * @type                              Function
- *
- * Return an object with all the registered transports functions stored by transport name
- *
- * @return                      {Object}                                    An object in which keys are transports names and values transports functions
- *
- * @example                   js
- * import getRegisteredTransports from '@coffeekraken/sugar/js/log/getRegisteredTransports';
- * getRegisteredTransports(); // => { console: ... }
- *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-var _default = () => {
-  (0, _ensureExist.default)('window.Sugar._logTransports');
-  return Sugar._logTransports ? Sugar._logTransports : {};
-};
-
-exports.default = _default;
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _ensureExist = _interopRequireDefault(__webpack_require__(5));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/**
- * @name                                  isTransportRegistered
- * @namespace                             sugar.js.log
- * @type                                  Function
- *
- * Check if the passed transport is already registered
- *
- * @param             {String}                name                    The transport name to check
- * @return            {Boolean}                                       true if already registered, false if not
- *
- * @example           js
- * import isTransportRegistered from '@coffeekraken/sugar/js/log/isTransportRegistered';
- * isTransportRegistered('console'); // => true
- *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-var _default = name => {
-  (0, _ensureExist.default)('window.Sugar._logTransports');
-  return Sugar._logTransports[name] ? true : false;
-};
-
-exports.default = _default;
-
-/***/ }),
-/* 17 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var root_1 = __webpack_require__(7);
-
-var toSubscriber_1 = __webpack_require__(55);
-
-var observable_1 = __webpack_require__(62);
-
-var pipe_1 = __webpack_require__(63);
+var pipe_1 = __webpack_require__(58);
 /**
  * A representation of any set of values over any amount of time. This is the most basic building block
  * of RxJS.
@@ -1854,7 +1087,7 @@ var Observable = function () {
 exports.Observable = Observable;
 
 /***/ }),
-/* 18 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1880,7 +1113,7 @@ try {
 module.exports = g;
 
 /***/ }),
-/* 19 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1893,7 +1126,7 @@ function isFunction(x) {
 exports.isFunction = isFunction;
 
 /***/ }),
-/* 20 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1904,7 +1137,7 @@ exports.errorObject = {
 };
 
 /***/ }),
-/* 21 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1920,13 +1153,13 @@ exports.empty = {
 };
 
 /***/ }),
-/* 22 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var root_1 = __webpack_require__(7);
+var root_1 = __webpack_require__(2);
 
 var Symbol = root_1.root.Symbol;
 exports.rxSubscriber = typeof Symbol === 'function' && typeof Symbol.for === 'function' ? Symbol.for('rxSubscriber') : '@@rxSubscriber';
@@ -1937,7 +1170,7 @@ exports.rxSubscriber = typeof Symbol === 'function' && typeof Symbol.for === 'fu
 exports.$$rxSubscriber = exports.rxSubscriber;
 
 /***/ }),
-/* 23 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1981,7 +1214,7 @@ function strToHtml(string) {
 }
 
 /***/ }),
-/* 24 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2039,27 +1272,27 @@ function when($node, state, settings = {}) {
 
     switch (state) {
       case 'attribute':
-        importPromise = Promise.resolve().then(() => _interopRequireWildcard(__webpack_require__(67)));
+        importPromise = Promise.resolve().then(() => _interopRequireWildcard(__webpack_require__(62)));
         args = [$node, settings.attribute, settings.checkFn];
         break;
 
       case 'inViewport':
-        importPromise = Promise.resolve().then(() => _interopRequireWildcard(__webpack_require__(69)));
+        importPromise = Promise.resolve().then(() => _interopRequireWildcard(__webpack_require__(64)));
         args = [$node, settings.offset];
         break;
 
       case 'outOfViewport':
-        importPromise = Promise.resolve().then(() => _interopRequireWildcard(__webpack_require__(71)));
+        importPromise = Promise.resolve().then(() => _interopRequireWildcard(__webpack_require__(68)));
         args = [$node, settings.offset];
         break;
 
       case 'transitionEnd':
-        importPromise = Promise.resolve().then(() => _interopRequireWildcard(__webpack_require__(75)));
+        importPromise = Promise.resolve().then(() => _interopRequireWildcard(__webpack_require__(72)));
         args = [$node, settings.callback];
         break;
 
       case 'visible':
-        importPromise = Promise.resolve().then(() => _interopRequireWildcard(__webpack_require__(80)));
+        importPromise = Promise.resolve().then(() => _interopRequireWildcard(__webpack_require__(77)));
         args = [$node, settings.callback];
         break;
 
@@ -2082,7 +1315,43 @@ function when($node, state, settings = {}) {
 ;
 
 /***/ }),
-/* 25 */
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = uniqid;
+
+var _uniqid = _interopRequireDefault(__webpack_require__(66));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name          uniqid
+ * @namespace       sugar.js.string
+ * @type          Function
+ *
+ * Generate a uniqid string of 8 bytes. Work using the [uniqid](https://www.npmjs.com/package/uniqid) npm package under the hood.
+ *
+ * @return          {String}                A 8 bytes uniqid string
+ *
+ * @example       js
+ * import uniqid from '@coffeekraken/sugar/js/string/uniqid';
+ * console.log(uniqid()); // => 4n5pxq24
+ *
+ * @see       https://www.npmjs.com/package/uniqid
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+function uniqid() {
+  return (0, _uniqid.default)();
+}
+
+/***/ }),
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2129,15 +1398,15 @@ function isVisible(elm) {
 window.__isVisible = isVisible;
 
 /***/ }),
-/* 26 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _SquidApp = _interopRequireDefault(__webpack_require__(27));
+var _SquidApp = _interopRequireDefault(__webpack_require__(21));
 
-var _when = _interopRequireDefault(__webpack_require__(24));
+var _when = _interopRequireDefault(__webpack_require__(17));
 
 var _coffeekrakenLogo = _interopRequireDefault(__webpack_require__(84));
 
@@ -2147,7 +1416,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 new _SquidApp.default();
 
 /***/ }),
-/* 27 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2158,13 +1427,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _SApp = _interopRequireDefault(__webpack_require__(28));
+var _SApp = _interopRequireDefault(__webpack_require__(22));
 
-var _querySelectorLive = _interopRequireDefault(__webpack_require__(1));
+var _querySelectorLive = _interopRequireDefault(__webpack_require__(8));
 
-var _appendScriptTag = _interopRequireDefault(__webpack_require__(42));
+var _appendScriptTag = _interopRequireDefault(__webpack_require__(37));
 
-var _base = _interopRequireDefault(__webpack_require__(13));
+var _base = _interopRequireDefault(__webpack_require__(3));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2174,9 +1443,9 @@ class Squid extends _SApp.default {
       name: 'Squid'
     });
 
-    this._importAll(__webpack_require__(44), 'animation');
+    this._importAll(__webpack_require__(39), 'animation');
 
-    this._importAll(__webpack_require__(48), 'view'); // register animations
+    this._importAll(__webpack_require__(43), 'view'); // register animations
 
 
     this._registerAnimations();
@@ -2202,7 +1471,7 @@ class Squid extends _SApp.default {
 
 
   _registerAnimations() {
-    const sugarInAnimations = __webpack_require__(83);
+    const sugarInAnimations = __webpack_require__(80);
 
     sugarInAnimations.keys().forEach(key => {
       const name = key.split('/')[key.split('/').length - 1].replace('.js', '');
@@ -2216,7 +1485,7 @@ exports.default = Squid;
 ;
 
 /***/ }),
-/* 28 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2227,11 +1496,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _get = _interopRequireDefault(__webpack_require__(29));
+var _get = _interopRequireDefault(__webpack_require__(23));
 
-var _base = _interopRequireDefault(__webpack_require__(30));
+var _base = _interopRequireDefault(__webpack_require__(24));
 
-var _base2 = _interopRequireDefault(__webpack_require__(13));
+var _base2 = _interopRequireDefault(__webpack_require__(3));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2392,7 +1661,7 @@ class SApp {
       const _this = this; // __ensureExist('window.Squid._log');
 
 
-      Promise.all([Promise.resolve().then(() => _interopRequireWildcard(__webpack_require__(39))), Promise.resolve().then(() => _interopRequireWildcard(__webpack_require__(16))), Promise.resolve().then(() => _interopRequireWildcard(__webpack_require__(15))), Promise.resolve().then(() => _interopRequireWildcard(__webpack_require__(40)))]).then(modules => {
+      Promise.all([Promise.resolve().then(() => _interopRequireWildcard(__webpack_require__(33))), Promise.resolve().then(() => _interopRequireWildcard(__webpack_require__(7))), Promise.resolve().then(() => _interopRequireWildcard(__webpack_require__(6))), Promise.resolve().then(() => _interopRequireWildcard(__webpack_require__(34)))]).then(modules => {
         const __log = modules[0],
               __isTransportRegistered = modules[1],
               __getRegisteredTransports = modules[2],
@@ -2402,7 +1671,7 @@ class SApp {
         let transp = transports ? transports : configTransports;
 
         if (!this.__log.sugarTransports) {
-          this.__log.sugarTransports = __webpack_require__(41);
+          this.__log.sugarTransports = __webpack_require__(35);
         }
 
         const transportsImportPromises = [];
@@ -2428,7 +1697,7 @@ exports.default = SApp;
 ;
 
 /***/ }),
-/* 29 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2474,7 +1743,7 @@ var _default = (obj, path) => {
 exports.default = _default;
 
 /***/ }),
-/* 30 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2518,7 +1787,7 @@ function isBase64(value) {
 }
 
 /***/ }),
-/* 31 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2529,21 +1798,21 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = toString;
 
-var _json = _interopRequireDefault(__webpack_require__(14));
+var _json = _interopRequireDefault(__webpack_require__(4));
 
-var _object = _interopRequireDefault(__webpack_require__(32));
+var _object = _interopRequireDefault(__webpack_require__(26));
 
-var _array = _interopRequireDefault(__webpack_require__(33));
+var _array = _interopRequireDefault(__webpack_require__(27));
 
-var _function = _interopRequireDefault(__webpack_require__(34));
+var _function = _interopRequireDefault(__webpack_require__(28));
 
-var _boolean = _interopRequireDefault(__webpack_require__(35));
+var _boolean = _interopRequireDefault(__webpack_require__(29));
 
-var _regexp = _interopRequireDefault(__webpack_require__(36));
+var _regexp = _interopRequireDefault(__webpack_require__(30));
 
-var _string = _interopRequireDefault(__webpack_require__(37));
+var _string = _interopRequireDefault(__webpack_require__(31));
 
-var _number = _interopRequireDefault(__webpack_require__(38));
+var _number = _interopRequireDefault(__webpack_require__(32));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2602,7 +1871,7 @@ function toString(value) {
 }
 
 /***/ }),
-/* 32 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2636,7 +1905,7 @@ function isObject(value) {
 }
 
 /***/ }),
-/* 33 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2670,7 +1939,7 @@ function isArray(value) {
 }
 
 /***/ }),
-/* 34 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2704,7 +1973,7 @@ function isFunction(value) {
 }
 
 /***/ }),
-/* 35 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2738,7 +2007,7 @@ function isBoolean(value) {
 }
 
 /***/ }),
-/* 36 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2772,7 +2041,7 @@ function isRegexp(value) {
 }
 
 /***/ }),
-/* 37 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2806,7 +2075,7 @@ function isString(value) {
 }
 
 /***/ }),
-/* 38 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2840,7 +2109,7 @@ function isNumber(source) {
 }
 
 /***/ }),
-/* 39 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2851,9 +2120,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _getRegisteredTransports = _interopRequireDefault(__webpack_require__(15));
+var _getRegisteredTransports = _interopRequireDefault(__webpack_require__(6));
 
-var _isTransportRegistered = _interopRequireDefault(__webpack_require__(16));
+var _isTransportRegistered = _interopRequireDefault(__webpack_require__(7));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2900,7 +2169,7 @@ var _default = (message, type = 'info', transports = null) => {
 exports.default = _default;
 
 /***/ }),
-/* 40 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2911,7 +2180,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _ensureExist = _interopRequireDefault(__webpack_require__(5));
+var _ensureExist = _interopRequireDefault(__webpack_require__(1));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2960,22 +2229,22 @@ var _default = (name, transportFn) => {
 exports.default = _default;
 
 /***/ }),
-/* 41 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
 	"./console.js": [
-		86,
-		4
+		90,
+		6
 	],
 	"./mail.js": [
-		87,
-		3,
-		2
+		91,
+		5,
+		4
 	],
 	"./vendors/smtp.js": [
-		85,
-		5
+		89,
+		7
 	]
 };
 function webpackAsyncContext(req) {
@@ -2995,11 +2264,45 @@ function webpackAsyncContext(req) {
 webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 	return Object.keys(map);
 };
-webpackAsyncContext.id = 41;
+webpackAsyncContext.id = 35;
 module.exports = webpackAsyncContext;
 
 /***/ }),
-/* 42 */
+/* 36 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = uniqid;
+let uniqidIdx = 0;
+if (!window.sugar) window.sugar = {};
+if (!window.sugar._uniqid) window.sugar._uniqid = 0;
+/**
+ * @name        uniqid
+ * @namespace       sugar.js.util
+ * @type      Function
+ *
+ * Generate a uniq id
+ *
+ * @example    js
+ * import uniqid from '@coffeekraken/sugar/js/util/uniqid'
+ * uniqid() // s2
+ *
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+function uniqid() {
+  // update uniqid idx
+  window.sugar._uniqid++;
+  return `s${window.sugar._uniqid.toString()}`;
+}
+
+/***/ }),
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3010,7 +2313,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = appendScriptTag;
 
-var _scriptLoaded = _interopRequireDefault(__webpack_require__(43));
+var _scriptLoaded = _interopRequireDefault(__webpack_require__(38));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3038,7 +2341,7 @@ function appendScriptTag(src, $parent = document.body) {
 }
 
 /***/ }),
-/* 43 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3103,13 +2406,13 @@ function loadScript($script) {
 }
 
 /***/ }),
-/* 44 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./call.js": 45,
-	"./exist.js": 46,
-	"./register.js": 47
+	"./call.js": 40,
+	"./exist.js": 41,
+	"./register.js": 42
 };
 
 
@@ -3130,10 +2433,10 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 44;
+webpackContext.id = 39;
 
 /***/ }),
-/* 45 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3180,7 +2483,7 @@ var _default = (phase, name, node) => {
 exports.default = _default;
 
 /***/ }),
-/* 46 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3217,7 +2520,7 @@ var _default = (phase, name) => {
 exports.default = _default;
 
 /***/ }),
-/* 47 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3254,11 +2557,11 @@ var _default = (phase, name, fn) => {
 exports.default = _default;
 
 /***/ }),
-/* 48 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./call.js": 49
+	"./call.js": 44
 };
 
 
@@ -3279,10 +2582,10 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 48;
+webpackContext.id = 43;
 
 /***/ }),
-/* 49 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3293,11 +2596,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = squidViewToken;
 
-var _SAjax = _interopRequireDefault(__webpack_require__(50));
+var _SAjax = _interopRequireDefault(__webpack_require__(45));
 
-var _when = _interopRequireDefault(__webpack_require__(24));
+var _when = _interopRequireDefault(__webpack_require__(17));
 
-var _toDomNodes = _interopRequireDefault(__webpack_require__(82));
+var _toDomNodes = _interopRequireDefault(__webpack_require__(79));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3335,7 +2638,7 @@ async function squidViewToken(tokenObject) {
 }
 
 /***/ }),
-/* 50 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3346,19 +2649,19 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _SObject = _interopRequireDefault(__webpack_require__(51));
+var _SObject = _interopRequireDefault(__webpack_require__(46));
 
-var _simpleAjax = _interopRequireDefault(__webpack_require__(52));
+var _simpleAjax = _interopRequireDefault(__webpack_require__(47));
 
-var _Observable = __webpack_require__(17);
+var _Observable = __webpack_require__(10);
 
-var _strToHtml = _interopRequireDefault(__webpack_require__(23));
+var _strToHtml = _interopRequireDefault(__webpack_require__(16));
 
-var _htmlToStr = _interopRequireDefault(__webpack_require__(65));
+var _htmlToStr = _interopRequireDefault(__webpack_require__(60));
 
-var _SAjaxRequest = _interopRequireDefault(__webpack_require__(66));
+var _SAjaxRequest = _interopRequireDefault(__webpack_require__(61));
 
-var _autoCast = _interopRequireDefault(__webpack_require__(3));
+var _autoCast = _interopRequireDefault(__webpack_require__(0));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3645,7 +2948,7 @@ class SAjax extends _SObject.default {
 exports.default = SAjax;
 
 /***/ }),
-/* 51 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3677,14 +2980,14 @@ class SObject {
 exports.default = SObject;
 
 /***/ }),
-/* 52 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var EventEmitter = __webpack_require__(53).EventEmitter,
-    queryString = __webpack_require__(54);
+var EventEmitter = __webpack_require__(48).EventEmitter,
+    queryString = __webpack_require__(49);
 
 function tryParseJson(data) {
   try {
@@ -3823,7 +3126,7 @@ Ajax.prototype.send = function () {
 module.exports = Ajax;
 
 /***/ }),
-/* 53 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4236,7 +3539,7 @@ function unwrapListeners(arr) {
 }
 
 /***/ }),
-/* 54 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4309,17 +3612,17 @@ var __WEBPACK_AMD_DEFINE_RESULT__;
 })();
 
 /***/ }),
-/* 55 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var Subscriber_1 = __webpack_require__(56);
+var Subscriber_1 = __webpack_require__(51);
 
-var rxSubscriber_1 = __webpack_require__(22);
+var rxSubscriber_1 = __webpack_require__(15);
 
-var Observer_1 = __webpack_require__(21);
+var Observer_1 = __webpack_require__(14);
 
 function toSubscriber(nextOrObserver, error, complete) {
   if (nextOrObserver) {
@@ -4342,7 +3645,7 @@ function toSubscriber(nextOrObserver, error, complete) {
 exports.toSubscriber = toSubscriber;
 
 /***/ }),
-/* 56 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4358,13 +3661,13 @@ var __extends = void 0 && (void 0).__extends || function (d, b) {
   d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 
-var isFunction_1 = __webpack_require__(19);
+var isFunction_1 = __webpack_require__(12);
 
-var Subscription_1 = __webpack_require__(57);
+var Subscription_1 = __webpack_require__(52);
 
-var Observer_1 = __webpack_require__(21);
+var Observer_1 = __webpack_require__(14);
 
-var rxSubscriber_1 = __webpack_require__(22);
+var rxSubscriber_1 = __webpack_require__(15);
 /**
  * Implements the {@link Observer} interface and extends the
  * {@link Subscription} class. While the {@link Observer} is the public API for
@@ -4685,23 +3988,23 @@ function isTrustedSubscriber(obj) {
 }
 
 /***/ }),
-/* 57 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var isArray_1 = __webpack_require__(58);
+var isArray_1 = __webpack_require__(53);
 
-var isObject_1 = __webpack_require__(59);
+var isObject_1 = __webpack_require__(54);
 
-var isFunction_1 = __webpack_require__(19);
+var isFunction_1 = __webpack_require__(12);
 
-var tryCatch_1 = __webpack_require__(60);
+var tryCatch_1 = __webpack_require__(55);
 
-var errorObject_1 = __webpack_require__(20);
+var errorObject_1 = __webpack_require__(13);
 
-var UnsubscriptionError_1 = __webpack_require__(61);
+var UnsubscriptionError_1 = __webpack_require__(56);
 /**
  * Represents a disposable resource, such as the execution of an Observable. A
  * Subscription has one important method, `unsubscribe`, that takes no argument
@@ -4931,7 +4234,7 @@ function flattenUnsubscriptionErrors(errors) {
 }
 
 /***/ }),
-/* 58 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4942,7 +4245,7 @@ exports.isArray = Array.isArray || function (x) {
 };
 
 /***/ }),
-/* 59 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4955,13 +4258,13 @@ function isObject(x) {
 exports.isObject = isObject;
 
 /***/ }),
-/* 60 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var errorObject_1 = __webpack_require__(20);
+var errorObject_1 = __webpack_require__(13);
 
 var tryCatchTarget;
 
@@ -4983,7 +4286,7 @@ exports.tryCatch = tryCatch;
 ;
 
 /***/ }),
-/* 61 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5025,13 +4328,13 @@ var UnsubscriptionError = function (_super) {
 exports.UnsubscriptionError = UnsubscriptionError;
 
 /***/ }),
-/* 62 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var root_1 = __webpack_require__(7);
+var root_1 = __webpack_require__(2);
 
 function getSymbolObservable(context) {
   var $$observable;
@@ -5060,13 +4363,13 @@ exports.observable = getSymbolObservable(root_1.root);
 exports.$$observable = exports.observable;
 
 /***/ }),
-/* 63 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var noop_1 = __webpack_require__(64);
+var noop_1 = __webpack_require__(59);
 /* tslint:enable:max-line-length */
 
 
@@ -5102,7 +4405,7 @@ function pipeFromArray(fns) {
 exports.pipeFromArray = pipeFromArray;
 
 /***/ }),
-/* 64 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5114,7 +4417,7 @@ function noop() {}
 exports.noop = noop;
 
 /***/ }),
-/* 65 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5154,7 +4457,7 @@ function htmlToStr(html, deep = true) {
 }
 
 /***/ }),
-/* 66 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5280,7 +4583,7 @@ class SAjaxRequest {
 exports.default = SAjaxRequest;
 
 /***/ }),
-/* 67 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5291,9 +4594,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = whenAttribute;
 
-var _attributesObservable = _interopRequireDefault(__webpack_require__(68));
+var _attributesObservable = _interopRequireDefault(__webpack_require__(63));
 
-var _autoCast = _interopRequireDefault(__webpack_require__(3));
+var _autoCast = _interopRequireDefault(__webpack_require__(0));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5355,7 +4658,7 @@ function whenAttribute(elm, attrName, checkFn = null) {
 }
 
 /***/ }),
-/* 68 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5366,7 +4669,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = _default;
 
-var _Observable = __webpack_require__(17);
+var _Observable = __webpack_require__(10);
 
 /**
  * @name        attributesObservable
@@ -5424,7 +4727,7 @@ function _default(target, settings = {}) {
  */
 
 /***/ }),
-/* 69 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5435,9 +4738,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = whenInViewport;
 
-var _inViewport = _interopRequireDefault(__webpack_require__(70));
+var _inViewport = _interopRequireDefault(__webpack_require__(65));
 
-var _uniqid = _interopRequireDefault(__webpack_require__(4));
+var _uniqid = _interopRequireDefault(__webpack_require__(18));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5471,7 +4774,7 @@ function whenInViewport(elm, offset = 50) {
 }
 
 /***/ }),
-/* 70 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5738,10 +5041,272 @@ function observeDOM(watches, container, cb) {
     return filter.call(nodes, watches.isWatched).length > 0;
   }
 }
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(18)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(11)))
 
 /***/ }),
-/* 71 */
+/* 66 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+/* 
+(The MIT License)
+Copyright (c) 2014-2019 Halász Ádám <mail@adamhalasz.com>
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+//  Unique Hexatridecimal ID Generator
+// ================================================
+//  Dependencies
+// ================================================
+var pid = process && process.pid ? process.pid.toString(36) : '';
+var address = '';
+
+if (false) { var i, mac, networkInterfaces; } //  Exports
+// ================================================
+
+
+module.exports = module.exports.default = function (prefix, suffix) {
+  return (prefix ? prefix : '') + address + pid + now().toString(36) + (suffix ? suffix : '');
+};
+
+module.exports.process = function (prefix, suffix) {
+  return (prefix ? prefix : '') + pid + now().toString(36) + (suffix ? suffix : '');
+};
+
+module.exports.time = function (prefix, suffix) {
+  return (prefix ? prefix : '') + now().toString(36) + (suffix ? suffix : '');
+}; //  Helpers
+// ================================================
+
+
+function now() {
+  var time = Date.now();
+  var last = now.last || time;
+  return now.last = time > last ? time : last + 1;
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(67)))
+
+/***/ }),
+/* 67 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+// shim for using process in browser
+var process = module.exports = {}; // cached from whatever global is present so that test runners that stub it
+// don't break things.  But we need to wrap it in a try catch in case it is
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+// function because try/catches deoptimize in certain engines.
+
+var cachedSetTimeout;
+var cachedClearTimeout;
+
+function defaultSetTimout() {
+  throw new Error('setTimeout has not been defined');
+}
+
+function defaultClearTimeout() {
+  throw new Error('clearTimeout has not been defined');
+}
+
+(function () {
+  try {
+    if (typeof setTimeout === 'function') {
+      cachedSetTimeout = setTimeout;
+    } else {
+      cachedSetTimeout = defaultSetTimout;
+    }
+  } catch (e) {
+    cachedSetTimeout = defaultSetTimout;
+  }
+
+  try {
+    if (typeof clearTimeout === 'function') {
+      cachedClearTimeout = clearTimeout;
+    } else {
+      cachedClearTimeout = defaultClearTimeout;
+    }
+  } catch (e) {
+    cachedClearTimeout = defaultClearTimeout;
+  }
+})();
+
+function runTimeout(fun) {
+  if (cachedSetTimeout === setTimeout) {
+    //normal enviroments in sane situations
+    return setTimeout(fun, 0);
+  } // if setTimeout wasn't available but was latter defined
+
+
+  if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+    cachedSetTimeout = setTimeout;
+    return setTimeout(fun, 0);
+  }
+
+  try {
+    // when when somebody has screwed with setTimeout but no I.E. maddness
+    return cachedSetTimeout(fun, 0);
+  } catch (e) {
+    try {
+      // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+      return cachedSetTimeout.call(null, fun, 0);
+    } catch (e) {
+      // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+      return cachedSetTimeout.call(this, fun, 0);
+    }
+  }
+}
+
+function runClearTimeout(marker) {
+  if (cachedClearTimeout === clearTimeout) {
+    //normal enviroments in sane situations
+    return clearTimeout(marker);
+  } // if clearTimeout wasn't available but was latter defined
+
+
+  if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+    cachedClearTimeout = clearTimeout;
+    return clearTimeout(marker);
+  }
+
+  try {
+    // when when somebody has screwed with setTimeout but no I.E. maddness
+    return cachedClearTimeout(marker);
+  } catch (e) {
+    try {
+      // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+      return cachedClearTimeout.call(null, marker);
+    } catch (e) {
+      // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+      // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+      return cachedClearTimeout.call(this, marker);
+    }
+  }
+}
+
+var queue = [];
+var draining = false;
+var currentQueue;
+var queueIndex = -1;
+
+function cleanUpNextTick() {
+  if (!draining || !currentQueue) {
+    return;
+  }
+
+  draining = false;
+
+  if (currentQueue.length) {
+    queue = currentQueue.concat(queue);
+  } else {
+    queueIndex = -1;
+  }
+
+  if (queue.length) {
+    drainQueue();
+  }
+}
+
+function drainQueue() {
+  if (draining) {
+    return;
+  }
+
+  var timeout = runTimeout(cleanUpNextTick);
+  draining = true;
+  var len = queue.length;
+
+  while (len) {
+    currentQueue = queue;
+    queue = [];
+
+    while (++queueIndex < len) {
+      if (currentQueue) {
+        currentQueue[queueIndex].run();
+      }
+    }
+
+    queueIndex = -1;
+    len = queue.length;
+  }
+
+  currentQueue = null;
+  draining = false;
+  runClearTimeout(timeout);
+}
+
+process.nextTick = function (fun) {
+  var args = new Array(arguments.length - 1);
+
+  if (arguments.length > 1) {
+    for (var i = 1; i < arguments.length; i++) {
+      args[i - 1] = arguments[i];
+    }
+  }
+
+  queue.push(new Item(fun, args));
+
+  if (queue.length === 1 && !draining) {
+    runTimeout(drainQueue);
+  }
+}; // v8 likes predictible objects
+
+
+function Item(fun, array) {
+  this.fun = fun;
+  this.array = array;
+}
+
+Item.prototype.run = function () {
+  this.fun.apply(null, this.array);
+};
+
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+process.version = ''; // empty string to avoid regexp issues
+
+process.versions = {};
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+process.prependListener = noop;
+process.prependOnceListener = noop;
+
+process.listeners = function (name) {
+  return [];
+};
+
+process.binding = function (name) {
+  throw new Error('process.binding is not supported');
+};
+
+process.cwd = function () {
+  return '/';
+};
+
+process.chdir = function (dir) {
+  throw new Error('process.chdir is not supported');
+};
+
+process.umask = function () {
+  return 0;
+};
+
+/***/ }),
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5752,11 +5317,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = whenOutOfViewport;
 
-var _isInViewport = _interopRequireDefault(__webpack_require__(72));
+var _isInViewport = _interopRequireDefault(__webpack_require__(69));
 
-var _throttle = _interopRequireDefault(__webpack_require__(73));
+var _throttle = _interopRequireDefault(__webpack_require__(70));
 
-var _closest = _interopRequireDefault(__webpack_require__(74));
+var _closest = _interopRequireDefault(__webpack_require__(71));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5848,7 +5413,7 @@ function whenOutOfViewport(elm, offset = 50) {
 }
 
 /***/ }),
-/* 72 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5903,7 +5468,7 @@ function isInViewport(elm, offset = 50) {
 }
 
 /***/ }),
-/* 73 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5959,7 +5524,7 @@ function throttle(fn, threshhold) {
 }
 
 /***/ }),
-/* 74 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5970,7 +5535,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = closest;
 
-var _matches = _interopRequireDefault(__webpack_require__(2));
+var _matches = _interopRequireDefault(__webpack_require__(9));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6016,7 +5581,7 @@ function closest(elm, selector) {
 }
 
 /***/ }),
-/* 75 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6027,7 +5592,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = whenTransitionEnd;
 
-var _getTransitionProperties = _interopRequireDefault(__webpack_require__(76));
+var _getTransitionProperties = _interopRequireDefault(__webpack_require__(73));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6061,7 +5626,7 @@ function whenTransitionEnd(elm, cb = null) {
 }
 
 /***/ }),
-/* 76 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6072,11 +5637,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = getTransitionProperties;
 
-var _getStyleProperty = _interopRequireDefault(__webpack_require__(77));
+var _getStyleProperty = _interopRequireDefault(__webpack_require__(74));
 
-var _autoCast = _interopRequireDefault(__webpack_require__(3));
+var _autoCast = _interopRequireDefault(__webpack_require__(0));
 
-var _toMs = _interopRequireDefault(__webpack_require__(79));
+var _toMs = _interopRequireDefault(__webpack_require__(76));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6140,7 +5705,7 @@ function getTransitionProperties(elm) {
 }
 
 /***/ }),
-/* 77 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6151,9 +5716,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = getStyleProperty;
 
-var _camelize = _interopRequireDefault(__webpack_require__(78));
+var _camelize = _interopRequireDefault(__webpack_require__(75));
 
-var _autoCast = _interopRequireDefault(__webpack_require__(3));
+var _autoCast = _interopRequireDefault(__webpack_require__(0));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6196,7 +5761,7 @@ function getStyleProperty(elm, property) {
 }
 
 /***/ }),
-/* 78 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6233,7 +5798,7 @@ function camelize(text) {
 }
 
 /***/ }),
-/* 79 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6285,7 +5850,7 @@ function toMs(string) {
 }
 
 /***/ }),
-/* 80 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6296,9 +5861,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = whenVisible;
 
-var _isVisible = _interopRequireDefault(__webpack_require__(25));
+var _isVisible = _interopRequireDefault(__webpack_require__(19));
 
-var _closestNotVisible = _interopRequireDefault(__webpack_require__(81));
+var _closestNotVisible = _interopRequireDefault(__webpack_require__(78));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6454,7 +6019,7 @@ function whenVisible(elm, cb = null) {
 }
 
 /***/ }),
-/* 81 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6465,7 +6030,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = closestNotVisible;
 
-var _isVisible = _interopRequireDefault(__webpack_require__(25));
+var _isVisible = _interopRequireDefault(__webpack_require__(19));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6505,7 +6070,7 @@ function closestNotVisible(elm) {
 }
 
 /***/ }),
-/* 82 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6516,7 +6081,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = toDomNodes;
 
-var _strToHtml = _interopRequireDefault(__webpack_require__(23));
+var _strToHtml = _interopRequireDefault(__webpack_require__(16));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6585,11 +6150,11 @@ function toDomNodes(source) {
 }
 
 /***/ }),
-/* 83 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./slide.js": 10
+	"./slide.js": 81
 };
 
 
@@ -6610,15 +6175,447 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 83;
+webpackContext.id = 80;
+
+/***/ }),
+/* 81 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _uniqid = _interopRequireDefault(__webpack_require__(18));
+
+var _parseArgs = _interopRequireDefault(__webpack_require__(82));
+
+var _querySelectorLive = _interopRequireDefault(__webpack_require__(8));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _default = (() => {
+  (0, _querySelectorLive.default)('[slide-in]', $item => {
+    // generate a unique id for this node
+    const uniqClass = `slide-in-${(0, _uniqid.default)()}`;
+    $item.classList.add(uniqClass); // parse the slide-in value
+
+    const slideInValue = $item.getAttribute('slide-in');
+    const args = (0, _parseArgs.default)(slideInValue, {
+      x: 'Number -x --x "0"',
+      y: 'Number -y --y "0"',
+      duration: 'Number -d --duration "500"',
+      delay: 'Number --delay "0"',
+      when: 'String -w --when "inViewport"'
+    }); // generate the animation css
+
+    const css = `
+      [slide-in].${uniqClass} {
+        opacity: 0;
+        transform: translate(${args.x || 0}px, ${args.y || 0}px);
+
+      }
+    `;
+    const cssIn = `
+      [slide-in].${uniqClass}.in {
+        transition: all ${args.duration / 1000 || '0.5'}s;
+        opacity: 1;
+        transform: translate(0, 0);
+      }
+    `; // append the css into the section
+
+    document.head.innerHTML += `
+      <style id="${uniqClass}">
+        ${css}
+      </style>
+    `;
+    setTimeout(() => {
+      document.head.innerHTML += `
+        <style id="${uniqClass}-in">
+          ${cssIn}
+        </style>
+      `;
+    }, 100); // add the "in" class
+
+    setTimeout(() => {
+      $item.classList.add('in');
+    }, args.delay);
+    setTimeout(() => {
+      const $style = document.querySelector(`style#${uniqClass}`);
+      if ($style) $style.parentNode.removeChild($style);
+      const $styleIn = document.querySelector(`style#${uniqClass}-in`);
+      if ($styleIn) $styleIn.parentNode.removeChild($styleIn);
+    }, args.delay + args.duration);
+  });
+})();
+
+exports.default = _default;
+
+/***/ }),
+/* 82 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _parse = _interopRequireDefault(__webpack_require__(5));
+
+var _unquote = _interopRequireDefault(__webpack_require__(83));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name                        parseArgs
+ * @namespace                   sugar.js.string
+ * @type                        Function
+ *
+ * Parse a string to find the provided arguments into the list and return a corresponding object.
+ *
+ * @param             {String}                    string                      The string to parse
+ * @param             {Object}                    arguments                   The arguments object description
+ * @return            {Object}                                                The object of funded arguments
+ *
+ * @example         js
+ * import parseArgs from '@coffeekraken/sugar/js/string/parseArgs';
+ * parseArgs('hello -w 10 --help "coco yep" #blop', {
+ *    action: 'String -a --action /^\\S$/',
+ *    world: 'Integer -w --world',
+ *    help: 'String -h --help',
+ *    id: 'String -i --id /^#([\\S]+)$/',
+ *    yop: 'String -y --yop "Default value"'
+ * });
+ * // {
+ * //   action: 'hello',
+ * //   world: 10,
+ * //   help: 'coco yep',
+ * //   id: 'blop',
+ * //   yop: 'Default value'
+ * // }
+ *
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+var _default = (string, args) => {
+  string = ' ' + string + ' ';
+  const keys = Object.keys(args);
+  const resultObject = {}; // search for the "-a 'something cool'" style
+
+  const regSmallArg = /\s-[a-z]\s(?![-])[\S]+\s/g;
+  const regBigArg = /\s--[a-z]+\s(?![-])[\S]+\s/g;
+  const regRestArg = /(?![-])[\S]+/g;
+  const smallArgs = string.match(regSmallArg);
+
+  if (smallArgs) {
+    smallArgs.forEach((item, i) => {
+      string = string.replace(item, ' ');
+    });
+  }
+
+  const bigArgs = string.match(regBigArg);
+
+  if (bigArgs) {
+    bigArgs.forEach((item, i) => {
+      string = string.replace(item, ' ');
+    });
+  }
+
+  const restArgs = string.match(regRestArg);
+
+  if (restArgs) {
+    restArgs.forEach((item, i) => {
+      string = string.replace(item, ' ');
+    });
+  } // loop on each keys to search for corresponding value
+
+
+  for (let _i = 0; _i < keys.length; _i++) {
+    const k = keys[_i];
+    let keyArgs = args[k];
+    let keyString = null;
+    let keyPreprocess = null;
+
+    if (typeof keyArgs === 'object') {
+      if (keyArgs.args === undefined || typeof keyArgs.args !== 'string') {
+        console.error('sugar.js.string.parseArgs', `You have passed an object as argument for the key "${k}" but this object has to have an "args" property of type "String" and here's your object passed...`, keyArgs);
+        return {};
+      }
+
+      if (keyArgs.preprocess === undefined || typeof keyArgs.preprocess !== 'function') {
+        console.error('sugar.js.string.parseArgs', `You have passed an object as argument for the key "${k}" but this object has to have an "preprocess" property of type "Function" and here's your object passed...`, keyArgs);
+        return {};
+      }
+
+      keyString = ' ' + keyArgs.args + ' ';
+      keyPreprocess = keyArgs.preprocess;
+    } else {
+      keyString = ' ' + keyArgs + ' ';
+    }
+
+    const regKeyArgsType = /\s[a-zA-Z]+/g;
+    const regKeyArgsSmallName = /\s-[a-zA-Z]\s/g;
+    const regKeyArgsBigName = /\s--[a-zA-Z]+\s/g;
+    const regKeyArgsRegex = /\s\/[\S]+\/\s/g;
+    const regKeyArgsDefault = /['|"|`](.*)['|"|`]/g;
+    let type = keyString.match(regKeyArgsType);
+    if (type && type.length) type = type[0].trim();
+    let smallName = keyString.match(regKeyArgsSmallName);
+    if (smallName && smallName.length) smallName = smallName[0].trim();
+    let bigName = keyString.match(regKeyArgsBigName);
+    if (bigName && bigName.length) bigName = bigName[0].trim();
+    let regex = keyString.match(regKeyArgsRegex);
+    if (regex && regex.length) regex = regex[0].trim().slice(1, -1);
+    let defaultValue = keyString.match(regKeyArgsDefault);
+    if (defaultValue && defaultValue.length === 1) defaultValue = (0, _unquote.default)(defaultValue[0]);
+
+    if (smallArgs && smallName && resultObject[k] === undefined) {
+      for (let i = 0; i < smallArgs.length; i++) {
+        let item = smallArgs[i];
+        item = item.trim();
+        const key = item.slice(0, 2);
+        if (key !== smallName) continue;
+        let value = item.slice(2).trim();
+        value = (0, _unquote.default)(value); // check that the value match the args
+
+        if (type && typeof (0, _parse.default)(value) !== type.toLowerCase()) continue;
+
+        if (regex) {
+          const r = new RegExp(regex);
+          if (!r.test(value)) continue; // check if some parentheses exists
+
+          const matches = value.match(regex);
+
+          if (matches[1] !== undefined) {
+            value = matches[1];
+          }
+        }
+
+        smallArgs.splice(i, 1);
+
+        if (keyPreprocess) {
+          resultObject[k] = keyPreprocess((0, _parse.default)(value));
+        } else {
+          resultObject[k] = (0, _parse.default)(value);
+        }
+
+        break;
+      }
+    }
+
+    if (bigArgs && bigName && resultObject[k] === undefined) {
+      for (let i = 0; i < bigArgs.length; i++) {
+        let item = bigArgs[i];
+        item = item.trim();
+        const argKey = item.match(/--[\S]+/g)[0];
+        if (argKey !== bigName) continue;
+        item = item.replace(argKey, '').trim();
+        let value = item;
+        value = (0, _unquote.default)(value); // check that the value match the args
+
+        if (type && typeof (0, _parse.default)(value) !== type.toLowerCase()) continue;
+
+        if (regex) {
+          const r = new RegExp(regex);
+          if (!r.test(value)) continue; // check if some parentheses exists
+
+          const matches = value.match(regex);
+
+          if (matches[1] !== undefined) {
+            value = matches[1];
+          }
+        }
+
+        bigArgs.splice(i, 1);
+
+        if (keyPreprocess) {
+          resultObject[k] = keyPreprocess((0, _parse.default)(value));
+        } else {
+          resultObject[k] = (0, _parse.default)(value);
+        }
+
+        break;
+      }
+    }
+
+    if (restArgs && resultObject[k] === undefined) {
+      for (let i = 0; i < restArgs.length; i++) {
+        let item = restArgs[i];
+        item = item.trim();
+        let value = item;
+        value = (0, _unquote.default)(value); // check that the value match the args
+
+        if (type && typeof (0, _parse.default)(value) !== type.toLowerCase()) {
+          continue;
+        }
+
+        if (regex) {
+          const r = new RegExp(regex);
+          if (!r.test(value)) continue; // check if some parentheses exists
+
+          const matches = value.match(regex);
+
+          if (matches[1] !== undefined) {
+            value = matches[1];
+          }
+        }
+
+        restArgs.splice(i, 1);
+
+        if (keyPreprocess) {
+          resultObject[k] = keyPreprocess((0, _parse.default)(value));
+        } else {
+          resultObject[k] = (0, _parse.default)(value);
+        }
+
+        break;
+      }
+    }
+
+    if (resultObject[k] === undefined && defaultValue !== undefined) {
+      resultObject[k] = (0, _parse.default)(defaultValue);
+    }
+  }
+
+  return resultObject; // // split the string without the quotes
+  // const parts = string.match(/(('|").*?('|")|[^('|")\s]+)+(?=\s*|\s*$)/g);
+  //
+  // // init the resulting object
+  // const resultObject = {};
+  //
+  // let argsSettings = {};
+  // Object.keys(args).forEach(key => {
+  //   const arg = args[key];
+  //   let smallName, bigName, type;
+  //   // parse the argument definition
+  //   const argParts = arg.split(' ');
+  //   // loop on the args parts
+  //   for (let i=0; i<argParts.length; i++) {
+  //     const p = argParts[i];
+  //     if (p.slice(0,2) === '--') {
+  //       bigName = p.slice(2);
+  //     } else if (p.slice(0,1) === '-' && p.length === 2) {
+  //       smallName = p.slice(1);
+  //     } else {
+  //       type = p;
+  //     }
+  //   }
+  //   argsSettings[key] = {
+  //     smallName, bigName, type
+  //   };
+  // });
+  //
+  // // loop on the parts
+  // for (let i=0; i<parts.length; i++) {
+  //   const p = parts[i];
+  //
+  //   let smallName, bigName;
+  //   if (p.slice(0,2) === '--') {
+  //     bigName = p.slice(2);
+  //   } else if (p.slice(0,1) === '-' && p.length === 2) {
+  //     smallName = p.slice(1);
+  //   }
+  //
+  //   for (let j=0; j<Object.keys(argsSettings).length; j++) {
+  //
+  //     const k = Object.keys(argsSettings)[j];
+  //
+  //     if (resultObject[k] !== undefined) {
+  //       delete argsSettings[k];
+  //       // console.log(argsSettings);
+  //       break;
+  //     }
+  //
+  //     const set = argsSettings[k];
+  //
+  //     if (smallName && set.smallName === smallName) {
+  //       resultObject[k] = __parse(parts[i+1]);
+  //       i++;
+  //       delete argsSettings[k];
+  //       // console.log(argsSettings);
+  //       break;
+  //     }
+  //     if (bigName && set.bigName === bigName) {
+  //       resultObject[k] = __parse(parts[i+1]);
+  //       i++;
+  //       delete argsSettings[k];
+  //       // console.log(argsSettings);
+  //       break;
+  //     }
+  //
+  //     const type = typeof __parse(p);
+  //     // console.log(p, type.charAt(0).toUpperCase() + type.slice(1));
+  //     if (type.charAt(0).toUpperCase() + type.slice(1) === set.type) {
+  //       delete argsSettings[k];
+  //       // console.log(argsSettings);
+  //       resultObject[k] = __parse(p);
+  //       break;
+  //     }
+  //   }
+  //
+  // }
+  // return resultObject;
+};
+
+exports.default = _default;
+
+/***/ }),
+/* 83 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = unquote;
+
+/**
+ * @name        unquote
+ * @namespace       sugar.js.string
+ * @type      Function
+ *
+ * Remove the quotes of a string
+ * Types of quotes removed :
+ * - `"`, `'`, `”`
+ *
+ * @param    {String}    string    The string to process
+ * @param    {Array<String>}    [quotesToRemove=['"','\'','”']]    The quotes to removes
+ * @return    {String}    The unquoted string
+ *
+ * @example    js
+ * import unquote from '@coffeekraken/sugar/js/string/unquote'
+ * unquote("'Hello world'") // "Hello world"
+ *
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+function unquote(string, quotesToRemove = ['"', "'", "”"]) {
+  // trim the string just in case
+  string = string.trim(); // loop on each quotes to remove
+
+  quotesToRemove.forEach(quote => {
+    if (string.substr(0, 1) === quote && string.substr(-1) === quote) {
+      string = string.substr(1);
+      string = string.substr(0, string.length - 1); // break the loop to avoid unquoting multiple levels
+
+      return;
+    }
+  }); // return the processed string
+
+  return string;
+}
 
 /***/ }),
 /* 84 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "images/.resources/coffeekraken-logo.jpg");
+
 
 /***/ })
 /******/ ]);

@@ -25,6 +25,7 @@
     "@coffeekraken/sugar": "^1.0.23",
     "autoprefixer": "^9.7.4",
     "babel-loader": "^8.0.6",
+    "coffeescript": "^2.5.1",
     "commander": "^4.1.0",
     "compression": "^1.7.4",
     "cssnano": "^4.1.10",
@@ -49,6 +50,7 @@
     "sass": "^1.25.0",
     "sass-glob-importer": "^1.0.1",
     "scss-bundle": "^3.0.2",
+    "typescript": "^3.7.5",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
     "webpack-import-glob-loader": "^1.6.3"

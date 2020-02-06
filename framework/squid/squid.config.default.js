@@ -7,7 +7,7 @@ if (__fs.existsSync(process.cwd() + '/squid.config.js')) {
 	__projectConfig = require(process.cwd() + '/squid.config.js');
 }
 
-module.exports = __deepMerge({
+let config = __deepMerge({
 	views: {
 
     folder: 'views',
@@ -45,21 +45,56 @@ module.exports = __deepMerge({
 
   dist: {
 
+		folder: 'dist',
+
+		ts: {
+			extensions: ['ts'],
+			sources: '**/*.ts',
+			sourcesFolder: ['src/js'],
+			outputFolder: 'dist/js'
+		},
+
+		coffee: {
+			extensions: ['coffee'],
+			sources: '**/*.coffee',
+			sourcesFolder: ['src/js'],
+			outputFolder: 'dist/js'
+		},
+
+		css: {
+			extensions: ['css','scss','sass'],
+			sources: '**/*.bundle.{css,scss,sass}',
+			sourcesFolder: ['views','src/css'],
+			outputFolder: 'dist/css'
+		},
+
     js: {
-
-      bundleFiles: '{views,src}/**/*.bundle.js',
-      sourcesFolder: 'src/js',
-      outputFolder: 'dist/js'
-
+			extensions: ['js'],
+			sources: '**/*.bundle.js',
+			sourcesFolder: ['views','src/js'],
+			outputFolder: 'dist/js'
     },
 
 		css: {
+			extensions: ['css','scss','sass'],
+			sources: '**/*.bundle.{css,scss,sass}',
+			sourcesFolder: ['views','src/css'],
+			outputFolder: 'dist/css'
+		},
 
-      bundleFiles: '{views,src}/**/*.bundle.scss',
-      sourcesFolder: 'src/css',
-      outputFolder: 'dist/css'
+		images: {
+			extensions: ['jpg','jpeg','png','gif','svg','webp'],
+			sources: '**/*.{jpg,jpeg,png,gif,svg,webp}',
+			sourcesFolder: ['views','src/images'],
+			outputFolder: 'dist/images'
+		},
 
-    }
+		jpg: {
+			extensions: ['jpg', 'jpeg'],
+			sources: '**/*.{jpg,jpeg}',
+			sourcesFolder: ['views','src/images'],
+			outputFolder: 'dist/images'
+		}
 
   },
 
@@ -135,3 +170,7 @@ module.exports = __deepMerge({
   }
 
 }, __projectConfig);
+
+config.dist.jpg = __deepMerge(config.dist.images, config.dist.jpg);
+
+module.exports = config;

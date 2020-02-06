@@ -25,10 +25,10 @@ commander
   .action(what => {
     switch(what) {
       case 'js':
-        require('./commands/squidJs')();
+        require('./commands/squid')(['js','ts','coffee','jpg']);
       break;
       case 'css':
-        require('./commands/squidCss')();
+        require('./commands/squid')(['scss','sass','css']);
       break;
     }
   });

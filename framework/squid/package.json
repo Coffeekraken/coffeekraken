@@ -14,6 +14,10 @@
   "license": "MIT",
   "scripts": {},
   "_moduleAliases": {
+    "@coffeekraken/webpack-coffee-loader": "../../webpack/coffee-loader",
+    "@coffeekraken/webpack-coffeepack": "../../webpack/coffeepack",
+    "@coffeekraken/webpack-concat-dependencies-vendors-plugin": "../../webpack/concat-dependencies-vendors-plugin",
+    "@coffeekraken/webpack-lazy-dom-load-plugin": "../../webpack/lazy-dom-load-plugin",
     "@coffeekraken/sugar/js": "../../util/sugar/dist/js",
     "@coffeekraken/sugar/node": "../../util/sugar/src/node"
   },

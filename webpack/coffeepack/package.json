@@ -1,0 +1,53 @@
+{
+  "name": "@coffeekraken/webpack-coffeepack",
+  "version": "0.0.1",
+  "description": "Coffeepack let you configure your webpack instance as simply and pleasant as drink a coffee. It will handle the compilation/optimization of your CSS (css,sass,scss), JS (js,coffee,ts), images (jpg,png,gif,webp,svg) and more...",
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Coffeekraken/coffeekraken/tree/master/webpack/coffeepack"
+  },
+  "keywords": [
+    "coffee",
+    "kraken",
+    "coffeekraken",
+    "webpack",
+    "lazy",
+    "load",
+    "lazyload",
+    "compilation",
+    "optimization",
+    "css",
+    "scss",
+    "sass",
+    "js",
+    "coffeescript",
+    "typescript",
+    "images",
+    "jpg",
+    "jpeg",
+    "png",
+    "gif",
+    "svg",
+    "webp",
+    "concat",
+    "concatenation"
+  ],
+  "author": "Coffeekraken <hello@coffeekraken.io>",
+  "contributors": [
+    {
+      "name": "Olivier Bossel",
+      "email": "olivier.bossel@gmail.com",
+      "url": "http://olivierbossel.com"
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://coffeekraken.io",
+  "dependencies": {
+    "@coffeekraken/sugar": "^1.0.23",
+    "glob": "^7.1.6",
+    "webpack": "^4.41.5",
+    "webpack-import-glob-loader": "^1.6.3"
+  },
+  "devDependencies": {}
+}

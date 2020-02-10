@@ -1,5 +1,6 @@
 import __parse from './parse';
 import __unquote from './unquote';
+import __upperFirst from './upperFirst';
 
 /**
  * @name                        parseArgs
@@ -31,190 +32,537 @@ import __unquote from './unquote';
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+
+const availableTypes = [
+  'number',
+  'bigint',
+  'string',
+  'boolean',
+  'null',
+  'undefined',
+  'object',
+  'symbol',
+  'function',
+  'object',
+  'array'
+];
+
+function parseArgsString(string, arg) {
+
+  string = string.split(' ');
+  string = string.filter((s) => {
+    if (s.trim() === '') return false;
+    return true;
+  });
+  const argObj = {};
+
+  string.forEach((s) => {
+    if (availableTypes.indexOf(s.toLowerCase()) !== -1) {
+      argObj.types = s.trim().split(',');
+    } else if (s.trim().slice(0,2) === '--') {
+      argObj.bigName = s.trim().slice(2);
+    } else if (s.trim().slice(0,1) === '-') {
+      argObj.smallName = s.trim().slice(1);
+    } else if (s.trim().slice(0,1) === '/' && s.trim().slice(-1) === '/') {
+      argObj.regex = s.trim();
+    } else if (s.trim().slice(0,1) === '"' && s.trim().slice(-1) === '"') {
+      argObj.default = s.trim().slice(1,-1).split(',');
+      argObj.default = argObj.default.map((v) => {
+        return __parse(v);
+      });
+      if (argObj.default.length <= 1) {
+        argObj.default = argObj.default[0];
+      }
+    }
+  });
+
+  // check the "default" value depending on the alloewd types
+  if (argObj.default !== undefined) {
+    if (Array.isArray(argObj.default) && argObj.types.indexOf('Array') !== -1) {
+
+    } else if (argObj.types.indexOf(__upperFirst(typeof argObj.default)) === -1) {
+      throw new Error(`The "default" value setted to "${argObj.default}" for the argument "${arg}" is of type "${__upperFirst(typeof argObj.default)}" and does not fit with the allowed types which are "${argObj.types.join(',')}"...`);
+    }
+  }
+
+  return argObj;
+}
+
 export default (string, args) => {
+
+  if ( ! string) return;
+
+  let argsObj = Object.assign(args);
+
+  // handle the "alone" atruments that mean boolean true
+  const aloneSmallArgs = string.match(/\s(-[a-zA-Z])\s-/g);
+  const lastAloneSmallArgs = string.match(/\s(-[a-zA-Z])\s?$/g);
+  const aloneBigArgs = string.match(/\s(--[a-zA-Z-]+)\s-/g);
+  const lastAloneBigArgs = string.match(/\s(--[a-zA-Z-]+)\s?$/g);
+  if (aloneSmallArgs) {
+    aloneSmallArgs.forEach((arg) => {
+      const splitedArg = arg.trim().split(' ');
+      string = string.replace(arg, ` ${splitedArg[0]} true -`);
+    });
+  }
+  if (lastAloneSmallArgs) {
+    lastAloneSmallArgs.forEach((arg) => {
+      const splitedArg = arg.trim().split(' ');
+      string = string.replace(arg, ` ${splitedArg[0]} true `);
+    });
+  }
+  if (aloneBigArgs) {
+    aloneBigArgs.forEach((arg) => {
+      const splitedArg = arg.trim().split(' ');
+      string = string.replace(arg, ` ${splitedArg[0]} true -`);
+    });
+  }
+  if (lastAloneBigArgs) {
+    lastAloneBigArgs.forEach((arg) => {
+      const splitedArg = arg.trim().split(' ');
+      string = string.replace(arg, ` ${splitedArg[0]} true `);
+    });
+  }
 
   string = ' ' + string + ' ';
 
-  const keys = Object.keys(args);
-  const resultObject = {};
+  let parts = string.split(/(--?[a-zA-Z-]+)/g);
 
-  // search for the "-a 'something cool'" style
-  const regSmallArg = /\s-[a-z]\s(?![-])[\S]+\s/g;
-  const regBigArg = /\s--[a-z]+\s(?![-])[\S]+\s/g;
-  const regRestArg = /(?![-])[\S]+/g;
+  parts = parts.map((p) => {
+    return p.trim();
+  });
+  parts = parts.filter((p) => {
+    if (p.trim() === '') return false;
+    return true;
+  });
 
-  const smallArgs = string.match(regSmallArg);
-  if (smallArgs) {
-    smallArgs.forEach((item, i) => {
-      string = string.replace(item, ' ');
-    });
-  }
+  const argsValues = {};
+  let partsToDelete = [];
 
-  const bigArgs = string.match(regBigArg);
-  if (bigArgs) {
-    bigArgs.forEach((item, i) => {
-      string = string.replace(item, ' ');
-    });
-  }
+  // loop on every parts
+  parts.forEach((part, j) => {
 
-  const restArgs = string.match(regRestArg);
-  if (restArgs) {
-    restArgs.forEach((item, i) => {
-      string = string.replace(item, ' ');
-    });
-  }
+    let smallName = null, bigName = null;
 
-  // loop on each keys to search for corresponding value
-  for (let _i=0; _i<keys.length; _i++) {
-    const k = keys[_i];
-
-    let keyArgs = args[k];
-    let keyString = null;
-    let keyPreprocess = null;
-
-    if (typeof keyArgs === 'object') {
-      if (keyArgs.args === undefined || typeof keyArgs.args !== 'string') {
-        console.error('sugar.js.string.parseArgs', `You have passed an object as argument for the key "${k}" but this object has to have an "args" property of type "String" and here's your object passed...`, keyArgs);
-        return {};
-      }
-      if (keyArgs.preprocess === undefined || typeof keyArgs.preprocess !== 'function') {
-        console.error('sugar.js.string.parseArgs', `You have passed an object as argument for the key "${k}" but this object has to have an "preprocess" property of type "Function" and here's your object passed...`, keyArgs);
-        return {};
-      }
-      keyString = ' ' + keyArgs.args + ' ';
-      keyPreprocess = keyArgs.preprocess;
-    } else {
-      keyString = ' ' + keyArgs + ' ';
+    if (part.slice(0,2) === '--') {
+      bigName = part.slice(2);
+    } else if (part.slice(0,1) === '-') {
+      smallName = part.slice(1);
     }
 
-    const regKeyArgsType = /\s[a-zA-Z]+/g;
-    const regKeyArgsSmallName = /\s-[a-zA-Z]\s/g;
-    const regKeyArgsBigName = /\s--[a-zA-Z]+\s/g;
-    const regKeyArgsRegex = /\s\/[\S]+\/\s/g;
-    const regKeyArgsDefault = /['|"|`](.*)['|"|`]/g
+    if (smallName) {
 
-    let type = keyString.match(regKeyArgsType);
-    if (type && type.length) type = type[0].trim();
+      let argName = null, argsString = null, value = null;
 
-    let smallName = keyString.match(regKeyArgsSmallName);
-    if (smallName && smallName.length) smallName = smallName[0].trim();
+      for (let i=0; i<Object.keys(args).length; i++) {
+        argsString = ` ${args[Object.keys(args)[i]]} `;
+        if (argsString.includes(` -${smallName} `)) {
+          argName = Object.keys(args)[i];
+          break;
+        }
+      }
 
-    let bigName = keyString.match(regKeyArgsBigName);
-    if (bigName && bigName.length) bigName = bigName[0].trim();
+      const argObj = parseArgsString(argsString, argName);
 
-    let regex = keyString.match(regKeyArgsRegex);
-    if (regex && regex.length) regex = regex[0].trim().slice(1,-1);
+      value = parts[j+1].split(',');
+      value = value.map((v) => {
+        return availableTypes.indexOf(v.toLowerCase()) === -1 ? __parse(v) : v;
+      });
+      if (value.length <= 1) {
+        value = value[0];
+      }
 
-    let defaultValue = keyString.match(regKeyArgsDefault);
-    if (defaultValue && defaultValue.length === 1) defaultValue = __unquote(defaultValue[0]);
+      partsToDelete.push(part);
 
-    if (smallArgs && smallName && resultObject[k] === undefined) {
-      for (let i=0; i<smallArgs.length; i++) {
-        let item = smallArgs[i];
-        item = item.trim();
-        const key = item.slice(0,2);
-
-        if (key !== smallName) continue;
-
-        let value = item.slice(2).trim();
-        value = __unquote(value);
-
-        // check that the value match the args
-        if (type && typeof __parse(value) !== type.toLowerCase()) continue;
-        if (regex) {
-          const r = new RegExp(regex);
-          if ( ! r.test(value)) continue;
-          // check if some parentheses exists
-          const matches = value.match(regex);
-          if (matches[1] !== undefined) {
-            value = matches[1];
+      if (typeof value === 'string') {
+        if (value.slice(0,2) === '--' || value.slice(0,1) === '-') {
+          if (argObj.types.indexOf('Boolean') === -1) {
+            throw new Error(`The argument "${argName}" want to set his value to "true" but does not accept "Boolean" as type... Here's are the allowed types: "${argObj.types.join(',')}"`);
+          } else {
+            value = true;
           }
-        }
-
-        smallArgs.splice(i, 1);
-        if (keyPreprocess) {
-          resultObject[k] = keyPreprocess(__parse(value));
         } else {
-          resultObject[k] = __parse(value);
+          partsToDelete.push(parts[j+1]);
         }
-        break;
-
+        if (argObj.regex && ! new RegExp(argObj.regex.slice(1,-1), 'g').test(value)) {
+          throw new Error(`The argument "${argName}"want to set his value to "${value}" but this does not match the argument regex "${argObj.regex}"...`);
+        }
+      } else {
+        partsToDelete.push(parts[j+1]);
       }
-    }
 
-    if (bigArgs && bigName && resultObject[k] === undefined) {
-      for (let i=0; i<bigArgs.length; i++) {
-        let item = bigArgs[i];
-        item = item.trim();
-        const argKey = item.match(/--[\S]+/g)[0];
+      delete argsObj[argName];
 
-        if (argKey !== bigName) continue;
+      argsValues[argName] = {
+        value: value,
+        types: argObj.types,
+        regex: argObj.regex || undefined,
+        default: argObj.default
+      };
 
-        item = item.replace(argKey, '').trim();
-        let value = item;
-        value = __unquote(value);
+    } else if (bigName) {
 
-        // check that the value match the args
-        if (type && typeof __parse(value) !== type.toLowerCase()) continue;
-        if (regex) {
-          const r = new RegExp(regex);
-          if ( ! r.test(value)) continue;
-          // check if some parentheses exists
-          const matches = value.match(regex);
-          if (matches[1] !== undefined) {
-            value = matches[1];
+      let argName = null, argsString = null, value = null;
+
+      for (let i=0; i<Object.keys(args).length; i++) {
+        argsString = ` ${args[Object.keys(args)[i]]} `;
+        if (argsString.includes(` --${bigName} `)) {
+          argName = Object.keys(args)[i];
+          break;
+        }
+      }
+
+      const argObj = parseArgsString(argsString, argName);
+
+      value = parts[j+1].split(',');
+      value = value.map((v) => {
+        return availableTypes.indexOf(v.toLowerCase()) === -1 ? __parse(v) : v;
+      });
+      if (value.length <= 1) {
+        value = value[0];
+      }
+
+      partsToDelete.push(part);
+
+      if (typeof value === 'string') {
+        if (value.slice(0,2) === '--' || value.slice(0,1) === '-') {
+          if (argObj.types.indexOf('Boolean') === -1) {
+            throw new Error(`The argument "${argName}" want to set his value to "true" but does not accept "Boolean" as type... Here's are the allowed types: "${argObj.types.join(',')}"`);
+          } else {
+            value = true;
           }
-        }
-
-        bigArgs.splice(i, 1);
-        if (keyPreprocess) {
-          resultObject[k] = keyPreprocess(__parse(value));
         } else {
-          resultObject[k] = __parse(value);
+          partsToDelete.push(parts[j+1]);
         }
-        break;
-
+        if (argObj.regex && ! new RegExp(argObj.regex.slice(1,-1), 'g').test(value)) {
+          throw new Error(`The argument "${argName}"want to set his value to "${value}" but this does not match the argument regex "${argObj.regex}"...`);
+        }
+      } else {
+        partsToDelete.push(parts[j+1]);
       }
+
+      delete argsObj[argName];
+
+      argsValues[argName] = {
+        value: value,
+        types: argObj.types,
+        regex: argObj.regex || undefined,
+        default: argObj.default
+      };
     }
 
-    if (restArgs && resultObject[k] === undefined) {
-      for (let i=0; i<restArgs.length; i++) {
-        let item = restArgs[i];
-        item = item.trim();
-        let value = item;
-        value = __unquote(value);
+  });
 
-        // check that the value match the args
-        if (type && typeof __parse(value) !== type.toLowerCase()) {
-          continue;
-        }
-        if (regex) {
-          const r = new RegExp(regex);
-          if ( ! r.test(value)) continue;
-          // check if some parentheses exists
-          const matches = value.match(regex);
-          if (matches[1] !== undefined) {
-            value = matches[1];
+    // filter the parts already handled
+  parts = parts.filter((p, i) => {
+    if (partsToDelete.indexOf(p) !== -1) return false;
+    return true;
+  });
+
+  // loop on the remaining parts
+  parts.forEach((v) => {
+
+    const valuesArray = v.match(/\w+|"[^"]+"/g)
+
+    valuesArray.forEach((value) => {
+      value = __unquote(value).split(',');
+      value = value.map((v) => {
+        return availableTypes.indexOf(v.toLowerCase()) === -1 ? __parse(v) : v;
+      });
+      if (value.length <= 1) {
+        value = value[0];
+      }
+
+      for (let i=0; i<Object.keys(argsObj).length; i++) {
+        const argName = Object.keys(argsObj)[i];
+        const argsString = args[argName];
+        const argObj = parseArgsString(argsString, argName);
+
+        const type = Array.isArray(value) ? 'array' : typeof value;
+
+        if ( ! argsValues[argName] && argObj.types.indexOf(__upperFirst(type)) !== -1) {
+
+          if (typeof value === 'string' && argObj.regex && ! new RegExp(argObj.regex, 'g').test(value)) {
+            continue;
           }
+
+          delete argsObj[argName];
+
+          argsValues[argName] = {
+            value,
+            types: argObj.types,
+            regex: argObj.regex || undefined,
+            default: argObj.default
+          };
         }
 
-        restArgs.splice(i, 1);
-        if (keyPreprocess) {
-          resultObject[k] = keyPreprocess(__parse(value));
-        } else {
-          resultObject[k] = __parse(value);
-        }
-        break;
       }
-    }
 
-    if (resultObject[k] === undefined && defaultValue !== undefined) {
-      resultObject[k] = __parse(defaultValue);
-    }
+    });
 
-  }
+  });
 
-  return resultObject;
+  Object.keys(argsObj).forEach((k) => {
+
+    if (argsValues[k]) return;
+
+    const argObj = parseArgsString(argsObj[k], k);
+
+    const value = argObj.default;
+
+    delete argsObj[k];
+
+    argsValues[k] = {
+      value: typeof value === 'string' && availableTypes.indexOf(value.toLowerCase()) === -1 ? __parse(value) : value,
+      types: argObj.types,
+      regex: argObj.regex || undefined,
+      default: argObj.default
+    };
+
+
+  });
+
+  return argsValues;
+
+  // // handle the "alone" atruments that mean boolean true
+  // const aloneSmallArgs = string.match(/\s(-[a-zA-Z])\s-/g);
+  // const lastAloneSmallArgs = string.match(/\s(-[a-zA-Z])\s?$/g);
+  // const aloneBigArgs = string.match(/\s(--[a-zA-Z-]+)\s-/g);
+  // const lastAloneBigArgs = string.match(/\s(--[a-zA-Z-]+)\s?$/g);
+  // if (aloneSmallArgs) {
+  //   aloneSmallArgs.forEach((arg) => {
+  //     const splitedArg = arg.trim().split(' ');
+  //     string = string.replace(arg, ` ${splitedArg[0]} true -`);
+  //   });
+  // }
+  // if (lastAloneSmallArgs) {
+  //   lastAloneSmallArgs.forEach((arg) => {
+  //     const splitedArg = arg.trim().split(' ');
+  //     string = string.replace(arg, ` ${splitedArg[0]} true `);
+  //   });
+  // }
+  // if (aloneBigArgs) {
+  //   aloneBigArgs.forEach((arg) => {
+  //     const splitedArg = arg.trim().split(' ');
+  //     string = string.replace(arg, ` ${splitedArg[0]} true -`);
+  //   });
+  // }
+  // if (lastAloneBigArgs) {
+  //   lastAloneBigArgs.forEach((arg) => {
+  //     const splitedArg = arg.trim().split(' ');
+  //     string = string.replace(arg, ` ${splitedArg[0]} true `);
+  //   });
+  // }
+  //
+  // const keys = Object.keys(args);
+  // const resultObject = {};
+  //
+  //
+  //
+  // // search for the "-a 'something cool'" style
+  // const regSmallArg = /\s-[a-zA-Z]\s(?![-])[\S]+\s/g;
+  // const regBigArg = /\s--[a-zA-Z-]+\s(?![-])[\S]+\s/g;
+  // const regRestArg = /(?![-])[\S]+/g;
+  //
+  // const smallArgs = string.match(regSmallArg);
+  // if (smallArgs) {
+  //   smallArgs.forEach((item, i) => {
+  //     string = string.replace(item, ' ');
+  //   });
+  // }
+  //
+  // const bigArgs = string.match(regBigArg);
+  // if (bigArgs) {
+  //   bigArgs.forEach((item, i) => {
+  //     string = string.replace(item, ' ');
+  //   });
+  // }
+  //
+  // const restArgs = string.match(regRestArg);
+  // if (restArgs) {
+  //   restArgs.forEach((item, i) => {
+  //     string = string.replace(item, ' ');
+  //   });
+  // }
+  //
+  // // loop on each keys to search for corresponding value
+  // for (let _i=0; _i<keys.length; _i++) {
+  //   const k = keys[_i];
+  //
+  //   let keyArgs = args[k];
+  //   let keyString = null;
+  //   let keyPreprocess = null;
+  //
+  //   if (typeof keyArgs === 'object') {
+  //     if (keyArgs.args === undefined || typeof keyArgs.args !== 'string') {
+  //       console.error('sugar.js.string.parseArgs', `You have passed an object as argument for the key "${k}" but this object has to have an "args" property of type "String" and here's your object passed...`, keyArgs);
+  //       return {};
+  //     }
+  //     if (keyArgs.preprocess === undefined || typeof keyArgs.preprocess !== 'function') {
+  //       console.error('sugar.js.string.parseArgs', `You have passed an object as argument for the key "${k}" but this object has to have an "preprocess" property of type "Function" and here's your object passed...`, keyArgs);
+  //       return {};
+  //     }
+  //     keyString = ' ' + keyArgs.args + ' ';
+  //     keyPreprocess = keyArgs.preprocess;
+  //   } else {
+  //     keyString = ' ' + keyArgs + ' ';
+  //   }
+  //
+  //   const regKeyArgsType = /\s[a-zA-Z]+/g;
+  //   const regKeyArgsSmallName = /\s-[a-zA-Z]\s/g;
+  //   const regKeyArgsBigName = /\s--[a-zA-Z-]+\s/g;
+  //   const regKeyArgsRegex = /\s\/[\S]+\/\s/g;
+  //   const regKeyArgsDefault = /['|"|`](.*)['|"|`]/g
+  //
+  //   let type = keyString.match(regKeyArgsType);
+  //   if (type && type.length) type = type[0].trim();
+  //
+  //   let smallName = keyString.match(regKeyArgsSmallName);
+  //   if (smallName && smallName.length) smallName = smallName[0].trim();
+  //
+  //   let bigName = keyString.match(regKeyArgsBigName);
+  //   if (bigName && bigName.length) bigName = bigName[0].trim();
+  //
+  //   let regex = keyString.match(regKeyArgsRegex);
+  //   if (regex && regex.length) regex = regex[0].trim().slice(1,-1);
+  //
+  //   let defaultValue = keyString.match(regKeyArgsDefault);
+  //   if (defaultValue && defaultValue.length === 1) defaultValue = __unquote(defaultValue[0]);
+  //
+  //   if (smallArgs && smallName && resultObject[k] === undefined) {
+  //     for (let i=0; i<smallArgs.length; i++) {
+  //       let item = smallArgs[i];
+  //       item = item.trim();
+  //       const key = item.slice(0,2);
+  //
+  //       if (key !== smallName) continue;
+  //
+  //       let value = item.slice(2).trim();
+  //       value = __unquote(value);
+  //
+  //       // check that the value match the args
+  //       if (type && typeof __parse(value) !== type.toLowerCase() && availableTypes.indexOf(type.toLowerCase()) === -1) continue;
+  //       if (regex) {
+  //         const r = new RegExp(regex);
+  //         if ( ! r.test(value)) continue;
+  //         // check if some parentheses exists
+  //         const matches = value.match(regex);
+  //         if (matches[1] !== undefined) {
+  //           value = matches[1];
+  //         }
+  //       }
+  //
+  //       smallArgs.splice(i, 1);
+  //       if (keyPreprocess) {
+  //         if (typeof value === 'string' && availableTypes.indexOf(value) !== -1) {
+  //           resultObject[k] = keyPreprocess(value);
+  //         } else {
+  //           resultObject[k] = keyPreprocess(__parse(value));
+  //         }
+  //       } else {
+  //         if (typeof value === 'string' && availableTypes.indexOf(value) !== -1) {
+  //           resultObject[k] = value;
+  //         } else {
+  //           resultObject[k] = __parse(value);
+  //         }
+  //       }
+  //       break;
+  //
+  //     }
+  //   }
+  //
+  //   if (bigArgs && bigName && resultObject[k] === undefined) {
+  //     for (let i=0; i<bigArgs.length; i++) {
+  //       let item = bigArgs[i];
+  //       item = item.trim();
+  //       const argKey = item.match(/--[\S]+/g)[0];
+  //
+  //       if (argKey !== bigName) continue;
+  //
+  //       item = item.replace(argKey, '').trim();
+  //       let value = item;
+  //       value = __unquote(value);
+  //
+  //       // check that the value match the args
+  //       if (type && typeof __parse(value) !== type.toLowerCase() && availableTypes.indexOf(type.toLowerCase()) === -1) continue;
+  //
+  //       if (regex) {
+  //         const r = new RegExp(regex);
+  //         if ( ! r.test(value)) continue;
+  //         // check if some parentheses exists
+  //         const matches = value.match(regex);
+  //         if (matches[1] !== undefined) {
+  //           value = matches[1];
+  //         }
+  //       }
+  //
+  //       bigArgs.splice(i, 1);
+  //       if (keyPreprocess) {
+  //         if (availableTypes.indexOf(value.toLowerCase()) !== -1) {
+  //           resultObject[k] = keyPreprocess(value);
+  //         } else {
+  //           resultObject[k] = keyPreprocess(__parse(value));
+  //         }
+  //       } else {
+  //         if (availableTypes.indexOf(value.toLowerCase()) !== -1) {
+  //           resultObject[k] = value;
+  //         } else {
+  //           resultObject[k] = __parse(value);
+  //         }
+  //       }
+  //       break;
+  //
+  //     }
+  //   }
+  //
+  //   console.log(restArgs, k);
+  //
+  //   if (restArgs && resultObject[k] === undefined) {
+  //     for (let i=0; i<restArgs.length; i++) {
+  //       let item = restArgs[i];
+  //       item = item.trim();
+  //       let value = item;
+  //       value = __unquote(value);
+  //
+  //       // check that the value match the args
+  //       if (type && typeof __parse(value) !== type.toLowerCase() && availableTypes.indexOf(type.toLowerCase()) === -1) {
+  //         continue;
+  //       }
+  //       if (regex) {
+  //         const r = new RegExp(regex);
+  //         if ( ! r.test(value)) continue;
+  //         // check if some parentheses exists
+  //         const matches = value.match(regex);
+  //         if (matches[1] !== undefined) {
+  //           value = matches[1];
+  //         }
+  //       }
+  //
+  //       restArgs.splice(i, 1);
+  //       if (keyPreprocess) {
+  //         if (availableTypes.indexOf(value.toLowerCase()) !== -1) {
+  //           resultObject[k] = keyPreprocess(value);
+  //         } else {
+  //           resultObject[k] = keyPreprocess(__parse(value));
+  //         }
+  //       } else {
+  //         if (availableTypes.indexOf(value.toLowerCase()) !== -1) {
+  //           resultObject[k] = value;
+  //         } else {
+  //           resultObject[k] = __parse(value);
+  //         }
+  //       }
+  //       break;
+  //     }
+  //   }
+  //
+  //   if (resultObject[k] === undefined && defaultValue !== undefined) {
+  //     resultObject[k] = __parse(defaultValue);
+  //   }
+  //
+  // }
+  //
+  // return resultObject;
 
   // // split the string without the quotes
   // const parts = string.match(/(('|").*?('|")|[^('|")\s]+)+(?=\s*|\s*$)/g);

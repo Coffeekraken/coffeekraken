@@ -12,8 +12,12 @@ const __filesize = require('file-size');
 const __TerserPlugin = require('terser-webpack-plugin');
 const __base64 = require('@coffeekraken/sugar/node/crypt/base64');
 const __CoffeePack = require('@coffeekraken/webpack-coffeepack');
+const __initEnv = require('@coffeekraken/sugar/node/dev/initEnv');
 
 const projectPackageJson = require(process.cwd() + '/package.json');
+
+// init env
+__initEnv();
 
 module.exports = (compile = ['js']) => {
 
@@ -25,11 +29,11 @@ module.exports = (compile = ['js']) => {
 
   });
 
-  console.log(coffeepack.loaders());
-  console.log(coffeepack.plugins());
-  console.log(coffeepack.webpackConfig());
-
-  console.log(coffeepack.entry());
+  // console.log(coffeepack.webpack.loaders());
+  // console.log(coffeepack.webpack.plugins());
+  // console.log(coffeepack.webpack.config());
+  //
+  // console.log(coffeepack.webpack.entry());
 
   // __coffeeLoader.options({
   //   compile: compile

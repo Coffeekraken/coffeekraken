@@ -2,35 +2,27 @@ const __webpack = require('webpack');
 const __deepMerge = require('@coffeekraken/sugar/js/object/deepMerge');
 const __log = require('@coffeekraken/sugar/node/log/log');
 const __glob = require('glob');
+const __bindMethods = require('bind-methods');
+const __checkArgs = require('@coffeekraken/sugar/js/dev/checkArgs');
 
 const __config = require('./config');
 
 const __path = require('path');
 const __fs = require('fs');
 
-module.exports = class CoffeePack {
+class CoffeePack {
 
   /**
-   * @name                    _loaders
-   * @namespace               webpack.coffeepack.CoffeePack
-   * @type                    Object
+   * @name                        _processors
+   * @namespace                   webpack.coffeepack.CoffeePack
+   * @type                        Array
    *
-   * Store all the loaders available through coffeepack
+   * Store all the registered processors
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _loaders = {};
+  _processors = [];
 
-  /**
-   * @name                    _plugins
-   * @namespace               webpack.coffeepack.CoffeePack
-   * @type                    Object
-   *
-   * Store all the plugins available through coffeepack
-   *
-   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _plugins = {};
 
   constructor(config = {}) {
 
@@ -97,32 +89,230 @@ module.exports = class CoffeePack {
         quality: 70
       },
 
-      loaders: [
-        '@coffeekraken/webpack-coffee-loader',
-        'webpack-import-glob-loader'
-      ],
-      plugins: [
-        '@coffeekraken/webpack-concat-dependencies-vendors-plugin',
-        '@coffeekraken/webpack-lazy-dom-load-plugin'
-      ],
+      // loaders: [
+      //   '@coffeekraken/webpack-coffee-loader',
+      //   'webpack-import-glob-loader'
+      // ],
+      // plugins: [
+      //   '@coffeekraken/webpack-concat-dependencies-vendors-plugin',
+      //   '@coffeekraken/webpack-lazy-dom-load-plugin'
+      // ],
       vendors: {
         webpack: __config.default.webpack
       }
     }, config);
 
-    // handle the "webpack.config.js" file at the project root
-    if (__fs.existsSync(process.cwd() + '/webpack.config.js')) {
-      this._config.vendors.webpack = __deepMerge(this._config.vendors.webpack, require(process.cwd() + '/webpack.config.js'));
-    }
+    // init the CoffeePackWebpack instance
+    this.webpack = new CoffeePackWebpack(this);
 
     // register default loaders
-    this.registerLoader('@coffeekraken/webpack-coffee-loader', /\.*$/, {});
-    this.registerLoader('webpack-import-glob-loader', /\.js$/, {});
+    this.webpack.registerLoader('@coffeekraken/webpack-coffee-loader', /\.*$/, {});
+    this.webpack.registerLoader('webpack-import-glob-loader', /\.js$/, {});
 
     // register default plugins
-    this.registerPlugin('@coffeekraken/webpack-concat-dependencies-vendors-plugin', {});
-    this.registerPlugin('@coffeekraken/webpack-lazy-dom-load-plugin', {});
+    this.webpack.registerPlugin('@coffeekraken/webpack-concat-dependencies-vendors-plugin', {});
+    this.webpack.registerPlugin('@coffeekraken/webpack-lazy-dom-load-plugin', {});
 
+    this.registerProcessor(['jpg','jpeg'], (filePath, source, callback) => {
+
+    });
+
+  }
+
+  /**
+   * @name                    registerProcessor
+   * @namespace               webpack.coffeepack.CoffeePack
+   * @type                    Function
+   *
+   * Register a processor function that will take as parameters the file extensions that
+   * it will handle, the function itself that will process the files and optionaly a "weight"
+   * that specify if this processor function has to be called preferably first, middle or last...
+   * See the weight of internal processors if you need to register yours in the middle...
+   *
+   * A processor function is a simple function that will take as arguments the file source path, the file
+   * source code and the callback function to call at the end. You can make absolutely whatever you want to the source code but you have to call the callback function
+   * and passing it the processed source code in order that it can be processed by the others registered processors...
+   *
+   * @param             {Array}               extensions                The file extensions that need to be processed by this function
+   * @param             {Function}            processor                 The actual processor function that will take as arguments the source path and the source code of the file.
+   * @param             {Number}              [weight=null]             The weight of the processor. This define the order of processors oxecutions
+   *
+   * @example           js
+   * coffeepack.registerProcessor(['jpg','jpeg'], (filePath, source, callback) => {
+   *    // do something with the source code...
+   *    callback(source);
+   * }, 10);
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  registerProcessor(extensions, processor, weight = null) {
+    // check arguments
+    // if ( ! extensions || typeof)
+
+    __checkArgs(this.registerProcessor, arguments, {
+      extensions: 'Array "hello,world" --of String --allow-undefined -n -l 10',
+      // processor: 'Function'
+    });
+
+    // register the processor
+    this._processors.push({
+      extensions,
+      processor,
+      weight
+    });
+  }
+
+}
+
+class CoffeePackWebpack {
+
+  /**
+   * @name                    _loaders
+   * @namespace               webpack.coffeepack.CoffeePack
+   * @type                    Object
+   *
+   * Store all the loaders available through coffeepack
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _loaders = {};
+
+  /**
+   * @name                    _plugins
+   * @namespace               webpack.coffeepack.CoffeePack
+   * @type                    Object
+   *
+   * Store all the plugins available through coffeepack
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _plugins = {};
+
+  /**
+   * @name                    _coffeepack
+   * @namespace               webpack.coffeepack.CoffeePackWebpack
+   * @type                    CoffeePack
+   *
+   * Store the CoffeePack instance
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _coffeepack = null;
+
+  /**
+   * @name                     constructor
+   * @namespace                webpack.coffeepack.CoffeePackWebpack
+   * @type                      Function
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  constructor(coffeepack) {
+    this._coffeepack = coffeepack;
+
+    // handle the "webpack.config.js" file at the project root
+    if (__fs.existsSync(process.cwd() + '/webpack.config.js')) {
+      this._coffeepack._config.vendors.webpack = __deepMerge(this._coffeepack._config.vendors.webpack, require(process.cwd() + '/webpack.config.js'));
+    }
+  }
+
+  /**
+   * @name                        registerLoader
+   * @namespace                   webpack.coffeepack.CoffeePack
+   * @type                        Function
+   *
+   * Register a new loader by passing his name, file test and options
+   *
+   * @param               {String}              name                 The loader name. This has to be the require path to the loader...
+   * @param               {RegExp}              [test=/\.*$/]        The regex test that will determine if a file has to passe through the loader or not
+   * @param               {Object}              [options={}]         The loader options
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  registerLoader(name, test = /\.*$/, options = {}) {
+    // register a new loader to use
+    this._loaders[name] = {
+      test: test,
+      use: [{
+        loader: name,
+        options: __deepMerge(__config.default.loaders.coffeeLoader, options)
+      }]
+    };
+  }
+
+  /**
+   * @name                                loaders
+   * @namespace                           webpack.coffeepack.CoffeePack
+   * @type                                Function
+   *
+   * Return the "module" webpack object with all the registered loaders
+   *
+   * @return              {Object}                    The "module" webpack object
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  loaders() {
+
+    const moduleObj = {
+      rules: []
+    };
+
+    Object.keys(this._loaders).forEach((loader) => {
+      // if (this._config.loaders.indexOf(loader) !== -1) {
+        moduleObj.rules.push(this._loaders[loader]);
+      // }
+    });
+
+    // return the module object with all the loaders configurated
+    return moduleObj;
+
+  }
+
+  /**
+   * @name                                loaders
+   * @namespace                           webpack.coffeepack.CoffeePack
+   * @type                                Function
+   *
+   * Return the "module" webpack object with all the registered loaders
+   *
+   * @return              {Object}                    The "module" webpack object
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  plugins() {
+
+    const pluginsArray = [];
+
+    Object.keys(this._plugins).forEach((plugin) => {
+      // if (this._config.plugins.indexOf(plugin) !== -1) {
+        const pluginObj = this._plugins[plugin];
+        pluginsArray.push(new pluginObj.class(pluginObj.options));
+      // }
+    });
+
+    return pluginsArray;
+
+  }
+
+  /**
+   * @name                        registerPlugin
+   * @namespace                   webpack.coffeepack.CoffeePack
+   * @type                        Function
+   *
+   * Register a new plugin by passing his name, class and options
+   *
+   * @param               {String}              name                 The plugin name. This has to be the require path to the loader...
+   * @param               {Object}              [options={}]         The plugin options
+   * @param               {RegExp}              [cls=null]           The plugin class if the "require(name)" has not returned the class
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  registerPlugin(name, options = {}, cls = null) {
+
+    // register a new plugin to use
+    this._plugins[name] = {
+      class: require(name) || cls,
+      options
+    };
   }
 
   /**
@@ -136,9 +326,9 @@ module.exports = class CoffeePack {
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  webpackConfig() {
+  config() {
 
-    const webpackConfig = this._config.vendors.webpack;
+    const webpackConfig = this._coffeepack._config.vendors.webpack;
 
     // plugins
     webpackConfig.plugins = __deepMerge(webpackConfig.plugins, this.plugins());
@@ -168,10 +358,10 @@ module.exports = class CoffeePack {
     let entryObj = {};
 
     // loop on the "compile" option to know which file types we have to handle
-    this._config.compile.forEach((fileType) => {
+    this._coffeepack._config.compile.forEach((fileType) => {
 
       // get the file type options object
-      const optionsObj = this._config[fileType] || {};
+      const optionsObj = this._coffeepack._config[fileType] || {};
 
       // check the configuration object
       if ( ! optionsObj.sourcesFolder) {
@@ -221,105 +411,6 @@ module.exports = class CoffeePack {
 
   }
 
-  /**
-   * @name                        registerLoader
-   * @namespace                   webpack.coffeepack.CoffeePack
-   * @type                        Function
-   *
-   * Register a new loader by passing his name, file test and options
-   *
-   * @param               {String}              name                 The loader name. This has to be the require path to the loader...
-   * @param               {RegExp}              [test=/\.*$/]        The regex test that will determine if a file has to passe through the loader or not
-   * @param               {Object}              [options={}]         The loader options
-   *
-   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  registerLoader(name, test = /\.*$/, options = {}) {
-    // register a new loader to use
-    this._loaders[name] = {
-      test: test,
-      use: [{
-        loader: name,
-        options: __deepMerge(__config.default.loaders.coffeeLoader, options)
-      }]
-    };
-  }
+}
 
-  /**
-   * @name                                loaders
-   * @namespace                           webpack.coffeepack.CoffeePack
-   * @type                                Function
-   *
-   * Return the "module" webpack object with all the registered loaders
-   *
-   * @return              {Object}                    The "module" webpack object
-   *
-   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  loaders() {
-
-    const moduleObj = {
-      rules: []
-    };
-
-    Object.keys(this._loaders).forEach((loader) => {
-      if (this._config.loaders.indexOf(loader) !== -1) {
-        moduleObj.rules.push(this._loaders[loader]);
-      }
-    });
-
-    // return the module object with all the loaders configurated
-    return moduleObj;
-
-  }
-
-  /**
-   * @name                        registerPlugin
-   * @namespace                   webpack.coffeepack.CoffeePack
-   * @type                        Function
-   *
-   * Register a new plugin by passing his name, class and options
-   *
-   * @param               {String}              name                 The plugin name. This has to be the require path to the loader...
-   * @param               {Object}              [options={}]         The plugin options
-   * @param               {RegExp}              [cls=null]           The plugin class if the "require(name)" has not returned the class
-   *
-   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  registerPlugin(name, options = {}, cls = null) {
-    // register a new plugin to use
-    this._plugins[name] = {
-      class: require(name) || cls,
-      options
-    };
-  }
-
-  /**
-   * @name                                loaders
-   * @namespace                           webpack.coffeepack.CoffeePack
-   * @type                                Function
-   *
-   * Return the "module" webpack object with all the registered loaders
-   *
-   * @return              {Object}                    The "module" webpack object
-   *
-   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  plugins() {
-
-    const pluginsArray = [];
-
-    Object.keys(this._plugins).forEach((plugin) => {
-      if (this._config.plugins.indexOf(plugin) !== -1) {
-        const pluginObj = this._plugins[plugin];
-        pluginsArray.push(new pluginObj.class(pluginObj.options));
-      }
-    });
-
-    return pluginsArray;
-
-  }
-
-
-};
-module.exports.plugins = require('./plugins');
+module.exports = CoffeePack;

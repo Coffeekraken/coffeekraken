@@ -11,7 +11,7 @@
  *
  * @example             js
  * import get from '@coffeekraken/sugar/node/object/get';
- * get('myObject.cool.value'); // => 'Hello world'
+ * get(myObject, 'cool.value'); // => 'Hello world'
  *
  */
 module.exports = function(obj, path) {

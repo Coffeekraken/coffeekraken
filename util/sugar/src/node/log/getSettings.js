@@ -34,6 +34,7 @@ module.exports = (transportName = null) => {
   if ( ! Sugar._log.settings) {
     Sugar._log.settings = {
       transportsByType: {
+        default: process.env.NODE_ENV === 'production' ? '' : 'console files',
         error: process.env.NODE_ENV === 'production' ? 'mail' : 'console files',
         warn: process.env.NODE_ENV === 'production' ? 'mail' : 'console files',
         info: process.env.NODE_ENV === 'production' ? '' : 'console files',

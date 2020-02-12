@@ -45,7 +45,7 @@ module.exports = (compile = ['js']) => {
   //   entryObj[`${config.dist.js.outputFolder}/lazyload/${__base64.encrypt(selector)}.js`] = config.lazyload[selector];
   // });
 
-  __log(`Emptying the current javascript dist folder "${config.dist.js.outputFolder}"...`, 'info');
+  __log(`Emptying the current javascript dist folder <bold><cyan>"${config.dist.js.outputFolder}"</cyan></bold>...`, 'info');
   __emptyDirSync(__dirname + '/../../' + config.dist.js.outputFolder);
   __log('Compiling/compressing the javascript bundle files...', 'info');
 

@@ -57,8 +57,24 @@ function parseArgsString(string, arg) {
   const argObj = {};
 
   string.forEach((s) => {
-    if (availableTypes.indexOf(s.toLowerCase()) !== -1) {
-      argObj.types = s.trim().split(',');
+
+    let isArrayOfTypes = true;
+    const parsedString = __parse(s);
+    if (Array.isArray(parsedString)) {
+      for (let i=0; i<parsedString.length; i++) {
+        if (availableTypes.indexOf(parsedString[i].toLowerCase()) === -1) {
+          isArrayOfTypes = false;
+          break;
+        }
+      }
+    } else {
+      isArrayOfTypes = false;
+    }
+
+    if (isArrayOfTypes) {
+      argObj.types = parsedString;
+    } else if (availableTypes.indexOf(s.toLowerCase()) !== -1) {
+      argObj.types = [s.trim()];
     } else if (s.trim().slice(0,2) === '--') {
       argObj.bigName = s.trim().slice(2);
     } else if (s.trim().slice(0,1) === '-') {
@@ -68,7 +84,7 @@ function parseArgsString(string, arg) {
     } else if (s.trim().slice(0,1) === '"' && s.trim().slice(-1) === '"') {
       argObj.default = s.trim().slice(1,-1).split(',');
       argObj.default = argObj.default.map((v) => {
-        return __parse(v);
+        return availableTypes.indexOf(v.toLowerCase()) === -1 ? __parse(v) : v;
       });
       if (argObj.default.length <= 1) {
         argObj.default = argObj.default[0];
@@ -164,8 +180,15 @@ export default (string, args) => {
 
       const argObj = parseArgsString(argsString, argName);
 
-      value = parts[j+1].split(',');
+      const parsedValue = __parse(parts[j+1]);
+      if (Array.isArray(parsedValue)) {
+        value = [parsedValue];
+      } else {
+        value = __unquote(parts[j+1]).split(',');
+      }
+
       value = value.map((v) => {
+        if (Array.isArray(v)) return v;
         return availableTypes.indexOf(v.toLowerCase()) === -1 ? __parse(v) : v;
       });
       if (value.length <= 1) {
@@ -214,8 +237,15 @@ export default (string, args) => {
 
       const argObj = parseArgsString(argsString, argName);
 
-      value = parts[j+1].split(',');
+      const parsedValue = __parse(parts[j+1]);
+      if (Array.isArray(parsedValue)) {
+        value = [parsedValue];
+      } else {
+        value = __unquote(parts[j+1]).split(',');
+      }
+
       value = value.map((v) => {
+        if (Array.isArray(v)) return v;
         return availableTypes.indexOf(v.toLowerCase()) === -1 ? __parse(v) : v;
       });
       if (value.length <= 1) {
@@ -265,8 +295,14 @@ export default (string, args) => {
     const valuesArray = v.match(/\w+|"[^"]+"/g)
 
     valuesArray.forEach((value) => {
-      value = __unquote(value).split(',');
+      const parsedValue = __parse(value);
+      if (Array.isArray(parsedValue)) {
+        value = [parsedValue];
+      } else {
+        value = __unquote(value).split(',');
+      }
       value = value.map((v) => {
+        if (Array.isArray(v)) return v;
         return availableTypes.indexOf(v.toLowerCase()) === -1 ? __parse(v) : v;
       });
       if (value.length <= 1) {
@@ -279,6 +315,8 @@ export default (string, args) => {
         const argObj = parseArgsString(argsString, argName);
 
         const type = Array.isArray(value) ? 'array' : typeof value;
+
+        // console.log(type, argObj);
 
         if ( ! argsValues[argName] && argObj.types.indexOf(__upperFirst(type)) !== -1) {
 

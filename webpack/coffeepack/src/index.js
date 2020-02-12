@@ -113,7 +113,7 @@ class CoffeePack {
     this.webpack.registerPlugin('@coffeekraken/webpack-concat-dependencies-vendors-plugin', {});
     this.webpack.registerPlugin('@coffeekraken/webpack-lazy-dom-load-plugin', {});
 
-    this.registerProcessor(['jpg','jpeg'], (filePath, source, callback) => {
+    this.registerProcessor(['jpg', 'jpeg'], (filePath, source, callback) => {
 
     });
 
@@ -150,8 +150,8 @@ class CoffeePack {
     // if ( ! extensions || typeof)
 
     __checkArgs(this.registerProcessor, arguments, {
-      extensions: 'Array "hello,world" --of String --allow-undefined -n -l 10',
-      // processor: 'Function'
+      extensions: 'Array --of ["String"]',
+      processor: 'Function'
     });
 
     // register the processor

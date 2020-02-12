@@ -1,6 +1,6 @@
-const chalk = require('chalk');
-chalk.enabled = true;
-chalk.level = 3;
+const __consoleHtmlPreset = require('../htmlPresets/console');
+const __breakLineDependingOnSidesPadding = require('../../terminal/breakLineDependingOnSidesPadding');
+const __getDevEnv = require('../../dev/getDevEnv');
 
 /**
  * @name                                    console
@@ -16,32 +16,43 @@ chalk.level = 3;
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = (message, type = 'info', settings = {}) => {
+module.exports = (message, type, settings = {}) => {
   return new Promise((resolve, reject) => {
 
-    // prepend the new log
-    let logMessage = message;
-    switch(type) {
-      case 'error':
-        logMessage = chalk.red(logMessage);
-      break;
-      case 'warn':
-        logMessage = chalk.magenta(logMessage);
-      break;
-      case 'info':
-        logMessage = chalk.yellow(logMessage);
-      break;
-      case 'verbose':
-      case 'debug':
-      case 'silly':
-        logMessage = chalk.blue(logMessage);
-      break;
-      case 'success':
-        logMessage = chalk.green(logMessage);
-      break;
+    // replace the tags
+    message = __consoleHtmlPreset(message);
+
+    const columns = process.env.STDOUT_COLUMNS || process.stdout.columns;
+
+    const symbols = {
+      default: '-',
+      error: '✘',
+      warn: '⚠',
+      info: 'ⓘ',
+      verbose: '＠',
+      debug: '¶',
+      silly: '★',
+      success: '✔'
+    };
+    const symbol = symbols[type] || '-';
+
+    // message = `${symbol}  ${message}`;
+
+    const originalLines = message.split('\n');
+
+    let lines = [];
+
+    for (let i = 0; i<originalLines.length; i++) {
+
+      const l = originalLines[i];
+
+      lines.push(__breakLineDependingOnSidesPadding(l, __getDevEnv('terminal.padding') || 6));
+
     }
 
-    console.log(logMessage);
+    lines = lines.join('\n');
+
+    console.log(`${lines}\n`);
 
     resolve();
 

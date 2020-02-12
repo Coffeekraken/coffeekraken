@@ -22,7 +22,7 @@ const __fs = require('fs');
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function log(message, level = 'info', transports = null) {
+module.exports = function log(message, level = 'default', transports = null) {
   return new Promise((resolve, reject) => {
 
     const settings = __getSettings();

@@ -1,4 +1,4 @@
-const __getAppMeta = require('../../app/getAppMeta');
+const __getAppMeta = require('../../app/getAppMetas');
 const __nodemailer = require('nodemailer');
 
 /**
@@ -33,7 +33,7 @@ module.exports = function mail(message, level = 'info', settings = {}) {
   return new Promise((resolve, reject) => {
 
     // get the app meta
-    const appMeta = __getAppMeta();
+    const appMeta = __getAppMetas();
 
     settings = {
       from: `${level}@${settings.domain || appMeta.domain}`,

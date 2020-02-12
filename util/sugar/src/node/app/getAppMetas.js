@@ -2,7 +2,7 @@ const __existDeep = require('../../../dist/js/object/existDeep');
 
 
 /**
- * @name                  getAppMeta
+ * @name                  getAppMetas
  * @namespace             sugar.node.app
  * @type                  Function
  *
@@ -11,12 +11,12 @@ const __existDeep = require('../../../dist/js/object/existDeep');
  * @return            {Object}                              The meta data object setted
  *
  * @example           js
- * const getAppMeta = require('@coffeekraken/sugar/node/app/getAppMeta');
- * getAppMeta(); // => { name: 'My Cool App', version: '1.0.0' }
+ * const getAppMetas = require('@coffeekraken/sugar/node/app/getAppMetas');
+ * getAppMetas(); // => { name: 'My Cool App', version: '1.0.0' }
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function getAppMeta() {
+module.exports = function getAppMetas() {
   if ( ! __existDeep('global.Sugar._app.metas')) return {};
   return Sugar._app.metas;
 }

@@ -1,5 +1,6 @@
 const __log = require('./log');
 const __splitEveryNChars = require('../../../dist/js/string/splitEveryNChars');
+const __getDevEnv = require('../dev/getDevEnv');
 
 /**
  * @name                logHeader
@@ -20,35 +21,33 @@ const __splitEveryNChars = require('../../../dist/js/string/splitEveryNChars');
  */
 module.exports = function logHeader(title, description=null, infos={}) {
 
-  let descriptionArray = [];
+  const columns = process.env.STDOUT_COLUMNS || process.stdout.columns;
+
+  const sidePadding = __getDevEnv('terminal.padding');
+
+  let message = '<br/>';
+  message += '<br/>';
+  message += `${'#'.repeat(columns - sidePadding * 2)}`;
+  message += '<br/>';
+  message += `<red>${title}</red>`;
+  message += '<br/>';
+  message += '<br/> ';
   if (description) {
-    descriptionArray = __splitEveryNChars(description, 60);
-  }
-  let descriptionFormated = '';
-  descriptionArray.forEach((line) => {
-    descriptionFormated += '# ' + line + '\n';
-  });
-
-
-  let message = '#######################################################################\n';
-  message += '#\n';
-  message += `# ${title} \n`;
-  message += '#\n';
-  if (descriptionFormated) {
-    message += descriptionFormated;
-    message += '#\n';
+    message += description;
+    message += '<br/>';
+    message += '<br/>';
   }
   // loop on each infos
   Object.keys(infos).forEach((key) => {
-    message += `# - ${key.charAt(0).toUpperCase() + key.slice(1)}: ${infos[key]}\n`;
+    message += `<bold><cyan>${key.charAt(0).toUpperCase() + key.slice(1)}</cyan></bold>: ${infos[key]}\n`;
   });
-  if (Object.keys(infos).length > 0) {
-    message += `#\n`;
-  }
-  message += '#######################################################################';
-  message += `#\n`;
+  message += '<br/>';
+  message += '<br/>';
+  message += '\n';
+  message += `${'#'.repeat(columns - sidePadding * 2)}`;
+  message += '<br/>';
 
   // log the message
-  __log(message, 'success');
+  __log(message);
 
 }

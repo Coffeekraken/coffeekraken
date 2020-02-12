@@ -2,7 +2,7 @@ const exec = require("child_process").exec;
 const chalk = require("chalk");
 const chokidar = require("chokidar");
 const logSymbols = require("log-symbols");
-const removeBlankLines = require("remove-blank-lines");
+// const removeBlankLines = require("remove-blank-lines");
 const terminate = require("terminate");
 const commandExistsSync = require("command-exists").sync;
 
@@ -64,7 +64,7 @@ module.exports = class Script {
       // new data
       this._readed = false;
       // push new data to the stack
-      this._stack.push(removeBlankLines(data.toString()));
+      this._stack.push(data.toString());
       // dispatch new data
       this._dispatchData(data);
     });
@@ -72,7 +72,7 @@ module.exports = class Script {
       // new data
       this._readed = false;
       // push new data to the stack
-      this._stack.push(removeBlankLines(data.toString()));
+      this._stack.push(data.toString());
       // dispatch new data
       this._dispatchData(data);
       // dispatch new warning

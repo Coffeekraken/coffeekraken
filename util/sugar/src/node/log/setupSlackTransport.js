@@ -1,6 +1,6 @@
 const __winston = require('winston');
 const SlackHook = require("winston-slack-webhook-transport");
-const __getAppMeta = require('../app/getAppMeta');
+const __getAppMeta = require('../app/getAppMetas');
 
 /**
  * @name                    setupSlackTransport
@@ -34,7 +34,7 @@ const __getAppMeta = require('../app/getAppMeta');
 module.exports = function setupSlackTransport(webhookUrl = process.env.LOG_SLACK_WEBHOOKURL, level = 'error', winstonSlackSettings = {}) {
 
   // get the app meta
-  const appMeta = __getAppMeta();
+  const appMeta = __getAppMetas();
 
   // format message
   const formatArray = [];

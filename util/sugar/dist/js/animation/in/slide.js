@@ -31,13 +31,13 @@ var _default = (() => {
     const css = `
       [slide-in].${uniqClass} {
         opacity: 0;
-        transform: translate(${args.x || 0}px, ${args.y || 0}px);
+        transform: translate(${args.x.value || 0}px, ${args.y.value || 0}px);
 
       }
     `;
     const cssIn = `
       [slide-in].${uniqClass}.in {
-        transition: all ${args.duration / 1000 || '0.5'}s;
+        transition: all ${args.duration.value / 1000 || '0.5'}s;
         opacity: 1;
         transform: translate(0, 0);
       }
@@ -58,13 +58,13 @@ var _default = (() => {
 
     setTimeout(() => {
       $item.classList.add('in');
-    }, args.delay);
+    }, args.delay.value);
     setTimeout(() => {
       const $style = document.querySelector(`style#${uniqClass}`);
       if ($style) $style.parentNode.removeChild($style);
       const $styleIn = document.querySelector(`style#${uniqClass}-in`);
       if ($styleIn) $styleIn.parentNode.removeChild($styleIn);
-    }, args.delay + args.duration);
+    }, args.delay.value + args.duration.value);
   });
 })();
 

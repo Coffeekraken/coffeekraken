@@ -1,7 +1,7 @@
 const __ensureExist = require('../../../dist/js/object/ensureExist');
 
 /**
- * @name                  setAppMeta
+ * @name                  setAppMetas
  * @namespace             sugar.node.app
  * @type                  Function
  *
@@ -12,12 +12,12 @@ const __ensureExist = require('../../../dist/js/object/ensureExist');
  * @return            {Object}                              The meta data object setted
  *
  * @example           js
- * const setAppMeta = require('@coffeekraken/sugar/node/app/setAppMeta');
- * setAppMeta({ name: 'My Cool App', version: '1.0.0' });
+ * const setAppMetas = require('@coffeekraken/sugar/node/app/setAppMetas');
+ * setAppMetas({ name: 'My Cool App', version: '1.0.0' });
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function setAppMeta(meta, override = false) {
+module.exports = function setAppMetas(meta, override = false) {
 
   __ensureExist('global.Sugar._app.metas');
   if (override) {

@@ -103,7 +103,8 @@ let config = __deepMerge({
     frontend: {
 
       transportsByType: {
-        error: process.env.NODE_ENV === 'production' ? 'squid' : 'console mail',
+				default: process.env.NODE_ENV === 'production' ? '' : 'console mail',
+				error: process.env.NODE_ENV === 'production' ? 'squid' : 'console mail',
         warn: process.env.NODE_ENV === 'production' ? 'squid' : 'console',
         info: process.env.NODE_ENV === 'production' ? '' : 'console',
         verbose: process.env.NODE_ENV === 'production' ? '' : 'console',
@@ -124,6 +125,7 @@ let config = __deepMerge({
     backend: {
 
       transportsByType: {
+				default: process.env.NODE_ENV === 'production' ? '' : 'console files',
         error: process.env.NODE_ENV === 'production' ? 'mail' : 'console files',
         warn: process.env.NODE_ENV === 'production' ? 'mail' : 'console files',
         info: process.env.NODE_ENV === 'production' ? '' : 'console files',

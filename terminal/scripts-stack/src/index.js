@@ -29,6 +29,13 @@ class scriptsStack {
     this._screen = null;
     this._currentScriptId = null;
 
+    // set an environment variable
+    process.env.SCRIPTS_STACK = true;
+    process.env.STDOUT_COLUMNS = Math.round(process.stdout.columns / 4 * 3);
+    process.stdout.on('resize', function() {
+      process.env.STDOUT_COLUMNS = Math.round(process.stdout.columns / 4 * 3);
+    });
+
     // load package json
     this._packageJson = this._loadPackageJson();
 
@@ -306,7 +313,7 @@ class scriptsStack {
       tags: true,
       vi: false,
       scrollable: true,
-      alwaysScroll: true,
+      alwaysScroll: false,
       style: {
         bg: "black",
         fg: "white"
@@ -530,7 +537,7 @@ class scriptsStack {
 
     // set the console content to the selected script
     this.screen.$consoleBox.setContent(script.stack.join("") || '');
-    this.screen.$consoleBox.scroll(99999999999);
+    this.screen.$consoleBox.setScrollPerc(100);
 
     // mark the script as read
     // script.markAsRead()
@@ -607,7 +614,7 @@ class scriptsStack {
           if (this._currentScriptId === scriptId) {
             this.screen.$consoleBox.setContent(script.stack.join(""));
           }
-          this.screen.$consoleBox.scroll(99999999999);
+          this.screen.$consoleBox.setScrollPerc(100);
           this._renderScreen();
         });
         script.on("error", data => {

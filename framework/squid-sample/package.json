@@ -23,7 +23,8 @@
     "@coffeekraken/sugar": "^1.0.23",
     "babel-loader": "^8.0.6",
     "bind-methods": "^1.1.0",
-    "exec-sh": "^0.3.4"
+    "exec-sh": "^0.3.4",
+    "webpack": "^4.41.5"
   },
   "devDependencies": {}
 }

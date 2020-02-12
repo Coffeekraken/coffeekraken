@@ -1,6 +1,6 @@
 const __winston = require('winston');
 const __winstonMail = require('winston-mail');
-const __getAppMeta = require('../app/getAppMeta');
+const __getAppMeta = require('../app/getAppMetas');
 
 /**
  * @name                    setupMailTransport
@@ -22,7 +22,7 @@ const __getAppMeta = require('../app/getAppMeta');
 module.exports = function setupMailTransport(emails, level = 'error', winstonMailSettings = {}) {
 
   // get the app meta
-  const appMeta = __getAppMeta();
+  const appMeta = __getAppMetas();
 
   let contributorsArray = null;
   if (appMeta.contributors) {

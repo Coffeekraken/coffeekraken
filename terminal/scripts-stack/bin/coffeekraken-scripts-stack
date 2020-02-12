@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// require('module-alias/register');
 
 const __program = require('commander')
 const __packageJson = require('../package.json')

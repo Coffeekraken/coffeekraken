@@ -1,10 +1,12 @@
-const __env = require('./env');
-const __setAppMeta = require('./setAppMeta');
-const __getAppMeta = require('./getAppMeta');
+const __setAppMetas = require('./setAppMetas');
+const __getAppMetas = require('./getAppMetas');
 const __getAppCwd = require('./getAppCwd');
 const __setAppCwd = require('./setAppCwd');
 const __fs = require('fs');
 const __logHeader = require('../log/logHeader');
+const __beautifyErrors = require('../dev/beautifyErrors');
+const __initEnv = require('./initEnv');
+const __setupDevEnv = require('../dev/setupDevEnv');
 
 /**
  * @name                  initApp
@@ -46,37 +48,47 @@ module.exports = function initApp(settings = {}) {
     }
   } catch(e) {}
 
+  // beautify the errors
+  __beautifyErrors();
+
+  // setup dev env
+  __setupDevEnv({
+    terminal: {
+      padding: 3
+    }
+  });
+
   // init env stack
-  __env();
+  __initEnv();
   process.env = {
     ...process.env,
     ...settings.env || {}
   };
 
   // set app meta
-  __setAppMeta(packageJson || {});
-  __setAppMeta(settings.meta || {});
-  __setAppMeta({
+  __setAppMetas(packageJson || {});
+  __setAppMetas(settings.meta || {});
+  __setAppMetas({
     cwd: cwd
   });
 
   // get the current app meta
-  const appMeta = __getAppMeta();
+  const appMetas = __getAppMetas();
 
   // log the app header
   const metas = {};
-  if (appMeta.author) metas.author = appMeta.author;
-  if (appMeta.homepage) metas.homepage = appMeta.homepage;
-  if (appMeta.version) metas.version = appMeta.version;
-  if (appMeta.license) metas.license = appMeta.license;
-  if (appMeta.keywords) metas.keywords = appMeta.keywords.join(',');
-  if (appMeta.contributors) {
+  if (appMetas.author) metas.author = appMetas.author;
+  if (appMetas.homepage) metas.homepage = appMetas.homepage;
+  if (appMetas.version) metas.version = appMetas.version;
+  if (appMetas.license) metas.license = appMetas.license;
+  if (appMetas.keywords) metas.keywords = appMetas.keywords.join(',');
+  if (appMetas.contributors) {
     let contributorsArray = [];
-    appMeta.contributors.forEach((cont) => {
+    appMetas.contributors.forEach((cont) => {
       contributorsArray.push(`${cont.name} <${cont.email}>`);
     });
     metas.contributors = contributorsArray.join(', ');
   }
-  __logHeader(appMeta.name || 'Coffeekraken', appMeta.description || 'Coffeekraken sugar based application', metas);
+  __logHeader(appMetas.name || 'Coffeekraken', appMetas.description || 'Coffeekraken sugar based application', metas);
 
 }

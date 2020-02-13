@@ -25,27 +25,25 @@ module.exports = (transportName = null) => {
 
   if (transportName) {
     if ( ! __existDeep(`Sugar._log.transports.${transportName}.settings`)) {
-      console.error(`You try to get the log settings for the transport "${transportName}" but this transport has not been registered...`);
+      throw new Error(`You try to get the log settings for the transport "${transportName}" but this transport has not been registered...`);
       return false;
     }
     return Sugar._log.transports[transportName].settings || {};
   }
-
-  if ( ! Sugar._log.settings) {
-    Sugar._log.settings = {
-      transportsByType: {
-        default: process.env.NODE_ENV === 'production' ? '' : 'console files',
-        error: process.env.NODE_ENV === 'production' ? 'mail' : 'console files',
-        warn: process.env.NODE_ENV === 'production' ? 'mail' : 'console files',
-        info: process.env.NODE_ENV === 'production' ? '' : 'console files',
-        verbose: process.env.NODE_ENV === 'production' ? '' : 'console files',
-        debug: process.env.NODE_ENV === 'production' ? '' : 'console files',
-        silly: process.env.NODE_ENV === 'production' ? '' : 'console files',
-        success: process.env.NODE_ENV === 'production' ? '' : 'console files'
-      }
-    }
-  }
-
   return Sugar._log.settings;
 
 }
+
+__ensureExist('global.Sugar._log');
+Sugar._log.settings = {
+  transportsByType: {
+    default: process.env.NODE_ENV === 'production' ? '' : 'console files',
+    error: process.env.NODE_ENV === 'production' ? 'mail' : 'console files',
+    warn: process.env.NODE_ENV === 'production' ? 'mail' : 'console files',
+    info: process.env.NODE_ENV === 'production' ? '' : 'console files',
+    verbose: process.env.NODE_ENV === 'production' ? '' : 'console files',
+    debug: process.env.NODE_ENV === 'production' ? '' : 'console files',
+    silly: process.env.NODE_ENV === 'production' ? '' : 'console files',
+    success: process.env.NODE_ENV === 'production' ? '' : 'console files'
+  }
+};

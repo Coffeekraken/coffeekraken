@@ -17,29 +17,31 @@ module.exports = function mail(text) {
 
   return __replaceTags(text, {
 
-    black: (tag, content) => __term.styleReset().str.black(content),
-    red: (tag, content) => __term.styleReset().str.red(content),
-    green: (tag, content) => __term.styleReset().str.green(content),
-    yellow: (tag, content) => __term.styleReset().str.yellow(content),
-    blue: (tag, content) => __term.styleReset().str.blue(content),
-    magenta: (tag, content) => __term.styleReset().str.magenta(content),
-    cyan: (tag, content) => __term.styleReset().str.cyan(content),
-    white: (tag, content) => __term.styleReset().str.white(content),
+    black: (tag, content) => `<span style="color: black">${content}</span>`,
+    red: (tag, content) => `<span style="color: #FF0000">${content}</span>`,
+    green: (tag, content) => `<span style="color: #008000">${content}</span>`,
+    yellow: (tag, content) => `<span style="color: #F1C40F">${content}</span>`,
+    blue: (tag, content) => `<span style="color: #0000FF">${content}</span>`,
+    magenta: (tag, content) => `<span style="color: #800080">${content}</span>`,
+    cyan: (tag, content) => `<span style="color: #5DADE2">${content}</span>`,
+    white: (tag, content) => `<span style="color: white">${content}</span>`,
 
-    bgBlack: (tag, content) => __term.styleReset().str.bgBlack(content),
-    bgRed: (tag, content) => __term.styleReset().str.bgRed(content),
-    bgGreen: (tag, content) => __term.styleReset().str.bgGreen(content),
-    bgYellow: (tag, content) => __term.styleReset().str.bgYellow(content),
-    bgBlue: (tag, content) => __term.styleReset().str.bgBlue(content),
-    bgMagenta: (tag, content) => __term.styleReset().str.bgMagenta(content),
-    bgCyan: (tag, content) => __term.styleReset().str.bgCyan(content),
-    bgWhite: (tag, content) => __term.styleReset().str.bgWhite(content),
+    bgBlack: (tag, content) => `<span style="background-color: black">${content}</span>`,
+    bgRed: (tag, content) => `<span style="background-color: #FF0000">${content}</span>`,
+    bgGreen: (tag, content) => `<span style="background-color: #008000">${content}</span>`,
+    bgYellow: (tag, content) => `<span style="background-color: #F1C40F">${content}</span>`,
+    bgBlue: (tag, content) => `<span style="background-color: #0000FF">${content}</span>`,
+    bgMagenta: (tag, content) => `<span style="background-color: #800080">${content}</span>`,
+    bgCyan: (tag, content) => `<span style="background-color: #5DADE2">${content}</span>`,
+    bgWhite: (tag, content) => `<span style="background-color: white">${content}</span>`,
 
-    bold: (tag, content) => __term.styleReset().str.bold(content),
-    dim: (tag, content) => __term.styleReset().str.dim(content),
-    italic: (tag, content) => __term.styleReset().str.italic(content),
-    underline: (tag, content) => __term.styleReset().str.underline(content),
-    strike: (tag, content) => __term.styleReset().str.strike(content)
+    bold: (tag, content) => `<span style="font-weight: bold;">${content}</span>`,
+    dim: (tag, content) => `<span style="">${content}</span>`,
+    italic: (tag, content) => `<span style="font-style: italic;">${content}</span>`,
+    underline: (tag, content) => `<span style="font-style: underline;">${content}</span>`,
+    strike: (tag, content) => `<span text-decoration="line-through;">${content}</span>`,
+
+    br: (tag, content) => '<br />'
 
   });
 

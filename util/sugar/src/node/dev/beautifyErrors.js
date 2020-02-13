@@ -1,6 +1,6 @@
-const __parseError = require('parse-error');
 const __log = require('../log/log');
 const __breakLineDependingOnSidesPadding = require('../terminal/breakLineDependingOnSidesPadding');
+const __parseError = require('./parseError');
 
 /**
  * @name                              beautifyErrors
@@ -18,76 +18,73 @@ const __breakLineDependingOnSidesPadding = require('../terminal/breakLineDependi
 module.exports = function beautifyErrors() {
 
   // catch the errors to prettify them
-  process.on('uncaughtException', (err) => {
+  ['unhandledRejection', 'uncaughtException'].forEach((e) => {
+    process.on(e, async (err) => {
 
-    const error = __parseError(err);
+      const error = __parseError(err);
 
-    const substract = 12;
-    const columns = (process.env.STDOUT_COLUMNS || process.stdout.columns) - substract;
+      const substract = 12;
+      const columns = (process.env.STDOUT_COLUMNS || process.stdout.columns) - substract;
 
-    const stack = error.stack.split('\n');
-    let finalStack = stack.filter((line) => {
-      if ( ! line.includes('at ')) return false;
-      if (line.includes('checkArgs.js')) return false;
-      if (line.includes('<anonymous>')) return false;
-      if (line.includes('/node_modules/')) return false;
-      return true;
+      let finalStack = error.stack.filter((line) => {
+        if (line.filename.includes('checkArgs.js')) return false;
+        if (line.filename.includes('/node_modules/')) return false;
+        return true;
+      });
+      finalStack = finalStack.map((line) => {
+        line.filename = line.filename.replace(process.cwd(), '');
+        return line;
+      });
+
+      let message = '';
+
+      message += '<br/>';
+      message += '<br/>';
+      message += '<br/>';
+
+      message += `<bgRed>   ${' '.repeat(error.type.length)}   </bgRed>`;
+      message += '<br/>';
+      message += `<bgRed>   <bold>${error.type}</bold>   </bgRed>`;
+      message += '<br/>';
+      message += `<bgRed>   ${' '.repeat(error.type.length)}   </bgRed>`;
+
+      message += '<br/>';
+      message += '<br/>';
+      message += '<br/>';
+
+      message += error.message;
+
+      message += '<br/>';
+      message += '<br/>';
+      message += '<br/>';
+
+      finalStack.forEach((line) => {
+
+        const formatedFunc = `<yellow>${line.function}</yellow>`;
+        const formatedPath = `${line.filename}`;
+        const formatedPosition = `<bold><cyan>${line.line}</cyan></bold>:<cyan>${line.row}</cyan>`;
+
+        message += `<bold>${formatedFunc}</bold>`;
+        message += '<br/>';
+
+        message += `${formatedPath}`;
+
+        message += '<br/>';
+
+        message += `${formatedPosition}`;
+        message += '<br/>';
+        message += '<br/>';
+
+      });
+
+      message += '<br/>';
+      message += '<br/>';
+
+      await __log(message, 'error');
+
+      process.exit(0);
+
     });
-    finalStack = finalStack.map((line) => {
-      line = line.trim().replace('at ', '');
-      line = line.replace(process.cwd(), '');
-      return line;
-    });
-
-    let message = '';
-
-    message += `<bgRed>   ${' '.repeat(error.type.length)}   </bgRed>`;
-    message += '<br/>';
-    message += `<bgRed>   <bold>${error.type}</bold>   </bgRed>`;
-    message += '<br/>';
-    message += `<bgRed>   ${' '.repeat(error.type.length)}   </bgRed>`;
-
-    message += '<br/>';
-    message += '<br/>';
-    message += '<br/>';
-
-    message += `<bold><white>${error.message}</white></bold>`;
-
-    message += '<br/>';
-    message += '<br/>';
-    message += '<br/>';
-
-    finalStack.forEach((line) => {
-
-      let func = line.match(/[\S]+\s/g);
-      let path = line.match(/\([a-zA-Z0-9\/.]+/g);
-      let position = line.match(/:[0-9:]+/g);
-
-      if (func) func = func[0].trim();
-      if (path) path = path[0].slice(1);
-      if (position) position = position[0].slice(1);
-
-      const formatedFunc = `<yellow>${func}</yellow>`;
-      const formatedPath = `${path}`;
-      const formatedPosition = `<cyan>${position}</cyan>`;
-
-      message += `<bold>${formatedFunc}</bold>`;
-      message += '<br/>';
-
-      message += `${formatedPath}`;
-
-      message += '<br/>';
-
-      message += `${formatedPosition}`;
-      message += '<br/>';
-      message += '<br/>';
-
-    });
-
-    message += '<br/>';
-    message += '<br/>';
-
-    __log(message, 'error');
 
   });
 

@@ -1,5 +1,6 @@
 const __prependFile = require('prepend-file');
 const __makeDir = require('make-dir');
+const __filesPreset = require('../htmlPresets/files');
 
 /**
  * @name                                    files
@@ -31,8 +32,11 @@ module.exports = (message, type = 'info', settings = {}) => {
     __makeDir.sync(settings.logsPath);
 
     // prepend the new log
-    const newLog = `# ${new Date().toISOString()}\n# ${message}\n\n`;
+    const newLog = `# ${new Date().toISOString()}\n# ${__filesPreset(message)}\n\n`;
     __prependFile.sync(`${settings.logsPath}/${type}.log`, newLog);
+
+    // resolving the file logging
+    resolve();
 
   });
 }

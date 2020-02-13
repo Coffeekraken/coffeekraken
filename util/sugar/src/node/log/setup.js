@@ -39,7 +39,6 @@ module.exports = (settings, transport = null) => {
 
   __ensureExist('global.Sugar._log.settings');
   Sugar._log.settings = __deepMerge(Sugar._log.settings, settings);
-
   return Sugar._log.settings;
 
 }

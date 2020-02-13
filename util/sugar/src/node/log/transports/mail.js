@@ -1,5 +1,6 @@
-const __getAppMeta = require('../../app/getAppMetas');
+const __getAppMetas = require('../../app/getAppMetas');
 const __nodemailer = require('nodemailer');
+const __mailPreset = require('../htmlPresets/mail');
 
 /**
  * @name                    mail
@@ -86,7 +87,7 @@ module.exports = function mail(message, level = 'info', settings = {}) {
         to: settings.to,
         subject: settings.subject,
         html: `
-          ${message}
+          ${__mailPreset(message)}
           <br/><br/>
           ${list}
         `

@@ -151,7 +151,14 @@ class CoffeePack {
 
     __checkArgs(this.registerProcessor, arguments, {
       extensions: 'Array --of ["String"]',
-      processor: 'Function'
+      processor: 'Function',
+      weight: 'Number --greater -1 "10"'
+    });
+
+    console.log({
+      extensions,
+      processor,
+      weight
     });
 
     // register the processor

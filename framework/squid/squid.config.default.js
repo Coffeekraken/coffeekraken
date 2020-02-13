@@ -137,7 +137,7 @@ let config = __deepMerge({
 
       transports: {
         mail: {
-          to: 'olivier.bossel@gmail.com',
+          to: 'pb@buzzbrothers.ch',
           service: 'SendinBlue',
           auth: {
             user: 'olivier.bossel@gmail.com',

@@ -1,6 +1,7 @@
 const __express = require('express');
 const __fs = require('fs');
 const __path = require('path');
+const __initApp = require('@coffeekraken/sugar/node/app/initApp');
 const __log = require('@coffeekraken/sugar/node/log/log');
 const __setupLog = require('@coffeekraken/sugar/node/log/setup');
 const __compression = require('compression');
@@ -53,6 +54,8 @@ module.exports = class SquidApp extends __SExpressApp {
       }
     }, __express());
 
+    // init app
+    __initApp();
 
     // require the Squid dependencies
     this._requirePrototypeDependencies();
@@ -68,6 +71,23 @@ module.exports = class SquidApp extends __SExpressApp {
 
     // register new template engines
     this._registerExpressTemplateEngines();
+
+    // setTimeout(() => {
+    //
+    //   throw new Error(`
+    //     iowjefwoejf oiwej foiwej of <br />
+    //     iewjf iowjef <bold>plop</bold> wijfoi weofwefoiw jefoi jweofij weo <red>hello</red> oiwjfowijefoiwjef <br />
+    //     ifjweofoiwfj io <cyan><bold>iwejfwoefweof</bold></cyan> wifj owijef oiwjfei jeof woejpf woje fq jpweofi jpqwoijpqw jeifpw qefjpwi jfoiw jfeoijwpefij powi efoiw jefpiqojwe pi jqwojif pwijfowef
+    //     ifjweofoiwfj io <cyan><bold>iwejfwoefweof</bold></cyan> wifj owijef oiwjfei jeof woejpf woje fq jpweofi jpqwoijpqw jeifpw qefjpwi jfoiw jfeoijwpefij powi efoiw jefpiqojwe pi jqwojif pwijfowef
+    //     ifjweofoiwfj io <cyan><bold>iwejfwoefweof</bold></cyan> wifj owijef oiwjfei jeof woejpf woje fq jpweofi jpqwoijpqw
+    //     <br /><br />
+    //     jeifpw qefjpwi jfoiw jfeoijwpefij powi efoiw jefpiqojwe pi jqwojif pwijfowef
+    //     ifjweofoiwfj io <cyan><bold>iwejfwoefweof</bold></cyan> wifj owijef oiwjfei jeof woejpf woje fq jpweofi jpqwoijpqw jeifpw qefjpwi jfoiw jfeoijwpefij powi efoiw jefpiqojwe pi jqwojif pwijfowef
+    //     ifjweofoiwfj io <cyan><bold>iwejfwoefweof</bold></cyan> wifj owijef oiwjfei jeof woejpf woje fq jpweofi jpqwoijpqw jeifpw qefjpwi jfoiw jfeoijwpefij powi efoiw jefpiqojwe pi jqwojif pwijfowef
+    //     ifjweofoiwfj io <cyan><bold>iwejfwoefweof</bold></cyan> wifj owijef oiwjfei jeof woejpf woje fq jpweofi jpqwoijpqw jeifpw qefjpwi jfoiw jfeoijwpefij powi efoiw jefpiqojwe pi jqwojif pwijfowef
+    //   `);
+    // 
+    // });
 
   }
 
@@ -148,8 +168,7 @@ module.exports = class SquidApp extends __SExpressApp {
               res.send(processedHtml);
             }
           } catch(e) {
-            console.log(e);
-            __log(`An error has occured during the rendering process of the view "${renderPath}"... Please try again later...`, 'error');
+            throw new Error(`An error has occured during the rendering process of the view <cyan><bold>"${renderPath}"</bold></cyan>... <br /> Please try again later...`);
           }
         })
       };

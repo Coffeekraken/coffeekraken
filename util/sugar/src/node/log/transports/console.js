@@ -22,8 +22,6 @@ module.exports = (message, type, settings = {}) => {
     // replace the tags
     message = __consoleHtmlPreset(message);
 
-    const columns = process.env.STDOUT_COLUMNS || process.stdout.columns;
-
     const symbols = {
       default: '-',
       error: '✘',

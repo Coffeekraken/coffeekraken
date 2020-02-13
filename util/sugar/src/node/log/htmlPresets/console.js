@@ -1,6 +1,8 @@
 const __replaceTags = require('../../../../dist/js/html/replaceTags');
 const __chalk = require('chalk');
 
+__chalk.level = 3;
+
 /**
  * @name                              console
  * @namespace                         sugar.node.log.htmlPresets

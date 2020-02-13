@@ -12,7 +12,7 @@ const __filesize = require('file-size');
 const __TerserPlugin = require('terser-webpack-plugin');
 const __base64 = require('@coffeekraken/sugar/node/crypt/base64');
 const __CoffeePack = require('@coffeekraken/webpack-coffeepack');
-const __initEnv = require('@coffeekraken/sugar/node/dev/initEnv');
+const __initEnv = require('@coffeekraken/sugar/node/app/initEnv');
 
 const projectPackageJson = require(process.cwd() + '/package.json');
 

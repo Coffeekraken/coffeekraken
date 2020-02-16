@@ -6,7 +6,6 @@ module.exports.default.loaders = {};
 module.exports.default.webpack = {
   mode: 'production',
   entry: {},
-  // context: __path.resolve(__dirname, '../../'),
   output: {
     filename: '[name]',
     pathinfo: false,
@@ -17,7 +16,7 @@ module.exports.default.webpack = {
   plugins: [],
   optimization: {
     minimize: true,
-    minimizer: process.env.NODE_ENV === 'prod' ? [
+    minimizer: process.env.NODE_ENV === 'production' ? [
       new __TerserPlugin({
         terserOptions: {}
       }
@@ -27,8 +26,8 @@ module.exports.default.webpack = {
     alias: {
       '@squid': __path.resolve(__dirname, '../../src/js'),
       '@app': process.cwd() + '/dist/js',
-      '@coffeekraken/sugar/js': __dirname + '/../../../../util/sugar/src/js',
-      '@coffeekraken/sugar/node': __dirname + '/../../../../util/sugar/src/node'
+      '@coffeekraken/sugar/js': __dirname + '/../../../util/sugar/src/js',
+      '@coffeekraken/sugar/node': __dirname + '/../../../util/sugar/src/node'
     }
   },
   module: {
@@ -36,5 +35,4 @@ module.exports.default.webpack = {
   }
 };
 
-module.exports.default.loaders.coffeeLoader = {
-};
+module.exports.default.loaders.coffeeLoader = {};

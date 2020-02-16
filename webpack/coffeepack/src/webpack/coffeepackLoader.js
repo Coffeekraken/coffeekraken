@@ -1,33 +1,25 @@
 const __getExtension = require('@coffeekraken/sugar/js/string/getExtension');
 const __fs = require('fs');
 const __loaderUtils = require('loader-utils');
-const __deepMerge = require('@coffeekraken/sugar/node/object/deepMerge');
-const __sortObj = require('@coffeekraken/sugar/js/object/sort');
-const __filterObj = require('@coffeekraken/sugar/js/object/filter');
-const __asyncForEach = require('@coffeekraken/sugar/js/array/asyncForEach');
-const __writeFileSync = require('@coffeekraken/sugar/node/fs/writeFileSync');
 
-module.exports.raw = true;
-module.exports = function coffeeLoader(source) {
+module.exports = async function coffeepackLoader(source) {
   this.cacheable && this.cacheable();
 
-  const _callback = this.async();
-  const _extension = __getExtension(this.resource);
-  let _saveExtension = _extension;
-  const _rootContext = this.rootContext;
+  const callback = this.async();
+  const extension = __getExtension(this.resource);
   const _this = this;
-  let _options = __loaderUtils.getOptions(this);
-  _options = __deepMerge(require('./defaultSettings'), _options);
+  let returnSource = true;
+  let returnExtension = extension;
+  const options = __loaderUtils.getOptions(this);
 
-  const _resource = this.resource;
-  let _source = source;
+  console.log('OPT', options);
 
-  if (_options.disable === true) {
+  if (options.disable === true) {
     // Bypass processing while on watch mode
     return source;
   } else {
 
-    const stats = __fs.statSync(_resource);
+    const stats = __fs.statSync(this.resource);
     const mimeTime = stats.mtime;
 
     // if (updatedTimestamps[this.resource]) {
@@ -86,85 +78,6 @@ module.exports = function coffeeLoader(source) {
     //     return callback(null, source);
     //   }
     // }
-
-    let processorsSortedAndFilteredObj = __sortObj(_options.processors, (a, b) => {
-      return b.weight - a.weight;
-    });
-    processorsSortedAndFilteredObj = __filterObj(processorsSortedAndFilteredObj, (item) => {
-      return item !== false && item.extensions.indexOf(_extension) !== -1;
-    });
-
-    async function execProcessor(i = 0) {
-      const processorObj = processorsSortedAndFilteredObj[Object.keys(processorsSortedAndFilteredObj)[i]];
-      const result = await processorObj.processor(_resource, _source, processorObj.settings);
-      _source = result.source || result;
-      if (result.extension) _saveExtension = result.extension;
-      if (i >= Object.keys(processorsSortedAndFilteredObj).length-1) {
-        handleProcessedFile(_resource, _source);
-      } else {
-        execProcessor(i+1);
-      }
-    }
-    if (Object.keys(processorsSortedAndFilteredObj).length > 0) execProcessor();
-    else handleProcessedFile(_resource, _source);
-
-    function handleProcessedFile(resource, sourceCode) {
-      // check if is a js file so that we let webpack handle his saving phase...
-      if (_extension === 'js') {
-        _callback(null, sourceCode);
-      } else {
-        saveProcessedFile(resource, sourceCode);
-      }
-    }
-
-    function saveProcessedFile(resource, sourceCode) {
-
-      let buildScopes = {};
-      let extension = __getExtension(resource);
-
-      Object.keys(_options.files).forEach((key, i) => {
-        const opts = _options.files[key];
-
-        let outputFilePath = resource;
-
-        if (opts.extensions && opts.extensions.indexOf(extension) !== -1) {
-          buildScopes[key] = opts;
-        } else return;
-
-        Object.keys(buildScopes).forEach((scopeKey) => {
-
-          const scope = buildScopes[scopeKey];
-
-          let outputFolder = scope.outputFolder;
-          if ( ! Array.isArray(outputFolder)) outputFolder = [outputFolder];
-
-          let sourcesFolder = scope.sourcesFolder;
-          if ( ! Array.isArray(sourcesFolder)) sourcesFolder = [sourcesFolder];
-          if ( ! outputFolder || ! sourcesFolder) return;
-
-          outputFolder.forEach((outputFolderPath) => {
-
-            sourcesFolder.forEach((sourcesFolderPath) => {
-              outputFilePath = outputFilePath.trim();
-              outputFilePath = outputFilePath.replace(_rootContext, '');
-              outputFilePath = outputFilePath.replace(sourcesFolderPath, '');
-              if (outputFilePath.slice(0,2) === '//') outputFilePath = outputFilePath.slice(2);
-              if (outputFilePath.slice(0,1) === '/') outputFilePath = outputFilePath.slice(1);
-              outputFilePath = outputFilePath.replace(`.${_extension}`,`.${_saveExtension}`);
-            });
-
-
-            console.log(outputFolderPath + '/' + outputFilePath);
-            // console.log(`${this.rootContext}/${outputFolder}/${outputFilePath}`);
-            __writeFileSync(process.cwd() + '/' + outputFolderPath + '/' + outputFilePath, sourceCode);
-            // _this.emitFile(`${outputFolderPath}/${outputFilePath}`, sourceCode);
-
-          });
-        });
-      });
-    }
-
-    // console.log(this.resource, src);
 
     // jpg transpiler
   //   if (options.jpg.extensions.indexOf(extension) !== -1) {
@@ -302,8 +215,11 @@ module.exports = function coffeeLoader(source) {
   //
   }
 
-  // console.log(this.resource, result);
-
+  if (returnSource) {
+    callback(null, source);
+  } else {
+    callback(null, '');
+  }
   // return source;
 
 }

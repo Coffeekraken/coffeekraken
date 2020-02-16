@@ -61,17 +61,29 @@ module.exports = function parseError(error) {
     };
 
   });
+
   stackTrace = stackTrace.filter((s) => {
     if ( ! s) return false;
     return true;
   });
 
+  if ( ! stackTrace || ! stackTrace[0]) {
+    stackTrace = [{
+      filename: 'Anonymous',
+      message: '...',
+      type: 'Error',
+      line: 0,
+      row: 0,
+      stack: []
+    }];
+  }
+
   return {
-    filename: stackTrace[0].filename,
+    filename: stackTrace[0].filename ? stackTrace[0].filename : '',
     message: message.split('\n').join('').replace(/\s+/g, " ").trim(),
     type: type,
-    line: stackTrace[0].line,
-    row: stackTrace[0].row,
+    line: stackTrace[0].line ? stackTrace[0].line : '',
+    row: stackTrace[0].row ? stackTrace[0].row : '',
     stack: stackTrace
   };
 }

@@ -4,6 +4,7 @@ const __log = require('@coffeekraken/sugar/node/log/log');
 const __glob = require('glob');
 const __bindMethods = require('bind-methods');
 const __checkArgs = require('@coffeekraken/sugar/js/dev/checkArgs');
+const __filterObj = require('@coffeekraken/sugar/js/object/filter');
 
 const __config = require('./config');
 
@@ -15,13 +16,13 @@ class CoffeePack {
   /**
    * @name                        _processors
    * @namespace                   webpack.coffeepack.CoffeePack
-   * @type                        Array
+   * @type                        Object
    *
    * Store all the registered processors
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _processors = [];
+  _processors = {};
 
 
   constructor(config = {}) {
@@ -29,6 +30,7 @@ class CoffeePack {
     this._config = __deepMerge({
 
       compile: ['js','css','images','jpg','svg','gif','png','webp'],
+
 
       file: {
         extensions: [],
@@ -48,7 +50,7 @@ class CoffeePack {
         sources: '**/*.bundle.{css,scss,sass}'
       },
       images: {
-        extension: ['jpg','jpeg','svg','gif','png','webp'],
+        extensions: ['jpg','jpeg','svg','gif','png','webp'],
         outputFolder: ['dist/images'],
         sourcesFolder: ['src/images'],
         sources: '**,*.{jpg,jpeg,svg,gif,png,webp}',
@@ -88,15 +90,6 @@ class CoffeePack {
         sources: '**/*.webp',
         quality: 70
       },
-
-      // loaders: [
-      //   '@coffeekraken/webpack-coffee-loader',
-      //   'webpack-import-glob-loader'
-      // ],
-      // plugins: [
-      //   '@coffeekraken/webpack-concat-dependencies-vendors-plugin',
-      //   '@coffeekraken/webpack-lazy-dom-load-plugin'
-      // ],
       vendors: {
         webpack: __config.default.webpack
       }
@@ -105,17 +98,77 @@ class CoffeePack {
     // init the CoffeePackWebpack instance
     this.webpack = new CoffeePackWebpack(this);
 
+    // register default plugins
+    // this.webpack.registerPlugin('@coffeekraken/webpack-concat-dependencies-vendors-plugin', {});
+    // this.webpack.registerPlugin('@coffeekraken/webpack-lazy-dom-load-plugin', {});
+
+
+    // this.registerProcessor('jpg', ['jpg', 'jpeg'], (filePath, source) => {
+    //   return new Promise((resolve, reject) => {
+    //     // console.log('process', filePath);
+    //     resolve(source);
+    //   });
+    // });
+    //
+    this.registerProcessor('js', ['js'], (filePath, source, settings) => {
+      return new Promise((resolve, reject) => {
+        // console.log('SE', settings);
+        // console.log('process JS', filePath);
+        resolve(source);
+      });
+    }, {
+      plop: 'hello'
+    }, 100);
+
+    // this.registerProcessor(['png'], (filePath, source, callback) => {
+    //   return new Promise((resolve, reject) => {
+    //     console.log('process', filePath);
+    //     resolve(source);
+    //   });
+    // }, 2);
+    //
+    // this.registerProcessor(['gif'], (filePath, source, callback) => {
+    //   return new Promise((resolve, reject) => {
+    //     console.log('process', filePath);
+    //     resolve(source);
+    //   });
+    // }, 20);
+
     // register default loaders
-    this.webpack.registerLoader('@coffeekraken/webpack-coffee-loader', /\.*$/, {});
+    // this.webpack.registerLoader('@coffeekraken/webpack-coffee-loader', /\.*$/, {});
+    this.webpack.registerLoader(__dirname + '/../../coffee-loader/src/index', /\.*$/, {
+      files: __filterObj(this.config(), (item) => {
+        return item.extensions !== undefined && item.outputFolder !== undefined && item.sourcesFolder !== undefined && item.sources !== undefined;
+      }),
+      processors: this._processors
+    });
+    // this.webpack.registerLoader(__dirname + '/webpack/coffeepackLoader', /\.*$/, {
+    //   types: __filterObj(this.config(), (item) => {
+    //     return item.extensions !== undefined && item.outputFolder !== undefined && item.sourcesFolder !== undefined && item.sources !== undefined;
+    //   }),
+    //   processors: this._processors
+    // });
     this.webpack.registerLoader('webpack-import-glob-loader', /\.js$/, {});
 
-    // register default plugins
-    this.webpack.registerPlugin('@coffeekraken/webpack-concat-dependencies-vendors-plugin', {});
-    this.webpack.registerPlugin('@coffeekraken/webpack-lazy-dom-load-plugin', {});
+  }
 
-    this.registerProcessor(['jpg', 'jpeg'], (filePath, source, callback) => {
+  /**
+   * @name                        config
+   * @namespace                   webpack.coffeepack.CoffeePack
+   * @type                        Function
+   *
+   * Return the coffeepack configuration object
+   *
+   * @return        {Object}                The coffeepack configuration object
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  config() {
 
-    });
+    const config = this._config;
+
+    // return the webpack configuration object
+    return config;
 
   }
 
@@ -130,42 +183,73 @@ class CoffeePack {
    * See the weight of internal processors if you need to register yours in the middle...
    *
    * A processor function is a simple function that will take as arguments the file source path, the file
-   * source code and the callback function to call at the end. You can make absolutely whatever you want to the source code but you have to call the callback function
+   * source code and that return a simple Primise. You can make absolutely whatever you want to the source code but you have to resolve the Promise
    * and passing it the processed source code in order that it can be processed by the others registered processors...
    *
+   * @param             {String}              name                      The name of the processor. It has to be a single word as it will be used as an object property name...
    * @param             {Array}               extensions                The file extensions that need to be processed by this function
    * @param             {Function}            processor                 The actual processor function that will take as arguments the source path and the source code of the file.
+   * @param             {Object}              [settings={}]             The settings that will be passed to the processor function
    * @param             {Number}              [weight=null]             The weight of the processor. This define the order of processors oxecutions
    *
    * @example           js
-   * coffeepack.registerProcessor(['jpg','jpeg'], (filePath, source, callback) => {
-   *    // do something with the source code...
-   *    callback(source);
-   * }, 10);
+   * coffeepack.registerProcessor('jpg', ['jpg','jpeg'], (filePath, source, settings) => {
+   *    return new Promise((resolve, reject) => {
+   *      // do something with the source code...
+   *      resolve(source);
+   *    });
+   * }, {}, 10);
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  registerProcessor(extensions, processor, weight = null) {
-    // check arguments
-    // if ( ! extensions || typeof)
+  registerProcessor(name, extensions, processor, settings = {}, weight = 10) {
 
-    __checkArgs(this.registerProcessor, arguments, {
-      extensions: 'Array --of ["String"]',
-      processor: 'Function',
-      weight: 'Number --greater -1 "10"'
-    });
+    // const args = __checkArgs(this.registerProcessor, arguments, {
+    //   extensions: 'Array --of ["String"]',
+    //   processor: 'Function',
+    //   weight: `Number --greater -1 -d "${weight}"`
+    // });
 
-    console.log({
-      extensions,
-      processor,
-      weight
-    });
+    if (this._processors[name] !== undefined) {
+      throw new Error(`You try to register a processor named "${name}" but a processor with this name already exist...`);
+    }
 
     // register the processor
-    this._processors.push({
+    this._processors[name] = {
+      name,
       extensions,
       processor,
+      settings,
       weight
+    };
+  }
+
+  /**
+   * @name                    run
+   * @namespace               webpack.coffeepack.CoffeePack
+   * @type                    Function
+   *
+   * Run the build process and return a Promise that will be resolved once the build is completed
+   *
+   * @return          {Promise}                       A promise that will be resolved once the build is completed
+   *
+   * @example           js
+   * import CoffeePack from '@coffeekraken/coffeepack';
+   * const coffeepack = new CoffeePack();
+   * coffeepack.run().then((result) => {
+   *    // do something once the build is finished
+   * })
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  run() {
+    return new Promise((resolve, reject) => {
+      // run webpack
+      Promise.all([
+        this.webpack.run()
+      ]).then(() => {
+        resolve();
+      });
     });
   }
 
@@ -220,6 +304,31 @@ class CoffeePackWebpack {
     if (__fs.existsSync(process.cwd() + '/webpack.config.js')) {
       this._coffeepack._config.vendors.webpack = __deepMerge(this._coffeepack._config.vendors.webpack, require(process.cwd() + '/webpack.config.js'));
     }
+  }
+
+  /**
+   * @name                        run
+   * @namespace                   webpack.coffeepack.CoffeePack
+   * @type                        Function
+   *
+   * Run the webpack build process
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  run() {
+    return new Promise((resolve, reject) => {
+
+      __webpack(this.config(), (err, stats) => {
+        if (err || stats.hasErrors()) {
+          // console.log(stats);
+          // throw new Error(err);
+          // reject(err);
+        }
+        // console.log(stats);
+        // process finished
+        resolve(stats);
+      });
+    });
   }
 
   /**
@@ -337,6 +446,9 @@ class CoffeePackWebpack {
 
     const webpackConfig = this._coffeepack._config.vendors.webpack;
 
+    // entry
+    webpackConfig.entry = __deepMerge(webpackConfig.entry, this.entry());
+
     // plugins
     webpackConfig.plugins = __deepMerge(webpackConfig.plugins, this.plugins());
 
@@ -406,12 +518,15 @@ class CoffeePackWebpack {
         outputFolder.forEach((folder) => {
           entryKey = `${folder}/${entryKey}`;
           entryKey = entryKey.replace('//','/');
-          entryObj[entryKey] = file;
+          // if ( ! entryKey.match(/\.js$/g)) return;
+          entryObj[entryKey] = process.cwd() + '/' + file;
         });
 
       });
 
     });
+
+    console.log(entryObj);
 
     // return the entry object
     return entryObj;

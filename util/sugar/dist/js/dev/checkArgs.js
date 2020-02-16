@@ -22,7 +22,7 @@ const __upperFirst = require('../string/upperFirst');
  *
  * @param             {Object}                  args                  The arguments object description
  * @param             {Boolean}                 [throwError=true]     Specify if you want that the function throw an error if needed or not
- * @return            {Boolean}                                       true if all is good, false if not
+ * @return            {Object}                                        Return an object of the arguments and values
  *
  * @example           js
  * import checkArgs from '@coffeekraken/sugar/js/dev/checkArgs';
@@ -48,8 +48,11 @@ const __upperFirst = require('../string/upperFirst');
 
 function checkArgs(func, args, descriptor, throwError = true) {
   // get the function arguments names
-  const argumentsNames = __getArgsNames(func); // loop on the arguments names
+  const argumentsNames = __getArgsNames(func);
 
+  const availableTypes = ['number', 'bigint', 'string', 'boolean', 'null', 'undefined', 'object', 'symbol', 'function', 'object', 'array']; // init the resulting object
+
+  const resultObj = {}; // loop on the arguments names
 
   argumentsNames.forEach((argName, i) => {
     // get the argument description object
@@ -60,11 +63,14 @@ function checkArgs(func, args, descriptor, throwError = true) {
       greater: 'Number -g --greater /^\\d$/',
       lower: 'Number -l --lower /^\\d$/',
       allowUndefined: 'Boolean -u --allow-undefined "false"',
-      allowNull: 'Boolean -n --allow-null "false"'
+      allowNull: 'Boolean -n --allow-null "false"' // default: `[${availableTypes.map((i) => `"${__upperFirst(i)}"`).toString()}] -d --default /\"[\\s\\S]+\"/`
+
     });
 
     if (!descriptor[argName]) return;
-    const argValue = args[i]; // check allow undefined
+    const argValue = args[i]; // construct the resultObj
+
+    resultObj[argName] = args[i]; // check allow undefined
 
     if (!descriptionObj.allowUndefined.value && argValue === undefined) {
       throw new Error(`The argument <yellow><bold>"${argName}"</bold></yellow> of the function <cyan><bold>"${func.name}"</bold></cyan> cannot be undefined...`);
@@ -76,17 +82,23 @@ function checkArgs(func, args, descriptor, throwError = true) {
     } // check type
 
 
-    const t = typeof descriptionObj.types.value ? [descriptionObj.types.value] : descriptionObj.types.value;
+    const allowedTypes = typeof descriptionObj.types.value ? [descriptionObj.types.value] : descriptionObj.types.value;
 
-    if (Array.isArray(t)) {
+    if (Array.isArray(allowedTypes)) {
       const argType = Array.isArray(argValue) ? 'Array' : __upperFirst(typeof argValue);
-      t.forEach(type => {
-        if (__upperFirst(type) !== argType) {
-          let argValueToDisplay = typeof argValue === 'function' ? argValue.name : argValue;
-          if (argValueToDisplay === '' && typeof argValue === 'function') argValueToDisplay = 'Anonymous function';
-          throw new Error(`The argument <yellow><bold>"${argName}"<bold></yellow> of the function <cyan><bold>"${func.name}"</bold></cyan> has to be of type <red>"${t.join(',')}"</red> but the passed value <red>"${argValueToDisplay}"</red> is a "${argType}"...`);
+      let isValid = argValue === undefined && descriptionObj.allowUndefined.value ? true : false;
+      isValid = argValue === null && descriptionObj.allowNull.value ? true : isValid;
+      allowedTypes.forEach(type => {
+        if (__upperFirst(type) === argType) {
+          isValid = true;
         }
       });
+
+      if (!isValid) {
+        let argValueToDisplay = typeof argValue === 'function' ? argValue.name : argValue;
+        if (argValueToDisplay === '' && typeof argValue === 'function') argValueToDisplay = 'Anonymous function';
+        throw new Error(`The argument <yellow><bold>"${argName}"<bold></yellow> of the function <cyan><bold>"${func.name}"</bold></cyan> has to be of type <red>"${allowedTypes.join(',')}"</red> but the passed value <red>"${argValueToDisplay}"</red> is a "${argType}"...`);
+      }
     } // check "of"
 
 
@@ -140,7 +152,9 @@ function checkArgs(func, args, descriptor, throwError = true) {
         }
       });
     }
-  });
+  }); // return the result object
+
+  return resultObj;
 }
 
 module.exports = exports.default;

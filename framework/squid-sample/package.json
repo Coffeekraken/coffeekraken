@@ -20,11 +20,14 @@
     "@babel/core": "^7.8.3",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/preset-env": "^7.8.3",
+    "@coffeekraken/gridle": "0.0.6",
     "@coffeekraken/sugar": "^1.0.23",
     "babel-loader": "^8.0.6",
+    "babel-plugin-transform-dynamic-import-default": "0.0.4",
     "bind-methods": "^1.1.0",
     "exec-sh": "^0.3.4",
-    "webpack": "^4.41.5"
+    "webpack": "^4.41.5",
+    "webpack-import-glob-loader": "^1.6.3"
   },
   "devDependencies": {}
 }

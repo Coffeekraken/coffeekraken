@@ -102,9 +102,9 @@ var _default = (string, args) => {
   if (!string) return;
   let argsObj = Object.assign(args); // handle the "alone" atruments that mean boolean true
 
-  const aloneSmallArgs = string.match(/\s(-[a-zA-Z])\s-/g);
+  const aloneSmallArgs = string.match(/\s(-[a-zA-Z])\s-[^0-9\s]+/g);
   const lastAloneSmallArgs = string.match(/\s(-[a-zA-Z])\s?$/g);
-  const aloneBigArgs = string.match(/\s(--[a-zA-Z-]+)\s-/g);
+  const aloneBigArgs = string.match(/\s(--[a-zA-Z-]+)\s-[^0-9\s]+/g);
   const lastAloneBigArgs = string.match(/\s(--[a-zA-Z-]+)\s?$/g);
 
   if (aloneSmallArgs) {
@@ -136,7 +136,7 @@ var _default = (string, args) => {
   }
 
   string = ' ' + string + ' ';
-  let parts = string.split(/(--?[a-zA-Z-]+)/g);
+  let parts = string.split(/(--?[a-zA-Z0-9-]+)/g);
   parts = parts.map(p => {
     return p.trim();
   });
@@ -177,7 +177,7 @@ var _default = (string, args) => {
       if (Array.isArray(parsedValue)) {
         value = [parsedValue];
       } else {
-        value = (0, _unquote.default)(parts[j + 1]).split(',');
+        value = (0, _unquote.default)(parts[j + 1] || '').split(',');
       }
 
       value = value.map(v => {
@@ -203,7 +203,7 @@ var _default = (string, args) => {
         }
 
         if (argObj.regex && !new RegExp(argObj.regex.slice(1, -1), 'g').test(value)) {
-          throw new Error(`The argument "${argName}"want to set his value to "${value}" but this does not match the argument regex "${argObj.regex}"...`);
+          throw new Error(`The argument "${argName}" want to set his value to "${value}" but this does not match the argument regex "${argObj.regex}"...`);
         }
       } else {
         partsToDelete.push(parts[j + 1]);
@@ -236,7 +236,7 @@ var _default = (string, args) => {
       if (Array.isArray(parsedValue)) {
         value = [parsedValue];
       } else {
-        value = (0, _unquote.default)(parts[j + 1]).split(',');
+        value = (0, _unquote.default)(parts[j + 1] || '').split(',');
       }
 
       value = value.map(v => {
@@ -262,7 +262,7 @@ var _default = (string, args) => {
         }
 
         if (argObj.regex && !new RegExp(argObj.regex.slice(1, -1), 'g').test(value)) {
-          throw new Error(`The argument "${argName}"want to set his value to "${value}" but this does not match the argument regex "${argObj.regex}"...`);
+          throw new Error(`The argument "${argName}" want to set his value to "${value}" but this does not match the argument regex "${argObj.regex}"...`);
         }
       } else {
         partsToDelete.push(parts[j + 1]);
@@ -291,7 +291,7 @@ var _default = (string, args) => {
       if (Array.isArray(parsedValue)) {
         value = [parsedValue];
       } else {
-        value = (0, _unquote.default)(value).split(',');
+        value = (0, _unquote.default)(value || '').split(',');
       }
 
       value = value.map(v => {

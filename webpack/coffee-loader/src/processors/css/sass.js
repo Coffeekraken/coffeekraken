@@ -34,8 +34,6 @@ module.exports = function sassProcessor(filepath, source, settings = {}) {
       // importer: __globImporter()
     }, settings)).css;
 
-    console.log('RES', source);
-
     // resolve the processor
     resolve({
       source: source,

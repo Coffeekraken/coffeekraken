@@ -110,15 +110,15 @@ class CoffeePack {
     //   });
     // });
     //
-    this.registerProcessor('js', ['js'], (filePath, source, settings) => {
-      return new Promise((resolve, reject) => {
-        // console.log('SE', settings);
-        // console.log('process JS', filePath);
-        resolve(source);
-      });
-    }, {
-      plop: 'hello'
-    }, 100);
+    // this.registerProcessor('js', ['js'], (filePath, source, settings) => {
+    //   return new Promise((resolve, reject) => {
+    //     // console.log('SE', settings);
+    //     // console.log('process JS', filePath);
+    //     resolve(source);
+    //   });
+    // }, {
+    //   plop: 'hello'
+    // }, 100);
 
     // this.registerProcessor(['png'], (filePath, source, callback) => {
     //   return new Promise((resolve, reject) => {
@@ -324,7 +324,6 @@ class CoffeePackWebpack {
           // throw new Error(err);
           // reject(err);
         }
-        // console.log(stats);
         // process finished
         resolve(stats);
       });
@@ -526,7 +525,7 @@ class CoffeePackWebpack {
 
     });
 
-    console.log(entryObj);
+    // console.log(entryObj);
 
     // return the entry object
     return entryObj;

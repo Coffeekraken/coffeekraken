@@ -1,12 +1,12 @@
 const __imagemin = require('imagemin');
-const __imagemin_mozjpeg = require('imagemin-mozjpeg');
+const __imagemin_webp = require('imagemin-webp');
 
 /**
- * @name                            mozjpeg
+ * @name                            webp
  * @namespace                       webpack.coffeeLoader.processors.image
  * @type                            Function
  *
- * Execute the imagemin mozjpeg on the source
+ * Execute the imagemin webp on the source
  *
  * @param            {String}             filepath        The path of the file to process
  * @param            {String}             source          The source code to process
@@ -14,11 +14,11 @@ const __imagemin_mozjpeg = require('imagemin-mozjpeg');
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function imagejpegProcessor(filepath, source, settings = {}) {
+module.exports = function webpProcessor(filepath, source, settings = {}) {
   return new Promise(async (resolve, reject) => {
 
     source = await __imagemin([filepath], {
-      plugins: [__imagemin_mozjpeg(settings)]
+      plugins: [__imagemin_webp(settings)]
     });
 
     // resolve the processor

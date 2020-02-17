@@ -46,6 +46,11 @@ module.exports = function log(message, level = 'default', transports = null) {
       // get the transport settings
       const transportSettings = (settings.transports && settings.transports[name]) ? settings.transports[name] : {};
 
+      if (message.slice(0,9) === 'override:') {
+        message = message.slice(9);
+        transportSettings.override = true;
+      }
+
       // call the transport and add it to the promises stack
       logPromises.push(Sugar._log.transports[name].function(message, level, transportSettings));
 

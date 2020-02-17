@@ -10,13 +10,17 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = {
+
+  sourcesFolder: 'src',
+  distFolder: 'dist',
+
   processors: {
 
     /**
      * Babel processor
      */
     babel: {
-      extensions: ['js'],
+      extensions: ['js','ts','coffee'],
       processor: require(__dirname + '/processors/js/babel'),
       settings: {
         presets: [
@@ -39,6 +43,26 @@ module.exports = {
     },
 
     /**
+     * Typescript processor
+     */
+    typescript: {
+      extensions: ['ts'],
+      processor: require(__dirname + '/processors/js/typescript'),
+      settings: {},
+      weight: 100
+    },
+
+    /**
+     * Coffeescript processor
+     */
+    coffeescript: {
+      extensions: ['coffee'],
+      processor: require(__dirname + '/processors/js/coffeescript'),
+      settings: {},
+      weight: 100
+    },
+
+    /**
      * Imagemin mozjpeg processor
      */
     mozjpeg: {
@@ -47,7 +71,53 @@ module.exports = {
       settings: {
         quality: 70
       },
-      weight: 10
+      weight: 100
+    },
+
+    /**
+     * Imagemin pngquant processor
+     */
+    pngquant: {
+      extensions: ['png'],
+      processor: require(__dirname + '/processors/image/pngquant'),
+      settings: {
+        quality: 70
+      },
+      weight: 100
+    },
+
+    /**
+     * Imagemin gifsicle processor
+     */
+    gifsicle: {
+      extensions: ['gif'],
+      processor: require(__dirname + '/processors/image/gifsicle'),
+      settings: {
+        quality: 70
+      },
+      weight: 100
+    },
+
+    /**
+     * Imagemin webp processor
+     */
+    webp: {
+      extensions: ['webp'],
+      processor: require(__dirname + '/processors/image/webp'),
+      settings: {
+        quality: 70
+      },
+      weight: 100
+    },
+
+    /**
+     * Imagemin svgo processor
+     */
+    svgo: {
+      extensions: ['svg'],
+      processor: require(__dirname + '/processors/image/svgo'),
+      settings: {},
+      weight: 100
     },
 
     /**

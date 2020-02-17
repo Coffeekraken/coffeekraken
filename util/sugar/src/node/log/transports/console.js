@@ -1,6 +1,10 @@
 const __consoleHtmlPreset = require('../htmlPresets/console');
 const __breakLineDependingOnSidesPadding = require('../../terminal/breakLineDependingOnSidesPadding');
 const __getDevEnv = require('../../dev/getDevEnv');
+const __terminalOverwrite = require('terminal-overwrite');
+const __readline = require('readline');
+
+let _lastLog = null;
 
 /**
  * @name                                    console
@@ -50,7 +54,20 @@ module.exports = (message, type, settings = {}) => {
 
     lines = lines.join('\n');
 
-    console.log(`${lines}\n`);
+    if (settings.override) {
+      if (_lastLog) {
+        const linesCount = _lastLog.split('\n').length;
+        for (let i=0; i<linesCount; i++) {
+          __readline.clearLine(process.stdout, 0);
+          __readline.moveCursor(process.stdout, 0, -1);
+        }
+        __readline.clearLine(process.stdout, 0);
+      }
+      _lastLog = `${lines}\n`;
+      process.stdout.write(`${lines}\n\n`);
+    } else {
+      console.log(`${lines}\n`);
+    }
 
     resolve();
 

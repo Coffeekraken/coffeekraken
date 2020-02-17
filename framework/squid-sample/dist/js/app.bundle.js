@@ -93,6 +93,12 @@
 
 var _deepMerge = _interopRequireDefault(__webpack_require__(1));
 
+var coco = _interopRequireWildcard(__webpack_require__(3));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
@@ -266,6 +272,64 @@ deepmerge.all = function deepmergeAll(array, options) {
 
 var deepmerge_1 = deepmerge;
 module.exports = deepmerge_1;
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+(function () {
+  // Assignment:
+  var cubes, list, math, num, number, opposite, race, square;
+  number = 42;
+  opposite = true;
+
+  if (opposite) {
+    // Conditions:
+    number = -42;
+  } // Functions:
+
+
+  square = function (x) {
+    return x * x;
+  }; // Arrays:
+
+
+  list = [1, 2, 3, 4, 5];
+  console.log('Hello World'); // Objects:
+
+  math = {
+    root: Math.sqrt,
+    square: square,
+    cube: function (x) {
+      return x * square(x);
+    }
+  }; // Splats:
+
+  race = function (winner, ...runners) {
+    return print(winner, runners);
+  };
+
+  if (typeof elvis !== "undefined" && elvis !== null) {
+    // Existence:
+    alert("I knew it!");
+  } // Array comprehensions:
+
+
+  cubes = function () {
+    var i, len, results;
+    results = [];
+
+    for (i = 0, len = list.length; i < len; i++) {
+      num = list[i];
+      results.push(math.cube(num));
+    }
+
+    return results;
+  }();
+}).call(void 0);
 
 /***/ })
 /******/ ]);

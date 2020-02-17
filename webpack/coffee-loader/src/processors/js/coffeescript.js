@@ -1,12 +1,12 @@
-const __imagemin = require('imagemin');
-const __imagemin_mozjpeg = require('imagemin-mozjpeg');
+const __coffeescript = require('coffeescript');
+const __deepMerge = require('@coffeekraken/sugar/node/object/deepMerge');
 
 /**
- * @name                            mozjpeg
+ * @name                            coffeescript
  * @namespace                       webpack.coffeeLoader.processors.image
  * @type                            Function
  *
- * Execute the imagemin mozjpeg on the source
+ * Execute the imagemin coffeescript on the source
  *
  * @param            {String}             filepath        The path of the file to process
  * @param            {String}             source          The source code to process
@@ -14,15 +14,22 @@ const __imagemin_mozjpeg = require('imagemin-mozjpeg');
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function imagejpegProcessor(filepath, source, settings = {}) {
+module.exports = function coffeescriptProcessor(filepath, source, settings = {}) {
   return new Promise(async (resolve, reject) => {
 
-    source = await __imagemin([filepath], {
-      plugins: [__imagemin_mozjpeg(settings)]
-    });
+    // console.log('COFFEE');
+
+    const result = __coffeescript.compile(source.toString(), __deepMerge({
+    }, settings));
+    source = result;
+
+    // console.log(result);
 
     // resolve the processor
-    resolve(source[0].data);
+    resolve({
+      source: source,
+      extension: 'js'
+    });
 
   });
 }

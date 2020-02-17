@@ -6,17 +6,141 @@ const __sortObj = require('@coffeekraken/sugar/js/object/sort');
 const __filterObj = require('@coffeekraken/sugar/js/object/filter');
 const __asyncForEach = require('@coffeekraken/sugar/js/array/asyncForEach');
 const __writeFileSync = require('@coffeekraken/sugar/node/fs/writeFileSync');
+const __log = require('@coffeekraken/sugar/node/log/log');
+const __cliProgress = require('cli-progress');
+const __colors = require('colors/safe');
+const __getDevEnv = require('@coffeekraken/sugar/node/dev/getDevEnv');
+const __breakLineDependingOnSidesPadding = require('@coffeekraken/sugar/node/terminal/breakLineDependingOnSidesPadding');
+const __readline = require('readline');
+const __folderSize = require('@coffeekraken/sugar/node/fs/folderSize');
+
+let _options = {};
+const _processedResources = [];
+let _processedResourcesPercentage = 0;
+let _interface = null;
+let _linesCount = 6;
+
+function drawProgressBar(percentage, resource){
+  return new Promise((resolve, reject) => {
+    // bar grows dynamically by current progrss - no whitespaces are added
+    // const bar = options.barCompleteString.substr(0, Math.round(params.progress*options.barsize));
+
+    // const bar = options.barCompleteString;
+
+    const padding = __getDevEnv('terminal.padding') || 3;
+    const maxWidth = (process.env.STDOUT_COLUMNS || process.stdout.columns) - padding * 2;
+    const progress = Math.round(maxWidth / 100 * percentage);
+
+    if ( ! _interface) {
+      // for (let i=0; i<5; i++) {
+      //   __readline.clearLine(process.stdout, 0);
+      //   __readline.moveCursor(process.stdout, 0, -1);
+      // }
+
+      _interface = __readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+      });
+
+      // _interface.on('line', (input) => {
+      //   console.log(`Received: ${input}`);
+      //   // linesCount++;
+      // });
+
+    } else {
+
+      for (let i=0; i<_linesCount; i++) {
+        __readline.clearLine(process.stdout, 0);
+        __readline.moveCursor(process.stdout, 0, -1);
+        // __readline.clearLine(process.stdout, 0);
+      }
+
+      _linesCount = 6;
+
+    }
+
+    let barColorFn = __colors.red;
+    if (percentage > 33) barColorFn = __colors.yellow;
+    if (percentage > 66) barColorFn = __colors.green;
+
+    let bar = barColorFn('█'.repeat(progress));
+    bar += '░'.repeat(maxWidth - progress);
+    if (percentage >= 100) {
+      bar = __colors.green('✔ '.repeat(Math.round(maxWidth / 2)));
+    }
+
+    let progressingResource = __breakLineDependingOnSidesPadding(`Processing "${__colors.yellow(resource.replace(process.cwd(), ''))}"...\n`, padding);
+    if (percentage >= 100) {
+      progressingResource = __breakLineDependingOnSidesPadding(`Congratulation! ${__colors.cyan(_processedResources.length.toString())} files have been builded with success!`, padding);
+    }
+    _linesCount += progressingResource.split('\n').length;
+
+    let title = `CoffeeBuilder in ${__colors.yellow('progress')}...\n`;
+    if (percentage >= 100 ) {
+      title = `CoffeeBuilder completed ${__colors.green('successfuly')}!\n`;
+    }
+
+    _interface.write(' '.repeat(10) + '\n');
+    _interface.write(' '.repeat(padding) + title);
+    _interface.write(' '.repeat(10) + '\n');
+    _interface.write(' '.repeat(padding) + bar + '\n');
+    _interface.write(' '.repeat(10) + '\n');
+    console.log(progressingResource);
+    _interface.write(' '.repeat(10) + '\n');
+
+    // console.log(linesCount);
+
+    if (percentage >= 100) {
+
+      (async function() {
+        if (_options.sourcesFolder && _options.distFolder) {
+          const srcSize = await __folderSize(_options.sourcesFolder);
+          const distSize = await __folderSize(_options.distFolder);
+          const rawSrcSize = await __folderSize(_options.sourcesFolder, true);
+          const rawDistSize = await __folderSize(_options.distFolder, true);
+          _interface.write(__breakLineDependingOnSidesPadding(`Sources folder size: ${__colors.red(srcSize)} / Dist folder size: ${__colors.yellow(distSize)}\n`, padding));
+          _interface.write(' '.repeat(10) + '\n');
+          _interface.write(__breakLineDependingOnSidesPadding(`The build has ${__colors.green(100 - Math.round(100 / rawSrcSize * rawDistSize))}%...\n`, padding));
+        }
+        _interface.write(' '.repeat(10) + '\n');
+        _interface.write(' '.repeat(10) + '\n');
+        _interface.write(' '.repeat(10) + '\n');
+        _interface.close();
+        resolve();
+      })();
+    } else {
+      resolve();
+    }
+
+    // const text = `   Build Progress\n${barColorFn(bar)} | {percentage}%   `;
+
+
+
+    // end value reached ?
+    // change color to green when finished
+    // if (params.value >= params.total){
+    //     return '# ' + _colors.grey(payload.task) + '   ' + _colors.green(params.value + '/' + params.total) + ' --[' + bar + ']-- ';
+    // }else{
+    //     return '# ' + payload.task + '   ' + _colors.yellow(params.value + '/' + params.total) + ' --[' + bar + ']-- ';
+    // }
+    // return text;
+
+  });
+}
 
 module.exports.raw = true;
 module.exports = function coffeeLoader(source) {
+
   this.cacheable && this.cacheable();
+
+  // __log(`override:Processing the file <yellow>"${this.resource.replace(process.cwd(), '')}"</yellow>...`);
 
   const _callback = this.async();
   const _extension = __getExtension(this.resource);
   let _saveExtension = _extension;
   const _rootContext = this.rootContext;
   const _this = this;
-  let _options = __loaderUtils.getOptions(this);
+  _options = __loaderUtils.getOptions(this);
   _options = __deepMerge(require('./defaultSettings'), _options);
 
   const _resource = this.resource;
@@ -95,6 +219,9 @@ module.exports = function coffeeLoader(source) {
     });
 
     async function execProcessor(i = 0) {
+
+      drawProgressBar(_processedResourcesPercentage, _resource);
+
       const processorObj = processorsSortedAndFilteredObj[Object.keys(processorsSortedAndFilteredObj)[i]];
       const result = await processorObj.processor(_resource, _source, processorObj.settings);
       _source = result.source || result;
@@ -108,12 +235,27 @@ module.exports = function coffeeLoader(source) {
     if (Object.keys(processorsSortedAndFilteredObj).length > 0) execProcessor();
     else handleProcessedFile(_resource, _source);
 
-    function handleProcessedFile(resource, sourceCode) {
+    async function handleProcessedFile(resource, sourceCode) {
+
+
+      _processedResources.push(resource);
+      let processedResourcesCount = 0;
+      Object.keys(_this._compiler.options.entry).forEach((r) => {
+        const sourcePath = _this._compiler.options.entry[r];
+        if (_processedResources.indexOf(sourcePath) != -1) {
+          processedResourcesCount++;
+        }
+      });
+      _processedResourcesPercentage = 100 / Object.keys(_this._compiler.options.entry).length * processedResourcesCount;
+
+      await drawProgressBar(_processedResourcesPercentage, resource);
+
       // check if is a js file so that we let webpack handle his saving phase...
-      if (_extension === 'js') {
-        _callback(null, sourceCode);
+      if (_saveExtension === 'js') {
+        return _callback(null, sourceCode);
       } else {
         saveProcessedFile(resource, sourceCode);
+        return _callback(null, '');
       }
     }
 
@@ -153,9 +295,6 @@ module.exports = function coffeeLoader(source) {
               outputFilePath = outputFilePath.replace(`.${_extension}`,`.${_saveExtension}`);
             });
 
-
-            console.log(outputFolderPath + '/' + outputFilePath);
-            // console.log(`${this.rootContext}/${outputFolder}/${outputFilePath}`);
             __writeFileSync(process.cwd() + '/' + outputFolderPath + '/' + outputFilePath, sourceCode);
             // _this.emitFile(`${outputFolderPath}/${outputFilePath}`, sourceCode);
 

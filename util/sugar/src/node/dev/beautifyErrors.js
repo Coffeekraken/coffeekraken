@@ -21,6 +21,9 @@ module.exports = function beautifyErrors() {
   ['unhandledRejection', 'uncaughtException'].forEach((e) => {
     process.on(e, async (err) => {
 
+      console.log(err);
+      return;
+
       const error = __parseError(err);
 
       const substract = 12;

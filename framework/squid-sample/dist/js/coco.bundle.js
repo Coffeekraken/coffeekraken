@@ -81,16 +81,67 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
-/******/ ({
+/******/ ([
+/* 0 */,
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
 
-/***/ 4:
-/***/ (function(module, exports) {
+"use strict";
 
 
+(function () {
+  // Assignment:
+  var cubes, list, math, num, number, opposite, race, square;
+  number = 42;
+  opposite = true;
+
+  if (opposite) {
+    // Conditions:
+    number = -42;
+  } // Functions:
+
+
+  square = function (x) {
+    return x * x;
+  }; // Arrays:
+
+
+  list = [1, 2, 3, 4, 5];
+  console.log('Hello World'); // Objects:
+
+  math = {
+    root: Math.sqrt,
+    square: square,
+    cube: function (x) {
+      return x * square(x);
+    }
+  }; // Splats:
+
+  race = function (winner, ...runners) {
+    return print(winner, runners);
+  };
+
+  if (typeof elvis !== "undefined" && elvis !== null) {
+    // Existence:
+    alert("I knew it!");
+  } // Array comprehensions:
+
+
+  cubes = function () {
+    var i, len, results;
+    results = [];
+
+    for (i = 0, len = list.length; i < len; i++) {
+      num = list[i];
+      results.push(math.cube(num));
+    }
+
+    return results;
+  }();
+}).call(void 0);
 
 /***/ })
-
-/******/ });
+/******/ ]);

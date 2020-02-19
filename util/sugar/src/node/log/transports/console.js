@@ -1,7 +1,6 @@
-const __consoleHtmlPreset = require('../htmlPresets/console');
+const __parseHtml = require('../../terminal/parseHtml');
 const __breakLineDependingOnSidesPadding = require('../../terminal/breakLineDependingOnSidesPadding');
 const __getDevEnv = require('../../dev/getDevEnv');
-const __terminalOverwrite = require('terminal-overwrite');
 const __readline = require('readline');
 
 let _lastLog = null;
@@ -24,7 +23,9 @@ module.exports = (message, type, settings = {}) => {
   return new Promise((resolve, reject) => {
 
     // replace the tags
-    message = __consoleHtmlPreset(message);
+    message = __parseHtml(message);
+
+    const padding = __getDevEnv('stdout.padding');
 
     const symbols = {
       default: '-',
@@ -48,9 +49,14 @@ module.exports = (message, type, settings = {}) => {
 
       const l = originalLines[i];
 
-      lines.push(__breakLineDependingOnSidesPadding(l, __getDevEnv('terminal.padding') || 6));
+      lines.push(__breakLineDependingOnSidesPadding(l, padding || 6));
 
     }
+
+    lines = lines.map((l) => {
+      if (l.slice(0,padding) !== ' '.repeat(padding)) return ' '.repeat(padding) + l;
+      return l;
+    });
 
     lines = lines.join('\n');
 

@@ -15,7 +15,7 @@
   "scripts": {},
   "_moduleAliases": {
     "@coffeekraken/webpack-coffee-loader": "../../webpack/coffee-loader",
-    "@coffeekraken/webpack-coffeepack": "../../webpack/coffeepack",
+    "@coffeekraken/coffeebuilder": "../../terminal/coffeebuilder",
     "@coffeekraken/webpack-concat-dependencies-vendors-plugin": "../../webpack/concat-dependencies-vendors-plugin",
     "@coffeekraken/webpack-lazy-dom-load-plugin": "../../webpack/lazy-dom-load-plugin",
     "@coffeekraken/sugar/js": "../../util/sugar/dist/js",

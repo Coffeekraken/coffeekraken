@@ -53,7 +53,7 @@ module.exports = function initApp(settings = {}) {
 
   // setup dev env
   __setupDevEnv({
-    terminal: {
+    stdout: {
       padding: 3
     }
   });

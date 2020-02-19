@@ -1,12 +1,12 @@
-const __coffeescript = require('coffeescript');
+const __typescript = require('typescript');
 const __deepMerge = require('@coffeekraken/sugar/node/object/deepMerge');
 
 /**
- * @name                            coffeescript
+ * @name                            typescript
  * @namespace                       webpack.coffeeLoader.processors.image
  * @type                            Function
  *
- * Execute the imagemin coffeescript on the source
+ * Execute the imagemin typescript on the source
  *
  * @param            {String}             filepath        The path of the file to process
  * @param            {String}             source          The source code to process
@@ -14,16 +14,16 @@ const __deepMerge = require('@coffeekraken/sugar/node/object/deepMerge');
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function coffeescriptProcessor(filepath, source, settings = {}) {
+module.exports = function typescriptProcessor(filepath, source, settings = {}) {
   return new Promise(async (resolve, reject) => {
 
-    // console.log('COFFEE');
-
-    const result = __coffeescript.compile(source.toString(), __deepMerge({
+    const result = __typescript.transpileModule(source.toString(), __deepMerge({
+      compilerOptions: {
+        module: __typescript.ModuleKind.CommonJS,
+        // inlineSourceMap: true
+      }
     }, settings));
-    source = result;
-
-    // console.log(result);
+    source = result.outputText;
 
     // resolve the processor
     resolve({

@@ -81,15 +81,20 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 6:
-/***/ (function(module, exports) {
+/***/ 2:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 
 
+var result = myLib.makeGreeting("hello, world");
+console.log("The computed greeting is:" + result);
+var count = myLib.numberOfGreetings;
 
 /***/ })
 

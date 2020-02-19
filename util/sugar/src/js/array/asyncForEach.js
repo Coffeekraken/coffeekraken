@@ -23,7 +23,10 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default async function asyncForEach(array, asyncFn) {
-  for (let index = 0; index < array.length; index++) {
-    await asyncFn(array[index], index, array);
-  }
+  return new Promise(async (resolve, reject) => {
+    for (let index = 0; index < array.length; index++) {
+      await asyncFn(array[index], index, array);
+    }
+    resolve();
+  });
 }

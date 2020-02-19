@@ -23,10 +23,17 @@ module.exports = function babelProcessor(filepath, source, settings = {}) {
   return new Promise((resolve, reject) => {
 
     // transform the code using babel
-    const babelResult = __babel.transform(source, settings);
+    const babelResult = __babel.transform(source, {
+      inputSourceMap: true,
+      sourceMaps: true,
+      ...settings
+    });
 
     // resolve the processor
-    resolve(babelResult.code);
+    resolve({
+      source: babelResult.code,
+      sourceMap: babelResult.map
+    });
 
   });
 }

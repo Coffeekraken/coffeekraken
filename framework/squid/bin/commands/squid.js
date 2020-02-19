@@ -11,7 +11,7 @@ const __emptyDirSync = require('@coffeekraken/sugar/node/fs/emptyDirSync');
 const __filesize = require('file-size');
 const __TerserPlugin = require('terser-webpack-plugin');
 const __base64 = require('@coffeekraken/sugar/node/crypt/base64');
-const __CoffeePack = require('@coffeekraken/webpack-coffeepack');
+const __CoffeeBuilder = require('@coffeekraken/coffeebuilder');
 const __initEnv = require('@coffeekraken/sugar/node/app/initEnv');
 
 const projectPackageJson = require(process.cwd() + '/package.json');
@@ -25,10 +25,10 @@ module.exports = (compile = ['js']) => {
   const config = __getConfig();
   const entryObj = {};
 
-  const coffeepack = new __CoffeePack({});
+  const coffeepack = new __CoffeeBuilder({});
 
   coffeepack.run().then(() => {
-    console.log('build finished!');
+    // console.log('build finished!');
   });
 
   // console.log(coffeepack.webpack.loaders());

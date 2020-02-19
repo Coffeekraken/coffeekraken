@@ -23,12 +23,13 @@ module.exports = function breakLineDependingOnSidesPadding(text, sidesPadding) {
   const pHalf = Math.round(p / 2);
   const startingLine = text.slice(0,2);
   const startingLineMatch = startingLine.match(/([^a-zA-Z0-9])\s/);
-  if (startingLineMatch) {
-    text = text.replace(startingLineMatch[0], '');
-    currentLine += `${' '.repeat(pHalf)}${startingLineMatch[1]}${' '.repeat(pHalf-1)}`;
-  } else {
-    currentLine += `${' '.repeat(p)}`;
-  }
+
+  // if (startingLineMatch) {
+  //   text = text.replace(startingLineMatch[0], '');
+  //   currentLine += `${' '.repeat(pHalf)}${startingLineMatch[1]}${' '.repeat(pHalf-1)}`;
+  // } else {
+  //   currentLine += `${' '.repeat(p)}`;
+  // }
   // if () {
   //   currentLine += `${startingLine}`
   // }

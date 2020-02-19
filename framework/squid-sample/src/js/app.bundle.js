@@ -1,3 +1,3 @@
-import __deepMerge from '@coffeekraken/sugar/js/object/deepMerge';
-
-import * as coco from './coco.coffee';
+// import __deepMerge from '@coffeekraken/sugar/js/object/deepMerge';
+alert('Hello world');
+// import * as coco from './coco.coffee';

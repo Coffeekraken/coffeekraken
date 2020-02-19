@@ -23,7 +23,7 @@ module.exports = function logHeader(title, description=null, infos={}) {
 
   const columns = process.env.STDOUT_COLUMNS || process.stdout.columns;
 
-  const sidePadding = __getDevEnv('terminal.padding');
+  const sidePadding = __getDevEnv('stdout.padding');
 
   let message = '<br/>';
   message += '<br/>';

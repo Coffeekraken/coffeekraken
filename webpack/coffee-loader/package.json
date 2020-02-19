@@ -36,6 +36,11 @@
   ],
   "license": "MIT",
   "homepage": "https://coffeekraken.io",
+  "_moduleAliases": {
+    "@coffeekraken/coffeebuilder/node": "../../terminal/coffeebuilder/src/node",
+    "@coffeekraken/sugar/js": "../../util/sugar/dist/js",
+    "@coffeekraken/sugar/node": "../../util/sugar/src/node"
+  },
   "dependencies": {
     "@babel/core": "^7.8.4",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
@@ -64,5 +69,7 @@
     "typescript": "^3.7.5",
     "webpack": "^4.41.5"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "module-alias": "^2.2.2"
+  }
 }

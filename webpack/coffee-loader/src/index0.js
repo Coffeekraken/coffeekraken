@@ -1,25 +1,73 @@
+if (process.env.NODE_ENV != 'production') require('module-alias/register');
+
 const __getExtension = require('@coffeekraken/sugar/js/string/getExtension');
 const __fs = require('fs');
 const __loaderUtils = require('loader-utils');
+const __deepMerge = require('@coffeekraken/sugar/node/object/deepMerge');
+const __sortObj = require('@coffeekraken/sugar/js/object/sort');
+const __filterObj = require('@coffeekraken/sugar/js/object/filter');
+const __asyncForEach = require('@coffeekraken/sugar/js/array/asyncForEach');
+const __writeFileSync = require('@coffeekraken/sugar/node/fs/writeFileSync');
+const __log = require('@coffeekraken/sugar/node/log/log');
+const __cliProgress = require('cli-progress');
+const __colors = require('colors/safe');
+const __getDevEnv = require('@coffeekraken/sugar/node/dev/getDevEnv');
+const __breakLineDependingOnSidesPadding = require('@coffeekraken/sugar/node/terminal/breakLineDependingOnSidesPadding');
+const __readline = require('readline');
+const __folderSize = require('@coffeekraken/sugar/node/fs/folderSize');
+const __parseHtml = require('@coffeekraken/sugar/node/terminal/parseHtml');
+const __coffeeEvents = require('@coffeekraken/coffeebuilder/node/events');
 
-module.exports = async function coffeepackLoader(source) {
-  this.cacheable && this.cacheable();
+let _options = {};
+let _processedResources = [];
+let _processedResourcesPercentage = 0;
+let _interface = null;
+let _usedProcessors = {};
 
-  const callback = this.async();
-  const extension = __getExtension(this.resource);
+let printInterval;
+
+__coffeeEvents.on('reset', () => {
+  console.log('RESET');
+  _processedResources = [];
+  _processedResourcesPercentage = 0;
+  _usedProcessors = {};
+});
+
+module.exports.raw = true;
+module.exports = function coffeeLoader(source) {
+
+  this.cacheable(false);
+
+  // this.cacheable && this.cacheable();
+
+  const _callback = this.async();
+  const _extension = __getExtension(this.resource);
+  let _saveExtension = _extension;
+  const _rootContext = this.rootContext;
   const _this = this;
-  let returnSource = true;
-  let returnExtension = extension;
-  const options = __loaderUtils.getOptions(this);
+  _options = __loaderUtils.getOptions(this);
+  _options = __deepMerge(require('./defaultSettings'), _options);
 
-  console.log('OPT', options);
+  const _resource = this.resource;
+  let _source = source;
 
-  if (options.disable === true) {
+  Object.keys(_options.processors).forEach((processorName) => {
+    const processorObj = _options.processors[processorName];
+    if (processorObj.extensions.indexOf(_extension) != -1) {
+      if ( ! _usedProcessors[processorName]) {
+        _usedProcessors[processorName] = {
+          files: 0
+        };
+      }
+    }
+  });
+
+  if (_options.disable === true) {
     // Bypass processing while on watch mode
     return source;
   } else {
 
-    const stats = __fs.statSync(this.resource);
+    const stats = __fs.statSync(_resource);
     const mimeTime = stats.mtime;
 
     // if (updatedTimestamps[this.resource]) {
@@ -78,6 +126,114 @@ module.exports = async function coffeepackLoader(source) {
     //     return callback(null, source);
     //   }
     // }
+
+    let processorsSortedAndFilteredObj = __sortObj(_options.processors, (a, b) => {
+      return b.weight - a.weight;
+    });
+    processorsSortedAndFilteredObj = __filterObj(processorsSortedAndFilteredObj, (item) => {
+      return item !== false && item.extensions.indexOf(_extension) !== -1;
+    });
+
+    async function execProcessor(i = 0) {
+
+      const processorObj = processorsSortedAndFilteredObj[Object.keys(processorsSortedAndFilteredObj)[i]];
+      const result = await processorObj.processor(_resource, _source, processorObj.settings, _this);
+      _source = result.source || result;
+      if (result.extension) _saveExtension = result.extension;
+
+      _usedProcessors[Object.keys(processorsSortedAndFilteredObj)[i]].files++;
+
+      __coffeeEvents.emit('data', {
+        percentage: _processedResourcesPercentage,
+        resource: _resource,
+        processor: Object.keys(processorsSortedAndFilteredObj)[i],
+        processedResources: _processedResources,
+        usedProcessors: _usedProcessors
+      });
+
+      if (i >= Object.keys(processorsSortedAndFilteredObj).length-1) {
+        handleProcessedFile(_resource, _source, Object.keys(processorsSortedAndFilteredObj)[i]);
+      } else {
+        execProcessor(i+1);
+      }
+    }
+    if (Object.keys(processorsSortedAndFilteredObj).length > 0) execProcessor();
+    else handleProcessedFile(_resource, _source);
+
+    async function handleProcessedFile(resource, sourceCode, processor) {
+
+      _processedResources.push(resource);
+      let processedResourcesCount = 0;
+      Object.keys(_this._compiler.options.entry).forEach((r) => {
+        const sourcePath = _this._compiler.options.entry[r];
+        if (_processedResources.indexOf(sourcePath) != -1) {
+          processedResourcesCount++;
+        }
+      });
+      _processedResourcesPercentage = 100 / Object.keys(_this._compiler.options.entry).length * processedResourcesCount;
+
+      __coffeeEvents.emit('data', {
+        percentage: _processedResourcesPercentage,
+        resource,
+        processor,
+        processedResources: _processedResources,
+        usedProcessors: _usedProcessors
+      });
+
+      // check if is a js file so that we let webpack handle his saving phase...
+      if (_saveExtension === 'js') {
+        return _callback(null, sourceCode);
+      } else {
+        saveProcessedFile(resource, sourceCode, _saveExtension);
+        return _callback(null, '');
+      }
+    }
+
+    function saveProcessedFile(resource, sourceCode, saveExtension) {
+
+      let buildScopes = {};
+      let extension = __getExtension(resource);
+
+      Object.keys(_options.files).forEach((key, i) => {
+        const opts = _options.files[key];
+
+        let outputFilePath = resource;
+
+        if (opts.extensions && opts.extensions.indexOf(extension) !== -1) {
+          buildScopes[key] = opts;
+        } else return;
+
+        Object.keys(buildScopes).forEach((scopeKey) => {
+
+          const scope = buildScopes[scopeKey];
+
+          let outputFolder = scope.outputFolder;
+          if ( ! Array.isArray(outputFolder)) outputFolder = [outputFolder];
+
+          let sourcesFolder = scope.sourcesFolder;
+          if ( ! Array.isArray(sourcesFolder)) sourcesFolder = [sourcesFolder];
+          if ( ! outputFolder || ! sourcesFolder) return;
+
+          outputFolder.forEach((outputFolderPath) => {
+
+            sourcesFolder.forEach((sourcesFolderPath) => {
+              outputFilePath = outputFilePath.trim();
+              outputFilePath = outputFilePath.replace(_rootContext, '');
+              outputFilePath = outputFilePath.replace(sourcesFolderPath, '');
+              if (outputFilePath.slice(0,2) === '//') outputFilePath = outputFilePath.slice(2);
+              if (outputFilePath.slice(0,1) === '/') outputFilePath = outputFilePath.slice(1);
+              outputFilePath = outputFilePath.replace(`.${_extension}`,`.${saveExtension}`);
+            });
+
+            __writeFileSync(process.cwd() + '/' + outputFolderPath + '/' + outputFilePath, sourceCode);
+            // _this.emitFile(`${outputFolderPath}/${outputFilePath}`, sourceCode);
+
+          });
+        });
+      });
+    }
+
+    // console.log(this.resource, src);
 
     // jpg transpiler
   //   if (options.jpg.extensions.indexOf(extension) !== -1) {
@@ -215,11 +371,8 @@ module.exports = async function coffeepackLoader(source) {
   //
   }
 
-  if (returnSource) {
-    callback(null, source);
-  } else {
-    callback(null, '');
-  }
+  // console.log(this.resource, result);
+
   // return source;
 
 }

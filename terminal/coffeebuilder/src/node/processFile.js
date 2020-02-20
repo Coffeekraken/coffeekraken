@@ -4,45 +4,24 @@ const __sortObj = require('@coffeekraken/sugar/js/object/sort');
 const __filterObj = require('@coffeekraken/sugar/js/object/filter');
 const __getExtension = require('@coffeekraken/sugar/js/string/getExtension');
 const __fs = require('fs');
+const __path = require('path');
 const __writeFileSync = require('@coffeekraken/sugar/node/fs/writeFileSync');
+const __tmpDir = require('@coffeekraken/sugar/node/fs/tmpDir');
+
 const __coffeeEvents = require('./events');
 const __settings = require('./settings');
 
-let _processedResources = [];
-let _processedResourcesPercentage = 0;
-let _usedProcessors = {};
-
-let printInterval;
-
-__coffeeEvents.on('reset', () => {
-  _processedResources = [];
-  _processedResourcesPercentage = 0;
-  _usedProcessors = {};
-});
-
-module.exports = function processFile(source, filepath) {
+module.exports = function processFile(source, filepath, loaderInstance = null) {
 
   return new Promise(async (resolve, reject) => {
+
+    __coffeeEvents.emit('build', {
+      files: Object.values(loaderInstance._compiler.options.entry)
+    });
 
     const _extension = __getExtension(filepath);
     let _saveExtension = _extension;
     const settings = require(__dirname + '/settings');
-
-    // track how many precessors are used and how many files have been processed
-    Object.keys(__settings.processors).forEach((processorName) => {
-      const processorObj = __settings.processors[processorName];
-      if (processorObj.extensions.indexOf(_extension) != -1) {
-        if ( ! _usedProcessors[processorName]) {
-          _usedProcessors[processorName] = {
-            files: 0
-          };
-        }
-      }
-    });
-
-
-    // const stats = __fs.statSync(_resource);
-    // const mimeTime = stats.mtime;
 
     let processorsSortedAndFilteredObj = __sortObj(__settings.processors, (a, b) => {
       return b.weight - a.weight;
@@ -64,29 +43,12 @@ module.exports = function processFile(source, filepath) {
 
       if (result.extension) _saveExtension = result.extension;
 
-      _usedProcessors[processorsKeys[i]].files++;
-
-      __coffeeEvents.emit('data', {
-        percentage: _processedResourcesPercentage,
-        resource: filepath,
-        processor: processorsSortedAndFilteredObj[processorsKeys[i]],
-        processedResources: _processedResources,
-        usedProcessors: _usedProcessors
+      __coffeeEvents.emit('build', {
+        filepath: filepath,
+        processor: processorsKeys[i]
       });
 
     }
-
-    _processedResources.push(filepath);
-
-    // let processedResourcesCount = 0;
-    // Object.keys(_this._compiler.options.entry).forEach((r) => {
-    //   const sourcePath = _this._compiler.options.entry[r];
-    //   if (_processedResources.indexOf(sourcePath) != -1) {
-    //     processedResourcesCount++;
-    //   }
-    // });
-    // _processedResourcesPercentage = 100 / Object.keys(_this._compiler.options.entry).length * processedResourcesCount;
-
 
     // check if is a js file so that we let webpack handle his saving phase...
     if (_saveExtension === 'js') {
@@ -125,14 +87,17 @@ module.exports = function processFile(source, filepath) {
             outputFilePath = outputFilePath.replace(`.${_extension}`,`.${_saveExtension}`);
           });
 
-          // __writeFileSync(process.cwd() + '/' + outputFolderPath + '/' + outputFilePath, source);
-          // this.emitFile(process.cwd() + '/' + outputFolderPath + '/' + outputFilePath, source);
+          if (loaderInstance) {
+            loaderInstance.emitFile(outputFolderPath + '/' + outputFilePath, source);
+          } else {
+            __writeFileSync(process.cwd() + '/' + outputFolderPath + '/' + outputFilePath, source);
+          }
 
         });
       });
     });
 
-    resolve(null);
+    resolve('');
 
   });
 

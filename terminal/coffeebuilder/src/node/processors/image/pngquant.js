@@ -10,7 +10,7 @@ const __imagemin_pngquant = require('imagemin-pngquant');
  *
  * @param            {String}             filepath        The path of the file to process
  * @param            {String}             source          The source code to process
- * @param            {Object}             [settings={}]   The settings to pass to babel package
+ * @param            {Object}             [settings={}]   The settings to pass to imagemin pngquant package
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */

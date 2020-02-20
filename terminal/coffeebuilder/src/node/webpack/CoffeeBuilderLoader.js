@@ -7,8 +7,8 @@ const __sortObj = require('@coffeekraken/sugar/js/object/sort');
 const __filterObj = require('@coffeekraken/sugar/js/object/filter');
 const __writeFileSync = require('@coffeekraken/sugar/node/fs/writeFileSync');
 
-const __coffeeEvents = require('@coffeekraken/coffeebuilder/node/events');
-const __processFile = require('@coffeekraken/coffeebuilder/node/processFile');
+const __coffeeEvents = require('../events');
+const __processFile = require('../processFile');
 
 module.exports.raw = true;
 module.exports = function coffeeLoader(source) {
@@ -17,12 +17,8 @@ module.exports = function coffeeLoader(source) {
 
   const _callback = this.async();
 
-  __processFile(source, this.resource).then((src) => {
-    // console.log('Build finished!!!', this.resrc);
-
-    console.log(this.resource, src);
+  __processFile(source, this.resource, this).then((src) => {
     _callback(null, src);
-
   });
 
 

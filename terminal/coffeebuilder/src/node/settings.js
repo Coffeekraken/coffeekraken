@@ -95,6 +95,23 @@ let _settings = {
   },
 
   /**
+   * Default post processors
+   */
+  postProcessors: {
+
+    /**
+     * Terser post processor
+     */
+    terser: {
+      extensions: ['js'],
+      processor: require(__dirname + '/postProcessors/js/terser'),
+      settings: {},
+      weight: 10
+    }
+
+  },
+
+  /**
    * Default processors
    */
   processors: {

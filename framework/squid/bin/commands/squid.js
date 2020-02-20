@@ -48,7 +48,7 @@ module.exports = (compile = ['js']) => {
   // });
 
   __log(`Emptying the current javascript dist folder <bold><cyan>"${config.dist.js.outputFolder}"</cyan></bold>...`, 'info');
-  __emptyDirSync(__dirname + '/../../' + config.dist.js.outputFolder);
+  __emptyDirSync(process.cwd() + '/' + config.dist.folder);
   __log('Compiling/compressing the javascript bundle files...', 'info');
 
 

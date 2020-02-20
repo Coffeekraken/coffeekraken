@@ -12,7 +12,7 @@ const __loaderUtils = require('loader-utils');
  *
  * @param            {String}             filepath        The path of the file to process
  * @param            {String}             source          The source code to process
- * @param            {Object}             [settings={}]   The settings to pass to babel package
+ * @param            {Object}             [settings={}]   The settings to pass to coffeescript compiler
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */

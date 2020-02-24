@@ -29,7 +29,7 @@ module.exports = function coffeescriptProcessor(filepath, source, settings = {})
     // resolve the processor
     resolve({
       source: source.js,
-      sourceMap: source.sourceMap,
+      map: source.sourceMap,
       extension: 'js'
     });
 

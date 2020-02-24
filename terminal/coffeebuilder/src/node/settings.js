@@ -72,14 +72,10 @@ let _settings = {
         publicPath: '/app/js/',
         chunkFilename: `dist/js/chunks/[name]-[chunkhash]-${projectPackageJson.version}.js`
       },
+      devtool: 'source-map',
       plugins: [],
       optimization: {
-        minimize: true,
-        minimizer: process.env.NODE_ENV === 'production' ? [
-          new __TerserPlugin({
-            terserOptions: {}
-          }
-        )] : []
+        minimize: true
       },
       resolve: {
         alias: {
@@ -105,6 +101,16 @@ let _settings = {
     terser: {
       extensions: ['js'],
       processor: require(__dirname + '/postProcessors/js/terser'),
+      settings: {},
+      weight: 10
+    },
+
+    /**
+     * CleanCSS post processor
+     */
+    cleanCss: {
+      extensions: ['css','scss','sass'],
+      processor: require(__dirname + '/postProcessors/css/cleanCss'),
       settings: {},
       weight: 10
     }

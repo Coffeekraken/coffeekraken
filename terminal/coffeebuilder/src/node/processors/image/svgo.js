@@ -22,7 +22,10 @@ module.exports = function svgoProcessor(filepath, source, settings = {}) {
     });
 
     // resolve the processor
-    resolve(source[0].data);
+    resolve({
+      source: source[0].data,
+      map: null
+    });
 
   });
 }

@@ -17,10 +17,11 @@ const __readline = require('readline');
 const __cfonts = require('cfonts');
 const __chokidar = require('chokidar');
 const __restoreCursor = require('restore-cursor');
+const __ora = require('ora');
 
-const __config = require('./config');
 const __coffeeEvents = require('./events');
 const __setup = require('./settings').setup;
+const __stats = require('./stats');
 
 const __path = require('path');
 const __fs = require('fs');
@@ -53,38 +54,6 @@ class CoffeePack {
    */
   _postProcessors = {};
 
-  /**
-   * @name                        _stats
-   * @namespace                   coffeebuilder.node.CoffeeBuilder
-   * @type                        Object
-   *
-   * Store the build process stats
-   *
-   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _stats = {
-    build: {
-      startTimestamp: null,
-      endTimestamp: null,
-      files: [],
-      processedFiles: [],
-      currentFilePath: '',
-      currentProcessor: '',
-      percentage: 0,
-      processors: {}
-    },
-    postBuild: {
-      startTimestamp: null,
-      endTimestamp: null,
-      files: [],
-      processedFiles: [],
-      currentFilePath: '',
-      currentProcessor: '',
-      percentage: 0,
-      processors: {}
-    }
-  };
-
   _watchCompile = [];
   _drawInterfaceTimeout = null;
 
@@ -105,7 +74,7 @@ class CoffeePack {
 
     process.stdout.on('resize', () => {
       this.drawInterface();
-      if (this._stats.build.endTimestamp) {
+      if (__stats.build.endTimestamp) {
         this.drawAfterBuildStats();
       }
     });
@@ -140,63 +109,13 @@ class CoffeePack {
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _listenBuildEvents() {
-
     __coffeeEvents.on('build', (data) => {
-
-      if (data.files) this._stats.build.files = data.files;
-      if (data.filepath) this._stats.build.currentFilePath = data.filepath;
-      if (data.processor) this._stats.build.currentProcessor = data.processor;
-
-      if (data.processor && ! this._stats.build.processors[data.processor]) {
-        this._stats.build.processors[data.processor] = {
-          processedFiles: []
-        }
-      }
-      if (data.filepath && data.processor) {
-        if (this._stats.build.processors[data.processor].processedFiles.indexOf(data.filepath) === -1) this._stats.build.processors[data.processor].processedFiles.push(data.filepath);
-        if (this._stats.build.processedFiles.indexOf(data.filepath) === -1) this._stats.build.processedFiles.push(data.filepath);
-      }
-
-      const filteredFilesArray = this._stats.build.processedFiles.filter((f) => {
-        return this._stats.build.files.indexOf(f) !== -1;
-      });
-
-      this._stats.build.percentage = Math.round(100 / this._stats.build.files.length * filteredFilesArray.length);
-
       this.drawInterface();
     });
 
     __coffeeEvents.on('postBuild', (data) => {
-
-      if (data.files) this._stats.postBuild.files = data.files.map((f) => {
-        return __path.resolve(f);
-      });
-
-      if (data.filepath) this._stats.postBuild.currentFilePath = data.filepath;
-      if (data.processor) this._stats.postBuild.currentProcessor = data.processor;
-
-      if (data.processor && ! this._stats.build.processors[data.processor]) {
-        this._stats.build.processors[data.processor] = {
-          processedFiles: []
-        }
-      }
-      if (data.filepath && data.processor) {
-        if (this._stats.build.processors[data.processor].processedFiles.indexOf(data.filepath) === -1) this._stats.build.processors[data.processor].processedFiles.push(data.filepath);
-      }
-      if (data.filepath) {
-        if (this._stats.postBuild.processedFiles.indexOf(data.filepath) === -1) this._stats.postBuild.processedFiles.push(data.filepath);
-      }
-
-      const filteredFilesArray = this._stats.postBuild.processedFiles.filter((f) => {
-        return this._stats.postBuild.files.indexOf(f) !== -1;
-      });
-
-      this._stats.postBuild.percentage = Math.round(100 / this._stats.postBuild.files.length * filteredFilesArray.length);
-
-
       this.drawInterface();
     });
-
   }
 
   /**
@@ -403,7 +322,7 @@ class CoffeePack {
       // __coffeeEvents.emit('reset');
 
       // save the startTimestamp
-      this._stats.build.startTimestamp = Date.now();
+      __stats.build.startTimestamp = Date.now();
 
       // run webpack
       Promise.all([
@@ -411,7 +330,7 @@ class CoffeePack {
       ]).then(() => {
 
         // save the endTimestamp
-        this._stats.build.endTimestamp = Date.now();
+        __stats.build.endTimestamp = Date.now();
 
         // redraw the interface one last time
         this.drawInterface();
@@ -432,7 +351,8 @@ class CoffeePack {
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   resetBuildStats() {
-    this._stats.build = {
+    __stats.cache.files = [];
+    __stats.build = {
       startTimestamp: null,
       endTimestamp: null,
       files: [],
@@ -458,255 +378,274 @@ class CoffeePack {
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   drawInterface(){
-     return new Promise(async (resolve, reject) => {
 
-       if ( ! this._stats.build.percentage) this._stats.build.percentage = 0;
+    // if ( ! this._drawInterfaceInterval) {
+    //   this._drawInterfaceInterval = setInterval(() => {
+    //     this.drawInterface();
+    //   }, 300);
+    // }
 
-       const { percentage, currentFilePath, currentProcessor, processedFiles, processors } = this._stats.build;
+   return new Promise(async (resolve, reject) => {
 
-       const postPercentage = this._stats.postBuild.percentage;
+     if ( ! __stats.build.percentage) __stats.build.percentage = 0;
 
-       const watchCompile = this._watchCompile;
-       const compileType = watchCompile.length ? watchCompile : this._config.compile;
+     const { percentage, currentFilePath, currentProcessor, processedFiles, processors } = __stats.build;
 
-       let lines = ['\n'];
+     const postPercentage = __stats.postBuild.percentage;
 
-       // const padding = __getDevEnv('stdout.padding') || 3;
-       const padding = process.env.STDOUT_PADDING || 3;
-       const maxWidth = (process.env.STDOUT_COLUMNS || process.stdout.columns) - padding * 2;
-       const progress = Math.round(maxWidth / 100 * percentage || 0);
-       const postProgress = Math.round(maxWidth / 100 * postPercentage || 0);
+     const watchCompile = this._watchCompile;
+     const compileType = watchCompile.length ? watchCompile : this._config.compile;
 
-       // clear the terminal
-       __readline.clearLine(process.stdout, 0);
-       for (let i = 0; i < process.stdout.rows; i++) {
-         __readline.clearLine(process.stdout, 0);
-         __readline.moveCursor(process.stdout, 0, -1);
-       }
+     let lines = ['\n'];
 
-       let barColorTag = 'red';
-       if (percentage > 33) barColorTag = 'yellow';
-       if (percentage > 66) barColorTag = 'green';
+     // const padding = __getDevEnv('stdout.padding') || 3;
+     const padding = process.env.STDOUT_PADDING || 3;
+     const maxWidth = (process.env.STDOUT_COLUMNS || process.stdout.columns) - padding * 2;
+     const progress = Math.round(maxWidth / 100 * percentage || 0);
+     const postProgress = Math.round(maxWidth / 100 * postPercentage || 0);
 
-       let bar = `<${barColorTag}>` + '█'.repeat(progress) + `</${barColorTag}>`;
-       bar += '░'.repeat(maxWidth - progress);
+     // clear the terminal
+     // __readline.clearLine(process.stdout, 0);
+     // for (let i = 0; i < process.stdout.rows; i++) {
+     //   __readline.clearLine(process.stdout, 0);
+     //   __readline.moveCursor(process.stdout, 0, -1);
+     // }
 
-       if (percentage >= 100) {
-         bar = '<green>' + '✔ '.repeat(Math.round(maxWidth / 2)) + '</green>';
-       }
+     let barColorTag = 'red';
+     if (percentage > 33) barColorTag = 'yellow';
+     if (percentage > 66) barColorTag = 'green';
 
-       let postBarColorTag = 'red';
-       if (postPercentage > 33) postBarColorTag = 'yellow';
-       if (postPercentage > 66) postBarColorTag = 'green';
+     let bar = `<${barColorTag}>` + '█'.repeat(progress) + `</${barColorTag}>`;
+     bar += '░'.repeat(maxWidth - progress);
 
-       let postBar = `<${postBarColorTag}>` + '█'.repeat(postProgress) + `</${postBarColorTag}>`;
-       postBar += '░'.repeat(maxWidth - postProgress);
+     if (percentage >= 100) {
+       bar = '<green>' + '✔ '.repeat(Math.round(maxWidth / 2)) + '</green>';
+     }
 
-       if (postPercentage >= 100) {
-         postBar = '<green>' + '✔ '.repeat(Math.round(maxWidth / 2)) + '</green>';
-       }
+     let postBarColorTag = 'red';
+     if (postPercentage > 33) postBarColorTag = 'yellow';
+     if (postPercentage > 66) postBarColorTag = 'green';
 
-       let titleLine = __parseHtml(`<yellow><bold>CoffeeBuilder</bold></yellow> v${__packageJson.version}`);
-       let titleLineCount = __countLine(titleLine);
+     let postBar = `<${postBarColorTag}>` + '█'.repeat(postProgress) + `</${postBarColorTag}>`;
+     postBar += '░'.repeat(maxWidth - postProgress);
 
-       const author = __packageJson.author;
-       const authorLength = author.length;
+     if (postPercentage >= 100) {
+       postBar = '<green>' + '✔ '.repeat(Math.round(maxWidth / 2)) + '</green>';
+     }
 
-       titleLine += ' '.repeat(maxWidth - titleLineCount - authorLength) + __parseHtml(`<white>${author}</white>`);
+     let titleLine = __parseHtml(`<yellow><bold>CoffeeBuilder</bold></yellow> v${__packageJson.version}`);
+     let titleLineCount = __countLine(titleLine);
 
-       lines.push('\n');
-       lines.push(titleLine);
-       lines.push('\n');
-       lines.push('\n');
+     const author = __packageJson.author;
+     const authorLength = author.length;
 
-       let compileLine = `<black>░░</black>`;
-       compileLine = '';
-       this._config.compile.forEach((compile, i) => {
-         if (watchCompile[0] === compile || watchCompile.length === 0) {
-           compileLine += `<green>✔ <bold><bgBlack>${compile}</bgBlack></bold></green>  `;
-         } else {
-           compileLine += `<white>✘ <bold><bgBlack>${compile}</bgBlack></bold></white>  `;
-         }
-       });
-       compileLine = __parseHtml(compileLine);
+     titleLine += ' '.repeat(maxWidth - titleLineCount - authorLength) + __parseHtml(`<white>${author}</white>`);
 
-       lines.push('-'.repeat(maxWidth));
-       lines.push('\n');
-       lines.push(compileLine);
-       lines.push('\n');
-       lines.push('-'.repeat(maxWidth));
-       lines.push('\n');
-       lines.push('\n');
-       lines.push(__parseHtml(`Build processors progress`));
-       lines.push('\n');
-       lines.push('\n');
-       lines.push(__parseHtml(bar));
-       lines.push('\n');
-       lines.push('\n');
+     lines.push('\n');
+     lines.push(titleLine);
+     lines.push('\n');
+     lines.push('\n');
 
-       lines.push(__parseHtml(`Post build processors progress`));
-       lines.push('\n');
-       lines.push('\n');
-       lines.push(__parseHtml(postBar));
-       lines.push('\n');
-       lines.push('\n');
-
-
-       // resource
-       if (percentage < 100) {
-         let resourceLine = __breakLineDependingOnSidesPadding(__parseHtml(`Processing resource "<yellow>${currentFilePath.replace(process.cwd(), '')}</yellow>" using "<cyan>${currentProcessor}</cyan>" processor...`), padding);
-         lines.push(resourceLine);
-
+     let compileLine = `<black>░░</black>`;
+     compileLine = '';
+     this._config.compile.forEach((compile, i) => {
+       if (watchCompile[0] === compile || watchCompile.length === 0) {
+         compileLine += `<green>✔ <bold><bgBlack>${compile}</bgBlack></bold></green>  `;
        } else {
+         compileLine += `<white>✘ <bold><bgBlack>${compile}</bgBlack></bold></white>  `;
+       }
+     });
 
-         // processed resources
-         let processedResourcesLine = `<cyan><bold>${processedFiles.length}</bold></cyan> (${compileType.join(',')}) file${processedFiles.length > 1 ? 's' : ''} processed`;
-         if (this._stats.build.startTimestamp && this._stats.build.endTimestamp) {
-           processedResourcesLine += ` in <yellow>${new Date(this._stats.build.endTimestamp - this._stats.build.startTimestamp).getSeconds()}s</yellow>`;
+     if (this._config.watch) {
+       if ( ! this._watchSpinner) this._watchSpinner = __ora('Watching');
+       const watchSpinner = this._watchSpinner.frame();
+       compileLine += ' '.repeat(maxWidth - __countLine(compileLine) - __countLine(watchSpinner)) + watchSpinner;
+     }
+
+     compileLine = __parseHtml(compileLine);
+
+     lines.push('-'.repeat(maxWidth));
+     lines.push('\n');
+     lines.push(compileLine);
+     lines.push('\n');
+     lines.push('-'.repeat(maxWidth));
+     lines.push('\n');
+     lines.push('\n');
+     lines.push(__parseHtml(`Build processors progress`));
+     lines.push('\n');
+     lines.push('\n');
+     lines.push(__parseHtml(bar));
+     lines.push('\n');
+     lines.push('\n');
+
+     lines.push(__parseHtml(`Post build processors progress`));
+     lines.push('\n');
+     lines.push('\n');
+     lines.push(__parseHtml(postBar));
+     lines.push('\n');
+     lines.push('\n');
+
+
+     // resource
+     if (percentage < 100) {
+       let resourceLine = __breakLineDependingOnSidesPadding(__parseHtml(`Processing resource "<yellow>${currentFilePath.replace(process.cwd(), '')}</yellow>" using "<cyan>${currentProcessor}</cyan>" processor...`), padding);
+       lines.push(resourceLine);
+
+     } else {
+
+       // processed resources
+       let processedResourcesLine = `<cyan><bold>${processedFiles.length}</bold></cyan> (${compileType.join(',')}) file${processedFiles.length > 1 ? 's' : ''} processed`;
+       if (__stats.build.startTimestamp && __stats.build.endTimestamp) {
+         processedResourcesLine += ` in <yellow>${new Date(__stats.build.endTimestamp - __stats.build.startTimestamp).getSeconds()}s</yellow>`;
+         if (__stats.cache.files.length > 0) {
+           processedResourcesLine += ` / ${__stats.cache.files.length} taken from cache...`;
          }
-         lines.push(__parseHtml('<green>✔</green>  ' + processedResourcesLine));
-
        }
+       lines.push(__parseHtml('<green>✔</green>  ' + processedResourcesLine));
 
-       lines.push('\n');
-       lines.push('\n');
-       lines.push('\n');
+     }
 
-       let fileProcessedLine = __parseHtml(`<bold><yellow>Files processed</yellow></bold>`);
-       lines.push(fileProcessedLine);
-       lines.push('\n');
-       lines.push('-'.repeat(maxWidth));
-       lines.push('\n');
-       lines.push('\n');
+     lines.push('\n');
+     lines.push('\n');
+     lines.push('\n');
 
-       const usedProcessorsColumns = [];
-       const usedProcessorsKeys = Object.keys(processors);
-       const usedProcessorsColumnsCount = maxWidth > 150 ? 4 : maxWidth > 100 ? 3 : 2;
-       const usedProcessorsItemsCountByColumn = Math.round(usedProcessorsKeys.length / usedProcessorsColumnsCount)
+     let fileProcessedLine = __parseHtml(`<bold><yellow>Files processed</yellow></bold>`);
+     lines.push(fileProcessedLine);
+     lines.push('\n');
+     lines.push('-'.repeat(maxWidth));
+     lines.push('\n');
+     lines.push('\n');
 
-       for (let i=0; i<usedProcessorsColumnsCount; i++) {
-         let currentColumn = [];
-         usedProcessorsKeys.slice(i*usedProcessorsItemsCountByColumn, i*usedProcessorsItemsCountByColumn + usedProcessorsItemsCountByColumn).forEach((k) => {
-           currentColumn.push(__parseHtml(`<yellow>░</yellow> ${k}: <cyan><bold>${processors[k].processedFiles.length}</bold></cyan>`));
-         });
-         usedProcessorsColumns.push(currentColumn.join('\n'));
-       }
+     const usedProcessorsColumns = [];
+     const usedProcessorsKeys = Object.keys(processors);
+     const usedProcessorsColumnsCount = maxWidth > 150 ? 4 : maxWidth > 100 ? 3 : 2;
+     const usedProcessorsItemsCountByColumn = Math.round(usedProcessorsKeys.length / usedProcessorsColumnsCount)
 
-       lines.push(__columns(usedProcessorsColumns, padding));
-
-       lines.push('\n');
-       lines.push('\n');
-
-       lines = lines.map((l) => {
-         if (l.slice(0,padding) === ' '.repeat(padding)) return l;
-         return ' '.repeat(padding) + l;
+     for (let i=0; i<usedProcessorsColumnsCount; i++) {
+       let currentColumn = [];
+       usedProcessorsKeys.slice(i*usedProcessorsItemsCountByColumn, i*usedProcessorsItemsCountByColumn + usedProcessorsItemsCountByColumn).forEach((k) => {
+         currentColumn.push(__parseHtml(`<yellow>░</yellow> ${k}: <cyan><bold>${processors[k].processedFiles.length}</bold></cyan>`));
        });
+       usedProcessorsColumns.push(currentColumn.join('\n'));
+     }
 
-       this._interface.write(lines.join('') + '\u001B[?25l');
+     lines.push(__columns(usedProcessorsColumns, padding));
 
-     });
-   }
+     lines.push('\n');
+     lines.push('\n');
 
-   drawAfterBuildStats() {
-     return new Promise(async (resolve, reject) => {
-
-       const watchCompile = this._watchCompile;
-       const compileTypes = this._config.compile;
-       const sourcesFolderObj = {};
-       const outputFolderObj = {};
-
-       const padding = process.env.STDOUT_PADDING || 3;
-       const maxWidth = (process.env.STDOUT_COLUMNS || process.stdout.columns) - padding * 2;
-
-       let lines = [];
-
-       await __asyncForEach(compileTypes, async (compile) => {
-         return new Promise(async (r) => {
-
-           const compileTypeObj = this._config.files[compile];
-
-           await __asyncForEach(compileTypeObj.sourcesFolder, (sourcesFolder) => {
-             return new Promise(async (resolve, reject) => {
-
-               const folderSize = await __folderSize(sourcesFolder, true);
-               sourcesFolderObj[sourcesFolder] = folderSize;
-               resolve(folderSize);
-
-             });
-           });
-
-           await __asyncForEach(compileTypeObj.outputFolder, (outputFolder) => {
-             return new Promise(async (resolve, reject) => {
-
-               const folderSize = await __folderSize(outputFolder, true);
-               outputFolderObj[outputFolder] = folderSize;
-               resolve(folderSize);
-
-             });
-           });
-
-           r();
-
-         });
-       });
-
-       const sourcesFolderColumns = [];
-       const sourcesFolderKeys = Object.keys(sourcesFolderObj);
-       const sourcesFolderColumnsCount = maxWidth > 150 ? 4 : maxWidth > 100 ? 3 : 2;
-       const sourcesFolderItemsCountByColumn = Math.round(sourcesFolderKeys.length / sourcesFolderColumnsCount)
-
-       let sourcesFolderLine = __parseHtml(`<bold><yellow>Sources folder(s)</yellow></bold>`);
-       lines.push(sourcesFolderLine);
-
-       lines.push('\n');
-       lines.push('-'.repeat(maxWidth));
-       lines.push('\n');
-       lines.push('\n');
-
-       for (let i=0; i<sourcesFolderColumnsCount; i++) {
-         let currentColumn = [];
-         sourcesFolderKeys.slice(i*sourcesFolderItemsCountByColumn, i*sourcesFolderItemsCountByColumn + sourcesFolderItemsCountByColumn).forEach((k) => {
-           currentColumn.push(__parseHtml(`<green>✔</green> ${k}: <cyan><bold>${__formatFileSize(sourcesFolderObj[k])}</bold></cyan>`));
-         });
-         sourcesFolderColumns.push(currentColumn.join('\n'));
-       }
-       lines.push(__columns(sourcesFolderColumns, padding));
-
-       lines.push('\n');
-       lines.push('\n');
-
-       let outputFolderLine = __parseHtml(`<bold><yellow>Output folder(s)</yellow></bold>`);
-       lines.push(outputFolderLine);
-
-       lines.push('\n');
-       lines.push('-'.repeat(maxWidth));
-       lines.push('\n');
-       lines.push('\n');
-
-       const outputFolderColumns = [];
-       const outputFolderKeys = Object.keys(outputFolderObj);
-       const outputFolderColumnsCount = maxWidth > 150 ? 4 : maxWidth > 100 ? 3 : 2;
-       const outputFolderItemsCountByColumn = Math.round(outputFolderKeys.length / outputFolderColumnsCount)
-
-       for (let i=0; i<outputFolderColumnsCount; i++) {
-         let currentColumn = [];
-         outputFolderKeys.slice(i*outputFolderItemsCountByColumn, i*outputFolderItemsCountByColumn + outputFolderItemsCountByColumn).forEach((k) => {
-           currentColumn.push(__parseHtml(`<green>✔</green> ${k}: <cyan><bold>${__formatFileSize(outputFolderObj[k])}</bold></cyan>`));
-         });
-         outputFolderColumns.push(currentColumn.join('\n'));
-       }
-       lines.push(__columns(outputFolderColumns, padding));
-
-       lines = lines.map((l) => {
-         if (l.slice(0,padding) === ' '.repeat(padding)) return l;
-         return ' '.repeat(padding) + l;
-       });
-
-       this._interface.write(lines.join('') + '\u001B[?25l');
-
+     lines = lines.map((l) => {
+       if (l.slice(0,padding) === ' '.repeat(padding)) return l;
+       return ' '.repeat(padding) + l;
      });
 
-   }
+     this._lines = lines;
+
+     this._interface.write(lines.join('') + '\u001B[?25l');
+
+   });
+ }
+
+ drawAfterBuildStats() {
+   return new Promise(async (resolve, reject) => {
+
+     const watchCompile = this._watchCompile;
+     const compileTypes = this._config.compile;
+     const sourcesFolderObj = {};
+     const outputFolderObj = {};
+
+     const padding = process.env.STDOUT_PADDING || 3;
+     const maxWidth = (process.env.STDOUT_COLUMNS || process.stdout.columns) - padding * 2;
+
+     let lines = [];
+
+     await __asyncForEach(compileTypes, async (compile) => {
+       return new Promise(async (r) => {
+
+         const compileTypeObj = this._config.files[compile];
+
+         await __asyncForEach(compileTypeObj.sourcesFolder, (sourcesFolder) => {
+           return new Promise(async (resolve, reject) => {
+
+             const folderSize = await __folderSize(sourcesFolder, true);
+             sourcesFolderObj[sourcesFolder] = folderSize;
+             resolve(folderSize);
+
+           });
+         });
+
+         await __asyncForEach(compileTypeObj.outputFolder, (outputFolder) => {
+           return new Promise(async (resolve, reject) => {
+
+             const folderSize = await __folderSize(outputFolder, true);
+             outputFolderObj[outputFolder] = folderSize;
+             resolve(folderSize);
+
+           });
+         });
+
+         r();
+
+       });
+     });
+
+     const sourcesFolderColumns = [];
+     const sourcesFolderKeys = Object.keys(sourcesFolderObj);
+     const sourcesFolderColumnsCount = maxWidth > 150 ? 4 : maxWidth > 100 ? 3 : 2;
+     const sourcesFolderItemsCountByColumn = Math.round(sourcesFolderKeys.length / sourcesFolderColumnsCount)
+
+     let sourcesFolderLine = __parseHtml(`<bold><yellow>Sources folder(s)</yellow></bold>`);
+     lines.push(sourcesFolderLine);
+
+     lines.push('\n');
+     lines.push('-'.repeat(maxWidth));
+     lines.push('\n');
+     lines.push('\n');
+
+     for (let i=0; i<sourcesFolderColumnsCount; i++) {
+       let currentColumn = [];
+       sourcesFolderKeys.slice(i*sourcesFolderItemsCountByColumn, i*sourcesFolderItemsCountByColumn + sourcesFolderItemsCountByColumn).forEach((k) => {
+         currentColumn.push(__parseHtml(`<green>✔</green> ${k}: <cyan><bold>${__formatFileSize(sourcesFolderObj[k])}</bold></cyan>`));
+       });
+       sourcesFolderColumns.push(currentColumn.join('\n'));
+     }
+     lines.push(__columns(sourcesFolderColumns, padding));
+
+     lines.push('\n');
+     lines.push('\n');
+
+     let outputFolderLine = __parseHtml(`<bold><yellow>Output folder(s)</yellow></bold>`);
+     lines.push(outputFolderLine);
+
+     lines.push('\n');
+     lines.push('-'.repeat(maxWidth));
+     lines.push('\n');
+     lines.push('\n');
+
+     const outputFolderColumns = [];
+     const outputFolderKeys = Object.keys(outputFolderObj);
+     const outputFolderColumnsCount = maxWidth > 150 ? 4 : maxWidth > 100 ? 3 : 2;
+     const outputFolderItemsCountByColumn = Math.round(outputFolderKeys.length / outputFolderColumnsCount)
+
+     for (let i=0; i<outputFolderColumnsCount; i++) {
+       let currentColumn = [];
+       outputFolderKeys.slice(i*outputFolderItemsCountByColumn, i*outputFolderItemsCountByColumn + outputFolderItemsCountByColumn).forEach((k) => {
+         currentColumn.push(__parseHtml(`<green>✔</green> ${k}: <cyan><bold>${__formatFileSize(outputFolderObj[k])}</bold></cyan>`));
+       });
+       outputFolderColumns.push(currentColumn.join('\n'));
+     }
+     lines.push(__columns(outputFolderColumns, padding));
+
+     lines = lines.map((l) => {
+       if (l.slice(0,padding) === ' '.repeat(padding)) return l;
+       return ' '.repeat(padding) + l;
+     });
+
+     this._interface.write(lines.join('') + '\u001B[?25l');
+
+   });
+
+ }
 
 }
 
@@ -810,7 +749,7 @@ class CoffeeBuilderWebpack {
       test: test,
       use: [{
         loader: name,
-        options: __deepMerge(__config.default.loaders.coffeeLoader, options)
+        options: options
       }]
     };
   }

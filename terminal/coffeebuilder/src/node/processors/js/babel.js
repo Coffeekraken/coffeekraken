@@ -32,7 +32,7 @@ module.exports = function babelProcessor(filepath, source, settings = {}) {
     // resolve the processor
     resolve({
       source: babelResult.code,
-      sourceMap: babelResult.map
+      map: babelResult.map
     });
 
   });

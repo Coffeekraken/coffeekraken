@@ -30,13 +30,15 @@ module.exports = function sassProcessor(filepath, source, settings = {}) {
 
     source = __sass.renderSync(__deepMerge({
       file: `${__tmpDir()}/_coffeekrakenCoffeeLoader.scss`,
+      sourceMap: true,
       includePaths: [__path.resolve(process.cwd(), 'node_modules')],
       // importer: __globImporter()
-    }, settings)).css;
+    }, settings));
 
     // resolve the processor
     resolve({
-      source: source,
+      source: source.css,
+      map: source.map,
       extension: 'css'
     });
 

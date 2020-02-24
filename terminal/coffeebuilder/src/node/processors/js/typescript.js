@@ -20,14 +20,16 @@ module.exports = function typescriptProcessor(filepath, source, settings = {}) {
     const result = __typescript.transpileModule(source.toString(), __deepMerge({
       compilerOptions: {
         module: __typescript.ModuleKind.CommonJS,
-        // inlineSourceMap: true
+        sourceMap: true
       }
     }, settings));
+
     source = result.outputText;
 
     // resolve the processor
     resolve({
       source: source,
+      map: result.sourceMapText,
       extension: 'js'
     });
 

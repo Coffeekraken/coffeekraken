@@ -8,7 +8,7 @@ const __filterObj = require('@coffeekraken/sugar/js/object/filter');
 const __writeFileSync = require('@coffeekraken/sugar/node/fs/writeFileSync');
 
 const __coffeeEvents = require('../events');
-const __processFile = require('../processFile');
+const __processFile = require('../utils/processFile');
 
 module.exports.raw = true;
 module.exports = function coffeeLoader(source) {

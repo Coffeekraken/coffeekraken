@@ -1,30 +1,31 @@
-const __terser = require("terser");
+const __cleanCss = require("clean-css");
 
 /**
- * @name                                terser
+ * @name                                cleanCss
  * @namespace                           coffeebuilder.node.postProcessors.js
  * @type                                Function
  *
- * Apply the terser package on the passed javascript source code to optimize it.
+ * Apply the cleanCss package on the passed css source code to optimize it.
  *
  * @param            {String}             filepath        The path of the file to process
  * @param            {String}             source          The source code to process
- * @param            {Object}             [settings={}]   The settings to pass to terser package
+ * @param            {Object}             [settings={}]   The settings to pass to cleanCss package
  * @return            {Promise}                           The promise that will be resolved with the processed source code
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function terserPostProcessor(filepath, source, settings = {}) {
+module.exports = function cleanCssPostProcessor(filepath, source, settings = {}) {
   return new Promise((resolve, reject) => {
 
-    const result = __terser.minify(source, {
+    const result = new __cleanCss({
       sourceMap: true,
-      ...settings
-    });
+      compatibility: 'ie9',
+      level: 2
+    }).minify(source);
 
     resolve({
-      source: result.code,
-      map: result.map
+      source: result.styles,
+      map: result.sourceMap.toString()
     });
 
   });

@@ -3,9 +3,6 @@ if (process.env.NODE_ENV != 'production') require('module-alias/register');
 const __sortObj = require('@coffeekraken/sugar/js/object/sort');
 const __filterObj = require('@coffeekraken/sugar/js/object/filter');
 const __getExtension = require('@coffeekraken/sugar/js/string/getExtension');
-const __fs = require('fs');
-const __path = require('path');
-const __writeFileSync = require('@coffeekraken/sugar/node/fs/writeFileSync');
 const __tmpDir = require('@coffeekraken/sugar/node/fs/tmpDir');
 
 const __coffeeEvents = require('../events');
@@ -14,6 +11,8 @@ const __settings = require('../settings');
 const __saveFile = require('./saveFile');
 const __cacheFile = require('./cacheFile');
 const __getCachedFile = require('./getCachedFile');
+const __getOutputFilePath = require('./getOutputFilePath');
+const __emitSaveProcessedStat = require('./emitSaveProcessedStat');
 
 module.exports = function processFile(source, filepath, loaderInstance = null) {
 
@@ -22,7 +21,9 @@ module.exports = function processFile(source, filepath, loaderInstance = null) {
     let map = null;
 
     __coffeeEvents.emit('build', {
-      files: Object.values(loaderInstance._compiler.options.entry)
+      files: Object.values(loaderInstance._compiler.options.entry).filter((f) => {
+        return ! f.includes(__tmpDir());
+      })
     });
 
     const _extension = __getExtension(filepath);
@@ -37,6 +38,11 @@ module.exports = function processFile(source, filepath, loaderInstance = null) {
     const processorsKeys = Object.keys(processorsSortedAndFilteredObj);
 
     const cachedContent = await __getCachedFile(filepath);
+    if ( ! filepath.includes(__tmpDir()) && cachedContent) {
+      source = cachedContent.source;
+      map = cachedContent.map;
+      _saveExtension = cachedContent.saveExtension || _saveExtension;
+    }
 
     for (let i=0; i<processorsKeys.length; i++) {
 
@@ -59,14 +65,16 @@ module.exports = function processFile(source, filepath, loaderInstance = null) {
     if (_saveExtension === 'js') {
       if ( ! cachedContent) {
         // check if is a js file so that we let webpack handle his saving phase...
-        await __cacheFile(filepath, source);
+        await __cacheFile(filepath, source, _saveExtension);
       }
-      return resolve(cachedContent || source);
+      __emitSaveProcessedStat(filepath, _saveExtension);
+      return resolve(source);
     }
 
     // save the file
     if (processorsKeys.length) {
-      await __saveFile(cachedContent || source, filepath, _saveExtension, map, loaderInstance);
+      await __saveFile(source, filepath, _saveExtension, map, loaderInstance);
+      __emitSaveProcessedStat(filepath, _saveExtension);
     }
 
     // resolve

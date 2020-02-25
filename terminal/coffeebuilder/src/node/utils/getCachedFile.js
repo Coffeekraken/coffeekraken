@@ -3,6 +3,7 @@ const __base64 = require('@coffeekraken/sugar/node/crypt/base64');
 const __tmpDir = require('@coffeekraken/sugar/node/fs/tmpDir');
 const __fs = require('fs');
 const __events = require('../events');
+const __getExtension = require('@coffeekraken/sugar/js/string/getExtension');
 
 /**
  * @name                                  getCachedFile
@@ -23,45 +24,33 @@ module.exports = function cacheFile(filepath) {
 
     const cachePath = __tmpDir() + '/coffeeBuilderCache';
     const encryptedPath = __base64.encrypt(filepath);
+    const jsonCacheFilePath = cachePath + '/' + encryptedPath + '.json';
 
-    const infos = await __cacache.get.info(cachePath, encryptedPath);
-    const cacheUpdateTimestamp = infos && infos.metadata ? infos.metadata.updateTimestamp : 0;
-
-    const stats = __fs.statSync(filepath);
-    const updateTimestamp = Math.round(stats.mtimeMs);
-
-    // if (infos) {
-    //   console.log(Math.round(infos.time / 1000) - Math.round(stats.mtimeMs / 1000));
-    //   console.log(Math.round(stats.mtimeMs / 1000));
-    //   console.log(Math.round(infos.time / 1000));
-    //   console.log(filepath);
-    //   console.log(Math.round(infos.time / 1000) - updateTimestamp);
-    // }
-
-    if ( ! infos || cacheUpdateTimestamp < updateTimestamp) {
+    if ( ! __fs.existsSync(jsonCacheFilePath)) {
       return resolve(false);
     }
 
-    let content = null;
-    let mapContent = null;
-    try {
-      content = await __cacache.get(cachePath, encryptedPath);
-    } catch (e) {}
-    try {
-      mapContent = await __cacache.get(cachePath, `${encryptedPath}.map`);
-    } catch(e) {}
-    if (content) {
-      console.log('CAC', filepath.replace(process.cwd(), ''));
-      __events.emit('cache', {
-        files: [filepath]
-      });
-      return resolve({
-        source: content.data,
-        map: mapContent ? mapContent.data : null
-      });
+    const updateTimestamp = __fs.statSync(filepath).mtimeMs;
+    const jsonCacheFileUpdateTimestamp = __fs.statSync(jsonCacheFilePath).mtimeMs;
+
+    if ( updateTimestamp > jsonCacheFileUpdateTimestamp) {
+      return resolve(false);
     }
 
-    return resolve(false);
+    // reading the cache file
+    const jsonCacheFile = JSON.parse(__fs.readFileSync(jsonCacheFilePath));
+
+    jsonCacheFile.source = new Buffer(jsonCacheFile.source, 'base64');
+
+    __events.emit('cache', {
+      files: [filepath]
+    });
+
+    return resolve({
+      source: jsonCacheFile.source,
+      map: jsonCacheFile.map,
+      saveExtension: jsonCacheFile.saveExtension
+    });
 
   });
 }

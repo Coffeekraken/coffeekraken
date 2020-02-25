@@ -12,13 +12,14 @@ const __stats = require('../stats');
  * Take care of caching the passed file if needed
  *
  * @param             {String}            filepath            The file path to store in cache
- * @param             {String}            content             The content to save
- * @return            {Promise}                               A promise that will be resolved with the file content
+ * @param             {String}            source             The source to save
+ * @return            {Promise}                               A promise that will be resolved with the file source
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function cacheFile(filepath, content) {
+module.exports = function cacheFile(filepath, source, saveExtension = null) {
   return new Promise(async (resolve, reject) => {
+
 
     const cachePath = __tmpDir() + '/coffeeBuilderCache';
     const encryptedPath = __base64.encrypt(filepath);
@@ -28,35 +29,56 @@ module.exports = function cacheFile(filepath, content) {
       mapContent = __fs.readFileSync(`${filepath}.map`);
     }
 
-    const infos = await __cacache.get.info(cachePath, encryptedPath);
-    const cacheUpdateTimestamp = infos && infos.metadata ? infos.metadata.updateTimestamp : 0;
-
     const stats = __fs.statSync(filepath);
     const updateTimestamp = stats.mtimeMs;
 
-    console.log('C', cacheUpdateTimestamp, updateTimestamp, filepath.replace(process.cwd(), ''));
+    let jsonCacheFileUpdateTimestamp = 0;
 
-    if ( ! infos || cacheUpdateTimestamp < updateTimestamp) {
+    // try to get the json cache file
+    let jsonCacheFile = null;
+    const jsonCacheFilePath = cachePath + '/' + encryptedPath + '.json';
+    if (__fs.existsSync(jsonCacheFilePath)) {
+      jsonCacheFile = __fs.readFileSync(jsonCacheFilePath);
+      jsonCacheFile = JSON.parse(jsonCacheFile);
+      jsonCacheFileUpdateTimestamp = __fs.statSync(jsonCacheFilePath).mtimeMs;
+    }
 
-      console.log('CACHE', filepath.replace(process.cwd(), ''));
+    if (jsonCacheFileUpdateTimestamp < updateTimestamp) {
 
-      // save the new content
-      await __cacache.put(cachePath, encryptedPath, content, {
-        metadata: {
-          updateTimestamp: __stats.build.startTimestamp
-        }
-      });
-      if (mapContent) {
-        await __cacache.put(cachePath, `${encryptedPath}.map`, mapContent);
-      }
-
-      // resolve with true to set the file has been cached
-      return resolve(true);
+      // update the source
+      __fs.writeFileSync(jsonCacheFilePath, JSON.stringify({
+        source: Buffer.from(source).toString('base64'),
+        map: mapContent,
+        saveExtension
+      }));
 
     }
 
-    // the file has not been cached cause it is either newest in the cache, or the same...
-    return resolve(false);
+    resolve(true);
+
+
+
+    // // if ( ! infos || cacheUpdateTimestamp < updateTimestamp) {
+    //
+    //   // save the new source
+    //   await __cacache.put(cachePath, encryptedPath, source, {
+    //     metadata: {
+    //       updateTimestamp: __stats.build.startTimestamp,
+    //       saveExtension,
+    //       map: mapContent
+    //     }
+    //   });
+    //   // if (mapContent) {
+    //   //   await __cacache.put(cachePath, `${encryptedPath}.map`, mapContent);
+    //   // }
+    //
+    //   // resolve with true to set the file has been cached
+    //   return resolve(true);
+    //
+    // // }
+    //
+    // // the file has not been cached cause it is either newest in the cache, or the same...
+    // return resolve(false);
 
   });
 }

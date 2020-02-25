@@ -3,6 +3,7 @@ const __deepMerge = require('@coffeekraken/sugar/js/object/deepMerge');
 const __log = require('@coffeekraken/sugar/node/log/log');
 const __glob = require('glob');
 const __filterObj = require('@coffeekraken/sugar/js/object/filter');
+const __sortObj = require('@coffeekraken/sugar/js/object/sort');
 const __parseHtml = require('@coffeekraken/sugar/node/terminal/parseHtml');
 const __countLine = require('@coffeekraken/sugar/node/terminal/countLine');
 const __columns = require('@coffeekraken/sugar/node/terminal/columns');
@@ -29,12 +30,13 @@ const __fs = require('fs');
 const __packageJson = require('@coffeekraken/coffeebuilder/package.json');
 
 const __CoffeeBuilderPlugin = require('./webpack/CoffeeBuilderPlugin');
+const __lazyDomLoadPlugin = require('./plugins/lazyDomLoad');
 
 class CoffeePack {
 
   /**
    * @name                        _processors
-   * @namespace                   webpack.coffeepack.CoffeePack
+   * @namespace                   terminal.coffeebuilder.node.CoffeeBuilder
    * @type                        Object
    *
    * Store all the registered processors
@@ -45,7 +47,7 @@ class CoffeePack {
 
   /**
    * @name                        _postProcessors
-   * @namespace                   webpack.coffeepack.CoffeePack
+   * @namespace                   terminal.coffeebuilder.node.CoffeeBuilder
    * @type                        Object
    *
    * Store all the registered processors
@@ -53,6 +55,17 @@ class CoffeePack {
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _postProcessors = {};
+
+  /**
+   * @name                        _plugins
+   * @namespace                   terminal.coffeebuilder.node.CoffeeBuilder
+   * @type                        Object
+   *
+   * Store all the registered plugins
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _plugins = {};
 
   _watchCompile = [];
   _drawInterfaceTimeout = null;
@@ -89,6 +102,10 @@ class CoffeePack {
     // this.webpack.registerPlugin('@coffeekraken/webpack-concat-dependencies-vendors-plugin', {});
     // this.webpack.registerPlugin('@coffeekraken/webpack-lazy-dom-load-plugin', {});
 
+    // register coffeebuilder plugins
+    this.registerPlugin('lazyDomLoad', __lazyDomLoadPlugin, {});
+
+    // register webpack plugins
     this.webpack.registerPlugin('CoffeeBuilderPlugin', {
       postProcessors: this.postProcessors.bind(this),
     }, __CoffeeBuilderPlugin);
@@ -153,7 +170,7 @@ class CoffeePack {
 
   /**
    * @name                        config
-   * @namespace                   webpack.coffeepack.CoffeePack
+   * @namespace                   terminal.coffeebuilder.node.CoffeeBuilder
    * @type                        Function
    *
    * Return the coffeepack configuration object
@@ -173,7 +190,7 @@ class CoffeePack {
 
   /**
    * @name                    registerProcessor
-   * @namespace               webpack.coffeepack.CoffeePack
+   * @namespace               terminal.coffeebuilder.node.CoffeeBuilder
    * @type                    Function
    *
    * Register a processor function that will take as parameters the file extensions that
@@ -234,7 +251,7 @@ class CoffeePack {
 
   /**
    * @name                    registerPostProcessor
-   * @namespace               webpack.coffeepack.CoffeePack
+   * @namespace               terminal.coffeebuilder.node.CoffeeBuilder
    * @type                    Function
    *
    * Register a post processor function that will take as parameters the file extensions that
@@ -298,7 +315,7 @@ class CoffeePack {
 
   /**
    * @name                    run
-   * @namespace               webpack.coffeepack.CoffeePack
+   * @namespace               terminal.coffeebuilder.node.CoffeeBuilder
    * @type                    Function
    *
    * Run the build process and return a Promise that will be resolved once the build is completed
@@ -318,16 +335,16 @@ class CoffeePack {
   run(compile = null) {
     return new Promise((resolve, reject) => {
 
-      // reset the datas
-      // __coffeeEvents.emit('reset');
-
       // save the startTimestamp
       __stats.build.startTimestamp = Date.now();
 
       // run webpack
-      Promise.all([
-        this.webpack.run(compile)
-      ]).then(() => {
+      (async () => {
+
+        console.log('COCO');
+
+        await this.webpack.run(compile);
+        await this._runPlugins(compile);
 
         // save the endTimestamp
         __stats.build.endTimestamp = Date.now();
@@ -337,8 +354,79 @@ class CoffeePack {
         this.drawAfterBuildStats();
 
         resolve();
-      });
+      })();
     });
+  }
+
+  /**
+   * @name                  _runPlugins
+   * @namespace             coffeebuilder.node.CoffeeBuilder
+   * @type                  Function
+   *
+   * Launch the plugins execution and return a promise resolved once all the plugins have finished their job
+   *
+   * @return        {Promise}                   A promise resolved once all the plugins have finished their job
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _runPlugins() {
+    return new Promise(async (resolve, reject) => {
+
+      const sortedPluginsStack = __sortObj(this._plugins, (a, b) => {
+        return b.weight - a.weight;
+      });
+
+      const sortedPluginsStackNames = Object.keys(sortedPluginsStack);
+      for (let i=0; i<sortedPluginsStackNames.length; i++) {
+        const pluginObj = sortedPluginsStack[sortedPluginsStackNames[i]];
+        await pluginObj.plugin({
+          processed: __stats.build.processedFilesStack,
+          postProcessed: __stats.postBuild.processedFilesStack
+        }, pluginObj.settings);
+      }
+
+      resolve();
+
+    });
+  }
+
+  /**
+   * @name                    registerPlugin
+   * @namespace               terminal.coffeebuilder.node.CoffeeBuilder
+   * @type                    Function
+   *
+   * Register a plugin function that will take as parameters the list of files processed during the build, as well as the
+   * settings object specific to the plugin itself.
+   *
+   * @param             {String}              name                      The name of the plugin. It has to be a single word as it will be used as an object property name...
+   * @param             {Function}            plugin                    The actual plugin function that will take as arguments the processed files list and the plugin settings object
+   * @param             {Object}              [settings={}]             The settings that will be passed to the plugin function
+   * @param             {Number}              [weight=null]             The weight of the plugin. This define the order of plugins oxecutions. The higher is executed first
+   *
+   * @example           js
+   * coffeepack.registerPlugin('myCoolPlugin', (files, settings) => {
+   *    return new Promise((resolve, reject) => {
+   *      // do something...
+   *      resolve();
+   *    });
+   * }, {}, 10);
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  registerPlugin(name, plugin, settings = {}, weight = 10) {
+
+
+    if (this._plugins[name] !== undefined) {
+      throw new Error(`You try to register a plugin named "${name}" but a plugin with this name already exist...`);
+    }
+
+    // register the processor
+    this._plugins[name] = {
+      name,
+      plugin,
+      settings,
+      weight
+    };
   }
 
   /**
@@ -351,19 +439,7 @@ class CoffeePack {
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   resetBuildStats() {
-    __stats.cache.files = [];
-    __stats.build = {
-      startTimestamp: null,
-      endTimestamp: null,
-      files: [],
-      processedFiles: [],
-      currentFilePath: '',
-      currentProcessor: '',
-      percentage: 0,
-      processors: {
-
-      }
-    };
+    __stats.reset();
   }
 
   /**
@@ -379,11 +455,11 @@ class CoffeePack {
    */
   drawInterface(){
 
-    // if ( ! this._drawInterfaceInterval) {
-    //   this._drawInterfaceInterval = setInterval(() => {
-    //     this.drawInterface();
-    //   }, 300);
-    // }
+    if ( ! this._drawInterfaceInterval) {
+      this._drawInterfaceInterval = setInterval(() => {
+        this.drawInterface();
+      }, 500);
+    }
 
    return new Promise(async (resolve, reject) => {
 
@@ -405,11 +481,11 @@ class CoffeePack {
      const postProgress = Math.round(maxWidth / 100 * postPercentage || 0);
 
      // clear the terminal
-     // __readline.clearLine(process.stdout, 0);
-     // for (let i = 0; i < process.stdout.rows; i++) {
-     //   __readline.clearLine(process.stdout, 0);
-     //   __readline.moveCursor(process.stdout, 0, -1);
-     // }
+     __readline.clearLine(process.stdout, 0);
+     for (let i = 0; i < process.stdout.rows; i++) {
+       __readline.clearLine(process.stdout, 0);
+       __readline.moveCursor(process.stdout, 0, -1);
+     }
 
      let barColorTag = 'red';
      if (percentage > 33) barColorTag = 'yellow';
@@ -498,12 +574,27 @@ class CoffeePack {
        if (__stats.build.startTimestamp && __stats.build.endTimestamp) {
          processedResourcesLine += ` in <yellow>${new Date(__stats.build.endTimestamp - __stats.build.startTimestamp).getSeconds()}s</yellow>`;
          if (__stats.cache.files.length > 0) {
-           processedResourcesLine += ` / ${__stats.cache.files.length} taken from cache...`;
+           processedResourcesLine += ` / <magenta><bold>${__stats.cache.files.length}</bold></magenta> taken from cache...`;
          }
        }
        lines.push(__parseHtml('<green>✔</green>  ' + processedResourcesLine));
 
      }
+
+     // lines.push('\n');
+     //
+     // processedFiles.forEach((f) => {
+     //   lines.push(f);
+     //   lines.push('\n');
+     // });
+     //
+     // lines.push('\n');
+     // lines.push('\n');
+     //
+     // __stats.cache.files.forEach((f) => {
+     //   lines.push(f);
+     //   lines.push('\n');
+     // });
 
      lines.push('\n');
      lines.push('\n');
@@ -653,7 +744,7 @@ class CoffeeBuilderWebpack {
 
   /**
    * @name                    _loaders
-   * @namespace               webpack.coffeepack.CoffeePack
+   * @namespace               terminal.coffeebuilder.node.CoffeeBuilder
    * @type                    Object
    *
    * Store all the loaders available through coffeepack
@@ -664,7 +755,7 @@ class CoffeeBuilderWebpack {
 
   /**
    * @name                    _plugins
-   * @namespace               webpack.coffeepack.CoffeePack
+   * @namespace               terminal.coffeebuilder.node.CoffeeBuilder
    * @type                    Object
    *
    * Store all the plugins available through coffeepack
@@ -702,7 +793,7 @@ class CoffeeBuilderWebpack {
 
   /**
    * @name                        run
-   * @namespace                   webpack.coffeepack.CoffeePack
+   * @namespace                   terminal.coffeebuilder.node.CoffeeBuilder
    * @type                        Function
    *
    * Run the webpack build process
@@ -718,12 +809,8 @@ class CoffeeBuilderWebpack {
 
       __webpack(this.config(), (err, stats) => {
         if (err || stats.hasErrors()) {
-          // console.log(stats);
-          // throw new Error(err);
-          // reject(err);
           console.log(stats);
         }
-
         // process finished
         resolve(stats);
       });
@@ -732,7 +819,7 @@ class CoffeeBuilderWebpack {
 
   /**
    * @name                        registerLoader
-   * @namespace                   webpack.coffeepack.CoffeePack
+   * @namespace                   terminal.coffeebuilder.node.CoffeeBuilder
    * @type                        Function
    *
    * Register a new loader by passing his name, file test and options
@@ -756,7 +843,7 @@ class CoffeeBuilderWebpack {
 
   /**
    * @name                                loaders
-   * @namespace                           webpack.coffeepack.CoffeePack
+   * @namespace                           terminal.coffeebuilder.node.CoffeeBuilder
    * @type                                Function
    *
    * Return the "module" webpack object with all the registered loaders
@@ -784,7 +871,7 @@ class CoffeeBuilderWebpack {
 
   /**
    * @name                                loaders
-   * @namespace                           webpack.coffeepack.CoffeePack
+   * @namespace                           terminal.coffeebuilder.node.CoffeeBuilder
    * @type                                Function
    *
    * Return the "module" webpack object with all the registered loaders
@@ -810,7 +897,7 @@ class CoffeeBuilderWebpack {
 
   /**
    * @name                        registerPlugin
-   * @namespace                   webpack.coffeepack.CoffeePack
+   * @namespace                   terminal.coffeebuilder.node.CoffeeBuilder
    * @type                        Function
    *
    * Register a new plugin by passing his name, class and options
@@ -839,7 +926,7 @@ class CoffeeBuilderWebpack {
 
   /**
    * @name                        webpackConfig
-   * @namespace                   webpack.coffeepack.CoffeePack
+   * @namespace                   terminal.coffeebuilder.node.CoffeeBuilder
    * @type                        Function
    *
    * Return the webpack configuration object builded by coffeepack
@@ -868,7 +955,7 @@ class CoffeeBuilderWebpack {
 
   /**
    * @name                        entry
-   * @namespace                   webpack.coffeepack.CoffeePack
+   * @namespace                   terminal.coffeebuilder.node.CoffeeBuilder
    * @type                        Function
    *
    * Return the "entry" webpack configuration object builded by coffeepack

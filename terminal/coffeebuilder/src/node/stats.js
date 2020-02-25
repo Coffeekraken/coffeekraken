@@ -1,33 +1,64 @@
 const __events = require('./events');
+const __path = require('path');
+const __tmpDir = require('@coffeekraken/sugar/node/fs/tmpDir');
 
-const __stats = {
-  cache: {
-    files: []
-  },
-  build: {
-    startTimestamp: null,
-    endTimestamp: null,
-    files: [],
-    processedFiles: [],
-    currentFilePath: '',
-    currentProcessor: '',
-    percentage: 0,
-    processors: {}
-  },
-  postBuild: {
-    startTimestamp: null,
-    endTimestamp: null,
-    files: [],
-    processedFiles: [],
-    currentFilePath: '',
-    currentProcessor: '',
-    percentage: 0,
-    processors: {}
-  }
+let __stats = {};
+
+function reset() {
+  __stats = {
+    cache: {
+      files: []
+    },
+    build: {
+      startTimestamp: null,
+      endTimestamp: null,
+      files: [],
+      processedFiles: [],
+      processedFilesStack: {},
+      currentFilePath: '',
+      currentProcessor: '',
+      percentage: 0,
+      processors: {}
+    },
+    postBuild: {
+      startTimestamp: null,
+      endTimestamp: null,
+      files: [],
+      processedFiles: [],
+      processedFilesStack: {},
+      currentFilePath: '',
+      currentProcessor: '',
+      percentage: 0,
+      processors: {}
+    }
+  };
 }
+reset();
 
 __events.on('cache', (data) => {
   __stats.cache.files = __stats.cache.files.concat(data.files);
+});
+
+__events.on('saveProcessed', (data) => {
+  if ( ! __stats.build.processedFilesStack[data.sourceFilePath]) {
+    __stats.build.processedFilesStack[data.sourceFilePath] = {
+      sourceFilePath: data.sourceFilePath,
+      outputFilePath: [data.outputFilePath]
+    };
+  } else {
+    __stats.build.processedFilesStack[data.sourceFilePath].outputFilePath.push(data.outputFilePath);
+  }
+});
+
+__events.on('savePostProcessed', (data) => {
+  if ( ! __stats.postBuild.processedFilesStack[data.sourceFilePath]) {
+    __stats.postBuild.processedFilesStack[data.sourceFilePath] = {
+      sourceFilePath: data.sourceFilePath,
+      outputFilePath: [data.outputFilePath]
+    };
+  } else {
+    __stats.postBuild.processedFilesStack[data.sourceFilePath].outputFilePath.push(data.outputFilePath);
+  }
 });
 
 __events.on('build', (data) => {
@@ -41,7 +72,7 @@ __events.on('build', (data) => {
       processedFiles: []
     }
   }
-  if (data.filepath && data.processor) {
+  if (data.filepath && data.processor && ! data.filepath.includes(__tmpDir())) {
     if (__stats.build.processors[data.processor].processedFiles.indexOf(data.filepath) === -1) __stats.build.processors[data.processor].processedFiles.push(data.filepath);
     if (__stats.build.processedFiles.indexOf(data.filepath) === -1) __stats.build.processedFiles.push(data.filepath);
   }
@@ -83,3 +114,4 @@ __events.on('postBuild', (data) => {
 });
 
 module.exports = __stats;
+module.exports.reset = reset;

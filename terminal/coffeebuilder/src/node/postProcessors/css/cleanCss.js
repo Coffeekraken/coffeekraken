@@ -17,6 +17,10 @@ const __cleanCss = require("clean-css");
 module.exports = function cleanCssPostProcessor(filepath, source, settings = {}) {
   return new Promise((resolve, reject) => {
 
+    if (typeof source !== 'string') {
+      source = source.toString('utf8');
+    }
+
     const result = new __cleanCss({
       sourceMap: true,
       compatibility: 'ie9',

@@ -21,6 +21,7 @@ const __restoreCursor = require('restore-cursor');
 const __ora = require('ora');
 
 const __coffeeEvents = require('./events');
+const __CoffeeBuilderResource = require('./classes/CoffeeBuilderResource');
 const __setup = require('./settings').setup;
 const __stats = require('./stats');
 
@@ -106,9 +107,9 @@ class CoffeePack {
     this.registerPlugin('lazyDomLoad', __lazyDomLoadPlugin, {});
 
     // register webpack plugins
-    this.webpack.registerPlugin('CoffeeBuilderPlugin', {
-      postProcessors: this.postProcessors.bind(this),
-    }, __CoffeeBuilderPlugin);
+    // this.webpack.registerPlugin('CoffeeBuilderPlugin', {
+    //   postProcessors: this.postProcessors.bind(this),
+    // }, __CoffeeBuilderPlugin);
 
     // register default loaders
     this.webpack.registerLoader(__dirname + '/webpack/CoffeeBuilderLoader', /\.*$/, {});
@@ -283,7 +284,6 @@ class CoffeePack {
    */
   registerPostProcessor(name, extensions, processor, settings = {}, weight = 10) {
 
-
     if (this._postProcessors[name] !== undefined) {
       throw new Error(`You try to register a processor named "${name}" but a processor with this name already exist...`);
     }
@@ -340,8 +340,6 @@ class CoffeePack {
 
       // run webpack
       (async () => {
-
-        console.log('COCO');
 
         await this.webpack.run(compile);
         await this._runPlugins(compile);
@@ -465,7 +463,8 @@ class CoffeePack {
 
      if ( ! __stats.build.percentage) __stats.build.percentage = 0;
 
-     const { percentage, currentFilePath, currentProcessor, processedFiles, processors } = __stats.build;
+     const { percentage, currentResourcePath, currentProcessor, processedResources, processors } = __stats.build;
+
 
      const postPercentage = __stats.postBuild.percentage;
 
@@ -481,11 +480,11 @@ class CoffeePack {
      const postProgress = Math.round(maxWidth / 100 * postPercentage || 0);
 
      // clear the terminal
-     __readline.clearLine(process.stdout, 0);
-     for (let i = 0; i < process.stdout.rows; i++) {
-       __readline.clearLine(process.stdout, 0);
-       __readline.moveCursor(process.stdout, 0, -1);
-     }
+     // __readline.clearLine(process.stdout, 0);
+     // for (let i = 0; i < process.stdout.rows; i++) {
+     //   __readline.clearLine(process.stdout, 0);
+     //   __readline.moveCursor(process.stdout, 0, -1);
+     // }
 
      let barColorTag = 'red';
      if (percentage > 33) barColorTag = 'yellow';
@@ -564,13 +563,13 @@ class CoffeePack {
 
      // resource
      if (percentage < 100) {
-       let resourceLine = __breakLineDependingOnSidesPadding(__parseHtml(`Processing resource "<yellow>${currentFilePath.replace(process.cwd(), '')}</yellow>" using "<cyan>${currentProcessor}</cyan>" processor...`), padding);
+       let resourceLine = __breakLineDependingOnSidesPadding(__parseHtml(`Processing resource "<yellow>${currentResourcePath.replace(process.cwd(), '')}</yellow>" using "<cyan>${currentProcessor}</cyan>" processor...`), padding);
        lines.push(resourceLine);
 
      } else {
 
        // processed resources
-       let processedResourcesLine = `<cyan><bold>${processedFiles.length}</bold></cyan> (${compileType.join(',')}) file${processedFiles.length > 1 ? 's' : ''} processed`;
+       let processedResourcesLine = `<cyan><bold>${Object.keys(processedResources).length}</bold></cyan> (${compileType.join(',')}) file${Object.keys(processedResources).length > 1 ? 's' : ''} processed`;
        if (__stats.build.startTimestamp && __stats.build.endTimestamp) {
          processedResourcesLine += ` in <yellow>${new Date(__stats.build.endTimestamp - __stats.build.startTimestamp).getSeconds()}s</yellow>`;
          if (__stats.cache.files.length > 0) {
@@ -583,7 +582,7 @@ class CoffeePack {
 
      // lines.push('\n');
      //
-     // processedFiles.forEach((f) => {
+     // processedResources.forEach((f) => {
      //   lines.push(f);
      //   lines.push('\n');
      // });
@@ -615,7 +614,7 @@ class CoffeePack {
      for (let i=0; i<usedProcessorsColumnsCount; i++) {
        let currentColumn = [];
        usedProcessorsKeys.slice(i*usedProcessorsItemsCountByColumn, i*usedProcessorsItemsCountByColumn + usedProcessorsItemsCountByColumn).forEach((k) => {
-         currentColumn.push(__parseHtml(`<yellow>░</yellow> ${k}: <cyan><bold>${processors[k].processedFiles.length}</bold></cyan>`));
+         currentColumn.push(__parseHtml(`<yellow>░</yellow> ${k}: <cyan><bold>${Object.keys(processors[k].processedResources).length}</bold></cyan>`));
        });
        usedProcessorsColumns.push(currentColumn.join('\n'));
      }
@@ -1015,13 +1014,13 @@ class CoffeeBuilderWebpack {
             key = key.replace('//','/');
             // if ( ! entryKey.match(/\.js$/g)) return;
             entryObj[key] = process.cwd() + '/' + file;
+            __coffeeEvents.emit('entryPathes', process.cwd() + '/' + file);
           });
         } else {
-
           const filename = file.split('/').slice(-1)[0];
           entryKey = entryKey.replace('//','/');
           entryString += `import * as coffeebuilderImport${__uniqid()} from '${process.cwd() + '/' + file}';\n`;
-
+          __coffeeEvents.emit('entryPathes', process.cwd() + '/' + file);
         }
 
       });

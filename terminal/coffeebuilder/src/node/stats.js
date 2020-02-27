@@ -1,21 +1,23 @@
 const __events = require('./events');
 const __path = require('path');
 const __tmpDir = require('@coffeekraken/sugar/node/fs/tmpDir');
+const __filterObj = require('@coffeekraken/sugar/js/object/filter');
 
 let __stats = {};
 
 function reset() {
   __stats = {
+    resources: {},
+    entryPathes: [],
+    savedResources: {},
     cache: {
-      files: []
+      resources: {}
     },
     build: {
       startTimestamp: null,
       endTimestamp: null,
-      files: [],
-      processedFiles: [],
-      processedFilesStack: {},
-      currentFilePath: '',
+      processedResources: {},
+      currentResourcePath: '',
       currentProcessor: '',
       percentage: 0,
       processors: {}
@@ -23,9 +25,7 @@ function reset() {
     postBuild: {
       startTimestamp: null,
       endTimestamp: null,
-      files: [],
-      processedFiles: [],
-      processedFilesStack: {},
+      processedResources: {},
       currentFilePath: '',
       currentProcessor: '',
       percentage: 0,
@@ -35,81 +35,82 @@ function reset() {
 }
 reset();
 
-__events.on('cache', (data) => {
-  __stats.cache.files = __stats.cache.files.concat(data.files);
-});
-
-__events.on('saveProcessed', (data) => {
-  if ( ! __stats.build.processedFilesStack[data.sourceFilePath]) {
-    __stats.build.processedFilesStack[data.sourceFilePath] = {
-      sourceFilePath: data.sourceFilePath,
-      outputFilePath: [data.outputFilePath]
-    };
-  } else {
-    __stats.build.processedFilesStack[data.sourceFilePath].outputFilePath.push(data.outputFilePath);
+__events.on('resource', (resource) => {
+  if ( ! __stats.resources[resource.filepath]) {
+    __stats.resources[resource.filepath] = resource;
   }
 });
 
-__events.on('savePostProcessed', (data) => {
-  if ( ! __stats.postBuild.processedFilesStack[data.sourceFilePath]) {
-    __stats.postBuild.processedFilesStack[data.sourceFilePath] = {
-      sourceFilePath: data.sourceFilePath,
-      outputFilePath: [data.outputFilePath]
-    };
-  } else {
-    __stats.postBuild.processedFilesStack[data.sourceFilePath].outputFilePath.push(data.outputFilePath);
+__events.on('entryPathes', (path) => {
+  if (__stats.entryPathes.indexOf(path) === -1) {
+    __stats.entryPathes.push(path);
   }
+});
+
+__events.on('savedResource', (resource) => {
+  if ( ! __stats.savedResources[resource.filepath]) {
+    __stats.savedResources[resource.filepath] = resource;
+  }
+});
+
+__events.on('cache', (resource) => {
+  __stats.cache.resources[resource.filepath] = resource;
 });
 
 __events.on('build', (data) => {
 
-  if (data.files) __stats.build.files = data.files;
-  if (data.filepath) __stats.build.currentFilePath = data.filepath;
-  if (data.processor) __stats.build.currentProcessor = data.processor;
+  const resource = data.resource;
+  const processorName = data.processor || data.processorName;
 
-  if (data.processor && ! __stats.build.processors[data.processor]) {
-    __stats.build.processors[data.processor] = {
-      processedFiles: []
+  __stats.build.processedResources[resource.filepath] = resource;
+
+  __stats.build.currentResourcePath = resource.filepath;
+
+  if (processorName) __stats.build.currentProcessor = processorName;
+
+  if (processorName && ! __stats.build.processors[processorName]) {
+    __stats.build.processors[processorName] = {
+      processedResources: {}
     }
   }
-  if (data.filepath && data.processor && ! data.filepath.includes(__tmpDir())) {
-    if (__stats.build.processors[data.processor].processedFiles.indexOf(data.filepath) === -1) __stats.build.processors[data.processor].processedFiles.push(data.filepath);
-    if (__stats.build.processedFiles.indexOf(data.filepath) === -1) __stats.build.processedFiles.push(data.filepath);
+  if (processorName && ! resource.filepath.includes(__tmpDir())) {
+    if ( ! __stats.build.processors[processorName][resource.filepath]) {
+      __stats.build.processors[processorName].processedResources[resource.filepath] = resource;
+    }
   }
 
-  const filteredFilesArray = __stats.build.processedFiles.filter((f) => {
-    return __stats.build.files.indexOf(f) !== -1;
+  const filteredObj = __filterObj(__stats.build.processedResources, (f) => {
+    return __stats.entryPathes.indexOf(f.filepath) !== -1;
   });
-
-  __stats.build.percentage = Math.round(100 / __stats.build.files.length * filteredFilesArray.length);
+  __stats.build.percentage = Math.round(100 / __stats.entryPathes.length * Object.keys(filteredObj).length);
 });
 
 __events.on('postBuild', (data) => {
 
-  if (data.files) __stats.postBuild.files = data.files.map((f) => {
-    return __path.resolve(f);
-  });
+  const resource = data.resource;
+  const processorName = data.processor || data.processorName;
 
-  if (data.filepath) __stats.postBuild.currentFilePath = data.filepath;
-  if (data.processor) __stats.postBuild.currentProcessor = data.processor;
+  __stats.postBuild.processedResources[resource.filepath] = resource;
 
-  if (data.processor && ! __stats.build.processors[data.processor]) {
-    __stats.build.processors[data.processor] = {
-      processedFiles: []
+  __stats.postBuild.currentResourcePath = resource.filepath;
+
+  if (processorName) __stats.postBuild.currentProcessor = processorName;
+
+  if (processorName && ! __stats.postBuild.processors[processorName]) {
+    __stats.postBuild.processors[processorName] = {
+      processedResources: {}
     }
   }
-  if (data.filepath && data.processor) {
-    if (__stats.build.processors[data.processor].processedFiles.indexOf(data.filepath) === -1) __stats.build.processors[data.processor].processedFiles.push(data.filepath);
-  }
-  if (data.filepath) {
-    if (__stats.postBuild.processedFiles.indexOf(data.filepath) === -1) __stats.postBuild.processedFiles.push(data.filepath);
+  if (processorName && ! resource.filepath.includes(__tmpDir())) {
+    if ( ! __stats.postBuild.processors[processorName][resource.filepath]) {
+      __stats.postBuild.processors[processorName].processedResources[resource.filepath] = resource;
+    }
   }
 
-  const filteredFilesArray = __stats.postBuild.processedFiles.filter((f) => {
-    return __stats.postBuild.files.indexOf(f) !== -1;
+  const filteredObj = __filterObj(__stats.postBuild.processedResources, (f) => {
+    return __stats.entryPathes.indexOf(f.filepath) !== -1;
   });
-
-  __stats.postBuild.percentage = Math.round(100 / __stats.postBuild.files.length * filteredFilesArray.length);
+  __stats.postBuild.percentage = Math.round(100 / __stats.entryPathes.length * Object.keys(filteredObj).length);
 
 });
 

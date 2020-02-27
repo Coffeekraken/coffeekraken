@@ -6,7 +6,7 @@ const __log = require('@coffeekraken/sugar/node/log/log');
 module.exports = function lazyDomLoadPlugin(files, settings = {}) {
   return new Promise((resolve, reject) => {
 
-    console.log(files);
+    // console.log(files);
     process.exit();
 
     setTimeout(() => {

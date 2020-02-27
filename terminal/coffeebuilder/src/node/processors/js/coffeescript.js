@@ -19,12 +19,14 @@ const __loaderUtils = require('loader-utils');
 module.exports = function coffeescriptProcessor(filepath, source, settings = {}) {
   return new Promise(async (resolve, reject) => {
 
-    const result = __coffeescript.compile(source.toString(), __deepMerge({
+    const result = __coffeescript.compile(source.toString('utf8'), __deepMerge({
 			// filename: filepath,
 			sourceMap: true
     }, settings));
 
     source = result;
+
+    console.log('sss', source);
 
     // resolve the processor
     resolve({

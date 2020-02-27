@@ -17,6 +17,10 @@ const __terser = require("terser");
 module.exports = function terserPostProcessor(filepath, source, settings = {}) {
   return new Promise((resolve, reject) => {
 
+    if (typeof source !== 'string') {
+      source = source.toString('utf8');
+    }
+
     const result = __terser.minify(source, {
       sourceMap: true,
       ...settings

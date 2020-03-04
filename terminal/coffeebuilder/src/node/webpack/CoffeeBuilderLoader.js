@@ -20,14 +20,12 @@ module.exports = function coffeeLoader(source) {
   const _callback = this.async();
 
   let resource;
-  if ( ! __stats.resources[this.resource]) {
+  if (!__stats.resources[this.resource]) {
     resource = new __CoffeeBuilderResource(this.resource);
     __coffeeEvents.emit('resource', resource);
   } else {
     resource = __stats.resources[this.resource];
   }
-
-  // console.log(resource);
 
   __processFile(resource, this).then((src) => {
     _callback(null, src);

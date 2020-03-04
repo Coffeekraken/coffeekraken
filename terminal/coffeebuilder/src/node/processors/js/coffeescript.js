@@ -20,18 +20,16 @@ module.exports = function coffeescriptProcessor(filepath, source, settings = {})
   return new Promise(async (resolve, reject) => {
 
     const result = __coffeescript.compile(source.toString('utf8'), __deepMerge({
-			// filename: filepath,
-			sourceMap: true
+      // filename: filepath,
+      sourceMap: true
     }, settings));
 
     source = result;
 
-    console.log('sss', source);
-
     // resolve the processor
     resolve({
       source: source.js,
-      map: source.sourceMap,
+      map: source.v3SourceMap,
       extension: 'js'
     });
 

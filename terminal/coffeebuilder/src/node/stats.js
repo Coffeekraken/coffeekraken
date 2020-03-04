@@ -36,7 +36,7 @@ function reset() {
 reset();
 
 __events.on('resource', (resource) => {
-  if ( ! __stats.resources[resource.filepath]) {
+  if (!__stats.resources[resource.filepath]) {
     __stats.resources[resource.filepath] = resource;
   }
 });
@@ -48,19 +48,19 @@ __events.on('entryPathes', (path) => {
 });
 
 __events.on('savedResource', (resource) => {
-  if ( ! __stats.savedResources[resource.filepath]) {
+  if (!__stats.savedResources[resource.filepath]) {
     __stats.savedResources[resource.filepath] = resource;
   }
 });
 
-__events.on('cache', (resource) => {
-  __stats.cache.resources[resource.filepath] = resource;
+__events.on('fromCache', (data) => {
+  __stats.cache.resources[data.resource.filepath] = data.resource;
 });
 
 __events.on('build', (data) => {
 
   const resource = data.resource;
-  const processorName = data.processor || data.processorName;
+  const processorName = data.processor || data.processorName;
 
   __stats.build.processedResources[resource.filepath] = resource;
 
@@ -68,13 +68,13 @@ __events.on('build', (data) => {
 
   if (processorName) __stats.build.currentProcessor = processorName;
 
-  if (processorName && ! __stats.build.processors[processorName]) {
+  if (processorName && !__stats.build.processors[processorName]) {
     __stats.build.processors[processorName] = {
       processedResources: {}
     }
   }
-  if (processorName && ! resource.filepath.includes(__tmpDir())) {
-    if ( ! __stats.build.processors[processorName][resource.filepath]) {
+  if (processorName && !resource.filepath.includes(__tmpDir())) {
+    if (!__stats.build.processors[processorName].processedResources[resource.filepath]) {
       __stats.build.processors[processorName].processedResources[resource.filepath] = resource;
     }
   }
@@ -88,7 +88,7 @@ __events.on('build', (data) => {
 __events.on('postBuild', (data) => {
 
   const resource = data.resource;
-  const processorName = data.processor || data.processorName;
+  const processorName = data.processor || data.processorName;
 
   __stats.postBuild.processedResources[resource.filepath] = resource;
 
@@ -96,13 +96,13 @@ __events.on('postBuild', (data) => {
 
   if (processorName) __stats.postBuild.currentProcessor = processorName;
 
-  if (processorName && ! __stats.postBuild.processors[processorName]) {
+  if (processorName && !__stats.postBuild.processors[processorName]) {
     __stats.postBuild.processors[processorName] = {
       processedResources: {}
     }
   }
-  if (processorName && ! resource.filepath.includes(__tmpDir())) {
-    if ( ! __stats.postBuild.processors[processorName][resource.filepath]) {
+  if (processorName && !resource.filepath.includes(__tmpDir())) {
+    if (!__stats.postBuild.processors[processorName].processedResources[resource.filepath]) {
       __stats.postBuild.processors[processorName].processedResources[resource.filepath] = resource;
     }
   }

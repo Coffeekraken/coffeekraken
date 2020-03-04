@@ -18,16 +18,10 @@ class CoffeeBuilderPlugin {
 
     compiler.hooks.done.tap('CoffeeBuilderPlugin', async stats => {
 
-      // const postProcessedFiles = [];
-      //
-      // __coffeeEvents.emit('postBuild', {
-      //   files
-      // });
-
       // loop on all the compiled assets
       const assetsKeys = Object.keys(__stats.savedResources);
 
-      for (let i=0; i<assetsKeys.length; i++) {
+      for (let i = 0; i < assetsKeys.length; i++) {
 
         const resourceObj = __stats.savedResources[assetsKeys[i]];
 
@@ -37,13 +31,13 @@ class CoffeeBuilderPlugin {
         //   resourceObj.save();
         //   continue;
         // }
-        // const cachedContent = await __getCachedFile(resourcePath);
-        // if (cachedContent) {
-        //   console.log('CACHEC', resourcePath, saveExtension);
-        //   __emitSaveProcessedStat(resourcePath, saveExtension, 'savePostProcessed');
-        //   await __saveFile(cachedContent.source, resourcePath, saveExtension, cachedContent.map);
-        //   continue;
-        // }
+        // // const cachedContent = await __getCachedFile(resourcePath);
+        // // if (cachedContent) {
+        // //   console.log('CACHEC', resourcePath, saveExtension);
+        // //   __emitSaveProcessedStat(resourcePath, saveExtension, 'savePostProcessed');
+        // //   await __saveFile(cachedContent.source, resourcePath, saveExtension, cachedContent.map);
+        // //   continue;
+        // // }
 
         let processorsSortedAndFilteredObj = __sortObj(this._settings.postProcessors, (a, b) => {
           return b.weight - a.weight;
@@ -56,21 +50,19 @@ class CoffeeBuilderPlugin {
 
         if (processorsKeys.length) {
 
-          let map = null;
+          for (let j = 0; j < processorsKeys.length; j++) {
 
-          for (let i=0; i<processorsKeys.length; i++) {
-
-            const processorObj = processorsSortedAndFilteredObj[processorsKeys[i]];
+            const processorObj = processorsSortedAndFilteredObj[processorsKeys[j]];
 
             const result = await processorObj.processor(resourceObj.filepath, resourceObj.data, processorObj.settings);
 
-            resourceObj.data = result.source || result;
-            resourceObj.map = result.map || null;
+            resourceObj.data = result.source || result;
+            resourceObj.map = result.map || null;
             if (result.extension) resourceObj.saveExtension = result.extension;
 
             __coffeeEvents.emit('postBuild', {
               resource: resourceObj,
-              processor: processorsKeys[i]
+              processor: processorsKeys[j]
             });
 
           }

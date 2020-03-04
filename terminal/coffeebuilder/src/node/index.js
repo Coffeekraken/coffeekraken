@@ -30,6 +30,8 @@ const __fs = require('fs');
 
 const __packageJson = require('@coffeekraken/coffeebuilder/package.json');
 
+const __defaultConfig = require('../../coffeebuilder.config');
+
 const __CoffeeBuilderPlugin = require('./webpack/CoffeeBuilderPlugin');
 const __lazyDomLoadPlugin = require('./plugins/lazyDomLoad');
 
@@ -104,17 +106,34 @@ class CoffeePack {
     // this.webpack.registerPlugin('@coffeekraken/webpack-lazy-dom-load-plugin', {});
 
     // register coffeebuilder plugins
-    this.registerPlugin('lazyDomLoad', __lazyDomLoadPlugin, {});
+    this.registerPlugin('lazyDomLoad', __lazyDomLoadPlugin, __deepMerge(__defaultConfig.plugins.lazyDomLoad, this._userConfig.plugins.lazyDomLoad || {}));
 
     // register webpack plugins
-    // this.webpack.registerPlugin('CoffeeBuilderPlugin', {
-    //   postProcessors: this.postProcessors.bind(this),
-    // }, __CoffeeBuilderPlugin);
+    this.webpack.registerPlugin('CoffeeBuilderPlugin', {
+      postProcessors: this.postProcessors.bind(this),
+    }, __CoffeeBuilderPlugin);
 
     // register default loaders
     this.webpack.registerLoader(__dirname + '/webpack/CoffeeBuilderLoader', /\.*$/, {});
     this.webpack.registerLoader('webpack-import-glob-loader', /\.js$/, {});
 
+  }
+
+  /**
+   * @name                       _userConfig
+   * @namespace                  terminal.coffeebuilder.node.CoffeeBuilder
+   * @type                        Object
+   * 
+   * Store the user config defines at the root of his project in the "coffeebuilder.config.js" file.
+   * If the file does not exist, return an empty object
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get _userConfig() {
+    if (!__fs.existsSync(`${process.cwd()}/coffeebuilder.config.js`)) return {
+      plugins: {}
+    };
+    return require(`${process.cwd()}/coffeebuilder.config.js`);
   }
 
   /**
@@ -152,7 +171,7 @@ class CoffeePack {
     this._config.compile.forEach((compile) => {
 
       const fileObj = this._config.files[compile];
-      if ( ! fileObj || ! fileObj.sourcesFolder) return;
+      if (!fileObj || !fileObj.sourcesFolder) return;
 
       fileObj.sourcesFolder.forEach((folder) => {
 
@@ -375,11 +394,11 @@ class CoffeePack {
       });
 
       const sortedPluginsStackNames = Object.keys(sortedPluginsStack);
-      for (let i=0; i<sortedPluginsStackNames.length; i++) {
+      for (let i = 0; i < sortedPluginsStackNames.length; i++) {
         const pluginObj = sortedPluginsStack[sortedPluginsStackNames[i]];
         await pluginObj.plugin({
-          processed: __stats.build.processedFilesStack,
-          postProcessed: __stats.postBuild.processedFilesStack
+          processed: __stats.build.processedResources,
+          postProcessed: __stats.postBuild.processedResources
         }, pluginObj.settings);
       }
 
@@ -451,291 +470,292 @@ class CoffeePack {
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  drawInterface(){
-
-    if ( ! this._drawInterfaceInterval) {
-      this._drawInterfaceInterval = setInterval(() => {
-        this.drawInterface();
-      }, 500);
-    }
-
-   return new Promise(async (resolve, reject) => {
-
-     if ( ! __stats.build.percentage) __stats.build.percentage = 0;
-
-     const { percentage, currentResourcePath, currentProcessor, processedResources, processors } = __stats.build;
-
-
-     const postPercentage = __stats.postBuild.percentage;
-
-     const watchCompile = this._watchCompile;
-     const compileType = watchCompile.length ? watchCompile : this._config.compile;
-
-     let lines = ['\n'];
-
-     // const padding = __getDevEnv('stdout.padding') || 3;
-     const padding = process.env.STDOUT_PADDING || 3;
-     const maxWidth = (process.env.STDOUT_COLUMNS || process.stdout.columns) - padding * 2;
-     const progress = Math.round(maxWidth / 100 * percentage || 0);
-     const postProgress = Math.round(maxWidth / 100 * postPercentage || 0);
-
-     // clear the terminal
-     // __readline.clearLine(process.stdout, 0);
-     // for (let i = 0; i < process.stdout.rows; i++) {
-     //   __readline.clearLine(process.stdout, 0);
-     //   __readline.moveCursor(process.stdout, 0, -1);
-     // }
-
-     let barColorTag = 'red';
-     if (percentage > 33) barColorTag = 'yellow';
-     if (percentage > 66) barColorTag = 'green';
-
-     let bar = `<${barColorTag}>` + '█'.repeat(progress) + `</${barColorTag}>`;
-     bar += '░'.repeat(maxWidth - progress);
-
-     if (percentage >= 100) {
-       bar = '<green>' + '✔ '.repeat(Math.round(maxWidth / 2)) + '</green>';
-     }
-
-     let postBarColorTag = 'red';
-     if (postPercentage > 33) postBarColorTag = 'yellow';
-     if (postPercentage > 66) postBarColorTag = 'green';
-
-     let postBar = `<${postBarColorTag}>` + '█'.repeat(postProgress) + `</${postBarColorTag}>`;
-     postBar += '░'.repeat(maxWidth - postProgress);
-
-     if (postPercentage >= 100) {
-       postBar = '<green>' + '✔ '.repeat(Math.round(maxWidth / 2)) + '</green>';
-     }
-
-     let titleLine = __parseHtml(`<yellow><bold>CoffeeBuilder</bold></yellow> v${__packageJson.version}`);
-     let titleLineCount = __countLine(titleLine);
-
-     const author = __packageJson.author;
-     const authorLength = author.length;
-
-     titleLine += ' '.repeat(maxWidth - titleLineCount - authorLength) + __parseHtml(`<white>${author}</white>`);
-
-     lines.push('\n');
-     lines.push(titleLine);
-     lines.push('\n');
-     lines.push('\n');
-
-     let compileLine = `<black>░░</black>`;
-     compileLine = '';
-     this._config.compile.forEach((compile, i) => {
-       if (watchCompile[0] === compile || watchCompile.length === 0) {
-         compileLine += `<green>✔ <bold><bgBlack>${compile}</bgBlack></bold></green>  `;
-       } else {
-         compileLine += `<white>✘ <bold><bgBlack>${compile}</bgBlack></bold></white>  `;
-       }
-     });
-
-     if (this._config.watch) {
-       if ( ! this._watchSpinner) this._watchSpinner = __ora('Watching');
-       const watchSpinner = this._watchSpinner.frame();
-       compileLine += ' '.repeat(maxWidth - __countLine(compileLine) - __countLine(watchSpinner)) + watchSpinner;
-     }
-
-     compileLine = __parseHtml(compileLine);
-
-     lines.push('-'.repeat(maxWidth));
-     lines.push('\n');
-     lines.push(compileLine);
-     lines.push('\n');
-     lines.push('-'.repeat(maxWidth));
-     lines.push('\n');
-     lines.push('\n');
-     lines.push(__parseHtml(`Build processors progress`));
-     lines.push('\n');
-     lines.push('\n');
-     lines.push(__parseHtml(bar));
-     lines.push('\n');
-     lines.push('\n');
-
-     lines.push(__parseHtml(`Post build processors progress`));
-     lines.push('\n');
-     lines.push('\n');
-     lines.push(__parseHtml(postBar));
-     lines.push('\n');
-     lines.push('\n');
-
-
-     // resource
-     if (percentage < 100) {
-       let resourceLine = __breakLineDependingOnSidesPadding(__parseHtml(`Processing resource "<yellow>${currentResourcePath.replace(process.cwd(), '')}</yellow>" using "<cyan>${currentProcessor}</cyan>" processor...`), padding);
-       lines.push(resourceLine);
-
-     } else {
-
-       // processed resources
-       let processedResourcesLine = `<cyan><bold>${Object.keys(processedResources).length}</bold></cyan> (${compileType.join(',')}) file${Object.keys(processedResources).length > 1 ? 's' : ''} processed`;
-       if (__stats.build.startTimestamp && __stats.build.endTimestamp) {
-         processedResourcesLine += ` in <yellow>${new Date(__stats.build.endTimestamp - __stats.build.startTimestamp).getSeconds()}s</yellow>`;
-         if (__stats.cache.files.length > 0) {
-           processedResourcesLine += ` / <magenta><bold>${__stats.cache.files.length}</bold></magenta> taken from cache...`;
-         }
-       }
-       lines.push(__parseHtml('<green>✔</green>  ' + processedResourcesLine));
-
-     }
-
-     // lines.push('\n');
-     //
-     // processedResources.forEach((f) => {
-     //   lines.push(f);
-     //   lines.push('\n');
-     // });
-     //
-     // lines.push('\n');
-     // lines.push('\n');
-     //
-     // __stats.cache.files.forEach((f) => {
-     //   lines.push(f);
-     //   lines.push('\n');
-     // });
-
-     lines.push('\n');
-     lines.push('\n');
-     lines.push('\n');
-
-     let fileProcessedLine = __parseHtml(`<bold><yellow>Files processed</yellow></bold>`);
-     lines.push(fileProcessedLine);
-     lines.push('\n');
-     lines.push('-'.repeat(maxWidth));
-     lines.push('\n');
-     lines.push('\n');
-
-     const usedProcessorsColumns = [];
-     const usedProcessorsKeys = Object.keys(processors);
-     const usedProcessorsColumnsCount = maxWidth > 150 ? 4 : maxWidth > 100 ? 3 : 2;
-     const usedProcessorsItemsCountByColumn = Math.round(usedProcessorsKeys.length / usedProcessorsColumnsCount)
-
-     for (let i=0; i<usedProcessorsColumnsCount; i++) {
-       let currentColumn = [];
-       usedProcessorsKeys.slice(i*usedProcessorsItemsCountByColumn, i*usedProcessorsItemsCountByColumn + usedProcessorsItemsCountByColumn).forEach((k) => {
-         currentColumn.push(__parseHtml(`<yellow>░</yellow> ${k}: <cyan><bold>${Object.keys(processors[k].processedResources).length}</bold></cyan>`));
-       });
-       usedProcessorsColumns.push(currentColumn.join('\n'));
-     }
-
-     lines.push(__columns(usedProcessorsColumns, padding));
-
-     lines.push('\n');
-     lines.push('\n');
-
-     lines = lines.map((l) => {
-       if (l.slice(0,padding) === ' '.repeat(padding)) return l;
-       return ' '.repeat(padding) + l;
-     });
-
-     this._lines = lines;
-
-     this._interface.write(lines.join('') + '\u001B[?25l');
-
-   });
- }
-
- drawAfterBuildStats() {
-   return new Promise(async (resolve, reject) => {
-
-     const watchCompile = this._watchCompile;
-     const compileTypes = this._config.compile;
-     const sourcesFolderObj = {};
-     const outputFolderObj = {};
-
-     const padding = process.env.STDOUT_PADDING || 3;
-     const maxWidth = (process.env.STDOUT_COLUMNS || process.stdout.columns) - padding * 2;
-
-     let lines = [];
-
-     await __asyncForEach(compileTypes, async (compile) => {
-       return new Promise(async (r) => {
-
-         const compileTypeObj = this._config.files[compile];
-
-         await __asyncForEach(compileTypeObj.sourcesFolder, (sourcesFolder) => {
-           return new Promise(async (resolve, reject) => {
-
-             const folderSize = await __folderSize(sourcesFolder, true);
-             sourcesFolderObj[sourcesFolder] = folderSize;
-             resolve(folderSize);
-
-           });
-         });
-
-         await __asyncForEach(compileTypeObj.outputFolder, (outputFolder) => {
-           return new Promise(async (resolve, reject) => {
-
-             const folderSize = await __folderSize(outputFolder, true);
-             outputFolderObj[outputFolder] = folderSize;
-             resolve(folderSize);
-
-           });
-         });
-
-         r();
-
-       });
-     });
-
-     const sourcesFolderColumns = [];
-     const sourcesFolderKeys = Object.keys(sourcesFolderObj);
-     const sourcesFolderColumnsCount = maxWidth > 150 ? 4 : maxWidth > 100 ? 3 : 2;
-     const sourcesFolderItemsCountByColumn = Math.round(sourcesFolderKeys.length / sourcesFolderColumnsCount)
-
-     let sourcesFolderLine = __parseHtml(`<bold><yellow>Sources folder(s)</yellow></bold>`);
-     lines.push(sourcesFolderLine);
-
-     lines.push('\n');
-     lines.push('-'.repeat(maxWidth));
-     lines.push('\n');
-     lines.push('\n');
-
-     for (let i=0; i<sourcesFolderColumnsCount; i++) {
-       let currentColumn = [];
-       sourcesFolderKeys.slice(i*sourcesFolderItemsCountByColumn, i*sourcesFolderItemsCountByColumn + sourcesFolderItemsCountByColumn).forEach((k) => {
-         currentColumn.push(__parseHtml(`<green>✔</green> ${k}: <cyan><bold>${__formatFileSize(sourcesFolderObj[k])}</bold></cyan>`));
-       });
-       sourcesFolderColumns.push(currentColumn.join('\n'));
-     }
-     lines.push(__columns(sourcesFolderColumns, padding));
-
-     lines.push('\n');
-     lines.push('\n');
-
-     let outputFolderLine = __parseHtml(`<bold><yellow>Output folder(s)</yellow></bold>`);
-     lines.push(outputFolderLine);
-
-     lines.push('\n');
-     lines.push('-'.repeat(maxWidth));
-     lines.push('\n');
-     lines.push('\n');
-
-     const outputFolderColumns = [];
-     const outputFolderKeys = Object.keys(outputFolderObj);
-     const outputFolderColumnsCount = maxWidth > 150 ? 4 : maxWidth > 100 ? 3 : 2;
-     const outputFolderItemsCountByColumn = Math.round(outputFolderKeys.length / outputFolderColumnsCount)
-
-     for (let i=0; i<outputFolderColumnsCount; i++) {
-       let currentColumn = [];
-       outputFolderKeys.slice(i*outputFolderItemsCountByColumn, i*outputFolderItemsCountByColumn + outputFolderItemsCountByColumn).forEach((k) => {
-         currentColumn.push(__parseHtml(`<green>✔</green> ${k}: <cyan><bold>${__formatFileSize(outputFolderObj[k])}</bold></cyan>`));
-       });
-       outputFolderColumns.push(currentColumn.join('\n'));
-     }
-     lines.push(__columns(outputFolderColumns, padding));
-
-     lines = lines.map((l) => {
-       if (l.slice(0,padding) === ' '.repeat(padding)) return l;
-       return ' '.repeat(padding) + l;
-     });
-
-     this._interface.write(lines.join('') + '\u001B[?25l');
-
-   });
-
- }
+  drawInterface() {
+
+    // if (!this._drawInterfaceInterval) {
+    //   this._drawInterfaceInterval = setInterval(() => {
+    //     this.drawInterface();
+    //   }, 500);
+    // }
+
+    return new Promise(async (resolve, reject) => {
+
+      if (!__stats.build.percentage) __stats.build.percentage = 0;
+
+      let { percentage, currentResourcePath, currentProcessor, processedResources, processors } = __stats.build;
+      const postBuildProcessors = __stats.postBuild.processors;
+      processors = __deepMerge(processors, postBuildProcessors);
+
+      const postPercentage = __stats.postBuild.percentage;
+
+      const watchCompile = this._watchCompile;
+      const compileType = watchCompile.length ? watchCompile : this._config.compile;
+
+      let lines = ['\n'];
+
+      // const padding = __getDevEnv('stdout.padding') || 3;
+      const padding = process.env.STDOUT_PADDING || 3;
+      const maxWidth = (process.env.STDOUT_COLUMNS || process.stdout.columns) - padding * 2;
+      const progress = Math.round(maxWidth / 100 * percentage || 0);
+      const postProgress = Math.round(maxWidth / 100 * postPercentage || 0);
+
+      // clear the terminal
+      __readline.clearLine(process.stdout, 0);
+      for (let i = 0; i < process.stdout.rows; i++) {
+        __readline.clearLine(process.stdout, 0);
+        __readline.moveCursor(process.stdout, 0, -1);
+      }
+
+      let barColorTag = 'red';
+      if (percentage > 33) barColorTag = 'yellow';
+      if (percentage > 66) barColorTag = 'green';
+
+      let bar = `<${barColorTag}>` + '█'.repeat(progress) + `</${barColorTag}>`;
+      bar += '░'.repeat(maxWidth - progress);
+
+      if (percentage >= 100) {
+        bar = '<green>' + '✔ '.repeat(Math.round(maxWidth / 2)) + '</green>';
+      }
+
+      let postBarColorTag = 'red';
+      if (postPercentage > 33) postBarColorTag = 'yellow';
+      if (postPercentage > 66) postBarColorTag = 'green';
+
+      let postBar = `<${postBarColorTag}>` + '█'.repeat(postProgress) + `</${postBarColorTag}>`;
+      postBar += '░'.repeat(maxWidth - postProgress);
+
+      if (postPercentage >= 100) {
+        postBar = '<green>' + '✔ '.repeat(Math.round(maxWidth / 2)) + '</green>';
+      }
+
+      let titleLine = __parseHtml(`<yellow><bold>CoffeeBuilder</bold></yellow> v${__packageJson.version}`);
+      let titleLineCount = __countLine(titleLine);
+
+      const author = __packageJson.author;
+      const authorLength = author.length;
+
+      titleLine += ' '.repeat(maxWidth - titleLineCount - authorLength) + __parseHtml(`<white>${author}</white>`);
+
+      lines.push('\n');
+      lines.push(titleLine);
+      lines.push('\n');
+      lines.push('\n');
+
+      let compileLine = `<black>░░</black>`;
+      compileLine = '';
+      this._config.compile.forEach((compile, i) => {
+        if (watchCompile[0] === compile || watchCompile.length === 0) {
+          compileLine += `<green>✔ <bold><bgBlack>${compile}</bgBlack></bold></green>  `;
+        } else {
+          compileLine += `<white>✘ <bold><bgBlack>${compile}</bgBlack></bold></white>  `;
+        }
+      });
+
+      if (this._config.watch) {
+        if (!this._watchSpinner) this._watchSpinner = __ora('Watching');
+        const watchSpinner = this._watchSpinner.frame();
+        compileLine += ' '.repeat(maxWidth - __countLine(compileLine) - __countLine(watchSpinner)) + watchSpinner;
+      }
+
+      compileLine = __parseHtml(compileLine);
+
+      lines.push('-'.repeat(maxWidth));
+      lines.push('\n');
+      lines.push(compileLine);
+      lines.push('\n');
+      lines.push('-'.repeat(maxWidth));
+      lines.push('\n');
+      lines.push('\n');
+      lines.push(__parseHtml(`Build processors progress`));
+      lines.push('\n');
+      lines.push('\n');
+      lines.push(__parseHtml(bar));
+      lines.push('\n');
+      lines.push('\n');
+
+      lines.push(__parseHtml(`Post build processors progress`));
+      lines.push('\n');
+      lines.push('\n');
+      lines.push(__parseHtml(postBar));
+      lines.push('\n');
+      lines.push('\n');
+
+
+      // resource
+      if (percentage < 100) {
+        let resourceLine = __breakLineDependingOnSidesPadding(__parseHtml(`Processing resource "<yellow>${currentResourcePath.replace(process.cwd(), '')}</yellow>" using "<cyan>${currentProcessor}</cyan>" processor...`), padding);
+        lines.push(resourceLine);
+
+      } else {
+
+        // processed resources
+        let processedResourcesLine = `<cyan><bold>${Object.keys(processedResources).length}</bold></cyan> (${compileType.join(',')}) file${Object.keys(processedResources).length > 1 ? 's' : ''} processed`;
+        if (__stats.build.startTimestamp && __stats.build.endTimestamp) {
+          processedResourcesLine += ` in <yellow>${new Date(__stats.build.endTimestamp - __stats.build.startTimestamp).getSeconds()}s</yellow>`;
+          if (Object.keys(__stats.cache.resources).length > 0) {
+            processedResourcesLine += ` / <magenta><bold>${Object.keys(__stats.cache.resources).length}</bold></magenta> taken from cache...`;
+          }
+        }
+        lines.push(__parseHtml('<green>✔</green>  ' + processedResourcesLine));
+
+      }
+
+      // lines.push('\n');
+      //
+      // processedResources.forEach((f) => {
+      //   lines.push(f);
+      //   lines.push('\n');
+      // });
+      //
+      // lines.push('\n');
+      // lines.push('\n');
+      //
+      // __stats.cache.files.forEach((f) => {
+      //   lines.push(f);
+      //   lines.push('\n');
+      // });
+
+      lines.push('\n');
+      lines.push('\n');
+      lines.push('\n');
+
+      let fileProcessedLine = __parseHtml(`<bold><yellow>Files processed</yellow></bold>`);
+      lines.push(fileProcessedLine);
+      lines.push('\n');
+      lines.push('-'.repeat(maxWidth));
+      lines.push('\n');
+      lines.push('\n');
+
+      const usedProcessorsColumns = [];
+      const usedProcessorsKeys = Object.keys(processors);
+      const usedProcessorsColumnsCount = maxWidth > 150 ? 4 : maxWidth > 100 ? 3 : 2;
+      const usedProcessorsItemsCountByColumn = Math.round(usedProcessorsKeys.length / usedProcessorsColumnsCount)
+
+      for (let i = 0; i < usedProcessorsColumnsCount; i++) {
+        let currentColumn = [];
+        usedProcessorsKeys.slice(i * usedProcessorsItemsCountByColumn, i * usedProcessorsItemsCountByColumn + usedProcessorsItemsCountByColumn).forEach((k) => {
+          currentColumn.push(__parseHtml(`<yellow>░</yellow> ${k}: <cyan><bold>${Object.keys(processors[k].processedResources).length}</bold></cyan>`));
+        });
+        usedProcessorsColumns.push(currentColumn.join('\n'));
+      }
+
+      lines.push(__columns(usedProcessorsColumns, padding));
+
+      lines.push('\n');
+      lines.push('\n');
+
+      lines = lines.map((l) => {
+        if (l.slice(0, padding) === ' '.repeat(padding)) return l;
+        return ' '.repeat(padding) + l;
+      });
+
+      this._lines = lines;
+
+      this._interface.write(lines.join('') + '\u001B[?25l');
+
+    });
+  }
+
+  drawAfterBuildStats() {
+    return new Promise(async (resolve, reject) => {
+
+      const watchCompile = this._watchCompile;
+      const compileTypes = this._config.compile;
+      const sourcesFolderObj = {};
+      const outputFolderObj = {};
+
+      const padding = process.env.STDOUT_PADDING || 3;
+      const maxWidth = (process.env.STDOUT_COLUMNS || process.stdout.columns) - padding * 2;
+
+      let lines = [];
+
+      await __asyncForEach(compileTypes, async (compile) => {
+        return new Promise(async (r) => {
+
+          const compileTypeObj = this._config.files[compile];
+
+          await __asyncForEach(compileTypeObj.sourcesFolder, (sourcesFolder) => {
+            return new Promise(async (resolve, reject) => {
+
+              const folderSize = await __folderSize(sourcesFolder, true);
+              sourcesFolderObj[sourcesFolder] = folderSize;
+              resolve(folderSize);
+
+            });
+          });
+
+          await __asyncForEach(compileTypeObj.outputFolder, (outputFolder) => {
+            return new Promise(async (resolve, reject) => {
+
+              const folderSize = await __folderSize(outputFolder, true);
+              outputFolderObj[outputFolder] = folderSize;
+              resolve(folderSize);
+
+            });
+          });
+
+          r();
+
+        });
+      });
+
+      const sourcesFolderColumns = [];
+      const sourcesFolderKeys = Object.keys(sourcesFolderObj);
+      const sourcesFolderColumnsCount = maxWidth > 150 ? 4 : maxWidth > 100 ? 3 : 2;
+      const sourcesFolderItemsCountByColumn = Math.round(sourcesFolderKeys.length / sourcesFolderColumnsCount)
+
+      let sourcesFolderLine = __parseHtml(`<bold><yellow>Sources folder(s)</yellow></bold>`);
+      lines.push(sourcesFolderLine);
+
+      lines.push('\n');
+      lines.push('-'.repeat(maxWidth));
+      lines.push('\n');
+      lines.push('\n');
+
+      for (let i = 0; i < sourcesFolderColumnsCount; i++) {
+        let currentColumn = [];
+        sourcesFolderKeys.slice(i * sourcesFolderItemsCountByColumn, i * sourcesFolderItemsCountByColumn + sourcesFolderItemsCountByColumn).forEach((k) => {
+          currentColumn.push(__parseHtml(`<green>✔</green> ${k}: <cyan><bold>${__formatFileSize(sourcesFolderObj[k])}</bold></cyan>`));
+        });
+        sourcesFolderColumns.push(currentColumn.join('\n'));
+      }
+      lines.push(__columns(sourcesFolderColumns, padding));
+
+      lines.push('\n');
+      lines.push('\n');
+
+      let outputFolderLine = __parseHtml(`<bold><yellow>Output folder(s)</yellow></bold>`);
+      lines.push(outputFolderLine);
+
+      lines.push('\n');
+      lines.push('-'.repeat(maxWidth));
+      lines.push('\n');
+      lines.push('\n');
+
+      const outputFolderColumns = [];
+      const outputFolderKeys = Object.keys(outputFolderObj);
+      const outputFolderColumnsCount = maxWidth > 150 ? 4 : maxWidth > 100 ? 3 : 2;
+      const outputFolderItemsCountByColumn = Math.round(outputFolderKeys.length / outputFolderColumnsCount)
+
+      for (let i = 0; i < outputFolderColumnsCount; i++) {
+        let currentColumn = [];
+        outputFolderKeys.slice(i * outputFolderItemsCountByColumn, i * outputFolderItemsCountByColumn + outputFolderItemsCountByColumn).forEach((k) => {
+          currentColumn.push(__parseHtml(`<green>✔</green> ${k}: <cyan><bold>${__formatFileSize(outputFolderObj[k])}</bold></cyan>`));
+        });
+        outputFolderColumns.push(currentColumn.join('\n'));
+      }
+      lines.push(__columns(outputFolderColumns, padding));
+
+      lines = lines.map((l) => {
+        if (l.slice(0, padding) === ' '.repeat(padding)) return l;
+        return ' '.repeat(padding) + l;
+      });
+
+      this._interface.write(lines.join('') + '\u001B[?25l');
+
+    });
+
+  }
 
 }
 
@@ -859,7 +879,7 @@ class CoffeeBuilderWebpack {
 
     Object.keys(this._loaders).forEach((loader) => {
       // if (this._config.loaders.indexOf(loader) !== -1) {
-        moduleObj.rules.push(this._loaders[loader]);
+      moduleObj.rules.push(this._loaders[loader]);
       // }
     });
 
@@ -885,8 +905,8 @@ class CoffeeBuilderWebpack {
 
     Object.keys(this._plugins).forEach((plugin) => {
       // if (this._config.plugins.indexOf(plugin) !== -1) {
-        const pluginObj = this._plugins[plugin];
-        pluginsArray.push(new pluginObj.class(pluginObj.settings));
+      const pluginObj = this._plugins[plugin];
+      pluginsArray.push(new pluginObj.class(pluginObj.settings));
       // }
     });
 
@@ -912,7 +932,7 @@ class CoffeeBuilderWebpack {
     let _class = cls;
     try {
       _class = require(name);
-    } catch(e) {
+    } catch (e) {
       _class = cls;
     }
 
@@ -970,25 +990,25 @@ class CoffeeBuilderWebpack {
     let entryString = '';
 
     // loop on the "compile" option to know which file types we have to handle
-    const fileTypesToCompile = this._compile || this._coffeepack._config.compile;
+    const fileTypesToCompile = this._compile || this._coffeepack._config.compile;
     fileTypesToCompile.forEach((fileType) => {
 
       // get the file type options object
-      const optionsObj = this._coffeepack._config.files[fileType] || {};
+      const optionsObj = this._coffeepack._config.files[fileType] || {};
 
       // check the configuration object
-      if ( ! optionsObj.sourcesFolder) {
+      if (!optionsObj.sourcesFolder) {
         throw new Error(`You try to compile the <yellow>"${fileType}"</yellow> files but you don't have setted the <red>"config.${fileType}.sourcesFolder"</red> config...`);
       }
-      if ( ! optionsObj.outputFolder) {
+      if (!optionsObj.outputFolder) {
         throw new Error(`You try to compile the <yellow>"${fileType}"</yellow> files but you don't have setted the <red>"config.${fileType}.outputFolder"</red> config...`);
       }
-      if ( ! optionsObj.sources) {
+      if (!optionsObj.sources) {
         throw new Error(`You try to compile the <yellow>"${fileType}"</yellow> files but you don't have setted the <red>"config.${fileType}.sources"</red> config...`);
       }
 
       const sourcesFolder = Array.isArray(optionsObj.sourcesFolder) ? optionsObj.sourcesFolder : [optionsObj.sourcesFolder];
-      const outputFolder = Array.isArray(optionsObj.outputFolder ) ? optionsObj.outputFolder   : [optionsObj.outputFolder];
+      const outputFolder = Array.isArray(optionsObj.outputFolder) ? optionsObj.outputFolder : [optionsObj.outputFolder];
 
       // search for the files
       let files = [];
@@ -1001,24 +1021,24 @@ class CoffeeBuilderWebpack {
 
         let entryKey = file;
         const ext = __getExtension(entryKey);
-        entryKey = entryKey.replace(ext, optionsObj.saveExtension || ext);
+        entryKey = entryKey.replace(ext, optionsObj.saveExtension || ext);
 
         sourcesFolder.forEach((source) => {
           entryKey = entryKey.replace(source, '');
-          if (entryKey.slice(0,1) === '/') entryKey = entryKey.slice(1);
+          if (entryKey.slice(0, 1) === '/') entryKey = entryKey.slice(1);
         });
 
         if (__getExtension(entryKey) === 'js') {
           outputFolder.forEach((folder) => {
             let key = `${folder}/${entryKey}`;
-            key = key.replace('//','/');
+            key = key.replace('//', '/');
             // if ( ! entryKey.match(/\.js$/g)) return;
             entryObj[key] = process.cwd() + '/' + file;
             __coffeeEvents.emit('entryPathes', process.cwd() + '/' + file);
           });
         } else {
           const filename = file.split('/').slice(-1)[0];
-          entryKey = entryKey.replace('//','/');
+          entryKey = entryKey.replace('//', '/');
           entryString += `import * as coffeebuilderImport${__uniqid()} from '${process.cwd() + '/' + file}';\n`;
           __coffeeEvents.emit('entryPathes', process.cwd() + '/' + file);
         }
@@ -1032,7 +1052,7 @@ class CoffeeBuilderWebpack {
       const tmpDir = __tmpDir();
       __fs.writeFileSync(tmpDir + '/coffeebuilderImports.js', entryString);
 
-      const relativePathToTmpDir =__path.relative(process.cwd(), tmpDir);
+      const relativePathToTmpDir = __path.relative(process.cwd(), tmpDir);
       entryObj[relativePathToTmpDir + '/coffeebuilderImportsBuilded.js'] = tmpDir + '/coffeebuilderImports.js';
 
     }

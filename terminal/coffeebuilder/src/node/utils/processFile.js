@@ -22,15 +22,19 @@ module.exports = function processFile(resource, loaderInstance = null) {
     });
     const processorsKeys = Object.keys(processorsSortedAndFilteredObj);
 
-    for (let i=0; i<processorsKeys.length; i++) {
+    for (let i = 0; i < processorsKeys.length; i++) {
 
       const processorObj = processorsSortedAndFilteredObj[processorsKeys[i]];
 
-      if ( ! resource.isFromCache()) {
+      if (!resource.isFromCache()) {
         const result = await processorObj.processor(resource.filepath, resource.data, processorObj.settings);
-        resource.data = result.source || result;
-        resource.map = result.map || null;
+        resource.data = result.source || result;
+        resource.map = result.map || null;
         if (result.extension) resource.saveExtension = result.extension;
+      } else {
+        __coffeeEvents.emit('fromCache', {
+          resource: resource
+        });
       }
 
       __coffeeEvents.emit('build', {

@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "We are a young collectve of front-end creative developers with one goal in mind. Build tools to make every team working day life better",
   "scripts": {
+    "install": "lerna bootstrap",
     "docker-build": "docker build -t coffeekraken/coffeekraken .",
-    "docker-run": "docker run -p 2222:22 --name coffeekraken -d coffeekraken/coffeekraken"
+    "docker-run": "docker run -p 2222:22 -v $(pwd):/home/web/coffeekraken --name coffeekraken -d coffeekraken/coffeekraken"
   },
   "pre-commit": [],
   "repository": {
@@ -29,13 +30,11 @@
     "url": "https://github.com/Coffeekraken/coffeekraken/issues"
   },
   "homepage": "https://github.com/Coffeekraken/coffeekraken#readme",
-  "dependencies": {
-    "glob": "^7.1.6"
-  },
+  "dependencies": {},
   "globalDependencies": {},
   "devDependencies": {
     "@coffeekraken/monorepo": "0.0.27",
-    "@coffeekraken/scripts-stack": "0.0.23",
-    "pre-commit": "^1.2.2"
+    "lerna": "^3.20.2",
+    "lerna-wizard": "^1.1.1"
   }
 }

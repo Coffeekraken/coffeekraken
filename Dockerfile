@@ -1,20 +1,17 @@
-# Start from the node:10 image
-FROM node:10
+# Start from the node:latest image
+FROM node:latest
 
 # Create app directory
 WORKDIR /home/web/coffeekraken
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-COPY package*.json ./
+# Update apt
+RUN apt-get update
 
-# If you are building your code for production
-# RUN npm ci --only=production
-RUN npm install
+# Install nano
+RUN apt-get install -y nano
 
 # Install openssh server
-RUN apt-get update && apt-get install -y openssh-server
+RUN apt-get install -y openssh-server
 RUN mkdir /var/run/sshd
 
 # Allow password login
@@ -37,9 +34,6 @@ RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so
 
 # Expose port 22 for ssh login
 EXPOSE 22
-
-# Bundle app source
-# COPY . .
 
 # Launch the ssh service
 CMD ["/usr/sbin/sshd", "-D"]

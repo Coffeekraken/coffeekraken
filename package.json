@@ -2,7 +2,10 @@
   "name": "coffeekraken",
   "version": "1.0.0",
   "description": "We are a young collectve of front-end creative developers with one goal in mind. Build tools to make every team working day life better",
-  "scripts": {},
+  "scripts": {
+    "docker-build": "docker build -t coffeekraken/coffeekraken .",
+    "docker-run": "docker run -p 2222:22 --name coffeekraken -d coffeekraken/coffeekraken"
+  },
   "pre-commit": [],
   "repository": {
     "type": "git",

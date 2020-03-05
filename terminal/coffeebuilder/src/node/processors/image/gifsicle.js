@@ -8,13 +8,15 @@ const __imagemin_gifsicle = require('imagemin-gifsicle');
  *
  * Execute the imagemin gifsicle on the source
  *
- * @param            {String}             filepath        The path of the file to process
+ * @param            {Object}             resource        The resource file object to process
  * @param            {String}             source          The source code to process
  * @param            {Object}             [settings={}]   The settings to pass to imagemin gifsicle package
- *
+ * @param             {Object}            api             The CoffeeBuilderApi instance to interact with the system
+ * @return            {Promise}                           The promise that will be resolved with the processed source code
+ * 
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function gifsicleProcessor(filepath, source, settings = {}) {
+module.exports = function gifsicleProcessor(resource, source, settings = {}, api) {
   return new Promise(async (resolve, reject) => {
 
     // process the quality option if needed

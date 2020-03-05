@@ -1,24 +1,43 @@
 const __path = require('path');
 const __fs = require('fs');
+const __getExtension = require('@coffeekraken/sugar/js/string/getExtension');
 const __tmpDir = require('@coffeekraken/sugar/node/fs/tmpDir');
 const __log = require('@coffeekraken/sugar/node/log/log');
+const __glob = require('glob');
 
-module.exports = function lazyDomLoadPlugin(files, settings = {}) {
-  return new Promise((resolve, reject) => {
+module.exports = {
 
-    console.log('PLIO', files, settings);
-    process.exit();
+  start: (stats, settings, api) => {
+    return new Promise((resolve, reject) => {
 
-    // console.log(files);
-    // process.exit();
+      if (settings.resourcesPattern) {
+        const resourcesArray = __glob.sync(settings.resourcesPattern);
+        if (resourcesArray.length) {
+          resourcesArray.forEach(resourcePath => {
+            const name = resourcePath.split('/').pop();
+            const ext = __getExtension(name);
+            const selector = name.replace(`.${ext}`, '');
+            if (settings.resources[selector]) {
+              throw new Error(`CoffeeBuilder: The "<yellow>${settings.resourcesPattern}</yellow>" resourcesPattern has found a file named "<cyan>${name}</cyan>" that try to override the manually setted "<yellow>resources.${selector}</yellow>" config...`);
+            }
+            settings.resources[selector] = resourcePath;
+          });
+        }
+      }
 
-    // setTimeout(() => {
-    //   resolve();
-    // }, 3000);
+      let script = `
+        import __appendScriptTag from '@coffeekraken/sugar/js/dom/appendScriptTag';
+        import __querySelectorLive from '@coffeekraken/sugar/js/dom/querySelectorLive';
+        import __when from '@coffeekraken/sugar/js/dom/when';
+      `;
 
-    resolve();
+      api.injectScript(script);
 
-  });
+      resolve();
+
+    });
+
+  }
 
   //
   // compiler.hooks.entryOption.tap('LazyDomLoadPlugin', (context, entry) => {

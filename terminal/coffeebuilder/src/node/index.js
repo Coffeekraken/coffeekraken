@@ -20,9 +20,10 @@ const __chokidar = require('chokidar');
 const __restoreCursor = require('restore-cursor');
 const __ora = require('ora');
 
+const __coffeeApi = require('./classes/CoffeeBuilderApi');
 const __coffeeEvents = require('./events');
 const __CoffeeBuilderResource = require('./classes/CoffeeBuilderResource');
-const __setup = require('./settings').setup;
+const __setup = require('../../coffeebuilder.config').setup;
 const __stats = require('./stats');
 
 const __path = require('path');
@@ -81,7 +82,7 @@ class CoffeePack {
     this.webpack = new CoffeeBuilderWebpack(this);
 
     // init watch
-    if (this._config.watch) this._initWatch();
+    // if (this._config.watch) this._initWatch();
 
     this._interface = __readline.createInterface({
       input: process.stdin,
@@ -100,22 +101,6 @@ class CoffeePack {
 
     // listen for build events
     this._listenBuildEvents();
-
-    // register default plugins
-    // this.webpack.registerPlugin('@coffeekraken/webpack-concat-dependencies-vendors-plugin', {});
-    // this.webpack.registerPlugin('@coffeekraken/webpack-lazy-dom-load-plugin', {});
-
-    // register coffeebuilder plugins
-    this.registerPlugin('lazyDomLoad', __lazyDomLoadPlugin, __deepMerge(__defaultConfig.plugins.lazyDomLoad, this._userConfig.plugins.lazyDomLoad || {}));
-
-    // register webpack plugins
-    this.webpack.registerPlugin('CoffeeBuilderPlugin', {
-      postProcessors: this.postProcessors.bind(this),
-    }, __CoffeeBuilderPlugin);
-
-    // register default loaders
-    this.webpack.registerLoader(__dirname + '/webpack/CoffeeBuilderLoader', /\.*$/, {});
-    this.webpack.registerLoader('webpack-import-glob-loader', /\.js$/, {});
 
   }
 
@@ -170,7 +155,7 @@ class CoffeePack {
     // loop on each asked compile files
     this._config.compile.forEach((compile) => {
 
-      const fileObj = this._config.files[compile];
+      const fileObj = this._config.resources[compile];
       if (!fileObj || !fileObj.sourcesFolder) return;
 
       fileObj.sourcesFolder.forEach((folder) => {
@@ -209,130 +194,6 @@ class CoffeePack {
   }
 
   /**
-   * @name                    registerProcessor
-   * @namespace               terminal.coffeebuilder.node.CoffeeBuilder
-   * @type                    Function
-   *
-   * Register a processor function that will take as parameters the file extensions that
-   * it will handle, the function itself that will process the files and optionaly a "weight"
-   * that specify if this processor function has to be called preferably first, middle or last...
-   * See the weight of internal processors if you need to register yours in the middle...
-   *
-   * A processor function is a simple function that will take as arguments the file source path, the file
-   * source code and that return a simple Promise. You can make absolutely whatever you want to the source code but you have to resolve the Promise
-   * and passing it the processed source code in order that it can be processed by the others registered processors...
-   *
-   * @param             {String}              name                      The name of the processor. It has to be a single word as it will be used as an object property name...
-   * @param             {Array}               extensions                The file extensions that need to be processed by this function
-   * @param             {Function}            processor                 The actual processor function that will take as arguments the source path and the source code of the file.
-   * @param             {Object}              [settings={}]             The settings that will be passed to the processor function
-   * @param             {Number}              [weight=null]             The weight of the processor. This define the order of processors oxecutions
-   *
-   * @example           js
-   * coffeepack.registerProcessor('jpg', ['jpg','jpeg'], (filePath, source, settings) => {
-   *    return new Promise((resolve, reject) => {
-   *      // do something with the source code...
-   *      resolve(source);
-   *    });
-   * }, {}, 10);
-   *
-   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  registerProcessor(name, extensions, processor, settings = {}, weight = 10) {
-
-    if (this._processors[name] !== undefined) {
-      throw new Error(`You try to register a processor named "${name}" but a processor with this name already exist...`);
-    }
-
-    // register the processor
-    this._processors[name] = {
-      name,
-      extensions,
-      processor,
-      settings,
-      weight
-    };
-  }
-
-  /**
-   * @name                    processors
-   * @namespace               coffeebuilder.node.CoffeeBuilder
-   * @type                    Function
-   *
-   * Get the registered processors object back
-   *
-   * @return          {Object}                  The registered processors
-   *
-   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  processors() {
-    return this._processors;
-  }
-
-  /**
-   * @name                    registerPostProcessor
-   * @namespace               terminal.coffeebuilder.node.CoffeeBuilder
-   * @type                    Function
-   *
-   * Register a post processor function that will take as parameters the file extensions that
-   * it will handle, the function itself that will process the files and optionaly a "weight"
-   * that specify if this processor function has to be called preferably first, middle or last...
-   * See the weight of internal postProcessors if you need to register yours in the middle...
-   *
-   * The difference with the processors is that postProcessors are runed AFTER the actual build process is done.
-   *
-   * A postProcessor function is a simple function that will take as arguments the file source path, the file
-   * source code and that return a simple Promise. You can make absolutely whatever you want to the source code but you have to resolve the Promise
-   * and passing it the processed source code in order that it can be processed by the others registered postProcessors...
-   *
-   * @param             {String}              name                      The name of the postProcessor. It has to be a single word as it will be used as an object property name...
-   * @param             {Array}               extensions                The file extensions that need to be processed by this function
-   * @param             {Function}            processor                 The actual postProcessor function that will take as arguments the source path and the source code of the file.
-   * @param             {Object}              [settings={}]             The settings that will be passed to the postProcessor function
-   * @param             {Number}              [weight=null]             The weight of the postProcessor. This define the order of processors oxecutions
-   *
-   * @example           js
-   * coffeepack.registerPostProcessor('jpg', ['jpg','jpeg'], (filePath, source, settings) => {
-   *    return new Promise((resolve, reject) => {
-   *      // do something with the source code...
-   *      resolve(source);
-   *    });
-   * }, {}, 10);
-   *
-   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  registerPostProcessor(name, extensions, processor, settings = {}, weight = 10) {
-
-    if (this._postProcessors[name] !== undefined) {
-      throw new Error(`You try to register a processor named "${name}" but a processor with this name already exist...`);
-    }
-
-    // register the processor
-    this._postProcessors[name] = {
-      name,
-      extensions,
-      processor,
-      settings,
-      weight
-    };
-  }
-
-  /**
-   * @name                    postProcessors
-   * @namespace               coffeebuilder.node.CoffeeBuilder
-   * @type                    Function
-   *
-   * Get the registered postProcessors object back
-   *
-   * @return          {Object}                  The registered postProcessors
-   *
-   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  postProcessors() {
-    return this._postProcessors;
-  }
-
-  /**
    * @name                    run
    * @namespace               terminal.coffeebuilder.node.CoffeeBuilder
    * @type                    Function
@@ -354,6 +215,9 @@ class CoffeePack {
   run(compile = null) {
     return new Promise((resolve, reject) => {
 
+      // clear the injected scripts
+      __coffeeApi.clearInjectedScripts();
+
       // save the startTimestamp
       __stats.build.startTimestamp = Date.now();
 
@@ -361,7 +225,8 @@ class CoffeePack {
       (async () => {
 
         await this.webpack.run(compile);
-        await this._runPlugins(compile);
+
+        // console.log('PLOP'); process.exit();
 
         // save the endTimestamp
         __stats.build.endTimestamp = Date.now();
@@ -373,77 +238,6 @@ class CoffeePack {
         resolve();
       })();
     });
-  }
-
-  /**
-   * @name                  _runPlugins
-   * @namespace             coffeebuilder.node.CoffeeBuilder
-   * @type                  Function
-   *
-   * Launch the plugins execution and return a promise resolved once all the plugins have finished their job
-   *
-   * @return        {Promise}                   A promise resolved once all the plugins have finished their job
-   *
-   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _runPlugins() {
-    return new Promise(async (resolve, reject) => {
-
-      const sortedPluginsStack = __sortObj(this._plugins, (a, b) => {
-        return b.weight - a.weight;
-      });
-
-      const sortedPluginsStackNames = Object.keys(sortedPluginsStack);
-      for (let i = 0; i < sortedPluginsStackNames.length; i++) {
-        const pluginObj = sortedPluginsStack[sortedPluginsStackNames[i]];
-        await pluginObj.plugin({
-          processed: __stats.build.processedResources,
-          postProcessed: __stats.postBuild.processedResources
-        }, pluginObj.settings);
-      }
-
-      resolve();
-
-    });
-  }
-
-  /**
-   * @name                    registerPlugin
-   * @namespace               terminal.coffeebuilder.node.CoffeeBuilder
-   * @type                    Function
-   *
-   * Register a plugin function that will take as parameters the list of files processed during the build, as well as the
-   * settings object specific to the plugin itself.
-   *
-   * @param             {String}              name                      The name of the plugin. It has to be a single word as it will be used as an object property name...
-   * @param             {Function}            plugin                    The actual plugin function that will take as arguments the processed files list and the plugin settings object
-   * @param             {Object}              [settings={}]             The settings that will be passed to the plugin function
-   * @param             {Number}              [weight=null]             The weight of the plugin. This define the order of plugins oxecutions. The higher is executed first
-   *
-   * @example           js
-   * coffeepack.registerPlugin('myCoolPlugin', (files, settings) => {
-   *    return new Promise((resolve, reject) => {
-   *      // do something...
-   *      resolve();
-   *    });
-   * }, {}, 10);
-   *
-   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  registerPlugin(name, plugin, settings = {}, weight = 10) {
-
-
-    if (this._plugins[name] !== undefined) {
-      throw new Error(`You try to register a plugin named "${name}" but a plugin with this name already exist...`);
-    }
-
-    // register the processor
-    this._plugins[name] = {
-      name,
-      plugin,
-      settings,
-      weight
-    };
   }
 
   /**
@@ -471,13 +265,6 @@ class CoffeePack {
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   drawInterface() {
-
-    // if (!this._drawInterfaceInterval) {
-    //   this._drawInterfaceInterval = setInterval(() => {
-    //     this.drawInterface();
-    //   }, 500);
-    // }
-
     return new Promise(async (resolve, reject) => {
 
       if (!__stats.build.percentage) __stats.build.percentage = 0;
@@ -500,11 +287,11 @@ class CoffeePack {
       const postProgress = Math.round(maxWidth / 100 * postPercentage || 0);
 
       // clear the terminal
-      __readline.clearLine(process.stdout, 0);
-      for (let i = 0; i < process.stdout.rows; i++) {
-        __readline.clearLine(process.stdout, 0);
-        __readline.moveCursor(process.stdout, 0, -1);
-      }
+      // __readline.clearLine(process.stdout, 0);
+      // for (let i = 0; i < process.stdout.rows; i++) {
+      //   __readline.clearLine(process.stdout, 0);
+      //   __readline.moveCursor(process.stdout, 0, -1);
+      // }
 
       let barColorTag = 'red';
       if (percentage > 33) barColorTag = 'yellow';
@@ -672,9 +459,9 @@ class CoffeePack {
       await __asyncForEach(compileTypes, async (compile) => {
         return new Promise(async (r) => {
 
-          const compileTypeObj = this._config.files[compile];
+          const compileTypeObj = this._config.resources[compile];
 
-          await __asyncForEach(compileTypeObj.sourcesFolder, (sourcesFolder) => {
+          await __asyncForEach(compileTypeObj.sourcesFolders, (sourcesFolder) => {
             return new Promise(async (resolve, reject) => {
 
               const folderSize = await __folderSize(sourcesFolder, true);
@@ -684,7 +471,7 @@ class CoffeePack {
             });
           });
 
-          await __asyncForEach(compileTypeObj.outputFolder, (outputFolder) => {
+          await __asyncForEach(compileTypeObj.outputFolders, (outputFolder) => {
             return new Promise(async (resolve, reject) => {
 
               const folderSize = await __folderSize(outputFolder, true);
@@ -762,28 +549,6 @@ class CoffeePack {
 class CoffeeBuilderWebpack {
 
   /**
-   * @name                    _loaders
-   * @namespace               terminal.coffeebuilder.node.CoffeeBuilder
-   * @type                    Object
-   *
-   * Store all the loaders available through coffeepack
-   *
-   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _loaders = {};
-
-  /**
-   * @name                    _plugins
-   * @namespace               terminal.coffeebuilder.node.CoffeeBuilder
-   * @type                    Object
-   *
-   * Store all the plugins available through coffeepack
-   *
-   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _plugins = {};
-
-  /**
    * @name                    _coffeepack
    * @namespace               webpack.coffeepack.CoffeeBuilderWebpack
    * @type                    CoffeePack
@@ -830,117 +595,11 @@ class CoffeeBuilderWebpack {
         if (err || stats.hasErrors()) {
           console.log(stats);
         }
+        // console.log(stats);
         // process finished
         resolve(stats);
       });
     });
-  }
-
-  /**
-   * @name                        registerLoader
-   * @namespace                   terminal.coffeebuilder.node.CoffeeBuilder
-   * @type                        Function
-   *
-   * Register a new loader by passing his name, file test and options
-   *
-   * @param               {String}              name                 The loader name. This has to be the require path to the loader...
-   * @param               {RegExp}              [test=/\.*$/]        The regex test that will determine if a file has to passe through the loader or not
-   * @param               {Object}              [options={}]         The loader options
-   *
-   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  registerLoader(name, test = /\.*$/, options = {}) {
-    // register a new loader to use
-    this._loaders[name] = {
-      test: test,
-      use: [{
-        loader: name,
-        options: options
-      }]
-    };
-  }
-
-  /**
-   * @name                                loaders
-   * @namespace                           terminal.coffeebuilder.node.CoffeeBuilder
-   * @type                                Function
-   *
-   * Return the "module" webpack object with all the registered loaders
-   *
-   * @return              {Object}                    The "module" webpack object
-   *
-   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  loaders() {
-
-    const moduleObj = {
-      rules: []
-    };
-
-    Object.keys(this._loaders).forEach((loader) => {
-      // if (this._config.loaders.indexOf(loader) !== -1) {
-      moduleObj.rules.push(this._loaders[loader]);
-      // }
-    });
-
-    // return the module object with all the loaders configurated
-    return moduleObj;
-
-  }
-
-  /**
-   * @name                                loaders
-   * @namespace                           terminal.coffeebuilder.node.CoffeeBuilder
-   * @type                                Function
-   *
-   * Return the "module" webpack object with all the registered loaders
-   *
-   * @return              {Object}                    The "module" webpack object
-   *
-   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  plugins() {
-
-    const pluginsArray = [];
-
-    Object.keys(this._plugins).forEach((plugin) => {
-      // if (this._config.plugins.indexOf(plugin) !== -1) {
-      const pluginObj = this._plugins[plugin];
-      pluginsArray.push(new pluginObj.class(pluginObj.settings));
-      // }
-    });
-
-    return pluginsArray;
-
-  }
-
-  /**
-   * @name                        registerPlugin
-   * @namespace                   terminal.coffeebuilder.node.CoffeeBuilder
-   * @type                        Function
-   *
-   * Register a new plugin by passing his name, class and options
-   *
-   * @param               {String}              name                 The plugin name. This has to be the require path to the loader...
-   * @param               {Object}              [settings={}]         The plugin settings
-   * @param               {RegExp}              [cls=null]           The plugin class if the "require(name)" has not returned the class
-   *
-   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  registerPlugin(name, settings = {}, cls = null) {
-
-    let _class = cls;
-    try {
-      _class = require(name);
-    } catch (e) {
-      _class = cls;
-    }
-
-    // register a new plugin to use
-    this._plugins[name] = {
-      class: _class,
-      settings
-    };
   }
 
   /**
@@ -959,13 +618,7 @@ class CoffeeBuilderWebpack {
     const webpackConfig = Object.assign({}, this._coffeepack._config.vendors.webpack);
 
     // entry
-    webpackConfig.entry = this.entry();
-
-    // plugins
-    webpackConfig.plugins = this.plugins();
-
-    // loaders
-    webpackConfig.module = this.loaders();
+    webpackConfig.entry = this._getEntry();
 
     // return the webpack configuration object
     return webpackConfig;
@@ -973,9 +626,10 @@ class CoffeeBuilderWebpack {
   }
 
   /**
-   * @name                        entry
+   * @name                        _getEntry
    * @namespace                   terminal.coffeebuilder.node.CoffeeBuilder
    * @type                        Function
+   * @private
    *
    * Return the "entry" webpack configuration object builded by coffeepack
    *
@@ -983,7 +637,7 @@ class CoffeeBuilderWebpack {
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  entry() {
+  _getEntry() {
 
     // the entry webpack object
     let entryObj = {};
@@ -994,21 +648,21 @@ class CoffeeBuilderWebpack {
     fileTypesToCompile.forEach((fileType) => {
 
       // get the file type options object
-      const optionsObj = this._coffeepack._config.files[fileType] || {};
+      const optionsObj = this._coffeepack._config.resources[fileType] || {};
 
       // check the configuration object
-      if (!optionsObj.sourcesFolder) {
+      if (!optionsObj.sourcesFolders) {
         throw new Error(`You try to compile the <yellow>"${fileType}"</yellow> files but you don't have setted the <red>"config.${fileType}.sourcesFolder"</red> config...`);
       }
-      if (!optionsObj.outputFolder) {
+      if (!optionsObj.outputFolders) {
         throw new Error(`You try to compile the <yellow>"${fileType}"</yellow> files but you don't have setted the <red>"config.${fileType}.outputFolder"</red> config...`);
       }
       if (!optionsObj.sources) {
         throw new Error(`You try to compile the <yellow>"${fileType}"</yellow> files but you don't have setted the <red>"config.${fileType}.sources"</red> config...`);
       }
 
-      const sourcesFolder = Array.isArray(optionsObj.sourcesFolder) ? optionsObj.sourcesFolder : [optionsObj.sourcesFolder];
-      const outputFolder = Array.isArray(optionsObj.outputFolder) ? optionsObj.outputFolder : [optionsObj.outputFolder];
+      const sourcesFolder = Array.isArray(optionsObj.sourcesFolders) ? optionsObj.sourcesFolders : [optionsObj.sourcesFolders];
+      const outputFolder = Array.isArray(optionsObj.outputFolders) ? optionsObj.outputFolders : [optionsObj.outputFolders];
 
       // search for the files
       let files = [];

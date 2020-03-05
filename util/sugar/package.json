@@ -47,6 +47,7 @@
     "in-viewport": "^3.6.0",
     "inline-style-prefixer": "^5.1.0",
     "is-base64": "^1.0.0",
+    "is-plain-object": "^3.0.0",
     "jss": "^10.0.3",
     "jss-plugin-global": "^10.0.3",
     "jss-plugin-vendor-prefixer": "^10.0.3",

@@ -5,7 +5,7 @@ const __writeFileSync = require('@coffeekraken/sugar/node/fs/writeFileSync');
 const __fs = require('fs');
 const __events = require('../events');
 
-const __settings = require('../settings');
+const __settings = require('../../../coffeebuilder.config');
 
 
 /**
@@ -101,7 +101,7 @@ module.exports = class CoffeeBuilderResource {
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(filepath) {
-    if ( ! __fs.existsSync(filepath)) {
+    if (!__fs.existsSync(filepath)) {
       throw new Error(`The CoffeeBuilderResource with the filepath "${filepath}" cannot be instanciated cause the source file does not exist...`);
     }
     this._filepath = filepath;
@@ -169,7 +169,7 @@ module.exports = class CoffeeBuilderResource {
     const cachePath = __tmpDir() + '/coffeeBuilderCache';
     const encryptedPath = __base64.encrypt(this.filepath);
     const jsonCacheFilePath = cachePath + '/' + encryptedPath + '.json';
-    if ( ! __fs.existsSync(jsonCacheFilePath)) return false;
+    if (!__fs.existsSync(jsonCacheFilePath)) return false;
     const jsonCacheFileUpdateTimestamp = __fs.statSync(jsonCacheFilePath).mtimeMs;
     return jsonCacheFileUpdateTimestamp;
   }
@@ -217,8 +217,8 @@ module.exports = class CoffeeBuilderResource {
     const results = [];
 
     let buildScopes = {};
-    Object.keys(__settings.files).forEach((key, i) => {
-      const opts = __settings.files[key];
+    Object.keys(__settings.resources).forEach((key, i) => {
+      const opts = __settings.resources[key];
 
       let outputFilePath = this.filepath;
 
@@ -230,12 +230,12 @@ module.exports = class CoffeeBuilderResource {
 
         const scope = buildScopes[scopeKey];
 
-        let outputFolder = scope.outputFolder;
-        if ( ! Array.isArray(outputFolder)) outputFolder = [outputFolder];
+        let outputFolder = scope.outputFolders;
+        if (!Array.isArray(outputFolder)) outputFolder = [outputFolder];
 
-        let sourcesFolder = scope.sourcesFolder;
-        if ( ! Array.isArray(sourcesFolder)) sourcesFolder = [sourcesFolder];
-        if ( ! outputFolder || ! sourcesFolder) return;
+        let sourcesFolder = scope.sourcesFolders;
+        if (!Array.isArray(sourcesFolder)) sourcesFolder = [sourcesFolder];
+        if (!outputFolder || !sourcesFolder) return;
 
         outputFolder.forEach((outputFolderPath) => {
 
@@ -244,9 +244,9 @@ module.exports = class CoffeeBuilderResource {
             outputFilePath = outputFilePath.replace(process.cwd(), '');
             outputFilePath = outputFilePath.replace(sourcesFolderPath, '');
             outputFilePath = outputFilePath.replace(outputFolderPath, '');
-            if (outputFilePath.slice(0,2) === '//') outputFilePath = outputFilePath.slice(2);
-            if (outputFilePath.slice(0,1) === '/') outputFilePath = outputFilePath.slice(1);
-            outputFilePath = outputFilePath.replace(`.${this.extension}`,`.${this.saveExtension}`);
+            if (outputFilePath.slice(0, 2) === '//') outputFilePath = outputFilePath.slice(2);
+            if (outputFilePath.slice(0, 1) === '/') outputFilePath = outputFilePath.slice(1);
+            outputFilePath = outputFilePath.replace(`.${this.extension}`, `.${this.saveExtension}`);
           });
 
           if (`${outputFolderPath}/${outputFilePath}`.includes(__tmpDir())) return;
@@ -278,7 +278,7 @@ module.exports = class CoffeeBuilderResource {
   get saveExtension() {
 
     // check if the data is already available
-    if ( this._saveExtension) return this._saveExtension;
+    if (this._saveExtension) return this._saveExtension;
 
     // return the actual file extension
     return this.extension;
@@ -341,7 +341,7 @@ module.exports = class CoffeeBuilderResource {
   get map() {
 
     // check if the data is already available
-    if ( this._map) return this._map;
+    if (this._map) return this._map;
 
     // // the resource is not either in the _data property or in the cache, get if from the file itself...
     // if (__fs.existsSync(this.outputFilePathes[0] + '.map')) {
@@ -390,7 +390,7 @@ module.exports = class CoffeeBuilderResource {
   get data() {
 
     // check if the data is already available
-    if ( this._data) return this._data;
+    if (this._data) return this._data;
 
     // the resource is not either in the _data property or in the cache, get if from the file itself...
     this.data = __fs.readFileSync(this._filepath);
@@ -471,7 +471,7 @@ module.exports = class CoffeeBuilderResource {
     const encryptedPath = __base64.encrypt(this._filepath);
     let mapContent = null;
 
-    if (__fs.existsSync(`${this._filepath}.map`)) {
+    if (__fs.existsSync(`${this._filepath}.map`)) {
       mapContent = __fs.readFileSync(`${this._filepath}.map`);
     }
 
@@ -520,7 +520,7 @@ module.exports = class CoffeeBuilderResource {
 
     this.emitSaveProcessedStat();
 
-    if ( ! this.filepath.includes(__tmpDir())) __events.emit('savedResource', this);
+    if (!this.filepath.includes(__tmpDir())) __events.emit('savedResource', this);
 
     if (this.saveExtension === 'js' && loaderInstance) {
       return true;
@@ -528,21 +528,7 @@ module.exports = class CoffeeBuilderResource {
 
     // loop on all the output file pathes
     this.outputFilePathes.forEach((output) => {
-
       __writeFileSync(process.cwd() + '/' + output, this.data);
-
-      // if (loaderInstance) {
-      //   loaderInstance.emitFile(output, this.data);
-      //
-      // } else {
-      //   console.log('WIR', process.cwd() + '/' + output, this.data.toString('utf8'));
-      //   __writeFileSync(process.cwd() + '/' + output, this.data);
-      // }
-      //
-      // if (this.map) {
-      //   __writeFileSync(process.cwd() + '/' + output + '.map', this.map);
-      // }
-
     });
 
     return true;

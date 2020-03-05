@@ -10,13 +10,15 @@ const __loaderUtils = require('loader-utils');
  *
  * Execute the imagemin coffeescript on the source
  *
- * @param            {String}             filepath        The path of the file to process
+ * @param            {Object}             resource        The resource file object to process
  * @param            {String}             source          The source code to process
  * @param            {Object}             [settings={}]   The settings to pass to coffeescript compiler
- *
+ * @param             {Object}            api             The CoffeeBuilderApi instance to interact with the system
+ * @return            {Promise}                           The promise that will be resolved with the processed source code
+ * 
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function coffeescriptProcessor(filepath, source, settings = {}) {
+module.exports = function coffeescriptProcessor(resource, source, settings = {}, api) {
   return new Promise(async (resolve, reject) => {
 
     const result = __coffeescript.compile(source.toString('utf8'), __deepMerge({

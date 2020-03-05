@@ -13,13 +13,15 @@ const __deepMerge = require('@coffeekraken/sugar/node/object/deepMerge');
  * - @babel/plugin-proposal-class-properties
  * - @babel/plugin-proposal-export-default-from
  *
- * @param            {String}             filepath        The path of the file to process
+ * @param            {Object}             resource        The resource file object to process
  * @param            {String}             source          The source code to process
  * @param            {Object}             [settings={}]   The settings to pass to babel package
- *
+ * @param             {Object}            api             The CoffeeBuilderApi instance to interact with the system
+ * @return            {Promise}                           The promise that will be resolved with the processed source code
+ * 
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function babelProcessor(filepath, source, settings = {}) {
+module.exports = function babelProcessor(resource, source, settings = {}, api) {
   return new Promise((resolve, reject) => {
 
     // transform the code using babel

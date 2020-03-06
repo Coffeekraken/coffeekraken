@@ -94,6 +94,9 @@ module.exports = class CoffeeBuilderResource {
   _updateTimestamp = 0;
 
   /**
+   * @name                                constructor
+   * @namespace                           terminal.coffeebuilder.node.classes.CoffeeBuilderResource
+   * @type                                Function
    * @constructor
    *
    * @param         {String}            filepath            The path to the source file that will represent the resource

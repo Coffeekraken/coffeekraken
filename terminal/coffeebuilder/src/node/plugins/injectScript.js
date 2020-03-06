@@ -18,11 +18,11 @@ module.exports = {
 
   before: (stats, settings, api) => {
 
-    api.getInjectedScriptsFilepathes().forEach(injectPath => {
+    // api.getInjectedScriptsFilepathes().forEach(injectPath => {
 
-      api.addWebpackEntry(injectPath, `${injectPath.replace('.js', '.compiled.js')}`);
+    //   api.addWebpackEntry(injectPath, `${injectPath.replace('.js', '.compiled.js')}`);
 
-    });
+    // });
 
   },
 

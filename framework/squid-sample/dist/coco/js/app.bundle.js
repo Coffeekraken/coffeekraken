@@ -1,0 +1,1 @@
+"use strict";alert("Hello world"),alert("yop yop"),console.log("coco");

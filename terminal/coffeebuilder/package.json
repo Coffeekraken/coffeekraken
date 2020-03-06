@@ -73,6 +73,7 @@
     "sass": "^1.25.0",
     "sass-glob-importer": "^1.0.1",
     "scss-bundle": "^3.0.2",
+    "terminal-kit": "^1.34.1",
     "terser": "^4.6.3",
     "typescript": "^3.7.5",
     "webpack": "^4.41.5",

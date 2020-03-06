@@ -30,12 +30,33 @@ class CoffeeBuilderApi {
    * @name            constructor
    * @namespace       terminal.coffeebuilder.node.classes.CoffeeBuilderApi
    * @type            Function
+   * @constructor
    * 
    * Construct the class
    * 
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor() {
+
+  }
+
+  /**
+   * @name                                _runPlugins
+   * @namespace                           terminal.coffeebuilder.node.classes.CoffeeBuilderApi
+   * @type                                Function
+   * 
+   * Run the registered plugins based on the "moment" ou want like "start", "before", etc...
+   * 
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  async _runPlugins(when = 'after') {
+
+    for (let i = 0; i < Object.keys(this.config.plugins).length; i++) {
+      const pluginObj = this.config.plugins[Object.keys(this.config.plugins)[i]];
+      if (pluginObj.plugin[when]) {
+        await pluginObj.plugin[when](this.stats, this.config.plugins[Object.keys(this.config.plugins)[i]].settings, this);
+      }
+    }
 
   }
 
@@ -68,6 +89,38 @@ class CoffeeBuilderApi {
    */
   get config() {
     return require('../../../coffeebuilder.config');
+  }
+
+  /**
+   * @name                       userConfig
+   * @namespace                  terminal.coffeebuilder.node.CoffeeBuilder
+   * @type                        Object
+   * 
+   * Store the user config defines at the root of his project in the "coffeebuilder.config.js" file.
+   * If the file does not exist, return an empty object
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get userConfig() {
+    if (!__fs.existsSync(`${process.cwd()}/coffeebuilder.config.js`)) return {
+      plugins: {}
+    };
+    return require(`${process.cwd()}/coffeebuilder.config.js`);
+  }
+
+  /**
+   * @name                stats
+   * @namespace           terminal.coffeebuilder.node.classes.CoffeeBuilderApi
+   * @type                Function
+   * 
+   * Get the coffeebuilder execution stats
+   * 
+   * @return        {Object}            
+   * 
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get stats() {
+    return require('../stats');
   }
 
   /**

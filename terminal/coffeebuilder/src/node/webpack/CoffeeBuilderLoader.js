@@ -5,8 +5,6 @@ const __coffeeEvents = require('../events');
 const __processFile = require('../utils/processFile');
 const __CoffeeBuilderResource = require('../classes/CoffeeBuilderResource');
 
-console.log('LOADER');
-
 module.exports.raw = true;
 module.exports = function coffeeLoader(source) {
   this.cacheable(false);

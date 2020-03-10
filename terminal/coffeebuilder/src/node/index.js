@@ -1,21 +1,15 @@
 const __webpack = require('webpack');
 const __deepMerge = require('@coffeekraken/sugar/js/object/deepMerge');
-const __log = require('@coffeekraken/sugar/node/log/log');
 const __glob = require('glob');
-const __filterObj = require('@coffeekraken/sugar/js/object/filter');
-const __sortObj = require('@coffeekraken/sugar/js/object/sort');
 const __getExtension = require('@coffeekraken/sugar/js/string/getExtension');
 const __uniqid = require('@coffeekraken/sugar/js/string/uniqid');
 const __tmpDir = require('@coffeekraken/sugar/node/fs/tmpDir');
-const __cfonts = require('cfonts');
 const __chokidar = require('chokidar');
 const __restoreCursor = require('restore-cursor');
 
 const __coffeeBuilderApi = require('./classes/CoffeeBuilderApi');
 const __coffeeEvents = require('./events');
 const __coffeeBuilderUI = require('./classes/CoffeeBuilderUI');
-const __CoffeeBuilderResource = require('./classes/CoffeeBuilderResource');
-const __setup = require('../../coffeebuilder.config').setup;
 const __stats = require('./stats');
 
 const __path = require('path');
@@ -24,9 +18,8 @@ const __fs = require('fs');
 const __defaultConfig = require('../../coffeebuilder.config');
 
 const __CoffeeBuilderPlugin = require('./webpack/CoffeeBuilderPlugin');
-const __lazyDomLoadPlugin = require('./plugins/lazyDomLoad');
 
-class CoffeePack {
+class CoffeeBuilder {
 
   /**
    * @name                        _processors
@@ -61,6 +54,8 @@ class CoffeePack {
    */
   _plugins = {};
 
+  _packages = [];
+
   _watchCompile = [];
   _drawInterfaceTimeout = null;
 
@@ -69,7 +64,15 @@ class CoffeePack {
     // display the "home" UI
     __coffeeBuilderUI.changeLocation('home');
 
-    this._config = __setup(config);
+    // search for all the packages
+    this._packages = __glob.sync('**/*(package.json|coffeebuilder.config.js)', {
+      ignore: '**/node_modules/**'
+    }).map(p => {
+      return p.replace('/package.json', '').replace('/coffeebuilder.config.js', '');
+    });
+    this._packages = [...new Set(this._packages)];
+
+    this._config = __defaultConfig.setup(config);
 
     // run the plugins at "start" moment
     __coffeeBuilderApi._runPlugins('start');
@@ -78,7 +81,7 @@ class CoffeePack {
     this.webpack = new CoffeeBuilderWebpack(this);
 
     // init watch
-    // if (this._config.watch) this._initWatch();
+    if (this._config.watch) this._initWatch();
 
     process.on('beforeExit', () => {
       __coffeeBuilderApi._runPlugins('end');
@@ -101,24 +104,60 @@ class CoffeePack {
    */
   _initWatch() {
 
-    // loop on each asked compile files
-    this._config.compile.forEach((compile) => {
+    // loop on each packages to watch
+    this._packages.forEach(packagePath => {
 
-      const fileObj = this._config.resources[compile];
-      if (!fileObj || !fileObj.sourcesFolder) return;
+      // let packageJson = {};
+      // if (__fs.existsSync(process.cwd() + '/' + packagePath + '/package.json')) {
+      //   packageJson = require(process.cwd() + '/' + packagePath + '/package.json');
+      // }
 
-      fileObj.sourcesFolder.forEach((folder) => {
+      // let coffeebuilderPackageConfig = {};
+      // if (__fs.existsSync(process.cwd() + '/' + packagePath + '/coffeebuilder.config.js')) {
+      //   coffeebuilderPackageConfig = require(process.cwd() + '/' + packagePath + '/coffeebuilder.config.js');
+      // }
 
-        __chokidar.watch(`${folder}/${fileObj.sources}`).on('change', (event, path) => {
-          this.resetBuildStats();
-          this._watchCompile = [compile];
-          this.run([compile]);
+      this._config.compile.forEach(compile => {
+
+        const fileObj = this._config.resources[compile];
+        if (!fileObj || !fileObj.sourcesFolders) return;
+        fileObj.sourcesFolders.forEach((folder) => {
+
+          console.log(`${process.cwd()}/${packagePath}/${folder}/${fileObj.sources}`);
+
+          __chokidar.watch(`${process.cwd()}/${packagePath}/${folder}/${fileObj.sources}`).on('change', (event, path) => {
+            // this.resetBuildStats();
+            console.log('Update in', packagePath, folder, fileObj.sources);
+            process.exit();
+            // this._watchCompile = [compile];
+            // this.run([compile]);
+          });
+
+
         });
-
 
       });
 
     });
+
+    // loop on each asked compile files
+    // this._config.compile.forEach((compile) => {
+
+    //   const fileObj = this._config.resources[compile];
+    //   if (!fileObj || !fileObj.sourcesFolder) return;
+
+    //   fileObj.sourcesFolder.forEach((folder) => {
+
+    //     __chokidar.watch(`${folder}/${fileObj.sources}`).on('change', (event, path) => {
+    //       this.resetBuildStats();
+    //       this._watchCompile = [compile];
+    //       this.run([compile]);
+    //     });
+
+
+    //   });
+
+    // });
 
   }
 
@@ -127,9 +166,9 @@ class CoffeePack {
    * @namespace                   terminal.coffeebuilder.node.CoffeeBuilder
    * @type                        Function
    *
-   * Return the coffeepack configuration object
+   * Return the coffeebuilder configuration object
    *
-   * @return        {Object}                The coffeepack configuration object
+   * @return        {Object}                The coffeebuilder configuration object
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
@@ -149,19 +188,20 @@ class CoffeePack {
    *
    * Run the build process and return a Promise that will be resolved once the build is completed
    *
-   * @param           {Array}                         An array of file types to compile. If not set, will take this parameter from the config
+   * @param           {String}               [packagePath=null]            The package path in which to launch the compilation/optimization process
+   * @param           {Array}               [compile=null]                 An array of file types to compile. If not set, will take this parameter from the config
    * @return          {Promise}                       A promise that will be resolved once the build is completed
    *
    * @example           js
-   * import CoffeePack from '@coffeekraken/coffeepack';
-   * const coffeepack = new CoffeePack();
-   * coffeepack.run().then((result) => {
+   * import coffeebuilder from '@coffeekraken/coffeebuilder';
+   * const coffeebuilder = new coffeebuilder();
+   * coffeebuilder.run().then((result) => {
    *    // do something once the build is finished
    * })
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  run(compile = null) {
+  run(packagePath = null, compile = null) {
     return new Promise((resolve, reject) => {
 
       // run the plugins at "before" moment
@@ -180,8 +220,6 @@ class CoffeePack {
         __coffeeBuilderUI.changeLocation('build');
 
         await this.webpack.run(compile);
-
-        // console.log('PLOP'); process.exit();
 
         // save the endTimestamp
         __stats.build.endTimestamp = Date.now();
@@ -215,30 +253,30 @@ class CoffeePack {
 class CoffeeBuilderWebpack {
 
   /**
-   * @name                    _coffeepack
-   * @namespace               webpack.coffeepack.CoffeeBuilderWebpack
-   * @type                    CoffeePack
+   * @name                    _coffeebuilder
+   * @namespace               webpack.coffeebuilder.CoffeeBuilderWebpack
+   * @type                    coffeebuilder
    *
-   * Store the CoffeePack instance
+   * Store the coffeebuilder instance
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _coffeepack = null;
+  _coffeebuilder = null;
 
   /**
    * @name                     constructor
-   * @namespace                webpack.coffeepack.CoffeeBuilderWebpack
+   * @namespace                webpack.coffeebuilder.CoffeeBuilderWebpack
    * @type                      Function
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(coffeepack) {
-    this._coffeepack = coffeepack;
+  constructor(coffeebuilder) {
+    this._coffeebuilder = coffeebuilder;
 
     // handle the "webpack.config.js" file at the project root
-    if (__fs.existsSync(process.cwd() + '/webpack.config.js')) {
-      this._coffeepack._config.vendors.webpack = __deepMerge(this._coffeepack._config.vendors.webpack, require(process.cwd() + '/webpack.config.js'));
-    }
+    // if (__fs.existsSync(process.cwd() + '/webpack.config.js')) {
+    //   this._coffeebuilder._config.vendors.webpack = __deepMerge(this._coffeebuilder._config.vendors.webpack, require(process.cwd() + '/webpack.config.js'));
+    // }
   }
 
   /**
@@ -257,6 +295,13 @@ class CoffeeBuilderWebpack {
 
       this._compile = compile;
 
+      // check the needed configs in order to run the compilation properly
+      if (Object.keys(this.config().entry).length === 0) {
+        __coffeeBuilderUI.changeLocation('error', {
+          message: `It seems that your configuration return no files to compile at all...`
+        });
+      }
+
       __webpack(this.config(), (err, stats) => {
         if (err || stats.hasErrors()) {
           console.log(stats);
@@ -273,7 +318,7 @@ class CoffeeBuilderWebpack {
    * @namespace                   terminal.coffeebuilder.node.CoffeeBuilder
    * @type                        Function
    *
-   * Return the webpack configuration object builded by coffeepack
+   * Return the webpack configuration object builded by coffeebuilder
    *
    * @return        {Object}                The webpack configuration object
    *
@@ -281,7 +326,7 @@ class CoffeeBuilderWebpack {
    */
   config() {
 
-    const webpackConfig = Object.assign({}, this._coffeepack._config.vendors.webpack);
+    const webpackConfig = Object.assign({}, this._coffeebuilder._config.vendors.webpack);
 
     // entry
     webpackConfig.entry = this._getEntry();
@@ -297,7 +342,7 @@ class CoffeeBuilderWebpack {
    * @type                        Function
    * @private
    *
-   * Return the "entry" webpack configuration object builded by coffeepack
+   * Return the "entry" webpack configuration object builded by coffeebuilder
    *
    * @return                {Object}                The "entry" webpack object
    *
@@ -310,11 +355,11 @@ class CoffeeBuilderWebpack {
     let entryString = '';
 
     // loop on the "compile" option to know which file types we have to handle
-    const fileTypesToCompile = this._compile || this._coffeepack._config.compile;
+    const fileTypesToCompile = this._compile || this._coffeebuilder._config.compile;
     fileTypesToCompile.forEach((fileType) => {
 
       // get the file type options object
-      const optionsObj = this._coffeepack._config.resources[fileType] || {};
+      const optionsObj = this._coffeebuilder._config.resources[fileType] || {};
 
       // check the configuration object
       if (!optionsObj.sourcesFolders) {
@@ -384,4 +429,4 @@ class CoffeeBuilderWebpack {
 
 }
 
-module.exports = CoffeePack;
+module.exports = CoffeeBuilder;

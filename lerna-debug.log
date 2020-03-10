@@ -1,0 +1,637 @@
+0 silly argv {
+0 silly argv   _: [ 'bootstrap' ],
+0 silly argv   lernaVersion: '3.20.2',
+0 silly argv   '$0': 'node_modules/.bin/lerna'
+0 silly argv }
+1 notice cli v3.20.2
+2 verbose rootPath /home/web/coffeekraken
+3 info versioning independent
+4 silly npmConfig {
+4 silly npmConfig   registry: undefined,
+4 silly npmConfig   npmClient: 'npm',
+4 silly npmConfig   npmClientArgs: [],
+4 silly npmConfig   mutex: undefined
+4 silly npmConfig }
+5 info Bootstrapping 38 packages
+6 verbose lifecycle preinstall
+7 silly lifecycle No script for "preinstall" in "@coffeekraken/docblock-json-to-markdown", continuing
+8 silly lifecycle No script for "preinstall" in "@coffeekraken/docblock-parser", continuing
+9 silly lifecycle No script for "preinstall" in "@coffeekraken/gridle", continuing
+10 silly lifecycle No script for "preinstall" in "@coffeekraken/form-style", continuing
+11 silly lifecycle No script for "preinstall" in "@coffeekraken/favicons", continuing
+12 silly lifecycle No script for "preinstall" in "@coffeekraken/imagemin", continuing
+13 silly lifecycle No script for "preinstall" in "@coffeekraken/run", continuing
+14 silly lifecycle No script for "preinstall" in "@coffeekraken/scripts-stack", continuing
+15 silly lifecycle No script for "preinstall" in "@coffeekraken/sugar", continuing
+16 silly lifecycle No script for "preinstall" in "@coffeekraken/docblock-to-markdown", continuing
+17 silly lifecycle No script for "preinstall" in "@coffeekraken/text-intro", continuing
+18 silly lifecycle No script for "preinstall" in "@coffeekraken/squid-sample", continuing
+19 silly lifecycle No script for "preinstall" in "@coffeekraken/starter-kit", continuing
+20 silly lifecycle No script for "preinstall" in "@coffeekraken/typography-style", continuing
+21 silly lifecycle No script for "preinstall" in "@coffeekraken/node-blade-php", continuing
+22 silly lifecycle No script for "preinstall" in "@coffeekraken/webpack-coffeepack", continuing
+23 silly lifecycle No script for "preinstall" in "@coffeekraken/compile-server", continuing
+24 silly lifecycle No script for "preinstall" in "@coffeekraken/monorepo", continuing
+25 silly lifecycle No script for "preinstall" in "@coffeekraken/github-doc-scraping", continuing
+26 silly lifecycle No script for "preinstall" in "@coffeekraken/codemirror-webcomponent", continuing
+27 silly lifecycle No script for "preinstall" in "@coffeekraken/icon-webcomponent", continuing
+28 silly lifecycle No script for "preinstall" in "@coffeekraken/select-webcomponent", continuing
+29 silly lifecycle No script for "preinstall" in "@coffeekraken/webpack-concat-dependencies-vendors-plugin", continuing
+30 silly lifecycle No script for "preinstall" in "@coffeekraken/webpack-lazy-dom-load-plugin", continuing
+31 silly lifecycle No script for "preinstall" in "@coffeekraken/squid", continuing
+32 silly lifecycle No script for "preinstall" in "@coffeekraken/pre-view", continuing
+33 silly lifecycle No script for "preinstall" in "@coffeekraken/button-style", continuing
+34 silly lifecycle No script for "preinstall" in "@coffeekraken/scrollbar-webcomponent", continuing
+35 silly lifecycle No script for "preinstall" in "@coffeekraken/interactive-demo-webcomponent", continuing
+36 silly lifecycle No script for "preinstall" in "@coffeekraken/webkit", continuing
+37 silly lifecycle No script for "preinstall" in "@coffeekraken/dropdown-style", continuing
+38 silly lifecycle No script for "preinstall" in "@coffeekraken/tooltip-style", continuing
+39 silly lifecycle No script for "preinstall" in "@coffeekraken/dialog-webcomponent", continuing
+40 silly lifecycle No script for "preinstall" in "@coffeekraken/drawer-webcomponent", continuing
+41 silly lifecycle No script for "preinstall" in "@coffeekraken/notification-webcomponent", continuing
+42 silly lifecycle No script for "preinstall" in "@coffeekraken/shape-webcomponent", continuing
+43 silly lifecycle No script for "preinstall" in "@coffeekraken/share-webcomponent", continuing
+44 silly lifecycle No script for "preinstall" in "@coffeekraken/code-playground", continuing
+45 silly hasDependencyInstalled @coffeekraken/squid module-alias
+46 silly hasDependencyInstalled @coffeekraken/webpack-coffeepack module-alias
+47 silly hasDependencyInstalled @coffeekraken/scripts-stack module-alias
+48 silly hasDependencyInstalled @coffeekraken/docblock-json-to-markdown @babel/cli
+49 silly hasDependencyInstalled @coffeekraken/docblock-to-markdown @babel/cli
+50 silly hasDependencyInstalled @coffeekraken/monorepo @babel/cli
+51 silly hasDependencyInstalled @coffeekraken/webkit @babel/cli
+52 silly hasDependencyInstalled @coffeekraken/docblock-json-to-markdown @babel/core
+53 silly hasDependencyInstalled @coffeekraken/docblock-to-markdown @babel/core
+54 silly hasDependencyInstalled @coffeekraken/squid-sample @babel/core
+55 silly hasDependencyInstalled @coffeekraken/squid @babel/core
+56 silly hasDependencyInstalled @coffeekraken/webpack-coffeepack @babel/core
+57 silly hasDependencyInstalled @coffeekraken/code-playground @babel/core
+58 silly hasDependencyInstalled @coffeekraken/monorepo @babel/core
+59 silly hasDependencyInstalled @coffeekraken/webkit @babel/core
+60 silly hasDependencyInstalled @coffeekraken/docblock-json-to-markdown @babel/preset-env
+61 silly hasDependencyInstalled @coffeekraken/docblock-to-markdown @babel/preset-env
+62 silly hasDependencyInstalled @coffeekraken/squid-sample @babel/preset-env
+63 silly hasDependencyInstalled @coffeekraken/squid @babel/preset-env
+64 silly hasDependencyInstalled @coffeekraken/monorepo @babel/preset-env
+65 silly hasDependencyInstalled @coffeekraken/webkit @babel/preset-env
+66 silly hasDependencyInstalled @coffeekraken/docblock-json-to-markdown babel-jest
+67 silly hasDependencyInstalled @coffeekraken/docblock-to-markdown babel-jest
+68 silly hasDependencyInstalled @coffeekraken/monorepo babel-jest
+69 silly hasDependencyInstalled @coffeekraken/webkit babel-jest
+70 silly hasDependencyInstalled @coffeekraken/docblock-json-to-markdown babel-plugin-add-module-exports
+71 silly hasDependencyInstalled @coffeekraken/docblock-to-markdown babel-plugin-add-module-exports
+72 silly hasDependencyInstalled @coffeekraken/squid-sample babel-plugin-add-module-exports
+73 silly hasDependencyInstalled @coffeekraken/webpack-coffeepack babel-plugin-add-module-exports
+74 silly hasDependencyInstalled @coffeekraken/monorepo babel-plugin-add-module-exports
+75 silly hasDependencyInstalled @coffeekraken/webkit babel-plugin-add-module-exports
+76 silly hasDependencyInstalled @coffeekraken/docblock-json-to-markdown jest
+77 silly hasDependencyInstalled @coffeekraken/docblock-to-markdown jest
+78 silly hasDependencyInstalled @coffeekraken/monorepo jest
+79 silly hasDependencyInstalled @coffeekraken/webkit jest
+80 silly hasDependencyInstalled @coffeekraken/run jest
+81 silly hasDependencyInstalled @coffeekraken/docblock-json-to-markdown lodash
+82 silly hasDependencyInstalled @coffeekraken/docblock-parser lodash
+83 silly hasDependencyInstalled @coffeekraken/docblock-to-markdown lodash
+84 silly hasDependencyInstalled @coffeekraken/code-playground lodash
+85 silly hasDependencyInstalled @coffeekraken/compile-server lodash
+86 silly hasDependencyInstalled @coffeekraken/webkit lodash
+87 silly hasDependencyInstalled @coffeekraken/sugar lodash
+88 silly hasDependencyInstalled @coffeekraken/interactive-demo-webcomponent lodash
+89 silly hasDependencyInstalled @coffeekraken/docblock-json-to-markdown trim-lines
+90 silly hasDependencyInstalled @coffeekraken/docblock-parser @coffeekraken/docblock-to-markdown
+91 silly hasDependencyInstalled @coffeekraken/docblock-parser @coffeekraken/scripts-stack
+92 silly hasDependencyInstalled @coffeekraken/monorepo @coffeekraken/scripts-stack
+93 silly hasDependencyInstalled @coffeekraken/webkit @coffeekraken/scripts-stack
+94 silly hasDependencyInstalled @coffeekraken/docblock-parser core-js
+95 silly hasDependencyInstalled @coffeekraken/monorepo core-js
+96 silly hasDependencyInstalled @coffeekraken/webkit core-js
+97 silly hasDependencyInstalled @coffeekraken/scripts-stack core-js
+98 silly hasDependencyInstalled @coffeekraken/sugar core-js
+99 silly hasDependencyInstalled @coffeekraken/docblock-to-markdown chai
+100 silly hasDependencyInstalled @coffeekraken/docblock-to-markdown chai-json-schema
+101 silly hasDependencyInstalled @coffeekraken/docblock-to-markdown fs
+102 silly hasDependencyInstalled @coffeekraken/docblock-to-markdown jsonschema
+103 silly hasDependencyInstalled @coffeekraken/docblock-to-markdown raw-loader
+104 silly hasDependencyInstalled @coffeekraken/docblock-to-markdown commander
+105 silly hasDependencyInstalled @coffeekraken/scripts-stack commander
+106 silly hasDependencyInstalled @coffeekraken/squid commander
+107 silly hasDependencyInstalled @coffeekraken/monorepo commander
+108 silly hasDependencyInstalled @coffeekraken/webkit commander
+109 silly hasDependencyInstalled @coffeekraken/pre-view commander
+110 silly hasDependencyInstalled @coffeekraken/webpack-coffeepack commander
+111 silly hasDependencyInstalled @coffeekraken/favicons commander
+112 silly hasDependencyInstalled @coffeekraken/run commander
+113 silly hasDependencyInstalled @coffeekraken/docblock-to-markdown fs-extra
+114 silly hasDependencyInstalled @coffeekraken/text-intro fs-extra
+115 silly hasDependencyInstalled @coffeekraken/squid fs-extra
+116 silly hasDependencyInstalled @coffeekraken/button-style fs-extra
+117 silly hasDependencyInstalled @coffeekraken/compile-server fs-extra
+118 silly hasDependencyInstalled @coffeekraken/codemirror-webcomponent fs-extra
+119 silly hasDependencyInstalled @coffeekraken/dialog-webcomponent fs-extra
+120 silly hasDependencyInstalled @coffeekraken/drawer-webcomponent fs-extra
+121 silly hasDependencyInstalled @coffeekraken/icon-webcomponent fs-extra
+122 silly hasDependencyInstalled @coffeekraken/interactive-demo-webcomponent fs-extra
+123 silly hasDependencyInstalled @coffeekraken/notification-webcomponent fs-extra
+124 silly hasDependencyInstalled @coffeekraken/select-webcomponent fs-extra
+125 silly hasDependencyInstalled @coffeekraken/shape-webcomponent fs-extra
+126 silly hasDependencyInstalled @coffeekraken/sugar fs-extra
+127 silly hasDependencyInstalled @coffeekraken/docblock-to-markdown glob
+128 silly hasDependencyInstalled @coffeekraken/squid glob
+129 silly hasDependencyInstalled @coffeekraken/webpack-coffeepack glob
+130 silly hasDependencyInstalled @coffeekraken/monorepo glob
+131 silly hasDependencyInstalled @coffeekraken/webkit glob
+132 silly hasDependencyInstalled @coffeekraken/docblock-to-markdown replace-ext
+133 silly hasDependencyInstalled @coffeekraken/squid-sample @babel/plugin-proposal-class-properties
+134 silly hasDependencyInstalled @coffeekraken/squid @babel/plugin-proposal-class-properties
+135 silly hasDependencyInstalled @coffeekraken/webpack-coffeepack @babel/plugin-proposal-class-properties
+136 silly hasDependencyInstalled @coffeekraken/monorepo @babel/plugin-proposal-class-properties
+137 silly hasDependencyInstalled @coffeekraken/webkit @babel/plugin-proposal-class-properties
+138 silly hasDependencyInstalled @coffeekraken/squid-sample @babel/plugin-proposal-export-default-from
+139 silly hasDependencyInstalled @coffeekraken/webpack-coffeepack @babel/plugin-proposal-export-default-from
+140 silly hasDependencyInstalled @coffeekraken/monorepo @babel/plugin-proposal-export-default-from
+141 silly hasDependencyInstalled @coffeekraken/webkit @babel/plugin-proposal-export-default-from
+142 silly hasDependencyInstalled @coffeekraken/squid-sample babel-loader
+143 silly hasDependencyInstalled @coffeekraken/squid babel-loader
+144 silly hasDependencyInstalled @coffeekraken/compile-server babel-loader
+145 silly hasDependencyInstalled @coffeekraken/monorepo babel-loader
+146 silly hasDependencyInstalled @coffeekraken/webkit babel-loader
+147 silly hasDependencyInstalled @coffeekraken/squid-sample babel-plugin-transform-dynamic-import-default
+148 silly hasDependencyInstalled @coffeekraken/webpack-coffeepack babel-plugin-transform-dynamic-import-default
+149 silly hasDependencyInstalled @coffeekraken/squid-sample bind-methods
+150 silly hasDependencyInstalled @coffeekraken/webpack-coffeepack bind-methods
+151 silly hasDependencyInstalled @coffeekraken/squid-sample exec-sh
+152 silly hasDependencyInstalled @coffeekraken/squid exec-sh
+153 silly hasDependencyInstalled @coffeekraken/monorepo exec-sh
+154 silly hasDependencyInstalled @coffeekraken/webkit exec-sh
+155 silly hasDependencyInstalled @coffeekraken/squid-sample webpack
+156 silly hasDependencyInstalled @coffeekraken/squid webpack
+157 silly hasDependencyInstalled @coffeekraken/webpack-coffeepack webpack
+158 silly hasDependencyInstalled @coffeekraken/monorepo webpack
+159 silly hasDependencyInstalled @coffeekraken/webkit webpack
+160 silly hasDependencyInstalled @coffeekraken/compile-server webpack
+161 silly hasDependencyInstalled @coffeekraken/squid-sample webpack-import-glob-loader
+162 silly hasDependencyInstalled @coffeekraken/squid webpack-import-glob-loader
+163 silly hasDependencyInstalled @coffeekraken/webpack-coffeepack webpack-import-glob-loader
+164 silly hasDependencyInstalled @coffeekraken/squid babel-plugin-syntax-dynamic-import
+165 silly hasDependencyInstalled @coffeekraken/squid compression-webpack-plugin
+166 silly hasDependencyInstalled @coffeekraken/squid css-loader
+167 silly hasDependencyInstalled @coffeekraken/squid file-size
+168 silly hasDependencyInstalled @coffeekraken/squid fkill-cli
+169 silly hasDependencyInstalled @coffeekraken/squid import-glob-loader
+170 silly hasDependencyInstalled @coffeekraken/squid kill-port
+171 silly hasDependencyInstalled @coffeekraken/squid kill-port-process
+172 silly hasDependencyInstalled @coffeekraken/sugar kill-port-process
+173 silly hasDependencyInstalled @coffeekraken/squid mini-css-extract-plugin
+174 silly hasDependencyInstalled @coffeekraken/squid string-replace-loader
+175 silly hasDependencyInstalled @coffeekraken/squid terser-webpack-plugin
+176 silly hasDependencyInstalled @coffeekraken/squid uglifyjs-webpack-plugin
+177 silly hasDependencyInstalled @coffeekraken/squid webpack-concat-plugin
+178 silly hasDependencyInstalled @coffeekraken/squid autoprefixer
+179 silly hasDependencyInstalled @coffeekraken/webkit autoprefixer
+180 silly hasDependencyInstalled @coffeekraken/squid coffeescript
+181 silly hasDependencyInstalled @coffeekraken/webpack-coffeepack coffeescript
+182 silly hasDependencyInstalled @coffeekraken/compile-server coffeescript
+183 silly hasDependencyInstalled @coffeekraken/squid compression
+184 silly hasDependencyInstalled @coffeekraken/squid cssnano
+185 silly hasDependencyInstalled @coffeekraken/webkit cssnano
+186 silly hasDependencyInstalled @coffeekraken/squid express
+187 silly hasDependencyInstalled @coffeekraken/code-playground express
+188 silly hasDependencyInstalled @coffeekraken/compile-server express
+189 silly hasDependencyInstalled @coffeekraken/squid express-nunjucks
+190 silly hasDependencyInstalled @coffeekraken/squid file-loader
+191 silly hasDependencyInstalled @coffeekraken/squid forever
+192 silly hasDependencyInstalled @coffeekraken/sugar forever
+193 silly hasDependencyInstalled @coffeekraken/squid imagemin
+194 silly hasDependencyInstalled @coffeekraken/webpack-coffeepack imagemin
+195 silly hasDependencyInstalled @coffeekraken/imagemin imagemin
+196 silly hasDependencyInstalled @coffeekraken/squid imagemin-gifsicle
+197 silly hasDependencyInstalled @coffeekraken/webpack-coffeepack imagemin-gifsicle
+198 silly hasDependencyInstalled @coffeekraken/imagemin imagemin-gifsicle
+199 silly hasDependencyInstalled @coffeekraken/squid imagemin-mozjpeg
+200 silly hasDependencyInstalled @coffeekraken/webpack-coffeepack imagemin-mozjpeg
+201 silly hasDependencyInstalled @coffeekraken/squid imagemin-pngquant
+202 silly hasDependencyInstalled @coffeekraken/webpack-coffeepack imagemin-pngquant
+203 silly hasDependencyInstalled @coffeekraken/imagemin imagemin-pngquant
+204 silly hasDependencyInstalled @coffeekraken/squid imagemin-svgo
+205 silly hasDependencyInstalled @coffeekraken/imagemin imagemin-svgo
+206 silly hasDependencyInstalled @coffeekraken/webpack-coffeepack imagemin-svgo
+207 silly hasDependencyInstalled @coffeekraken/squid imagemin-webp
+208 silly hasDependencyInstalled @coffeekraken/webpack-coffeepack imagemin-webp
+209 silly hasDependencyInstalled @coffeekraken/imagemin imagemin-webp
+210 silly hasDependencyInstalled @coffeekraken/squid nunjucks
+211 silly hasDependencyInstalled @coffeekraken/squid postcss
+212 silly hasDependencyInstalled @coffeekraken/webkit postcss
+213 silly hasDependencyInstalled @coffeekraken/squid postcss-preset-env
+214 silly hasDependencyInstalled @coffeekraken/webkit postcss-preset-env
+215 silly hasDependencyInstalled @coffeekraken/squid precss
+216 silly hasDependencyInstalled @coffeekraken/webkit precss
+217 silly hasDependencyInstalled @coffeekraken/squid rucksack-css
+218 silly hasDependencyInstalled @coffeekraken/webkit rucksack-css
+219 silly hasDependencyInstalled @coffeekraken/squid sass
+220 silly hasDependencyInstalled @coffeekraken/webpack-coffeepack sass
+221 silly hasDependencyInstalled @coffeekraken/compile-server sass
+222 silly hasDependencyInstalled @coffeekraken/monorepo sass
+223 silly hasDependencyInstalled @coffeekraken/webkit sass
+224 silly hasDependencyInstalled @coffeekraken/squid sass-glob-importer
+225 silly hasDependencyInstalled @coffeekraken/webpack-coffeepack sass-glob-importer
+226 silly hasDependencyInstalled @coffeekraken/webkit sass-glob-importer
+227 silly hasDependencyInstalled @coffeekraken/squid scss-bundle
+228 silly hasDependencyInstalled @coffeekraken/webpack-coffeepack scss-bundle
+229 silly hasDependencyInstalled @coffeekraken/webkit scss-bundle
+230 silly hasDependencyInstalled @coffeekraken/squid typescript
+231 silly hasDependencyInstalled @coffeekraken/webpack-coffeepack typescript
+232 silly hasDependencyInstalled @coffeekraken/compile-server typescript
+233 silly hasDependencyInstalled @coffeekraken/squid webpack-cli
+234 silly hasDependencyInstalled @coffeekraken/webkit webpack-cli
+235 silly hasDependencyInstalled @coffeekraken/sugar webpack-cli
+236 silly hasDependencyInstalled @coffeekraken/code-playground codemirror
+237 silly hasDependencyInstalled @coffeekraken/codemirror-webcomponent codemirror
+238 silly hasDependencyInstalled @coffeekraken/code-playground cookie-session
+239 silly hasDependencyInstalled @coffeekraken/code-playground cryptr
+240 silly hasDependencyInstalled @coffeekraken/compile-server cryptr
+241 silly hasDependencyInstalled @coffeekraken/code-playground express-handlebars
+242 silly hasDependencyInstalled @coffeekraken/code-playground express-session
+243 silly hasDependencyInstalled @coffeekraken/code-playground golden-layout
+244 silly hasDependencyInstalled @coffeekraken/code-playground http
+245 silly hasDependencyInstalled @coffeekraken/code-playground jquery
+246 silly hasDependencyInstalled @coffeekraken/code-playground md5
+247 silly hasDependencyInstalled @coffeekraken/code-playground mousetrap
+248 silly hasDependencyInstalled @coffeekraken/codemirror-webcomponent mousetrap
+249 silly hasDependencyInstalled @coffeekraken/code-playground request
+250 silly hasDependencyInstalled @coffeekraken/code-playground socket.io
+251 silly hasDependencyInstalled @coffeekraken/code-playground uniqid
+252 silly hasDependencyInstalled @coffeekraken/sugar uniqid
+253 silly hasDependencyInstalled @coffeekraken/pre-view chalk
+254 silly hasDependencyInstalled @coffeekraken/sugar chalk
+255 silly hasDependencyInstalled @coffeekraken/run chalk
+256 silly hasDependencyInstalled @coffeekraken/scripts-stack chalk
+257 silly hasDependencyInstalled @coffeekraken/pre-view @coffeekraken/select-webcomponent
+258 silly hasDependencyInstalled @coffeekraken/pre-view get-bin-path
+259 silly hasDependencyInstalled @coffeekraken/pre-view livereload
+260 silly hasDependencyInstalled @coffeekraken/pre-view npm-which
+261 silly hasDependencyInstalled @coffeekraken/pre-view php-server
+262 silly hasDependencyInstalled @coffeekraken/starter-kit @babel/polyfill
+263 silly hasDependencyInstalled @coffeekraken/starter-kit @coffeekraken/webkit
+264 silly hasDependencyInstalled @coffeekraken/starter-kit cssuseragent
+265 silly hasDependencyInstalled @coffeekraken/starter-kit fastclick
+266 silly hasDependencyInstalled @coffeekraken/form-style @coffeekraken/sugar
+267 silly hasDependencyInstalled @coffeekraken/node-blade-php exec-php
+268 silly hasDependencyInstalled @coffeekraken/node-blade-php rimraf
+269 silly hasDependencyInstalled @coffeekraken/node-blade-php tmp
+270 silly hasDependencyInstalled @coffeekraken/webpack-coffeepack auto-bind
+271 silly hasDependencyInstalled @coffeekraken/webpack-coffeepack blessed
+272 silly hasDependencyInstalled @coffeekraken/scripts-stack blessed
+273 silly hasDependencyInstalled @coffeekraken/sugar blessed
+274 silly hasDependencyInstalled @coffeekraken/webpack-coffeepack cacache
+275 silly hasDependencyInstalled @coffeekraken/webpack-coffeepack cfonts
+276 silly hasDependencyInstalled @coffeekraken/webpack-coffeepack chokidar
+277 silly hasDependencyInstalled @coffeekraken/scripts-stack chokidar
+278 silly hasDependencyInstalled @coffeekraken/webpack-coffeepack clean-css
+279 silly hasDependencyInstalled @coffeekraken/webpack-coffeepack listr
+280 silly hasDependencyInstalled @coffeekraken/webpack-coffeepack loader-utils
+281 silly hasDependencyInstalled @coffeekraken/webpack-coffeepack ora
+282 silly hasDependencyInstalled @coffeekraken/webpack-coffeepack pretty-error
+283 silly hasDependencyInstalled @coffeekraken/sugar pretty-error
+284 silly hasDependencyInstalled @coffeekraken/webpack-coffeepack restore-cursor
+285 silly hasDependencyInstalled @coffeekraken/webpack-coffeepack terminal-kit
+286 silly hasDependencyInstalled @coffeekraken/sugar terminal-kit
+287 silly hasDependencyInstalled @coffeekraken/webpack-coffeepack terser
+288 silly hasDependencyInstalled @coffeekraken/compile-server ajax-request
+289 silly hasDependencyInstalled @coffeekraken/compile-server body-parser
+290 silly hasDependencyInstalled @coffeekraken/compile-server coffee-loader
+291 silly hasDependencyInstalled @coffeekraken/compile-server cors
+292 silly hasDependencyInstalled @coffeekraken/compile-server html-entities
+293 silly hasDependencyInstalled @coffeekraken/compile-server shortid
+294 silly hasDependencyInstalled @coffeekraken/compile-server stylus
+295 silly hasDependencyInstalled @coffeekraken/compile-server ts-loader
+296 silly hasDependencyInstalled @coffeekraken/favicons favicons
+297 silly hasDependencyInstalled @coffeekraken/imagemin imagemin-jpeg-recompress
+298 silly hasDependencyInstalled @coffeekraken/monorepo babel
+299 silly hasDependencyInstalled @coffeekraken/monorepo config
+300 silly hasDependencyInstalled @coffeekraken/webkit config
+301 silly hasDependencyInstalled @coffeekraken/monorepo get-folder-size
+302 silly hasDependencyInstalled @coffeekraken/webkit get-folder-size
+303 silly hasDependencyInstalled @coffeekraken/sugar get-folder-size
+304 silly hasDependencyInstalled @coffeekraken/monorepo http-server
+305 silly hasDependencyInstalled @coffeekraken/webkit http-server
+306 silly hasDependencyInstalled @coffeekraken/monorepo jest-raw-loader
+307 silly hasDependencyInstalled @coffeekraken/webkit jest-raw-loader
+308 silly hasDependencyInstalled @coffeekraken/monorepo pkg-up
+309 silly hasDependencyInstalled @coffeekraken/scripts-stack pkg-up
+310 silly hasDependencyInstalled @coffeekraken/webkit pkg-up
+311 silly hasDependencyInstalled @coffeekraken/monorepo app-root-path
+312 silly hasDependencyInstalled @coffeekraken/webkit app-root-path
+313 silly hasDependencyInstalled @coffeekraken/monorepo find-up
+314 silly hasDependencyInstalled @coffeekraken/scripts-stack find-up
+315 silly hasDependencyInstalled @coffeekraken/webkit find-up
+316 silly hasDependencyInstalled @coffeekraken/monorepo @symfony/webpack-encore
+317 silly hasDependencyInstalled @coffeekraken/webkit @symfony/webpack-encore
+318 silly hasDependencyInstalled @coffeekraken/run eslint
+319 silly hasDependencyInstalled @coffeekraken/run eslint-config-airbnb
+320 silly hasDependencyInstalled @coffeekraken/run eslint-config-prettier
+321 silly hasDependencyInstalled @coffeekraken/run eslint-plugin-import
+322 silly hasDependencyInstalled @coffeekraken/run eslint-plugin-jsx-a11y
+323 silly hasDependencyInstalled @coffeekraken/run eslint-plugin-react
+324 silly hasDependencyInstalled @coffeekraken/run pre-commit
+325 silly hasDependencyInstalled @coffeekraken/run prettier
+326 silly hasDependencyInstalled @coffeekraken/run pretty-quick
+327 silly hasDependencyInstalled @coffeekraken/run remove-blank-lines
+328 silly hasDependencyInstalled @coffeekraken/scripts-stack remove-blank-lines
+329 silly hasDependencyInstalled @coffeekraken/run terminate
+330 silly hasDependencyInstalled @coffeekraken/scripts-stack terminate
+331 silly hasDependencyInstalled @coffeekraken/scripts-stack standard
+332 silly hasDependencyInstalled @coffeekraken/scripts-stack ansi-styles
+333 silly hasDependencyInstalled @coffeekraken/scripts-stack clear
+334 silly hasDependencyInstalled @coffeekraken/scripts-stack clipboardy
+335 silly hasDependencyInstalled @coffeekraken/scripts-stack command-exists
+336 silly hasDependencyInstalled @coffeekraken/scripts-stack create-symlink
+337 silly hasDependencyInstalled @coffeekraken/scripts-stack flat
+338 silly hasDependencyInstalled @coffeekraken/scripts-stack log-symbols
+339 silly hasDependencyInstalled @coffeekraken/scripts-stack node-notifier
+340 silly hasDependencyInstalled @coffeekraken/scripts-stack pad
+341 silly hasDependencyInstalled @coffeekraken/scripts-stack strip-ansi
+342 silly hasDependencyInstalled @coffeekraken/webkit babel-cli
+343 silly hasDependencyInstalled @coffeekraken/webkit import-glob
+344 silly hasDependencyInstalled @coffeekraken/webkit webpack-bundle-analyzer
+345 silly hasDependencyInstalled @coffeekraken/webkit webpack-import-glob
+346 silly hasDependencyInstalled @coffeekraken/github-doc-scraping js-base64
+347 silly hasDependencyInstalled @coffeekraken/sugar replace-in-files
+348 silly hasDependencyInstalled @coffeekraken/sugar symlink-dir
+349 silly hasDependencyInstalled @coffeekraken/sugar @ungap/custom-elements-builtin
+350 silly hasDependencyInstalled @coffeekraken/sugar ansi-escapes
+351 silly hasDependencyInstalled @coffeekraken/sugar base-64
+352 silly hasDependencyInstalled @coffeekraken/sugar check-types
+353 silly hasDependencyInstalled @coffeekraken/sugar crypto-js
+354 silly hasDependencyInstalled @coffeekraken/sugar custom-event
+355 silly hasDependencyInstalled @coffeekraken/sugar deepmerge
+356 silly hasDependencyInstalled @coffeekraken/sugar document-register-element
+357 silly hasDependencyInstalled @coffeekraken/sugar domready
+358 silly hasDependencyInstalled @coffeekraken/sugar dotenv
+359 silly hasDependencyInstalled @coffeekraken/sugar download-file
+360 silly hasDependencyInstalled @coffeekraken/sugar downloads-folder
+361 silly hasDependencyInstalled @coffeekraken/sugar envinfo
+362 silly hasDependencyInstalled @coffeekraken/sugar es6-object-assign
+363 silly hasDependencyInstalled @coffeekraken/sugar fastdom
+364 silly hasDependencyInstalled @coffeekraken/sugar filesize
+365 silly hasDependencyInstalled @coffeekraken/sugar form-serialize
+366 silly hasDependencyInstalled @coffeekraken/sugar get-parameter-names
+367 silly hasDependencyInstalled @coffeekraken/sugar hotkeys-js
+368 silly hasDependencyInstalled @coffeekraken/sugar html2canvas
+369 silly hasDependencyInstalled @coffeekraken/sugar in-view
+370 silly hasDependencyInstalled @coffeekraken/sugar in-viewport
+371 silly hasDependencyInstalled @coffeekraken/sugar inline-style-prefixer
+372 silly hasDependencyInstalled @coffeekraken/sugar is-base64
+373 silly hasDependencyInstalled @coffeekraken/sugar is-plain-object
+374 silly hasDependencyInstalled @coffeekraken/sugar jss
+375 silly hasDependencyInstalled @coffeekraken/sugar jss-plugin-global
+376 silly hasDependencyInstalled @coffeekraken/sugar jss-plugin-vendor-prefixer
+377 silly hasDependencyInstalled @coffeekraken/sugar log-with-style
+378 silly hasDependencyInstalled @coffeekraken/sugar make-dir
+379 silly hasDependencyInstalled @coffeekraken/sugar markdown-chalk
+380 silly hasDependencyInstalled @coffeekraken/sugar merge-deep
+381 silly hasDependencyInstalled @coffeekraken/sugar mkdirp
+382 silly hasDependencyInstalled @coffeekraken/sugar mobile-detect
+383 silly hasDependencyInstalled @coffeekraken/sugar nodemailer
+384 silly hasDependencyInstalled @coffeekraken/sugar object-encode
+385 silly hasDependencyInstalled @coffeekraken/sugar on-change
+386 silly hasDependencyInstalled @coffeekraken/sugar parse-error
+387 silly hasDependencyInstalled @coffeekraken/sugar prepend-file
+388 silly hasDependencyInstalled @coffeekraken/sugar renderkid
+389 silly hasDependencyInstalled @coffeekraken/sugar rxjs
+390 silly hasDependencyInstalled @coffeekraken/sugar simple-ajax
+391 silly hasDependencyInstalled @coffeekraken/sugar sprintf-js
+392 silly hasDependencyInstalled @coffeekraken/sugar stringify-object
+393 silly hasDependencyInstalled @coffeekraken/sugar temp-dir
+394 silly hasDependencyInstalled @coffeekraken/sugar terminal-overwrite
+395 silly hasDependencyInstalled @coffeekraken/sugar unquote
+396 silly hasDependencyInstalled @coffeekraken/sugar url-parse
+397 silly hasDependencyInstalled @coffeekraken/sugar winston
+398 silly hasDependencyInstalled @coffeekraken/sugar winston-mail
+399 silly hasDependencyInstalled @coffeekraken/sugar winston-slack-webhook-transport
+400 silly hasDependencyInstalled @coffeekraken/codemirror-webcomponent clipboard
+401 silly hasDependencyInstalled @coffeekraken/interactive-demo-webcomponent clipboard
+402 silly hasDependencyInstalled @coffeekraken/codemirror-webcomponent codemirror-formatting
+403 silly hasDependencyInstalled @coffeekraken/icon-webcomponent axios
+404 silly hasDependencyInstalled @coffeekraken/interactive-demo-webcomponent @coffeekraken/compile-server
+405 silly hasDependencyInstalled @coffeekraken/scrollbar-webcomponent simplebar
+406 silly hasDependencyInstalled @coffeekraken/shape-webcomponent css-element-queries
+407 silly hasDependencyInstalled @coffeekraken/share-webcomponent sharer.npm.js
+408 silly root dependencies {}
+409 silly leaf dependencies {}
+410 info Installing external dependencies
+411 verbose actions 2 actions, concurrency 8
+412 silly npmInstallDependencies @coffeekraken/monorepo [
+412 silly npmInstallDependencies   '@babel/cli@^7.7.7',
+412 silly npmInstallDependencies   '@babel/core@^7.7.7',
+412 silly npmInstallDependencies   '@babel/preset-env@^7.7.7',
+412 silly npmInstallDependencies   'babel-jest@^24.9.0',
+412 silly npmInstallDependencies   'babel-plugin-add-module-exports@^1.0.2',
+412 silly npmInstallDependencies   'jest@^24.9.0',
+412 silly npmInstallDependencies   '@coffeekraken/scripts-stack@0.0.25',
+412 silly npmInstallDependencies   'core-js@^3.6.2',
+412 silly npmInstallDependencies   'commander@^4.1.0',
+412 silly npmInstallDependencies   'glob@^7.1.6',
+412 silly npmInstallDependencies   '@babel/plugin-proposal-class-properties@^7.7.4',
+412 silly npmInstallDependencies   '@babel/plugin-proposal-export-default-from@^7.7.4',
+412 silly npmInstallDependencies   'babel-loader@^8.0.6',
+412 silly npmInstallDependencies   'exec-sh@^0.3.4',
+412 silly npmInstallDependencies   'webpack@^4.41.5',
+412 silly npmInstallDependencies   'sass@^1.24.2',
+412 silly npmInstallDependencies   'babel@^6.23.0',
+412 silly npmInstallDependencies   'config@^3.2.4',
+412 silly npmInstallDependencies   'get-folder-size@^2.0.1',
+412 silly npmInstallDependencies   'http-server@^0.12.0',
+412 silly npmInstallDependencies   'jest-raw-loader@^1.0.1',
+412 silly npmInstallDependencies   'pkg-up@^3.1.0',
+412 silly npmInstallDependencies   'app-root-path@^3.0.0',
+412 silly npmInstallDependencies   'find-up@^4.1.0',
+412 silly npmInstallDependencies   '@symfony/webpack-encore@github:symfony/webpack-encore'
+412 silly npmInstallDependencies ]
+413 silly npmInstallDependencies backup /home/web/coffeekraken/terminal/monorepo/package.json
+414 silly npmInstallDependencies @coffeekraken/webkit [
+414 silly npmInstallDependencies   '@babel/cli@^7.7.7',
+414 silly npmInstallDependencies   '@babel/core@^7.7.7',
+414 silly npmInstallDependencies   '@babel/preset-env@^7.7.7',
+414 silly npmInstallDependencies   'babel-jest@^24.9.0',
+414 silly npmInstallDependencies   'babel-plugin-add-module-exports@^1.0.2',
+414 silly npmInstallDependencies   'jest@^24.9.0',
+414 silly npmInstallDependencies   'lodash@^4.17.15',
+414 silly npmInstallDependencies   '@coffeekraken/scripts-stack@0.0.22',
+414 silly npmInstallDependencies   'core-js@^3.6.2',
+414 silly npmInstallDependencies   'commander@^4.1.0',
+414 silly npmInstallDependencies   'glob@^7.1.6',
+414 silly npmInstallDependencies   '@babel/plugin-proposal-class-properties@^7.7.4',
+414 silly npmInstallDependencies   '@babel/plugin-proposal-export-default-from@^7.7.4',
+414 silly npmInstallDependencies   'babel-loader@^8.0.6',
+414 silly npmInstallDependencies   'exec-sh@^0.3.4',
+414 silly npmInstallDependencies   'webpack@^4.41.5',
+414 silly npmInstallDependencies   'autoprefixer@^9.7.3',
+414 silly npmInstallDependencies   'cssnano@^4.1.10',
+414 silly npmInstallDependencies   'postcss@^7.0.26',
+414 silly npmInstallDependencies   'postcss-preset-env@^6.7.0',
+414 silly npmInstallDependencies   'precss@^4.0.0',
+414 silly npmInstallDependencies   'rucksack-css@^1.0.2',
+414 silly npmInstallDependencies   'sass@^1.24.3',
+414 silly npmInstallDependencies   'sass-glob-importer@^1.0.1',
+414 silly npmInstallDependencies   'scss-bundle@^3.0.2',
+414 silly npmInstallDependencies   'webpack-cli@^3.3.10',
+414 silly npmInstallDependencies   'config@^3.2.4',
+414 silly npmInstallDependencies   'get-folder-size@^2.0.1',
+414 silly npmInstallDependencies   'http-server@^0.12.0',
+414 silly npmInstallDependencies   'jest-raw-loader@^1.0.1',
+414 silly npmInstallDependencies   'pkg-up@^3.1.0',
+414 silly npmInstallDependencies   'app-root-path@^3.0.0',
+414 silly npmInstallDependencies   'find-up@^4.1.0',
+414 silly npmInstallDependencies   '@symfony/webpack-encore@github:symfony/webpack-encore',
+414 silly npmInstallDependencies   'babel-cli@^6.26.0',
+414 silly npmInstallDependencies   'import-glob@^1.5.0',
+414 silly npmInstallDependencies   'webpack-bundle-analyzer@^3.6.0',
+414 silly npmInstallDependencies   'webpack-import-glob@^2.0.0'
+414 silly npmInstallDependencies ]
+415 silly npmInstallDependencies backup /home/web/coffeekraken/terminal/webkit/package.json
+416 silly npmInstallDependencies writing tempJson {
+416 silly npmInstallDependencies   name: '@coffeekraken/monorepo',
+416 silly npmInstallDependencies   version: '0.0.27',
+416 silly npmInstallDependencies   description: 'Manage easily monorepo scripts, tests, etc...',
+416 silly npmInstallDependencies   bin: {
+416 silly npmInstallDependencies     ck: './bin/coffeekraken-monorepo.js',
+416 silly npmInstallDependencies     'ck-monorepo': './bin/coffeekraken-monorepo.js',
+416 silly npmInstallDependencies     'coffeekraken-monorepo': './bin/coffeekraken-monorepo.js'
+416 silly npmInstallDependencies   },
+416 silly npmInstallDependencies   repository: {
+416 silly npmInstallDependencies     type: 'git',
+416 silly npmInstallDependencies     url: 'https://github.com/Coffeekraken/coffeekraken/tree/master/terminal/monorepo'
+416 silly npmInstallDependencies   },
+416 silly npmInstallDependencies   keywords: [
+416 silly npmInstallDependencies     'coffee',
+416 silly npmInstallDependencies     'kraken',
+416 silly npmInstallDependencies     'coffeekraken',
+416 silly npmInstallDependencies     'monorepo',
+416 silly npmInstallDependencies     'scripts',
+416 silly npmInstallDependencies     'tests'
+416 silly npmInstallDependencies   ],
+416 silly npmInstallDependencies   author: 'Coffeekraken <hello@coffeekraken.io>',
+416 silly npmInstallDependencies   contributors: [
+416 silly npmInstallDependencies     {
+416 silly npmInstallDependencies       name: 'Olivier Bossel',
+416 silly npmInstallDependencies       email: 'olivier.bossel@gmail.com',
+416 silly npmInstallDependencies       url: 'http://olivierbossel.com'
+416 silly npmInstallDependencies     }
+416 silly npmInstallDependencies   ],
+416 silly npmInstallDependencies   license: 'MIT',
+416 silly npmInstallDependencies   homepage: 'https://coffeekraken.io',
+416 silly npmInstallDependencies   dependencies: {
+416 silly npmInstallDependencies     '@babel/plugin-proposal-class-properties': '^7.7.4',
+416 silly npmInstallDependencies     '@babel/plugin-proposal-export-default-from': '^7.7.4',
+416 silly npmInstallDependencies     '@coffeekraken/scripts-stack': '0.0.25',
+416 silly npmInstallDependencies     babel: '^6.23.0',
+416 silly npmInstallDependencies     'babel-jest': '^24.9.0',
+416 silly npmInstallDependencies     'babel-plugin-add-module-exports': '^1.0.2',
+416 silly npmInstallDependencies     commander: '^4.1.0',
+416 silly npmInstallDependencies     config: '^3.2.4',
+416 silly npmInstallDependencies     'core-js': '^3.6.2',
+416 silly npmInstallDependencies     'exec-sh': '^0.3.4',
+416 silly npmInstallDependencies     'get-folder-size': '^2.0.1',
+416 silly npmInstallDependencies     'http-server': '^0.12.0',
+416 silly npmInstallDependencies     jest: '^24.9.0',
+416 silly npmInstallDependencies     'jest-raw-loader': '^1.0.1',
+416 silly npmInstallDependencies     'pkg-up': '^3.1.0',
+416 silly npmInstallDependencies     sass: '^1.24.2',
+416 silly npmInstallDependencies     'app-root-path': '^3.0.0',
+416 silly npmInstallDependencies     'find-up': '^4.1.0',
+416 silly npmInstallDependencies     glob: '^7.1.6',
+416 silly npmInstallDependencies     '@babel/cli': '^7.7.7',
+416 silly npmInstallDependencies     '@babel/core': '^7.7.7',
+416 silly npmInstallDependencies     '@babel/preset-env': '^7.7.7',
+416 silly npmInstallDependencies     '@symfony/webpack-encore': 'github:symfony/webpack-encore',
+416 silly npmInstallDependencies     'babel-loader': '^8.0.6',
+416 silly npmInstallDependencies     webpack: '^4.41.5'
+416 silly npmInstallDependencies   },
+416 silly npmInstallDependencies   devDependencies: {}
+416 silly npmInstallDependencies }
+417 silly npmInstallDependencies writing tempJson {
+417 silly npmInstallDependencies   name: '@coffeekraken/webkit',
+417 silly npmInstallDependencies   version: '0.0.11',
+417 silly npmInstallDependencies   description: 'Create easily website without the issues of configuring preprocessors like babel, webpack, imagemin, handlebars, etc...',
+417 silly npmInstallDependencies   bin: {
+417 silly npmInstallDependencies     'ck-webkit': './bin/coffeekraken-webkit.js',
+417 silly npmInstallDependencies     'coffeekraken-webkit': './bin/coffeekraken-webkit.js'
+417 silly npmInstallDependencies   },
+417 silly npmInstallDependencies   repository: {
+417 silly npmInstallDependencies     type: 'git',
+417 silly npmInstallDependencies     url: 'https://github.com/Coffeekraken/coffeekraken/tree/master/terminal/webkit'
+417 silly npmInstallDependencies   },
+417 silly npmInstallDependencies   keywords: [
+417 silly npmInstallDependencies     'coffee',       'kraken',
+417 silly npmInstallDependencies     'coffeekraken', 'webkit',
+417 silly npmInstallDependencies     'webpack',      'babel',
+417 silly npmInstallDependencies     'imagemin',     'sass',
+417 silly npmInstallDependencies     'scripts',      'tests'
+417 silly npmInstallDependencies   ],
+417 silly npmInstallDependencies   author: 'Coffeekraken <hello@coffeekraken.io>',
+417 silly npmInstallDependencies   contributors: [
+417 silly npmInstallDependencies     {
+417 silly npmInstallDependencies       name: 'Olivier Bossel',
+417 silly npmInstallDependencies       email: 'olivier.bossel@gmail.com',
+417 silly npmInstallDependencies       url: 'http://olivierbossel.com'
+417 silly npmInstallDependencies     }
+417 silly npmInstallDependencies   ],
+417 silly npmInstallDependencies   license: 'MIT',
+417 silly npmInstallDependencies   homepage: 'https://coffeekraken.io',
+417 silly npmInstallDependencies   dependencies: {
+417 silly npmInstallDependencies     '@babel/cli': '^7.7.7',
+417 silly npmInstallDependencies     '@babel/core': '^7.7.7',
+417 silly npmInstallDependencies     '@babel/plugin-proposal-class-properties': '^7.7.4',
+417 silly npmInstallDependencies     '@babel/plugin-proposal-export-default-from': '^7.7.4',
+417 silly npmInstallDependencies     '@babel/preset-env': '^7.7.7',
+417 silly npmInstallDependencies     '@coffeekraken/scripts-stack': '0.0.22',
+417 silly npmInstallDependencies     '@symfony/webpack-encore': 'github:symfony/webpack-encore',
+417 silly npmInstallDependencies     'app-root-path': '^3.0.0',
+417 silly npmInstallDependencies     autoprefixer: '^9.7.3',
+417 silly npmInstallDependencies     'babel-cli': '^6.26.0',
+417 silly npmInstallDependencies     'babel-jest': '^24.9.0',
+417 silly npmInstallDependencies     'babel-loader': '^8.0.6',
+417 silly npmInstallDependencies     'babel-plugin-add-module-exports': '^1.0.2',
+417 silly npmInstallDependencies     commander: '^4.1.0',
+417 silly npmInstallDependencies     config: '^3.2.4',
+417 silly npmInstallDependencies     'core-js': '^3.6.2',
+417 silly npmInstallDependencies     cssnano: '^4.1.10',
+417 silly npmInstallDependencies     'exec-sh': '^0.3.4',
+417 silly npmInstallDependencies     'find-up': '^4.1.0',
+417 silly npmInstallDependencies     'get-folder-size': '^2.0.1',
+417 silly npmInstallDependencies     glob: '^7.1.6',
+417 silly npmInstallDependencies     'http-server': '^0.12.0',
+417 silly npmInstallDependencies     'import-glob': '^1.5.0',
+417 silly npmInstallDependencies     jest: '^24.9.0',
+417 silly npmInstallDependencies     'jest-raw-loader': '^1.0.1',
+417 silly npmInstallDependencies     'pkg-up': '^3.1.0',
+417 silly npmInstallDependencies     postcss: '^7.0.26',
+417 silly npmInstallDependencies     'postcss-preset-env': '^6.7.0',
+417 silly npmInstallDependencies     precss: '^4.0.0',
+417 silly npmInstallDependencies     'rucksack-css': '^1.0.2',
+417 silly npmInstallDependencies     sass: '^1.24.3',
+417 silly npmInstallDependencies     'sass-glob-importer': '^1.0.1',
+417 silly npmInstallDependencies     'scss-bundle': '^3.0.2',
+417 silly npmInstallDependencies     webpack: '^4.41.5',
+417 silly npmInstallDependencies     'webpack-bundle-analyzer': '^3.6.0',
+417 silly npmInstallDependencies     'webpack-cli': '^3.3.10',
+417 silly npmInstallDependencies     'webpack-import-glob': '^2.0.0'
+417 silly npmInstallDependencies   },
+417 silly npmInstallDependencies   devDependencies: { lodash: '^4.17.15' }
+417 silly npmInstallDependencies }
+418 silly getExecOpts /home/web/coffeekraken/terminal/monorepo undefined
+419 silly npmInstall [ 'npm', [ 'install' ] ]
+420 silly getExecOpts /home/web/coffeekraken/terminal/webkit undefined
+421 silly npmInstall [ 'npm', [ 'install' ] ]
+422 silly npmInstallDependencies cleanup /home/web/coffeekraken/terminal/webkit/package.json
+423 verbose installed leaf @coffeekraken/webkit
+424 silly npmInstallDependencies cleanup /home/web/coffeekraken/terminal/monorepo/package.json
+425 error Error: Command failed: npm install
+425 error npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@2.1.2 (node_modules/@coffeekraken/scripts-stack/node_modules/fsevents):
+425 error npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.1.2: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+425 error npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.11 (node_modules/fsevents):
+425 error npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.11: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+425 error
+425 error removed 3 packages in 36.445s
+425 error
+425 error     at makeError (/home/web/coffeekraken/node_modules/@lerna/child-process/node_modules/execa/index.js:174:9)
+425 error     at /home/web/coffeekraken/node_modules/@lerna/child-process/node_modules/execa/index.js:278:16

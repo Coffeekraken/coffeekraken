@@ -2,6 +2,7 @@ const __tmpDir = require('@coffeekraken/sugar/node/fs/tmpDir');
 const __writeFileSync = require('@coffeekraken/sugar/node/fs/writeFileSync');
 const __fs = require('fs');
 const __glob = require('glob');
+const __defaultConfig = require('../../../coffeebuilder.config');
 
 /**
  * @name                            api
@@ -88,7 +89,7 @@ class CoffeeBuilderApi {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   get config() {
-    return require('../../../coffeebuilder.config');
+    return __defaultConfig;
   }
 
   /**

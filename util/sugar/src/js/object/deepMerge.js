@@ -1,4 +1,5 @@
-import __deepMerge from 'deepmerge';
+// import __deepMerge from 'deepmerge';
+import { merge } from 'merge-anything';
 
 /**
  * @name                deepMerge
@@ -19,5 +20,6 @@ import __deepMerge from 'deepmerge';
  */
 export default function deepMerge() {
   // merge all the passed objects
-  return __deepMerge.all(Array.prototype.slice.call(arguments));
+  return merge.apply(null, Array.prototype.slice.call(arguments));
+  // return __deepMerge.all(Array.prototype.slice.call(arguments));
 }

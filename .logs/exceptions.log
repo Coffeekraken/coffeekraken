@@ -1,0 +1,338 @@
+[31muncaughtException: Cannot find module 'forever'[39m
+[31mRequire stack:[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/commands/start.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/coffeekraken-coffeebuilder.js[39m
+[31mError: Cannot find module 'forever'[39m
+[31mRequire stack:[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/commands/start.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/coffeekraken-coffeebuilder.js[39m
+[31m    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:980:15)[39m
+[31m    at Function.Module._resolveFilename (/home/web/coffeekraken/terminal/coffeebuilder/node_modules/module-alias/index.js:49:29)[39m
+[31m    at Function.Module._load (internal/modules/cjs/loader.js:862:27)[39m
+[31m    at Module.require (internal/modules/cjs/loader.js:1040:19)[39m
+[31m    at require (internal/modules/cjs/helpers.js:72:18)[39m
+[31m    at Object.<anonymous> (/home/web/coffeekraken/terminal/coffeebuilder/bin/commands/start.js:4:19)[39m
+[31m    at Module._compile (internal/modules/cjs/loader.js:1151:30)[39m
+[31m    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1171:10)[39m
+[31m    at Module.load (internal/modules/cjs/loader.js:1000:32)[39m
+[31m    at Function.Module._load (internal/modules/cjs/loader.js:899:14)[39m
+[31muncaughtException: Cannot find module '@coffeekraken/sugar/js/object/filter'[39m
+[31mRequire stack:[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/commands/start.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/coffeekraken-coffeebuilder.js[39m
+[31mError: Cannot find module '@coffeekraken/sugar/js/object/filter'[39m
+[31mRequire stack:[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/commands/start.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/coffeekraken-coffeebuilder.js[39m
+[31m    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:980:15)[39m
+[31m    at Function.Module._resolveFilename (/home/web/coffeekraken/terminal/coffeebuilder/node_modules/module-alias/index.js:49:29)[39m
+[31m    at Function.Module._load (internal/modules/cjs/loader.js:862:27)[39m
+[31m    at Module.require (internal/modules/cjs/loader.js:1040:19)[39m
+[31m    at require (internal/modules/cjs/helpers.js:72:18)[39m
+[31m    at Object.<anonymous> (/home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js:5:21)[39m
+[31m    at Module._compile (internal/modules/cjs/loader.js:1151:30)[39m
+[31m    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1171:10)[39m
+[31m    at Module.load (internal/modules/cjs/loader.js:1000:32)[39m
+[31m    at Function.Module._load (internal/modules/cjs/loader.js:899:14)[39m
+[31muncaughtException: Cannot find module '@coffeekraken/sugar/js/object/filter'[39m
+[31mRequire stack:[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/commands/start.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/coffeekraken-coffeebuilder.js[39m
+[31mError: Cannot find module '@coffeekraken/sugar/js/object/filter'[39m
+[31mRequire stack:[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/commands/start.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/coffeekraken-coffeebuilder.js[39m
+[31m    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:980:15)[39m
+[31m    at Function.Module._resolveFilename (/home/web/coffeekraken/terminal/coffeebuilder/node_modules/module-alias/index.js:49:29)[39m
+[31m    at Function.Module._load (internal/modules/cjs/loader.js:862:27)[39m
+[31m    at Module.require (internal/modules/cjs/loader.js:1040:19)[39m
+[31m    at require (internal/modules/cjs/helpers.js:72:18)[39m
+[31m    at Object.<anonymous> (/home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js:5:21)[39m
+[31m    at Module._compile (internal/modules/cjs/loader.js:1151:30)[39m
+[31m    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1171:10)[39m
+[31m    at Module.load (internal/modules/cjs/loader.js:1000:32)[39m
+[31m    at Function.Module._load (internal/modules/cjs/loader.js:899:14)[39m
+[31muncaughtException: Cannot find module '@coffeekraken/sugar/js/object/filter'[39m
+[31mRequire stack:[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/commands/start.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/coffeekraken-coffeebuilder.js[39m
+[31mError: Cannot find module '@coffeekraken/sugar/js/object/filter'[39m
+[31mRequire stack:[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/commands/start.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/coffeekraken-coffeebuilder.js[39m
+[31m    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:980:15)[39m
+[31m    at Function.Module._resolveFilename (/home/web/coffeekraken/terminal/coffeebuilder/node_modules/module-alias/index.js:49:29)[39m
+[31m    at Function.Module._load (internal/modules/cjs/loader.js:862:27)[39m
+[31m    at Module.require (internal/modules/cjs/loader.js:1040:19)[39m
+[31m    at require (internal/modules/cjs/helpers.js:72:18)[39m
+[31m    at Object.<anonymous> (/home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js:5:21)[39m
+[31m    at Module._compile (internal/modules/cjs/loader.js:1151:30)[39m
+[31m    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1171:10)[39m
+[31m    at Module.load (internal/modules/cjs/loader.js:1000:32)[39m
+[31m    at Function.Module._load (internal/modules/cjs/loader.js:899:14)[39m
+[31muncaughtException: Cannot find module '@coffeekraken/sugar/js/object/filter'[39m
+[31mRequire stack:[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/commands/start.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/coffeekraken-coffeebuilder.js[39m
+[31mError: Cannot find module '@coffeekraken/sugar/js/object/filter'[39m
+[31mRequire stack:[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/commands/start.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/coffeekraken-coffeebuilder.js[39m
+[31m    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:980:15)[39m
+[31m    at Function.Module._resolveFilename (/home/web/coffeekraken/terminal/coffeebuilder/node_modules/module-alias/index.js:49:29)[39m
+[31m    at Function.Module._load (internal/modules/cjs/loader.js:862:27)[39m
+[31m    at Module.require (internal/modules/cjs/loader.js:1040:19)[39m
+[31m    at require (internal/modules/cjs/helpers.js:72:18)[39m
+[31m    at Object.<anonymous> (/home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js:5:21)[39m
+[31m    at Module._compile (internal/modules/cjs/loader.js:1151:30)[39m
+[31m    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1171:10)[39m
+[31m    at Module.load (internal/modules/cjs/loader.js:1000:32)[39m
+[31m    at Function.Module._load (internal/modules/cjs/loader.js:899:14)[39m
+[31muncaughtException: Cannot find module '@coffeekraken/sugar/js/object/filter'[39m
+[31mRequire stack:[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/commands/start.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/coffeekraken-coffeebuilder.js[39m
+[31mError: Cannot find module '@coffeekraken/sugar/js/object/filter'[39m
+[31mRequire stack:[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/commands/start.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/coffeekraken-coffeebuilder.js[39m
+[31m    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:980:15)[39m
+[31m    at Function.Module._resolveFilename (/home/web/coffeekraken/terminal/coffeebuilder/node_modules/module-alias/index.js:49:29)[39m
+[31m    at Function.Module._load (internal/modules/cjs/loader.js:862:27)[39m
+[31m    at Module.require (internal/modules/cjs/loader.js:1040:19)[39m
+[31m    at require (internal/modules/cjs/helpers.js:72:18)[39m
+[31m    at Object.<anonymous> (/home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js:5:21)[39m
+[31m    at Module._compile (internal/modules/cjs/loader.js:1151:30)[39m
+[31m    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1171:10)[39m
+[31m    at Module.load (internal/modules/cjs/loader.js:1000:32)[39m
+[31m    at Function.Module._load (internal/modules/cjs/loader.js:899:14)[39m
+[31muncaughtException: Cannot find module '@coffeekraken/sugar/js/object/filter'[39m
+[31mRequire stack:[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/commands/start.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/coffeekraken-coffeebuilder.js[39m
+[31mError: Cannot find module '@coffeekraken/sugar/js/object/filter'[39m
+[31mRequire stack:[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/commands/start.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/coffeekraken-coffeebuilder.js[39m
+[31m    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:980:15)[39m
+[31m    at Function.Module._resolveFilename (/home/web/coffeekraken/terminal/coffeebuilder/node_modules/module-alias/index.js:49:29)[39m
+[31m    at Function.Module._load (internal/modules/cjs/loader.js:862:27)[39m
+[31m    at Module.require (internal/modules/cjs/loader.js:1040:19)[39m
+[31m    at require (internal/modules/cjs/helpers.js:72:18)[39m
+[31m    at Object.<anonymous> (/home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js:5:21)[39m
+[31m    at Module._compile (internal/modules/cjs/loader.js:1151:30)[39m
+[31m    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1171:10)[39m
+[31m    at Module.load (internal/modules/cjs/loader.js:1000:32)[39m
+[31m    at Function.Module._load (internal/modules/cjs/loader.js:899:14)[39m
+[31muncaughtException: Cannot find module '@coffeekraken/sugar/js/object/filter'[39m
+[31mRequire stack:[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/commands/start.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/coffeekraken-coffeebuilder.js[39m
+[31mError: Cannot find module '@coffeekraken/sugar/js/object/filter'[39m
+[31mRequire stack:[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/commands/start.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/coffeekraken-coffeebuilder.js[39m
+[31m    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:980:15)[39m
+[31m    at Function.Module._resolveFilename (/home/web/coffeekraken/terminal/coffeebuilder/node_modules/module-alias/index.js:49:29)[39m
+[31m    at Function.Module._load (internal/modules/cjs/loader.js:862:27)[39m
+[31m    at Module.require (internal/modules/cjs/loader.js:1040:19)[39m
+[31m    at require (internal/modules/cjs/helpers.js:72:18)[39m
+[31m    at Object.<anonymous> (/home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js:5:21)[39m
+[31m    at Module._compile (internal/modules/cjs/loader.js:1151:30)[39m
+[31m    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1171:10)[39m
+[31m    at Module.load (internal/modules/cjs/loader.js:1000:32)[39m
+[31m    at Function.Module._load (internal/modules/cjs/loader.js:899:14)[39m
+[31muncaughtException: Cannot find module '@coffeekraken/sugar/js/object/filter'[39m
+[31mRequire stack:[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/commands/start.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/coffeekraken-coffeebuilder.js[39m
+[31mError: Cannot find module '@coffeekraken/sugar/js/object/filter'[39m
+[31mRequire stack:[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/commands/start.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/coffeekraken-coffeebuilder.js[39m
+[31m    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:980:15)[39m
+[31m    at Function.Module._load (internal/modules/cjs/loader.js:862:27)[39m
+[31m    at Module.require (internal/modules/cjs/loader.js:1040:19)[39m
+[31m    at require (internal/modules/cjs/helpers.js:72:18)[39m
+[31m    at Object.<anonymous> (/home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js:5:21)[39m
+[31m    at Module._compile (internal/modules/cjs/loader.js:1151:30)[39m
+[31m    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1171:10)[39m
+[31m    at Module.load (internal/modules/cjs/loader.js:1000:32)[39m
+[31m    at Function.Module._load (internal/modules/cjs/loader.js:899:14)[39m
+[31m    at Module.require (internal/modules/cjs/loader.js:1040:19)[39m
+[31muncaughtException: Cannot find module '@coffeekraken/sugar/js/object/filter'[39m
+[31mRequire stack:[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/commands/start.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/coffeekraken-coffeebuilder.js[39m
+[31mError: Cannot find module '@coffeekraken/sugar/js/object/filter'[39m
+[31mRequire stack:[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/commands/start.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/coffeekraken-coffeebuilder.js[39m
+[31m    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:980:15)[39m
+[31m    at Function.Module._resolveFilename (/home/web/coffeekraken/node_modules/module-alias/index.js:49:29)[39m
+[31m    at Function.Module._load (internal/modules/cjs/loader.js:862:27)[39m
+[31m    at Module.require (internal/modules/cjs/loader.js:1040:19)[39m
+[31m    at require (internal/modules/cjs/helpers.js:72:18)[39m
+[31m    at Object.<anonymous> (/home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js:5:21)[39m
+[31m    at Module._compile (internal/modules/cjs/loader.js:1151:30)[39m
+[31m    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1171:10)[39m
+[31m    at Module.load (internal/modules/cjs/loader.js:1000:32)[39m
+[31m    at Function.Module._load (internal/modules/cjs/loader.js:899:14)[39m
+[31muncaughtException: Cannot find module '@coffeekraken/sugar/js/object/filter'[39m
+[31mRequire stack:[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/commands/start.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/coffeekraken-coffeebuilder.js[39m
+[31mError: Cannot find module '@coffeekraken/sugar/js/object/filter'[39m
+[31mRequire stack:[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/commands/start.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/coffeekraken-coffeebuilder.js[39m
+[31m    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:980:15)[39m
+[31m    at Function.Module._resolveFilename (/home/web/coffeekraken/node_modules/module-alias/index.js:49:29)[39m
+[31m    at Function.Module._load (internal/modules/cjs/loader.js:862:27)[39m
+[31m    at Module.require (internal/modules/cjs/loader.js:1040:19)[39m
+[31m    at require (internal/modules/cjs/helpers.js:72:18)[39m
+[31m    at Object.<anonymous> (/home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js:5:21)[39m
+[31m    at Module._compile (internal/modules/cjs/loader.js:1151:30)[39m
+[31m    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1171:10)[39m
+[31m    at Module.load (internal/modules/cjs/loader.js:1000:32)[39m
+[31m    at Function.Module._load (internal/modules/cjs/loader.js:899:14)[39m
+[31muncaughtException: Cannot find module '@coffeekraken/sugar/js/object/filter'[39m
+[31mRequire stack:[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/commands/start.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/coffeekraken-coffeebuilder.js[39m
+[31mError: Cannot find module '@coffeekraken/sugar/js/object/filter'[39m
+[31mRequire stack:[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/commands/start.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/coffeekraken-coffeebuilder.js[39m
+[31m    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:980:15)[39m
+[31m    at Function.Module._resolveFilename (/home/web/coffeekraken/node_modules/module-alias/index.js:49:29)[39m
+[31m    at Function.Module._load (internal/modules/cjs/loader.js:862:27)[39m
+[31m    at Module.require (internal/modules/cjs/loader.js:1040:19)[39m
+[31m    at require (internal/modules/cjs/helpers.js:72:18)[39m
+[31m    at Object.<anonymous> (/home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js:5:21)[39m
+[31m    at Module._compile (internal/modules/cjs/loader.js:1151:30)[39m
+[31m    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1171:10)[39m
+[31m    at Module.load (internal/modules/cjs/loader.js:1000:32)[39m
+[31m    at Function.Module._load (internal/modules/cjs/loader.js:899:14)[39m
+[31muncaughtException: Cannot find module '@coffeekraken/sugar/js/object/filter'[39m
+[31mRequire stack:[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/commands/start.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/coffeekraken-coffeebuilder.js[39m
+[31mError: Cannot find module '@coffeekraken/sugar/js/object/filter'[39m
+[31mRequire stack:[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/commands/start.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/coffeekraken-coffeebuilder.js[39m
+[31m    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:980:15)[39m
+[31m    at Function.Module._resolveFilename (/home/web/coffeekraken/node_modules/module-alias/index.js:49:29)[39m
+[31m    at Function.Module._load (internal/modules/cjs/loader.js:862:27)[39m
+[31m    at Module.require (internal/modules/cjs/loader.js:1040:19)[39m
+[31m    at require (internal/modules/cjs/helpers.js:72:18)[39m
+[31m    at Object.<anonymous> (/home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js:5:21)[39m
+[31m    at Module._compile (internal/modules/cjs/loader.js:1151:30)[39m
+[31m    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1171:10)[39m
+[31m    at Module.load (internal/modules/cjs/loader.js:1000:32)[39m
+[31m    at Function.Module._load (internal/modules/cjs/loader.js:899:14)[39m
+[31muncaughtException: Cannot find module '@coffeekraken/sugar/js/object/filter'[39m
+[31mRequire stack:[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/commands/start.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/coffeekraken-coffeebuilder.js[39m
+[31mError: Cannot find module '@coffeekraken/sugar/js/object/filter'[39m
+[31mRequire stack:[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/commands/start.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/coffeekraken-coffeebuilder.js[39m
+[31m    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:980:15)[39m
+[31m    at Function.Module._resolveFilename (/home/web/coffeekraken/node_modules/module-alias/index.js:49:29)[39m
+[31m    at Function.Module._load (internal/modules/cjs/loader.js:862:27)[39m
+[31m    at Module.require (internal/modules/cjs/loader.js:1040:19)[39m
+[31m    at require (internal/modules/cjs/helpers.js:72:18)[39m
+[31m    at Object.<anonymous> (/home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js:5:21)[39m
+[31m    at Module._compile (internal/modules/cjs/loader.js:1151:30)[39m
+[31m    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1171:10)[39m
+[31m    at Module.load (internal/modules/cjs/loader.js:1000:32)[39m
+[31m    at Function.Module._load (internal/modules/cjs/loader.js:899:14)[39m
+[31muncaughtException: Cannot find module '@coffeekraken/sugar/js/object/filter'[39m
+[31mRequire stack:[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/commands/start.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/coffeekraken-coffeebuilder.js[39m
+[31mError: Cannot find module '@coffeekraken/sugar/js/object/filter'[39m
+[31mRequire stack:[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/commands/start.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/coffeekraken-coffeebuilder.js[39m
+[31m    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:980:15)[39m
+[31m    at Function.Module._resolveFilename (/home/web/coffeekraken/node_modules/module-alias/index.js:49:29)[39m
+[31m    at Function.Module._load (internal/modules/cjs/loader.js:862:27)[39m
+[31m    at Module.require (internal/modules/cjs/loader.js:1040:19)[39m
+[31m    at require (internal/modules/cjs/helpers.js:72:18)[39m
+[31m    at Object.<anonymous> (/home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js:5:21)[39m
+[31m    at Module._compile (internal/modules/cjs/loader.js:1151:30)[39m
+[31m    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1171:10)[39m
+[31m    at Module.load (internal/modules/cjs/loader.js:1000:32)[39m
+[31m    at Function.Module._load (internal/modules/cjs/loader.js:899:14)[39m
+[31muncaughtException: Cannot find module '@coffeekraken/sugar/js/object/filter'[39m
+[31mRequire stack:[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/commands/start.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/coffeekraken-coffeebuilder.js[39m
+[31mError: Cannot find module '@coffeekraken/sugar/js/object/filter'[39m
+[31mRequire stack:[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/commands/start.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/coffeekraken-coffeebuilder.js[39m
+[31m    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:980:15)[39m
+[31m    at Function.Module._resolveFilename (/home/web/coffeekraken/node_modules/module-alias/index.js:49:29)[39m
+[31m    at Function.Module._load (internal/modules/cjs/loader.js:862:27)[39m
+[31m    at Module.require (internal/modules/cjs/loader.js:1040:19)[39m
+[31m    at require (internal/modules/cjs/helpers.js:72:18)[39m
+[31m    at Object.<anonymous> (/home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js:5:21)[39m
+[31m    at Module._compile (internal/modules/cjs/loader.js:1151:30)[39m
+[31m    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1171:10)[39m
+[31m    at Module.load (internal/modules/cjs/loader.js:1000:32)[39m
+[31m    at Function.Module._load (internal/modules/cjs/loader.js:899:14)[39m
+[31muncaughtException: Cannot find module '@coffeekraken/sugar/js/object/filter'[39m
+[31mRequire stack:[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/commands/start.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/coffeekraken-coffeebuilder.js[39m
+[31mError: Cannot find module '@coffeekraken/sugar/js/object/filter'[39m
+[31mRequire stack:[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/commands/start.js[39m
+[31m- /home/web/coffeekraken/terminal/coffeebuilder/bin/coffeekraken-coffeebuilder.js[39m
+[31m    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:980:15)[39m
+[31m    at Function.Module._load (internal/modules/cjs/loader.js:862:27)[39m
+[31m    at Module.require (internal/modules/cjs/loader.js:1040:19)[39m
+[31m    at require (internal/modules/cjs/helpers.js:72:18)[39m
+[31m    at Object.<anonymous> (/home/web/coffeekraken/terminal/coffeebuilder/src/node/index.js:5:21)[39m
+[31m    at Module._compile (internal/modules/cjs/loader.js:1151:30)[39m
+[31m    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1171:10)[39m
+[31m    at Module.load (internal/modules/cjs/loader.js:1000:32)[39m
+[31m    at Function.Module._load (internal/modules/cjs/loader.js:899:14)[39m
+[31m    at Module.require (internal/modules/cjs/loader.js:1040:19)[39m

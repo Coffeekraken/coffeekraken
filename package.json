@@ -30,7 +30,17 @@
     "url": "https://github.com/Coffeekraken/coffeekraken/issues"
   },
   "homepage": "https://github.com/Coffeekraken/coffeekraken#readme",
-  "dependencies": {},
+  "_moduleAliases": {
+    "@coffeekraken/webpack-coffee-loader": "webpack/coffee-loader",
+    "@coffeekraken/coffeebuilder": "terminal/coffeebuilder",
+    "@coffeekraken/webpack-concat-dependencies-vendors-plugin": "webpack/concat-dependencies-vendors-plugin",
+    "@coffeekraken/webpack-lazy-dom-load-plugin": "webpack/lazy-dom-load-plugin",
+    "@coffeekraken/sugar/js": "util/sugar/dist/js",
+    "@coffeekraken/sugar/node": "util/sugar/src/node"
+  },
+  "dependencies": {
+    "module-alias": "^2.2.2"
+  },
   "globalDependencies": {},
   "devDependencies": {
     "@coffeekraken/monorepo": "0.0.27",

@@ -21,17 +21,17 @@ class LazyDomLoadPlugin {
       `;
 
       const files = Object.keys(entry);
-      for (let i=0; i<files.length; i++) {
+      for (let i = 0; i < files.length; i++) {
         const fileName = files[i];
         if (fileName !== this._options.outputEntry) continue;
         const filePath = entry[files[i]];
 
         const entryNames = Object.keys(entry);
-        for (let j=0; j<entryNames.length; j++) {
+        for (let j = 0; j < entryNames.length; j++) {
           const entryName = entryNames[j];
           const reg = new RegExp(this._options.entryRegexp, 'g');
           const match = reg.exec(entryName);
-          if ( ! match) continue;
+          if (!match) continue;
           const path = match[0];
           let selector = this._options.decryptSelectorFn ? this._options.decryptSelectorFn(match[1]) : match[1];
           let when = null;

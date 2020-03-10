@@ -10,6 +10,10 @@ function reset() {
     resources: {},
     entryPathes: [],
     savedResources: {},
+    folders: {
+      sources: {},
+      outputs: {}
+    },
     cache: {
       resources: {}
     },

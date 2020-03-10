@@ -3,14 +3,16 @@ const __parseHtml = require('@coffeekraken/sugar/node/terminal/parseHtml');
 const __countLine = require('@coffeekraken/sugar/node/terminal/countLine');
 const __columns = require('@coffeekraken/sugar/node/terminal/columns');
 const __readline = require('readline');
+const __blessed = require('blessed');
 const __asyncForEach = require('@coffeekraken/sugar/js/array/asyncForEach');
 const __ora = require('ora');
 const __folderSize = require('@coffeekraken/sugar/node/fs/folderSize');
 const __formatFileSize = require('@coffeekraken/sugar/node/fs/formatFileSize');
 const __deepMerge = require('@coffeekraken/sugar/js/object/deepMerge');
 const __breakLineDependingOnSidesPadding = require('@coffeekraken/sugar/node/terminal/breakLineDependingOnSidesPadding');
+const __splitEvery = require('@coffeekraken/sugar/node/string/splitEvery');
 
-const __packageJson = require('@coffeekraken/coffeebuilder/package.json');
+const __packageJson = require('../../../package.json');
 
 const __coffeeEvents = require('../events');
 const __coffeeBuilderApi = require('./CoffeeBuilderApi');
@@ -79,6 +81,22 @@ class CoffeeBuilderUI {
   _watchCompile = [];
 
   /**
+   * @name                              _changeLocationDefaultSettings
+   * @namespace                         terminal.coffeebuilder.node.classes.CoffeeBuilderUi
+   * @type                              Object
+   * 
+   * Store the default change location settings by locations
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _changeLocationDefaultSettings = {
+    'stats': {
+      loadDependencies: this._loadStatsDependencies,
+      loadingMessage: 'Loading stats please wait...'
+    }
+  };
+
+  /**
    * @name                              constructor
    * @namespace                         terminal.coffeebuilder.node.classes.CoffeeBuilderUI
    * @type                              Function
@@ -89,23 +107,34 @@ class CoffeeBuilderUI {
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor() {
-    // init terminal-kit
-    __terminalKit.grabInput({
-      mouse: 'motion',
-      // focus: true
-    });
 
-    __terminalKit.on('mouse', function (name, data) {
-      // console.log("'mouse' event:", name, data);
-    });
-    // __terminalKit.on('focus', function (name, data) {
-    //   console.log("'focus' event:", name, data);
+    // function terminate() {
+    //   __terminalKit.grabInput(false);
+    //   setTimeout(function () { process.exit() }, 100);
+    // }
+
+    // __terminalKit.bold.cyan('Type anything on the keyboard...\n');
+    // __terminalKit.green('Hit CTRL-C to quit.\n\n');
+
+    // __terminalKit.grabInput({ mouse: 'button' });
+
+    // __terminalKit.on('key', function (name, matches, data) {
+    //   // console.log("'key' event:", name);
+    //   if (name === 'CTRL_C') { terminate(); }
     // });
 
-    this._interface = __readline.createInterface({
-      input: process.stdin,
-      output: process.stdout
-    });
+    // __terminalKit.on('terminal', function (name, data) {
+    //   // console.log("'terminal' event:", name, data);
+    // });
+
+    // __terminalKit.on('mouse', function (name, data) {
+    //   // console.log("'mouse' event:", name, data);
+    // });
+
+    // this._interface = __readline.createInterface({
+    //   input: process.stdin,
+    //   output: process.stdout
+    // });
 
     process.stdout.on('resize', () => {
       this._padding = process.env.STDOUT_PADDING || 3;
@@ -114,8 +143,10 @@ class CoffeeBuilderUI {
       this.draw();
     });
 
+    this.draw();
+
     // listen for build events
-    this._listenBuildEvents();
+    // this._listenBuildEvents();
   }
 
   /**
@@ -128,11 +159,18 @@ class CoffeeBuilderUI {
   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
   */
   _listenBuildEvents() {
+    let postBuildTimeout, buildTimeout;
     __coffeeEvents.on('build', (data) => {
-      this.draw();
+      clearTimeout(buildTimeout);
+      buildTimeout = setTimeout(() => {
+        this.draw();
+      });
     });
     __coffeeEvents.on('postBuild', (data) => {
-      this.draw();
+      clearTimeout(postBuildTimeout);
+      postBuildTimeout = setTimeout(() => {
+        this.draw();
+      }, 10);
     });
   }
 
@@ -151,32 +189,22 @@ class CoffeeBuilderUI {
    * 
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  changeLocation(location) {
+  async changeLocation(location, settings = {}) {
+
+    // set the new location
+    this._locationSettings = __deepMerge(this._changeLocationDefaultSettings[location] || {}, settings);
+
+    if (this._locationSettings.loadDependencies) {
+      this._location = 'loading';
+      this.draw();
+      await this._locationSettings.loadDependencies();
+    }
+
     // set the new location
     this._location = location;
+
     // draw the new UI
-    this.draw();
-  }
-
-  /**
-   * @name                  _printLines
-   * @namespace             terminal.coffeebuilder.node.classes.CoffeeBuilderUI
-   * @type                  Function
-   * @private
-   * 
-   * Print the array of lines passed as parameters
-   * 
-   * @param           {Array}               lines             The array of lines to print
-   * 
-   * 
-   */
-  _printLines(lines) {
-    lines = lines.map((l) => {
-      if (l.slice(0, this._padding) === ' '.repeat(this._padding)) return l;
-      return ' '.repeat(this._padding) + l;
-    });
-
-    this._interface.write(lines.join('') + '\u001B[?25l');
+    this.draw(this._locationSettings);
   }
 
   /**
@@ -190,27 +218,66 @@ class CoffeeBuilderUI {
    */
   draw() {
 
-    // clear the terminal
-    __readline.clearLine(process.stdout, 0);
-    for (let i = 0; i < process.stdout.rows; i++) {
-      __readline.clearLine(process.stdout, 0);
-      __readline.moveCursor(process.stdout, 0, -1);
+    if (!this._blessedScreen) {
+      this._blessedScreen = __blessed.screen({
+        smartCSR: true,
+        fullUnicode: true,
+        forceUnicode: true
+      });
+      // Quit on Escape, q, or Control-C.
+      this._blessedScreen.key(['C-c'], function (ch, key) {
+        return process.exit(0);
+      });
+      this._blessedScreen.title = __packageJson.name;
+    }
+    if (!this._blessedContent) {
+      this._blessedContent = __blessed.box({
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        content: 'Hello {bold}world{/bold}!',
+        tags: true,
+        scrollable: true
+      });
+      this._blessedScreen.append(this._blessedContent);
     }
 
+    let lines = [];
+
     // draw the header
-    this.drawHeader();
+    lines = lines.concat(this.drawHeader(this._locationSettings));
 
     switch (this._location) {
       case 'home':
-        this.drawHome();
+        lines = lines.concat(this.drawHome(this._locationSettings));
         break;
       case 'build':
-        this.drawBuild();
+        lines = lines.concat(this.drawBuild(this._locationSettings));
         break;
       case 'stats':
-        this.drawStats()
+        lines = lines.concat(this.drawStats(this._locationSettings));
+        break;
+      case 'loading':
+        lines = lines.concat(this.drawLoading(this._locationSettings));
+        break;
+      case 'error':
+        lines = lines.concat(this.drawError(this._locationSettings));
         break;
     }
+
+    lines = lines.map((l) => {
+      if (l.slice(0, this._padding) === ' '.repeat(this._padding)) return l;
+      return ' '.repeat(this._padding) + l;
+    });
+
+    this._blessedContent.setContent(lines.join(''));
+    this._blessedScreen.render();
+
+    clearTimeout(this._drawTimeout);
+    this._drawTimeout = setTimeout(() => {
+      this.draw();
+    }, 100);
 
   }
 
@@ -221,30 +288,57 @@ class CoffeeBuilderUI {
    *
    * Draw the header of the UI
    *
-   * @return            {Promise}                             A promise resolved when the intereface has been drawed
+   * @param           {Object}              [settings={}]               The location settings
+   * @return          {Array}                                           An array of lines to draw
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  drawHeader() {
-    return new Promise(async (resolve, reject) => {
+  drawHeader(locationSettings = {}) {
+    let titleLine = __parseHtml(`<yellow><bold>CoffeeBuilder</bold></yellow> v${__packageJson.version}`);
+    let titleLineCount = __countLine(titleLine);
 
-      let titleLine = __parseHtml(`<yellow><bold>CoffeeBuilder</bold></yellow> v${__packageJson.version}`);
-      let titleLineCount = __countLine(titleLine);
+    const author = __packageJson.author;
+    const authorLength = author.length;
 
-      const author = __packageJson.author;
-      const authorLength = author.length;
+    titleLine += ' '.repeat(this._maxWidth - titleLineCount - authorLength) + __parseHtml(`<white>${author}</white>`);
 
-      titleLine += ' '.repeat(this._maxWidth - titleLineCount - authorLength) + __parseHtml(`<white>${author}</white>`);
+    const lines = [];
+    lines.push('\n');
+    lines.push(titleLine);
+    lines.push('\n');
+    lines.push('\n');
 
-      const lines = [];
-      lines.push('\n');
-      lines.push(titleLine);
-      lines.push('\n');
-      lines.push('\n');
+    let menuLine = ``;
 
-      this._printLines(lines);
+    if (this._location === 'home') {
+      menuLine += `<bgYellow><black><bold> Home </bold></black></bgYellow>`;
+    } else {
+      menuLine += `<bgWhite><black> Home </black></bgWhite>`;
+    }
+    if (this._location === 'build') {
+      menuLine += `<bgYellow><black><bold> Build </bold></black></bgYellow>`;
+    } else {
+      menuLine += `<bgWhite><black> Build </black></bgWhite>`;
+    }
+    if (this._location === 'stats') {
+      menuLine += `<bgYellow><black><bold> Stats </bold></black></bgYellow>`;
+    } else {
+      menuLine += `<bgWhite><black> Stats </black></bgWhite>`;
+    }
+    if (this._location === 'error') {
+      menuLine += `<bgYellow><black><bold> Error </bold></black></bgYellow>`;
+    } else {
+      menuLine += `<bgWhite><black> Error </black></bgWhite>`;
+    }
 
-    });
+    menuLine += `<bgWhite>${' '.repeat(this._maxWidth - __countLine(menuLine))}</bgWhite>`;
+
+    lines.push(__parseHtml(menuLine));
+    lines.push('\n');
+    lines.push('\n');
+
+    return lines;
+
   }
 
   /**
@@ -254,14 +348,14 @@ class CoffeeBuilderUI {
    *
    * Draw the "welcome" interface
    *
-   * @return            {Promise}                             A promise resolved when the intereface has been drawed
+   * @param           {Object}              [settings={}]               The location settings
+   * @return          {Array}                                           An array of lines to draw
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  drawHome() {
-    return new Promise(async (resolve, reject) => {
-
-    });
+  drawHome(settings = {}) {
+    const lines = [];
+    return lines;
   }
 
   /**
@@ -271,176 +365,149 @@ class CoffeeBuilderUI {
    *
    * Draw the interface depending on the data object passed
    *
-   * @return            {Promise}                             A promise resolved when the intereface has been drawed
+   * @param           {Object}              [settings={}]               The location settings
+   * @return          {Array}                                           An array of lines to draw
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  drawBuild() {
-    return new Promise(async (resolve, reject) => {
+  drawBuild(settings = {}) {
 
-      if (!__coffeeBuilderApi.stats.build.percentage) __coffeeBuilderApi.stats.build.percentage = 0;
+    if (!__coffeeBuilderApi.stats.build.percentage) __coffeeBuilderApi.stats.build.percentage = 0;
 
-      let { percentage, currentResourcePath, currentProcessor, processedResources, processors } = __coffeeBuilderApi.stats.build;
-      const postBuildProcessors = __coffeeBuilderApi.stats.postBuild.processors;
-      processors = __deepMerge(processors, postBuildProcessors);
+    let { percentage, currentResourcePath, currentProcessor, processedResources, processors } = __coffeeBuilderApi.stats.build;
+    const postBuildProcessors = __coffeeBuilderApi.stats.postBuild.processors;
+    processors = __deepMerge(processors, postBuildProcessors);
 
-      const postPercentage = __coffeeBuilderApi.stats.postBuild.percentage;
+    const postPercentage = __coffeeBuilderApi.stats.postBuild.percentage;
 
-      const watchCompile = this._watchCompile;
-      const compileType = watchCompile.length ? watchCompile : __coffeeBuilderApi.config.compile;
+    const watchCompile = this._watchCompile;
 
-      let lines = ['\n'];
+    let lines = ['\n'];
 
-      const progress = Math.round(this._maxWidth / 100 * percentage || 0);
-      const postProgress = Math.round(this._maxWidth / 100 * postPercentage || 0);
+    const progress = Math.round(this._maxWidth / 100 * percentage || 0);
+    const postProgress = Math.round(this._maxWidth / 100 * postPercentage || 0);
 
-      let barColorTag = 'red';
-      if (percentage > 33) barColorTag = 'yellow';
-      if (percentage > 66) barColorTag = 'green';
+    let barColorTag = 'red';
+    if (percentage > 33) barColorTag = 'yellow';
+    if (percentage > 66) barColorTag = 'green';
 
-      let bar = `<${barColorTag}>` + '█'.repeat(progress) + `</${barColorTag}>`;
-      bar += '░'.repeat(this._maxWidth - progress);
+    let bar = `<${barColorTag}>` + '█'.repeat(progress) + `</${barColorTag}>`;
+    bar += '░'.repeat(this._maxWidth - progress);
 
-      if (percentage >= 100) {
-        bar = '<green>' + '✔ '.repeat(Math.round(this._maxWidth / 2)) + '</green>';
-      }
+    if (percentage >= 100) {
+      bar = '<green>' + '✔ '.repeat(Math.round(this._maxWidth / 2)) + '</green>';
+    }
 
-      let postBarColorTag = 'red';
-      if (postPercentage > 33) postBarColorTag = 'yellow';
-      if (postPercentage > 66) postBarColorTag = 'green';
+    let postBarColorTag = 'red';
+    if (postPercentage > 33) postBarColorTag = 'yellow';
+    if (postPercentage > 66) postBarColorTag = 'green';
 
-      let postBar = `<${postBarColorTag}>` + '█'.repeat(postProgress) + `</${postBarColorTag}>`;
-      postBar += '░'.repeat(this._maxWidth - postProgress);
+    let postBar = `<${postBarColorTag}>` + '█'.repeat(postProgress) + `</${postBarColorTag}>`;
+    postBar += '░'.repeat(this._maxWidth - postProgress);
 
-      if (postPercentage >= 100) {
-        postBar = '<green>' + '✔ '.repeat(Math.round(this._maxWidth / 2)) + '</green>';
-      }
+    if (postPercentage >= 100) {
+      postBar = '<green>' + '✔ '.repeat(Math.round(this._maxWidth / 2)) + '</green>';
+    }
 
-      let compileLine = `<black>░░</black>`;
-      compileLine = '';
-      __coffeeBuilderApi.config.compile.forEach((compile, i) => {
-        if (watchCompile[0] === compile || watchCompile.length === 0) {
-          compileLine += `<green>✔ <bold><bgBlack>${compile}</bgBlack></bold></green>  `;
-        } else {
-          compileLine += `<white>✘ <bold><bgBlack>${compile}</bgBlack></bold></white>  `;
-        }
-      });
-
-      if (__coffeeBuilderApi.config.watch) {
-        if (!this._watchSpinner) this._watchSpinner = __ora('Watching');
-        const watchSpinner = this._watchSpinner.frame();
-        compileLine += ' '.repeat(this._maxWidth - __countLine(compileLine) - __countLine(watchSpinner)) + watchSpinner;
-      }
-
-      compileLine = __parseHtml(compileLine);
-
-      lines.push('-'.repeat(this._maxWidth));
-      lines.push('\n');
-      lines.push(compileLine);
-      lines.push('\n');
-      lines.push('-'.repeat(this._maxWidth));
-      lines.push('\n');
-      lines.push('\n');
-      lines.push(__parseHtml(`Build processors progress`));
-      lines.push('\n');
-      lines.push('\n');
-      lines.push(__parseHtml(bar));
-      lines.push('\n');
-      lines.push('\n');
-
-      lines.push(__parseHtml(`Post build processors progress`));
-      lines.push('\n');
-      lines.push('\n');
-      lines.push(__parseHtml(postBar));
-      lines.push('\n');
-      lines.push('\n');
-
-
-      // resource
-      if (percentage < 100) {
-        let resourceLine = __breakLineDependingOnSidesPadding(__parseHtml(`Processing resource "<yellow>${currentResourcePath.replace(process.cwd(), '')}</yellow>" using "<cyan>${currentProcessor}</cyan>" processor...`), this._padding);
-        lines.push(resourceLine);
-
+    let compileLine = `<black>░░</black>`;
+    compileLine = '';
+    __coffeeBuilderApi.config.compile.forEach((compile, i) => {
+      if (watchCompile[0] === compile || watchCompile.length === 0) {
+        compileLine += `<green>✔ <bold><bgBlack>${compile}</bgBlack></bold></green>  `;
       } else {
-
-        // processed resources
-        let processedResourcesLine = `<cyan><bold>${Object.keys(processedResources).length}</bold></cyan> (${compileType.join(',')}) file${Object.keys(processedResources).length > 1 ? 's' : ''} processed`;
-        if (__coffeeBuilderApi.stats.build.startTimestamp && __coffeeBuilderApi.stats.build.endTimestamp) {
-          processedResourcesLine += ` in <yellow>${new Date(__coffeeBuilderApi.stats.build.endTimestamp - __coffeeBuilderApi.stats.build.startTimestamp).getSeconds()}s</yellow>`;
-          if (Object.keys(__coffeeBuilderApi.stats.cache.resources).length > 0) {
-            processedResourcesLine += ` / <magenta><bold>${Object.keys(__coffeeBuilderApi.stats.cache.resources).length}</bold></magenta> taken from cache...`;
-          }
-        }
-        lines.push(__parseHtml('<green>✔</green>  ' + processedResourcesLine));
-
+        compileLine += `<white>✘ <bold><bgBlack>${compile}</bgBlack></bold></white>  `;
       }
-
-      // lines.push('\n');
-      //
-      // processedResources.forEach((f) => {
-      //   lines.push(f);
-      //   lines.push('\n');
-      // });
-      //
-      // lines.push('\n');
-      // lines.push('\n');
-      //
-      // __coffeeBuilderApi.stats.cache.files.forEach((f) => {
-      //   lines.push(f);
-      //   lines.push('\n');
-      // });
-
-      lines.push('\n');
-      lines.push('\n');
-      lines.push('\n');
-
-      let fileProcessedLine = __parseHtml(`<bold><yellow>Files processed</yellow></bold>`);
-      lines.push(fileProcessedLine);
-      lines.push('\n');
-      lines.push('-'.repeat(this._maxWidth));
-      lines.push('\n');
-      lines.push('\n');
-
-      const usedProcessorsColumns = [];
-      const usedProcessorsKeys = Object.keys(processors);
-      const usedProcessorsColumnsCount = this._maxWidth > 150 ? 4 : this._maxWidth > 100 ? 3 : 2;
-      const usedProcessorsItemsCountByColumn = Math.round(usedProcessorsKeys.length / usedProcessorsColumnsCount)
-
-      for (let i = 0; i < usedProcessorsColumnsCount; i++) {
-        let currentColumn = [];
-        usedProcessorsKeys.slice(i * usedProcessorsItemsCountByColumn, i * usedProcessorsItemsCountByColumn + usedProcessorsItemsCountByColumn).forEach((k) => {
-          currentColumn.push(__parseHtml(`<yellow>░</yellow> ${k}: <cyan><bold>${Object.keys(processors[k].processedResources).length}</bold></cyan>`));
-        });
-        usedProcessorsColumns.push(currentColumn.join('\n'));
-      }
-
-      lines.push(__columns(usedProcessorsColumns, this._padding));
-
-      lines.push('\n');
-      lines.push('\n');
-
-      this._printLines(lines);
-
     });
+
+    if (__coffeeBuilderApi.config.watch) {
+      if (!this._watchSpinner) this._watchSpinner = __ora('Watching');
+      const watchSpinner = this._watchSpinner.frame();
+      compileLine += ' '.repeat(this._maxWidth - __countLine(compileLine) - __countLine(watchSpinner)) + watchSpinner;
+    }
+
+    compileLine = __parseHtml(compileLine);
+
+    lines.push('-'.repeat(this._maxWidth));
+    lines.push('\n');
+    lines.push(compileLine);
+    lines.push('\n');
+    lines.push('-'.repeat(this._maxWidth));
+    lines.push('\n');
+    lines.push('\n');
+    lines.push(__parseHtml(`Build processors progress`));
+    lines.push('\n');
+    lines.push('\n');
+    lines.push(__parseHtml(bar));
+    lines.push('\n');
+    lines.push('\n');
+
+    lines.push(__parseHtml(`Post build processors progress`));
+    lines.push('\n');
+    lines.push('\n');
+    lines.push(__parseHtml(postBar));
+    lines.push('\n');
+    lines.push('\n');
+
+
+    // resource
+    if (percentage < 100) {
+      let resourceLine = __breakLineDependingOnSidesPadding(__parseHtml(`Processing resource "<yellow>${currentResourcePath.replace(process.cwd(), '')}</yellow>" using "<cyan>${currentProcessor}</cyan>" processor...`), this._padding);
+      lines.push(resourceLine);
+
+    }
+
+    lines.push('\n');
+    lines.push('\n');
+    lines.push('\n');
+
+    return lines;
+
   }
 
   /**
-   * @name                            drawStats
-   * @namespace                       terminal.coffeebuilder.node.classes.CoffeeBuilderUI
+   * @name                            drawLoading
+   * @namespace                       terminal.coffeebuilder.node.classes.CoffeeBuilderApi
    * @type                            Function
    * 
-   * Draw the "after build" stats
+   * Display a loading message to the user
+   * 
+   * @param           {Object}              [settings={}]               The location settings
+   * @return          {Array}                                           An array of lines to draw
    * 
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  drawStats() {
-    return new Promise(async (resolve, reject) => {
-      const watchCompile = this._watchCompile;
-      const compileTypes = __coffeeBuilderApi.config.compile;
-      const sourcesFolderObj = {};
-      const outputFolderObj = {};
+  drawLoading(settings = {}) {
 
-      let lines = [];
+    const message = this._locationSettings.loadingMessage || 'Please wait...';
+
+    if (!this._loadingSpinner) this._loadingSpinner = __ora(message);
+    const loadingSpinner = this._loadingSpinner.frame();
+    const loadingSpinnerCount = __countLine(loadingSpinner);
+    let loadingLine = '';
+    loadingLine += ' '.repeat(this._maxWidth / 2 - loadingSpinnerCount / 2);
+    loadingLine += loadingSpinner;
+
+    const lines = [];
+    lines.push('\n'.repeat(process.stdout.rows / 2 - 5));
+    lines.push(loadingLine);
+    lines.push('\n');
+    lines.push('\n');
+
+    setTimeout(() => {
+      if (this._location === 'loading') {
+        this.draw();
+      }
+    }, 20);
+
+    return lines;
+
+  }
+
+  _loadStatsDependencies() {
+    return new Promise(async (resolve, reject) => {
+
+      // const watchCompile = this._watchCompile;
+      const compileTypes = __coffeeBuilderApi.config.compile;
 
       await __asyncForEach(compileTypes, async (compile) => {
         return new Promise(async (r) => {
@@ -451,7 +518,7 @@ class CoffeeBuilderUI {
             return new Promise(async (resolve, reject) => {
 
               const folderSize = await __folderSize(sourcesFolder, true);
-              sourcesFolderObj[sourcesFolder] = folderSize;
+              __coffeeBuilderApi.stats.folders.sources[sourcesFolder] = folderSize;
               resolve(folderSize);
 
             });
@@ -461,7 +528,7 @@ class CoffeeBuilderUI {
             return new Promise(async (resolve, reject) => {
 
               const folderSize = await __folderSize(outputFolder, true);
-              outputFolderObj[outputFolder] = folderSize;
+              __coffeeBuilderApi.stats.folders.outputs[outputFolder] = folderSize;
               resolve(folderSize);
 
             });
@@ -472,56 +539,161 @@ class CoffeeBuilderUI {
         });
       });
 
-      const sourcesFolderColumns = [];
-      const sourcesFolderKeys = Object.keys(sourcesFolderObj);
-      const sourcesFolderColumnsCount = this._maxWidth > 150 ? 4 : this._maxWidth > 100 ? 3 : 2;
-      const sourcesFolderItemsCountByColumn = Math.round(sourcesFolderKeys.length / sourcesFolderColumnsCount)
-
-      let sourcesFolderLine = __parseHtml(`<bold><yellow>Sources folder(s)</yellow></bold>`);
-      lines.push(sourcesFolderLine);
-
-      lines.push('\n');
-      lines.push('-'.repeat(this._maxWidth));
-      lines.push('\n');
-      lines.push('\n');
-
-      for (let i = 0; i < sourcesFolderColumnsCount; i++) {
-        let currentColumn = [];
-        sourcesFolderKeys.slice(i * sourcesFolderItemsCountByColumn, i * sourcesFolderItemsCountByColumn + sourcesFolderItemsCountByColumn).forEach((k) => {
-          currentColumn.push(__parseHtml(`<green>✔</green> ${k}: <cyan><bold>${__formatFileSize(sourcesFolderObj[k])}</bold></cyan>`));
-        });
-        sourcesFolderColumns.push(currentColumn.join('\n'));
-      }
-      lines.push(__columns(sourcesFolderColumns, this._padding));
-
-      lines.push('\n');
-      lines.push('\n');
-
-      let outputFolderLine = __parseHtml(`<bold><yellow>Output folder(s)</yellow></bold>`);
-      lines.push(outputFolderLine);
-
-      lines.push('\n');
-      lines.push('-'.repeat(this._maxWidth));
-      lines.push('\n');
-      lines.push('\n');
-
-      const outputFolderColumns = [];
-      const outputFolderKeys = Object.keys(outputFolderObj);
-      const outputFolderColumnsCount = this._maxWidth > 150 ? 4 : this._maxWidth > 100 ? 3 : 2;
-      const outputFolderItemsCountByColumn = Math.round(outputFolderKeys.length / outputFolderColumnsCount)
-
-      for (let i = 0; i < outputFolderColumnsCount; i++) {
-        let currentColumn = [];
-        outputFolderKeys.slice(i * outputFolderItemsCountByColumn, i * outputFolderItemsCountByColumn + outputFolderItemsCountByColumn).forEach((k) => {
-          currentColumn.push(__parseHtml(`<green>✔</green> ${k}: <cyan><bold>${__formatFileSize(outputFolderObj[k])}</bold></cyan>`));
-        });
-        outputFolderColumns.push(currentColumn.join('\n'));
-      }
-      lines.push(__columns(outputFolderColumns, this._padding));
-
-      this._printLines(lines);
+      resolve();
 
     });
+  }
+
+  /**
+   * @name                            drawError
+   * @namespace                       terminal.coffeebuilder.node.classes.CoffeeBuilderUI
+   * @type                            Function
+   * 
+   * Draw the error message
+   * 
+   * @param           {Object}              [settings={}]               The location settings
+   * @return          {Array}                                           An array of lines to draw
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  drawError(settings = {}) {
+
+    let lines = [];
+
+    const lineWidth = Math.round(process.stdout.columns / 2);
+    // console.log(lineWidth);
+    // const reg = new RegExp(`.{1,${lineWidth}}`, 'g');
+    // // console.log(settings.message.match(reg));
+    // console.log([...settings.message.matchAll(reg)].map(o => o[0]));
+
+    const parts = __splitEvery(settings.message, lineWidth).map(l => __parseHtml(l)).map((l) => {
+      return ' '.repeat(Math.round((this._maxWidth - l.length) / 2)) + l;
+    });
+
+    for (let i = 0; i < process.stdout.rows / 2 - 5; i++) {
+      lines.push('\n');
+    }
+
+    lines = lines.concat(parts);
+
+    return lines;
+
+  }
+
+  /**
+   * @name                            drawStats
+   * @namespace                       terminal.coffeebuilder.node.classes.CoffeeBuilderUI
+   * @type                            Function
+   * 
+   * Draw the "after build" stats
+   * 
+   * @param           {Object}              [settings={}]               The location settings
+   * @return          {Array}                                           An array of lines to draw
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  drawStats(settings = {}) {
+    let lines = [];
+
+    let { processedResources, processors } = __coffeeBuilderApi.stats.build;
+
+    const watchCompile = this._watchCompile;
+    const compileType = watchCompile.length ? watchCompile : __coffeeBuilderApi.config.compile;
+
+    let resourcesLine = __parseHtml(`<bold><yellow>Processed resource(s)</yellow></bold>`);
+    lines.push('\n');
+    lines.push(resourcesLine);
+    lines.push('\n');
+    lines.push('-'.repeat(this._maxWidth));
+    lines.push('\n');
+    lines.push('\n');
+
+    // processed resources
+    let processedResourcesLine = `<cyan><bold>${Object.keys(processedResources).length}</bold></cyan> (${compileType.join(',')}) file${Object.keys(processedResources).length > 1 ? 's' : ''} processed`;
+    if (__coffeeBuilderApi.stats.build.startTimestamp && __coffeeBuilderApi.stats.build.endTimestamp) {
+      processedResourcesLine += ` in <yellow>${new Date(__coffeeBuilderApi.stats.build.endTimestamp - __coffeeBuilderApi.stats.build.startTimestamp).getSeconds()}s</yellow>`;
+      if (Object.keys(__coffeeBuilderApi.stats.cache.resources).length > 0) {
+        processedResourcesLine += ` / <magenta><bold>${Object.keys(__coffeeBuilderApi.stats.cache.resources).length}</bold></magenta> taken from cache...`;
+      }
+    }
+    lines.push(__parseHtml('<green>✔</green>  ' + processedResourcesLine));
+    lines.push('\n');
+    lines.push('\n');
+    lines.push('\n');
+
+    let processorsLine = __parseHtml(`<bold><yellow>Processor(s) used</yellow></bold>`);
+    lines.push(processorsLine);
+    lines.push('\n');
+    lines.push('-'.repeat(this._maxWidth));
+    lines.push('\n');
+    lines.push('\n');
+
+    const usedProcessorsColumns = [];
+    const usedProcessorsKeys = Object.keys(processors);
+    const usedProcessorsColumnsCount = this._maxWidth > 150 ? 4 : this._maxWidth > 100 ? 3 : 2;
+    const usedProcessorsItemsCountByColumn = Math.round(usedProcessorsKeys.length / usedProcessorsColumnsCount)
+
+    for (let i = 0; i < usedProcessorsColumnsCount; i++) {
+      let currentColumn = [];
+      usedProcessorsKeys.slice(i * usedProcessorsItemsCountByColumn, i * usedProcessorsItemsCountByColumn + usedProcessorsItemsCountByColumn).forEach((k) => {
+        currentColumn.push(__parseHtml(`<yellow>░</yellow> ${k}: <cyan><bold>${Object.keys(processors[k].processedResources).length}</bold></cyan>`));
+      });
+      usedProcessorsColumns.push(currentColumn.join('\n'));
+    }
+
+    lines.push(__columns(usedProcessorsColumns, this._padding));
+
+    lines.push('\n');
+    lines.push('\n');
+
+    const sourcesFolderColumns = [];
+    const sourcesFolderKeys = Object.keys(__coffeeBuilderApi.stats.folders.sources);
+    const sourcesFolderColumnsCount = this._maxWidth > 150 ? 4 : this._maxWidth > 100 ? 3 : 2;
+    const sourcesFolderItemsCountByColumn = Math.round(sourcesFolderKeys.length / sourcesFolderColumnsCount)
+
+    let sourcesFolderLine = __parseHtml(`<bold><yellow>Sources folder(s)</yellow></bold>`);
+    lines.push(sourcesFolderLine);
+
+    lines.push('\n');
+    lines.push('-'.repeat(this._maxWidth));
+    lines.push('\n');
+    lines.push('\n');
+
+    for (let i = 0; i < sourcesFolderColumnsCount; i++) {
+      let currentColumn = [];
+      sourcesFolderKeys.slice(i * sourcesFolderItemsCountByColumn, i * sourcesFolderItemsCountByColumn + sourcesFolderItemsCountByColumn).forEach((k) => {
+        currentColumn.push(__parseHtml(`<green>✔</green> ${k}: <cyan><bold>${__formatFileSize(__coffeeBuilderApi.stats.folders.sources[k])}</bold></cyan>`));
+      });
+      sourcesFolderColumns.push(currentColumn.join('\n'));
+    }
+    lines.push(__columns(sourcesFolderColumns, this._padding));
+
+    lines.push('\n');
+    lines.push('\n');
+
+    let outputFolderLine = __parseHtml(`<bold><yellow>Output folder(s)</yellow></bold>`);
+    lines.push(outputFolderLine);
+
+    lines.push('\n');
+    lines.push('-'.repeat(this._maxWidth));
+    lines.push('\n');
+    lines.push('\n');
+
+    const outputFolderColumns = [];
+    const outputFolderKeys = Object.keys(__coffeeBuilderApi.stats.folders.outputs);
+    const outputFolderColumnsCount = this._maxWidth > 150 ? 4 : this._maxWidth > 100 ? 3 : 2;
+    const outputFolderItemsCountByColumn = Math.round(outputFolderKeys.length / outputFolderColumnsCount)
+
+    for (let i = 0; i < outputFolderColumnsCount; i++) {
+      let currentColumn = [];
+      outputFolderKeys.slice(i * outputFolderItemsCountByColumn, i * outputFolderItemsCountByColumn + outputFolderItemsCountByColumn).forEach((k) => {
+        currentColumn.push(__parseHtml(`<green>✔</green> ${k}: <cyan><bold>${__formatFileSize(__coffeeBuilderApi.stats.folders.outputs[k])}</bold></cyan>`));
+      });
+      outputFolderColumns.push(currentColumn.join('\n'));
+    }
+    lines.push(__columns(outputFolderColumns, this._padding));
+
+    return lines;
 
   }
 

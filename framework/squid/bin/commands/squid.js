@@ -25,17 +25,17 @@ module.exports = (compile = ['js']) => {
   const config = __getConfig();
   const entryObj = {};
 
-  const coffeepack = new __CoffeeBuilder({});
+  const coffeebuilder = new __CoffeeBuilder({});
 
-  coffeepack.run().then(() => {
+  coffeebuilder.run().then(() => {
     // console.log('build finished!');
   });
 
-  // console.log(coffeepack.webpack.loaders());
-  // console.log(coffeepack.webpack.plugins());
-  // console.log(coffeepack.webpack.config());
+  // console.log(coffeebuilder.webpack.loaders());
+  // console.log(coffeebuilder.webpack.plugins());
+  // console.log(coffeebuilder.webpack.config());
   //
-  // console.log(coffeepack.webpack.entry());
+  // console.log(coffeebuilder.webpack.entry());
 
   // __coffeeLoader.options({
   //   compile: compile
@@ -46,15 +46,6 @@ module.exports = (compile = ['js']) => {
   // Object.keys(config.lazyload).forEach((selector) => {
   //   entryObj[`${config.dist.js.outputFolder}/lazyload/${__base64.encrypt(selector)}.js`] = config.lazyload[selector];
   // });
-
-  __log(`Emptying the current javascript dist folder <bold><cyan>"${config.dist.js.outputFolder}"</cyan></bold>...`, 'info');
-  __emptyDirSync(process.cwd() + '/' + config.dist.folder);
-  __log('Compiling/compressing the javascript bundle files...', 'info');
-
-
-  if (__fs.existsSync(process.cwd() + '/webpack.config.js')) {
-    webpackConfig = __deepMerge(webpackConfig, require(process.cwd() + '/webpack.config.js'));
-  }
 
   // process the files
   // __webpack(webpackConfig, (err, stats) => {

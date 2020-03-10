@@ -25,15 +25,11 @@ module.exports = () => {
     const parts = bundleFilePath.split('/');
     const bundleName = parts[parts.length - 1];
 
-    let finalBundleFilePath = bundleFilePath.replace('src/js/','');
+    let finalBundleFilePath = bundleFilePath.replace('src/js/', '');
     finalBundleFilePath = process.cwd() + '/' + config.dist.js.outputFolder + '/' + finalBundleFilePath;
 
     entryObj[finalBundleFilePath] = (bundleFilePath.charAt(0) === '/') ? bundleFilePath : './' + bundleFilePath;
   });
-
-  __log(`Emptying the current javascript dist folder "${config.dist.js.outputFolder}"...`, 'info');
-  __emptyDirSync(config.dist.js.outputFolder);
-  __log('Compiling/compressing the javascript bundle files...', 'info');
 
   let webpackConfig = {
     mode: 'production',

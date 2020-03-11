@@ -1,6 +1,6 @@
 // const __deepMerge = require('deepmerge');
 // const __isPlainObject = require('is-plain-object');
-const { merge } = require('merge-anything');
+const { mergeAndCompare, merge } = require('merge-anything');
 
 /**
  * @name                deepMerge
@@ -26,7 +26,27 @@ const { merge } = require('merge-anything');
 module.exports = function deepMerge() {
   // merge all the passed objects
 
-  return merge.apply(null, Array.prototype.slice.call(arguments));
+  function deepMergeErase(originVal, newVal, key) {
+    if (newVal._deepMergeEraseKeys) {
+      // console.log('KEY', key, originVal, newVal);
+      Object.keys(newVal).forEach(k => {
+        if (k.indexOf(newVal._deepMergeEraseKeys) === -1) delete newVal[k];
+      });
+      delete newVal._deepMergeEraseKeys;
+      return newVal;
+    }
+    // always return newVal as fallback!!
+    return newVal
+  }
+
+  const mergeArgumentsArray = Array.prototype.slice.call(arguments);
+  mergeArgumentsArray.unshift(deepMergeErase);
+
+  // console.log(mergeArgumentsArray);
+  // process.exit();
+
+  // return merge.apply(null, Array.prototype.slice.call(arguments));
+  return mergeAndCompare.apply(null, mergeArgumentsArray);
 
   // let objectsArray = Array.prototype.slice.call(arguments);
   // let settings = {

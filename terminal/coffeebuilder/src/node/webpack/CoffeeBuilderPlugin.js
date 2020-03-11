@@ -1,9 +1,4 @@
-const __sortObj = require('@coffeekraken/sugar/js/object/sort');
-const __filterObj = require('@coffeekraken/sugar/js/object/filter');
-
 const __api = require('../classes/CoffeeBuilderApi');
-const __coffeeEvents = require('../events');
-const __stats = require('../stats');
 
 module.exports = class CoffeeBuilderPlugin {
 

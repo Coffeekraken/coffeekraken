@@ -1,4 +1,8 @@
 #!/usr/bin/env node
+const __fs = require('fs');
+if (__fs.existsSync(`${__dirname}/../../../moduleAliases.js`)) {
+  require(`${__dirname}/../../../moduleAliases.js`);
+}
 const __initApp = require('@coffeekraken/sugar/node/app/initApp');
 const __path = require('path');
 const commander = require("commander");

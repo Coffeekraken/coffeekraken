@@ -40,6 +40,35 @@ const defaultConfig = {
   watch: true,
 
   /**
+   * @name                          exclude
+   * @namespace                     terminal.coffeebuilder.config
+   * @type                          Array
+   * 
+   * Define some glob patterns that have to be excluded of the compilation process
+   * 
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  exclude: ['*/node_modules/*'],
+
+  /**
+   * @name                          packages
+   * @namespace                     terminal.coffeebuilder.config
+   * @type                          Object
+   * 
+   * Specify all the packages that have to be used in the CoffeeBuilder process.
+   * A package is by definition a folder with a "package.json" file and optionaly a "coffeebuilder.config.js" file.
+   * This package config has to be an Object formated like so:
+   * {
+   *    "packageName": "/absolute/path/to/the/package"
+   * }
+   * If no packages are specified, CoffeeBuilder will try to find them for you by checking all the folders that
+   * have a "package.json" file or a "coffeebuilder.config.js" file...
+   * 
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  packages: {},
+
+  /**
    * @name                          resources
    * @namespace                     terminal.coffeebuilder.config
    * @type                          Object
@@ -184,7 +213,7 @@ const defaultConfig = {
         ],
         plugins: [
           "add-module-exports",
-          "transform-dynamic-import-default",
+          "@babel/plugin-syntax-dynamic-import",
           "@babel/plugin-proposal-class-properties",
           "@babel/plugin-proposal-export-default-from"
         ]
@@ -563,7 +592,6 @@ const defaultConfig = {
         filename: '[name]',
         pathinfo: false,
         path: process.cwd(),
-        publicPath: '/app/js/',
         chunkFilename: `dist/js/chunks/[name]-[chunkhash]-${projectPackageJson.version}.js`
       },
       devtool: 'source-map',
@@ -572,11 +600,8 @@ const defaultConfig = {
         minimize: true
       },
       resolve: {
-        alias: {
-          '@app': process.cwd() + '/dist/js',
-          '@coffeekraken/sugar/js': __dirname + '/../../../util/sugar/src/js',
-          '@coffeekraken/sugar/node': __dirname + '/../../../util/sugar/src/node'
-        }
+        modules: [],
+        alias: {}
       },
       module: {
         rules: [{
@@ -585,13 +610,15 @@ const defaultConfig = {
             loader: `${__dirname}/src/node/webpack/CoffeeBuilderLoader`,
             options: {}
           }]
-        }, {
-          test: /\.js$/,
-          use: [{
-            loader: 'webpack-import-glob-loader',
-            options: {}
-          }]
-        }]
+        },
+          // {
+          //   test: /\.js$/,
+          //   use: [{
+          //     loader: 'webpack-import-glob-loader',
+          //     options: {}
+          //   }]
+          // }
+        ]
       }
     }
   },

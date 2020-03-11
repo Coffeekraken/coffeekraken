@@ -16,11 +16,11 @@ module.exports = {
   after: (stats, settings, api) => {
     return new Promise(async (resolve, reject) => {
       // loop on all the compiled assets
-      const assetsKeys = Object.keys(stats.savedResources);
+      const assetsKeys = Object.keys(stats.getValue('savedResources'));
 
       for (let i = 0; i < assetsKeys.length; i++) {
 
-        const resource = stats.savedResources[assetsKeys[i]];
+        const resource = stats.getValue(`savedResources.${assetsKeys[i]}`);
 
         let processorsSortedAndFilteredObj = __sortObj(api.config.postProcessors, (a, b) => {
           return b.weight - a.weight;

@@ -1,8 +1,12 @@
 const __tmpDir = require('@coffeekraken/sugar/node/fs/tmpDir');
 const __writeFileSync = require('@coffeekraken/sugar/node/fs/writeFileSync');
+const __deepMerge = require('@coffeekraken/sugar/node/object/deepMerge');
 const __fs = require('fs');
+const __path = require('path');
 const __glob = require('glob');
 const __defaultConfig = require('../../../coffeebuilder.config');
+
+const __coffeeBuilderPrivateApi = require('./CoffeeBuilderPrivateApi');
 
 /**
  * @name                            api
@@ -28,6 +32,17 @@ class CoffeeBuilderApi {
   _injectScriptFilePath = `${__tmpDir()}/coffeeBuilderInjectScript.js`;
 
   /**
+   * @name                      _currentPackage
+   * @namespace                 terminal.coffeebuilder.node.classes.CoffeeBuilderApi
+   * @type                       String
+   * 
+   * Store the current package name
+   * 
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _currentPackage = null;
+
+  /**
    * @name            constructor
    * @namespace       terminal.coffeebuilder.node.classes.CoffeeBuilderApi
    * @type            Function
@@ -42,23 +57,32 @@ class CoffeeBuilderApi {
   }
 
   /**
-   * @name                                _runPlugins
+   * @name                                setCurrentPackage
    * @namespace                           terminal.coffeebuilder.node.classes.CoffeeBuilderApi
    * @type                                Function
    * 
-   * Run the registered plugins based on the "moment" ou want like "start", "before", etc...
+   * Set the current package by it's name
+   * 
+   * @todo      low           Check that the passed package name exist
+   * @todo      low           Emit and event
    * 
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  async _runPlugins(when = 'after') {
+  setCurrentPackage(name) {
+    this._currentPackage = name;
+  }
 
-    for (let i = 0; i < Object.keys(this.config.plugins).length; i++) {
-      const pluginObj = this.config.plugins[Object.keys(this.config.plugins)[i]];
-      if (pluginObj.plugin[when]) {
-        await pluginObj.plugin[when](this.stats, this.config.plugins[Object.keys(this.config.plugins)[i]].settings, this);
-      }
-    }
-
+  /**
+   * @name                        getCurrentPackage
+   * @namespace                   terminal.coffeebuilder.node.classes.coffeeBuilderApi
+   * @type                        Function
+   * 
+   * Get the current package name
+   * 
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  getCurrentPackage() {
+    return this._currentPackage;
   }
 
   /**
@@ -89,6 +113,7 @@ class CoffeeBuilderApi {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   get config() {
+    console.log('CCCC', __defaultConfig);
     return __defaultConfig;
   }
 

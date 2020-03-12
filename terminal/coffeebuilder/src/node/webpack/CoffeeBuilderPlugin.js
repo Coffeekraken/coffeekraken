@@ -1,5 +1,3 @@
-const __api = require('../classes/CoffeeBuilderApi');
-
 module.exports = class CoffeeBuilderPlugin {
 
   constructor(settings) {
@@ -8,7 +6,7 @@ module.exports = class CoffeeBuilderPlugin {
 
   apply(compiler) {
     compiler.hooks.failed.tap('CoffeeBuilderPlugin', async () => {
-      __api._runPlugins('failed');
+      CoffeeBuilder._api._runPlugins('failed');
     });
   }
 }

@@ -1,6 +1,5 @@
 const __sortObj = require('@coffeekraken/sugar/js/object/sort');
 const __filterObj = require('@coffeekraken/sugar/js/object/filter');
-const __coffeeEvents = require('../events');
 
 /**
  * @name                                postProcessors
@@ -43,7 +42,7 @@ module.exports = {
             resource.map = result.map || null;
             if (result.extension) resource.saveExtension = result.extension;
 
-            __coffeeEvents.emit('postBuild', {
+            CoffeeBuilder.events.emit('postBuild', {
               resource: resource,
               processor: processorsKeys[j]
             });
@@ -54,7 +53,7 @@ module.exports = {
           resource.save();
 
         } else {
-          __coffeeEvents.emit('postBuild', {
+          CoffeeBuilder.events.emit('postBuild', {
             resource: resource,
             processor: null
           });

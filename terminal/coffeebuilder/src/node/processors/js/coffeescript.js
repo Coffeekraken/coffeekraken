@@ -1,6 +1,5 @@
 const __coffeescript = require('coffeescript');
 const __deepMerge = require('@coffeekraken/sugar/node/object/deepMerge');
-const __loaderUtils = require('loader-utils');
 
 
 /**

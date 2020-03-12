@@ -1,6 +1,3 @@
-const __sortObj = require('@coffeekraken/sugar/js/object/sort');
-const __filterObj = require('@coffeekraken/sugar/js/object/filter');
-const __coffeeEvents = require('../events');
 const __tmpDir = require('@coffeekraken/sugar/node/fs/tmpDir');
 const __fs = require('fs');
 const __getExtension = require('@coffeekraken/sugar/js/string/getExtension');
@@ -16,16 +13,6 @@ const __getExtension = require('@coffeekraken/sugar/js/string/getExtension');
  */
 module.exports = {
 
-  before: (stats, settings, api) => {
-
-    // api.getInjectedScriptsFilepathes().forEach(injectPath => {
-
-    //   api.addWebpackEntry(injectPath, `${injectPath.replace('.js', '.compiled.js')}`);
-
-    // });
-
-  },
-
   after: (stats, settings, api) => {
     return new Promise(async (resolve, reject) => {
 
@@ -34,6 +21,7 @@ module.exports = {
 
       Object.keys(stats.getValue('savedResources')).forEach(resourcePath => {
         const resource = stats.getValue(`savedResources.${resourcePath}`);
+        console.log('res', resource);
         resource.outputFilePathes.forEach(path => {
 
           // ensure we work with a js file

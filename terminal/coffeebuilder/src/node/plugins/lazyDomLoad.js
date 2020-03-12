@@ -1,8 +1,4 @@
-const __path = require('path');
-const __fs = require('fs');
 const __getExtension = require('@coffeekraken/sugar/js/string/getExtension');
-const __tmpDir = require('@coffeekraken/sugar/node/fs/tmpDir');
-const __log = require('@coffeekraken/sugar/node/log/log');
 const __glob = require('glob');
 
 module.exports = {
@@ -31,7 +27,7 @@ module.exports = {
         import __when from '@coffeekraken/sugar/js/dom/when';
       `;
 
-      api.injectScript(script);
+      CoffeeBuilder.api.injectScript(script);
 
       resolve();
 

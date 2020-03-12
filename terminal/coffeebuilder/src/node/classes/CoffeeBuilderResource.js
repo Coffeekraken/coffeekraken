@@ -3,10 +3,6 @@ const __tmpDir = require('@coffeekraken/sugar/node/fs/tmpDir');
 const __base64 = require('@coffeekraken/sugar/node/crypt/base64');
 const __writeFileSync = require('@coffeekraken/sugar/node/fs/writeFileSync');
 const __fs = require('fs');
-const __events = require('../events');
-
-const __settings = require('../../../coffeebuilder.config');
-
 
 /**
  * @name                                      CoffeeBuilderResource
@@ -220,8 +216,8 @@ module.exports = class CoffeeBuilderResource {
     const results = [];
 
     let buildScopes = {};
-    Object.keys(__settings.resources).forEach((key, i) => {
-      const opts = __settings.resources[key];
+    Object.keys(CoffeeBuilder.api.config.resources).forEach((key, i) => {
+      const opts = CoffeeBuilder.api.config.resources[key];
 
       let outputFilePath = this.filepath;
 
@@ -260,6 +256,8 @@ module.exports = class CoffeeBuilderResource {
         });
       });
     });
+
+    console.log(results);
 
     // return the output file paths
     return results;
@@ -456,7 +454,7 @@ module.exports = class CoffeeBuilderResource {
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   emitSaveProcessedStat(e = 'saveProcessed') {
-    __events.emit(e, this);
+    CoffeeBuilder.events.emit(e, this);
   }
 
   /**
@@ -523,7 +521,7 @@ module.exports = class CoffeeBuilderResource {
 
     this.emitSaveProcessedStat();
 
-    if (!this.filepath.includes(__tmpDir())) __events.emit('savedResource', this);
+    if (!this.filepath.includes(__tmpDir())) CoffeeBuilder.events.emit('savedResource', this);
 
     if (this.saveExtension === 'js' && loaderInstance) {
       return true;

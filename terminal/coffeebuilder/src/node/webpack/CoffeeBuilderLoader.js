@@ -1,10 +1,7 @@
 if (process.env.NODE_ENV != 'production') require('module-alias/register');
 
-const __stats = require('../stats');
-const __coffeeEvents = require('../events');
 const __processFile = require('../utils/processFile');
 const __CoffeeBuilderResource = require('../classes/CoffeeBuilderResource');
-const __coffeeBuilderApi = require('../classes/CoffeeBuilderApi');
 const __globToRegExp = require('glob-to-regexp');
 
 module.exports.raw = true;
@@ -13,7 +10,7 @@ module.exports = function coffeeLoader(source) {
 
   const _callback = this.async();
 
-  const exclude = __coffeeBuilderApi.config.exclude;
+  const exclude = CoffeeBuilder.api.config.exclude;
   for (let i = 0; i < exclude.length; i++) {
     if (__globToRegExp(exclude[i]).test(this.resource)) {
       return _callback(null, source);
@@ -21,11 +18,11 @@ module.exports = function coffeeLoader(source) {
   }
 
   let resource;
-  if (!__stats.getValue(`resources.${this.resource}`)) {
+  if (!CoffeeBuilder.stats.getValue(`resources.${this.resource}`)) {
     resource = new __CoffeeBuilderResource(this.resource);
-    __coffeeEvents.emit('resource', resource);
+    CoffeeBuilder.events.emit('resource', resource);
   } else {
-    resource = __stats.getValue(`resources.${this.resource}`);
+    resource = CoffeeBuilder.stats.getValue(`resources.${this.resource}`);
   }
 
   __processFile(resource, this).then((src) => {

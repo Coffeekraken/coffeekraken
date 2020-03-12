@@ -32,17 +32,6 @@ class CoffeeBuilderApi {
   _injectScriptFilePath = `${__tmpDir()}/coffeeBuilderInjectScript.js`;
 
   /**
-   * @name                      _currentPackage
-   * @namespace                 terminal.coffeebuilder.node.classes.CoffeeBuilderApi
-   * @type                       String
-   * 
-   * Store the current package name
-   * 
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _currentPackage = null;
-
-  /**
    * @name            constructor
    * @namespace       terminal.coffeebuilder.node.classes.CoffeeBuilderApi
    * @type            Function
@@ -57,23 +46,96 @@ class CoffeeBuilderApi {
   }
 
   /**
-   * @name                                setCurrentPackage
+   * @name                    run
+   * @namespace               terminal.coffeebuilder.node.CoffeeBuilder
+   * @type                    Function
+   *
+   * Run the build process and return a Promise that will be resolved once the build is completed
+   *
+   * @param           {Array|String}               [packagesNames=null]            The package name or packages names to build
+   * @param           {Array}               [compile=null]                 An array of file types to compile. If not set, will take this parameter from the config
+   * @return          {Promise}                       A promise that will be resolved once the build is completed
+   *
+   * @example           js
+   * import coffeebuilder from '@coffeekraken/coffeebuilder';
+   * const coffeebuilder = new coffeebuilder();
+   * coffeebuilder.run().then((result) => {
+   *    // do something once the build is finished
+   * })
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  run(packagesNames = null, compile = null) {
+    return new Promise((resolve, reject) => {
+
+      if (packagesNames === null) {
+        packagesNames = [this.getCurrentPackageName()];
+      } else if (typeof packagesNames === 'string') {
+        packagesNames = [packagesNames];
+      }
+
+      // save the resources types to run
+      if (compile) this._runCompile = compile;
+      else this._runCompile = CoffeeBuilder.api.config.compile;
+
+      // reset the build stats
+      CoffeeBuilder.stats.reset();
+
+      // run the plugins at "before" moment
+      CoffeeBuilder._api._runPlugins('before');
+
+      // clear the injected scripts
+      CoffeeBuilder.api.clearInjectedScripts();
+
+      // save the startTimestamp
+      CoffeeBuilder.stats.setValue('build.startTimestamp', Date.now());
+
+      // run webpack
+      (async () => {
+
+        // change the location to "build"
+        CoffeeBuilder.ui.changeLocation('build');
+
+        // execute all the wanted packages
+        for (let i = 0; i < packagesNames.length; i++) {
+
+          // update the stats currentPackage value
+          CoffeeBuilder.api.setCurrentPackageByName(packagesNames[i]);
+
+          // run the current package
+          await CoffeeBuilder.webpack.run(packagesNames[i], compile);
+
+        }
+
+        // save the endTimestamp
+        CoffeeBuilder.stats.setValue('build.endTimestamp', Date.now());
+
+        // change the location to "stats"
+        CoffeeBuilder.ui.changeLocation('stats');
+
+        // run the plugins at the "after" moment
+        CoffeeBuilder._api._runPlugins('after');
+
+        resolve();
+      })();
+    });
+  }
+
+  /**
+   * @name                                setCurrentPackageByName
    * @namespace                           terminal.coffeebuilder.node.classes.CoffeeBuilderApi
    * @type                                Function
    * 
    * Set the current package by it's name
    * 
-   * @todo      low           Check that the passed package name exist
-   * @todo      low           Emit and event
-   * 
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  setCurrentPackage(name) {
-    this._currentPackage = name;
+  setCurrentPackageByName(name) {
+    CoffeeBuilder._api.setCurrentPackageByName(name);
   }
 
   /**
-   * @name                        getCurrentPackage
+   * @name                        getCurrentPackageName
    * @namespace                   terminal.coffeebuilder.node.classes.coffeeBuilderApi
    * @type                        Function
    * 
@@ -81,8 +143,8 @@ class CoffeeBuilderApi {
    * 
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  getCurrentPackage() {
-    return this._currentPackage;
+  getCurrentPackageName() {
+    return CoffeeBuilder._api.getCurrentPackageName();
   }
 
   /**
@@ -102,51 +164,63 @@ class CoffeeBuilderApi {
   }
 
   /**
-   * @name                config
-   * @namespace           terminal.coffeebuilder.node.classes.CoffeeBuilderApi
-   * @type                Function
+   * @name                              getPackages
+   * @namespace                         terminal.coffeebuilder.node.classes.CoffeeBuilderApi
+   * @type                              Function
    * 
-   * Get the global coffeebuilder config
+   * Get the packages list in object format. The format of the object is this one:
+   * {
+   *    "packageName": "package/path",
+   *    // etc...
+   * }
    * 
-   * @return        {Object}            
+   * @return                  {Object}                          The packages list object
    * 
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
+  getPackages() {
+    return this.baseConfig.packages;
+  }
+
+  /**
+ * @name                                config
+ * @namespace                           terminal.coffeebuilder.node.classes.CoffeeBuilderPrivateApi
+ * @type                                Object
+ * 
+ * Access the config object. This object is the result of the default coffeebuilder config mixed with the "base" config specified in the "coffeebuilder.config.js" file
+ * at the "process.cwd()" folder path and mixed with the current package config specified in the "coffeebuilder.config.js" file at the package root path...
+ * 
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
   get config() {
-    console.log('CCCC', __defaultConfig);
-    return __defaultConfig;
+    return CoffeeBuilder._api.config;
   }
 
   /**
-   * @name                       userConfig
-   * @namespace                  terminal.coffeebuilder.node.CoffeeBuilder
-   * @type                        Object
+   * @name                                baseConfig
+   * @namespace                           terminal.coffeebuilder.node.classes.CoffeeBuilderPrivateApi
+   * @type                                Object
    * 
-   * Store the user config defines at the root of his project in the "coffeebuilder.config.js" file.
-   * If the file does not exist, return an empty object
-   * 
-   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  get userConfig() {
-    if (!__fs.existsSync(`${process.cwd()}/coffeebuilder.config.js`)) return {
-      plugins: {}
-    };
-    return require(`${process.cwd()}/coffeebuilder.config.js`);
-  }
-
-  /**
-   * @name                stats
-   * @namespace           terminal.coffeebuilder.node.classes.CoffeeBuilderApi
-   * @type                Function
-   * 
-   * Get the coffeebuilder execution stats
-   * 
-   * @return        {Object}            
+   * Access the baseConfig object. This object is the result of the default coffeebuilder config mixed with the "base" baseConfig specified in the "coffeebuilder.baseConfig.js" file
+   * at the "process.cwd()" folder path.
    * 
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  get stats() {
-    return require('../stats');
+  get baseConfig() {
+    return CoffeeBuilder._api.baseConfig;
+  }
+
+  /**
+   * @name                                defaultConfig
+   * @namespace                           terminal.coffeebuilder.node.classes.CoffeeBuilderPrivateApi
+   * @type                                Object
+   * 
+   * Access the defaultConfig object. This object is the one specified in the CoffeeBuilder package.
+   * 
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get defaultConfig() {
+    return CoffeeBuilder._api.defaultConfig;
   }
 
   /**
@@ -263,4 +337,4 @@ class CoffeeBuilderApi {
 
 }
 
-module.exports = new CoffeeBuilderApi();
+module.exports = CoffeeBuilderApi;

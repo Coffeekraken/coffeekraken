@@ -1,6 +1,6 @@
 /**
  * @name                            replaceTags
- * @namespace                       sugar.js.html
+ * @namespace                       sugar.node.html
  * @type                            Function
  *
  * Replace all the html tags that you specify by something else that you can fully choose
@@ -10,14 +10,14 @@
  * @return              {String}                                                The new text
  *
  * @example             js
- * import replaceTags from '@coffeekraken/sugar/js/html/replaceTags';
+ * const replaceTags = require('@coffeekraken/sugar/node/html/replaceTags');
  * replaceTags('<span>Hello</span> world', {
  *    span: (tag, content) => `<div>${content}</div>`; // => <div>Hello</div> world
  * });
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function replaceTags(text, tags) {
+module.exports = function replaceTags(text, tags) {
 
   let oneLineText = text.replace(/\r\n/g, '|rn|');
   oneLineText = oneLineText.replace(/\n/g, '|n|');
@@ -68,4 +68,4 @@ export default function replaceTags(text, tags) {
 
   return oneLineText;
 
-}
+};

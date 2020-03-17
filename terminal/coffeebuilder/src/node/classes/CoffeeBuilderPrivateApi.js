@@ -1,14 +1,12 @@
 const __tmpDir = require('@coffeekraken/sugar/node/fs/tmpDir');
-const __writeFileSync = require('@coffeekraken/sugar/node/fs/writeFileSync');
 const __deepMerge = require('@coffeekraken/sugar/node/object/deepMerge');
 const __fs = require('fs');
 const __path = require('path');
 const __glob = require('glob');
-const __defaultConfig = require('../../../coffeebuilder.config');
 
 /**
- * @name                            api
- * @namespace                       terminal.coffeebuilder.node
+ * @name                            CoffeeBuilderPrivateApi
+ * @namespace                       terminal.coffeebuilder.node.classes
  * @type                            Class
  * 
  * Expose some methods to interact with the coffeebuilder instance, settings, etc...
@@ -28,42 +26,6 @@ class CoffeeBuilderPrivateApi {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _injectScriptFilePath = `${__tmpDir()}/coffeeBuilderInjectScript.js`;
-
-  /**
-   * @name                      _defaultConfig
-   * @namespace                 terminal.coffeebuilder.node.classes.CoffeeBuilderPrivateApi
-   * @type                      Object
-   * @private
-   * 
-   * Store the default coffeebuilder configuration object
-   * 
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _defaultConfig = {};
-
-  /**
-   * @name                      _baseConfig
-   * @namespace                 terminal.coffeebuilder.node.classes.CoffeeBuilderPrivateApi
-   * @type                      Object
-   * @private
-   * 
-   * Store the default coffeebuilder configuration mixed with the configuration in the "process.cwd()" folder
-   * 
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _baseConfig = {};
-
-  /**
-   * @name                      _config
-   * @namespace                 terminal.coffeebuilder.node.classes.CoffeeBuilderPrivateApi
-   * @type                      Object
-   * @private
-   * 
-   * Store the current package configuration object
-   * 
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _config = {};
 
   /**
    * @name                        _currentPackageName
@@ -89,73 +51,6 @@ class CoffeeBuilderPrivateApi {
    */
   constructor() {
 
-    // load the configuration
-    this._loadConfig();
-
-  }
-
-  /**
-   * @aname                               _loadConfig
-   * @namespace                           terminal.coffeebuilder.node.classes.CoffeeBuilderPrivateApi
-   * @type                                Function
-   * 
-   * Load the configuration from the default one and the current package one if it exist
-   * 
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _loadConfig() {
-
-    const defaultConfig = require(__path.resolve(__dirname, '../../../coffeebuilder.config'));
-    let baseConfig = {};
-
-    this._defaultConfig = Object.assign({}, defaultConfig);
-
-    if (__fs.existsSync(__path.resolve(process.cwd(), 'coffeebuilder.config.js'))) {
-      baseConfig = require(__path.resolve(process.cwd(), 'coffeebuilder.config.js'));
-    }
-
-    this._baseConfig = Object.assign({}, __deepMerge(defaultConfig, baseConfig));
-
-    if (!this._baseConfig.packages || Object.keys(this._baseConfig.packages).length === 0) {
-      // find the packages
-      let packagesObj = this._searchPackages();
-
-      // check if theirs a package.json at the process root folder
-      if (__fs.existsSync(__path.resolve(process.cwd(), 'package.json'))) {
-        const packageJson = require(__path.resolve(process.cwd(), 'package.json'));
-        const obj = {};
-        obj[packageJson.name] = process.cwd();
-        packagesObj = Object.assign(obj, packagesObj);
-      }
-
-      this._baseConfig.packages = packagesObj;
-    }
-
-    // init the config object
-    this._config = Object.assign({}, this._baseConfig);
-
-    // set the current package if possible
-    let _currentPackage;
-    if (Object.keys(this._baseConfig.packages).length > 0 && !_currentPackage) {
-      const firstPackageName = Object.keys(this._baseConfig.packages)[0];
-      this.setCurrentPackageByName(firstPackageName);
-    }
-
-  }
-
-  /**
-   * @name                                setConfig
-   * @namespace                           terminal.coffeebuilder.node.classes.CoffeeBuilderPrivateApi
-   * @type                                Function
-   * 
-   * Merge the passed config with the baseConfig one
-   * 
-   * @param           {Object}            config            The config object to merge
-   * 
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  setConfig(config) {
-    this._baseConfig = Object.assign({}, __deepMerge(this._baseConfig, config));
   }
 
   /**
@@ -191,13 +86,13 @@ class CoffeeBuilderPrivateApi {
     this._currentPackageName = packageName;
 
     let packageConfig = {};
-    if (packageName && this._baseConfig.packages[packageName]) {
-      if (__fs.existsSync(__path.resolve(process.cwd(), this._baseConfig.packages[packageName], 'coffeebuilder.config.js'))) {
-        packageConfig = require(__path.resolve(process.cwd(), this._baseConfig.packages[packageName], 'coffeebuilder.config.js'));
+    if (packageName && CoffeeBuilder.config.base.packages[packageName]) {
+      if (__fs.existsSync(__path.resolve(process.cwd(), CoffeeBuilder.config.base.packages[packageName], 'coffeebuilder.config.js'))) {
+        packageConfig = require(__path.resolve(process.cwd(), CoffeeBuilder.config.base.packages[packageName], 'coffeebuilder.config.js'));
       }
     }
-    this._config = Object.assign({}, __deepMerge(this._baseConfig, packageConfig));
-    delete this._config.packages;
+    CoffeeBuilder.config.current = Object.assign({}, __deepMerge(CoffeeBuilder.config.base, packageConfig));
+    delete CoffeeBuilder.config.current.packages;
   }
 
   /**
@@ -210,76 +105,7 @@ class CoffeeBuilderPrivateApi {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   getPackagesPathes() {
-    return Object.values(this._baseConfig.packages);
-  }
-
-  /**
-   * @name                                config
-   * @namespace                           terminal.coffeebuilder.node.classes.CoffeeBuilderPrivateApi
-   * @type                                Object
-   * 
-   * Access the config object. This object is the result of the default coffeebuilder config mixed with the "base" config specified in the "coffeebuilder.config.js" file
-   * at the "process.cwd()" folder path and mixed with the current package config specified in the "coffeebuilder.config.js" file at the package root path...
-   * 
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  get config() {
-    return this._config;
-  }
-
-  /**
-   * @name                                baseConfig
-   * @namespace                           terminal.coffeebuilder.node.classes.CoffeeBuilderPrivateApi
-   * @type                                Object
-   * 
-   * Access the baseConfig object. This object is the result of the default coffeebuilder config mixed with the "base" baseConfig specified in the "coffeebuilder.baseConfig.js" file
-   * at the "process.cwd()" folder path.
-   * 
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  get baseConfig() {
-    return this._baseConfig;
-  }
-
-  /**
-   * @name                                defaultConfig
-   * @namespace                           terminal.coffeebuilder.node.classes.CoffeeBuilderPrivateApi
-   * @type                                Object
-   * 
-   * Access the defaultConfig object. This object is the one specified in the CoffeeBuilder package.
-   * 
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  get defaultConfig() {
-    return this._defaultConfig;
-  }
-
-  /**
-   * @name                                _searchPackages
-   * @namespace                           terminal.coffeebuilder.node.classes.CoffeeBuilderPrivateApi
-   * @type                                Function
-   * @private
-   * 
-   * Search for the packages inside sub folders
-   * 
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _searchPackages() {
-    // search for all the packages
-    let packages = __glob.sync('**/*(package.json|coffeebuilder.config.js)', {
-      ignore: '**/node_modules/**'
-    }).map(p => {
-      return p.replace('/package.json', '').replace('/coffeebuilder.config.js', '');
-    });
-    packages = [...new Set(packages)];
-    const packagesObj = {};
-    packages.forEach(p => {
-      if (__fs.existsSync(__path.resolve(process.cwd(), p, 'package.json'))) {
-        const packageJson = require(__path.resolve(process.cwd(), p, 'package.json'));
-        packagesObj[packageJson.name] = p;
-      }
-    });
-    return packagesObj;
+    return Object.values(CoffeeBuilder.config.base.packages);
   }
 
   /**
@@ -294,10 +120,10 @@ class CoffeeBuilderPrivateApi {
    */
   async _runPlugins(when = 'after') {
 
-    for (let i = 0; i < Object.keys(this._config.plugins).length; i++) {
-      const pluginObj = this._config.plugins[Object.keys(this._config.plugins)[i]];
+    for (let i = 0; i < Object.keys(CoffeeBuilder.config.current.plugins).length; i++) {
+      const pluginObj = CoffeeBuilder.config.current.plugins[Object.keys(CoffeeBuilder.config.current.plugins)[i]];
       if (pluginObj.plugin[when]) {
-        await pluginObj.plugin[when](CoffeeBuilder.stats, this._config.plugins[Object.keys(this._config.plugins)[i]].settings, this);
+        await pluginObj.plugin[when](CoffeeBuilder.stats, CoffeeBuilder.config.current.plugins[Object.keys(CoffeeBuilder.config.current.plugins)[i]].settings, this);
       }
     }
 

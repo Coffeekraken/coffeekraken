@@ -15,13 +15,13 @@ module.exports = {
   after: (stats, settings, api) => {
     return new Promise(async (resolve, reject) => {
       // loop on all the compiled assets
-      const assetsKeys = Object.keys(stats.getValue('savedResources'));
+      const assetsKeys = Object.keys(stats.get('savedResources'));
 
       for (let i = 0; i < assetsKeys.length; i++) {
 
-        const resource = stats.getValue(`savedResources.${assetsKeys[i]}`);
+        const resource = stats.get(`savedResources.${assetsKeys[i]}`);
 
-        let processorsSortedAndFilteredObj = __sortObj(api.config.postProcessors, (a, b) => {
+        let processorsSortedAndFilteredObj = __sortObj(config.current.postProcessors, (a, b) => {
           return b.weight - a.weight;
         });
         processorsSortedAndFilteredObj = __filterObj(processorsSortedAndFilteredObj, (item) => {

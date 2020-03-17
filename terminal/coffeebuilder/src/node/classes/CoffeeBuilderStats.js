@@ -82,7 +82,27 @@ class CoffeeBuilderStats {
   }
 
   /**
-   * @name                            setValue
+   * @name                            getCurrentPackageStats
+   * @namespace                       terminal.coffeebuilder.node.classes.CoffeeBuilderStats
+   * @type                            Function
+   * 
+   * Get the current package stats or return false if their's not...
+   * 
+   * @return              {Object|Boolean}                          The current package stats or false if their's not...
+   * 
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  getCurrentPackageStats() {
+
+    if (this._stats.statsByPackages[CoffeeBuilder.api.getCurrentPackageName()]) {
+      return this._stats.statsByPackages[CoffeeBuilder.api.getCurrentPackageName()];
+    }
+
+    return false;
+  }
+
+  /**
+   * @name                            set
    * @namespace                       terminal.coffeebuilder.node.classes.CoffeeBuilderStats
    * @type                            Function
    * 
@@ -92,7 +112,7 @@ class CoffeeBuilderStats {
    * 
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  setValue(path, value) {
+  set(path, value) {
 
     if (!this._stats.statsByPackages[CoffeeBuilder.api.getCurrentPackageName()]) {
       this._stats.statsByPackages[CoffeeBuilder.api.getCurrentPackageName()] = {};
@@ -103,7 +123,7 @@ class CoffeeBuilderStats {
   }
 
   /**
-   * @name                            getValue
+   * @name                            get
    * @namespace                       terminal.coffeebuilder.node.classes.CoffeeBuilderStats
    * @type                            Function
    * 
@@ -113,7 +133,7 @@ class CoffeeBuilderStats {
    * 
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  getValue(path) {
+  get(path) {
     if (!this._stats.statsByPackages[CoffeeBuilder.api.getCurrentPackageName()]) {
       this._stats.statsByPackages[CoffeeBuilder.api.getCurrentPackageName()] = {};
       Object.assign(this._stats.statsByPackages[CoffeeBuilder.api.getCurrentPackageName()], this._stats.statsTemplate);

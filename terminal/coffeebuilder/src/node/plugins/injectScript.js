@@ -19,8 +19,8 @@ module.exports = {
       const injectScriptFilePath = `${__tmpDir()}/coffeeBuilderInjectScript.default.js`;
       let defaultInjected = __fs.existsSync(injectScriptFilePath) ? false : true;
 
-      Object.keys(stats.getValue('savedResources')).forEach(resourcePath => {
-        const resource = stats.getValue(`savedResources.${resourcePath}`);
+      Object.keys(stats.get('savedResources')).forEach(resourcePath => {
+        const resource = stats.get(`savedResources.${resourcePath}`);
         console.log('res', resource);
         resource.outputFilePathes.forEach(path => {
 

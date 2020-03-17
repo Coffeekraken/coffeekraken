@@ -17,17 +17,9 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function splitEvery(array, every) {
-  let tempArray = [];
-  const finalArray = [];
-  let splitAt = every;
-  for (let i = 0; i < array.length; i++) {
-    if (i + 1 === splitAt) {
-      finalArray.push(tempArray);
-      tempArray = [];
-      splitAt += every;
-      splitAt -= 1;
-    }
-    tempArray.push(array[i]);
+  let i, j, finalArray = [];
+  for (i = 0, j = array.length; i < j; i += every) {
+    finalArray.push(array.slice(i, i + every));
   }
   return finalArray;
 }

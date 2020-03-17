@@ -216,8 +216,8 @@ module.exports = class CoffeeBuilderResource {
     const results = [];
 
     let buildScopes = {};
-    Object.keys(CoffeeBuilder.api.config.resources).forEach((key, i) => {
-      const opts = CoffeeBuilder.api.config.resources[key];
+    Object.keys(CoffeeBuilder.config.current.resources).forEach((key, i) => {
+      const opts = CoffeeBuilder.config.current.resources[key];
 
       let outputFilePath = this.filepath;
 

@@ -7,7 +7,7 @@ module.exports = function processFile(resource, loaderInstance = null) {
 
   return new Promise(async (resolve, reject) => {
 
-    let processorsSortedAndFilteredObj = __sortObj(CoffeeBuilder.api.config.processors, (a, b) => {
+    let processorsSortedAndFilteredObj = __sortObj(CoffeeBuilder.config.current.processors, (a, b) => {
       return b.weight - a.weight;
     });
     processorsSortedAndFilteredObj = __filterObj(processorsSortedAndFilteredObj, (item) => {

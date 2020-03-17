@@ -1,16 +1,11 @@
 const __tmpDir = require('@coffeekraken/sugar/node/fs/tmpDir');
 const __writeFileSync = require('@coffeekraken/sugar/node/fs/writeFileSync');
-const __deepMerge = require('@coffeekraken/sugar/node/object/deepMerge');
 const __fs = require('fs');
-const __path = require('path');
 const __glob = require('glob');
-const __defaultConfig = require('../../../coffeebuilder.config');
-
-const __coffeeBuilderPrivateApi = require('./CoffeeBuilderPrivateApi');
 
 /**
- * @name                            api
- * @namespace                       terminal.coffeebuilder.node
+ * @name                            CoffeeBuilderApi
+ * @namespace                       terminal.coffeebuilder.node.classes
  * @type                            Class
  * 
  * Expose some methods to interact with the coffeebuilder instance, settings, etc...
@@ -32,6 +27,18 @@ class CoffeeBuilderApi {
   _injectScriptFilePath = `${__tmpDir()}/coffeeBuilderInjectScript.js`;
 
   /**
+   * @name                          _isRunning
+   * @namespace                     terminal.coffeebuilder.node.classes.CoffeeBuilderApi
+   * @type                          Boolean
+   * @private
+   * 
+   * Store the running status. If a package is currently building, this will be true, otherwise, it will be false
+   * 
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _isRunning = false;
+
+  /**
    * @name            constructor
    * @namespace       terminal.coffeebuilder.node.classes.CoffeeBuilderApi
    * @type            Function
@@ -43,6 +50,21 @@ class CoffeeBuilderApi {
    */
   constructor() {
 
+  }
+
+  /**
+   * @name                      isRunning
+   * @namespace                 terminal.coffeebuilder.node.classes.CoffeeBuilderApi
+   * @type                      Function
+   * 
+   * Get the "isRunning" status. This will return true if a package is currently building, false otherwise...
+   * 
+   * @return            {Boolean}                       true if a package is currently building, false if not
+   * 
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  isRunning() {
+    return this._isRunning;
   }
 
   /**
@@ -68,6 +90,9 @@ class CoffeeBuilderApi {
   run(packagesNames = null, compile = null) {
     return new Promise((resolve, reject) => {
 
+      // update the isRunning status
+      this._isRunning = true;
+
       if (packagesNames === null) {
         packagesNames = [this.getCurrentPackageName()];
       } else if (typeof packagesNames === 'string') {
@@ -76,7 +101,7 @@ class CoffeeBuilderApi {
 
       // save the resources types to run
       if (compile) this._runCompile = compile;
-      else this._runCompile = CoffeeBuilder.api.config.compile;
+      else this._runCompile = CoffeeBuilder.config.current.compile;
 
       // reset the build stats
       CoffeeBuilder.stats.reset();
@@ -88,7 +113,7 @@ class CoffeeBuilderApi {
       CoffeeBuilder.api.clearInjectedScripts();
 
       // save the startTimestamp
-      CoffeeBuilder.stats.setValue('build.startTimestamp', Date.now());
+      CoffeeBuilder.stats.set('build.startTimestamp', Date.now());
 
       // run webpack
       (async () => {
@@ -108,13 +133,16 @@ class CoffeeBuilderApi {
         }
 
         // save the endTimestamp
-        CoffeeBuilder.stats.setValue('build.endTimestamp', Date.now());
+        CoffeeBuilder.stats.set('build.endTimestamp', Date.now());
 
         // change the location to "stats"
         CoffeeBuilder.ui.changeLocation('stats');
 
         // run the plugins at the "after" moment
         CoffeeBuilder._api._runPlugins('after');
+
+        // update the isRunning status
+        this._isRunning = false;
 
         resolve();
       })();
@@ -179,48 +207,7 @@ class CoffeeBuilderApi {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   getPackages() {
-    return this.baseConfig.packages;
-  }
-
-  /**
- * @name                                config
- * @namespace                           terminal.coffeebuilder.node.classes.CoffeeBuilderPrivateApi
- * @type                                Object
- * 
- * Access the config object. This object is the result of the default coffeebuilder config mixed with the "base" config specified in the "coffeebuilder.config.js" file
- * at the "process.cwd()" folder path and mixed with the current package config specified in the "coffeebuilder.config.js" file at the package root path...
- * 
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-  get config() {
-    return CoffeeBuilder._api.config;
-  }
-
-  /**
-   * @name                                baseConfig
-   * @namespace                           terminal.coffeebuilder.node.classes.CoffeeBuilderPrivateApi
-   * @type                                Object
-   * 
-   * Access the baseConfig object. This object is the result of the default coffeebuilder config mixed with the "base" baseConfig specified in the "coffeebuilder.baseConfig.js" file
-   * at the "process.cwd()" folder path.
-   * 
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  get baseConfig() {
-    return CoffeeBuilder._api.baseConfig;
-  }
-
-  /**
-   * @name                                defaultConfig
-   * @namespace                           terminal.coffeebuilder.node.classes.CoffeeBuilderPrivateApi
-   * @type                                Object
-   * 
-   * Access the defaultConfig object. This object is the one specified in the CoffeeBuilder package.
-   * 
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  get defaultConfig() {
-    return CoffeeBuilder._api.defaultConfig;
+    return CoffeeBuilder.config.base.packages;
   }
 
   /**

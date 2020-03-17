@@ -8,6 +8,7 @@ const __CoffeeBuilderPrivateApi = require('./classes/CoffeeBuilderPrivateApi');
 const __CoffeeBuilderEvents = require('./classes/CoffeeBuilderEvents');
 const __CoffeeBuilderUI = require('./classes/CoffeeBuilderUI');
 const __CoffeeBuilderStats = require('./classes/CoffeeBuilderStats');
+const __CoffeeBuilderConfig = require('./classes/CoffeeBuilderConfig');
 const __CoffeeBuilderWebpack = require('./classes/CoffeeBuilderWebpack');
 
 class CoffeeBuilderApp extends __CoffeeBuilderApi {
@@ -25,6 +26,7 @@ class CoffeeBuilderApp extends __CoffeeBuilderApi {
     CoffeeBuilder.app = this;
     CoffeeBuilder.events = new __CoffeeBuilderEvents();
     CoffeeBuilder.stats = new __CoffeeBuilderStats();
+    CoffeeBuilder.config = new __CoffeeBuilderConfig();
     CoffeeBuilder.api = this;
     CoffeeBuilder._api = new __CoffeeBuilderPrivateApi();
     CoffeeBuilder.ui = new __CoffeeBuilderUI();
@@ -37,13 +39,13 @@ class CoffeeBuilderApp extends __CoffeeBuilderApi {
     CoffeeBuilder.ui.changeLocation('home');
 
     // set the passed config
-    CoffeeBuilder._api.setConfig(config);
+    CoffeeBuilder.config.set(config);
 
     // run the plugins at "start" moment
     CoffeeBuilder._api._runPlugins('start');
 
     // init watch
-    if (CoffeeBuilder.api.config.watch) this._initWatch();
+    if (CoffeeBuilder.config.current.watch) this._initWatch();
 
     // run the "end" plugins phase
     process.on('beforeExit', () => {
@@ -68,13 +70,13 @@ class CoffeeBuilderApp extends __CoffeeBuilderApi {
   _initWatch() {
 
     // loop on each packages to watch
-    Object.keys(CoffeeBuilder.api.baseConfig.packages).forEach((packageKey, i) => {
+    Object.keys(CoffeeBuilder.config.base.packages).forEach((packageKey, i) => {
 
-      const packagePath = CoffeeBuilder.api.baseConfig.packages[packageKey];
+      const packagePath = CoffeeBuilder.config.base.packages[packageKey];
 
-      CoffeeBuilder.api.config.compile.forEach(compile => {
+      CoffeeBuilder.config.current.compile.forEach(compile => {
 
-        const fileObj = CoffeeBuilder.api.config.resources[compile];
+        const fileObj = CoffeeBuilder.config.current.resources[compile];
         if (!fileObj || !fileObj.sourcesFolders) return;
         fileObj.sourcesFolders.forEach((folder) => {
 

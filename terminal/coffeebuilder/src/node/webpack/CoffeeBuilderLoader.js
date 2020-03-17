@@ -10,7 +10,7 @@ module.exports = function coffeeLoader(source) {
 
   const _callback = this.async();
 
-  const exclude = CoffeeBuilder.api.config.exclude;
+  const exclude = CoffeeBuilder.config.current.exclude;
   for (let i = 0; i < exclude.length; i++) {
     if (__globToRegExp(exclude[i]).test(this.resource)) {
       return _callback(null, source);
@@ -18,11 +18,11 @@ module.exports = function coffeeLoader(source) {
   }
 
   let resource;
-  if (!CoffeeBuilder.stats.getValue(`resources.${this.resource}`)) {
+  if (!CoffeeBuilder.stats.get(`resources.${this.resource}`)) {
     resource = new __CoffeeBuilderResource(this.resource);
     CoffeeBuilder.events.emit('resource', resource);
   } else {
-    resource = CoffeeBuilder.stats.getValue(`resources.${this.resource}`);
+    resource = CoffeeBuilder.stats.get(`resources.${this.resource}`);
   }
 
   __processFile(resource, this).then((src) => {

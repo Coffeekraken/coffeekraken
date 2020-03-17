@@ -40,6 +40,17 @@ const defaultConfig = {
   watch: true,
 
   /**
+   * @name                        autoSwitch
+   * @namespace                   terminal.coffeebuilder.config
+   * @type                        Boolean
+   * 
+   * If you want to switch automatically between pages depending on the running process...
+   * 
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  autoSwitch: true,
+
+  /**
    * @name                          exclude
    * @namespace                     terminal.coffeebuilder.config
    * @type                          Array

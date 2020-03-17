@@ -4,6 +4,7 @@ const __fs = require('fs');
 const __path = require('path');
 const __glob = require('glob');
 const __getExtension = require('@coffeekraken/sugar/js/string/getExtension');
+const __uniqid = require('@coffeekraken/sugar/js/string/uniqid');
 
 /**
  * @name                                      CoffeeBuilderWebpack
@@ -45,7 +46,7 @@ module.exports = class CoffeeBuilderWebpack {
     return new Promise((resolve, reject) => {
 
       this._packageName = packageName;
-      this._packagePath = CoffeeBuilder.api.baseConfig.packages[packageName];
+      this._packagePath = CoffeeBuilder.config.base.packages[packageName];
       this._compile = compile;
 
       if (this._packagePath && __fs.existsSync(`${process.cwd()}/${this._packagePath}/node_modules`)) {
@@ -55,7 +56,7 @@ module.exports = class CoffeeBuilderWebpack {
       // check the needed configs in order to run the compilation properly
       if (Object.keys(this.config().entry).length === 0) {
         CoffeeBuilder.ui.changeLocation('error', {
-          message: `It seems that your configuration return <red><bold>no files</bold></red> to compile at all for the package "<yellow><bold>${packageName}</bold></yellow>"...`
+          message: `It seems that your configuration return <red><bold>no files</bold></red> to compile at all for the package "<yellow><bold>${CoffeeBuilder.api.getCurrentPackageName()}</bold></yellow>"...`
         });
         return;
       }
@@ -84,7 +85,7 @@ module.exports = class CoffeeBuilderWebpack {
    */
   config() {
 
-    const runConfig = CoffeeBuilder.api.config;
+    const runConfig = CoffeeBuilder.config.current;
     const webpackConfig = Object.assign({}, runConfig.vendors.webpack);
 
     // context
@@ -143,7 +144,7 @@ module.exports = class CoffeeBuilderWebpack {
       packagePath = this._packagePath;
     }
 
-    const runConfig = CoffeeBuilder.api.config;
+    const runConfig = CoffeeBuilder.config.current;
 
     // loop on the "compile" option to know which file types we have to handle
     const fileTypesToCompile = this._compile || runConfig.compile;

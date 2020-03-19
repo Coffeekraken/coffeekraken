@@ -5,6 +5,7 @@ const __path = require('path');
 const __glob = require('glob');
 const __getExtension = require('@coffeekraken/sugar/js/string/getExtension');
 const __uniqid = require('@coffeekraken/sugar/js/string/uniqid');
+const __tmpDir = require('@coffeekraken/sugar/node/fs/tmpDir');
 
 /**
  * @name                                      CoffeeBuilderWebpack
@@ -42,15 +43,13 @@ module.exports = class CoffeeBuilderWebpack {
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  run(packageName = null, compile = null) {
+  run() {
     return new Promise((resolve, reject) => {
 
-      this._packageName = packageName;
-      this._packagePath = CoffeeBuilder.config.base.packages[packageName];
-      this._compile = compile;
+      const packagePath = CoffeeBuilder.api.getCurrentPackage().path;
 
-      if (this._packagePath && __fs.existsSync(`${process.cwd()}/${this._packagePath}/node_modules`)) {
-        __moduleAlias.addPath(`${process.cwd()}/${this._packagePath}/node_modules`);
+      if (packagePath && __fs.existsSync(`${process.cwd()}/${packagePath}/node_modules`)) {
+        __moduleAlias.addPath(`${process.cwd()}/${packagePath}/node_modules`);
       }
 
       // check the needed configs in order to run the compilation properly
@@ -63,7 +62,7 @@ module.exports = class CoffeeBuilderWebpack {
 
       __webpack(this.config(), (err, stats) => {
         if (err || stats.hasErrors()) {
-          console.log(stats);
+          // console.log(stats);
         }
         // console.log(stats);
         // process finished
@@ -139,15 +138,13 @@ module.exports = class CoffeeBuilderWebpack {
     let entryObj = {};
     let entryString = '';
 
-    let packagePath = '';
-    if (this._packagePath) {
-      packagePath = this._packagePath;
-    }
+    let packagePath = CoffeeBuilder.api.getCurrentPackage().path;
 
     const runConfig = CoffeeBuilder.config.current;
 
     // loop on the "compile" option to know which file types we have to handle
-    const fileTypesToCompile = this._compile || runConfig.compile;
+    const fileTypesToCompile = runConfig.compile;
+
     fileTypesToCompile.forEach((fileType) => {
 
       // get the file type options object

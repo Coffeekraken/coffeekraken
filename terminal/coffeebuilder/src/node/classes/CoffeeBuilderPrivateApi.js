@@ -4,6 +4,8 @@ const __fs = require('fs');
 const __path = require('path');
 const __glob = require('glob');
 
+const __CoffeeBuilderPackage = require('./CoffeeBuilderPackage');
+
 /**
  * @name                            CoffeeBuilderPrivateApi
  * @namespace                       terminal.coffeebuilder.node.classes
@@ -50,7 +52,11 @@ class CoffeeBuilderPrivateApi {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor() {
-
+    setTimeout(() => {
+      this._initPackages();
+      this._listenPackagesUpdated();
+      this._listenCompilationErrors();
+    });
   }
 
   /**
@@ -83,16 +89,32 @@ class CoffeeBuilderPrivateApi {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   setCurrentPackageByName(packageName) {
+
+    if (!this.getPackage(packageName)) {
+      return CoffeeBuilder.ui.changeLocation('error', {
+        message: `You try to access the package "<red>${packageName}</red>" but it has not been registered...`
+      });
+    }
+
     this._currentPackageName = packageName;
 
-    let packageConfig = {};
-    if (packageName && CoffeeBuilder.config.base.packages[packageName]) {
-      if (__fs.existsSync(__path.resolve(process.cwd(), CoffeeBuilder.config.base.packages[packageName], 'coffeebuilder.config.js'))) {
-        packageConfig = require(__path.resolve(process.cwd(), CoffeeBuilder.config.base.packages[packageName], 'coffeebuilder.config.js'));
-      }
-    }
-    CoffeeBuilder.config.current = Object.assign({}, __deepMerge(CoffeeBuilder.config.base, packageConfig));
+    CoffeeBuilder.config.current = Object.assign({}, this.getPackage(packageName).config);
     delete CoffeeBuilder.config.current.packages;
+  }
+
+  /**
+   * @name                                getCurrentPackage
+   * @namespace                           terminal.coffeebuilder.node.classes.CoffeeBuilderPrivateApi
+   * @type                                Function
+   * 
+   * Return the current package instance
+   * 
+   * @return      {CoffeeBuilderPackage}            The package instance
+   * 
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  getCurrentPackage() {
+    return this.getPackage(this.getCurrentPackageName());
   }
 
   /**
@@ -105,7 +127,92 @@ class CoffeeBuilderPrivateApi {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   getPackagesPathes() {
-    return Object.values(CoffeeBuilder.config.base.packages);
+    return CoffeeBuilder.config.base.packages;
+  }
+
+  /**
+   * @name                                _initPackages
+   * @namespace                           terminal.coffeebuilder.node.classes.CoffeeBuilderPrivateApi
+   * @type                                Function
+   * 
+   * Init the packages instances
+   * 
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _initPackages() {
+    // loop on the packages pathes registered in the config
+    if (this._packagesCache) return this._packagesCache;
+    this._packagesCache = {}
+    CoffeeBuilder.config.base.packages.forEach(p => {
+      const packageInstance = new __CoffeeBuilderPackage(p);
+      this._packagesCache[packageInstance.name] = packageInstance;
+    });
+    this.setCurrentPackageByName(this._packagesCache[Object.keys(this._packagesCache)[0]].name);
+    CoffeeBuilder.ui.draw();
+    return this._packagesCache;
+  }
+
+  /**
+   * @name                                _listenPackagesUpdated
+   * @namespace                           terminal.coffeebuilder.node.classes.CoffeeBuilderPrivateApi
+   * @type                                Function
+   * @private
+   * 
+   * Listen for the "packageUpdated" event on the CoffeeBuilderEvents instance and run the build automatically
+   * 
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _listenPackagesUpdated() {
+    CoffeeBuilder.events.on('packageUpdated', (p) => {
+      this.setCurrentPackageByName(p.name);
+      CoffeeBuilder.api.run();
+      if (CoffeeBuilder.config.get('autoSwitch')) {
+        CoffeeBuilder.ui.changeLocation('build');
+      }
+    });
+  }
+
+  _listenCompilationErrors() {
+    CoffeeBuilder.events.on('compilationFailed', (e) => {
+      console.log('COMPilation failed', e);
+    });
+  }
+
+  /**
+   * @name                                getPackages
+   * @namespace                           terminal.coffeebuilder.node.classes.CoffeeBuilderPrivateApi
+   * @type                                Function
+   * 
+   * Return an object of all the packages found in the current CoffeeBuilder process
+   * The object is formated like so:
+   * {
+   *    "packageName": "packageInstance {CoffeeBuilderPackage}"
+   * }
+   * 
+   * @return          {Object}                  An object of founded packages in the current process
+   * 
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  getPackages() {
+    if (!this._packagesCache) this._initPackages();
+    return this._packagesCache;
+  }
+
+  /**
+   * @name                                getPackage
+   * @namespace                           terminal.coffeebuilder.node.classes.CoffeeBuilderPrivateApi
+   * @type                                Function
+   * 
+   * Return the CoffeeBuilderPackage instance of the passed package name
+   * 
+   * @param           {String}                packageName         The package name wanted
+   * @return          {CoffeeBuilderPackage}                  The CoffeeBuilderPackage instance of the required package
+   * 
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  getPackage(packageName) {
+    const packages = this.getPackages();
+    return packages[packageName];
   }
 
   /**

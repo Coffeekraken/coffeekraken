@@ -87,21 +87,10 @@ class CoffeeBuilderApi {
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  run(packagesNames = null, compile = null) {
+  run() {
     return new Promise((resolve, reject) => {
-
       // update the isRunning status
       this._isRunning = true;
-
-      if (packagesNames === null) {
-        packagesNames = [this.getCurrentPackageName()];
-      } else if (typeof packagesNames === 'string') {
-        packagesNames = [packagesNames];
-      }
-
-      // save the resources types to run
-      if (compile) this._runCompile = compile;
-      else this._runCompile = CoffeeBuilder.config.current.compile;
 
       // reset the build stats
       CoffeeBuilder.stats.reset();
@@ -121,22 +110,23 @@ class CoffeeBuilderApi {
         // change the location to "build"
         CoffeeBuilder.ui.changeLocation('build');
 
-        // execute all the wanted packages
-        for (let i = 0; i < packagesNames.length; i++) {
-
-          // update the stats currentPackage value
-          CoffeeBuilder.api.setCurrentPackageByName(packagesNames[i]);
-
-          // run the current package
-          await CoffeeBuilder.webpack.run(packagesNames[i], compile);
-
-        }
+        // run the current package
+        await CoffeeBuilder.webpack.run();
 
         // save the endTimestamp
         CoffeeBuilder.stats.set('build.endTimestamp', Date.now());
 
         // change the location to "stats"
-        CoffeeBuilder.ui.changeLocation('stats');
+        if (CoffeeBuilder.stats.get('errors').length) {
+          setTimeout(() => {
+            CoffeeBuilder.ui.changeLocation('buildErrors', {
+              errors: CoffeeBuilder.stats.get('errors')
+            });
+          });
+
+        } else {
+          CoffeeBuilder.ui.changeLocation('stats');
+        }
 
         // run the plugins at the "after" moment
         CoffeeBuilder._api._runPlugins('after');
@@ -176,6 +166,56 @@ class CoffeeBuilderApi {
   }
 
   /**
+   * @name                                getCurrentPackage
+   * @namespace                           terminal.coffeebuilder.node.classes.CoffeeBuilderApi
+   * @type                                Function
+   * 
+   * Return the current package instance
+   * 
+   * @return      {CoffeeBuilderPackage}            The package instance
+   * 
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  getCurrentPackage() {
+    return CoffeeBuilder._api.getCurrentPackage();
+  }
+
+  /**
+   * @name                                getPackages
+   * @namespace                           terminal.coffeebuilder.node.classes.CoffeeBuilderApi
+   * @type                                Function
+   * 
+   * Return an object of all the packages found in the current CoffeeBuilder process
+   * The object is formated like so:
+   * {
+   *    "packageName": "packageInstance {CoffeeBuilderPackage}"
+   * }
+   * 
+   * @return          {Object}                  An object of founded packages in the current process
+   * 
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  getPackages() {
+    return CoffeeBuilder._api.getPackages();
+  }
+
+  /**
+   * @name                                getPackage
+   * @namespace                           terminal.coffeebuilder.node.classes.CoffeeBuilderApi
+   * @type                                Function
+   * 
+   * Return the CoffeeBuilderPackage instance of the passed package name
+   * 
+   * @param           {String}                packageName         The package name wanted
+   * @return          {CoffeeBuilderPackage}                  The CoffeeBuilderPackage instance of the required package
+   * 
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  getPackage(packageName) {
+    return CoffeeBuilder._api.getPackage(packageName);
+  }
+
+  /**
    * @name                addWebpackEntry
    * @namespace           terminal.coffeebuilder.node.classes.CoffeeBuilderApi
    * @type                Function
@@ -207,7 +247,7 @@ class CoffeeBuilderApi {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   getPackages() {
-    return CoffeeBuilder.config.base.packages;
+    return CoffeeBuilder._api.getPackages();
   }
 
   /**

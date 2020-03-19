@@ -1,7 +1,7 @@
 const __deepMergeErase = require('@coffeekraken/sugar/node/object/deepMergeErase');
 
 module.exports = {
-  compile: ['js'],
+  compile: ['js', 'images'],
   watch: true,
   resources: __deepMergeErase({
     js: {
@@ -10,6 +10,12 @@ module.exports = {
       sourcesFolders: ['src'],
       sources: '**/*.{js,coffee,ts}',
       saveExtension: 'js'
+    },
+    images: {
+      extensions: ['png'],
+      outputFolders: ['imagesBuilded'],
+      sourcesFolders: ['images'],
+      sources: '*.png'
     }
   })
 };

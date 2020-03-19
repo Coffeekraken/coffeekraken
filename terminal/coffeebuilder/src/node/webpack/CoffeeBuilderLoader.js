@@ -1,5 +1,3 @@
-if (process.env.NODE_ENV != 'production') require('module-alias/register');
-
 const __processFile = require('../utils/processFile');
 const __CoffeeBuilderResource = require('../classes/CoffeeBuilderResource');
 const __globToRegExp = require('glob-to-regexp');
@@ -25,7 +23,7 @@ module.exports = function coffeeLoader(source) {
     resource = CoffeeBuilder.stats.get(`resources.${this.resource}`);
   }
 
-  __processFile(resource, this).then((src) => {
+  __processFile(resource).then((src) => {
     _callback(null, src);
   });
 

@@ -1,9 +1,7 @@
-if (process.env.NODE_ENV != 'production') require('module-alias/register');
-
 const __sortObj = require('@coffeekraken/sugar/js/object/sort');
 const __filterObj = require('@coffeekraken/sugar/js/object/filter');
 
-module.exports = function processFile(resource, loaderInstance = null) {
+module.exports = function processFile(resource) {
 
   return new Promise(async (resolve, reject) => {
 
@@ -20,10 +18,19 @@ module.exports = function processFile(resource, loaderInstance = null) {
       const processorObj = processorsSortedAndFilteredObj[processorsKeys[i]];
 
       if (!resource.isFromCache() || !processorObj.cache) {
-        const result = await processorObj.processor(resource, resource.data, processorObj.settings, CoffeeBuilder.api);
-        resource.data = result.source || result;
-        resource.map = result.map || null;
-        if (result.extension) resource.saveExtension = result.extension;
+        try {
+          const result = await processorObj.processor(resource, resource.data, processorObj.settings, CoffeeBuilder.api);
+          resource.data = result.source || result;
+          resource.map = result.map || null;
+          if (result.extension) resource.saveExtension = result.extension;
+        } catch (e) {
+          CoffeeBuilder.stats.get('errors').push({
+            package: CoffeeBuilder.api.getCurrentPackage(),
+            resource,
+            error: e
+          });
+          // throw new Error();
+        }
       } else {
         CoffeeBuilder.events.emit('fromCache', {
           resource: resource
@@ -44,7 +51,7 @@ module.exports = function processFile(resource, loaderInstance = null) {
 
     // save the file
     if (processorsKeys.length) {
-      resource.save(loaderInstance);
+      resource.save();
     }
 
     // resolve

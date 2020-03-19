@@ -5,7 +5,8 @@ module.exports = class CoffeeBuilderPlugin {
   }
 
   apply(compiler) {
-    compiler.hooks.failed.tap('CoffeeBuilderPlugin', async () => {
+    compiler.hooks.failed.tap('CoffeeBuilderPlugin', async (e) => {
+      CoffeeBuilder.events.emit('compilationFailed', e);
       CoffeeBuilder._api._runPlugins('failed');
     });
   }

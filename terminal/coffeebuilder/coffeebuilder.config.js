@@ -64,20 +64,38 @@ const defaultConfig = {
   /**
    * @name                          packages
    * @namespace                     terminal.coffeebuilder.config
-   * @type                          Object
+   * @type                          Array
    * 
-   * Specify all the packages that have to be used in the CoffeeBuilder process.
-   * A package is by definition a folder with a "package.json" file and optionaly a "coffeebuilder.config.js" file.
-   * This package config has to be an Object formated like so:
-   * {
-   *    "packageName": "/absolute/path/to/the/package"
-   * }
-   * If no packages are specified, CoffeeBuilder will try to find them for you by checking all the folders that
-   * have a "package.json" file or a "coffeebuilder.config.js" file...
+   * Register all the packages that will be used during the CoffeeBuilder process.
+   * A package has to responde to the criterions of at least one packagesAdapters registered.
+   * A package adapter is a simple class that will analyze the passed package path and expose
+   * some informations from this package as the name, the version and the description.
+   * 
+   * If you don't specify any packages yourself, CoffeeBuilder will search for them in the sub folders
+   * of the current process root one.
    * 
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  packages: {},
+  packages: [],
+
+  /**
+   * @name                              packagesAdapters
+   * @namespace                         terminal.coffeebuilder.config
+   * @type                              Array
+   * 
+   * Specify all the packages adapters to use. A package adapter has to be a simple object that has to expose these functions:
+   * - static searchGlob = 'package.json': Has to be a glob pattern that tells CoffeeBuilder how to find this package type
+   * - static isPackage(path): Has to return true or false depending if the passed package path match the adapter criterions
+   * - get name: Has to return the package name
+   * - get description: Has to return the package description
+   * - get version: Has to return the package version
+   * 
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  packagesAdapters: [
+    require('./src/node/classes/packagesAdapters/NodePackageAdapter'),
+    require('./src/node/classes/packagesAdapters/ComposerPackageAdapter')
+  ],
 
   /**
    * @name                          resources
@@ -641,8 +659,8 @@ if (__fs.existsSync(`${process.cwd()}/coffeebuilder.config`)) {
   settings = __deepMerge(settings, require(`${process.cwd()}/coffeebuilder.config`));
 }
 
-const coffeeBuilderPluginInstance = new __CoffeeBuilderPlugin(settings);
-settings.vendors.webpack.plugins.push(coffeeBuilderPluginInstance);
+// const coffeeBuilderPluginInstance = new __CoffeeBuilderPlugin(settings);
+// settings.vendors.webpack.plugins.push(coffeeBuilderPluginInstance);
 
 module.exports = settings;
 module.exports.setup = function (newSettings) {

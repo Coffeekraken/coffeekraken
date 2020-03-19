@@ -1,6 +1,7 @@
 const __tmpDir = require('@coffeekraken/sugar/node/fs/tmpDir');
 const __fs = require('fs');
 const __getExtension = require('@coffeekraken/sugar/js/string/getExtension');
+const __base64 = require('@coffeekraken/sugar/node/crypt/base64');
 
 /**
  * @name                                injectScript
@@ -19,9 +20,9 @@ module.exports = {
       const injectScriptFilePath = `${__tmpDir()}/coffeeBuilderInjectScript.default.js`;
       let defaultInjected = __fs.existsSync(injectScriptFilePath) ? false : true;
 
-      Object.keys(stats.get('savedResources')).forEach(resourcePath => {
-        const resource = stats.get(`savedResources.${resourcePath}`);
-        console.log('res', resource);
+      Object.keys(stats.get('savedResources')).forEach(resourceId => {
+        const resource = stats.get(`savedResources.${resourceId}`);
+
         resource.outputFilePathes.forEach(path => {
 
           // ensure we work with a js file

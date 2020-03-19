@@ -200,6 +200,90 @@ module.exports = class CoffeeBuilderResource {
   }
 
   /**
+   * @name                  package
+   * @namespace             terminal.coffeebuilder.node.classes.CoffeeBuilderResource
+   * @type                  CoffeeBuilderPackage
+   * 
+   * Get the CoffeeBuilderPackage in which lives this resource
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get package() {
+    if (this._packageCache) return this._packageCache;
+    // read the "package.json" in the package folder
+    if (!__fs.existsSync(`${process.cwd()}/${this.packagePath}/package.json`)) {
+      throw new Error(`The resource "${this.filepath}" try to access his package information in the folder "${process.cwd()}/${this.packagePath}" but no "package.json" have been found here...`);
+    }
+    const pkgJson = require(`${process.cwd()}/${this.packagePath}/package.json`);
+    this._packageCache = CoffeeBuilder.api.getPackage(pkgJson.name);
+    return this._packageCache;
+  }
+
+  /**
+   * @name                  id
+   * @namespace             terminal.coffeebuilder.node.classes.CoffeeBuilderResource
+   * @type                  String
+   * 
+   * Get this resource id build from the "filepath" property encrypted in base64
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get id() {
+    if (this._idCache) return this._idCache;
+    this._idCache = __base64.encrypt(this.filepath);
+    return this._idCache;
+  }
+
+  /**
+   * @name                  packagePath
+   * @namespace             terminal.coffeebuilder.node.classes.CoffeeBuilderResource
+   * @type                  String
+   * 
+   * Get the package path in which live this resource
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get packagePath() {
+
+    if (this._packagePathCache) return this._packagePathCache;
+
+    let packagePath = this.filepath.replace(process.cwd(), '');
+
+    let buildScopes = {};
+    Object.keys(CoffeeBuilder.config.current.resources).forEach((key, i) => {
+      const opts = CoffeeBuilder.config.current.resources[key];
+
+      if (opts.extensions && opts.extensions.indexOf(this.extension) !== -1) {
+        buildScopes[key] = opts;
+      } else return;
+
+      Object.keys(buildScopes).forEach((scopeKey) => {
+
+        const scope = buildScopes[scopeKey];
+        let sourcesFolder = scope.sourcesFolders;
+
+        sourcesFolder.forEach(sf => {
+
+          let pkgPathParts = packagePath.split('/');
+          const idx = pkgPathParts.indexOf(sf);
+          if (idx !== -1) {
+            pkgPathParts = pkgPathParts.slice(0, idx);
+          }
+          pkgPathParts = pkgPathParts.filter(p => p !== '');
+          packagePath = pkgPathParts.join('/');
+
+        });
+
+      });
+
+    });
+
+    this._packagePathCache = packagePath;
+
+    return packagePath;
+  }
+
+  /**
    * @name                  outputFilePathes
    * @namespace             terminal.coffeebuilder.node.classes.CoffeeBuilderResource
    * @type                  Array
@@ -212,6 +296,8 @@ module.exports = class CoffeeBuilderResource {
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   get outputFilePathes() {
+
+    if (this._outputFilePathesCache) return this._outputFilePathesCache;
 
     const results = [];
 
@@ -241,8 +327,9 @@ module.exports = class CoffeeBuilderResource {
           sourcesFolder.forEach((sourcesFolderPath) => {
             outputFilePath = outputFilePath.trim();
             outputFilePath = outputFilePath.replace(process.cwd(), '');
-            outputFilePath = outputFilePath.replace(sourcesFolderPath, '');
-            outputFilePath = outputFilePath.replace(outputFolderPath, '');
+            outputFilePath = outputFilePath.replace(sourcesFolderPath + '/', '/');
+            outputFilePath = outputFilePath.replace(outputFolderPath + '/', '/');
+            outputFilePath = outputFilePath.replace(this.packagePath, '');
             if (outputFilePath.slice(0, 2) === '//') outputFilePath = outputFilePath.slice(2);
             if (outputFilePath.slice(0, 1) === '/') outputFilePath = outputFilePath.slice(1);
             outputFilePath = outputFilePath.replace(`.${this.extension}`, `.${this.saveExtension}`);
@@ -250,14 +337,16 @@ module.exports = class CoffeeBuilderResource {
 
           if (`${outputFolderPath}/${outputFilePath}`.includes(__tmpDir())) return;
 
+          const outpath = `${outputFolderPath}/${outputFilePath}`.split('//').join('/');
+
           // append the output file path to the results
-          results.push(`${outputFolderPath}/${outputFilePath}`);
+          results.push(outpath);
 
         });
       });
     });
 
-    console.log(results);
+    this._outputFilePathesCache = results;
 
     // return the output file paths
     return results;
@@ -510,11 +599,10 @@ module.exports = class CoffeeBuilderResource {
    *
    * Save the passed file depending on the differents scopes and output folders setted in the config
    *
-   * @param           {WebpackLoader}             [loaderInstance=null]               The webpack loader instance to use to save the file
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  save(loaderInstance = null) {
+  save() {
 
     // cache the file
     this.saveCache();
@@ -523,13 +611,17 @@ module.exports = class CoffeeBuilderResource {
 
     if (!this.filepath.includes(__tmpDir())) CoffeeBuilder.events.emit('savedResource', this);
 
-    if (this.saveExtension === 'js' && loaderInstance) {
+    if (this.saveExtension === 'js') {
       return true;
     }
 
     // loop on all the output file pathes
     this.outputFilePathes.forEach((output) => {
-      __writeFileSync(process.cwd() + '/' + output, this.data);
+      let outputPath = process.cwd() + '/' + output;
+      if (this.packagePath) {
+        outputPath = process.cwd() + '/' + this.packagePath + '/' + output;
+      }
+      __writeFileSync(outputPath, this.data);
     });
 
     return true;

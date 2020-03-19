@@ -2,6 +2,7 @@ const __tmpDir = require('@coffeekraken/sugar/node/fs/tmpDir');
 const __filterObj = require('@coffeekraken/sugar/js/object/filter');
 const __set = require('@coffeekraken/sugar/js/object/set');
 const __get = require('@coffeekraken/sugar/js/object/get');
+const __base64 = require('@coffeekraken/sugar/node/crypt/base64');
 
 class CoffeeBuilderStats {
 
@@ -59,6 +60,7 @@ class CoffeeBuilderStats {
         cache: {
           resources: {}
         },
+        errors: [],
         build: {
           startTimestamp: null,
           endTimestamp: null,
@@ -152,25 +154,25 @@ class CoffeeBuilderStats {
   _listenEvents() {
 
     CoffeeBuilder.events.on('resource', (resource) => {
-      if (!this.getValue(`resources.${resource.filepath}`)) {
-        this.setValue(`resources.${resource.filepath}`, resource);
+      if (!this.get(`resources.${resource.id}`)) {
+        this.set(`resources.${resource.id}`, resource);
       }
     });
 
     CoffeeBuilder.events.on('entryPathes', (path) => {
-      if (this.getValue('entryPathes').indexOf(path) === -1) {
+      if (this.get('entryPathes').indexOf(path) === -1) {
         this._stats.statsByPackages[CoffeeBuilder.api.getCurrentPackageName()].entryPathes.push(path);
       }
     });
 
     CoffeeBuilder.events.on('savedResource', (resource) => {
-      if (!this.getValue(`savedResources.${resource.filepath}`)) {
-        this.setValue(`savedResources.${resource.filepath}`, resource);
+      if (!this.get(`savedResources.${resource.id}`)) {
+        this.set(`savedResources.${resource.id}`, resource);
       }
     });
 
     CoffeeBuilder.events.on('fromCache', (data) => {
-      this.setValue(`cache.resources.${data.resource.filepath}`, data.resource);
+      this.set(`cache.resources.${data.resource.id}`, data.resource);
     });
 
     CoffeeBuilder.events.on('build', (data) => {
@@ -178,29 +180,29 @@ class CoffeeBuilderStats {
       const resource = data.resource;
       const processorName = data.processor || data.processorName;
 
-      this.setValue(`build.processedResources.${resource.filepath}`, resource);
+      this.set(`build.processedResources.${resource.id}`, resource);
 
-      this.setValue(`build.currentResourcePath`, resource.filepath);
+      this.set(`build.currentResourcePath`, resource.id);
 
-      if (processorName) this.setValue('build.currentProcessor', processorName);
+      if (processorName) this.set('build.currentProcessor', processorName);
 
-      if (processorName && !this.getValue(`build.processors.${processorName}`)) {
-        this.setValue(`build.processors.${processorName}`, {
+      if (processorName && !this.get(`build.processors.${processorName}`)) {
+        this.set(`build.processors.${processorName}`, {
           processedResources: {}
         });
       }
 
       if (processorName && !resource.filepath.includes(__tmpDir())) {
-        if (!this.getValue(`build.processors.${processorName}.processedResources.${resource.filepath}`)) {
-          this.setValue(`build.processors.${processorName}.processedResources.${resource.filepath}`, resource);
+        if (!this.get(`build.processors.${processorName}.processedResources.${resource.id}`)) {
+          this.set(`build.processors.${processorName}.processedResources.${resource.id}`, resource);
         }
       }
 
-      const filteredObj = __filterObj(this.getValue('build.processedResources'), (f) => {
-        return this.getValue('entryPathes').indexOf(f.filepath) !== -1;
+      const filteredObj = __filterObj(this.get('build.processedResources'), (f) => {
+        return this.get('entryPathes').indexOf(f.filepath) !== -1;
       });
 
-      this.setValue(`build.percentage`, Math.round(100 / this.getValue('entryPathes').length * Object.keys(filteredObj).length))
+      this.set(`build.percentage`, Math.round(100 / this.get('entryPathes').length * Object.keys(filteredObj).length))
     });
 
     CoffeeBuilder.events.on('postBuild', (data) => {
@@ -208,29 +210,29 @@ class CoffeeBuilderStats {
       const resource = data.resource;
       const processorName = data.processor || data.processorName;
 
-      this.setValue(`postBuild.processedResources.${resource.filepath}`, resource);
+      this.set(`postBuild.processedResources.${resource.id}`, resource);
 
-      this.setValue(`postBuild.currentResourcePath`, resource.filepath);
+      this.set(`postBuild.currentResourcePath`, resource.id);
 
-      if (processorName) this.setValue('postBuild.currentProcessor', processorName);
+      if (processorName) this.set('postBuild.currentProcessor', processorName);
 
-      if (processorName && !getValue(`postBuild.processors.${processorName}`)) {
-        this.setValue(`postBuild.processors.${processorName}`, {
+      if (processorName && !this.get(`postBuild.processors.${processorName}`)) {
+        this.set(`postBuild.processors.${processorName}`, {
           processedResources: {}
         });
       }
 
       if (processorName && !resource.filepath.includes(__tmpDir())) {
-        if (!this.getValue(`postBuild.processors.${processorName}.processedResources.${resource.filepath}`)) {
-          this.setValue(`postBuild.processors.${processorName}.processedResources.${resource.filepath}`, resource);
+        if (!this.get(`postBuild.processors.${processorName}.processedResources.${resource.id}`)) {
+          this.set(`postBuild.processors.${processorName}.processedResources.${resource.id}`, resource);
         }
       }
 
-      const filteredObj = __filterObj(this.getValue('postBuild.processedResources'), (f) => {
-        return this.getValue('entryPathes').indexOf(f.filepath) !== -1;
+      const filteredObj = __filterObj(this.get('postBuild.processedResources'), (f) => {
+        return this.get('entryPathes').indexOf(f.filepath) !== -1;
       });
 
-      this.setValue(`postBuild.percentage`, Math.round(100 / this.getValue('entryPathes').length * Object.keys(filteredObj).length))
+      this.set(`postBuild.percentage`, Math.round(100 / this.get('entryPathes').length * Object.keys(filteredObj).length))
 
     });
 

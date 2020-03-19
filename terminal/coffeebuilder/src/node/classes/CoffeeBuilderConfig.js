@@ -1,11 +1,13 @@
 const __deepMerge = require('@coffeekraken/sugar/node/object/deepMerge');
+const __get = require('@coffeekraken/sugar/node/object/get');
+const __set = require('@coffeekraken/sugar/node/object/set');
 const __fs = require('fs');
 const __path = require('path');
 const __glob = require('glob');
 
 /**
  * @name                            CoffeeBuilderConfig
- * @namespace                       terminal.coffeebuilder.node
+ * @namespace                       terminal.coffeebuilder.node.classes
  * @type                            Class
  * 
  * Expose some methods to interact with the coffeebuilder configuration
@@ -62,13 +64,10 @@ class CoffeeBuilderConfig {
    */
   constructor() {
 
-    // load the configs
-    this._loadConfigs();
-
   }
 
   /**
-   * @aname                               _loadConfigs
+   * @aname                               load
    * @namespace                           terminal.coffeebuilder.node.classes.CoffeeBuilderConfig
    * @type                                Function
    * 
@@ -76,79 +75,74 @@ class CoffeeBuilderConfig {
    * 
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _loadConfigs() {
+  load() {
+    return new Promise((resolve, reject) => {
 
-    const defaultConfig = require(__path.resolve(__dirname, '../../../coffeebuilder.config'));
-    let baseConfig = {};
+      const defaultConfig = require(__path.resolve(__dirname, '../../../coffeebuilder.config'));
+      let baseConfig = {};
 
-    this.__defaultConfig = Object.assign({}, defaultConfig);
+      this.__defaultConfig = Object.assign({}, defaultConfig);
 
-    if (__fs.existsSync(__path.resolve(process.cwd(), 'coffeebuilder.config.js'))) {
-      baseConfig = require(__path.resolve(process.cwd(), 'coffeebuilder.config.js'));
-    }
-
-    this._baseConfig = Object.assign({}, __deepMerge(defaultConfig, baseConfig));
-
-    if (!this._baseConfig.packages || Object.keys(this._baseConfig.packages).length === 0) {
-      // find the packages
-      let packagesObj = this._searchPackages();
-
-      // check if theirs a package.json at the process root folder
-      if (__fs.existsSync(__path.resolve(process.cwd(), 'package.json'))) {
-        const packageJson = require(__path.resolve(process.cwd(), 'package.json'));
-        const obj = {};
-        obj[packageJson.name] = process.cwd();
-        packagesObj = Object.assign(obj, packagesObj);
+      if (__fs.existsSync(__path.resolve(process.cwd(), 'coffeebuilder.config.js'))) {
+        baseConfig = require(__path.resolve(process.cwd(), 'coffeebuilder.config.js'));
       }
 
-      this._baseConfig.packages = packagesObj;
-    }
+      this._baseConfig = Object.assign({}, __deepMerge(defaultConfig, baseConfig));
 
-    // init the config object
-    this._currentConfig = Object.assign({}, this._baseConfig);
+      // init the config object
+      this._currentConfig = Object.assign({}, this._baseConfig);
 
-    // set the current package if possible
-    let _currentPackage;
-    if (Object.keys(this._baseConfig.packages).length > 0 && !_currentPackage) {
-      const firstPackageName = Object.keys(this._baseConfig.packages)[0];
-      setTimeout(() => {
-        CoffeeBuilder.api.setCurrentPackageByName(firstPackageName);
-        CoffeeBuilder.ui.draw();
-      });
-    }
+      resolve();
 
+    });
   }
 
   /**
-   * @name                                _searchPackages
-   * @namespace                           terminal.coffeebuilder.node.classes.CoffeeBuilderPrivateApi
-   * @type                                Function
-   * @private
+   * @name                                get
+   * @namespace                           terminal.coffeebuilder.node.classes.CoffeeBuilderConfig
+   * @type                                Boolean
    * 
-   * Search for the packages inside sub folders
+   * This will return the current requested config but if the user has made a change manually to the requested
+   * config, it will be his value that will be returned
+   * 
+   * @param           {String}                  path                  The config path to get like "autoSwitch" or "something.cool"
+   * @param           {Boolean}                 [userProxy=true]      Tell if we want to check first in the user proxied values or not
+   * @return          {Mixed}                                         Either the current config or the user setted one
    * 
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _searchPackages() {
-    // search for all the packages
-    let packages = __glob.sync('**/*(package.json|coffeebuilder.config.js)', {
-      ignore: '**/node_modules/**'
-    }).map(p => {
-      return p.replace('/package.json', '').replace('/coffeebuilder.config.js', '');
-    });
-    packages = [...new Set(packages)];
-    const packagesObj = {};
-    packages.forEach(p => {
-      if (__fs.existsSync(__path.resolve(process.cwd(), p, 'package.json'))) {
-        const packageJson = require(__path.resolve(process.cwd(), p, 'package.json'));
-        packagesObj[packageJson.name] = p;
-      }
-    });
-    return packagesObj;
+  get(path, userProxy = true) {
+    if (userProxy) {
+      if (!this._userProxiedConfig) this._userProxiedConfig = {};
+      const userValue = __get(this._userProxiedConfig, path);
+      if (userValue !== undefined) return userValue;
+    }
+    return __get(this._currentConfig, path);
   }
 
   /**
    * @name                                set
+   * @namespace                           terminal.coffeebuilder.node.classes.CoffeeBuilderConfig
+   * @type                                Boolean
+   * 
+   * This will set a user defined config and save it to be able to return it when the "get" method is called
+   * 
+   * @param           {String}                  path                  The config path to get like "autoSwitch" or "something.cool"
+   * @param           {Mixed}                   value                 The config value to set
+   * @param           {Boolean}                 [userProxy=false]     Tell if the value setted has to be savec as a user proxied value
+   * 
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  set(path, value, userProxy = false) {
+    __set(this._currentConfig, path, value);
+    if (userProxy) {
+      if (!this._userProxiedConfig) this._userProxiedConfig = {};
+      __set(this._userProxiedConfig, path, value);
+    }
+  }
+
+  /**
+   * @name                                setup
    * @namespace                           terminal.coffeebuilder.node.classes.CoffeeBuilderConfig
    * @type                                Function
    * 
@@ -158,7 +152,7 @@ class CoffeeBuilderConfig {
    * 
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  set(config) {
+  setup(config) {
     this._baseConfig = Object.assign({}, __deepMerge(this._baseConfig, config));
   }
 

@@ -21,7 +21,7 @@ module.exports = {
 
         const resource = stats.get(`savedResources.${assetsKeys[i]}`);
 
-        let processorsSortedAndFilteredObj = __sortObj(config.current.postProcessors, (a, b) => {
+        let processorsSortedAndFilteredObj = __sortObj(CoffeeBuilder.config.current.postProcessors, (a, b) => {
           return b.weight - a.weight;
         });
         processorsSortedAndFilteredObj = __filterObj(processorsSortedAndFilteredObj, (item) => {
@@ -36,11 +36,18 @@ module.exports = {
 
             const processorObj = processorsSortedAndFilteredObj[processorsKeys[j]];
 
-            const result = await processorObj.processor(resource, resource.data, processorObj.settings, api);
-
-            resource.data = result.source || result;
-            resource.map = result.map || null;
-            if (result.extension) resource.saveExtension = result.extension;
+            try {
+              const result = await processorObj.processor(resource, resource.data, processorObj.settings, api);
+              resource.data = result.source || result;
+              resource.map = result.map || null;
+              if (result.extension) resource.saveExtension = result.extension;
+            } catch (e) {
+              CoffeeBuilder.stats.get('errors').push({
+                package: CoffeeBuilder.api.getCurrentPackage(),
+                resource,
+                error: e
+              });
+            }
 
             CoffeeBuilder.events.emit('postBuild', {
               resource: resource,

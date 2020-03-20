@@ -1,5 +1,5 @@
 const __parseHtml = require('../../terminal/parseHtml');
-const __breakLineDependingOnSidesPadding = require('../../terminal/breakLineDependingOnSidesPadding');
+const __breakLine = require('../../terminal/breakLine');
 const __getDevEnv = require('../../dev/getDevEnv');
 const __readline = require('readline');
 
@@ -37,7 +37,7 @@ module.exports = (message, type, settings = {}) => {
       silly: '★',
       success: '✔'
     };
-    const symbol = symbols[type] || '-';
+    const symbol = symbols[type] || '-';
 
     // message = `${symbol}  ${message}`;
 
@@ -45,25 +45,25 @@ module.exports = (message, type, settings = {}) => {
 
     let lines = [];
 
-    for (let i = 0; i<originalLines.length; i++) {
+    for (let i = 0; i < originalLines.length; i++) {
 
       const l = originalLines[i];
 
-      lines.push(__breakLineDependingOnSidesPadding(l, padding || 6));
+      lines.push(__breakLine(l, padding || 6));
 
     }
 
     lines = lines.map((l) => {
-      if (l.slice(0,padding) !== ' '.repeat(padding)) return ' '.repeat(padding) + l;
+      if (l.slice(0, padding) !== ' '.repeat(padding)) return ' '.repeat(padding) + l;
       return l;
     });
 
     lines = lines.join('\n');
 
-    if (settings.override) {
+    if (settings.override) {
       if (_lastLog) {
         const linesCount = _lastLog.split('\n').length;
-        for (let i=0; i<linesCount; i++) {
+        for (let i = 0; i < linesCount; i++) {
           __readline.clearLine(process.stdout, 0);
           __readline.moveCursor(process.stdout, 0, -1);
         }

@@ -659,8 +659,8 @@ if (__fs.existsSync(`${process.cwd()}/coffeebuilder.config`)) {
   settings = __deepMerge(settings, require(`${process.cwd()}/coffeebuilder.config`));
 }
 
-// const coffeeBuilderPluginInstance = new __CoffeeBuilderPlugin(settings);
-// settings.vendors.webpack.plugins.push(coffeeBuilderPluginInstance);
+const coffeeBuilderPluginInstance = new __CoffeeBuilderPlugin(settings);
+settings.vendors.webpack.plugins.push(coffeeBuilderPluginInstance);
 
 module.exports = settings;
 module.exports.setup = function (newSettings) {

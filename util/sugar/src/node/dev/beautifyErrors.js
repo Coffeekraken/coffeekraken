@@ -1,5 +1,4 @@
 const __log = require('../log/log');
-const __breakLineDependingOnSidesPadding = require('../terminal/breakLineDependingOnSidesPadding');
 const __parseError = require('./parseError');
 
 /**
@@ -27,7 +26,7 @@ module.exports = function beautifyErrors() {
       const error = __parseError(err);
 
       const substract = 12;
-      const columns = (process.env.STDOUT_COLUMNS || process.stdout.columns) - substract;
+      const columns = (process.env.STDOUT_COLUMNS || process.stdout.columns) - substract;
 
       let finalStack = error.stack.filter((line) => {
         if (line.filename.includes('checkArgs.js')) return false;

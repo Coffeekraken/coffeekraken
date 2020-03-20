@@ -1,5 +1,7 @@
 const __splitLineEvery = require('./splitLineEvery');
 const __countLine = require('./countLine');
+const __deepMerge = require('../object/deepMerge');
+const __replaceTags = require('../html/replaceTags');
 
 /**
  * @name                                          columns
@@ -7,9 +9,14 @@ const __countLine = require('./countLine');
  * @type                                          Function
  *
  * Display your content using columns. The number of columns is defined by the number of items in the content array
- *
+ * 
+ * @param:settings
+ * - width (process.env.STDOUT_COLUMNS || process.stdout.columns) {Number}: The base width on which to calculate the columns
+ * - padding (process.env.STDOUT_PADDING || 3) {Number}: The padding to apply on the sides
+ * - cropLines (false) {String|Boolean}: Specify if you want the lines that are to long to stay in one line to be cropped. "true" will use the characters "..." as cropping signal, otherwise you can pass any characters you want here to be used as cropped signal...
+ * 
  * @param                 {Array}                       content                     The columns content stored in an Array
- * @param                 {Number}                      [padding=3]                 The padding to apply on the sides
+ * @param                 {Object}                      [settings={}]               An object of settings descripbed above
  * @return                {String}                                                  The string to log in the terminal
  *
  * @example               js
@@ -21,10 +28,15 @@ const __countLine = require('./countLine');
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function columns(content, padding = process.env.STDOUT_PADDING || 3) {
+module.exports = function columns(content, settings = {}) {
 
-  const columns = process.env.STDOUT_COLUMNS || process.stdout.columns;
-  const maxWidth = columns - padding * 2;
+  settings = __deepMerge({
+    width: process.env.STDOUT_COLUMNS || process.stdout.columns,
+    padding: process.env.STDOUT_PADDING || 3,
+    cropLines: false
+  }, settings);
+
+  const maxWidth = settings.width - settings.padding * 2;
 
   const maxColumnWidth = Math.round(maxWidth / content.length);
 
@@ -33,49 +45,69 @@ module.exports = function columns(content, padding = process.env.STDOUT_PADDING 
 
   content.forEach((c, i) => {
 
-    splitedContent['column_' + i] = __splitLineEvery(c, maxColumnWidth - padding);
+    const columnsPadding = i === 0 ? settings.padding : i === content.length - 1 ? settings.padding : settings.padding * 2;
+
+    if (settings.cropLines !== false) {
+      c = __replaceTags(c, {
+        cropable: (tag, content) => {
+          return 'coco';
+        }
+      });
+    }
+
+    let lines = __splitLineEvery(c, maxColumnWidth - columnsPadding);
+
+    splitedContent['column_' + i] = {
+      lines: lines,
+      padding: columnsPadding
+    };
 
   });
 
   let biggestColumnHeight = 0;
   Object.keys(splitedContent).forEach((columnName) => {
-    if (splitedContent[columnName].length > biggestColumnHeight) {
-      biggestColumnHeight = splitedContent[columnName].length;
+    if (splitedContent[columnName].lines.length > biggestColumnHeight) {
+      biggestColumnHeight = splitedContent[columnName].lines.length;
     }
   });
 
-  for (let i=0; i<biggestColumnHeight; i++) {
+  for (let i = 0; i < biggestColumnHeight; i++) {
 
     let currentLine = '';
 
     Object.keys(splitedContent).forEach((columnName, j) => {
 
-      const columnContentArray = splitedContent[columnName];
-      if (i > columnContentArray.length-1) {
+      const hasColumnLeftAndRightPadding = j === 0 ? false : j === content.length - 1 ? false : true;
+      const paddingSide = j === 0 ? 'right' : j === content.length - 1 ? 'left' : null;
+      const currentColumn = splitedContent[columnName];
+      const columnLinesArray = currentColumn.lines;
+      if (i > columnLinesArray.length - 1) {
         currentLine += ' '.repeat(maxColumnWidth);
       } else {
-        const columnContentString = columnContentArray[i];
+        const columnContentString = columnLinesArray[i];
 
-        const restOfLineCount = maxColumnWidth - __countLine(columnContentString || '');
 
-        if (j > 0) {
-          currentLine += ' '.repeat(padding) + columnContentString + ' '.repeat(restOfLineCount);
+        let restOfLineCount = maxColumnWidth - __countLine(columnContentString || '') - (hasColumnLeftAndRightPadding ? settings.padding * 2 : settings.padding);
+
+        if (hasColumnLeftAndRightPadding) {
+          currentLine += ' '.repeat(settings.padding) + columnContentString + ' '.repeat(restOfLineCount) + ' '.repeat(settings.padding);
         } else {
-          currentLine += columnContentString + ' '.repeat(restOfLineCount);
+          if (paddingSide === 'left') {
+            currentLine += ' '.repeat(settings.padding) + columnContentString + ' '.repeat(restOfLineCount);
+          } else if (paddingSide === 'right') {
+            currentLine += columnContentString + ' '.repeat(restOfLineCount) + ' '.repeat(settings.padding);
+          }
         }
 
       }
 
     });
 
-    lines.push(' '.repeat(padding) + currentLine);
+    lines.push(currentLine);
     currentLine = '';
 
   }
 
   return lines.join('\n');
-
-  // console.log(lines);
-
 
 }

@@ -22,19 +22,19 @@ const __crop = require('@coffeekraken/sugar/node/string/crop');
 const __packageJson = require('../../../package.json');
 
 /**
- * @name                        CoffeeBuilderUI
- * @namespace                   terminal.coffeebuilder.node.classes
+ * @name                        UI
+ * @namespace                   terminal.coffeebuilder.node.workers
  * @type                        Class
  * 
  * Class that handle the coffeebuilder interface drawing, user inputs, etc...
  * 
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class CoffeeBuilderUI {
+class UI {
 
   /**
    * @name                              _data
-   * @namespace                         terminal.coffeebuilder.node.classes
+   * @namespace                         terminal.coffeebuilder.node.workers
    * @type                              Object
    * 
    * Store the passed datas from the main process to be able to draw the ui correctly
@@ -57,7 +57,7 @@ module.exports = class CoffeeBuilderUI {
 
   /**
    * @name                              _location
-   * @namespace                         terminal.coffeebuilder.node.classes.CoffeeBuilderUI
+   * @namespace                         terminal.coffeebuilder.node.workers.UI
    * @type                              String
    * @private
    * 
@@ -72,7 +72,7 @@ module.exports = class CoffeeBuilderUI {
 
   /**
    * @name                            _maxWidth
-   * @namespace                       terminal.coffeebuilder.node.classes.CoffeeBuilderUI
+   * @namespace                       terminal.coffeebuilder.node.workers.UI
    * @type                            Number
    * @private
    * 
@@ -84,7 +84,7 @@ module.exports = class CoffeeBuilderUI {
 
   /**
    * @name                            _padding
-   * @namespace                       terminal.coffeebuilder.node.classes.CoffeeBuilderUI
+   * @namespace                       terminal.coffeebuilder.node.workers.UI
    * @type                            Number
    * @private
    * 
@@ -97,7 +97,7 @@ module.exports = class CoffeeBuilderUI {
 
   /**
    * @name                              _watchCompile
-   * @namespace                         terminal.coffeebuilder.node.classes.CoffeeBuilderUI
+   * @namespace                         terminal.coffeebuilder.node.workers.UI
    * @type                              Array
    * @private
    * 
@@ -109,7 +109,7 @@ module.exports = class CoffeeBuilderUI {
 
   /**
    * @name                              _uiItems
-   * @namespace                         terminal.coffeebuilder.node.classes.CoffeeBuilderUI
+   * @namespace                         terminal.coffeebuilder.node.workers.UI
    * @type                              Object
    * @private
    * 
@@ -121,7 +121,7 @@ module.exports = class CoffeeBuilderUI {
 
   /**
    * @name                              _packageSelectorColumns
-   * @namespace                         terminal.coffeebuilder.node.classes.CoffeeBuilderUI
+   * @namespace                         terminal.coffeebuilder.node.workers.UI
    * @type                              Array
    * 
    * Store the package selector ui columns items
@@ -132,7 +132,7 @@ module.exports = class CoffeeBuilderUI {
 
   /**
    * @name                              _packageSelectorSelectedItem
-   * @namespace                         terminal.coffeebuilder.node.classes.CoffeeBuilderUI
+   * @namespace                         terminal.coffeebuilder.node.workers.UI
    * @type                              Array
    * 
    * Store Selected item in the package selector ui in format:
@@ -150,7 +150,7 @@ module.exports = class CoffeeBuilderUI {
 
   /**
    * @name                              _changeLocationDefaultSettings
-   * @namespace                         terminal.coffeebuilder.node.classes.CoffeeBuilderUI
+   * @namespace                         terminal.coffeebuilder.node.workers.UI
    * @type                              Object
    * 
    * Store the default change location settings by locations
@@ -175,7 +175,7 @@ module.exports = class CoffeeBuilderUI {
 
   /**
    * @name                              constructor
-   * @namespace                         terminal.coffeebuilder.node.classes.CoffeeBuilderUI
+   * @namespace                         terminal.coffeebuilder.node.workers.UI
    * @type                              Function
    * @constructor
    * 
@@ -189,15 +189,17 @@ module.exports = class CoffeeBuilderUI {
       __terminalKit.grabInput(false);
       setTimeout(function () { process.exit() }, 100);
     }
-    const _this = this;
+
     __terminalKit.grabInput({ mouse: 'button' });
 
     __terminalKit.on('key', function (name, matches, data) {
-      _this._onKey({
+      this._onKey({
         name
       });
       if (name === 'CTRL_C') { terminate(); }
     });
+
+    const _this = this;
 
     __terminalKit.on('mouse', function (name, data) {
       if (!name.includes('_RELEASED')) return;
@@ -208,7 +210,7 @@ module.exports = class CoffeeBuilderUI {
         const isInY = data.y >= itemObj.y && data.y <= itemObj.y + itemObj.height;
 
         if (isInX && isInY) {
-          _this._onClick({
+          this._onClick({
             item,
             x: data.x,
             y: data.y
@@ -233,7 +235,7 @@ module.exports = class CoffeeBuilderUI {
 
   /**
    * @name                                set
-   * @namespace                           terminal.coffeebuilder.node.classes.CoffeeBuilderUI
+   * @namespace                           terminal.coffeebuilder.node.workers.UI
    * @type                                Function
    * 
    * Method that is used to set some datas used as data for the UI rendering
@@ -250,7 +252,7 @@ module.exports = class CoffeeBuilderUI {
 
   /**
    * @name                                get
-   * @namespace                           terminal.coffeebuilder.node.classes.CoffeeBuilderUI
+   * @namespace                           terminal.coffeebuilder.node.workers.UI
    * @type                                Function
    * 
    * Method that is used to get some datas used as data for the UI rendering
@@ -266,7 +268,7 @@ module.exports = class CoffeeBuilderUI {
 
   /**
    * @name                    _onKey
-   * @namespace               terminal.coffeebuilder.node.classes.CoffeeBuilderUI
+   * @namespace               terminal.coffeebuilder.node.workers.UI
    * @type                    Function
    * @private
    * 
@@ -296,12 +298,12 @@ module.exports = class CoffeeBuilderUI {
         this.changeLocation('packageSelector');
         break;
       case 'R':
-        CoffeeBuilder.api.run();
-        if (CoffeeBuilder.config.get('autoSwitch')) {
-          setTimeout(() => {
-            this.changeLocation('build');
-          });
-        }
+        // @TODO CoffeeBuilder.api.run();
+        // if (CoffeeBuilder.config.get('autoSwitch')) {
+        //   setTimeout(() => {
+        //     this.changeLocation('build');
+        //   });
+        // }
         break;
       case 'W':
         this.set('config.current.watch', this.get('config.current.watch') ? false : true);
@@ -371,7 +373,7 @@ module.exports = class CoffeeBuilderUI {
 
   /**
    * @name                  _onClick
-   * @namespace             terminal.coffeebuilder.node.classes.CoffeeBuilderUI
+   * @namespace             terminal.coffeebuilder.node.workers.UI
    * @type                  Function
    * 
    * This method is called when a ui element defines in the this._uiItems object has been clicked
@@ -413,7 +415,7 @@ module.exports = class CoffeeBuilderUI {
 
   /**
    * @name                  changeLocation
-   * @namespace             terminal.coffeebuilder.node.classes.CoffeeBuilderUI
+   * @namespace             terminal.coffeebuilder.node.workers.UI
    * @type                  Function
    * 
    * Change the user location in the UI. This method accept 1 argument which is the new location wanted
@@ -440,8 +442,7 @@ module.exports = class CoffeeBuilderUI {
     if (this._locationSettings.drawDependencies) {
       this._location = 'loading';
       this.draw();
-      const drawDependenciesFn = this._locationSettings.drawDependencies.bind(this);
-      const newSettings = await drawDependenciesFn() || {};
+      const newSettings = await this._locationSettings.drawDependencies() || {};
       this._locationSettings = __deepMerge(this._locationSettings, newSettings);
     }
 
@@ -454,7 +455,7 @@ module.exports = class CoffeeBuilderUI {
 
   /**
    * @name                  draw
-   * @namespace             terminal.coffeebuilder.node.classes.CoffeeBuilderUI
+   * @namespace             terminal.coffeebuilder.node.workers.UI
    * @type                  Function
    * 
    * Draw the interface
@@ -570,7 +571,7 @@ module.exports = class CoffeeBuilderUI {
 
   /**
    * @name                  drawHeader
-   * @namespace             terminal.coffeebuilder.node.classes.CoffeeBuilderUI
+   * @namespace             terminal.coffeebuilder.node.workers.UI
    * @type                  Function
    *
    * Draw the header of the UI
@@ -689,7 +690,7 @@ module.exports = class CoffeeBuilderUI {
 
   /**
    * @name                  drawFooter
-   * @namespace             terminal.coffeebuilder.node.classes.CoffeeBuilderUI
+   * @namespace             terminal.coffeebuilder.node.workers.UI
    * @type                  Function
    *
    * Draw the footer of the UI
@@ -746,7 +747,7 @@ module.exports = class CoffeeBuilderUI {
 
   /**
    * @name                  drawPackageSelector
-   * @namespace             terminal.coffeebuilder.node.classes.CoffeeBuilderUI
+   * @namespace             terminal.coffeebuilder.node.workers.UI
    * @type                  Function
    * 
    * Draw the package selector list
@@ -809,7 +810,7 @@ module.exports = class CoffeeBuilderUI {
 
   /**
    * @name                  drawHome
-   * @namespace             terminal.coffeebuilder.node.classes.CoffeeBuilderUI
+   * @namespace             terminal.coffeebuilder.node.workers.UI
    * @type                  Function
    *
    * Draw the "welcome" interface
@@ -847,7 +848,7 @@ module.exports = class CoffeeBuilderUI {
 
   /**
    * @name                  drawBuildDependencies
-   * @namespace             terminal.coffeebuilder.node.classes.CoffeeBuilderUI
+   * @namespace             terminal.coffeebuilder.node.workers.UI
    * @type                  Function
    * 
    * Load the build dependencies and check if all is good to render the build process
@@ -868,7 +869,7 @@ module.exports = class CoffeeBuilderUI {
 
   /**
    * @name                  drawBuild
-   * @namespace             terminal.coffeebuilder.node.classes.CoffeeBuilderUI
+   * @namespace             terminal.coffeebuilder.node.workers.UI
    * @type                  Function
    *
    * Draw the interface depending on the data object passed
@@ -879,6 +880,8 @@ module.exports = class CoffeeBuilderUI {
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   async drawBuild(settings = {}) {
+
+    console.log('BUILKD');
 
     let lines = [];
 
@@ -973,7 +976,7 @@ module.exports = class CoffeeBuilderUI {
 
   /**
    * @name                                  _selectBuildErrors
-   * @namespace                             terminal.coffeebuilder.node.classes.CoffeeBuilderUI
+   * @namespace                             terminal.coffeebuilder.node.workers.UI
    * @type                                  Function
    * @private
    * 
@@ -1008,7 +1011,7 @@ module.exports = class CoffeeBuilderUI {
 
   /**
    * @name                                  drawBuildErrors
-   * @namespace                             terminal.coffeebuilder.node.classes.CoffeeBuilderUI
+   * @namespace                             terminal.coffeebuilder.node.workers.UI
    * @type                                  Function
    * 
    * Draw the errors reporting after a compilation
@@ -1042,7 +1045,7 @@ module.exports = class CoffeeBuilderUI {
 
   /**
    * @name                            drawLoading
-   * @namespace                       terminal.coffeebuilder.node.classes.CoffeeBuilderUI
+   * @namespace                       terminal.coffeebuilder.node.workers.UI
    * @type                            Function
    * 
    * Display a loading message to the user
@@ -1075,7 +1078,7 @@ module.exports = class CoffeeBuilderUI {
 
   /**
    * @name                                drawStatsDependencies
-   * @namespace                           terminal.coffeebuilder.node.classes.CoffeeBuilderUI
+   * @namespace                           terminal.coffeebuilder.node.workers.UI
    * @type                                Function
    * 
    * Load the stats dependencies
@@ -1120,7 +1123,7 @@ module.exports = class CoffeeBuilderUI {
 
   /**
    * @name                            drawError
-   * @namespace                       terminal.coffeebuilder.node.classes.CoffeeBuilderUI
+   * @namespace                       terminal.coffeebuilder.node.workers.UI
    * @type                            Function
    * 
    * Draw the error message
@@ -1142,7 +1145,7 @@ module.exports = class CoffeeBuilderUI {
 
   /**
    * @name                            drawStats
-   * @namespace                       terminal.coffeebuilder.node.classes.CoffeeBuilderUI
+   * @namespace                       terminal.coffeebuilder.node.workers.UI
    * @type                            Function
    * 
    * Draw the "after build" stats
@@ -1292,3 +1295,11 @@ module.exports = class CoffeeBuilderUI {
   }
 
 }
+
+const ui = new UI();
+
+__expose({
+  set: ui.set,
+  changeLocation: ui.changeLocation,
+  draw: ui.draw
+});

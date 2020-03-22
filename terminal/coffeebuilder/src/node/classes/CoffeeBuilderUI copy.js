@@ -1,12 +1,10 @@
-const __expose = require('threads/worker').expose;
 const __terminalKit = require('terminal-kit').terminal;
 const __parseHtml = require('@coffeekraken/sugar/node/terminal/parseHtml');
 const __countLine = require('@coffeekraken/sugar/node/terminal/countLine');
 const __columns = require('@coffeekraken/sugar/node/terminal/columns');
 const __blessed = require('blessed');
+const __asyncForEach = require('@coffeekraken/sugar/js/array/asyncForEach');
 const __ora = require('ora');
-const __set = require('@coffeekraken/sugar/node/object/set');
-const __get = require('@coffeekraken/sugar/node/object/get');
 const __folderSize = require('@coffeekraken/sugar/node/fs/folderSize');
 const __formatFileSize = require('@coffeekraken/sugar/node/fs/formatFileSize');
 const __deepMerge = require('@coffeekraken/sugar/node/object/deepMerge');
@@ -30,30 +28,7 @@ const __packageJson = require('../../../package.json');
  * 
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class CoffeeBuilderUI {
-
-  /**
-   * @name                              _data
-   * @namespace                         terminal.coffeebuilder.node.classes
-   * @type                              Object
-   * 
-   * Store the passed datas from the main process to be able to draw the ui correctly
-   * 
-   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _data = {
-    currentPackage: {
-      name: null
-    },
-    packages: {},
-    stats: {},
-    isRunning: false,
-    config: {
-      current: {},
-      base: {},
-      default: {}
-    }
-  };
+class CoffeeBuilderUI {
 
   /**
    * @name                              _location
@@ -150,7 +125,7 @@ module.exports = class CoffeeBuilderUI {
 
   /**
    * @name                              _changeLocationDefaultSettings
-   * @namespace                         terminal.coffeebuilder.node.classes.CoffeeBuilderUI
+   * @namespace                         terminal.coffeebuilder.node.classes.CoffeeBuilderUi
    * @type                              Object
    * 
    * Store the default change location settings by locations
@@ -189,15 +164,17 @@ module.exports = class CoffeeBuilderUI {
       __terminalKit.grabInput(false);
       setTimeout(function () { process.exit() }, 100);
     }
-    const _this = this;
+
     __terminalKit.grabInput({ mouse: 'button' });
 
     __terminalKit.on('key', function (name, matches, data) {
-      _this._onKey({
+      CoffeeBuilder.events.emit('key', {
         name
       });
       if (name === 'CTRL_C') { terminate(); }
     });
+
+    const _this = this;
 
     __terminalKit.on('mouse', function (name, data) {
       if (!name.includes('_RELEASED')) return;
@@ -208,7 +185,7 @@ module.exports = class CoffeeBuilderUI {
         const isInY = data.y >= itemObj.y && data.y <= itemObj.y + itemObj.height;
 
         if (isInX && isInY) {
-          _this._onClick({
+          CoffeeBuilder.events.emit('click', {
             item,
             x: data.x,
             y: data.y
@@ -229,186 +206,154 @@ module.exports = class CoffeeBuilderUI {
 
     this.draw();
 
+    CoffeeBuilder.events.on('click', (data) => {
+      switch (data.item) {
+        case 'packageSelector':
+        case 'menuPackageSelector':
+          this.changeLocation('packageSelector');
+          break;
+        case 'menuHome':
+          this.changeLocation('home');
+          break;
+        case 'menuBuild':
+          this.changeLocation('build');
+          break;
+        case 'menuStats':
+          this.changeLocation('stats');
+          break;
+        case 'menuError':
+          this.changeLocation('error');
+          break;
+        case 'menuAutoSwitch':
+          CoffeeBuilder.config.set('autoSwitch', CoffeeBuilder.config.get('autoSwitch') ? false : true, true);
+          this.draw();
+          break;
+        case 'menuWatch':
+          CoffeeBuilder.config.set('watch', CoffeeBuilder.config.get('watch') ? false : true, true);
+          this.draw();
+          break;
+      }
+    });
+
+    CoffeeBuilder.events.on('key', (data) => {
+
+      // general key bindings
+      switch (data.name.toUpperCase()) {
+        case 'H':
+          CoffeeBuilder.ui.changeLocation('home');
+          break;
+        case 'B':
+          CoffeeBuilder.ui.changeLocation('build');
+          break;
+        case 'S':
+          CoffeeBuilder.ui.changeLocation('stats');
+          break;
+        case 'E':
+          CoffeeBuilder.ui.changeLocation('error');
+          break;
+        case 'P':
+          CoffeeBuilder.ui.changeLocation('packageSelector');
+          break;
+        case 'R':
+          CoffeeBuilder.api.run();
+          if (CoffeeBuilder.config.get('autoSwitch')) {
+            setTimeout(() => {
+              CoffeeBuilder.ui.changeLocation('build');
+            });
+          }
+          break;
+        case 'W':
+          CoffeeBuilder.config.set('watch', CoffeeBuilder.config.get('watch') ? false : true, true);
+          this.draw();
+          break;
+        case 'A':
+          CoffeeBuilder.config.set('autoSwitch', CoffeeBuilder.config.get('autoSwitch') ? false : true, true);
+          this.draw();
+          break;
+      }
+
+      // key bindings by location
+      switch (this._location) {
+        case 'buildErrors':
+          switch (data.name) {
+            case '1':
+            case '2':
+            case '3':
+            case '4':
+            case '5':
+            case '6':
+            case '7':
+            case '8':
+            case '9':
+              this._selectBuildErrors(parseInt(data.name));
+              break;
+            case 'UP':
+              this._selectBuildErrors('previous');
+              break;
+            case 'DOWN':
+              this._selectBuildErrors('next');
+              break;
+          }
+          break;
+        case 'packageSelector':
+          switch (data.name) {
+            case 'UP':
+              if (this._packageSelectorSelectedItem.row > 1) {
+                this._packageSelectorSelectedItem.row -= 1;
+              }
+              break;
+            case 'DOWN':
+              const columnItems = this._packageSelectorColumns[this._packageSelectorSelectedItem.column - 1];
+              if (this._packageSelectorSelectedItem.row < columnItems.length) {
+                this._packageSelectorSelectedItem.row += 1;
+              }
+              break;
+            case 'RIGHT':
+              if (this._packageSelectorSelectedItem.column < this._packageSelectorColumns.length) {
+                this._packageSelectorSelectedItem.column += 1;
+              }
+              break;
+            case 'LEFT':
+              if (this._packageSelectorSelectedItem.column > 1) {
+                this._packageSelectorSelectedItem.column -= 1;
+              }
+              break;
+            case 'ENTER':
+              CoffeeBuilder.api.setCurrentPackageByName(this._packageSelectorColumns[this._packageSelectorSelectedItem.column - 1][this._packageSelectorSelectedItem.row - 1]);
+              break;
+          }
+          this.draw();
+          break;
+      }
+    });
+
+    // listen for build events
+    // this._listenBuildEvents();
   }
 
   /**
-   * @name                                set
-   * @namespace                           terminal.coffeebuilder.node.classes.CoffeeBuilderUI
-   * @type                                Function
-   * 
-   * Method that is used to set some datas used as data for the UI rendering
-   * 
-   * @param               {String}              path                The dotted data path to set like config.current.autoSwitch
-   * @param               {Mixed}               value               The value to set
-   * 
-   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  set(path, value) {
-    __set(this._data, path, value);
-    this.draw();
-  }
-
-  /**
-   * @name                                get
-   * @namespace                           terminal.coffeebuilder.node.classes.CoffeeBuilderUI
-   * @type                                Function
-   * 
-   * Method that is used to get some datas used as data for the UI rendering
-   * 
-   * @param               {String}              path                The dotted data path to set like config.current.autoSwitch
-   * @return               {Mixed}                               The value getted
-   * 
-   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  get(path) {
-    return __get(this._data, path);
-  }
-
-  /**
-   * @name                    _onKey
-   * @namespace               terminal.coffeebuilder.node.classes.CoffeeBuilderUI
-   * @type                    Function
-   * @private
-   * 
-   * Method called when a key is pressed wih an object containing the "name" of the key pressed
-   * 
-   * @param         {Object}                  key                   An object representing the pressed key with a "name" property
-   * 
-   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _onKey(key) {
-
-    // general key bindings
-    switch (key.name.toUpperCase()) {
-      case 'H':
-        this.changeLocation('home');
-        break;
-      case 'B':
-        this.changeLocation('build');
-        break;
-      case 'S':
-        this.changeLocation('stats');
-        break;
-      case 'E':
-        this.changeLocation('error');
-        break;
-      case 'P':
-        this.changeLocation('packageSelector');
-        break;
-      case 'R':
-        CoffeeBuilder.api.run();
-        if (CoffeeBuilder.config.get('autoSwitch')) {
-          setTimeout(() => {
-            this.changeLocation('build');
-          });
-        }
-        break;
-      case 'W':
-        this.set('config.current.watch', this.get('config.current.watch') ? false : true);
+  * @name                        _listenBuildEvents
+  * @namespace                   terminal.coffeebuilder.node.classes.CoffeeBuilderUI
+  * @type                        Function
+  *
+  * Listen and handle build events emitted from the loader and the plugin
+  *
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+  _listenBuildEvents() {
+    let postBuildTimeout, buildTimeout;
+    CoffeeBuilder.events.on('build', (data) => {
+      clearTimeout(buildTimeout);
+      buildTimeout = setTimeout(() => {
         this.draw();
-        break;
-      case 'A':
-        this.set('config.current.autoSwitch', this.get('config.current.autoSwitch') ? false : true);
+      });
+    });
+    CoffeeBuilder.events.on('postBuild', (data) => {
+      clearTimeout(postBuildTimeout);
+      postBuildTimeout = setTimeout(() => {
         this.draw();
-        break;
-    }
-
-    // key bindings by location
-    switch (this._location) {
-      case 'buildErrors':
-        switch (key.name) {
-          case '1':
-          case '2':
-          case '3':
-          case '4':
-          case '5':
-          case '6':
-          case '7':
-          case '8':
-          case '9':
-            this._selectBuildErrors(parseInt(key.name));
-            break;
-          case 'UP':
-            this._selectBuildErrors('previous');
-            break;
-          case 'DOWN':
-            this._selectBuildErrors('next');
-            break;
-        }
-        break;
-      case 'packageSelector':
-        switch (key.name) {
-          case 'UP':
-            if (this._packageSelectorSelectedItem.row > 1) {
-              this._packageSelectorSelectedItem.row -= 1;
-            }
-            break;
-          case 'DOWN':
-            const columnItems = this._packageSelectorColumns[this._packageSelectorSelectedItem.column - 1];
-            if (this._packageSelectorSelectedItem.row < columnItems.length) {
-              this._packageSelectorSelectedItem.row += 1;
-            }
-            break;
-          case 'RIGHT':
-            if (this._packageSelectorSelectedItem.column < this._packageSelectorColumns.length) {
-              this._packageSelectorSelectedItem.column += 1;
-            }
-            break;
-          case 'LEFT':
-            if (this._packageSelectorSelectedItem.column > 1) {
-              this._packageSelectorSelectedItem.column -= 1;
-            }
-            break;
-          case 'ENTER':
-            // @TODO CoffeeBuilder.api.setCurrentPackageByName(this._packageSelectorColumns[this._packageSelectorSelectedItem.column - 1][this._packageSelectorSelectedItem.row - 1]);
-            break;
-        }
-        this.draw();
-        break;
-    }
-
-  }
-
-  /**
-   * @name                  _onClick
-   * @namespace             terminal.coffeebuilder.node.classes.CoffeeBuilderUI
-   * @type                  Function
-   * 
-   * This method is called when a ui element defines in the this._uiItems object has been clicked
-   * 
-   * @param             {Object}                item                An object representing the ui item clicked
-   * 
-   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _onClick(item) {
-
-    switch (item.item) {
-      case 'packageSelector':
-      case 'menuPackageSelector':
-        this.changeLocation('packageSelector');
-        break;
-      case 'menuHome':
-        this.changeLocation('home');
-        break;
-      case 'menuBuild':
-        this.changeLocation('build');
-        break;
-      case 'menuStats':
-        this.changeLocation('stats');
-        break;
-      case 'menuError':
-        this.changeLocation('error');
-        break;
-      case 'menuAutoSwitch':
-        this.set('config.current.autoSwitch', this.get('config.current.autoSwitch') ? false : true);
-        this.draw();
-        break;
-      case 'menuWatch':
-        this.set('config.current.watch', this.get('config.current.watch') ? false : true);
-        this.draw();
-        break;
-    }
-
+      }, 10);
+    });
   }
 
   /**
@@ -440,8 +385,7 @@ module.exports = class CoffeeBuilderUI {
     if (this._locationSettings.drawDependencies) {
       this._location = 'loading';
       this.draw();
-      const drawDependenciesFn = this._locationSettings.drawDependencies.bind(this);
-      const newSettings = await drawDependenciesFn() || {};
+      const newSettings = await this._locationSettings.drawDependencies() || {};
       this._locationSettings = __deepMerge(this._locationSettings, newSettings);
     }
 
@@ -580,7 +524,7 @@ module.exports = class CoffeeBuilderUI {
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  async drawHeader(settings = {}) {
+  async drawHeader(locationSettings = {}) {
     let titleLine = `<yellow><bold>CoffeeBuilder</bold></yellow> (version <cyan>${__packageJson.version}</cyan>)`;
     let titleLineCount = __countLine(titleLine);
 
@@ -620,7 +564,7 @@ module.exports = class CoffeeBuilderUI {
     let menuBuild;
     if (!this._menuBuildLoader) this._menuBuildLoader = __ora('');
     this._menuBuildLoader.color = 'black';
-    let menuBuildLoaderString = this.get('isRunning') ? this._menuBuildLoader.frame() : '';
+    let menuBuildLoaderString = CoffeeBuilder.api.isRunning() ? this._menuBuildLoader.frame() : '';
     if (this._location === 'build') {
       menuBuild = `<bgYellow><black><bold> ${menuBuildLoaderString}Build(b) </bold></black></bgYellow>`;
     } else {
@@ -663,7 +607,7 @@ module.exports = class CoffeeBuilderUI {
     menuLine += menuPackageSelector;
 
     let packageSelector = '';
-    packageSelector += `<bgCyan><black><bold> ${this.get('currentPackage.name')}(p) </bold></black></bgCyan>`;
+    packageSelector += `<bgCyan><black><bold> ${CoffeeBuilder.api.getCurrentPackageName()}(p) </bold></black></bgCyan>`;
 
     let menuRight = '';
     menuRight += packageSelector;
@@ -706,13 +650,13 @@ module.exports = class CoffeeBuilderUI {
     let menuLine = ``;
 
     let menuWatch = '';
-    if (this.get('config.current.watch')) {
+    if (CoffeeBuilder.config.get('watch')) {
       menuWatch += `<bgGreen><black><bold> Watch(w) </bold></black></bgGreen>`;
     } else {
       menuWatch += `<bgRed><black><bold> Watch(w) </bold></black></bgRed>`;
     }
     let menuAutoSwitch = '';
-    if (this.get('config.current.autoSwitch')) {
+    if (CoffeeBuilder.config.get('autoSwitch')) {
       menuAutoSwitch += `<bgGreen><black><bold> Auto Switch(a) </bold></black></bgGreen>`;
     } else {
       menuAutoSwitch += `<bgRed><black><bold> Auto Switch(a) </bold></black></bgRed>`;
@@ -767,7 +711,7 @@ module.exports = class CoffeeBuilderUI {
       row: 1
     };
 
-    Object.keys(this.get('packages')).forEach(p => {
+    Object.keys(CoffeeBuilder.api.getPackages()).forEach(p => {
       columnsItems.push(`${p}`);
     });
 
@@ -858,9 +802,9 @@ module.exports = class CoffeeBuilderUI {
    */
   async drawBuildDependencies() {
 
-    if (this.get('isRunning')) {
+    if (!CoffeeBuilder.api.isRunning()) {
       return {
-        message: `To start <magenta>building the package</magenta> "<bold><yellow>${this.get('currentPackage.name')}</yellow></bold>", simply tap the "<cyan><bold>R</bold></cyan>" key...`
+        message: `To start <magenta>building the package</magenta> "<bold><yellow>${CoffeeBuilder.api.getCurrentPackageName()}</yellow></bold>", simply tap the "<cyan><bold>R</bold></cyan>" key...`
       };
     }
     return {};
@@ -880,6 +824,8 @@ module.exports = class CoffeeBuilderUI {
    */
   async drawBuild(settings = {}) {
 
+    console.log('BUILKD');
+
     let lines = [];
 
     if (settings.message) {
@@ -891,13 +837,13 @@ module.exports = class CoffeeBuilderUI {
       return lines;
     }
 
-    if (!this.get('stats.build.percentage')) this.set('stats.build.percentage', 0);
+    if (!CoffeeBuilder.stats.get('build.percentage')) CoffeeBuilder.stats.set('build.percentage', 0);
 
-    let { percentage, currentResourcePath, currentProcessor, processedResources, processors } = this.get('stats.build');
-    const postBuildProcessors = this.get('stats.postBuild.processors');
+    let { percentage, currentResourcePath, currentProcessor, processedResources, processors } = CoffeeBuilder.stats.get('build');
+    const postBuildProcessors = CoffeeBuilder.stats.get('postBuild.processors');
     processors = __deepMerge(processors, postBuildProcessors);
 
-    const postPercentage = this.get('stats.postBuild.percentage');
+    const postPercentage = CoffeeBuilder.stats.get('postBuild.percentage');
 
     const watchCompile = this._watchCompile;
 
@@ -928,8 +874,7 @@ module.exports = class CoffeeBuilderUI {
 
     let compileLine = `<black>░░</black>`;
     compileLine = '';
-    // @TODO
-    this.get('config.current.compile').forEach((compile, i) => {
+    CoffeeBuilder.config.current.compile.forEach((compile, i) => {
       if (watchCompile[0] === compile || watchCompile.length === 0) {
         compileLine += `<green>✔ <bold><bgBlack>${compile}</bgBlack></bold></green>  `;
       } else {
@@ -937,7 +882,7 @@ module.exports = class CoffeeBuilderUI {
       }
     });
 
-    if (this.get('config.current.watch')) {
+    if (CoffeeBuilder.config.get('watch')) {
       if (!this._watchSpinner) this._watchSpinner = __ora('Watching');
       const watchSpinner = this._watchSpinner.frame();
       compileLine += ' '.repeat(this._maxWidth - __countLine(compileLine) - __countLine(watchSpinner)) + watchSpinner;
@@ -985,7 +930,7 @@ module.exports = class CoffeeBuilderUI {
    */
   _selectBuildErrors(which) {
     if (!this._selectBuildErrorsWhich) this._selectBuildErrorsWhich = 1;
-    const errors = this.get('stats.errors');
+    const errors = CoffeeBuilder.stats.get('errors');
     if (typeof which === 'number') {
       if (which < 1 || which > 9) {
         this._selectBuildErrorsWhich = 1;
@@ -1087,31 +1032,30 @@ module.exports = class CoffeeBuilderUI {
   drawStatsDependencies() {
     return new Promise(async (resolve, reject) => {
 
-      // @TODO
-      // // check that the current package has stats
-      // if (!CoffeeBuilder.stats.getCurrentPackageStats()) {
-      //   return resolve({
-      //     message: `Their's no stats for the package "<bold><yellow>${CoffeeBuilder.api.getCurrentPackageName()}</yellow></bold>"... To start the <magenta>build process</magenta>, simply type the "<cyan><bold>R</bold></cyan>" key...`
-      //   });
-      // }
+      // check that the current package has stats
+      if (!CoffeeBuilder.stats.getCurrentPackageStats()) {
+        return resolve({
+          message: `Their's no stats for the package "<bold><yellow>${CoffeeBuilder.api.getCurrentPackageName()}</yellow></bold>"... To start the <magenta>build process</magenta>, simply type the "<cyan><bold>R</bold></cyan>" key...`
+        });
+      }
 
-      // const currentPackage = CoffeeBuilder.api.getCurrentPackage();
+      const currentPackage = CoffeeBuilder.api.getCurrentPackage();
 
-      // await __asyncForEach(currentPackage.sourcesFoldersPaths, async (p) => {
-      //   return new Promise(async (resolve, reject) => {
-      //     const folderSize = await __folderSize(p, true);
-      //     CoffeeBuilder.stats.set(`folders.sources.${p.replace(currentPackage.path + '/', '')}`, folderSize);
-      //     resolve(folderSize);
-      //   });
-      // });
+      await __asyncForEach(currentPackage.sourcesFoldersPaths, async (p) => {
+        return new Promise(async (resolve, reject) => {
+          const folderSize = await __folderSize(p, true);
+          CoffeeBuilder.stats.set(`folders.sources.${p.replace(currentPackage.path + '/', '')}`, folderSize);
+          resolve(folderSize);
+        });
+      });
 
-      // await __asyncForEach(currentPackage.outputsFoldersPaths, async (p) => {
-      //   return new Promise(async (resolve, reject) => {
-      //     const folderSize = await __folderSize(p, true);
-      //     CoffeeBuilder.stats.set(`folders.outputs.${p.replace(currentPackage.path + '/', '')}`, folderSize);
-      //     resolve(folderSize);
-      //   });
-      // });
+      await __asyncForEach(currentPackage.outputsFoldersPaths, async (p) => {
+        return new Promise(async (resolve, reject) => {
+          const folderSize = await __folderSize(p, true);
+          CoffeeBuilder.stats.set(`folders.outputs.${p.replace(currentPackage.path + '/', '')}`, folderSize);
+          resolve(folderSize);
+        });
+      });
 
       resolve();
 
@@ -1164,10 +1108,10 @@ module.exports = class CoffeeBuilderUI {
       return lines;
     }
 
-    let { processedResources, processors } = this.get('stats.build');
+    let { processedResources, processors } = CoffeeBuilder.stats.get('build');
 
     const watchCompile = this._watchCompile;
-    const compileType = watchCompile.length ? watchCompile : this.get('config.current.compile');
+    const compileType = watchCompile.length ? watchCompile : CoffeeBuilder.config.current.compile;
 
     let resourcesLine = `<bold><yellow>Processed resource(s)</yellow></bold>`;
     lines.push(resourcesLine);
@@ -1176,10 +1120,10 @@ module.exports = class CoffeeBuilderUI {
 
     // processed resources
     let processedResourcesLine = `<cyan><bold>${Object.keys(processedResources).length}</bold></cyan> (${compileType.join(',')}) file${Object.keys(processedResources).length > 1 ? 's' : ''} processed`;
-    if (this.get('stats.build.startTimestamp') && this.get('stats.build.endTimestamp')) {
-      processedResourcesLine += ` in <yellow>${new Date(this.get('stats.build.endTimestamp') - this.get('stats.build.startTimestamp')).getSeconds()}s</yellow>`;
-      if (Object.keys(this.get('stats.cache.resources')).length > 0) {
-        processedResourcesLine += ` / <magenta><bold>${Object.keys(this.get('stats.cache.resources')).length}</bold></magenta> taken from cache...`;
+    if (CoffeeBuilder.stats.get('build.startTimestamp') && CoffeeBuilder.stats.get('build.endTimestamp')) {
+      processedResourcesLine += ` in <yellow>${new Date(CoffeeBuilder.stats.get('build.endTimestamp') - CoffeeBuilder.stats.get('build.startTimestamp')).getSeconds()}s</yellow>`;
+      if (Object.keys(CoffeeBuilder.stats.get('cache.resources')).length > 0) {
+        processedResourcesLine += ` / <magenta><bold>${Object.keys(CoffeeBuilder.stats.get('cache.resources')).length}</bold></magenta> taken from cache...`;
       }
     }
     lines.push('<green>✔</green>  ' + processedResourcesLine);
@@ -1208,7 +1152,7 @@ module.exports = class CoffeeBuilderUI {
     lines.push(' ');
 
     const sourcesFolderColumns = [];
-    const sourcesFolderKeys = Object.keys(this.get('stats.folders.sources'));
+    const sourcesFolderKeys = Object.keys(CoffeeBuilder.stats.get('folders.sources'));
     const sourcesFolderColumnsCount = this._maxWidth > 150 ? 4 : this._maxWidth > 100 ? 3 : 2;
     const sourcesFolderItemsCountByColumn = Math.round(sourcesFolderKeys.length / sourcesFolderColumnsCount)
 
@@ -1220,7 +1164,7 @@ module.exports = class CoffeeBuilderUI {
     for (let i = 0; i < sourcesFolderColumnsCount; i++) {
       let currentColumn = [];
       sourcesFolderKeys.slice(i * sourcesFolderItemsCountByColumn, i * sourcesFolderItemsCountByColumn + sourcesFolderItemsCountByColumn).forEach((k) => {
-        currentColumn.push(`<green>✔</green> ${k}: <cyan><bold>${__formatFileSize(this.get('stats.folders.sources')[k])}</bold></cyan>`);
+        currentColumn.push(`<green>✔</green> ${k}: <cyan><bold>${__formatFileSize(CoffeeBuilder.stats.get('folders.sources')[k])}</bold></cyan>`);
       });
       sourcesFolderColumns.push(currentColumn.join('\n'));
     }
@@ -1234,14 +1178,14 @@ module.exports = class CoffeeBuilderUI {
     lines.push(' ');
 
     const outputFolderColumns = [];
-    const outputFolderKeys = Object.keys(this.get('stats.folders.outputs'));
+    const outputFolderKeys = Object.keys(CoffeeBuilder.stats.get('folders.outputs'));
     const outputFolderColumnsCount = this._maxWidth > 150 ? 4 : this._maxWidth > 100 ? 3 : 2;
     const outputFolderItemsCountByColumn = Math.round(outputFolderKeys.length / outputFolderColumnsCount)
 
     for (let i = 0; i < outputFolderColumnsCount; i++) {
       let currentColumn = [];
       outputFolderKeys.slice(i * outputFolderItemsCountByColumn, i * outputFolderItemsCountByColumn + outputFolderItemsCountByColumn).forEach((k) => {
-        currentColumn.push(`<green>✔</green> ${k}: <cyan><bold>${__formatFileSize(this.get('stats.folders.outputs')[k])}</bold></cyan>`);
+        currentColumn.push(`<green>✔</green> ${k}: <cyan><bold>${__formatFileSize(CoffeeBuilder.stats.get('folders.outputs')[k])}</bold></cyan>`);
       });
       outputFolderColumns.push(currentColumn.join('\n'));
     }
@@ -1292,3 +1236,5 @@ module.exports = class CoffeeBuilderUI {
   }
 
 }
+
+module.exports = CoffeeBuilderUI;

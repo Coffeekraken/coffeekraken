@@ -13,7 +13,6 @@ const __replaceTags = require('../html/replaceTags');
  * @param:settings
  * - width (process.env.STDOUT_COLUMNS || process.stdout.columns) {Number}: The base width on which to calculate the columns
  * - padding (process.env.STDOUT_PADDING || 3) {Number}: The padding to apply on the sides
- * - cropLines (false) {String|Boolean}: Specify if you want the lines that are to long to stay in one line to be cropped. "true" will use the characters "..." as cropping signal, otherwise you can pass any characters you want here to be used as cropped signal...
  * 
  * @param                 {Array}                       content                     The columns content stored in an Array
  * @param                 {Object}                      [settings={}]               An object of settings descripbed above
@@ -32,8 +31,7 @@ module.exports = function columns(content, settings = {}) {
 
   settings = __deepMerge({
     width: process.env.STDOUT_COLUMNS || process.stdout.columns,
-    padding: process.env.STDOUT_PADDING || 3,
-    cropLines: false
+    padding: process.env.STDOUT_PADDING || 3
   }, settings);
 
   const maxWidth = settings.width - settings.padding * 2;
@@ -46,14 +44,6 @@ module.exports = function columns(content, settings = {}) {
   content.forEach((c, i) => {
 
     const columnsPadding = i === 0 ? settings.padding : i === content.length - 1 ? settings.padding : settings.padding * 2;
-
-    if (settings.cropLines !== false) {
-      c = __replaceTags(c, {
-        cropable: (tag, content) => {
-          return 'coco';
-        }
-      });
-    }
 
     let lines = __splitLineEvery(c, maxColumnWidth - columnsPadding);
 

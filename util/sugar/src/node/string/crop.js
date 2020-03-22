@@ -135,7 +135,7 @@ function crop(text, length, settings = {}) {
 
 module.exports = crop;
 
-console.log(crop('iw <yop>fdjhwi <coco>ouefj wio <br/> ejfoiwejfiow</coco> jefoiw ejfoiweifojw oefjw</yop> oejf', 40, {
-  chars: '...',
-  splitWords: false
-}));
+// console.log(crop('iw <yop>fdjhwi <coco plop="hello">ouefj wio <br/> ejfoiwejfiow</coco> jefoiw ejfoiweifojw oefjw</yop> oejf', 40, {
+//   chars: '...',
+//   splitWords: false
+// }));

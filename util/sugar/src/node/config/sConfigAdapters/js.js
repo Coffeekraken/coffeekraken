@@ -4,6 +4,7 @@ const __get = require('../../object/get');
 const __toString = require('../../string/toString');
 const __parse = require('../../string/parse');
 const __stringifyObject = require('stringify-object');
+const __deepMerge = require('../../object/deepMerge');
 
 /**
  * @name                  js
@@ -24,36 +25,38 @@ const __stringifyObject = require('stringify-object');
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-let __jsConfig = {};
-module.exports = function(path, value = null, settings = {}) {
-  return new Promise((resolve, reject) => {
 
-      // check the settings
-      if ( ! settings.filename) {
-        __log(`The JS SConfig data adapter need a "filename" settings to specify where you want to save your data...`, 'error');
-        return reject();
-      }
+module.exports = class JsConfigAdapter {
 
-      // try to get the value of the already savec config
-      if (__fs.existsSync(settings.filename) && Object.keys(__jsConfig).length <= 0) {
-        __jsConfig = require(settings.filename);
-      }
+  static name = 'js';
+  static defaultSettings = {
+    defaultConfigPath: null,
+    userConfigPath: `${process.cwd()}/[name].conf.js`
+  };
 
-      // check if we need to save or just get a value
-      if (value !== null) {
-        __set(__jsConfig, path, value);
+  constructor(settings = {}) {
+    this._settings = settings;
+    this._settings.userConfigPath = settings.userConfigPath.replace('[name]', settings.name);
+  }
 
-        // save the new value
-        const d = `module.exports = ${__stringifyObject(__jsConfig)};`;
-        __fs.writeFileSync(settings.filename, d);
+  load() {
 
-        resolve(value);
-        return value;
-      } else {
-        const v = __get(__jsConfig, path);
-        resolve(v);
-        return v;
-      }
+    let defaultConfig = {};
+    let userConfig = {};
 
-  });
+    // load the default config if exists
+    if (this._settings.defaultConfigPath && __fs.existsSync(this._settings.defaultConfigPath)) {
+      defaultConfig = require(this._settings.defaultConfigPath);
+    }
+
+    // load the user config
+    if (this._settings.userConfigPath && __fs.existsSync(this._settings.userConfigPath)) {
+      defaultConfig = require(this._settings.userConfigPath);
+    }
+
+    // mix the configs and save them in the instance
+    return __deepMerge(defaultConfig, userConfig);
+
+  }
+
 }

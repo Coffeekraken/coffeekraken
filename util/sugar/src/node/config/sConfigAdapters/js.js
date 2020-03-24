@@ -5,6 +5,7 @@ const __toString = require('../../string/toString');
 const __parse = require('../../string/parse');
 const __stringifyObject = require('stringify-object');
 const __deepMerge = require('../../object/deepMerge');
+const __tmpDir = require('../../fs/tmpDir');
 
 /**
  * @name                  js
@@ -31,22 +32,31 @@ module.exports = class JsConfigAdapter {
   static name = 'js';
   static defaultSettings = {
     defaultConfigPath: null,
-    userConfigPath: `${process.cwd()}/[name].conf.js`
+    appConfigPath: `${process.cwd()}/[name].config.js`,
+    userConfigPath: `${__tmpDir()}/[name].config.js`
   };
 
   constructor(settings = {}) {
     this._settings = settings;
+    this._settings.defaultConfigPath = settings.defaultConfigPath.replace('[name]', settings.name);
+    this._settings.appConfigPath = settings.appConfigPath.replace('[name]', settings.name);
     this._settings.userConfigPath = settings.userConfigPath.replace('[name]', settings.name);
   }
 
-  load() {
+  async load() {
 
     let defaultConfig = {};
+    let appConfig = {};
     let userConfig = {};
 
     // load the default config if exists
     if (this._settings.defaultConfigPath && __fs.existsSync(this._settings.defaultConfigPath)) {
       defaultConfig = require(this._settings.defaultConfigPath);
+    }
+
+    // load the app config if exists
+    if (this._settings.appConfigPath && __fs.existsSync(this._settings.appConfigPath)) {
+      appConfig = require(this._settings.appConfigPath);
     }
 
     // load the user config
@@ -55,7 +65,13 @@ module.exports = class JsConfigAdapter {
     }
 
     // mix the configs and save them in the instance
-    return __deepMerge(defaultConfig, userConfig);
+    return __deepMerge(defaultConfig, appConfig, userConfig);
+
+  }
+
+  async save(newConfig = {}) {
+
+
 
   }
 

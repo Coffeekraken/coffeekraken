@@ -1,0 +1,29 @@
+{
+  "name": "@buzzbrothers/cli",
+  "version": "0.0.1",
+  "description": "Buzzbrothers internal CLI that let you execute actions on clients projects like deploy, install, etc...",
+  "main": "src/node/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/buzzbrothers/buzzbrothers-cli.git"
+  },
+  "keywords": [
+    "buzz",
+    "brothers",
+    "buzzbrothers",
+    "cli"
+  ],
+  "author": "Olivier Bossel <ob@buzzbrothers.ch>",
+  "license": "MIT",
+  "homepage": "https://bitbucket.org/buzzbrothers/buzzbrothers-cli#readme",
+  "dependencies": {
+    "@coffeekraken/sugar": "^1.0.23",
+    "bitbucket": "^2.0.3",
+    "commander": "^5.0.0",
+    "cryptr": "^6.0.1",
+    "node-machine-id": "^1.1.12"
+  }
+}

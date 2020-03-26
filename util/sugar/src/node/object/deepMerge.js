@@ -25,7 +25,7 @@ function deepMerge() {
   // merge all the passed objects
 
   function deepMergeErase(originVal, newVal, key) {
-    if (newVal._deepMergeEraseKeys) {
+    if (newVal !== null && newVal !== undefined && newVal._deepMergeEraseKeys) {
       // console.log('KEY', key, originVal, newVal);
       Object.keys(newVal).forEach(k => {
         if (newVal._deepMergeEraseKeys.indexOf(k) === -1 && k !== '_deepMergeEraseKeys') {

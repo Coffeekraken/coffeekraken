@@ -33,7 +33,6 @@ module.exports = class BitbucketApi {
     (async () => {
       // check that we have already the bitbucket auth tokens
       const auth = await __auth.get('bitbucket');
-      console.log('auth', auth);
     })();
   }
 

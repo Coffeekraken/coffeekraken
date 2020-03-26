@@ -4,7 +4,12 @@ const __Cryptr = require("cryptr");
 const { machineIdSync } = require("node-machine-id");
 const __tmpDir = require("@coffeekraken/sugar/node/fs/tmpDir");
 const __writeFileSync = require("@coffeekraken/sugar/node/fs/writeFileSync");
-const __list = require('@coffeekraken/sugar/node/terminal/list');
+
+const __SScreen = require('@coffeekraken/sugar/node/terminal/SScreen');
+const __SForm = require('@coffeekraken/sugar/node/terminal/SForm');
+const __SInputContainer = require('@coffeekraken/sugar/node/terminal/SInputContainer');
+const __SFiltrableList = require('@coffeekraken/sugar/node/terminal/SFiltrableList');
+
 
 const machineId = machineIdSync();
 const authFilepath = `${__tmpDir()}/@coffeekraken.cli.${machineId}.json`;
@@ -97,11 +102,55 @@ class AuthUtilities {
    * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   async ask(name, fields) {
-    console.log(__list([
-      'hello',
-      'world',
-      'coco'
-    ]));
+
+    const screen = new __SScreen({
+    });
+    const form = new __SForm({
+    });
+    form.setStyle({
+      fg: 'black',
+      bg: 'cyan',
+      border: {
+        style: 'line'
+      }
+    });
+
+    const list = new __SFiltrableList({
+      input: {
+        focused: true
+      },
+      items: [
+        'hello',
+        'world',
+        'coco',
+        'fwefwef wef we fwe f',
+        'fwefewfwefwef',
+        'wefwef',
+        'eee',
+        'ijoi jqioj oijqwdioj qwoidj qowdijpqiwdj o iqpjwdoj qpowdj qioj doiqj wdoqj widoj qoiwdj qoiwjd ioqjwdoiqj wdoiqjwoidjwq',
+        'ewfwefqiuhjwefiuwheifuhew ifhuweif',
+        'wqfiuhjw fiuhw uihf '
+      ]
+    });
+
+    form.append(list);
+    screen.append(form);
+
+    setTimeout(() => {
+      screen.render();
+    });
+
+    // __list([
+    //   'hello',
+    //   'world',
+    //   'coco',
+    //   'fwefwef wef we fwe f',
+    //   'fwefewfwefwef',
+    //   'wefwef',
+    //   'eee',
+    //   'ewfwefqiuhjwefiuwheifuhew ifhuweif',
+    //   'wqfiuhjw fiuhw uihf '
+    // ]);
   }
 };
 

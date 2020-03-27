@@ -43,6 +43,7 @@ module.exports = class STerminalScreen extends __blessed.screen {
    */
   constructor(settings = {}) {
     settings = __deepMerge({
+      router: null, // store the SRouter instance if needed
       smartCSR: true,
       // autoPadding: true,
       padding: process.env.STDOUT_PADDING ? {
@@ -68,9 +69,15 @@ module.exports = class STerminalScreen extends __blessed.screen {
     });
     super.append(this._box);
 
+    if (settings.router && settings.router.setOutput) {
+      settings.router.setOutput(this._box);
+    }
+
     // listen for closing the app
-    this.key('C-c', function () {
+    this.key(['C-c', 'escape'], function () {
+      console.log('tcho');
       this.destroy();
+      process.exit();
     });
 
   }

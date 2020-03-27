@@ -68,14 +68,11 @@ function crop(text, length, settings = {}) {
         if (c !== ' ') {
           currentWord += c;
         } else {
-          console.log(currentLength + __countLine(currentWord) + __countLine(settings.chars), length);
-          if (currentLength + __countLine(currentWord) + __countLine(settings.chars) <= length) {
+          if (__countLine(result) + __countLine(currentWord) + __countLine(settings.chars) <= length) {
             result += currentWord;
-            currentLength += __countLine(currentWord);
           } else {
             result = result.trim();
             result += settings.chars;
-            currentLength += __countLine(settings.chars);
             break; // stop the loop execution...
           }
 
@@ -94,7 +91,6 @@ function crop(text, length, settings = {}) {
 
       if (currentWord !== '') {
         result += currentWord;
-        currentLength += __countLine(currentWord);
         currentWord = '';
       }
 
@@ -126,14 +122,12 @@ function crop(text, length, settings = {}) {
     }
   }
 
-  console.log(currentLength, result, __countLine(result));
+  // console.log(currentLength, result, __countLine(result));
 
   // if we take care of html, make sure the opened tags are closed
   openedHtmlTagsArray.forEach(tag => {
     result += `</${tag}>`;
   });
-
-  // console.log(length, result, __countLine(result));
 
   return result;
 

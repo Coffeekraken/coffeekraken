@@ -21,6 +21,7 @@
   "homepage": "https://bitbucket.org/buzzbrothers/buzzbrothers-cli#readme",
   "dependencies": {
     "@coffeekraken/sugar": "^1.0.23",
+    "axios": "^0.19.2",
     "bitbucket": "^2.0.3",
     "commander": "^5.0.0",
     "cryptr": "^6.0.1",

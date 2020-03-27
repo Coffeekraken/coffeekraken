@@ -1,7 +1,7 @@
 const __terminalKit = require('terminal-kit').terminal;
 const __blessed = require('blessed');
 
-
+const __get = require('../object/get');
 const __crop = require('../string/crop');
 const __splitEvery = require('../array/splitEvery');
 const __deepMerge = require('../object/deepMerge');
@@ -28,9 +28,13 @@ const __countLine = require('./countLine');
  */
 module.exports = class SFiltrableList extends __blessed.box {
 
+  _currentInputValue = '';
+
   _selectedItemObj = {
     row: 0, col: 0
   };
+
+  _currentSearchNamespaceArray = [];
 
   /**
    * @name                          constructor
@@ -56,9 +60,9 @@ module.exports = class SFiltrableList extends __blessed.box {
         name: 'input',
         height: 1,
         focused: true,
-        input: true,
-        keyable: true,
-        clickable: true,
+        // input: true,
+        //keyable: true,
+        // clickable: true,
         inputOnFocus: true,
         padding: {
           top: 0, bottom: 0,
@@ -88,10 +92,11 @@ module.exports = class SFiltrableList extends __blessed.box {
       left: 0
     }, settings.list));
 
+    this._currentInputValue = this._input.value;
+
     setTimeout(() => {
 
       if (this._settings.columns === null) {
-        console.log(this.width);
         this._settings.columns = this.width >= 200 ? 4 : this.width >= 100 ? 3 : this.width >= 50 ? 2 : 1;
       }
 
@@ -107,19 +112,9 @@ module.exports = class SFiltrableList extends __blessed.box {
 
       this._listenKeyPress();
 
-      // console.log(this.width, this.parent.width, this.screen.width);
-
-      // if (this.parent) {
-      //   this._input.width = this.width - __countLine(settings.label.content || '');
-      //   
-      // }
+      if (this.screen) this.screen.render();
 
     });
-
-    // console.log(this._list.width);
-
-
-    // 
 
   }
 
@@ -174,21 +169,105 @@ module.exports = class SFiltrableList extends __blessed.box {
           if (this._selectedItemObj.col > 0) this._selectedItemObj.col -= 1;
           break;
         case 'ENTER':
-          let selectedItemIdx = this._selectedItemObj.col * this._lines.length + this._selectedItemObj.row;
-          const selectedObj = {
-            id: selectedItemIdx,
-            column: this._selectedItemObj.col,
-            row: this._selectedItemObj.row,
-            raw: this._settings.items[selectedItemIdx],
-            formatted: this._settings.formaters.selected(this._settings.items[selectedItemIdx], selectedItemIdx),
-          };
-          if (this._settings.onSelect) this._settings.onSelect(selectedObj);
-          // this._events.emit('select', selectedObj);
+
+          const selectedItemObj = this._selectedItem;
+
+          if (Array.isArray(this._settings.items)) {
+            this._input.setValue(selectedItemObj.raw);
+          } else if (typeof this._settings.items === 'object') {
+            let namespace = this._input.value.split('.');
+            if (namespace.length) {
+              namespace = namespace.slice(0, -1);
+            }
+            namespace = namespace.filter(n => n !== '');
+            namespace.push(selectedItemObj.value.raw);
+            const value = __get(this._settings.items, namespace.join('.'));
+            if (typeof value !== 'object' || value._sFiltrableListValue) {
+              this._input.setValue(namespace.join('.'));
+
+              if (this._settings.onSelect) this._settings.onSelect(selectedItemObj);
+              this.emit('select', selectedItemObj);
+
+            } else {
+              this._input.setValue(namespace.join('.') + '.');
+            }
+          }
+
           break;
       }
-      this._list.setContent(this.get().join('\n'));
-      this.screen.render();
+
+      if (eventName !== 'UP' && eventName !== 'DOWN' && eventName != 'RIGHT' && eventName !== 'LEFT') {
+        this._selectedItemObj.row = 0;
+        this._selectedItemObj.col = 0;
+      }
+
+      if (eventName !== 'ENTER') {
+        if (this._input.value.length <= this._currentInputValue.length - 2) {
+          this._input.setValue(this._currentInputValue.slice(0, -1));
+        } else if (this._currentInputValue.length <= this._input.value.length - 2) {
+          this._input.setValue(this._input.value.slice(0, -1));
+        }
+      }
+      this._currentInputValue = this._input.value;
+
+      if (eventName === 'CTRL_C' || eventName === 'ESCAPE') {
+        process.exit();
+      }
+      if (eventName !== 'CTRL_C' && eventName !== 'ESCAPE') {
+        this._list.setContent(this.get().join('\n'));
+        this.screen.render();
+        this._input.focus();
+      }
     });
+  }
+
+  /**
+  * @name                          selectedItemObj
+  * @type                          Object
+  * 
+  * Access the selected item object
+  * 
+  * @
+  */
+  get _selectedItem() {
+
+    let selectedItemIdx = this._selectedItemObj.col * this._lines.length + this._selectedItemObj.row;
+    this._selectedItemObj.idx = selectedItemIdx || 0;
+    const selectedItemObj = {
+      idx: selectedItemIdx,
+      column: this._selectedItemObj.col,
+      row: this._selectedItemObj.row,
+      value: {}
+    };
+
+    let keys = [];
+    let rawValue = null;
+    let rawSubValue = null;
+    if (Array.isArray(this._settings.items)) {
+      keys = this._settings.items;
+      if (keys[selectedItemIdx]) {
+        rawValue = keys[selectedItemIdx];
+      }
+    } else if (typeof this._settings.items === 'object') {
+      let namespace = this._input.value.split('.');
+      namespace = namespace.filter(n => n !== '');
+      const val = __get(this._settings.items, namespace.join('.'));
+      if (Array.isArray(val)) {
+        keys = val;
+      } else if (typeof val === 'object') {
+        keys = Object.keys(val);
+      }
+      if (keys[selectedItemIdx] && val[keys[selectedItemIdx]]) {
+        rawValue = keys[selectedItemIdx];
+        rawSubValue = val[keys[selectedItemIdx]];
+      }
+    }
+
+    selectedItemObj.value.raw = rawValue;
+    selectedItemObj.value.formated = this._settings.formaters.selected(rawValue, selectedItemIdx);
+    if (rawSubValue) selectedItemObj.value.sub = rawSubValue;
+
+    return selectedItemObj;
   }
 
   /**
@@ -208,15 +287,39 @@ module.exports = class SFiltrableList extends __blessed.box {
 
     let lines = [];
 
-    let items = this._settings.items;
-    if (this._input.value) items = items.filter(item => item.includes(this._input.value));
+    let items = [];
+    let searchValue = this._input.value;
+    let lastSearchNamespace = this._input.value.split('.').pop();
+
+    if (Array.isArray(this._settings.items)) {
+      items = this._settings.items.filter(item => item.includes(searchValue));
+    } else if (typeof this._settings.items === 'object') {
+      let searchNamespaces = searchValue.split('.');
+      searchNamespaces = searchNamespaces.filter(n => n !== '');
+      if (!searchNamespaces.length) {
+        items = Object.keys(this._settings.items);
+      } else if (searchNamespaces.length) {
+        let matchingSearch = __get(this._settings.items, searchNamespaces.join('.'));
+        if (!matchingSearch) {
+          const searchNamespacesWithoutLast = searchNamespaces.slice(0, -1);
+          matchingSearch = __get(this._settings.items, searchNamespacesWithoutLast.join('.'));
+          if (matchingSearch) {
+            items = Object.keys(matchingSearch);
+          }
+        } else {
+          items = Object.keys(matchingSearch);
+        }
+      }
+    }
+
+    items = items.filter(i => i.includes(lastSearchNamespace));
 
     if (!items.length) return format === 'string' ? '' : [];
 
     let columns = [];
-    let splitEvery = Math.round(items.length / this._settings.columns);
+    let splitEvery = Math.ceil(items.length / this._settings.columns);
     if (this._settings.columns > 1 && splitEvery > 0) {
-      columns = __splitEvery(items, Math.round(items.length / this._settings.columns));
+      columns = __splitEvery(items, splitEvery);
     } else {
       columns.push(items);
     }
@@ -257,13 +360,10 @@ module.exports = class SFiltrableList extends __blessed.box {
           }
         }
         itemString = __crop(itemString, columnWidth, {
-          splitWords: false
+          splitWords: true
         });
-        // console.log('COCO', itemString.length, columnWidth);
 
         const itemWidth = itemString ? __countLine(itemString) : 0;
-
-        // console.log(columnWidth, itemWidth, itemString);
 
         if (itemWidth > 0) {
           const hasClosingTag = itemString.match(/<\//);

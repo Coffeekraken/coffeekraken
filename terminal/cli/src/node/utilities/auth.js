@@ -119,18 +119,37 @@ class AuthUtilities {
       input: {
         focused: true
       },
-      items: [
-        'hello',
-        'world',
-        'coco',
-        'fwefwef wef we fwe f',
-        'fwefewfwefwef',
-        'wefwef',
-        'eee',
-        'ijoi jqioj oijqwdioj qwoidj qowdijpqiwdj o iqpjwdoj qpowdj qioj doiqj wdoqj widoj qoiwdj qoiwjd ioqjwdoiqj wdoiqjwoidjwq',
-        'ewfwefqiuhjwefiuwheifuhew ifhuweif',
-        'wqfiuhjw fiuhw uihf '
-      ]
+      // items: [
+      //   'hello',
+      //   'world',
+      //   'coco',
+      //   'fwefwef wef we fwe f',
+      //   'fwefewfwefwef',
+      //   'wefwef',
+      //   'eee',
+      //   'ijoi jqioj oijqwdioj qwoidj qowdijpqiwdj o iqpjwdoj qpowdj qioj doiqj wdoqj widoj qoiwdj qoiwjd ioqjwdoiqj wdoiqjwoidjwq',
+      //   'ewfwefqiuhjwefiuwheifuhew ifhuweif',
+      //   'wqfiuhjw fiuhw uihf '
+      // ]
+      items: {
+        hello: {
+          world: 'Comment ça va ?',
+          coco: 'Integer mauris metus, efficitur eget gravida id, dignissim ut felis.',
+          yop: 'Integer mauris metus, efficitur eget gravida id, dignissim ut felis.'
+        },
+        family: {
+          olivier: 'iwjf oiwej fiowfweifjwoei',
+          sébastien: 'Integer mauris metus, efficitur eget gravida id, dignissim ut felis.',
+          gisele: 'qwoidjfwe oifjwioefj owej foiwejf',
+          fanny: 'wfiojweifj woefj iwoejf '
+        },
+        world: {
+          monique: 'wefiwj efoijw oeifjwoefjiwojefoiwejf',
+          bernard: 'weifojw eifj woief oweijf',
+          camille: 'wfiwjefoiwejfoiwef',
+          valentin: 'wefwoijefwoiejfoiwjefowe'
+        }
+      }
     });
 
     form.append(list);

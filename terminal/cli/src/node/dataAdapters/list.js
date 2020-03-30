@@ -19,26 +19,35 @@ module.exports = async function (params = {}) {
   });
 
   if (res.data.values) {
-    let cliFilesArray = [];
-    const requests = [];
-    res.data.values.forEach(repo => {
-      let cliFile = __axios.get(`https://api.bitbucket.org/2.0/repositories/${repo.full_name}/src/develop/cli.config.js`, {
-        ...authHeaders
-      }).catch(error => {
-        // handle error
-        console.log(error);
-      }).then(res => {
-        console.log(res);
-        if (res && res.data) {
-          cliFilesArray.push(res.data);
-        }
-      });
-      requests.push(cliFile);
+    // res.data.values.forEach(repo => {
+    let cliFile = __axios.get(`https://api.bitbucket.org/2.0/teams/buzzbrothers/search/code?search_query=cli.config.js ext:js`, {
+      ...authHeaders
+    }).catch(error => {
+      // handle error
+      console.log(error);
+    }).then(res => {
+      // console.log(res.data.values[0].file.links);
+      // loop on all the search results to get the files content
+      if (res && res.data.values) {
+        let filesQueries = [];
+        res.data.values.forEach(file => {
+          filesQueries.push(__axios.get(file.file.links.self.href, {
+            ...authHeaders
+          }).then(fileRes => {
+            console.log(fileRes);
+          }));
+        });
+        Promise.all(filesQueries).then(() => {
+          console.log('END');
+        });
+      }
 
     });
-    Promise.all(requests).then(() => {
-      console.log(cliFilesArray);
-    });
+
+    // });
+    // Promise.all(requests).then(() => {
+    //   console.log(cliFilesArray);
+    // });
   }
 
   // console.log(res.data);

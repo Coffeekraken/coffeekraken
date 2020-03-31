@@ -1,4 +1,4 @@
-const __deepMerge = require('../object/deepMerge');
+const __deepMerge = require('../../object/deepMerge');
 
 /**
  * @name                                SCacheAdapter
@@ -56,34 +56,6 @@ module.exports = class SCacheAdapter {
   constructor(settings = {}) {
     // store the settings
     this._settings = settings;
-  }
-
-  /**
-   * @name                              stringify
-   * @type                              Function
-   * 
-   * Take the name, the value and the settings and generate a string that you can save in a file, in a database, etc...
-   * 
-   * @param               {String}                name                  The name of the item
-   * @param               {Mixed}                 value                 The value to save
-   * @param               {Object}                [settings={}]         An object of settings to override the default ones
-   * @return              {String}                                      The string that you can save where you want
-   * 
-   * @example           js
-   * class SCacheCoolAdapter extends SCacheAdapter {
-   * 
-   *    async set(name, value, settings = {}) {
-   *      const stringToSave = this.stringify(name, value, settings);
-   *      // save the string where you want...
-   *      return true;
-   *    }
-   * 
-   * }
-   * 
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  stringify(name, value, settings = {}) {
-
   }
 
 }

@@ -1,4 +1,5 @@
 const __axios = require('axios').default;
+const __SCache = require('@coffeekraken/sugar/node/cache/SCache');
 
 module.exports = async function (params = {}) {
 
@@ -10,6 +11,8 @@ module.exports = async function (params = {}) {
       'Authorization': `Basic ${token}`
     }
   };
+
+  const cache = new __SCache('cli')
 
   const res = await __axios.get('https://api.bitbucket.org/2.0/repositories/buzzbrothers', {
     params: {

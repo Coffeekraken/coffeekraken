@@ -1,0 +1,1 @@
+"{\"name\":\"coco\",\"value\":{\"hello\":\"world\"},\"created\":1585651229259,\"updated\":1585651229259,\"deleteAt\":\"function getTime() { [native code] }86400000\",\"settings\":{\"deleteOnExpire\":true,\"ttl\":\"1d\"}}"

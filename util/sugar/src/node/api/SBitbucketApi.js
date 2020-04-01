@@ -1,5 +1,6 @@
 const __deepMerge = require('../object/deepMerge');
 
+const __SAuth = require('../auth/SAuth');
 const __SApi = require('./SApi');
 
 /**
@@ -32,7 +33,15 @@ module.exports = class SBitbucketApi extends __SApi {
   constructor(name, settings = {}) {
 
     // init SApi instance
-    super(name, settings);
+    super(name, __deepMerge({
+      baseUrl: 'https://api.bitbucket.org/2.0',
+      auth: {
+        title: 'Bitbucket API Auth',
+        info: 'Log in with your Bitbucket credentials...',
+        type: 'basic',
+        validator: 'bitbucketApi'
+      }
+    }, settings));
 
   }
 

@@ -60,24 +60,28 @@ module.exports = class SAuthAdapter {
    * 
    * Ask form some auth informations depending on the auth type you want and the supported auth types of the selected adapter
    * 
-   * @param         {String}            type          
-   * The auth type you want to get infos for:
-   * - basic: Username/password base64 encoded "token"
-   * - bearer: Request a token to use as auth   * 
+   * @param         {Object}              [settings={}]
+   * - type (settings.type) {String}: Specify the auth type you want to ask like "basic", "bearer", "oauth2", etc...
+   * - title (null) {String}: Specify the title to display on top of the form
+   * - error (null) {String}: An error message to display to the user. Can be something like "Your credentials have been declined. Please try again..."
+   * - info (null) {String}: An info message to display to the user
    * 
    * @example           js
-   * const authInfos = await myAuth.ask('basic');
+   * const authInfos = await myAuth.ask({
+   *    type: 'basic'
+   * });
    * 
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  ask(type) {
+  async ask(settings = {}) {
     // make sure the adapter support the auth type requested
-    if (!this[`_${type}`]) {
-      throw new Error(`You try to ask the user for "${type}" auth informations but this auth type is not supported by the current adapter...`);
+    if (!this[`_${settings.type}`]) {
+      throw new Error(`You try to ask the user for "${settings.type}" auth informations but this auth type is not supported by the current adapter...`);
     }
 
     // get the auth info using the adapter
-    return this[`_${type}`]()
+    const infos = await this[`_${settings.type}`](settings);
+    return infos;
 
   }
 

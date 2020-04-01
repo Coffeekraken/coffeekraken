@@ -9,8 +9,10 @@ const __SBitbucketApi = require('@coffeekraken/sugar/node/api/SBitbucketApi');
 module.exports = async function start() {
 
   const api = new __SBitbucketApi('cli');
-  const a = await api.auth();
-  console.log('ifjweoifjweoifjwoeijfew', a);
+
+  const response = api.get('repositories');
+
+  console.log('re', response);
 
 
   // const router = new __SRouter({

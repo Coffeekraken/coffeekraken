@@ -8,11 +8,21 @@ const __SBitbucketApi = require('@coffeekraken/sugar/node/api/SBitbucketApi');
 
 module.exports = async function start() {
 
-  const api = new __SBitbucketApi('cli');
+  // const api = new __SBitbucketApi('cli');
 
-  const response = api.get('repositories');
+  // const response = await api.get('teams/buzzbrothers/search/code', {
+  //   timeout: '2h',
+  //   params: {
+  //     search_query: 'cli.config ext:js'
+  //   }
+  // });
 
-  console.log('re', response);
+  // response.data.values.forEach(async (v) => {
+  //   const res = await api.get(v.file.links.self.href);
+
+  //   console.log(res);
+
+  // });
 
 
   // const router = new __SRouter({

@@ -1,5 +1,5 @@
 {
-  "name": "@buzzbrothers/cli",
+  "name": "@buzzbrothers/coffeecli",
   "version": "0.0.1",
   "description": "Buzzbrothers internal CLI that let you execute actions on clients projects like deploy, install, etc...",
   "main": "src/node/index.js",

@@ -6,18 +6,21 @@ const __parse = require('../../string/parse');
 const __stringifyObject = require('stringify-object');
 const __deepMerge = require('../../object/deepMerge');
 const __tmpDir = require('../../fs/tmpDir');
+const __writeFileSync = require('../../fs/writeFileSync');
 
 /**
- * @name                  js
- * @namespace             sugar.node.class.sConfigAdapters
- * @type                  Function
+ * @name                  SConfigJsAdapter
+ * @namespace             sugar.node.config.adapters
+ * @type                  Class
  *
  * The JSON data adapter for the SConfig class that let you define a filename where you want to save your configs, how you want to encrypt/decrypt it
  * and then you just have to use the SConfig class and that's it...
  *
- * @param                   {String}                    path                  The dotted object path to specify the config you want in the retreived object
- * @param                   {Mixed}                     [value=null]          The value that you want to save, or null if you want to simply get a value
  * @param                   {Object}                    [settings={}]         The adapter settings that let you work with the good data storage solution...
+ * - name (null) {String}: This specify the config name that you want to use.
+ * - defaultConfigPath (null) {String}: This specify the path to the "default" config file.
+ * - appConfigPath (${process.cwd()}/[name].config.js) {String}: This specify the path to the "app" config file
+ * - userConfigPath (${__tmpDir()}/[name].config.js) {String}: This specify the path to the "user" config file
  * @return                  {Promise}                                         A promise that will be resolved once the data has been getted/saved...
  *
  * @settings
@@ -27,10 +30,11 @@ const __tmpDir = require('../../fs/tmpDir');
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-module.exports = class JsConfigAdapter {
+module.exports = class SConfigJsAdapter {
 
   static name = 'js';
   static defaultSettings = {
+    name: null,
     defaultConfigPath: null,
     appConfigPath: `${process.cwd()}/[name].config.js`,
     userConfigPath: `${__tmpDir()}/[name].config.js`
@@ -43,7 +47,7 @@ module.exports = class JsConfigAdapter {
     this._settings.userConfigPath = settings.userConfigPath.replace('[name]', settings.name);
   }
 
-  async load() {
+  load() {
 
     let defaultConfig = {};
     let appConfig = {};
@@ -69,9 +73,19 @@ module.exports = class JsConfigAdapter {
 
   }
 
-  async save(newConfig = {}) {
+  save(newConfig = {}) {
 
+    if (!this._settings.userConfigPath) {
+      throw new Error(`You try to save the config "${this._settings.name}" but the "settings.userConfigPath" is not set...`);
+    }
 
+    let newConfigString = `
+      module.exports = ${JSON.stringify(newConfig)};
+    `;
+    console.log(newConfigString);
+
+    // write the new config file
+    __writeFileSync(this._settings.userConfigPath, newConfigString);
 
   }
 

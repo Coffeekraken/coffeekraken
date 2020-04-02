@@ -1,4 +1,5 @@
 const __deepMerge = require('../object/deepMerge');
+const __machineId = require('node-machine-id').machineIdSync;
 
 const __SAuth = require('../auth/SAuth');
 const __SApi = require('./SApi');
@@ -30,10 +31,11 @@ module.exports = class SBitbucketApi extends __SApi {
    * 
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(name, settings = {}) {
+  constructor(settings = {}) {
 
     // init SApi instance
-    super(name, __deepMerge({
+    super(__deepMerge({
+      name: `SBitbucketApi-${__machineId()}`,
       baseUrl: 'https://api.bitbucket.org/2.0',
       auth: {
         title: 'Bitbucket API Auth',

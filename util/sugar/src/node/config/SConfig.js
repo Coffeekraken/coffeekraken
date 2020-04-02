@@ -8,6 +8,7 @@ const __isClass = require('../is/class');
 const __deepMerge = require('../object/deepMerge');
 const __get = require('../object/get');
 const __set = require('../object/set');
+const __upperFirst = require('../string/upperFirst');
 
 /**
  * @name                                            config
@@ -18,7 +19,7 @@ const __set = require('../object/set');
  * The base available data adapters are "json" and "js" allowing you to store data inside files on the server drive.
  *
  * @example             js
- * const SConfig = require('@coffeekraken/sugar/node/class/SConfig');
+ * const SConfig = require('@coffeekraken/sugar/node/config/SConfig');
  * const config = new SConfig({
  *    json: {
  *      filename: process.cwd() + '/config.json',
@@ -72,9 +73,14 @@ module.exports = class SConfig {
    * @param                {Object}                    [settings={}]          
    * An object to configure your SConfig instance. See the list above
    * The available settings are:
-   * - @setting         {String}            [adapters=["js"]]              An array of adapters name/instances to use for this SConfig instance
-   * - @setting         {Boolean}           [allowSet=true]             Specify if you can change the configs during the process or not
-   * - @settings        {Boolean}           [allowReset=true]           Specify if you can rest the configs during the process or not
+   * - adapters (['js']) {Array}: An array of adapters names/instances to use for this SConfig instance
+   * - defaultAdapter (null) {String}: This specify which adapter you want to use as default one. If not set, take the first adapter in the adapters list
+   * - allowSave (true) {Boolean}: Specify if this instance can save the updated configs
+   * - allowSet (true) {Boolean}: Specify if you can change the configs during the process or not
+   * - allowReset (true) {Boolean}: Specify if you can rest the configs during the process or not
+   * - allowNew (false) {Boolean}: Specify you can create new configs with this instance or not
+   * - autoLoad (true) {Boolean}: Specify if you want the config to be loaded automatically at instanciation
+   * - throwErrorOnUndefinedConfig (true) {Boolean}: Specify if you want the class to throw some errors when get undefined configs
    * @return              {SConfig}                                           An SConfig instance with the once you can access/update the configs
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -134,11 +140,11 @@ module.exports = class SConfig {
           adapterInstance = new cls(adapterSettings);
         } else {
           // check that the passed adapter is a default one
-          if (!__fs.existsSync(`${__dirname}/sConfigAdapters/${adapterInstance}.js`)) {
+          if (!__fs.existsSync(`${__dirname}/adapters/SConfig${__upperFirst(adapterInstance)}Adapter.js`)) {
             throw new Error(`You have specified the adapter "${adapterInstance}" as adapter to use but it does not exists...`);
           }
           // load the class and instanciate it
-          const cls = require(`${__dirname}/sConfigAdapters/${adapterInstance}.js`);
+          const cls = require(`${__dirname}/adapters/SConfig${__upperFirst(adapterInstance)}Adapter.js`);
           if (cls.defaultSettings) {
             adapterSettings = __deepMerge(cls.defaultSettings, adapterSettings);
           }
@@ -160,7 +166,9 @@ module.exports = class SConfig {
 
     // load the config from the default adapter if the setting "autoLoad" is true
     if (this._settings.autoLoad) {
-      this.load();
+      (async () => {
+        await this.load();
+      })();
     }
 
   }
@@ -179,11 +187,13 @@ module.exports = class SConfig {
    * 
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  async load(adapter = this._settings.defaultAdapter) {
+  load(adapter = this._settings.defaultAdapter) {
     if (!this._adapters[adapter]) {
       throw new Error(`You try to load the config from the adapter "${adapter}" but this adapter does not exists...`);
     }
-    return await this._adapters[adapter].instance.load();
+    const config = this._adapters[adapter].instance.load();
+    this._adapters[adapter].config = config;
+    return config;
   }
 
   /**

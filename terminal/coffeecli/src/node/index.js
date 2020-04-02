@@ -7,6 +7,9 @@ program.version(__packageJson.version);
 //   .description("List all the clients available")
 //   .action(require("./commands/clients"));
 
-require('./commands/start')();
+// require('./commands/start')();
+
+const __CoffeeCli = require('./classes/CoffeeCli');
+const cli = new __CoffeeCli();
 
 program.parse(process.argv);

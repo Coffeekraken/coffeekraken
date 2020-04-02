@@ -188,7 +188,7 @@ module.exports = class SCache {
   async set(name, value, settings = {}) {
 
     // test name
-    if (!/^[a-zA-Z0-9_-]+$/.test(name)) {
+    if (!/^[a-zA-Z0-9_\-\+]+$/.test(name)) {
       throw new Error(`You try to set an item named "${name}" is the "${this._name}" SCache instance but an item name can contain only these characters [a-zA-Z0-9_-]...`);
     }
 

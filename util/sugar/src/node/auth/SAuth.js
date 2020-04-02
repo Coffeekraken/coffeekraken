@@ -116,6 +116,96 @@ module.exports = class SAuth {
   }
 
   /**
+   * @name                          authInfo
+   * @type                          Object
+   * 
+   * Get the authInfo object if already saved in memory or ask the user for this
+   * 
+   * @param           {Object}            [settings={}]       An object of settings. Here's the options available:
+   * - title (null) {String}: The title to display on top of the form
+   * - type (settings.type) {String}: Specify the auth type that you want to ask to the user
+   * - error (null) {String}: An error message to display to the user. Can be something like "Your credentials have been declined. Please try again..."
+   * - info (null) {String}: An info message to display to the user
+   * @return          {Promise}                               A promise resolved with the authInfo object
+   * 
+   * @example         js
+   * const authInfo = await myAuth.authInfo();
+   * 
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  async authInfo(settings = {}) {
+
+    settings = __deepMerge({
+      type: this.type,
+      title: this._settings.title,
+      info: this._settings.info,
+      error: null
+    }, settings);
+
+    // return the cached info in memory
+    if (this._authInfo) return this._authInfo;
+
+    // check if we have already the infos in cache
+    const cachedInfos = await this._settings.cache.get(settings.type);
+    if (cachedInfos) {
+      const decryptedValue = __cryptObject.decrypt(cachedInfos, __machineIdSync());
+      return decryptedValue;
+    }
+
+    // ask the user for his credentials
+    const authInfo = await this.ask(settings);
+
+    // return the getted infos
+    return authInfo;
+
+  }
+
+  /**
+   * @name                          inject
+   * @type                          Function
+   * 
+   * This method take the passed requestConfig object and inject the auth parameters depending on the "injector" wanted that can be one of the described bellow
+   * 
+   * @param           {String|Function}            injector              The injector wanted that can be one of these:
+   * - axios: Inject the auth infos into an axio request config object
+   * - Function: A function that take as parameters the requestConfig object and the authInfo object and has to return the updated requestConfig
+   * @param           {Object}            requestConfig         The request config object into which inject the auth info
+   * @param           {Object}            [authInfo=this.authInfo]      The authInfo object to use
+   * @return          {Object}                                  The hooked requestConfig
+   * 
+   * @example         js
+   * myAuth.inject('axios', requestConfig);
+   * 
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  inject(injector, requestConfig, authInfo = this._authInfo) {
+    // if we don't have any auth info, return the request object untouched
+    if (!authInfo) return requestConfig;
+
+    // init the final request config variable that will be hooked
+    let finalRequestConfig = {};
+
+    // check if the injector is a string
+    if (typeof injector === 'string') {
+      if (!__fs.existsSync(`${__dirname}/injectors/${injector}Injector.js`)) {
+        throw new Error(`You try to inject the auth info using the injector "${injector}" but it does not exists...`);
+      }
+      finalRequestConfig = require(`${__dirname}/injectors/${injector}Injector.js`)(Object.assign(requestConfig), authInfo);
+    } else if (typeof injector === 'function') {
+      finalRequestConfig = injector(Object.assign(requestConfig), authInfo);
+    }
+
+    // process a little bit the final request config object
+    delete finalRequestConfig.name;
+    delete finalRequestConfig.token;
+    delete finalRequestConfig.type;
+
+    // return the requestConfig untouched as fallback
+    return finalRequestConfig;
+
+  }
+
+  /**
    * @name                          ask
    * @type                          Function
    * @async
@@ -123,13 +213,14 @@ module.exports = class SAuth {
    * Allows you to request for some auth informations to the user.
    * 
    * @param           {Object}            [settings={}]       An object of settings. Here's the options available:
+   * - title (null) {String}: The title to display on top of the form
    * - type (settings.type) {String}: Specify the auth type that you want to ask to the user
    * - error (null) {String}: An error message to display to the user. Can be something like "Your credentials have been declined. Please try again..."
    * - info (null) {String}: An info message to display to the user
    * @return          {Promise}                         A promise that will be resolved once the user (or the api) has answer with the correct infos
    * 
    * @example           js
-   * const authInfos = await myAuthInstance.ask('basic');
+   * const authInfos = await myAuthInstance.ask();
    * // {
    * //   type: 'basic',
    * //   name: 'maAuth.basic',
@@ -153,13 +244,6 @@ module.exports = class SAuth {
     // check that the requested auth type is handled by the adapter
     if (this._adapter.supportedAuthTypes.indexOf(settings.type) === -1) {
       throw new Error(`You try to ask the auth informations of type "${settings.type}" through the "${this._name}" SAuth instance but the setted adapter does not handle this auth type...`);
-    }
-
-    // check if we have already the infos in cache
-    const cachedInfos = await this._settings.cache.get(settings.type);
-    if (cachedInfos) {
-      const decryptedValue = __cryptObject.decrypt(cachedInfos, __machineIdSync());
-      return decryptedValue;
     }
 
     // ask the adapter for the auth infos
@@ -203,6 +287,9 @@ module.exports = class SAuth {
 
     // the infos are ok so we save them in cache
     await this._settings.cache.set(settings.type, cryptedInfos, {});
+
+    // save the auth info into memory
+    this._authInfo = formatedInfos;
 
     // return the getted infos
     return formatedInfos;

@@ -1,5 +1,5 @@
 const __log = require('./log');
-const __splitEveryNChars = require('../../../dist/js/string/splitEveryNChars');
+const __splitEveryNChars = require('../../../js/string/splitEveryNChars');
 const __getDevEnv = require('../dev/getDevEnv');
 
 /**
@@ -19,9 +19,9 @@ const __getDevEnv = require('../dev/getDevEnv');
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function logHeader(title, description=null, infos={}) {
+module.exports = function logHeader(title, description = null, infos = {}) {
 
-  const columns = process.env.STDOUT_COLUMNS || process.stdout.columns;
+  const columns = process.env.STDOUT_COLUMNS || process.stdout.columns;
 
   const sidePadding = __getDevEnv('stdout.padding');
 

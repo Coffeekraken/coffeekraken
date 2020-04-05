@@ -1,4 +1,4 @@
-import SAjax from "../class/SAjax";
+import SAjax from "../http/SAjax";
 import __formSerialize from "form-serialize";
 
 /**

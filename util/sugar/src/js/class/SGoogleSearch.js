@@ -26,7 +26,7 @@
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 
-import SAjax from "../class/SAjax";
+import SAjax from "../http/SAjax";
 
 export default class SGoogleSearch {
   /**

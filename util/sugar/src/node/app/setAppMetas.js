@@ -1,4 +1,4 @@
-const __ensureExist = require('../../../dist/js/object/ensureExist');
+const __ensureExist = require('../../../js/object/ensureExist');
 
 /**
  * @name                  setAppMetas
@@ -30,9 +30,9 @@ module.exports = function setAppMetas(meta, override = false) {
   }
 
   // check if a "domain" meta exist
-  if ( ! Sugar._app.metas.domain) {
+  if (!Sugar._app.metas.domain) {
     if (Sugar._app.metas.homepage) {
-      const domain = Sugar._app.metas.homepage.replace('https://','').replace('http://','').split('/')[0];
+      const domain = Sugar._app.metas.homepage.replace('https://', '').replace('http://', '').split('/')[0];
       Sugar._app.metas.domain = domain;
     } else if (process.env.DOMAIN) {
       Sugar._app.metas.domain = process.env.DOMAIN;

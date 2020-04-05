@@ -1,4 +1,4 @@
-const __ensureExist = require('../../../dist/js/object/ensureExist');
+const __ensureExist = require('../../../js/object/ensureExist');
 /**
  * @name                                  isTransportRegistered
  * @namespace                             sugar.node.log

@@ -1,5 +1,5 @@
 /**
- * @name 		settings
+ * @name 		        settings
  * @namespace     sugar.js.core
  * @type 		{Object}
  *
@@ -32,13 +32,9 @@ domReady(() => {
     _settings = _settings.replace(/\\"/g, '"');
     // handle numbers that does not have initial 0.65
     _settings = _settings.replace(/([:|\s])(\.\d+)([\s|,|}]?)/g, "$10$2$3");
-    // _settings = _settings.replace(/\\\'\\"/g,'"').replace(/\\"\\\'/g,'"');
-    // _settings = _settings.replace(/\'\\"/g,'"').replace(/\\"\'/g,'"');
-    // _settings = _settings.replace(/'"/g,'"').replace(/"'/g,'"');
     _settings = _settings.slice(1, _settings.length - 1);
     _settings = JSON.parse(_settings);
     Object.assign(settings, _settings);
-    // settings = {...settings, ..._settings};
   }
 });
 

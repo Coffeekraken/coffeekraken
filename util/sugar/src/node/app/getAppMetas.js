@@ -1,4 +1,4 @@
-const __existDeep = require('../../../dist/js/object/existDeep');
+const __existDeep = require('../../../js/object/existDeep');
 
 
 /**
@@ -17,6 +17,6 @@ const __existDeep = require('../../../dist/js/object/existDeep');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function getAppMetas() {
-  if ( ! __existDeep('global.Sugar._app.metas')) return {};
+  if (!__existDeep('global.Sugar._app.metas')) return {};
   return Sugar._app.metas;
 }

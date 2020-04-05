@@ -1,5 +1,5 @@
-const __replaceTags = require('../../../../dist/js/html/replaceTags');
-const __term = require( 'terminal-kit' ).terminal;
+const __replaceTags = require('../../../js/html/replaceTags');
+const __term = require('terminal-kit').terminal;
 
 /**
  * @name                              mail

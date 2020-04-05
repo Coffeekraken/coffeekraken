@@ -11,7 +11,7 @@ const { mergeAndCompare } = require('merge-anything');
  * @return          {Object}                              The merged object result
  *
  * @example           js
- * import deepMerge from '@coffeekraken/sugar/js/object/deepMerge';
+ * import deepMerge from '@coffeekraken/sugar/node/object/deepMerge';
  * deepMerge({a: {b: {c: 'c', d: 'd'}}}, {a: {b: {e: 'e', f: 'f'}}});
  * // => { a: { b: { c: 'c', d: 'd', e: 'e', f: 'f' } } }
  *

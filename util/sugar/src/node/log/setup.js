@@ -1,5 +1,5 @@
-const __ensureExist = require('../../../dist/js/object/ensureExist');
-const __deepMerge = require('../../../dist/js/object/deepMerge');
+const __ensureExist = require('../../../js/object/ensureExist');
+const __deepMerge = require('../../../js/object/deepMerge');
 
 /**
  * @name                                                  setup

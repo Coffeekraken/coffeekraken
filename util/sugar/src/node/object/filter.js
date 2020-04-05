@@ -12,7 +12,7 @@
  * @return              {Object}                                      The filtered object
  *
  * @example           js
- * const filter = require('@coffeekraken/sugar/js/object/filter');
+ * const filter = require('@coffeekraken/sugar/node/object/filter');
  * filter({
  *    coco: 'hello',
  *    plop: true

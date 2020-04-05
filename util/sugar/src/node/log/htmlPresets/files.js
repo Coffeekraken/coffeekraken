@@ -1,4 +1,4 @@
-const __replaceTags = require('../../../../dist/js/html/replaceTags');
+const __replaceTags = require('../../../js/html/replaceTags');
 const __chalk = require('chalk');
 
 __chalk.level = 3;

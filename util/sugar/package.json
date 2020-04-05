@@ -13,8 +13,12 @@
   ],
   "main": "dist/js/_all.js",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "build.js": "rm -rf dist && babel src/js -d js"
+  },
   "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-export-default-from": "^7.8.3",
     "@ungap/custom-elements-builtin": "^0.1.2",
     "ansi-escapes": "^4.3.0",
     "axios": "^0.19.2",
@@ -92,6 +96,12 @@
     "winston-slack-webhook-transport": "^1.1.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-proposal-export-namespace-from": "^7.8.3",
+    "@babel/plugin-transform-modules-commonjs": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "babel-plugin-add-module-exports": "^1.0.2",
     "replace-in-files": "^2.0.3",
     "symlink-dir": "^3.1.1",
     "webpack-cli": "^3.3.10"

@@ -1,5 +1,5 @@
 const __deepMerge = require('../object/deepMerge');
-const __flattenObj = require('../../../dist/js/object/flatten');
+const __flattenObj = require('../../../js/object/flatten');
 /**
  * @name                            setupDevEnv
  * @namespace                       sugar.node.dev

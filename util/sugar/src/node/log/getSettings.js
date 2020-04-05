@@ -1,5 +1,5 @@
-const __existDeep = require('../../../dist/js/object/existDeep');
-const __ensureExist = require('../../../dist/js/object/ensureExist');
+const __existDeep = require('../../../js/object/existDeep');
+const __ensureExist = require('../../../js/object/ensureExist');
 
 
 /**
@@ -24,7 +24,7 @@ module.exports = (transportName = null) => {
   __ensureExist('global.Sugar._log');
 
   if (transportName) {
-    if ( ! __existDeep(`Sugar._log.transports.${transportName}.settings`)) {
+    if (!__existDeep(`Sugar._log.transports.${transportName}.settings`)) {
       throw new Error(`You try to get the log settings for the transport "${transportName}" but this transport has not been registered...`);
       return false;
     }

@@ -1,43 +1,23 @@
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _axios = _interopRequireDefault(require("axios"));
-
-var _Observable = require("rxjs/Observable");
-
-var _strToHtml = _interopRequireDefault(require("../string/strToHtml"));
-
-var _htmlToStr = _interopRequireDefault(require("../string/htmlToStr"));
-
-var _SAjaxRequest = _interopRequireDefault(require("./SAjaxRequest"));
-
-var _autoCast = _interopRequireDefault(require("../string/autoCast"));
-
-var _convert = _interopRequireDefault(require("../time/convert"));
-
-var _deepMerge = _interopRequireDefault(require("../object/deepMerge"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+import __axios from 'axios';
+import __strToHtml from "../string/strToHtml";
+import __htmlToStr from "../string/htmlToStr";
+import __SRequestConfig from "./SRequestConfig";
+import __autoCast from "../string/autoCast";
+import __convert from '../time/convert';
+import __deepMerge from '../object/deepMerge';
 
 /**
- * @name 		                    SAjax
+ * @name 		                    SRequest
  * @namespace                   sugar.js.http
  * @type                        Class
  *
  * Class that allows to simply handle ajax requests with ease.
  * This class give some useful features like :
  * - Promise support
- * - Observable support
  * - Recursive requests
  *
  * @example 	js
- * const ajx = new SAjax({
+ * const request = new SRequest({
  * 		url : 'api/...',
  * 		method : 'GET',
  * 		data : {
@@ -46,7 +26,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * });
  *
  * // send and listen for data
- * ajx.send().then((response) => {
+ * request.send().then((response) => {
  * 		// do something with response here...
  * }).catch((error) => {
  * 		// something went wrong...
@@ -54,26 +34,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-class SAjax {
+export default class SRequest {
+
   /**
    * @name                      _defaultRequestSettings
-   * @type                      {SAjaxRequest}
+   * @type                      {SRequestConfig}
    * @private
    * 
    * Store the request settings to use
    * 
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
+  _defaultRequestSettings = {};
 
   /**
    * @name                      _currentRequestSettings
-   * @type                      {SAjaxRequest}
+   * @type                      {SRequestConfig}
    * @private
    * 
    * Store the request settings to use
    * 
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
+  _currentRequestSettings = {};
 
   /**
    * @name                      _requestsCount
@@ -84,6 +67,7 @@ class SAjax {
    * 
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
+  _requestsCount = 0;
 
   /**
    * @name                              constructor
@@ -91,24 +75,21 @@ class SAjax {
    * 
    * Constructor
    * 
-   * @param           	{SAjaxRequest|Object} 		            request 	            	The request object used to make ajax call
+   * @param           	{SRequestConfig|Object} 		            request 	            	The request object used to make ajax call
    * 
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(request) {
-    _defineProperty(this, "_defaultRequestSettings", {});
 
-    _defineProperty(this, "_currentRequestSettings", {});
-
-    _defineProperty(this, "_requestsCount", 0);
-
-    // if the request is not an SAjaxRequest, create it
-    if (!(request instanceof _SAjaxRequest.default)) {
-      this._defaultRequestSettings = new _SAjaxRequest.default(request);
+    // if the request is not an SRequestConfig, create it
+    if (!(request instanceof __SRequestConfig)) {
+      this._defaultRequestSettings = new __SRequestConfig(request);
     } else {
       this._defaultRequestSettings = request;
     }
+
   }
+
   /**
    * @name                      _onSuccess
    * @type                      Function
@@ -120,47 +101,49 @@ class SAjax {
    * 
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-
-
   _onSuccess(response) {
+
     // init the final response
-    let finalResponse = response.data; // get the response content-type header
+    let finalResponse = response.data;
 
-    const contentType = response.headers['content-type'] || 'text/plain'; // try to get an hash in the settings url
+    // get the response content-type header
+    const contentType = response.headers['content-type'] || 'text/plain';
 
-    const hash = this._currentRequestSettings.url.indexOf('#') !== -1 ? this._currentRequestSettings.url.split('#')[1] : false; // if a hash exist, check that we are in the browser to have access to the document and querySelector method
+    // try to get an hash in the settings url
+    const hash = this._currentRequestSettings.url.indexOf('#') !== -1 ? this._currentRequestSettings.url.split('#')[1] : false;
 
+    // if a hash exist, check that we are in the browser to have access to the document and querySelector method
     if (contentType === 'text/html' && hash !== false && document !== undefined && document.querySelector !== undefined) {
-      const $html = (0, _strToHtml.default)(response.data);
-
+      const $html = __strToHtml(response.data);
       if ($html.id === hash) {
-        finalResponse = (0, _htmlToStr.default)($html);
+        finalResponse = __htmlToStr($html);
       } else {
         const $part = $html.querySelector(`#${hash}`);
-
         if ($part) {
-          finalResponse = (0, _htmlToStr.default)($part);
+          finalResponse = __htmlToStr($part);
         }
       }
     } else if (contentType === 'application/json') {
       finalResponse = JSON.parse(response.data);
-    } // save the processed data in the response object
+    }
 
+    // save the processed data in the response object
+    response.data = finalResponse;
 
-    response.data = finalResponse; // remove some useless response properties
-
+    // remove some useless response properties
     delete response.config;
-    delete response.request; // append the new response inside the responsesArray
+    delete response.request;
 
-    this._responsesArray.push(response); // check if an "everyResponse" setting has been set
+    // append the new response inside the responsesArray
+    this._responsesArray.push(response);
 
-
+    // check if an "everyResponse" setting has been set
     if (this._currentRequestSettings.everyResponse) {
       // call the callback function
       this._currentRequestSettings.everyResponse(Object.assign({}, response), this._requestsCount);
-    } // check if it was the last request or not
+    }
 
-
+    // check if it was the last request or not
     if (this._requestsCount >= this._currentRequestSettings.sendCount) {
       // resolve the request session
       this._resolve(this._responsesArray.length <= 1 ? this._responsesArray[0] : this._responsesArray);
@@ -168,7 +151,9 @@ class SAjax {
       // send a new request
       this._send();
     }
+
   }
+
   /**
    * @name                      _onError
    * @type                      Function
@@ -180,12 +165,13 @@ class SAjax {
    * 
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-
-
   _onError(error) {
+
     // something has gone wrong with the request(s) so reject the session
     this._reject(error);
+
   }
+
   /**
    * @name                          _send
    * @type                          Function
@@ -197,23 +183,28 @@ class SAjax {
    * 
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-
-
   _send(requestSettings = {}) {
+
     // update request count
-    this._requestsCount++; // process request settings
+    this._requestsCount++;
 
-    requestSettings = (0, _deepMerge.default)(this._defaultRequestSettings, requestSettings);
-
+    // process request settings
+    requestSettings = __deepMerge(this._defaultRequestSettings, requestSettings);
     if (requestSettings.beforeSend) {
-      requestSettings = requestSettings.beforeSend(requestSettings, this._requestsCount);
-    } // save the current request settings
+      requestSettings = requestSettings.beforeSend(
+        requestSettings,
+        this._requestsCount
+      );
+    }
 
+    // save the current request settings
+    this._currentRequestSettings = Object.assign(requestSettings);
 
-    this._currentRequestSettings = Object.assign(requestSettings); // create the new axios ajax instance
+    // create the new axios ajax instance
+    __axios(requestSettings).then(this._onSuccess.bind(this)).catch(this._onError.bind(this));
 
-    (0, _axios.default)(requestSettings).then(this._onSuccess.bind(this)).catch(this._onError.bind(this));
   }
+
   /**
    * @name                retry
    * @type                Function
@@ -227,11 +218,11 @@ class SAjax {
    * 
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-
-
   retry() {
     return this.send();
   }
+
+
   /**
    * @name              send
    * @type              Function
@@ -250,8 +241,6 @@ class SAjax {
    * 
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-
-
   send(requestSettings = {}) {
     // return a promise
     return new Promise((resolve, reject) => {
@@ -263,19 +252,20 @@ class SAjax {
       //     return;
       //   }
       // }
+
       // reset the variables
-      this._requestsCount = 0; // init the data array holder
+      this._requestsCount = 0;
 
-      this._responsesArray = []; // set the resolve and reject callback in the instance
+      // init the data array holder
+      this._responsesArray = [];
 
+      // set the resolve and reject callback in the instance
       this._resolve = resolve;
-      this._reject = reject; // start requests
+      this._reject = reject;
 
+      // start requests
       this._send(requestSettings);
+
     });
   }
-
 }
-
-exports.default = SAjax;
-module.exports = exports.default;

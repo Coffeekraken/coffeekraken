@@ -1,6 +1,13 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = deepMergeErase;
+
 /**
  * @name                              deepMergeErase
- * @namespace                         sugar.node.object
+ * @namespace                         sugar.js.object
  * @type                              Function
  * 
  * This function allows you to tell the deepMerge one to use ONLY the passed value as final value and to not merge it as normal...
@@ -10,8 +17,8 @@
  * @return                {Object}                            Return the object with the indication that it need to erase the other ones...
  * 
  * @example               js
- * const deepMerge = require('@coffeekraken/sugar/node/object/deepMerge');
- * const deepMergeErase = require('@coffeekraken/sugar/node/object/deepMergeErase');
+ * import deepMerge from '@coffeekraken/sugar/node/object/deepMerge';
+ * import deepMergeErase from '@coffeekraken/sugar/node/object/deepMergeErase';
  * const obj1 = {
  *    value: {
  *      hello: 'world',
@@ -32,8 +39,10 @@
  * 
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function deepMergeErase(obj) {
+function deepMergeErase(obj) {
   // set the flag to erase the other objects
   obj._deepMergeEraseKeys = Object.keys(obj);
   return obj;
 }
+
+module.exports = exports.default;

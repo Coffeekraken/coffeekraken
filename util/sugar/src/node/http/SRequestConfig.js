@@ -1,0 +1,4 @@
+/**
+ * @src               ../../js/http/SRequestConfig.js
+ */
+module.exports = require('../../../js/http/SRequestConfig');

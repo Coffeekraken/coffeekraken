@@ -14,7 +14,8 @@
   "main": "dist/js/_all.js",
   "license": "MIT",
   "scripts": {
-    "build.js": "rm -rf dist && babel src/js -d js"
+    "test": "jest",
+    "build.js": "rm -rf dist && babel src/js -d js --ignore 'src/**/*.spec.js','src/**/*.test.js'"
   },
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "^7.8.3",
@@ -101,7 +102,12 @@
     "@babel/plugin-proposal-export-namespace-from": "^7.8.3",
     "@babel/plugin-transform-modules-commonjs": "^7.9.0",
     "@babel/preset-env": "^7.9.0",
+    "@shopify/jest-dom-mocks": "^2.8.11",
+    "@testing-library/jest-dom": "^5.3.0",
     "babel-plugin-add-module-exports": "^1.0.2",
+    "jest": "^25.2.7",
+    "jest-puppeteer": "^4.4.0",
+    "puppeteer": "^2.1.1",
     "replace-in-files": "^2.0.3",
     "symlink-dir": "^3.1.1",
     "webpack-cli": "^3.3.10"

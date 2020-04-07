@@ -1,26 +1,15 @@
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _convert = _interopRequireDefault(require("../time/convert"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+import __convert from '../time/convert';
 
 /**
- * @name 	              	SAjaxRequest
+ * @name 	              	SRequestConfig
  * @namespace              sugar.js.http
  * @type                  Class
  *
- * Class that represent an ajax request that will be passed to an SAjax instance.
+ * Class that represent an ajax request that will be passed to an SRequest instance.
  * All the axios settings are supported by this class
  *
  * @example 	js
- * const request = new SAjaxRequest({
+ * const request = new SRequestConfig({
  *  	url : '/api/...',
  *  	method : 'GET',
  *  	data : {
@@ -31,7 +20,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * @see       https://github.com/axios/axios
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-class SAjaxRequest {
+export default class SRequestConfig {
+
   /**
    * @name                    url
    * @type                    String
@@ -41,6 +31,7 @@ class SAjaxRequest {
    * 
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
+  url = null;
 
   /**
    * @name                      baseURL
@@ -52,6 +43,7 @@ class SAjaxRequest {
    * 
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
+  baseURL = null;
 
   /**
    * @name                      method
@@ -63,6 +55,7 @@ class SAjaxRequest {
    * 
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
+  method = "GET";
 
   /**
    * @name                      headers
@@ -78,6 +71,7 @@ class SAjaxRequest {
    * 
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
+  headers = {};
 
   /**
    * @name                  params
@@ -94,6 +88,7 @@ class SAjaxRequest {
    * 
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
+  params = {};
 
   /**
    * @name                      data
@@ -110,6 +105,7 @@ class SAjaxRequest {
    * 
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
+  data = {};
 
   /**
    * @name                  timeout
@@ -121,6 +117,7 @@ class SAjaxRequest {
    * 
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
+  timeout = 0;
 
   /**
    * @name                      sendInterval
@@ -134,6 +131,7 @@ class SAjaxRequest {
    * 
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
+  sendInterval = 1000;
 
   /**
    * @name                        sendCount
@@ -145,6 +143,7 @@ class SAjaxRequest {
    * 
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
+  sendCount = 1;
 
   /**
    * @name                   everyResponse
@@ -157,6 +156,7 @@ class SAjaxRequest {
    * 
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
+  everyResponse = null;
 
   /**
    * @name                  responseType
@@ -168,6 +168,7 @@ class SAjaxRequest {
    * 
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
+  responseType = 'json';
 
   /**
    * @name                        constructor
@@ -178,36 +179,11 @@ class SAjaxRequest {
    * @param 	      {Object} 	          params 		              The request params in object format
    */
   constructor(params) {
-    _defineProperty(this, "url", null);
-
-    _defineProperty(this, "baseURL", null);
-
-    _defineProperty(this, "method", "GET");
-
-    _defineProperty(this, "headers", {});
-
-    _defineProperty(this, "params", {});
-
-    _defineProperty(this, "data", {});
-
-    _defineProperty(this, "timeout", 0);
-
-    _defineProperty(this, "sendInterval", 1000);
-
-    _defineProperty(this, "sendCount", 1);
-
-    _defineProperty(this, "everyResponse", null);
-
-    _defineProperty(this, "responseType", 'json');
-
     // process params that need something
-    if (params.timeout && typeof params.timeout === 'string') params.timeout = (0, _convert.default)(params.timeout, 'ms');
-    if (params.sendInterval && typeof params.sendInterval === 'string') params.sendInterval = (0, _convert.default)(params.sendInterval, 'ms'); // set the parameters
+    if (params.timeout && typeof params.timeout === 'string') params.timeout = __convert(params.timeout, 'ms');
+    if (params.sendInterval && typeof params.sendInterval === 'string') params.sendInterval = __convert(params.sendInterval, 'ms');
 
+    // set the parameters
     Object.assign(this, params);
   }
-
 }
-
-exports.default = SAjaxRequest;
-module.exports = exports.default;

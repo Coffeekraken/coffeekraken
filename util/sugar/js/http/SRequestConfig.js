@@ -12,15 +12,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 /**
- * @name 	              	SAjaxRequest
+ * @name 	              	SRequestConfig
  * @namespace              sugar.js.http
  * @type                  Class
  *
- * Class that represent an ajax request that will be passed to an SAjax instance.
+ * Class that represent an ajax request that will be passed to an SRequest instance.
  * All the axios settings are supported by this class
  *
  * @example 	js
- * const request = new SAjaxRequest({
+ * const request = new SRequestConfig({
  *  	url : '/api/...',
  *  	method : 'GET',
  *  	data : {
@@ -31,7 +31,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * @see       https://github.com/axios/axios
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-class SAjaxRequest {
+class SRequestConfig {
   /**
    * @name                    url
    * @type                    String
@@ -209,5 +209,5 @@ class SAjaxRequest {
 
 }
 
-exports.default = SAjaxRequest;
+exports.default = SRequestConfig;
 module.exports = exports.default;

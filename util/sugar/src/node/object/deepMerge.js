@@ -46,7 +46,3 @@ function deepMerge() {
 }
 
 module.exports = deepMerge;
-
-deepMerge({
-  coco: 'hello'
-}, {});

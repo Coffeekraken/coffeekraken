@@ -7,13 +7,11 @@ exports.default = void 0;
 
 var _axios = _interopRequireDefault(require("axios"));
 
-var _Observable = require("rxjs/Observable");
-
 var _strToHtml = _interopRequireDefault(require("../string/strToHtml"));
 
 var _htmlToStr = _interopRequireDefault(require("../string/htmlToStr"));
 
-var _SAjaxRequest = _interopRequireDefault(require("./SAjaxRequest"));
+var _SRequestConfig = _interopRequireDefault(require("./SRequestConfig"));
 
 var _autoCast = _interopRequireDefault(require("../string/autoCast"));
 
@@ -26,18 +24,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 /**
- * @name 		                    SAjax
+ * @name 		                    SRequest
  * @namespace                   sugar.js.http
  * @type                        Class
  *
  * Class that allows to simply handle ajax requests with ease.
  * This class give some useful features like :
  * - Promise support
- * - Observable support
  * - Recursive requests
  *
  * @example 	js
- * const ajx = new SAjax({
+ * const request = new SRequest({
  * 		url : 'api/...',
  * 		method : 'GET',
  * 		data : {
@@ -46,7 +43,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * });
  *
  * // send and listen for data
- * ajx.send().then((response) => {
+ * request.send().then((response) => {
  * 		// do something with response here...
  * }).catch((error) => {
  * 		// something went wrong...
@@ -54,10 +51,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-class SAjax {
+class SRequest {
   /**
    * @name                      _defaultRequestSettings
-   * @type                      {SAjaxRequest}
+   * @type                      {SRequestConfig}
    * @private
    * 
    * Store the request settings to use
@@ -67,7 +64,7 @@ class SAjax {
 
   /**
    * @name                      _currentRequestSettings
-   * @type                      {SAjaxRequest}
+   * @type                      {SRequestConfig}
    * @private
    * 
    * Store the request settings to use
@@ -91,7 +88,7 @@ class SAjax {
    * 
    * Constructor
    * 
-   * @param           	{SAjaxRequest|Object} 		            request 	            	The request object used to make ajax call
+   * @param           	{SRequestConfig|Object} 		            request 	            	The request object used to make ajax call
    * 
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
@@ -102,9 +99,9 @@ class SAjax {
 
     _defineProperty(this, "_requestsCount", 0);
 
-    // if the request is not an SAjaxRequest, create it
-    if (!(request instanceof _SAjaxRequest.default)) {
-      this._defaultRequestSettings = new _SAjaxRequest.default(request);
+    // if the request is not an SRequestConfig, create it
+    if (!(request instanceof _SRequestConfig.default)) {
+      this._defaultRequestSettings = new _SRequestConfig.default(request);
     } else {
       this._defaultRequestSettings = request;
     }
@@ -277,5 +274,5 @@ class SAjax {
 
 }
 
-exports.default = SAjax;
+exports.default = SRequest;
 module.exports = exports.default;

@@ -1,4 +1,4 @@
-import SEvent from "../class/SEvent";
+import __SEvent from "../event/SEvent";
 
 /**
  * @name      dispatchEvent
@@ -21,7 +21,7 @@ import SEvent from "../class/SEvent";
  */
 export default function dispatchEvent(target, name, data = null) {
   // create new event
-  const e = new SEvent(name, {
+  const e = new __SEvent(name, {
     detail: data,
     bubbles: true,
     cancelable: true

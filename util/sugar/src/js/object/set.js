@@ -1,3 +1,5 @@
+import __get from './get';
+
 /**
  * @name                                        set
  * @namespace                                   sugar.js.object
@@ -16,7 +18,7 @@
  *
  */
 export default (obj, path, value) => {
-  if ( ! path || path === '' || path === '.') {
+  if (!path || path === '' || path === '.') {
     obj = value;
     return;
   }
@@ -27,5 +29,6 @@ export default (obj, path, value) => {
     if (!(n in o)) o[n] = {}
     o = o[n]
   }
-  o[a[0]] = value
+  o[a[0]] = value;
+  return __get(obj, path);
 }

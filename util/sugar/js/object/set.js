@@ -5,6 +5,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _get = _interopRequireDefault(require("./get"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 /**
  * @name                                        set
  * @namespace                                   sugar.js.object
@@ -38,6 +42,7 @@ var _default = (obj, path, value) => {
   }
 
   o[a[0]] = value;
+  return (0, _get.default)(obj, path);
 };
 
 exports.default = _default;

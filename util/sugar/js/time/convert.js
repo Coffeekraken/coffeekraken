@@ -27,22 +27,26 @@ function convert(from, to = 'ms') {
   let fromMs = from; // check if the time is a string to convert it to ms
 
   if (typeof from === 'string') {
-    if (from.slice(-2) === 'ms' || from.slice(-11) === 'millisecond' || from.slice(-12) === 'milliseconds') {
-      fromMs = parseFloat(from);
-    } else if (from.slice(-1) === 's' || from.slice(-6) === 'second' || from.slice(-7) === 'seconds') {
-      fromMs = parseFloat(from) * 1000;
-    } else if (from.slice(-1) === 'm' || from.slice(-6) === 'minute' || from.slice(-7) === 'minutes') {
-      fromMs = parseFloat(from) * 60 * 1000;
-    } else if (from.slice(-1) === 'h' || from.slice(-4) === 'hour' || from.slice(-5) === 'months') {
-      fromMs = parseFloat(from) * 60 * 60 * 1000;
-    } else if (from.slice(-1) === 'd' || from.slice(-3) === 'day' || from.slice(-4) === 'days') {
-      fromMs = parseFloat(from) * 24 * 60 * 60 * 1000;
-    } else if (from.slice(-1) === 'w' || from.slice(-4) === 'week' || from.slice(-5) === 'weeks') {
-      fromMs = parseFloat(from) * 7 * 24 * 60 * 60 * 1000;
-    } else if (from.slice(-5) === 'month' || from.slice(-6) === 'months') {
-      fromMs = parseFloat(from) * 31 * 24 * 60 * 60 * 1000;
-    } else if (from.slice(-1) === 'y' || from.slice(-4) === 'year' || from.slice(-5) === 'years') {
-      fromMs = parseFloat(from) * 365 * 24 * 60 * 60 * 1000;
+    const fromNumber = parseFloat(from);
+    const fromLength = fromNumber.toString().length;
+    const fromString = from.slice(fromLength);
+
+    if (fromString === 'ms' || fromString === 'millisecond' || fromString === 'milliseconds') {
+      fromMs = fromNumber;
+    } else if (fromString === 's' || fromString === 'second' || fromString === 'seconds') {
+      fromMs = fromNumber * 1000;
+    } else if (fromString === 'm' || fromString === 'minute' || fromString === 'minutes') {
+      fromMs = fromNumber * 60 * 1000;
+    } else if (fromString === 'h' || fromString === 'hour' || fromString === 'months') {
+      fromMs = fromNumber * 60 * 60 * 1000;
+    } else if (fromString === 'd' || fromString === 'day' || fromString === 'days') {
+      fromMs = fromNumber * 24 * 60 * 60 * 1000;
+    } else if (fromString === 'w' || fromString === 'week' || fromString === 'weeks') {
+      fromMs = fromNumber * 7 * 24 * 60 * 60 * 1000;
+    } else if (fromString === 'month' || fromString === 'months') {
+      fromMs = fromNumber * 31 * 24 * 60 * 60 * 1000;
+    } else if (fromString === 'y' || fromString === 'year' || fromString === 'years') {
+      fromMs = fromNumber * 365 * 24 * 60 * 60 * 1000;
     }
   } // convert not the fromMs value to the requested format
 
@@ -96,7 +100,7 @@ function convert(from, to = 'ms') {
       break;
 
     default:
-      throw new Error(`You tra to convert "${from}" to "${to}" but this format does not exist... The valids formats are "ms,s,m,h,d,w,month,y"...`);
+      throw new Error(`You try to convert "${from}" to "${to}" but this format does not exist... The valids formats are "ms,s,m,h,d,w,month,y"...`);
       break;
   }
 }

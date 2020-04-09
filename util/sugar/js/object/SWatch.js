@@ -136,8 +136,16 @@ class SWatch {
       Object.defineProperties(this._proxiedObject, {
         unwatch: unwatchPropertyObj
       });
-    }
+    } // set a property that is usefull to check if the object
+    // is a SWatch watched one...
 
+
+    Object.defineProperty(this._proxiedObject, '__$SWatch', {
+      writable: false,
+      configurable: false,
+      enumerable: false,
+      value: true
+    });
     return this._proxiedObject;
   }
 

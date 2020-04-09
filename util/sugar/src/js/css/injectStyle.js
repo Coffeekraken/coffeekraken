@@ -15,7 +15,7 @@
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function injectStyle(style, node=document.head) {
+export default function injectStyle(style, node = document.head) {
   const $tag = document.createElement("style");
   $tag.type = "text/css";
   $tag.innerHTML = style;

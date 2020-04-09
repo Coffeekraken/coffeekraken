@@ -7,6 +7,28 @@ exports.default = void 0;
 
 var _deepMerge = _interopRequireDefault(require("../object/deepMerge"));
 
+var _parseRgba = _interopRequireDefault(require("./parseRgba"));
+
+var _parseHsl = _interopRequireDefault(require("./parseHsl"));
+
+var _parseHsv = _interopRequireDefault(require("./parseHsv"));
+
+var _rgba2hex = _interopRequireDefault(require("./rgba2hex"));
+
+var _hex2rgba = _interopRequireDefault(require("./hex2rgba"));
+
+var _hsv2rgba = _interopRequireDefault(require("./hsv2rgba"));
+
+var _hsl2rgba = _interopRequireDefault(require("./hsl2rgba"));
+
+var _rgba2hsv = _interopRequireDefault(require("./rgba2hsv"));
+
+var _rgba2hsl = _interopRequireDefault(require("./rgba2hsl"));
+
+var _parse = _interopRequireDefault(require("./parse"));
+
+var _convert = _interopRequireDefault(require("./convert"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -181,29 +203,8 @@ class SColor {
 
 
   _parse(color) {
-    // detecting input format
-    if (typeof color == "string") {
-      color = color.replace(/\s/g, "");
-
-      if (color.indexOf("rgb") != -1) {
-        color = this.parseRgba(color);
-      } else if (color.indexOf("hsv") != -1) {
-        color = this.parseHsv(color);
-        color = this.hsv2rgba(color.h, color.s, color.v);
-      } else if (color.indexOf("hsl") != -1) {
-        color = this.parseHsl(color);
-        color = this.hsl2rgba(color.h, color.s, color.l);
-      } else if (color.substring(0, 1) == "#") {
-        color = this.hex2rgba(color);
-      }
-    } else if (typeof color == "object") {
-      if (!(color.r && color.g && color.b) || !(color.h && color.s && color.l) || !(color.h && color.s && color.v)) {
-        throw "The passed color object " + color.toString() + " is not valid";
-      }
-    } else {
-      throw "The passed color " + color.toString() + " is not valid";
-    } // assign new color values
-
+    // parse the color
+    color = (0, _convert.default)(color, 'rgba'); // assign new color values
 
     this.r = color.r;
     this.g = color.g;
@@ -215,6 +216,7 @@ class SColor {
   /**
    * @name              convert2
    * @type              Function
+   * @private
    * 
    * Concert color
    * 
@@ -223,433 +225,35 @@ class SColor {
    * @return      	{object} 	                			The color in wanted object format
    * 
    * @example           js
-   * myColor.convert2('rgba');
+   * myColor._convert2('rgba');
    * 
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
 
-  convert2(format) {
+  _convert2(format) {
     switch (format) {
       case "rgba":
-        return this.rgba2rgba(this.r, this.g, this.b, this.a);
+        return {
+          r: this.r,
+          g: this.g,
+          b: this.b,
+          a: this.a
+        };
         break;
 
       case "hsl":
-        return this.rgba2hsl(this.r, this.g, this.b, this.a);
+        return (0, _rgba2hsl.default)(this.r, this.g, this.b, this.a);
         break;
 
       case "hsv":
-        return this.rgba2hsv(this.r, this.g, this.b, this.a);
+        return (0, _rgba2hsv.default)(this.r, this.g, this.b, this.a);
         break;
 
       case "hex":
-        return this.rgba2hex(this.r, this.g, this.b, this.a);
+        return (0, _rgba2hex.default)(this.r, this.g, this.b, this.a);
         break;
     }
-  }
-  /**
-   * @name                        parseRgba
-   * @type                        Function
-   * 
-   * Parse RGBA
-   * 
-   * @param 	          {string}	            rgbaString		            The rgba string (rgba(r,g,b,a)) to parse
-   * @return 	          {object} 				                              	The rgba object representation
-   * 
-   * @example           js
-   * myColor.parseRgba('rgba(20,10,100,20)');
-   * 
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-
-
-  parseRgba(rgbaString) {
-    rgbaString = rgbaString.toLowerCase();
-    let string = rgbaString.replace("rgba(", "").replace(")", "").replace(/\s/g, "");
-    let array = string.split(",");
-    return {
-      r: parseInt(array[0]),
-      g: parseInt(array[1]),
-      b: parseInt(array[2]),
-      a: parseInt(array[3])
-    };
-  }
-  /**
-   * @name                    parseHsl
-   * @type                    Function
-   * 
-   * Parse HSL
-   * 
-   * @param 	      {string}	        hslString			      The hsl string (hsl(h,s,l)) to parse
-   * @return 	        {object} 					                  	The hsl object representation
-   * 
-   * @example         js
-   * myColor.parseHsl('hsl(20,20,20)');
-   * 
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-
-
-  parseHsl(hslString) {
-    hslString = hslString.toLowerCase();
-    let string = hslString.replace("hsl(", "").replace(")", "").replace(/\s/g, "");
-    let array = string.split(",");
-    return {
-      h: parseFloat(array[0]),
-      s: parseFloat(array[1]),
-      l: parseFloat(array[2])
-    };
-  }
-  /**
-   * @name                parseHsv
-   * @type                Function
-   * 
-   * Parse HSV
-   * 
-   * @param         	{string}	          	hsvString		        	The hsv string (hsv(h,s,v)) to parse
-   * @return        	{object}					                        		The hsv object representation
-   * 
-   * @example       js 
-   * myColor.parseHsv('hsv(10,10,10)');
-   * 
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-
-
-  parseHsv(hsvString) {
-    hsvString = hsvString.toLowerCase();
-    let string = hsvString.replace("hsv(", "").replace(")", "").replace(/\s/g, "");
-    let array = string.split(",");
-    return {
-      h: parseFloat(array[0]),
-      s: parseFloat(array[1]),
-      v: parseFloat(array[2])
-    };
-  }
-  /**
-   * @name                rgba2hex
-   * @type                Function
-   * 
-   * RGBA to HEX
-   * 
-   * @param       	{Number}        	r	          	The red value between 0-255
-   * @param       	{Number}        	g	          	The green value between 0-255
-   * @param       	{Number}        	b	          	The blue value between 0-255
-   * @param       	{Number}        	a	          	The alpha value between 0-100|0-1
-   * @return      	{string}		                    	The hex string representation like #ff004f
-   * 
-   * @example         js
-   * myColor.rgba2hex(10,20,30,10);
-   * 
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-
-
-  rgba2hex(r, g, b, a = 1) {
-    let alpha = "";
-
-    if (a != 1 && a != 100) {
-      if (a < 1) {
-        a = 255 * a;
-      } else if (a > 1) {
-        a = 255 / 100 * a;
-      }
-
-      a = Math.round(a);
-      alpha = parseInt(a, 10).toString(16);
-    }
-
-    return "#" + ("0" + parseInt(r, 10).toString(16)).slice(-2) + ("0" + parseInt(g, 10).toString(16)).slice(-2) + ("0" + parseInt(b, 10).toString(16)).slice(-2) + alpha;
-  }
-  /**
-   * @name                      rgba2rgba
-   * @type                      Function
-   * 
-   * RGBA to RGBA
-   * 
-   * @param     	{Number}	        r           		The red value between 0-255
-   * @param     	{Number}        	g           		The green value between 0-255
-   * @param     	{Number}        	b           		The blue value between 0-255
-   * @param     	{Number}        	a           		The alpha value between 0-100|0-1
-   * @return 	    {object} 		                    	The rgba object representation
-   * 
-   * @example         js
-   * myColor.rgba2rgba(10,20,10,40);
-   * 
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-
-
-  rgba2rgba(r, g, b, a) {
-    a = parseFloat(a);
-    if (a > 1) a = 1 / 100 * a;
-    return {
-      r: r,
-      g: g,
-      b: b,
-      a: a
-    };
-  }
-  /**
-   * @name                  hex2rgba
-   * @type                  Function
-   * 
-   * Hex to RGBA
-   * 
-   * @param	              {string}       	hex         		The hex string to convert
-   * @return            	{object} 			                  	The rgba object representation
-   * 
-   * @example         js
-   * myColor.hex2rgba('#ff00ff');
-   * 
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-
-
-  hex2rgba(hex) {
-    hex = hex.replace("#", "");
-    const r = parseInt(hex.substring(0, 2), 16);
-    const g = parseInt(hex.substring(2, 4), 16);
-    const b = parseInt(hex.substring(4, 6), 16);
-    let a = 1;
-
-    if (hex.length == 8) {
-      a = 1 / 255 * parseInt(hex.substring(6, 8), 16);
-    }
-
-    return {
-      r: r,
-      g: g,
-      b: b,
-      a: a
-    };
-  }
-  /**
-   * @name              hsv2rgba
-   * @type              Function
-   * 
-   * HSV to RGBA
-   * 
-   * @param	        {Number}      	h       		The hue value between 0-360
-   * @param	        {Number}      	s       		The saturation value between 0-100|0-1
-   * @param	        {Number}      	v       		The value value between 0-100|0-1
-   * @param	        {Number}      	a       		The alpha value between 0-100|0-1
-   * @return      	{object} 		              	The rgba object representation
-   * 
-   * @example         js
-   * myColor.hsv2rgba(10,20,30);
-   * 
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-
-
-  hsv2rgba(h, s, v, a = 1) {
-    // manage arguments
-    h = parseFloat(h);
-    s = parseFloat(s);
-    v = parseFloat(v);
-    a = parseFloat(a);
-    if (h > 1) h = 1 / 360 * h;
-    if (s > 1) s = 1 / 100 * s;
-    if (v > 1) v = 1 / 100 * v;
-    if (a > 1) a = 1 / 100 * a;
-    var r, g, b, i, f, p, q, t;
-    i = Math.floor(h * 6);
-    f = h * 6 - i;
-    p = v * (1 - s);
-    q = v * (1 - f * s);
-    t = v * (1 - (1 - f) * s);
-
-    switch (i % 6) {
-      case 0:
-        r = v, g = t, b = p;
-        break;
-
-      case 1:
-        r = q, g = v, b = p;
-        break;
-
-      case 2:
-        r = p, g = v, b = t;
-        break;
-
-      case 3:
-        r = p, g = q, b = v;
-        break;
-
-      case 4:
-        r = t, g = p, b = v;
-        break;
-
-      case 5:
-        r = v, g = p, b = q;
-        break;
-    }
-
-    return {
-      r: Math.round(r * 255),
-      g: Math.round(g * 255),
-      b: Math.round(b * 255),
-      a: a
-    };
-  }
-  /**
-   * @name              hsl2rgba
-   * @type              Function
-   * 
-   * HSL to RGBA
-   * 
-   * @param	        {Number}        	h		        The hue value between 0-360
-   * @param	        {Number}        	s 	        	The saturation value between 0-100|0-1
-   * @param	        {Number}        	l 	        	The luminence value between 0-100|0-1
-   * @param	        {Number}        	a 	        	The alpha value between 0-100|0-1
-   * @return 	      {object} 		                  	The rgba object representation
-   * 
-   * @example         js
-   * myColor.hsl2rgba(10,20,30);
-   * 
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-
-
-  hsl2rgba(h, s, l, a = 1) {
-    // manage arguments
-    h = parseFloat(h);
-    s = parseFloat(s);
-    l = parseFloat(l);
-    a = parseFloat(a);
-    if (h > 1) h = 1 / 360 * h;
-    if (s > 1) s = 1 / 100 * s;
-    if (l > 1) l = 1 / 100 * l;
-    if (a > 1) a = 1 / 100 * a;
-    let r, g, b;
-
-    if (s == 0) {
-      r = g = b = l; // achromatic
-    } else {
-      const hue2rgb = function hue2rgb(p, q, t) {
-        if (t < 0) t += 1;
-        if (t > 1) t -= 1;
-        if (t < 1 / 6) return p + (q - p) * 6 * t;
-        if (t < 1 / 2) return q;
-        if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
-        return p;
-      };
-
-      let q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-      let p = 2 * l - q;
-      r = hue2rgb(p, q, h + 1 / 3);
-      g = hue2rgb(p, q, h);
-      b = hue2rgb(p, q, h - 1 / 3);
-    }
-
-    return {
-      r: Math.round(r * 255),
-      g: Math.round(g * 255),
-      b: Math.round(b * 255),
-      a: a
-    };
-  }
-  /**
-   * @name            rgba2hsv
-   * @type            Function
-   * 
-   * RGBA to HSV
-   * 
-   * @param       	{Number}        	r 	          	The red value between 0-255
-   * @param       	{Number}        	g 	          	The green value between 0-255
-   * @param       	{Number}        	b 	          	The blue value between 0-255
-   * @param       	{Number}        	a 	          	The alpha value between 0-100|0-1
-   * @return      	{object} 		                    	The hsv object representation
-   * 
-   * @example           js
-   * myColor.rgba2hsv(10,20,50,10);
-   * 
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-
-
-  rgba2hsv(r, g, b, a = 1) {
-    let min = Math.min(r, g, b),
-        max = Math.max(r, g, b),
-        delta = max - min,
-        h,
-        s,
-        v = max;
-    v = Math.floor(max / 255 * 100);
-    if (max != 0) s = Math.floor(delta / max * 100);else {
-      // black
-      return [0, 0, 0];
-    }
-    if (r == max) h = (g - b) / delta; // between yellow & magenta
-    else if (g == max) h = 2 + (b - r) / delta; // between cyan & yellow
-      else h = 4 + (r - g) / delta; // between magenta & cyan
-
-    h = Math.floor(h * 60); // degrees
-
-    if (h < 0) h += 360;
-    return {
-      h: h,
-      s: s,
-      v: v
-    };
-  }
-  /**
-   * @name                  rgba2hsl
-   * @type                  Function
-   * 
-   * RGBA to HSL
-   * 
-   * @param       	{Number}        	r 	        	The red value between 0-255
-   * @param       	{Number}        	g 	        	The green value between 0-255
-   * @param       	{Number}        	b 	        	The blue value between 0-255
-   * @param       	{Number}        	a 	        	The alpha value between 0-100|0-1
-   * @return 	      {object} 		                    	The hsl object representation
-   * 
-   * @example         js
-   * myColor.rgba2hsl(10,20,50,10);
-   * 
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-
-
-  rgba2hsl(r, g, b, a = 1) {
-    r /= 255, g /= 255, b /= 255;
-    let max = Math.max(r, g, b),
-        min = Math.min(r, g, b);
-    let h,
-        s,
-        l = (max + min) / 2;
-
-    if (max == min) {
-      h = s = 0; // achromatic
-    } else {
-      var d = max - min;
-      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-
-      switch (max) {
-        case r:
-          h = (g - b) / d + (g < b ? 6 : 0);
-          break;
-
-        case g:
-          h = (b - r) / d + 2;
-          break;
-
-        case b:
-          h = (r - g) / d + 4;
-          break;
-      }
-
-      h /= 6;
-    }
-
-    return {
-      h: Math.floor(h * 360),
-      s: Math.floor(s * 100),
-      l: Math.floor(l * 100)
-    };
   }
   /**
    * @name                toHex
@@ -667,7 +271,7 @@ class SColor {
 
 
   toHex() {
-    return this.convert2("hex");
+    return this._convert2("hex");
   }
   /**
    * @name            toHsl
@@ -685,7 +289,7 @@ class SColor {
 
 
   toHsl() {
-    return this.convert2("hsl");
+    return this._convert2("hsl");
   }
   /**
    * @name              toHsv
@@ -703,7 +307,7 @@ class SColor {
 
 
   toHsv() {
-    return this.convert2("hsv");
+    return this._convert2("hsv");
   }
   /**
    * @name            toRgba
@@ -721,7 +325,7 @@ class SColor {
 
 
   toRgba() {
-    return this.convert2("rgba");
+    return this._convert2("rgba");
   }
   /**
    * @name            r
@@ -831,15 +435,16 @@ class SColor {
 
 
   get l() {
-    return this.convert2("hsl").l;
+    return this._convert2("hsl").l;
   }
 
   set l(value) {
-    let hsl = this.convert2("hsl");
+    let hsl = this._convert2("hsl");
+
     value = parseInt(value);
     value = value > 100 ? 100 : value;
     hsl.l = value;
-    let rgba = this.hsl2rgba(hsl.h, hsl.s, hsl.l);
+    let rgba = (0, _hsl2rgba.default)(hsl.h, hsl.s, hsl.l);
     this.r = rgba.r;
     this.g = rgba.g;
     this.b = rgba.b;
@@ -859,15 +464,16 @@ class SColor {
 
 
   get s() {
-    return this.convert2("hsl").s;
+    return this._convert2("hsl").s;
   }
 
   set s(value) {
-    let hsl = this.convert2("hsl");
+    let hsl = this._convert2("hsl");
+
     value = parseInt(value);
     value = value > 100 ? 100 : value;
     hsl.s = value;
-    let rgba = this.hsl2rgba(hsl.h, hsl.s, hsl.l);
+    let rgba = (0, _hsl2rgba.default)(hsl.h, hsl.s, hsl.l);
     this.r = rgba.r;
     this.g = rgba.g;
     this.b = rgba.b;
@@ -887,15 +493,16 @@ class SColor {
 
 
   get v() {
-    return this.convert2("hsv").v;
+    return this._convert2("hsv").v;
   }
 
   set v(value) {
-    let hsv = this.convert2("hsv");
+    let hsv = this._convert2("hsv");
+
     value = parseInt(value);
     value = value > 100 ? 100 : value;
     hsv.v = value;
-    let rgba = this.hsv2rgba(hsv.h, hsv.s, hsv.v);
+    let rgba = (0, _hsv2rgba.default)(hsv.h, hsv.s, hsv.v);
     this.r = rgba.r;
     this.g = rgba.g;
     this.b = rgba.b;
@@ -915,15 +522,16 @@ class SColor {
 
 
   get h() {
-    return this.convert2("hsl").h;
+    return this._convert2("hsl").h;
   }
 
   set h(value) {
-    let hsl = this.convert2("hsl");
+    let hsl = this._convert2("hsl");
+
     value = parseInt(value);
     value = value > 360 ? 360 : value;
     hsl.h = value;
-    let rgba = this.hsl2rgba(hsl.h, hsl.s, hsl.l);
+    let rgba = (0, _hsl2rgba.default)(hsl.h, hsl.s, hsl.l);
     this.r = rgba.r;
     this.g = rgba.g;
     this.b = rgba.b;
@@ -1245,7 +853,7 @@ class SColor {
 
 
   toHexString() {
-    return this.convert2("hex");
+    return this._convert2("hex");
   }
   /**
    * @name                  toRgbaString
@@ -1281,7 +889,8 @@ class SColor {
 
 
   toHslString() {
-    const hsl = this.convert2("hsl");
+    const hsl = this._convert2("hsl");
+
     return `hsl(${hsl.h},${hsl.s},${hsl.l})`;
   }
   /**
@@ -1300,7 +909,8 @@ class SColor {
 
 
   toHsvString() {
-    const hsv = this.convert2("hsv");
+    const hsv = this._convert2("hsv");
+
     return `hsv(${hsv.h},${hsv.s},${hsv.v})`;
   }
   /**

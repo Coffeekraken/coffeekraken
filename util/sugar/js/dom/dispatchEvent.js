@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = dispatchEvent;
 
-var _SEvent = _interopRequireDefault(require("../class/SEvent"));
+var _SEvent = _interopRequireDefault(require("../event/SEvent"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

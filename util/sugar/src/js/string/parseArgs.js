@@ -61,7 +61,7 @@ function parseArgsString(string, arg) {
     let isArrayOfTypes = true;
     const parsedString = __parse(s);
     if (Array.isArray(parsedString)) {
-      for (let i=0; i<parsedString.length; i++) {
+      for (let i = 0; i < parsedString.length; i++) {
         if (availableTypes.indexOf(parsedString[i].toLowerCase()) === -1) {
           isArrayOfTypes = false;
           break;
@@ -75,14 +75,14 @@ function parseArgsString(string, arg) {
       argObj.types = parsedString;
     } else if (availableTypes.indexOf(s.toLowerCase()) !== -1) {
       argObj.types = [s.trim()];
-    } else if (s.trim().slice(0,2) === '--') {
+    } else if (s.trim().slice(0, 2) === '--') {
       argObj.bigName = s.trim().slice(2);
-    } else if (s.trim().slice(0,1) === '-') {
+    } else if (s.trim().slice(0, 1) === '-') {
       argObj.smallName = s.trim().slice(1);
-    } else if (s.trim().slice(0,1) === '/' && s.trim().slice(-1) === '/') {
+    } else if (s.trim().slice(0, 1) === '/' && s.trim().slice(-1) === '/') {
       argObj.regex = s.trim();
-    } else if (s.trim().slice(0,1) === '"' && s.trim().slice(-1) === '"') {
-      argObj.default = s.trim().slice(1,-1).split(',');
+    } else if (s.trim().slice(0, 1) === '"' && s.trim().slice(-1) === '"') {
+      argObj.default = s.trim().slice(1, -1).split(',');
       argObj.default = argObj.default.map((v) => {
         return availableTypes.indexOf(v.toLowerCase()) === -1 ? __parse(v) : v;
       });
@@ -106,7 +106,7 @@ function parseArgsString(string, arg) {
 
 export default (string, args) => {
 
-  if ( ! string) return;
+  if (!string) return;
 
   let argsObj = Object.assign(args);
 
@@ -160,9 +160,9 @@ export default (string, args) => {
 
     let smallName = null, bigName = null;
 
-    if (part.slice(0,2) === '--') {
+    if (part.slice(0, 2) === '--') {
       bigName = part.slice(2);
-    } else if (part.slice(0,1) === '-') {
+    } else if (part.slice(0, 1) === '-') {
       smallName = part.slice(1);
     }
 
@@ -170,7 +170,7 @@ export default (string, args) => {
 
       let argName = null, argsString = null, value = null;
 
-      for (let i=0; i<Object.keys(args).length; i++) {
+      for (let i = 0; i < Object.keys(args).length; i++) {
         argsString = ` ${args[Object.keys(args)[i]]} `;
         if (argsString.includes(` -${smallName} `)) {
           argName = Object.keys(args)[i];
@@ -180,11 +180,11 @@ export default (string, args) => {
 
       const argObj = parseArgsString(argsString, argName);
 
-      const parsedValue = __parse(parts[j+1]);
+      const parsedValue = __parse(parts[j + 1]);
       if (Array.isArray(parsedValue)) {
         value = [parsedValue];
       } else {
-        value = __unquote(parts[j+1] || '').split(',');
+        value = __unquote(parts[j + 1] || '').split(',');
       }
 
       value = value.map((v) => {
@@ -198,20 +198,20 @@ export default (string, args) => {
       partsToDelete.push(part);
 
       if (typeof value === 'string') {
-        if (value.slice(0,2) === '--' || value.slice(0,1) === '-') {
+        if (value.slice(0, 2) === '--' || value.slice(0, 1) === '-') {
           if (argObj.types.indexOf('Boolean') === -1) {
             throw new Error(`The argument "${argName}" want to set his value to "true" but does not accept "Boolean" as type... Here's are the allowed types: "${argObj.types.join(',')}"`);
           } else {
             value = true;
           }
         } else {
-          partsToDelete.push(parts[j+1]);
+          partsToDelete.push(parts[j + 1]);
         }
-        if (argObj.regex && ! new RegExp(argObj.regex.slice(1,-1), 'g').test(value)) {
+        if (argObj.regex && !new RegExp(argObj.regex.slice(1, -1), 'g').test(value)) {
           throw new Error(`The argument "${argName}" want to set his value to "${value}" but this does not match the argument regex "${argObj.regex}"...`);
         }
       } else {
-        partsToDelete.push(parts[j+1]);
+        partsToDelete.push(parts[j + 1]);
       }
 
       delete argsObj[argName];
@@ -227,7 +227,7 @@ export default (string, args) => {
 
       let argName = null, argsString = null, value = null;
 
-      for (let i=0; i<Object.keys(args).length; i++) {
+      for (let i = 0; i < Object.keys(args).length; i++) {
         argsString = ` ${args[Object.keys(args)[i]]} `;
         if (argsString.includes(` --${bigName} `)) {
           argName = Object.keys(args)[i];
@@ -237,11 +237,11 @@ export default (string, args) => {
 
       const argObj = parseArgsString(argsString, argName);
 
-      const parsedValue = __parse(parts[j+1]);
+      const parsedValue = __parse(parts[j + 1]);
       if (Array.isArray(parsedValue)) {
         value = [parsedValue];
       } else {
-        value = __unquote(parts[j+1] || '').split(',');
+        value = __unquote(parts[j + 1] || '').split(',');
       }
 
       value = value.map((v) => {
@@ -255,20 +255,20 @@ export default (string, args) => {
       partsToDelete.push(part);
 
       if (typeof value === 'string') {
-        if (value.slice(0,2) === '--' || value.slice(0,1) === '-') {
+        if (value.slice(0, 2) === '--' || value.slice(0, 1) === '-') {
           if (argObj.types.indexOf('Boolean') === -1) {
             throw new Error(`The argument "${argName}" want to set his value to "true" but does not accept "Boolean" as type... Here's are the allowed types: "${argObj.types.join(',')}"`);
           } else {
             value = true;
           }
         } else {
-          partsToDelete.push(parts[j+1]);
+          partsToDelete.push(parts[j + 1]);
         }
-        if (argObj.regex && ! new RegExp(argObj.regex.slice(1,-1), 'g').test(value)) {
+        if (argObj.regex && !new RegExp(argObj.regex.slice(1, -1), 'g').test(value)) {
           throw new Error(`The argument "${argName}" want to set his value to "${value}" but this does not match the argument regex "${argObj.regex}"...`);
         }
       } else {
-        partsToDelete.push(parts[j+1]);
+        partsToDelete.push(parts[j + 1]);
       }
 
       delete argsObj[argName];
@@ -276,14 +276,14 @@ export default (string, args) => {
       argsValues[argName] = {
         value: value,
         types: argObj.types,
-        regex: argObj.regex || undefined,
+        regex: argObj.regex || undefined,
         default: argObj.default
       };
     }
 
   });
 
-    // filter the parts already handled
+  // filter the parts already handled
   parts = parts.filter((p, i) => {
     if (partsToDelete.indexOf(p) !== -1) return false;
     return true;
@@ -299,7 +299,7 @@ export default (string, args) => {
       if (Array.isArray(parsedValue)) {
         value = [parsedValue];
       } else {
-        value = __unquote(value || '').split(',');
+        value = __unquote(value || '').split(',');
       }
       value = value.map((v) => {
         if (Array.isArray(v)) return v;
@@ -309,7 +309,7 @@ export default (string, args) => {
         value = value[0];
       }
 
-      for (let i=0; i<Object.keys(argsObj).length; i++) {
+      for (let i = 0; i < Object.keys(argsObj).length; i++) {
         const argName = Object.keys(argsObj)[i];
         const argsString = args[argName];
         const argObj = parseArgsString(argsString, argName);
@@ -318,9 +318,9 @@ export default (string, args) => {
 
         // console.log(type, argObj);
 
-        if ( ! argsValues[argName] && argObj.types.indexOf(__upperFirst(type)) !== -1) {
+        if (!argsValues[argName] && argObj.types.indexOf(__upperFirst(type)) !== -1) {
 
-          if (typeof value === 'string' && argObj.regex && ! new RegExp(argObj.regex, 'g').test(value)) {
+          if (typeof value === 'string' && argObj.regex && !new RegExp(argObj.regex, 'g').test(value)) {
             continue;
           }
 
@@ -329,7 +329,7 @@ export default (string, args) => {
           argsValues[argName] = {
             value,
             types: argObj.types,
-            regex: argObj.regex || undefined,
+            regex: argObj.regex || undefined,
             default: argObj.default
           };
         }
@@ -353,7 +353,7 @@ export default (string, args) => {
     argsValues[k] = {
       value: typeof value === 'string' && availableTypes.indexOf(value.toLowerCase()) === -1 ? __parse(value) : value,
       types: argObj.types,
-      regex: argObj.regex || undefined,
+      regex: argObj.regex || undefined,
       default: argObj.default
     };
 
@@ -361,325 +361,5 @@ export default (string, args) => {
   });
 
   return argsValues;
-
-  // // handle the "alone" atruments that mean boolean true
-  // const aloneSmallArgs = string.match(/\s(-[a-zA-Z])\s-/g);
-  // const lastAloneSmallArgs = string.match(/\s(-[a-zA-Z])\s?$/g);
-  // const aloneBigArgs = string.match(/\s(--[a-zA-Z-]+)\s-/g);
-  // const lastAloneBigArgs = string.match(/\s(--[a-zA-Z-]+)\s?$/g);
-  // if (aloneSmallArgs) {
-  //   aloneSmallArgs.forEach((arg) => {
-  //     const splitedArg = arg.trim().split(' ');
-  //     string = string.replace(arg, ` ${splitedArg[0]} true -`);
-  //   });
-  // }
-  // if (lastAloneSmallArgs) {
-  //   lastAloneSmallArgs.forEach((arg) => {
-  //     const splitedArg = arg.trim().split(' ');
-  //     string = string.replace(arg, ` ${splitedArg[0]} true `);
-  //   });
-  // }
-  // if (aloneBigArgs) {
-  //   aloneBigArgs.forEach((arg) => {
-  //     const splitedArg = arg.trim().split(' ');
-  //     string = string.replace(arg, ` ${splitedArg[0]} true -`);
-  //   });
-  // }
-  // if (lastAloneBigArgs) {
-  //   lastAloneBigArgs.forEach((arg) => {
-  //     const splitedArg = arg.trim().split(' ');
-  //     string = string.replace(arg, ` ${splitedArg[0]} true `);
-  //   });
-  // }
-  //
-  // const keys = Object.keys(args);
-  // const resultObject = {};
-  //
-  //
-  //
-  // // search for the "-a 'something cool'" style
-  // const regSmallArg = /\s-[a-zA-Z]\s(?![-])[\S]+\s/g;
-  // const regBigArg = /\s--[a-zA-Z-]+\s(?![-])[\S]+\s/g;
-  // const regRestArg = /(?![-])[\S]+/g;
-  //
-  // const smallArgs = string.match(regSmallArg);
-  // if (smallArgs) {
-  //   smallArgs.forEach((item, i) => {
-  //     string = string.replace(item, ' ');
-  //   });
-  // }
-  //
-  // const bigArgs = string.match(regBigArg);
-  // if (bigArgs) {
-  //   bigArgs.forEach((item, i) => {
-  //     string = string.replace(item, ' ');
-  //   });
-  // }
-  //
-  // const restArgs = string.match(regRestArg);
-  // if (restArgs) {
-  //   restArgs.forEach((item, i) => {
-  //     string = string.replace(item, ' ');
-  //   });
-  // }
-  //
-  // // loop on each keys to search for corresponding value
-  // for (let _i=0; _i<keys.length; _i++) {
-  //   const k = keys[_i];
-  //
-  //   let keyArgs = args[k];
-  //   let keyString = null;
-  //   let keyPreprocess = null;
-  //
-  //   if (typeof keyArgs === 'object') {
-  //     if (keyArgs.args === undefined || typeof keyArgs.args !== 'string') {
-  //       console.error('sugar.js.string.parseArgs', `You have passed an object as argument for the key "${k}" but this object has to have an "args" property of type "String" and here's your object passed...`, keyArgs);
-  //       return {};
-  //     }
-  //     if (keyArgs.preprocess === undefined || typeof keyArgs.preprocess !== 'function') {
-  //       console.error('sugar.js.string.parseArgs', `You have passed an object as argument for the key "${k}" but this object has to have an "preprocess" property of type "Function" and here's your object passed...`, keyArgs);
-  //       return {};
-  //     }
-  //     keyString = ' ' + keyArgs.args + ' ';
-  //     keyPreprocess = keyArgs.preprocess;
-  //   } else {
-  //     keyString = ' ' + keyArgs + ' ';
-  //   }
-  //
-  //   const regKeyArgsType = /\s[a-zA-Z]+/g;
-  //   const regKeyArgsSmallName = /\s-[a-zA-Z]\s/g;
-  //   const regKeyArgsBigName = /\s--[a-zA-Z-]+\s/g;
-  //   const regKeyArgsRegex = /\s\/[\S]+\/\s/g;
-  //   const regKeyArgsDefault = /['|"|`](.*)['|"|`]/g
-  //
-  //   let type = keyString.match(regKeyArgsType);
-  //   if (type && type.length) type = type[0].trim();
-  //
-  //   let smallName = keyString.match(regKeyArgsSmallName);
-  //   if (smallName && smallName.length) smallName = smallName[0].trim();
-  //
-  //   let bigName = keyString.match(regKeyArgsBigName);
-  //   if (bigName && bigName.length) bigName = bigName[0].trim();
-  //
-  //   let regex = keyString.match(regKeyArgsRegex);
-  //   if (regex && regex.length) regex = regex[0].trim().slice(1,-1);
-  //
-  //   let defaultValue = keyString.match(regKeyArgsDefault);
-  //   if (defaultValue && defaultValue.length === 1) defaultValue = __unquote(defaultValue[0]);
-  //
-  //   if (smallArgs && smallName && resultObject[k] === undefined) {
-  //     for (let i=0; i<smallArgs.length; i++) {
-  //       let item = smallArgs[i];
-  //       item = item.trim();
-  //       const key = item.slice(0,2);
-  //
-  //       if (key !== smallName) continue;
-  //
-  //       let value = item.slice(2).trim();
-  //       value = __unquote(value);
-  //
-  //       // check that the value match the args
-  //       if (type && typeof __parse(value) !== type.toLowerCase() && availableTypes.indexOf(type.toLowerCase()) === -1) continue;
-  //       if (regex) {
-  //         const r = new RegExp(regex);
-  //         if ( ! r.test(value)) continue;
-  //         // check if some parentheses exists
-  //         const matches = value.match(regex);
-  //         if (matches[1] !== undefined) {
-  //           value = matches[1];
-  //         }
-  //       }
-  //
-  //       smallArgs.splice(i, 1);
-  //       if (keyPreprocess) {
-  //         if (typeof value === 'string' && availableTypes.indexOf(value) !== -1) {
-  //           resultObject[k] = keyPreprocess(value);
-  //         } else {
-  //           resultObject[k] = keyPreprocess(__parse(value));
-  //         }
-  //       } else {
-  //         if (typeof value === 'string' && availableTypes.indexOf(value) !== -1) {
-  //           resultObject[k] = value;
-  //         } else {
-  //           resultObject[k] = __parse(value);
-  //         }
-  //       }
-  //       break;
-  //
-  //     }
-  //   }
-  //
-  //   if (bigArgs && bigName && resultObject[k] === undefined) {
-  //     for (let i=0; i<bigArgs.length; i++) {
-  //       let item = bigArgs[i];
-  //       item = item.trim();
-  //       const argKey = item.match(/--[\S]+/g)[0];
-  //
-  //       if (argKey !== bigName) continue;
-  //
-  //       item = item.replace(argKey, '').trim();
-  //       let value = item;
-  //       value = __unquote(value);
-  //
-  //       // check that the value match the args
-  //       if (type && typeof __parse(value) !== type.toLowerCase() && availableTypes.indexOf(type.toLowerCase()) === -1) continue;
-  //
-  //       if (regex) {
-  //         const r = new RegExp(regex);
-  //         if ( ! r.test(value)) continue;
-  //         // check if some parentheses exists
-  //         const matches = value.match(regex);
-  //         if (matches[1] !== undefined) {
-  //           value = matches[1];
-  //         }
-  //       }
-  //
-  //       bigArgs.splice(i, 1);
-  //       if (keyPreprocess) {
-  //         if (availableTypes.indexOf(value.toLowerCase()) !== -1) {
-  //           resultObject[k] = keyPreprocess(value);
-  //         } else {
-  //           resultObject[k] = keyPreprocess(__parse(value));
-  //         }
-  //       } else {
-  //         if (availableTypes.indexOf(value.toLowerCase()) !== -1) {
-  //           resultObject[k] = value;
-  //         } else {
-  //           resultObject[k] = __parse(value);
-  //         }
-  //       }
-  //       break;
-  //
-  //     }
-  //   }
-  //
-  //   console.log(restArgs, k);
-  //
-  //   if (restArgs && resultObject[k] === undefined) {
-  //     for (let i=0; i<restArgs.length; i++) {
-  //       let item = restArgs[i];
-  //       item = item.trim();
-  //       let value = item;
-  //       value = __unquote(value);
-  //
-  //       // check that the value match the args
-  //       if (type && typeof __parse(value) !== type.toLowerCase() && availableTypes.indexOf(type.toLowerCase()) === -1) {
-  //         continue;
-  //       }
-  //       if (regex) {
-  //         const r = new RegExp(regex);
-  //         if ( ! r.test(value)) continue;
-  //         // check if some parentheses exists
-  //         const matches = value.match(regex);
-  //         if (matches[1] !== undefined) {
-  //           value = matches[1];
-  //         }
-  //       }
-  //
-  //       restArgs.splice(i, 1);
-  //       if (keyPreprocess) {
-  //         if (availableTypes.indexOf(value.toLowerCase()) !== -1) {
-  //           resultObject[k] = keyPreprocess(value);
-  //         } else {
-  //           resultObject[k] = keyPreprocess(__parse(value));
-  //         }
-  //       } else {
-  //         if (availableTypes.indexOf(value.toLowerCase()) !== -1) {
-  //           resultObject[k] = value;
-  //         } else {
-  //           resultObject[k] = __parse(value);
-  //         }
-  //       }
-  //       break;
-  //     }
-  //   }
-  //
-  //   if (resultObject[k] === undefined && defaultValue !== undefined) {
-  //     resultObject[k] = __parse(defaultValue);
-  //   }
-  //
-  // }
-  //
-  // return resultObject;
-
-  // // split the string without the quotes
-  // const parts = string.match(/(('|").*?('|")|[^('|")\s]+)+(?=\s*|\s*$)/g);
-  //
-  // // init the resulting object
-  // const resultObject = {};
-  //
-  // let argsSettings = {};
-  // Object.keys(args).forEach(key => {
-  //   const arg = args[key];
-  //   let smallName, bigName, type;
-  //   // parse the argument definition
-  //   const argParts = arg.split(' ');
-  //   // loop on the args parts
-  //   for (let i=0; i<argParts.length; i++) {
-  //     const p = argParts[i];
-  //     if (p.slice(0,2) === '--') {
-  //       bigName = p.slice(2);
-  //     } else if (p.slice(0,1) === '-' && p.length === 2) {
-  //       smallName = p.slice(1);
-  //     } else {
-  //       type = p;
-  //     }
-  //   }
-  //   argsSettings[key] = {
-  //     smallName, bigName, type
-  //   };
-  // });
-  //
-  // // loop on the parts
-  // for (let i=0; i<parts.length; i++) {
-  //   const p = parts[i];
-  //
-  //   let smallName, bigName;
-  //   if (p.slice(0,2) === '--') {
-  //     bigName = p.slice(2);
-  //   } else if (p.slice(0,1) === '-' && p.length === 2) {
-  //     smallName = p.slice(1);
-  //   }
-  //
-  //   for (let j=0; j<Object.keys(argsSettings).length; j++) {
-  //
-  //     const k = Object.keys(argsSettings)[j];
-  //
-  //     if (resultObject[k] !== undefined) {
-  //       delete argsSettings[k];
-  //       // console.log(argsSettings);
-  //       break;
-  //     }
-  //
-  //     const set = argsSettings[k];
-  //
-  //     if (smallName && set.smallName === smallName) {
-  //       resultObject[k] = __parse(parts[i+1]);
-  //       i++;
-  //       delete argsSettings[k];
-  //       // console.log(argsSettings);
-  //       break;
-  //     }
-  //     if (bigName && set.bigName === bigName) {
-  //       resultObject[k] = __parse(parts[i+1]);
-  //       i++;
-  //       delete argsSettings[k];
-  //       // console.log(argsSettings);
-  //       break;
-  //     }
-  //
-  //     const type = typeof __parse(p);
-  //     // console.log(p, type.charAt(0).toUpperCase() + type.slice(1));
-  //     if (type.charAt(0).toUpperCase() + type.slice(1) === set.type) {
-  //       delete argsSettings[k];
-  //       // console.log(argsSettings);
-  //       resultObject[k] = __parse(p);
-  //       break;
-  //     }
-  //   }
-  //
-  // }
-
-  // return resultObject;
 
 }

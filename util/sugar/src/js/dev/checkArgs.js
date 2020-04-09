@@ -3,6 +3,8 @@ const __check = require('check-types');
 const __parseArgs = require('../string/parseArgs');
 const __upperFirst = require('../string/upperFirst');
 
+// TODO Make tests and prettify the code if possible
+
 /**
  * @name                        checkArgs
  * @namespace                   sugar.js.dev
@@ -36,6 +38,7 @@ const __upperFirst = require('../string/upperFirst');
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function checkArgs(func, args, descriptor, throwError = true) {
+
   // get the function arguments names
   const argumentsNames = __getArgsNames(func);
 
@@ -59,6 +62,7 @@ export default function checkArgs(func, args, descriptor, throwError = true) {
   // loop on the arguments names
   argumentsNames.forEach((argName, i) => {
     // get the argument description object
+    console.log(descriptor[argName]);
     const descriptionObj = __parseArgs(descriptor[argName], {
       types: '["String","Array"] -t --types',
       values: 'Array -v --values',
@@ -67,11 +71,12 @@ export default function checkArgs(func, args, descriptor, throwError = true) {
       lower: 'Number -l --lower /^\\d$/',
       allowUndefined: 'Boolean -u --allow-undefined "false"',
       allowNull: 'Boolean -n --allow-null "false"',
-      // default: `[${availableTypes.map((i) => `"${__upperFirst(i)}"`).toString()}] -d --default /\"[\\s\\S]+\"/`
+      default: `[${availableTypes.map((i) => `"${__upperFirst(i)}"`).toString()}] -d --default /\"[\\s\\S]+\"/`
     });
 
+    console.log(descriptionObj);
 
-    if ( ! descriptor[argName]) return;
+    if (!descriptor[argName]) return;
 
     const argValue = args[i];
 
@@ -79,12 +84,12 @@ export default function checkArgs(func, args, descriptor, throwError = true) {
     resultObj[argName] = args[i];
 
     // check allow undefined
-    if ( ! descriptionObj.allowUndefined.value && argValue === undefined) {
+    if (!descriptionObj.allowUndefined.value && argValue === undefined) {
       throw new Error(`The argument <yellow><bold>"${argName}"</bold></yellow> of the function <cyan><bold>"${func.name}"</bold></cyan> cannot be undefined...`);
     }
 
     // check allow null
-    if ( ! descriptionObj.allowNull.value && argValue === null) {
+    if (!descriptionObj.allowNull.value && argValue === null) {
       throw new Error(`The argument <yellow><bold>"${argName}"</bold></yellow> of the function <cyan><bold>"${func.name}"</bold></cyan>cannot be null...`);
     }
 
@@ -99,7 +104,7 @@ export default function checkArgs(func, args, descriptor, throwError = true) {
           isValid = true;
         }
       });
-      if ( ! isValid) {
+      if (!isValid) {
         let argValueToDisplay = typeof argValue === 'function' ? argValue.name : argValue;
         if (argValueToDisplay === '' && typeof argValue === 'function') argValueToDisplay = 'Anonymous function';
         throw new Error(`The argument <yellow><bold>"${argName}"<bold></yellow> of the function <cyan><bold>"${func.name}"</bold></cyan> has to be of type <red>"${allowedTypes.join(',')}"</red> but the passed value <red>"${argValueToDisplay}"</red> is a "${argType}"...`);
@@ -121,7 +126,7 @@ export default function checkArgs(func, args, descriptor, throwError = true) {
           invalidValue = v;
         }
       });
-      if ( ! isTypeValid) {
+      if (!isTypeValid) {
         throw new Error(`The value <red>"${invalidValue}"</red> in the argument Array <yellow><bold>"${argName}"</bold></yellow> of the function <cyan><bold>"${func.name}"</bold></cyan> has to be of type <cyan><bold>"${descriptionObj.of.value.join(',')}"</bold></cyan> but is a <cyan><bold>"${invalidType}"</bold></cyan>...`);
       }
     }

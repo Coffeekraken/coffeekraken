@@ -5,48 +5,42 @@
  *
  * Add an event listener that will be trigerred only once
  *
- * @param    {HTMLElement}    elm    The element to add the event listener on
+ * @param    {HTMLElement}    $elm    The element to add the event listener on
  * @param    {String}    event    The event to listen for
- * @param    {Function}    callback    The callback function to call on event
- * @param    {Mixed}     [bind=null]    The object to bind to the callback function
+ * @param    {Function}    [callback=null]    The callback function to call on event
  * @param    {Boolean}    [useCapture=false]    Use capture phase or not
  * @param    {object}    [options={}]    An options object that specifies characteristics about the event listener
- * @return    {Function}    The remove event listener function
+ * @return    {Promise}                   A promise that will be resolved once the event has been called
  *
  * @example    js
  * import addEventListenerOnce from '@coffeekraken/sugar/js/dom/addEventListenerOnce'
- * const removeEventListener = addEventListenerOnce(myElm, 'click', (e) => {
+ * addEventListenerOnce(myElm, 'click', (e) => {
  *     // do something on click
- * })
- * // remove event listener if wanted
- * removeEventListener()
+ * });
+ * addEventListenerOnce(myElm, 'click').then(e => {
+ *    // do something on click
+ * });
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function addEventListenerOnce(
-  elm,
+  $elm,
   event,
-  callback,
-  bind = null,
+  callback = null,
   useCapture = false,
   options = {}
 ) {
-  // bind
-  if (bind) {
-    callback = callback.bind(bind);
-  }
-
-  // event handler
-  function eventHandler(e) {
-    // call the callback
-    callback(e);
-    // remove the event listener
-    elm.removeEventListener(event, eventHandler, useCapture, options);
-  }
-  // add the listener to the element
-  elm.addEventListener(event, eventHandler, useCapture, options);
-  // return the removeEventListener function
-  return () => {
-    elm.removeEventListener(event, eventHandler, useCapture, options);
-  };
+  return new Promise((resolve, reject) => {
+    // event handler
+    function eventHandler(e) {
+      // call the callback
+      if (callback) callback(e);
+      // remove the event listener
+      $elm.removeEventListener(event, eventHandler, useCapture, options);
+      // resolve the promise
+      resolve(e);
+    }
+    // add the listener to the element
+    $elm.addEventListener(event, eventHandler, useCapture, options);
+  });
 }

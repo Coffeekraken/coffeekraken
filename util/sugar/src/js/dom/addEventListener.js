@@ -1,3 +1,5 @@
+import __SPromise from '../promise/SPromise';
+
 /**
  * @name        addEventListener
  * @namespace       sugar.js.dom
@@ -8,7 +10,6 @@
  * @param    {HTMLElement}    $elm    The HTMLElement on which to add the event listener
  * @param    {String}    eventName    THe event name to listen to
  * @param    {Function}    callback    The callback function to call on event
- * @param    {Boolean}    [useCapture=false]    Use capture phase or not
  * @param    {object}    [options={}]    An options object that specifies characteristics about the event listener
  * @return    {Function}    The remove event listener function
  *
@@ -24,13 +25,20 @@ export default function addEventListener(
   $elm,
   eventName,
   callback = null,
-  useCapture = false,
   options = {}
 ) {
-  // add the event listener
-  $elm.addEventListener(eventName, callback, useCapture, options);
-  // return the removeEventListener function
-  return () => {
-    $elm.removeEventListener(eventName, callback, useCapture, options);
-  };
+
+  let listenerFn = null;
+
+  return new __SPromise((resolve, reject, release) => {
+
+    listenerFn = (...args) => {
+      if (callback) callback.apply(this, [...args]);
+      resolve.apply(this, [...args]);
+    };
+
+    $elm.addEventListener(eventName, listenerFn, options);
+  }).after(() => {
+    $elm.removeEventListener(eventName, listenerFn, options);
+  });
 }

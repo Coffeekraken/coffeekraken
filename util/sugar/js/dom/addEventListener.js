@@ -15,7 +15,6 @@ exports.default = addEventListener;
  * @param    {HTMLElement}    $elm    The HTMLElement on which to add the event listener
  * @param    {String}    eventName    THe event name to listen to
  * @param    {Function}    callback    The callback function to call on event
- * @param    {Mixed}    [bind=null]    Bind the callback function
  * @param    {Boolean}    [useCapture=false]    Use capture phase or not
  * @param    {object}    [options={}]    An options object that specifies characteristics about the event listener
  * @return    {Function}    The remove event listener function
@@ -28,13 +27,8 @@ exports.default = addEventListener;
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function addEventListener($elm, eventName, callback, bind = null, useCapture = false, options = {}) {
-  // the function to bind
-  if (bind) {
-    callback = callback.bind(bind);
-  } // add the event listener
-
-
+function addEventListener($elm, eventName, callback = null, useCapture = false, options = {}) {
+  // add the event listener
   $elm.addEventListener(eventName, callback, useCapture, options); // return the removeEventListener function
 
   return () => {

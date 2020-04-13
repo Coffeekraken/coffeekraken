@@ -19,7 +19,7 @@ import __SPromise from '../promise/SPromise';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function loadScript($script) {
-  return new __SPromise((resolve, reject, release) => {
+  return new __SPromise((resolve, reject, trigger, cancel) => {
     let done = false;
 
     $script.onload = handleLoad;
@@ -30,7 +30,6 @@ export default function loadScript($script) {
       if (!done) {
         done = true;
         resolve($script);
-        release($script);
       }
     }
 
@@ -49,7 +48,7 @@ export default function loadScript($script) {
         reject(new Error(e));
       }
     }
-  }).after(() => {
+  }).on('cancel,finally', () => {
     $script.onload = null;
     $script.onreadystatechange = null;
     $script.onerror = null;

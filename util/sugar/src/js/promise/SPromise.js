@@ -9,55 +9,58 @@ import __deepMerge from '../object/deepMerge';
  * 
  * This class works the same as the default Promise one. The difference is that you have more control on this one like
  * the possibility to resolve it multiple times. Here's a list of the "differences" and the "features" that this class provide:
- * - Pass the normal "resolve" and "reject" function to the passed executor, and pass another one called "release".
- * - Expose the normal "then" and "catch" method to register callbacks
- * - Expose a new "after" method that is used to register callbacks that will be executed after that the Promise has been released using the "release" function
- * - Expose two new methods called "afterSuccess" and "afterError" that are called the same as the "after" one but depending on the passed "release" argument.
- *    - "afterSuccess" will be called everytime the "release" function is called with an argument that is NOT an Error instance
- *    - "afterError" will be called everytime the "release" function is called with an argument that IS an Error instance
- * - Expose two new methods "thenOnce" and "catchOnce" that will be executed the same as the "then" and "catch" callbacks, but just once.
- * - You can call multiple times the "resolve" and "reject" function. This will execute all the callbacks registered through the "then" and "catch" methods.
- * - Calling the "resolve" or "reject" function will not resolve the master promise returned by the constructor.
- * - You can have something like this "await new SPromise((resolve, reject, release) => { ... });" that will executes all your registered callbacks as normal but that will not pass to next statements (cause of the await) until you call the "release" function.
- * - Each "then", "catch", etc... callbacks have their context binded to the actual SPromise instance to you can call all the exposed methods like "resolve", "reject", "release", etc... using "this.resolve('something')" for example...
- * - If you're using arrow functions, you can have access to the SPromise instance through the last callback argument...
- * - A new method called "start" is exposed. This method is useful when you absolutely need that your executor function is launched right after the callbacks registrations.
- *    - Something like this can be used
- *    ```js
- *     const myPromise = new SPromise((resolve, reject, release) => {
- *        // do something...
- *     }).then(value => {
- *        // do something...
- *     }).start();
- *    ```
- *    - If you don't call the "start" method, the executor function passed to the SPromise constructor will be called on the next javascript execution loop
  * 
+ * - Pass the normal "resolve" and "reject" function to the passed executor
+ * - Pass a new function to the passed executor called "trigger" that let you launch your registered callbacks like "then", "catch", etc... but without resolving the master promise. Here's some examples:
+ *    - new SPromise((resolve, reject, trigger, cancel) => { trigger('then', 'myCoolValue'); }).then(value => { ... });
+ *    - new SPromise((resolve, reject, trigger, cancel) => { trigger('then,catch', 'myCoolValue') }).then(value => { ... });
+ * - Pass a new function to the passed executor called "cancel" that let you stop/cancel the promise execution without triggering your registered callbacks unless the "cancel" once...
+ * - Expose the normal "then" and "catch" methods to register your callbacks
+ * - Expose some new callbacks registration functions described here:
+ *    - Expose a method called "resolved" that let you register callbacks called only when the "resolve" function has been called
+ *    - Expose a method called "rejected" that let you register callbacks called only when the "reject" function has been called
+ *    - Expose a method called "finally" that let you register callbacks called when the "resolve" or "reject" function has been called
+ *    - Expose a method called "cancel" that let you register callbacks called only when the "cancel" function has been called
+ * - Every callbacks registration methods accept as first argument the number of time that your callback will be called at max. Here's some examples:
+ *    - new SPromise((...)).then(value => { // do something... }).catch(error => { // do something... }).start();
+ *    - new SPromise((...)).then(1, value => { // do something... }).catch(3, error => { // do something... }).start();
+ * - Expose a method called "on" that can be used to register callbacks the same as the "then", "catch", etc... methods but you can register a same callback function to multiple callbacks type at once:
+ *    - new SPromise((...)).on('then', value => { ... }).on('then,catch', value => { ... }).start();
+ *    - Specify the max number of time to call your callback function like so: new SPromise((...)).on('then:2', value => { ... }).on('then:1,catch', value => { ... }).start();
+ * - A new method called "start" is exposed. This method is useful when you absolutely need that your executor function is launched right after the callbacks registrations.
+ *    - If you don't call the "start" method, the executor function passed to the SPromise constructor will be called on the next javascript execution loop
+ * - Support the Promises chaining through the callbacks like to:
+ *    ```js
+ *      const result = await new SPromise((resolve, reject, trigger, cancel) => {
+ *        resolve('hello');
+ *      }).then(value => {
+ *        return new Promise((resolve) => {
+ *          setTimeout(() => {
+ *            resolve(value + 'World');
+ *          }, 1000);
+ *        });
+ *      }).then(value => {
+ *        return value + 'Promise';
+ *      }).start();
+ *      console.log(result); // => helloWorldPromise
+ *    ```
  * 
  * @example         js
  * import SPromise from '@coffeekraken/sugar/js/promise/SPromise';
  * function myCoolFunction() {
- *    return new SPromise((resolve, reject, release) => {
+ *    return new SPromise((resolve, reject, trigger, cancel) => {
  *        // do something...
  *        setInterval(() => {
  *            // resolve the promise
- *            resolve('something');
- * 
- *            // release the Promise. This will actually call the "resolve" function
- *            // on the master promise and so let the code execution continue his way when using some "await" statements
- *            release('finished the execution of my promise...');
- * 
- *            // if you want to "reject" the master promise, just pass an instance of the Error class
- *            // to the "release" function like so:
- *            release(new Error('something bad happened...'));
- * 
+ *            resolve('something'); * 
  *        }, 1000);
- *    }).start();
+ *    });
  * }
  * 
  * // calling the function and get back the SPromise instance
  * myCoolFunction().then(value => {
  *    // do something here...
- * }).thenOnce(value => {
+ * }).then(1, value => {
  *    // do something just once...
  * }).catch(error => {
  *    // do something with the returned reason of failure...
@@ -147,9 +150,13 @@ export default class SPromise {
    * @param         {Function}          executor          The executor function that will receive the resolve and reject ones...
    * 
    * @example       js
-   * const promise = new SPromise((resolve, reject, release) => {
+   * const promise = new SPromise((resolve, reject, trigger, cancel) => {
    *    // do something...
-   * });
+   * }).then(value => {
+   *    // do something...
+   * }).finally(value => {
+   *    // do something...
+   * }).start();
    * 
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
@@ -162,7 +169,7 @@ export default class SPromise {
       this._masterPromiseRejectFn = reject;
       setTimeout(() => {
         if (!this._isExecutorStarted) {
-          this._executorFn(this._resolve.bind(this), this._reject.bind(this), this.trigger.bind(this), this.cancel.bind(this));
+          this._executorFn(this._resolve.bind(this), this._reject.bind(this), this.trigger.bind(this), this._cancel.bind(this));
           this._isExecutorStarted = true;
         }
       });
@@ -299,8 +306,6 @@ export default class SPromise {
    */
   async _triggerStack(stack, initialValue) {
 
-    const stackName = stack;
-
     let currentCallbackReturnedValue = initialValue;
 
     if (typeof stack === 'string') stack = this._stacks[stack];
@@ -374,6 +379,7 @@ export default class SPromise {
    * the "this.resolve('something')" statement. In an arrow function like "(value) => { ... }", the "this" keyword will be bound to the current context where you define
    * your function. You can access to the SPromise instance through the last parameter like so "(value, sPromiseInstance) => { ... }".
    * 
+   * @param           {String|Array}      stacks        The stacks in which you want register your callback. Either an Array like ['then','finally'], or a String like "then,finally"
    * @param           {Function}        callback        The callback function to register
    * @return          {SPromise}                  The SPromise instance to maintain chainability
    * 
@@ -389,19 +395,12 @@ export default class SPromise {
    * 
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  on(...args) {
+  on(stacks, callback) {
 
-    // get the callback that is the last argument
-    const callback = args[args.length - 1];
+    if (typeof stacks === 'string') stacks = stacks.split(',').map(s => s.trim());
 
-    // get all the actions names like "then", "catch", etc...
-    const actionNames = args.filter(a => typeof a === 'string');
-
-    // make sure the last argument is a callback function
-    if (typeof callback !== 'function' || actionNames.length <= 0) return this._masterPromise;
-
-    // loop on each action names
-    actionNames.forEach(name => {
+    // loop on each stacks
+    stacks.forEach(name => {
       // check if it has a callNumber specified using name:1
       const splitedName = name.split(':');
       let callNumber = -1;
@@ -424,7 +423,7 @@ export default class SPromise {
    * @type                Function
    * 
    * This method allows the SPromise user to register a function that will be called every time the "resolve" one is called in the executor
-   * The context of the callback will be the SPromise instance itself so you can call all the methods available like "resolve", "release", "then", etc using
+   * The context of the callback will be the SPromise instance itself so you can call all the methods available like "resolve", "then", etc using
    * the "this.resolve('something')" statement. In an arrow function like "(value) => { ... }", the "this" keyword will be bound to the current context where you define
    * your function. You can access to the SPromise instance through the last parameter like so "(value, sPromiseInstance) => { ... }".
    * 
@@ -457,7 +456,7 @@ export default class SPromise {
    * @type                Function
    * 
    * This method allows the SPromise user to register a function that will be called every time the "reject" one is called in the executor
-   * The context of the callback will be the SPromise instance itself so you can call all the methods available like "resolve", "release", "then", etc using
+   * The context of the callback will be the SPromise instance itself so you can call all the methods available like "resolve", "then", etc using
    * the "this.resolve('something')" statement. In an arrow function like "(value) => { ... }", the "this" keyword will be bound to the current context where you define
    * your function. You can access to the SPromise instance through the last parameter like so "(value, sPromiseInstance) => { ... }".
    * 
@@ -486,7 +485,7 @@ export default class SPromise {
    * @type                Function
    * 
    * This method allows the SPromise user to register a function that will be called every time the "reject" one is called in the executor
-   * The context of the callback will be the SPromise instance itself so you can call all the methods available like "resolve", "release", "then", etc using
+   * The context of the callback will be the SPromise instance itself so you can call all the methods available like "resolve", "then", etc using
    * the "this.resolve('something')" statement. In an arrow function like "(value) => { ... }", the "this" keyword will be bound to the current context where you define
    * your function. You can access to the SPromise instance through the last parameter like so "(value, sPromiseInstance) => { ... }".
    * 
@@ -512,7 +511,7 @@ export default class SPromise {
    * @type                Function
    * 
    * This method allows the SPromise user to register a function that will be called every time the "reject" one is called in the executor
-   * The context of the callback will be the SPromise instance itself so you can call all the methods available like "resolve", "release", "then", etc using
+   * The context of the callback will be the SPromise instance itself so you can call all the methods available like "resolve", "then", etc using
    * the "this.resolve('something')" statement. In an arrow function like "(value) => { ... }", the "this" keyword will be bound to the current context where you define
    * your function. You can access to the SPromise instance through the last parameter like so "(value, sPromiseInstance) => { ... }".
    * 
@@ -538,7 +537,7 @@ export default class SPromise {
    * @type                Function
    * 
    * This method allows the SPromise user to register a function that will be called every time the "reject" one is called in the executor
-   * The context of the callback will be the SPromise instance itself so you can call all the methods available like "resolve", "release", "then", etc using
+   * The context of the callback will be the SPromise instance itself so you can call all the methods available like "resolve", "then", etc using
    * the "this.resolve('something')" statement. In an arrow function like "(value) => { ... }", the "this" keyword will be bound to the current context where you define
    * your function. You can access to the SPromise instance through the last parameter like so "(value, sPromiseInstance) => { ... }".
    * 
@@ -564,7 +563,7 @@ export default class SPromise {
    * @type                Function
    * 
    * This method allows the SPromise user to register a function that will be called once when the "revoke" function has been called
-   * The context of the callback will be the SPromise instance itself so you can call all the methods available like "resolve", "release", "then", etc using
+   * The context of the callback will be the SPromise instance itself so you can call all the methods available like "resolve", "then", etc using
    * the "this.resolve('something')" statement. In an arrow function like "(value) => { ... }", the "this" keyword will be bound to the current context where you define
    * your function. You can access to the SPromise instance through the last parameter like so "(value, sPromiseInstance) => { ... }".
    * 
@@ -582,19 +581,35 @@ export default class SPromise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   async cancel(...args) {
-    // if we have passed a function as argument, take that as a callback registration
-    if (typeof args[0] === 'function' || (args.length === 2 && typeof args[0] === 'number' && typeof args[1] === 'function')) {
+    if ((typeof args[0] === 'number' && typeof args[1] === 'function') || (args.length === 1 && typeof args[0] === 'function')) {
       return this._registerCallbackInStack('cancel', ...args);
     } else {
-      // otherwise, trigger the "cancel" callback
-      const cancelStackResult = await this._triggerStack('cancel', ...args);
-      // reject the master promise with "null" as parameter
-      this._masterPromiseResolveFn(cancelStackResult || null);
-      // destroy the promise
-      this._destroy();
-      // return the stack result
-      return cancelStackResult;
+      return this._cancel(...args);
     }
+  }
+
+  /**
+   * @name            _cancel
+   * @type            Function
+   * @private
+   * @async
+   * 
+   * Cancel the promise execution, destroy the Promise and resolve it with the passed value without calling any callbacks
+   * 
+   * @param         {Mixed}           arg           The argument you want to pass to the cancel callbacks
+   * @return        {Promise}                       A simple promise that will be resolved once the promise has been canceled with the cancel stack result as value
+   * 
+   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   */
+  async _cancel(...args) {
+    // otherwise, trigger the "cancel" callback
+    const cancelStackResult = await this._triggerStack('cancel', ...args);
+    // reject the master promise with "null" as parameter
+    this._masterPromiseResolveFn(cancelStackResult || null);
+    // destroy the promise
+    this._destroy();
+    // return the stack result
+    return cancelStackResult;
   }
 
   /**
@@ -617,7 +632,7 @@ export default class SPromise {
    */
   start() {
     if (this._isExecutorStarted) return;
-    this._executorFn(this._resolve.bind(this), this._reject.bind(this), this.trigger.bind(this), this.cancel.bind(this));
+    this._executorFn(this._resolve.bind(this), this._reject.bind(this), this.trigger.bind(this), this._cancel.bind(this));
     this._isExecutorStarted = true;
     // maintain chainability
     return this._masterPromise;

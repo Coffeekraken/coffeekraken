@@ -19,7 +19,7 @@ import __SPromise from '../promise/SPromise';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function removeClassOnAnimationEnd($elm, cls) {
-  return new __SPromise((resolve, reject, release) => {
+  return new __SPromise((resolve, reject, trigger, cancel) => {
     // listen for animation end on the element just once
     __addEventListenerOnce($elm, "animationend", e => {
       if (!Array.isArray(cls)) cls = [cls];
@@ -29,7 +29,6 @@ export default function removeClassOnAnimationEnd($elm, cls) {
       });
       // resolve the process
       resolve(e);
-      release(e);
     });
   });
 }

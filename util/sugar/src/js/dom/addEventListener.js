@@ -30,7 +30,7 @@ export default function addEventListener(
 
   let listenerFn = null;
 
-  return new __SPromise((resolve, reject, trigger) => {
+  return new __SPromise((resolve, reject, trigger, cancel) => {
 
     listenerFn = (...args) => {
       if (callback) callback.apply(this, [...args]);
@@ -38,8 +38,7 @@ export default function addEventListener(
     };
 
     $elm.addEventListener(eventName, listenerFn, options);
-  }).on('cancel', 'finally', () => {
-    console.log('Yeah');
+  }).on('cancel,finally', () => {
     $elm.removeEventListener(eventName, listenerFn, options);
   });
 }

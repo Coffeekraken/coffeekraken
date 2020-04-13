@@ -8,7 +8,7 @@ describe('sugar.js.dom.scriptLoaded', () => {
   `;
   const $elm = document.head.querySelector('script');
 
-  let isLoaded = false, isError = false, isReadyStateChange = false;
+  let isLoaded = false, isError = false;
 
   __scriptLoaded($elm).then(() => {
     isLoaded = true;
@@ -16,11 +16,10 @@ describe('sugar.js.dom.scriptLoaded', () => {
     isError = true;
   });
 
-  $elm.onload();
-
-  it('Should detect the script loading complete state', (done) => {
+  it('Should detect the script loading complete state', () => {
+    $elm.onload();
     expect(isLoaded).toBe(true);
-    expect(isError).toBe(true);
+    expect(isError).toBe(false);
   });
 
 });

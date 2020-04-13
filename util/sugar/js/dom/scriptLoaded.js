@@ -5,6 +5,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = loadScript;
 
+var _SPromise = _interopRequireDefault(require("../promise/SPromise"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 /**
  * @name      scriptLoaded
  * @namespace     sugar.js.dom
@@ -24,7 +28,7 @@ exports.default = loadScript;
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function loadScript($script) {
-  return new Promise((resolve, reject) => {
+  return new _SPromise.default((resolve, reject, release) => {
     let done = false;
     $script.onload = handleLoad;
     $script.onreadystatechange = handleReadyStateChange;
@@ -34,6 +38,7 @@ function loadScript($script) {
       if (!done) {
         done = true;
         resolve($script);
+        release($script);
       }
     }
 
@@ -49,13 +54,17 @@ function loadScript($script) {
       }
     }
 
-    function handleError() {
+    function handleError(e) {
       if (!done) {
         done = true;
-        reject($script);
+        reject(new Error(e));
       }
     }
-  });
+  }).after(() => {
+    $script.onload = null;
+    $script.onreadystatechange = null;
+    $script.onerror = null;
+  }).start();
 }
 
 module.exports = exports.default;

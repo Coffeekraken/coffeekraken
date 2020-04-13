@@ -2,43 +2,46 @@
 
 module.exports = __SPromise => {
   describe('sugar.js.promise.SPromise', () => {
-    const thenStack = [],
+    const triggerStack = [],
+          thenStack = [],
           thenOnceStack = [],
           catchStack = [],
-          catchOnceStack = [],
-          afterStack = [];
+          catchOnceStack = [];
     let isPassedAwait = false;
 
     (async () => {
-      await new __SPromise((resolve, reject, release) => {
-        resolve('world');
-        resolve('hello');
-        reject('error');
-        reject('plop');
-        setTimeout(() => {
-          release('release');
-        }, 100);
-      }).then(function (value, me) {
-        thenStack.push(`${value}`);
-      }).then(value => {
-        thenStack.push(`${value}`);
-      }).thenOnce(value => {
-        thenOnceStack.push(`${value}`);
-      }).catch(error => {
-        catchStack.push(`${error}`);
-      }).catchOnce(error => {
-        catchOnceStack.push(`${error}`);
-      }).after(value => {
-        afterStack.push(`${value}`);
-      });
+      const pro = new __SPromise((resolve, reject, trigger) => {// trigger('then', 'world');
+        // trigger('then', 'hello');
+        // trigger('catch', 'error');
+        // trigger('catch', 'plop');
+        // setTimeout(() => {
+        //   release('release');
+        // }, 10);
+      }); // .then((value, me) => {
+      //   thenStack.push(`${value}`);
+      // })
+      // .then(value => {
+      //   thenStack.push(`${value}`);
+      // })
+      // .thenOnce(value => {
+      //   thenOnceStack.push(`${value}`);
+      // })
+      // .catch(error => {
+      //   catchStack.push(`${error}`);
+      // })
+      // .catchOnce(error => {
+      //   catchOnceStack.push(`${error}`);
+      // })
+
+      console.log(typeof pro.start);
+      console.log(pro);
+      await pro;
       isPassedAwait = true;
     })();
 
     it('Should not have passed the await point in the source code before having calling the release function', done => {
-      setTimeout(() => {
-        expect(isPassedAwait).toBe(false);
-        done();
-      });
+      expect(isPassedAwait).toBe(false);
+      done();
     });
     it('Should pass all the tests of stack values after having calling all the "resolve", "reject" and "release" functions', done => {
       setTimeout(() => {
@@ -46,10 +49,9 @@ module.exports = __SPromise => {
         expect(thenOnceStack).toEqual(['world']);
         expect(catchStack).toEqual(['error', 'plop']);
         expect(catchOnceStack).toEqual(['error']);
-        expect(afterStack).toEqual(['release']);
         expect(isPassedAwait).toBe(true);
         done();
-      }, 250);
+      }, 20);
     });
   });
 };

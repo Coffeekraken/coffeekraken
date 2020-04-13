@@ -7,6 +7,8 @@ exports.default = removeClassOnAnimationEnd;
 
 var _addEventListenerOnce = _interopRequireDefault(require("./addEventListenerOnce"));
 
+var _SPromise = _interopRequireDefault(require("../promise/SPromise"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -27,7 +29,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function removeClassOnAnimationEnd($elm, cls) {
-  return new Promise((resolve, reject) => {
+  return new _SPromise.default((resolve, reject, release) => {
     // listen for animation end on the element just once
     (0, _addEventListenerOnce.default)($elm, "animationend", e => {
       if (!Array.isArray(cls)) cls = [cls]; // remove the cls
@@ -36,7 +38,8 @@ function removeClassOnAnimationEnd($elm, cls) {
         $elm.classList.remove(_cls);
       }); // resolve the process
 
-      resolve($elm);
+      resolve(e);
+      release(e);
     });
   });
 }

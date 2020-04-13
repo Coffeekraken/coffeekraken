@@ -5,6 +5,12 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = addEventListenerOnce;
 
+var _SPromise = _interopRequireDefault(require("../promise/SPromise"));
+
+var _addEventListener = _interopRequireDefault(require("./addEventListener"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 /**
  * @name        addEventListenerOnce
  * @namespace       sugar.js.dom
@@ -15,7 +21,6 @@ exports.default = addEventListenerOnce;
  * @param    {HTMLElement}    $elm    The element to add the event listener on
  * @param    {String}    event    The event to listen for
  * @param    {Function}    [callback=null]    The callback function to call on event
- * @param    {Boolean}    [useCapture=false]    Use capture phase or not
  * @param    {object}    [options={}]    An options object that specifies characteristics about the event listener
  * @return    {Promise}                   A promise that will be resolved once the event has been called
  *
@@ -30,21 +35,12 @@ exports.default = addEventListenerOnce;
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function addEventListenerOnce($elm, event, callback = null, useCapture = false, options = {}) {
-  return new Promise((resolve, reject) => {
-    // event handler
-    function eventHandler(e) {
-      // call the callback
-      if (callback) callback(e); // remove the event listener
-
-      $elm.removeEventListener(event, eventHandler, useCapture, options); // resolve the promise
-
-      resolve(e);
-    } // add the listener to the element
-
-
-    $elm.addEventListener(event, eventHandler, useCapture, options);
-  });
+function addEventListenerOnce($elm, event, callback = null, options = {}) {
+  const sPromise = (0, _addEventListener.default)($elm, event, callback, options);
+  sPromise.then(() => {
+    sPromise.revoke();
+  }).start();
+  return sPromise;
 }
 
 module.exports = exports.default;

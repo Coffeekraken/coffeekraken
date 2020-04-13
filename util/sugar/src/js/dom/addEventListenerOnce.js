@@ -33,7 +33,9 @@ export default function addEventListenerOnce(
 ) {
   const sPromise = __addEventListener($elm, event, callback, options);
   sPromise.then(() => {
-    sPromise.release();
+    setTimeout(() => {
+      sPromise.cancel();
+    });
   }).start();
   return sPromise;
 }

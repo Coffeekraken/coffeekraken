@@ -11,6 +11,7 @@ describe('sugar.js.dom.addEventListenerOnce', () => {
 
   it('Should add the event listener on the element correctly', done => {
     __addEventListenerOnce($elm, 'click').then(e => {
+      console.log(e);
       if (e.detail.twice) isTriggeredTwice = true;
       done();
     });

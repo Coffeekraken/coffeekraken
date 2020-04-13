@@ -1,3 +1,5 @@
+import __SPromise from '../promise/SPromise';
+
 /**
  * @name      scriptLoaded
  * @namespace     sugar.js.dom
@@ -17,7 +19,7 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function loadScript($script) {
-  return new Promise((resolve, reject) => {
+  return new __SPromise((resolve, reject, release) => {
     let done = false;
 
     $script.onload = handleLoad;
@@ -28,6 +30,7 @@ export default function loadScript($script) {
       if (!done) {
         done = true;
         resolve($script);
+        release($script);
       }
     }
 
@@ -40,11 +43,15 @@ export default function loadScript($script) {
         }
       }
     }
-    function handleError() {
+    function handleError(e) {
       if (!done) {
         done = true;
-        reject($script);
+        reject(new Error(e));
       }
     }
-  });
+  }).after(() => {
+    $script.onload = null;
+    $script.onreadystatechange = null;
+    $script.onerror = null;
+  }).start();
 }

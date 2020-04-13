@@ -3,7 +3,7 @@ import __dispatchEvent from '../dispatchEvent';
 
 describe('sugar.js.dom.addEventListener', () => {
 
-  let isCallbackCalled = false, isThenCalled = false, hasBeenReleased = false;
+  let isCallbackCalled = false, isThenCalled = false, hasBeenReleased = false, hasBeenCanceled = false;
   let clickCount = 0;
 
   document.body.innerHTML = `
@@ -15,14 +15,16 @@ describe('sugar.js.dom.addEventListener', () => {
   }).then((...args) => {
     isThenCalled = true;
     clickCount++;
-  }).after((...args) => {
+  }).finally((...args) => {
     hasBeenReleased = true;
+  }).on('cancel', (...args) => {
+    hasBeenCanceled = true;
   }).start();
 
   __dispatchEvent($elm, 'click');
 
   // release the listener
-  listener.release('end');
+  listener.cancel('end');
 
   __dispatchEvent($elm, 'click');
 
@@ -30,6 +32,7 @@ describe('sugar.js.dom.addEventListener', () => {
     expect(isCallbackCalled).toBe(true);
     expect(isThenCalled).toBe(true);
     expect(clickCount).toBe(1);
+    expect(hasBeenCanceled).toBe(true);
     done();
   });
 

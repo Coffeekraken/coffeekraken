@@ -11,7 +11,11 @@ var _injectStyle = _interopRequireDefault(require("../css/injectStyle"));
 
 var _emptyNode = _interopRequireDefault(require("./emptyNode"));
 
+var _convert = _interopRequireDefault(require("../time/convert"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// TODO tests
 
 /**
  * @name            innerHtml
@@ -37,8 +41,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *    action: 'replace', // replace, append, prepend
  *    animIn: 'fade', // fade, fadeUp, fadeDown, fadeLeft, fadeRight
  *    animOut: 'fadeUp', // fade, fadeUp, fadeDown, fadeLeft, fadeRight
- *    animInDuration: 600, // in ms
- *    animOutDuration: 300, // in ms
+ *    animInDuration: 600, // in ms if number, otherwise a string like '1s', '1m', etc...
+ *    animOutDuration: 300, // in ms if number, otherwise a string like '1s', '1m', etc...
  *    animInDistance: 25, // in px
  *    animOutDistance: 25, // in px
  *    animInEasing: 'ease-in-out',
@@ -63,7 +67,9 @@ function innerHtml(node, content, settings = {}) {
       animInEasing: 'ease-in-out',
       animOutEasing: 'ease-in-out',
       ...settings
-    }; // generate a uniqid for this process
+    };
+    settings.animInDuration = (0, _convert.default)(settings.animInDuration, 'ms');
+    settings.animOutDuration = (0, _convert.default)(settings.animOutDuration, 'ms'); // generate a uniqid for this process
 
     const _uniqid = (0, _uniqid2.default)();
 

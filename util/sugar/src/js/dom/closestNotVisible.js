@@ -1,4 +1,4 @@
-import isVisible from "./isVisible";
+import __isVisible from "./isVisible";
 
 /**
  * @name        closestNotVisible
@@ -24,7 +24,7 @@ export default function closestNotVisible(elm) {
   const originalElm = elm;
   elm = elm.parentNode;
   while (elm && elm != originalElm.ownerDocument) {
-    if (!isVisible(elm)) {
+    if (!__isVisible(elm)) {
       return elm;
     }
     elm = elm.parentNode;

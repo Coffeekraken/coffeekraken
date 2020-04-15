@@ -5,6 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = isInIframe;
 
+// TODO tests
+
 /**
  * @name      isInIframe
  * @namespace     sugar.js.dom

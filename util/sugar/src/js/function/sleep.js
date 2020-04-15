@@ -12,14 +12,14 @@
  * import sleep from '@coffeekraken/sugar/js/function/sleep';
  * async function() {
  *  console.log('hello');
- *  sleep(2000);
+ *  await sleep(2000);
  *  console.log('World');
  * }
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function sleep(time){
-  return new Promise(resolve=>{
-    setTimeout(resolve,time)
+export default function sleep(time) {
+  return new Promise(resolve => {
+    setTimeout(resolve, time)
   });
 }

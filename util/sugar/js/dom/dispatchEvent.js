@@ -16,7 +16,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * Helper to quickly display an event with some optional data attached to it
  *
- * @param 		{HTMLElement} 					target  		The element to dispatch the event from
+ * @param 		{HTMLElement} 					$target  		The element to dispatch the event from
  * @param 		{String} 						name 			The event name to dispatch
  * @param 		{Mixed} 						data 			The data to attache to the event
  *
@@ -28,14 +28,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function dispatchEvent(target, name, data = null) {
+function dispatchEvent($target, name, data = null) {
   // create new event
   const e = new _SEvent.default(name, {
     detail: data,
     bubbles: true,
     cancelable: true
   });
-  target.dispatchEvent(e);
+  $target.dispatchEvent(e);
 }
 
 module.exports = exports.default;

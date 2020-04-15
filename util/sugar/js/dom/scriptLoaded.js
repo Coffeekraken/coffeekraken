@@ -28,7 +28,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function loadScript($script) {
-  return new _SPromise.default((resolve, reject, release) => {
+  return new _SPromise.default((resolve, reject, trigger, cancel) => {
     let done = false;
     $script.onload = handleLoad;
     $script.onreadystatechange = handleReadyStateChange;
@@ -38,7 +38,6 @@ function loadScript($script) {
       if (!done) {
         done = true;
         resolve($script);
-        release($script);
       }
     }
 
@@ -60,7 +59,7 @@ function loadScript($script) {
         reject(new Error(e));
       }
     }
-  }).after(() => {
+  }).on('cancel,finally', () => {
     $script.onload = null;
     $script.onreadystatechange = null;
     $script.onerror = null;

@@ -29,7 +29,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function removeClassOnAnimationEnd($elm, cls) {
-  return new _SPromise.default((resolve, reject, release) => {
+  return new _SPromise.default((resolve, reject, trigger, cancel) => {
     // listen for animation end on the element just once
     (0, _addEventListenerOnce.default)($elm, "animationend", e => {
       if (!Array.isArray(cls)) cls = [cls]; // remove the cls
@@ -39,7 +39,6 @@ function removeClassOnAnimationEnd($elm, cls) {
       }); // resolve the process
 
       resolve(e);
-      release(e);
     });
   });
 }

@@ -2,6 +2,8 @@ import __isInViewport from "./isInViewport";
 import __throttle from "../function/throttle";
 import __closest from "./closest";
 
+// TODO tests
+
 /**
  * @name      whenOutOfViewport
  * @namespace     sugar.js.dom

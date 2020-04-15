@@ -3,6 +3,8 @@ import SSvgFilter from "./SSvgFilter";
 import fastdom from "fastdom";
 import forceRedraw from "../dom/forceRedraw";
 
+// TODO tests
+
 /**
  * @name 		SMotionblurSvgFilter
  * @namespace       sugar.js.filter
@@ -19,23 +21,47 @@ import forceRedraw from "../dom/forceRedraw";
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default class SMotionblurSvgFilter extends SSvgFilter {
+
   /**
+   * @name        amount
+   * @type        Number
+   * @default     0.5
+   * 
    * Store the amount of motion blur to apply
-   * @type 	{Number}
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   amount = 0.5;
 
   /**
+   * @name        _isMoving
+   * @type        Boolean
+   * 
    * Store the status of the animation
-   * @type 		{Boolean}
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _isMoving = false;
 
+  /**
+   * @name        _startMoveTimeout
+   * @type        Number
+   * 
+   * Store the starting moment when the element move
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
   _startMoveTimeout = null;
 
   /**
-   * @constructor
-   * @param 		{Number} 		amount 			The motion blur amount
+   * @name          constructor
+   * @type          Function
+   * 
+   * Constructor
+   * 
+   * @param 		{Number} 		[amount=0.5] 			The motion blur amount
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(amount = 0.5) {
     super(`
@@ -53,9 +79,15 @@ export default class SMotionblurSvgFilter extends SSvgFilter {
   }
 
   /**
-   * Apply the filter to element
+   * @name      applyTo
+   * @type      Function
    * @override
+   * 
+   * Apply the filter to element
+   * 
    * @param 		{HTMLElement} 		elm 		The element on which to apply the filter
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   applyTo(elm) {
     // call parent method
@@ -73,9 +105,15 @@ export default class SMotionblurSvgFilter extends SSvgFilter {
   }
 
   /**
-   * Remove the filter from element
+   * @name            unapplyFrom
+   * @type            Function
    * @override
+   * 
+   * Remove the filter from element
+   * 
    * @param 	{HTMLElement} 	elm 	The element to unapply the filter from
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   unapplyFrom(elm) {
     // remove event listeners
@@ -90,7 +128,13 @@ export default class SMotionblurSvgFilter extends SSvgFilter {
   }
 
   /**
+   * @name          _onMotionStart
+   * @type          Function
+   * @private
+   * 
    * When the animation, transition or draging start
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _onMotionStart(e) {
     if (e.target !== this.elms[0]) return;
@@ -103,7 +147,13 @@ export default class SMotionblurSvgFilter extends SSvgFilter {
   }
 
   /**
+   * @name          _onMotionStop
+   * @type          Function
+   * @private
+   * 
    * Transition / animation end
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _onMotionStop(e) {
     if (e.target !== this.elms[0]) return;
@@ -119,8 +169,15 @@ export default class SMotionblurSvgFilter extends SSvgFilter {
   }
 
   /**
+   * @name          _handleFilter
+   * @type          Function
+   * @private
+   * 
    * Handle filter
+   * 
    * @param 		{Boolean} 		recusrive 			If the function need to be called again at the end of it's execution
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _handleFilter() {
     // animation or move is finished
@@ -136,7 +193,13 @@ export default class SMotionblurSvgFilter extends SSvgFilter {
   }
 
   /**
+   * @name            _setMotionBlur
+   * @type            Function
+   * @private
+   * 
    * Set motion blur
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _setMotionBlur() {
     this._currentPos = __offset(this.elms[0]);
@@ -159,8 +222,13 @@ export default class SMotionblurSvgFilter extends SSvgFilter {
   }
 
   /**
-   * Destroy the filter
+   * @name        destroy
+   * @type        Function
    * @override
+   * 
+   * Destroy the filter
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   destroy() {
     cancelAnimationFrame(this._animationFrame);

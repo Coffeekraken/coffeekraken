@@ -1,9 +1,11 @@
 import uniqid from "../util/uniqid";
 
+// TODO tests
+
 /**
- * @name 		SGooeySvgFilter
+ * @name 		          SGooeySvgFilter
  * @namespace       sugar.js.filter
- * @type      Class
+ * @type             Class
  *
  * This class allows you to create with ease some complexe SVG filters and to apply it on any HTMLElement that you want
  * by extending this class like so
@@ -24,13 +26,17 @@ import uniqid from "../util/uniqid";
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-
-let _sSvgFilters = [];
-let _sIsSvgInjected = false;
 export default class SSvgFilter {
+
   /**
-   * @constructor
-   * @param 			{String} 			The SVG filter string representation
+   * @name          constructor
+   * @type          Function
+   * 
+   * Constructor
+   * 
+   * @param 			{String} 			filter          The SVG filter string representation
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(filter_content) {
     // save the reference of each elements
@@ -51,8 +57,14 @@ export default class SSvgFilter {
   }
 
   /**
+   * @name            applyTo
+   * @type            Function
+   * 
    * Apply the filter to an element
+   * 
    * @param 		{HTMLElement} 			elm 			The element on which to apply the filter
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   applyTo(elm) {
     ["-webkit-", "-moz-", "-ms-", "-o-", ""].forEach(vendor => {
@@ -62,8 +74,14 @@ export default class SSvgFilter {
   }
 
   /**
+   * @name          unapplyFrom
+   * @type          Function
+   * 
    * Unapply from
+   * 
    * @param 		{HTMLElement} 			elm 			The element from which to remove the filter
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   unapplyFrom(elm) {
     ["-webkit-", "-moz-", "-ms-", "-o-", ""].forEach(vendor => {
@@ -76,7 +94,13 @@ export default class SSvgFilter {
   }
 
   /**
+   * @name          _insertFilter
+   * @type          Function
+   * @private
+   * 
    * Insert the filter
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _insertFilter() {
     let svg = `
@@ -99,7 +123,12 @@ export default class SSvgFilter {
   }
 
   /**
+   * @name          destroy
+   * @type          Function
+   * 
    * Destroy the filter
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   destroy() {
     // loop on each element savec in stack to remove the filter
@@ -111,8 +140,14 @@ export default class SSvgFilter {
   }
 
   /**
-   * Inject the svg that will contains all the filters created through this class
+   * @name          _injectFiltersContainer
+   * @type          Function
    * @private
+   * @static
+   * 
+   * Inject the svg that will contains all the filters created through this class
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   static _injectFiltersContainer() {
     let style = ["position:absolute;", "left:-1000px;", "top:-300px;"];

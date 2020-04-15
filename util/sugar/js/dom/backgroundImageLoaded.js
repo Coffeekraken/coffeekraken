@@ -11,6 +11,8 @@ var _imageLoaded = _interopRequireDefault(require("./imageLoaded"));
 
 var _unquote = _interopRequireDefault(require("../string/unquote"));
 
+var _SPromise = _interopRequireDefault(require("../promise/SPromise"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -21,7 +23,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * Detect when a background image has been loaded on an HTMLElement
  *
  * @param    {HTMLElement}    $elm    The HTMLElement on which to detect the background image load
- * @return    {Promise}    A promise that will be resolved when the background image has been loaded
+ * @return    {SPromise}    A promise that will be resolved when the background image has been loaded
  *
  * @example    js
  * import backgroundImageLoaded from '@coffeekraken/sugar/js/dom/backgroundImageLoaded'
@@ -32,7 +34,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function backgroundImageLoaded($elm) {
-  return new Promise((resolve, reject) => {
+  let isCancelled = false,
+      $img;
+  const promise = new _SPromise.default((resolve, reject, trigger, cancel) => {
     // get the background-image property from computed style
     const backgroundImage = (0, _getStyleProperty.default)($elm, "background-image");
     const matches = backgroundImage.match(/.*url\((.*)\).*/);
@@ -45,11 +49,17 @@ function backgroundImageLoaded($elm) {
 
     const url = (0, _unquote.default)(matches[1]); // make a new image with the image set
 
-    const $img = new Image();
+    $img = new Image();
     $img.src = url; // return the promise of image loaded
 
-    resolve((0, _imageLoaded.default)($img));
-  });
+    (0, _imageLoaded.default)($img).then(() => {
+      if (!isCancelled) resolve($elm);
+    });
+  }).on('cancal,finally', () => {
+    isCancelled = true;
+  }).start();
+  promise.__$img = $img;
+  return promise;
 }
 
 module.exports = exports.default;

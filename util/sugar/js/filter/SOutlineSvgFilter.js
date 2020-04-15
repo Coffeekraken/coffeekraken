@@ -9,11 +9,13 @@ var _SSvgFilter = _interopRequireDefault(require("./SSvgFilter"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// TODO tests
+
 /**
- * @name 		SOutlineSvgFilter
+ * @name 		        SOutlineSvgFilter
  * @namespace       sugar.js.filter
- * @type      Class
- * @extends 		SSvgFilter
+ * @type            Class
+ * @extends 	    	SSvgFilter
  *
  * This class represent an outline filter that can be applied on any HTMLElement.
  *
@@ -25,8 +27,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 class SOutlineSvgFilter extends _SSvgFilter.default {
   /**
-   * @constructor
-   * @param 		{Number} 		amount 		The amount of effect to apply
+   * @name            constructor
+   * @type            Function
+   * 
+   * Constructor
+   * 
+   * @param 		{Number} 		[radius=8] 		The amount of effect to apply
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(radius = 8) {
     super(`
@@ -37,13 +45,21 @@ class SOutlineSvgFilter extends _SSvgFilter.default {
     this._$morphology = this.filter.querySelector("feMorphology");
   }
   /**
-   * The radius to produce the effect
-   * @type 	{Number}
+   * @name          radius
+   * @type          Number
+   * 
+   * Get/Set the radius to produce the effect
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
 
   set radius(value) {
     this._$morphology.setAttribute("radius", value);
+  }
+
+  get radius() {
+    return parseFloat(this._$morphology.getAttribute("radius"));
   }
 
 } // export modules

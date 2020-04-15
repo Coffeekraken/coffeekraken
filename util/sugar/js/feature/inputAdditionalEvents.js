@@ -19,6 +19,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+// TODO tests
 function handleInputAttributes(e) {
   const field = e.target ? e.target : e;
   if (!field || !field.tagName) return;
@@ -39,6 +40,7 @@ function handleInputAttributes(e) {
               break;
 
             case 27:
+              // escape
               if (field.hasAttribute("onescape")) {
                 eval(field.getAttribute("onescape"));
                 (0, _dispatchEvent.default)(field, "escape");

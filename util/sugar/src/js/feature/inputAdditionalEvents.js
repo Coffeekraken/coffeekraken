@@ -1,3 +1,6 @@
+import fastdom from "fastdom";
+import __dispatchEvent from "../dom/dispatchEvent";
+
 /**
  * @name 		handleInputAttributes
  * @namespace       sugar.js.feature
@@ -12,8 +15,7 @@
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-import fastdom from "fastdom";
-import __dispatchEvent from "../dom/dispatchEvent";
+// TODO tests
 
 function handleInputAttributes(e) {
   const field = e.target ? e.target : e;
@@ -30,7 +32,7 @@ function handleInputAttributes(e) {
                 __dispatchEvent(field, "enter");
               }
               break;
-            case 27:
+            case 27: // escape
               if (field.hasAttribute("onescape")) {
                 eval(field.getAttribute("onescape"));
                 __dispatchEvent(field, "escape");

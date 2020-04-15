@@ -7,8 +7,6 @@ exports.default = whenInViewport;
 
 var _inViewport = _interopRequireDefault(require("in-viewport"));
 
-var _uniqid = _interopRequireDefault(require("../string/uniqid"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**

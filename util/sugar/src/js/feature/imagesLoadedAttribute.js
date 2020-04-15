@@ -12,6 +12,8 @@
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
+// TODO tests
+
 import __imageLoaded from "../dom/imageLoaded";
 document.addEventListener(
   "load",

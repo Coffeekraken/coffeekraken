@@ -1,6 +1,7 @@
-import getStyleProperty from "./getStyleProperty";
-import autoCast from "../string/autoCast";
-import toMs from "../string/toMs";
+import __getStyleProperty from "./getStyleProperty";
+import __toMs from "../string/toMs";
+
+// TODO tests
 
 /**
  * @name      getTransitionProperties
@@ -36,16 +37,16 @@ function splitIfNeeded(what, separator) {
 
 export default function getTransitionProperties(elm) {
   // get the transition properties
-  const property = getStyleProperty(elm, "transition-property");
-  const duration = getStyleProperty(elm, "transition-duration") || 0;
-  const timingFunction = getStyleProperty(elm, "transition-timing-function");
-  const delay = getStyleProperty(elm, "transition-delay");
+  const property = __getStyleProperty(elm, "transition-property");
+  const duration = __getStyleProperty(elm, "transition-duration") || 0;
+  const timingFunction = __getStyleProperty(elm, "transition-timing-function");
+  const delay = __getStyleProperty(elm, "transition-delay");
 
   // return the transition object
   const props = {
     property: splitIfNeeded(property, ","),
-    duration: splitIfNeeded(duration, ",").map(value => toMs(value)),
-    delay: splitIfNeeded(delay, ",").map(value => toMs(value)),
+    duration: splitIfNeeded(duration, ",").map(value => __toMs(value)),
+    delay: splitIfNeeded(delay, ",").map(value => __toMs(value)),
     timingFunction: splitIfNeeded(timingFunction, ",")
   };
   let totalDuration = 0;

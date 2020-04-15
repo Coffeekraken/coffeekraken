@@ -7,7 +7,7 @@ import __SEvent from "../event/SEvent";
  *
  * Helper to quickly display an event with some optional data attached to it
  *
- * @param 		{HTMLElement} 					target  		The element to dispatch the event from
+ * @param 		{HTMLElement} 					$target  		The element to dispatch the event from
  * @param 		{String} 						name 			The event name to dispatch
  * @param 		{Mixed} 						data 			The data to attache to the event
  *
@@ -19,12 +19,12 @@ import __SEvent from "../event/SEvent";
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function dispatchEvent(target, name, data = null) {
+export default function dispatchEvent($target, name, data = null) {
   // create new event
   const e = new __SEvent(name, {
     detail: data,
     bubbles: true,
     cancelable: true
   });
-  target.dispatchEvent(e);
+  $target.dispatchEvent(e);
 }

@@ -14,7 +14,10 @@ import querySelectorLive from "../dom/querySelectorLive";
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-querySelectorLive("video[lazy-src]", $videoElm => {
+
+// TODO tests
+
+querySelectorLive("video[lazy-src]:not([is])", $videoElm => {
   whenInViewport($videoElm).then(() => {
     $videoElm.setAttribute("src", $videoElm.getAttribute("lazy-src"));
   });

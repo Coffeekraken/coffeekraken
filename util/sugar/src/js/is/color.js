@@ -23,5 +23,5 @@ export default function isColor(value) {
   return ele.style.color
     .split(/\s+/)
     .join("")
-    .toLowerCase();
+    .toLowerCase() !== '';
 }

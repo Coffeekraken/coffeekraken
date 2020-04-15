@@ -5,6 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = linkLoaded;
 
+// TODO tests
+
 /**
  * @name      linkLoaded
  * @namespace     sugar.js.dom

@@ -6,6 +6,7 @@ import MobileDetect from "mobile-detect";
  *
  * Detect if is a mobile device (phone or tablet)
  *
+ * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test * 
  * @return    {Boolean}    true if is a mobile, false if not
  *
  * @example 	js
@@ -15,7 +16,7 @@ import MobileDetect from "mobile-detect";
  * }
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function isMobile() {
-  const md = new MobileDetect(window.navigator.userAgent);
+export default function isMobile(ua = navigator.userAgent) {
+  const md = new MobileDetect(ua);
   return md.mobile() !== null;
 }

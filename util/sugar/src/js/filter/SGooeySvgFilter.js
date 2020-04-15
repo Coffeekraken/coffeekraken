@@ -1,13 +1,20 @@
 import SSvgFilter from "./SSvgFilter";
 
+// TODO tests
+
 /**
- * @name 		SGooeySvgFilter
+ * @name 		        SGooeySvgFilter
  * @namespace       sugar.js.filter
- * @type      Class
+ * @type           Class
+ * @extends       SSvgFilter
  *
- * @extends 		SSvgFilter
  * This class represent a gooey SVG filter that can be applied on any HTMLElement.
- *
+ * Here's the values that you can control on it:
+ * - blur: The amout of blur you want
+ * - contrast: The amout of contrast you want
+ * - shrink: The amount of shrink you want
+ * - amout: The overall amount of effect you want
+ * 
  * @example 		js
  * const filter = new SGooeySvgFilter();
  * filter.applyTo(myCoolHTMLElement);
@@ -15,16 +22,23 @@ import SSvgFilter from "./SSvgFilter";
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 class SGooeySvgFilter extends SSvgFilter {
+
   /**
-   * @constructor
-   * @param 		{Number} 		amount 		The amount of effect to apply
+   * @name              constructor
+   * @type              Function
+   * 
+   * Constructor
+   * 
+   * @param 		{Number} 		[amount=8] 		The amount of effect to apply
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(amount = 8) {
     super(`
 			<feGaussianBlur in="SourceGraphic" stdDeviation="${amount}" result="blur" />
 			<feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 ${parseInt(
-        amount
-      ) + 9} -9" result="gooey" />
+      amount
+    ) + 9} -9" result="gooey" />
 			<feComposite in="SourceGraphic" in2="gooey" operator="atop"/>
 		`);
     this._blur = this.filter.querySelector("feGaussianBlur");
@@ -32,16 +46,27 @@ class SGooeySvgFilter extends SSvgFilter {
   }
 
   /**
-   * The blur amount to produce the effect
-   * @type 	{Number}
+   * @name                blur
+   * @type                Number
+   * 
+   * Get/Set the blur amount to produce the effect
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   set blur(value) {
     this._blur.setAttribute("stdDeviation", value);
   }
+  get blur() {
+    return parseFloat(this._blur.getAttribute('stdDeviation'));
+  }
 
   /**
-   * The contrast amount to produce the effect
-   * @type 	{Number}
+   * @name              contrast
+   * @type              Number
+   * 
+   * Get the contrast amount to produce the effect
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   set contrast(value) {
     // get value
@@ -54,8 +79,12 @@ class SGooeySvgFilter extends SSvgFilter {
   }
 
   /**
-   * The shrink amount to produce the effect
-   * @type 	{Number}
+   * @name            shrink
+   * @type            Number
+   * 
+   * Get the shrink amount to produce the effect
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   set shrink(value) {
     // get value
@@ -68,8 +97,12 @@ class SGooeySvgFilter extends SSvgFilter {
   }
 
   /**
-   * The overall amount of effect to produce
-   * @type 	{Number}
+   * @name              amount
+   * @type              Number
+   * 
+   * Set the overall amount of effect to produce
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   set amount(value) {
     this._blur.setAttribute("stdDeviation", value);

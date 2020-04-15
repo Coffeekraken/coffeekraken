@@ -1,7 +1,9 @@
 import hotkeys from 'hotkeys-js';
-hotkeys.filter = function(event) {
+hotkeys.filter = function (event) {
   return true;
 }
+
+// TODO tests
 
 /**
  * @name 		hotkey
@@ -38,7 +40,7 @@ hotkeys.filter = function(event) {
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function(hotkey, handler, options = {}) {
+export default function (hotkey, handler, options = {}) {
   // merge default options with passed ones:
   options = {
     element: null,
@@ -53,7 +55,7 @@ export default function(hotkey, handler, options = {}) {
     handler(e, h);
   });
   // return the "delete" function to call when want to delete the hotkey listening
-  return function() {
+  return function () {
     hotkeys.unbind(hotkey);
   };
 }

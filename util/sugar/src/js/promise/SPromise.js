@@ -1,6 +1,7 @@
 import __upperFirst from '../string/upperFirst';
 import __asyncForEach from '../array/asyncForEach';
 import __deepMerge from '../object/deepMerge';
+import __prettyError from 'pretty-error';
 
 /**
  * @name                  SPromise
@@ -124,6 +125,18 @@ export default class SPromise {
   _isExecutorStarted = null;
 
   /**
+   * @name                  _settings
+   * @type                  Object
+   * @private
+   * 
+   * Store the settings of this SPromise instance. Here's the available settings:
+   * - stacks (null) {Array|String}: An array or comma separated string of additional stacks you want for this instance
+   * 
+   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   */
+  _settings = {};
+
+  /**
    * @name                  _stacks
    * @type                  Object
    * @private
@@ -148,6 +161,8 @@ export default class SPromise {
    * Constructor
    * 
    * @param         {Function}          executor          The executor function that will receive the resolve and reject ones...
+   * @param         {Object}            [settings={}]     An object of settings for this particular SPromise instance. Here's the available settings:
+   * - stacks (null) {Array|String}: An array or comma separated string of additional stacks you want for this instance
    * 
    * @example       js
    * const promise = new SPromise((resolve, reject, trigger, cancel) => {
@@ -160,9 +175,13 @@ export default class SPromise {
    * 
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  constructor(executor) {
+  constructor(executor, settings = {}) {
     // save the executor function
     this._executorFn = executor;
+    // extend settings
+    this._settings = __deepMerge({
+      stacks: null
+    }, settings);
     // init the master promise returned
     this._masterPromise = new Promise(async (resolve, reject) => {
       this._masterPromiseResolveFn = resolve;
@@ -173,7 +192,18 @@ export default class SPromise {
           this._isExecutorStarted = true;
         }
       });
+    }).catch(e => {
+      // check if we have some catch callbacks or not...
+      if (!this._stacks || this._stacks.catch.length === 0) {
+        let error = e.stack || (typeof e === 'object') ? JSON.stringify(e) : e;
+        const pe = new __prettyError();
+        console.log(pe.render(new Error(error)));
+      }
     });
+    // register additional stacks if set in the settings
+    if (this._settings.stacks) {
+      this._registerNewStacks(this._settings.stacks);
+    }
     // override master promise methods
     this._masterPromise.then = this.then.bind(this);
     this._masterPromise.catch = this.catch.bind(this);
@@ -231,6 +261,8 @@ export default class SPromise {
     const stacksResult = await this._triggerStacks(stacksOrder, arg);
     // resolve the master promise
     this._masterPromiseRejectFn.apply(this, [stacksResult, this]);
+    // destroy the promise
+    this._destroy();
     // return the stack result
     return stacksResult;
   }
@@ -261,6 +293,33 @@ export default class SPromise {
   async trigger(what, arg) {
     // triger the passed stacks
     return this._triggerStacks(what, arg);
+  }
+
+  /**
+   * @name            _registerNewStacks
+   * @type            Function
+   * @private
+   * 
+   * This methods allows you to register new stacks.
+   * A new stack can be called then using the "on('stackName', ...)" method,
+   * or directly on the SPromise instance like so "myPromise.stackName(...)".
+   * 
+   * @param       {String|Array}      stacks        The stack(s) name(s) you want to register. Can be an Array or a comma separated string
+   * @return      {SPromise}                        The SPromise instance
+   * 
+   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   */
+  _registerNewStacks(stacks) {
+    // split the stacks order
+    if (typeof stacks === 'string') stacks = stacks.split(',').map(s => s.trim());
+    stacks.forEach(stack => {
+      if (!this._stacks[stack]) {
+        this._stacks[stack] = [];
+        this._masterPromise[stack] = (...args) => {
+          return this._registerCallbackInStack(stack, ...args);
+        };
+      }
+    });
   }
 
   /**
@@ -308,6 +367,8 @@ export default class SPromise {
 
     let currentCallbackReturnedValue = initialValue;
 
+    if (!this._stacks || Object.keys(this._stacks).length === 0) return currentCallbackReturnedValue;
+
     if (typeof stack === 'string') stack = this._stacks[stack];
 
     // filter the catchStack
@@ -321,6 +382,8 @@ export default class SPromise {
     for (let i = 0; i < stack.length; i++) {
       // get the actual item in the array
       const item = stack[i];
+      // make sure the stack exist
+      if (!item.callback) return currentCallbackReturnedValue;
       // call the callback function
       let callbackResult = item.callback.apply(this, [currentCallbackReturnedValue, this]);
       // check if the callback result is a promise
@@ -401,6 +464,7 @@ export default class SPromise {
 
     // loop on each stacks
     stacks.forEach(name => {
+
       // check if it has a callNumber specified using name:1
       const splitedName = name.split(':');
       let callNumber = -1;

@@ -9,10 +9,12 @@ var _uniqid = _interopRequireDefault(require("../util/uniqid"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// TODO tests
+
 /**
- * @name 		SGooeySvgFilter
+ * @name 		          SGooeySvgFilter
  * @namespace       sugar.js.filter
- * @type      Class
+ * @type             Class
  *
  * This class allows you to create with ease some complexe SVG filters and to apply it on any HTMLElement that you want
  * by extending this class like so
@@ -33,13 +35,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-let _sSvgFilters = [];
-let _sIsSvgInjected = false;
-
 class SSvgFilter {
   /**
-   * @constructor
-   * @param 			{String} 			The SVG filter string representation
+   * @name          constructor
+   * @type          Function
+   * 
+   * Constructor
+   * 
+   * @param 			{String} 			filter          The SVG filter string representation
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(filter_content) {
     // save the reference of each elements
@@ -54,8 +59,14 @@ class SSvgFilter {
     this._insertFilter();
   }
   /**
+   * @name            applyTo
+   * @type            Function
+   * 
    * Apply the filter to an element
+   * 
    * @param 		{HTMLElement} 			elm 			The element on which to apply the filter
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
 
@@ -66,8 +77,14 @@ class SSvgFilter {
     this.elms.push(elm);
   }
   /**
+   * @name          unapplyFrom
+   * @type          Function
+   * 
    * Unapply from
+   * 
    * @param 		{HTMLElement} 			elm 			The element from which to remove the filter
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
 
@@ -81,7 +98,13 @@ class SSvgFilter {
     if (idx) this.elms.splice(idx, 1);
   }
   /**
+   * @name          _insertFilter
+   * @type          Function
+   * @private
+   * 
    * Insert the filter
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
 
@@ -103,7 +126,12 @@ class SSvgFilter {
     SSvgFilter.filtersContainer.appendChild(this.svg);
   }
   /**
+   * @name          destroy
+   * @type          Function
+   * 
    * Destroy the filter
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
 
@@ -116,8 +144,14 @@ class SSvgFilter {
     this.svg.parentNode.removeChild(this.svg);
   }
   /**
-   * Inject the svg that will contains all the filters created through this class
+   * @name          _injectFiltersContainer
+   * @type          Function
    * @private
+   * @static
+   * 
+   * Inject the svg that will contains all the filters created through this class
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
 

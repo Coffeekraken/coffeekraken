@@ -5,6 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = isHover;
 
+// TODO tests
+
 /**
  * @name      isHover
  * @namespace     sugar.js.dom

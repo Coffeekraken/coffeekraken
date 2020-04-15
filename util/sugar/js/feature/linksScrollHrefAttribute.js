@@ -20,6 +20,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+// TODO tests
 (0, _querySelectorLive.default)('[href^="scroll:#"]', $scrollElm => {
   $scrollElm.addEventListener("click", e => {
     e.preventDefault();

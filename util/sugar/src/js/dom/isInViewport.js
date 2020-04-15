@@ -1,3 +1,5 @@
+// TODO tests
+
 /**
  * @name      isInViewport
  * @namespace     sugar.js.dom
@@ -7,7 +9,7 @@
  *
  * @param 		{HTMLElement} 				elm  			The element to insert
  * @param 		{Object} 					[offset=50] 	An object of top, right, bottom and left offset used to detect the status or an object with top, right, bottom and left offsets
- * @return 		{Boolean									If the element is in the viewport or not
+ * @return 		{Boolean}									If the element is in the viewport or not
  *
  * @example  	js
  * import isInViewport from '@coffeekraken/sugar/js/dom/isInViewport'

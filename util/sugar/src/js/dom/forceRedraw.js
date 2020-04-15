@@ -1,4 +1,4 @@
-import getStyleProperty from "./getStyleProperty";
+import __getStyleProperty from "./getStyleProperty";
 
 /**
  * @name      forceRedraw
@@ -17,7 +17,7 @@ import getStyleProperty from "./getStyleProperty";
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function forceRedraw($elm) {
-  const display = getStyleProperty($elm, "display");
+  const display = __getStyleProperty($elm, "display");
   $elm.style.display = "none";
   $elm.offsetHeight;
   $elm.style.display = display;

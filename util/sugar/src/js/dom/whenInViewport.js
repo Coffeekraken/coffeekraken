@@ -1,5 +1,4 @@
 import __inViewport from 'in-viewport';
-import __uniqid from '../string/uniqid';
 
 /**
  * @name      whenInViewport

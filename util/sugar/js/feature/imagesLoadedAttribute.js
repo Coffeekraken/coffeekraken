@@ -17,6 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+// TODO tests
 document.addEventListener("load", e => {
   if (!e.target.tagName) return;
   if (e.target.tagName.toLowerCase() !== "img") return;

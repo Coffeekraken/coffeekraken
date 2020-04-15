@@ -26,10 +26,7 @@ exports.default = isVisible;
  */
 function isVisible(elm) {
   // assume that the script tag is always visible
-  if (elm.nodeName.toLowerCase() === "script") return true; // if no offset parent
-  // mean that the element is not visible
-  // if (elm.offsetParent === null) return false;
-  // get style
+  if (elm.nodeName.toLowerCase() === "script") return true; // get style
 
   const style = window.getComputedStyle(elm, null),
         opacity = style["opacity"],

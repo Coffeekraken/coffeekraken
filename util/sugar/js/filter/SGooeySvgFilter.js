@@ -9,14 +9,21 @@ var _SSvgFilter = _interopRequireDefault(require("./SSvgFilter"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// TODO tests
+
 /**
- * @name 		SGooeySvgFilter
+ * @name 		        SGooeySvgFilter
  * @namespace       sugar.js.filter
- * @type      Class
+ * @type           Class
+ * @extends       SSvgFilter
  *
- * @extends 		SSvgFilter
  * This class represent a gooey SVG filter that can be applied on any HTMLElement.
- *
+ * Here's the values that you can control on it:
+ * - blur: The amout of blur you want
+ * - contrast: The amout of contrast you want
+ * - shrink: The amount of shrink you want
+ * - amout: The overall amount of effect you want
+ * 
  * @example 		js
  * const filter = new SGooeySvgFilter();
  * filter.applyTo(myCoolHTMLElement);
@@ -25,8 +32,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 class SGooeySvgFilter extends _SSvgFilter.default {
   /**
-   * @constructor
-   * @param 		{Number} 		amount 		The amount of effect to apply
+   * @name              constructor
+   * @type              Function
+   * 
+   * Constructor
+   * 
+   * @param 		{Number} 		[amount=8] 		The amount of effect to apply
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(amount = 8) {
     super(`
@@ -38,17 +51,29 @@ class SGooeySvgFilter extends _SSvgFilter.default {
     this._color_matrix = this.filter.querySelector("feColorMatrix");
   }
   /**
-   * The blur amount to produce the effect
-   * @type 	{Number}
+   * @name                blur
+   * @type                Number
+   * 
+   * Get/Set the blur amount to produce the effect
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
 
   set blur(value) {
     this._blur.setAttribute("stdDeviation", value);
   }
+
+  get blur() {
+    return parseFloat(this._blur.getAttribute('stdDeviation'));
+  }
   /**
-   * The contrast amount to produce the effect
-   * @type 	{Number}
+   * @name              contrast
+   * @type              Number
+   * 
+   * Get the contrast amount to produce the effect
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
 
@@ -63,8 +88,12 @@ class SGooeySvgFilter extends _SSvgFilter.default {
     this._color_matrix.setAttribute("values", v.join(" "));
   }
   /**
-   * The shrink amount to produce the effect
-   * @type 	{Number}
+   * @name            shrink
+   * @type            Number
+   * 
+   * Get the shrink amount to produce the effect
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
 
@@ -79,8 +108,12 @@ class SGooeySvgFilter extends _SSvgFilter.default {
     this._color_matrix.setAttribute("values", v.join(" "));
   }
   /**
-   * The overall amount of effect to produce
-   * @type 	{Number}
+   * @name              amount
+   * @type              Number
+   * 
+   * Set the overall amount of effect to produce
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
 

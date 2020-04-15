@@ -1,3 +1,6 @@
+import fastdom from "fastdom";
+import __querySelectorLive from "../dom/querySelectorLive";
+
 /**
  * @name 		handleInputAttributes
  * @namespace       sugar.js.feature
@@ -15,8 +18,7 @@
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-import fastdom from "fastdom";
-import __querySelectorLive from "../dom/querySelectorLive";
+// TODO tests
 
 function handleInputAttributes(eOrElm, setDirty = true, forceDirty = false) {
   const field = eOrElm.target ? eOrElm.target : eOrElm;

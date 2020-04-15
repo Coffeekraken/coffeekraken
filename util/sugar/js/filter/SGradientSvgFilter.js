@@ -29,7 +29,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 class SGradientSvgFilter extends _SSvgFilter.default {
   /**
-   * @constructor
+   * @name          constructor
+   * @type          Function
+   * 
+   * Constructor
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor() {
     super(`
@@ -40,9 +45,15 @@ class SGradientSvgFilter extends _SSvgFilter.default {
     this._tile = this.filter.querySelector("feTile");
   }
   /**
+   * @name              linear
+   * @type              Function
+   * 
    * Linear gradient
+   * 
    * @param 		{Array} 			colors 			An array of colors for your gradient
    * @param 		{Object} 			settings 		The settings of your gradient that consist of an object like : ```{width: 512, height: 512, x0: 0, x1: 512, y0: 0, y1: 1}```
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
 
@@ -71,9 +82,21 @@ class SGradientSvgFilter extends _SSvgFilter.default {
     this._image.setAttribute("xlink:href", this.grad64);
   }
   /**
-   * Linear gradient
+   * @name          radial
+   * @type          Function
+   * 
+   * Radial gradient
+   * 
    * @param 		{Array} 			colors 			An array of colors for your gradient
    * @param 		{Object} 			settings 		The settings of your gradient that consist of an object like : ```{width: 512, height: 512, x0: 256, x1: 256, y0: 256, y1: 256, r0: 0, r1: 512}```
+   * 
+   * @example         js
+   * myFilter.radial(['#ff0000', '#00ffff], {
+   *    width: 300,
+   *    height: 300
+   * });
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
 
@@ -104,9 +127,15 @@ class SGradientSvgFilter extends _SSvgFilter.default {
     this._image.setAttribute("xlink:href", this.grad64);
   }
   /**
-   * Apply the filter to element
+   * @name          applyTo
+   * @type          Function
    * @override
+   * 
+   * Apply the filter to element
+   * 
    * @param 		{HTMLElement} 		elm 		The element on which to apply the filter
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
 
@@ -118,9 +147,15 @@ class SGradientSvgFilter extends _SSvgFilter.default {
     window.addEventListener("resize", this._onWindowResize.bind(this));
   }
   /**
-   * Remove the filter from element
+   * @name            unapplyFrom
+   * @type            Function
    * @override
+   * 
+   * Remove the filter from element
+   * 
    * @param 	{HTMLElement} 	elm 	The element to unapply the filter from
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
 
@@ -129,8 +164,15 @@ class SGradientSvgFilter extends _SSvgFilter.default {
     window.removeEventListener("resize", this._onWindowResize);
   }
   /**
+   * @name          _onWindowResize
+   * @type          Function
+   * @private
+   * 
    * When the window is resizing
+   * 
    * @param 		{Event} 		e 		The resize event
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
 
@@ -139,7 +181,13 @@ class SGradientSvgFilter extends _SSvgFilter.default {
     this._setImageSize();
   }
   /**
+   * @name        _setImageSize
+   * @type        Function
+   * @private
+   * 
    * Set image width
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
 

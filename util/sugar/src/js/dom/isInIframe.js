@@ -1,3 +1,5 @@
+// TODO tests
+
 /**
  * @name      isInIframe
  * @namespace     sugar.js.dom

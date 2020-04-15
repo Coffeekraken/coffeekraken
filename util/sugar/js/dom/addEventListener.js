@@ -32,14 +32,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 function addEventListener($elm, eventName, callback = null, options = {}) {
   let listenerFn = null;
-  return new _SPromise.default((resolve, reject, release, revoke) => {
+  return new _SPromise.default((resolve, reject, trigger, cancel) => {
     listenerFn = (...args) => {
       if (callback) callback.apply(this, [...args]);
-      resolve.apply(this, [...args]);
+      trigger('then', ...args);
     };
 
     $elm.addEventListener(eventName, listenerFn, options);
-  }).cancel(() => {
+  }).on('cancel,finally', () => {
     $elm.removeEventListener(eventName, listenerFn, options);
   });
 }

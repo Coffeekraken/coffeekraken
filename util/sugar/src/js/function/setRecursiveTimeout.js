@@ -9,7 +9,7 @@
  * @param 		{Number} 		timeout 		The time between each execution
  * @param 		{Number} 		duration 		The duration of the timeout
  * @param 		{Number}		[spread=0] 		An optional spread time that will be used to randomize the function executions times
- * @return 		{Function} 		clearer 		A function that you can use to clear the timeout before it ends by itself
+ * @return 		{Function} 		       		A function that you can use to clear the timeout before it ends by itself
  *
  * @example 		js
  * import setRecursiveTimeout from '@coffeekraken/sugar/js/function/setRecursiveTimeout';
@@ -40,7 +40,7 @@ export default function setRecursiveTimeout(fn, timeout, duration, spread = 0) {
   })();
 
   // return the clear function to be able to stop the timeout
-  return function() {
+  return function () {
     // clear the timeout
     clearTimeout(timeoutFn);
   };

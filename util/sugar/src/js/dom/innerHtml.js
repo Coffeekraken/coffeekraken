@@ -1,6 +1,9 @@
 import __uniqid from '../string/uniqid';
 import __injectStyle from '../css/injectStyle';
 import __emptyNode from './emptyNode';
+import __convert from '../time/convert';
+
+// TODO tests
 
 /**
  * @name            innerHtml
@@ -26,8 +29,8 @@ import __emptyNode from './emptyNode';
  *    action: 'replace', // replace, append, prepend
  *    animIn: 'fade', // fade, fadeUp, fadeDown, fadeLeft, fadeRight
  *    animOut: 'fadeUp', // fade, fadeUp, fadeDown, fadeLeft, fadeRight
- *    animInDuration: 600, // in ms
- *    animOutDuration: 300, // in ms
+ *    animInDuration: 600, // in ms if number, otherwise a string like '1s', '1m', etc...
+ *    animOutDuration: 300, // in ms if number, otherwise a string like '1s', '1m', etc...
  *    animInDistance: 25, // in px
  *    animOutDistance: 25, // in px
  *    animInEasing: 'ease-in-out',
@@ -54,6 +57,8 @@ export default function innerHtml(node, content, settings = {}) {
       animOutEasing: 'ease-in-out',
       ...settings
     };
+    settings.animInDuration = __convert(settings.animInDuration, 'ms');
+    settings.animOutDuration = __convert(settings.animOutDuration, 'ms');
 
     // generate a uniqid for this process
     const _uniqid = __uniqid();
@@ -64,7 +69,7 @@ export default function innerHtml(node, content, settings = {}) {
     let $styleAnimIn, $styleAnimOut, $div;
 
     // generate the animation styles
-    switch(settings.animIn) {
+    switch (settings.animIn) {
       case 'fade':
         const sheetAnimIn = `
           @keyframes animIn-${_uniqid} {
@@ -80,7 +85,7 @@ export default function innerHtml(node, content, settings = {}) {
           }
         `;
         $styleAnimIn = __injectStyle(sheetAnimIn);
-      break;
+        break;
       case 'fadeDown':
         const sheetAnimInFadeUp = `
           @keyframes animIn-${_uniqid} {
@@ -98,7 +103,7 @@ export default function innerHtml(node, content, settings = {}) {
           }
         `;
         $styleAnimIn = __injectStyle(sheetAnimInFadeUp);
-      break;
+        break;
       case 'fadeUp':
         const sheetAnimInFadeDown = `
           @keyframes animIn-${_uniqid} {
@@ -116,7 +121,7 @@ export default function innerHtml(node, content, settings = {}) {
           }
         `;
         $styleAnimIn = __injectStyle(sheetAnimInFadeDown);
-      break;
+        break;
       case 'fadeRight':
         const sheetAnimInFadeLeft = `
           @keyframes animIn-${_uniqid} {
@@ -134,7 +139,7 @@ export default function innerHtml(node, content, settings = {}) {
           }
         `;
         $styleAnimIn = __injectStyle(sheetAnimInFadeLeft);
-      break;
+        break;
       case 'fadeLeft':
         const sheetAnimInFadeRight = `
           @keyframes animIn-${_uniqid} {
@@ -152,9 +157,9 @@ export default function innerHtml(node, content, settings = {}) {
           }
         `;
         $styleAnimIn = __injectStyle(sheetAnimInFadeRight);
-      break;
+        break;
     }
-    switch(settings.animOut) {
+    switch (settings.animOut) {
       case 'fade':
         const sheetAnimOutFade = `
           @keyframes animOut-${_uniqid} {
@@ -170,7 +175,7 @@ export default function innerHtml(node, content, settings = {}) {
           }
         `;
         $styleAnimOut = __injectStyle(sheetAnimOutFade);
-      break;
+        break;
       case 'fadeUp':
         const sheetAnimOutFadeUp = `
           @keyframes animOut-${_uniqid} {
@@ -188,7 +193,7 @@ export default function innerHtml(node, content, settings = {}) {
           }
         `;
         $styleAnimOut = __injectStyle(sheetAnimOutFadeUp);
-      break;
+        break;
       case 'fadeDown':
         const sheetAnimOutFadeDown = `
           @keyframes animOut-${_uniqid} {
@@ -206,7 +211,7 @@ export default function innerHtml(node, content, settings = {}) {
           }
         `;
         $styleAnimOut = __injectStyle(sheetAnimOutFadeDown);
-      break;
+        break;
       case 'fadeLeft':
         const sheetAnimOutFadeLeft = `
           @keyframes animOut-${_uniqid} {
@@ -224,7 +229,7 @@ export default function innerHtml(node, content, settings = {}) {
           }
         `;
         $styleAnimOut = __injectStyle(sheetAnimOutFadeLeft);
-      break;
+        break;
       case 'fadeRight':
         const sheetAnimOutFadeRight = `
           @keyframes animOut-${_uniqid} {
@@ -242,11 +247,11 @@ export default function innerHtml(node, content, settings = {}) {
           }
         `;
         $styleAnimOut = __injectStyle(sheetAnimOutFadeRight);
-      break;
+        break;
     }
 
     // switch on the action to execute
-    switch(settings.action) {
+    switch (settings.action) {
       case 'replace':
         // anim out the content by adding the corresponding class
         node.classList.add(_animOutClassName);
@@ -281,7 +286,7 @@ export default function innerHtml(node, content, settings = {}) {
           }, settings.animInDuration);
 
         }, settings.animOutDuration);
-      break;
+        break;
       case 'append':
 
         // append the new content inside a simple div to animate it
@@ -309,7 +314,7 @@ export default function innerHtml(node, content, settings = {}) {
 
         }, settings.animInDuration);
 
-      break;
+        break;
       case 'prepend':
 
         // append the new content inside a simple div to animate it
@@ -337,7 +342,7 @@ export default function innerHtml(node, content, settings = {}) {
 
         }, settings.animInDuration);
 
-      break;
+        break;
     }
 
   });

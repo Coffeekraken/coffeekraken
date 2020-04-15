@@ -13,6 +13,8 @@ var _closest = _interopRequireDefault(require("./closest"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// TODO tests
+
 /**
  * @name      whenOutOfViewport
  * @namespace     sugar.js.dom

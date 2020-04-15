@@ -5,9 +5,17 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = inViewportStatusChange;
 
-var _InViewportStatusChangeDetector = _interopRequireDefault(require("./InViewportStatusChangeDetector"));
+var _SPromise = _interopRequireDefault(require("../promise/SPromise"));
+
+var _isInViewport = _interopRequireDefault(require("./isInViewport"));
+
+var _whenInViewport = _interopRequireDefault(require("./whenInViewport"));
+
+var _whenOutOfViewport = _interopRequireDefault(require("./whenOutOfViewport"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// TODO tests
 
 /**
  * @name      inViewportStatusChange
@@ -17,36 +25,50 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * Monitor when the passed element enter or exit the viewport
  *
  * @param 		{HTMLElement} 						elm  		The element to monitor
- * @param 		{Function} 							onEnter 	Callback when the element enter the viewport
- * @param 		{Function} 							onExit 		Callback when the element exit the viewport
- * @return 		{InViewportStatusChangeDetector} 				The in viewport status change detector instance
+ * @return 		{SPromise} 		                    The SPromise on wich you can register your callbacks. Available callbacks registration function are "enter" and "exit"
  *
  * @example  	js
- * import inViewportStatusChange from '@coffeekraken/sugar/js/dom/inViewportStatusChange'
- * const detector = inViewportStatusChange(myCoolHTMLElement, () => {
- * 		// i'm now in the viewport
- * }, () => {
- * 		// i'm now out of the viewport
+ * import inViewportStatusChange from '@coffeekraken/sugar/js/dom/inViewportStatusChange';
+ * inViewportStatusChange(myElm).enter($elm => {
+ *    // do something...
+ * }).exit($elm => {
+ *    // do something...
  * });
- *
- * // stop listening
- * detector.destroy();
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function inViewportStatusChange(elm, onEnter = null, onExit = null) {
-  const detector = new _InViewportStatusChangeDetector.default(elm);
+function inViewportStatusChange($elm) {
+  let isCanceled = false;
+  return new _SPromise.default((resolve, reject, trigger, cancel) => {
+    function _whenIn() {
+      (0, _whenInViewport.default)($elm).then(() => {
+        if (isCanceled) return;
+        trigger('enter', $elm);
 
-  if (onEnter) {
-    detector.on("enter", onEnter);
-  }
+        _whenOut();
+      });
+    }
 
-  if (onExit) {
-    detector.on("exit", onExit);
-  } // return the detector
+    function _whenOut() {
+      (0, _whenOutOfViewport.default)($elm).then(() => {
+        if (isCanceled) return;
+        trigger('exit', $elm);
+
+        _whenIn();
+      });
+    } // if not in viewport at start
 
 
-  return detector;
+    if (!(0, _isInViewport.default)($elm)) {
+      _whenOut();
+    } else {
+      _whenIn();
+    }
+  }, {
+    stacks: ['enter', 'exit']
+  }).on('cancel,finally', () => {
+    isCanceled = true;
+  }).start();
 }
 
 module.exports = exports.default;

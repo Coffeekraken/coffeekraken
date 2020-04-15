@@ -14,6 +14,9 @@ import easeInOutQuint from "../easing/easeInOutQuint";
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+
+// TODO tests
+
 querySelectorLive('[href^="scroll:#"]', $scrollElm => {
   $scrollElm.addEventListener("click", e => {
     e.preventDefault();

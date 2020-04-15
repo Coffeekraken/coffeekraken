@@ -1,3 +1,5 @@
+// TODO tests
+
 /**
  * @name      linkLoaded
  * @namespace     sugar.js.dom

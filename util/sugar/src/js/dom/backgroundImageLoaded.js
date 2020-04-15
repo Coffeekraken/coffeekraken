@@ -1,6 +1,7 @@
-import getStyleProperty from "./getStyleProperty";
-import imageLoaded from "./imageLoaded";
-import unquote from "../string/unquote";
+import __getStyleProperty from "./getStyleProperty";
+import __imageLoaded from "./imageLoaded";
+import __unquote from "../string/unquote";
+import __SPromise from '../promise/SPromise';
 
 /**
  * @name        backgroundImageLoaded
@@ -10,7 +11,7 @@ import unquote from "../string/unquote";
  * Detect when a background image has been loaded on an HTMLElement
  *
  * @param    {HTMLElement}    $elm    The HTMLElement on which to detect the background image load
- * @return    {Promise}    A promise that will be resolved when the background image has been loaded
+ * @return    {SPromise}    A promise that will be resolved when the background image has been loaded
  *
  * @example    js
  * import backgroundImageLoaded from '@coffeekraken/sugar/js/dom/backgroundImageLoaded'
@@ -21,20 +22,27 @@ import unquote from "../string/unquote";
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function backgroundImageLoaded($elm) {
-  return new Promise((resolve, reject) => {
+  let isCancelled = false, $img;
+  const promise = new __SPromise((resolve, reject, trigger, cancel) => {
     // get the background-image property from computed style
-    const backgroundImage = getStyleProperty($elm, "background-image");
+    const backgroundImage = __getStyleProperty($elm, "background-image");
     const matches = backgroundImage.match(/.*url\((.*)\).*/);
     if (!matches || !matches[1]) {
       reject("No background image url found...");
       return;
     }
     // process url
-    const url = unquote(matches[1]);
+    const url = __unquote(matches[1]);
     // make a new image with the image set
-    const $img = new Image();
+    $img = new Image();
     $img.src = url;
     // return the promise of image loaded
-    resolve(imageLoaded($img));
-  });
+    __imageLoaded($img).then(() => {
+      if (!isCancelled) resolve($elm);
+    });
+  }).on('cancal,finally', () => {
+    isCancelled = true;
+  }).start();
+  promise.__$img = $img;
+  return promise;
 }

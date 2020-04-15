@@ -19,7 +19,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-(0, _querySelectorLive.default)("video[lazy-src]", $videoElm => {
+// TODO tests
+(0, _querySelectorLive.default)("video[lazy-src]:not([is])", $videoElm => {
   (0, _whenInViewport.default)($videoElm).then(() => {
     $videoElm.setAttribute("src", $videoElm.getAttribute("lazy-src"));
   });

@@ -5,6 +5,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = detectInOutDirection;
 
+var _SPromise = _interopRequireDefault(require("../promise/SPromise"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 /**
  * @name      detectInOutDirection
  * @namespace     sugar.js.dom
@@ -13,29 +17,56 @@ exports.default = detectInOutDirection;
  * Detect the mouse direction when entered on the passed element. The direction can be up, down, left or right and will be passed to the two callbacks available.
  * The first one is the `onIn` callback, and the second one is the `onOut`.
  *
- * @param    {HTMLElement}    elm    The element to listen for mouseover and mouseout on
- * @param    {Function}    onIn    The onIn callback. The direction and the elm will be passed to it
- * @param    {Function}    onOut    The onOut callback. The direction and the elm will be passed to it
- * @return    {HTMLElement}    The elm to maintain chainability
+ * @param    {HTMLElement}    $elm    The element to listen for mouseover and mouseout on
+ * @param    {Function}    onIn    The onIn callback. The direction and the $elm will be passed to it
+ * @param    {Function}    onOut    The onOut callback. The direction and the $elm will be passed to it
+ * @return    {HTMLElement}    The $elm to maintain chainability
  *
  * @example     js
  * import detectInOutDirection from '@coffeekraken/sugar/js/dom/detectInOutDirection'
- * detectInOutDirection(myElm, (direction, elm) => {
- *     // do something on in
- * }, (direction, elm) => {
- *     // do something on out
- * })
+ * const detect = detectInOutDirection(myElm).in(direction => {
+ *    // do something...
+ * }).out(direction => {
+ *    // do something...
+ * }).then(value => {
+ *    // do something
+ *    console.log(value); // => { action: 'in', direction: 'up' };
+ * });
+ * 
+ * // cancel the detection process
+ * detect.cancel();
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function detectInOutDirection(elm, onIn, onOut) {
-  // detect when mouseenter/leave the element
-  elm.addEventListener("mouseenter", e => {
-    onIn && onIn(direction, elm);
-  });
-  elm.addEventListener("mouseleave", e => {
-    onOut && onOut(direction, elm);
-  });
+function detectInOutDirection($elm) {
+  let mouseEnterHandler, mouseLeaveHandler;
+  const promise = new _SPromise.default((resolve, reject, trigger, cancel) => {
+    mouseEnterHandler = e => {
+      trigger('in', direction);
+      trigger('then', {
+        action: 'in',
+        direction
+      });
+    };
+
+    mouseLeaveHandler = e => {
+      trigger('out', direction);
+      trigger('then', {
+        action: 'out',
+        direction
+      });
+    }; // detect when mouseenter/leave the element
+
+
+    $elm.addEventListener("mouseenter", mouseEnterHandler);
+    $elm.addEventListener("mouseleave", mouseLeaveHandler);
+  }, {
+    stacks: 'in,out'
+  }).on('cancel,finally', () => {
+    $elm.removeEventListener("mouseenter", mouseEnterHandler);
+    $elm.removeEventListener("mouseleave", mouseLeaveHandler);
+  }).start();
+  return promise;
 }
 
 let oldX = 0,

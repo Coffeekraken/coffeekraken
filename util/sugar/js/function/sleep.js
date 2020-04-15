@@ -19,7 +19,7 @@ exports.default = sleep;
  * import sleep from '@coffeekraken/sugar/js/function/sleep';
  * async function() {
  *  console.log('hello');
- *  sleep(2000);
+ *  await sleep(2000);
  *  console.log('World');
  * }
  *

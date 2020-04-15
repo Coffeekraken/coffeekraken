@@ -21,7 +21,7 @@ export default (message, type = 'info', settings = {}) => {
     const imageData = canvas.toDataURL('image/jpeg');
 
     let contributorsArray = null;
-    let contributors = settings.contributors || await window[window._sAppName || 'SApp'].meta('contributors');
+    let contributors = settings.contributors || await window[window._sAppName || 'SApp'].meta('contributors');
     if (contributors) {
       contributorsArray = [];
       contributors.forEach((cont) => {
@@ -29,23 +29,23 @@ export default (message, type = 'info', settings = {}) => {
       });
     }
     let list = '';
-    let version = settings.version || await window[window._sAppName || 'SApp'].meta('version');
+    let version = settings.version || await window[window._sAppName || 'SApp'].meta('version');
     if (version) {
       list += `<li><strong>Version:</strong> ${version}</li>`;
     }
-    let homepage = settings.homepage || await window[window._sAppName || 'SApp'].meta('homepage');
+    let homepage = settings.homepage || await window[window._sAppName || 'SApp'].meta('homepage');
     if (homepage) {
       list += `<li><strong>Homepage:</strong> <a href="${homepage}">${homepage}</a></li>`;
     }
-    let license = settings.license || await window[window._sAppName || 'SApp'].meta('license');
+    let license = settings.license || await window[window._sAppName || 'SApp'].meta('license');
     if (license) {
       list += `<li><strong>License:</strong> ${license}</li>`;
     }
-    let keywords = settings.keywords || await window[window._sAppName || 'SApp'].meta('keywords');
+    let keywords = settings.keywords || await window[window._sAppName || 'SApp'].meta('keywords');
     if (keywords) {
       list += `<li><strong>Keywords:</strong> ${keywords.join(',')}</li>`;
     }
-    let author = settings.author || await window[window._sAppName || 'SApp'].meta('author');
+    let author = settings.author || await window[window._sAppName || 'SApp'].meta('author');
     if (author) {
       list += `<li><strong>Author:</strong> ${author}</li>`;
     }
@@ -53,12 +53,12 @@ export default (message, type = 'info', settings = {}) => {
       list += `<li><strong>Contributors:</strong> ${contributorsArray.join(', ')}</li>`;
     }
 
-    let mailConfig = await window[window._sAppName || 'SApp'].config('log.frontend.transports.mail');
-    const appMeta = await window[window._sAppName || 'SApp'].meta();
+    let mailConfig = await window[window._sAppName || 'SApp'].config('log.frontend.transports.mail');
+    const appMeta = await window[window._sAppName || 'SApp'].meta();
 
     let key, keys = Object.keys(mailConfig);
     let n = keys.length;
-    var newobj={}
+    var newobj = {}
     while (n--) {
       key = keys[n];
       mailConfig[key.charAt(0).toUpperCase() + key.slice(1)] = mailConfig[key];
@@ -67,17 +67,17 @@ export default (message, type = 'info', settings = {}) => {
 
     try {
       const _set = {
-        From: `${type}@${settings.domain || appMeta.domain}`,
-        Subject: `${type}@${settings.domain || appMeta.domain}`,
-        Body : `
+        From: `${type}@${settings.domain || appMeta.domain}`,
+        Subject: `${type}@${settings.domain || appMeta.domain}`,
+        Body: `
           ${message}
           <br/><br/>
           ${list}
         `,
-        Attachments : [{
-      	   name : `${window._sAppName || 'SApp'}.${type}.jpg`,
-           data: imageData
-      	}],
+        Attachments: [{
+          name: `${window._sAppName || 'SApp'}.${type}.jpg`,
+          data: imageData
+        }],
         ...mailConfig,
         ...settings
       };
@@ -87,7 +87,7 @@ export default (message, type = 'info', settings = {}) => {
       }).catch(error => {
         reject(error);
       });
-    } catch(e) {
+    } catch (e) {
       console.error(e);
     }
 

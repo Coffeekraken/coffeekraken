@@ -17,6 +17,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+// TODO tests
+
 /**
  * @name 		SMotionblurSvgFilter
  * @namespace       sugar.js.filter
@@ -34,18 +36,42 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  */
 class SMotionblurSvgFilter extends _SSvgFilter.default {
   /**
+   * @name        amount
+   * @type        Number
+   * @default     0.5
+   * 
    * Store the amount of motion blur to apply
-   * @type 	{Number}
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
   /**
+   * @name        _isMoving
+   * @type        Boolean
+   * 
    * Store the status of the animation
-   * @type 		{Boolean}
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
   /**
-   * @constructor
-   * @param 		{Number} 		amount 			The motion blur amount
+   * @name        _startMoveTimeout
+   * @type        Number
+   * 
+   * Store the starting moment when the element move
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+
+  /**
+   * @name          constructor
+   * @type          Function
+   * 
+   * Constructor
+   * 
+   * @param 		{Number} 		[amount=0.5] 			The motion blur amount
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(amount = 0.5) {
     super(`
@@ -65,9 +91,15 @@ class SMotionblurSvgFilter extends _SSvgFilter.default {
     this._blur = this.filter.querySelector("feGaussianBlur");
   }
   /**
-   * Apply the filter to element
+   * @name      applyTo
+   * @type      Function
    * @override
+   * 
+   * Apply the filter to element
+   * 
    * @param 		{HTMLElement} 		elm 		The element on which to apply the filter
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
 
@@ -86,9 +118,15 @@ class SMotionblurSvgFilter extends _SSvgFilter.default {
     this._lastPos = (0, _offset.default)(this.elms[0]);
   }
   /**
-   * Remove the filter from element
+   * @name            unapplyFrom
+   * @type            Function
    * @override
+   * 
+   * Remove the filter from element
+   * 
    * @param 	{HTMLElement} 	elm 	The element to unapply the filter from
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
 
@@ -104,7 +142,13 @@ class SMotionblurSvgFilter extends _SSvgFilter.default {
     super.unapplyFrom(elm);
   }
   /**
+   * @name          _onMotionStart
+   * @type          Function
+   * @private
+   * 
    * When the animation, transition or draging start
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
 
@@ -118,7 +162,13 @@ class SMotionblurSvgFilter extends _SSvgFilter.default {
     });
   }
   /**
+   * @name          _onMotionStop
+   * @type          Function
+   * @private
+   * 
    * Transition / animation end
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
 
@@ -137,8 +187,15 @@ class SMotionblurSvgFilter extends _SSvgFilter.default {
     });
   }
   /**
+   * @name          _handleFilter
+   * @type          Function
+   * @private
+   * 
    * Handle filter
+   * 
    * @param 		{Boolean} 		recusrive 			If the function need to be called again at the end of it's execution
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
 
@@ -154,7 +211,13 @@ class SMotionblurSvgFilter extends _SSvgFilter.default {
     });
   }
   /**
+   * @name            _setMotionBlur
+   * @type            Function
+   * @private
+   * 
    * Set motion blur
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
 
@@ -174,8 +237,13 @@ class SMotionblurSvgFilter extends _SSvgFilter.default {
     };
   }
   /**
-   * Destroy the filter
+   * @name        destroy
+   * @type        Function
    * @override
+   * 
+   * Destroy the filter
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
 

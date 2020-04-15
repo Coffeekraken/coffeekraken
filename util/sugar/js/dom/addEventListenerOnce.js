@@ -38,7 +38,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function addEventListenerOnce($elm, event, callback = null, options = {}) {
   const sPromise = (0, _addEventListener.default)($elm, event, callback, options);
   sPromise.then(() => {
-    sPromise.revoke();
+    sPromise.cancel();
   }).start();
   return sPromise;
 }

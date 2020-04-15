@@ -11,6 +11,8 @@ var _toMs = _interopRequireDefault(require("../string/toMs"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// TODO tests
+
 /**
  * @name      getAnimationProperties
  * @namespace     sugar.js.dom

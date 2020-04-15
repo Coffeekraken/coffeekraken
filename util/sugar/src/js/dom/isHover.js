@@ -1,3 +1,5 @@
+// TODO tests
+
 /**
  * @name      isHover
  * @namespace     sugar.js.dom

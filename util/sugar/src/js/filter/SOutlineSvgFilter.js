@@ -1,10 +1,12 @@
 import SSvgFilter from "./SSvgFilter";
 
+// TODO tests
+
 /**
- * @name 		SOutlineSvgFilter
+ * @name 		        SOutlineSvgFilter
  * @namespace       sugar.js.filter
- * @type      Class
- * @extends 		SSvgFilter
+ * @type            Class
+ * @extends 	    	SSvgFilter
  *
  * This class represent an outline filter that can be applied on any HTMLElement.
  *
@@ -15,9 +17,16 @@ import SSvgFilter from "./SSvgFilter";
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 class SOutlineSvgFilter extends SSvgFilter {
+
   /**
-   * @constructor
-   * @param 		{Number} 		amount 		The amount of effect to apply
+   * @name            constructor
+   * @type            Function
+   * 
+   * Constructor
+   * 
+   * @param 		{Number} 		[radius=8] 		The amount of effect to apply
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(radius = 8) {
     super(`
@@ -29,11 +38,18 @@ class SOutlineSvgFilter extends SSvgFilter {
   }
 
   /**
-   * The radius to produce the effect
-   * @type 	{Number}
+   * @name          radius
+   * @type          Number
+   * 
+   * Get/Set the radius to produce the effect
+   * 
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   set radius(value) {
     this._$morphology.setAttribute("radius", value);
+  }
+  get radius() {
+    return parseFloat(this._$morphology.getAttribute("radius"));
   }
 }
 

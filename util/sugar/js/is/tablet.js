@@ -16,6 +16,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * Detect if is a tablet device
  *
+ * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test
+ * 
  * @return    {Boolean}    true if is a tablet, false if not
  *
  * @example 	js
@@ -25,8 +27,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * }
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function isTablet() {
-  const md = new _mobileDetect.default(window.navigator.userAgent);
+function isTablet(us = navigator.userAgent) {
+  const md = new _mobileDetect.default(ua);
   return md.tablet() !== null;
 }
 

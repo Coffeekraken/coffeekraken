@@ -12,6 +12,8 @@ exports.default = isUcBrowser;
  *
  * Detect if is the UC stock browser that is running the page
  *
+ * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test
+ * 
  * @example    js
  * import isUcBrowser from '@coffeekraken/sugar/js/is/ucBrowser'
  * if (isUcBrowser()) {
@@ -20,8 +22,8 @@ exports.default = isUcBrowser;
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function isUcBrowser() {
-  return window.navigator.userAgent.match(/UCBrowser/i) !== null;
+function isUcBrowser(ua = navigator.userAgent) {
+  return ua.match(/UCBrowser/i) !== null;
 }
 
 module.exports = exports.default;

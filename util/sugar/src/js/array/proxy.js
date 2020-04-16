@@ -16,7 +16,7 @@ import __uniqid from '../string/uniqid';
  * myArray.watch(['push','pop'], (watchObj) => {
  *    // check the watchObj action
  *    switch (watchObj.action) {
- *      case 'push':
+ *      case 'Array.push':
  *        // do something...
  *      break;
  *    }
@@ -26,7 +26,16 @@ import __uniqid from '../string/uniqid';
  */
 export default function proxy(array) {
 
+  if (array.__$proxied) return array;
+
   const watchStack = {};
+
+  // mark that this array has already been proxied
+  Object.defineProperty(array, '__$proxied', {
+    value: true,
+    enumerable: false,
+    writable: false
+  });
 
   function _proxyMethod(name, ...args) {
     const handlersStack = [];

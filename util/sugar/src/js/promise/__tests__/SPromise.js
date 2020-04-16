@@ -42,7 +42,7 @@ module.exports = (__SPromise) => {
           resolvedStack.push(value);
         }).on('then', value => {
           onThenStack.push(value + 'onThen');
-        }).on('then:1', 'catch:1', value => {
+        }).on('then:1,catch:1', value => {
           onThenCatchStack.push(value + 'onThenCatch');
         })
         .start();

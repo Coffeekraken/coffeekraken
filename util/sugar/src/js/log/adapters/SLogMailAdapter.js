@@ -1,6 +1,9 @@
 import __deepMerge from '../../object/deepMerge';
 import __isNode from '../../is/node';
-import __Email from './vendors/smtp.js';
+import Email from './vendors/smtp.js';
+import __mailHtmlPreset from '../htmlPresets/mail';
+
+// TODO finish the dev and make tests...
 
 /**
  * @name                    SLogMailAdapter
@@ -14,9 +17,9 @@ import __Email from './vendors/smtp.js';
  * import SLog from '@coffeekraken/sugar/js/log/SLog';
  * import SLogMailAdapter from '@coffeekraken/sugar/js/log/adapters/SLogMailAdapter';
  * const logger = new SLog({
- *    adapters: [
- *      new SLogMailAdapter()
- *    ]
+ *    adapters: {
+ *      mail: new SLogMailAdapter()
+ *    }
  * });
  * logger.log('Something cool happend...');
  * 
@@ -48,6 +51,7 @@ export default class SLogMailAdapter {
    * - host (null) {String}: Your smtp server hostname
    * - username (null) {String}: Your smtp username if needed
    * - password (null) {String}: Your smtp password if needed
+   * - secureToken (null) {String}: An SmtpJS secure token to avoid delivering your password online
    * - to (null) {String}: The email address where you want to send the logs
    * - from (null) {String}: The email address from which you want to send the logs
    * - subject ('[level] sugar.js.log') {String}: The mail title. You can use the [level] placeholder to be replaced with the actual log level
@@ -95,11 +99,11 @@ export default class SLogMailAdapter {
         list.push(`<li><strong>${metaName}</strong>: ${this._settings.metas[metaName]}</li>`);
       });
 
-      const body = this._settings.body.replace('[content]', `
+      const body = __mailHtmlPreset(this._settings.body.replace('[content]', `
         ${message}
         <br /><br />
         ${list.join('<br />')}
-      `);
+      `));
       const subject = this._settings.subject.replace('[level]', level);
 
       let keys = Object.keys(this._settings);
@@ -121,8 +125,9 @@ export default class SLogMailAdapter {
             data: imageData
           }];
         }
+        delete _set.metas;
 
-        __Email.send(_set).then(message => {
+        Email.send(_set).then(message => {
           console.log('ME', message);
           resolve(message);
         }).catch(error => {

@@ -1,12 +1,12 @@
 "use strict";
 
-var _getKeyByValue = _interopRequireDefault(require("../object/getKeyByValue"));
+var _getKeyByValue = _interopRequireDefault(require("../../object/getKeyByValue"));
 
-var _querySelectorLive = _interopRequireDefault(require("../dom/querySelectorLive"));
+var _querySelectorLive = _interopRequireDefault(require("../../dom/querySelectorLive"));
 
 var _fastdom = _interopRequireDefault(require("fastdom"));
 
-var _dispatchEvent = _interopRequireDefault(require("../dom/dispatchEvent"));
+var _dispatchEvent = _interopRequireDefault(require("../../dom/dispatchEvent"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -15,7 +15,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @namespace       sugar.js.feature
  * @type      Feature
  *
- * Add the possibility to dispatch en event named as you want
+ * Add the possibility to dispatch an event named as you want
  * when the native event is listened. By default the feature listen for
  * the click event unless you specify another one by using the format "{event}:{eventNameToDispach}"
  *

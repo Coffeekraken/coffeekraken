@@ -1,4 +1,6 @@
 import __deepMerge from '../object/deepMerge';
+import __SLogConsoleAdapter from './adapters/SLogConsoleAdapter';
+import __env from '../core/env';
 
 /**
  * @name                    SLog
@@ -12,9 +14,9 @@ import __deepMerge from '../object/deepMerge';
  * import SLog from '@coffeekraken/sugar/js/log/SLog';
  * import SLogConsoleAdapter from '@coffeekraken/sugar/js/log/adapters/SLogConsoleAdapter';
  * const logger = new SLog({
- *    adapters: [
- *      new SLogConsoleAdapter()
- *    ]
+ *    adapters: {
+ *      console: new SLogConsoleAdapter()
+ *    }
  * });
  * logger.log('Something cool happend...');
  * 
@@ -32,7 +34,9 @@ export default class SLog {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _settings = {
-    adapters: {}
+    adapters: {},
+    adaptersByLevel: {},
+    overrideNativeConsole: false
   };
 
   /**
@@ -43,14 +47,65 @@ export default class SLog {
    * 
    * @param         {Object}        [settings={}]           The settings object to configure your SLog instance. Here's the settings available:
    * - adapters ({}) {Object}: An object of adapters that you want to use in this SLog instance. The format is { adapterName: adapterInstance, etc... }
+   * - overrideNativeConsole (false) {Boolean}: This will override the console.log, warn, etc... methods
+   * - adaptersByLevel ({}) (Object): Specify which adapter you want to use by level. Can be an Array like ['console','mail'] or a comma separated string like "console,mail". The object format is { adapterName: adaptersList }
+   * - adaptersByEnvironment ({}) {Object}: Same as the "adaptersByLevel" but for the environments like "test", "development" or "production". The environment value is taken using the "sugar.js.core.env" function using the key "ENV" or "NODE_ENV"
    * 
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(settings = {}) {
     // extend settings
     this._settings = __deepMerge({
-      adapters: {}
+      adapters: {
+        console: new __SLogConsoleAdapter()
+      },
+      adaptersByLevel: {
+        log: null,
+        info: null,
+        warn: null,
+        debug: null,
+        error: null
+      },
+      adaptersByEnvironment: {
+        test: null,
+        development: null,
+        production: null
+      },
+      overrideNativeConsole: false
     }, settings);
+
+    // if needed, override the native console
+    if (this._settings.overrideNativeConsole) {
+      this._overrideNativeConsole();
+    }
+
+  }
+
+  /**
+   * @name            _overrideNativeConsole
+   * @type            Function
+   * @private
+   * 
+   * Override the native console object to call the SLog methods instead of the normal once.
+   * Store the native console inside the global/window variable called "nativeConsole"
+   * 
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _overrideNativeConsole() {
+    // check if need to override the native console methods
+    const _this = this;
+    const newConsole = (function (oldCons) {
+      (global || window).nativeConsole = Object.assign({}, oldCons);
+      return {
+        log: function (message, adapters) { _this.log(message, adapters); },
+        info: function (message, adapters) { _this.info(message, adapters); },
+        warn: function (message, adapters) { _this.warn(message, adapters); },
+        debug: function (message, adapters) { _this.debug(message, adapters); },
+        error: function (message, adapters) { _this.error(message, adapters); },
+        coco: 'please'
+      }
+    })((global || window).console);
+    (global || window).console = newConsole;
   }
 
   /**
@@ -70,8 +125,20 @@ export default class SLog {
   async _log(message, adapters = null, level = 'log') {
 
     // process the adapters argument
+    if (adapters === null) adapters = this._settings.adaptersByLevel[level];
     if (adapters === null) adapters = Object.keys(this._settings.adapters);
     else if (typeof adapters === 'string') adapters = adapters.split(',').map(a => a.trim());
+
+    const env = __env('env') || __env('node_env') || 'production';
+    if (env) {
+      let adaptersByEnvironment = this._settings.adaptersByEnvironment[env];
+      if (adaptersByEnvironment !== null) {
+        if (typeof adaptersByEnvironment === 'string') adaptersByEnvironment = adaptersByEnvironment.split(',').map(a => a.trim());
+        adapters = adapters.filter(a => {
+          return adaptersByEnvironment.indexOf(a) !== -1;
+        });
+      }
+    }
 
     // init the promises stack
     const adaptersLogStack = [];

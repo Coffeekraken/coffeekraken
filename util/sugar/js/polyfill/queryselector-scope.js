@@ -14,6 +14,7 @@
  * @see 		http://stackoverflow.com/questions/6481612/queryselector-search-immediate-children
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+// TODO tests
 (function (doc, proto) {
   try {
     // check if browser supports :scope natively

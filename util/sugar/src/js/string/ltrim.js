@@ -7,6 +7,7 @@
  *
  * @param    {String}    string    The string to trim
  * @param    {String}    needle    The string to find an cut out if found
+ * @param    {Boolean}  [trimResult=true]       If you want to trim the resulted ltrim
  * @return    {String}    The trimed string
  *
  * @example    js
@@ -15,9 +16,9 @@
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function ltrim(string, needle) {
+export default function ltrim(string, needle, trimResult = true) {
   if (string.substr(0, needle.length) === needle) {
-    return string.substr(needle.length);
+    return trimResult ? string.substr(needle.length).trim() : string.substr(needle.length);
   }
   // nothing to trim
   return string;

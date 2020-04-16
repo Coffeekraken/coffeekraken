@@ -16,6 +16,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * Detect if is a phone device
  *
+ * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test
+ * 
  * @return    {Boolean}    true if is a phone, false if not
  *
  * @example 	js
@@ -25,8 +27,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * }
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function isPhone() {
-  const md = new _mobileDetect.default(window.navigator.userAgent);
+function isPhone(ua = navigator.userAgent) {
+  const md = new _mobileDetect.default(ua);
   return md.phone() !== null;
 }
 

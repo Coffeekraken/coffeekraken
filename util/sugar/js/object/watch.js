@@ -7,6 +7,8 @@ exports.default = watch;
 
 var _SWatch = _interopRequireDefault(require("./SWatch"));
 
+var _uniqid = _interopRequireDefault(require("../string/uniqid"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -33,10 +35,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * 
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function watch(target, globs, handlerFn) {
+function watch(target, globs, handlerFn, id = (0, _uniqid.default)()) {
   const watchedObj = new _SWatch.default(target);
-  const watchId = (watchedObj.$watch || watchedObj.watch)(globs, handlerFn);
-  watchedObj.__$watchId = watchId;
+  (watchedObj.$watch || watchedObj.watch)(globs, handlerFn, id);
   return watchedObj;
 }
 

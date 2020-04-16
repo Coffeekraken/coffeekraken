@@ -7,7 +7,11 @@ exports.default = whenProperty;
 
 var _get2 = _interopRequireDefault(require("lodash/get"));
 
-var _SWatcher = _interopRequireDefault(require("../class/SWatcher"));
+var _SPromise = _interopRequireDefault(require("../promise/SPromise"));
+
+var _watch = _interopRequireDefault(require("./watch"));
+
+var _uniqid = _interopRequireDefault(require("../string/uniqid"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -50,7 +54,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function whenProperty(object, property, checkFn = null) {
-  return new Promise((resolve, reject) => {
+  let watchedObj,
+      watchId = (0, _uniqid.default)();
+  return new _SPromise.default((resolve, reject, trigger, cancel) => {
     const value = (0, _get2.default)(object, property);
 
     if (value) {
@@ -63,22 +69,21 @@ function whenProperty(object, property, checkFn = null) {
       }
     }
 
-    const watcher = new _SWatcher.default();
-    let ok = false;
-    watcher.watch(object, property, (newVal, oldVal) => {
-      if (ok) return;
-
-      if (checkFn && checkFn(newVal, oldVal)) {
-        ok = true;
-        resolve(newVal);
-        watcher.destroy();
-      } else if (!checkFn) {
-        ok = true;
-        resolve(value);
-        watcher.destroy();
+    watchedObj = (0, _watch.default)(object, property, update => {
+      if (update.action === 'Object.set') {
+        if (checkFn && checkFn(update.value, update.oldValue)) {
+          resolve(update.value);
+          object.unwatch(watchId);
+        } else if (!checkFn) {
+          resolve(update.value);
+          object.unwatch(watchId);
+        }
       }
-    });
-  });
+    }, watchId);
+    watchedObj = object;
+  }).on('cancel,finnaly', () => {
+    watchedObj && watchedObj.unwatch(watchId);
+  }).start();
 }
 
 module.exports = exports.default;

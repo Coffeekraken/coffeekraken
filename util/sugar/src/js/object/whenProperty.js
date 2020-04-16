@@ -1,5 +1,7 @@
 import _get from "lodash/get";
-import SWatcher from "../class/SWatcher";
+import __SPromise from '../promise/SPromise';
+import __watch from './watch';
+import __uniqid from '../string/uniqid';
 
 /**
  * @name        whenProperty
@@ -40,7 +42,11 @@ import SWatcher from "../class/SWatcher";
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function whenProperty(object, property, checkFn = null) {
-  return new Promise((resolve, reject) => {
+
+  let watchedObj, watchId = __uniqid();
+
+  return new __SPromise((resolve, reject, trigger, cancel) => {
+
     const value = _get(object, property);
     if (value) {
       if (checkFn && checkFn(value, value)) {
@@ -52,19 +58,20 @@ export default function whenProperty(object, property, checkFn = null) {
       }
     }
 
-    const watcher = new SWatcher();
-    let ok = false;
-    watcher.watch(object, property, (newVal, oldVal) => {
-      if (ok) return;
-      if (checkFn && checkFn(newVal, oldVal)) {
-        ok = true;
-        resolve(newVal);
-        watcher.destroy();
-      } else if (!checkFn) {
-        ok = true;
-        resolve(value);
-        watcher.destroy();
+    watchedObj = __watch(object, property, (update) => {
+      if (update.action === 'Object.set') {
+        if (checkFn && checkFn(update.value, update.oldValue)) {
+          resolve(update.value);
+          object.unwatch(watchId);
+        } else if (!checkFn) {
+          resolve(update.value);
+          object.unwatch(watchId);
+        }
       }
-    });
-  });
+    }, watchId);
+    watchedObj = object;
+
+  }).on('cancel,finnaly', () => {
+    watchedObj && watchedObj.unwatch(watchId);
+  }).start();
 }

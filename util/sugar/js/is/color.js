@@ -27,7 +27,7 @@ exports.default = isColor;
 function isColor(value) {
   var ele = document.createElement("div");
   ele.style.color = value;
-  return ele.style.color.split(/\s+/).join("").toLowerCase();
+  return ele.style.color.split(/\s+/).join("").toLowerCase() !== '';
 }
 
 module.exports = exports.default;

@@ -1,3 +1,5 @@
+// TODO check the smtp connection...
+
 module.exports = (__SLog, __SLogMailAdapter) => {
 
   describe('sugar.js.log.SLogMailAdapter', () => {
@@ -5,7 +7,10 @@ module.exports = (__SLog, __SLogMailAdapter) => {
     const logger = new __SLog({
       adapters: {
         mail: new __SLogMailAdapter({
-          secureToken: '811624db-3436-42be-adb1-4b44c2d71123',
+          // host: 'smtp.gmail.com',
+          // username: 'olivier.bossel@gmail.com',
+          // password: '',
+          secureToken: '2bafe154-7234-448b-8501-3da40dbf77cc',
           to: 'olivier.bossel@gmail.com',
           from: 'info@coffeekraken.io'
         })
@@ -16,9 +21,9 @@ module.exports = (__SLog, __SLogMailAdapter) => {
 
     it('Should send the mail correctly', done => {
 
-      setTimeout(() => {
-        done();
-      }, 10000);
+      // setTimeout(() => {
+      //   done();
+      // }, 3000);
     });
 
   });

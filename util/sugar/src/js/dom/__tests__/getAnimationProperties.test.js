@@ -24,8 +24,6 @@ describe('sugar.js.dom.getAnimationProperties', () => {
 
   const props = __getAnimationProperties($elm);
 
-  console.log(props);
-
   it('Should find the "testing" element that is up in the dom tree', () => {
     //  expect($testing.id).toBe('testing');
   });

@@ -12,6 +12,8 @@ exports.default = isFirefox;
  *
  * Detect if is firefox
  *
+ * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test
+ * 
  * @example 	js
  * import isFirefox from '@coffeekraken/sugar/js/is/firefox'
  * if (isFirefox()) {
@@ -21,8 +23,8 @@ exports.default = isFirefox;
  * @return    {Boolean}    true if is firefox, false if not
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function isFirefox() {
-  return navigator.userAgent.indexOf("Firefox") > -1;
+function isFirefox(ua = navigator.userAgent) {
+  return ua.indexOf("Firefox") > -1;
 }
 
 module.exports = exports.default;

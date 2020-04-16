@@ -26,11 +26,7 @@ exports.default = constructorName;
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function constructorName(obj) {
-  let funcNameRegex = /function (.{1,})\(/;
-  const res = funcNameRegex.exec(obj.toString());
-  if (res && res[1]) return res[1];
-  let results = funcNameRegex.exec(obj.constructor.toString());
-  return results && results.length > 1 ? results[1] : "";
+  return obj.constructor && obj.constructor.name ? obj.constructor.name : null;
 }
 
 module.exports = exports.default;

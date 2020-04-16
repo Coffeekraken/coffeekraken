@@ -11,7 +11,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 _hotkeysJs.default.filter = function (event) {
   return true;
-};
+}; // TODO tests
+
 /**
  * @name 		hotkey
  * @namespace       sugar.js.keyboard

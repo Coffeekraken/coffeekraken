@@ -12,6 +12,8 @@ exports.default = isSafari;
  *
  * Detect if is safari
  *
+ * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test
+ * 
  * @example 	js
  * import isSafari from '@coffeekraken/sugar/js/is/safari'
  * if (isSafari()) {
@@ -21,8 +23,8 @@ exports.default = isSafari;
  * @return    {Boolean}    true if is safari, false if not
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function isSafari() {
-  return navigator.userAgent.indexOf("Safari") != -1 && navigator.userAgent.indexOf("Chrome") == -1;
+function isSafari(ua = navigator.userAgent) {
+  return ua.indexOf("Safari") != -1 && ua.indexOf("Chrome") == -1;
 }
 
 module.exports = exports.default;

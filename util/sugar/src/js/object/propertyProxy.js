@@ -11,7 +11,7 @@ import _get from "lodash/get";
  * @param 		{Object} 		obj 			The object on which to create the proxy
  * @param 		{String} 		property 		The property name that will be proxied
  * @param 		{Object} 		descriptor 		A descriptor object that contains at least a get or a set method, or both
- * @param 		{Boolean} 		applySetterAtStart 	If need to apply the descriptor setter directly on the current value or not
+ * @param 		{Boolean} 		[applySetterAtStart=false] 	If need to apply the descriptor setter directly on the current value or not
  *
  * @example 	js
  * import propertyProxy from '@coffeekraken/sugar/js/object/propertyProxy';
@@ -37,8 +37,16 @@ export default function propertyProxy(
   obj,
   property,
   descriptor,
-  applySetterAtStart = true
+  applySetterAtStart = false
 ) {
+
+  // handle property like "something.cool"
+  const objPath = property.split('.').slice(0, -1).join('.');
+  if (objPath) {
+    property = property.split('.').pop();
+    obj = _get(obj, objPath);
+  }
+
   // store the current value
   let val = _get(obj, property);
   let currentDescriptor = Object.getOwnPropertyDescriptor(
@@ -92,14 +100,14 @@ export default function propertyProxy(
       descriptor.configurable !== undefined
         ? descriptor.configurable
         : currentDescriptor && currentDescriptor.configurable !== undefined
-        ? currentDescriptor.configurable
-        : false,
+          ? currentDescriptor.configurable
+          : false,
     enumarable:
       descriptor.enumarable !== undefined
         ? descriptor.enumarable
         : currentDescriptor && currentDescriptor.enumarable !== undefined
-        ? currentDescriptor.enumarable
-        : true
+          ? currentDescriptor.enumarable
+          : true
     // writable : currentDescriptor && currentDescriptor.writable !== undefined ? currentDescriptor.writable : true
   });
 

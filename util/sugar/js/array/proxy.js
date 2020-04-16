@@ -25,7 +25,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * myArray.watch(['push','pop'], (watchObj) => {
  *    // check the watchObj action
  *    switch (watchObj.action) {
- *      case 'push':
+ *      case 'Array.push':
  *        // do something...
  *      break;
  *    }
@@ -34,7 +34,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function proxy(array) {
-  const watchStack = {};
+  if (array.__$proxied) return array;
+  const watchStack = {}; // mark that this array has already been proxied
+
+  Object.defineProperty(array, '__$proxied', {
+    value: true,
+    enumerable: false,
+    writable: false
+  });
 
   function _proxyMethod(name, ...args) {
     const handlersStack = [];

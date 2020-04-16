@@ -8,7 +8,7 @@
  * passed property in the filtered object
  *
  * @param               {Object}                object                The object to filter
- * @param               {Function}              filter                The filter function
+ * @param               {Function}              filter                The filter function that take as parameter the property itself, and the property name
  * @return              {Object}                                      The filtered object
  *
  * @example           js
@@ -16,7 +16,7 @@
  * filter({
  *    coco: 'hello',
  *    plop: true
- * }, (item) => typeof item === 'string');
+ * }, (item, name) => typeof item === 'string');
  * // { coco: 'hello' }
  *
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -30,7 +30,7 @@ export default function filter(object, filter) {
   Object.keys(object).forEach((propertyName) => {
 
     // pass the property in the filter function
-    if (filter(object[propertyName])) {
+    if (filter(object[propertyName], propertyName)) {
 
       // add the property in the new object
       result[propertyName] = object[propertyName];

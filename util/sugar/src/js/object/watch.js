@@ -1,4 +1,5 @@
 import __SWatch from './SWatch';
+import __uniqid from '../string/uniqid';
 
 /**
  * @name                      watch
@@ -24,9 +25,8 @@ import __SWatch from './SWatch';
  * 
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function watch(target, globs, handlerFn) {
+export default function watch(target, globs, handlerFn, id = __uniqid()) {
   const watchedObj = new __SWatch(target);
-  const watchId = (watchedObj.$watch || watchedObj.watch)(globs, handlerFn);
-  watchedObj.__$watchId = watchId;
+  (watchedObj.$watch || watchedObj.watch)(globs, handlerFn, id);
   return watchedObj;
 }

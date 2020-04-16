@@ -1,4 +1,5 @@
 import __deepMerge from '../../object/deepMerge';
+import __consoleHtmlPreset from '../htmlPresets/console';
 
 /**
  * @name                    SLogConsoleAdapter
@@ -27,7 +28,8 @@ export default class SLogConsoleAdapter {
    * @type          Object
    * @private
    * 
-   * Store this instance settings
+   * Store this instance settings. Here's the list of available settings
+   * - logMethods ({}) {Object}: Store all the console methods like "log", "info", "warn", "debug" and "error". You can override each methods with your own method if you want. The Object format is { methodName: overrideFunction }
    * 
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
@@ -41,13 +43,23 @@ export default class SLogConsoleAdapter {
    * Constructor
    * 
    * @param         {Object}        [settings={}]           The settings object to configure your SLogConsoleAdapter instance. Here's the settings available:
+   * - logMethods ({}) {Object}: Store all the console methods like "log", "info", "warn", "debug" and "error". You can override each methods with your own method if you want. The Object format is { methodName: overrideFunction }
    * 
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(settings = {}) {
     // extend settings
     this._settings = __deepMerge({
+      logMethods: {
+        log: console.log,
+        info: console.info,
+        warn: console.warn,
+        debug: console.debug,
+        error: console.error
+      }
     }, settings);
+
+
   }
 
   /**
@@ -69,6 +81,7 @@ export default class SLogConsoleAdapter {
   async log(message, level) {
     return new Promise((resolve, reject) => {
 
+
       // init the console method to use
       let consoleMethod = 'log';
 
@@ -89,7 +102,7 @@ export default class SLogConsoleAdapter {
       }
 
       // log the message
-      console[consoleMethod](message);
+      ((global || window).nativeConsole || console)[consoleMethod](__consoleHtmlPreset(message));
 
       // resolve the promise
       resolve();

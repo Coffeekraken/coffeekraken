@@ -21,7 +21,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @param 		{Object} 		obj 			The object on which to create the proxy
  * @param 		{String} 		property 		The property name that will be proxied
  * @param 		{Object} 		descriptor 		A descriptor object that contains at least a get or a set method, or both
- * @param 		{Boolean} 		applySetterAtStart 	If need to apply the descriptor setter directly on the current value or not
+ * @param 		{Boolean} 		[applySetterAtStart=false] 	If need to apply the descriptor setter directly on the current value or not
  *
  * @example 	js
  * import propertyProxy from '@coffeekraken/sugar/js/object/propertyProxy';
@@ -43,8 +43,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function propertyProxy(obj, property, descriptor, applySetterAtStart = true) {
-  // store the current value
+function propertyProxy(obj, property, descriptor, applySetterAtStart = false) {
+  // handle property like "something.cool"
+  const objPath = property.split('.').slice(0, -1).join('.');
+
+  if (objPath) {
+    property = property.split('.').pop();
+    obj = (0, _get2.default)(obj, objPath);
+  } // store the current value
+
+
   let val = (0, _get2.default)(obj, property);
   let currentDescriptor = Object.getOwnPropertyDescriptor(obj.prototype || obj, property); // custom setter check
 

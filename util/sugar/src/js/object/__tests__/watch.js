@@ -16,52 +16,51 @@ module.exports = (__watch) => {
 
   let hasUnwatchedObjectBeenWatched = false;
 
-  const watchObj = __watch(obj, '**', (obj) => {
-    if (obj.action === 'Object.set' && obj.path === 'coco' && watchObj.coco === 'plop') {
+  const watchedObj = __watch(obj, '**', (update) => {
+    if (update.action === 'Object.set' && update.path === 'coco' && watchedObj.coco === 'plop') {
       doneAssign();
-    } else if (obj.path === 'a' && watchObj.a === 'bonjours') {
+    } else if (update.path === 'a' && watchedObj.a === 'bonjours') {
       doneUpdating();
-    } else if (obj.path === 'b.bb' && watchObj.b.bb === 'hola') {
+    } else if (update.path === 'b.bb' && watchedObj.b.bb === 'hola') {
       doneUpdatingDeep();
-    } else if (obj.action === 'Object.delete' && !watchObj.b.bb) {
+    } else if (update.action === 'Object.delete' && !watchedObj.b.bb) {
       doneDeleting();
-    } else if (obj.action === 'Array.push') {
-      expect(watchObj.c.cc.ccc).toEqual(['hello', 'world', 'plop']);
+    } else if (update.action === 'Array.push') {
+      expect(watchedObj.c.cc.ccc).toEqual(['hello', 'world', 'plop']);
       doneAddIntoArray();
-    } else if (obj.path === 'b.plop' && watchObj.b.plop === 'yop') {
-      console.log(obj);
+    } else if (update.path === 'b.plop' && watchedObj.b.plop === 'yop') {
       hasUnwatchedObjectBeenWatched = true;
     }
   });
 
   test('Assign a new value', done => {
     doneAssign = done;
-    watchObj.coco = 'plop';
+    watchedObj.coco = 'plop';
   });
 
   test('Update an existing value', done => {
     doneUpdating = done;
-    watchObj.a = 'bonjours';
+    watchedObj.a = 'bonjours';
   });
 
   test('Update an existing deep value', done => {
     doneUpdatingDeep = done;
-    watchObj.b.bb = 'hola';
+    watchedObj.b.bb = 'hola';
   });
 
   test('Deleting a deep value', done => {
     doneDeleting = done;
-    delete watchObj.b.bb;
+    delete watchedObj.b.bb;
   });
 
   test('Adding a value into an array using push', done => {
     doneAddIntoArray = done;
-    watchObj.c.cc.ccc.push('plop');
+    watchedObj.c.cc.ccc.push('plop');
   });
 
-  test('Unwatch the object', done => {
-    watchObj.unwatch();
-    watchObj.b.plop = 'yop';
+  test('Unwatch the watchedObject', done => {
+    watchedObj.unwatch();
+    watchedObj.b.plop = 'yop';
     setTimeout(() => {
       expect(hasUnwatchedObjectBeenWatched).toBe(false);
       done();

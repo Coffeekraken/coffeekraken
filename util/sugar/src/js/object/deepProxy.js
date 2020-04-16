@@ -10,7 +10,11 @@ import __proxy from '../array/proxy';
  * object levels and to new properties as well.
  * 
  * @param          {Object}                 object            The object on which to add the proxy
- * @param           {Object}                handler           The object handler. Support all the native function described here: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy/handler
+ * @param           {Function}                handlerFn       The handler function that will be called with the update object. It can be a property deleted, an array item added, a property updated, etc...:
+ * - Object.set: An object property added or updated
+ * - Object.delete: An object property deleted
+ * - Array.push: An item has been added inside an array
+ * - Array.{methodName}: Every array actions
  * @return          {Object}                                  The proxied object
  * 
  * @example           js
@@ -28,7 +32,6 @@ import __proxy from '../array/proxy';
  */
 export default function deepProxy(object, handlerFn) {
   const preproxy = new WeakMap();
-  let proxy = null;
 
   function makeHandler(path) {
     return {
@@ -43,7 +46,7 @@ export default function deepProxy(object, handlerFn) {
         target[key] = value;
 
         handlerFn({
-          object: proxy,
+          object,
           path: [...path, key].join('.'),
           action: 'Object.set',
           oldValue,
@@ -61,7 +64,7 @@ export default function deepProxy(object, handlerFn) {
           let deleted = Reflect.deleteProperty(target, key);
           if (deleted) {
             handlerFn({
-              object: proxy,
+              object,
               path: [...path, key].join('.'),
               action: 'Object.delete',
               oldValue
@@ -114,6 +117,6 @@ export default function deepProxy(object, handlerFn) {
     preproxy.set(p, obj);
     return p;
   }
-  proxy = proxify(object, []);
-  return proxy;
+  return proxify(object, []);
+
 }

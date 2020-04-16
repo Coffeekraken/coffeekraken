@@ -71,6 +71,8 @@ class SWatch {
   constructor(object) {
     _defineProperty(this, "_watchStack", {});
 
+    // check if the passed object is already an SWatch instance
+    if (object.__$SWatch) return object;
     this._proxiedObject = (0, _deepProxy.default)(object, obj => {
       let path = obj.path;
       let value = obj.value;
@@ -82,15 +84,7 @@ class SWatch {
 
       if (!watchProcesses.length) return; // build object depending on action
 
-      let individualWatchObj = {}; // switch (true) {
-      //   case obj.action === 'Object.set':
-      //     break;
-      //   case obj.action === 'Object.delete':
-      //     break;
-      //   case obj.action.startsWith('Array'):
-      //     break;
-      // }
-      // build the object to pass to the handler
+      let individualWatchObj = {}; // build the object to pass to the handler
 
       const watchResult = {
         object: this._proxiedObject,
@@ -176,7 +170,7 @@ class SWatch {
    * 
    * @param     {String|Array}          globs         A glob or array of glob patterns to tell which propertie(s) you want to watch
    * @param     {Function}              handlerFn     A function that will be called with the watchObj that define the update
-   * - set
+   * @param     {String}                [id=null]   The id you want to give to this watch process. It will be used to unwatch this process
    * 
    * @example         js
    * myWatch.watch('**.*', {
@@ -189,14 +183,25 @@ class SWatch {
    */
 
 
-  watch(globs, handlerFn) {
-    const watchId = (0, _uniqid.default)();
-    this._watchStack[watchId] = {
+  watch(globs, handlerFn, id = null) {
+    if (!id) id = (0, _uniqid.default)();
+
+    if (!this._proxiedObject.__$watchIds) {
+      Object.defineProperty(this._proxiedObject, '__$watchIds', {
+        enumerable: false,
+        writable: false,
+        value: []
+      });
+    }
+
+    this._proxiedObject.__$watchIds.push(id);
+
+    this._watchStack[id] = {
       globs: Array.isArray(globs) ? globs : [globs],
       handlerFn
-    }; // return the watchId to be able to remove the watching process
+    }; // return the id to be able to remove the watching process
 
-    return watchId;
+    return id;
   }
   /**
    * @name                unwatch
@@ -216,7 +221,13 @@ class SWatch {
    */
 
 
-  unwatch(watchId = this._proxiedObject.__$watchId) {
+  unwatch(watchId = this._proxiedObject.__$watchIds) {
+    if (Array.isArray(watchId)) {
+      watchId.forEach(id => {
+        delete this._watchStack[id];
+      });
+    }
+
     delete this._watchStack[watchId];
   }
 

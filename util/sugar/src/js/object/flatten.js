@@ -6,7 +6,8 @@
  * Transform the passed multiple level object into a single level one
  *
  * @param               {Object}                          object                    The object to flatten
- * @param               {String}                          [separation="_"]          The separation character to use for preperty names
+ * @param               {String}                          [separation="."]          The separation character to use for preperty names
+ * @param 							{Boolean}													[flattenArrays=false] 		Specify if you want to flatten arrays or not
  * @return              {Object}                                                    The flatten object
  *
  * @example             js
@@ -18,14 +19,14 @@
  * });
  *
  */
-export default function flatten(object, separation = '_') {
+export default function flatten(object, separation = '.', flattenArrays = false) {
 	let toReturn = {};
 
 	for (let i in object) {
 		if (!object.hasOwnProperty(i)) continue;
 
-		if ((typeof object[i]) == 'object') {
-			let flatObject = flatten(object[i]);
+		if ((Array.isArray(object[i]) && flattenArrays) || (!Array.isArray(object[i]) && typeof object[i]) == 'object') {
+			let flatObject = flatten(object[i], separation, flattenArrays);
 			for (let x in flatObject) {
 				if (!flatObject.hasOwnProperty(x)) continue;
 

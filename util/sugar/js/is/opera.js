@@ -12,6 +12,8 @@ exports.default = isOpera;
  *
  * Detect if is opera
  *
+ * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test
+ * 
  * @example 	js
  * import isOpera from '@coffeekraken/sugar/js/is/opera'
  * if (isOpera()) {
@@ -21,8 +23,8 @@ exports.default = isOpera;
  * @return    {Boolean}    true if is opera, false if not
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function isOpera() {
-  return navigator.userAgent.toLowerCase().indexOf("op") > -1;
+function isOpera(ua = navigator.userAgent) {
+  return ua.toLowerCase().indexOf("op") > -1;
 }
 
 module.exports = exports.default;

@@ -3,13 +3,19 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports.default = parseArgsString;
+
+var _deepMerge = _interopRequireDefault(require("../object/deepMerge"));
 
 var _parse = _interopRequireDefault(require("./parse"));
 
-var _unquote = _interopRequireDefault(require("./unquote"));
+var _set = _interopRequireDefault(require("../object/set"));
 
-var _upperFirst = _interopRequireDefault(require("./upperFirst"));
+var _get = _interopRequireDefault(require("../object/get"));
+
+var _delete = _interopRequireDefault(require("../object/delete"));
+
+var _parseHtml = _interopRequireDefault(require("../console/parseHtml"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21,324 +27,232 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * Parse a string to find the provided arguments into the list and return a corresponding object.
  *
  * @param             {String}                    string                      The string to parse
- * @param             {Object}                    arguments                   The arguments object description
- * @return            {Object}                                                The object of funded arguments
+ * @param             {Object}                    argsDefinitions                   The arguments object description
+ * @param             {Object}                    [settings={}]               A settings object that configure how the string will be parsed. Here's the settings options:
+ * - treatDotsAsObject (true) {Boolean}: Specify if you want the options with dot(s) in the name to be treated as object in the returned object
+ * - handleOrphanOptions (true) {Boolean}: Specify if you want the options values without clear argument name given to be handled or not
+ * @return            {Object}                                                The object of funded arguments and their values
  *
  * @example         js
  * import parseArgs from '@coffeekraken/sugar/js/string/parseArgs';
- * parseArgs('hello -w 10 --help "coco yep" #blop', {
- *    action: 'String -a --action /^\\S$/',
- *    world: 'Integer -w --world',
- *    help: 'String -h --help',
- *    id: 'String -i --id /^#([\\S]+)$/',
- *    yop: 'String -y --yop "Default value"'
+ * parseArgs('hello -w 10 yop "hello world" -b --hello.world Nelson --help "coco yep" #blop', {
+ *    param1: { type: 'String', alias: 'p' },
+ *    world: { type: 'Array', alias: 'w', validator: value => {
+ *      return Array.isArray(value);
+ *    }},
+ *    bool: { type: 'Boolean', alias: 'b', default: false, required: true },
+ *    'hello.world': { type: 'String' },
+ *    help: { type: 'String', alias: 'h' },
+ *    id: { type: 'String', alias: 'i', regexp: /^#([\S]+)$/ }
+ * }, {
+ *    treatDotsAsObject: true,
+ *    handleOrphanOptions: true
  * });
- * // {
- * //   action: 'hello',
- * //   world: 10,
- * //   help: 'coco yep',
- * //   id: 'blop',
- * //   yop: 'Default value'
- * // }
+ * {
+ *    param1: 'hello',
+ *    world: [10, 'yop', 'hello world'],
+ *    bool: true,
+ *    hello: {
+ *      world: 'Nelson'
+ *    },
+ *    help: 'coco yep',
+ *    id: '#blop'
+ * }
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-const availableTypes = ['number', 'bigint', 'string', 'boolean', 'null', 'undefined', 'object', 'symbol', 'function', 'object', 'array'];
+function parseArgsString(string, argsDefinitions = {}, settings = {}) {
+  settings = (0, _deepMerge.default)({
+    treatDotsAsObject: true,
+    handleOrphanOptions: true
+  }, settings); // process the passed string
 
-function parseArgsString(string, arg) {
-  string = string.split(' ');
-  string = string.filter(s => {
-    if (s.trim() === '') return false;
-    return true;
-  });
-  const argObj = {};
-  string.forEach(s => {
-    let isArrayOfTypes = true;
-    const parsedString = (0, _parse.default)(s);
+  let stringArray = string.match(/(?:[^\s("|')]+|("|')[^("|')]*("|'))+/gm);
+  let currentArg = null;
+  const argsObj = {};
+  stringArray = stringArray.filter(part => {
+    if (part.slice(0, 2) === '--' || part.slice(0, 1) === '-') {
+      currentArg = part.replace(/^[-]{1,2}/, '');
+      if (currentArg.length === 1) currentArg = getArgNameByAlias(currentArg, argsDefinitions);
 
-    if (Array.isArray(parsedString)) {
-      for (let i = 0; i < parsedString.length; i++) {
-        if (availableTypes.indexOf(parsedString[i].toLowerCase()) === -1) {
-          isArrayOfTypes = false;
-          break;
+      if (settings.treatDotsAsObject) {
+        (0, _set.default)(argsObj, currentArg, true);
+      } else {
+        argsObj[currentArg] = true;
+      }
+
+      return false;
+    }
+
+    if (currentArg) {
+      const argDefinition = argsDefinitions[currentArg]; // check that the current argument actually exists in the argsDefinitions object
+
+      if (!argDefinition) return false; // take care of array argument
+
+      if (argDefinition.type && processArgType(argDefinition.type) === 'array') {
+        if (settings.treatDotsAsObject) {
+          if (!Array.isArray((0, _get.default)(argsObj, currentArg))) (0, _set.default)(argsObj, currentArg, []);
+
+          if (Array.isArray(part)) {
+            (0, _get.default)(argsObj, currentArg).push((0, _parse.default)(...part));
+          } else {
+            (0, _get.default)(argsObj, currentArg).push((0, _parse.default)(part));
+          }
+        } else {
+          if (!Array.isArray(argsObj[currentArg])) argsObj[currentArg] = [];
+
+          if (Array.isArray(part)) {
+            argsObj[currentArg].push(...(0, _parse.default)(part));
+          } else {
+            argsObj[currentArg].push((0, _parse.default)(part));
+          }
         }
+
+        return false;
+      } // take care of all argument types
+
+
+      if (settings.treatDotsAsObject) {
+        (0, _set.default)(argsObj, currentArg, (0, _parse.default)(part));
+      } else {
+        argsObj[currentArg] = (0, _parse.default)(part);
       }
+
+      currentArg = null;
+      return false;
+    }
+
+    return true;
+  }); // get the list of arguments that does not have value for now
+
+  let argsWithoutValues = Object.keys(argsDefinitions).filter(argName => {
+    if (settings.treatDotsAsObject) {
+      return (0, _get.default)(argsObj, argName) === undefined;
     } else {
-      isArrayOfTypes = false;
+      return argsObj[argName] === undefined;
     }
+  });
 
-    if (isArrayOfTypes) {
-      argObj.types = parsedString;
-    } else if (availableTypes.indexOf(s.toLowerCase()) !== -1) {
-      argObj.types = [s.trim()];
-    } else if (s.trim().slice(0, 2) === '--') {
-      argObj.bigName = s.trim().slice(2);
-    } else if (s.trim().slice(0, 1) === '-') {
-      argObj.smallName = s.trim().slice(1);
-    } else if (s.trim().slice(0, 1) === '/' && s.trim().slice(-1) === '/') {
-      argObj.regex = s.trim();
-    } else if (s.trim().slice(0, 1) === '"' && s.trim().slice(-1) === '"') {
-      argObj.default = s.trim().slice(1, -1).split(',');
-      argObj.default = argObj.default.map(v => {
-        return availableTypes.indexOf(v.toLowerCase()) === -1 ? (0, _parse.default)(v) : v;
-      });
+  if (settings.handleOrphanOptions) {
+    // loop on these "unknown" values and try to get the argument that correspond to it
+    stringArray = stringArray.filter(value => {
+      let hasFoundAnArgument = false; // loop on the args without values
 
-      if (argObj.default.length <= 1) {
-        argObj.default = argObj.default[0];
+      argsWithoutValues = argsWithoutValues.filter(argName => {
+        // check that the argument does not have any value
+        if (settings.treatDotsAsObject) {
+          if ((0, _get.default)(argsObj, argName)) return false;
+        } else {
+          if (argsObj[argName]) return false;
+        } // check if the value correspond to the argument
+
+
+        if (isValueCorrespondToArgDefinition(value, argsDefinitions[argName])) {
+          // set the value in the argsObj
+          if (settings.treatDotsAsObject) {
+            (0, _set.default)(argsObj, argName, value);
+          } else {
+            argsObj[argName] = value;
+          } // tell that this value has found an argument
+
+
+          hasFoundAnArgument = true; // tell that this argument is now fullfiled with a value
+
+          return false;
+        } // the argument does not have any value
+
+
+        return true;
+      }); // filter the stringArray
+
+      return !hasFoundAnArgument;
+    });
+  } // init the error list
+
+
+  const errors = []; // make sure all the arguments correspond to their definition
+
+  Object.keys(argsDefinitions).forEach(argName => {
+    let value;
+
+    if (settings.treatDotsAsObject) {
+      value = (0, _get.default)(argsObj, argName);
+    } else {
+      value = argsObj[argName];
+    } // check argument without value but with a default property in the definition
+
+
+    if (value === undefined && argsDefinitions[argName].default !== undefined) {
+      if (settings.treatDotsAsObject) {
+        (0, _set.default)(argsObj, argName, argsDefinitions[argName].default);
+      } else {
+        argsObj[argName] = argsDefinitions[argName].default;
+      }
+
+      value = argsDefinitions[argName].default;
+    } // check argument that does not have any value and that are required
+
+
+    if (value === undefined && argsDefinitions[argName].required === true) {
+      errors.push(`The argument "<red>${argName}</red>" is required but you don't pass any value...`);
+      return;
+    } // check that the argument correspond to his definition
+
+
+    if (!isValueCorrespondToArgDefinition(value, argsDefinitions[argName])) {
+      if (settings.treatDotsAsObject) {
+        (0, _delete.default)(argsObj, argName);
+      } else {
+        delete argsObj[argName];
       }
     }
-  }); // check the "default" value depending on the alloewd types
+  }); // return errors if their is
 
-  if (argObj.default !== undefined) {
-    if (Array.isArray(argObj.default) && argObj.types.indexOf('Array') !== -1) {} else if (argObj.types.indexOf((0, _upperFirst.default)(typeof argObj.default)) === -1) {
-      throw new Error(`The "default" value setted to "${argObj.default}" for the argument "${arg}" is of type "${(0, _upperFirst.default)(typeof argObj.default)}" and does not fit with the allowed types which are "${argObj.types.join(',')}"...`);
-    }
-  }
+  if (errors.length) {
+    return new Error((0, _parseHtml.default)(errors.join('\n')));
+  } // return the argsObj
 
-  return argObj;
+
+  return argsObj;
 }
 
-var _default = (string, args) => {
-  if (!string) return;
-  let argsObj = Object.assign(args); // handle the "alone" atruments that mean boolean true
+function processArgType(type) {
+  return type.toLowerCase();
+}
 
-  const aloneSmallArgs = string.match(/\s(-[a-zA-Z])\s-[^0-9\s]+/g);
-  const lastAloneSmallArgs = string.match(/\s(-[a-zA-Z])\s?$/g);
-  const aloneBigArgs = string.match(/\s(--[a-zA-Z-]+)\s-[^0-9\s]+/g);
-  const lastAloneBigArgs = string.match(/\s(--[a-zA-Z-]+)\s?$/g);
+function getArgNameByAlias(alias, argsDefinitions) {
+  const argsNames = Object.keys(argsDefinitions);
 
-  if (aloneSmallArgs) {
-    aloneSmallArgs.forEach(arg => {
-      const splitedArg = arg.trim().split(' ');
-      string = string.replace(arg, ` ${splitedArg[0]} true -`);
-    });
-  }
+  for (let i = 0; i < argsNames.length; i++) {
+    const argumentObj = argsDefinitions[argsNames[i]];
 
-  if (lastAloneSmallArgs) {
-    lastAloneSmallArgs.forEach(arg => {
-      const splitedArg = arg.trim().split(' ');
-      string = string.replace(arg, ` ${splitedArg[0]} true `);
-    });
-  }
-
-  if (aloneBigArgs) {
-    aloneBigArgs.forEach(arg => {
-      const splitedArg = arg.trim().split(' ');
-      string = string.replace(arg, ` ${splitedArg[0]} true -`);
-    });
-  }
-
-  if (lastAloneBigArgs) {
-    lastAloneBigArgs.forEach(arg => {
-      const splitedArg = arg.trim().split(' ');
-      string = string.replace(arg, ` ${splitedArg[0]} true `);
-    });
-  }
-
-  string = ' ' + string + ' ';
-  let parts = string.split(/(--?[a-zA-Z0-9-]+)/g);
-  parts = parts.map(p => {
-    return p.trim();
-  });
-  parts = parts.filter(p => {
-    if (p.trim() === '') return false;
-    return true;
-  });
-  const argsValues = {};
-  let partsToDelete = []; // loop on every parts
-
-  parts.forEach((part, j) => {
-    let smallName = null,
-        bigName = null;
-
-    if (part.slice(0, 2) === '--') {
-      bigName = part.slice(2);
-    } else if (part.slice(0, 1) === '-') {
-      smallName = part.slice(1);
+    if (alias === argumentObj.alias) {
+      return argsNames[i];
     }
+  }
+}
 
-    if (smallName) {
-      let argName = null,
-          argsString = null,
-          value = null;
+function isValueCorrespondToArgDefinition(value, argDefinition) {
+  // checking type first
+  let type = null;
 
-      for (let i = 0; i < Object.keys(args).length; i++) {
-        argsString = ` ${args[Object.keys(args)[i]]} `;
+  if (argDefinition.type) {
+    type = processArgType(argDefinition.type);
+    if (type === 'array' && !Array.isArray((0, _parse.default)(value))) return false;else if (type !== 'array' && type !== typeof (0, _parse.default)(value)) return false;
+  } // checking regexp
 
-        if (argsString.includes(` -${smallName} `)) {
-          argName = Object.keys(args)[i];
-          break;
-        }
-      }
 
-      const argObj = parseArgsString(argsString, argName);
-      const parsedValue = (0, _parse.default)(parts[j + 1]);
+  if (argDefinition.regexp && typeof value === 'string') {
+    if (!argDefinition.regexp.test(value)) return false;
+  } // checking validator
 
-      if (Array.isArray(parsedValue)) {
-        value = [parsedValue];
-      } else {
-        value = (0, _unquote.default)(parts[j + 1] || '').split(',');
-      }
 
-      value = value.map(v => {
-        if (Array.isArray(v)) return v;
-        return availableTypes.indexOf(v.toLowerCase()) === -1 ? (0, _parse.default)(v) : v;
-      });
+  if (argDefinition.validator && typeof argDefinition.validator === 'function') {
+    if (!argDefinition.validator((0, _parse.default)(value))) return false;
+  } // all good
 
-      if (value.length <= 1) {
-        value = value[0];
-      }
 
-      partsToDelete.push(part);
+  return true;
+}
 
-      if (typeof value === 'string') {
-        if (value.slice(0, 2) === '--' || value.slice(0, 1) === '-') {
-          if (argObj.types.indexOf('Boolean') === -1) {
-            throw new Error(`The argument "${argName}" want to set his value to "true" but does not accept "Boolean" as type... Here's are the allowed types: "${argObj.types.join(',')}"`);
-          } else {
-            value = true;
-          }
-        } else {
-          partsToDelete.push(parts[j + 1]);
-        }
-
-        if (argObj.regex && !new RegExp(argObj.regex.slice(1, -1), 'g').test(value)) {
-          throw new Error(`The argument "${argName}" want to set his value to "${value}" but this does not match the argument regex "${argObj.regex}"...`);
-        }
-      } else {
-        partsToDelete.push(parts[j + 1]);
-      }
-
-      delete argsObj[argName];
-      argsValues[argName] = {
-        value: value,
-        types: argObj.types,
-        regex: argObj.regex || undefined,
-        default: argObj.default
-      };
-    } else if (bigName) {
-      let argName = null,
-          argsString = null,
-          value = null;
-
-      for (let i = 0; i < Object.keys(args).length; i++) {
-        argsString = ` ${args[Object.keys(args)[i]]} `;
-
-        if (argsString.includes(` --${bigName} `)) {
-          argName = Object.keys(args)[i];
-          break;
-        }
-      }
-
-      const argObj = parseArgsString(argsString, argName);
-      const parsedValue = (0, _parse.default)(parts[j + 1]);
-
-      if (Array.isArray(parsedValue)) {
-        value = [parsedValue];
-      } else {
-        value = (0, _unquote.default)(parts[j + 1] || '').split(',');
-      }
-
-      value = value.map(v => {
-        if (Array.isArray(v)) return v;
-        return availableTypes.indexOf(v.toLowerCase()) === -1 ? (0, _parse.default)(v) : v;
-      });
-
-      if (value.length <= 1) {
-        value = value[0];
-      }
-
-      partsToDelete.push(part);
-
-      if (typeof value === 'string') {
-        if (value.slice(0, 2) === '--' || value.slice(0, 1) === '-') {
-          if (argObj.types.indexOf('Boolean') === -1) {
-            throw new Error(`The argument "${argName}" want to set his value to "true" but does not accept "Boolean" as type... Here's are the allowed types: "${argObj.types.join(',')}"`);
-          } else {
-            value = true;
-          }
-        } else {
-          partsToDelete.push(parts[j + 1]);
-        }
-
-        if (argObj.regex && !new RegExp(argObj.regex.slice(1, -1), 'g').test(value)) {
-          throw new Error(`The argument "${argName}" want to set his value to "${value}" but this does not match the argument regex "${argObj.regex}"...`);
-        }
-      } else {
-        partsToDelete.push(parts[j + 1]);
-      }
-
-      delete argsObj[argName];
-      argsValues[argName] = {
-        value: value,
-        types: argObj.types,
-        regex: argObj.regex || undefined,
-        default: argObj.default
-      };
-    }
-  }); // filter the parts already handled
-
-  parts = parts.filter((p, i) => {
-    if (partsToDelete.indexOf(p) !== -1) return false;
-    return true;
-  }); // loop on the remaining parts
-
-  parts.forEach(v => {
-    const valuesArray = v.match(/\w+|"[^"]+"/g);
-    valuesArray.forEach(value => {
-      const parsedValue = (0, _parse.default)(value);
-
-      if (Array.isArray(parsedValue)) {
-        value = [parsedValue];
-      } else {
-        value = (0, _unquote.default)(value || '').split(',');
-      }
-
-      value = value.map(v => {
-        if (Array.isArray(v)) return v;
-        return availableTypes.indexOf(v.toLowerCase()) === -1 ? (0, _parse.default)(v) : v;
-      });
-
-      if (value.length <= 1) {
-        value = value[0];
-      }
-
-      for (let i = 0; i < Object.keys(argsObj).length; i++) {
-        const argName = Object.keys(argsObj)[i];
-        const argsString = args[argName];
-        const argObj = parseArgsString(argsString, argName);
-        const type = Array.isArray(value) ? 'array' : typeof value; // console.log(type, argObj);
-
-        if (!argsValues[argName] && argObj.types.indexOf((0, _upperFirst.default)(type)) !== -1) {
-          if (typeof value === 'string' && argObj.regex && !new RegExp(argObj.regex, 'g').test(value)) {
-            continue;
-          }
-
-          delete argsObj[argName];
-          argsValues[argName] = {
-            value,
-            types: argObj.types,
-            regex: argObj.regex || undefined,
-            default: argObj.default
-          };
-        }
-      }
-    });
-  });
-  Object.keys(argsObj).forEach(k => {
-    if (argsValues[k]) return;
-    const argObj = parseArgsString(argsObj[k], k);
-    const value = argObj.default;
-    delete argsObj[k];
-    argsValues[k] = {
-      value: typeof value === 'string' && availableTypes.indexOf(value.toLowerCase()) === -1 ? (0, _parse.default)(value) : value,
-      types: argObj.types,
-      regex: argObj.regex || undefined,
-      default: argObj.default
-    };
-  });
-  return argsValues;
-};
-
-exports.default = _default;
 module.exports = exports.default;

@@ -44,7 +44,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function toString(value) {
   if ((0, _string.default)(value)) {
     return value;
-  } else if (typeof value === 'symbol' || typeof value === 'typedArray' || typeof value === 'date' || typeof value === 'color') {
+  } else if (value === null) {
+    return 'null';
+  } else if (typeof value === 'symbol' || typeof value === 'typedArray' || value instanceof Date || typeof value === 'color') {
     return value.toString();
   } else if ((0, _object.default)(value) || (0, _array.default)(value) || (0, _json.default)(value)) {
     return JSON.stringify(value);
@@ -56,8 +58,6 @@ function toString(value) {
     return value.toString();
   } else if ((0, _number.default)(value)) {
     return value.toString();
-  } else if (value === null) {
-    return "";
   } else if (value === undefined) {
     return "undefined";
   } else {

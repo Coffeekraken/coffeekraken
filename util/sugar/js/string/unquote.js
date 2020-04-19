@@ -12,10 +12,10 @@ exports.default = unquote;
  *
  * Remove the quotes of a string
  * Types of quotes removed :
- * - `"`, `'`, `”`
+ * - `"`, `'`, `”`, '`'
  *
  * @param    {String}    string    The string to process
- * @param    {Array<String>}    [quotesToRemove=['"','\'','”']]    The quotes to removes
+ * @param    {Array<String>}    [quotesToRemove=['"','\'','”','`']]    The quotes to removes
  * @return    {String}    The unquoted string
  *
  * @example    js
@@ -24,7 +24,7 @@ exports.default = unquote;
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function unquote(string, quotesToRemove = ['"', "'", "”"]) {
+function unquote(string, quotesToRemove = ['"', "'", "”", '`']) {
   // trim the string just in case
   string = string.trim(); // loop on each quotes to remove
 

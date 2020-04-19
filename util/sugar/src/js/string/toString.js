@@ -28,7 +28,9 @@ import isNumber from "../is/number";
 export default function toString(value) {
   if (isString(value)) {
     return value;
-  } else if (typeof value === 'symbol' || typeof value === 'typedArray' || typeof value === 'date' || typeof value === 'color') {
+  } else if (value === null) {
+    return 'null';
+  } else if (typeof value === 'symbol' || typeof value === 'typedArray' || value instanceof Date || typeof value === 'color') {
     return value.toString();
   } else if (isObject(value) || isArray(value) || isJson(value)) {
     return JSON.stringify(value);
@@ -41,8 +43,6 @@ export default function toString(value) {
     return value.toString();
   } else if (isNumber(value)) {
     return value.toString();
-  } else if (value === null) {
-    return "";
   } else if (value === undefined) {
     return "undefined";
   } else {

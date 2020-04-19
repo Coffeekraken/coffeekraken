@@ -5,10 +5,10 @@
  *
  * Remove the quotes of a string
  * Types of quotes removed :
- * - `"`, `'`, `”`
+ * - `"`, `'`, `”`, '`'
  *
  * @param    {String}    string    The string to process
- * @param    {Array<String>}    [quotesToRemove=['"','\'','”']]    The quotes to removes
+ * @param    {Array<String>}    [quotesToRemove=['"','\'','”','`']]    The quotes to removes
  * @return    {String}    The unquoted string
  *
  * @example    js
@@ -17,7 +17,7 @@
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function unquote(string, quotesToRemove = ['"', "'", "”"]) {
+export default function unquote(string, quotesToRemove = ['"', "'", "”", '`']) {
   // trim the string just in case
   string = string.trim();
   // loop on each quotes to remove

@@ -14,6 +14,7 @@ exports.default = rtrim;
  *
  * @param    {String}    string    The string to trim
  * @param    {String}    needle    The string to find an cut out if found
+ * @param     {Boolean}     [trimResult=true]       Specify if you want to trim the trimed string
  * @return    {String}    The trimed string
  *
  * @example    js
@@ -22,9 +23,13 @@ exports.default = rtrim;
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function rtrim(string, needle) {
+function rtrim(string, needle, trimResult = true) {
   if (string.substr(needle.length * -1) === needle) {
-    return string.substr(0, string.length - needle.length);
+    if (trimResult) {
+      return string.substr(0, string.length - needle.length).trim();
+    } else {
+      return string.substr(0, string.length - needle.length);
+    }
   } // nothing to trim
 
 

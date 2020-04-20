@@ -1,4 +1,5 @@
-"use strict";
+"use strict"; // TODO documentation
+// TODO tests
 
 var _createClass = function () {
   function defineProperties(target, props) {

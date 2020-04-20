@@ -2,6 +2,8 @@ const __replaceTags = require('../html/replaceTags');
 const __chalk = require('chalk');
 __chalk.level = 3;
 
+// TODO tests
+
 /**
  * @name                                parseHtml
  * @namespace                           sugar.node.terminal

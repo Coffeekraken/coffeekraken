@@ -1,5 +1,5 @@
 const __deepMerge = require('../object/deepMerge');
-const __countLine = require('./countLine');
+const __countLine = require('../string/countLine');
 
 /**
  * @name                                    center

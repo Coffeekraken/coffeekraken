@@ -1,5 +1,7 @@
 const __terminalKit = require('terminal-kit').terminal;
 
+// TODO tests
+
 /**
  * @name                                      cursorPos
  * @namespace                                 sugar.node.terminal
@@ -13,6 +15,7 @@ const __terminalKit = require('terminal-kit').terminal;
  * const cursorPos = require('@coffeekraken/sugar/node/terminal/cursorPos');
  * await cursorPos(); // => { x: 10, y: 20 }
  * 
+ * @see       https://www.npmjs.com/package/terminal-kit
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function cursorPos() {

@@ -1,7 +1,6 @@
-const __splitLineEvery = require('./splitLineEvery');
-const __countLine = require('./countLine');
+const __splitLineEvery = require('./__wip__/splitLineEvery');
+const __countLine = require('../string/countLine');
 const __deepMerge = require('../object/deepMerge');
-const __replaceTags = require('../html/replaceTags');
 
 /**
  * @name                                          columns

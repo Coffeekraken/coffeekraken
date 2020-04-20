@@ -5,13 +5,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = queryStringToObject;
 
-var _ltrim = _interopRequireDefault(require("./ltrim"));
+var _ltrim = _interopRequireDefault(require("../string/ltrim"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name        queryStringToObject
- * @namespace       sugar.js.string
+ * @namespace       sugar.js.url
  * @type      Function
  *
  * Transform a query string into his object (key => pairs) representation

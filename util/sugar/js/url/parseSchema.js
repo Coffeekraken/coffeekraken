@@ -41,19 +41,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * //     project: {
  * //       optional: false,
  * //       raw: '{project:string}',
- * //       type: ['string'],
+ * //       type: 'string',
  * //       value: 'myApp'
  * //     },
  * //     branch: {
  * //       optional: true,
  * //       raw: '{?branch:string},
- * //       type: ['string'],
+ * //       type: 'string',
  * //       value: 'master'
  * //     },
  * //     idx: {
  * //       optional: true,
  * //       raw: '{?idx:number}',
- * //       type: ['number'],
+ * //       type: 'number',
  * //       value: 3
  * //     }
  * //   }
@@ -84,7 +84,6 @@ function parseSchema(url, schema) {
         type = part.split(':')[1].slice(0, -1);
         if (name.slice(0, 1) === '?') name = name.slice(1);
         if (type.slice(-1) === '?') type = type.slice(0, -1);
-        type = type.split('|');
       } else {
         name = part.slice(1, -1);
         if (name.slice(-1) === '?') name = name.slice(0, -1);
@@ -139,15 +138,15 @@ function parseSchema(url, schema) {
 
 
     if (schema.type) {
-      const types = schema.type;
+      const type = schema.type;
 
-      if (types.indexOf(typeof (0, _parse.default)(part)) === -1) {
+      if (type !== typeof (0, _parse.default)(part)) {
         match = false;
         const errorObj = {
           type: 'type',
-          requested: types.join(','),
+          requested: type,
           passed: typeof (0, _parse.default)(part),
-          description: `This param "${schema.name}" has to be a "${types.join(',')}" but he's a "${typeof (0, _parse.default)(part)}"...`
+          description: `This param "${schema.name}" has to be a "${type}" but he's a "${typeof (0, _parse.default)(part)}"...`
         };
         errors[schema.name] = errorObj;
         params[schema.name].error = errorObj;

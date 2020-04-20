@@ -7,7 +7,7 @@ exports.default = getAnimationProperties;
 
 var _getStyleProperty = _interopRequireDefault(require("./getStyleProperty"));
 
-var _toMs = _interopRequireDefault(require("../string/toMs"));
+var _convert = _interopRequireDefault(require("../time/convert"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -58,8 +58,8 @@ function getAnimationProperties(elm) {
 
   const props = {
     name: name.split(","),
-    duration: duration.split(",").map(value => (0, _toMs.default)(value)),
-    delay: `${delay}`.split(",").map(value => (0, _toMs.default)(value)),
+    duration: duration.split(",").map(value => (0, _convert.default)(value, 'ms')),
+    delay: `${delay}`.split(",").map(value => (0, _convert.default)(value, 'ms')),
     timingFunction: timingFunction.split(","),
     iterationCount: `${iterationCount}`.split(","),
     direction: direction.split(",")

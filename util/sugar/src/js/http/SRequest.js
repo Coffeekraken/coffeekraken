@@ -1,6 +1,6 @@
 import __axios from 'axios';
-import __strToHtml from "../string/strToHtml";
-import __htmlToStr from "../string/htmlToStr";
+import __strToHtml from "../html/strToHtml";
+import __htmlToString from "../html/toString";
 import __SRequestConfig from "./SRequestConfig";
 import __autoCast from "../string/autoCast";
 import __convert from '../time/convert';
@@ -116,11 +116,11 @@ export default class SRequest {
     if (contentType === 'text/html' && hash !== false && document !== undefined && document.querySelector !== undefined) {
       const $html = __strToHtml(response.data);
       if ($html.id === hash) {
-        finalResponse = __htmlToStr($html);
+        finalResponse = __htmlToString($html);
       } else {
         const $part = $html.querySelector(`#${hash}`);
         if ($part) {
-          finalResponse = __htmlToStr($part);
+          finalResponse = __htmlToString($part);
         }
       }
     } else if (contentType === 'application/json') {

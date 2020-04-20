@@ -1,5 +1,5 @@
 import __getStyleProperty from "./getStyleProperty";
-import __toMs from "../string/toMs";
+import __convert from '../time/convert';
 
 // TODO tests
 
@@ -50,8 +50,8 @@ export default function getAnimationProperties(elm) {
   // return the animation object
   const props = {
     name: name.split(","),
-    duration: duration.split(",").map(value => __toMs(value)),
-    delay: `${delay}`.split(",").map(value => __toMs(value)),
+    duration: duration.split(",").map(value => __convert(value, 'ms')),
+    delay: `${delay}`.split(",").map(value => __convert(value, 'ms')),
     timingFunction: timingFunction.split(","),
     iterationCount: `${iterationCount}`.split(","),
     direction: direction.split(",")

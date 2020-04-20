@@ -32,19 +32,19 @@ import __parseString from '../string/parse';
  * //     project: {
  * //       optional: false,
  * //       raw: '{project:string}',
- * //       type: ['string'],
+ * //       type: 'string',
  * //       value: 'myApp'
  * //     },
  * //     branch: {
  * //       optional: true,
  * //       raw: '{?branch:string},
- * //       type: ['string'],
+ * //       type: 'string',
  * //       value: 'master'
  * //     },
  * //     idx: {
  * //       optional: true,
  * //       raw: '{?idx:number}',
- * //       type: ['number'],
+ * //       type: 'number',
  * //       value: 3
  * //     }
  * //   }
@@ -81,7 +81,6 @@ export default function parseSchema(url, schema) {
         type = part.split(':')[1].slice(0, -1);
         if (name.slice(0, 1) === '?') name = name.slice(1);
         if (type.slice(-1) === '?') type = type.slice(0, -1);
-        type = type.split('|');
       } else {
         name = part.slice(1, -1);
         if (name.slice(-1) === '?') name = name.slice(0, -1);
@@ -141,14 +140,14 @@ export default function parseSchema(url, schema) {
 
     // check that all correspond to the schema
     if (schema.type) {
-      const types = schema.type;
-      if (types.indexOf(typeof __parseString(part)) === -1) {
+      const type = schema.type;
+      if (type !== typeof __parseString(part)) {
         match = false;
         const errorObj = {
           type: 'type',
-          requested: types.join(','),
+          requested: type,
           passed: typeof __parseString(part),
-          description: `This param "${schema.name}" has to be a "${types.join(',')}" but he's a "${typeof __parseString(part)}"...`
+          description: `This param "${schema.name}" has to be a "${type}" but he's a "${typeof __parseString(part)}"...`
         };
         errors[schema.name] = errorObj;
         params[schema.name].error = errorObj;

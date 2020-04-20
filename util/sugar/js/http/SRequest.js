@@ -7,9 +7,9 @@ exports.default = void 0;
 
 var _axios = _interopRequireDefault(require("axios"));
 
-var _strToHtml = _interopRequireDefault(require("../string/strToHtml"));
+var _strToHtml = _interopRequireDefault(require("../html/strToHtml"));
 
-var _htmlToStr = _interopRequireDefault(require("../string/htmlToStr"));
+var _toString = _interopRequireDefault(require("../html/toString"));
 
 var _SRequestConfig = _interopRequireDefault(require("./SRequestConfig"));
 
@@ -131,12 +131,12 @@ class SRequest {
       const $html = (0, _strToHtml.default)(response.data);
 
       if ($html.id === hash) {
-        finalResponse = (0, _htmlToStr.default)($html);
+        finalResponse = (0, _toString.default)($html);
       } else {
         const $part = $html.querySelector(`#${hash}`);
 
         if ($part) {
-          finalResponse = (0, _htmlToStr.default)($part);
+          finalResponse = (0, _toString.default)($part);
         }
       }
     } else if (contentType === 'application/json') {

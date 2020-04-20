@@ -1,8 +1,8 @@
-import ltrim from "./ltrim";
+import ltrim from "../string/ltrim";
 
 /**
  * @name        queryStringToObject
- * @namespace       sugar.js.string
+ * @namespace       sugar.js.url
  * @type      Function
  *
  * Transform a query string into his object (key => pairs) representation

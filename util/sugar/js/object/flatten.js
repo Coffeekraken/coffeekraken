@@ -25,6 +25,7 @@ exports.default = flatten;
  *    }
  * });
  *
+ * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function flatten(object, separation = '.', flattenArrays = false) {
   let toReturn = {};

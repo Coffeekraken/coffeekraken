@@ -18,19 +18,19 @@ module.exports = (__SConfig, __SConfigFsAdapter) => {
 
       expect(config.get('')).toEqual({
         "hello": "world",
+        "other": {
+          "cool": "Yop yop Nelson"
+        },
         "something": {
           "cool": "Hello world",
         },
       });
 
-      config.set('something.cool', 'Hello world');
+      await config.set('something.cool', 'Hello world');
 
-      config.set('other.cool', 'Yop yop Nelson');
+      await config.set('other.cool', 'Yop yop Nelson');
 
       expect(config.get('something')).toEqual({ cool: 'Hello world' });
-
-
-
 
       done();
     });

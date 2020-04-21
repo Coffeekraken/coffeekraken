@@ -20,9 +20,13 @@ module.exports = __diff => {
           coco: 'coco'
         },
         param: {
-          three: 'nelson'
+          three: 'nelson',
+          nelson: {
+            coco: 'eating'
+          }
         },
-        yes: true
+        added: 'value',
+        yes: false
       };
 
       const result = __diff(obj1, obj2);
@@ -30,7 +34,77 @@ module.exports = __diff => {
       expect(result).toEqual({
         hello: {
           coco: 'coco'
-        }
+        },
+        param: {
+          nelson: {
+            coco: 'eating'
+          }
+        },
+        added: 'value',
+        yes: false
+      });
+
+      const result2 = __diff(obj1, obj2, {
+        added: false
+      });
+
+      expect(result2).toEqual({
+        yes: false
+      });
+
+      const result3 = __diff(obj1, obj2, {
+        deleted: true
+      });
+
+      expect(result3).toEqual({
+        hello: {
+          world: 'hello world',
+          coco: 'coco'
+        },
+        plop: {
+          yop: 'coco'
+        },
+        param: {
+          nelson: {
+            coco: 'eating'
+          }
+        },
+        added: 'value',
+        yes: false
+      });
+
+      const result4 = __diff(obj1, obj2, {
+        equals: true
+      });
+
+      expect(result4).toEqual({
+        hello: {
+          coco: 'coco'
+        },
+        param: {
+          three: 'nelson',
+          nelson: {
+            coco: 'eating'
+          }
+        },
+        added: 'value',
+        yes: false
+      });
+
+      const result5 = __diff(obj1, obj2, {
+        updated: false
+      });
+
+      expect(result5).toEqual({
+        hello: {
+          coco: 'coco'
+        },
+        param: {
+          nelson: {
+            coco: 'eating'
+          }
+        },
+        added: 'value'
       });
       done();
     });

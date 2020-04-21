@@ -1,5 +1,7 @@
 const __fs = require('fs-extra');
 
+// TODO tests
+
 /**
  * @name        move
  * @namespace     sugar.node.fs

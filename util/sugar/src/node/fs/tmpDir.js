@@ -1,5 +1,7 @@
 const __tmpDir = require('temp-dir');
 
+// TODO tests
+
 /**
  * @name                            tmpDir
  * @namespace                       sugar.node.fs
@@ -16,6 +18,6 @@ const __tmpDir = require('temp-dir');
  * @see       https://www.npmjs.com/package/temp-dir
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function() {
+module.exports = function () {
   return __tmpDir;
 }

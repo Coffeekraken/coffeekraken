@@ -78,6 +78,7 @@ export default class SConfig {
    * - allowReset (true) {Boolean}: Specify if you can rest the configs during the process or not
    * - allowNew (false) {Boolean}: Specify you can create new configs with this instance or not
    * - autoLoad (true) {Boolean}: Specify if you want the config to be loaded automatically at instanciation
+   * - autoSave (true) {Boolean}: Specify if you want the setting to be saved through the adapters directly on "set" action
    * - throwErrorOnUndefinedConfig (true) {Boolean}: Specify if you want the class to throw some errors when get undefined configs
    * @return              {SConfig}                                           An SConfig instance with the once you can access/update the configs
    *
@@ -162,7 +163,7 @@ export default class SConfig {
       throw new Error(`You try to load the config from the adapter "${adapter}" but this adapter does not exists...`);
     }
     const config = await this._adapters[adapter].instance.load();
-    this._adapters[adapter].config = config;
+    this._adapters[adapter].config = JSON.parse(JSON.stringify(config));
     return config;
   }
 
@@ -238,19 +239,21 @@ export default class SConfig {
    * @name                                set
    * @namespace                           sugar.node.config.SConfig
    * @type                                Function
-   *
+   * @async
+   * 
    * Get a config depending on the dotted object path passed and either using the first registered adapter found, or the passed one
    *
    * @param                 {String}                      path                 The dotted object path for the value wanted
    * @param                 {Mixed}                       value                 The value to set
    * @param                 {String|Array}                      [adapters=Object.keys(this._adapters)]       The adapter you want to use or an array of adapters
-   *
+   * @return                {Promise}                                           A promise resolved once the setting has been correctly set (and save depending on your instance config)
+   * 
    * @example               js
    * config.set('log.frontend.mail.host', 'coffeekraken.io');
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  set(path, value, adapters = Object.keys(this._adapters)) {
+  async set(path, value, adapters = Object.keys(this._adapters)) {
 
     if (!this._settings.allowSet) {
       throw new Error(`You try to set a config value on the "${this._name}" SConfig instance but this instance does not allow to set values... Set the "settings.allowSet" property to allow this action...`);
@@ -273,8 +276,11 @@ export default class SConfig {
 
     // check if need to autoSave or not
     if (this._settings.autoSave) {
-      this.save(adapters);
+      return this.save(adapters);
     }
+
+    // return true
+    return true;
 
   }
 

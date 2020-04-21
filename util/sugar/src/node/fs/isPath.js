@@ -1,6 +1,8 @@
 const __isValidPath = require('is-valid-path');
 const __fs = require('fs');
 
+// TODO tests
+
 /**
  * @name                            isPath
  * @namespace                       sugar.node.fs
@@ -16,6 +18,7 @@ const __fs = require('fs');
  * const isPath = require('@coffeekraken/sugar/node/fs/isPath');
  * isPath('hello/world'); // => true
  * 
+ * @see       https://www.npmjs.com/package/is-valid-path
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function isPath(path, checkExistence = false) {

@@ -4,10 +4,13 @@ const __downloadsFolder = require('downloads-folder');
 const __path = require('path');
 const __mkdirp = require('mkdirp');
 
+// TODO tests
+
 /**
  * @name            downloadFolder
  * @namespace       sugar.node.github
  * @type            Function
+ * @async
  *
  * Provide the ability to download all the files in a particular folder of a specific repository
  *
@@ -43,7 +46,7 @@ module.exports = function downloadFolder(repo, path, destinationPath = __downloa
         // loop on each files in the folder
         response.forEach((fileObj) => {
           // check if exist a downloadUrl
-          if ( ! fileObj.download_url && fileObj.type === 'dir') {
+          if (!fileObj.download_url && fileObj.type === 'dir') {
             downloadFilesPromises.push(downloadFolder(repo, fileObj.path, destinationPath));
             return;
           }

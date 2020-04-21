@@ -1,9 +1,12 @@
 const __fs = require('fs-extra');
 
+// TODO tests
+
 /**
  * @name        emptyDir
  * @namespace     sugar.node.fs
  * @type          Function
+ * @async
  *
  * Empty a directory (async)
  *

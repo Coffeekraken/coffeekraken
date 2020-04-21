@@ -1,6 +1,6 @@
 /**
  * @name                header
- * @namespace           sugar.node.log
+ * @namespace           sugar.node.log.presets
  * @type                Function
  *
  * Log a header message containing infos like passed title, passed description and passed infos {Object}.

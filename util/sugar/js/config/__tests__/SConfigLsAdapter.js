@@ -3,7 +3,13 @@
 module.exports = (__SConfig, __SConfigLsAdapter) => {
   const config = new __SConfig('myCoolConfig', {
     adapters: [new __SConfigLsAdapter({
-      name: 'something'
+      name: 'something',
+      defaultConfig: {
+        adapter: 'ls',
+        joy: {
+          hello: 'world'
+        }
+      }
     })],
     allowNew: true
   });

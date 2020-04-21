@@ -1,6 +1,6 @@
 "use strict";
 
-const __base64 = require('../../crypt/base64');
+const __base64 = require('../../../crypt/base64');
 /**
  * @name                          basicFormater
  * @namespace                     sugar.node.auth.formaters

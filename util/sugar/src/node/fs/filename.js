@@ -1,5 +1,7 @@
 const __extension = require('./extension');
 
+// TODO tests
+
 /**
  * @name                       filename
  * @namespace                   sugar.node.fs

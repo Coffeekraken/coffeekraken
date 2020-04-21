@@ -2,6 +2,7 @@ const __fs = require('fs');
 const __deepMerge = require('../../object/deepMerge');
 const __tmpDir = require('../../fs/tmpDir');
 const __writeFileSync = require('../../fs/writeFileSync');
+const __diff = require('../../object/diff');
 
 const __SConfigAdapter = require('./SConfigAdapter');
 
@@ -45,27 +46,27 @@ module.exports = class SConfigFsAdapter extends __SConfigAdapter {
 
   async load() {
 
-    let defaultConfig = {};
-    let appConfig = {};
-    let userConfig = {};
+    this._defaultConfig = {};
+    this._appConfig = {};
+    this._userConfig = {};
 
     // load the default config if exists
     if (this.settings.defaultConfigPath && __fs.existsSync(this.settings.defaultConfigPath)) {
-      defaultConfig = require(this.settings.defaultConfigPath);
+      this._defaultConfig = require(this.settings.defaultConfigPath);
     }
 
     // load the app config if exists
     if (this.settings.appConfigPath && __fs.existsSync(this.settings.appConfigPath)) {
-      appConfig = require(this.settings.appConfigPath);
+      this._appConfig = require(this.settings.appConfigPath);
     }
 
     // load the user config
     if (this.settings.userConfigPath && __fs.existsSync(this.settings.userConfigPath)) {
-      userConfig = require(this.settings.userConfigPath);
+      this._userConfig = require(this.settings.userConfigPath);
     }
 
     // mix the configs and save them in the instance
-    return __deepMerge(defaultConfig, appConfig, userConfig);
+    return __deepMerge(this._defaultConfig, this._appConfig, this._userConfig);
 
   }
 
@@ -75,10 +76,14 @@ module.exports = class SConfigFsAdapter extends __SConfigAdapter {
       throw new Error(`You try to save the config "${this.name}" but the "settings.userConfigPath" is not set...`);
     }
 
+    const baseConfig = __deepMerge(this._defaultConfig, this._appConfig);
+
+    newConfig = __diff(baseConfig, newConfig);
+
+
     let newConfigString = `
       module.exports = ${JSON.stringify(newConfig)};
     `;
-    console.log(newConfigString);
 
     // write the new config file
     __writeFileSync(this.settings.userConfigPath, newConfigString);

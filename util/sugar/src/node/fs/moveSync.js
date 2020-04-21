@@ -1,5 +1,7 @@
 const __fs = require('fs-extra');
 
+// TODO tests
+
 /**
  * @name        moveSync
  * @namespace     sugar.node.fs

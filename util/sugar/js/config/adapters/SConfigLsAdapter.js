@@ -14,6 +14,8 @@ var _deepMerge = _interopRequireDefault(require("../../object/deepMerge"));
 
 var _SConfigAdapter = _interopRequireDefault(require("./SConfigAdapter"));
 
+var _diff = _interopRequireDefault(require("../../object/diff"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -46,10 +48,11 @@ module.exports = class SConfigLsAdapter extends _SConfigAdapter.default {
   }
 
   async save(newConfig = {}) {
+    const baseConfig = (0, _deepMerge.default)(this._settings.defaultConfig, this._settings.appConfig);
     localStorage.setItem(this._settings.name, (0, _toString.default)({
       default: this._settings.defaultConfig,
       app: this._settings.appConfig,
-      user: newConfig
+      user: (0, _diff.default)(baseConfig, newConfig)
     }));
     return true;
   }

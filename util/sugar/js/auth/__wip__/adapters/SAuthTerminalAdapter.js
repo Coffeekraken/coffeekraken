@@ -6,7 +6,7 @@ const __blessed = require('blessed');
 
 const __terminalKit = require('terminal-kit');
 
-const __parseHtml = require('../../terminal/parseHtml');
+const __parseHtml = require('../../../terminal/parseHtml');
 
 const __ora = require('ora');
 /**

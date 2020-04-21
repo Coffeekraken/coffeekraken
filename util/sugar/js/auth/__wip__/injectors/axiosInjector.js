@@ -1,6 +1,6 @@
 "use strict";
 
-const __deepMerge = require('../../object/deepMerge');
+const __deepMerge = require('../../../object/deepMerge');
 /**
  * @name                              axiosInjector
  * @namespace                         sugar.node.auth.injectors

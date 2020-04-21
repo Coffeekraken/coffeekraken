@@ -36,7 +36,8 @@ exports.default = map;
  */
 function map(object, processor) {
   Object.keys(object).forEach(prop => {
-    object[prop] = processor(object[prop], prop);
+    const res = processor(object[prop], prop);
+    if (res === -1) delete object[prop];else object[prop] = res;
   });
   return object;
 }

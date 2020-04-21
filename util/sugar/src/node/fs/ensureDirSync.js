@@ -1,5 +1,7 @@
 const __fs = require('fs-extra');
 
+// TODO tests
+
 /**
  * @name        ensureDirSync
  * @namespace     sugar.node.fs

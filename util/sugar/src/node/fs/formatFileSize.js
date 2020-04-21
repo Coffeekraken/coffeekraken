@@ -1,5 +1,7 @@
 const __filesize = require('filesize');
 
+// TODO tests
+
 /**
  * @name                                    formatFileSize
  * @namespace                               sugar.node.fs

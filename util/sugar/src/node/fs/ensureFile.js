@@ -1,10 +1,13 @@
 const __fs = require('fs-extra');
 
+// TODO tests
+
 /**
  * @name        ensureFile
  * @namespace     sugar.node.fs
  * @type          Function
- *
+ * @async
+ * 
  * Ensure that the passed file exists. If not, it will be created... (async)
  *
  * @param       {String}              file           The file to ensure that it exists...

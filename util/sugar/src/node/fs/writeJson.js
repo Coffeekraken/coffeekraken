@@ -1,10 +1,13 @@
 const __fs = require('fs-extra');
 
+// TODO tests
+
 /**
  * @name        writeJson
  * @namespace     sugar.node.fs
  * @type          Function
- *
+ * @async
+ * 
  * Write a JSON file. If don't exist, will be created as well as the directory structure if needed... ( (async)
  *
  * @param       {String}              path           The file path to write

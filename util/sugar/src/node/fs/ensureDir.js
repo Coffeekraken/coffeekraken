@@ -1,9 +1,12 @@
 const __fs = require('fs-extra');
 
+// TODO tests
+
 /**
  * @name        ensureDir
  * @namespace     sugar.node.fs
  * @type          Function
+ * @async
  *
  * Ensure that the passed directory exists. If not, will be created recursively... (async)
  *

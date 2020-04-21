@@ -5,6 +5,7 @@ import __parse from '../../string/parse';
 import __stringifyObject from 'stringify-object';
 import __deepMerge from '../../object/deepMerge';
 import __SConfigAdapter from './SConfigAdapter';
+import __diff from '../../object/diff';
 
 /**
  * @name                  SConfigLsAdapter
@@ -41,10 +42,11 @@ module.exports = class SConfigLsAdapter extends __SConfigAdapter {
   }
 
   async save(newConfig = {}) {
+    const baseConfig = __deepMerge(this._settings.defaultConfig, this._settings.appConfig);
     localStorage.setItem(this._settings.name, __toString({
       default: this._settings.defaultConfig,
       app: this._settings.appConfig,
-      user: newConfig
+      user: __diff(baseConfig, newConfig)
     }));
     return true;
   }

@@ -1,10 +1,13 @@
 const __getSize = require('get-folder-size');
 const __filesize = require('filesize');
 
+// TODO tests
+
 /**
  * @name                            folderSize
  * @namespace                       sugar.node.fs
  * @type                            Function
+ * @async
  *
  * Calculate the size of the passed folder and return it through a promise, either in raw format, either in human readdable one...
  *

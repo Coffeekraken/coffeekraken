@@ -1,9 +1,12 @@
 const __fs = require('fs-extra');
 
+// TODO tests
+
 /**
  * @name        copy
  * @namespace     sugar.node.fs
  * @type          Function
+ * @async
  *
  * Copy a file or directory (async)
  *

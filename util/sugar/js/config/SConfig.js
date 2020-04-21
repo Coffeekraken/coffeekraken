@@ -173,7 +173,7 @@ class SConfig {
     }
 
     const config = await this._adapters[adapter].instance.load();
-    this._adapters[adapter].config = config;
+    this._adapters[adapter].config = JSON.parse(JSON.stringify(config));
     return config;
   }
   /**
@@ -259,7 +259,7 @@ class SConfig {
    */
 
 
-  set(path, value, adapters = Object.keys(this._adapters)) {
+  async set(path, value, adapters = Object.keys(this._adapters)) {
     if (!this._settings.allowSet) {
       throw new Error(`You try to set a config value on the "${this._name}" SConfig instance but this instance does not allow to set values... Set the "settings.allowSet" property to allow this action...`);
     } // check if we allow new config or not
@@ -278,8 +278,11 @@ class SConfig {
     }); // check if need to autoSave or not
 
     if (this._settings.autoSave) {
-      this.save(adapters);
-    }
+      return this.save(adapters);
+    } // return true
+
+
+    return true;
   }
 
 }

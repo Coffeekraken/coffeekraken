@@ -240,7 +240,6 @@ class SColor {
    * And still some content
    *
    * And content content content...
-   * @return        {Object}        A cool and awesome object
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */

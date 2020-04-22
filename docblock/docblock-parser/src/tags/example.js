@@ -1,6 +1,5 @@
-"use strict";
-
 const __upperFirst = require('@coffeekraken/sugar/js/string/upperFirst');
+
 /**
  * @name              example
  * @namespace         src.tags
@@ -13,15 +12,12 @@ const __upperFirst = require('@coffeekraken/sugar/js/string/upperFirst');
  * 
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
-
-
 module.exports = function example(data) {
   if (data.content && data.content[data.content.length - 1] === '') {
     data.content = data.content.slice(0, -1);
   }
-
   return {
     language: typeof data.value === 'string' ? data.value.toLowerCase() : data.value,
     code: data.content.join('\n')
   };
-};
+}

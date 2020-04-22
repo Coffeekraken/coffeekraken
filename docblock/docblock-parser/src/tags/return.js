@@ -1,6 +1,5 @@
-"use strict";
-
 const __upperFirst = require('@coffeekraken/sugar/js/string/upperFirst');
+
 /**
  * @name              return
  * @namespace         src.tags
@@ -13,12 +12,10 @@ const __upperFirst = require('@coffeekraken/sugar/js/string/upperFirst');
  * 
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
-
-
 module.exports = function returnTag(data) {
   const stringArray = data.value.trim().split(/(?<=^\S+)\s/);
   return {
     type: __upperFirst(stringArray[0].replace('{', '').replace('}', '').trim()),
     description: stringArray[1].trim()
   };
-};
+}

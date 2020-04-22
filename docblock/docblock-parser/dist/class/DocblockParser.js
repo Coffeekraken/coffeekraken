@@ -1,20 +1,32 @@
-const __deepMerge = require('@coffeekraken/sugar/js/object/deepMerge');
-const __map = require('@coffeekraken/sugar/js/object/map');
-const __defaultConfig = require('../docblock-parser.config');
+"use strict";
 
-// TODO tag function implementation for: listens, member, var, event, borrows, yields, typedef and throws
+var _temp;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+const __deepMerge = require('@coffeekraken/sugar/js/object/deepMerge');
+
+const __map = require('@coffeekraken/sugar/js/object/map');
+
+const __defaultConfig = require('../docblock-parser.config'); // TODO tag function implementation for: listens, member, var, event, borrows, yields, typedef and throws
+
 
 const __authorTag = require('../tags/author');
+
 const __simpleValueTag = require('../tags/simpleValue');
+
 const __descriptionTag = require('../tags/description');
+
 const __returnTag = require('../tags/return');
+
 const __exampleTag = require('../tags/example');
+
 const __paramTag = require('../tags/param');
+
 const __snippetTag = require('../tags/snippet');
 
 const tagsMap = {
   author: __authorTag,
-
   abstract: __simpleValueTag,
   final: __simpleValueTag,
   async: __simpleValueTag,
@@ -78,35 +90,23 @@ const tagsMap = {
   version: __simpleValueTag,
   enum: __simpleValueTag,
   src: __simpleValueTag,
-
   description: __descriptionTag,
   desc: __descriptionTag,
-
   // yields: __yieldsTag,
-
   // typedef: __typedefTag,
-
   // throws: __throwsTag,
-
   return: __returnTag,
-
   param: __paramTag,
   property: __paramTag,
   prop: __paramTag,
-
   // listens: __listensTag,
-
   // member: __memberTag,
   // var: __memberTag,
-
   // event: __eventTag,
-
   // borrows: __borrowsTag,
-
   snippet: __snippetTag,
   example: __exampleTag
 };
-
 /**
  * @name                  DockblockParser
  * @namespace             src.class
@@ -123,8 +123,8 @@ const tagsMap = {
  * 
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
-module.exports = class DocblockParser {
 
+module.exports = (_temp = class DocblockParser {
   /**
    * @name              _settings
    * @type              Object
@@ -134,7 +134,6 @@ module.exports = class DocblockParser {
    * 
    * @author 	Olivier Bossel <olivier.bossel@gmail.com>
    */
-  _settings = {};
 
   /**
    * @name            constructor
@@ -147,11 +146,12 @@ module.exports = class DocblockParser {
    * @author 	Olivier Bossel <olivier.bossel@gmail.com>
    */
   constructor(settings = {}) {
+    _defineProperty(this, "_settings", {});
+
     this._settings = __deepMerge(__defaultConfig, {
       tags: tagsMap
     }, settings);
   }
-
   /**
    * @name          parse
    * @type          Function
@@ -165,20 +165,17 @@ module.exports = class DocblockParser {
    * 
    * @author 	Olivier Bossel <olivier.bossel@gmail.com>
    */
+
+
   parse(string, settings = {}) {
-
     // search for the docblock(s) (?:[ \t]*\*[ \t]*)(?:@([a-zA-Z]+)[ \t]*)?(?:([^{\n-]+)[ \t]+)?(?:{([a-z|A-Z]+)}[ \t]*)?(.*)
-    // const docblocksRawStrings = string.match(/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/g).map(s => {
-    const docblocksRawStrings = string.match(/\/\*{2}([\s\S]+?)\*\//g).map(s => {
+    const docblocksRawStrings = string.match(/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/g).map(s => {
       return `/${s}/`;
-    });
+    }); // store the docblocks object parsed lines
 
-    // store the docblocks object parsed lines
-    const docblocks = [];
+    const docblocks = []; // loop on found docblocks
 
-    // loop on found docblocks
     docblocksRawStrings.forEach(block => {
-
       // some variables
       let currentTag = null;
       let currentContent = [];
@@ -188,26 +185,28 @@ module.exports = class DocblockParser {
 
       function add() {
         if (currentContent.length) currentObj.content = currentContent;
+
         if (docblockObj.hasOwnProperty(currentTag) && !Array.isArray(docblockObj[currentTag])) {
           const currentValue = docblockObj[currentTag];
           docblockObj[currentTag] = [currentValue];
         }
+
         if (!currentObj.value) currentObj.value = true;
+
         if (Array.isArray(docblockObj[currentTag])) {
           docblockObj[currentTag].push(currentObj);
         } else {
           docblockObj[currentTag] = currentObj;
         }
+
         currentObj = {};
         currentContent = [];
         currentTag = null;
-      }
+      } // split the block by tags
 
-      // split the block by tags
+
       const lines = block.split('\n').map(l => l.trim());
-
       lines.forEach(line => {
-
         // get the tag name
         const tagNameReg = /\*[\s]?@([a-zA-Z0-9]+)/;
         const tagNameMatch = line.match(tagNameReg);
@@ -219,19 +218,23 @@ module.exports = class DocblockParser {
             if (currentTag && currentObj.value) {
               add();
             }
+
             previousWasEmptyLine = true;
           }
         } else if (tagNameMatch) {
           if (currentTag) {
             add();
           }
+
           currentTag = tagNameMatch[1];
           line = line.replace(tagNameMatch[0], '').trim();
+
           if (line.length > 0) {
             currentObj.value = line;
           } else {
             currentObj.value = true;
           }
+
           previousWasEmptyLine = false;
         } else if (previousWasEmptyLine) {
           currentTag = 'description';
@@ -242,30 +245,23 @@ module.exports = class DocblockParser {
           line = line.replace('/**', '');
           line = line.replace('*/', '');
           line = line.replace('*', '');
+
           if (line.trim().length) {
             currentContent.push(line);
           }
         }
       });
-
       add();
-
       docblocks.push(docblockObj);
+    }); // loop on each docblocks to process the parsed lines
 
-    });
-
-    // loop on each docblocks to process the parsed lines
     docblocks.forEach(block => {
-
       block = __map(block, (value, prop) => {
         if (this._settings.tags[prop]) return this._settings.tags[prop](value);
         return __simpleValueTag(value);
       });
-
     });
-
     return docblocks;
-
   }
 
-}
+}, _temp);

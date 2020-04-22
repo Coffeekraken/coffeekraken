@@ -1,8 +1,6 @@
-"use strict";
-
 const __parse = require('@coffeekraken/sugar/js/string/parse');
-
 const __upperFirst = require('@coffeekraken/sugar/js/string/upperFirst');
+
 /**
  * @name              param
  * @namespace         src.tags
@@ -15,16 +13,15 @@ const __upperFirst = require('@coffeekraken/sugar/js/string/upperFirst');
  * 
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
-
-
 module.exports = function param(data) {
+
   if (!Array.isArray(data)) data = [data];
+
   const res = {};
+
   data.forEach(param => {
     const parts = param.value.split(/\s{2,20000}/).map(l => l.trim());
-
     let type = __upperFirst(parts[0].replace('{', '').replace('}', ''));
-
     const variable = parts[1];
     const description = parts[2];
     let name = variable;
@@ -47,6 +44,7 @@ module.exports = function param(data) {
       description,
       default: defaultValue
     };
+
   });
   return res;
-};
+}

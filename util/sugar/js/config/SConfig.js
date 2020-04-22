@@ -87,6 +87,7 @@ class SConfig {
    * - allowReset (true) {Boolean}: Specify if you can rest the configs during the process or not
    * - allowNew (false) {Boolean}: Specify you can create new configs with this instance or not
    * - autoLoad (true) {Boolean}: Specify if you want the config to be loaded automatically at instanciation
+   * - autoSave (true) {Boolean}: Specify if you want the setting to be saved through the adapters directly on "set" action
    * - throwErrorOnUndefinedConfig (true) {Boolean}: Specify if you want the class to throw some errors when get undefined configs
    * @return              {SConfig}                                           An SConfig instance with the once you can access/update the configs
    *
@@ -245,13 +246,15 @@ class SConfig {
    * @name                                set
    * @namespace                           sugar.node.config.SConfig
    * @type                                Function
-   *
+   * @async
+   * 
    * Get a config depending on the dotted object path passed and either using the first registered adapter found, or the passed one
    *
    * @param                 {String}                      path                 The dotted object path for the value wanted
    * @param                 {Mixed}                       value                 The value to set
    * @param                 {String|Array}                      [adapters=Object.keys(this._adapters)]       The adapter you want to use or an array of adapters
-   *
+   * @return                {Promise}                                           A promise resolved once the setting has been correctly set (and save depending on your instance config)
+   * 
    * @example               js
    * config.set('log.frontend.mail.host', 'coffeekraken.io');
    *

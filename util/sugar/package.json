@@ -15,28 +15,15 @@
   "license": "MIT",
   "scripts": {
     "test": "jest",
-    "build.js": "rm -rf dist && babel src/js -d js --ignore 'src/**/*.spec.js','src/**/*.test.js'"
-  },
-  "snippet.npm-package.filename": "sugar.node.code-snippets",
-  "snippet.npm-package.languages": [
-    "javascript",
-    "node",
-    "nodejs"
-  ],
-  "contributes": {
-    "snippets": [
-      {
-        "language": "javascript,node",
-        "path": "./src/node/snippets.json"
-      }
-    ]
+    "build.js": "rm -rf dist && babel src/js -d js --ignore 'src/**/*.spec.js','src/**/*.test.js'",
+    "snippets.node": "node src/node/generateSnippetsFile.js"
   },
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/plugin-proposal-export-default-from": "^7.8.3",
     "@ungap/custom-elements-builtin": "^0.1.2",
-    "@coffeekraken/docblock-parser": "^0.0.1",
     "ansi-escapes": "^4.3.0",
+    "app-root-path": "^3.0.0",
     "axios": "^0.19.2",
     "base-64": "^0.1.0",
     "blessed": "^0.1.81",
@@ -59,6 +46,7 @@
     "es6-object-assign": "^1.1.0",
     "fastdom": "^1.0.9",
     "filesize": "^6.0.1",
+    "find-package-json": "^1.2.0",
     "forever": "^2.0.0",
     "form-serialize": "^0.7.2",
     "fs-extra": "^6.0.1",
@@ -125,6 +113,7 @@
     "@babel/plugin-proposal-export-namespace-from": "^7.8.3",
     "@babel/plugin-transform-modules-commonjs": "^7.9.0",
     "@babel/preset-env": "^7.9.0",
+    "@coffeekraken/docblock-parser": "0.0.1",
     "@shopify/jest-dom-mocks": "^2.8.11",
     "@testing-library/jest-dom": "^5.3.0",
     "babel-plugin-add-module-exports": "^1.0.2",

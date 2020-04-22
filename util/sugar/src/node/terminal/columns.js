@@ -9,12 +9,10 @@ const __deepMerge = require('../object/deepMerge');
  *
  * Display your content using columns. The number of columns is defined by the number of items in the content array
  * 
- * @param:settings
- * - width (process.env.STDOUT_COLUMNS || process.stdout.columns) {Number}: The base width on which to calculate the columns
- * - padding (process.env.STDOUT_PADDING || 3) {Number}: The padding to apply on the sides
- * 
  * @param                 {Array}                       content                     The columns content stored in an Array
  * @param                 {Object}                      [settings={}]               An object of settings descripbed above
+ * - width (process.env.STDOUT_COLUMNS || process.stdout.columns) {Number}: The base width on which to calculate the columns
+ * - padding (process.env.STDOUT_PADDING || 3) {Number}: The padding to apply on the sides
  * @return                {String}                                                  The string to log in the terminal
  *
  * @example               js

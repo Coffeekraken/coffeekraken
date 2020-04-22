@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "description": "Simple, powerfull and extensible docblock parser that return a JSON representation to work with",
   "main": "src/index.js",
+  "scripts": {
+    "test": "jest",
+    "build.js": "rm -rf dist && babel src -d dist --ignore 'src/**/*.spec.js','src/**/*.test.js'"
+  },
   "keywords": [
     "coffee",
     "kraken",
@@ -24,8 +28,14 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-export-default-from": "^7.8.3",
+    "@babel/plugin-proposal-export-namespace-from": "^7.8.3",
+    "@babel/plugin-transform-modules-commonjs": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
     "@coffeekraken/docblock-to-markdown": "^0.0.3",
     "@coffeekraken/scripts-stack": "^0.0.4",
+    "babel-plugin-add-module-exports": "^1.0.2",
     "core-js": "^3.6.1",
     "jest": "^25.4.0",
     "lodash": "^4.17.2"

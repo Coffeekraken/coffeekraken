@@ -1787,6 +1787,32 @@
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+.clearfix-overflow {
+  overflow: hidden;
+}
+
+.clearfix-facebook {
+  display: table-cell;
+  vertical-align: top;
+  width: 10000px !important;
+}
+
+.clearfix-float {
+  float: left;
+  width: 100%;
+}
+
+.clearfix-micro, .clearfix {
+  zoom: 1;
+}
+.clearfix-micro:before, .clearfix:before, .clearfix-micro:after, .clearfix:after {
+  content: " ";
+  display: table;
+}
+.clearfix-micro:after, .clearfix:after {
+  clear: both;
+}
+
 /**
  * @name      coffeekraken-logo
  * @namespace     sugar.scss.mixin
@@ -3531,7 +3557,7 @@
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /**
- * @name      init-classes
+ * @name            init-classes
  * @namespace     sugar.scss.core.mixin
  * @type      mixin
  *
@@ -3540,6 +3566,7 @@
  *
  * @example     scss
  * \@include sugar.init-classes();
+ *
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
@@ -3764,6 +3791,555 @@
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+.pull-left {
+  /**
+  * @name 		```.pull-left```
+  * Allows you to pull an element to the left side
+  * @styleguide 	Helpers / Pull
+  * @example 	html
+   * <div>
+  * 	<span class="pull-left">Hello world</span>
+  * </div>
+  */
+  float: left;
+}
+
+.pull-right {
+  /**
+  * @name 		```.pull-right```
+  * Allows you to pull an element to the right side
+  * @styleguide 	Helpers / Pull
+  * @example 	html
+   * <div>
+  * 	<span class="pull-right">Hello world</span>
+  * </div>
+  */
+  float: right;
+}
+
+.relative {
+  /**
+  * @name 		```.relative```
+  * Set an element position as ```relative```
+  * @styleguide 	Helpers / Position
+  * @example 	html
+  * <div class="relative">
+  * 	I'm relative now
+  * </div>
+  */
+  position: relative;
+}
+
+.absolute {
+  /**
+  * @name 		```.absolute```
+  * Set an element position as ```absolute```
+  * @styleguide 	Helpers / Position
+  * @example 	html
+  * <div class="absolute">
+  * 	I'm absolute now
+  * </div>
+  */
+  position: absolute;
+}
+
+.clear-left {
+  /**
+  * @name 		```.clear-left```
+  * Clear the left float on the element
+  * @styleguide 	Helpers / Float
+  * @example 	html
+  * <div class="clear-left">
+  * 	I clear the left float
+  * </div>
+  */
+  clear: left;
+}
+
+.clear-right {
+  /**
+  * @name 		```.clear-right```
+  * Clear the right float on the element
+  * @styleguide 	Helpers / Float
+  * @example 	html
+  * <div class="clear-right">
+  * 	I clear the right float
+  * </div>
+  */
+  clear: right;
+}
+
+.clear {
+  /**
+  * @name 		```.clear```
+  * Clear both float on the element
+  * @styleguide 	Helpers / Float
+  * @example 	html
+  * <div class="clear">
+  * 	I clear both floats
+  * </div>
+  */
+  clear: both;
+}
+
+.pointer-events-none {
+  /**
+  * @name 		```.pointer-events-none```
+  * Disable any pointer events
+  * @styleguide 	Helpers / Pointer events
+  * @example 	html
+  * <div class="pointer-events-none">
+  * 	I will not react to any pointer events
+  * </div>
+  */
+  pointer-events: none;
+}
+
+.pointer-events-all {
+  /**
+  * @name 		```.pointer-events-all```
+  * Disable any pointer events
+  * @styleguide 	Helpers / Pointer events
+  * @example 	html
+  * <div class="pointer-events-all">
+  * 	I will not react to any pointer events
+  * </div>
+  */
+  pointer-events: all;
+}
+
+.block {
+  /**
+  * @name 		```.block```
+  * Display the element as ```block```
+  * @styleguide 	Helpers / Display
+  * @example 	html
+  * <div class="block">
+  * 	I'm displayed as block
+  * </div>
+  */
+  display: block;
+}
+
+.inline {
+  /**
+  * @name 		```.inline```
+  * Display the element as ```inline```
+  * @styleguide 	Helpers / Display
+  * @example 	html
+  * <div class="inline">
+  * 	I'm displayed as inline
+  * </div>
+  */
+  display: inline;
+}
+
+.inline-block {
+  /**
+  * @name 		```.inline-block```
+  * Display the element as ```inline-block```
+  * @styleguide 	Helpers / Display
+  * @example 	html
+  * <div class="inline-block">
+  * 	I'm displayed as inline-block
+  * </div>
+  */
+  display: inline-block;
+}
+
+.show {
+  /**
+  * @name 		```.show```
+  * Display the element as ```block```
+  * @styleguide 	Helpers / Display
+  * @example 	html
+  * <div class="show">
+  * 	I'm displayed
+  * </div>
+  */
+  display: block;
+}
+
+.show-inline {
+  /**
+  * @name 		```.show-inline```
+  * Display the element as ```inline-block```
+  * @styleguide 	Helpers / Display
+  * @example 	html
+  * <div class="show-inline">
+  * 	I'm inline displayed
+  * </div>
+  */
+  display: inline-block;
+}
+
+.hidden {
+  /**
+  * @name 		```.hidden```
+  * Hide the element by setting the display to ```none```
+  * @styleguide 	Helpers / Display
+  * @example 	html
+  * <div class="hidden">
+  * 	I'm hidden
+  * </div>
+  */
+  display: none;
+}
+
+.hide {
+  /**
+  * @name 		```.hide```
+  * Hide the element by setting the display to ```none```
+  * @styleguide 	Helpers / Display
+  * @example 	html
+  * <div class="hide">
+  * 	I'm hidden
+  * </div>
+  */
+  display: none;
+}
+
+.visible {
+  /**
+  * @name 		```.visible```
+  * Display the element by setting the visibility to ```visible```
+  * @styleguide 	Helpers / Display
+  * @example 	html
+  * <div class="visible">
+  * 	I'm visible
+  * </div>
+  */
+  visibility: visible;
+}
+
+.invisible {
+  /**
+  * @name 		```.invisible```
+  * Display the element by setting the visibility to ```hidden```
+  * @styleguide 	Helpers / Display
+  * @example 	html
+  * <div class="invisible">
+  * 	I'm invisible
+  * </div>
+  */
+  visibility: hidden;
+}
+
+.visually-hidden {
+  /**
+  * @name 		```.visually-hidden```
+  * Hide the element from display but not for SEO.
+  * This class use some tricks to make the element dissapear without using some ```display:none;```, etc...
+  * @styleguide 	Helpers / Display
+  * @example 	html
+  * <div class="visually-hidden">
+  * 	I'm only visually hidden
+  * </div>
+  */
+  margin: -1px;
+  padding: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip: rect(0, 0, 0, 0);
+  position: absolute;
+}
+
+.t-hidden {
+  /**
+  * @name 		```.t-hidden```
+  * Hide the text
+  * @styleguide 	Helpers / Text
+  * @example 	html
+  * <div class="t-hidden">
+  * 	I'm not visible
+  * </div>
+  */
+  overflow: hidden;
+  text-indent: -9000px;
+  display: block;
+}
+
+.t-truncate {
+  /**
+  * @name 		```.t-truncate```
+  * Hide the text
+  * @styleguide 	Helpers / Text
+  * @example 	html
+  * <div class="t-truncate">
+  * 	I'm truncated cause I talk a lot too much Nulla mauris eros, finibus ac faucibus et, tempus quis risus. Praesent sit amet nulla vel libero euismod sodales eu nec.
+  * </div>
+  */
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.t-truncate > * {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.t-left {
+  /**
+  * @name 		```.t-left```
+  * Align the text to the left
+  * @styleguide 	Helpers / Text Align
+  * @example 	html
+  * <div class="t-left">
+  * 	I'm left aligned
+  * </div>
+  */
+  text-align: left;
+}
+
+.t-right {
+  /**
+  * @name 		```.t-right```
+  * Align the text to the right
+  * @styleguide 	Helpers / Text Align
+  * @example 	html
+  * <div class="t-right">
+  * 	I'm right aligned
+  * </div>
+  */
+  text-align: right;
+}
+
+.t-center {
+  /**
+  * @name 		```.t-center```
+  * Align the text to the center
+  * @styleguide 	Helpers / Text Align
+  * @example 	html
+  * <div class="t-center">
+  * 	I'm centered
+  * </div>
+  */
+  text-align: center;
+}
+
+.t-justify {
+  /**
+  * @name 		```.t-justify```
+  * Make the text justified
+  * @styleguide 	Helpers / Text Align
+  * @example 	html
+  * <div class="t-justify">
+  * 	Nullam vel feugiat nunc. Phasellus facilisis, nisi sit amet viverra rhoncus, arcu risus volutpat dolor, sed euismod magna tellus ac purus. Praesent augue lorem, ullamcorper ac accumsan nec, suscipit eu.
+  * </div>
+  */
+  text-align: justify;
+}
+
+.t-lowercase {
+  /**
+  * @name 		```.t-lowercase```
+  * Transform the text to lowercase
+  * @styleguide 	Helpers / Text Transform
+  * @example 	html
+  * <div class="t-lowercase">
+  * 	I'M LOWERCASE
+  * </div>
+  */
+  text-transform: lowercase;
+}
+
+.t-uppercase {
+  /**
+  * @name 		```.t-uppercase```
+  * Transform the text to uppercase
+  * @styleguide 	Helpers / Text Transform
+  * @example 	html
+  * <div class="t-uppercase">
+  * 	I'm uppercase
+  * </div>
+  */
+  text-transform: uppercase;
+}
+
+.t-capitalize {
+  /**
+  * @name 		```.t-capitalize```
+  * Capizalize the words
+  * @styleguide 	Helpers / Text Transform
+  * @example 	html
+  * <div class="t-capitalize">
+  * 	I'm capitalized
+  * </div>
+  */
+  text-transform: capitalize;
+}
+
+.f-bold {
+  /**
+  * @name 		```.f-bold```
+  * Set the font-weight to ```bold```
+  * @styleguide 	Helpers / Font Weight
+  * @example 	html
+  * This <span class="f-bold">word</span> is bold
+  */
+  font-weight: bold;
+}
+
+.f-lighter {
+  /**
+  * @name 		```.f-lighter```
+  * Set the font-weight to ```lighter```
+  * @styleguide 	Helpers / Font Weight
+  * @example 	html
+  * 	This <span class="f-lighter">word</span> is lighter
+  */
+  font-weight: lighter;
+}
+
+.f-bolder {
+  /**
+  * @name 		```.f-bolder```
+  * Set the font-weight to ```bolder```
+  * @styleguide 	Helpers / Font Weight
+  * @example 	html
+  * This <span class="f-bolder">word</span> is bolder
+  */
+  font-weight: bolder;
+}
+
+.f-normal {
+  /**
+  * @name 		```.f-normal```
+  * Set the font-weight to ```normal```
+  * @styleguide 	Helpers / Font Weight
+  * @example 	html
+  * <div class="f-bold">
+  * 	This <span class="f-normal">word</span> is normal
+  * </div>
+  */
+  font-weight: normal;
+  font-style: normal;
+}
+
+.f-italic {
+  /**
+  * @name 		```.f-italic```
+  * Set the font-style to ```italic```
+  * @styleguide 	Helpers / Font
+  * @example 	html
+  * This <span class="f-italic">word</span> is italic
+  */
+  font-style: italic;
+}
+
+.f-oblique {
+  /**
+  * @name 		```.f-oblique```
+  * Set the font-style to ```oblique```
+  * @styleguide 	Helpers / Font Style
+  * @example 	html
+  * This <span class="f-oblique">word</span> is oblique
+  */
+  font-style: oblique;
+}
+
+.f-small-caps {
+  /**
+  * @name 		```.f-small-caps```
+  * Set the font-variant to ```small-caps```
+  * @styleguide 	Helpers / Font Variant
+  * @example 	html
+  * This <span class="f-small-caps">word</span> is small-caps
+  */
+  font-variant: small-caps;
+}
+
+.block-center {
+  /**
+  * @name 		```.block-center```
+  * Set the element to as ```display:block``` and center it
+  * @styleguide 	Helpers / Block
+  * @example 	html
+  * <div class="block-center bkg-primary" style="width:100px;">
+  * 	I'm a centered block
+  * </div>
+  */
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.abs-cover {
+  /**
+  * @name 		```.abs-cover```
+  * Set a size that will cover the entire parent surface by positionning it in absolute
+  * @styleguide 	Helpers / Sizes
+  * @example 	html
+  * <div class="ratio-16-9">
+  * 	<img src="https://source.unsplash.com/random" class="abs-cover" />
+  * </div>
+  */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.abs-contain {
+  /**
+  * @name 		```.abs-contain```
+  * Set a size that will contain the entire parent surface by positionning it in absolute
+  * @styleguide 	Helpers / Sizes
+  * @example 	html
+  * <div class="ratio-16-9">
+  * 	<img src="https://source.unsplash.com/random" class="abs-contain" />
+  * </div>
+  */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.abs-fit {
+  /**
+  * @name 		```.abs-fit```
+  * Set a size that will fit the entire parent surface by positionning it in absolute
+  * @styleguide 	Helpers / Sizes
+  * @example 	html
+  * <div class="ratio-16-9">
+  * 	<img src="https://source.unsplash.com/random" class="abs-fit" />
+  * </div>
+  */
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.mo {
+  /**
+  * @name 		```.mo .mo--center .mo__content```
+  * Famous media object class
+  * @styleguide 	Helpers / Media object
+  * @example 	html
+  * <div class="mo">
+  *   <div class="mo__content">
+  *     <img src="https://source.unsplash.com/random/100x100" />
+  *   </div>
+  *   <div class="mo__content">
+  *     <h2 class="h3">Hello World</h2>
+  *     <p class="p">Phasellus fringilla aliquet justo eget pulvinar. Donec in justo leo.</p>
+  *   </div>
+  * </div>
+  */
+  display: flex;
+  flex-wrap: nowrap;
+}
 .mo--center {
   align-items: center;
 }
@@ -3774,6 +4350,263 @@
 
 .mo__content {
   flex: 0 1 auto;
+}
+
+.clearfix {
+  /**
+  * @name 		```.clearfix```
+  * Apply the micro clearfix on the element
+  * @styleguide 	Helpers / Clearfix
+  * @example 	html
+  * <div class="clearfix bkg-primary">
+  * 	<div class="pull-right">right pulled</div>
+  * </div>
+  * <div class="bkg-primary">
+  * 	<div class="pull-right">right pulled without clearfix</div>
+  * </div>
+  */
+}
+
+.clearfix-float {
+  /**
+  * @name 		```.clearfix-float```
+  * Apply the float clearfix on the element
+  * @styleguide 	Helpers / Clearfix
+  * @example 	html
+  * <div class="clearfix-float bkg-primary">
+  * 	<div class="pull-right">right pulled</div>
+  * </div>
+  * <div class="bkg-primary">
+  * 	<div class="pull-right">right pulled without clearfix</div>
+  * </div>
+  */
+}
+
+.clearfix-micro, .clearfix {
+  /**
+  * @name 		```.clearfix```
+  * Apply the micro clearfix on the element
+  * @styleguide 	Helpers / Clearfix
+  * @example 	html
+  * <div class="clearfix bkg-primary">
+  * 	<div class="pull-right">right pulled</div>
+  * </div>
+  * <div class="bkg-primary">
+  * 	<div class="pull-right">right pulled without clearfix</div>
+  * </div>
+  */
+}
+
+.clearfix-overflow {
+  /**
+  * @name 		```.clearfix-overflow```
+  * Apply the overflow clearfix on the element
+  * @styleguide 	Helpers / Clearfix
+  * @example 	html
+  * <div class="clearfix-overflow bkg-primary">
+  * 	<div class="pull-right">right pulled</div>
+  * </div>
+  * <div class="bkg-primary">
+  * 	<div class="pull-right">right pulled without clearfix</div>
+  * </div>
+  */
+}
+
+.clearfix-facebook {
+  /**
+  * @name 		```.clearfix-facebook```
+  * Apply the facebook clearfix on the element
+  * @styleguide 	Helpers / Clearfix
+  * @example 	html
+  * <div class="clearfix-facebook bkg-primary">
+  * 	<div class="pull-right">right pulled</div>
+  * </div>
+  * <div class="bkg-primary">
+  * 	<div class="pull-right">right pulled without clearfix</div>
+  * </div>
+  */
+}
+
+.ratio-21-9 {
+  /**
+  * @name 		```.ratio-21-9```
+  * Keep a 16/9 ratio on a particular element. Applied by setting height to 0 and paddingtop to 100% / 16 * 9
+  * @styleguide 	Helpers / Ratios
+  * @example 	html
+  * <div class="bkg-primary ratio-21-9"></div>
+  */
+  position: relative;
+}
+.ratio-21-9::before {
+  content: "";
+  padding-top: 42.8571428571%;
+  float: left;
+}
+.ratio-21-9::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.ratio-16-9 {
+  /**
+  * @name 		```.ratio-16-9```
+  * Keep a 16/9 ratio on a particular element. Applied by setting height to 0 and paddingtop to 100% / 16 * 9
+  * @styleguide 	Helpers / Ratios
+  * @example 	html
+  * <div class="bkg-primary ratio-16-9"></div>
+  */
+  position: relative;
+}
+.ratio-16-9::before {
+  content: "";
+  padding-top: 56.25%;
+  float: left;
+}
+.ratio-16-9::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.ratio-4-3 {
+  /**
+  * @name 		```.ratio-4-3```
+  * Keep a 4/3 ratio on a particular element. Applied by setting height to 0 and paddingtop to 100% / 4 * 3
+  * @styleguide 	Helpers / Ratios
+  * @example 	html
+  * <div class="bkg-primary ratio-4-3"></div>
+  */
+  position: relative;
+}
+.ratio-4-3::before {
+  content: "";
+  padding-top: 75%;
+  float: left;
+}
+.ratio-4-3::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.ratio-1-1 {
+  /**
+  * @name 		```.ratio-1-1```
+  * Keep a 1/1 ratio on a particular element. Applied by setting height to 0 and paddingtop to 100%
+  * @styleguide 	Helpers / Ratios
+  * @example 	html
+  * <div class="bkg-primary ratio-1-1"></div>
+  */
+  position: relative;
+}
+.ratio-1-1::before {
+  content: "";
+  padding-top: 100%;
+  float: left;
+}
+.ratio-1-1::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.no-transitions {
+  /**
+  * @name 		```.no-transitions```
+  * Disable the transitions <span class="f-bold">only on the element</span>
+  * @styleguide 	Helpers / Transitions
+  * @example 	html
+  * <div class="no-transitions">
+  * 	I have no more transitions
+  * 	<div>But I have</div>
+  * </div>
+  */
+}
+.no-transitions, .no-transitions:before, .no-transitions:after {
+  transition: none !important;
+}
+
+.clear-transitions {
+  /**
+  * @name 		```.clear-transitions```
+  * Disable the transitions <span class="f-bold">on the element and all his children</span>
+  * @styleguide 	Helpers / Transitions
+  * @example 	html
+  * <div class="clear-transitions">
+  * 	I have no more transitions
+  * 	<div>Me neither</div>
+  * </div>
+  */
+}
+.clear-transitions, .clear-transitions:before, .clear-transitions:after, .clear-transitions *, .clear-transitions *:before, .clear-transitions *:after {
+  transition: none !important;
+}
+
+.no-animations {
+  /**
+  * @name 		```.no-animations```
+  * Disable the animations <span class="f-bold">only on the element</span>
+  * @styleguide 	Helpers / Animations
+  * @example 	html
+  * <div class="no-animations">
+  * 	I have no more animations
+  * 	<div>But I have</div>
+  * </div>
+  */
+}
+.no-animations, .no-animations:before, .no-animations:after {
+  animation: none !important;
+}
+
+.clear-animations {
+  /**
+  * @name 		```.clear-animations```
+  * Disable the transitions <span class="f-bold">on the element and all his children</span>
+  * @styleguide 	Helpers / Animations
+  * @example 	html
+  * <div class="clear-animations">
+  * 	I have no more animations
+  * 	<div>Me neither</div>
+  * </div>
+  */
+}
+.clear-animations, .clear-animations:before, .clear-animations:after, .clear-animations *, .clear-animations *:before, .clear-animations *:after {
+  animation: none !important;
+}
+
+.no-transmations {
+  /**
+  * @name 		```.no-transmations```
+  * Disable the animations and transitions <span class="f-bold">only on the element</span>
+  * @styleguide 	Helpers / Transmations
+  * @example 	html
+  * <div class="no-transmations">
+  * 	I have no more animations or transitions
+  * 	<div>But I have</div>
+  * </div>
+  */
+}
+.no-transmations, .no-transmations:before, .no-transmations:after {
+  transition: none !important;
+  animation: none !important;
+}
+
+.clear-transmations {
+  /**
+  * @name 		```.clear-transmations```
+  * Disable the animations and transitions <span class="f-bold">on the element and all his children</span>
+  * @styleguide 	Helpers / Transmations
+  * @example 	html
+  * <div class="clear-transmations">
+  * 	I have no more animations or transitions
+  * 	<div>Me neither</div>
+  * </div>
+  */
+}
+.clear-transmations, .clear-transmations:before, .clear-transmations:after, .clear-transmations *, .clear-transmations *:before, .clear-transmations *:after {
+  transition: none !important;
+  animation: none !important;
 }
 
 /**
@@ -3904,6 +4737,2944 @@
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+/**
+* @name       	tr-fast
+   * @styleguide  	class.transition
+   *
+   * Apply the transition **fast**
+   *
+* @example 	html
+* <div class="tr-fast">
+* 	I'm transitionned with fast
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.tr-fast {
+  transition: all 0.1s ease-in-out 0s, outline-color 0.000001s linear 0s;
+  outline-color: black;
+}
+
+/**
+* @name       	tr-default
+   * @styleguide  	class.transition
+   *
+   * Apply the transition **default**
+   *
+* @example 	html
+* <div class="tr-default">
+* 	I'm transitionned with default
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.tr {
+  transition: all 0.2s ease-in-out 0s, outline-color 0.000001s linear 0s;
+  outline-color: black;
+}
+
+/**
+* @name       	tr-slow
+   * @styleguide  	class.transition
+   *
+   * Apply the transition **slow**
+   *
+* @example 	html
+* <div class="tr-slow">
+* 	I'm transitionned with slow
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.tr-slow {
+  transition: all 0.5s ease-in-out 0s, outline-color 0.000001s linear 0s;
+  outline-color: black;
+}
+
+/**
+* @name       	  f-default
+   * @styleguide  	class.font
+   *
+   * Apply the font **default**
+   *
+* @example 	html
+* <div class="f-default">
+* 	I have the font "default" applied
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.f {
+  font-family: "Helvetica Neue", Helvetica, Verdana, Arial, sans-serif;
+  font-weight: normal;
+}
+
+/**
+* @name       	  f-quote
+   * @styleguide  	class.font
+   *
+   * Apply the font **quote**
+   *
+* @example 	html
+* <div class="f-quote">
+* 	I have the font "quote" applied
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.f-quote {
+  font-family: Palatino, Times, Georgia, serif;
+  font-weight: normal;
+}
+
+/**
+* @name       	  f-code
+   * @styleguide  	class.font
+   *
+   * Apply the font **code**
+   *
+* @example 	html
+* <div class="f-code">
+* 	I have the font "code" applied
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.f-code {
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-weight: normal;
+}
+
+/**
+* @name       	m-b-smaller
+   * @styleguide  	class.margin.smaller
+   *
+   * Set the **bottom** margin to the **0.3** size
+   *
+* @example 	html
+* <div class="m-b-smaller" style="background:#f2bc2b; width:100px; height:5px"></div>
+* <div style="background:#2b3438; width:100px; height:5px"></div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.m-b-smaller {
+  margin-bottom: 5px;
+}
+
+/**
+* @name          m-t-smaller
+   * @styleguide  	class.margin.smaller
+   *
+   * Set the **top** margin to the **0.3** size
+   *
+* @example 	html
+* <div style="background:#f2bc2b; width:100px; height:5px"></div>
+* <div class="m-t-smaller" style="background:#2b3438; width:100px; height:5px"></div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.m-t-smaller {
+  margin-top: 5px;
+}
+
+/**
+* @name       	m-l-smaller
+   * @styleguide  	class.margin.smaller
+   *
+   * Set the **left** margin to the **0.3** size
+   *
+* @example 	html
+* <div style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+* <div class="m-l-smaller" style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.m-l-smaller {
+  margin-left: 5px;
+}
+
+/**
+* @name       	m-r-smaller
+   * @styleguide  	class.margin.smaller
+   *
+   * Set the **right* margin to the **0.3** size
+   *
+* @example 	html
+* <div class="m-r-smaller" style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+* <div style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.m-r-smaller {
+  margin-right: 5px;
+}
+
+/**
+* @name       	m-s-smaller
+   * @styleguide  	class.margin.smaller
+   *
+   * Set the **side** margin to the **0.3** size
+   *
+* @example 	html
+* <div class="m-s-smaller" style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+* <div style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.m-s-smaller {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+/**
+* @name        p-smaller
+   * @styleguide  	class.padding.smaller
+   *
+   * Set the paddings to the **0.3** size
+   *
+* @example 	html
+* <div class="p-smaller" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* 	<div style="background:#2b3438; width:100%; height:100%"></div>
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.p-smaller {
+  padding: 5px;
+}
+
+/**
+* @name       	p-b-smaller
+   * @styleguide  	class.padding.smaller
+   *
+   * Set the **bottom** padding to the **0.3** size
+   *
+* @example 	html
+* <div class="p-b-smaller" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* 	<div style="background:#2b3438; width:100%; height:100%"></div>
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.p-b-smaller {
+  padding-bottom: 5px;
+}
+
+/**
+* @name       	p-t-smaller
+   * @styleguide  	class.padding.smaller
+   *
+   * Set the **top** padding to the **0.3** size
+   *
+* @example 	html
+* <div class="p-t-smaller" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* 	<div style="background:#2b3438; width:100%; height:100%"></div>
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.p-t-smaller {
+  padding-top: 5px;
+}
+
+/**
+* @name       	p-l-smaller
+   * @styleguide  	class.padding.smaller
+   *
+   * Set the **left** padding  to the **0.3** size
+   *
+* @example 	html
+* <div class="p-l-smaller" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* 	<div style="background:#2b3438; width:100%; height:100%"></div>
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.p-l-smaller {
+  padding-left: 5px;
+}
+
+/**
+* @name       	p-r-smaller
+   * @styleguide  	class.padding.smaller
+   *
+   * Set the **right** padding  to the **0.3** size
+   *
+* @example 	html
+* <div class="p-r-smaller" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* 	<div style="background:#2b3438; width:100%; height:100%"></div>
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.p-r-smaller {
+  padding-right: 5px;
+}
+
+/**
+* @name       	p-s-smaller
+   * @styleguide  	class.padding.smaller
+   *
+   * Set the **side** padding  to the **0.3** size
+   *
+* @example 	html
+* <div class="p-s-smaller" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* 	<div style="background:#2b3438; width:100%; height:100%"></div>
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.p-s-smaller {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+/**
+* @name       	m-b-small
+   * @styleguide  	class.margin.small
+   *
+   * Set the **bottom** margin to the **0.6** size
+   *
+* @example 	html
+* <div class="m-b-small" style="background:#f2bc2b; width:100px; height:5px"></div>
+* <div style="background:#2b3438; width:100px; height:5px"></div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.m-b-small {
+  margin-bottom: 10px;
+}
+
+/**
+* @name          m-t-small
+   * @styleguide  	class.margin.small
+   *
+   * Set the **top** margin to the **0.6** size
+   *
+* @example 	html
+* <div style="background:#f2bc2b; width:100px; height:5px"></div>
+* <div class="m-t-small" style="background:#2b3438; width:100px; height:5px"></div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.m-t-small {
+  margin-top: 10px;
+}
+
+/**
+* @name       	m-l-small
+   * @styleguide  	class.margin.small
+   *
+   * Set the **left** margin to the **0.6** size
+   *
+* @example 	html
+* <div style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+* <div class="m-l-small" style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.m-l-small {
+  margin-left: 10px;
+}
+
+/**
+* @name       	m-r-small
+   * @styleguide  	class.margin.small
+   *
+   * Set the **right* margin to the **0.6** size
+   *
+* @example 	html
+* <div class="m-r-small" style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+* <div style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.m-r-small {
+  margin-right: 10px;
+}
+
+/**
+* @name       	m-s-small
+   * @styleguide  	class.margin.small
+   *
+   * Set the **side** margin to the **0.6** size
+   *
+* @example 	html
+* <div class="m-s-small" style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+* <div style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.m-s-small {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/**
+* @name        p-small
+   * @styleguide  	class.padding.small
+   *
+   * Set the paddings to the **0.6** size
+   *
+* @example 	html
+* <div class="p-small" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* 	<div style="background:#2b3438; width:100%; height:100%"></div>
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.p-small {
+  padding: 10px;
+}
+
+/**
+* @name       	p-b-small
+   * @styleguide  	class.padding.small
+   *
+   * Set the **bottom** padding to the **0.6** size
+   *
+* @example 	html
+* <div class="p-b-small" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* 	<div style="background:#2b3438; width:100%; height:100%"></div>
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.p-b-small {
+  padding-bottom: 10px;
+}
+
+/**
+* @name       	p-t-small
+   * @styleguide  	class.padding.small
+   *
+   * Set the **top** padding to the **0.6** size
+   *
+* @example 	html
+* <div class="p-t-small" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* 	<div style="background:#2b3438; width:100%; height:100%"></div>
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.p-t-small {
+  padding-top: 10px;
+}
+
+/**
+* @name       	p-l-small
+   * @styleguide  	class.padding.small
+   *
+   * Set the **left** padding  to the **0.6** size
+   *
+* @example 	html
+* <div class="p-l-small" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* 	<div style="background:#2b3438; width:100%; height:100%"></div>
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.p-l-small {
+  padding-left: 10px;
+}
+
+/**
+* @name       	p-r-small
+   * @styleguide  	class.padding.small
+   *
+   * Set the **right** padding  to the **0.6** size
+   *
+* @example 	html
+* <div class="p-r-small" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* 	<div style="background:#2b3438; width:100%; height:100%"></div>
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.p-r-small {
+  padding-right: 10px;
+}
+
+/**
+* @name       	p-s-small
+   * @styleguide  	class.padding.small
+   *
+   * Set the **side** padding  to the **0.6** size
+   *
+* @example 	html
+* <div class="p-s-small" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* 	<div style="background:#2b3438; width:100%; height:100%"></div>
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.p-s-small {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+/**
+* @name       	m-b
+   * @styleguide  	class.margin.default
+   *
+   * Set the **bottom** margin to the **1** size
+   *
+* @example 	html
+* <div class="m-b" style="background:#f2bc2b; width:100px; height:5px"></div>
+* <div style="background:#2b3438; width:100px; height:5px"></div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.m-b {
+  margin-bottom: 20px;
+}
+
+/**
+* @name          m-t
+   * @styleguide  	class.margin.default
+   *
+   * Set the **top** margin to the **1** size
+   *
+* @example 	html
+* <div style="background:#f2bc2b; width:100px; height:5px"></div>
+* <div class="m-t" style="background:#2b3438; width:100px; height:5px"></div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.m-t {
+  margin-top: 20px;
+}
+
+/**
+* @name       	m-l
+   * @styleguide  	class.margin.default
+   *
+   * Set the **left** margin to the **1** size
+   *
+* @example 	html
+* <div style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+* <div class="m-l" style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.m-l {
+  margin-left: 20px;
+}
+
+/**
+* @name       	m-r
+   * @styleguide  	class.margin.default
+   *
+   * Set the **right* margin to the **1** size
+   *
+* @example 	html
+* <div class="m-r" style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+* <div style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.m-r {
+  margin-right: 20px;
+}
+
+/**
+* @name       	m-s
+   * @styleguide  	class.margin.default
+   *
+   * Set the **side** margin to the **1** size
+   *
+* @example 	html
+* <div class="m-s" style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+* <div style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.m-s {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+/**
+* @name        p
+   * @styleguide  	class.padding.default
+   *
+   * Set the paddings to the **1** size
+   *
+* @example 	html
+* <div class="p" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* 	<div style="background:#2b3438; width:100%; height:100%"></div>
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.p:not(p) {
+  padding: 20px;
+}
+
+/**
+* @name       	p-b
+   * @styleguide  	class.padding.default
+   *
+   * Set the **bottom** padding to the **1** size
+   *
+* @example 	html
+* <div class="p-b" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* 	<div style="background:#2b3438; width:100%; height:100%"></div>
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.p-b {
+  padding-bottom: 20px;
+}
+
+/**
+* @name       	p-t
+   * @styleguide  	class.padding.default
+   *
+   * Set the **top** padding to the **1** size
+   *
+* @example 	html
+* <div class="p-t" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* 	<div style="background:#2b3438; width:100%; height:100%"></div>
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.p-t {
+  padding-top: 20px;
+}
+
+/**
+* @name       	p-l
+   * @styleguide  	class.padding.default
+   *
+   * Set the **left** padding  to the **1** size
+   *
+* @example 	html
+* <div class="p-l" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* 	<div style="background:#2b3438; width:100%; height:100%"></div>
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.p-l {
+  padding-left: 20px;
+}
+
+/**
+* @name       	p-r
+   * @styleguide  	class.padding.default
+   *
+   * Set the **right** padding  to the **1** size
+   *
+* @example 	html
+* <div class="p-r" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* 	<div style="background:#2b3438; width:100%; height:100%"></div>
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.p-r {
+  padding-right: 20px;
+}
+
+/**
+* @name       	p-s
+   * @styleguide  	class.padding.default
+   *
+   * Set the **side** padding  to the **1** size
+   *
+* @example 	html
+* <div class="p-s" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* 	<div style="background:#2b3438; width:100%; height:100%"></div>
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.p-s {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/**
+* @name       	m-b-medium
+   * @styleguide  	class.margin.medium
+   *
+   * Set the **bottom** margin to the **1.4** size
+   *
+* @example 	html
+* <div class="m-b-medium" style="background:#f2bc2b; width:100px; height:5px"></div>
+* <div style="background:#2b3438; width:100px; height:5px"></div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.m-b-medium {
+  margin-bottom: 40px;
+}
+
+/**
+* @name          m-t-medium
+   * @styleguide  	class.margin.medium
+   *
+   * Set the **top** margin to the **1.4** size
+   *
+* @example 	html
+* <div style="background:#f2bc2b; width:100px; height:5px"></div>
+* <div class="m-t-medium" style="background:#2b3438; width:100px; height:5px"></div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.m-t-medium {
+  margin-top: 40px;
+}
+
+/**
+* @name       	m-l-medium
+   * @styleguide  	class.margin.medium
+   *
+   * Set the **left** margin to the **1.4** size
+   *
+* @example 	html
+* <div style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+* <div class="m-l-medium" style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.m-l-medium {
+  margin-left: 40px;
+}
+
+/**
+* @name       	m-r-medium
+   * @styleguide  	class.margin.medium
+   *
+   * Set the **right* margin to the **1.4** size
+   *
+* @example 	html
+* <div class="m-r-medium" style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+* <div style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.m-r-medium {
+  margin-right: 40px;
+}
+
+/**
+* @name       	m-s-medium
+   * @styleguide  	class.margin.medium
+   *
+   * Set the **side** margin to the **1.4** size
+   *
+* @example 	html
+* <div class="m-s-medium" style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+* <div style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.m-s-medium {
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+/**
+* @name        p-medium
+   * @styleguide  	class.padding.medium
+   *
+   * Set the paddings to the **1.4** size
+   *
+* @example 	html
+* <div class="p-medium" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* 	<div style="background:#2b3438; width:100%; height:100%"></div>
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.p-medium {
+  padding: 40px;
+}
+
+/**
+* @name       	p-b-medium
+   * @styleguide  	class.padding.medium
+   *
+   * Set the **bottom** padding to the **1.4** size
+   *
+* @example 	html
+* <div class="p-b-medium" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* 	<div style="background:#2b3438; width:100%; height:100%"></div>
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.p-b-medium {
+  padding-bottom: 40px;
+}
+
+/**
+* @name       	p-t-medium
+   * @styleguide  	class.padding.medium
+   *
+   * Set the **top** padding to the **1.4** size
+   *
+* @example 	html
+* <div class="p-t-medium" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* 	<div style="background:#2b3438; width:100%; height:100%"></div>
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.p-t-medium {
+  padding-top: 40px;
+}
+
+/**
+* @name       	p-l-medium
+   * @styleguide  	class.padding.medium
+   *
+   * Set the **left** padding  to the **1.4** size
+   *
+* @example 	html
+* <div class="p-l-medium" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* 	<div style="background:#2b3438; width:100%; height:100%"></div>
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.p-l-medium {
+  padding-left: 40px;
+}
+
+/**
+* @name       	p-r-medium
+   * @styleguide  	class.padding.medium
+   *
+   * Set the **right** padding  to the **1.4** size
+   *
+* @example 	html
+* <div class="p-r-medium" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* 	<div style="background:#2b3438; width:100%; height:100%"></div>
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.p-r-medium {
+  padding-right: 40px;
+}
+
+/**
+* @name       	p-s-medium
+   * @styleguide  	class.padding.medium
+   *
+   * Set the **side** padding  to the **1.4** size
+   *
+* @example 	html
+* <div class="p-s-medium" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* 	<div style="background:#2b3438; width:100%; height:100%"></div>
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.p-s-medium {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+/**
+* @name       	m-b-big
+   * @styleguide  	class.margin.big
+   *
+   * Set the **bottom** margin to the **2** size
+   *
+* @example 	html
+* <div class="m-b-big" style="background:#f2bc2b; width:100px; height:5px"></div>
+* <div style="background:#2b3438; width:100px; height:5px"></div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.m-b-big {
+  margin-bottom: 70px;
+}
+
+/**
+* @name          m-t-big
+   * @styleguide  	class.margin.big
+   *
+   * Set the **top** margin to the **2** size
+   *
+* @example 	html
+* <div style="background:#f2bc2b; width:100px; height:5px"></div>
+* <div class="m-t-big" style="background:#2b3438; width:100px; height:5px"></div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.m-t-big {
+  margin-top: 70px;
+}
+
+/**
+* @name       	m-l-big
+   * @styleguide  	class.margin.big
+   *
+   * Set the **left** margin to the **2** size
+   *
+* @example 	html
+* <div style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+* <div class="m-l-big" style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.m-l-big {
+  margin-left: 70px;
+}
+
+/**
+* @name       	m-r-big
+   * @styleguide  	class.margin.big
+   *
+   * Set the **right* margin to the **2** size
+   *
+* @example 	html
+* <div class="m-r-big" style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+* <div style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.m-r-big {
+  margin-right: 70px;
+}
+
+/**
+* @name       	m-s-big
+   * @styleguide  	class.margin.big
+   *
+   * Set the **side** margin to the **2** size
+   *
+* @example 	html
+* <div class="m-s-big" style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+* <div style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.m-s-big {
+  margin-left: 70px;
+  margin-right: 70px;
+}
+
+/**
+* @name        p-big
+   * @styleguide  	class.padding.big
+   *
+   * Set the paddings to the **2** size
+   *
+* @example 	html
+* <div class="p-big" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* 	<div style="background:#2b3438; width:100%; height:100%"></div>
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.p-big {
+  padding: 70px;
+}
+
+/**
+* @name       	p-b-big
+   * @styleguide  	class.padding.big
+   *
+   * Set the **bottom** padding to the **2** size
+   *
+* @example 	html
+* <div class="p-b-big" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* 	<div style="background:#2b3438; width:100%; height:100%"></div>
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.p-b-big {
+  padding-bottom: 70px;
+}
+
+/**
+* @name       	p-t-big
+   * @styleguide  	class.padding.big
+   *
+   * Set the **top** padding to the **2** size
+   *
+* @example 	html
+* <div class="p-t-big" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* 	<div style="background:#2b3438; width:100%; height:100%"></div>
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.p-t-big {
+  padding-top: 70px;
+}
+
+/**
+* @name       	p-l-big
+   * @styleguide  	class.padding.big
+   *
+   * Set the **left** padding  to the **2** size
+   *
+* @example 	html
+* <div class="p-l-big" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* 	<div style="background:#2b3438; width:100%; height:100%"></div>
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.p-l-big {
+  padding-left: 70px;
+}
+
+/**
+* @name       	p-r-big
+   * @styleguide  	class.padding.big
+   *
+   * Set the **right** padding  to the **2** size
+   *
+* @example 	html
+* <div class="p-r-big" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* 	<div style="background:#2b3438; width:100%; height:100%"></div>
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.p-r-big {
+  padding-right: 70px;
+}
+
+/**
+* @name       	p-s-big
+   * @styleguide  	class.padding.big
+   *
+   * Set the **side** padding  to the **2** size
+   *
+* @example 	html
+* <div class="p-s-big" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* 	<div style="background:#2b3438; width:100%; height:100%"></div>
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.p-s-big {
+  padding-left: 70px;
+  padding-right: 70px;
+}
+
+/**
+* @name       	m-b-bigger
+   * @styleguide  	class.margin.bigger
+   *
+   * Set the **bottom** margin to the **3** size
+   *
+* @example 	html
+* <div class="m-b-bigger" style="background:#f2bc2b; width:100px; height:5px"></div>
+* <div style="background:#2b3438; width:100px; height:5px"></div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.m-b-bigger {
+  margin-bottom: 100px;
+}
+
+/**
+* @name          m-t-bigger
+   * @styleguide  	class.margin.bigger
+   *
+   * Set the **top** margin to the **3** size
+   *
+* @example 	html
+* <div style="background:#f2bc2b; width:100px; height:5px"></div>
+* <div class="m-t-bigger" style="background:#2b3438; width:100px; height:5px"></div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.m-t-bigger {
+  margin-top: 100px;
+}
+
+/**
+* @name       	m-l-bigger
+   * @styleguide  	class.margin.bigger
+   *
+   * Set the **left** margin to the **3** size
+   *
+* @example 	html
+* <div style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+* <div class="m-l-bigger" style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.m-l-bigger {
+  margin-left: 100px;
+}
+
+/**
+* @name       	m-r-bigger
+   * @styleguide  	class.margin.bigger
+   *
+   * Set the **right* margin to the **3** size
+   *
+* @example 	html
+* <div class="m-r-bigger" style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+* <div style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.m-r-bigger {
+  margin-right: 100px;
+}
+
+/**
+* @name       	m-s-bigger
+   * @styleguide  	class.margin.bigger
+   *
+   * Set the **side** margin to the **3** size
+   *
+* @example 	html
+* <div class="m-s-bigger" style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+* <div style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.m-s-bigger {
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+/**
+* @name        p-bigger
+   * @styleguide  	class.padding.bigger
+   *
+   * Set the paddings to the **3** size
+   *
+* @example 	html
+* <div class="p-bigger" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* 	<div style="background:#2b3438; width:100%; height:100%"></div>
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.p-bigger {
+  padding: 100px;
+}
+
+/**
+* @name       	p-b-bigger
+   * @styleguide  	class.padding.bigger
+   *
+   * Set the **bottom** padding to the **3** size
+   *
+* @example 	html
+* <div class="p-b-bigger" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* 	<div style="background:#2b3438; width:100%; height:100%"></div>
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.p-b-bigger {
+  padding-bottom: 100px;
+}
+
+/**
+* @name       	p-t-bigger
+   * @styleguide  	class.padding.bigger
+   *
+   * Set the **top** padding to the **3** size
+   *
+* @example 	html
+* <div class="p-t-bigger" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* 	<div style="background:#2b3438; width:100%; height:100%"></div>
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.p-t-bigger {
+  padding-top: 100px;
+}
+
+/**
+* @name       	p-l-bigger
+   * @styleguide  	class.padding.bigger
+   *
+   * Set the **left** padding  to the **3** size
+   *
+* @example 	html
+* <div class="p-l-bigger" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* 	<div style="background:#2b3438; width:100%; height:100%"></div>
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.p-l-bigger {
+  padding-left: 100px;
+}
+
+/**
+* @name       	p-r-bigger
+   * @styleguide  	class.padding.bigger
+   *
+   * Set the **right** padding  to the **3** size
+   *
+* @example 	html
+* <div class="p-r-bigger" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* 	<div style="background:#2b3438; width:100%; height:100%"></div>
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.p-r-bigger {
+  padding-right: 100px;
+}
+
+/**
+* @name       	p-s-bigger
+   * @styleguide  	class.padding.bigger
+   *
+   * Set the **side** padding  to the **3** size
+   *
+* @example 	html
+* <div class="p-s-bigger" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* 	<div style="background:#2b3438; width:100%; height:100%"></div>
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.p-s-bigger {
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+/**
+* @name       	s-smaller
+   * @styleguide  	class.size
+   *
+   * Set the size **smaller** relative to the root element
+   *
+* @example 	html
+* <div class="s-smaller">
+* 	I have the size "smaller" defined
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.s-smaller {
+  font-size: 0.3rem;
+}
+
+/**
+* @name       	s-smaller-rel
+   * @styleguide  	class.size
+   *
+   * Set the size **smaller** relative to my parent
+   *
+* @example 	html
+* <div class="s-smaller-rel">
+* 	I have the size "smaller" defined relative to my parent
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.s-smaller-rel {
+  font-size: 0.3em;
+}
+
+/**
+* @name       	s-small
+   * @styleguide  	class.size
+   *
+   * Set the size **small** relative to the root element
+   *
+* @example 	html
+* <div class="s-small">
+* 	I have the size "small" defined
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.s-small {
+  font-size: 0.6rem;
+}
+
+/**
+* @name       	s-small-rel
+   * @styleguide  	class.size
+   *
+   * Set the size **small** relative to my parent
+   *
+* @example 	html
+* <div class="s-small-rel">
+* 	I have the size "small" defined relative to my parent
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.s-small-rel {
+  font-size: 0.6em;
+}
+
+/**
+* @name       	s-default
+   * @styleguide  	class.size
+   *
+   * Set the size **default** relative to the root element
+   *
+* @example 	html
+* <div class="s-default">
+* 	I have the size "default" defined
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.s {
+  font-size: 1rem;
+}
+
+/**
+* @name       	s-default-rel
+   * @styleguide  	class.size
+   *
+   * Set the size **default** relative to my parent
+   *
+* @example 	html
+* <div class="s-default-rel">
+* 	I have the size "default" defined relative to my parent
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.s-rel {
+  font-size: 1em;
+}
+
+/**
+* @name       	s-medium
+   * @styleguide  	class.size
+   *
+   * Set the size **medium** relative to the root element
+   *
+* @example 	html
+* <div class="s-medium">
+* 	I have the size "medium" defined
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.s-medium {
+  font-size: 1.4rem;
+}
+
+/**
+* @name       	s-medium-rel
+   * @styleguide  	class.size
+   *
+   * Set the size **medium** relative to my parent
+   *
+* @example 	html
+* <div class="s-medium-rel">
+* 	I have the size "medium" defined relative to my parent
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.s-medium-rel {
+  font-size: 1.4em;
+}
+
+/**
+* @name       	s-big
+   * @styleguide  	class.size
+   *
+   * Set the size **big** relative to the root element
+   *
+* @example 	html
+* <div class="s-big">
+* 	I have the size "big" defined
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.s-big {
+  font-size: 2rem;
+}
+
+/**
+* @name       	s-big-rel
+   * @styleguide  	class.size
+   *
+   * Set the size **big** relative to my parent
+   *
+* @example 	html
+* <div class="s-big-rel">
+* 	I have the size "big" defined relative to my parent
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.s-big-rel {
+  font-size: 2em;
+}
+
+/**
+* @name       	s-bigger
+   * @styleguide  	class.size
+   *
+   * Set the size **bigger** relative to the root element
+   *
+* @example 	html
+* <div class="s-bigger">
+* 	I have the size "bigger" defined
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.s-bigger {
+  font-size: 3rem;
+}
+
+/**
+* @name       	s-bigger-rel
+   * @styleguide  	class.size
+   *
+   * Set the size **bigger** relative to my parent
+   *
+* @example 	html
+* <div class="s-bigger-rel">
+* 	I have the size "bigger" defined relative to my parent
+* </div>
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+.s-bigger-rel {
+  font-size: 3em;
+}
+
+/**
+* @name       	no-p-t
+  * @styleguide  	class.padding.no
+  *
+  * Reset **top** padding
+*
+* @example 	html
+* <div class="no-p-t" style="display:inline-block; background:#f2bc2b; width:50px; height:50px;"></div>
+  *
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.no-p-t {
+  padding-top: 0 !important;
+}
+
+/**
+* @name       	no-p-r
+  * @styleguide  	class.padding.no
+  *
+  * Reset **right** padding
+*
+* @example 	html
+* <div class="no-p-r" style="display:inline-block; background:#f2bc2b; width:50px; height:50px;"></div>
+  *
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.no-p-r {
+  padding-right: 0 !important;
+}
+
+/**
+* @name       	no-p-b
+  * @styleguide  	class.padding.no
+  *
+  * Reset **bottom** padding
+*
+* @example 	html
+* <div class="no-p-b" style="display:inline-block; background:#f2bc2b; width:50px; height:50px;"></div>
+  *
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.no-p-b {
+  padding-bottom: 0 !important;
+}
+
+/**
+* @name       	no-p-l
+  * @styleguide  	class.padding.no
+  *
+  * Reset **left** padding
+*
+* @example 	html
+* <div class="no-p-l" style="display:inline-block; background:#f2bc2b; width:50px; height:50px;"></div>
+  *
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.no-p-l {
+  padding-left: 0 !important;
+}
+
+/**
+* @name       	no-p-s
+  * @styleguide  	class.padding.no
+  *
+  * Reset **left** and **right** paddings
+*
+* @example 	html
+* <div class="no-p-s" style="display:inline-block; background:#f2bc2b; width:50px; height:50px;"></div>
+  *
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.no-p-s {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/**
+* @name       	no-m-t
+  * @styleguide  	class.margin.no
+  *
+  * Reset **top** padding
+*
+* @example 	html
+* <div class="no-m-t" style="display:inline-block; background:#f2bc2b; width:50px; height:50px;"></div>
+  *
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.no-m-t {
+  margin-top: 0 !important;
+}
+
+/**
+* @name       	no-m-r
+  * @styleguide  	class.margin.no
+  *
+  * Reset **right** padding
+*
+* @example 	html
+* <div class="no-m-r" style="display:inline-block; background:#f2bc2b; width:50px; height:50px;"></div>
+  *
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.no-m-r {
+  margin-right: 0 !important;
+}
+
+/**
+* @name       	no-m-b
+  * @styleguide  	class.margin.no
+  *
+  * Reset **bottom** padding
+*
+* @example 	html
+* <div class="no-m-b" style="display:inline-block; background:#f2bc2b; width:50px; height:50px;"></div>
+  *
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.no-m-b {
+  margin-bottom: 0 !important;
+}
+
+/**
+* @name       	no-m-l
+  * @styleguide  	class.margin.no
+  *
+  * Reset **left** padding
+*
+* @example 	html
+* <div class="no-m-l" style="display:inline-block; background:#f2bc2b; width:50px; height:50px;"></div>
+  *
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.no-m-l {
+  margin-left: 0 !important;
+}
+
+/**
+* @name       	no-m-s
+  * @styleguide  	class.padding.no
+  *
+  * Reset **left** and **right** margins
+*
+* @example 	html
+* <div class="no-m-s" style="display:inline-block; background:#f2bc2b; width:50px; height:50px;"></div>
+  *
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.no-m-s {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/**
+* @name       	c
+    * @styleguide  	class.color.default
+    *
+    * Specify the color to **default**
+*
+* @example 	html
+* <div class="c">
+* 	I'm in "default" color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.c {
+  color: #848e91;
+}
+
+/**
+* @name       	bkg
+    * @styleguide  	class.color.default
+    *
+    * Specify the background color to **default**
+*
+* @example 	html
+* <div class="bkg p" style="color:white">
+* 	My background color is "default"
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.bkg {
+  background-color: #848e91;
+}
+
+/**
+* @name       	b
+    * @styleguide  	class.color.default
+    *
+    * Specify the border of 1px solid to **default**
+*
+* @example 	html
+* <div class="b">
+* 	I have a default border color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b {
+  border: 0.0714285714rem solid #848e91;
+}
+
+/**
+* @name       	b-t
+    * @styleguide  	class.color.default
+    *
+    * Specify the border top of 1px solid to **default**
+*
+* @example 	html
+* <div class="b-t">
+* 	I have a default border top color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-t {
+  border-top: 0.0714285714rem solid #848e91;
+}
+
+/**
+* @name       	b-r
+    * @styleguide  	class.color.default
+    *
+    * Specify the border right of 1px solid to **default**
+*
+* @example 	html
+* <div class="b-r">
+* 	I have a default border right color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-r {
+  border-right: 0.0714285714rem solid #848e91;
+}
+
+/**
+    * @name       	b-b
+    * @styleguide  	class.color.default
+    *
+    * Specify the border bottom of 1px solid to **default**
+    *
+* @example 	html
+* <div class="b-b">
+* 	I have a default border bottom color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-b {
+  border-bottom: 0.0714285714rem solid #848e91;
+}
+
+/**
+* @name       	b-l
+    * @styleguide  	class.color.default
+    *
+    * Specify the border left of 1px solid to **default**
+*
+* @example 	html
+* <div class="b-l">
+* 	I have a default border left color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-l {
+  border-left: 0.0714285714rem solid #848e91;
+}
+
+/**
+* @name       	b-s
+    * @styleguide  	class.color.default
+    *
+    * Specify the border side of 1px solid to **default**
+*
+* @example 	html
+* <div class="b-s">
+* 	I have a default border side color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-s {
+  border-left: 0.0714285714rem solid #848e91;
+  border-right: 0.0714285714rem solid #848e91;
+}
+
+/**
+* @name       	c-title
+    * @styleguide  	class.color.title
+    *
+    * Specify the color to **title**
+*
+* @example 	html
+* <div class="c-title">
+* 	I'm in "title" color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.c-title {
+  color: #2b3438;
+}
+
+/**
+* @name       	bkg-title
+    * @styleguide  	class.color.title
+    *
+    * Specify the background color to **title**
+*
+* @example 	html
+* <div class="bkg-title p" style="color:white">
+* 	My background color is "title"
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.bkg-title {
+  background-color: #2b3438;
+}
+
+/**
+* @name       	b-title
+    * @styleguide  	class.color.title
+    *
+    * Specify the border of 1px solid to **title**
+*
+* @example 	html
+* <div class="b-title">
+* 	I have a title border color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-title {
+  border: 0.0714285714rem solid #2b3438;
+}
+
+/**
+* @name       	b-t-title
+    * @styleguide  	class.color.title
+    *
+    * Specify the border top of 1px solid to **title**
+*
+* @example 	html
+* <div class="b-t-title">
+* 	I have a title border top color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-t-title {
+  border-top: 0.0714285714rem solid #2b3438;
+}
+
+/**
+* @name       	b-r-title
+    * @styleguide  	class.color.title
+    *
+    * Specify the border right of 1px solid to **title**
+*
+* @example 	html
+* <div class="b-r-title">
+* 	I have a title border right color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-r-title {
+  border-right: 0.0714285714rem solid #2b3438;
+}
+
+/**
+    * @name       	b-b-title
+    * @styleguide  	class.color.title
+    *
+    * Specify the border bottom of 1px solid to **title**
+    *
+* @example 	html
+* <div class="b-b-title">
+* 	I have a title border bottom color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-b-title {
+  border-bottom: 0.0714285714rem solid #2b3438;
+}
+
+/**
+* @name       	b-l-title
+    * @styleguide  	class.color.title
+    *
+    * Specify the border left of 1px solid to **title**
+*
+* @example 	html
+* <div class="b-l-title">
+* 	I have a title border left color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-l-title {
+  border-left: 0.0714285714rem solid #2b3438;
+}
+
+/**
+* @name       	b-s-title
+    * @styleguide  	class.color.title
+    *
+    * Specify the border side of 1px solid to **title**
+*
+* @example 	html
+* <div class="b-s-title">
+* 	I have a title border side color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-s-title {
+  border-left: 0.0714285714rem solid #2b3438;
+  border-right: 0.0714285714rem solid #2b3438;
+}
+
+/**
+* @name       	c-text
+    * @styleguide  	class.color.text
+    *
+    * Specify the color to **text**
+*
+* @example 	html
+* <div class="c-text">
+* 	I'm in "text" color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.c-text {
+  color: #848e91;
+}
+
+/**
+* @name       	bkg-text
+    * @styleguide  	class.color.text
+    *
+    * Specify the background color to **text**
+*
+* @example 	html
+* <div class="bkg-text p" style="color:white">
+* 	My background color is "text"
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.bkg-text {
+  background-color: #848e91;
+}
+
+/**
+* @name       	b-text
+    * @styleguide  	class.color.text
+    *
+    * Specify the border of 1px solid to **text**
+*
+* @example 	html
+* <div class="b-text">
+* 	I have a text border color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-text {
+  border: 0.0714285714rem solid #848e91;
+}
+
+/**
+* @name       	b-t-text
+    * @styleguide  	class.color.text
+    *
+    * Specify the border top of 1px solid to **text**
+*
+* @example 	html
+* <div class="b-t-text">
+* 	I have a text border top color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-t-text {
+  border-top: 0.0714285714rem solid #848e91;
+}
+
+/**
+* @name       	b-r-text
+    * @styleguide  	class.color.text
+    *
+    * Specify the border right of 1px solid to **text**
+*
+* @example 	html
+* <div class="b-r-text">
+* 	I have a text border right color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-r-text {
+  border-right: 0.0714285714rem solid #848e91;
+}
+
+/**
+    * @name       	b-b-text
+    * @styleguide  	class.color.text
+    *
+    * Specify the border bottom of 1px solid to **text**
+    *
+* @example 	html
+* <div class="b-b-text">
+* 	I have a text border bottom color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-b-text {
+  border-bottom: 0.0714285714rem solid #848e91;
+}
+
+/**
+* @name       	b-l-text
+    * @styleguide  	class.color.text
+    *
+    * Specify the border left of 1px solid to **text**
+*
+* @example 	html
+* <div class="b-l-text">
+* 	I have a text border left color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-l-text {
+  border-left: 0.0714285714rem solid #848e91;
+}
+
+/**
+* @name       	b-s-text
+    * @styleguide  	class.color.text
+    *
+    * Specify the border side of 1px solid to **text**
+*
+* @example 	html
+* <div class="b-s-text">
+* 	I have a text border side color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-s-text {
+  border-left: 0.0714285714rem solid #848e91;
+  border-right: 0.0714285714rem solid #848e91;
+}
+
+/**
+* @name       	c-link
+    * @styleguide  	class.color.link
+    *
+    * Specify the color to **link**
+*
+* @example 	html
+* <div class="c-link">
+* 	I'm in "link" color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.c-link {
+  color: #f2bc2b;
+}
+
+/**
+* @name       	bkg-link
+    * @styleguide  	class.color.link
+    *
+    * Specify the background color to **link**
+*
+* @example 	html
+* <div class="bkg-link p" style="color:white">
+* 	My background color is "link"
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.bkg-link {
+  background-color: #f2bc2b;
+}
+
+/**
+* @name       	b-link
+    * @styleguide  	class.color.link
+    *
+    * Specify the border of 1px solid to **link**
+*
+* @example 	html
+* <div class="b-link">
+* 	I have a link border color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-link {
+  border: 0.0714285714rem solid #f2bc2b;
+}
+
+/**
+* @name       	b-t-link
+    * @styleguide  	class.color.link
+    *
+    * Specify the border top of 1px solid to **link**
+*
+* @example 	html
+* <div class="b-t-link">
+* 	I have a link border top color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-t-link {
+  border-top: 0.0714285714rem solid #f2bc2b;
+}
+
+/**
+* @name       	b-r-link
+    * @styleguide  	class.color.link
+    *
+    * Specify the border right of 1px solid to **link**
+*
+* @example 	html
+* <div class="b-r-link">
+* 	I have a link border right color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-r-link {
+  border-right: 0.0714285714rem solid #f2bc2b;
+}
+
+/**
+    * @name       	b-b-link
+    * @styleguide  	class.color.link
+    *
+    * Specify the border bottom of 1px solid to **link**
+    *
+* @example 	html
+* <div class="b-b-link">
+* 	I have a link border bottom color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-b-link {
+  border-bottom: 0.0714285714rem solid #f2bc2b;
+}
+
+/**
+* @name       	b-l-link
+    * @styleguide  	class.color.link
+    *
+    * Specify the border left of 1px solid to **link**
+*
+* @example 	html
+* <div class="b-l-link">
+* 	I have a link border left color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-l-link {
+  border-left: 0.0714285714rem solid #f2bc2b;
+}
+
+/**
+* @name       	b-s-link
+    * @styleguide  	class.color.link
+    *
+    * Specify the border side of 1px solid to **link**
+*
+* @example 	html
+* <div class="b-s-link">
+* 	I have a link border side color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-s-link {
+  border-left: 0.0714285714rem solid #f2bc2b;
+  border-right: 0.0714285714rem solid #f2bc2b;
+}
+
+/**
+* @name       	c-primary
+    * @styleguide  	class.color.primary
+    *
+    * Specify the color to **primary**
+*
+* @example 	html
+* <div class="c-primary">
+* 	I'm in "primary" color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.c-primary {
+  color: #f2bc2b;
+}
+
+/**
+* @name       	bkg-primary
+    * @styleguide  	class.color.primary
+    *
+    * Specify the background color to **primary**
+*
+* @example 	html
+* <div class="bkg-primary p" style="color:white">
+* 	My background color is "primary"
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.bkg-primary {
+  background-color: #f2bc2b;
+}
+
+/**
+* @name       	b-primary
+    * @styleguide  	class.color.primary
+    *
+    * Specify the border of 1px solid to **primary**
+*
+* @example 	html
+* <div class="b-primary">
+* 	I have a primary border color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-primary {
+  border: 0.0714285714rem solid #f2bc2b;
+}
+
+/**
+* @name       	b-t-primary
+    * @styleguide  	class.color.primary
+    *
+    * Specify the border top of 1px solid to **primary**
+*
+* @example 	html
+* <div class="b-t-primary">
+* 	I have a primary border top color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-t-primary {
+  border-top: 0.0714285714rem solid #f2bc2b;
+}
+
+/**
+* @name       	b-r-primary
+    * @styleguide  	class.color.primary
+    *
+    * Specify the border right of 1px solid to **primary**
+*
+* @example 	html
+* <div class="b-r-primary">
+* 	I have a primary border right color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-r-primary {
+  border-right: 0.0714285714rem solid #f2bc2b;
+}
+
+/**
+    * @name       	b-b-primary
+    * @styleguide  	class.color.primary
+    *
+    * Specify the border bottom of 1px solid to **primary**
+    *
+* @example 	html
+* <div class="b-b-primary">
+* 	I have a primary border bottom color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-b-primary {
+  border-bottom: 0.0714285714rem solid #f2bc2b;
+}
+
+/**
+* @name       	b-l-primary
+    * @styleguide  	class.color.primary
+    *
+    * Specify the border left of 1px solid to **primary**
+*
+* @example 	html
+* <div class="b-l-primary">
+* 	I have a primary border left color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-l-primary {
+  border-left: 0.0714285714rem solid #f2bc2b;
+}
+
+/**
+* @name       	b-s-primary
+    * @styleguide  	class.color.primary
+    *
+    * Specify the border side of 1px solid to **primary**
+*
+* @example 	html
+* <div class="b-s-primary">
+* 	I have a primary border side color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-s-primary {
+  border-left: 0.0714285714rem solid #f2bc2b;
+  border-right: 0.0714285714rem solid #f2bc2b;
+}
+
+/**
+* @name       	c-secondary
+    * @styleguide  	class.color.secondary
+    *
+    * Specify the color to **secondary**
+*
+* @example 	html
+* <div class="c-secondary">
+* 	I'm in "secondary" color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.c-secondary {
+  color: #2b3438;
+}
+
+/**
+* @name       	bkg-secondary
+    * @styleguide  	class.color.secondary
+    *
+    * Specify the background color to **secondary**
+*
+* @example 	html
+* <div class="bkg-secondary p" style="color:white">
+* 	My background color is "secondary"
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.bkg-secondary {
+  background-color: #2b3438;
+}
+
+/**
+* @name       	b-secondary
+    * @styleguide  	class.color.secondary
+    *
+    * Specify the border of 1px solid to **secondary**
+*
+* @example 	html
+* <div class="b-secondary">
+* 	I have a secondary border color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-secondary {
+  border: 0.0714285714rem solid #2b3438;
+}
+
+/**
+* @name       	b-t-secondary
+    * @styleguide  	class.color.secondary
+    *
+    * Specify the border top of 1px solid to **secondary**
+*
+* @example 	html
+* <div class="b-t-secondary">
+* 	I have a secondary border top color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-t-secondary {
+  border-top: 0.0714285714rem solid #2b3438;
+}
+
+/**
+* @name       	b-r-secondary
+    * @styleguide  	class.color.secondary
+    *
+    * Specify the border right of 1px solid to **secondary**
+*
+* @example 	html
+* <div class="b-r-secondary">
+* 	I have a secondary border right color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-r-secondary {
+  border-right: 0.0714285714rem solid #2b3438;
+}
+
+/**
+    * @name       	b-b-secondary
+    * @styleguide  	class.color.secondary
+    *
+    * Specify the border bottom of 1px solid to **secondary**
+    *
+* @example 	html
+* <div class="b-b-secondary">
+* 	I have a secondary border bottom color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-b-secondary {
+  border-bottom: 0.0714285714rem solid #2b3438;
+}
+
+/**
+* @name       	b-l-secondary
+    * @styleguide  	class.color.secondary
+    *
+    * Specify the border left of 1px solid to **secondary**
+*
+* @example 	html
+* <div class="b-l-secondary">
+* 	I have a secondary border left color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-l-secondary {
+  border-left: 0.0714285714rem solid #2b3438;
+}
+
+/**
+* @name       	b-s-secondary
+    * @styleguide  	class.color.secondary
+    *
+    * Specify the border side of 1px solid to **secondary**
+*
+* @example 	html
+* <div class="b-s-secondary">
+* 	I have a secondary border side color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-s-secondary {
+  border-left: 0.0714285714rem solid #2b3438;
+  border-right: 0.0714285714rem solid #2b3438;
+}
+
+/**
+* @name       	c-success
+    * @styleguide  	class.color.success
+    *
+    * Specify the color to **success**
+*
+* @example 	html
+* <div class="c-success">
+* 	I'm in "success" color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.c-success {
+  color: #5cb85c;
+}
+
+/**
+* @name       	bkg-success
+    * @styleguide  	class.color.success
+    *
+    * Specify the background color to **success**
+*
+* @example 	html
+* <div class="bkg-success p" style="color:white">
+* 	My background color is "success"
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.bkg-success {
+  background-color: #5cb85c;
+}
+
+/**
+* @name       	b-success
+    * @styleguide  	class.color.success
+    *
+    * Specify the border of 1px solid to **success**
+*
+* @example 	html
+* <div class="b-success">
+* 	I have a success border color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-success {
+  border: 0.0714285714rem solid #5cb85c;
+}
+
+/**
+* @name       	b-t-success
+    * @styleguide  	class.color.success
+    *
+    * Specify the border top of 1px solid to **success**
+*
+* @example 	html
+* <div class="b-t-success">
+* 	I have a success border top color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-t-success {
+  border-top: 0.0714285714rem solid #5cb85c;
+}
+
+/**
+* @name       	b-r-success
+    * @styleguide  	class.color.success
+    *
+    * Specify the border right of 1px solid to **success**
+*
+* @example 	html
+* <div class="b-r-success">
+* 	I have a success border right color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-r-success {
+  border-right: 0.0714285714rem solid #5cb85c;
+}
+
+/**
+    * @name       	b-b-success
+    * @styleguide  	class.color.success
+    *
+    * Specify the border bottom of 1px solid to **success**
+    *
+* @example 	html
+* <div class="b-b-success">
+* 	I have a success border bottom color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-b-success {
+  border-bottom: 0.0714285714rem solid #5cb85c;
+}
+
+/**
+* @name       	b-l-success
+    * @styleguide  	class.color.success
+    *
+    * Specify the border left of 1px solid to **success**
+*
+* @example 	html
+* <div class="b-l-success">
+* 	I have a success border left color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-l-success {
+  border-left: 0.0714285714rem solid #5cb85c;
+}
+
+/**
+* @name       	b-s-success
+    * @styleguide  	class.color.success
+    *
+    * Specify the border side of 1px solid to **success**
+*
+* @example 	html
+* <div class="b-s-success">
+* 	I have a success border side color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-s-success {
+  border-left: 0.0714285714rem solid #5cb85c;
+  border-right: 0.0714285714rem solid #5cb85c;
+}
+
+/**
+* @name       	c-warning
+    * @styleguide  	class.color.warning
+    *
+    * Specify the color to **warning**
+*
+* @example 	html
+* <div class="c-warning">
+* 	I'm in "warning" color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.c-warning {
+  color: #f0ad4e;
+}
+
+/**
+* @name       	bkg-warning
+    * @styleguide  	class.color.warning
+    *
+    * Specify the background color to **warning**
+*
+* @example 	html
+* <div class="bkg-warning p" style="color:white">
+* 	My background color is "warning"
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.bkg-warning {
+  background-color: #f0ad4e;
+}
+
+/**
+* @name       	b-warning
+    * @styleguide  	class.color.warning
+    *
+    * Specify the border of 1px solid to **warning**
+*
+* @example 	html
+* <div class="b-warning">
+* 	I have a warning border color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-warning {
+  border: 0.0714285714rem solid #f0ad4e;
+}
+
+/**
+* @name       	b-t-warning
+    * @styleguide  	class.color.warning
+    *
+    * Specify the border top of 1px solid to **warning**
+*
+* @example 	html
+* <div class="b-t-warning">
+* 	I have a warning border top color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-t-warning {
+  border-top: 0.0714285714rem solid #f0ad4e;
+}
+
+/**
+* @name       	b-r-warning
+    * @styleguide  	class.color.warning
+    *
+    * Specify the border right of 1px solid to **warning**
+*
+* @example 	html
+* <div class="b-r-warning">
+* 	I have a warning border right color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-r-warning {
+  border-right: 0.0714285714rem solid #f0ad4e;
+}
+
+/**
+    * @name       	b-b-warning
+    * @styleguide  	class.color.warning
+    *
+    * Specify the border bottom of 1px solid to **warning**
+    *
+* @example 	html
+* <div class="b-b-warning">
+* 	I have a warning border bottom color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-b-warning {
+  border-bottom: 0.0714285714rem solid #f0ad4e;
+}
+
+/**
+* @name       	b-l-warning
+    * @styleguide  	class.color.warning
+    *
+    * Specify the border left of 1px solid to **warning**
+*
+* @example 	html
+* <div class="b-l-warning">
+* 	I have a warning border left color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-l-warning {
+  border-left: 0.0714285714rem solid #f0ad4e;
+}
+
+/**
+* @name       	b-s-warning
+    * @styleguide  	class.color.warning
+    *
+    * Specify the border side of 1px solid to **warning**
+*
+* @example 	html
+* <div class="b-s-warning">
+* 	I have a warning border side color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-s-warning {
+  border-left: 0.0714285714rem solid #f0ad4e;
+  border-right: 0.0714285714rem solid #f0ad4e;
+}
+
+/**
+* @name       	c-error
+    * @styleguide  	class.color.error
+    *
+    * Specify the color to **error**
+*
+* @example 	html
+* <div class="c-error">
+* 	I'm in "error" color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.c-error {
+  color: #d9534f;
+}
+
+/**
+* @name       	bkg-error
+    * @styleguide  	class.color.error
+    *
+    * Specify the background color to **error**
+*
+* @example 	html
+* <div class="bkg-error p" style="color:white">
+* 	My background color is "error"
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.bkg-error {
+  background-color: #d9534f;
+}
+
+/**
+* @name       	b-error
+    * @styleguide  	class.color.error
+    *
+    * Specify the border of 1px solid to **error**
+*
+* @example 	html
+* <div class="b-error">
+* 	I have a error border color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-error {
+  border: 0.0714285714rem solid #d9534f;
+}
+
+/**
+* @name       	b-t-error
+    * @styleguide  	class.color.error
+    *
+    * Specify the border top of 1px solid to **error**
+*
+* @example 	html
+* <div class="b-t-error">
+* 	I have a error border top color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-t-error {
+  border-top: 0.0714285714rem solid #d9534f;
+}
+
+/**
+* @name       	b-r-error
+    * @styleguide  	class.color.error
+    *
+    * Specify the border right of 1px solid to **error**
+*
+* @example 	html
+* <div class="b-r-error">
+* 	I have a error border right color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-r-error {
+  border-right: 0.0714285714rem solid #d9534f;
+}
+
+/**
+    * @name       	b-b-error
+    * @styleguide  	class.color.error
+    *
+    * Specify the border bottom of 1px solid to **error**
+    *
+* @example 	html
+* <div class="b-b-error">
+* 	I have a error border bottom color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-b-error {
+  border-bottom: 0.0714285714rem solid #d9534f;
+}
+
+/**
+* @name       	b-l-error
+    * @styleguide  	class.color.error
+    *
+    * Specify the border left of 1px solid to **error**
+*
+* @example 	html
+* <div class="b-l-error">
+* 	I have a error border left color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-l-error {
+  border-left: 0.0714285714rem solid #d9534f;
+}
+
+/**
+* @name       	b-s-error
+    * @styleguide  	class.color.error
+    *
+    * Specify the border side of 1px solid to **error**
+*
+* @example 	html
+* <div class="b-s-error">
+* 	I have a error border side color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-s-error {
+  border-left: 0.0714285714rem solid #d9534f;
+  border-right: 0.0714285714rem solid #d9534f;
+}
+
+/**
+* @name       	c-info
+    * @styleguide  	class.color.info
+    *
+    * Specify the color to **info**
+*
+* @example 	html
+* <div class="c-info">
+* 	I'm in "info" color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.c-info {
+  color: #2199e8;
+}
+
+/**
+* @name       	bkg-info
+    * @styleguide  	class.color.info
+    *
+    * Specify the background color to **info**
+*
+* @example 	html
+* <div class="bkg-info p" style="color:white">
+* 	My background color is "info"
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.bkg-info {
+  background-color: #2199e8;
+}
+
+/**
+* @name       	b-info
+    * @styleguide  	class.color.info
+    *
+    * Specify the border of 1px solid to **info**
+*
+* @example 	html
+* <div class="b-info">
+* 	I have a info border color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-info {
+  border: 0.0714285714rem solid #2199e8;
+}
+
+/**
+* @name       	b-t-info
+    * @styleguide  	class.color.info
+    *
+    * Specify the border top of 1px solid to **info**
+*
+* @example 	html
+* <div class="b-t-info">
+* 	I have a info border top color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-t-info {
+  border-top: 0.0714285714rem solid #2199e8;
+}
+
+/**
+* @name       	b-r-info
+    * @styleguide  	class.color.info
+    *
+    * Specify the border right of 1px solid to **info**
+*
+* @example 	html
+* <div class="b-r-info">
+* 	I have a info border right color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-r-info {
+  border-right: 0.0714285714rem solid #2199e8;
+}
+
+/**
+    * @name       	b-b-info
+    * @styleguide  	class.color.info
+    *
+    * Specify the border bottom of 1px solid to **info**
+    *
+* @example 	html
+* <div class="b-b-info">
+* 	I have a info border bottom color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-b-info {
+  border-bottom: 0.0714285714rem solid #2199e8;
+}
+
+/**
+* @name       	b-l-info
+    * @styleguide  	class.color.info
+    *
+    * Specify the border left of 1px solid to **info**
+*
+* @example 	html
+* <div class="b-l-info">
+* 	I have a info border left color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-l-info {
+  border-left: 0.0714285714rem solid #2199e8;
+}
+
+/**
+* @name       	b-s-info
+    * @styleguide  	class.color.info
+    *
+    * Specify the border side of 1px solid to **info**
+*
+* @example 	html
+* <div class="b-s-info">
+* 	I have a info border side color
+* </div>
+    *
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+.b-s-info {
+  border-left: 0.0714285714rem solid #2199e8;
+  border-right: 0.0714285714rem solid #2199e8;
+}
+
 body {
   background-repeat: no-repeat;
   background-size: cover;

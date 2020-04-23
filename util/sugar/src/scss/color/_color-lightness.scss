@@ -1,4 +1,3 @@
-@use 'sass:color';
 /**
  * @name      color-lightness
  * @namespace     sugar.scss.color
@@ -21,5 +20,5 @@
       $color
     );
   }
-  @return color.lightness($color);
+  @return lightness($color);
 }

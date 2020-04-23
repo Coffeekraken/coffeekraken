@@ -1,1 +1,10 @@
-@import '../index';
+@use '../index' as Sugar;
+
+body {
+  @include Sugar.coffeekraken-logo();
+}
+
+.hello {
+  @debug Sugar.color-hue(#ff0000);
+  content: 'coco';
+}

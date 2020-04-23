@@ -1,2 +1,3 @@
-@forward 'src/scss/sugar';
-/*# sourceMappingURL=index.css.map */
+@use '../index' as Sugar;
+.hello {
+  content: 'coco'; }

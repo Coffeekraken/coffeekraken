@@ -30,6 +30,12 @@
   "bugs": {
     "url": "https://github.com/Coffeekraken/coffeekraken/issues"
   },
+  "prettier": {
+    "bracketSpacing": true,
+    "singleQuote": true,
+    "jsxBracketSameLine": true,
+    "trailingComma": "none"
+  },
   "homepage": "https://github.com/Coffeekraken/coffeekraken#readme",
   "_moduleAliases": {
     "@coffeekraken/webpack-coffee-loader": "webpack/coffee-loader",

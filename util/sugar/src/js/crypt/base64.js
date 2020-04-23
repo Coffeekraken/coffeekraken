@@ -2,11 +2,19 @@ import __isJson from '../is/json';
 import toString from '../string/toString';
 import parse from '../string/parse';
 
+/**
+ * @name            base64
+ * @namespace       sugar.js.crypt
+ * @type            Object
+ * 
+ * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the base64 algorithm
+ * 
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
 export default {
 
   /**
    * @name        encrypt
-   * @namespace     sugar.js.crypt.base64
    * @type        Function
    *
    * Encrypt
@@ -16,14 +24,13 @@ export default {
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  encrypt: function(message) {
+  encrypt: function (message) {
     if (typeof message !== 'string') message = toString(message);
     return btoa(message);
   },
 
   /**
    * @name        decrypt
-   * @namespace       sugar.js.crypt.base64
    * @type        Function
    *
    * Decrypt
@@ -33,7 +40,7 @@ export default {
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  decrypt: function(message) {
+  decrypt: function (message) {
     message = atob(message);
     return parse(message);
   }

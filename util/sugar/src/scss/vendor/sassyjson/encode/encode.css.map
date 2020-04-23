@@ -1,0 +1,19 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "encode.scss",
+        "helpers/_quote.scss",
+        "types/_bool.scss",
+        "types/_color.scss",
+        "types/_list.scss",
+        "types/_map.scss",
+        "types/_number.scss",
+        "types/_string.scss",
+        "types/_null.scss",
+        "api/_json.scss",
+        "mixins/_json.scss"
+    ],
+    "names": [],
+    "file": "encode.css"
+}

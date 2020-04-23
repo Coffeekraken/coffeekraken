@@ -33,7 +33,7 @@ function queryStringToObject(str) {
   str = (0, _ltrim.default)(str, "?");
   str = decodeURIComponent(str);
   var chunks = str.split("&"),
-    obj = {};
+      obj = {};
   chunks = chunks.filter(ch => {
     return ch !== "";
   });

@@ -1,13 +1,29 @@
-import __deepMerge from '../object/deepMerge';
-import __parse from './parse';
-import __set from '../object/set';
-import __get from '../object/get';
-import __delete from '../object/delete';
-import __parseHtml from '../console/parseHtml';
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = parseArgsString;
+
+var _deepMerge = _interopRequireDefault(require("../object/deepMerge"));
+
+var _parse = _interopRequireDefault(require("../string/parse"));
+
+var _set = _interopRequireDefault(require("../object/set"));
+
+var _get = _interopRequireDefault(require("../object/get"));
+
+var _delete = _interopRequireDefault(require("../object/delete"));
+
+var _parseHtml = _interopRequireDefault(require("../console/parseHtml"));
+
+var _plainObject = _interopRequireDefault(require("../is/plainObject"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name                        parseArgs
- * @namespace                   sugar.js.string
+ * @namespace                   sugar.js.cli
  * @type                        Function
  *
  * Parse a string to find the provided arguments into the list and return a corresponding object.
@@ -47,71 +63,73 @@ import __parseHtml from '../console/parseHtml';
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function parseArgsString(string, argsDefinitions = {}, settings = {}) {
-
-  settings = __deepMerge({
+function parseArgsString(string, argsDefinitions = {}, settings = {}) {
+  settings = (0, _deepMerge.default)({
     treatDotsAsObject: true,
     handleOrphanOptions: true
-  }, settings);
+  }, settings); // process the passed string
 
-  // process the passed string
-  let stringArray = string.match(/(?:[^\s("|')]+|("|')[^("|')]*("|'))+/gm);
+  let stringArray = string.match(/(?:[^\s("|')]+|("|')[^("|')]*("|'))+/gm) || [];
   let currentArg = null;
   const argsObj = {};
   stringArray = stringArray.filter(part => {
     if (part.slice(0, 2) === '--' || part.slice(0, 1) === '-') {
       currentArg = part.replace(/^[-]{1,2}/, '');
       if (currentArg.length === 1) currentArg = getArgNameByAlias(currentArg, argsDefinitions);
+
       if (settings.treatDotsAsObject) {
-        __set(argsObj, currentArg, true);
+        (0, _set.default)(argsObj, currentArg, true);
       } else {
         argsObj[currentArg] = true;
       }
+
       return false;
     }
 
     if (currentArg) {
-      const argDefinition = argsDefinitions[currentArg];
+      const argDefinition = argsDefinitions[currentArg]; // check that the current argument actually exists in the argsDefinitions object
 
-      // check that the current argument actually exists in the argsDefinitions object
-      if (!argDefinition) return false;
+      if (!argDefinition) return false; // take care of array argument
 
-      // take care of array argument
       if (argDefinition.type && processArgType(argDefinition.type) === 'array') {
         if (settings.treatDotsAsObject) {
-          if (!Array.isArray(__get(argsObj, currentArg))) __set(argsObj, currentArg, []);
+          if (!Array.isArray((0, _get.default)(argsObj, currentArg))) (0, _set.default)(argsObj, currentArg, []);
+
           if (Array.isArray(part)) {
-            __get(argsObj, currentArg).push(__parse(...part));
+            (0, _get.default)(argsObj, currentArg).push(parse(...part));
           } else {
-            __get(argsObj, currentArg).push(__parse(part));
+            (0, _get.default)(argsObj, currentArg).push(parse(part));
           }
         } else {
           if (!Array.isArray(argsObj[currentArg])) argsObj[currentArg] = [];
+
           if (Array.isArray(part)) {
-            argsObj[currentArg].push(...__parse(part));
+            argsObj[currentArg].push(...parse(part));
           } else {
-            argsObj[currentArg].push(__parse(part));
+            argsObj[currentArg].push(parse(part));
           }
         }
+
         return false;
+      } // take care of all argument types
+
+
+      if (settings.treatDotsAsObject) {
+        (0, _set.default)(argsObj, currentArg, parse(part));
+      } else {
+        argsObj[currentArg] = parse(part);
       }
 
-      // take care of all argument types
-      if (settings.treatDotsAsObject) {
-        __set(argsObj, currentArg, __parse(part));
-      } else {
-        argsObj[currentArg] = __parse(part);
-      }
       currentArg = null;
       return false;
     }
-    return true;
-  });
 
-  // get the list of arguments that does not have value for now
+    return true;
+  }); // get the list of arguments that does not have value for now
+
   let argsWithoutValues = Object.keys(argsDefinitions).filter(argName => {
     if (settings.treatDotsAsObject) {
-      return __get(argsObj, argName) === undefined;
+      return (0, _get.default)(argsObj, argName) === undefined;
     } else {
       return argsObj[argName] === undefined;
     }
@@ -120,82 +138,84 @@ export default function parseArgsString(string, argsDefinitions = {}, settings =
   if (settings.handleOrphanOptions) {
     // loop on these "unknown" values and try to get the argument that correspond to it
     stringArray = stringArray.filter(value => {
-      let hasFoundAnArgument = false;
-      // loop on the args without values
+      let hasFoundAnArgument = false; // loop on the args without values
+
       argsWithoutValues = argsWithoutValues.filter(argName => {
         // check that the argument does not have any value
         if (settings.treatDotsAsObject) {
-          if (__get(argsObj, argName)) return false;
+          if ((0, _get.default)(argsObj, argName)) return false;
         } else {
           if (argsObj[argName]) return false;
-        }
-        // check if the value correspond to the argument
-        if (isValueCorrespondToArgDefinition(value, argsDefinitions[argName])) {
+        } // check if the value correspond to the argument
+
+
+        if (!hasFoundAnArgument && isValueCorrespondToArgDefinition(value, argsDefinitions[argName])) {
           // set the value in the argsObj
           if (settings.treatDotsAsObject) {
-            __set(argsObj, argName, value);
+            (0, _set.default)(argsObj, argName, value);
           } else {
             argsObj[argName] = value;
-          }
-          // tell that this value has found an argument
-          hasFoundAnArgument = true;
-          // tell that this argument is now fullfiled with a value
+          } // tell that this value has found an argument
+
+
+          hasFoundAnArgument = true; // tell that this argument is now fullfiled with a value
+
           return false;
-        }
-        // the argument does not have any value
+        } // the argument does not have any value
+
+
         return true;
-      });
-      // filter the stringArray
+      }); // filter the stringArray
+
       return !hasFoundAnArgument;
     });
-  }
+  } // init the error list
 
-  // init the error list
-  const errors = [];
 
-  // make sure all the arguments correspond to their definition
+  const errors = []; // make sure all the arguments correspond to their definition
+
   Object.keys(argsDefinitions).forEach(argName => {
     let value;
+
     if (settings.treatDotsAsObject) {
-      value = __get(argsObj, argName);
+      value = (0, _get.default)(argsObj, argName);
     } else {
       value = argsObj[argName];
-    }
+    } // check argument without value but with a default property in the definition
 
-    // check argument without value but with a default property in the definition
+
     if (value === undefined && argsDefinitions[argName].default !== undefined) {
       if (settings.treatDotsAsObject) {
-        __set(argsObj, argName, argsDefinitions[argName].default);
+        (0, _set.default)(argsObj, argName, argsDefinitions[argName].default);
       } else {
         argsObj[argName] = argsDefinitions[argName].default;
       }
-      value = argsDefinitions[argName].default;
-    }
 
-    // check argument that does not have any value and that are required
+      value = argsDefinitions[argName].default;
+    } // check argument that does not have any value and that are required
+
+
     if (value === undefined && argsDefinitions[argName].required === true) {
       errors.push(`The argument "<red>${argName}</red>" is required but you don't pass any value...`);
       return;
-    }
+    } // check that the argument correspond to his definition
 
-    // check that the argument correspond to his definition
+
     if (!isValueCorrespondToArgDefinition(value, argsDefinitions[argName])) {
       if (settings.treatDotsAsObject) {
-        __delete(argsObj, argName);
+        (0, _delete.default)(argsObj, argName);
       } else {
         delete argsObj[argName];
       }
     }
-  });
+  }); // return errors if their is
 
-  // return errors if their is
   if (errors.length) {
-    return new Error(__parseHtml(errors.join('\n')));
-  }
+    return new Error((0, _parseHtml.default)(errors.join('\n')));
+  } // return the argsObj
 
-  // return the argsObj
+
   return argsObj;
-
 }
 
 function processArgType(type) {
@@ -204,34 +224,48 @@ function processArgType(type) {
 
 function getArgNameByAlias(alias, argsDefinitions) {
   const argsNames = Object.keys(argsDefinitions);
+
   for (let i = 0; i < argsNames.length; i++) {
     const argumentObj = argsDefinitions[argsNames[i]];
+
     if (alias === argumentObj.alias) {
       return argsNames[i];
     }
   }
 }
 
+function parse(value) {
+  if (value === 'root') return value;
+  const parsedValue = (0, _parse.default)(value);
+
+  if (typeof parsedValue === 'object' && !(0, _plainObject.default)(parsedValue)) {
+    return value;
+  }
+
+  return parsedValue;
+}
+
 function isValueCorrespondToArgDefinition(value, argDefinition) {
   // checking type first
   let type = null;
+
   if (argDefinition.type) {
     type = processArgType(argDefinition.type);
-    if (type === 'array' && !Array.isArray(__parse(value))) return false;
-    else if (type !== 'array' && type !== typeof __parse(value)) return false;
-  }
+    if (type === 'array' && !Array.isArray(parse(value))) return false;else if (type !== 'array' && type !== typeof parse(value)) return false;
+  } // checking regexp
 
-  // checking regexp
+
   if (argDefinition.regexp && typeof value === 'string') {
     if (!argDefinition.regexp.test(value)) return false;
-  }
+  } // checking validator
 
-  // checking validator
+
   if (argDefinition.validator && typeof argDefinition.validator === 'function') {
-    if (!argDefinition.validator(__parse(value))) return false;
-  }
+    if (!argDefinition.validator(parse(value))) return false;
+  } // all good
 
-  // all good
+
   return true;
-
 }
+
+module.exports = exports.default;

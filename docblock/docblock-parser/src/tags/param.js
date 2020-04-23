@@ -20,6 +20,7 @@ module.exports = function param(data) {
   const res = {};
 
   data.forEach(param => {
+    if (typeof param !== 'string') return;
     const parts = param.value.split(/\s{2,20000}/).map(l => l.trim());
     let type = __upperFirst(parts[0].replace('{', '').replace('}', ''));
     const variable = parts[1];

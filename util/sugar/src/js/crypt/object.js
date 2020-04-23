@@ -1,10 +1,18 @@
 import __encodeObject from 'object-encode';
 
+/**
+ * @name            object
+ * @namespace       sugar.js.crypt
+ * @type            Object
+ * 
+ * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the object algorithm
+ * 
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
 export default {
 
   /**
    * @name        encrypt
-   * @namespace     sugar.js.crypt.object
    * @type        Function
    *
    * Encrypt
@@ -21,7 +29,6 @@ export default {
 
   /**
    * @name        decrypt
-   * @namespace       sugar.js.crypt.object
    * @type        Function
    *
    * Decrypt

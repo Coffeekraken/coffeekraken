@@ -18,6 +18,6 @@ module.exports = function example(data) {
   }
   return {
     language: typeof data.value === 'string' ? data.value.toLowerCase() : data.value,
-    code: data.content.join('\n')
+    code: Array.isArray(data.content) ? data.content.join('\n') : data.content
   };
 }

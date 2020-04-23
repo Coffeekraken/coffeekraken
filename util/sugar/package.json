@@ -12,11 +12,17 @@
     }
   ],
   "main": "dist/js/_all.js",
+  "bin": {
+    "sugar": "./src/cli/sugar.cli.js"
+  },
   "license": "MIT",
   "scripts": {
     "test": "jest",
     "build.js": "rm -rf dist && babel src/js -d js --ignore 'src/**/*.spec.js','src/**/*.test.js'",
     "snippets.node": "node src/node/generateSnippetsFile.js"
+  },
+  "_moduleAliases": {
+    "@coffeekraken/sugar": "."
   },
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "^7.8.3",
@@ -79,6 +85,7 @@
     "mixin-deep": "^2.0.1",
     "mkdirp": "^0.5.1",
     "mobile-detect": "^1.4.4",
+    "module-alias": "^2.2.2",
     "node-machine-id": "^1.1.12",
     "nodemailer": "^6.4.2",
     "object-diff": "0.0.4",

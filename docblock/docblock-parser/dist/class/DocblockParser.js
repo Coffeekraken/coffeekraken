@@ -169,7 +169,8 @@ module.exports = (_temp = class DocblockParser {
 
   parse(string, settings = {}) {
     // search for the docblock(s) (?:[ \t]*\*[ \t]*)(?:@([a-zA-Z]+)[ \t]*)?(?:([^{\n-]+)[ \t]+)?(?:{([a-z|A-Z]+)}[ \t]*)?(.*)
-    const docblocksRawStrings = string.match(/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/g).map(s => {
+    // const docblocksRawStrings = string.match(/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/g).map(s => {
+    const docblocksRawStrings = string.match(/\/\*{2}([\s\S]+?)\*\//g).map(s => {
       return `/${s}/`;
     }); // store the docblocks object parsed lines
 

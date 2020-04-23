@@ -3,11 +3,19 @@ import utf8 from 'crypto-js/enc-utf8';
 import toString from '../string/toString';
 import parse from '../string/parse';
 
+/**
+ * @name            aes
+ * @namespace       sugar.js.crypt
+ * @type            Object
+ * 
+ * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the aes algorithm
+ * 
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
 export default {
 
   /**
    * @name        encrypt
-   * @namespace     sugar.js.crypt.aes
    * @type        Function
    *
    * Encrypt
@@ -18,14 +26,13 @@ export default {
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  encrypt: function(message, key = 'coffeekraken.sugar.crypt.aes') {
+  encrypt: function (message, key = 'coffeekraken.sugar.crypt.aes') {
     if (typeof message !== 'string') message = toString(message);
     return AES.encrypt(message, key).toString();
   },
 
   /**
    * @name        decrypt
-   * @namespace       sugar.js.crypt.aes
    * @type        Function
    *
    * Decrypt
@@ -36,7 +43,7 @@ export default {
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  decrypt: function(message, key = 'coffeekraken.sugar.crypt.aes') {
+  decrypt: function (message, key = 'coffeekraken.sugar.crypt.aes') {
     let value = AES.decrypt(message, key).toString(utf8);
     return parse(value);
   }

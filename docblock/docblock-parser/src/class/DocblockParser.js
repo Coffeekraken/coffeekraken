@@ -1,6 +1,9 @@
 const __deepMerge = require('@coffeekraken/sugar/js/object/deepMerge');
 const __map = require('@coffeekraken/sugar/js/object/map');
 const __defaultConfig = require('../docblock-parser.config');
+const __isPath = require('@coffeekraken/sugar/node/is/path');
+const __fs = require('fs');
+const __path = require('path');
 
 // TODO tag function implementation for: listens, member, var, event, borrows, yields, typedef and throws
 
@@ -11,6 +14,7 @@ const __returnTag = require('../tags/return');
 const __exampleTag = require('../tags/example');
 const __paramTag = require('../tags/param');
 const __snippetTag = require('../tags/snippet');
+
 
 const tagsMap = {
   author: __authorTag,
@@ -167,17 +171,36 @@ module.exports = class DocblockParser {
    */
   parse(string, settings = {}) {
 
+    // check if the passed string is a file path
+    let filepath = null;
+    if (__isPath(string, true)) {
+      filepath = string;
+      string = __fs.readFileSync(string).toString();
+    } else if (settings.filepath) {
+      filepath = settings.filepath;
+    }
+
     // search for the docblock(s) (?:[ \t]*\*[ \t]*)(?:@([a-zA-Z]+)[ \t]*)?(?:([^{\n-]+)[ \t]+)?(?:{([a-z|A-Z]+)}[ \t]*)?(.*)
     // const docblocksRawStrings = string.match(/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/g).map(s => {
     const docblocksRawStrings = string.match(/\/\*{2}([\s\S]+?)\*\//g).map(s => {
-      return `/${s}/`;
+      return s;
     });
 
     // store the docblocks object parsed lines
-    const docblocks = [];
+    let docblocks = [];
 
     // loop on found docblocks
-    docblocksRawStrings.forEach(block => {
+    docblocksRawStrings.forEach(blockString => {
+
+      // check if theirs some processor(s) function registered
+      if (settings.preprocessor) {
+        if (!Array.isArray(settings.preprocessor)) settings.preprocessor = [settings.preprocessor];
+        let currentBlockString = blockString;
+        settings.preprocessor.forEach(fn => {
+          currentBlockString = fn(currentBlockString);
+        });
+        blockString = currentBlockString;
+      }
 
       // some variables
       let currentTag = null;
@@ -204,7 +227,7 @@ module.exports = class DocblockParser {
       }
 
       // split the block by tags
-      const lines = block.split('\n').map(l => l.trim());
+      const lines = blockString.split('\n').map(l => l.trim());
 
       lines.forEach(line => {
 
@@ -250,17 +273,46 @@ module.exports = class DocblockParser {
 
       add();
 
+      // save the raw string
+      docblockObj._ = {
+        raw: blockString.toString(),
+        filepath
+      };
+
       docblocks.push(docblockObj);
 
     });
 
     // loop on each docblocks to process the parsed lines
-    docblocks.forEach(block => {
+    docblocks = docblocks.map(block => {
 
       block = __map(block, (value, prop) => {
+        if (prop.slice(0, 1) === '_') return value;
         if (this._settings.tags[prop]) return this._settings.tags[prop](value);
         return __simpleValueTag(value);
       });
+
+      if (block.src) {
+        if (block.src.slice(0, 1) === '.' && !filepath) {
+          throw new Error(`A block contains a "@src" tag that has a relative path "${block.src}". Unfortunally we don't have the exact path of the original parsed file so we cannot resolve this relative path... Please, either pass as first parameter the absolute path of the file to parse, of in the settings by specifying this property "settings.filepath"...`);
+        }
+        let srcPath;
+        if (block.src.slice(0, 1) === '/') {
+          srcPath = block.src;
+        } else if (filepath) {
+          srcPath = __path.resolve(filepath.split('/').slice(0, -1).join('/'), block.src);
+        }
+        if (__isPath(srcPath, true)) {
+          const srcBlock = this.parse(srcPath, this._settings)[0];
+          if (srcBlock) {
+            delete block._.raw;
+            block = __deepMerge(srcBlock, block);
+            delete block.src;
+          }
+        }
+      }
+
+      return block;
 
     });
 

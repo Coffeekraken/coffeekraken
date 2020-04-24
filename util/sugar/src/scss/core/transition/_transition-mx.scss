@@ -1,0 +1,51 @@
+@use 'sass:string';
+/**
+ * @name    transition
+ * @namespace     sugar.scss.core.transition
+ * @type      mixin
+ *
+ * Take a transition as parameter and print the corresponding transition property
+ * The $transitions parameter can be either a registered transition name or a custom css transition like : all .2s ease-in-out 2s
+ * The $transitions argument will be parsed with the [./_parse-properties.scss] function.
+ *
+ * @param 			{List} 				$transitions 			The registered transition(s) name(s) or the transition(s) strings(s) to transform into list
+ * @return 			{List} 										The corresponding transition list properties
+ *
+ * @example     scss
+ * // register a transition
+ * \@include sugar.setup((
+ * 		transitions : (
+ * 			fast : all .2s ease-in-out 0s,
+ * 			// other transitions...
+ * 		)
+ * ));
+ *
+ * // registered transition
+ * .my-cool-element {
+ * 		\@include sugar.transition(fast);
+ * 		// transition : all .2s ease-in-out 0s;
+ * }
+ *
+ * // custom transition
+ * .my-cool-element {
+ * 		\@include sugar.transition(fast -delay .5s, fast width ease-in);
+ *  	// transition : all .2s ease-in-out .5s, width .2s ease-in 0s;
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@mixin transition($transitions...) {
+  // get the transitions
+  $trans: transition($transitions...);
+
+  // add the outline-color transition to detect the transitionstart in js
+  $trans: list-append(
+    str-unquote("#{$trans}"),
+    outline-color 0.000001s linear 0s,
+    comma
+  );
+
+  // set transition
+  transition: $trans;
+  outline-color: black;
+}

@@ -1,0 +1,26 @@
+/**
+ * @name    color-opacity
+ * @namespace     sugar.scss.core.color
+ * @type          Function
+ *
+ * Return the opacity of the passed color
+ *
+ * @param       {Color}       $color        The color to prcess
+ * @return      {Number}                    The color opacity
+ *
+ * @example     scss
+ * sugar.color-opacity(#e1d7d2); // => 1
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function color-opacity($color) {
+  @if setting('debug.test-arguments') {
+    $color: test-argument(
+      'sugar.color-opacity',
+      'color',
+      color,
+      $color
+    );
+  }
+  @return opacity($color);
+}

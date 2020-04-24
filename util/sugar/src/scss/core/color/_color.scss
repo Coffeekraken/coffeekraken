@@ -1,0 +1,259 @@
+@use "sass:color";
+@use "sass:map";
+@use "sass:math";
+@use "sass:meta";
+
+/**
+ * @name      color
+ * @namespace     sugar.scss.core.color
+ * @type      function
+ *
+ * Get a registered color by name or wrap a new color into a sugar.color call
+ * to manipulate it with ease.
+ * Supported actions :
+ * - hue {Deg}
+ * - lighten {Percent}
+ * - darken {Percent}
+ * - saturate {Percent}
+ * - desaturate {Percent}
+ * - grayscale {Boolean}
+ * - complement {Boolean}
+ * - invert {Boolean}
+ * - opacity {Percent}
+ * - mix {Color}
+ * - lightness {Percent}
+ * - saturation {Percent}
+ *
+ * @param 		{String|Color} 		$color 				The color name or the color value to manipulate
+ * @param 		{String|List} 			[$modifier=null] 	The color modifier to apply. Can be a registered modifier name or a modifier list
+ * @return 		{Color} 									The actual color value
+ *
+ * @example 	 	scss
+ * // default color (settings.colors.default)
+ * $myColor : sugar.color(default);
+ * // primary color (settings.colors.primary)
+ * $primary : sugar.color(primary);
+ * // manipulate
+ * $primary-dark : sugar.color(primary, -darken 10%);
+ * // registered modifier
+ * $primary-light : sugar.color(primary, light);
+ * // $name as list
+ * $modified primary : sugar.color((primary, -darken 10%));
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function color($name, $actions: null) {
+
+  // dash syntax
+  @if $actions and meta.type-of($actions) == list {
+    @return color($name, dash-to-map($actions));
+  }
+
+  // test parameters
+  @if setting('debug.test-arguments') {
+    $name: test-argument("color", "name", "color|string", $name);
+    $actions: test-argument(
+      "color",
+      "actions",
+      "map|string|color",
+      $actions
+    );
+  }
+
+  // grab the colors
+  $colors: setting("colors");
+  $color: setting("colors.#{$name}");
+  $modifiers: null;
+
+  // check that we have the color
+  @if $color == null {
+    @if is($name, color) {
+      $color: $name;
+    } @else {
+      @error ('The color "#{$name}" does not exist...');
+    }
+  }
+
+  // check if is a map
+  @if meta.type-of($color) == map {
+    $modifiers: map.get($color, modifiers);
+    $color: map.get($color, color);
+  }
+
+  // if the color is a string
+  @if is($color, string) or is($color, color) {
+    @if $color != $name and setting("colors.#{$color}") {
+      @return color($color, $actions);
+    }
+  }
+
+  // check if action is a string to check if is a modifier
+  @if meta.type-of($actions) ==
+    string and
+    $modifiers and
+    map.get($modifiers, $actions)
+  {
+    $mod: map.get($modifiers, $actions);
+    @if meta.type-of($mod) == color {
+      $color: $mod;
+      $actions: null;
+    } @else if meta.type-of($mod) == list {
+      $actions: sugar.dash-to-map($mod);
+    } @else if meta.type-of($mod) == map {
+      $actions: $mod;
+    } @else {
+      @error ('The color "#{$name}" "actions" parameter set as "#{$actions}" for the "sugar.color" function is not valid');
+    }
+  }
+
+  // check action to do
+  @if $actions {
+    // check arguments
+    @if setting('debug.test-arguments') {
+      @if meta.type-of($actions) == map {
+        $hue: test-argument(
+          "color",
+          "actions.hue",
+          number,
+          map.get($actions, hue)
+        );
+        $lighten: test-argument(
+          "color",
+          "actions.lighten",
+          number,
+          map.get($actions, lighten)
+        );
+        $darken: test-argument(
+          "color",
+          "actions.darken",
+          number,
+          map.get($actions, darken)
+        );
+        $saturate: test-argument(
+          "color",
+          "actions.saturate",
+          number,
+          map.get($actions, saturate)
+        );
+        $desaturate: test-argument(
+          "color",
+          "actions.desaturate",
+          number,
+          map.get($actions, desaturate)
+        );
+        $grayscale: test-argument(
+          "color",
+          "actions.grayscale",
+          boolean,
+          map.get($actions, grayscale)
+        );
+        $complement: test-argument(
+          "color",
+          "actions.complement",
+          boolean,
+          map.get($actions, complement)
+        );
+        $invert: test-argument(
+          "color",
+          "actions.invert",
+          boolean,
+          map.get($actions, invert)
+        );
+        $opacity: test-argument(
+          "color",
+          "actions.opacity",
+          number,
+          map.get($actions, opacity)
+        );
+        $mix: test-argument(
+          "color",
+          "actions.mix",
+          color,
+          map.get($actions, mix)
+        );
+        $saturation: test-argument(
+          "color",
+          "actions.saturation",
+          number,
+          map.get($actions, saturation)
+        );
+        $lightness: test-argument(
+          "color",
+          "actions.lightness",
+          number,
+          map.get($actions, lightness)
+        );
+      } @else if meta.type-of($actions) == string {
+        $modifiers: setting("colors.#{$name}.modifiers");
+        @if not $modifiers {
+          @error ('The color "#{$name}" does not have any "#{$actions}" modifier...');
+        }
+        $actions: test-argument(
+          "color",
+          "actions",
+          map.keys(sugar.setting("colors.#{$name}.modifiers")),
+          $actions
+        );
+      }
+    }
+
+    // loop on each action to process to keep order
+    @each $action, $value in $actions {
+      // hue
+      @if $action == hue {
+        $color: color.adjust($color, $hue: $value);
+      }
+      // lighten
+      @if $action == lighten {
+        $color: color.adjust($color, $lightness: $value);
+      }
+      // darken
+      @if $action == darken {
+        $color: color.adjust($color, $lightness: -($value));
+      }
+      // saturate
+      @if $action == saturate {
+        $color: color.adjust($color, $saturation: $value);
+      }
+      // desaturate
+      @if $action == desaturate {
+        $color: color.adjust($color, $saturation: -($value));
+      }
+      // grayscale
+      @if $action == grayscale and $value == true {
+        $color: color.grayscale($color);
+      }
+      // complement
+      @if $action == complement and $value == true {
+        $color: color.complement($color);
+      }
+      // invert
+      @if $action == invert and $value == true {
+        $color: color.invert($color);
+      }
+      // opacity
+      @if $action == opacity and meta.type-of($value) == number {
+        $transparentize: 1 - strip-units($value);
+        @if math.unit($value) == "%" {
+          $transparentize: (100 - strip-units($value)) / 100;
+        }
+        $color: color.adjust($color, $alpha: -$transparentize);
+      }
+      // mix
+      @if $action == mix and meta.type-of($value) == color {
+        $color: color.mix($color, $value);
+      }
+      // saturation
+      @if $action == saturation and meta.type-of($value) == number {
+        $color: color.change($color, $saturation: $value);
+      }
+      // lightness
+      @if $action == lightness and meta.type-of($value) == number {
+        $color: color.change($color, $lightness: $value);
+      }
+    }
+  }
+
+  // return the color
+  @return $color;
+}

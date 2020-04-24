@@ -1,0 +1,20 @@
+/**
+ * @name      space
+ * @namespace     sugar.scss.core.space
+ * @type    function
+ *
+ * Return a value interpolated from the settings.spaces stack
+ *
+ * @param 			{String} 			$size 			The space size wanted. Must exist in the settings.sizes stack
+ * @return 			{Number} 							The actual space value
+ *
+ * @example     scss
+ * .my-cool-section {
+ * 		padding : sugar.space(big);
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function space($size) {
+  @return interpolate("spaces", $size);
+}

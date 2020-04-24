@@ -1,0 +1,62 @@
+@use "sass:list";
+@use "sass:meta";
+@use "sass:string";
+
+/**
+ * @name      dash-to-map
+ * @namespace     sugar.scss.core.map
+ * @type        function
+ *
+ * Transform a dash notation value into a map
+ * Dash notation value is : -key1 value1 -key2 value2
+ *
+ * @param 			{List} 			$dash 			The dash list notation to transform
+ * @return 			{Map} 							The map generated
+ *
+ * @example
+ * $dash : -hello world -coco universe
+ * sugar.dash-to-map($dash);
+ * // (
+ * // 	hello : world,
+ * // 	coco : universe
+ * // )
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function dash-to-map($dash) {
+  $prop: null;
+  $values: ();
+  $map: ();
+  // protect
+  @if meta.type-of($dash) != list or string.slice(list.nth($dash, 1), 1, 1) != "-" {
+    @return $dash;
+  }
+  // loop on each properties
+  @each $d in $dash {
+    @if meta.type-of($d) == string and string.slice($d, 1, 1) == "-" {
+      // check if a prop exist and if values exists
+      @if $prop and list.length($values) > 0 {
+        @if list.length($values) == 1 {
+          $values: list.nth($values, 1);
+        }
+        $map: map-set($map, $prop, $values);
+        $values: ();
+      }
+      // set new prop
+      $prop: string.slice($d, 2);
+      // check if
+    } @else {
+      // append values
+      $values: list.append($values, $d);
+    }
+  }
+  // check if a prop exist and if values exists
+  @if $prop and list.length($values) > 0 {
+    @if list.length($values) == 1 {
+      $values: list.nth($values, 1);
+    }
+    $map: map-set($map, $prop, $values);
+  }
+  // return the map
+  @return $map;
+}

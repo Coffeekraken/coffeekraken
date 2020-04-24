@@ -1,4 +1,3 @@
-const __childProcess = require('child_process');
 const __parseArgs = require('../../node/cli/parseArgs');
 const __appPath = require('app-root-path');
 const __path = require('path');
@@ -6,6 +5,12 @@ const __parseHtml = require('../../node/terminal/parseHtml');
 const __sass = require('sass');
 const __chokidar = require('chokidar');
 const __writeFileSync = require('../../node/fs/writeFileSync');
+const __fs = require('fs');
+const __postcss = require('postcss');
+const __autoprefixer = require('autoprefixer');
+const __precss = require('precss');
+const __postcssPresetEnv = require('postcss-preset-env');
+const __cssnano = require('cssnano');
 
 module.exports = (stringArgs) => {
   const args = __parseArgs(stringArgs, {
@@ -38,6 +43,11 @@ module.exports = (stringArgs) => {
       type: 'Boolean',
       alias: 'm',
       default: true
+    },
+    prod: {
+      type: 'Boolean',
+      alias: 'p',
+      default: false
     }
   });
 
@@ -94,8 +104,6 @@ module.exports = (stringArgs) => {
   watcher.on('unlink', renderScss);
 
   function renderScss(path) {
-    console.log(path);
-
     const writingPath =
       outputPath +
       path
@@ -119,6 +127,36 @@ module.exports = (stringArgs) => {
         __writeFileSync(writingPath, result.css.toString());
         if (result.map) {
           __writeFileSync(writingMapPath, result.map.toString());
+        }
+
+        if (args.prod) {
+          console.log(
+            __parseHtml(
+              `Start building the production version that will be saved to: <yellow>${outputPath
+                .replace(__appPath.path, '<rootDir>')
+                .replace('.css', '.prod.css')}</yellow>`
+            )
+          );
+
+          __fs.readFile(writingPath, (err, css) => {
+            __postcss([__precss, __autoprefixer, __postcssPresetEnv, __cssnano])
+              .process(css, {
+                from: writingPath,
+                to: writingPath.replace('.css', '.prod.css')
+              })
+              .then((result) => {
+                __fs.writeFileSync(
+                  writingPath.replace('.css', '.prod.css'),
+                  result.css
+                );
+                if (result.map) {
+                  __fs.writeFileSync(
+                    writingPath.replace('.css', '.prod.css.map'),
+                    result.map
+                  );
+                }
+              });
+          });
         }
       }
     );

@@ -1,60 +1,60 @@
 /**
  * This file is responsible to register the static helper classes like:
  *
- * - sugar.helper.pull.left : ```.pull-left```
- * - sugar.helper.pull.right : ```.pull-right```
- * - sugar.helper.position.relative : ```.relative```
- * - sugar.helper.position.absolute : ```.absolute```
- * - sugar.helper.clear.left : ```.clear-left```
- * - sugar.helper.clear.right : ```.clear-right```
- * - sugar.helper.clear.both : ```.clear```
- * - sugar.helper.pointer.events.all : ```.pointer-events-all```
- * - sugar.helper.pointer.events.none : ```.pointer-events-none```
- * - sugar.helper.display.show : ```.show```
- * - sugar.helper.display.show-inline : ```.show-inline```
- * - sugar.helper.display.hidden : ```.hidden```
- * - sugar.helper.display.hide : ```.hide```
- * - sugar.helper.display.visible : ```.visible```
- * - sugar.helper.display.invisible : ```.invisible```
- * - sugar.helper.display.visually-hidden : ```.visually-hidden```
- * - sugar.helper.text.hidden : ```.t-hidden```
- * - sugar.helper.text.truncate : ```.t-truncate```
- * - sugar.helper.text.align.left : ```.t-left```
- * - sugar.helper.text.align.right : ```.t-right```
- * - sugar.helper.text.align.center : ```.t-center```
- * - sugar.helper.text.align.justify : ```.t-justify```
- * - sugar.helper.text.transform.lowercase : ```.t-lowercase```
- * - sugar.helper.text.transform.uppercase : ```.t-uppercase```
- * - sugar.helper.text.transform.capitalize : ```.t-capitalize```
- * - sugar.helper.font.weight.bold : ```.f-bold```
- * - sugar.helper.font.weight.lighter : ```.f-lighter```
- * - sugar.helper.font.weight.bolder : ```.f-bolder```
- * - sugar.helper.font.weight.normal : ```.f-normal```
- * - sugar.helper.font.style.italic : ```.f-italic```
- * - sugar.helper.font.style.oblique : ```.f-oblique```
- * - sugar.helper.font.variant.small-caps : ```.f-small-caps```
- * - sugar.helper.block.align.center : ```.block-center```
- * - sugar.helper.ratio.21-9 : ```.ratio-21-9```
- * - sugar.helper.ratio.16-9 : ```.ratio-16-9```
- * - sugar.helper.ratio.4-3 : ```.ratio-4-3```
- * - sugar.helper.ratio.1-1 : ```.ratio-1-1```
- * - sugar.helper.size.abs.cover : ```.abs-cover```
- * - sugar.helper.size.abs.contain : ```.abs-contain```
- * - sugar.helper.size.abs.fit : ```.abs-fit```
- * - sugar.helper.media.object : ```.mo .mo--center .mo--end .mo__content```
- * - sugar.helper.clearfix.default : ```.clearfix```
- * - sugar.helper.clearfix.float : ```.clearfix-float```
- * - sugar.helper.clearfix.micro : ```.clearfix-micro```
- * - sugar.helper.clearfix.overflow : ```.clearfix-overflow```
- * - sugar.helper.clearfix.facebook : ```.clearfix-facebook```
- * - sugar.helper.no-transitions : ```.no-transitions```
- * - sugar.helper.clear-transitions : ```.clear-transitions```
- * - sugar.helper.no-animations : ```.no-animations```
- * - sugar.helper.clear-animations : ```.clear-animations```
- * - sugar.helper.no-transmations : ```.no-transmations```
- * - sugar.helper.clear-transmations : ```.clear-transmations```
+ * - sugar.helper.pull.left : <primary>pull-left</primary>
+ * - sugar.helper.pull.right : <primary>pull-right</primary>
+ * - sugar.helper.position.relative : <primary>relative</primary>
+ * - sugar.helper.position.absolute : <primary>absolute</primary>
+ * - sugar.helper.clear.left : <primary>clear-left</primary>
+ * - sugar.helper.clear.right : <primary>clear-right</primary>
+ * - sugar.helper.clear.both : <primary>clear</primary>
+ * - sugar.helper.pointer.events.all : <primary>pointer-events-all</primary>
+ * - sugar.helper.pointer.events.none : <primary>pointer-events-none</primary>
+ * - sugar.helper.display.show : <primary>show</primary>
+ * - sugar.helper.display.show-inline : <primary>show-inline</primary>
+ * - sugar.helper.display.hidden : <primary>hidden</primary>
+ * - sugar.helper.display.hide : <primary>hide</primary>
+ * - sugar.helper.display.visible : <primary>visible</primary>
+ * - sugar.helper.display.invisible : <primary>invisible</primary>
+ * - sugar.helper.display.visually-hidden : <primary>visually-hidden</primary>
+ * - sugar.helper.text.hidden : <primary>t-hidden</primary>
+ * - sugar.helper.text.truncate : <primary>t-truncate</primary>
+ * - sugar.helper.text.align.left : <primary>t-left</primary>
+ * - sugar.helper.text.align.right : <primary>t-right</primary>
+ * - sugar.helper.text.align.center : <primary>t-center</primary>
+ * - sugar.helper.text.align.justify : <primary>t-justify</primary>
+ * - sugar.helper.text.transform.lowercase : <primary>t-lowercase</primary>
+ * - sugar.helper.text.transform.uppercase : <primary>t-uppercase</primary>
+ * - sugar.helper.text.transform.capitalize : <primary>t-capitalize</primary>
+ * - sugar.helper.font.weight.bold : <primary>f-bold</primary>
+ * - sugar.helper.font.weight.lighter : <primary>f-lighter</primary>
+ * - sugar.helper.font.weight.bolder : <primary>f-bolder</primary>
+ * - sugar.helper.font.weight.normal : <primary>f-normal</primary>
+ * - sugar.helper.font.style.italic : <primary>f-italic</primary>
+ * - sugar.helper.font.style.oblique : <primary>f-oblique</primary>
+ * - sugar.helper.font.variant.small-caps : <primary>f-small-caps</primary>
+ * - sugar.helper.block.align.center : <primary>block-center</primary>
+ * - sugar.helper.ratio.21-9 : <primary>ratio-21-9</primary>
+ * - sugar.helper.ratio.16-9 : <primary>ratio-16-9</primary>
+ * - sugar.helper.ratio.4-3 : <primary>ratio-4-3</primary>
+ * - sugar.helper.ratio.1-1 : <primary>ratio-1-1</primary>
+ * - sugar.helper.size.abs.cover : <primary>abs-cover</primary>
+ * - sugar.helper.size.abs.contain : <primary>abs-contain</primary>
+ * - sugar.helper.size.abs.fit : <primary>abs-fit</primary>
+ * - sugar.helper.media.object : <primary>mo .mo--center .mo--end .mo__content</primary>
+ * - sugar.helper.clearfix.default : <primary>clearfix</primary>
+ * - sugar.helper.clearfix.float : <primary>clearfix-float</primary>
+ * - sugar.helper.clearfix.micro : <primary>clearfix-micro</primary>
+ * - sugar.helper.clearfix.overflow : <primary>clearfix-overflow</primary>
+ * - sugar.helper.clearfix.facebook : <primary>clearfix-facebook</primary>
+ * - sugar.helper.no-transition : <primary>no-transition</primary>
+ * - sugar.helper.clear-transition : <primary>clear-transition</primary>
+ * - sugar.helper.no-animation : <primary>no-animation</primary>
+ * - sugar.helper.clear-animation : <primary>clear-animation</primary>
+ * - sugar.helper.no-transmation : <primary>no-transmation</primary>
+ * - sugar.helper.clear-transmation : <primary>clear-transmation</primary>
  *
- * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
  */
 
 //
@@ -62,26 +62,36 @@
 //
 @include register-class(pull-left, "sugar.helper.pull.left") {
   /**
-	 * @name 		```.pull-left```
+   * @name 		pull-left
+   * @namespace 	sugar.scss.helper.class.pull
+   * @type        class
+   *
 	 * Allows you to pull an element to the left side
-	 * @styleguide 	Helpers / Pull
-	 * @example 	html
+   *
+   * @example 	html
    * <div>
 	 * 	<span class="pull-left">Hello world</span>
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   float: left;
 }
 @include register-class(pull-right, "sugar.helper.pull.right") {
   /**
-	 * @name 		```.pull-right```
+   * @name 		pull-right
+   * @namespace 	sugar.scss.helper.class.pull
+   * @type        class
+   *
 	 * Allows you to pull an element to the right side
-	 * @styleguide 	Helpers / Pull
-	 * @example 	html
+   *
+   * @example 	html
    * <div>
 	 * 	<span class="pull-right">Hello world</span>
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   float: right;
 }
 
@@ -90,26 +100,36 @@
 //
 @include register-class(relative, "sugar.helper.position.relative") {
   /**
-	 * @name 		```.relative```
+   * @name 		relative
+   * @namespace 	sugar.scss.helper.class.position
+   * @type        class
+   *
 	 * Set an element position as ```relative```
-	 * @styleguide 	Helpers / Position
-	 * @example 	html
+   *
+   * @example 	html
 	 * <div class="relative">
 	 * 	I'm relative now
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   position: relative;
 }
 @include register-class(absolute, "sugar.helper.position.absolute") {
   /**
-	 * @name 		```.absolute```
+   * @name 		absolute
+   * @namespace 	sugar.scss.helper.class.position
+   * @type        class
+   *
 	 * Set an element position as ```absolute```
-	 * @styleguide 	Helpers / Position
-	 * @example 	html
+   *
+   * @example 	html
 	 * <div class="absolute">
 	 * 	I'm absolute now
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   position: absolute;
 }
 
@@ -118,38 +138,53 @@
 //
 @include register-class(clear-left, "sugar.helper.clear.left") {
   /**
-	 * @name 		```.clear-left```
+   * @name 		clear-left
+   * @namespace 	sugar.scss.helper.class.float
+   * @type        class
+   *
 	 * Clear the left float on the element
-	 * @styleguide 	Helpers / Float
-	 * @example 	html
+   *
+   * @example 	html
 	 * <div class="clear-left">
 	 * 	I clear the left float
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   clear: left;
 }
 @include register-class(clear-right, "sugar.helper.clear.right") {
   /**
-	 * @name 		```.clear-right```
+   * @name 		clear-right
+   * @namespace 	sugar.scss.helper.class.float
+   * @type        class
+   *
 	 * Clear the right float on the element
-	 * @styleguide 	Helpers / Float
-	 * @example 	html
+   *
+   * @example 	html
 	 * <div class="clear-right">
 	 * 	I clear the right float
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   clear: right;
 }
 @include register-class(clear, "sugar.helper.clear.both") {
   /**
-	 * @name 		```.clear```
+   * @name 		clear
+   * @namespace 	sugar.scss.helper.class.float
+   * @type        class
+   *
 	 * Clear both float on the element
-	 * @styleguide 	Helpers / Float
-	 * @example 	html
+   *
+   * @example 	html
 	 * <div class="clear">
 	 * 	I clear both floats
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   clear: both;
 }
 
@@ -161,14 +196,19 @@
   "sugar.helper.pointer.events.none"
 ) {
   /**
-	 * @name 		```.pointer-events-none```
+   * @name 		pointer-events-none
+   * @namespace 	sugar.scss.helper.class.pointer.event
+   * @type        class
+   *
 	 * Disable any pointer events
-	 * @styleguide 	Helpers / Pointer events
-	 * @example 	html
+   *
+   * @example 	html
 	 * <div class="pointer-events-none">
 	 * 	I will not react to any pointer events
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   pointer-events: none;
 }
 @include register-class(
@@ -176,14 +216,19 @@
   "sugar.helper.pointer.events.all"
 ) {
   /**
-	 * @name 		```.pointer-events-all```
+   * @name 		pointer-events-all
+   * @namespace 	sugar.scss.helper.class.pointer.event
+   * @type        class
+   *
 	 * Disable any pointer events
-	 * @styleguide 	Helpers / Pointer events
-	 * @example 	html
+   *
+   * @example 	html
 	 * <div class="pointer-events-all">
 	 * 	I will not react to any pointer events
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   pointer-events: all;
 }
 
@@ -192,110 +237,155 @@
 //
 @include register-class(block, "sugar.helper.display.block") {
   /**
-	 * @name 		```.block```
+   * @name 		block
+   * @namespace 	sugar.scss.helper.class.display
+   * @type        class
+   *
 	 * Display the element as ```block```
-	 * @styleguide 	Helpers / Display
-	 * @example 	html
+   *
+   * @example 	html
 	 * <div class="block">
 	 * 	I'm displayed as block
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   display: block;
 }
 @include register-class(inline, "sugar.helper.display.inline") {
   /**
-	 * @name 		```.inline```
+   * @name 		inline
+   * @namespace 	sugar.scss.helper.class.display
+   * @type        class
+   *
 	 * Display the element as ```inline```
-	 * @styleguide 	Helpers / Display
-	 * @example 	html
+   *
+   * @example 	html
 	 * <div class="inline">
 	 * 	I'm displayed as inline
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   display: inline;
 }
 @include register-class(inline-block, "sugar.helper.display.inline-block") {
   /**
-	 * @name 		```.inline-block```
+   * @name 		inline-block
+   * @namespace 	sugar.scss.helper.class.display
+   * @type        class
+   *
 	 * Display the element as ```inline-block```
-	 * @styleguide 	Helpers / Display
-	 * @example 	html
+   *
+   * @example 	html
 	 * <div class="inline-block">
 	 * 	I'm displayed as inline-block
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   display: inline-block;
 }
 @include register-class(show, "sugar.helper.display.show") {
   /**
-	 * @name 		```.show```
+   * @name 		show
+   * @namespace 	sugar.scss.helper.class.display
+   * @type        class
+   *
 	 * Display the element as ```block```
-	 * @styleguide 	Helpers / Display
-	 * @example 	html
+   *
+   * @example 	html
 	 * <div class="show">
 	 * 	I'm displayed
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   display: block;
 }
 @include register-class(show-inline, "sugar.helper.display.show-inline") {
   /**
-	 * @name 		```.show-inline```
+   * @name 		show-inline
+   * @namespace 	sugar.scss.helper.class.display
+   * @type        class
+   *
 	 * Display the element as ```inline-block```
-	 * @styleguide 	Helpers / Display
-	 * @example 	html
+   *
+   * @example 	html
 	 * <div class="show-inline">
 	 * 	I'm inline displayed
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   display: inline-block;
 }
 @include register-class(hidden, "sugar.helper.display.hidden") {
   /**
-	 * @name 		```.hidden```
+   * @name 		hidden
+   * @namespace 	sugar.scss.helper.class.display
+   * @type        class
+   *
 	 * Hide the element by setting the display to ```none```
-	 * @styleguide 	Helpers / Display
-	 * @example 	html
+   *
+   * @example 	html
 	 * <div class="hidden">
 	 * 	I'm hidden
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   display: none;
 }
 @include register-class(hide, "sugar.helper.display.hide") {
   /**
-	 * @name 		```.hide```
+   * @name 		hide
+   * @namespace 	sugar.scss.helper.class.display
+   * @type        class
+   *
 	 * Hide the element by setting the display to ```none```
-	 * @styleguide 	Helpers / Display
-	 * @example 	html
+   *
+   * @example 	html
 	 * <div class="hide">
 	 * 	I'm hidden
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   display: none;
 }
 @include register-class(visible, "sugar.helper.display.visible") {
   /**
-	 * @name 		```.visible```
+   * @name 		visible
+   * @namespace 	sugar.scss.helper.class.display
+   * @type        class
+   *
 	 * Display the element by setting the visibility to ```visible```
-	 * @styleguide 	Helpers / Display
-	 * @example 	html
+   *
+   * @example 	html
 	 * <div class="visible">
 	 * 	I'm visible
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   visibility: visible;
 }
 @include register-class(invisible, "sugar.helper.display.invisible") {
   /**
-	 * @name 		```.invisible```
+   * @name 		invisible
+   * @namespace 	sugar.scss.helper.class.display
+   * @type        class
+   *
 	 * Display the element by setting the visibility to ```hidden```
-	 * @styleguide 	Helpers / Display
-	 * @example 	html
+   *
+   * @example 	html
 	 * <div class="invisible">
 	 * 	I'm invisible
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   visibility: hidden;
 }
 @include register-class(
@@ -303,15 +393,20 @@
   "sugar.helper.display.visually-hidden"
 ) {
   /**
-	 * @name 		```.visually-hidden```
+   * @name 		visually-hidden
+   * @namespace 	sugar.scss.helper.class.display
+   * @type        class
+   *
 	 * Hide the element from display but not for SEO.
 	 * This class use some tricks to make the element dissapear without using some ```display:none;```, etc...
-	 * @styleguide 	Helpers / Display
-	 * @example 	html
+   *
+   * @example 	html
 	 * <div class="visually-hidden">
 	 * 	I'm only visually hidden
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   @include visually-hidden();
 }
 
@@ -320,74 +415,104 @@
 //
 @include register-class(t-hidden, "sugar.helper.text.hidden") {
   /**
-	 * @name 		```.t-hidden```
+   * @name 		t-hidden
+   * @namespace 	sugar.scss.helper.class.text
+   * @type        class
+   *
 	 * Hide the text
-	 * @styleguide 	Helpers / Text
-	 * @example 	html
+   *
+   * @example 	html
 	 * <div class="t-hidden">
 	 * 	I'm not visible
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   @include text-hide();
 }
 @include register-class(t-truncate, "sugar.helper.text.truncate") {
   /**
-	 * @name 		```.t-truncate```
+   * @name 		t-truncate
+   * @namespace 	sugar.scss.helper.class.text
+   * @type        class
+   *
 	 * Hide the text
-	 * @styleguide 	Helpers / Text
-	 * @example 	html
+   *
+   * @example 	html
 	 * <div class="t-truncate">
 	 * 	I'm truncated cause I talk a lot too much Nulla mauris eros, finibus ac faucibus et, tempus quis risus. Praesent sit amet nulla vel libero euismod sodales eu nec.
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   @include text-truncate();
 }
 @include register-class(t-left, "sugar.helper.text.align.left") {
   /**
-	 * @name 		```.t-left```
+   * @name 		t-left
+   * @namespace 	sugar.scss.helper.class.text.align
+   * @type        class
+   *
 	 * Align the text to the left
-	 * @styleguide 	Helpers / Text Align
-	 * @example 	html
+   *
+   * @example 	html
 	 * <div class="t-left">
 	 * 	I'm left aligned
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   text-align: left;
 }
 @include register-class(t-right, "sugar.helper.text.align.right") {
   /**
-	 * @name 		```.t-right```
+   * @name 		t-right
+   * @namespace 	sugar.scss.helper.class.text.align
+   * @type        class
+   *
 	 * Align the text to the right
-	 * @styleguide 	Helpers / Text Align
-	 * @example 	html
+   *
+   * @example 	html
 	 * <div class="t-right">
 	 * 	I'm right aligned
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   text-align: right;
 }
 @include register-class(t-center, "sugar.helper.text.align.center") {
   /**
-	 * @name 		```.t-center```
+   * @name 		t-center
+   * @namespace 	sugar.scss.helper.class.text.align
+   * @type        class
+   *
 	 * Align the text to the center
-	 * @styleguide 	Helpers / Text Align
-	 * @example 	html
+   *
+   * @example 	html
 	 * <div class="t-center">
 	 * 	I'm centered
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   text-align: center;
 }
 @include register-class(t-justify, "sugar.helper.text.align.justify") {
   /**
-	 * @name 		```.t-justify```
+   * @name 		t-justify
+   * @namespace 	sugar.scss.helper.class.text.align
+   * @type        class
+   *
 	 * Make the text justified
-	 * @styleguide 	Helpers / Text Align
-	 * @example 	html
+   *
+   * @example 	html
 	 * <div class="t-justify">
 	 * 	Nullam vel feugiat nunc. Phasellus facilisis, nisi sit amet viverra rhoncus, arcu risus volutpat dolor, sed euismod magna tellus ac purus. Praesent augue lorem, ullamcorper ac accumsan nec, suscipit eu.
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   text-align: justify;
 }
 @include register-class(
@@ -395,14 +520,19 @@
   "sugar.helper.text.transform.lowercase"
 ) {
   /**
-	 * @name 		```.t-lowercase```
+   * @name 		t-lowercase
+   * @namespace 	sugar.scss.helper.class.text.transform
+   * @type        class
+   *
 	 * Transform the text to lowercase
-	 * @styleguide 	Helpers / Text Transform
-	 * @example 	html
+   *
+   * @example 	html
 	 * <div class="t-lowercase">
 	 * 	I'M LOWERCASE
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   text-transform: lowercase;
 }
 @include register-class(
@@ -410,14 +540,19 @@
   "sugar.helper.text.transform.uppercase"
 ) {
   /**
-	 * @name 		```.t-uppercase```
+   * @name 		t-uppercase
+   * @namespace 	sugar.scss.helper.class.text.transform
+   * @type        class
+   *
 	 * Transform the text to uppercase
-	 * @styleguide 	Helpers / Text Transform
-	 * @example 	html
+   *
+   * @example 	html
 	 * <div class="t-uppercase">
 	 * 	I'm uppercase
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   text-transform: uppercase;
 }
 @include register-class(
@@ -425,14 +560,19 @@
   "sugar.helper.text.transform.capitalize"
 ) {
   /**
-	 * @name 		```.t-capitalize```
+   * @name 		t-capitalize
+   * @namespace 	sugar.scss.helper.class.text.transform
+   * @type        class
+   *
 	 * Capizalize the words
-	 * @styleguide 	Helpers / Text Transform
-	 * @example 	html
+   *
+   * @example 	html
 	 * <div class="t-capitalize">
 	 * 	I'm capitalized
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   text-transform: capitalize;
 }
 
@@ -441,65 +581,95 @@
 //
 @include register-class(f-bold, "sugar.helper.font.weight.bold") {
   /**
-	 * @name 		```.f-bold```
+   * @name 		f-bold
+   * @namespace 	sugar.scss.helper.class.font.weight
+   * @type        class
+   *
 	 * Set the font-weight to ```bold```
-	 * @styleguide 	Helpers / Font Weight
-	 * @example 	html
+   *
+   * @example 	html
 	 * This <span class="f-bold">word</span> is bold
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   font-weight: bold;
 }
 @include register-class(f-lighter, "sugar.helper.font.weight.lighter") {
   /**
-	 * @name 		```.f-lighter```
+   * @name 		f-lighter
+   * @namespace 	sugar.scss.helper.class.font.weight
+   * @type        class
+   *
 	 * Set the font-weight to ```lighter```
-	 * @styleguide 	Helpers / Font Weight
-	 * @example 	html
+   *
+   * @example 	html
 	 * 	This <span class="f-lighter">word</span> is lighter
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   font-weight: lighter;
 }
 @include register-class(f-bolder, "sugar.helper.font.weight.bolder") {
   /**
-	 * @name 		```.f-bolder```
+   * @name 		f-bolder
+   * @namespace 	sugar.scss.helper.class.font.weight
+   * @type        class
+   *
 	 * Set the font-weight to ```bolder```
-	 * @styleguide 	Helpers / Font Weight
-	 * @example 	html
+   *
+   * @example 	html
 	 * This <span class="f-bolder">word</span> is bolder
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   font-weight: bolder;
 }
 @include register-class(f-normal, "sugar.helper.font.weight.normal") {
   /**
-	 * @name 		```.f-normal```
+   * @name 		f-normal
+   * @namespace 	sugar.scss.helper.class.font.weight
+   * @type        class
+   *
 	 * Set the font-weight to ```normal```
-	 * @styleguide 	Helpers / Font Weight
-	 * @example 	html
+   *
+   * @example 	html
 	 * <div class="f-bold">
 	 * 	This <span class="f-normal">word</span> is normal
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   font-weight: normal;
   font-style: normal;
 }
 @include register-class(f-italic, "sugar.helper.font.style.italic") {
   /**
-	 * @name 		```.f-italic```
+   * @name 		f-italic
+   * @namespace 	sugar.scss.helper.class.font
+   * @type        class
+   *
 	 * Set the font-style to ```italic```
-	 * @styleguide 	Helpers / Font
-	 * @example 	html
+   *
+   * @example 	html
 	 * This <span class="f-italic">word</span> is italic
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   font-style: italic;
 }
 @include register-class(f-oblique, "sugar.helper.font.style.oblique") {
   /**
-	 * @name 		```.f-oblique```
+   * @name 		f-oblique
+   * @namespace 	sugar.scss.helper.class.font.style
+   * @type        class
+   *
 	 * Set the font-style to ```oblique```
-	 * @styleguide 	Helpers / Font Style
-	 * @example 	html
+   *
+   * @example 	html
 	 * This <span class="f-oblique">word</span> is oblique
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   font-style: oblique;
 }
 @include register-class(
@@ -507,12 +677,17 @@
   "sugar.helper.font.variant.small-caps"
 ) {
   /**
-	 * @name 		```.f-small-caps```
+   * @name 		f-small-caps
+   * @namespace 	sugar.scss.helper.class.font.variant
+   * @type        class
+   *
 	 * Set the font-variant to ```small-caps```
-	 * @styleguide 	Helpers / Font Variant
-	 * @example 	html
+   *
+   * @example 	html
 	 * This <span class="f-small-caps">word</span> is small-caps
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   font-variant: small-caps;
 }
 
@@ -521,14 +696,19 @@
 //
 @include register-class(block-center, "sugar.helper.block.align.center") {
   /**
-	 * @name 		```.block-center```
+   * @name 		block-center
+   * @namespace 	sugar.scss.helper.class.block
+   * @type        class
+   *
 	 * Set the element to as ```display:block``` and center it
-	 * @styleguide 	Helpers / Block
-	 * @example 	html
+   *
+   * @example 	html
 	 * <div class="block-center bkg-primary" style="width:100px;">
 	 * 	I'm a centered block
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -539,38 +719,53 @@
 //
 @include register-class(abs-cover, "sugar.helper.size.abs.cover") {
   /**
-	 * @name 		```.abs-cover```
+   * @name 		abs-cover
+   * @namespace 	sugar.scss.helper.class.size
+   * @type        class
+   *
 	 * Set a size that will cover the entire parent surface by positionning it in absolute
-	 * @styleguide 	Helpers / Sizes
-	 * @example 	html
+   *
+   * @example 	html
 	 * <div class="ratio-16-9">
 	 * 	<img src="https://source.unsplash.com/random" class="abs-cover" />
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   @include size(cover, $position: absolute);
 }
 @include register-class(abs-contain, "sugar.helper.size.abs.contain") {
   /**
-	 * @name 		```.abs-contain```
+   * @name 		abs-contain
+   * @namespace 	sugar.scss.helper.class.size
+   * @type        class
+   *
 	 * Set a size that will contain the entire parent surface by positionning it in absolute
-	 * @styleguide 	Helpers / Sizes
-	 * @example 	html
+   *
+   * @example 	html
 	 * <div class="ratio-16-9">
 	 * 	<img src="https://source.unsplash.com/random" class="abs-contain" />
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   @include size(contain, $position: absolute);
 }
 @include register-class(abs-fit, "sugar.helper.size.abs.fit") {
   /**
-	 * @name 		```.abs-fit```
+   * @name 		abs-fit
+   * @namespace 	sugar.scss.helper.class.size
+   * @type        class
+   *
 	 * Set a size that will fit the entire parent surface by positionning it in absolute
-	 * @styleguide 	Helpers / Sizes
-	 * @example 	html
+   *
+   * @example 	html
 	 * <div class="ratio-16-9">
 	 * 	<img src="https://source.unsplash.com/random" class="abs-fit" />
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   @include size(fit, $position: absolute);
 }
 
@@ -579,10 +774,13 @@
 //
 @include register-class(mo, "sugar.helper.media.object") {
   /**
-	 * @name 		```.mo .mo--center .mo__content```
+   * @name 		mo .mo--center .mo__content
+   * @namespace 	sugar.scss.helper.class.media-object
+   * @type        class
+   *
 	 * Famous media object class
-	 * @styleguide 	Helpers / Media object
-	 * @example 	html
+   *
+   * @example 	html
 	 * <div class="mo">
 	 *   <div class="mo__content">
 	 *     <img src="https://source.unsplash.com/random/100x100" />
@@ -592,7 +790,9 @@
 	 *     <p class="p">Phasellus fringilla aliquet justo eget pulvinar. Donec in justo leo.</p>
 	 *   </div>
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   display: flex;
   flex-wrap: nowrap;
 
@@ -614,77 +814,102 @@
 //
 @include register-class(clearfix, "sugar.helper.clearfix.default") {
   /**
-	 * @name 		```.clearfix```
+   * @name 		clearfix
+   * @namespace 	sugar.scss.helper.class.clearfix
+   * @type        class
+   *
 	 * Apply the micro clearfix on the element
-	 * @styleguide 	Helpers / Clearfix
-	 * @example 	html
+   *
+   * @example 	html
 	 * <div class="clearfix bkg-primary">
 	 * 	<div class="pull-right">right pulled</div>
 	 * </div>
 	 * <div class="bkg-primary">
 	 * 	<div class="pull-right">right pulled without clearfix</div>
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   @include clearfix(micro);
 }
 @include register-class(clearfix-float, "sugar.helper.clearfix.float") {
   /**
-	 * @name 		```.clearfix-float```
+   * @name 		clearfix-float
+   * @namespace 	sugar.scss.helper.class.clearfix
+   * @type        class
+   *
 	 * Apply the float clearfix on the element
-	 * @styleguide 	Helpers / Clearfix
-	 * @example 	html
+   *
+   * @example 	html
 	 * <div class="clearfix-float bkg-primary">
 	 * 	<div class="pull-right">right pulled</div>
 	 * </div>
 	 * <div class="bkg-primary">
 	 * 	<div class="pull-right">right pulled without clearfix</div>
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   @include clearfix(float);
 }
 @include register-class(clearfix-micro, "sugar.helper.clearfix.micro") {
   /**
-	 * @name 		```.clearfix```
+   * @name 		clearfix
+   * @namespace 	sugar.scss.helper.class.clearfix
+   * @type        class
+   *
 	 * Apply the micro clearfix on the element
-	 * @styleguide 	Helpers / Clearfix
-	 * @example 	html
+   *
+   * @example 	html
 	 * <div class="clearfix bkg-primary">
 	 * 	<div class="pull-right">right pulled</div>
 	 * </div>
 	 * <div class="bkg-primary">
 	 * 	<div class="pull-right">right pulled without clearfix</div>
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   @include clearfix(micro);
 }
 @include register-class(clearfix-overflow, "sugar.helper.clearfix.overflow") {
   /**
-	 * @name 		```.clearfix-overflow```
+   * @name 		clearfix-overflow
+   * @namespace 	sugar.scss.helper.class.clearfix
+   * @type        class
+   *
 	 * Apply the overflow clearfix on the element
-	 * @styleguide 	Helpers / Clearfix
-	 * @example 	html
+   *
+   * @example 	html
 	 * <div class="clearfix-overflow bkg-primary">
 	 * 	<div class="pull-right">right pulled</div>
 	 * </div>
 	 * <div class="bkg-primary">
 	 * 	<div class="pull-right">right pulled without clearfix</div>
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   @include clearfix(overflow);
 }
 @include register-class(clearfix-facebook, "sugar.helper.clearfix.facebook") {
   /**
-	 * @name 		```.clearfix-facebook```
+   * @name 		clearfix-facebook
+   * @namespace 	sugar.scss.helper.class.clearfix
+   * @type        class
+   *
 	 * Apply the facebook clearfix on the element
-	 * @styleguide 	Helpers / Clearfix
-	 * @example 	html
+   *
+   * @example 	html
 	 * <div class="clearfix-facebook bkg-primary">
 	 * 	<div class="pull-right">right pulled</div>
 	 * </div>
 	 * <div class="bkg-primary">
 	 * 	<div class="pull-right">right pulled without clearfix</div>
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   @include clearfix(facebook);
 }
 
@@ -693,76 +918,106 @@
 //
 @include register-class(ratio-21-9, "sugar.helper.ratio.21-9") {
   /**
-	 * @name 		```.ratio-21-9```
+   * @name 		ratio-21-9
+   * @namespace 	sugar.scss.helper.class.ratio
+   * @type        class
+   *
 	 * Keep a 16/9 ratio on a particular element. Applied by setting height to 0 and paddingtop to 100% / 16 * 9
-	 * @styleguide 	Helpers / Ratios
-	 * @example 	html
+   *
+   * @example 	html
 	 * <div class="bkg-primary ratio-21-9"></div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   @include ratio(21/9);
 }
 @include register-class(ratio-16-9, "sugar.helper.ratio.16-9") {
   /**
-	 * @name 		```.ratio-16-9```
+   * @name 		ratio-16-9
+   * @namespace 	sugar.scss.helper.class.ratio
+   * @type        class
+   *
 	 * Keep a 16/9 ratio on a particular element. Applied by setting height to 0 and paddingtop to 100% / 16 * 9
-	 * @styleguide 	Helpers / Ratios
-	 * @example 	html
+   *
+   * @example 	html
 	 * <div class="bkg-primary ratio-16-9"></div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   @include ratio(16/9);
 }
 @include register-class(ratio-4-3, "sugar.helper.ratio.4-3") {
   /**
-	 * @name 		```.ratio-4-3```
+   * @name 		ratio-4-3
+   * @namespace 	sugar.scss.helper.class.ratio
+   * @type        class
+   *
 	 * Keep a 4/3 ratio on a particular element. Applied by setting height to 0 and paddingtop to 100% / 4 * 3
-	 * @styleguide 	Helpers / Ratios
-	 * @example 	html
+   *
+   * @example 	html
 	 * <div class="bkg-primary ratio-4-3"></div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   @include ratio(4/3);
 }
 @include register-class(ratio-1-1, "sugar.helper.ratio.1-1") {
   /**
-	 * @name 		```.ratio-1-1```
+   * @name 		ratio-1-1
+   * @namespace 	sugar.scss.helper.class.ratio
+   * @type        class
+   *
 	 * Keep a 1/1 ratio on a particular element. Applied by setting height to 0 and paddingtop to 100%
-	 * @styleguide 	Helpers / Ratios
-	 * @example 	html
+   *
+   * @example 	html
 	 * <div class="bkg-primary ratio-1-1"></div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   @include ratio(1);
 }
 
 //
 // Transition / Animation
 //
-@include register-class(no-transitions, "sugar.helper.no-transitions") {
+@include register-class(no-transition, "sugar.helper.no-transition") {
   /**
-	 * @name 		```.no-transitions```
-	 * Disable the transitions <span class="f-bold">only on the element</span>
-	 * @styleguide 	Helpers / Transitions
-	 * @example 	html
-	 * <div class="no-transitions">
+   * @name 		no-transition
+   * @namespace 	sugar.scss.helper.class.transition
+   * @type        class
+   *
+	 * Disable the transitions **only on the element**
+   *
+   * @example 	html
+	 * <div class="no-transition">
 	 * 	I have no more transitions
 	 * 	<div>But I have</div>
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   &,
   &:before,
   &:after {
     transition: none !important;
   }
 }
-@include register-class(clear-transitions, "sugar.helper.clear-transitions") {
+@include register-class(clear-transition, "sugar.helper.clear-transition") {
   /**
-	 * @name 		```.clear-transitions```
-	 * Disable the transitions <span class="f-bold">on the element and all his children</span>
-	 * @styleguide 	Helpers / Transitions
-	 * @example 	html
-	 * <div class="clear-transitions">
+   * @name 		clear-transition
+   * @namespace 	sugar.scss.helper.class.transition
+   * @type        class
+   *
+	 * Disable the transitions **on the element and all his children**
+   *
+   * @example 	html
+	 * <div class="clear-transition">
 	 * 	I have no more transitions
 	 * 	<div>Me neither</div>
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   &,
   &:before,
   &:after,
@@ -772,34 +1027,44 @@
     transition: none !important;
   }
 }
-@include register-class(no-animations, "sugar.helper.no-animations") {
+@include register-class(no-animation, "sugar.helper.no-animation") {
   /**
-	 * @name 		```.no-animations```
-	 * Disable the animations <span class="f-bold">only on the element</span>
-	 * @styleguide 	Helpers / Animations
-	 * @example 	html
-	 * <div class="no-animations">
+   * @name 		no-animation
+   * @namespace 	sugar.scss.helper.class.animation
+   * @type        class
+   *
+	 * Disable the animations **only on the element**
+   *
+   * @example 	html
+	 * <div class="no-animation">
 	 * 	I have no more animations
 	 * 	<div>But I have</div>
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   &,
   &:before,
   &:after {
     animation: none !important;
   }
 }
-@include register-class(clear-animations, "sugar.helper.clear-animations") {
+@include register-class(clear-animation, "sugar.helper.clear-animation") {
   /**
-	 * @name 		```.clear-animations```
-	 * Disable the transitions <span class="f-bold">on the element and all his children</span>
-	 * @styleguide 	Helpers / Animations
-	 * @example 	html
-	 * <div class="clear-animations">
+   * @name 		clear-animation
+   * @namespace 	sugar.scss.helper.class.animation
+   * @type        class
+   *
+	 * Disable the transitions **on the element and all his children**
+   *
+   * @example 	html
+	 * <div class="clear-animation">
 	 * 	I have no more animations
 	 * 	<div>Me neither</div>
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   &,
   &:before,
   &:after,
@@ -809,17 +1074,22 @@
     animation: none !important;
   }
 }
-@include register-class(no-transmations, "sugar.helper.no-transmations") {
+@include register-class(no-transmation, "sugar.helper.no-transmation") {
   /**
-	 * @name 		```.no-transmations```
-	 * Disable the animations and transitions <span class="f-bold">only on the element</span>
-	 * @styleguide 	Helpers / Transmations
-	 * @example 	html
-	 * <div class="no-transmations">
+   * @name 		no-transmation
+   * @namespace 	sugar.scss.helper.class.transmation
+   * @type        class
+   *
+	 * Disable the animations and transitions **only on the element**
+   *
+   * @example 	html
+	 * <div class="no-transmation">
 	 * 	I have no more animations or transitions
 	 * 	<div>But I have</div>
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   &,
   &:before,
   &:after {
@@ -828,19 +1098,24 @@
   }
 }
 @include register-class(
-  clear-transmations,
-  "sugar.helper.clear-transmations"
+  clear-transmation,
+  "sugar.helper.clear-transmation"
 ) {
   /**
-	 * @name 		```.clear-transmations```
-	 * Disable the animations and transitions <span class="f-bold">on the element and all his children</span>
-	 * @styleguide 	Helpers / Transmations
-	 * @example 	html
-	 * <div class="clear-transmations">
+   * @name 		clear-transmation
+   * @namespace 	sugar.scss.helper.class.transmation
+   * @type        class
+   *
+	 * Disable the animations and transitions **on the element and all his children**
+   *
+   * @example 	html
+	 * <div class="clear-transmation">
 	 * 	I have no more animations or transitions
 	 * 	<div>Me neither</div>
 	 * </div>
-	 */
+   *
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+   */
   &,
   &:before,
   &:after,

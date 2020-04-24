@@ -1,0 +1,156 @@
+/**
+ * @name        settings
+ * @type        {Map}
+ *
+ * Store all the settings
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+ $settings: (
+  // set the namespace where all the generated classes/colors/etc... will be documented
+  namespace: '',
+  // set the base unit to use across the system
+  unit: rem,
+  // by default, a reset will be applied
+  reset: true,
+  // set if need to set all as border box model
+  border-box: true,
+  // store all the ratios between sizes
+  sizes: (
+    smaller: 0.3,
+    small: 0.6,
+    // the default size is required and need to stay to 1
+    default: 1,
+    medium: 1.4,
+    big: 2,
+    bigger: 3
+  ),
+  typography: (
+    // set the font to use by default
+    font-family: default,
+    // default font-size
+    font-size: 14px,
+    // map of font-sizes by media (size : media)
+    font-sizes: null,
+    // optimal letters count in a line
+    line-letters-count: 55,
+    // font format used in font-face
+    font-format: (
+      eot: embedded-opentype,
+      woff2: woff2,
+      woff: woff,
+      ttf: truetype,
+      otf: opentype,
+      svg: svg,
+      svgz: svgz
+    )
+  ),
+  // store some settings for the look and feel
+  look-and-feel: (
+    border-radius: 0em,
+    padding-vertical: 1.4em,
+    padding-horizontal: 0.8em,
+    disabled-opacity: 0.5,
+    line-height: 1.4
+  ),
+  // store all the spaces available
+  spaces: (
+    smaller: 5px,
+    small: 10px,
+    default: 20px,
+    medium: 40px,
+    big: 70px,
+    bigger: 100px
+  ),
+  // store all the colors
+  colors: (
+    default: (
+      color: #848e91
+    ),
+    title: (
+      color: #2b3438
+    ),
+    text: (
+      color: default
+    ),
+    link: (
+      color: primary
+    ),
+    primary: (
+      color: #f2bc2b
+    ),
+    secondary: (
+      color: #2b3438
+    ),
+    success: (
+      color: #5cb85c
+    ),
+    warning: (
+      color: #f0ad4e
+    ),
+    error: (
+      color: #d9534f
+    ),
+    info: (
+      color: #2199e8
+    )
+  ),
+  modular-scale: (
+    base: 1rem,
+    ratio: 1.33
+  ),
+  text-format: (
+    scope-class: tf
+  ),
+  // Vertical rhythme options
+  vertical-rhythm: (
+    scope-class: vr // the class in which the vertical rhythme will be applied
+  ),
+  // store all the fonts
+  fonts: (
+    default: (
+      font-family: (
+        "Helvetica Neue",
+        Helvetica,
+        Verdana,
+        Arial,
+        sans-serif
+      ),
+      font-weight: normal,
+      cap-height: 0.65
+    ),
+    quote: (
+      font-family: (
+        Palatino,
+        Times,
+        Georgia,
+        serif
+      ),
+      font-weight: normal,
+      cap-height: 0.65
+    ),
+    code: (
+      font-family: (
+        Menlo,
+        Monaco,
+        Consolas,
+        "Courier New",
+        monospace
+      ),
+      font-weight: normal,
+      cap-height: 0.65
+    )
+  ),
+  // store all the registered filters
+  filters: (
+  ),
+  // store all the transition settings
+  transitions: (
+    fast: all 0.1s ease-in-out 0s,
+    default: all 0.2s ease-in-out 0s, // default transition
+    slow: all 0.5s ease-in-out 0s
+  ),
+  debug: (
+    test-arguments: true
+  )
+) !default;

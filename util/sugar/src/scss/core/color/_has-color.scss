@@ -1,0 +1,19 @@
+/**
+ * @name      has-color
+ * @namespace     sugar.scss.core.color
+ * @type    function
+ *
+ * Check if the provided color is a registered one or not
+ *
+ * @param 		{String} 		$color 		The color nane to check
+ * @return 		{Boolean} 					True if exists, false if not
+ *
+ * @example     scss
+ * sugar.has-color(primary); // => true
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function has-color($color) {
+  // grab the color in config
+  @return setting("colors.#{$color}") != null;
+}

@@ -1,0 +1,23 @@
+/**
+ * @name      selector
+ * @namespace     sugar.scss.core.string
+ * @type    function
+ *
+ * Process selector to avoid having --default, etc...
+ *
+ * @param 		{String} 		$selector 		The selector to process
+ * @return 		{String} 						The processed selector
+ *
+ * @example 	scss
+ * sugar.selector('.input--default'); // => .input
+ * sugar.selector('.input-default'); // => .input
+ * sugar.selector('.input.default'); // => .input
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function selector($selector) {
+  $selector: str-replace($selector, "--default", "");
+  $selector: str-replace($selector, "-default", "");
+  $selector: str-replace($selector, ".default", "");
+  @return $selector;
+}

@@ -1,0 +1,28 @@
+/**
+ * @name    vertical-aligner
+ * @namespace     sugar.scss.helper
+ * @type      mixin
+ *
+ * Vertically align content by using the inline-block middle trick
+ *
+ * @example 	scss
+ * .my-cool-container {
+ * 	\@include sugar.vertical-aligner();
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@mixin vertical-aligner() {
+  &:before {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+    width: 0.1px;
+  }
+
+  > * {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}

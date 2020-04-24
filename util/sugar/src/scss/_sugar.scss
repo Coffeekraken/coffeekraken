@@ -1,17 +1,20 @@
-@import 'color/all';
-@import 'vendor/all';
-@import 'styleguide/all';
-@import 'function/all';
+@import '_primitive/all';
+@import 'core/all';
+
+@import 'coffeekraken/all';
+@import 'effect/all';
+@import 'form/all';
+@import 'helper/all';
 @import 'icon/all';
+@import 'image/all';
+@import 'layout/all';
 @import 'list/all';
 @import 'loader/all';
-@import 'math/all';
 @import 'meta/all';
-@import 'map/all';
-@import 'mixin/all';
-@import 'string/all';
-@import 'util/all';
-@import 'core/all';
-@import 'effect/all';
+@import 'responsive/all';
+@import 'shape/all';
+@import 'typography/all';
+@import 'unit/all';
+@import 'vendor/all';
 
-@debug 'plop';
+@import 'core/helper-classes';

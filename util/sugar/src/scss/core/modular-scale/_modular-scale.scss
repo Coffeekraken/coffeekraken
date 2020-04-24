@@ -1,0 +1,20 @@
+@use '../../vendor/modularscale-sass/mdl-scale' as mdl-scale;
+/**
+ * @name      modular-scale
+ * @namespace     sugar.scss.core.modular-scale
+ * @type    function
+ *
+ * Return the modular scale value based on the settings ```modular-scale.base``` and ```modular-scale.ratio```.
+ *
+ * @param 			{Number} 		$scale 		The wanted scale
+ * @param 			{Number} 		[$base=settings.modular-scale.base] 	The base of calculation
+ * @return 			{Number} 					The calculated resulting value
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function modular-scale($scale, $base: null) {
+  @if not $base {
+    $base: setting("modular-scale.base");
+  }
+  @return mdl-scale.ms($scale, $base);
+}

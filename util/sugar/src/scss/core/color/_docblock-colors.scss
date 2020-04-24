@@ -1,0 +1,50 @@
+@use 'sass:map';
+/**
+ * @name      docblock-colors
+ * @namespace     sugar.scss.core.color
+ * @type      mixin
+ *
+ * Print the styleguide docblocks for the registered sugar colors
+ *
+ * @example     scss
+ * @include sugar.docblock-colors();
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@mixin docblock-colors() {
+  $colors: setting("colors");
+  @each $name, $color in $colors {
+
+    $namespace: 'color';
+    @if setting('namespace') != '' {
+      $namespace: '#{setting('namespace')}.color';
+    }
+
+    /**
+     * @name 		#{$name}
+     * @namespace       #{$namespace}
+     * @type    color
+     *
+     * This is the ```#{$name}``` registered color
+     *
+		 * @color 		#{color($name)}
+		 */
+
+    $modifiers: map.get($color, modifiers);
+    // modifiers
+    @if $modifiers {
+      @each $mod-name, $mod in $modifiers {
+
+        /**
+         * @name 		#{$name}--#{$mod-name}
+         * @namespace       #{$namespace}
+         * @type    color
+         *
+         * This is the ```#{$name}--${$mod-name}``` registered color
+         *
+         * @color 		#{color($name, $mod-name)}
+         */
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+/**
+ * @name    selection
+ * @namespace     sugar.scss.typography
+ * @type      mixin
+ *
+ * Set the user selection styling with ease
+ *
+ * @example 	scss
+ * \@include sugar.selection() {
+ * 	background: red;
+ * 	color: white;
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@mixin selection {
+  ::-moz-selection {
+    @content;
+  }
+  ::selection {
+    @content;
+  }
+}

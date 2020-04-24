@@ -1,13 +1,16 @@
 @use '../index' as Sugar;
 
-@include Sugar.init-classes();
 @include Sugar.classes();
 
 body {
   @include Sugar.coffeekraken-logo();
+  background-color: Sugar.color(primary);
 }
+
+@include Sugar.docblock-colors();
 
 .hello {
   @debug Sugar.color-hue(#ff0000);
   content: 'coco';
+
 }

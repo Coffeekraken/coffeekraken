@@ -2,7 +2,22 @@
 // Imports core
 //
 @import 'variables';
-@import 'util/all';
-@import 'function/all';
-@import 'mixin/all';
-@import 'helper-classes';
+@import 'init';
+@import 'setup';
+@import 'setting/all';
+
+@import 'animation/all';
+@import 'class/all';
+@import 'color/all';
+@import 'context/all';
+@import 'dev/all';
+@import 'filter/all';
+@import 'font/all';
+@import 'look-and-feel/all';
+@import 'map/all';
+@import 'modular-scale/all';
+@import 'size/all';
+@import 'space/all';
+@import 'string/all';
+@import 'transition/all';
+@import 'typography/all';

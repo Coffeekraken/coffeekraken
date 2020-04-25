@@ -1,0 +1,60 @@
+/**
+ * @name      parse-properties
+ * @namespace     sugar.scss.core.string
+ * @type    function
+ *
+ * Parse a given string/list properties and return the Map corresponding to the Map description
+ *
+ * @param 				{List} 				$properties 			The properties to parse
+ * @param 				{Map} 				$descriptor 			The descriptor map to use to parse the properties
+ * @return 				{Map} 										The properties in map format
+ *
+ * @example     scss
+ * sugar.parse-properties(10px hello -delay 20s, (
+ *  	myNumber : Number,
+ *  	myOtherNumber : Number,
+ *  	myString : String,
+ *  	myCoolVar : String,
+ *  	delay : second
+ * ));
+ * // => (
+ * //  	myNumber : 10px,
+ * // 	myString : hello,
+ * // 	delay : 20s
+ * // )
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      replace-tokens
+ * @namespace     sugar.scss.core.string
+ * @type    function
+ *
+ * Search and replace tokens like colors #primary in a passed string, list or map
+ * Supported tokens types :
+ * 1. Colors : colorName
+ *
+ * @example     scss
+ * sugar.replace-tokens(12px #primary hello #secondary); // > 12px #ddd hello #fff;
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      selector
+ * @namespace     sugar.scss.core.string
+ * @type    function
+ *
+ * Process selector to avoid having --default, etc...
+ *
+ * @param 		{String} 		$selector 		The selector to process
+ * @return 		{String} 						The processed selector
+ *
+ * @example 	scss
+ * sugar.selector('.input--default'); // => .input
+ * sugar.selector('.input-default'); // => .input
+ * sugar.selector('.input.default'); // => .input
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/*# sourceMappingURL=_all.css.map */

@@ -1,0 +1,995 @@
+@charset "UTF-8";
+/**
+ * @name    color-hue
+ * @namespace     sugar.scss.core.color
+ * @type          Function
+ *
+ * Return the hue of the passed color
+ *
+ * @param       {Color}     $color      The color to process
+ * @return      {Number}                The color hue
+ *
+ * @example   scss
+ * sugar.color-hue(#e1d7d2); // => 20deg
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      color-lightness
+ * @namespace     sugar.scss.core.color
+ * @type          Function
+ *
+ * Return the lightness of the passed color
+ *
+ * @param         {Color}       $color      The color to check
+ * @return        {Number}                  The color lightness
+ *
+ * @example     scss
+ * sugar.color-lightness(#e1d7d2); // => 85.2941176471%
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    color-opacity
+ * @namespace     sugar.scss.core.color
+ * @type          Function
+ *
+ * Return the opacity of the passed color
+ *
+ * @param       {Color}       $color        The color to prcess
+ * @return      {Number}                    The color opacity
+ *
+ * @example     scss
+ * sugar.color-opacity(#e1d7d2); // => 1
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    color-saturation
+ * @namespace     sugar.scss.core.color
+ * @type          Function
+ *
+ * Return the saturation of the passed color
+ *
+ * @param       {Color}     $color      The color to process
+ * @return      {Number}                The color saturation
+ *
+ * @example   scss
+ * sugar.color-saturation(#e1d7d2); // => 20%
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    color-transparentize
+ * @namespace     sugar.scss.color
+ * @type          Function
+ *
+ * Makes $color more transparent.
+ * The $amount must be a number between 0 and 1 (inclusive). Decreases the alpha channel of $color by that amount.
+ *
+ * @param       {Color}       $color        The color to process
+ * @param       {Number}      $amount       The amount to transparentize the color. Must be between 0 and 1
+ *
+ * @example       scss
+ * sugar.color-transparentize(rgba(#036, 0.3), 0.3); // => rgba(0, 51, 102, 0)
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      list-append
+ * @namespace     sugar.scss.list
+ * @type      function
+ *
+ * Append a value to the passed list
+ *
+ * @param           {List}        $list               The list to append the value to
+ * @param           {Mixed}       $value              The value to append to the list
+ * @param           {String}      [$separator=auto]   The separator to use. Can be auto, space or comma
+ * @return          {List}                            The new list with the appended value
+ *
+ * @example     scss
+ * sugar.list-append(hello world, coco, comma); // hello, world, coco
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      list-first
+ * @namespace     sugar.scss.list
+ * @type      function
+ *
+ * Return the first element of the passed list
+ *
+ * @param         {List}        $list         The list to get the first element from
+ * @return        {Mixed}                     The first element of the list
+ *
+ * @example       scss
+ * sugar.list-first(('hello', 'world')); // => 'hello'
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      list-implode
+ * @namespace     sugar.scss.list
+ * @type      function
+ *
+ * Join all the list items using the passed glue and return a string
+ *
+ * @param           {List}          $list           The list to implode
+ * @param           {String}        [$glue=""]      The glue to use to implode the list
+ * @return          {String}                        The imploded list in string format
+ *
+ * @example       scss
+ * sugar.list-implode(('hello','world'), '-'); // hello-world
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    list-index
+ * @namespace     sugar.scss.list
+ * @type      function
+ *
+ * Return the index of the wanted value in the passed list.
+ *
+ * @param       {List}      $list       The list to process
+ * @param       {Mixed}     $value      The value to search in the list
+ * @return      {Number}                The index of the founded value or null
+ *
+ * @example     scss
+ * sugar.list-index(('hello','world'), 'world'); // => 2
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      list-join
+ * @namespace     sugar.scss.list
+ * @type      function
+ *
+ * Return a string representing all the list items
+ *
+ * @param         {List}        $list1         The list to process
+ * @param         {List}        $list2         The list to join with the first one
+ * @param         {String}      [$separator=auto]     The separator to use for the list. Can be auto, comma or space
+ * @param         {String|Boolean}    [$bracketed=auto]     If true is passed, the list will be bracketed
+ * @return        {String}                    The new list
+ *
+ * @example     scss
+ * sugar.list-join(('hello','world'), ('coco'), space); // ('hello' 'world' 'coco')
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    list-last-nth
+ * @namespace     sugar.scss.list
+ * @type      function
+ *
+ * Return the last item of the passed list
+ *
+ * @param     {List}    $list     The list to get the last item from
+ * @return    {Mixed}             The last item of the list
+ *
+ * @example       scss
+ * sugar.list-last-nth(('hello', 'world')); // 'world'
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      list-length
+ * @namespace     sugar.scss.list
+ * @type      function
+ *
+ * Return the number of item in the passed list
+ *
+ * @param       {List}      $list         The list to check
+ * @return      {Number}                  The count of item in the list
+ *
+ * @example     scss
+ * sugar.list-length(('hello','world')); // => 2
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      list-set-nth
+ * @namespace     sugar.scss.list
+ * @type      function
+ *
+ * Set a value in the passed list at the passed index. The original value at the passed index will be replaced with the passed value
+ *
+ * @param       {List}      $list       The list to process
+ * @param       {Number}    $index      The index to set the value in the list
+ * @param       {Mixed}     $value      The value to set in the list
+ * @return      {List}                  The new processed list
+ *
+ * @example       scss
+ * sugar.list-set-nth(('hello','world'), 1, 'coco'); // => ('coco','world')
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    list-nth
+ * @namespace     sugar.scss.list
+ * @type      function
+ *
+ * Return the item of the list at the passed index
+ *
+ * @param         {List}        $list         The list to process
+ * @param         {Number}      $index        The index of the element to get in the list
+ * @return        {Mixed}                     The value at the passed index
+ *
+ * @example     scss
+ * sugar.list-nth(('hello','world'), 2); // => 'world'
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      list-pop
+ * @namespace     sugar.scss.list
+ * @type      function
+ *
+ * Remove the last item of the passed list
+ *
+ * @param       {List}        $list         The list to process
+ * @return      {List}                      The processed list
+ *
+ * @example       scss
+ * sugar.list-pop(('hello', 'world')); // ('hello')
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    list-prepend
+ * @namespace     sugar.scss.list
+ * @type      function
+ *
+ * Prepend a value in the passed list
+ *
+ * @param         {List}        $list           The list to process
+ * @param         {Mixed}       $value          The value to prepend in the list
+ * @param         {String}      [$separator=auto]   The separator to use. Can be auto, space or comma
+ * @return        {List}                        The new list with his new value
+ *
+ * @example   scss
+ * sugar.list-prepend(('hello','world'), 'coco'); // => ('coco','hello','world')
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      list-remove-nth
+ * @namespace     sugar.scss.list
+ * @type      function
+ *
+ * Remove item from list using an index
+ *
+ * @param         {List}          $list           The list to process
+ * @param         {Number}        $index          The index of the item to remove from the list
+ * @return        {List}                          The processes list
+ *
+ * @example       scss
+ * sugar.list-remove-nth(('hello','world'), 1); // ('hello')
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      list-search
+ * @namespace     sugar.scss.list
+ * @type      function
+ *
+ * Search for the passed value in the passed list and return true if exist, false if not
+ *
+ * @param           {List}          $list           The list in which to search for the passed value
+ * @param           {Mixed}         $value          The value to search in the List
+ * @return          {Boolean}                       true if the value exist in the list, false if not
+ *
+ * @example   scss
+ * sugar.list-search(('hello', 'world'), 'hello'); // => true
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      map-deep-values
+ * @namespace     sugar.scss.map
+ * @type      function
+ *
+ * Get values of a map even if it is deep
+ *
+ * @param       {Map}       $map        The map to get values from
+ * @return      {List}                  The list of map values
+ *
+ * @example       scss
+ * sugar.map-deep-values((
+ *    'hello': 'world',
+ *    'coco': (
+ *       'plop': 'youhou'
+ *    )
+ * ));
+ * // => ('world', 'youhou')
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      map-extend
+ * @namespace     sugar.scss.map
+ * @type      function
+ *
+ * Extend the passed map with the others passed map(s)
+ *
+ * @param           {Map}         $map        The map to @extend
+ * @param           {Map|List-Map}  $maps     The map(s) used to extend the first one
+ * @return          {Map}                     The extended map
+ *
+ * @example     scss
+ * sugar.map-extend((
+ *  'hello': 'world'
+ * ), (
+ *  'coco': 'plop'
+ * ));
+ * // returned map:
+ * (
+ *  'hello': 'world',
+ *  'coco': 'plop'
+ * )
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      map-filter-by-namespace
+ * @namespace     sugar.scss.map
+ * @type      function
+ *
+ * Return all the map values that have a key that match the passed namespace
+ *
+ * @param           {Map}         $map          The map to process
+ * @param           {String}      $namespace    The namespace to search like (something.another.thing)
+ * @return          {Map}                       The filtered map
+ *
+ * @example     scss
+ * sugar.map-filter-by-namespace((
+ *  'hello.world': 'Hello',
+ *  'coco.world': 'Coco',
+ *  'hello.that': 'That is cool'
+ * ), 'hello');
+ * // return that map:
+ * (
+ *   'hello.world': 'Hello',
+ *   'hello.that': 'That is cool'
+ * )
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    map-get-or
+ * @namespace     sugar.scss.map
+ * @type      function
+ *
+ * Get a map value by passing a list of wanted indexes, or return the default passed value
+ *
+ * @param         {Map}         $map              The map to get the value from
+ * @param         {List}        $index-list       The list of indexes to try to get
+ * @param         {Midex}       [$default=null]   The default value to return if nothing is found in the map
+ *
+ * @example     scss
+ * sugar.map-get-or((
+ *  coco: 'hello',
+ *  plop: 'world'
+ * ), plop, null); // 'world'
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    map-get-path
+ * @namespace     sugar.scss.map
+ * @type      function
+ *
+ * Return the map value depending on the passed path
+ *
+ * @param       {Map}       $map        The map in which to get the value
+ * @param       {String}    $path       The path to get the value from
+ * @param       {Mixed}     [$default:null]       The default value to return if none exist
+ * @return      {Mixed}                 The value wanted
+ *
+ * @example     scss
+ * sugar.map-get-path((
+ *    'hello': 'world',
+ *    'coco': (
+ *      'plop': 'youhou'
+ *    )
+ * ), 'coco.plop');
+ * // => 'youhou'
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      map-get
+ * @namespace     sugar.scss.map
+ * @type      function
+ *
+ * Get a value in the passed map using the passed key
+ *
+ * @param         {Map}         $map        The map to get the value from
+ * @param         {String}      $key        The key to get the value in the map
+ * @param         {Mixed}                   The getted value
+ *
+ * @example       scss
+ * sugar.map-get((
+ *  hello: 'world'
+ * ), hello); // => 'world'
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name     map-has-key
+ * @namespace     sugar.scss.map
+ * @type      function
+ *
+ * Check if the passed map has the passed key. Return true if has, false if not
+ *
+ * @param           {Map}         $map        The map to check
+ * @param           {String}      $key        The key to check in the map
+ * @return          {Boolean}                 true if has the key, false if not
+ *
+ * @example     scss
+ * sugar.map-has-key((
+ *    'hello': 'world',
+ *    'coco': 'plop'
+ * ), 'hello'); // => true
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name  map-keys
+ * @namespace     sugar.scss.map
+ * @type      function
+ *
+ * Return a comma separated list of the map keys
+ *
+ * @param       {Map}       $map      The map to process
+ * @return      {List}                The list of map keys
+ *
+ * @example     scss
+ * sugar.map-keys((
+ *  'hello': 'world',
+ *  'coco': 'plop'
+ * )); // => ('hello','coco')
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    map-merge
+ * @namespace     sugar.scss.map
+ * @type      function
+ *
+ * Merge the first passed map with the second passed one and return the result
+ *
+ * @param           {Map}         $map1         The first map to extend
+ * @param           {Map}         $map2         The second map to extend the first one with
+ * @return          {Map}                       The extended map
+ *
+ * @example     scss
+ * sugar.map-merge((
+ *  hello: 'world'
+ * ), (
+ *  coco: 'plop'
+ * ));
+ * // returned map:
+ * (
+ *  hello: 'world',
+ *  coco: 'plop'
+ * )
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    map-remove
+ * @namespace     sugar.scss.map
+ * @type      function
+ *
+ * Remove one or multiple keys from the passed map
+ *
+ * @param           {Map}         $map          The map to process
+ * @param           {String}      $keys...      The key(s) to remove
+ * @return          {Map}                       The processed map
+ *
+ * @example       scss
+ * sugar.map-remove((
+ *  hello: 'world',
+ *  coco: 'plop'
+ * ), coco);
+ * // returned map:
+ * (
+ *  hello: 'world'
+ * )
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    map-set
+ * @namespace     sugar.scss.map
+ * @type      function
+ *
+ * Set a map property with the passed value
+ * @param 			{Map} 			$map 		The map to modify
+ * @param       {String}    $key    The key to set the propery to
+ * @param       {Mixed}     $value  The value to set
+ * @return 			{Map} 					    The updated map
+ *
+ * @example     scss
+ * $my-map : sugar.map-set($my-map, 'coco', 'Something cool');
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      math-abs
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Return the absolute version of the passed number
+ *
+ * @param         {Number}        $number       The number to process
+ * @return        {Number}                      The absolute version of the number
+ *
+ * @example     scss
+ * sugar.math-abs(-10); // => 10
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      math-acos
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Calculate the cosinus inverse of the passed angle
+ *
+ * @param         {Number}        $angle          The angle to calculate the cosinus inverse from
+ * @param         {String}        [$unit=deg]     The wanted unit. Can de deg, rad, grad or turn
+ * @return         {Number}                       The calculated cosinus inverse
+ *
+ * @example     scss
+ * sugar.math-acos(1, deg); // 0.0559529097deg
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      math-asin
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Calculate the sinus inverse
+ *
+ * @param         {Number}        $value        The value to use
+ * @param         {String}        [$unit=deg]   The unit wanted. Possible values are deg, rad, grad and turn
+ * @return        {Number}                      The calculated asin
+ *
+ * @example     scss
+ * sugar.math-asin(1, rad); // => 1.5698197643rad
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      math-atan
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Calculate the tangent inverse of the passed angle
+ *
+ * @param       {Number}      $angle        The angle to calculate the tangent inverse from
+ * @param       {String}      [$unit=deg]   The wanted unit. Can be deg, rad, grad or turn
+ * @return      {Number}                    The calculated tangent inverse of the passed angle
+ *
+ * @example       scss
+ * sugar.math-atan(10, deg); // => 84.2988568542deg
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    math-ceil
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Rounds $number up to the next highest whole number
+ *
+ * @param       {Number}      $number       The number to process
+ * @return      {Number}                    The up rounded number
+ *
+ * @example     scss
+ * sugar.math-ceil(4.2); // => 5
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    math-convert-angle
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Convert the passed angle into another unit like rad, deg, grad or turn
+ *
+ * @param           {Number}            $value          The angle value to convert
+ * @param           {String}            $unit           The wanted unit. Can be rad, deg, grad or turn
+ * @return          {Number}                            The converted angle value
+ *
+ * @example   scss
+ * sugar.math-convert-angle()
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      math-cos
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Calculate the cosinus of the passed angle
+ *
+ * @param         {Number}        $angle      The angle to calculate the cosinus from
+ * @return        {Number}                    The calculated cosinus
+ *
+ * @example     scss
+ * sugar.math-cos(10); // => 6.6645643378
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      math-deg
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Convert the passed unitless angle to degree
+ *
+ * @param         {Number}        $angle      The angle to convert to degree
+ * @return        {Number}                    The degree version of the angle
+ *
+ * @example     scss
+ * sugar.math-deg(10); // => 572.9577951308deg
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      math-even
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Convert the passed value to the closest even value
+ *
+ * @param 			{Number} 		$value 		The value to convert
+ * @return 			{Number} 					The closest even converted value
+ *
+ * @example     scss
+ * sugar.math-even(9); // => 10
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      math-fact
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Returns the factorial of desired number
+ *
+ * @param         {Number}          $number         The number to calculate the factorial number
+ * @return        {Number}                          The calculated factorial of the passed number
+ *
+ * @example     scss
+ * sugar.math-fact(5); // => 120
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      math-grad
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Convert the passed unitless angle to gradian
+ *
+ * @param         {Number}        $angle      The angle to convert to gradian
+ * @return        {Number}                    The gradian version of the angle
+ *
+ * @example     scss
+ * sugar.math-grad(10); // => 636.6197723675grad
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      math-odd
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Convert the passed value to the closest odd value
+ *
+ * @param 			{Number} 		$value 		The value to convert
+ * @return 			{Number} 					The closest odd converted value
+ *
+ * @example     scss
+ * sugar.math-odd(10); // => 9
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      math-percentage
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Converts a unitless $number (usually a decimal between 0 and 1) to a percentage.
+ *
+ * @param         {Number}          $number           The number to convert into percentage
+ * @return        {Number}                            The percentage converted
+ *
+ * @example
+ * sugar.math-percentage(0.2); // => 20%
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      math-pow
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Return the calculated power of the passed base using the passed exponent
+ *
+ * @param         {Number}        $base         The base number
+ * @param         {Number}        $exponent     The exponent used to raise the base
+ * @return        {Number}                      The calculated power number
+ *
+ * @example    scss
+ * sugar.math.pow(7, 3); // => 343
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      math-rad
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Convert the passed unitless angle to radian
+ *
+ * @param         {Number}        $angle      The angle to convert to radian
+ * @return        {Number}                    The radian version of the angle
+ *
+ * @example     scss
+ * sugar.math-rad(10); // => 10rad
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    math-random
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * If $limit is null, returns a random decimal number between 0 and 1.
+ *
+ * @param       {Number}      [$limit:null]     The limit to generate a number under that
+ * @return      {Number}                        The generated number
+ *
+ * @example     scss
+ * sugar.math-random(); // => 0.2821251858
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    math-round
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Rounds $number to the nearest whole number.
+ *
+ * @param       {Number}      $number       The number to round
+ * @return      {Number}                    The rounded number
+ *
+ * @example     scss
+ * sugar.math-round(4.2); // => 4
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    math-sin
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Calculate the sinus of the passed angle
+ *
+ * @param       {Number}      $angle        The angle to calculate the sinus from
+ * @return      {Number}                    The calculated sinus
+ *
+ * @example     scss
+ * sugar.math-sin(10); // => 2.761090926
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name  math-sqrt
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Return the square root of the passed number
+ *
+ * @param         {Number}        $number       The number to process
+ * @return        {Number}                      The square root of the passed number
+ *
+ * @example   scss
+ * sugar.math-sqrt(2); // => 1.41421356237
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      math-tan
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Calculate the tangent of the passed angle
+ *
+ * @param         {Number}        $angle        The angle to calculate the tangent from
+ * @return        {Number}                      The calculated tangent
+ *
+ * @example       scss
+ * sugar.math-tan(10); // => 0.4142942863
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      math-turn
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Convert the passed unitless angle to turn
+ *
+ * @param         {Number}        $angle      The angle to convert to turn
+ * @return        {Number}                    The turn version of the angle
+ *
+ * @example     scss
+ * sugar.math-turn(10); // => 1.5915494309turn
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      str-index
+ * @namespace     sugar.scss.string
+ * @type      function
+ *
+ * Returns the first index of $substring in $string, or null if $string doesn’t contain $substring.
+ *
+ * @param       {String}      $string       The string to process
+ * @param       {String}      $substring    The string to search
+ * @return      {Number}                    The index of the finded substring or null if not exist...
+ *
+ * @example      scss
+ * sugar.str-index('Hello world', 'world'); // => 7
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    str-is-url
+ * @namespace     sugar.scss.string
+ * @type      function
+ *
+ * Check if a string is a url or not
+ *
+ * @param 			{String} 				$url 			The string to check
+ * @return 			{Boolean} 								true if is a url, false if not
+ *
+ * @example     scss
+ * sugar.str-is-url('Hello world') // false
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    str-length
+ * @namespace     sugar.scss.string
+ * @type      function
+ *
+ * Return the number of characters in the passed string
+ *
+ * @param       {String}      $string       The string to process
+ * @return      {Number}                    The number of characters that compose the string
+ *
+ * @example     scss
+ * sugar.str-length('hello'); // => 4
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    str-replace
+ * @namespace     sugar.scss.string
+ * @type      function
+ *
+ * Replace the passed string with another one in a specific string
+ *
+ * @param         {String}        $string         The string in which to replace the searched one
+ * @param         {String}        $search         The string to replace
+ * @param         {String}        [$replace=""]   The string used as replacement
+ * @return        {String}                        The processed string
+ *
+ * @example     scss
+ * sugar.str-replace('Hello world', 'world', 'coco'); // 'Hello coco'
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    str-slice
+ * @namespace     sugar.scss.string
+ * @type      function
+ *
+ * Returns the slice of $string starting at index $start-at and ending at index $end-at (both inclusive).
+ *
+ * @param         {String}        $string         The string to slice
+ * @param         {Number}        $start-at       Where to start slice the string
+ * @param         {Number}        [$end-at=-1]    Where to end to slice the string
+ *
+ * @param       scss
+ * sugar.str-slice('Hello world', 1, 4); // => Hell
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    str-split
+ * @namespace     sugar.scss.string
+ * @type      function
+ *
+ * Split a string using a delimiter
+ *
+ * @param         {String}          $string             The string to split
+ * @param         {String}          [$delimiter=""]     The delimiter to split the string
+ * @return        {List}                                A list a the splited string
+ *
+ * @example       scss
+ * sugar.str-split('hello.world', '.'); // ('hello', 'world')
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    str-unique-id
+ * @namespace     sugar.scss.string
+ * @type      function
+ *
+ * Generate a unique id in string format
+ *
+ * @return        {String}          The generated unique id
+ *
+ * @example     scss
+ * sugar.str-unique-id(); // => uabtrnzug
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      str-unquote
+ * @namespace     sugar.scss.string
+ * @type      function
+ *
+ * Return an unquoted version of the passed string
+ *
+ * @param         {String}        $string           The string to unquote
+ * @return        {String}                          The unquoted string
+ *
+ * @example       scss
+ * sugar.str-unquote('hello world'); // => hello world
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    str-split
+ * @namespace     sugar.scss.string
+ * @type      function
+ *
+ * Split a string using a delimiter
+ *
+ * @param         {String}          $string             The string to split
+ * @param         {String}          [$delimiter=""]     The delimiter to split the string
+ * @return        {List}                                A list a the splited string
+ *
+ * @example       scss
+ * sugar.str-split('hello.world', '.'); // ('hello', 'world')
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name        str-url-ext
+ * @namespace     sugar.scss.string
+ * @type      function
+ *
+ * Check if a string is a url or not
+ *
+ * @param 			{String} 				$url 			The string to check
+ * @return 			{Boolean} 								true if is a url, false if not
+ *
+ * @example       scss
+ * sugar.str-is-url('Hello world') // false
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/*# sourceMappingURL=_all.css.map */

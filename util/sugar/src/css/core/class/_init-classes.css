@@ -1,0 +1,15 @@
+/**
+ * @name            init-classes
+ * @namespace     sugar.scss.core.class
+ * @type      mixin
+ *
+ * Register all the dynamic helper classes that depends on the settings, etc...
+ * This is used internaly
+ *
+ * @example     scss
+ * \@include sugar.init-classes();
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/*# sourceMappingURL=_init-classes.css.map */

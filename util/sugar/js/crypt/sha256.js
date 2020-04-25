@@ -14,10 +14,19 @@ var _parse = _interopRequireDefault(require("../string/parse"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const __encryptedMessages = {};
+/**
+ * @name            sha256
+ * @namespace       sugar.js.crypt
+ * @type            Object
+ * 
+ * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the sha256 algorithm
+ * 
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 var _default = {
   /**
    * @name        encrypt
-   * @namespace     sugar.js.crypt.sha256
    * @type          Function
    *
    * Encrypt
@@ -36,7 +45,6 @@ var _default = {
 
   /**
    * @name        decrypt
-   * @namespace     sugar.js.crypt.sha256
    * @type        Function
    *
    * Decrypt

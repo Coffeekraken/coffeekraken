@@ -1,0 +1,23 @@
+/**
+ * @name      loader-flip-ball
+ * @namespace     sugar.scss.loader
+ * @type      Mixin
+ *
+ * Generate a full animated, single element, flip ball style loader
+ *
+ * @param 		{String} 		[$shape=circle] 			The shape of the loader (circle,rect)
+ * @param 		{Number} 		[$size=2em] 				The size of the loader
+ * @param 		{Color} 		[$colors=(primary,success,warning,error,info)] 			The colors of the loader. Can be a list of colors
+ * @param 		{Second} 		[$a-duration=1s] 			The overall animation duration
+ * @param 		{Second} 		[$a-delay=0s] 				The delay between two animation cycle
+ * @param 		{String} 		[$a-ease=ease-in-out]		The ease to use for the animation
+ *
+ * @example       scss
+ * .my-cool-loader {
+ * 		\@include sugar.loader-flip-ball();
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/*# sourceMappingURL=_loader-flip-ball.css.map */

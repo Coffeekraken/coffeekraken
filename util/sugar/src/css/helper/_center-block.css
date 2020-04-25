@@ -1,0 +1,16 @@
+/**
+ * @name  center-block
+ * @namespace     sugar.scss.helper
+ * @type      mixin
+ *
+ * Center a block element using margins etc...
+ *
+ * @example 	scss
+ * .my-cool-block-element {
+ * 	\@include sugar.center-block();
+ * }
+ *
+ * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/*# sourceMappingURL=_center-block.css.map */

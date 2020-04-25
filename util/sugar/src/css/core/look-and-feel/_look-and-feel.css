@@ -1,0 +1,19 @@
+/**
+ * @name      look-and-feel
+ * @namespace     sugar.scss.core.look-and-feel
+ * @type    function
+ *
+ * Return a settings.look-and-feel stack value
+ *
+ * @param 		{String} 		$name					The look and feel value name
+ * @return 		{Number} 								The look and feel value in em
+ *
+ * @example
+ * .my-cool-element {
+ * 		padding : sugar.look-and-feel(padding-horizontal) sugar.look-and-feel(padding-vertical);
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/*# sourceMappingURL=_look-and-feel.css.map */

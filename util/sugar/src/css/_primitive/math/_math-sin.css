@@ -1,0 +1,17 @@
+/**
+ * @name    math-sin
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Calculate the sinus of the passed angle
+ *
+ * @param       {Number}      $angle        The angle to calculate the sinus from
+ * @return      {Number}                    The calculated sinus
+ *
+ * @example     scss
+ * sugar.math-sin(10); // => 2.761090926
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/*# sourceMappingURL=_math-sin.css.map */

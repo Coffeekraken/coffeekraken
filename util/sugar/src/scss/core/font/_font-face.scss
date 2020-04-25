@@ -74,7 +74,7 @@
   }
 
   // get font format from settings
-  $font-format: setting("typography.font-format");
+  $font-formats: setting("typography.font-formats");
 
   // if the src is a string
   // mean that's a url
@@ -95,7 +95,7 @@
     $srcs: ();
     @each $e in $extensions {
       // get the format
-      $format: map.get($font-format, $e);
+      $format: map.get($font-formats, $e);
       $srcs: list.append($srcs, url("#{$path}.#{$e}") format("#{$format}"), comma);
     }
   }

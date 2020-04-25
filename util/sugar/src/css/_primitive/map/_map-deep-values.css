@@ -1,0 +1,23 @@
+/**
+ * @name      map-deep-values
+ * @namespace     sugar.scss.map
+ * @type      function
+ *
+ * Get values of a map even if it is deep
+ *
+ * @param       {Map}       $map        The map to get values from
+ * @return      {List}                  The list of map values
+ *
+ * @example       scss
+ * sugar.map-deep-values((
+ *    'hello': 'world',
+ *    'coco': (
+ *       'plop': 'youhou'
+ *    )
+ * ));
+ * // => ('world', 'youhou')
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/*# sourceMappingURL=_map-deep-values.css.map */

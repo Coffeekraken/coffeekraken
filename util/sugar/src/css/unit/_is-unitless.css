@@ -1,0 +1,18 @@
+/**
+ * @name      is-unitless
+ * @namespace     sugar.scss.unit
+ * @type      function
+ *
+ * Check if the passed variable is unitless or not
+ *
+ * @param         {Number}        $number       The number to check
+ * @return        {Boolean}                     true if unitless, false if not
+ *
+ * @example       scss
+ * sugar.is-unitless(20); // => true
+ * sugar.is-unitless(10px); // => false
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/*# sourceMappingURL=_is-unitless.css.map */

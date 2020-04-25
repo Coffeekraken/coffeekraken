@@ -1,0 +1,18 @@
+/**
+ * @name      math-acos
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Calculate the cosinus inverse of the passed angle
+ *
+ * @param         {Number}        $angle          The angle to calculate the cosinus inverse from
+ * @param         {String}        [$unit=deg]     The wanted unit. Can de deg, rad, grad or turn
+ * @return         {Number}                       The calculated cosinus inverse
+ *
+ * @example     scss
+ * sugar.math-acos(1, deg); // 0.0559529097deg
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/*# sourceMappingURL=_math-acos.css.map */

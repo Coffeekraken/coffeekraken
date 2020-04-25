@@ -1,0 +1,25 @@
+/**
+ * @name    map-get-path
+ * @namespace     sugar.scss.map
+ * @type      function
+ *
+ * Return the map value depending on the passed path
+ *
+ * @param       {Map}       $map        The map in which to get the value
+ * @param       {String}    $path       The path to get the value from
+ * @param       {Mixed}     [$default:null]       The default value to return if none exist
+ * @return      {Mixed}                 The value wanted
+ *
+ * @example     scss
+ * sugar.map-get-path((
+ *    'hello': 'world',
+ *    'coco': (
+ *      'plop': 'youhou'
+ *    )
+ * ), 'coco.plop');
+ * // => 'youhou'
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/*# sourceMappingURL=_map-get-path.css.map */

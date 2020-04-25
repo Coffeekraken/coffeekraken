@@ -1,0 +1,209 @@
+/*!
+ * Font Awesome Free 5.11.2 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
+.fa,
+.fas,
+.far,
+.fal,
+.fad,
+.fab {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1;
+}
+
+/*!
+ * Font Awesome Free 5.11.2 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
+@font-face {
+  font-family: "Font Awesome 5 Brands";
+  font-style: normal;
+  font-weight: normal;
+  font-display: auto;
+  src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-brands-400.eot");
+  src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-brands-400.eot?#iefix") format("embedded-opentype"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-brands-400.woff2") format("woff2"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-brands-400.woff") format("woff"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-brands-400.ttf") format("truetype"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-brands-400.svg#fontawesome") format("svg");
+}
+.fab {
+  font-family: "Font Awesome 5 Brands";
+}
+
+/*!
+ * Font Awesome Free 5.11.2 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
+@font-face {
+  font-family: "Font Awesome 5 Free";
+  font-style: normal;
+  font-weight: 400;
+  font-display: auto;
+  src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-regular-400.eot");
+  src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-regular-400.eot?#iefix") format("embedded-opentype"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-regular-400.woff2") format("woff2"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-regular-400.woff") format("woff"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-regular-400.ttf") format("truetype"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-regular-400.svg#fontawesome") format("svg");
+}
+.far {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 400;
+}
+
+/*!
+ * Font Awesome Free 5.11.2 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
+@font-face {
+  font-family: "Font Awesome 5 Free";
+  font-style: normal;
+  font-weight: 900;
+  font-display: auto;
+  src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-solid-900.eot");
+  src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-solid-900.eot?#iefix") format("embedded-opentype"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-solid-900.woff2") format("woff2"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-solid-900.woff") format("woff"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-solid-900.ttf") format("truetype"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-solid-900.svg#fontawesome") format("svg");
+}
+.fa,
+.fas {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+
+/**
+ * @name        settings
+ * @type        {Map}
+ *
+ * Store all the settings
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name        current-context
+ * @type        {String}
+ * @private
+ *
+ * Store the current context
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name          font-size
+ * @type          {Number}
+ * @private
+ *
+ * Store the current registered font size
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name            $svg-icons
+ * @type            {Map}
+ * @private
+ *
+ * Store all the registered svg icons
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name          classes
+ * @type          {Map}
+ * @private
+ *
+ * Store all the classes in their namespaces
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name      icon
+ * @namespace     sugar.scss.icon
+ * @type      mixin
+ *
+ * Apply an icon on the element. This mixin support font-awesome and custom icons systems that have an icon name formated like "icon-{name}"
+ * The custom icon style if you pass as name "user" will extend %icon, %icon-user, .icon and .icon-user classes
+ *
+ * @param 		{String} 		$name 		The icon name to apply
+ * @param     {Color}     [$color=null]    The color wanted for the icon
+ *
+ * @example 	scss
+ * .my-cool-icon {
+ * 	\@include sugar.icon(fa-user, primary);
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      icons
+ * @namespace      sugar.scss.icon
+ * @type    mixin
+ *
+ * Generate some icon classes like .icon-$icon-name
+ *
+ * @param         {List}          $icons-names            The list of icons names to generate
+ * @param         {Color}         [$color=null]         The color wanted for the generated icons
+ *
+ * @example       scss
+ * \@include sugar.icons(fa-user fa-bell fa-circle);
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name        settings
+ * @type        {Map}
+ *
+ * Store all the settings
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name        current-context
+ * @type        {String}
+ * @private
+ *
+ * Store the current context
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name          font-size
+ * @type          {Number}
+ * @private
+ *
+ * Store the current registered font size
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name            $svg-icons
+ * @type            {Map}
+ * @private
+ *
+ * Store all the registered svg icons
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name          classes
+ * @type          {Map}
+ * @private
+ *
+ * Store all the classes in their namespaces
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name register-svg-icon
+ * @namespace     sugar.scss.icon
+ * @type      mixin
+ *
+ * Register a new icon to be used as base64 encoded url.
+ * If you want your icon to be colorable, you need to specify this code on your paths: `style="fill:%color"`
+ *
+ * @param    {String}    $name    The icon name
+ * @param    {String}    $svgCode    The icons svg code
+ *
+ * @example     scss
+ * @include sugar.register-svg-icon(user, 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjwhRE9DVFlQRSBzdmcgIFBVQkxJQyAnLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4nICAnaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkJz48c3ZnIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDUwIDUwIiBoZWlnaHQ9IjUwcHgiIGlkPSJMYXllcl8xIiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA1MCA1MCIgd2lkdGg9IjUwcHgiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxjaXJjbGUgY3g9IjI1IiBjeT0iMjUiIGZpbGw9Im5vbmUiIHI9IjI0IiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBzdHJva2Utd2lkdGg9IjIiLz48cmVjdCBmaWxsPSJub25lIiBoZWlnaHQ9IjUwIiB3aWR0aD0iNTAiLz48cGF0aCBkPSJNMjkuOTMzLDM1LjUyOGMtMC4xNDYtMS42MTItMC4wOS0yLjczNy0wLjA5LTQuMjFjMC43My0wLjM4MywyLjAzOC0yLjgyNSwyLjI1OS00Ljg4OGMwLjU3NC0wLjA0NywxLjQ3OS0wLjYwNywxLjc0NC0yLjgxOCAgYzAuMTQzLTEuMTg3LTAuNDI1LTEuODU1LTAuNzcxLTIuMDY1YzAuOTM0LTIuODA5LDIuODc0LTExLjQ5OS0zLjU4OC0xMi4zOTdjLTAuNjY1LTEuMTY4LTIuMzY4LTEuNzU5LTQuNTgxLTEuNzU5ICBjLTguODU0LDAuMTYzLTkuOTIyLDYuNjg2LTcuOTgxLDE0LjE1NmMtMC4zNDUsMC4yMS0wLjkxMywwLjg3OC0wLjc3MSwyLjA2NWMwLjI2NiwyLjIxMSwxLjE3LDIuNzcxLDEuNzQ0LDIuODE4ICBjMC4yMiwyLjA2MiwxLjU4LDQuNTA1LDIuMzEyLDQuODg4YzAsMS40NzMsMC4wNTUsMi41OTgtMC4wOTEsNC4yMWMtMS4yNjEsMy4zOS03LjczNywzLjY1NS0xMS40NzMsNi45MjQgIGMzLjkwNiwzLjkzMywxMC4yMzYsNi43NDYsMTYuOTE2LDYuNzQ2czE0LjUzMi01LjI3NCwxNS44MzktNi43MTNDMzcuNjg4LDM5LjE4NiwzMS4xOTcsMzguOTMsMjkuOTMzLDM1LjUyOHoiLz48L3N2Zz4=');
+ *
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/*# sourceMappingURL=_all.css.map */

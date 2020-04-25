@@ -1,0 +1,17 @@
+/**
+ * @name      math-even
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Convert the passed value to the closest even value
+ *
+ * @param 			{Number} 		$value 		The value to convert
+ * @return 			{Number} 					The closest even converted value
+ *
+ * @example     scss
+ * sugar.math-even(9); // => 10
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/*# sourceMappingURL=_math-even.css.map */

@@ -1,0 +1,17 @@
+/**
+ * @name    to-px
+ * @namespace     sugar.scss.unit
+ * @type      function
+ *
+ * Convert the passed value to px
+ *
+ * @param 			{Number} 		$value 		The value to convert
+ * @return 			{Number} 					The px converted value
+ *
+ * @example       scss
+ * sugar.to-px(10rem);
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/*# sourceMappingURL=_to-px.css.map */

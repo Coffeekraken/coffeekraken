@@ -8,8 +8,7 @@ const __parseArgs = require('../../node/cli/parseArgs');
 const __parse = require('../../node/docblock/parse');
 const __includes = require('../../node/string/includes');
 
-module.exports = async (stringArgs) => {
-
+module.exports = async (stringArgs = '') => {
   const args = __parseArgs(stringArgs, {
     source: {
       type: 'String',
@@ -28,12 +27,13 @@ module.exports = async (stringArgs) => {
     }
   });
 
-
-  const itemsArray = [`
+  const itemsArray = [
+    `
   require('module-alias/register');
 const __ensureExists = require('@coffeekraken/sugar/node/object/ensureExists');
 const api = {};
-  `];
+  `
+  ];
 
   const stackFn = {};
   const stack = {};
@@ -41,7 +41,6 @@ const api = {};
   const files = await __find.find('@namespace', args.source, '.js$');
 
   for (let i = 0; i < Object.keys(files).length; i++) {
-
     const filepath = Object.keys(files)[i];
 
     // console.log(filepath);
@@ -60,15 +59,22 @@ const api = {};
       }
     })[0];
 
-    const relativeFilePath = __path.relative(args.destination.split('/').slice(0, -1).join('/'), docObj._.filepath);
+    const relativeFilePath = __path.relative(
+      args.destination.split('/').slice(0, -1).join('/'),
+      docObj._.filepath
+    );
 
     // check the type of the parsed file
     switch (docObj.type.toLowerCase()) {
       case 'function':
         itemsArray.push(`
 ${docObj._.raw}
-__ensureExists(api, '${docObj.namespace.split('.').slice(1).join('.')}.${docObj.name}', null);
-api.${docObj.namespace.split('.').slice(1).join('.')}.${docObj.name} = (...args) => {
+__ensureExists(api, '${docObj.namespace.split('.').slice(1).join('.')}.${
+          docObj.name
+        }', null);
+api.${docObj.namespace.split('.').slice(1).join('.')}.${
+          docObj.name
+        } = (...args) => {
   return require('./${relativeFilePath}').call(null, ...args);
 };
         `);
@@ -77,8 +83,12 @@ api.${docObj.namespace.split('.').slice(1).join('.')}.${docObj.name} = (...args)
       default:
         itemsArray.push(`
 ${docObj._.raw}
-__ensureExists(api, '${docObj.namespace.split('.').slice(1).join('.')}.${docObj.name}', null);
-Object.defineProperty(api.${docObj.namespace.split('.').slice(1).join('.')}, '${docObj.name}', {
+__ensureExists(api, '${docObj.namespace.split('.').slice(1).join('.')}.${
+          docObj.name
+        }', null);
+Object.defineProperty(api.${docObj.namespace.split('.').slice(1).join('.')}, '${
+          docObj.name
+        }', {
   get: function() {
     return require('./${relativeFilePath}');
   }
@@ -86,12 +96,10 @@ Object.defineProperty(api.${docObj.namespace.split('.').slice(1).join('.')}, '${
           `);
         break;
     }
-
   }
 
   // export the API
   itemsArray.push(`module.exports = api;`);
 
   __writeFileSync(args.destination, itemsArray.join('\n'));
-
-}
+};

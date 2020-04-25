@@ -1,18 +1,14 @@
-const __findPkgJson = require('find-package-json');
+const __packageRoot = require('../../node/path/packageRoot');
+const __parseArgs = require('../../node/cli/parseArgs');
 
-module.exports = async (stringArgs) => {
+module.exports = async (stringArgs = '') => {
+  const args = __parseArgs(stringArgs, {
+    highest: {
+      type: 'Boolean',
+      alias: 'h',
+      default: false
+    }
+  });
 
-  const f = __findPkgJson(process.cwd());
-  let file = f.next();
-  let finalFile, rootPath;
-  while (!file.done) {
-    if (file.done) break;
-    finalFile = file;
-    file = f.next();
-  }
-  if (finalFile.filename) {
-    rootPath = finalFile.filename.split('/').slice(0, -1).join('/');
-  }
-  console.log(rootPath);
-
-}
+  console.log(__packageRoot(args.highest));
+};

@@ -1,0 +1,34 @@
+/**
+ * @name      loader-grid
+ * @namespace     sugar.scss.loader
+ * @type      function
+ *
+ * Generate a grid style loader
+ *
+ * @param       {String}      [$shape=rect]             The shape of the grid items. Can be rect or circle
+ * @param       {Color}       [$color=color(primary)]   The color to use for the grid items
+ * @param       {Number}      [$cols=3]                 How many columns the grid must have
+ * @param       {Number}      [$rows=3]                 How many rows must have the grid
+ * @param       {Number}      [$size=10px]              The size of each grid items
+ * @param       {Number}      [$gap=5px]                The size of the gaps between the grid items
+ * @param       {Number}      [$offset=0]               The offset used for the grid
+ * @param       {Number}      [$rotate=0deg]            Apply a rotation to the grid items
+ * @param       {String}      [$a-shape=null]           The animation shape to apply to the grid items. Can be rect or circle
+ * @param       {Number}      [$a-steps=5]              How many steps must have the animation
+ * @param       {Number}      [$a-spread=15px]          How much must the grid items spread during the animation
+ * @param       {Number}      [$a-rotate=null]          How many degrees must the grid items rotate during the animation
+ * @param       {Number}      [$a-scale=null]           Apply a scale for the animation of the grid items
+ * @param       {Number}      [$a-opacity=null]         Apply an opacity to the grid items during the animation
+ * @param       {Second}      [$a-duration=1s]          The duration of the animation
+ * @param       {Second}      [$a-delay=0s]             How many seconds to wait between each animations
+ * @param       {String}      [$a-ease=ease-in-out]     The easing to use for the animation
+ *
+ * @example     scss
+ * .my-cool-loader {
+ *    @include sugar.loader-grid();
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/*# sourceMappingURL=_loader-grid.css.map */

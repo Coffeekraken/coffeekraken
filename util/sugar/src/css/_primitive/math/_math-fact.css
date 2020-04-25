@@ -1,0 +1,17 @@
+/**
+ * @name      math-fact
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Returns the factorial of desired number
+ *
+ * @param         {Number}          $number         The number to calculate the factorial number
+ * @return        {Number}                          The calculated factorial of the passed number
+ *
+ * @example     scss
+ * sugar.math-fact(5); // => 120
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/*# sourceMappingURL=_math-fact.css.map */

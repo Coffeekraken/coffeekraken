@@ -1,0 +1,234 @@
+/**
+ * @name      map-deep-values
+ * @namespace     sugar.scss.map
+ * @type      function
+ *
+ * Get values of a map even if it is deep
+ *
+ * @param       {Map}       $map        The map to get values from
+ * @return      {List}                  The list of map values
+ *
+ * @example       scss
+ * sugar.map-deep-values((
+ *    'hello': 'world',
+ *    'coco': (
+ *       'plop': 'youhou'
+ *    )
+ * ));
+ * // => ('world', 'youhou')
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      map-extend
+ * @namespace     sugar.scss.map
+ * @type      function
+ *
+ * Extend the passed map with the others passed map(s)
+ *
+ * @param           {Map}         $map        The map to @extend
+ * @param           {Map|List-Map}  $maps     The map(s) used to extend the first one
+ * @return          {Map}                     The extended map
+ *
+ * @example     scss
+ * sugar.map-extend((
+ *  'hello': 'world'
+ * ), (
+ *  'coco': 'plop'
+ * ));
+ * // returned map:
+ * (
+ *  'hello': 'world',
+ *  'coco': 'plop'
+ * )
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      map-filter-by-namespace
+ * @namespace     sugar.scss.map
+ * @type      function
+ *
+ * Return all the map values that have a key that match the passed namespace
+ *
+ * @param           {Map}         $map          The map to process
+ * @param           {String}      $namespace    The namespace to search like (something.another.thing)
+ * @return          {Map}                       The filtered map
+ *
+ * @example     scss
+ * sugar.map-filter-by-namespace((
+ *  'hello.world': 'Hello',
+ *  'coco.world': 'Coco',
+ *  'hello.that': 'That is cool'
+ * ), 'hello');
+ * // return that map:
+ * (
+ *   'hello.world': 'Hello',
+ *   'hello.that': 'That is cool'
+ * )
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    map-get-or
+ * @namespace     sugar.scss.map
+ * @type      function
+ *
+ * Get a map value by passing a list of wanted indexes, or return the default passed value
+ *
+ * @param         {Map}         $map              The map to get the value from
+ * @param         {List}        $index-list       The list of indexes to try to get
+ * @param         {Midex}       [$default=null]   The default value to return if nothing is found in the map
+ *
+ * @example     scss
+ * sugar.map-get-or((
+ *  coco: 'hello',
+ *  plop: 'world'
+ * ), plop, null); // 'world'
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    map-get-path
+ * @namespace     sugar.scss.map
+ * @type      function
+ *
+ * Return the map value depending on the passed path
+ *
+ * @param       {Map}       $map        The map in which to get the value
+ * @param       {String}    $path       The path to get the value from
+ * @param       {Mixed}     [$default:null]       The default value to return if none exist
+ * @return      {Mixed}                 The value wanted
+ *
+ * @example     scss
+ * sugar.map-get-path((
+ *    'hello': 'world',
+ *    'coco': (
+ *      'plop': 'youhou'
+ *    )
+ * ), 'coco.plop');
+ * // => 'youhou'
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      map-get
+ * @namespace     sugar.scss.map
+ * @type      function
+ *
+ * Get a value in the passed map using the passed key
+ *
+ * @param         {Map}         $map        The map to get the value from
+ * @param         {String}      $key        The key to get the value in the map
+ * @param         {Mixed}                   The getted value
+ *
+ * @example       scss
+ * sugar.map-get((
+ *  hello: 'world'
+ * ), hello); // => 'world'
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name     map-has-key
+ * @namespace     sugar.scss.map
+ * @type      function
+ *
+ * Check if the passed map has the passed key. Return true if has, false if not
+ *
+ * @param           {Map}         $map        The map to check
+ * @param           {String}      $key        The key to check in the map
+ * @return          {Boolean}                 true if has the key, false if not
+ *
+ * @example     scss
+ * sugar.map-has-key((
+ *    'hello': 'world',
+ *    'coco': 'plop'
+ * ), 'hello'); // => true
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name  map-keys
+ * @namespace     sugar.scss.map
+ * @type      function
+ *
+ * Return a comma separated list of the map keys
+ *
+ * @param       {Map}       $map      The map to process
+ * @return      {List}                The list of map keys
+ *
+ * @example     scss
+ * sugar.map-keys((
+ *  'hello': 'world',
+ *  'coco': 'plop'
+ * )); // => ('hello','coco')
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    map-merge
+ * @namespace     sugar.scss.map
+ * @type      function
+ *
+ * Merge the first passed map with the second passed one and return the result
+ *
+ * @param           {Map}         $map1         The first map to extend
+ * @param           {Map}         $map2         The second map to extend the first one with
+ * @return          {Map}                       The extended map
+ *
+ * @example     scss
+ * sugar.map-merge((
+ *  hello: 'world'
+ * ), (
+ *  coco: 'plop'
+ * ));
+ * // returned map:
+ * (
+ *  hello: 'world',
+ *  coco: 'plop'
+ * )
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    map-remove
+ * @namespace     sugar.scss.map
+ * @type      function
+ *
+ * Remove one or multiple keys from the passed map
+ *
+ * @param           {Map}         $map          The map to process
+ * @param           {String}      $keys...      The key(s) to remove
+ * @return          {Map}                       The processed map
+ *
+ * @example       scss
+ * sugar.map-remove((
+ *  hello: 'world',
+ *  coco: 'plop'
+ * ), coco);
+ * // returned map:
+ * (
+ *  hello: 'world'
+ * )
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    map-set
+ * @namespace     sugar.scss.map
+ * @type      function
+ *
+ * Set a map property with the passed value
+ * @param 			{Map} 			$map 		The map to modify
+ * @param       {String}    $key    The key to set the propery to
+ * @param       {Mixed}     $value  The value to set
+ * @return 			{Map} 					    The updated map
+ *
+ * @example     scss
+ * $my-map : sugar.map-set($my-map, 'coco', 'Something cool');
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/*# sourceMappingURL=_all.css.map */

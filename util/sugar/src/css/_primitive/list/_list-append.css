@@ -1,0 +1,19 @@
+/**
+ * @name      list-append
+ * @namespace     sugar.scss.list
+ * @type      function
+ *
+ * Append a value to the passed list
+ *
+ * @param           {List}        $list               The list to append the value to
+ * @param           {Mixed}       $value              The value to append to the list
+ * @param           {String}      [$separator=auto]   The separator to use. Can be auto, space or comma
+ * @return          {List}                            The new list with the appended value
+ *
+ * @example     scss
+ * sugar.list-append(hello world, coco, comma); // hello, world, coco
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/*# sourceMappingURL=_list-append.css.map */

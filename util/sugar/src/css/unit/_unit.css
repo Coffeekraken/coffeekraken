@@ -1,0 +1,17 @@
+/**
+ * @name    unit
+ * @namespace     sugar.scss.unit
+ * @type      function
+ *
+ * Return the unit of the passed number
+ *
+ * @param       {Number}      $number       The number to get the unit from
+ * @return      {String}                    The unit
+ *
+ * @example     scss
+ * sugar.unit(10px); // => px
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/*# sourceMappingURL=_unit.css.map */

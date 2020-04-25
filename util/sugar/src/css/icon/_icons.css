@@ -1,0 +1,17 @@
+/**
+ * @name      icons
+ * @namespace      sugar.scss.icon
+ * @type    mixin
+ *
+ * Generate some icon classes like .icon-$icon-name
+ *
+ * @param         {List}          $icons-names            The list of icons names to generate
+ * @param         {Color}         [$color=null]         The color wanted for the generated icons
+ *
+ * @example       scss
+ * \@include sugar.icons(fa-user fa-bell fa-circle);
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/*# sourceMappingURL=_icons.css.map */

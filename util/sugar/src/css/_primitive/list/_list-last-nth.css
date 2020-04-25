@@ -1,0 +1,17 @@
+/**
+ * @name    list-last-nth
+ * @namespace     sugar.scss.list
+ * @type      function
+ *
+ * Return the last item of the passed list
+ *
+ * @param     {List}    $list     The list to get the last item from
+ * @return    {Mixed}             The last item of the list
+ *
+ * @example       scss
+ * sugar.list-last-nth(('hello', 'world')); // 'world'
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/*# sourceMappingURL=_list-last-nth.css.map */

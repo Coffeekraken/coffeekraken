@@ -1,3 +1,5 @@
+@use "sass:meta";
+
 /**
  * @name        settings
  * @type        {Map}
@@ -35,7 +37,7 @@
     // optimal letters count in a line
     line-letters-count: 55,
     // font format used in font-face
-    font-format: (
+    font-formats: (
       eot: embedded-opentype,
       woff2: woff2,
       woff: woff,
@@ -154,3 +156,7 @@
     test-arguments: true
   )
 ) !default;
+
+@if global-variable-exists(sugarUserSettings) and meta.type-of($sugarUserSettings) == 'map' {
+  $settings: map-extend($settings, $sugarUserSettings);
+}

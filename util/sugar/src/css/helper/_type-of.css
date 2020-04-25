@@ -1,0 +1,17 @@
+/**
+ * @name    type-of
+ * @namespace     sugar.scss.helper
+ * @type      function
+ *
+ * Get the type of the passed variable
+ *
+ * @param           {Mixed}         $variable       The variable to get the type of
+ * @return          {String}                        The type of the variable passed
+ *
+ * @example     scss
+ * sugar.type-of('hello world'); // => string
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/*# sourceMappingURL=_type-of.css.map */

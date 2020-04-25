@@ -11,8 +11,7 @@ const __appRootPath = require('app-root-path');
 const __findPkgJson = require('find-package-json');
 const __parseArgs = require('../../node/cli/parseArgs');
 
-module.exports = async (stringArgs) => {
-
+module.exports = async (stringArgs = '') => {
   const f = __findPkgJson(__dirname);
   let file = f.next();
   let finalFile, rootPath;
@@ -44,10 +43,13 @@ module.exports = async (stringArgs) => {
 
   const snippetsObj = {};
   const filepathesProcessed = [];
-  const files = await __find.find('@namespace', `${__dirname}/../../${args.language}`, '.js$');
+  const files = await __find.find(
+    '@namespace',
+    `${__dirname}/../../${args.language}`,
+    '.js$'
+  );
 
   for (let i = 0; i < Object.keys(files).length; i++) {
-
     const filepath = Object.keys(files)[i];
 
     if (filepath.includes('__wip__')) continue;
@@ -61,7 +63,10 @@ module.exports = async (stringArgs) => {
     let fileNamespace;
 
     let docObjs = __parse(fileContent);
-    const folderPath = __path.relative(__dirname, filepath).split('/').slice(0, -1);
+    const folderPath = __path
+      .relative(__dirname, filepath)
+      .split('/')
+      .slice(0, -1);
 
     if (docObjs && docObjs.length) {
       fileNamespace = docObjs[0].namespace;
@@ -70,7 +75,10 @@ module.exports = async (stringArgs) => {
     // check if the file has a @src tag in the forst block
     const firstBlock = docObjs[0];
     if (firstBlock.src) {
-      const relativeSrcPath = __path.resolve(__dirname, firstBlock.src.replace('../'.repeat(folderPath.length), ''));
+      const relativeSrcPath = __path.resolve(
+        __dirname,
+        firstBlock.src.replace('../'.repeat(folderPath.length), '')
+      );
 
       // read the source path
       let srcContent = __fs.readFileSync(relativeSrcPath).toString();
@@ -87,11 +95,9 @@ module.exports = async (stringArgs) => {
           }
         });
       }
-
     }
 
-    docObjs.forEach(docObj => {
-
+    docObjs.forEach((docObj) => {
       //  console.log(docObj);
       const namespace = docObj.namespace || fileNamespace;
       if (!namespace || !docObj.description || !docObj.name) {
@@ -145,12 +151,11 @@ module.exports = async (stringArgs) => {
         prefix: `${__upperFirst(namespace)}.${docObj.name}`,
         body,
         description
-      }
+      };
 
       // add this snippet to the snippets object
       snippetsObj[`${__upperFirst(namespace)}.${docObj.name}`] = snippet;
     });
-
   }
 
   // write the file
@@ -161,5 +166,4 @@ module.exports = async (stringArgs) => {
       console.log(e);
     }
   }
-
-}
+};

@@ -1,0 +1,17 @@
+/**
+ * @name      list-length
+ * @namespace     sugar.scss.list
+ * @type      function
+ *
+ * Return the number of item in the passed list
+ *
+ * @param       {List}      $list         The list to check
+ * @return      {Number}                  The count of item in the list
+ *
+ * @example     scss
+ * sugar.list-length(('hello','world')); // => 2
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/*# sourceMappingURL=_list-length.css.map */

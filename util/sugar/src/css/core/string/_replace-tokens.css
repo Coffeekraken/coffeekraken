@@ -1,0 +1,16 @@
+/**
+ * @name      replace-tokens
+ * @namespace     sugar.scss.core.string
+ * @type    function
+ *
+ * Search and replace tokens like colors #primary in a passed string, list or map
+ * Supported tokens types :
+ * 1. Colors : colorName
+ *
+ * @example     scss
+ * sugar.replace-tokens(12px #primary hello #secondary); // > 12px #ddd hello #fff;
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/*# sourceMappingURL=_replace-tokens.css.map */

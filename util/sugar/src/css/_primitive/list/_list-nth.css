@@ -1,0 +1,18 @@
+/**
+ * @name    list-nth
+ * @namespace     sugar.scss.list
+ * @type      function
+ *
+ * Return the item of the list at the passed index
+ *
+ * @param         {List}        $list         The list to process
+ * @param         {Number}      $index        The index of the element to get in the list
+ * @return        {Mixed}                     The value at the passed index
+ *
+ * @example     scss
+ * sugar.list-nth(('hello','world'), 2); // => 'world'
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/*# sourceMappingURL=_list-nth.css.map */

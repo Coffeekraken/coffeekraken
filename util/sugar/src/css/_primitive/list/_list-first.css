@@ -1,0 +1,17 @@
+/**
+ * @name      list-first
+ * @namespace     sugar.scss.list
+ * @type      function
+ *
+ * Return the first element of the passed list
+ *
+ * @param         {List}        $list         The list to get the first element from
+ * @return        {Mixed}                     The first element of the list
+ *
+ * @example       scss
+ * sugar.list-first(('hello', 'world')); // => 'hello'
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/*# sourceMappingURL=_list-first.css.map */

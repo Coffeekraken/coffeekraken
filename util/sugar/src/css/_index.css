@@ -1,0 +1,3895 @@
+@charset "UTF-8";
+/**
+ * @name    color-hue
+ * @namespace     sugar.scss.core.color
+ * @type          Function
+ *
+ * Return the hue of the passed color
+ *
+ * @param       {Color}     $color      The color to process
+ * @return      {Number}                The color hue
+ *
+ * @example   scss
+ * sugar.color-hue(#e1d7d2); // => 20deg
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      color-lightness
+ * @namespace     sugar.scss.core.color
+ * @type          Function
+ *
+ * Return the lightness of the passed color
+ *
+ * @param         {Color}       $color      The color to check
+ * @return        {Number}                  The color lightness
+ *
+ * @example     scss
+ * sugar.color-lightness(#e1d7d2); // => 85.2941176471%
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    color-opacity
+ * @namespace     sugar.scss.core.color
+ * @type          Function
+ *
+ * Return the opacity of the passed color
+ *
+ * @param       {Color}       $color        The color to prcess
+ * @return      {Number}                    The color opacity
+ *
+ * @example     scss
+ * sugar.color-opacity(#e1d7d2); // => 1
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    color-saturation
+ * @namespace     sugar.scss.core.color
+ * @type          Function
+ *
+ * Return the saturation of the passed color
+ *
+ * @param       {Color}     $color      The color to process
+ * @return      {Number}                The color saturation
+ *
+ * @example   scss
+ * sugar.color-saturation(#e1d7d2); // => 20%
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    color-transparentize
+ * @namespace     sugar.scss.color
+ * @type          Function
+ *
+ * Makes $color more transparent.
+ * The $amount must be a number between 0 and 1 (inclusive). Decreases the alpha channel of $color by that amount.
+ *
+ * @param       {Color}       $color        The color to process
+ * @param       {Number}      $amount       The amount to transparentize the color. Must be between 0 and 1
+ *
+ * @example       scss
+ * sugar.color-transparentize(rgba(#036, 0.3), 0.3); // => rgba(0, 51, 102, 0)
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      list-append
+ * @namespace     sugar.scss.list
+ * @type      function
+ *
+ * Append a value to the passed list
+ *
+ * @param           {List}        $list               The list to append the value to
+ * @param           {Mixed}       $value              The value to append to the list
+ * @param           {String}      [$separator=auto]   The separator to use. Can be auto, space or comma
+ * @return          {List}                            The new list with the appended value
+ *
+ * @example     scss
+ * sugar.list-append(hello world, coco, comma); // hello, world, coco
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      list-first
+ * @namespace     sugar.scss.list
+ * @type      function
+ *
+ * Return the first element of the passed list
+ *
+ * @param         {List}        $list         The list to get the first element from
+ * @return        {Mixed}                     The first element of the list
+ *
+ * @example       scss
+ * sugar.list-first(('hello', 'world')); // => 'hello'
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      list-implode
+ * @namespace     sugar.scss.list
+ * @type      function
+ *
+ * Join all the list items using the passed glue and return a string
+ *
+ * @param           {List}          $list           The list to implode
+ * @param           {String}        [$glue=""]      The glue to use to implode the list
+ * @return          {String}                        The imploded list in string format
+ *
+ * @example       scss
+ * sugar.list-implode(('hello','world'), '-'); // hello-world
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    list-index
+ * @namespace     sugar.scss.list
+ * @type      function
+ *
+ * Return the index of the wanted value in the passed list.
+ *
+ * @param       {List}      $list       The list to process
+ * @param       {Mixed}     $value      The value to search in the list
+ * @return      {Number}                The index of the founded value or null
+ *
+ * @example     scss
+ * sugar.list-index(('hello','world'), 'world'); // => 2
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      list-join
+ * @namespace     sugar.scss.list
+ * @type      function
+ *
+ * Return a string representing all the list items
+ *
+ * @param         {List}        $list1         The list to process
+ * @param         {List}        $list2         The list to join with the first one
+ * @param         {String}      [$separator=auto]     The separator to use for the list. Can be auto, comma or space
+ * @param         {String|Boolean}    [$bracketed=auto]     If true is passed, the list will be bracketed
+ * @return        {String}                    The new list
+ *
+ * @example     scss
+ * sugar.list-join(('hello','world'), ('coco'), space); // ('hello' 'world' 'coco')
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    list-last-nth
+ * @namespace     sugar.scss.list
+ * @type      function
+ *
+ * Return the last item of the passed list
+ *
+ * @param     {List}    $list     The list to get the last item from
+ * @return    {Mixed}             The last item of the list
+ *
+ * @example       scss
+ * sugar.list-last-nth(('hello', 'world')); // 'world'
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      list-length
+ * @namespace     sugar.scss.list
+ * @type      function
+ *
+ * Return the number of item in the passed list
+ *
+ * @param       {List}      $list         The list to check
+ * @return      {Number}                  The count of item in the list
+ *
+ * @example     scss
+ * sugar.list-length(('hello','world')); // => 2
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      list-set-nth
+ * @namespace     sugar.scss.list
+ * @type      function
+ *
+ * Set a value in the passed list at the passed index. The original value at the passed index will be replaced with the passed value
+ *
+ * @param       {List}      $list       The list to process
+ * @param       {Number}    $index      The index to set the value in the list
+ * @param       {Mixed}     $value      The value to set in the list
+ * @return      {List}                  The new processed list
+ *
+ * @example       scss
+ * sugar.list-set-nth(('hello','world'), 1, 'coco'); // => ('coco','world')
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    list-nth
+ * @namespace     sugar.scss.list
+ * @type      function
+ *
+ * Return the item of the list at the passed index
+ *
+ * @param         {List}        $list         The list to process
+ * @param         {Number}      $index        The index of the element to get in the list
+ * @return        {Mixed}                     The value at the passed index
+ *
+ * @example     scss
+ * sugar.list-nth(('hello','world'), 2); // => 'world'
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      list-pop
+ * @namespace     sugar.scss.list
+ * @type      function
+ *
+ * Remove the last item of the passed list
+ *
+ * @param       {List}        $list         The list to process
+ * @return      {List}                      The processed list
+ *
+ * @example       scss
+ * sugar.list-pop(('hello', 'world')); // ('hello')
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    list-prepend
+ * @namespace     sugar.scss.list
+ * @type      function
+ *
+ * Prepend a value in the passed list
+ *
+ * @param         {List}        $list           The list to process
+ * @param         {Mixed}       $value          The value to prepend in the list
+ * @param         {String}      [$separator=auto]   The separator to use. Can be auto, space or comma
+ * @return        {List}                        The new list with his new value
+ *
+ * @example   scss
+ * sugar.list-prepend(('hello','world'), 'coco'); // => ('coco','hello','world')
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      list-remove-nth
+ * @namespace     sugar.scss.list
+ * @type      function
+ *
+ * Remove item from list using an index
+ *
+ * @param         {List}          $list           The list to process
+ * @param         {Number}        $index          The index of the item to remove from the list
+ * @return        {List}                          The processes list
+ *
+ * @example       scss
+ * sugar.list-remove-nth(('hello','world'), 1); // ('hello')
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      list-search
+ * @namespace     sugar.scss.list
+ * @type      function
+ *
+ * Search for the passed value in the passed list and return true if exist, false if not
+ *
+ * @param           {List}          $list           The list in which to search for the passed value
+ * @param           {Mixed}         $value          The value to search in the List
+ * @return          {Boolean}                       true if the value exist in the list, false if not
+ *
+ * @example   scss
+ * sugar.list-search(('hello', 'world'), 'hello'); // => true
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      map-deep-values
+ * @namespace     sugar.scss.map
+ * @type      function
+ *
+ * Get values of a map even if it is deep
+ *
+ * @param       {Map}       $map        The map to get values from
+ * @return      {List}                  The list of map values
+ *
+ * @example       scss
+ * sugar.map-deep-values((
+ *    'hello': 'world',
+ *    'coco': (
+ *       'plop': 'youhou'
+ *    )
+ * ));
+ * // => ('world', 'youhou')
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      map-extend
+ * @namespace     sugar.scss.map
+ * @type      function
+ *
+ * Extend the passed map with the others passed map(s)
+ *
+ * @param           {Map}         $map        The map to @extend
+ * @param           {Map|List-Map}  $maps     The map(s) used to extend the first one
+ * @return          {Map}                     The extended map
+ *
+ * @example     scss
+ * sugar.map-extend((
+ *  'hello': 'world'
+ * ), (
+ *  'coco': 'plop'
+ * ));
+ * // returned map:
+ * (
+ *  'hello': 'world',
+ *  'coco': 'plop'
+ * )
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      map-filter-by-namespace
+ * @namespace     sugar.scss.map
+ * @type      function
+ *
+ * Return all the map values that have a key that match the passed namespace
+ *
+ * @param           {Map}         $map          The map to process
+ * @param           {String}      $namespace    The namespace to search like (something.another.thing)
+ * @return          {Map}                       The filtered map
+ *
+ * @example     scss
+ * sugar.map-filter-by-namespace((
+ *  'hello.world': 'Hello',
+ *  'coco.world': 'Coco',
+ *  'hello.that': 'That is cool'
+ * ), 'hello');
+ * // return that map:
+ * (
+ *   'hello.world': 'Hello',
+ *   'hello.that': 'That is cool'
+ * )
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    map-get-or
+ * @namespace     sugar.scss.map
+ * @type      function
+ *
+ * Get a map value by passing a list of wanted indexes, or return the default passed value
+ *
+ * @param         {Map}         $map              The map to get the value from
+ * @param         {List}        $index-list       The list of indexes to try to get
+ * @param         {Midex}       [$default=null]   The default value to return if nothing is found in the map
+ *
+ * @example     scss
+ * sugar.map-get-or((
+ *  coco: 'hello',
+ *  plop: 'world'
+ * ), plop, null); // 'world'
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    map-get-path
+ * @namespace     sugar.scss.map
+ * @type      function
+ *
+ * Return the map value depending on the passed path
+ *
+ * @param       {Map}       $map        The map in which to get the value
+ * @param       {String}    $path       The path to get the value from
+ * @param       {Mixed}     [$default:null]       The default value to return if none exist
+ * @return      {Mixed}                 The value wanted
+ *
+ * @example     scss
+ * sugar.map-get-path((
+ *    'hello': 'world',
+ *    'coco': (
+ *      'plop': 'youhou'
+ *    )
+ * ), 'coco.plop');
+ * // => 'youhou'
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      map-get
+ * @namespace     sugar.scss.map
+ * @type      function
+ *
+ * Get a value in the passed map using the passed key
+ *
+ * @param         {Map}         $map        The map to get the value from
+ * @param         {String}      $key        The key to get the value in the map
+ * @param         {Mixed}                   The getted value
+ *
+ * @example       scss
+ * sugar.map-get((
+ *  hello: 'world'
+ * ), hello); // => 'world'
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name     map-has-key
+ * @namespace     sugar.scss.map
+ * @type      function
+ *
+ * Check if the passed map has the passed key. Return true if has, false if not
+ *
+ * @param           {Map}         $map        The map to check
+ * @param           {String}      $key        The key to check in the map
+ * @return          {Boolean}                 true if has the key, false if not
+ *
+ * @example     scss
+ * sugar.map-has-key((
+ *    'hello': 'world',
+ *    'coco': 'plop'
+ * ), 'hello'); // => true
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name  map-keys
+ * @namespace     sugar.scss.map
+ * @type      function
+ *
+ * Return a comma separated list of the map keys
+ *
+ * @param       {Map}       $map      The map to process
+ * @return      {List}                The list of map keys
+ *
+ * @example     scss
+ * sugar.map-keys((
+ *  'hello': 'world',
+ *  'coco': 'plop'
+ * )); // => ('hello','coco')
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    map-merge
+ * @namespace     sugar.scss.map
+ * @type      function
+ *
+ * Merge the first passed map with the second passed one and return the result
+ *
+ * @param           {Map}         $map1         The first map to extend
+ * @param           {Map}         $map2         The second map to extend the first one with
+ * @return          {Map}                       The extended map
+ *
+ * @example     scss
+ * sugar.map-merge((
+ *  hello: 'world'
+ * ), (
+ *  coco: 'plop'
+ * ));
+ * // returned map:
+ * (
+ *  hello: 'world',
+ *  coco: 'plop'
+ * )
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    map-remove
+ * @namespace     sugar.scss.map
+ * @type      function
+ *
+ * Remove one or multiple keys from the passed map
+ *
+ * @param           {Map}         $map          The map to process
+ * @param           {String}      $keys...      The key(s) to remove
+ * @return          {Map}                       The processed map
+ *
+ * @example       scss
+ * sugar.map-remove((
+ *  hello: 'world',
+ *  coco: 'plop'
+ * ), coco);
+ * // returned map:
+ * (
+ *  hello: 'world'
+ * )
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    map-set
+ * @namespace     sugar.scss.map
+ * @type      function
+ *
+ * Set a map property with the passed value
+ * @param 			{Map} 			$map 		The map to modify
+ * @param       {String}    $key    The key to set the propery to
+ * @param       {Mixed}     $value  The value to set
+ * @return 			{Map} 					    The updated map
+ *
+ * @example     scss
+ * $my-map : sugar.map-set($my-map, 'coco', 'Something cool');
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      math-abs
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Return the absolute version of the passed number
+ *
+ * @param         {Number}        $number       The number to process
+ * @return        {Number}                      The absolute version of the number
+ *
+ * @example     scss
+ * sugar.math-abs(-10); // => 10
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      math-acos
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Calculate the cosinus inverse of the passed angle
+ *
+ * @param         {Number}        $angle          The angle to calculate the cosinus inverse from
+ * @param         {String}        [$unit=deg]     The wanted unit. Can de deg, rad, grad or turn
+ * @return         {Number}                       The calculated cosinus inverse
+ *
+ * @example     scss
+ * sugar.math-acos(1, deg); // 0.0559529097deg
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      math-asin
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Calculate the sinus inverse
+ *
+ * @param         {Number}        $value        The value to use
+ * @param         {String}        [$unit=deg]   The unit wanted. Possible values are deg, rad, grad and turn
+ * @return        {Number}                      The calculated asin
+ *
+ * @example     scss
+ * sugar.math-asin(1, rad); // => 1.5698197643rad
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      math-atan
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Calculate the tangent inverse of the passed angle
+ *
+ * @param       {Number}      $angle        The angle to calculate the tangent inverse from
+ * @param       {String}      [$unit=deg]   The wanted unit. Can be deg, rad, grad or turn
+ * @return      {Number}                    The calculated tangent inverse of the passed angle
+ *
+ * @example       scss
+ * sugar.math-atan(10, deg); // => 84.2988568542deg
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    math-ceil
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Rounds $number up to the next highest whole number
+ *
+ * @param       {Number}      $number       The number to process
+ * @return      {Number}                    The up rounded number
+ *
+ * @example     scss
+ * sugar.math-ceil(4.2); // => 5
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    math-convert-angle
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Convert the passed angle into another unit like rad, deg, grad or turn
+ *
+ * @param           {Number}            $value          The angle value to convert
+ * @param           {String}            $unit           The wanted unit. Can be rad, deg, grad or turn
+ * @return          {Number}                            The converted angle value
+ *
+ * @example   scss
+ * sugar.math-convert-angle()
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      math-cos
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Calculate the cosinus of the passed angle
+ *
+ * @param         {Number}        $angle      The angle to calculate the cosinus from
+ * @return        {Number}                    The calculated cosinus
+ *
+ * @example     scss
+ * sugar.math-cos(10); // => 6.6645643378
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      math-deg
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Convert the passed unitless angle to degree
+ *
+ * @param         {Number}        $angle      The angle to convert to degree
+ * @return        {Number}                    The degree version of the angle
+ *
+ * @example     scss
+ * sugar.math-deg(10); // => 572.9577951308deg
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      math-even
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Convert the passed value to the closest even value
+ *
+ * @param 			{Number} 		$value 		The value to convert
+ * @return 			{Number} 					The closest even converted value
+ *
+ * @example     scss
+ * sugar.math-even(9); // => 10
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      math-fact
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Returns the factorial of desired number
+ *
+ * @param         {Number}          $number         The number to calculate the factorial number
+ * @return        {Number}                          The calculated factorial of the passed number
+ *
+ * @example     scss
+ * sugar.math-fact(5); // => 120
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      math-grad
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Convert the passed unitless angle to gradian
+ *
+ * @param         {Number}        $angle      The angle to convert to gradian
+ * @return        {Number}                    The gradian version of the angle
+ *
+ * @example     scss
+ * sugar.math-grad(10); // => 636.6197723675grad
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      math-odd
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Convert the passed value to the closest odd value
+ *
+ * @param 			{Number} 		$value 		The value to convert
+ * @return 			{Number} 					The closest odd converted value
+ *
+ * @example     scss
+ * sugar.math-odd(10); // => 9
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      math-percentage
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Converts a unitless $number (usually a decimal between 0 and 1) to a percentage.
+ *
+ * @param         {Number}          $number           The number to convert into percentage
+ * @return        {Number}                            The percentage converted
+ *
+ * @example
+ * sugar.math-percentage(0.2); // => 20%
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      math-pow
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Return the calculated power of the passed base using the passed exponent
+ *
+ * @param         {Number}        $base         The base number
+ * @param         {Number}        $exponent     The exponent used to raise the base
+ * @return        {Number}                      The calculated power number
+ *
+ * @example    scss
+ * sugar.math.pow(7, 3); // => 343
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      math-rad
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Convert the passed unitless angle to radian
+ *
+ * @param         {Number}        $angle      The angle to convert to radian
+ * @return        {Number}                    The radian version of the angle
+ *
+ * @example     scss
+ * sugar.math-rad(10); // => 10rad
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    math-random
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * If $limit is null, returns a random decimal number between 0 and 1.
+ *
+ * @param       {Number}      [$limit:null]     The limit to generate a number under that
+ * @return      {Number}                        The generated number
+ *
+ * @example     scss
+ * sugar.math-random(); // => 0.2821251858
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    math-round
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Rounds $number to the nearest whole number.
+ *
+ * @param       {Number}      $number       The number to round
+ * @return      {Number}                    The rounded number
+ *
+ * @example     scss
+ * sugar.math-round(4.2); // => 4
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    math-sin
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Calculate the sinus of the passed angle
+ *
+ * @param       {Number}      $angle        The angle to calculate the sinus from
+ * @return      {Number}                    The calculated sinus
+ *
+ * @example     scss
+ * sugar.math-sin(10); // => 2.761090926
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name  math-sqrt
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Return the square root of the passed number
+ *
+ * @param         {Number}        $number       The number to process
+ * @return        {Number}                      The square root of the passed number
+ *
+ * @example   scss
+ * sugar.math-sqrt(2); // => 1.41421356237
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      math-tan
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Calculate the tangent of the passed angle
+ *
+ * @param         {Number}        $angle        The angle to calculate the tangent from
+ * @return        {Number}                      The calculated tangent
+ *
+ * @example       scss
+ * sugar.math-tan(10); // => 0.4142942863
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      math-turn
+ * @namespace     sugar.scss.math
+ * @type      function
+ *
+ * Convert the passed unitless angle to turn
+ *
+ * @param         {Number}        $angle      The angle to convert to turn
+ * @return        {Number}                    The turn version of the angle
+ *
+ * @example     scss
+ * sugar.math-turn(10); // => 1.5915494309turn
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      str-index
+ * @namespace     sugar.scss.string
+ * @type      function
+ *
+ * Returns the first index of $substring in $string, or null if $string doesn’t contain $substring.
+ *
+ * @param       {String}      $string       The string to process
+ * @param       {String}      $substring    The string to search
+ * @return      {Number}                    The index of the finded substring or null if not exist...
+ *
+ * @example      scss
+ * sugar.str-index('Hello world', 'world'); // => 7
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    str-is-url
+ * @namespace     sugar.scss.string
+ * @type      function
+ *
+ * Check if a string is a url or not
+ *
+ * @param 			{String} 				$url 			The string to check
+ * @return 			{Boolean} 								true if is a url, false if not
+ *
+ * @example     scss
+ * sugar.str-is-url('Hello world') // false
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    str-length
+ * @namespace     sugar.scss.string
+ * @type      function
+ *
+ * Return the number of characters in the passed string
+ *
+ * @param       {String}      $string       The string to process
+ * @return      {Number}                    The number of characters that compose the string
+ *
+ * @example     scss
+ * sugar.str-length('hello'); // => 4
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    str-replace
+ * @namespace     sugar.scss.string
+ * @type      function
+ *
+ * Replace the passed string with another one in a specific string
+ *
+ * @param         {String}        $string         The string in which to replace the searched one
+ * @param         {String}        $search         The string to replace
+ * @param         {String}        [$replace=""]   The string used as replacement
+ * @return        {String}                        The processed string
+ *
+ * @example     scss
+ * sugar.str-replace('Hello world', 'world', 'coco'); // 'Hello coco'
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    str-slice
+ * @namespace     sugar.scss.string
+ * @type      function
+ *
+ * Returns the slice of $string starting at index $start-at and ending at index $end-at (both inclusive).
+ *
+ * @param         {String}        $string         The string to slice
+ * @param         {Number}        $start-at       Where to start slice the string
+ * @param         {Number}        [$end-at=-1]    Where to end to slice the string
+ *
+ * @param       scss
+ * sugar.str-slice('Hello world', 1, 4); // => Hell
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    str-split
+ * @namespace     sugar.scss.string
+ * @type      function
+ *
+ * Split a string using a delimiter
+ *
+ * @param         {String}          $string             The string to split
+ * @param         {String}          [$delimiter=""]     The delimiter to split the string
+ * @return        {List}                                A list a the splited string
+ *
+ * @example       scss
+ * sugar.str-split('hello.world', '.'); // ('hello', 'world')
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    str-unique-id
+ * @namespace     sugar.scss.string
+ * @type      function
+ *
+ * Generate a unique id in string format
+ *
+ * @return        {String}          The generated unique id
+ *
+ * @example     scss
+ * sugar.str-unique-id(); // => uabtrnzug
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      str-unquote
+ * @namespace     sugar.scss.string
+ * @type      function
+ *
+ * Return an unquoted version of the passed string
+ *
+ * @param         {String}        $string           The string to unquote
+ * @return        {String}                          The unquoted string
+ *
+ * @example       scss
+ * sugar.str-unquote('hello world'); // => hello world
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    str-split
+ * @namespace     sugar.scss.string
+ * @type      function
+ *
+ * Split a string using a delimiter
+ *
+ * @param         {String}          $string             The string to split
+ * @param         {String}          [$delimiter=""]     The delimiter to split the string
+ * @return        {List}                                A list a the splited string
+ *
+ * @example       scss
+ * sugar.str-split('hello.world', '.'); // ('hello', 'world')
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name        str-url-ext
+ * @namespace     sugar.scss.string
+ * @type      function
+ *
+ * Check if a string is a url or not
+ *
+ * @param 			{String} 				$url 			The string to check
+ * @return 			{Boolean} 								true if is a url, false if not
+ *
+ * @example       scss
+ * sugar.str-is-url('Hello world') // false
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name        settings
+ * @type        {Map}
+ *
+ * Store all the settings
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name        current-context
+ * @type        {String}
+ * @private
+ *
+ * Store the current context
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name          font-size
+ * @type          {Number}
+ * @private
+ *
+ * Store the current registered font size
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name            $svg-icons
+ * @type            {Map}
+ * @private
+ *
+ * Store all the registered svg icons
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name          classes
+ * @type          {Map}
+ * @private
+ *
+ * Store all the classes in their namespaces
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name        settings
+ * @type        {Map}
+ *
+ * Store all the settings
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name        current-context
+ * @type        {String}
+ * @private
+ *
+ * Store the current context
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name          font-size
+ * @type          {Number}
+ * @private
+ *
+ * Store the current registered font size
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name            $svg-icons
+ * @type            {Map}
+ * @private
+ *
+ * Store all the registered svg icons
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name          classes
+ * @type          {Map}
+ * @private
+ *
+ * Store all the classes in their namespaces
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name    init
+ * @namespace     sugar.scss.core.mixin
+ * @type      mixin
+ *
+ * Init the sugar toolkit.
+ * This has to be called **AFTER** all the [./_s-setup.scss] mixin call
+ * and **BEFORE** all the others sugar mixins and functions calls
+ *
+ * @example     scss
+ * \@include sugar.init();
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name        settings
+ * @type        {Map}
+ *
+ * Store all the settings
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name        current-context
+ * @type        {String}
+ * @private
+ *
+ * Store the current context
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name          font-size
+ * @type          {Number}
+ * @private
+ *
+ * Store the current registered font size
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name            $svg-icons
+ * @type            {Map}
+ * @private
+ *
+ * Store all the registered svg icons
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name          classes
+ * @type          {Map}
+ * @private
+ *
+ * Store all the classes in their namespaces
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name      setup
+ * @namespace     sugar.scss.core.mixin
+ * @type      mixin
+ *
+ * Setup sugar toolkit by overriding the default [settings](../_settings.scss)
+ * This has to be called **BEFORE** the [s-init mixin](./_s-init.scss)
+ *
+ * @param 			{Map} 			$settings 		The settings to override
+ *
+ * @example       scss
+ * \@include sugar.setup((
+ * 		typo : (
+ * 			font-size : 12px
+ * 		),
+ * 		sizes : (
+ * 			small : 0.5,
+ * 			big : 1.5
+ * 		)
+ * ));
+ * // this mixin can be called as many times as you need
+ * // this allows you to separate your configs setup into multiple
+ * // files...
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name        settings
+ * @type        {Map}
+ *
+ * Store all the settings
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name        current-context
+ * @type        {String}
+ * @private
+ *
+ * Store the current context
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name          font-size
+ * @type          {Number}
+ * @private
+ *
+ * Store the current registered font size
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name            $svg-icons
+ * @type            {Map}
+ * @private
+ *
+ * Store all the registered svg icons
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name          classes
+ * @type          {Map}
+ * @private
+ *
+ * Store all the classes in their namespaces
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name      setting
+ * @namespace     sugar.scss.core.setting
+ * @type    function
+ *
+ * Get a settings from the global settings stack
+ *
+ * @param 				{String} 			$path 						The setting path wanted separated by dots
+ * @param 				{String} 			[$context=s-context()] 		The context name to get the setting
+ * @param 				{Mixed} 			[$default=null] 			The value to return if no value is found
+ * @return 				{Mixed} 										The setting value¨
+ *
+ * @example
+ * $font-size : sugar.setting('typography.font-size');
+ * // etc...
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      animation
+ * @namespace     sugar.scss.core.mixin
+ * @type      mixin
+ *
+ * Print out the animation property calculated with the passed arguments
+ * This mixin support all the standard css animation properties like name, duration, delay, ease, direction and fill-mode.
+ * The $animations argument will be parsed with the [../functions/_s-parse-properties.scss] function.
+ * If you specify multiple animations at a time, this mixin will take care
+ * of the delay calculation for each animations and make them play one after another
+ *
+ * @param 			{List} 				$animations 			The animations wanted like : coco .2s ease-in-out reverse
+ *
+ * @example     scss
+ * .my-cool-element {
+ * 		@include sugar.animation(my-animation 1s ease-in-out, another-animation 4s);
+ * 		// animation : my-animation 1s 0s ease-in-out 1 normal forwards, another-animation 4s 1s ease-in-out 1 normal forwards;
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name        settings
+ * @type        {Map}
+ *
+ * Store all the settings
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name        current-context
+ * @type        {String}
+ * @private
+ *
+ * Store the current context
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name          font-size
+ * @type          {Number}
+ * @private
+ *
+ * Store the current registered font size
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name            $svg-icons
+ * @type            {Map}
+ * @private
+ *
+ * Store all the registered svg icons
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name          classes
+ * @type          {Map}
+ * @private
+ *
+ * Store all the classes in their namespaces
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name    classes
+ * @namespace     sugar.scss.core.class
+ * @type      mixin
+ *
+ * Print out all wanted registered classes like padding helpers, margin helpers, font helpers, etc...
+ * Available namespaces
+ * - sugar.filter.{name} : .fi-{name}
+ * - sugar.transition.{name} : .tr-{name}
+ * - sugar.font.family.{name} : .f-{name}
+ * - sugar.margin.bottom.{size} : .m-b-{size}
+ * - sugar.margin.top.{size} : .m-t-{size}
+ * - sugar.margin.left.{size} : .m-l-{size}
+ * - sugar.margin.right.{size} : .m-r-{size}
+ * - sugar.margin.side.{size} : .m-s-{size}
+ * - sugar.padding.all.{size} : .p-{size}
+ * - sugar.padding.top.{size} : .p-t-{size}
+ * - sugar.padding.bottom.{size} : .p-b-{size}
+ * - sugar.padding.left.{size} : .p-l-{size}
+ * - sugar.padding.right.{size} : .p-r-{size}
+ * - sugar.padding.side.{size} : .p-s-{size}
+ * - sugar.size.{size} : .s-{size}
+ * - sugar.size.rel.{size} : .s-{size}-rel
+ * - sugar.padding.no.top : .no-p-t
+ * - sugar.padding.no.bottom : .no-p-b
+ * - sugar.padding.no.left : .no-p-l
+ * - sugar.padding.no.right : .no-p-r
+ * - sugar.padding.no.side : .no-p-s
+ * - sugar.margin.no.top : .no-m-t
+ * - sugar.margin.no.bottom : .no-m-b
+ * - sugar.margin.no.left : .no-m-l
+ * - sugar.margin.no.right : .no-m-r
+ * - sugar.margin.no.side : .no-m-s
+ * - sugar.color.{name}.color : .c-{name}
+ * - sugar.color.{name}.bkg : .bkg-{name}
+ * - sugar.color.{name}.modifier.{mod-name}.color : .c-{name}--{mod-name}
+ * - sugar.color.{name}.modifier.{mod-name}.bkg : .bkg-{name}--{mod-name}
+ * - sugar.pull.left : .pull-left
+ * - sugar.pull.right : .pull-right
+ * - sugar.position.relative : .relative
+ * - sugar.position.absolute : .absolute
+ * - sugar.clear.left : .clear-left
+ * - sugar.clear.right : .clear-right
+ * - sugar.clear.both : .clear
+ * - sugar.pointer.events.all : .pointer-events-all
+ * - sugar.pointer.events.none : .pointer-events-none
+ * - sugar.display.show : .show
+ * - sugar.display.show-inline : .show-inline
+ * - sugar.display.hidden : .hidden
+ * - sugar.display.hide : .hide
+ * - sugar.display.visible : .visible
+ * - sugar.display.invisible : .invisible
+ * - sugar.display.visually-hidden : .visually-hidden
+ * - sugar.text.hidden : .t-hidden
+ * - sugar.text.truncate : .t-truncate
+ * - sugar.text.align.left : .t-left
+ * - sugar.text.align.right : .t-right
+ * - sugar.text.align.center : .t-center
+ * - sugar.text.align.justify : .t-justify
+ * - sugar.text.transform.lowercase : .t-lowercase
+ * - sugar.text.transform.uppercase : .t-uppercase
+ * - sugar.text.transform.capitalize : .t-capitalize
+ * - sugar.font.weight.bold : .f-bold
+ * - sugar.font.weight.lighter : .f-lighter
+ * - sugar.font.weight.bolder : .f-bolder
+ * - sugar.font.weight.normal : .f-normal
+ * - sugar.font.style.italic : .f-italic
+ * - sugar.font.style.oblique : .f-oblique
+ * - sugar.font.variant.small-caps : .f-small-caps
+ * - sugar.block.align.center : .block-center
+ * - sugar.ratio.21-9 : ```.ratio-21-9```
+ * - sugar.ratio.16-9 : ```.ratio-16-9```
+ * - sugar.ratio.4-3 : ```.ratio-4-3```
+ * - sugar.ratio.1-1 : ```.ratio-1-1```
+ * - sugar.size.abs.cover : ```.abs-cover```
+ * - sugar.size.abs.contain : ```.abs-contain```
+ * - sugar.size.abs.fit : ```.abs-fit```
+ * - sugar.clearfix.default : .clearfix
+ * - sugar.clearfix.float : .clearfix-float
+ * - sugar.clearfix.micro : .clearfix-micro
+ * - sugar.clearfix.overflow : .clearfix-overflow
+ * - sugar.clearfix.facebook : .clearfix-facebook
+ * - sugar.no-transitions : .no-transitions
+ * - sugar.clear-transitions : .clear-transitions
+ * - sugar.no-animations : .no-animations
+ * - sugar.clear-animations : .clear-animations
+ * - sugar.no-transmations : .no-transmations
+ * - sugar.clear-transmations : .clear-transmations
+ *
+ * @param 			{List}<string> 			$namespaces 		The classes namespaces wanted
+ *
+ * @example     scss
+ * \@include sugar.classes(); // will print out all the classes
+ * \@include sugar.classes('sugar.font'); // will print all the font classes
+ * \@include sugar.classes('sugar.clearfix' 'sugar.pull'); // the clearfixes and the pull classes
+ * // etc...
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name            init-classes
+ * @namespace     sugar.scss.core.class
+ * @type      mixin
+ *
+ * Register all the dynamic helper classes that depends on the settings, etc...
+ * This is used internaly
+ *
+ * @example     scss
+ * \@include sugar.init-classes();
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name        settings
+ * @type        {Map}
+ *
+ * Store all the settings
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name        current-context
+ * @type        {String}
+ * @private
+ *
+ * Store the current context
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name          font-size
+ * @type          {Number}
+ * @private
+ *
+ * Store the current registered font size
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name            $svg-icons
+ * @type            {Map}
+ * @private
+ *
+ * Store all the registered svg icons
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name          classes
+ * @type          {Map}
+ * @private
+ *
+ * Store all the classes in their namespaces
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name      register-class
+ * @namespace     sugar.scss.core.class
+ * @type      mixin
+ *
+ * Register a class under a certain namespace
+ *
+ * @param 			{String} 		$classname 		The classname that will be printed out
+ * @param 			{String} 		$namespace 		The dots separated namespace under which the class will live
+ *
+ * @example       scss
+ * \@include sugar.register-class(my-cool-class, 'my.cool.namespace') {
+ * 		background : pink;
+ * }
+ * \@include sugar.register-class(another-cool-class, 'my.another.namespace') {
+ * 		background : red;
+ * }
+ *
+ * // print out my helpers classes
+ * \@include sugar.classes('my');
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    color-modifier
+ * @namespace     sugar.scss.core.color
+ * @type      function
+ *
+ * Return the color in a modifier list
+ *
+ * @param 			{List} 			$modifiers 		The modifiers list
+ * @return 			{String} 						The color name
+ *
+ * @example
+ * $my-color : sugar.color-modifier(outline primary); // => primary
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      color-schema
+ * @namespace     sugar.scss.core.color
+ * @type      mixin
+ *
+ * Print out the scoped color schema css
+ *
+ * @param 		{String} 			$name 			The color schema name
+ *
+ * @example       scss
+ * \@include sugar.color-schema(light) {
+ * 		h1, h2 {
+ * 			color : white;
+ * 		}
+ * }
+ * // will print
+ * .cs-light h1,
+ * .cs-light h2 {
+ * 		color : white;
+ * }
+ *
+ * h1, h2 {
+ * 		\@include sugar.color-schema(light) {
+ * 			color : white;
+ * 		}
+ * }
+ * // will print
+ * .cs-light h1, h1.cs-light,
+ * .cs-light h2, h2.cs-light {
+ * 		color : white;
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      color
+ * @namespace     sugar.scss.core.color
+ * @type      function
+ *
+ * Get a registered color by name or wrap a new color into a sugar.color call
+ * to manipulate it with ease.
+ * Supported actions :
+ * - hue {Deg}
+ * - lighten {Percent}
+ * - darken {Percent}
+ * - saturate {Percent}
+ * - desaturate {Percent}
+ * - grayscale {Boolean}
+ * - complement {Boolean}
+ * - invert {Boolean}
+ * - opacity {Percent}
+ * - mix {Color}
+ * - lightness {Percent}
+ * - saturation {Percent}
+ *
+ * @param 		{String|Color} 		$color 				The color name or the color value to manipulate
+ * @param 		{String|List} 			[$modifier=null] 	The color modifier to apply. Can be a registered modifier name or a modifier list
+ * @return 		{Color} 									The actual color value
+ *
+ * @example 	 	scss
+ * // default color (settings.colors.default)
+ * $myColor : sugar.color(default);
+ * // primary color (settings.colors.primary)
+ * $primary : sugar.color(primary);
+ * // manipulate
+ * $primary-dark : sugar.color(primary, -darken 10%);
+ * // registered modifier
+ * $primary-light : sugar.color(primary, light);
+ * // $name as list
+ * $modified primary : sugar.color((primary, -darken 10%));
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      docblock-colors
+ * @namespace     sugar.scss.core.color
+ * @type      mixin
+ *
+ * Print the styleguide docblocks for the registered sugar colors
+ *
+ * @example     scss
+ * @include sugar.docblock-colors();
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      has-color
+ * @namespace     sugar.scss.core.color
+ * @type    function
+ *
+ * Check if the provided color is a registered one or not
+ *
+ * @param 		{String} 		$color 		The color nane to check
+ * @return 		{Boolean} 					True if exists, false if not
+ *
+ * @example     scss
+ * sugar.has-color(primary); // => true
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name        settings
+ * @type        {Map}
+ *
+ * Store all the settings
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name        current-context
+ * @type        {String}
+ * @private
+ *
+ * Store the current context
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name          font-size
+ * @type          {Number}
+ * @private
+ *
+ * Store the current registered font size
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name            $svg-icons
+ * @type            {Map}
+ * @private
+ *
+ * Store all the registered svg icons
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name          classes
+ * @type          {Map}
+ * @private
+ *
+ * Store all the classes in their namespaces
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name      context
+ * @namespace     sugar.scss.core.context
+ * @type      function
+ * Return the name of the context setted with the [../mixins/_context.scss] mixin
+ *
+ * @param 			{String} 			[$default=null] 		The name to return if no context exist
+ * @return 			{String} 									The context name
+ *
+ * @example
+ * // register a context
+ * \@include sugar.context-setup('my-context', (
+ * 		// override some settings here...
+ * ));
+ *
+ * sugar.context('hello') // => 'hello'
+ * \@include sugar.context('my-context') {
+ * 		sugar.context('hello') // => 'my-context'
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com);
+ */
+/**
+ * @name        settings
+ * @type        {Map}
+ *
+ * Store all the settings
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name        current-context
+ * @type        {String}
+ * @private
+ *
+ * Store the current context
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name          font-size
+ * @type          {Number}
+ * @private
+ *
+ * Store the current registered font size
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name            $svg-icons
+ * @type            {Map}
+ * @private
+ *
+ * Store all the registered svg icons
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name          classes
+ * @type          {Map}
+ * @private
+ *
+ * Store all the classes in their namespaces
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name      context
+ * @namespace     sugar.scss.core.context
+ * @type      mixin
+ *
+ * Set a context to be used inside the mixin
+ *
+ * @param 			{String|Map} 			$name-or-map 		The name of a registered context or a map
+ *
+ * @example     scss
+ * // register a context
+ * \@include sugar.context-setup(my-cool-context, (
+ * 		look-and-feel : (
+ * 			padding-vertical : (
+ * 				default : 0.6em
+ * 			)
+ * 		)
+ * ));
+ *
+ * // registered context
+ * \@include sugar.context(my-cool-context) {
+ * 		// your code here...
+ * }
+ *
+ * // inline context
+ * \@include sugar.context((
+ * 		look-and-feel : (
+ * 			padding-vertical : (
+ * 				default : .3em
+ * 			)
+ * 		)
+ * )) {
+ * 		// your code here...
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name        settings
+ * @type        {Map}
+ *
+ * Store all the settings
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name        current-context
+ * @type        {String}
+ * @private
+ *
+ * Store the current context
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name          font-size
+ * @type          {Number}
+ * @private
+ *
+ * Store the current registered font size
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name            $svg-icons
+ * @type            {Map}
+ * @private
+ *
+ * Store all the registered svg icons
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name          classes
+ * @type          {Map}
+ * @private
+ *
+ * Store all the classes in their namespaces
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name      context-setup
+ * @namespace     sugar.scss.core.context
+ * @type      mixin
+ *
+ * Register a context with a name to use it later
+ *
+ * @param 			{String} 		$name 			The context name
+ * @param 			{Map} 			$settings 		The settings to override for this context
+ *
+ * @example       scss
+ * \@include sugar.context-setup(my-cool-context, (
+ * 		look-and-feel : (
+ * 			padding-vertical : (
+ * 				default : 0.6em
+ * 			)
+ * 		)
+ * ));
+ *
+ * // using your context
+ * \@include sugar.context(my-cool-context) {
+ * 		sugar.look-and-feel(padding-vertical); // => 0.6em
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      _check-property
+ * @namespace     sugar.scss.core.dev
+ * @type      function
+ *
+ * Check a property types and values
+ *
+ * @param         {String}        $property         The property name to check
+ * @param         {String}        $type             The property type wanted
+ * @param         {Mixed}         $value            The property value to check
+ * @param         {Boolean}       [$check-only=false]  Define if we want to throw an error or just send back false on type error
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      _get-property-name
+ * @namespace     sugar.scss.core.dev
+ * @type      function
+ *
+ * Return the property name
+ *
+ * @param       {String}        $property         The property name to get
+ * @param       {Map}           [$keywords=()]    The
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      _get-property-type
+ * @namespace     sugar.scss.core.dev
+ * @type      function
+ *
+ * Get the property type
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    test-argument
+ * @namespace     sugar.scss.core.dev
+ * @type    function
+ *
+ * Test an argument passed to a function or a mixin to ensure his type, value, etc...
+ * If the argument does not pass the test, an error will be thrown, unless the $check-only argument is true
+ *
+ * @param 				{String} 				$method 				The function/mixin name (debug purpose)
+ * @param 				{String} 				$argument 				The argument name to test (debug purpose)
+ * @param 				{List|String} 			$type-or-values 		If string, the type(s) that the argument must match, if list, the possible values that the argument can take
+ * @param 				{Mixed} 				$value 					The actual argument value
+ * @param 				{Boolean} 				[$check-only=false]		If this is true, will not thrown any error
+ * @return 				{Mixed} 										The value if ok, false if not
+ *
+ * @example     scss
+ * \@mixin my-cool-mixin($argument1, $argument2) {
+ *        $argument1 : sugar.test-argument(my-cool-mixin, argument1, string, $argument1);
+ *        $argument2 : sugar.test-argument(my-cool-mixin, argument2, (hello,world,12), $argument2);
+ * }
+ * \@mixin my-cool-mixin(hello, world); // ok
+ * \@mixin my-cool-mixin(hello, universe); // throw an error
+ * \@mixin my-cool-mixin(12, world); // throw an error
+ *
+ * @author 				Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    filter
+ * @namespace     sugar.scss.core.filter
+ * @type    function
+ *
+ * Return a list with all the filters that are passed as argument
+ * This will use the [./_s-filter-map.scss] function to parse the filters
+ *
+ * @param 	 	{List}<String> 			$filters 			The registered filter(s) name(s) or the filter(s) string(s) to transform into list
+ * @return 		{List} 										The converted filters list to use as css property
+ *
+ * @example
+ * // register a filter
+ * \@include sugar.setup((
+ * 		filters : (
+ * 			myCoolFilter : box-shadow(#000 0 0 10px) blur(30px),
+ * 			// other filters...
+ * 		)
+ * ));
+ *
+ * // registered filter
+ * .my-cool-elememt {
+ * 		filter : sugar.filter(myCoolFilter);
+ * 		// filter : box-shadow(#000 0 0 10px) blur(30px);
+ * }
+ *
+ * // custom filter
+ * .my-cool-element {
+ * 		filter : sugar.filter(myCoolFilter invert(100%));
+ * 		// filter : box-shadow(#000 0 0 10px) blur(30px) invert(100%);
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      filter
+ * @namespace     sugar.scss.core.filter
+ * @type      mixin
+ *
+ * Print out a list with all the filters that are passed as argument
+ * This will use the [../functions/_filter-map.scss] function to parse the filters
+ *
+ * @param 	 	{List}<String> 			$filters 			The registered filter(s) name(s) or the filter(s) string(s) to transform into list
+ *
+ * @example     scss
+ * // register a filter
+ * \@include sugar.setup((
+ * 		filters : (
+ * 			myCoolFilter : box-shadow(#000 0 0 10px) blur(30px),
+ * 			// other filters...
+ * 		)
+ * ));
+ *
+ * // registered filter
+ * .my-cool-elememt {
+ * 		\@include sugar.filter(myCoolFilter);
+ * 		// filter : box-shadow(#000 0 0 10px) blur(30px);
+ * }
+ *
+ * // custom filter
+ * .my-cool-element {
+ * 		\@include sugar.filter(myCoolFilter invert(100%));
+ * 		// filter : box-shadow(#000 0 0 10px) blur(30px) invert(100%);
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    font-face
+ * @namespace     sugar.scss.core.font
+ * @type      mixin
+ *
+ * Helper to print a font-face
+ *
+ * @param 			{String} 		$font-family 			The font-family
+ * @param 			{String} 		$src 					The source url (only 1 extension)
+ * @param 			{List} 			[$extensions=woff2] 	The extensions list that you have available
+ * @param 			{String} 		[$font-weight=normal] 	The font-weight property
+ * @param 			{String} 		[$font-style=normal] 	The font-style property
+ * @param       {String}    [$font-display=auto]    The font-display property
+ *
+ * @example     scss
+ * // if you have these extensions files : .woff .eot .woff2
+ * \@include sugar.font-face(
+ * 		$name : my-cool-font,
+ * 		$src : '/fonts/my-font.eot',
+ * 		$extensions : eot woff woff2
+ * )
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    font-family
+ * @namespace     sugar.scss.core.font
+ * @type      function
+ *
+ * Return the font-family string or a registered font
+ *
+ * @param 			{String} 		$name 		The name of the registered font
+ * @return 			{String} 					The corresponding font-family property to set in your css
+ *
+ * @example
+ * // register a font
+ * \@include sugar.setup((
+ * 		fonts : (
+ * 			myCoolFont : (
+ * 				font-family : 'Helvetica Neue',
+ * 				font-weight : 'bold',
+ * 				// etc...
+ * 			),
+ * 			// other fonts...
+ * 		)
+ * ));
+ *
+ * // apply the font
+ * .my-cool-element {
+ * 		font-family : sugar.font-family(myCoolFont);
+ * 		// 'Helvetica Neue';
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    font
+ * @namespace     sugar.scss.core.font
+ * @type    function
+ *
+ * Return the font {Map} that correspond to the passed arguments
+ *
+ * @param 		{String} 			[$family=null] 			The font family wanted (can be a registered font name)
+ * @param 		{Color} 			[$color=null] 			The color wanted (can be a registered color name)
+ * @param 		{Number} 			[$size=null] 			The font-size wanted
+ * @param 		{String} 			[$style=null] 			The font-style wanted
+ * @param 		{String} 			[$variant=null] 		The font-variant wanted
+ * @param 		{String|Number} 	[$weight=null] 			The font-weight wanted
+ * @param 		{String} 			[$decoration=null] 		The text-decoration wanted
+ * @param 		{String} 			[$align=null] 			The text-align wanted
+ * @param 		{String} 			[$transform=null] 		The text-transform wanted
+ * @param 		{String} 			[$stretch=null] 		The font-stretch wanted
+ * @param 		{String} 			[$white-space=null] 	The white-space wanted
+ * @param 		{Number} 			[$height=null] 			The line-height wanted
+ * @param 		{Number} 			[$spacing=null] 		The letter-spacing wanted
+ * @param 		{Number} 			[$indent=null] 			The text-indent wanted
+ * @param 		{String} 			[$break=null] 			The line-break wanted
+ * @param 		{String} 			[$wrap=null] 			The word-wrap wanted
+ * @return 		{Map} 										The corresponding font map
+ *
+ * @example
+ * sugar.font(
+ * 		$family : 'Helvetica Neue',
+ * 		$size : 12px,
+ * 		$wrap : norwap
+ * );
+ * // (
+ * 		font-family : 'Helvetica Neue',
+ * 		font-size : 12px,
+ * 		word-wrap : nowrap
+ * // )
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      font
+ * @namespace     sugar.scss.core.font
+ * @type      mixin
+ *
+ * Print all the fonts properties that correspond to the passed arguments
+ *
+ * @param 		{String} 			[$family=null] 			The font family wanted (can be a registered font name)
+ * @param 		{Color} 			[$color=null] 			The color wanted (can be a registered color name)
+ * @param 		{Number} 			[$size=null] 			The font-size wanted
+ * @param 		{String} 			[$style=null] 			The font-style wanted
+ * @param 		{String} 			[$variant=null] 		The font-variant wanted
+ * @param 		{String|Number} 	[$weight=null] 			The font-weight wanted
+ * @param 		{String} 			[$decoration=null] 		The text-decoration wanted
+ * @param 		{String} 			[$align=null] 			The text-align wanted
+ * @param 		{String} 			[$transform=null] 		The text-transform wanted
+ * @param 		{String} 			[$stretch=null] 		The font-stretch wanted
+ * @param 		{String} 			[$white-space=null] 	The white-space wanted
+ * @param 		{Number} 			[$height=null] 			The line-height wanted
+ * @param 		{Number} 			[$spacing=null] 		The letter-spacing wanted
+ * @param 		{Number} 			[$indent=null] 			The text-indent wanted
+ * @param 		{String} 			[$break=null] 			The line-break wanted
+ * @param 		{String} 			[$wrap=null] 			The word-wrap wanted
+ * @return 		{Map} 										The corresponding font map
+ *
+ * @example     scss
+ * .my-cool-elememt {
+ * 		\@include sugar.font(
+ * 			$family : 'Helvetica Neue',
+ * 		 	$size : 12px,
+ * 		  $wrap : normal
+ *    );
+ *    // print
+ * 		font-family : 'Helvetica Neue',
+ * 		font-size : 12px,
+ * 		word-wrap : normal
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    lnf
+ * @namespace     sugar.scss.core.look-and-feel
+ * @type    function
+ *
+ * Alias to the [./_look-and-feel.scss] function
+ *
+ * Return a settings.look-and-feel stack value
+ *
+ * @param 		{String} 		$name					The look and feel value name
+ * @return 		{Number} 								The look and feel value in em
+ *
+ * @example
+ * .my-cool-element {
+ * 		padding : sugar.lnf(padding-horizontal) sugar.lnf(padding-vertical);
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      look-and-feel
+ * @namespace     sugar.scss.core.look-and-feel
+ * @type    function
+ *
+ * Return a settings.look-and-feel stack value
+ *
+ * @param 		{String} 		$name					The look and feel value name
+ * @return 		{Number} 								The look and feel value in em
+ *
+ * @example
+ * .my-cool-element {
+ * 		padding : sugar.look-and-feel(padding-horizontal) sugar.look-and-feel(padding-vertical);
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      dash-to-map
+ * @namespace     sugar.scss.core.map
+ * @type        function
+ *
+ * Transform a dash notation value into a map
+ * Dash notation value is : -key1 value1 -key2 value2
+ *
+ * @param 			{List} 			$dash 			The dash list notation to transform
+ * @return 			{Map} 							The map generated
+ *
+ * @example
+ * $dash : -hello world -coco universe
+ * sugar.dash-to-map($dash);
+ * // (
+ * // 	hello : world,
+ * // 	coco : universe
+ * // )
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    filter-map
+ * @namespace     sugar.scss.core.map
+ * @type      function
+ *
+ * Take a filter as parameter and parse it to return the {Map} corresponding
+ * The $filter parameter can be either a registered filter name or a filter formated like `filterName(filterValue)`
+ *
+ * @param 			{List}<String> 			$filter 			The registered filter name or the filter string to transform into map
+ * @return 			{Map} 										The corresponding filter map properties
+ *
+ * @example
+ * // register a filter
+ * \@include sugar.setup((
+ * 		filters : (
+ * 			myCoolFilter : box-shadow(#000 0 0 10px) blur(30px),
+ * 			// other filters...
+ * 		)
+ * ));
+ *
+ * // registered filter
+ * sugar.filter-map(myCoolFilter);
+ * // {
+ * // 	box-shadow : #000 0 0 10px,
+ * // 	blur : 30px
+ * // }
+ *
+ * // custom filter
+ * sugar.filter-map(blur(10px));
+ * // {
+ * // 	blur : 10px
+ * // }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      modular-scale
+ * @namespace     sugar.scss.core.modular-scale
+ * @type    function
+ *
+ * Return the modular scale value based on the settings ```modular-scale.base``` and ```modular-scale.ratio```.
+ *
+ * @param 			{Number} 		$scale 		The wanted scale
+ * @param 			{Number} 		[$base=settings.modular-scale.base] 	The base of calculation
+ * @return 			{Number} 					The calculated resulting value
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    interpolate
+ * @namespace     sugar.scss.core.size
+ * @type    function
+ *
+ * Return the specified or calculated value of the given stack and size
+ * depending on the settings.sizes ratios stack
+ *
+ * @param 		{Map} 			$stack 			The stack from which to interpolate the value
+ * @param 		{String} 		$size 			The size wanted (has to exist in the settings.sizes stack)
+ * @return 		{Number} 						The $stack.$size value or the interpolated one depending on the settings.sizes ratios
+ *
+ * @example     scss
+ * // settings.sizes
+ * \@include sugar.setup((
+ * 		sizes : (
+ * 			small : 0.5,
+ * 			default : 1, // default is ALWAYS 1
+ * 			big : 1.5
+ * 		)
+ * ));
+ *
+ * $myStack : (
+ * 		default : 3rem,
+ * 		big : 6rem
+ * )
+ *
+ * sugar.interpolate($myStack, big) // 6rem cause specified in the $myStack value
+ * sugar.interpolate($myStack, small) // 1.5rem => calculated like : 3rem * 0.5 = 1.5rem
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      space
+ * @namespace     sugar.scss.core.space
+ * @type    function
+ *
+ * Return a value interpolated from the settings.spaces stack
+ *
+ * @param 			{String} 			$size 			The space size wanted. Must exist in the settings.sizes stack
+ * @return 			{Number} 							The actual space value
+ *
+ * @example     scss
+ * .my-cool-section {
+ * 		padding : sugar.space(big);
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      parse-properties
+ * @namespace     sugar.scss.core.string
+ * @type    function
+ *
+ * Parse a given string/list properties and return the Map corresponding to the Map description
+ *
+ * @param 				{List} 				$properties 			The properties to parse
+ * @param 				{Map} 				$descriptor 			The descriptor map to use to parse the properties
+ * @return 				{Map} 										The properties in map format
+ *
+ * @example     scss
+ * sugar.parse-properties(10px hello -delay 20s, (
+ *  	myNumber : Number,
+ *  	myOtherNumber : Number,
+ *  	myString : String,
+ *  	myCoolVar : String,
+ *  	delay : second
+ * ));
+ * // => (
+ * //  	myNumber : 10px,
+ * // 	myString : hello,
+ * // 	delay : 20s
+ * // )
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      replace-tokens
+ * @namespace     sugar.scss.core.string
+ * @type    function
+ *
+ * Search and replace tokens like colors #primary in a passed string, list or map
+ * Supported tokens types :
+ * 1. Colors : colorName
+ *
+ * @example     scss
+ * sugar.replace-tokens(12px #primary hello #secondary); // > 12px #ddd hello #fff;
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      selector
+ * @namespace     sugar.scss.core.string
+ * @type    function
+ *
+ * Process selector to avoid having --default, etc...
+ *
+ * @param 		{String} 		$selector 		The selector to process
+ * @return 		{String} 						The processed selector
+ *
+ * @example 	scss
+ * sugar.selector('.input--default'); // => .input
+ * sugar.selector('.input-default'); // => .input
+ * sugar.selector('.input.default'); // => .input
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      transition
+ * @namespace     sugar.scss.core.transition
+ * @type    function
+ *
+ * Take a transition as parameter and parse it to return the {List} corresponding
+ * The $transitions parameter can be either a registered transition name or a custom css transition like : all .2s ease-in-out 2s
+ * The $transitions argument will be parsed with the [./_parse-properties.scss] function.
+ *
+ * @param 			{List} 				$transitions 			The registered transition(s) name(s) or the transition(s) strings(s) to transform into list
+ * @return 			{List} 										The corresponding transition list properties
+ *
+ * @example   scss
+ * // register a transition
+ * \@include sugar.setup((
+ * 		transitions : (
+ * 			fast : all .2s ease-in-out 0s,
+ * 			// other transitions...
+ * 		)
+ * ));
+ *
+ * // registered transition
+ * .my-cool-element {
+ * 		transition : sugar.transition(fast);
+ * 		// transition : all .2s ease-in-out 0s;
+ * }
+ *
+ * // custom transition
+ * .my-cool-element {
+ *  	transition : sugar.transition(fast -delay .5s, fast width ease-in);
+ *  	// transition : all .2s ease-in-out .5s, width .2s ease-in 0s;
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      transition-map
+ * @namespace     sugar.scss.core.transition
+ * @type    function
+ *
+ * Take a transition as parameter and parse it to return the {Map} corresponding
+ * The $transition parameter can be either a registered transition name or a custom css transition like : all .2s ease-in-out 2s
+ * The $transition argument will be parsed with the [./_parse-properties.scss] function.
+ *
+ * @param 			{List} 				$transition 			The registered transition name or the transition string to transform into map
+ * @return 			{Map} 										The corresponding transition map properties
+ *
+ * @example     scss
+ * // register a transition
+ * \@include sugar.setup((
+ * 		transitions : (
+ * 			fast : all .2s ease-in-out,
+ * 			// other transitions...
+ * 		)
+ * ));
+ *
+ * // registered transition
+ * sugar.transition-map(fast);
+ * // {
+ * // 	property : all,
+ * // 	duration : .2s,
+ * // 	ease : ease-in-out
+ * // }
+ *
+ * // custom transition
+ * sugar.transition-map(fast -delay .5s);
+ * // {
+ * // 	property : all,
+ * // 	duration : .2s,
+ * // 	ease : ease-in-out,
+ * // 	delay : .5s
+ * // }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    transition
+ * @namespace     sugar.scss.core.transition
+ * @type      mixin
+ *
+ * Take a transition as parameter and print the corresponding transition property
+ * The $transitions parameter can be either a registered transition name or a custom css transition like : all .2s ease-in-out 2s
+ * The $transitions argument will be parsed with the [./_parse-properties.scss] function.
+ *
+ * @param 			{List} 				$transitions 			The registered transition(s) name(s) or the transition(s) strings(s) to transform into list
+ * @return 			{List} 										The corresponding transition list properties
+ *
+ * @example     scss
+ * // register a transition
+ * \@include sugar.setup((
+ * 		transitions : (
+ * 			fast : all .2s ease-in-out 0s,
+ * 			// other transitions...
+ * 		)
+ * ));
+ *
+ * // registered transition
+ * .my-cool-element {
+ * 		\@include sugar.transition(fast);
+ * 		// transition : all .2s ease-in-out 0s;
+ * }
+ *
+ * // custom transition
+ * .my-cool-element {
+ * 		\@include sugar.transition(fast -delay .5s, fast width ease-in);
+ *  	// transition : all .2s ease-in-out .5s, width .2s ease-in 0s;
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      show-vertical-rhythm
+ * @namespace     sugar.scss.core.typography
+ * @type      mixin
+ *
+ * Display the vertical rhythme
+ *
+ * @param 			{Color}      [$color=#0ff] 		The color wanted
+ *
+ * @example     scss
+ * body {
+ * 		@include sugar.show-vertical-rhythm();
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      text-format-class
+ * @namespace     sugar.scss.core.typography
+ * @type    function
+ *
+ * Return the text-format setting scope class
+ *
+ * @return 		{String} 		The text-format scope class from settings.text-format.scope-class
+ *
+ * @example     scss
+ * sugar.text-format-class(); // tf
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      vertical-rhythm-class
+ * @namespace     sugar.scss.core.typography
+ * @type    function
+ *
+ * Return the vertical-rhythm setting scope class
+ *
+ * @return 		{String} 		The vertical-rhythm scope class from settings.vertical-rhythm.scope-class
+ *
+ * @example     scss
+ * sugar.vertical-rhythm-class(); // vr
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      vertical-rhythm
+ * @namespace     sugar.scss.core.typography
+ * @type      mixin
+ *
+ * Scope the content inside the `settings.vertical-rhythm.scope-class` class
+ *
+ * @example       scss
+ * .my-cool-item {
+ * 	@include sugar.vertical-rhythm() {
+ * 		margin-bottom: 2em; // will be applied only if .my-cool-item is in the .vr scope
+ * 	}
+ * }
+ *
+ * @see 			https://medium.com/written-in-code/aligning-type-to-baseline-the-right-way-using-sass-e258fce47a9b#.lck2lgbni
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      coffeekraken-logo
+ * @namespace     sugar.scss.coffeekraken
+ * @type      mixin
+ *
+ * Display a coffeekraken logo with two specified colors
+ *
+ * @param 		{Color} 		[$color=default] 	The base color to use
+ * @param 		{Color} 		[$accent=primary] 	The accent color to use
+ *
+ * @example 	scss
+ * .my-cool-coffeekraken-logo {
+ * 	\@include sugar.coffeekraken-logo();
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    effect-bubble
+ * @namespace     sugar.scss.effect
+ * @type      mixin
+ *
+ * Create an arrow bubble effect
+ *
+ * @param 		{String} 			[$side=bottom] 				The side (top,right,bottom,left)
+ * @param 		{String} 			[$align=center] 			The alignement (left,center,right,top,middle,bottom)
+ * @param 		{Number} 			[$size=10px] 				The size of the arrow
+ * @param 		{Color} 			[$color=s-color(primary)] 	The color of the bubble
+ * @param 		{Number} 			[$arrow-offset=10px] 		The arrow offset from the side of the bubble
+ * @param 		{Number} 			[$border-width=0] 			The border width of the bubble
+ * @param 		{Color} 			[$border-color=null] 		The border color of the bubble
+ *
+ * @example     scss
+ * .my-cool-bubble {
+ * 		\@include sugar.effect-bubble(
+ * 			$color : sugar.color(secondary)
+ * 		);
+ * 		color : white;
+ * }
+ *
+ * @see 			https://codepen.io/kirkas/pen/otqyJ
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name        effect-depth
+ * @namespace     sugar.scss.effect
+ * @type      mixin
+ *
+ * Generate a drop shadow depending on the depth specified
+ *
+ * @param 		{Integer} 			$depth 							The depth wanted (1,2,3,4,etc...)
+ * @param 		{Color} 			[$color=rgba(0,0,0,.2)] 		The drop shadow color
+ *
+ * @example     scss
+ * .my-cool-element {
+ * 		\@include sugar.effect-depth(2);
+ * }
+ *
+ * @author 	 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      effect-hey
+ * @namespace     sugar.scss.effect
+ * @type      mixin
+ *
+ * Create a poping dot effect to catch user attention on a particular item
+ * This mixin affect the :before and :after pseudo selector of the item
+ *
+ * @param 		{String} 		[$vertical-align=top] 			Where to put the dot verticaly (top,middle,bottom)
+ * @param 		{String} 		[$align=left] 					Where to put the dot horizontaly (left,center,right)
+ * @param 		{Number} 		[$size=20px] 					The size of the dot
+ * @param 		{Color} 		[$color=primary] 				The color of the dot
+ * @param 		{Number} 		[$offset-top=0] 				The offset top
+ * @param 		{Number} 		[$offset-right=0] 				The offset right
+ * @param 		{Number} 		[$offset-bottom=0] 				The offset bottom
+ * @param 		{Number} 		[$offset-left=0] 				The offset left
+ *
+ * @example       scss
+ * .my-cool-element {
+ * 		\@include sugar.effect-hey(
+ * 			$align : right,
+ * 			$color : secondary,
+ * 			$size : 10px,
+ * 			$offset-top : -10px,
+ * 			$offset-right : -10px
+ * 		);
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    effect-long-shadow
+ * @namespace     sugar.scss.effect
+ * @type      mixin
+ *
+ * Generate a long shadow effect like [this](https://www.google.ch/search?q=long+shadow&espv=2&biw=2560&bih=1316&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjjne6x49LPAhVBHRQKHat8AW8Q_AUIBigB)
+ *
+ * @param 		{Color} 		[$color=rgba(0,0,0,.3)] 			The shadow color
+ * @param 		{String} 		[$type=text] 						The shadow type (text,box)
+ * @param 		{Degree} 		[$angle=135deg] 					The shadow angle
+ * @param 		{Integer} 		[$depth=20] 						The shadow depth
+ * @param 		{Boolean} 		[$fade=false] 						If true, the shadow will fade itself
+ * @param 		{Number} 		[$blur=0] 							The blur amount of the shadow
+ * @param 		{Number} 		[$blur-ratio=0] 					The ratio to blur each depth more
+ *
+ * @example       scss
+ * .my-cool-title {
+ * 		\@include sugar.effect-long-shadow(
+ * 			$depth : 10
+ * 		);
+ * }
+ * .my-cool-box {
+ * 		\@include sugar.effect-long-shadow(
+ * 			$type : box
+ * 		);
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      effect-side-lined
+ * @namespace     sugar.scss.effect
+ * @type      mixin
+ *
+ * Create side lines around an item
+ *
+ * @param 			{String} 		[$style=solid] 			The line style, same possible values as the border-style property
+ * @param 			{String} 		[$side=both] 			The side where to put lines (left,right,both)
+ * @param 			{Number} 		[$height=1px] 			The lines height
+ * @param 			{Number} 		[$width=50%] 			The width of the lines
+ * @param 			{Color} 		[$color=text]			The color of the lines
+ * @param 			{Number} 		[$padding=0] 			The padding between the lines and the content
+ * @param 			{Number} 		[$offset-top=null] 		The line offset top
+ *
+ * @example     scss
+ * h1 {
+ * 		\@include sugar.effect-side-lined(
+ * 			$padding : 20px,
+ * 			$side : right,
+ * 			$width : 100%
+ * 		);
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      input-placeholder
+ * @namespace     sugar.scss.form
+ * @type      mixin
+ *
+ * Set the placeholder style for inputs, etc...
+ *
+ * @example 	scss
+ * input, textarea {
+ * 	\@include sugar.input-placeholder() {
+ * 		color : red;
+ * 	}
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      border-radius
+ * @namespace     sugar.scss.helper
+ * @type      mixin
+ *
+ * Apply some border radius
+ *
+ * @param 		{Number} 		[$radius=null] 			The radius to apply globally
+ * @param 		{Number} 		[$top=null] 			The radius to apply on top corners
+ * @param 		{Number} 		[$right=null] 			The radius to apply on right corners
+ * @param 		{Number} 		[$bottom=null] 			The radius to apply on bottom corners
+ * @param 		{Number} 		[$left=null] 			The radius to apply on left corners
+ * @param 		{Number} 		[$top-left=null] 		The radius to apply on top-left corners
+ * @param 		{Number} 		[$top-right=null] 		The radius to apply on top-right corners
+ * @param 		{Number} 		[$bottom-left=null] 	The radius to apply on bottom-left corners
+ * @param 		{Number} 		[$bottom-right=null] 	The radius to apply on bottom-right corners
+ *
+ * @example 	scss
+ * .my-cool-item {
+ * 	// apply on top left and right corners
+ * 	\@include sugar.border-radius(
+ * 		$top : 10px;
+ * 	);
+ * 	// apply on each corners
+ * 	\@include sugar.border-radius(10px);
+ * 	// etc...
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name  center-block
+ * @namespace     sugar.scss.helper
+ * @type      mixin
+ *
+ * Center a block element using margins etc...
+ *
+ * @example 	scss
+ * .my-cool-block-element {
+ * 	\@include sugar.center-block();
+ * }
+ *
+ * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name 	clearfix
+ * @namespace     sugar.scss.helper
+ * @type      mixin
+ *
+ * Apply a clearfix on the element.
+ * Supported methods:
+ * - micro
+ * - facebook
+ * - float
+ * - micro
+ *
+ * @param 		{String} 		[$method=micro] 		The clearfix method to use
+ *
+ * @example 	scss
+ * .my-cool-element {
+ *  \@include sugar.clearfix();
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      corner
+ * @namespace     sugar.scss.helper
+ * @type      mixin
+ *
+ * Apply some border radius
+ * @param 		{Number} 		[$radius=null] 			The radius to apply globally
+ * @param 		{Number} 		[$top=null] 			The radius to apply on top corners
+ * @param 		{Number} 		[$right=null] 			The radius to apply on right corners
+ * @param 		{Number} 		[$bottom=null] 			The radius to apply on bottom corners
+ * @param 		{Number} 		[$left=null] 			The radius to apply on left corners
+ * @param 		{Number} 		[$top-left=null] 		The radius to apply on top-left corners
+ * @param 		{Number} 		[$top-right=null] 		The radius to apply on top-right corners
+ * @param 		{Number} 		[$bottom-left=null] 	The radius to apply on bottom-left corners
+ * @param 		{Number} 		[$bottom-right=null] 	The radius to apply on bottom-right corners
+ *
+ * @example 	scss
+ * .my-cool-item {
+ * 	// apply on top left and right corners
+ * 	\@include sugar.corner(
+ * 		$top : 10px;
+ * 	);
+ * 	// apply on each corners
+ * 	\@include sugar.corner(10px);
+ * 	// etc...
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      fit
+ * @namespace     sugar.scss.helper
+ * @type      mixin
+ *
+ * Make the element fit his container.
+ *
+ * @param 	{String} 			[$position=null] 		The position how to fit the element.
+ *
+ * @example 	scss
+ * .my-cool-element {
+ * 	\@include sugar.fit(absolute);
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      is
+ * @namespace     sugar.scss.helper
+ * @type      function
+ *
+ * Check if the passed value is of a certain type
+ *
+ * Here's the available types that you can check
+ * - mixed => mean anything
+ * - null
+ * - url
+ * - px
+ * - pt
+ * - rem
+ * - em
+ * - percent | %
+ * - vw
+ * - vh
+ * - ex
+ * - ch
+ * - cm
+ * - mm
+ * - in
+ * - pc
+ * - s | second
+ * - boolean | bool
+ * - function
+ * - number
+ * - int | integer
+ * - string
+ * - color
+ * - list
+ * - map
+ * - deg | degree
+ * - list-{type} => check if is a list of the specified type
+ * - map-{type} => check if is a map of the specified type
+ *
+ * @param 			{Mixed} 			$value 			The value to check
+ * @param 			{String} 			$type 			The type to check
+ * @return 			{Boolean} 							true if match the type, false if not
+ *
+ * @example       scss
+ * sugar.is(hello, string) // => true
+ * sugar.is('hello', string) // => true
+ * sugar.is(#fff, color) // => true
+ * sugar.is(hello #fff, list-color) // => false
+ * sugar.is(#fff #ddd, list-color) // => true
+ * // etc...
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      position
+ * @namespace     sugar.scss.helper
+ * @type      mixin
+ *
+ * Set a complexe position styling like position:absolute; top:0; left:100%; etc...
+ * This mixin gives you some shortcuts to align your element top, bottom, middle, center, etc...
+ *
+ * @param 		{String} 			[$position=absolute] 			The position css property
+ * @param 		{String} 			[$vertical-align=top] 			The vertical alignement wanted (top,middle,bottom)
+ * @param 		{String} 			[$align=left] 					The horizontal alignement wanted (left,center,right)
+ * @param 		{Number} 			[$top=null] 					The top property wanted
+ * @param 		{Number} 			[$right=null] 					The right property wanted
+ * @param 		{Number} 			[$bottom=null] 					The bottom property wanted
+ * @param 		{Number} 			[$left=null] 					The left property wanted
+ * @return 		{Map} 												The map representation of the position wanted
+ *
+ * @example       scss
+ * .my-cool-element {
+ * 	// absolute top right
+ * 	\@include sugar.position(absolute, top, right);
+ * 	// custom right and bottom values
+ * 	\@include sugar.position(absolute,
+ * 		$bottom : 20px,
+ * 		$right : 20px
+ * 	);
+ * 	// etc...
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      reset
+ * @namespace     sugar.scss.helper
+ * @type      mixin
+ *
+ * Print out a reset css
+ *
+ * @example     scss
+ * @include sugar.reset();
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    size
+ * @namespace     sugar.scss.helper
+ * @type      mixin
+ *
+ * Quicky and easily set simple or complexe size to any element
+ *
+ * @param 		{String|Number} 		$size-width				The size like "cover" or "contain", or the width in number
+ * @param 		{Number} 				[$height=null] 			The height wanted
+ * @param 		{String} 				[$position=absolute] 	The position wanted if the size is "cover" or "contain"
+ *
+ * @example 	scss
+ * .my-cool-image {
+ * 	\@include sugar.size(cover);
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    translate
+ * @namespace     sugar.scss.helper
+ * @type      mixin
+ *
+ * Quicky set some translates
+ * @param 		{Number} 		[$x=0] 		The x translate value
+ * @param 		{Number} 		[$y=0] 		The y translate value
+ * @param 		{Number} 		[$z=0] 		The z translate value
+ *
+ * @example     scss
+ * .my-cool-element {
+ * 	\@include sugar.translate(50%, 20px);
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    type-of
+ * @namespace     sugar.scss.helper
+ * @type      function
+ *
+ * Get the type of the passed variable
+ *
+ * @param           {Mixed}         $variable       The variable to get the type of
+ * @return          {String}                        The type of the variable passed
+ *
+ * @example     scss
+ * sugar.type-of('hello world'); // => string
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    vertical-aligner
+ * @namespace     sugar.scss.helper
+ * @type      mixin
+ *
+ * Vertically align content by using the inline-block middle trick
+ *
+ * @example 	scss
+ * .my-cool-container {
+ * 	\@include sugar.vertical-aligner();
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      visually-hidden
+ * @namespace     sugar.scss.helper
+ * @type      mixin
+ *
+ * Hide an element only visually. This ensure that the element is still correctly displayed in the page for SEO
+ * but will not being visible to the user
+ *
+ * @example 	scss
+ * .my-cool-element {
+ * 	\@include sugar.visually-hidden();
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/*!
+ * Font Awesome Free 5.11.2 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
+.fa,
+.fas,
+.far,
+.fal,
+.fad,
+.fab {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1;
+}
+
+/*!
+ * Font Awesome Free 5.11.2 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
+@font-face {
+  font-family: "Font Awesome 5 Brands";
+  font-style: normal;
+  font-weight: normal;
+  font-display: auto;
+  src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-brands-400.eot");
+  src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-brands-400.eot?#iefix") format("embedded-opentype"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-brands-400.woff2") format("woff2"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-brands-400.woff") format("woff"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-brands-400.ttf") format("truetype"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-brands-400.svg#fontawesome") format("svg");
+}
+.fab {
+  font-family: "Font Awesome 5 Brands";
+}
+
+/*!
+ * Font Awesome Free 5.11.2 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
+@font-face {
+  font-family: "Font Awesome 5 Free";
+  font-style: normal;
+  font-weight: 400;
+  font-display: auto;
+  src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-regular-400.eot");
+  src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-regular-400.eot?#iefix") format("embedded-opentype"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-regular-400.woff2") format("woff2"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-regular-400.woff") format("woff"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-regular-400.ttf") format("truetype"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-regular-400.svg#fontawesome") format("svg");
+}
+.far {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 400;
+}
+
+/*!
+ * Font Awesome Free 5.11.2 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
+@font-face {
+  font-family: "Font Awesome 5 Free";
+  font-style: normal;
+  font-weight: 900;
+  font-display: auto;
+  src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-solid-900.eot");
+  src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-solid-900.eot?#iefix") format("embedded-opentype"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-solid-900.woff2") format("woff2"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-solid-900.woff") format("woff"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-solid-900.ttf") format("truetype"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-solid-900.svg#fontawesome") format("svg");
+}
+.fa,
+.fas {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+
+/**
+ * @name        settings
+ * @type        {Map}
+ *
+ * Store all the settings
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name        current-context
+ * @type        {String}
+ * @private
+ *
+ * Store the current context
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name          font-size
+ * @type          {Number}
+ * @private
+ *
+ * Store the current registered font size
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name            $svg-icons
+ * @type            {Map}
+ * @private
+ *
+ * Store all the registered svg icons
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name          classes
+ * @type          {Map}
+ * @private
+ *
+ * Store all the classes in their namespaces
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name      icon
+ * @namespace     sugar.scss.icon
+ * @type      mixin
+ *
+ * Apply an icon on the element. This mixin support font-awesome and custom icons systems that have an icon name formated like "icon-{name}"
+ * The custom icon style if you pass as name "user" will extend %icon, %icon-user, .icon and .icon-user classes
+ *
+ * @param 		{String} 		$name 		The icon name to apply
+ * @param     {Color}     [$color=null]    The color wanted for the icon
+ *
+ * @example 	scss
+ * .my-cool-icon {
+ * 	\@include sugar.icon(fa-user, primary);
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      icons
+ * @namespace      sugar.scss.icon
+ * @type    mixin
+ *
+ * Generate some icon classes like .icon-$icon-name
+ *
+ * @param         {List}          $icons-names            The list of icons names to generate
+ * @param         {Color}         [$color=null]         The color wanted for the generated icons
+ *
+ * @example       scss
+ * \@include sugar.icons(fa-user fa-bell fa-circle);
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name        settings
+ * @type        {Map}
+ *
+ * Store all the settings
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name        current-context
+ * @type        {String}
+ * @private
+ *
+ * Store the current context
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name          font-size
+ * @type          {Number}
+ * @private
+ *
+ * Store the current registered font size
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name            $svg-icons
+ * @type            {Map}
+ * @private
+ *
+ * Store all the registered svg icons
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name          classes
+ * @type          {Map}
+ * @private
+ *
+ * Store all the classes in their namespaces
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name register-svg-icon
+ * @namespace     sugar.scss.icon
+ * @type      mixin
+ *
+ * Register a new icon to be used as base64 encoded url.
+ * If you want your icon to be colorable, you need to specify this code on your paths: `style="fill:%color"`
+ *
+ * @param    {String}    $name    The icon name
+ * @param    {String}    $svgCode    The icons svg code
+ *
+ * @example     scss
+ * @include sugar.register-svg-icon(user, 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjwhRE9DVFlQRSBzdmcgIFBVQkxJQyAnLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4nICAnaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkJz48c3ZnIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDUwIDUwIiBoZWlnaHQ9IjUwcHgiIGlkPSJMYXllcl8xIiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA1MCA1MCIgd2lkdGg9IjUwcHgiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxjaXJjbGUgY3g9IjI1IiBjeT0iMjUiIGZpbGw9Im5vbmUiIHI9IjI0IiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBzdHJva2Utd2lkdGg9IjIiLz48cmVjdCBmaWxsPSJub25lIiBoZWlnaHQ9IjUwIiB3aWR0aD0iNTAiLz48cGF0aCBkPSJNMjkuOTMzLDM1LjUyOGMtMC4xNDYtMS42MTItMC4wOS0yLjczNy0wLjA5LTQuMjFjMC43My0wLjM4MywyLjAzOC0yLjgyNSwyLjI1OS00Ljg4OGMwLjU3NC0wLjA0NywxLjQ3OS0wLjYwNywxLjc0NC0yLjgxOCAgYzAuMTQzLTEuMTg3LTAuNDI1LTEuODU1LTAuNzcxLTIuMDY1YzAuOTM0LTIuODA5LDIuODc0LTExLjQ5OS0zLjU4OC0xMi4zOTdjLTAuNjY1LTEuMTY4LTIuMzY4LTEuNzU5LTQuNTgxLTEuNzU5ICBjLTguODU0LDAuMTYzLTkuOTIyLDYuNjg2LTcuOTgxLDE0LjE1NmMtMC4zNDUsMC4yMS0wLjkxMywwLjg3OC0wLjc3MSwyLjA2NWMwLjI2NiwyLjIxMSwxLjE3LDIuNzcxLDEuNzQ0LDIuODE4ICBjMC4yMiwyLjA2MiwxLjU4LDQuNTA1LDIuMzEyLDQuODg4YzAsMS40NzMsMC4wNTUsMi41OTgtMC4wOTEsNC4yMWMtMS4yNjEsMy4zOS03LjczNywzLjY1NS0xMS40NzMsNi45MjQgIGMzLjkwNiwzLjkzMywxMC4yMzYsNi43NDYsMTYuOTE2LDYuNzQ2czE0LjUzMi01LjI3NCwxNS44MzktNi43MTNDMzcuNjg4LDM5LjE4NiwzMS4xOTcsMzguOTMsMjkuOTMzLDM1LjUyOHoiLz48L3N2Zz4=');
+ *
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      background
+ * @namespace     sugar.scss.image
+ * @type      mixin
+ *
+ * Helper mixin to set a background image
+ *
+ * @param 			{String} 				[$repeat=null] 				The background-repeat property
+ * @param 			{String} 				[$size=null] 				The background-size property
+ * @param 			{String} 				[$attachment=null] 			The background-attachment property
+ * @param 			{String} 				[$blend-mode=null] 			The background-blend-mode property
+ * @param 			{String} 				[$clip=null] 				The background-clip property
+ * @param 			{String} 				[$url=null] 				The background-image url property
+ * @param 			{Number} 				[$width=null] 				The background-size width property
+ * @param 			{Number} 				[$height=null] 				The background-size height property
+ * @param 			{Number} 				[$top=null] 				The background-position top property
+ * @param 			{Number} 				[$left=null] 				The background-position left property
+ * @param 			{String} 				[$suffix2x=@2x] 			The suffix to add the the url if the 2x resolution if wanted
+ * @param 			{String} 				[$suffix3x=@3x] 			The suffix to add the the url if the 3x resolution if wanted
+ * @param 			{String} 				[$suffix4x=@4x] 			The suffix to add the the url if the 4x resolution if wanted
+ * @param 			{List} 					[$resolution=null] 			The resolution wanted like 2x, 3x and 4x
+ * @param 			{List} 					[$position=null] 			The background-position property
+ *
+ * @example     scss
+ * .my-cool-element {
+ * 		\@include sugar.background(
+ * 			$url : 'img/my-cool-image.jpg',
+ * 			$size : cover,
+ * 			$resolution : 2x 3x 4x
+ * 		);
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      image-rendering
+ * @namespace     sugar.scss.image
+ * @type      mixin
+ *
+ * Set how to render the image
+ *
+ * @param 		{String} 		[$mode=auto] 		The mode to use to render the image
+ *
+ * @example 	scss
+ * img {
+ * 	\@include sugar.image-rendering(crips-edges);
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    columns
+ * @namespace     sugar.scss.layout
+ * @type      mixin
+ *
+ * Create a column layout my setting each columns properties at once
+ *
+ * @param 		{Integer} 		[$count=null] 		The number of columns wanted
+ * @param 		{Number} 		[$gap=null] 		The column-gap width wanted
+ * @param 		{String} 		[$fill=null] 		The column-fill wanted
+ * @param 		{Number} 		[$width=null] 		THe width of each columns wanted
+ * @param 		{String} 		[$span=null] 		Specify on how many columns the element has to span across
+ * @param 		{List} 			[$rule=null] 		Specify the shorthand version of the column-rule-color, column-rule-style and column-rule-width
+ * @param 		{String} 		[$rule-style=null] 	Specify the column-rule-style wanted
+ * @param 		{Color} 		[$rule-color=null] 	Specify the column-rule-color wanted
+ * @param 		{Number} 		[$rule-width=null] 	Specify the column-rule-width wanted
+ *
+ * @example 	scss
+ * .my-cool-container {
+ * 	\@include sugar.columns(
+ * 		$count : 3,
+ * 		$gap : 30px,
+ * 		$span : all
+ * 	);
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    ratio
+ * @namespace     sugar.scss.ratio
+ * @type      mixin
+ *
+ * Apply a ratio css styling. This will apply a before or after content that will make the element keep the specified ratio.
+ * The content need to be displayed as absolute top left and fit in size.
+ *
+ * @param 		{Number} 		$ratio 			The ratio to keep like 16/9, etc...
+ *
+ * @example 	scss
+ * .my-cool-element {
+ * 	\@include sugar.ratio(16/9);
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      list-bullet
+ * @namespace     sugar.scss.list
+ * @type      mixin
+ *
+ * Set how the list bullet has to be displayed.
+ *
+ * @param 		{String} 		[$type=null] 				The list type to use. Can be all the list-style-type values
+ * @param 		{Url} 			[$image=null] 				An image url to use as bullet
+ * @param 		{String} 		[$icon=null] 				An icon name to use as bullet. Will use the s-icon mixin under the hood
+ * @param 		{Color} 		[$color=s-color(default)] 	The color to use for the bullet
+ * @param 		{Number} 		[$size=null] 				The size to use for the bullet
+ * @param 		{Number|List<Number>} 	[$offset=null] 		A number that represent the top offset, or a list of two numbers that represent the top, left offset
+ * @param 		{String} 		[$font=null] 				The font name to use for the bullet
+ * @param 		{Number} 		[$space=null] 				The space between the bullet and the content
+ *
+ * @example 	scss
+ * .my-cool-list__item {
+ * 	@\include sugar.list-bullet(
+ * 		$image : '../img/my-cool-bullet.svg',
+ * 		$offset : 5px 10px,
+ * 		$size : 1em,
+ * 		$space : 2em
+ * 	);
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    list-start
+ * @namespace     sugar.scss.list
+ * @type      mixin
+ *
+ * Start a new list
+ *
+ * @param 		{String} 		[$counter-reset=s-list] 		A counter name to reset
+ *
+ * @example     scss
+ * .my-cool-list {
+ *    sugar.list-start();
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      loader-bars
+ * @namespace     sugar.scss.loader
+ * @type      function
+ *
+ * Generate a full animated, single element, bars loader
+ *
+ * @param 			{String} 			[$shape=rect] 				The shape of the bars (rect,circle)
+ * @param 			{Color} 			[$color=primary] 			The color(s) of the loader. Can be a list of colors
+ * @param 			{Number} 			[$width=.5em] 				The width of each bars
+ * @param 			{Number} 			[$height=2em] 				The height of each bars
+ * @param 			{Integer} 			[$count=5] 					How many bars you want
+ * @param 			{Number} 			[$gap=.5em] 				The gap between each bars
+ * @param 			{Number} 			[$opacity=1] 				The initial opacity of each bars
+ * @param 			{Number} 			[$a-opacity=null] 			The opacity of the animated bars
+ * @param 			{Second} 			[$a-duration=1s] 			The overall animation duration
+ * @param 			{Second} 			[$a-delay=0s] 				The delay between two animation cycle
+ * @param 			{Integer} 			[$a-near=1] 				How many bars are affected by the animated one
+ * @param 			{String} 			[$a-ease=ease-in-out] 		The ease to use to animate each bars
+ * @param 			{Number} 			[$a-offset=1em] 			The offset to move the animated bar in em
+ * @param 			{String} 			[$a-direction=both] 		The direction in which to move the bars (up,down,both)
+ * @param 			{Boolean} 			[$a-continuous=true] 		If true, the first bars will be animated at same time at the last ones
+ *
+ * @example     scss
+ * .my-cool-loader {
+ * 		\@include sugar.loader-bars(
+ * 			$color : primary,
+ * 			$a-offset : .5em
+ * 		);
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      loader-circle
+ * @namespace     sugar.scss.loader
+ * @type      Mixin
+ *
+ * Generate a full animated, single element, circle loader
+ *
+ * @param 			{Color} 			[$color=primary] 			The color(s) of the loader. Can be a list of colors
+ * @param 			{Number} 			[$size=.33em] 				The size of each dot
+ * @param 			{Number} 			[$radius=2em] 				The distance of each dot from the center of the loader
+ * @param 			{Integer} 			[$count=8] 					How many bars you want
+ * @param 			{Number} 			[$opacity=1] 				The initial opacity of each bars
+ * @param 			{Number} 			[$a-opacity=null] 			The opacity of the animated bars
+ * @param 			{Second} 			[$a-duration=1s] 			The overall animation duration
+ * @param 			{Second} 			[$a-delay=0s] 				The delay between two animation cycle
+ * @param 			{Integer} 			[$a-near=2] 				How many bars are affected by the animated one
+ * @param 			{String} 			[$a-ease=ease-in-out] 		The ease to use to animate each bars
+ * @param       {Number}       [$a-spread=2em]        How many distance the points have to be animated
+ * @param       {Number}        [$a-rotate=null]      How many degrees have the points to be animated
+ * @param       {Number}        [$a-scale=1em]        How many scale have the points to be animated
+ *
+ * @example     scss
+ * .my-cool-loader {
+ *    @include sugar.loader-circle(
+ *      $color: sugar.color(primary)
+ *    );
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      loader-couch-potato
+ * @namespace     sugar.scss.loader
+ * @type      function
+ *
+ * Generate a full animated, single element, couch-potato style loader
+ *
+ * @param 		{Number} 		[$size=1em] 				The size of the loader
+ * @param 		{Color} 		[$color=primary] 			The color of the loader
+ * @param 		{Second} 		[$a-duration=1s] 			The overall animation duration
+ * @param 		{Second} 		[$a-delay=0s] 				The delay between two animation cycle
+ * @param 		{String} 		[$a-ease=ease-in-out]		The ease to use for the animation
+ * @param 		{Degree}		[$a-rotate=360deg] 			The animation rotation
+ * @param 		{Number} 		[$a-scale=2] 				The animation scale
+ *
+ * @example     scss
+ * .my-cool-loader {
+ * 		\@include sugar.loader-couch-potato();
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      loader-flip-ball
+ * @namespace     sugar.scss.loader
+ * @type      Mixin
+ *
+ * Generate a full animated, single element, flip ball style loader
+ *
+ * @param 		{String} 		[$shape=circle] 			The shape of the loader (circle,rect)
+ * @param 		{Number} 		[$size=2em] 				The size of the loader
+ * @param 		{Color} 		[$colors=(primary,success,warning,error,info)] 			The colors of the loader. Can be a list of colors
+ * @param 		{Second} 		[$a-duration=1s] 			The overall animation duration
+ * @param 		{Second} 		[$a-delay=0s] 				The delay between two animation cycle
+ * @param 		{String} 		[$a-ease=ease-in-out]		The ease to use for the animation
+ *
+ * @example       scss
+ * .my-cool-loader {
+ * 		\@include sugar.loader-flip-ball();
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      loader-grid
+ * @namespace     sugar.scss.loader
+ * @type      function
+ *
+ * Generate a grid style loader
+ *
+ * @param       {String}      [$shape=rect]             The shape of the grid items. Can be rect or circle
+ * @param       {Color}       [$color=color(primary)]   The color to use for the grid items
+ * @param       {Number}      [$cols=3]                 How many columns the grid must have
+ * @param       {Number}      [$rows=3]                 How many rows must have the grid
+ * @param       {Number}      [$size=10px]              The size of each grid items
+ * @param       {Number}      [$gap=5px]                The size of the gaps between the grid items
+ * @param       {Number}      [$offset=0]               The offset used for the grid
+ * @param       {Number}      [$rotate=0deg]            Apply a rotation to the grid items
+ * @param       {String}      [$a-shape=null]           The animation shape to apply to the grid items. Can be rect or circle
+ * @param       {Number}      [$a-steps=5]              How many steps must have the animation
+ * @param       {Number}      [$a-spread=15px]          How much must the grid items spread during the animation
+ * @param       {Number}      [$a-rotate=null]          How many degrees must the grid items rotate during the animation
+ * @param       {Number}      [$a-scale=null]           Apply a scale for the animation of the grid items
+ * @param       {Number}      [$a-opacity=null]         Apply an opacity to the grid items during the animation
+ * @param       {Second}      [$a-duration=1s]          The duration of the animation
+ * @param       {Second}      [$a-delay=0s]             How many seconds to wait between each animations
+ * @param       {String}      [$a-ease=ease-in-out]     The easing to use for the animation
+ *
+ * @example     scss
+ * .my-cool-loader {
+ *    @include sugar.loader-grid();
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      loader-radial
+ * @namespace     sugar.scss.loader
+ * @type      function
+ *
+ * Generate a radial styled loader
+ *
+ * @param       {String}      [$shape=circle]       The shape of the items that make the circle. Can be rect or circle
+ * @param       {Number}      [$size=3em]           The size of the items
+ * @param       {Number}      [$width=0.2em]        The width of the circle loader
+ * @param       {String}      [$style=solid]        The style of the items that form the loader. Can be none, hidden, dotted, dashed, solid, double, groove, ridge, inset, outset, initial or inherit
+ * @param       {Color}       [$color=primary]     The color to use for the loader
+ * @param       {Second}      [$a-duration=2s]      How many time will be the animation
+ * @param       {Second}      [$a-delay=0s]         How many time to wait between two animation
+ * @param       {Number}      [$a-count=2]          How many circles will be animated
+ * @param       {Number}      [$a-spread=1em]         Specify a spread value for the animation of each circles
+ * @param       {String}      [$a-ease=linear]      Specify the ease to use for the animation
+ *
+ * @example       scss
+ * .my-cool-loader {
+ *    @include sugar.loader-radial();
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      loader-spinner
+ * @namespace     sugar.scss.loader
+ * @type      function
+ *
+ * Generate a spinner loader
+ *
+ * @param         {Number}        [$size=2em]             Specify the size of the spinner loader
+ * @param         {Number}        [$width=0.3em]          Specify the width of the spinner loader
+ * @param         {Color}         [$color=primary]        Specify the color of the spinner loader
+ * @param         {Color}         [$bgcolor=inherit]        Specify the background color of the spinner loader
+ * @param         {Number}        [$length=3/4]           The length of the spinner loader
+ * @param         {Second}        [$a-duration=1s]        The duration of the spinner loader animation
+ * @param         {String}        [$a-ease=linear]          Specify an ease to use for the spinner loader animation
+ *
+ * @example     scss
+ * .my-cool-loader {
+ *    @include sugar.loader-spinner();
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    to-base64-url
+ * @namespace     sugar.scss.meta
+ * @type      function
+ *
+ * Convert the passed svg code to an embadable base64 url
+ *
+ * @param       {String}        $svg        The svg code to convert
+ * @return      {String}                    The embedable converted base64 url
+ *
+ * @example       scss
+ * sugar.to-base64-url('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.822 18.096c-3.439-.794-6.641-1.49-5.09-4.418 4.719-8.912 1.251-13.678-3.732-13.678-5.081 0-8.464 4.949-3.732 13.678 1.597 2.945-1.725 3.641-5.09 4.418-2.979.688-3.178 2.143-3.178 4.663l.005 1.241h10.483l.704-3h1.615l.704 3h10.483l.005-1.241c.001-2.52-.198-3.975-3.177-4.663zm-8.231 1.904h-1.164l-.91-2h2.994l-.92 2z"/></svg>');
+ * // url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M20.822 18.096c-3.439-.794-6.641-1.49-5.09-4.418 4.719-8.912 1.251-13.678-3.732-13.678-5.081 0-8.464 4.949-3.732 13.678 1.597 2.945-1.725 3.641-5.09 4.418-2.979.688-3.178 2.143-3.178 4.663l.005 1.241h10.483l.704-3h1.615l.704 3h10.483l.005-1.241c.001-2.52-.198-3.975-3.177-4.663zm-8.231 1.904h-1.164l-.91-2h2.994l-.92 2z'/%3E%3C/svg%3E")
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      to-base64
+ * @namespace     sugar.scss.meta
+ * @type      function
+ *
+ * Convert the passed svg code to base64 embedable url
+ *
+ * @param       {String}        $svg        The svg code to convert
+ * @return      {String}                    The base64 converted url code
+ *
+ * @example     scss
+ * sugar.to-base64('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.822 18.096c-3.439-.794-6.641-1.49-5.09-4.418 4.719-8.912 1.251-13.678-3.732-13.678-5.081 0-8.464 4.949-3.732 13.678 1.597 2.945-1.725 3.641-5.09 4.418-2.979.688-3.178 2.143-3.178 4.663l.005 1.241h10.483l.704-3h1.615l.704 3h10.483l.005-1.241c.001-2.52-.198-3.975-3.177-4.663zm-8.231 1.904h-1.164l-.91-2h2.994l-.92 2z"/></svg>');
+ * // url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M20.822 18.096c-3.439-.794-6.641-1.49-5.09-4.418 4.719-8.912 1.251-13.678-3.732-13.678-5.081 0-8.464 4.949-3.732 13.678 1.597 2.945-1.725 3.641-5.09 4.418-2.979.688-3.178 2.143-3.178 4.663l.005 1.241h10.483l.704-3h1.615l.704 3h10.483l.005-1.241c.001-2.52-.198-3.975-3.177-4.663zm-8.231 1.904h-1.164l-.91-2h2.994l-.92 2z'/%3E%3C/svg%3E")
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      media
+ * @namespace     sugar.scss.responsive
+ * @type      mixin
+ *
+ * Easy to use media query mixin that support cssua classes to target specific browsers
+ *
+ * @param 		{String} 		[$screen=null] 			Any of the @media screen type property like "screen, handheld, print, etc..."
+ * @param 		{Number} 		[$min-width=null] 		The min width to target
+ * @param 		{Number} 		[$max-width=null] 		The max width to target
+ * @param 		{Number} 		[$min-height=null] 		The min height to target
+ * @param 		{Number} 		[$max-height=null] 		The max height to target
+ * @param 		{String} 		[$orientation=null] 	The orientation to target. Can be portrait or landscape
+ * @param 		{String} 		[$resolution=null] 		The resolution to target. Can be 2x, 3x, 4x, etc...
+ * @param 		{String} 		[$engine=null] 			The engine that powers the display. Can be gecko, webkit, trident, blink or presto
+ * @param 		{String} 		[$device=null] 			The device to target. Can be mobile, tablet, desktop, iphone or ipad
+ * @param 		{String} 		[$browser=null] 		The browser(s) to target. Can be chrome, safari, firefox, opera, ie, ie6-20
+ * @param 		{String} 		[$system=null] 			The system(s) to target. Can be ios, osx, windows, linux, android, webos or blackberry
+ *
+ * @example 	scss
+ * // simple min width
+ * \@include sugar.media(
+ * 	$min-width : 200px
+ * ) {
+ * 	// custom css here...
+ * }
+ *
+ * // target a specific engine
+ * \@include sugar.media(
+ * 	$engine : gecko webkit
+ * ) {
+ * 	// custom css here
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      round-overflow
+ * @namespace     sugar.scss.shape
+ * @type      mixin
+ *
+ * Apply some css to have a rounded element with already an overflow on it
+ *
+ * @param 		{Number} 		[$size=null] 		The size (width and height) of the element wanted
+ * @param 		{Number} 		[$width=null] 		The width of the element wanted
+ * @param 		{Number} 		[$height=null] 		The height of the element wanted
+ *
+ * @example 	scss
+ * .my-cool-image {
+ * 	\@include sugar.round-overflow(100px);
+ *
+ * 	img {
+ * 		\@include sugar.size(cover);
+ * 	}
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name        triangle
+ * @namespace     sugar.scss.shape
+ * @type      mixin
+ *
+ * Generate a triangle shape
+ *
+ * @param       {Number}        [$width=1em]              The triangle width
+ * @param       {Number}        [$height=1em]             The triangle height
+ * @param       {Color}         [$color=color(primary)]    The triangle color
+ * @param       {String}        [$direction=right]        The triangle direction. Can be top, right, bottom, left, top-left, top-right, bottom-left or bottom-right
+ * @param       {String}        [$transform-origin=center]    The triangle transform origin. Can be center or base
+ * @param       {Number}        [$border-width=0]         The border width
+ * @param       {Color}         [$border-color=null]      The border color
+ *
+ * @example     scss
+ * .my-cool-triangle {
+ *    @include sugar.triangle();
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      rhythm-width
+ * @namespace     sugar.scss.typography
+ * @type      function
+ *
+ * Return the Map properties representation for the rhythme width
+ * The rhythme width is the width of an element that target a certain number of letters by line
+ *
+ * @param 			{Integer} 			[$letters-count=settings.typography.line-letters-count] 		The number of letters to target by line
+ * @return 			{Map} 																		The Map properties representation
+ *
+ * @example     scss
+ * sugar.rhythm-width(50);
+ * // return
+ * // (
+ * // 	display : block,
+ * // 	max-width : 50ex
+ * // )
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name        rhythm-width
+ * @namespace     sugar.scss.typography
+ * @type      mixin
+ *
+ * Print out the css on a container that will make the lines displays a maximum number of characters.
+ *
+ * @example 	scss
+ * h1 {
+ * 	\@include sugar.rhythm-width(45);
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    selection
+ * @namespace     sugar.scss.typography
+ * @type      mixin
+ *
+ * Set the user selection styling with ease
+ *
+ * @example 	scss
+ * \@include sugar.selection() {
+ * 	background: red;
+ * 	color: white;
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      text-hide
+ * @namespace     sugar.scss.typography
+ * @type      mixin
+ *
+ * Hide the contained text
+ *
+ * @example 	scss
+ * .my-cool-container {
+ * 	\@include sugar.text-hide();
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      text-truncate
+ * @namespace     sugar.scss.typography
+ * @type      mixin
+ *
+ * Print out the style to truncate the text if needed
+ *
+ * @example 	scss
+ * h1 {
+ * 	\@include sugar.text-truncate();
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name        settings
+ * @type        {Map}
+ *
+ * Store all the settings
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name        current-context
+ * @type        {String}
+ * @private
+ *
+ * Store the current context
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name          font-size
+ * @type          {Number}
+ * @private
+ *
+ * Store the current registered font size
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name            $svg-icons
+ * @type            {Map}
+ * @private
+ *
+ * Store all the registered svg icons
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name          classes
+ * @type          {Map}
+ * @private
+ *
+ * Store all the classes in their namespaces
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+ * @name      convert
+ * @namespace     sugar.scss.unit
+ * @type      function
+ *
+ * Convert a passed value to the wanted unit
+ * The conversion between some units that depends on a font-size will take the settings.typography.font-size value as reference.
+ *
+ * Available conversions
+ * - from px
+ * 	- to em
+ * 	- to rem
+ * 	- to pt
+ * 	- to %
+ *
+ * - from em
+ * 	- to rem
+ * 	- to px
+ * 	- to pt
+ * 	- to %
+ *
+ * - from pt
+ * 	- to em
+ * 	- to rem
+ * 	- to px
+ * 	- to pt
+ * 	- to %
+ *
+ * - from rem
+ * 	- to em
+ * 	- to px
+ * 	- to pt
+ * 	- to %
+ *
+ * @param 			{Number} 		$value 			The value to convert
+ * @param 			{String} 		$unit 			The unit in which to convert the value
+ * @return 			{Number} 						The converted value
+ *
+ * @example     scss
+ * // if the settings.typography.font-size === 16px
+ * sugar.convert(24px, rem) // 1.5rem
+ * sugar.convert(3rem, pt) // 36pt
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      is-unitless
+ * @namespace     sugar.scss.unit
+ * @type      function
+ *
+ * Check if the passed variable is unitless or not
+ *
+ * @param         {Number}        $number       The number to check
+ * @return        {Boolean}                     true if unitless, false if not
+ *
+ * @example       scss
+ * sugar.is-unitless(20); // => true
+ * sugar.is-unitless(10px); // => false
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    strip-units
+ * @namespace     sugar.scss.unit
+ * @type      function
+ *
+ * Return a number without any units
+ *
+ * @param 			{Number} 		$number 		The number to process
+ * @return 			{Number} 						The number without units
+ *
+ * @example       scss
+ * sugar.strip-units(12px); // => 12
+ * sugar.strip-units(30rem); // => 30
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    to-em
+ * @namespace     sugar.scss.unit
+ * @type      function
+ *
+ * Convert the passed value to em
+ *
+ * @param 			{Number} 		$value 		The value to convert
+ * @return 			{Number} 					The em converted value
+ *
+ * @example     scss
+ * sugar.to-em(10px);
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    to-percent
+ * @namespace     sugar.scss.unit
+ * @type      function
+ *
+ * Convert the passed value to %
+ *
+ * @param 			{Number} 		$value 		The value to convert
+ * @return 			{Number} 					The % converted value
+ *
+ * @example     scss
+ * sugar.to-percent(10px);
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      to-pt
+ * @namespace     sugar.scss.unit
+ * @type      function
+ *
+ * Convert the passed value to pt
+ *
+ * @param 			{Number} 		$value 		The value to convert
+ * @return 			{Number} 					The pt converted value
+ *
+ * @example       scss
+ * sugar.to-pt(10px);
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    to-px
+ * @namespace     sugar.scss.unit
+ * @type      function
+ *
+ * Convert the passed value to px
+ *
+ * @param 			{Number} 		$value 		The value to convert
+ * @return 			{Number} 					The px converted value
+ *
+ * @example       scss
+ * sugar.to-px(10rem);
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    to-rem
+ * @namespace     sugar.scss.unit
+ * @type      function
+ *
+ * Convert the passed value to rem
+ *
+ * @param 			{Number} 		$value 		The value to convert
+ * @return 			{Number} 					The rem converted value
+ *
+ * @example     scss
+ * sugar.to-rem(10px);
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    unit
+ * @namespace     sugar.scss.unit
+ * @type      function
+ *
+ * Return the unit of the passed number
+ *
+ * @param       {Number}      $number       The number to get the unit from
+ * @return      {String}                    The unit
+ *
+ * @example     scss
+ * sugar.unit(10px); // => px
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * This file is responsible to register the static helper classes like:
+ *
+ * - sugar.helper.pull.left : <primary>pull-left</primary>
+ * - sugar.helper.pull.right : <primary>pull-right</primary>
+ * - sugar.helper.position.relative : <primary>relative</primary>
+ * - sugar.helper.position.absolute : <primary>absolute</primary>
+ * - sugar.helper.clear.left : <primary>clear-left</primary>
+ * - sugar.helper.clear.right : <primary>clear-right</primary>
+ * - sugar.helper.clear.both : <primary>clear</primary>
+ * - sugar.helper.pointer.events.all : <primary>pointer-events-all</primary>
+ * - sugar.helper.pointer.events.none : <primary>pointer-events-none</primary>
+ * - sugar.helper.display.show : <primary>show</primary>
+ * - sugar.helper.display.show-inline : <primary>show-inline</primary>
+ * - sugar.helper.display.hidden : <primary>hidden</primary>
+ * - sugar.helper.display.hide : <primary>hide</primary>
+ * - sugar.helper.display.visible : <primary>visible</primary>
+ * - sugar.helper.display.invisible : <primary>invisible</primary>
+ * - sugar.helper.display.visually-hidden : <primary>visually-hidden</primary>
+ * - sugar.helper.text.hidden : <primary>t-hidden</primary>
+ * - sugar.helper.text.truncate : <primary>t-truncate</primary>
+ * - sugar.helper.text.align.left : <primary>t-left</primary>
+ * - sugar.helper.text.align.right : <primary>t-right</primary>
+ * - sugar.helper.text.align.center : <primary>t-center</primary>
+ * - sugar.helper.text.align.justify : <primary>t-justify</primary>
+ * - sugar.helper.text.transform.lowercase : <primary>t-lowercase</primary>
+ * - sugar.helper.text.transform.uppercase : <primary>t-uppercase</primary>
+ * - sugar.helper.text.transform.capitalize : <primary>t-capitalize</primary>
+ * - sugar.helper.font.weight.bold : <primary>f-bold</primary>
+ * - sugar.helper.font.weight.lighter : <primary>f-lighter</primary>
+ * - sugar.helper.font.weight.bolder : <primary>f-bolder</primary>
+ * - sugar.helper.font.weight.normal : <primary>f-normal</primary>
+ * - sugar.helper.font.style.italic : <primary>f-italic</primary>
+ * - sugar.helper.font.style.oblique : <primary>f-oblique</primary>
+ * - sugar.helper.font.variant.small-caps : <primary>f-small-caps</primary>
+ * - sugar.helper.block.align.center : <primary>block-center</primary>
+ * - sugar.helper.ratio.21-9 : <primary>ratio-21-9</primary>
+ * - sugar.helper.ratio.16-9 : <primary>ratio-16-9</primary>
+ * - sugar.helper.ratio.4-3 : <primary>ratio-4-3</primary>
+ * - sugar.helper.ratio.1-1 : <primary>ratio-1-1</primary>
+ * - sugar.helper.size.abs.cover : <primary>abs-cover</primary>
+ * - sugar.helper.size.abs.contain : <primary>abs-contain</primary>
+ * - sugar.helper.size.abs.fit : <primary>abs-fit</primary>
+ * - sugar.helper.media.object : <primary>mo .mo--center .mo--end .mo__content</primary>
+ * - sugar.helper.clearfix.default : <primary>clearfix</primary>
+ * - sugar.helper.clearfix.float : <primary>clearfix-float</primary>
+ * - sugar.helper.clearfix.micro : <primary>clearfix-micro</primary>
+ * - sugar.helper.clearfix.overflow : <primary>clearfix-overflow</primary>
+ * - sugar.helper.clearfix.facebook : <primary>clearfix-facebook</primary>
+ * - sugar.helper.no-transition : <primary>no-transition</primary>
+ * - sugar.helper.clear-transition : <primary>clear-transition</primary>
+ * - sugar.helper.no-animation : <primary>no-animation</primary>
+ * - sugar.helper.clear-animation : <primary>clear-animation</primary>
+ * - sugar.helper.no-transmation : <primary>no-transmation</primary>
+ * - sugar.helper.clear-transmation : <primary>clear-transmation</primary>
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+.mo--center {
+  align-items: center;
+}
+
+.mo--end {
+  align-items: flex-end;
+}
+
+.mo__content {
+  flex: 0 1 auto;
+}
+
+/*# sourceMappingURL=_index.css.map */

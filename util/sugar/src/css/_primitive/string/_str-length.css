@@ -1,0 +1,17 @@
+/**
+ * @name    str-length
+ * @namespace     sugar.scss.string
+ * @type      function
+ *
+ * Return the number of characters in the passed string
+ *
+ * @param       {String}      $string       The string to process
+ * @return      {Number}                    The number of characters that compose the string
+ *
+ * @example     scss
+ * sugar.str-length('hello'); // => 4
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/*# sourceMappingURL=_str-length.css.map */

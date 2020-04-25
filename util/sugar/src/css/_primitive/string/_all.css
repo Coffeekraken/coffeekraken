@@ -1,0 +1,158 @@
+@charset "UTF-8";
+/**
+ * @name      str-index
+ * @namespace     sugar.scss.string
+ * @type      function
+ *
+ * Returns the first index of $substring in $string, or null if $string doesn’t contain $substring.
+ *
+ * @param       {String}      $string       The string to process
+ * @param       {String}      $substring    The string to search
+ * @return      {Number}                    The index of the finded substring or null if not exist...
+ *
+ * @example      scss
+ * sugar.str-index('Hello world', 'world'); // => 7
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    str-is-url
+ * @namespace     sugar.scss.string
+ * @type      function
+ *
+ * Check if a string is a url or not
+ *
+ * @param 			{String} 				$url 			The string to check
+ * @return 			{Boolean} 								true if is a url, false if not
+ *
+ * @example     scss
+ * sugar.str-is-url('Hello world') // false
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    str-length
+ * @namespace     sugar.scss.string
+ * @type      function
+ *
+ * Return the number of characters in the passed string
+ *
+ * @param       {String}      $string       The string to process
+ * @return      {Number}                    The number of characters that compose the string
+ *
+ * @example     scss
+ * sugar.str-length('hello'); // => 4
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    str-replace
+ * @namespace     sugar.scss.string
+ * @type      function
+ *
+ * Replace the passed string with another one in a specific string
+ *
+ * @param         {String}        $string         The string in which to replace the searched one
+ * @param         {String}        $search         The string to replace
+ * @param         {String}        [$replace=""]   The string used as replacement
+ * @return        {String}                        The processed string
+ *
+ * @example     scss
+ * sugar.str-replace('Hello world', 'world', 'coco'); // 'Hello coco'
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    str-slice
+ * @namespace     sugar.scss.string
+ * @type      function
+ *
+ * Returns the slice of $string starting at index $start-at and ending at index $end-at (both inclusive).
+ *
+ * @param         {String}        $string         The string to slice
+ * @param         {Number}        $start-at       Where to start slice the string
+ * @param         {Number}        [$end-at=-1]    Where to end to slice the string
+ *
+ * @param       scss
+ * sugar.str-slice('Hello world', 1, 4); // => Hell
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    str-split
+ * @namespace     sugar.scss.string
+ * @type      function
+ *
+ * Split a string using a delimiter
+ *
+ * @param         {String}          $string             The string to split
+ * @param         {String}          [$delimiter=""]     The delimiter to split the string
+ * @return        {List}                                A list a the splited string
+ *
+ * @example       scss
+ * sugar.str-split('hello.world', '.'); // ('hello', 'world')
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    str-unique-id
+ * @namespace     sugar.scss.string
+ * @type      function
+ *
+ * Generate a unique id in string format
+ *
+ * @return        {String}          The generated unique id
+ *
+ * @example     scss
+ * sugar.str-unique-id(); // => uabtrnzug
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      str-unquote
+ * @namespace     sugar.scss.string
+ * @type      function
+ *
+ * Return an unquoted version of the passed string
+ *
+ * @param         {String}        $string           The string to unquote
+ * @return        {String}                          The unquoted string
+ *
+ * @example       scss
+ * sugar.str-unquote('hello world'); // => hello world
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name    str-split
+ * @namespace     sugar.scss.string
+ * @type      function
+ *
+ * Split a string using a delimiter
+ *
+ * @param         {String}          $string             The string to split
+ * @param         {String}          [$delimiter=""]     The delimiter to split the string
+ * @return        {List}                                A list a the splited string
+ *
+ * @example       scss
+ * sugar.str-split('hello.world', '.'); // ('hello', 'world')
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name        str-url-ext
+ * @namespace     sugar.scss.string
+ * @type      function
+ *
+ * Check if a string is a url or not
+ *
+ * @param 			{String} 				$url 			The string to check
+ * @return 			{Boolean} 								true if is a url, false if not
+ *
+ * @example       scss
+ * sugar.str-is-url('Hello world') // false
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/*# sourceMappingURL=_all.css.map */

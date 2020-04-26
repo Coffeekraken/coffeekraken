@@ -1,16 +1,9 @@
 const __fs = require('fs');
 const __packageRoot = require('./node/path/packageRoot');
+const __isInPackage = require('./node/path/isInPackage');
 
-const packageRoot = __packageRoot(process.cwd());
-let pkg;
 function isInSugarPackage() {
-  if (pkg && pkg.name === '@coffeekraken/sugar') return true;
-  if (pkg) return false;
-  if (!__fs.existsSync(packageRoot + '/package.json')) {
-    return false;
-  }
-  pkg = require(packageRoot + '/package.json');
-  return isInSugarPackage();
+  return __isInPackage('@coffeekraken/sugar');
 }
 
 module.exports = {
@@ -21,7 +14,7 @@ module.exports = {
          * @name              input
          * @namespace         sugar.config.cli.build.scss
          * @type              String
-         * @default           <appRoot>/src/scss/*.scss
+         * @default           <appRoot>/src/scss/[^_]*.scss
          *
          * Specify the root folder (or file) to check for .scss|sass files to build.
          * Glob patterns can be used
@@ -30,8 +23,8 @@ module.exports = {
          * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         input: isInSugarPackage()
-          ? `${__packageRoot()}/tests/src/scss/*.scss`
-          : `${__packageRoot()}/src/scss/*.scss`,
+          ? `${__packageRoot()}/tests/src/scss/[^_]*.scss`
+          : `${__packageRoot()}/src/scss/[^_]*.scss`,
 
         /**
          * @name              output
@@ -100,7 +93,42 @@ module.exports = {
          * @since             2.0.0
          * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        prod: false
+        prod: false,
+
+        include: {
+          /**
+           * @name                sugar
+           * @namespace           sugar.config.build.scss.include
+           * @type                Boolean
+           * @default             true
+           *
+           * This options tells the sugar scss compiler process if you want to include the sugar toolkit or not
+           *
+           * @since             2.0.0
+           * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+           */
+          sugar: true
+        },
+
+        vendor: {
+          /**
+           * @name                sass
+           * @namespace           sugar.config.build.scss.vendor
+           * @type                Object
+           * @default             {}
+           *
+           * Store the <primary>Sass compiler</primary>(https://www.npmjs.com/package/sass) configuration if you want to override some default ones.
+           * Here's the sass compiler settings setted by the ```sugar build.scss``` process:
+           * - data (...) {String}: The actual scss data to compile
+           * - includePaths ([<inputFolder>, <appRoot>/node_modules]): Specify which folders you want the compiler to inspect for resolving the @imports, etc statements
+           * - sourceMap (true) {Boolean}: Specify if you want a sourcemap file to be generated
+           * - outFile (<outputFile>) {String}: Specify the output file path for sourcemap generation
+           *
+           * @since             2.0.0
+           * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+           */
+          sass: {}
+        }
       }
     }
   },

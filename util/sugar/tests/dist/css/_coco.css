@@ -5004,7 +5004,7 @@
 }
 
 .coco {
-  color: #f2bc2b;
+  color: hello world;
 }
 
 /**
@@ -5079,7 +5079,7 @@
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 .f {
-  font-family: "Helvetica Neue", Helvetica, Verdana, Arial, sans-serif;
+  font-family: "Helvetica Neue, Helvetica, Verdana, Arial, sans-serif";
   font-weight: normal;
 }
 
@@ -5098,7 +5098,7 @@
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 .f-quote {
-  font-family: Palatino, Times, Georgia, serif;
+  font-family: "Palatino, Times, Georgia, serif";
   font-weight: normal;
 }
 
@@ -5117,7 +5117,7 @@
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 .f-code {
-  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-family: "Menlo, Monaco, Consolas, Courier New, monospace";
   font-weight: normal;
 }
 
@@ -5129,7 +5129,7 @@
    * Set the **bottom** margin to the **0.3** size
    *
 * @example 	html
-* <div class="m-b-smaller" style="background:#f2bc2b; width:100px; height:5px"></div>
+* <div class="m-b-smaller" style="background:hello world; width:100px; height:5px"></div>
 * <div style="background:#2b3438; width:100px; height:5px"></div>
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -5146,7 +5146,7 @@
    * Set the **top** margin to the **0.3** size
    *
 * @example 	html
-* <div style="background:#f2bc2b; width:100px; height:5px"></div>
+* <div style="background:hello world; width:100px; height:5px"></div>
 * <div class="m-t-smaller" style="background:#2b3438; width:100px; height:5px"></div>
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -5163,7 +5163,7 @@
    * Set the **left** margin to the **0.3** size
    *
 * @example 	html
-* <div style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+* <div style="display:inline-block; background:hello world; width:50px; height:50px"></div>
 * <div class="m-l-smaller" style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -5180,7 +5180,7 @@
    * Set the **right* margin to the **0.3** size
    *
 * @example 	html
-* <div class="m-r-smaller" style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+* <div class="m-r-smaller" style="display:inline-block; background:hello world; width:50px; height:50px"></div>
 * <div style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -5197,7 +5197,7 @@
    * Set the **side** margin to the **0.3** size
    *
 * @example 	html
-* <div class="m-s-smaller" style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+* <div class="m-s-smaller" style="display:inline-block; background:hello world; width:50px; height:50px"></div>
 * <div style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -5215,7 +5215,7 @@
    * Set the paddings to the **0.3** size
    *
 * @example 	html
-* <div class="p-smaller" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* <div class="p-smaller" style="border:1px solid hello world; width:150px; height:150px;">
 * 	<div style="background:#2b3438; width:100%; height:100%"></div>
 * </div>
    *
@@ -5233,7 +5233,7 @@
    * Set the **bottom** padding to the **0.3** size
    *
 * @example 	html
-* <div class="p-b-smaller" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* <div class="p-b-smaller" style="border:1px solid hello world; width:150px; height:150px;">
 * 	<div style="background:#2b3438; width:100%; height:100%"></div>
 * </div>
    *
@@ -5251,7 +5251,7 @@
    * Set the **top** padding to the **0.3** size
    *
 * @example 	html
-* <div class="p-t-smaller" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* <div class="p-t-smaller" style="border:1px solid hello world; width:150px; height:150px;">
 * 	<div style="background:#2b3438; width:100%; height:100%"></div>
 * </div>
    *
@@ -5269,7 +5269,7 @@
    * Set the **left** padding  to the **0.3** size
    *
 * @example 	html
-* <div class="p-l-smaller" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* <div class="p-l-smaller" style="border:1px solid hello world; width:150px; height:150px;">
 * 	<div style="background:#2b3438; width:100%; height:100%"></div>
 * </div>
    *
@@ -5287,7 +5287,7 @@
    * Set the **right** padding  to the **0.3** size
    *
 * @example 	html
-* <div class="p-r-smaller" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* <div class="p-r-smaller" style="border:1px solid hello world; width:150px; height:150px;">
 * 	<div style="background:#2b3438; width:100%; height:100%"></div>
 * </div>
    *
@@ -5305,7 +5305,7 @@
    * Set the **side** padding  to the **0.3** size
    *
 * @example 	html
-* <div class="p-s-smaller" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* <div class="p-s-smaller" style="border:1px solid hello world; width:150px; height:150px;">
 * 	<div style="background:#2b3438; width:100%; height:100%"></div>
 * </div>
    *
@@ -5324,7 +5324,7 @@
    * Set the **bottom** margin to the **0.6** size
    *
 * @example 	html
-* <div class="m-b-small" style="background:#f2bc2b; width:100px; height:5px"></div>
+* <div class="m-b-small" style="background:hello world; width:100px; height:5px"></div>
 * <div style="background:#2b3438; width:100px; height:5px"></div>
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -5341,7 +5341,7 @@
    * Set the **top** margin to the **0.6** size
    *
 * @example 	html
-* <div style="background:#f2bc2b; width:100px; height:5px"></div>
+* <div style="background:hello world; width:100px; height:5px"></div>
 * <div class="m-t-small" style="background:#2b3438; width:100px; height:5px"></div>
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -5358,7 +5358,7 @@
    * Set the **left** margin to the **0.6** size
    *
 * @example 	html
-* <div style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+* <div style="display:inline-block; background:hello world; width:50px; height:50px"></div>
 * <div class="m-l-small" style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -5375,7 +5375,7 @@
    * Set the **right* margin to the **0.6** size
    *
 * @example 	html
-* <div class="m-r-small" style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+* <div class="m-r-small" style="display:inline-block; background:hello world; width:50px; height:50px"></div>
 * <div style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -5392,7 +5392,7 @@
    * Set the **side** margin to the **0.6** size
    *
 * @example 	html
-* <div class="m-s-small" style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+* <div class="m-s-small" style="display:inline-block; background:hello world; width:50px; height:50px"></div>
 * <div style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -5410,7 +5410,7 @@
    * Set the paddings to the **0.6** size
    *
 * @example 	html
-* <div class="p-small" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* <div class="p-small" style="border:1px solid hello world; width:150px; height:150px;">
 * 	<div style="background:#2b3438; width:100%; height:100%"></div>
 * </div>
    *
@@ -5428,7 +5428,7 @@
    * Set the **bottom** padding to the **0.6** size
    *
 * @example 	html
-* <div class="p-b-small" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* <div class="p-b-small" style="border:1px solid hello world; width:150px; height:150px;">
 * 	<div style="background:#2b3438; width:100%; height:100%"></div>
 * </div>
    *
@@ -5446,7 +5446,7 @@
    * Set the **top** padding to the **0.6** size
    *
 * @example 	html
-* <div class="p-t-small" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* <div class="p-t-small" style="border:1px solid hello world; width:150px; height:150px;">
 * 	<div style="background:#2b3438; width:100%; height:100%"></div>
 * </div>
    *
@@ -5464,7 +5464,7 @@
    * Set the **left** padding  to the **0.6** size
    *
 * @example 	html
-* <div class="p-l-small" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* <div class="p-l-small" style="border:1px solid hello world; width:150px; height:150px;">
 * 	<div style="background:#2b3438; width:100%; height:100%"></div>
 * </div>
    *
@@ -5482,7 +5482,7 @@
    * Set the **right** padding  to the **0.6** size
    *
 * @example 	html
-* <div class="p-r-small" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* <div class="p-r-small" style="border:1px solid hello world; width:150px; height:150px;">
 * 	<div style="background:#2b3438; width:100%; height:100%"></div>
 * </div>
    *
@@ -5500,7 +5500,7 @@
    * Set the **side** padding  to the **0.6** size
    *
 * @example 	html
-* <div class="p-s-small" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* <div class="p-s-small" style="border:1px solid hello world; width:150px; height:150px;">
 * 	<div style="background:#2b3438; width:100%; height:100%"></div>
 * </div>
    *
@@ -5519,7 +5519,7 @@
    * Set the **bottom** margin to the **1** size
    *
 * @example 	html
-* <div class="m-b" style="background:#f2bc2b; width:100px; height:5px"></div>
+* <div class="m-b" style="background:hello world; width:100px; height:5px"></div>
 * <div style="background:#2b3438; width:100px; height:5px"></div>
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -5536,7 +5536,7 @@
    * Set the **top** margin to the **1** size
    *
 * @example 	html
-* <div style="background:#f2bc2b; width:100px; height:5px"></div>
+* <div style="background:hello world; width:100px; height:5px"></div>
 * <div class="m-t" style="background:#2b3438; width:100px; height:5px"></div>
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -5553,7 +5553,7 @@
    * Set the **left** margin to the **1** size
    *
 * @example 	html
-* <div style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+* <div style="display:inline-block; background:hello world; width:50px; height:50px"></div>
 * <div class="m-l" style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -5570,7 +5570,7 @@
    * Set the **right* margin to the **1** size
    *
 * @example 	html
-* <div class="m-r" style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+* <div class="m-r" style="display:inline-block; background:hello world; width:50px; height:50px"></div>
 * <div style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -5587,7 +5587,7 @@
    * Set the **side** margin to the **1** size
    *
 * @example 	html
-* <div class="m-s" style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+* <div class="m-s" style="display:inline-block; background:hello world; width:50px; height:50px"></div>
 * <div style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -5605,7 +5605,7 @@
    * Set the paddings to the **1** size
    *
 * @example 	html
-* <div class="p" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* <div class="p" style="border:1px solid hello world; width:150px; height:150px;">
 * 	<div style="background:#2b3438; width:100%; height:100%"></div>
 * </div>
    *
@@ -5623,7 +5623,7 @@
    * Set the **bottom** padding to the **1** size
    *
 * @example 	html
-* <div class="p-b" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* <div class="p-b" style="border:1px solid hello world; width:150px; height:150px;">
 * 	<div style="background:#2b3438; width:100%; height:100%"></div>
 * </div>
    *
@@ -5641,7 +5641,7 @@
    * Set the **top** padding to the **1** size
    *
 * @example 	html
-* <div class="p-t" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* <div class="p-t" style="border:1px solid hello world; width:150px; height:150px;">
 * 	<div style="background:#2b3438; width:100%; height:100%"></div>
 * </div>
    *
@@ -5659,7 +5659,7 @@
    * Set the **left** padding  to the **1** size
    *
 * @example 	html
-* <div class="p-l" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* <div class="p-l" style="border:1px solid hello world; width:150px; height:150px;">
 * 	<div style="background:#2b3438; width:100%; height:100%"></div>
 * </div>
    *
@@ -5677,7 +5677,7 @@
    * Set the **right** padding  to the **1** size
    *
 * @example 	html
-* <div class="p-r" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* <div class="p-r" style="border:1px solid hello world; width:150px; height:150px;">
 * 	<div style="background:#2b3438; width:100%; height:100%"></div>
 * </div>
    *
@@ -5695,7 +5695,7 @@
    * Set the **side** padding  to the **1** size
    *
 * @example 	html
-* <div class="p-s" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* <div class="p-s" style="border:1px solid hello world; width:150px; height:150px;">
 * 	<div style="background:#2b3438; width:100%; height:100%"></div>
 * </div>
    *
@@ -5714,7 +5714,7 @@
    * Set the **bottom** margin to the **1.4** size
    *
 * @example 	html
-* <div class="m-b-medium" style="background:#f2bc2b; width:100px; height:5px"></div>
+* <div class="m-b-medium" style="background:hello world; width:100px; height:5px"></div>
 * <div style="background:#2b3438; width:100px; height:5px"></div>
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -5731,7 +5731,7 @@
    * Set the **top** margin to the **1.4** size
    *
 * @example 	html
-* <div style="background:#f2bc2b; width:100px; height:5px"></div>
+* <div style="background:hello world; width:100px; height:5px"></div>
 * <div class="m-t-medium" style="background:#2b3438; width:100px; height:5px"></div>
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -5748,7 +5748,7 @@
    * Set the **left** margin to the **1.4** size
    *
 * @example 	html
-* <div style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+* <div style="display:inline-block; background:hello world; width:50px; height:50px"></div>
 * <div class="m-l-medium" style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -5765,7 +5765,7 @@
    * Set the **right* margin to the **1.4** size
    *
 * @example 	html
-* <div class="m-r-medium" style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+* <div class="m-r-medium" style="display:inline-block; background:hello world; width:50px; height:50px"></div>
 * <div style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -5782,7 +5782,7 @@
    * Set the **side** margin to the **1.4** size
    *
 * @example 	html
-* <div class="m-s-medium" style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+* <div class="m-s-medium" style="display:inline-block; background:hello world; width:50px; height:50px"></div>
 * <div style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -5800,7 +5800,7 @@
    * Set the paddings to the **1.4** size
    *
 * @example 	html
-* <div class="p-medium" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* <div class="p-medium" style="border:1px solid hello world; width:150px; height:150px;">
 * 	<div style="background:#2b3438; width:100%; height:100%"></div>
 * </div>
    *
@@ -5818,7 +5818,7 @@
    * Set the **bottom** padding to the **1.4** size
    *
 * @example 	html
-* <div class="p-b-medium" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* <div class="p-b-medium" style="border:1px solid hello world; width:150px; height:150px;">
 * 	<div style="background:#2b3438; width:100%; height:100%"></div>
 * </div>
    *
@@ -5836,7 +5836,7 @@
    * Set the **top** padding to the **1.4** size
    *
 * @example 	html
-* <div class="p-t-medium" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* <div class="p-t-medium" style="border:1px solid hello world; width:150px; height:150px;">
 * 	<div style="background:#2b3438; width:100%; height:100%"></div>
 * </div>
    *
@@ -5854,7 +5854,7 @@
    * Set the **left** padding  to the **1.4** size
    *
 * @example 	html
-* <div class="p-l-medium" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* <div class="p-l-medium" style="border:1px solid hello world; width:150px; height:150px;">
 * 	<div style="background:#2b3438; width:100%; height:100%"></div>
 * </div>
    *
@@ -5872,7 +5872,7 @@
    * Set the **right** padding  to the **1.4** size
    *
 * @example 	html
-* <div class="p-r-medium" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* <div class="p-r-medium" style="border:1px solid hello world; width:150px; height:150px;">
 * 	<div style="background:#2b3438; width:100%; height:100%"></div>
 * </div>
    *
@@ -5890,7 +5890,7 @@
    * Set the **side** padding  to the **1.4** size
    *
 * @example 	html
-* <div class="p-s-medium" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* <div class="p-s-medium" style="border:1px solid hello world; width:150px; height:150px;">
 * 	<div style="background:#2b3438; width:100%; height:100%"></div>
 * </div>
    *
@@ -5909,7 +5909,7 @@
    * Set the **bottom** margin to the **2** size
    *
 * @example 	html
-* <div class="m-b-big" style="background:#f2bc2b; width:100px; height:5px"></div>
+* <div class="m-b-big" style="background:hello world; width:100px; height:5px"></div>
 * <div style="background:#2b3438; width:100px; height:5px"></div>
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -5926,7 +5926,7 @@
    * Set the **top** margin to the **2** size
    *
 * @example 	html
-* <div style="background:#f2bc2b; width:100px; height:5px"></div>
+* <div style="background:hello world; width:100px; height:5px"></div>
 * <div class="m-t-big" style="background:#2b3438; width:100px; height:5px"></div>
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -5943,7 +5943,7 @@
    * Set the **left** margin to the **2** size
    *
 * @example 	html
-* <div style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+* <div style="display:inline-block; background:hello world; width:50px; height:50px"></div>
 * <div class="m-l-big" style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -5960,7 +5960,7 @@
    * Set the **right* margin to the **2** size
    *
 * @example 	html
-* <div class="m-r-big" style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+* <div class="m-r-big" style="display:inline-block; background:hello world; width:50px; height:50px"></div>
 * <div style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -5977,7 +5977,7 @@
    * Set the **side** margin to the **2** size
    *
 * @example 	html
-* <div class="m-s-big" style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+* <div class="m-s-big" style="display:inline-block; background:hello world; width:50px; height:50px"></div>
 * <div style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -5995,7 +5995,7 @@
    * Set the paddings to the **2** size
    *
 * @example 	html
-* <div class="p-big" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* <div class="p-big" style="border:1px solid hello world; width:150px; height:150px;">
 * 	<div style="background:#2b3438; width:100%; height:100%"></div>
 * </div>
    *
@@ -6013,7 +6013,7 @@
    * Set the **bottom** padding to the **2** size
    *
 * @example 	html
-* <div class="p-b-big" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* <div class="p-b-big" style="border:1px solid hello world; width:150px; height:150px;">
 * 	<div style="background:#2b3438; width:100%; height:100%"></div>
 * </div>
    *
@@ -6031,7 +6031,7 @@
    * Set the **top** padding to the **2** size
    *
 * @example 	html
-* <div class="p-t-big" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* <div class="p-t-big" style="border:1px solid hello world; width:150px; height:150px;">
 * 	<div style="background:#2b3438; width:100%; height:100%"></div>
 * </div>
    *
@@ -6049,7 +6049,7 @@
    * Set the **left** padding  to the **2** size
    *
 * @example 	html
-* <div class="p-l-big" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* <div class="p-l-big" style="border:1px solid hello world; width:150px; height:150px;">
 * 	<div style="background:#2b3438; width:100%; height:100%"></div>
 * </div>
    *
@@ -6067,7 +6067,7 @@
    * Set the **right** padding  to the **2** size
    *
 * @example 	html
-* <div class="p-r-big" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* <div class="p-r-big" style="border:1px solid hello world; width:150px; height:150px;">
 * 	<div style="background:#2b3438; width:100%; height:100%"></div>
 * </div>
    *
@@ -6085,7 +6085,7 @@
    * Set the **side** padding  to the **2** size
    *
 * @example 	html
-* <div class="p-s-big" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* <div class="p-s-big" style="border:1px solid hello world; width:150px; height:150px;">
 * 	<div style="background:#2b3438; width:100%; height:100%"></div>
 * </div>
    *
@@ -6104,7 +6104,7 @@
    * Set the **bottom** margin to the **3** size
    *
 * @example 	html
-* <div class="m-b-bigger" style="background:#f2bc2b; width:100px; height:5px"></div>
+* <div class="m-b-bigger" style="background:hello world; width:100px; height:5px"></div>
 * <div style="background:#2b3438; width:100px; height:5px"></div>
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -6121,7 +6121,7 @@
    * Set the **top** margin to the **3** size
    *
 * @example 	html
-* <div style="background:#f2bc2b; width:100px; height:5px"></div>
+* <div style="background:hello world; width:100px; height:5px"></div>
 * <div class="m-t-bigger" style="background:#2b3438; width:100px; height:5px"></div>
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -6138,7 +6138,7 @@
    * Set the **left** margin to the **3** size
    *
 * @example 	html
-* <div style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+* <div style="display:inline-block; background:hello world; width:50px; height:50px"></div>
 * <div class="m-l-bigger" style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -6155,7 +6155,7 @@
    * Set the **right* margin to the **3** size
    *
 * @example 	html
-* <div class="m-r-bigger" style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+* <div class="m-r-bigger" style="display:inline-block; background:hello world; width:50px; height:50px"></div>
 * <div style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -6172,7 +6172,7 @@
    * Set the **side** margin to the **3** size
    *
 * @example 	html
-* <div class="m-s-bigger" style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+* <div class="m-s-bigger" style="display:inline-block; background:hello world; width:50px; height:50px"></div>
 * <div style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -6190,7 +6190,7 @@
    * Set the paddings to the **3** size
    *
 * @example 	html
-* <div class="p-bigger" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* <div class="p-bigger" style="border:1px solid hello world; width:150px; height:150px;">
 * 	<div style="background:#2b3438; width:100%; height:100%"></div>
 * </div>
    *
@@ -6208,7 +6208,7 @@
    * Set the **bottom** padding to the **3** size
    *
 * @example 	html
-* <div class="p-b-bigger" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* <div class="p-b-bigger" style="border:1px solid hello world; width:150px; height:150px;">
 * 	<div style="background:#2b3438; width:100%; height:100%"></div>
 * </div>
    *
@@ -6226,7 +6226,7 @@
    * Set the **top** padding to the **3** size
    *
 * @example 	html
-* <div class="p-t-bigger" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* <div class="p-t-bigger" style="border:1px solid hello world; width:150px; height:150px;">
 * 	<div style="background:#2b3438; width:100%; height:100%"></div>
 * </div>
    *
@@ -6244,7 +6244,7 @@
    * Set the **left** padding  to the **3** size
    *
 * @example 	html
-* <div class="p-l-bigger" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* <div class="p-l-bigger" style="border:1px solid hello world; width:150px; height:150px;">
 * 	<div style="background:#2b3438; width:100%; height:100%"></div>
 * </div>
    *
@@ -6262,7 +6262,7 @@
    * Set the **right** padding  to the **3** size
    *
 * @example 	html
-* <div class="p-r-bigger" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* <div class="p-r-bigger" style="border:1px solid hello world; width:150px; height:150px;">
 * 	<div style="background:#2b3438; width:100%; height:100%"></div>
 * </div>
    *
@@ -6280,7 +6280,7 @@
    * Set the **side** padding  to the **3** size
    *
 * @example 	html
-* <div class="p-s-bigger" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+* <div class="p-s-bigger" style="border:1px solid hello world; width:150px; height:150px;">
 * 	<div style="background:#2b3438; width:100%; height:100%"></div>
 * </div>
    *
@@ -6515,7 +6515,7 @@
   * Reset **top** padding
 *
 * @example 	html
-* <div class="no-p-t" style="display:inline-block; background:#f2bc2b; width:50px; height:50px;"></div>
+* <div class="no-p-t" style="display:inline-block; background:hello world; width:50px; height:50px;"></div>
   *
   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
   */
@@ -6531,7 +6531,7 @@
   * Reset **right** padding
 *
 * @example 	html
-* <div class="no-p-r" style="display:inline-block; background:#f2bc2b; width:50px; height:50px;"></div>
+* <div class="no-p-r" style="display:inline-block; background:hello world; width:50px; height:50px;"></div>
   *
   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
   */
@@ -6547,7 +6547,7 @@
   * Reset **bottom** padding
 *
 * @example 	html
-* <div class="no-p-b" style="display:inline-block; background:#f2bc2b; width:50px; height:50px;"></div>
+* <div class="no-p-b" style="display:inline-block; background:hello world; width:50px; height:50px;"></div>
   *
   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
   */
@@ -6563,7 +6563,7 @@
   * Reset **left** padding
 *
 * @example 	html
-* <div class="no-p-l" style="display:inline-block; background:#f2bc2b; width:50px; height:50px;"></div>
+* <div class="no-p-l" style="display:inline-block; background:hello world; width:50px; height:50px;"></div>
   *
   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
   */
@@ -6579,7 +6579,7 @@
   * Reset **left** and **right** paddings
 *
 * @example 	html
-* <div class="no-p-s" style="display:inline-block; background:#f2bc2b; width:50px; height:50px;"></div>
+* <div class="no-p-s" style="display:inline-block; background:hello world; width:50px; height:50px;"></div>
   *
   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
   */
@@ -6596,7 +6596,7 @@
   * Reset **top** padding
 *
 * @example 	html
-* <div class="no-m-t" style="display:inline-block; background:#f2bc2b; width:50px; height:50px;"></div>
+* <div class="no-m-t" style="display:inline-block; background:hello world; width:50px; height:50px;"></div>
   *
   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
   */
@@ -6612,7 +6612,7 @@
   * Reset **right** padding
 *
 * @example 	html
-* <div class="no-m-r" style="display:inline-block; background:#f2bc2b; width:50px; height:50px;"></div>
+* <div class="no-m-r" style="display:inline-block; background:hello world; width:50px; height:50px;"></div>
   *
   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
   */
@@ -6628,7 +6628,7 @@
   * Reset **bottom** padding
 *
 * @example 	html
-* <div class="no-m-b" style="display:inline-block; background:#f2bc2b; width:50px; height:50px;"></div>
+* <div class="no-m-b" style="display:inline-block; background:hello world; width:50px; height:50px;"></div>
   *
   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
   */
@@ -6644,7 +6644,7 @@
   * Reset **left** padding
 *
 * @example 	html
-* <div class="no-m-l" style="display:inline-block; background:#f2bc2b; width:50px; height:50px;"></div>
+* <div class="no-m-l" style="display:inline-block; background:hello world; width:50px; height:50px;"></div>
   *
   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
   */
@@ -6660,7 +6660,7 @@
   * Reset **left** and **right** margins
 *
 * @example 	html
-* <div class="no-m-s" style="display:inline-block; background:#f2bc2b; width:50px; height:50px;"></div>
+* <div class="no-m-s" style="display:inline-block; background:hello world; width:50px; height:50px;"></div>
   *
   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
   */
@@ -7119,7 +7119,7 @@
     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
 .c-link {
-  color: #f2bc2b;
+  color: hello world;
 }
 
 /**
@@ -7137,7 +7137,7 @@
     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
 .bkg-link {
-  background-color: #f2bc2b;
+  background-color: hello world;
 }
 
 /**
@@ -7155,7 +7155,7 @@
     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
 .b-link {
-  border: 0.0714285714rem solid #f2bc2b;
+  border: 0.0714285714rem solid hello world;
 }
 
 /**
@@ -7173,7 +7173,7 @@
     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
 .b-t-link {
-  border-top: 0.0714285714rem solid #f2bc2b;
+  border-top: 0.0714285714rem solid hello world;
 }
 
 /**
@@ -7191,7 +7191,7 @@
     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
 .b-r-link {
-  border-right: 0.0714285714rem solid #f2bc2b;
+  border-right: 0.0714285714rem solid hello world;
 }
 
 /**
@@ -7209,7 +7209,7 @@
     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
 .b-b-link {
-  border-bottom: 0.0714285714rem solid #f2bc2b;
+  border-bottom: 0.0714285714rem solid hello world;
 }
 
 /**
@@ -7227,7 +7227,7 @@
     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
 .b-l-link {
-  border-left: 0.0714285714rem solid #f2bc2b;
+  border-left: 0.0714285714rem solid hello world;
 }
 
 /**
@@ -7245,8 +7245,8 @@
     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
 .b-s-link {
-  border-left: 0.0714285714rem solid #f2bc2b;
-  border-right: 0.0714285714rem solid #f2bc2b;
+  border-left: 0.0714285714rem solid hello world;
+  border-right: 0.0714285714rem solid hello world;
 }
 
 /**
@@ -7264,7 +7264,7 @@
     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
 .c-primary {
-  color: #f2bc2b;
+  color: hello world;
 }
 
 /**
@@ -7282,7 +7282,7 @@
     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
 .bkg-primary {
-  background-color: #f2bc2b;
+  background-color: hello world;
 }
 
 /**
@@ -7300,7 +7300,7 @@
     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
 .b-primary {
-  border: 0.0714285714rem solid #f2bc2b;
+  border: 0.0714285714rem solid hello world;
 }
 
 /**
@@ -7318,7 +7318,7 @@
     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
 .b-t-primary {
-  border-top: 0.0714285714rem solid #f2bc2b;
+  border-top: 0.0714285714rem solid hello world;
 }
 
 /**
@@ -7336,7 +7336,7 @@
     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
 .b-r-primary {
-  border-right: 0.0714285714rem solid #f2bc2b;
+  border-right: 0.0714285714rem solid hello world;
 }
 
 /**
@@ -7354,7 +7354,7 @@
     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
 .b-b-primary {
-  border-bottom: 0.0714285714rem solid #f2bc2b;
+  border-bottom: 0.0714285714rem solid hello world;
 }
 
 /**
@@ -7372,7 +7372,7 @@
     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
 .b-l-primary {
-  border-left: 0.0714285714rem solid #f2bc2b;
+  border-left: 0.0714285714rem solid hello world;
 }
 
 /**
@@ -7390,8 +7390,8 @@
     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
 .b-s-primary {
-  border-left: 0.0714285714rem solid #f2bc2b;
-  border-right: 0.0714285714rem solid #f2bc2b;
+  border-left: 0.0714285714rem solid hello world;
+  border-right: 0.0714285714rem solid hello world;
 }
 
 /**
@@ -8122,9 +8122,9 @@
 body {
   background-repeat: no-repeat;
   background-size: cover;
-  background-image: url("data:image/svg+xml;charset=utf8,%3C?xml version='1.0' encoding='utf-8'?%3E	 %3Csvg version='1.2' baseProfile='tiny' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'		 x='0px' y='0px' viewBox='0 0 954.1 288.7' xml:space='preserve'%3E	%3Cg fill='%23848e91'%3E		%3Cpath fill='%23f2bc2b' d='M932.9,217.2c0-18.7-11.6-26.9-25.2-26.9c-10.2,0-19.9,3.8-32.7,13.1V192l-65,0.5c-5.3-1.9-11-2.8-16.8-2.8			c-5.1,0-10.2,0.8-15.1,2.4h-73.5v15.3h16L693.3,229h-8.4v-78.6h-36.3v16.5h17.3v103.5h-14.1v-52c0-15.3-9.5-29.1-37.6-29.1			c-0.8,0-1.6,0-2.4,0l0,0l-32,1c-12,0-24.2,7-30.2,22.9H549V192h-34.2l0,0h-37.1v15.3h16L466.2,229h-8.4v-78.6h-36.3v16.5h17.3			v103.4h-17.5v16.5h50.8v-16.5h-14.2l0.1-23h8.3l39.9,39.5h24.4l0,0h62.5c3.4,1.1,7.1,1.7,11,1.7c10.6,0,18.9-3.6,30.9-13.3v11.6h33			l0,0h31v-16.3l-14.2-0.1l0.1-23.1h8.3l39.8,39.5l50.2,0.5c4.1,0.9,8.5,1.3,13.1,1.3c20.2,0,37.3-8.7,47.5-24.4l-16.4-7.1			c-7,9.9-18.4,15.3-30.6,15.3c-17.6,0-29.6-10.5-32.5-28.7h79.5c0-14.5-4.4-26.4-11.4-35.4H856v61.9h-16.4v16.5h52v-16.5h-16.4			v-50.8c9.7-7.6,19.9-12.1,27.6-12.1c7.7,0,11.2,5.2,11.2,17.3v62.1h35.5v-16.5h-16.4v-53H932.9z M534,270.2l-18.9,0.1v0.1h-1.2			L480,236.8l35.9-29.5h14.8l0,0h3.3V270.2z M632.5,262.8c-7.7,7-17.3,11.2-25.8,11.2c-10.2,0-17.3-6.4-17.3-15.7			c0-9.4,7.7-16.3,18.3-16.3c8.1,0,16.6,3.2,24.8,9.4V262.8z M632.5,235.7c-7.7-5-17.7-8-26.2-8c-19.7,0-34.9,13.5-34.9,30.7			c0,4.3,0.9,8.4,2.6,12.1l-0.2-0.1h-20.7v-27.2c0-18.3,4.8-29.9,19.6-33.1l18,6.2c4.3-7.4,11.4-11.2,20.5-11.2			c11.4,0,21.3,4.8,21.3,18.3L632.5,235.7L632.5,235.7z M707.1,236.8l35.9-29.5h12.1c-7,8.2-11.5,19.1-11.5,31.9			c0,12.2,3.9,22.9,10.7,31.2H741L707.1,236.8z M764.9,230.2c2.8-15.7,14-25.8,28.8-25.8s28,10.9,31,25.8H764.9z'/%3E		%3Cpath d='M135.9,229.7c26.3,0,46.1-9.9,58.9-27.1v27h58.1v-28.8h-29.1l-0.3-45.3l14.7-0.1l74.3,74.1l29.5-0.1v-28.8h-14l-61-59.7			l52.6-53H342V59.1h-88.7v28.8h24.1l-39.2,38.9l-14.4-0.1l0.3-67.5L194.8,59v27.6c-15.1-19.6-37.7-27.5-56.7-27.5			c-20.4,0-36.9,2.9-50.7,13.4v-13H58.7v59.2h28.9c8.2-21.3,22.4-31.9,42.6-31.9c16.7,0,29.3,5.6,37.9,16.8			c8.5,11.2,12.8,24.6,12.8,40.3c0,16.4-4.5,29.6-13.6,39.7c-9,10.1-20.6,15.2-34.6,15.2c-20.2,0-37.1-7.2-45.3-28.4H58.5v59.2h28.9			v-13.1c13.4,10.2,28.9,12.9,48.5,13.1V229.7z'/%3E		%3Crect fill='%23f2bc2b' x='87.7' y='2' width='225.1' height='28.8'/%3E		%3Cpolygon points='29.3,30.8 58.5,30.8 58.5,2 0,2 0,287.3 58.5,287.3 58.5,258.5 29.3,258.5 	'/%3E		%3Cpolygon points='342,30.8 371.3,30.8 371.3,258.5 342,258.5 342,287.3 400.6,287.3 400.6,2 342,2 	'/%3E		%3Crect x='87.7' y='258.6' width='225.1' height='28.8'/%3E		%3Cg%3E			%3Cpath d='M497.4,142c22.9,0,40.6-6.6,53.1-19.8c1.6,2,3.3,3.9,5.3,5.7c9.9,9,22.1,13.5,36.4,13.5c14.7,0,26.9-4.5,36.6-13.6				c9.8-9.1,14.7-21.3,14.7-36.7c0-15.6-4.9-27.9-14.8-36.9c-9.9-9-22-13.5-36.5-13.5c-14.4,0-26.5,4.5-36.4,13.5				c-7.3,6.6-11.9,15.1-13.9,25.4l0,0c-2.5,11.2-10.1,21.4-17.2,27.7c-7.1,6.3-15.3,9.4-24.7,9.4c-11.5,0-21-4.2-28.4-12.5				S460.5,85,460.5,71.6c0-12.8,3.5-23.9,10.5-33.1s17.4-13.8,31.1-13.8c13.6,0,23.9,5.9,30.9,17.7c1.5,2.6,2.9,5.4,4.1,8.5				l23.5-17.1l0.2-31.5h-23.7V13c-11.3-8.7-25.3-13-42-13c-13.4,0-25.8,2.8-37,8.3c-11.3,5.5-20.3,13.7-27,24.7				c-6.7,10.9-10,23.7-10,38.2c0,20.4,6.4,37.4,19.2,50.7C453.2,135.3,472.2,142,497.4,142z M592.1,64.3c6,0,10.7,2.3,14.2,6.9				s5.2,11,5.2,19.2c0,9.3-1.8,16.2-5.4,20.5c-3.6,4.4-8.3,6.6-14.1,6.6c-6.5,0-11.3-2.4-14.5-7.3s-4.8-11-4.8-18.5				C572.9,73.4,579.3,64.3,592.1,64.3z'/%3E			%3Cpath d='M906.1,121.5c-5.7,0-11.1-1.8-16.3-5.5c-5.1-3.6-7.9-9.8-8.4-18.6h72.7c0-10.2-1.6-19.4-4.7-27.7				c-3.2-8.3-8.8-15.2-16.9-20.7c-8.1-5.6-17.8-8.3-28.9-8.3c-15.4,0-28.1,5-38,14.9c-3.4,3.4-6.2,7-8.4,10.9				c-3.3-6.8-8.5-12.7-15.5-17.5c-8.1-5.6-17.8-8.3-28.9-8.3c-15.4,0-28.1,5-38,14.9s-14.9,22.3-14.9,37.1c0,14.6,4.8,26.3,14.5,35.2				c9.6,8.9,23.1,13.4,40.3,13.4c19.8,0,34.7-6.6,44.9-19.8c1.7,2.3,3.5,4.4,5.7,6.4c9.6,8.9,23.1,13.4,40.3,13.4				c21.6,0,37.4-7.8,47.6-23.5l-24.2-7.6C921.1,117.7,913.6,121.5,906.1,121.5z M901.9,61c6.1,0,10.9,1.9,14.5,5.7				c3.5,3.8,5.7,8.3,6.4,13.7H882C883.8,67.5,890.5,61,901.9,61z M811.1,61c6.1,0,10.9,1.9,14.5,5.7c3.5,3.8,5.7,8.3,6.4,13.7h-40.8				C793,67.5,799.6,61,811.1,61z M846.6,112.9l-8.7-2.7c-7.6,7.5-15.1,11.3-22.6,11.3c-5.7,0-11.1-1.8-16.3-5.5				c-5.1-3.6-7.9-9.8-8.4-18.6h60.2c0.5,6.8,2.2,12.9,5,18.4C852.7,114.8,849,113.7,846.6,112.9z'/%3E			%3Cpath d='M652.1,118.3l-14.2,0.4v21.8h43.4h17.2h64v-22.1h-15.3V66.6h15.3V44.4h-15.3V33.8c0-8.9,2.7-13.3,8.1-13.3				c3.8,0,6.7,3.4,8.7,10.3l22.6-17.4C780.1,4.5,769.2,0,754,0c-12.6,0-22,3.4-28.4,10.2s-9.5,15.2-9.5,25.4v8.8H703v22.2h13.1v51.7				h-17.5h-15.3V66.6h15.3V44.4h-15.3V33.8c0-8.9,2.7-13.3,8.1-13.3c3.8,0,6.7,3.4,8.7,10.3l22.6-17.4C716.1,4.5,705.2,0,690,0				c-12.6,0-22,3.4-28.4,10.2s-9.5,15.2-9.5,25.4v8.8H639v22.2h13.1V118.3z'/%3E		%3C/g%3E	%3C/g%3E	%3C/svg%3E");
+  background-image: url("data:image/svg+xml;charset=utf8,%3C?xml version='1.0' encoding='utf-8'?%3E	 %3Csvg version='1.2' baseProfile='tiny' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'		 x='0px' y='0px' viewBox='0 0 954.1 288.7' xml:space='preserve'%3E	%3Cg fill='%23848e91'%3E		%3Cpath fill='hello world' d='M932.9,217.2c0-18.7-11.6-26.9-25.2-26.9c-10.2,0-19.9,3.8-32.7,13.1V192l-65,0.5c-5.3-1.9-11-2.8-16.8-2.8			c-5.1,0-10.2,0.8-15.1,2.4h-73.5v15.3h16L693.3,229h-8.4v-78.6h-36.3v16.5h17.3v103.5h-14.1v-52c0-15.3-9.5-29.1-37.6-29.1			c-0.8,0-1.6,0-2.4,0l0,0l-32,1c-12,0-24.2,7-30.2,22.9H549V192h-34.2l0,0h-37.1v15.3h16L466.2,229h-8.4v-78.6h-36.3v16.5h17.3			v103.4h-17.5v16.5h50.8v-16.5h-14.2l0.1-23h8.3l39.9,39.5h24.4l0,0h62.5c3.4,1.1,7.1,1.7,11,1.7c10.6,0,18.9-3.6,30.9-13.3v11.6h33			l0,0h31v-16.3l-14.2-0.1l0.1-23.1h8.3l39.8,39.5l50.2,0.5c4.1,0.9,8.5,1.3,13.1,1.3c20.2,0,37.3-8.7,47.5-24.4l-16.4-7.1			c-7,9.9-18.4,15.3-30.6,15.3c-17.6,0-29.6-10.5-32.5-28.7h79.5c0-14.5-4.4-26.4-11.4-35.4H856v61.9h-16.4v16.5h52v-16.5h-16.4			v-50.8c9.7-7.6,19.9-12.1,27.6-12.1c7.7,0,11.2,5.2,11.2,17.3v62.1h35.5v-16.5h-16.4v-53H932.9z M534,270.2l-18.9,0.1v0.1h-1.2			L480,236.8l35.9-29.5h14.8l0,0h3.3V270.2z M632.5,262.8c-7.7,7-17.3,11.2-25.8,11.2c-10.2,0-17.3-6.4-17.3-15.7			c0-9.4,7.7-16.3,18.3-16.3c8.1,0,16.6,3.2,24.8,9.4V262.8z M632.5,235.7c-7.7-5-17.7-8-26.2-8c-19.7,0-34.9,13.5-34.9,30.7			c0,4.3,0.9,8.4,2.6,12.1l-0.2-0.1h-20.7v-27.2c0-18.3,4.8-29.9,19.6-33.1l18,6.2c4.3-7.4,11.4-11.2,20.5-11.2			c11.4,0,21.3,4.8,21.3,18.3L632.5,235.7L632.5,235.7z M707.1,236.8l35.9-29.5h12.1c-7,8.2-11.5,19.1-11.5,31.9			c0,12.2,3.9,22.9,10.7,31.2H741L707.1,236.8z M764.9,230.2c2.8-15.7,14-25.8,28.8-25.8s28,10.9,31,25.8H764.9z'/%3E		%3Cpath d='M135.9,229.7c26.3,0,46.1-9.9,58.9-27.1v27h58.1v-28.8h-29.1l-0.3-45.3l14.7-0.1l74.3,74.1l29.5-0.1v-28.8h-14l-61-59.7			l52.6-53H342V59.1h-88.7v28.8h24.1l-39.2,38.9l-14.4-0.1l0.3-67.5L194.8,59v27.6c-15.1-19.6-37.7-27.5-56.7-27.5			c-20.4,0-36.9,2.9-50.7,13.4v-13H58.7v59.2h28.9c8.2-21.3,22.4-31.9,42.6-31.9c16.7,0,29.3,5.6,37.9,16.8			c8.5,11.2,12.8,24.6,12.8,40.3c0,16.4-4.5,29.6-13.6,39.7c-9,10.1-20.6,15.2-34.6,15.2c-20.2,0-37.1-7.2-45.3-28.4H58.5v59.2h28.9			v-13.1c13.4,10.2,28.9,12.9,48.5,13.1V229.7z'/%3E		%3Crect fill='hello world' x='87.7' y='2' width='225.1' height='28.8'/%3E		%3Cpolygon points='29.3,30.8 58.5,30.8 58.5,2 0,2 0,287.3 58.5,287.3 58.5,258.5 29.3,258.5 	'/%3E		%3Cpolygon points='342,30.8 371.3,30.8 371.3,258.5 342,258.5 342,287.3 400.6,287.3 400.6,2 342,2 	'/%3E		%3Crect x='87.7' y='258.6' width='225.1' height='28.8'/%3E		%3Cg%3E			%3Cpath d='M497.4,142c22.9,0,40.6-6.6,53.1-19.8c1.6,2,3.3,3.9,5.3,5.7c9.9,9,22.1,13.5,36.4,13.5c14.7,0,26.9-4.5,36.6-13.6				c9.8-9.1,14.7-21.3,14.7-36.7c0-15.6-4.9-27.9-14.8-36.9c-9.9-9-22-13.5-36.5-13.5c-14.4,0-26.5,4.5-36.4,13.5				c-7.3,6.6-11.9,15.1-13.9,25.4l0,0c-2.5,11.2-10.1,21.4-17.2,27.7c-7.1,6.3-15.3,9.4-24.7,9.4c-11.5,0-21-4.2-28.4-12.5				S460.5,85,460.5,71.6c0-12.8,3.5-23.9,10.5-33.1s17.4-13.8,31.1-13.8c13.6,0,23.9,5.9,30.9,17.7c1.5,2.6,2.9,5.4,4.1,8.5				l23.5-17.1l0.2-31.5h-23.7V13c-11.3-8.7-25.3-13-42-13c-13.4,0-25.8,2.8-37,8.3c-11.3,5.5-20.3,13.7-27,24.7				c-6.7,10.9-10,23.7-10,38.2c0,20.4,6.4,37.4,19.2,50.7C453.2,135.3,472.2,142,497.4,142z M592.1,64.3c6,0,10.7,2.3,14.2,6.9				s5.2,11,5.2,19.2c0,9.3-1.8,16.2-5.4,20.5c-3.6,4.4-8.3,6.6-14.1,6.6c-6.5,0-11.3-2.4-14.5-7.3s-4.8-11-4.8-18.5				C572.9,73.4,579.3,64.3,592.1,64.3z'/%3E			%3Cpath d='M906.1,121.5c-5.7,0-11.1-1.8-16.3-5.5c-5.1-3.6-7.9-9.8-8.4-18.6h72.7c0-10.2-1.6-19.4-4.7-27.7				c-3.2-8.3-8.8-15.2-16.9-20.7c-8.1-5.6-17.8-8.3-28.9-8.3c-15.4,0-28.1,5-38,14.9c-3.4,3.4-6.2,7-8.4,10.9				c-3.3-6.8-8.5-12.7-15.5-17.5c-8.1-5.6-17.8-8.3-28.9-8.3c-15.4,0-28.1,5-38,14.9s-14.9,22.3-14.9,37.1c0,14.6,4.8,26.3,14.5,35.2				c9.6,8.9,23.1,13.4,40.3,13.4c19.8,0,34.7-6.6,44.9-19.8c1.7,2.3,3.5,4.4,5.7,6.4c9.6,8.9,23.1,13.4,40.3,13.4				c21.6,0,37.4-7.8,47.6-23.5l-24.2-7.6C921.1,117.7,913.6,121.5,906.1,121.5z M901.9,61c6.1,0,10.9,1.9,14.5,5.7				c3.5,3.8,5.7,8.3,6.4,13.7H882C883.8,67.5,890.5,61,901.9,61z M811.1,61c6.1,0,10.9,1.9,14.5,5.7c3.5,3.8,5.7,8.3,6.4,13.7h-40.8				C793,67.5,799.6,61,811.1,61z M846.6,112.9l-8.7-2.7c-7.6,7.5-15.1,11.3-22.6,11.3c-5.7,0-11.1-1.8-16.3-5.5				c-5.1-3.6-7.9-9.8-8.4-18.6h60.2c0.5,6.8,2.2,12.9,5,18.4C852.7,114.8,849,113.7,846.6,112.9z'/%3E			%3Cpath d='M652.1,118.3l-14.2,0.4v21.8h43.4h17.2h64v-22.1h-15.3V66.6h15.3V44.4h-15.3V33.8c0-8.9,2.7-13.3,8.1-13.3				c3.8,0,6.7,3.4,8.7,10.3l22.6-17.4C780.1,4.5,769.2,0,754,0c-12.6,0-22,3.4-28.4,10.2s-9.5,15.2-9.5,25.4v8.8H703v22.2h13.1v51.7				h-17.5h-15.3V66.6h15.3V44.4h-15.3V33.8c0-8.9,2.7-13.3,8.1-13.3c3.8,0,6.7,3.4,8.7,10.3l22.6-17.4C716.1,4.5,705.2,0,690,0				c-12.6,0-22,3.4-28.4,10.2s-9.5,15.2-9.5,25.4v8.8H639v22.2h13.1V118.3z'/%3E		%3C/g%3E	%3C/g%3E	%3C/svg%3E");
   display: inline-block;
-  background-color: #f2bc2b;
+  background-color: hello world;
 }
 body:after {
   content: "";
@@ -8168,7 +8168,7 @@ body:after {
   *
   * This is the ```link``` registered color
   *
-* @color 		#f2bc2b
+* @color 		hello world
 */
 /**
   * @name 		primary
@@ -8177,7 +8177,7 @@ body:after {
   *
   * This is the ```primary``` registered color
   *
-* @color 		#f2bc2b
+* @color 		hello world
 */
 /**
   * @name 		secondary
@@ -8225,7 +8225,7 @@ body:after {
 * @color 		#2199e8
 */
 .hello {
-  content: #f2bc2b;
+  content: hello world;
 }
 
-/*# sourceMappingURL=index.css.map */
+/*# sourceMappingURL=_coco.css.map */

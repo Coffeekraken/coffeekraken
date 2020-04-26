@@ -1,6 +1,6 @@
 @import 'subfolder/new';
 
-// @include Sugar.classes();
+@include Sugar.classes();
 
 body {
   @include Sugar.coffeekraken-logo();

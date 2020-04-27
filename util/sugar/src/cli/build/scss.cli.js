@@ -51,21 +51,9 @@ module.exports = async (stringArgs = '') => {
 
   const panel = new __SPanel('sugar.cli.build.scss', {
     beforeLog: () => {
-      return (
-        '<blue>' +
-        (new Date().getHours() +
-          ':' +
-          new Date().getMinutes() +
-          ':' +
-          new Date().getSeconds() +
-          '</blue> > ')
-      );
+      return '<blue><time /></blue> ';
     }
   });
-
-  setTimeout(() => {
-    panel.log('Hello world');
-  }, 1000);
 
   __buildScss(args).on('log', (message) => {
     // console.log(message);

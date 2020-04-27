@@ -17,7 +17,6 @@ __chalk.level = 3;
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function parseHtml(message) {
-
   let isArray = false;
   if (Array.isArray(message)) {
     isArray = true;
@@ -25,9 +24,8 @@ module.exports = function parseHtml(message) {
     message = [message];
   }
 
-  message = message.map(m => {
+  message = message.map((m) => {
     return __replaceTags(m, {
-
       black: (tag, content) => __chalk.black(content),
       red: (tag, content) => __chalk.red(content),
       green: (tag, content) => __chalk.green(content),
@@ -52,12 +50,44 @@ module.exports = function parseHtml(message) {
       underline: (tag, content) => __chalk.underline(content),
       strike: (tag, content) => __chalk.strike(content),
 
+      date: (tag, content) =>
+        new Date().getDate().toString().padStart('0', 2) +
+        '-' +
+        (new Date().getMonth() + 1).toString().padStart('0', 2) +
+        '-' +
+        new Date().getFullYear().toString().padStart('0', 2),
+      time: (tag, content) =>
+        new Date().getHours().toString().padStart('0', 2) +
+        ':' +
+        new Date().getMinutes().toString().padStart('0', 2) +
+        ':' +
+        new Date().getMinutes().toString().padStart('0', 2),
+      day: (tag, content) => new Date().getDate().toString().padStart('0', 2),
+      days: (tag, content) => new Date().getDate().toString().padStart('0', 2),
+      month: (tag, content) =>
+        new Date().getMonth().toString().padStart('0', 2),
+      months: (tag, content) =>
+        new Date().getMonth().toString().padStart('0', 2),
+      year: (tag, content) =>
+        new Date().getFullYear().toString().padStart('0', 2),
+      years: (tag, content) =>
+        new Date().getFullYear().toString().padStart('0', 2),
+      hour: (tag, content) => new Date().getHours().toString().padStart('0', 2),
+      hours: (tag, content) =>
+        new Date().getHours().toString().padStart('0', 2),
+      minute: (tag, content) =>
+        new Date().getMinutes().toString().padStart('0', 2),
+      minutes: (tag, content) =>
+        new Date().getMinutes().toString().padStart('0', 2),
+      second: (tag, content) =>
+        new Date().getSeconds().toString().padStart('0', 2),
+      seconds: (tag, content) =>
+        new Date().getSeconds().toString().padStart('0', 2),
+
       br: (tag, content) => '\n'
-
     });
-
   });
 
   if (isArray) return message;
   return message[0];
-}
+};

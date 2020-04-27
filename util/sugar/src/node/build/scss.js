@@ -167,6 +167,11 @@ module.exports = (settings = {}) => {
 
         trigger(
           'log',
+          `<underline><magenta>Starting build process:</magenta></underline>\n`
+        );
+
+        trigger(
+          'log',
           `Start building the file <yellow>${smallPath}</yellow>...`
         );
 

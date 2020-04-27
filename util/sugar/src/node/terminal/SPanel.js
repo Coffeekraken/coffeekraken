@@ -1,6 +1,8 @@
 const __deepMerge = require('../object/deepMerge');
 const __blessed = require('blessed');
 const __parseHtml = require('./parseHtml');
+const __splitEvery = require('../string/splitEvery');
+const __countLine = require('../string/countLine');
 
 /**
  * @name                    SPanel
@@ -63,6 +65,7 @@ module.exports = class SPanel extends __blessed.box {
         beforeLogLine: null,
         afterLog: null,
         afterLogLine: null,
+        padBeforeLog: true,
         screen: true,
         blessed: {
           padding: {
@@ -153,8 +156,28 @@ module.exports = class SPanel extends __blessed.box {
       afterLog = '';
     }
 
-    // append the content to the panel
-    this.pushLine(__parseHtml(beforeLog + message + afterLog));
+    if (this._settings.padBeforeLog) {
+      let formatedBeforeLog = __parseHtml(beforeLog);
+      let formatedMessage = message + afterLog;
+      formatedMessage = __splitEvery(
+        __parseHtml(formatedMessage),
+        this.width -
+          this._settings.blessed.padding.left -
+          this._settings.blessed.padding.right -
+          __countLine(formatedBeforeLog)
+      ).map((l, i) => {
+        if (i === 0) {
+          return __parseHtml(beforeLog) + l;
+        } else {
+          return ' '.repeat(__countLine(__parseHtml(beforeLog))) + l;
+        }
+      });
+
+      // append the content to the panel
+      this.pushLine(formatedMessage.join('\n'));
+    } else {
+      this.pushLine(__parseHtml(beforeLog + message + afterLog));
+    }
 
     // check if we have something to put after log line
     if (this._settings.afterLogLine) {

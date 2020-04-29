@@ -1,4 +1,5 @@
 const __replaceTags = require('../html/replaceTags');
+const __sugarConfig = require('../config/sugar');
 const __chalk = require('chalk');
 __chalk.level = 3;
 

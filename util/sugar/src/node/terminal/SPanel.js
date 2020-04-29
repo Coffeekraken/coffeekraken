@@ -66,7 +66,8 @@ module.exports = class SPanel extends __blessed.box {
         afterLog: null,
         afterLogLine: null,
         padBeforeLog: true,
-        screen: true,
+        screen: false,
+        scrollable: true,
         blessed: {
           padding: {
             top: 2,
@@ -78,12 +79,15 @@ module.exports = class SPanel extends __blessed.box {
       },
       settings
     );
+
     // create the screen if setted in the settings
     let screenInstance;
-    if (_settings.screen) {
+    if (_settings.screen === true) {
       screenInstance = __blessed.screen({
         smartCSR: true
       });
+    } else if (_settings.screen instanceof __blessed.screen) {
+      screenInstance = _settings.screen;
     }
     // extend from blessed.box
     super(_settings.blessed);
@@ -93,7 +97,7 @@ module.exports = class SPanel extends __blessed.box {
     // append this box to the screen
     if (screenInstance) {
       screenInstance.append(this);
-      this._screen = screenInstance;
+      this.screen = screenInstance;
     }
 
     // save the name
@@ -105,7 +109,7 @@ module.exports = class SPanel extends __blessed.box {
     this._name = name;
 
     // render the screen
-    screenInstance.render();
+    if (this.screen) this.screen.render();
   }
 
   /**
@@ -192,6 +196,6 @@ module.exports = class SPanel extends __blessed.box {
       }
     }
 
-    if (this._screen) this._screen.render();
+    if (this.screen) this.screen.render();
   }
 };

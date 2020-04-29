@@ -21,7 +21,7 @@ import __parseString from '../string/parse';
  * - errors (null) {Object}: An object with all the params in error with the description of the error for each
  * - params (null) {Object}: An object containing every params grabed from the url with their values for each
  * - match (true) {Object}: A boolean that tells you if the parsed url match the passed schema or not
- * 
+ *
  * @example       js
  * import parseSchema from '@coffeekraken/sugar/js/url/parseSchema';
  * parseSchema('https://github.com/myApp/master/3', '{project:string}/{?branch:string}/{?idx:number}');
@@ -53,9 +53,14 @@ import __parseString from '../string/parse';
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 export default function parseSchema(url, schema) {
-
-  // transform the url into an Url instance
-  url = new URL(url);
+  // get the pathname of the url
+  let pathname;
+  try {
+    pathname = new URL(url).pathname;
+  } catch (e) {
+    pathname = url;
+  }
+  if (pathname.slice(0, 1) === '/') pathname = pathname.slice(1);
 
   // init the params object
   const params = {};
@@ -66,11 +71,9 @@ export default function parseSchema(url, schema) {
   let schemaParts = schema.split('/');
 
   // analyze all the schema parts
-  schemaParts = schemaParts.map(part => {
-
+  schemaParts = schemaParts.map((part) => {
     // check if is a param
     if (part.slice(0, 1) === '{' && part.slice(-1) === '}') {
-
       const isOptional = part.slice(0, 2) === '{?' || part.slice(-2) === '?}';
       const isType = part.indexOf(':') !== -1;
 
@@ -93,15 +96,13 @@ export default function parseSchema(url, schema) {
         raw: part,
         optional: isOptional
       };
-
     }
 
     // this is not a parameter so return as is
     return part;
-
   });
 
-  schemaParts.forEach(part => {
+  schemaParts.forEach((part) => {
     if (!part.name) return;
     params[part.name] = {
       ...part
@@ -110,10 +111,9 @@ export default function parseSchema(url, schema) {
   });
 
   // loop on the schema to get the params values
-  const pathname = url.pathname.slice(1);
+  // const pathname = url.pathname.slice(1);
   const splitedPathname = pathname.split('/');
   for (let i = 0; i < schemaParts.length; i++) {
-
     // get the schema for this part
     const schema = schemaParts[i];
 
@@ -147,19 +147,21 @@ export default function parseSchema(url, schema) {
           type: 'type',
           requested: type,
           passed: typeof __parseString(part),
-          description: `This param "${schema.name}" has to be a "${type}" but he's a "${typeof __parseString(part)}"...`
+          description: `This param "${
+            schema.name
+          }" has to be a "${type}" but he's a "${typeof __parseString(
+            part
+          )}"...`
         };
         errors[schema.name] = errorObj;
         params[schema.name].error = errorObj;
         params[schema.name].value = __parseString(part);
         continue;
-      };
-
+      }
     }
 
     // this part match the schema so we add it to the params
     params[schema.name].value = __parseString(part);
-
   }
   // return the schema result
   return {
@@ -167,5 +169,4 @@ export default function parseSchema(url, schema) {
     params: !Object.keys(params).length ? null : params,
     match
   };
-
 }

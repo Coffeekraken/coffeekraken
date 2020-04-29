@@ -30,7 +30,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * - errors (null) {Object}: An object with all the params in error with the description of the error for each
  * - params (null) {Object}: An object containing every params grabed from the url with their values for each
  * - match (true) {Object}: A boolean that tells you if the parsed url match the passed schema or not
- * 
+ *
  * @example       js
  * import parseSchema from '@coffeekraken/sugar/js/url/parseSchema';
  * parseSchema('https://github.com/myApp/master/3', '{project:string}/{?branch:string}/{?idx:number}');
@@ -62,8 +62,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 function parseSchema(url, schema) {
-  // transform the url into an Url instance
-  url = new URL(url); // init the params object
+  // get the pathname of the url
+  let pathname;
+
+  try {
+    pathname = new URL(url).pathname;
+  } catch (e) {
+    pathname = url;
+  }
+
+  if (pathname.slice(0, 1) === '/') pathname = pathname.slice(1); // init the params object
 
   const params = {};
   const errors = {};
@@ -107,8 +115,8 @@ function parseSchema(url, schema) {
     };
     delete params[part.name].name;
   }); // loop on the schema to get the params values
+  // const pathname = url.pathname.slice(1);
 
-  const pathname = url.pathname.slice(1);
   const splitedPathname = pathname.split('/');
 
   for (let i = 0; i < schemaParts.length; i++) {
@@ -153,8 +161,6 @@ function parseSchema(url, schema) {
         params[schema.name].value = (0, _parse.default)(part);
         continue;
       }
-
-      ;
     } // this part match the schema so we add it to the params
 
 

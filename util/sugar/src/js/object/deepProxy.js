@@ -4,11 +4,11 @@ import __proxy from '../array/proxy';
  * @name                            deepProxy
  * @namespace                       sugar.js.object
  * @type                            Function
- * 
+ *
  * This function allows you to add Proxy to an object in deep fashion.
  * Normally the Proxy process only the level on which it has been added. Here we add Proxy to all the
  * object levels and to new properties as well.
- * 
+ *
  * @param          {Object}                 object            The object on which to add the proxy
  * @param           {Function}                handlerFn       The handler function that will be called with the update object. It can be a property deleted, an array item added, a property updated, etc...:
  * - Object.set: An object property added or updated
@@ -16,19 +16,17 @@ import __proxy from '../array/proxy';
  * - Array.push: An item has been added inside an array
  * - Array.{methodName}: Every array actions
  * @return          {Object}                                  The proxied object
- * 
+ *
  * @example           js
  * import deepProxy from '@coffeekraken/sugar/js/object/deepProxy';
  * const a = deepProxy({
  *    hello: 'world'
- * }, {
- *    set: (obj) => {
- *      // do something with the update object
- *    }
+ * }, (actionObj) => {
+ *    // do something with the actionObj...
  * });
  * a.hello = 'coco';
- * 
- * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com) 
+ *
+ * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function deepProxy(object, handlerFn) {
   const preproxy = new WeakMap();
@@ -36,7 +34,6 @@ export default function deepProxy(object, handlerFn) {
   function makeHandler(path) {
     return {
       set(target, key, value) {
-
         if (typeof value === 'object') {
           value = proxify(value, [...path, key]);
         }
@@ -47,14 +44,28 @@ export default function deepProxy(object, handlerFn) {
 
         handlerFn({
           object,
+          target,
+          key,
           path: [...path, key].join('.'),
           action: 'Object.set',
           oldValue,
           value
         });
 
-
         return true;
+      },
+
+      get(target, key) {
+        if (Reflect.has(target, key)) {
+          return handlerFn({
+            object,
+            target,
+            key,
+            path: [...path, key].join('.'),
+            action: 'Object.get'
+          });
+        }
+        return undefined;
       },
 
       deleteProperty(target, key) {
@@ -65,17 +76,18 @@ export default function deepProxy(object, handlerFn) {
           if (deleted) {
             handlerFn({
               object,
+              target,
+              key,
               path: [...path, key].join('.'),
               action: 'Object.delete',
               oldValue
             });
-
           }
           return deleted;
         }
         return false;
       }
-    }
+    };
   }
 
   // function unproxy(obj = proxy, key = null) {
@@ -100,15 +112,16 @@ export default function deepProxy(object, handlerFn) {
   function proxify(obj, path) {
     for (let key of Object.keys(obj)) {
       if (Array.isArray(obj[key])) {
-
         obj[key] = __proxy(obj[key]);
-        obj[key].watch(Object.getOwnPropertyNames(Array.prototype), (watchObj) => {
-          handlerFn({
-            path: [...path, key].join('.'),
-            ...watchObj,
-          });
-        });
-
+        obj[key].watch(
+          Object.getOwnPropertyNames(Array.prototype),
+          (watchObj) => {
+            handlerFn({
+              path: [...path, key].join('.'),
+              ...watchObj
+            });
+          }
+        );
       } else if (typeof obj[key] === 'object') {
         obj[key] = proxify(obj[key], [...path, key]);
       }
@@ -118,5 +131,4 @@ export default function deepProxy(object, handlerFn) {
     return p;
   }
   return proxify(object, []);
-
 }

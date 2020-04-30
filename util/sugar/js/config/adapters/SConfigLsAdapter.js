@@ -25,7 +25,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * This Local Storage adapter for the SConfig class let you define a name for your config and then you can just
  * let the SConfig class do the work for you...
- * 
+ *
  * @param                   {Object}                    [settings={}]         The adapter settings that let you work with the good data storage solution...
  * - name (null) {String}: This specify the config name that you want to use.
  * - defaultConfig ({}) {Object}: This specify the "default" config that you want.
@@ -40,14 +40,14 @@ module.exports = class SConfigLsAdapter extends _SConfigAdapter.default {
     super(settings);
   }
 
-  async load() {
+  load() {
     // try to get the config from the localstorage
     const config = (0, _parse.default)(localStorage.getItem(this._settings.name)) || {}; // mix the configs and save them in the instance
 
     return (0, _deepMerge.default)(config.default || {}, config.app || {}, config.user || {});
   }
 
-  async save(newConfig = {}) {
+  save(newConfig = {}) {
     const baseConfig = (0, _deepMerge.default)(this._settings.defaultConfig, this._settings.appConfig);
     localStorage.setItem(this._settings.name, (0, _toString.default)({
       default: this._settings.defaultConfig,

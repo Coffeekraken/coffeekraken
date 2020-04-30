@@ -4,6 +4,8 @@ const __parseHtml = require('./parseHtml');
 const __splitEvery = require('../string/splitEvery');
 const __countLine = require('../string/countLine');
 const __parseSchema = require('../url/parseSchema');
+const __sugarConfig = require('../config/sugar');
+const __hotkey = require('../keyboard/hotkey');
 
 /**
  * @name                    SApp
@@ -60,25 +62,33 @@ module.exports = class SApp extends __blessed.screen {
     // save the settings
     const _settings = __deepMerge(
       {
-        screen: {
-          smartCSR: true
+        blessed: {
+          screen: {
+            smartCSR: true
+          }
         }
       },
       settings
     );
     // extend from blessed.box
-    super(_settings.screen);
+    super(_settings.blessed.screen);
     // save settings
     this._settings = _settings;
 
     // save the name
     this._name = name;
 
-    // get the current route object
-    const routeObj = this._getRouteObj(this._settings.homeRoute);
+    __hotkey('left').on('key', (e) => {
+      this.previousMenu();
+    });
+    __hotkey('right').on('key', (e) => {
+      this.nextMenu();
+    });
 
     // render the layout with the current url passed
-    this._renderLayout(routeObj);
+    setTimeout(() => {
+      this.goTo(this._settings.homeRoute);
+    });
   }
 
   /**
@@ -110,6 +120,86 @@ module.exports = class SApp extends __blessed.screen {
     }
     // by default, return false
     return false;
+  }
+
+  /**
+   * @name                    nextMenu
+   * @type                    Function
+   *
+   * This method allows you to pass to the next menu item
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  nextMenu() {
+    // get the actual menu item index
+    const menuUrls = Object.keys(this._settings.menu);
+    const currentMenuItemIndex = menuUrls.indexOf(this._currentUrl);
+    if (
+      currentMenuItemIndex === -1 ||
+      currentMenuItemIndex === menuUrls.length - 1
+    )
+      return;
+    const nextMenuItemUrl = menuUrls[currentMenuItemIndex + 1];
+    // go to the next menu item
+    this.goTo(nextMenuItemUrl);
+  }
+
+  /**
+   * @name                    previousMenu
+   * @type                    Function
+   *
+   * This method allows you to pass to the next menu item
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  previousMenu() {
+    // get the actual menu item index
+    const menuUrls = Object.keys(this._settings.menu);
+    const currentMenuItemIndex = menuUrls.indexOf(this._currentUrl);
+    if (currentMenuItemIndex === -1 || currentMenuItemIndex === 0) return;
+    const previousMenuItemUrl = menuUrls[currentMenuItemIndex - 1];
+    // go to the next menu item
+    this.goTo(previousMenuItemUrl);
+  }
+
+  /**
+   * @name                    goTo
+   * @type                    Function
+   *
+   * This method allows you to change the "page" by passing a simple url like 'build/scss' depending on the registered routes in your app.
+   *
+   * @param         {String}          url           The url to go to
+   * @return        {Boolean}                       true if ok, false if something goes wrong like the page does not exist, etc...
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  goTo(url) {
+    // get the current route object
+    const routeObj = this._getRouteObj(url);
+
+    // if something goes wrong
+    if (!routeObj) return false;
+
+    // save the current url
+    this._currentUrl = url;
+
+    // render the layout with the current url passed
+    this._renderLayout(routeObj);
+  }
+
+  /**
+   * @name                    isActive
+   * @type                    Function
+   *
+   * This method allows you to check if the passed url is the active one
+   *
+   * @param       {String}        url            The url to check
+   * @return      {Boolean}                       true if is the active one, false if not
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  isActive(url) {
+    return this._currentUrl === url;
   }
 
   /**

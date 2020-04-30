@@ -1,5 +1,4 @@
 module.exports = (__SConfig, __SConfigLsAdapter) => {
-
   const config = new __SConfig('myCoolConfig', {
     adapters: [
       new __SConfigLsAdapter({
@@ -16,19 +15,14 @@ module.exports = (__SConfig, __SConfigLsAdapter) => {
   });
 
   describe('sugar.js.config.adapters.SConfigLsAdapter', () => {
-
-    it('Should load, set, save and get correctly the config from the localStorage', async done => {
-
+    it('Should load, set, save and get correctly the config from the localStorage', async (done) => {
       config.set('something.cool', 'Hello world');
 
-      await config.load();
+      config.load();
 
       expect(config.get('something')).toEqual({ cool: 'Hello world' });
 
-
       done();
     });
-
   });
-
-}
+};

@@ -70,10 +70,10 @@ module.exports = class SPanel extends __blessed.box {
         scrollable: true,
         blessed: {
           padding: {
-            top: 2,
-            bottom: 2,
-            left: 4,
-            right: 4
+            top: 1,
+            bottom: 1,
+            left: 2,
+            right: 2
           }
         }
       },

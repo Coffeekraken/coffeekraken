@@ -1,8 +1,11 @@
 import __deepMerge from '../object/deepMerge';
 import __get from '../object/get';
 import __set from '../object/set';
+import __resolveTokens from '../object/resolveTokens';
 
 import __SConfigAdapter from './adapters/SConfigAdapter';
+
+// TODO: Add a "catch" method that allows to get the saving errors, etc...
 
 /**
  * @name                                            config
@@ -82,83 +85,73 @@ export default class SConfig {
    * - autoLoad (true) {Boolean}: Specify if you want the config to be loaded automatically at instanciation
    * - autoSave (true) {Boolean}: Specify if you want the setting to be saved through the adapters directly on "set" action
    * - throwErrorOnUndefinedConfig (true) {Boolean}: Specify if you want the class to throw some errors when get undefined configs
-   * @return              {Promise}                    A promise that will be resolved with the SConfig instance once the config has been fully loaded (if the setting.autoLoad is set to true). Otherwise the promise will be resolved directly
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(name, settings = {}) {
-    this._masterPromise = new Promise((resolve, reject) => {
-      // store the name
-      if (!/^[a-zA-Z0-9_-]+$/.test(name)) {
+    // store the name
+    if (!/^[a-zA-Z0-9_-]+$/.test(name)) {
+      throw new Error(
+        `The name of an SConfig instance can contain only letters like [a-zA-Z0-9_-]...`
+      );
+    }
+
+    // save the settings name
+    this._name = name;
+
+    // save the settings
+    this._settings = {
+      adapters: [],
+      defaultAdapter: null,
+      allowSave: true,
+      allowSet: true,
+      allowReset: true,
+      allowNew: false,
+      autoLoad: true,
+      autoSave: true,
+      throwErrorOnUndefinedConfig: true,
+      ...settings
+    };
+
+    // init all the adapters if needed
+    this._settings.adapters.forEach((adapter) => {
+      if (!adapter instanceof __SConfigAdapter) {
         throw new Error(
-          `The name of an SConfig instance can contain only letters like [a-zA-Z0-9_-]...`
+          `You have specified the adapter "${
+            adapter.name || 'unknown'
+          }" as adapter for your "${
+            this._name
+          }" SConfig instance but this adapter does not extends the SConfigAdapter class...`
         );
       }
 
-      // save the settings name
-      this._name = name;
+      // make sure we have a name for this adapter
+      if (!adapter.name) {
+        adapter.name = this._name + ':' + adapter.constructor.name;
+      } else {
+        adapter.name = this._name + ':' + adapter.name;
+      }
 
-      // save the settings
-      this._settings = {
-        adapters: [],
-        defaultAdapter: null,
-        allowSave: true,
-        allowSet: true,
-        allowReset: true,
-        allowNew: false,
-        autoLoad: true,
-        autoSave: true,
-        throwErrorOnUndefinedConfig: true,
-        ...settings
+      this._adapters[adapter.name] = {
+        instance: adapter,
+        config: {}
       };
-
-      // init all the adapters if needed
-      this._settings.adapters.forEach((adapter) => {
-        if (!adapter instanceof __SConfigAdapter) {
-          throw new Error(
-            `You have specified the adapter "${
-              adapter.name || 'unknown'
-            }" as adapter for your "${
-              this._name
-            }" SConfig instance but this adapter does not extends the SConfigAdapter class...`
-          );
-        }
-
-        // make sure we have a name for this adapter
-        if (!adapter.name) {
-          adapter.name = this._name + ':' + adapter.constructor.name;
-        } else {
-          adapter.name = this._name + ':' + adapter.name;
-        }
-
-        this._adapters[adapter.name] = {
-          instance: adapter,
-          config: {}
-        };
-      });
-
-      // set the default get adapter if it has not been specified in the settings
-      if (!this._settings.defaultAdapter) {
-        this._settings.defaultAdapter = Object.keys(this._adapters)[0];
-      }
-
-      // load the config from the default adapter if the setting "autoLoad" is true
-      if (this._settings.autoLoad) {
-        (async () => {
-          await this.load();
-          resolve(this);
-        })();
-      }
     });
 
-    if (!this._settings.autoLoad) return this;
-    return this._masterPromise;
+    // set the default get adapter if it has not been specified in the settings
+    if (!this._settings.defaultAdapter) {
+      this._settings.defaultAdapter = Object.keys(this._adapters)[0];
+    }
+
+    // load the config from the default adapter if the setting "autoLoad" is true
+    if (this._settings.autoLoad) {
+      this.load();
+    }
   }
 
   /**
    * @name                                load
    * @type                                Function
-   * @async
    *
    * Load the config from the default adapter or from the passed adapter
    *
@@ -170,21 +163,32 @@ export default class SConfig {
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  async load(adapter = this._settings.defaultAdapter) {
+  load(adapter = this._settings.defaultAdapter) {
     if (!this._adapters[adapter]) {
       throw new Error(
         `You try to load the config from the adapter "${adapter}" but this adapter does not exists...`
       );
     }
-    const config = await this._adapters[adapter].instance.load();
-    this._adapters[adapter].config = JSON.parse(JSON.stringify(config));
+
+    const config = this._adapters[adapter].instance.load();
+    if (config instanceof Promise) {
+      return new Promise((resolve) => {
+        config.then((c) => {
+          c = __resolveTokens(JSON.parse(JSON.stringify(c)));
+          this._adapters[adapter].config = c;
+          resolve(c);
+        });
+      });
+    }
+    this._adapters[adapter].config = __resolveTokens(
+      JSON.parse(JSON.stringify(config))
+    );
     return config;
   }
 
   /**
    * @name                          save
    * @type                          Function
-   * @async
    *
    * Save the config through all the registered adapters or just the one specify in params
    *
@@ -196,7 +200,7 @@ export default class SConfig {
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  async save(adapters = Object.keys(this._adapters)) {
+  save(adapters = Object.keys(this._adapters)) {
     if (!this._settings.allowSave) {
       throw new Error(
         `You try to save the config on the "${this._name}" SConfig instance but this instance does not allow to save configs... Set the "settings.allowSave" property to allow this action...`
@@ -212,9 +216,7 @@ export default class SConfig {
         );
       }
 
-      await this._adapters[adapter].instance.save(
-        this._adapters[adapter].config
-      );
+      this._adapters[adapter].instance.save(this._adapters[adapter].config);
     }
 
     // all saved correctly
@@ -258,7 +260,6 @@ export default class SConfig {
    * @name                                set
    * @namespace                           sugar.node.config.SConfig
    * @type                                Function
-   * @async
    *
    * Get a config depending on the dotted object path passed and either using the first registered adapter found, or the passed one
    *
@@ -272,7 +273,7 @@ export default class SConfig {
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  async set(path, value, adapters = Object.keys(this._adapters)) {
+  set(path, value, adapters = Object.keys(this._adapters)) {
     if (!this._settings.allowSet) {
       throw new Error(
         `You try to set a config value on the "${this._name}" SConfig instance but this instance does not allow to set values... Set the "settings.allowSet" property to allow this action...`

@@ -57,13 +57,15 @@ export default function deepProxy(object, handlerFn) {
 
       get(target, key) {
         if (Reflect.has(target, key)) {
-          return handlerFn({
+          const value = handlerFn({
             object,
             target,
             key,
             path: [...path, key].join('.'),
             action: 'Object.get'
           });
+          if (value === undefined) return target[key];
+          return value;
         }
         return undefined;
       },
@@ -110,6 +112,7 @@ export default function deepProxy(object, handlerFn) {
   // }
 
   function proxify(obj, path) {
+    if (obj === null) return obj;
     for (let key of Object.keys(obj)) {
       if (Array.isArray(obj[key])) {
         obj[key] = __proxy(obj[key]);

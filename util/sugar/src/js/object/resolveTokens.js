@@ -34,14 +34,20 @@ export default function resolveTokens(object) {
     const tokens = rawValue.match(reg);
     let finalValue = rawValue;
 
-    console.log(getObj);
+    if (!tokens) return rawValue;
 
     // console.log(tokens);
     tokens.forEach((token) => {
-      // finalValue = finalValue.replace(token, __get())
+      finalValue = finalValue.replace(
+        token,
+        __get(
+          object,
+          token.replace('{', '').replace('}', '').replace('this.', '')
+        )
+      );
     });
 
-    return rawValue;
+    return finalValue;
   });
   // return the proxied object
   return proxiedObject;

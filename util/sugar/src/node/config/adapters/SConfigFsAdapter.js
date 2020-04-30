@@ -60,7 +60,7 @@ module.exports = class SConfigFsAdapter extends __SConfigAdapter {
       );
   }
 
-  async load() {
+  load() {
     this._defaultConfig = {};
     this._appConfig = {};
     this._userConfig = {};
@@ -93,7 +93,7 @@ module.exports = class SConfigFsAdapter extends __SConfigAdapter {
     return __deepMerge(this._defaultConfig, this._appConfig, this._userConfig);
   }
 
-  async save(newConfig = {}) {
+  save(newConfig = {}) {
     if (!this.settings.userConfigPath) {
       throw new Error(
         `You try to save the config "${this.name}" but the "settings.userConfigPath" is not set...`

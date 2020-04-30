@@ -1,5 +1,6 @@
 const __replaceTags = require('../html/replaceTags');
 const __sugarConfig = require('../config/sugar');
+const __upperFirst = require('../string/upperFirst');
 const __chalk = require('chalk');
 __chalk.level = 3;
 
@@ -25,8 +26,10 @@ module.exports = function parseHtml(message) {
     message = [message];
   }
 
+  const colors = __sugarConfig('colors');
+
   message = message.map((m) => {
-    return __replaceTags(m, {
+    const tagsMap = {
       black: (tag, content) => __chalk.black(content),
       red: (tag, content) => __chalk.red(content),
       green: (tag, content) => __chalk.green(content),
@@ -86,7 +89,16 @@ module.exports = function parseHtml(message) {
         new Date().getSeconds().toString().padStart('0', 2),
 
       br: (tag, content) => '\n'
+    };
+
+    Object.keys(colors).forEach((c) => {
+      const cValue = colors[c];
+      tagsMap[c] = (tag, content) => __chalk.hex(colors[c])(content);
+      tagsMap[`bg${__upperFirst(c)}`] = (tag, content) =>
+        __chalk.bgHex(colors[c])(content);
     });
+
+    return __replaceTags(m, tagsMap);
   });
 
   if (isArray) return message;

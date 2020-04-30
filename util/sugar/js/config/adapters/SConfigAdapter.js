@@ -15,9 +15,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * @name                                SConfigAdapter
  * @namespace                           sugar.js.config.adapters
  * @type                                Class
- * 
+ *
  * Base class for SCache adapters
- * 
+ *
  * @example             js
  * class SConfigCoolAdapter extends SConfigAdapter {
  *    constructor(settings = {}) {
@@ -33,7 +33,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  *      return true;
  *    }
  * }
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 class SConfigAdapter {
@@ -41,22 +41,22 @@ class SConfigAdapter {
    * @name                              _settings
    * @type                              Object
    * @private
-   * 
+   *
    * Store the default settings of the SConfigAdapter instance
-   * 
+   *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
   /**
    * @name                              constructor
    * @type                              Function
-   * 
+   *
    * Construct the SConfigAdapter instance with the settings passed in object format. See description bellow.
-   * 
+   *
    * @param         {Object}          [settings={}]             An object to configure the SConfigAdapter instance. This is specific to each adapters.settings.settings...
    * - name (null) {String}: Specify a simple name for this adapter instance. This name will be used to save the configs, etc...
    * - ...others: All the settings you need for your specific adapter
-   * 
+   *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(settings = {}) {
@@ -73,9 +73,9 @@ class SConfigAdapter {
    * @name                  name
    * @type                  String
    * @get
-   * 
+   *
    * Access the adapter setted name
-   * 
+   *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
@@ -95,9 +95,9 @@ class SConfigAdapter {
    * @name                  settings
    * @type                  Object
    * @get
-   * 
+   *
    * Access the adapter setted settings
-   * 
+   *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 

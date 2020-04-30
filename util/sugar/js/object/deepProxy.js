@@ -30,10 +30,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * import deepProxy from '@coffeekraken/sugar/js/object/deepProxy';
  * const a = deepProxy({
  *    hello: 'world'
- * }, {
- *    set: (obj) => {
- *      // do something with the update object
- *    }
+ * }, (actionObj) => {
+ *    // do something with the actionObj...
  * });
  * a.hello = 'coco';
  *
@@ -53,6 +51,8 @@ function deepProxy(object, handlerFn) {
         target[key] = value;
         handlerFn({
           object,
+          target,
+          key,
           path: [...path, key].join('.'),
           action: 'Object.set',
           oldValue,
@@ -63,11 +63,15 @@ function deepProxy(object, handlerFn) {
 
       get(target, key) {
         if (Reflect.has(target, key)) {
-          return handlerFn({
+          const value = handlerFn({
             object,
+            target,
+            key,
             path: [...path, key].join('.'),
             action: 'Object.get'
           });
+          if (value === undefined) return target[key];
+          return value;
         }
 
         return undefined;
@@ -82,6 +86,8 @@ function deepProxy(object, handlerFn) {
           if (deleted) {
             handlerFn({
               object,
+              target,
+              key,
               path: [...path, key].join('.'),
               action: 'Object.delete',
               oldValue
@@ -112,6 +118,8 @@ function deepProxy(object, handlerFn) {
 
 
   function proxify(obj, path) {
+    if (obj === null) return obj;
+
     for (let key of Object.keys(obj)) {
       if (Array.isArray(obj[key])) {
         obj[key] = (0, _proxy.default)(obj[key]);

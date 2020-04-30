@@ -1,6 +1,8 @@
-module.exports = (__resolveTokens) => {
+"use strict";
+
+module.exports = __resolveTokens => {
   describe('sugar.js.object.resolveTokens', () => {
-    it('Should apply the proxy correctly and return the good value when is some tokens', (done) => {
+    it('Should apply the proxy correctly and return the good value when is some tokens', done => {
       const obj1 = __resolveTokens({
         hello: {
           world: 'hello world'
@@ -13,7 +15,6 @@ module.exports = (__resolveTokens) => {
 
       expect(obj1.plop.array).toEqual([0, 1, 2]);
       expect(obj1.plop.nelson).toBe('hello world');
-
       done();
     });
   });

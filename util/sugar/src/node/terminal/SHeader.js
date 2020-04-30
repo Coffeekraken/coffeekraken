@@ -60,11 +60,12 @@ module.exports = class SHeader extends __blessed.box {
     const _settings = __deepMerge(
       {
         blessed: {
+          tags: true,
           padding: {
             top: 1,
-            bottom: 1,
+            bottom: 0,
             left: 2,
-            right: 2
+            right: 1
           }
         }
       },
@@ -80,7 +81,7 @@ module.exports = class SHeader extends __blessed.box {
     this._title = title;
 
     // set the size
-    this.height = 4;
+    this.height = 3;
 
     // set the header content
     this.setContent(__parseHtml(title));

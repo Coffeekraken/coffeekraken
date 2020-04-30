@@ -1,7 +1,6 @@
 const __fs = require('fs');
 const __packageRoot = require('./node/path/packageRoot');
 const __isInPackage = require('./node/path/isInPackage');
-const __resolveTokens = require('./node/object/');
 
 function isInSugarPackage() {
   return __isInPackage('@coffeekraken/sugar');
@@ -700,7 +699,7 @@ module.exports = {
        * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
       title: {
-        color: '#2b3438'
+        color: '{this.colors.title}'
       },
       /**
        * @name            text
@@ -823,7 +822,7 @@ module.exports = {
        * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
       primary: {
-        color: '#f2bc2b'
+        color: '{this.colors.primary}'
       },
       /**
        * @name            secondary
@@ -864,7 +863,7 @@ module.exports = {
        * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
       secondary: {
-        color: '#2b3438'
+        color: '{this.colors.secondary}'
       },
       /**
        * @name            success
@@ -905,7 +904,7 @@ module.exports = {
        * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
       success: {
-        color: '#5cb85c'
+        color: '{this.colors.success}'
       },
       /**
        * @name            warning
@@ -946,7 +945,7 @@ module.exports = {
        * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
       warning: {
-        color: '#f0ad4e'
+        color: '{this.colors.warning}'
       },
       /**
        * @name            error
@@ -987,7 +986,7 @@ module.exports = {
        * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
       error: {
-        color: '#d9534f'
+        color: '{this.colors.error}'
       },
       /**
        * @name            info
@@ -1028,7 +1027,7 @@ module.exports = {
        * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
       info: {
-        color: '#2199e8'
+        color: '{this.colors.info}'
       }
     },
 

@@ -2,6 +2,7 @@ const __SConfig = require('./SConfig');
 const __SConfigFsAdapter = require('./adapters/SConfigFsAdapter');
 const __path = require('path');
 const __packageRoot = require('../path/packageRoot');
+const __resolveTokens = require('../object/resolveTokens');
 
 /**
  * @name                  sugar
@@ -22,9 +23,9 @@ const __packageRoot = require('../path/packageRoot');
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 let sugarConfigInstance;
-module.exports = async function sugar(dotPath) {
+module.exports = function sugar(dotPath) {
   if (!sugarConfigInstance) {
-    sugarConfigInstance = await new __SConfig('sugar', {
+    sugarConfigInstance = new __SConfig('sugar', {
       adapters: [
         new __SConfigFsAdapter({
           name: 'sugar',

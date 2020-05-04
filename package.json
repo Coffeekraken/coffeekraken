@@ -46,6 +46,7 @@
     "@coffeekraken/sugar/node": "util/sugar/src/node"
   },
   "dependencies": {
+    "json-to-scss": "^1.5.0",
     "module-alias": "^2.2.2"
   },
   "globalDependencies": {},

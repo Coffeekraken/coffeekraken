@@ -3,6 +3,8 @@ const __blessed = require('blessed');
 const __parseHtml = require('./parseHtml');
 const __splitEvery = require('../string/splitEvery');
 const __countLine = require('../string/countLine');
+const __uniqid = require('../string/uniqid');
+const __sugarConfig = require('../config/sugar');
 
 /**
  * @name                    SPanel
@@ -25,7 +27,7 @@ const __countLine = require('../string/countLine');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SPanel extends __blessed.box {
+module.exports = class SPanel extends __blessed.Box {
   /**
    * @name              _name
    * @type              String
@@ -57,23 +59,37 @@ module.exports = class SPanel extends __blessed.box {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(name, settings = {}) {
+  constructor(settings = {}) {
     // save the settings
     const _settings = __deepMerge(
       {
+        name: __uniqid(),
         beforeLog: null,
         beforeLogLine: null,
         afterLog: null,
         afterLogLine: null,
         padBeforeLog: true,
         screen: false,
-        scrollable: true,
         blessed: {
+          mouse: true,
+          keys: true,
+          vi: true,
+          scrollable: true,
+          alwaysScroll: true,
+          scrollbar: {
+            ch: ' ',
+            inverse: true
+          },
+          style: {
+            scrollbar: {
+              bg: __sugarConfig('colors.primary')
+            }
+          },
           padding: {
             top: 1,
             bottom: 1,
             left: 2,
-            right: 2
+            right: 0
           }
         }
       },
@@ -101,15 +117,18 @@ module.exports = class SPanel extends __blessed.box {
     }
 
     // save the name
-    if (!/^[a-zA-Z0-9\._-]+$/.test(name)) {
+    if (!/^[a-zA-Z0-9\._-\s]+$/.test(this._settings.name)) {
       throw new Error(
-        `The name of an SPanel instance can contain only letters like [a-zA-Z0-9_-.]...`
+        `The name of an SPanel instance can contain only letters like [a-zA-Z0-9_-. ]...`
       );
     }
-    this._name = name;
+    this._name = this._settings.name;
 
     // render the screen
-    if (this.screen) this.screen.render();
+    if (this.screen) {
+      this.screen.title = this._name;
+      this.screen.render();
+    }
   }
 
   /**
@@ -123,78 +142,84 @@ module.exports = class SPanel extends __blessed.box {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   log(message) {
-    // check if we have something to put before log
-    if (this._settings.beforeLogLine) {
-      let beforeLogLine = this._settings.beforeLogLine;
-      if (typeof beforeLogLine === 'function') {
-        beforeLogLine = beforeLogLine(message);
-      }
-      if (typeof beforeLogLine === 'number') {
-        this.pushLine(' '.repeat(parseInt(beforeLogLine)).split(''));
-      } else {
-        this.pushLine(__parseHtml(beforeLogLine));
-      }
-    }
+    if (!Array.isArray(message)) message = [message];
 
-    let beforeLog = this._settings.beforeLog;
-    if (beforeLog) {
-      if (typeof beforeLog === 'function') {
-        beforeLog = beforeLog(message);
-      }
-      if (typeof beforeLog === 'number') {
-        beforeLog = ' '.repeat(parseInt(beforeLog));
-      }
-    } else {
-      beforeLog = '';
-    }
-
-    let afterLog = this._settings.afterLog;
-    if (afterLog) {
-      if (typeof afterLog === 'function') {
-        afterLog = afterLog(message);
-      }
-      if (typeof afterLog === 'number') {
-        afterLog = ' '.repeat(parseInt(afterLog));
-      }
-    } else {
-      afterLog = '';
-    }
-
-    if (this._settings.padBeforeLog) {
-      let formatedBeforeLog = __parseHtml(beforeLog);
-      let formatedMessage = message + afterLog;
-      formatedMessage = __splitEvery(
-        __parseHtml(formatedMessage),
-        this.width -
-          this._settings.blessed.padding.left -
-          this._settings.blessed.padding.right -
-          __countLine(formatedBeforeLog)
-      ).map((l, i) => {
-        if (i === 0) {
-          return __parseHtml(beforeLog) + l;
-        } else {
-          return ' '.repeat(__countLine(__parseHtml(beforeLog))) + l;
+    message.forEach((m) => {
+      // check if we have something to put before log
+      if (this._settings.beforeLogLine) {
+        let beforeLogLine = this._settings.beforeLogLine;
+        if (typeof beforeLogLine === 'function') {
+          beforeLogLine = beforeLogLine(m);
         }
-      });
-
-      // append the content to the panel
-      this.pushLine(formatedMessage.join('\n'));
-    } else {
-      this.pushLine(__parseHtml(beforeLog + message + afterLog));
-    }
-
-    // check if we have something to put after log line
-    if (this._settings.afterLogLine) {
-      let afterLogLine = this._settings.afterLogLine;
-      if (typeof afterLogLine === 'function') {
-        afterLogLine = afterLogLine(message);
+        if (typeof beforeLogLine === 'number') {
+          this.pushLine(' '.repeat(parseInt(beforeLogLine)).split(''));
+        } else {
+          this.pushLine(__parseHtml(beforeLogLine));
+        }
       }
-      if (typeof afterLogLine === 'number') {
-        this.pushLine(' '.repeat(parseInt(afterLogLine)).split(''));
+
+      let beforeLog = this._settings.beforeLog;
+      if (beforeLog) {
+        if (typeof beforeLog === 'function') {
+          beforeLog = beforeLog(m);
+        }
+        if (typeof beforeLog === 'number') {
+          beforeLog = ' '.repeat(parseInt(beforeLog));
+        }
       } else {
-        this.pushLine(__parseHtml(afterLogLine));
+        beforeLog = '';
       }
-    }
+
+      let afterLog = this._settings.afterLog;
+      if (afterLog) {
+        if (typeof afterLog === 'function') {
+          afterLog = afterLog(m);
+        }
+        if (typeof afterLog === 'number') {
+          afterLog = ' '.repeat(parseInt(afterLog));
+        }
+      } else {
+        afterLog = '';
+      }
+
+      if (this._settings.padBeforeLog) {
+        let formatedBeforeLog = __parseHtml(beforeLog);
+        let formatedMessage = m + afterLog;
+        formatedMessage = __splitEvery(
+          __parseHtml(formatedMessage),
+          this.width -
+            this._settings.blessed.padding.left -
+            this._settings.blessed.padding.right -
+            __countLine(formatedBeforeLog)
+        ).map((l, i) => {
+          if (i === 0) {
+            return __parseHtml(beforeLog) + l;
+          } else {
+            return ' '.repeat(__countLine(__parseHtml(beforeLog))) + l;
+          }
+        });
+
+        // append the content to the panel
+        this.pushLine(formatedMessage.join('\n'));
+      } else {
+        this.pushLine(__parseHtml(beforeLog + m + afterLog));
+      }
+
+      // check if we have something to put after log line
+      if (this._settings.afterLogLine) {
+        let afterLogLine = this._settings.afterLogLine;
+        if (typeof afterLogLine === 'function') {
+          afterLogLine = afterLogLine(m);
+        }
+        if (typeof afterLogLine === 'number') {
+          this.pushLine(' '.repeat(parseInt(afterLogLine)).split(''));
+        } else {
+          this.pushLine(__parseHtml(afterLogLine));
+        }
+      }
+    });
+
+    this.setScrollPerc(100);
 
     if (this.screen) this.screen.render();
   }

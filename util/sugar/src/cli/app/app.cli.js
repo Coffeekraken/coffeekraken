@@ -26,18 +26,7 @@ module.exports = async (stringArgs = '') => {
       'build/{what}': {
         title: 'Sugar Build [what]',
         content: (params) => {
-          switch (params.what.value) {
-            case 'scss':
-              return new __BuildScssSPanel('BuildScss', {
-                blessed: {}
-              });
-              break;
-            case 'js':
-              return new __BuildScssSPanel('BuildScss', {
-                blessed: {}
-              });
-              break;
-          }
+          return `sugar build.${params.what.value}`;
         }
       }
     }

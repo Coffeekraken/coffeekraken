@@ -111,7 +111,7 @@ module.exports = (settings = {}) => {
             JSON.stringify(scssConfig, null, 4)
           );
 
-          const command = `npx json-to-scss ${__tmpDir()}/sugar.build.scss.config.json ${__tmpDir()}/sugar.build.scss.config.scss --mo`;
+          const command = `npx --no-install json-to-scss ${__tmpDir()}/sugar.build.scss.config.json ${__tmpDir()}/sugar.build.scss.config.scss --mo`;
           __child_process.execSync(command);
           scssConfigString = __fs
             .readFileSync(`${__tmpDir()}/sugar.build.scss.config.scss`, 'ascii')

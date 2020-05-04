@@ -1,3 +1,4 @@
+const __childProcess = require('child_process');
 const __deepMerge = require('../object/deepMerge');
 const __blessed = require('blessed');
 const __parseHtml = require('./parseHtml');
@@ -5,7 +6,8 @@ const __splitEvery = require('../string/splitEvery');
 const __countLine = require('../string/countLine');
 const __parseSchema = require('../url/parseSchema');
 const __sugarConfig = require('../config/sugar');
-const __hotkey = require('../keyboard/hotkey');
+const __SPanel = require('../terminal/SPanel');
+const __packageRoot = require('../path/packageRoot');
 
 /**
  * @name                    SApp
@@ -50,6 +52,17 @@ module.exports = class SApp extends __blessed.screen {
   _settings = {};
 
   /**
+   * @name              _currentPanes
+   * @type              Object
+   * @private
+   *
+   * Store the current panes contents depending on the current url
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _currentPanes = {};
+
+  /**
    * @name              constructor
    * @type              Function
    * @constructor
@@ -78,11 +91,15 @@ module.exports = class SApp extends __blessed.screen {
     // save the name
     this._name = name;
 
-    __hotkey('left').on('key', (e) => {
-      this.previousMenu();
+    this.key('C-c', (ch, key) => {
+      this.destroy();
     });
-    __hotkey('right').on('key', (e) => {
+
+    this.key('right', (e) => {
       this.nextMenu();
+    });
+    this.key('left', (e) => {
+      this.previousMenu();
     });
 
     // render the layout with the current url passed
@@ -114,6 +131,7 @@ module.exports = class SApp extends __blessed.screen {
       if (parsedSchema.match) {
         return {
           ...this._settings.routes[Object.keys(this._settings.routes)[i]],
+          url,
           params: parsedSchema.params
         };
       }
@@ -214,10 +232,60 @@ module.exports = class SApp extends __blessed.screen {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   async _renderLayout(routeObj) {
-    // getting the actual content
-    const content = await routeObj.content(routeObj.params);
+    let contentPanel, contentProcess;
+
+    if (!this._currentPanes[routeObj.url]) {
+      this._currentPanes[routeObj.url] = {};
+
+      // creating the panel to host the logs
+      contentPanel = new __SPanel({
+        beforeLog: () => {
+          return '<blue><time/></blue> ';
+        }
+      });
+
+      // switch between the content types that can be:
+      // - string: Launch a new child process with the specified command
+      const content = await routeObj.content(routeObj.params);
+      if (typeof content === 'string') {
+        contentProcess = __childProcess.spawn(content, [], {
+          env: {
+            ...process.env,
+            IS_CHILD_PROCESS: true
+          },
+          detached: true,
+          cwd: __packageRoot(process.cwd()),
+          shell: true
+        });
+        contentProcess.stdout.on('data', (data) => {
+          contentPanel.log(
+            data
+              .toString()
+              .split('~')
+              .filter((m) => m !== '')
+          );
+        });
+        contentProcess.stderr.on('data', (data) => {
+          contentPanel.log(
+            data
+              .toString()
+              .split('~')
+              .filter((m) => m !== '')
+          );
+        });
+      }
+
+      // store the content panel and process for later
+      this._currentPanes[routeObj.url].process = contentProcess;
+      this._currentPanes[routeObj.url].panel = contentPanel;
+    } else {
+      // restore the content panel and process
+      contentPanel = this._currentPanes[routeObj.url].panel;
+      contentProcess = this._currentPanes[routeObj.url].process;
+    }
+
     // getting the overall layout
-    const layout = await this._settings.layout(content);
+    const layout = await this._settings.layout(contentPanel);
     // rendering the layout to the terminal
     this.append(layout);
     // render the screen

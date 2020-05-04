@@ -1,6 +1,7 @@
 const __SPromise = require('../promise/SPromise');
 const __readline = require('readline');
 const __uniqid = require('../string/uniqid');
+const __terminalKit = require('terminal-kit').terminal;
 
 /**
  * @name                hotkey
@@ -43,59 +44,50 @@ module.exports = function hotkey(key, settings = {}) {
   // generate a new uniqid for this listener
   const uniqid = __uniqid();
 
-  let keypressedInTimeout = false;
-
-  return new __SPromise(
-    (resolve, reject, trigger, cancel) => {
-      // save the trigger function in the stack
-      hotkeyStack[uniqid] = {
-        trigger,
-        key
-      };
-
-      // add the listener if needed
-      if (!isListenerAlreadyAdded) {
-        isListenerAlreadyAdded = true;
-        // Allows us to listen for events from stdin
-        __readline.emitKeypressEvents(process.stdin);
-        // Raw mode gets rid of standard keypress events and other
-        // functionality Node.js adds by default
-        process.stdin.setRawMode(true);
-        // Start the keypress listener for the process
-        process.stdin.on('keypress', (str, key) => {
-          if (!key) return;
-          if (keypressedInTimeout) return;
-          keypressedInTimeout = true;
-          setTimeout(() => {
-            keypressedInTimeout = false;
-          });
-          // "Raw" mode so we must do our own kill switch
-          if (key.sequence === '\u0003') {
-            process.exit();
-          }
-          // process the full key
-          const sequence = key.full.split('-').map((k) => {
-            if (key.ctrl && k === 'C') return 'ctrl';
-            if (key.shift && k === 'S') return 'shift';
-            return k;
-          });
-          // check with wich handler this key correspond
-          Object.keys(hotkeyStack).forEach((id) => {
-            const hotkeyObj = hotkeyStack[id];
-            if (sequence.join(settings.splitKey) === hotkeyObj.key) {
-              hotkeyObj.trigger('key', key);
-            }
-          });
-        });
-      }
-    },
-    {
-      stacks: 'key'
+  if (!isListenerAlreadyAdded) {
+    isListenerAlreadyAdded = true;
+    function _terminate() {
+      __terminalKit.grabInput(false);
+      setTimeout(function () {
+        process.exit();
+      });
     }
-  )
+    __terminalKit.grabInput({ mouse: 'button' });
+    __terminalKit.on('key', function (name, matches, data) {
+      if (name === 'CTRL_C') {
+        _terminate();
+        return;
+      }
+      // loop on each promises registered
+      Object.keys(hotkeyStack).forEach((id) => {
+        const obj = hotkeyStack[id];
+        if (name === obj.key) {
+          obj.promise.trigger('key', name);
+        }
+      });
+    });
+  }
+
+  const promise = new __SPromise((resolve, reject, trigger, cancel) => {}, {
+    stacks: 'key'
+  })
+    .on('key', (key) => {
+      if (settings.once) {
+        promise.cancel();
+      }
+    })
     .on('finally,cancel', () => {
       // delete the callback from the stack
       delete hotkeyStack[uniqid];
     })
     .start();
+
+  // save the trigger function in the stack
+  hotkeyStack[uniqid] = {
+    key,
+    promise
+  };
+
+  // return the promise
+  return promise;
 };

@@ -5,6 +5,7 @@ const __splitEvery = require('../string/splitEvery');
 const __countLine = require('../string/countLine');
 const __uniqid = require('../string/uniqid');
 const __sugarConfig = require('../config/sugar');
+const { print, stringify } = require('q-i');
 
 /**
  * @name                    SPanel
@@ -24,6 +25,8 @@ const __sugarConfig = require('../config/sugar');
  * });
  * panel.log('Hello world');
  *
+ * @see       https://www.npmjs.com/package/q-i
+ * @see       https://www.npmjs.com/package/blessed
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
@@ -66,10 +69,12 @@ module.exports = class SPanel extends __blessed.Box {
         name: __uniqid(),
         beforeLog: null,
         beforeLogLine: null,
+        beforeEachLine: null,
         afterLog: null,
         afterLogLine: null,
         padBeforeLog: true,
         screen: false,
+        logBox: null,
         blessed: {
           mouse: true,
           keys: true,
@@ -89,7 +94,7 @@ module.exports = class SPanel extends __blessed.Box {
             top: 1,
             bottom: 1,
             left: 2,
-            right: 0
+            right: 1
           }
         }
       },
@@ -107,8 +112,12 @@ module.exports = class SPanel extends __blessed.Box {
     }
     // extend from blessed.box
     super(_settings.blessed);
+
     // save settings
     this._settings = _settings;
+
+    // manage logBox setting
+    if (!this._settings.logBox) this._settings.logBox = this;
 
     // append this box to the screen
     if (screenInstance) {
@@ -132,22 +141,47 @@ module.exports = class SPanel extends __blessed.Box {
   }
 
   /**
+   * @name                  update
+   * @type                  Function
+   *
+   * This method simply update the screen if the panel is a child of one
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  update() {
+    if (this.screen) this.screen.render();
+  }
+
+  /**
    * @name                  log
    * @type                  Function
    *
    * Allow to log some content in the panel
    *
    * @param       {String}        message         The message to log
+   * @param       {Object}        [settings={}]   Some settings to override for this particular log
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  log(message) {
+  log(message, settings = {}) {
     if (!Array.isArray(message)) message = [message];
 
+    const logSettings = __deepMerge(this._settings, settings);
+
     message.forEach((m) => {
+      // check message type
+      switch (typeof m) {
+        case 'object':
+          m = stringify(m);
+          break;
+      }
+      if (Array.isArray(m)) m = stringify(m);
+
+      m = __parseHtml(m);
+
       // check if we have something to put before log
-      if (this._settings.beforeLogLine) {
-        let beforeLogLine = this._settings.beforeLogLine;
+      if (logSettings.beforeLogLine) {
+        let beforeLogLine = logSettings.beforeLogLine;
         if (typeof beforeLogLine === 'function') {
           beforeLogLine = beforeLogLine(m);
         }
@@ -158,7 +192,7 @@ module.exports = class SPanel extends __blessed.Box {
         }
       }
 
-      let beforeLog = this._settings.beforeLog;
+      let beforeLog = logSettings.beforeLog;
       if (beforeLog) {
         if (typeof beforeLog === 'function') {
           beforeLog = beforeLog(m);
@@ -170,7 +204,19 @@ module.exports = class SPanel extends __blessed.Box {
         beforeLog = '';
       }
 
-      let afterLog = this._settings.afterLog;
+      let beforeEachLine = logSettings.beforeEachLine;
+      if (beforeEachLine) {
+        if (typeof beforeEachLine === 'function') {
+          beforeEachLine = beforeEachLine(m);
+        }
+        if (typeof beforeEachLine === 'number') {
+          beforeEachLine = ' '.repeat(parseInt(beforeEachLine));
+        }
+      } else {
+        beforeEachLine = '';
+      }
+
+      let afterLog = logSettings.afterLog;
       if (afterLog) {
         if (typeof afterLog === 'function') {
           afterLog = afterLog(m);
@@ -182,45 +228,65 @@ module.exports = class SPanel extends __blessed.Box {
         afterLog = '';
       }
 
-      if (this._settings.padBeforeLog) {
+      if (logSettings.padBeforeLog) {
+        let formatedBeforeEachLine = __parseHtml(beforeEachLine);
         let formatedBeforeLog = __parseHtml(beforeLog);
         let formatedMessage = m + afterLog;
-        formatedMessage = __splitEvery(
-          __parseHtml(formatedMessage),
-          this.width -
-            this._settings.blessed.padding.left -
-            this._settings.blessed.padding.right -
-            __countLine(formatedBeforeLog)
-        ).map((l, i) => {
-          if (i === 0) {
-            return __parseHtml(beforeLog) + l;
-          } else {
-            return ' '.repeat(__countLine(__parseHtml(beforeLog))) + l;
-          }
+
+        // split lines
+        formatedMessage = formatedMessage.split('\n');
+
+        let lines = [];
+        formatedMessage.map((line, i) => {
+          line = __splitEvery(
+            line,
+            this.width -
+              logSettings.blessed.padding.left -
+              logSettings.blessed.padding.right -
+              __countLine(formatedBeforeLog) -
+              __countLine(formatedBeforeEachLine)
+          );
+          line = line.map((l, j) => {
+            if (i === 0 && j === 0) {
+              return formatedBeforeLog + formatedBeforeEachLine + l;
+            } else {
+              return (
+                ' '.repeat(__countLine(formatedBeforeLog)) +
+                formatedBeforeEachLine +
+                l
+              );
+            }
+          });
+
+          lines = [...lines, ...line];
         });
 
         // append the content to the panel
-        this.pushLine(formatedMessage.join('\n'));
+        logSettings.logBox.pushLine(lines.join('\n'));
       } else {
-        this.pushLine(__parseHtml(beforeLog + m + afterLog));
+        logSettings.logBox.pushLine(
+          __parseHtml(beforeLog + beforeEachLine + m + afterLog)
+        );
       }
 
       // check if we have something to put after log line
-      if (this._settings.afterLogLine) {
-        let afterLogLine = this._settings.afterLogLine;
+      if (logSettings.afterLogLine) {
+        let afterLogLine = logSettings.afterLogLine;
         if (typeof afterLogLine === 'function') {
           afterLogLine = afterLogLine(m);
         }
         if (typeof afterLogLine === 'number') {
-          this.pushLine(' '.repeat(parseInt(afterLogLine)).split(''));
+          logSettings.logBox.pushLine(
+            ' '.repeat(parseInt(afterLogLine)).split('')
+          );
         } else {
-          this.pushLine(__parseHtml(afterLogLine));
+          logSettings.logBox.pushLine(__parseHtml(afterLogLine));
         }
       }
     });
 
-    this.setScrollPerc(100);
+    logSettings.logBox.setScrollPerc(100);
 
-    if (this.screen) this.screen.render();
+    this.update();
   }
 };

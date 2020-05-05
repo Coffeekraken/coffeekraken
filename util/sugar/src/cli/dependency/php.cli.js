@@ -2,6 +2,9 @@ const __parseArgs = require('../../node/cli/parseArgs');
 const __SPhpDependency = require('../../node/dependency/SPhpDependency');
 
 const __SProcess = require('../../node/terminal/SProcess');
+const __SPanel = require('../../node/terminal/SPanel');
+const __SProcessPanel = require('../../node/terminal/SProcessPanel');
+const __SPhpServerProcess = require('../../node/server/SPhpServerProcess');
 
 module.exports = (stringArgs = '') => {
   const args = __parseArgs(stringArgs, {
@@ -11,45 +14,41 @@ module.exports = (stringArgs = '') => {
     }
   });
 
-  class MyProcess extends __SProcess {
-    _watch = false;
+  // class MyProcess extends __SProcess {
+  //   constructor() {
+  //     super(
+  //       {
+  //         install: 'npm install',
+  //         doSomething: 'php -v',
+  //         another: 'node .',
+  //         failling: 'curl -v'
+  //       },
+  //       {
+  //         keys: {
+  //           run: {
+  //             key: 'r',
+  //             type: 'run',
+  //             menu: 'Do Something',
+  //             command: 'doSomething'
+  //           },
+  //           watch: {
+  //             key: 'w',
+  //             type: 'toggle',
+  //             menu: 'Watch'
+  //           }
+  //         }
+  //       }
+  //     );
+  //   }
+  // }
 
-    constructor() {
-      super(
-        {
-          install: 'npm install',
-          doSomething: 'php -v',
-          another: 'node .',
-          failling: 'curl -v'
-        },
-        {
-          keys: {
-            run: {
-              key: 'r',
-              type: 'run',
-              command: 'doSomething'
-            },
-            watch: {
-              key: 'w',
-              type: 'toggle',
-              path: '_watch'
-            }
-          }
-        }
-      );
-    }
-  }
+  // const pro = new MyProcess();
 
-  const pro = new MyProcess()
-    .on('toggle', (key) => {
-      console.log('toggle', key);
-    })
-    .on('run', (key) => {
-      console.log('run', key);
-    })
-    .then((value) => {
-      console.log('then', value);
-    });
+  const pro = new __SPhpServerProcess({});
+
+  const panel = new __SProcessPanel(pro, {
+    screen: true
+  });
 
   // const dep = new __SPhpDependency();
   // dep.install(args.version);

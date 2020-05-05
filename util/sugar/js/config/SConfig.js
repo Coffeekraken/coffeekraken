@@ -19,6 +19,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+// TODO: Add a "catch" method that allows to get the saving errors, etc...
+
 /**
  * @name                                            config
  * @namespace                                       sugar.js.config
@@ -94,7 +96,6 @@ class SConfig {
    * - autoLoad (true) {Boolean}: Specify if you want the config to be loaded automatically at instanciation
    * - autoSave (true) {Boolean}: Specify if you want the setting to be saved through the adapters directly on "set" action
    * - throwErrorOnUndefinedConfig (true) {Boolean}: Specify if you want the class to throw some errors when get undefined configs
-   * @return              {Promise}                    A promise that will be resolved with the SConfig instance once the config has been fully loaded (if the setting.autoLoad is set to true). Otherwise the promise will be resolved directly
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */

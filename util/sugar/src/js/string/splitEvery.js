@@ -16,6 +16,9 @@
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+
+// TODO: Add support for special characters like terminal colors, html tags, etc...
+
 module.exports = function splitEvery(text, every, splitWords = false) {
   if (splitWords) {
     const reg = new RegExp(`.{1,${every}}`, 'g');

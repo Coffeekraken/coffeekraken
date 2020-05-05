@@ -243,6 +243,7 @@ export default class SPromise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   async _resolve(arg, stacksOrder = 'then,resolved,finally') {
+    if (this._isDestroyed) return;
     // exec the wanted stacks
     const stacksResult = await this._triggerStacks(stacksOrder, arg);
     // resolve the master promise
@@ -264,6 +265,7 @@ export default class SPromise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   async _reject(arg, stacksOrder = ['catch', 'rejected', 'finally']) {
+    if (this._isDestroyed) return;
     // exec the wanted stacks
     const stacksResult = await this._triggerStacks(stacksOrder, arg);
     // resolve the master promise
@@ -298,6 +300,11 @@ export default class SPromise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   async trigger(what, arg) {
+    if (this._isDestroyed) {
+      throw new Error(
+        `Sorry but you can't call the "trigger" method on this SPromise cause it has been destroyed...`
+      );
+    }
     // triger the passed stacks
     return this._triggerStacks(what, arg);
   }
@@ -339,6 +346,11 @@ export default class SPromise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   _registerCallbackInStack(stack, ...args) {
+    if (this._isDestroyed) {
+      throw new Error(
+        `Sorry but you can't call the "${stack}" method on this SPromise cause it has been destroyed...`
+      );
+    }
     if (typeof stack === 'string') stack = this._stacks[stack];
     // process the args
     let callback = args[0];
@@ -472,6 +484,11 @@ export default class SPromise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   on(stacks, callback) {
+    if (this._isDestroyed) {
+      throw new Error(
+        `Sorry but you can't call the "on" method on this SPromise cause it has been destroyed...`
+      );
+    }
     if (typeof stacks === 'string')
       stacks = stacks.split(',').map((s) => s.trim());
 
@@ -657,6 +674,11 @@ export default class SPromise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   async cancel(...args) {
+    if (this._isDestroyed) {
+      throw new Error(
+        `Sorry but you can't call the "cancel" method on this SPromise cause it has been destroyed...`
+      );
+    }
     if (
       (typeof args[0] === 'number' && typeof args[1] === 'function') ||
       (args.length === 1 && typeof args[0] === 'function')
@@ -681,6 +703,7 @@ export default class SPromise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   async _cancel(...args) {
+    if (this._isDestroyed) return;
     // otherwise, trigger the "cancel" callback
     const cancelStackResult = await this._triggerStack('cancel', ...args);
     // reject the master promise with "null" as parameter
@@ -710,6 +733,11 @@ export default class SPromise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   start() {
+    if (this._isDestroyed) {
+      throw new Error(
+        `Sorry but you can't call the "start" method on this SPromise cause it has been destroyed...`
+      );
+    }
     if (this._isExecutorStarted) return;
     this._executorFn(
       this._resolve.bind(this),
@@ -739,5 +767,7 @@ export default class SPromise {
     delete this._masterPromiseResolveFn;
     delete this._masterPromiseRejectFn;
     delete this._masterPromise;
+
+    this._isDestroyed = false;
   }
 }

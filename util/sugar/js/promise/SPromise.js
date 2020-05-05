@@ -256,7 +256,8 @@ class SPromise {
 
 
   async _resolve(arg, stacksOrder = 'then,resolved,finally') {
-    // exec the wanted stacks
+    if (this._isDestroyed) return; // exec the wanted stacks
+
     const stacksResult = await this._triggerStacks(stacksOrder, arg); // resolve the master promise
 
     this._masterPromiseResolveFn.apply(this, [stacksResult, this]); // return the stack result
@@ -279,7 +280,8 @@ class SPromise {
 
 
   async _reject(arg, stacksOrder = ['catch', 'rejected', 'finally']) {
-    // exec the wanted stacks
+    if (this._isDestroyed) return; // exec the wanted stacks
+
     const stacksResult = await this._triggerStacks(stacksOrder, arg); // resolve the master promise
 
     this._masterPromiseRejectFn.apply(this, [stacksResult, this]); // destroy the promise
@@ -316,7 +318,11 @@ class SPromise {
 
 
   async trigger(what, arg) {
-    // triger the passed stacks
+    if (this._isDestroyed) {
+      throw new Error(`Sorry but you can't call the "trigger" method on this SPromise cause it has been destroyed...`);
+    } // triger the passed stacks
+
+
     return this._triggerStacks(what, arg);
   }
   /**
@@ -359,6 +365,10 @@ class SPromise {
 
 
   _registerCallbackInStack(stack, ...args) {
+    if (this._isDestroyed) {
+      throw new Error(`Sorry but you can't call the "${stack}" method on this SPromise cause it has been destroyed...`);
+    }
+
     if (typeof stack === 'string') stack = this._stacks[stack]; // process the args
 
     let callback = args[0];
@@ -487,6 +497,10 @@ class SPromise {
 
 
   on(stacks, callback) {
+    if (this._isDestroyed) {
+      throw new Error(`Sorry but you can't call the "on" method on this SPromise cause it has been destroyed...`);
+    }
+
     if (typeof stacks === 'string') stacks = stacks.split(',').map(s => s.trim()); // loop on each stacks
 
     stacks.forEach(name => {
@@ -677,6 +691,10 @@ class SPromise {
 
 
   async cancel(...args) {
+    if (this._isDestroyed) {
+      throw new Error(`Sorry but you can't call the "cancel" method on this SPromise cause it has been destroyed...`);
+    }
+
     if (typeof args[0] === 'number' && typeof args[1] === 'function' || args.length === 1 && typeof args[0] === 'function') {
       return this._registerCallbackInStack('cancel', ...args);
     } else {
@@ -699,7 +717,8 @@ class SPromise {
 
 
   async _cancel(...args) {
-    // otherwise, trigger the "cancel" callback
+    if (this._isDestroyed) return; // otherwise, trigger the "cancel" callback
+
     const cancelStackResult = await this._triggerStack('cancel', ...args); // reject the master promise with "null" as parameter
 
     this._masterPromiseResolveFn(cancelStackResult || null); // destroy the promise
@@ -731,6 +750,10 @@ class SPromise {
 
 
   start() {
+    if (this._isDestroyed) {
+      throw new Error(`Sorry but you can't call the "start" method on this SPromise cause it has been destroyed...`);
+    }
+
     if (this._isExecutorStarted) return;
 
     this._executorFn(this._resolve.bind(this), this._reject.bind(this), this.trigger.bind(this), this._cancel.bind(this));
@@ -757,6 +780,7 @@ class SPromise {
     delete this._masterPromiseResolveFn;
     delete this._masterPromiseRejectFn;
     delete this._masterPromise;
+    this._isDestroyed = false;
   }
 
 }

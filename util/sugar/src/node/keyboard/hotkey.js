@@ -16,7 +16,7 @@ const __terminalKit = require('terminal-kit').terminal;
  * - keyup (false) {Boolean}: Detect on keyup
  * - keydown (true) {Boolean}: Detect on keydown
  * - once (false) {Boolean}: Specify if you want to detect the keyboard event just once
- * - splitKey (*) {String}: Specify the split key to use in the sequences like "ctrl+a"
+ * - splitKey (+) {String}: Specify the split key to use in the sequences like "ctrl+a"
  * @return      {SPromise}                       An SPromise instance on which you can register for "key" stack event
  *
  * @example         js
@@ -47,21 +47,20 @@ module.exports = function hotkey(key, settings = {}) {
   if (!isListenerAlreadyAdded) {
     isListenerAlreadyAdded = true;
     function _terminate() {
-      __terminalKit.grabInput(false);
       setTimeout(function () {
+        __terminalKit.grabInput(false);
         process.exit();
-      });
+      }, 100);
     }
     __terminalKit.grabInput({ mouse: 'button' });
     __terminalKit.on('key', function (name, matches, data) {
       if (name === 'CTRL_C') {
         _terminate();
-        return;
       }
       // loop on each promises registered
       Object.keys(hotkeyStack).forEach((id) => {
         const obj = hotkeyStack[id];
-        if (name === obj.key) {
+        if (name === obj.key.split(settings.splitKey).join('_').toUpperCase()) {
           obj.promise.trigger('key', name);
         }
       });

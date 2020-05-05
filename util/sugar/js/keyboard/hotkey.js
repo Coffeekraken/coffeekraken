@@ -7,6 +7,8 @@ exports.default = _default;
 
 var _hotkeysJs = _interopRequireDefault(require("hotkeys-js"));
 
+var _SPromise = _interopRequireDefault(require("../promise/SPromise"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _hotkeysJs.default.filter = function (event) {
@@ -25,49 +27,50 @@ _hotkeysJs.default.filter = function (event) {
  * - from f1 to f19
  * - all the letters keys
  *
- * You can pass an option object to your hotkey function call. Here's the option object format:
- * {
- *    element: {HTMLElement}, // default: null
- *    keyup: {Boolean}, // default: false
- *    keydown: {Boolean}, // default: true
- *    splitKey: {String} // default: '+'
- * }
+ * You can pass an option object to your hotkey function call.
  *
  * @param        {String}       hotkey          The hotkey to detect
- * @param         {Function}    handler         The handler function called when the hotkey is pressed. It take as parameter the 'event' object and the 'handler' one.
- * @param         {Object}      [options={}]    An option object to configure your hotkey
- * @return      {Function}                       A function to call when you want to delete the hotkey listener
+ * @param         {Object}      [settings={}]    An option object to configure your hotkey. Here's the list of available settings:
+ * - element (null) {HTMLElement}: Specify an HTMLElement to detect keyboard events from
+ * - keyup (false) {Boolean}: Detect on keyup
+ * - keydown (true) {Boolean}: Detect on keydown
+ * - once (false) {Boolean}: Specify if you want to detect the keyboard event just once
+ * - splitKey (*) {String}: Specify the split key to use in the sequences like "ctrl+a"
+ * @return      {SPromise}                       An SPromise instance on which you can register for "key" stack event
  *
  * @example    js
  * import hotkey from '@coffeekraken/sugar/js/keyboard/hotkey'
- * const delete = hotkey('ctrl+a', (event, handler) => {
- *    console.log('ctrl + a has been pressed');
+ * const promise = hotkey('ctrl+a');
+ * promise.on('ctrl+a', (e) => {
+ *    // do something...
  * });
- * // when you want to stop the listener
- * delete();
+ * promise.cancel();
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
 
-function _default(hotkey, handler, options = {}) {
-  // merge default options with passed ones:
-  options = {
-    element: null,
-    keyup: false,
-    keydown: true,
-    splitKey: '+',
-    ...options
-  }; // init the hotkey
+function _default(hotkey, settings = {}) {
+  return new _SPromise.default((resolve, reject, trigger, cancel) => {
+    // merge default settings with passed ones:
+    settings = {
+      element: null,
+      keyup: false,
+      keydown: true,
+      once: false,
+      splitKey: '+',
+      ...settings
+    }; // init the hotkey
 
-  (0, _hotkeysJs.default)(hotkey, options, (e, h) => {
-    // call the handler function
-    handler(e, h);
-  }); // return the "delete" function to call when want to delete the hotkey listening
+    (0, _hotkeysJs.default)(hotkey, settings, (e, h) => {
+      // call the handler function
+      trigger('key', e); // unsubscribe if once is truc
 
-  return function () {
+      if (settings.once) cancel();
+    });
+  }).on('finally,cancel', () => {
     _hotkeysJs.default.unbind(hotkey);
-  };
+  }).start();
 }
 
 module.exports = exports.default;

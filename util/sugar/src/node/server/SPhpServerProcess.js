@@ -40,34 +40,40 @@ module.exports = class SPhpServerProcess extends __SProcess {
     const port = settings.port || __sugarConfig('server.php.port') || 8080;
 
     // init SProcess instance
-    super({
-      ...(settings.process || {}),
-      commands: {
+    super(
+      {
         start: {
           command: `php -S ${hostname}:${port} -t ${rootDir}`,
           concurrent: false,
-          color: 'magenta'
+          color: 'magenta',
+          run: true,
+          ask: true
         },
         start1: {
           command: `php -S ${hostname}:8181 -t ${rootDir}`,
           concurrent: false,
-          color: 'yellow'
+          color: 'yellow',
+          run: true
         }
       },
-      keys: {
-        start: {
-          key: 's',
-          type: 'run',
-          menu: 'Start',
-          command: 'start'
-        },
-        start1: {
-          key: 'd',
-          type: 'run',
-          menu: 'Start 1',
-          command: 'start1'
+      {
+        ...(settings.process || {}),
+        type: 'steps',
+        keys: {
+          start: {
+            key: 's',
+            type: 'run',
+            menu: 'Start',
+            command: 'start'
+          },
+          start1: {
+            key: 'd',
+            type: 'run',
+            menu: 'Start 1',
+            command: 'start1'
+          }
         }
       }
-    });
+    );
   }
 };

@@ -68,10 +68,8 @@ module.exports = class SPanel extends __blessed.Box {
       {
         name: __uniqid(),
         beforeLog: null,
-        beforeLogLine: null,
         beforeEachLine: null,
         afterLog: null,
-        afterLogLine: null,
         padBeforeLog: true,
         screen: false,
         logBox: null,
@@ -168,6 +166,8 @@ module.exports = class SPanel extends __blessed.Box {
 
     const logSettings = __deepMerge(this._settings, settings);
 
+    let lines = [];
+
     message.forEach((m) => {
       // check message type
       switch (typeof m) {
@@ -178,19 +178,6 @@ module.exports = class SPanel extends __blessed.Box {
       if (Array.isArray(m)) m = stringify(m);
 
       m = __parseHtml(m);
-
-      // check if we have something to put before log
-      if (logSettings.beforeLogLine) {
-        let beforeLogLine = logSettings.beforeLogLine;
-        if (typeof beforeLogLine === 'function') {
-          beforeLogLine = beforeLogLine(m);
-        }
-        if (typeof beforeLogLine === 'number') {
-          this.pushLine(' '.repeat(parseInt(beforeLogLine)).split(''));
-        } else {
-          this.pushLine(__parseHtml(beforeLogLine));
-        }
-      }
 
       let beforeLog = logSettings.beforeLog;
       if (beforeLog) {
@@ -228,65 +215,46 @@ module.exports = class SPanel extends __blessed.Box {
         afterLog = '';
       }
 
-      if (logSettings.padBeforeLog) {
-        let formatedBeforeEachLine = __parseHtml(beforeEachLine);
-        let formatedBeforeLog = __parseHtml(beforeLog);
-        let formatedMessage = m + afterLog;
+      let formatedBeforeEachLine = __parseHtml(beforeEachLine);
+      let formatedBeforeLog = __parseHtml(beforeLog);
+      let formatedMessage = m + afterLog;
 
-        // split lines
-        formatedMessage = formatedMessage.split('\n');
+      // split lines
+      formatedMessage = formatedMessage.split('\n');
 
-        let lines = [];
-        formatedMessage.map((line, i) => {
-          line = __splitEvery(
-            line,
-            this.width -
-              logSettings.blessed.padding.left -
-              logSettings.blessed.padding.right -
-              __countLine(formatedBeforeLog) -
-              __countLine(formatedBeforeEachLine)
-          );
-          line = line.map((l, j) => {
-            if (i === 0 && j === 0) {
-              return formatedBeforeLog + formatedBeforeEachLine + l;
-            } else {
-              return (
-                ' '.repeat(__countLine(formatedBeforeLog)) +
-                formatedBeforeEachLine +
-                l
-              );
-            }
-          });
-
-          lines = [...lines, ...line];
+      formatedMessage.map((line, i) => {
+        line = __splitEvery(
+          line,
+          this.width -
+            logSettings.blessed.padding.left -
+            logSettings.blessed.padding.right -
+            __countLine(formatedBeforeLog) -
+            __countLine(formatedBeforeEachLine)
+        );
+        line = line.map((l, j) => {
+          if (i === 0 && j === 0) {
+            return formatedBeforeLog + formatedBeforeEachLine + l;
+          } else {
+            return (
+              ' '.repeat(__countLine(formatedBeforeLog)) +
+              formatedBeforeEachLine +
+              l
+            );
+          }
         });
 
-        // append the content to the panel
-        logSettings.logBox.pushLine(lines.join('\n'));
-      } else {
-        logSettings.logBox.pushLine(
-          __parseHtml(beforeLog + beforeEachLine + m + afterLog)
-        );
-      }
+        lines = [...lines, ...line];
+      });
 
-      // check if we have something to put after log line
-      if (logSettings.afterLogLine) {
-        let afterLogLine = logSettings.afterLogLine;
-        if (typeof afterLogLine === 'function') {
-          afterLogLine = afterLogLine(m);
-        }
-        if (typeof afterLogLine === 'number') {
-          logSettings.logBox.pushLine(
-            ' '.repeat(parseInt(afterLogLine)).split('')
-          );
-        } else {
-          logSettings.logBox.pushLine(__parseHtml(afterLogLine));
-        }
-      }
+      // append the content to the panel
+      logSettings.logBox.pushLine(lines.join('\n'));
     });
 
     logSettings.logBox.setScrollPerc(100);
 
     this.update();
+
+    // return the lines
+    return lines;
   }
 };

@@ -2,6 +2,7 @@ import __upperFirst from '../string/upperFirst';
 import __asyncForEach from '../array/asyncForEach';
 import __deepMerge from '../object/deepMerge';
 import __prettyError from 'pretty-error';
+import __getMethods from '../class/getMethods';
 
 /**
  * @name                  SPromise
@@ -226,6 +227,27 @@ export default class SPromise {
 
     this._masterPromise.start = this.start.bind(this);
 
+    __getMethods(this).forEach((name) => {
+      if (
+        !this._masterPromise[name] &&
+        [
+          '_cancel',
+          '_destroy',
+          '_executorFn',
+          '_masterPromiseRejectFn',
+          '_masterPromiseResolveFn',
+          '_registerCallbackInStack',
+          '_registerNewStacks',
+          '_reject',
+          '_resolve',
+          '_triggerStack',
+          '_triggerStacks'
+        ].indexOf(name) === -1
+      ) {
+        this._masterPromise[name] = this[name];
+      }
+    });
+
     // return the master promise
     return this._masterPromise;
   }
@@ -300,11 +322,7 @@ export default class SPromise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   async trigger(what, arg) {
-    if (this._isDestroyed) {
-      throw new Error(
-        `Sorry but you can't call the "trigger" method on this SPromise cause it has been destroyed...`
-      );
-    }
+    if (this._isDestroyed) return;
     // triger the passed stacks
     return this._triggerStacks(what, arg);
   }
@@ -330,9 +348,9 @@ export default class SPromise {
     stacks.forEach((stack) => {
       if (!this._stacks[stack]) {
         this._stacks[stack] = [];
-        this._masterPromise[stack] = (...args) => {
-          return this._registerCallbackInStack(stack, ...args);
-        };
+        // this._masterPromise[stack] = (...args) => {
+        //   return this._registerCallbackInStack(stack, ...args);
+        // };
       }
     });
   }
@@ -674,11 +692,7 @@ export default class SPromise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   async cancel(...args) {
-    if (this._isDestroyed) {
-      throw new Error(
-        `Sorry but you can't call the "cancel" method on this SPromise cause it has been destroyed...`
-      );
-    }
+    if (this._isDestroyed) return;
     if (
       (typeof args[0] === 'number' && typeof args[1] === 'function') ||
       (args.length === 1 && typeof args[0] === 'function')
@@ -768,6 +782,6 @@ export default class SPromise {
     delete this._masterPromiseRejectFn;
     delete this._masterPromise;
 
-    this._isDestroyed = false;
+    this._isDestroyed = true;
   }
 }

@@ -60,9 +60,22 @@ module.exports = function hotkey(key, settings = {}) {
       // loop on each promises registered
       Object.keys(hotkeyStack).forEach((id) => {
         const obj = hotkeyStack[id];
-        if (name === obj.key.split(settings.splitKey).join('_').toUpperCase()) {
-          obj.promise.trigger('key', name);
-        }
+        obj.key
+          .split(',')
+          .map((m) => m.trim())
+          .forEach((key) => {
+            if (key.split(settings.splitKey).length > 1) {
+              if (
+                name === key.split(settings.splitKey).join('_').toUpperCase()
+              ) {
+                obj.promise.trigger('key', key);
+              }
+              return;
+            }
+            if (name === key) {
+              obj.promise.trigger('key', key);
+            }
+          });
       });
     });
   }

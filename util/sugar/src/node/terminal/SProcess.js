@@ -4,7 +4,9 @@ const __isPath = require('../is/path');
 const __extension = require('../fs/extension');
 const __SPromise = require('../promise/SPromise');
 const __hotkey = require('../keyboard/hotkey');
-const __commandExists = require('command-exists');
+const __filter = require('../object/filter');
+const __wait = require('../time/wait');
+const __SCommand = require('./SCommand');
 
 /**
  * @name                    SProcess
@@ -19,6 +21,18 @@ const __commandExists = require('command-exists');
  *
  * @param           {String}          commands         The commands that you want to be available in this process. The format is { name: command }
  * @param           {Object}          [settings={}]   An object of settings described bellow:
+ * - type (default) {String}: This specify the type of process you want. It can be:
+ *    - default: Simple process that does not launch anything by default
+ *    - steps: This describe a step by step process that will automatically launch the first command and run the next after next ones
+ * - keys ({}) {Object}: This describe the keyboard hotkeys associated with this process. Each hotkey has to be described with these properties:
+ *    - key: Specify the key to listen for
+ *    - type: Can be either "toggle", "run" or "action"
+ *        - toggle: Simply toggle the "value" property in the key object to true/false
+ *        - run: Simply launch the associated command by specifying the property "command" with the command name wanted
+          - action: Does nothing by default. Simply specify the action name you want in the "action" property and you'll get access to that by listening "key.action" on the promise
+      - menu: Specify the text wanted in the menu when using this class with an SProcessPanel instance
+      - action: Specify an action name when the type is "action"
+      - command: Specify a command name to run when the type is "run"
  *
  * @example         js
  * const SProcess = require('@coffeekraken/sugar/node/terminal/SProcess');
@@ -58,6 +72,28 @@ module.exports = class SProcess {
   _durations = {};
 
   /**
+   * @name              _askPromises
+   * @type              Array
+   * @private
+   *
+   * This is an array that store all the current ask promises
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _askPromises = [];
+
+  /**
+   * @name              _commands
+   * @type              Object
+   * @private
+   *
+   * This is an object that store the available commands in this process
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _commands = {};
+
+  /**
    * @name              constructor
    * @type              Function
    * @constructor
@@ -66,23 +102,17 @@ module.exports = class SProcess {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(settings = {}) {
+  constructor(commands, settings = {}) {
     // save the settings
     const _settings = __deepMerge(
       {
-        commands: {},
+        type: 'default',
         keys: {
           clear: {
             key: 'x',
             type: 'action',
             menu: 'Clear',
             action: 'clear'
-          },
-          kill: {
-            key: 'k',
-            type: 'action',
-            menu: 'Kill',
-            action: 'kill'
           }
         }
       },
@@ -98,16 +128,35 @@ module.exports = class SProcess {
       },
       {
         stacks:
-          'data,error,run,key.run,key.kill,key.toggle,key.action,exit,close,success,warning,kill'
+          'data,error,run,key.run,key.kill,key.toggle,key.action,exit,close,success,warning,kill,ask,answer'
       }
     ).start();
     this.on = this._promise.on.bind(this);
 
+    // save commands
+    Object.keys(commands).forEach((commandName) => {
+      const commandObj = commands[commandName];
+      if (commandObj instanceof __SCommand) {
+        this._commands[commandName] = commandObj;
+      } else {
+        this._commands[commandName] = new __SCommand(
+          commandName,
+          commandObj.command,
+          commandObj
+        );
+      }
+    });
+
+    // this._commands = commands;
+    // Object.keys(this._commands).forEach((name) => {
+    //   this._commands[name].name = name;
+    // });
+
+    // pipe the commands promises to this process promise
+    this._pipeCommandsPromises();
+
     // save settings
     this._settings = _settings;
-
-    // check the commands
-    this._checkCommands();
 
     // check keys
     this._checkKeys();
@@ -115,60 +164,75 @@ module.exports = class SProcess {
     // init keys
     this._initKeys();
 
+    // switch on process type to handle it properly
+    setTimeout(() => {
+      switch (this._settings.type) {
+        case 'steps':
+          (async () => {
+            const results = {};
+            for (let i = 0; i < Object.keys(this._commands).length; i++) {
+              const command = Object.keys(this._commands)[i];
+              // console.log(command);
+              // const res = await this.run(command);
+              // console.log('res', res);
+              // results[command] = res;
+              // await __wait(100);
+            }
+            console.log('difin', results);
+            this._promise.resolve(results);
+          })();
+          break;
+        default:
+          // Object.keys(
+          //   __filter(this._commands, (obj) => {
+          //     return obj.run === true;
+          //   })
+          // ).forEach((name, i) => {
+          //   setTimeout(() => {
+          //     this.run(name);
+          //   }, i * 10);
+          // });
+          break;
+      }
+    });
+
     process.stdin.resume();
   }
 
   /**
-   * @name                _checkCommands
+   * @name                _pipeCommandsPromises
    * @type                Function
    * @private
    *
-   * This method simply take the passed command(s) and check that they are all runnable
-   * depending on the installed tools on your machine
+   * This methods pipe all the SCommand promises to this process promise
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _checkCommands() {
-    Object.keys(this._settings.commands).forEach((name) => {
-      const commandObj = this._settings.commands[name];
-      this._checkCommand(commandObj.command);
+  _pipeCommandsPromises() {
+    // loop on each commands
+    Object.keys(this._commands).forEach((name) => {
+      const command = this._commands[name];
+      command.on('run', (data) => {
+        this.trigger('run', data);
+      });
+      command.on('close', (data) => {
+        console.log('CLOSE');
+        this.trigger('close', data);
+      });
+      command.on('success', (data) => {
+        this.trigger('success', data);
+      });
+      command.on('error', (data) => {
+        this.trigger('error', data);
+      });
+      command.on('data', (data) => {
+        console.log('DSA');
+        this.trigger('data', data);
+      });
+      command.on('kill', (data) => {
+        this.trigger('kill', data);
+      });
     });
-  }
-
-  /**
-   * @name                 _checkCommand
-   * @type                Function
-   * @private
-   *
-   * This methood takes a command as parameter and return true if it is executable or throw an error if not
-   *
-   * @param         {String}          command           The command to check
-   * @return        {Boolean}                           true if is executable, throw an error if not
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _checkCommand(command) {
-    let extension, executable;
-    if (__isPath(command, true)) {
-      // get the file extension
-      extension = __extension(command);
-      executable = this._getExecutableFromExtension(extension);
-    } else if (typeof command === 'string') {
-      // treat this as a command
-      executable = command.split(' ').slice(0, 1);
-    } else {
-      // the passed process value is not something usable...
-      throw new Error(
-        `The passed command "<primary>${command}</primary>" is not something usable...`
-      );
-    }
-    // check if the command needed to launch this script is available
-    if (!__commandExists.sync(executable)) {
-      throw new Error(
-        `Sorry but the executable "${executable}" needed to launch the command named "${name}" is not installed on your machine...`
-      );
-    }
-    return true;
   }
 
   /**
@@ -227,14 +291,14 @@ module.exports = class SProcess {
           case 'run':
             // run the command
             if (
-              this._settings.commands[keyObj.command] &&
-              this._settings.commands[keyObj.command].isRunning &&
-              this._settings.commands[keyObj.command].promise
+              this._commands[keyObj.command] &&
+              this._commands[keyObj.command]._isRunning &&
+              this._commands[keyObj.command].promise
             ) {
-              this._settings.commands[keyObj.command].promise.cancel();
+              this._commands[keyObj.command].promise.resolve();
               this._promise.trigger('key.kill', keyObj);
             } else {
-              this.run(keyObj.command);
+              this.run(this._commands[keyObj.command]);
               this._promise.trigger('key.run', keyObj);
             }
             break;
@@ -273,31 +337,6 @@ module.exports = class SProcess {
   }
 
   /**
-   * @name                _getExecutableFromExtension
-   * @type                Function
-   * @private
-   *
-   * Return the executable to use in order to execute the passed file extension
-   *
-   * @param         {String}        extension       The file extension to get the executable for
-   * @return        {String}                        The executable command to execute the file extension passed
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _getExecutableFromExtension(extension) {
-    switch (extension.toLowerCase()) {
-      case 'js':
-      case 'jsx':
-        return 'node';
-        break;
-      case 'php':
-      default:
-        return extension.toLowerCase();
-        break;
-    }
-  }
-
-  /**
    * @name                _getKeyObjectFromCommandName
    * @type                Function
    * @private
@@ -318,172 +357,97 @@ module.exports = class SProcess {
   }
 
   /**
+   * @name                  _ask
+   * @type                  Function
+   * @async
+   *
+   * This method take care of asking something to the user ans return back the user answer.
+   *
+   * @param         {Object}        question      The question object that describe what to ask. Here's the list of properties available:
+   * - question (null) {String}: Specify the question to ask
+   * - type (yesOrNo) {String}: Specify the type of question to ask. Can be only "yesOrNo" for now but more to come...
+   * @return        {SPromise}                An SPromise instance that will be resolved once the question has been answered
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _ask(question, command) {
+    return new __SPromise((resolve, reject, trigger, cancel) => {
+      switch (question.type) {
+        case 'yesOrNo':
+        default:
+          this._promise.trigger('ask', {
+            question:
+              question.querstion ||
+              `Would you really like to launch the "${command.name}" command? (y/n)`,
+            type: question.type || 'yesOrNo'
+          });
+          __hotkey('y,n', {
+            once: true
+          }).on('key', (key) => {
+            resolve({
+              command,
+              value: key === 'y'
+            });
+          });
+          break;
+      }
+    }).start();
+  }
+
+  /**
    * @name                  run
    * @type                  Function
    * @async
    *
-   * This method is used to run a command specified in the first constructor parameter object
+   * This method is used to run the command
    *
-   * @param         {String}         command        The name of the command to run or a command directly
+   * @param         {SCommand}      command             The SCommand instance to run
    * @return        {SPromise}                          An SPromise instance on which you can subscribe for some events listed bellow and that will be resolved once the command is successfully finished
    * - data: Triggered when some data are logged in the child process
-   * - catch: Triggered when something goes wrong in the child process
+   * - error: Triggered when something goes wrong in the child process
+   * - exit: Triggered when the child process has been exited
+   * - close: Triggered when the child process has been closed
+   * - success: Triggered when the child process has finished with success
+   * - kill: Triggered when the child process has been killed
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(command) {
-    const commandObj = this._settings.commands[command];
-    if (command.split(' ').length === 1 && !this._settings.commands[command]) {
-      throw new Error(
-        `You try to run the command named "${command}" but it does not exists in the registered commands. Here's the list of available ones\n- ${Object.keys(
-          this._settings.commands
-        ).join('\n- ')}`
-      );
-    } else {
-      commandObj.name = command;
-    }
-
-    // check if the command can be run depending on the "concurrent" property and the command state
-    if (commandObj && commandObj.isRunning && !commandObj.concurrent) {
-      this._promise.trigger('warning', {
-        ...commandObj,
-        warning: `You cannot run the command "${commandObj.name}" twice at the same time...`
-      });
-      return;
-    }
-
     // search for a key object that correspond to this command
     const keyObjForCurrentCommand = this._getKeyObjectByPropery(
       'command',
-      commandObj.name
+      command.name
     );
 
-    if (keyObjForCurrentCommand) {
-      keyObjForCurrentCommand.isRunning = true;
-    }
+    // // check if the command can be run depending on the "concurrent" property and the command state
+    // if (this._isRunning && !this._settings.concurrent) {
+    //   this.trigger(
+    //     'warning',
+    //     `You cannot run the command "${this._name}" twice at the same time...`
+    //   );
+    //   return;
+    // }
 
-    let child;
-    const promise = new __SPromise(
-      (resolve, reject, trigger, cancel) => {
-        this._promise.trigger('run', commandObj);
-        // save the start timestamp
-        this._durations[commandObj.name] = {
-          start: Date.now()
-        };
-        try {
-          // set the command state
-          if (commandObj) commandObj.isRunning = true;
+    // check if we need to ask something to the user before running this command
+    // if (this._settings.ask) {
 
-          // init the child process
-          child = __childProcess.spawn(commandObj.command, {
-            shell: true,
-            detached: true
-          });
+    //   this._isAsking = true;
 
-          __hotkey('ctrl+c', {
-            once: true
-          }).on('key', (e) => {
-            cancel();
-          });
-
-          child.on('exit', (code, signal) => {
-            cancel();
-            trigger('exit', {
-              ...commandObj,
-              code,
-              signal
-            });
-            this._promise.trigger('exit', {
-              ...commandObj,
-              code,
-              signal
-            });
-          });
-          child.on('close', (code, signal) => {
-            this._durations[commandObj.name].end = Date.now();
-            if (keyObjForCurrentCommand) {
-              keyObjForCurrentCommand.isRunning = false;
-            }
-            if (commandObj) commandObj.isRunning = false;
-            // resolve(code);
-            if (code === 0) {
-              this._promise.trigger('success', {
-                duration:
-                  this._durations[commandObj.name].end -
-                  this._durations[commandObj.name].start,
-                ...commandObj,
-                code,
-                signal
-              });
-            }
-            trigger('close', {
-              ...commandObj,
-              code,
-              signal
-            });
-            this._promise.trigger('close', {
-              ...commandObj,
-              code,
-              signal
-            });
-          });
-          child.on('error', (error) => {
-            cancel();
-            trigger('error', {
-              ...commandObj,
-              error
-            });
-            this._promise.trigger('error', {
-              ...commandObj,
-              error
-            });
-          });
-          child.stdout.on('data', (value) => {
-            trigger('data', {
-              ...commandObj,
-              data: value.toString()
-            });
-            this._promise.trigger('data', {
-              ...commandObj,
-              data: value.toString()
-            });
-          });
-          child.stderr.on('data', (error) => {
-            trigger('error', {
-              ...commandObj,
-              error: error.toString()
-            });
-            this._promise.trigger('error', {
-              ...commandObj,
-              error: error.toString()
-            });
-          });
-        } catch (e) {
-          cancel();
-        }
-      },
-      {
-        stacks: 'data,error,exit,close,kill'
-      }
-    )
-      .on('cancel,finally', () => {
-        if (commandObj) {
-          commandObj.isRunning = false;
-          delete commandObj.promise;
-        }
-        console.log('KILL');
-        child.kill();
-        promise.trigger('kill', commandObj);
-        this._promise.trigger('kill', commandObj);
-      })
-      .start();
-
-    // store the promise in the command object
-    if (commandObj) {
-      commandObj.promise = promise;
-    }
+    //   const askPromise = this._ask(commandObj.ask, commandObj);
+    //   this._askPromises.push(askPromise);
+    //   askPromise.then(() => {
+    //     this._askPromises.splice(this._askPromises.indexOf(askPromise), 1);
+    //   });
+    //   const answer = await askPromise;
+    //   delete commandObj._isAsking;
+    //   this._promise.trigger('answer', answer);
+    //   if (answer.value === false) {
+    //     cancel();
+    //     return;
+    //   }
+    // }
 
     // return the promise
-    return promise;
+    return command.run();
   }
 };

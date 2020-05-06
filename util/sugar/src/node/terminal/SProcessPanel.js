@@ -98,25 +98,61 @@ module.exports = class SProcessPanel extends __SPanel {
    */
   _subscribeToProcess() {
     // subscribe to data
+    let currentCommandColor = null,
+      currentAskLinesCount = 1;
     this._process
       .on('data', (command) => {
+        if (currentCommandColor !== command.color) this.log(' ');
+        currentCommandColor = command.color;
         this.log(command.data, {
           beforeLog: `<${command.color || 'white'}>${
             this._settings.beforeLog
           }</${command.color || 'white'}>`
         });
       })
+      .on('exit', (command) => {
+        if (currentCommandColor !== command.color) this.log(' ');
+        currentCommandColor = command.color;
+        this.log(
+          `<cyan>The command "${command.name}" has been terminated</cyan>`,
+          {
+            beforeLog: `<${command.color || 'white'}>${
+              this._settings.beforeLog
+            }</${command.color || 'white'}>`
+          }
+        );
+      })
       // subscribe to errors
       .on('error', (command) => {
+        if (currentCommandColor !== command.color) this.log(' ');
+        currentCommandColor = command.color;
         this.log(`<error>Something went wrong:</error>\n${command.error}`, {
           beforeLog: `<${command.color || 'white'}>${
             this._settings.beforeLog
           }</${command.color || 'white'}>`
         });
+      })
+      // subscribe to ask
+      .on('ask', (command) => {
         this.log(' ');
+        currentCommandColor = command.color;
+        const lines = this.log(`<cyan>${command.question}</cyan>`, {
+          beforeLog: `<${command.color || 'white'}>${
+            this._settings.beforeLog
+          }</${command.color || 'white'}>`
+        });
+        currentAskLinesCount = lines.length + 1;
+      })
+      // subscribe to answer
+      .on('answer', (answer) => {
+        for (let i = 0; i < currentAskLinesCount; i++) {
+          this._settings.logBox.deleteBottom();
+        }
       })
       // subscribe to warnings
       .on('warning', (command) => {
+        if (currentCommandColor !== command.color) this.log(' ');
+        currentCommandColor = command.color;
         this.log(`<yellow>${command.warning}</yellow>`, {
           beforeLog: `<${command.color || 'white'}>${
             this._settings.beforeLog
@@ -125,6 +161,8 @@ module.exports = class SProcessPanel extends __SPanel {
       })
       // subscribe to "run", meaning that a new command has just been launched in the process
       .on('run', (command) => {
+        if (currentCommandColor !== command.color) this.log(' ');
+        currentCommandColor = command.color;
         this.log(
           `<yellow>Starting the "${command.name}" command:</yellow>\n<blue>${command.command}</blue>`,
           {
@@ -133,6 +171,10 @@ module.exports = class SProcessPanel extends __SPanel {
             }</${command.color || 'white'}>`
           }
         );
+        this._updateKeysBox();
+      })
+      // subscribe to "kill", meaning that a new command has just been launched in the process
+      .on('kill', (command) => {
         this._updateKeysBox();
       })
       .on('key.toggle', () => {
@@ -148,6 +190,8 @@ module.exports = class SProcessPanel extends __SPanel {
       })
       // subscribe to "success", meaning that a command is just finished
       .on('success', (command) => {
+        if (currentCommandColor !== command.color) this.log(' ');
+        currentCommandColor = command.color;
         this.log(
           `<green>The "${
             command.name
@@ -163,7 +207,6 @@ module.exports = class SProcessPanel extends __SPanel {
         );
       })
       .on('close', (command) => {
-        this.log(' ');
         this._updateKeysBox();
       })
       .catch((e) => {
@@ -207,8 +250,8 @@ module.exports = class SProcessPanel extends __SPanel {
           break;
         case 'run':
           settings.style = {
-            bg: keyObj.isRunning ? 'green' : 'yellow',
-            fg: keyObj.isRunning ? 'black' : 'black'
+            bg: keyObj._isRunning ? 'green' : 'yellow',
+            fg: keyObj._isRunning ? 'black' : 'black'
           };
           break;
         case 'action':

@@ -13,6 +13,8 @@ var _deepMerge = _interopRequireDefault(require("../object/deepMerge"));
 
 var _prettyError = _interopRequireDefault(require("pretty-error"));
 
+var _getMethods = _interopRequireDefault(require("../class/getMethods"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -237,7 +239,12 @@ class SPromise {
     this._masterPromise.reject = this._reject.bind(this);
     this._masterPromise.trigger = this.trigger.bind(this);
     this._masterPromise.cancel = this.cancel.bind(this);
-    this._masterPromise.start = this.start.bind(this); // return the master promise
+    this._masterPromise.start = this.start.bind(this);
+    (0, _getMethods.default)(this).forEach(name => {
+      if (!this._masterPromise[name] && ['_cancel', '_destroy', '_executorFn', '_masterPromiseRejectFn', '_masterPromiseResolveFn', '_registerCallbackInStack', '_registerNewStacks', '_reject', '_resolve', '_triggerStack', '_triggerStacks'].indexOf(name) === -1) {
+        this._masterPromise[name] = this[name];
+      }
+    }); // return the master promise
 
     return this._masterPromise;
   }
@@ -318,10 +325,7 @@ class SPromise {
 
 
   async trigger(what, arg) {
-    if (this._isDestroyed) {
-      throw new Error(`Sorry but you can't call the "trigger" method on this SPromise cause it has been destroyed...`);
-    } // triger the passed stacks
-
+    if (this._isDestroyed) return; // triger the passed stacks
 
     return this._triggerStacks(what, arg);
   }
@@ -346,11 +350,9 @@ class SPromise {
     if (typeof stacks === 'string') stacks = stacks.split(',').map(s => s.trim());
     stacks.forEach(stack => {
       if (!this._stacks[stack]) {
-        this._stacks[stack] = [];
-
-        this._masterPromise[stack] = (...args) => {
-          return this._registerCallbackInStack(stack, ...args);
-        };
+        this._stacks[stack] = []; // this._masterPromise[stack] = (...args) => {
+        //   return this._registerCallbackInStack(stack, ...args);
+        // };
       }
     });
   }
@@ -691,9 +693,7 @@ class SPromise {
 
 
   async cancel(...args) {
-    if (this._isDestroyed) {
-      throw new Error(`Sorry but you can't call the "cancel" method on this SPromise cause it has been destroyed...`);
-    }
+    if (this._isDestroyed) return;
 
     if (typeof args[0] === 'number' && typeof args[1] === 'function' || args.length === 1 && typeof args[0] === 'function') {
       return this._registerCallbackInStack('cancel', ...args);
@@ -780,7 +780,7 @@ class SPromise {
     delete this._masterPromiseResolveFn;
     delete this._masterPromiseRejectFn;
     delete this._masterPromise;
-    this._isDestroyed = false;
+    this._isDestroyed = true;
   }
 
 }

@@ -1,8 +1,5 @@
-import __upperFirst from '../string/upperFirst';
-import __asyncForEach from '../array/asyncForEach';
 import __deepMerge from '../object/deepMerge';
 import __prettyError from 'pretty-error';
-import __getMethods from '../class/getMethods';
 
 /**
  * @name                  SPromise
@@ -22,7 +19,7 @@ import __getMethods from '../class/getMethods';
  *    - Expose a method called "resolved" that let you register callbacks called only when the "resolve" function has been called
  *    - Expose a method called "rejected" that let you register callbacks called only when the "reject" function has been called
  *    - Expose a method called "finally" that let you register callbacks called when the "resolve" or "reject" function has been called
- *    - Expose a method called "cancel" that let you register callbacks called only when the "cancel" function has been called
+ *    - Expose a method called "canceled" that let you register callbacks called only when the "cancel" function has been called
  * - Every callbacks registration methods accept as first argument the number of time that your callback will be called at max. Here's some examples:
  *    - new SPromise((...)).then(value => { // do something... }).catch(error => { // do something... }).start();
  *    - new SPromise((...)).then(1, value => { // do something... }).catch(3, error => { // do something... }).start();
@@ -70,18 +67,7 @@ import __getMethods from '../class/getMethods';
  *
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-export default class SPromise {
-  /**
-   * @name                   _masterPromise
-   * @type                    Promise
-   * @private
-   *
-   * Store the master promise returned by the class constructor
-   *
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  _masterPromise = null;
-
+export default class SPromise extends Promise {
   /**
    * @name                   _masterPromiseResolveFn
    * @type                    Promise
@@ -148,8 +134,8 @@ export default class SPromise {
   _stacks = {
     then: [],
     catch: [],
-    resolved: [],
-    rejected: [],
+    resolve: [],
+    reject: [],
     finally: [],
     cancel: []
   };
@@ -162,7 +148,7 @@ export default class SPromise {
    *
    * @param         {Function}          executor          The executor function that will receive the resolve and reject ones...
    * @param         {Object}            [settings={}]     An object of settings for this particular SPromise instance. Here's the available settings:
-   * - stacks (null) {Array|String}: An array or comma separated string of additional stacks you want for this instance
+   * - safeReject (true) {Boolean}: Specify if you prefere that your promise is "resolved" with an "Error" instance when rejected, or if you prefere the normal throw that does not resolve your promise and block the "await" statement...
    *
    * @example       js
    * const promise = new SPromise((resolve, reject, trigger, cancel) => {
@@ -175,31 +161,11 @@ export default class SPromise {
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  constructor(executor, settings = {}) {
-    // save the executor function
-    this._executorFn = executor;
-    // extend settings
-    this._settings = __deepMerge(
-      {
-        stacks: null
-      },
-      settings
-    );
-    // init the master promise returned
-    this._masterPromise = new Promise(async (resolve, reject) => {
-      this._masterPromiseResolveFn = resolve;
-      this._masterPromiseRejectFn = reject;
-      setTimeout(() => {
-        if (!this._isExecutorStarted) {
-          this._executorFn(
-            this._resolve.bind(this),
-            this._reject.bind(this),
-            this.trigger.bind(this),
-            this._cancel.bind(this)
-          );
-          this._isExecutorStarted = true;
-        }
-      });
+  constructor(executorFn, settings = {}) {
+    let _resolve, _reject;
+    super((resolve, reject) => {
+      _resolve = resolve;
+      _reject = reject;
     }).catch((e) => {
       // check if we have some catch callbacks or not...
       if (!this._stacks || this._stacks.catch.length === 0) {
@@ -208,70 +174,124 @@ export default class SPromise {
         console.log(pe.render(new Error(error)));
       }
     });
-    // register additional stacks if set in the settings
-    if (this._settings.stacks) {
-      this._registerNewStacks(this._settings.stacks);
-    }
-    // override master promise methods
-    this._masterPromise.then = this.then.bind(this);
-    this._masterPromise.catch = this.catch.bind(this);
-    this._masterPromise.finally = this.finally.bind(this);
-    this._masterPromise.resolved = this.resolved.bind(this);
-    this._masterPromise.rejected = this.rejected.bind(this);
-    this._masterPromise.on = this.on.bind(this);
 
-    this._masterPromise.resolve = this._resolve.bind(this);
-    this._masterPromise.reject = this._reject.bind(this);
-    this._masterPromise.trigger = this.trigger.bind(this);
-    this._masterPromise.cancel = this.cancel.bind(this);
+    this._masterPromiseResolveFn = _resolve;
+    this._masterPromiseRejectFn = _reject;
+    // save the executor function
+    this._executorFn = executorFn;
+    // extend settings
+    this._settings = __deepMerge(
+      {
+        safeReject: true
+      },
+      settings
+    );
 
-    this._masterPromise.start = this.start.bind(this);
-
-    __getMethods(this).forEach((name) => {
-      if (
-        !this._masterPromise[name] &&
-        [
-          '_cancel',
-          '_destroy',
-          '_executorFn',
-          '_masterPromiseRejectFn',
-          '_masterPromiseResolveFn',
-          '_registerCallbackInStack',
-          '_registerNewStacks',
-          '_reject',
-          '_resolve',
-          '_triggerStack',
-          '_triggerStacks'
-        ].indexOf(name) === -1
-      ) {
-        this._masterPromise[name] = this[name];
+    setTimeout(() => {
+      if (!this._isExecutorStarted) {
+        this._executorFn(
+          this._resolve.bind(this),
+          this._reject.bind(this),
+          this.trigger.bind(this),
+          this._cancel.bind(this)
+        );
+        this._isExecutorStarted = true;
       }
     });
+  }
 
-    // return the master promise
-    return this._masterPromise;
+  /**
+   * @name                    start
+   * @type                    Function
+   *
+   * This method is useful when you want the executor function passed to the constructor to be called directly and not
+   * as usual during the next javascript execution loop.
+   *
+   * @return          {SPromise}                  The SPromise instance to maintain chainability
+   *
+   * @example         js
+   * new SPromise((resolve, reject, trigger, cancel) => {
+   *    // do something
+   * }).then(value => {
+   *    // do something
+   * }).start();
+   *
+   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   */
+  start() {
+    if (this._isDestroyed) {
+      throw new Error(
+        `Sorry but you can't call the "start" method on this SPromise cause it has been destroyed...`
+      );
+    }
+    if (this._isExecutorStarted) return;
+    this._executorFn.apply(this, [
+      this._resolve.bind(this),
+      this._reject.bind(this),
+      this.trigger.bind(this),
+      this._cancel.bind(this)
+    ]);
+    this._isExecutorStarted = true;
+
+    // maintain chainability
+    return this;
+  }
+
+  /**
+   * @name          resolve
+   * @type          Function
+   * @async
+   *
+   * This is the "resolve" method exposed on the promise itself for convinience
+   *
+   * @param         {Mixed}         arg       The value that you want to return back from the promise
+   * @param       {Array|String}         [stacksOrder='then,resolve,finally']      This specify in which order have to be called the stacks
+   * @return        {Mixed}                   Return the resolve result value passed in each stacks specified in the second parameter
+   *
+   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   */
+  resolve(arg, stacksOrder = 'then,resolve,finally') {
+    return this._resolve(arg, stacksOrder);
   }
 
   /**
    * @name          _resolve
    * @type          Function
    * @private
+   * @async
    *
    * This is the method that will be called by the promise executor passed resolve function
    *
    * @param       {Mixed}         arg           The argument that the promise user is sendind through the resolve function
-   * @param       {Array|String}         [stacksOrder='then,resolved,finally']      This specify in which order have to be called the stacks
+   * @param       {Array|String}         [stacksOrder='then,resolve,finally']      This specify in which order have to be called the stacks
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  async _resolve(arg, stacksOrder = 'then,resolved,finally') {
+  async _resolve(arg, stacksOrder = 'then,resolve,finally') {
     if (this._isDestroyed) return;
     // exec the wanted stacks
     const stacksResult = await this._triggerStacks(stacksOrder, arg);
     // resolve the master promise
-    this._masterPromiseResolveFn.apply(this, [stacksResult, this]);
+    this._masterPromiseResolveFn(stacksResult);
     // return the stack result
     return stacksResult;
+  }
+
+  /**
+   * @name          reject
+   * @type          Function
+   * @async
+   *
+   * This is the "reject" method exposed on the promise itself for convinience
+   *
+   * @param         {Mixed}         arg       The value that you want to return back from the promise
+   * @param       {Array|String}         [stacksOrder='then,reject,finally']      This specify in which order have to be called the stacks
+   * @return        {Mixed}                   Return the reject result value passed in each stacks specified in the second parameter
+   *
+   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   */
+  reject(arg, stacksOrder = 'then,reject,finally') {
+    return this._reject(arg, stacksOrder);
   }
 
   /**
@@ -286,14 +306,56 @@ export default class SPromise {
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  async _reject(arg, stacksOrder = ['catch', 'rejected', 'finally']) {
+  async _reject(arg, stacksOrder = 'catch,reject,finally') {
     if (this._isDestroyed) return;
     // exec the wanted stacks
     const stacksResult = await this._triggerStacks(stacksOrder, arg);
     // resolve the master promise
-    this._masterPromiseRejectFn.apply(this, [stacksResult, this]);
-    // destroy the promise
-    this._destroy();
+    if (this._settings.safeReject) {
+      this._masterPromiseResolveFn(new Error(stacksResult));
+    } else {
+      this._masterPromiseRejectFn(stacksResult);
+    }
+    // return the stack result
+    return stacksResult;
+  }
+
+  /**
+   * @name          cancel
+   * @type          Function
+   * @async
+   *
+   * This is the "cancel" method exposed on the promise itself for convinience
+   *
+   * @param         {Mixed}         arg       The value that you want to return back from the promise
+   * @param       {Array|String}         [stacksOrder='cancel']      This specify in which order have to be called the stacks
+   * @return        {Mixed}                   Return the cancel result value passed in each stacks specified in the second parameter
+   *
+   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   */
+  cancel(arg, stacksOrder = 'cancel') {
+    return this._cancel(arg, stacksOrder);
+  }
+
+  /**
+   * @name            _cancel
+   * @type            Function
+   * @private
+   * @async
+   *
+   * Cancel the promise execution, destroy the Promise and resolve it with the passed value without calling any callbacks
+   *
+   * @param         {Mixed}           arg           The argument you want to pass to the cancel callbacks
+   * @return        {Promise}                       A simple promise that will be resolved once the promise has been canceled with the cancel stack result as value
+   *
+   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   */
+  async _cancel(arg, stacksOrder = 'cancel') {
+    if (this._isDestroyed) return;
+    // exec the wanted stacks
+    const stacksResult = await this._triggerStacks(stacksOrder, arg);
+    // resolve the master promise
+    this._masterPromiseResolveFn.apply(this, [stacksResult || null, this]);
     // return the stack result
     return stacksResult;
   }
@@ -348,9 +410,6 @@ export default class SPromise {
     stacks.forEach((stack) => {
       if (!this._stacks[stack]) {
         this._stacks[stack] = [];
-        // this._masterPromise[stack] = (...args) => {
-        //   return this._registerCallbackInStack(stack, ...args);
-        // };
       }
     });
   }
@@ -369,6 +428,11 @@ export default class SPromise {
         `Sorry but you can't call the "${stack}" method on this SPromise cause it has been destroyed...`
       );
     }
+    // make sure the stack exist
+    if (!this._stacks[stack]) {
+      this._registerNewStacks(stack);
+    }
+
     if (typeof stack === 'string') stack = this._stacks[stack];
     // process the args
     let callback = args[0];
@@ -385,7 +449,7 @@ export default class SPromise {
         called: 0
       });
     // maintain chainability
-    return this._masterPromise;
+    return this;
   }
 
   /**
@@ -408,7 +472,13 @@ export default class SPromise {
     if (!this._stacks || Object.keys(this._stacks).length === 0)
       return currentCallbackReturnedValue;
 
-    if (typeof stack === 'string') stack = this._stacks[stack];
+    if (typeof stack === 'string') {
+      // make sure the stack exist
+      if (!this._stacks[stack]) {
+        this._registerNewStacks(stack);
+      }
+      stack = this._stacks[stack];
+    }
 
     // filter the catchStack
     stack.map((item) => item.called++);
@@ -519,14 +589,12 @@ export default class SPromise {
         name = splitedName[0];
         callNumber = parseInt(splitedName[1]);
       }
-      // make sure this action name is available on the promise object
-      if (!this._masterPromise[name]) return;
       // calling the registration method
-      this._masterPromise[name](callNumber, callback);
+      this._registerCallbackInStack(name, callNumber, callback);
     });
 
     // maintain chainability
-    return this._masterPromise;
+    return this;
   }
 
   /**
@@ -559,6 +627,15 @@ export default class SPromise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   then(...args) {
+    if (
+      args.length === 2 &&
+      typeof args[0] === 'function' &&
+      typeof args[1] === 'function'
+    ) {
+      this._masterPromiseResolveFn = args[0];
+      this._masterPromiseRejectFn = args[1];
+      return;
+    }
     return this._registerCallbackInStack('then', ...args);
   }
 
@@ -588,6 +665,7 @@ export default class SPromise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   catch(...args) {
+    // super.catch(...args);
     return this._registerCallbackInStack('catch', ...args);
   }
 
@@ -640,7 +718,7 @@ export default class SPromise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   resolved(...args) {
-    return this._registerCallbackInStack('resolved', ...args);
+    return this._registerCallbackInStack('resolve', ...args);
   }
 
   /**
@@ -666,11 +744,11 @@ export default class SPromise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   rejected(...args) {
-    return this._registerCallbackInStack('rejected', ...args);
+    return this._registerCallbackInStack('reject', ...args);
   }
 
   /**
-   * @name                cancel
+   * @name                canceled
    * @type                Function
    *
    * This method allows the SPromise user to register a function that will be called once when the "revoke" function has been called
@@ -685,83 +763,40 @@ export default class SPromise {
    * new SPromise((resolve, reject, trigger, cancel) => {
    *    // do something...
    *    cancel('hello world');
-   * }).cancel(value => {
+   * }).canceled(value => {
    *    // do something with the value that is "hello world"
    * }).start();
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  async cancel(...args) {
-    if (this._isDestroyed) return;
-    if (
-      (typeof args[0] === 'number' && typeof args[1] === 'function') ||
-      (args.length === 1 && typeof args[0] === 'function')
-    ) {
-      return this._registerCallbackInStack('cancel', ...args);
-    } else {
-      return this._cancel(...args);
-    }
+  canceled(...args) {
+    return this._registerCallbackInStack('cancel', ...args);
   }
 
   /**
-   * @name            _cancel
-   * @type            Function
-   * @private
-   * @async
+   * @name                cancel
+   * @type                Function
    *
-   * Cancel the promise execution, destroy the Promise and resolve it with the passed value without calling any callbacks
+   * This method allows the user to cancel the promise execution.
+   * This mean that the promise will be resolved but not trigger any
+   * other stacks like "resolve,reject,etc..."
    *
-   * @param         {Mixed}           arg           The argument you want to pass to the cancel callbacks
-   * @return        {Promise}                       A simple promise that will be resolved once the promise has been canceled with the cancel stack result as value
-   *
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  async _cancel(...args) {
-    if (this._isDestroyed) return;
-    // otherwise, trigger the "cancel" callback
-    const cancelStackResult = await this._triggerStack('cancel', ...args);
-    // reject the master promise with "null" as parameter
-    this._masterPromiseResolveFn(cancelStackResult || null);
-    // destroy the promise
-    this._destroy();
-    // return the stack result
-    return cancelStackResult;
-  }
-
-  /**
-   * @name                    start
-   * @type                    Function
-   *
-   * This method is useful when you want the executor function passed to the constructor to be called directly and not
-   * as usual during the next javascript execution loop.
-   *
-   * @return          {SPromise}                  The SPromise instance to maintain chainability
+   * @param           {Mixed}         [value=null]      A value that you want to pass to the resolve promise
+   * @return          {Promise}                  A simple promise that will be resolved with the cancel stack result
    *
    * @example         js
    * new SPromise((resolve, reject, trigger, cancel) => {
-   *    // do something
-   * }).then(value => {
-   *    // do something
+   *    // do something...
+   *    cancel('hello world');
+   * }).canceled(value => {
+   *    // do something with the value that is "hello world"
    * }).start();
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  start() {
-    if (this._isDestroyed) {
-      throw new Error(
-        `Sorry but you can't call the "start" method on this SPromise cause it has been destroyed...`
-      );
-    }
-    if (this._isExecutorStarted) return;
-    this._executorFn(
-      this._resolve.bind(this),
-      this._reject.bind(this),
-      this.trigger.bind(this),
-      this._cancel.bind(this)
-    );
-    this._isExecutorStarted = true;
-    // maintain chainability
-    return this._masterPromise;
+  cancel(...args) {
+    if (this._isDestroyed) return;
+    return this._cancel(...args);
   }
 
   /**

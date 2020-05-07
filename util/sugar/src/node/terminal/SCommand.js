@@ -20,7 +20,9 @@ const __uniqid = require('../string/uniqid');
  * @param         {Object}        [settings={}]     Some settings to configure your command
  * - concurrent (true) {Boolean}: Specify if this command can be launched multiple times at the same time
  * - ask (null) {Object|Array}: Specify one or more (Array) questions to ask before running the command. Here's the possible object properties for a question:
- *    - type (yesOrNo) {String}: Specify the question type. For now it support only "yesOrNo"
+ *    - type (confirm) {String}: Specify the question type. For now it support:
+ *        - confirm: This type ask the user if he really want to run this command
+ *        - boolean: This type ask the user to answer yes or no (true, false)
  *    - question (null) {String}: Specify the question to ask to the user
  *
  * @example       js
@@ -31,17 +33,6 @@ const __uniqid = require('../string/uniqid');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = class SCommand extends __SPromise {
-  /**
-   * @name          _settings
-   * @type          Object
-   * @private
-   *
-   * Store this instance settings
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _settings = {};
-
   /**
    * @name        _askPromise
    * @type        Promise
@@ -177,20 +168,25 @@ module.exports = class SCommand extends __SPromise {
         // save the parameters
         this._name = name;
         this._command = command;
-        // extend settings
-        this._settings = __deepMerge(
-          {
-            concurrent: true,
-            ask: null
-          },
-          settings
-        );
+        // // extend settings
+        // this._settings = __deepMerge(
+        //   {
+        //     concurrent: true,
+        //     ask: null
+        //   },
+        //   settings
+        // );
         // check the command
         this._check();
       },
-      {
-        stacks: 'data,error,run,exit,close,success,warning,kill,ask,answer'
-      }
+      __deepMerge(
+        {
+          color: 'white',
+          ask: null,
+          concurrent: true
+        },
+        settings
+      )
     ).start();
   }
 
@@ -205,6 +201,31 @@ module.exports = class SCommand extends __SPromise {
    */
   get name() {
     return this._name;
+  }
+
+  /**
+   * @name                   color
+   * @type                    String
+   * @get
+   *
+   * Get the command color
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get color() {
+    return this._settings.color;
+  }
+
+  /**
+   * @name                    isRunning
+   * @type                    Function
+   *
+   * This method return true if the command is currently running, false if not
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  isRunning() {
+    return this._isRunning;
   }
 
   /**
@@ -246,166 +267,237 @@ module.exports = class SCommand extends __SPromise {
       stdout: [],
       stderr: []
     };
+    const _this = this;
+    let command = this._command;
+
     let childProcess;
-
-    const promise = new __SPromise(
-      async (resolve, reject, trigger, cancel) => {
-        // if (this._askPromises.length) {
-        //   await Promise.all(this._askPromises);
-        //   await __wait(100);
-        // }
-
-        // check if the command has a question running now
-        if (this._isAsking) {
-          return;
-        }
-
-        // check if the command can be run depending on the "concurrent" property and the command state
-        if (this._isRunning && !this._settings.concurrent) {
-          this.trigger(
-            'warning',
-            `You cannot run the command "${this._name}" twice at the same time...`
-          );
-          return;
-        }
-
-        // check if we need to ask something to the user before running this command
-        // if (this._settings.ask) {
-
-        //   this._isAsking = true;
-
-        //   const askPromise = this._ask(commandObj.ask, commandObj);
-        //   this._askPromises.push(askPromise);
-        //   askPromise.then(() => {
-        //     this._askPromises.splice(this._askPromises.indexOf(askPromise), 1);
-        //   });
-        //   const answer = await askPromise;
-        //   delete commandObj._isAsking;
-        //   this._promise.trigger('answer', answer);
-        //   if (answer.value === false) {
-        //     cancel();
-        //     return;
-        //   }
-        // }
-
-        try {
-          // if (keyObjForCurrentCommand) {
-          //   keyObjForCurrentCommand._isRunning = true;
-          // }
-
-          // set the command state
-          this._isRunning = true;
-
-          // emit a run stack event
-          this.trigger('run', this);
-
-          // init the child process
-          childProcess = __childProcess.spawn(this._command, {
-            shell: true,
-            detached: true
-          });
-
-          // listen for the killing of the process
-          __hotkey('ctrl+c', {
-            once: true
-          }).on('key', (e) => {
+    const promise = new __SPromise(async (resolve, reject, trigger, cancel) => {
+      // check if we need to ask some questions before running the command
+      if (this._settings.ask) {
+        const askStack = Array.isArray(this._settings.ask)
+          ? this._settings.ask
+          : [this._settings.ask];
+        for (let i = 0; i < askStack.length; i++) {
+          let askObj = askStack[i];
+          const answer = await this._ask(askObj);
+          askObj = {
+            get command() {
+              return _this;
+            },
+            answer,
+            ...askObj
+          };
+          askStack[i] = askObj;
+          this.trigger('answer', askObj);
+          if (askObj.type === 'confirm' && askObj.answer === false) {
             cancel();
-          });
-
-          // child.on('exit', (code, signal) => {
-          //   cancel();
-          //   trigger('exit', {
-          //     ...commandObj,
-          //     code,
-          //     signal
-          //   });
-          //   this._promise.trigger('exit', {
-          //     ...commandObj,
-          //     code,
-          //     signal
-          //   });
-          // });
-
-          childProcess.on('close', (code, signal) => {
-            processObj.end = Date.now();
-            processObj.duration = processObj.end - processObj.start;
-            if (!code || code === 0) {
-              processObj.promise.resolve({
-                ...processObj,
-                code,
-                signal
-              });
-              this.trigger('success', {
-                ...processObj,
-                code,
-                signal
-              });
-            } else {
-              console.log(processObj);
-              console.log(code, signal);
-              reject({
-                ...processObj,
-                code,
-                signal
-              });
-              this.trigger('close', {
-                ...processObj,
-                code,
-                signal
-              });
-            }
-          });
-          childProcess.on('error', (error) => {
-            processObj.end = Date.now();
-            processObj.duration = processObj.end - processObj.start;
-            reject({
-              ...processObj,
-              error
-            });
-            this.trigger('error', {
-              ...processObj,
-              error
-            });
-          });
-          childProcess.stdout.on('data', (value) => {
-            processObj.stdout.push(value.toString());
-            trigger('data', {
-              ...processObj,
-              data: value.toString()
-            });
-            this.trigger('data', {
-              ...processObj,
-              data: value.toString()
-            });
-          });
-          childProcess.stderr.on('data', (error) => {
-            processObj.stdout.push(error.toString());
-            trigger('error', {
-              ...processObj,
-              error: error.toString()
-            });
-            this.trigger('error', {
-              ...processObj,
-              error: error.toString()
-            });
-          });
-        } catch (e) {
-          reject(e);
+            return;
+          }
         }
-      },
-      {
-        stacks: 'data,error,exit,close,kill'
+
+        askStack.forEach((askObj) => {
+          if (askObj.token) {
+            command = command.replace(`[${askObj.token}]`, askObj.answer);
+          }
+        });
       }
-    )
+
+      // check if the command has a question running now
+      if (this._isAsking) {
+        return;
+      }
+
+      // check if the command can be run depending on the "concurrent" property and the command state
+      if (this.isRunning() && !this._settings.concurrent) {
+        this.trigger('warning', {
+          get command() {
+            return _this;
+          },
+          warning: `You cannot run the command "${this._name}" twice at the same time...`
+        });
+        return;
+      }
+
+      // check if we need to ask something to the user before running this command
+      // if (this._settings.ask) {
+
+      //   this._isAsking = true;
+
+      //   const askPromise = this._ask(commandObj.ask, commandObj);
+      //   this._askPromises.push(askPromise);
+      //   askPromise.then(() => {
+      //     this._askPromises.splice(this._askPromises.indexOf(askPromise), 1);
+      //   });
+      //   const answer = await askPromise;
+      //   delete commandObj._isAsking;
+      //   this._promise.trigger('answer', answer);
+      //   if (answer.value === false) {
+      //     cancel();
+      //     return;
+      //   }
+      // }
+
+      try {
+        // if (keyObjForCurrentCommand) {
+        //   keyObjForCurrentCommand._isRunning = true;
+        // }
+
+        // set the command state
+        this._isRunning = true;
+
+        // emit a run stack event
+        this.trigger('run', {
+          get command() {
+            return _this;
+          },
+          ...processObj
+        });
+
+        // init the child process
+
+        setTimeout(() => {
+          console.log('', '', '');
+          console.log(command);
+        }, 1000);
+        childProcess = __childProcess.spawn(command, {
+          shell: true,
+          detached: true
+        });
+
+        // listen for the killing of the process
+        __hotkey('ctrl+c', {
+          once: true
+        }).on('key', (e) => {
+          cancel();
+        });
+
+        // child.on('exit', (code, signal) => {
+        //   cancel();
+        //   trigger('exit', {
+        //     ...commandObj,
+        //     code,
+        //     signal
+        //   });
+        //   this._promise.trigger('exit', {
+        //     ...commandObj,
+        //     code,
+        //     signal
+        //   });
+        // });
+
+        childProcess.on('close', (code, signal) => {
+          processObj.end = Date.now();
+          processObj.duration = processObj.end - processObj.start;
+          if (!code || code === 0) {
+            resolve({
+              get command() {
+                return _this;
+              },
+              ...processObj,
+              code,
+              signal
+            });
+            this.trigger('success', {
+              get command() {
+                return _this;
+              },
+              ...processObj,
+              code,
+              signal
+            });
+          } else {
+            reject({
+              get command() {
+                return _this;
+              },
+              ...processObj,
+              code,
+              signal
+            });
+            this.trigger('close', {
+              get command() {
+                return _this;
+              },
+              ...processObj,
+              code,
+              signal
+            });
+          }
+        });
+        childProcess.on('error', (error) => {
+          processObj.end = Date.now();
+          processObj.duration = processObj.end - processObj.start;
+          reject({
+            get command() {
+              return _this;
+            },
+            ...processObj,
+            error
+          });
+          this.trigger('error', {
+            get command() {
+              return _this;
+            },
+            ...processObj,
+            error
+          });
+        });
+        childProcess.stdout.on('data', (value) => {
+          processObj.stdout.push(value.toString());
+          trigger('data', {
+            get command() {
+              return _this;
+            },
+            ...processObj,
+            data: value.toString()
+          });
+          this.trigger('data', {
+            get command() {
+              return _this;
+            },
+            ...processObj,
+            data: value.toString()
+          });
+        });
+        childProcess.stderr.on('data', (error) => {
+          processObj.stdout.push(error.toString());
+          trigger('error', {
+            get command() {
+              return _this;
+            },
+            ...processObj,
+            error: error.toString()
+          });
+          this.trigger('error', {
+            get command() {
+              return _this;
+            },
+            ...processObj,
+            error: error.toString()
+          });
+        });
+      } catch (e) {
+        reject(e);
+      }
+    })
       .on('cancel,finally', () => {
         delete this._processes[processId];
         if (Object.keys(this._processes).length <= 0) {
           this._isRunning = false;
         }
-
         childProcess && childProcess.kill();
-        promise.trigger('kill', processObj);
-        this.trigger('kill', processObj);
+        promise.trigger('kill', {
+          get command() {
+            return _this;
+          },
+          ...processObj
+        });
+        this.trigger('kill', {
+          get command() {
+            return _this;
+          },
+          ...processObj
+        });
       })
       .start();
 
@@ -413,7 +505,62 @@ module.exports = class SCommand extends __SPromise {
     this._processes[processId] = processObj;
 
     // return the promise
-    return processObj.promise;
+    return promise;
+  }
+
+  /**
+   * @name                  _ask
+   * @type                  Function
+   * @async
+   *
+   * This method take care of asking something to the user ans return back the user answer.
+   *
+   * @param         {Object}        question      The question object that describe what to ask. Here's the list of properties available:
+   * - question (null) {String}: Specify the question to ask
+   * - type (yesOrNo) {String}: Specify the type of question to ask. Can be only "yesOrNo" for now but more to come...
+   * @return        {SPromise}                An SPromise instance that will be resolved once the question has been answered
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _ask(question) {
+    const _this = this;
+    return new __SPromise((resolve, reject, trigger, cancel) => {
+      switch (question.type) {
+        case 'input':
+          this.trigger('ask', {
+            ...question,
+            get command() {
+              return _this;
+            },
+            answerCallback: (answer) => {
+              resolve(answer);
+            },
+            question:
+              question.question ||
+              'You need to specify a question using the "question" property of the ask object...'
+          });
+          break;
+        case 'confirm':
+        case 'boolean':
+        default:
+          this.trigger('ask', {
+            get command() {
+              return _this;
+            },
+            question:
+              question.querstion || question.type === 'confirm'
+                ? `Would you really like to launch the "${this.name}" command? (y/n)`
+                : `You need to specify a question using the "question" property of the ask object...`,
+            type: question.type || 'confirm'
+          });
+          __hotkey('y,n', {
+            once: true
+          }).on('key', (key) => {
+            resolve(key === 'y');
+          });
+          break;
+      }
+    }).start();
   }
 
   /**

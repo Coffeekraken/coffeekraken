@@ -119,19 +119,13 @@ module.exports = class SProcess {
       settings
     );
     // init the SPromise class
-    this._promise = new __SPromise(
-      (resolve, reject, trigger, cancel) => {
-        this.resolve = resolve.bind(this);
-        this.reject = reject.bind(this);
-        this.trigger = trigger.bind(this);
-        this.cancel = cancel.bind(this);
-      },
-      {
-        stacks:
-          'data,error,run,key.run,key.kill,key.toggle,key.action,exit,close,success,warning,kill,ask,answer'
-      }
-    ).start();
-    this.on = this._promise.on.bind(this);
+    this._promise = new __SPromise((resolve, reject, trigger, cancel) => {
+      this.resolve = resolve.bind(this);
+      this.reject = reject.bind(this);
+      this.trigger = trigger.bind(this);
+      this.cancel = cancel.bind(this);
+    }, {}).start();
+    this.on = this._promise.on.bind(this._promise);
 
     // save commands
     Object.keys(commands).forEach((commandName) => {
@@ -147,10 +141,10 @@ module.exports = class SProcess {
       }
     });
 
-    // this._commands = commands;
-    // Object.keys(this._commands).forEach((name) => {
-    //   this._commands[name].name = name;
-    // });
+    // // this._commands = commands;
+    // // Object.keys(this._commands).forEach((name) => {
+    // //   this._commands[name].name = name;
+    // // });
 
     // pipe the commands promises to this process promise
     this._pipeCommandsPromises();
@@ -164,37 +158,37 @@ module.exports = class SProcess {
     // init keys
     this._initKeys();
 
-    // switch on process type to handle it properly
-    setTimeout(() => {
-      switch (this._settings.type) {
-        case 'steps':
-          (async () => {
-            const results = {};
-            for (let i = 0; i < Object.keys(this._commands).length; i++) {
-              const command = Object.keys(this._commands)[i];
-              // console.log(command);
-              // const res = await this.run(command);
-              // console.log('res', res);
-              // results[command] = res;
-              // await __wait(100);
-            }
-            console.log('difin', results);
-            this._promise.resolve(results);
-          })();
-          break;
-        default:
-          // Object.keys(
-          //   __filter(this._commands, (obj) => {
-          //     return obj.run === true;
-          //   })
-          // ).forEach((name, i) => {
-          //   setTimeout(() => {
-          //     this.run(name);
-          //   }, i * 10);
-          // });
-          break;
-      }
-    });
+    // // switch on process type to handle it properly
+    // setTimeout(() => {
+    //   switch (this._settings.type) {
+    //     case 'steps':
+    //       (async () => {
+    //         const results = {};
+    //         for (let i = 0; i < Object.keys(this._commands).length; i++) {
+    //           const command = Object.keys(this._commands)[i];
+    //           // console.log(command);
+    //           // const res = await this.run(command);
+    //           // console.log('res', res);
+    //           // results[command] = res;
+    //           // await __wait(100);
+    //         }
+    //         console.log('difin', results);
+    //         this._promise.resolve(results);
+    //       })();
+    //       break;
+    //     default:
+    //       // Object.keys(
+    //       //   __filter(this._commands, (obj) => {
+    //       //     return obj.run === true;
+    //       //   })
+    //       // ).forEach((name, i) => {
+    //       //   setTimeout(() => {
+    //       //     this.run(name);
+    //       //   }, i * 10);
+    //       // });
+    //       break;
+    //   }
+    // });
 
     process.stdin.resume();
   }
@@ -212,25 +206,19 @@ module.exports = class SProcess {
     // loop on each commands
     Object.keys(this._commands).forEach((name) => {
       const command = this._commands[name];
-      command.on('run', (data) => {
-        this.trigger('run', data);
-      });
-      command.on('close', (data) => {
-        console.log('CLOSE');
-        this.trigger('close', data);
-      });
-      command.on('success', (data) => {
-        this.trigger('success', data);
-      });
-      command.on('error', (data) => {
-        this.trigger('error', data);
-      });
-      command.on('data', (data) => {
-        console.log('DSA');
-        this.trigger('data', data);
-      });
-      command.on('kill', (data) => {
-        this.trigger('kill', data);
+      [
+        'run',
+        'close',
+        'success',
+        'error',
+        'ask',
+        'answer',
+        'data',
+        'kill'
+      ].forEach((name) => {
+        command.on(name, (data) => {
+          this.trigger(name, data);
+        });
       });
     });
   }
@@ -309,8 +297,6 @@ module.exports = class SProcess {
             break;
           case 'action':
             switch (keyObj.action) {
-              case 'kill':
-                break;
               default:
                 this._promise.trigger('key.action', keyObj);
                 break;
@@ -328,12 +314,12 @@ module.exports = class SProcess {
    * This method simply return the keys settings property
    * so you can build a UI on top of it
    *
-   * @return        {Object}
+   * @return        {Object}            The keys object from the settings
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   getKeys() {
-    return this._settings.keys;
+    return this._settings.keys || {};
   }
 
   /**
@@ -354,44 +340,6 @@ module.exports = class SProcess {
       const obj = this._settings.keys[Object.keys(this._settings.keys)[i]];
       if (obj[property] !== undefined && obj[property] === value) return obj;
     }
-  }
-
-  /**
-   * @name                  _ask
-   * @type                  Function
-   * @async
-   *
-   * This method take care of asking something to the user ans return back the user answer.
-   *
-   * @param         {Object}        question      The question object that describe what to ask. Here's the list of properties available:
-   * - question (null) {String}: Specify the question to ask
-   * - type (yesOrNo) {String}: Specify the type of question to ask. Can be only "yesOrNo" for now but more to come...
-   * @return        {SPromise}                An SPromise instance that will be resolved once the question has been answered
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _ask(question, command) {
-    return new __SPromise((resolve, reject, trigger, cancel) => {
-      switch (question.type) {
-        case 'yesOrNo':
-        default:
-          this._promise.trigger('ask', {
-            question:
-              question.querstion ||
-              `Would you really like to launch the "${command.name}" command? (y/n)`,
-            type: question.type || 'yesOrNo'
-          });
-          __hotkey('y,n', {
-            once: true
-          }).on('key', (key) => {
-            resolve({
-              command,
-              value: key === 'y'
-            });
-          });
-          break;
-      }
-    }).start();
   }
 
   /**
@@ -418,15 +366,6 @@ module.exports = class SProcess {
       'command',
       command.name
     );
-
-    // // check if the command can be run depending on the "concurrent" property and the command state
-    // if (this._isRunning && !this._settings.concurrent) {
-    //   this.trigger(
-    //     'warning',
-    //     `You cannot run the command "${this._name}" twice at the same time...`
-    //   );
-    //   return;
-    // }
 
     // check if we need to ask something to the user before running this command
     // if (this._settings.ask) {

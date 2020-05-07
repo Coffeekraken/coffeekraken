@@ -101,46 +101,52 @@ module.exports = class SProcessPanel extends __SPanel {
     let currentCommandColor = null,
       currentAskLinesCount = 1;
     this._process
-      .on('data', (command) => {
-        if (currentCommandColor !== command.color) this.log(' ');
-        currentCommandColor = command.color;
-        this.log(command.data, {
-          beforeLog: `<${command.color || 'white'}>${
+      .on('data', (data) => {
+        if (currentCommandColor !== data.command.color) this.log(' ');
+        currentCommandColor = data.command.color;
+        this.log(data.command.data, {
+          beforeLog: `<${data.command.color || 'white'}>${
             this._settings.beforeLog
-          }</${command.color || 'white'}>`
+          }</${data.command.color || 'white'}>`
         });
       })
-      .on('exit', (command) => {
-        if (currentCommandColor !== command.color) this.log(' ');
-        currentCommandColor = command.color;
+      .on('exit', (data) => {
+        if (currentCommandColor !== data.command.color) this.log(' ');
+        currentCommandColor = data.command.color;
         this.log(
-          `<cyan>The command "${command.name}" has been terminated</cyan>`,
+          `<cyan>The command "${data.command.name}" has been terminated</cyan>`,
           {
-            beforeLog: `<${command.color || 'white'}>${
+            beforeLog: `<${data.command.color || 'white'}>${
               this._settings.beforeLog
-            }</${command.color || 'white'}>`
+            }</${data.command.color || 'white'}>`
           }
         );
       })
       // subscribe to errors
-      .on('error', (command) => {
-        if (currentCommandColor !== command.color) this.log(' ');
-        currentCommandColor = command.color;
-        this.log(`<error>Something went wrong:</error>\n${command.error}`, {
-          beforeLog: `<${command.color || 'white'}>${
+      .on('error', (data) => {
+        if (currentCommandColor !== data.command.color) this.log(' ');
+        currentCommandColor = data.command.color;
+        this.log(`<error>Something went wrong:</error>\n${data.error}`, {
+          beforeLog: `<${data.command.color || 'white'}>${
             this._settings.beforeLog
-          }</${command.color || 'white'}>`
+          }</${data.command.color || 'white'}>`
         });
       })
       // subscribe to ask
-      .on('ask', (command) => {
+      .on('ask', async (question) => {
         this.log(' ');
-        currentCommandColor = command.color;
-        const lines = this.log(`<cyan>${command.question}</cyan>`, {
-          beforeLog: `<${command.color || 'white'}>${
+        currentCommandColor = question.command.color;
+        const lines = this.log(`<cyan>${question.question}</cyan>`, {
+          beforeLog: `<${question.command.color || 'white'}>${
             this._settings.beforeLog
-          }</${command.color || 'white'}>`
+          }</${question.command.color || 'white'}>`
         });
+        if (question.type === 'input') {
+          const answer = await this.input({
+            placeholder: question.default
+          }).promise;
+          question.answerCallback && question.answerCallback(answer);
+        }
         currentAskLinesCount = lines.length + 1;
       })
       // subscribe to answer
@@ -150,31 +156,31 @@ module.exports = class SProcessPanel extends __SPanel {
         }
       })
       // subscribe to warnings
-      .on('warning', (command) => {
-        if (currentCommandColor !== command.color) this.log(' ');
-        currentCommandColor = command.color;
-        this.log(`<yellow>${command.warning}</yellow>`, {
-          beforeLog: `<${command.color || 'white'}>${
+      .on('warning', (data) => {
+        if (currentCommandColor !== data.command.color) this.log(' ');
+        currentCommandColor = data.command.color;
+        this.log(`<yellow>${data.warning}</yellow>`, {
+          beforeLog: `<${data.command.color || 'white'}>${
             this._settings.beforeLog
-          }</${command.color || 'white'}>`
+          }</${data.command.color || 'white'}>`
         });
       })
       // subscribe to "run", meaning that a new command has just been launched in the process
-      .on('run', (command) => {
-        if (currentCommandColor !== command.color) this.log(' ');
-        currentCommandColor = command.color;
+      .on('run', (data) => {
+        if (currentCommandColor !== data.command.color) this.log(' ');
+        currentCommandColor = data.command.color;
         this.log(
-          `<yellow>Starting the "${command.name}" command:</yellow>\n<blue>${command.command}</blue>`,
+          `<yellow>Starting the "${data.command.name}" command:</yellow>\n<blue>${data.command.command}</blue>`,
           {
-            beforeLog: `<${command.color || 'white'}>${
+            beforeLog: `<${data.command.color || 'white'}>${
               this._settings.beforeLog
-            }</${command.color || 'white'}>`
+            }</${data.command.color || 'white'}>`
           }
         );
         this._updateKeysBox();
       })
       // subscribe to "kill", meaning that a new command has just been launched in the process
-      .on('kill', (command) => {
+      .on('kill', (data) => {
         this._updateKeysBox();
       })
       .on('key.toggle', () => {
@@ -189,24 +195,24 @@ module.exports = class SProcessPanel extends __SPanel {
         }
       })
       // subscribe to "success", meaning that a command is just finished
-      .on('success', (command) => {
-        if (currentCommandColor !== command.color) this.log(' ');
-        currentCommandColor = command.color;
+      .on('success', (data) => {
+        if (currentCommandColor !== data.command.color) this.log(' ');
+        currentCommandColor = data.command.color;
         this.log(
           `<green>The "${
-            command.name
+            data.command.name
           }" command has finished successfuly in <yellow>${__convert(
-            command.duration,
+            data.duration,
             's'
           )}s</yellow></green>`,
           {
-            beforeLog: `<${command.color || 'white'}>${
+            beforeLog: `<${data.command.color || 'white'}>${
               this._settings.beforeLog
-            }</${command.color || 'white'}>`
+            }</${data.command.color || 'white'}>`
           }
         );
       })
-      .on('close', (command) => {
+      .on('close', (data) => {
         this._updateKeysBox();
       })
       .catch((e) => {

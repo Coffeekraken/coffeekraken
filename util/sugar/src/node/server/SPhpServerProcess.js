@@ -43,11 +43,23 @@ module.exports = class SPhpServerProcess extends __SProcess {
     super(
       {
         start: {
-          command: `php -S ${hostname}:${port} -t ${rootDir}`,
+          command: `php -S [hostname]:[port] -t ${rootDir}`,
           concurrent: false,
-          color: 'magenta',
-          run: true,
-          ask: true
+          color: 'red',
+          ask: [
+            {
+              type: 'input',
+              default: 8181,
+              question: 'Is that the port "8181" ok for you?',
+              token: 'port'
+            },
+            {
+              type: 'input',
+              default: 'localhost',
+              question: 'Is that the hostname "localhost" ok for you?',
+              token: 'hostname'
+            }
+          ]
         },
         start1: {
           command: `php -S ${hostname}:8181 -t ${rootDir}`,

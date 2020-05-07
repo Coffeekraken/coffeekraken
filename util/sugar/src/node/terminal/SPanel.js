@@ -6,6 +6,7 @@ const __countLine = require('../string/countLine');
 const __uniqid = require('../string/uniqid');
 const __sugarConfig = require('../config/sugar');
 const { print, stringify } = require('q-i');
+const __SPromise = require('../promise/SPromise');
 
 /**
  * @name                    SPanel
@@ -73,6 +74,11 @@ module.exports = class SPanel extends __blessed.Box {
         padBeforeLog: true,
         screen: false,
         logBox: null,
+        input: {
+          width: '100%',
+          height: 1,
+          placeholder: null
+        },
         blessed: {
           mouse: true,
           keys: true,
@@ -148,6 +154,74 @@ module.exports = class SPanel extends __blessed.Box {
    */
   update() {
     if (this.screen) this.screen.render();
+  }
+
+  /**
+   * @name                   input
+   * @type                  Function
+   *
+   * Allow to display an input to ask something to the user
+   *
+   * @param       {Object}      [settings = {}]       A settings object to configure your input. Here's the available settings:
+   * - width (100%) {String|Number}: Specify the width of your input
+   * - height (1) {String|Number}: Specify the height of your input
+   * - placeholder (null) {String}: Specify a placeholder to display before the user starts to write something
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  input(settings = {}) {
+    settings = __deepMerge(
+      {
+        bottom: 0,
+        left: 0,
+        focus: true,
+        keys: true,
+        mouse: true,
+        inputOnFocus: true,
+        style: {
+          fg: 'black',
+          bg: 'yellow'
+        }
+      },
+      this._settings.input,
+      settings
+    );
+
+    const input = __blessed.textbox({
+      top: this._settings.logBox.content.split('\n').length,
+      ...settings
+    });
+
+    input.promise = new __SPromise((resolve, reject, trigger, cancel) => {});
+
+    this._settings.logBox.append(input);
+    if (settings.focus) input.focus();
+    if (settings.placeholder) {
+      const placeholder = settings.placeholder.toString();
+      input.setValue(placeholder);
+      let placeholderPressed = false;
+      setTimeout(() => {
+        input.on('keypress', (value) => {
+          if (placeholderPressed) return;
+          placeholderPressed = true;
+          input.setValue(value);
+          this.update();
+        });
+      });
+    }
+    input.on('submit', (value) => {
+      input.promise.resolve(value);
+      this._settings.logBox.remove(input);
+      this.update();
+    });
+    input.on('cancel', () => {
+      input.promise.cancel();
+      this._settings.logBox.remove(input);
+      this.update();
+    });
+    this.update();
+
+    return input;
   }
 
   /**

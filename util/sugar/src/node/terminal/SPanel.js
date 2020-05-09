@@ -68,14 +68,13 @@ module.exports = class SPanel extends __blessed.Box {
     const _settings = __deepMerge(
       {
         name: __uniqid(),
-        beforeLog: null,
-        beforeEachLine: null,
-        afterLog: null,
+        beforeLog: '',
+        beforeEachLine: '',
         padBeforeLog: true,
         screen: false,
         logBox: null,
         input: {
-          width: '100%',
+          width: 3,
           height: 1,
           placeholder: null
         },
@@ -173,14 +172,22 @@ module.exports = class SPanel extends __blessed.Box {
     settings = __deepMerge(
       {
         bottom: 0,
-        left: 0,
+        left:
+          __countLine(__parseHtml(this._settings.beforeLog)) +
+          __countLine(__parseHtml(this._settings.beforeEachLine)),
         focus: true,
         keys: true,
         mouse: true,
         inputOnFocus: true,
         style: {
           fg: 'black',
-          bg: 'yellow'
+          bg: 'white'
+        },
+        padding: {
+          top: 0,
+          left: 1,
+          right: 1,
+          bottom: 0
         }
       },
       this._settings.input,
@@ -194,32 +201,68 @@ module.exports = class SPanel extends __blessed.Box {
 
     input.promise = new __SPromise((resolve, reject, trigger, cancel) => {});
 
-    this._settings.logBox.append(input);
-    if (settings.focus) input.focus();
-    if (settings.placeholder) {
-      const placeholder = settings.placeholder.toString();
-      input.setValue(placeholder);
-      let placeholderPressed = false;
-      setTimeout(() => {
-        input.on('keypress', (value) => {
-          if (placeholderPressed) return;
-          placeholderPressed = true;
-          input.setValue(value);
-          this.update();
-        });
+    setTimeout(() => {
+      const _beforeLog =
+        __parseHtml(this._settings.beforeLog) +
+        __parseHtml(this._settings.beforeEachLine);
+      const beforeBox = __blessed.box({
+        top: this._settings.logBox.content.split('\n').length,
+        left: 0,
+        width: __countLine(_beforeLog),
+        height: 1,
+        content: _beforeLog
       });
-    }
-    input.on('submit', (value) => {
-      input.promise.resolve(value);
-      this._settings.logBox.remove(input);
+
+      this.log(' ');
+      this._settings.logBox.append(beforeBox);
+      this._settings.logBox.append(input);
+
+      if (settings.focus) input.focus();
+      if (settings.placeholder) {
+        const placeholder = settings.placeholder.toString();
+        input.setValue(placeholder);
+        input.width =
+          placeholder.length + input.padding.left + input.padding.right;
+        let placeholderPressed = false;
+        setTimeout(() => {
+          let isBackspace = false;
+          input.onceKey('backspace', () => {
+            isBackspace = true;
+          });
+          input.on('keypress', (value) => {
+            setTimeout(() => {
+              if (!placeholderPressed) {
+                if (!isBackspace) {
+                  input.setValue(value);
+                }
+                placeholderPressed = true;
+              }
+              input.width =
+                input.getValue().length +
+                input.padding.left +
+                input.padding.right +
+                2;
+              this.update();
+            });
+          });
+        });
+      }
+      input.on('submit', (value) => {
+        input.promise.resolve(value);
+        input.style.bg = 'green';
+        input.width =
+          input.getValue().length + input.padding.left + input.padding.right;
+        this.update();
+      });
+      input.on('cancel', () => {
+        input.promise.cancel('fwefew');
+        input.style.bg = 'red';
+        input.width =
+          input.getValue().length + input.padding.left + input.padding.right;
+        this.update();
+      });
       this.update();
     });
-    input.on('cancel', () => {
-      input.promise.cancel();
-      this._settings.logBox.remove(input);
-      this.update();
-    });
-    this.update();
 
     return input;
   }
@@ -277,21 +320,9 @@ module.exports = class SPanel extends __blessed.Box {
         beforeEachLine = '';
       }
 
-      let afterLog = logSettings.afterLog;
-      if (afterLog) {
-        if (typeof afterLog === 'function') {
-          afterLog = afterLog(m);
-        }
-        if (typeof afterLog === 'number') {
-          afterLog = ' '.repeat(parseInt(afterLog));
-        }
-      } else {
-        afterLog = '';
-      }
-
       let formatedBeforeEachLine = __parseHtml(beforeEachLine);
       let formatedBeforeLog = __parseHtml(beforeLog);
-      let formatedMessage = m + afterLog;
+      let formatedMessage = m;
 
       // split lines
       formatedMessage = formatedMessage.split('\n');

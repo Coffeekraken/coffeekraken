@@ -1,5 +1,5 @@
 const __parseArgs = require('../../node/cli/parseArgs');
-const __SPhpDependency = require('../../node/dependency/SPhpDependency');
+// const __SPhpDependency = require('../../node/dependency/SPhpDependency');
 
 const __SProcess = require('../../node/terminal/SProcess');
 const __SPanel = require('../../node/terminal/SPanel');

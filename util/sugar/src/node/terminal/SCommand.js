@@ -18,7 +18,6 @@ const __uniqid = require('../string/uniqid');
  * @param         {String}        name            Specify a simple name for this command
  * @param        {String}         command         The command that this instance has to represent
  * @param         {Object}        [settings={}]     Some settings to configure your command
- * - concurrent (true) {Boolean}: Specify if this command can be launched multiple times at the same time
  * - ask (null) {Object|Array}: Specify one or more (Array) questions to ask before running the command. Here's the possible object properties for a question:
  *    - type (confirm) {String}: Specify the question type. For now it support:
  *        - confirm: This type ask the user if he really want to run this command
@@ -87,6 +86,17 @@ module.exports = class SCommand extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _command = null;
+
+  /**
+   * @name          _runPromise
+   * @type          SPromise
+   * @private
+   *
+   * Store the running command promise
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _runPromise = null;
 
   /**
    * @name          _startTimestamp
@@ -168,22 +178,13 @@ module.exports = class SCommand extends __SPromise {
         // save the parameters
         this._name = name;
         this._command = command;
-        // // extend settings
-        // this._settings = __deepMerge(
-        //   {
-        //     concurrent: true,
-        //     ask: null
-        //   },
-        //   settings
-        // );
         // check the command
         this._check();
       },
       __deepMerge(
         {
           color: 'white',
-          ask: null,
-          concurrent: true
+          ask: null
         },
         settings
       )
@@ -242,6 +243,20 @@ module.exports = class SCommand extends __SPromise {
   }
 
   /**
+   * @name                  kill
+   * @type                  Function
+   *
+   * This method can be used to kill the current running process
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  kill() {
+    if (!this._isRunning) return;
+    if (!this._runPromise) return;
+    this._runPromise.cancel();
+  }
+
+  /**
    * @name                  run
    * @type                  Function
    * @async
@@ -259,8 +274,14 @@ module.exports = class SCommand extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run() {
+    if (this.isRunning()) {
+      throw new Error(
+        `Sorry but the command named "${this.name}" is already running...`
+      );
+    }
+
     // generate a process id
-    const processId = __uniqid();
+    // const processId = __uniqid();
     const processObj = {
       start: Date.now(),
       end: null,
@@ -274,12 +295,14 @@ module.exports = class SCommand extends __SPromise {
     const promise = new __SPromise(async (resolve, reject, trigger, cancel) => {
       // check if we need to ask some questions before running the command
       if (this._settings.ask) {
-        const askStack = Array.isArray(this._settings.ask)
-          ? this._settings.ask
-          : [this._settings.ask];
-        for (let i = 0; i < askStack.length; i++) {
-          let askObj = askStack[i];
+        const askStack = this._settings.ask;
+        for (let i = 0; i < Object.keys(askStack).length; i++) {
+          let askObj = askStack[Object.keys(askStack)[i]];
           const answer = await this._ask(askObj);
+          if (answer === '__canceled__') {
+            cancel();
+            return;
+          }
           askObj = {
             get command() {
               return _this;
@@ -287,7 +310,7 @@ module.exports = class SCommand extends __SPromise {
             answer,
             ...askObj
           };
-          askStack[i] = askObj;
+          askStack[Object.keys(askStack)[i]] = askObj;
           this.trigger('answer', askObj);
           if (askObj.type === 'confirm' && askObj.answer === false) {
             cancel();
@@ -295,10 +318,9 @@ module.exports = class SCommand extends __SPromise {
           }
         }
 
-        askStack.forEach((askObj) => {
-          if (askObj.token) {
-            command = command.replace(`[${askObj.token}]`, askObj.answer);
-          }
+        Object.keys(askStack).forEach((askName) => {
+          const askObj = askStack[askName];
+          command = command.replace(`[${askName}]`, askObj.answer);
         });
       }
 
@@ -306,36 +328,6 @@ module.exports = class SCommand extends __SPromise {
       if (this._isAsking) {
         return;
       }
-
-      // check if the command can be run depending on the "concurrent" property and the command state
-      if (this.isRunning() && !this._settings.concurrent) {
-        this.trigger('warning', {
-          get command() {
-            return _this;
-          },
-          warning: `You cannot run the command "${this._name}" twice at the same time...`
-        });
-        return;
-      }
-
-      // check if we need to ask something to the user before running this command
-      // if (this._settings.ask) {
-
-      //   this._isAsking = true;
-
-      //   const askPromise = this._ask(commandObj.ask, commandObj);
-      //   this._askPromises.push(askPromise);
-      //   askPromise.then(() => {
-      //     this._askPromises.splice(this._askPromises.indexOf(askPromise), 1);
-      //   });
-      //   const answer = await askPromise;
-      //   delete commandObj._isAsking;
-      //   this._promise.trigger('answer', answer);
-      //   if (answer.value === false) {
-      //     cancel();
-      //     return;
-      //   }
-      // }
 
       try {
         // if (keyObjForCurrentCommand) {
@@ -354,11 +346,6 @@ module.exports = class SCommand extends __SPromise {
         });
 
         // init the child process
-
-        setTimeout(() => {
-          console.log('', '', '');
-          console.log(command);
-        }, 1000);
         childProcess = __childProcess.spawn(command, {
           shell: true,
           detached: true
@@ -481,10 +468,8 @@ module.exports = class SCommand extends __SPromise {
       }
     })
       .on('cancel,finally', () => {
-        delete this._processes[processId];
-        if (Object.keys(this._processes).length <= 0) {
-          this._isRunning = false;
-        }
+        this._isRunning = false;
+        this._runPromise = null;
         childProcess && childProcess.kill();
         promise.trigger('kill', {
           get command() {
@@ -501,8 +486,8 @@ module.exports = class SCommand extends __SPromise {
       })
       .start();
 
-    // save the process into the stack
-    this._processes[processId] = processObj;
+    // save the run promise
+    this._runPromise = promise;
 
     // return the promise
     return promise;
@@ -524,43 +509,51 @@ module.exports = class SCommand extends __SPromise {
    */
   _ask(question) {
     const _this = this;
-    return new __SPromise((resolve, reject, trigger, cancel) => {
-      switch (question.type) {
-        case 'input':
-          this.trigger('ask', {
-            ...question,
-            get command() {
-              return _this;
-            },
-            answerCallback: (answer) => {
-              resolve(answer);
-            },
-            question:
-              question.question ||
-              'You need to specify a question using the "question" property of the ask object...'
-          });
-          break;
-        case 'confirm':
-        case 'boolean':
-        default:
-          this.trigger('ask', {
-            get command() {
-              return _this;
-            },
-            question:
-              question.querstion || question.type === 'confirm'
-                ? `Would you really like to launch the "${this.name}" command? (y/n)`
-                : `You need to specify a question using the "question" property of the ask object...`,
-            type: question.type || 'confirm'
-          });
-          __hotkey('y,n', {
-            once: true
-          }).on('key', (key) => {
-            resolve(key === 'y');
-          });
-          break;
+    return new __SPromise(
+      (resolve, reject, trigger, cancel) => {
+        switch (question.type) {
+          case 'input':
+            this.trigger('ask', {
+              ...question,
+              get command() {
+                return _this;
+              },
+              answerCallback: (answer) => {
+                resolve(answer);
+              },
+              cancelCallback: () => {
+                reject();
+              },
+              question:
+                question.question ||
+                'You need to specify a question using the "question" property of the ask object...'
+            });
+            break;
+          case 'confirm':
+          case 'boolean':
+          default:
+            this.trigger('ask', {
+              get command() {
+                return _this;
+              },
+              question:
+                question.querstion || question.type === 'confirm'
+                  ? `Would you really like to launch the "${this.name}" command? (y/n)`
+                  : `You need to specify a question using the "question" property of the ask object...`,
+              type: question.type || 'confirm'
+            });
+            __hotkey('y,n', {
+              once: true
+            }).on('key', (key) => {
+              resolve(key === 'y');
+            });
+            break;
+        }
+      },
+      {
+        cancelDefaultReturn: '__canceled__'
       }
-    }).start();
+    ).start();
   }
 
   /**

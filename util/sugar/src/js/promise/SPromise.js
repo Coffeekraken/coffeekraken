@@ -149,6 +149,7 @@ export default class SPromise extends Promise {
    * @param         {Function}          executor          The executor function that will receive the resolve and reject ones...
    * @param         {Object}            [settings={}]     An object of settings for this particular SPromise instance. Here's the available settings:
    * - safeReject (true) {Boolean}: Specify if you prefere that your promise is "resolved" with an "Error" instance when rejected, or if you prefere the normal throw that does not resolve your promise and block the "await" statement...
+   * - cancelDefaultReturn (null) {Mixed}: Specify what you want to return by default if you cancel your promise without any value
    *
    * @example       js
    * const promise = new SPromise((resolve, reject, trigger, cancel) => {
@@ -182,7 +183,8 @@ export default class SPromise extends Promise {
     // extend settings
     this._settings = __deepMerge(
       {
-        safeReject: true
+        safeReject: true,
+        cancelDefaultReturn: null
       },
       settings
     );
@@ -312,7 +314,9 @@ export default class SPromise extends Promise {
     const stacksResult = await this._triggerStacks(stacksOrder, arg);
     // resolve the master promise
     if (this._settings.safeReject) {
-      this._masterPromiseResolveFn(new Error(stacksResult));
+      this._masterPromiseResolveFn(
+        stacksResult || this._settings.cancelDefaultReturn
+      );
     } else {
       this._masterPromiseRejectFn(stacksResult);
     }

@@ -128,7 +128,10 @@ module.exports = class SProcess {
     this.on = this._promise.on.bind(this._promise);
 
     // save commands
+    this._biggestCommandName = Object.keys(commands)[0];
     Object.keys(commands).forEach((commandName) => {
+      if (commandName.length > this._biggestCommandName.length)
+        this._biggestCommandName = commandName;
       const commandObj = commands[commandName];
       if (commandObj instanceof __SCommand) {
         this._commands[commandName] = commandObj;
@@ -141,11 +144,6 @@ module.exports = class SProcess {
       }
     });
 
-    // // this._commands = commands;
-    // // Object.keys(this._commands).forEach((name) => {
-    // //   this._commands[name].name = name;
-    // // });
-
     // pipe the commands promises to this process promise
     this._pipeCommandsPromises();
 
@@ -157,6 +155,8 @@ module.exports = class SProcess {
 
     // init keys
     this._initKeys();
+
+    this._listenCommandActions();
 
     // // switch on process type to handle it properly
     // setTimeout(() => {
@@ -191,6 +191,40 @@ module.exports = class SProcess {
     // });
 
     process.stdin.resume();
+  }
+
+  /**
+   * @name                _listenCommandActions
+   * @type                Function
+   * @private
+   *
+   * This method listen for the process commands actions
+   * in order to maintain some states like the keys states up to date
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _listenCommandActions() {
+    Object.keys(this._commands).forEach((name) => {
+      const command = this._commands[name];
+      command.on('run', (data) => {
+        // set the isRunning state of the keys associated to this command
+        Object.keys(this.keys).forEach((keyName) => {
+          const keyObj = this.keys[keyName];
+          if (keyObj.type === 'run' && keyObj.command === data.command.name) {
+            keyObj._isRunning = true;
+          }
+        });
+      });
+      command.on('kill', (data) => {
+        // set the isRunning state of the keys associated to this command
+        Object.keys(this.keys).forEach((keyName) => {
+          const keyObj = this.keys[keyName];
+          if (keyObj.type === 'run' && keyObj.command === data.command.name) {
+            keyObj._isRunning = false;
+          }
+        });
+      });
+    });
   }
 
   /**
@@ -280,13 +314,12 @@ module.exports = class SProcess {
             // run the command
             if (
               this._commands[keyObj.command] &&
-              this._commands[keyObj.command]._isRunning &&
-              this._commands[keyObj.command].promise
+              this._commands[keyObj.command].isRunning()
             ) {
-              this._commands[keyObj.command].promise.resolve();
+              this._commands[keyObj.command].kill();
               this._promise.trigger('key.kill', keyObj);
             } else {
-              this.run(this._commands[keyObj.command]);
+              keyObj._runPromise = this.run(this._commands[keyObj.command]);
               this._promise.trigger('key.run', keyObj);
             }
             break;
@@ -308,17 +341,45 @@ module.exports = class SProcess {
   }
 
   /**
-   * @name                getKeys
-   * @type                Function
+   * @name                biggestCommandName
+   * @type                String
+   * @get
    *
-   * This method simply return the keys settings property
-   * so you can build a UI on top of it
-   *
-   * @return        {Object}            The keys object from the settings
+   * Get the biggest command name passed in constructor
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  getKeys() {
+  get biggestCommandName() {
+    let biggestCommandName = Object.keys(this.commands) || '';
+    const biggestName = Object.keys(this.commands).forEach((name) => {
+      if (name.length > biggestCommandName.length) biggestCommandName = name;
+    });
+    return biggestCommandName;
+  }
+
+  /**
+   * @name                commands
+   * @type                Object
+   * @get
+   *
+   * Access the commands object
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get commands() {
+    return this._commands;
+  }
+
+  /**
+   * @name                keys
+   * @type                Function
+   * @get
+   *
+   * Access the setted keys
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get keys() {
     return this._settings.keys || {};
   }
 

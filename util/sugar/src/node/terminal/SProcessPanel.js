@@ -69,7 +69,7 @@ module.exports = class SProcessPanel extends __SPanel {
     super(
       __deepMerge(
         {
-          beforeLog: '<time/>',
+          beforeLog: ' '.repeat(process.biggestCommandName.length),
           beforeEachLine: ' <white>│</white> ',
           blessed: {
             scrollable: false
@@ -87,6 +87,25 @@ module.exports = class SProcessPanel extends __SPanel {
   }
 
   /**
+   * @name                _getBeforeLog
+   * @type                Function
+   * @private
+   *
+   * This method return the beforeLog setting to pass to the log method of the SPanel
+   *
+   * @param         {SCommand}        command         The SCommand instance
+   * @return        {String}                          The beforeLog string
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _getBeforeLog(command) {
+    const biggestCommandName = this._process.biggestCommandName;
+    return `<${command.color || 'white'}>${' '.repeat(
+      biggestCommandName.length - command.name.length
+    )}${command.name}</${command.color || 'white'}>`;
+  }
+
+  /**
    * @name          _subscribeToProcess
    * @type          Function
    * @private
@@ -98,16 +117,13 @@ module.exports = class SProcessPanel extends __SPanel {
    */
   _subscribeToProcess() {
     // subscribe to data
-    let currentCommandColor = null,
-      currentAskLinesCount = 1;
+    let currentCommandColor = null;
     this._process
       .on('data', (data) => {
         if (currentCommandColor !== data.command.color) this.log(' ');
         currentCommandColor = data.command.color;
         this.log(data.command.data, {
-          beforeLog: `<${data.command.color || 'white'}>${
-            this._settings.beforeLog
-          }</${data.command.color || 'white'}>`
+          beforeLog: this._getBeforeLog(data.command)
         });
       })
       .on('exit', (data) => {
@@ -116,9 +132,7 @@ module.exports = class SProcessPanel extends __SPanel {
         this.log(
           `<cyan>The command "${data.command.name}" has been terminated</cyan>`,
           {
-            beforeLog: `<${data.command.color || 'white'}>${
-              this._settings.beforeLog
-            }</${data.command.color || 'white'}>`
+            beforeLog: this._getBeforeLog(data.command)
           }
         );
       })
@@ -127,42 +141,41 @@ module.exports = class SProcessPanel extends __SPanel {
         if (currentCommandColor !== data.command.color) this.log(' ');
         currentCommandColor = data.command.color;
         this.log(`<error>Something went wrong:</error>\n${data.error}`, {
-          beforeLog: `<${data.command.color || 'white'}>${
-            this._settings.beforeLog
-          }</${data.command.color || 'white'}>`
+          beforeLog: this._getBeforeLog(data.command)
         });
       })
       // subscribe to ask
       .on('ask', async (question) => {
-        this.log(' ');
+        // this.log(' ');
         currentCommandColor = question.command.color;
-        const lines = this.log(`<cyan>${question.question}</cyan>`, {
-          beforeLog: `<${question.command.color || 'white'}>${
-            this._settings.beforeLog
-          }</${question.command.color || 'white'}>`
+        this.log(`<cyan>${question.question}</cyan>`, {
+          beforeLog: this._getBeforeLog(question.command)
         });
         if (question.type === 'input') {
-          const answer = await this.input({
+          const input = this.input({
             placeholder: question.default
-          }).promise;
-          question.answerCallback && question.answerCallback(answer);
+          });
+          input.promise.on('cancel', () => {
+            question.cancelCallback && question.cancelCallback();
+          });
+          input.promise.on('resolve', (answer) => {
+            question.answerCallback && question.answerCallback(answer);
+          });
         }
-        currentAskLinesCount = lines.length + 1;
       })
       // subscribe to answer
       .on('answer', (answer) => {
-        for (let i = 0; i < currentAskLinesCount; i++) {
-          this._settings.logBox.deleteBottom();
-        }
+        // console.log(answer);
+        // for (let i = 0; i < currentAskLinesCount; i++) {
+        //   this._settings.logBox.deleteBottom();
+        // }
       })
       // subscribe to warnings
       .on('warning', (data) => {
         if (currentCommandColor !== data.command.color) this.log(' ');
         currentCommandColor = data.command.color;
         this.log(`<yellow>${data.warning}</yellow>`, {
-          beforeLog: `<${data.command.color || 'white'}>${
-            this._settings.beforeLog
-          }</${data.command.color || 'white'}>`
+          beforeLog: this._getBeforeLog(data.command)
         });
       })
       // subscribe to "run", meaning that a new command has just been launched in the process
@@ -172,12 +185,12 @@ module.exports = class SProcessPanel extends __SPanel {
         this.log(
           `<yellow>Starting the "${data.command.name}" command:</yellow>\n<blue>${data.command.command}</blue>`,
           {
-            beforeLog: `<${data.command.color || 'white'}>${
-              this._settings.beforeLog
-            }</${data.command.color || 'white'}>`
+            beforeLog: this._getBeforeLog(data.command)
           }
         );
-        this._updateKeysBox();
+        setTimeout(() => {
+          this._updateKeysBox();
+        });
       })
       // subscribe to "kill", meaning that a new command has just been launched in the process
       .on('kill', (data) => {
@@ -206,9 +219,7 @@ module.exports = class SProcessPanel extends __SPanel {
             's'
           )}s</yellow></green>`,
           {
-            beforeLog: `<${data.command.color || 'white'}>${
-              this._settings.beforeLog
-            }</${data.command.color || 'white'}>`
+            beforeLog: this._getBeforeLog(data.command)
           }
         );
       })
@@ -234,7 +245,7 @@ module.exports = class SProcessPanel extends __SPanel {
     let currentLeft = 0;
 
     // keys
-    const keys = this._process.getKeys();
+    const keys = this._process.keys;
 
     // loop on all the keys
     Object.keys(keys).forEach((keyName) => {
@@ -297,7 +308,7 @@ module.exports = class SProcessPanel extends __SPanel {
    */
   _generateUI() {
     // keys
-    const keys = this._process.getKeys();
+    const keys = this._process.keys;
 
     // init the logbox
     this._logBox = __blessed.box(

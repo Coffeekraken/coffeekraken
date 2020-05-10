@@ -26,7 +26,17 @@ module.exports = function parseHtml(message) {
     message = [message];
   }
 
-  const colors = __sugarConfig('colors');
+  const sugarColors = Object.keys(__sugarConfig('colors')).filter(
+    (c) => c !== 'terminal'
+  );
+  const terminalColors = Object.keys(__sugarConfig('colors.terminal'));
+  const colorsObj = {};
+  sugarColors.forEach((name) => {
+    colorsObj[name] = __sugarConfig(`colors.${name}`);
+  });
+  terminalColors.forEach((name) => {
+    colorsObj[name] = __sugarConfig(`colors.terminal.${name}`);
+  });
 
   message = message.map((m) => {
     const tagsMap = {
@@ -91,11 +101,11 @@ module.exports = function parseHtml(message) {
       br: (tag, content) => '\n'
     };
 
-    Object.keys(colors).forEach((c) => {
-      const cValue = colors[c];
-      tagsMap[c] = (tag, content) => __chalk.hex(colors[c])(content);
+    Object.keys(colorsObj).forEach((c) => {
+      const cValue = colorsObj[c];
+      tagsMap[c] = (tag, content) => __chalk.hex(cValue)(content);
       tagsMap[`bg${__upperFirst(c)}`] = (tag, content) =>
-        __chalk.bgHex(colors[c])(content);
+        __chalk.bgHex(cValue)(content);
     });
 
     return __replaceTags(m, tagsMap);

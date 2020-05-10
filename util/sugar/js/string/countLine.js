@@ -2,6 +2,8 @@
 
 var _deepMerge = _interopRequireDefault(require("../object/deepMerge"));
 
+var _stripAnsi = _interopRequireDefault(require("strip-ansi"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -34,7 +36,7 @@ module.exports = function countLine(line, count = {}) {
   let newLine = line;
 
   if (count.terminalSpecialChars === false) {
-    newLine = newLine.replace(/\u001b\[\d{1,3}m/g, '');
+    newLine = (0, _stripAnsi.default)(newLine);
   }
 
   if (count.htmlTags === false) {

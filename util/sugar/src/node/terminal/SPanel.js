@@ -7,6 +7,7 @@ const __uniqid = require('../string/uniqid');
 const __sugarConfig = require('../config/sugar');
 const { print, stringify } = require('q-i');
 const __SPromise = require('../promise/SPromise');
+const __color = require('../color/color');
 
 /**
  * @name                    SPanel
@@ -90,7 +91,7 @@ module.exports = class SPanel extends __blessed.Box {
           },
           style: {
             scrollbar: {
-              bg: __sugarConfig('colors.primary')
+              bg: __color('terminal.yellow').toString()
             }
           },
           padding: {
@@ -108,7 +109,16 @@ module.exports = class SPanel extends __blessed.Box {
     let screenInstance;
     if (_settings.screen === true) {
       screenInstance = __blessed.screen({
-        smartCSR: true
+        smartCSR: true,
+        cursor: {
+          artificial: true,
+          shape: {
+            bg: __color('terminal.yellow').toString(),
+            ch: '|'
+            // ch: '█'
+          },
+          blink: true
+        }
       });
     } else if (_settings.screen instanceof __blessed.screen) {
       screenInstance = _settings.screen;
@@ -180,8 +190,8 @@ module.exports = class SPanel extends __blessed.Box {
         mouse: true,
         inputOnFocus: true,
         style: {
-          fg: 'black',
-          bg: 'white'
+          fg: __color('terminal.black').toString(),
+          bg: __color('terminal.yellow').toString()
         },
         padding: {
           top: 0,
@@ -249,14 +259,14 @@ module.exports = class SPanel extends __blessed.Box {
       }
       input.on('submit', (value) => {
         input.promise.resolve(value);
-        input.style.bg = 'green';
+        input.style.bg = __color('terminal.green').toString();
         input.width =
           input.getValue().length + input.padding.left + input.padding.right;
         this.update();
       });
       input.on('cancel', () => {
         input.promise.cancel('fwefew');
-        input.style.bg = 'red';
+        input.style.bg = __color('terminal.red').toString();
         input.width =
           input.getValue().length + input.padding.left + input.padding.right;
         this.update();

@@ -2,6 +2,7 @@ const __SPanel = require('./SPanel');
 const __convert = require('../time/convert');
 const __deepMerge = require('../object/deepMerge');
 const __blessed = require('blessed');
+const __color = require('../color/color');
 
 /**
  * @name                  SProcessPanel
@@ -192,8 +193,14 @@ module.exports = class SProcessPanel extends __SPanel {
           this._updateKeysBox();
         });
       })
-      // subscribe to "kill", meaning that a new command has just been launched in the process
+      // subscribe to "kill", meaning that a command has just been killed
       .on('kill', (data) => {
+        this.log(
+          `<magenta>The command "${data.command.name}" has just been killed</magenta>`,
+          {
+            beforeLog: this._getBeforeLog(data.command)
+          }
+        );
         this._updateKeysBox();
       })
       .on('key.toggle', () => {
@@ -261,20 +268,24 @@ module.exports = class SProcessPanel extends __SPanel {
       switch (keyObj.type) {
         case 'toggle':
           settings.style = {
-            bg: keyObj.value ? 'green' : 'red',
-            fg: 'black'
+            bg: keyObj.value
+              ? __color('terminal.green').toString()
+              : __color('terminal.red').toString(),
+            fg: __color('terminal.black').toString()
           };
           break;
         case 'run':
           settings.style = {
-            bg: keyObj._isRunning ? 'green' : 'yellow',
-            fg: keyObj._isRunning ? 'black' : 'black'
+            bg: keyObj._isRunning
+              ? __color('terminal.green').toString()
+              : __color('terminal.yellow').toString(),
+            fg: __color('terminal.black').toString()
           };
           break;
         case 'action':
           settings.style = {
-            bg: 'white',
-            fg: 'black'
+            bg: __color('terminal.white').toString(),
+            fg: __color('terminal.black').toString()
           };
           break;
       }
@@ -342,8 +353,8 @@ module.exports = class SProcessPanel extends __SPanel {
       bottom: 0,
       left: 0,
       style: {
-        bg: 'white',
-        fg: 'black'
+        bg: __color('terminal.white').toString(),
+        fg: __color('terminal.black').toString()
       }
     });
 

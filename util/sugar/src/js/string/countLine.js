@@ -1,4 +1,5 @@
 import __deepMerge from '../object/deepMerge';
+import __stripAnsi from 'strip-ansi';
 
 /**
  * @name                                  countLine
@@ -22,16 +23,18 @@ import __deepMerge from '../object/deepMerge';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function countLine(line, count = {}) {
-
-  count = __deepMerge({
-    htmlTags: false,
-    terminalSpecialChars: false,
-    newLineChars: false
-  }, count);
+  count = __deepMerge(
+    {
+      htmlTags: false,
+      terminalSpecialChars: false,
+      newLineChars: false
+    },
+    count
+  );
 
   let newLine = line;
   if (count.terminalSpecialChars === false) {
-    newLine = newLine.replace(/\u001b\[\d{1,3}m/g, '');
+    newLine = __stripAnsi(newLine);
   }
   if (count.htmlTags === false) {
     newLine = newLine.replace(/<\/?[a-zA-Z0-9]+\s?\/?>/g, '');
@@ -41,5 +44,4 @@ module.exports = function countLine(line, count = {}) {
   }
 
   return newLine.length;
-
-}
+};

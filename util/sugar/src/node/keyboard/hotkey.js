@@ -60,6 +60,7 @@ module.exports = function hotkey(key, settings = {}) {
       // loop on each promises registered
       Object.keys(hotkeyStack).forEach((id) => {
         const obj = hotkeyStack[id];
+        if (!obj || !obj.key) return;
         obj.key
           .split(',')
           .map((m) => m.trim())

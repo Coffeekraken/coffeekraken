@@ -9,6 +9,7 @@ const { print, stringify } = require('q-i');
 const __SPromise = require('../promise/SPromise');
 const __color = require('../color/color');
 const __hotkey = require('../keyboard/hotkey');
+const __clone = require('../object/clone');
 
 /**
  * @name                    SPanel
@@ -78,9 +79,41 @@ module.exports = class SPanel extends __blessed.Box {
         input: {
           width: 3,
           height: 1,
-          placeholder: null
+          placeholder: null,
+          bottom: 0,
+          left: 0,
+          focus: true,
+          keys: true,
+          mouse: true,
+          inputOnFocus: true,
+          style: {
+            fg: __color('terminal.black').toString(),
+            bg: __color('terminal.yellow').toString()
+          },
+          padding: {
+            top: 0,
+            left: 1,
+            right: 1,
+            bottom: 0
+          }
         },
-        summary: {},
+        summary: {
+          bottom: 0,
+          focus: true,
+          keys: false,
+          mouse: true,
+          interactive: true,
+          style: {
+            item: {
+              bg: __color('terminal.black').toString(),
+              fg: __color('terminal.white').toString()
+            },
+            selected: {
+              bg: __color('terminal.yellow').toString(),
+              fg: __color('terminal.black').toString()
+            }
+          }
+        },
         blessed: {
           mouse: true,
           keys: true,
@@ -168,6 +201,86 @@ module.exports = class SPanel extends __blessed.Box {
   }
 
   /**
+   * @name                  _input
+   * @type                  Function
+   * @private
+   *
+   * This method return a pre-configured textbox
+   *
+   * @param       {Object}      [settings={}]       A blessed textbox settings object with some additional settings:
+   * - focus (true) {Boolean}: Specify if you want the input to have focus directly
+   * - placeholder (null) {String}: Specify a placeholder to set in the input
+   * @return      {Textbox}             A blessed textbox
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _input(settings = {}) {
+    settings = __deepMerge(
+      {
+        focus: true,
+        placeholder: null
+      },
+      __clone(this._settings.input, true),
+      settings
+    );
+
+    const input = __blessed.textbox(settings);
+    input.promise = new __SPromise((resolve, reject, trigger, cancel) => {});
+
+    input.on('attach', () => {
+      setTimeout(() => {
+        if (settings.focus) input.focus();
+
+        let placeholderPressed = false;
+        if (settings.placeholder) {
+          const placeholder = settings.placeholder.toString();
+          input.setValue(placeholder);
+          input.width =
+            placeholder.length + input.padding.left + input.padding.right;
+        }
+
+        let isBackspace = false;
+        input.onceKey('backspace', () => {
+          isBackspace = true;
+        });
+
+        input.on('keypress', (value) => {
+          setTimeout(() => {
+            if (settings.placeholder && !placeholderPressed) {
+              if (!isBackspace) {
+                input.setValue(value);
+              }
+              placeholderPressed = true;
+            }
+            input.width =
+              input.getValue().length +
+              input.padding.left +
+              input.padding.right +
+              2;
+            this.update();
+          });
+        });
+        input.on('submit', (value) => {
+          input.promise.resolve(value);
+          input.style.bg = __color('terminal.green').toString();
+          input.width =
+            input.getValue().length + input.padding.left + input.padding.right;
+          this.update();
+        });
+        input.on('cancel', () => {
+          input.promise.cancel();
+          input.style.bg = __color('terminal.red').toString();
+          input.width =
+            input.getValue().length + input.padding.left + input.padding.right;
+          this.update();
+        });
+        this.update();
+      });
+    });
+    return input;
+  }
+
+  /**
    * @name                   input
    * @type                  Function
    *
@@ -182,36 +295,17 @@ module.exports = class SPanel extends __blessed.Box {
    */
   input(settings = {}) {
     settings = __deepMerge(
+      this._settings.input,
       {
-        bottom: 0,
+        top: this._settings.logBox.content.split('\n').length,
         left:
           __countLine(__parseHtml(this._settings.beforeLog)) +
-          __countLine(__parseHtml(this._settings.beforeEachLine)),
-        focus: true,
-        keys: true,
-        mouse: true,
-        inputOnFocus: true,
-        style: {
-          fg: __color('terminal.black').toString(),
-          bg: __color('terminal.yellow').toString()
-        },
-        padding: {
-          top: 0,
-          left: 1,
-          right: 1,
-          bottom: 0
-        }
+          __countLine(__parseHtml(this._settings.beforeEachLine))
       },
-      this._settings.input,
       settings
     );
 
-    const input = __blessed.textbox({
-      top: this._settings.logBox.content.split('\n').length,
-      ...settings
-    });
-
-    input.promise = new __SPromise((resolve, reject, trigger, cancel) => {});
+    const input = this._input(settings);
 
     setTimeout(() => {
       const _beforeLog =
@@ -228,52 +322,6 @@ module.exports = class SPanel extends __blessed.Box {
       this.log(' ');
       this._settings.logBox.append(beforeBox);
       this._settings.logBox.append(input);
-
-      if (settings.focus) input.focus();
-      if (settings.placeholder) {
-        const placeholder = settings.placeholder.toString();
-        input.setValue(placeholder);
-        input.width =
-          placeholder.length + input.padding.left + input.padding.right;
-        let placeholderPressed = false;
-        setTimeout(() => {
-          let isBackspace = false;
-          input.onceKey('backspace', () => {
-            isBackspace = true;
-          });
-          input.on('keypress', (value) => {
-            setTimeout(() => {
-              if (!placeholderPressed) {
-                if (!isBackspace) {
-                  input.setValue(value);
-                }
-                placeholderPressed = true;
-              }
-              input.width =
-                input.getValue().length +
-                input.padding.left +
-                input.padding.right +
-                2;
-              this.update();
-            });
-          });
-        });
-      }
-      input.on('submit', (value) => {
-        input.promise.resolve(value);
-        input.style.bg = __color('terminal.green').toString();
-        input.width =
-          input.getValue().length + input.padding.left + input.padding.right;
-        this.update();
-      });
-      input.on('cancel', () => {
-        input.promise.cancel();
-        input.style.bg = __color('terminal.red').toString();
-        input.width =
-          input.getValue().length + input.padding.left + input.padding.right;
-        this.update();
-      });
-      this.update();
     });
 
     return input;
@@ -294,26 +342,10 @@ module.exports = class SPanel extends __blessed.Box {
   summary(settings = {}) {
     settings = __deepMerge(
       {
-        bottom: 0,
         top: this._settings.logBox.content.split('\n').length,
         left:
           __countLine(__parseHtml(this._settings.beforeLog)) +
-          __countLine(__parseHtml(this._settings.beforeEachLine)),
-        focus: true,
-        keys: true,
-        mouse: true,
-        interactive: true,
-        style: {
-          item: {
-            bg: __color('terminal.black').toString(),
-            fg: __color('terminal.white').toString()
-          },
-          selected: {
-            width: 20,
-            bg: __color('terminal.yellow').toString(),
-            fg: __color('terminal.black').toString()
-          }
-        }
+          __countLine(__parseHtml(this._settings.beforeEachLine))
       },
       this._settings.summary,
       settings
@@ -353,18 +385,12 @@ module.exports = class SPanel extends __blessed.Box {
       content: _beforeLogLines.join('\n')
     });
 
+    let editInput;
+    let isEditing = false;
     const list = __blessed.list({
       ...settings,
       items: listItems
     });
-
-    const terminate = () => {
-      this._settings.logBox.remove(list);
-      [...Array(listItems.length - 1)].forEach((i) => {
-        this._settings.logBox.deleteBottom();
-      });
-      this.update();
-    };
 
     list.promise = new __SPromise((resolve, reject, trigger, cancel) => {});
 
@@ -378,25 +404,76 @@ module.exports = class SPanel extends __blessed.Box {
     });
 
     const escape = __hotkey('escape').on('press', (key) => {
-      terminate();
-      list.promise.cancel();
+      if (isEditing) {
+        isEditing = false;
+      } else {
+        terminate();
+        list.promise.cancel();
+      }
     });
     const down = __hotkey('down').on('press', (key) => {
+      if (isEditing) return;
       list.down(1);
       this.update();
     });
     const up = __hotkey('up').on('press', (key) => {
+      if (isEditing) return;
       list.up(1);
       this.update();
     });
     const enter = __hotkey('enter').on('press', (key) => {
-      terminate();
-      list.promise.resolve(settings.items[list.selected]);
+      // terminate();
+      // list.promise.resolve(settings.items[list.selected]);
+
+      if (!isEditing) {
+        isEditing = true;
+        editInput = this._input({
+          placeholder: settings.items[list.selected].default,
+          top: settings.top + list.selected,
+          left: settings.left + longestItemText.length + 3
+        });
+        editInput.promise
+          .on('resolve', (value) => {
+            isEditing = false;
+            const selected = list.selected;
+            listItems = settings.items.map((item, i) => {
+              return (
+                ' ' +
+                item.text +
+                ' '.repeat(longestItemText.length - item.text.length) +
+                ' - ' +
+                (i === list.selected ? value : item.default)
+              );
+            });
+            list.clearItems();
+            list.setItems(listItems);
+            list.select(selected);
+          })
+          .on('cancel', () => {
+            isEditing = false;
+          })
+          .on('cancel,finally', () => {
+            this._settings.logBox.remove(editInput);
+          });
+        this._settings.logBox.append(editInput);
+      }
     });
 
-    [...Array(_beforeLogLines.length - 1)].forEach(() => {
-      this.log(' ');
-    });
+    const terminate = () => {
+      this._settings.logBox.remove(list);
+      this._settings.logBox.remove(beforeBox);
+      if (editInput) this._settings.logBox.remove(editInput);
+      this._settings.logBox.deleteBottom();
+      escape.cancel();
+      down.cancel();
+      up.cancel();
+      enter.cancel();
+      this.update();
+    };
+
+    // [...Array(_beforeLogLines.length - 1)].forEach(() => {
+    //   this.log(' ');
+    // });
     this._settings.logBox.append(beforeBox);
     this._settings.logBox.append(list);
 

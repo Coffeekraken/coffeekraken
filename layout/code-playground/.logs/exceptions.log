@@ -1,0 +1,85 @@
+uncaughtException: {(intermediate value)}.concat is not a function
+TypeError: {(intermediate value)}.concat is not a function
+    at SlackHook.formatter (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/dist/node/log/setupSlackTransport.js:85:11)
+    at SlackHook.log (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/winston-slack-webhook-transport/slackHook.js:38:25)
+    at SlackHook._write (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/winston-transport/index.js:81:19)
+    at doWrite (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:428:64)
+    at writeOrBuffer (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:417:5)
+    at SlackHook.Writable.write (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:334:11)
+    at DerivedLogger.ondata (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/readable-stream/lib/_stream_readable.js:662:20)
+    at DerivedLogger.emit (events.js:215:7)
+    at addChunk (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/readable-stream/lib/_stream_readable.js:297:12)
+    at readableAddChunk (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/readable-stream/lib/_stream_readable.js:279:11)
+uncaughtException: The first argument must be one of type string, Buffer, ArrayBuffer, Array, or Array-like Object. Received type undefined
+TypeError [ERR_INVALID_ARG_TYPE]: The first argument must be one of type string, Buffer, ArrayBuffer, Array, or Array-like Object. Received type undefined
+    at Function.from (buffer.js:305:9)
+    at output_data (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/emailjs/smtp/message.js:386:15)
+    at output_attachment (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/emailjs/smtp/message.js:374:4)
+    at output_alternative (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/emailjs/smtp/message.js:556:5)
+    at output_mixed (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/emailjs/smtp/message.js:299:5)
+    at output_header_data (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/emailjs/smtp/message.js:584:5)
+    at output_header (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/emailjs/smtp/message.js:614:4)
+    at processTicksAndRejections (internal/process/task_queues.js:75:11)
+uncaughtException: contributorsArray is not defined
+ReferenceError: contributorsArray is not defined
+    at exports.Mail.formatter (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/dist/node/log/setupMailTransport.js:68:46)
+    at exports.Mail.Mail.log (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/winston-mail/lib/winston-mail.js:106:21)
+    at exports.Mail._write (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/winston-transport/index.js:81:19)
+    at doWrite (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:428:64)
+    at writeOrBuffer (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:417:5)
+    at exports.Mail.Writable.write (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:334:11)
+    at DerivedLogger.ondata (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/readable-stream/lib/_stream_readable.js:662:20)
+    at DerivedLogger.emit (events.js:215:7)
+    at addChunk (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/readable-stream/lib/_stream_readable.js:297:12)
+    at readableAddChunk (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/readable-stream/lib/_stream_readable.js:279:11)
+uncaughtException: contributorsArray is not defined
+ReferenceError: contributorsArray is not defined
+    at exports.Mail.formatter (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/dist/node/log/setupMailTransport.js:70:46)
+    at exports.Mail.Mail.log (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/winston-mail/lib/winston-mail.js:106:21)
+    at exports.Mail._write (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/winston-transport/index.js:81:19)
+    at doWrite (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:428:64)
+    at writeOrBuffer (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:417:5)
+    at exports.Mail.Writable.write (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:334:11)
+    at DerivedLogger.ondata (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/readable-stream/lib/_stream_readable.js:662:20)
+    at DerivedLogger.emit (events.js:215:7)
+    at addChunk (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/readable-stream/lib/_stream_readable.js:297:12)
+    at readableAddChunk (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/readable-stream/lib/_stream_readable.js:279:11)
+uncaughtException: contributorsArray is not defined
+ReferenceError: contributorsArray is not defined
+    at exports.Mail.formatter (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/dist/node/log/setupMailTransport.js:70:46)
+    at exports.Mail.Mail.log (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/winston-mail/lib/winston-mail.js:106:21)
+    at exports.Mail._write (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/winston-transport/index.js:81:19)
+    at doWrite (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:428:64)
+    at writeOrBuffer (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:417:5)
+    at exports.Mail.Writable.write (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:334:11)
+    at DerivedLogger.ondata (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/readable-stream/lib/_stream_readable.js:662:20)
+    at DerivedLogger.emit (events.js:215:7)
+    at addChunk (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/readable-stream/lib/_stream_readable.js:297:12)
+    at readableAddChunk (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/readable-stream/lib/_stream_readable.js:279:11)
+[31muncaughtException: process.pwd is not a function[39m
+[31mTypeError: process.pwd is not a function[39m
+[31m    at module.exports (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/terminal/compile-server/server/server.js:27:22)[39m
+[31m    at /Users/olivierbossel/data/web/coffeekraken/coffeekraken/terminal/compile-server/bin/coffeekraken-compile-server:60:2[39m
+[31m    at Object.<anonymous> (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/terminal/compile-server/bin/coffeekraken-compile-server:62:3)[39m
+[31m    at Module._compile (internal/modules/cjs/loader.js:959:30)[39m
+[31m    at Object.Module._extensions..js (internal/modules/cjs/loader.js:995:10)[39m
+[31m    at Module.load (internal/modules/cjs/loader.js:815:32)[39m
+[31m    at Function.Module._load (internal/modules/cjs/loader.js:727:14)[39m
+[31m    at Function.Module.runMain (internal/modules/cjs/loader.js:1047:10)[39m
+[31m    at internal/main/run_main_module.js:17:11[39m
+[31muncaughtException: spawn ../../terminal/compile-server/bin/coffeekraken-compile-server ENOENT[39m
+[31mError: spawn ../../terminal/compile-server/bin/coffeekraken-compile-server ENOENT[39m
+[31m    at Process.ChildProcess._handle.onexit (internal/child_process.js:264:19)[39m
+[31m    at onErrorNT (internal/child_process.js:456:16)[39m
+[31m    at processTicksAndRejections (internal/process/task_queues.js:80:21)[39m
+[31muncaughtException: spawn ../../../../terminal/compile-server/bin/coffeekraken-compile-server ENOENT[39m
+[31mError: spawn ../../../../terminal/compile-server/bin/coffeekraken-compile-server ENOENT[39m
+[31m    at Process.ChildProcess._handle.onexit (internal/child_process.js:264:19)[39m
+[31m    at onErrorNT (internal/child_process.js:456:16)[39m
+[31m    at processTicksAndRejections (internal/process/task_queues.js:80:21)[39m
+[31muncaughtException: __fs.fileExistSync is not a function[39m
+[31mTypeError: __fs.fileExistSync is not a function[39m
+[31m    at Socket.<anonymous> (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/layout/code-playground/src/js/server/index.js:281:16)[39m
+[31m    at Socket.emit (events.js:210:5)[39m
+[31m    at /Users/olivierbossel/data/web/coffeekraken/coffeekraken/layout/code-playground/node_modules/socket.io/lib/socket.js:528:12[39m
+[31m    at processTicksAndRejections (internal/process/task_queues.js:75:11)[39m

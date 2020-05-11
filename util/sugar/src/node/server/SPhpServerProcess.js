@@ -65,6 +65,31 @@ module.exports = class SPhpServerProcess extends __SProcess {
             }
           }
         },
+        plop: {
+          command: 'ls -la',
+          concurrent: false,
+          color: 'cyan',
+          ask: {
+            type: 'summary',
+            items: [
+              {
+                id: 'port',
+                text: 'Port',
+                default: port
+              },
+              {
+                id: 'hostname',
+                text: 'Hostname',
+                default: hostname
+              },
+              {
+                id: 'rootDir',
+                text: 'Root directory',
+                default: rootDir
+              }
+            ]
+          }
+        },
         start1: {
           command: `php -S ${hostname}:8181 -t ${rootDir}`,
           concurrent: false,
@@ -80,6 +105,12 @@ module.exports = class SPhpServerProcess extends __SProcess {
             type: 'run',
             menu: 'Start',
             command: 'start'
+          },
+          plop: {
+            key: 'p',
+            type: 'run',
+            menu: 'Plop',
+            command: 'plop'
           },
           start1: {
             key: 'd',

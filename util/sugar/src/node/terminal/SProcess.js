@@ -215,7 +215,7 @@ module.exports = class SProcess {
           }
         });
       });
-      command.on('kill', (data) => {
+      command.on('kill,success', (data) => {
         // set the isRunning state of the keys associated to this command
         Object.keys(this.keys).forEach((keyName) => {
           const keyObj = this.keys[keyName];
@@ -427,25 +427,6 @@ module.exports = class SProcess {
       'command',
       command.name
     );
-
-    // check if we need to ask something to the user before running this command
-    // if (this._settings.ask) {
-
-    //   this._isAsking = true;
-
-    //   const askPromise = this._ask(commandObj.ask, commandObj);
-    //   this._askPromises.push(askPromise);
-    //   askPromise.then(() => {
-    //     this._askPromises.splice(this._askPromises.indexOf(askPromise), 1);
-    //   });
-    //   const answer = await askPromise;
-    //   delete commandObj._isAsking;
-    //   this._promise.trigger('answer', answer);
-    //   if (answer.value === false) {
-    //     cancel();
-    //     return;
-    //   }
-    // }
 
     // return the promise
     return command.run();

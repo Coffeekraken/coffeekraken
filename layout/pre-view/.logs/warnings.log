@@ -1,0 +1,12 @@
+[31m✘ Error: Shell command exit with non zero code: 1[39m
+[31m✘ Error: Shell command exit with non zero code: 2[39m
+[31m✘ Error: Shell command exit with non zero code: 2[39m
+[31m✘ Error: Shell command exit with non zero code: 2[39m
+[31m✘ Error: Shell command exit with non zero code: 2[39m
+[31m✘ Error: Shell command exit with non zero code: 2[39m
+[35m⚠ No files with name "*.bundle.js" has been found...[39m
+[31m✘ ------------ Optimizing images...[39m
+[31m- src/img folder size :   12K[39m
+[31m- dist/img folder size :  12K[39m
+[31m------------ Images optimized![39m
+[31m[39m

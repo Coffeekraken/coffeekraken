@@ -8,6 +8,7 @@ const __sugarConfig = require('../config/sugar');
 const { print, stringify } = require('q-i');
 const __SPromise = require('../promise/SPromise');
 const __color = require('../color/color');
+const __hotkey = require('../keyboard/hotkey');
 
 /**
  * @name                    SPanel
@@ -79,6 +80,7 @@ module.exports = class SPanel extends __blessed.Box {
           height: 1,
           placeholder: null
         },
+        summary: {},
         blessed: {
           mouse: true,
           keys: true,
@@ -265,7 +267,7 @@ module.exports = class SPanel extends __blessed.Box {
         this.update();
       });
       input.on('cancel', () => {
-        input.promise.cancel('fwefew');
+        input.promise.cancel();
         input.style.bg = __color('terminal.red').toString();
         input.width =
           input.getValue().length + input.padding.left + input.padding.right;
@@ -275,6 +277,132 @@ module.exports = class SPanel extends __blessed.Box {
     });
 
     return input;
+  }
+
+  /**
+   * @name                  summary
+   * @type                  Function
+   *
+   * Allow to display some editable informations in a list format.
+   * This is usefull when you want to propose to the user some default informations that he can update if wanted
+   * then send back to the command process
+   *
+   * @param      {Object}             settings = {}               A settings object to configure your summary input
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  summary(settings = {}) {
+    settings = __deepMerge(
+      {
+        bottom: 0,
+        top: this._settings.logBox.content.split('\n').length,
+        left:
+          __countLine(__parseHtml(this._settings.beforeLog)) +
+          __countLine(__parseHtml(this._settings.beforeEachLine)),
+        focus: true,
+        keys: true,
+        mouse: true,
+        interactive: true,
+        style: {
+          item: {
+            bg: __color('terminal.black').toString(),
+            fg: __color('terminal.white').toString()
+          },
+          selected: {
+            width: 20,
+            bg: __color('terminal.yellow').toString(),
+            fg: __color('terminal.black').toString()
+          }
+        }
+      },
+      this._settings.summary,
+      settings
+    );
+
+    let longestItemText = '';
+    settings.items.forEach((item) => {
+      if (longestItemText.length < item.text.length)
+        longestItemText = item.text;
+    });
+    let listItems = [];
+    listItems = settings.items.map((item) => {
+      return (
+        ' ' +
+        item.text +
+        ' '.repeat(longestItemText.length - item.text.length) +
+        ' - ' +
+        item.default
+      );
+    });
+
+    const _beforeLogLine =
+      __parseHtml(this._settings.beforeLog) +
+      __parseHtml(this._settings.beforeEachLine);
+    const _beforeLogLines = [];
+    ' '
+      .repeat(listItems.length)
+      .split(' ')
+      .forEach((i) => {
+        _beforeLogLines.push(_beforeLogLine);
+      });
+    const beforeBox = __blessed.box({
+      top: this._settings.logBox.content.split('\n').length,
+      left: 0,
+      width: __countLine(_beforeLogLine),
+      height: _beforeLogLines.length - 1,
+      content: _beforeLogLines.join('\n')
+    });
+
+    const list = __blessed.list({
+      ...settings,
+      items: listItems
+    });
+
+    const terminate = () => {
+      this._settings.logBox.remove(list);
+      [...Array(listItems.length - 1)].forEach((i) => {
+        this._settings.logBox.deleteBottom();
+      });
+      this.update();
+    };
+
+    list.promise = new __SPromise((resolve, reject, trigger, cancel) => {});
+
+    list.on('select', (list) => {
+      terminate();
+      list.promise.resolve(settings.items[list.selected]);
+    });
+    list.on('cancel', (item) => {
+      terminate();
+      list.promise.cancel();
+    });
+
+    const escape = __hotkey('escape').on('press', (key) => {
+      terminate();
+      list.promise.cancel();
+    });
+    const down = __hotkey('down').on('press', (key) => {
+      list.down(1);
+      this.update();
+    });
+    const up = __hotkey('up').on('press', (key) => {
+      list.up(1);
+      this.update();
+    });
+    const enter = __hotkey('enter').on('press', (key) => {
+      terminate();
+      list.promise.resolve(settings.items[list.selected]);
+    });
+
+    [...Array(_beforeLogLines.length - 1)].forEach(() => {
+      this.log(' ');
+    });
+    this._settings.logBox.append(beforeBox);
+    this._settings.logBox.append(list);
+
+    this.update();
+
+    return list;
   }
 
   /**
@@ -304,7 +432,7 @@ module.exports = class SPanel extends __blessed.Box {
       }
       if (Array.isArray(m)) m = stringify(m);
 
-      m = __parseHtml(m);
+      m = __parseHtml(m || '');
 
       let beforeLog = logSettings.beforeLog;
       if (beforeLog) {

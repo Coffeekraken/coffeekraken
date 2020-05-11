@@ -121,15 +121,11 @@ module.exports = class SProcessPanel extends __SPanel {
     let currentCommandColor = null;
     this._process
       .on('data', (data) => {
-        if (currentCommandColor !== data.command.color) this.log(' ');
-        currentCommandColor = data.command.color;
         this.log(data.command.data, {
           beforeLog: this._getBeforeLog(data.command)
         });
       })
       .on('exit', (data) => {
-        if (currentCommandColor !== data.command.color) this.log(' ');
-        currentCommandColor = data.command.color;
         this.log(
           `<cyan>The command "${data.command.name}" has been terminated</cyan>`,
           {
@@ -139,8 +135,6 @@ module.exports = class SProcessPanel extends __SPanel {
       })
       // subscribe to errors
       .on('error', (data) => {
-        if (currentCommandColor !== data.command.color) this.log(' ');
-        currentCommandColor = data.command.color;
         this.log(`<error>Something went wrong:</error>\n${data.error}`, {
           beforeLog: this._getBeforeLog(data.command)
         });
@@ -157,10 +151,20 @@ module.exports = class SProcessPanel extends __SPanel {
             placeholder: question.default
           });
           input.promise.on('cancel', () => {
-            question.cancelCallback && question.cancelCallback();
+            question.reject && question.reject();
           });
           input.promise.on('resolve', (answer) => {
-            question.answerCallback && question.answerCallback(answer);
+            question.resolve && question.resolve(answer);
+          });
+        } else if (question.type === 'summary') {
+          const summary = this.summary({
+            items: question.items
+          });
+          summary.promise.on('cancel', () => {
+            question.reject && question.reject();
+          });
+          summary.promise.on('resolve', (answer) => {
+            question.resolve && question.resolve(answer);
           });
         }
       })
@@ -173,25 +177,19 @@ module.exports = class SProcessPanel extends __SPanel {
       })
       // subscribe to warnings
       .on('warning', (data) => {
-        if (currentCommandColor !== data.command.color) this.log(' ');
-        currentCommandColor = data.command.color;
         this.log(`<yellow>${data.warning}</yellow>`, {
           beforeLog: this._getBeforeLog(data.command)
         });
       })
       // subscribe to "run", meaning that a new command has just been launched in the process
       .on('run', (data) => {
-        if (currentCommandColor !== data.command.color) this.log(' ');
-        currentCommandColor = data.command.color;
         this.log(
           `<yellow>Starting the "${data.command.name}" command:</yellow>\n<blue>${data.command.command}</blue>`,
           {
             beforeLog: this._getBeforeLog(data.command)
           }
         );
-        setTimeout(() => {
-          this._updateKeysBox();
-        });
+        this._updateKeysBox();
       })
       // subscribe to "kill", meaning that a command has just been killed
       .on('kill', (data) => {
@@ -216,8 +214,6 @@ module.exports = class SProcessPanel extends __SPanel {
       })
       // subscribe to "success", meaning that a command is just finished
       .on('success', (data) => {
-        if (currentCommandColor !== data.command.color) this.log(' ');
-        currentCommandColor = data.command.color;
         this.log(
           `<green>The "${
             data.command.name
@@ -229,6 +225,7 @@ module.exports = class SProcessPanel extends __SPanel {
             beforeLog: this._getBeforeLog(data.command)
           }
         );
+        this._updateKeysBox();
       })
       .on('close', (data) => {
         this._updateKeysBox();
@@ -248,64 +245,67 @@ module.exports = class SProcessPanel extends __SPanel {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _updateKeysBox() {
-    const items = [];
-    let currentLeft = 0;
+    setTimeout(() => {
+      const items = [];
+      let currentLeft = 0;
 
-    // keys
-    const keys = this._process.keys;
+      // keys
+      const keys = this._process.keys;
 
-    // loop on all the keys
-    Object.keys(keys).forEach((keyName) => {
-      const keyObj = keys[keyName];
-      const settings = {
-        padding: {
-          top: 0,
-          bottom: 0,
-          left: 1,
-          right: 1
+      // loop on all the keys
+      Object.keys(keys).forEach((keyName) => {
+        const keyObj = keys[keyName];
+        const settings = {
+          padding: {
+            top: 0,
+            bottom: 0,
+            left: 1,
+            right: 1
+          }
+        };
+        switch (keyObj.type) {
+          case 'toggle':
+            settings.style = {
+              bg: keyObj.value
+                ? __color('terminal.green').toString()
+                : __color('terminal.red').toString(),
+              fg: __color('terminal.black').toString()
+            };
+            break;
+          case 'run':
+            settings.style = {
+              bg: keyObj._isRunning
+                ? __color('terminal.green').toString()
+                : __color('terminal.yellow').toString(),
+              fg: __color('terminal.black').toString()
+            };
+            break;
+          case 'action':
+            settings.style = {
+              bg: __color('terminal.white').toString(),
+              fg: __color('terminal.black').toString()
+            };
+            break;
         }
-      };
-      switch (keyObj.type) {
-        case 'toggle':
-          settings.style = {
-            bg: keyObj.value
-              ? __color('terminal.green').toString()
-              : __color('terminal.red').toString(),
-            fg: __color('terminal.black').toString()
-          };
-          break;
-        case 'run':
-          settings.style = {
-            bg: keyObj._isRunning
-              ? __color('terminal.green').toString()
-              : __color('terminal.yellow').toString(),
-            fg: __color('terminal.black').toString()
-          };
-          break;
-        case 'action':
-          settings.style = {
-            bg: __color('terminal.white').toString(),
-            fg: __color('terminal.black').toString()
-          };
-          break;
-      }
-      const content = `${keyObj.menu}(${keyObj.key})`;
-      const item = __blessed.button({
-        ...settings,
-        left: currentLeft,
-        width: content.length + settings.padding.left + settings.padding.right,
-        content
+        const content = `${keyObj.menu}(${keyObj.key})`;
+        const item = __blessed.button({
+          ...settings,
+          left: currentLeft,
+          width:
+            content.length + settings.padding.left + settings.padding.right,
+          content
+        });
+        currentLeft += item.width;
+
+        items.push(item);
       });
-      currentLeft += item.width;
 
-      items.push(item);
+      items.forEach((item) => {
+        this._keysBox.append(item);
+      });
+
+      this.update();
     });
-
-    items.forEach((item) => {
-      this._keysBox.append(item);
-    });
-
-    this.update();
   }
 
   /**

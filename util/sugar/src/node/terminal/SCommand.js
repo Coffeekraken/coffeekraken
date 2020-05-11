@@ -33,39 +33,6 @@ const __uniqid = require('../string/uniqid');
  */
 module.exports = class SCommand extends __SPromise {
   /**
-   * @name        _askPromise
-   * @type        Promise
-   * @private
-   *
-   * Store the promise of a question asked to the user
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _askPromise = null;
-
-  /**
-   * @name        _process
-   * @type        Promise
-   * @private
-   *
-   * Store child process initiated when running the command
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _process = null;
-
-  /**
-   * @name          _processes
-   * @type          Object
-   * @private
-   *
-   * Store all the processes runned in this command instance
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _processes = {};
-
-  /**
    * @name          _name
    * @type          String
    * @private
@@ -88,79 +55,26 @@ module.exports = class SCommand extends __SPromise {
   _command = null;
 
   /**
-   * @name          _runPromise
-   * @type          SPromise
+   * @name          _runningProcess
+   * @type          Object
    * @private
    *
-   * Store the running command promise
+   * This store the currently running process if their's one
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _runPromise = null;
+  _runningProcess = null;
 
   /**
-   * @name          _startTimestamp
-   * @type          Boolean
+   * @name          _lastRunnedProcess
+   * @type          Object
    * @private
    *
-   * Store the start timestamp
+   * This store the last runned process
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _startTimestamp = null;
-
-  /**
-   * @name          _endTimestamp
-   * @type          Boolean
-   * @private
-   *
-   * Store the end timestamp
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _endTimestamp = null;
-
-  /**
-   * @name          _isRunning
-   * @type          Boolean
-   * @private
-   *
-   * Store if the command is currently running or not
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _isRunning = false;
-
-  /**
-   * @name          _isAsking
-   * @type          Boolean
-   * @private
-   *
-   * Store if the command is currently asking something to the user or not
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _isAsking = false;
-
-  /**
-   * @name          stdout
-   * @type          Array
-   *
-   * Store the data emitted by the command
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  stdout = [];
-
-  /**
-   * @name          stderr
-   * @type          Array
-   *
-   * Store the errors emitted by the command
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  stderr = [];
+  _lastRunnedProcess = null;
 
   /**
    * @name          constructor
@@ -226,7 +140,7 @@ module.exports = class SCommand extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   isRunning() {
-    return this._isRunning;
+    return this._runningProcess !== null;
   }
 
   /**
@@ -251,9 +165,9 @@ module.exports = class SCommand extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   kill() {
-    if (!this._isRunning) return;
-    if (!this._runPromise) return;
-    this._runPromise.cancel();
+    if (!this.isRunning()) return;
+    if (!this._runningProcess.promise) return;
+    this._runningProcess.promise.cancel();
   }
 
   /**
@@ -280,13 +194,14 @@ module.exports = class SCommand extends __SPromise {
       );
     }
 
-    // generate a process id
-    // const processId = __uniqid();
-    const processObj = {
+    this._runningProcess = {
+      id: __uniqid(),
       start: Date.now(),
       end: null,
+      duration: null,
       stdout: [],
-      stderr: []
+      stderr: [],
+      promise: null
     };
     const _this = this;
     let command = this._command;
@@ -295,7 +210,13 @@ module.exports = class SCommand extends __SPromise {
     const promise = new __SPromise(async (resolve, reject, trigger, cancel) => {
       // check if we need to ask some questions before running the command
       if (this._settings.ask) {
-        const askStack = this._settings.ask;
+        let askStack = this._settings.ask;
+        if (askStack.type) {
+          askStack = {
+            default: askStack
+          };
+        }
+
         for (let i = 0; i < Object.keys(askStack).length; i++) {
           let askObj = askStack[Object.keys(askStack)[i]];
           const answer = await this._ask(askObj);
@@ -324,25 +245,13 @@ module.exports = class SCommand extends __SPromise {
         });
       }
 
-      // check if the command has a question running now
-      if (this._isAsking) {
-        return;
-      }
-
       try {
-        // if (keyObjForCurrentCommand) {
-        //   keyObjForCurrentCommand._isRunning = true;
-        // }
-
-        // set the command state
-        this._isRunning = true;
-
         // emit a run stack event
         this.trigger('run', {
           get command() {
             return _this;
           },
-          ...processObj
+          ...this._runningProcess
         });
 
         // init the child process
@@ -358,29 +267,26 @@ module.exports = class SCommand extends __SPromise {
           cancel();
         });
 
-        // child.on('exit', (code, signal) => {
-        //   cancel();
-        //   trigger('exit', {
-        //     ...commandObj,
-        //     code,
-        //     signal
-        //   });
-        //   this._promise.trigger('exit', {
-        //     ...commandObj,
-        //     code,
-        //     signal
-        //   });
-        // });
-
         childProcess.on('close', (code, signal) => {
-          processObj.end = Date.now();
-          processObj.duration = processObj.end - processObj.start;
-          if (!code || code === 0) {
+          if (!code && signal) {
+            trigger('kill', {
+              get command() {
+                return _this;
+              },
+              ...this._runningProcess
+            });
+            this.trigger('kill', {
+              get command() {
+                return _this;
+              },
+              ...this._runningProcess
+            });
+          } else if (code === 0 && !signal) {
             resolve({
               get command() {
                 return _this;
               },
-              ...processObj,
+              ...this._runningProcess,
               code,
               signal
             });
@@ -388,78 +294,109 @@ module.exports = class SCommand extends __SPromise {
               get command() {
                 return _this;
               },
-              ...processObj,
-              code,
-              signal
-            });
-          } else {
-            reject({
-              get command() {
-                return _this;
-              },
-              ...processObj,
-              code,
-              signal
-            });
-            this.trigger('close', {
-              get command() {
-                return _this;
-              },
-              ...processObj,
+              ...this._runningProcess,
               code,
               signal
             });
           }
+          this._lastRunnedProcess = Object.assign({}, this._runningProcess);
+          this._runningProcess = null;
         });
+
+        // childProcess.on('close', (code, signal) => {
+        //   this._runningProcess.end = Date.now();
+        //   this._runningProcess.duration =
+        //     this._runningProcess.end - this._runningProcess.start;
+        //   console.log(signal);
+        //   if (!code || code === 0) {
+        //     if (!signal) {
+        //       resolve({
+        //         get command() {
+        //           return _this;
+        //         },
+        //         ...this._runningProcess,
+        //         code,
+        //         signal
+        //       });
+        //       this.trigger('success', {
+        //         get command() {
+        //           return _this;
+        //         },
+        //         ...this._runningProcess,
+        //         code,
+        //         signal
+        //       });
+        //     }
+        //   } else {
+        //     reject({
+        //       get command() {
+        //         return _this;
+        //       },
+        //       ...this._runningProcess,
+        //       code,
+        //       signal
+        //     });
+        //     this.trigger('close', {
+        //       get command() {
+        //         return _this;
+        //       },
+        //       ...this._runningProcess,
+        //       code,
+        //       signal
+        //     });
+        //   }
+        // });
+
         childProcess.on('error', (error) => {
-          processObj.end = Date.now();
-          processObj.duration = processObj.end - processObj.start;
+          this._runningProcess.end = Date.now();
+          this._runningProcess.duration =
+            this._runningProcess.end - this._runningProcess.start;
           reject({
             get command() {
               return _this;
             },
-            ...processObj,
+            ...this._runningProcess,
             error
           });
           this.trigger('error', {
             get command() {
               return _this;
             },
-            ...processObj,
+            ...this._runningProcess,
             error
           });
         });
         childProcess.stdout.on('data', (value) => {
-          processObj.stdout.push(value.toString());
+          this._runningProcess.stdout.push(value.toString());
           trigger('data', {
             get command() {
               return _this;
             },
-            ...processObj,
+            ...this._runningProcess,
             data: value.toString()
           });
           this.trigger('data', {
             get command() {
               return _this;
             },
-            ...processObj,
+            ...this._runningProcess,
             data: value.toString()
           });
         });
         childProcess.stderr.on('data', (error) => {
-          processObj.stdout.push(error.toString());
+          this._runningProcess.stdout.push(error.toString());
           trigger('error', {
             get command() {
               return _this;
             },
-            ...processObj,
+            ...this._runningProcess,
             error: error.toString()
           });
           this.trigger('error', {
             get command() {
               return _this;
             },
-            ...processObj,
+            ...this._runningProcess,
             error: error.toString()
           });
         });
@@ -468,26 +405,12 @@ module.exports = class SCommand extends __SPromise {
       }
     })
       .on('cancel,finally', () => {
-        this._isRunning = false;
-        this._runPromise = null;
         childProcess && childProcess.kill();
-        promise.trigger('kill', {
-          get command() {
-            return _this;
-          },
-          ...processObj
-        });
-        this.trigger('kill', {
-          get command() {
-            return _this;
-          },
-          ...processObj
-        });
       })
       .start();
 
     // save the run promise
-    this._runPromise = promise;
+    this._runningProcess.promise = promise;
 
     // return the promise
     return promise;
@@ -518,15 +441,25 @@ module.exports = class SCommand extends __SPromise {
               get command() {
                 return _this;
               },
-              answerCallback: (answer) => {
-                resolve(answer);
-              },
-              cancelCallback: () => {
-                reject();
-              },
+              resolve,
+              reject,
               question:
                 question.question ||
                 'You need to specify a question using the "question" property of the ask object...'
+            });
+            break;
+          case 'summary':
+            this.trigger('ask', {
+              get command() {
+                return _this;
+              },
+              resolve,
+              reject,
+              items: question.items,
+              question:
+                question.question ||
+                `Are that command details ok for you? (y/n)`,
+              type: 'summary'
             });
             break;
           case 'confirm':

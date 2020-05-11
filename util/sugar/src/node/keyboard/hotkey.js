@@ -69,11 +69,20 @@ module.exports = function hotkey(key, settings = {}) {
                 name === key.split(settings.splitKey).join('_').toUpperCase()
               ) {
                 obj.promise.trigger('key', key);
+                obj.promise.trigger('press', key);
+              }
+              return;
+            }
+            if (key.length > 1) {
+              if (name === key.toUpperCase()) {
+                obj.promise.trigger('key', key);
+                obj.promise.trigger('press', key);
               }
               return;
             }
             if (name === key) {
               obj.promise.trigger('key', key);
+              obj.promise.trigger('press', key);
             }
           });
       });

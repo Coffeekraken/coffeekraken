@@ -432,6 +432,10 @@ module.exports = class SPanel extends __blessed.Box {
           top: settings.top + list.selected,
           left: settings.left + longestItemText.length + 3
         });
+        list.style.selected = {
+          bg: 'cyan',
+          fg: 'white'
+        };
         editInput.promise
           .on('resolve', (value) => {
             isEditing = false;
@@ -454,6 +458,10 @@ module.exports = class SPanel extends __blessed.Box {
           })
           .on('cancel,finally', () => {
             this._settings.logBox.remove(editInput);
+            list.style.selected = {
+              bg: __color('terminal.yellow').toString(),
+              fg: __color('terminal.black').toString()
+            };
           });
         this._settings.logBox.append(editInput);
       }

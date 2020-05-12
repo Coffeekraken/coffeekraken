@@ -71,10 +71,7 @@ module.exports = class SProcessPanel extends __SPanel {
       __deepMerge(
         {
           beforeLog: ' '.repeat(process.biggestCommandName.length),
-          beforeEachLine: ' <white>│</white> ',
-          blessed: {
-            scrollable: false
-          }
+          beforeEachLine: ' <white>│</white> '
         },
         settings
       )
@@ -94,16 +91,16 @@ module.exports = class SProcessPanel extends __SPanel {
    *
    * This method return the beforeLog setting to pass to the log method of the SPanel
    *
-   * @param         {SCommand}        command         The SCommand instance
+   * @param         {SCommand}        commandObj         The SCommand instance
    * @return        {String}                          The beforeLog string
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _getBeforeLog(command) {
-    const biggestCommandName = this._process.biggestCommandName;
-    return `<${command.color || 'white'}>${' '.repeat(
-      biggestCommandName.length - command.name.length
-    )}${command.name}</${command.color || 'white'}>`;
+  _getBeforeLog(commandObj) {
+    const biggestCommandName = this._process._biggestCommandName;
+    return `<${commandObj.color || 'white'}>${' '.repeat(
+      biggestCommandName.length - commandObj.name.length
+    )}${commandObj.name}</${commandObj.color || 'white'}>`;
   }
 
   /**
@@ -121,30 +118,30 @@ module.exports = class SProcessPanel extends __SPanel {
     let currentCommandColor = null;
     this._process
       .on('data', (data) => {
-        this.log(data.command.data, {
-          beforeLog: this._getBeforeLog(data.command)
+        this.log(data.data, {
+          beforeLog: this._getBeforeLog(data.commandObj)
         });
       })
       .on('exit', (data) => {
         this.log(
-          `<cyan>The command "${data.command.name}" has been terminated</cyan>`,
+          `<cyan>The command "${data.commandObj.name}" has been terminated</cyan>`,
           {
-            beforeLog: this._getBeforeLog(data.command)
+            beforeLog: this._getBeforeLog(data.commandObj)
           }
         );
       })
       // subscribe to errors
       .on('error', (data) => {
         this.log(`<error>Something went wrong:</error>\n${data.error}`, {
-          beforeLog: this._getBeforeLog(data.command)
+          beforeLog: this._getBeforeLog(data.commandObj)
         });
       })
       // subscribe to ask
       .on('ask', async (question) => {
         // this.log(' ');
-        currentCommandColor = question.command.color;
+        currentCommandColor = question.commandObj.color;
         this.log(`<cyan>${question.question}</cyan>`, {
-          beforeLog: this._getBeforeLog(question.command)
+          beforeLog: this._getBeforeLog(question.commandObj)
         });
         if (question.type === 'input') {
           const input = this.input({
@@ -178,15 +175,15 @@ module.exports = class SProcessPanel extends __SPanel {
       // subscribe to warnings
       .on('warning', (data) => {
         this.log(`<yellow>${data.warning}</yellow>`, {
-          beforeLog: this._getBeforeLog(data.command)
+          beforeLog: this._getBeforeLog(data.commandObj)
         });
       })
       // subscribe to "run", meaning that a new command has just been launched in the process
       .on('run', (data) => {
         this.log(
-          `<yellow>Starting the "${data.command.name}" command:</yellow>\n<blue>${data.command.command}</blue>`,
+          `<yellow>Starting the "${data.commandObj.name}" command:</yellow>\n<blue>${data.command}</blue>`,
           {
-            beforeLog: this._getBeforeLog(data.command)
+            beforeLog: this._getBeforeLog(data.commandObj)
           }
         );
         this._updateKeysBox();
@@ -194,9 +191,9 @@ module.exports = class SProcessPanel extends __SPanel {
       // subscribe to "kill", meaning that a command has just been killed
       .on('kill', (data) => {
         this.log(
-          `<magenta>The command "${data.command.name}" has just been killed</magenta>`,
+          `<magenta>The command "${data.commandObj.name}" has just been killed</magenta>`,
           {
-            beforeLog: this._getBeforeLog(data.command)
+            beforeLog: this._getBeforeLog(data.commandObj)
           }
         );
         this._updateKeysBox();
@@ -216,13 +213,13 @@ module.exports = class SProcessPanel extends __SPanel {
       .on('success', (data) => {
         this.log(
           `<green>The "${
-            data.command.name
+            data.commandObj.name
           }" command has finished successfuly in <yellow>${__convert(
             data.duration,
             's'
           )}s</yellow></green>`,
           {
-            beforeLog: this._getBeforeLog(data.command)
+            beforeLog: this._getBeforeLog(data.commandObj)
           }
         );
         this._updateKeysBox();
@@ -318,47 +315,45 @@ module.exports = class SProcessPanel extends __SPanel {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _generateUI() {
-    // keys
-    const keys = this._process.keys;
-
     // init the logbox
-    this._logBox = __blessed.box(
-      __deepMerge(
-        {
-          ...this._settings.blessed
-        },
-        {
-          scrollable: true,
-          padding: {
-            left: 0,
-            right: 0,
-            bottom: 0,
-            top: 0
-          },
-          position: {
-            top: 0,
-            left: 0,
-            bottom: 2,
-            right: 0
-          }
-        }
-      )
-    );
-    this._settings.logBox = this._logBox;
+    // this._logBox = __blessed.box(
+    //   __deepMerge(
+    //     {
+    //       ...this._settings.blessed
+    //     },
+    //     {
+    //       scrollable: true,
+    //       padding: {
+    //         left: 0,
+    //         right: 0,
+    //         bottom: 0,
+    //         top: 0
+    //       },
+    //       position: {
+    //         top: 0,
+    //         left: 0,
+    //         bottom: 2,
+    //         right: 0
+    //       }
+    //     }
+    //   )
+    // );
+    // this._settings.logBox = this._logBox;
+
+    this._settings.logBox.bottom = 2;
 
     // init the blessed box that will display the keys
     this._keysBox = __blessed.box({
-      right: 0,
+      right: 1,
       height: 1,
-      bottom: 0,
-      left: 0,
+      bottom: 1,
+      left: 1,
       style: {
         bg: __color('terminal.white').toString(),
         fg: __color('terminal.black').toString()
       }
     });
 
-    this.append(this._logBox);
     this.append(this._keysBox);
 
     // update the keysBox

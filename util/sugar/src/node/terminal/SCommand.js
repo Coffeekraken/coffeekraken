@@ -152,7 +152,7 @@ module.exports = class SCommand extends __SPromise {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  get command() {
+  get commandObj() {
     return this._command;
   }
 
@@ -201,10 +201,10 @@ module.exports = class SCommand extends __SPromise {
       duration: null,
       stdout: [],
       stderr: [],
-      promise: null
+      promise: null,
+      command: this._command
     };
     const _this = this;
-    let command = this._command;
 
     let childProcess;
     const promise = new __SPromise(async (resolve, reject, trigger, cancel) => {
@@ -225,7 +225,7 @@ module.exports = class SCommand extends __SPromise {
             return;
           }
           askObj = {
-            get command() {
+            get commandObj() {
               return _this;
             },
             answer,
@@ -237,25 +237,30 @@ module.exports = class SCommand extends __SPromise {
             cancel();
             return;
           }
+          switch (askObj.type) {
+            case 'summary':
+              askObj.items.forEach((item) => {
+                this._runningProcess.command = this._runningProcess.command.replace(
+                  `[${item.id}]`,
+                  item.value
+                );
+              });
+              break;
+          }
         }
-
-        Object.keys(askStack).forEach((askName) => {
-          const askObj = askStack[askName];
-          command = command.replace(`[${askName}]`, askObj.answer);
-        });
       }
 
       try {
         // emit a run stack event
         this.trigger('run', {
-          get command() {
+          get commandObj() {
             return _this;
           },
           ...this._runningProcess
         });
 
         // init the child process
-        childProcess = __childProcess.spawn(command, {
+        childProcess = __childProcess.spawn(this._runningProcess.command, {
           shell: true,
           detached: true
         });
@@ -270,20 +275,20 @@ module.exports = class SCommand extends __SPromise {
         childProcess.on('close', (code, signal) => {
           if (!code && signal) {
             trigger('kill', {
-              get command() {
+              get commandObj() {
                 return _this;
               },
               ...this._runningProcess
             });
             this.trigger('kill', {
-              get command() {
+              get commandObj() {
                 return _this;
               },
               ...this._runningProcess
             });
           } else if (code === 0 && !signal) {
             resolve({
-              get command() {
+              get commandObj() {
                 return _this;
               },
               ...this._runningProcess,
@@ -291,7 +296,7 @@ module.exports = class SCommand extends __SPromise {
               signal
             });
             this.trigger('success', {
-              get command() {
+              get commandObj() {
                 return _this;
               },
               ...this._runningProcess,
@@ -303,63 +308,19 @@ module.exports = class SCommand extends __SPromise {
           this._runningProcess = null;
         });
 
-        // childProcess.on('close', (code, signal) => {
-        //   this._runningProcess.end = Date.now();
-        //   this._runningProcess.duration =
-        //     this._runningProcess.end - this._runningProcess.start;
-        //   console.log(signal);
-        //   if (!code || code === 0) {
-        //     if (!signal) {
-        //       resolve({
-        //         get command() {
-        //           return _this;
-        //         },
-        //         ...this._runningProcess,
-        //         code,
-        //         signal
-        //       });
-        //       this.trigger('success', {
-        //         get command() {
-        //           return _this;
-        //         },
-        //         ...this._runningProcess,
-        //         code,
-        //         signal
-        //       });
-        //     }
-        //   } else {
-        //     reject({
-        //       get command() {
-        //         return _this;
-        //       },
-        //       ...this._runningProcess,
-        //       code,
-        //       signal
-        //     });
-        //     this.trigger('close', {
-        //       get command() {
-        //         return _this;
-        //       },
-        //       ...this._runningProcess,
-        //       code,
-        //       signal
-        //     });
-        //   }
-        // });
-
         childProcess.on('error', (error) => {
           this._runningProcess.end = Date.now();
           this._runningProcess.duration =
             this._runningProcess.end - this._runningProcess.start;
           reject({
-            get command() {
+            get commandObj() {
               return _this;
             },
             ...this._runningProcess,
             error
           });
           this.trigger('error', {
-            get command() {
+            get commandObj() {
               return _this;
             },
             ...this._runningProcess,
@@ -369,14 +330,14 @@ module.exports = class SCommand extends __SPromise {
         childProcess.stdout.on('data', (value) => {
           this._runningProcess.stdout.push(value.toString());
           trigger('data', {
-            get command() {
+            get commandObj() {
               return _this;
             },
             ...this._runningProcess,
             data: value.toString()
           });
           this.trigger('data', {
-            get command() {
+            get commandObj() {
               return _this;
             },
             ...this._runningProcess,
@@ -386,14 +347,14 @@ module.exports = class SCommand extends __SPromise {
         childProcess.stderr.on('data', (error) => {
           this._runningProcess.stdout.push(error.toString());
           trigger('error', {
-            get command() {
+            get commandObj() {
               return _this;
             },
             ...this._runningProcess,
             error: error.toString()
           });
           this.trigger('error', {
-            get command() {
+            get commandObj() {
               return _this;
             },
             ...this._runningProcess,
@@ -438,7 +399,7 @@ module.exports = class SCommand extends __SPromise {
           case 'input':
             this.trigger('ask', {
               ...question,
-              get command() {
+              get commandObj() {
                 return _this;
               },
               resolve,
@@ -450,7 +411,7 @@ module.exports = class SCommand extends __SPromise {
             break;
           case 'summary':
             this.trigger('ask', {
-              get command() {
+              get commandObj() {
                 return _this;
               },
               resolve,
@@ -466,7 +427,7 @@ module.exports = class SCommand extends __SPromise {
           case 'boolean':
           default:
             this.trigger('ask', {
-              get command() {
+              get commandObj() {
                 return _this;
               },
               question:

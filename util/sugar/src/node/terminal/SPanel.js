@@ -99,9 +99,8 @@ module.exports = class SPanel extends __blessed.Box {
         },
         summary: {
           bottom: 0,
-          focus: true,
           keys: false,
-          mouse: true,
+          mouse: false,
           interactive: true,
           style: {
             item: {
@@ -109,8 +108,8 @@ module.exports = class SPanel extends __blessed.Box {
               fg: __color('terminal.white').toString()
             },
             selected: {
-              bg: __color('terminal.yellow').toString(),
-              fg: __color('terminal.black').toString()
+              bg: __color('terminal.cyan').toString(),
+              fg: __color('terminal.white').toString()
             }
           }
         },
@@ -132,7 +131,7 @@ module.exports = class SPanel extends __blessed.Box {
           padding: {
             top: 1,
             bottom: 1,
-            left: 2,
+            left: 1,
             right: 1
           }
         }
@@ -145,6 +144,7 @@ module.exports = class SPanel extends __blessed.Box {
     if (_settings.screen === true) {
       screenInstance = __blessed.screen({
         smartCSR: true,
+        autoPadding: true,
         cursor: {
           artificial: true,
           shape: {
@@ -159,13 +159,44 @@ module.exports = class SPanel extends __blessed.Box {
       screenInstance = _settings.screen;
     }
     // extend from blessed.box
-    super(_settings.blessed);
+    super({
+      width: '100%',
+      height: '100%'
+    });
 
     // save settings
     this._settings = _settings;
 
+    const _logBox = __blessed.box({
+      ...this._settings.blessed
+    });
+    const _overlayBox = __blessed.box({
+      ...this._settings.blessed,
+      style: {
+        bg: 'black'
+      },
+      border: {
+        type: 'line'
+      },
+      style: {
+        border: {
+          fg: 'yellow'
+        }
+      },
+      padding: {
+        top: 1,
+        bottom: 1,
+        left: 3,
+        right: 3
+      }
+    });
+
     // manage logBox setting
-    if (!this._settings.logBox) this._settings.logBox = this;
+    if (!this._settings.logBox) this._settings.logBox = _logBox;
+    if (!this._settings.overlayBox) this._settings.overlayBox = _overlayBox;
+
+    // append the logBox to the panel
+    this.append(_logBox);
 
     // append this box to the screen
     if (screenInstance) {
@@ -324,6 +355,8 @@ module.exports = class SPanel extends __blessed.Box {
       this._settings.logBox.append(input);
     });
 
+    this._settings.logBox.setScrollPerc(100);
+
     return input;
   }
 
@@ -340,43 +373,69 @@ module.exports = class SPanel extends __blessed.Box {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   summary(settings = {}) {
-    settings = __deepMerge(
-      {
-        top: this._settings.logBox.content.split('\n').length,
-        left:
-          __countLine(__parseHtml(this._settings.beforeLog)) +
-          __countLine(__parseHtml(this._settings.beforeEachLine))
-      },
-      this._settings.summary,
-      settings
-    );
+    // console.log('P', this._settings.logBox.getScrollPerc());
 
-    let longestItemText = '';
+    settings = __deepMerge({}, __clone(this._settings.summary, true), settings);
+
+    // init settings items
     settings.items.forEach((item) => {
-      if (longestItemText.length < item.text.length)
-        longestItemText = item.text;
+      if (item.value === undefined && item.default) {
+        item.value = item.default;
+      }
     });
-    let listItems = [];
-    listItems = settings.items.map((item) => {
-      return (
-        ' ' +
-        item.text +
-        ' '.repeat(longestItemText.length - item.text.length) +
-        ' - ' +
-        item.default
+
+    const getLongestListItem = () => {
+      let longestItemText = '';
+      settings.items.forEach((item) => {
+        if (longestItemText.length < item.text.length)
+          longestItemText = item.text;
+      });
+      return longestItemText;
+    };
+
+    const buildListItems = (selected) => {
+      const longestItemText = getLongestListItem();
+      let listItems = settings.items.map((item, i) => {
+        let value = settings.items[i].value
+          ? settings.items[i].value
+          : item.default;
+        if (editingItem === i) value = '';
+
+        return __parseHtml(
+          (i === selected ? ' ' : '') +
+            item.text +
+            ' '.repeat(longestItemText.length - item.text.length) +
+            ' '.repeat(i === selected ? 4 : 5) +
+            '<yellow>' +
+            value +
+            '</yellow>'
+        );
+      });
+      listItems.push(
+        (selected === settings.items.length ? ' ' : '') +
+          __parseHtml(`<bold>Validate!</bold>`) +
+          (selected === settings.items.length ? ' ' : '')
       );
-    });
+      return listItems;
+    };
+
+    const rebuildList = () => {
+      const selected = list.selected;
+      let listItems = buildListItems(selected);
+      list.clearItems();
+      list.setItems(listItems);
+      list.select(selected);
+      list.items[list.items.length - 1].top += 1;
+      setSelectedItemWidth();
+    };
 
     const _beforeLogLine =
       __parseHtml(this._settings.beforeLog) +
       __parseHtml(this._settings.beforeEachLine);
     const _beforeLogLines = [];
-    ' '
-      .repeat(listItems.length)
-      .split(' ')
-      .forEach((i) => {
-        _beforeLogLines.push(_beforeLogLine);
-      });
+    [...Array(settings.items.length + 2)].forEach((i) => {
+      _beforeLogLines.push(_beforeLogLine);
+    });
     const beforeBox = __blessed.box({
       top: this._settings.logBox.content.split('\n').length,
       left: 0,
@@ -387,21 +446,22 @@ module.exports = class SPanel extends __blessed.Box {
 
     let editInput;
     let isEditing = false;
+    let editingItem = null;
     const list = __blessed.list({
       ...settings,
-      items: listItems
+      items: buildListItems(settings.items.length)
     });
 
     list.promise = new __SPromise((resolve, reject, trigger, cancel) => {});
 
-    list.on('select', (list) => {
-      terminate();
-      list.promise.resolve(settings.items[list.selected]);
-    });
-    list.on('cancel', (item) => {
-      terminate();
-      list.promise.cancel();
-    });
+    // list.on('select', (list) => {
+    //   terminate();
+    //   list.promise.resolve(settings.items[list.selected]);
+    // });
+    // list.on('cancel', (item) => {
+    //   terminate();
+    //   list.promise.cancel();
+    // });
 
     const escape = __hotkey('escape').on('press', (key) => {
       if (isEditing) {
@@ -414,62 +474,66 @@ module.exports = class SPanel extends __blessed.Box {
     const down = __hotkey('down').on('press', (key) => {
       if (isEditing) return;
       list.down(1);
+      rebuildList();
       this.update();
     });
     const up = __hotkey('up').on('press', (key) => {
       if (isEditing) return;
       list.up(1);
+      rebuildList();
       this.update();
     });
     const enter = __hotkey('enter').on('press', (key) => {
-      // terminate();
-      // list.promise.resolve(settings.items[list.selected]);
-
       if (!isEditing) {
+        if (list.selected === settings.items.length) {
+          terminate();
+          list.promise.resolve(settings.items);
+          return;
+        }
+
         isEditing = true;
+        editingItem = list.selected;
         editInput = this._input({
           placeholder: settings.items[list.selected].default,
           top: settings.top + list.selected,
-          left: settings.left + longestItemText.length + 3
+          left: settings.left + getLongestListItem().length + 4
         });
         list.style.selected = {
-          bg: 'cyan',
+          bg: 'black',
           fg: 'white'
         };
         editInput.promise
           .on('resolve', (value) => {
             isEditing = false;
-            const selected = list.selected;
-            listItems = settings.items.map((item, i) => {
-              return (
-                ' ' +
-                item.text +
-                ' '.repeat(longestItemText.length - item.text.length) +
-                ' - ' +
-                (i === list.selected ? value : item.default)
-              );
-            });
-            list.clearItems();
-            list.setItems(listItems);
-            list.select(selected);
+            editingItem = null;
+            settings.items[list.selected].value = value;
+            rebuildList();
           })
           .on('cancel', () => {
             isEditing = false;
+            editingItem = null;
           })
           .on('cancel,finally', () => {
             this._settings.logBox.remove(editInput);
             list.style.selected = {
-              bg: __color('terminal.yellow').toString(),
-              fg: __color('terminal.black').toString()
+              bg: this._settings.summary.style.selected.bg,
+              fg: this._settings.summary.style.selected.fg
             };
           });
+        rebuildList();
         this._settings.logBox.append(editInput);
       }
     });
 
+    const setSelectedItemWidth = () => {
+      const selectedItem = list.items[list.selected];
+      selectedItem.width =
+        __countLine(buildListItems()[list.selected]) +
+        (list.selected === settings.items.length ? 2 : 1);
+    };
+
     const terminate = () => {
-      this._settings.logBox.remove(list);
-      this._settings.logBox.remove(beforeBox);
+      this._settings.overlayBox.remove(list);
       if (editInput) this._settings.logBox.remove(editInput);
       this._settings.logBox.deleteBottom();
       escape.cancel();
@@ -479,11 +543,46 @@ module.exports = class SPanel extends __blessed.Box {
       this.update();
     };
 
-    // [...Array(_beforeLogLines.length - 1)].forEach(() => {
-    //   this.log(' ');
-    // });
-    this._settings.logBox.append(beforeBox);
-    this._settings.logBox.append(list);
+    this._settings.overlayBox.append(list);
+
+    list.select(settings.items.length);
+
+    const _titleBox = __blessed.box({
+      height: 2,
+      content: __parseHtml('<bold><yellow>Something cool!</yellow></bold><br/>')
+    });
+    const _descriptionBox = __blessed.box({
+      top: _titleBox.height,
+      height: 2,
+      content:
+        'wiejf iowjef oewj foiw jq oiweifo wpjepf io jwqeiq pfjwoi ejoiw jef wipjefoi qjwpef jwoije opwej fpioq wjefoi weiofj woq efjiowe jfpiwo jefoi jweiof jwoij fiwjef pwi jpfqwj fijw pifo wpjf wopj f'
+    });
+
+    this._settings.overlayBox.append(_titleBox);
+    this._settings.overlayBox.append(_descriptionBox);
+
+    this.append(this._settings.overlayBox);
+
+    // list.width = `80%`;
+    list.height =
+      settings.items.length + 1 + _titleBox.height + _descriptionBox.height;
+    list.top = _titleBox.height + _descriptionBox.height;
+    list.left = 0;
+
+    const overlayBoxHeight =
+      list.height +
+      1 +
+      this._settings.overlayBox.padding.top +
+      this._settings.overlayBox.padding.bottom +
+      2;
+    this._settings.overlayBox.top = `50%-${Math.round(
+      overlayBoxHeight / 2 + 4
+    )}`;
+    this._settings.overlayBox.left = `10%`;
+    this._settings.overlayBox.width = '80%';
+    this._settings.overlayBox.height = overlayBoxHeight;
+
+    rebuildList();
 
     this.update();
 
@@ -578,7 +677,7 @@ module.exports = class SPanel extends __blessed.Box {
       logSettings.logBox.pushLine(lines.join('\n'));
     });
 
-    logSettings.logBox.setScrollPerc(100);
+    // logSettings.logBox.setScrollPerc(100);
 
     this.update();
 

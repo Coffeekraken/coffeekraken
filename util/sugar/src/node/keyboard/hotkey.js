@@ -1,7 +1,6 @@
 const __SPromise = require('../promise/SPromise');
-const __readline = require('readline');
 const __uniqid = require('../string/uniqid');
-const __terminalKit = require('terminal-kit').terminal;
+const __keypress = require('keypress');
 
 /**
  * @name                hotkey
@@ -13,8 +12,6 @@ const __terminalKit = require('terminal-kit').terminal;
  *
  * @param        {String}       hotkey          The hotkey to detect
  * @param         {Object}      [settings={}]    An option object to configure your hotkey. Here's the list of available settings:
- * - keyup (false) {Boolean}: Detect on keyup
- * - keydown (true) {Boolean}: Detect on keydown
  * - once (false) {Boolean}: Specify if you want to detect the keyboard event just once
  * - splitKey (+) {String}: Specify the split key to use in the sequences like "ctrl+a"
  * @return      {SPromise}                       An SPromise instance on which you can register for "key" stack event
@@ -34,8 +31,6 @@ module.exports = function hotkey(key, settings = {}) {
   // extends the settings
   settings = {
     element: null,
-    keyup: false,
-    keydown: true,
     once: false,
     splitKey: '+',
     ...settings
@@ -46,42 +41,50 @@ module.exports = function hotkey(key, settings = {}) {
 
   if (!isListenerAlreadyAdded) {
     isListenerAlreadyAdded = true;
+
     function _terminate() {
       setTimeout(function () {
-        __terminalKit.grabInput(false);
         process.exit();
       }, 100);
     }
-    __terminalKit.grabInput({ mouse: 'button' });
-    __terminalKit.on('key', function (name, matches, data) {
-      if (name === 'CTRL_C') {
+
+    __keypress(process.stdin);
+
+    process.stdin.on('keypress', function (ch, keyObj) {
+      if (keyObj && keyObj.ctrl && keyObj.name == 'c') {
         _terminate();
       }
+
       // loop on each promises registered
       Object.keys(hotkeyStack).forEach((id) => {
         const obj = hotkeyStack[id];
         if (!obj || !obj.key) return;
         obj.key
+          .toString()
           .split(',')
           .map((m) => m.trim())
           .forEach((key) => {
-            if (key.split(settings.splitKey).length > 1) {
-              if (
-                name === key.split(settings.splitKey).join('_').toUpperCase()
-              ) {
-                obj.promise.trigger('key', key);
-                obj.promise.trigger('press', key);
-              }
+            if (ch && ch.toString() === key) {
+              obj.promise.trigger('key', key);
+              obj.promise.trigger('press', key);
               return;
             }
-            if (key.length > 1) {
-              if (name === key.toUpperCase()) {
-                obj.promise.trigger('key', key);
-                obj.promise.trigger('press', key);
-              }
-              return;
-            }
-            if (name === key) {
+
+            if (!keyObj) return;
+
+            const ctrlWanted = key
+                .toLowerCase()
+                .includes(`ctrl${settings.splitKey}`),
+              shiftWanted = key
+                .toLowerCase()
+                .includes(`shift${settings.splitKey}`),
+              altWanted = key.toLowerCase().includes(`alt${settings.splitKey}`);
+
+            let prefix = ctrlWanted ? `ctrl${settings.splitKey}` : '';
+            prefix = shiftWanted ? `shift${settings.splitKey}` : prefix;
+            prefix = altWanted ? `alt${settings.splitKey}` : prefix;
+
+            if (`${prefix}${keyObj.name}` === key) {
               obj.promise.trigger('key', key);
               obj.promise.trigger('press', key);
             }

@@ -1,5 +1,5 @@
 const __SConfig = require('./SConfig');
-const __SConfigFsAdapter = require('./adapters/SConfigFsAdapter');
+const __SConfigFolderAdapter = require('./adapters/SConfigFolderAdapter');
 const __path = require('path');
 const __packageRoot = require('../path/packageRoot');
 const __resolveTokens = require('../object/resolveTokens');
@@ -27,14 +27,12 @@ module.exports = function sugar(dotPath) {
   if (!sugarConfigInstance) {
     sugarConfigInstance = new __SConfig('sugar', {
       adapters: [
-        new __SConfigFsAdapter({
+        new __SConfigFolderAdapter({
           name: 'sugar',
+          foldername: '.sugar',
           filename: '[name].config.js',
-          defaultConfigPath: __path.resolve(
-            __dirname,
-            '../../../sugar.config.default.js'
-          ),
-          appConfigPath: `${__packageRoot(process.cwd())}/[filename]`,
+          defaultConfigPath: __path.resolve(__dirname, '../../../[foldername]'),
+          appConfigPath: `${__packageRoot(process.cwd())}/[foldername]`,
           userConfigPath: null
         })
       ]

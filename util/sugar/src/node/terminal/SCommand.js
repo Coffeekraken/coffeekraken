@@ -16,12 +16,15 @@ const __uniqid = require('../string/uniqid');
  * This class define a command that you can launch, subscribe for data, etc...
  *
  * @param         {String}        name            Specify a simple name for this command
- * @param        {String}         command         The command that this instance has to represent
+ * @param        {String}         command         The command that this instance has to represent. Can contain some "tokens" like "[port]" that will be replaced with the asked question results
  * @param         {Object}        [settings={}]     Some settings to configure your command
  * - ask (null) {Object|Array}: Specify one or more (Array) questions to ask before running the command. Here's the possible object properties for a question:
- *    - type (confirm) {String}: Specify the question type. For now it support:
- *        - confirm: This type ask the user if he really want to run this command
- *        - boolean: This type ask the user to answer yes or no (true, false)
+ *    - type (summary) {String}: Specify the question type. For now it support:
+ *        - summary: This display a list of default values for some properties with the ability to edit each of them.
+ *          - items ([]) {Array}: An array of properties object to display.
+ *            - id (null) {String}: The id of the property like "port"
+ *            - text (null) {String}: The text to display before the property value like "Server port"
+ *            - default (null) {Mixed}: The default value for this property
  *    - question (null) {String}: Specify the question to ask to the user
  *
  * @example       js
@@ -103,6 +106,10 @@ module.exports = class SCommand extends __SPromise {
         settings
       )
     ).start();
+
+    setTimeout(() => {
+      if (this._settings.run) this.run();
+    });
   }
 
   /**

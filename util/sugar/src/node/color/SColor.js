@@ -36,7 +36,14 @@ module.exports = class SColor extends __SColor {
    */
   getColor(color) {
     // try to get the color from the sugar config
-    const sugarConfigColor = __sugarConfig(`colors.${color}`);
+    let sugarConfigColor;
+    try {
+      sugarConfigColor = __sugarConfig(`colors.${color}`);
+    } catch (e) {
+      sugarConfigColor = __sugarConfig(
+        `terminal.colors.${color.replace('terminal.', '')}`
+      );
+    }
     if (sugarConfigColor) return sugarConfigColor;
     return super.getColor(color);
   }

@@ -245,7 +245,11 @@ export default class SConfig {
       );
     }
 
-    const value = __get(this._adapters[adapter].config, path);
+    let value = __get(this._adapters[adapter].config, path);
+
+    if (typeof value === 'string' && value.substr(0, 7) === '@config') {
+      value = this.get(value.replace('@config.', ''), adapter);
+    }
 
     if (this._settings.throwErrorOnUndefinedConfig && value === undefined) {
       throw new Error(

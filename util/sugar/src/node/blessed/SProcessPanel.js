@@ -1,17 +1,19 @@
-const __SPanel = require('./SPanel');
+const __SLogPanel = require('./SLogPanel');
 const __convert = require('../time/convert');
 const __deepMerge = require('../object/deepMerge');
 const __blessed = require('blessed');
 const __color = require('../color/color');
+const __SComponent = require('./SComponent');
 
 /**
  * @name                  SProcessPanel
+ * @namespace             sugar.node.blessed
  * @type                  Class
  *
- * This class is a simple SPanel extended one that accesp an SProcess instance
- * to log the data's from and display an simple UI depending on the SProcess configured keys
+ * This class is a simple SPanel extended one that accesp an SProcessPanel instance
+ * to log the data's from and display an simple UI depending on the SProcessPanel configured keys
  *
- * @param         {SProcess}            process           The SProcess instance you want to attach
+ * @param         {SProcessPanel}            process           The SProcessPanel instance you want to attach
  * @param         {Object}              [settings={}]     The settings object to configure your SProcessPanel
  *
  * @example         js
@@ -22,13 +24,13 @@ const __color = require('../color/color');
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SProcessPanel extends __SPanel {
+module.exports = class SProcessPanel extends __SComponent {
   /**
    * @name          _process
-   * @type          SProcess
+   * @type          SProcessPanel
    * @private
    *
-   * Store the SProcess instance
+   * Store the SProcessPanel instance
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
@@ -66,16 +68,14 @@ module.exports = class SProcessPanel extends __SPanel {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(process, settings = {}) {
-    // extends SPanel
-    super(
-      __deepMerge(
-        {
-          beforeLog: ' '.repeat(process.biggestCommandName.length),
-          beforeEachLine: ' <white>│</white> '
-        },
-        settings
-      )
+    const _settings = __deepMerge(
+      {
+        blessed: {}
+      },
+      settings
     );
+    // extends SPanel
+    super(_settings.blessed);
     // save the process
     this._process = process;
     // subscribe to the process
@@ -115,15 +115,14 @@ module.exports = class SProcessPanel extends __SPanel {
    */
   _subscribeToProcess() {
     // subscribe to data
-    let currentCommandColor = null;
     this._process
       .on('data', (data) => {
-        this.log(data.data, {
+        this._logBox.log(data.data, {
           beforeLog: this._getBeforeLog(data.commandObj)
         });
       })
       .on('exit', (data) => {
-        this.log(
+        this._logBox.log(
           `<cyan>The command "${data.commandObj.name}" has been terminated</cyan>`,
           {
             beforeLog: this._getBeforeLog(data.commandObj)
@@ -132,15 +131,18 @@ module.exports = class SProcessPanel extends __SPanel {
       })
       // subscribe to errors
       .on('error', (data) => {
-        this.log(`<error>Something went wrong:</error>\n${data.error}`, {
-          beforeLog: this._getBeforeLog(data.commandObj)
-        });
+        this._logBox.log(
+          `<error>Something went wrong:</error>\n${data.error}`,
+          {
+            beforeLog: this._getBeforeLog(data.commandObj)
+          }
+        );
       })
       // subscribe to ask
       .on('ask', async (question) => {
-        // this.log(' ');
+        // this._logBox.log(' ');
         currentCommandColor = question.commandObj.color;
-        this.log(`<cyan>${question.question}</cyan>`, {
+        this._logBox.log(`<cyan>${question.question}</cyan>`, {
           beforeLog: this._getBeforeLog(question.commandObj)
         });
         if (question.type === 'input') {
@@ -174,13 +176,13 @@ module.exports = class SProcessPanel extends __SPanel {
       })
       // subscribe to warnings
       .on('warning', (data) => {
-        this.log(`<yellow>${data.warning}</yellow>`, {
+        this._logBox.log(`<yellow>${data.warning}</yellow>`, {
           beforeLog: this._getBeforeLog(data.commandObj)
         });
       })
       // subscribe to "run", meaning that a new command has just been launched in the process
       .on('run', (data) => {
-        this.log(
+        this._logBox.log(
           `<yellow>Starting the "${data.commandObj.name}" command:</yellow>\n<blue>${data.command}</blue>`,
           {
             beforeLog: this._getBeforeLog(data.commandObj)
@@ -190,7 +192,7 @@ module.exports = class SProcessPanel extends __SPanel {
       })
       // subscribe to "kill", meaning that a command has just been killed
       .on('kill', (data) => {
-        this.log(
+        this._logBox.log(
           `<magenta>The command "${data.commandObj.name}" has just been killed</magenta>`,
           {
             beforeLog: this._getBeforeLog(data.commandObj)
@@ -211,7 +213,7 @@ module.exports = class SProcessPanel extends __SPanel {
       })
       // subscribe to "success", meaning that a command is just finished
       .on('success', (data) => {
-        this.log(
+        this._logBox.log(
           `<green>The "${
             data.commandObj.name
           }" command has finished successfuly in <yellow>${__convert(
@@ -228,7 +230,7 @@ module.exports = class SProcessPanel extends __SPanel {
         this._updateKeysBox();
       })
       .catch((e) => {
-        this.log(' ');
+        this._logBox.log(' ');
       });
   }
 
@@ -285,7 +287,7 @@ module.exports = class SProcessPanel extends __SPanel {
             break;
         }
         const content = `${keyObj.menu}(${keyObj.key})`;
-        const item = __blessed.button({
+        const item = __blessed.box({
           ...settings,
           left: currentLeft,
           width:
@@ -296,7 +298,6 @@ module.exports = class SProcessPanel extends __SPanel {
 
         items.push(item);
       });
-
       items.forEach((item) => {
         this._keysBox.append(item);
       });
@@ -315,45 +316,27 @@ module.exports = class SProcessPanel extends __SPanel {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _generateUI() {
-    // init the logbox
-    // this._logBox = __blessed.box(
-    //   __deepMerge(
-    //     {
-    //       ...this._settings.blessed
-    //     },
-    //     {
-    //       scrollable: true,
-    //       padding: {
-    //         left: 0,
-    //         right: 0,
-    //         bottom: 0,
-    //         top: 0
-    //       },
-    //       position: {
-    //         top: 0,
-    //         left: 0,
-    //         bottom: 2,
-    //         right: 0
-    //       }
-    //     }
-    //   )
-    // );
-    // this._settings.logBox = this._logBox;
-
-    this._settings.logBox.bottom = 2;
+    this._logBox = new __SLogPanel({
+      beforeLog: ' '.repeat(this._process._biggestCommandName.length),
+      beforeEachLine: ' <white>│</white> '
+    });
+    this._logBox.bottom = 2;
 
     // init the blessed box that will display the keys
     this._keysBox = __blessed.box({
-      right: 1,
+      right: 0,
+      height: 0,
+      bottom: 0,
+      left: 0,
+      width: '100%',
       height: 1,
-      bottom: 1,
-      left: 1,
       style: {
         bg: __color('terminal.white').toString(),
         fg: __color('terminal.black').toString()
       }
     });
 
+    this.append(this._logBox);
     this.append(this._keysBox);
 
     // update the keysBox

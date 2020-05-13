@@ -1,10 +1,10 @@
 const __parseArgs = require('../../node/cli/parseArgs');
 // const __SPhpDependency = require('../../node/dependency/SPhpDependency');
 
-const __SProcess = require('../../node/terminal/SProcess');
-const __SPanel = require('../../node/terminal/SPanel');
-const __SProcessPanel = require('../../node/terminal/SProcessPanel');
+const __SProcessPanel = require('../../node/blessed/SProcessPanel');
 const __SPhpServerProcess = require('../../node/server/SPhpServerProcess');
+
+const __sugarTermApp = require('../../../termapp/src/node/index');
 
 module.exports = (stringArgs = '') => {
   const args = __parseArgs(stringArgs, {
@@ -14,7 +14,7 @@ module.exports = (stringArgs = '') => {
     }
   });
 
-  // class MyProcess extends __SProcess {
+  // class MyProcess extends __SProcessPanel {
   //   constructor() {
   //     super(
   //       {
@@ -44,11 +44,14 @@ module.exports = (stringArgs = '') => {
 
   // const pro = new MyProcess();
 
-  const pro = new __SPhpServerProcess({});
+  __sugarTermApp.exec([
+    'ls -la',
+    'ps something wrint wijfwij iowjefijweofji weoi'
+  ]);
 
-  const panel = new __SProcessPanel(pro, {
-    screen: true
-  });
+  // const pro = new __SPhpServerProcess({});
+
+  // const processPanel = new __SProcessPanel(pro, {});
 
   // const dep = new __SPhpDependency();
   // dep.install(args.version);

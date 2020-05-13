@@ -29,13 +29,13 @@ module.exports = function parseHtml(message) {
   const sugarColors = Object.keys(__sugarConfig('colors')).filter(
     (c) => c !== 'terminal'
   );
-  const terminalColors = Object.keys(__sugarConfig('colors.terminal'));
+  const terminalColors = Object.keys(__sugarConfig('terminal.colors'));
   const colorsObj = {};
   sugarColors.forEach((name) => {
     colorsObj[name] = __sugarConfig(`colors.${name}`);
   });
   terminalColors.forEach((name) => {
-    colorsObj[name] = __sugarConfig(`colors.terminal.${name}`);
+    colorsObj[name] = __sugarConfig(`terminal.colors.${name}`);
   });
 
   message = message.map((m) => {

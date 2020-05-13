@@ -7,6 +7,7 @@ const __hotkey = require('../keyboard/hotkey');
 const __filter = require('../object/filter');
 const __wait = require('../time/wait');
 const __SCommand = require('./SCommand');
+const __sugarConfig = require('../config/sugar');
 
 /**
  * @name                    SProcess
@@ -38,8 +39,7 @@ const __SCommand = require('./SCommand');
  * const SProcess = require('@coffeekraken/sugar/node/terminal/SProcess');
  * const app = new SProcess({
  *    install: {
- *      command: 'npm install something',
- *      concurrent: false
+ *      command: 'npm install something'
  *    }
  * }, {
  *    // some settings here...
@@ -127,6 +127,29 @@ module.exports = class SProcess {
     }, {}).start();
     this.on = this._promise.on.bind(this._promise);
 
+    // make sure the passed commands are valid
+    if (!Array.isArray(commands)) {
+      commands = [commands];
+    }
+    let newCommandsObj = {};
+    commands.forEach((command, i) => {
+      if (typeof command === 'string') {
+        newCommandsObj[`command${i + 1}`] = {
+          command,
+          color:
+            Object.keys(__sugarConfig('terminal.colors'))[i + 1] || 'yellow',
+          run: true
+        };
+        _settings.keys[`command${i + 1}`] = {
+          key: i + 1,
+          type: 'run',
+          command: `command${i + 1}`,
+          menu: `${command.substr(0, 10) + (command.length > 10 ? '...' : '')}`
+        };
+      }
+    });
+    commands = newCommandsObj;
+
     // save commands
     this._biggestCommandName = Object.keys(commands)[0];
     Object.keys(commands).forEach((commandName) => {
@@ -158,37 +181,28 @@ module.exports = class SProcess {
 
     this._listenCommandActions();
 
-    // // switch on process type to handle it properly
-    // setTimeout(() => {
-    //   switch (this._settings.type) {
-    //     case 'steps':
-    //       (async () => {
-    //         const results = {};
-    //         for (let i = 0; i < Object.keys(this._commands).length; i++) {
-    //           const command = Object.keys(this._commands)[i];
-    //           // console.log(command);
-    //           // const res = await this.run(command);
-    //           // console.log('res', res);
-    //           // results[command] = res;
-    //           // await __wait(100);
-    //         }
-    //         console.log('difin', results);
-    //         this._promise.resolve(results);
-    //       })();
-    //       break;
-    //     default:
-    //       // Object.keys(
-    //       //   __filter(this._commands, (obj) => {
-    //       //     return obj.run === true;
-    //       //   })
-    //       // ).forEach((name, i) => {
-    //       //   setTimeout(() => {
-    //       //     this.run(name);
-    //       //   }, i * 10);
-    //       // });
-    //       break;
-    //   }
-    // });
+    // switch on process type to handle it properly
+    setTimeout(() => {
+      switch (this._settings.type) {
+        // case 'steps':
+        //   (async () => {
+        //     const results = {};
+        //     for (let i = 0; i < Object.keys(this._commands).length; i++) {
+        //       const command = Object.keys(this._commands)[i];
+        //       // console.log(command);
+        //       // const res = await this.run(command);
+        //       // console.log('res', res);
+        //       // results[command] = res;
+        //       // await __wait(100);
+        //     }
+        //     console.log('difin', results);
+        //     this._promise.resolve(results);
+        //   })();
+        //   break;
+        default:
+          break;
+      }
+    });
 
     process.stdin.resume();
   }
@@ -306,7 +320,11 @@ module.exports = class SProcess {
     // loop on each keys to be inited
     Object.keys(this._settings.keys || {}).forEach((keyName) => {
       const keyObj = this._settings.keys[keyName];
-      __hotkey(`ctrl+${keyObj.key}`, {
+      let keyString = `ctrl+${keyObj.key}`;
+      if (typeof keyObj.key === 'number') {
+        keyString = keyObj.key;
+      }
+      __hotkey(keyString, {
         once: keyObj.once
       }).on('key', (key) => {
         switch (keyObj.type) {
@@ -383,25 +401,25 @@ module.exports = class SProcess {
     return this._settings.keys || {};
   }
 
-  /**
-   * @name                _getKeyObjectFromCommandName
-   * @type                Function
-   * @private
-   *
-   * This method return the key object by searching with the command name
-   *
-   * @param         {String}          property         The property to search for inside each key objects
-   * @param         {Mixed}           value           The value searched
-   * @return        {Object}                          The key object or false if not found
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _getKeyObjectByPropery(property, value) {
-    for (let i = 0; i < Object.keys(this._settings.keys).length; i++) {
-      const obj = this._settings.keys[Object.keys(this._settings.keys)[i]];
-      if (obj[property] !== undefined && obj[property] === value) return obj;
-    }
-  }
+  // /**
+  //  * @name                _getKeyObjectFromCommandName
+  //  * @type                Function
+  //  * @private
+  //  *
+  //  * This method return the key object by searching with the command name
+  //  *
+  //  * @param         {String}          property         The property to search for inside each key objects
+  //  * @param         {Mixed}           value           The value searched
+  //  * @return        {Object}                          The key object or false if not found
+  //  *
+  //  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  //  */
+  // _getKeyObjectByPropery(property, value) {
+  //   for (let i = 0; i < Object.keys(this._settings.keys).length; i++) {
+  //     const obj = this._settings.keys[Object.keys(this._settings.keys)[i]];
+  //     if (obj[property] !== undefined && obj[property] === value) return obj;
+  //   }
+  // }
 
   /**
    * @name                  run
@@ -410,7 +428,7 @@ module.exports = class SProcess {
    *
    * This method is used to run the command
    *
-   * @param         {SCommand}      command             The SCommand instance to run
+   * @param         {SCommand|String}      command             The SCommand instance to run or the name under which it is stored in the commands object
    * @return        {SPromise}                          An SPromise instance on which you can subscribe for some events listed bellow and that will be resolved once the command is successfully finished
    * - data: Triggered when some data are logged in the child process
    * - error: Triggered when something goes wrong in the child process
@@ -422,11 +440,26 @@ module.exports = class SProcess {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(command) {
-    // search for a key object that correspond to this command
-    const keyObjForCurrentCommand = this._getKeyObjectByPropery(
-      'command',
-      command.name
-    );
+    if (typeof command === 'string') {
+      if (!this._commands[command]) {
+        throw new Error(
+          `You try to launch the command named "${command}" but it does not exists in this SProcess instance. Here's the available commands:\n${Object.keys(
+            this._commands
+          ).join('\n- ')}`
+        );
+      }
+      command = this._commands[command];
+    } else if (!command.run) {
+      throw new Error(
+        `You try to launch a command but it seems that the passed one is not an instance of the SCommand class...`
+      );
+    }
+
+    // // search for a key object that correspond to this command
+    // const keyObjForCurrentCommand = this._getKeyObjectByPropery(
+    //   'command',
+    //   command.name
+    // );
 
     // return the promise
     return command.run();

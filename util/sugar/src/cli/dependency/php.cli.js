@@ -44,14 +44,15 @@ module.exports = (stringArgs = '') => {
 
   // const pro = new MyProcess();
 
-  __sugarTermApp.exec([
-    'ls -la',
-    'ps something wrint wijfwij iowjefijweofji weoi'
-  ]);
+  // __sugarTermApp.exec([
+  //   {
+  //     command: ''
+  //   },
+  //   'ps something wrint wijfwij iowjefijweofji weoi'
+  // ]);
 
-  // const pro = new __SPhpServerProcess({});
-
-  // const processPanel = new __SProcessPanel(pro, {});
+  const pro = new __SPhpServerProcess({});
+  __sugarTermApp.process(pro);
 
   // const dep = new __SPhpDependency();
   // dep.install(args.version);

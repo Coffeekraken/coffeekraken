@@ -25,6 +25,7 @@ exports.default = replaceTags;
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function replaceTags(text, tags) {
+  if (!text) text = '';
   let oneLineText = text.replace(/\r\n/g, '|rn|');
   oneLineText = oneLineText.replace(/\n/g, '|n|');
   oneLineText = oneLineText.replace(/\r/g, '|r|'); // loop on the tags

@@ -159,7 +159,7 @@ module.exports = class SCommand extends __SPromise {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  get commandObj() {
+  get command() {
     return this._command;
   }
 
@@ -175,6 +175,7 @@ module.exports = class SCommand extends __SPromise {
     if (!this.isRunning()) return;
     if (!this._runningProcess.promise) return;
     this._runningProcess.promise.cancel();
+    this._runningProcess = null;
   }
 
   /**
@@ -374,6 +375,7 @@ module.exports = class SCommand extends __SPromise {
     })
       .on('cancel,finally', () => {
         childProcess && childProcess.kill();
+        this._runningProcess = null;
       })
       .start();
 

@@ -44,7 +44,6 @@ module.exports = class SPhpServerProcess extends __SProcess {
       {
         start: {
           command: `php -S [hostname]:[port] -t [rootDir]`,
-          concurrent: false,
           color: 'red',
           ask: {
             type: 'questions',

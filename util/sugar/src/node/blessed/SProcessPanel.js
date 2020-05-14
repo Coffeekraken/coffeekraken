@@ -4,6 +4,8 @@ const __deepMerge = require('../object/deepMerge');
 const __blessed = require('blessed');
 const __color = require('../color/color');
 const __SComponent = require('./SComponent');
+const __SCenteredPopup = require('./SCenteredPopup');
+const __SSummaryList = require('./SSummaryList');
 
 /**
  * @name                  SProcessPanel
@@ -68,14 +70,9 @@ module.exports = class SProcessPanel extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(process, settings = {}) {
-    const _settings = __deepMerge(
-      {
-        blessed: {}
-      },
-      settings
-    );
+    const _settings = __deepMerge({}, settings);
     // extends SPanel
-    super(_settings.blessed);
+    super(_settings);
     // save the process
     this._process = process;
     // subscribe to the process
@@ -141,24 +138,22 @@ module.exports = class SProcessPanel extends __SComponent {
       // subscribe to ask
       .on('ask', async (question) => {
         // this._logBox.log(' ');
-        currentCommandColor = question.commandObj.color;
-        this._logBox.log(`<cyan>${question.question}</cyan>`, {
-          beforeLog: this._getBeforeLog(question.commandObj)
-        });
-        if (question.type === 'input') {
-          const input = this.input({
-            placeholder: question.default
-          });
-          input.promise.on('cancel', () => {
-            question.reject && question.reject();
-          });
-          input.promise.on('resolve', (answer) => {
-            question.resolve && question.resolve(answer);
-          });
-        } else if (question.type === 'summary') {
-          const summary = this.summary({
-            items: question.items
-          });
+        // this._logBox.log(`<cyan>${question.question}</cyan>`, {
+        //   beforeLog: this._getBeforeLog(question.commandObj)
+        // });
+        // if (question.type === 'input') {
+        //   const input = this.input({
+        //     placeholder: question.default
+        //   });
+        //   input.promise.on('cancel', () => {
+        //     question.reject && question.reject();
+        //   });
+        //   input.promise.on('resolve', (answer) => {
+        //     question.resolve && question.resolve(answer);
+        //   });
+        // } else
+        if (question.type === 'summary') {
+          const summary = this.summary(question.commandObj, question.items);
           summary.promise.on('cancel', () => {
             question.reject && question.reject();
           });
@@ -232,6 +227,30 @@ module.exports = class SProcessPanel extends __SComponent {
       .catch((e) => {
         this._logBox.log(' ');
       });
+  }
+
+  /**
+   * @name          summary
+   * @type          Function
+   *
+   * This method display a summary list to the user with the possibility to update
+   * each data and validate
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  summary(command, items) {
+    const popupBox = new __SCenteredPopup({
+      title: `Run command <bgBlack><bold><primary> ${command.name} </primary></bold></bgBlack> | Are these properties ok?`,
+      description: `<bold><cyan>${command.command}</cyan></bold>`
+    });
+    const summaryListBox = new __SSummaryList(items, {});
+    this.append(popupBox);
+    popupBox.append(summaryListBox);
+    summaryListBox.promise.on('finally,cancel', () => {
+      popupBox.remove(summaryListBox);
+      this.remove(popupBox);
+    });
+    return summaryListBox;
   }
 
   /**

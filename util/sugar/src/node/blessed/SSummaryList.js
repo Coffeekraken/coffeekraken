@@ -4,6 +4,10 @@ const __deepMerge = require('../object/deepMerge');
 const __parseHtml = require('../terminal/parseHtml');
 const __countLine = require('../string/countLine');
 const __hotkey = require('../keyboard/hotkey');
+const __color = require('../color/color');
+const __SPromise = require('../promise/SPromise');
+const __SInput = require('./SInput');
+const __multiple = require('../class/multipleExtends');
 
 /**
  * @name                  SSummaryList
@@ -13,7 +17,11 @@ const __hotkey = require('../keyboard/hotkey');
  * This class gives you the ability to display an editable list of informations.
  * This is very useful to display for example a summary of a command to launch, or whatever...
  *
- * @param        {Object}         [settings = {}]         A settings object to configure your this._list. Here's the available settings:
+ * @param         {Array}           items                 An array of items object constitued of these properties:
+ * - id (null) {String}: The item id
+ * - text (null) {String}: The item text to display before the value
+ * - default (null) {String}: The item default value
+ * @param        {Object}         [settings = {}]         A settings object to configure your this. Here's the available settings:
  *
  * @example       js
  * const SSummaryList = require('@coffeekraken/sugar/node/blessed/SSummaryList');
@@ -21,7 +29,10 @@ const __hotkey = require('../keyboard/hotkey');
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SSummaryList extends __SComponent {
+module.exports = class SSummaryList extends __multiple(
+  __SComponent,
+  __blessed.list
+) {
   /**
    * @name                  _editingItemIdx
    * @type                  Number
@@ -69,6 +80,16 @@ module.exports = class SSummaryList extends __SComponent {
   _list = null;
 
   /**
+   * @name                  _items
+   * @type                  Array
+   *
+   * Store the items list
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _items = [];
+
+  /**
    * @name                  constructor
    * @type                  Function
    * @constructor
@@ -77,104 +98,60 @@ module.exports = class SSummaryList extends __SComponent {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(settings = {}) {
+  constructor(items, settings = {}) {
     super(
       __deepMerge(
         {
-          items: [],
-          list: {
-            keys: false,
-            mouse: false,
-            interactive: true,
-            style: {
-              item: {
-                bg: __color('terminal.black').toString(),
-                fg: __color('terminal.white').toString()
-              },
-              selected: {
-                bg: __color('terminal.cyan').toString(),
-                fg: __color('terminal.white').toString()
-              }
+          keys: false,
+          mouse: false,
+          interactive: true,
+          style: {
+            bg: __color('terminal.black').toString(),
+            item: {
+              bg: __color('terminal.black').toString(),
+              fg: __color('terminal.white').toString()
+            },
+            selected: {
+              bg: __color('terminal.cyan').toString(),
+              fg: __color('terminal.white').toString()
             }
           }
         },
         settings
       )
     );
+    // save the items
+    this._items = items;
 
     // init settings items
-    this._settings.items.forEach((item) => {
+    this._items.forEach((item) => {
       if (item.value === undefined && item.default) {
         item.value = item.default;
       }
     });
 
     this._editingItemIdx = null;
-    this._list = __blessed.list({
-      ...this._settings.list,
-      items: this._buildBlessedListItemsArray()
+
+    this.on('attach', () => {
+      this._rebuildList();
     });
 
-    this._list.promise = new __SPromise(
-      (resolve, reject, trigger, cancel) => {}
-    );
+    this.promise = new __SPromise((resolve, reject, trigger, cancel) => {});
 
-    // this._list.on('select', (list) => {
+    // this.on('select', (list) => {
     //   this._terminate();
-    //   this._list.promise.resolve(settings.items[this._list.selected]);
+    //   this.promise.resolve(settings.items[this.selected]);
     // });
-    // this._list.on('cancel', (item) => {
+    // this.on('cancel', (item) => {
     //   this._terminate();
-    //   this._list.promise.cancel();
+    //   this.promise.cancel();
     // });
 
     // init hotkeys
     this._initHotkeys();
 
-    this._settings.overlayBox.append(this._list);
-
-    this._list.select(this._settings.items.length);
-
-    // let _titleBox = null;
-    // if (this._settings.title) {
-    //   _titleBox = __blessed.box({
-    //     height: 2,
-    //     content: __parseHtml(this._settings.title)
-    //   });
-    // }
-    // let _descriptionBox = null;
-    // if (this._settings.description) {
-    //   _descriptionBox = __blessed.box({
-    //     top: _titlebox ? _titleBox.height : 0,
-    //     height: 2,
-    //     content: this._settings.description
-    //   });
-    // }
-
-    // if (_titleBox) this._settings.overlayBox.append(_titleBox);
-    // if (_descriptionBox) this._settings.overlayBox.append(_descriptionBox);
-
-    // this.append(this._settings.overlayBox);
-
-    // this._list.width = `80%`;
-    this._list.height = this._settings.items.length + 1;
-    this._list.top = 0;
-    this._list.left = 0;
-
-    // const overlayBoxHeight =
-    //   this._list.height +
-    //   1 +
-    //   this._settings.overlayBox.padding.top +
-    //   this._settings.overlayBox.padding.bottom +
-    //   2;
-    // this._settings.overlayBox.top = `50%-${Math.round(
-    //   overlayBoxHeight / 2 + 4
-    // )}`;
-    // this._settings.overlayBox.left = `10%`;
-    // this._settings.overlayBox.width = '80%';
-    // this._settings.overlayBox.height = overlayBoxHeight;
-
-    this._rebuildList();
+    this.select(this._items.length);
+    this._selectedItemIdx = this._items.length;
   }
 
   /**
@@ -192,60 +169,59 @@ module.exports = class SSummaryList extends __SComponent {
         this._isEditing = false;
       } else {
         this._terminate();
-        this._list.promise.cancel();
+        this.promise.cancel();
       }
     });
     this._downHotkey = __hotkey('down').on('press', (key) => {
       if (this._isEditing) return;
-      this._list.down(1);
-      this._selectedItemIdx = this._list.selected;
+      this.down(1);
+      this._selectedItemIdx = this.selected;
       this._rebuildList();
     });
     this._upHotkey = __hotkey('up').on('press', (key) => {
       if (this._isEditing) return;
-      this._list.up(1);
-      this._selectedItemIdx = this._list.selected;
+      this.up(1);
+      this._selectedItemIdx = this.selected;
       this._rebuildList();
     });
     this._enterHotkey = __hotkey('enter').on('press', (key) => {
       if (!this._isEditing) {
-        if (this._list.selected === settings.items.length) {
+        if (this.selected === this._items.length) {
           this._terminate();
-          this._list.promise.resolve(settings.items);
+          this.promise.resolve(this._items);
           return;
         }
 
         this._isEditing = true;
-        this._editingItemIdx = this._list.selected;
-        this._editInput = this._input({
-          placeholder: settings.items[this._list.selected].default,
-          top: settings.top + this._list.selected,
-          left: settings.left + this.getLongestListItemName().length + 4
+        this._editingItemIdx = this.selected;
+        this._editInput = new __SInput({
+          placeholder: this._items[this.selected].default,
+          top: this.selected,
+          left: this.getLongestListItemName().length + 4
         });
-        this._list.style.selected = {
+        this.style.selected = {
           bg: 'black',
           fg: 'white'
         };
         this._editInput.promise
           .on('resolve', (value) => {
-            this._isEditing = false;
-            this._editingItemIdx = null;
-            settings.items[this._list.selected].value = value;
-            this._rebuildList();
+            this._items[this.selected].value = value;
           })
-          .on('cancel', () => {
-            this._isEditing = false;
-            this._editingItemIdx = null;
-          })
+          .on('cancel', () => {})
           .on('cancel,finally', () => {
-            this._settings.logBox.remove(this._editInput);
-            this._list.style.selected = {
-              bg: this._settings.summary.style.selected.bg,
-              fg: this._settings.summary.style.selected.fg
-            };
+            setTimeout(() => {
+              this._isEditing = false;
+              this._editingItemIdx = null;
+              this.remove(this._editInput);
+              this.style.selected = {
+                bg: this._settings.style.selected.bg,
+                fg: this._settings.style.selected.fg
+              };
+              this._rebuildList();
+            });
           });
         this._rebuildList();
-        this._settings.logBox.append(this._editInput);
+        this.append(this._editInput);
       }
     });
   }
@@ -262,7 +238,7 @@ module.exports = class SSummaryList extends __SComponent {
    */
   getLongestListItemName() {
     let longestItemText = '';
-    this._settings.items.forEach((item) => {
+    this._items.forEach((item) => {
       if (longestItemText.length < item.text.length)
         longestItemText = item.text;
     });
@@ -279,8 +255,7 @@ module.exports = class SSummaryList extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _terminate() {
-    this._settings.overlayBox.remove(this._list);
-    if (this._editInput) this._settings.logBox.remove(this._editInput);
+    if (this._editInput) this.remove(this._editInput);
     this._escapeHotkey.cancel();
     this._downHotkey.cancel();
     this._upHotkey.cancel();
@@ -301,26 +276,24 @@ module.exports = class SSummaryList extends __SComponent {
    */
   _buildBlessedListItemsArray() {
     const longestItemText = this.getLongestListItemName();
-    let listItems = this._settings.items.map((item, i) => {
-      let value = this._settings.items[i].value
-        ? this._settings.items[i].value
-        : item.default;
-      if (this.this._editingItemIdx === i) value = '';
+    let listItems = this._items.map((item, i) => {
+      let value = this._items[i].value ? this._items[i].value : item.default;
+      if (this._editingItemIdx === i) value = '';
 
       return __parseHtml(
-        (i === selected ? ' ' : '') +
+        (i === this._selectedItemIdx ? ' ' : '') +
           item.text +
           ' '.repeat(longestItemText.length - item.text.length) +
-          ' '.repeat(i === selected ? 4 : 5) +
+          ' '.repeat(i === this._selectedItemIdx ? 4 : 5) +
           '<yellow>' +
           value +
           '</yellow>'
       );
     });
     listItems.push(
-      (selected === this._settings.items.length ? ' ' : '') +
+      (this._selectedItemIdx === this._items.length ? ' ' : '') +
         __parseHtml(`<bold>Validate!</bold>`) +
-        (selected === this._settings.items.length ? ' ' : '')
+        (this._selectedItemIdx === this._items.length ? ' ' : '')
     );
     return listItems;
   }
@@ -336,16 +309,31 @@ module.exports = class SSummaryList extends __SComponent {
    */
   _rebuildList() {
     let listItems = this._buildBlessedListItemsArray();
-    this._list.clearItems();
-    this._list.setItems(listItems);
-    this._list.select(this._selectedItemIdx);
-    this._list.items[this._list.items.length - 1].top += 1;
+    this.clearItems();
+    this.setItems(listItems);
+    this.select(this._selectedItemIdx);
+    this.items[this._items.length].top += 1;
 
-    const selectedItem = this._list.items[this._selectedItemIdx];
-    selectedItem.width =
+    this.style.bg = __color('terminal.black').toString();
+
+    this.items.forEach((item) => {
+      item.style.bg = __color('terminal.black').toString();
+    });
+
+    const selectedItem = this.items[this._selectedItemIdx];
+    if (!this._isEditing) {
+      selectedItem.style.bg = __color('terminal.cyan').toString();
+    }
+
+    selectedItem.position.width =
       __countLine(this._buildBlessedListItemsArray()[this._selectedItemIdx]) +
-      (this._selectedItemIdx === this._settings.items.length ? 2 : 1);
+      (this._selectedItemIdx === this._items.length ? 2 : 1);
 
     this.update();
+  }
+
+  update() {
+    this.position.height = this._items.length + 2;
+    super.update();
   }
 };

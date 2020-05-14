@@ -2,8 +2,7 @@ const __blessed = require('blessed');
 const __SComponent = require('./SComponent');
 const __deepMerge = require('../object/deepMerge');
 const __parseHtml = require('../terminal/parseHtml');
-const __countLine = require('../string/countLine');
-const __terminalLink = require('terminal-link');
+const __color = require('../color/color');
 
 /**
  * @name                  SFooter
@@ -36,15 +35,19 @@ module.exports = class SFooter extends __SComponent {
         {
           authors: [],
           website: null,
-          blessed: {
+          position: {
             width: '100%',
-            height: 1,
-            padding: {
-              top: 0,
-              bottom: 0,
-              left: 1,
-              right: 1
-            }
+            height: 1
+          },
+          style: {
+            bg: __color('terminal.primary').toString(),
+            fg: __color('terminal.black').toString()
+          },
+          padding: {
+            top: 0,
+            bottom: 0,
+            left: 1,
+            right: 1
           }
         },
         settings
@@ -60,8 +63,8 @@ module.exports = class SFooter extends __SComponent {
         right: 0,
         tags: true,
         style: {
-          bg: this._settings.blessed.style.bg,
-          fg: this._settings.blessed.style.fg
+          bg: this._settings.style.bg,
+          fg: this._settings.style.fg
         },
         content: __parseHtml(`Made by <bold>${authArray.join(', ')}</bold>`)
       });
@@ -71,8 +74,8 @@ module.exports = class SFooter extends __SComponent {
     this._copyrightBox = __blessed.text({
       left: 0,
       style: {
-        bg: this._settings.blessed.style.bg,
-        fg: this._settings.blessed.style.fg
+        bg: this._settings.style.bg,
+        fg: this._settings.style.fg
       },
       content: __parseHtml(`MIT ©${new Date().getFullYear()} Coffeekraken`)
     });
@@ -92,6 +95,7 @@ module.exports = class SFooter extends __SComponent {
     if (this._authorsBox) {
       // this._authorsBox.width = __countLine(this._authorsBox.content);
     }
+    this.position.height = 1;
 
     super.update();
   }

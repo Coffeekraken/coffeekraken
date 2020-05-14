@@ -146,6 +146,17 @@ module.exports = class SProcess {
           command: `command${i + 1}`,
           menu: `${command.substr(0, 10) + (command.length > 10 ? '...' : '')}`
         };
+      } else if (
+        typeof command === 'object' &&
+        command.command &&
+        command.name
+      ) {
+        newCommandsObj[command.name] = command;
+      } else if (typeof command === 'object') {
+        newCommandsObj = {
+          ...newCommandsObj,
+          ...command
+        };
       }
     });
     commands = newCommandsObj;

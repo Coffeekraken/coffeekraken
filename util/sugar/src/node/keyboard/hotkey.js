@@ -72,19 +72,15 @@ module.exports = function hotkey(key, settings = {}) {
 
             if (!keyObj) return;
 
-            const ctrlWanted = key
-                .toLowerCase()
-                .includes(`ctrl${settings.splitKey}`),
-              shiftWanted = key
-                .toLowerCase()
-                .includes(`shift${settings.splitKey}`),
-              altWanted = key.toLowerCase().includes(`alt${settings.splitKey}`);
+            let pressedKey = keyObj.name;
+            if (keyObj.ctrl)
+              pressedKey = `ctrl${settings.splitKey}${pressedKey}`;
+            if (keyObj.shift)
+              pressedKey = `shift${settings.splitKey}${pressedKey}`;
+            if (keyObj.meta)
+              pressedKey = `alt${settings.splitKey}${pressedKey}`;
 
-            let prefix = ctrlWanted ? `ctrl${settings.splitKey}` : '';
-            prefix = shiftWanted ? `shift${settings.splitKey}` : prefix;
-            prefix = altWanted ? `alt${settings.splitKey}` : prefix;
-
-            if (`${prefix}${keyObj.name}` === key) {
+            if (pressedKey === key) {
               obj.promise.trigger('key', key);
               obj.promise.trigger('press', key);
             }
@@ -93,9 +89,7 @@ module.exports = function hotkey(key, settings = {}) {
     });
   }
 
-  const promise = new __SPromise((resolve, reject, trigger, cancel) => {}, {
-    stacks: 'key'
-  })
+  const promise = new __SPromise((resolve, reject, trigger, cancel) => {}, {})
     .on('key', (key) => {
       if (settings.once) {
         promise.cancel();

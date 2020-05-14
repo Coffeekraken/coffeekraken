@@ -1,6 +1,19 @@
 module.exports = {
   colors: {
     /**
+     * @name                primary
+     * @namespace           sugar.config.terminal.colors
+     * @type                Color
+     * @default             #343a43
+     *
+     * Specify the "primary" terminal color value
+     *
+     * @since               2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    primary: '@config.terminal.colors.yellow',
+
+    /**
      * @name                black
      * @namespace           sugar.config.terminal.colors
      * @type                Color

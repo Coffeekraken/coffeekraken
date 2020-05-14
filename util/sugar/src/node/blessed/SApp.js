@@ -38,10 +38,10 @@ module.exports = class SApp extends __SComponent {
     // store the settings
     settings = __deepMerge(
       {
+        appendToScreen: true,
         header: {
           title: 'Coffeekraken Sugar based application'
-        },
-        blessed: {}
+        }
       },
       settings
     );
@@ -50,11 +50,9 @@ module.exports = class SApp extends __SComponent {
 
     if (this._settings.header) {
       this._headerBox = new __SHeader({
-        blessed: {
-          style: {
-            bg: __color('terminal.yellow').toString(),
-            fg: __color('terminal.black').toString()
-          }
+        style: {
+          bg: __color('terminal.yellow').toString(),
+          fg: __color('terminal.black').toString()
         },
         ...this._settings.header
       });
@@ -63,11 +61,9 @@ module.exports = class SApp extends __SComponent {
 
     if (this._settings.footer) {
       this._footerBox = new __SFooter({
-        blessed: {
-          style: {
-            bg: __color('terminal.yellow').toString(),
-            fg: __color('terminal.black').toString()
-          }
+        style: {
+          bg: __color('terminal.yellow').toString(),
+          fg: __color('terminal.black').toString()
         },
         ...this._settings.footer
       });
@@ -93,10 +89,11 @@ module.exports = class SApp extends __SComponent {
    */
   append(component, ui = false) {
     if (ui) {
-      this.screen.append(component);
+      super.append(component);
     } else {
       this._contentBox.append(component);
     }
+    this.update();
     return this;
   }
 
@@ -111,16 +108,19 @@ module.exports = class SApp extends __SComponent {
    */
   update() {
     if (this._headerBox) {
-      this._headerBox.top = 0;
-      this._headerBox.left = 0;
-
-      this._contentBox.top = this._headerBox.height;
+      this._headerBox.position.top = 0;
+      this._headerBox.position.left = 0;
+      if (this._contentBox) {
+        this._contentBox.position.top = this._headerBox.position.height;
+      }
     }
     if (this._footerBox) {
-      this._footerBox.bottom = 0;
-      this._footerBox.left = 0;
+      this._footerBox.position.bottom = 0;
+      this._footerBox.position.left = 0;
 
-      this._contentBox.bottom = this._footerBox.height;
+      if (this._contentBox) {
+        this._contentBox.position.bottom = this._footerBox.position.height;
+      }
     }
 
     super.update();

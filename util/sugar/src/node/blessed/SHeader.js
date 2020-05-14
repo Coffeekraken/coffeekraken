@@ -2,6 +2,7 @@ const __blessed = require('blessed');
 const __SComponent = require('./SComponent');
 const __deepMerge = require('../object/deepMerge');
 const __parseHtml = require('../terminal/parseHtml');
+const __color = require('../color/color');
 
 /**
  * @name                  SComponent
@@ -38,15 +39,17 @@ module.exports = class SHeader extends __SComponent {
         {
           title:
             'Coffeekraken <bgBlack><yellow>Sugar</yellow></bgBlack> based application',
-          blessed: {
-            width: '100%',
-            height: 3,
-            padding: {
-              top: 1,
-              bottom: 1,
-              left: 1,
-              right: 1
-            }
+          width: '100%',
+          height: 3,
+          style: {
+            bg: __color('terminal.primary').toString(),
+            fg: __color('terminal.black').toString()
+          },
+          padding: {
+            top: 1,
+            bottom: 1,
+            left: 1,
+            right: 1
           }
         },
         settings
@@ -54,8 +57,8 @@ module.exports = class SHeader extends __SComponent {
     );
     this._titleBox = __blessed.box({
       style: {
-        bg: this._settings.blessed.style.bg,
-        fg: this._settings.blessed.style.fg
+        bg: this._settings.style.bg,
+        fg: this._settings.style.fg
       },
       content: __parseHtml(this._settings.title)
     });

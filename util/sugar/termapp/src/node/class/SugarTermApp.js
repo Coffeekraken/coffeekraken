@@ -73,4 +73,23 @@ module.exports = class SugarTermApp extends __SApp {
     const processPanel = new __SProcessPanel(process, {});
     this.append(processPanel);
   }
+
+  /**
+   * @name              process
+   * @type              Function
+   *
+   * This method take as parameter an SProcess instance and display it properly
+   *
+   * @param         {SProcess}         process            The SProcess to display
+   *
+   * @example       js
+   * myCoolApp.process(myCoolProcess);
+   *
+   * @TODO      Better example
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  process(process) {
+    const processPanel = new __SProcessPanel(process, {});
+    this.append(processPanel);
+  }
 };

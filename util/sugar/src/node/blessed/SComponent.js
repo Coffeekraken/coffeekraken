@@ -53,7 +53,7 @@ module.exports = class SComponent extends __blessed.box {
         cursor: {
           artificial: true,
           shape: {
-            bg: __color('terminal.yellow').toString(),
+            bg: __color('terminal.primary').toString(),
             ch: '|'
             // ch: '█'
           },
@@ -63,23 +63,30 @@ module.exports = class SComponent extends __blessed.box {
     }
 
     // store the settings
-    settings = __deepMerge(
-      {
-        screen: true
-      },
-      settings
-    );
+    settings = __deepMerge({}, settings);
     // extends parent
-    super(settings.blessed);
-
-    this.screen = __activeScreen;
+    super(settings);
 
     // save the settings
     this._settings = settings;
-    // render the screen first time if exist
-    setTimeout(() => {
-      this.update();
-    });
+
+    this._screen = __activeScreen;
+    if (this._settings.appendToScreen) {
+      console.log('APPEND');
+      __activeScreen.append(this);
+    }
+
+    if (!this._settings.appendToScreen) {
+      if (this.parent) {
+        this.update();
+      } else {
+        this.on('attach', () => {
+          setTimeout(() => {
+            this.update();
+          });
+        });
+      }
+    }
   }
 
   /**
@@ -91,6 +98,6 @@ module.exports = class SComponent extends __blessed.box {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   update() {
-    if (this.screen) this.screen.render();
+    if (this._screen) this._screen.render();
   }
 };

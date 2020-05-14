@@ -14,7 +14,7 @@ const __clone = require('../object/clone');
 const __SComponent = require('./SComponent');
 
 /**
- * @name                    SLog
+ * @name                    SLogPanel
  * @namespace               sugar.node.blessed
  * @type                    Class
  *
@@ -26,8 +26,8 @@ const __SComponent = require('./SComponent');
  * - screen (true) {Boolean}: Specify if you want your panel wrapped inside an "blessed"(https://www.npmjs.com/package/blessed) screen object. Useful when you just want to render your panel in the terminal. If you have your own screen object
  *
  * @example         js
- * const SLog = require('@coffeekraken/sugar/node/terminal/SLog');
- * const panel = new SLog('my-cool-pannel', {
+ * const SLogPanel = require('@coffeekraken/sugar/node/terminal/SLogPanel');
+ * const panel = new SLogPanel('my-cool-pannel', {
  * });
  * panel.log('Hello world');
  *
@@ -36,7 +36,7 @@ const __SComponent = require('./SComponent');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SLog extends __SComponent {
+module.exports = class SLogPanel extends __SComponent {
   /**
    * @name              _name
    * @type              String
@@ -87,27 +87,26 @@ module.exports = class SLog extends __SComponent {
           //     bottom: 0
           //   }
           // },
-          blessed: {
-            mouse: true,
-            keys: true,
-            // vi: true,
-            scrollable: true,
-            // alwaysScroll: true,
+          mouse: true,
+          keys: true,
+          // vi: true,
+          scrollable: true,
+          // alwaysScroll: true,
+          scrollbar: {
+            ch: ' ',
+            inverse: true
+          },
+          style: {
+            bg: __color('terminal.black').toString(),
             scrollbar: {
-              ch: ' ',
-              inverse: true
-            },
-            style: {
-              scrollbar: {
-                bg: __color('terminal.yellow').toString()
-              }
-            },
-            padding: {
-              top: 1,
-              bottom: 0,
-              left: 1,
-              right: 1
+              bg: __color('terminal.primary').toString()
             }
+          },
+          padding: {
+            top: 1,
+            bottom: 0,
+            left: 1,
+            right: 1
           }
         },
         settings
@@ -335,8 +334,8 @@ module.exports = class SLog extends __SComponent {
         line = __splitEvery(
           line,
           this.width -
-            logSettings.blessed.padding.left -
-            logSettings.blessed.padding.right -
+            logSettings.padding.left -
+            logSettings.padding.right -
             __countLine(formatedBeforeLog) -
             __countLine(formatedBeforeEachLine)
         );

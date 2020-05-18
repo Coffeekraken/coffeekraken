@@ -6,6 +6,7 @@ const __color = require('../color/color');
 const __SComponent = require('./SComponent');
 const __SCenteredPopup = require('./SCenteredPopup');
 const __SSummaryList = require('./SSummaryList');
+const __summaryListPopup = require('./summaryListPopup');
 
 /**
  * @name                  SProcessPanel
@@ -154,10 +155,10 @@ module.exports = class SProcessPanel extends __SComponent {
         // } else
         if (question.type === 'summary') {
           const summary = this.summary(question.commandObj, question.items);
-          summary.promise.on('cancel', () => {
+          summary.on('cancel', () => {
             question.reject && question.reject();
           });
-          summary.promise.on('resolve', (answer) => {
+          summary.on('resolve', (answer) => {
             question.resolve && question.resolve(answer);
           });
         }
@@ -239,18 +240,13 @@ module.exports = class SProcessPanel extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   summary(command, items) {
-    const popupBox = new __SCenteredPopup({
+    const summaryListPopup = __summaryListPopup({
       title: `Run command <bgBlack><bold><primary> ${command.name} </primary></bold></bgBlack> | Are these properties ok?`,
-      description: `<bold><cyan>${command.command}</cyan></bold>`
+      description: `<bold><cyan>${command.command}</cyan></bold>`,
+      items
     });
-    const summaryListBox = new __SSummaryList(items, {});
-    this.append(popupBox);
-    popupBox.append(summaryListBox);
-    summaryListBox.promise.on('finally,cancel', () => {
-      popupBox.remove(summaryListBox);
-      this.remove(popupBox);
-    });
-    return summaryListBox;
+    summaryListPopup.attachTo(this);
+    return summaryListPopup;
   }
 
   /**
@@ -305,7 +301,7 @@ module.exports = class SProcessPanel extends __SComponent {
             };
             break;
         }
-        const content = `${keyObj.menu}(${keyObj.key})`;
+        const content = `${keyObj.text || keyObj.menu}(${keyObj.key})`;
         const item = __blessed.box({
           ...settings,
           left: currentLeft,

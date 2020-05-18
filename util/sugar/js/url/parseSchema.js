@@ -108,7 +108,7 @@ function parseSchema(url, schema) {
 
 
     return part;
-  });
+  }).filter(l => l !== '');
   schemaParts.forEach(part => {
     if (!part.name) return;
     params[part.name] = { ...part

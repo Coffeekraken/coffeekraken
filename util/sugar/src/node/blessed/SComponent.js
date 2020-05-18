@@ -71,8 +71,9 @@ module.exports = class SComponent extends __blessed.box {
     this._settings = settings;
 
     this._screen = __activeScreen;
+    global.screen = __activeScreen;
+
     if (this._settings.appendToScreen) {
-      console.log('APPEND');
       __activeScreen.append(this);
     }
 

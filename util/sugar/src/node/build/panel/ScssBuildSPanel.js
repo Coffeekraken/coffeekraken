@@ -2,10 +2,10 @@ const __parseArgs = require('../../cli/parseArgs');
 const __packageRoot = require('../../path/packageRoot');
 const __sugarConfig = require('../../config/sugar');
 const __buildScss = require('../scss');
-const __SPanel = require('../../terminal/SPanel');
+const __SLogPanel = require('../../blessed/SLogPanel');
 const __deepMerge = require('../../object/deepMerge');
 
-module.exports = class ScssBuildSPanel extends __SPanel {
+module.exports = class ScssBuildSPanel extends __SProcessPanel {
   constructor(settings = {}) {
     super(
       __deepMerge(

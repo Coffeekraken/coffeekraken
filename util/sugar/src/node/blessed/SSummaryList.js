@@ -138,6 +138,10 @@ module.exports = class SSummaryList extends __multiple(
 
     this.promise = new __SPromise((resolve, reject, trigger, cancel) => {});
 
+    this.on = this.promise.on.bind(this.promise);
+    this.then = this.promise.then.bind(this.promise);
+    this.catch = this.promise.catch.bind(this.promise);
+
     // this.on('select', (list) => {
     //   this._terminate();
     //   this.promise.resolve(settings.items[this.selected]);

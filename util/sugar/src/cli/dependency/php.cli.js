@@ -1,6 +1,9 @@
 const __parseArgs = require('../../node/cli/parseArgs');
 // const __SPhpDependency = require('../../node/dependency/SPhpDependency');
 
+const __scss = require('../../node/build/scss');
+
+const __SProcess = require('../../node/terminal/SProcess');
 const __SProcessPanel = require('../../node/blessed/SProcessPanel');
 const __SPhpServerProcess = require('../../node/server/SPhpServerProcess');
 
@@ -51,8 +54,17 @@ module.exports = (stringArgs = '') => {
   //   'ps something wrint wijfwij iowjefijweofji weoi'
   // ]);
 
-  const pro = new __SPhpServerProcess({});
-  __sugarTermApp.process(pro);
+  // const pro = new __SPhpServerProcess({});
+  // __sugarTermApp.process(pro);
+
+  const myCoolProcess = new __SProcess({
+    build: {
+      command: () => {
+        return __scss();
+      }
+    }
+  });
+  __sugarTermApp.process(myCoolProcess);
 
   // const dep = new __SPhpDependency();
   // dep.install(args.version);

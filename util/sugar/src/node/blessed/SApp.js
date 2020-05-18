@@ -4,6 +4,9 @@ const __color = require('../color/color');
 const __SComponent = require('./SComponent');
 const __SHeader = require('./SHeader');
 const __SFooter = require('./SFooter');
+const __get = require('../object/get');
+const __parseSchema = require('../url/parseSchema');
+const __SProcess = require('../terminal/SProcess');
 
 /**
  * @name                  SApp
@@ -41,10 +44,17 @@ module.exports = class SApp extends __SComponent {
         appendToScreen: true,
         header: {
           title: 'Coffeekraken Sugar based application'
-        }
+        },
+        footer: {}
       },
       settings
     );
+
+    // check if we have a config object to different config files
+    if (settings.sConfigInstance) {
+      settings = __deepMerge(settings.sConfigInstance.get(''), settings);
+    }
+
     // extends parent
     super(settings);
 
@@ -72,7 +82,100 @@ module.exports = class SApp extends __SComponent {
 
     this._contentBox = __blessed.box({});
     this.append(this._contentBox, true);
+
+    // go to default page
+    if (this.config('pages.default')) {
+      this.goTo(this.config('pages.default'));
+    }
   }
+
+  /**
+   * @name            config
+   * @type            Function
+   *
+   * This methods allows you to get some configuration through the setted SConfig instance
+   *
+   * @param         {String}          dotedPath         The doted path to the config you want to get
+   * @return        {Mixed}                             The config getted
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  config(dotedPath) {
+    return __get(this._settings, dotedPath);
+  }
+
+  /**
+   * @name            goTo
+   * @type            Function
+   *
+   * This methods allows you to specify the "url" you want to go to
+   *
+   * @param         {String}            url               The url you want to go to
+   *
+   * @example       js
+   * myCoolApp.goTo('/something/cool');
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  goTo(url) {
+    // loop on the pages urls available in the config
+    const urlsKeys = Object.keys(this.config('pages.urls'));
+    for (let i = 0; i < urlsKeys.length; i++) {
+      const parsedSchema = __parseSchema(url, urlsKeys[i]);
+      if (parsedSchema.match) {
+        this._goTo(url, urlsKeys[i], parsedSchema);
+        break;
+      }
+    }
+  }
+
+  /**
+   * @name          _goTo
+   * @type          Function
+   * @private
+   *
+   * This is the internal version of the goTo method. It will take care of actualy change the page etc...
+   *
+   * @param         {String}          url             The url where the user want to go
+   * @param         {String}          rawUrl          The raw url used in the config. This is the url that may content some params like "{what}", etc...
+   * @param         {Object}          parsedSchema    The parsed url schema
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _goTo(url, rawUrl, parsedSchema) {
+    const pageObj = this.config(`pages.urls.${rawUrl}`);
+
+    // switch on the page type
+    switch (pageObj.type) {
+      case 'process':
+        let process;
+        // try to get the actual SProcess instance linked to the page
+        if (pageObj.process instanceof __SProcess) {
+          process = pageObj.process;
+        } else if (typeof pageObj.process === 'function') {
+          process = pageObj.process(url, rawUrl, parsedSchema);
+        } else {
+          process = this._getProcessInstance(url, rawUrl, parsedSchema);
+        }
+        break;
+    }
+  }
+
+  /**
+   * @name          _getProcessInstance
+   * @type          Function
+   * @private
+   *
+   * This method take care of retreiving the SProcess instance linked to a certain page/url.
+   *
+   * @param         {String}          url             The url where the user want to go
+   * @param         {String}          rawUrl          The raw url used in the config. This is the url that may content some params like "{what}", etc...
+   * @param         {Object}          parsedSchema    The parsed url schema
+   * @return        {SProcess}                        The SProcess instance for the passed page/url
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _getProcessInstance(url, rawUrl, parsedSchema) {}
 
   /**
    * @name          append

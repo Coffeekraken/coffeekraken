@@ -118,6 +118,7 @@ module.exports = class SProcess {
       },
       settings
     );
+
     // init the SPromise class
     this._promise = new __SPromise((resolve, reject, trigger, cancel) => {
       this.resolve = resolve.bind(this);
@@ -140,12 +141,12 @@ module.exports = class SProcess {
             Object.keys(__sugarConfig('terminal.colors'))[i + 1] || 'yellow',
           run: true
         };
-        _settings.keys[`command${i + 1}`] = {
-          key: i + 1,
-          type: 'run',
-          command: `command${i + 1}`,
-          menu: `${command.substr(0, 10) + (command.length > 10 ? '...' : '')}`
-        };
+        // _settings.keys[`command${i + 1}`] = {
+        //   key: i + 1,
+        //   type: 'run',
+        //   command: `command${i + 1}`,
+        //   menu: `${command.substr(0, 10) + (command.length > 10 ? '...' : '')}`
+        // };
       } else if (
         typeof command === 'object' &&
         command.command &&
@@ -170,11 +171,21 @@ module.exports = class SProcess {
       if (commandObj instanceof __SCommand) {
         this._commands[commandName] = commandObj;
       } else {
-        this._commands[commandName] = new __SCommand(
-          commandName,
-          commandObj.command,
-          commandObj
-        );
+        if (typeof commandObj === 'string') {
+          this._commands[commandName] = new __SCommand(
+            commandName,
+            commandObj,
+            {}
+          );
+        } else if (typeof commandObj === 'object' && commandObj.command) {
+          const commandSettings = Object.assign({}, commandObj);
+          delete commandSettings.command;
+          this._commands[commandName] = new __SCommand(
+            commandName,
+            commandObj.command,
+            commandSettings || {}
+          );
+        }
       }
     });
 
@@ -215,7 +226,7 @@ module.exports = class SProcess {
       }
     });
 
-    process.stdin.resume();
+    // process.stdin.resume();
   }
 
   /**
@@ -244,7 +255,10 @@ module.exports = class SProcess {
         // set the isRunning state of the keys associated to this command
         Object.keys(this.keys).forEach((keyName) => {
           const keyObj = this.keys[keyName];
-          if (keyObj.type === 'run' && keyObj.command === data.command.name) {
+          if (
+            keyObj.type === 'run' &&
+            keyObj.command === data.commandObj.name
+          ) {
             keyObj._isRunning = false;
           }
         });
@@ -328,6 +342,11 @@ module.exports = class SProcess {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _initKeys() {
+    // init the kill process
+    __hotkey('ctrl+c').on('press', () => {
+      process.exit(0);
+    });
+
     // loop on each keys to be inited
     Object.keys(this._settings.keys || {}).forEach((keyName) => {
       const keyObj = this._settings.keys[keyName];
@@ -412,26 +431,6 @@ module.exports = class SProcess {
     return this._settings.keys || {};
   }
 
-  // /**
-  //  * @name                _getKeyObjectFromCommandName
-  //  * @type                Function
-  //  * @private
-  //  *
-  //  * This method return the key object by searching with the command name
-  //  *
-  //  * @param         {String}          property         The property to search for inside each key objects
-  //  * @param         {Mixed}           value           The value searched
-  //  * @return        {Object}                          The key object or false if not found
-  //  *
-  //  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-  //  */
-  // _getKeyObjectByPropery(property, value) {
-  //   for (let i = 0; i < Object.keys(this._settings.keys).length; i++) {
-  //     const obj = this._settings.keys[Object.keys(this._settings.keys)[i]];
-  //     if (obj[property] !== undefined && obj[property] === value) return obj;
-  //   }
-  // }
-
   /**
    * @name                  run
    * @type                  Function
@@ -465,12 +464,6 @@ module.exports = class SProcess {
         `You try to launch a command but it seems that the passed one is not an instance of the SCommand class...`
       );
     }
-
-    // // search for a key object that correspond to this command
-    // const keyObjForCurrentCommand = this._getKeyObjectByPropery(
-    //   'command',
-    //   command.name
-    // );
 
     // return the promise
     return command.run();

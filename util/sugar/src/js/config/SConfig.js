@@ -3,6 +3,8 @@ import __get from '../object/get';
 import __set from '../object/set';
 import __resolveTokens from '../object/resolveTokens';
 
+import __isPlainObject from '../is/plainObject';
+import __deepMap from '../object/deepMap';
 import __SConfigAdapter from './adapters/SConfigAdapter';
 
 // TODO: Add a "catch" method that allows to get the saving errors, etc...
@@ -247,7 +249,14 @@ export default class SConfig {
 
     let value = __get(this._adapters[adapter].config, path);
 
-    if (typeof value === 'string' && value.substr(0, 7) === '@config') {
+    if (__isPlainObject(value)) {
+      value = __deepMap(value, (val, prop, fullPath) => {
+        if (typeof val === 'string' && val.substr(0, 7) === '@config') {
+          return this.get(val.replace('@config.', ''), adapter);
+        }
+        return val;
+      });
+    } else if (typeof value === 'string' && value.substr(0, 7) === '@config') {
       value = this.get(value.replace('@config.', ''), adapter);
     }
 

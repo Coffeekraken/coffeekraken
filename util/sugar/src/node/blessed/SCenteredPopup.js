@@ -3,6 +3,7 @@ const __SComponent = require('./SComponent');
 const __deepMerge = require('../object/deepMerge');
 const __parseHtml = require('../terminal/parseHtml');
 const __color = require('../color/color');
+const __escapeStack = require('../terminal/escapeStack');
 
 /**
  * @name                  SCenteredPopup
@@ -109,6 +110,10 @@ module.exports = class SCenteredPopup extends __SComponent {
       }
     });
     super.append(this._contentBox);
+
+    __escapeStack(() => {
+      this.parent.remove(this);
+    });
   }
 
   /**

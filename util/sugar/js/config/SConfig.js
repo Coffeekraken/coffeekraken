@@ -13,6 +13,10 @@ var _set = _interopRequireDefault(require("../object/set"));
 
 var _resolveTokens = _interopRequireDefault(require("../object/resolveTokens"));
 
+var _plainObject = _interopRequireDefault(require("../is/plainObject"));
+
+var _deepMap = _interopRequireDefault(require("../object/deepMap"));
+
 var _SConfigAdapter = _interopRequireDefault(require("./adapters/SConfigAdapter"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -249,7 +253,15 @@ class SConfig {
 
     let value = (0, _get.default)(this._adapters[adapter].config, path);
 
-    if (typeof value === 'string' && value.substr(0, 7) === '@config') {
+    if ((0, _plainObject.default)(value)) {
+      value = (0, _deepMap.default)(value, (val, prop, fullPath) => {
+        if (typeof val === 'string' && val.substr(0, 7) === '@config') {
+          return this.get(val.replace('@config.', ''), adapter);
+        }
+
+        return val;
+      });
+    } else if (typeof value === 'string' && value.substr(0, 7) === '@config') {
       value = this.get(value.replace('@config.', ''), adapter);
     }
 

@@ -1,23 +1,30 @@
-const __ScssBuildSPanel = require('../../node/build/panels/ScssBuildSPanel');
 const __isChildProcess = require('../../node/is/childProcess');
 const __buildScss = require('../../node/build/scss');
-const __ScssBuildSProcess = require('../../node/build/processes/ScssBuildSProcess');
+const __parseHtml = require('../../node/terminal/parseHtml');
+const __SProcess = require('../../node/terminal/SProcess');
+const __SProcessPanel = require('../../node/blessed/SProcessPanel');
+const __parseArgs = require('../../node/cli/parseArgs');
+const __ScssBuildSProcess = require('../../node/build/process/ScssBuildSProcess');
 
 module.exports = (stringArgs = '') => {
+  const args = __parseArgs(stringArgs, {
+    child: {
+      type: 'boolean',
+      default: false
+    }
+  });
+
   if (__isChildProcess()) {
-    const build = __buildScss();
+    const build = __buildScss({
+      watch: true
+    });
     build.on('log', (message) => {
-      console.log('~' + message);
+      console.log(message);
     });
     return;
   }
 
-  const _process = new __ScssBuildSProcess({});
-  console.log('P', _process);
-
-  // const scssBuildSPanel = new __ScssBuildSPanel({
-  //   screen: true
-  // });
-  // scssBuildSPanel.build();
-  // return scssBuildSPanel;
+  const scssBuildProcess = new __ScssBuildSProcess();
+  const panel = new __SProcessPanel(scssBuildProcess, {});
+  global.screen.append(panel);
 };

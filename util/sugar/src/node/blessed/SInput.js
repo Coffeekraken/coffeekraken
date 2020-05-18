@@ -7,6 +7,7 @@ const __terminalLink = require('terminal-link');
 const __SPromise = require('../promise/SPromise');
 const __multiple = require('../class/multipleExtends');
 const __color = require('../color/color');
+const __escapeStack = require('../terminal/escapeStack');
 
 /**
  * @name                  SInput
@@ -63,6 +64,10 @@ module.exports = class SInput extends __SComponent {
     this._input.promise = new __SPromise(
       (resolve, reject, trigger, cancel) => {}
     );
+
+    this._input.on('focus', () => {
+      __escapeStack(() => {});
+    });
 
     this._input.on('attach', () => {
       setTimeout(() => {

@@ -4,6 +4,10 @@ const __SProcessPanel = require('../../../../node/blessed/SProcessPanel');
 const __SLogPanel = require('../../../../node/blessed/SLogPanel');
 const __deepMerge = require('../../../../node/object/deepMerge');
 const __packageJson = require('../../../../package.json');
+const __sugarConfig = require('../../../../node/config/sugar');
+const __SConfig = require('../../../../node/config/SConfig');
+const __SConfigFsAdapter = require('../../../../node/config/adapters/SConfigFsAdapter');
+const __packageRoot = require('../../../../node/path/packageRoot');
 
 /**
  * @name            SugarTermApp
@@ -30,21 +34,26 @@ module.exports = class SugarTermApp extends __SApp {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(settings = {}) {
+    const adapter = new __SConfigFsAdapter({
+      name: 'termapp',
+      filename: '[name].config.js',
+      defaultConfigPath: `${__packageRoot(__dirname)}/.sugar/[filename]`,
+      appConfigPath: `${__packageRoot(process.cwd())}/.sugar/[filename]`,
+      userConfigPath: null
+    });
+    const sConfigInstance = new __SConfig('termapp', {
+      adapters: [adapter],
+      allowSave: false,
+      allowSet: false,
+      allowReset: false,
+      allowNew: false,
+      autoLoad: true,
+      autoSave: false
+    });
     super(
       __deepMerge(
         {
-          header: {
-            title: `<bold>Coffeekraken</bold> <bgBlack><yellow> Sugar </yellow></bgBlack> <black>v${__packageJson.version}</black>`
-          },
-          footer: {
-            authors: [
-              {
-                name: 'Olivier Bossel',
-                email: 'olivier.bossel@gmail.com',
-                website: 'https://olivierbossel.com'
-              }
-            ]
-          }
+          sConfigInstance
         },
         settings
       )

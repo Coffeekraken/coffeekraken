@@ -71,36 +71,38 @@ export default function parseSchema(url, schema) {
   let schemaParts = schema.split('/');
 
   // analyze all the schema parts
-  schemaParts = schemaParts.map((part) => {
-    // check if is a param
-    if (part.slice(0, 1) === '{' && part.slice(-1) === '}') {
-      const isOptional = part.slice(0, 2) === '{?' || part.slice(-2) === '?}';
-      const isType = part.indexOf(':') !== -1;
+  schemaParts = schemaParts
+    .map((part) => {
+      // check if is a param
+      if (part.slice(0, 1) === '{' && part.slice(-1) === '}') {
+        const isOptional = part.slice(0, 2) === '{?' || part.slice(-2) === '?}';
+        const isType = part.indexOf(':') !== -1;
 
-      let type = null;
-      let name = null;
-      if (isType) {
-        name = part.split(':')[0].slice(1);
-        type = part.split(':')[1].slice(0, -1);
-        if (name.slice(0, 1) === '?') name = name.slice(1);
-        if (type.slice(-1) === '?') type = type.slice(0, -1);
-      } else {
-        name = part.slice(1, -1);
-        if (name.slice(-1) === '?') name = name.slice(0, -1);
-        if (name.slice(0, 1) === '?') name = name.slice(1);
+        let type = null;
+        let name = null;
+        if (isType) {
+          name = part.split(':')[0].slice(1);
+          type = part.split(':')[1].slice(0, -1);
+          if (name.slice(0, 1) === '?') name = name.slice(1);
+          if (type.slice(-1) === '?') type = type.slice(0, -1);
+        } else {
+          name = part.slice(1, -1);
+          if (name.slice(-1) === '?') name = name.slice(0, -1);
+          if (name.slice(0, 1) === '?') name = name.slice(1);
+        }
+
+        return {
+          name,
+          type,
+          raw: part,
+          optional: isOptional
+        };
       }
 
-      return {
-        name,
-        type,
-        raw: part,
-        optional: isOptional
-      };
-    }
-
-    // this is not a parameter so return as is
-    return part;
-  });
+      // this is not a parameter so return as is
+      return part;
+    })
+    .filter((l) => l !== '');
 
   schemaParts.forEach((part) => {
     if (!part.name) return;

@@ -270,7 +270,11 @@ module.exports = class SCommand extends __SPromise {
         // init the child process
         childProcess = __childProcess.spawn(this._runningProcess.command, {
           shell: true,
-          detached: true
+          env: {
+            ...process.env,
+            IS_CHILD_PROCESS: true
+          }
+          // detached: true
         });
 
         // listen for the killing of the process
@@ -336,6 +340,7 @@ module.exports = class SCommand extends __SPromise {
           });
         });
         childProcess.stdout.on('data', (value) => {
+          if (!this._runningProcess) return;
           this._runningProcess.stdout.push(value.toString());
           trigger('data', {
             get commandObj() {
@@ -353,6 +358,7 @@ module.exports = class SCommand extends __SPromise {
           });
         });
         childProcess.stderr.on('data', (error) => {
+          if (!this._runningProcess) return;
           this._runningProcess.stdout.push(error.toString());
           trigger('error', {
             get commandObj() {

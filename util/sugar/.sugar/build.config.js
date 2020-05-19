@@ -42,14 +42,16 @@ module.exports = {
      * @name              watch
      * @namespace         sugar.config.build.scss
      * @type              String
-     * @default           false
+     * @default           src/scss\/**\/*.scss
      *
-     * SSet if you want to watch files by default during the build process
+     * SSet the watch files that you want to check
      *
      * @since             2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    watch: false,
+    watch: isInSugarPackage()
+      ? `${__packageRoot()}/tests/src/scss/**/*.scss`
+      : `${__packageRoot()}/src/scss/**/*.scss`,
 
     /**
      * @name              style

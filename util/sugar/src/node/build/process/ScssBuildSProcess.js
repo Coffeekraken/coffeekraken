@@ -1,5 +1,7 @@
 const __SProcess = require('../../terminal/SProcess');
 const __deepMerge = require('../../object/deepMerge');
+const __sugarConfig = require('../../config/sugar');
+const __parseArgs = require('../../cli/parseArgs');
 
 /**
  * @name              ScssBuildSProcess
@@ -51,12 +53,16 @@ module.exports = class ScssBuildSProcess extends __SProcess {
       }
     }
 
-    console.log(commandLine);
-
     // init parent class
     super(
       {
-        build: `sugar build.scss ${commandLine}`
+        build: {
+          command: `sugar build.scss ${commandLine}`,
+          watch: {
+            patterns: __sugarConfig('build.scss.watch'),
+            type: 'new,update'
+          }
+        }
       },
       __deepMerge(
         {

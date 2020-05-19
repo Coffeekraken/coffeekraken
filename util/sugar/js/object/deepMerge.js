@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @type                Function
  *
  * Deep merge one object with another and return the merged object result
- * 
+ *
  * @param           {Object}            objects...        Pass all the objects you want to merge
  * @return          {Object}                              The merged object result
  *

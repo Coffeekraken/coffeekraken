@@ -48,23 +48,31 @@ import __isPlainObject from '../is/plainObject';
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function parseArgsString(string, argsDefinitions = {}, settings = {}) {
-
-  settings = __deepMerge({
-    treatDotsAsObject: true,
-    handleOrphanOptions: true
-  }, settings);
+export default function parseArgsString(
+  string,
+  argsDefinitions = {},
+  settings = {}
+) {
+  settings = __deepMerge(
+    {
+      treatDotsAsObject: true,
+      handleOrphanOptions: true,
+      defaultObj: null
+    },
+    settings
+  );
 
   // process the passed string
-  let stringArray = string.match(/(?:[^\s("|')]+|("|')[^("|')]*("|'))+/gm) || [];
+  let stringArray =
+    string.match(/(?:[^\s("|'|`)]+|("|'|`)[^("|'|`)]*("|'|`))+/gm) || [];
 
   let currentArg = null;
   const argsObj = {};
-  stringArray = stringArray.filter(part => {
-
+  stringArray = stringArray.filter((part) => {
     if (part.slice(0, 2) === '--' || part.slice(0, 1) === '-') {
       currentArg = part.replace(/^[-]{1,2}/, '');
-      if (currentArg.length === 1) currentArg = getArgNameByAlias(currentArg, argsDefinitions);
+      if (currentArg.length === 1)
+        currentArg = getArgNameByAlias(currentArg, argsDefinitions);
       if (settings.treatDotsAsObject) {
         __set(argsObj, currentArg, true);
       } else {
@@ -80,9 +88,13 @@ export default function parseArgsString(string, argsDefinitions = {}, settings =
       if (!argDefinition) return false;
 
       // take care of array argument
-      if (argDefinition.type && processArgType(argDefinition.type) === 'array') {
+      if (
+        argDefinition.type &&
+        processArgType(argDefinition.type) === 'array'
+      ) {
         if (settings.treatDotsAsObject) {
-          if (!Array.isArray(__get(argsObj, currentArg))) __set(argsObj, currentArg, []);
+          if (!Array.isArray(__get(argsObj, currentArg)))
+            __set(argsObj, currentArg, []);
           if (Array.isArray(part)) {
             __get(argsObj, currentArg).push(parse(...part));
           } else {
@@ -112,7 +124,7 @@ export default function parseArgsString(string, argsDefinitions = {}, settings =
   });
 
   // get the list of arguments that does not have value for now
-  let argsWithoutValues = Object.keys(argsDefinitions).filter(argName => {
+  let argsWithoutValues = Object.keys(argsDefinitions).filter((argName) => {
     if (settings.treatDotsAsObject) {
       return __get(argsObj, argName) === undefined;
     } else {
@@ -121,43 +133,68 @@ export default function parseArgsString(string, argsDefinitions = {}, settings =
   });
 
   if (settings.handleOrphanOptions) {
-    // loop on these "unknown" values and try to get the argument that correspond to it
-    stringArray = stringArray.filter(value => {
-      let hasFoundAnArgument = false;
-      // loop on the args without values
-      argsWithoutValues = argsWithoutValues.filter(argName => {
-        // check that the argument does not have any value
-        if (settings.treatDotsAsObject) {
-          if (__get(argsObj, argName)) return false;
-        } else {
-          if (argsObj[argName]) return false;
+    let settedValues = [];
+    argsWithoutValues.forEach((argName) => {
+      const argObj = argsDefinitions[argName];
+      for (let i = 0; i < stringArray.length; i++) {
+        const value = stringArray[i];
+        if (settedValues.indexOf(value) !== -1) continue;
+        if (isValueCorrespondToArgDefinition(value, argObj)) {
+          argsObj[argName] = value;
+          settedValues.push(value);
+          break;
         }
-        // check if the value correspond to the argument
-        if (!hasFoundAnArgument && isValueCorrespondToArgDefinition(value, argsDefinitions[argName])) {
-          // set the value in the argsObj
-          if (settings.treatDotsAsObject) {
-            __set(argsObj, argName, value);
-          } else {
-            argsObj[argName] = value;
-          }
-          // tell that this value has found an argument
-          hasFoundAnArgument = true;
-          // tell that this argument is now fullfiled with a value
-          return false;
-        }
-        // the argument does not have any value
-        return true;
-      });
-      // filter the stringArray
-      return !hasFoundAnArgument;
+      }
     });
+
+    //   // loop on these "unknown" values and try to get the argument that correspond to it
+    //   let orphansValuesArray = [...stringArray];
+    //   stringArray = stringArray.filter((value) => {
+    //     // let hasFoundAnArgument = false;
+    //     // loop on the args without values
+    //     argsWithoutValues = argsWithoutValues.filter((argName) => {
+    //       if (orphansValuesArray.indexOf(value) === -1) return true;
+    //       // check that the argument does not have any value
+    //       if (settings.treatDotsAsObject) {
+    //         console.log('get', __get(argsObj, argName), argName);
+    //         if (__get(argsObj, argName)) return false;
+    //       } else {
+    //         console.log('get', argsObj[argName], argName);
+    //         if (argsObj[argName]) return false;
+    //       }
+    //       // check if the value correspond to the argument
+    //       if (
+    //         // !hasFoundAnArgument &&
+    //         isValueCorrespondToArgDefinition(value, argsDefinitions[argName])
+    //       ) {
+    //         console.log('ca', value, argName, orphansValuesArray);
+    //         // set the value in the argsObj
+    //         if (settings.treatDotsAsObject) {
+    //           console.log('set', argName, value);
+    //           __set(argsObj, argName, value);
+    //         } else {
+    //           console.log('set', argName, value);
+    //           argsObj[argName] = value;
+    //         }
+    //         orphansValuesArray.splice(orphansValuesArray.indexOf(value), 1);
+    //         // // tell that this value has found an argument
+    //         // hasFoundAnArgument = true;
+    //         // tell that this argument is now fullfiled with a value
+    //         return false;
+    //       }
+    //       // the argument does not have any value
+    //       return true;
+    //     });
+    //     // filter the stringArray
+    //     return !hasFoundAnArgument;
+    //   });
   }
 
   // init the error list
   const errors = [];
 
   // make sure all the arguments correspond to their definition
-  Object.keys(argsDefinitions).forEach(argName => {
+  Object.keys(argsDefinitions).forEach((argName) => {
     let value;
     if (settings.treatDotsAsObject) {
       value = __get(argsObj, argName);
@@ -173,11 +210,22 @@ export default function parseArgsString(string, argsDefinitions = {}, settings =
         argsObj[argName] = argsDefinitions[argName].default;
       }
       value = argsDefinitions[argName].default;
+    } else if (value === undefined && settings.defaultObj) {
+      if (__get(settings.defaultObj, argName) !== undefined) {
+        if (settings.treatDotsAsObject) {
+          __set(argsObj, argName, __get(settings.defaultObj, argName));
+        } else {
+          argsObj[argName] = __get(settings.defaultObj, argName);
+        }
+        value = __get(settings.defaultObj, argName);
+      }
     }
 
     // check argument that does not have any value and that are required
     if (value === undefined && argsDefinitions[argName].required === true) {
-      errors.push(`The argument "<red>${argName}</red>" is required but you don't pass any value...`);
+      errors.push(
+        `The argument "<red>${argName}</red>" is required but you don't pass any value...`
+      );
       return;
     }
 
@@ -198,7 +246,6 @@ export default function parseArgsString(string, argsDefinitions = {}, settings =
 
   // return the argsObj
   return argsObj;
-
 }
 
 function processArgType(type) {
@@ -239,11 +286,13 @@ function isValueCorrespondToArgDefinition(value, argDefinition) {
   }
 
   // checking validator
-  if (argDefinition.validator && typeof argDefinition.validator === 'function') {
+  if (
+    argDefinition.validator &&
+    typeof argDefinition.validator === 'function'
+  ) {
     if (!argDefinition.validator(parse(value))) return false;
   }
 
   // all good
   return true;
-
 }

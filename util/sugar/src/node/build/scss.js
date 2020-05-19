@@ -19,6 +19,7 @@ const __child_process = require('child_process');
 const __isInPackage = require('../../node/path/isInPackage');
 const __deepMerge = require('../../node/object/deepMerge');
 const __SPromise = require('../promise/SPromise');
+const __glob = require('glob');
 
 /**
  * @name                scss
@@ -55,30 +56,7 @@ const __SPromise = require('../promise/SPromise');
  */
 module.exports = (settings = {}) => {
   return new __SPromise(async (resolve, reject, trigger, cancel) => {
-    settings = __deepMerge(
-      {
-        input:
-          (await __sugarConfig('build.scss.input')) ||
-          `${__appPath.path}/src/scss/[^_]*.scss`,
-        output:
-          (await __sugarConfig('build.scss.output')) ||
-          `${__appPath.path}/dist/css`,
-        watch: (await __sugarConfig('build.scss.watch')) || false,
-        style: (await __sugarConfig('build.scss.style')) || 'expanded',
-        map: await __sugarConfig('build.scss.map'),
-        prod: await __sugarConfig('build.scss.prod'),
-        include: {
-          sugar:
-            (await __sugarConfig('build.scss.include.sugar')) === undefined
-              ? true
-              : await __sugarConfig('build.scss.include.sugar')
-        },
-        vendor: {
-          sass: (await __sugarConfig('build.scss.vendor.sass')) || {}
-        }
-      },
-      settings
-    );
+    settings = __deepMerge(__sugarConfig('build.scss'), settings);
 
     let inputPath = settings.input;
     let outputPath = settings.output;
@@ -124,242 +102,184 @@ module.exports = (settings = {}) => {
       }
     }
 
-    if (settings.watch) {
-      trigger(
-        'log',
-        `<green>Start watching your files at "<yellow>${inputPath.replace(
-          __appPath.path,
-          '<rootDir>'
-        )}</yellow>"...</green>`
-      );
+    // get all the files to compile
+    let filesToCompile = __glob.sync(inputPath);
+    let compiledFiles = {};
+    for (let i = 0; i < filesToCompile.length; i++) {
+      await renderScss(filesToCompile[i]);
     }
 
-    let filesToCompile = [];
-    let compiledFiles = {};
+    // resolve the promise with all the compiled files
+    resolve(compiledFiles);
 
-    const watcher = __chokidar.watch(inputPath, {
-      persistent: true
-    });
-    watcher.on('add', renderScss);
-    watcher.on('change', renderScss);
-    watcher.on('unlink', renderScss);
-    watcher.on('all', (s) => {
-      const files = watcher.getWatched();
-      Object.keys(files).forEach((path) => {
-        const filesStack = files[path];
-        filesStack.forEach((filename) => {
-          if (filesToCompile.indexOf(`${path}/${filename}`) === -1) {
-            filesToCompile.push(`${path}/${filename}`);
-          }
-        });
-      });
-    });
-    watcher.on('ready', () => {
-      if (!settings.watch) {
-        watcher.close();
-      }
-    });
-
-    async function renderScss(path) {
-      const smallPath = path.replace(__packageRoot(process.cwd()), '<appRoot>');
-
-      // trigger(
-      //   'log',
-      //   `<underline><magenta>Starting build process:</magenta></underline>\n`
-      // );
-
-      trigger(
-        'log',
-        `<green>‣</green> Start building the file <yellow>${smallPath}</yellow>...`
-      );
-
-      const writingPath =
-        outputPath +
-        path
-          .replace(inputFolderPath, '')
-          .replace('.scss', '.css')
-          .replace('.sass', '.css');
-      const writingMapPath = writingPath.replace('.css', '.css.map');
-      const smallWritingPath = writingPath.replace(
-        __packageRoot(process.cwd()),
-        '<appRoot>'
-      );
-
-      // trigger(
-      //   'log',
-      //   `Bundling the files together before actually compiling them...`
-      // );
-
-      const bundler = new __Bundler(undefined, inputPath);
-      let bundledScssString = await (await bundler.bundle(path)).bundledContent;
-
-      let importAndSetupSugar = '';
-      if (settings.include.sugar) {
-        // trigger(
-        //   'log',
-        //   `Importing <green>Sugar</green> in the file <yellow>${smallPath}</yellow>...`
-        // );
-
-        importAndSetupSugar = `
-          @use '@coffeekraken/sugar/index' as Sugar;
-          @include Sugar.setup($sugarUserSettings);
-        `;
-        if (__isInPackage('@coffeekraken/sugar')) {
+    function renderScss(path) {
+      return new Promise(async (renderResolve, renderReject) => {
+        const smallPath = path.replace(
+          __packageRoot(process.cwd()),
+          '<appRoot>'
+        );
+        trigger(
+          'start',
+          `<iStart/> Start building the file <yellow>${smallPath}</yellow>...`
+        );
+        const writingPath =
+          outputPath +
+          path
+            .replace(inputFolderPath, '')
+            .replace('.scss', '.css')
+            .replace('.sass', '.css');
+        const writingMapPath = writingPath.replace('.css', '.css.map');
+        const smallWritingPath = writingPath.replace(
+          __packageRoot(process.cwd()),
+          '<appRoot>'
+        );
+        trigger(
+          'log',
+          `Bundling the files together before actually compiling them...`
+        );
+        const bundler = new __Bundler(undefined, inputPath);
+        let bundledScssString = await (await bundler.bundle(path))
+          .bundledContent;
+        let importAndSetupSugar = '';
+        if (settings.include.sugar) {
           // trigger(
           //   'log',
-          //   `Updating the @use <green>Sugar</green> path because we are in the <yellow>@coffeekraken/sugar</yellow> package...`
+          //   `Importing <green>Sugar</green> in the file <yellow>${smallPath}</yellow>...`
           // );
-
-          const relativePath = __path.relative(
-            inputFolderPath,
-            __packageRoot(__dirname)
-          );
           importAndSetupSugar = `
-            @use '${relativePath}/index' as Sugar;
+            @use '@coffeekraken/sugar/index' as Sugar;
             @include Sugar.setup($sugarUserSettings);
           `;
-        }
-      }
-
-      // prepend the scssConfigString if exists
-      bundledScssString = `
-        ${scssConfigString}
-        ${importAndSetupSugar}
-        ${bundledScssString}
-      `;
-
-      // trigger(
-      //   'log',
-      //   `Start compiling the file <yellow>${smallPath}</yellow>...`
-      // );
-
-      // render sass
-      __sass.render(
-        __deepMerge(
-          {
-            data: bundledScssString,
-            includePaths: [
+          if (__isInPackage('@coffeekraken/sugar')) {
+            // trigger(
+            //   'log',
+            //   `Updating the @use <green>Sugar</green> path because we are in the <yellow>@coffeekraken/sugar</yellow> package...`
+            // );
+            const relativePath = __path.relative(
               inputFolderPath,
-              `${__packageRoot(process.cwd())}/node_modules`
-            ],
-            sourceMap: settings.map,
-            outFile: settings.map ? writingPath : null
-          },
-          settings.vendor.sass
-        ),
-        async function (err, result) {
-          if (err) {
-            filesToCompile = [];
-            reject(err);
-            return;
+              __packageRoot(__dirname)
+            );
+            importAndSetupSugar = `
+              @use '${relativePath}/index' as Sugar;
+              @include Sugar.setup($sugarUserSettings);
+            `;
           }
-
-          // trigger(
-          //   'log',
-          //   `Compilation of the file <yellow>${smallPath}</yellow> finished with <green>success</green>...`
-          // );
-
-          const fileObj = {};
-
-          trigger(
-            'log',
-            `- Writing the file <yellow>${smallPath}</yellow> to <green>${smallWritingPath}</green>...`
-          );
-          await __writeFile(writingPath, result.css.toString());
-          fileObj.css = writingPath;
-
-          if (result.map) {
+        }
+        // prepend the scssConfigString if exists
+        bundledScssString = `
+          ${scssConfigString}
+          ${importAndSetupSugar}
+          ${bundledScssString}
+        `;
+        trigger(
+          'log',
+          `Start compiling the file <yellow>${smallPath}</yellow>...`
+        );
+        // render sass
+        __sass.render(
+          __deepMerge(
+            {
+              data: bundledScssString,
+              includePaths: [
+                inputFolderPath,
+                `${__packageRoot(process.cwd())}/node_modules`
+              ],
+              sourceMap: settings.map,
+              outFile: settings.map ? writingPath : null
+            },
+            settings.vendor.sass
+          ),
+          async function (err, result) {
+            if (err) {
+              reject(err);
+              return;
+            }
+            // trigger(
+            //   'log',
+            //   `Compilation of the file <yellow>${smallPath}</yellow> finished with <green>success</green>...`
+            // );
+            const fileObj = {};
             trigger(
               'log',
-              `- Writing the sourcemap of the file <yellow>${smallPath}</yellow> to <green>${smallWritingPath.replace(
-                '.css',
-                '.css.map'
-              )}</green>...`
+              `Writing the file <yellow>${smallPath}</yellow> to <green>${smallWritingPath}</green>...`
             );
-            await __writeFile(writingMapPath, result.map.toString());
-            fileObj.map = writingMapPath;
-          }
-
-          if (settings.prod) {
-            //   console.log(
-            //     __parseHtml(
-            //       `Start building the production version that will be saved to: <yellow>${outputPath
-            //         .replace(__appPath.path, '<rootDir>')
-            //         .replace('.css', '.prod.css')}</yellow>`
-            //     )
-            //   );
-
-            const css = await __fs.readFile(writingPath);
-
-            trigger(
-              'log',
-              `- Minifying and optimizing the file <yellow>${smallPath}</yellow>...`
-            );
-
-            const postCssResult = await __postcss([
-              __precss,
-              __autoprefixer,
-              __postcssPresetEnv,
-              __cssnano
-            ]).process(css, {
-              from: writingPath,
-              to: writingPath.replace('.css', '.prod.css')
-            });
-
-            trigger(
-              'log',
-              `- Writing the minified/optimized file to <green>${smallWritingPath.replace(
-                '.css',
-                '.prod.css'
-              )}</green>...`
-            );
-            await __fs.writeFile(
-              writingPath.replace('.css', '.prod.css'),
-              postCssResult.css
-            );
-            fileObj.prodCss = writingPath.replace('.css', '.prod.css');
-
-            if (postCssResult.map) {
+            await __writeFile(writingPath, result.css.toString());
+            fileObj.css = writingPath;
+            if (result.map) {
               trigger(
                 'log',
-                `- Writing the sourcemap of the production file to <yellow>${smallWritingPath.replace(
+                `Writing the sourcemap of the file <yellow>${smallPath}</yellow> to <green>${smallWritingPath.replace(
+                  '.css',
+                  '.css.map'
+                )}</green>...`
+              );
+              await __writeFile(writingMapPath, result.map.toString());
+              fileObj.map = writingMapPath;
+            }
+            if (settings.prod) {
+              //   console.log(
+              //     __parseHtml(
+              //       `Start building the production version that will be saved to: <yellow>${outputPath
+              //         .replace(__appPath.path, '<rootDir>')
+              //         .replace('.css', '.prod.css')}</yellow>`
+              //     )
+              //   );
+              const css = await __fs.readFile(writingPath);
+              trigger(
+                'log',
+                `Minifying and optimizing the file <yellow>${smallPath}</yellow>...`
+              );
+              const postCssResult = await __postcss([
+                __precss,
+                __autoprefixer,
+                __postcssPresetEnv,
+                __cssnano
+              ]).process(css, {
+                from: writingPath,
+                to: writingPath.replace('.css', '.prod.css')
+              });
+              trigger(
+                'log',
+                `Writing the minified/optimized file to <green>${smallWritingPath.replace(
                   '.css',
                   '.prod.css'
-                )}</yellow> to <green>${smallWritingPath.replace(
-                  '.css',
-                  '.prod.css.map'
                 )}</green>...`
               );
               await __fs.writeFile(
-                writingPath.replace('.css', '.prod.css.map'),
-                result.map
+                writingPath.replace('.css', '.prod.css'),
+                postCssResult.css
               );
-              fileObj.prodMap = writingPath.replace('.css', '.prod.css.map');
+              fileObj.prodCss = writingPath.replace('.css', '.prod.css');
+              if (postCssResult.map) {
+                trigger(
+                  'log',
+                  `Writing the sourcemap of the production file to <yellow>${smallWritingPath.replace(
+                    '.css',
+                    '.prod.css'
+                  )}</yellow> to <green>${smallWritingPath.replace(
+                    '.css',
+                    '.prod.css.map'
+                  )}</green>...`
+                );
+                await __fs.writeFile(
+                  writingPath.replace('.css', '.prod.css.map'),
+                  result.map
+                );
+                fileObj.prodMap = writingPath.replace('.css', '.prod.css.map');
+              }
             }
+            // add the file to the "compiledFiles" stack
+            compiledFiles[path] = fileObj;
+            trigger(
+              'log',
+              `Compilation of the file <yellow>${smallPath}</yellow> finished <green>successfully</green>!`
+            );
+            // trigger a "file" stack action
+            trigger('file', fileObj);
+            renderResolve(fileObj);
           }
-
-          // remove the file from the files to compile
-          filesToCompile = filesToCompile.filter((p) => {
-            return p !== path;
-          });
-
-          // add the file to the "compiledFiles" stack
-          compiledFiles[path] = fileObj;
-
-          trigger(
-            'log',
-            `<green>✓</green> Compilation of the file <yellow>${smallPath}</yellow> finished <green>successfully</green>!`
-          );
-
-          // trigger a "compiled" stack action
-          trigger('compiled', fileObj);
-
-          if (!filesToCompile.length) {
-            trigger('then', compiledFiles);
-            compiledFiles = {};
-          }
-        }
-      );
+        );
+      });
     }
   }).start();
 };

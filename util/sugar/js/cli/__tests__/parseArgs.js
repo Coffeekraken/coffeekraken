@@ -10,6 +10,12 @@ module.exports = __parseArgs => {
           default: 'Hello World',
           required: true
         },
+        id: {
+          type: 'String',
+          alias: 'i',
+          regexp: /^#([\S]+)$/,
+          required: true
+        },
         hehe: {
           type: 'String',
           default: 'Nelson the cat',
@@ -32,19 +38,17 @@ module.exports = __parseArgs => {
             return Array.isArray(value);
           }
         },
-        id: {
-          type: 'String',
-          alias: 'i',
-          regexp: /^#([\S]+)$/,
-          required: true
-        },
         yop: {
-          type: 'Array',
+          type: 'String',
           alias: 'y'
         },
         help: {
           type: 'String',
           alias: 'h'
+        }
+      }, {
+        defaultObj: {
+          yop: 'Hello world'
         }
       });
 
@@ -56,8 +60,9 @@ module.exports = __parseArgs => {
         },
         help: 'coco yep',
         action: 'hello',
-        hehe: 'hello',
-        id: '#blop'
+        hehe: 'Nelson the cat',
+        id: '#blop',
+        yop: 'Hello world'
       });
       done();
     });

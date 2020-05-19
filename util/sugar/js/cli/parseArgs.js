@@ -66,10 +66,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function parseArgsString(string, argsDefinitions = {}, settings = {}) {
   settings = (0, _deepMerge.default)({
     treatDotsAsObject: true,
-    handleOrphanOptions: true
+    handleOrphanOptions: true,
+    defaultObj: null
   }, settings); // process the passed string
 
-  let stringArray = string.match(/(?:[^\s("|')]+|("|')[^("|')]*("|'))+/gm) || [];
+  let stringArray = string.match(/(?:[^\s("|'|`)]+|("|'|`)[^("|'|`)]*("|'|`))+/gm) || [];
   let currentArg = null;
   const argsObj = {};
   stringArray = stringArray.filter(part => {
@@ -136,39 +137,61 @@ function parseArgsString(string, argsDefinitions = {}, settings = {}) {
   });
 
   if (settings.handleOrphanOptions) {
-    // loop on these "unknown" values and try to get the argument that correspond to it
-    stringArray = stringArray.filter(value => {
-      let hasFoundAnArgument = false; // loop on the args without values
+    let settedValues = [];
+    argsWithoutValues.forEach(argName => {
+      const argObj = argsDefinitions[argName];
 
-      argsWithoutValues = argsWithoutValues.filter(argName => {
-        // check that the argument does not have any value
-        if (settings.treatDotsAsObject) {
-          if ((0, _get.default)(argsObj, argName)) return false;
-        } else {
-          if (argsObj[argName]) return false;
-        } // check if the value correspond to the argument
+      for (let i = 0; i < stringArray.length; i++) {
+        const value = stringArray[i];
+        if (settedValues.indexOf(value) !== -1) continue;
 
-
-        if (!hasFoundAnArgument && isValueCorrespondToArgDefinition(value, argsDefinitions[argName])) {
-          // set the value in the argsObj
-          if (settings.treatDotsAsObject) {
-            (0, _set.default)(argsObj, argName, value);
-          } else {
-            argsObj[argName] = value;
-          } // tell that this value has found an argument
-
-
-          hasFoundAnArgument = true; // tell that this argument is now fullfiled with a value
-
-          return false;
-        } // the argument does not have any value
-
-
-        return true;
-      }); // filter the stringArray
-
-      return !hasFoundAnArgument;
-    });
+        if (isValueCorrespondToArgDefinition(value, argObj)) {
+          argsObj[argName] = value;
+          settedValues.push(value);
+          break;
+        }
+      }
+    }); //   // loop on these "unknown" values and try to get the argument that correspond to it
+    //   let orphansValuesArray = [...stringArray];
+    //   stringArray = stringArray.filter((value) => {
+    //     // let hasFoundAnArgument = false;
+    //     // loop on the args without values
+    //     argsWithoutValues = argsWithoutValues.filter((argName) => {
+    //       if (orphansValuesArray.indexOf(value) === -1) return true;
+    //       // check that the argument does not have any value
+    //       if (settings.treatDotsAsObject) {
+    //         console.log('get', __get(argsObj, argName), argName);
+    //         if (__get(argsObj, argName)) return false;
+    //       } else {
+    //         console.log('get', argsObj[argName], argName);
+    //         if (argsObj[argName]) return false;
+    //       }
+    //       // check if the value correspond to the argument
+    //       if (
+    //         // !hasFoundAnArgument &&
+    //         isValueCorrespondToArgDefinition(value, argsDefinitions[argName])
+    //       ) {
+    //         console.log('ca', value, argName, orphansValuesArray);
+    //         // set the value in the argsObj
+    //         if (settings.treatDotsAsObject) {
+    //           console.log('set', argName, value);
+    //           __set(argsObj, argName, value);
+    //         } else {
+    //           console.log('set', argName, value);
+    //           argsObj[argName] = value;
+    //         }
+    //         orphansValuesArray.splice(orphansValuesArray.indexOf(value), 1);
+    //         // // tell that this value has found an argument
+    //         // hasFoundAnArgument = true;
+    //         // tell that this argument is now fullfiled with a value
+    //         return false;
+    //       }
+    //       // the argument does not have any value
+    //       return true;
+    //     });
+    //     // filter the stringArray
+    //     return !hasFoundAnArgument;
+    //   });
   } // init the error list
 
 
@@ -192,6 +215,16 @@ function parseArgsString(string, argsDefinitions = {}, settings = {}) {
       }
 
       value = argsDefinitions[argName].default;
+    } else if (value === undefined && settings.defaultObj) {
+      if ((0, _get.default)(settings.defaultObj, argName) !== undefined) {
+        if (settings.treatDotsAsObject) {
+          (0, _set.default)(argsObj, argName, (0, _get.default)(settings.defaultObj, argName));
+        } else {
+          argsObj[argName] = (0, _get.default)(settings.defaultObj, argName);
+        }
+
+        value = (0, _get.default)(settings.defaultObj, argName);
+      }
     } // check argument that does not have any value and that are required
 
 

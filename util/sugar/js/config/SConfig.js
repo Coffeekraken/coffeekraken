@@ -192,7 +192,7 @@ class SConfig {
       });
     }
 
-    this._adapters[adapter].config = (0, _resolveTokens.default)(JSON.parse(JSON.stringify(config)));
+    this._adapters[adapter].config = config;
     return config;
   }
   /**

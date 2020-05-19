@@ -287,7 +287,10 @@ module.exports = class SProcess {
         'ask',
         'answer',
         'data',
-        'kill'
+        'kill',
+        'watch.new',
+        'watch.update',
+        'watch.delete'
       ].forEach((name) => {
         command.on(name, (data) => {
           this.trigger(name, data);

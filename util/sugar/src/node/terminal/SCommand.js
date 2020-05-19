@@ -6,6 +6,8 @@ const __extension = require('../fs/extension');
 const __commandExists = require('command-exists');
 const __hotkey = require('../keyboard/hotkey');
 const __uniqid = require('../string/uniqid');
+const __argsToString = require('../cli/argsToString');
+const __watchCli = require('../../cli/fs/watch.cli');
 
 /**
  * @name            SCommand
@@ -101,13 +103,15 @@ module.exports = class SCommand extends __SPromise {
       __deepMerge(
         {
           color: 'white',
-          ask: null
+          ask: null,
+          watch: null
         },
         settings
       )
     ).start();
 
     setTimeout(() => {
+      if (this._settings.watch) this._watch();
       if (this._settings.run) this.run();
     });
   }
@@ -164,6 +168,69 @@ module.exports = class SCommand extends __SPromise {
   }
 
   /**
+   * @name                  _watch
+   * @type                  Function
+   *
+   * This method init the watch process passed in the settings.watch object
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _watch() {
+    const commandLine = __argsToString(
+      this._settings.watch,
+      __watchCli.definition
+    );
+    const childProcess = __childProcess.spawn(`sugar fs.watch ${commandLine}`, {
+      shell: true,
+      env: {
+        ...process.env,
+        IS_CHILD_PROCESS: true
+      }
+    });
+    let watchTimeout;
+    childProcess.stdout.on('data', (data) => {
+      // split the logged value
+      const action = data.toString().split(':')[0];
+      const path = data.toString().split(':')[1];
+      const _this = this;
+
+      if (action === 'new') {
+        this.trigger('watch.new', {
+          get commandObj() {
+            return _this;
+          },
+          path,
+          ...this._runningProcess
+        });
+      } else if (action === 'update') {
+        this.trigger('watch.update', {
+          get commandObj() {
+            return _this;
+          },
+          path,
+          ...this._runningProcess
+        });
+      } else if (action === 'delete') {
+        this.trigger('watch.delete', {
+          get commandObj() {
+            return _this;
+          },
+          path,
+          ...this._runningProcess
+        });
+      }
+      if (!this.isRunning()) {
+        // check if is already running
+        clearTimeout(watchTimeout);
+        watchTimeout = setTimeout(() => {
+          // run the command
+          this.run();
+        }, 200);
+      }
+    });
+  }
+
+  /**
    * @name                  kill
    * @type                  Function
    *
@@ -188,8 +255,6 @@ module.exports = class SCommand extends __SPromise {
    * @return        {SPromise}                          An SPromise instance on which you can subscribe for some events listed bellow and that will be resolved once the command is successfully finished
    * - data: Triggered when some data are logged in the child process
    * - error: Triggered when something goes wrong in the child process
-   * - exit: Triggered when the child process has been exited
-   * - close: Triggered when the child process has been closed
    * - success: Triggered when the child process has finished with success
    * - kill: Triggered when the child process has been killed
    *

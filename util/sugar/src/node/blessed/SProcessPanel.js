@@ -61,6 +61,8 @@ module.exports = class SProcessPanel extends __SComponent {
    */
   _keysBox = null;
 
+  _runningCommands = {};
+
   /**
    * @name          constructor
    * @type          Function
@@ -170,6 +172,9 @@ module.exports = class SProcessPanel extends __SComponent {
         //   this._settings.logBox.deleteBottom();
         // }
       })
+      .on('start', (data) => {
+        console.log('start', data);
+      })
       // subscribe to warnings
       .on('warning', (data) => {
         this._logBox.log(`<yellow>${data.warning}</yellow>`, {
@@ -195,6 +200,30 @@ module.exports = class SProcessPanel extends __SComponent {
           }
         );
         this._updateKeysBox();
+      })
+      .on('watch.new', (data) => {
+        this._logBox.log(
+          `A new file has been detected at <yellow>${data.path}</yellow>`,
+          {
+            beforeLog: this._getBeforeLog(data.commandObj)
+          }
+        );
+      })
+      .on('watch.update', (data) => {
+        this._logBox.log(
+          `A file has been updated at <yellow>${data.path}</yellow>`,
+          {
+            beforeLog: this._getBeforeLog(data.commandObj)
+          }
+        );
+      })
+      .on('watch.delete', (data) => {
+        this._logBox.log(
+          `A file has been deleted at <yellow>${data.path}</yellow>`,
+          {
+            beforeLog: this._getBeforeLog(data.commandObj)
+          }
+        );
       })
       .on('key.toggle', () => {
         this._updateKeysBox();

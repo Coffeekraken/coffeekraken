@@ -1,5 +1,5 @@
 /**
  * @namespace       sugar.node.log.htmlPresets
- * @src               ../../../js/log/htmlPresets/files.js
+ * @src               ../../../../js/log/htmlPresets/files.js
  */
-module.exports = require('../../../js/log/htmlPresets/files');
+module.exports = require('../../../../js/log/htmlPresets/files');

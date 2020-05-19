@@ -19,10 +19,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * @name                    SLog
  * @namespace               sugar.js.log
  * @type                    Class
- * 
+ *
  * This class allows you to log your messages, errors, etc... easily through some adapters that cover some targets like "console" of course,
  * "mail", "slack", etc...
- * 
+ *
  * @example               js
  * import SLog from '@coffeekraken/sugar/js/log/SLog';
  * import SLogConsoleAdapter from '@coffeekraken/sugar/js/log/adapters/SLogConsoleAdapter';
@@ -32,7 +32,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  *    }
  * });
  * logger.log('Something cool happend...');
- * 
+ *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 class SLog {
@@ -40,24 +40,24 @@ class SLog {
    * @name          _settings
    * @type          Object
    * @private
-   * 
+   *
    * Store this instance settings
-   * 
+   *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
   /**
    * @name          constructor
    * @type          Function
-   * 
+   *
    * Constructor
-   * 
+   *
    * @param         {Object}        [settings={}]           The settings object to configure your SLog instance. Here's the settings available:
    * - adapters ({}) {Object}: An object of adapters that you want to use in this SLog instance. The format is { adapterName: adapterInstance, etc... }
    * - overrideNativeConsole (false) {Boolean}: This will override the console.log, warn, etc... methods
    * - adaptersByLevel ({}) (Object): Specify which adapter you want to use by level. Can be an Array like ['console','mail'] or a comma separated string like "console,mail". The object format is { adapterName: adaptersList }
    * - adaptersByEnvironment ({}) {Object}: Same as the "adaptersByLevel" but for the environments like "test", "development" or "production". The environment value is taken using the "sugar.js.core.env" function using the key "ENV" or "NODE_ENV"
-   * 
+   *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(settings = {}) {
@@ -95,10 +95,10 @@ class SLog {
    * @name            _overrideNativeConsole
    * @type            Function
    * @private
-   * 
+   *
    * Override the native console object to call the SLog methods instead of the normal once.
    * Store the native console inside the global/window variable called "nativeConsole"
-   * 
+   *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
@@ -124,8 +124,7 @@ class SLog {
         },
         error: function (message, adapters) {
           _this.error(message, adapters);
-        },
-        coco: 'please'
+        }
       };
     }((global || window).console);
 
@@ -135,14 +134,14 @@ class SLog {
    * @name            _log
    * @type            Function
    * @private
-   * 
+   *
    * Internal log method that make the actual call to all the adapters, etc...
-   * 
+   *
    * @param         {Mixed}         message         The actual message to log
    * @param         {String|Array}    [adapters=null]       The list of adapters to use
    * @param         {String}          [level='log']         The log level. Can be "log", "info", "error", "debug" or "warn"
    * @return        {Promise}                             A promise that will be resolved once all the adapters have correctly log the message
-   * 
+   *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
@@ -181,16 +180,16 @@ class SLog {
    * @name            log
    * @type            Function
    * @async
-   * 
+   *
    * The main log method that log a normal message
-   * 
+   *
    * @param           {Mixed}           message             The message to log
    * @param           {String|Array}    [adapters=null]     The list of adapters you want to use for this message. Can be an Array like ['console','mail'], or a comma separated String like "console,mail"
    * @return          {Promise}                             A promise that will be resolved once the message has been correctly logged through all adapters
-   * 
+   *
    * @example         js
    * await logger.log('Something cool');
-   * 
+   *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
@@ -203,16 +202,16 @@ class SLog {
    * @name            info
    * @type            Function
    * @async
-   * 
+   *
    * The info method that log a message with the "info" level
-   * 
+   *
    * @param           {Mixed}           message             The message to log
    * @param           {String|Array}    [adapters=null]     The list of adapters you want to use for this message. Can be an Array like ['console','mail'], or a comma separated String like "console,mail"
    * @return          {Promise}                             A promise that will be resolved once the message has been correctly logged through all adapters
-   * 
+   *
    * @example         js
    * await logger.info('Something cool');
-   * 
+   *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
@@ -225,16 +224,16 @@ class SLog {
    * @name            warn
    * @type            Function
    * @async
-   * 
+   *
    * The warn method that log a message with the "warn" level
-   * 
+   *
    * @param           {Mixed}           message             The message to log
    * @param           {String|Array}    [adapters=null]     The list of adapters you want to use for this message. Can be an Array like ['console','mail'], or a comma separated String like "console,mail"
    * @return          {Promise}                             A promise that will be resolved once the message has been correctly logged through all adapters
-   * 
+   *
    * @example         js
    * await logger.warn('Something cool');
-   * 
+   *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
@@ -247,16 +246,16 @@ class SLog {
    * @name            debug
    * @type            Function
    * @async
-   * 
+   *
    * The debug method that log a message with the "debug" level
-   * 
+   *
    * @param           {Mixed}           message             The message to log
    * @param           {String|Array}    [adapters=null]     The list of adapters you want to use for this message. Can be an Array like ['console','mail'], or a comma separated String like "console,mail"
    * @return          {Promise}                             A promise that will be resolved once the message has been correctly logged through all adapters
-   * 
+   *
    * @example         js
    * await logger.debug('Something cool');
-   * 
+   *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
@@ -269,16 +268,16 @@ class SLog {
    * @name            error
    * @type            Function
    * @async
-   * 
+   *
    * The error method that log a message with the "error" level
-   * 
+   *
    * @param           {Mixed}           message             The message to log
    * @param           {String|Array}    [adapters=null]     The list of adapters you want to use for this message. Can be an Array like ['console','mail'], or a comma separated String like "console,mail"
    * @return          {Promise}                             A promise that will be resolved once the message has been correctly logged through all adapters
-   * 
+   *
    * @example         js
    * await logger.error('Something cool');
-   * 
+   *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 

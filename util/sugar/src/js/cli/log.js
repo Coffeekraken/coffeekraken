@@ -1,3 +1,5 @@
+import __toString from '../string/toString';
+
 /**
  * @name                    log
  * @namespace               sugar.js.cli
@@ -9,6 +11,7 @@
  *
  * @param         {Mixed}         value           The value to log
  * @param         {String}        [type="log"]    The type of log you want to make. Can be anothing but has to stay a single word
+ * @return        {String}                        The logged message
  *
  * @example       js
  * import log from '@coffeekraken/sugar/js/cli/log';
@@ -16,11 +19,15 @@
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function log(value, type = 'log') {}
-log.start = (value) => log(value, 'start');
-log.success = (value) => log(value, 'success');
+function log(value, type = 'log', logger = console) {
+  const formated = `${type}: ${__toString(value)}`;
+  logger.log(formated);
+  return formated;
+}
+log.info = (value) => log(value, 'info');
+log.warn = (value) => log(value, 'warn');
+log.debug = (value) => log(value, 'debug');
 log.error = (value) => log(value, 'error');
-log.warning = (value) => log(value, 'warning');
 log.end = (value) => log(value, 'end');
 log.complete = (value) => log(value, 'complete');
 module.exports = log;

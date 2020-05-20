@@ -8,6 +8,8 @@ const __ScssBuildSProcess = require('../../node/build/process/ScssBuildSProcess'
 const __sugarConfig = require('../../node/config/sugar');
 const __initSugar = require('../../node/index');
 
+const __parseLog = require('../../../js/cli/parseLog');
+
 const definition = {
   input: {
     type: 'String',
@@ -50,23 +52,16 @@ const definition = {
 };
 
 module.exports = (stringArgs = '') => {
-  console.log('COCO');
-  console.warn('COCO');
-  console.error('COCO');
-  console.debug({ hello: 'world' });
-
-  // const args = __parseArgs(stringArgs, definition);
-
-  // if (__isChildProcess()) {
-  //   const build = __buildScss(args);
-  //   build.on('log', (message) => {
-  //     console.log(message);
-  //   });
-  //   return;
-  // }
-
-  // const scssBuildProcess = new __ScssBuildSProcess();
-  // const panel = new __SProcessPanel(scssBuildProcess, {});
-  // global.screen.append(panel);
+  const args = __parseArgs(stringArgs, definition);
+  if (__isChildProcess()) {
+    const build = __buildScss(args);
+    build.on('log', (message) => {
+      console.log(message);
+    });
+    return;
+  }
+  const scssBuildProcess = new __ScssBuildSProcess();
+  const panel = new __SProcessPanel(scssBuildProcess, {});
+  global.screen.append(panel);
 };
 module.exports.definition = definition;

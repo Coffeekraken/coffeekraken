@@ -7,6 +7,8 @@ const __SComponent = require('./SComponent');
 const __SCenteredPopup = require('./SCenteredPopup');
 const __SSummaryList = require('./SSummaryList');
 const __summaryListPopup = require('./summaryListPopup');
+const __ora = require('ora');
+const __parseHtml = require('../terminal/parseHtml');
 
 /**
  * @name                  SProcessPanel
@@ -61,7 +63,16 @@ module.exports = class SProcessPanel extends __SComponent {
    */
   _keysBox = null;
 
-  _runningCommands = {};
+  /**
+   * @name            _processes
+   * @type            Object
+   * @private
+   *
+   * Store all the running commands
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _processes = {};
 
   /**
    * @name          constructor
@@ -116,28 +127,34 @@ module.exports = class SProcessPanel extends __SComponent {
   _subscribeToProcess() {
     // subscribe to data
     this._process
-      .on('data', (data) => {
-        this._logBox.log(data.data, {
-          beforeLog: this._getBeforeLog(data.commandObj)
-        });
+      .on('start', (data) => {
+        this._processes[data.id] = data;
+        this.update();
       })
-      .on('exit', (data) => {
-        this._logBox.log(
-          `<cyan>The command "${data.commandObj.name}" has been terminated</cyan>`,
-          {
-            beforeLog: this._getBeforeLog(data.commandObj)
-          }
-        );
+      .on('close', (data) => {
+        this._processes[data.id] = {
+          ...this._processes[data.id],
+          ...data
+        };
+        this._removeProcessBox(this._processes[data.id]);
+        this.update();
+      })
+      .on('stdout.data', (data) => {
+        this._processes[data.id] = {
+          ...this._processes[data.id],
+          ...data
+        };
+        this.update();
+      })
+      .on('stderr.data', (data) => {
+        this._processes[data.id] = {
+          ...this._processes[data.id],
+          ...data
+        };
+        this.update();
       })
       // subscribe to errors
-      .on('error', (data) => {
-        this._logBox.log(
-          `<error>Something went wrong:</error>\n${data.error}`,
-          {
-            beforeLog: this._getBeforeLog(data.commandObj)
-          }
-        );
-      })
+      .on('error', (data) => {})
       // subscribe to ask
       .on('ask', async (question) => {
         // this._logBox.log(' ');
@@ -172,91 +189,94 @@ module.exports = class SProcessPanel extends __SComponent {
         //   this._settings.logBox.deleteBottom();
         // }
       })
-      .on('start', (data) => {
-        console.log('start', data);
-      })
-      // subscribe to warnings
-      .on('warning', (data) => {
-        this._logBox.log(`<yellow>${data.warning}</yellow>`, {
-          beforeLog: this._getBeforeLog(data.commandObj)
-        });
-      })
-      // subscribe to "run", meaning that a new command has just been launched in the process
-      .on('run', (data) => {
-        this._logBox.log(
-          `<yellow>Starting the "${data.commandObj.name}" command:</yellow>\n<blue>${data.command}</blue>`,
-          {
-            beforeLog: this._getBeforeLog(data.commandObj)
-          }
-        );
-        this._updateKeysBox();
-      })
-      // subscribe to "kill", meaning that a command has just been killed
-      .on('kill', (data) => {
-        this._logBox.log(
-          `<magenta>The command "${data.commandObj.name}" has just been killed</magenta>`,
-          {
-            beforeLog: this._getBeforeLog(data.commandObj)
-          }
-        );
-        this._updateKeysBox();
-      })
-      .on('watch.new', (data) => {
-        this._logBox.log(
-          `A new file has been detected at <yellow>${data.path}</yellow>`,
-          {
-            beforeLog: this._getBeforeLog(data.commandObj)
-          }
-        );
-      })
-      .on('watch.update', (data) => {
-        this._logBox.log(
-          `A file has been updated at <yellow>${data.path}</yellow>`,
-          {
-            beforeLog: this._getBeforeLog(data.commandObj)
-          }
-        );
-      })
-      .on('watch.delete', (data) => {
-        this._logBox.log(
-          `A file has been deleted at <yellow>${data.path}</yellow>`,
-          {
-            beforeLog: this._getBeforeLog(data.commandObj)
-          }
-        );
-      })
-      .on('key.toggle', () => {
-        this._updateKeysBox();
-      })
-      .on('key.action', (keyObj) => {
-        switch (keyObj.action) {
-          case 'clear':
-            this._logBox.setContent('');
-            this.update();
-            break;
-        }
-      })
-      // subscribe to "success", meaning that a command is just finished
-      .on('success', (data) => {
-        this._logBox.log(
-          `<green>The "${
-            data.commandObj.name
-          }" command has finished successfuly in <yellow>${__convert(
-            data.duration,
-            's'
-          )}s</yellow></green>`,
-          {
-            beforeLog: this._getBeforeLog(data.commandObj)
-          }
-        );
-        this._updateKeysBox();
-      })
+      // // subscribe to "kill", meaning that a command has just been killed
+      // .on('kill', (data) => {
+      //   this._logBox.log(
+      //     `<magenta>The command "${data.commandObj.name}" has just been killed</magenta>`,
+      //     {
+      //       beforeLog: this._getBeforeLog(data.commandObj)
+      //     }
+      //   );
+      //   this._updateKeysBox();
+      // })
+      // .on('watch.new', (data) => {
+      //   this._logBox.log(
+      //     `A new file has been detected at <yellow>${data.path}</yellow>`,
+      //     {
+      //       beforeLog: this._getBeforeLog(data.commandObj)
+      //     }
+      //   );
+      // })
+      // .on('watch.update', (data) => {
+      //   this._logBox.log(
+      //     `A file has been updated at <yellow>${data.path}</yellow>`,
+      //     {
+      //       beforeLog: this._getBeforeLog(data.commandObj)
+      //     }
+      //   );
+      // })
+      // .on('watch.delete', (data) => {
+      //   this._logBox.log(
+      //     `A file has been deleted at <yellow>${data.path}</yellow>`,
+      //     {
+      //       beforeLog: this._getBeforeLog(data.commandObj)
+      //     }
+      //   );
+      // })
+      // .on('key.toggle', () => {
+      //   this._updateKeysBox();
+      // })
+      // .on('key.action', (keyObj) => {
+      //   switch (keyObj.action) {
+      //     case 'clear':
+      //       this._logBox.setContent('');
+      //       this.update();
+      //       break;
+      //   }
+      // })
+      // // subscribe to "success", meaning that a command is just finished
+      // .on('success', (data) => {
+      //   this._logBox.log(
+      //     `<green>The "${
+      //       data.commandObj.name
+      //     }" command has finished successfuly in <yellow>${__convert(
+      //       data.duration,
+      //       's'
+      //     )}s</yellow></green>`,
+      //     {
+      //       beforeLog: this._getBeforeLog(data.commandObj)
+      //     }
+      //   );
+      //   this._updateKeysBox();
+      // })
       .on('close', (data) => {
         this._updateKeysBox();
       })
       .catch((e) => {
         this._logBox.log(' ');
       });
+  }
+
+  /**
+   * @name          _removeProcessBox
+   * @type          Function
+   * @private
+   *
+   * This method take care of removing properly the box of the passed process object
+   *
+   * @param       {Object}      processObj        The process object to remove the box from
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _removeProcessBox(processObj) {
+    if (!processObj.error) {
+      setTimeout(() => {
+        // processObj.processBox.detach();
+        clearInterval(processObj.spinner.interval);
+        // delete this._processes[processObj.id];
+        this.update();
+      }, 4000);
+    }
   }
 
   /**
@@ -319,8 +339,10 @@ module.exports = class SProcessPanel extends __SComponent {
             settings.style = {
               bg: keyObj._isRunning
                 ? __color('terminal.green').toString()
-                : __color('terminal.yellow').toString(),
-              fg: __color('terminal.black').toString()
+                : __color('terminal.black').toString(),
+              fg: keyObj._isRunning
+                ? __color('terminal.black').toString()
+                : __color('terminal.white').toString()
             };
             break;
           case 'action':
@@ -345,8 +367,6 @@ module.exports = class SProcessPanel extends __SComponent {
       items.forEach((item) => {
         this._keysBox.append(item);
       });
-
-      this.update();
     });
   }
 
@@ -360,11 +380,37 @@ module.exports = class SProcessPanel extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _generateUI() {
-    this._logBox = new __SLogPanel({
-      beforeLog: ' '.repeat(this._process._biggestCommandName.length),
-      beforeEachLine: ' <white>│</white> '
+    // this._logBox = new __SLogPanel({
+    //   beforeLog: ' '.repeat(this._process._biggestCommandName.length),
+    //   beforeEachLine: ' <white>│</white> '
+    // });
+    this._logBox = __blessed.box({
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 2,
+      // style: {
+      //   fg: 'white'
+      // },
+      mouse: true,
+      keys: true,
+      scrollable: true,
+      scrollbar: {
+        ch: '#',
+        inverse: true
+      },
+      style: {
+        scrollbar: {
+          bg: __color('terminal.primary').toString()
+        }
+      },
+      padding: {
+        top: 1,
+        left: 2,
+        right: 2,
+        bottom: 1
+      }
     });
-    this._logBox.bottom = 2;
 
     // init the blessed box that will display the keys
     this._keysBox = __blessed.box({
@@ -385,5 +431,180 @@ module.exports = class SProcessPanel extends __SComponent {
 
     // update the keysBox
     this._updateKeysBox();
+  }
+
+  update() {
+    // loop one each of the processed
+    let currentTop = 0;
+    Object.keys(this._processes).forEach((processId) => {
+      const processObj = this._processes[processId];
+      // console.log(processObj);
+      // check if we have already a processBox for this process
+      if (!processObj.processBox) {
+        processObj.processBox = __blessed.box({
+          height: 3,
+          style: {
+            bg: __color('terminal.primary').toString(),
+            fg: __color('terminal.black').toString()
+          },
+          padding: {
+            top: 1,
+            left: 2,
+            right: 2,
+            bottom: 1
+          },
+          mouse: true,
+          keys: true,
+          top: currentTop,
+          left: 0,
+          right: 0,
+          clickable: true
+        });
+        processObj.logBox = __blessed.box({
+          // width: '100%-4',
+          height: 0,
+          top: 2,
+          left: 0,
+          right: 0,
+          style: {
+            fg: 'white'
+          },
+          // mouse: true,
+          // keys: true,
+          scrollable: true,
+          // scrollbar: {
+          //   ch: ' ',
+          //   inverse: true
+          // },
+          style: {
+            // scrollbar: {
+            //   bg: __color('terminal.primary').toString()
+            // }
+          },
+          padding: {
+            top: 1,
+            left: 2,
+            right: 2,
+            bottom: 1
+          }
+        });
+
+        processObj.opened = null;
+        processObj.processBox.on('click', () => {
+          if (this._processes[processId].opened === null) {
+            this._processes[processId].opened = true;
+          } else {
+            this._processes[processId].opened = !this._processes[processId]
+              .opened;
+          }
+          this.update();
+        });
+
+        processObj.processBox.append(processObj.logBox);
+
+        setTimeout(() => {
+          processObj.logBox.pushLine('Process starting up...');
+        });
+
+        // append it in the logBox
+        this._logBox.append(processObj.processBox);
+      }
+
+      let boxTitle = `<bold>${
+        processObj.commandObj.title || processObj.commandObj.name
+      }</bold>`;
+      if (processObj.duration) {
+        boxTitle += ` <italic>${processObj.duration / 1000}s</italic>`;
+      }
+
+      if (processObj.error) {
+        processObj.processBox.style.bg = __color('terminal.red').toString();
+        clearInterval(processObj.spinner.interval);
+        processObj.processBox.setContent(__parseHtml(`<iCross/>  ${boxTitle}`));
+        processObj.processBox.screen.render();
+      } else if (processObj.end) {
+        processObj.processBox.style.bg = __color('terminal.green').toString();
+        clearInterval(processObj.spinner.interval);
+        processObj.processBox.setContent(__parseHtml(`<iCheck/>  ${boxTitle}`));
+        processObj.processBox.screen.render();
+      } else {
+        if (!processObj.spinner) {
+          processObj.spinner = {
+            ora: __ora({
+              text: __parseHtml(boxTitle),
+              color: 'black'
+            })
+          };
+        }
+        clearInterval(processObj.spinner.interval);
+        processObj.spinner.interval = setInterval(() => {
+          processObj.processBox.setContent(processObj.spinner.ora.frame());
+          processObj.processBox.screen.render();
+        }, 50);
+      }
+
+      processObj.processBox.height =
+        processObj.processBox.padding.top +
+        processObj.processBox.padding.bottom +
+        1 +
+        processObj.logBox.height;
+
+      // take care of the content of the processBox
+      processObj.logBox.setContent('');
+      if (processObj.stderr.length) {
+        processObj.stderr.forEach((logItem) => {
+          processObj.logBox.pushLine(logItem.value || logItem);
+        });
+      } else {
+        processObj.stdout.forEach((logItem) => {
+          processObj.logBox.pushLine(logItem.value || logItem);
+        });
+      }
+
+      let logHeight = 3;
+      let processHeight = 3;
+      if (processObj.opened === null) {
+        // log box height
+        // if (!processObj.stdout.length) logHeight = 0;
+        if (processObj.end && !processObj.error) logHeight = 0;
+        // if (processObj.error) logHeight = processObj.stderr.length;
+        // process box height
+        if (logHeight === 0) processHeight = 3;
+        else processHeight = logHeight + 4;
+
+        // if (
+        //   !processObj.stdout.length ||
+        //   (processObj.end && !processObj.error)
+        // ) {
+        //   processHeight = 3;
+        // } else {
+        //   processHeight = processObj.logBox.height + 5;
+        // }
+      } else if (processObj.opened) {
+        logHeight = processObj.logBox.getContent().split('\n').length;
+        processHeight = logHeight + 4;
+      } else if (!processObj.opened) {
+        logHeight = 0;
+        processHeight = 3;
+      }
+
+      processObj.processBox.height = processHeight;
+      processObj.logBox.height = logHeight;
+      processObj.logBox.setScrollPerc(100);
+
+      processObj.processBox.top = currentTop;
+
+      currentTop += processObj.processBox.height + 1;
+    });
+
+    // this._logBox.setContent('');
+    // for (let i = 0; i < currentTop; i++) {
+    //   this._logBox.pushLine(' ');
+    // }
+    this._logBox.setScrollPerc(100);
+
+    this._updateKeysBox();
+
+    super.update();
   }
 };

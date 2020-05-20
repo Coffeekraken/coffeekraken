@@ -141,6 +141,40 @@ export default class SPromise extends Promise {
   };
 
   /**
+   * @name                  pipe
+   * @type                  Function
+   * @static
+   *
+   * This static function allows you to redirect some SPromise "events" to another SPromise instance
+   * with the ability to process the linked value before triggering it on the destination SPromise.
+   *
+   * @param         {SPromise}      sourceSPromise        The source SPromise instance on which to listen for "events"
+   * @param         {SPromise}      destSPromise          The destination SPromise instance on which to trigger the listened "events"
+   * @param         {Object}        [settings={}]         An object of settings to configure your pipe process
+   * - stacks (*) {String}: Specify which stacks you want to pipe. By default it's all using the "*" character
+   * - processor (null) {Function}: Specify a function to apply on the triggered value before triggering it on the dest SPromise. Take as arguments the value itself and the stack name. Need to return a new value
+   *
+   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   */
+  static pipe(sourceSPromise, destSPromise, settings = {}) {
+    // settings
+    settings = __deepMerge(
+      {
+        stacks: '*',
+        processor: null
+      },
+      settings
+    );
+    // listen for all on the source promise
+    sourceSPromise.on(settings.stacks, (value, stack) => {
+      // check if need to process the value
+      if (settings.processor) value = settings.processor(value, stack);
+      // trigger on the destination promise
+      destSPromise.trigger(stack, value);
+    });
+  }
+
+  /**
    * @name                  constructor
    * @type                  Function
    *
@@ -167,14 +201,15 @@ export default class SPromise extends Promise {
     super((resolve, reject) => {
       _resolve = resolve;
       _reject = reject;
-    }).catch((e) => {
-      // check if we have some catch callbacks or not...
-      if (!this._stacks || this._stacks.catch.length === 0) {
-        let error = e.stack || typeof e === 'object' ? JSON.stringify(e) : e;
-        const pe = new __prettyError();
-        console.log(pe.render(new Error(error)));
-      }
     });
+    // .catch((e) => {
+    // check if we have some catch callbacks or not...
+    // if (!this._stacks || this._stacks.catch.length === 0) {
+    //   let error = e.stack || typeof e === 'object' ? JSON.stringify(e) : e;
+    //   const pe = new __prettyError();
+    //   console.log(pe.render(new Error(error)));
+    // }
+    // });
 
     this._masterPromiseResolveFn = _resolve;
     this._masterPromiseRejectFn = _reject;
@@ -271,6 +306,7 @@ export default class SPromise extends Promise {
    */
   async _resolve(arg, stacksOrder = 'then,resolve,finally') {
     if (this._isDestroyed) return;
+
     // exec the wanted stacks
     const stacksResult = await this._triggerStacks(stacksOrder, arg);
     // resolve the master promise
@@ -466,12 +502,14 @@ export default class SPromise extends Promise {
    *
    * @param         {Array|String}             stack             The stack to execute. Can be the stack array directly, or just the stack name like "then", "catch", etc.stack.stack.
    * @param         {Mixed}             initialValue      The initial value to pass to the first stack callback
+   * @param         {String}            [as=null]         This parameter is useful when you want to trigger a stack as another one like when you trigger the stack "*"
    * @return        {Promise}                             A promise resolved with the stack result
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  async _triggerStack(stack, initialValue) {
+  async _triggerStack(stack, initialValue, asName = null) {
     let currentCallbackReturnedValue = initialValue;
+    const stackName = asName || stack;
 
     if (!this._stacks || Object.keys(this._stacks).length === 0)
       return currentCallbackReturnedValue;
@@ -498,10 +536,10 @@ export default class SPromise extends Promise {
       // make sure the stack exist
       if (!item.callback) return currentCallbackReturnedValue;
       // call the callback function
-      let callbackResult = item.callback.apply(this, [
+      let callbackResult = item.callback(
         currentCallbackReturnedValue,
-        this
-      ]);
+        stackName
+      );
       // check if the callback result is a promise
       if (Promise.resolve(callbackResult) === callbackResult) {
         callbackResult = await callbackResult;
@@ -532,9 +570,11 @@ export default class SPromise extends Promise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   async _triggerStacks(stacks, initialValue) {
-    // split the stacks order
+    // check if the stacks is "*"
     if (typeof stacks === 'string')
       stacks = stacks.split(',').map((s) => s.trim());
+
+    // stacks.push('*');
 
     let currentStackResult = initialValue;
     for (let i = 0; i < stacks.length; i++) {
@@ -545,6 +585,8 @@ export default class SPromise extends Promise {
       if (stackResult !== undefined) {
         currentStackResult = stackResult;
       }
+      await this._triggerStack('*', currentStackResult, stacks[i]);
+      // this._triggerAllStack(stacks[i], currentStackResult);
     }
 
     return currentStackResult;
@@ -581,6 +623,7 @@ export default class SPromise extends Promise {
         `Sorry but you can't call the "on" method on this SPromise cause it has been destroyed...`
       );
     }
+
     if (typeof stacks === 'string')
       stacks = stacks.split(',').map((s) => s.trim());
 

@@ -8,6 +8,7 @@ const __hotkey = require('../keyboard/hotkey');
 const __uniqid = require('../string/uniqid');
 const __argsToString = require('../cli/argsToString');
 const __watchCli = require('../../cli/fs/watch.cli');
+const __spawn = require('../childProcess/spawn');
 
 /**
  * @name            SCommand
@@ -102,8 +103,10 @@ module.exports = class SCommand extends __SPromise {
       },
       __deepMerge(
         {
+          concurrent: false,
           color: 'white',
           ask: null,
+          title: null,
           watch: null
         },
         settings
@@ -130,6 +133,19 @@ module.exports = class SCommand extends __SPromise {
   }
 
   /**
+   * @name                   title
+   * @type                    String
+   * @get
+   *
+   * Get the command title if specified in the settings
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get title() {
+    return this._settings.title;
+  }
+
+  /**
    * @name                   color
    * @type                    String
    * @get
@@ -152,6 +168,19 @@ module.exports = class SCommand extends __SPromise {
    */
   isRunning() {
     return this._runningProcess !== null;
+  }
+
+  /**
+   * @name                    concurrent
+   * @type                    Function
+   * @get
+   *
+   * This method return true if the command can be concurrent, false if not
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get concurrent() {
+    return this._settings.concurrent;
   }
 
   /**
@@ -240,8 +269,8 @@ module.exports = class SCommand extends __SPromise {
    */
   kill() {
     if (!this.isRunning()) return;
-    if (!this._runningProcess.promise) return;
-    this._runningProcess.promise.cancel();
+    if (!this._runningProcess.childProcessPromise) return;
+    this._runningProcess.childProcessPromise.cancel();
     this._runningProcess = null;
   }
 
@@ -261,11 +290,13 @@ module.exports = class SCommand extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run() {
-    if (this.isRunning()) {
+    if (this.isRunning() && !this.concurrent) {
+      console.log('IJFOJEFIOWJFOWJEF');
       throw new Error(
         `Sorry but the command named "${this.name}" is already running...`
       );
     }
+    const _this = this;
 
     this._runningProcess = {
       id: __uniqid(),
@@ -274,12 +305,10 @@ module.exports = class SCommand extends __SPromise {
       duration: null,
       stdout: [],
       stderr: [],
-      promise: null,
-      command: this._command
+      command: this._command,
+      childProcessPromise: null
     };
-    const _this = this;
 
-    let childProcess;
     const promise = new __SPromise(async (resolve, reject, trigger, cancel) => {
       // check if we need to ask some questions before running the command
       if (this._settings.ask) {
@@ -324,22 +353,21 @@ module.exports = class SCommand extends __SPromise {
       }
 
       try {
-        // emit a run stack event
-        this.trigger('run', {
-          get commandObj() {
-            return _this;
-          },
-          ...this._runningProcess
-        });
-
         // init the child process
-        childProcess = __childProcess.spawn(this._runningProcess.command, {
-          shell: true,
-          env: {
-            ...process.env,
-            IS_CHILD_PROCESS: true
+        this._runningProcess.childProcessPromise = __spawn(
+          this._runningProcess.command
+        );
+
+        __SPromise.pipe(this._runningProcess.childProcessPromise, this, {
+          processor: (value, stack) => {
+            if (typeof value === 'object') {
+              value = {
+                ...value,
+                commandObj: this
+              };
+            }
+            return value;
           }
-          // detached: true
         });
 
         // listen for the killing of the process
@@ -348,110 +376,15 @@ module.exports = class SCommand extends __SPromise {
         }).on('key', (e) => {
           cancel();
         });
-
-        childProcess.on('close', (code, signal) => {
-          if (!code && signal) {
-            trigger('kill', {
-              get commandObj() {
-                return _this;
-              },
-              ...this._runningProcess
-            });
-            this.trigger('kill', {
-              get commandObj() {
-                return _this;
-              },
-              ...this._runningProcess
-            });
-          } else if (code === 0 && !signal) {
-            resolve({
-              get commandObj() {
-                return _this;
-              },
-              ...this._runningProcess,
-              code,
-              signal
-            });
-            this.trigger('success', {
-              get commandObj() {
-                return _this;
-              },
-              ...this._runningProcess,
-              code,
-              signal
-            });
-          }
-          this._lastRunnedProcess = Object.assign({}, this._runningProcess);
-          this._runningProcess = null;
-        });
-
-        childProcess.on('error', (error) => {
-          this._runningProcess.end = Date.now();
-          this._runningProcess.duration =
-            this._runningProcess.end - this._runningProcess.start;
-          reject({
-            get commandObj() {
-              return _this;
-            },
-            ...this._runningProcess,
-            error
-          });
-          this.trigger('error', {
-            get commandObj() {
-              return _this;
-            },
-            ...this._runningProcess,
-            error
-          });
-        });
-        childProcess.stdout.on('data', (value) => {
-          if (!this._runningProcess) return;
-          this._runningProcess.stdout.push(value.toString());
-          trigger('data', {
-            get commandObj() {
-              return _this;
-            },
-            ...this._runningProcess,
-            data: value.toString()
-          });
-          this.trigger('data', {
-            get commandObj() {
-              return _this;
-            },
-            ...this._runningProcess,
-            data: value.toString()
-          });
-        });
-        childProcess.stderr.on('data', (error) => {
-          if (!this._runningProcess) return;
-          this._runningProcess.stdout.push(error.toString());
-          trigger('error', {
-            get commandObj() {
-              return _this;
-            },
-            ...this._runningProcess,
-            error: error.toString()
-          });
-          this.trigger('error', {
-            get commandObj() {
-              return _this;
-            },
-            ...this._runningProcess,
-            error: error.toString()
-          });
-        });
       } catch (e) {
         reject(e);
       }
     })
       .on('cancel,finally', () => {
-        childProcess && childProcess.kill();
+        this._runningProcess.childProcessPromise.cancel();
         this._runningProcess = null;
       })
       .start();
-
-    // save the run promise
-    this._runningProcess.promise = promise;
 
     // return the promise
     return promise;

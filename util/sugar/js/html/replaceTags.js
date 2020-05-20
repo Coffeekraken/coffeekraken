@@ -5,6 +5,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = replaceTags;
 
+var _toString = _interopRequireDefault(require("../string/toString"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 /**
  * @name                            replaceTags
  * @namespace                       sugar.js.html
@@ -26,6 +30,7 @@ exports.default = replaceTags;
  */
 function replaceTags(text, tags) {
   if (!text) text = '';
+  text = (0, _toString.default)(text);
   let oneLineText = text.replace(/\r\n/g, '|rn|');
   oneLineText = oneLineText.replace(/\n/g, '|n|');
   oneLineText = oneLineText.replace(/\r/g, '|r|'); // loop on the tags

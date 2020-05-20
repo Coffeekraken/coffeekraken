@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+require('../node/index');
+
 /**
  * @name            sugar.cli
  * @namespace       sugar.cli

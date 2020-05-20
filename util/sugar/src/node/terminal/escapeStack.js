@@ -23,25 +23,30 @@ const __hotkey = require('../keyboard/hotkey');
  */
 const escapeStackCallbacks = {};
 let escapeStackCurrentIndex = 0;
+let hotkeyInitiated = false;
 module.exports = function escapeStack(callback, index = null) {
   if (!escapeStackCallbacks[escapeStackCurrentIndex.toString()]) {
     escapeStackCallbacks[escapeStackCurrentIndex.toString()] = [];
   }
   escapeStackCallbacks[escapeStackCurrentIndex.toString()].push(callback);
   escapeStackCurrentIndex++;
-};
 
-__hotkey('escape').on('press', (key) => {
-  if (escapeStackCurrentIndex <= 0) {
-    return;
-  }
-  escapeStackCurrentIndex--;
-  if (escapeStackCallbacks[escapeStackCurrentIndex.toString()]) {
-    escapeStackCallbacks[escapeStackCurrentIndex.toString()].forEach(
-      (callback) => {
-        callback(escapeStackCurrentIndex);
+  if (!hotkeyInitiated) {
+    hotkeyInitiated = true;
+
+    __hotkey('escape').on('press', (key) => {
+      if (escapeStackCurrentIndex <= 0) {
+        return;
       }
-    );
-    escapeStackCallbacks[escapeStackCurrentIndex.toString()] = [];
+      escapeStackCurrentIndex--;
+      if (escapeStackCallbacks[escapeStackCurrentIndex.toString()]) {
+        escapeStackCallbacks[escapeStackCurrentIndex.toString()].forEach(
+          (callback) => {
+            callback(escapeStackCurrentIndex);
+          }
+        );
+        escapeStackCallbacks[escapeStackCurrentIndex.toString()] = [];
+      }
+    });
   }
-});
+};

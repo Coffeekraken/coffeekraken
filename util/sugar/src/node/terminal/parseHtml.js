@@ -64,9 +64,10 @@ module.exports = function parseHtml(message) {
       underline: (tag, content) => __chalk.underline(content),
       strike: (tag, content) => __chalk.strike(content),
 
-      iCheck: (tag, content) => parseHtml(`<green>✓</green>`),
-      iClose: (tag, content) => parseHtml(`<red>✓</red>`),
-      iStart: (tag, content) => parseHtml(`<green>‣</green>`),
+      iCheck: (tag, content) => parseHtml(`✓`),
+      iCross: (tag, content) => parseHtml(`✖`),
+      iClose: (tag, content) => parseHtml(`✖`),
+      iStart: (tag, content) => parseHtml(`‣`),
 
       date: (tag, content) =>
         new Date().getDate().toString().padStart('0', 2) +

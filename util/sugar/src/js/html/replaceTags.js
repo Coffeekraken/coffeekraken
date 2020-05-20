@@ -1,3 +1,5 @@
+import __toString from '../string/toString';
+
 /**
  * @name                            replaceTags
  * @namespace                       sugar.js.html
@@ -19,6 +21,7 @@
  */
 export default function replaceTags(text, tags) {
   if (!text) text = '';
+  text = __toString(text);
   let oneLineText = text.replace(/\r\n/g, '|rn|');
   oneLineText = oneLineText.replace(/\n/g, '|n|');
   oneLineText = oneLineText.replace(/\r/g, '|r|');

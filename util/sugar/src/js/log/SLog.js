@@ -132,7 +132,26 @@ export default class SLog {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  async _log(message, adapters = null, level = 'log') {
+  async _log(...args) {
+    let adapters = null,
+      level = 'log',
+      messages = [];
+    args.forEach((v) => {
+      if (typeof v === 'string') {
+        if (['log', 'warn', 'info', 'error', 'debug'].indexOf(v) !== -1) {
+          level = v;
+          return;
+        }
+      }
+      messages.push(v);
+    });
+
+    messages = messages.filter((m) => {
+      if (m === null || m === '') return false;
+      if (typeof m === 'string' && m.trim() === '') return false;
+      return true;
+    });
+
     // process the adapters argument
     if (adapters === null) adapters = this._settings.adaptersByLevel[level];
     if (adapters === null) adapters = Object.keys(this._settings.adapters);
@@ -153,6 +172,8 @@ export default class SLog {
       }
     }
 
+    if (!Array.isArray(adapters)) return;
+
     // init the promises stack
     const adaptersLogStack = [];
 
@@ -161,11 +182,14 @@ export default class SLog {
       // check if the adapter exists
       if (!this._settings.adapters[adapterName]) return;
 
-      // make the actual log call to this adapter and add it's result to the
-      // adaptersLogStack array
-      adaptersLogStack.push(
-        this._settings.adapters[adapterName].log(message, level)
-      );
+      // loop on all messages to log
+      messages.forEach((message) => {
+        // make the actual log call to this adapter and add it's result to the
+        // adaptersLogStack array
+        adaptersLogStack.push(
+          this._settings.adapters[adapterName].log(message, level)
+        );
+      });
     });
 
     // return the result of all the adapters promises

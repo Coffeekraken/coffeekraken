@@ -1,7 +1,7 @@
 "use strict";
 
 module.exports = __argsToString => {
-  describe('sugar.js.string.argsToString', () => {
+  describe('sugar.js.cli.argsToString', () => {
     it('Should process the passed args object correctly', done => {
       const string = __argsToString({
         arg1: 'Hello world',

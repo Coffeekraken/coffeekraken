@@ -1,3 +1,9 @@
+"use strict";
+
+var _toString = _interopRequireDefault(require("../string/toString"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 /**
  * @name                    log
  * @namespace               sugar.js.cli
@@ -9,6 +15,7 @@
  *
  * @param         {Mixed}         value           The value to log
  * @param         {String}        [type="log"]    The type of log you want to make. Can be anothing but has to stay a single word
+ * @return        {String}                        The logged message
  *
  * @example       js
  * import log from '@coffeekraken/sugar/js/cli/log';
@@ -16,4 +23,22 @@
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-"use strict";
+function log(value, type = 'log', logger = console) {
+  const formated = `${type}: ${(0, _toString.default)(value)}`;
+  logger.log(formated);
+  return formated;
+}
+
+log.info = value => log(value, 'info');
+
+log.warn = value => log(value, 'warn');
+
+log.debug = value => log(value, 'debug');
+
+log.error = value => log(value, 'error');
+
+log.end = value => log(value, 'end');
+
+log.complete = value => log(value, 'complete');
+
+module.exports = log;

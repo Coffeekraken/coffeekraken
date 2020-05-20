@@ -58,6 +58,8 @@ module.exports = class ScssBuildSProcess extends __SProcess {
       {
         build: {
           command: `sugar build.scss ${commandLine}`,
+          title: 'Build SCSS',
+          concurrent: true,
           watch: {
             patterns: __sugarConfig('build.scss.watch'),
             type: 'new,update'

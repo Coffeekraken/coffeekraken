@@ -13,6 +13,10 @@ var _childProcess = _interopRequireDefault(require("../../is/childProcess"));
 
 var _toString = _interopRequireDefault(require("../../string/toString"));
 
+var _log = _interopRequireDefault(require("../../cli/log"));
+
+var _fmtObj = _interopRequireDefault(require("fmt-obj"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -117,12 +121,17 @@ class SLogConsoleAdapter {
           break;
       }
 
-      let formatedMessage = message; // if (this._settings.enableChildProcessLogs && __isChildProcess()) {
+      if (this._settings.enableChildProcessLogs && (0, _childProcess.default)()) {
+        (0, _log.default)((0, _console.default)(message), level, (global || window).nativeConsole || console);
+      } else {
+        // log the message
+        if (typeof message === 'string') {
+          ((global || window).nativeConsole || console)[consoleMethod]((0, _console.default)(message));
+        } else {
+          ((global || window).nativeConsole || console)[consoleMethod]((0, _fmtObj.default)(message));
+        }
+      } // resolve the promise
 
-      formatedMessage = `${level}:${(0, _toString.default)(message)}`; // }
-      // log the message
-
-      ((global || window).nativeConsole || console)[consoleMethod]((0, _console.default)(formatedMessage)); // resolve the promise
 
       resolve();
     });

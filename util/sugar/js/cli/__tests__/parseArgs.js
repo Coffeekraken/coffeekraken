@@ -1,7 +1,7 @@
 "use strict";
 
 module.exports = __parseArgs => {
-  describe('sugar.js.string.parseArgs', () => {
+  describe('sugar.js.cli.parseArgs', () => {
     it('Should process the passed string correctly', done => {
       const args = __parseArgs('hello -w 10 yop "hello world" -b --hello.world Nelson --help "coco yep" #blop', {
         action: {

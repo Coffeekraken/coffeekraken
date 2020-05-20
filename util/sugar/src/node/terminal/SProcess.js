@@ -204,27 +204,27 @@ module.exports = class SProcess {
     this._listenCommandActions();
 
     // switch on process type to handle it properly
-    setTimeout(() => {
-      switch (this._settings.type) {
-        // case 'steps':
-        //   (async () => {
-        //     const results = {};
-        //     for (let i = 0; i < Object.keys(this._commands).length; i++) {
-        //       const command = Object.keys(this._commands)[i];
-        //       // console.log(command);
-        //       // const res = await this.run(command);
-        //       // console.log('res', res);
-        //       // results[command] = res;
-        //       // await __wait(100);
-        //     }
-        //     console.log('difin', results);
-        //     this._promise.resolve(results);
-        //   })();
-        //   break;
-        default:
-          break;
-      }
-    });
+    // setTimeout(() => {
+    //   switch (this._settings.type) {
+    //     // case 'steps':
+    //     //   (async () => {
+    //     //     const results = {};
+    //     //     for (let i = 0; i < Object.keys(this._commands).length; i++) {
+    //     //       const command = Object.keys(this._commands)[i];
+    //     //       // console.log(command);
+    //     //       // const res = await this.run(command);
+    //     //       // console.log('res', res);
+    //     //       // results[command] = res;
+    //     //       // await __wait(100);
+    //     //     }
+    //     //     console.log('difin', results);
+    //     //     this._promise.resolve(results);
+    //     //   })();
+    //     //   break;
+    //     default:
+    //       break;
+    //   }
+    // });
 
     // process.stdin.resume();
   }
@@ -242,16 +242,19 @@ module.exports = class SProcess {
   _listenCommandActions() {
     Object.keys(this._commands).forEach((name) => {
       const command = this._commands[name];
-      command.on('run', (data) => {
+      command.on('start', (data) => {
         // set the isRunning state of the keys associated to this command
         Object.keys(this.keys).forEach((keyName) => {
           const keyObj = this.keys[keyName];
-          if (keyObj.type === 'run' && keyObj.command === data.command.name) {
+          if (
+            keyObj.type === 'run' &&
+            keyObj.command === data.commandObj.name
+          ) {
             keyObj._isRunning = true;
           }
         });
       });
-      command.on('kill,success', (data) => {
+      command.on('close', (data) => {
         // set the isRunning state of the keys associated to this command
         Object.keys(this.keys).forEach((keyName) => {
           const keyObj = this.keys[keyName];
@@ -279,23 +282,7 @@ module.exports = class SProcess {
     // loop on each commands
     Object.keys(this._commands).forEach((name) => {
       const command = this._commands[name];
-      [
-        'run',
-        'close',
-        'success',
-        'error',
-        'ask',
-        'answer',
-        'data',
-        'kill',
-        'watch.new',
-        'watch.update',
-        'watch.delete'
-      ].forEach((name) => {
-        command.on(name, (data) => {
-          this.trigger(name, data);
-        });
-      });
+      __SPromise.pipe(command, this);
     });
   }
 
@@ -359,19 +346,19 @@ module.exports = class SProcess {
       }
       __hotkey(keyString, {
         once: keyObj.once
-      }).on('key', (key) => {
+      }).on('press', (key) => {
         switch (keyObj.type) {
           case 'run':
+            const commandObj = this._commands[keyObj.command];
             // run the command
             if (
-              this._commands[keyObj.command] &&
-              this._commands[keyObj.command].isRunning()
+              commandObj &&
+              commandObj.isRunning() &&
+              !commandObj.concurrent
             ) {
-              this._commands[keyObj.command].kill();
-              this._promise.trigger('key.kill', keyObj);
+              commandObj.kill();
             } else {
-              keyObj._runPromise = this.run(this._commands[keyObj.command]);
-              this._promise.trigger('key.run', keyObj);
+              keyObj._runPromise = this.run(commandObj);
             }
             break;
           case 'toggle':

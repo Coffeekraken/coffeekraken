@@ -2,6 +2,8 @@ import __deepMerge from '../../object/deepMerge';
 import __consoleHtmlPreset from '../htmlPresets/console';
 import __isChildProcess from '../../is/childProcess';
 import __toString from '../../string/toString';
+import __cliLog from '../../cli/log';
+import __formatObject from 'fmt-obj';
 
 /**
  * @name                    SLogConsoleAdapter
@@ -102,16 +104,24 @@ export default class SLogConsoleAdapter {
           break;
       }
 
-      let formatedMessage = message;
-
-      // if (this._settings.enableChildProcessLogs && __isChildProcess()) {
-      formatedMessage = `${level}:${__toString(message)}`;
-      // }
-
-      // log the message
-      ((global || window).nativeConsole || console)[consoleMethod](
-        __consoleHtmlPreset(formatedMessage)
-      );
+      if (this._settings.enableChildProcessLogs && __isChildProcess()) {
+        __cliLog(
+          __consoleHtmlPreset(message),
+          level,
+          (global || window).nativeConsole || console
+        );
+      } else {
+        // log the message
+        if (typeof message === 'string') {
+          ((global || window).nativeConsole || console)[consoleMethod](
+            __consoleHtmlPreset(message)
+          );
+        } else {
+          ((global || window).nativeConsole || console)[consoleMethod](
+            __formatObject(message)
+          );
+        }
+      }
 
       // resolve the promise
       resolve();

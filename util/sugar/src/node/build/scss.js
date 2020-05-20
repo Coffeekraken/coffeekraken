@@ -54,6 +54,7 @@ const __glob = require('glob');
  * @since           2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
+
 module.exports = (settings = {}) => {
   return new __SPromise(async (resolve, reject, trigger, cancel) => {
     settings = __deepMerge(__sugarConfig('build.scss'), settings);
@@ -119,8 +120,8 @@ module.exports = (settings = {}) => {
           '<appRoot>'
         );
         trigger(
-          'start',
-          `<iStart/> Start building the file <yellow>${smallPath}</yellow>...`
+          'log',
+          `Start building the file <yellow>${smallPath}</yellow>...`
         );
         const writingPath =
           outputPath +
@@ -194,6 +195,7 @@ module.exports = (settings = {}) => {
               reject(err);
               return;
             }
+
             // trigger(
             //   'log',
             //   `Compilation of the file <yellow>${smallPath}</yellow> finished with <green>success</green>...`

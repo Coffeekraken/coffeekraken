@@ -49,7 +49,6 @@ module.exports = class SComponent extends __blessed.box {
     if (!__activeScreen && settings.screen !== false) {
       __activeScreen = __blessed.screen({
         smartCSR: true,
-        autoPadding: true,
         cursor: {
           artificial: true,
           shape: {
@@ -58,6 +57,23 @@ module.exports = class SComponent extends __blessed.box {
             // ch: '█'
           },
           blink: true
+        },
+        container: {
+          // width: '100%',
+          height: '100%',
+          top: 1,
+          left: 2,
+          right: 2,
+          bottom: 1,
+          padding: {
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0
+          },
+          style: {
+            bg: 'red'
+          }
         }
       });
     }
@@ -70,11 +86,17 @@ module.exports = class SComponent extends __blessed.box {
     // save the settings
     this._settings = settings;
 
+    if (settings.container) {
+      const container = __blessed.box(settings.container);
+      __activeScreen.container = container;
+      __activeScreen.append(container);
+    }
+
     this._screen = __activeScreen;
     global.screen = __activeScreen;
 
     if (this._settings.appendToScreen) {
-      __activeScreen.append(this);
+      (__activeScreen.container || __activeScreen).append(this);
     }
 
     if (!this._settings.appendToScreen) {
@@ -88,6 +110,18 @@ module.exports = class SComponent extends __blessed.box {
         });
       }
     }
+  }
+
+  /**
+   * @name                  addToScreen
+   * @type                  Function
+   *
+   * This method simply append the component to the generated screen
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  addToScreen() {
+    (global.screen.container || global.screen).append(this);
   }
 
   /**

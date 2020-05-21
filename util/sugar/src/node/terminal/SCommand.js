@@ -61,26 +61,26 @@ module.exports = class SCommand extends __SPromise {
   _command = null;
 
   /**
-   * @name          _runningProcess
+   * @name          _currentProcess
    * @type          Object
    * @private
    *
-   * This store the currently running process if their's one
+   * This store the current process object
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _runningProcess = null;
+  _currentProcess = null;
 
   /**
-   * @name          _lastRunnedProcess
-   * @type          Object
+   * @name          _processesStack
+   * @type          Array
    * @private
    *
-   * This store the last runned process
+   * This store all the runned processes
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _lastRunnedProcess = null;
+  _processesStack = [];
 
   /**
    * @name          constructor
@@ -100,6 +100,8 @@ module.exports = class SCommand extends __SPromise {
         this._command = command;
         // check the command
         this._check();
+        // reset the running process object
+        this._resetCurrentProcessObject();
       },
       __deepMerge(
         {
@@ -117,6 +119,30 @@ module.exports = class SCommand extends __SPromise {
       if (this._settings.watch) this._watch();
       if (this._settings.run) this.run();
     });
+  }
+
+  /**
+   * @name                   _resetCurrentProcessObject
+   * @type                    Function
+   * @private
+   *
+   * This method simply reset the running process object
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _resetCurrentProcessObject() {
+    this._currentProcess = {
+      id: __uniqid(),
+      start: null,
+      end: null,
+      duration: null,
+      stdout: [],
+      stderr: [],
+      command: this._command,
+      childProcessPromise: null,
+      state: this._settings.watch ? 'watching' : 'idle'
+    };
+    this._processesStack.push(this._currentProcess);
   }
 
   /**
@@ -167,7 +193,7 @@ module.exports = class SCommand extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   isRunning() {
-    return this._runningProcess !== null;
+    return this._currentProcess && this._currentProcess.state === 'running';
   }
 
   /**
@@ -194,6 +220,47 @@ module.exports = class SCommand extends __SPromise {
    */
   get command() {
     return this._command;
+  }
+
+  /**
+   * @name                  lastProcessObj
+   * @type                  Object
+   * @get
+   *
+   * Get the last process. It can be the running one as well as a finished one
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get lastProcessObj() {
+    if (!this._processesStack.length) return null;
+    return this._processesStack[this._processesStack.length - 1];
+  }
+
+  /**
+   * @name                  runningProcessObj
+   * @type                  Object
+   * @get
+   *
+   * Get the running process.
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get runningProcessObj() {
+    if (this._currentProcess.state === 'running') return this._currentProcess;
+    return null;
+  }
+
+  /**
+   * @name                  processesStack
+   * @type                  Array
+   * @get
+   *
+   * Get all the runned/ing processes objects
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get processesStack() {
+    return this._processesStack;
   }
 
   /**
@@ -229,7 +296,7 @@ module.exports = class SCommand extends __SPromise {
             return _this;
           },
           path,
-          ...this._runningProcess
+          ...this._currentProcess
         });
       } else if (action === 'update') {
         this.trigger('watch.update', {
@@ -237,7 +304,7 @@ module.exports = class SCommand extends __SPromise {
             return _this;
           },
           path,
-          ...this._runningProcess
+          ...this._currentProcess
         });
       } else if (action === 'delete') {
         this.trigger('watch.delete', {
@@ -245,7 +312,7 @@ module.exports = class SCommand extends __SPromise {
             return _this;
           },
           path,
-          ...this._runningProcess
+          ...this._currentProcess
         });
       }
       if (!this.isRunning()) {
@@ -269,9 +336,9 @@ module.exports = class SCommand extends __SPromise {
    */
   kill() {
     if (!this.isRunning()) return;
-    if (!this._runningProcess.childProcessPromise) return;
-    this._runningProcess.childProcessPromise.cancel();
-    this._runningProcess = null;
+    if (!this._currentProcess.childProcessPromise) return;
+    this._currentProcess.childProcessPromise.cancel();
+    this._currentProcess = null;
   }
 
   /**
@@ -291,23 +358,14 @@ module.exports = class SCommand extends __SPromise {
    */
   run() {
     if (this.isRunning() && !this.concurrent) {
-      console.log('IJFOJEFIOWJFOWJEF');
       throw new Error(
         `Sorry but the command named "${this.name}" is already running...`
       );
     }
     const _this = this;
 
-    this._runningProcess = {
-      id: __uniqid(),
-      start: Date.now(),
-      end: null,
-      duration: null,
-      stdout: [],
-      stderr: [],
-      command: this._command,
-      childProcessPromise: null
-    };
+    // set the state of the runningProcess
+    this._currentProcess.state = 'running';
 
     const promise = new __SPromise(async (resolve, reject, trigger, cancel) => {
       // check if we need to ask some questions before running the command
@@ -342,7 +400,7 @@ module.exports = class SCommand extends __SPromise {
           switch (askObj.type) {
             case 'summary':
               askObj.items.forEach((item) => {
-                this._runningProcess.command = this._runningProcess.command.replace(
+                this._currentProcess.command = this._currentProcess.command.replace(
                   `[${item.id}]`,
                   item.value
                 );
@@ -354,11 +412,22 @@ module.exports = class SCommand extends __SPromise {
 
       try {
         // init the child process
-        this._runningProcess.childProcessPromise = __spawn(
-          this._runningProcess.command
+        this._currentProcess.childProcessPromise = __spawn(
+          this._currentProcess.command
         );
 
-        __SPromise.pipe(this._runningProcess.childProcessPromise, this, {
+        this._currentProcess.childProcess
+          .on('error', () => {
+            this._currentProcess.state = 'error';
+          })
+          .on('kill', () => {
+            this._currentProcess.state = 'killed';
+          })
+          .on('success', () => {
+            this._currentProcess.state = 'success';
+          });
+
+        __SPromise.pipe(this._currentProcess.childProcessPromise, this, {
           processor: (value, stack) => {
             if (typeof value === 'object') {
               value = {
@@ -381,8 +450,8 @@ module.exports = class SCommand extends __SPromise {
       }
     })
       .on('cancel,finally', () => {
-        this._runningProcess.childProcessPromise.cancel();
-        this._runningProcess = null;
+        this._currentProcess.childProcessPromise.cancel();
+        this._resetCurrentProcessObject();
       })
       .start();
 

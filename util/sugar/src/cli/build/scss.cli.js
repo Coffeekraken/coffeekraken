@@ -62,6 +62,6 @@ module.exports = (stringArgs = '') => {
   }
   const scssBuildProcess = new __ScssBuildSProcess();
   const panel = new __SProcessPanel(scssBuildProcess, {});
-  global.screen.append(panel);
+  panel.addToScreen();
 };
 module.exports.definition = definition;

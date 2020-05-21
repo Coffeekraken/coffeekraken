@@ -9,6 +9,7 @@ const __SSummaryList = require('./SSummaryList');
 const __summaryListPopup = require('./summaryListPopup');
 const __ora = require('ora');
 const __parseHtml = require('../terminal/parseHtml');
+const __isOdd = require('../is/odd');
 
 /**
  * @name                  SProcessPanel
@@ -271,7 +272,7 @@ module.exports = class SProcessPanel extends __SComponent {
   _removeProcessBox(processObj) {
     if (!processObj.error) {
       setTimeout(() => {
-        // processObj.processBox.detach();
+        // commandObj._panel.box.detach();
         clearInterval(processObj.spinner.interval);
         // delete this._processes[processObj.id];
         this.update();
@@ -380,18 +381,16 @@ module.exports = class SProcessPanel extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _generateUI() {
-    // this._logBox = new __SLogPanel({
-    //   beforeLog: ' '.repeat(this._process._biggestCommandName.length),
-    //   beforeEachLine: ' <white>│</white> '
-    // });
     this._logBox = __blessed.box({
+      width: '100%+1',
       top: 0,
       left: 0,
       right: 0,
-      bottom: 2,
-      // style: {
-      //   fg: 'white'
-      // },
+      bottom: 0,
+      style: {
+        fg: 'white',
+        bg: 'red'
+      },
       mouse: true,
       keys: true,
       scrollable: true,
@@ -405,10 +404,10 @@ module.exports = class SProcessPanel extends __SComponent {
         }
       },
       padding: {
-        top: 1,
-        left: 2,
-        right: 2,
-        bottom: 1
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0
       }
     });
 
@@ -433,15 +432,23 @@ module.exports = class SProcessPanel extends __SComponent {
     this._updateKeysBox();
   }
 
-  update() {
-    // loop one each of the processed
-    let currentTop = 0;
-    Object.keys(this._processes).forEach((processId) => {
-      const processObj = this._processes[processId];
-      // console.log(processObj);
+  /**
+   * @name            _updateCommandBoxesStyle
+   * @type            Function
+   * @private
+   *
+   * This method handle the display of a command box depending on his state, etc...
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _updateCommandBoxesStyle() {
+    Object.keys(this._process.commands).forEach((commandName) => {
+      const commandObj = this._process.commands[commandName];
+
       // check if we have already a processBox for this process
-      if (!processObj.processBox) {
-        processObj.processBox = __blessed.box({
+      if (!commandObj._panel) {
+        commandObj._panel = {};
+        commandObj._panel.box = __blessed.box({
           height: 3,
           style: {
             bg: __color('terminal.primary').toString(),
@@ -455,12 +462,12 @@ module.exports = class SProcessPanel extends __SComponent {
           },
           mouse: true,
           keys: true,
-          top: currentTop,
+          top: 0,
           left: 0,
           right: 0,
           clickable: true
         });
-        processObj.logBox = __blessed.box({
+        commandObj._panel.logBox = __blessed.box({
           // width: '100%-4',
           height: 0,
           top: 2,
@@ -489,112 +496,189 @@ module.exports = class SProcessPanel extends __SComponent {
           }
         });
 
-        processObj.opened = null;
-        processObj.processBox.on('click', () => {
-          if (this._processes[processId].opened === null) {
-            this._processes[processId].opened = true;
+        commandObj._panel.opened = null;
+        commandObj._panel.box.on('click', () => {
+          if (commandObj._panel.opened === null) {
+            commandObj._panel.opened = true;
           } else {
-            this._processes[processId].opened = !this._processes[processId]
-              .opened;
+            commandObj._panel.opened = !commandObj._panel.opened;
           }
           this.update();
         });
 
-        processObj.processBox.append(processObj.logBox);
+        commandObj._panel.spinner = {
+          ora: __ora({
+            text: __parseHtml(commandObj.title || commandObj.name),
+            color: 'black'
+          })
+        };
 
-        setTimeout(() => {
-          processObj.logBox.pushLine('Process starting up...');
-        });
+        commandObj._panel.box.append(commandObj._panel.logBox);
+
+        // setTimeout(() => {
+        //   commandObj._panel.logBox.pushLine('Process starting up...');
+        // });
 
         // append it in the logBox
-        this._logBox.append(processObj.processBox);
+        this._logBox.append(commandObj._panel.box);
       }
 
-      let boxTitle = `<bold>${
-        processObj.commandObj.title || processObj.commandObj.name
-      }</bold>`;
-      if (processObj.duration) {
-        boxTitle += ` <italic>${processObj.duration / 1000}s</italic>`;
+      let boxTitle = `<bold>${commandObj.title || commandObj.name}</bold>`;
+      if (commandObj.lastProcessObj.duration) {
+        boxTitle += ` <italic>${
+          commandObj.lastProcessObj.duration / 1000
+        }s</italic>`;
       }
 
-      if (processObj.error) {
-        processObj.processBox.style.bg = __color('terminal.red').toString();
-        clearInterval(processObj.spinner.interval);
-        processObj.processBox.setContent(__parseHtml(`<iCross/>  ${boxTitle}`));
-        processObj.processBox.screen.render();
-      } else if (processObj.end) {
-        processObj.processBox.style.bg = __color('terminal.green').toString();
-        clearInterval(processObj.spinner.interval);
-        processObj.processBox.setContent(__parseHtml(`<iCheck/>  ${boxTitle}`));
-        processObj.processBox.screen.render();
-      } else {
-        if (!processObj.spinner) {
-          processObj.spinner = {
-            ora: __ora({
-              text: __parseHtml(boxTitle),
-              color: 'black'
-            })
-          };
-        }
-        clearInterval(processObj.spinner.interval);
-        processObj.spinner.interval = setInterval(() => {
-          processObj.processBox.setContent(processObj.spinner.ora.frame());
-          processObj.processBox.screen.render();
+      if (commandObj.lastProcessObj.state === 'error') {
+        commandObj._panel.box.style.bg = __color('terminal.red').toString();
+        clearInterval(commandObj._panel.spinner.interval);
+        commandObj._panel.box.setContent(
+          __parseHtml(`<iCross/>  ${boxTitle} (error)`)
+        );
+        commandObj._panel.box.screen.render();
+      } else if (commandObj.lastProcessObj.state === 'success') {
+        commandObj._panel.box.style.bg = __color('terminal.green').toString();
+        clearInterval(commandObj._panel.spinner.interval);
+        commandObj._panel.box.setContent(
+          __parseHtml(`<iCheck/>  ${boxTitle} (success)`)
+        );
+        commandObj._panel.box.screen.render();
+      } else if (commandObj.lastProcessObj.state === 'running') {
+        clearInterval(commandObj._panel.spinner.interval);
+        commandObj._panel.spinner.interval = setInterval(() => {
+          commandObj._panel.spinner.ora.text = __parseHtml(
+            `${boxTitle} (running)`
+          );
+          commandObj._panel.box.setContent(
+            commandObj._panel.spinner.ora.frame()
+          );
+          commandObj._panel.box.screen.render();
         }, 50);
-      }
-
-      processObj.processBox.height =
-        processObj.processBox.padding.top +
-        processObj.processBox.padding.bottom +
-        1 +
-        processObj.logBox.height;
-
-      // take care of the content of the processBox
-      processObj.logBox.setContent('');
-      if (processObj.stderr.length) {
-        processObj.stderr.forEach((logItem) => {
-          processObj.logBox.pushLine(logItem.value || logItem);
-        });
+      } else if (commandObj.lastProcessObj.state === 'watching') {
+        commandObj._panel.box.style.bg = __color('terminal.yellow').toString();
+        clearInterval(commandObj._panel.spinner.interval);
+        commandObj._panel.spinner.interval = setInterval(() => {
+          commandObj._panel.spinner.ora.text = __parseHtml(
+            `${boxTitle} (watching)`
+          );
+          commandObj._panel.box.setContent(
+            commandObj._panel.spinner.ora.frame()
+          );
+          commandObj._panel.box.screen.render();
+        }, 50);
       } else {
-        processObj.stdout.forEach((logItem) => {
-          processObj.logBox.pushLine(logItem.value || logItem);
-        });
+        commandObj._panel.box.style.bg = commandObj.color || 'white';
+        commandObj._panel.box.setContent(
+          __parseHtml(`<iStart/>  ${boxTitle} (idle)`)
+        );
+        commandObj._panel.box.screen.render();
+      }
+    });
+  }
+
+  /**
+   * @name              _updateCommandBoxesLayout
+   * @type              Function
+   * @private
+   *
+   * This method take all the current commandObj available and set the layout correctly depending
+   * on how many they are, etc...
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _updateCommandBoxesLayout() {
+    let currentTop = 0;
+    const commandNames = Object.keys(this._process.commands);
+
+    commandNames.forEach((commandName, i) => {
+      const commandObj = this._process.commands[commandName];
+
+      let layout = 'default';
+      if (commandNames.length === 2) layout = 'two';
+      if (commandNames.length === 3) layout = 'three';
+      if (commandNames.length === 4) layout = 'four';
+      if (commandNames.length === 5) layout = 'five';
+      if (commandNames.length === 6) layout = 'six';
+      if (commandNames.length === 7) layout = 'seven';
+
+      let width, height, top, left, right, bottom;
+
+      switch (layout) {
+        case 'two':
+          width =
+            i === 1 && __isOdd(process.stdout.columns) ? '50%-2' : '50%-1';
+          height = '100%';
+          top = 0;
+          left = i === 0 ? 0 : '50%+1';
+          right = i === 0 ? '50%+1' : 0;
+          bottom = 0;
+          this._logBox.scrollable = false;
+          break;
       }
 
-      let logHeight = 3;
-      let processHeight = 3;
-      if (processObj.opened === null) {
-        // log box height
-        // if (!processObj.stdout.length) logHeight = 0;
-        if (processObj.end && !processObj.error) logHeight = 0;
-        // if (processObj.error) logHeight = processObj.stderr.length;
-        // process box height
-        if (logHeight === 0) processHeight = 3;
-        else processHeight = logHeight + 4;
+      commandObj._panel.box.width = width;
+      commandObj._panel.box.height = height;
+      commandObj._panel.box.top = top;
+      commandObj._panel.box.left = left;
+      commandObj._panel.box.right = right;
+      commandObj._panel.box.bottom = bottom;
+      // delete commandObj._panel.box.width;
+      // delete commandObj._panel.box.height;
 
-        // if (
-        //   !processObj.stdout.length ||
-        //   (processObj.end && !processObj.error)
-        // ) {
-        //   processHeight = 3;
-        // } else {
-        //   processHeight = processObj.logBox.height + 5;
-        // }
-      } else if (processObj.opened) {
-        logHeight = processObj.logBox.getContent().split('\n').length;
-        processHeight = logHeight + 4;
-      } else if (!processObj.opened) {
-        logHeight = 0;
-        processHeight = 3;
-      }
+      // commandObj._panel.box.height =
+      //   commandObj._panel.box.padding.top +
+      //   commandObj._panel.box.padding.bottom +
+      //   1 +
+      //   commandObj._panel.logBox.height;
 
-      processObj.processBox.height = processHeight;
-      processObj.logBox.height = logHeight;
-      processObj.logBox.setScrollPerc(100);
+      // // take care of the content of the processBox
+      // commandObj._panel.logBox.setContent('');
+      // if (commandObj.lastProcessObj.stderr.length) {
+      //   commandObj.lastProcessObj.stderr.forEach((logItem) => {
+      //     commandObj._panel.logBox.pushLine(logItem.value || logItem);
+      //   });
+      // } else {
+      //   commandObj.lastProcessObj.stdout.forEach((logItem) => {
+      //     commandObj._panel.logBox.pushLine(logItem.value || logItem);
+      //   });
+      // }
 
-      processObj.processBox.top = currentTop;
+      // let logHeight = 3;
+      // let processHeight = 3;
+      // if (commandObj._panel.opened === null) {
+      //   // log box height
+      //   // if (!processObj.stdout.length) logHeight = 0;
+      //   if (commandObj.lastProcessObj.end && !commandObj.lastProcessObj.error)
+      //     logHeight = 0;
+      //   // if (processObj.error) logHeight = processObj.stderr.length;
+      //   // process box height
+      //   if (logHeight === 0) processHeight = 3;
+      //   else processHeight = logHeight + 4;
 
-      currentTop += processObj.processBox.height + 1;
+      //   // if (
+      //   //   !processObj.stdout.length ||
+      //   //   (processObj.end && !processObj.error)
+      //   // ) {
+      //   //   processHeight = 3;
+      //   // } else {
+      //   //   processHeight = processObj.logBox.height + 5;
+      //   // }
+      // } else if (commandObj._panel.opened) {
+      //   logHeight = commandObj._panel.logBox.getContent().split('\n').length;
+      //   processHeight = logHeight + 4;
+      // } else if (!commandObj._panel.opened) {
+      //   logHeight = 0;
+      //   processHeight = 3;
+      // }
+
+      // commandObj._panel.box.height = processHeight;
+      // commandObj._panel.logBox.height = logHeight;
+      // commandObj._panel.logBox.setScrollPerc(100);
+
+      // commandObj._panel.box.top = currentTop;
+
+      // currentTop += commandObj._panel.box.height + 1;
     });
 
     // this._logBox.setContent('');
@@ -602,6 +686,14 @@ module.exports = class SProcessPanel extends __SComponent {
     //   this._logBox.pushLine(' ');
     // }
     this._logBox.setScrollPerc(100);
+  }
+
+  update() {
+    // init and update command boxes
+    this._updateCommandBoxesStyle();
+
+    // update the layout
+    this._updateCommandBoxesLayout();
 
     this._updateKeysBox();
 

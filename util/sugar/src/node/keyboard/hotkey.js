@@ -1,6 +1,7 @@
 const __SPromise = require('../promise/SPromise');
 const __uniqid = require('../string/uniqid');
 const __keypress = require('keypress');
+const __activeSpace = require('../core/activeSpace');
 
 /**
  * @name                hotkey
@@ -30,9 +31,9 @@ let isListenerAlreadyAdded = false;
 module.exports = function hotkey(key, settings = {}) {
   // extends the settings
   settings = {
-    element: null,
     once: false,
     splitKey: '+',
+    activeSpace: null,
     ...settings
   };
 
@@ -59,6 +60,12 @@ module.exports = function hotkey(key, settings = {}) {
       Object.keys(hotkeyStack).forEach((id) => {
         const obj = hotkeyStack[id];
         if (!obj || !obj.key) return;
+
+        // check if an activeSpace is specified
+        if (obj.settings.activeSpace) {
+          if (__activeSpace.is(obj.settings.activeSpace)) return;
+        }
+
         obj.key
           .toString()
           .split(',')
@@ -74,11 +81,11 @@ module.exports = function hotkey(key, settings = {}) {
 
             let pressedKey = keyObj.name;
             if (keyObj.ctrl)
-              pressedKey = `ctrl${settings.splitKey}${pressedKey}`;
+              pressedKey = `ctrl${obj.settings.splitKey}${pressedKey}`;
             if (keyObj.shift)
-              pressedKey = `shift${settings.splitKey}${pressedKey}`;
+              pressedKey = `shift${obj.settings.splitKey}${pressedKey}`;
             if (keyObj.meta)
-              pressedKey = `alt${settings.splitKey}${pressedKey}`;
+              pressedKey = `alt${obj.settings.splitKey}${pressedKey}`;
 
             if (pressedKey === key) {
               obj.promise.trigger('key', key);
@@ -104,7 +111,8 @@ module.exports = function hotkey(key, settings = {}) {
   // save the trigger function in the stack
   hotkeyStack[uniqid] = {
     key,
-    promise
+    promise,
+    settings
   };
 
   // return the promise

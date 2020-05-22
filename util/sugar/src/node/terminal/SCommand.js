@@ -102,14 +102,23 @@ module.exports = class SCommand extends __SPromise {
         this._check();
         // reset the running process object
         this._resetCurrentProcessObject();
+        // init key
+        this._initKey();
+
+        // check if need to run it automatically
+        if (this._settings.run) this.run();
       },
       __deepMerge(
         {
+          // TODO: documentation settings
+          run: false,
           concurrent: false,
           color: 'white',
           ask: null,
           title: null,
-          watch: null
+          watch: null,
+          key: null,
+          activeSpace: null
         },
         settings
       )
@@ -169,6 +178,32 @@ module.exports = class SCommand extends __SPromise {
    */
   get title() {
     return this._settings.title;
+  }
+
+  /**
+   * @name                   key
+   * @type                    String
+   * @get
+   *
+   * Get the command key
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get key() {
+    return this._settings.key;
+  }
+
+  /**
+   * @name                   activeSpace
+   * @type                    String
+   * @get
+   *
+   * Get the command activeSpace
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get activeSpace() {
+    return this._settings.activeSpace;
   }
 
   /**
@@ -264,8 +299,31 @@ module.exports = class SCommand extends __SPromise {
   }
 
   /**
+   * @name                  _initKey
+   * @type                  Function
+   * @private
+   *
+   * This method init the key listening if a settings.key is defined
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _initKey() {
+    if (!this._settings.key) return;
+    __hotkey(this._settings.key, {
+      activeSpace: this._settings.activeSpace || null
+    }).on('press', () => {
+      if (this.isRunning() && !this._settings.concurrent) {
+        this.kill();
+      } else {
+        this.run();
+      }
+    });
+  }
+
+  /**
    * @name                  _watch
    * @type                  Function
+   * @private
    *
    * This method init the watch process passed in the settings.watch object
    *

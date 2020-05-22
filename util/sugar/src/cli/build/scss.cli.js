@@ -1,14 +1,10 @@
 const __isChildProcess = require('../../node/is/childProcess');
 const __buildScss = require('../../node/build/scss');
-const __parseHtml = require('../../node/terminal/parseHtml');
-const __SProcess = require('../../node/terminal/SProcess');
 const __SProcessPanel = require('../../node/blessed/SProcessPanel');
 const __parseArgs = require('../../node/cli/parseArgs');
 const __ScssBuildSProcess = require('../../node/build/process/ScssBuildSProcess');
 const __sugarConfig = require('../../node/config/sugar');
 const __initSugar = require('../../node/index');
-
-const __parseLog = require('../../../js/cli/parseLog');
 
 const definition = {
   input: {

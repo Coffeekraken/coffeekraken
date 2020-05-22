@@ -251,7 +251,7 @@ module.exports = class SProcessPanel extends __SComponent {
       //   this._updateKeysBox();
       // })
       .on('close', (data) => {
-        this._updateKeysBox();
+        // this._updateKeysBox();
       })
       .catch((e) => {
         this._logBox.log(' ');
@@ -299,77 +299,77 @@ module.exports = class SProcessPanel extends __SComponent {
     return summaryListPopup;
   }
 
-  /**
-   * @name          _updateKeysBox
-   * @type          Function
-   * @private
-   *
-   * This method simply generate all the keys buttons and update the keysBox
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _updateKeysBox() {
-    setTimeout(() => {
-      const items = [];
-      let currentLeft = 0;
+  // /**
+  //  * @name          _updateKeysBox
+  //  * @type          Function
+  //  * @private
+  //  *
+  //  * This method simply generate all the keys buttons and update the keysBox
+  //  *
+  //  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  //  */
+  // _updateKeysBox() {
+  //   setTimeout(() => {
+  //     const items = [];
+  //     let currentLeft = 0;
 
-      // keys
-      const keys = this._process.keys;
+  //     // keys
+  //     const keys = this._process.keys;
 
-      // loop on all the keys
-      Object.keys(keys).forEach((keyName) => {
-        const keyObj = keys[keyName];
-        const settings = {
-          padding: {
-            top: 0,
-            bottom: 0,
-            left: 1,
-            right: 1
-          }
-        };
-        switch (keyObj.type) {
-          case 'toggle':
-            settings.style = {
-              bg: keyObj.value
-                ? __color('terminal.green').toString()
-                : __color('terminal.red').toString(),
-              fg: __color('terminal.black').toString()
-            };
-            break;
-          case 'run':
-            settings.style = {
-              bg: keyObj._isRunning
-                ? __color('terminal.green').toString()
-                : __color('terminal.black').toString(),
-              fg: keyObj._isRunning
-                ? __color('terminal.black').toString()
-                : __color('terminal.white').toString()
-            };
-            break;
-          case 'action':
-            settings.style = {
-              bg: __color('terminal.white').toString(),
-              fg: __color('terminal.black').toString()
-            };
-            break;
-        }
-        const content = `${keyObj.text || keyObj.menu}(${keyObj.key})`;
-        const item = __blessed.box({
-          ...settings,
-          left: currentLeft,
-          width:
-            content.length + settings.padding.left + settings.padding.right,
-          content
-        });
-        currentLeft += item.width;
+  //     // loop on all the keys
+  //     Object.keys(keys).forEach((keyName) => {
+  //       const keyObj = keys[keyName];
+  //       const settings = {
+  //         padding: {
+  //           top: 0,
+  //           bottom: 0,
+  //           left: 1,
+  //           right: 1
+  //         }
+  //       };
+  //       switch (keyObj.type) {
+  //         case 'toggle':
+  //           settings.style = {
+  //             bg: keyObj.value
+  //               ? __color('terminal.green').toString()
+  //               : __color('terminal.red').toString(),
+  //             fg: __color('terminal.black').toString()
+  //           };
+  //           break;
+  //         case 'run':
+  //           settings.style = {
+  //             bg: keyObj._isRunning
+  //               ? __color('terminal.green').toString()
+  //               : __color('terminal.black').toString(),
+  //             fg: keyObj._isRunning
+  //               ? __color('terminal.black').toString()
+  //               : __color('terminal.white').toString()
+  //           };
+  //           break;
+  //         case 'action':
+  //           settings.style = {
+  //             bg: __color('terminal.white').toString(),
+  //             fg: __color('terminal.black').toString()
+  //           };
+  //           break;
+  //       }
+  //       const content = `${keyObj.text || keyObj.menu}(${keyObj.key})`;
+  //       const item = __blessed.box({
+  //         ...settings,
+  //         left: currentLeft,
+  //         width:
+  //           content.length + settings.padding.left + settings.padding.right,
+  //         content
+  //       });
+  //       currentLeft += item.width;
 
-        items.push(item);
-      });
-      items.forEach((item) => {
-        this._keysBox.append(item);
-      });
-    });
-  }
+  //       items.push(item);
+  //     });
+  //     items.forEach((item) => {
+  //       this._keysBox.append(item);
+  //     });
+  //   });
+  // }
 
   /**
    * @name          _generateUI
@@ -411,25 +411,25 @@ module.exports = class SProcessPanel extends __SComponent {
       }
     });
 
-    // init the blessed box that will display the keys
-    this._keysBox = __blessed.box({
-      right: 0,
-      height: 0,
-      bottom: 0,
-      left: 0,
-      width: '100%',
-      height: 1,
-      style: {
-        bg: __color('terminal.white').toString(),
-        fg: __color('terminal.black').toString()
-      }
-    });
+    // // init the blessed box that will display the keys
+    // this._keysBox = __blessed.box({
+    //   right: 0,
+    //   height: 0,
+    //   bottom: 0,
+    //   left: 0,
+    //   width: '100%',
+    //   height: 1,
+    //   style: {
+    //     bg: __color('terminal.white').toString(),
+    //     fg: __color('terminal.black').toString()
+    //   }
+    // });
 
     this.append(this._logBox);
-    this.append(this._keysBox);
+    // this.append(this._keysBox);
 
     // update the keysBox
-    this._updateKeysBox();
+    // this._updateKeysBox();
   }
 
   /**
@@ -695,7 +695,7 @@ module.exports = class SProcessPanel extends __SComponent {
     // update the layout
     this._updateCommandBoxesLayout();
 
-    this._updateKeysBox();
+    // this._updateKeysBox();
 
     super.update();
   }

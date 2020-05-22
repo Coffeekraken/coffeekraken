@@ -91,6 +91,7 @@
     "merge-anything": "^3.0.2",
     "merge-deep": "^3.0.2",
     "micromatch": "^4.0.2",
+    "minimatch": "^3.0.4",
     "mixin-deep": "^2.0.1",
     "mkdirp": "^0.5.1",
     "mobile-detect": "^1.4.4",

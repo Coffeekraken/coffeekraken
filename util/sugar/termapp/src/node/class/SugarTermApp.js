@@ -9,6 +9,9 @@ const __SConfig = require('../../../../node/config/SConfig');
 const __SConfigFsAdapter = require('../../../../node/config/adapters/SConfigFsAdapter');
 const __packageRoot = require('../../../../node/path/packageRoot');
 
+const __SCommandPanel = require('../../../../node/blessed/SCommandPanel');
+const __SBuildScssCommand = require('../../../../node/build/commands/SBuildScssCommand');
+
 /**
  * @name            SugarTermApp
  * @namespace       termapp.node.class
@@ -50,6 +53,7 @@ module.exports = class SugarTermApp extends __SApp {
       autoLoad: true,
       autoSave: false
     });
+
     super(
       __deepMerge(
         {
@@ -58,47 +62,9 @@ module.exports = class SugarTermApp extends __SApp {
         settings
       )
     );
-  }
 
-  /**
-   * @name              exec
-   * @type              Function
-   *
-   * This method takes one or more SCommand instances and execute them.
-   * You can also pass as parameter a simple text command like "ls -la" or whatever
-   *
-   * @param         {String|SCommand|Array}         command         The command(s) to execute
-   * @return        {SPromise}                                      An SPromise instance that will be resolved once all the commands are finished
-   *
-   * @example       js
-   * myCoolApp.exec('ls -la');
-   *
-   * @TODO      Better example
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  exec(command) {
-    if (!Array.isArray(command)) command = [command];
-    const process = new __SProcess(command, {});
-    const processPanel = new __SProcessPanel(process, {});
-    this.append(processPanel);
-  }
-
-  /**
-   * @name              process
-   * @type              Function
-   *
-   * This method take as parameter an SProcess instance and display it properly
-   *
-   * @param         {SProcess}         process            The SProcess to display
-   *
-   * @example       js
-   * myCoolApp.process(myCoolProcess);
-   *
-   * @TODO      Better example
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  process(process) {
-    const processPanel = new __SProcessPanel(process, {});
-    this.append(processPanel);
+    // const scssCommand = ;
+    const panel = new __SCommandPanel([new __SBuildScssCommand()]);
+    this.append(panel);
   }
 };

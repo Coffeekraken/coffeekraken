@@ -9,6 +9,7 @@ const __uniqid = require('../string/uniqid');
 const __argsToString = require('../cli/argsToString');
 const __watchCli = require('../../cli/fs/watch.cli');
 const __spawn = require('../childProcess/spawn');
+const __minimatch = require('minimatch');
 
 /**
  * @name            SCommand
@@ -37,7 +38,20 @@ const __spawn = require('../childProcess/spawn');
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+const _namespacedCommandsStack = {};
 module.exports = class SCommand extends __SPromise {
+  /**
+   * @name          _id
+   * @type          String
+   * @private
+   *
+   * Store the command generated uniquid
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _id = null;
+
   /**
    * @name          _name
    * @type          String
@@ -45,6 +59,7 @@ module.exports = class SCommand extends __SPromise {
    *
    * Store the command name
    *
+   * @since     2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _name = null;
@@ -56,9 +71,35 @@ module.exports = class SCommand extends __SPromise {
    *
    * Store the command
    *
+   * @since     2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _command = null;
+
+  /**
+   * @name          _id
+   * @type          String
+   * @private
+   *
+   * Store a unique id that identify the command instance
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _id = null;
+
+  /**
+   * @name          _destroyed
+   * @type          String
+   * @default       false
+   * @private
+   *
+   * Store the "destroy" state of this command
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _destroyed = false;
 
   /**
    * @name          _currentProcess
@@ -67,9 +108,22 @@ module.exports = class SCommand extends __SPromise {
    *
    * This store the current process object
    *
+   * @since     2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _currentProcess = null;
+
+  /**
+   * @name          _watchProcess
+   * @type          childProcess
+   * @private
+   *
+   * This store the watch child process instance
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _watchProcess = null;
 
   /**
    * @name          _processesStack
@@ -78,9 +132,43 @@ module.exports = class SCommand extends __SPromise {
    *
    * This store all the runned processes
    *
+   * @since     2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _processesStack = [];
+
+  /**
+   * @name          getCommands
+   * @type          Function
+   * @static
+   *
+   * This static methods allows you to get back all the commands instances depending on the passed namespace glob pattern.
+   * Each commands can have as setting a "namespace" property that will be used to get the commands back using this method.
+   * Note that a command that does not have any namespace cannot be retreived using this command.
+   *
+   * @param       {String}        [namespace=null]        The namespace pattern to get the commands back. If not specified, will return all the commands that have a namespace specified.
+   * @return      {Array}                                 An array containing all the commands instances that match the namespace pattern passed
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static getCommands(namespace = null) {
+    let returnCommandsArray = [];
+    // loop on every namespaced commands registered
+    Object.keys(_namespacedCommandsStack).forEach((commandNamespace) => {
+      if (__minimatch(commandNamespace, namespace)) {
+        Object.keys(_namespacedCommandsStack[commandNamespace]).forEach(
+          (commandId) => {
+            returnCommandsArray.push(
+              _namespacedCommandsStack[commandNamespace][commandId]
+            );
+          }
+        );
+      }
+    });
+    // return the commands
+    return returnCommandsArray;
+  }
 
   /**
    * @name          constructor
@@ -98,15 +186,21 @@ module.exports = class SCommand extends __SPromise {
         // save the parameters
         this._name = name;
         this._command = command;
+        this._id = __uniqid();
+        // save this command in the stack if a namespace is specified
+        if (this._settings.namespace) {
+          if (!_namespacedCommandsStack[this._settings.namespace])
+            _namespacedCommandsStack[this._settings.namespace] = {};
+          this._namespacedCommandsStack[this._settings.namespace][
+            this._id
+          ] = this;
+        }
         // check the command
         this._check();
         // reset the running process object
         this._resetCurrentProcessObject();
         // init key
         this._initKey();
-
-        // check if need to run it automatically
-        if (this._settings.run) this.run();
       },
       __deepMerge(
         {
@@ -116,16 +210,19 @@ module.exports = class SCommand extends __SPromise {
           color: 'white',
           ask: null,
           title: null,
+          args: {},
+          definition: null,
+          summary: true,
           watch: null,
           key: null,
-          activeSpace: null
+          namespace: null
         },
         settings
       )
     ).start();
 
     setTimeout(() => {
-      if (this._settings.watch) this._watch();
+      if (this._settings.watch) this.watch();
       if (this._settings.run) this.run();
     });
   }
@@ -194,16 +291,16 @@ module.exports = class SCommand extends __SPromise {
   }
 
   /**
-   * @name                   activeSpace
+   * @name                   namespace
    * @type                    String
    * @get
    *
-   * Get the command activeSpace
+   * Get the command namespace
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  get activeSpace() {
-    return this._settings.activeSpace;
+  get namespace() {
+    return this._settings.namespace;
   }
 
   /**
@@ -310,7 +407,7 @@ module.exports = class SCommand extends __SPromise {
   _initKey() {
     if (!this._settings.key) return;
     __hotkey(this._settings.key, {
-      activeSpace: this._settings.activeSpace || null
+      activeSpace: this._settings.namespace || null
     }).on('press', () => {
       if (this.isRunning() && !this._settings.concurrent) {
         this.kill();
@@ -321,7 +418,21 @@ module.exports = class SCommand extends __SPromise {
   }
 
   /**
-   * @name                  _watch
+   * @name              unwatch
+   * @type              Function
+   *
+   * This methid allows you to stop the watch process if one has been launched
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  unwatch() {
+    if (!this._watchProcess) return;
+    this._watchProcess.kill();
+  }
+
+  /**
+   * @name                  watch
    * @type                  Function
    * @private
    *
@@ -329,12 +440,17 @@ module.exports = class SCommand extends __SPromise {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _watch() {
+  watch() {
+    if (!this._settings.watch) {
+      throw new Error(
+        `You try to launch the "watch" process on the command named "${this.name}" but you don't have specified the "settings.watch" configuration object...`
+      );
+    }
     const commandLine = __argsToString(
       this._settings.watch,
       __watchCli.definition
     );
-    const childProcess = __childProcess.spawn(`sugar fs.watch ${commandLine}`, {
+    this._watchProcess = __childProcess.spawn(`sugar fs.watch ${commandLine}`, {
       shell: true,
       env: {
         ...process.env,
@@ -342,7 +458,7 @@ module.exports = class SCommand extends __SPromise {
       }
     });
     let watchTimeout;
-    childProcess.stdout.on('data', (data) => {
+    this._watchProcess.stdout.on('data', (data) => {
       // split the logged value
       const action = data.toString().split(':')[0];
       const path = data.toString().split(':')[1];
@@ -400,6 +516,30 @@ module.exports = class SCommand extends __SPromise {
   }
 
   /**
+   * @name          destroy
+   * @type          Function
+   *
+   * This method is used to destroy this instance.
+   * This mean that you can not run it anymore, you cannot retreive it by using
+   * the static "getCommands" method, etc...
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  destroy() {
+    // update the destroy state
+    this._destroyed = true;
+    // remove it from the registered commands stacks
+    if (this._settings.namespace) {
+      delete _namespacedCommandsStack[this._settings.namespace][this._id];
+    }
+    // kill current process if is running
+    this.kill();
+    // stop the watch process if is running
+    this.unwatch();
+  }
+
+  /**
    * @name                  run
    * @type                  Function
    * @async
@@ -415,6 +555,11 @@ module.exports = class SCommand extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run() {
+    if (this._destroyed) {
+      throw new Error(
+        `Sorry but this command named "${this.name}" has been destroyed...`
+      );
+    }
     if (this.isRunning() && !this.concurrent) {
       throw new Error(
         `Sorry but the command named "${this.name}" is already running...`
@@ -426,86 +571,103 @@ module.exports = class SCommand extends __SPromise {
     this._currentProcess.state = 'running';
 
     const promise = new __SPromise(async (resolve, reject, trigger, cancel) => {
-      // check if we need to ask some questions before running the command
-      if (this._settings.ask) {
-        let askStack = this._settings.ask;
-        if (askStack.type) {
-          askStack = {
-            default: askStack
-          };
-        }
+      // // check if we need to ask some questions before running the command
+      // if (this._settings.ask) {
+      //   let askStack = this._settings.ask;
+      //   if (askStack.type) {
+      //     askStack = {
+      //       default: askStack
+      //     };
+      //   }
 
-        for (let i = 0; i < Object.keys(askStack).length; i++) {
-          let askObj = askStack[Object.keys(askStack)[i]];
-          const answer = await this._ask(askObj);
-          if (answer === '__canceled__') {
-            cancel();
-            return;
-          }
-          askObj = {
-            get commandObj() {
-              return _this;
-            },
-            answer,
-            ...askObj
-          };
-          askStack[Object.keys(askStack)[i]] = askObj;
-          this.trigger('answer', askObj);
-          if (askObj.type === 'confirm' && askObj.answer === false) {
-            cancel();
-            return;
-          }
-          switch (askObj.type) {
-            case 'summary':
-              askObj.items.forEach((item) => {
-                this._currentProcess.command = this._currentProcess.command.replace(
-                  `[${item.id}]`,
-                  item.value
-                );
-              });
-              break;
-          }
-        }
-      }
+      //   for (let i = 0; i < Object.keys(askStack).length; i++) {
+      //     let askObj = askStack[Object.keys(askStack)[i]];
+      //     const answer = await this._ask(askObj);
+      //     if (answer === '__canceled__') {
+      //       cancel();
+      //       return;
+      //     }
+      //     askObj = {
+      //       get commandObj() {
+      //         return _this;
+      //       },
+      //       answer,
+      //       ...askObj
+      //     };
+      //     askStack[Object.keys(askStack)[i]] = askObj;
+      //     this.trigger('answer', askObj);
+      //     if (askObj.type === 'confirm' && askObj.answer === false) {
+      //       cancel();
+      //       return;
+      //     }
+      //     switch (askObj.type) {
+      //       case 'summary':
+      //         askObj.items.forEach((item) => {
+      //           this._currentProcess.command = this._currentProcess.command.replace(
+      //             `[${item.id}]`,
+      //             item.value
+      //           );
+      //         });
+      //         break;
+      //     }
+      //   }
+      // }
 
-      try {
-        // init the child process
-        this._currentProcess.childProcessPromise = __spawn(
-          this._currentProcess.command
-        );
+      // if (this._settings.summary) {
+      //   await new Promise((resolve, reject) => {
+      //     this.trigger('summary', {
+      //       get commandObj() {
+      //         return _this;
+      //       },
+      //       resolve,
+      //       reject,
+      //       // items: question.items,
+      //       question: `"${this.name}" command arguments summary`,
+      //       type: 'summary'
+      //     });
+      //   });
+      // }
 
-        this._currentProcess.childProcess
-          .on('error', () => {
-            this._currentProcess.state = 'error';
-          })
-          .on('kill', () => {
-            this._currentProcess.state = 'killed';
-          })
-          .on('success', () => {
-            this._currentProcess.state = 'success';
-          });
+      // try {
+      // init the child process
+      this._currentProcess.childProcessPromise = __spawn(
+        this._currentProcess.command
+      );
 
-        __SPromise.pipe(this._currentProcess.childProcessPromise, this, {
-          processor: (value, stack) => {
-            if (typeof value === 'object') {
-              value = {
-                ...value,
-                commandObj: this
-              };
-            }
-            return value;
-          }
+      this._currentProcess.childProcess
+        .on('error', () => {
+          this._currentProcess.state = 'error';
+        })
+        .on('kill', () => {
+          this._currentProcess.state = 'killed';
+        })
+        .on('success', () => {
+          this._currentProcess.state = 'success';
         });
 
-        // listen for the killing of the process
-        __hotkey('ctrl+c', {
-          once: true
-        }).on('key', (e) => {
-          cancel();
-        });
-      } catch (e) {
-        reject(e);
-      }
+      __SPromise.pipe(this._currentProcess.childProcessPromise, this, {
+        processor: (value, stack) => {
+          if (typeof value === 'object') {
+            value = {
+              ...value,
+              commandObj: this
+            };
+          }
+          return value;
+        }
+      });
+
+      // listen for the killing of the process
+      __hotkey('ctrl+c', {
+        once: true
+      }).on('key', (e) => {
+        cancel();
+      });
+      // } catch (e) {
+      //   console.log('SOINE');
+      //   console.log(e);
+      //   reject(e);
+      // }
     })
       .on('cancel,finally', () => {
         this._currentProcess.childProcessPromise.cancel();
@@ -531,64 +693,64 @@ module.exports = class SCommand extends __SPromise {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _ask(question) {
-    const _this = this;
-    return new __SPromise(
-      (resolve, reject, trigger, cancel) => {
-        switch (question.type) {
-          case 'input':
-            this.trigger('ask', {
-              ...question,
-              get commandObj() {
-                return _this;
-              },
-              resolve,
-              reject,
-              question:
-                question.question ||
-                'You need to specify a question using the "question" property of the ask object...'
-            });
-            break;
-          case 'summary':
-            this.trigger('ask', {
-              get commandObj() {
-                return _this;
-              },
-              resolve,
-              reject,
-              items: question.items,
-              question:
-                question.question ||
-                `Are that command details ok for you? (y/n)`,
-              type: 'summary'
-            });
-            break;
-          case 'confirm':
-          case 'boolean':
-          default:
-            this.trigger('ask', {
-              get commandObj() {
-                return _this;
-              },
-              question:
-                question.querstion || question.type === 'confirm'
-                  ? `Would you really like to launch the "${this.name}" command? (y/n)`
-                  : `You need to specify a question using the "question" property of the ask object...`,
-              type: question.type || 'confirm'
-            });
-            __hotkey('y,n', {
-              once: true
-            }).on('key', (key) => {
-              resolve(key === 'y');
-            });
-            break;
-        }
-      },
-      {
-        cancelDefaultReturn: '__canceled__'
-      }
-    ).start();
-  }
+  // _ask(question) {
+  //   const _this = this;
+  //   return new __SPromise(
+  //     (resolve, reject, trigger, cancel) => {
+  //       switch (question.type) {
+  //         case 'input':
+  //           this.trigger('ask', {
+  //             ...question,
+  //             get commandObj() {
+  //               return _this;
+  //             },
+  //             resolve,
+  //             reject,
+  //             question:
+  //               question.question ||
+  //               'You need to specify a question using the "question" property of the ask object...'
+  //           });
+  //           break;
+  //         case 'summary':
+  //           this.trigger('ask', {
+  //             get commandObj() {
+  //               return _this;
+  //             },
+  //             resolve,
+  //             reject,
+  //             items: question.items,
+  //             question:
+  //               question.question ||
+  //               `Are that command details ok for you? (y/n)`,
+  //             type: 'summary'
+  //           });
+  //           break;
+  //         case 'confirm':
+  //         case 'boolean':
+  //         default:
+  //           this.trigger('ask', {
+  //             get commandObj() {
+  //               return _this;
+  //             },
+  //             question:
+  //               question.querstion || question.type === 'confirm'
+  //                 ? `Would you really like to launch the "${this.name}" command? (y/n)`
+  //                 : `You need to specify a question using the "question" property of the ask object...`,
+  //             type: question.type || 'confirm'
+  //           });
+  //           __hotkey('y,n', {
+  //             once: true
+  //           }).on('key', (key) => {
+  //             resolve(key === 'y');
+  //           });
+  //           break;
+  //       }
+  //     },
+  //     {
+  //       cancelDefaultReturn: '__canceled__'
+  //     }
+  //   ).start();
+  // }
 
   /**
    * @name                 _check

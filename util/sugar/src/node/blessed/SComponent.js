@@ -1,6 +1,7 @@
 const __blessed = require('blessed');
 const __deepMerge = require('../object/deepMerge');
 const __color = require('../color/color');
+const __hotkey = require('../keyboard/hotkey');
 
 let __activeScreen = null;
 
@@ -23,6 +24,7 @@ let __activeScreen = null;
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+let _isCtrlCInited = false;
 module.exports = class SComponent extends __blessed.box {
   /**
    * @name                  _settings
@@ -82,6 +84,14 @@ module.exports = class SComponent extends __blessed.box {
     settings = __deepMerge({}, settings);
     // extends parent
     super(settings);
+
+    // ctrl+c callback
+    if (!_isCtrlCInited) {
+      _isCtrlCInited = true;
+      __hotkey('ctrl+c').on('press', () => {
+        process.exit();
+      });
+    }
 
     // save the settings
     this._settings = settings;

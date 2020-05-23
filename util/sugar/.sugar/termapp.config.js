@@ -19,7 +19,8 @@ module.exports = {
     default: '/builds/scss',
     urls: {
       '/builds/{what}': {
-        type: 'process',
+        type: 'commands',
+        namespace: 'build.**',
         menu: [
           {
             url: '/builds/scss',

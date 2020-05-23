@@ -51,11 +51,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = function argsToString(args, definition) {
   const cliArray = []; // loop on passed args
 
-  Object.keys(args).forEach(argName => {
+  Object.keys(definition).forEach(argName => {
     const defObj = definition[argName];
     if (!defObj) return;
     const prefix = defObj.alias ? `-${defObj.alias}` : `--${argName}`;
-    let value = (0, _toString.default)(args[argName]);
+    let value = args[argName] || definition[argName].default;
+
+    if (value === undefined) {
+      return;
+    }
+
+    value = (0, _toString.default)(value);
     if (defObj.type.toLowerCase() === 'string') value = `"${value}"`;
     if (defObj.type.toLowerCase() === 'boolean') value = '';
     if (defObj.type.toLowerCase() === 'object' || defObj.type.toLowerCase() === 'array') value = `"${value}"`;

@@ -8,6 +8,7 @@ const __color = require('../color/color');
 const __SPromise = require('../promise/SPromise');
 const __SInput = require('./SInput');
 const __multiple = require('../class/multipleExtends');
+const __activeSpace = require('../core/activeSpace');
 
 /**
  * @name                  SSummaryList
@@ -133,6 +134,7 @@ module.exports = class SSummaryList extends __multiple(
     this._editingItemIdx = null;
 
     this.on('attach', () => {
+      __activeSpace.append('summaryList');
       this._rebuildList();
     });
 
@@ -168,7 +170,9 @@ module.exports = class SSummaryList extends __multiple(
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _initHotkeys() {
-    this._escapeHotkey = __hotkey('escape').on('press', (key) => {
+    this._escapeHotkey = __hotkey('escape', {
+      activeSpace: '**.summaryList'
+    }).on('press', (key) => {
       if (this._isEditing) {
         this._isEditing = false;
       } else {
@@ -176,19 +180,25 @@ module.exports = class SSummaryList extends __multiple(
         this.promise.cancel();
       }
     });
-    this._downHotkey = __hotkey('down').on('press', (key) => {
+    this._downHotkey = __hotkey('down', {
+      activeSpace: '**.summaryList'
+    }).on('press', (key) => {
       if (this._isEditing) return;
       this.down(1);
       this._selectedItemIdx = this.selected;
       this._rebuildList();
     });
-    this._upHotkey = __hotkey('up').on('press', (key) => {
+    this._upHotkey = __hotkey('up', {
+      activeSpace: '**.summaryList'
+    }).on('press', (key) => {
       if (this._isEditing) return;
       this.up(1);
       this._selectedItemIdx = this.selected;
       this._rebuildList();
     });
-    this._enterHotkey = __hotkey('enter').on('press', (key) => {
+    this._enterHotkey = __hotkey('enter', {
+      activeSpace: '**.summaryList'
+    }).on('press', (key) => {
       if (!this._isEditing) {
         if (this.selected === this._items.length) {
           this._terminate();

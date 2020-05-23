@@ -7,6 +7,7 @@ const __SFooter = require('./SFooter');
 const __get = require('../object/get');
 const __parseSchema = require('../url/parseSchema');
 const __SProcess = require('../terminal/SProcess');
+const __SProcessPanel = require('../blessed/SProcessPanel');
 
 /**
  * @name                  SApp
@@ -61,7 +62,7 @@ module.exports = class SApp extends __SComponent {
     if (this._settings.header) {
       this._headerBox = new __SHeader({
         style: {
-          bg: __color('terminal.yellow').toString(),
+          bg: __color('terminal.primary').toString(),
           fg: __color('terminal.black').toString()
         },
         ...this._settings.header
@@ -72,7 +73,7 @@ module.exports = class SApp extends __SComponent {
     if (this._settings.footer) {
       this._footerBox = new __SFooter({
         style: {
-          bg: __color('terminal.yellow').toString(),
+          bg: __color('terminal.primary').toString(),
           fg: __color('terminal.black').toString()
         },
         ...this._settings.footer
@@ -80,7 +81,14 @@ module.exports = class SApp extends __SComponent {
       this.append(this._footerBox, true);
     }
 
-    this._contentBox = __blessed.box({});
+    this._contentBox = __blessed.box({
+      padding: {
+        top: 1,
+        left: 2,
+        right: 2,
+        bottom: 1
+      }
+    });
     this.append(this._contentBox, true);
 
     // go to default page
@@ -176,6 +184,48 @@ module.exports = class SApp extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _getProcessInstance(url, rawUrl, parsedSchema) {}
+
+  /**
+   * @name              exec
+   * @type              Function
+   *
+   * This method takes one or more SCommand instances and execute them.
+   * You can also pass as parameter a simple text command like "ls -la" or whatever
+   *
+   * @param         {String|SCommand|Array}         command         The command(s) to execute
+   * @return        {SPromise}                                      An SPromise instance that will be resolved once all the commands are finished
+   *
+   * @example       js
+   * myCoolApp.exec('ls -la');
+   *
+   * @TODO      Better example
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  exec(command) {
+    if (!Array.isArray(command)) command = [command];
+    const process = new __SProcess(command, {});
+    const processPanel = new __SProcessPanel(process, {});
+    this.append(processPanel);
+  }
+
+  /**
+   * @name              process
+   * @type              Function
+   *
+   * This method take as parameter an SProcess instance and display it properly
+   *
+   * @param         {SProcess}         process            The SProcess to display
+   *
+   * @example       js
+   * myCoolApp.process(myCoolProcess);
+   *
+   * @TODO      Better example
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  process(process) {
+    const processPanel = new __SProcessPanel(process, {});
+    this.append(processPanel);
+  }
 
   /**
    * @name          append

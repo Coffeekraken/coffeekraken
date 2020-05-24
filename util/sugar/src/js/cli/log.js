@@ -17,6 +17,7 @@ import __toString from '../string/toString';
  * import log from '@coffeekraken/sugar/js/cli/log';
  * log('Hello world', 'error');
  *
+ * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function log(value, type = 'log', logger = console) {

@@ -10,6 +10,7 @@ const __argsToString = require('../cli/argsToString');
 const __watchCli = require('../../cli/fs/watch.cli');
 const __spawn = require('../childProcess/spawn');
 const __minimatch = require('minimatch');
+const __checkDefinitionObject = require('../cli/checkDefinitionObject');
 
 /**
  * @name            SCommand
@@ -38,7 +39,6 @@ const __minimatch = require('minimatch');
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-const _namespacedCommandsStack = {};
 module.exports = class SCommand extends __SPromise {
   /**
    * @name          _id
@@ -138,7 +138,19 @@ module.exports = class SCommand extends __SPromise {
   _processesStack = [];
 
   /**
-   * @name          getCommands
+   * @name          _commandsStack
+   * @type          Array
+   * @static
+   *
+   * This static property store all the commands instances that have been instanciated
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static _commandsStack = [];
+
+  /**
+   * @name          getCommandsByName
    * @type          Function
    * @static
    *
@@ -146,25 +158,42 @@ module.exports = class SCommand extends __SPromise {
    * Each commands can have as setting a "namespace" property that will be used to get the commands back using this method.
    * Note that a command that does not have any namespace cannot be retreived using this command.
    *
-   * @param       {String}        [namespace=null]        The namespace pattern to get the commands back. If not specified, will return all the commands that have a namespace specified.
+   * @param       {String}        name        TThe command name that you want to get back
    * @return      {Array}                                 An array containing all the commands instances that match the namespace pattern passed
    *
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static getCommands(namespace = null) {
+  static getCommandsByName(name) {
     let returnCommandsArray = [];
-    // loop on every namespaced commands registered
-    Object.keys(_namespacedCommandsStack).forEach((commandNamespace) => {
-      if (__minimatch(commandNamespace, namespace)) {
-        Object.keys(_namespacedCommandsStack[commandNamespace]).forEach(
-          (commandId) => {
-            returnCommandsArray.push(
-              _namespacedCommandsStack[commandNamespace][commandId]
-            );
-          }
-        );
-      }
+    SCommand._commandsStack.forEach((instance) => {
+      if (instance.name === name) returnCommandsArray.push(instance);
+    });
+    // return the commands
+    return returnCommandsArray;
+  }
+
+  /**
+   * @name          getCommandsByNamespace
+   * @type          Function
+   * @static
+   *
+   * This static methods allows you to get back all the commands instances depending on the passed namespace glob pattern.
+   * Each commands can have as setting a "namespace" property that will be used to get the commands back using this method.
+   * Note that a command that does not have any namespace cannot be retreived using this command.
+   *
+   * @param       {String}        namespace        TThe command glob namespace pattern that you want to get back
+   * @return      {Array}                                 An array containing all the commands instances that match the namespace pattern passed
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static getCommandsByNamespace(namespace) {
+    let returnCommandsArray = [];
+    SCommand._commandsStack.forEach((instance) => {
+      if (!instance.namespace) return;
+      if (__minimatch(instance.namespace, namespace))
+        returnCommandsArray.push(instance);
     });
     // return the commands
     return returnCommandsArray;
@@ -183,22 +212,21 @@ module.exports = class SCommand extends __SPromise {
     // init subclass
     super(
       (resolve, reject, trigger, cancel) => {
+        // make sure we have a definition setting
+        this._checkDefinition(this._settings.definition);
+
+        // save this command into the static commands stack
+        SCommand._commandsStack.push(this);
+
         // save the parameters
         this._name = name;
         this._command = command;
         this._id = __uniqid();
-        // save this command in the stack if a namespace is specified
-        if (this._settings.namespace) {
-          if (!_namespacedCommandsStack[this._settings.namespace])
-            _namespacedCommandsStack[this._settings.namespace] = {};
-          this._namespacedCommandsStack[this._settings.namespace][
-            this._id
-          ] = this;
-        }
+
         // check the command
         this._check();
         // reset the running process object
-        this._resetCurrentProcessObject();
+        // this._resetCurrentProcessObject();
         // init key
         this._initKey();
       },
@@ -225,6 +253,27 @@ module.exports = class SCommand extends __SPromise {
       if (this._settings.watch) this.watch();
       if (this._settings.run) this.run();
     });
+  }
+
+  /**
+   * @name                  _checkDefinition
+   * @type                  Function
+   * @private
+   *
+   * This method take care of checking the passed "definition" object in the settings and make sure all is valid
+   *
+   * @param       {Object}        definition        The definition object to check
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _checkDefinition(definition) {
+    // check the definition object
+    const res = __checkDefinitionObject(definition);
+    if (res !== true) {
+      throw new Error(res);
+    }
+    return true;
   }
 
   /**
@@ -325,7 +374,7 @@ module.exports = class SCommand extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   isRunning() {
-    return this._currentProcess && this._currentProcess.state === 'running';
+    return this.lastProcessObj && this.lastProcessObj.state === 'running';
   }
 
   /**
@@ -378,7 +427,7 @@ module.exports = class SCommand extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   get runningProcessObj() {
-    if (this._currentProcess.state === 'running') return this._currentProcess;
+    if (this.isRunning()) return this._currentProcess;
     return null;
   }
 
@@ -529,9 +578,10 @@ module.exports = class SCommand extends __SPromise {
   destroy() {
     // update the destroy state
     this._destroyed = true;
-    // remove it from the registered commands stacks
-    if (this._settings.namespace) {
-      delete _namespacedCommandsStack[this._settings.namespace][this._id];
+    // remove this command from the static commands stack
+    const instanceIdx = SCommand._commandsStack.indexOf(this);
+    if (instanceIdx !== -1) {
+      SCommand._commandsStack.splice(instanceIdx, 1);
     }
     // kill current process if is running
     this.kill();
@@ -546,15 +596,19 @@ module.exports = class SCommand extends __SPromise {
    *
    * This method is used to run the command
    *
-   * @return        {SPromise}                          An SPromise instance on which you can subscribe for some events listed bellow and that will be resolved once the command is successfully finished
-   * - data: Triggered when some data are logged in the child process
-   * - error: Triggered when something goes wrong in the child process
-   * - success: Triggered when the child process has finished with success
-   * - kill: Triggered when the child process has been killed
+   * @param         {Object}        [args=null]         An optional arguments object for this particular process instance. If not specified, will take the default one passed in the constructor settings
+   * @return        {SPromise}                          An SPromise instance on which you can subscribe to all the "spawn" function "events" which are:
+   * - start: Triggered when the command start a process
+   * - close: Triggered when the process is closed
+   * - kill: Triggered when the process has been killed
+   * - success: Triggered when the process has finished without any error
+   * - error: Triggered when the process has had an error
+   * - stdout.data: Triggered when some data are pushed in the stdout channel
+   * - stderr.data: Triggered when some data are pushed in the srderr channel
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  run() {
+  run(args = null) {
     if (this._destroyed) {
       throw new Error(
         `Sorry but this command named "${this.name}" has been destroyed...`
@@ -566,9 +620,6 @@ module.exports = class SCommand extends __SPromise {
       );
     }
     const _this = this;
-
-    // set the state of the runningProcess
-    this._currentProcess.state = 'running';
 
     const promise = new __SPromise(async (resolve, reject, trigger, cancel) => {
       // // check if we need to ask some questions before running the command
@@ -629,49 +680,30 @@ module.exports = class SCommand extends __SPromise {
       // }
 
       // try {
-      // init the child process
-      this._currentProcess.childProcessPromise = __spawn(
-        this._currentProcess.command
+
+      // generate the final command to run
+      const commandLine = __argsToString(
+        args || this._settings.args,
+        this._settings.definition
       );
 
-      this._currentProcess.childProcess
-        .on('error', () => {
-          this._currentProcess.state = 'error';
-        })
-        .on('kill', () => {
-          this._currentProcess.state = 'killed';
-        })
-        .on('success', () => {
-          this._currentProcess.state = 'success';
-        });
-
-      __SPromise.pipe(this._currentProcess.childProcessPromise, this, {
-        processor: (value, stack) => {
-          if (typeof value === 'object') {
-            value = {
-              ...value,
-              commandObj: this
-            };
-          }
-          return value;
-        }
+      this._currentProcess = {};
+      // init the child process
+      this._currentProcess.childProcessPromise = __spawn(
+        `${this._command} ${commandLine}`
+      );
+      this._currentProcess.childProcessPromise.on('*', (data) => {
+        this._processesStack[this._processesStack.length - 1] = {
+          ...this._processesStack[this._processesStack.length - 1],
+          ...(data && data.process ? data.process : {})
+        };
       });
+      this._processesStack.push(this._currentProcess);
 
-      // listen for the killing of the process
-      __hotkey('ctrl+c', {
-        once: true
-      }).on('key', (e) => {
-        cancel();
-      });
-      // } catch (e) {
-      //   console.log('SOINE');
-      //   console.log(e);
-      //   reject(e);
-      // }
+      __SPromise.pipe(this._currentProcess.childProcessPromise, this, {});
     })
       .on('cancel,finally', () => {
         this._currentProcess.childProcessPromise.cancel();
-        this._resetCurrentProcessObject();
       })
       .start();
 

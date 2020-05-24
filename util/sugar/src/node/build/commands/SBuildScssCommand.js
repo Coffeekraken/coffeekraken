@@ -10,7 +10,7 @@ const __scssCli = require('../../../cli/build/scss.cli');
  *
  * This class represent a command used to watch and build scss files.
  *
- * @param         {Object}        [settings={}]                An object to configure this specific scss command with these properties:
+ * @param         {Object}        [args={}]                An object to configure this specific scss command with these properties:
  * - input (null) {String}: Specify the input files that you want to build. You can use glob pattern
  * - output (null) {String}: Specify the output folder where you want to save the compiled files
  * - watch (null) {String}: Specify a glob pattern of the files you want to watch
@@ -40,16 +40,20 @@ module.exports = class SBuildScssCommand extends __SCommand {
    * @since       2.0.0
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  constructor(settings = {}, commandSettings = {}) {
+  constructor(args = {}, commandSettings = {}) {
     // generate the cli command line
-    const command = __argsToString(settings, __scssCli.definition);
+    // const command = __argsToString(settings, __scssCli.definition);
     // init command
     super(
       'build.scss',
       `sugar build.scss`,
       __deepMerge(
         {
-          run: true
+          key: 'ctrl+s',
+          concurrent: false,
+          definition: __scssCli.definition,
+          args,
+          namespace: 'build'
         },
         commandSettings
       )

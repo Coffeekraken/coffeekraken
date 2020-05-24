@@ -48,10 +48,10 @@ module.exports = function spawn(
       start: Date.now(),
       end: null,
       duration: null,
-      time: null,
       stdout: [],
       stderr: [],
       command,
+      state: 'idle',
       args: Array.isArray(argsOrSettings) ? argsOrSettings : []
     };
 
@@ -60,9 +60,10 @@ module.exports = function spawn(
     // runningProcess.childProcess = childProcess;
 
     // start
+    runningProcess.state = 'running';
     trigger('start', {
       time: Date.now(),
-      ...runningProcess
+      process: runningProcess
     });
 
     // close
@@ -73,27 +74,29 @@ module.exports = function spawn(
         code,
         signal,
         time: Date.now(),
-        ...runningProcess
+        process: runningProcess
       });
       if (!code && signal) {
+        runningProcess.state = 'killed';
         trigger('kill', {
           code,
           signal,
           time: Date.now(),
-          ...runningProcess
+          process: runningProcess
         });
       } else if (code === 0 && !signal) {
+        runningProcess.state = 'success';
         resolve({
           code,
           signal,
           time: Date.now(),
-          ...runningProcess
+          process: runningProcess
         });
         trigger('success', {
           code,
           signal,
           time: Date.now(),
-          ...runningProcess
+          process: runningProcess
         });
       }
     });
@@ -102,15 +105,16 @@ module.exports = function spawn(
     childProcess.on('error', (error) => {
       runningProcess.end = Date.now();
       runningProcess.duration = runningProcess.end - runningProcess.start;
+      runningProcess.state = 'error';
       reject({
         error,
         time: Date.now(),
-        ...runningProcess
+        process: runningProcess
       });
       trigger('error', {
         error,
         time: Date.now(),
-        ...runningProcess
+        process: runningProcess
       });
     });
 
@@ -118,7 +122,7 @@ module.exports = function spawn(
     childProcess.stdout.on('data', (value) => {
       runningProcess.stdout.push(__parseLog(value.toString()));
       trigger('stdout.data', {
-        ...runningProcess,
+        process: runningProcess,
         time: Date.now(),
         value: __parseLog(value.toString())
       });
@@ -128,7 +132,7 @@ module.exports = function spawn(
     childProcess.stderr.on('data', (error) => {
       runningProcess.stderr.push(__parseLog(error.toString()));
       trigger('stderr.data', {
-        ...runningProcess,
+        process: runningProcess,
         time: Date.now(),
         error: __parseLog(error.toString())
       });

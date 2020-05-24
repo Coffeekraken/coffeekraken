@@ -63,8 +63,16 @@ module.exports = class SugarTermApp extends __SApp {
       )
     );
 
+    new __SBuildScssCommand();
+    new __SBuildScssCommand();
+    new __SBuildScssCommand();
+    new __SBuildScssCommand();
+    new __SBuildScssCommand();
+    new __SBuildScssCommand();
+    new __SBuildScssCommand();
+
     // const scssCommand = ;
-    const panel = new __SCommandPanel([new __SBuildScssCommand()]);
+    const panel = new __SCommandPanel('build');
     this.append(panel);
   }
 };

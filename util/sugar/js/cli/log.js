@@ -21,6 +21,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * import log from '@coffeekraken/sugar/js/cli/log';
  * log('Hello world', 'error');
  *
+ * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function log(value, type = 'log', logger = console) {

@@ -54,6 +54,7 @@
     "dotenv": "^8.2.0",
     "download-file": "^0.1.5",
     "downloads-folder": "^1.0.2",
+    "easing": "^1.2.1",
     "envinfo": "^7.5.0",
     "es6-object-assign": "^1.1.0",
     "fastdom": "^1.0.9",

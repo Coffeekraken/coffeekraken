@@ -226,7 +226,7 @@ module.exports = (settings = {}) => {
               //         .replace('.css', '.prod.css')}</yellow>`
               //     )
               //   );
-              const css = await __fs.readFile(writingPath);
+              const css = __fs.readFileSync(writingPath);
               trigger(
                 'log',
                 `Minifying and optimizing the file <yellow>${smallPath}</yellow>...`
@@ -247,7 +247,7 @@ module.exports = (settings = {}) => {
                   '.prod.css'
                 )}</green>...`
               );
-              await __fs.writeFile(
+              __fs.writeFileSync(
                 writingPath.replace('.css', '.prod.css'),
                 postCssResult.css
               );
@@ -263,7 +263,7 @@ module.exports = (settings = {}) => {
                     '.prod.css.map'
                   )}</green>...`
                 );
-                await __fs.writeFile(
+                __fs.writeFileSync(
                   writingPath.replace('.css', '.prod.css.map'),
                   result.map
                 );

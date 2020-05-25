@@ -7,6 +7,10 @@ exports.default = void 0;
 
 var _convert = _interopRequireDefault(require("./convert"));
 
+var _SPromise = _interopRequireDefault(require("../promise/SPromise"));
+
+var _deepMerge = _interopRequireDefault(require("../object/deepMerge"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -15,213 +19,132 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * @name 		            STimer
  * @namespace           sugar.js.time
  * @type                  Class
+ * @extends               SPromise
  *
  * Class that let you create and handle timer with ease.
  * With this class you can set some callback function that will be
  * called each x ms or tell that you want your callbacks to be called
  * a certain number of time during the timer time.
+ * This class extends the SPromise one, meaning that you can subscribe to differents "events" triggered by the timer instance. Here's the list:
+ * - complete: Triggered when the timer is completed
+ * - tick: Triggered at each ticks depending on your settings
+ * - duration: Triggered when the duration has been changed
+ * - tickCount: Triggered when the tickCount has been changed
+ * - reset: Triggered when the timer has been reseted
+ * - start: Triggered when the timer starts
+ * - pause: Triggered when the timer has been paused
+ * - stop: Triggered when the timer has been stoped
+ * - destroy: Triggered when the timer has been destroyed
+ *
+ * @param     {Number|String}     duration      The duration of the timer. Can be a Number that will be treated as miliseconds, or a string like "1s", "2m", etc...
+ * @param     {Object}            [settings={}]     A settings object to configure your timer more deeply:
+ * - tickInterval (1000) {Number}: Specify the interval wanted between each ticks in miliseconds
+ * - tickCount (null) {Number}: Specify how many ticks you want during the timer process
+ * - loop (false) {Boolean}: Specify if you want the timer to loop or not.
  *
  * @example 	js
  * const STimer = require('@coffeekraken/sugar/js/time/STimer');
  * const myTimer = new STimer(2000, {
  * 		tickCount : 5
  * })
- * myTimer.onTick((myTimer) => {
+ * myTimer.on('tick', myTimer => {
  * 		// do something here...
  * })
  * myTimer.start()
  *
- * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+ * @since     2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-class STimer {
-  /**
-   * @name              _settings
-   * @type              Object
-   * @private
-   * 
-   * Store the settings for the timer
-   *
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-
+class STimer extends _SPromise.default {
   /**
    * @name          _duration
    * @type          Number
    * @private
-   * 
+   *
    * Store the timer duration wanted
    *
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
   /**
    * @name        _remaining
    * @type        Number
    * @private
-   * 
+   *
    * Store the remaining time
    *
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
   /**
    * @name            _tickCount
    * @type            Number
    * @private
-   * 
+   *
    * How many ticks wanted during the timeout
    *
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
   /**
    * @name          _tickInterval
    * @type          Number
    * @private
-   * 
+   *
    * Computed value depending on the settings
    *
-   */
-
-  /**
-   * @name            _ticksCallbacks
-   * @type            {Array}
-   * @private
-   * 
-   * Store all the functions to call on tick
-   *
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-
-  /**
-   * @name            _completesCallbacks
-   * @type            Array
-   * @private
-   * 
-   * Store all the functions to call on complete
-   *
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-
-  /**
-   * @name            _startsCallbacks
-   * @type            Array
-   * @private
-   * 
-   * Store all the functions to call on start
-   *
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-
-  /**
-   * @name            _pausesCallbackes
-   * @type            Array
-   * @private
-   * 
-   * Store all the functions to call on pause
-   *
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-
-  /**
-   * @name            _stopsCallbacks
-   * @type            Array
-   * @private
-   * 
-   * Store all the functions to call on stop
-   *
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-
-  /**
-   * @name            _destroysCallbacks
-   * @type            Array
-   * @private
-   * 
-   * Store all the functions to call on destroy
-   *
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-
-  /**
-   * @name            _changeDurationsCallbacks
-   * @type            Array
-   * @private
-   * 
-   * Store all the functions to call on change duration
-   *
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-
-  /**
-   * @name            _changeTicksCountCallbacks
-   * @type            Array
-   * @private
-   * 
-   * Store all the functions to call on changing ticks count
-   *
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-
-  /**
-   * @name            _resetsCallbacks
-   * @type            Array
-   * @private
-   * 
-   * Store all the functions to call on reset
-   *
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
   /**
    * @name          _tickSetTimeout
    * @type          Numbee
    * @private
-   * 
+   *
    * Store the setInterval instance
    *
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
   /**
    * @name            _startTime
    * @type            Date
    * @private
-   * 
+   *
    * Store the time when the timer is started
    *
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
   /**
    * @name          _tickTime
    * @type          Date
    * @private
-   * 
+   *
    * Store the last tick time
-   * 
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
   /**
    * @name          _pauseTime
    * @type          Date
    * @private
-   * 
+   *
    * Store the pause time
    *
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
   /**
    * @name          constructor
    * @type          Function
-   * 
+   *
    * Constructor
-   * 
+   *
    * @param 	{number} 	[duration=1000] 		The duration of the timer. Can be a number of milliseconds of a string time like '1s', '2m', etc...
    * @param 	{Object} 	settings 		The settings for the timer
-   * 
+   *
    * @example         js
    * import STimer from '@coffeekraken/sugar/js/time/STimer';
    * const timer = new STimer('2m');
@@ -229,48 +152,24 @@ class STimer {
    *    // do something...
    * });
    * timer.start();
-   * 
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(duration, settings = {}) {
-    _defineProperty(this, "_settings", {
-      /**
-       * @name            tickInterval
-       * @type            Number
-       * @default         1000
-       * @setting
-       * 
-       * Store the interval between ticks. If specified in number format, it will mean milliseconds.
-       * You can specify also the time by string like: '1s', '2m', '1h', etc...
-       *
-       * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-       */
+    super((resolve, reject, trigger, cancel) => {
+      this.duration = duration; // calculate the tickInterval
+
+      if (this._settings.tickCount) {
+        this._tickCount = this._settings.tickCount;
+        this._tickInterval = this._duration / this._tickCount; // remove 1 cause the first tick is always the start time
+      } else {
+        this._tickInterval = (0, _convert.default)(this._settings.tickInterval, 'ms');
+      }
+    }, (0, _deepMerge.default)({
       tickInterval: 1000,
-
-      /**
-       * @name                tickCount
-       * @type                Number
-       * @default             null
-       * @setting
-       * 
-       * Set the number of tick wanted
-       *
-       * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-       */
       tickCount: null,
-
-      /**
-       * @name          loop
-       * @type          Boolean
-       * @default       false
-       * @setting
-       * 
-       * Set if the timer has to loop
-       *
-       * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-       */
       loop: false
-    });
+    }, settings));
 
     _defineProperty(this, "_duration", 0);
 
@@ -280,24 +179,6 @@ class STimer {
 
     _defineProperty(this, "_tickInterval", 1000);
 
-    _defineProperty(this, "_ticksCallbacks", []);
-
-    _defineProperty(this, "_completesCallbacks", []);
-
-    _defineProperty(this, "_startsCallbacks", []);
-
-    _defineProperty(this, "_pausesCallbackes", []);
-
-    _defineProperty(this, "_stopsCallbacks", []);
-
-    _defineProperty(this, "_destroysCallbacks", []);
-
-    _defineProperty(this, "_changeDurationsCallbacks", []);
-
-    _defineProperty(this, "_changeTicksCountCallbacks", []);
-
-    _defineProperty(this, "_resetsCallbacks", []);
-
     _defineProperty(this, "_tickSetTimeout", null);
 
     _defineProperty(this, "_startTime", null);
@@ -306,25 +187,16 @@ class STimer {
 
     _defineProperty(this, "_pauseTime", null);
 
-    this._duration = (0, _convert.default)(duration, 'ms'); // updating settings
-
-    this._settings = Object.assign(this._settings, settings); // calculate the tickInterval
-
-    if (this._settings.tickCount) {
-      this._tickCount = this._settings.tickCount;
-      this._tickInterval = this._duration / this._tickCount; // remove 1 cause the first tick is always the start time
-    } else {
-      this._tickInterval = (0, _convert.default)(this._settings.tickInterval, 'ms');
-    }
+    super.start();
   }
   /**
    * @name          _tick
    * @type          Function
    * @private
-   * 
+   *
    * Internal tick function
-   * 
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
 
@@ -343,9 +215,7 @@ class STimer {
       } // loop on each completes functions
 
 
-      this._completesCallbacks.forEach(complete => {
-        complete(this);
-      });
+      this.trigger('complete', this);
     } else {
       // launch another tick
       clearTimeout(this._tickSetTimeout);
@@ -355,18 +225,16 @@ class STimer {
     } // loop on each ticks functions
 
 
-    this._ticksCallbacks.forEach(tick => {
-      tick(this);
-    });
+    if (this.isStarted()) this.trigger('tick', this);
   }
   /**
    * @name            remaing
    * @type            Number
    * @get
-   * 
+   *
    * Get the remaining time in ms
-   * 
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
 
@@ -379,10 +247,10 @@ class STimer {
    * @type              Number
    * @get
    * @set
-   * 
+   *
    * Set or get the duration. Can be a number in milliseconds, or a time string like '1m', '2s', etc...
-   * 
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
 
@@ -395,9 +263,7 @@ class STimer {
     } // loop on each change duration functions
 
 
-    this._changeDurationsCallbacks.forEach(durationFn => {
-      durationFn(this);
-    });
+    this.trigger('duration', this);
   }
 
   get duration() {
@@ -408,10 +274,10 @@ class STimer {
    * @type          Number
    * @get
    * @set
-   * 
+   *
    * Set of get the tickCount
-   * 
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
 
@@ -419,213 +285,37 @@ class STimer {
     this._tickCount = tickCount;
     this._tickInterval = this._duration / this._tickCount; // loop on each change tick count functions
 
-    this._changeTicksCountCallbacks.forEach(tickCountFn => {
-      tickCountFn(this);
-    });
+    this.trigger('tickCount', this);
   }
 
   get tickCount() {
     return this._tickCount;
   }
   /**
-   * @name          onTick
-   * @type          Function
-   * 
-   * Register a function called on tick
-   * 
-   * @param 	      {Function} 	      A       function to call on tick
-   * @return 	      {STimer} 	                The timer instance
-   * 
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   * @name              percentage
+   * @type              Number
+   * @get
+   *
+   * Get the current timer advancement percentage
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
 
-  onTick(fn) {
-    // add the function if not already
-    if (this._ticksCallbacks.indexOf(fn) !== -1) return this;
-
-    this._ticksCallbacks.push(fn);
-
-    return this;
-  }
-  /**
-   * @name            onComplete
-   * @type            Function
-   * 
-   * Register a function called on complete
-   * 
-   * @param 	{Function} 	A function to call on complete
-   * @retun 	{STimer} 	The timer instance
-   * 
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-
-
-  onComplete(fn) {
-    // add the function if not already
-    if (this._completesCallbacks.indexOf(fn) !== -1) return this;
-
-    this._completesCallbacks.push(fn);
-
-    return this;
-  }
-  /**
-   * @name          onPause
-   * @type          Function
-   * 
-   * Register a function called on pause
-   * 
-   * @param 	      {Function} 	      A       function to call on pause
-   * @return 	      {STimer} 	                The timer instance
-   * 
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-
-
-  onPause(fn) {
-    // add the function if not already
-    if (this._pausesCallbackes.indexOf(fn) !== -1) return this;
-
-    this._pausesCallbackes.push(fn);
-
-    return this;
-  }
-  /**
-   * @name          onStart
-   * @type          Function
-   * 
-   * Register a function called on start
-   * 
-   * @param 	      {Function} 	      A       function to call on start
-   * @return 	      {STimer} 	                The timer instance
-   * 
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-
-
-  onStart(fn) {
-    // add the function if not already
-    if (this._startsCallbacks.indexOf(fn) !== -1) return this;
-
-    this._startsCallbacks.push(fn);
-
-    return this;
-  }
-  /**
-   * @name          onReset
-   * @type          Function
-   * 
-   * Register a function called on reset
-   * 
-   * @param 	      {Function} 	      A       function to call on reset
-   * @return 	      {STimer} 	                The timer instance
-   * 
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-
-
-  onReset(fn) {
-    // add the function if not already
-    if (this._resetsCallbacks.indexOf(fn) !== -1) return this;
-
-    this._resetsCallbacks.push(fn);
-
-    return this;
-  }
-  /**
-   * @name          onStop
-   * @type          Function
-   * 
-   * Register a function called on stop
-   * 
-   * @param 	      {Function} 	      A       function to call on stop
-   * @return 	      {STimer} 	                The timer instance
-   * 
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-
-
-  onStop(fn) {
-    // add the function if not already
-    if (this._stopsCallbacks.indexOf(fn) !== -1) return this;
-
-    this._stopsCallbacks.push(fn);
-
-    return this;
-  }
-  /**
-   * @name          onChangeDuration
-   * @type          Function
-   * 
-   * Register a function called on duration change
-   * 
-   * @param 	      {Function} 	      A       function to call on duration change
-   * @return 	      {STimer} 	                The timer instance
-   * 
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-
-
-  onChangeDuration(fn) {
-    // add the function if not already
-    if (this._changeDurationsCallbacks.indexOf(fn) !== -1) return this;
-
-    this._changeDurationsCallbacks.push(fn);
-
-    return this;
-  }
-  /**
-   * @name          onChangeTickCount
-   * @type          Function
-   * 
-   * Register a function called on tick counts change
-   * 
-   * @param 	      {Function} 	      A       function to call on tick count changes
-   * @return 	      {STimer} 	                The timer instance
-   * 
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-
-
-  onChangeTickCount(fn) {
-    // add the function if not already
-    if (this._changeTicksCountCallbacks.indexOf(fn) !== -1) return this;
-
-    this._changeTicksCountCallbacks.push(fn);
-
-    return this;
-  }
-  /**
-   * @name          onDestroy
-   * @type          Function
-   * 
-   * Register a function called on destroy
-   * 
-   * @param 	      {Function} 	      A       function to call on destroy
-   * @return 	      {STimer} 	                The timer instance
-   * 
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-
-
-  onDestroy(fn) {
-    // add the function if not already
-    if (this._destroysCallbacks.indexOf(fn) !== -1) return this;
-
-    this._destroysCallbacks.push(fn);
-
-    return this;
+  get percentage() {
+    if (!this.isStarted()) return 0;
+    return 100 / this.duration * (this.duration - this.remaining);
   }
   /**
    * @name              reset
    * @type              Function
-   * 
+   *
    * Reset the timer
-   * 
+   *
    * @param 	{Boolean} 	start 	If the timer has to start after reseting or not
    * @return 	{STimer}            The STimer instance
-   * 
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
 
@@ -639,23 +329,20 @@ class STimer {
 
     if (start) this.start(); // loop on each resets functions
 
-    this._resetsCallbacks.forEach(resetFn => {
-      resetFn(this);
-    }); // maintain chainability
-
+    this.trigger('reset', this); // maintain chainability
 
     return this;
   }
   /**
    * @name            start
    * @type            Function
-   * 
+   *
    * Start the timer
-   * 
+   *
    * @param         {Number}          [duration=null]           An optional duration for the timer session
    * @return 	{STimer}      The STimer instance
-   * 
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
 
@@ -696,22 +383,19 @@ class STimer {
     } // loop on each start functions
 
 
-    this._startsCallbacks.forEach(startFn => {
-      startFn(this);
-    }); // maintain chainability
-
+    this.trigger('start', this); // maintain chainability
 
     return this;
   }
   /**
    * @name            pause
    * @type            Function
-   * 
+   *
    * Pause the timer
-   * 
+   *
    * @return 	{STimer}        The STimer instance
-   * 
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
 
@@ -721,22 +405,19 @@ class STimer {
 
     clearTimeout(this._tickSetTimeout); // loop on each pause functions
 
-    this._pausesCallbackes.forEach(pauseFn => {
-      pauseFn(this);
-    }); // maintain chainability
-
+    this.trigger('pause', this); // maintain chainability
 
     return this;
   }
   /**
    * @name              stop
    * @type              Function
-   * 
+   *
    * Stop the timer
-   * 
+   *
    * @return 	{STimer}      The STimer instance
-   * 
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
 
@@ -744,22 +425,19 @@ class STimer {
     // reset
     this.reset(); // loop on each stop functions
 
-    this._stopsCallbacks.forEach(stopFn => {
-      stopFn(this);
-    }); // maintain chainability
-
+    this.trigger('stop', this); // maintain chainability
 
     return this;
   }
   /**
    * @name            destroy
    * @type            Function
-   * 
+   *
    * Destroy the timer
-   * 
+   *
    * @return        {STimer}            The STimer instance
-   * 
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
 
@@ -768,25 +446,23 @@ class STimer {
     this._completesCallbacks = [];
     this._ticksCallbacks = []; // loop on each destroy functions
 
-    this._destroysCallbacks.forEach(destroyFn => {
-      destroyFn(this);
-    }); // maintain chainability
-
+    this.trigger('destroy', this); // maintain chainability
 
     return this;
   }
   /**
    * @name              isStarted
-   * @type              Boolean
-   * @get
-   * 
+   * @type              Function
+   *
    * Check if the timer is started
-   * 
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   *
+   * @return          {Boolean}         true if started, false if not
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
 
-  get isStarted() {
+  isStarted() {
     return this._startTime && !this._pauseTime;
   }
 

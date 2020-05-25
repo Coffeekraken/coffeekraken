@@ -3,6 +3,9 @@ const __deepMerge = require('../object/deepMerge');
 const __SPromise = require('../promise/SPromise');
 const __uniqid = require('../string/uniqid');
 const __parseLog = require('../cli/parseLog');
+const __hotkey = require('../keyboard/hotkey');
+const __fkill = require('fkill');
+const __tkill = require('tree-kill');
 
 /**
  * @name                                spawn
@@ -58,6 +61,9 @@ module.exports = function spawn(
     childProcess = __childProcess.spawn(command, argsOrSettings, settings);
 
     // runningProcess.childProcess = childProcess;
+    __hotkey('ctrl+c').on('press', () => {
+      // childProcess.kill();
+    });
 
     // start
     runningProcess.state = 'running';
@@ -86,13 +92,13 @@ module.exports = function spawn(
         });
       } else if (code === 0 && !signal) {
         runningProcess.state = 'success';
-        resolve({
+        trigger('success', {
           code,
           signal,
           time: Date.now(),
           process: runningProcess
         });
-        trigger('success', {
+        resolve({
           code,
           signal,
           time: Date.now(),
@@ -106,12 +112,12 @@ module.exports = function spawn(
       runningProcess.end = Date.now();
       runningProcess.duration = runningProcess.end - runningProcess.start;
       runningProcess.state = 'error';
-      reject({
+      trigger('error', {
         error,
         time: Date.now(),
         process: runningProcess
       });
-      trigger('error', {
+      reject({
         error,
         time: Date.now(),
         process: runningProcess
@@ -134,12 +140,15 @@ module.exports = function spawn(
       trigger('stderr.data', {
         process: runningProcess,
         time: Date.now(),
-        error: __parseLog(error.toString())
+        error: __parseLog(error.toString()),
+        value: __parseLog(error.toString())
       });
     });
   })
     .on('cancel,finally', () => {
-      childProcess && childProcess.kill();
+      const pid = childProcess.pid;
+      // childProcess && childProcess.kill('SIGTERM');
+      if (pid) __tkill(pid);
     })
     .start();
 };

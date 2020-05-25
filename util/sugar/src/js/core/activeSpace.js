@@ -32,7 +32,7 @@ import __minimatch from 'minimatch';
  */
 const _activeSpaceCallbacksStack = {};
 const _activeSpaceStack = [];
-export default {
+const activeSpaceApi = {
   /**
    * @name                get
    * @type                Function
@@ -71,7 +71,7 @@ export default {
     // call the registered callbacks that match this activeSpace
     Object.keys(_activeSpaceCallbacksStack).forEach((activeSpaceToCheck) => {
       // check if the active space match or not
-      if (!this.is(activeSpaceToCheck)) return;
+      if (!activeSpaceApi.is(activeSpaceToCheck)) return;
       // loop on every callbacks registered
       _activeSpaceCallbacksStack[activeSpaceToCheck].forEach(
         (activeSpaceCallbackObj) => {
@@ -113,10 +113,12 @@ export default {
    */
   append: (activeSpace) => {
     // get the current one
-    const currentActiveSpace = this.get() || '';
+    const currentActiveSpace = activeSpaceApi.get() || '';
     const currentActiveSpaceArray = currentActiveSpace.split('.');
     const activeSpaceArray = activeSpace.split('.');
-    this.set([...currentActiveSpaceArray, ...activeSpaceArray].join('.'));
+    activeSpaceApi.set(
+      [...currentActiveSpaceArray, ...activeSpaceArray].join('.')
+    );
   },
 
   /**
@@ -131,7 +133,7 @@ export default {
   previous: () => {
     if (_activeSpaceStack.length <= 1) return;
     _activeSpaceStack.pop();
-    this.set(_activeSpaceStack[_activeSpaceStack.length - 1]);
+    activeSpaceApi.set(_activeSpaceStack[_activeSpaceStack.length - 1]);
   },
 
   /**
@@ -191,3 +193,5 @@ export default {
     });
   }
 };
+
+export default activeSpaceApi;

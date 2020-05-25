@@ -1,10 +1,8 @@
 const __isChildProcess = require('../../node/is/childProcess');
 const __buildScss = require('../../node/build/scss');
-const __SProcessPanel = require('../../node/blessed/SProcessPanel');
 const __parseArgs = require('../../node/cli/parseArgs');
-const __ScssBuildSProcess = require('../../node/build/process/ScssBuildSProcess');
+const __SProcessOutput = require('../../node/blessed/SProcessOutput');
 const __sugarConfig = require('../../node/config/sugar');
-const __initSugar = require('../../node/index');
 
 const definition = {
   input: {
@@ -57,15 +55,15 @@ const definition = {
 
 module.exports = (stringArgs = '') => {
   const args = __parseArgs(stringArgs, definition);
+  const build = __buildScss(args);
   if (__isChildProcess()) {
-    const build = __buildScss(args);
-    build.on('log', (message) => {
+    build.on('stdout.data', (message) => {
       console.log(message);
     });
     return;
   }
-  const scssBuildProcess = new __ScssBuildSProcess();
-  const panel = new __SProcessPanel(scssBuildProcess, {});
-  panel.addToScreen();
+  const output = new __SProcessOutput(build, {});
+  output.attach();
 };
+
 module.exports.definition = definition;

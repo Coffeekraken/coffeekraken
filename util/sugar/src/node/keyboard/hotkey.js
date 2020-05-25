@@ -72,8 +72,18 @@ module.exports = function hotkey(key, settings = {}) {
           .map((m) => m.trim())
           .forEach((key) => {
             if (ch && ch.toString() === key) {
-              obj.promise.trigger('key', key);
-              obj.promise.trigger('press', key);
+              obj.promise.trigger('key', {
+                key,
+                ctrl: keyObj.ctrl,
+                meta: keyObj.meta,
+                shift: keyObj.shift
+              });
+              obj.promise.trigger('press', {
+                key,
+                ctrl: keyObj.ctrl,
+                meta: keyObj.meta,
+                shift: keyObj.shift
+              });
               return;
             }
 
@@ -88,8 +98,18 @@ module.exports = function hotkey(key, settings = {}) {
               pressedKey = `alt${obj.settings.splitKey}${pressedKey}`;
 
             if (pressedKey === key) {
-              obj.promise.trigger('key', key);
-              obj.promise.trigger('press', key);
+              obj.promise.trigger('key', {
+                key,
+                ctrl: keyObj.ctrl,
+                meta: keyObj.meta,
+                shift: keyObj.shift
+              });
+              obj.promise.trigger('press', {
+                key,
+                ctrl: keyObj.ctrl,
+                meta: keyObj.meta,
+                shift: keyObj.shift
+              });
             }
           });
       });

@@ -116,10 +116,12 @@ export default class SLogConsoleAdapter {
           ((global || window).nativeConsole || console)[consoleMethod](
             __consoleHtmlPreset(message)
           );
-        } else {
+        } else if (typeof message === 'object') {
           ((global || window).nativeConsole || console)[consoleMethod](
             __formatObject(message)
           );
+        } else {
+          ((global || window).nativeConsole || console)[consoleMethod](message);
         }
       }
 

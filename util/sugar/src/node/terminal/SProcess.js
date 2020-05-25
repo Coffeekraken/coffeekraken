@@ -4,7 +4,7 @@ const __SCommand = require('./SCommand');
 const __sugarConfig = require('../config/sugar');
 
 /**
- * @name                    SCommandsStack
+ * @name                    SProcess
  * @namespace               sugar.node.terminal
  * @type                    Class
  *
@@ -21,13 +21,13 @@ const __sugarConfig = require('../config/sugar');
  *        - toggle: Simply toggle the "value" property in the key object to true/false
  *        - run: Simply launch the associated command by specifying the property "command" with the command name wanted
           - action: Does nothing by default. Simply specify the action name you want in the "action" property and you'll get access to that by listening "key.action" on the promise
-      - menu: Specify the text wanted in the menu when using this class with an SCommandsStackPanel instance
+      - menu: Specify the text wanted in the menu when using this class with an SProcessPanel instance
       - action: Specify an action name when the type is "action"
       - command: Specify a command name to run when the type is "run"
  *
  * @example         js
- * const SCommandsStack = require('@coffeekraken/sugar/node/terminal/SCommandsStack');
- * const app = new SCommandsStack({
+ * const SProcess = require('@coffeekraken/sugar/node/terminal/SProcess');
+ * const app = new SProcess({
  *    install: {
  *      command: 'npm install something'
  *    }
@@ -38,7 +38,7 @@ const __sugarConfig = require('../config/sugar');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SCommandsStack {
+module.exports = class SProcess {
   /**
    * @name              _settings
    * @type              Object
@@ -214,7 +214,7 @@ module.exports = class SCommandsStack {
     if (typeof command === 'string') {
       if (!this._commands[command]) {
         throw new Error(
-          `You try to launch the command named "${command}" but it does not exists in this SCommandsStack instance. Here's the available commands:\n${Object.keys(
+          `You try to launch the command named "${command}" but it does not exists in this SProcess instance. Here's the available commands:\n${Object.keys(
             this._commands
           ).join('\n- ')}`
         );

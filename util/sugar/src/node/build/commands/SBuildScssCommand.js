@@ -49,7 +49,7 @@ module.exports = class SBuildScssCommand extends __SCommand {
       `sugar build.scss`,
       __deepMerge(
         {
-          key: 'ctrl+s',
+          key: 's',
           concurrent: false,
           definition: __scssCli.definition,
           args,

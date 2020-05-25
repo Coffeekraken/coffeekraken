@@ -42,7 +42,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 const _activeSpaceCallbacksStack = {};
 const _activeSpaceStack = [];
-var _default = {
+const activeSpaceApi = {
   /**
    * @name                get
    * @type                Function
@@ -80,7 +80,7 @@ var _default = {
 
     Object.keys(_activeSpaceCallbacksStack).forEach(activeSpaceToCheck => {
       // check if the active space match or not
-      if (!(void 0).is(activeSpaceToCheck)) return; // loop on every callbacks registered
+      if (!activeSpaceApi.is(activeSpaceToCheck)) return; // loop on every callbacks registered
 
       _activeSpaceCallbacksStack[activeSpaceToCheck].forEach(activeSpaceCallbackObj => {
         // call the callback
@@ -116,10 +116,10 @@ var _default = {
    */
   append: activeSpace => {
     // get the current one
-    const currentActiveSpace = (void 0).get() || '';
+    const currentActiveSpace = activeSpaceApi.get() || '';
     const currentActiveSpaceArray = currentActiveSpace.split('.');
     const activeSpaceArray = activeSpace.split('.');
-    (void 0).set([...currentActiveSpaceArray, ...activeSpaceArray].join('.'));
+    activeSpaceApi.set([...currentActiveSpaceArray, ...activeSpaceArray].join('.'));
   },
 
   /**
@@ -136,7 +136,7 @@ var _default = {
 
     _activeSpaceStack.pop();
 
-    (void 0).set(_activeSpaceStack[_activeSpaceStack.length - 1]);
+    activeSpaceApi.set(_activeSpaceStack[_activeSpaceStack.length - 1]);
   },
 
   /**
@@ -192,5 +192,6 @@ var _default = {
     });
   }
 };
+var _default = activeSpaceApi;
 exports.default = _default;
 module.exports = exports.default;

@@ -37,7 +37,7 @@ module.exports = class SCenteredPopup extends __SComponent {
           title: null,
           description: null,
           width: '80%',
-          height: 'shrink',
+          height: 200,
           top: '50%',
           left: '50%',
           style: {
@@ -97,11 +97,16 @@ module.exports = class SCenteredPopup extends __SComponent {
     if (this._titleBox) contentTop += this._titleBox.height;
     if (this._descriptionBox) contentTop += this._descriptionBox.height;
     this._contentBox = __blessed.box({
+      shrink: true,
       top: contentTop,
       height: 'shrink',
       style: {
         bg: __color('terminal.black').toString()
       },
+      scrollable: true,
+      mouse: true,
+      keys: true,
+
       padding: {
         top: 1,
         left: 2,
@@ -142,8 +147,13 @@ module.exports = class SCenteredPopup extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   update() {
+    this.height = this._contentBox.getScrollHeight() + 7;
+
     this.top = `50%-${Math.round(this.height / 2)}`;
     this.left = `50%-${Math.round(this.width / 2)}`;
+
+    // this._contentBox.height = this.height - 6;
+
     super.update();
   }
 };

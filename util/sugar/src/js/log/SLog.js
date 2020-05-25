@@ -98,20 +98,20 @@ export default class SLog {
     const newConsole = (function (oldCons) {
       (global || window).nativeConsole = Object.assign({}, oldCons);
       return {
-        log: function (message, adapters) {
-          _this.log(message, adapters);
+        log: function (...args) {
+          _this.log(...args);
         },
-        info: function (message, adapters) {
-          _this.info(message, adapters);
+        info: function (...args) {
+          _this.info(...args);
         },
-        warn: function (message, adapters) {
-          _this.warn(message, adapters);
+        warn: function (...args) {
+          _this.warn(...args);
         },
-        debug: function (message, adapters) {
-          _this.debug(message, adapters);
+        debug: function (...args) {
+          _this.debug(...args);
         },
-        error: function (message, adapters) {
-          _this.error(message, adapters);
+        error: function (...args) {
+          _this.error(...args);
         }
       };
     })((global || window).console);
@@ -125,9 +125,7 @@ export default class SLog {
    *
    * Internal log method that make the actual call to all the adapters, etc...
    *
-   * @param         {Mixed}         message         The actual message to log
-   * @param         {String|Array}    [adapters=null]       The list of adapters to use
-   * @param         {String}          [level='log']         The log level. Can be "log", "info", "error", "debug" or "warn"
+   * @param         {Mixed}         ...args         The actual message(s) to log or the level wanted like "log", "warn", "info", "debug" or "error"
    * @return        {Promise}                             A promise that will be resolved once all the adapters have correctly log the message
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -203,8 +201,7 @@ export default class SLog {
    *
    * The main log method that log a normal message
    *
-   * @param           {Mixed}           message             The message to log
-   * @param           {String|Array}    [adapters=null]     The list of adapters you want to use for this message. Can be an Array like ['console','mail'], or a comma separated String like "console,mail"
+   * @param           {Mixed}           ...args             The message(s) to log
    * @return          {Promise}                             A promise that will be resolved once the message has been correctly logged through all adapters
    *
    * @example         js
@@ -212,9 +209,9 @@ export default class SLog {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  async log(message, adapters = null) {
+  async log(...args) {
     // call the internal _log method and return his result
-    return this._log(message, adapters, 'log');
+    return this._log(...args);
   }
 
   /**

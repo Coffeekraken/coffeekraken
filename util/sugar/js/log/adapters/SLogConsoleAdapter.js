@@ -127,8 +127,10 @@ class SLogConsoleAdapter {
         // log the message
         if (typeof message === 'string') {
           ((global || window).nativeConsole || console)[consoleMethod]((0, _console.default)(message));
-        } else {
+        } else if (typeof message === 'object') {
           ((global || window).nativeConsole || console)[consoleMethod]((0, _fmtObj.default)(message));
+        } else {
+          ((global || window).nativeConsole || console)[consoleMethod](message);
         }
       } // resolve the promise
 

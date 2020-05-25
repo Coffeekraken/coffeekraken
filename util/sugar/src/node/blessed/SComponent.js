@@ -2,6 +2,7 @@ const __blessed = require('blessed');
 const __deepMerge = require('../object/deepMerge');
 const __color = require('../color/color');
 const __hotkey = require('../keyboard/hotkey');
+const __tkill = require('tree-kill');
 
 let __activeScreen = null;
 
@@ -89,7 +90,14 @@ module.exports = class SComponent extends __blessed.box {
     if (!_isCtrlCInited) {
       _isCtrlCInited = true;
       __hotkey('ctrl+c').on('press', () => {
-        process.exit();
+        // setTimeout(() => {
+        //   process.exit();
+        // }, 1000);
+        __tkill(process.pid);
+        // __tkill(process.pid, 'SIGTERM', (e) => {
+        //   if (e) console.log(e);
+        //   process.exit();
+        // });
       });
     }
 
@@ -123,14 +131,18 @@ module.exports = class SComponent extends __blessed.box {
   }
 
   /**
-   * @name                  addToScreen
+   * @name                  attach
    * @type                  Function
    *
    * This method simply append the component to the generated screen
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  addToScreen() {
+  attach(to = null) {
+    if (to) {
+      to.append(this);
+      return;
+    }
     (global.screen.container || global.screen).append(this);
   }
 

@@ -5,11 +5,9 @@ module.exports = __STimer => {
   let tickCount = 0;
   const timer = new __STimer(1000, {
     tickInterval: '100ms'
-  });
-  timer.onTick(() => {
+  }).on('tick', () => {
     tickCount++;
-  });
-  timer.onComplete(() => {
+  }).on('complete', () => {
     doneComplete();
   });
   timer.start();

@@ -30,10 +30,7 @@ const __activeSpace = require('../core/activeSpace');
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SSummaryList extends __multiple(
-  __SComponent,
-  __blessed.list
-) {
+module.exports = class SSummaryList extends __SComponent {
   /**
    * @name                  _editingItemIdx
    * @type                  Number
@@ -103,9 +100,6 @@ module.exports = class SSummaryList extends __multiple(
     super(
       __deepMerge(
         {
-          keys: false,
-          mouse: false,
-          interactive: true,
           style: {
             bg: __color('terminal.black').toString(),
             item: {
@@ -121,6 +115,17 @@ module.exports = class SSummaryList extends __multiple(
         settings
       )
     );
+
+    // init the actual list component
+    this._list = __blessed.list({
+      keys: false,
+      mouse: false,
+      interactive: true,
+      ...this._settings
+    });
+
+    this.append(this._list);
+
     // save the items
     this._items = items;
 
@@ -156,7 +161,7 @@ module.exports = class SSummaryList extends __multiple(
     // init hotkeys
     this._initHotkeys();
 
-    this.select(this._items.length);
+    this._list.select(this._items.length);
     this._selectedItemIdx = this._items.length;
   }
 
@@ -184,42 +189,42 @@ module.exports = class SSummaryList extends __multiple(
       activeSpace: '**.summaryList'
     }).on('press', (key) => {
       if (this._isEditing) return;
-      this.down(1);
-      this._selectedItemIdx = this.selected;
+      this._list.down(1);
+      this._selectedItemIdx = this._list.selected;
       this._rebuildList();
     });
     this._upHotkey = __hotkey('up', {
       activeSpace: '**.summaryList'
     }).on('press', (key) => {
       if (this._isEditing) return;
-      this.up(1);
-      this._selectedItemIdx = this.selected;
+      this._list.up(1);
+      this._selectedItemIdx = this._list.selected;
       this._rebuildList();
     });
     this._enterHotkey = __hotkey('enter', {
       activeSpace: '**.summaryList'
     }).on('press', (key) => {
       if (!this._isEditing) {
-        if (this.selected === this._items.length) {
+        if (this._list.selected === this._items.length) {
           this._terminate();
           this.promise.resolve(this._items);
           return;
         }
 
         this._isEditing = true;
-        this._editingItemIdx = this.selected;
+        this._editingItemIdx = this._list.selected;
         this._editInput = new __SInput({
-          placeholder: this._items[this.selected].default,
-          top: this.selected,
+          placeholder: this._items[this._list.selected].default,
+          top: this._list.selected,
           left: this.getLongestListItemName().length + 4
         });
-        this.style.selected = {
+        this._list.style.selected = {
           bg: 'black',
           fg: 'white'
         };
         this._editInput.promise
           .on('resolve', (value) => {
-            this._items[this.selected].value = value;
+            this._items[this._list.selected].value = value;
           })
           .on('cancel', () => {})
           .on('cancel,finally', () => {
@@ -227,7 +232,7 @@ module.exports = class SSummaryList extends __multiple(
               this._isEditing = false;
               this._editingItemIdx = null;
               this.remove(this._editInput);
-              this.style.selected = {
+              this._list.style.selected = {
                 bg: this._settings.style.selected.bg,
                 fg: this._settings.style.selected.fg
               };
@@ -270,6 +275,7 @@ module.exports = class SSummaryList extends __multiple(
    */
   _terminate() {
     if (this._editInput) this.remove(this._editInput);
+    this._list.detach();
     this._escapeHotkey.cancel();
     this._downHotkey.cancel();
     this._upHotkey.cancel();
@@ -323,18 +329,18 @@ module.exports = class SSummaryList extends __multiple(
    */
   _rebuildList() {
     let listItems = this._buildBlessedListItemsArray();
-    this.clearItems();
-    this.setItems(listItems);
-    this.select(this._selectedItemIdx);
-    this.items[this._items.length].top += 1;
+    this._list.clearItems();
+    this._list.setItems(listItems);
+    this._list.select(this._selectedItemIdx);
+    this._list.items[this._items.length].top += 1;
 
     this.style.bg = __color('terminal.black').toString();
 
-    this.items.forEach((item) => {
+    this._list.items.forEach((item) => {
       item.style.bg = __color('terminal.black').toString();
     });
 
-    const selectedItem = this.items[this._selectedItemIdx];
+    const selectedItem = this._list.items[this._selectedItemIdx];
     if (!this._isEditing) {
       selectedItem.style.bg = __color('terminal.cyan').toString();
     }
@@ -347,7 +353,10 @@ module.exports = class SSummaryList extends __multiple(
   }
 
   update() {
-    this.position.height = this._items.length + 2;
-    super.update();
+    this._list.height = this._items.length + 2;
+    this.height = this._items.length + 2;
+    setTimeout(() => {
+      super.update();
+    });
   }
 };

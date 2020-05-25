@@ -120,7 +120,7 @@ module.exports = (settings = {}) => {
           '<appRoot>'
         );
         trigger(
-          'log',
+          'stdout.data',
           `Start building the file <yellow>${smallPath}</yellow>...`
         );
         const writingPath =
@@ -135,7 +135,7 @@ module.exports = (settings = {}) => {
           '<appRoot>'
         );
         trigger(
-          'log',
+          'stdout.data',
           `Bundling the files together before actually compiling them...`
         );
         const bundler = new __Bundler(undefined, inputPath);
@@ -144,7 +144,7 @@ module.exports = (settings = {}) => {
         let importAndSetupSugar = '';
         if (settings.include.sugar) {
           // trigger(
-          //   'log',
+          //   'stdout.data',
           //   `Importing <green>Sugar</green> in the file <yellow>${smallPath}</yellow>...`
           // );
           importAndSetupSugar = `
@@ -153,7 +153,7 @@ module.exports = (settings = {}) => {
           `;
           if (__isInPackage('@coffeekraken/sugar')) {
             // trigger(
-            //   'log',
+            //   'stdout.data',
             //   `Updating the @use <green>Sugar</green> path because we are in the <yellow>@coffeekraken/sugar</yellow> package...`
             // );
             const relativePath = __path.relative(
@@ -173,7 +173,7 @@ module.exports = (settings = {}) => {
           ${bundledScssString}
         `;
         trigger(
-          'log',
+          'stdout.data',
           `Start compiling the file <yellow>${smallPath}</yellow>...`
         );
         // render sass
@@ -197,19 +197,19 @@ module.exports = (settings = {}) => {
             }
 
             // trigger(
-            //   'log',
+            //   'stdout.data',
             //   `Compilation of the file <yellow>${smallPath}</yellow> finished with <green>success</green>...`
             // );
             const fileObj = {};
             trigger(
-              'log',
+              'stdout.data',
               `Writing the file <yellow>${smallPath}</yellow> to <green>${smallWritingPath}</green>...`
             );
             await __writeFile(writingPath, result.css.toString());
             fileObj.css = writingPath;
             if (result.map) {
               trigger(
-                'log',
+                'stdout.data',
                 `Writing the sourcemap of the file <yellow>${smallPath}</yellow> to <green>${smallWritingPath.replace(
                   '.css',
                   '.css.map'
@@ -228,7 +228,7 @@ module.exports = (settings = {}) => {
               //   );
               const css = __fs.readFileSync(writingPath);
               trigger(
-                'log',
+                'stdout.data',
                 `Minifying and optimizing the file <yellow>${smallPath}</yellow>...`
               );
               const postCssResult = await __postcss([
@@ -241,7 +241,7 @@ module.exports = (settings = {}) => {
                 to: writingPath.replace('.css', '.prod.css')
               });
               trigger(
-                'log',
+                'stdout.data',
                 `Writing the minified/optimized file to <green>${smallWritingPath.replace(
                   '.css',
                   '.prod.css'
@@ -254,7 +254,7 @@ module.exports = (settings = {}) => {
               fileObj.prodCss = writingPath.replace('.css', '.prod.css');
               if (postCssResult.map) {
                 trigger(
-                  'log',
+                  'stdout.data',
                   `Writing the sourcemap of the production file to <yellow>${smallWritingPath.replace(
                     '.css',
                     '.prod.css'
@@ -273,11 +273,11 @@ module.exports = (settings = {}) => {
             // add the file to the "compiledFiles" stack
             compiledFiles[path] = fileObj;
             trigger(
-              'log',
+              'stdout.data',
               `Compilation of the file <yellow>${smallPath}</yellow> finished <green>successfully</green>!`
             );
             // trigger a "file" stack action
-            trigger('file', fileObj);
+            // trigger('file', fileObj);
             renderResolve(fileObj);
           }
         );

@@ -5,6 +5,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _extendsClasses = _interopRequireDefault(require("extends-classes"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 /**
  * @name                multipleExtends
  * @namespace           sugar.js.class
@@ -22,31 +26,39 @@ exports.default = void 0;
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-var _default = (baseClass, ...mixins) => {
-  class base extends baseClass {
-    constructor(...args) {
-      super(...args);
-      mixins.forEach(mixin => {
-        copyProps(this, new mixin());
-      });
-    }
-
-  }
-
-  let copyProps = (target, source) => {
-    // this function copies all properties and symbols, filtering out some special ones
-    Object.getOwnPropertyNames(source).concat(Object.getOwnPropertySymbols(source)).forEach(prop => {
-      if (!prop.match(/^(?:constructor|prototype|arguments|caller|name|bind|call|apply|toString|length)$/)) Object.defineProperty(target, prop, Object.getOwnPropertyDescriptor(source, prop));
-    });
-  };
-
-  mixins.forEach(mixin => {
-    // outside contructor() to allow aggregation(A,B,C).staticFunction() to be called etc.
-    copyProps(base.prototype, mixin.prototype);
-    copyProps(base, mixin);
-  });
-  return base;
-};
+var _default = _extendsClasses.default; // export default (baseClass, ...mixins) => {
+//   class base extends baseClass {
+//     constructor(...args) {
+//       super(...args);
+//       mixins.forEach((mixin) => {
+//         copyProps(this, new mixin());
+//       });
+//     }
+//   }
+//   let copyProps = (target, source) => {
+//     // this function copies all properties and symbols, filtering out some special ones
+//     Object.getOwnPropertyNames(source)
+//       .concat(Object.getOwnPropertySymbols(source))
+//       .forEach((prop) => {
+//         if (
+//           !prop.match(
+//             /^(?:constructor|prototype|arguments|caller|name|bind|call|apply|toString|length)$/
+//           )
+//         )
+//           Object.defineProperty(
+//             target,
+//             prop,
+//             Object.getOwnPropertyDescriptor(source, prop)
+//           );
+//       });
+//   };
+//   mixins.forEach((mixin) => {
+//     // outside contructor() to allow aggregation(A,B,C).staticFunction() to be called etc.
+//     copyProps(base.prototype, mixin.prototype);
+//     copyProps(base, mixin);
+//   });
+//   return base;
+// };
 
 exports.default = _default;
 module.exports = exports.default;

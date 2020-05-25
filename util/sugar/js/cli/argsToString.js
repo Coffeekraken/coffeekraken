@@ -57,7 +57,7 @@ module.exports = function argsToString(args, definition) {
     const prefix = defObj.alias ? `-${defObj.alias}` : `--${argName}`;
     let value = args[argName] || definition[argName].default;
 
-    if (value === undefined) {
+    if (value === undefined || value === null || defObj.type.toLowerCase() === 'boolean' && value === false) {
       return;
     }
 

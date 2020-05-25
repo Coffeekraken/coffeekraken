@@ -1,7 +1,4 @@
 const __SApp = require('../../../../node/blessed/SApp');
-const __SProcess = require('../../../../node/terminal/SProcess');
-const __SProcessPanel = require('../../../../node/blessed/SProcessPanel');
-const __SLogPanel = require('../../../../node/blessed/SLogPanel');
 const __deepMerge = require('../../../../node/object/deepMerge');
 const __packageJson = require('../../../../package.json');
 const __sugarConfig = require('../../../../node/config/sugar');
@@ -9,6 +6,7 @@ const __SConfig = require('../../../../node/config/SConfig');
 const __SConfigFsAdapter = require('../../../../node/config/adapters/SConfigFsAdapter');
 const __packageRoot = require('../../../../node/path/packageRoot');
 
+const __SPhpServerCommand = require('../../../../node/server/commands/SPhpServerCommand');
 const __SCommandPanel = require('../../../../node/blessed/SCommandPanel');
 const __SBuildScssCommand = require('../../../../node/build/commands/SBuildScssCommand');
 
@@ -69,10 +67,11 @@ module.exports = class SugarTermApp extends __SApp {
     new __SBuildScssCommand();
     new __SBuildScssCommand();
     new __SBuildScssCommand();
-    new __SBuildScssCommand();
+    // new __SBuildScssCommand();
+    new __SPhpServerCommand();
 
     // const scssCommand = ;
-    const panel = new __SCommandPanel('build');
+    const panel = new __SCommandPanel('+(build|server)');
     this.append(panel);
   }
 };

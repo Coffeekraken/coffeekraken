@@ -455,15 +455,51 @@ module.exports = class SCommand extends __SPromise {
    */
   _initKey() {
     if (!this._settings.key) return;
-    __hotkey(this._settings.key, {
+    __hotkey(`ctrl+${this._settings.key}`, {
       activeSpace: this._settings.namespace || null
-    }).on('press', () => {
+    }).on('press', (keyObj) => {
       if (this.isRunning() && !this._settings.concurrent) {
         this.kill();
       } else {
         this.run();
       }
     });
+    __hotkey(`shift+${this._settings.key}`, {
+      activeSpace: this._settings.namespace || null
+    }).on('press', async (keyObj) => {
+      if (this.isRunning() && !this._settings.concurrent) {
+        this.kill();
+      } else {
+        const answer = await this._ask({
+          type: 'summary',
+          items: this._buildSummaryItems()
+        });
+        if (!Array.isArray(answer)) return;
+        const args = {};
+        answer.forEach((item) => {
+          args[item.id] = item.value;
+        });
+
+        this.run(args);
+      }
+    });
+  }
+
+  _buildSummaryItems(args = this._settings.args) {
+    if (!this._settings.definition) return false;
+    const items = [];
+    Object.keys(this._settings.definition).forEach((argName) => {
+      const definitionObj = this._settings.definition[argName];
+      const argValue =
+        args[argName] !== undefined ? args[argName] : definitionObj.default;
+      if (definitionObj.level !== 1) return;
+      items.push({
+        id: argName,
+        text: definitionObj.description,
+        default: argValue
+      });
+    });
+    return items;
   }
 
   /**
@@ -725,64 +761,32 @@ module.exports = class SCommand extends __SPromise {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  // _ask(question) {
-  //   const _this = this;
-  //   return new __SPromise(
-  //     (resolve, reject, trigger, cancel) => {
-  //       switch (question.type) {
-  //         case 'input':
-  //           this.trigger('ask', {
-  //             ...question,
-  //             get commandObj() {
-  //               return _this;
-  //             },
-  //             resolve,
-  //             reject,
-  //             question:
-  //               question.question ||
-  //               'You need to specify a question using the "question" property of the ask object...'
-  //           });
-  //           break;
-  //         case 'summary':
-  //           this.trigger('ask', {
-  //             get commandObj() {
-  //               return _this;
-  //             },
-  //             resolve,
-  //             reject,
-  //             items: question.items,
-  //             question:
-  //               question.question ||
-  //               `Are that command details ok for you? (y/n)`,
-  //             type: 'summary'
-  //           });
-  //           break;
-  //         case 'confirm':
-  //         case 'boolean':
-  //         default:
-  //           this.trigger('ask', {
-  //             get commandObj() {
-  //               return _this;
-  //             },
-  //             question:
-  //               question.querstion || question.type === 'confirm'
-  //                 ? `Would you really like to launch the "${this.name}" command? (y/n)`
-  //                 : `You need to specify a question using the "question" property of the ask object...`,
-  //             type: question.type || 'confirm'
-  //           });
-  //           __hotkey('y,n', {
-  //             once: true
-  //           }).on('key', (key) => {
-  //             resolve(key === 'y');
-  //           });
-  //           break;
-  //       }
-  //     },
-  //     {
-  //       cancelDefaultReturn: '__canceled__'
-  //     }
-  //   ).start();
-  // }
+  _ask(question) {
+    const _this = this;
+    return new __SPromise(
+      (resolve, reject, trigger, cancel) => {
+        switch (question.type) {
+          case 'summary':
+            this.trigger('ask', {
+              get commandInstance() {
+                return _this;
+              },
+              resolve,
+              reject,
+              items: question.items,
+              question:
+                question.question ||
+                `Are that command details ok for you? (y/n)`,
+              type: 'summary'
+            });
+            break;
+        }
+      },
+      {
+        cancelDefaultReturn: '__canceled__'
+      }
+    ).start();
+  }
 
   /**
    * @name                 _check

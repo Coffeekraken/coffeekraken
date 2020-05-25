@@ -7,7 +7,6 @@ const __SFooter = require('./SFooter');
 const __get = require('../object/get');
 const __parseSchema = require('../url/parseSchema');
 const __SProcess = require('../terminal/SProcess');
-const __SProcessPanel = require('../blessed/SProcessPanel');
 
 /**
  * @name                  SApp
@@ -202,10 +201,10 @@ module.exports = class SApp extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   exec(command) {
-    if (!Array.isArray(command)) command = [command];
-    const process = new __SProcess(command, {});
-    const processPanel = new __SProcessPanel(process, {});
-    this.append(processPanel);
+    // if (!Array.isArray(command)) command = [command];
+    // const process = new __SProcess(command, {});
+    // const processPanel = new __SProcessPanel(process, {});
+    // this.append(processPanel);
   }
 
   /**
@@ -223,8 +222,8 @@ module.exports = class SApp extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   process(process) {
-    const processPanel = new __SProcessPanel(process, {});
-    this.append(processPanel);
+    // const processPanel = new __SProcessPanel(process, {});
+    // this.append(processPanel);
   }
 
   /**

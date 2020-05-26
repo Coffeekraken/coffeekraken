@@ -2,6 +2,8 @@
 
 var _toString = _interopRequireDefault(require("../string/toString"));
 
+var _parseArgs = _interopRequireDefault(require("./parseArgs"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -20,6 +22,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *    - default: The default value if nothing is specified
  *    - regexp: A regexp that is used to validate the passed value
  *    - validator: A function to validate the passed value. Has to return true or false
+ * @param       {Boolean}     [includeAllArgs = true]       Specify if you want all the arguments in the definition object in your command line string, or if you just want the one passed in your argsObj argument
  *
  * @example       js
  * import argsToString from '@coffeekraken/sugar/js/cli/argsToString';
@@ -48,12 +51,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 // TODO: support deep object structure
 // TODO: support required args
-module.exports = function argsToString(args, definition) {
+module.exports = function argsToString(args, definition, includeAllArgs = true) {
+  if (typeof args === 'string') {
+    args = (0, _parseArgs.default)(args, definition);
+  }
+
   const cliArray = []; // loop on passed args
 
   Object.keys(definition).forEach(argName => {
     const defObj = definition[argName];
     if (!defObj) return;
+    if (!includeAllArgs && args[argName] === undefined) return;
     const prefix = defObj.alias ? `-${defObj.alias}` : `--${argName}`;
     let value = args[argName] || definition[argName].default;
 

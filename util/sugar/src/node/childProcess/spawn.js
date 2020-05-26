@@ -30,10 +30,11 @@ module.exports = function spawn(
   settings = null
 ) {
   let childProcess;
-
-  return new __SPromise((resolve, reject, trigger, cancel) => {
+  const promise = new __SPromise((resolve, reject, trigger, cancel) => {
     const defaultSettings = {
-      shell: true,
+      // shell: true,
+      // detached: true,
+      // stdio: 'inherit',
       env: {
         ...process.env,
         IS_CHILD_PROCESS: true
@@ -145,10 +146,28 @@ module.exports = function spawn(
       });
     });
   })
-    .on('cancel,finally', () => {
+    .on('cancel,finally', () => {})
+    .start();
+
+  const _promiseCancel = promise.cancel.bind(promise);
+  promise.cancel = () => {
+    return new Promise((resolve, reject) => {
       const pid = childProcess.pid;
       // childProcess && childProcess.kill('SIGTERM');
-      if (pid) __tkill(pid);
-    })
-    .start();
+      // if (pid) console.log(`kill -9 ${pid}`);
+      // __childProcess.spawn(`kill -9 ${pid}`);
+      if (pid) {
+        __tkill(pid, 'SIGTERM', (e) => {
+          if (e) {
+            reject(e);
+          } else {
+            resolve();
+          }
+          _promiseCancel(e);
+        });
+      }
+    });
+  };
+
+  return promise;
 };

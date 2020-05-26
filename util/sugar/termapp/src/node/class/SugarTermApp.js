@@ -6,7 +6,7 @@ const __SConfig = require('../../../../node/config/SConfig');
 const __SConfigFsAdapter = require('../../../../node/config/adapters/SConfigFsAdapter');
 const __packageRoot = require('../../../../node/path/packageRoot');
 
-const __SPhpServerCommand = require('../../../../node/server/commands/SPhpServerCommand');
+const __SPhpServerCommand = require('../../../../node/server/SPhpServerCommand');
 const __SCommandPanel = require('../../../../node/blessed/SCommandPanel');
 const __SBuildScssCommand = require('../../../../node/build/commands/SBuildScssCommand');
 

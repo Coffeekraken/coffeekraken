@@ -25,11 +25,17 @@ var _rgba2hsv = _interopRequireDefault(require("./rgba2hsv"));
 
 var _rgba2hsl = _interopRequireDefault(require("./rgba2hsl"));
 
-var _parse = _interopRequireDefault(require("./parse"));
+var _parse2 = _interopRequireDefault(require("./parse"));
 
 var _convert = _interopRequireDefault(require("./convert"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -72,7 +78,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * @since     2.0.0
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-class SColor {
+let SColor = /*#__PURE__*/function () {
   /**
    * @name                colors
    * @type                Object
@@ -160,7 +166,9 @@ class SColor {
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(color, settings = {}) {
+  function SColor(color, settings = {}) {
+    _classCallCheck(this, SColor);
+
     _defineProperty(this, "_originalSColor", null);
 
     _defineProperty(this, "_r", null);
@@ -196,779 +204,805 @@ class SColor {
    */
 
 
-  getColor(color) {
-    // try to get the color from the map
-    if (typeof color == 'string' && SColor.colors[color.toLowerCase()]) {
-      return SColor.colors[color.toLowerCase()];
-    } // return the passed color
+  _createClass(SColor, [{
+    key: "getColor",
+    value: function getColor(color) {
+      // try to get the color from the map
+      if (typeof color == 'string' && SColor.colors[color.toLowerCase()]) {
+        return SColor.colors[color.toLowerCase()];
+      } // return the passed color
 
 
-    return color;
-  }
-  /**
-   * @name            _parse
-   * @type            Function
-   * @private
-   *
-   * Parse
-   *
-   * @param       {object}      color       The color to parse like (#ff0000 | rgba(...) | hsl(...) | hsv(...) | {r:255,r:140,b:23,a:40})
-   * @return      {object}                  The rgba representation of the passed color
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-
-
-  _parse(color) {
-    // parse the color
-    color = (0, _convert.default)(color, 'rgba'); // assign new color values
-
-    this.r = color.r;
-    this.g = color.g;
-    this.b = color.b;
-    this.a = color.a; // return the parsed color
-
-    return color;
-  }
-  /**
-   * @name              convert2
-   * @type              Function
-   * @private
-   *
-   * Concert color
-   *
-   * @param       	{string}      	format 	      	The format wanted as output like (rgba,hsl,hsv and hex)
-   * @values        rgba, hsl, hsv, hex
-   * @return      	{object} 	                			The color in wanted object format
-   *
-   * @example           js
-   * myColor._convert2('rgba');
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-
-
-  _convert2(format) {
-    switch (format) {
-      case 'rgba':
-        return {
-          r: this.r,
-          g: this.g,
-          b: this.b,
-          a: this.a
-        };
-        break;
-
-      case 'hsl':
-        return (0, _rgba2hsl.default)(this.r, this.g, this.b, this.a);
-        break;
-
-      case 'hsv':
-        return (0, _rgba2hsv.default)(this.r, this.g, this.b, this.a);
-        break;
-
-      case 'hex':
-        return (0, _rgba2hex.default)(this.r, this.g, this.b, this.a);
-        break;
+      return color;
     }
-  }
-  /**
-   * @name                toHex
-   * @type                Function
-   *
-   * To hex
-   *
-   * @return 	{string} 		The hex string representation
-   *
-   * @example           js
-   * myColor.toHex();
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
+    /**
+     * @name            _parse
+     * @type            Function
+     * @private
+     *
+     * Parse
+     *
+     * @param       {object}      color       The color to parse like (#ff0000 | rgba(...) | hsl(...) | hsv(...) | {r:255,r:140,b:23,a:40})
+     * @return      {object}                  The rgba representation of the passed color
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
 
+  }, {
+    key: "_parse",
+    value: function _parse(color) {
+      // parse the color
+      color = (0, _convert.default)(color, 'rgba'); // assign new color values
 
-  toHex() {
-    return this._convert2('hex');
-  }
-  /**
-   * @name            toHsl
-   * @type            Function
-   *
-   * To hsl
-   *
-   * @return 	{object} 		The hsl object representation
-   *
-   * @example       js
-   * myColor.toHsl();
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
+      this.r = color.r;
+      this.g = color.g;
+      this.b = color.b;
+      this.a = color.a; // return the parsed color
 
-
-  toHsl() {
-    return this._convert2('hsl');
-  }
-  /**
-   * @name              toHsv
-   * @type              Function
-   *
-   * To hsv
-   *
-   * @return 	{object} 		The hsv object representation
-   *
-   * @example         js
-   * myColor.toHsv();
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-
-
-  toHsv() {
-    return this._convert2('hsv');
-  }
-  /**
-   * @name            toRgba
-   * @type            Function
-   *
-   * To rgba
-   *
-   * @return 	{object} 		The rgba object representation
-   *
-   * @example         js
-   * myColor.toRgba();
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-
-
-  toRgba() {
-    return this._convert2('rgba');
-  }
-  /**
-   * @name            r
-   * @type            Number
-   *
-   * Get/set the red value
-   *
-   * @example         js
-   * myColor.r;
-   * myColor.r = 128;
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-
-
-  get r() {
-    return this._r;
-  }
-
-  set r(value) {
-    value = parseInt(value);
-    value = value > 255 ? 255 : value;
-    this._r = value;
-  }
-  /**
-   * @name              g
-   * @type              Number
-   *
-   * Get/set the green value
-   *
-   * @example         js
-   * myColor.g;
-   * myColor.g = 20;
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-
-
-  get g() {
-    return this._g;
-  }
-
-  set g(value) {
-    value = parseInt(value);
-    value = value > 255 ? 255 : value;
-    this._g = value;
-  }
-  /**
-   * @name              b
-   * @type              Number
-   *
-   * Get/set the blue value
-   *
-   * @example           js
-   * myColor.b;
-   * myColor.b = 30;
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-
-
-  get b() {
-    return this._b;
-  }
-
-  set b(value) {
-    value = parseInt(value);
-    value = value > 255 ? 255 : value;
-    this._b = value;
-  }
-  /**
-   * @name              a
-   * @type              Number
-   *
-   * Get/set the alpha value
-   *
-   * @example       js
-   * myColor.a;
-   * myColor.a = 20;
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-
-
-  get a() {
-    return this._a;
-  }
-
-  set a(value) {
-    value = parseFloat(value);
-    value = value > 1 ? 1 / 100 * value : value;
-    value = value > 1 ? 1 : value;
-    this._a = value;
-  }
-  /**
-   * @name              l
-   * @type              Number
-   *
-   * The luminence value
-   *
-   * @example             js
-   * myColor.l;
-   * myColor.l = 10;
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-
-
-  get l() {
-    return this._convert2('hsl').l;
-  }
-
-  set l(value) {
-    let hsl = this._convert2('hsl');
-
-    value = parseInt(value);
-    value = value > 100 ? 100 : value;
-    hsl.l = value;
-    let rgba = (0, _hsl2rgba.default)(hsl.h, hsl.s, hsl.l);
-    this.r = rgba.r;
-    this.g = rgba.g;
-    this.b = rgba.b;
-  }
-  /**
-   * @name              s
-   * @type              Number
-   *
-   * The saturation value
-   *
-   * @example         js
-   * myColor.s;
-   * myColor.s = 20;
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-
-
-  get s() {
-    return this._convert2('hsl').s;
-  }
-
-  set s(value) {
-    let hsl = this._convert2('hsl');
-
-    value = parseInt(value);
-    value = value > 100 ? 100 : value;
-    hsl.s = value;
-    let rgba = (0, _hsl2rgba.default)(hsl.h, hsl.s, hsl.l);
-    this.r = rgba.r;
-    this.g = rgba.g;
-    this.b = rgba.b;
-  }
-  /**
-   * @name                  v
-   * @type                  Number
-   *
-   * The value of the HSV format
-   *
-   * @example         js
-   * myColor.v;
-   * myColor.v = 20;
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-
-
-  get v() {
-    return this._convert2('hsv').v;
-  }
-
-  set v(value) {
-    let hsv = this._convert2('hsv');
-
-    value = parseInt(value);
-    value = value > 100 ? 100 : value;
-    hsv.v = value;
-    let rgba = (0, _hsv2rgba.default)(hsv.h, hsv.s, hsv.v);
-    this.r = rgba.r;
-    this.g = rgba.g;
-    this.b = rgba.b;
-  }
-  /**
-   * @name              h
-   * @type              Number
-   *
-   * Get/set the hue
-   *
-   * @example         js
-   * myColor.h;
-   * myColor.h = 30;
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-
-
-  get h() {
-    return this._convert2('hsl').h;
-  }
-
-  set h(value) {
-    let hsl = this._convert2('hsl');
-
-    value = parseInt(value);
-    value = value > 360 ? 360 : value;
-    hsl.h = value;
-    let rgba = (0, _hsl2rgba.default)(hsl.h, hsl.s, hsl.l);
-    this.r = rgba.r;
-    this.g = rgba.g;
-    this.b = rgba.b;
-  }
-  /**
-   * @name          reset
-   * @type          Function
-   *
-   * Reset to the original color
-   *
-   * @example         js
-   * myColor.reset();
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-
-
-  reset() {
-    // parse again the color
-    this._parse(this._originalSColor);
-  }
-  /**
-   * @name                desaturate
-   * @type                Function
-   *
-   * Desaturate
-   *
-   * @param         	{Number} 	          amount 	        	The amount of desaturation wanted between 0-100
-   * @param           {Boolean}           [returnNewInstance=this._settings.returnNewInstance]        Specify if you want back a new SColor instance of the actual one
-   * @return 	        {SColor} 			                      	A new SColor instance or the actual one
-   *
-   * @example           js
-   * myColor.desaturate(20);
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-
-
-  desaturate(amount, returnNewInstance = this._settings.returnNewInstance) {
-    amount = parseInt(amount);
-
-    if (returnNewInstance) {
-      const n = new SColor(this.toHex());
-      n.s -= amount;
-      return n;
+      return color;
     }
+    /**
+     * @name              convert2
+     * @type              Function
+     * @private
+     *
+     * Concert color
+     *
+     * @param       	{string}      	format 	      	The format wanted as output like (rgba,hsl,hsv and hex)
+     * @values        rgba, hsl, hsv, hex
+     * @return      	{object} 	                			The color in wanted object format
+     *
+     * @example           js
+     * myColor._convert2('rgba');
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
 
-    this.s -= amount;
-    return this;
-  }
-  /**
-   * @name                saturate
-   * @type                Function
-   *
-   * Saturate
-   *
-   * @param         	{Number}        	amount 	            	The amount of saturation wanted between 0-100
-   * @param           {Boolean}           [returnNewInstance=this._settings.returnNewInstance]        Specify if you want back a new SColor instance of the actual one
-   * @return 	        {SColor} 			                         	A new SColor instance or the actual one
-   *
-   * @example         js
-   * myColor.saturate(20);
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
+  }, {
+    key: "_convert2",
+    value: function _convert2(format) {
+      switch (format) {
+        case 'rgba':
+          return {
+            r: this.r,
+            g: this.g,
+            b: this.b,
+            a: this.a
+          };
+          break;
 
+        case 'hsl':
+          return (0, _rgba2hsl.default)(this.r, this.g, this.b, this.a);
+          break;
 
-  saturate(amount, returnNewInstance = this._settings.returnNewInstance) {
-    amount = parseInt(amount);
+        case 'hsv':
+          return (0, _rgba2hsv.default)(this.r, this.g, this.b, this.a);
+          break;
 
-    if (returnNewInstance) {
-      const n = new SColor(this.toHex());
-      n.s += amount;
-      return n;
+        case 'hex':
+          return (0, _rgba2hex.default)(this.r, this.g, this.b, this.a);
+          break;
+      }
     }
+    /**
+     * @name                toHex
+     * @type                Function
+     *
+     * To hex
+     *
+     * @return 	{string} 		The hex string representation
+     *
+     * @example           js
+     * myColor.toHex();
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
 
-    this.s += amount;
-    return this;
-  }
-  /**
-   * @name                      grayscale
-   * @type                      Function
-   *
-   * Return a new SColor instance of the color to grayscale
-   *
-   * @param           {Boolean}           [returnNewInstance=this._settings.returnNewInstance]        Specify if you want back a new SColor instance of the actual one
-   * @return 	{SColor} 			A new SColor instance or the actual one
-   *
-   * @example           js
-   * myColor.grayscale();
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-
-
-  grayscale(returnNewInstance = this._settings.returnNewInstance) {
-    if (returnNewInstance) {
-      const n = new SColor(this.toHex());
-      n.s = 0;
-      return n;
+  }, {
+    key: "toHex",
+    value: function toHex() {
+      return this._convert2('hex');
     }
+    /**
+     * @name            toHsl
+     * @type            Function
+     *
+     * To hsl
+     *
+     * @return 	{object} 		The hsl object representation
+     *
+     * @example       js
+     * myColor.toHsl();
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
 
-    this.s = 0;
-    return this;
-  }
-  /**
-   * @name              spin
-   * @type              Function
-   *
-   * Spin the hue on the passed value (max 360)
-   *
-   * @param             	{Number}            	amount 		          	The amount of hue spin wanted between 0-360
-   * @param           {Boolean}           [returnNewInstance=this._settings.returnNewInstance]        Specify if you want back a new SColor instance of the actual one
-   * @return 	            {SColor} 				                          	A new SColor instance or the actual one
-   *
-   * @example           js
-   * myColor.spin(230);
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-
-
-  spin(amount, returnNewInstance = this._settings.returnNewInstance) {
-    amount = parseInt(amount);
-    let hue = this.h;
-    let newHue = hue + amount;
-
-    if (newHue > 360) {
-      newHue -= 360;
+  }, {
+    key: "toHsl",
+    value: function toHsl() {
+      return this._convert2('hsl');
     }
+    /**
+     * @name              toHsv
+     * @type              Function
+     *
+     * To hsv
+     *
+     * @return 	{object} 		The hsv object representation
+     *
+     * @example         js
+     * myColor.toHsv();
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
 
-    if (returnNewInstance) {
-      const n = new SColor(this.toHex());
-      n.h = newHue;
-      return n;
+  }, {
+    key: "toHsv",
+    value: function toHsv() {
+      return this._convert2('hsv');
     }
+    /**
+     * @name            toRgba
+     * @type            Function
+     *
+     * To rgba
+     *
+     * @return 	{object} 		The rgba object representation
+     *
+     * @example         js
+     * myColor.toRgba();
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
 
-    this.h = newHue;
-    return this;
-  }
-  /**
-   * @name              transparentize
-   * @type              Function
-   *
-   * Transparentize
-   *
-   * @param             	{Number} 	          	amount 		          	The amount of transparence to apply between 0-100|0-1
-   * @param           {Boolean}           [returnNewInstance=this._settings.returnNewInstance]        Specify if you want back a new SColor instance of the actual one
-   * @return            	{SColor} 					                        	A new SColor instance or the actual one
-   *
-   * @example           js
-   * myColor.transparenize(30);
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-
-
-  transparentize(amount, returnNewInstance = this._settings.returnNewInstance) {
-    amount = parseFloat(amount);
-
-    if (returnNewInstance) {
-      const n = new SColor(this.toHex());
-      n.a -= amount;
-      return n;
+  }, {
+    key: "toRgba",
+    value: function toRgba() {
+      return this._convert2('rgba');
     }
+    /**
+     * @name            r
+     * @type            Number
+     *
+     * Get/set the red value
+     *
+     * @example         js
+     * myColor.r;
+     * myColor.r = 128;
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
 
-    this.a -= amount;
-    return this;
-  }
-  /**
-   * @name                alpha
-   * @type                Function
-   *
-   * Set the alpha
-   *
-   * @param           	{Number} 	            alpha 		            	The new alpha value to apply between 0-100|0-1
-   * @param           {Boolean}           [returnNewInstance=this._settings.returnNewInstance]        Specify if you want back a new SColor instance of the actual one
-   * @return          	{SColor} 					                            A new SColor instance or the actual one
-   *
-   * @example           js
-   * myColor.alpha(10);
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
+  }, {
+    key: "reset",
 
-
-  alpha(alpha, returnNewInstance = this._settings.returnNewInstance) {
-    alpha = parseFloat(alpha);
-
-    if (returnNewInstance) {
-      const n = new SColor(this.toHex());
-      n.a = alpha;
-      return n;
+    /**
+     * @name          reset
+     * @type          Function
+     *
+     * Reset to the original color
+     *
+     * @example         js
+     * myColor.reset();
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    value: function reset() {
+      // parse again the color
+      this._parse(this._originalSColor);
     }
+    /**
+     * @name                desaturate
+     * @type                Function
+     *
+     * Desaturate
+     *
+     * @param         	{Number} 	          amount 	        	The amount of desaturation wanted between 0-100
+     * @param           {Boolean}           [returnNewInstance=this._settings.returnNewInstance]        Specify if you want back a new SColor instance of the actual one
+     * @return 	        {SColor} 			                      	A new SColor instance or the actual one
+     *
+     * @example           js
+     * myColor.desaturate(20);
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
 
-    this.a = alpha;
-    return this;
-  }
-  /**
-   * @name                  opacity
-   * @type                  Function
-   *
-   * Set the opacity (alias for alpha)
-   *
-   * @param 	                {Number}          	opacity 	              	The new opacity value to apply between 0-100|0-1
-   * @param           {Boolean}           [returnNewInstance=this._settings.returnNewInstance]        Specify if you want back a new SColor instance of the actual one
-   * @return                	{SColor} 			                            		A new SColor instance or the actual one
-   *
-   * @example               js
-   * myColor.opacity(20);
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
+  }, {
+    key: "desaturate",
+    value: function desaturate(amount, returnNewInstance = this._settings.returnNewInstance) {
+      amount = parseInt(amount);
 
+      if (returnNewInstance) {
+        const n = new SColor(this.toHex());
+        n.s -= amount;
+        return n;
+      }
 
-  opacity(opacity, returnNewInstance = this._settings.returnNewInstance) {
-    return this.alpha(opacity, returnNewInstance);
-  }
-  /**
-   * @name                  opacify
-   * @type                  Function
-   *
-   * Opacify
-   *
-   * @param 	          {Number} 	            amount 		              The amount of transparence to remove between 0-100|0-1
-   * @param           {Boolean}           [returnNewInstance=this._settings.returnNewInstance]        Specify if you want back a new SColor instance of the actual one
-   * @return          	{SColor} 			                              	A new SColor instance or the actual one
-   *
-   * @example           js
-   * myColor.opacify(18);
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-
-
-  opacify(amount, returnNewInstance = this._settings.returnNewInstance) {
-    amount = parseFloat(amount);
-
-    if (returnNewInstance) {
-      const n = new SColor(this.toHex());
-      n.a += amount;
-      return n;
+      this.s -= amount;
+      return this;
     }
+    /**
+     * @name                saturate
+     * @type                Function
+     *
+     * Saturate
+     *
+     * @param         	{Number}        	amount 	            	The amount of saturation wanted between 0-100
+     * @param           {Boolean}           [returnNewInstance=this._settings.returnNewInstance]        Specify if you want back a new SColor instance of the actual one
+     * @return 	        {SColor} 			                         	A new SColor instance or the actual one
+     *
+     * @example         js
+     * myColor.saturate(20);
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
 
-    this.a += amount;
-    return this;
-  }
-  /**
-   * @name                  darken
-   * @type                  Function
-   *
-   * Darken
-   *
-   * @param                 	{Number} 	                amount 	                	The amount of darkness (of the nightmare of the shadow) to apply between 0-100
-   * @param           {Boolean}           [returnNewInstance=this._settings.returnNewInstance]        Specify if you want back a new SColor instance of the actual one
-   * @return                	{SColor} 				                                    A new SColor instance or the actual one
-   *
-   * @example             js
-   * myColor.darken(20);
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
+  }, {
+    key: "saturate",
+    value: function saturate(amount, returnNewInstance = this._settings.returnNewInstance) {
+      amount = parseInt(amount);
 
+      if (returnNewInstance) {
+        const n = new SColor(this.toHex());
+        n.s += amount;
+        return n;
+      }
 
-  darken(amount, returnNewInstance = this._settings.returnNewInstance) {
-    amount = parseInt(amount);
-
-    if (returnNewInstance) {
-      const n = new SColor(this.toHex());
-      n.l -= amount;
-      return n;
+      this.s += amount;
+      return this;
     }
+    /**
+     * @name                      grayscale
+     * @type                      Function
+     *
+     * Return a new SColor instance of the color to grayscale
+     *
+     * @param           {Boolean}           [returnNewInstance=this._settings.returnNewInstance]        Specify if you want back a new SColor instance of the actual one
+     * @return 	{SColor} 			A new SColor instance or the actual one
+     *
+     * @example           js
+     * myColor.grayscale();
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
 
-    this.l -= amount;
-    return this;
-  }
-  /**
-   * @name                      lighten
-   * @type                      Function
-   *
-   * Lighten
-   *
-   * @param 	              {Number} 	              amount 	                	The amount of lightness (of the sky of the angels) to apply between 0-100
-   * @param           {Boolean}           [returnNewInstance=this._settings.returnNewInstance]        Specify if you want back a new SColor instance of the actual one
-   * @return                	{SColor} 			                                  	A new SColor instance or the actual one
-   *
-   * @example             js
-   * myColor.lighten(20);
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
+  }, {
+    key: "grayscale",
+    value: function grayscale(returnNewInstance = this._settings.returnNewInstance) {
+      if (returnNewInstance) {
+        const n = new SColor(this.toHex());
+        n.s = 0;
+        return n;
+      }
 
-
-  lighten(amount, returnNewInstance = this._settings.returnNewInstance) {
-    amount = parseInt(amount);
-
-    if (returnNewInstance) {
-      const n = new SColor(this.toHex());
-      n.l += amount;
-      return n;
+      this.s = 0;
+      return this;
     }
+    /**
+     * @name              spin
+     * @type              Function
+     *
+     * Spin the hue on the passed value (max 360)
+     *
+     * @param             	{Number}            	amount 		          	The amount of hue spin wanted between 0-360
+     * @param           {Boolean}           [returnNewInstance=this._settings.returnNewInstance]        Specify if you want back a new SColor instance of the actual one
+     * @return 	            {SColor} 				                          	A new SColor instance or the actual one
+     *
+     * @example           js
+     * myColor.spin(230);
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
 
-    this.l += amount;
-    return this;
-  }
-  /**
-   * @name                  toHexString
-   * @type                  Function
-   *
-   * To hex string
-   *
-   * @return 	            {string} 	              	The hex string representation of the color
-   *
-   * @example           js
-   * myColor.toHexString();
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
+  }, {
+    key: "spin",
+    value: function spin(amount, returnNewInstance = this._settings.returnNewInstance) {
+      amount = parseInt(amount);
+      let hue = this.h;
+      let newHue = hue + amount;
 
+      if (newHue > 360) {
+        newHue -= 360;
+      }
 
-  toHexString() {
-    return this._convert2('hex');
-  }
-  /**
-   * @name                  toRgbaString
-   * @type                  Function
-   *
-   * To rgba string
-   *
-   * @return 	              {string} 	              	The rgba string representation of the color
-   *
-   * @example           js
-   * myColor.toRgbaString();
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
+      if (returnNewInstance) {
+        const n = new SColor(this.toHex());
+        n.h = newHue;
+        return n;
+      }
 
-
-  toRgbaString() {
-    return `rgba(${this._r},${this._g},${this._b},${this._a})`;
-  }
-  /**
-   * @name                    toHslString
-   * @type                    Function
-   *
-   * To hsl string
-   *
-   * @return 	              {string} 	              	The hsl string representation of the color
-   *
-   * @example             js
-   * myColor.toHslString();
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-
-
-  toHslString() {
-    const hsl = this._convert2('hsl');
-
-    return `hsl(${hsl.h},${hsl.s},${hsl.l})`;
-  }
-  /**
-   * @name                      toHsvString
-   * @type                      Function
-   *
-   * To hsv string
-   *
-   * @return              	{string} 	              	The hsv string representation of the color
-   *
-   * @example           js
-   * myColor.toHsvString();
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-
-
-  toHsvString() {
-    const hsv = this._convert2('hsv');
-
-    return `hsv(${hsv.h},${hsv.s},${hsv.v})`;
-  }
-  /**
-   * @name                toString
-   * @type                Function
-   *
-   * To string
-   *
-   * @param       {String}              [format=this._settings.defaultFormat]                The format you want back
-   * @values        hex,hsl,hsv,rgba
-   * @return 	      {string} 		                                                      The rgba string representation of the color
-   *
-   * @example         js
-   * myColor.toString();
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-
-
-  toString(format = this._settings.defaultFormat) {
-    switch (format) {
-      case 'hex':
-        return this.toHexString();
-        break;
-
-      case 'hsl':
-        return this.toHslString();
-        break;
-
-      case 'hsv':
-        return this.toHsvString();
-        break;
-
-      case 'rgba':
-      default:
-        return this.toRgbaString();
-        break;
+      this.h = newHue;
+      return this;
     }
-  }
+    /**
+     * @name              transparentize
+     * @type              Function
+     *
+     * Transparentize
+     *
+     * @param             	{Number} 	          	amount 		          	The amount of transparence to apply between 0-100|0-1
+     * @param           {Boolean}           [returnNewInstance=this._settings.returnNewInstance]        Specify if you want back a new SColor instance of the actual one
+     * @return            	{SColor} 					                        	A new SColor instance or the actual one
+     *
+     * @example           js
+     * myColor.transparenize(30);
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
 
-} // // inject sugar css colors into class
+  }, {
+    key: "transparentize",
+    value: function transparentize(amount, returnNewInstance = this._settings.returnNewInstance) {
+      amount = parseFloat(amount);
+
+      if (returnNewInstance) {
+        const n = new SColor(this.toHex());
+        n.a -= amount;
+        return n;
+      }
+
+      this.a -= amount;
+      return this;
+    }
+    /**
+     * @name                alpha
+     * @type                Function
+     *
+     * Set the alpha
+     *
+     * @param           	{Number} 	            alpha 		            	The new alpha value to apply between 0-100|0-1
+     * @param           {Boolean}           [returnNewInstance=this._settings.returnNewInstance]        Specify if you want back a new SColor instance of the actual one
+     * @return          	{SColor} 					                            A new SColor instance or the actual one
+     *
+     * @example           js
+     * myColor.alpha(10);
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "alpha",
+    value: function alpha(_alpha, returnNewInstance = this._settings.returnNewInstance) {
+      _alpha = parseFloat(_alpha);
+
+      if (returnNewInstance) {
+        const n = new SColor(this.toHex());
+        n.a = _alpha;
+        return n;
+      }
+
+      this.a = _alpha;
+      return this;
+    }
+    /**
+     * @name                  opacity
+     * @type                  Function
+     *
+     * Set the opacity (alias for alpha)
+     *
+     * @param 	                {Number}          	opacity 	              	The new opacity value to apply between 0-100|0-1
+     * @param           {Boolean}           [returnNewInstance=this._settings.returnNewInstance]        Specify if you want back a new SColor instance of the actual one
+     * @return                	{SColor} 			                            		A new SColor instance or the actual one
+     *
+     * @example               js
+     * myColor.opacity(20);
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "opacity",
+    value: function opacity(_opacity, returnNewInstance = this._settings.returnNewInstance) {
+      return this.alpha(_opacity, returnNewInstance);
+    }
+    /**
+     * @name                  opacify
+     * @type                  Function
+     *
+     * Opacify
+     *
+     * @param 	          {Number} 	            amount 		              The amount of transparence to remove between 0-100|0-1
+     * @param           {Boolean}           [returnNewInstance=this._settings.returnNewInstance]        Specify if you want back a new SColor instance of the actual one
+     * @return          	{SColor} 			                              	A new SColor instance or the actual one
+     *
+     * @example           js
+     * myColor.opacify(18);
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "opacify",
+    value: function opacify(amount, returnNewInstance = this._settings.returnNewInstance) {
+      amount = parseFloat(amount);
+
+      if (returnNewInstance) {
+        const n = new SColor(this.toHex());
+        n.a += amount;
+        return n;
+      }
+
+      this.a += amount;
+      return this;
+    }
+    /**
+     * @name                  darken
+     * @type                  Function
+     *
+     * Darken
+     *
+     * @param                 	{Number} 	                amount 	                	The amount of darkness (of the nightmare of the shadow) to apply between 0-100
+     * @param           {Boolean}           [returnNewInstance=this._settings.returnNewInstance]        Specify if you want back a new SColor instance of the actual one
+     * @return                	{SColor} 				                                    A new SColor instance or the actual one
+     *
+     * @example             js
+     * myColor.darken(20);
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "darken",
+    value: function darken(amount, returnNewInstance = this._settings.returnNewInstance) {
+      amount = parseInt(amount);
+
+      if (returnNewInstance) {
+        const n = new SColor(this.toHex());
+        n.l -= amount;
+        return n;
+      }
+
+      this.l -= amount;
+      return this;
+    }
+    /**
+     * @name                      lighten
+     * @type                      Function
+     *
+     * Lighten
+     *
+     * @param 	              {Number} 	              amount 	                	The amount of lightness (of the sky of the angels) to apply between 0-100
+     * @param           {Boolean}           [returnNewInstance=this._settings.returnNewInstance]        Specify if you want back a new SColor instance of the actual one
+     * @return                	{SColor} 			                                  	A new SColor instance or the actual one
+     *
+     * @example             js
+     * myColor.lighten(20);
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "lighten",
+    value: function lighten(amount, returnNewInstance = this._settings.returnNewInstance) {
+      amount = parseInt(amount);
+
+      if (returnNewInstance) {
+        const n = new SColor(this.toHex());
+        n.l += amount;
+        return n;
+      }
+
+      this.l += amount;
+      return this;
+    }
+    /**
+     * @name                  toHexString
+     * @type                  Function
+     *
+     * To hex string
+     *
+     * @return 	            {string} 	              	The hex string representation of the color
+     *
+     * @example           js
+     * myColor.toHexString();
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "toHexString",
+    value: function toHexString() {
+      return this._convert2('hex');
+    }
+    /**
+     * @name                  toRgbaString
+     * @type                  Function
+     *
+     * To rgba string
+     *
+     * @return 	              {string} 	              	The rgba string representation of the color
+     *
+     * @example           js
+     * myColor.toRgbaString();
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "toRgbaString",
+    value: function toRgbaString() {
+      return `rgba(${this._r},${this._g},${this._b},${this._a})`;
+    }
+    /**
+     * @name                    toHslString
+     * @type                    Function
+     *
+     * To hsl string
+     *
+     * @return 	              {string} 	              	The hsl string representation of the color
+     *
+     * @example             js
+     * myColor.toHslString();
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "toHslString",
+    value: function toHslString() {
+      const hsl = this._convert2('hsl');
+
+      return `hsl(${hsl.h},${hsl.s},${hsl.l})`;
+    }
+    /**
+     * @name                      toHsvString
+     * @type                      Function
+     *
+     * To hsv string
+     *
+     * @return              	{string} 	              	The hsv string representation of the color
+     *
+     * @example           js
+     * myColor.toHsvString();
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "toHsvString",
+    value: function toHsvString() {
+      const hsv = this._convert2('hsv');
+
+      return `hsv(${hsv.h},${hsv.s},${hsv.v})`;
+    }
+    /**
+     * @name                toString
+     * @type                Function
+     *
+     * To string
+     *
+     * @param       {String}              [format=this._settings.defaultFormat]                The format you want back
+     * @values        hex,hsl,hsv,rgba
+     * @return 	      {string} 		                                                      The rgba string representation of the color
+     *
+     * @example         js
+     * myColor.toString();
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "toString",
+    value: function toString(format = this._settings.defaultFormat) {
+      switch (format) {
+        case 'hex':
+          return this.toHexString();
+          break;
+
+        case 'hsl':
+          return this.toHslString();
+          break;
+
+        case 'hsv':
+          return this.toHsvString();
+          break;
+
+        case 'rgba':
+        default:
+          return this.toRgbaString();
+          break;
+      }
+    }
+  }, {
+    key: "r",
+    get: function () {
+      return this._r;
+    },
+    set: function (value) {
+      value = parseInt(value);
+      value = value > 255 ? 255 : value;
+      this._r = value;
+    }
+    /**
+     * @name              g
+     * @type              Number
+     *
+     * Get/set the green value
+     *
+     * @example         js
+     * myColor.g;
+     * myColor.g = 20;
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "g",
+    get: function () {
+      return this._g;
+    },
+    set: function (value) {
+      value = parseInt(value);
+      value = value > 255 ? 255 : value;
+      this._g = value;
+    }
+    /**
+     * @name              b
+     * @type              Number
+     *
+     * Get/set the blue value
+     *
+     * @example           js
+     * myColor.b;
+     * myColor.b = 30;
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "b",
+    get: function () {
+      return this._b;
+    },
+    set: function (value) {
+      value = parseInt(value);
+      value = value > 255 ? 255 : value;
+      this._b = value;
+    }
+    /**
+     * @name              a
+     * @type              Number
+     *
+     * Get/set the alpha value
+     *
+     * @example       js
+     * myColor.a;
+     * myColor.a = 20;
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "a",
+    get: function () {
+      return this._a;
+    },
+    set: function (value) {
+      value = parseFloat(value);
+      value = value > 1 ? 1 / 100 * value : value;
+      value = value > 1 ? 1 : value;
+      this._a = value;
+    }
+    /**
+     * @name              l
+     * @type              Number
+     *
+     * The luminence value
+     *
+     * @example             js
+     * myColor.l;
+     * myColor.l = 10;
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "l",
+    get: function () {
+      return this._convert2('hsl').l;
+    },
+    set: function (value) {
+      let hsl = this._convert2('hsl');
+
+      value = parseInt(value);
+      value = value > 100 ? 100 : value;
+      hsl.l = value;
+      let rgba = (0, _hsl2rgba.default)(hsl.h, hsl.s, hsl.l);
+      this.r = rgba.r;
+      this.g = rgba.g;
+      this.b = rgba.b;
+    }
+    /**
+     * @name              s
+     * @type              Number
+     *
+     * The saturation value
+     *
+     * @example         js
+     * myColor.s;
+     * myColor.s = 20;
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "s",
+    get: function () {
+      return this._convert2('hsl').s;
+    },
+    set: function (value) {
+      let hsl = this._convert2('hsl');
+
+      value = parseInt(value);
+      value = value > 100 ? 100 : value;
+      hsl.s = value;
+      let rgba = (0, _hsl2rgba.default)(hsl.h, hsl.s, hsl.l);
+      this.r = rgba.r;
+      this.g = rgba.g;
+      this.b = rgba.b;
+    }
+    /**
+     * @name                  v
+     * @type                  Number
+     *
+     * The value of the HSV format
+     *
+     * @example         js
+     * myColor.v;
+     * myColor.v = 20;
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "v",
+    get: function () {
+      return this._convert2('hsv').v;
+    },
+    set: function (value) {
+      let hsv = this._convert2('hsv');
+
+      value = parseInt(value);
+      value = value > 100 ? 100 : value;
+      hsv.v = value;
+      let rgba = (0, _hsv2rgba.default)(hsv.h, hsv.s, hsv.v);
+      this.r = rgba.r;
+      this.g = rgba.g;
+      this.b = rgba.b;
+    }
+    /**
+     * @name              h
+     * @type              Number
+     *
+     * Get/set the hue
+     *
+     * @example         js
+     * myColor.h;
+     * myColor.h = 30;
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "h",
+    get: function () {
+      return this._convert2('hsl').h;
+    },
+    set: function (value) {
+      let hsl = this._convert2('hsl');
+
+      value = parseInt(value);
+      value = value > 360 ? 360 : value;
+      hsl.h = value;
+      let rgba = (0, _hsl2rgba.default)(hsl.h, hsl.s, hsl.l);
+      this.r = rgba.r;
+      this.g = rgba.g;
+      this.b = rgba.b;
+    }
+  }]);
+
+  return SColor;
+}(); // // inject sugar css colors into class
 // __domReady(() => {
 //   // get settings
 //   if (!__settings || !__settings.colors) return;

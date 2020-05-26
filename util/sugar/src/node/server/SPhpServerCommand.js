@@ -1,7 +1,7 @@
-const __SCommand = require('../../terminal/SCommand');
-const __deepMerge = require('../../object/deepMerge');
-const __argsToString = require('../../cli/argsToString');
-const __phpCli = require('../../../cli/server/php.cli');
+const __SCommand = require('../terminal/SCommand');
+const __deepMerge = require('../object/deepMerge');
+const __phpCli = require('../../cli/server/php.cli');
+const __SPhpServerCli = require('./SPhpServerCli');
 
 /**
  * @name              SPhpServerCommand
@@ -36,13 +36,13 @@ module.exports = class SPhpServerCommand extends __SCommand {
     // init command
     super(
       'server.php',
-      `sugar server.php`,
+      __SPhpServerCli.command,
       __deepMerge(
         {
           title: 'PHP Server',
           key: 'p',
           concurrent: false,
-          definition: __phpCli.definition,
+          definitionObj: __SPhpServerCli.definitionObj,
           args,
           namespace: 'server'
         },

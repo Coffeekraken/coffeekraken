@@ -63,7 +63,11 @@ function checkDefinitionObject(definitionObj) {
 
 
     if (!argDefinition.description) return `The property "description" for your argument "${argName}" is missing...`;
-    if (typeof argDefinition.description !== 'string') return `The property "description" of an argument definition object has to be a String. You've passed "${(0, _toString.default)(argDefinition.description)}" which is a "${typeof argDefinition.description}" for your argument "${argName}"...`;
+    if (typeof argDefinition.description !== 'string') return `The property "description" of an argument definition object has to be a String. You've passed "${(0, _toString.default)(argDefinition.description)}" which is a "${typeof argDefinition.description}" for your argument "${argName}"...`; // check level
+
+    if (argDefinition.level && typeof argDefinition.level !== 'number') {
+      return `The property "level" for your argument "${argName}" has to be a Number. You've passed "${(0, _toString.default)(argDefinition.level)}" which is a "${typeof argDefinition.level}"...`;
+    }
   } // return true
 
 

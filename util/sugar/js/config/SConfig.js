@@ -21,6 +21,12 @@ var _SConfigAdapter = _interopRequireDefault(require("./adapters/SConfigAdapter"
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 // TODO: Add a "catch" method that allows to get the saving errors, etc...
@@ -50,7 +56,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-class SConfig {
+let SConfig = /*#__PURE__*/function () {
   /**
    * @name              _name
    * @type              {String}
@@ -103,7 +109,9 @@ class SConfig {
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(name, settings = {}) {
+  function SConfig(name, settings = {}) {
+    _classCallCheck(this, SConfig);
+
     _defineProperty(this, "_name", null);
 
     _defineProperty(this, "_adapters", {});
@@ -175,148 +183,155 @@ class SConfig {
    */
 
 
-  load(adapter = this._settings.defaultAdapter) {
-    if (!this._adapters[adapter]) {
-      throw new Error(`You try to load the config from the adapter "${adapter}" but this adapter does not exists...`);
-    }
-
-    const config = this._adapters[adapter].instance.load();
-
-    if (config instanceof Promise) {
-      return new Promise(resolve => {
-        config.then(c => {
-          c = (0, _resolveTokens.default)(JSON.parse(JSON.stringify(c)));
-          this._adapters[adapter].config = c;
-          resolve(c);
-        });
-      });
-    }
-
-    this._adapters[adapter].config = config;
-    return config;
-  }
-  /**
-   * @name                          save
-   * @type                          Function
-   *
-   * Save the config through all the registered adapters or just the one specify in params
-   *
-   * @param           {String|Array}          [adapters=Object.keys(this._adapters)]        The adapters to save the config through
-   * @return          {Promise}                                                              A promise once all the adapters have correctly saved the config
-   *
-   * @example           js
-   * await config.save();
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-
-
-  save(adapters = Object.keys(this._adapters)) {
-    if (!this._settings.allowSave) {
-      throw new Error(`You try to save the config on the "${this._name}" SConfig instance but this instance does not allow to save configs... Set the "settings.allowSave" property to allow this action...`);
-    }
-
-    for (let i = 0; i < adapters.length; i++) {
-      const adapter = adapters[i];
-
-      if (adapter && !this._adapters[adapter]) {
-        throw new Error(`You try to save the config on the "${this._name}" SConfig instance using the adapter "${adapter}" but this adapter does not exists...`);
+  _createClass(SConfig, [{
+    key: "load",
+    value: function load(adapter = this._settings.defaultAdapter) {
+      if (!this._adapters[adapter]) {
+        throw new Error(`You try to load the config from the adapter "${adapter}" but this adapter does not exists...`);
       }
 
-      this._adapters[adapter].instance.save(this._adapters[adapter].config);
-    } // all saved correctly
+      const config = this._adapters[adapter].instance.load();
 
+      if (config instanceof Promise) {
+        return new Promise(resolve => {
+          config.then(c => {
+            c = (0, _resolveTokens.default)(JSON.parse(JSON.stringify(c)));
+            this._adapters[adapter].config = c;
+            resolve(c);
+          });
+        });
+      }
 
-    return true;
-  }
-  /**
-   * @name                                get
-   * @type                                Function
-   *
-   * Get a config depending on the dotted object path passed and either using the first registered adapter found, or the passed one
-   *
-   * @param                 {String}                      path                 The dotted object path for the value wanted
-   * @param                 {String}                      [adapter=null]       The data adapter that you want to use to retreive this value
-   * @return                {Mixed}                                            The value getted
-   *
-   * @example               js
-   * await config.get('log.frontend.mail.host'); // => gmail.google.com
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-
-
-  get(path, adapter = this._settings.defaultAdapter) {
-    if (adapter && !this._adapters[adapter]) {
-      throw new Error(`You try to get the config value "${path}" using the adapter "${adapter}" but this adapter does not exists...`);
+      this._adapters[adapter].config = config;
+      return config;
     }
+    /**
+     * @name                          save
+     * @type                          Function
+     *
+     * Save the config through all the registered adapters or just the one specify in params
+     *
+     * @param           {String|Array}          [adapters=Object.keys(this._adapters)]        The adapters to save the config through
+     * @return          {Promise}                                                              A promise once all the adapters have correctly saved the config
+     *
+     * @example           js
+     * await config.save();
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
 
-    let value = (0, _get.default)(this._adapters[adapter].config, path);
+  }, {
+    key: "save",
+    value: function save(adapters = Object.keys(this._adapters)) {
+      if (!this._settings.allowSave) {
+        throw new Error(`You try to save the config on the "${this._name}" SConfig instance but this instance does not allow to save configs... Set the "settings.allowSave" property to allow this action...`);
+      }
 
-    if ((0, _plainObject.default)(value)) {
-      value = (0, _deepMap.default)(value, (val, prop, fullPath) => {
-        if (typeof val === 'string' && val.substr(0, 7) === '@config') {
-          return this.get(val.replace('@config.', ''), adapter);
+      for (let i = 0; i < adapters.length; i++) {
+        const adapter = adapters[i];
+
+        if (adapter && !this._adapters[adapter]) {
+          throw new Error(`You try to save the config on the "${this._name}" SConfig instance using the adapter "${adapter}" but this adapter does not exists...`);
         }
 
-        return val;
-      });
-    } else if (typeof value === 'string' && value.substr(0, 7) === '@config') {
-      value = this.get(value.replace('@config.', ''), adapter);
+        this._adapters[adapter].instance.save(this._adapters[adapter].config);
+      } // all saved correctly
+
+
+      return true;
     }
+    /**
+     * @name                                get
+     * @type                                Function
+     *
+     * Get a config depending on the dotted object path passed and either using the first registered adapter found, or the passed one
+     *
+     * @param                 {String}                      path                 The dotted object path for the value wanted
+     * @param                 {String}                      [adapter=null]       The data adapter that you want to use to retreive this value
+     * @return                {Mixed}                                            The value getted
+     *
+     * @example               js
+     * await config.get('log.frontend.mail.host'); // => gmail.google.com
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
 
-    if (this._settings.throwErrorOnUndefinedConfig && value === undefined) {
-      throw new Error(`You try to get the config "${path}" on the "${this._name}" SConfig instance but this config does not exists...`);
-    }
-
-    return value;
-  }
-  /**
-   * @name                                set
-   * @namespace                           sugar.node.config.SConfig
-   * @type                                Function
-   *
-   * Get a config depending on the dotted object path passed and either using the first registered adapter found, or the passed one
-   *
-   * @param                 {String}                      path                 The dotted object path for the value wanted
-   * @param                 {Mixed}                       value                 The value to set
-   * @param                 {String|Array}                      [adapters=Object.keys(this._adapters)]       The adapter you want to use or an array of adapters
-   * @return                {Promise}                                           A promise resolved once the setting has been correctly set (and save depending on your instance config)
-   *
-   * @example               js
-   * config.set('log.frontend.mail.host', 'coffeekraken.io');
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-
-
-  set(path, value, adapters = Object.keys(this._adapters)) {
-    if (!this._settings.allowSet) {
-      throw new Error(`You try to set a config value on the "${this._name}" SConfig instance but this instance does not allow to set values... Set the "settings.allowSet" property to allow this action...`);
-    } // check if we allow new config or not
-
-
-    if (!this._settings.allowNew && (0, _get.default)(this._adapters[this._settings.defaultAdapter].config, path) === undefined) {
-      throw new Error(`You try to set the config "${path}" on the "${this._name}" SConfig instance but this config does not exists and this instance does not allow for new config creation...`);
-    }
-
-    adapters.forEach(adapter => {
+  }, {
+    key: "get",
+    value: function get(path, adapter = this._settings.defaultAdapter) {
       if (adapter && !this._adapters[adapter]) {
-        throw new Error(`You try to set the config value "${path}" using the adapter "${adapter}" but this adapter does not exists...`);
+        throw new Error(`You try to get the config value "${path}" using the adapter "${adapter}" but this adapter does not exists...`);
       }
 
-      (0, _set.default)(this._adapters[adapter].config, path, value);
-    }); // check if need to autoSave or not
+      let value = (0, _get.default)(this._adapters[adapter].config, path);
 
-    if (this._settings.autoSave) {
-      return this.save(adapters);
-    } // return true
+      if ((0, _plainObject.default)(value)) {
+        value = (0, _deepMap.default)(value, (val, prop, fullPath) => {
+          if (typeof val === 'string' && val.substr(0, 7) === '@config') {
+            return this.get(val.replace('@config.', ''), adapter);
+          }
+
+          return val;
+        });
+      } else if (typeof value === 'string' && value.substr(0, 7) === '@config') {
+        value = this.get(value.replace('@config.', ''), adapter);
+      }
+
+      if (this._settings.throwErrorOnUndefinedConfig && value === undefined) {
+        throw new Error(`You try to get the config "${path}" on the "${this._name}" SConfig instance but this config does not exists...`);
+      }
+
+      return value;
+    }
+    /**
+     * @name                                set
+     * @namespace                           sugar.node.config.SConfig
+     * @type                                Function
+     *
+     * Get a config depending on the dotted object path passed and either using the first registered adapter found, or the passed one
+     *
+     * @param                 {String}                      path                 The dotted object path for the value wanted
+     * @param                 {Mixed}                       value                 The value to set
+     * @param                 {String|Array}                      [adapters=Object.keys(this._adapters)]       The adapter you want to use or an array of adapters
+     * @return                {Promise}                                           A promise resolved once the setting has been correctly set (and save depending on your instance config)
+     *
+     * @example               js
+     * config.set('log.frontend.mail.host', 'coffeekraken.io');
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "set",
+    value: function set(path, value, adapters = Object.keys(this._adapters)) {
+      if (!this._settings.allowSet) {
+        throw new Error(`You try to set a config value on the "${this._name}" SConfig instance but this instance does not allow to set values... Set the "settings.allowSet" property to allow this action...`);
+      } // check if we allow new config or not
 
 
-    return true;
-  }
+      if (!this._settings.allowNew && (0, _get.default)(this._adapters[this._settings.defaultAdapter].config, path) === undefined) {
+        throw new Error(`You try to set the config "${path}" on the "${this._name}" SConfig instance but this config does not exists and this instance does not allow for new config creation...`);
+      }
 
-}
+      adapters.forEach(adapter => {
+        if (adapter && !this._adapters[adapter]) {
+          throw new Error(`You try to set the config value "${path}" using the adapter "${adapter}" but this adapter does not exists...`);
+        }
+
+        (0, _set.default)(this._adapters[adapter].config, path, value);
+      }); // check if need to autoSave or not
+
+      if (this._settings.autoSave) {
+        return this.save(adapters);
+      } // return true
+
+
+      return true;
+    }
+  }]);
+
+  return SConfig;
+}();
 
 exports.default = SConfig;
 module.exports = exports.default;

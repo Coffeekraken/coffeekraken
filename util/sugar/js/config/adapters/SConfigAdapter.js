@@ -9,6 +9,12 @@ var _deepMerge = _interopRequireDefault(require("../../object/deepMerge"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 /**
@@ -36,7 +42,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-class SConfigAdapter {
+let SConfigAdapter = /*#__PURE__*/function () {
   /**
    * @name                              _settings
    * @type                              Object
@@ -59,7 +65,9 @@ class SConfigAdapter {
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(settings = {}) {
+  function SConfigAdapter(settings = {}) {
+    _classCallCheck(this, SConfigAdapter);
+
     _defineProperty(this, "_settings", {});
 
     if (settings.name && !/^[a-zA-Z0-9_\-:]+$/.test(settings.name)) {
@@ -80,33 +88,37 @@ class SConfigAdapter {
    */
 
 
-  get name() {
-    return this._settings.name;
-  }
+  _createClass(SConfigAdapter, [{
+    key: "name",
+    get: function () {
+      return this._settings.name;
+    },
+    set: function (value) {
+      if (!/^[a-zA-Z0-9_\-:]+$/.test(value)) {
+        throw new Error(`The name of an SConfigAdapter instance can contain only letters like [a-zA-Z0-9_-:]...`);
+      }
 
-  set name(value) {
-    if (!/^[a-zA-Z0-9_\-:]+$/.test(value)) {
-      throw new Error(`The name of an SConfigAdapter instance can contain only letters like [a-zA-Z0-9_-:]...`);
+      this._settings.name = value;
     }
+    /**
+     * @name                  settings
+     * @type                  Object
+     * @get
+     *
+     * Access the adapter setted settings
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
 
-    this._settings.name = value;
-  }
-  /**
-   * @name                  settings
-   * @type                  Object
-   * @get
-   *
-   * Access the adapter setted settings
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
+  }, {
+    key: "settings",
+    get: function () {
+      return this._settings;
+    }
+  }]);
 
-
-  get settings() {
-    return this._settings;
-  }
-
-}
+  return SConfigAdapter;
+}();
 
 exports.default = SConfigAdapter;
 module.exports = exports.default;

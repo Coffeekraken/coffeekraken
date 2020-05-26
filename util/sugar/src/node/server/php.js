@@ -1,8 +1,4 @@
-const __deepMerge = require('../../node/object/deepMerge');
-const __SPromise = require('../promise/SPromise');
-const __spawn = require('../childProcess/spawn');
-const __phpCli = require('../../cli/server/php.cli');
-const __argsToString = require('../cli/argsToString');
+const __PhpSCli = require('./SPhpServerCli');
 
 /**
  * @name                php
@@ -10,11 +6,9 @@ const __argsToString = require('../cli/argsToString');
  * @type                Function
  *
  * This function take care of starting a local php server on which you can subscribe for different "events"
- * through the returned SPromise api:
+ * through the returned SPromise api.
  *
- *
- * @param         {Object}          [settings={}]         The settings object to configure the build process. Here's the list of available settings:
- *
+ * @param         {Object}          [args={}]         The args object to configure the build process. Check the PhpSCli class definition object for available arguments
  * @return        {SPromise}                An SPromise instance on which you can subscribe for "compiled" stack as well as the normal Promise stacks like "then, catch" etc... Here's the "events" you can subscribe on:
  *
  * @example       js
@@ -28,27 +22,29 @@ const __argsToString = require('../cli/argsToString');
  * @since           2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-module.exports = (settings = {}) => {
-  let childProcess;
-  const promise = new __SPromise((resolve, reject, trigger, cancel) => {
-    settings = __deepMerge({}, settings);
-    const args = __argsToString(settings, __phpCli.definition);
-    childProcess = __spawn(
-      `php -S ${settings.hostname || 'localhost'}:${settings.port || 8080} ${
-        settings.rootDir || '.'
-      } ${args}`
-    );
-    childProcess.trigger(
-      'stdout.data',
-      `<green><bold>Your PHP server is up and running</bold></green>:
-- Hostname: <yellow>${settings.hostname}</yellow>
-- Port    : <yellow>${settings.port}</yellow>
-- RootDir : <yellow>${settings.rootDir}</yellow>
-- URL     : <cyan>http://${settings.hostname}:${settings.port}</cyan>
+module.exports = (args = {}) => {
+  const cli = new __PhpSCli();
+  return cli.spawn(args);
+  //   let childProcess;
+  //   const promise = new __SPromise((resolve, reject, trigger, cancel) => {
+  //     settings = __deepMerge({}, settings);
+  //     const args = __argsToString(settings, __phpCli.definition);
+  //     childProcess = __spawn(
+  //       `php -S ${settings.hostname || 'localhost'}:${settings.port || 8080} ${
+  //         settings.rootDir || '.'
+  //       } ${args}`
+  //     );
+  //     childProcess.trigger(
+  //       'stdout.data',
+  //       `<green><bold>Your PHP server is up and running</bold></green>:
+  // - Hostname: <yellow>${settings.hostname}</yellow>
+  // - Port    : <yellow>${settings.port}</yellow>
+  // - RootDir : <yellow>${settings.rootDir}</yellow>
+  // - URL     : <cyan>http://${settings.hostname}:${settings.port}</cyan>
 
-<red>Ctrl+c</red> to kill the server`
-    );
-  }).start();
-  __SPromise.pipe(childProcess, promise);
-  return promise;
+  // <red>Ctrl+c</red> to kill the server`
+  //     );
+  //   }).start();
+  //   __SPromise.pipe(childProcess, promise);
+  //   return promise;
 };

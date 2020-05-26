@@ -113,13 +113,8 @@ module.exports = class SProcessOutput extends __SComponent {
       // subscribe to errors
       .on('error', (data) => {
         this.log(`<red>Something went wrong:</red>`);
-        this.log(
-          data.value && data.value.value
-            ? data.value.value
-            : data.value
-            ? data.value
-            : data
-        );
+        this.log(data.error ? data.error : data);
+        this.update();
       });
   }
 

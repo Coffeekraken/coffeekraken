@@ -5,6 +5,12 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 /**
@@ -30,7 +36,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  *
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-class SLocalStorageFonts {
+let SLocalStorageFonts = /*#__PURE__*/function () {
   /**
    * Settings
    * @type 	{Object}
@@ -40,7 +46,9 @@ class SLocalStorageFonts {
    * @constructor
    * @param 		{Object} 	settings 	The settings
    */
-  constructor(settings = {}) {
+  function SLocalStorageFonts(settings = {}) {
+    _classCallCheck(this, SLocalStorageFonts);
+
     _defineProperty(this, "_settings", {
       /**
        * Store the version of the fonts to load.
@@ -79,105 +87,111 @@ class SLocalStorageFonts {
    */
 
 
-  _init() {
-    // check cachebuster
-    let cb = this._settings.json_path.split("#");
+  _createClass(SLocalStorageFonts, [{
+    key: "_init",
+    value: function _init() {
+      // check cachebuster
+      let cb = this._settings.json_path.split("#");
 
-    if (cb.length == 2) {
-      this._settings.version = cb[1];
-      this._settings.json_path = cb[0];
-    }
-
-    try {
-      this._cache = window.localStorage.getItem("sugar-fonts");
-
-      if (this._cache) {
-        this._cache = JSON.parse(this._cache);
-
-        if (this._cache.version == this._settings.version) {
-          this._debug("No new version of you fonts");
-
-          this._insertFonts(this._cache.value);
-        } else {
-          this._debug("New version of your fonts"); // busting the cache
-
-
-          window.localStorage.removeItem("sugar-fonts");
-          this._cache = null;
-        }
+      if (cb.length == 2) {
+        this._settings.version = cb[1];
+        this._settings.json_path = cb[0];
       }
-    } catch (e) {
-      // localstorage not available
-      this._debug("Your browser seems to not support the localStorage api");
-    } // if no cache, load the fonts file
+
+      try {
+        this._cache = window.localStorage.getItem("sugar-fonts");
+
+        if (this._cache) {
+          this._cache = JSON.parse(this._cache);
+
+          if (this._cache.version == this._settings.version) {
+            this._debug("No new version of you fonts");
+
+            this._insertFonts(this._cache.value);
+          } else {
+            this._debug("New version of your fonts"); // busting the cache
 
 
-    if (!this._cache) {
-      window.addEventListener("load", e => {
-        let request = new XMLHttpRequest(),
-            response = undefined;
-        request.open("GET", this._settings.json_path, true);
+            window.localStorage.removeItem("sugar-fonts");
+            this._cache = null;
+          }
+        }
+      } catch (e) {
+        // localstorage not available
+        this._debug("Your browser seems to not support the localStorage api");
+      } // if no cache, load the fonts file
 
-        request.onload = () => {
-          if (request.status == 200) {
-            try {
-              response = JSON.parse(request.responseText);
-              let fontface = "";
-              response.fonts.forEach(font => {
-                fontface += "@font-face{";
 
-                for (let prop in font) {
-                  let value = font[prop];
+      if (!this._cache) {
+        window.addEventListener("load", e => {
+          let request = new XMLHttpRequest(),
+              response = undefined;
+          request.open("GET", this._settings.json_path, true);
 
-                  if (prop == "font-family") {
-                    value = '"' + value + '"';
+          request.onload = () => {
+            if (request.status == 200) {
+              try {
+                response = JSON.parse(request.responseText);
+                let fontface = "";
+                response.fonts.forEach(font => {
+                  fontface += "@font-face{";
+
+                  for (let prop in font) {
+                    let value = font[prop];
+
+                    if (prop == "font-family") {
+                      value = '"' + value + '"';
+                    }
+
+                    fontface += prop + ":" + value + ";";
                   }
 
-                  fontface += prop + ":" + value + ";";
-                }
+                  fontface += "}";
+                }); // insert fonts
 
-                fontface += "}";
-              }); // insert fonts
-
-              this._insertFonts(fontface); // save fonts in localstorage
+                this._insertFonts(fontface); // save fonts in localstorage
 
 
-              window.localStorage.setItem("sugar-fonts", JSON.stringify({
-                version: this._settings.version,
-                value: fontface
-              }));
-            } catch (e) {}
-          }
-        };
+                window.localStorage.setItem("sugar-fonts", JSON.stringify({
+                  version: this._settings.version,
+                  value: fontface
+                }));
+              } catch (e) {}
+            }
+          };
 
-        request.send();
-      });
+          request.send();
+        });
+      }
     }
-  }
-  /**
-   * Insert font
-   */
+    /**
+     * Insert font
+     */
 
+  }, {
+    key: "_insertFonts",
+    value: function _insertFonts(value) {
+      this._debug("inserting fonts");
 
-  _insertFonts(value) {
-    this._debug("inserting fonts");
-
-    let style = document.createElement("style");
-    style.innerHTML = value;
-    document.head.appendChild(style);
-  }
-  /**
-   * Debug
-   */
-
-
-  _debug() {
-    if (this._settings.debug) {
-      console.log("SUGAR-LOCALSTORAGEFONTS", arguments);
+      let style = document.createElement("style");
+      style.innerHTML = value;
+      document.head.appendChild(style);
     }
-  }
+    /**
+     * Debug
+     */
 
-} // export modules
+  }, {
+    key: "_debug",
+    value: function _debug() {
+      if (this._settings.debug) {
+        console.log("SUGAR-LOCALSTORAGEFONTS", arguments);
+      }
+    }
+  }]);
+
+  return SLocalStorageFonts;
+}(); // export modules
 
 
 var _default = SLocalStorageFonts;

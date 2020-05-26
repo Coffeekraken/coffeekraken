@@ -1,5 +1,7 @@
 "use strict";
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 module.exports = __deepMerge => {
@@ -31,16 +33,15 @@ module.exports = __deepMerge => {
       done();
     });
     it('Should merge the passed objects with some classes instances correctly', done => {
-      class MyClass {
-        constructor(value) {
-          _defineProperty(this, "classParam1", 'hello');
+      let MyClass = function MyClass(value) {
+        _classCallCheck(this, MyClass);
 
-          _defineProperty(this, "classParam2", false);
+        _defineProperty(this, "classParam1", 'hello');
 
-          this.value = value;
-        }
+        _defineProperty(this, "classParam2", false);
 
-      }
+        this.value = value;
+      };
 
       const myObj = new MyClass('MyClass');
       const obj1 = {
@@ -74,16 +75,15 @@ module.exports = __deepMerge => {
       done();
     });
     it('Should leave the class instances and don\'s touch them', done => {
-      class MyClass {
-        constructor(value) {
-          _defineProperty(this, "classParam1", 'hello');
+      let MyClass = function MyClass(value) {
+        _classCallCheck(this, MyClass);
 
-          _defineProperty(this, "classParam2", false);
+        _defineProperty(this, "classParam1", 'hello');
 
-          this.value = value;
-        }
+        _defineProperty(this, "classParam2", false);
 
-      }
+        this.value = value;
+      };
 
       const myObj = new MyClass('MyClass');
       const obj1 = {

@@ -21,6 +21,12 @@ var _micromatch = _interopRequireDefault(require("micromatch"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 /**
@@ -49,7 +55,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-class SWatch {
+let SWatch = /*#__PURE__*/function () {
   /**
    * @name                    _watchStack
    * @type                    Object
@@ -68,7 +74,9 @@ class SWatch {
    * 
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(object) {
+  function SWatch(object) {
+    _classCallCheck(this, SWatch);
+
     _defineProperty(this, "_watchStack", {});
 
     // check if the passed object is already an SWatch instance
@@ -143,95 +151,101 @@ class SWatch {
     return this._proxiedObject;
   }
 
-  _getWatchStack(path) {
-    const watchProcesses = [];
+  _createClass(SWatch, [{
+    key: "_getWatchStack",
+    value: function _getWatchStack(path) {
+      const watchProcesses = [];
 
-    for (let i = 0; i < Object.keys(this._watchStack).length; i++) {
-      const watchObj = this._watchStack[Object.keys(this._watchStack)[i]];
+      for (let i = 0; i < Object.keys(this._watchStack).length; i++) {
+        const watchObj = this._watchStack[Object.keys(this._watchStack)[i]];
 
-      for (let j = 0; j < watchObj.globs.length; j++) {
-        if (_micromatch.default.isMatch(path, watchObj.globs[j])) {
-          watchProcesses.push(watchObj);
-          break;
+        for (let j = 0; j < watchObj.globs.length; j++) {
+          if (_micromatch.default.isMatch(path, watchObj.globs[j])) {
+            watchProcesses.push(watchObj);
+            break;
+          }
         }
       }
+
+      return watchProcesses;
     }
+    /**
+     * @name              watch
+     * @type              Function
+     * 
+     * This allows you to set a watch process on one or multiple properties of the object setted in the instance.
+     * The "globs" parameter has to be a simple glob pattern or an array of glob patterns.
+     * The only difference with basic glob is that you can replace the "/" with "." (optional).
+     * It uses under the hood the "glob" package that you can find here: https://www.npmjs.com/package/glob
+     * 
+     * @param     {String|Array}          globs         A glob or array of glob patterns to tell which propertie(s) you want to watch
+     * @param     {Function}              handlerFn     A function that will be called with the watchObj that define the update
+     * @param     {String}                [id=null]   The id you want to give to this watch process. It will be used to unwatch this process
+     * 
+     * @example         js
+     * myWatch.watch('**.*', {
+     *    set: (object, prop, value) => {
+     *      // do something
+     *    }
+     * });
+     * 
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
 
-    return watchProcesses;
-  }
-  /**
-   * @name              watch
-   * @type              Function
-   * 
-   * This allows you to set a watch process on one or multiple properties of the object setted in the instance.
-   * The "globs" parameter has to be a simple glob pattern or an array of glob patterns.
-   * The only difference with basic glob is that you can replace the "/" with "." (optional).
-   * It uses under the hood the "glob" package that you can find here: https://www.npmjs.com/package/glob
-   * 
-   * @param     {String|Array}          globs         A glob or array of glob patterns to tell which propertie(s) you want to watch
-   * @param     {Function}              handlerFn     A function that will be called with the watchObj that define the update
-   * @param     {String}                [id=null]   The id you want to give to this watch process. It will be used to unwatch this process
-   * 
-   * @example         js
-   * myWatch.watch('**.*', {
-   *    set: (object, prop, value) => {
-   *      // do something
-   *    }
-   * });
-   * 
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
+  }, {
+    key: "watch",
+    value: function watch(globs, handlerFn, id = null) {
+      if (!id) id = (0, _uniqid.default)();
 
+      if (!this._proxiedObject.__$watchIds) {
+        Object.defineProperty(this._proxiedObject, '__$watchIds', {
+          enumerable: false,
+          writable: false,
+          value: []
+        });
+      }
 
-  watch(globs, handlerFn, id = null) {
-    if (!id) id = (0, _uniqid.default)();
+      this._proxiedObject.__$watchIds.push(id);
 
-    if (!this._proxiedObject.__$watchIds) {
-      Object.defineProperty(this._proxiedObject, '__$watchIds', {
-        enumerable: false,
-        writable: false,
-        value: []
-      });
+      this._watchStack[id] = {
+        globs: Array.isArray(globs) ? globs : [globs],
+        handlerFn
+      }; // return the id to be able to remove the watching process
+
+      return id;
     }
+    /**
+     * @name                unwatch
+     * @type                Function
+     * 
+     * Stop watching a watch process that you have created with the "watch" function
+     * 
+     * @param       {String}        watchId             The watchId to stop watching. This came as return of the "watch" method
+     * 
+     * @example         js
+     * const watchId = myWatch.watch('**.*', {
+     *    // etc...
+     * });
+     * myWatch.unwatch(watchId);
+     * 
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
 
-    this._proxiedObject.__$watchIds.push(id);
+  }, {
+    key: "unwatch",
+    value: function unwatch(watchId = this._proxiedObject.__$watchIds) {
+      if (Array.isArray(watchId)) {
+        watchId.forEach(id => {
+          delete this._watchStack[id];
+        });
+      }
 
-    this._watchStack[id] = {
-      globs: Array.isArray(globs) ? globs : [globs],
-      handlerFn
-    }; // return the id to be able to remove the watching process
-
-    return id;
-  }
-  /**
-   * @name                unwatch
-   * @type                Function
-   * 
-   * Stop watching a watch process that you have created with the "watch" function
-   * 
-   * @param       {String}        watchId             The watchId to stop watching. This came as return of the "watch" method
-   * 
-   * @example         js
-   * const watchId = myWatch.watch('**.*', {
-   *    // etc...
-   * });
-   * myWatch.unwatch(watchId);
-   * 
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-
-
-  unwatch(watchId = this._proxiedObject.__$watchIds) {
-    if (Array.isArray(watchId)) {
-      watchId.forEach(id => {
-        delete this._watchStack[id];
-      });
+      delete this._watchStack[watchId];
     }
+  }]);
 
-    delete this._watchStack[watchId];
-  }
-
-}
+  return SWatch;
+}();
 
 exports.default = SWatch;
 module.exports = exports.default;

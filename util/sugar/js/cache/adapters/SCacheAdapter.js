@@ -6,6 +6,8 @@ var _temp;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 /**
@@ -38,32 +40,32 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * 
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = (_temp = class SCacheAdapter {
-  /**
-   * @name                              _settings
-   * @type                              Object
-   * @private
-   * 
-   * Store the default settings of the SCacheAdapter instance
-   * 
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
+module.exports = (_temp =
+/**
+ * @name                              _settings
+ * @type                              Object
+ * @private
+ * 
+ * Store the default settings of the SCacheAdapter instance
+ * 
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
 
-  /**
-   * @name                              constructor
-   * @type                              Function
-   * 
-   * Construct the SCacheAdapter instance with the settings passed in object format. See description bellow.
-   * 
-   * @param         {Object}          [settings={}]             An object to configure the SCacheAdapter instance. This is specific to each adapters.settings.settings...
-   * 
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  constructor(settings = {}) {
-    _defineProperty(this, "_settings", {});
+/**
+ * @name                              constructor
+ * @type                              Function
+ * 
+ * Construct the SCacheAdapter instance with the settings passed in object format. See description bellow.
+ * 
+ * @param         {Object}          [settings={}]             An object to configure the SCacheAdapter instance. This is specific to each adapters.settings.settings...
+ * 
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+function SCacheAdapter(settings = {}) {
+  _classCallCheck(this, SCacheAdapter);
 
-    // store the settings
-    this._settings = settings;
-  }
+  _defineProperty(this, "_settings", {});
 
+  // store the settings
+  this._settings = settings;
 }, _temp);

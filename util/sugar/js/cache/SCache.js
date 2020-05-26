@@ -19,6 +19,12 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 /**
@@ -40,7 +46,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * 
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-class SCache {
+let SCache = /*#__PURE__*/function () {
   /**
    * @name                              _name
    * @type                              String
@@ -99,7 +105,9 @@ class SCache {
    * 
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(settings = {}) {
+  function SCache(settings = {}) {
+    _classCallCheck(this, SCache);
+
     _defineProperty(this, "_name", null);
 
     _defineProperty(this, "_settings", {});
@@ -140,200 +148,210 @@ class SCache {
    */
 
 
-  async getAdapter() {
-    // check if we have already an adapter setted for this instance
-    if (this._adapter) return this._adapter; // get the adapter specified in the settings
+  _createClass(SCache, [{
+    key: "getAdapter",
+    value: async function getAdapter() {
+      // check if we have already an adapter setted for this instance
+      if (this._adapter) return this._adapter; // get the adapter specified in the settings
 
-    let adapter = this._settings.adapter; // check the type
+      let adapter = this._settings.adapter; // check the type
 
-    if (typeof adapter === 'string' && this._defaultAdaptersPaths[adapter]) {
-      let adptr = await Promise.resolve().then(() => _interopRequireWildcard(require(`${
-      /* webpackChunkName: "SCacheAdapter" */
-      this._defaultAdaptersPaths[adapter]}`)));
-      if (adptr.default) adptr = adptr.default;
-      this._adapter = new adptr();
-    } else if (adapter instanceof _SCacheAdapter.default) {
-      this._adapter = adapter;
-    } // return the adapter
-
-
-    return this._adapter;
-  }
-  /**
-   * @name                            get
-   * @type                            Function
-   * @async
-   * 
-   * Get a value back from the cache using the specified adapter in the settings
-   * 
-   * @param               {String}              name              The name of the item to get back from the cache
-   * @param               {Boolean}             [valueOnly=true]  Specify if you want the value only or the all cache object
-   * @return              {Promise}                               A promise that will be resolved once the item has been getted
-   * 
-   * @example             js
-   * const myValue = myCache.get('coolValue');
-   * 
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
+      if (typeof adapter === 'string' && this._defaultAdaptersPaths[adapter]) {
+        let adptr = await Promise.resolve().then(() => _interopRequireWildcard(require(`${
+        /* webpackChunkName: "SCacheAdapter" */
+        this._defaultAdaptersPaths[adapter]}`)));
+        if (adptr.default) adptr = adptr.default;
+        this._adapter = new adptr();
+      } else if (adapter instanceof _SCacheAdapter.default) {
+        this._adapter = adapter;
+      } // return the adapter
 
 
-  async get(name, valueOnly = true) {
-    // get the adapter
-    const adapter = await this.getAdapter(); // using the specified adapter to get the value back
+      return this._adapter;
+    }
+    /**
+     * @name                            get
+     * @type                            Function
+     * @async
+     * 
+     * Get a value back from the cache using the specified adapter in the settings
+     * 
+     * @param               {String}              name              The name of the item to get back from the cache
+     * @param               {Boolean}             [valueOnly=true]  Specify if you want the value only or the all cache object
+     * @return              {Promise}                               A promise that will be resolved once the item has been getted
+     * 
+     * @example             js
+     * const myValue = myCache.get('coolValue');
+     * 
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
 
-    const rawValue = await adapter.get(`${this._name}.${name}`); // check that we have a value back
+  }, {
+    key: "get",
+    value: async function get(name, valueOnly = true) {
+      // get the adapter
+      const adapter = await this.getAdapter(); // using the specified adapter to get the value back
 
-    if (!rawValue || typeof rawValue !== 'string') return null; // parse the raw value back to an object
+      const rawValue = await adapter.get(`${this._name}.${name}`); // check that we have a value back
 
-    const value = adapter.parse ? adapter.parse(rawValue) : this._parse(rawValue); // check if the item is too old...
+      if (!rawValue || typeof rawValue !== 'string') return null; // parse the raw value back to an object
 
-    if (value.deleteAt !== -1 && value.deleteAt < new Date().getTime()) {
-      // this item has to be deleted
-      if (value.deleteOnExpire) await adapter.delete(name); // return null cause the item is too old
+      const value = adapter.parse ? adapter.parse(rawValue) : this._parse(rawValue); // check if the item is too old...
 
-      return null;
-    } // otherwise, this is good so return the item
-    // either the value only, or the full cache object
+      if (value.deleteAt !== -1 && value.deleteAt < new Date().getTime()) {
+        // this item has to be deleted
+        if (value.deleteOnExpire) await adapter.delete(name); // return null cause the item is too old
 
-
-    if (valueOnly) return value.value;
-    return value;
-  }
-  /**
-   * @name                            set
-   * @type                            Function
-   * @async
-   * 
-   * Set a value to the cache system using the specified adapter with some settings like described bellow
-   * 
-   * @param               {String}              name              The name of the item to set in the cache system
-   * @param               {Mixed}               value             The value to set.
-   * @param               {Object}              [settings={}]     
-   * The settings for this particular item:
-   * - ttl (-1) {Number}: Time to live in seconds
-   * - deleteOnExpire (true) {Boolean}: Specify if this item has to be deleted on expire on not
-   * @return              {Promise}                               A promise that will be resolved once the item has been saved
-   * 
-   * @example             js
-   * const myValue = myCache.set('coolValue', { hello: 'world' }, {
-   *    ttl: 1000
-   * });
-   * 
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
+        return null;
+      } // otherwise, this is good so return the item
+      // either the value only, or the full cache object
 
 
-  async set(name, value, settings = {}) {
-    // test name
-    if (!/^[a-zA-Z0-9_\-\+]+$/.test(name)) {
-      throw new Error(`You try to set an item named "${name}" is the "${this._name}" SCache instance but an item name can contain only these characters [a-zA-Z0-9_-]...`);
-    } // get the adapter
+      if (valueOnly) return value.value;
+      return value;
+    }
+    /**
+     * @name                            set
+     * @type                            Function
+     * @async
+     * 
+     * Set a value to the cache system using the specified adapter with some settings like described bellow
+     * 
+     * @param               {String}              name              The name of the item to set in the cache system
+     * @param               {Mixed}               value             The value to set.
+     * @param               {Object}              [settings={}]     
+     * The settings for this particular item:
+     * - ttl (-1) {Number}: Time to live in seconds
+     * - deleteOnExpire (true) {Boolean}: Specify if this item has to be deleted on expire on not
+     * @return              {Promise}                               A promise that will be resolved once the item has been saved
+     * 
+     * @example             js
+     * const myValue = myCache.set('coolValue', { hello: 'world' }, {
+     *    ttl: 1000
+     * });
+     * 
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "set",
+    value: async function set(name, value, settings = {}) {
+      // test name
+      if (!/^[a-zA-Z0-9_\-\+]+$/.test(name)) {
+        throw new Error(`You try to set an item named "${name}" is the "${this._name}" SCache instance but an item name can contain only these characters [a-zA-Z0-9_-]...`);
+      } // get the adapter
 
 
-    const adapter = await this.getAdapter(); // try to get the value to update it
+      const adapter = await this.getAdapter(); // try to get the value to update it
 
-    const existingValue = await this.get(name, false); // merge the default and the item settings
+      const existingValue = await this.get(name, false); // merge the default and the item settings
 
-    const finalSettings = (0, _deepMerge.default)({
-      ttl: this._settings.ttl,
-      deleteOnExpire: this._settings.deleteOnExpire
-    }, settings); // initial the object that will be saved in the cache
+      const finalSettings = (0, _deepMerge.default)({
+        ttl: this._settings.ttl,
+        deleteOnExpire: this._settings.deleteOnExpire
+      }, settings); // initial the object that will be saved in the cache
 
-    const deleteAt = finalSettings.ttl === -1 ? -1 : new Date().getTime() + (0, _convert.default)(typeof finalSettings.ttl === 'number' ? `${finalSettings.ttl}s` : finalSettings.ttl, 'ms');
-    const valueToSave = {
-      name,
-      value,
-      created: existingValue ? existingValue.created : new Date().getTime(),
-      updated: new Date().getTime(),
-      deleteAt,
-      settings: finalSettings
-    }; // stringify the value to save
+      const deleteAt = finalSettings.ttl === -1 ? -1 : new Date().getTime() + (0, _convert.default)(typeof finalSettings.ttl === 'number' ? `${finalSettings.ttl}s` : finalSettings.ttl, 'ms');
+      const valueToSave = {
+        name,
+        value,
+        created: existingValue ? existingValue.created : new Date().getTime(),
+        updated: new Date().getTime(),
+        deleteAt,
+        settings: finalSettings
+      }; // stringify the value to save
 
-    const stringifiedValueToSave = adapter.stringify ? adapter.stringify(valueToSave) : this._stringify(valueToSave); // use the adapter to save the value
+      const stringifiedValueToSave = adapter.stringify ? adapter.stringify(valueToSave) : this._stringify(valueToSave); // use the adapter to save the value
 
-    return adapter.set(`${this._name}.${name}`, stringifiedValueToSave);
-  }
-  /**
-   * @name                                delete
-   * @type                                Function
-   * 
-   * Delete an item in the cache by his name
-   * 
-   * @param                 {String}               name               The name of the item to delete
-   * @return                {Promise}                                  A promise that will return true if correctly deleted, false if not
-   * 
-   * @example           js
-   * await myCache.delete('coco');
-   * 
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
+      return adapter.set(`${this._name}.${name}`, stringifiedValueToSave);
+    }
+    /**
+     * @name                                delete
+     * @type                                Function
+     * 
+     * Delete an item in the cache by his name
+     * 
+     * @param                 {String}               name               The name of the item to delete
+     * @return                {Promise}                                  A promise that will return true if correctly deleted, false if not
+     * 
+     * @example           js
+     * await myCache.delete('coco');
+     * 
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
 
+  }, {
+    key: "delete",
+    value: async function _delete(name) {
+      // get the adapter
+      const adapter = await this.getAdapter(); // delete the item
 
-  async delete(name) {
-    // get the adapter
-    const adapter = await this.getAdapter(); // delete the item
+      return adapter.delete(`${this._name}.${name}`);
+    }
+    /**
+     * @name                                clear
+     * @type                                Function
+     * 
+     * Delete all the items in the current cache instance
+     * 
+     * @return                {Promise}                                  A promise that will return true if correctly deleted, false if not
+     * 
+     * @example           js
+     * await myCache.clear();
+     * 
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
 
-    return adapter.delete(`${this._name}.${name}`);
-  }
-  /**
-   * @name                                clear
-   * @type                                Function
-   * 
-   * Delete all the items in the current cache instance
-   * 
-   * @return                {Promise}                                  A promise that will return true if correctly deleted, false if not
-   * 
-   * @example           js
-   * await myCache.clear();
-   * 
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
+  }, {
+    key: "clear",
+    value: async function clear() {
+      // get the adapter
+      const adapter = await this.getAdapter(); // clear the cache
 
+      return adapter.clear(this._name);
+    }
+    /**
+     * @name                                _parse
+     * @type                                Function
+     * @private
+     * 
+     * Take the raw value getted from the cache system and parse it to his actual object format
+     * You can hook how this method will act by specify the "settings.parse" property to a different function
+     * 
+     * @param               {String}                      rawValue                    The raw value to transform into an object
+     * @return              {Object}                                                  The object format of the value getted back from the cache system
+     * 
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
 
-  async clear() {
-    // get the adapter
-    const adapter = await this.getAdapter(); // clear the cache
+  }, {
+    key: "_parse",
+    value: function _parse(rawValue) {
+      return this._settings.parse(rawValue);
+    }
+    /**
+     * @name                                _stringify
+     * @type                                Function
+     * @private
+     * 
+     * Transform the passed object to a simple string in order to save it in the cache system using the specified adapter.
+     * You can hook how this method will act by specify the "settings.stringify" property to a different function
+     * 
+     * @param               {Object}                      object                       The object to save to the cache system that have to transformed in string before...                
+     * @return              {String}                                                  The string format of the item to save to cache
+     * 
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
 
-    return adapter.clear(this._name);
-  }
-  /**
-   * @name                                _parse
-   * @type                                Function
-   * @private
-   * 
-   * Take the raw value getted from the cache system and parse it to his actual object format
-   * You can hook how this method will act by specify the "settings.parse" property to a different function
-   * 
-   * @param               {String}                      rawValue                    The raw value to transform into an object
-   * @return              {Object}                                                  The object format of the value getted back from the cache system
-   * 
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
+  }, {
+    key: "_stringify",
+    value: function _stringify(object) {
+      return this._settings.stringify(object);
+    }
+  }]);
 
-
-  _parse(rawValue) {
-    return this._settings.parse(rawValue);
-  }
-  /**
-   * @name                                _stringify
-   * @type                                Function
-   * @private
-   * 
-   * Transform the passed object to a simple string in order to save it in the cache system using the specified adapter.
-   * You can hook how this method will act by specify the "settings.stringify" property to a different function
-   * 
-   * @param               {Object}                      object                       The object to save to the cache system that have to transformed in string before...                
-   * @return              {String}                                                  The string format of the item to save to cache
-   * 
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-
-
-  _stringify(object) {
-    return this._settings.stringify(object);
-  }
-
-}
+  return SCache;
+}();
 
 exports.default = SCache;
 module.exports = exports.default;

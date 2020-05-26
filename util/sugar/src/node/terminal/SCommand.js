@@ -11,6 +11,7 @@ const __watchCli = require('../../cli/fs/watch.cli');
 const __spawn = require('../childProcess/spawn');
 const __minimatch = require('minimatch');
 const __checkDefinitionObject = require('../cli/checkDefinitionObject');
+const __buildCommandLine = require('../cli/buildCommandLine');
 
 /**
  * @name            SCommand
@@ -644,7 +645,7 @@ module.exports = class SCommand extends __SPromise {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  run(args = null) {
+  run(args = null, includeAllArgs = true) {
     if (this._destroyed) {
       throw new Error(
         `Sorry but this command named "${this.name}" has been destroyed...`
@@ -658,76 +659,19 @@ module.exports = class SCommand extends __SPromise {
     const _this = this;
 
     const promise = new __SPromise(async (resolve, reject, trigger, cancel) => {
-      // // check if we need to ask some questions before running the command
-      // if (this._settings.ask) {
-      //   let askStack = this._settings.ask;
-      //   if (askStack.type) {
-      //     askStack = {
-      //       default: askStack
-      //     };
-      //   }
-
-      //   for (let i = 0; i < Object.keys(askStack).length; i++) {
-      //     let askObj = askStack[Object.keys(askStack)[i]];
-      //     const answer = await this._ask(askObj);
-      //     if (answer === '__canceled__') {
-      //       cancel();
-      //       return;
-      //     }
-      //     askObj = {
-      //       get commandObj() {
-      //         return _this;
-      //       },
-      //       answer,
-      //       ...askObj
-      //     };
-      //     askStack[Object.keys(askStack)[i]] = askObj;
-      //     this.trigger('answer', askObj);
-      //     if (askObj.type === 'confirm' && askObj.answer === false) {
-      //       cancel();
-      //       return;
-      //     }
-      //     switch (askObj.type) {
-      //       case 'summary':
-      //         askObj.items.forEach((item) => {
-      //           this._currentProcess.command = this._currentProcess.command.replace(
-      //             `[${item.id}]`,
-      //             item.value
-      //           );
-      //         });
-      //         break;
-      //     }
-      //   }
-      // }
-
-      // if (this._settings.summary) {
-      //   await new Promise((resolve, reject) => {
-      //     this.trigger('summary', {
-      //       get commandObj() {
-      //         return _this;
-      //       },
-      //       resolve,
-      //       reject,
-      //       // items: question.items,
-      //       question: `"${this.name}" command arguments summary`,
-      //       type: 'summary'
-      //     });
-      //   });
-      // }
-
       // try {
 
       // generate the final command to run
-      const commandLine = __argsToString(
+      const commandLine = __buildCommandLine(
+        this._command,
+        this._settings.definitionObj,
         args || this._settings.args,
-        this._settings.definition
+        includeAllArgs
       );
 
       this._currentProcess = {};
       // init the child process
-      this._currentProcess.childProcessPromise = __spawn(
-        `${this._command} ${commandLine}`
-      );
+      this._currentProcess.childProcessPromise = __spawn(commandLine);
       this._currentProcess.childProcessPromise.on('*', (data) => {
         this._processesStack[this._processesStack.length - 1] = {
           ...this._processesStack[this._processesStack.length - 1],

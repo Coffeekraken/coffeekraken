@@ -67,6 +67,12 @@ export default function checkDefinitionObject(definitionObj) {
       return `The property "description" of an argument definition object has to be a String. You've passed "${__toString(
         argDefinition.description
       )}" which is a "${typeof argDefinition.description}" for your argument "${argName}"...`;
+    // check level
+    if (argDefinition.level && typeof argDefinition.level !== 'number') {
+      return `The property "level" for your argument "${argName}" has to be a Number. You've passed "${__toString(
+        argDefinition.level
+      )}" which is a "${typeof argDefinition.level}"...`;
+    }
   }
   // return true
   return true;

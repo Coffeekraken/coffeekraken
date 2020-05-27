@@ -1,7 +1,11 @@
+const __SLogPanel = require('./SLogPanel');
+const __convert = require('../../time/convert');
 const __deepMerge = require('../../object/deepMerge');
 const __blessed = require('blessed');
 const __color = require('../../color/color');
 const __SComponent = require('../SComponent');
+const __SCenteredPopup = require('./SCenteredPopup');
+const __SSummaryList = require('../list/SSummaryList');
 const __summaryListPopup = require('../list/summaryListPopup');
 const __ora = require('ora');
 const __parseHtml = require('../../terminal/parseHtml');
@@ -12,7 +16,7 @@ const __transitionObjectProperties = require('../../transition/objectProperties'
 
 /**
  * @name                  SCommandPanel
- * @namespace             sugar.node.blessed.panel
+ * @namespace             sugar.node.blessed
  * @type                  Class
  *
  * This class is a simple SPanel extended one that accesp an SCommandPanel instance
@@ -22,7 +26,7 @@ const __transitionObjectProperties = require('../../transition/objectProperties'
  * @param         {Object}              [settings={}]     The settings object to configure your SCommandPanel
  *
  * @example         js
- * const SCommandPanel = require('@coffeekraken/sugar/node/blessed/panel/SCommandPanel');
+ * const SCommandPanel = require('@coffeekraken/sugar/node/terminal/SCommandPanel');
  * const myPanel = new SCommandPanel(myProcess, {
  *    screen: true
  * });
@@ -477,11 +481,7 @@ module.exports = class SCommandPanel extends __SComponent {
         this._logBox.append(panelObj.box);
       }
 
-      let boxTitle = '';
-      if (commandInstance.namespace) {
-        boxTitle += `<bgBlack><white> ${commandInstance.namespace} </white></bgBlack> `;
-      }
-      boxTitle += `<bold>${
+      let boxTitle = `<bold>${
         commandInstance.title || commandInstance.name
       }</bold>`;
       if (lastProcessObj && lastProcessObj.duration) {
@@ -521,7 +521,9 @@ module.exports = class SCommandPanel extends __SComponent {
         }, 50);
       } else {
         panelObj.box.style.bg = commandInstance.color || 'white';
-        panelObj.headerBox.setContent(__parseHtml(`<iStart/>  ${boxTitle}`));
+        panelObj.headerBox.setContent(
+          __parseHtml(`<iStart/>  ${boxTitle} (idle)`)
+        );
         panelObj.box.screen.render();
       }
 

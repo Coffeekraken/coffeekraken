@@ -15,7 +15,7 @@ const __SComponent = require('../SComponent');
 
 /**
  * @name                    SLogPanel
- * @namespace               sugar.node.blessed.panel
+ * @namespace               sugar.node.blessed
  * @type                    Class
  *
  * This class define a "panel" in the terminal that you can easily configure to have the look and feel that you want
@@ -26,7 +26,7 @@ const __SComponent = require('../SComponent');
  * - screen (true) {Boolean}: Specify if you want your panel wrapped inside an "blessed"(https://www.npmjs.com/package/blessed) screen object. Useful when you just want to render your panel in the terminal. If you have your own screen object
  *
  * @example         js
- * const SLogPanel = require('@coffeekraken/sugar/node/blessed/panel/SLogPanel');
+ * const SLogPanel = require('@coffeekraken/sugar/node/terminal/SLogPanel');
  * const panel = new SLogPanel('my-cool-pannel', {
  * });
  * panel.log('Hello world');

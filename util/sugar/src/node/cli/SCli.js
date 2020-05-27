@@ -2,6 +2,8 @@ const __buildCommandLine = require('./buildCommandLine');
 const __checkDefinitionObject = require('./checkDefinitionObject');
 const __spawn = require('../childProcess/spawn');
 const __SProcessOutput = require('../blessed/SProcessOutput');
+const __deepMerge = require('../object/deepMerge');
+const __parseHtml = require('../terminal/parseHtml');
 
 /**
  * @name                SCli
@@ -22,20 +24,22 @@ const __SProcessOutput = require('../blessed/SProcessOutput');
  * @example         js
  * const SCli = require('@coffeekraken/sugar/js/cli/SCli');
  * class MyCli extends SCli {
- *    constructor() {
- *      super('php [hostname]:[port] [rootDir] [arguments]', {
- *        hostname: {
- *          type: 'String',
- *          description: 'Server hostname',
- *          default: 'localhost'
- *        },
- *        port: {
- *          type: 'Number',
- *          description: 'Server port',
- *          default: 8080
- *        },
- *        // etc...
- *      });
+ *    static command = 'php [hostname]:[port] [rootDir] [arguments]';
+ *    static definitionObj = {
+ *      hostname: {
+ *        type: 'String',
+ *        description: 'Server hostname',
+ *        default: 'localhost'
+ *      },
+ *      port: {
+ *        type: 'Number',
+ *        description: 'Server port',
+ *        default: 8080
+ *      },
+ *      // etc...
+ *    }:
+ *    constructor(settings = {}) {
+ *      super(settings);
  *    }
  * }
  * const myCli = new MyCli();
@@ -59,6 +63,28 @@ module.exports = class SCli {
   _childProcess = null;
 
   /**
+   * @name        _runningArgsObj
+   * @type        Object
+   * @private
+   *
+   * Store the currently running process arguments object
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _runningArgsObj = {};
+
+  /**
+   * @name        _settings
+   * @type        Object
+   * @private
+   *
+   * Store the instance settings
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _settings = {};
+
+  /**
    * @name        constructor
    * @type        Function
    * @constructor
@@ -67,11 +93,15 @@ module.exports = class SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(commandString, definitionObj) {
-    // // save the command string
-    // this._commandString = commandString;
-    // // save the definition object
-    // this._definitionObj = definitionObj;
+  constructor(settings = {}) {
+    // save the settings
+    this._settings = __deepMerge(
+      {
+        includeAllArgs: true,
+        argsObj: null
+      },
+      settings
+    );
     // check integrity
     this._checkCliIntegrity();
   }
@@ -100,6 +130,19 @@ module.exports = class SCli {
    */
   get definitionObj() {
     return Object.assign({}, this.constructor.definitionObj);
+  }
+
+  /**
+   * @name        runningArgsObj
+   * @type        Object
+   * @get
+   *
+   * Get the current process lauched with "run" or "runWithOutput" methods arguments
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get runningArgsObj() {
+    return this._runningArgsObj || {};
   }
 
   /**
@@ -138,18 +181,18 @@ module.exports = class SCli {
   }
 
   /**
-   * @name          buildCommandLine
+   * @name          toString
    * @type          Function
    *
    * This method allows you to pass an arguments object and return the builded command line string depending on the definition object.
    *
    * @param       {Object}      argsObj         An argument object to use for the command line string generation
-   * @param       {Boolean}     [includeAllArgs = true]       Specify if you want all the arguments in the definition object in your command line string, or if you just want the one passed in your argsObj argument
+   * @param       {Boolean}     [includeAllArgs=settings.includeAllArgs]       Specify if you want all the arguments in the definition object in your command line string, or if you just want the one passed in your argsObj argument
    * @return      {String}                        The generated command line string
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  buildCommandLine(argsObj, includeAllArgs = true) {
+  toString(argsObj, includeAllArgs = this._settings.includeAllArgs) {
     return __buildCommandLine(
       this.commandString,
       this.definitionObj,
@@ -159,11 +202,11 @@ module.exports = class SCli {
   }
 
   /**
-   * @name          spawn
+   * @name          run
    * @type          Function
    * @async
    *
-   * This method spawn a new child process with the provided arguments and the definition object.
+   * This method run a new child process with the provided arguments and the definition object.
    * The returned object MUST be an SPromise instance that emit these "events":
    * - start: Triggered when the command start a process
    * - close: Triggered when the process is closed
@@ -176,12 +219,12 @@ module.exports = class SCli {
    * You can use the "spawn" function available under the namespace "sugar.node.childProcess" in order to
    * spawn the process with already all these events setted...
    *
-   * @param       {Object}        [argsObj={}]      An argument object to override the default values of the definition object
-   * @param       {Boolean}     [includeAllArgs = true]       Specify if you want all the arguments in the definition object in your command line string, or if you just want the one passed in your argsObj argument
+   * @param       {Object}        [argsObj=settings.argsObj]      An argument object to override the default values of the definition object
+   * @param       {Boolean}     [includeAllArgs=settings.includeAllArgs]       Specify if you want all the arguments in the definition object in your command line string, or if you just want the one passed in your argsObj argument
    * @return      {SPromise}                        An SPromise instance on which you can subscribe for "events" described above
    *
    * @example       js
-   * myCli.spawn({
+   * myCli.run({
    *    port: 8888
    * }).on('start', data => {
    *    // do something...
@@ -189,30 +232,54 @@ module.exports = class SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  spawn(argsObj = {}, includeAllArgs = true) {
+  run(
+    argsObj = this._settings.argsObj,
+    includeAllArgs = this._settings.includeAllArgs
+  ) {
     if (this._childProcess) {
       throw new Error(
         `You cannot spawn multiple "${this.constructor.name}" child process at the same time. Please kill the currently running one using the "kill" method...`
       );
     }
-
-    const commandLine = this.buildCommandLine(argsObj, includeAllArgs);
-    this._childProcess = __spawn(commandLine);
+    const commandLine = this.toString(argsObj, includeAllArgs);
+    this._runningArgsObj = this._runningProcessArgsObject(
+      argsObj,
+      includeAllArgs
+    );
+    this._childProcess = __spawn(commandLine).on('cancel,finally', () => {
+      this._runningArgsObj = null;
+      this._childProcess = null;
+    });
     return this._childProcess;
   }
 
   /**
-   * @name          spawnWithOutput
-   * @type          Function
+   * @name        isRunning
+   * @type        Function
    *
-   * This method spawn the command line and display his output
-   * in a nicely styles screen.
-   * Check the "spawn" method documentation for the the arguments and return values
+   * This method simply return true or false if the child process is running or not
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  spawnWithDisplay(argsObj = {}, includeAllArgs = true) {
-    const serverProcess = this.spawn(argsObj, includeAllArgs);
+  isRunning() {
+    return this._childProcess !== null;
+  }
+
+  /**
+   * @name          runWithOutput
+   * @type          Function
+   *
+   * This method run the command line and display his output
+   * in a nicely styled screen.
+   * Check the "run" method documentation for the the arguments and return values
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  runWithOutput(
+    argsObj = this._settings.argsObj,
+    includeAllArgs = this._settings.includeAllArgs
+  ) {
+    const serverProcess = this.run(argsObj, includeAllArgs);
     const output = new __SProcessOutput(serverProcess, {});
     output.attach();
     return serverProcess;
@@ -230,5 +297,51 @@ module.exports = class SCli {
   kill() {
     if (!this._childProcess) return;
     return this._childProcess.cancel();
+  }
+
+  /**
+   * @name            _runningProcessArgsObject
+   * @type            Function
+   * @private
+   *
+   * This method take an argument object as parameter and return
+   * the final argument object depending on the definitionObj and the passed object
+   *
+   * @param       {Object}      [argsObj=settings.argsObj]      An argument object used for processing the final argument object one
+   * @param       {Boolean}     [includeAllArgs=settings.includeAllArgs]       Specify if you want all the arguments in the definition object in your command line string, or if you just want the one passed in your argsObj argument
+   * @return      {Object}              The processed args object
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _runningProcessArgsObject(
+    argsObj = {},
+    includeAllArgs = this._settings.includeAllArgs
+  ) {
+    const finalArgsObj = {};
+    Object.keys(this.definitionObj).forEach((argName) => {
+      if (argsObj[argName] === undefined && !includeAllArgs) return;
+      finalArgsObj[argName] =
+        argsObj[argName] !== undefined
+          ? argsObj[argName]
+          : this.definitionObj[argName].default;
+    });
+    return finalArgsObj;
+  }
+
+  /**
+   * @name            log
+   * @type            Function
+   *
+   * This method simulate a log coming fron the child process
+   *
+   * @param       {Mixed}       ...args       The message(s) to log
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  log(...args) {
+    if (!this.isRunning()) return;
+    args.forEach((arg) => {
+      this._childProcess.log(__parseHtml(arg));
+    });
   }
 };

@@ -163,6 +163,21 @@ let SPromise = /*#__PURE__*/function (_Promise) {
      */
 
     /**
+     * @name                  _status
+     * @type                  String
+     * @private
+     *
+     * Store the promise status. Can be:
+     * - pending: When the promise is waiting for resolution or rejection
+     * - resolved: When the promise has been resolved
+     * - rejected: When the promise has been rejected
+     * - canceled: When the promise has been canceled
+     * - destroyed: When the promise has been destroyed
+     *
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+
+    /**
      * @name                  _stacks
      * @type                  Object
      * @private
@@ -210,7 +225,7 @@ let SPromise = /*#__PURE__*/function (_Promise) {
      *
      * @param         {Function}          executor          The executor function that will receive the resolve and reject ones...
      * @param         {Object}            [settings={}]     An object of settings for this particular SPromise instance. Here's the available settings:
-     * - safeReject (true) {Boolean}: Specify if you prefere that your promise is "resolved" with an "Error" instance when rejected, or if you prefere the normal throw that does not resolve your promise and block the "await" statement...
+     * - safeReject (true) {Boolean}: Specify if you prefere that your promise is "resolved" with an "Error" instance when rejected, or if you prefere the normal throw that does not resolve your promise and block the "await" statusment...
      * - cancelDefaultReturn (null) {Mixed}: Specify what you want to return by default if you cancel your promise without any value
      *
      * @example       js
@@ -256,6 +271,8 @@ let SPromise = /*#__PURE__*/function (_Promise) {
 
     _defineProperty(_assertThisInitialized(_this), "_settings", {});
 
+    _defineProperty(_assertThisInitialized(_this), "_status", 'pending');
+
     _defineProperty(_assertThisInitialized(_this), "_stacks", {
       then: [],
       catch: [],
@@ -284,26 +301,140 @@ let SPromise = /*#__PURE__*/function (_Promise) {
     return _this;
   }
   /**
-   * @name                    start
-   * @type                    Function
+   * @name                    status
+   * @type                    String
+   * @get
    *
-   * This method is useful when you want the executor function passed to the constructor to be called directly and not
-   * as usual during the next javascript execution loop.
-   *
-   * @return          {SPromise}                  The SPromise instance to maintain chainability
-   *
-   * @example         js
-   * new SPromise((resolve, reject, trigger, cancel) => {
-   *    // do something
-   * }).then(value => {
-   *    // do something
-   * }).start();
+   * Access the promise status. Can be one of these:
+   * - pending: When the promise is waiting for resolution or rejection
+   * - resolved: When the promise has been resolved
+   * - rejected: When the promise has been rejected
+   * - canceled: When the promise has been canceled
+   * - destroyed: When the promise has been destroyed
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
 
 
   _createClass(SPromise, [{
+    key: "is",
+
+    /**
+     * @name                  is
+     * @type                  Function
+     *
+     * Check is the promise is on one of the passed status
+     *
+     * @param       {String}        status        A comma separated list of status to check
+     * @return      {Boolean}                     Return true if the promise is in one of the passed status
+     *
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    value: function is(status) {
+      const statusArray = status.split(',').map(l => l.trim());
+      if (statusArray.indexOf(this._status) !== -1) return true;
+      return false;
+    }
+    /**
+     * @name                  isPending
+     * @type                  Function
+     *
+     * Return back true or false depending on the promise status
+     *
+     * @return    {Boolean}         true or false depending on the promise status
+     *
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+
+  }, {
+    key: "isPending",
+    value: function isPending() {
+      return this._status === 'pending';
+    }
+    /**
+     * @name                  isResolved
+     * @type                  Function
+     *
+     * Return back true or false depending on the promise status
+     *
+     * @return    {Boolean}         true or false depending on the promise status
+     *
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+
+  }, {
+    key: "isResolved",
+    value: function isResolved() {
+      return this._status === 'resolved';
+    }
+    /**
+     * @name                  isRejected
+     * @type                  Function
+     *
+     * Return back true or false depending on the promise status
+     *
+     * @return    {Boolean}         true or false depending on the promise status
+     *
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+
+  }, {
+    key: "isRejected",
+    value: function isRejected() {
+      return this._status === 'rejected';
+    }
+    /**
+     * @name                  isCanceled
+     * @type                  Function
+     *
+     * Return back true or false depending on the promise status
+     *
+     * @return    {Boolean}         true or false depending on the promise status
+     *
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+
+  }, {
+    key: "isCanceled",
+    value: function isCanceled() {
+      return this._status === 'canceled';
+    }
+    /**
+     * @name                  isDestroyed
+     * @type                  Function
+     *
+     * Return back true or false depending on the promise status
+     *
+     * @return    {Boolean}         true or false depending on the promise status
+     *
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+
+  }, {
+    key: "isDestroyed",
+    value: function isDestroyed() {
+      return this._status === 'destroyed';
+    }
+    /**
+     * @name                    start
+     * @type                    Function
+     *
+     * This method is useful when you want the executor function passed to the constructor to be called directly and not
+     * as usual during the next javascript execution loop.
+     *
+     * @return          {SPromise}                  The SPromise instance to maintain chainability
+     *
+     * @example         js
+     * new SPromise((resolve, reject, trigger, cancel) => {
+     *    // do something
+     * }).then(value => {
+     *    // do something
+     * }).start();
+     *
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+
+  }, {
     key: "start",
     value: function start() {
       if (this._isDestroyed) {
@@ -354,7 +485,9 @@ let SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "_resolve",
     value: async function _resolve(arg, stacksOrder = 'then,resolve,finally') {
-      if (this._isDestroyed) return; // exec the wanted stacks
+      if (this._isDestroyed) return; // update the status
+
+      this._status = 'resolved'; // exec the wanted stacks
 
       const stacksResult = await this._triggerStacks(stacksOrder, arg); // resolve the master promise
 
@@ -398,7 +531,9 @@ let SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "_reject",
     value: async function _reject(arg, stacksOrder = 'catch,reject,finally') {
-      if (this._isDestroyed) return; // exec the wanted stacks
+      if (this._isDestroyed) return; // update the status
+
+      this._status = 'rejected'; // exec the wanted stacks
 
       const stacksResult = await this._triggerStacks(stacksOrder, arg); // resolve the master promise
 
@@ -447,7 +582,9 @@ let SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "_cancel",
     value: async function _cancel(arg, stacksOrder = 'cancel') {
-      if (this._isDestroyed) return; // exec the wanted stacks
+      if (this._isDestroyed) return; // update the status
+
+      this._status = 'canceled'; // exec the wanted stacks
 
       const stacksResult = await this._triggerStacks(stacksOrder, arg); // resolve the master promise
 
@@ -656,7 +793,7 @@ let SPromise = /*#__PURE__*/function (_Promise) {
      *
      * This method allows the SPromise user to register a function that will be called every time the "resolve" one is called in the executor
      * The context of the callback will be the SPromise instance itself so you can call all the methods available like "resolve", "release", "on", etc using
-     * the "this.resolve('something')" statement. In an arrow function like "(value) => { ... }", the "this" keyword will be bound to the current context where you define
+     * the "this.resolve('something')" statusment. In an arrow function like "(value) => { ... }", the "this" keyword will be bound to the current context where you define
      * your function. You can access to the SPromise instance through the last parameter like so "(value, sPromiseInstance) => { ... }".
      *
      * @param           {String|Array}      stacks        The stacks in which you want register your callback. Either an Array like ['then','finally'], or a String like "then,finally"
@@ -707,7 +844,7 @@ let SPromise = /*#__PURE__*/function (_Promise) {
      *
      * This method allows the SPromise user to register a function that will be called every time the "resolve" one is called in the executor
      * The context of the callback will be the SPromise instance itself so you can call all the methods available like "resolve", "then", etc using
-     * the "this.resolve('something')" statement. In an arrow function like "(value) => { ... }", the "this" keyword will be bound to the current context where you define
+     * the "this.resolve('something')" statusment. In an arrow function like "(value) => { ... }", the "this" keyword will be bound to the current context where you define
      * your function. You can access to the SPromise instance through the last parameter like so "(value, sPromiseInstance) => { ... }".
      *
      * @param           {Number}          [callNumber=-1]     (Optional) How many times you want this callback to be called at max. -1 means unlimited
@@ -748,7 +885,7 @@ let SPromise = /*#__PURE__*/function (_Promise) {
      *
      * This method allows the SPromise user to register a function that will be called every time the "reject" one is called in the executor
      * The context of the callback will be the SPromise instance itself so you can call all the methods available like "resolve", "then", etc using
-     * the "this.resolve('something')" statement. In an arrow function like "(value) => { ... }", the "this" keyword will be bound to the current context where you define
+     * the "this.resolve('something')" statusment. In an arrow function like "(value) => { ... }", the "this" keyword will be bound to the current context where you define
      * your function. You can access to the SPromise instance through the last parameter like so "(value, sPromiseInstance) => { ... }".
      *
      * @param           {Number}          [callNumber=-1]     (Optional) How many times you want this callback to be called at max. -1 means unlimited
@@ -780,7 +917,7 @@ let SPromise = /*#__PURE__*/function (_Promise) {
      *
      * This method allows the SPromise user to register a function that will be called every time the "reject" one is called in the executor
      * The context of the callback will be the SPromise instance itself so you can call all the methods available like "resolve", "then", etc using
-     * the "this.resolve('something')" statement. In an arrow function like "(value) => { ... }", the "this" keyword will be bound to the current context where you define
+     * the "this.resolve('something')" statusment. In an arrow function like "(value) => { ... }", the "this" keyword will be bound to the current context where you define
      * your function. You can access to the SPromise instance through the last parameter like so "(value, sPromiseInstance) => { ... }".
      *
      * @param           {Function}        callback        The callback function to register
@@ -808,7 +945,7 @@ let SPromise = /*#__PURE__*/function (_Promise) {
      *
      * This method allows the SPromise user to register a function that will be called every time the "reject" one is called in the executor
      * The context of the callback will be the SPromise instance itself so you can call all the methods available like "resolve", "then", etc using
-     * the "this.resolve('something')" statement. In an arrow function like "(value) => { ... }", the "this" keyword will be bound to the current context where you define
+     * the "this.resolve('something')" statusment. In an arrow function like "(value) => { ... }", the "this" keyword will be bound to the current context where you define
      * your function. You can access to the SPromise instance through the last parameter like so "(value, sPromiseInstance) => { ... }".
      *
      * @param           {Function}        callback        The callback function to register
@@ -836,7 +973,7 @@ let SPromise = /*#__PURE__*/function (_Promise) {
      *
      * This method allows the SPromise user to register a function that will be called every time the "reject" one is called in the executor
      * The context of the callback will be the SPromise instance itself so you can call all the methods available like "resolve", "then", etc using
-     * the "this.resolve('something')" statement. In an arrow function like "(value) => { ... }", the "this" keyword will be bound to the current context where you define
+     * the "this.resolve('something')" statusment. In an arrow function like "(value) => { ... }", the "this" keyword will be bound to the current context where you define
      * your function. You can access to the SPromise instance through the last parameter like so "(value, sPromiseInstance) => { ... }".
      *
      * @param           {Function}        callback        The callback function to register
@@ -864,7 +1001,7 @@ let SPromise = /*#__PURE__*/function (_Promise) {
      *
      * This method allows the SPromise user to register a function that will be called once when the "revoke" function has been called
      * The context of the callback will be the SPromise instance itself so you can call all the methods available like "resolve", "then", etc using
-     * the "this.resolve('something')" statement. In an arrow function like "(value) => { ... }", the "this" keyword will be bound to the current context where you define
+     * the "this.resolve('something')" statusment. In an arrow function like "(value) => { ... }", the "this" keyword will be bound to the current context where you define
      * your function. You can access to the SPromise instance through the last parameter like so "(value, sPromiseInstance) => { ... }".
      *
      * @param           {Function}        callback        The callback function to register
@@ -926,7 +1063,9 @@ let SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "_destroy",
     value: function _destroy() {
-      // destroying all the callbacks stacks registered
+      // update the status
+      this._status = 'destroyed'; // destroying all the callbacks stacks registered
+
       delete this._stacks; // delete this._isExecutorStarted; // keep it to avoid errors in the "setTimeout" function in the masterPromise executor...
 
       delete this._executorFn;
@@ -934,6 +1073,11 @@ let SPromise = /*#__PURE__*/function (_Promise) {
       delete this._masterPromiseRejectFn;
       delete this._masterPromise;
       this._isDestroyed = true;
+    }
+  }, {
+    key: "status",
+    get: function () {
+      return this._status;
     }
   }]);
 

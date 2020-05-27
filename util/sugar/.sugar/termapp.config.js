@@ -1,5 +1,6 @@
 const __packageJson = require('../package.json');
 const __packageRoot = require('../node/path/packageRoot');
+const __CommandsAppPage = require('../');
 
 module.exports = {
   rootDir: `${__packageRoot(__dirname)}/termapp`,
@@ -15,29 +16,5 @@ module.exports = {
       }
     ]
   },
-  pages: {
-    default: '/builds/scss',
-    urls: {
-      '/builds/{what}': {
-        type: 'commands',
-        namespace: 'build.**',
-        menu: [
-          {
-            url: '/builds/scss',
-            text: 'Builds / Scss'
-          },
-          {
-            url: '/builds/js',
-            text: 'Builds / JS'
-          }
-        ],
-        ui: (parsedUrl) => {
-          console.log('content', parsedUrl);
-        },
-        process: (parsedUrl) => {
-          console.log('process');
-        }
-      }
-    }
-  }
+  pages: {}
 };

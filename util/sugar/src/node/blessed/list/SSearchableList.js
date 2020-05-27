@@ -1,47 +1,38 @@
 const __blessed = require('blessed');
-const __SComponent = require('./SComponent');
-const __deepMerge = require('../object/deepMerge');
-const __parseHtml = require('../terminal/parseHtml');
-const __countLine = require('../string/countLine');
-const __hotkey = require('../keyboard/hotkey');
-const __color = require('../color/color');
-const __SPromise = require('../promise/SPromise');
-const __SInput = require('./SInput');
-const __multiple = require('../class/multipleExtends');
-const __activeSpace = require('../core/activeSpace');
+const __SComponent = require('../SComponent');
+const __deepMerge = require('../../object/deepMerge');
+const __parseHtml = require('../../terminal/parseHtml');
+const __countLine = require('../../string/countLine');
+const __hotkey = require('../../keyboard/hotkey');
+const __color = require('../../color/color');
+const __SPromise = require('../../promise/SPromise');
+const __SInput = require('../form/SInput');
+const __multiple = require('../../class/multipleExtends');
+const __activeSpace = require('../../core/activeSpace');
 
 /**
- * @name                  SSummaryList
+ * @name                  SSearchableList
  * @namespace             sugar.node.blessed
  * @type                  Class
  *
- * This class gives you the ability to display an editable list of informations.
- * This is very useful to display for example a summary of a command to launch, or whatever...
+ * This class gives you the ability to display a list in which you can make research
+ * and select item with the keyboard or the mouse.
  *
  * @param         {Array}           items                 An array of items object constitued of these properties:
  * - id (null) {String}: The item id
- * - text (null) {String}: The item text to display before the value
- * - default (null) {String}: The item default value
+ * - value (null) {String}: The item text to display
  * @param        {Object}         [settings = {}]         A settings object to configure your this. Here's the available settings:
  *
  * @example       js
- * const SSummaryList = require('@coffeekraken/sugar/node/blessed/SSummaryList');
- * const list = new SSummaryList({});
+ * const SSearchableList = require('@coffeekraken/sugar/node/blessed/SSearchableList');
+ * const list = new SSearchableList([{
+ *    id: 'something',
+ *    value: 'Hello world'
+ * }]);
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SSummaryList extends __SComponent {
-  /**
-   * @name                  _editingItemIdx
-   * @type                  Number
-   * @private
-   *
-   * Store the editing list item index
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _editingItemIdx = null;
-
+module.exports = class SSearchableList extends __SComponent {
   /**
    * @name                  _selectedItemIdx
    * @type                  Number
@@ -52,18 +43,6 @@ module.exports = class SSummaryList extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _selectedItemIdx = null;
-
-  /**
-   * @name                  _isEditing
-   * @type                  Boolean
-   * @default               false
-   * @private
-   *
-   * Store if the list is in editing mode or not
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _isEditing = false;
 
   /**
    * @name                _list
@@ -80,6 +59,8 @@ module.exports = class SSummaryList extends __SComponent {
   /**
    * @name                  _items
    * @type                  Array
+   * @default               []
+   * @private
    *
    * Store the items list
    *
@@ -100,15 +81,17 @@ module.exports = class SSummaryList extends __SComponent {
     super(
       __deepMerge(
         {
-          style: {
-            bg: __color('terminal.black').toString(),
-            item: {
+          list: {
+            style: {
               bg: __color('terminal.black').toString(),
-              fg: __color('terminal.white').toString()
-            },
-            selected: {
-              bg: __color('terminal.cyan').toString(),
-              fg: __color('terminal.white').toString()
+              item: {
+                bg: __color('terminal.black').toString(),
+                fg: __color('terminal.white').toString()
+              },
+              selected: {
+                bg: __color('terminal.cyan').toString(),
+                fg: __color('terminal.white').toString()
+              }
             }
           }
         },
@@ -121,7 +104,7 @@ module.exports = class SSummaryList extends __SComponent {
       keys: false,
       mouse: false,
       interactive: true,
-      ...this._settings
+      ...this._settings.list
     });
 
     this.append(this._list);
@@ -129,17 +112,10 @@ module.exports = class SSummaryList extends __SComponent {
     // save the items
     this._items = items;
 
-    // init settings items
-    this._items.forEach((item) => {
-      if (item.value === undefined && item.default) {
-        item.value = item.default;
-      }
-    });
-
     this._editingItemIdx = null;
 
     this.on('attach', () => {
-      __activeSpace.append('summaryList');
+      // __activeSpace.append('search');
       this._rebuildList();
     });
 
@@ -149,20 +125,11 @@ module.exports = class SSummaryList extends __SComponent {
     this.then = this.promise.then.bind(this.promise);
     this.catch = this.promise.catch.bind(this.promise);
 
-    // this.on('select', (list) => {
-    //   this._terminate();
-    //   this.promise.resolve(settings.items[this.selected]);
-    // });
-    // this.on('cancel', (item) => {
-    //   this._terminate();
-    //   this.promise.cancel();
-    // });
-
     // init hotkeys
     this._initHotkeys();
 
-    this._list.select(this._items.length);
-    this._selectedItemIdx = this._items.length;
+    this._list.select(0);
+    this._selectedItemIdx = 0;
   }
 
   /**
@@ -176,73 +143,28 @@ module.exports = class SSummaryList extends __SComponent {
    */
   _initHotkeys() {
     this._escapeHotkey = __hotkey('escape', {
-      activeSpace: '**.summaryList'
+      // activeSpace: '**.summaryList'
     }).on('press', (key) => {
-      if (this._isEditing) {
-        this._isEditing = false;
-      } else {
-        this._terminate();
-        this.promise.cancel();
-      }
+      this._terminate();
+      this.promise.cancel();
     });
     this._downHotkey = __hotkey('down', {
-      activeSpace: '**.summaryList'
+      // activeSpace: '**.summaryList'
     }).on('press', (key) => {
-      if (this._isEditing) return;
       this._list.down(1);
       this._selectedItemIdx = this._list.selected;
       this._rebuildList();
     });
     this._upHotkey = __hotkey('up', {
-      activeSpace: '**.summaryList'
+      // activeSpace: '**.summaryList'
     }).on('press', (key) => {
-      if (this._isEditing) return;
       this._list.up(1);
       this._selectedItemIdx = this._list.selected;
       this._rebuildList();
     });
     this._enterHotkey = __hotkey('enter', {
-      activeSpace: '**.summaryList'
-    }).on('press', (key) => {
-      if (!this._isEditing) {
-        if (this._list.selected === this._items.length) {
-          this._terminate();
-          this.promise.resolve(this._items);
-          return;
-        }
-
-        this._isEditing = true;
-        this._editingItemIdx = this._list.selected;
-        this._editInput = new __SInput({
-          placeholder: this._items[this._list.selected].default,
-          top: this._list.selected,
-          left: this.getLongestListItemName().length + 4
-        });
-        this._list.style.selected = {
-          bg: 'black',
-          fg: 'white'
-        };
-        this._editInput.promise
-          .on('resolve', (value) => {
-            this._items[this._list.selected].value = value;
-          })
-          .on('cancel', () => {})
-          .on('cancel,finally', () => {
-            setTimeout(() => {
-              this._isEditing = false;
-              this._editingItemIdx = null;
-              this.remove(this._editInput);
-              this._list.style.selected = {
-                bg: this._settings.style.selected.bg,
-                fg: this._settings.style.selected.fg
-              };
-              this._rebuildList();
-            });
-          });
-        this._rebuildList();
-        this.append(this._editInput);
-      }
-    });
+      // activeSpace: '**.summaryList'
+    }).on('press', (key) => {});
   }
 
   /**
@@ -256,12 +178,12 @@ module.exports = class SSummaryList extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   getLongestListItemName() {
-    let longestItemText = '';
+    let longestItemValue = '';
     this._items.forEach((item) => {
-      if (longestItemText.length < item.text.length)
-        longestItemText = item.text;
+      if (longestItemValue.length < item.value.length)
+        longestItemValue = item.value;
     });
-    return longestItemText;
+    return longestItemValue;
   }
 
   /**
@@ -274,7 +196,6 @@ module.exports = class SSummaryList extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _terminate() {
-    if (this._editInput) this.remove(this._editInput);
     this._list.detach();
     this._escapeHotkey.cancel();
     this._downHotkey.cancel();
@@ -332,7 +253,6 @@ module.exports = class SSummaryList extends __SComponent {
     this._list.clearItems();
     this._list.setItems(listItems);
     this._list.select(this._selectedItemIdx);
-    this._list.items[this._items.length].top += 1;
 
     this.style.bg = __color('terminal.black').toString();
 
@@ -341,13 +261,7 @@ module.exports = class SSummaryList extends __SComponent {
     });
 
     const selectedItem = this._list.items[this._selectedItemIdx];
-    if (!this._isEditing) {
-      selectedItem.style.bg = __color('terminal.cyan').toString();
-    }
-
-    selectedItem.position.width =
-      __countLine(this._buildBlessedListItemsArray()[this._selectedItemIdx]) +
-      (this._selectedItemIdx === this._items.length ? 2 : 1);
+    selectedItem.style.bg = __color('terminal.cyan').toString();
 
     this.update();
   }

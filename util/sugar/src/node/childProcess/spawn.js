@@ -4,7 +4,6 @@ const __SPromise = require('../promise/SPromise');
 const __uniqid = require('../string/uniqid');
 const __parseLog = require('../cli/parseLog');
 const __hotkey = require('../keyboard/hotkey');
-const __fkill = require('fkill');
 const __tkill = require('tree-kill');
 
 /**
@@ -30,9 +29,22 @@ module.exports = function spawn(
   settings = null
 ) {
   let childProcess;
+
+  const runningProcess = {
+    id: __uniqid(),
+    start: Date.now(),
+    end: null,
+    duration: null,
+    stdout: [],
+    stderr: [],
+    command,
+    state: 'idle',
+    args: Array.isArray(argsOrSettings) ? argsOrSettings : []
+  };
+
   const promise = new __SPromise((resolve, reject, trigger, cancel) => {
     const defaultSettings = {
-      // shell: true,
+      shell: true,
       // detached: true,
       // stdio: 'inherit',
       env: {
@@ -46,18 +58,6 @@ module.exports = function spawn(
     if (typeof settings === 'object') {
       settings = __deepMerge(defaultSettings, settings);
     }
-
-    const runningProcess = {
-      id: __uniqid(),
-      start: Date.now(),
-      end: null,
-      duration: null,
-      stdout: [],
-      stderr: [],
-      command,
-      state: 'idle',
-      args: Array.isArray(argsOrSettings) ? argsOrSettings : []
-    };
 
     childProcess = __childProcess.spawn(command, argsOrSettings, settings);
 
@@ -91,6 +91,12 @@ module.exports = function spawn(
           time: Date.now(),
           process: runningProcess
         });
+        reject({
+          code,
+          signal,
+          time: Date.now(),
+          process: runningProcess
+        });
       } else if (code === 0 && !signal) {
         runningProcess.state = 'success';
         trigger('success', {
@@ -100,6 +106,20 @@ module.exports = function spawn(
           process: runningProcess
         });
         resolve({
+          code,
+          signal,
+          time: Date.now(),
+          process: runningProcess
+        });
+      } else {
+        runningProcess.state = 'error';
+        trigger('error', {
+          code,
+          signal,
+          time: Date.now(),
+          process: runningProcess
+        });
+        reject({
           code,
           signal,
           time: Date.now(),
@@ -148,6 +168,17 @@ module.exports = function spawn(
   })
     .on('cancel,finally', () => {})
     .start();
+
+  promise.log = (...args) => {
+    args.forEach((arg) => {
+      runningProcess.stdout.push(__parseLog(arg.toString()));
+      promise.trigger('stdout.data', {
+        process: runningProcess,
+        time: Date.now(),
+        value: __parseLog(arg.toString())
+      });
+    });
+  };
 
   const _promiseCancel = promise.cancel.bind(promise);
   promise.cancel = () => {

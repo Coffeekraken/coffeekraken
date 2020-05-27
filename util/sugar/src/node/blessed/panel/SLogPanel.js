@@ -1,21 +1,21 @@
-const __deepMerge = require('../object/deepMerge');
+const __deepMerge = require('../../object/deepMerge');
 const __blessed = require('blessed');
-const __parseHtml = require('../terminal/parseHtml');
-const __splitEvery = require('../string/splitEvery');
-const __countLine = require('../string/countLine');
-const __uniqid = require('../string/uniqid');
-const __sugarConfig = require('../config/sugar');
+const __parseHtml = require('../../terminal/parseHtml');
+const __splitEvery = require('../../string/splitEvery');
+const __countLine = require('../../string/countLine');
+const __uniqid = require('../../string/uniqid');
+const __sugarConfig = require('../../config/sugar');
 const { print, stringify } = require('q-i');
-const __SPromise = require('../promise/SPromise');
-const __color = require('../color/color');
-const __hotkey = require('../keyboard/hotkey');
-const __clone = require('../object/clone');
+const __SPromise = require('../../promise/SPromise');
+const __color = require('../../color/color');
+const __hotkey = require('../../keyboard/hotkey');
+const __clone = require('../../object/clone');
 
-const __SComponent = require('./SComponent');
+const __SComponent = require('../SComponent');
 
 /**
  * @name                    SLogPanel
- * @namespace               sugar.node.blessed
+ * @namespace               sugar.node.blessed.panel
  * @type                    Class
  *
  * This class define a "panel" in the terminal that you can easily configure to have the look and feel that you want
@@ -26,7 +26,7 @@ const __SComponent = require('./SComponent');
  * - screen (true) {Boolean}: Specify if you want your panel wrapped inside an "blessed"(https://www.npmjs.com/package/blessed) screen object. Useful when you just want to render your panel in the terminal. If you have your own screen object
  *
  * @example         js
- * const SLogPanel = require('@coffeekraken/sugar/node/terminal/SLogPanel');
+ * const SLogPanel = require('@coffeekraken/sugar/node/blessed/panel/SLogPanel');
  * const panel = new SLogPanel('my-cool-pannel', {
  * });
  * panel.log('Hello world');

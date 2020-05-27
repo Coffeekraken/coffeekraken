@@ -5,9 +5,21 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _extendsClasses = _interopRequireDefault(require("extends-classes"));
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (typeof call === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 /**
  * @name                multipleExtends
@@ -26,39 +38,41 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-var _default = _extendsClasses.default; // export default (baseClass, ...mixins) => {
-//   class base extends baseClass {
-//     constructor(...args) {
-//       super(...args);
-//       mixins.forEach((mixin) => {
-//         copyProps(this, new mixin());
-//       });
-//     }
-//   }
-//   let copyProps = (target, source) => {
-//     // this function copies all properties and symbols, filtering out some special ones
-//     Object.getOwnPropertyNames(source)
-//       .concat(Object.getOwnPropertySymbols(source))
-//       .forEach((prop) => {
-//         if (
-//           !prop.match(
-//             /^(?:constructor|prototype|arguments|caller|name|bind|call|apply|toString|length)$/
-//           )
-//         )
-//           Object.defineProperty(
-//             target,
-//             prop,
-//             Object.getOwnPropertyDescriptor(source, prop)
-//           );
-//       });
-//   };
-//   mixins.forEach((mixin) => {
-//     // outside contructor() to allow aggregation(A,B,C).staticFunction() to be called etc.
-//     copyProps(base.prototype, mixin.prototype);
-//     copyProps(base, mixin);
-//   });
-//   return base;
-// };
+var _default = (baseClass, ...mixins) => {
+  let base = /*#__PURE__*/function (_baseClass) {
+    _inherits(base, _baseClass);
+
+    var _super = _createSuper(base);
+
+    function base(...args) {
+      var _this;
+
+      _classCallCheck(this, base);
+
+      _this = _super.call(this, ...args);
+      mixins.forEach(mixin => {
+        copyProps(_assertThisInitialized(_this), new mixin());
+      });
+      return _this;
+    }
+
+    return base;
+  }(baseClass);
+
+  let copyProps = (target, source) => {
+    // this function copies all properties and symbols, filtering out some special ones
+    Object.getOwnPropertyNames(source).concat(Object.getOwnPropertySymbols(source)).forEach(prop => {
+      if (!prop.match(/^(?:constructor|prototype|arguments|caller|name|bind|call|apply|toString|length)$/)) Object.defineProperty(target, prop, Object.getOwnPropertyDescriptor(source, prop));
+    });
+  };
+
+  mixins.forEach(mixin => {
+    // outside contructor() to allow aggregation(A,B,C).staticFunction() to be called etc.
+    copyProps(base.prototype, mixin.prototype);
+    copyProps(base, mixin);
+  });
+  return base;
+};
 
 exports.default = _default;
 module.exports = exports.default;

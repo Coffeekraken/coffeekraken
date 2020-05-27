@@ -1,13 +1,14 @@
 const __blessed = require('blessed');
-const __SComponent = require('./SComponent');
-const __deepMerge = require('../object/deepMerge');
-const __parseHtml = require('../terminal/parseHtml');
-const __color = require('../color/color');
-const __escapeStack = require('../terminal/escapeStack');
+const __SComponent = require('../SComponent');
+const __deepMerge = require('../../object/deepMerge');
+const __parseHtml = require('../../terminal/parseHtml');
+const __color = require('../../color/color');
+const __escapeStack = require('../../terminal/escapeStack');
+const __activeSpace = require('../../core/activeSpace');
 
 /**
- * @name                  SCenteredPopup
- * @namespace             sugar.node.blessed
+ * @name                  SPopup
+ * @namespace             sugar.node.blessed.popup
  * @type                  Class
  *
  * This class is the base one for all the sugar blessed components like input, panel, etc...
@@ -15,12 +16,12 @@ const __escapeStack = require('../terminal/escapeStack');
  * @param        {Object}         [settings = {}]         A settings object to configure your list. Here's the available settings:
  *
  * @example       js
- * const SCenteredPopup = require('@coffeekraken/sugar/node/blessed/SCenteredPopup');
- * const myPopup = new SCenteredPopup();
+ * const SPopup = require('@coffeekraken/sugar/node/blessed/popup/SPopup');
+ * const myPopup = new SPopup();
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SCenteredPopup extends __SComponent {
+module.exports = class SPopup extends __SComponent {
   /**
    * @name                  constructor
    * @type                  Function
@@ -97,7 +98,8 @@ module.exports = class SCenteredPopup extends __SComponent {
     if (this._titleBox) contentTop += this._titleBox.height;
     if (this._descriptionBox) contentTop += this._descriptionBox.height;
     this._contentBox = __blessed.box({
-      shrink: true,
+      left: 0,
+      right: 0,
       top: contentTop,
       height: 'shrink',
       style: {
@@ -116,7 +118,10 @@ module.exports = class SCenteredPopup extends __SComponent {
     });
     super.append(this._contentBox);
 
+    __activeSpace.append('popup');
+
     __escapeStack(() => {
+      __activeSpace.previous();
       this.parent.remove(this);
     });
   }

@@ -35,6 +35,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * import parseSchema from '@coffeekraken/sugar/js/url/parseSchema';
  * parseSchema('https://github.com/myApp/master/3', '{project:string}/{?branch:string}/{?idx:number}');
  * // {
+ * //   url: 'https://github.com/myApp/master/3',
+ * //   schema: '{project:string}/{?branch:string}/{?idx:number}',
  * //   match: true,
  * //   errors: null,
  * //   params: {
@@ -62,7 +64,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 function parseSchema(url, schema) {
-  // get the pathname of the url
+  const rawSchemaString = schema;
+  const rawUrlString = url; // remove query string
+
+  url = url.split('?')[0]; // get the pathname of the url
+
   let pathname;
 
   try {
@@ -121,14 +127,14 @@ function parseSchema(url, schema) {
 
   for (let i = 0; i < schemaParts.length; i++) {
     // get the schema for this part
-    const schema = schemaParts[i]; // if it's not an object, mean that it's a simple string part
+    const schema = schemaParts[i]; // get the part to check
+
+    const part = splitedPathname[i]; // if it's not an object, mean that it's a simple string part
 
     if (typeof schema !== 'object') {
+      if (part !== schema) match = false;
       continue;
-    } // get the part to check
-
-
-    const part = splitedPathname[i];
+    }
 
     if (!part && !schema.optional) {
       let errorObj = {
@@ -171,7 +177,9 @@ function parseSchema(url, schema) {
   return {
     errors: !Object.keys(errors).length ? null : errors,
     params: !Object.keys(params).length ? null : params,
-    match
+    match,
+    schema: rawSchemaString,
+    url: rawUrlString
   };
 }
 

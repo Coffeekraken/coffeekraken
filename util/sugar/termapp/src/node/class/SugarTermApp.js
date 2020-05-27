@@ -1,14 +1,8 @@
-const __SApp = require('../../../../node/blessed/SApp');
+const __SApp = require('../../../../node/blessed/app/SApp');
 const __deepMerge = require('../../../../node/object/deepMerge');
-const __packageJson = require('../../../../package.json');
-const __sugarConfig = require('../../../../node/config/sugar');
 const __SConfig = require('../../../../node/config/SConfig');
 const __SConfigFsAdapter = require('../../../../node/config/adapters/SConfigFsAdapter');
 const __packageRoot = require('../../../../node/path/packageRoot');
-
-const __SPhpServerCommand = require('../../../../node/server/SPhpServerCommand');
-const __SCommandPanel = require('../../../../node/blessed/SCommandPanel');
-const __SBuildScssCommand = require('../../../../node/build/commands/SBuildScssCommand');
 
 /**
  * @name            SugarTermApp
@@ -39,7 +33,7 @@ module.exports = class SugarTermApp extends __SApp {
       name: 'termapp',
       filename: '[name].config.js',
       defaultConfigPath: `${__packageRoot(__dirname)}/.sugar/[filename]`,
-      appConfigPath: `${__packageRoot(process.cwd())}/.sugar/[filename]`,
+      appConfigPath: `${__dirname}/../../../[filename]`,
       userConfigPath: null
     });
     const sConfigInstance = new __SConfig('termapp', {
@@ -61,17 +55,24 @@ module.exports = class SugarTermApp extends __SApp {
       )
     );
 
-    new __SBuildScssCommand();
-    new __SBuildScssCommand();
-    new __SBuildScssCommand();
-    new __SBuildScssCommand();
-    new __SBuildScssCommand();
-    new __SBuildScssCommand();
-    // new __SBuildScssCommand();
-    new __SPhpServerCommand();
+    // setTimeout(() => {
+    //   this.goTo('/about?coco=efdwef');
+    // }, 2000);
+    // setTimeout(() => {
+    //   this.goTo('/commands/build');
+    // }, 2000);
 
-    // const scssCommand = ;
-    const panel = new __SCommandPanel('+(build|server)');
-    this.append(panel);
+    // new __SBuildScssCommand();
+    // new __SBuildScssCommand();
+    // new __SBuildScssCommand();
+    // new __SBuildScssCommand();
+    // new __SBuildScssCommand();
+    // new __SBuildScssCommand();
+    // // new __SBuildScssCommand();
+    // new __SPhpServerCommand();
+
+    // // const scssCommand = ;
+    // const panel = new __SCommandPanel('+(build|server)');
+    // this.append(panel);
   }
 };

@@ -1,17 +1,14 @@
 const __childProcess = require('child_process');
 const __deepMerge = require('../object/deepMerge');
 const __SPromise = require('../promise/SPromise');
-const __isPath = require('../is/path');
-const __extension = require('../fs/extension');
-const __commandExists = require('command-exists');
 const __hotkey = require('../keyboard/hotkey');
 const __uniqid = require('../string/uniqid');
 const __argsToString = require('../cli/argsToString');
 const __watchCli = require('../../cli/fs/watch.cli');
-const __spawn = require('../childProcess/spawn');
 const __minimatch = require('minimatch');
-const __checkDefinitionObject = require('../cli/checkDefinitionObject');
-const __buildCommandLine = require('../cli/buildCommandLine');
+const __SCli = require('../cli/SCli');
+const __spawn = require('../childProcess/spawn');
+const __replaceTokens = require('../string/replaceTokens');
 
 /**
  * @name            SCommand
@@ -210,24 +207,24 @@ module.exports = class SCommand extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(name, command, settings = {}) {
+    // make sure the arguments are valid
+    if (typeof command === 'string') {
+    } else if (command instanceof __SCli) {
+    } else {
+      throw new Error(
+        `The "command" argument of the "SCommand" class constructor has to be one of these types: String,SCli...`
+      );
+    }
+
     // init subclass
     super(
       (resolve, reject, trigger, cancel) => {
-        // make sure we have a definition setting
-        this._checkDefinition(this._settings.definition);
-
         // save this command into the static commands stack
         SCommand._commandsStack.push(this);
-
         // save the parameters
         this._name = name;
         this._command = command;
         this._id = __uniqid();
-
-        // check the command
-        this._check();
-        // reset the running process object
-        // this._resetCurrentProcessObject();
         // init key
         this._initKey();
       },
@@ -235,12 +232,10 @@ module.exports = class SCommand extends __SPromise {
         {
           // TODO: documentation settings
           run: false,
+          argsObj: {},
           concurrent: false,
           color: 'white',
-          ask: null,
           title: null,
-          args: {},
-          definition: null,
           summary: true,
           watch: null,
           key: null,
@@ -254,51 +249,6 @@ module.exports = class SCommand extends __SPromise {
       if (this._settings.watch) this.watch();
       if (this._settings.run) this.run();
     });
-  }
-
-  /**
-   * @name                  _checkDefinition
-   * @type                  Function
-   * @private
-   *
-   * This method take care of checking the passed "definition" object in the settings and make sure all is valid
-   *
-   * @param       {Object}        definition        The definition object to check
-   *
-   * @since       2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _checkDefinition(definition) {
-    // check the definition object
-    const res = __checkDefinitionObject(definition);
-    if (res !== true) {
-      throw new Error(res);
-    }
-    return true;
-  }
-
-  /**
-   * @name                   _resetCurrentProcessObject
-   * @type                    Function
-   * @private
-   *
-   * This method simply reset the running process object
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _resetCurrentProcessObject() {
-    this._currentProcess = {
-      id: __uniqid(),
-      start: null,
-      end: null,
-      duration: null,
-      stdout: [],
-      stderr: [],
-      command: this._command,
-      childProcessPromise: null,
-      state: this._settings.watch ? 'watching' : 'idle'
-    };
-    this._processesStack.push(this._currentProcess);
   }
 
   /**
@@ -471,32 +421,24 @@ module.exports = class SCommand extends __SPromise {
       if (this.isRunning() && !this._settings.concurrent) {
         this.kill();
       } else {
-        const answer = await this._ask({
-          type: 'summary',
-          items: this._buildSummaryItems()
-        });
-        if (!Array.isArray(answer)) return;
-        const args = {};
-        answer.forEach((item) => {
-          args[item.id] = item.value;
-        });
-
-        this.run(args);
+        this.run(this._settings.argsObj, false);
       }
     });
   }
 
-  _buildSummaryItems(args = this._settings.args) {
-    if (!this._settings.definition) return false;
+  _buildSummaryItems(argsObj = this._settings.argsObj, definitionObj) {
+    if (!definitionObj) return false;
     const items = [];
-    Object.keys(this._settings.definition).forEach((argName) => {
-      const definitionObj = this._settings.definition[argName];
+    Object.keys(definitionObj).forEach((argName) => {
+      const argDefinitionObj = definitionObj[argName];
       const argValue =
-        args[argName] !== undefined ? args[argName] : definitionObj.default;
-      if (definitionObj.level !== 1) return;
+        argsObj[argName] !== undefined
+          ? argsObj[argName]
+          : argDefinitionObj.default;
+      if (argDefinitionObj.level !== 1) return;
       items.push({
         id: argName,
-        text: definitionObj.description,
+        text: argDefinitionObj.description,
         default: argValue
       });
     });
@@ -596,6 +538,7 @@ module.exports = class SCommand extends __SPromise {
    */
   kill() {
     if (!this.isRunning()) return;
+    if (!this._currentProcess) return;
     if (!this._currentProcess.childProcessPromise) return;
     this._currentProcess.childProcessPromise.cancel();
     this._currentProcess = null;
@@ -633,7 +576,8 @@ module.exports = class SCommand extends __SPromise {
    *
    * This method is used to run the command
    *
-   * @param         {Object}        [args=null]         An optional arguments object for this particular process instance. If not specified, will take the default one passed in the constructor settings
+   * @param         {Object}        [args=settings.argsObj]         An optional arguments object for this particular process instance. If not specified, will take the default one passed in the constructor settings
+   * @param         {Boolean}       [skipAsk=true]             Specify if you want to skip the "ask" process
    * @return        {SPromise}                          An SPromise instance on which you can subscribe to all the "spawn" function "events" which are:
    * - start: Triggered when the command start a process
    * - close: Triggered when the process is closed
@@ -645,7 +589,7 @@ module.exports = class SCommand extends __SPromise {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  run(args = null, includeAllArgs = true) {
+  async run(argsObj = this._settings.argsObj, skipAsk = true) {
     if (this._destroyed) {
       throw new Error(
         `Sorry but this command named "${this.name}" has been destroyed...`
@@ -656,39 +600,64 @@ module.exports = class SCommand extends __SPromise {
         `Sorry but the command named "${this.name}" is already running...`
       );
     }
-    const _this = this;
 
-    const promise = new __SPromise(async (resolve, reject, trigger, cancel) => {
-      // try {
+    this._currentProcess = {};
 
-      // generate the final command to run
-      const commandLine = __buildCommandLine(
-        this._command,
-        this._settings.definitionObj,
-        args || this._settings.args,
-        includeAllArgs
+    if (!skipAsk) {
+      if (this._command instanceof __SCli) {
+        const answer = await this._ask({
+          type: 'summary',
+          items: this._buildSummaryItems(argsObj, this._command.definitionObj)
+        });
+        if (!Array.isArray(answer)) return;
+        answer.forEach((item) => {
+          argsObj[item.id] = item.value;
+        });
+      }
+    }
+
+    if (this._command instanceof __SCli) {
+      this._currentProcess.childProcessPromise = this._runSCli(argsObj);
+    } else if (typeof this._command === 'string') {
+      this._currentProcess.childProcessPromise = __spawn(
+        __replaceTokens(this._command, argsObj)
       );
+    }
 
-      this._currentProcess = {};
-      // init the child process
-      this._currentProcess.childProcessPromise = __spawn(commandLine);
-      this._currentProcess.childProcessPromise.on('*', (data) => {
-        this._processesStack[this._processesStack.length - 1] = {
-          ...this._processesStack[this._processesStack.length - 1],
-          ...(data && data.process ? data.process : {})
-        };
-      });
-      this._processesStack.push(this._currentProcess);
+    // init the child process
+    this._currentProcess.childProcessPromise.on('*', (data) => {
+      this._processesStack[this._processesStack.length - 1] = {
+        ...this._processesStack[this._processesStack.length - 1],
+        ...(data && data.process ? data.process : data || {})
+      };
+    });
+    this._currentProcess.childProcessPromise.on('close', () => {
+      this._currentProcess = null;
+    });
+    this._processesStack.push(this._currentProcess);
 
-      __SPromise.pipe(this._currentProcess.childProcessPromise, this, {});
-    })
-      .on('cancel,finally', () => {
-        this._currentProcess.childProcessPromise.cancel();
-      })
+    const promise = new __SPromise((resolve, reject, trigger, cancel) => {})
+      .on('cancel,finally', () => {})
       .start();
+
+    __SPromise.pipe(this._currentProcess.childProcessPromise, promise, {});
+    __SPromise.pipe(this._currentProcess.childProcessPromise, this, {});
 
     // return the promise
     return promise;
+  }
+
+  /**
+   * @name                _runSCli
+   * @type                Function
+   * @async
+   *
+   * This method run a SCli based command
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _runSCli(argsObj = {}) {
+    return this._command.run(argsObj);
   }
 
   /**
@@ -743,52 +712,27 @@ module.exports = class SCommand extends __SPromise {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _check() {
-    let extension, executable;
-    if (__isPath(this._command, true)) {
-      // get the file extension
-      extension = __extension(this._command);
-      executable = this._getExecutableFromExtension(extension);
-    } else if (typeof this._command === 'string') {
-      // treat this as a command
-      executable = this._command.split(' ').slice(0, 1);
-    } else {
-      // the passed process value is not something usable...
-      throw new Error(
-        `The passed command "<primary>${this._command}</primary>" is not something usable...`
-      );
-    }
-    // check if the command needed to launch this script is available
-    if (!__commandExists.sync(executable)) {
-      throw new Error(
-        `Sorry but the executable "${executable}" needed to launch the command named "${this._name}" is not installed on your machine...`
-      );
-    }
-    return true;
-  }
-
-  /**
-   * @name                _getExecutableFromExtension
-   * @type                Function
-   * @private
-   *
-   * Return the executable to use in order to execute the passed file extension
-   *
-   * @param         {String}        extension       The file extension to get the executable for
-   * @return        {String}                        The executable command to execute the file extension passed
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _getExecutableFromExtension(extension) {
-    switch (extension.toLowerCase()) {
-      case 'js':
-      case 'jsx':
-        return 'node';
-        break;
-      case 'php':
-      default:
-        return extension.toLowerCase();
-        break;
-    }
-  }
+  // _check() {
+  //   let extension, executable;
+  //   if (__isPath(this._command, true)) {
+  //     // get the file extension
+  //     extension = __extension(this._command);
+  //     executable = this._getExecutableFromExtension(extension);
+  //   } else if (typeof this._command === 'string') {
+  //     // treat this as a command
+  //     executable = this._command.split(' ').slice(0, 1);
+  //   } else {
+  //     // the passed process value is not something usable...
+  //     throw new Error(
+  //       `The passed command "<primary>${this._command}</primary>" is not something usable...`
+  //     );
+  //   }
+  //   // check if the command needed to launch this script is available
+  //   if (!__commandExists.sync(executable)) {
+  //     throw new Error(
+  //       `Sorry but the executable "${executable}" needed to launch the command named "${this._name}" is not installed on your machine...`
+  //     );
+  //   }
+  //   return true;
+  // }
 };

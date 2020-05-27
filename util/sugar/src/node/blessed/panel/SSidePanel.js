@@ -11,7 +11,7 @@ const __multiple = require('../class/multipleExtends');
 
 /**
  * @name                  SSidePanel
- * @namespace             sugar.node.blessed
+ * @namespace             sugar.node.blessed.panel
  * @type                  Class
  *
  * This class gives you the ability to create a side panel (left, right, tom, bottom) that can contain any other content
@@ -23,7 +23,7 @@ const __multiple = require('../class/multipleExtends');
  *
  *
  * @example       js
- * const SSidePanel = require('@coffeekraken/sugar/node/blessed/SSidePanel');
+ * const SSidePanel = require('@coffeekraken/sugar/node/blessed/panel/SSidePanel');
  * const panel = new SSidePanel({
  *    id: 'myCoolPanel',
  *    side: 'right'

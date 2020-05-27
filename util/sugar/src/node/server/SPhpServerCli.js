@@ -2,7 +2,7 @@ const __SCli = require('../cli/SCli');
 const __packageRoot = require('../path/packageRoot');
 
 /**
- * @name            SPhpCli
+ * @name            SPhpServerCli
  * @namespace       sugar.node.server
  * @type            Class
  * @extends         SCli
@@ -12,7 +12,7 @@ const __packageRoot = require('../path/packageRoot');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SPhpCli extends __SCli {
+module.exports = class SPhpServerCli extends __SCli {
   /**
    * @name          command
    * @type          String
@@ -205,7 +205,33 @@ module.exports = class SPhpCli extends __SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor() {
-    super();
+  constructor(settings = {}) {
+    super(settings);
+  }
+
+  /**
+   * @name            run
+   * @type            Function
+   * @override
+   *
+   * This method simply override the default one.
+   * For arguments documentation, check the SCli class.
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  run(
+    argsObj = this._settings.argsObj,
+    includeAllArgs = this._settings.includeAllArgs
+  ) {
+    const process = super.run(argsObj, includeAllArgs);
+    setTimeout(() => {
+      this.log(`<green>Your PHP server is up and running</green>:
+
+Hostname  : <yellow>${this.runningArgsObj.hostname}</yellow>
+Port      : <yellow>${this.runningArgsObj.port}</yellow>
+Directory : <yellow>${this.runningArgsObj.rootDir}</yellow>
+URL       : <cyan>http://${this.runningArgsObj.hostname}:${this.runningArgsObj.port}</cyan>`);
+    });
+    return process;
   }
 };

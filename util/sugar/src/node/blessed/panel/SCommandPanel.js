@@ -1,22 +1,18 @@
-const __SLogPanel = require('./SLogPanel');
-const __convert = require('../time/convert');
-const __deepMerge = require('../object/deepMerge');
+const __deepMerge = require('../../object/deepMerge');
 const __blessed = require('blessed');
-const __color = require('../color/color');
-const __SComponent = require('./SComponent');
-const __SCenteredPopup = require('./SCenteredPopup');
-const __SSummaryList = require('./SSummaryList');
-const __summaryListPopup = require('./summaryListPopup');
+const __color = require('../../color/color');
+const __SComponent = require('../SComponent');
+const __summaryListPopup = require('../list/summaryListPopup');
 const __ora = require('ora');
-const __parseHtml = require('../terminal/parseHtml');
-const __isOdd = require('../is/odd');
-const __SPromise = require('../promise/SPromise');
-const __SCommand = require('../terminal/SCommand');
-const __transitionObjectProperties = require('../transition/objectProperties');
+const __parseHtml = require('../../terminal/parseHtml');
+const __isOdd = require('../../is/odd');
+const __SPromise = require('../../promise/SPromise');
+const __SCommand = require('../../terminal/SCommand');
+const __transitionObjectProperties = require('../../transition/objectProperties');
 
 /**
  * @name                  SCommandPanel
- * @namespace             sugar.node.blessed
+ * @namespace             sugar.node.blessed.panel
  * @type                  Class
  *
  * This class is a simple SPanel extended one that accesp an SCommandPanel instance
@@ -26,7 +22,7 @@ const __transitionObjectProperties = require('../transition/objectProperties');
  * @param         {Object}              [settings={}]     The settings object to configure your SCommandPanel
  *
  * @example         js
- * const SCommandPanel = require('@coffeekraken/sugar/node/terminal/SCommandPanel');
+ * const SCommandPanel = require('@coffeekraken/sugar/node/blessed/panel/SCommandPanel');
  * const myPanel = new SCommandPanel(myProcess, {
  *    screen: true
  * });
@@ -481,7 +477,11 @@ module.exports = class SCommandPanel extends __SComponent {
         this._logBox.append(panelObj.box);
       }
 
-      let boxTitle = `<bold>${
+      let boxTitle = '';
+      if (commandInstance.namespace) {
+        boxTitle += `<bgBlack><white> ${commandInstance.namespace} </white></bgBlack> `;
+      }
+      boxTitle += `<bold>${
         commandInstance.title || commandInstance.name
       }</bold>`;
       if (lastProcessObj && lastProcessObj.duration) {
@@ -521,9 +521,7 @@ module.exports = class SCommandPanel extends __SComponent {
         }, 50);
       } else {
         panelObj.box.style.bg = commandInstance.color || 'white';
-        panelObj.headerBox.setContent(
-          __parseHtml(`<iStart/>  ${boxTitle} (idle)`)
-        );
+        panelObj.headerBox.setContent(__parseHtml(`<iStart/>  ${boxTitle}`));
         panelObj.box.screen.render();
       }
 
@@ -652,12 +650,13 @@ module.exports = class SCommandPanel extends __SComponent {
       const panelObj = this._panelObjects.get(commandInstance);
       const lastProcessObj = commandInstance.lastProcessObj;
 
-      if (
-        lastProcessObj &&
-        (lastProcessObj.state === 'error' || lastProcessObj.state === 'killed')
-      ) {
+      if (lastProcessObj && lastProcessObj.state === 'killed') {
         panelObj.logBox.setContent(
           __parseHtml(`<red>The process has been killed...</red>`)
+        );
+      } else if (lastProcessObj && lastProcessObj.state === 'error') {
+        panelObj.logBox.pushLine(
+          __parseHtml(`<red>Something went wrong...</red>`)
         );
       } else {
         // take care of the content of the processBox

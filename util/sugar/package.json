@@ -11,7 +11,7 @@
       "url": "http://olivierbossel.com"
     }
   ],
-  "main": "dist/js/_all.js",
+  "main": "node.js",
   "bin": {
     "sugar": "./src/cli/sugar.cli.js"
   },
@@ -117,6 +117,7 @@
     "printf": "^0.5.3",
     "prompts": "^2.3.2",
     "q-i": "^2.0.1",
+    "query-string": "^6.12.1",
     "renderkid": "^2.0.3",
     "rxjs": "^5.5.12",
     "sass": "^1.26.3",

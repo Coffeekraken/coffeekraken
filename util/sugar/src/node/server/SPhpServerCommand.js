@@ -1,6 +1,5 @@
 const __SCommand = require('../terminal/SCommand');
 const __deepMerge = require('../object/deepMerge');
-const __phpCli = require('../../cli/server/php.cli');
 const __SPhpServerCli = require('./SPhpServerCli');
 
 /**
@@ -10,7 +9,7 @@ const __SPhpServerCli = require('./SPhpServerCli');
  *
  * This class represent a command used start a PHP server locally.
  *
- * @param         {Object}        [args={}]                An object to configure this specific php server command with these properties:
+ * @param         {Object}        [argsObj={}]                An object to configure this specific php server command with these properties:
  * @param        {Object}         [commandSettings={}]         An object of SCommand settings to configure your command
  *
  * @example       js
@@ -32,18 +31,17 @@ module.exports = class SPhpServerCommand extends __SCommand {
    * @since       2.0.0
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  constructor(args = {}, commandSettings = {}) {
+  constructor(argsObj = {}, commandSettings = {}) {
     // init command
     super(
       'server.php',
-      __SPhpServerCli.command,
+      new __SPhpServerCli(),
       __deepMerge(
         {
+          argsObj,
           title: 'PHP Server',
           key: 'p',
           concurrent: false,
-          definitionObj: __SPhpServerCli.definitionObj,
-          args,
           namespace: 'server'
         },
         commandSettings

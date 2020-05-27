@@ -1,16 +1,16 @@
 const __blessed = require('blessed');
-const __deepMerge = require('../object/deepMerge');
-const __color = require('../color/color');
-const __SComponent = require('./SComponent');
-const __SHeader = require('./SHeader');
-const __SFooter = require('./SFooter');
-const __get = require('../object/get');
-const __parseSchema = require('../url/parseSchema');
-const __SProcess = require('../terminal/SProcess');
+const __deepMerge = require('../../object/deepMerge');
+const __color = require('../../color/color');
+const __SComponent = require('../SComponent');
+const __SHeader = require('../SHeader');
+const __SFooter = require('../SFooter');
+const __get = require('../../object/get');
+const __parseSchema = require('../../url/parseSchema');
+const __SUrl = require('../../url/SUrl');
 
 /**
  * @name                  SApp
- * @namespace             sugar.node.blessed
+ * @namespace             sugar.node.blessed.app
  * @type                  Class
  *
  * This class is the main one when you want to create a Sugar terminal based application.
@@ -18,7 +18,7 @@ const __SProcess = require('../terminal/SProcess');
  * @param        {Object}         [settings = {}]         A settings object to configure your list. Here's the available settings:
  *
  * @example       js
- * const SApp = require('@coffeekraken/sugar/node/blessed/SApp');
+ * const SApp = require('@coffeekraken/sugar/node/blessed/app/SApp');
  * class MyApp extends SApp {
  *    constructor(settings = {}) {
  *      super(settings);
@@ -28,6 +28,40 @@ const __SProcess = require('../terminal/SProcess');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = class SApp extends __SComponent {
+  /**
+   * @name                  _historyArray
+   * @type                  Array
+   * @private
+   *
+   * Store the urls object history
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _historyArray = [];
+
+  /**
+   * @name                  _pagesStack
+   * @type                  Object
+   * @private
+   *
+   * Store the pages instances to reuse them instead of recreate them every
+   * page change...
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _pagesStack = {};
+
+  /**
+   * @name          _commandsStack
+   * @type          Object
+   * @private
+   *
+   * Store the instanciated commands specified in the config
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _commandsStack = {};
+
   /**
    * @name                  constructor
    * @type                  Function
@@ -57,6 +91,21 @@ module.exports = class SApp extends __SComponent {
 
     // extends parent
     super(settings);
+
+    // save the application instance globally
+    if (global.SAppInstance)
+      throw new Error(
+        `Only 1 instance of the SApp class can be instanciated at the same time...`
+      );
+    global.SAppInstance = this;
+
+    // check if their some "commands" specified in the config
+    if (
+      this.config('commands') &&
+      Object.keys(this.config('commands')).length
+    ) {
+      this._initCommands();
+    }
 
     if (this._settings.header) {
       this._headerBox = new __SHeader({
@@ -97,6 +146,34 @@ module.exports = class SApp extends __SComponent {
   }
 
   /**
+   * @name            currentUrlObj
+   * @type            Object
+   * @get
+   *
+   * Access the current url object.
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get currentUrlObj() {
+    if (!this._historyArray.length) return null;
+    return this._historyArray[this._historyArray.length - 1];
+  }
+
+  /**
+   * @name            previousUrlObj
+   * @type            Object
+   * @get
+   *
+   * Access the previous url object.
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get previousUrlObj() {
+    if (this._historyArray.length < 2) return null;
+    return this._historyArray[this._historyArray.length - 2];
+  }
+
+  /**
    * @name            config
    * @type            Function
    *
@@ -128,9 +205,11 @@ module.exports = class SApp extends __SComponent {
     // loop on the pages urls available in the config
     const urlsKeys = Object.keys(this.config('pages.urls'));
     for (let i = 0; i < urlsKeys.length; i++) {
-      const parsedSchema = __parseSchema(url, urlsKeys[i]);
-      if (parsedSchema.match) {
-        this._goTo(url, urlsKeys[i], parsedSchema);
+      const sUrl = new __SUrl(url, {
+        schema: urlsKeys[i]
+      });
+      if (sUrl.schema.match) {
+        this._goTo(sUrl);
         break;
       }
     }
@@ -143,29 +222,84 @@ module.exports = class SApp extends __SComponent {
    *
    * This is the internal version of the goTo method. It will take care of actualy change the page etc...
    *
-   * @param         {String}          url             The url where the user want to go
-   * @param         {String}          rawUrl          The raw url used in the config. This is the url that may content some params like "{what}", etc...
-   * @param         {Object}          parsedSchema    The parsed url schema
+   * @param       {SUrl}        sUrl        An SUrl instance to work with
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _goTo(url, rawUrl, parsedSchema) {
-    const pageObj = this.config(`pages.urls.${rawUrl}`);
+  _goTo(sUrl) {
+    const pageObj = this.config(`pages.urls.${sUrl.schema.schema}`);
 
-    // switch on the page type
-    switch (pageObj.type) {
-      case 'process':
-        let process;
-        // try to get the actual SProcess instance linked to the page
-        if (pageObj.process instanceof __SProcess) {
-          process = pageObj.process;
-        } else if (typeof pageObj.process === 'function') {
-          process = pageObj.process(url, rawUrl, parsedSchema);
-        } else {
-          process = this._getProcessInstance(url, rawUrl, parsedSchema);
-        }
-        break;
+    // check if the pageObj exist
+    if (!pageObj && this.config('pages.url.404')) {
+      // go to 404 page
+      this.goTo('/404');
+      return;
+    } else if (!pageObj) {
+      throw new Error(
+        `The requested page "${url}" does not exists and you don't have any 404 page defined in your @config.pages configuration...`
+      );
     }
+
+    // append the new url to the history
+    this._historyArray.push(sUrl);
+
+    // check if we have already the page instance
+    let currentPageInstance = this._pagesStack[sUrl.schema.schema];
+    if (!currentPageInstance) {
+      currentPageInstance = new pageObj.pageClass();
+      this._pagesStack[sUrl.schema.schema] = currentPageInstance;
+    }
+
+    // set args on the page
+    const argsObj = {};
+    if (sUrl.schema.params) {
+      // console.log(sUrl.schema.params);
+      Object.keys(sUrl.schema.params).forEach((paramName) => {
+        let argValue = sUrl.schema.params[paramName].value;
+        if (argValue === null) argValue = pageObj.defaultArgs[paramName];
+        argsObj[paramName] = argValue;
+      });
+    }
+    currentPageInstance.setArgs(argsObj);
+
+    // get the previous page and check if we need to destroy it
+    if (this.previousUrlObj) {
+      const previousPageInstance = this._pagesStack[
+        this.previousUrlObj.schema.schema
+      ];
+      if (previousPageInstance !== currentPageInstance) {
+        if (previousPageInstance) previousPageInstance.detach();
+        if (!previousPageInstance.persistent) {
+          previousPageInstance.destroy();
+          delete this._pagesStack[this.previousUrlObj.schema.schema];
+        }
+      }
+    }
+
+    // append the page
+    if (!currentPageInstance.parent) this.append(currentPageInstance);
+  }
+
+  /**
+   * @name          _initCommands
+   * @type          Function
+   * @private
+   *
+   * This methods takes the commands classes specified in the configuration
+   * and instanciate them to be available through the app
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _initCommands() {
+    const commandsObj = this.config('commands');
+    Object.keys(commandsObj).forEach((commandName) => {
+      const commandObj = commandsObj[commandName];
+      commandObj.settings.namespace = commandName;
+      this._commandsStack[commandName] = new commandObj.class(
+        commandObj.argsObj,
+        commandObj.settings
+      );
+    });
   }
 
   /**

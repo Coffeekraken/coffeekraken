@@ -1,10 +1,10 @@
-const __deepMerge = require('../object/deepMerge');
-const __SCenteredPopup = require('./SCenteredPopup');
+const __deepMerge = require('../../object/deepMerge');
+const __SPopup = require('../popup/SPopup');
 const __SSummaryList = require('./SSummaryList');
 
 /**
  * @name                      summaryListPopup
- * @namespace                 sugar.node.blessed
+ * @namespace                 sugar.node.blessed.list
  * @type                      Function
  *
  * This function init and display a summary list popup and return an SPromise instance on which you can subscribe for response, etc...
@@ -19,7 +19,7 @@ const __SSummaryList = require('./SSummaryList');
  * - attachTo: A simple function that you can use to attach the popup to a blessed element
  *
  * @example         js
- * const summaryListPopup = require('@coffeekraken/sugar/node/blessed/summaryListPopup');
+ * const summaryListPopup = require('@coffeekraken/sugar/node/blessed/list/summaryListPopup');
  * summaryListPopup({
  *    title: 'Hello',
  *    description: 'World',
@@ -42,7 +42,7 @@ module.exports = function summaryListPopup(settings = {}) {
     settings
   );
 
-  const popupBox = new __SCenteredPopup({
+  const popupBox = new __SPopup({
     title: settings.title,
     description: settings.description
   });

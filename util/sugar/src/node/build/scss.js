@@ -26,28 +26,26 @@ const __glob = require('glob');
  * @namespace           sugar.node.build
  * @type                Function
  *
- * This function take care of the build of scss|sass files with some nice features like watching files for changes, etc...
+ * This function take care of the build of scss|sass files with some nice features.
  *
  * @param         {Object}          [settings={}]         The settings object to configure the build process. Here's the list of available settings:
  * - input (<appRoot>/src/scss/*.scss): Specify the inputs files to compile. Accept glob patterns
  * - output: (<appRoot>/dist/css): Specify the output folder in which to save the files in
- * - watch (false) {Boolean}: Specify if you want to watch the files to compile them automatically on changes
  * - style (expanded) {String}: Specify the output style you want between nested,expanded,compact,compressed
  * - map (true) {Boolean}: Specify if you want a sourcemap to be generated or not
  * - prod (false) {Boolean}: Specify if you want a ```<filename>.prod.css``` to be generated. This file is optimized to be the smallest possible, etc...
+ * - include.sugar (true) {Boolean}: Specify if you want to include automatically the sugar scss toolkit
  * - vendor.sass ({}) {Object}: Override some Sass compiler (https://www.npmjs.com/package/sass) settings if you want. Be carefull by doing this cause this function take care of setting up these followings options: data,includePaths,sourceMap,outFile
  * @return        {SPromise}                An SPromise instance on which you can subscribe for "compiled" stack as well as the normal Promise stacks like "then, catch" etc... Here's the "events" you can subscribe on:
- * - log: Triggered when a log message has to be displayed
- * - compiled: Triggered when a file has finished his compilation
- * - then: Triggered when all the files to compile have been compiled
+ * - stdout.data: Triggered when a log message has to be displayed
+ * - resolve: Triggered when the compilation has finished successfully
  *
  * @example       js
  * const buildScss = require('@coffeekraken/sugar/node/build/scss');
  * buildScss({
  *    input: 'my/cool/input.scss',
- *    output: 'my/cool/output',
- *    watch: true
- * }).on('compiled', file => {
+ *    output: 'my/cool/output'
+ * }).on('resolve', files => {
  *    // do something...
  * });
  *
@@ -143,19 +141,11 @@ module.exports = (settings = {}) => {
           .bundledContent;
         let importAndSetupSugar = '';
         if (settings.include.sugar) {
-          // trigger(
-          //   'stdout.data',
-          //   `Importing <green>Sugar</green> in the file <yellow>${smallPath}</yellow>...`
-          // );
           importAndSetupSugar = `
             @use '@coffeekraken/sugar/index' as Sugar;
             @include Sugar.setup($sugarUserSettings);
           `;
           if (__isInPackage('@coffeekraken/sugar')) {
-            // trigger(
-            //   'stdout.data',
-            //   `Updating the @use <green>Sugar</green> path because we are in the <yellow>@coffeekraken/sugar</yellow> package...`
-            // );
             const relativePath = __path.relative(
               inputFolderPath,
               __packageRoot(__dirname)
@@ -195,11 +185,6 @@ module.exports = (settings = {}) => {
               reject(err);
               return;
             }
-
-            // trigger(
-            //   'stdout.data',
-            //   `Compilation of the file <yellow>${smallPath}</yellow> finished with <green>success</green>...`
-            // );
             const fileObj = {};
             trigger(
               'stdout.data',
@@ -219,13 +204,6 @@ module.exports = (settings = {}) => {
               fileObj.map = writingMapPath;
             }
             if (settings.prod) {
-              //   console.log(
-              //     __parseHtml(
-              //       `Start building the production version that will be saved to: <yellow>${outputPath
-              //         .replace(__appPath.path, '<rootDir>')
-              //         .replace('.css', '.prod.css')}</yellow>`
-              //     )
-              //   );
               const css = __fs.readFileSync(writingPath);
               trigger(
                 'stdout.data',
@@ -276,8 +254,6 @@ module.exports = (settings = {}) => {
               'stdout.data',
               `Compilation of the file <yellow>${smallPath}</yellow> finished <green>successfully</green>!`
             );
-            // trigger a "file" stack action
-            // trigger('file', fileObj);
             renderResolve(fileObj);
           }
         );

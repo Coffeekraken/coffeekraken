@@ -49,6 +49,7 @@ module.exports = class SugarTermApp extends __SApp {
     super(
       __deepMerge(
         {
+          ...sConfigInstance.get(''),
           sConfigInstance
         },
         settings

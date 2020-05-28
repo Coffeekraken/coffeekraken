@@ -80,13 +80,13 @@ module.exports = class SProcessOutput extends __SComponent {
   _subscribeToProcess() {
     // subscribe to data
     this._process
-      .on('start', (data) => {
-        this.log(`<yellow># Starting process...</yellow>`);
-        this.update();
-      })
+      // .on('start', (data) => {
+      //   this.log(`<yellow># Starting process...</yellow>`);
+      //   this.update();
+      // })
       .on('close', (data) => {
         this.log(
-          `# Closing process with code <red>${data.code}</red> and signal <red>${data.signal}</red>...`
+          `Closing process with code <red>${data.code}</red> and signal <red>${data.signal}</red>...`
         );
         this.update();
       })

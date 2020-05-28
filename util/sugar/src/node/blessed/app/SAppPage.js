@@ -110,6 +110,32 @@ module.exports = class SAppPage extends __SComponent {
   }
 
   /**
+   * @name        id
+   * @type        String
+   * @get
+   *
+   * Access the page id setted in the constructor
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get id() {
+    return this._id;
+  }
+
+  /**
+   * @name        title
+   * @type        String
+   * @get
+   *
+   * Access the page title setted in the constructor
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get title() {
+    return this._title;
+  }
+
+  /**
    * @name        persistent
    * @type        Boolean
    * @get

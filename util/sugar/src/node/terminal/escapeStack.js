@@ -1,3 +1,4 @@
+const __SPromise = require('../promise/SPromise');
 const __hotkey = require('../keyboard/hotkey');
 
 /**
@@ -21,32 +22,60 @@ const __hotkey = require('../keyboard/hotkey');
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-const escapeStackCallbacks = {};
-let escapeStackCurrentIndex = 0;
+const escapeStackStack = [];
 let hotkeyInitiated = false;
-module.exports = function escapeStack(callback, index = null) {
-  if (!escapeStackCallbacks[escapeStackCurrentIndex.toString()]) {
-    escapeStackCallbacks[escapeStackCurrentIndex.toString()] = [];
-  }
-  escapeStackCallbacks[escapeStackCurrentIndex.toString()].push(callback);
-  escapeStackCurrentIndex++;
+module.exports = function escapeStack(callback = null) {
+  const promise = new __SPromise((resolve, reject, trigger, cancel) => {});
 
   if (!hotkeyInitiated) {
     hotkeyInitiated = true;
-
     __hotkey('escape').on('press', (key) => {
-      if (escapeStackCurrentIndex <= 0) {
-        return;
-      }
-      escapeStackCurrentIndex--;
-      if (escapeStackCallbacks[escapeStackCurrentIndex.toString()]) {
-        escapeStackCallbacks[escapeStackCurrentIndex.toString()].forEach(
-          (callback) => {
-            callback(escapeStackCurrentIndex);
-          }
-        );
-        escapeStackCallbacks[escapeStackCurrentIndex.toString()] = [];
-      }
+      if (escapeStackStack.length === 0) return;
+      const lastPromise = escapeStackStack[escapeStackStack.length - 1];
+      lastPromise.resolve();
+      escapeStackStack.splice(-1, 1);
     });
   }
+
+  if (callback) {
+    promise.on('resolve', callback);
+  }
+
+  // append the promise in the stack
+  escapeStackStack.push(promise);
+
+  // handle cancel
+  promise.on('cancel,finally', () => {
+    escapeStackStack.splice(escapeStackStack.indexOf(promise), 1);
+  });
+
+  // return the promise
+  return promise;
+
+  // if (!escapeStackCallbacks[escapeStackCurrentIndex.toString()]) {
+  //   escapeStackCallbacks[escapeStackCurrentIndex.toString()] = [];
+  // }
+  // escapeStackCallbacks[escapeStackCurrentIndex.toString()].push(callback);
+  // escapeStackCurrentIndex++;
+
+  // if (!hotkeyInitiated) {
+  //   hotkeyInitiated = true;
+
+  //   __hotkey('escape').on('press', (key) => {
+  //     if (escapeStackCurrentIndex <= 0) {
+  //       return;
+  //     }
+  //     escapeStackCurrentIndex--;
+  //     if (escapeStackCallbacks[escapeStackCurrentIndex.toString()]) {
+  //       escapeStackCallbacks[escapeStackCurrentIndex.toString()].forEach(
+  //         (callback) => {
+  //           callback(escapeStackCurrentIndex);
+  //         }
+  //       );
+  //       escapeStackCallbacks[escapeStackCurrentIndex.toString()] = [];
+  //     }
+  //   });
+  // }
+
+  return;
 };

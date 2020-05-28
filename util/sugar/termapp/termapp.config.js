@@ -3,11 +3,12 @@ const __CommandsAppPage = require('./src/node/pages/CommandsAppPage');
 const __AboutAppPage = require('./src/node/pages/AboutAppPage');
 const __SBuildScssCommand = require('../src/node/build/SBuildScssCommand');
 const __SPhpServerCommand = require('../src/node/server/SPhpServerCommand');
+const __SBuildJsCommand = require('../src/node/build/SBuildJsCommand');
 
 module.exports = {
   rootDir: __dirname,
   header: {
-    title: `<bold>Coffeekraken</bold> <bgBlack><yellow> Sugar </yellow></bgBlack> <black>v${__packageJson.version}</black>`
+    title: `<bgBlack><white> MIT </white></bgBlack> <bold>Coffeekraken</bold> <bgWhite><black> Sugar </black></bgWhite> <black>v${__packageJson.version}</black>`
   },
   footer: {
     authors: [
@@ -22,10 +23,17 @@ module.exports = {
     'server.php': {
       class: __SPhpServerCommand,
       argsObj: {},
-      settings: {}
+      settings: {
+        activeSpace: 'commands'
+      }
     },
     'build.scss': {
       class: __SBuildScssCommand,
+      argsObj: {},
+      settings: {}
+    },
+    'build.js': {
+      class: __SBuildJsCommand,
       argsObj: {},
       settings: {}
     }
@@ -34,10 +42,12 @@ module.exports = {
     default: '/commands',
     urls: {
       '/commands/{?namespace}': {
-        pageClass: __CommandsAppPage,
-        defaultArgs: {
-          namespace: 'server.**'
+        page: {
+          class: __CommandsAppPage,
+          id: 'command',
+          title: 'Commands'
         },
+        defaultArgs: {},
         menu: [
           {
             url: '/commands/build',
@@ -50,7 +60,11 @@ module.exports = {
         ]
       },
       '/about': {
-        pageClass: __AboutAppPage,
+        page: {
+          class: __AboutAppPage,
+          id: 'about',
+          title: 'About'
+        },
         menu: [
           {
             url: '/about',

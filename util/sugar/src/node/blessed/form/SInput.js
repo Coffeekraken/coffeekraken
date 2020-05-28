@@ -48,7 +48,7 @@ module.exports = class SInput extends __SComponent {
         mouse: true,
         inputOnFocus: true,
         style: {
-          bg: __color('terminal.primary').toString(),
+          bg: __color('terminal.cyan').toString(),
           fg: __color('terminal.black').toString()
         },
         padding: {
@@ -67,7 +67,9 @@ module.exports = class SInput extends __SComponent {
     });
 
     this.$input = __blessed.textbox(inputSettings);
-    this.promise = new __SPromise((resolve, reject, trigger, cancel) => {});
+    this.promise = new __SPromise(
+      (resolve, reject, trigger, cancel) => {}
+    ).start();
 
     this.$input.height =
       inputSettings.padding.top + inputSettings.padding.bottom + 1;
@@ -98,7 +100,7 @@ module.exports = class SInput extends __SComponent {
         this.$input.onceKey('backspace,space,escape', () => {
           isBackspace = true;
         });
-        this.$input.on('keypress', (value) => {
+        this.$input.on('keypress', (value, key) => {
           setTimeout(() => {
             if (inputSettings.placeholder && !placeholderPressed) {
               if (!isBackspace) {

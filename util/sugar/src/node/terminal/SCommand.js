@@ -18,6 +18,8 @@ const __replaceTokens = require('../string/replaceTokens');
  *
  * This class define a command that you can launch, subscribe for data, etc...
  *
+ * // TODO: settings documentation
+ *
  * @param         {String}        name            Specify a simple name for this command
  * @param        {String}         command         The command that this instance has to represent. Can contain some "tokens" like "[port]" that will be replaced with the asked question results
  * @param         {Object}        [settings={}]     Some settings to configure your command
@@ -188,8 +190,9 @@ module.exports = class SCommand extends __SPromise {
    */
   static getCommandsByNamespace(namespace) {
     let returnCommandsArray = [];
+    if (!namespace) return [];
     SCommand._commandsStack.forEach((instance) => {
-      if (!instance.namespace) return;
+      if (!instance.namespace) return SCommand._commandsStack;
       if (__minimatch(instance.namespace, namespace))
         returnCommandsArray.push(instance);
     });
@@ -239,7 +242,8 @@ module.exports = class SCommand extends __SPromise {
           summary: true,
           watch: null,
           key: null,
-          namespace: null
+          namespace: null,
+          activeSpace: null
         },
         settings
       )
@@ -407,7 +411,7 @@ module.exports = class SCommand extends __SPromise {
   _initKey() {
     if (!this._settings.key) return;
     __hotkey(`ctrl+${this._settings.key}`, {
-      activeSpace: this._settings.namespace || null
+      activeSpace: this._settings.activeSpace || null
     }).on('press', (keyObj) => {
       if (this.isRunning() && !this._settings.concurrent) {
         this.kill();
@@ -416,7 +420,7 @@ module.exports = class SCommand extends __SPromise {
       }
     });
     __hotkey(`shift+${this._settings.key}`, {
-      activeSpace: this._settings.namespace || null
+      activeSpace: this._settings.activeSpace || null
     }).on('press', async (keyObj) => {
       if (this.isRunning() && !this._settings.concurrent) {
         this.kill();

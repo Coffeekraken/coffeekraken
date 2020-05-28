@@ -5,6 +5,7 @@ const __parseHtml = require('../../terminal/parseHtml');
 const __color = require('../../color/color');
 const __escapeStack = require('../../terminal/escapeStack');
 const __activeSpace = require('../../core/activeSpace');
+const __SPromise = require('../../promise/SPromise');
 
 /**
  * @name                  SPopup
@@ -14,6 +15,9 @@ const __activeSpace = require('../../core/activeSpace');
  * This class is the base one for all the sugar blessed components like input, panel, etc...
  *
  * @param        {Object}         [settings = {}]         A settings object to configure your list. Here's the available settings:
+ * - title (null) {String}: The popup title
+ * - description (null) {String}: A description to display in the popup
+ * - id (popup) {String}: An id to identify the popup. This id will be appended to the "activeSpace" when the popup is opened
  *
  * @example       js
  * const SPopup = require('@coffeekraken/sugar/node/blessed/popup/SPopup');
@@ -37,18 +41,61 @@ module.exports = class SPopup extends __SComponent {
         {
           title: null,
           description: null,
+          id: 'popup',
           width: '80%',
           height: 200,
           top: '50%',
           left: '50%',
           style: {
-            bg: __color('terminal.primary').toString()
+            bg: __color('terminal.primary').toString(),
+            fg: __color('terminal.black').toString()
           },
           padding: {
             top: 0,
             bottom: 1,
             left: 2,
             right: 2
+          },
+          $title: {
+            top: 0,
+            height: 3,
+            padding: {
+              top: 1,
+              bottom: 1,
+              left: 0,
+              right: 0
+            }
+          },
+          $description: {
+            height: 2,
+            style: {
+              bg: __color('terminal.black').toString(),
+              fg: __color('terminal.white').toString()
+            },
+            padding: {
+              top: 1,
+              bottom: 0,
+              left: 2,
+              right: 2
+            }
+          },
+          $content: {
+            left: 0,
+            right: 0,
+            scrollable: true,
+            scrollbar: {
+              ch: ' ',
+              inverse: true
+            },
+            scrollable: true,
+            mouse: true,
+            keys: true,
+            padding: {
+              top: 1,
+              left: 2,
+              bottom: 1,
+              right: 2
+            }
           }
         },
         settings
@@ -56,73 +103,51 @@ module.exports = class SPopup extends __SComponent {
     );
 
     if (this._settings.title) {
-      this._titleBox = __blessed.box({
-        top: 0,
-        height: 3,
-        style: {
-          bg: __color('terminal.primary').toString(),
-          fg: __color('terminal.black').toString()
-        },
-        padding: {
-          top: 1,
-          bottom: 1,
-          left: 0,
-          right: 0
-        },
+      this.$title = __blessed.box({
+        style: this._settings.style,
+        ...this._settings.$title,
         content: __parseHtml(this._settings.title)
       });
     }
 
     if (this._settings.description) {
-      this._descriptionBox = __blessed.box({
-        top: this._titleBox ? this._titleBox.height : 0,
-        height: 2,
-        style: {
-          bg: __color('terminal.black').toString(),
-          fg: __color('terminal.white').toString()
-        },
-        padding: {
-          top: 1,
-          bottom: 0,
-          left: 2,
-          right: 2
-        },
+      this.$description = __blessed.box({
+        ...this._settings.$description,
+        top: this.$title ? this.$title.height : 0,
         content: __parseHtml(this._settings.description)
       });
     }
 
-    if (this._titleBox) super.append(this._titleBox);
-    if (this._descriptionBox) super.append(this._descriptionBox);
+    if (this.$title) super.append(this.$title);
+    if (this.$description) super.append(this.$description);
 
     let contentTop = 0;
-    if (this._titleBox) contentTop += this._titleBox.height;
-    if (this._descriptionBox) contentTop += this._descriptionBox.height;
-    this._contentBox = __blessed.box({
-      left: 0,
-      right: 0,
+    if (this.$title) contentTop += this.$title.height;
+    if (this.$description) contentTop += this.$description.height;
+    this.$content = __blessed.box({
       top: contentTop,
-      height: 'shrink',
       style: {
-        bg: __color('terminal.black').toString()
+        scrollbar: {
+          bg: this._settings.style.bg || __color('terminal.primary').toString()
+        }
       },
-      scrollable: true,
-      mouse: true,
-      keys: true,
-
-      padding: {
-        top: 1,
-        left: 2,
-        bottom: 1,
-        right: 2
-      }
+      ...(this._settings.$content || {})
     });
-    super.append(this._contentBox);
+    this.promise = new __SPromise(() => {}).start();
 
-    __activeSpace.append('popup');
+    super.append(this.$content);
+    this.promise.trigger('open');
 
-    __escapeStack(() => {
-      __activeSpace.previous();
+    __activeSpace.append(this._settings.id);
+
+    const escape = __escapeStack(() => {
       this.parent.remove(this);
+    });
+
+    this.on('detach', () => {
+      __activeSpace.previous();
+      escape.cancel();
+      this.promise.trigger('close');
     });
   }
 
@@ -138,7 +163,7 @@ module.exports = class SPopup extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   append(content) {
-    this._contentBox.append(content);
+    this.$content.append(content);
     return this;
   }
 
@@ -152,12 +177,10 @@ module.exports = class SPopup extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   update() {
-    this.height = this._contentBox.getScrollHeight() + 7;
+    this.height = this.$content.getScrollHeight() + 6;
 
     this.top = `50%-${Math.round(this.height / 2)}`;
     this.left = `50%-${Math.round(this.width / 2)}`;
-
-    // this._contentBox.height = this.height - 6;
 
     super.update();
   }

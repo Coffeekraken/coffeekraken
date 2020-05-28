@@ -55,6 +55,8 @@ const activeSpaceApi = {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   get: () => {
+    if (!_activeSpaceStack.length) return null;
+    return _activeSpaceStack[_activeSpaceStack.length - 1];
     return (global || window)._sActiveSpace || null;
   },
 
@@ -71,36 +73,16 @@ const activeSpaceApi = {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   set: activeSpace => {
-    (global || window)._sActiveSpace = activeSpace; // check if the passed activeSpace is the same as the last one
-
+    // (global || window)._sActiveSpace = activeSpace;
+    // check if the passed activeSpace is the same as the last one
     if (_activeSpaceStack[_activeSpaceStack.length - 1] !== activeSpace) {
       _activeSpaceStack.push(activeSpace);
-    } // call the registered callbacks that match this activeSpace
+    } // call the callbacks
 
 
-    Object.keys(_activeSpaceCallbacksStack).forEach(activeSpaceToCheck => {
-      // check if the active space match or not
-      if (!activeSpaceApi.is(activeSpaceToCheck)) return; // loop on every callbacks registered
+    activeSpaceApi._callCallbacks();
 
-      _activeSpaceCallbacksStack[activeSpaceToCheck].forEach(activeSpaceCallbackObj => {
-        // call the callback
-        activeSpaceCallbackObj.callback(); // increase the called property
-
-        activeSpaceCallbackObj.called++; // check if we have reached call count
-
-        if (activeSpaceCallbackObj.settings.count === -1) return;
-
-        if (activeSpaceCallbackObj.called >= activeSpaceCallbackObj.settings.count) {
-          activeSpaceCallbackObj.delete = true;
-        } // filter activeSpaceCallbackObj to remove the "delete" once
-
-
-        _activeSpaceCallbacksStack[activeSpaceToCheck] = _activeSpaceCallbacksStack[activeSpaceToCheck].filter(obj => {
-          return obj.delete !== true;
-        });
-      });
-    });
-    return (global || window)._sActiveSpace || null;
+    return activeSpaceApi.get();
   },
 
   /**
@@ -117,9 +99,11 @@ const activeSpaceApi = {
   append: activeSpace => {
     // get the current one
     const currentActiveSpace = activeSpaceApi.get() || '';
+    if ((0, _minimatch.default)(currentActiveSpace, `**.${activeSpace}`)) return activeSpaceApi.get();
     const currentActiveSpaceArray = currentActiveSpace.split('.');
     const activeSpaceArray = activeSpace.split('.');
     activeSpaceApi.set([...currentActiveSpaceArray, ...activeSpaceArray].join('.'));
+    return activeSpaceApi.get();
   },
 
   /**
@@ -134,9 +118,9 @@ const activeSpaceApi = {
   previous: () => {
     if (_activeSpaceStack.length <= 1) return;
 
-    _activeSpaceStack.pop();
+    _activeSpaceStack.splice(-1, 1);
 
-    activeSpaceApi.set(_activeSpaceStack[_activeSpaceStack.length - 1]);
+    activeSpaceApi._callCallbacks();
   },
 
   /**
@@ -153,7 +137,7 @@ const activeSpaceApi = {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   is: activeSpaceToCheck => {
-    const currentActiveSpace = (global || window)._sActiveSpace || null;
+    const currentActiveSpace = activeSpaceApi.get();
     if (!currentActiveSpace) return false;
     return (0, _minimatch.default)(currentActiveSpace, activeSpaceToCheck);
   },
@@ -189,6 +173,41 @@ const activeSpaceApi = {
       callback,
       settings,
       called: 0
+    });
+  },
+
+  /**
+   * @name          _callCallbacks
+   * @type          Function
+   * @private
+   *
+   * Call the callbacks when an activeSpace has been setted
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _callCallbacks: () => {
+    // call the registered callbacks that match this activeSpace
+    Object.keys(_activeSpaceCallbacksStack).forEach(activeSpaceToCheck => {
+      // check if the active space match or not
+      if (!activeSpaceApi.is(activeSpaceToCheck)) return; // loop on every callbacks registered
+
+      _activeSpaceCallbacksStack[activeSpaceToCheck].forEach(activeSpaceCallbackObj => {
+        // call the callback
+        activeSpaceCallbackObj.callback(); // increase the called property
+
+        activeSpaceCallbackObj.called++; // check if we have reached call count
+
+        if (activeSpaceCallbackObj.settings.count === -1) return;
+
+        if (activeSpaceCallbackObj.called >= activeSpaceCallbackObj.settings.count) {
+          activeSpaceCallbackObj.delete = true;
+        } // filter activeSpaceCallbackObj to remove the "delete" once
+
+
+        _activeSpaceCallbacksStack[activeSpaceToCheck] = _activeSpaceCallbacksStack[activeSpaceToCheck].filter(obj => {
+          return obj.delete !== true;
+        });
+      });
     });
   }
 };

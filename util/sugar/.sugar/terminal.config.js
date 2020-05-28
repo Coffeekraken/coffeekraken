@@ -14,6 +14,19 @@ module.exports = {
     primary: '@config.terminal.colors.yellow',
 
     /**
+     * @name                secondary
+     * @namespace           sugar.config.terminal.colors
+     * @type                Color
+     * @default             #343a43
+     *
+     * Specify the "secondary" terminal color value
+     *
+     * @since               2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    secondary: '@config.terminal.colors.cyan',
+
+    /**
      * @name                black
      * @namespace           sugar.config.terminal.colors
      * @type                Color

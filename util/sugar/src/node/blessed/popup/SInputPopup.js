@@ -1,6 +1,7 @@
 const __deepMerge = require('../../object/deepMerge');
 const __SInput = require('../form/SInput');
 const __SPopup = require('./SPopup');
+const __activeSpace = require('../../core/activeSpace');
 
 /**
  * @name                  SInputPopup
@@ -34,9 +35,6 @@ module.exports = class SInputPopup extends __SPopup {
     super(
       __deepMerge(
         {
-          style: {
-            bg: 'red'
-          },
           closeDelay: 500,
           $input: {}
         },
@@ -54,10 +52,16 @@ module.exports = class SInputPopup extends __SPopup {
 
     this.$input.promise.on('resolve', (value) => {
       setTimeout(() => {
-        this.detach();
+        this.parent.remove(this);
+        this.promise.resolve(value);
       }, this._settings.closeDelay);
     });
 
     this.append(this.$input);
+  }
+
+  update() {
+    super.update();
+    this.height = this.$content.getScrollHeight() + 5;
   }
 };

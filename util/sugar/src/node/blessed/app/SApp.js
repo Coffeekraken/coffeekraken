@@ -5,7 +5,7 @@ const __SComponent = require('../SComponent');
 const __SHeader = require('../SHeader');
 const __SFooter = require('../SFooter');
 const __get = require('../../object/get');
-const __parseSchema = require('../../url/parseSchema');
+const __activeSpace = require('../../core/activeSpace');
 const __SUrl = require('../../url/SUrl');
 
 /**
@@ -108,6 +108,7 @@ module.exports = class SApp extends __SComponent {
     }
 
     if (this._settings.header) {
+      console.log(this._settings.header);
       this._headerBox = new __SHeader({
         style: {
           bg: __color('terminal.primary').toString(),
@@ -201,7 +202,7 @@ module.exports = class SApp extends __SComponent {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  goTo(url) {
+  goTo(url, history = true) {
     // loop on the pages urls available in the config
     const urlsKeys = Object.keys(this.config('pages.urls'));
     for (let i = 0; i < urlsKeys.length; i++) {
@@ -209,10 +210,24 @@ module.exports = class SApp extends __SComponent {
         schema: urlsKeys[i]
       });
       if (sUrl.schema.match) {
-        this._goTo(sUrl);
+        this._goTo(sUrl, history);
         break;
       }
     }
+  }
+
+  /**
+   * @name          back
+   * @type          Function
+   *
+   * This method simply go back 1 url in the history
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  back() {
+    if (this._historyArray.length <= 1) return;
+    this._historyArray.splice(-1, 1);
+    this._goTo(this._historyArray[this._historyArray.length - 1], false);
   }
 
   /**
@@ -226,7 +241,7 @@ module.exports = class SApp extends __SComponent {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _goTo(sUrl) {
+  _goTo(sUrl, history = true) {
     const pageObj = this.config(`pages.urls.${sUrl.schema.schema}`);
 
     // check if the pageObj exist
@@ -241,19 +256,30 @@ module.exports = class SApp extends __SComponent {
     }
 
     // append the new url to the history
-    this._historyArray.push(sUrl);
+    if (history) this._historyArray.push(sUrl);
+
+    // generate active space string depending on the url.
+    const activeSpaceString = sUrl.href
+      .split('/')
+      .filter((i) => i !== '')
+      .join('.');
+
+    // set the activeSpace
+    __activeSpace.set(activeSpaceString);
 
     // check if we have already the page instance
     let currentPageInstance = this._pagesStack[sUrl.schema.schema];
     if (!currentPageInstance) {
-      currentPageInstance = new pageObj.pageClass();
+      currentPageInstance = new pageObj.page.class(
+        pageObj.page.id,
+        pageObj.page.title
+      );
       this._pagesStack[sUrl.schema.schema] = currentPageInstance;
     }
 
     // set args on the page
     const argsObj = {};
     if (sUrl.schema.params) {
-      // console.log(sUrl.schema.params);
       Object.keys(sUrl.schema.params).forEach((paramName) => {
         let argValue = sUrl.schema.params[paramName].value;
         if (argValue === null) argValue = pageObj.defaultArgs[paramName];
@@ -295,6 +321,8 @@ module.exports = class SApp extends __SComponent {
     Object.keys(commandsObj).forEach((commandName) => {
       const commandObj = commandsObj[commandName];
       commandObj.settings.namespace = commandName;
+      if (!commandObj.settings.activeSpace)
+        commandObj.settings.activeSpace = commandName;
       this._commandsStack[commandName] = new commandObj.class(
         commandObj.argsObj,
         commandObj.settings

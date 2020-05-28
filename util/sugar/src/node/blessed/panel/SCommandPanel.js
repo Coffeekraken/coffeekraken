@@ -1,11 +1,7 @@
-const __SLogPanel = require('./SLogPanel');
-const __convert = require('../../time/convert');
 const __deepMerge = require('../../object/deepMerge');
 const __blessed = require('blessed');
 const __color = require('../../color/color');
 const __SComponent = require('../SComponent');
-const __SCenteredPopup = require('./SCenteredPopup');
-const __SSummaryList = require('../list/SSummaryList');
 const __summaryListPopup = require('../list/summaryListPopup');
 const __ora = require('ora');
 const __parseHtml = require('../../terminal/parseHtml');
@@ -13,6 +9,9 @@ const __isOdd = require('../../is/odd');
 const __SPromise = require('../../promise/SPromise');
 const __SCommand = require('../../terminal/SCommand');
 const __transitionObjectProperties = require('../../transition/objectProperties');
+const __SPopup = require('../../blessed/popup/SPopup');
+const __hotkey = require('../../keyboard/hotkey');
+const __SInputPopup = require('../popup/SInputPopup');
 
 /**
  * @name                  SCommandPanel
@@ -47,7 +46,7 @@ module.exports = class SCommandPanel extends __SComponent {
   _commands = null;
 
   /**
-   * @name          _logBox
+   * @name          $log
    * @type          blessed.Box
    * @private
    *
@@ -55,29 +54,29 @@ module.exports = class SCommandPanel extends __SComponent {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _logBox = null;
+  $log = null;
 
   /**
-   * @name          _keysBox
-   * @type          blessed.Box
+   * @name          $namespace
+   * @type          blessed.box
    * @private
    *
-   * Store the box where the keys will be generated
+   * Store the "namespace" panel that display which is the current namespace displayed
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _keysBox = null;
+  $namespace = null;
 
   /**
-   * @name            _processes
-   * @type            Object
+   * @name          _namespace
+   * @type          String
    * @private
    *
-   * Store all the running commands
+   * Store the current displayed namespace
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _processes = {};
+  _namespace = null;
 
   /**
    * @name          constructor
@@ -97,7 +96,7 @@ module.exports = class SCommandPanel extends __SComponent {
     // // generate keys UI
     // this._generateUI();
 
-    this._panelObjects = new Map();
+    this._boxesObjectsMap = new Map();
 
     // check if the commands parameter is a string, meaning that we have to
     // ask the SCommand static "getCommands" method for the corresponding command instances
@@ -113,7 +112,7 @@ module.exports = class SCommandPanel extends __SComponent {
 
     // generate the panel object for each commands
     this._commands.forEach((commandInstance) => {
-      this._panelObjects.set(commandInstance, {});
+      this._boxesObjectsMap.set(commandInstance, {});
     });
 
     // pipe all commands "events" to the _sPromise internal promise
@@ -122,8 +121,14 @@ module.exports = class SCommandPanel extends __SComponent {
       __SPromise.pipe(commandInstance, this._sPromise);
     });
 
+    this.promise = new __SPromise(() => {});
+
     // subscribe to the commands instances
     this._subscribeToCommandsEvents();
+
+    // init filter popup
+    this._initFilterPopup();
+
     // generate the UI
     this._generateUI();
   }
@@ -181,25 +186,37 @@ module.exports = class SCommandPanel extends __SComponent {
   }
 
   /**
-   * @name          _removeProcessBox
-   * @type          Function
+   * @name        _initFilterPopup
+   * @type        Function
    * @private
    *
-   * This method take care of removing properly the box of the passed process object
-   *
-   * @param       {Object}      processObj        The process object to remove the box from
+   * This method initialize the filter popup
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _removeProcessBox(processObj) {
-    if (!processObj.error) {
-      setTimeout(() => {
-        // panel.box.detach();
-        clearInterval(processObj.spinner.interval);
-        // delete this._processes[processObj.id];
-        this.update();
-      }, 4000);
-    }
+  _initFilterPopup() {
+    let inputPopup;
+    __hotkey('ﬁ', {
+      active: () => {
+        return this.parent !== null;
+      }
+    }).on('press', () => {
+      if (inputPopup && inputPopup.parent) return;
+      inputPopup = new __SInputPopup({
+        id: 'filterCommandsByNamespace',
+        title: 'Filter commands by namespace',
+        $input: {
+          placeholder: this._namespace
+        }
+      });
+      inputPopup.promise.on('resolve', (value) => {
+        // change page
+        // emit an event
+        this.promise.trigger('namespace', value);
+        // this.filterByNamespace(value);
+      });
+      this.append(inputPopup);
+    });
   }
 
   /**
@@ -221,77 +238,83 @@ module.exports = class SCommandPanel extends __SComponent {
     return summaryListPopup;
   }
 
-  // /**
-  //  * @name          _updateKeysBox
-  //  * @type          Function
-  //  * @private
-  //  *
-  //  * This method simply generate all the keys buttons and update the keysBox
-  //  *
-  //  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-  //  */
-  // _updateKeysBox() {
-  //   setTimeout(() => {
-  //     const items = [];
-  //     let currentLeft = 0;
+  /**
+   * @name              filterByNamespace
+   * @type              Function
+   *
+   * This method simply takes a namespae and filter the displayed commands
+   *
+   * @param     {String}        namespace         The namespace to apply
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  filterByNamespace(namespace) {
+    // get the commands to display using the passed namespace
+    const filteredCommandsInstances = __SCommand.getCommandsByNamespace(
+      namespace
+    );
 
-  //     // keys
-  //     const keys = this._process.keys;
+    // check if we have some commands to display
+    if (!filteredCommandsInstances.length) {
+      const $popup = new __SPopup({
+        title: 'No commands to display',
+        description: `Sorry but the passed namespace "${namespace}" does not return any commands...`,
+        style: {
+          bg: 'red'
+        },
+        width: '50%'
+      });
+      this.append($popup);
+      setTimeout(() => {
+        $popup.detach();
+        $popup.destroy();
+      }, 3000);
+      return;
+    }
 
-  //     // loop on all the keys
-  //     Object.keys(keys).forEach((keyName) => {
-  //       const keyObj = keys[keyName];
-  //       const settings = {
-  //         padding: {
-  //           top: 0,
-  //           bottom: 0,
-  //           left: 1,
-  //           right: 1
-  //         }
-  //       };
-  //       switch (keyObj.type) {
-  //         case 'toggle':
-  //           settings.style = {
-  //             bg: keyObj.value
-  //               ? __color('terminal.green').toString()
-  //               : __color('terminal.red').toString(),
-  //             fg: __color('terminal.black').toString()
-  //           };
-  //           break;
-  //         case 'run':
-  //           settings.style = {
-  //             bg: keyObj._isRunning
-  //               ? __color('terminal.green').toString()
-  //               : __color('terminal.black').toString(),
-  //             fg: keyObj._isRunning
-  //               ? __color('terminal.black').toString()
-  //               : __color('terminal.white').toString()
-  //           };
-  //           break;
-  //         case 'action':
-  //           settings.style = {
-  //             bg: __color('terminal.white').toString(),
-  //             fg: __color('terminal.black').toString()
-  //           };
-  //           break;
-  //       }
-  //       const content = `${keyObj.text || keyObj.menu}(${keyObj.key})`;
-  //       const item = __blessed.box({
-  //         ...settings,
-  //         left: currentLeft,
-  //         width:
-  //           content.length + settings.padding.left + settings.padding.right,
-  //         content
-  //       });
-  //       currentLeft += item.width;
+    // save the current namespace
+    this._namespace = namespace;
 
-  //       items.push(item);
-  //     });
-  //     items.forEach((item) => {
-  //       this._keysBox.append(item);
-  //     });
-  //   });
-  // }
+    // clear all existing boxes
+    this._clearCommands();
+
+    // register new commands
+    this._commands = filteredCommandsInstances;
+
+    // generate the panel object for each commands
+    this._commands.forEach((commandInstance) => {
+      this._boxesObjectsMap.set(commandInstance, {});
+    });
+
+    // update
+    this.update();
+  }
+
+  /**
+   * @name          _clearCommands
+   * @type          Function
+   * @private
+   *
+   * This method remove all the command boxes from the content panel as
+   * well as in the "_commands" property as well as in the "_boxesObjectsMap"
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _clearCommands() {
+    this._commands.forEach((commandInstance) => {
+      let boxObj = this._boxesObjectsMap.get(commandInstance);
+      if (!boxObj.$header) return;
+      boxObj.$header.destroy();
+      boxObj.$actions.destroy();
+      boxObj.$log.destroy();
+      clearInterval(boxObj.spinner.interval);
+      boxObj.$box.destroy();
+    });
+    // remove all commands in the map
+    this._boxesObjectsMap.clear();
+    // reset the _commands array
+    this._commands = null;
+  }
 
   /**
    * @name          _generateUI
@@ -303,9 +326,9 @@ module.exports = class SCommandPanel extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _generateUI() {
-    this._logBox = __blessed.box({
+    this.$log = __blessed.box({
       width: '100%+1',
-      top: 0,
+      top: 4,
       left: 0,
       right: 0,
       bottom: 0,
@@ -333,25 +356,27 @@ module.exports = class SCommandPanel extends __SComponent {
       }
     });
 
-    // // init the blessed box that will display the keys
-    // this._keysBox = __blessed.box({
-    //   right: 0,
-    //   height: 0,
-    //   bottom: 0,
-    //   left: 0,
-    //   width: '100%',
-    //   height: 1,
-    //   style: {
-    //     bg: __color('terminal.white').toString(),
-    //     fg: __color('terminal.black').toString()
-    //   }
-    // });
+    this.$namespace = __blessed.box({
+      width: '100%+1',
+      height: 1,
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      style: {
+        fg: 'black',
+        bg: 'cyan'
+      },
+      padding: {
+        top: 0,
+        left: 2,
+        right: 2,
+        bottom: 0
+      }
+    });
 
-    this.append(this._logBox);
-    // this.append(this._keysBox);
-
-    // update the keysBox
-    // this._updateKeysBox();
+    this.append(this.$namespace);
+    this.append(this.$log);
   }
 
   /**
@@ -366,11 +391,11 @@ module.exports = class SCommandPanel extends __SComponent {
   _updateCommandBoxesStyle() {
     this._commands.forEach((commandInstance) => {
       const lastProcessObj = commandInstance.lastProcessObj;
-      let panelObj = this._panelObjects.get(commandInstance);
+      let boxObj = this._boxesObjectsMap.get(commandInstance);
 
       // check if we have already a processBox for this process
-      if (!Object.keys(panelObj).length) {
-        panelObj.box = __blessed.box({
+      if (!Object.keys(boxObj).length) {
+        boxObj.$box = __blessed.box({
           height: 3,
           style: {
             bg: __color('terminal.primary').toString(),
@@ -390,7 +415,7 @@ module.exports = class SCommandPanel extends __SComponent {
           right: 0,
           clickable: true
         });
-        panelObj.logBox = __blessed.box({
+        boxObj.$log = __blessed.box({
           // width: '100%-4',
           height: 0,
           top: 2,
@@ -419,14 +444,14 @@ module.exports = class SCommandPanel extends __SComponent {
             bottom: 1
           }
         });
-        panelObj.actionBox = __blessed.box({
+        boxObj.$actions = __blessed.box({
           top: 0,
           right: 0,
           width: 'shrink',
           height: 1,
           style: {}
         });
-        panelObj.headerBox = __blessed.box({
+        boxObj.$header = __blessed.box({
           top: -1,
           left: 0,
           right: 0,
@@ -440,10 +465,10 @@ module.exports = class SCommandPanel extends __SComponent {
           }
         });
 
-        panelObj.opened = null;
+        boxObj.opened = null;
         let doubleClick = false;
 
-        panelObj.headerBox.on('click', (mouse) => {
+        boxObj.$header.on('click', (mouse) => {
           if (doubleClick === false) {
             doubleClick = true;
             setTimeout(() => {
@@ -452,12 +477,12 @@ module.exports = class SCommandPanel extends __SComponent {
             return;
           }
 
-          if (panelObj.opened === null) {
-            panelObj.opened = true;
+          if (boxObj.opened === null) {
+            boxObj.opened = true;
             this._openCommandBox(commandInstance);
           } else {
-            panelObj.opened = !panelObj.opened;
-            if (panelObj.opened) {
+            boxObj.opened = !boxObj.opened;
+            if (boxObj.opened) {
               this._openCommandBox(commandInstance);
             } else {
               this._closePanelBox(commandInstance);
@@ -466,22 +491,27 @@ module.exports = class SCommandPanel extends __SComponent {
           this.update();
         });
 
-        panelObj.spinner = {
+        boxObj.spinner = {
           ora: __ora({
             text: __parseHtml(commandInstance.title || commandInstance.name),
             color: 'black'
           })
         };
 
-        panelObj.box.append(panelObj.headerBox);
-        panelObj.box.append(panelObj.actionBox);
-        panelObj.box.append(panelObj.logBox);
+        boxObj.$box.append(boxObj.$header);
+        boxObj.$box.append(boxObj.$actions);
+        boxObj.$box.append(boxObj.$log);
 
         // append it in the logBox
-        this._logBox.append(panelObj.box);
+        this.$log.append(boxObj.$box);
       }
 
-      let boxTitle = `<bold>${
+      let boxTitle = '';
+      if (commandInstance.namespace) {
+        boxTitle += `<bgBlack><white> ${commandInstance.namespace} </white></bgBlack> `;
+      }
+
+      boxTitle += `<bold>${
         commandInstance.title || commandInstance.name
       }</bold>`;
       if (lastProcessObj && lastProcessObj.duration) {
@@ -492,54 +522,52 @@ module.exports = class SCommandPanel extends __SComponent {
         lastProcessObj &&
         (lastProcessObj.state === 'error' || lastProcessObj.state === 'killed')
       ) {
-        panelObj.box.style.bg = __color('terminal.red').toString();
-        clearInterval(panelObj.spinner.interval);
-        panelObj.headerBox.setContent(
+        boxObj.$box.style.bg = __color('terminal.red').toString();
+        clearInterval(boxObj.spinner.interval);
+        boxObj.$header.setContent(
           __parseHtml(`<iCross/>  ${boxTitle} (${lastProcessObj.state})`)
         );
-        panelObj.box.screen.render();
+        boxObj.$box.screen.render();
       } else if (lastProcessObj && lastProcessObj.state === 'success') {
-        panelObj.box.style.bg = __color('terminal.green').toString();
-        clearInterval(panelObj.spinner.interval);
-        panelObj.headerBox.setContent(__parseHtml(`<iCheck/>  ${boxTitle}`));
-        panelObj.box.screen.render();
+        boxObj.$box.style.bg = __color('terminal.green').toString();
+        clearInterval(boxObj.spinner.interval);
+        boxObj.$header.setContent(__parseHtml(`<iCheck/>  ${boxTitle}`));
+        boxObj.$box.screen.render();
       } else if (lastProcessObj && lastProcessObj.state === 'running') {
-        panelObj.box.style.bg = __color('terminal.cyan').toString();
-        clearInterval(panelObj.spinner.interval);
-        panelObj.spinner.interval = setInterval(() => {
-          panelObj.spinner.ora.text = __parseHtml(`${boxTitle}`);
-          panelObj.headerBox.setContent(panelObj.spinner.ora.frame());
-          panelObj.box.screen.render();
+        boxObj.$box.style.bg = __color('terminal.cyan').toString();
+        clearInterval(boxObj.spinner.interval);
+        boxObj.spinner.interval = setInterval(() => {
+          boxObj.spinner.ora.text = __parseHtml(`${boxTitle}`);
+          boxObj.$header.setContent(boxObj.spinner.ora.frame());
+          boxObj.$box.screen.render();
         }, 50);
       } else if (lastProcessObj && lastProcessObj.state === 'watching') {
-        panelObj.box.style.bg = __color('terminal.yellow').toString();
-        clearInterval(panelObj.spinner.interval);
-        panelObj.spinner.interval = setInterval(() => {
-          panelObj.spinner.ora.text = __parseHtml(`${boxTitle} (watching)`);
-          panelObj.headerBox.setContent(panelObj.spinner.ora.frame());
-          panelObj.box.screen.render();
+        boxObj.$box.style.bg = __color('terminal.yellow').toString();
+        clearInterval(boxObj.spinner.interval);
+        boxObj.spinner.interval = setInterval(() => {
+          boxObj.spinner.ora.text = __parseHtml(`${boxTitle} (watching)`);
+          boxObj.$header.setContent(boxObj.spinner.ora.frame());
+          boxObj.$box.screen.render();
         }, 50);
       } else {
-        panelObj.box.style.bg = commandInstance.color || 'white';
-        panelObj.headerBox.setContent(
-          __parseHtml(`<iStart/>  ${boxTitle} (idle)`)
-        );
-        panelObj.box.screen.render();
+        boxObj.$box.style.bg = commandInstance.color || 'white';
+        boxObj.$header.setContent(__parseHtml(`<iStart/>  ${boxTitle} (idle)`));
+        boxObj.$box.screen.render();
       }
 
       if (commandInstance.key) {
-        panelObj.actionBox.setContent(`(${commandInstance.key})`);
-        panelObj.actionBox.style.bg = panelObj.box.style.bg;
-        panelObj.actionBox.style.fg = panelObj.box.style.fg;
+        boxObj.$actions.setContent(`(${commandInstance.key})`);
+        boxObj.$actions.style.bg = boxObj.$box.style.bg;
+        boxObj.$actions.style.fg = boxObj.$box.style.fg;
       }
 
-      panelObj.headerBox.style.bg = panelObj.box.style.bg;
-      panelObj.headerBox.style.fg = panelObj.box.style.fg;
+      boxObj.$header.style.bg = boxObj.$box.style.bg;
+      boxObj.$header.style.fg = boxObj.$box.style.fg;
 
-      panelObj.logBox.top = 2;
-      panelObj.logBox.left = 0;
-      panelObj.logBox.width = '100%-4';
-      panelObj.logBox.height = '100%-4';
+      boxObj.$log.top = 2;
+      boxObj.$log.left = 0;
+      boxObj.$log.width = '100%-4';
+      boxObj.$log.height = '100%-4';
     });
   }
 
@@ -555,30 +583,30 @@ module.exports = class SCommandPanel extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _openCommandBox(commandInstance) {
-    const panelObj = this._panelObjects.get(commandInstance);
-    if (panelObj._closeTransition) {
-      panelObj._closeTransition.cancel();
-      delete panelObj._closeTransition;
+    const boxObj = this._boxesObjectsMap.get(commandInstance);
+    if (boxObj._closeTransition) {
+      boxObj._closeTransition.cancel();
+      delete boxObj._closeTransition;
     }
-    if (panelObj._openTransition) return;
-    panelObj.box.setFront();
-    panelObj._closedBoxStateObj = {
-      width: panelObj.box.width,
-      height: panelObj.box.height,
-      top: panelObj.box.top,
-      left: panelObj.box.left,
-      right: panelObj.box.right,
-      bottom: panelObj.box.bottom
+    if (boxObj._openTransition) return;
+    boxObj.$box.setFront();
+    boxObj._closedBoxStateObj = {
+      width: boxObj.$box.width,
+      height: boxObj.$box.height,
+      top: boxObj.$box.top,
+      left: boxObj.$box.left,
+      right: boxObj.$box.right,
+      bottom: boxObj.$box.bottom
     };
-    panelObj._openTransition = __transitionObjectProperties(
-      panelObj._closedBoxStateObj,
+    boxObj._openTransition = __transitionObjectProperties(
+      boxObj._closedBoxStateObj,
       {
-        width: panelObj.box.parent.width,
-        height: panelObj.box.parent.height,
-        top: panelObj.box.parent.top,
-        left: panelObj.box.parent.left,
-        right: panelObj.box.parent.right,
-        bottom: panelObj.box.parent.bottom
+        width: boxObj.$box.parent.width,
+        height: boxObj.$box.parent.height,
+        top: boxObj.$box.parent.top,
+        left: boxObj.$box.parent.left,
+        right: boxObj.$box.parent.right,
+        bottom: boxObj.$box.parent.bottom
       },
       {
         duration: '0.3s',
@@ -586,11 +614,11 @@ module.exports = class SCommandPanel extends __SComponent {
       }
     )
       .on('step', (stepObj) => {
-        Object.assign(panelObj.box, stepObj);
-        panelObj.box.screen.render();
+        Object.assign(boxObj.$box, stepObj);
+        boxObj.$box.screen.render();
       })
       .on('resolve', () => {
-        delete panelObj._openTransition;
+        delete boxObj._openTransition;
       });
   }
 
@@ -606,34 +634,34 @@ module.exports = class SCommandPanel extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _closePanelBox(commandInstance) {
-    const panelObj = this._panelObjects.get(commandInstance);
-    if (panelObj._openTransition) {
-      panelObj._openTransition.cancel();
-      delete panelObj._openTransition;
+    const boxObj = this._boxesObjectsMap.get(commandInstance);
+    if (boxObj._openTransition) {
+      boxObj._openTransition.cancel();
+      delete boxObj._openTransition;
     }
-    if (panelObj._closeTransition) return;
-    panelObj._closeTransition = __transitionObjectProperties(
+    if (boxObj._closeTransition) return;
+    boxObj._closeTransition = __transitionObjectProperties(
       {
-        width: panelObj.box.width,
-        height: panelObj.box.height,
-        top: panelObj.box.top,
-        left: panelObj.box.left,
-        right: panelObj.box.right,
-        bottom: panelObj.box.bottom
+        width: boxObj.$box.width,
+        height: boxObj.$box.height,
+        top: boxObj.$box.top,
+        left: boxObj.$box.left,
+        right: boxObj.$box.right,
+        bottom: boxObj.$box.bottom
       },
-      panelObj._closedBoxStateObj,
+      boxObj._closedBoxStateObj,
       {
         duration: '0.3s',
         easing: 'easeInOutQuint'
       }
     )
       .on('step', (stepObj) => {
-        Object.assign(panelObj.box, stepObj);
-        panelObj.box.screen.render();
+        Object.assign(boxObj.$box, stepObj);
+        boxObj.$box.screen.render();
       })
       .on('resolve', () => {
-        delete panelObj._closeTransition;
-        delete panelObj._closedBoxStateObj;
+        delete boxObj._closeTransition;
+        delete boxObj._closedBoxStateObj;
       });
   }
 
@@ -649,33 +677,31 @@ module.exports = class SCommandPanel extends __SComponent {
    */
   _updateCommandBoxesContent() {
     this._commands.forEach((commandInstance, i) => {
-      const panelObj = this._panelObjects.get(commandInstance);
+      const boxObj = this._boxesObjectsMap.get(commandInstance);
       const lastProcessObj = commandInstance.lastProcessObj;
 
       if (lastProcessObj && lastProcessObj.state === 'killed') {
-        panelObj.logBox.setContent(
+        boxObj.$log.setContent(
           __parseHtml(`<red>The process has been killed...</red>`)
         );
       } else if (lastProcessObj && lastProcessObj.state === 'error') {
-        panelObj.logBox.pushLine(
-          __parseHtml(`<red>Something went wrong...</red>`)
-        );
+        boxObj.$log.pushLine(__parseHtml(`<red>Something went wrong...</red>`));
       } else {
         // take care of the content of the processBox
-        panelObj.logBox.setContent('');
+        boxObj.$log.setContent('');
         if (lastProcessObj && lastProcessObj.stderr.length) {
           lastProcessObj.stderr.forEach((logItem) => {
-            panelObj.logBox.pushLine(logItem.value || logItem);
+            boxObj.$log.pushLine(logItem.value || logItem);
           });
         } else if (lastProcessObj) {
           lastProcessObj.stdout.forEach((logItem) => {
-            panelObj.logBox.pushLine(logItem.value || logItem);
+            boxObj.$log.pushLine(logItem.value || logItem);
           });
         }
       }
 
       // scroll logBox
-      panelObj.logBox.setScrollPerc(100);
+      boxObj.$log.setScrollPerc(100);
     });
   }
 
@@ -693,7 +719,7 @@ module.exports = class SCommandPanel extends __SComponent {
     let currentTop = 0;
 
     this._commands.forEach((commandInstance, i) => {
-      const panelObj = this._panelObjects.get(commandInstance);
+      const boxObj = this._boxesObjectsMap.get(commandInstance);
       const lastProcessObj = commandInstance.lastProcessObj;
       let layout = 'default';
       if (this._commands.length === 2) layout = 'two';
@@ -799,27 +825,27 @@ module.exports = class SCommandPanel extends __SComponent {
           break;
       }
 
-      panelObj.box.width = width;
-      panelObj.box.height = height;
-      panelObj.box.top = top;
-      panelObj.box.left = left;
-      panelObj.box.right = right;
-      panelObj.box.bottom = bottom;
-      // delete panelObj.box.width;
-      // delete panelObj.box.height;
+      boxObj.$box.width = width;
+      boxObj.$box.height = height;
+      boxObj.$box.top = top;
+      boxObj.$box.left = left;
+      boxObj.$box.right = right;
+      boxObj.$box.bottom = bottom;
+      // deleteboxObj.$box.width;
+      // deleteboxObj.$box.height;
 
-      if (panelObj.opened && !panelObj._openTransition) {
-        panelObj.box.setFront();
-        panelObj.box.width = '100%';
-        panelObj.box.height = '100%';
-        panelObj.box.left = 0;
-        panelObj.box.top = 0;
-        panelObj.box.right = 0;
-        panelObj.box.bottom = 0;
+      if (boxObj.opened && !boxObj._openTransition) {
+        boxObj.$box.setFront();
+        boxObj.$box.width = '100%';
+        boxObj.$box.height = '100%';
+        boxObj.$box.left = 0;
+        boxObj.$box.top = 0;
+        boxObj.$box.right = 0;
+        boxObj.$box.bottom = 0;
       }
     });
 
-    this._logBox.setScrollPerc(100);
+    this.$log.setScrollPerc(100);
   }
 
   update() {
@@ -832,7 +858,18 @@ module.exports = class SCommandPanel extends __SComponent {
     // update the content
     this._updateCommandBoxesContent();
 
-    // this._updateKeysBox();
+    if (this._namespace) {
+      this.$namespace.height = 1;
+      this.$log.top = 2;
+      this.$namespace.setContent(
+        __parseHtml(
+          `<white>Currently displayed namespace:</white> <yellow>${this._namespace}</yellow>`
+        )
+      );
+    } else {
+      this.$namespace.height = 0;
+      this.$log.top = 0;
+    }
 
     super.update();
   }

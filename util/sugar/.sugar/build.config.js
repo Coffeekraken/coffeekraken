@@ -128,5 +128,65 @@ module.exports = {
        */
       sass: {}
     }
+  },
+
+  js: {
+    /**
+     * @name              input
+     * @namespace         sugar.config.build.js
+     * @type              String
+     * @default           <appRoot>/src/js/*.js
+     *
+     * Specify the root folder (or file) to check for .js files to build.
+     * Glob patterns can be used
+     *
+     * @since             2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    input: isInSugarPackage()
+      ? `${__packageRoot()}/tests/src/js/*.js`
+      : `${__packageRoot()}/src/js/*.js`,
+
+    /**
+     * @name              output
+     * @namespace         sugar.config.build.js
+     * @type              String
+     * @default           <appRoot>/dist/js
+     *
+     * Specify the destination folder where to put the compiled files in
+     *
+     * @since             2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    output: isInSugarPackage()
+      ? `${__packageRoot()}/tests/dist/js`
+      : `${__packageRoot()}/dist/js`,
+
+    /**
+     * @name              map
+     * @namespace         sugar.config.build.js
+     * @type              Boolean
+     * @default           true
+     *
+     * Specify if you want sourcemap files to be generated
+     *
+     * @since             2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    map: true,
+
+    /**
+     * @name              prod
+     * @namespace         sugar.config.build.js
+     * @type              Boolean
+     * @default           false
+     *
+     * Specify if you want also the <primary>production</primary> versions of the compiled files.
+     * The production version are named ```[filename].prod.js```
+     *
+     * @since             2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    prod: false
   }
 };

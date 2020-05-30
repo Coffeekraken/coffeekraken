@@ -75,11 +75,20 @@ module.exports = class SInput extends __SComponent {
       inputSettings.padding.top + inputSettings.padding.bottom + 1;
     this.height = inputSettings.padding.top + inputSettings.padding.bottom + 1;
 
-    if (inputSettings.escapeKey) {
-      this.$input.on('focus', () => {
+    this.$input.on('blur', () => {
+      if (this.$input.focused && __activeSpace.get().includes('form.input')) {
+        __activeSpace.previous();
+      }
+    });
+
+    this.$input.on('focus', () => {
+      if (!__activeSpace.get().includes('form.input')) {
+        __activeSpace.append('form.input');
+      }
+      if (inputSettings.escapeKey) {
         __escapeStack(() => {});
-      });
-    }
+      }
+    });
 
     this.$input.on('attach', () => {
       setTimeout(() => {

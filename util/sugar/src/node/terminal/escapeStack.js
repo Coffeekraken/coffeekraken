@@ -29,7 +29,9 @@ module.exports = function escapeStack(callback = null) {
 
   if (!hotkeyInitiated) {
     hotkeyInitiated = true;
-    __hotkey('escape').on('press', (key) => {
+    __hotkey('escape', {
+      disableWhenEditingForm: false
+    }).on('press', (key) => {
       if (escapeStackStack.length === 0) return;
       const lastPromise = escapeStackStack[escapeStackStack.length - 1];
       lastPromise.resolve();

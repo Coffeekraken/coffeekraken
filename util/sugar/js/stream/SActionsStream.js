@@ -11,6 +11,12 @@ var _deepMerge = _interopRequireDefault(require("../object/deepMerge"));
 
 var _convert = _interopRequireDefault(require("../time/convert"));
 
+var _SActionsStreamAction = _interopRequireDefault(require("./SActionsStreamAction"));
+
+var _class = _interopRequireDefault(require("../is/class"));
+
+var _validateDefinitionObject = _interopRequireDefault(require("../cli/validateDefinitionObject"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -105,8 +111,16 @@ let SActionStream = /*#__PURE__*/function (_SPromise) {
 
     _defineProperty(_assertThisInitialized(_this), "_actionsObject", {});
 
-    _get(_getPrototypeOf(SActionStream.prototype), "start", _assertThisInitialized(_this)).call(_assertThisInitialized(_this)); // save the actions
+    _get(_getPrototypeOf(SActionStream.prototype), "start", _assertThisInitialized(_this)).call(_assertThisInitialized(_this)); // check the actions
 
+
+    Object.keys(actions).forEach(actionName => {
+      const actionInstance = actions[actionName];
+
+      if (typeof actionInstance === 'function' || actionInstance === _SActionsStreamAction.default || actionInstance instanceof _SActionsStreamAction.default) {} else {
+        throw new Error(`The value passed for the "${actionName}" action has to be either a simple function or an "SActionsStreamAction" instance. You have passed a "${typeof actionInstance}"...`);
+      }
+    }); // save the actions
 
     _this._actionsObject = actions;
     return _this;
@@ -139,7 +153,9 @@ let SActionStream = /*#__PURE__*/function (_SPromise) {
     value: function start(streamObj = {}, settings = {}) {
       settings = (0, _deepMerge.default)(Object.assign({}, this._settings), settings);
       let canceled = false,
-          currentActionReturn;
+          currentActionReturn; // check the streamObj depending on the "definitionObj" or the action class
+
+      const definitionObjCheckResult = (0, _validateDefinitionObject.default)();
       return new _SPromise2.default(async (resolve, reject, trigger, cancel) => {
         // starting log
         const startString = `Starting the stream "<cyan>${settings.name || 'unnamed'}</cyan>"`;
@@ -161,8 +177,22 @@ let SActionStream = /*#__PURE__*/function (_SPromise) {
         for (let i = 0; i < actionsOrderedNames.length; i++) {
           if (canceled) break;
           const actionName = actionsOrderedNames[i];
-          const actionFn = this._actionsObject[actionName];
-          const actionSettings = settings.actions ? settings.actions[actionName] || {} : {};
+          const actionSettings = settings.actions ? settings.actions[actionName] || {} : {}; // handle passed action that can be either a simple function, a extended SActionsStreamAction class or an instance of the SActionsStreamAction class
+
+          let actionFn;
+
+          if (!(0, _class.default)(this._actionsObject[actionName]) && typeof this._actionsObject[actionName] === 'function') {
+            actionFn = this._actionsObject[actionName];
+          } else if (!(0, _class.default)(this._actionsObject[actionName]) && this._actionsObject[actionName] instanceof _SActionsStreamAction.default) {
+            actionFn = this._actionsObject[actionName].run;
+          } else if ((0, _class.default)(this._actionsObject[actionName]) && this._actionsObject[actionName].prototype instanceof _SActionsStreamAction.default) {
+            const actionInstance = new this._actionsObject[actionName](actionSettings);
+            actionInstance.on('stderr.data', data => {
+              console.log('data', data);
+            });
+            actionFn = actionInstance.run;
+          }
+
           let actionObj = {
             action: actionName,
             start: Date.now(),
@@ -183,6 +213,7 @@ let SActionStream = /*#__PURE__*/function (_SPromise) {
             if (currentActionReturn instanceof Promise) currentStreamObj = await currentActionReturn;else currentStreamObj = currentActionReturn;
             currentActionReturn = null;
           } catch (e) {
+            console.log(e);
             error = e;
           } // complete the actionObj
 

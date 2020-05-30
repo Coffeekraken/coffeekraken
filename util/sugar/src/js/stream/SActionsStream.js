@@ -1,6 +1,9 @@
 import __SPromise from '../promise/SPromise';
 import __deepMerge from '../object/deepMerge';
 import __convert from '../time/convert';
+import __SActionsStreamAction from './SActionsStreamAction';
+import __isClass from '../is/class';
+import __checkDefinitionObj from '../cli/validateDefinitionObject';
 
 /**
  * @name          SActionStream
@@ -66,6 +69,21 @@ export default class SActionStream extends __SPromise {
     );
     super.start();
 
+    // check the actions
+    Object.keys(actions).forEach((actionName) => {
+      const actionInstance = actions[actionName];
+      if (
+        typeof actionInstance === 'function' ||
+        actionInstance === __SActionsStreamAction ||
+        actionInstance instanceof __SActionsStreamAction
+      ) {
+      } else {
+        throw new Error(
+          `The value passed for the "${actionName}" action has to be either a simple function or an "SActionsStreamAction" instance. You have passed a "${typeof actionInstance}"...`
+        );
+      }
+    });
+
     // save the actions
     this._actionsObject = actions;
   }
@@ -95,6 +113,9 @@ export default class SActionStream extends __SPromise {
     settings = __deepMerge(Object.assign({}, this._settings), settings);
     let canceled = false,
       currentActionReturn;
+
+    // check the streamObj depending on the "definitionObj" or the action class
+    const definitionObjCheckResult = __checkDefinitionObj();
 
     return new __SPromise(async (resolve, reject, trigger, cancel) => {
       // starting log
@@ -126,10 +147,36 @@ export default class SActionStream extends __SPromise {
       for (let i = 0; i < actionsOrderedNames.length; i++) {
         if (canceled) break;
         const actionName = actionsOrderedNames[i];
-        const actionFn = this._actionsObject[actionName];
         const actionSettings = settings.actions
           ? settings.actions[actionName] || {}
           : {};
+
+        // handle passed action that can be either a simple function, a extended SActionsStreamAction class or an instance of the SActionsStreamAction class
+        let actionFn;
+        if (
+          !__isClass(this._actionsObject[actionName]) &&
+          typeof this._actionsObject[actionName] === 'function'
+        ) {
+          actionFn = this._actionsObject[actionName];
+        } else if (
+          !__isClass(this._actionsObject[actionName]) &&
+          this._actionsObject[actionName] instanceof __SActionsStreamAction
+        ) {
+          actionFn = this._actionsObject[actionName].run;
+        } else if (
+          __isClass(this._actionsObject[actionName]) &&
+          this._actionsObject[actionName].prototype instanceof
+            __SActionsStreamAction
+        ) {
+          const actionInstance = new this._actionsObject[actionName](
+            actionSettings
+          );
+          actionInstance.on('stderr.data', (data) => {
+            console.log('data', data);
+          });
+          actionFn = actionInstance.run;
+        }
+
         let actionObj = {
           action: actionName,
           start: Date.now(),
@@ -152,6 +199,7 @@ export default class SActionStream extends __SPromise {
           else currentStreamObj = currentActionReturn;
           currentActionReturn = null;
         } catch (e) {
+          console.log(e);
           error = e;
         }
         // complete the actionObj

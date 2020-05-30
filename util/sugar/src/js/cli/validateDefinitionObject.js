@@ -1,8 +1,7 @@
-import __isPlainObj from '../is/plainObject';
-import __toString from '../string/toString';
+import __validateDefinitionObject from '../object/validateDefinitionObject';
 
 /**
- * @name            checkDefinitionObject
+ * @name            validateDefinitionObject
  * @namespace       sugar.js.cli
  * @type            Function
  *
@@ -12,7 +11,7 @@ import __toString from '../string/toString';
  * @return      {Boolean|String}                             true if valid, a string with the error details if not
  *
  * @example       js
- * import checkDefinitionObject from '@coffeekraken/sugar/js/cli/checkDefinitionObject';
+ * import validateDefinitionObject from '@coffeekraken/sugar/js/cli/validateDefinitionObject';
  * const definition = {
  *    arg1: {
  *      type: 'String',
@@ -21,36 +20,13 @@ import __toString from '../string/toString';
  *      default: 'hello'
  *    }
  * }
- * checkDefinitionObject(definition); // => true
+ * validateDefinitionObject(definition); // => true
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function checkDefinitionObject(definitionObj) {
-  if (!__isPlainObj(definitionObj)) {
-    return `Sorry but the passed definition object has to be a plain object...`;
-  }
-  const argNames = Object.keys(definitionObj);
-  if (!argNames.length) {
-    return `A definition object has to contain at least 1 argument definition...`;
-  }
-  for (let i = 0; i < argNames.length; i++) {
-    const argName = argNames[i];
-    const argDefinition = definitionObj[argName];
-    // check the type
-    const supportedTypes = ['string', 'number', 'object', 'array', 'boolean'];
-    if (argDefinition.type === undefined)
-      return `An argument definiion object has to contain a "type" property which is not the case for your argument "${argName}"...`;
-    if (typeof argDefinition.type !== 'string')
-      return `The "type" property of an argument definition object has to be a String. You've passed "${__toString(
-        argDefinition.type
-      )}" which is a "${typeof argDefinition.type}" for your argument "${argName}"...`;
-    if (supportedTypes.indexOf(argDefinition.type.toLowerCase()) === -1)
-      return `The "type" property of an argument definition object has to be one of these values "${supportedTypes.join(
-        ','
-      )}". You've passed "${
-        argDefinition.type
-      }" for your argument "${argName}"...`;
+export default function validateDefinitionObject(definitionObj) {
+  return __validateDefinitionObject(definitionObj, (argName, argDefinition) => {
     // check alias
     if (argDefinition.alias) {
       if (typeof argDefinition.alias !== 'string')
@@ -73,7 +49,5 @@ export default function checkDefinitionObject(definitionObj) {
         argDefinition.level
       )}" which is a "${typeof argDefinition.level}"...`;
     }
-  }
-  // return true
-  return true;
+  });
 }

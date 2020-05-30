@@ -42,7 +42,7 @@ module.exports = class SPhpServerCommand extends __SCommand {
           title: 'PHP Server',
           key: 'p',
           concurrent: false,
-          namespace: 'server'
+          namespace: 'server.php'
         },
         commandSettings
       )

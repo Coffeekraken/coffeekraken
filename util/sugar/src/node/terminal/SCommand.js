@@ -190,9 +190,9 @@ module.exports = class SCommand extends __SPromise {
    */
   static getCommandsByNamespace(namespace) {
     let returnCommandsArray = [];
-    if (!namespace) return [];
+    if (!namespace) return SCommand._commandsStack;
     SCommand._commandsStack.forEach((instance) => {
-      if (!instance.namespace) return SCommand._commandsStack;
+      if (!instance.namespace) return;
       if (__minimatch(instance.namespace, namespace))
         returnCommandsArray.push(instance);
     });
@@ -410,7 +410,7 @@ module.exports = class SCommand extends __SPromise {
    */
   _initKey() {
     if (!this._settings.key) return;
-    __hotkey(`ctrl+${this._settings.key}`, {
+    __hotkey(`${this._settings.key}`, {
       activeSpace: this._settings.activeSpace || null
     }).on('press', (keyObj) => {
       if (this.isRunning() && !this._settings.concurrent) {

@@ -3,14 +3,14 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = checkDefinitionObject;
+exports.default = validateDefinitionObject;
 
-var _checkDefinitionObject = _interopRequireDefault(require("../object/checkDefinitionObject"));
+var _validateDefinitionObject = _interopRequireDefault(require("../object/validateDefinitionObject"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
- * @name            checkDefinitionObject
+ * @name            validateDefinitionObject
  * @namespace       sugar.js.cli
  * @type            Function
  *
@@ -20,7 +20,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @return      {Boolean|String}                             true if valid, a string with the error details if not
  *
  * @example       js
- * import checkDefinitionObject from '@coffeekraken/sugar/js/cli/checkDefinitionObject';
+ * import validateDefinitionObject from '@coffeekraken/sugar/js/cli/validateDefinitionObject';
  * const definition = {
  *    arg1: {
  *      type: 'String',
@@ -29,13 +29,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *      default: 'hello'
  *    }
  * }
- * checkDefinitionObject(definition); // => true
+ * validateDefinitionObject(definition); // => true
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function checkDefinitionObject(definitionObj) {
-  return (0, _checkDefinitionObject.default)(definitionObj, (argName, argDefinition) => {
+function validateDefinitionObject(definitionObj) {
+  return (0, _validateDefinitionObject.default)(definitionObj, (argName, argDefinition) => {
     // check alias
     if (argDefinition.alias) {
       if (typeof argDefinition.alias !== 'string') return `The "alias" property of an argument definition object has to be a String. You've passed "${__toString(argDefinition.alias)}" which is a "${typeof argDefinition.alias}" for your argument "${argName}"...`;

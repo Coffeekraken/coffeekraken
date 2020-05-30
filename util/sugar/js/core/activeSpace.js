@@ -9,6 +9,8 @@ var _deepMerge = _interopRequireDefault(require("../object/deepMerge"));
 
 var _minimatch = _interopRequireDefault(require("minimatch"));
 
+var _isGlob = _interopRequireDefault(require("is-glob"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -67,14 +69,18 @@ const activeSpaceApi = {
    * This function allows you to set the current active space
    *
    * @param       {String}      activeSpace       The active space to set
+   * @param       {Boolean}     [silent=false]    Specify if you want to have errors throwed or not
    * @return      {String}                  The current active space
    *
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  set: activeSpace => {
-    // (global || window)._sActiveSpace = activeSpace;
-    // check if the passed activeSpace is the same as the last one
+  set: (activeSpace, silent = false) => {
+    if (!silent && (0, _isGlob.default)(activeSpace)) {
+      throw new Error(`You try to set as activeSpace this string "${activeSpace}". It seems that this string is a glob pattern and activeSpace does not have to be a glob pattern...`);
+    } // check if the passed activeSpace is the same as the last one
+
+
     if (_activeSpaceStack[_activeSpaceStack.length - 1] !== activeSpace) {
       _activeSpaceStack.push(activeSpace);
     } // call the callbacks
@@ -131,13 +137,13 @@ const activeSpaceApi = {
    * The checking process is done using the "minimatch" package that let you use cool features like "*", "**", etc...
    *
    * @param       {String}        activeSpaceToCheck          The active space string that you want to check
+   * @param       {String}        [currentActiveSpace=activeSpaceApi.get()]       The current active space to check against the passed one
    * @return      {Boolean}                                   true if the passed active space string match the current one, false if not
    *
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  is: activeSpaceToCheck => {
-    const currentActiveSpace = activeSpaceApi.get();
+  is: (activeSpaceToCheck, currentActiveSpace = activeSpaceApi.get()) => {
     if (!currentActiveSpace) return false;
     return (0, _minimatch.default)(currentActiveSpace, activeSpaceToCheck);
   },

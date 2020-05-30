@@ -196,7 +196,7 @@ module.exports = class SCommandPanel extends __SComponent {
    */
   _initFilterPopup() {
     let inputPopup;
-    __hotkey('ﬁ', {
+    __hotkey('shift+n', {
       active: () => {
         return this.parent !== null;
       }
@@ -249,45 +249,47 @@ module.exports = class SCommandPanel extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   filterByNamespace(namespace) {
-    // get the commands to display using the passed namespace
-    const filteredCommandsInstances = __SCommand.getCommandsByNamespace(
-      namespace
-    );
+    setTimeout(() => {
+      // get the commands to display using the passed namespace
+      const filteredCommandsInstances = __SCommand.getCommandsByNamespace(
+        `+(${namespace}|${namespace}.**)`
+      );
 
-    // check if we have some commands to display
-    if (!filteredCommandsInstances.length) {
-      const $popup = new __SPopup({
-        title: 'No commands to display',
-        description: `Sorry but the passed namespace "${namespace}" does not return any commands...`,
-        style: {
-          bg: 'red'
-        },
-        width: '50%'
+      // check if we have some commands to display
+      if (!filteredCommandsInstances.length) {
+        const $popup = new __SPopup({
+          title: 'No commands to display',
+          description: `Sorry but the passed namespace "${namespace}" does not return any commands...`,
+          style: {
+            bg: 'red'
+          },
+          width: '50%'
+        });
+        this.append($popup);
+        setTimeout(() => {
+          $popup.detach();
+          $popup.destroy();
+        }, 3000);
+        return;
+      }
+
+      // save the current namespace
+      this._namespace = namespace;
+
+      // clear all existing boxes
+      this._clearCommands();
+
+      // register new commands
+      this._commands = filteredCommandsInstances;
+
+      // generate the panel object for each commands
+      this._commands.forEach((commandInstance) => {
+        this._boxesObjectsMap.set(commandInstance, {});
       });
-      this.append($popup);
-      setTimeout(() => {
-        $popup.detach();
-        $popup.destroy();
-      }, 3000);
-      return;
-    }
 
-    // save the current namespace
-    this._namespace = namespace;
-
-    // clear all existing boxes
-    this._clearCommands();
-
-    // register new commands
-    this._commands = filteredCommandsInstances;
-
-    // generate the panel object for each commands
-    this._commands.forEach((commandInstance) => {
-      this._boxesObjectsMap.set(commandInstance, {});
+      // update
+      this.update();
     });
-
-    // update
-    this.update();
   }
 
   /**

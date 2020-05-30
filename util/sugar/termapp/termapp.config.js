@@ -23,9 +23,7 @@ module.exports = {
     'server.php': {
       class: __SPhpServerCommand,
       argsObj: {},
-      settings: {
-        activeSpace: 'commands'
-      }
+      settings: {}
     },
     'build.scss': {
       class: __SBuildScssCommand,
@@ -35,7 +33,9 @@ module.exports = {
     'build.js': {
       class: __SBuildJsCommand,
       argsObj: {},
-      settings: {}
+      settings: {
+        key: 'j'
+      }
     }
   },
   pages: {

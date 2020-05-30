@@ -50,7 +50,7 @@ module.exports = class SBuildScssCommand extends __SCommand {
           title: 'Build SCSS',
           key: 's',
           concurrent: false,
-          namespace: 'build'
+          namespace: 'build.scss'
         },
         commandSettings
       )

@@ -321,8 +321,18 @@ module.exports = class SApp extends __SComponent {
     Object.keys(commandsObj).forEach((commandName) => {
       const commandObj = commandsObj[commandName];
       commandObj.settings.namespace = commandName;
-      if (!commandObj.settings.activeSpace)
-        commandObj.settings.activeSpace = commandName;
+      if (!commandObj.settings.activeSpace) {
+        // const split = commandName.split('.');
+        // let current = '',
+        //   activeSpacesArray = [];
+        // split.forEach((part) => {
+        //   activeSpacesArray.push([...activeSpacesArray, part].join('.'));
+        // });
+        commandObj.settings.activeSpace = '+(commands|commands.**)';
+        // commandObj.settings.activeSpace = `commands.+(${activeSpacesArray.join(
+        //   '|'
+        // )})`;
+      }
       this._commandsStack[commandName] = new commandObj.class(
         commandObj.argsObj,
         commandObj.settings

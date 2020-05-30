@@ -34,6 +34,7 @@ module.exports = function hotkey(key, settings = {}) {
     once: false,
     splitKey: '+',
     activeSpace: null,
+    disableWhenEditingForm: true,
     ...settings
   };
 
@@ -61,6 +62,9 @@ module.exports = function hotkey(key, settings = {}) {
         const obj = hotkeyStack[id];
         if (!obj || !obj.key) return;
         // check if an activeSpace is specified
+        if (obj.settings.disableWhenEditingForm) {
+          if (__activeSpace.is('**.form.*')) return;
+        }
         if (obj.settings.activeSpace) {
           if (!__activeSpace.is(obj.settings.activeSpace)) return;
         }

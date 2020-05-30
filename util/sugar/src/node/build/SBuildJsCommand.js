@@ -1,6 +1,6 @@
 const __SCommand = require('../terminal/SCommand');
 const __deepMerge = require('../object/deepMerge');
-const __SBuildScssCli = require('./SBuildScssCli');
+const __SBuildJsCli = require('./SBuildJsCli');
 
 /**
  * @name              SBuildJsCommand
@@ -39,14 +39,14 @@ module.exports = class SBuildJsCommand extends __SCommand {
     // init command
     super(
       'build.js',
-      new __SBuildScssCli(),
+      new __SBuildJsCli(),
       __deepMerge(
         {
           argsObj,
           title: 'Build JS',
           key: 'j',
           concurrent: false,
-          namespace: 'build'
+          namespace: 'build.js'
         },
         commandSettings
       )

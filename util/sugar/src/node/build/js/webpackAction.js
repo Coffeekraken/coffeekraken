@@ -2,6 +2,10 @@ const __webpack = require('webpack');
 const __getFilename = require('../../fs/filename');
 const __packageRoot = require('../../path/packageRoot');
 const __deepMerge = require('../../object/deepMerge');
+const __fs = require('fs');
+const __path = require('path');
+const __SActionsStreamAction = require('../../stream/SActionsStreamAction');
+const __SBuildJsCli = require('../SBuildJsCli');
 
 /**
  * @name                webpackAction
@@ -16,51 +20,102 @@ const __deepMerge = require('../../object/deepMerge');
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function webpackAction(streamObj, settings = {}) {
-  return new Promise((resolve, reject) => {
-    __webpack(
-      __deepMerge(
-        {
-          mode: streamObj.prod ? 'production' : 'development',
-          entry: streamObj.input,
-          output: {
-            path: streamObj.output,
-            filename: streamObj.prod
-              ? __getFilename(streamObj.input).replace('.js', '.prod.js')
-              : __getFilename(streamObj.input)
-          },
-          module: {
-            rules: [
-              {
-                test: /\.m?js$/,
-                exclude: /(node_modules|bower_components)/,
-                use: {
-                  loader: 'babel-loader',
-                  options: {
-                    presets: ['@babel/preset-env']
+module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
+  /**
+   * @name            definitionObj
+   * @type             Object
+   * @static
+   *
+   * Store the definition object that specify the streamObj required properties, types, etc...
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static definitionObj = {
+    ...__SBuildJsCli.definitionObj
+  };
+
+  /**
+   * @name            constructor
+   * @type            Function
+   * @constructor
+   *
+   * Constructor
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  constructor(settings = {}) {
+    super(settings);
+  }
+
+  /**
+   * @name          run
+   * @type          Function
+   * @async
+   *
+   * Override the base class run method
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  run(streamObj, settings = this._settings) {
+    this.checkStreamObject(streamObj);
+    return new Promise((resolve, reject) => {
+      __webpack(
+        __deepMerge(
+          {
+            mode: streamObj.prod ? 'production' : 'development',
+            entry: streamObj.input,
+            output: {
+              path: streamObj.output,
+              filename: streamObj.prod
+                ? __getFilename(streamObj.input).replace('.js', '.prod.js')
+                : __getFilename(streamObj.input)
+            },
+            module: {
+              rules: [
+                {
+                  test: /\.m?js$/,
+                  exclude: /(node_modules|bower_components)/,
+                  use: {
+                    loader: 'babel-loader',
+                    options: {
+                      presets: ['@babel/preset-env']
+                    }
                   }
                 }
-              }
-            ]
+              ]
+            },
+            resolve: {
+              modules: [
+                `${__packageRoot(process.cwd())}/node_modules`,
+                `${__packageRoot(process.cwd())}/src/js`
+              ]
+            },
+            target: 'web',
+            devtool: streamObj.map ? 'source-map' : false,
+            context: __packageRoot(process.cwd())
           },
-          resolve: {
-            modules: [
-              `${__packageRoot(process.cwd())}/node_modules`,
-              `${__packageRoot(process.cwd())}/src/js`
-            ]
-          },
-          target: 'web',
-          devtool: streamObj.map ? 'source-map' : false,
-          context: __packageRoot(process.cwd())
-        },
-        settings
-      ),
-      (error, stats) => {
-        if (error || stats.hasErrors()) {
-          return reject(error);
+          settings
+        ),
+        (error, stats) => {
+          if (error || stats.hasErrors()) {
+            return reject(error);
+          }
+
+          // reading the outputed file
+          const output = __fs.readFileSync(
+            __path.resolve(streamObj.output, __getFilename(streamObj.input)),
+            'utf8'
+          );
+
+          // // read the entry file
+          // const entryData = __fs.readFileSync(streamObj.entry, 'utf8');
+
+          // if (!streamObj.dataBefore) streamObj.dataBefore = {};
+          streamObj.data = output;
+
+          resolve(streamObj);
         }
-        resolve(streamObj);
-      }
-    );
-  });
+      );
+    });
+  }
 };

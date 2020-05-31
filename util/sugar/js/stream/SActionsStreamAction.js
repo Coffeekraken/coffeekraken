@@ -13,7 +13,7 @@ var _convert = _interopRequireDefault(require("../time/convert"));
 
 var _validateDefinitionObject = _interopRequireDefault(require("../object/validateDefinitionObject"));
 
-var _checkWithDefinitionObject = _interopRequireDefault(require("../object/checkWithDefinitionObject"));
+var _validateWithDefinitionObject = _interopRequireDefault(require("../object/validateWithDefinitionObject"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -118,8 +118,13 @@ let SActionStreamAction = /*#__PURE__*/function (_SPromise) {
     key: "checkStreamObject",
     value: function checkStreamObject(streamObj) {
       // validate the streamObj depending on the static definitionObj property
-      const checkWithDefinitionObjectResult = (0, _checkWithDefinitionObject.default)(streamObj, this.constructor.definitionObj);
-      if (checkWithDefinitionObjectResult !== true) this.trigger('stderr.data', checkWithDefinitionObjectResult);
+      const checkWithDefinitionObjectResult = (0, _validateWithDefinitionObject.default)(streamObj, this.constructor.definitionObj);
+
+      if (checkWithDefinitionObjectResult !== true) {
+        throw new Error(checkWithDefinitionObjectResult); // throwError(checkWithDefinitionObjectResult);
+      } // throw new Error(checkWithDefinitionObjectResult);
+      // this.trigger('stderr.data', checkWithDefinitionObjectResult);
+
     }
     /**
      * @name          run

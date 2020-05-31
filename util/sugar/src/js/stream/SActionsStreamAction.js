@@ -2,7 +2,7 @@ import __SPromise from '../promise/SPromise';
 import __deepMerge from '../object/deepMerge';
 import __convert from '../time/convert';
 import __validateDefinitionObject from '../object/validateDefinitionObject';
-import __checkWithDefinitionObject from '../object/checkWithDefinitionObject';
+import __validateWithDefinitionObject from '../object/validateWithDefinitionObject';
 
 /**
  * @name          SActionStreamAction
@@ -77,12 +77,17 @@ export default class SActionStreamAction extends __SPromise {
    */
   checkStreamObject(streamObj) {
     // validate the streamObj depending on the static definitionObj property
-    const checkWithDefinitionObjectResult = __checkWithDefinitionObject(
+    const checkWithDefinitionObjectResult = __validateWithDefinitionObject(
       streamObj,
       this.constructor.definitionObj
     );
-    if (checkWithDefinitionObjectResult !== true)
-      this.trigger('stderr.data', checkWithDefinitionObjectResult);
+    if (checkWithDefinitionObjectResult !== true) {
+      throw new Error(checkWithDefinitionObjectResult);
+
+      // throwError(checkWithDefinitionObjectResult);
+    }
+    // throw new Error(checkWithDefinitionObjectResult);
+    // this.trigger('stderr.data', checkWithDefinitionObjectResult);
   }
 
   /**

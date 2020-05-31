@@ -1,8 +1,20 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = validateWithDefinitionObject;
+
+var _validateDefinitionObject = _interopRequireDefault(require("./validateDefinitionObject"));
+
+var _toString = _interopRequireDefault(require("../string/toString"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 // TODO: tests
-import __validateDefinitionObject from './validateDefinitionObject';
 
 /**
- * @name            checkWithDefinitionObject
+ * @name            validateWithDefinitionObject
  * @namespace       sugar.js.object
  * @type            Function
  *
@@ -17,8 +29,8 @@ import __validateDefinitionObject from './validateDefinitionObject';
  * @return      {Boolean|String}                    Return true if all is ok, and a simple string that describe the issue if it's not
  *
  * @example         js
- * import checkWithDefinitionObject from '@coffeekraken/sugar/js/object/checkWithDefinitionObject';
- * checkWithDefinitionObject({
+ * import validateWithDefinitionObject from '@coffeekraken/sugar/js/object/validateWithDefinitionObject';
+ * validateWithDefinitionObject({
  *    arg1: 'hello',
  *    arg2: false
  * }, {
@@ -35,52 +47,44 @@ import __validateDefinitionObject from './validateDefinitionObject';
  * @since     2.0.0
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function checkWithDefinitionObject(
-  objectToCheck,
-  definitionObj,
-  extendsFn = null,
-  validateDefinitionObject = true
-) {
+function validateWithDefinitionObject(objectToCheck, definitionObj, extendsFn = null, validateDefinitionObject = true) {
   // validate the passed definition object first
   if (validateDefinitionObject) {
-    const validateDefinitionObjectResult = __validateDefinitionObject(
-      definitionObj
-    );
-    if (validateDefinitionObjectResult !== true)
-      return validateDefinitionObjectResult;
+    const validateDefinitionObjectResult = (0, _validateDefinitionObject.default)(definitionObj);
+    if (validateDefinitionObjectResult !== true) return validateDefinitionObjectResult;
   }
 
-  // loop on the definition object properties
-  for (let i = 0; i < Object.keys(definitionObj); i++) {
+  const errorHead = `<bold><red><iCross/>  Definition Object Error</red></bold>\n`; // loop on the definition object properties
+
+  for (let i = 0; i < Object.keys(definitionObj).length; i++) {
     const argName = Object.keys(definitionObj)[i];
     const argDefinition = definitionObj[argName];
-    const value = objectToCheck[argName];
+    const value = objectToCheck[argName]; // validate type
 
-    // validate type
     if (value !== undefined && argDefinition.type) {
       if (argDefinition.type.toLowerCase() === 'array') {
-        if (!Array.isArray(value))
-          return `The property "${argName}" has to be an Array. You've passed a "${typeof value}"...`;
+        if (!Array.isArray(value)) return `${errorHead}The property "<yellow>${argName}</yellow>" has to be an <green>Array</green>. You've passed a "<red>${typeof value}</red>" with the value "<cyan>${(0, _toString.default)(value)}</cyan>"...`;
       } else if (typeof value !== argDefinition.type.toLowerCase()) {
-        return `The property "${argName}" has to be of type "${
-          argDefinition.type
-        }". You've passed a "${typeof value}"...`;
+        return `${errorHead}The property "<yellow>${argName}</yellow>" has to be of type "<green>${argDefinition.type}</green>". You've passed a "<red>${typeof value}</red>" with the value "<cyan>${(0, _toString.default)(value)}</cyan>"...`;
       }
-    }
-    // check required
+    } // check required
+
+
     if (argDefinition.required === true) {
       if (value === null || value === undefined) {
-        return `The property "${argName}" is required...`;
+        return `${errorHead}The property "${argName}" is required...`;
       }
-    }
+    } // check if is an extendsFn
 
-    // check if is an extendsFn
+
     if (extendsFn) {
       const extendsFnResult = extendsFn(argName, argDefinition, value);
       if (extendsFnResult !== true) return extendsFnResult;
     }
-  }
+  } // all is good
 
-  // all is good
+
   return true;
 }
+
+module.exports = exports.default;

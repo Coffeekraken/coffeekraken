@@ -62,6 +62,8 @@ export default class SActionStream extends __SPromise {
         {
           name: null,
           order: null,
+          before: null,
+          after: null,
           actions: {}
         },
         settings
@@ -114,16 +116,19 @@ export default class SActionStream extends __SPromise {
     let canceled = false,
       currentActionReturn;
 
-    // check the streamObj depending on the "definitionObj" or the action class
-    const definitionObjCheckResult = __checkDefinitionObj();
+    // check if is a "before" setting function
+    if (settings.before && typeof settings.before === 'function') {
+      streamObj = settings.before(streamObj);
+    }
 
     return new __SPromise(async (resolve, reject, trigger, cancel) => {
       // starting log
       const startString = `Starting the stream "<cyan>${
         settings.name || 'unnamed'
       }</cyan>"`;
-      trigger('stdout.data', startString);
-      this.trigger('stdout.data', this.startString);
+      const startObj = { value: startString };
+      trigger('stdout.data', startObj);
+      this.trigger('stdout.data', startObj);
 
       // take the actions order array
       const actionsOrderedNames = Array.isArray(settings.order)
@@ -147,6 +152,7 @@ export default class SActionStream extends __SPromise {
       for (let i = 0; i < actionsOrderedNames.length; i++) {
         if (canceled) break;
         const actionName = actionsOrderedNames[i];
+        let actionInstance;
         const actionSettings = settings.actions
           ? settings.actions[actionName] || {}
           : {};
@@ -162,19 +168,17 @@ export default class SActionStream extends __SPromise {
           !__isClass(this._actionsObject[actionName]) &&
           this._actionsObject[actionName] instanceof __SActionsStreamAction
         ) {
-          actionFn = this._actionsObject[actionName].run;
+          actionInstance = this._actionsObject[actionName];
+          actionFn = this._actionsObject[actionName].run.bind(
+            this._actionsObject[actionName]
+          );
         } else if (
           __isClass(this._actionsObject[actionName]) &&
           this._actionsObject[actionName].prototype instanceof
             __SActionsStreamAction
         ) {
-          const actionInstance = new this._actionsObject[actionName](
-            actionSettings
-          );
-          actionInstance.on('stderr.data', (data) => {
-            console.log('data', data);
-          });
-          actionFn = actionInstance.run;
+          actionInstance = new this._actionsObject[actionName](actionSettings);
+          actionFn = actionInstance.run.bind(actionInstance);
         }
 
         let actionObj = {
@@ -183,14 +187,44 @@ export default class SActionStream extends __SPromise {
           streamObj: Object.assign({}, currentStreamObj)
         };
         let error = null;
+
+        if (actionInstance) {
+          actionInstance.on('stdout.data', (value) => {
+            const dataObj = { ...actionObj, value: value };
+            trigger('stdout.data', dataObj);
+            this.trigger('stdout.data', dataObj);
+            trigger(`${actionName}.stdout.data`, dataObj);
+            this.trigger(`${actionName}.stdout.data`, dataObj);
+          });
+          actionInstance.on('stderr.data', (value) => {
+            const dataObj = { ...actionObj, value: value };
+            trigger('stderr.data', { dataObj });
+            this.trigger('stderr.data', { dataObj });
+            trigger(`${actionName}.stderr.data`, { dataObj });
+            this.trigger(`${actionName}.stderr.data`, { dataObj });
+          });
+          actionInstance.on('reject', (value) => {
+            const dataObj = { ...actionObj, value: value };
+            trigger('reject', dataObj);
+            this.trigger('reject', dataObj);
+            trigger(`${actionName}.reject`, dataObj);
+            this.trigger(`${actionName}.reject`, dataObj);
+            cancel(dataObj);
+          });
+        }
+
         // trigger some "start" events
         trigger(`start`, Object.assign({}, actionObj));
         this.trigger(`start`, Object.assign({}, actionObj));
         trigger(`${actionName}.start`, Object.assign({}, actionObj));
         this.trigger(`${actionName}.start`, Object.assign({}, actionObj));
         const startString = `Starting the action "<yellow>${actionName}</yellow>"`;
-        trigger('stdout.data', startString);
-        this.trigger('stdout.data', startString);
+        const dataObj = { ...actionObj, value: startString };
+        trigger('stdout.data', dataObj);
+        this.trigger('stdout.data', dataObj);
+        trigger(`${actionName}.stdout.data`, dataObj);
+        this.trigger(`${actionName}.stdout.data`, dataObj);
+
         // call the action and pass it the current stream object
         try {
           currentActionReturn = actionFn(currentStreamObj, actionSettings);
@@ -199,9 +233,15 @@ export default class SActionStream extends __SPromise {
           else currentStreamObj = currentActionReturn;
           currentActionReturn = null;
         } catch (e) {
-          console.log(e);
-          error = e;
+          // trigger an "event"
+          const errorObj = { ...actionObj, value: e.message };
+          trigger('stderr.data', errorObj);
+          trigger(`${actionName}.stderr.data`, errorObj);
+          this.trigger('stderr.data', errorObj);
+          this.trigger(`${actionName}.stderr.data`, errorObj);
+          cancel(errorObj);
         }
+        if (canceled) return;
         // complete the actionObj
         actionObj = {
           ...actionObj,
@@ -213,27 +253,28 @@ export default class SActionStream extends __SPromise {
         // save the result into the overall actions stats object
         overallActionsStats.actions[actionName] = Object.assign({}, actionObj);
         // trigger an "event"
-        trigger(error ? 'error' : 'step', Object.assign({}, actionObj));
-        trigger(
-          error ? `${actionName}.step` : `${actionName}.error`,
-          Object.assign({}, actionObj)
-        );
-        this.trigger(error ? 'error' : 'step', Object.assign({}, actionObj));
-        this.trigger(
-          error ? `${actionName}.error` : `${actionName}.step`,
-          Object.assign({}, actionObj)
-        );
+        trigger('step', Object.assign({}, actionObj));
+        trigger(`${actionName}.step`, Object.assign({}, actionObj));
+        this.trigger('step', Object.assign({}, actionObj));
+        this.trigger(`${actionName}.step`, Object.assign({}, actionObj));
+
         if (error) {
           const errorString = `Something went wrong during the "<yellow>${actionName}</yellow>" action...`;
-          trigger('stderr.data', errorString);
-          this.trigger('stderr.data', errorString);
+          const dataObj = { ...actionObj, value: errorString };
+          trigger('stderr.data', dataObj);
+          this.trigger('stderr.data', dataObj);
+          trigger(`${actionName}.stderr.data`, dataObj);
+          this.trigger(`${actionName}.stderr.data`, dataObj);
         } else {
           const successString = `The action "<yellow>${actionName}</yellow>" has finished <green>successfully</green> in <yellow>${__convert(
             actionObj.duration,
             's'
           )}s</yellow>`;
-          trigger('stdout.data', successString);
-          this.trigger('stdout.data', successString);
+          const dataObj = { ...actionObj, value: successString };
+          trigger('stdout.data', dataObj);
+          this.trigger('stdout.data', dataObj);
+          trigger(`${actionName}.stdout.data`, dataObj);
+          this.trigger(`${actionName}.stdout.data`, dataObj);
         }
       }
       // complete the overall stats
@@ -251,13 +292,15 @@ export default class SActionStream extends __SPromise {
         overallActionsStats.duration,
         's'
       )}s</yellow>`;
-      trigger('stdout.data', completeString);
-      this.trigger('stdout.data', completeString);
+      const successObj = { ...overallActionsStats, value: completeString };
+      trigger('stdout.data', successObj);
+      this.trigger('stdout.data', successObj);
 
       // resolve this stream process
-      trigger('complete', overallActionsStats);
-      this.trigger('complete', overallActionsStats);
-      resolve(overallActionsStats);
+      const completeObj = { ...overallActionsStats };
+      trigger('complete', completeObj);
+      this.trigger('complete', completeObj);
+      resolve(completeObj);
     })
       .on('cancel', () => {
         canceled = true;

@@ -1,8 +1,8 @@
-import __checkWithDefinitionObject from '../object/checkWithDefinitionObject';
+import __validateWithDefinitionObject from '../object/validateWithDefinitionObject';
 import __validateDefinitionObject from './validateDefinitionObject';
 
 /**
- * @name            checkWithDefinitionObject
+ * @name            validateWithDefinitionObject
  * @namespace       sugar.js.cli
  * @type            Function
  *
@@ -16,8 +16,8 @@ import __validateDefinitionObject from './validateDefinitionObject';
  * @return      {Boolean|String}                    Return true if all is ok, and a simple string that describe the issue if it's not
  *
  * @example         js
- * import checkWithDefinitionObject from '@coffeekraken/sugar/js/object/checkWithDefinitionObject';
- * checkWithDefinitionObject({
+ * import validateWithDefinitionObject from '@coffeekraken/sugar/js/object/validateWithDefinitionObject';
+ * validateWithDefinitionObject({
  *    arg1: 'hello',
  *    arg2: false
  * }, {
@@ -34,7 +34,7 @@ import __validateDefinitionObject from './validateDefinitionObject';
  * @since     2.0.0
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function checkWithDefinitionObject(
+export default function validateWithDefinitionObject(
   objectToCheck,
   definitionObj,
   validateDefinitionObject = true
@@ -48,7 +48,7 @@ export default function checkWithDefinitionObject(
       return validateDefinitionObjectResult;
   }
 
-  return __checkWithDefinitionObject(
+  return __validateWithDefinitionObject(
     objectToCheck,
     definitionObj,
     (argName, argDefinition, value) => {

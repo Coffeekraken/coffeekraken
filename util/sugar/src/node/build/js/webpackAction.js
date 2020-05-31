@@ -57,7 +57,10 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(streamObj, settings = this._settings) {
+    // make sure we have a correct streamObj
     this.checkStreamObject(streamObj);
+
+    // return the promise for this action
     return new Promise((resolve, reject) => {
       __webpack(
         __deepMerge(
@@ -107,11 +110,21 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
             'utf8'
           );
 
-          // // read the entry file
-          // const entryData = __fs.readFileSync(streamObj.entry, 'utf8');
+          // check if is a sourcemap
+          let sourcemapOutput;
+          if (streamObj.map) {
+            sourcemapOutput = __fs.readFileSync(
+              __path.resolve(
+                streamObj.output,
+                __getFilename(streamObj.input) + '.map'
+              ),
+              'utf8'
+            );
+          }
 
-          // if (!streamObj.dataBefore) streamObj.dataBefore = {};
+          // // if (!streamObj.dataBefore) streamObj.dataBefore = {};
           streamObj.data = output;
+          if (sourcemapOutput) streamObj.sourcemapData = sourcemapOutput;
 
           resolve(streamObj);
         }

@@ -1,9 +1,9 @@
-const __webpack = require('webpack');
 const __getFilename = require('../../fs/filename');
-const __packageRoot = require('../../path/packageRoot');
 const __deepMerge = require('../../object/deepMerge');
 const __fs = require('fs');
 const __path = require('path');
+const __SActionsStreamAction = require('../../stream/SActionsStreamAction');
+const __SBuildJsCli = require('../SBuildJsCli');
 const __uglifyJs = require('uglify-js');
 
 /**
@@ -11,33 +11,94 @@ const __uglifyJs = require('uglify-js');
  * @namespace           sugar.node.build.js
  * @type                Function
  *
- * This function is responsible of passing uglify on the passed "data" of the streamObj
+ * This function is responsible of passing uglify js on the output files
  *
- * @param       {Object}        streamObj          The streamObj object with the needed properties described bellow:
- * - data (null) {String}: The data on which will be passed the uglify process
+ * @param       {Object}        streamObj          The streamObj object with the properties described bellow:
  *
  * @return      {Promise}                         A simple promise that will be resolved when the process is finished
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function uglifyAction(streamObj, settings = {}) {
-  return new Promise((resolve, reject) => {
-    if (!streamObj.data || typeof streamObj.data !== 'string') {
-      return reject(
-        `The "<cyan>uglifyAction</cyan>" need a "<yellow>data</yellow>" property of type String in the streamObj...`
+module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
+  /**
+   * @name            definitionObj
+   * @type             Object
+   * @static
+   *
+   * Store the definition object that specify the streamObj required properties, types, etc...
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static definitionObj = {
+    filename: {
+      type: 'String',
+      required: true
+    },
+    data: {
+      type: 'String',
+      required: true
+    },
+    sourcemapData: {
+      type: 'String',
+      required: false
+    }
+  };
+
+  /**
+   * @name            constructor
+   * @type            Function
+   * @constructor
+   *
+   * Constructor
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  constructor(settings = {}) {
+    super(settings);
+  }
+
+  /**
+   * @name          run
+   * @type          Function
+   * @async
+   *
+   * Override the base class run method
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  run(streamObj, settings = this._settings) {
+    // make sure we have a correct streamObj
+    this.checkStreamObject(streamObj);
+
+    // return the promise for this action
+    return new Promise((resolve, reject) => {
+      // minify the "data"
+      const uglifyResult = __uglifyJs.minify(
+        streamObj.data,
+        __deepMerge(
+          {
+            sourceMap: {
+              filename: streamObj.filename,
+              url: streamObj.filename + '.map'
+            }
+          },
+          settings
+        )
       );
-    }
 
-    const result = __uglifyJs.minify(streamObj.data, settings);
+      // check if has some error
+      if (uglifyResult.error) {
+        throw new Error(uglifyResult.error);
+      }
 
-    if (result.error) {
-      return reject(result.error);
-    }
+      // otherwise, save the new data in the streamObj
+      streamObj.data = uglifyResult.code;
 
-    // save the uglified data
-    streamObj.data = result.code;
+      // set the map if has been generated
+      if (uglifyResult.map) streamObj.sourcemapData = uglifyResult.map;
 
-    // resolve the action
-    resolve();
-  });
+      // resolve the new streamObj
+      resolve(streamObj);
+    });
+  }
 };

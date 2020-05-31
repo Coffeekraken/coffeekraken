@@ -1,7 +1,10 @@
 const __SActionsStream = require('../stream/SActionsStream');
 const __webpackAction = require('./js/webpackAction');
+const __uglifyAction = require('./js/uglifyAction');
 const __glob = require('glob');
 const __SPromise = require('../promise/SPromise');
+const __deepMerge = require('../object/deepMerge');
+const __getFilename = require('../fs/filename');
 
 /**
  * @name            SBuildJsActionsStream
@@ -40,9 +43,20 @@ module.exports = class SBuildJsActionsStream extends __SActionsStream {
     // init actions stream
     super(
       {
-        webpack: __webpackAction
+        webpack: __webpackAction,
+        uglify: __uglifyAction
       },
-      settings
+      __deepMerge(
+        {
+          before: (streamObj) => {
+            if (streamObj.input) {
+              streamObj.filename = __getFilename(streamObj.input);
+            }
+            return streamObj;
+          }
+        },
+        settings
+      )
     );
   }
 

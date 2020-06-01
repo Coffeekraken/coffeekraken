@@ -1,20 +1,21 @@
-const __SActionsStreamAction = require('../SActionsStreamAction');
-const __writeFile = require('../../fs/writeFile');
-const __toString = require('../../string/toString');
+const __SActionsStreamAction = require('../../stream/SActionsStreamAction');
+const __Bundler = require('scss-bundle').Bundler;
+const __getFilename = require('../../fs/filename');
 
 /**
- * @name            SFsOutputStreamAction
- * @namespace       sugar.node.stream.actions
- * @type            Class
- * @extends         SActionsStreamAction
+ * @name                SImportsStreamAction
+ * @namespace           sugar.node.build.scss
+ * @type                Class
+ * @extends             SActionsStreamAction
  *
- * This class is a stream action that allows you to save file(s) to the filesystem
+ * This function is responsible of importing some packages directly on top of the scss files
+ *
  * @param       {Object}        streamObj          The streamObj object with the properties described bellow:
  * @return      {Promise}                         A simple promise that will be resolved when the process is finished
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SFsOutputStreamAction extends __SActionsStreamAction {
+module.exports = class SImportsStreamAction extends __SActionsStreamAction {
   /**
    * @name            definitionObj
    * @type             Object
@@ -25,9 +26,23 @@ module.exports = class SFsOutputStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   static definitionObj = {
-    outputStack: {
-      type: 'Object',
-      required: true
+    imports: {
+      type: 'Array<Object>',
+      required: false,
+      children: {
+        name: {
+          type: 'String',
+          required: true
+        },
+        path: {
+          type: 'String',
+          required: true
+        },
+        scss: {
+          type: 'String',
+          required: false
+        }
+      }
     }
   };
 
@@ -58,18 +73,20 @@ module.exports = class SFsOutputStreamAction extends __SActionsStreamAction {
     this.checkStreamObject(streamObj);
 
     return new Promise(async (resolve, reject) => {
-      // loop on the files to save
-      const outputStackKeys = Object.keys(streamObj.outputStack);
-      for (let i = 0; i < outputStackKeys.length; i++) {
-        const key = outputStackKeys[i];
-        const outputPath = streamObj.outputStack[key];
-        if (!streamObj[key]) continue;
-        this.trigger('stdout.data', {
-          value: `Saving the streamObj property "<yellow>${key}</yellow>" under "<cyan>${outputPath}</cyan>"`
-        });
-        await __writeFile(outputPath, __toString(streamObj[key]));
-      }
+      if (!streamObj.imports) return resolve(streamObj);
 
+      streamObj.imports.forEach((importObj) => {
+        const importString = `
+          @use "${importObj.path}" as ${importObj.name};
+          ${importObj.scss ? importObj.scss : ''}
+        `;
+
+        // add this to the "data" property
+        if (streamObj.data) streamObj.data = importString + streamObj.data;
+        else streamObj.data = importString;
+      });
+
+      // resolve the action
       resolve(streamObj);
     });
   }

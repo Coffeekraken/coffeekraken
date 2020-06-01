@@ -1,6 +1,8 @@
 const __replaceTags = require('../html/replaceTags');
 const __sugarConfig = require('../config/sugar');
 const __upperFirst = require('../string/upperFirst');
+const __countLine = require('../string/countLine');
+const __splitEvery = require('../string/splitEvery');
 const __chalk = require('chalk');
 __chalk.level = 3;
 
@@ -64,10 +66,26 @@ module.exports = function parseHtml(message) {
       underline: (tag, content) => __chalk.underline(content),
       strike: (tag, content) => __chalk.strike(content),
 
-      iCheck: (tag, content) => parseHtml(`✓`),
-      iCross: (tag, content) => parseHtml(`✖`),
-      iClose: (tag, content) => parseHtml(`✖`),
-      iStart: (tag, content) => parseHtml(`‣`),
+      h1: (tag, content) => {
+        const length = __countLine(content);
+        const width = length;
+        const rest = Math.floor(width - length);
+        return `${'-'.repeat(width)}\n${' '.repeat(
+          width
+        )}\n${content}\n${' '.repeat(width)}\n${'-'.repeat(width)}`;
+      },
+
+      pSuccess: (tag, content) => {
+        return parseHtml(`<green><iCheck/></green> ${content}`);
+      },
+      pError: (tag, content) => {
+        return parseHtml(`<red><iCross/></red> ${content}`);
+      },
+
+      iCheck: (tag, content) => `✓`,
+      iCross: (tag, content) => `✖`,
+      iClose: (tag, content) => `✖`,
+      iStart: (tag, content) => `‣`,
 
       date: (tag, content) =>
         new Date().getDate().toString().padStart('0', 2) +

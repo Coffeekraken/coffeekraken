@@ -1,15 +1,21 @@
 const __SActionsStream = require('../stream/SActionsStream');
-const __SWebpackStreamAction = require('./js/SWebpackStreamAction');
-const __SUglifyJsStreamAction = require('./js/SUglifyJsStreamAction');
 const __glob = require('glob');
 const __SPromise = require('../promise/SPromise');
 const __deepMerge = require('../object/deepMerge');
 const __getFilename = require('../fs/filename');
 const __SFsOutputStreamAction = require('../stream/actions/SFsOutputStreamAction');
+const __SJsObjectToScssStreamAction = require('./scss/SJsObjectToScssStreamAction');
+const __SImportsStreamAction = require('./scss/SImportsStreamAction');
+const __SBundleScssStreamAction = require('./scss/SBundleScssStreamAction');
+const __SRenderSassStreamAction = require('./scss/SRenderSassStreamAction');
+const __SPostCssStreamAction = require('./scss/SPostCssStreamAction');
 const __path = require('path');
+const __packageRoot = require('../path/packageRoot');
+const __sugarConfig = require('../config/sugar');
+const __isInPackage = require('../is/inPackage');
 
 /**
- * @name            SBuildJsActionsStream
+ * @name            SBuildScssActionsStream
  * @namespace       sugar.node.build
  * @type            Class
  * @extends         SActionsStream
@@ -19,11 +25,11 @@ const __path = require('path');
  * @param           {Object}          [settings={}]         The settings object to configure your instance
  *
  * @example         js
- * const SBuildJsActionsStream = require('@coffeekraken/sugar/node/build/SBuildJsActionsStream');
- * const myStream = new SBuildJsActionsStream();
+ * const SBuildScssActionsStream = require('@coffeekraken/sugar/node/build/SBuildScssActionsStream');
+ * const myStream = new SBuildScssActionsStream();
  * myStream.start({
  *    input: '...',
- *    output: '...'
+ *    outputDir: '...'
  * }).on('resolve', (result) => {
  *    // do something
  * });
@@ -31,7 +37,7 @@ const __path = require('path');
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SBuildJsActionsStream extends __SActionsStream {
+module.exports = class SBuildScssActionsStream extends __SActionsStream {
   /**
    * @name        constructor
    * @type        Function
@@ -45,16 +51,34 @@ module.exports = class SBuildJsActionsStream extends __SActionsStream {
     // init actions stream
     super(
       {
-        webpack: __SWebpackStreamAction,
-        uglify: __SUglifyJsStreamAction,
+        bundle: __SBundleScssStreamAction,
+        imports: __SImportsStreamAction,
+        jsConfig: __SJsObjectToScssStreamAction,
+        render: __SRenderSassStreamAction,
+        postCss: __SPostCssStreamAction,
         fsOutput: __SFsOutputStreamAction
       },
       __deepMerge(
         {
           before: (streamObj) => {
+            streamObj.jsObjectToScss = __sugarConfig('scss');
+
             if (streamObj.input) {
               streamObj.filename = __getFilename(streamObj.input);
             }
+
+            if (streamObj.include && streamObj.include.sugar) {
+              streamObj.imports = [
+                {
+                  name: 'Sugar',
+                  path: __isInPackage('@coffeekraken/sugar')
+                    ? __path.resolve(__packageRoot(__dirname), 'index')
+                    : '@coffeekraken/sugar/index',
+                  scss: `@include Sugar.setup($sugarUserSettings);`
+                }
+              ];
+            }
+
             return streamObj;
           },
           beforeActions: {
@@ -63,19 +87,23 @@ module.exports = class SBuildJsActionsStream extends __SActionsStream {
               if (streamObj.outputDir && streamObj.filename && streamObj.data) {
                 streamObj.outputStack.data = __path.resolve(
                   streamObj.outputDir,
-                  streamObj.filename
+                  streamObj.prod
+                    ? streamObj.filename.replace('.scss', '.prod.css')
+                    : streamObj.filename.replace('.scss', '.css')
                 );
               }
-              if (
-                streamObj.outputDir &&
-                streamObj.filename &&
-                streamObj.sourcemapData
-              ) {
-                streamObj.outputStack.sourcemapData = __path.resolve(
-                  streamObj.outputDir,
-                  streamObj.filename + '.map'
-                );
-              }
+              // if (
+              //   streamObj.outputDir &&
+              //   streamObj.filename &&
+              //   streamObj.sourcemapData
+              // ) {
+              //   streamObj.outputStack.sourcemapData = __path.resolve(
+              //     streamObj.outputDir,
+              //     (streamObj.prod
+              //       ? streamObj.filename.replace('.css', '.prod.css')
+              //       : streamObj.filename) + '.map'
+              //   );
+              // }
               return streamObj;
             }
           }

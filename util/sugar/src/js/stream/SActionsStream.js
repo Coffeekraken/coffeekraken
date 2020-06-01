@@ -64,6 +64,8 @@ export default class SActionStream extends __SPromise {
           order: null,
           before: null,
           after: null,
+          beforeActions: {},
+          afterActions: {},
           actions: {}
         },
         settings
@@ -123,9 +125,9 @@ export default class SActionStream extends __SPromise {
 
     return new __SPromise(async (resolve, reject, trigger, cancel) => {
       // starting log
-      const startString = `Starting the stream "<cyan>${
+      const startString = `<h1>Starting the stream "<cyan>${
         settings.name || 'unnamed'
-      }</cyan>"`;
+      }</cyan>"</h1>`;
       const startObj = { value: startString };
       trigger('stdout.data', startObj);
       this.trigger('stdout.data', startObj);
@@ -213,6 +215,17 @@ export default class SActionStream extends __SPromise {
           });
         }
 
+        // check if is a "beforeActions" setting function
+        if (
+          settings.beforeActions[actionName] &&
+          typeof settings.beforeActions[actionName] === 'function'
+        ) {
+          currentStreamObj = settings.beforeActions[actionName](
+            currentStreamObj,
+            Object.assign({}, actionObj)
+          );
+        }
+
         // trigger some "start" events
         trigger(`start`, Object.assign({}, actionObj));
         this.trigger(`start`, Object.assign({}, actionObj));
@@ -242,6 +255,7 @@ export default class SActionStream extends __SPromise {
           cancel(errorObj);
         }
         if (canceled) return;
+
         // complete the actionObj
         actionObj = {
           ...actionObj,
@@ -257,6 +271,17 @@ export default class SActionStream extends __SPromise {
         trigger(`${actionName}.step`, Object.assign({}, actionObj));
         this.trigger('step', Object.assign({}, actionObj));
         this.trigger(`${actionName}.step`, Object.assign({}, actionObj));
+
+        // check if is a "afterActions" setting function
+        if (
+          settings.afterActions[actionName] &&
+          typeof settings.afterActions[actionName] === 'function'
+        ) {
+          currentStreamObj = settings.afterActions[actionName](
+            currentStreamObj,
+            Object.assign({}, streamObj)
+          );
+        }
 
         if (error) {
           const errorString = `Something went wrong during the "<yellow>${actionName}</yellow>" action...`;
@@ -286,12 +311,12 @@ export default class SActionStream extends __SPromise {
       };
       if (canceled) return;
 
-      const completeString = `The stream "<cyan>${
+      const completeString = `<pSuccess>The stream "<cyan>${
         settings.name || 'unnamed'
       }</cyan>" has finished <green>successfully</green> in <yellow>${__convert(
         overallActionsStats.duration,
         's'
-      )}s</yellow>`;
+      )}s</yellow></pSuccess>`;
       const successObj = { ...overallActionsStats, value: completeString };
       trigger('stdout.data', successObj);
       this.trigger('stdout.data', successObj);

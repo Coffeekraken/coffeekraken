@@ -1,25 +1,23 @@
-const __getFilename = require('../../fs/filename');
-const __deepMerge = require('../../object/deepMerge');
-const __fs = require('fs');
-const __path = require('path');
 const __SActionsStreamAction = require('../../stream/SActionsStreamAction');
-const __SBuildJsCli = require('../SBuildJsCli');
-const __uglifyJs = require('uglify-js');
+const __getFilename = require('../../fs/filename');
+const __sass = require('sass');
+const __deepMerge = require('../../object/deepMerge');
+const __packageRoot = require('../../path/packageRoot');
 
 /**
- * @name                uglifyAction
- * @namespace           sugar.node.build.js
- * @type                Function
+ * @name                SRenderSassStreamAction
+ * @namespace           sugar.node.build.scss
+ * @type                Class
+ * @extends             SActionsStreamAction
  *
- * This function is responsible of passing uglify js on the output files
+ * This function is responsible of rendering the sass string in the "data" property
  *
  * @param       {Object}        streamObj          The streamObj object with the properties described bellow:
- *
  * @return      {Promise}                         A simple promise that will be resolved when the process is finished
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
+module.exports = class SRenderSassStreamAction extends __SActionsStreamAction {
   /**
    * @name            definitionObj
    * @type             Object
@@ -30,16 +28,12 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   static definitionObj = {
-    filename: {
-      type: 'String',
-      required: true
-    },
     data: {
       type: 'String',
       required: true
     },
-    sourcemapData: {
-      type: 'String',
+    map: {
+      type: 'Boolean',
       required: false
     }
   };
@@ -70,35 +64,34 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
     // make sure we have a correct streamObj
     this.checkStreamObject(streamObj);
 
-    // return the promise for this action
-    return new Promise((resolve, reject) => {
-      // minify the "data"
-      const uglifyResult = __uglifyJs.minify(
-        streamObj.data,
+    return new Promise(async (resolve, reject) => {
+      __sass.render(
         __deepMerge(
           {
-            sourceMap: {
-              filename: streamObj.filename,
-              url: streamObj.filename + '.map'
-            }
+            data: streamObj.data,
+            includePaths: [`${__packageRoot(process.cwd())}/node_modules`],
+            sourceMap: streamObj.map
           },
           settings
-        )
+        ),
+        async function (err, result) {
+          if (err) {
+            reject(err);
+            return;
+          }
+
+          // save the new css into "data"
+          streamObj.data = result.css.toString();
+
+          // save the map if exist into "sourcemapData"
+          if (result.map) {
+            streamObj.sourcemapData = result.map.toString();
+          }
+
+          // resolve the action
+          resolve(streamObj);
+        }
       );
-
-      // check if has some error
-      if (uglifyResult.error) {
-        throw new Error(uglifyResult.error);
-      }
-
-      // otherwise, save the new data in the streamObj
-      streamObj.data = uglifyResult.code;
-
-      // set the map if has been generated
-      if (uglifyResult.map) streamObj.sourcemapData = uglifyResult.map;
-
-      // resolve the new streamObj
-      resolve(streamObj);
     });
   }
 };

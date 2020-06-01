@@ -2,24 +2,22 @@ const __childProcess = require('child_process');
 const __deepMerge = require('../object/deepMerge');
 const __SPromise = require('../promise/SPromise');
 const __uniqid = require('../string/uniqid');
-const __parseLog = require('../cli/parseLog');
 const __hotkey = require('../keyboard/hotkey');
 const __tkill = require('tree-kill');
 
 /**
  * @name                                spawn
- * @namespace                           sugar.node.childProcess
+ * @namespace                           sugar.node.process
  * @type                                Function
  *
  * This function is a wrapper for the native "spawn" one that add the Promise support
- * and parse automatically the logs received using the "sugar.node.cli.parseLog" function.
  *
  * @param       {String}        command           The command to execute
  * @param       {Array|Object}    [argsOrSettings=null]     Either an Array of args, or an object of settings
  * @param       {Object}        [settings=null]               An object of settings for your spawn command. This is the same as the settings of the native spawn
  *
  * @example       js
- * const spawn = require('@coffeekraken/sugar/node/childProcess/spawn');
+ * const spawn = require('@coffeekraken/sugar/node/process/spawn');
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
@@ -62,9 +60,9 @@ module.exports = function spawn(
     childProcess = __childProcess.spawn(command, argsOrSettings, settings);
 
     // runningProcess.childProcess = childProcess;
-    __hotkey('ctrl+c').on('press', () => {
-      // childProcess.kill();
-    });
+    // __hotkey('ctrl+c').on('press', () => {
+    //   // childProcess.kill();
+    // });
 
     // start
     runningProcess.state = 'running';
@@ -147,22 +145,22 @@ module.exports = function spawn(
 
     // stdout data
     childProcess.stdout.on('data', (value) => {
-      runningProcess.stdout.push(__parseLog(value.toString()));
+      runningProcess.stdout.push(value.toString());
       trigger('stdout.data', {
         process: runningProcess,
         time: Date.now(),
-        value: __parseLog(value.toString())
+        value: value.toString()
       });
     });
 
     // stderr data
     childProcess.stderr.on('data', (error) => {
-      runningProcess.stderr.push(__parseLog(error.toString()));
+      runningProcess.stderr.push(error.toString());
       trigger('stderr.data', {
         process: runningProcess,
         time: Date.now(),
-        error: __parseLog(error.toString()),
-        value: __parseLog(error.toString())
+        error: error.toString(),
+        value: error.toString()
       });
     });
   })
@@ -171,11 +169,11 @@ module.exports = function spawn(
 
   promise.log = (...args) => {
     args.forEach((arg) => {
-      runningProcess.stdout.push(__parseLog(arg.toString()));
+      runningProcess.stdout.push(arg.toString());
       promise.trigger('stdout.data', {
         process: runningProcess,
         time: Date.now(),
-        value: __parseLog(arg.toString())
+        value: arg.toString()
       });
     });
   };

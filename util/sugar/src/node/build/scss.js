@@ -30,7 +30,7 @@ const __glob = require('glob');
  *
  * @param         {Object}          [settings={}]         The settings object to configure the build process. Here's the list of available settings:
  * - input (<appRoot>/src/scss/*.scss): Specify the inputs files to compile. Accept glob patterns
- * - output: (<appRoot>/dist/css): Specify the output folder in which to save the files in
+ * - outputDir: (<appRoot>/dist/css): Specify the output folder in which to save the files in
  * - style (expanded) {String}: Specify the output style you want between nested,expanded,compact,compressed
  * - map (true) {Boolean}: Specify if you want a sourcemap to be generated or not
  * - prod (false) {Boolean}: Specify if you want a ```<filename>.prod.css``` to be generated. This file is optimized to be the smallest possible, etc...
@@ -44,7 +44,7 @@ const __glob = require('glob');
  * const buildScss = require('@coffeekraken/sugar/node/build/scss');
  * buildScss({
  *    input: 'my/cool/input.scss',
- *    output: 'my/cool/output'
+ *    outputDir: 'my/cool/output'
  * }).on('resolve', files => {
  *    // do something...
  * });
@@ -58,7 +58,7 @@ module.exports = (settings = {}) => {
     settings = __deepMerge(__sugarConfig('build.scss'), settings);
 
     let inputPath = settings.input;
-    let outputPath = settings.output;
+    let outputPath = settings.outputDir;
     const inputFolderPath = inputPath
       .split('/')
       .filter((path) => {
@@ -84,20 +84,6 @@ module.exports = (settings = {}) => {
     if (settings.include.sugar) {
       const scssConfig = await __sugarConfig('scss');
       if (scssConfig) {
-        await __writeFile(
-          __tmpDir() + '/sugar.build.scss.config.json',
-          JSON.stringify(scssConfig, null, 4)
-        );
-
-        const command = `npx --no-install json-to-scss ${__tmpDir()}/sugar.build.scss.config.json ${__tmpDir()}/sugar.build.scss.config.scss --mo`;
-        __child_process.execSync(command);
-        scssConfigString = __fs
-          .readFileSync(`${__tmpDir()}/sugar.build.scss.config.scss`, 'ascii')
-          .replace('$sugar:', '$sugarUserSettings:')
-          .trim();
-
-        __fs.unlinkSync(`${__tmpDir()}/sugar.build.scss.config.json`);
-        __fs.unlinkSync(`${__tmpDir()}/sugar.build.scss.config.scss`);
       }
     }
 

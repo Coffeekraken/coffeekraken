@@ -41,11 +41,11 @@ module.exports = class SBuildScssCli extends __SCli {
       default: __sugarConfig('build.scss.input') || 'src/scss/**/*.scss',
       level: 1
     },
-    output: {
+    outputDir: {
       type: 'String',
       alias: 'o',
-      description: 'Output folder path',
-      default: __sugarConfig('build.scss.output') || 'dist/css',
+      description: 'Output directory path',
+      default: __sugarConfig('build.scss.outputDir') || 'dist/css',
       level: 1
     },
     style: {

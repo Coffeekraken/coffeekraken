@@ -1,6 +1,6 @@
 const __buildCommandLine = require('./buildCommandLine');
-const __checkDefinitionObject = require('./checkDefinitionObject');
-const __spawn = require('../childProcess/spawn');
+const __validateDefinitionObject = require('./validateDefinitionObject');
+const __spawn = require('../process/spawn');
 const __SProcessOutput = require('../blessed/SProcessOutput');
 const __deepMerge = require('../object/deepMerge');
 const __parseHtml = require('../terminal/parseHtml');
@@ -176,7 +176,7 @@ module.exports = class SCli {
       );
     }
     // check definition object
-    const definitionObjCheck = __checkDefinitionObject(this.definitionObj);
+    const definitionObjCheck = __validateDefinitionObject(this.definitionObj);
     if (definitionObjCheck !== true) throw new Error(definitionObjCheck);
   }
 

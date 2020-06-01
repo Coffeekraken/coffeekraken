@@ -7,7 +7,7 @@ const __argsToString = require('../cli/argsToString');
 const __watchCli = require('../../cli/fs/watch.cli');
 const __minimatch = require('minimatch');
 const __SCli = require('../cli/SCli');
-const __spawn = require('../childProcess/spawn');
+const __spawn = require('../process/spawn');
 const __replaceTokens = require('../string/replaceTokens');
 
 /**

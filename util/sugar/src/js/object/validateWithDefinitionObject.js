@@ -1,6 +1,7 @@
 // TODO: tests
 import __validateDefinitionObject from './validateDefinitionObject';
 import __toString from '../string/toString';
+import __isOfType from '../is/ofType';
 
 /**
  * @name            validateWithDefinitionObject
@@ -40,7 +41,8 @@ export default function validateWithDefinitionObject(
   objectToCheck,
   definitionObj,
   extendsFn = null,
-  validateDefinitionObject = true
+  validateDefinitionObject = true,
+  _argPath = []
 ) {
   // validate the passed definition object first
   if (validateDefinitionObject) {
@@ -61,23 +63,17 @@ export default function validateWithDefinitionObject(
 
     // validate type
     if (value !== undefined && argDefinition.type) {
-      if (argDefinition.type.toLowerCase() === 'array') {
-        if (!Array.isArray(value))
-          return `${errorHead}The property "<yellow>${argName}</yellow>" has to be an <green>Array</green>. You've passed a "<red>${typeof value}</red>" with the value "<cyan>${__toString(
-            value
-          )}</cyan>"...`;
-      } else if (typeof value !== argDefinition.type.toLowerCase()) {
-        return `${errorHead}The property "<yellow>${argName}</yellow>" has to be of type "<green>${
-          argDefinition.type
-        }</green>". You've passed a "<red>${typeof value}</red>" with the value "<cyan>${__toString(
-          value
-        )}</cyan>"...`;
+      const isOfTypeResult = __isOfType(value, argDefinition.type, true);
+      if (isOfTypeResult !== true) {
+        return isOfTypeResult;
       }
     }
     // check required
     if (argDefinition.required === true) {
       if (value === null || value === undefined) {
-        return `${errorHead}The property "${argName}" is required...`;
+        return `${errorHead}The property "<yellow>${
+          _argPath.length ? _argPath.join('.') + '.' : ''
+        }${argName}</yellow>" is <green>required</green>...`;
       }
     }
 
@@ -85,6 +81,32 @@ export default function validateWithDefinitionObject(
     if (extendsFn) {
       const extendsFnResult = extendsFn(argName, argDefinition, value);
       if (extendsFnResult !== true) return extendsFnResult;
+    }
+
+    // check if we have some "children" properties
+    if (argDefinition.children) {
+      if (Array.isArray(objectToCheck[argName])) {
+        for (let i = 0; i < objectToCheck[argName].length; i++) {
+          const valueToCheck = objectToCheck[argName][i];
+          const childrenValidation = validateWithDefinitionObject(
+            valueToCheck,
+            argDefinition.children,
+            extendsFn,
+            validateDefinitionObject,
+            [..._argPath, argName]
+          );
+          if (childrenValidation !== true) return childrenValidation;
+        }
+      } else {
+        const childrenValidation = validateWithDefinitionObject(
+          objectToCheck[argName],
+          argDefinition.children,
+          extendsFn,
+          validateDefinitionObject,
+          [..._argPath, argName]
+        );
+        if (childrenValidation !== true) return childrenValidation;
+      }
     }
   }
 

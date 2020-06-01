@@ -45,7 +45,6 @@ export default class SLogConsoleAdapter {
    * Constructor
    *
    * @param         {Object}        [settings={}]           The settings object to configure your SLogConsoleAdapter instance. Here's the settings available:
-   * - enableChildProcessLogs (true) {Boolean}: Specify if you want that the logs are formatted specialy for when used in a child process
    * - logMethods ({}) {Object}: Store all the console methods like "log", "info", "warn", "debug" and "error". You can override each methods with your own method if you want. The Object format is { methodName: overrideFunction }
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -104,25 +103,17 @@ export default class SLogConsoleAdapter {
           break;
       }
 
-      if (this._settings.enableChildProcessLogs && __isChildProcess()) {
-        __cliLog(
-          __consoleHtmlPreset(message),
-          level,
-          (global || window).nativeConsole || console
+      // log the message
+      if (typeof message === 'string') {
+        ((global || window).nativeConsole || console)[consoleMethod](
+          __consoleHtmlPreset(message)
+        );
+      } else if (typeof message === 'object') {
+        ((global || window).nativeConsole || console)[consoleMethod](
+          __formatObject(message)
         );
       } else {
-        // log the message
-        if (typeof message === 'string') {
-          ((global || window).nativeConsole || console)[consoleMethod](
-            __consoleHtmlPreset(message)
-          );
-        } else if (typeof message === 'object') {
-          ((global || window).nativeConsole || console)[consoleMethod](
-            __formatObject(message)
-          );
-        } else {
-          ((global || window).nativeConsole || console)[consoleMethod](message);
-        }
+        ((global || window).nativeConsole || console)[consoleMethod](message);
       }
 
       // resolve the promise

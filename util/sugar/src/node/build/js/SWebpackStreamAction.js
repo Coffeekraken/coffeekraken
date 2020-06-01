@@ -8,14 +8,14 @@ const __SActionsStreamAction = require('../../stream/SActionsStreamAction');
 const __SBuildJsCli = require('../SBuildJsCli');
 
 /**
- * @name                webpackAction
+ * @name                SWebpackStreamAction
  * @namespace           sugar.node.build.js
- * @type                Function
+ * @type                Class
+ * @extends             SActionsStreamAction
  *
  * This function is responsible of passing webpack on the output files
  *
  * @param       {Object}        streamObj          The streamObj object with the properties described bellow:
- *
  * @return      {Promise}                         A simple promise that will be resolved when the process is finished
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -68,7 +68,7 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
             mode: streamObj.prod ? 'production' : 'development',
             entry: streamObj.input,
             output: {
-              path: streamObj.output,
+              path: streamObj.outputDir,
               filename: streamObj.prod
                 ? __getFilename(streamObj.input).replace('.js', '.prod.js')
                 : __getFilename(streamObj.input)
@@ -106,7 +106,7 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
 
           // reading the outputed file
           const output = __fs.readFileSync(
-            __path.resolve(streamObj.output, __getFilename(streamObj.input)),
+            __path.resolve(streamObj.outputDir, __getFilename(streamObj.input)),
             'utf8'
           );
 
@@ -115,7 +115,7 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
           if (streamObj.map) {
             sourcemapOutput = __fs.readFileSync(
               __path.resolve(
-                streamObj.output,
+                streamObj.outputDir,
                 __getFilename(streamObj.input) + '.map'
               ),
               'utf8'

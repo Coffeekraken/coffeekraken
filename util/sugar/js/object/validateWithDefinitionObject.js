@@ -9,6 +9,8 @@ var _validateDefinitionObject = _interopRequireDefault(require("./validateDefini
 
 var _toString = _interopRequireDefault(require("../string/toString"));
 
+var _ofType = _interopRequireDefault(require("../is/ofType"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // TODO: tests
@@ -47,7 +49,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @since     2.0.0
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function validateWithDefinitionObject(objectToCheck, definitionObj, extendsFn = null, validateDefinitionObject = true) {
+function validateWithDefinitionObject(objectToCheck, definitionObj, extendsFn = null, validateDefinitionObject = true, _argPath = []) {
   // validate the passed definition object first
   if (validateDefinitionObject) {
     const validateDefinitionObjectResult = (0, _validateDefinitionObject.default)(definitionObj);
@@ -62,17 +64,17 @@ function validateWithDefinitionObject(objectToCheck, definitionObj, extendsFn = 
     const value = objectToCheck[argName]; // validate type
 
     if (value !== undefined && argDefinition.type) {
-      if (argDefinition.type.toLowerCase() === 'array') {
-        if (!Array.isArray(value)) return `${errorHead}The property "<yellow>${argName}</yellow>" has to be an <green>Array</green>. You've passed a "<red>${typeof value}</red>" with the value "<cyan>${(0, _toString.default)(value)}</cyan>"...`;
-      } else if (typeof value !== argDefinition.type.toLowerCase()) {
-        return `${errorHead}The property "<yellow>${argName}</yellow>" has to be of type "<green>${argDefinition.type}</green>". You've passed a "<red>${typeof value}</red>" with the value "<cyan>${(0, _toString.default)(value)}</cyan>"...`;
+      const isOfTypeResult = (0, _ofType.default)(value, argDefinition.type, true);
+
+      if (isOfTypeResult !== true) {
+        return isOfTypeResult;
       }
     } // check required
 
 
     if (argDefinition.required === true) {
       if (value === null || value === undefined) {
-        return `${errorHead}The property "${argName}" is required...`;
+        return `${errorHead}The property "<yellow>${_argPath.length ? _argPath.join('.') + '.' : ''}${argName}</yellow>" is <green>required</green>...`;
       }
     } // check if is an extendsFn
 
@@ -80,6 +82,20 @@ function validateWithDefinitionObject(objectToCheck, definitionObj, extendsFn = 
     if (extendsFn) {
       const extendsFnResult = extendsFn(argName, argDefinition, value);
       if (extendsFnResult !== true) return extendsFnResult;
+    } // check if we have some "children" properties
+
+
+    if (argDefinition.children) {
+      if (Array.isArray(objectToCheck[argName])) {
+        for (let i = 0; i < objectToCheck[argName].length; i++) {
+          const valueToCheck = objectToCheck[argName][i];
+          const childrenValidation = validateWithDefinitionObject(valueToCheck, argDefinition.children, extendsFn, validateDefinitionObject, [..._argPath, argName]);
+          if (childrenValidation !== true) return childrenValidation;
+        }
+      } else {
+        const childrenValidation = validateWithDefinitionObject(objectToCheck[argName], argDefinition.children, extendsFn, validateDefinitionObject, [..._argPath, argName]);
+        if (childrenValidation !== true) return childrenValidation;
+      }
     }
   } // all is good
 

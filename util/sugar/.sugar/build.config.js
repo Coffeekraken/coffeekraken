@@ -24,7 +24,7 @@ module.exports = {
       : `${__packageRoot()}/src/scss/[^_]*.scss`,
 
     /**
-     * @name              output
+     * @name              outputDir
      * @namespace         sugar.config.build.scss
      * @type              String
      * @default           <appRoot>/dist/css
@@ -34,7 +34,7 @@ module.exports = {
      * @since             2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    output: isInSugarPackage()
+    outputDir: isInSugarPackage()
       ? `${__packageRoot()}/tests/dist/css`
       : `${__packageRoot()}/dist/css`,
 
@@ -148,7 +148,7 @@ module.exports = {
       : `${__packageRoot()}/src/js/*.js`,
 
     /**
-     * @name              output
+     * @name              outputDir
      * @namespace         sugar.config.build.js
      * @type              String
      * @default           <appRoot>/dist/js
@@ -158,7 +158,7 @@ module.exports = {
      * @since             2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    output: isInSugarPackage()
+    outputDir: isInSugarPackage()
       ? `${__packageRoot()}/tests/dist/js`
       : `${__packageRoot()}/dist/js`,
 

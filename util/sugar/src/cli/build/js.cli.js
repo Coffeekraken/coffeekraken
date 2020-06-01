@@ -1,18 +1,13 @@
-const __isChildProcess = require('../../node/is/childProcess');
-const __buildJs = require('../../node/build/js');
 const __parseArgs = require('../../node/cli/parseArgs');
-const __SProcessOutput = require('../../node/blessed/SProcessOutput');
 const __SBuildJsCli = require('../../node/build/SBuildJsCli');
+const __SBuildJsActionsStream = require('../../node/build/SBuildJsActionsStream');
+const __output = require('../../node/process/output');
 
 module.exports = (stringArgs = '') => {
   const args = __parseArgs(stringArgs, __SBuildJsCli.definitionObj);
-  const build = __buildJs(args);
-  if (__isChildProcess()) {
-    build.on('stdout.data', (message) => {
-      console.log(message);
-    });
-    return;
-  }
-  const output = new __SProcessOutput(build, {});
-  output.attach();
+  const stream = new __SBuildJsActionsStream({
+    name: 'Build JS'
+  });
+  const proc = stream.start(args);
+  __output(proc);
 };

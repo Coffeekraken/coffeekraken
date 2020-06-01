@@ -49,6 +49,8 @@ function validateDefinitionObject(definitionObj) {
     if (argDefinition.level && typeof argDefinition.level !== 'number') {
       return `The property "level" for your argument "${argName}" has to be a Number. You've passed "${__toString(argDefinition.level)}" which is a "${typeof argDefinition.level}"...`;
     }
+
+    return true;
   });
 }
 

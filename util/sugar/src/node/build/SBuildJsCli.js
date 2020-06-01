@@ -41,11 +41,11 @@ module.exports = class SBuildJsCli extends __SCli {
       default: __sugarConfig('build.js.input') || 'src/js/*.js',
       level: 1
     },
-    output: {
+    outputDir: {
       type: 'String',
       alias: 'o',
-      description: 'Output folder path',
-      default: __sugarConfig('build.js.output') || 'dist/js',
+      description: 'Output directory path',
+      default: __sugarConfig('build.js.outputDir') || 'dist/js',
       level: 1
     },
     map: {

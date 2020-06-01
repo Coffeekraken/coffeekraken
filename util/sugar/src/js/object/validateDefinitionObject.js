@@ -50,12 +50,12 @@ export default function validateDefinitionObject(
       return `The "type" property of an argument definition object has to be a String. You've passed "${__toString(
         argDefinition.type
       )}" which is a "${typeof argDefinition.type}" for your argument "${argName}"...`;
-    if (supportedTypes.indexOf(argDefinition.type.toLowerCase()) === -1)
-      return `The "type" property of an argument definition object has to be one of these values "${supportedTypes.join(
-        ','
-      )}". You've passed "${
-        argDefinition.type
-      }" for your argument "${argName}"...`;
+    // if (supportedTypes.indexOf(argDefinition.type.toLowerCase()) === -1)
+    //   return `The "type" property of an argument definition object has to be one of these values "${supportedTypes.join(
+    //     ','
+    //   )}". You've passed "${
+    //     argDefinition.type
+    //   }" for your argument "${argName}"...`;
     if (argDefinition.required !== undefined) {
       if (typeof argDefinition.required !== 'boolean') {
         return `The "required" property of an argument definition object has to bo a Boolean. You've passed "${__toString(

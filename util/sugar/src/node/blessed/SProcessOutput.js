@@ -3,6 +3,7 @@ const __blessed = require('blessed');
 const __color = require('../color/color');
 const __SComponent = require('./SComponent');
 const __parseHtml = require('../terminal/parseHtml');
+const __isChildProcess = require('../is/childProcess');
 
 /**
  * @name                  SProcessOutput
@@ -63,7 +64,7 @@ module.exports = class SProcessOutput extends __SComponent {
     this._process = process;
     // subscribe to the process
     this._subscribeToProcess();
-    // generate keys UI
+    // // generate keys UI
     this._generateUI();
   }
 
@@ -133,8 +134,13 @@ module.exports = class SProcessOutput extends __SComponent {
       if (typeof arg === 'string') {
         arg = __parseHtml(arg);
       }
-      this._logBox.pushLine(arg);
-      this._logBox.pushLine(' ');
+      if (!__isChildProcess()) {
+        this._logBox.pushLine(arg);
+        this._logBox.pushLine(' ');
+      } else {
+        console.log(arg);
+        console.log('<black> </black>');
+      }
     });
   }
 

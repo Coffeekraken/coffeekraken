@@ -49,5 +49,6 @@ export default function validateDefinitionObject(definitionObj) {
         argDefinition.level
       )}" which is a "${typeof argDefinition.level}"...`;
     }
+    return true;
   });
 }

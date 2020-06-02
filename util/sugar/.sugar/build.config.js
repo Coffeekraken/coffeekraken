@@ -44,7 +44,7 @@ module.exports = {
      * @type              String
      * @default           src/scss\/**\/*.scss
      *
-     * SSet the watch files that you want to check
+     * Set the watch files that you want to check
      *
      * @since             2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -94,14 +94,14 @@ module.exports = {
      */
     prod: false,
 
-    include: {
+    import: {
       /**
        * @name                sugar
-       * @namespace           sugar.config.build.scss.include
+       * @namespace           sugar.config.build.scss.import
        * @type                Boolean
        * @default             true
        *
-       * This options tells the sugar scss compiler process if you want to include the sugar toolkit or not
+       * This options tells the sugar scss compiler process if you want to import the sugar toolkit or not
        *
        * @since             2.0.0
        * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -161,6 +161,21 @@ module.exports = {
     outputDir: isInSugarPackage()
       ? `${__packageRoot()}/tests/dist/js`
       : `${__packageRoot()}/dist/js`,
+
+    /**
+     * @name              watch
+     * @namespace         sugar.config.build.js
+     * @type              String
+     * @default           src/js\/**\/*.js
+     *
+     * Set the watch files that you want to check
+     *
+     * @since             2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    watch: isInSugarPackage()
+      ? `${__packageRoot()}/tests/src/js/**/*.js`
+      : `${__packageRoot()}/src/js/**/*.js`,
 
     /**
      * @name              map

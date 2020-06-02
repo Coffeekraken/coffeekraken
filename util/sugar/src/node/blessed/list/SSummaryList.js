@@ -9,6 +9,7 @@ const __SPromise = require('../../promise/SPromise');
 const __SInput = require('../form/SInput');
 const __multiple = require('../../class/multipleExtends');
 const __activeSpace = require('../../core/activeSpace');
+const __escapeStack = require('../../terminal/escapeStack');
 
 /**
  * @name                  SSummaryList
@@ -66,7 +67,7 @@ module.exports = class SSummaryList extends __SComponent {
   _isEditing = false;
 
   /**
-   * @name                _list
+   * @name                $list
    * @type                blessed.List
    * @default             null
    * @private
@@ -75,7 +76,7 @@ module.exports = class SSummaryList extends __SComponent {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _list = null;
+  $list = null;
 
   /**
    * @name                  _items
@@ -117,14 +118,14 @@ module.exports = class SSummaryList extends __SComponent {
     );
 
     // init the actual list component
-    this._list = __blessed.list({
+    this.$list = __blessed.list({
       keys: false,
       mouse: false,
       interactive: true,
       ...this._settings
     });
 
-    this.append(this._list);
+    this.append(this.$list);
 
     // save the items
     this._items = items;
@@ -141,6 +142,9 @@ module.exports = class SSummaryList extends __SComponent {
     this.on('attach', () => {
       __activeSpace.append('summaryList');
       this._rebuildList();
+    });
+    this.on('detach', () => {
+      __activeSpace.remove('.summaryList');
     });
 
     this.promise = new __SPromise((resolve, reject, trigger, cancel) => {});
@@ -161,7 +165,7 @@ module.exports = class SSummaryList extends __SComponent {
     // init hotkeys
     this._initHotkeys();
 
-    this._list.select(this._items.length);
+    this.$list.select(this._items.length);
     this._selectedItemIdx = this._items.length;
   }
 
@@ -175,9 +179,12 @@ module.exports = class SSummaryList extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _initHotkeys() {
+    let escapeStackPromise;
+
     this._escapeHotkey = __hotkey('escape', {
       activeSpace: '**.summaryList'
     }).on('press', (key) => {
+      if (escapeStackPromise) escapeStackPromise.cancel();
       if (this._isEditing) {
         this._isEditing = false;
       } else {
@@ -189,50 +196,67 @@ module.exports = class SSummaryList extends __SComponent {
       activeSpace: '**.summaryList'
     }).on('press', (key) => {
       if (this._isEditing) return;
-      this._list.down(1);
-      this._selectedItemIdx = this._list.selected;
+      this.$list.down(1);
+      this._selectedItemIdx = this.$list.selected;
       this._rebuildList();
     });
     this._upHotkey = __hotkey('up', {
       activeSpace: '**.summaryList'
     }).on('press', (key) => {
       if (this._isEditing) return;
-      this._list.up(1);
-      this._selectedItemIdx = this._list.selected;
+      this.$list.up(1);
+      this._selectedItemIdx = this.$list.selected;
       this._rebuildList();
     });
     this._enterHotkey = __hotkey('enter', {
       activeSpace: '**.summaryList'
     }).on('press', (key) => {
       if (!this._isEditing) {
-        if (this._list.selected === this._items.length) {
+        if (this.$list.selected === this._items.length) {
           this._terminate();
           this.promise.resolve(this._items);
           return;
         }
 
+        // check if the value is a boolean
+        if (typeof this._items[this.$list.selected].default === 'boolean') {
+          this._items[this.$list.selected].value = !this._items[
+            this.$list.selected
+          ].value;
+          this._rebuildList();
+          return;
+        }
+
+        // init an new empty escape stack
+        escapeStackPromise = __escapeStack(() => {});
+
         this._isEditing = true;
-        this._editingItemIdx = this._list.selected;
-        this._editInput = new __SInput({
-          placeholder: this._items[this._list.selected].default,
-          top: this._list.selected,
-          left: this.getLongestListItemName().length + 4
+        this._editingItemIdx = this.$list.selected;
+        this.$editInput = new __SInput({
+          width: 'auto',
+          placeholder: this._items[this.$list.selected].default,
+          top: this.$list.selected,
+          left: this.getLongestListItemName().length + 4,
+          padding: {
+            top: 0,
+            bottom: 0
+          }
         });
-        this._list.style.selected = {
+        this.$list.style.selected = {
           bg: 'black',
           fg: 'white'
         };
-        this._editInput.promise
+        this.$editInput.promise
           .on('resolve', (value) => {
-            this._items[this._list.selected].value = value;
+            this._items[this.$list.selected].value = value;
           })
           .on('cancel', () => {})
           .on('cancel,finally', () => {
             setTimeout(() => {
               this._isEditing = false;
               this._editingItemIdx = null;
-              this.remove(this._editInput);
-              this._list.style.selected = {
+              this.$editInput.detach();
+              this.$list.style.selected = {
                 bg: this._settings.style.selected.bg,
                 fg: this._settings.style.selected.fg
               };
@@ -240,7 +264,7 @@ module.exports = class SSummaryList extends __SComponent {
             });
           });
         this._rebuildList();
-        this.append(this._editInput);
+        this.append(this.$editInput);
       }
     });
   }
@@ -274,13 +298,12 @@ module.exports = class SSummaryList extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _terminate() {
-    if (this._editInput) this.remove(this._editInput);
-    this._list.detach();
+    if (this.$editInput) this.remove(this.$editInput);
+    this.$list.detach();
     this._escapeHotkey.cancel();
     this._downHotkey.cancel();
     this._upHotkey.cancel();
     this._enterHotkey.cancel();
-    this.update();
   }
 
   /**
@@ -297,7 +320,10 @@ module.exports = class SSummaryList extends __SComponent {
   _buildBlessedListItemsArray() {
     const longestItemText = this.getLongestListItemName();
     let listItems = this._items.map((item, i) => {
-      let value = this._items[i].value ? this._items[i].value : item.default;
+      let value =
+        this._items[i].value !== undefined
+          ? this._items[i].value
+          : item.default;
       if (this._editingItemIdx === i) value = '';
 
       return __parseHtml(
@@ -329,18 +355,18 @@ module.exports = class SSummaryList extends __SComponent {
    */
   _rebuildList() {
     let listItems = this._buildBlessedListItemsArray();
-    this._list.clearItems();
-    this._list.setItems(listItems);
-    this._list.select(this._selectedItemIdx);
-    this._list.items[this._items.length].top += 1;
+    this.$list.clearItems();
+    this.$list.setItems(listItems);
+    this.$list.select(this._selectedItemIdx);
+    this.$list.items[this._items.length].top += 1;
 
     this.style.bg = __color('terminal.black').toString();
 
-    this._list.items.forEach((item) => {
+    this.$list.items.forEach((item) => {
       item.style.bg = __color('terminal.black').toString();
     });
 
-    const selectedItem = this._list.items[this._selectedItemIdx];
+    const selectedItem = this.$list.items[this._selectedItemIdx];
     if (!this._isEditing) {
       selectedItem.style.bg = __color('terminal.cyan').toString();
     }
@@ -353,7 +379,7 @@ module.exports = class SSummaryList extends __SComponent {
   }
 
   update() {
-    this._list.height = this._items.length + 2;
+    this.$list.height = this._items.length + 2;
     this.height = this._items.length + 2;
     setTimeout(() => {
       super.update();

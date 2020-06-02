@@ -1,0 +1,15 @@
+{
+  "name": "@coffeekraken/sugar-webapp",
+  "version": "0.0.1",
+  "description": "Sugar webapp that is used to develop nice and clean modern websites",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@coffeekraken/sugar": "*",
+    "json-to-scss": "^1.5.0"
+  }
+}

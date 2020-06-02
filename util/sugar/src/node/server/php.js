@@ -25,26 +25,4 @@ const __PhpSCli = require('./SPhpServerCli');
 module.exports = (args = {}) => {
   const cli = new __PhpSCli();
   return cli.spawn(args);
-  //   let childProcess;
-  //   const promise = new __SPromise((resolve, reject, trigger, cancel) => {
-  //     settings = __deepMerge({}, settings);
-  //     const args = __argsToString(settings, __phpCli.definition);
-  //     childProcess = __spawn(
-  //       `php -S ${settings.hostname || 'localhost'}:${settings.port || 8080} ${
-  //         settings.rootDir || '.'
-  //       } ${args}`
-  //     );
-  //     childProcess.trigger(
-  //       'stdout.data',
-  //       `<green><bold>Your PHP server is up and running</bold></green>:
-  // - Hostname: <yellow>${settings.hostname}</yellow>
-  // - Port    : <yellow>${settings.port}</yellow>
-  // - RootDir : <yellow>${settings.rootDir}</yellow>
-  // - URL     : <cyan>http://${settings.hostname}:${settings.port}</cyan>
-
-  // <red>Ctrl+c</red> to kill the server`
-  //     );
-  //   }).start();
-  //   __SPromise.pipe(childProcess, promise);
-  //   return promise;
 };

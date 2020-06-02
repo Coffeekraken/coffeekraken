@@ -42,25 +42,25 @@ module.exports = function summaryListPopup(settings = {}) {
     settings
   );
 
-  const popupBox = new __SPopup({
+  const $popupBox = new __SPopup({
     title: settings.title,
     description: settings.description
   });
-  const summaryListBox = new __SSummaryList(settings.items, {});
-  popupBox.append(summaryListBox);
-  summaryListBox.promise.on('finally,cancel', () => {
-    popupBox.remove(summaryListBox);
-    popupBox.detach();
+  const $summaryListBox = new __SSummaryList(settings.items, {});
+  $popupBox.append($summaryListBox);
+  $summaryListBox.promise.on('finally,cancel', () => {
+    $popupBox.remove($summaryListBox);
+    $popupBox.detach();
   });
 
   return {
-    popup: popupBox,
-    list: summaryListBox,
-    on: summaryListBox.on,
-    then: summaryListBox.then,
-    catch: summaryListBox.catch,
-    attachTo: (parent) => {
-      parent.append(popupBox);
+    $popup: $popupBox,
+    $list: $summaryListBox,
+    on: $summaryListBox.on,
+    then: $summaryListBox.then,
+    catch: $summaryListBox.catch,
+    attach: (parent) => {
+      parent.append($popupBox);
     }
   };
 };

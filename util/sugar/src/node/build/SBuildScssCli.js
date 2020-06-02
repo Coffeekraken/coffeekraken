@@ -69,10 +69,10 @@ module.exports = class SBuildScssCli extends __SCli {
       default: __sugarConfig('build.scss.prod') || false,
       level: 1
     },
-    'include.sugar': {
+    'import.sugar': {
       type: 'Boolean',
-      description: 'Include the coffeekraken sugar toolkit',
-      default: __sugarConfig('build.scss.include.sugar') || true,
+      description: 'Import the coffeekraken sugar toolkit',
+      default: __sugarConfig('build.scss.import.sugar') || true,
       level: 1
     },
     'vendor.sass': {

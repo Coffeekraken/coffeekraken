@@ -9,6 +9,9 @@ const __minimatch = require('minimatch');
 const __SCli = require('../cli/SCli');
 const __spawn = require('../process/spawn');
 const __replaceTokens = require('../string/replaceTokens');
+const __notifier = require('node-notifier');
+const __packageRoot = require('../path/packageRoot');
+const __path = require('path');
 
 /**
  * @name            SCommand
@@ -138,6 +141,17 @@ module.exports = class SCommand extends __SPromise {
   _processesStack = [];
 
   /**
+   * @name          _isWatching
+   * @type          Boolean
+   * @private
+   *
+   * Store the watching status
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _isWatching = false;
+
+  /**
    * @name          _commandsStack
    * @type          Array
    * @static
@@ -239,6 +253,20 @@ module.exports = class SCommand extends __SPromise {
           concurrent: false,
           color: 'white',
           title: null,
+          notification: {
+            successIconPath: __path.join(
+              __packageRoot(__dirname),
+              'src/data/notifications/success.jpg'
+            ),
+            errorIconPath: __path.join(
+              __packageRoot(__dirname),
+              'src/data/notifications/error.jpg'
+            ),
+            runIconPath: __path.join(
+              __packageRoot(__dirname),
+              'src/data/notifications/run.jpg'
+            )
+          },
           summary: true,
           watch: null,
           key: null,
@@ -250,7 +278,7 @@ module.exports = class SCommand extends __SPromise {
     ).start();
 
     setTimeout(() => {
-      if (this._settings.watch) this.watch();
+      if (this._settings.watch && !this._settings.run) this.watch();
       if (this._settings.run) this.run();
     });
   }
@@ -368,7 +396,11 @@ module.exports = class SCommand extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   get lastProcessObj() {
-    if (!this._processesStack.length) return null;
+    if (!this._processesStack.length) {
+      if (!this._processObjWhenNoLastOne)
+        this._processObjWhenNoLastOne = { stdout: [], stderr: [] };
+      return this._processObjWhenNoLastOne;
+    }
     return this._processesStack[this._processesStack.length - 1];
   }
 
@@ -450,6 +482,20 @@ module.exports = class SCommand extends __SPromise {
   }
 
   /**
+   * @name              isWatching
+   * @type              Function
+   *
+   * Get if this command is currently watching or not
+   *
+   * @return      {Boolean}             true if watching, false if not
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  isWatching() {
+    return this._isWatching;
+  }
+
+  /**
    * @name              unwatch
    * @type              Function
    *
@@ -478,6 +524,13 @@ module.exports = class SCommand extends __SPromise {
         `You try to launch the "watch" process on the command named "${this.name}" but you don't have specified the "settings.watch" configuration object...`
       );
     }
+
+    this._isWatching = true;
+    this.lastProcessObj.stdout.push(
+      `Starting the watch process for the command "<yellow>${this.name}</yellow>"...`
+    );
+    this.trigger('stdout.data', this.lastProcessObj);
+
     const commandLine = __argsToString(
       this._settings.watch,
       __watchCli.definition
@@ -497,28 +550,28 @@ module.exports = class SCommand extends __SPromise {
       const _this = this;
 
       if (action === 'new') {
-        this.trigger('watch.new', {
-          get commandObj() {
-            return _this;
-          },
-          path,
-          ...this._currentProcess
+        this.lastProcessObj.stdout.push(
+          `A file has been <green>created</green>: <cyan>${path}</cyan>`
+        );
+        this.trigger('stdout.data', {
+          ...this.lastProcessObj,
+          path
         });
       } else if (action === 'update') {
-        this.trigger('watch.update', {
-          get commandObj() {
-            return _this;
-          },
-          path,
-          ...this._currentProcess
+        this.lastProcessObj.stdout.push(
+          `A file has been <yellow>updated</yellow>: <cyan>${path}</cyan>`
+        );
+        this.trigger('stdout.data', {
+          ...this.lastProcessObj,
+          path
         });
       } else if (action === 'delete') {
-        this.trigger('watch.delete', {
-          get commandObj() {
-            return _this;
-          },
-          path,
-          ...this._currentProcess
+        this.lastProcessObj.stdout.push(
+          `A file has been <red>deleted</red>: <cyan>${path}</cyan>`
+        );
+        this.trigger('stdout.data', {
+          ...this.lastProcessObj,
+          path
         });
       }
       if (!this.isRunning()) {
@@ -529,6 +582,12 @@ module.exports = class SCommand extends __SPromise {
           this.run();
         }, 200);
       }
+    });
+    this._watchProcess.on('close', () => {
+      this._isWatching = false;
+      this.trigger('stdout.data', {
+        value: `The watch process has been stopped`
+      });
     });
   }
 
@@ -605,6 +664,9 @@ module.exports = class SCommand extends __SPromise {
       );
     }
 
+    if (this._settings.watch) this.unwatch();
+
+    clearTimeout(this._currentProcessSuccessTimeout);
     this._currentProcess = {};
 
     if (!skipAsk) {
@@ -620,6 +682,17 @@ module.exports = class SCommand extends __SPromise {
       }
     }
 
+    // notification
+    if (this._settings.notification) {
+      __notifier.notify({
+        title: this.name,
+        message: `Starting the command "${this.name}"`,
+        icon: this._settings.notification.runIconPath || false, // Absolute path (doesn't work on balloons)
+        sound: false, // Only Notification Center or Windows Toasters
+        wait: false // Wait with callback, until user action is taken against notification, does not apply to Windows Toasters as they always wait or notify-send as it does not support the wait option
+      });
+    }
+
     if (this._command instanceof __SCli) {
       this._currentProcess.childProcessPromise = this._runSCli(argsObj);
     } else if (typeof this._command === 'string') {
@@ -628,6 +701,8 @@ module.exports = class SCommand extends __SPromise {
       );
     }
 
+    this._processesStack.push(this._currentProcess);
+
     // init the child process
     this._currentProcess.childProcessPromise.on('*', (data) => {
       this._processesStack[this._processesStack.length - 1] = {
@@ -635,10 +710,44 @@ module.exports = class SCommand extends __SPromise {
         ...(data && data.process ? data.process : data || {})
       };
     });
-    this._currentProcess.childProcessPromise.on('close', () => {
+    this._currentProcess.childProcessPromise.on('close', (data) => {
       this._currentProcess = null;
+      if (data.code === 0 && !data.signal) return;
+      if (this._settings.notification) {
+        __notifier.notify({
+          title: this.name,
+          message: `Command closed with code "${data.code}" and signal ${data.signal}`,
+          icon: this._settings.notification.errorIconPath || false, // Absolute path (doesn't work on balloons)
+          sound: false, // Only Notification Center or Windows Toasters
+          wait: false // Wait with callback, until user action is taken against notification, does not apply to Windows Toasters as they always wait or notify-send as it does not support the wait option
+        });
+      }
     });
-    this._processesStack.push(this._currentProcess);
+    this._currentProcess.childProcessPromise.on('success', () => {
+      if (this._settings.notification) {
+        __notifier.notify({
+          title: this.name,
+          message: `Command finished successfully!`,
+          icon: this._settings.notification.successIconPath || false, // Absolute path (doesn't work on balloons)
+          sound: false, // Only Notification Center or Windows Toasters
+          wait: false // Wait with callback, until user action is taken against notification, does not apply to Windows Toasters as they always wait or notify-send as it does not support the wait option
+        });
+      }
+      this._currentProcessSuccessTimeout = setTimeout(() => {
+        if (this._settings.watch) this.watch();
+      }, 2000);
+    });
+    this._currentProcess.childProcessPromise.on('error', () => {
+      if (this._settings.notification) {
+        __notifier.notify({
+          title: this.name,
+          message: `Error!`,
+          icon: this._settings.notification.errorIconPath || false, // Absolute path (doesn't work on balloons)
+          sound: false, // Only Notification Center or Windows Toasters
+          wait: false // Wait with callback, until user action is taken against notification, does not apply to Windows Toasters as they always wait or notify-send as it does not support the wait option
+        });
+      }
+    });
 
     const promise = new __SPromise((resolve, reject, trigger, cancel) => {})
       .on('cancel,finally', () => {})

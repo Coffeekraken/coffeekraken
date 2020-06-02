@@ -234,7 +234,7 @@ module.exports = class SCommandPanel extends __SComponent {
       description: `<bold><cyan>${commandInstance.command}</cyan></bold>`,
       items
     });
-    summaryListPopup.attachTo(this);
+    summaryListPopup.attach(this);
     return summaryListPopup;
   }
 
@@ -530,6 +530,14 @@ module.exports = class SCommandPanel extends __SComponent {
           __parseHtml(`<iCross/>  ${boxTitle} (${lastProcessObj.state})`)
         );
         boxObj.$box.screen.render();
+      } else if (commandInstance.isWatching()) {
+        boxObj.$box.style.bg = __color('terminal.yellow').toString();
+        clearInterval(boxObj.spinner.interval);
+        boxObj.spinner.interval = setInterval(() => {
+          boxObj.spinner.ora.text = __parseHtml(`${boxTitle} (watching)`);
+          boxObj.$header.setContent(boxObj.spinner.ora.frame());
+          boxObj.$box.screen.render();
+        }, 50);
       } else if (lastProcessObj && lastProcessObj.state === 'success') {
         boxObj.$box.style.bg = __color('terminal.green').toString();
         clearInterval(boxObj.spinner.interval);
@@ -540,14 +548,6 @@ module.exports = class SCommandPanel extends __SComponent {
         clearInterval(boxObj.spinner.interval);
         boxObj.spinner.interval = setInterval(() => {
           boxObj.spinner.ora.text = __parseHtml(`${boxTitle}`);
-          boxObj.$header.setContent(boxObj.spinner.ora.frame());
-          boxObj.$box.screen.render();
-        }, 50);
-      } else if (lastProcessObj && lastProcessObj.state === 'watching') {
-        boxObj.$box.style.bg = __color('terminal.yellow').toString();
-        clearInterval(boxObj.spinner.interval);
-        boxObj.spinner.interval = setInterval(() => {
-          boxObj.spinner.ora.text = __parseHtml(`${boxTitle} (watching)`);
           boxObj.$header.setContent(boxObj.spinner.ora.frame());
           boxObj.$box.screen.render();
         }, 50);
@@ -693,11 +693,11 @@ module.exports = class SCommandPanel extends __SComponent {
         boxObj.$log.setContent('');
         if (lastProcessObj && lastProcessObj.stderr.length) {
           lastProcessObj.stderr.forEach((logItem) => {
-            boxObj.$log.pushLine(logItem.value || logItem);
+            boxObj.$log.pushLine(__parseHtml(logItem.value || logItem));
           });
         } else if (lastProcessObj) {
           lastProcessObj.stdout.forEach((logItem) => {
-            boxObj.$log.pushLine(logItem.value || logItem);
+            boxObj.$log.pushLine(__parseHtml(logItem.value || logItem));
           });
         }
       }

@@ -4,7 +4,7 @@ const __SPhpServerCli = require('./SPhpServerCli');
 
 /**
  * @name              SPhpServerCommand
- * @namespace         sugar.node.server.commands
+ * @namespace         sugar.node.server
  * @type              SCommand
  *
  * This class represent a command used start a PHP server locally.

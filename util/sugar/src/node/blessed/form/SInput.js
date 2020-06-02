@@ -40,7 +40,6 @@ module.exports = class SInput extends __SComponent {
     const inputSettings = __deepMerge(
       {
         focus: true,
-        escapeKey: false,
         placeholder: null,
         width: '100%',
         height: 3,
@@ -66,6 +65,8 @@ module.exports = class SInput extends __SComponent {
       // height: null,
     });
 
+    this._escapeKeyPromise = null;
+
     this.$input = __blessed.textbox(inputSettings);
     this.promise = new __SPromise(
       (resolve, reject, trigger, cancel) => {}
@@ -76,18 +77,17 @@ module.exports = class SInput extends __SComponent {
     this.height = inputSettings.padding.top + inputSettings.padding.bottom + 1;
 
     this.$input.on('blur', () => {
-      if (this.$input.focused && __activeSpace.get().includes('form.input')) {
-        __activeSpace.previous();
+      console.log('blue');
+      if (this.$input.focused) {
+        console.log('remove');
       }
     });
 
     this.$input.on('focus', () => {
-      if (!__activeSpace.get().includes('form.input')) {
-        __activeSpace.append('form.input');
-      }
-      if (inputSettings.escapeKey) {
-        __escapeStack(() => {});
-      }
+      __activeSpace.append('form.input');
+      this._escapeKeyPromise = __escapeStack(() => {
+        __activeSpace.remove('.form.input');
+      });
     });
 
     this.$input.on('attach', () => {
@@ -97,7 +97,7 @@ module.exports = class SInput extends __SComponent {
         if (inputSettings.placeholder) {
           const placeholder = inputSettings.placeholder.toString();
           if (inputSettings.width === 'auto') {
-            this.width =
+            this.$input.width =
               placeholder.length +
               this.$input.padding.left +
               this.$input.padding.right +
@@ -136,19 +136,21 @@ module.exports = class SInput extends __SComponent {
               this.$input.padding.left +
               this.$input.padding.right;
           }
+          __activeSpace.remove('.form.input');
+          if (this._escapeKeyPromise) this._escapeKeyPromise.cancel();
           this.update();
         });
         this.$input.on('cancel', () => {
-          if (inputSettings.escapeKey) {
-            this.promise.cancel();
-            this.$input.style.bg = __color('terminal.red').toString();
-            if (inputSettings.width === 'auto') {
-              this.$input.width =
-                this.$input.getValue().length +
-                this.$input.padding.left +
-                this.$input.padding.right;
-            }
+          this.promise.cancel();
+          this.$input.style.bg = __color('terminal.red').toString();
+          if (inputSettings.width === 'auto') {
+            this.$input.width =
+              this.$input.getValue().length +
+              this.$input.padding.left +
+              this.$input.padding.right;
           }
+          __activeSpace.remove('.form.input');
+          if (this._escapeKeyPromise) this._escapeKeyPromise.cancel();
           this.update();
         });
         this.update();

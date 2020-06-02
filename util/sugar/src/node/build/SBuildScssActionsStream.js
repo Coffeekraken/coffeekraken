@@ -67,7 +67,7 @@ module.exports = class SBuildScssActionsStream extends __SActionsStream {
               streamObj.filename = __getFilename(streamObj.input);
             }
 
-            if (streamObj.include && streamObj.include.sugar) {
+            if (streamObj.import && streamObj.import.sugar) {
               streamObj.imports = [
                 {
                   name: 'Sugar',

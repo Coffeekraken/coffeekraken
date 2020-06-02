@@ -141,13 +141,10 @@ module.exports = class SPopup extends __SComponent {
     __activeSpace.append(this._settings.id);
 
     const escape = __escapeStack(() => {
-      this.parent.remove(this);
-    });
-
-    this.on('detach', () => {
       __activeSpace.previous();
       escape.cancel();
       this.promise.trigger('close');
+      this.detach();
     });
   }
 
@@ -177,7 +174,7 @@ module.exports = class SPopup extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   update() {
-    this.height = this.$content.getScrollHeight() + 6;
+    this.height = this.$content.getScrollHeight() + 7;
 
     this.top = `50%-${Math.round(this.height / 2)}`;
     this.left = `50%-${Math.round(this.width / 2)}`;

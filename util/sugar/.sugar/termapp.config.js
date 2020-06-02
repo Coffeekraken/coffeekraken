@@ -3,7 +3,7 @@ const __packageRoot = require('../node/path/packageRoot');
 const __CommandsAppPage = require('../');
 
 module.exports = {
-  rootDir: `${__packageRoot(__dirname)}/termapp`,
+  rootDir: `${__packageRoot(__dirname)}`,
   header: {
     title: `<bold>Coffeekraken</bold> <bgBlack><yellow> Sugar </yellow></bgBlack> <black>v${__packageJson.version}</black>`
   },

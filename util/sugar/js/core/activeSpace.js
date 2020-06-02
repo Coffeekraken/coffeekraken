@@ -44,6 +44,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 const _activeSpaceCallbacksStack = {};
 const _activeSpaceStack = [];
+let _activeSpaceCurrent = null;
 const activeSpaceApi = {
   /**
    * @name                get
@@ -57,9 +58,7 @@ const activeSpaceApi = {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   get: () => {
-    if (!_activeSpaceStack.length) return null;
-    return _activeSpaceStack[_activeSpaceStack.length - 1];
-    return (global || window)._sActiveSpace || null;
+    return _activeSpaceCurrent;
   },
 
   /**
@@ -69,22 +68,25 @@ const activeSpaceApi = {
    * This function allows you to set the current active space
    *
    * @param       {String}      activeSpace       The active space to set
+   * @param       {Boolean}       [history=true]    Specify if you want that this action make en new entry in history or not
    * @param       {Boolean}     [silent=false]    Specify if you want to have errors throwed or not
    * @return      {String}                  The current active space
    *
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  set: (activeSpace, silent = false) => {
+  set: (activeSpace, history = true, silent = false) => {
     if (!silent && (0, _isGlob.default)(activeSpace)) {
       throw new Error(`You try to set as activeSpace this string "${activeSpace}". It seems that this string is a glob pattern and activeSpace does not have to be a glob pattern...`);
     } // check if the passed activeSpace is the same as the last one
 
 
-    if (_activeSpaceStack[_activeSpaceStack.length - 1] !== activeSpace) {
+    if (_activeSpaceCurrent !== activeSpace && history) {
       _activeSpaceStack.push(activeSpace);
-    } // call the callbacks
+    } // set the active space
 
+
+    _activeSpaceCurrent = activeSpace; // call the callbacks
 
     activeSpaceApi._callCallbacks();
 
@@ -98,17 +100,46 @@ const activeSpaceApi = {
    * This function take the current activeSpace string and add the passed one to set the new activeSpace string
    *
    * @param       {String}      activeSpace         The activeSpace to append
+   * @param       {Boolean}       [history=true]    Specify if you want that this action make en new entry in history or not
+   * @return      {String}                          Return the current active space
    *
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  append: activeSpace => {
+  append: (activeSpace, history = true) => {
     // get the current one
     const currentActiveSpace = activeSpaceApi.get() || '';
-    if ((0, _minimatch.default)(currentActiveSpace, `**.${activeSpace}`)) return activeSpaceApi.get();
+    if (currentActiveSpace !== '' && (0, _minimatch.default)(currentActiveSpace, `**.${activeSpace}`)) return activeSpaceApi.get();
     const currentActiveSpaceArray = currentActiveSpace.split('.');
     const activeSpaceArray = activeSpace.split('.');
-    activeSpaceApi.set([...currentActiveSpaceArray, ...activeSpaceArray].join('.'));
+    activeSpaceApi.set([...currentActiveSpaceArray, ...activeSpaceArray].join('.'), history);
+    return activeSpaceApi.get();
+  },
+
+  /**
+   * @name                remove
+   * @type                Function
+   *
+   * This function simply remove the passed string from the activeSpace stack
+   *
+   * @param       {String}        toRemove          The string to remove
+   * @param       {Boolean}       [history=true]    Specify if you want that this action make en new entry in history or not
+   * @return      {String}                          Return the current active space
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  remove: (toRemove, history = true) => {
+    // get the current
+    const currentActiveSpace = activeSpaceApi.get(); // generate new active space
+
+    let newActiveSpace = currentActiveSpace.replace(toRemove, ''); // clean the new active space
+
+    if (newActiveSpace.substr(-1) === '.') newActiveSpace = newActiveSpace.slice(0, -1);
+    if (newActiveSpace.substr(0, 1) === '.') newActiveSpace = newActiveSpace.substr(1); // check if we need to append in the history
+
+    activeSpaceApi.set(newActiveSpace, history); // return the current active space
+
     return activeSpaceApi.get();
   },
 
@@ -120,13 +151,15 @@ const activeSpaceApi = {
    *
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @return      {String}                          Return the current active space
    */
   previous: () => {
     if (_activeSpaceStack.length <= 1) return;
 
     _activeSpaceStack.splice(-1, 1);
 
-    activeSpaceApi._callCallbacks();
+    activeSpaceApi.set(_activeSpaceStack[_activeSpaceStack.length - 1], false);
+    return activeSpaceApi.get();
   },
 
   /**

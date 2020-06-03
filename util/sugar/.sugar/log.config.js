@@ -3,9 +3,7 @@ const __SLogConsoleAdapter = require('../node/log/adapters/SLogConsoleAdapter');
 
 module.exports = {
   adapters: {
-    console: new __SLogConsoleAdapter({
-      enableChildProcessLogs: true
-    })
+    console: new __SLogConsoleAdapter({})
   },
   adaptersByLevel: {
     log: null,

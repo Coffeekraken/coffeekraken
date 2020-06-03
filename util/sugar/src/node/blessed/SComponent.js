@@ -86,21 +86,6 @@ module.exports = class SComponent extends __blessed.box {
     // extends parent
     super(settings);
 
-    // ctrl+c callback
-    if (!_isCtrlCInited) {
-      _isCtrlCInited = true;
-      __hotkey('ctrl+c').on('press', () => {
-        // setTimeout(() => {
-        //   process.exit();
-        // }, 1000);
-        __tkill(process.pid);
-        // __tkill(process.pid, 'SIGTERM', (e) => {
-        //   if (e) console.log(e);
-        //   process.exit();
-        // });
-      });
-    }
-
     // save the settings
     this._settings = settings;
 

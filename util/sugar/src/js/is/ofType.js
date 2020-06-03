@@ -130,7 +130,7 @@ export default function ofType(value, argTypeDefinition, returnError = false) {
         )}</cyan>" has to be a <green>${__upperFirst(
           definitionObj.type
         )}</green>...`;
-    } else if (value.constructor && value.constructor.name) {
+    } else if (value && value.constructor && value.constructor.name) {
       if (definitionObj.type === value.constructor.name.toLowerCase())
         return true;
       else

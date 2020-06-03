@@ -207,7 +207,7 @@ module.exports = class SCommand extends __SPromise {
     if (!namespace) return SCommand._commandsStack;
     SCommand._commandsStack.forEach((instance) => {
       if (!instance.namespace) return;
-      if (__minimatch(instance.namespace, namespace))
+      if (__minimatch(instance.namespace, namespace.toLowerCase()))
         returnCommandsArray.push(instance);
     });
     // return the commands
@@ -332,7 +332,7 @@ module.exports = class SCommand extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   get namespace() {
-    return this._settings.namespace;
+    return this._settings.namespace.toLowerCase();
   }
 
   /**

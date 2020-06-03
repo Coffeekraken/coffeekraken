@@ -4,6 +4,8 @@ const __spawn = require('../process/spawn');
 const __SProcessOutput = require('../blessed/SProcessOutput');
 const __deepMerge = require('../object/deepMerge');
 const __parseHtml = require('../terminal/parseHtml');
+const __argsToObject = require('../cli/argsToObject');
+const __isPlainObject = require('../is/plainObject');
 
 /**
  * @name                SCli
@@ -98,7 +100,7 @@ module.exports = class SCli {
     this._settings = __deepMerge(
       {
         includeAllArgs: true,
-        argsObj: null
+        argsObj: {}
       },
       settings
     );
@@ -192,7 +194,7 @@ module.exports = class SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  toString(argsObj, includeAllArgs = this._settings.includeAllArgs) {
+  toString(argsObj = {}, includeAllArgs = this._settings.includeAllArgs) {
     return __buildCommandLine(
       this.commandString,
       this.definitionObj,
@@ -241,11 +243,10 @@ module.exports = class SCli {
         `You cannot spawn multiple "${this.constructor.name}" child process at the same time. Please kill the currently running one using the "kill" method...`
       );
     }
+    argsObj = __argsToObject(argsObj, this.definitionObj);
+
     const commandLine = this.toString(argsObj, includeAllArgs);
-    this._runningArgsObj = this._runningProcessArgsObject(
-      argsObj,
-      includeAllArgs
-    );
+    this._runningArgsObj = Object.assign({}, argsObj);
     this._childProcess = __spawn(commandLine).on('cancel,finally', () => {
       this._runningArgsObj = null;
       this._childProcess = null;
@@ -313,20 +314,21 @@ module.exports = class SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _runningProcessArgsObject(
-    argsObj = {},
-    includeAllArgs = this._settings.includeAllArgs
-  ) {
-    const finalArgsObj = {};
-    Object.keys(this.definitionObj).forEach((argName) => {
-      if (argsObj[argName] === undefined && !includeAllArgs) return;
-      finalArgsObj[argName] =
-        argsObj[argName] !== undefined
-          ? argsObj[argName]
-          : this.definitionObj[argName].default;
-    });
-    return finalArgsObj;
-  }
+  // _runningProcessArgsObject(
+  //   argsObj = {},
+  //   includeAllArgs = this._settings.includeAllArgs
+  // ) {
+  //   const finalArgsObj = {};
+  //   Object.keys(this.definitionObj).forEach((argName) => {
+  //     if ((!argsObj || argsObj[argName] === undefined) && !includeAllArgs)
+  //       return;
+  //     finalArgsObj[argName] =
+  //       argsObj[argName] !== undefined
+  //         ? argsObj[argName]
+  //         : this.definitionObj[argName].default;
+  //   });
+  //   return finalArgsObj;
+  // }
 
   /**
    * @name            log

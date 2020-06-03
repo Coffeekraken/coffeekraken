@@ -25,21 +25,23 @@ const definition = {
   patterns: {
     type: 'String',
     alias: 'p',
-    default: ''
+    description: 'Files glob pattern(s)'
   },
   type: {
     type: 'String',
     alias: 't',
+    description: 'What you want to watch',
     default: 'new,update,delete'
   },
   persistent: {
     type: 'Boolean',
+    description: 'Specify if the process shoud stay alive',
     default: true
   },
   ignore: {
     type: 'String',
     alias: 'i',
-    default: null
+    description: 'Some glob patterns to ignore'
   }
 };
 module.exports = (stringArgs = '') => {

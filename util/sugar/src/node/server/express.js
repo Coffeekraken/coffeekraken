@@ -5,6 +5,7 @@ const __path = require('path');
 const __packageRoot = require('../path/packageRoot');
 const __uncamelize = require('../string/uncamelize');
 const __find = require('find-in-files');
+const __request = require('../http/request');
 
 /**
  * @name                express
@@ -32,16 +33,32 @@ module.exports = async (args = {}) => {
     server.set(__uncamelize(name, ' ').toLowerCase(), settings[name]);
   });
 
-  const files = await __find.find('@namespace', settings.views, '.*$');
+  if (settings.viewEngine === 'bladePhp') {
+    const bladeSettings = __sugarConfig('blade');
+    server.get('/views/*', async (req, res) => {
+      const renderedView = await __request({
+        url: `http://${bladeSettings.server.hostname}:${
+          bladeSettings.server.port
+        }${req.path.substr(6)}?viewsDir=${bladeSettings.viewsDir}&cacheDir=${
+          bladeSettings.cacheDir
+        }`,
+        method: 'GET'
+      }).catch((e) => {
+        console.log(e);
+      });
 
-  Object.keys(files).forEach((path) => {
-    const fileObj = files[path];
-    const namespace = fileObj.line[0].replace('@namespace', '').trim();
-    server.get(`/${namespace.split('.').join('/')}`, function (req, res) {
-      res.render(path, { title: 'Hey', message: 'Hello there!' });
+      res.send(renderedView.data);
     });
-  });
+  }
 
-  server.listen(settings.port);
+  // Object.keys(files).forEach((path) => {
+  //   const fileObj = files[path];
+  //   const namespace = fileObj.line[0].replace('@namespace', '').trim();
+  //   server.get(`/${namespace.split('.').join('/')}`, function (req, res) {
+  //     res.render(path, { title: 'Hey', message: 'Hello there!' });
+  //   });
+  // });
+
+  server.listen(settings.port, settings.hostname);
   return server;
 };

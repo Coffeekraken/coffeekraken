@@ -11,6 +11,8 @@ var _toString = _interopRequireDefault(require("../string/toString"));
 
 var _ofType = _interopRequireDefault(require("../is/ofType"));
 
+var _plainObject = _interopRequireDefault(require("../is/plainObject"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // TODO: tests
@@ -67,7 +69,7 @@ function validateWithDefinitionObject(objectToCheck, definitionObj, extendsFn = 
       const isOfTypeResult = (0, _ofType.default)(value, argDefinition.type, true);
 
       if (isOfTypeResult !== true) {
-        return isOfTypeResult;
+        return `${argName}: ${isOfTypeResult}`;
       }
     } // check required
 
@@ -86,16 +88,22 @@ function validateWithDefinitionObject(objectToCheck, definitionObj, extendsFn = 
 
 
     if (argDefinition.children) {
-      if (Array.isArray(objectToCheck[argName])) {
-        for (let i = 0; i < objectToCheck[argName].length; i++) {
-          const valueToCheck = objectToCheck[argName][i];
-          const childrenValidation = validateWithDefinitionObject(valueToCheck, argDefinition.children, extendsFn, validateDefinitionObject, [..._argPath, argName]);
-          if (childrenValidation !== true) return childrenValidation;
-        }
-      } else {
-        const childrenValidation = validateWithDefinitionObject(objectToCheck[argName], argDefinition.children, extendsFn, validateDefinitionObject, [..._argPath, argName]);
-        if (childrenValidation !== true) return childrenValidation;
-      }
+      // if (Array.isArray(objectToCheck[argName])) {
+      //   for (let i = 0; i < objectToCheck[argName].length; i++) {
+      //     const valueToCheck = objectToCheck[argName][i];
+      //     if (!__isPlainObject(valueToCheck)) continue;
+      //     const childrenValidation = validateWithDefinitionObject(
+      //       valueToCheck,
+      //       argDefinition.children,
+      //       extendsFn,
+      //       validateDefinitionObject,
+      //       [..._argPath, argName]
+      //     );
+      //     if (childrenValidation !== true) return childrenValidation;
+      //   }
+      // } else {
+      const childrenValidation = validateWithDefinitionObject(objectToCheck[argName] || {}, argDefinition.children, extendsFn, validateDefinitionObject, [..._argPath, argName]);
+      if (childrenValidation !== true) return childrenValidation; // }
     }
   } // all is good
 

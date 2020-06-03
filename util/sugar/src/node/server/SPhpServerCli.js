@@ -1,5 +1,6 @@
 const __SCli = require('../cli/SCli');
 const __packageRoot = require('../path/packageRoot');
+const __sugarConfig = require('../config/sugar');
 
 /**
  * @name            SPhpServerCli
@@ -22,7 +23,7 @@ module.exports = class SPhpServerCli extends __SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static command = 'php -S [hostname]:[port] [rootDir] [arguments]';
+  static command = 'php -S [hostname]:[port] -t [rootDir] [router] [arguments]';
 
   /**
    * @name          definitionObj
@@ -38,20 +39,26 @@ module.exports = class SPhpServerCli extends __SCli {
       type: 'String',
       alias: 'o',
       description: 'Server hostname',
-      default: 'localhost',
+      default: __sugarConfig('php.hostname') || 'localhost',
       level: 1
     },
     port: {
       type: 'Number',
       alias: 'p',
       description: 'Server port',
-      default: 8080,
+      default: __sugarConfig('php.port') || 8080,
       level: 1
     },
     rootDir: {
       type: 'String',
       description: 'Server root directory',
-      default: __packageRoot(process.cwd()),
+      default: __sugarConfig('php.rootDir') || __packageRoot(process.cwd()),
+      level: 1
+    },
+    router: {
+      type: 'String',
+      description: 'Server router',
+      default: '',
       level: 1
     },
     interactive: {
@@ -65,7 +72,6 @@ module.exports = class SPhpServerCli extends __SCli {
       type: 'String',
       alias: 'c',
       description: 'Look for php.ini file in this directory',
-      default: null,
       level: 2
     },
     noini: {
@@ -79,7 +85,6 @@ module.exports = class SPhpServerCli extends __SCli {
       type: 'String',
       alias: 'd',
       description: `Define INI entry foo with value 'bar'`,
-      default: null,
       level: 2
     },
     extended: {
@@ -93,7 +98,6 @@ module.exports = class SPhpServerCli extends __SCli {
       type: 'String',
       alias: 'f',
       description: 'Parse <file>',
-      default: null,
       level: 2
     },
     help: {
@@ -128,35 +132,30 @@ module.exports = class SPhpServerCli extends __SCli {
       type: 'String',
       alias: 'r',
       description: 'Run PHP <code> without using script tags <?..?>',
-      default: null,
       level: 2
     },
     begin: {
       type: 'String',
       alias: 'B',
       description: 'Run PHP <begin_code> before processing input lines',
-      default: null,
       level: 2
     },
     runLine: {
       type: 'String',
       alias: 'R',
       description: 'Run PHP <code for every input line',
-      default: null,
       level: 2
     },
     fileLine: {
       type: 'String',
       alias: 'F',
       description: 'Parse and execute <file> for every input line',
-      default: null,
       level: 2
     },
     end: {
       type: 'String',
       alias: 'E',
       description: 'Run PHP <end_code> after processing all input lines',
-      default: null,
       level: 2
     },
     hide: {
@@ -191,7 +190,6 @@ module.exports = class SPhpServerCli extends __SCli {
       type: 'String',
       alias: 'z',
       description: 'Load Zend extension <file>',
-      default: null,
       level: 2
     }
   };
@@ -221,17 +219,20 @@ module.exports = class SPhpServerCli extends __SCli {
    */
   run(
     argsObj = this._settings.argsObj,
-    includeAllArgs = this._settings.includeAllArgs
+    includeAllArgs = this._settings.includeAllArgs,
+    log = true
   ) {
-    const process = super.run(argsObj, includeAllArgs);
+    const pro = super.run(argsObj, includeAllArgs);
+    if (!log) return pro;
+
     setTimeout(() => {
       this.log(`<green>Your PHP server is up and running</green>:
 
-Hostname  : <yellow>${this.runningArgsObj.hostname}</yellow>
-Port      : <yellow>${this.runningArgsObj.port}</yellow>
-Directory : <yellow>${this.runningArgsObj.rootDir}</yellow>
-URL       : <cyan>http://${this.runningArgsObj.hostname}:${this.runningArgsObj.port}</cyan>`);
+Hostname       : <yellow>${this.runningArgsObj.hostname}</yellow>
+Port           : <yellow>${this.runningArgsObj.port}</yellow>
+Root directory : <yellow>${this.runningArgsObj.rootDir}</yellow>
+URL            : <cyan>http://${this.runningArgsObj.hostname}:${this.runningArgsObj.port}</cyan>`);
     });
-    return process;
+    return pro;
   }
 };

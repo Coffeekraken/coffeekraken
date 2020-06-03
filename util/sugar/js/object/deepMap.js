@@ -32,8 +32,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function deepMap(object, processor, _path = []) {
   Object.keys(object).forEach(prop => {
     if ((0, _plainObject.default)(object[prop])) {
-      object[prop] = deepMap(object[prop], processor, [..._path, prop]);
-      return;
+      object[prop] = deepMap(object[prop], processor, [..._path, prop]); // return;
     }
 
     const res = processor(object[prop], prop, [..._path, prop].join('.'));

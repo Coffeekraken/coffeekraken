@@ -24,7 +24,7 @@ export default function deepMap(object, processor, _path = []) {
   Object.keys(object).forEach((prop) => {
     if (__isPlainObject(object[prop])) {
       object[prop] = deepMap(object[prop], processor, [..._path, prop]);
-      return;
+      // return;
     }
     const res = processor(object[prop], prop, [..._path, prop].join('.'));
     if (res === -1) delete object[prop];

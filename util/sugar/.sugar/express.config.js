@@ -3,7 +3,7 @@ const __packageRoot = require('../src/node/path/packageRoot');
 module.exports = {
   /**
    * @name              port
-   * @namespace         sugar.config.server.express
+   * @namespace         sugar.config.express
    * @type              Number
    * @default           3000
    *
@@ -15,21 +15,21 @@ module.exports = {
   port: 3000,
 
   /**
-   * @name              host
-   * @namespace         sugar.config.server.express
+   * @name              hostname
+   * @namespace         sugar.config.express
    * @type              String
-   * @default           localhost
+   * @default           127.0.0.1
    *
-   * Specify the host to use for the express server
+   * Specify the hostname to use for the express server
    *
    * @since             2.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  host: 'localhost',
+  hostname: '127.0.0.1',
 
   /**
    * @name              rootDir
-   * @namespace         sugar.config.server.express
+   * @namespace         sugar.config.express
    * @type              String
    * @default           ${__packageRoot(process.cwd())}
    *
@@ -40,7 +40,31 @@ module.exports = {
    */
   rootDir: `${__packageRoot(process.cwd())}`,
 
-  views: `${__packageRoot(process.cwd())}/views`,
+  /**
+   * @name            viewsDir
+   * @namespace       sugar.config.express
+   * @type            String
+   * @default         views
+   *
+   * Specify the views directory path relative to the server root directory
+   *
+   * @since         2.0.0
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  viewsDir: `views`,
 
-  viewEngine: 'jade'
+  /**
+   * @name           viewEngine
+   * @namespace       sugar.config.express
+   * @type           String
+   * @default        bladePhp
+   *
+   * Specify the view engine you want to use.
+   * By default it is set to "bladePhp" which need to have the "SBladePhpServer" up and running
+   *
+   * @see         https://github.com/expressjs/express/wiki#template-engines
+   * @since         2.0.0
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  viewEngine: 'bladePhp'
 };

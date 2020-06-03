@@ -320,7 +320,7 @@ module.exports = class SApp extends __SComponent {
     const commandsObj = this.config('commands');
     Object.keys(commandsObj).forEach((commandName) => {
       const commandObj = commandsObj[commandName];
-      commandObj.settings.namespace = commandName;
+      commandObj.settings.namespace = commandName.toLowerCase();
       if (!commandObj.settings.activeSpace) {
         // const split = commandName.split('.');
         // let current = '',
@@ -338,6 +338,7 @@ module.exports = class SApp extends __SComponent {
         commandObj.settings
       );
     });
+    console.log(this._commandsStack);
   }
 
   /**

@@ -108,7 +108,7 @@ function ofType(value, argTypeDefinition, returnError = false) {
 
     if ((0, _class.default)(value) && value.name) {
       if (definitionObj.type === value.name.toLowerCase()) return true;else error = `Regarding to the argument definition "<yellow>${argTypeDefinition}</yellow>", the passed value "<cyan>${(0, _toString.default)(value)}</cyan>" has to be a <green>${(0, _upperFirst.default)(definitionObj.type)}</green>...`;
-    } else if (value.constructor && value.constructor.name) {
+    } else if (value && value.constructor && value.constructor.name) {
       if (definitionObj.type === value.constructor.name.toLowerCase()) return true;else error = `Regarding to the argument definition "<yellow>${argTypeDefinition}</yellow>", the passed value "<cyan>${(0, _toString.default)(value)}</cyan>" has to be a <green>${(0, _upperFirst.default)(definitionObj.type)}</green>...`;
     }
   }

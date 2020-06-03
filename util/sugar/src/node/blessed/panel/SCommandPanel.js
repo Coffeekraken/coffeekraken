@@ -91,10 +91,6 @@ module.exports = class SCommandPanel extends __SComponent {
     const _settings = __deepMerge({}, settings);
     // extends SPanel
     super(_settings);
-    // // subscribe to the process
-    // this._subscribeToProcess();
-    // // generate keys UI
-    // this._generateUI();
 
     this._boxesObjectsMap = new Map();
 

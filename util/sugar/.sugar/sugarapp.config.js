@@ -4,6 +4,7 @@ const __STermAppAboutPage = require('../src/node/termapp/pages/STermAppAboutPage
 const __SBuildScssCommand = require('../src/node/build/SBuildScssCommand');
 const __SPhpServerCommand = require('../src/node/server/SPhpServerCommand');
 const __SExpressServerCommand = require('../src/node/server/SExpressServerCommand');
+const __SBladePhpServerCommand = require('../src/node/server/SBladePhpServerCommand');
 const __SBuildJsCommand = require('../src/node/build/SBuildJsCommand');
 const __sugarConfig = require('../src/node/config/sugar');
 
@@ -34,6 +35,13 @@ module.exports = {
         run: true
       }
     },
+    'server.bladePhp': {
+      class: __SBladePhpServerCommand,
+      argsObj: {},
+      settings: {
+        run: true
+      }
+    },
     'build.scss': {
       class: __SBuildScssCommand,
       argsObj: {},
@@ -45,7 +53,6 @@ module.exports = {
       class: __SBuildJsCommand,
       argsObj: {},
       settings: {
-        key: 'j',
         watch: __sugarConfig('build.js.watch')
       }
     }

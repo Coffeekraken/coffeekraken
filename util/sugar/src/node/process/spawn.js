@@ -4,6 +4,7 @@ const __SPromise = require('../promise/SPromise');
 const __uniqid = require('../string/uniqid');
 const __hotkey = require('../keyboard/hotkey');
 const __tkill = require('tree-kill');
+const __registerProcess = require('./registerProcess');
 
 /**
  * @name                                spawn
@@ -166,6 +167,9 @@ module.exports = function spawn(
   })
     .on('cancel,finally', () => {})
     .start();
+
+  // save the process
+  __registerProcess(childProcess);
 
   promise.log = (...args) => {
     args.forEach((arg) => {

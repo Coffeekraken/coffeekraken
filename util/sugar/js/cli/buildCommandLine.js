@@ -67,7 +67,7 @@ function buildCommandLine(command, definitionObj, args = {}, includeAllArgs = tr
   tokens.forEach(token => {
     const tokenName = token.replace('[', '').replace(']', '');
     if (tokenName === 'arguments') return;
-    const tokenValue = args[tokenName] || (definitionObj[tokenName] ? definitionObj[tokenName].default : undefined);
+    const tokenValue = args && args[tokenName] !== undefined ? args[tokenName] : definitionObj[tokenName] ? definitionObj[tokenName].default : undefined;
     delete definitionObj[tokenName];
 
     if (tokenValue === undefined) {

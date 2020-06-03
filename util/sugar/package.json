@@ -33,6 +33,7 @@
     "@ungap/custom-elements-builtin": "^0.1.2",
     "ansi-escapes": "^4.3.0",
     "app-root-path": "^3.0.0",
+    "async-exit-hook": "^2.0.1",
     "autoprefixer": "^9.7.6",
     "await-spawn": "^3.0.0",
     "axios": "^0.19.2",

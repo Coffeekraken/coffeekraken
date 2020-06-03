@@ -53,9 +53,9 @@ module.exports = function hotkey(key, settings = {}) {
     __keypress(process.stdin);
 
     process.stdin.on('keypress', function (ch, keyObj) {
-      if (keyObj && keyObj.ctrl && keyObj.name == 'c') {
-        _terminate();
-      }
+      // if (keyObj && keyObj.ctrl && keyObj.name == 'c') {
+      //   // _terminate();
+      // }
 
       // loop on each promises registered
       Object.keys(hotkeyStack).forEach((id) => {

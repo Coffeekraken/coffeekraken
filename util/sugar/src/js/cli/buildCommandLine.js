@@ -63,8 +63,11 @@ export default function buildCommandLine(
     const tokenName = token.replace('[', '').replace(']', '');
     if (tokenName === 'arguments') return;
     const tokenValue =
-      args[tokenName] ||
-      (definitionObj[tokenName] ? definitionObj[tokenName].default : undefined);
+      args && args[tokenName] !== undefined
+        ? args[tokenName]
+        : definitionObj[tokenName]
+        ? definitionObj[tokenName].default
+        : undefined;
     delete definitionObj[tokenName];
     if (tokenValue === undefined) {
       command = command.replace(token, '');

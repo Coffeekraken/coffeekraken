@@ -65,7 +65,10 @@ module.exports = function argsToString(
     if (!includeAllArgs && args[argName] === undefined) return;
     const prefix = defObj.alias ? `-${defObj.alias}` : `--${argName}`;
 
-    let value = args[argName] || definition[argName].default;
+    let value =
+      args && args[argName] !== undefined
+        ? args[argName]
+        : definition[argName].default;
     if (
       value === undefined ||
       value === null ||

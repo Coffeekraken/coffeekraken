@@ -34,7 +34,7 @@ module.exports = class SExpressServerCommand extends __SCommand {
   constructor(argsObj = {}, commandSettings = {}) {
     // init command
     super(
-      'server.hapi',
+      'server.express',
       new __SExpressServerCli(),
       __deepMerge(
         {

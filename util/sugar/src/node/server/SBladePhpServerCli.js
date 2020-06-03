@@ -1,6 +1,8 @@
 const __SPhpServerCli = require('./SPhpServerCli');
 const __packageRoot = require('../path/packageRoot');
 const __deepMerge = require('../object/deepMerge');
+const __argsToObject = require('../cli/argsToObject');
+const __sugarConfig = require('../config/sugar');
 
 /**
  * @name            SBladePhpServerCli
@@ -24,7 +26,27 @@ module.exports = class SBladePhpServerCli extends __SPhpServerCli {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   static definitionObj = {
-    ...__SPhpServerCli.definitionObj
+    server: {
+      type: 'Object',
+      description: 'PHP server options',
+      children: {
+        ...__SPhpServerCli.definitionObj
+      }
+    },
+    viewsDir: {
+      type: 'String',
+      description: 'Blade views root directory',
+      default:
+        __sugarConfig('blade.viewsDir') ||
+        `${__packageRoot(process.cwd())}/public/views`
+    },
+    cacheDir: {
+      type: 'String',
+      description: 'Blade views cache directory',
+      default:
+        __sugarConfig('blade.cacheDir') ||
+        `${__packageRoot(process.cwd())}/public/views`
+    }
   };
 
   /**
@@ -54,12 +76,24 @@ module.exports = class SBladePhpServerCli extends __SPhpServerCli {
     argsObj = this._settings.argsObj,
     includeAllArgs = this._settings.includeAllArgs
   ) {
-    const process = super.run(argsObj.server, includeAllArgs);
+    const args = __argsToObject(argsObj, this.definitionObj);
+    const serverArgs = __deepMerge(args.server, {
+      ...__sugarConfig('blade.server')
+    });
+    serverArgs.router = `${__packageRoot(
+      __dirname
+    )}/src/php/blade/sBladePhpServerRouter.php`;
+    const pro = super.run(serverArgs, includeAllArgs, false);
     setTimeout(() => {
       this.log(`<green>Your Blade PHP server is up and running</green>:
 
-    `);
+Hostname              : <yellow>${this.runningArgsObj.hostname}</yellow>
+Port                  : <yellow>${this.runningArgsObj.port}</yellow>
+Root directory        : <yellow>${this.runningArgsObj.rootDir}</yellow>
+Views directory       : <yellow>${args.viewsDir}</yellow>
+Views cache directory : <yellow>${args.cacheDir}</yellow>
+API Url               : <cyan>http://${this.runningArgsObj.hostname}:${this.runningArgsObj.port}</cyan>`);
     });
-    return process;
+    return pro;
   }
 };

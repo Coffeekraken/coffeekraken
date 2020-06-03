@@ -38,14 +38,21 @@ module.exports = class SBuildScssCli extends __SCli {
       type: 'String',
       alias: 'i',
       description: 'Input files glob pattern',
-      default: __sugarConfig('build.scss.input') || 'src/scss/**/*.scss',
+      default: __sugarConfig('build.scss.input'),
       level: 1
     },
     outputDir: {
       type: 'String',
       alias: 'o',
       description: 'Output directory path',
-      default: __sugarConfig('build.scss.outputDir') || 'dist/css',
+      default: __sugarConfig('build.scss.outputDir'),
+      level: 1
+    },
+    watch: {
+      type: 'String',
+      alias: 'w',
+      description: 'Watch files glob pattern',
+      default: __sugarConfig('build.scss.watch'),
       level: 1
     },
     style: {

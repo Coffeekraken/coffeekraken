@@ -2,6 +2,7 @@
 import __validateDefinitionObject from './validateDefinitionObject';
 import __toString from '../string/toString';
 import __isOfType from '../is/ofType';
+import __isPlainObject from '../is/plainObject';
 
 /**
  * @name            validateWithDefinitionObject
@@ -65,7 +66,7 @@ export default function validateWithDefinitionObject(
     if (value !== undefined && argDefinition.type) {
       const isOfTypeResult = __isOfType(value, argDefinition.type, true);
       if (isOfTypeResult !== true) {
-        return isOfTypeResult;
+        return `${argName}: ${isOfTypeResult}`;
       }
     }
     // check required
@@ -85,28 +86,29 @@ export default function validateWithDefinitionObject(
 
     // check if we have some "children" properties
     if (argDefinition.children) {
-      if (Array.isArray(objectToCheck[argName])) {
-        for (let i = 0; i < objectToCheck[argName].length; i++) {
-          const valueToCheck = objectToCheck[argName][i];
-          const childrenValidation = validateWithDefinitionObject(
-            valueToCheck,
-            argDefinition.children,
-            extendsFn,
-            validateDefinitionObject,
-            [..._argPath, argName]
-          );
-          if (childrenValidation !== true) return childrenValidation;
-        }
-      } else {
-        const childrenValidation = validateWithDefinitionObject(
-          objectToCheck[argName],
-          argDefinition.children,
-          extendsFn,
-          validateDefinitionObject,
-          [..._argPath, argName]
-        );
-        if (childrenValidation !== true) return childrenValidation;
-      }
+      // if (Array.isArray(objectToCheck[argName])) {
+      //   for (let i = 0; i < objectToCheck[argName].length; i++) {
+      //     const valueToCheck = objectToCheck[argName][i];
+      //     if (!__isPlainObject(valueToCheck)) continue;
+      //     const childrenValidation = validateWithDefinitionObject(
+      //       valueToCheck,
+      //       argDefinition.children,
+      //       extendsFn,
+      //       validateDefinitionObject,
+      //       [..._argPath, argName]
+      //     );
+      //     if (childrenValidation !== true) return childrenValidation;
+      //   }
+      // } else {
+      const childrenValidation = validateWithDefinitionObject(
+        objectToCheck[argName] || {},
+        argDefinition.children,
+        extendsFn,
+        validateDefinitionObject,
+        [..._argPath, argName]
+      );
+      if (childrenValidation !== true) return childrenValidation;
+      // }
     }
   }
 

@@ -203,5 +203,38 @@ module.exports = {
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     prod: false
+  },
+
+  config: {
+    /**
+     * @name              input
+     * @namespace         sugar.config.build.config
+     * @type              String
+     * @default           <appRoot>/src/config/*.js
+     *
+     * Specify the root folder (or file) to check for .config|sass files to build.
+     * Glob patterns can be used
+     *
+     * @since             2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    input: isInSugarPackage()
+      ? `${__packageRoot()}/tests/src/config/*.js`
+      : `${__packageRoot()}/src/config/*.js`,
+
+    /**
+     * @name              outputDir
+     * @namespace         sugar.config.build.config
+     * @type              String
+     * @default           <appRoot>/dist/config
+     *
+     * Specify the destination folder where to put the compiled files in
+     *
+     * @since             2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    outputDir: isInSugarPackage()
+      ? `${__packageRoot()}/tests/dist/config`
+      : `${__packageRoot()}/dist/config`
   }
 };

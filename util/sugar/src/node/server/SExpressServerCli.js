@@ -1,5 +1,6 @@
 const __SCli = require('../cli/SCli');
 const __packageRoot = require('../path/packageRoot');
+const __sugarConfig = require('../config/sugar');
 
 /**
  * @name            SExpressServerCli
@@ -34,25 +35,37 @@ module.exports = class SExpressServerCli extends __SCli {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   static definitionObj = {
-    host: {
+    hostname: {
       type: 'String',
       alias: 'o',
       description: 'Server hostname',
-      default: 'localhost',
+      default: __sugarConfig('express.hostname') || '127.0.0.1',
       level: 1
     },
     port: {
       type: 'Number',
       alias: 'p',
       description: 'Server port',
-      default: 3000,
+      default: __sugarConfig('express.port') || 3000,
       level: 1
     },
     rootDir: {
       type: 'String',
       description: 'Server root directory',
-      default: __packageRoot(process.cwd()),
+      default: __sugarConfig('express.rootDir') || __packageRoot(process.cwd()),
       level: 1
+    },
+    viewsDir: {
+      type: 'String',
+      description: 'Server views directory',
+      default:
+        __sugarConfig('express.viewsDir') ||
+        __packageRoot(process.cwd()) + '/views'
+    },
+    viewEngine: {
+      type: 'String',
+      description: 'Server views rendering engine',
+      default: __sugarConfig('express.viewEngine') || 'bladePhp'
     }
   };
 
@@ -84,13 +97,16 @@ module.exports = class SExpressServerCli extends __SCli {
     includeAllArgs = this._settings.includeAllArgs
   ) {
     const process = super.run(argsObj, includeAllArgs);
+
     setTimeout(() => {
       this.log(`<green>Your Express server is up and running</green>:
 
-Host      : <yellow>${this.runningArgsObj.host}</yellow>
-Port      : <yellow>${this.runningArgsObj.port}</yellow>
-Directory : <yellow>${this.runningArgsObj.rootDir}</yellow>
-URL       : <cyan>http://${this.runningArgsObj.host}:${this.runningArgsObj.port}</cyan>`);
+Hostname        : <yellow>${this.runningArgsObj.hostname}</yellow>
+Port            : <yellow>${this.runningArgsObj.port}</yellow>
+Root directory  : <yellow>${this.runningArgsObj.rootDir}</yellow>
+Views directory : <yellow>${this.runningArgsObj.viewsDir}</yellow>
+Views engine    : <yellow>${this.runningArgsObj.viewEngine}</yellow>
+URL             : <cyan>http://${this.runningArgsObj.hostname}:${this.runningArgsObj.port}</cyan>`);
     });
     return process;
   }

@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 require('../node/index');
+const __exitCleanup = require('../node/process/exitCleanup');
 
 /**
  * @name            sugar.cli
@@ -16,6 +17,9 @@ const command = process.argv[2].split(' ')[0];
 const stack = command.split('.')[0];
 let action = command.split('.')[1] || null;
 const args = process.argv.slice(3).join(' ') || '';
+
+// handle clean exit
+__exitCleanup();
 
 // if no action, try to get the default one
 if (!action) {

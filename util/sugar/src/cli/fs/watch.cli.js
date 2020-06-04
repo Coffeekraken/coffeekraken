@@ -1,6 +1,7 @@
-const __parseArgs = require('../../node/cli/parseArgs');
+const __argsToObject = require('../../node/cli/argsToObject');
 const __chokidar = require('chokidar');
 const __packageRoot = require('../../node/path/packageRoot');
+const __path = require('path');
 
 /**
  * @name                watch
@@ -25,7 +26,8 @@ const definition = {
   patterns: {
     type: 'String',
     alias: 'p',
-    description: 'Files glob pattern(s)'
+    description: 'Files glob pattern(s)',
+    required: true
   },
   type: {
     type: 'String',
@@ -45,7 +47,7 @@ const definition = {
   }
 };
 module.exports = (stringArgs = '') => {
-  const args = __parseArgs(stringArgs, definition);
+  const args = __argsToObject(stringArgs, definition);
   const watcher = __chokidar.watch(args.patterns.split(','), {
     persistent: args.persistent,
     ignored: args.ignore,
@@ -58,15 +60,15 @@ module.exports = (stringArgs = '') => {
   watcher
     .on('add', (path) => {
       if (args.type.split(',').indexOf('new') === -1) return;
-      console.log(`new:${path}`);
+      console.log(`new:${__path.resolve(path)}`);
     })
     .on('change', (path) => {
       if (args.type.split(',').indexOf('update') === -1) return;
-      console.log(`update:${path}`);
+      console.log(`update:${__path.resolve(path)}`);
     })
     .on('unlink', (path) => {
       if (args.type.split(',').indexOf('delete') === -1) return;
-      console.log(`delete:${path}`);
+      console.log(`delete:${__path.resolve(path)}`);
     });
 };
 module.exports.definition = definition;

@@ -176,7 +176,6 @@ module.exports = {
     watch: isInSugarPackage()
       ? `${__packageRoot()}/tests/src/js/**/*.js`
       : `${__packageRoot()}/src/js/**/*.js`,
-
     /**
      * @name              map
      * @namespace         sugar.config.build.js
@@ -219,8 +218,8 @@ module.exports = {
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     input: isInSugarPackage()
-      ? `${__packageRoot()}/tests/src/config/*.js`
-      : `${__packageRoot()}/src/config/*.js`,
+      ? `${__packageRoot()}/tests/src/config/*.config.js`
+      : `${__packageRoot()}/src/config/*.config.js`,
 
     /**
      * @name              outputDir
@@ -235,6 +234,68 @@ module.exports = {
      */
     outputDir: isInSugarPackage()
       ? `${__packageRoot()}/tests/dist/config`
-      : `${__packageRoot()}/dist/config`
+      : `${__packageRoot()}/dist/config`,
+
+    /**
+     * @name              watch
+     * @namespace         sugar.config.build.config
+     * @type              String
+     * @default           src/config\/**\/*.config.js
+     *
+     * Set the watch files that you want to check
+     *
+     * @since             2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    watch: isInSugarPackage()
+      ? `${__packageRoot()}/tests/src/config/**/*.config.js`
+      : `${__packageRoot()}/src/config/**/*.config.js`
+  },
+
+  doc: {
+    /**
+     * @name              input
+     * @namespace         sugar.config.build.doc
+     * @type              String
+     * @default           <appRoot>/src/**\/*
+     *
+     * Specify the root folder (or file) to check for documentation build from docblocks
+     *
+     * @since             2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    input: isInSugarPackage()
+      ? `${__packageRoot()}/tests/src/node/cli/argsToObject.js`
+      : `${__packageRoot()}/src/**/*.*`,
+
+    /**
+     * @name              outputDir
+     * @namespace         sugar.config.build.doc
+     * @type              String
+     * @default           <appRoot>/dist/doc
+     *
+     * Specify the destination folder where to put the compiled files in
+     *
+     * @since             2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    outputDir: isInSugarPackage()
+      ? `${__packageRoot()}/tests/dist/doc`
+      : `${__packageRoot()}/dist/doc`,
+
+    /**
+     * @name              watch
+     * @namespace         sugar.config.build.doc
+     * @type              String
+     * @default           src/**\/*
+     *
+     * Set the watch files that you want to check
+     *
+     * @since             2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    watch: isInSugarPackage()
+      ? `${__packageRoot()}/tests/src/**/*`
+      : `${__packageRoot()}/src/**/*`
   }
 };

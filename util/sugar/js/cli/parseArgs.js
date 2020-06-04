@@ -78,7 +78,8 @@ function parseArgsString(string, definitionObj = {}, settings = {}) {
     const currentArg = part.replace(/^[-]{1,2}/, '');
 
     if (part.slice(0, 2) === '--' || part.slice(0, 1) === '-') {
-      argsObj[currentArg] = true;
+      const realArgName = getArgNameByAlias(currentArg, definitionObj) || currentArg;
+      argsObj[realArgName] = true;
       return false;
     }
 
@@ -120,6 +121,17 @@ function parseArgsString(string, definitionObj = {}, settings = {}) {
   // if (argsValidationResult !== true) throw new Error(argsValidationResult);
   // // return the argsObj
   // return finalArgsObject;
+}
+
+function getArgNameByAlias(alias, definitionObj) {
+  const argNames = Object.keys(definitionObj);
+
+  for (let i = 0; i < argNames.length; i++) {
+    const argDefinition = definitionObj[argNames[i]];
+    if (argDefinition.alias && argDefinition.alias === alias) return argNames[i];
+  }
+
+  return null;
 }
 
 module.exports = exports.default;

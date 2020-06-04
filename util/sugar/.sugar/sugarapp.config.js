@@ -6,6 +6,7 @@ const __SPhpServerCommand = require('../src/node/server/SPhpServerCommand');
 const __SExpressServerCommand = require('../src/node/server/SExpressServerCommand');
 const __SBladePhpServerCommand = require('../src/node/server/SBladePhpServerCommand');
 const __SBuildJsCommand = require('../src/node/build/SBuildJsCommand');
+const __SBuildConfigCommand = require('../src/node/build/SBuildConfigCommand');
 const __sugarConfig = require('../src/node/config/sugar');
 
 module.exports = {
@@ -40,6 +41,13 @@ module.exports = {
       argsObj: {},
       settings: {
         run: true
+      }
+    },
+    'build.config': {
+      class: __SBuildConfigCommand,
+      argsObj: {},
+      settings: {
+        watch: __sugarConfig('build.config.watch')
       }
     },
     'build.scss': {

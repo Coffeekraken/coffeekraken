@@ -54,6 +54,7 @@
     "cssnano": "^4.1.10",
     "custom-event": "^1.0.1",
     "deep-diff": "^1.0.2",
+    "deep-map": "^2.0.0",
     "deepmerge": "^4.2.2",
     "document-register-element": "^1.14.3",
     "domready": "^1.0.8",

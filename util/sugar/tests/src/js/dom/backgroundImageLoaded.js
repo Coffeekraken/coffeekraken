@@ -1,0 +1,48 @@
+import __getStyleProperty from "./getStyleProperty";
+import __imageLoaded from "./imageLoaded";
+import __unquote from "../string/unquote";
+import __SPromise from '../promise/SPromise';
+
+/**
+ * @name        backgroundImageLoaded
+ * @namespace       sugar.js.dom
+ * @type      Function
+ *
+ * Detect when a background image has been loaded on an HTMLElement
+ *
+ * @param    {HTMLElement}    $elm    The HTMLElement on which to detect the background image load
+ * @return    {SPromise}    A promise that will be resolved when the background image has been loaded
+ *
+ * @example    js
+ * import backgroundImageLoaded from '@coffeekraken/sugar/js/dom/backgroundImageLoaded'
+ * backgroundImageLoaded($myElm).then(() => {
+ *   // do something when loaded
+ * })
+ *
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+export default function backgroundImageLoaded($elm) {
+  let isCancelled = false, $img;
+  const promise = new __SPromise((resolve, reject, trigger, cancel) => {
+    // get the background-image property from computed style
+    const backgroundImage = __getStyleProperty($elm, "background-image");
+    const matches = backgroundImage.match(/.*url\((.*)\).*/);
+    if (!matches || !matches[1]) {
+      reject("No background image url found...");
+      return;
+    }
+    // process url
+    const url = __unquote(matches[1]);
+    // make a new image with the image set
+    $img = new Image();
+    $img.src = url;
+    // return the promise of image loaded
+    __imageLoaded($img).then(() => {
+      if (!isCancelled) resolve($elm);
+    });
+  }).on('cancal,finally', () => {
+    isCancelled = true;
+  }).start();
+  promise.__$img = $img;
+  return promise;
+}

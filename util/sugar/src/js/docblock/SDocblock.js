@@ -1,15 +1,9 @@
 import __deepMerge from '../object/deepMerge';
-import __map from '../object/map';
-import __isPath from '../is/path';
-import __isNode from '../is/node';
+import __SDocblockBlock from './SDocblockBlock';
+import __handlebars from 'handlebars';
+import __markdown from './markdown/index';
 
-import __authorTag from './tags/author';
-import __simpleValueTag from './tags/simpleValue';
-import __descriptionTag from './tags/description';
-import __returnTag from './tags/return';
-import __exampleTag from './tags/example';
-import __paramTag from './tags/param';
-import __snippetTag from './tags/snippet';
+// TODO: tests
 
 /**
  * @name                  Dockblock
@@ -64,7 +58,18 @@ export default class SDocblock {
    *
    * @author 	Olivier Bossel <olivier.bossel@gmail.com>
    */
-  _blocks = [];
+  _blocks = null;
+
+  /**
+   * @name          _to
+   * @type          String
+   * @private
+   *
+   * Store the format in which the docblocks have to be converted
+   *
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com>
+   */
+  _to = null;
 
   /**
    * @name            constructor
@@ -77,15 +82,27 @@ export default class SDocblock {
   constructor(source, settings = {}) {
     this._settings = __deepMerge(
       {
-        tags: SDocblock.tagsMap
+        filepath: null,
+        to: {
+          markdown: __markdown
+        }
       },
       settings
     );
     this._source = source;
+  }
 
-    // check the source type
-    if (Array.isArray(source)) {
-    }
+  /**
+   * @name        blocks
+   * @type        Array
+   *
+   * Access the parsed blocks array
+   *
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com>
+   */
+  get blocks() {
+    if (!this._blocks) this.parse();
+    return this._blocks;
   }
 
   /**
@@ -95,147 +112,101 @@ export default class SDocblock {
    * This method is the principal one. Use it to parse a string
    * and get back the object version of it
    *
-   * @param       {String}        string        The string to parse
-   * @param       {Object}        [settings={}]   Override some settings if wanted for this particular parse process. See the settings of the constructor for more info...
-   * @return      {Object}                      The object version of the docblock(s) finded
+   * @param       {String}        [string=this._source]        The string to parse
+   * @return      {Array}                     An array of SDockblock instances representing each extracted docblocks
    *
    * @author 	Olivier Bossel <olivier.bossel@gmail.com>
    */
-  parse(string, settings = {}) {
-    // check if the passed string is a file path
-    let filepath = null;
-    if (__isPath(string, true) && __isNode()) {
-      const __fs = require('fs');
-      if (__fs.existsSync(string)) {
-        filepath = string;
-        string = __fs.readFileSync(string).toString();
-      }
-    }
-
-    // search for the docblock(s) (?:[ \t]*\*[ \t]*)(?:@([a-zA-Z]+)[ \t]*)?(?:([^{\n-]+)[ \t]+)?(?:{([a-z|A-Z]+)}[ \t]*)?(.*)
-    // const docblocksRawStrings = string.match(/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/g).map(s => {
-    let docblocksRawStrings = string.match(/\/\*{2}([\s\S]+?)\*\//g);
-    if (!docblocksRawStrings) return [];
-
-    docblocksRawStrings = docblocksRawStrings.map((s) => {
-      return s;
-    });
-
-    // store the docblocks object parsed lines
-    let docblocks = [];
-
-    // loop on found docblocks
-    docblocksRawStrings.forEach((blockString) => {
-      // some variables
-      let currentTag = null;
-      let currentContent = [];
-      let currentObj = {};
-      let docblockObj = {};
-      let previousWasEmptyLine = false;
-
-      function add() {
-        if (currentContent.length) currentObj.content = currentContent;
-        if (
-          docblockObj.hasOwnProperty(currentTag) &&
-          !Array.isArray(docblockObj[currentTag])
-        ) {
-          const currentValue = docblockObj[currentTag];
-          docblockObj[currentTag] = [currentValue];
-        }
-        if (!currentObj.value) currentObj.value = true;
-        if (Array.isArray(docblockObj[currentTag])) {
-          docblockObj[currentTag].push(currentObj);
-        } else {
-          docblockObj[currentTag] = currentObj;
-        }
-        currentObj = {};
-        currentContent = [];
-        currentTag = null;
-      }
-
-      // split the block by tags
-      const lines = blockString.split('\n').map((l) => l.trim());
-
-      lines.forEach((line) => {
-        // get the tag name
-        const tagNameReg = /\*[\s]?@([a-zA-Z0-9]+)/;
-        const tagNameMatch = line.match(tagNameReg);
-
-        if (line.replace('*', '').trim() === '') {
-          if (currentContent.length > 0) {
-            currentContent.push('');
-          } else {
-            if (currentTag && currentObj.value) {
-              add();
-            }
-            previousWasEmptyLine = true;
-          }
-        } else if (tagNameMatch) {
-          if (currentTag) {
-            add();
-          }
-          currentTag = tagNameMatch[1];
-          line = line.replace(tagNameMatch[0], '').trim();
-          if (line.length > 0) {
-            currentObj.value = line;
-          } else {
-            currentObj.value = true;
-          }
-          previousWasEmptyLine = false;
-        } else if (previousWasEmptyLine) {
-          currentTag = 'description';
-          currentContent = [line.replace('*', '')];
-          currentObj = {};
-          previousWasEmptyLine = false;
-        } else {
-          line = line.replace('/**', '');
-          line = line.replace('*/', '');
-          line = line.replace('*', '');
-          if (line.trim().length) {
-            currentContent.push(line);
-          }
-        }
+  parse(string = this._source) {
+    // extract each docblocks
+    const reg = /\/\*{2}([\s\S]+?)\*\//g;
+    // extracting blocks
+    const blocksArray = string
+      .match(reg)
+      .map((t) => t.trim())
+      .map((block) => {
+        return new __SDocblockBlock(block, {
+          filepath: this._settings.filepath
+        });
       });
+    // save the blocks
+    this._blocks = blocksArray;
+    // return the array of docblock blocks
+    return blocksArray;
+  }
 
-      add();
+  /**
+   * @name          toMarkdown
+   * @type          Function
+   *
+   * This method convert the parsed docblocks to a markdown string
+   *
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com>
+   */
+  toMarkdown() {
+    return this.to('markdown');
+  }
 
-      // save the raw string
-      docblockObj._ = {
-        raw: blockString.toString(),
-        filepath
-      };
+  /**
+   * @name              to
+   * @type              Function
+   *
+   * This method allows you to convert the parsed docblocks to a format like "markdown" and more to come...
+   *
+   * @param       {String}          format          The format in which you want to convert your docblocks.
+   * @return      {String}                          The converted docblocks
+   *
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com>
+   */
+  to(format) {
+    const includedTypes = [];
+    __handlebars.registerHelper('include', (type) => {
+      // filter blocks
+      const blocks = this.blocks
+        .filter((block) => {
+          return (
+            (type === '...' &&
+              includedTypes.indexOf(block.object.type.toLowerCase()) === -1) ||
+            (block.object.type.toLowerCase() === type &&
+              includedTypes.indexOf(block.object.type.toLowerCase()) === -1)
+          );
+        })
+        .map((block) => {
+          return block.to(format);
+        });
+      // save this included type
+      includedTypes.push(type);
 
-      docblocks.push(docblockObj);
+      return blocks.join('\n\n');
     });
 
-    // loop on each docblocks to process the parsed lines
-    docblocks = docblocks.map((block) => {
-      block = __map(block, (value, prop) => {
-        if (prop.slice(0, 1) === '_') return value;
-        if (this._settings.tags[prop] && prop !== 'src')
-          return this._settings.tags[prop](value);
-        return __simpleValueTag(value);
-      });
-      return block;
-    });
-
-    let firstBlock = docblocks[0];
-    if (firstBlock && firstBlock.src && __isNode()) {
-      // get the src file content
-      const __fs = require('fs');
-      const __path = require('path');
-      const srcPath = __path.resolve(firstBlock._.filepath, firstBlock.src);
-      // parse the src
-      const srcBlocks = this.parse(srcPath, settings);
-      delete firstBlock.src;
-      if (srcBlocks && srcBlocks[0]) {
-        firstBlock = __deepMerge(srcBlocks[0], firstBlock);
-        docblocks[0] = firstBlock;
-        srcBlocks.shift();
-        docblocks = [...docblocks, ...srcBlocks];
-      }
-    }
-
-    return docblocks;
+    // get the blocks
+    const blocksArray = this.blocks;
+    // loop on each blocks to convert them to a markdown string
+    // const renderedBlocks = blocksArray.map((block) => {
+    //   return block.to(format);
+    // });
+    // check the first docblock
+    const firstBlock = blocksArray[0];
+    // get the block type
+    const type = firstBlock.object.type.toLowerCase();
+    // render the good template depending on the first block type
+    const template = this._settings.to[format].templates[type];
+    if (!template)
+      throw new Error(
+        `You try to convert your docblocks into "${format}" format but the needed "${type}" template is not available for this particular format. Here's the available templates: ${Object.keys(
+          this._settings.to[format].templates
+        ).join(',')}...`
+      );
+    // save the format in which converting the docblocks
+    this._to = format;
+    // render the template
+    const compiledTemplateFn = __handlebars.compile(
+      this._settings.to[format].templates[type],
+      { noEscape: true }
+    );
+    const renderedTemplate = compiledTemplateFn();
+    // return the rendered template
+    return renderedTemplate;
   }
 }

@@ -1,5 +1,7 @@
 import __deepMege from '../object/deepMerge';
 import __map from '../object/map';
+import __handlebars from 'handlebars';
+import __isNode from '../is/node';
 
 import __authorTag from './tags/author';
 import __simpleValueTag from './tags/simpleValue';
@@ -9,9 +11,12 @@ import __exampleTag from './tags/example';
 import __paramTag from './tags/param';
 import __snippetTag from './tags/snippet';
 
-import __jsTemplate from './templates/js';
+import __markdownTemplate from './markdown/templates';
+import __markdownBlocks from './markdown/blocks';
 
-import __markdownRenderTags from './markdown/tags';
+import __SDocblock from './SDocblock';
+
+// TODO: tests
 
 /**
  * @name          SDocblockBlock
@@ -147,9 +152,7 @@ export default class SDocblockBlock {
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com
    */
-  static templates = {
-    js: __jsTemplate
-  };
+  static templates = {};
 
   /**
    * @name          _source
@@ -197,13 +200,21 @@ export default class SDocblockBlock {
     this._source = source.trim();
     this._settings = __deepMege(
       {
-        tags: SDocblockBlock.tagsMap,
-        renderTags: __markdownRenderTags
+        filepath: null,
+        to: {
+          markdown: {
+            blocks: __markdownBlocks,
+            template: __markdownTemplate
+          }
+        },
+        parse: {
+          tags: SDocblockBlock.tagsMap
+        }
       },
       settings
     );
     // parse the docblock string
-    this._blockObj = this._parse();
+    this._blockObj = this.parse();
   }
 
   /**
@@ -266,81 +277,55 @@ export default class SDocblockBlock {
    *
    * This method can be used to convert the docblock object to a markdown string
    *
-   * @param       {String}          [template=null]           The template you want to use. Can be:
-   * - A simple word that specify a registered template registered using the "registerTemplate" static method of this class
-   * - A template string that will be used as the template directly
-   * - One of the premade templates like: "js", "node", "scss", and more to come...
-   *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  toMarkdown(template = 'js') {
-    let templateString = template;
-    if (template.split(' ').length === 1) {
-      // template name
-      templateString = SDocblockBlock.templates[template];
-    }
-
-    const linesArray = templateString.split('\n');
-
-    linesArray.forEach((line, i) => {
-      // get all the @something in the line
-      const tagNameReg = /[\s]?@([a-zA-Z0-9]+)/gm;
-      const tagNameMatch = line.match(tagNameReg);
-
-      if (!tagNameMatch) return;
-
-      let currentLineValue = line;
-      tagNameMatch.forEach((tagName) => {
-        tagName = tagName.trim().replace('@', '');
-
-        // render the tag
-        const renderedTag = this._renderTag(tagName, this.object[tagName]);
-        if (
-          typeof renderedTag === 'string' ||
-          typeof renderedTag === 'number'
-        ) {
-          // replace the tag in the line
-          currentLineValue = currentLineValue.replace(
-            `@${tagName}`,
-            renderedTag
-          );
-        }
-      });
-
-      // save the new line
-      linesArray[i] = currentLineValue;
-    });
-
-    // return the rendered block
-    return linesArray.join('\n');
+  toMarkdown() {
+    return this.to('markdown');
   }
 
   /**
-   * @name          _renderTag
+   * @name          to
    * @type          Function
-   * @private
    *
-   * This method takes a tag name to render with his data and render it
+   * This method can be used to convert the docblock to one of the supported output
+   * format like "markdown" and more to come...
    *
-   * @param       {String}        tagName         The tag name to render
-   * @param       {Mixed}         data            The tag datas
-   * @return      {String}                        The rendered tag
+   * @param         {String}          format        The format wanted as output. Can be actually "markdown" and more to come...
+   * @return        {String}                        The converted docblocks
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _renderTag(tagName, data) {
-    // check if we have a special render tags
-    let renderTagFn = this._settings.renderTags.default;
-    if (this._settings.renderTags[tagName])
-      renderTagFn = this._settings.renderTags[tagName];
-    // render the tag
-    const renderedTag = renderTagFn(tagName, data);
-    // return the rendered tag
-    return renderedTag;
+  to(format) {
+    // try to get the needed settings for the conversion
+    const convertionSettings = this._settings.to[format];
+
+    if (!convertionSettings)
+      throw new Error(
+        `You try to convert the docblock literals to "${format}" format but this format is not available. Here's the list of available format: ${Object.keys(
+          this._settings.to
+        ).join(',')}...`
+      );
+
+    const blockTemplate =
+      this._settings.to[format].blocks[this.object.type.toLowerCase()] ||
+      this._settings.to[format].blocks['default'];
+    if (!blockTemplate) {
+      throw new Error(
+        `You try to convert a docblock of type "${
+          this.object.type
+        }" into "${format}" format but this block type is not supported. Here's the list of blocks supported in "${format}" format: ${Object.keys(
+          convertionSettings.blocks
+        ).join(',')}...`
+      );
+    }
+    const compiledTemplate = __handlebars.compile(blockTemplate, {
+      noEscape: true
+    });
+    return compiledTemplate(this.object);
   }
 
   /**
-   * @name          _parse
+   * @name          parse
    * @type          Function
    * @private
    *
@@ -350,7 +335,7 @@ export default class SDocblockBlock {
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _parse() {
+  parse() {
     // some variables
     let currentTag = null;
     let currentContent = [];
@@ -430,10 +415,28 @@ export default class SDocblockBlock {
 
     docblockObj = __map(docblockObj, (value, prop) => {
       if (prop.slice(0, 1) === '_') return value;
-      if (this._settings.tags[prop] && prop !== 'src')
-        return this._settings.tags[prop](value);
+      if (this._settings.parse.tags[prop] && prop !== 'src')
+        return this._settings.parse.tags[prop](value);
       return __simpleValueTag(value);
     });
+
+    if (docblockObj['src'] && __isNode() && this._settings.filepath) {
+      const __fs = require('fs');
+      const __path = require('path');
+
+      const absoluteFilepath = __path.resolve(
+        this._settings.filepath,
+        docblockObj['src']
+      );
+
+      const srcValue = __fs.readFileSync(absoluteFilepath, 'utf8');
+      const srcDocblockInstance = new __SDocblock(srcValue);
+      const srcBlocks = srcDocblockInstance.parse();
+      if (srcBlocks.length) {
+        const tags = srcBlocks[0].parse();
+        docblockObj = __deepMege(docblockObj, tags);
+      }
+    }
 
     // save the raw string
     docblockObj.raw = this._source.toString();

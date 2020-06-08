@@ -27,7 +27,7 @@ function param(data) {
   if (!Array.isArray(data)) data = [data];
   const res = {};
   data.forEach(param => {
-    if (typeof param !== 'string') return;
+    if (typeof param !== 'object' || !param.value || typeof param.value !== 'string') return;
     const parts = param.value.split(/\s{2,20000}/).map(l => l.trim());
 
     let type = __upperFirst(parts[0].replace('{', '').replace('}', ''));
@@ -54,6 +54,7 @@ function param(data) {
       description,
       default: defaultValue
     };
+    if (param.content) res[name].content = param.content.join('\n');
   });
   return res;
 }

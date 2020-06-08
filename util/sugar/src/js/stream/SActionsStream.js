@@ -235,7 +235,7 @@ export default class SActionStream extends __SPromise {
         this.trigger(`start`, Object.assign({}, actionObj));
         trigger(`${actionName}.start`, Object.assign({}, actionObj));
         this.trigger(`${actionName}.start`, Object.assign({}, actionObj));
-        const startString = `Starting the action "<yellow>${actionName}</yellow> on <magenta>${streamSourcesCount}</magenta> sources"`;
+        const startString = `Starting the action "<yellow>${actionName}</yellow>" on <magenta>${streamSourcesCount}</magenta> sources`;
         const dataObj = { ...actionObj, value: startString };
         trigger('stdout.data', dataObj);
         this.trigger('stdout.data', dataObj);

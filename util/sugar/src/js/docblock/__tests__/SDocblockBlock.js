@@ -27,9 +27,10 @@ module.exports = (__SDocblockBlock) => {
        */
       `;
 
-    it('Should parse a simple docblick correctly', () => {
+    it('Should parse a simple docblick correctly', (done) => {
       const docblockBlock = new __SDocblockBlock(docblock);
-      console.log(docblockBlock.toMarkdown());
+      // console.log(docblockBlock.toMarkdown());
+      done();
     });
 
     return;

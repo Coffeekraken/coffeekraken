@@ -4,7 +4,7 @@ const __getFilename = require('../../fs/filename');
 const __SFsOutputStreamAction = require('../../stream/actions/SFsOutputStreamAction');
 const __SFsReadFileStreamAction = require('../../stream/actions/SFsReadFileStreamAction');
 const __SGlobResolverStreamAction = require('../../stream/actions/SGlobResolverStreamAction');
-const __SParseDocblocksStreamAction = require('./actions/SParseDocblocksStreamAction');
+const __SDocblockObjectsToMarkdownStreamAction = require('./actions/SDocblocksObjectsToMarkdownStreamAction');
 const __path = require('path');
 
 /**
@@ -45,9 +45,9 @@ module.exports = class SBuildDocActionStream extends __SActionsStream {
     super(
       {
         globResolver: __SGlobResolverStreamAction,
-        // fsReadFile: __SFsReadFileStreamAction,
-        parseDocblocks: __SParseDocblocksStreamAction
-        // fsOutput: __SFsOutputStreamAction
+        fsReadFile: __SFsReadFileStreamAction,
+        docblocksToMarkdown: __SDocblockObjectsToMarkdownStreamAction,
+        fsOutput: __SFsOutputStreamAction
       },
       __deepMerge(
         {
@@ -69,7 +69,7 @@ module.exports = class SBuildDocActionStream extends __SActionsStream {
               if (streamObj.outputDir && streamObj.filename && streamObj.data) {
                 streamObj.outputStack.data = __path.resolve(
                   streamObj.outputDir,
-                  streamObj.filename
+                  streamObj.filename.replace('.js', '.md')
                 );
               }
               return streamObj;

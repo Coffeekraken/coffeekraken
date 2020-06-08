@@ -1,11 +1,9 @@
 module.exports = {
-  setupFiles: [
-    '<rootDir>/.jest/setup.js'
-  ],
+  setupFiles: ['<rootDir>/.jest/setup.js'],
   // testTimeout: 20000,
-  testRegex: "((\\.|/)(test|spec))\\.[jt]sx?$",
+  testRegex: '((\\.|/)(test|spec))\\.[jt]sx?$',
   moduleNameMapper: {
-    "^@coffeekraken\/sugar\/(.*)$": "<rootDir>/src/$1"
+    '^@coffeekraken/sugar/(.*)$': '<rootDir>/src/$1'
   },
-  modulePathIgnorePatterns: ["__wip__"]
+  modulePathIgnorePatterns: ['__wip__|tests/']
 };

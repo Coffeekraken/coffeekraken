@@ -1,4 +1,5 @@
 const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
+const __SDocblock = require('../../../docblock/SDocblock');
 
 /**
  * @name                SDocblocksObjectsToMarkdownStreamAction
@@ -25,7 +26,7 @@ module.exports = class SDocblocksObjectsToMarkdownStreamAction extends __SAction
    */
   static definitionObj = {
     data: {
-      type: 'Object|Array<Object>',
+      type: 'String',
       required: true
     }
   };
@@ -58,10 +59,12 @@ module.exports = class SDocblocksObjectsToMarkdownStreamAction extends __SAction
 
     // return the promise for this action
     return new Promise((resolve, reject) => {
-      const markdown = new __SDocblockJsonToMarkdown(settings).convert(
-        streamObj.data
-      );
-      streamObj.data = markdown;
+      // convert the objects to markdown
+      console.log(streamObj.data);
+      const docblockInstance = new __SDocblock(streamObj.data, {
+        filepath: streamObj.input
+      });
+      streamObj.data = docblockInstance.toMarkdown();
       resolve(streamObj);
     });
   }

@@ -265,7 +265,7 @@ module.exports = {
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     input: isInSugarPackage()
-      ? `${__packageRoot()}/tests/src/node/cli/argsToObject.js`
+      ? `${__packageRoot()}/tests/src/node/**/*.*`
       : `${__packageRoot()}/src/**/*.*`,
 
     /**

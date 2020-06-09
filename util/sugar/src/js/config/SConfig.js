@@ -249,9 +249,25 @@ export default class SConfig {
 
     if (__isPlainObject(value)) {
       value = __deepMap(value, (val, prop, fullPath) => {
-        if (typeof val === 'string' && val.substr(0, 7) === '@config') {
-          return this.get(val.replace('@config.', ''), adapter);
+        // check if we get some things to use as variable
+        if (typeof val === 'string') {
+          const reg = /\[config.[a-zA-Z0-9.]+\]/gm;
+          const matches = val.match(reg);
+          if (matches && matches.length) {
+            matches.forEach((match) => {
+              val = val.replace(
+                match,
+                this.get(match.replace('[config.', '').replace(']', ''))
+              );
+            });
+            return val;
+          }
         }
+
+        // if (typeof val === 'string' /& val.slice(0,1) === '<')
+        // if (typeof val === 'string' && val.substr(0, 7) === '@config') {
+        //   return this.get(val.replace('@config.', ''), adapter);
+        // }
         return val;
       });
     } else if (typeof value === 'string' && value.substr(0, 7) === '@config') {

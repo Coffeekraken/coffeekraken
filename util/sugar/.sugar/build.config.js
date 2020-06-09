@@ -265,7 +265,7 @@ module.exports = {
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     input: isInSugarPackage()
-      ? `${__packageRoot()}/tests/src/node/**/*.*`
+      ? `${__packageRoot()}/tests/src/**/*.*`
       : `${__packageRoot()}/src/**/*.*`,
 
     /**
@@ -295,7 +295,55 @@ module.exports = {
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     watch: isInSugarPackage()
-      ? `${__packageRoot()}/tests/src/**/*`
-      : `${__packageRoot()}/src/**/*`
+      ? `${__packageRoot()}/tests/src/**/*.*`
+      : `${__packageRoot()}/src/**/*.*`
+  },
+
+  views: {
+    /**
+     * @name              input
+     * @namespace         sugar.views.build.views
+     * @type              String
+     * @default           <appRoot>/src/views/*.*
+     *
+     * Specify the root folder (or file) to check for .views|sass files to build.
+     * Glob patterns can be used
+     *
+     * @since             2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    input: isInSugarPackage()
+      ? `${__packageRoot()}/public/src/views/**/*.*`
+      : `${__packageRoot()}/src/views/**/*.*`,
+
+    /**
+     * @name              outputDir
+     * @namespace         sugar.views.build.views
+     * @type              String
+     * @default           <appRoot>/dist/views
+     *
+     * Specify the destination folder where to put the compiled files in
+     *
+     * @since             2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    outputDir: isInSugarPackage()
+      ? `${__packageRoot()}/public/dist/views`
+      : `${__packageRoot()}/dist/views`,
+
+    /**
+     * @name              watch
+     * @namespace         sugar.views.build.views
+     * @type              String
+     * @default           src/views\/**\/*.*
+     *
+     * Set the watch files that you want to check
+     *
+     * @since             2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    watch: isInSugarPackage()
+      ? `${__packageRoot()}/public/src/views/**/*.*`
+      : `${__packageRoot()}/src/views/**/*.*`
   }
 };

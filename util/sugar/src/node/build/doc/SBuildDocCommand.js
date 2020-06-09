@@ -1,6 +1,6 @@
 const __SCommand = require('../../terminal/SCommand');
 const __deepMerge = require('../../object/deepMerge');
-const __SBuildDocumentationSCli = require('../SBuildConfigCli');
+const __SBuildDocCli = require('./SBuildDocCli');
 const __sugarConfig = require('../../config/sugar');
 
 /**
@@ -37,18 +37,18 @@ module.exports = class SBuildDocCommand extends __SCommand {
   constructor(argsObj = {}, commandSettings = {}) {
     // init command
     super(
-      'build.documentation',
-      new __SBuildDocumentationSCli(),
+      'build.doc',
+      new __SBuildDocCli(),
       __deepMerge(
         {
           argsObj,
-          title: 'Build Doocumentation',
+          title: 'Build Doc',
           key: 'd',
           concurrent: false,
-          namespace: 'build.documentation',
-          watch: __sugarConfig('build.documentation.watch')
+          namespace: 'build.doc',
+          watch: __sugarConfig('build.doc.watch')
             ? {
-                patterns: __sugarConfig('build.documentation.watch'),
+                patterns: __sugarConfig('build.doc.watch'),
                 mapToProperty: 'input'
               }
             : false

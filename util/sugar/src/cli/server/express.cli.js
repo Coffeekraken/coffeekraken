@@ -1,6 +1,6 @@
-const __ExpressCli = require('../../node/server/SExpressServerCli');
+const __ExpressCli = require('../../node/server/express/SExpressServerCli');
 const __isChildProcess = require('../../node/is/childProcess');
-const __expressServer = require('../../node/server/express');
+const __expressServer = require('../../node/server/express/express');
 const __argsToObject = require('../../node/cli/argsToObject');
 
 module.exports = (stringArgs = '') => {

@@ -15,6 +15,7 @@ export default function author(data) {
   const authorNfo = /^([^<(]+?)?[ \t]*(?:<([^>(]+?)>)?[ \t]*(?:\(([^)]+?)\)|$)/gm.exec(
     data.value
   );
+  if (!authorNfo) return null;
 
   return {
     name: authorNfo[1],

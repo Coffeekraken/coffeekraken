@@ -143,11 +143,18 @@ let SDocblock = /*#__PURE__*/function () {
       // extract each docblocks
       const reg = /\/\*{2}([\s\S]+?)\*\//g; // extracting blocks
 
-      const blocksArray = string.match(reg).map(t => t.trim()).map(block => {
-        return new _SDocblockBlock.default(block, {
-          filepath: this._settings.filepath
+      let blocksArray = string.match(reg);
+
+      if (!blocksArray) {
+        blocksArray = [];
+      } else {
+        blocksArray = blocksArray.map(t => t.trim()).map(block => {
+          return new _SDocblockBlock.default(block, {
+            filepath: this._settings.filepath
+          });
         });
-      }); // save the blocks
+      } // save the blocks
+
 
       this._blocks = blocksArray; // return the array of docblock blocks
 
@@ -187,6 +194,7 @@ let SDocblock = /*#__PURE__*/function () {
       _handlebars.default.registerHelper('include', type => {
         // filter blocks
         const blocks = this.blocks.filter(block => {
+          if (!block.object.type) return false;
           return type === '...' && includedTypes.indexOf(block.object.type.toLowerCase()) === -1 || block.object.type.toLowerCase() === type && includedTypes.indexOf(block.object.type.toLowerCase()) === -1;
         }).map(block => {
           return block.to(format);
@@ -197,22 +205,19 @@ let SDocblock = /*#__PURE__*/function () {
       }); // get the blocks
 
 
-      const blocksArray = this.blocks; // loop on each blocks to convert them to a markdown string
-      // const renderedBlocks = blocksArray.map((block) => {
-      //   return block.to(format);
-      // });
-      // check the first docblock
+      const blocksArray = this.blocks;
+      if (!blocksArray || !blocksArray.length) return null; // check the first docblock
 
       const firstBlock = blocksArray[0]; // get the block type
 
-      const type = firstBlock.object.type.toLowerCase(); // render the good template depending on the first block type
+      const type = firstBlock.object.type ? firstBlock.object.type.toLowerCase() : 'default'; // render the good template depending on the first block type
 
-      const template = this._settings.to[format].templates[type];
+      const template = this._settings.to[format].templates[type] || this._settings.to[format].templates.default;
       if (!template) throw new Error(`You try to convert your docblocks into "${format}" format but the needed "${type}" template is not available for this particular format. Here's the available templates: ${Object.keys(this._settings.to[format].templates).join(',')}...`); // save the format in which converting the docblocks
 
       this._to = format; // render the template
 
-      const compiledTemplateFn = _handlebars.default.compile(this._settings.to[format].templates[type], {
+      const compiledTemplateFn = _handlebars.default.compile(template, {
         noEscape: true
       });
 

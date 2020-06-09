@@ -414,7 +414,7 @@ export default class SDocblockBlock {
     add();
 
     docblockObj = __map(docblockObj, (value, prop) => {
-      if (prop.slice(0, 1) === '_') return value;
+      if (!prop || prop.length <= 1 || prop.slice(0, 1) === '_') return value;
       if (this._settings.parse.tags[prop] && prop !== 'src')
         return this._settings.parse.tags[prop](value);
       return __simpleValueTag(value);

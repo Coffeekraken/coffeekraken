@@ -404,7 +404,7 @@ module.exports = {
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     default: {
-      color: '@config.colors.default'
+      color: '[config.colors.default]'
     },
     /**
      * @name            title
@@ -445,7 +445,7 @@ module.exports = {
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     title: {
-      color: '@config.colors.title'
+      color: '[config.colors.title]'
     },
     /**
      * @name            text
@@ -568,7 +568,7 @@ module.exports = {
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     primary: {
-      color: '@config.colors.primary'
+      color: '[config.colors.primary]'
     },
     /**
      * @name            secondary
@@ -609,7 +609,7 @@ module.exports = {
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     secondary: {
-      color: '@config.colors.secondary'
+      color: '[config.colors.secondary]'
     },
     /**
      * @name            success
@@ -650,7 +650,7 @@ module.exports = {
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     success: {
-      color: '@config.colors.success'
+      color: '[config.colors.success]'
     },
     /**
      * @name            warning
@@ -691,7 +691,7 @@ module.exports = {
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     warning: {
-      color: '@config.colors.warning'
+      color: '[config.colors.warning]'
     },
     /**
      * @name            error
@@ -732,7 +732,7 @@ module.exports = {
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     error: {
-      color: '@config.colors.error'
+      color: '[config.colors.error]'
     },
     /**
      * @name            info
@@ -773,7 +773,7 @@ module.exports = {
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     info: {
-      color: '@config.colors.info'
+      color: '[config.colors.info]'
     }
   },
 

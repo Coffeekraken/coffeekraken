@@ -20,6 +20,7 @@ exports.default = author;
  */
 function author(data) {
   const authorNfo = /^([^<(]+?)?[ \t]*(?:<([^>(]+?)>)?[ \t]*(?:\(([^)]+?)\)|$)/gm.exec(data.value);
+  if (!authorNfo) return null;
   return {
     name: authorNfo[1],
     email: authorNfo[2],

@@ -1,12 +1,13 @@
 const __packageJson = require('../package.json');
 const __STermAppCommandsPage = require('../src/node/termapp/pages/STermAppCommandsPage');
 const __STermAppAboutPage = require('../src/node/termapp/pages/STermAppAboutPage');
-const __SBuildScssCommand = require('../src/node/build/SBuildScssCommand');
-const __SPhpServerCommand = require('../src/node/server/SPhpServerCommand');
-const __SExpressServerCommand = require('../src/node/server/SExpressServerCommand');
-const __SBladePhpServerCommand = require('../src/node/server/SBladePhpServerCommand');
-const __SBuildJsCommand = require('../src/node/build/SBuildJsCommand');
-const __SBuildConfigCommand = require('../src/node/build/SBuildConfigCommand');
+const __SBuildScssCommand = require('../src/node/build/scss/SBuildScssCommand');
+const __SBuildDocCommand = require('../src/node/build/doc/SBuildDocCommand');
+const __SBuildViewsCommand = require('../src/node/build/views/SBuildViewsCommand');
+const __SFrontendServerCommand = require('../src/node/server/frontend/SFrontendServerCommand');
+const __SBladePhpServerCommand = require('../src/node/server/bladePhp/SBladePhpServerCommand');
+const __SBuildJsCommand = require('../src/node/build/js/SBuildJsCommand');
+const __SBuildConfigCommand = require('../src/node/build/config/SBuildConfigCommand');
 const __sugarConfig = require('../src/node/config/sugar');
 
 module.exports = {
@@ -29,8 +30,15 @@ module.exports = {
     //   argsObj: {},
     //   settings: {}
     // },
-    'server.express': {
-      class: __SExpressServerCommand,
+    // 'server.express': {
+    //   class: __SExpressServerCommand,
+    //   argsObj: {},
+    //   settings: {
+    //     run: true
+    //   }
+    // },
+    'server.frontend': {
+      class: __SFrontendServerCommand,
       argsObj: {},
       settings: {
         run: true
@@ -62,6 +70,20 @@ module.exports = {
       argsObj: {},
       settings: {
         watch: __sugarConfig('build.js.watch')
+      }
+    },
+    'build.views': {
+      class: __SBuildViewsCommand,
+      argsObj: {},
+      settings: {
+        watch: __sugarConfig('build.views.watch')
+      }
+    },
+    'build.doc': {
+      class: __SBuildDocCommand,
+      argsObj: {},
+      settings: {
+        watch: __sugarConfig('build.doc.watch')
       }
     }
   },

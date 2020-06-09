@@ -11,7 +11,7 @@ module.exports = {
      * @since               2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    primary: '@config.terminal.colors.yellow',
+    primary: '[config.terminal.colors.yellow]',
 
     /**
      * @name                secondary
@@ -24,7 +24,7 @@ module.exports = {
      * @since               2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    secondary: '@config.terminal.colors.cyan',
+    secondary: '[config.terminal.colors.cyan]',
 
     /**
      * @name                black

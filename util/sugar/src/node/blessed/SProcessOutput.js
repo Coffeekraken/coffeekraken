@@ -142,6 +142,7 @@ module.exports = class SProcessOutput extends __SComponent {
         console.log('<black> </black>');
       }
     });
+    this._logBox.setScrollPerc(100);
   }
 
   /**

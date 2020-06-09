@@ -285,7 +285,6 @@ let SActionStream = /*#__PURE__*/function (_SPromise) {
               let currentStreamObj = streamObjArray[j];
 
               if (Array.isArray(currentStreamObj)) {
-                console.log('ISS');
                 return await handleStreamObjArray(currentStreamObj, actionObj);
               } else {
                 currentStreamObj._isStreamObj = true;
@@ -302,9 +301,11 @@ let SActionStream = /*#__PURE__*/function (_SPromise) {
                 if (currentActionReturn instanceof Promise) currentStreamObj = await currentActionReturn;else currentStreamObj = currentActionReturn;
                 currentActionReturn = null;
               } catch (e) {
+                // nativeConsole.log(e);
                 // trigger an "event"
                 const errorObj = { ...actionObj,
-                  value: e.message
+                  value: e.message,
+                  error: e
                 };
                 trigger('stderr.data', errorObj);
                 trigger(`${actionName}.stderr.data`, errorObj);

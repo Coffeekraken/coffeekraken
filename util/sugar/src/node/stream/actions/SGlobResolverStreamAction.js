@@ -1,6 +1,8 @@
 const __SActionsStreamAction = require('../SActionsStreamAction');
 const __glob = require('glob');
 const __clone = require('../../object/clone');
+const __extractSame = require('../../string/extractSame');
+const __getFilename = require('../../fs/filename');
 
 /**
  * @name            SGlobResolverStreamAction
@@ -61,6 +63,7 @@ module.exports = class SGlobResolverStreamAction extends __SActionsStreamAction 
 
     return new Promise(async (resolve, reject) => {
       // resolve glob pattern
+      const rootDir = streamObj[streamObj.globProperty].split('*')[0];
       const files = __glob.sync(streamObj[streamObj.globProperty]);
 
       // build the streamObj stack
@@ -69,7 +72,16 @@ module.exports = class SGlobResolverStreamAction extends __SActionsStreamAction 
       // loop on each files founded
       files.forEach((filePath) => {
         const newStreamObj = __clone(streamObj);
+
         newStreamObj[streamObj.globProperty] = filePath;
+
+        newStreamObj.outputDir =
+          newStreamObj.outputDir +
+          '/' +
+          filePath.replace(rootDir, '').replace(__getFilename(filePath), '');
+        if (newStreamObj.outputDir.slice(-1) === '/')
+          newStreamObj.outputDir = newStreamObj.outputDir.slice(0, -1);
+
         delete newStreamObj.globProperty;
         streamObjArray.push(newStreamObj);
       });

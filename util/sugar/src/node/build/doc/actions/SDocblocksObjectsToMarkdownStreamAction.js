@@ -60,7 +60,7 @@ module.exports = class SDocblocksObjectsToMarkdownStreamAction extends __SAction
     // return the promise for this action
     return new Promise((resolve, reject) => {
       // convert the objects to markdown
-      console.log(streamObj.data);
+      // console.log(streamObj.data);
       const docblockInstance = new __SDocblock(streamObj.data, {
         filepath: streamObj.input
       });

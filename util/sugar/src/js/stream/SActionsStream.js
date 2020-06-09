@@ -247,7 +247,6 @@ export default class SActionStream extends __SPromise {
           for (let j = 0; j < streamObjArray.length; j++) {
             let currentStreamObj = streamObjArray[j];
             if (Array.isArray(currentStreamObj)) {
-              console.log('ISS');
               return await handleStreamObjArray(currentStreamObj, actionObj);
             } else {
               currentStreamObj._isStreamObj = true;
@@ -272,8 +271,9 @@ export default class SActionStream extends __SPromise {
               else currentStreamObj = currentActionReturn;
               currentActionReturn = null;
             } catch (e) {
+              // nativeConsole.log(e);
               // trigger an "event"
-              const errorObj = { ...actionObj, value: e.message };
+              const errorObj = { ...actionObj, value: e.message, error: e };
               trigger('stderr.data', errorObj);
               trigger(`${actionName}.stderr.data`, errorObj);
               _this.trigger('stderr.data', errorObj);

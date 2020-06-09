@@ -5,6 +5,7 @@ const __SFsOutputStreamAction = require('../../stream/actions/SFsOutputStreamAct
 const __SFsReadFileStreamAction = require('../../stream/actions/SFsReadFileStreamAction');
 const __SGlobResolverStreamAction = require('../../stream/actions/SGlobResolverStreamAction');
 const __SDocblockObjectsToMarkdownStreamAction = require('./actions/SDocblocksObjectsToMarkdownStreamAction');
+const __SUnlinkStreamAction = require('../../stream/actions/SUnlinkStreamAction');
 const __path = require('path');
 
 /**
@@ -44,6 +45,7 @@ module.exports = class SBuildDocActionStream extends __SActionsStream {
     // init actions stream
     super(
       {
+        unlink: __SUnlinkStreamAction,
         globResolver: __SGlobResolverStreamAction,
         fsReadFile: __SFsReadFileStreamAction,
         docblocksToMarkdown: __SDocblockObjectsToMarkdownStreamAction,
@@ -53,6 +55,7 @@ module.exports = class SBuildDocActionStream extends __SActionsStream {
         {
           before: (streamObj) => {
             streamObj.globProperty = 'input';
+            streamObj.unlink = streamObj.outputDir;
             return streamObj;
           },
           afterActions: {

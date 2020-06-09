@@ -40,31 +40,5 @@ module.exports = {
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     rootDir: `${__packageRoot(process.cwd())}`
-  },
-
-  /**
-   * @name            viewsDir
-   * @namespace       sugar.config.blade
-   * @type            String
-   * @default          ${__packageRoot(process.cwd())}/views
-   *
-   * Specify the root views directory relative to the server root directory
-   *
-   * @since       2.0.0
-   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  viewsDir: `views`,
-
-  /**
-   * @name            cacheDir
-   * @namespace       sugar.config.blade
-   * @type            String
-   * @default          ${__packageRoot(process.cwd())}/views/.cache
-   *
-   * Specify the views template rendering cache directory relative to the server root directory
-   *
-   * @since       2.0.0
-   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  cacheDir: `views/.cache`
+  }
 };

@@ -333,7 +333,7 @@ let SDocblockBlock = /*#__PURE__*/function () {
       });
       add();
       docblockObj = (0, _map.default)(docblockObj, (value, prop) => {
-        if (prop.slice(0, 1) === '_') return value;
+        if (!prop || prop.length <= 1 || prop.slice(0, 1) === '_') return value;
         if (this._settings.parse.tags[prop] && prop !== 'src') return this._settings.parse.tags[prop](value);
         return (0, _simpleValue.default)(value);
       });

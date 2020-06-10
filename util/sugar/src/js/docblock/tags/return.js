@@ -16,7 +16,9 @@ const __upperFirst = require('../../string/upperFirst');
 export default function returnTag(data) {
   const stringArray = data.value.trim().split(/(?<=^\S+)\s/);
   return {
-    type: __upperFirst(stringArray[0].replace('{', '').replace('}', '').trim()),
-    description: stringArray[1].trim()
+    type: stringArray[0]
+      ? __upperFirst(stringArray[0].replace('{', '').replace('}', '').trim())
+      : '',
+    description: stringArray[1] ? stringArray[1].trim() : ''
   };
 }

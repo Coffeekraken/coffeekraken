@@ -283,8 +283,10 @@ let SDocblockBlock = /*#__PURE__*/function () {
       } // split the block by tags
 
 
-      const lines = this._source.trim().split('\n').map(l => l.trim());
+      let lines = this._source.trim().split('\n');
 
+      if (!lines || !lines.length) return null;
+      lines = lines.map(l => l.trim());
       lines.forEach(line => {
         // get the tag name
         const tagNameReg = /\*[\s]?@([a-zA-Z0-9]+)/;

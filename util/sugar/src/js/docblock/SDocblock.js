@@ -123,19 +123,20 @@ export default class SDocblock {
     // extracting blocks
     let blocksArray = string.match(reg);
 
-    if (!blocksArray) {
+    if (!Array.isArray(blocksArray)) {
       blocksArray = [];
-    } else {
-      blocksArray = blocksArray
-        .map((t) => t.trim())
-        .map((block) => {
-          return new __SDocblockBlock(block, {
-            filepath: this._settings.filepath
-          });
+    } else if (Array.isArray(blocksArray) && blocksArray.length) {
+      blocksArray = blocksArray.map((t) => t.trim());
+      if (!blocksArray || !blocksArray.length) return [];
+      blocksArray = blocksArray.map((block) => {
+        return new __SDocblockBlock(block || ' ', {
+          filepath: this._settings.filepath || ''
         });
+      });
     }
     // save the blocks
     this._blocks = blocksArray;
+
     // return the array of docblock blocks
     return blocksArray;
   }
@@ -166,6 +167,7 @@ export default class SDocblock {
   to(format) {
     const includedTypes = [];
     __handlebars.registerHelper('include', (type) => {
+      if (!this.blocks || !this.blocks.length) return '';
       // filter blocks
       const blocks = this.blocks
         .filter((block) => {
@@ -189,7 +191,7 @@ export default class SDocblock {
     // get the blocks
     const blocksArray = this.blocks;
 
-    if (!blocksArray || !blocksArray.length) return null;
+    if (!blocksArray || !blocksArray.length) return '';
 
     // check the first docblock
     const firstBlock = blocksArray[0];

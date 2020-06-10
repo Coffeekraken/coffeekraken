@@ -102,13 +102,19 @@ module.exports = class SProcessOutput extends __SComponent {
         this.update();
       })
       .on('stderr.data', (data) => {
-        this.log(
-          data.value && data.value.value
-            ? data.value.value
-            : data.value
-            ? data.value
-            : data
-        );
+        if (data.error) {
+          this.log(`<red>${data.error.message}</red>`);
+          if (data.error.stack) this.log(data.error.stack);
+          if (data.error.trace) this.log(data.error.trace);
+        } else {
+          this.log(
+            data.value && data.value.value
+              ? data.value.value
+              : data.value
+              ? data.value
+              : data
+          );
+        }
         this.update();
       })
       // subscribe to errors

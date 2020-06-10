@@ -163,6 +163,7 @@ export default class SActionStream extends __SPromise {
 
         // handle passed action that can be either a simple function, a extended SActionsStreamAction class or an instance of the SActionsStreamAction class
         let actionFn;
+        let actionOnce = false;
         if (
           !__isClass(this._actionsObject[actionName]) &&
           typeof this._actionsObject[actionName] === 'function'
@@ -173,6 +174,7 @@ export default class SActionStream extends __SPromise {
           this._actionsObject[actionName] instanceof __SActionsStreamAction
         ) {
           actionInstance = this._actionsObject[actionName];
+          actionOnce = actionInstance.constructor.once;
           actionFn = this._actionsObject[actionName].run.bind(
             this._actionsObject[actionName]
           );
@@ -182,6 +184,7 @@ export default class SActionStream extends __SPromise {
             __SActionsStreamAction
         ) {
           actionInstance = new this._actionsObject[actionName](actionSettings);
+          actionOnce = this._actionsObject[actionName].once;
           actionFn = actionInstance.run.bind(actionInstance);
         }
 
@@ -244,6 +247,11 @@ export default class SActionStream extends __SPromise {
 
         const _this = this;
         async function handleStreamObjArray(streamObjArray, actionObj) {
+          if (actionOnce) {
+            console.log('ONCE');
+            streamObjArray = [streamObjArray[0]];
+          }
+
           for (let j = 0; j < streamObjArray.length; j++) {
             let currentStreamObj = streamObjArray[j];
             if (Array.isArray(currentStreamObj)) {
@@ -271,7 +279,6 @@ export default class SActionStream extends __SPromise {
               else currentStreamObj = currentActionReturn;
               currentActionReturn = null;
             } catch (e) {
-              // nativeConsole.log(e);
               // trigger an "event"
               const errorObj = { ...actionObj, value: e.message, error: e };
               trigger('stderr.data', errorObj);

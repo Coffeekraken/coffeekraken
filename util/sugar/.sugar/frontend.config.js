@@ -1,8 +1,35 @@
 module.exports = {
+  menu: {
+    /**
+     * @name            doc
+     * @namespace       sugar.config.frontend.menu
+     * @type            Object
+     *
+     * List all the documentations views
+     *
+     * @since         2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    doc: {
+      /**
+       * @name            generator
+       * @namespace       sugar.config.frontend.menu.doc
+       * @type            Function
+       * @async
+       *
+       * Specify the generator function to use to generate the documentation menu tree
+       *
+       * @since         2.0.0
+       * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      // generator:
+    }
+  },
+
   pages: {
     /**
      * @name            views
-     * @namespace       sugar.config.frontend
+     * @namespace       sugar.config.frontend.pages
      * @type            Object
      *
      * Store all the "views" configuration access like the slug, the title, etc...
@@ -28,15 +55,15 @@ module.exports = {
        * @name          title
        * @namespace     sugar.config.frontent.pages.views
        * @type          String
-       * @default       Views | {name}
+       * @default       Views | [title]
        *
        * Specify the page title wanted. Accessible tokens:
-       * - {name}: Name of the view
+       * - [title]: Name of the view
        *
        * @since       2.0.0
        * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      title: 'Views | {name}',
+      title: 'Views | [title]',
 
       /**
        * @name            handler
@@ -79,14 +106,14 @@ module.exports = {
        * @name            title
        * @namespace       sugar.config.frontend.pages.doc
        * @type            String
-       * @default         Documentation | {name}
+       * @default         Documentation | [title]
        *
        * Specify the title to use for this "section"
        *
        * @since         2.0.0
        * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      title: 'Documentation | {name}',
+      title: 'Documentation | [title]',
 
       /**
        * @name            handler

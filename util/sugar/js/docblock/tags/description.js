@@ -23,6 +23,7 @@ function description(data) {
     data.content = data.content.slice(0, -1);
   }
 
+  if (!data.content) return '';
   return data.content.map(c => c.trim()).join('\n').trim();
 }
 

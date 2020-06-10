@@ -26,9 +26,10 @@ function example(data) {
     data.content = data.content.slice(0, -1);
   }
 
+  if (!data.content) null;
   return {
     language: typeof data.value === 'string' ? data.value.toLowerCase() : data.value,
-    code: Array.isArray(data.content) ? data.content.join('\n').trim() : data.content.trim()
+    code: Array.isArray(data.content) ? data.content.join('\n').trim() : data.content
   };
 }
 

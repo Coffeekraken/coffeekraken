@@ -145,12 +145,14 @@ let SDocblock = /*#__PURE__*/function () {
 
       let blocksArray = string.match(reg);
 
-      if (!blocksArray) {
+      if (!Array.isArray(blocksArray)) {
         blocksArray = [];
-      } else {
-        blocksArray = blocksArray.map(t => t.trim()).map(block => {
-          return new _SDocblockBlock.default(block, {
-            filepath: this._settings.filepath
+      } else if (Array.isArray(blocksArray) && blocksArray.length) {
+        blocksArray = blocksArray.map(t => t.trim());
+        if (!blocksArray || !blocksArray.length) return [];
+        blocksArray = blocksArray.map(block => {
+          return new _SDocblockBlock.default(block || ' ', {
+            filepath: this._settings.filepath || ''
           });
         });
       } // save the blocks
@@ -192,7 +194,8 @@ let SDocblock = /*#__PURE__*/function () {
       const includedTypes = [];
 
       _handlebars.default.registerHelper('include', type => {
-        // filter blocks
+        if (!this.blocks || !this.blocks.length) return ''; // filter blocks
+
         const blocks = this.blocks.filter(block => {
           if (!block.object.type) return false;
           return type === '...' && includedTypes.indexOf(block.object.type.toLowerCase()) === -1 || block.object.type.toLowerCase() === type && includedTypes.indexOf(block.object.type.toLowerCase()) === -1;
@@ -206,7 +209,7 @@ let SDocblock = /*#__PURE__*/function () {
 
 
       const blocksArray = this.blocks;
-      if (!blocksArray || !blocksArray.length) return null; // check the first docblock
+      if (!blocksArray || !blocksArray.length) return ''; // check the first docblock
 
       const firstBlock = blocksArray[0]; // get the block type
 

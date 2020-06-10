@@ -5,15 +5,14 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _default = `
-# Class
 
 {{include "class"}}
 
-# Methods
+## Methods
 
 {{include "function"}}
 
-# Variables
+## Variables
 
 {{include "..."}}
 `;

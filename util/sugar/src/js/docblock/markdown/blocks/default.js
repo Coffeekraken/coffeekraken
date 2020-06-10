@@ -1,5 +1,7 @@
 export default `
-## {{#if static}}Static {{/if}}{{#if get}}get {{/if}}{{#if set}}set {{/if}}\`\`\`js {{name}} \`\`\`
+{{#if namespace}}<!-- @namespace    {{namespace}} -->{{/if}}
+
+# {{#if static}}Static {{/if}}{{#if get}}get {{/if}}{{#if set}}set {{/if}}\`\`\`js {{name}} \`\`\`
 {{#if since}}### Since: {{since}}{{/if}}
 
 {{#if description}}{{description}}{{/if}}

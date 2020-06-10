@@ -43,6 +43,7 @@ module.exports = async (args = {}) => {
         // handle response
         const page = response.page || 'default';
         const content = response.content || '404';
+        const title = response.title || 'Welcome';
 
         // const renderedView = __request({
         //   url: `http://${bladeSettings.server.hostname}:${bladeSettings.server.port}`,
@@ -55,6 +56,7 @@ module.exports = async (args = {}) => {
           `http://${bladeSettings.server.hostname}:${bladeSettings.server.port}/pages/${page}?rootDir=${viewsSettings.rootDir}&cacheDir=${viewsSettings.cacheDir}`,
           {
             content,
+            title,
             settings: baseSettings
           }
         );

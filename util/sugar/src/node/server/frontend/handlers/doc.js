@@ -1,6 +1,7 @@
 const __sugarConfig = require('../../../config/sugar');
 const __fs = require('fs');
 const __marked = require('marked');
+const __jsDom = require('jsdom').JSDOM;
 
 /**
  * @name                doc
@@ -21,6 +22,7 @@ module.exports = function doc(req, server) {
     // get the path
     const docPath = __sugarConfig('doc.rootDir');
     const filePath = `${docPath}/${req.params[0]}.md`;
+    let title = __sugarConfig('frontend.pages.doc.title');
 
     // try to read the doc file
     // if (!__fs.existsSync(filePath)) return reject('404');
@@ -31,8 +33,15 @@ module.exports = function doc(req, server) {
     // convert to html
     const htmlData = __marked(mdData);
 
+    const $dom = new __jsDom(htmlData);
+    title = title.replace(
+      '[title]',
+      $dom.window.document.querySelector('h1').textContent || ''
+    );
+
     // send back the result
     resolve({
+      title,
       content: htmlData
     });
   });

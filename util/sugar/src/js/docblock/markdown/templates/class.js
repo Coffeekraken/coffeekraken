@@ -1,13 +1,12 @@
 export default `
-# Class
 
 {{include "class"}}
 
-# Methods
+## Methods
 
 {{include "function"}}
 
-# Variables
+## Variables
 
 {{include "..."}}
 `;

@@ -17,11 +17,12 @@ export default function example(data) {
   if (data.content && data.content[data.content.length - 1] === '') {
     data.content = data.content.slice(0, -1);
   }
+  if (!data.content) null;
   return {
     language:
       typeof data.value === 'string' ? data.value.toLowerCase() : data.value,
     code: Array.isArray(data.content)
       ? data.content.join('\n').trim()
-      : data.content.trim()
+      : data.content
   };
 }

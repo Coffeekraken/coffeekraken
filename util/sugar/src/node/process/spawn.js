@@ -59,7 +59,6 @@ module.exports = function spawn(
     }
 
     childProcess = __childProcess.spawn(command, argsOrSettings, settings);
-
     // runningProcess.childProcess = childProcess;
     // __hotkey('ctrl+c').on('press', () => {
     //   // childProcess.kill();

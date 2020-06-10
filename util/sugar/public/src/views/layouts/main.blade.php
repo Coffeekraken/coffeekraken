@@ -1,14 +1,18 @@
 <html>
     <head>
-        <title>Coffeekraken Sugar | @yield('title')</title>
-        @if ($settings->assets && $settings->assets->css && $settings->assets->css->head)
-          @foreach ($settings->assets->css->head as $asset)
-            <link rel="stylesheet" id="{{ $asset->name }}" href="{{ str_replace($_SERVER['DOCUMENT_ROOT'], '', $asset->path) }}">
+        <title>{{ $title }}</title>
+        @if ($settings->assets && $settings->assets->css)
+          @foreach ($settings->assets->css as $asset)
+            @if (!$asset->body)
+              <link rel="stylesheet" id="{{ $asset->name }}" href="{{ str_replace($_SERVER['DOCUMENT_ROOT'], '', $asset->path) }}">
+            @endif
           @endforeach
         @endif
-        @if ($settings->assets && $settings->assets->js && $settings->assets->js->head)
-          @foreach ($settings->assets->js->head as $asset)
-            <script id="{{ $asset->name }}" href="{{ str_replace($_SERVER['DOCUMENT_ROOT'], '', $asset->path) }}"></script>
+        @if ($settings->assets && $settings->assets->js)
+          @foreach ($settings->assets->js as $asset)
+             @if (!$asset->body)
+              <script id="{{ $asset->name }}" href="{{ str_replace($_SERVER['DOCUMENT_ROOT'], '', $asset->path) }}"></script>
+            @endif
           @endforeach
         @endif
     </head>
@@ -20,14 +24,18 @@
         @yield('content')
       </div>
 
-      @if ($settings->assets && $settings->assets->css && $settings->assets->css->body)
-        @foreach ($settings->assets->css->body as $asset)
-          <link rel="stylesheet" id="{{ $asset->name }}" href="{{ str_replace($_SERVER['DOCUMENT_ROOT'], '', $asset->path) }}">
+      @if ($settings->assets && $settings->assets->css)
+        @foreach ($settings->assets->css as $asset)
+          @if ($asset->body)
+            <link rel="stylesheet" id="{{ $asset->name }}" href="{{ str_replace($_SERVER['DOCUMENT_ROOT'], '', $asset->path) }}">
+          @endif
         @endforeach
       @endif
-      @if ($settings->assets && $settings->assets->js && $settings->assets->js->body)
-        @foreach ($settings->assets->js->body as $asset)
-          <script id="{{ $asset->name }}" href="{{ str_replace($_SERVER['DOCUMENT_ROOT'], '', $asset->path) }}"></script>
+      @if ($settings->assets && $settings->assets->js)
+        @foreach ($settings->assets->js as $asset)
+          @if ($asset->body)
+            <script id="{{ $asset->name }}" href="{{ str_replace($_SERVER['DOCUMENT_ROOT'], '', $asset->path) }}"></script>
+          @endif
         @endforeach
       @endif
     </body>

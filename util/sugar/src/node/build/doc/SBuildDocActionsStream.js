@@ -5,6 +5,7 @@ const __SFsOutputStreamAction = require('../../stream/actions/SFsOutputStreamAct
 const __SFsReadFileStreamAction = require('../../stream/actions/SFsReadFileStreamAction');
 const __SGlobResolverStreamAction = require('../../stream/actions/SGlobResolverStreamAction');
 const __SDocblockObjectsToMarkdownStreamAction = require('./actions/SDocblocksObjectsToMarkdownStreamAction');
+const __SDocMapStreamAction = require('./actions/SDocMapStreamActions');
 const __SUnlinkStreamAction = require('../../stream/actions/SUnlinkStreamAction');
 const __path = require('path');
 
@@ -49,13 +50,15 @@ module.exports = class SBuildDocActionStream extends __SActionsStream {
         globResolver: __SGlobResolverStreamAction,
         fsReadFile: __SFsReadFileStreamAction,
         docblocksToMarkdown: __SDocblockObjectsToMarkdownStreamAction,
-        fsOutput: __SFsOutputStreamAction
+        fsOutput: __SFsOutputStreamAction,
+        docMap: __SDocMapStreamAction
       },
       __deepMerge(
         {
           before: (streamObj) => {
             streamObj.globProperty = 'input';
             streamObj.unlink = streamObj.outputDir;
+            streamObj.docRoot = streamObj.outputDir;
             return streamObj;
           },
           afterActions: {
@@ -75,6 +78,10 @@ module.exports = class SBuildDocActionStream extends __SActionsStream {
                   streamObj.filename.replace('.js', '.md')
                 );
               }
+              return streamObj;
+            },
+            docMap: (streamObj) => {
+              streamObj.outputDir = streamObj.docRoot;
               return streamObj;
             }
           }

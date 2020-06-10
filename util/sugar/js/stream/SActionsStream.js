@@ -194,14 +194,17 @@ let SActionStream = /*#__PURE__*/function (_SPromise) {
           const actionSettings = settings.actions ? settings.actions[actionName] || {} : {}; // handle passed action that can be either a simple function, a extended SActionsStreamAction class or an instance of the SActionsStreamAction class
 
           let actionFn;
+          let actionOnce = false;
 
           if (!(0, _class.default)(this._actionsObject[actionName]) && typeof this._actionsObject[actionName] === 'function') {
             actionFn = this._actionsObject[actionName];
           } else if (!(0, _class.default)(this._actionsObject[actionName]) && this._actionsObject[actionName] instanceof _SActionsStreamAction.default) {
             actionInstance = this._actionsObject[actionName];
+            actionOnce = actionInstance.constructor.once;
             actionFn = this._actionsObject[actionName].run.bind(this._actionsObject[actionName]);
           } else if ((0, _class.default)(this._actionsObject[actionName]) && this._actionsObject[actionName].prototype instanceof _SActionsStreamAction.default) {
             actionInstance = new this._actionsObject[actionName](actionSettings);
+            actionOnce = this._actionsObject[actionName].once;
             actionFn = actionInstance.run.bind(actionInstance);
           }
 
@@ -281,6 +284,11 @@ let SActionStream = /*#__PURE__*/function (_SPromise) {
           const _this = this;
 
           async function handleStreamObjArray(streamObjArray, actionObj) {
+            if (actionOnce) {
+              console.log('ONCE');
+              streamObjArray = [streamObjArray[0]];
+            }
+
             for (let j = 0; j < streamObjArray.length; j++) {
               let currentStreamObj = streamObjArray[j];
 
@@ -301,7 +309,6 @@ let SActionStream = /*#__PURE__*/function (_SPromise) {
                 if (currentActionReturn instanceof Promise) currentStreamObj = await currentActionReturn;else currentStreamObj = currentActionReturn;
                 currentActionReturn = null;
               } catch (e) {
-                // nativeConsole.log(e);
                 // trigger an "event"
                 const errorObj = { ...actionObj,
                   value: e.message,

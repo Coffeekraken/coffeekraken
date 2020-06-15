@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.blessed.list -->
+<!-- @name    summaryListPopup -->
 
 # ```js summaryListPopup ```
 

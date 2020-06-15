@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.class -->
+<!-- @name    SApp -->
 
 # ```js SApp ```
 
@@ -31,6 +32,7 @@ const myApp = new MyCoolApp();
 
 
 <!-- @namespace    sugar.js.class.SApp -->
+<!-- @name    config -->
 
 # ```js config ```
 
@@ -56,6 +58,7 @@ const host = await myApp.config('log.frontend.mail.host');
 
 
 <!-- @namespace    sugar.js.class.SApp -->
+<!-- @name    meta -->
 
 # ```js meta ```
 
@@ -81,6 +84,7 @@ const name = await myApp.meta('name');
 
 
 <!-- @namespace    squid.js.log -->
+<!-- @name    log -->
 
 # ```js log ```
 
@@ -114,6 +118,7 @@ Squid.log('Hello world', 'error').then(() => {
 
 
 
+<!-- @name    __settings -->
 
 # ```js __settings ```
 
@@ -128,6 +133,7 @@ Squid.log('Hello world', 'error').then(() => {
 
 
 
+<!-- @name    __meta -->
 
 # ```js __meta ```
 
@@ -142,6 +148,7 @@ Squid.log('Hello world', 'error').then(() => {
 
 
 
+<!-- @name    __config -->
 
 # ```js __config ```
 
@@ -156,6 +163,7 @@ Squid.log('Hello world', 'error').then(() => {
 
 
 
+<!-- @name    __data -->
 
 # ```js __data ```
 
@@ -170,6 +178,7 @@ Squid.log('Hello world', 'error').then(() => {
 
 
 
+<!-- @name    __log -->
 
 # ```js __log ```
 

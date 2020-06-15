@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.dom -->
+<!-- @name    linkLoaded -->
 
 # ```js linkLoaded ```
 

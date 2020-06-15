@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.config -->
+<!-- @name    config -->
 
 # ```js config ```
 
@@ -38,6 +39,7 @@ await config.set('log.frontend.mail.host', 'mailchimp.com');
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -70,6 +72,7 @@ The available settings are:
 
 
 
+<!-- @name    load -->
 
 # ```js load ```
 
@@ -95,6 +98,7 @@ const config = await config.load();
 
 
 
+<!-- @name    save -->
 
 # ```js save ```
 
@@ -120,6 +124,7 @@ await config.save();
 
 
 
+<!-- @name    get -->
 
 # ```js get ```
 
@@ -147,6 +152,7 @@ await config.get('log.frontend.mail.host'); // => gmail.google.com
 
 
 <!-- @namespace    sugar.node.config.SConfig -->
+<!-- @name    set -->
 
 # ```js set ```
 
@@ -178,6 +184,7 @@ config.set('log.frontend.mail.host', 'coffeekraken.io');
 
 
 
+<!-- @name    _name -->
 
 # ```js _name ```
 
@@ -192,6 +199,7 @@ The name of the config
 
 
 
+<!-- @name    _adapters -->
 
 # ```js _adapters ```
 
@@ -206,6 +214,7 @@ Save the registered adapters instances
 
 
 
+<!-- @name    _settings -->
 
 # ```js _settings ```
 

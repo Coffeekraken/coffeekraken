@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.dev -->
+<!-- @name    parseError -->
 
 # ```js parseError ```
 

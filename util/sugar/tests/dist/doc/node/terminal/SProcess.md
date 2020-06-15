@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.terminal -->
+<!-- @name    SProcess -->
 
 # ```js SProcess ```
 ### Since: 2.0.0
@@ -50,6 +51,7 @@ const app = new SProcess({
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -65,6 +67,7 @@ Constructor
 
 
 
+<!-- @name    _pipeCommandsPromises -->
 
 # ```js _pipeCommandsPromises ```
 
@@ -80,6 +83,7 @@ This methods pipe all the SCommand promises to this process promise
 
 
 
+<!-- @name    run -->
 
 # ```js run ```
 
@@ -101,6 +105,7 @@ This method is used to run the command
 
 
 
+<!-- @name    _settings -->
 
 # ```js _settings ```
 
@@ -115,6 +120,7 @@ Store the process settings
 
 
 
+<!-- @name    _commands -->
 
 # ```js _commands ```
 
@@ -129,6 +135,7 @@ This is an object that store the available commands in this process
 
 
 
+<!-- @name    biggestCommandName -->
 
 # get ```js biggestCommandName ```
 
@@ -143,6 +150,7 @@ Get the biggest command name passed in constructor
 
 
 
+<!-- @name    commands -->
 
 # get ```js commands ```
 

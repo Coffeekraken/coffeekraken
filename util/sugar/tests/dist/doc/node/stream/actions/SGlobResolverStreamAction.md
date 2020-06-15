@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.stream.actions -->
+<!-- @name    SGlobResolverStreamAction -->
 
 # ```js SGlobResolverStreamAction ```
 
@@ -24,6 +25,7 @@ is one. It will then return an array of streamObj handled normally by the SActio
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -39,6 +41,7 @@ Constructor
 
 
 
+<!-- @name    run -->
 
 # ```js run ```
 
@@ -56,6 +59,7 @@ Override the base class run method
 
 
 
+<!-- @name    definitionObj -->
 
 # Static ```js definitionObj ```
 

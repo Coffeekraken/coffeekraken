@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.blessed -->
+<!-- @name    SCommandPanel -->
 
 # ```js SCommandPanel ```
 
@@ -35,6 +36,7 @@ const myPanel = new SCommandPanel(myProcess, {
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -50,6 +52,7 @@ Constructor
 
 
 
+<!-- @name    _subscribeToCommandsEvents -->
 
 # ```js _subscribeToCommandsEvents ```
 ### Since: 2.0.0
@@ -65,6 +68,7 @@ This method subscribe to the commands events to make corresponding action like l
 
 
 
+<!-- @name    _initFilterPopup -->
 
 # ```js _initFilterPopup ```
 
@@ -80,6 +84,7 @@ This method initialize the filter popup
 
 
 
+<!-- @name    summary -->
 
 # ```js summary ```
 
@@ -96,6 +101,7 @@ each data and validate
 
 
 
+<!-- @name    filterByNamespace -->
 
 # ```js filterByNamespace ```
 
@@ -115,6 +121,7 @@ This method simply takes a namespae and filter the displayed commands
 
 
 
+<!-- @name    _clearCommands -->
 
 # ```js _clearCommands ```
 
@@ -131,6 +138,7 @@ well as in the "_commands" property as well as in the "_boxesObjectsMap"
 
 
 
+<!-- @name    _generateUI -->
 
 # ```js _generateUI ```
 
@@ -146,6 +154,7 @@ This method take the registered keys in the process and generate a nice and clea
 
 
 
+<!-- @name    _updateCommandBoxesStyle -->
 
 # ```js _updateCommandBoxesStyle ```
 
@@ -161,6 +170,7 @@ This method handle the display of a command box depending on his state, etc...
 
 
 
+<!-- @name    _openCommandBox -->
 
 # ```js _openCommandBox ```
 
@@ -180,6 +190,7 @@ This method simply open the passed panel box by animating the transition state
 
 
 
+<!-- @name    _closePanelBox -->
 
 # ```js _closePanelBox ```
 
@@ -199,6 +210,7 @@ This method simply open the passed panel box by animating the transition state
 
 
 
+<!-- @name    _updateCommandBoxesContent -->
 
 # ```js _updateCommandBoxesContent ```
 
@@ -215,6 +227,7 @@ on how many they are, etc...
 
 
 
+<!-- @name    _updateCommandBoxesLayout -->
 
 # ```js _updateCommandBoxesLayout ```
 
@@ -233,6 +246,7 @@ on how many they are, etc...
 
 
 
+<!-- @name    _commands -->
 
 # ```js _commands ```
 
@@ -248,6 +262,7 @@ either a namespace string of commands that you want to display
 
 
 
+<!-- @name    $log -->
 
 # ```js $log ```
 
@@ -262,6 +277,7 @@ Store the actual box where the logs will be pushed
 
 
 
+<!-- @name    $namespace -->
 
 # ```js $namespace ```
 
@@ -276,6 +292,7 @@ Store the "namespace" panel that display which is the current namespace displaye
 
 
 
+<!-- @name    _namespace -->
 
 # ```js _namespace ```
 

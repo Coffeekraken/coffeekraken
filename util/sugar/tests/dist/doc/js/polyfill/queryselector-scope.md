@@ -1,6 +1,7 @@
 
 
 <!-- @namespace    sugar.js.polyfill -->
+<!-- @name    queryselector-scope -->
 
 # ```js queryselector-scope ```
 

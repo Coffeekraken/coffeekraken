@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.termapp.pages -->
+<!-- @name    STermAppCommandsPage -->
 
 # ```js STermAppCommandsPage ```
 
@@ -19,6 +20,7 @@ This represent the page where we display the commands available through the suga
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -36,6 +38,7 @@ Constructor
 
 
 
+<!-- @name    currentNamespace -->
 
 # Static ```js currentNamespace ```
 

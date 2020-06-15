@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.blessed.app -->
+<!-- @name    SAppPage -->
 
 # ```js SAppPage ```
 
@@ -38,6 +39,7 @@ TODO: Documentation
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -53,6 +55,7 @@ Constructor
 
 
 
+<!-- @name    setArgs -->
 
 # ```js setArgs ```
 
@@ -73,6 +76,7 @@ Calling this will trigger an "args" and an "arg" SPromise "event".
 
 
 
+<!-- @name    destroy -->
 
 # ```js destroy ```
 
@@ -91,6 +95,7 @@ value of settings.persistent is to false
 
 
 
+<!-- @name    _id -->
 
 # ```js _id ```
 
@@ -105,6 +110,7 @@ Store the page id
 
 
 
+<!-- @name    _title -->
 
 # ```js _title ```
 
@@ -119,6 +125,7 @@ Store the page title
 
 
 
+<!-- @name    _promise -->
 
 # ```js _promise ```
 
@@ -133,6 +140,7 @@ Store an SPromise instance
 
 
 
+<!-- @name    _argsObj -->
 
 # ```js _argsObj ```
 
@@ -147,6 +155,7 @@ Store the arguments object
 
 
 
+<!-- @name    app -->
 
 # get ```js app ```
 
@@ -161,6 +170,7 @@ Access the application instance on which you will have access to configs, etc...
 
 
 
+<!-- @name    id -->
 
 # get ```js id ```
 
@@ -175,6 +185,7 @@ Access the page id setted in the constructor
 
 
 
+<!-- @name    title -->
 
 # get ```js title ```
 
@@ -189,6 +200,7 @@ Access the page title setted in the constructor
 
 
 
+<!-- @name    persistent -->
 
 # get ```js persistent ```
 

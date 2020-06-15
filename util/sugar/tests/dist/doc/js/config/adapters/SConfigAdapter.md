@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.config.adapters -->
+<!-- @name    SConfigAdapter -->
 
 # ```js SConfigAdapter ```
 
@@ -38,6 +39,7 @@ class SConfigCoolAdapter extends SConfigAdapter {
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -61,6 +63,7 @@ Construct the SConfigAdapter instance with the settings passed in object format.
 
 
 
+<!-- @name    _settings -->
 
 # ```js _settings ```
 
@@ -75,6 +78,7 @@ Store the default settings of the SConfigAdapter instance
 
 
 
+<!-- @name    name -->
 
 # get ```js name ```
 
@@ -89,6 +93,7 @@ Access the adapter setted name
 
 
 
+<!-- @name    settings -->
 
 # get ```js settings ```
 

@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.dom -->
+<!-- @name    imagesLoaded -->
 
 # ```js imagesLoaded ```
 

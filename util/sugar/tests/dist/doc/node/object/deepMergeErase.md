@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.object -->
+<!-- @name    deepMergeErase -->
 
 # ```js deepMergeErase ```
 

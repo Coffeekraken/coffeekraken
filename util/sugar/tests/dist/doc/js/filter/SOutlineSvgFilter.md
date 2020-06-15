@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.filter -->
+<!-- @name    SOutlineSvgFilter -->
 
 # ```js SOutlineSvgFilter ```
 
@@ -26,6 +27,7 @@ filter.applyTo(myCoolHTMLElement);
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -47,6 +49,7 @@ Constructor
 
 
 
+<!-- @name    radius -->
 
 # ```js radius ```
 

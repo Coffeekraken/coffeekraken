@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.filter -->
+<!-- @name    SGooeySvgFilter -->
 
 # ```js SGooeySvgFilter ```
 
@@ -31,6 +32,7 @@ filter.applyTo(myCoolHTMLElement);
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -52,6 +54,7 @@ Constructor
 
 
 
+<!-- @name    blur -->
 
 # ```js blur ```
 
@@ -66,6 +69,7 @@ Get/Set the blur amount to produce the effect
 
 
 
+<!-- @name    contrast -->
 
 # ```js contrast ```
 
@@ -80,6 +84,7 @@ Get the contrast amount to produce the effect
 
 
 
+<!-- @name    shrink -->
 
 # ```js shrink ```
 
@@ -94,6 +99,7 @@ Get the shrink amount to produce the effect
 
 
 
+<!-- @name    amount -->
 
 # ```js amount ```
 

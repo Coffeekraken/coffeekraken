@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.docblock.tags -->
+<!-- @name    simpleValue -->
 
 # ```js simpleValue ```
 ### Since: 2.0.0

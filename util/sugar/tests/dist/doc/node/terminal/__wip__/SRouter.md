@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.terminal -->
+<!-- @name    SRouter -->
 
 # ```js SRouter ```
 
@@ -19,6 +20,7 @@ Provide a simple router class to switch between pages in the terminal
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -34,6 +36,7 @@ Construct the router class with settings described bellow
 
 
 
+<!-- @name    setOutput -->
 
 # ```js setOutput ```
 
@@ -62,6 +65,7 @@ myRouter.setOutput(myBox);
 
 
 
+<!-- @name    goto -->
 
 # ```js goto ```
 
@@ -91,6 +95,7 @@ myRouter.goto('something/cool/01');
 
 
 
+<!-- @name    _routes -->
 
 # ```js _routes ```
 
@@ -105,6 +110,7 @@ Store the routes available in this router instance
 
 
 
+<!-- @name    _settings -->
 
 # ```js _settings ```
 

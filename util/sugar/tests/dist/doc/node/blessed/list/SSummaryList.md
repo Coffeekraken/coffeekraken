@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.blessed.list -->
+<!-- @name    SSummaryList -->
 
 # ```js SSummaryList ```
 
@@ -35,6 +36,7 @@ const list = new SSummaryList({});
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -50,6 +52,7 @@ Constructor
 
 
 
+<!-- @name    _initHotkeys -->
 
 # ```js _initHotkeys ```
 
@@ -65,6 +68,7 @@ This method init the hotkeys
 
 
 
+<!-- @name    getLongestListItemName -->
 
 # ```js getLongestListItemName ```
 
@@ -80,6 +84,7 @@ This method return the longest list item name
 
 
 
+<!-- @name    _terminate -->
 
 # ```js _terminate ```
 
@@ -95,6 +100,7 @@ This method simply "kill" the component
 
 
 
+<!-- @name    _buildBlessedListItemsArray -->
 
 # ```js _buildBlessedListItemsArray ```
 
@@ -110,6 +116,7 @@ This method build the blessed list items array to pass to the blessed list compo
 
 
 
+<!-- @name    _rebuildList -->
 
 # ```js _rebuildList ```
 
@@ -127,6 +134,7 @@ This method simply rebuild the blessed list
 
 
 
+<!-- @name    _editingItemIdx -->
 
 # ```js _editingItemIdx ```
 
@@ -141,6 +149,7 @@ Store the editing list item index
 
 
 
+<!-- @name    _selectedItemIdx -->
 
 # ```js _selectedItemIdx ```
 
@@ -155,6 +164,7 @@ Store the selected item index
 
 
 
+<!-- @name    _isEditing -->
 
 # ```js _isEditing ```
 
@@ -169,6 +179,7 @@ Store if the list is in editing mode or not
 
 
 
+<!-- @name    $list -->
 
 # ```js $list ```
 
@@ -183,6 +194,7 @@ Store the blessed list component
 
 
 
+<!-- @name    _items -->
 
 # ```js _items ```
 

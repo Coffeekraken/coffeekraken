@@ -1,6 +1,7 @@
 
 
 <!-- @namespace    sugar.js.dev -->
+<!-- @name    dataTypesArray -->
 
 # ```js dataTypesArray ```
 

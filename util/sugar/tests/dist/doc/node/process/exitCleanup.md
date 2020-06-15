@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.process -->
+<!-- @name    exitCleanup -->
 
 # ```js exitCleanup ```
 ### Since: 2.0.0

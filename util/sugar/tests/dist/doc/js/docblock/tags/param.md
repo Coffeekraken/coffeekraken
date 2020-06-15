@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.docblock.tags -->
+<!-- @name    param -->
 
 # ```js param ```
 ### Since: 2.0.0

@@ -116,6 +116,9 @@ let SNav = /*#__PURE__*/function () {
         ul: {
           class: 's-nav s-nav--unordered'
         },
+        child_link: {
+          class: 's-nav__child-link'
+        },
         child: {
           class: 's-nav__child'
         }
@@ -318,6 +321,7 @@ let SNav = /*#__PURE__*/function () {
           itemsArray.push('\t'.repeat(settings.indent) + sNavItem.toHtml(settings));
         } else if (sNavItem instanceof SNav) {
           itemsArray.push(`${'\t'.repeat(settings.indent)}<li class="${settings.child.class}">
+            <a href="#${sNavItem.id}" class="${settings.child_link.class}">${sNavItem.text}</a>
 ${sNavItem.toHtml({ ...settings,
             indent: settings.indent + 1
           })}

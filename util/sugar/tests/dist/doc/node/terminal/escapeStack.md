@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.blessed -->
+<!-- @name    escapeStack -->
 
 # ```js escapeStack ```
 

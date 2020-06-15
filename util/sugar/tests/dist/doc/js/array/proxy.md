@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.array -->
+<!-- @name    proxy -->
 
 # ```js proxy ```
 
@@ -36,6 +37,7 @@ myArray.watch(['push','pop'], (watchObj) => {
 
 
 
+<!-- @name    watch -->
 
 # ```js watch ```
 
@@ -70,6 +72,7 @@ const watchId = myProxiedArray.watch(['push', 'pop'], (watchObj) => {
 
 
 
+<!-- @name    unwatch -->
 
 # ```js unwatch ```
 

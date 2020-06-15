@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.color -->
+<!-- @name    SColor -->
 
 # ```js SColor ```
 ### Since: 2.0.0
@@ -51,6 +52,7 @@ console.log(lighterColor.toRgbaString());
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -73,6 +75,7 @@ Constructor
 
 
 
+<!-- @name    getColor -->
 
 # ```js getColor ```
 
@@ -90,6 +93,7 @@ from the Sugar configured colors
 
 
 
+<!-- @name    _parse -->
 
 # ```js _parse ```
 
@@ -109,6 +113,7 @@ Parse
 
 
 
+<!-- @name    convert2 -->
 
 # ```js convert2 ```
 
@@ -134,6 +139,7 @@ myColor._convert2('rgba');
 
 
 
+<!-- @name    toHex -->
 
 # ```js toHex ```
 
@@ -155,6 +161,7 @@ myColor.toHex();
 
 
 
+<!-- @name    toHsl -->
 
 # ```js toHsl ```
 
@@ -176,6 +183,7 @@ myColor.toHsl();
 
 
 
+<!-- @name    toHsv -->
 
 # ```js toHsv ```
 
@@ -197,6 +205,7 @@ myColor.toHsv();
 
 
 
+<!-- @name    toRgba -->
 
 # ```js toRgba ```
 
@@ -218,6 +227,7 @@ myColor.toRgba();
 
 
 
+<!-- @name    reset -->
 
 # ```js reset ```
 
@@ -239,6 +249,7 @@ myColor.reset();
 
 
 
+<!-- @name    desaturate -->
 
 # ```js desaturate ```
 
@@ -266,6 +277,7 @@ myColor.desaturate(20);
 
 
 
+<!-- @name    saturate -->
 
 # ```js saturate ```
 
@@ -293,6 +305,7 @@ myColor.saturate(20);
 
 
 
+<!-- @name    grayscale -->
 
 # ```js grayscale ```
 
@@ -318,6 +331,7 @@ myColor.grayscale();
 
 
 
+<!-- @name    spin -->
 
 # ```js spin ```
 
@@ -345,6 +359,7 @@ myColor.spin(230);
 
 
 
+<!-- @name    transparentize -->
 
 # ```js transparentize ```
 
@@ -372,6 +387,7 @@ myColor.transparenize(30);
 
 
 
+<!-- @name    alpha -->
 
 # ```js alpha ```
 
@@ -399,6 +415,7 @@ myColor.alpha(10);
 
 
 
+<!-- @name    opacity -->
 
 # ```js opacity ```
 
@@ -426,6 +443,7 @@ myColor.opacity(20);
 
 
 
+<!-- @name    opacify -->
 
 # ```js opacify ```
 
@@ -453,6 +471,7 @@ myColor.opacify(18);
 
 
 
+<!-- @name    darken -->
 
 # ```js darken ```
 
@@ -480,6 +499,7 @@ myColor.darken(20);
 
 
 
+<!-- @name    lighten -->
 
 # ```js lighten ```
 
@@ -507,6 +527,7 @@ myColor.lighten(20);
 
 
 
+<!-- @name    toHexString -->
 
 # ```js toHexString ```
 
@@ -528,6 +549,7 @@ myColor.toHexString();
 
 
 
+<!-- @name    toRgbaString -->
 
 # ```js toRgbaString ```
 
@@ -549,6 +571,7 @@ myColor.toRgbaString();
 
 
 
+<!-- @name    toHslString -->
 
 # ```js toHslString ```
 
@@ -570,6 +593,7 @@ myColor.toHslString();
 
 
 
+<!-- @name    toHsvString -->
 
 # ```js toHsvString ```
 
@@ -591,6 +615,7 @@ myColor.toHsvString();
 
 
 
+<!-- @name    toString -->
 
 # ```js toString ```
 
@@ -618,6 +643,7 @@ myColor.toString();
 
 
 
+<!-- @name    colors -->
 
 # Static ```js colors ```
 
@@ -632,6 +658,7 @@ Static color names map
 
 
 
+<!-- @name    _originalSColor -->
 
 # ```js _originalSColor ```
 
@@ -646,6 +673,7 @@ Original color value
 
 
 
+<!-- @name    _r -->
 
 # ```js _r ```
 
@@ -660,6 +688,7 @@ Internal red value
 
 
 
+<!-- @name    _g -->
 
 # ```js _g ```
 
@@ -674,6 +703,7 @@ Internal green value
 
 
 
+<!-- @name    _b -->
 
 # ```js _b ```
 
@@ -688,6 +718,7 @@ Internal blue value
 
 
 
+<!-- @name    _a -->
 
 # ```js _a ```
 
@@ -702,6 +733,7 @@ Internal alpha value
 
 
 
+<!-- @name    _settings -->
 
 # ```js _settings ```
 
@@ -718,6 +750,7 @@ Store the settings passed to the constructor. Here's the list of available setti
 
 
 
+<!-- @name    r -->
 
 # ```js r ```
 
@@ -739,6 +772,7 @@ myColor.r = 128;
 
 
 
+<!-- @name    g -->
 
 # ```js g ```
 
@@ -760,6 +794,7 @@ myColor.g = 20;
 
 
 
+<!-- @name    b -->
 
 # ```js b ```
 
@@ -781,6 +816,7 @@ myColor.b = 30;
 
 
 
+<!-- @name    a -->
 
 # ```js a ```
 
@@ -802,6 +838,7 @@ myColor.a = 20;
 
 
 
+<!-- @name    l -->
 
 # ```js l ```
 
@@ -823,6 +860,7 @@ myColor.l = 10;
 
 
 
+<!-- @name    s -->
 
 # ```js s ```
 
@@ -844,6 +882,7 @@ myColor.s = 20;
 
 
 
+<!-- @name    v -->
 
 # ```js v ```
 
@@ -865,6 +904,7 @@ myColor.v = 20;
 
 
 
+<!-- @name    h -->
 
 # ```js h ```
 

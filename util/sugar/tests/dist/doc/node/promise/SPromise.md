@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.promise -->
+<!-- @name    SPromise -->
 
 # ```js SPromise ```
 

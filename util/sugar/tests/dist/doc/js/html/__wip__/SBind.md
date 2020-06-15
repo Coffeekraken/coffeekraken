@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.class -->
+<!-- @name    SBind -->
 
 # ```js SBind ```
 
@@ -33,6 +34,7 @@ binder.bindObjectPath2ElementAttribute(myObject1, 'title', myHTMLElement, 'title
 
 
 
+<!-- @name    bind -->
 
 # ```js bind ```
 
@@ -62,6 +64,7 @@ element will be updated as well
 
 
 
+<!-- @name    _bindStack -->
 
 # ```js _bindStack ```
 
@@ -76,6 +79,7 @@ Store all the bind objects settings
 
 
 
+<!-- @name    _mutationObservedElementsStack -->
 
 # ```js _mutationObservedElementsStack ```
 
@@ -91,6 +95,7 @@ be notified when attributes are updated
 
 
 
+<!-- @name    _digestsMutation -->
 
 # ```js _digestsMutation ```
 

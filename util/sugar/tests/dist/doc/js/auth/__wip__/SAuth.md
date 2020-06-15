@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.auth -->
+<!-- @name    SAuth -->
 
 # ```js SAuth ```
 
@@ -26,6 +27,7 @@ const token = await apiAuth.ask('token');
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -54,6 +56,7 @@ An object of settings to configure this SAuth instance. Here's the list of avail
 
 
 
+<!-- @name    inject -->
 
 # ```js inject ```
 
@@ -84,6 +87,7 @@ myAuth.inject('axios', requestConfig);
 
 
 
+<!-- @name    ask -->
 
 # ```js ask ```
 
@@ -122,6 +126,7 @@ const authInfos = await myAuthInstance.ask();
 
 
 
+<!-- @name    _name -->
 
 # ```js _name ```
 
@@ -136,6 +141,7 @@ Store the instance name
 
 
 
+<!-- @name    _adapter -->
 
 # ```js _adapter ```
 
@@ -150,6 +156,7 @@ Store the instance adapter
 
 
 
+<!-- @name    _settings -->
 
 # ```js _settings ```
 
@@ -164,6 +171,7 @@ Store the instance settings
 
 
 
+<!-- @name    type -->
 
 # ```js type ```
 
@@ -178,6 +186,7 @@ Access the auth type like "basic", "bearer", "oauth2", etc...
 
 
 
+<!-- @name    authInfo -->
 
 # ```js authInfo ```
 

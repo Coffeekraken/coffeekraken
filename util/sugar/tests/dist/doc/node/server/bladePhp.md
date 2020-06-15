@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.server -->
+<!-- @name    php -->
 
 # ```js php ```
 ### Since: 2.0.0

@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.build.doc.actions -->
+<!-- @name    SParseDocblockStreamAction -->
 
 # ```js SParseDocblockStreamAction ```
 
@@ -23,6 +24,7 @@ This function is responsible of extracting and parsing the docblocks finded in t
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -38,6 +40,7 @@ Constructor
 
 
 
+<!-- @name    run -->
 
 # ```js run ```
 
@@ -55,6 +58,7 @@ Override the base class run method
 
 
 
+<!-- @name    definitionObj -->
 
 # Static ```js definitionObj ```
 

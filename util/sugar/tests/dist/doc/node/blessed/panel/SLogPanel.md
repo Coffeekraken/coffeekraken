@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.blessed -->
+<!-- @name    SLogPanel -->
 
 # ```js SLogPanel ```
 ### Since: 2.0.0
@@ -36,6 +37,7 @@ panel.log('Hello world');
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -51,6 +53,7 @@ Constructor
 
 
 
+<!-- @name    log -->
 
 # ```js log ```
 
@@ -74,6 +77,7 @@ Allow to log some content in the panel
 
 
 
+<!-- @name    _name -->
 
 # ```js _name ```
 
@@ -88,6 +92,7 @@ Store the panel name
 
 
 
+<!-- @name    //                    _input -->
 
 # ```js //                    _input ```
 
@@ -102,6 +107,7 @@ Store the panel name
 
 
 
+<!-- @name    //                     input -->
 
 # ```js //                     input ```
 
@@ -116,6 +122,7 @@ Store the panel name
 
 
 
+<!-- @name    //                    summary -->
 
 # ```js //                    summary ```
 

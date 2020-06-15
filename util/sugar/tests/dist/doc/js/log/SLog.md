@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.log -->
+<!-- @name    SLog -->
 
 # ```js SLog ```
 
@@ -33,6 +34,7 @@ logger.log('Something cool happend...');
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -56,6 +58,7 @@ Constructor
 
 
 
+<!-- @name    _overrideNativeConsole -->
 
 # ```js _overrideNativeConsole ```
 
@@ -72,6 +75,7 @@ Store the native console inside the global/window variable called "nativeConsole
 
 
 
+<!-- @name    _log -->
 
 # ```js _log ```
 
@@ -91,6 +95,7 @@ Internal log method that make the actual call to all the adapters, etc...
 
 
 
+<!-- @name    log -->
 
 # ```js log ```
 
@@ -116,6 +121,7 @@ await logger.log('Something cool');
 
 
 
+<!-- @name    info -->
 
 # ```js info ```
 
@@ -143,6 +149,7 @@ await logger.info('Something cool');
 
 
 
+<!-- @name    warn -->
 
 # ```js warn ```
 
@@ -170,6 +177,7 @@ await logger.warn('Something cool');
 
 
 
+<!-- @name    debug -->
 
 # ```js debug ```
 
@@ -197,6 +205,7 @@ await logger.debug('Something cool');
 
 
 
+<!-- @name    error -->
 
 # ```js error ```
 
@@ -226,6 +235,7 @@ await logger.error('Something cool');
 
 
 
+<!-- @name    _settings -->
 
 # ```js _settings ```
 

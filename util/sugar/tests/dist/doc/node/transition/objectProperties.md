@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.transition -->
+<!-- @name    objectProperties -->
 
 # ```js objectProperties ```
 ### Since: 2.0.0

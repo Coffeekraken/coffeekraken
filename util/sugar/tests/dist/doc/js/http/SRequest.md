@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.http -->
+<!-- @name    SRequest -->
 
 # ```js SRequest ```
 
@@ -41,6 +42,7 @@ request.send().then((response) => {
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -60,6 +62,7 @@ Constructor
 
 
 
+<!-- @name    _onSuccess -->
 
 # ```js _onSuccess ```
 
@@ -79,6 +82,7 @@ Callback when the request has been a success
 
 
 
+<!-- @name    _onError -->
 
 # ```js _onError ```
 
@@ -98,6 +102,7 @@ Callback when the request return an error
 
 
 
+<!-- @name    _send -->
 
 # ```js _send ```
 
@@ -117,6 +122,7 @@ Send the actual request using axios
 
 
 
+<!-- @name    retry -->
 
 # ```js retry ```
 
@@ -140,6 +146,7 @@ myAjax.retry().then(response => {
 
 
 
+<!-- @name    send -->
 
 # ```js send ```
 
@@ -168,6 +175,7 @@ myAjax.send().then(response => {
 
 
 
+<!-- @name    _defaultRequestSettings -->
 
 # ```js _defaultRequestSettings ```
 
@@ -182,6 +190,7 @@ Store the request settings to use
 
 
 
+<!-- @name    _currentRequestSettings -->
 
 # ```js _currentRequestSettings ```
 
@@ -196,6 +205,7 @@ Store the request settings to use
 
 
 
+<!-- @name    _requestsCount -->
 
 # ```js _requestsCount ```
 

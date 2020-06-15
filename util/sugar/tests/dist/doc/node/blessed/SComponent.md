@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.blessed -->
+<!-- @name    SComponent -->
 
 # ```js SComponent ```
 
@@ -34,6 +35,7 @@ class MyCoolComponent extends SComponent {
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -49,6 +51,7 @@ Constructor
 
 
 
+<!-- @name    attach -->
 
 # ```js attach ```
 
@@ -64,6 +67,7 @@ This method simply append the component to the generated screen
 
 
 
+<!-- @name    update -->
 
 # ```js update ```
 
@@ -81,6 +85,7 @@ This method simply update the screen if the component is a child of one
 
 
 
+<!-- @name    _settings -->
 
 # ```js _settings ```
 

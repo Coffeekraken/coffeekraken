@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.class -->
+<!-- @name    methodExists -->
 
 # ```js methodExists ```
 

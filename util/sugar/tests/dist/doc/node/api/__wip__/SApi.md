@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.api -->
+<!-- @name    SApi -->
 
 # ```js SApi ```
 
@@ -34,6 +35,7 @@ class MyCoolApi extends SApi {
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -63,6 +65,7 @@ An object of settings to configure this SApi instance. Here's the list of availa
 
 
 
+<!-- @name    get -->
 
 # ```js get ```
 
@@ -92,6 +95,7 @@ const response = await myApi.get('repositories', {
 
 
 
+<!-- @name    post -->
 
 # ```js post ```
 
@@ -121,6 +125,7 @@ const response = await myApi.post('repositories', {
 
 
 
+<!-- @name    delete -->
 
 # ```js delete ```
 
@@ -150,6 +155,7 @@ const response = await myApi.delete('repositories', {
 
 
 
+<!-- @name    head -->
 
 # ```js head ```
 
@@ -179,6 +185,7 @@ const response = await myApi.head('repositories', {
 
 
 
+<!-- @name    options -->
 
 # ```js options ```
 
@@ -208,6 +215,7 @@ const response = await myApi.options('repositories', {
 
 
 
+<!-- @name    put -->
 
 # ```js put ```
 
@@ -237,6 +245,7 @@ const response = await myApi.put('repositories', {
 
 
 
+<!-- @name    patch -->
 
 # ```js patch ```
 
@@ -266,6 +275,7 @@ const response = await myApi.patch('repositories', {
 
 
 
+<!-- @name    request -->
 
 # ```js request ```
 
@@ -296,6 +306,7 @@ configured the settings.auth {SAuth} class.
 
 
 
+<!-- @name    auth -->
 
 # ```js auth ```
 
@@ -317,6 +328,7 @@ const auth = await myApi.auth();
 
 
 
+<!-- @name    _getFromCache -->
 
 # ```js _getFromCache ```
 
@@ -336,6 +348,7 @@ This method check into the cache if the request uid exists
 
 
 
+<!-- @name    _setIntoCache -->
 
 # ```js _setIntoCache ```
 
@@ -359,6 +372,7 @@ This method save into the cache if the request response usinf the request uid as
 
 
 
+<!-- @name    _name -->
 
 # ```js _name ```
 
@@ -373,6 +387,7 @@ Store the instance name
 
 
 
+<!-- @name    _settings -->
 
 # ```js _settings ```
 

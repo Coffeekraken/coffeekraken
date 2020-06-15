@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.stream -->
+<!-- @name    SActionStreamAction -->
 
 # ```js SActionStreamAction ```
 ### Since: 2.0.0

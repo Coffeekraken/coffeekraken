@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.url -->
+<!-- @name    SUrl -->
 
 # ```js SUrl ```
 
@@ -58,6 +59,7 @@ console.log(urlWithSchema.schema);
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -80,6 +82,7 @@ Constructor
 
 
 
+<!-- @name    _parseSchema -->
 
 # ```js _parseSchema ```
 
@@ -102,6 +105,7 @@ Here's some examples:
 
 
 
+<!-- @name    toString -->
 
 # ```js toString ```
 
@@ -125,6 +129,7 @@ console.log(myUrl.toString()); // => https://google.com
 
 
 
+<!-- @name    _settings -->
 
 # ```js _settings ```
 
@@ -139,6 +144,7 @@ Store the settings mixed from the default ones and the passed ones
 
 
 
+<!-- @name    _originUrl -->
 
 # ```js _originUrl ```
 
@@ -153,6 +159,7 @@ The origin URL
 
 
 
+<!-- @name    _parsedSchema -->
 
 # ```js _parsedSchema ```
 
@@ -171,6 +178,7 @@ This object contain these properties:
 
 
 
+<!-- @name    schema -->
 
 # ```js schema ```
 
@@ -189,6 +197,7 @@ This object contain these properties:
 
 
 
+<!-- @name    protocol -->
 
 # ```js protocol ```
 
@@ -203,6 +212,7 @@ Get/set the protocol
 
 
 
+<!-- @name    slashes -->
 
 # ```js slashes ```
 
@@ -217,6 +227,7 @@ A boolean which indicates whether the protocol is followed by two forward slashe
 
 
 
+<!-- @name    auth -->
 
 # ```js auth ```
 
@@ -231,6 +242,7 @@ Authentication information portion (e.g. username:password).
 
 
 
+<!-- @name    username -->
 
 # ```js username ```
 
@@ -245,6 +257,7 @@ Get/set username of basic authentication
 
 
 
+<!-- @name    password -->
 
 # ```js password ```
 
@@ -259,6 +272,7 @@ Get/set password of basic authentication
 
 
 
+<!-- @name    host -->
 
 # ```js host ```
 
@@ -273,6 +287,7 @@ Get/set Host name with port number
 
 
 
+<!-- @name    hostname -->
 
 # ```js hostname ```
 
@@ -287,6 +302,7 @@ Get/set host name without port number
 
 
 
+<!-- @name    port -->
 
 # ```js port ```
 
@@ -301,6 +317,7 @@ Optional port number
 
 
 
+<!-- @name    pathname -->
 
 # ```js pathname ```
 
@@ -315,6 +332,7 @@ URL path
 
 
 
+<!-- @name    pathnameArray -->
 
 # ```js pathnameArray ```
 
@@ -329,6 +347,7 @@ URL path in array format
 
 
 
+<!-- @name    query -->
 
 # ```js query ```
 
@@ -343,6 +362,7 @@ Parsed object containing query string
 
 
 
+<!-- @name    queryString -->
 
 # ```js queryString ```
 
@@ -357,6 +377,7 @@ Origin query string from the URL
 
 
 
+<!-- @name    hash -->
 
 # ```js hash ```
 
@@ -371,6 +392,7 @@ The "fragment" portion of the URL including the pound-sign (#)
 
 
 
+<!-- @name    href -->
 
 # ```js href ```
 
@@ -385,6 +407,7 @@ The full URL
 
 
 
+<!-- @name    origin -->
 
 # ```js origin ```
 

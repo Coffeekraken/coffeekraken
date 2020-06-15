@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.color -->
+<!-- @name    rgba2hex -->
 
 # ```js rgba2hex ```
 

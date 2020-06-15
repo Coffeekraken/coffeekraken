@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.terminal -->
+<!-- @name    SSimpleApp -->
 
 # ```js SSimpleApp ```
 ### Since: 2.0.0
@@ -34,6 +35,7 @@ const app = new SSimpleApp('My Cool Application', {
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -49,6 +51,7 @@ Constructor
 
 
 
+<!-- @name    _layout -->
 
 # ```js _layout ```
 

@@ -1,6 +1,7 @@
 
 
 <!-- @namespace    sugar.js.crypt -->
+<!-- @name    aes -->
 
 # ```js aes ```
 

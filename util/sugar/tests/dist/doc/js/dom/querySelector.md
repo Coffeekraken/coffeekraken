@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.dom -->
+<!-- @name    querySelector -->
 
 # ```js querySelector ```
 
@@ -37,6 +38,7 @@ const elm = querySelector('.a-cool-css-selector', {
 
 
 
+<!-- @name    visible -->
 
 # ```js visible ```
 
@@ -51,6 +53,7 @@ const elm = querySelector('.a-cool-css-selector', {
 
 
 
+<!-- @name    inViewport -->
 
 # ```js inViewport ```
 
@@ -65,6 +68,7 @@ const elm = querySelector('.a-cool-css-selector', {
 
 
 
+<!-- @name    rootNode -->
 
 # ```js rootNode ```
 

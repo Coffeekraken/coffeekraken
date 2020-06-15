@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.cli -->
+<!-- @name    buildCommandLine -->
 
 # ```js buildCommandLine ```
 ### Since: 2.0.0

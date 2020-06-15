@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.cli -->
+<!-- @name    SCli -->
 
 # ```js SCli ```
 ### Since: 2.0.0
@@ -60,6 +61,7 @@ myCli.getCommandLine({
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -75,6 +77,7 @@ Constructor
 
 
 
+<!-- @name    _checkCliIntegrity -->
 
 # ```js _checkCliIntegrity ```
 
@@ -90,6 +93,7 @@ This method simply check that the extended SCli instance has the needed override
 
 
 
+<!-- @name    toString -->
 
 # ```js toString ```
 
@@ -111,6 +115,7 @@ This method allows you to pass an arguments object and return the builded comman
 
 
 
+<!-- @name    run -->
 
 # ```js run ```
 
@@ -153,6 +158,7 @@ myCli.run({
 
 
 
+<!-- @name    isRunning -->
 
 # ```js isRunning ```
 
@@ -168,6 +174,7 @@ This method simply return true or false if the child process is running or not
 
 
 
+<!-- @name    runWithOutput -->
 
 # ```js runWithOutput ```
 
@@ -185,6 +192,7 @@ Check the "run" method documentation for the the arguments and return values
 
 
 
+<!-- @name    kill -->
 
 # ```js kill ```
 
@@ -200,6 +208,7 @@ This method simply kill the running child process if their's one, otherwise it w
 
 
 
+<!-- @name    _runningProcessArgsObject -->
 
 # ```js _runningProcessArgsObject ```
 
@@ -222,6 +231,7 @@ the final argument object depending on the definitionObj and the passed object
 
 
 
+<!-- @name    log -->
 
 # ```js log ```
 
@@ -243,6 +253,7 @@ This method simulate a log coming fron the child process
 
 
 
+<!-- @name    _childProcess -->
 
 # ```js _childProcess ```
 
@@ -257,6 +268,7 @@ Store the spawned child process
 
 
 
+<!-- @name    _runningArgsObj -->
 
 # ```js _runningArgsObj ```
 
@@ -271,6 +283,7 @@ Store the currently running process arguments object
 
 
 
+<!-- @name    _settings -->
 
 # ```js _settings ```
 
@@ -285,6 +298,7 @@ Store the instance settings
 
 
 
+<!-- @name    commandString -->
 
 # get ```js commandString ```
 
@@ -299,6 +313,7 @@ Access the command string
 
 
 
+<!-- @name    definitionObj -->
 
 # get ```js definitionObj ```
 
@@ -313,6 +328,7 @@ Access the definition object
 
 
 
+<!-- @name    runningArgsObj -->
 
 # get ```js runningArgsObj ```
 

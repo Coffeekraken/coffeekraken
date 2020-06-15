@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.http -->
+<!-- @name    SRequestConfig -->
 
 # ```js SRequestConfig ```
 
@@ -32,6 +33,7 @@ const request = new SRequestConfig({
 
 
 
+<!-- @name    everyResponse -->
 
 # ```js everyResponse ```
 
@@ -49,6 +51,7 @@ Specify a function to call on every response. The parameters passed to the funct
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -70,6 +73,7 @@ Constructor
 
 
 
+<!-- @name    url -->
 
 # ```js url ```
 
@@ -84,6 +88,7 @@ The url to call
 
 
 
+<!-- @name    baseURL -->
 
 # ```js baseURL ```
 
@@ -99,6 +104,7 @@ If the "url" setting is absolute, this setting will don't have any impact on you
 
 
 
+<!-- @name    method -->
 
 # ```js method ```
 
@@ -113,6 +119,7 @@ The request method to use like GET, POST, DELETE or PUT
 
 
 
+<!-- @name    headers -->
 
 # ```js headers ```
 
@@ -135,6 +142,7 @@ Specify some headers to add to the request
 
 
 
+<!-- @name    params -->
 
 # ```js params ```
 
@@ -158,6 +166,7 @@ Must be a plain object or a URLSearchParams object
 
 
 
+<!-- @name    data -->
 
 # ```js data ```
 
@@ -181,6 +190,7 @@ This setting is available only for 'PUT', 'POST', and 'PATCH' requests...
 
 
 
+<!-- @name    timeout -->
 
 # ```js timeout ```
 
@@ -196,6 +206,7 @@ You can also specify this settings using string format like so: '2s', '1h', '4m'
 
 
 
+<!-- @name    sendInterval -->
 
 # ```js sendInterval ```
 
@@ -212,6 +223,7 @@ in string format like '34s', '1h', '10ms', '2d', etc...
 
 
 
+<!-- @name    sendCount -->
 
 # ```js sendCount ```
 
@@ -226,6 +238,7 @@ Set how many times the request has to be sent
 
 
 
+<!-- @name    responseType -->
 
 # ```js responseType ```
 

@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.easing -->
+<!-- @name    easeInQuint -->
 
 # ```js easeInQuint ```
 

@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.filter -->
+<!-- @name    SMotionblurSvgFilter -->
 
 # ```js SMotionblurSvgFilter ```
 
@@ -28,6 +29,7 @@ filter.applyTo(myCoolHTMLElement);
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -47,6 +49,7 @@ Constructor
 
 
 
+<!-- @name    applyTo -->
 
 # ```js applyTo ```
 
@@ -66,6 +69,7 @@ Apply the filter to element
 
 
 
+<!-- @name    unapplyFrom -->
 
 # ```js unapplyFrom ```
 
@@ -85,6 +89,7 @@ Remove the filter from element
 
 
 
+<!-- @name    _onMotionStart -->
 
 # ```js _onMotionStart ```
 
@@ -100,6 +105,7 @@ When the animation, transition or draging start
 
 
 
+<!-- @name    _onMotionStop -->
 
 # ```js _onMotionStop ```
 
@@ -115,6 +121,7 @@ Transition / animation end
 
 
 
+<!-- @name    _handleFilter -->
 
 # ```js _handleFilter ```
 
@@ -134,6 +141,7 @@ Handle filter
 
 
 
+<!-- @name    _setMotionBlur -->
 
 # ```js _setMotionBlur ```
 
@@ -149,6 +157,7 @@ Set motion blur
 
 
 
+<!-- @name    destroy -->
 
 # ```js destroy ```
 
@@ -166,6 +175,7 @@ Destroy the filter
 
 
 
+<!-- @name    amount -->
 
 # ```js amount ```
 
@@ -180,6 +190,7 @@ Store the amount of motion blur to apply
 
 
 
+<!-- @name    _isMoving -->
 
 # ```js _isMoving ```
 
@@ -194,6 +205,7 @@ Store the status of the animation
 
 
 
+<!-- @name    _startMoveTimeout -->
 
 # ```js _startMoveTimeout ```
 

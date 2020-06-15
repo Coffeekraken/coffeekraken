@@ -52,32 +52,41 @@ module.exports = async function docMap(rootDir, settings = {}) {
     const reg = /#\s?.*/g;
     const matches = content.match(reg);
 
-    flattenItemsObj[relativePath] = {
+    const nameReg = /.*\@name\s+([a-zA-Z0-9_-])+.*/g;
+    const nameLine = content.match(nameReg);
+    const name =
+      nameLine && nameLine[0]
+        ? nameLine[0]
+            .replace('<!--', '')
+            .replace('-->', '')
+            .replace(`@name`, '')
+            .trim()
+        : __getFilename(relativePath).replace(
+            '.' + __extension(relativePath),
+            ''
+          );
+    const namespace = item.line[0]
+      .replace('<!--', '')
+      .replace('-->', '')
+      .replace(`@${settings.tag}`, '')
+      .trim();
+
+    flattenItemsObj[namespace + '.' + name] = {
+      name,
+      namespace,
       path: relativePath,
       filename: __getFilename(relativePath),
       title:
         matches && matches.length
           ? matches[0].replace('#', '').replace('# ', '').trim()
-          : null,
-      namespace: item.line[0]
-        .replace('<!--', '')
-        .replace('-->', '')
-        .replace(`@${settings.tag}`, '')
-        .trim()
+          : null
     };
   });
 
   const itemsObj = {};
-  Object.keys(flattenItemsObj).forEach((path) => {
-    const filename = __getFilename(path);
-    const dotedPath = path
-      .replace(__getFilename(path), '')
-      .split('/')
-      .filter((i) => i !== '')
-      .join('.');
-    __ensureExists(itemsObj, dotedPath, {});
-    const obj = __get(itemsObj, dotedPath);
-    obj[filename] = flattenItemsObj[path];
+  Object.keys(flattenItemsObj).forEach((namespace) => {
+    const itemObj = flattenItemsObj[namespace];
+    __ensureExists(itemsObj, namespace, itemObj);
   });
 
   return {

@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.blessed.app -->
+<!-- @name    SApp -->
 
 # ```js SApp ```
 
@@ -34,6 +35,7 @@ class MyApp extends SApp {
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -49,6 +51,7 @@ Constructor
 
 
 
+<!-- @name    config -->
 
 # ```js config ```
 
@@ -68,6 +71,7 @@ This methods allows you to get some configuration through the setted SConfig ins
 
 
 
+<!-- @name    goTo -->
 
 # ```js goTo ```
 
@@ -93,6 +97,7 @@ myCoolApp.goTo('/something/cool');
 
 
 
+<!-- @name    back -->
 
 # ```js back ```
 
@@ -108,6 +113,7 @@ This method simply go back 1 url in the history
 
 
 
+<!-- @name    _goTo -->
 
 # ```js _goTo ```
 
@@ -127,6 +133,7 @@ This is the internal version of the goTo method. It will take care of actualy ch
 
 
 
+<!-- @name    _initCommands -->
 
 # ```js _initCommands ```
 
@@ -143,6 +150,7 @@ and instanciate them to be available through the app
 
 
 
+<!-- @name    _getProcessInstance -->
 
 # ```js _getProcessInstance ```
 
@@ -166,6 +174,7 @@ This method take care of retreiving the SProcess instance linked to a certain pa
 
 
 
+<!-- @name    exec -->
 
 # ```js exec ```
 
@@ -192,6 +201,7 @@ myCoolApp.exec('ls -la');
 
 
 
+<!-- @name    process -->
 
 # ```js process ```
 
@@ -217,6 +227,7 @@ myCoolApp.process(myCoolProcess);
 
 
 
+<!-- @name    append -->
 
 # ```js append ```
 
@@ -238,6 +249,7 @@ This method simply append some content inside the contentBox
 
 
 
+<!-- @name    update -->
 
 # ```js update ```
 
@@ -255,6 +267,7 @@ This method simply draw the UI on the screen
 
 
 
+<!-- @name    _historyArray -->
 
 # ```js _historyArray ```
 
@@ -269,6 +282,7 @@ Store the urls object history
 
 
 
+<!-- @name    _pagesStack -->
 
 # ```js _pagesStack ```
 
@@ -284,6 +298,7 @@ page change...
 
 
 
+<!-- @name    _commandsStack -->
 
 # ```js _commandsStack ```
 
@@ -298,6 +313,7 @@ Store the instanciated commands specified in the config
 
 
 
+<!-- @name    currentUrlObj -->
 
 # get ```js currentUrlObj ```
 
@@ -312,6 +328,7 @@ Access the current url object.
 
 
 
+<!-- @name    previousUrlObj -->
 
 # get ```js previousUrlObj ```
 

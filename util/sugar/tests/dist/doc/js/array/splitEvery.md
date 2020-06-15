@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.array -->
+<!-- @name    splitEvery -->
 
 # ```js splitEvery ```
 

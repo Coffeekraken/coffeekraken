@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.dom -->
+<!-- @name    querySelectorLive -->
 
 # ```js querySelectorLive ```
 
@@ -38,6 +39,7 @@ querySelectorLive('.my-cool-item', (node, clearFn) => {
 
 
 
+<!-- @name    settings.rootNode -->
 
 # ```js settings.rootNode ```
 
@@ -52,6 +54,7 @@ querySelectorLive('.my-cool-item', (node, clearFn) => {
 
 
 
+<!-- @name    settings.once -->
 
 # ```js settings.once ```
 

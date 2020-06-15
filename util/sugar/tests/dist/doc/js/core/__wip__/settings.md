@@ -1,6 +1,7 @@
 
 
 <!-- @namespace    sugar.js.core -->
+<!-- @name    settings -->
 
 # ```js settings ```
 

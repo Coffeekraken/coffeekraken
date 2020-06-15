@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.dev -->
+<!-- @name    beautifyErrors -->
 
 # ```js beautifyErrors ```
 

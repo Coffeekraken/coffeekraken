@@ -1,7 +1,7 @@
 const __sugarConfig = require('../../config/sugar');
 const __deepMerge = require('../../object/deepMerge');
 const __expressServer = require('../express/express');
-const __axios = require('axios');
+const __bladePhp = require('../../template/bladePhp');
 
 /**
  * @name                express
@@ -32,6 +32,15 @@ module.exports = async (args = {}) => {
 
   const server = __expressServer(args.express);
 
+  // generate menus
+  const menuStack = {};
+  Object.keys(settings.menu).forEach((menuName) => {
+    // generate the menus
+    menuStack[menuName] = settings.menu[menuName].generator();
+  });
+
+  console.log(menuStack);
+
   // loop on pages
   Object.keys(settings.pages).forEach((pageName) => {
     const pageSettings = settings.pages[pageName];
@@ -41,27 +50,26 @@ module.exports = async (args = {}) => {
         const response = await pageSettings.handler(req, server);
 
         // handle response
-        const page = response.page || 'default';
+        const view = response.page || 'pages.default';
         const content = response.content || '404';
         const title = response.title || 'Welcome';
 
-        // const renderedView = __request({
-        //   url: `http://${bladeSettings.server.hostname}:${bladeSettings.server.port}`,
-        //   method: 'post'
-        //   // data: content
-        // }).catch((e) => {
-        //   console.log(e);
-        // });
-        const result = await __axios.post(
-          `http://${bladeSettings.server.hostname}:${bladeSettings.server.port}/pages/${page}?rootDir=${viewsSettings.rootDir}&cacheDir=${viewsSettings.cacheDir}`,
-          {
-            content,
-            title,
-            settings: baseSettings
-          }
-        );
+        // render the view
+        const result = await __bladePhp(view, {
+          title,
+          content
+        });
 
-        res.send(result.data);
+        // const result = await __axios.post(
+        //   `http://${bladeSettings.server.hostname}:${bladeSettings.server.port}/pages/${page}?rootDir=${viewsSettings.rootDir}&cacheDir=${viewsSettings.cacheDir}`,
+        //   {
+        //     content,
+        //     title,
+        //     settings: baseSettings
+        //   }
+        // );
+
+        res.send(result);
       } catch (e) {
         console.log(e);
         // res.redirect('/404');

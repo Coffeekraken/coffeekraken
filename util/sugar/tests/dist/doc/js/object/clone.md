@@ -2,6 +2,7 @@
 
 
 
+<!-- @name    clone -->
 
 # ```js clone ```
 

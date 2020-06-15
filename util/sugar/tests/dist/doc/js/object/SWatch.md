@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.object -->
+<!-- @name    SWatch -->
 
 # ```js SWatch ```
 
@@ -39,6 +40,7 @@ myObject.title = 'Hello Universe';
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -54,6 +56,7 @@ Constructor
 
 
 
+<!-- @name    watch -->
 
 # ```js watch ```
 
@@ -90,6 +93,7 @@ myWatch.watch('*.*', {
 
 
 
+<!-- @name    unwatch -->
 
 # ```js unwatch ```
 
@@ -120,6 +124,7 @@ myWatch.unwatch(watchId);
 
 
 
+<!-- @name    _watchStack -->
 
 # ```js _watchStack ```
 

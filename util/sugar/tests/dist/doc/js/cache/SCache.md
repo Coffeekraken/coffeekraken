@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.cache -->
+<!-- @name    SCache -->
 
 # ```js SCache ```
 
@@ -32,6 +33,7 @@ cache.set('myCoolCacheItem', someData);
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -59,6 +61,7 @@ The settings for the SCache instance
 
 
 
+<!-- @name    get -->
 
 # ```js get ```
 
@@ -86,6 +89,7 @@ const myValue = myCache.get('coolValue');
 
 
 
+<!-- @name    set -->
 
 # ```js set ```
 
@@ -119,6 +123,7 @@ const myValue = myCache.set('coolValue', { hello: 'world' }, {
 
 
 
+<!-- @name    delete -->
 
 # ```js delete ```
 
@@ -144,6 +149,7 @@ await myCache.delete('coco');
 
 
 
+<!-- @name    clear -->
 
 # ```js clear ```
 
@@ -165,6 +171,7 @@ await myCache.clear();
 
 
 
+<!-- @name    _parse -->
 
 # ```js _parse ```
 
@@ -185,6 +192,7 @@ You can hook how this method will act by specify the "settings.parse" property t
 
 
 
+<!-- @name    _stringify -->
 
 # ```js _stringify ```
 
@@ -207,6 +215,7 @@ You can hook how this method will act by specify the "settings.stringify" proper
 
 
 
+<!-- @name    _name -->
 
 # ```js _name ```
 
@@ -221,6 +230,7 @@ Store the cache name
 
 
 
+<!-- @name    _settings -->
 
 # ```js _settings ```
 
@@ -235,6 +245,7 @@ Store the default settings of the SCache instance
 
 
 
+<!-- @name    _defaultAdaptersPaths -->
 
 # ```js _defaultAdaptersPaths ```
 
@@ -249,6 +260,7 @@ List all the default adapters and their path
 
 
 
+<!-- @name    _adapter -->
 
 # ```js _adapter ```
 
@@ -263,6 +275,7 @@ Store this current instance adapter
 
 
 
+<!-- @name    adapter -->
 
 # ```js adapter ```
 

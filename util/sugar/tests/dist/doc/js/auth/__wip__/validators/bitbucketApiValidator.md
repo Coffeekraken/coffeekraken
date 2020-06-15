@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.auth -->
+<!-- @name    bitbucketApiValidator -->
 
 # ```js bitbucketApiValidator ```
 

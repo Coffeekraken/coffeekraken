@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.github -->
+<!-- @name    getAuthToken -->
 
 # ```js getAuthToken ```
 

@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.keyboard -->
+<!-- @name    hotkey -->
 
 # ```js hotkey ```
 

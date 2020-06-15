@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.terminal -->
+<!-- @name    list -->
 
 # ```js list ```
 
@@ -33,6 +34,7 @@ const myList = new STerminalList(['Hello','World'], {
 
 
 
+<!-- @name    _listenKeyPress -->
 
 # ```js _listenKeyPress ```
 
@@ -48,6 +50,7 @@ Listen for keys press like UP, DOWN, etc...
 
 
 
+<!-- @name    destroy -->
 
 # ```js destroy ```
 
@@ -63,6 +66,7 @@ Destroy the list component gracefully
 
 
 
+<!-- @name    get -->
 
 # ```js get ```
 
@@ -85,6 +89,7 @@ Get the list back in String or Array format depending on the passed settings
 
 
 
+<!-- @name    events -->
 
 # ```js events ```
 

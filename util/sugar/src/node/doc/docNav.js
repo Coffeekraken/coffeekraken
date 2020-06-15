@@ -3,11 +3,12 @@ const __SNav = require('../nav/SNav');
 const __SNavItem = require('../nav/SNavItem');
 const __isJson = require('../is/json');
 const __isPath = require('../is/path');
-const __deepMap = require('../object/deepMap');
-const __getFilename = require('../fs/filename');
 const __ensureExists = require('../object/ensureExists');
 const __get = require('../object/get');
+const __set = require('../object/set');
 const __paramCase = require('../string/paramCase');
+const __deepMerge = require('../object/deepMerge');
+const __sugarConfig = require('../config/sugar');
 
 /**
  * @name              docNav
@@ -17,8 +18,9 @@ const __paramCase = require('../string/paramCase');
  * This function take as parameter a docMap JSON data structure and convert it to an
  * SNav instance that you can convert then into markdown, html, etc...
  *
- * @param       {Object}          docMap             Either directly a docMap JSON or a docMap.json path
+ * @param       {Object}          [docMap=`${__sugarConfig('doc.rootDir')}/docMap.json`]             Either directly a docMap JSON or a docMap.json path
  * @param       {Object}          [settings={}]     A settings object that will be passed to the SNav constructor
+ * - url ([path]) {String}: Specify the url you want in each SNavItem. The token "[path]" will be replaced by the actual doc file path
  * @return      {SNav}                              An SNav instance representing the document navigation
  *
  * @example       js
@@ -28,92 +30,61 @@ const __paramCase = require('../string/paramCase');
  * @since       2.0.0
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function docNav(docMap) {
+module.exports = function docNav(
+  docMap = `${__sugarConfig('doc.rootDir')}/docMap.json`,
+  settings = {}
+) {
   if (!__isJson(docMap) && !__isPath(docMap, true)) {
     throw new Error(
       `You try to generate a docNav by passing "${docMap}" as parameter but this parameter MUST be either a valid docMap JSON or a valid docMap.json file path...`
     );
   }
+
+  settings = __deepMerge(
+    {
+      url: '[path]'
+    },
+    settings
+  );
+
   let json = docMap;
   if (__isPath(docMap, true)) {
     json = JSON.parse(__fs.readFileSync(docMap, 'utf8'));
   }
 
-  let stacks = [];
-  Object.keys(json.flat).forEach((path) => {
-    const item = json.flat[path];
-    const dotedPath = path
-      .replace(item.filename, '')
-      .split('/')
-      .filter((t) => t !== '')
-      .join('.');
-    stacks.push(dotedPath);
-  });
-  stacks = [...new Set(stacks)];
-
-  let navItems = {};
-  stacks.forEach((stackPath) => {
-    __ensureExists(navItems, stackPath, []);
-  });
+  const navObj = {};
 
   Object.keys(json.flat).forEach((path) => {
     const item = json.flat[path];
-    const dotedPath = path
-      .replace(item.filename, '')
-      .split('/')
-      .filter((t) => t !== '')
-      .join('.');
-    const array = __get(navItems, dotedPath);
-    if (!Array.isArray(array)) return;
-
-    array.push(
-      new __SNavItem(__paramCase(item.filename), item.title, item.path, {})
-    );
+    __ensureExists(navObj, `${item.namespace}.${item.name}`, null);
   });
 
-  // navItems = __deepMap(navItems, (value, prop, fullProp) => {
-  //   if (Array.isArray(value)) {
-  //     return new __SNav(fullProp, prop, value);
-  //   }
+  let finalNavObj = new __SNav('.', '.', []);
 
-  //   if (typeof value === 'object') {
-  //     return new __SNav(fullProp, prop, )
-  //     console.log(Object.keys(value));
-  //   }
-
-  //   return value;
-
-  //   // return new __SNav(fullProp, prop, [value]);
-  // });
-
-  let currentItem = navItems;
-  const rootNav = new __SNav('doc', 'Doc', []);
-  function deep(stack, sNav) {
-    if (!Array.isArray(stack) && typeof stack === 'object') {
-      Object.keys(stack).forEach((key) => {});
+  function deep(currentNavInstance, dotPath = '') {
+    // get nav items in the navObj
+    const navItem = __get(navObj, dotPath);
+    if (navItem === null) {
+      const docMapItem = json.flat[dotPath];
+      const sNavItem = new __SNavItem(
+        __paramCase(dotPath),
+        docMapItem.title,
+        settings.url.replace('[path]', docMapItem.path)
+      );
+      currentNavInstance.addItem(sNavItem);
+    } else if (typeof navItem === 'object') {
+      Object.keys(navItem).forEach((navKey) => {
+        let newDotKey = dotPath.split('.').filter((i) => i !== '');
+        newDotKey = [...newDotKey, navKey].join('.');
+        const navInstance = new __SNav(__paramCase(newDotKey), newDotKey, []);
+        currentNavInstance.addItem(navInstance);
+        deep(navInstance, newDotKey);
+      });
     }
-
-    Object.keys(stack).forEach((key) => {
-      const item = stack[key];
-
-      if (!Array.isArray(item) && typeof item === 'object') {
-        const nav = new __SNav(key, key, []);
-      }
-
-      if (!Array.isArray(item) && typeof item === 'object') {
-        return deep(item);
-      } else if (Array.isArray(item)) {
-        return new __SNav(key, item.title);
-      }
-      console.log(key);
-    });
   }
-  deep(currentItem, rootNav);
+  deep(finalNavObj, '');
 
-  // console.log(navItems.node.toMarkdown());
+  // console.log(finalNavObj.toHtml());
 
-  // __deepMap(json, (value, prop, fullProp) => {
-  //   console.log(fullProp);
-  //   return value;
-  // });
+  return finalNavObj;
 };

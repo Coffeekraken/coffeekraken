@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.config -->
+<!-- @name    config -->
 
 # ```js config ```
 

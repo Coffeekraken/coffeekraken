@@ -1,6 +1,7 @@
 
 
 <!-- @namespace    sugar.js.crypt -->
+<!-- @name    md5 -->
 
 # ```js md5 ```
 

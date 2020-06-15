@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.object -->
+<!-- @name    uid -->
 
 # ```js uid ```
 

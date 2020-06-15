@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.color -->
+<!-- @name    SColor -->
 
 # ```js SColor ```
 ### Since: 2.0.0
@@ -51,6 +52,7 @@ console.log(lighterColor.toRgbaString());
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -66,6 +68,7 @@ Constructor
 
 
 
+<!-- @name    getColor -->
 
 # ```js getColor ```
 

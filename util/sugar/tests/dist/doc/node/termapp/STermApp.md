@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.termapp -->
+<!-- @name    STermApp -->
 
 # ```js STermApp ```
 ### Since: 2.0.0
@@ -26,6 +27,7 @@ const myApp = new STermApp();
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 

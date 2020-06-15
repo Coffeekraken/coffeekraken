@@ -5,32 +5,48 @@ module.exports = (__docMap) => {
 
       expect(docMap).toEqual({
         flat: {
-          'somethinf.md': {
+          'sugar.cool.thing.coco': {
             path: 'somethinf.md',
+            name: 'coco',
             filename: 'somethinf.md',
             title: 'Something',
             namespace: 'sugar.cool.thing'
           },
-          'child/other.md': {
+          'something.cool.and.child.other': {
             path: 'child/other.md',
+            name: 'other',
             filename: 'other.md',
             title: 'Other thing',
             namespace: 'something.cool.and.child'
           }
         },
         tree: {
-          'somethinf.md': {
-            path: 'somethinf.md',
-            filename: 'somethinf.md',
-            title: 'Something',
-            namespace: 'sugar.cool.thing'
+          something: {
+            cool: {
+              and: {
+                child: {
+                  other: {
+                    filename: 'other.md',
+                    name: 'other',
+                    namespace: 'something.cool.and.child',
+                    path: 'child/other.md',
+                    title: 'Other thing'
+                  }
+                }
+              }
+            }
           },
-          child: {
-            'other.md': {
-              filename: 'other.md',
-              namespace: 'something.cool.and.child',
-              path: 'child/other.md',
-              title: 'Other thing'
+          sugar: {
+            cool: {
+              thing: {
+                coco: {
+                  path: 'somethinf.md',
+                  name: 'coco',
+                  filename: 'somethinf.md',
+                  title: 'Something',
+                  namespace: 'sugar.cool.thing'
+                }
+              }
             }
           }
         }

@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.auth.adapters -->
+<!-- @name    SAuthAdapter -->
 
 # ```js SAuthAdapter ```
 
@@ -30,6 +31,7 @@ class MyCoolAdapter extends SAuthAdapter {
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -45,6 +47,7 @@ Construct the SAuthAdapter instance
 
 
 
+<!-- @name    ask -->
 
 # ```js ask ```
 
@@ -78,6 +81,7 @@ const authInfos = await myAuth.ask({
 
 
 
+<!-- @name    _supportedAuthTypes -->
 
 # ```js _supportedAuthTypes ```
 
@@ -92,6 +96,7 @@ Store the supported auth types by the current auth adapter
 
 
 
+<!-- @name    supportedAuthTypes -->
 
 # ```js supportedAuthTypes ```
 

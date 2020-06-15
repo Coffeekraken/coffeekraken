@@ -1,6 +1,7 @@
 
 
 <!-- @namespace    sugar.node.server -->
+<!-- @name    SExpressServerCommand -->
 
 # ```js SExpressServerCommand ```
 ### Since: 2.0.0
@@ -23,6 +24,7 @@ myCommand.run();
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 ### Since: 2.0.0

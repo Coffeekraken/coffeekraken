@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.function -->
+<!-- @name    sleep -->
 
 # ```js sleep ```
 

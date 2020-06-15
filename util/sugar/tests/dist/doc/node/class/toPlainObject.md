@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.class -->
+<!-- @name    toPlainObject -->
 
 # ```js toPlainObject ```
 

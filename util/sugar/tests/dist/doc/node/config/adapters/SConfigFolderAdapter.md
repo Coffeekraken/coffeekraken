@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.config.adapters -->
+<!-- @name    SConfigFolderAdapter -->
 
 # ```js SConfigFolderAdapter ```
 

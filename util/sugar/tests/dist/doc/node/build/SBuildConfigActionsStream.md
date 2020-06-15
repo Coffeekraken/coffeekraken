@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.build -->
+<!-- @name    SBuildConfigActionsStream -->
 
 # ```js SBuildConfigActionsStream ```
 ### Since: 2.0.0
@@ -36,6 +37,7 @@ myStream.start({
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 

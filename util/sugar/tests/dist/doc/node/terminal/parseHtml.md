@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.terminal -->
+<!-- @name    parseHtml -->
 
 # ```js parseHtml ```
 

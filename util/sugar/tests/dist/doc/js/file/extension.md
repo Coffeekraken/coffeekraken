@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.file -->
+<!-- @name    extension -->
 
 # ```js extension ```
 

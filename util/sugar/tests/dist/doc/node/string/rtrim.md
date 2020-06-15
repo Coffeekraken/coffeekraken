@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.string -->
+<!-- @name    rtrim -->
 
 # ```js rtrim ```
 

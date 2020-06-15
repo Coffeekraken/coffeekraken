@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.docblock -->
+<!-- @name    DockblockParser -->
 
 # ```js DockblockParser ```
 ### Since: 2.0.0
@@ -29,6 +30,7 @@ new SDocblockParser({
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -49,6 +51,7 @@ Constructor
 
 
 
+<!-- @name    parse -->
 
 # ```js parse ```
 
@@ -73,6 +76,7 @@ and get back the object version of it
 
 
 
+<!-- @name    _settings -->
 
 # ```js _settings ```
 
@@ -87,6 +91,7 @@ Store this instance settings
 
 
 
+<!-- @name    tagsMap -->
 
 # Static ```js tagsMap ```
 

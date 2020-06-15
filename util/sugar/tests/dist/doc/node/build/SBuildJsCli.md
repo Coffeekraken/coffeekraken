@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.build -->
+<!-- @name    SBuildJsCli -->
 
 # ```js SBuildJsCli ```
 ### Since: 2.0.0
@@ -19,6 +20,7 @@ This class represent the build JS cli
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -36,6 +38,7 @@ Constructor
 
 
 
+<!-- @name    command -->
 
 # Static ```js command ```
 
@@ -50,6 +53,7 @@ Store the command string
 
 
 
+<!-- @name    definitionObj -->
 
 # Static ```js definitionObj ```
 

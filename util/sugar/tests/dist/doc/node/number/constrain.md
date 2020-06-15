@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.number -->
+<!-- @name    constrain -->
 
 # ```js constrain ```
 

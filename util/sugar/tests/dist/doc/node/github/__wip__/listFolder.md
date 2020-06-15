@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.github -->
+<!-- @name    listFolder -->
 
 # ```js listFolder ```
 

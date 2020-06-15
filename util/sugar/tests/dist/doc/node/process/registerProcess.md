@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.process -->
+<!-- @name    registerProcess -->
 
 # ```js registerProcess ```
 ### Since: 2.0.0

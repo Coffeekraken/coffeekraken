@@ -1,6 +1,7 @@
 
 
 <!-- @namespace    sugar.js.crypt -->
+<!-- @name    base64 -->
 
 # ```js base64 ```
 

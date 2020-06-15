@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.geom.2d -->
+<!-- @name    circleConstrain -->
 
 # ```js circleConstrain ```
 

@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.server -->
+<!-- @name    SPhpServerCli -->
 
 # ```js SPhpServerCli ```
 ### Since: 2.0.0
@@ -19,6 +20,7 @@ This class represent the PHP cli
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -34,6 +36,7 @@ Constructor
 
 
 
+<!-- @name    run -->
 
 # ```js run ```
 
@@ -52,6 +55,7 @@ For arguments documentation, check the SCli class.
 
 
 
+<!-- @name    command -->
 
 # Static ```js command ```
 
@@ -66,6 +70,7 @@ Store the command string
 
 
 
+<!-- @name    definitionObj -->
 
 # Static ```js definitionObj ```
 

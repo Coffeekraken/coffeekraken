@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.blessed.input -->
+<!-- @name    SInput -->
 
 # ```js SInput ```
 
@@ -35,6 +36,7 @@ new SInput({});
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 

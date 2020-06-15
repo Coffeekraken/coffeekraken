@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.log -->
+<!-- @name    setupSlackTransport -->
 
 # ```js setupSlackTransport ```
 

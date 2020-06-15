@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.filter -->
+<!-- @name    SGooeySvgFilter -->
 
 # ```js SGooeySvgFilter ```
 
@@ -37,6 +38,7 @@ myFilter.applyTo(myCoolHTMLElement);
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -56,6 +58,7 @@ Constructor
 
 
 
+<!-- @name    applyTo -->
 
 # ```js applyTo ```
 
@@ -75,6 +78,7 @@ Apply the filter to an element
 
 
 
+<!-- @name    unapplyFrom -->
 
 # ```js unapplyFrom ```
 
@@ -94,6 +98,7 @@ Unapply from
 
 
 
+<!-- @name    _insertFilter -->
 
 # ```js _insertFilter ```
 
@@ -109,6 +114,7 @@ Insert the filter
 
 
 
+<!-- @name    destroy -->
 
 # ```js destroy ```
 
@@ -124,6 +130,7 @@ Destroy the filter
 
 
 
+<!-- @name    _injectFiltersContainer -->
 
 # Static ```js _injectFiltersContainer ```
 

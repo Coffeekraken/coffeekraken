@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.express.controllers.AppControllers -->
+<!-- @name    config -->
 
 # ```js config ```
 
@@ -23,6 +24,7 @@ Return the whole configuration object or the specified value requested using the
 
 
 <!-- @namespace    sugar.node.express.controllers.AppControllers -->
+<!-- @name    meta -->
 
 # ```js meta ```
 
@@ -44,6 +46,7 @@ Return the application meta data
 
 
 <!-- @namespace    sugar.node.express.controllers.AppControllers -->
+<!-- @name    js -->
 
 # ```js js ```
 

@@ -1,6 +1,7 @@
 
 
 <!-- @namespace    sugar.js.crypt -->
+<!-- @name    object -->
 
 # ```js object ```
 

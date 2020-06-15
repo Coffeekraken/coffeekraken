@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.terminal -->
+<!-- @name    STerminalScreen -->
 
 # ```js STerminalScreen ```
 
@@ -34,6 +35,7 @@ myScreen.render();
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -54,6 +56,7 @@ Construct the STerminalScreen instance which inherit from the blessed.screen sta
 
 
 
+<!-- @name    append -->
 
 # ```js append ```
 
@@ -69,6 +72,7 @@ Append an element to the screen
 
 
 
+<!-- @name    prepend -->
 
 # ```js prepend ```
 

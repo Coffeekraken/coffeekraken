@@ -1,6 +1,7 @@
 
 
 <!-- @namespace    sugar.js.core -->
+<!-- @name    activeSpace -->
 
 # ```js activeSpace ```
 ### Since: 2.0.0

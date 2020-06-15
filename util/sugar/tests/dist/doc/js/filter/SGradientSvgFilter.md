@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.filter -->
+<!-- @name    SGradientSvgFilter -->
 
 # ```js SGradientSvgFilter ```
 
@@ -30,6 +31,7 @@ filter.applyTo(myCoolHTMLElement);
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -45,6 +47,7 @@ Constructor
 
 
 
+<!-- @name    linear -->
 
 # ```js linear ```
 
@@ -66,6 +69,7 @@ Linear gradient
 
 
 
+<!-- @name    radial -->
 
 # ```js radial ```
 
@@ -96,6 +100,7 @@ myFilter.radial(['#ff0000', '#00ffff], {
 
 
 
+<!-- @name    applyTo -->
 
 # ```js applyTo ```
 
@@ -115,6 +120,7 @@ Apply the filter to element
 
 
 
+<!-- @name    unapplyFrom -->
 
 # ```js unapplyFrom ```
 
@@ -134,6 +140,7 @@ Remove the filter from element
 
 
 
+<!-- @name    _onWindowResize -->
 
 # ```js _onWindowResize ```
 
@@ -153,6 +160,7 @@ When the window is resizing
 
 
 
+<!-- @name    _setImageSize -->
 
 # ```js _setImageSize ```
 

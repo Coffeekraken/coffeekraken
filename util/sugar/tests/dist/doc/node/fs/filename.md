@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.fs -->
+<!-- @name    filename -->
 
 # ```js filename ```
 

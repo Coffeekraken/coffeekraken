@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.cli -->
+<!-- @name    argsToObject -->
 
 # ```js argsToObject ```
 ### Since: 2.0.0

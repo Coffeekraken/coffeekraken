@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.terminal -->
+<!-- @name    SInput -->
 
 # ```js SInput ```
 
@@ -33,6 +34,7 @@ myForm.append(myInput);
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -52,6 +54,7 @@ Construct the STerminalScreen instance which inherit from the blessed.screen sta
 
 
 
+<!-- @name    setFormStyle -->
 
 # ```js setFormStyle ```
 
@@ -71,6 +74,7 @@ Set the form style. Normaly this is called automatically when you append/prepend
 
 
 
+<!-- @name    _SInputenKeyPress -->
 
 # ```js _SInputenKeyPress ```
 
@@ -86,6 +90,7 @@ Listen for keys press like UP, DOWN, etc...
 
 
 
+<!-- @name    get -->
 
 # ```js get ```
 

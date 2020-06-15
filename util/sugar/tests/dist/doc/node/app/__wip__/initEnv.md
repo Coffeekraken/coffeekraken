@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.app -->
+<!-- @name    initEnv -->
 
 # ```js initEnv ```
 

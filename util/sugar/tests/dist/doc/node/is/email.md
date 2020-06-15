@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.is -->
+<!-- @name    isEmail -->
 
 # ```js isEmail ```
 

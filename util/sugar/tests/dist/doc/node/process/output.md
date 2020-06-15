@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.process -->
+<!-- @name    output -->
 
 # ```js output ```
 ### Since: 2.0.0

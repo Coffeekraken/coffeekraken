@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.terminal -->
+<!-- @name    SForm -->
 
 # ```js SForm ```
 
@@ -34,6 +35,7 @@ myScreen.append(myForm);
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -53,6 +55,7 @@ Construct the SForm instance which inherit from the blessed.form stack
 
 
 
+<!-- @name    setStyle -->
 
 # ```js setStyle ```
 
@@ -75,6 +78,7 @@ This works only with the classes of type SSomething of the terminal scope.
 
 
 
+<!-- @name    style -->
 
 # ```js style ```
 

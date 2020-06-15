@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.server -->
+<!-- @name    SBladePhpServerCli -->
 
 # ```js SBladePhpServerCli ```
 ### Since: 2.0.0
@@ -19,6 +20,7 @@ This class represent the Blade PHP cli
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -34,6 +36,7 @@ Constructor
 
 
 
+<!-- @name    run -->
 
 # ```js run ```
 
@@ -52,6 +55,7 @@ For arguments documentation, check the SCli class.
 
 
 
+<!-- @name    definitionObj -->
 
 # Static ```js definitionObj ```
 

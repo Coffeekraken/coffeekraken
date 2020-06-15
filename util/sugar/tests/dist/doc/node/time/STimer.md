@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.time -->
+<!-- @name    STimer -->
 
 # ```js STimer ```
 ### Since: 2.0.0

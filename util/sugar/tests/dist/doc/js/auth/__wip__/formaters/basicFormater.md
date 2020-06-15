@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.auth.formaters -->
+<!-- @name    basicFormater -->
 
 # ```js basicFormater ```
 

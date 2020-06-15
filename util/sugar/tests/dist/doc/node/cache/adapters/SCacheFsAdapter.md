@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.fs.cacheAdapters -->
+<!-- @name    SCacheFsAdapter -->
 
 # ```js SCacheFsAdapter ```
 
@@ -30,6 +31,7 @@ const cache = new SCache({
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -49,6 +51,7 @@ Construct the SCacheFsAdapter instance with the settings passed in object format
 
 
 
+<!-- @name    set -->
 
 # ```js set ```
 
@@ -80,6 +83,7 @@ await myCache.set('myCoolItem', { hello: 'world' }, {
 
 
 
+<!-- @name    get -->
 
 # ```js get ```
 
@@ -105,6 +109,7 @@ await myCache.get('myCoolItem');
 
 
 
+<!-- @name    delete -->
 
 # ```js delete ```
 
@@ -130,6 +135,7 @@ await myCache.delete('myCoolItem');
 
 
 
+<!-- @name    clear -->
 
 # ```js clear ```
 

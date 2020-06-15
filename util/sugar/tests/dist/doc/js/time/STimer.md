@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.time -->
+<!-- @name    STimer -->
 
 # ```js STimer ```
 ### Since: 2.0.0
@@ -54,6 +55,7 @@ myTimer.start()
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -86,6 +88,7 @@ timer.start();
 
 
 
+<!-- @name    _tick -->
 
 # ```js _tick ```
 
@@ -101,6 +104,7 @@ Internal tick function
 
 
 
+<!-- @name    reset -->
 
 # ```js reset ```
 
@@ -120,6 +124,7 @@ Reset the timer
 
 
 
+<!-- @name    start -->
 
 # ```js start ```
 
@@ -139,6 +144,7 @@ Start the timer
 
 
 
+<!-- @name    pause -->
 
 # ```js pause ```
 
@@ -154,6 +160,7 @@ Pause the timer
 
 
 
+<!-- @name    stop -->
 
 # ```js stop ```
 
@@ -169,6 +176,7 @@ Stop the timer
 
 
 
+<!-- @name    destroy -->
 
 # ```js destroy ```
 
@@ -184,6 +192,7 @@ Destroy the timer
 
 
 
+<!-- @name    isStarted -->
 
 # ```js isStarted ```
 
@@ -201,6 +210,7 @@ Check if the timer is started
 
 
 
+<!-- @name    _duration -->
 
 # ```js _duration ```
 
@@ -215,6 +225,7 @@ Store the timer duration wanted
 
 
 
+<!-- @name    _remaining -->
 
 # ```js _remaining ```
 
@@ -229,6 +240,7 @@ Store the remaining time
 
 
 
+<!-- @name    _tickCount -->
 
 # ```js _tickCount ```
 
@@ -243,6 +255,7 @@ How many ticks wanted during the timeout
 
 
 
+<!-- @name    _tickInterval -->
 
 # ```js _tickInterval ```
 
@@ -257,6 +270,7 @@ Computed value depending on the settings
 
 
 
+<!-- @name    _tickSetTimeout -->
 
 # ```js _tickSetTimeout ```
 
@@ -271,6 +285,7 @@ Store the setInterval instance
 
 
 
+<!-- @name    _startTime -->
 
 # ```js _startTime ```
 
@@ -285,6 +300,7 @@ Store the time when the timer is started
 
 
 
+<!-- @name    _tickTime -->
 
 # ```js _tickTime ```
 
@@ -299,6 +315,7 @@ Store the last tick time
 
 
 
+<!-- @name    _pauseTime -->
 
 # ```js _pauseTime ```
 
@@ -313,6 +330,7 @@ Store the pause time
 
 
 
+<!-- @name    remaing -->
 
 # get ```js remaing ```
 
@@ -327,6 +345,7 @@ Get the remaining time in ms
 
 
 
+<!-- @name    duration -->
 
 # get set ```js duration ```
 
@@ -341,6 +360,7 @@ Set or get the duration. Can be a number in milliseconds, or a time string like 
 
 
 
+<!-- @name    tickCount -->
 
 # get set ```js tickCount ```
 
@@ -355,6 +375,7 @@ Set of get the tickCount
 
 
 
+<!-- @name    percentage -->
 
 # get ```js percentage ```
 

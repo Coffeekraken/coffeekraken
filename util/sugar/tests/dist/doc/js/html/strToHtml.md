@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.html -->
+<!-- @name    strToHtml -->
 
 # ```js strToHtml ```
 

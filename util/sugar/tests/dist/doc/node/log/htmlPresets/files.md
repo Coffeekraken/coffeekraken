@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.log.htmlPresets -->
+<!-- @name    files -->
 
 # ```js files ```
 

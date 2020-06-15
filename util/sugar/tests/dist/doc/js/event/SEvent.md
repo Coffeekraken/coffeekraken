@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.event -->
+<!-- @name    SEvent -->
 
 # ```js SEvent ```
 
@@ -34,6 +35,7 @@ myHTMLElement.dispatch(myEvent);
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -57,6 +59,7 @@ Construct the event
 
 
 
+<!-- @name    settings.cancelable -->
 
 # ```js settings.cancelable ```
 
@@ -71,6 +74,7 @@ Set if the event is cancelable or not
 
 
 
+<!-- @name    settings.bubbles -->
 
 # ```js settings.bubbles ```
 
@@ -85,6 +89,7 @@ Set if the event will bubble or not
 
 
 
+<!-- @name    settings.detail -->
 
 # ```js settings.detail ```
 

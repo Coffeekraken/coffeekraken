@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.http -->
+<!-- @name    request -->
 
 # ```js request ```
 

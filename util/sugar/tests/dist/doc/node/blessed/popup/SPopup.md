@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.blessed.popup -->
+<!-- @name    SPopup -->
 
 # ```js SPopup ```
 
@@ -33,6 +34,7 @@ const myPopup = new SPopup();
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -48,6 +50,7 @@ Constructor
 
 
 
+<!-- @name    append -->
 
 # ```js append ```
 
@@ -63,6 +66,7 @@ This method is simply used to append content inside the popup
 
 
 
+<!-- @name    update -->
 
 # ```js update ```
 

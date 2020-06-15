@@ -1,6 +1,7 @@
 
 
 <!-- @namespace    sugar.js.encoding -->
+<!-- @name    base64 -->
 
 # ```js base64 ```
 
@@ -24,6 +25,7 @@ base64.decode('SGVsbG8gV29ybGQh');
 
 
 
+<!-- @name    encode -->
 
 # ```js encode ```
 
@@ -43,6 +45,7 @@ Encode in base 64
 
 
 
+<!-- @name    decode -->
 
 # ```js decode ```
 

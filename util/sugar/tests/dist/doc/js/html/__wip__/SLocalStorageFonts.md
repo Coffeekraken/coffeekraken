@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.class -->
+<!-- @name    SLocalStorageFonts -->
 
 # ```js SLocalStorageFonts ```
 
@@ -41,19 +42,6 @@ new SLocalStorageFonts({
 
 
 
-# ```js  ```
-
-
-
-
-
-
-### Author
-- 
-
-
-
-
 
 # ```js  ```
 
@@ -69,6 +57,7 @@ new SLocalStorageFonts({
 
 
 
+
 # ```js  ```
 
 
@@ -78,6 +67,22 @@ new SLocalStorageFonts({
 
 ### Author
 - 
+
+
+
+
+
+
+# ```js  ```
+
+
+
+
+
+
+### Author
+- 
+
 
 
 

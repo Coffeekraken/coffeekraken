@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.docblock.tags -->
+<!-- @name    snippet -->
 
 # ```js snippet ```
 ### Since: 2.0.0

@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.dom -->
+<!-- @name    observeAttributes -->
 
 # ```js observeAttributes ```
 
@@ -34,6 +35,7 @@ observer.cancel();
 
 
 
+<!-- @name    attributes -->
 
 # ```js attributes ```
 

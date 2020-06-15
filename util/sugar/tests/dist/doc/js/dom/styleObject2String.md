@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.dom -->
+<!-- @name    styleObject2String -->
 
 # ```js styleObject2String ```
 

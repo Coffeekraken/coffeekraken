@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.terminal -->
+<!-- @name    SApp -->
 
 # ```js SApp ```
 ### Since: 2.0.0
@@ -34,6 +35,7 @@ const app = new SApp('My Cool Application', {
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -49,6 +51,7 @@ Constructor
 
 
 
+<!-- @name    _getRouteObj -->
 
 # ```js _getRouteObj ```
 
@@ -68,6 +71,7 @@ Get the route configuration object depending on the current url
 
 
 
+<!-- @name    nextMenu -->
 
 # ```js nextMenu ```
 
@@ -83,6 +87,7 @@ This method allows you to pass to the next menu item
 
 
 
+<!-- @name    previousMenu -->
 
 # ```js previousMenu ```
 
@@ -98,6 +103,7 @@ This method allows you to pass to the next menu item
 
 
 
+<!-- @name    goTo -->
 
 # ```js goTo ```
 
@@ -117,6 +123,7 @@ This method allows you to change the "page" by passing a simple url like 'build/
 
 
 
+<!-- @name    isActive -->
 
 # ```js isActive ```
 
@@ -136,6 +143,7 @@ This method allows you to check if the passed url is the active one
 
 
 
+<!-- @name    _renderLayout -->
 
 # ```js _renderLayout ```
 
@@ -157,6 +165,7 @@ Render the layout with the current content defined by the current route object p
 
 
 
+<!-- @name    _name -->
 
 # ```js _name ```
 
@@ -171,6 +180,7 @@ Store the application name
 
 
 
+<!-- @name    _settings -->
 
 # ```js _settings ```
 
@@ -185,6 +195,7 @@ Store the application settings
 
 
 
+<!-- @name    _currentPanes -->
 
 # ```js _currentPanes ```
 

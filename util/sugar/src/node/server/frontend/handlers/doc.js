@@ -41,6 +41,7 @@ module.exports = function doc(req, server) {
 
     // send back the result
     resolve({
+      view: 'pages.doc',
       title,
       content: htmlData
     });

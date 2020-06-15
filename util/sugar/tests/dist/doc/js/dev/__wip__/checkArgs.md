@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.dev -->
+<!-- @name    checkArgs -->
 
 # ```js checkArgs ```
 

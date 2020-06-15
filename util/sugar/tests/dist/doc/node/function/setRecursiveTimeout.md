@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.function -->
+<!-- @name    setRecursiveTimeout -->
 
 # ```js setRecursiveTimeout ```
 

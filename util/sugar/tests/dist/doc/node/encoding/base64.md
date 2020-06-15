@@ -1,6 +1,7 @@
 
 
 <!-- @namespace    sugar.js.encoding -->
+<!-- @name    base64 -->
 
 # ```js base64 ```
 

@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.function -->
+<!-- @name    debounce -->
 
 # ```js debounce ```
 

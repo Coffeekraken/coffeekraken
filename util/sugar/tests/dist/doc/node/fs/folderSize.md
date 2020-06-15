@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.fs -->
+<!-- @name    folderSize -->
 
 # ```js folderSize ```
 

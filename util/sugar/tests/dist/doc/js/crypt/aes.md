@@ -1,6 +1,7 @@
 
 
 <!-- @namespace    sugar.js.crypt -->
+<!-- @name    aes -->
 
 # ```js aes ```
 
@@ -15,6 +16,7 @@ Expose two function named "encrypt" and "decrypt" that you can use to process yo
 
 
 
+<!-- @name    encrypt -->
 
 # ```js encrypt ```
 
@@ -36,6 +38,7 @@ Encrypt
 
 
 
+<!-- @name    decrypt -->
 
 # ```js decrypt ```
 

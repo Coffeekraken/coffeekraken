@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.blessed -->
+<!-- @name    SProcessOutput -->
 
 # ```js SProcessOutput ```
 
@@ -35,6 +36,7 @@ const myPanel = new SProcessOutput(myProcess, {
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -50,6 +52,7 @@ Constructor
 
 
 
+<!-- @name    _subscribeToProcess -->
 
 # ```js _subscribeToProcess ```
 
@@ -66,6 +69,7 @@ from it into the panel
 
 
 
+<!-- @name    log -->
 
 # ```js log ```
 
@@ -85,6 +89,7 @@ This method simply log the passed arguments
 
 
 
+<!-- @name    _generateUI -->
 
 # ```js _generateUI ```
 
@@ -102,6 +107,7 @@ This method take the registered keys in the process and generate a nice and clea
 
 
 
+<!-- @name    _process -->
 
 # ```js _process ```
 
@@ -116,6 +122,7 @@ Store the SProcessOutput instance
 
 
 
+<!-- @name    _logBox -->
 
 # ```js _logBox ```
 

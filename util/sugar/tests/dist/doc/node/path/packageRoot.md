@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.path -->
+<!-- @name    packageRoot -->
 
 # ```js packageRoot ```
 

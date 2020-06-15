@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.process -->
+<!-- @name    spawn -->
 
 # ```js spawn ```
 

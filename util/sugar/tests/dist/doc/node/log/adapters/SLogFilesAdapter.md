@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.log -->
+<!-- @name    SLogFilesAdapter -->
 
 # ```js SLogFilesAdapter ```
 
@@ -32,6 +33,7 @@ logger.log('Something cool happend...');
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -52,6 +54,7 @@ Constructor
 
 
 
+<!-- @name    log -->
 
 # ```js log ```
 
@@ -81,6 +84,7 @@ await consoleAdapter.log('hello world');
 
 
 
+<!-- @name    _settings -->
 
 # ```js _settings ```
 

@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.auth.adapters -->
+<!-- @name    STerminalAuthAdapter -->
 
 # ```js STerminalAuthAdapter ```
 
@@ -19,6 +20,7 @@ Terminal SAuth adapter that allows you to ask the auth informations through the 
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -34,6 +36,7 @@ Construct the STerminalAuthAdapter instance
 
 
 
+<!-- @name    _success -->
 
 # ```js _success ```
 
@@ -49,6 +52,7 @@ Display the success message to the user
 
 
 
+<!-- @name    _validation -->
 
 # ```js _validation ```
 
@@ -64,6 +68,7 @@ Display the validation message to the user
 
 
 
+<!-- @name    _basic -->
 
 # ```js _basic ```
 
@@ -85,6 +90,7 @@ Ask the user for username, password
 
 
 
+<!-- @name    _bearer -->
 
 # ```js _bearer ```
 

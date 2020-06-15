@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.parse -->
+<!-- @name    argumentTypeDefinitionString -->
 
 # ```js argumentTypeDefinitionString ```
 ### Since: 2.0.0

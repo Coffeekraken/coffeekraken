@@ -1,6 +1,7 @@
 
 
 <!-- @namespace    sugar.js.feature -->
+<!-- @name    dispatchEventAttribute -->
 
 # ```js dispatchEventAttribute ```
 

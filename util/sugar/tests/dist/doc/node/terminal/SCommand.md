@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.terminal -->
+<!-- @name    SCommand -->
 
 # ```js SCommand ```
 
@@ -45,6 +46,7 @@ myCommand.run();
 
 
 
+<!-- @name    getCommandsByName -->
 
 # Static ```js getCommandsByName ```
 ### Since: 2.0.0
@@ -66,6 +68,7 @@ Note that a command that does not have any namespace cannot be retreived using t
 
 
 
+<!-- @name    getCommandsByNamespace -->
 
 # Static ```js getCommandsByNamespace ```
 ### Since: 2.0.0
@@ -87,6 +90,7 @@ Note that a command that does not have any namespace cannot be retreived using t
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -102,6 +106,7 @@ Constructor
 
 
 
+<!-- @name    isRunning -->
 
 # ```js isRunning ```
 
@@ -117,6 +122,7 @@ This method return true if the command is currently running, false if not
 
 
 
+<!-- @name    concurrent -->
 
 # get ```js concurrent ```
 
@@ -132,6 +138,7 @@ This method return true if the command can be concurrent, false if not
 
 
 
+<!-- @name    _initKey -->
 
 # ```js _initKey ```
 
@@ -147,6 +154,7 @@ This method init the key listening if a settings.key is defined
 
 
 
+<!-- @name    isWatching -->
 
 # ```js isWatching ```
 
@@ -162,6 +170,7 @@ Get if this command is currently watching or not
 
 
 
+<!-- @name    unwatch -->
 
 # ```js unwatch ```
 ### Since: 2.0.0
@@ -177,6 +186,7 @@ This methid allows you to stop the watch process if one has been launched
 
 
 
+<!-- @name    watch -->
 
 # ```js watch ```
 
@@ -192,6 +202,7 @@ This method init the watch process passed in the settings.watch object
 
 
 
+<!-- @name    kill -->
 
 # ```js kill ```
 
@@ -207,6 +218,7 @@ This method can be used to kill the current running process
 
 
 
+<!-- @name    destroy -->
 
 # ```js destroy ```
 ### Since: 2.0.0
@@ -224,6 +236,7 @@ the static "getCommands" method, etc...
 
 
 
+<!-- @name    run -->
 
 # ```js run ```
 
@@ -245,6 +258,7 @@ This method is used to run the command
 
 
 
+<!-- @name    _runSCli -->
 
 # ```js _runSCli ```
 
@@ -260,6 +274,7 @@ This method run a SCli based command
 
 
 
+<!-- @name    _ask -->
 
 # ```js _ask ```
 
@@ -280,6 +295,7 @@ This method take care of asking something to the user ans return back the user a
 
 
 
+<!-- @name    _check -->
 
 # ```js _check ```
 
@@ -297,6 +313,7 @@ This methood takes a command as parameter and return true if it is executable or
 
 
 
+<!-- @name    _id -->
 
 # ```js _id ```
 ### Since: 2.0.0
@@ -311,6 +328,7 @@ Store the command generated uniquid
 
 
 
+<!-- @name    _name -->
 
 # ```js _name ```
 ### Since: 2.0.0
@@ -325,6 +343,7 @@ Store the command name
 
 
 
+<!-- @name    _command -->
 
 # ```js _command ```
 ### Since: 2.0.0
@@ -339,6 +358,7 @@ Store the command
 
 
 
+<!-- @name    _id -->
 
 # ```js _id ```
 ### Since: 2.0.0
@@ -353,6 +373,7 @@ Store a unique id that identify the command instance
 
 
 
+<!-- @name    _destroyed -->
 
 # ```js _destroyed ```
 ### Since: 2.0.0
@@ -367,6 +388,7 @@ Store the "destroy" state of this command
 
 
 
+<!-- @name    _currentProcess -->
 
 # ```js _currentProcess ```
 ### Since: 2.0.0
@@ -381,6 +403,7 @@ This store the current process object
 
 
 
+<!-- @name    _watchProcess -->
 
 # ```js _watchProcess ```
 ### Since: 2.0.0
@@ -395,6 +418,7 @@ This store the watch child process instance
 
 
 
+<!-- @name    _processesStack -->
 
 # ```js _processesStack ```
 ### Since: 2.0.0
@@ -409,6 +433,7 @@ This store all the runned processes
 
 
 
+<!-- @name    _isWatching -->
 
 # ```js _isWatching ```
 
@@ -423,6 +448,7 @@ Store the watching status
 
 
 
+<!-- @name    _commandsStack -->
 
 # Static ```js _commandsStack ```
 ### Since: 2.0.0
@@ -437,6 +463,7 @@ This static property store all the commands instances that have been instanciate
 
 
 
+<!-- @name    name -->
 
 # get ```js name ```
 
@@ -451,6 +478,7 @@ Get the command name
 
 
 
+<!-- @name    title -->
 
 # get ```js title ```
 
@@ -465,6 +493,7 @@ Get the command title if specified in the settings
 
 
 
+<!-- @name    key -->
 
 # get ```js key ```
 
@@ -479,6 +508,7 @@ Get the command key
 
 
 
+<!-- @name    namespace -->
 
 # get ```js namespace ```
 
@@ -493,6 +523,7 @@ Get the command namespace
 
 
 
+<!-- @name    color -->
 
 # get ```js color ```
 
@@ -507,6 +538,7 @@ Get the command color
 
 
 
+<!-- @name    command -->
 
 # get ```js command ```
 
@@ -521,6 +553,7 @@ Get the command command
 
 
 
+<!-- @name    lastProcessObj -->
 
 # get ```js lastProcessObj ```
 
@@ -535,6 +568,7 @@ Get the last process. It can be the running one as well as a finished one
 
 
 
+<!-- @name    runningProcessObj -->
 
 # get ```js runningProcessObj ```
 
@@ -549,6 +583,7 @@ Get the running process.
 
 
 
+<!-- @name    processesStack -->
 
 # get ```js processesStack ```
 

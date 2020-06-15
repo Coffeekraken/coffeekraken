@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.is -->
+<!-- @name    ofType -->
 
 # ```js ofType ```
 ### Since: 2.0.0

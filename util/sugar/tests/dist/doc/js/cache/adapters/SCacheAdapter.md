@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.cache.cacheAdapters -->
+<!-- @name    SCacheAdapter -->
 
 # ```js SCacheAdapter ```
 
@@ -43,6 +44,7 @@ class SCacheCoolAdapter extends SCacheAdapter {
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -64,6 +66,7 @@ Construct the SCacheAdapter instance with the settings passed in object format. 
 
 
 
+<!-- @name    _settings -->
 
 # ```js _settings ```
 

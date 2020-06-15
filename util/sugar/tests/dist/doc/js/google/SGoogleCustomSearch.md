@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.google -->
+<!-- @name    SGoogleCustomSearch -->
 
 # ```js SGoogleCustomSearch ```
 
@@ -39,6 +40,7 @@ googleSearch.next().then((response) => {
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -60,6 +62,7 @@ Constructor
 
 
 
+<!-- @name    _generateSearchUrl -->
 
 # ```js _generateSearchUrl ```
 
@@ -76,6 +79,7 @@ parameters like the current page, etc...
 
 
 
+<!-- @name    search -->
 
 # ```js search ```
 
@@ -97,6 +101,7 @@ Launch a search
 
 
 
+<!-- @name    next -->
 
 # ```js next ```
 
@@ -112,6 +117,7 @@ Load the next page
 
 
 
+<!-- @name    previous -->
 
 # ```js previous ```
 
@@ -129,6 +135,7 @@ Load the previous page
 
 
 
+<!-- @name    _apiKey -->
 
 # ```js _apiKey ```
 
@@ -143,6 +150,7 @@ Store the api key used to reach the google services
 
 
 
+<!-- @name    _cx -->
 
 # ```js _cx ```
 
@@ -157,6 +165,7 @@ Store the context key used to reach the good google search instance
 
 
 
+<!-- @name    _settings -->
 
 # ```js _settings ```
 
@@ -172,6 +181,7 @@ next page etc...
 
 
 
+<!-- @name    num -->
 
 # ```js num ```
 
@@ -187,6 +197,7 @@ Can be between 1 and 10
 
 
 
+<!-- @name    page -->
 
 # ```js page ```
 
@@ -201,6 +212,7 @@ The page to request
 
 
 
+<!-- @name    _searchUrl -->
 
 # ```js _searchUrl ```
 
@@ -215,6 +227,7 @@ Store the google search url
 
 
 
+<!-- @name    _page -->
 
 # ```js _page ```
 
@@ -229,6 +242,7 @@ Store the current page
 
 
 
+<!-- @name    _keywords -->
 
 # ```js _keywords ```
 

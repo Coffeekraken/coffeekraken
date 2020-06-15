@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.debug -->
+<!-- @name    debug -->
 
 # ```js debug ```
 

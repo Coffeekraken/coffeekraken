@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.dependency -->
+<!-- @name    SPhpDependency -->
 
 # ```js SPhpDependency ```
 ### Since: 2.0.0
@@ -26,6 +27,7 @@ const promise = SPhpDependency.install();
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 

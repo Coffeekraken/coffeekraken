@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.info -->
+<!-- @name    info -->
 
 # ```js info ```
 

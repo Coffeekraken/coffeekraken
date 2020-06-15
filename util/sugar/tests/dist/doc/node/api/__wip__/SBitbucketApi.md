@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.api -->
+<!-- @name    SBitbucketApi -->
 
 # ```js SBitbucketApi ```
 
@@ -26,6 +27,7 @@ const repos = await bitbucketApi.get('repositories');
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 

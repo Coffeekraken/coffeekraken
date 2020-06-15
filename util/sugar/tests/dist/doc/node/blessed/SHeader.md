@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.blessed -->
+<!-- @name    SComponent -->
 
 # ```js SComponent ```
 
@@ -34,6 +35,7 @@ class MyCoolComponent extends SComponent {
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -49,6 +51,7 @@ Constructor
 
 
 
+<!-- @name    update -->
 
 # ```js update ```
 

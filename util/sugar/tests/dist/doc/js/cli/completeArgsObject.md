@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.cli -->
+<!-- @name    completeArgsObject -->
 
 # ```js completeArgsObject ```
 ### Since: 2.0.0

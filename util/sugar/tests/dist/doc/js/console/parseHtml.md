@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.console -->
+<!-- @name    parseHtml -->
 
 # ```js parseHtml ```
 

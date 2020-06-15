@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.auth.injectors -->
+<!-- @name    axiosInjector -->
 
 # ```js axiosInjector ```
 

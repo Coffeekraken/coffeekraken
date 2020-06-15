@@ -1,6 +1,7 @@
 
 
 <!-- @namespace    sugar.js.feature -->
+<!-- @name    videoLazySrcAttribute -->
 
 # ```js videoLazySrcAttribute ```
 

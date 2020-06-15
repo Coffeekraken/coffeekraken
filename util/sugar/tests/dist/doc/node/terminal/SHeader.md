@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.terminal -->
+<!-- @name    SHeader -->
 
 # ```js SHeader ```
 ### Since: 2.0.0
@@ -34,6 +35,7 @@ const header = new SHeader('Hello world', {});
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -51,6 +53,7 @@ Constructor
 
 
 
+<!-- @name    _title -->
 
 # ```js _title ```
 
@@ -65,6 +68,7 @@ Store the header title
 
 
 
+<!-- @name    _settings -->
 
 # ```js _settings ```
 

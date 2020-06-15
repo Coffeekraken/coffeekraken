@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.stream -->
+<!-- @name    SActionStream -->
 
 # ```js SActionStream ```
 ### Since: 2.0.0
@@ -39,6 +40,7 @@ Here's all the "events" that you can subscribe on the SActionStream instance, or
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -54,6 +56,7 @@ Constructor
 
 
 
+<!-- @name    start -->
 
 # ```js start ```
 
@@ -88,6 +91,7 @@ streamPromise.on('step', (streamObj) => {
 
 
 
+<!-- @name    _actionsObj -->
 
 # ```js _actionsObj ```
 

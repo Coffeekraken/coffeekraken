@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.terminal -->
+<!-- @name    SLayout -->
 
 # ```js SLayout ```
 
@@ -33,6 +34,7 @@ const myLayout = new SLayout({
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -54,6 +56,7 @@ Construct the SLayout instance which inherit from the blessed.box stack
 
 
 
+<!-- @name    setContent -->
 
 # ```js setContent ```
 

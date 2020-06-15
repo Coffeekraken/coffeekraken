@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.log -->
+<!-- @name    log -->
 
 # ```js log ```
 

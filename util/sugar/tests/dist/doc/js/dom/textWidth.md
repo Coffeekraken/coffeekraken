@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.dom -->
+<!-- @name    textWidth -->
 
 # ```js textWidth ```
 

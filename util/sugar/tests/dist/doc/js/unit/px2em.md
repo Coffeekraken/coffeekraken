@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.unit -->
+<!-- @name    px2em -->
 
 # ```js px2em ```
 

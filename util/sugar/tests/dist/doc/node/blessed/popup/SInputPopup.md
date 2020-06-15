@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.blessed.popup -->
+<!-- @name    SInputPopup -->
 
 # ```js SInputPopup ```
 
@@ -32,6 +33,7 @@ new SInputPopup({});
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 

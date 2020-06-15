@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.is -->
+<!-- @name    isBase64 -->
 
 # ```js isBase64 ```
 

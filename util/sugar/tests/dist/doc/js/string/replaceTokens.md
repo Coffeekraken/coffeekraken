@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.string -->
+<!-- @name    replaceTokens -->
 
 # ```js replaceTokens ```
 ### Since: 2.0.0

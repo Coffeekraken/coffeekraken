@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.docblock.tags -->
+<!-- @name    return -->
 
 # ```js return ```
 ### Since: 2.0.0

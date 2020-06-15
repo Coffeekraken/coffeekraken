@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.class -->
+<!-- @name    getMethods -->
 
 # ```js getMethods ```
 

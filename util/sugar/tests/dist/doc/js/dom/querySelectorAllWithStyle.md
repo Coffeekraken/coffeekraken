@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.dom -->
+<!-- @name    querySelectorAllWithStyle -->
 
 # ```js querySelectorAllWithStyle ```
 
@@ -42,6 +43,7 @@ const style = {
 
 
 
+<!-- @name    settings.rootNode -->
 
 # ```js settings.rootNode ```
 

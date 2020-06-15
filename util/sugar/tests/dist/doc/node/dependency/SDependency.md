@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.dependency -->
+<!-- @name    SDependency -->
 
 # ```js SDependency ```
 ### Since: 2.0.0
@@ -37,6 +38,7 @@ class MyDependency extends SDependency {
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -52,6 +54,7 @@ Constructor
 
 
 
+<!-- @name    _loadDepFile -->
 
 # ```js _loadDepFile ```
 
@@ -67,6 +70,7 @@ Load the dep file path content
 
 
 
+<!-- @name    install -->
 
 # ```js install ```
 
@@ -86,6 +90,7 @@ This method process to the installation of the dependency
 
 
 
+<!-- @name    _execCommands -->
 
 # ```js _execCommands ```
 
@@ -111,6 +116,7 @@ This method take care of executing one or more commands and send back an SPromis
 
 
 
+<!-- @name    _settings -->
 
 # ```js _settings ```
 
@@ -125,6 +131,7 @@ Store the process settings
 
 
 
+<!-- @name    _name -->
 
 # ```js _name ```
 
@@ -139,6 +146,7 @@ Store the dependency name
 
 
 
+<!-- @name    _depFilepath -->
 
 # ```js _depFilepath ```
 
@@ -153,6 +161,7 @@ Store the dependency file path
 
 
 
+<!-- @name    _depJson -->
 
 # ```js _depJson ```
 

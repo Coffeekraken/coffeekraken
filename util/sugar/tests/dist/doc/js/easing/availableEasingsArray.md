@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.easing -->
+<!-- @name    availableEasingsArray -->
 
 # ```js availableEasingsArray ```
 ### Since: 2.0.0

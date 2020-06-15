@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.cli -->
+<!-- @name    parseArgs -->
 
 # ```js parseArgs ```
 

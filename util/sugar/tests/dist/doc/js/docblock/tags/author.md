@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.docblock.tags -->
+<!-- @name    author -->
 
 # ```js author ```
 ### Since: 2.0.0

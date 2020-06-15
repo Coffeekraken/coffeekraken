@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.server -->
+<!-- @name    express -->
 
 # ```js express ```
 ### Since: 2.0.0

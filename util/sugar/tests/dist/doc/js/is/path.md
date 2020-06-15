@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.is -->
+<!-- @name    path -->
 
 # ```js path ```
 

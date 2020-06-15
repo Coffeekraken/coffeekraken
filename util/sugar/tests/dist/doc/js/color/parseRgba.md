@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.color -->
+<!-- @name    parseRgba -->
 
 # ```js parseRgba ```
 

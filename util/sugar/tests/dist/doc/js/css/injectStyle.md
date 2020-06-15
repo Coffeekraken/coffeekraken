@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.css -->
+<!-- @name    injectStyle -->
 
 # ```js injectStyle ```
 

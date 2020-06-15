@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.is -->
+<!-- @name    inPackage -->
 
 # ```js inPackage ```
 ### Since: 2.0.0

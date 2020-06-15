@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.process -->
+<!-- @name    getRegisteredProcesses -->
 
 # ```js getRegisteredProcesses ```
 ### Since: 2.0.0

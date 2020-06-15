@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.build.scss -->
+<!-- @name    SRenderSassStreamAction -->
 
 # ```js SRenderSassStreamAction ```
 
@@ -23,6 +24,7 @@ This function is responsible of rendering the sass string in the "data" property
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -38,6 +40,7 @@ Constructor
 
 
 
+<!-- @name    run -->
 
 # ```js run ```
 
@@ -55,6 +58,7 @@ Override the base class run method
 
 
 
+<!-- @name    definitionObj -->
 
 # Static ```js definitionObj ```
 

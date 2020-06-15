@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.stream.actions -->
+<!-- @name    SFsReadFileStreamAction -->
 
 # ```js SFsReadFileStreamAction ```
 
@@ -23,6 +24,7 @@ This class is a stream action that allows you to read file(s) to the filesystem
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -38,6 +40,7 @@ Constructor
 
 
 
+<!-- @name    run -->
 
 # ```js run ```
 
@@ -55,6 +58,7 @@ Override the base class run method
 
 
 
+<!-- @name    definitionObj -->
 
 # Static ```js definitionObj ```
 

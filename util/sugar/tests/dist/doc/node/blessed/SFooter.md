@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.blessed -->
+<!-- @name    SFooter -->
 
 # ```js SFooter ```
 
@@ -30,6 +31,7 @@ new SFooter({});
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -45,6 +47,7 @@ Constructor
 
 
 
+<!-- @name    update -->
 
 # ```js update ```
 

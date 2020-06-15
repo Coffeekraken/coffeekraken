@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.time -->
+<!-- @name    wait -->
 
 # ```js wait ```
 

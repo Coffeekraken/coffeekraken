@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.socket -->
+<!-- @name    syncDom -->
 
 # ```js syncDom ```
 
@@ -21,6 +22,7 @@ The messages that are listened are:
 
 
 <!-- @namespace    sugar.js.class -->
+<!-- @name    emit -->
 
 # ```js emit ```
 
@@ -48,6 +50,7 @@ myCoolSocketDomInstance.emit('coco', { hello: 'world' });
 
 
 <!-- @namespace    sugar.js.class -->
+<!-- @name    registerEvent -->
 
 # ```js registerEvent ```
 
@@ -78,6 +81,7 @@ myCoolSocketDomInstance.registerEvent('hello', (data, settings) => {
 
 
 
+
 # ```js  ```
 
 
@@ -87,6 +91,7 @@ myCoolSocketDomInstance.registerEvent('hello', (data, settings) => {
 
 ### Author
 - 
+
 
 
 
@@ -105,6 +110,7 @@ myCoolSocketDomInstance.registerEvent('hello', (data, settings) => {
 
 
 <!-- @namespace    sugar.js.class -->
+<!-- @name    settings.node -->
 
 # ```js settings.node ```
 
@@ -119,6 +125,7 @@ The root node where the html contents will be injected if no node is passed with
 
 
 <!-- @namespace    sugar.js class -->
+<!-- @name    settings.action -->
 
 # ```js settings.action ```
 
@@ -137,6 +144,7 @@ It can be one of these:
 
 
 <!-- @namespace    sugar.js.class -->
+<!-- @name    settings.events -->
 
 # ```js settings.events ```
 

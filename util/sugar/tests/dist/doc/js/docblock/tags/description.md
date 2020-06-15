@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.docblock.tags -->
+<!-- @name    description -->
 
 # ```js description ```
 ### Since: 2.0.0

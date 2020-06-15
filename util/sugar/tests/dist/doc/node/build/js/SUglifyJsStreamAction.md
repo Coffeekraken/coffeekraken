@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.build.js -->
+<!-- @name    SUglifyJsStreamAction -->
 
 # ```js SUglifyJsStreamAction ```
 
@@ -23,6 +24,7 @@ This function is responsible of passing uglify js on the output files
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -38,6 +40,7 @@ Constructor
 
 
 
+<!-- @name    run -->
 
 # ```js run ```
 
@@ -55,6 +58,7 @@ Override the base class run method
 
 
 
+<!-- @name    definitionObj -->
 
 # Static ```js definitionObj ```
 

@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.object -->
+<!-- @name    deepMap -->
 
 # ```js deepMap ```
 

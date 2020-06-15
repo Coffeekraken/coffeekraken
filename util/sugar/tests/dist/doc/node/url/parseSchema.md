@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.url -->
+<!-- @name    parseSchema -->
 
 # ```js parseSchema ```
 

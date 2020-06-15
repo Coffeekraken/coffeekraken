@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.terminal -->
+<!-- @name    SFiltrableList -->
 
 # ```js SFiltrableList ```
 
@@ -32,6 +33,7 @@ myForm.append(myList);
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -51,6 +53,7 @@ Construct the STerminalScreen instance which inherit from the blessed.screen sta
 
 
 
+<!-- @name    setFormStyle -->
 
 # ```js setFormStyle ```
 
@@ -70,6 +73,7 @@ Set the form style. Normaly this is called automatically when you append/prepend
 
 
 
+<!-- @name    _listenKeyPress -->
 
 # ```js _listenKeyPress ```
 
@@ -85,6 +89,7 @@ Listen for keys press like UP, DOWN, etc...
 
 
 
+<!-- @name    get -->
 
 # ```js get ```
 
@@ -109,6 +114,7 @@ Get the SFiltrableList back in String or Array format depending on the passed se
 
 
 
+<!-- @name    selectedItemObj -->
 
 # ```js selectedItemObj ```
 

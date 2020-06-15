@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.stream -->
+<!-- @name    SActionStreamAction -->
 
 # ```js SActionStreamAction ```
 ### Since: 2.0.0
@@ -31,6 +32,7 @@ to work with, etc...
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -46,6 +48,7 @@ Constructor
 
 
 
+<!-- @name    checkStreamObject -->
 
 # ```js checkStreamObject ```
 
@@ -66,6 +69,7 @@ specified in the static definitionObj property.
 
 
 
+<!-- @name    run -->
 
 # ```js run ```
 

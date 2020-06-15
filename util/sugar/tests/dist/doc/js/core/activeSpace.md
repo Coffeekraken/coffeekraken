@@ -1,6 +1,7 @@
 
 
 <!-- @namespace    sugar.js.core -->
+<!-- @name    activeSpace -->
 
 # ```js activeSpace ```
 ### Since: 2.0.0
@@ -36,6 +37,7 @@ activeSpace.is('hello.*'); // => true
 
 
 
+<!-- @name    get -->
 
 # ```js get ```
 ### Since: 2.0.0
@@ -51,6 +53,7 @@ This function allows you to get the current active space
 
 
 
+<!-- @name    set -->
 
 # ```js set ```
 ### Since: 2.0.0
@@ -74,6 +77,7 @@ This function allows you to set the current active space
 
 
 
+<!-- @name    append -->
 
 # ```js append ```
 ### Since: 2.0.0
@@ -95,6 +99,7 @@ This function take the current activeSpace string and add the passed one to set 
 
 
 
+<!-- @name    remove -->
 
 # ```js remove ```
 ### Since: 2.0.0
@@ -116,6 +121,7 @@ This function simply remove the passed string from the activeSpace stack
 
 
 
+<!-- @name    previous -->
 
 # ```js previous ```
 ### Since: 2.0.0
@@ -131,6 +137,7 @@ This function simply go back by 1 in the activeSpace stack
 
 
 
+<!-- @name    is -->
 
 # ```js is ```
 ### Since: 2.0.0
@@ -153,6 +160,7 @@ The checking process is done using the "minimatch" package that let you use cool
 
 
 
+<!-- @name    on -->
 
 # ```js on ```
 ### Since: 2.0.0
@@ -179,6 +187,7 @@ that will be called once the activeSpace is matched
 
 
 
+<!-- @name    _callCallbacks -->
 
 # ```js _callCallbacks ```
 

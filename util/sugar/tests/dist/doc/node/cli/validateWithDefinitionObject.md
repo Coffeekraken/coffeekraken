@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.cli -->
+<!-- @name    validateWithDefinitionObject -->
 
 # ```js validateWithDefinitionObject ```
 ### Since: 2.0.0

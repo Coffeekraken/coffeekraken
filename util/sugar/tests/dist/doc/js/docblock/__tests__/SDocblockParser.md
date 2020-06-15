@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.docblock -->
+<!-- @name    DockblockParser -->
 
 # ```js DockblockParser ```
 ### Since: 2.0.0
@@ -33,6 +34,7 @@ new SDocblockParser({
 
 
 <!-- @namespace    '                    sugar.js.docblock\n' + -->
+<!-- @name    '                         DockblockParser\n' + -->
 
 # ```js '                         DockblockParser\n' + ```
 ### Since: '            2.0.0\n' +

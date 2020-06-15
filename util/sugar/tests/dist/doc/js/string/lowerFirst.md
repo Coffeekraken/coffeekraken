@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.string -->
+<!-- @name    lowerFirst -->
 
 # ```js lowerFirst ```
 

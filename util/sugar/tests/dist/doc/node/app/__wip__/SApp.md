@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.class -->
+<!-- @name    SApp -->
 
 # ```js SApp ```
 
@@ -31,6 +32,7 @@ const myApp = new MyCoolApp();
 
 
 <!-- @namespace    sugar.node.class.SApp -->
+<!-- @name    config -->
 
 # ```js config ```
 
@@ -50,6 +52,7 @@ Access the configuration of the setted adapters in "settings.config". For more i
 
 
 <!-- @namespace    sugar.node.class.SApp -->
+<!-- @name    meta -->
 
 # ```js meta ```
 
@@ -75,6 +78,7 @@ sApp.meta('name'); // => @coffeekraken/sugar
 
 
 <!-- @namespace    sugar.node.class.SApp -->
+<!-- @name    __eatData -->
 
 # ```js __eatData ```
 
@@ -90,6 +94,7 @@ Search the setted sources to find the files like package.json, app.config.js, et
 
 
 <!-- @namespace    sugar.node.class.SApp -->
+<!-- @name    _jsContent -->
 
 # ```js _jsContent ```
 
@@ -105,6 +110,7 @@ Get all the configured js files content and return it in text format
 
 
 <!-- @namespace    sugar.node.class.SApp -->
+<!-- @name    _cssContent -->
 
 # ```js _cssContent ```
 
@@ -122,6 +128,7 @@ Get all the configured js files content and return it in text format
 
 
 
+<!-- @name    __settings -->
 
 # ```js __settings ```
 
@@ -136,6 +143,7 @@ Get all the configured js files content and return it in text format
 
 
 
+<!-- @name    __data -->
 
 # ```js __data ```
 

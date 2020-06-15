@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.html -->
+<!-- @name    toString -->
 
 # ```js toString ```
 

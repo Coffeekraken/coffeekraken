@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.js.promise -->
+<!-- @name    SPromise -->
 
 # ```js SPromise ```
 
@@ -79,6 +80,7 @@ myCoolFunction().then(value => {
 
 
 
+<!-- @name    _executorFn -->
 
 # ```js _executorFn ```
 
@@ -94,6 +96,7 @@ Store the executor function passed to the constructor
 
 
 
+<!-- @name    pipe -->
 
 # Static ```js pipe ```
 
@@ -120,6 +123,7 @@ with the ability to process the linked value before triggering it on the destina
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -155,6 +159,7 @@ const promise = new SPromise((resolve, reject, trigger, cancel) => {
 
 
 
+<!-- @name    is -->
 
 # ```js is ```
 
@@ -174,6 +179,7 @@ Check is the promise is on one of the passed status
 
 
 
+<!-- @name    isPending -->
 
 # ```js isPending ```
 
@@ -189,6 +195,7 @@ Return back true or false depending on the promise status
 
 
 
+<!-- @name    isResolved -->
 
 # ```js isResolved ```
 
@@ -204,6 +211,7 @@ Return back true or false depending on the promise status
 
 
 
+<!-- @name    isRejected -->
 
 # ```js isRejected ```
 
@@ -219,6 +227,7 @@ Return back true or false depending on the promise status
 
 
 
+<!-- @name    isCanceled -->
 
 # ```js isCanceled ```
 
@@ -234,6 +243,7 @@ Return back true or false depending on the promise status
 
 
 
+<!-- @name    isDestroyed -->
 
 # ```js isDestroyed ```
 
@@ -249,6 +259,7 @@ Return back true or false depending on the promise status
 
 
 
+<!-- @name    start -->
 
 # ```js start ```
 
@@ -275,6 +286,7 @@ new SPromise((resolve, reject, trigger, cancel) => {
 
 
 
+<!-- @name    resolve -->
 
 # ```js resolve ```
 
@@ -296,6 +308,7 @@ This is the "resolve" method exposed on the promise itself for convinience
 
 
 
+<!-- @name    _resolve -->
 
 # ```js _resolve ```
 
@@ -317,6 +330,7 @@ This is the method that will be called by the promise executor passed resolve fu
 
 
 
+<!-- @name    reject -->
 
 # ```js reject ```
 
@@ -338,6 +352,7 @@ This is the "reject" method exposed on the promise itself for convinience
 
 
 
+<!-- @name    _reject -->
 
 # ```js _reject ```
 
@@ -357,6 +372,7 @@ This is the method that will be called by the promise executor passed reject fun
 
 
 
+<!-- @name    cancel -->
 
 # ```js cancel ```
 
@@ -378,6 +394,7 @@ This is the "cancel" method exposed on the promise itself for convinience
 
 
 
+<!-- @name    _cancel -->
 
 # ```js _cancel ```
 
@@ -397,6 +414,7 @@ Cancel the promise execution, destroy the Promise and resolve it with the passed
 
 
 
+<!-- @name    trigger -->
 
 # ```js trigger ```
 
@@ -431,6 +449,7 @@ new SPromise((resolve, reject, trigger, cancel) => {
 
 
 
+<!-- @name    _registerNewStacks -->
 
 # ```js _registerNewStacks ```
 
@@ -452,6 +471,7 @@ or directly on the SPromise instance like so "myPromise.stackName(...)".
 
 
 
+<!-- @name    _registerCallbackInStack -->
 
 # ```js _registerCallbackInStack ```
 
@@ -467,6 +487,7 @@ This function take as argument a stack array and register into it the passed cal
 
 
 
+<!-- @name    _triggerStack -->
 
 # ```js _triggerStack ```
 
@@ -490,6 +511,7 @@ This function take an Array Stack as parameter and execute it to return the resu
 
 
 
+<!-- @name    _triggerStacks -->
 
 # ```js _triggerStacks ```
 
@@ -512,6 +534,7 @@ the initial value to pass to the first callback of the joined stacks...
 
 
 
+<!-- @name    on -->
 
 # ```js on ```
 
@@ -549,6 +572,7 @@ new SPromise((resolve, reject, trigger, cancel) => {
 
 
 
+<!-- @name    then -->
 
 # ```js then ```
 
@@ -590,6 +614,7 @@ new SPromise((resolve, reject, trigger, cancel) => {
 
 
 
+<!-- @name    catch -->
 
 # ```js catch ```
 
@@ -627,6 +652,7 @@ new SPromise((resolve, reject, trigger, cancel) => {
 
 
 
+<!-- @name    finally -->
 
 # ```js finally ```
 
@@ -660,6 +686,7 @@ new SPromise((resolve, reject, trigger, cancel) => {
 
 
 
+<!-- @name    resolved -->
 
 # ```js resolved ```
 
@@ -693,6 +720,7 @@ new SPromise((resolve, reject, trigger, cancel) => {
 
 
 
+<!-- @name    rejected -->
 
 # ```js rejected ```
 
@@ -726,6 +754,7 @@ new SPromise((resolve, reject, trigger, cancel) => {
 
 
 
+<!-- @name    canceled -->
 
 # ```js canceled ```
 
@@ -759,6 +788,7 @@ new SPromise((resolve, reject, trigger, cancel) => {
 
 
 
+<!-- @name    cancel -->
 
 # ```js cancel ```
 
@@ -791,6 +821,7 @@ new SPromise((resolve, reject, trigger, cancel) => {
 
 
 
+<!-- @name    _destroy -->
 
 # ```js _destroy ```
 
@@ -808,6 +839,7 @@ Destroying the SPromise instance by unregister all the callbacks, etc...
 
 
 
+<!-- @name    _masterPromiseResolveFn -->
 
 # ```js _masterPromiseResolveFn ```
 
@@ -822,6 +854,7 @@ Store the master promise resolve function
 
 
 
+<!-- @name    _masterPromiseRejectFn -->
 
 # ```js _masterPromiseRejectFn ```
 
@@ -836,6 +869,7 @@ Store the master promise reject function
 
 
 
+<!-- @name    _isExecutorStarted -->
 
 # ```js _isExecutorStarted ```
 
@@ -850,6 +884,7 @@ Store the status of the executor function. true if it has been executed, false i
 
 
 
+<!-- @name    _settings -->
 
 # ```js _settings ```
 
@@ -865,6 +900,7 @@ Store the settings of this SPromise instance. Here's the available settings:
 
 
 
+<!-- @name    _status -->
 
 # ```js _status ```
 
@@ -884,6 +920,7 @@ Store the promise status. Can be:
 
 
 
+<!-- @name    _stacks -->
 
 # ```js _stacks ```
 
@@ -898,6 +935,7 @@ Store the stacks callbacks
 
 
 
+<!-- @name    status -->
 
 # get ```js status ```
 

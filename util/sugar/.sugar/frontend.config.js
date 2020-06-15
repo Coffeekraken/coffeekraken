@@ -1,4 +1,12 @@
+const __docNav = require('../src/node/doc/docNav');
+
 module.exports = {
+  layout: {
+    /**
+     *
+     */
+  },
+
   menu: {
     /**
      * @name            doc
@@ -17,12 +25,37 @@ module.exports = {
        * @type            Function
        * @async
        *
-       * Specify the generator function to use to generate the documentation menu tree
+       * Specify the generator function to use to generate the documentation menu tree. Has to return an SNav instance
        *
        * @since         2.0.0
        * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      // generator:
+      generator: __docNav
+    },
+
+    /**
+     * @name            views
+     * @namespace       sugar.config.frontend.menu
+     * @type            Object
+     *
+     * List all the developed views
+     *
+     * @since         2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    views: {
+      /**
+       * @name            generator
+       * @namespace       sugar.config.frontend.menu.views
+       * @type            Function
+       * @async
+       *
+       * Specify the generator function to use to generate the views menu tree. Has to return an SNav instance
+       *
+       * @since         2.0.0
+       * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      generator: __docNav
     }
   },
 

@@ -2,6 +2,7 @@
 
 
 <!-- @namespace    sugar.node.blessed.panel -->
+<!-- @name    SSidePanel -->
 
 # ```js SSidePanel ```
 
@@ -37,6 +38,7 @@ const panel = new SSidePanel({
 
 
 
+<!-- @name    constructor -->
 
 # ```js constructor ```
 
@@ -52,6 +54,7 @@ Constructor
 
 
 
+<!-- @name    update -->
 
 # ```js update ```
 

@@ -119,7 +119,7 @@ export default class SDocblock {
    */
   parse(string = this._source) {
     // extract each docblocks
-    const reg = /\/\*{2}([\s\S]+?)\*\//g;
+    const reg = /(<!--|\/\*{2})([\s\S]+?)(\*\/|-->)/g;
     // extracting blocks
     let blocksArray = string.match(reg);
 

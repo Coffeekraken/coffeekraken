@@ -34,9 +34,10 @@ module.exports = async (args = {}) => {
 
   // generate menus
   const menuStack = {};
-  Object.keys(settings.menu).forEach((menuName) => {
+  Object.keys(settings.menu).forEach(async (menuName) => {
     // generate the menus
-    menuStack[menuName] = settings.menu[menuName].generator();
+    const generatorObj = settings.menu[menuName].generator;
+    menuStack[menuName] = await generatorObj.fn(generatorObj.directory);
   });
 
   console.log(menuStack);

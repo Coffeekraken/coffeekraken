@@ -1,4 +1,5 @@
 const __docNav = require('../src/node/doc/docNav');
+const __namespaceSNav = require('../src/node/nav/namespaceSNav');
 
 module.exports = {
   layout: {
@@ -30,7 +31,10 @@ module.exports = {
        * @since         2.0.0
        * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      generator: __docNav
+      generator: {
+        fn: __docNav,
+        directory: '[config.doc.rootDir]'
+      }
     },
 
     /**
@@ -55,7 +59,10 @@ module.exports = {
        * @since         2.0.0
        * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      generator: __docNav
+      generator: {
+        fn: __namespaceSNav,
+        directory: '[config.views.rootDir]'
+      }
     }
   },
 

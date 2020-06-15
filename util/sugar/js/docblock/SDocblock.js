@@ -141,7 +141,7 @@ let SDocblock = /*#__PURE__*/function () {
      */
     value: function parse(string = this._source) {
       // extract each docblocks
-      const reg = /\/\*{2}([\s\S]+?)\*\//g; // extracting blocks
+      const reg = /(<!--|\/\*{2})([\s\S]+?)(\*\/|-->)/g; // extracting blocks
 
       let blocksArray = string.match(reg);
 

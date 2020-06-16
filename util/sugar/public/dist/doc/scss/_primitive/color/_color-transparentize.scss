@@ -1,0 +1,32 @@
+
+
+
+<!-- @namespace    sugar.scss.color -->
+<!-- @name    color-transparentize -->
+
+# ```js color-transparentize ```
+
+
+Makes $color more transparent.
+The $amount must be a number between 0 and 1 (inclusive). Decreases the alpha channel of $color by that amount.
+
+## Parameters
+
+- **$color**  Color: The color to process
+
+- **$amount**  Number: The amount to transparentize the color. Must be between 0 and 1
+
+
+
+## Example (scss)
+
+```scss
+sugar.color-transparentize(rgba(#036, 0.3), 0.3); // => rgba(0, 51, 102, 0)
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+

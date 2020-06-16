@@ -1,0 +1,31 @@
+
+
+
+<!-- @namespace    sugar.scss.list -->
+<!-- @name    list-search -->
+
+# ```js list-search ```
+
+
+Search for the passed value in the passed list and return true if exist, false if not
+
+## Parameters
+
+- **$list**  List: The list in which to search for the passed value
+
+- **$value**  Mixed: The value to search in the List
+
+
+
+## Example (scss)
+
+```scss
+sugar.list-search(('hello', 'world'), 'hello'); // => true
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+

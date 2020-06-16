@@ -1,0 +1,25 @@
+
+
+<!-- @namespace    sugar.scss.loader -->
+<!-- @name    loader-circle -->
+
+# ```js loader-circle ```
+
+
+Generate a full animated, single element, circle loader
+
+
+### Example (scss)
+
+```scss
+.my-cool-loader {
+   @include sugar.loader-circle(
+     $color: sugar.color(primary)
+   );
+}
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+

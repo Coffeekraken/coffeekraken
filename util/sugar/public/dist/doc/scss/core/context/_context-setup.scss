@@ -1,0 +1,32 @@
+
+
+<!-- @namespace    sugar.scss.core.context -->
+<!-- @name    context-setup -->
+
+# ```js context-setup ```
+
+
+Register a context with a name to use it later
+
+
+### Example (scss)
+
+```scss
+\@include sugar.context-setup(my-cool-context, (
+		look-and-feel : (
+			padding-vertical : (
+				default : 0.6em
+			)
+		)
+));
+
+// using your context
+\@include sugar.context(my-cool-context) {
+		sugar.look-and-feel(padding-vertical); // => 0.6em
+}
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+

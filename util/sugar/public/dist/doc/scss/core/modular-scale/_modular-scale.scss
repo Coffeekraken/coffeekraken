@@ -1,0 +1,25 @@
+
+
+
+<!-- @namespace    sugar.scss.core.modular-scale -->
+<!-- @name    modular-scale -->
+
+# ```js modular-scale ```
+
+
+Return the modular scale value based on the settings ```modular-scale.base``` and ```modular-scale.ratio```.
+
+## Parameters
+
+- **$scale**  Number: The wanted scale
+
+- **$base** (settings.modular-scale.base) Number: The base of calculation
+
+
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+

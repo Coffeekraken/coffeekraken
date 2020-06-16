@@ -1,0 +1,29 @@
+
+
+
+<!-- @namespace    sugar.scss.core.color -->
+<!-- @name    color-saturation -->
+
+# ```js color-saturation ```
+
+
+Return the saturation of the passed color
+
+## Parameters
+
+- **$color**  Color: The color to process
+
+
+
+## Example (scss)
+
+```scss
+sugar.color-saturation(#e1d7d2); // => 20%
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+

@@ -1,0 +1,68 @@
+
+
+
+<!-- @namespace    sugar.scss.core.font -->
+<!-- @name    font -->
+
+# ```js font ```
+
+
+Return the font {Map} that correspond to the passed arguments
+
+## Parameters
+
+- **$family**  String: The font family wanted (can be a registered font name)
+
+- **$color**  Color: The color wanted (can be a registered color name)
+
+- **$size**  Number: The font-size wanted
+
+- **$style**  String: The font-style wanted
+
+- **$variant**  String: The font-variant wanted
+
+- **$weight**  String,Number: The font-weight wanted
+
+- **$decoration**  String: The text-decoration wanted
+
+- **$align**  String: The text-align wanted
+
+- **$transform**  String: The text-transform wanted
+
+- **$stretch**  String: The font-stretch wanted
+
+- **$white-space**  String: The white-space wanted
+
+- **$height**  Number: The line-height wanted
+
+- **$spacing**  Number: The letter-spacing wanted
+
+- **$indent**  Number: The text-indent wanted
+
+- **$break**  String: The line-break wanted
+
+- **$wrap**  String: The word-wrap wanted
+
+
+
+## Example (true)
+
+```true
+sugar.font(
+		$family : 'Helvetica Neue',
+		$size : 12px,
+		$wrap : norwap
+);
+// (
+		font-family : 'Helvetica Neue',
+		font-size : 12px,
+		word-wrap : nowrap
+// )
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+

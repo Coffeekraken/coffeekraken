@@ -1,0 +1,44 @@
+
+
+<!-- @namespace    sugar.scss.core.context -->
+<!-- @name    context -->
+
+# ```js context ```
+
+
+Set a context to be used inside the mixin
+
+
+### Example (scss)
+
+```scss
+// register a context
+\@include sugar.context-setup(my-cool-context, (
+		look-and-feel : (
+			padding-vertical : (
+				default : 0.6em
+			)
+		)
+));
+
+// registered context
+\@include sugar.context(my-cool-context) {
+		// your code here...
+}
+
+// inline context
+\@include sugar.context((
+		look-and-feel : (
+			padding-vertical : (
+				default : .3em
+			)
+		)
+)) {
+		// your code here...
+}
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+

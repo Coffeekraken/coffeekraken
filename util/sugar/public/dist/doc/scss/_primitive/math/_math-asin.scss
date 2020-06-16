@@ -1,0 +1,31 @@
+
+
+
+<!-- @namespace    sugar.scss.math -->
+<!-- @name    math-asin -->
+
+# ```js math-asin ```
+
+
+Calculate the sinus inverse
+
+## Parameters
+
+- **$value**  Number: The value to use
+
+- **$unit** (deg) String: The unit wanted. Possible values are deg, rad, grad and turn
+
+
+
+## Example (scss)
+
+```scss
+sugar.math-asin(1, rad); // => 1.5698197643rad
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+

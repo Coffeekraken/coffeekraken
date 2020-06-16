@@ -1,0 +1,28 @@
+
+
+<!-- @namespace    sugar.scss.helper -->
+<!-- @name    clearfix -->
+
+# ```js clearfix ```
+
+
+Apply a clearfix on the element.
+Supported methods:
+- micro
+- facebook
+- float
+- micro
+
+
+### Example (scss)
+
+```scss
+.my-cool-element {
+ \@include sugar.clearfix();
+}
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+

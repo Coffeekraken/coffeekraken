@@ -1,0 +1,37 @@
+
+
+
+<!-- @namespace    sugar.scss.util -->
+<!-- @name    translate-map -->
+
+# ```js translate-map ```
+
+
+Return the Map properties representation of a translate x,y and z
+
+## Parameters
+
+- **$x**  Number: The x translate value
+
+- **$y**  Number: The y translate value
+
+- **$z**  Number: The z translate value
+
+
+
+## Example (scss)
+
+```scss
+sugar.translate-map(10px,20px);
+// return
+// (
+// 	transform: translateX(10px) translateY(20px) translateZ(0)
+// )
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+

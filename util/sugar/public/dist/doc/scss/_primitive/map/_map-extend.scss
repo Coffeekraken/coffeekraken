@@ -1,0 +1,40 @@
+
+
+
+<!-- @namespace    sugar.scss.map -->
+<!-- @name    map-extend -->
+
+# ```js map-extend ```
+
+
+Extend the passed map with the others passed map(s)
+
+## Parameters
+
+- **$map**  Map: The map to @extend
+
+- **$maps**  Map,List-Map: The map(s) used to extend the first one
+
+
+
+## Example (scss)
+
+```scss
+sugar.map-extend((
+ 'hello': 'world'
+), (
+ 'coco': 'plop'
+));
+// returned map:
+(
+ 'hello': 'world',
+ 'coco': 'plop'
+)
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+

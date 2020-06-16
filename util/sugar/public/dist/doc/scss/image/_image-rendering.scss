@@ -1,0 +1,23 @@
+
+
+<!-- @namespace    sugar.scss.image -->
+<!-- @name    image-rendering -->
+
+# ```js image-rendering ```
+
+
+Set how to render the image
+
+
+### Example (scss)
+
+```scss
+img {
+	\@include sugar.image-rendering(crips-edges);
+}
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+

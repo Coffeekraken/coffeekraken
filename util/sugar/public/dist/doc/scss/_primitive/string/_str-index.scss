@@ -1,0 +1,31 @@
+
+
+
+<!-- @namespace    sugar.scss.string -->
+<!-- @name    str-index -->
+
+# ```js str-index ```
+
+
+Returns the first index of $substring in $string, or null if $string doesn’t contain $substring.
+
+## Parameters
+
+- **$string**  String: The string to process
+
+- **$substring**  String: The string to search
+
+
+
+## Example (scss)
+
+```scss
+sugar.str-index('Hello world', 'world'); // => 7
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+

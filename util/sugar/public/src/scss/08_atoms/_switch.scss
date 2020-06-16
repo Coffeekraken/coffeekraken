@@ -1,0 +1,3 @@
+@import 'node_modules/coffeekraken-s-switch-component/index';
+
+@include s-switch-classes($colors: default primary secondary);

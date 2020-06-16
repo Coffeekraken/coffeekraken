@@ -1,0 +1,43 @@
+
+
+
+<!-- @namespace    sugar.scss.loader -->
+<!-- @name    loader-couch-potato -->
+
+# ```js loader-couch-potato ```
+
+
+Generate a full animated, single element, couch-potato style loader
+
+## Parameters
+
+- **$size** (1em) Number: The size of the loader
+
+- **$color** (primary) Color: The color of the loader
+
+- **$a-duration** (1s) Second: The overall animation duration
+
+- **$a-delay** (0s) Second: The delay between two animation cycle
+
+- **$a-ease** (ease-in-out) String: The ease to use for the animation
+
+- **$a-rotate** (360deg) Degree: The animation rotation
+
+- **$a-scale** (2) Number: The animation scale
+
+
+
+## Example (scss)
+
+```scss
+.my-cool-loader {
+		\@include sugar.loader-couch-potato();
+}
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+

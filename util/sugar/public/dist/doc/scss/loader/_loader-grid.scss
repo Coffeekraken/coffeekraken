@@ -1,0 +1,63 @@
+
+
+
+<!-- @namespace    sugar.scss.loader -->
+<!-- @name    loader-grid -->
+
+# ```js loader-grid ```
+
+
+Generate a grid style loader
+
+## Parameters
+
+- **$shape** (rect) String: The shape of the grid items. Can be rect or circle
+
+- **$color** (color(primary)) Color: The color to use for the grid items
+
+- **$cols** (3) Number: How many columns the grid must have
+
+- **$rows** (3) Number: How many rows must have the grid
+
+- **$size** (10px) Number: The size of each grid items
+
+- **$gap** (5px) Number: The size of the gaps between the grid items
+
+- **$offset**  Number: The offset used for the grid
+
+- **$rotate** (0deg) Number: Apply a rotation to the grid items
+
+- **$a-shape**  String: The animation shape to apply to the grid items. Can be rect or circle
+
+- **$a-steps** (5) Number: How many steps must have the animation
+
+- **$a-spread** (15px) Number: How much must the grid items spread during the animation
+
+- **$a-rotate**  Number: How many degrees must the grid items rotate during the animation
+
+- **$a-scale**  Number: Apply a scale for the animation of the grid items
+
+- **$a-opacity**  Number: Apply an opacity to the grid items during the animation
+
+- **$a-duration** (1s) Second: The duration of the animation
+
+- **$a-delay** (0s) Second: How many seconds to wait between each animations
+
+- **$a-ease** (ease-in-out) String: The easing to use for the animation
+
+
+
+## Example (scss)
+
+```scss
+.my-cool-loader {
+   @include sugar.loader-grid();
+}
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+

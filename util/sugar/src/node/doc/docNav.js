@@ -48,7 +48,9 @@ module.exports = function docNav(
   );
 
   let json = docMap;
-  if (__isPath(docMap, true)) {
+  if (__isPath(`${docMap}/docMap.json`, true)) {
+    json = JSON.parse(__fs.readFileSync(`${docMap}/docMap.json`, 'utf8'));
+  } else if (__isPath(docMap, true)) {
     json = JSON.parse(__fs.readFileSync(docMap, 'utf8'));
   }
 

@@ -1,0 +1,16 @@
+.ck-header {
+  background: Sugar.color(secondary);
+  height: 70px;
+  width: calc(100% - 100px);
+  display: block;
+  @include Sugar.position(fixed, top, left, $top: 50px, $left: 50px);
+  @include Sugar.vertical-aligner();
+  padding: 0 10px;
+}
+  .ck-header__logo {
+    @include Sugar.coffeekraken-logo(primary, white);
+    width: 100px;
+  }
+  .ck-header__title {
+    color: Sugar.color(white);
+  }

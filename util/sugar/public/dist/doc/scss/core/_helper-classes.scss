@@ -1,0 +1,1328 @@
+
+
+<!-- @namespace    sugar.scss.helper.class.pull -->
+<!-- @name    pull-left -->
+
+# ```js pull-left ```
+
+
+Allows you to pull an element to the left side
+
+
+
+## Example (html)
+
+```html
+<div>
+	<span class="pull-left">Hello world</span>
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.pull -->
+<!-- @name    pull-right -->
+
+# ```js pull-right ```
+
+
+Allows you to pull an element to the right side
+
+
+
+## Example (html)
+
+```html
+<div>
+	<span class="pull-right">Hello world</span>
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.position -->
+<!-- @name    relative -->
+
+# ```js relative ```
+
+
+Set an element position as ```relative```
+
+
+
+## Example (html)
+
+```html
+<div class="relative">
+	I'm relative now
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.position -->
+<!-- @name    absolute -->
+
+# ```js absolute ```
+
+
+Set an element position as ```absolute```
+
+
+
+## Example (html)
+
+```html
+<div class="absolute">
+	I'm absolute now
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.float -->
+<!-- @name    clear-left -->
+
+# ```js clear-left ```
+
+
+Clear the left float on the element
+
+
+
+## Example (html)
+
+```html
+<div class="clear-left">
+	I clear the left float
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.float -->
+<!-- @name    clear-right -->
+
+# ```js clear-right ```
+
+
+Clear the right float on the element
+
+
+
+## Example (html)
+
+```html
+<div class="clear-right">
+	I clear the right float
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.float -->
+<!-- @name    clear -->
+
+# ```js clear ```
+
+
+Clear both float on the element
+
+
+
+## Example (html)
+
+```html
+<div class="clear">
+	I clear both floats
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.pointer.event -->
+<!-- @name    pointer-events-none -->
+
+# ```js pointer-events-none ```
+
+
+Disable any pointer events
+
+
+
+## Example (html)
+
+```html
+<div class="pointer-events-none">
+	I will not react to any pointer events
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.pointer.event -->
+<!-- @name    pointer-events-all -->
+
+# ```js pointer-events-all ```
+
+
+Disable any pointer events
+
+
+
+## Example (html)
+
+```html
+<div class="pointer-events-all">
+	I will not react to any pointer events
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.display -->
+<!-- @name    block -->
+
+# ```js block ```
+
+
+Display the element as ```block```
+
+
+
+## Example (html)
+
+```html
+<div class="block">
+	I'm displayed as block
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.display -->
+<!-- @name    inline -->
+
+# ```js inline ```
+
+
+Display the element as ```inline```
+
+
+
+## Example (html)
+
+```html
+<div class="inline">
+	I'm displayed as inline
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.display -->
+<!-- @name    inline-block -->
+
+# ```js inline-block ```
+
+
+Display the element as ```inline-block```
+
+
+
+## Example (html)
+
+```html
+<div class="inline-block">
+	I'm displayed as inline-block
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.display -->
+<!-- @name    show -->
+
+# ```js show ```
+
+
+Display the element as ```block```
+
+
+
+## Example (html)
+
+```html
+<div class="show">
+	I'm displayed
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.display -->
+<!-- @name    show-inline -->
+
+# ```js show-inline ```
+
+
+Display the element as ```inline-block```
+
+
+
+## Example (html)
+
+```html
+<div class="show-inline">
+	I'm inline displayed
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.display -->
+<!-- @name    hidden -->
+
+# ```js hidden ```
+
+
+Hide the element by setting the display to ```none```
+
+
+
+## Example (html)
+
+```html
+<div class="hidden">
+	I'm hidden
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.display -->
+<!-- @name    hide -->
+
+# ```js hide ```
+
+
+Hide the element by setting the display to ```none```
+
+
+
+## Example (html)
+
+```html
+<div class="hide">
+	I'm hidden
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.display -->
+<!-- @name    visible -->
+
+# ```js visible ```
+
+
+Display the element by setting the visibility to ```visible```
+
+
+
+## Example (html)
+
+```html
+<div class="visible">
+	I'm visible
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.display -->
+<!-- @name    invisible -->
+
+# ```js invisible ```
+
+
+Display the element by setting the visibility to ```hidden```
+
+
+
+## Example (html)
+
+```html
+<div class="invisible">
+	I'm invisible
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.display -->
+<!-- @name    visually-hidden -->
+
+# ```js visually-hidden ```
+
+
+Hide the element from display but not for SEO.
+This class use some tricks to make the element dissapear without using some ```display:none;```, etc...
+
+
+
+## Example (html)
+
+```html
+<div class="visually-hidden">
+	I'm only visually hidden
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.text -->
+<!-- @name    t-hidden -->
+
+# ```js t-hidden ```
+
+
+Hide the text
+
+
+
+## Example (html)
+
+```html
+<div class="t-hidden">
+	I'm not visible
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.text -->
+<!-- @name    t-truncate -->
+
+# ```js t-truncate ```
+
+
+Hide the text
+
+
+
+## Example (html)
+
+```html
+<div class="t-truncate">
+	I'm truncated cause I talk a lot too much Nulla mauris eros, finibus ac faucibus et, tempus quis risus. Praesent sit amet nulla vel libero euismod sodales eu nec.
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.text.align -->
+<!-- @name    t-left -->
+
+# ```js t-left ```
+
+
+Align the text to the left
+
+
+
+## Example (html)
+
+```html
+<div class="t-left">
+	I'm left aligned
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.text.align -->
+<!-- @name    t-right -->
+
+# ```js t-right ```
+
+
+Align the text to the right
+
+
+
+## Example (html)
+
+```html
+<div class="t-right">
+	I'm right aligned
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.text.align -->
+<!-- @name    t-center -->
+
+# ```js t-center ```
+
+
+Align the text to the center
+
+
+
+## Example (html)
+
+```html
+<div class="t-center">
+	I'm centered
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.text.align -->
+<!-- @name    t-justify -->
+
+# ```js t-justify ```
+
+
+Make the text justified
+
+
+
+## Example (html)
+
+```html
+<div class="t-justify">
+	Nullam vel feugiat nunc. Phasellus facilisis, nisi sit amet viverra rhoncus, arcu risus volutpat dolor, sed euismod magna tellus ac purus. Praesent augue lorem, ullamcorper ac accumsan nec, suscipit eu.
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.text.transform -->
+<!-- @name    t-lowercase -->
+
+# ```js t-lowercase ```
+
+
+Transform the text to lowercase
+
+
+
+## Example (html)
+
+```html
+<div class="t-lowercase">
+	I'M LOWERCASE
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.text.transform -->
+<!-- @name    t-uppercase -->
+
+# ```js t-uppercase ```
+
+
+Transform the text to uppercase
+
+
+
+## Example (html)
+
+```html
+<div class="t-uppercase">
+	I'm uppercase
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.text.transform -->
+<!-- @name    t-capitalize -->
+
+# ```js t-capitalize ```
+
+
+Capizalize the words
+
+
+
+## Example (html)
+
+```html
+<div class="t-capitalize">
+	I'm capitalized
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.font.weight -->
+<!-- @name    f-bold -->
+
+# ```js f-bold ```
+
+
+Set the font-weight to ```bold```
+
+
+
+## Example (html)
+
+```html
+This <span class="f-bold">word</span> is bold
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.font.weight -->
+<!-- @name    f-lighter -->
+
+# ```js f-lighter ```
+
+
+Set the font-weight to ```lighter```
+
+
+
+## Example (html)
+
+```html
+This <span class="f-lighter">word</span> is lighter
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.font.weight -->
+<!-- @name    f-bolder -->
+
+# ```js f-bolder ```
+
+
+Set the font-weight to ```bolder```
+
+
+
+## Example (html)
+
+```html
+This <span class="f-bolder">word</span> is bolder
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.font.weight -->
+<!-- @name    f-normal -->
+
+# ```js f-normal ```
+
+
+Set the font-weight to ```normal```
+
+
+
+## Example (html)
+
+```html
+<div class="f-bold">
+	This <span class="f-normal">word</span> is normal
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.font -->
+<!-- @name    f-italic -->
+
+# ```js f-italic ```
+
+
+Set the font-style to ```italic```
+
+
+
+## Example (html)
+
+```html
+This <span class="f-italic">word</span> is italic
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.font.style -->
+<!-- @name    f-oblique -->
+
+# ```js f-oblique ```
+
+
+Set the font-style to ```oblique```
+
+
+
+## Example (html)
+
+```html
+This <span class="f-oblique">word</span> is oblique
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.font.variant -->
+<!-- @name    f-small-caps -->
+
+# ```js f-small-caps ```
+
+
+Set the font-variant to ```small-caps```
+
+
+
+## Example (html)
+
+```html
+This <span class="f-small-caps">word</span> is small-caps
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.block -->
+<!-- @name    block-center -->
+
+# ```js block-center ```
+
+
+Set the element to as ```display:block``` and center it
+
+
+
+## Example (html)
+
+```html
+<div class="block-center bkg-primary" style="width:100px;">
+	I'm a centered block
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.size -->
+<!-- @name    abs-cover -->
+
+# ```js abs-cover ```
+
+
+Set a size that will cover the entire parent surface by positionning it in absolute
+
+
+
+## Example (html)
+
+```html
+<div class="ratio-16-9">
+	<img src="https://source.unsplash.com/random" class="abs-cover" />
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.size -->
+<!-- @name    abs-contain -->
+
+# ```js abs-contain ```
+
+
+Set a size that will contain the entire parent surface by positionning it in absolute
+
+
+
+## Example (html)
+
+```html
+<div class="ratio-16-9">
+	<img src="https://source.unsplash.com/random" class="abs-contain" />
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.size -->
+<!-- @name    abs-fit -->
+
+# ```js abs-fit ```
+
+
+Set a size that will fit the entire parent surface by positionning it in absolute
+
+
+
+## Example (html)
+
+```html
+<div class="ratio-16-9">
+	<img src="https://source.unsplash.com/random" class="abs-fit" />
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.media-object -->
+<!-- @name    mo .mo--center .mo__content -->
+
+# ```js mo .mo--center .mo__content ```
+
+
+Famous media object class
+
+
+
+## Example (html)
+
+```html
+<div class="mo">
+  <div class="mo__content">
+    <img src="https://source.unsplash.com/random/100x100" />
+  </div>
+  <div class="mo__content">
+    <h2 class="h3">Hello World</h2>
+    <p class="p">Phasellus fringilla aliquet justo eget pulvinar. Donec in justo leo.</p>
+  </div>
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.clearfix -->
+<!-- @name    clearfix -->
+
+# ```js clearfix ```
+
+
+Apply the micro clearfix on the element
+
+
+
+## Example (html)
+
+```html
+<div class="clearfix bkg-primary">
+	<div class="pull-right">right pulled</div>
+</div>
+<div class="bkg-primary">
+	<div class="pull-right">right pulled without clearfix</div>
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.clearfix -->
+<!-- @name    clearfix-float -->
+
+# ```js clearfix-float ```
+
+
+Apply the float clearfix on the element
+
+
+
+## Example (html)
+
+```html
+<div class="clearfix-float bkg-primary">
+	<div class="pull-right">right pulled</div>
+</div>
+<div class="bkg-primary">
+	<div class="pull-right">right pulled without clearfix</div>
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.clearfix -->
+<!-- @name    clearfix -->
+
+# ```js clearfix ```
+
+
+Apply the micro clearfix on the element
+
+
+
+## Example (html)
+
+```html
+<div class="clearfix bkg-primary">
+	<div class="pull-right">right pulled</div>
+</div>
+<div class="bkg-primary">
+	<div class="pull-right">right pulled without clearfix</div>
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.clearfix -->
+<!-- @name    clearfix-overflow -->
+
+# ```js clearfix-overflow ```
+
+
+Apply the overflow clearfix on the element
+
+
+
+## Example (html)
+
+```html
+<div class="clearfix-overflow bkg-primary">
+	<div class="pull-right">right pulled</div>
+</div>
+<div class="bkg-primary">
+	<div class="pull-right">right pulled without clearfix</div>
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.clearfix -->
+<!-- @name    clearfix-facebook -->
+
+# ```js clearfix-facebook ```
+
+
+Apply the facebook clearfix on the element
+
+
+
+## Example (html)
+
+```html
+<div class="clearfix-facebook bkg-primary">
+	<div class="pull-right">right pulled</div>
+</div>
+<div class="bkg-primary">
+	<div class="pull-right">right pulled without clearfix</div>
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.ratio -->
+<!-- @name    ratio-21-9 -->
+
+# ```js ratio-21-9 ```
+
+
+Keep a 16/9 ratio on a particular element. Applied by setting height to 0 and paddingtop to 100% / 16 * 9
+
+
+
+## Example (html)
+
+```html
+<div class="bkg-primary ratio-21-9"></div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.ratio -->
+<!-- @name    ratio-16-9 -->
+
+# ```js ratio-16-9 ```
+
+
+Keep a 16/9 ratio on a particular element. Applied by setting height to 0 and paddingtop to 100% / 16 * 9
+
+
+
+## Example (html)
+
+```html
+<div class="bkg-primary ratio-16-9"></div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.ratio -->
+<!-- @name    ratio-4-3 -->
+
+# ```js ratio-4-3 ```
+
+
+Keep a 4/3 ratio on a particular element. Applied by setting height to 0 and paddingtop to 100% / 4 * 3
+
+
+
+## Example (html)
+
+```html
+<div class="bkg-primary ratio-4-3"></div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.ratio -->
+<!-- @name    ratio-1-1 -->
+
+# ```js ratio-1-1 ```
+
+
+Keep a 1/1 ratio on a particular element. Applied by setting height to 0 and paddingtop to 100%
+
+
+
+## Example (html)
+
+```html
+<div class="bkg-primary ratio-1-1"></div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.transition -->
+<!-- @name    no-transition -->
+
+# ```js no-transition ```
+
+
+Disable the transitions **only on the element**
+
+
+
+## Example (html)
+
+```html
+<div class="no-transition">
+	I have no more transitions
+	<div>But I have</div>
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.transition -->
+<!-- @name    clear-transition -->
+
+# ```js clear-transition ```
+
+
+Disable the transitions **on the element and all his children**
+
+
+
+## Example (html)
+
+```html
+<div class="clear-transition">
+	I have no more transitions
+	<div>Me neither</div>
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.animation -->
+<!-- @name    no-animation -->
+
+# ```js no-animation ```
+
+
+Disable the animations **only on the element**
+
+
+
+## Example (html)
+
+```html
+<div class="no-animation">
+	I have no more animations
+	<div>But I have</div>
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.animation -->
+<!-- @name    clear-animation -->
+
+# ```js clear-animation ```
+
+
+Disable the transitions **on the element and all his children**
+
+
+
+## Example (html)
+
+```html
+<div class="clear-animation">
+	I have no more animations
+	<div>Me neither</div>
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.transmation -->
+<!-- @name    no-transmation -->
+
+# ```js no-transmation ```
+
+
+Disable the animations and transitions **only on the element**
+
+
+
+## Example (html)
+
+```html
+<div class="no-transmation">
+	I have no more animations or transitions
+	<div>But I have</div>
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.helper.class.transmation -->
+<!-- @name    clear-transmation -->
+
+# ```js clear-transmation ```
+
+
+Disable the animations and transitions **on the element and all his children**
+
+
+
+## Example (html)
+
+```html
+<div class="clear-transmation">
+	I have no more animations or transitions
+	<div>Me neither</div>
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+

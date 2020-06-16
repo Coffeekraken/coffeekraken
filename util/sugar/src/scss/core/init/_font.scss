@@ -1,0 +1,58 @@
+@use 'sass:meta';
+
+@mixin init-font() {
+
+  $fonts: setting("fonts");
+
+  @each $font-name, $font in $fonts {
+    @if meta.type-of($font) == string {
+      $font: map-get($fonts, $font);
+    }
+    @if not map-get($font, family) {
+      $font: map-set($font, family, $font-name);
+    }
+    $font: map-remove($font, cap-height);
+    @if map-get($font, src) {
+      @include font-face(
+        $font-family: inspect(map-get($font, family)),
+        $src: map-get($font, src),
+        $extensions: map-get($font, extensions),
+        $font-weight: map-get($font, weight),
+        $font-style: map-get($font, style),
+        $font-display: map-get($font, display)
+      );
+    } @else {
+      $ff: map-get($font, family);
+      $fs: map-get($font, style);
+      $fw: map-get($font, weight);
+      $fd: map-get($font, display);
+      /**
+       * @name   			#{$font-name}
+       * @styleguide 		Fonts / Faces
+       * @display 		font
+       * @font-family 	#{$ff}
+       * @font-style 		#{$fs}
+       * @font-weight 	#{$fw}
+       * @font-display    #{$fd}
+       */
+    }
+  }
+
+  html {
+    $base-font-size: setting("typography.font-size");
+    $base-font-sizes: setting("typography.font-sizes");
+    font-size: $base-font-size;
+    color: color(text);
+    @if meta.type-of($base-font-sizes) == map {
+      @each $size, $media in $base-font-sizes {
+        @include media($media...) {
+          font-size: $size;
+        }
+      }
+    }
+
+    // try to get the font family from fonts
+    // @include font(setting("typography.font-family"));
+  }
+
+}

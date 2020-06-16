@@ -1,0 +1,30 @@
+
+
+<!-- @namespace    sugar.scss.effect -->
+<!-- @name    effect-long-shadow -->
+
+# ```js effect-long-shadow ```
+
+
+Generate a long shadow effect like [this](https://www.google.ch/search?q=long+shadow&espv=2&biw=2560&bih=1316&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjjne6x49LPAhVBHRQKHat8AW8Q_AUIBigB)
+
+
+### Example (scss)
+
+```scss
+.my-cool-title {
+		\@include sugar.effect-long-shadow(
+			$depth : 10
+		);
+}
+.my-cool-box {
+		\@include sugar.effect-long-shadow(
+			$type : box
+		);
+}
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+

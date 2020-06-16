@@ -1,0 +1,30 @@
+
+
+
+<!-- @namespace    sugar.scss.unit -->
+<!-- @name    strip-units -->
+
+# ```js strip-units ```
+
+
+Return a number without any units
+
+## Parameters
+
+- **$number**  Number: The number to process
+
+
+
+## Example (scss)
+
+```scss
+sugar.strip-units(12px); // => 12
+sugar.strip-units(30rem); // => 30
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+

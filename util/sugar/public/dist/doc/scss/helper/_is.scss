@@ -1,0 +1,66 @@
+
+
+
+<!-- @namespace    sugar.scss.helper -->
+<!-- @name    is -->
+
+# ```js is ```
+
+
+Check if the passed value is of a certain type
+
+Here's the available types that you can check
+- mixed => mean anything
+- null
+- url
+- px
+- pt
+- rem
+- em
+- percent | %
+- vw
+- vh
+- ex
+- ch
+- cm
+- mm
+- in
+- pc
+- s | second
+- boolean | bool
+- function
+- number
+- int | integer
+- string
+- color
+- list
+- map
+- deg | degree
+- list-{type} => check if is a list of the specified type
+- map-{type} => check if is a map of the specified type
+
+## Parameters
+
+- **$value**  Mixed: The value to check
+
+- **$type**  String: The type to check
+
+
+
+## Example (scss)
+
+```scss
+sugar.is(hello, string) // => true
+sugar.is('hello', string) // => true
+sugar.is(#fff, color) // => true
+sugar.is(hello #fff, list-color) // => false
+sugar.is(#fff #ddd, list-color) // => true
+// etc...
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+

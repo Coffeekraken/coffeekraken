@@ -37,11 +37,7 @@ module.exports = (directory, settings = {}) => {
       settings
     );
 
-    console.log(directory);
-
     const namespaceObj = await __firstLookup(directory, settings);
-
-    console.log(namespaceObj);
 
     const navObj = {};
 

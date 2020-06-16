@@ -1,0 +1,29 @@
+
+
+
+<!-- @namespace    sugar.scss.list -->
+<!-- @name    list-length -->
+
+# ```js list-length ```
+
+
+Return the number of item in the passed list
+
+## Parameters
+
+- **$list**  List: The list to check
+
+
+
+## Example (scss)
+
+```scss
+sugar.list-length(('hello','world')); // => 2
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+

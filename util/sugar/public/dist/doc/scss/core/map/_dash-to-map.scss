@@ -1,0 +1,35 @@
+
+
+
+<!-- @namespace    sugar.scss.core.map -->
+<!-- @name    dash-to-map -->
+
+# ```js dash-to-map ```
+
+
+Transform a dash notation value into a map
+Dash notation value is : -key1 value1 -key2 value2
+
+## Parameters
+
+- **$dash**  List: The dash list notation to transform
+
+
+
+## Example (true)
+
+```true
+$dash : -hello world -coco universe
+sugar.dash-to-map($dash);
+// (
+// 	hello : world,
+// 	coco : universe
+// )
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+

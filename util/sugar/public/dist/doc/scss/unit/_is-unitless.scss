@@ -1,0 +1,30 @@
+
+
+
+<!-- @namespace    sugar.scss.unit -->
+<!-- @name    is-unitless -->
+
+# ```js is-unitless ```
+
+
+Check if the passed variable is unitless or not
+
+## Parameters
+
+- **$number**  Number: The number to check
+
+
+
+## Example (scss)
+
+```scss
+sugar.is-unitless(20); // => true
+sugar.is-unitless(10px); // => false
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+

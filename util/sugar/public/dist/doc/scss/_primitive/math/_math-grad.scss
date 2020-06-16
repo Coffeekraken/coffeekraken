@@ -1,0 +1,29 @@
+
+
+
+<!-- @namespace    sugar.scss.math -->
+<!-- @name    math-grad -->
+
+# ```js math-grad ```
+
+
+Convert the passed unitless angle to gradian
+
+## Parameters
+
+- **$angle**  Number: The angle to convert to gradian
+
+
+
+## Example (scss)
+
+```scss
+sugar.math-grad(10); // => 636.6197723675grad
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+

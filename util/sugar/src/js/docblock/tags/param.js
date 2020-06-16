@@ -27,21 +27,29 @@ export default function param(data) {
     )
       return;
     const parts = param.value.split(/\s{2,20000}/).map((l) => l.trim());
-    let type = __upperFirst(parts[0].replace('{', '').replace('}', ''));
-    const variable = parts[1];
-    const description = parts[2];
+    let type =
+      parts && parts[0]
+        ? __upperFirst(parts[0].replace('{', '').replace('}', ''))
+        : null;
+    const variable = parts && parts[1] ? parts[1] : null;
+    const description = parts && parts[2] ? parts[2] : null;
     let name = variable;
     let defaultValue = undefined;
-    const variableMatch = variable.match(/^\[(.*)\]$/);
+    let variableMatch = null;
 
-    if (type.includes('|')) {
+    if (variable && typeof variable === 'string')
+      variableMatch = variable.match(/^\[(.*)\]$/);
+
+    if (type && type.includes('|')) {
       type = type.split('|').map((l) => __upperFirst(l.trim()));
     }
 
     if (variableMatch) {
       const variableParts = variableMatch[1].split('=');
-      name = variableParts[0].trim();
-      defaultValue = __parse(variableParts[1].trim());
+      if (variableParts.length === 2) {
+        name = variableParts[0].trim();
+        defaultValue = __parse(variableParts[1].trim());
+      }
     }
 
     res[name] = {

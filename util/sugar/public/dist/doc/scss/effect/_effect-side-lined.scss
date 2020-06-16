@@ -1,0 +1,27 @@
+
+
+<!-- @namespace    sugar.scss.effect -->
+<!-- @name    effect-side-lined -->
+
+# ```js effect-side-lined ```
+
+
+Create side lines around an item
+
+
+### Example (scss)
+
+```scss
+h1 {
+		\@include sugar.effect-side-lined(
+			$padding : 20px,
+			$side : right,
+			$width : 100%
+		);
+}
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+

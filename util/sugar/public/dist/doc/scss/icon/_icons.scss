@@ -1,0 +1,21 @@
+
+
+<!-- @namespace    sugar.scss.icon -->
+<!-- @name    icons -->
+
+# ```js icons ```
+
+
+Generate some icon classes like .icon-$icon-name
+
+
+### Example (scss)
+
+```scss
+\@include sugar.icons(fa-user fa-bell fa-circle);
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+

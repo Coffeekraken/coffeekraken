@@ -1,0 +1,1005 @@
+
+
+<!-- @namespace    sugar.scss.core.class -->
+<!-- @name    init-classes -->
+
+# ```js init-classes ```
+
+
+Register all the dynamic helper classes that depends on the settings, etc...
+This is used internaly
+
+
+### Example (scss)
+
+```scss
+\@include sugar.init-classes();
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.filter -->
+<!-- @name    fi-#{$name} -->
+
+# ```js fi-#{$name} ```
+
+
+Apply the filter **#{$name}**
+
+
+
+## Example (html)
+
+```html
+<div class="fi-#{$name}">
+	I'm filtered with #{$name}
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.transition -->
+<!-- @name    tr-#{$name} -->
+
+# ```js tr-#{$name} ```
+
+
+Apply the transition **#{$name}**
+
+
+
+## Example (html)
+
+```html
+<div class="tr-#{$name}">
+	I'm transitionned with #{$name}
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.font -->
+<!-- @name    f-#{$name} -->
+
+# ```js f-#{$name} ```
+
+
+Apply the font **#{$name}**
+
+
+
+## Example (html)
+
+```html
+<div class="f-#{$name}">
+	I have the font "#{$name}" applied
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.margin.#{$name} -->
+<!-- @name    #{$cname} -->
+
+# ```js #{$cname} ```
+
+
+Set the **bottom** margin to the **#{$size}** size
+
+
+
+## Example (html)
+
+```html
+<div class="#{$cname}" style="background:#{color(primary)}; width:100px; height:5px"></div>
+<div style="background:#{color(secondary)}; width:100px; height:5px"></div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.margin.#{$name} -->
+<!-- @name    #{$cname} -->
+
+# ```js #{$cname} ```
+
+
+Set the **top** margin to the **#{$size}** size
+
+
+
+## Example (html)
+
+```html
+<div style="background:#{color(primary)}; width:100px; height:5px"></div>
+<div class="#{$cname}" style="background:#{color(secondary)}; width:100px; height:5px"></div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.margin.#{$name} -->
+<!-- @name    #{$cname} -->
+
+# ```js #{$cname} ```
+
+
+Set the **left** margin to the **#{$size}** size
+
+
+
+## Example (html)
+
+```html
+<div style="display:inline-block; background:#{color(primary)}; width:50px; height:50px"></div>
+<div class="#{$cname}" style="display:inline-block; background:#{color(secondary)}; width:50px; height:50px"></div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.margin.#{$name} -->
+<!-- @name    #{$cname} -->
+
+# ```js #{$cname} ```
+
+
+Set the **right* margin to the **#{$size}** size
+
+
+
+## Example (html)
+
+```html
+<div class="#{$cname}" style="display:inline-block; background:#{color(primary)}; width:50px; height:50px"></div>
+<div style="display:inline-block; background:#{color(secondary)}; width:50px; height:50px"></div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.margin.#{$name} -->
+<!-- @name    #{$cname} -->
+
+# ```js #{$cname} ```
+
+
+Set the **side** margin to the **#{$size}** size
+
+
+
+## Example (html)
+
+```html
+<div class="#{$cname}" style="display:inline-block; background:#{color(primary)}; width:50px; height:50px"></div>
+<div style="display:inline-block; background:#{color(secondary)}; width:50px; height:50px"></div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.padding.#{$name} -->
+<!-- @name    #{$cname} -->
+
+# ```js #{$cname} ```
+
+
+Set the paddings to the **#{$size}** size
+
+
+
+## Example (html)
+
+```html
+<div class="#{$cname}" style="border:1px solid #{color(primary)}; width:150px; height:150px;">
+	<div style="background:#{color(secondary)}; width:100%; height:100%"></div>
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.padding.#{$name} -->
+<!-- @name    #{$cname} -->
+
+# ```js #{$cname} ```
+
+
+Set the **bottom** padding to the **#{$size}** size
+
+
+
+## Example (html)
+
+```html
+<div class="#{$cname}" style="border:1px solid #{color(primary)}; width:150px; height:150px;">
+	<div style="background:#{color(secondary)}; width:100%; height:100%"></div>
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.padding.#{$name} -->
+<!-- @name    #{$cname} -->
+
+# ```js #{$cname} ```
+
+
+Set the **top** padding to the **#{$size}** size
+
+
+
+## Example (html)
+
+```html
+<div class="#{$cname}" style="border:1px solid #{color(primary)}; width:150px; height:150px;">
+	<div style="background:#{color(secondary)}; width:100%; height:100%"></div>
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.padding.#{$name} -->
+<!-- @name    #{$cname} -->
+
+# ```js #{$cname} ```
+
+
+Set the **left** padding  to the **#{$size}** size
+
+
+
+## Example (html)
+
+```html
+<div class="#{$cname}" style="border:1px solid #{color(primary)}; width:150px; height:150px;">
+	<div style="background:#{color(secondary)}; width:100%; height:100%"></div>
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.padding.#{$name} -->
+<!-- @name    #{$cname} -->
+
+# ```js #{$cname} ```
+
+
+Set the **right** padding  to the **#{$size}** size
+
+
+
+## Example (html)
+
+```html
+<div class="#{$cname}" style="border:1px solid #{color(primary)}; width:150px; height:150px;">
+	<div style="background:#{color(secondary)}; width:100%; height:100%"></div>
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.padding.#{$name} -->
+<!-- @name    #{$cname} -->
+
+# ```js #{$cname} ```
+
+
+Set the **side** padding  to the **#{$size}** size
+
+
+
+## Example (html)
+
+```html
+<div class="#{$cname}" style="border:1px solid #{color(primary)}; width:150px; height:150px;">
+	<div style="background:#{color(secondary)}; width:100%; height:100%"></div>
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.size -->
+<!-- @name    s-#{$size} -->
+
+# ```js s-#{$size} ```
+
+
+Set the size **#{$size}** relative to the root element
+
+
+
+## Example (html)
+
+```html
+<div class="s-#{$size}">
+	I have the size "#{$size}" defined
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.size -->
+<!-- @name    s-#{$size}-rel -->
+
+# ```js s-#{$size}-rel ```
+
+
+Set the size **#{$size}** relative to my parent
+
+
+
+## Example (html)
+
+```html
+<div class="s-#{$size}-rel">
+	I have the size "#{$size}" defined relative to my parent
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.padding.no -->
+<!-- @name    no-p-t -->
+
+# ```js no-p-t ```
+
+
+Reset **top** padding
+
+
+
+## Example (html)
+
+```html
+<div class="no-p-t" style="display:inline-block; background:#{color(primary)}; width:50px; height:50px;"></div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.padding.no -->
+<!-- @name    no-p-r -->
+
+# ```js no-p-r ```
+
+
+Reset **right** padding
+
+
+
+## Example (html)
+
+```html
+<div class="no-p-r" style="display:inline-block; background:#{color(primary)}; width:50px; height:50px;"></div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.padding.no -->
+<!-- @name    no-p-b -->
+
+# ```js no-p-b ```
+
+
+Reset **bottom** padding
+
+
+
+## Example (html)
+
+```html
+<div class="no-p-b" style="display:inline-block; background:#{color(primary)}; width:50px; height:50px;"></div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.padding.no -->
+<!-- @name    no-p-l -->
+
+# ```js no-p-l ```
+
+
+Reset **left** padding
+
+
+
+## Example (html)
+
+```html
+<div class="no-p-l" style="display:inline-block; background:#{color(primary)}; width:50px; height:50px;"></div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.padding.no -->
+<!-- @name    no-p-s -->
+
+# ```js no-p-s ```
+
+
+Reset **left** and **right** paddings
+
+
+
+## Example (html)
+
+```html
+<div class="no-p-s" style="display:inline-block; background:#{color(primary)}; width:50px; height:50px;"></div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.margin.no -->
+<!-- @name    no-m-t -->
+
+# ```js no-m-t ```
+
+
+Reset **top** padding
+
+
+
+## Example (html)
+
+```html
+<div class="no-m-t" style="display:inline-block; background:#{color(primary)}; width:50px; height:50px;"></div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.margin.no -->
+<!-- @name    no-m-r -->
+
+# ```js no-m-r ```
+
+
+Reset **right** padding
+
+
+
+## Example (html)
+
+```html
+<div class="no-m-r" style="display:inline-block; background:#{color(primary)}; width:50px; height:50px;"></div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.margin.no -->
+<!-- @name    no-m-b -->
+
+# ```js no-m-b ```
+
+
+Reset **bottom** padding
+
+
+
+## Example (html)
+
+```html
+<div class="no-m-b" style="display:inline-block; background:#{color(primary)}; width:50px; height:50px;"></div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.margin.no -->
+<!-- @name    no-m-l -->
+
+# ```js no-m-l ```
+
+
+Reset **left** padding
+
+
+
+## Example (html)
+
+```html
+<div class="no-m-l" style="display:inline-block; background:#{color(primary)}; width:50px; height:50px;"></div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.padding.no -->
+<!-- @name    no-m-s -->
+
+# ```js no-m-s ```
+
+
+Reset **left** and **right** margins
+
+
+
+## Example (html)
+
+```html
+<div class="no-m-s" style="display:inline-block; background:#{color(primary)}; width:50px; height:50px;"></div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.color.#{$name} -->
+<!-- @name    #{$cls} -->
+
+# ```js #{$cls} ```
+
+
+Specify the color to **#{$name}**
+
+
+
+## Example (html)
+
+```html
+<div class="#{$cls}">
+	I'm in "#{$name}" color
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.color.#{$name} -->
+<!-- @name    #{$cls} -->
+
+# ```js #{$cls} ```
+
+
+Specify the background color to **#{$name}**
+
+
+
+## Example (html)
+
+```html
+<div class="#{$cls} p" style="color:white">
+	My background color is "#{$name}"
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.color.#{$name} -->
+<!-- @name    #{$cls} -->
+
+# ```js #{$cls} ```
+
+
+Specify the border of 1px solid to **#{$name}**
+
+
+
+## Example (html)
+
+```html
+<div class="#{$cls}">
+	I have a #{$name} border color
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.color.#{$name} -->
+<!-- @name    #{$cls} -->
+
+# ```js #{$cls} ```
+
+
+Specify the border top of 1px solid to **#{$name}**
+
+
+
+## Example (html)
+
+```html
+<div class="#{$cls}">
+	I have a #{$name} border top color
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.color.#{$name} -->
+<!-- @name    #{$cls} -->
+
+# ```js #{$cls} ```
+
+
+Specify the border right of 1px solid to **#{$name}**
+
+
+
+## Example (html)
+
+```html
+<div class="#{$cls}">
+	I have a #{$name} border right color
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.color.#{$name} -->
+<!-- @name    #{$cls} -->
+
+# ```js #{$cls} ```
+
+
+Specify the border bottom of 1px solid to **#{$name}**
+
+
+
+## Example (html)
+
+```html
+<div class="#{$cls}">
+	I have a #{$name} border bottom color
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.color.#{$name} -->
+<!-- @name    #{$cls} -->
+
+# ```js #{$cls} ```
+
+
+Specify the border left of 1px solid to **#{$name}**
+
+
+
+## Example (html)
+
+```html
+<div class="#{$cls}">
+	I have a #{$name} border left color
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.color.#{$name} -->
+<!-- @name    #{$cls} -->
+
+# ```js #{$cls} ```
+
+
+Specify the border side of 1px solid to **#{$name}**
+
+
+
+## Example (html)
+
+```html
+<div class="#{$cls}">
+	I have a #{$name} border side color
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.color.#{$name}.#{$mod-name} -->
+<!-- @name    #{$cls} -->
+
+# ```js #{$cls} ```
+
+
+Specify the color to **#{$name}--#{$mod-name}**
+
+
+
+## Example (html)
+
+```html
+<div class="#{$cls}">
+	I'm in "#{$name}--#{$mod-name}" color
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.color.#{$name}.#{$mod-name} -->
+<!-- @name    {$cls} -->
+
+# ```js {$cls} ```
+
+
+Specify the background color to **#{$name}--#{$mod-name}**
+
+
+
+## Example (html)
+
+```html
+<div class="#{$cls} p" style="color:white">
+	My background color is "#{$name}--#{$mod-name}"
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.color.#{$name}.#{$mod-name} -->
+<!-- @name    #{$cls} -->
+
+# ```js #{$cls} ```
+
+
+Specify the border of 1px solid to **#{$name}--#{$mod-name}**
+
+
+
+## Example (html)
+
+```html
+<div class="#{$cls}">
+	I have a "#{$name}--#{$mod-name}" border color
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.color.#{$name}.#{$mod-name} -->
+<!-- @name    #{$cls} -->
+
+# ```js #{$cls} ```
+
+
+Specify the border top of 1px solid to **#{$name}--#{$mod-name}**
+
+
+
+## Example (html)
+
+```html
+<div class="#{$cls}">
+	I have a "#{$name}--#{$mod-name}" border top color
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.color.#{$name}.#{$mod-name} -->
+<!-- @name    #{$cls} -->
+
+# ```js #{$cls} ```
+
+
+Specify the border right of 1px solid to **#{$name}--#{$mod-name}**
+
+
+
+## Example (html)
+
+```html
+<div class="#{$cls}">
+	I have a "#{$name}--#{$mod-name}" border right color
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.color.#{$name}.#{$mod-name} -->
+<!-- @name    #{$cls} -->
+
+# ```js #{$cls} ```
+
+
+Specify the border bottom of 1px solid to **#{$name}--#{$mod-name}**
+
+
+
+## Example (html)
+
+```html
+<div class="#{$cls}">
+	I have a "#{$name}--#{$mod-name}" border bottom color
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.color.#{$name}.#{$mod-name} -->
+<!-- @name    #{$cls} -->
+
+# ```js #{$cls} ```
+
+
+Specify the border left of 1px solid to **#{$name}--#{$mod-name}**
+
+
+
+## Example (html)
+
+```html
+<div class="#{$cls}">
+	I have a "#{$name}--#{$mod-name}" border left color
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+
+<!-- @namespace    sugar.scss.class.color.#{$name}.#{$mod-name} -->
+<!-- @name    #{$cls} -->
+
+# ```js #{$cls} ```
+
+
+Specify the border side of 1px solid to **#{$name}--#{$mod-name}**
+
+
+
+## Example (html)
+
+```html
+<div class="#{$cls}">
+	I have a "#{$name}--#{$mod-name}" border side color
+</div>
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+

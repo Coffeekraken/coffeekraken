@@ -1,0 +1,34 @@
+
+
+
+<!-- @namespace    sugar.scss.core.math -->
+<!-- @name    render-round-even -->
+
+# ```js render-round-even ```
+
+
+Return the passed values in the same unit but that has been even rounded on the corresponding px value
+This ensure that your passed value will be a round px value for final rander in the viewport
+
+## Parameters
+
+- **$value**  Number: The value to process
+
+
+
+## Example (scss)
+
+```scss
+// if settings.typography.font-size == 16px
+sugar.render-round-even(5.2rem);
+// 1. transform to px values : 5.2  16px = 83.2px
+// 2. round even the px value : 84px
+// 3. transform to passed unit value : 84px / 16px = 5.25rem
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+

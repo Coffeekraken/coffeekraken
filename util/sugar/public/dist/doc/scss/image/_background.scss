@@ -1,0 +1,27 @@
+
+
+<!-- @namespace    sugar.scss.image -->
+<!-- @name    background -->
+
+# ```js background ```
+
+
+Helper mixin to set a background image
+
+
+### Example (scss)
+
+```scss
+.my-cool-element {
+		\@include sugar.background(
+			$url : 'img/my-cool-image.jpg',
+			$size : cover,
+			$resolution : 2x 3x 4x
+		);
+}
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+

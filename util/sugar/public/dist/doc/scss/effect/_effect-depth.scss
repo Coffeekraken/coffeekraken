@@ -1,0 +1,23 @@
+
+
+<!-- @namespace    sugar.scss.effect -->
+<!-- @name    effect-depth -->
+
+# ```js effect-depth ```
+
+
+Generate a drop shadow depending on the depth specified
+
+
+### Example (scss)
+
+```scss
+.my-cool-element {
+		\@include sugar.effect-depth(2);
+}
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+

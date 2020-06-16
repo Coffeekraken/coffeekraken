@@ -51,6 +51,8 @@ module.exports = {
    */
   'border-box': true,
 
+  fonts: '@config.fonts',
+
   sizes: {
     /**
      * @name              smaller
@@ -837,92 +839,92 @@ module.exports = {
     'scope-class': 'vr'
   },
 
-  fonts: {
-    /**
-     * @name              default
-     * @namespace         sugar.config.scss.fonts
-     * @type              Object
-     * @default           { 'font-family': 'Helvetica Neue, Helvetica, Verdana, Arial, sans-serif', 'font-weight': 'normal' }
-     *
-     * Register the <primary>default</primary> font
-     *
-     * @example           js
-     * {
-     *    scss: {
-     *      fonts: {
-     *        default: {
-     *          'font-family': 'Helvetica Neue, Helvetica, Verdana, Arial, sans-serif',
-     *          'font-weight': 'nornal'
-     *        }
-     *      }
-     *    }
-     * }
-     *
-     * @since             1.0.0
-     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    default: {
-      'font-family': 'Helvetica Neue, Helvetica, Verdana, Arial, sans-serif',
-      'font-weight': 'normal',
-      'cap-height': 0.65
-    },
-    /**
-     * @name              quote
-     * @namespace         sugar.config.scss.fonts
-     * @type              Object
-     * @default           { 'font-family': 'Palatino, Times, Georgia, serif', 'font-weight': 'normal' }
-     *
-     * Register the <primary>quote</primary> font
-     *
-     * @example           js
-     * {
-     *    scss: {
-     *      fonts: {
-     *        quote: {
-     *          'font-family': 'Palatino, Times, Georgia, serif',
-     *          'font-weight': 'nornal'
-     *        }
-     *      }
-     *    }
-     * }
-     *
-     * @since             1.0.0
-     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    quote: {
-      'font-family': 'Palatino, Times, Georgia, serif',
-      'font-weight': 'normal',
-      'cap-height': 0.65
-    },
-    /**
-     * @name              code
-     * @namespace         sugar.config.scss.fonts
-     * @type              Object
-     * @default           { 'font-family': 'Menlo, Monaco, Consolas, Courier New, monospace', 'font-weight': 'normal' }
-     *
-     * Register the <primary>code</primary> font
-     *
-     * @example           js
-     * {
-     *    scss: {
-     *      fonts: {
-     *        code: {
-     *          'font-family': 'Menlo, Monaco, Consolas, Courier New, monospace',
-     *          'font-weight': 'nornal'
-     *        }
-     *      }
-     *    }
-     * }
-     *
-     * @since             1.0.0
-     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    code: {
-      'font-family': 'Menlo, Monaco, Consolas, Courier New, monospace',
-      'font-weight': 'normal',
-      'cap-height': 0.65
-    }
-  },
+  // fonts: {
+  //   /**
+  //    * @name              default
+  //    * @namespace         sugar.config.scss.fonts
+  //    * @type              Object
+  //    * @default           { 'font-family': 'Helvetica Neue, Helvetica, Verdana, Arial, sans-serif', 'font-weight': 'normal' }
+  //    *
+  //    * Register the <primary>default</primary> font
+  //    *
+  //    * @example           js
+  //    * {
+  //    *    scss: {
+  //    *      fonts: {
+  //    *        default: {
+  //    *          'font-family': 'Helvetica Neue, Helvetica, Verdana, Arial, sans-serif',
+  //    *          'font-weight': 'nornal'
+  //    *        }
+  //    *      }
+  //    *    }
+  //    * }
+  //    *
+  //    * @since             1.0.0
+  //    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  //    */
+  //   default: {
+  //     'font-family': 'Helvetica Neue, Helvetica, Verdana, Arial, sans-serif',
+  //     'font-weight': 'normal',
+  //     'cap-height': 0.65
+  //   },
+  //   /**
+  //    * @name              quote
+  //    * @namespace         sugar.config.scss.fonts
+  //    * @type              Object
+  //    * @default           { 'font-family': 'Palatino, Times, Georgia, serif', 'font-weight': 'normal' }
+  //    *
+  //    * Register the <primary>quote</primary> font
+  //    *
+  //    * @example           js
+  //    * {
+  //    *    scss: {
+  //    *      fonts: {
+  //    *        quote: {
+  //    *          'font-family': 'Palatino, Times, Georgia, serif',
+  //    *          'font-weight': 'nornal'
+  //    *        }
+  //    *      }
+  //    *    }
+  //    * }
+  //    *
+  //    * @since             1.0.0
+  //    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  //    */
+  //   quote: {
+  //     'font-family': 'Palatino, Times, Georgia, serif',
+  //     'font-weight': 'normal',
+  //     'cap-height': 0.65
+  //   },
+  //   /**
+  //    * @name              code
+  //    * @namespace         sugar.config.scss.fonts
+  //    * @type              Object
+  //    * @default           { 'font-family': 'Menlo, Monaco, Consolas, Courier New, monospace', 'font-weight': 'normal' }
+  //    *
+  //    * Register the <primary>code</primary> font
+  //    *
+  //    * @example           js
+  //    * {
+  //    *    scss: {
+  //    *      fonts: {
+  //    *        code: {
+  //    *          'font-family': 'Menlo, Monaco, Consolas, Courier New, monospace',
+  //    *          'font-weight': 'nornal'
+  //    *        }
+  //    *      }
+  //    *    }
+  //    * }
+  //    *
+  //    * @since             1.0.0
+  //    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  //    */
+  //   code: {
+  //     'font-family': 'Menlo, Monaco, Consolas, Courier New, monospace',
+  //     'font-weight': 'normal',
+  //     'cap-height': 0.65
+  //   }
+  // },
 
   /**
    * @name                    filters

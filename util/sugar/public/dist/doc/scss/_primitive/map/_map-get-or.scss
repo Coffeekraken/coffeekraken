@@ -1,0 +1,36 @@
+
+
+
+<!-- @namespace    sugar.scss.map -->
+<!-- @name    map-get-or -->
+
+# ```js map-get-or ```
+
+
+Get a map value by passing a list of wanted indexes, or return the default passed value
+
+## Parameters
+
+- **$map**  Map: The map to get the value from
+
+- **$index-list**  List: The list of indexes to try to get
+
+- **$default**  Midex: The default value to return if nothing is found in the map
+
+
+
+## Example (scss)
+
+```scss
+sugar.map-get-or((
+ coco: 'hello',
+ plop: 'world'
+), plop, null); // 'world'
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+

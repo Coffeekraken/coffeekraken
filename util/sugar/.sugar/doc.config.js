@@ -18,6 +18,6 @@ module.exports = {
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   rootDir: isInSugarPackage()
-    ? `${__packageRoot()}/tests/dist/doc`
+    ? `${__packageRoot()}/public/dist/doc`
     : `${__packageRoot()}/dist/doc`
 };

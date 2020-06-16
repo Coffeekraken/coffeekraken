@@ -62,12 +62,18 @@ module.exports = class SJsObjectToScssStreamAction extends __SActionsStreamActio
     this.checkStreamObject(streamObj);
 
     return new Promise(async (resolve, reject) => {
+      streamObj.jsObjectToScss._jsonToScss = {
+        valueFormat: 'dq',
+        indentationText: '',
+        indentationSize: 0
+      };
+
       await __writeFile(
         __tmpDir() + '/sugar.build.scss.config.json',
         JSON.stringify(streamObj.jsObjectToScss, null, 4)
       );
 
-      const command = `npx --no-install json-to-scss ${__tmpDir()}/sugar.build.scss.config.json ${__tmpDir()}/sugar.build.scss.config.scss --mo`;
+      const command = `npx --no-install -c "json-to-scss ${__tmpDir()}/sugar.build.scss.config.json ${__tmpDir()}/sugar.build.scss.config.scss --mo"`;
       __child_process.execSync(command);
       const scssConfigString = __fs
         .readFileSync(`${__tmpDir()}/sugar.build.scss.config.scss`, 'ascii')

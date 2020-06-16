@@ -1,0 +1,23 @@
+
+
+<!-- @namespace    sugar.scss.core.typography -->
+<!-- @name    show-vertical-rhythm -->
+
+# ```js show-vertical-rhythm ```
+
+
+Display the vertical rhythme
+
+
+### Example (scss)
+
+```scss
+body {
+		@include sugar.show-vertical-rhythm();
+}
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+

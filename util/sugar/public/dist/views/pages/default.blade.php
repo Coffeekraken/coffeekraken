@@ -1,11 +1,15 @@
+<!--
+* @name               default
+* @namespace          pages
+* @type               blade
+*
+* Default view used for all sort of things
+*
+* @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+-->
 @extends('layouts.main')
 
 @section('title', 'Default')
-
-@section('sidebar')
-    @parent
-    <p>This is appended to the master sidebar.</p>
-@endsection
 
 @section('content')
   {!! $content !!}

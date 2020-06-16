@@ -1,0 +1,30 @@
+
+
+
+<!-- @namespace    sugar.scss.string -->
+<!-- @name    str-slice -->
+
+# ```js str-slice ```
+
+
+Returns the slice of $string starting at index $start-at and ending at index $end-at (both inclusive).
+
+## Parameters
+
+- **$string**  String: The string to slice
+
+- **$start-at**  Number: Where to start slice the string
+
+- **$end-at** (-1) Number: Where to end to slice the string
+
+- ****  Scss: 
+sugar.str-slice('Hello world', 1, 4); // => Hell
+
+
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+

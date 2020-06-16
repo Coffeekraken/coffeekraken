@@ -1,0 +1,3 @@
+@import 'node_modules/coffeekraken-s-chip-component/index';
+
+@include s-chip-classes($colors: default primary secondary);

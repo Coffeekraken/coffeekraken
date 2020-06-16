@@ -1,0 +1,23 @@
+
+
+<!-- @namespace    sugar.scss.helper -->
+<!-- @name    vertical-aligner -->
+
+# ```js vertical-aligner ```
+
+
+Vertically align content by using the inline-block middle trick
+
+
+### Example (scss)
+
+```scss
+.my-cool-container {
+	\@include sugar.vertical-aligner();
+}
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+

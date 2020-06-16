@@ -1,0 +1,47 @@
+
+
+
+<!-- @namespace    sugar.scss.core.size -->
+<!-- @name    interpolate -->
+
+# ```js interpolate ```
+
+
+Return the specified or calculated value of the given stack and size
+depending on the settings.sizes ratios stack
+
+## Parameters
+
+- **$stack**  Map: The stack from which to interpolate the value
+
+- **$size**  String: The size wanted (has to exist in the settings.sizes stack)
+
+
+
+## Example (scss)
+
+```scss
+// settings.sizes
+\@include sugar.setup((
+		sizes : (
+			small : 0.5,
+			default : 1, // default is ALWAYS 1
+			big : 1.5
+		)
+));
+
+$myStack : (
+		default : 3rem,
+		big : 6rem
+)
+
+sugar.interpolate($myStack, big) // 6rem cause specified in the $myStack value
+sugar.interpolate($myStack, small) // 1.5rem => calculated like : 3rem  0.5 = 1.5rem
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+

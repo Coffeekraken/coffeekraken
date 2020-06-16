@@ -1,6 +1,6 @@
 const __parseArgs = require('../../node/cli/parseArgs');
-const __SBuildScssCli = require('../../node/build/SBuildScssCli');
-const __SBuildScssActionsStream = require('../../node/build/SBuildScssActionsStream');
+const __SBuildScssCli = require('../../node/build/scss/SBuildScssCli');
+const __SBuildScssActionsStream = require('../../node/build/scss/SBuildScssActionsStream');
 const __output = require('../../node/process/output');
 
 module.exports = (stringArgs = '') => {

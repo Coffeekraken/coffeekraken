@@ -1,0 +1,23 @@
+
+
+<!-- @namespace    sugar.scss.coffeekraken -->
+<!-- @name    coffeekraken-logo -->
+
+# ```js coffeekraken-logo ```
+
+
+Display a coffeekraken logo with two specified colors
+
+
+### Example (scss)
+
+```scss
+.my-cool-coffeekraken-logo {
+	\@include sugar.coffeekraken-logo();
+}
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+

@@ -269,13 +269,24 @@ let SConfig = /*#__PURE__*/function () {
         value = (0, _deepMap.default)(value, (val, prop, fullPath) => {
           // check if we get some things to use as variable
           if (typeof val === 'string') {
+            if (val.substr(0, 7) === '@config') {
+              val = this.get(val.replace('@config.', ''), adapter);
+              return val;
+            }
+
             const reg = /\[config.[a-zA-Z0-9.]+\]/gm;
             const matches = val.match(reg);
 
             if (matches && matches.length) {
-              matches.forEach(match => {
-                val = val.replace(match, this.get(match.replace('[config.', '').replace(']', '')));
-              });
+              if (matches.length === 1 && val === matches[0]) {
+                val = this.get(matches[0].replace('[config.', '').replace(']', ''), adapter);
+                return val;
+              } else {
+                matches.forEach(match => {
+                  val = val.replace(match, this.get(match.replace('[config.', '').replace(']', ''), adapter));
+                });
+              }
+
               return val;
             }
           } // if (typeof val === 'string' /& val.slice(0,1) === '<')

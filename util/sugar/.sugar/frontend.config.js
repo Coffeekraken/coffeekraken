@@ -2,11 +2,7 @@ const __docNav = require('../src/node/doc/docNav');
 const __namespaceSNav = require('../src/node/nav/namespaceSNav');
 
 module.exports = {
-  layout: {
-    /**
-     *
-     */
-  },
+  assets: '@config.assets',
 
   menu: {
     /**
@@ -33,7 +29,7 @@ module.exports = {
        */
       generator: {
         fn: __docNav,
-        directory: '[config.doc.rootDir]'
+        directory: '@config.doc.rootDir'
       }
     },
 
@@ -61,7 +57,7 @@ module.exports = {
        */
       generator: {
         fn: __namespaceSNav,
-        directory: '[config.views.rootDir]'
+        directory: '@config.views.rootDir'
       }
     }
   },
@@ -169,5 +165,5 @@ module.exports = {
     }
   },
 
-  express: {}
+  express: '@config.express'
 };

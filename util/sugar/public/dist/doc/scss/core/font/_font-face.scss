@@ -1,0 +1,26 @@
+
+
+<!-- @namespace    sugar.scss.core.font -->
+<!-- @name    font-face -->
+
+# ```js font-face ```
+
+
+Helper to print a font-face
+
+
+### Example (scss)
+
+```scss
+// if you have these extensions files : .woff .eot .woff2
+\@include sugar.font-face(
+		$name : my-cool-font,
+		$src : '/fonts/my-font.eot',
+		$extensions : eot woff woff2
+)
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+

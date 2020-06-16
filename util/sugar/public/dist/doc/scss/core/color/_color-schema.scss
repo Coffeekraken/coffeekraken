@@ -1,0 +1,41 @@
+
+
+<!-- @namespace    sugar.scss.core.color -->
+<!-- @name    color-schema -->
+
+# ```js color-schema ```
+
+
+Print out the scoped color schema css
+
+
+### Example (scss)
+
+```scss
+\@include sugar.color-schema(light) {
+		h1, h2 {
+			color : white;
+		}
+}
+// will print
+.cs-light h1,
+.cs-light h2 {
+		color : white;
+}
+
+h1, h2 {
+		\@include sugar.color-schema(light) {
+			color : white;
+		}
+}
+// will print
+.cs-light h1, h1.cs-light,
+.cs-light h2, h2.cs-light {
+		color : white;
+}
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+

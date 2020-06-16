@@ -1,0 +1,31 @@
+
+
+
+<!-- @namespace    sugar.scss.list -->
+<!-- @name    list-nth -->
+
+# ```js list-nth ```
+
+
+Return the item of the list at the passed index
+
+## Parameters
+
+- **$list**  List: The list to process
+
+- **$index**  Number: The index of the element to get in the list
+
+
+
+## Example (scss)
+
+```scss
+sugar.list-nth(('hello','world'), 2); // => 'world'
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+

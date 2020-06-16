@@ -1,0 +1,33 @@
+
+
+
+<!-- @namespace    sugar.scss.list -->
+<!-- @name    list-append -->
+
+# ```js list-append ```
+
+
+Append a value to the passed list
+
+## Parameters
+
+- **$list**  List: The list to append the value to
+
+- **$value**  Mixed: The value to append to the list
+
+- **$separator** (auto) String: The separator to use. Can be auto, space or comma
+
+
+
+## Example (scss)
+
+```scss
+sugar.list-append(hello world, coco, comma); // hello, world, coco
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+

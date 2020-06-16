@@ -1,0 +1,25 @@
+
+
+<!-- @namespace    sugar.scss.form -->
+<!-- @name    input-placeholder -->
+
+# ```js input-placeholder ```
+
+
+Set the placeholder style for inputs, etc...
+
+
+### Example (scss)
+
+```scss
+input, textarea {
+	\@include sugar.input-placeholder() {
+		color : red;
+	}
+}
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+

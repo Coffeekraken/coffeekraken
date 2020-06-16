@@ -1,0 +1,49 @@
+
+
+
+<!-- @namespace    sugar.scss.loader -->
+<!-- @name    loader-radial -->
+
+# ```js loader-radial ```
+
+
+Generate a radial styled loader
+
+## Parameters
+
+- **$shape** (circle) String: The shape of the items that make the circle. Can be rect or circle
+
+- **$size** (3em) Number: The size of the items
+
+- **$width** (0.2em) Number: The width of the circle loader
+
+- **$style** (solid) String: The style of the items that form the loader. Can be none, hidden, dotted, dashed, solid, double, groove, ridge, inset, outset, initial or inherit
+
+- **$color** (primary) Color: The color to use for the loader
+
+- **$a-duration** (2s) Second: How many time will be the animation
+
+- **$a-delay** (0s) Second: How many time to wait between two animation
+
+- **$a-count** (2) Number: How many circles will be animated
+
+- **$a-spread** (1em) Number: Specify a spread value for the animation of each circles
+
+- **$a-ease** (linear) String: Specify the ease to use for the animation
+
+
+
+## Example (scss)
+
+```scss
+.my-cool-loader {
+   @include sugar.loader-radial();
+}
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+

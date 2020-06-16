@@ -1,0 +1,31 @@
+
+
+
+<!-- @namespace    sugar.scss.list -->
+<!-- @name    list-implode -->
+
+# ```js list-implode ```
+
+
+Join all the list items using the passed glue and return a string
+
+## Parameters
+
+- **$list**  List: The list to implode
+
+- **$glue**  String: The glue to use to implode the list
+
+
+
+## Example (scss)
+
+```scss
+sugar.list-implode(('hello','world'), '-'); // hello-world
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+

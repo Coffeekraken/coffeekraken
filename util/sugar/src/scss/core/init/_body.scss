@@ -1,0 +1,10 @@
+@mixin init-body() {
+
+  // default color and stuffs on the body
+  body {
+    color: color(text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+}

@@ -1,0 +1,32 @@
+
+
+
+<!-- @namespace    sugar.scss.util -->
+<!-- @name    margin-map -->
+
+# ```js margin-map ```
+
+
+Parse and return the Map respresentation of a margin property
+The $margin argument will be parsed with the [s-parse-properties](../core/functions/_s-parse-properties.scss) function.
+
+## Parameters
+
+- **$margin**  List,Number: The margin property to parse
+
+
+
+## Example (scss)
+
+```scss
+sugar.margin-map(10px); // => ( top:10px, right:10px, bottom:10px, left:10px )
+sugar.margin-map(10px 20px); // => ( top:10px, right:20px, bottom:10px, left:20px )
+sugar.margin-map(5px 10px 15px 20px); // => ( top:5px, right:10px, bottom:15px, left:20px )
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+

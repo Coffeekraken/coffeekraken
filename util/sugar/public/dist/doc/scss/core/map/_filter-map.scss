@@ -1,0 +1,49 @@
+
+
+
+<!-- @namespace    sugar.scss.core.map -->
+<!-- @name    filter-map -->
+
+# ```js filter-map ```
+
+
+Take a filter as parameter and parse it to return the {Map} corresponding
+The $filter parameter can be either a registered filter name or a filter formated like `filterName(filterValue)`
+
+## Parameters
+
+- **$filter**  List<String>: The registered filter name or the filter string to transform into map
+
+
+
+## Example (true)
+
+```true
+// register a filter
+\@include sugar.setup((
+		filters : (
+			myCoolFilter : box-shadow(#000 0 0 10px) blur(30px),
+			// other filters...
+		)
+));
+
+// registered filter
+sugar.filter-map(myCoolFilter);
+// {
+// 	box-shadow : #000 0 0 10px,
+// 	blur : 30px
+// }
+
+// custom filter
+sugar.filter-map(blur(10px));
+// {
+// 	blur : 10px
+// }
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+

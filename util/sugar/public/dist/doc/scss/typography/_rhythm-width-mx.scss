@@ -1,0 +1,23 @@
+
+
+<!-- @namespace    sugar.scss.typography -->
+<!-- @name    rhythm-width -->
+
+# ```js rhythm-width ```
+
+
+Print out the css on a container that will make the lines displays a maximum number of characters.
+
+
+### Example (scss)
+
+```scss
+h1 {
+	\@include sugar.rhythm-width(45);
+}
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+

@@ -4,11 +4,11 @@ const __SPromise = require('../../promise/SPromise');
 const __deepMerge = require('../../object/deepMerge');
 const __getFilename = require('../../fs/filename');
 const __SFsOutputStreamAction = require('../../stream/actions/SFsOutputStreamAction');
-const __SJsObjectToScssStreamAction = require('./scss/SJsObjectToScssStreamAction');
-const __SImportsStreamAction = require('./scss/SImportsStreamAction');
-const __SBundleScssStreamAction = require('./scss/SBundleScssStreamAction');
-const __SRenderSassStreamAction = require('./scss/SRenderSassStreamAction');
-const __SPostCssStreamAction = require('./scss/SPostCssStreamAction');
+const __SJsObjectToScssStreamAction = require('./actions/SJsObjectToScssStreamAction');
+const __SImportsStreamAction = require('./actions/SImportsStreamAction');
+const __SBundleScssStreamAction = require('./actions/SBundleScssStreamAction');
+const __SRenderSassStreamAction = require('./actions/SRenderSassStreamAction');
+const __SPostCssStreamAction = require('./actions/SPostCssStreamAction');
 const __SGlobResolverStreamAction = require('../../stream/actions/SGlobResolverStreamAction');
 const __path = require('path');
 const __packageRoot = require('../../path/packageRoot');
@@ -65,7 +65,6 @@ module.exports = class SBuildScssActionsStream extends __SActionsStream {
           before: (streamObj) => {
             streamObj.jsObjectToScss = __sugarConfig('scss');
             streamObj.globProperty = 'input';
-
             if (streamObj.import && streamObj.import.sugar) {
               streamObj.imports = [
                 {
@@ -73,7 +72,10 @@ module.exports = class SBuildScssActionsStream extends __SActionsStream {
                   path: __isInPackage('@coffeekraken/sugar')
                     ? __path.resolve(__packageRoot(__dirname), 'index')
                     : '@coffeekraken/sugar/index',
-                  scss: `@include Sugar.setup($sugarUserSettings);`
+                  scss: `
+                    @include Sugar.setup($sugarUserSettings);
+                    @include Sugar.init();
+                  `
                 }
               ];
             }
@@ -82,6 +84,7 @@ module.exports = class SBuildScssActionsStream extends __SActionsStream {
           },
           afterActions: {
             globResolver: (streamObj) => {
+              // console.log(streamObj);
               if (streamObj.input) {
                 streamObj.filename = __getFilename(streamObj.input);
               }
@@ -99,6 +102,7 @@ module.exports = class SBuildScssActionsStream extends __SActionsStream {
                     : streamObj.filename.replace('.scss', '.css')
                 );
               }
+              console.log(streamObj.outputDir);
               return streamObj;
             }
           }

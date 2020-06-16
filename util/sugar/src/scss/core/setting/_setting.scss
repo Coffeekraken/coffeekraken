@@ -1,6 +1,7 @@
 @use "sass:map";
 @use "sass:math";
 @use "sass:meta";
+@use "sass:string";
 @use '../variables' as sugar;
 /**
  * @name      setting
@@ -41,6 +42,15 @@
   // if no value
   @if not $value {
     @return $default;
+  }
+
+  @if meta.type-of($value) == 'list' {
+    $stringValue: str-trim(inspect($value));
+    @if string.slice($stringValue,0,2) == '""' {
+      // $stringValue: string.slice($stringValue,2);
+      $stringValue: str-replace($stringValue, '""', '');
+      $value: str-trim($stringValue);
+    }
   }
 
   // return the value

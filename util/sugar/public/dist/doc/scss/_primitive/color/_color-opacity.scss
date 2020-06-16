@@ -1,0 +1,29 @@
+
+
+
+<!-- @namespace    sugar.scss.core.color -->
+<!-- @name    color-opacity -->
+
+# ```js color-opacity ```
+
+
+Return the opacity of the passed color
+
+## Parameters
+
+- **$color**  Color: The color to prcess
+
+
+
+## Example (scss)
+
+```scss
+sugar.color-opacity(#e1d7d2); // => 1
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+

@@ -1,0 +1,31 @@
+
+
+
+<!-- @namespace    sugar.scss.list -->
+<!-- @name    list-index -->
+
+# ```js list-index ```
+
+
+Return the index of the wanted value in the passed list.
+
+## Parameters
+
+- **$list**  List: The list to process
+
+- **$value**  Mixed: The value to search in the list
+
+
+
+## Example (scss)
+
+```scss
+sugar.list-index(('hello','world'), 'world'); // => 2
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+

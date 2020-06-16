@@ -1,0 +1,40 @@
+
+
+
+<!-- @namespace    sugar.scss.map -->
+<!-- @name    map-merge -->
+
+# ```js map-merge ```
+
+
+Merge the first passed map with the second passed one and return the result
+
+## Parameters
+
+- **$map1**  Map: The first map to extend
+
+- **$map2**  Map: The second map to extend the first one with
+
+
+
+## Example (scss)
+
+```scss
+sugar.map-merge((
+ hello: 'world'
+), (
+ coco: 'plop'
+));
+// returned map:
+(
+ hello: 'world',
+ coco: 'plop'
+)
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+

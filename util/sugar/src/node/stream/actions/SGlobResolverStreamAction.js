@@ -63,7 +63,7 @@ module.exports = class SGlobResolverStreamAction extends __SActionsStreamAction 
 
     return new Promise(async (resolve, reject) => {
       // resolve glob pattern
-      const rootDir = streamObj[streamObj.globProperty].split('*')[0];
+      const rootDir = streamObj[streamObj.globProperty];
       const files = __glob.sync(streamObj[streamObj.globProperty]);
 
       // build the streamObj stack
@@ -75,10 +75,26 @@ module.exports = class SGlobResolverStreamAction extends __SActionsStreamAction 
 
         newStreamObj[streamObj.globProperty] = filePath;
 
-        newStreamObj.outputDir =
-          newStreamObj.outputDir +
-          '/' +
-          filePath.replace(rootDir, '').replace(__getFilename(filePath), '');
+        let cleanedRootDir = rootDir;
+        cleanedRootDir = cleanedRootDir.replace(
+          __getFilename(cleanedRootDir),
+          ''
+        );
+        cleanedRootDir = cleanedRootDir
+          .replace(/\[.*\]/gm, '')
+          .replace(/\*{1,2}/gm, '')
+          .replace(/\(.*\)/gm, '')
+          .replace(/(\?|!|\+|@)/gm, '');
+        if (cleanedRootDir.slice(-1) === '/')
+          cleanedRootDir = cleanedRootDir.slice(0, -1);
+
+        let outputFilePath = filePath
+          .replace(cleanedRootDir, '')
+          .replace(__getFilename(filePath), '');
+        if (outputFilePath.slice(0, 1) === '/')
+          outputFilePath = outputFilePath.slice(1);
+
+        newStreamObj.outputDir = newStreamObj.outputDir + '/' + outputFilePath;
         if (newStreamObj.outputDir.slice(-1) === '/')
           newStreamObj.outputDir = newStreamObj.outputDir.slice(0, -1);
 

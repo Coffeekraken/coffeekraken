@@ -1,0 +1,33 @@
+
+
+
+<!-- @namespace    sugar.scss.map -->
+<!-- @name    map-set -->
+
+# ```js map-set ```
+
+
+Set a map property with the passed value
+
+## Parameters
+
+- **$map**  Map: The map to modify
+
+- **$key**  String: The key to set the propery to
+
+- **$value**  Mixed: The value to set
+
+
+
+## Example (scss)
+
+```scss
+$my-map : sugar.map-set($my-map, 'coco', 'Something cool');
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+

@@ -1,0 +1,29 @@
+
+
+
+<!-- @namespace    sugar.scss.math -->
+<!-- @name    math-deg -->
+
+# ```js math-deg ```
+
+
+Convert the passed unitless angle to degree
+
+## Parameters
+
+- **$angle**  Number: The angle to convert to degree
+
+
+
+## Example (scss)
+
+```scss
+sugar.math-deg(10); // => 572.9577951308deg
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+

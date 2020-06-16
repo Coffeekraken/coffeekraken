@@ -25,27 +25,8 @@ module.exports = {
     ]
   },
   commands: {
-    // 'server.php': {
-    //   class: __SPhpServerCommand,
-    //   argsObj: {},
-    //   settings: {}
-    // },
-    // 'server.express': {
-    //   class: __SExpressServerCommand,
-    //   argsObj: {},
-    //   settings: {
-    //     run: true
-    //   }
-    // },
     'server.frontend': {
       class: __SFrontendServerCommand,
-      argsObj: {},
-      settings: {
-        run: true
-      }
-    },
-    'server.bladePhp': {
-      class: __SBladePhpServerCommand,
       argsObj: {},
       settings: {
         run: true

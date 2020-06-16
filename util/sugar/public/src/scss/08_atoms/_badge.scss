@@ -1,0 +1,3 @@
+@import 'node_modules/coffeekraken-s-badge-component/index';
+
+@include s-badge-classes($colors: default primary secondary);

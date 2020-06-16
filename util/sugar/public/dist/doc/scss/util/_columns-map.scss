@@ -1,0 +1,50 @@
+
+
+
+<!-- @namespace    sugar.scss.util -->
+<!-- @name    columns-util -->
+
+# ```js columns-util ```
+
+
+Return the Map representation of a columns properties
+
+## Parameters
+
+- **$count**  Interger: The number of columns
+
+- **$gap**  Number: The gap width between each columns
+
+- **$fill**  String: The fill property (balance,auto,initial,inherit)
+
+- **$width**  Number: The width of the columns
+
+- **$span**  Integer,String: The column-span property (1,all,initial,inherit)
+
+- **$rule**  List: The column-rule property
+
+- **$rule-style**  String: The column-rule-style property
+
+- **$rule-color**  Color: The column-rule-color property
+
+- **$rule-width**  Number: The column-rule-width property
+
+
+
+## Example (scss)
+
+```scss
+sugar.columns-map(2, 20px);
+// return
+// (
+// 	column-count : 2,
+// 	column-gap : 20px
+// )
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+

@@ -1,0 +1,29 @@
+
+
+
+<!-- @namespace    sugar.scss.core.color -->
+<!-- @name    has-color -->
+
+# ```js has-color ```
+
+
+Check if the provided color is a registered one or not
+
+## Parameters
+
+- **$color**  String: The color nane to check
+
+
+
+## Example (scss)
+
+```scss
+sugar.has-color(primary); // => true
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+
+
+

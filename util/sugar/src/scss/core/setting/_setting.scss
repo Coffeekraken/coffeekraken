@@ -44,14 +44,14 @@
     @return $default;
   }
 
-  @if meta.type-of($value) == 'list' {
-    $stringValue: str-trim(inspect($value));
-    @if string.slice($stringValue,0,2) == '""' {
-      // $stringValue: string.slice($stringValue,2);
-      $stringValue: str-replace($stringValue, '""', '');
-      $value: str-trim($stringValue);
-    }
-  }
+  // @if meta.type-of($value) == 'list' {
+  //   $stringValue: str-trim(inspect($value));
+  //   @if string.slice($stringValue,0,2) == '""' {
+  //     // $stringValue: string.slice($stringValue,2);
+  //     $stringValue: str-replace($stringValue, '""', '');
+  //     $value: str-trim($stringValue);
+  //   }
+  // }
 
   // return the value
   @return $value;

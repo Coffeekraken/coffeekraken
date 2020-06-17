@@ -58,85 +58,87 @@
   $break: null,
   $wrap: null
 ) {
-  @if setting('debug.test-arguments') {
-    $family: test-argument(
-      "sugar.font",
-      "family",
-      map.keys(setting("fonts")),
-      $family
-    );
-    $color: test-argument("sugar.font", "color", color, $color);
-    $size: test-argument("sugar.font", "size", number, $size);
-    $style: test-argument(
-      "sugar.font",
-      "style",
-      (normal, italic, oblique, initial, inherit),
-      $style
-    );
-    $variant: test-argument(
-      "sugar.font",
-      "variant",
-      (normal, small-caps, initial, inherit),
-      $variant
-    );
-    $weight: test-argument("sugar.font", "weight", "string|number", $weight);
-    $decoration: test-argument(
-      "sugar.font",
-      "decoration",
-      (none, underline, overline, line-through, initial, inherit),
-      $decoration
-    );
-    $align: test-argument(
-      "sugar.font",
-      "align",
-      (left, right, center, justify, initial, inherit),
-      $align
-    );
-    $transform: test-argument(
-      "sugar.font",
-      "transform",
-      (none, capitalize, uppercase, lowercase, initial, inherit),
-      $transform
-    );
-    $stretch: test-argument(
-      "sugar.font",
-      "stretch",
-      (
-        ultra-condensed,
-        extra-condensed,
-        condensed,
-        semi-condensed,
-        normal,
-        semi-expanded,
-        expanded,
-        extra-expanded,
-        ultra-expanded,
-        initial,
-        inherit
-      ),
-      $stretch
-    );
-    $white-space: test-argument(
-      "sugar.font",
-      "white-space",
-      (normal, nowrap, pre, pre-line, pre-wrap, initial, inherit),
-      $white-space
-    );
-    $height: test-argument("sugar.font", "height", number, $height);
-    $spacing: test-argument("sugar.font", "spacing", number, $spacing);
-    $indent: test-argument("sugar.font", "indent", number, $indent);
-    $break: test-argument(
-      "sugar.font",
-      "break",
-      (normal, break-all, keep-all, initial, inherit),
-      $break
-    );
-    $wrap: test-argument(
-      "sugar.font",
-      "wrap",
-      (normal, break-word, initial, inherit),
-      $wrap
-    );
+  $family: test-argument(
+    "sugar.font",
+    "family",
+    map.keys(setting("fonts")),
+    $family
+  );
+  $color: test-argument("sugar.font", "color", color, $color);
+  $size: test-argument("sugar.font", "size", 'number|string', $size);
+  $style: test-argument(
+    "sugar.font",
+    "style",
+    (normal, italic, oblique, initial, inherit),
+    $style
+  );
+  $variant: test-argument(
+    "sugar.font",
+    "variant",
+    (normal, small-caps, initial, inherit),
+    $variant
+  );
+  $weight: test-argument("sugar.font", "weight", "string|number", $weight);
+  $decoration: test-argument(
+    "sugar.font",
+    "decoration",
+    (none, underline, overline, line-through, initial, inherit),
+    $decoration
+  );
+  $align: test-argument(
+    "sugar.font",
+    "align",
+    (left, right, center, justify, initial, inherit),
+    $align
+  );
+  $transform: test-argument(
+    "sugar.font",
+    "transform",
+    (none, capitalize, uppercase, lowercase, initial, inherit),
+    $transform
+  );
+  $stretch: test-argument(
+    "sugar.font",
+    "stretch",
+    (
+      ultra-condensed,
+      extra-condensed,
+      condensed,
+      semi-condensed,
+      normal,
+      semi-expanded,
+      expanded,
+      extra-expanded,
+      ultra-expanded,
+      initial,
+      inherit
+    ),
+    $stretch
+  );
+  $white-space: test-argument(
+    "sugar.font",
+    "white-space",
+    (normal, nowrap, pre, pre-line, pre-wrap, initial, inherit),
+    $white-space
+  );
+  $height: test-argument("sugar.font", "height", number, $height);
+  $spacing: test-argument("sugar.font", "spacing", number, $spacing);
+  $indent: test-argument("sugar.font", "indent", number, $indent);
+  $break: test-argument(
+    "sugar.font",
+    "break",
+    (normal, break-all, keep-all, initial, inherit),
+    $break
+  );
+  $wrap: test-argument(
+    "sugar.font",
+    "wrap",
+    (normal, break-word, initial, inherit),
+    $wrap
+  );
+
+  @if meta.type-of($size) == string {
+    $size: interpolate(1rem, $size);
   }
 
   // get the font object
@@ -155,12 +157,12 @@
         $f: map.get($fonts, $f);
       }
       $cap-height: map-get-or($f, cap-height, 0);
-      $family: map-get-or($f, font-family, $family);
+      $family: map-get-or($f, font-family, map-get-or($f, family, $family));
       @if not $style {
-        $style: map.get($f, font-style);
+        $style: map-get-or($f, font-style, map.get($f, style));
       }
       @if not $weight {
-        $weight: map.get($f, font-weight);
+        $weight: map-get-or($f, font-weight, map.get($f, weight));
       }
     }
   }

@@ -378,6 +378,13 @@
             "filename": "_border-radius.scss",
             "title": "```js border-radius ```"
         },
+        "sugar.scss.format.format-marked": {
+            "name": "format-marked",
+            "namespace": "sugar.scss.format",
+            "path": "scss/format/_marked.scss",
+            "filename": "_marked.scss",
+            "title": "```js format-marked ```"
+        },
         "sugar.scss.form.input-placeholder": {
             "name": "input-placeholder",
             "namespace": "sugar.scss.form",
@@ -420,12 +427,12 @@
             "filename": "_effect-bubble.scss",
             "title": "```js effect-bubble ```"
         },
-        "sugar.scss.core.typography.vertical-rhythm": {
-            "name": "vertical-rhythm",
+        "sugar.scss.core.typography.vertical-rhythm-scope": {
+            "name": "vertical-rhythm-scope",
             "namespace": "sugar.scss.core.typography",
-            "path": "scss/core/typography/_vertical-rhythm.scss",
-            "filename": "_vertical-rhythm.scss",
-            "title": "```js vertical-rhythm ```"
+            "path": "scss/core/typography/_vertical-rhythm-scope.scss",
+            "filename": "_vertical-rhythm-scope.scss",
+            "title": "```js vertical-rhythm-scope ```"
         },
         "sugar.scss.core.typography.vertical-rhythm-class": {
             "name": "vertical-rhythm-class",
@@ -433,6 +440,13 @@
             "path": "scss/core/typography/_vertical-rhythm-class.scss",
             "filename": "_vertical-rhythm-class.scss",
             "title": "```js vertical-rhythm-class ```"
+        },
+        "sugar.scss.core.typography.text-format-scope": {
+            "name": "text-format-scope",
+            "namespace": "sugar.scss.core.typography",
+            "path": "scss/core/typography/_text-format-scope.scss",
+            "filename": "_text-format-scope.scss",
+            "title": "```js text-format-scope ```"
         },
         "sugar.scss.core.typography.text-format-class": {
             "name": "text-format-class",
@@ -741,6 +755,13 @@
             "path": "scss/_primitive/string/_str-unique-id.scss",
             "filename": "_str-unique-id.scss",
             "title": "```js str-unique-id ```"
+        },
+        "sugar.scss.string.str-trim": {
+            "name": "str-trim",
+            "namespace": "sugar.scss.string",
+            "path": "scss/_primitive/string/_str-trim.scss",
+            "filename": "_str-trim.scss",
+            "title": "```js str-trim ```"
         },
         "sugar.scss.string.str-split": {
             "name": "str-split",
@@ -4514,6 +4535,15 @@
                         }
                     }
                 },
+                "format": {
+                    "format-marked": {
+                        "name": "format-marked",
+                        "namespace": "sugar.scss.format",
+                        "path": "scss/format/_marked.scss",
+                        "filename": "_marked.scss",
+                        "title": "```js format-marked ```"
+                    }
+                },
                 "form": {
                     "input-placeholder": {
                         "name": "input-placeholder",
@@ -4562,12 +4592,12 @@
                 },
                 "core": {
                     "typography": {
-                        "vertical-rhythm": {
-                            "name": "vertical-rhythm",
+                        "vertical-rhythm-scope": {
+                            "name": "vertical-rhythm-scope",
                             "namespace": "sugar.scss.core.typography",
-                            "path": "scss/core/typography/_vertical-rhythm.scss",
-                            "filename": "_vertical-rhythm.scss",
-                            "title": "```js vertical-rhythm ```"
+                            "path": "scss/core/typography/_vertical-rhythm-scope.scss",
+                            "filename": "_vertical-rhythm-scope.scss",
+                            "title": "```js vertical-rhythm-scope ```"
                         },
                         "vertical-rhythm-class": {
                             "name": "vertical-rhythm-class",
@@ -4575,6 +4605,13 @@
                             "path": "scss/core/typography/_vertical-rhythm-class.scss",
                             "filename": "_vertical-rhythm-class.scss",
                             "title": "```js vertical-rhythm-class ```"
+                        },
+                        "text-format-scope": {
+                            "name": "text-format-scope",
+                            "namespace": "sugar.scss.core.typography",
+                            "path": "scss/core/typography/_text-format-scope.scss",
+                            "filename": "_text-format-scope.scss",
+                            "title": "```js text-format-scope ```"
                         },
                         "text-format-class": {
                             "name": "text-format-class",
@@ -4941,6 +4978,13 @@
                         "path": "scss/_primitive/string/_str-unique-id.scss",
                         "filename": "_str-unique-id.scss",
                         "title": "```js str-unique-id ```"
+                    },
+                    "str-trim": {
+                        "name": "str-trim",
+                        "namespace": "sugar.scss.string",
+                        "path": "scss/_primitive/string/_str-trim.scss",
+                        "filename": "_str-trim.scss",
+                        "title": "```js str-trim ```"
                     },
                     "str-split": {
                         "name": "str-split",

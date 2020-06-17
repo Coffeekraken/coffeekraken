@@ -50,15 +50,13 @@
   }
 
   // test parameters
-  @if setting('debug.test-arguments') {
-    $name: test-argument("color", "name", "color|string", $name);
-    $actions: test-argument(
-      "color",
-      "actions",
-      "map|string|color",
-      $actions
-    );
-  }
+  $name: test-argument("color", "name", "color|string", $name);
+  $actions: test-argument(
+    "color",
+    "actions",
+    "map|string|color",
+    $actions
+  );
 
   // grab the colors
   $colors: setting("colors");
@@ -109,92 +107,90 @@
   // check action to do
   @if $actions {
     // check arguments
-    @if setting('debug.test-arguments') {
-      @if meta.type-of($actions) == map {
-        $hue: test-argument(
-          "color",
-          "actions.hue",
-          number,
-          map.get($actions, hue)
-        );
-        $lighten: test-argument(
-          "color",
-          "actions.lighten",
-          number,
-          map.get($actions, lighten)
-        );
-        $darken: test-argument(
-          "color",
-          "actions.darken",
-          number,
-          map.get($actions, darken)
-        );
-        $saturate: test-argument(
-          "color",
-          "actions.saturate",
-          number,
-          map.get($actions, saturate)
-        );
-        $desaturate: test-argument(
-          "color",
-          "actions.desaturate",
-          number,
-          map.get($actions, desaturate)
-        );
-        $grayscale: test-argument(
-          "color",
-          "actions.grayscale",
-          boolean,
-          map.get($actions, grayscale)
-        );
-        $complement: test-argument(
-          "color",
-          "actions.complement",
-          boolean,
-          map.get($actions, complement)
-        );
-        $invert: test-argument(
-          "color",
-          "actions.invert",
-          boolean,
-          map.get($actions, invert)
-        );
-        $opacity: test-argument(
-          "color",
-          "actions.opacity",
-          number,
-          map.get($actions, opacity)
-        );
-        $mix: test-argument(
-          "color",
-          "actions.mix",
-          color,
-          map.get($actions, mix)
-        );
-        $saturation: test-argument(
-          "color",
-          "actions.saturation",
-          number,
-          map.get($actions, saturation)
-        );
-        $lightness: test-argument(
-          "color",
-          "actions.lightness",
-          number,
-          map.get($actions, lightness)
-        );
-      } @else if meta.type-of($actions) == string {
-        $modifiers: setting("colors.#{$name}.modifiers");
-        @if not $modifiers {
-          @error ('The color "#{$name}" does not have any "#{$actions}" modifier...');
-        }
-        $actions: test-argument(
-          "color",
-          "actions",
-          map.keys(sugar.setting("colors.#{$name}.modifiers")),
-          $actions
-        );
+    @if meta.type-of($actions) == map {
+      $hue: test-argument(
+        "color",
+        "actions.hue",
+        number,
+        map.get($actions, hue)
+      );
+      $lighten: test-argument(
+        "color",
+        "actions.lighten",
+        number,
+        map.get($actions, lighten)
+      );
+      $darken: test-argument(
+        "color",
+        "actions.darken",
+        number,
+        map.get($actions, darken)
+      );
+      $saturate: test-argument(
+        "color",
+        "actions.saturate",
+        number,
+        map.get($actions, saturate)
+      );
+      $desaturate: test-argument(
+        "color",
+        "actions.desaturate",
+        number,
+        map.get($actions, desaturate)
+      );
+      $grayscale: test-argument(
+        "color",
+        "actions.grayscale",
+        boolean,
+        map.get($actions, grayscale)
+      );
+      $complement: test-argument(
+        "color",
+        "actions.complement",
+        boolean,
+        map.get($actions, complement)
+      );
+      $invert: test-argument(
+        "color",
+        "actions.invert",
+        boolean,
+        map.get($actions, invert)
+      );
+      $opacity: test-argument(
+        "color",
+        "actions.opacity",
+        number,
+        map.get($actions, opacity)
+      );
+      $mix: test-argument(
+        "color",
+        "actions.mix",
+        color,
+        map.get($actions, mix)
+      );
+      $saturation: test-argument(
+        "color",
+        "actions.saturation",
+        number,
+        map.get($actions, saturation)
+      );
+      $lightness: test-argument(
+        "color",
+        "actions.lightness",
+        number,
+        map.get($actions, lightness)
+      );
+    } @else if meta.type-of($actions) == string {
+      $modifiers: setting("colors.#{$name}.modifiers");
+      @if not $modifiers {
+        @error ('The color "#{$name}" does not have any "#{$actions}" modifier...');
       }
+      $actions: test-argument(
+        "color",
+        "actions",
+        map.keys(sugar.setting("colors.#{$name}.modifiers")),
+        $actions
+      );
     }
 
     // loop on each action to process to keep order

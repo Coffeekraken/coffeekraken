@@ -27,20 +27,18 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @mixin context-setup($contextName, $settings) {
-  @if (setting('debug.test-arguments')) {
-    $contextName: test-argument(
-      'sugar.context-setup',
-      'contextName',
-      string,
-      $contextName
-    );
-    $settings: test-argument(
-      'sugar.context-setup',
-      'settings',
-      map,
-      $settings
-    );
-  }
+  $contextName: test-argument(
+    'sugar.context-setup',
+    'contextName',
+    string,
+    $contextName
+  );
+  $settings: test-argument(
+    'sugar.context-setup',
+    'settings',
+    map,
+    $settings
+  );
   $current-settings: map.get($settings, $contextName);
   @if $current-settings {
     $settings: map-extend($current-settings, $settings);

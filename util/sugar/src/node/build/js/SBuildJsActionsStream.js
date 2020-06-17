@@ -1,6 +1,6 @@
 const __SActionsStream = require('../../stream/SActionsStream');
-const __SWebpackStreamAction = require('./js/SWebpackStreamAction');
-const __SUglifyJsStreamAction = require('./js/SUglifyJsStreamAction');
+const __SWebpackStreamAction = require('./actions/SWebpackStreamAction');
+const __SUglifyJsStreamAction = require('./actions/SUglifyJsStreamAction');
 const __glob = require('glob');
 const __SPromise = require('../../promise/SPromise');
 const __deepMerge = require('../../object/deepMerge');
@@ -48,7 +48,7 @@ module.exports = class SBuildJsActionsStream extends __SActionsStream {
       {
         globResolver: __SGlobResolverStreamAction,
         webpack: __SWebpackStreamAction,
-        uglify: __SUglifyJsStreamAction,
+        // uglify: __SUglifyJsStreamAction,
         fsOutput: __SFsOutputStreamAction
       },
       __deepMerge(

@@ -16,9 +16,6 @@
   @each $name, $color in $colors {
 
     $namespace: 'color';
-    @if setting('namespace') != '' {
-      $namespace: '#{setting('namespace')}.color';
-    }
 
     /**
      * @name 		#{$name}

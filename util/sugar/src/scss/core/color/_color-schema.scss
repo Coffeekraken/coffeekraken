@@ -33,14 +33,12 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @mixin color-schema($name) {
-  @if (setting('debug.test-arguments')) {
-    $name: test-argument(
-      'sugar.color-schema',
-      'name',
-      string,
-      $name
-    );
-  }
+  $name: test-argument(
+    'sugar.color-schema',
+    'name',
+    string,
+    $name
+  );
   $root: #{&};
   @if $root != "" {
     .cs-#{$name} &,

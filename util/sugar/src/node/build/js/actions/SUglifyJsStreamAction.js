@@ -69,6 +69,7 @@ module.exports = class SUglifyJsStreamAction extends __SActionsStreamAction {
     // return the promise for this action
     return new Promise((resolve, reject) => {
       // minify the "data"
+
       const uglifyResult = __uglifyJs.minify(
         streamObj.data,
         __deepMerge(

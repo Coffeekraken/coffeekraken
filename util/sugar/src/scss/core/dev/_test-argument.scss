@@ -34,6 +34,7 @@
   $value,
   $check-only: false
 ) {
+
   // check if not value
   @if not $value {
     @return $value;

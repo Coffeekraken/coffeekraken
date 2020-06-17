@@ -34,38 +34,11 @@ $_sugar-inited: false;
 
     // border box
     @if setting("border-box") == true {
-      html {
-        box-sizing: border-box;
-      }
-      *,
-      *:before,
-      *:after {
-        box-sizing: inherit;
-      }
+      @include init-border-box();
     }
 
     // links
-    a {
-      color: inherit;
-    }
-
-    // check settings
-    // $base-font-family: setting("typography.font-family");
-    // $fonts: setting("fonts");
-    // @if $base-font-family and not map-get($fonts, $base-font-family) {
-    //   @error ("Your typography.font-family setting has to be a registered font...");
-    // }
-
-    // // set the base font family if not defined
-    // @if not $base-font-family {
-    //   @include setup(
-    //     (
-    //       typo: (
-    //         font-family: default
-    //       )
-    //     )
-    //   );
-    // }
+    @include init-links();
 
     // body
     @include init-body();
@@ -73,8 +46,10 @@ $_sugar-inited: false;
     // font faces
     @include init-font();
 
+    // typography
+    @include init-typography();
+
     // modular scale
-    $ms-base: setting("modular-scale.base") !global;
-    $ms-ratio: setting("modular-scale.ratio") !global;
+    @include init-modular-scale();
   }
 }

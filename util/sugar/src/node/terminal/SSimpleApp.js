@@ -74,7 +74,7 @@ module.exports = class SSimpleApp extends __SApp {
     const header = new __SHeader(headerContent, {
       blessed: {
         style: {
-          bg: __sugarConfig('colors.primary')
+          bg: __sugarConfig('colors.primary.color')
         }
       }
     });

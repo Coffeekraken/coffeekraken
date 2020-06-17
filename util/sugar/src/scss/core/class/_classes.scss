@@ -102,14 +102,12 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @mixin classes($namespaces: "sugar") {
-  @if (setting('debug.test-arguments')) {
-    $namespaces: test-argument(
-      'sugar.classes',
-      'namespaces',
-      'string|list-string',
-      $namespaces
-    );
-  }
+  $namespaces: test-argument(
+    'sugar.classes',
+    'namespaces',
+    'string|list-string',
+    $namespaces
+  );
 
   // init classes
   @include init-classes();

@@ -26,20 +26,18 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function map-filter-by-namespace($map, $namespace) {
-  @if (setting('debug.test-arguments')) {
-    $map: test-argument(
-      "map-filter-by-namespace",
-      "map",
-      map,
-      $map
-    );
-    $namespace: test-argument(
-      'map-filter-by-namespace',
-      'namespace',
-      string,
-      $namespace
-    );
-  }
+  $map: test-argument(
+    "map-filter-by-namespace",
+    "map",
+    map,
+    $map
+  );
+  $namespace: test-argument(
+    'map-filter-by-namespace',
+    'namespace',
+    string,
+    $namespace
+  );
   // get the map keys
   $keys: map.keys($map);
   // init the filtered map

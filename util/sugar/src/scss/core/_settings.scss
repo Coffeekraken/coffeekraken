@@ -9,8 +9,6 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
  */
  $settings: (
-  // set the namespace where all the generated classes/colors/etc... will be documented
-  namespace: '',
   // set the base unit to use across the system
   unit: rem,
   // by default, a reset will be applied
@@ -35,17 +33,7 @@
     // map of font-sizes by media (size : media)
     font-sizes: null,
     // optimal letters count in a line
-    line-letters-count: 55,
-    // font format used in font-face
-    font-formats: (
-      eot: embedded-opentype,
-      woff2: woff2,
-      woff: woff,
-      ttf: truetype,
-      otf: opentype,
-      svg: svg,
-      svgz: svgz
-    )
+    line-letters-count: 55
   ),
   // store some settings for the look and feel
   look-and-feel: (
@@ -101,13 +89,9 @@
     base: 1rem,
     ratio: 1.33
   ),
-  text-format: (
-    scope-class: tf
-  ),
+  text-format-scope-class: tf,
   // Vertical rhythme options
-  vertical-rhythm: (
-    scope-class: vr // the class in which the vertical rhythme will be applied
-  ),
+  vertical-rhythm-scope-class: vr, // the class in which the vertical rhythme will be applied
   // store all the fonts
   fonts: (
     default: (
@@ -151,9 +135,6 @@
     fast: all 0.1s ease-in-out 0s,
     default: all 0.2s ease-in-out 0s, // default transition
     slow: all 0.5s ease-in-out 0s
-  ),
-  debug: (
-    test-arguments: true
   )
 ) !default;
 

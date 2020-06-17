@@ -1,0 +1,4 @@
+.marked {
+  @include Sugar.format-marked();
+  padding: Sugar.space(bigger);
+}

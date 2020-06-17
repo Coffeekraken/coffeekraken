@@ -311,7 +311,7 @@ let SActionStream = /*#__PURE__*/function (_SPromise) {
               } catch (e) {
                 // trigger an "event"
                 const errorObj = { ...actionObj,
-                  value: e.message,
+                  value: e && e.message ? e.message : e,
                   error: e
                 };
                 trigger('stderr.data', errorObj);

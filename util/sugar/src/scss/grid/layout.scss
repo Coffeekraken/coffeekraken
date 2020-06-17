@@ -1,0 +1,112 @@
+@use 'sass:list';
+@use 'sass:map';
+
+// TODO: Doc
+@mixin grid-layout($layout) {
+
+  $areas: ();
+
+  $colsCountByArea: ();
+  $rowsCountByArea: ();
+  $areasCountedByLine: ();
+  $areasCountedByCol: ();
+
+  $colsStartByArea: ();
+  $rowsStartByArea: ();
+  $colsEndByArea: ();
+  $rowsEndByArea: ();
+
+  $rowsCount: 0; $colsCount: 0;
+  // calculate the number of cols and rows
+  @each $line in $layout {
+    $rowsCount: $rowsCount + 1;
+    $lineCols: str-split($line, ' ');
+    @if $colsCount == 0 {
+      $colsCount: list.length($lineCols);
+    }
+  }
+
+  // calculate the ratios of the cols and rows
+  $currentCol: 0;
+  $currentRow: 0;
+  @each $line in $layout {
+    $currentRow: $currentRow + 1;
+    $currentCol: 0;
+
+    $lineCols: str-split($line, ' ');
+    @each $areaId in $lineCols {
+      $currentCol: $currentCol + 1;
+
+      // save all the aread names in the list
+      @if not list.index($areas, $areaId) {
+        $areas: list.append($areas, $areaId);
+      }
+
+      @if not map-get($areasCountedByCol, "#{$currentCol}-#{$areaId}") {
+        $areasCountedByCol: map-set($areasCountedByCol, "#{$currentCol}-#{$areaId}", true);
+
+        $currentColsCount: map-get-or($colsCountByArea, $areaId, 0);
+        $currentColsCount: $currentColsCount + 1;
+        $colsCountByArea: map-set($colsCountByArea, $areaId, $currentColsCount);
+      }
+
+      @if not map-get($areasCountedByLine, "#{$currentRow}-#{$areaId}") {
+        $areasCountedByLine: map-set($areasCountedByLine, "#{$currentRow}-#{$areaId}", true);
+
+        $currentRowsCount: map-get-or($rowsCountByArea, $areaId, 0);
+        $currentRowsCount: $currentRowsCount + 1;
+        $rowsCountByArea: map-set($rowsCountByArea, $areaId, $currentRowsCount);
+      }
+
+    }
+  }
+
+  $currentCol: 0;
+  $currentRow: 0;
+  $currentArea: '';
+  @each $row in $layout {
+    $currentRow: $currentRow + 1;
+    $currentCol: 0;
+
+    $cols: str-split($row, ' ');
+    @each $areaId in $cols {
+      $currentCol: $currentCol + 1;
+
+      $currentArea: $areaId;
+
+      @if not map-get($colsStartByArea, $areaId) {
+        $colsStartByArea: map-set($colsStartByArea, $areaId, $currentCol);
+      }
+      @if not map-get($rowsStartByArea, $areaId) {
+        $rowsStartByArea: map-set($rowsStartByArea, $areaId, $currentRow);
+      }
+
+      $colsEndByArea: map-set($colsEndByArea, $areaId, $currentCol);
+      $rowsEndByArea: map-set($rowsEndByArea, $areaId, $currentRow);
+
+    }
+  }
+
+  $colsStatement: ();
+  @for $i from 1 through $colsCount {
+    $colsStatement: list.append($colsStatement, 100% / $colsCount);
+  }
+
+  $rowsStatement: ();
+  @for $i from 1 through $rowsCount {
+    $rowsStatement: list.append($rowsStatement, 100% / $rowsCount);
+  }
+
+  display: grid;
+  grid-template-columns: $colsStatement;
+  grid-template-rows: $rowsStatement;
+
+  @each $areaId in $areas {
+    .area-#{$areaId} {
+      grid-column-start: map-get($colsStartByArea, $areaId);
+      grid-column-end: map-get($colsEndByArea, $areaId) + 1;
+      grid-row-start: map-get($rowsStartByArea, $areaId);
+      grid-row-end: map-get($rowsEndByArea, $areaId) + 1;
+    }
+  }
+}

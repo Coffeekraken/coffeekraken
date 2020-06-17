@@ -40,14 +40,12 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @mixin context($name-or-map) {
-  @if (setting('debug.test-arguments')) {
-    $name-or-map: test-argument(
-      'sugar.context',
-      'name-or-map',
-      'string|map',
-      $name-or-map
-    );
-  }
+  $name-or-map: test-argument(
+    'sugar.context',
+    'name-or-map',
+    'string|map',
+    $name-or-map
+  );
   $name: $name-or-map;
 
   // if the passes argument is a context map

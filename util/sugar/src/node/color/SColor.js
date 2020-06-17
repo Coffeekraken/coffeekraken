@@ -44,6 +44,8 @@ module.exports = class SColor extends __SColor {
         `terminal.colors.${color.replace('terminal.', '')}`
       );
     }
+    if (sugarConfigColor && sugarConfigColor.color)
+      return sugarConfigColor.color;
     if (sugarConfigColor) return sugarConfigColor;
     return super.getColor(color);
   }

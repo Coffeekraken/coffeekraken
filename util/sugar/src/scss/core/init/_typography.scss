@@ -1,0 +1,46 @@
+@use 'sass:map';
+@use 'sass:meta';
+
+@mixin init-typography() {
+
+  $typographySettingsMap: setting('typography');
+
+  $font-size: map-get-or($typographySettingsMap, font-size, 14px);
+  $font-family: map-get-or($typographySettingsMap, font-family, Roboto);
+
+  html {
+    @include font(
+      $family: $font-family,
+      $size: $font-size
+    );
+  }
+
+  .#{text-format-class()} {
+
+    @each $key, $config in map-get-or($typographySettingsMap, format, ()) {
+
+      $key: str-replace(inspect($key), ' ', ',');
+
+      #{$key} {
+        @include font(
+          $family: map-get-or($config, font-family, null),
+          $color: map-get-or($config, color, null),
+          $size: map-get-or($config, font-size, null),
+          $style: map-get-or($config, font-style, null),
+          $variant: map-get-or($config, font-variant, null),
+          $weight: map-get-or($config, font-weight, null),
+          $decoration: map-get-or($config, text-decoration, null),
+          $align: map-get-or($config, text-align, null),
+          $transform: map-get-or($config, text-transform, null),
+          $stretch: map-get-or($config, font-stretch, null),
+          $white-space: map-get-or($config, white-space, null),
+          $height: map-get-or($config, line-height, null),
+          $spacing: map-get-or($config, letter-spacing, null),
+          $indent: map-get-or($config, text-indent, null),
+          $break: map-get-or($config, line-break, null),
+          $wrap: map-get-or($config, text-wrap, null)
+        );
+      }
+    }
+  }
+}

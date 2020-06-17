@@ -81,7 +81,12 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
                   use: {
                     loader: 'babel-loader',
                     options: {
-                      presets: ['@babel/preset-env']
+                      presets: [
+                        '@babel/preset-env',
+                        {
+                          // forceAllTransforms: true
+                        }
+                      ]
                     }
                   }
                 }

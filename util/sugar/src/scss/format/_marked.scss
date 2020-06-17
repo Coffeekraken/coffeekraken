@@ -1,0 +1,98 @@
+/**
+ * @name            format-marked
+ * @namespace       sugar.scss.format
+ * @type            Mixin
+ *
+ * This mixin print the needed css to style a "marked" converted markdown to html
+ *
+ * @example       scss
+ * .my-cool-container {
+ *    @include Sugar.format-marked();
+ * }
+ *
+ * @since       2.0.0
+ * @see         https://github.com/markedjs/marked
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@mixin format-marked() {
+
+  @extend .#{text-format-class()} !optional;
+
+  // titles
+  h1 {
+  }
+  h2 {
+  }
+  h3 {
+
+  }
+  h4 {
+
+  }
+  h5 {
+
+  }
+  h6 {
+
+  }
+
+  // paragraphs
+  p {
+
+  }
+
+  // styling
+  strong {
+
+  }
+  em {
+
+  }
+
+  // blockquote
+  blockquote {
+
+  }
+
+  // lists
+  ol {
+
+    li {
+
+    }
+  }
+  ul {
+
+    li {
+
+    }
+  }
+
+  // images
+  img {
+
+  }
+
+  // code
+  code {
+
+  }
+
+  // links
+  a {
+
+  }
+
+  h1,
+  ol, ul,
+  blockquote, pre, img {
+    margin-bottom: space(medium);
+  }
+  h2, h3, h4, h5, h6 {
+    margin-bottom: space(small);
+  }
+  p {
+    margin-bottom: space(default);
+  }
+
+}

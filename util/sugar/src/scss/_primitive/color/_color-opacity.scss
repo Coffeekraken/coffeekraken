@@ -14,13 +14,12 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function color-opacity($color) {
-  @if setting('debug.test-arguments') {
-    $color: test-argument(
-      'sugar.color-opacity',
-      'color',
-      color,
-      $color
-    );
-  }
+  $color: test-argument(
+    'sugar.color-opacity',
+    'color',
+    color,
+    $color
+  );
+
   @return opacity($color);
 }

@@ -34,47 +34,53 @@
   $font-style: normal,
   $font-display: auto
 ) {
-  @if (setting('debug.test-arguments')) {
-    $font-family: test-argument(
-      "sugar.font-face",
-      "font-family",
-      string,
-      $font-family
-    );
-    $src : test-argument(
-      'sugar.font-face',
-      'src',
-      mixed,
-      $src
-    );
-    $extensions: test-argument(
-      "sugar.font-face",
-      "extensions",
-      "string|list",
-      $extensions
-    );
-    $font-weight: test-argument(
-      "sugar.font-face",
-      "font-weight",
-      (normal, bold, bolder, lighter, number, initial, inherit),
-      $font-weight
-    );
-    $font-style: test-argument(
-      "sugar.font-face",
-      "font-style",
-      (normal, italic, oblique, initial, inherit),
-      $font-style
-    );
-    $font-display: test-argument(
-      "sugar.font-face",
-      "font-display",
-      (auto, block, swap, fallback, optional),
-      $font-display
-    );
-  }
+  $font-family: test-argument(
+    "sugar.font-face",
+    "font-family",
+    string,
+    $font-family
+  );
+  $src : test-argument(
+    'sugar.font-face',
+    'src',
+    mixed,
+    $src
+  );
+  $extensions: test-argument(
+    "sugar.font-face",
+    "extensions",
+    "string|list",
+    $extensions
+  );
+  $font-weight: test-argument(
+    "sugar.font-face",
+    "font-weight",
+    (normal, bold, bolder, lighter, number, initial, inherit),
+    $font-weight
+  );
+  $font-style: test-argument(
+    "sugar.font-face",
+    "font-style",
+    (normal, italic, oblique, initial, inherit),
+    $font-style
+  );
+  $font-display: test-argument(
+    "sugar.font-face",
+    "font-display",
+    (auto, block, swap, fallback, optional),
+    $font-display
+  );
 
   // get font format from settings
-  $font-formats: setting("typography.font-formats");
+  $font-formats: (
+    eot: 'embedded-opentype',
+    woff2: 'woff2',
+    woff: 'woff',
+    ttf: 'truetype',
+    otf: 'opentype',
+    svg: 'svg',
+    svgz: 'svgz'
+  );
 
   // @if meta.type-of($extensions) == 'list'
 
@@ -99,7 +105,7 @@
       @if $e and str-trim($e) != '' {
         // get the format
         $format: map.get($font-formats, $e);
-        $srcs: list.append($srcs, url("#{$path}.#{$e}") format("#{$format}"), comma);
+        $srcs: list.append($srcs, url("#{$path}") format("#{$format}"), comma);
       }
     }
   }

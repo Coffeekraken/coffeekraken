@@ -11,7 +11,7 @@ module.exports = {
      * @since               2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    primary: '[config.terminal.colors.yellow]',
+    primary: '@config.terminal.colors.yellow',
 
     /**
      * @name                secondary
@@ -24,7 +24,7 @@ module.exports = {
      * @since               2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    secondary: '[config.terminal.colors.cyan]',
+    secondary: '@config.terminal.colors.cyan',
 
     /**
      * @name                black
@@ -37,7 +37,9 @@ module.exports = {
      * @since               2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    black: '#343a43',
+    black: {
+      color: '#343a43'
+    },
 
     /**
      * @name                red
@@ -50,7 +52,9 @@ module.exports = {
      * @since               2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    red: '#e78287',
+    red: {
+      color: '#e78287'
+    },
 
     /**
      * @name                green
@@ -63,7 +67,9 @@ module.exports = {
      * @since               2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    green: '#a7cb8b',
+    green: {
+      color: '#a7cb8b'
+    },
 
     /**
      * @name                yellow
@@ -76,7 +82,9 @@ module.exports = {
      * @since               2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    yellow: '#ffdc89',
+    yellow: {
+      color: '#ffdc89'
+    },
 
     /**
      * @name                blue
@@ -89,7 +97,9 @@ module.exports = {
      * @since               2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    blue: '#71bdf2',
+    blue: {
+      color: '#71bdf2'
+    },
 
     /**
      * @name                magenta
@@ -102,7 +112,9 @@ module.exports = {
      * @since               2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    magenta: '#d190e3',
+    magenta: {
+      color: '#d190e3'
+    },
 
     /**
      * @name                cyan
@@ -115,7 +127,9 @@ module.exports = {
      * @since               2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    cyan: '#65c1cd',
+    cyan: {
+      color: '#65c1cd'
+    },
 
     /**
      * @name                white
@@ -128,6 +142,8 @@ module.exports = {
      * @since               2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    white: '#e2e5e9'
+    white: {
+      color: '#e2e5e9'
+    }
   }
 };

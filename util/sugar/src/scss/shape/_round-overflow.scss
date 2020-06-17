@@ -21,11 +21,9 @@
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @mixin round-overflow($size: null, $height: null, $color: null) {
-  @if $_sugar-test-arguments {
-    $size: test-argument("sugar.round", "width", number, $size);
-    $width: test-argument("sugar.round", "width", number, $width);
-    $height: test-argument("sugar.round", "height", number, $height);
-  }
+  $size: test-argument("sugar.round", "width", number, $size);
+  $width: test-argument("sugar.round", "width", number, $width);
+  $height: test-argument("sugar.round", "height", number, $height);
   @if $size {
     width: $size;
     height: $size;

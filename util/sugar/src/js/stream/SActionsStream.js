@@ -280,7 +280,11 @@ export default class SActionStream extends __SPromise {
               currentActionReturn = null;
             } catch (e) {
               // trigger an "event"
-              const errorObj = { ...actionObj, value: e.message, error: e };
+              const errorObj = {
+                ...actionObj,
+                value: e && e.message ? e.message : e,
+                error: e
+              };
               trigger('stderr.data', errorObj);
               trigger(`${actionName}.stderr.data`, errorObj);
               _this.trigger('stderr.data', errorObj);

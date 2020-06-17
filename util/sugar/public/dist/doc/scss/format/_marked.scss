@@ -1,0 +1,23 @@
+
+
+<!-- @namespace    sugar.scss.format -->
+<!-- @name    format-marked -->
+
+# ```js format-marked ```
+### Since: 2.0.0
+
+This mixin print the needed css to style a "marked" converted markdown to html
+
+
+### Example (scss)
+
+```scss
+.my-cool-container {
+   @include Sugar.format-marked();
+}
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+

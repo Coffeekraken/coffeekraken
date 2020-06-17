@@ -8,10 +8,10 @@
  * @return 		{String} 		The vertical-rhythm scope class from settings.vertical-rhythm.scope-class
  *
  * @example     scss
- * sugar.vertical-rhythm-class(); // vr
+ * Sugar.vertical-rhythm-class(); // vr
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function vertical-rhythm-class() {
-  @return setting("vertical-rhythm.scope-class");
+  @return setting("vertical-rhythm-scope-class");
 }

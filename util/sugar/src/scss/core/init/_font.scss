@@ -12,20 +12,22 @@
       $font: map-set($font, family, $font-name);
     }
     $font: map-remove($font, cap-height);
-    @if map-get($font, src) {
+    @if map-get($font, import) {
+      @import url('#{map-get($font, import)}');
+    } @else if map-get($font, src) {
       @include font-face(
-        $font-family: inspect(map-get($font, family)),
+        $font-family: map-get($font, font-family),
         $src: map-get($font, src),
         $extensions: map-get($font, extensions),
-        $font-weight: map-get($font, weight),
-        $font-style: map-get($font, style),
-        $font-display: map-get($font, display)
+        $font-weight: map-get($font, font-weight),
+        $font-style: map-get($font, font-style),
+        $font-display: map-get($font, font-display)
       );
     } @else {
-      $ff: map-get($font, family);
-      $fs: map-get($font, style);
-      $fw: map-get($font, weight);
-      $fd: map-get($font, display);
+      $ff: map-get($font, font-family);
+      $fs: map-get($font, font-style);
+      $fw: map-get($font, font-weight);
+      $fd: map-get($font, font-display);
       /**
        * @name   			#{$font-name}
        * @styleguide 		Fonts / Faces
@@ -50,9 +52,6 @@
         }
       }
     }
-
-    // try to get the font family from fonts
-    // @include font(setting("typography.font-family"));
   }
 
 }

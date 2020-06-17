@@ -15,19 +15,17 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function color-transparentize($color, $amount) {
-  @if setting('debug.test-arguments') {
-    $color: test-argument(
-      'sugar.color-transparentize',
-      'color',
-      color,
-      $color
-    );
-    $amount: test-argument(
-      'sugar.color-transparentize',
-      'amount',
-      number,
-      $amount
-    );
-  }
+  $color: test-argument(
+    'sugar.color-transparentize',
+    'color',
+    color,
+    $color
+  );
+  $amount: test-argument(
+    'sugar.color-transparentize',
+    'amount',
+    number,
+    $amount
+  );
   @return transparentize($color, $amount);
 }

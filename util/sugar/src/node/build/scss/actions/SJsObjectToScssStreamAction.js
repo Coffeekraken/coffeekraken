@@ -61,13 +61,14 @@ module.exports = class SJsObjectToScssStreamAction extends __SActionsStreamActio
     // make sure we have a correct streamObj
     this.checkStreamObject(streamObj);
 
-    return new Promise(async (resolve, reject) => {
-      streamObj.jsObjectToScss._jsonToScss = {
-        valueFormat: 'dq',
-        indentationText: '',
-        indentationSize: 0
-      };
+    settings = __deepMerge(
+      {
+        quoteKeys: ['src', 'import']
+      },
+      settings
+    );
 
+    return new Promise(async (resolve, reject) => {
       await __writeFile(
         __tmpDir() + '/sugar.build.scss.config.json',
         JSON.stringify(streamObj.jsObjectToScss, null, 4)
@@ -75,10 +76,28 @@ module.exports = class SJsObjectToScssStreamAction extends __SActionsStreamActio
 
       const command = `npx --no-install -c "json-to-scss ${__tmpDir()}/sugar.build.scss.config.json ${__tmpDir()}/sugar.build.scss.config.scss --mo"`;
       __child_process.execSync(command);
-      const scssConfigString = __fs
+      let scssConfigString = __fs
         .readFileSync(`${__tmpDir()}/sugar.build.scss.config.scss`, 'ascii')
         .replace('$sugar:', '$sugarUserSettings:')
         .trim();
+
+      settings.quoteKeys.forEach((key) => {
+        const reg = new RegExp(
+          `\\s?${key}:\\s?([a-zA-Z0-9:\\/.-\?&@:]+),?\\s?`,
+          'gm'
+        );
+        const matches = scssConfigString.match(reg);
+        if (matches) {
+          matches.forEach((match) => {
+            match = match
+              .trim()
+              .replace(`${key}: `, '')
+              .replace(`${key}:`, '')
+              .replace(',', '');
+            scssConfigString = scssConfigString.replace(match, `"${match}"`);
+          });
+        }
+      });
 
       __fs.unlinkSync(`${__tmpDir()}/sugar.build.scss.config.json`);
       __fs.unlinkSync(`${__tmpDir()}/sugar.build.scss.config.scss`);

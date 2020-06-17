@@ -34,10 +34,10 @@ module.exports = function parseHtml(message) {
   const terminalColors = Object.keys(__sugarConfig('terminal.colors'));
   const colorsObj = {};
   sugarColors.forEach((name) => {
-    colorsObj[name] = __sugarConfig(`colors.${name}`);
+    colorsObj[name] = __sugarConfig(`colors.${name}.color`);
   });
   terminalColors.forEach((name) => {
-    colorsObj[name] = __sugarConfig(`terminal.colors.${name}`);
+    colorsObj[name] = __sugarConfig(`terminal.colors.${name}.color`);
   });
 
   message = message.map((m) => {

@@ -14,13 +14,11 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function color-lightness($color) {
-  @if setting('debug.test-arguments') {
-    $color: test-argument(
-      'sugar.color-lightness',
-      'color',
-      color,
-      $color
-    );
-  }
+  $color: test-argument(
+    'sugar.color-lightness',
+    'color',
+    color,
+    $color
+  );
   @return lightness($color);
 }

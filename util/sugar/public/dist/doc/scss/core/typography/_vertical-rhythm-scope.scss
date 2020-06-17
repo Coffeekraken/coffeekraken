@@ -1,0 +1,25 @@
+
+
+<!-- @namespace    sugar.scss.core.typography -->
+<!-- @name    vertical-rhythm-scope -->
+
+# ```js vertical-rhythm-scope ```
+
+
+Scope the content inside the `settings.vertical-rhythm-scope-class` class
+
+
+### Example (scss)
+
+```scss
+.my-cool-item {
+	@include sugar.vertical-rhythm-scope() {
+		margin-bottom: 2em; // will be applied only if .my-cool-item is in the .vr scope
+	}
+}
+```
+
+
+### Author
+- **Olivier Bossel** <a href="mailto:olivier.bossel@gmail.com">olivier.bossel@gmail.com</a> 
+

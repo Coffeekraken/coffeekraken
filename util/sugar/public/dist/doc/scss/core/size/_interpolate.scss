@@ -12,7 +12,7 @@ depending on the settings.sizes ratios stack
 
 ## Parameters
 
-- **$stack**  Map: The stack from which to interpolate the value
+- **$value**  Map: The stack from which to interpolate the value
 
 - **$size**  String: The size wanted (has to exist in the settings.sizes stack)
 
@@ -22,7 +22,7 @@ depending on the settings.sizes ratios stack
 
 ```scss
 // settings.sizes
-\@include sugar.setup((
+\@include Sugar.setup((
 		sizes : (
 			small : 0.5,
 			default : 1, // default is ALWAYS 1
@@ -35,8 +35,8 @@ $myStack : (
 		big : 6rem
 )
 
-sugar.interpolate($myStack, big) // 6rem cause specified in the $myStack value
-sugar.interpolate($myStack, small) // 1.5rem => calculated like : 3rem  0.5 = 1.5rem
+Sugar.interpolate($myStack, big) // 6rem cause specified in the $myStack value
+Sugar.interpolate($myStack, small) // 1.5rem => calculated like : 3rem  0.5 = 1.5rem
 ```
 
 

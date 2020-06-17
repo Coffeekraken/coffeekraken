@@ -23,21 +23,18 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @mixin register-class($classname, $namespace) {
-  @if setting('debug.test-arguments') {
-    $classname: test-argument(
-      "register-helper-class",
-      "classname",
-      string,
-      $classname
-    );
-    $namespace: test-argument(
-      "register-helper-class",
-      "namespace",
-      string,
-      $namespace
-    );
-  }
-
+  $classname: test-argument(
+    "register-helper-class",
+    "classname",
+    string,
+    $classname
+  );
+  $namespace: test-argument(
+    "register-helper-class",
+    "namespace",
+    string,
+    $namespace
+  );
   // register the class
   // $split: str-split($namespace, ".");
   sugar.$classes: map-merge(sugar.$classes, (

@@ -1,19 +1,19 @@
 
 
 <!-- @namespace    sugar.scss.core.typography -->
-<!-- @name    vertical-rhythm -->
+<!-- @name    text-format-scope -->
 
-# ```js vertical-rhythm ```
+# ```js text-format-scope ```
 
 
-Scope the content inside the `settings.vertical-rhythm.scope-class` class
+Scope the content inside the `settings.text-format-scope-class` class
 
 
 ### Example (scss)
 
 ```scss
 .my-cool-item {
-	@include sugar.vertical-rhythm() {
+	@include Sugar.text-format-scope() {
 		margin-bottom: 2em; // will be applied only if .my-cool-item is in the .vr scope
 	}
 }

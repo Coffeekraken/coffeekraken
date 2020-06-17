@@ -1,3 +1,42 @@
+/**
+ * @name                colors
+ * @namespace           sugar.config
+ * @type                Object
+ *
+ * This config file delare the colors used in the project. Each colors are defined
+ * by a ```color``` property that contain the actual color hexadecimal code and can
+ * have a ```modifiers``` property that specify some color variants like "light", "dark", etc...
+ * Here's the list of available modifiers actions:
+ * - hue {Deg}
+ * - lighten {Percent}
+ * - darken {Percent}
+ * - saturate {Percent}
+ * - desaturate {Percent}
+ * - grayscale {Boolean}
+ * - complement {Boolean}
+ * - invert {Boolean}
+ * - opacity {Percent}
+ * - mix {Color}
+ * - lightness {Percent}
+ * - saturation {Percent}
+ *
+ * @example         js
+ * {
+ *    scss: {
+ *      colors: {
+ *        default: {
+ *          color: '#ff0000',
+ *          modifiers: {
+ *            light: '-lighten 10% -opacity 50%'
+ *          }
+ *        }
+ *      }
+ *    }
+ * }
+ *
+ * @since           1.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
 module.exports = {
   /**
    * @name                default
@@ -10,7 +49,9 @@ module.exports = {
    * @since             2.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  default: '#848e91',
+  default: {
+    color: '#848e91'
+  },
 
   /**
    * @name                title
@@ -23,7 +64,9 @@ module.exports = {
    * @since             2.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  title: '#2b3438',
+  title: {
+    color: '#2b3438'
+  },
 
   /**
    * @name                text
@@ -31,12 +74,29 @@ module.exports = {
    * @type                Color
    * @default             #848e91
    *
-   * Specify the <text>text</text> color value
+   * Specify the <primary>text</primary> color value
    *
    * @since             2.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  text: '#848e91',
+  text: {
+    color: '#848e91'
+  },
+
+  /**
+   * @name                link
+   * @namespace           sugar.config.colors
+   * @type                Color
+   * @default             primary
+   *
+   * Specify the <primary>link</primary> color value
+   *
+   * @since             2.0.0
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  link: {
+    color: 'primary'
+  },
 
   /**
    * @name                primary
@@ -49,7 +109,9 @@ module.exports = {
    * @since             2.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  primary: '#f2bc2b',
+  primary: {
+    color: '#f2bc2b'
+  },
 
   /**
    * @name                secondary
@@ -62,7 +124,9 @@ module.exports = {
    * @since             2.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  secondary: '#2b3438',
+  secondary: {
+    color: '#2b3438'
+  },
 
   /**
    * @name                success
@@ -75,7 +139,9 @@ module.exports = {
    * @since             2.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  success: '#5cb85c',
+  success: {
+    color: '#5cb85c'
+  },
 
   /**
    * @name                warning
@@ -88,7 +154,9 @@ module.exports = {
    * @since             2.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  warning: '#f0ad4e',
+  warning: {
+    color: '#f0ad4e'
+  },
 
   /**
    * @name                error
@@ -101,7 +169,9 @@ module.exports = {
    * @since             2.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  error: '#d9534f',
+  error: {
+    color: '#d9534f'
+  },
 
   /**
    * @name                info
@@ -114,5 +184,7 @@ module.exports = {
    * @since             2.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  info: '#2199e8'
+  info: {
+    color: '#2199e8'
+  }
 };

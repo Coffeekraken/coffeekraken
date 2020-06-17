@@ -64,7 +64,6 @@ module.exports = class SRenderSassStreamAction extends __SActionsStreamAction {
   run(streamObj, settings = this._settings) {
     // make sure we have a correct streamObj
     this.checkStreamObject(streamObj);
-
     return new Promise(async (resolve, reject) => {
       __sass.render(
         __deepMerge(

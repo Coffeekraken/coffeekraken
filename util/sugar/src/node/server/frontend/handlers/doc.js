@@ -39,11 +39,16 @@ module.exports = function doc(req, server) {
       $dom.window.document.querySelector('h1').textContent || ''
     );
 
+    let content = `
+        <my-component param1="hello world"></my-component>
+      `;
+
     // send back the result
     resolve({
       view: 'pages.doc',
       title,
-      content: htmlData
+      content: `<div class="marked">${htmlData}</div>`,
+      content
     });
   });
 };

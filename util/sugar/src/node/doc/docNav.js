@@ -21,6 +21,8 @@ const __sugarConfig = require('../config/sugar');
  * @param       {Object}          [docMap=`${__sugarConfig('doc.rootDir')}/docMap.json`]             Either directly a docMap JSON or a docMap.json path
  * @param       {Object}          [settings={}]     A settings object that will be passed to the SNav constructor
  * - url ([path]) {String}: Specify the url you want in each SNavItem. The token "[path]" will be replaced by the actual doc file path
+ * - id (doc) {String}: Specify the id passed to the SNav instance
+ * - text (Documentation) {String}: Specify the text passed to the SNav instance
  * @return      {SNav}                              An SNav instance representing the document navigation
  *
  * @example       js
@@ -34,18 +36,23 @@ module.exports = function docNav(
   docMap = `${__sugarConfig('doc.rootDir')}/docMap.json`,
   settings = {}
 ) {
-  if (!__isJson(docMap) && !__isPath(docMap, true)) {
-    throw new Error(
-      `You try to generate a docNav by passing "${docMap}" as parameter but this parameter MUST be either a valid docMap JSON or a valid docMap.json file path...`
-    );
-  }
-
   settings = __deepMerge(
     {
-      url: '[path]'
+      url: '[path]',
+      id: 'doc',
+      text: 'Documentation'
     },
     settings
   );
+
+  let finalNavObj = new __SNav(settings.id, settings.text, []);
+
+  if (!__isJson(docMap) && !__isPath(docMap, true)) {
+    // throw new Error(
+    //   `You try to generate a docNav by passing "${docMap}" as parameter but this parameter MUST be either a valid docMap JSON or a valid docMap.json file path...`
+    // );
+    return finalNavObj;
+  }
 
   let json = docMap;
   if (__isPath(`${docMap}/docMap.json`, true)) {
@@ -60,8 +67,6 @@ module.exports = function docNav(
     const item = json.flat[path];
     __ensureExists(navObj, `${item.namespace}.${item.name}`, null);
   });
-
-  let finalNavObj = new __SNav('.', '.', []);
 
   function deep(currentNavInstance, dotPath = '') {
     // get nav items in the navObj

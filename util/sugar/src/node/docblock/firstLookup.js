@@ -36,6 +36,8 @@ module.exports = async function firstLookup(directory, settings = {}) {
     settings
   );
 
+  if (!__fs.existsSync(directory)) return {};
+
   let founded = await __findInFiles.find(`@namespace`, directory);
 
   const namespaceObj = {};

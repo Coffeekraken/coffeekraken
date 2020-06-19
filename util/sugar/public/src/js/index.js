@@ -1,21 +1,38 @@
 import __SWebcomponent from '../../../src/js/webcomponent/SWebComponent';
 import SWebComponent from '../../../src/js/webcomponent/SWebComponent';
+import './_component.scss';
 
 class MyComponent extends __SWebcomponent {
+  static get name() {
+    return 'myComponent';
+  }
+
   static get observedAttributes() {
     return ['param1', 'something'];
   }
 
+  static get physicalProps() {
+    return ['something'];
+  }
+
+  static get requiredProps() {
+    return ['param1'];
+  }
+
+  static get defaultProps() {
+    return {
+      param1: 'Something setteg',
+      something: 'Cool'
+    };
+  }
+
   constructor() {
-    super({
-      defaultProps: {
-        param1: 'Something setteg',
-        something: 'Cool'
-      },
-      requiredProps: ['param1'],
-      physicalProps: ['something']
-    });
+    super({});
     console.log('Cool component', this);
+
+    this.on('prop', (e) => {
+      console.log(e);
+    });
 
     setTimeout(() => {
       console.log('Setin');
@@ -24,7 +41,7 @@ class MyComponent extends __SWebcomponent {
   }
 }
 
-SWebComponent.define('my-component', MyComponent, {
+SWebComponent.define(MyComponent, {
   something: 'hello'
 });
 

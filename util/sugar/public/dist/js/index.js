@@ -1,6 +1,50 @@
 /******/ (function(modules) { // webpackBootstrap
+/******/ 	// install a JSONP callback for chunk loading
+/******/ 	function webpackJsonpCallback(data) {
+/******/ 		var chunkIds = data[0];
+/******/ 		var moreModules = data[1];
+/******/
+/******/
+/******/ 		// add "moreModules" to the modules object,
+/******/ 		// then flag all "chunkIds" as loaded and fire callback
+/******/ 		var moduleId, chunkId, i = 0, resolves = [];
+/******/ 		for(;i < chunkIds.length; i++) {
+/******/ 			chunkId = chunkIds[i];
+/******/ 			if(Object.prototype.hasOwnProperty.call(installedChunks, chunkId) && installedChunks[chunkId]) {
+/******/ 				resolves.push(installedChunks[chunkId][0]);
+/******/ 			}
+/******/ 			installedChunks[chunkId] = 0;
+/******/ 		}
+/******/ 		for(moduleId in moreModules) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
+/******/ 				modules[moduleId] = moreModules[moduleId];
+/******/ 			}
+/******/ 		}
+/******/ 		if(parentJsonpFunction) parentJsonpFunction(data);
+/******/
+/******/ 		while(resolves.length) {
+/******/ 			resolves.shift()();
+/******/ 		}
+/******/
+/******/ 	};
+/******/
+/******/
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
+/******/
+/******/ 	// object to store loaded and loading chunks
+/******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 	// Promise = chunk loading, 0 = chunk loaded
+/******/ 	var installedChunks = {
+/******/ 		"main": 0
+/******/ 	};
+/******/
+/******/
+/******/
+/******/ 	// script path function
+/******/ 	function jsonpScriptSrc(chunkId) {
+/******/ 		return __webpack_require__.p + "" + chunkId + ".index.js"
+/******/ 	}
 /******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
@@ -26,6 +70,67 @@
 /******/ 		return module.exports;
 /******/ 	}
 /******/
+/******/ 	// This file contains only the entry chunk.
+/******/ 	// The chunk loading function for additional chunks
+/******/ 	__webpack_require__.e = function requireEnsure(chunkId) {
+/******/ 		var promises = [];
+/******/
+/******/
+/******/ 		// JSONP chunk loading for javascript
+/******/
+/******/ 		var installedChunkData = installedChunks[chunkId];
+/******/ 		if(installedChunkData !== 0) { // 0 means "already installed".
+/******/
+/******/ 			// a Promise means "currently loading".
+/******/ 			if(installedChunkData) {
+/******/ 				promises.push(installedChunkData[2]);
+/******/ 			} else {
+/******/ 				// setup Promise in chunk cache
+/******/ 				var promise = new Promise(function(resolve, reject) {
+/******/ 					installedChunkData = installedChunks[chunkId] = [resolve, reject];
+/******/ 				});
+/******/ 				promises.push(installedChunkData[2] = promise);
+/******/
+/******/ 				// start chunk loading
+/******/ 				var script = document.createElement('script');
+/******/ 				var onScriptComplete;
+/******/
+/******/ 				script.charset = 'utf-8';
+/******/ 				script.timeout = 120;
+/******/ 				if (__webpack_require__.nc) {
+/******/ 					script.setAttribute("nonce", __webpack_require__.nc);
+/******/ 				}
+/******/ 				script.src = jsonpScriptSrc(chunkId);
+/******/
+/******/ 				// create error before stack unwound to get useful stacktrace later
+/******/ 				var error = new Error();
+/******/ 				onScriptComplete = function (event) {
+/******/ 					// avoid mem leaks in IE.
+/******/ 					script.onerror = script.onload = null;
+/******/ 					clearTimeout(timeout);
+/******/ 					var chunk = installedChunks[chunkId];
+/******/ 					if(chunk !== 0) {
+/******/ 						if(chunk) {
+/******/ 							var errorType = event && (event.type === 'load' ? 'missing' : event.type);
+/******/ 							var realSrc = event && event.target && event.target.src;
+/******/ 							error.message = 'Loading chunk ' + chunkId + ' failed.\n(' + errorType + ': ' + realSrc + ')';
+/******/ 							error.name = 'ChunkLoadError';
+/******/ 							error.type = errorType;
+/******/ 							error.request = realSrc;
+/******/ 							chunk[1](error);
+/******/ 						}
+/******/ 						installedChunks[chunkId] = undefined;
+/******/ 					}
+/******/ 				};
+/******/ 				var timeout = setTimeout(function(){
+/******/ 					onScriptComplete({ type: 'timeout', target: script });
+/******/ 				}, 120000);
+/******/ 				script.onerror = script.onload = onScriptComplete;
+/******/ 				document.head.appendChild(script);
+/******/ 			}
+/******/ 		}
+/******/ 		return Promise.all(promises);
+/******/ 	};
 /******/
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
@@ -78,6 +183,16 @@
 /******/
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// on error function for async loading
+/******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
+/******/
+/******/ 	var jsonpArray = window["webpackJsonp"] = window["webpackJsonp"] || [];
+/******/ 	var oldJsonpFunction = jsonpArray.push.bind(jsonpArray);
+/******/ 	jsonpArray.push = webpackJsonpCallback;
+/******/ 	jsonpArray = jsonpArray.slice();
+/******/ 	for(var i = 0; i < jsonpArray.length; i++) webpackJsonpCallback(jsonpArray[i]);
+/******/ 	var parentJsonpFunction = oldJsonpFunction;
 /******/
 /******/
 /******/ 	// Load entry module and return exports
@@ -287,6 +402,129 @@ module.exports = {
 		return false;
 	}
 };
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./public/src/js/_component.scss":
+/*!********************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./public/src/js/_component.scss ***!
+  \********************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "body {\n  background: green; }\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/runtime/api.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/css-loader/dist/runtime/api.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/*
+  MIT License http://www.opensource.org/licenses/mit-license.php
+  Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+// eslint-disable-next-line func-names
+module.exports = function (useSourceMap) {
+  var list = []; // return the list of modules as css string
+
+  list.toString = function toString() {
+    return this.map(function (item) {
+      var content = cssWithMappingToString(item, useSourceMap);
+
+      if (item[2]) {
+        return "@media ".concat(item[2], " {").concat(content, "}");
+      }
+
+      return content;
+    }).join('');
+  }; // import a list of modules into the list
+  // eslint-disable-next-line func-names
+
+
+  list.i = function (modules, mediaQuery, dedupe) {
+    if (typeof modules === 'string') {
+      // eslint-disable-next-line no-param-reassign
+      modules = [[null, modules, '']];
+    }
+
+    var alreadyImportedModules = {};
+
+    if (dedupe) {
+      for (var i = 0; i < this.length; i++) {
+        // eslint-disable-next-line prefer-destructuring
+        var id = this[i][0];
+
+        if (id != null) {
+          alreadyImportedModules[id] = true;
+        }
+      }
+    }
+
+    for (var _i = 0; _i < modules.length; _i++) {
+      var item = [].concat(modules[_i]);
+
+      if (dedupe && alreadyImportedModules[item[0]]) {
+        // eslint-disable-next-line no-continue
+        continue;
+      }
+
+      if (mediaQuery) {
+        if (!item[2]) {
+          item[2] = mediaQuery;
+        } else {
+          item[2] = "".concat(mediaQuery, " and ").concat(item[2]);
+        }
+      }
+
+      list.push(item);
+    }
+  };
+
+  return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+  var content = item[1] || ''; // eslint-disable-next-line prefer-destructuring
+
+  var cssMapping = item[3];
+
+  if (!cssMapping) {
+    return content;
+  }
+
+  if (useSourceMap && typeof btoa === 'function') {
+    var sourceMapping = toComment(cssMapping);
+    var sourceURLs = cssMapping.sources.map(function (source) {
+      return "/*# sourceURL=".concat(cssMapping.sourceRoot || '').concat(source, " */");
+    });
+    return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+  }
+
+  return [content].join('\n');
+} // Adapted from convert-source-map (MIT)
+
+
+function toComment(sourceMap) {
+  // eslint-disable-next-line no-undef
+  var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+  var data = "sourceMappingURL=data:application/json;charset=utf-8;base64,".concat(base64);
+  return "/*# ".concat(data, " */");
+}
 
 /***/ }),
 
@@ -2935,6 +3173,28 @@ exports.getName = function(elem){
 	return elem.name;
 };
 
+
+/***/ }),
+
+/***/ "./node_modules/dot-case/dist.es2015/index.js":
+/*!****************************************************!*\
+  !*** ./node_modules/dot-case/dist.es2015/index.js ***!
+  \****************************************************/
+/*! exports provided: dotCase */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dotCase", function() { return dotCase; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var no_case__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! no-case */ "./node_modules/no-case/dist.es2015/index.js");
+
+
+function dotCase(input, options) {
+    if (options === void 0) { options = {}; }
+    return Object(no_case__WEBPACK_IMPORTED_MODULE_1__["noCase"])(input, Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({ delimiter: "." }, options));
+}
+//# sourceMappingURL=index.js.map
 
 /***/ }),
 
@@ -5886,6 +6146,68 @@ module.exports = Array.isArray || function (arr) {
 
 /***/ }),
 
+/***/ "./node_modules/lower-case/dist.es2015/index.js":
+/*!******************************************************!*\
+  !*** ./node_modules/lower-case/dist.es2015/index.js ***!
+  \******************************************************/
+/*! exports provided: localeLowerCase, lowerCase */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "localeLowerCase", function() { return localeLowerCase; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lowerCase", function() { return lowerCase; });
+/**
+ * Source: ftp://ftp.unicode.org/Public/UCD/latest/ucd/SpecialCasing.txt
+ */
+var SUPPORTED_LOCALE = {
+    tr: {
+        regexp: /\u0130|\u0049|\u0049\u0307/g,
+        map: {
+            İ: "\u0069",
+            I: "\u0131",
+            İ: "\u0069"
+        }
+    },
+    az: {
+        regexp: /\u0130/g,
+        map: {
+            İ: "\u0069",
+            I: "\u0131",
+            İ: "\u0069"
+        }
+    },
+    lt: {
+        regexp: /\u0049|\u004A|\u012E|\u00CC|\u00CD|\u0128/g,
+        map: {
+            I: "\u0069\u0307",
+            J: "\u006A\u0307",
+            Į: "\u012F\u0307",
+            Ì: "\u0069\u0307\u0300",
+            Í: "\u0069\u0307\u0301",
+            Ĩ: "\u0069\u0307\u0303"
+        }
+    }
+};
+/**
+ * Localized lower case.
+ */
+function localeLowerCase(str, locale) {
+    var lang = SUPPORTED_LOCALE[locale.toLowerCase()];
+    if (lang)
+        return lowerCase(str.replace(lang.regexp, function (m) { return lang.map[m]; }));
+    return lowerCase(str);
+}
+/**
+ * Lower case as a function.
+ */
+function lowerCase(str) {
+    return str.toLowerCase();
+}
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
 /***/ "./node_modules/merge-anything/dist/index.esm.js":
 /*!*******************************************************!*\
   !*** ./node_modules/merge-anything/dist/index.esm.js ***!
@@ -6028,6 +6350,55 @@ function mergeAndConcat(origin) {
 
 
 
+
+/***/ }),
+
+/***/ "./node_modules/no-case/dist.es2015/index.js":
+/*!***************************************************!*\
+  !*** ./node_modules/no-case/dist.es2015/index.js ***!
+  \***************************************************/
+/*! exports provided: noCase */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "noCase", function() { return noCase; });
+/* harmony import */ var lower_case__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lower-case */ "./node_modules/lower-case/dist.es2015/index.js");
+
+// Support camel case ("camelCase" -> "camel Case" and "CAMELCase" -> "CAMEL Case").
+var DEFAULT_SPLIT_REGEXP = [/([a-z0-9])([A-Z])/g, /([A-Z])([A-Z][a-z])/g];
+// Remove all non-word characters.
+var DEFAULT_STRIP_REGEXP = /[^A-Z0-9]+/gi;
+/**
+ * Normalize the string into something other libraries can manipulate easier.
+ */
+function noCase(input, options) {
+    if (options === void 0) { options = {}; }
+    var _a = options.splitRegexp, splitRegexp = _a === void 0 ? DEFAULT_SPLIT_REGEXP : _a, _b = options.stripRegexp, stripRegexp = _b === void 0 ? DEFAULT_STRIP_REGEXP : _b, _c = options.transform, transform = _c === void 0 ? lower_case__WEBPACK_IMPORTED_MODULE_0__["lowerCase"] : _c, _d = options.delimiter, delimiter = _d === void 0 ? " " : _d;
+    var result = replace(replace(input, splitRegexp, "$1\0$2"), stripRegexp, "\0");
+    var start = 0;
+    var end = result.length;
+    // Trim the delimiter from around the output string.
+    while (result.charAt(start) === "\0")
+        start++;
+    while (result.charAt(end - 1) === "\0")
+        end--;
+    // Transform each token independently.
+    return result
+        .slice(start, end)
+        .split("\0")
+        .map(transform)
+        .join(delimiter);
+}
+/**
+ * Replace `re` in the input string with the replacement value.
+ */
+function replace(input, re, value) {
+    if (re instanceof RegExp)
+        return input.replace(re, value);
+    return re.reduce(function (input, re) { return input.replace(re, value); }, input);
+}
+//# sourceMappingURL=index.js.map
 
 /***/ }),
 
@@ -7950,6 +8321,28 @@ function parse(formula){
 	}
 }
 
+
+/***/ }),
+
+/***/ "./node_modules/param-case/dist.es2015/index.js":
+/*!******************************************************!*\
+  !*** ./node_modules/param-case/dist.es2015/index.js ***!
+  \******************************************************/
+/*! exports provided: paramCase */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "paramCase", function() { return paramCase; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var dot_case__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! dot-case */ "./node_modules/dot-case/dist.es2015/index.js");
+
+
+function paramCase(input, options) {
+    if (options === void 0) { options = {}; }
+    return Object(dot_case__WEBPACK_IMPORTED_MODULE_1__["dotCase"])(input, Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({ delimiter: "-" }, options));
+}
+//# sourceMappingURL=index.js.map
 
 /***/ }),
 
@@ -12540,6 +12933,534 @@ module.exports = string => typeof string === 'string' ? string.replace(ansiRegex
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js":
+/*!****************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var isOldIE = function isOldIE() {
+  var memo;
+  return function memorize() {
+    if (typeof memo === 'undefined') {
+      // Test for IE <= 9 as proposed by Browserhacks
+      // @see http://browserhacks.com/#hack-e71d8692f65334173fee715c222cb805
+      // Tests for existence of standard globals is to allow style-loader
+      // to operate correctly into non-standard environments
+      // @see https://github.com/webpack-contrib/style-loader/issues/177
+      memo = Boolean(window && document && document.all && !window.atob);
+    }
+
+    return memo;
+  };
+}();
+
+var getTarget = function getTarget() {
+  var memo = {};
+  return function memorize(target) {
+    if (typeof memo[target] === 'undefined') {
+      var styleTarget = document.querySelector(target); // Special case to return head of iframe instead of iframe itself
+
+      if (window.HTMLIFrameElement && styleTarget instanceof window.HTMLIFrameElement) {
+        try {
+          // This will throw an exception if access to iframe is blocked
+          // due to cross-origin restrictions
+          styleTarget = styleTarget.contentDocument.head;
+        } catch (e) {
+          // istanbul ignore next
+          styleTarget = null;
+        }
+      }
+
+      memo[target] = styleTarget;
+    }
+
+    return memo[target];
+  };
+}();
+
+var stylesInDom = [];
+
+function getIndexByIdentifier(identifier) {
+  var result = -1;
+
+  for (var i = 0; i < stylesInDom.length; i++) {
+    if (stylesInDom[i].identifier === identifier) {
+      result = i;
+      break;
+    }
+  }
+
+  return result;
+}
+
+function modulesToDom(list, options) {
+  var idCountMap = {};
+  var identifiers = [];
+
+  for (var i = 0; i < list.length; i++) {
+    var item = list[i];
+    var id = options.base ? item[0] + options.base : item[0];
+    var count = idCountMap[id] || 0;
+    var identifier = "".concat(id, " ").concat(count);
+    idCountMap[id] = count + 1;
+    var index = getIndexByIdentifier(identifier);
+    var obj = {
+      css: item[1],
+      media: item[2],
+      sourceMap: item[3]
+    };
+
+    if (index !== -1) {
+      stylesInDom[index].references++;
+      stylesInDom[index].updater(obj);
+    } else {
+      stylesInDom.push({
+        identifier: identifier,
+        updater: addStyle(obj, options),
+        references: 1
+      });
+    }
+
+    identifiers.push(identifier);
+  }
+
+  return identifiers;
+}
+
+function insertStyleElement(options) {
+  var style = document.createElement('style');
+  var attributes = options.attributes || {};
+
+  if (typeof attributes.nonce === 'undefined') {
+    var nonce =  true ? __webpack_require__.nc : undefined;
+
+    if (nonce) {
+      attributes.nonce = nonce;
+    }
+  }
+
+  Object.keys(attributes).forEach(function (key) {
+    style.setAttribute(key, attributes[key]);
+  });
+
+  if (typeof options.insert === 'function') {
+    options.insert(style);
+  } else {
+    var target = getTarget(options.insert || 'head');
+
+    if (!target) {
+      throw new Error("Couldn't find a style target. This probably means that the value for the 'insert' parameter is invalid.");
+    }
+
+    target.appendChild(style);
+  }
+
+  return style;
+}
+
+function removeStyleElement(style) {
+  // istanbul ignore if
+  if (style.parentNode === null) {
+    return false;
+  }
+
+  style.parentNode.removeChild(style);
+}
+/* istanbul ignore next  */
+
+
+var replaceText = function replaceText() {
+  var textStore = [];
+  return function replace(index, replacement) {
+    textStore[index] = replacement;
+    return textStore.filter(Boolean).join('\n');
+  };
+}();
+
+function applyToSingletonTag(style, index, remove, obj) {
+  var css = remove ? '' : obj.media ? "@media ".concat(obj.media, " {").concat(obj.css, "}") : obj.css; // For old IE
+
+  /* istanbul ignore if  */
+
+  if (style.styleSheet) {
+    style.styleSheet.cssText = replaceText(index, css);
+  } else {
+    var cssNode = document.createTextNode(css);
+    var childNodes = style.childNodes;
+
+    if (childNodes[index]) {
+      style.removeChild(childNodes[index]);
+    }
+
+    if (childNodes.length) {
+      style.insertBefore(cssNode, childNodes[index]);
+    } else {
+      style.appendChild(cssNode);
+    }
+  }
+}
+
+function applyToTag(style, options, obj) {
+  var css = obj.css;
+  var media = obj.media;
+  var sourceMap = obj.sourceMap;
+
+  if (media) {
+    style.setAttribute('media', media);
+  } else {
+    style.removeAttribute('media');
+  }
+
+  if (sourceMap && btoa) {
+    css += "\n/*# sourceMappingURL=data:application/json;base64,".concat(btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))), " */");
+  } // For old IE
+
+  /* istanbul ignore if  */
+
+
+  if (style.styleSheet) {
+    style.styleSheet.cssText = css;
+  } else {
+    while (style.firstChild) {
+      style.removeChild(style.firstChild);
+    }
+
+    style.appendChild(document.createTextNode(css));
+  }
+}
+
+var singleton = null;
+var singletonCounter = 0;
+
+function addStyle(obj, options) {
+  var style;
+  var update;
+  var remove;
+
+  if (options.singleton) {
+    var styleIndex = singletonCounter++;
+    style = singleton || (singleton = insertStyleElement(options));
+    update = applyToSingletonTag.bind(null, style, styleIndex, false);
+    remove = applyToSingletonTag.bind(null, style, styleIndex, true);
+  } else {
+    style = insertStyleElement(options);
+    update = applyToTag.bind(null, style, options);
+
+    remove = function remove() {
+      removeStyleElement(style);
+    };
+  }
+
+  update(obj);
+  return function updateStyle(newObj) {
+    if (newObj) {
+      if (newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap) {
+        return;
+      }
+
+      update(obj = newObj);
+    } else {
+      remove();
+    }
+  };
+}
+
+module.exports = function (list, options) {
+  options = options || {}; // Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+  // tags it will allow on a page
+
+  if (!options.singleton && typeof options.singleton !== 'boolean') {
+    options.singleton = isOldIE();
+  }
+
+  list = list || [];
+  var lastIdentifiers = modulesToDom(list, options);
+  return function update(newList) {
+    newList = newList || [];
+
+    if (Object.prototype.toString.call(newList) !== '[object Array]') {
+      return;
+    }
+
+    for (var i = 0; i < lastIdentifiers.length; i++) {
+      var identifier = lastIdentifiers[i];
+      var index = getIndexByIdentifier(identifier);
+      stylesInDom[index].references--;
+    }
+
+    var newLastIdentifiers = modulesToDom(newList, options);
+
+    for (var _i = 0; _i < lastIdentifiers.length; _i++) {
+      var _identifier = lastIdentifiers[_i];
+
+      var _index = getIndexByIdentifier(_identifier);
+
+      if (stylesInDom[_index].references === 0) {
+        stylesInDom[_index].updater();
+
+        stylesInDom.splice(_index, 1);
+      }
+    }
+
+    lastIdentifiers = newLastIdentifiers;
+  };
+};
+
+/***/ }),
+
+/***/ "./node_modules/tslib/tslib.es6.js":
+/*!*****************************************!*\
+  !*** ./node_modules/tslib/tslib.es6.js ***!
+  \*****************************************/
+/*! exports provided: __extends, __assign, __rest, __decorate, __param, __metadata, __awaiter, __generator, __exportStar, __values, __read, __spread, __spreadArrays, __await, __asyncGenerator, __asyncDelegator, __asyncValues, __makeTemplateObject, __importStar, __importDefault, __classPrivateFieldGet, __classPrivateFieldSet */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__extends", function() { return __extends; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__assign", function() { return __assign; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__rest", function() { return __rest; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__decorate", function() { return __decorate; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__param", function() { return __param; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__metadata", function() { return __metadata; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__awaiter", function() { return __awaiter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__generator", function() { return __generator; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__exportStar", function() { return __exportStar; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__values", function() { return __values; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__read", function() { return __read; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__spread", function() { return __spread; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__spreadArrays", function() { return __spreadArrays; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__await", function() { return __await; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__asyncGenerator", function() { return __asyncGenerator; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__asyncDelegator", function() { return __asyncDelegator; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__asyncValues", function() { return __asyncValues; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__makeTemplateObject", function() { return __makeTemplateObject; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__importStar", function() { return __importStar; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__importDefault", function() { return __importDefault; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__classPrivateFieldGet", function() { return __classPrivateFieldGet; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__classPrivateFieldSet", function() { return __classPrivateFieldSet; });
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation. All rights reserved.
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+this file except in compliance with the License. You may obtain a copy of the
+License at http://www.apache.org/licenses/LICENSE-2.0
+
+THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+MERCHANTABLITY OR NON-INFRINGEMENT.
+
+See the Apache Version 2.0 License for specific language governing permissions
+and limitations under the License.
+***************************************************************************** */
+/* global Reflect, Promise */
+
+var extendStatics = function(d, b) {
+    extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return extendStatics(d, b);
+};
+
+function __extends(d, b) {
+    extendStatics(d, b);
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+}
+
+var __assign = function() {
+    __assign = Object.assign || function __assign(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+        }
+        return t;
+    }
+    return __assign.apply(this, arguments);
+}
+
+function __rest(s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+}
+
+function __decorate(decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+}
+
+function __param(paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+}
+
+function __metadata(metadataKey, metadataValue) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+}
+
+function __awaiter(thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+}
+
+function __generator(thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+}
+
+function __exportStar(m, exports) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+
+function __values(o) {
+    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+    if (m) return m.call(o);
+    if (o && typeof o.length === "number") return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+}
+
+function __read(o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+}
+
+function __spread() {
+    for (var ar = [], i = 0; i < arguments.length; i++)
+        ar = ar.concat(__read(arguments[i]));
+    return ar;
+}
+
+function __spreadArrays() {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+};
+
+function __await(v) {
+    return this instanceof __await ? (this.v = v, this) : new __await(v);
+}
+
+function __asyncGenerator(thisArg, _arguments, generator) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var g = generator.apply(thisArg, _arguments || []), i, q = [];
+    return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
+    function verb(n) { if (g[n]) i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
+    function resume(n, v) { try { step(g[n](v)); } catch (e) { settle(q[0][3], e); } }
+    function step(r) { r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r); }
+    function fulfill(value) { resume("next", value); }
+    function reject(value) { resume("throw", value); }
+    function settle(f, v) { if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]); }
+}
+
+function __asyncDelegator(o) {
+    var i, p;
+    return i = {}, verb("next"), verb("throw", function (e) { throw e; }), verb("return"), i[Symbol.iterator] = function () { return this; }, i;
+    function verb(n, f) { i[n] = o[n] ? function (v) { return (p = !p) ? { value: __await(o[n](v)), done: n === "return" } : f ? f(v) : v; } : f; }
+}
+
+function __asyncValues(o) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var m = o[Symbol.asyncIterator], i;
+    return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
+    function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
+    function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
+}
+
+function __makeTemplateObject(cooked, raw) {
+    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+    return cooked;
+};
+
+function __importStar(mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result.default = mod;
+    return result;
+}
+
+function __importDefault(mod) {
+    return (mod && mod.__esModule) ? mod : { default: mod };
+}
+
+function __classPrivateFieldGet(receiver, privateMap) {
+    if (!privateMap.has(receiver)) {
+        throw new TypeError("attempted to get private field on non-instance");
+    }
+    return privateMap.get(receiver);
+}
+
+function __classPrivateFieldSet(receiver, privateMap, value) {
+    if (!privateMap.has(receiver)) {
+        throw new TypeError("attempted to set private field on non-instance");
+    }
+    privateMap.set(receiver, value);
+    return value;
+}
+
+
+/***/ }),
+
 /***/ "./node_modules/tty-browserify/index.js":
 /*!**********************************************!*\
   !*** ./node_modules/tty-browserify/index.js ***!
@@ -13351,6 +14272,35 @@ module.exports = g;
 
 /***/ }),
 
+/***/ "./public/src/js/_component.scss":
+/*!***************************************!*\
+  !*** ./public/src/js/_component.scss ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(/*! ../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+            var content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/sass-loader/dist/cjs.js!./_component.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./public/src/js/_component.scss");
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = api(content, options);
+
+
+
+module.exports = content.locals || {};
+
+/***/ }),
+
 /***/ "./public/src/js/index.js":
 /*!********************************!*\
   !*** ./public/src/js/index.js ***!
@@ -13362,24 +14312,42 @@ module.exports = g;
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _src_js_webcomponent_SWebComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../src/js/webcomponent/SWebComponent */ "./src/js/webcomponent/SWebComponent.js");
 /* harmony import */ var _src_js_webcomponent_SWebComponent__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_js_webcomponent_SWebComponent__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./_component.scss */ "./public/src/js/_component.scss");
+/* harmony import */ var _component_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_component_scss__WEBPACK_IMPORTED_MODULE_1__);
+
 
 
 
 class MyComponent extends _src_js_webcomponent_SWebComponent__WEBPACK_IMPORTED_MODULE_0___default.a {
+  static get name() {
+    return 'myComponent';
+  }
+
   static get observedAttributes() {
     return ['param1', 'something'];
   }
 
+  static get physicalProps() {
+    return ['something'];
+  }
+
+  static get requiredProps() {
+    return ['param1'];
+  }
+
+  static get defaultProps() {
+    return {
+      param1: 'Something setteg',
+      something: 'Cool'
+    };
+  }
+
   constructor() {
-    super({
-      defaultProps: {
-        param1: 'Something setteg',
-        something: 'Cool'
-      },
-      requiredProps: ['param1'],
-      physicalProps: ['something']
-    });
+    super({});
     console.log('Cool component', this);
+    this.on('prop', e => {
+      console.log(e);
+    });
     setTimeout(() => {
       console.log('Setin');
       this.prop('something', 'Coco youhou');
@@ -13388,7 +14356,7 @@ class MyComponent extends _src_js_webcomponent_SWebComponent__WEBPACK_IMPORTED_M
 
 }
 
-_src_js_webcomponent_SWebComponent__WEBPACK_IMPORTED_MODULE_0___default.a.define('my-component', MyComponent, {
+_src_js_webcomponent_SWebComponent__WEBPACK_IMPORTED_MODULE_0___default.a.define(MyComponent, {
   something: 'hello'
 });
 console.log(_src_js_webcomponent_SWebComponent__WEBPACK_IMPORTED_MODULE_0___default.a._componentsStack);
@@ -13440,6 +14408,109 @@ function toPlainObject(theClass) {
   }, {});
 }
 
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./src/js/dom/when.js":
+/*!****************************!*\
+  !*** ./src/js/dom/when.js ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = when;
+
+/**
+ * @name                              when
+ * @namespace                         sugar.js.dom
+ * @type                              Function
+ *
+ * Return a promise that will be resolved when the wanted status has been applied on the passed HTMLElement.
+ * The status that can be requested are:
+ * - attribute : Detect when a special attribute has been applied on the element
+ * --- settings.attribute : Specify the attribute to check
+ * --- settings.checkFn : An optional function to check the attribute. The promise is resolved when this function return true
+ *
+ * - inViewport : Detect when the element enter in the viewport
+ * --- settings.offset : Specify an offset to detect the in viewport state
+ *
+ * - outOfViewport : Detect when the element exit the viewport
+ * --- settings.offset : Specify an offset to detect the out viewport state
+ *
+ * - transitionEnd : Detect when the css transition is finished on the element
+ * --- settings.callback : An optional callback function if you prefer instead of the promise
+ *
+ * - visible : Detect when the element become visible
+ * --- settings.callback : An optional callback function if you prefer instead of the promise
+ *
+ * @param               {HTMLElement}                 $node               The HTMLElement to check
+ * @param               {String}                      state               The state to check on the HTMLElement
+ * @param               {Object}                      [settings={}]       The settings to configure the check process
+ * @return              {Promise}                                         A promise that will be resolved when the state is detected
+ *
+ * @example             js
+ * import when from '@coffeekraken/sugar/js/dom/when';
+ * when(myCoolNode, 'inViewport').then(() => {
+ *    // do something...
+ * });
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+function when($node, state, settings = {}) {
+  return new Promise(async (resolve, reject) => {
+    // check the state to detect
+    let importPromise, args;
+
+    switch (state) {
+      case 'attribute':
+        importPromise = __webpack_require__.e(/*! import() | whenAttribute */ "whenAttribute").then(__webpack_require__.t.bind(null, /*! ./whenAttribute */ "./src/js/dom/whenAttribute.js", 7));
+        args = [$node, settings.attribute, settings.checkFn];
+        break;
+
+      case 'inViewport':
+        importPromise = __webpack_require__.e(/*! import() | whenInViewport */ "whenInViewport").then(__webpack_require__.t.bind(null, /*! ./whenInViewport */ "./src/js/dom/whenInViewport.js", 7));
+        args = [$node, settings.offset];
+        break;
+
+      case 'outOfViewport':
+        importPromise = __webpack_require__.e(/*! import() | whenOutOfViewport */ "whenOutOfViewport").then(__webpack_require__.t.bind(null, /*! ./whenOutOfViewport */ "./src/js/dom/whenOutOfViewport.js", 7));
+        args = [$node, settings.offset];
+        break;
+
+      case 'transitionEnd':
+        importPromise = __webpack_require__.e(/*! import() | whenTransitionEnd */ "whenTransitionEnd").then(__webpack_require__.t.bind(null, /*! ./whenTransitionEnd */ "./src/js/dom/whenTransitionEnd.js", 7));
+        args = [$node, settings.callback];
+        break;
+
+      case 'visible':
+        importPromise = __webpack_require__.e(/*! import() | whenVisible */ "whenVisible").then(__webpack_require__.t.bind(null, /*! ./whenVisible */ "./src/js/dom/whenVisible.js", 7));
+        args = [$node, settings.callback];
+        break;
+
+      default:
+        resolve($node);
+        return;
+        break;
+    } // wait until the module is loaded
+
+
+    const module = await importPromise; // call the when... function
+
+    module.default.apply(null, args).then(() => {
+      // resolve the promise
+      resolve($node);
+    });
+  });
+}
+
+;
 module.exports = exports.default;
 
 /***/ }),
@@ -14946,6 +16017,95 @@ module.exports = exports.default;
 
 /***/ }),
 
+/***/ "./src/js/string/camelize.js":
+/*!***********************************!*\
+  !*** ./src/js/string/camelize.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = camelize;
+
+/**
+ * @name        camelize
+ * @namespace       sugar.js.string
+ * @type      Function
+ *
+ * Camelize a string
+ *
+ * @param         {String}          text        The string to camelize
+ * @param         {String}          [charsRange='_-\\s']      The regex chars range to remove and camelize the next character
+ * @return        {String}                      The camelized string
+ *
+ * @example     js
+ * import camelize from '@coffeekraken/sugar/js/string/camelize';
+ * camelize('hello world'); // => helloWorld
+ *
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+function camelize(text, chars = '_-\\s') {
+  let res = "";
+  const reg = new RegExp(`(?:^|[${chars}])(\w)`, 'g');
+  res = text.replace(reg, function (_, c) {
+    return c ? c.toUpperCase() : "";
+  });
+  res = res.substr(0, 1).toLowerCase() + res.slice(1);
+  return res.trim();
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./src/js/string/paramCase.js":
+/*!************************************!*\
+  !*** ./src/js/string/paramCase.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+var _paramCase = __webpack_require__(/*! param-case */ "./node_modules/param-case/dist.es2015/index.js");
+
+/**
+ * @name          paramCase
+ * @namespace     sugar.js.string
+ * @type          Function
+ *
+ * This function transform a string into a param case one like so "something-cool"
+ *
+ * @param       {String}        string          The string to convert
+ * @return      {String}                        The converted string
+ *
+ * @example       js
+ * import paramCase from '@coffeekraken/sugar/js/string/paramCase';
+ * paramCase('some thoing cool'); // => some-thing-cool
+ *
+ * @see         https://www.npmjs.com/package/param-case
+ * @since       2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+function _default(string) {
+  return (0, _paramCase.paramCase)(string);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
 /***/ "./src/js/string/parse.js":
 /*!********************************!*\
   !*** ./src/js/string/parse.js ***!
@@ -15109,6 +16269,12 @@ var _parse = _interopRequireDefault(__webpack_require__(/*! ../string/parse */ "
 
 var _toString = _interopRequireDefault(__webpack_require__(/*! ../string/toString */ "./src/js/string/toString.js"));
 
+var _when = _interopRequireDefault(__webpack_require__(/*! ../dom/when */ "./src/js/dom/when.js"));
+
+var _camelize = _interopRequireDefault(__webpack_require__(/*! ../string/camelize */ "./src/js/string/camelize.js"));
+
+var _paramCase = _interopRequireDefault(__webpack_require__(/*! ../string/paramCase */ "./src/js/string/paramCase.js"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -15155,14 +16321,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * - **Physical props** : Specify some props that will ALWAYS be present as attribute on the component for styling purpose
  * - Define some **default CSS** that will be injected in the head automatically
  * - Specify some **required props**
- * - **Full lifecycle management**:
- * 	- componentCreated
- * 	- componentWillMount
- * 	- componentMount
- * 	- componentWillReceiveProp
- * 	- componentWillReceiveProps
- * 	- render
- * 	- componentUnmount
+ * - **Full lifecycle management** through "events":
+ * 	  - attach: Dispatched when the component is attached to the DOM
+ *    - detach: Dispatched when the component is detached from the DOM
+ *    - mounting: Dispatched when the component starts to mount itself (before mountWhen and mountDependencies execution)
+ *    - mounted: Dispatched when the component has be mounted properly
+ *    - prop|prop.{name}: Dispatched when a property has been updated, removed or added
+ *      - The object format sended with the event is this one:
+ *        - { prop: 'propName', action: 'update|remove|add', value: 'Something', previousValue: 'Other' }
  * - **Mount dependencies** : This will allows you to set some promises that have to be resolved before mounting the component
  *
  * @param       {Object}        [settings={}]         A setting object to configure your webcomponent instance:
@@ -15261,47 +16427,124 @@ let SWebComponent = /*#__PURE__*/function (_HTMLElement) {
     _defineProperty(_assertThisInitialized(_this), "_settings", {});
 
     _this._settings = (0, _deepMerge.default)({
-      defaultProps: {},
-      physicalProps: [],
-      requiredProps: []
+      defaultProps: _this.constructor.defaultProps || {},
+      requiredProps: _this.constructor.requiredProps || [],
+      physicalProps: _this.constructor.physicalProps || []
     }, settings); // create the SPromise instance
 
-    _this._promise = new _SPromise.default(() => {}).start();
-    setTimeout(() => {
-      // init the default props
-      _this._handleDefaultProps(); // check the required props
+    _this._promise = new _SPromise.default(() => {}).start(); // launch the mounting process
 
-
-      _this._checkRequiredProps(); // handle physical props
-
-
-      _this._handlePhysicalProps();
-
-      console.log(_this._props);
-    });
+    setTimeout(_this._mount.bind(_assertThisInitialized(_this)));
     return _this;
   }
   /**
-   * @name          on
+   * @name          _mount
    * @type          Function
+   * @private
+   * @async
    *
-   * Method used to subscribe to the "events" dispatched
-   * during the lifecycle of the component. Here's the list of events:
-   * - attach: Dispatched when the component is attached to the DOM
-   * - detach: Dosèatched when the component is detached from the DOM
-   */
-
-  /**
-   * @name          connectedCallback
-   * @type          Function
-   *
-   * Called when the component is attached to the dom
+   * This method handle the mounting of the component
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
 
   _createClass(SWebComponent, [{
+    key: "_mount",
+    value: async function _mount() {
+      this._promise.trigger('mounting'); // wait until the component match the mountDependencies and mountWhen status
+
+
+      await this._mountDependencies(); // init the default props
+
+      this._handleDefaultProps(); // check the required props
+
+
+      this._checkRequiredProps(); // handle physical props
+
+
+      this._handlePhysicalProps();
+
+      this._promise.trigger('mounted');
+    }
+    /**
+     * @name          on
+     * @type          Function
+     *
+     * Method used to subscribe to the "events" dispatched
+     * during the lifecycle of the component. Here's the list of events:
+     * - attach: Dispatched when the component is attached to the DOM
+     * - detach: Dispatched when the component is detached from the DOM
+     * - mounting: Dispatched when the component starts to mount itself (before mountWhen and mountDependencies execution)
+     * - mounted: Dispatched when the component has be mounted properly
+     * - prop|prop.{name}: Dispatched when a property has been updated, removed or added
+     *    - The object format sended with the event is this one:
+     *      - { prop: 'propName', action: 'update|remove|add', value: 'Something', previousValue: 'Other' }
+     *
+     * @param       {String}        event         The event you want to subscribe to
+     * @param       {Function}      callback      The callback function that has to be called
+     * @return      {SPromise}                    The SPromise used in this instance
+     */
+
+  }, {
+    key: "on",
+    value: function on(event, callback) {
+      return this._promise.on(event, callback);
+    }
+    /**
+     * @name          _mountDependencies
+     * @type          Function
+     * @private
+     * @async
+     *
+     * This method simply delay the mounting process of the component
+     * based on different settings "properties":
+     * - mountWhen (null) {String}: Specify when you want the component to be mounted. Can be:
+     *    - inViewport: Mount the component only when it appears in the viewport
+     *    - visible: Mount the component when the component became visible (like display:none; to display:block; for example)
+     *    - domReady: Mount the component when the DOM is ready
+     *    - transitionEnd. Mount the component when the transition is ended
+     * - mountDependencies (null) {Function|Array<Function>}: Specify one/some function(s) that returns a Promise and that need to be all resolved before mounting the component
+     *
+     * @return      {Promise}               Return a promise that will be resolved once every "dependencies" are satisfied
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "_mountDependencies",
+    value: function _mountDependencies() {
+      return new Promise((resolve, reject) => {
+        let promises = []; // check if we have a "mountWhen" setting specified
+
+        if (this._settings.mountWhen) {
+          promises.push((0, _when.default)(this._settings.mountWhen));
+        } // check if we have one/some "mountDependencies" setting specified
+
+
+        if (this._settings._mountDependencies) {
+          const depsFns = [...this._settings._mountDependencies];
+          depsFns.forEach(fn => {
+            promises.push(fn());
+          });
+        } // wait until all promises are resolved
+
+
+        Promise.all(promises).then(() => {
+          resolve();
+        });
+      });
+    }
+    /**
+     * @name          connectedCallback
+     * @type          Function
+     *
+     * Called when the component is attached to the dom
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
     key: "connectedCallback",
     value: function connectedCallback() {
       // dispatch "event"
@@ -15340,16 +16583,19 @@ let SWebComponent = /*#__PURE__*/function (_HTMLElement) {
     value: function attributeChangedCallback(attrName, oldVal, newVal) {
       if (this._settedAttributesStack[attrName]) return; // try to get the property
 
-      const currentPropObj = this._props[attrName]; // save the old value and the new value
+      const currentPropObj = this._props[attrName];
+      const previousValue = (0, _parse.default)(oldVal);
+      const newValue = (0, _parse.default)(newVal); // save the old value and the new value
 
       const newPropObj = {
-        value: (0, _parse.default)(newVal),
-        previousValue: (0, _parse.default)(oldVal),
-        valuesStack: currentPropObj ? [...currentPropObj.valuesStack, (0, _parse.default)(newVal)] : [(0, _parse.default)(newVal)]
+        value: newValue,
+        previousValue,
+        valuesStack: currentPropObj ? [...currentPropObj.valuesStack, newValue] : [newValue]
       }; // save the prop
 
-      this._props[attrName] = newPropObj;
-      console.log(this._props);
+      this._props[(0, _camelize.default)(attrName)] = newPropObj; // trigger a "prop" event
+
+      this._triggerPropsEvents((0, _camelize.default)(attrName));
     }
     /**
      * @name        prop
@@ -15386,9 +16632,39 @@ let SWebComponent = /*#__PURE__*/function (_HTMLElement) {
       } // handle physical props
 
 
-      this._handlePhysicalProps();
+      this._handlePhysicalProps(); // trigger a "prop" event
+
+
+      this._triggerPropsEvents(_prop);
 
       return value;
+    }
+    /**
+     * @name        _triggerPropsEvents
+     * @type        Function
+     * @private
+     *
+     * This method simply trigger a prop|prop.{name} event through the SPromise instance.
+     *
+     * @param     {String}      prop      The property name to trigger event for
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "_triggerPropsEvents",
+    value: function _triggerPropsEvents(prop) {
+      // trigger a "prop" event
+      const eventObj = {
+        prop,
+        action: this._props[prop].previousValue !== null ? this._props[prop].value !== null ? 'update' : 'remove' : 'add',
+        value: this._props[prop].value,
+        previousValue: this._props[prop].previousValue
+      };
+
+      this._promise.trigger('prop', eventObj);
+
+      this._promise.trigger(`prop.${prop}`, eventObj);
     }
     /**
      * @name        _handlePhysicalProps
@@ -15405,6 +16681,8 @@ let SWebComponent = /*#__PURE__*/function (_HTMLElement) {
     key: "_handlePhysicalProps",
     value: function _handlePhysicalProps() {
       // loop on each required props
+      console.log('PH', this._settings);
+
       this._settings.physicalProps.forEach(prop => {
         const value = this._props[prop] && this._props[prop].value !== undefined ? this._props[prop].value : undefined;
 

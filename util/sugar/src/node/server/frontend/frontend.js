@@ -6,6 +6,7 @@ const __SNav = require('../../nav/SNav');
 const __deepMap = require('../../object/deepMap');
 const __packageRoot = require('../../path/packageRoot');
 const __packageJson = require(__packageRoot(process.cwd()) + '/package.json');
+const __fs = require('fs');
 
 /**
  * @name                express
@@ -47,6 +48,43 @@ module.exports = async (args = {}) => {
   // loop on pages
   Object.keys(settings.pages).forEach((pageName) => {
     const pageSettings = settings.pages[pageName];
+
+    // server.get('/', async (req, res) => {
+    //   // try to read an "index.html" page
+    //   if (__fs.existsSync(__packageRoot(process.cwd()) + '/index.html')) {
+    //     const content = __fs.readFileSync(__packageRoot(process.cwd()) + '/index.html', 'utf8');
+    //     if (!content.includes('<body')) {
+
+    //     }
+    //   }
+    //   res.send('Hello');
+    // });
+
+    server.get('/', async (req, res) => {
+      const indexHtmlPath = __packageRoot(process.cwd()) + '/index.html';
+      const indexViewPath = `${__sugarConfig('views.rootDir')}/index.blade.php`;
+      console.log('COCOCOC');
+      if (__fs.existsSync(indexViewPath)) {
+      } else if (__fs.existsSync(indexHtmlPath)) {
+        const content = __fs.readFileSync(indexHtmlPath, 'utf8');
+        console.log('cont', content);
+        if (!content.includes('<body')) {
+          console.log('YEA');
+          const baseContent = __fs.readFileSync(
+            __dirname + '/static/index.html',
+            'utf8'
+          );
+          let result = baseContent
+            .replace('{{ title }}', __packageJson.name)
+            .replace('{{ style }}', __sugarConfig('assets.css[0].path'))
+            .replace('{{ script }}', __sugarConfig('assets.js[0].path'))
+            .replace('{{ content }}', content);
+          res.send(result);
+        } else {
+          res.send(content);
+        }
+      }
+    });
 
     server.get(`${pageSettings.slug}/*`, async (req, res) => {
       try {

@@ -157,9 +157,9 @@ let SCache = /*#__PURE__*/function () {
       let adapter = this._settings.adapter; // check the type
 
       if (typeof adapter === 'string' && this._defaultAdaptersPaths[adapter]) {
-        let adptr = await Promise.resolve().then(() => _interopRequireWildcard(require(`${
+        let adptr = await Promise.resolve(`${
         /* webpackChunkName: "SCacheAdapter" */
-        this._defaultAdaptersPaths[adapter]}`)));
+        this._defaultAdaptersPaths[adapter]}`).then(s => _interopRequireWildcard(require(s)));
         if (adptr.default) adptr = adptr.default;
         this._adapter = new adptr();
       } else if (adapter instanceof _SCacheAdapter.default) {

@@ -1,5 +1,5 @@
-import __getStyleProperty from "./getStyleProperty";
-import __toMs from "../string/toMs";
+import __getStyleProperty from './getStyleProperty';
+import __convert from '../time/convert';
 
 // TODO tests
 
@@ -30,29 +30,31 @@ import __toMs from "../string/toMs";
 
 function splitIfNeeded(what, separator) {
   if (what.indexOf(separator) !== -1) {
-    return what.split(separator).map(item => item.trim());
+    return what.split(separator).map((item) => item.trim());
   }
   return [what];
 }
 
 export default function getTransitionProperties(elm) {
   // get the transition properties
-  const property = __getStyleProperty(elm, "transition-property");
-  const duration = __getStyleProperty(elm, "transition-duration") || 0;
-  const timingFunction = __getStyleProperty(elm, "transition-timing-function");
-  const delay = __getStyleProperty(elm, "transition-delay");
+  const property = __getStyleProperty(elm, 'transition-property');
+  const duration = __getStyleProperty(elm, 'transition-duration') || 0;
+  const timingFunction = __getStyleProperty(elm, 'transition-timing-function');
+  const delay = __getStyleProperty(elm, 'transition-delay');
 
   // return the transition object
   const props = {
-    property: splitIfNeeded(property, ","),
-    duration: splitIfNeeded(duration, ",").map(value => __toMs(value)),
-    delay: splitIfNeeded(delay, ",").map(value => __toMs(value)),
-    timingFunction: splitIfNeeded(timingFunction, ",")
+    property: splitIfNeeded(property, ','),
+    duration: splitIfNeeded(duration, ',').map((value) =>
+      __convert(value, 'ms')
+    ),
+    delay: splitIfNeeded(delay, ',').map((value) => __convert(value, 'ms')),
+    timingFunction: splitIfNeeded(timingFunction, ',')
   };
   let totalDuration = 0;
   let i = 0;
   const delays = [0].concat(props.delay);
-  [0].concat(props.duration).forEach(val => {
+  [0].concat(props.duration).forEach((val) => {
     if (val + delays[i] > totalDuration) {
       totalDuration = val + delays[i];
     }

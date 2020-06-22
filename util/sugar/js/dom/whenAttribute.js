@@ -5,9 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = whenAttribute;
 
-var _attributesObservable = _interopRequireDefault(require("./attributesObservable"));
-
 var _autoCast = _interopRequireDefault(require("../string/autoCast"));
+
+var _observeAttributes = _interopRequireDefault(require("./observeAttributes"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -52,16 +52,16 @@ function whenAttribute(elm, attrName, checkFn = null) {
       }
     }
 
-    const obs = (0, _attributesObservable.default)(elm).subscribe(mutation => {
+    const obs = (0, _observeAttributes.default)(elm).then(mutation => {
       if (mutation.attributeName === attrName) {
         const value = (0, _autoCast.default)(mutation.target.getAttribute(mutation.attributeName));
 
         if (checkFn && checkFn(value, mutation.oldValue)) {
           resolve(value);
-          obs.unsubscribe();
+          obs.cancel();
         } else if (!checkFn) {
           resolve(value);
-          obs.unsubscribe();
+          obs.cancel();
         }
       }
     });

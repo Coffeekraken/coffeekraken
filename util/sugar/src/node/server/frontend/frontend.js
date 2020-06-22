@@ -1,12 +1,19 @@
 const __sugarConfig = require('../../config/sugar');
 const __deepMerge = require('../../object/deepMerge');
 const __expressServer = require('../express/express');
+const __express = require('express');
 const __bladePhp = require('../../template/bladePhp');
 const __SNav = require('../../nav/SNav');
 const __deepMap = require('../../object/deepMap');
 const __packageRoot = require('../../path/packageRoot');
 const __packageJson = require(__packageRoot(process.cwd()) + '/package.json');
 const __fs = require('fs');
+const __path = require('path');
+const __ejs = require('ejs');
+const __ejsLint = require('ejs-lint');
+const tmpDir = require('../../fs/tmpDir');
+const __rimraf = require('rimraf');
+const tempDirectory = require('temp-dir');
 
 /**
  * @name                express
@@ -45,46 +52,105 @@ module.exports = async (args = {}) => {
     sNavInstance.addItem(menuStack[menuName]);
   });
 
-  // loop on pages
-  Object.keys(settings.pages).forEach((pageName) => {
-    const pageSettings = settings.pages[pageName];
+  function renderTemplate(string, data = {}) {
+    const lintRes = __ejsLint(string);
+    if (lintRes) {
+      throw new Error(lintRes);
+    }
+    // rendering the template
+    const result = __ejs.render(
+      string,
+      __deepMerge(
+        {
+          package: __packageJson,
+          menuHtml: sNavInstance.toHtml(),
+          settings
+        },
+        data
+      )
+    );
+    return result;
+  }
 
-    // server.get('/', async (req, res) => {
-    //   // try to read an "index.html" page
-    //   if (__fs.existsSync(__packageRoot(process.cwd()) + '/index.html')) {
-    //     const content = __fs.readFileSync(__packageRoot(process.cwd()) + '/index.html', 'utf8');
-    //     if (!content.includes('<body')) {
+  // build the "templateData" object to pass to the render engines
+  const templateData = {
+    title: __packageJson.name,
+    package: __packageJson,
+    menuHtml: sNavInstance.toHtml(),
+    settings: settings
+  };
 
-    //     }
-    //   }
-    //   res.send('Hello');
-    // });
+  server.get('/', async (req, res) => {
+    const indexHtmlPath = __packageRoot(process.cwd()) + '/index.html';
+    const indexViewPath = `${__sugarConfig('views.rootDir')}/index.blade.php`;
+    if (__fs.existsSync(indexViewPath)) {
+      // get the view content
+      const viewContent = __fs.readFileSync(
+        `${__sugarConfig('views.rootDir')}/index.blade.php`,
+        'utf8'
+      );
 
-    server.get('/', async (req, res) => {
-      const indexHtmlPath = __packageRoot(process.cwd()) + '/index.html';
-      const indexViewPath = `${__sugarConfig('views.rootDir')}/index.blade.php`;
-      console.log('COCOCOC');
-      if (__fs.existsSync(indexViewPath)) {
-      } else if (__fs.existsSync(indexHtmlPath)) {
-        const content = __fs.readFileSync(indexHtmlPath, 'utf8');
-        console.log('cont', content);
-        if (!content.includes('<body')) {
-          console.log('YEA');
-          const baseContent = __fs.readFileSync(
-            __dirname + '/static/index.html',
-            'utf8'
-          );
-          let result = baseContent
-            .replace('{{ title }}', __packageJson.name)
-            .replace('{{ style }}', __sugarConfig('assets.css[0].path'))
-            .replace('{{ script }}', __sugarConfig('assets.js[0].path'))
-            .replace('{{ content }}', content);
-          res.send(result);
-        } else {
-          res.send(content);
-        }
+      let view = 'index';
+      const tmpDir = __path.resolve(__sugarConfig('views.rootDir'), 'tmp');
+
+      // check if the view does extend a special layout
+      if (!viewContent.includes('@extends(')) {
+        // make sure we have a tmp dir
+        if (!__fs.existsSync(tmpDir)) __fs.mkdirSync(tmpDir);
+        // copy the default layout
+        __fs.copyFileSync(
+          __path.resolve(__dirname, 'views/layouts/main.blade.php'),
+          __path.resolve(tmpDir, 'main.blade.php')
+        );
+        // generate a new view that will extends the default one provided by sugar
+        const newViewContent = `
+          @extends('tmp.main')
+          @section('content')
+            ${viewContent}
+          @endsection
+        `;
+        __fs.writeFileSync(
+          __path.resolve(tmpDir, 'index.blade.php'),
+          newViewContent
+        );
+        // change the view to render
+        view = 'tmp.index';
       }
-    });
+
+      // render the view
+      let result = await __bladePhp(view, {
+        ...templateData
+      });
+
+      // remove tmp folder
+      __rimraf.sync(tmpDir);
+
+      // render using ejs
+      result = renderTemplate(result, {
+        ...templateData
+      });
+
+      res.send(result);
+    } else if (__fs.existsSync(indexHtmlPath)) {
+      const content = __fs.readFileSync(indexHtmlPath, 'utf8');
+      if (!content.includes('<body')) {
+        const baseContent = __fs.readFileSync(
+          __dirname + '/static/index.html',
+          'utf8'
+        );
+        const stringToCompile = baseContent.replace('[content]', content);
+        const result = renderTemplate(stringToCompile, templateData);
+        res.send(result);
+      } else {
+        const result = renderTemplate(content, templateData);
+        res.send(result);
+      }
+    }
+  });
+
+  // loop on pages
+  Object.keys(settings.pages).forEach(async (pageName) => {
+    const pageSettings = settings.pages[pageName];
 
     server.get(`${pageSettings.slug}/*`, async (req, res) => {
       try {
@@ -96,12 +162,15 @@ module.exports = async (args = {}) => {
         const title = response.title || 'Welcome';
 
         // render the view
-        const result = await __bladePhp(view, {
+        let result = await __bladePhp(view, {
+          ...templateData,
           title,
-          content,
-          package: JSON.stringify(__packageJson),
-          menuHtml: sNavInstance.toHtml(),
-          settings: JSON.stringify(settings)
+          content
+        });
+
+        // render using ejs
+        result = renderTemplate(result, {
+          ...templateData
         });
 
         res.send(result);

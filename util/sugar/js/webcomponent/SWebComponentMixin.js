@@ -1141,8 +1141,8 @@ const SWebComponentMixin = (0, _mixwith.Mixin)(superclass => {
 
     }, {
       key: "componentWillReceiveProp",
-      value: function componentWillReceiveProp(prop, newVal, oldVal) {} // do something
-
+      value: function componentWillReceiveProp(prop, newVal, oldVal) {// do something
+      }
       /**
        * Method that check if a property passed to the component has to be accepted or not.
        * @param 		{String} 			prop 		The property name

@@ -1,5 +1,5 @@
-import __attributesObservable from "./attributesObservable";
-import __autoCast from "../string/autoCast";
+import __autoCast from '../string/autoCast';
+import __observeAttribute from './observeAttributes';
 
 /**
  * @name      whenAttribute
@@ -41,17 +41,17 @@ export default function whenAttribute(elm, attrName, checkFn = null) {
       }
     }
 
-    const obs = __attributesObservable(elm).subscribe(mutation => {
+    const obs = __observeAttribute(elm).then((mutation) => {
       if (mutation.attributeName === attrName) {
         const value = __autoCast(
           mutation.target.getAttribute(mutation.attributeName)
         );
         if (checkFn && checkFn(value, mutation.oldValue)) {
           resolve(value);
-          obs.unsubscribe();
+          obs.cancel();
         } else if (!checkFn) {
           resolve(value);
-          obs.unsubscribe();
+          obs.cancel();
         }
       }
     });

@@ -67,6 +67,10 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
           {
             mode: streamObj.prod ? 'production' : 'development',
             entry: streamObj.input,
+            stats: {
+              errors: true,
+              errorDetails: true
+            },
             output: {
               path: streamObj.outputDir,
               filename: streamObj.prod
@@ -92,20 +96,32 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
                   use: {
                     loader: 'babel-loader',
                     options: {
+                      cwd: `${__packageRoot(__dirname)}/node_modules`,
                       presets: [
-                        '@babel/preset-env',
-                        {
-                          // forceAllTransforms: true
-                        }
-                      ]
+                        [
+                          '@babel/preset-env',
+                          {
+                            forceAllTransforms: true
+                          }
+                        ]
+                      ],
+                      plugins: ['@babel/plugin-proposal-class-properties']
                     }
                   }
                 }
               ]
             },
-            resolve: {
+            resolveLoader: {
               modules: [
                 `${__packageRoot(process.cwd())}/node_modules`,
+                `${__packageRoot(__dirname)}/node_modules`
+              ]
+            },
+            resolve: {
+              symlinks: true,
+              modules: [
+                `${__packageRoot(process.cwd())}/node_modules`,
+                `${__packageRoot(__dirname)}/node_modules`,
                 `${__packageRoot(process.cwd())}/src/js`
               ]
             },
@@ -116,8 +132,15 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
           settings
         ),
         (error, stats) => {
-          if (error || stats.hasErrors()) {
-            return reject(error);
+          if (stats.hasErrors()) {
+            const sts = stats.toJson();
+            console.error(sts.errors);
+            return reject(sts.errors);
+          }
+          if (stats.hasWarnings()) {
+            const sts = stats.toJson();
+            console.error(sts.warnings);
+            return reject(sts.warnings);
           }
 
           // reading the outputed file

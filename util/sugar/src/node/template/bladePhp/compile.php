@@ -13,7 +13,7 @@ function compile($viewsPath, $view, $data, $tmpPath) {
   $cache = $tmpPath;
   $blade = new Blade($views, $cache);
   try {
-    $res = $blade->render('pages.doc', $data);
+    $res = $blade->render($view, $data);
   } catch(Exception $e) {
     return var_dump('<pre>' . $e . '</pre>');
   }

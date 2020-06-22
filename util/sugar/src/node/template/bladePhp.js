@@ -48,6 +48,9 @@ module.exports = (view, data = {}, settings = {}) => {
       __dirname + '/bladePhp/compile.php',
       __dirname + '/../../bin/php',
       (error, php, outprint) => {
+        if (error) {
+          throw new Error(error);
+        }
         // execute the php engine and get back the result
         const result = php.compile(
           settings.rootDir,

@@ -7,7 +7,7 @@ exports.default = getTransitionProperties;
 
 var _getStyleProperty = _interopRequireDefault(require("./getStyleProperty"));
 
-var _toMs = _interopRequireDefault(require("../string/toMs"));
+var _convert = _interopRequireDefault(require("../time/convert"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -47,16 +47,16 @@ function splitIfNeeded(what, separator) {
 
 function getTransitionProperties(elm) {
   // get the transition properties
-  const property = (0, _getStyleProperty.default)(elm, "transition-property");
-  const duration = (0, _getStyleProperty.default)(elm, "transition-duration") || 0;
-  const timingFunction = (0, _getStyleProperty.default)(elm, "transition-timing-function");
-  const delay = (0, _getStyleProperty.default)(elm, "transition-delay"); // return the transition object
+  const property = (0, _getStyleProperty.default)(elm, 'transition-property');
+  const duration = (0, _getStyleProperty.default)(elm, 'transition-duration') || 0;
+  const timingFunction = (0, _getStyleProperty.default)(elm, 'transition-timing-function');
+  const delay = (0, _getStyleProperty.default)(elm, 'transition-delay'); // return the transition object
 
   const props = {
-    property: splitIfNeeded(property, ","),
-    duration: splitIfNeeded(duration, ",").map(value => (0, _toMs.default)(value)),
-    delay: splitIfNeeded(delay, ",").map(value => (0, _toMs.default)(value)),
-    timingFunction: splitIfNeeded(timingFunction, ",")
+    property: splitIfNeeded(property, ','),
+    duration: splitIfNeeded(duration, ',').map(value => (0, _convert.default)(value, 'ms')),
+    delay: splitIfNeeded(delay, ',').map(value => (0, _convert.default)(value, 'ms')),
+    timingFunction: splitIfNeeded(timingFunction, ',')
   };
   let totalDuration = 0;
   let i = 0;

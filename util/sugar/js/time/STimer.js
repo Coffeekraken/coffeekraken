@@ -184,7 +184,7 @@ let STimer = /*#__PURE__*/function (_SPromise) {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   function STimer(duration, settings = {}) {
-    var _this;
+    var _thisSuper, _this;
 
     _classCallCheck(this, STimer);
 
@@ -219,7 +219,7 @@ let STimer = /*#__PURE__*/function (_SPromise) {
 
     _defineProperty(_assertThisInitialized(_this), "_pauseTime", null);
 
-    _get(_getPrototypeOf(STimer.prototype), "start", _assertThisInitialized(_this)).call(_assertThisInitialized(_this));
+    _get((_thisSuper = _assertThisInitialized(_this), _getPrototypeOf(STimer.prototype)), "start", _thisSuper).call(_thisSuper);
 
     return _this;
   }

@@ -1,8 +1,6 @@
-
-  require('module-alias/register');
-const __ensureExists = require('@coffeekraken/sugar/node/object/ensureExists');
+// require('module-alias/register');
+const __ensureExists = require('./src/node/object/ensureExists');
 const api = {};
-  
 
 /**
  * @name        queryStringToObject
@@ -20,7 +18,7 @@ const api = {};
  *
  * @snippet     js
  * Sugar.node.url.queryStringToObject($1)
- * 
+ *
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  * @see  	http://stackoverflow.com/questions/8648892/convert-url-parameters-to-a-javascript-object
  */
@@ -28,7 +26,6 @@ __ensureExists(api, 'node.url.queryStringToObject', null);
 api.node.url.queryStringToObject = (...args) => {
   return require('./src/node/url/queryStringToObject.js').call(null, ...args);
 };
-        
 
 /**
  * @name                                parseSchema
@@ -51,7 +48,7 @@ api.node.url.queryStringToObject = (...args) => {
  * - errors (null) {Object}: An object with all the params in error with the description of the error for each
  * - params (null) {Object}: An object containing every params grabed from the url with their values for each
  * - match (true) {Object}: A boolean that tells you if the parsed url match the passed schema or not
- * 
+ *
  * @example       js
  * import parseSchema from '@coffeekraken/sugar/node/url/parseSchema';
  * parseSchema('https://github.com/myApp/master/3', '{project:string}/{?branch:string}/{?idx:number}');
@@ -86,7 +83,6 @@ __ensureExists(api, 'node.url.parseSchema', null);
 api.node.url.parseSchema = (...args) => {
   return require('./src/node/url/parseSchema.js').call(null, ...args);
 };
-        
 
 /**
  * @name            gravatarUrl
@@ -109,7 +105,6 @@ __ensureExists(api, 'node.url.gravatarUrl', null);
 api.node.url.gravatarUrl = (...args) => {
   return require('./src/node/url/gravatarUrl.js').call(null, ...args);
 };
-        
 
 /**
  * @name            SUrl
@@ -144,7 +139,7 @@ api.node.url.gravatarUrl = (...args) => {
  * const url = new SUrl('https://github.com/foo/bar');
  * console.log(url.hostname); // => github.com
  * url.hostname = 'youtube.com';
- * 
+ *
  * const urlWithSchema = new SUrl('https://github.com/hello/world/2', {
  *    schema: '{param1:string}/{param2}/{?param3:number}'
  * });
@@ -153,41 +148,39 @@ api.node.url.gravatarUrl = (...args) => {
  * //    match: true,
  * //    errors: {},
  * // }
- * 
+ *
  *
  * @see        https://www.npmjs.com/package/url-parse
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 __ensureExists(api, 'node.url.SUrl', null);
 Object.defineProperty(api.node.url, 'SUrl', {
-  get: function() {
+  get: function () {
     return require('./src/node/url/SUrl.js');
   }
 });
-          
 
 /**
  * @name                                  convert
  * @namespace                             sugar.node.time
  * @type                                  Function
- * 
+ *
  * This function allows you to convert time like seconds, ms, hours, minutes, etc... from one format to another
- * 
+ *
  * @param           {String|Number}             from                  The value to start from like "10s", "20ms", "2h", etc...
  * @param           {String}                    [to='ms']             The format you want to get back
  * @return          {Number}                                          The converted value
- * 
+ *
  * @example           js
  * import convert from '@coffeekraken/sugar/node/time/convert';
  * convert('10s', 'ms'); // => 10000
- * 
+ *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.time.convert', null);
 api.node.time.convert = (...args) => {
   return require('./src/node/time/convert.js').call(null, ...args);
 };
-        
 
 /**
  * @name 		            STimer
@@ -213,11 +206,10 @@ api.node.time.convert = (...args) => {
  */
 __ensureExists(api, 'node.time.STimer', null);
 Object.defineProperty(api.node.time, 'STimer', {
-  get: function() {
+  get: function () {
     return require('./src/node/time/STimer.js');
   }
 });
-          
 
 /**
  * @name                                parseHtml
@@ -235,21 +227,20 @@ __ensureExists(api, 'node.terminal.parseHtml', null);
 api.node.terminal.parseHtml = (...args) => {
   return require('./src/node/terminal/parseHtml.js').call(null, ...args);
 };
-        
 
 /**
  * @name                                      cursorPos
  * @namespace                                 sugar.node.terminal
  * @type                                      Function
- * 
+ *
  * Return the terminal cursor position in {x,y} format.
- * 
+ *
  * @return              {Promise}                         A promise resolved once the position has been getted
- * 
+ *
  * @example             js
  * const cursorPos = require('@coffeekraken/sugar/node/terminal/cursorPos');
  * await cursorPos(); // => { x: 10, y: 20 }
- * 
+ *
  * @see       https://www.npmjs.com/package/terminal-kit
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
@@ -257,7 +248,6 @@ __ensureExists(api, 'node.terminal.cursorPos', null);
 api.node.terminal.cursorPos = (...args) => {
   return require('./src/node/terminal/cursorPos.js').call(null, ...args);
 };
-        
 
 /**
  * @name                                          columns
@@ -265,7 +255,7 @@ api.node.terminal.cursorPos = (...args) => {
  * @type                                          Function
  *
  * Display your content using columns. The number of columns is defined by the number of items in the content array
- * 
+ *
  * @param                 {Array}                       content                     The columns content stored in an Array
  * @param                 {Object}                      [settings={}]               An object of settings descripbed above
  * - width (process.env.STDOUT_COLUMNS || process.stdout.columns) {Number}: The base width on which to calculate the columns
@@ -285,32 +275,30 @@ __ensureExists(api, 'node.terminal.columns', null);
 api.node.terminal.columns = (...args) => {
   return require('./src/node/terminal/columns.js').call(null, ...args);
 };
-        
 
 /**
  * @name                                    center
  * @namespace                               sugar.node.terminal
  * @type                                    Function
- * 
+ *
  * Allow to center one or more lines in the terminal depending on the process.env.STDOUT_PADDING environment variable
  * Settings:
  * - spaceChar (~) {String}: Which character to consider as a space that will be replaced by an actual space
- * 
+ *
  * @param                 {String|Array}                  text                    The text to center or array of strings to center
  * @param                 {Object}                  [settings={}]           An object of settings
  * @return                {String}                                          The centered text
- * 
+ *
  * @example             js
  * const center = require('@coffeekraken/sugar/node/terminal/center');
  * center('Hello world'); // => '                 Hello world'
- * 
+ *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.terminal.center', null);
 api.node.terminal.center = (...args) => {
   return require('./src/node/terminal/center.js').call(null, ...args);
 };
-        
 
 /**
  * @name        upperFirst
@@ -332,7 +320,6 @@ __ensureExists(api, 'node.string.upperFirst', null);
 api.node.string.upperFirst = (...args) => {
   return require('./src/node/string/upperFirst.js').call(null, ...args);
 };
-        
 
 /**
  * @name        unquote
@@ -357,7 +344,6 @@ __ensureExists(api, 'node.string.unquote', null);
 api.node.string.unquote = (...args) => {
   return require('./src/node/string/unquote.js').call(null, ...args);
 };
-        
 
 /**
  * @name          uniqid
@@ -379,7 +365,6 @@ __ensureExists(api, 'node.string.uniqid', null);
 api.node.string.uniqid = (...args) => {
   return require('./src/node/string/uniqid.js').call(null, ...args);
 };
-        
 
 /**
  * @name        uncamelize
@@ -402,7 +387,6 @@ __ensureExists(api, 'node.string.uncamelize', null);
 api.node.string.uncamelize = (...args) => {
   return require('./src/node/string/uncamelize.js').call(null, ...args);
 };
-        
 
 /**
  * @name        toString
@@ -426,7 +410,6 @@ __ensureExists(api, 'node.string.toString', null);
 api.node.string.toString = (...args) => {
   return require('./src/node/string/toString.js').call(null, ...args);
 };
-        
 
 /**
  * @name        sprintf
@@ -453,31 +436,29 @@ __ensureExists(api, 'node.string.sprintf', null);
 api.node.string.sprintf = (...args) => {
   return require('./src/node/string/sprintf.js').call(null, ...args);
 };
-        
 
 /**
  * @name                          splitEvery
  * @namespace                     sugar.node.string
  * @type                          Function
- * 
+ *
  * Split a string every n chars either by taking care of not spliting the words, or by simply spliting without any attention to that...
- * 
+ *
  * @param               {String}                  text                      The text to split
  * @param               {Number}                  every                     How many characters to split the text
  * @param               {Boolean}                 [splitWords=false]        If you want to split the words or not...
  * @return              {Array}                                             An array of the splited text parts
- * 
+ *
  * @example           js
  * const splitEvery = require('@coffeekraken/node/string/splitEvery');
  * splitEvery('Hello World', 2, true); // => ['He','ll','o ','Wo','rl','d']
- * 
+ *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.string.splitEvery', null);
 api.node.string.splitEvery = (...args) => {
   return require('./src/node/string/splitEvery.js').call(null, ...args);
 };
-        
 
 /**
  * @name        rtrim
@@ -501,7 +482,6 @@ __ensureExists(api, 'node.string.rtrim', null);
 api.node.string.rtrim = (...args) => {
   return require('./src/node/string/rtrim.js').call(null, ...args);
 };
-        
 
 /**
  * @name        printf
@@ -527,7 +507,6 @@ __ensureExists(api, 'node.string.printf', null);
 api.node.string.printf = (...args) => {
   return require('./src/node/string/printf.js').call(null, ...args);
 };
-        
 
 /**
  * @name                                  parse
@@ -549,7 +528,6 @@ __ensureExists(api, 'node.string.parse', null);
 api.node.string.parse = (...args) => {
   return require('./src/node/string/parse.js').call(null, ...args);
 };
-        
 
 /**
  * @name        ltrim
@@ -573,7 +551,6 @@ __ensureExists(api, 'node.string.ltrim', null);
 api.node.string.ltrim = (...args) => {
   return require('./src/node/string/ltrim.js').call(null, ...args);
 };
-        
 
 /**
  * @name        lowerFirst
@@ -595,7 +572,6 @@ __ensureExists(api, 'node.string.lowerFirst', null);
 api.node.string.lowerFirst = (...args) => {
   return require('./src/node/string/lowerFirst.js').call(null, ...args);
 };
-        
 
 /**
  * @name        includes
@@ -619,33 +595,31 @@ __ensureExists(api, 'node.string.includes', null);
 api.node.string.includes = (...args) => {
   return require('./src/node/string/includes.js').call(null, ...args);
 };
-        
 
 /**
  * @name                                        crop
  * @namespace                                   sugar.node.string
  * @type                                        Function
- * 
+ *
  * Allows you to crop a string at a certain length (this length take care of the croping characters like "...")
- * 
+ *
  * @param               {String}                  text                      The text to crop
  * @param               {Number}                  length                    The text length to have after the croping process
  * @param               {Object}                  [settings={}]             An object of settings described bellow:
  * - chars (...) {String}: The characters to use to signal the crop
  * - splitWords (false) {Boolean}: Specify if you want to split words or not. If not, the function will make sure the final text does not exceeds the wanted length
  * @return              {String}                                            The cropped text
- * 
+ *
  * @example         js
  * import crop from '@coffeekraken/sugar/node/string/crop';
  * crop('Hello World', 10); // => Hello w...
- * 
+ *
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.string.crop', null);
 api.node.string.crop = (...args) => {
   return require('./src/node/string/crop.js').call(null, ...args);
 };
-        
 
 /**
  * @name                                  countLine
@@ -672,7 +646,6 @@ __ensureExists(api, 'node.string.countLine', null);
 api.node.string.countLine = (...args) => {
   return require('./src/node/string/countLine.js').call(null, ...args);
 };
-        
 
 /**
  * @name        camelize
@@ -695,7 +668,6 @@ __ensureExists(api, 'node.string.camelize', null);
 api.node.string.camelize = (...args) => {
   return require('./src/node/string/camelize.js').call(null, ...args);
 };
-        
 
 /**
  * @name        autoCast
@@ -719,16 +691,15 @@ __ensureExists(api, 'node.string.autoCast', null);
 api.node.string.autoCast = (...args) => {
   return require('./src/node/string/autoCast.js').call(null, ...args);
 };
-        
 
 /**
  * @name                  SPromise
  * @namespace             sugar.node.promise
  * @type                  Class
- * 
+ *
  * This class works the same as the default Promise one. The difference is that you have more control on this one like
  * the possibility to resolve it multiple times. Here's a list of the "differences" and the "features" that this class provide:
- * 
+ *
  * - Pass the normal "resolve" and "reject" function to the passed executor
  * - Pass a new function to the passed executor called "trigger" that let you launch your registered callbacks like "then", "catch", etc... but without resolving the master promise. Here's some examples:
  *    - new SPromise((resolve, reject, trigger, cancel) => { trigger('then', 'myCoolValue'); }).then(value => { ... });
@@ -763,7 +734,7 @@ api.node.string.autoCast = (...args) => {
  *      }).start();
  *      console.log(result); // => helloWorldPromise
  *    ```
- * 
+ *
  * @example         js
  * import SPromise from '@coffeekraken/sugar/node/promise/SPromise';
  * function myCoolFunction() {
@@ -771,11 +742,11 @@ api.node.string.autoCast = (...args) => {
  *        // do something...
  *        setInterval(() => {
  *            // resolve the promise
- *            resolve('something'); * 
+ *            resolve('something'); *
  *        }, 1000);
  *    });
  * }
- * 
+ *
  * // calling the function and get back the SPromise instance
  * myCoolFunction().then(value => {
  *    // do something here...
@@ -784,16 +755,15 @@ api.node.string.autoCast = (...args) => {
  * }).catch(error => {
  *    // do something with the returned reason of failure...
  * }).start();
- * 
+ *
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 __ensureExists(api, 'node.promise.SPromise', null);
 Object.defineProperty(api.node.promise, 'SPromise', {
-  get: function() {
+  get: function () {
     return require('./src/node/promise/SPromise.js');
   }
 });
-          
 
 /**
  * @name        whenProperty
@@ -837,7 +807,6 @@ __ensureExists(api, 'node.object.whenProperty', null);
 api.node.object.whenProperty = (...args) => {
   return require('./src/node/object/whenProperty.js').call(null, ...args);
 };
-        
 
 /**
  * @name                      watch
@@ -850,7 +819,7 @@ api.node.object.whenProperty = (...args) => {
  * @param       {String|Array}        globs           A glob or array of glob patterns to tell which propertie(s) you want to watch
  * @param       {Function}            handlerFn       A function that will be called every time an update is made on the target. This function will receive an object as parameter that describe the update
  * @return      {Object}                              Return the proxied object on which you can make all the updates that you want
- * 
+ *
  * @example       js
  * import watch from '@coffeekraken/sugar/node/object/watch';
  * let myObj = watch({
@@ -860,41 +829,39 @@ api.node.object.whenProperty = (...args) => {
  *    console.log(event.action); // => Object.set
  * });
  * myObj.hello = 'plop';
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.object.watch', null);
 api.node.object.watch = (...args) => {
   return require('./src/node/object/watch.js').call(null, ...args);
 };
-        
 
 /**
  * @name                            uid
  * @namespace                       sugar.node.object
  * @type                            Function
- * 
+ *
  * This function allows you to generate a uniqid based on the objects you pass as parameters.
  * The uid is hashed into a SHA256 32bits string but you can specify it using the "format" parameter described above
- * 
+ *
  * @param       {Object}            objects...          The objects you want use to generate the uniqid
  * @param       {String}            [format='sha256']    The uid format that you want. Here's the available values:
  * - sha256: return a SHA256 64 characters formated string
  * - full: return the full length uid. The length can vary depending on the objects passed
  * @param       {String}            [key='sugar.node.object.uid']     The key used to encrypt the object
  * @return      {String}                                The uniqid generate based on the objects passed
- * 
+ *
  * @example       js
  * const uid = require('@coffeekraken/sugar/node/object/uid');
  * uid({ hello: 'world' }, { plop: 'coco' }); // => ijfw89uf98jhw9ef8whef87hw7e8q87wegfh78wgf87gw8fgw8e7fzghwz8efgw8fwzuheihgbweuzf
- * 
+ *
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.object.uid', null);
 api.node.object.uid = (...args) => {
   return require('./src/node/object/uid.js').call(null, ...args);
 };
-        
 
 /**
  * @name        toQueryString
@@ -920,7 +887,6 @@ __ensureExists(api, 'node.object.toQueryString', null);
 api.node.object.toQueryString = (...args) => {
   return require('./src/node/object/toQueryString.js').call(null, ...args);
 };
-        
 
 /**
  * @name                                sort
@@ -954,7 +920,6 @@ __ensureExists(api, 'node.object.sort', null);
 api.node.object.sort = (...args) => {
   return require('./src/node/object/sort.js').call(null, ...args);
 };
-        
 
 /**
  * @name                                        set
@@ -977,7 +942,6 @@ __ensureExists(api, 'node.object.set', null);
 api.node.object.set = (...args) => {
   return require('./src/node/object/set.js').call(null, ...args);
 };
-        
 
 /**
  * @name        propertyProxy
@@ -1017,21 +981,20 @@ __ensureExists(api, 'node.object.propertyProxy', null);
 api.node.object.propertyProxy = (...args) => {
   return require('./src/node/object/propertyProxy.js').call(null, ...args);
 };
-        
 
 /**
  * @name                map
  * @namespace           sugar.node.object
  * @type                Function
- * 
+ *
  * This is the same function as the "Array.map" but for objects. It will iterate over all the properties
  * of the passed object and pass the value to your process function. It will then save the property
  * with your processed value
- * 
+ *
  * @param           {Object}            object          The object to process
  * @param           {Function}          processor       The processor function that will take as parameters the current property value and the property name
  * @return          {Object}                            The processed object
- * 
+ *
  * @example         js
  * import map from '@coffeekraken/sugar/node/object/map';
  * const myObject = {
@@ -1045,14 +1008,13 @@ api.node.object.propertyProxy = (...args) => {
  *    hello: 'universe',
  *    cat: 'Nelson'
  * }
- * 
+ *
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.object.map', null);
 api.node.object.map = (...args) => {
   return require('./src/node/object/map.js').call(null, ...args);
 };
-        
 
 /**
  * @name          getKeyByValue
@@ -1075,7 +1037,6 @@ __ensureExists(api, 'node.object.getKeyByValue', null);
 api.node.object.getKeyByValue = (...args) => {
   return require('./src/node/object/getKeyByValue.js').call(null, ...args);
 };
-        
 
 /**
  * @name                          get
@@ -1097,7 +1058,6 @@ __ensureExists(api, 'node.object.get', null);
 api.node.object.get = (...args) => {
   return require('./src/node/object/get.js').call(null, ...args);
 };
-        
 
 /**
  * @name                              flatten
@@ -1125,7 +1085,6 @@ __ensureExists(api, 'node.object.flatten', null);
 api.node.object.flatten = (...args) => {
   return require('./src/node/object/flatten.js').call(null, ...args);
 };
-        
 
 /**
  * @name                        filter
@@ -1154,7 +1113,6 @@ __ensureExists(api, 'node.object.filter', null);
 api.node.object.filter = (...args) => {
   return require('./src/node/object/filter.js').call(null, ...args);
 };
-        
 
 /**
  * @name                        ensureExists
@@ -1179,16 +1137,15 @@ __ensureExists(api, 'node.object.ensureExists', null);
 api.node.object.ensureExists = (...args) => {
   return require('./src/node/object/ensureExists.js').call(null, ...args);
 };
-        
 
 /**
  * @name                      diff
  * @namespace                 sugar.node.object
  * @type                      Function
- * 
+ *
  * This function take two objects and return an object that contains only what has been changed between the two.
  * This function is a simple wrapper around the nice object-diff package from Thomas Jensen that you can find here: https://www.npmjs.com/package/object-diff
- * 
+ *
  * @param         {Object}          object1            The first object used for the diff process
  * @param         {Object}          object2            The second object used for the diff process
  * @param         {Object}          [settings={}]      An object of settings to configure the diff process:
@@ -1199,11 +1156,11 @@ api.node.object.ensureExists = (...args) => {
  * - emptyObject (false) {Boolean}: Specify if you want to keep the empty objects in the resulting one
  * - updated (true) {Boolean}: Specify if you want to include the updated values
  * @return        {Object}                             The object that contains only the differences between the two
- * 
+ *
  * @example         js
  * import diff from '@coffeekraken/sugar/node/object/diff';
  * const myObject1 = {
- *    hello: 'world', 
+ *    hello: 'world',
  *    plop: 'yop'
  * };
  * const myObject2 = {
@@ -1216,50 +1173,48 @@ api.node.object.ensureExists = (...args) => {
  *    coco: 'plop',
  *    hello: 'hey!'
  * }
- * 
+ *
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.object.diff', null);
 api.node.object.diff = (...args) => {
   return require('./src/node/object/diff.js').call(null, ...args);
 };
-        
 
 /**
  * @name                      delete
  * @namespace                 sugar.node.object
  * @type                      Function
- * 
+ *
  * Delete an object property using a dotPath like "something.else"
- * 
+ *
  * @param         {Object}          object            The object on which you want to delete the property
  * @param         {String}          dotPath           The dotpath to the property you want to delete
- * 
+ *
  * @example         js
  * import delete from '@coffeekraken/sugar/node/object/delete';
  * const myObject = {
- *    hello: 'world', 
+ *    hello: 'world',
  *    plop: 'yop'
  * };
  * delete(myObject, 'plop');
- * 
+ *
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.object.delete', null);
 api.node.object.delete = (...args) => {
   return require('./src/node/object/delete.js').call(null, ...args);
 };
-        
 
 /**
  * @name                            deepProxy
  * @namespace                       sugar.node.object
  * @type                            Function
- * 
+ *
  * This function allows you to add Proxy to an object in deep fashion.
  * Normally the Proxy process only the level on which it has been added. Here we add Proxy to all the
  * object levels and to new properties as well.
- * 
+ *
  * @param          {Object}                 object            The object on which to add the proxy
  * @param           {Function}                handlerFn       The handler function that will be called with the update object. It can be a property deleted, an array item added, a property updated, etc...:
  * - Object.set: An object property added or updated
@@ -1267,7 +1222,7 @@ api.node.object.delete = (...args) => {
  * - Array.push: An item has been added inside an array
  * - Array.{methodName}: Every array actions
  * @return          {Object}                                  The proxied object
- * 
+ *
  * @example           js
  * import deepProxy from '@coffeekraken/sugar/node/object/deepProxy';
  * const a = deepProxy({
@@ -1278,26 +1233,25 @@ api.node.object.delete = (...args) => {
  *    }
  * });
  * a.hello = 'coco';
- * 
- * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com) 
+ *
+ * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.object.deepProxy', null);
 api.node.object.deepProxy = (...args) => {
   return require('./src/node/object/deepProxy.js').call(null, ...args);
 };
-        
 
 /**
  * @name                              deepMergeErase
  * @namespace                         sugar.node.object
  * @type                              Function
- * 
+ *
  * This function allows you to tell the deepMerge one to use ONLY the passed value as final value and to not merge it as normal...
  * This seemd maybe a little bit weird but it will be more understandable in the example bellow...
- * 
+ *
  * @param                 {Object}            obj             The object to keep as final value. It will erase the object of the other object
  * @return                {Object}                            Return the object with the indication that it need to erase the other ones...
- * 
+ *
  * @example               js
  * import deepMerge from '@coffeekraken/sugar/node/object/deepMerge';
  * import deepMergeErase from '@coffeekraken/sugar/node/object/deepMergeErase';
@@ -1318,14 +1272,13 @@ api.node.object.deepProxy = (...args) => {
  *      yop: 'cool value'
  *    }
  * }
- * 
+ *
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.object.deepMergeErase', null);
 api.node.object.deepMergeErase = (...args) => {
   return require('./src/node/object/deepMergeErase.js').call(null, ...args);
 };
-        
 
 /**
  * @name                deepMerge
@@ -1333,7 +1286,7 @@ api.node.object.deepMergeErase = (...args) => {
  * @type                Function
  *
  * Deep merge one object with another and return the merged object result
- * 
+ *
  * @param           {Object}            objects...        Pass all the objects you want to merge
  * @return          {Object}                              The merged object result
  *
@@ -1348,7 +1301,6 @@ __ensureExists(api, 'node.object.deepMerge', null);
 api.node.object.deepMerge = (...args) => {
   return require('./src/node/object/deepMerge.js').call(null, ...args);
 };
-        
 
 /**
  * @name        constructorName
@@ -1374,7 +1326,6 @@ __ensureExists(api, 'node.object.constructorName', null);
 api.node.object.constructorName = (...args) => {
   return require('./src/node/object/constructorName.js').call(null, ...args);
 };
-        
 
 /**
  * @name 		            SWatch
@@ -1404,11 +1355,10 @@ api.node.object.constructorName = (...args) => {
  */
 __ensureExists(api, 'node.object.SWatch', null);
 Object.defineProperty(api.node.object, 'SWatch', {
-  get: function() {
+  get: function () {
     return require('./src/node/object/SWatch.js');
   }
 });
-          
 
 /**
  * @name        pad
@@ -1431,7 +1381,6 @@ __ensureExists(api, 'node.number.pad', null);
 api.node.number.pad = (...args) => {
   return require('./src/node/number/pad.js').call(null, ...args);
 };
-        
 
 /**
  * @name        constrain
@@ -1455,73 +1404,69 @@ __ensureExists(api, 'node.number.constrain', null);
 api.node.number.constrain = (...args) => {
   return require('./src/node/number/constrain.js').call(null, ...args);
 };
-        
 
 /**
  * @name              warn
  * @namespace         sugar.node.warn
  * @type              Function
- * 
+ *
  * This function is a simple wrapper around the SLog class that let you use the warn features quickly
- * 
+ *
  * @param           {Mixed}             message           The message to log
  * @return          {Promise}                             A promise resolved once your message has been correctly logged
- * 
+ *
  * @example         js
  * import warn from '@coffeekraken/sugar/node/log/warn';
  * warn('Hello world');
- * 
+ *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.log.warn', null);
 api.node.log.warn = (...args) => {
   return require('./src/node/log/warn.js').call(null, ...args);
 };
-        
 
 /**
  * @name              log
  * @namespace         sugar.node.log
  * @type              Function
- * 
+ *
  * This function is a simple wrapper around the SLog class that let you use the log features quickly
- * 
+ *
  * @param           {Mixed}             message           The message to log
  * @return          {Promise}                             A promise resolved once your message has been correctly logged
- * 
+ *
  * @example         js
  * import log from '@coffeekraken/sugar/node/log/log';
  * log('Hello world');
- * 
+ *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.log.log', null);
 api.node.log.log = (...args) => {
   return require('./src/node/log/log.js').call(null, ...args);
 };
-        
 
 /**
  * @name              info
  * @namespace         sugar.node.info
  * @type              Function
- * 
+ *
  * This function is a simple wrapper around the SLog class that let you use the info features quickly
- * 
+ *
  * @param           {Mixed}             message           The message to log
  * @return          {Promise}                             A promise resolved once your message has been correctly infoged
- * 
+ *
  * @example         js
  * import info from '@coffeekraken/sugar/node/log/info';
  * info('Hello world');
- * 
+ *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.log.info', null);
 api.node.log.info = (...args) => {
   return require('./src/node/log/info.js').call(null, ...args);
 };
-        
 
 /**
  * @name                              mail
@@ -1539,7 +1484,6 @@ __ensureExists(api, 'node.log.htmlPresets.mail', null);
 api.node.log.htmlPresets.mail = (...args) => {
   return require('./src/node/log/htmlPresets/mail.js').call(null, ...args);
 };
-        
 
 /**
  * @name                              files
@@ -1557,7 +1501,6 @@ __ensureExists(api, 'node.log.htmlPresets.files', null);
 api.node.log.htmlPresets.files = (...args) => {
   return require('./src/node/log/htmlPresets/files.js').call(null, ...args);
 };
-        
 
 /**
  * @name                              console
@@ -1575,59 +1518,56 @@ __ensureExists(api, 'node.log.htmlPresets.console', null);
 api.node.log.htmlPresets.console = (...args) => {
   return require('./src/node/log/htmlPresets/console.js').call(null, ...args);
 };
-        
 
 /**
  * @name              error
  * @namespace         sugar.node.error
  * @type              Function
- * 
+ *
  * This function is a simple wrapper around the SLog class that let you use the error features quickly
- * 
+ *
  * @param           {Mixed}             message           The message to log
  * @return          {Promise}                             A promise resolved once your message has been correctly logged
- * 
+ *
  * @example         js
  * import error from '@coffeekraken/sugar/node/log/error';
  * error('Hello world');
- * 
+ *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.log.error', null);
 api.node.log.error = (...args) => {
   return require('./src/node/log/error.js').call(null, ...args);
 };
-        
 
 /**
  * @name              debug
  * @namespace         sugar.node.debug
  * @type              Function
- * 
+ *
  * This function is a simple wrapper around the SLog class that let you use the debug features quickly
- * 
+ *
  * @param           {Mixed}             message           The message to log
  * @return          {Promise}                             A promise resolved once your message has been correctly logged
- * 
+ *
  * @example         js
  * import debug from '@coffeekraken/sugar/node/log/debug';
  * debug('Hello world');
- * 
+ *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.log.debug', null);
 api.node.log.debug = (...args) => {
   return require('./src/node/log/debug.js').call(null, ...args);
 };
-        
 
 /**
  * @name                    SLogFilesAdapter
  * @namespace               sugar.js.log
  * @type                    Class
- * 
+ *
  * This class allows you to log your messages, errors, etc... easily and store them in some files where you want on your file system.
- * 
+ *
  * @example               js
  * conse SLog = require('@coffeekraken/sugar/js/log/SLog');
  * const SLogFilesAdapter = require('@coffeekraken/sugar/node/log/adapters/SLogFilesAdapter');
@@ -1637,25 +1577,24 @@ api.node.log.debug = (...args) => {
  *    ]
  * });
  * logger.log('Something cool happend...');
- * 
+ *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'js.log.SLogFilesAdapter', null);
 Object.defineProperty(api.js.log, 'SLogFilesAdapter', {
-  get: function() {
+  get: function () {
     return require('./src/node/log/adapters/SLogFilesAdapter.js');
   }
 });
-          
 
 /**
  * @name                    SLogConsoleAdapter
  * @namespace               sugar.node.log
  * @type                    Class
- * 
+ *
  * This class allows you to log your messages, errors, etc... easily through some adapters that cover some targets like "console" of course,
  * "mail", "slack", etc...
- * 
+ *
  * @example               js
  * import SLog from '@coffeekraken/sugar/node/log/SLog';
  * import SLogConsoleAdapter from '@coffeekraken/sugar/js/log/adapters/SLogConsoleAdapter';
@@ -1665,25 +1604,24 @@ Object.defineProperty(api.js.log, 'SLogFilesAdapter', {
  *    ]
  * });
  * logger.log('Something cool happend...');
- * 
+ *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.log.adapters.SLogConsoleAdapter', null);
 Object.defineProperty(api.node.log.adapters, 'SLogConsoleAdapter', {
-  get: function() {
+  get: function () {
     return require('./src/node/log/adapters/SLogConsoleAdapter.js');
   }
 });
-          
 
 /**
  * @name                    SLog
  * @namespace               sugar.node.log
  * @type                    Class
- * 
+ *
  * This class allows you to log your messages, errors, etc... easily through some adapters that cover some targets like "console" of course,
  * "mail", "slack", etc...
- * 
+ *
  * @example               js
  * import SLog from '@coffeekraken/sugar/node/log/SLog';
  * import SLogConsoleAdapter from '@coffeekraken/sugar/js/log/adapters/SLogConsoleAdapter';
@@ -1693,16 +1631,15 @@ Object.defineProperty(api.node.log.adapters, 'SLogConsoleAdapter', {
  *    }
  * });
  * logger.log('Something cool happend...');
- * 
+ *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.log.SLog', null);
 Object.defineProperty(api.node.log, 'SLog', {
-  get: function() {
+  get: function () {
     return require('./src/node/log/SLog.js');
   }
 });
-          
 
 /**
  * @name        isYyyymmddDate
@@ -1727,28 +1664,26 @@ __ensureExists(api, 'node.is.isYyyymmddDate', null);
 api.node.is.isYyyymmddDate = (...args) => {
   return require('./src/node/is/yyyymmddDate.js').call(null, ...args);
 };
-        
 
 /**
  * @name                            windows
  * @namespace                       sugar.node.is
  * @type                            Function
- * 
+ *
  * Check if the app run on mac OS X or not
- * 
+ *
  * @return        {Boolean}                             true if mac OS X, false if not
- * 
+ *
  * @example       js
  * import isOsx from '@coffeekraken/sugar/node/is/windows';
  * isWindows(); // => true
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.is.windows', null);
 api.node.is.windows = (...args) => {
   return require('./src/node/is/windows.js').call(null, ...args);
 };
-        
 
 /**
  * @name        isUrl
@@ -1770,7 +1705,6 @@ __ensureExists(api, 'node.is.isUrl', null);
 api.node.is.isUrl = (...args) => {
   return require('./src/node/is/url.js').call(null, ...args);
 };
-        
 
 /**
  * @name        isUcBrowser
@@ -1780,7 +1714,7 @@ api.node.is.isUrl = (...args) => {
  * Detect if is the UC stock browser that is running the page
  *
  * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test
- * 
+ *
  * @example    js
  * import isUcBrowser from '@coffeekraken/sugar/node/is/ucBrowser'
  * if (isUcBrowser()) {
@@ -1793,7 +1727,6 @@ __ensureExists(api, 'node.is.isUcBrowser', null);
 api.node.is.isUcBrowser = (...args) => {
   return require('./src/node/is/ucBrowser.js').call(null, ...args);
 };
-        
 
 /**
  * @name        isTablet
@@ -1803,7 +1736,7 @@ api.node.is.isUcBrowser = (...args) => {
  * Detect if is a tablet device
  *
  * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test
- * 
+ *
  * @return    {Boolean}    true if is a tablet, false if not
  *
  * @example 	js
@@ -1817,7 +1750,6 @@ __ensureExists(api, 'node.is.isTablet', null);
 api.node.is.isTablet = (...args) => {
   return require('./src/node/is/tablet.js').call(null, ...args);
 };
-        
 
 /**
  * @name        isString
@@ -1841,7 +1773,6 @@ __ensureExists(api, 'node.is.isString', null);
 api.node.is.isString = (...args) => {
   return require('./src/node/is/string.js').call(null, ...args);
 };
-        
 
 /**
  * @name        isSamsumgBrowser
@@ -1851,7 +1782,7 @@ api.node.is.isString = (...args) => {
  * Detect if is the samsung stock browser that is running the page
  *
  * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test
- * 
+ *
  * @example    js
  * import isSamsumgBrowser from '@coffeekraken/sugar/node/is/samsungBrowser'
  * if (isSamsumgBrowser()) {
@@ -1864,7 +1795,6 @@ __ensureExists(api, 'node.is.isSamsumgBrowser', null);
 api.node.is.isSamsumgBrowser = (...args) => {
   return require('./src/node/is/samsungBrowser.js').call(null, ...args);
 };
-        
 
 /**
  * @name        isSafari
@@ -1874,7 +1804,7 @@ api.node.is.isSamsumgBrowser = (...args) => {
  * Detect if is safari
  *
  * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test
- * 
+ *
  * @example 	js
  * import isSafari from '@coffeekraken/sugar/node/is/safari'
  * if (isSafari()) {
@@ -1888,7 +1818,6 @@ __ensureExists(api, 'node.is.isSafari', null);
 api.node.is.isSafari = (...args) => {
   return require('./src/node/is/safari.js').call(null, ...args);
 };
-        
 
 /**
  * @name        isRegexp
@@ -1912,22 +1841,21 @@ __ensureExists(api, 'node.is.isRegexp', null);
 api.node.is.isRegexp = (...args) => {
   return require('./src/node/is/regexp.js').call(null, ...args);
 };
-        
 
 /**
  * @name                      plainObject
  * @namespace                 sugar.node.is
  * @type                      Function
- * 
+ *
  * Check if the passed object (or array of objects) is/are plain object(s)
- * 
+ *
  * @param         {Object|Array}            object                  The object(s) to check
  * @return        {Boolean}                                         true if is plain object(s), false if not
- * 
+ *
  * @example           js
  * const isPlainObject = require('@coffeekraken/sugar/node/is/plainObject');
  * isPlainObject({ hello: 'world'}); // => true
- * 
+ *
  * @see       https://www.npmjs.com/package/is-plain-object
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
@@ -1935,7 +1863,6 @@ __ensureExists(api, 'node.is.plainObject', null);
 api.node.is.plainObject = (...args) => {
   return require('./src/node/is/plainObject.js').call(null, ...args);
 };
-        
 
 /**
  * @name        isPhone
@@ -1945,7 +1872,7 @@ api.node.is.plainObject = (...args) => {
  * Detect if is a phone device
  *
  * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test
- * 
+ *
  * @return    {Boolean}    true if is a phone, false if not
  *
  * @example 	js
@@ -1959,51 +1886,48 @@ __ensureExists(api, 'node.is.isPhone', null);
 api.node.is.isPhone = (...args) => {
   return require('./src/node/is/phone.js').call(null, ...args);
 };
-        
 
 /**
  * @name                            path
  * @namespace                       sugar.node.is
  * @type                            Function
- * 
+ *
  * Check if the passed string is a valid path or not
- * 
+ *
  * @param         {String}            path              The path to check
  * @param         {Boolean}           [checkExistence=false]      Specify if you want to check that the passed path actually exist
  * @return        {Boolean}                             true if the path is valide, false if not
- * 
+ *
  * @example       js
  * const isPath = require('@coffeekraken/sugar/node/is/path');
  * isPath('hello/world'); // => true
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.is.path', null);
 api.node.is.path = (...args) => {
   return require('./src/node/is/path.js').call(null, ...args);
 };
-        
 
 /**
  * @name                            osx
  * @namespace                       sugar.node.is
  * @type                            Function
- * 
+ *
  * Check if the app run on mac OS X or not
- * 
+ *
  * @return        {Boolean}                             true if mac OS X, false if not
- * 
+ *
  * @example       js
  * import isOsx from '@coffeekraken/sugar/node/is/osx';
  * isOsx(); // => true
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.is.osx', null);
 api.node.is.osx = (...args) => {
   return require('./src/node/is/osx.js').call(null, ...args);
 };
-        
 
 /**
  * @name        isOpera
@@ -2013,7 +1937,7 @@ api.node.is.osx = (...args) => {
  * Detect if is opera
  *
  * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test
- * 
+ *
  * @example 	js
  * import isOpera from '@coffeekraken/sugar/node/is/opera'
  * if (isOpera()) {
@@ -2027,7 +1951,6 @@ __ensureExists(api, 'node.is.isOpera', null);
 api.node.is.isOpera = (...args) => {
   return require('./src/node/is/opera.js').call(null, ...args);
 };
-        
 
 /**
  * @name        isOdd
@@ -2048,7 +1971,6 @@ __ensureExists(api, 'node.is.isOdd', null);
 api.node.is.isOdd = (...args) => {
   return require('./src/node/is/odd.js').call(null, ...args);
 };
-        
 
 /**
  * @name        isObject
@@ -2072,7 +1994,6 @@ __ensureExists(api, 'node.is.isObject', null);
 api.node.is.isObject = (...args) => {
   return require('./src/node/is/object.js').call(null, ...args);
 };
-        
 
 /**
  * @name        isNumber
@@ -2096,7 +2017,6 @@ __ensureExists(api, 'node.is.isNumber', null);
 api.node.is.isNumber = (...args) => {
   return require('./src/node/is/number.js').call(null, ...args);
 };
-        
 
 /**
  * @name                                      isNode
@@ -2117,7 +2037,6 @@ __ensureExists(api, 'node.is.isNode', null);
 api.node.is.isNode = (...args) => {
   return require('./src/node/is/node.js').call(null, ...args);
 };
-        
 
 /**
  * @name        isMobile
@@ -2126,7 +2045,7 @@ api.node.is.isNode = (...args) => {
  *
  * Detect if is a mobile device (phone or tablet)
  *
- * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test * 
+ * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test *
  * @return    {Boolean}    true if is a mobile, false if not
  *
  * @example 	js
@@ -2140,7 +2059,6 @@ __ensureExists(api, 'node.is.isMobile', null);
 api.node.is.isMobile = (...args) => {
   return require('./src/node/is/mobile.js').call(null, ...args);
 };
-        
 
 /**
  * @name        isMmddyyyyDate
@@ -2165,28 +2083,26 @@ __ensureExists(api, 'node.is.isMmddyyyyDate', null);
 api.node.is.isMmddyyyyDate = (...args) => {
   return require('./src/node/is/mmddyyyyDate.js').call(null, ...args);
 };
-        
 
 /**
  * @name                            linux
  * @namespace                       sugar.node.is
  * @type                            Function
- * 
+ *
  * Check if the app run on linux
- * 
+ *
  * @return        {Boolean}                             true if linux, false if not
- * 
+ *
  * @example       js
  * import isLinux from '@coffeekraken/sugar/node/is/linux';
  * isLinux(); // => true
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.is.linux', null);
 api.node.is.linux = (...args) => {
   return require('./src/node/is/linux.js').call(null, ...args);
 };
-        
 
 /**
  * @name        isJson
@@ -2210,7 +2126,6 @@ __ensureExists(api, 'node.is.isJson', null);
 api.node.is.isJson = (...args) => {
   return require('./src/node/is/json.js').call(null, ...args);
 };
-        
 
 /**
  * @name                                      isJs
@@ -2231,7 +2146,6 @@ __ensureExists(api, 'node.is.isJs', null);
 api.node.is.isJs = (...args) => {
   return require('./src/node/is/js.js').call(null, ...args);
 };
-        
 
 /**
  * @name        isInteger
@@ -2254,7 +2168,6 @@ __ensureExists(api, 'node.is.isInteger', null);
 api.node.is.isInteger = (...args) => {
   return require('./src/node/is/integer.js').call(null, ...args);
 };
-        
 
 /**
  * @name        isIe
@@ -2264,7 +2177,7 @@ api.node.is.isInteger = (...args) => {
  * Detect if is ie (internet explorer)
  *
  * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test
- * 
+ *
  * @example 	js
  * import isIe from '@coffeekraken/sugar/node/is/ie'
  * if (isIe()) {
@@ -2278,7 +2191,6 @@ __ensureExists(api, 'node.is.isIe', null);
 api.node.is.isIe = (...args) => {
   return require('./src/node/is/ie.js').call(null, ...args);
 };
-        
 
 /**
  * @name        isFunction
@@ -2302,7 +2214,6 @@ __ensureExists(api, 'node.is.isFunction', null);
 api.node.is.isFunction = (...args) => {
   return require('./src/node/is/function.js').call(null, ...args);
 };
-        
 
 /**
  * @name        isFirefox
@@ -2312,7 +2223,7 @@ api.node.is.isFunction = (...args) => {
  * Detect if is firefox
  *
  * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test
- * 
+ *
  * @example 	js
  * import isFirefox from '@coffeekraken/sugar/node/is/firefox'
  * if (isFirefox()) {
@@ -2326,7 +2237,6 @@ __ensureExists(api, 'node.is.isFirefox', null);
 api.node.is.isFirefox = (...args) => {
   return require('./src/node/is/firefox.js').call(null, ...args);
 };
-        
 
 /**
  * @name        isEven
@@ -2347,7 +2257,6 @@ __ensureExists(api, 'node.is.isEven', null);
 api.node.is.isEven = (...args) => {
   return require('./src/node/is/even.js').call(null, ...args);
 };
-        
 
 /**
  * @name        isEmail
@@ -2371,7 +2280,6 @@ __ensureExists(api, 'node.is.isEmail', null);
 api.node.is.isEmail = (...args) => {
   return require('./src/node/is/email.js').call(null, ...args);
 };
-        
 
 /**
  * @name        isEdge
@@ -2381,7 +2289,7 @@ api.node.is.isEmail = (...args) => {
  * Detect if is edge
  *
  * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test
- * 
+ *
  * @example 	js
  * import isEdge from '@coffeekraken/sugar/node/is/edge'
  * if (isEdge()) {
@@ -2395,7 +2303,6 @@ __ensureExists(api, 'node.is.isEdge', null);
 api.node.is.isEdge = (...args) => {
   return require('./src/node/is/edge.js').call(null, ...args);
 };
-        
 
 /**
  * @name        isDdmmyyyyDate
@@ -2420,7 +2327,6 @@ __ensureExists(api, 'node.is.isDdmmyyyyDate', null);
 api.node.is.isDdmmyyyyDate = (...args) => {
   return require('./src/node/is/ddmmyyyyDate.js').call(null, ...args);
 };
-        
 
 /**
  * @name        isColor
@@ -2445,24 +2351,23 @@ __ensureExists(api, 'node.is.isColor', null);
 api.node.is.isColor = (...args) => {
   return require('./src/node/is/color.js').call(null, ...args);
 };
-        
 
 /**
  * @name                      class
  * @namespace                 sugar.node.is
  * @type                      Function
- * 
+ *
  * Check if the passed variable (or array of variables) is/are plain variable(s)
- * 
+ *
  * @param         {Mixed|Array}            variable                  The variable(s) to check
  * @return        {Boolean}                                         true if is class(es), false if not
- * 
+ *
  * @example           js
  * import isClass = from '@coffeekraken/sugar/node/is/class';
  * isClass({ hello: 'world'}); // => false
  * const myCoolClass = class Coco{};
  * isClass(myCoolClass); // => true
- * 
+ *
  * @see       https://www.npmjs.com/package/is-class
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
@@ -2470,7 +2375,6 @@ __ensureExists(api, 'node.is.class', null);
 api.node.is.class = (...args) => {
   return require('./src/node/is/class.js').call(null, ...args);
 };
-        
 
 /**
  * @name        isChrome
@@ -2480,7 +2384,7 @@ api.node.is.class = (...args) => {
  * Detect if is chrome
  *
  * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test
- * 
+ *
  * @example 	js
  * import isChrome from '@coffeekraken/sugar/node/is/chrome'
  * if (isChrome()) {
@@ -2494,7 +2398,6 @@ __ensureExists(api, 'node.is.isChrome', null);
 api.node.is.isChrome = (...args) => {
   return require('./src/node/is/chrome.js').call(null, ...args);
 };
-        
 
 /**
  * @name        isBoolean
@@ -2518,7 +2421,6 @@ __ensureExists(api, 'node.is.isBoolean', null);
 api.node.is.isBoolean = (...args) => {
   return require('./src/node/is/boolean.js').call(null, ...args);
 };
-        
 
 /**
  * @name        isBase64
@@ -2542,7 +2444,6 @@ __ensureExists(api, 'node.is.isBase64', null);
 api.node.is.isBase64 = (...args) => {
   return require('./src/node/is/base64.js').call(null, ...args);
 };
-        
 
 /**
  * @name        isArray
@@ -2566,15 +2467,14 @@ __ensureExists(api, 'node.is.isArray', null);
 api.node.is.isArray = (...args) => {
   return require('./src/node/is/array.js').call(null, ...args);
 };
-        
 
 /**
  * @name                              request
  * @namespace                          sugar.node.http
  * @type                              Function
- * 
+ *
  * Easily create and send an http request. This will return an instance of the SAjax class.
- * 
+ *
  * @param           {Object}              [settings={}]             The request settings. This support these settings and all the axio ones:
  * - url (null) {String}: The url on which to make the request
  * - baseURL (null) {String}: The base url on which to make the request.
@@ -2586,7 +2486,7 @@ api.node.is.isArray = (...args) => {
  * - sendInterval (1000) {Number}: Set the interval time between each requests if the sendCount setting is specified. If setted in number format, this is taken as millisenconds. You can also set the interval in string format like '34s', '1h', '10ms', '2d', etc...
  * - sendCount (1) {Number}: Set how many times the request has to be sent
  * - responseType (json) {String}: Indicates the type of data that the server will respond with
- * 
+ *
  * @example               js
  * import request from '@coffeekraken/sugar/node/http/request';
  * request({
@@ -2595,14 +2495,13 @@ api.node.is.isArray = (...args) => {
  * }).then(response => {
  *    // do something...
  * });
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.http.request', null);
 api.node.http.request = (...args) => {
   return require('./src/node/http/request.js').call(null, ...args);
 };
-        
 
 /**
  * @name 	              	SRequestConfig
@@ -2626,11 +2525,10 @@ api.node.http.request = (...args) => {
  */
 __ensureExists(api, 'node.http.SRequestConfig', null);
 Object.defineProperty(api.node.http, 'SRequestConfig', {
-  get: function() {
+  get: function () {
     return require('./src/node/http/SRequestConfig.js');
   }
 });
-          
 
 /**
  * @name 		                    SRequest
@@ -2662,11 +2560,10 @@ Object.defineProperty(api.node.http, 'SRequestConfig', {
  */
 __ensureExists(api, 'node.http.SRequest', null);
 Object.defineProperty(api.node.http, 'SRequest', {
-  get: function() {
+  get: function () {
     return require('./src/node/http/SRequest.js');
   }
 });
-          
 
 /**
  * @name            toString
@@ -2690,14 +2587,13 @@ __ensureExists(api, 'node.html.toString', null);
 api.node.html.toString = (...args) => {
   return require('./src/node/html/toString.js').call(null, ...args);
 };
-        
 
 /**
  * @name        striptags
  * @namespace       sugar.node.html
  * @type      Function
  *
- * Strip tags of an html string. 
+ * Strip tags of an html string.
  * This is a simple wrapper of the nice "striptags" package that you can find here: https://www.npmjs.com/package/striptags
  *
  * @param    {String}    html    The html string to process
@@ -2716,7 +2612,6 @@ __ensureExists(api, 'node.html.striptags', null);
 api.node.html.striptags = (...args) => {
   return require('./src/node/html/striptags.js').call(null, ...args);
 };
-        
 
 /**
  * @name                            replaceTags
@@ -2741,7 +2636,6 @@ __ensureExists(api, 'node.html.replaceTags', null);
 api.node.html.replaceTags = (...args) => {
   return require('./src/node/html/replaceTags.js').call(null, ...args);
 };
-        
 
 /**
  * @name 		                SGoogleCustomSearch
@@ -2772,11 +2666,10 @@ api.node.html.replaceTags = (...args) => {
  */
 __ensureExists(api, 'node.google.SGoogleCustomSearch', null);
 Object.defineProperty(api.node.google, 'SGoogleCustomSearch', {
-  get: function() {
+  get: function () {
     return require('./src/node/google/SGoogleCustomSearch.js');
   }
 });
-          
 
 /**
  * @name 		distanceBetween
@@ -2803,7 +2696,6 @@ __ensureExists(api, 'node.geom.distanceBetween', null);
 api.node.geom.distanceBetween = (...args) => {
   return require('./src/node/geom/distanceBetween.js').call(null, ...args);
 };
-        
 
 /**
  * @name 		circleConstrain
@@ -2832,7 +2724,6 @@ __ensureExists(api, 'node.geom.circleConstrain', null);
 api.node.geom.circleConstrain = (...args) => {
   return require('./src/node/geom/circleConstrain.js').call(null, ...args);
 };
-        
 
 /**
  * @name        throttle
@@ -2860,7 +2751,6 @@ __ensureExists(api, 'node.function.throttle', null);
 api.node.function.throttle = (...args) => {
   return require('./src/node/function/throttle.js').call(null, ...args);
 };
-        
 
 /**
  * @name        debounce
@@ -2889,7 +2779,6 @@ __ensureExists(api, 'node.function.debounce', null);
 api.node.function.debounce = (...args) => {
   return require('./src/node/function/sleep.js').call(null, ...args);
 };
-        
 
 /**
  * @name        setRecursiveTimeout
@@ -2914,9 +2803,11 @@ api.node.function.debounce = (...args) => {
  */
 __ensureExists(api, 'node.function.setRecursiveTimeout', null);
 api.node.function.setRecursiveTimeout = (...args) => {
-  return require('./src/node/function/setRecursiveTimeout.js').call(null, ...args);
+  return require('./src/node/function/setRecursiveTimeout.js').call(
+    null,
+    ...args
+  );
 };
-        
 
 /**
  * @name        debounce
@@ -2945,7 +2836,6 @@ __ensureExists(api, 'node.function.debounce', null);
 api.node.function.debounce = (...args) => {
   return require('./src/node/function/debounce.js').call(null, ...args);
 };
-        
 
 /**
  * @name        writeJsonSync
@@ -2971,14 +2861,13 @@ __ensureExists(api, 'node.fs.writeJsonSync', null);
 api.node.fs.writeJsonSync = (...args) => {
   return require('./src/node/fs/writeJsonSync.js').call(null, ...args);
 };
-        
 
 /**
  * @name        writeJson
  * @namespace     sugar.node.fs
  * @type          Function
  * @async
- * 
+ *
  * Write a JSON file. If don't exist, will be created as well as the directory structure if needed... ( (async)
  *
  * @param       {String}              path           The file path to write
@@ -2999,7 +2888,6 @@ __ensureExists(api, 'node.fs.writeJson', null);
 api.node.fs.writeJson = (...args) => {
   return require('./src/node/fs/writeJson.js').call(null, ...args);
 };
-        
 
 /**
  * @name        writeFileSync
@@ -3025,14 +2913,13 @@ __ensureExists(api, 'node.fs.writeFileSync', null);
 api.node.fs.writeFileSync = (...args) => {
   return require('./src/node/fs/writeFileSync.js').call(null, ...args);
 };
-        
 
 /**
  * @name        writeFile
  * @namespace     sugar.node.fs
  * @type          Function
  * @async
- * 
+ *
  * CWrite a file. If don't exist, will be created as well as the directory structure if needed... ( (async)
  *
  * @param       {String}              path           The file path to write
@@ -3053,7 +2940,6 @@ __ensureExists(api, 'node.fs.writeFile', null);
 api.node.fs.writeFile = (...args) => {
   return require('./src/node/fs/writeFile.js').call(null, ...args);
 };
-        
 
 /**
  * @name                            tmpDir
@@ -3075,7 +2961,6 @@ __ensureExists(api, 'node.fs.tmpDir', null);
 api.node.fs.tmpDir = (...args) => {
   return require('./src/node/fs/tmpDir.js').call(null, ...args);
 };
-        
 
 /**
  * @name        removeSync
@@ -3099,7 +2984,6 @@ __ensureExists(api, 'node.fs.removeSync', null);
 api.node.fs.removeSync = (...args) => {
   return require('./src/node/fs/removeSync.js').call(null, ...args);
 };
-        
 
 /**
  * @name        remove
@@ -3124,7 +3008,6 @@ __ensureExists(api, 'node.fs.remove', null);
 api.node.fs.remove = (...args) => {
   return require('./src/node/fs/remove.js').call(null, ...args);
 };
-        
 
 /**
  * @name        moveSync
@@ -3149,7 +3032,6 @@ __ensureExists(api, 'node.fs.moveSync', null);
 api.node.fs.moveSync = (...args) => {
   return require('./src/node/fs/moveSync.js').call(null, ...args);
 };
-        
 
 /**
  * @name        move
@@ -3175,23 +3057,22 @@ __ensureExists(api, 'node.fs.move', null);
 api.node.fs.move = (...args) => {
   return require('./src/node/fs/move.js').call(null, ...args);
 };
-        
 
 /**
  * @name                            isPath
  * @namespace                       sugar.node.fs
  * @type                            Function
- * 
+ *
  * Check if the passed string is a valid path or not
- * 
+ *
  * @param         {String}            path              The path to check
  * @param         {Boolean}           [checkExistence=false]      Specify if you want to check that the passed path actually exist
  * @return        {Boolean}                             true if the path is valide, false if not
- * 
+ *
  * @example       js
  * const isPath = require('@coffeekraken/sugar/node/fs/isPath');
  * isPath('hello/world'); // => true
- * 
+ *
  * @see       https://www.npmjs.com/package/is-valid-path
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
@@ -3199,7 +3080,6 @@ __ensureExists(api, 'node.fs.isPath', null);
 api.node.fs.isPath = (...args) => {
   return require('./src/node/fs/isPath.js').call(null, ...args);
 };
-        
 
 /**
  * @name                                    formatFileSize
@@ -3224,7 +3104,6 @@ __ensureExists(api, 'node.fs.formatFileSize', null);
 api.node.fs.formatFileSize = (...args) => {
   return require('./src/node/fs/formatFileSize.js').call(null, ...args);
 };
-        
 
 /**
  * @name                            folderSize
@@ -3250,7 +3129,6 @@ __ensureExists(api, 'node.fs.folderSize', null);
 api.node.fs.folderSize = (...args) => {
   return require('./src/node/fs/folderSize.js').call(null, ...args);
 };
-        
 
 /**
  * @name                       filename
@@ -3273,7 +3151,6 @@ __ensureExists(api, 'node.fs.filename', null);
 api.node.fs.filename = (...args) => {
   return require('./src/node/fs/filename.js').call(null, ...args);
 };
-        
 
 /**
  * @name                    extension
@@ -3295,7 +3172,6 @@ __ensureExists(api, 'node.fs.extension', null);
 api.node.fs.extension = (...args) => {
   return require('./src/node/fs/extension.js').call(null, ...args);
 };
-        
 
 /**
  * @name        ensureFileSync
@@ -3319,14 +3195,13 @@ __ensureExists(api, 'node.fs.ensureFileSync', null);
 api.node.fs.ensureFileSync = (...args) => {
   return require('./src/node/fs/ensureFileSync.js').call(null, ...args);
 };
-        
 
 /**
  * @name        ensureFile
  * @namespace     sugar.node.fs
  * @type          Function
  * @async
- * 
+ *
  * Ensure that the passed file exists. If not, it will be created... (async)
  *
  * @param       {String}              file           The file to ensure that it exists...
@@ -3345,7 +3220,6 @@ __ensureExists(api, 'node.fs.ensureFile', null);
 api.node.fs.ensureFile = (...args) => {
   return require('./src/node/fs/ensureFile.js').call(null, ...args);
 };
-        
 
 /**
  * @name        ensureDirSync
@@ -3370,7 +3244,6 @@ __ensureExists(api, 'node.fs.ensureDirSync', null);
 api.node.fs.ensureDirSync = (...args) => {
   return require('./src/node/fs/ensureDirSync.js').call(null, ...args);
 };
-        
 
 /**
  * @name        ensureDir
@@ -3396,7 +3269,6 @@ __ensureExists(api, 'node.fs.ensureDir', null);
 api.node.fs.ensureDir = (...args) => {
   return require('./src/node/fs/ensureDir.js').call(null, ...args);
 };
-        
 
 /**
  * @name        emptyDirSync
@@ -3420,7 +3292,6 @@ __ensureExists(api, 'node.fs.emptyDirSync', null);
 api.node.fs.emptyDirSync = (...args) => {
   return require('./src/node/fs/emptyDirSync.js').call(null, ...args);
 };
-        
 
 /**
  * @name        emptyDir
@@ -3446,7 +3317,6 @@ __ensureExists(api, 'node.fs.emptyDir', null);
 api.node.fs.emptyDir = (...args) => {
   return require('./src/node/fs/emptyDir.js').call(null, ...args);
 };
-        
 
 /**
  * @name              downloadFile
@@ -3472,7 +3342,6 @@ __ensureExists(api, 'node.fs.downloadFile', null);
 api.node.fs.downloadFile = (...args) => {
   return require('./src/node/fs/downloadFile.js').call(null, ...args);
 };
-        
 
 /**
  * @name        copySync
@@ -3497,7 +3366,6 @@ __ensureExists(api, 'node.fs.copySync', null);
 api.node.fs.copySync = (...args) => {
   return require('./src/node/fs/copySync.js').call(null, ...args);
 };
-        
 
 /**
  * @name        copy
@@ -3524,54 +3392,51 @@ __ensureExists(api, 'node.fs.copy', null);
 api.node.fs.copy = (...args) => {
   return require('./src/node/fs/copy.js').call(null, ...args);
 };
-        
 
 /**
  * @name                    base64
  * @namespace               sugar.node.encoding
  * @type                    Object
- * 
+ *
  * This return an object containing the "encode" and "decode" function that you can use
  * to encode/decode base64 Strings.
- * 
+ *
  * @example           js
  * import base64 from '@coffeekraken/sugar/node/encoding/base64';
  * base64.encode('Hello world');
  * base64.decode('SGVsbG8gV29ybGQh');
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.encoding.base64', null);
 Object.defineProperty(api.node.encoding, 'base64', {
-  get: function() {
+  get: function () {
     return require('./src/node/encoding/base64.js');
   }
 });
-          
 
 /**
  * @name                    parse
  * @namespace               sugar.node.docblock
  * @type                    Function
- * 
+ *
  * This function allows you to simply parse any strings that contains docblock(s) and return
  * the parsed version un object format
- * 
+ *
  * @param           {String}          string        The string to parse
  * @param           {Object}          [settings={}]  The settings to configure how you want to parse the dobclock(s)
  * @return          {Object}                        The object version of the docblock
- * 
+ *
  * @example         js
  * import parse from '@coffeekraken/sugar/node/docblock/parse';
  * parse(myString);
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.docblock.parse', null);
 api.node.docblock.parse = (...args) => {
   return require('./src/node/docblock/parse.js').call(null, ...args);
 };
-        
 
 /**
  * @name                            getArgsNames
@@ -3594,151 +3459,142 @@ __ensureExists(api, 'node.dev.getArgsNames', null);
 api.node.dev.getArgsNames = (...args) => {
   return require('./src/node/dev/getArgsNames.js').call(null, ...args);
 };
-        
 
 /**
  * @name                    dataTypesArray
  * @namespace               sugar.node.dev
  * @type                    Array
- * 
+ *
  * This is just a list of data types available in the
  * current language (node/js)
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.dev.dataTypesArray', null);
 Object.defineProperty(api.node.dev, 'dataTypesArray', {
-  get: function() {
+  get: function () {
     return require('./src/node/dev/dataTypesArray.js');
   }
 });
-          
 
 /**
  * @name            sha512
  * @namespace       sugar.node.crypt
  * @type            Object
- * 
+ *
  * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the sha512 algorithm
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.crypt.sha512', null);
 Object.defineProperty(api.node.crypt, 'sha512', {
-  get: function() {
+  get: function () {
     return require('./src/node/crypt/sha512.js');
   }
 });
-          
 
 /**
  * @name            sha256
  * @namespace       sugar.node.crypt
  * @type            Object
- * 
+ *
  * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the sha256 algorithm
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.crypt.sha256', null);
 Object.defineProperty(api.node.crypt, 'sha256', {
-  get: function() {
+  get: function () {
     return require('./src/node/crypt/sha256.js');
   }
 });
-          
 
 /**
  * @name            object
  * @namespace       sugar.node.crypt
  * @type            Object
- * 
+ *
  * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the object algorithm
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.crypt.object', null);
 Object.defineProperty(api.node.crypt, 'object', {
-  get: function() {
+  get: function () {
     return require('./src/node/crypt/object.js');
   }
 });
-          
 
 /**
  * @name            md5
  * @namespace       sugar.node.crypt
  * @type            Object
- * 
+ *
  * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the md5 algorithm
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.crypt.md5', null);
 Object.defineProperty(api.node.crypt, 'md5', {
-  get: function() {
+  get: function () {
     return require('./src/node/crypt/md5.js');
   }
 });
-          
 
 /**
  * @name            base64
  * @namespace       sugar.node.crypt
  * @type            Object
- * 
+ *
  * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the base64 algorithm
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.crypt.base64', null);
 Object.defineProperty(api.node.crypt, 'base64', {
-  get: function() {
+  get: function () {
     return require('./src/node/crypt/base64.js');
   }
 });
-          
 
 /**
  * @name            aes
  * @namespace       sugar.node.crypt
  * @type            Object
- * 
+ *
  * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the aes algorithm
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.crypt.aes', null);
 Object.defineProperty(api.node.crypt, 'aes', {
-  get: function() {
+  get: function () {
     return require('./src/node/crypt/aes.js');
   }
 });
-          
 
 /**
  * @name                    env
  * @namespace               sugar.node.core
  * @type                    Function
- * 
+ *
  * This function allows you to access environment variables through the same method in node and javascript
- * 
+ *
  * @param           {String}          dotPath         The dot path (something.else) to tell which variable you want
  * @param           {Mixed}           [value=null]    The value you want to assign. If null, you will just get the wanted variable back
  * @return          {Mixed}                           The variable value
- * 
+ *
  * @example         js
  * import env from '@coffeekraken/sugar/node/dev/env';
  * console.log(env('node_env')); // => production
  * env('something.cool', { hello: 'world' });
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.core.env', null);
 api.node.core.env = (...args) => {
   return require('./src/node/core/env.js').call(null, ...args);
 };
-        
 
 /**
  * @name                  SConfigFsAdapter
@@ -3760,19 +3616,18 @@ api.node.core.env = (...args) => {
  */
 __ensureExists(api, 'node.config.adapters.SConfigFsAdapter', null);
 Object.defineProperty(api.node.config.adapters, 'SConfigFsAdapter', {
-  get: function() {
+  get: function () {
     return require('./src/node/config/adapters/SConfigFsAdapter.js');
   }
 });
-          
 
 /**
  * @name                                SConfigAdapter
  * @namespace                           sugar.node.config.adapters
  * @type                                Class
- * 
+ *
  * Base class for SCache adapters
- * 
+ *
  * @example             js
  * class SConfigCoolAdapter extends SConfigAdapter {
  *    constructor(settings = {}) {
@@ -3788,16 +3643,15 @@ Object.defineProperty(api.node.config.adapters, 'SConfigFsAdapter', {
  *      return true;
  *    }
  * }
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.config.adapters.SConfigAdapter', null);
 Object.defineProperty(api.node.config.adapters, 'SConfigAdapter', {
-  get: function() {
+  get: function () {
     return require('./src/node/config/adapters/SConfigAdapter.js');
   }
 });
-          
 
 /**
  * @name                                            config
@@ -3823,86 +3677,82 @@ Object.defineProperty(api.node.config.adapters, 'SConfigAdapter', {
  */
 __ensureExists(api, 'node.config.config', null);
 Object.defineProperty(api.node.config, 'config', {
-  get: function() {
+  get: function () {
     return require('./src/node/config/SConfig.js');
   }
 });
-          
 
 /**
  * @name            rgba2hsv
  * @namespace             sugar.node.color
  * @type            Function
- * 
+ *
  * RGBA to HSV
- * 
+ *
  * @param       	{Number|Object}        	r 	          	The red value between 0-255 or an object representing r, g, b, a
  * @param       	{Number}        	g 	          	The green value between 0-255
  * @param       	{Number}        	b 	          	The blue value between 0-255
  * @param       	{Number}        	a 	          	The alpha value between 0-100|0-1
  * @return      	{object} 		                    	The hsv object representation
- * 
+ *
  * @example           js
  * import rgba2hsv from '@coffeekraken/sugar/node/color/rgba2hsv';
  * rgba2hsv(10,20,50,10);
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.color.rgba2hsv', null);
 api.node.color.rgba2hsv = (...args) => {
   return require('./src/node/color/rgba2hsv.js').call(null, ...args);
 };
-        
 
 /**
  * @name                  rgba2hsl
  * @namespace             sugar.node.color
  * @type                  Function
- * 
+ *
  * RGBA to HSL
- * 
+ *
  * @param       	{Number|Object}        	r 	        	The red value between 0-255 or an object representing r, b, g, a
  * @param       	{Number}        	g 	        	The green value between 0-255
  * @param       	{Number}        	b 	        	The blue value between 0-255
  * @param       	{Number}        	a 	        	The alpha value between 0-100|0-1
  * @return 	      {object} 		                    	The hsl object representation
- * 
+ *
  * @example         js
  * import rgba2hsl from '@coffeekraken/sugar/node/color/rgba2hsl';
  * rgba2hsl(10,20,50,10);
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.color.rgba2hsl', null);
 api.node.color.rgba2hsl = (...args) => {
   return require('./src/node/color/rgba2hsl.js').call(null, ...args);
 };
-        
 
 /**
  * @name                rgba2hex
  * @namespace             sugar.node.color
  * @type                Function
- * 
+ *
  * RGBA to HEX
- * 
+ *
  * @param       	{Number|Object}        	r	          	The red value between 0-255 or an object representing r, g, b, a
  * @param       	{Number}        	g	          	The green value between 0-255
  * @param       	{Number}        	b	          	The blue value between 0-255
  * @param       	{Number}        	a	          	The alpha value between 0-100|0-1
  * @return      	{string}		                    The hex string representation like #ff004f
- * 
+ *
  * @example         js
  * import rgba2hex from '@coffeekraken/sugar/node/color/rgba2hex';
  * rgba2hex(10,20,30,10);
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.color.rgba2hex', null);
 api.node.color.rgba2hex = (...args) => {
   return require('./src/node/color/rgba2hex.js').call(null, ...args);
 };
-        
 
 /**
  * @name                        parseRgba
@@ -3924,147 +3774,140 @@ __ensureExists(api, 'node.color.parseRgba', null);
 api.node.color.parseRgba = (...args) => {
   return require('./src/node/color/parseRgba.js').call(null, ...args);
 };
-        
 
 /**
  * @name                parseHsv
  * @namespace             sugar.node.color
  * @type                Function
- * 
+ *
  * Parse HSV
- * 
+ *
  * @param         	{string}	          	hsvString		        	The hsv string (hsv(h,s,v)) to parse
  * @return        	{object}					                        		The hsv object representation
- * 
- * @example       js 
+ *
+ * @example       js
  * import parseHsv from '@coffeekraken/sugar/node/color/parseHsv';
  * parseHsv('hsv(10,10,10)');
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.color.parseHsv', null);
 api.node.color.parseHsv = (...args) => {
   return require('./src/node/color/parseHsv.js').call(null, ...args);
 };
-        
 
 /**
  * @name                    parseHsl
  * @namespace             sugar.node.color
  * @type                    Function
- * 
+ *
  * Parse HSL
- * 
+ *
  * @param 	      {string}	        hslString			      The hsl string (hsl(h,s,l)) to parse
  * @return 	        {object} 					                  	The hsl object representation
- * 
+ *
  * @example         js
  * import parseHsl from '@coffeekraken/sugar/color/parseHsl';
  * parseHsl('hsl(20,20,20)');
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.color.parseHsl', null);
 api.node.color.parseHsl = (...args) => {
   return require('./src/node/color/parseHsl.js').call(null, ...args);
 };
-        
 
 /**
  * @name            parse
  * @namespace             sugar.node.color
  * @type            Function
  * @private
- * 
+ *
  * Parse a string and return you the wanted object format like "rgba", "hsl" or "hsv".
- * 
+ *
  * @param       {Object}      color       The color to parse like (#ff0000 | rgba(...) | hsl(...) | hsv(...))
  * @param       {String}      [format='rgba']       The object format wanted. Can be "rgba", "hsl" or "hsv"
  * @return      {Object}                  The rgba representation of the passed color
- * 
+ *
  * @example         js
  * import parse from '@coffeekraken/sugar/node/color/parse';
  * parse('rgba(10,20,30,100)'); // => { r: 10, b: 20, b: 30, a: 100 }
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.color.parse', null);
 api.node.color.parse = (...args) => {
   return require('./src/node/color/parse.js').call(null, ...args);
 };
-        
 
 /**
  * @name              hsv2rgba
  * @namespace             sugar.node.color
  * @type              Function
- * 
+ *
  * HSV to RGBA
- * 
+ *
  * @param	        {Number|Object}      	h       		The hue value between 0-360 or an object representing h, s, v, (a)
  * @param	        {Number}      	s       		The saturation value between 0-100|0-1
  * @param	        {Number}      	v       		The value value between 0-100|0-1
  * @param	        {Number}      	a       		The alpha value between 0-100|0-1
  * @return      	{object} 		              	The rgba object representation
- * 
+ *
  * @example         js
  * import hsv2rgba from '@coffeekraken/sugar/node/color/hsv2rgba';
  * hsv2rgba(10,20,30);
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.color.hsv2rgba', null);
 api.node.color.hsv2rgba = (...args) => {
   return require('./src/node/color/hsv2rgba.js').call(null, ...args);
 };
-        
 
 /**
  * @name              hsl2rgba
  * @namespace             sugar.node.color
  * @type              Function
- * 
+ *
  * HSL to RGBA
- * 
+ *
  * @param	        {Number|Object}        	h		        The hue value between 0-360 or an object representing h, s, l, (a)
  * @param	        {Number}        	s 	        	The saturation value between 0-100|0-1
  * @param	        {Number}        	l 	        	The luminence value between 0-100|0-1
  * @param	        {Number}        	a 	        	The alpha value between 0-100|0-1
  * @return 	      {object} 		                  	The rgba object representation
- * 
+ *
  * @example         js
  * import hsl2rgba from '@coffeekraken/sugar/node/color/hsl2rgba';
  * hsl2rgba(10,20,30);
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.color.hsl2rgba', null);
 api.node.color.hsl2rgba = (...args) => {
   return require('./src/node/color/hsl2rgba.js').call(null, ...args);
 };
-        
 
 /**
  * @name                  hex2rgba
  * @namespace             sugar.node.color
  * @type                  Function
- * 
+ *
  * Hex to RGBA
- * 
+ *
  * @param	              {string}       	hex         		The hex string to convert
  * @return            	{object} 			                  	The rgba object representation
- * 
+ *
  * @example         js
  * import hex2rgba from '@coffeekraken/sugar/node/color/hex2rgba';
  * hex2rgba('#ff00ff');
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.color.hex2rgba', null);
 api.node.color.hex2rgba = (...args) => {
   return require('./src/node/color/hex2rgba.js').call(null, ...args);
 };
-        
 
 /**
  * @name                  convert
@@ -4088,29 +3931,27 @@ __ensureExists(api, 'node.color.convert', null);
 api.node.color.convert = (...args) => {
   return require('./src/node/color/convert.js').call(null, ...args);
 };
-        
 
 /**
  * @name                color
  * @namespace           sugar.node.color
  * @type                Function
- * 
+ *
  * Simple wrapper to create an SColor instance quickly
- * 
+ *
  * @param         {Mixed}             color           A color in any format like rgba Object, hsl Object, hsv Object, hex String, rgba String, hsl String or hsv String
  * @return        {SColor}                            An SColor instance representing your color
- * 
+ *
  * @example         js
  * import color from '@coffeekraken/sugar/node/color/color';
  * const myColor = color('#ff00ff');
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.color.color', null);
 api.node.color.color = (...args) => {
   return require('./src/node/color/color.js').call(null, ...args);
 };
-        
 
 /**
  * @name 		SColor
@@ -4152,11 +3993,10 @@ api.node.color.color = (...args) => {
  */
 __ensureExists(api, 'node.color.SColor', null);
 Object.defineProperty(api.node.color, 'SColor', {
-  get: function() {
+  get: function () {
     return require('./src/node/color/SColor.js');
   }
 });
-          
 
 /**
  * @name                        parseArgs
@@ -4204,7 +4044,6 @@ __ensureExists(api, 'node.cli.parseArgs', null);
 api.node.cli.parseArgs = (...args) => {
   return require('./src/node/cli/parseArgs.js').call(null, ...args);
 };
-        
 
 /**
  * @name                          toPlainObject
@@ -4231,19 +4070,18 @@ __ensureExists(api, 'node.class.toPlainObject', null);
 api.node.class.toPlainObject = (...args) => {
   return require('./src/node/class/toPlainObject.js').call(null, ...args);
 };
-        
 
 /**
  * @name                                    methodExists
  * @namespace                               sugar.node.class
  * @type                                    Function
- * 
+ *
  * Check if one or more methods exists on a class instance
- * 
+ *
  * @param           {Object}              instance                The instance to check the methods on
  * @param           {String}              ...methods              The methods to check
  * @return          {Boolean|Array}                               Return true if all is ok, and an array of missing methods if not
- * 
+ *
  * @example           js
  * class Coco {
  *    hello() {}
@@ -4251,22 +4089,21 @@ api.node.class.toPlainObject = (...args) => {
  * import methodExists from '@coffeekraken/sugar/node/class/methodExists';
  * const myInstance = new Coco();
  * methodExists(myInstance, 'hello', 'world'); // => ['world'];
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.class.methodExists', null);
 api.node.class.methodExists = (...args) => {
   return require('./src/node/class/methodExists.js').call(null, ...args);
 };
-        
 
 /**
  * @name                                SCacheFsAdapter
  * @namespace                           sugar.node.fs.cacheAdapters
  * @type                                Class
- * 
+ *
  * A filesystem SCache adapter that allows you to store your cache items on the user system
- * 
+ *
  * @example             js
  * const cache = new SCache({
  *    ttl: 100,
@@ -4274,43 +4111,41 @@ api.node.class.methodExists = (...args) => {
  *      path: '/my/cool/folder
  *    })
  * });
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.fs.cacheAdapters.SCacheFsAdapter', null);
 Object.defineProperty(api.node.fs.cacheAdapters, 'SCacheFsAdapter', {
-  get: function() {
+  get: function () {
     return require('./src/node/cache/adapters/SCacheFsAdapter.js');
   }
 });
-          
 
 /**
  * @name                                SCache
  * @namespace                           sugar.node.cache
  * @type                                Class
- * 
+ *
  * Gives you the ability to manage cache through some defaults available adapters or using yours.
  * This cache class take care of these features:
  * - Standard and custom TTL by cache item
  * - Delete cache items on expires or not
- * 
+ *
  * @example             js
  * import SCache from '@coffeekraken/sugar/node/cache/SCache';
  * const cache = new SCache({
  *  ttl: '10s' // 10 seconds
  * });
  * cache.set('myCoolCacheItem', someData);
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 __ensureExists(api, 'node.cache.SCache', null);
 Object.defineProperty(api.node.cache, 'SCache', {
-  get: function() {
+  get: function () {
     return require('./src/node/cache/SCache.js');
   }
 });
-          
 
 /**
  * @name                                splitEvery
@@ -4334,7 +4169,6 @@ __ensureExists(api, 'node.array.splitEvery', null);
 api.node.array.splitEvery = (...args) => {
   return require('./src/node/array/splitEvery.js').call(null, ...args);
 };
-        
 
 /**
  * @name        keysLast
@@ -4357,7 +4191,6 @@ __ensureExists(api, 'node.array.keysLast', null);
 api.node.array.keysLast = (...args) => {
   return require('./src/node/array/keysLast.js').call(null, ...args);
 };
-        
 
 /**
  * @name        keysFirst
@@ -4381,7 +4214,6 @@ __ensureExists(api, 'node.array.keysFirst', null);
 api.node.array.keysFirst = (...args) => {
   return require('./src/node/array/keysFirst.js').call(null, ...args);
 };
-        
 
 /**
  * @name                              asyncForEach
@@ -4411,5 +4243,5 @@ __ensureExists(api, 'node.array.asyncForEach', null);
 api.node.array.asyncForEach = (...args) => {
   return require('./src/node/array/asyncForEach.js').call(null, ...args);
 };
-        
+
 module.exports = api;

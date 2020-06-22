@@ -41,6 +41,19 @@ module.exports = {
   rootDir: `${__packageRoot(process.cwd())}`,
 
   /**
+   * @name              staticDir
+   * @namespace         sugar.config.express
+   * @type              String
+   * @default           ${__packageRoot(process.cwd())}/dist
+   *
+   * Specify a directory that will be served as static files
+   *
+   * @since             2.0.0
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  staticDir: `${__packageRoot(process.cwd())}/dist`,
+
+  /**
    * @name            viewsDir
    * @namespace       sugar.config.express
    * @type            String

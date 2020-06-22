@@ -3,6 +3,7 @@ const __deepMerge = require('../../object/deepMerge');
 const __express = require('express');
 const __uncamelize = require('../../string/uncamelize');
 const __request = require('../../http/request');
+const __packageRoot = require('../../path/packageRoot');
 
 /**
  * @name                express
@@ -24,7 +25,10 @@ const __request = require('../../http/request');
 module.exports = (args = {}) => {
   const settings = __deepMerge(__sugarConfig('express'), args);
   const server = __express();
-  server.use(__express.static(settings.rootDir));
+  server.use(
+    settings.staticDir.replace(__packageRoot(process.cwd()), ''),
+    __express.static(settings.staticDir)
+  );
 
   Object.keys(settings).forEach((name) => {
     server.set(__uncamelize(name, ' ').toLowerCase(), settings[name]);

@@ -1,6 +1,17 @@
 {
+  "npmClient": "npm",
   "packages": [
     "*/**"
   ],
+  "command": {
+    "bootstrap": {
+      "ignore": [
+        ".old/**"
+      ],
+      "npmClientArgs": [
+        "--no-package-lock"
+      ]
+    }
+  },
   "version": "independent"
 }

@@ -100,7 +100,7 @@ let SActionStream = /*#__PURE__*/function (_SPromise) {
    * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   function SActionStream(actions, settings = {}) {
-    var _this2;
+    var _thisSuper, _this2;
 
     _classCallCheck(this, SActionStream);
 
@@ -117,7 +117,7 @@ let SActionStream = /*#__PURE__*/function (_SPromise) {
 
     _defineProperty(_assertThisInitialized(_this2), "_actionsObject", {});
 
-    _get(_getPrototypeOf(SActionStream.prototype), "start", _assertThisInitialized(_this2)).call(_assertThisInitialized(_this2)); // check the actions
+    _get((_thisSuper = _assertThisInitialized(_this2), _getPrototypeOf(SActionStream.prototype)), "start", _thisSuper).call(_thisSuper); // check the actions
 
 
     Object.keys(actions).forEach(actionName => {

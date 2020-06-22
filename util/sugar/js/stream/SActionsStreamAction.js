@@ -76,7 +76,7 @@ let SActionStreamAction = /*#__PURE__*/function (_SPromise) {
    * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   function SActionStreamAction(settings = {}) {
-    var _this;
+    var _thisSuper, _this;
 
     _classCallCheck(this, SActionStreamAction);
 
@@ -96,7 +96,7 @@ let SActionStreamAction = /*#__PURE__*/function (_SPromise) {
       throw new Error(validatekDefinitionObjResult);
     }
 
-    _get(_getPrototypeOf(SActionStreamAction.prototype), "start", _assertThisInitialized(_this)).call(_assertThisInitialized(_this));
+    _get((_thisSuper = _assertThisInitialized(_this), _getPrototypeOf(SActionStreamAction.prototype)), "start", _thisSuper).call(_thisSuper);
 
     return _this;
   }

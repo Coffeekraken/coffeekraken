@@ -35,37 +35,27 @@ module.exports = {
     'build.config': {
       class: __SBuildConfigCommand,
       argsObj: {},
-      settings: {
-        watch: __sugarConfig('build.config.watch')
-      }
+      settings: {}
     },
     'build.scss': {
       class: __SBuildScssCommand,
       argsObj: {},
-      settings: {
-        watch: __sugarConfig('build.scss.watch')
-      }
+      settings: {}
     },
     'build.js': {
       class: __SBuildJsCommand,
       argsObj: {},
-      settings: {
-        watch: __sugarConfig('build.js.watch')
-      }
+      settings: {}
     },
     'build.views': {
       class: __SBuildViewsCommand,
       argsObj: {},
-      settings: {
-        watch: __sugarConfig('build.views.watch')
-      }
+      settings: {}
     },
     'build.doc': {
       class: __SBuildDocCommand,
       argsObj: {},
-      settings: {
-        watch: __sugarConfig('build.doc.watch')
-      }
+      settings: {}
     }
   },
   pages: {

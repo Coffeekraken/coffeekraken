@@ -146,6 +146,22 @@ let SActionStreamAction = /*#__PURE__*/function (_SPromise) {
   }, {
     key: "run",
     value: function run(streamObj, settings = {}) {}
+    /**
+     * @name          log
+     * @type          Function
+     *
+     * This method allows you to log a message that will be catched by the parent manager class
+     *
+     * @param       {String}        message           The message you want to log
+     *
+     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "log",
+    value: function log(message) {
+      this.trigger('stdout.data', message);
+    }
   }]);
 
   return SActionStreamAction;

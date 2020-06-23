@@ -52,12 +52,10 @@ module.exports = class SBuildScssCommand extends __SCommand {
           key: 's',
           concurrent: false,
           namespace: 'build.scss',
-          watch: __sugarConfig('build.scss.watch')
-            ? {
-                patterns: __sugarConfig('build.scss.watch'),
-                mapToProperty: 'input'
-              }
-            : false
+          watch: {
+            patterns: __sugarConfig('build.scss.watch'),
+            mapToProperty: 'input'
+          }
         },
         commandSettings
       )

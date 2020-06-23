@@ -28,17 +28,17 @@ const __SConfigAdapter = require('./SConfigAdapter');
 
 module.exports = class SConfigFolderAdapter extends __SConfigAdapter {
   constructor(settings = {}) {
-    settings = __deepMerge(
-      {
-        name: null,
-        foldername: '.[name]',
-        filename: '[name].config.js',
-        defaultConfigPath: null,
-        appConfigPath: `${process.cwd()}/[foldername]`,
-        userConfigPath: `${__tmpDir()}/[foldername]`
-      },
-      settings
-    );
+    // settings = __deepMerge(
+    //   {
+    //     name: null,
+    //     foldername: '.[name]',
+    //     filename: '[name].config.js',
+    //     defaultConfigPath: null,
+    //     appConfigPath: `${process.cwd()}/[foldername]`,
+    //     userConfigPath: `${__tmpDir()}/[foldername]`
+    //   },
+    //   settings
+    // );
     super(settings);
 
     this.settings.foldername = this.settings.foldername.replace(
@@ -113,7 +113,13 @@ module.exports = class SConfigFolderAdapter extends __SConfigAdapter {
     }
 
     // mix the configs and save them in the instance
-    return __deepMerge(this._defaultConfig, this._appConfig, this._userConfig);
+    const n = __deepMerge(
+      this._defaultConfig,
+      this._appConfig,
+      this._userConfig
+    );
+
+    return n;
   }
 
   save(newConfig = {}) {

@@ -143,9 +143,13 @@ module.exports = {
      * @since             2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    input: isInSugarPackage()
-      ? `${__packageRoot()}/public/src/js/*.js`
-      : `${__packageRoot()}/src/js/*.js`,
+    get input() {
+      return isInSugarPackage()
+        ? `${__packageRoot()}/public/src/js/${
+            this.pack === true ? '*' : '**/*'
+          }.js`
+        : `${__packageRoot()}/src/js/${this.pack === true ? '*' : '**/*'}.js`;
+    },
 
     /**
      * @name              outputDir
@@ -188,6 +192,20 @@ module.exports = {
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     map: true,
+
+    /**
+     * @name              pack
+     * @namespace         sugar.config.build.js
+     * @type              Boolean
+     * @default           true
+     *
+     * Specify if you want to pack the files together using webpack or if you just want to
+     * compile the js files using babel
+     *
+     * @since             2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    pack: true,
 
     /**
      * @name              prod

@@ -35,7 +35,7 @@ module.exports = class SUglifyJsStreamAction extends __SActionsStreamAction {
       required: true
     },
     sourcemapData: {
-      type: 'String',
+      type: 'String|Object',
       required: false
     }
   };

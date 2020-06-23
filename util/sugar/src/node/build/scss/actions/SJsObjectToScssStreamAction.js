@@ -1,9 +1,6 @@
 const __deepMerge = require('../../../object/deepMerge');
 const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
-const __writeFile = require('../../../fs/writeFile');
-const __tmpDir = require('../../../fs/tmpDir');
-const __child_process = require('child_process');
-const __fs = require('fs');
+const __jsonSass = require('json-sass-vars');
 
 /**
  * @name                SJsObjectToScssStreamAction
@@ -63,44 +60,33 @@ module.exports = class SJsObjectToScssStreamAction extends __SActionsStreamActio
 
     settings = __deepMerge(
       {
-        quoteKeys: ['src', 'import']
+        quoteKeys: ['src', 'import', 'font-family']
       },
       settings
     );
 
     return new Promise(async (resolve, reject) => {
-      await __writeFile(
-        __tmpDir() + '/sugar.build.scss.config.json',
-        JSON.stringify(streamObj.jsObjectToScss, null, 4)
-      );
+      let scssConfigString = __jsonSass.convertJs(streamObj.jsObjectToScss);
 
-      const command = `npx --no-install -c "json-to-scss ${__tmpDir()}/sugar.build.scss.config.json ${__tmpDir()}/sugar.build.scss.config.scss --mo"`;
-      __child_process.execSync(command);
-      let scssConfigString = __fs
-        .readFileSync(`${__tmpDir()}/sugar.build.scss.config.scss`, 'ascii')
-        .replace('$sugar:', '$sugarUserSettings:')
-        .trim();
+      scssConfigString = `$sugarUserSettings: ${scssConfigString};`;
 
-      settings.quoteKeys.forEach((key) => {
-        const reg = new RegExp(
-          `\\s?${key}:\\s?([a-zA-Z0-9:\\/.-\?&@:]+),?\\s?`,
-          'gm'
-        );
-        const matches = scssConfigString.match(reg);
-        if (matches) {
-          matches.forEach((match) => {
-            match = match
-              .trim()
-              .replace(`${key}: `, '')
-              .replace(`${key}:`, '')
-              .replace(',', '');
-            scssConfigString = scssConfigString.replace(match, `"${match}"`);
-          });
+      scssConfigString.split('\n').forEach((line) => {
+        line = line.trim();
+        const isComma = line.substr(-1) === ',';
+        if (isComma) {
+          line = line.slice(0, -1);
         }
-      });
+        const prop = line.split(':')[0];
+        const value = line.split(':').slice(1).join(':').trim();
+        if (prop === '),' || prop === ')' || value === '(') return;
 
-      __fs.unlinkSync(`${__tmpDir()}/sugar.build.scss.config.json`);
-      __fs.unlinkSync(`${__tmpDir()}/sugar.build.scss.config.scss`);
+        if (settings.quoteKeys.indexOf(prop) === -1) return;
+
+        scssConfigString = scssConfigString.replace(
+          line,
+          `${prop}: "${value}"`
+        );
+      });
 
       // set or append in the "data" property
       if (streamObj.data) streamObj.data = scssConfigString + streamObj.data;

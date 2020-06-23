@@ -107,4 +107,18 @@ export default class SActionStreamAction extends __SPromise {
    * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(streamObj, settings = {}) {}
+
+  /**
+   * @name          log
+   * @type          Function
+   *
+   * This method allows you to log a message that will be catched by the parent manager class
+   *
+   * @param       {String}        message           The message you want to log
+   *
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  log(message) {
+    this.trigger('stdout.data', message);
+  }
 }

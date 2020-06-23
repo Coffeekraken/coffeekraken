@@ -1,6 +1,7 @@
 const __SActionsStreamAction = require('../SActionsStreamAction');
 const __writeFile = require('../../fs/writeFile');
 const __toString = require('../../string/toString');
+const __packageRoot = require('../../path/packageRoot');
 
 /**
  * @name            SFsOutputStreamAction
@@ -63,10 +64,14 @@ module.exports = class SFsOutputStreamAction extends __SActionsStreamAction {
       for (let i = 0; i < outputStackKeys.length; i++) {
         const key = outputStackKeys[i];
         const outputPath = streamObj.outputStack[key];
+        const readableOutputPath = outputPath.replace(
+          __packageRoot(process.cwd()),
+          ''
+        );
         if (!streamObj[key]) continue;
-        this.trigger('stdout.data', {
-          value: `Saving the streamObj property "<yellow>${key}</yellow>" under "<cyan>${outputPath}</cyan>"`
-        });
+        this.log(
+          `Saving the streamObj property "<yellow>${key}</yellow>" under "<cyan>${readableOutputPath}</cyan>"`
+        );
         await __writeFile(outputPath, __toString(streamObj[key]));
       }
 

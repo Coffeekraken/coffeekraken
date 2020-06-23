@@ -6,6 +6,8 @@ const __fs = require('fs');
 const __path = require('path');
 const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
 const __SBuildJsCli = require('../SBuildJsCli');
+const __sugarConfig = require('../../../config/sugar');
+const __babel = require('@babel/core');
 
 /**
  * @name                SWebpackStreamAction
@@ -61,7 +63,55 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
     this.checkStreamObject(streamObj);
 
     // return the promise for this action
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
+      // pass over this action if we don't want to pack the files
+      if (
+        streamObj.pack === false ||
+        (Array.isArray(streamObj.pack) &&
+          streamObj.pack.indexOf(streamObj.input) === -1)
+      ) {
+        this.log(
+          `Skipping the <yellow>webpack</yellow> packaging action for the file <cyan>${streamObj.input.replace(
+            __packageRoot(),
+            ''
+          )}</cyan> and processing file using <cyan>babel</cyan>`
+        );
+
+        const result = await __babel
+          .transformAsync(streamObj.data, {
+            cwd: __packageRoot(process.cwd()),
+            filename: streamObj.filename,
+            cwd: __packageRoot(__dirname),
+            presets: [
+              [
+                '@babel/preset-env',
+                {
+                  forceAllTransforms: true
+                }
+              ]
+            ],
+            plugins: ['@babel/plugin-proposal-class-properties'],
+            sourceMaps: true
+          })
+          .catch((error) => {
+            return reject(err);
+          });
+
+        streamObj.data = result.code;
+        if (streamObj.map && result.map) {
+          streamObj.sourcemapData = result.map;
+        }
+
+        return resolve(streamObj);
+      }
+
+      this.log(
+        `Processing the <yellow>webpack</yellow> action for the file <cyan>${streamObj.input.replace(
+          __packageRoot(),
+          ''
+        )}</cyan>`
+      );
+
       __webpack(
         __deepMerge(
           {
@@ -96,7 +146,7 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
                   use: {
                     loader: 'babel-loader',
                     options: {
-                      cwd: `${__packageRoot(__dirname)}/node_modules`,
+                      cwd: __packageRoot(__dirname),
                       presets: [
                         [
                           '@babel/preset-env',
@@ -113,16 +163,22 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
             },
             resolveLoader: {
               modules: [
-                `${__packageRoot(process.cwd())}/node_modules`,
-                `${__packageRoot(__dirname)}/node_modules`
+                `node_modules`,
+                __path.relative(
+                  __packageRoot(process.cwd()),
+                  `${__packageRoot(__dirname)}/node_modules`
+                )
               ]
             },
             resolve: {
               symlinks: true,
               modules: [
-                `${__packageRoot(process.cwd())}/node_modules`,
-                `${__packageRoot(__dirname)}/node_modules`,
-                `${__packageRoot(process.cwd())}/src/js`
+                'node_modules',
+                'src/js',
+                __path.relative(
+                  __packageRoot(process.cwd()),
+                  `${__packageRoot(__dirname)}/node_modules`
+                )
               ]
             },
             target: 'web',

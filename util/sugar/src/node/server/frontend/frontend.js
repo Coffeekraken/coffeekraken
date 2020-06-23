@@ -58,17 +58,7 @@ module.exports = async (args = {}) => {
       throw new Error(lintRes);
     }
     // rendering the template
-    const result = __ejs.render(
-      string,
-      __deepMerge(
-        {
-          package: __packageJson,
-          menuHtml: sNavInstance.toHtml(),
-          settings
-        },
-        data
-      )
-    );
+    const result = __ejs.render(string, data);
     return result;
   }
 

@@ -1,8 +1,7 @@
 const __SActionsStream = require('../../stream/SActionsStream');
 const __SWebpackStreamAction = require('./actions/SWebpackStreamAction');
 const __SUglifyJsStreamAction = require('./actions/SUglifyJsStreamAction');
-const __glob = require('glob');
-const __SPromise = require('../../promise/SPromise');
+const __SFsReadFileStreamAction = require('../../stream/actions/SFsReadFileStreamAction');
 const __deepMerge = require('../../object/deepMerge');
 const __getFilename = require('../../fs/filename');
 const __SFsOutputStreamAction = require('../../stream/actions/SFsOutputStreamAction');
@@ -47,8 +46,9 @@ module.exports = class SBuildJsActionsStream extends __SActionsStream {
     super(
       {
         globResolver: __SGlobResolverStreamAction,
+        readFile: __SFsReadFileStreamAction,
         webpack: __SWebpackStreamAction,
-        // uglify: __SUglifyJsStreamAction,
+        uglify: __SUglifyJsStreamAction,
         fsOutput: __SFsOutputStreamAction
       },
       __deepMerge(

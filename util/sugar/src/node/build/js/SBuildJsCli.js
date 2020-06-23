@@ -52,14 +52,21 @@ module.exports = class SBuildJsCli extends __SCli {
       type: 'Boolean',
       alias: 'm',
       description: 'Generate a sourcemap file',
-      default: __sugarConfig('build.js.map') || true,
+      default: __sugarConfig('build.js.map'),
+      level: 1
+    },
+    pack: {
+      type: 'Boolean|Array',
+      alias: 'p',
+      description:
+        'Specify some files to pack using webpack, true to pack all the files or false to simply process them using babel',
+      default: __sugarConfig('build.js.pack'),
       level: 1
     },
     prod: {
       type: 'Boolean',
-      alias: 'p',
       description: 'Generate the production ready files',
-      default: __sugarConfig('build.js.prod') || false,
+      default: __sugarConfig('build.js.prod'),
       level: 1
     }
   };

@@ -48,12 +48,10 @@ module.exports = class SBuildJsCommand extends __SCommand {
           key: 'j',
           concurrent: false,
           namespace: 'build.js',
-          watch: __sugarConfig('build.js.watch')
-            ? {
-                patterns: __sugarConfig('build.js.watch'),
-                mapToProperty: 'input'
-              }
-            : false
+          watch: {
+            patterns: __sugarConfig('build.js.watch'),
+            mapToProperty: 'input'
+          }
         },
         commandSettings
       )

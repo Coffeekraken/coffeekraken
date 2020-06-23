@@ -3,11 +3,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports.default = deepMerge;
 
-var _mergeAnything = require("merge-anything");
+var _copyTo = _interopRequireDefault(require("copy-to"));
 
-var _toPlainObject = _interopRequireDefault(require("../class/toPlainObject"));
+var _plainObject = _interopRequireDefault(require("../is/plainObject"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -16,7 +16,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @namespace           sugar.js.object
  * @type                Function
  *
- * Deep merge one object with another and return the merged object result
+ * Deep merge one object with another and return the merged object result. This merging implementation support:
+ * - Merging object with getters/setters
+ * - n numbers of objects as arguments
  *
  * @param           {Object}            objects...        Pass all the objects you want to merge
  * @return          {Object}                              The merged object result
@@ -28,31 +30,31 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function deepMerge() {
-  // merge all the passed objects
-  function deepMergeErase(originVal, newVal, key) {
-    if (newVal !== null && newVal !== undefined && newVal._deepMergeEraseKeys) {
-      // console.log('KEY', key, originVal, newVal);
-      Object.keys(newVal).forEach(k => {
-        if (newVal._deepMergeEraseKeys.indexOf(k) === -1 && k !== '_deepMergeEraseKeys') {
-          delete newVal[k];
-        }
-      });
-      delete newVal._deepMergeEraseKeys;
-      return newVal;
-    } // always return newVal as fallback!!
+function deepMerge(...args) {
+  function merge(firstObj, secondObj) {
+    const newObj = {};
+    (0, _copyTo.default)(firstObj).override(newObj);
 
+    for (const key of Object.keys(secondObj)) {
+      if ((0, _plainObject.default)(firstObj[key]) && (0, _plainObject.default)(secondObj[key])) {
+        newObj[key] = merge(firstObj[key], secondObj[key]);
+        continue;
+      }
 
-    return newVal;
+      (0, _copyTo.default)(secondObj).pick(key).toCover(newObj);
+    }
+
+    return newObj;
   }
 
-  const mergeArgumentsArray = Array.prototype.slice.call(arguments).map(obj => {
-    return (0, _toPlainObject.default)(obj);
-  });
-  mergeArgumentsArray.unshift(deepMergeErase);
-  return _mergeAnything.mergeAndCompare.apply(null, mergeArgumentsArray);
+  let currentObj = {};
+
+  for (let i = 0; i < args.length; i++) {
+    const toMergeObj = args[i] || {};
+    currentObj = merge(currentObj, toMergeObj);
+  }
+
+  return currentObj;
 }
 
-var _default = deepMerge;
-exports.default = _default;
 module.exports = exports.default;

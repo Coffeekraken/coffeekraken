@@ -248,7 +248,6 @@ export default class SActionStream extends __SPromise {
         const _this = this;
         async function handleStreamObjArray(streamObjArray, actionObj) {
           if (actionOnce) {
-            console.log('ONCE');
             streamObjArray = [streamObjArray[0]];
           }
 

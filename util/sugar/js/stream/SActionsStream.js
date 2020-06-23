@@ -285,7 +285,6 @@ let SActionStream = /*#__PURE__*/function (_SPromise) {
 
           async function handleStreamObjArray(streamObjArray, actionObj) {
             if (actionOnce) {
-              console.log('ONCE');
               streamObjArray = [streamObjArray[0]];
             }
 

@@ -23,6 +23,7 @@ import __validateWithDefinitionObject from './validateWithDefinitionObject';
  */
 export default function completeArgsObject(argsObj, definitionObj) {
   argsObj = Object.assign({}, argsObj);
+
   const flattenArgsDefinition = {};
   __deepMap(definitionObj, (value, prop, fullPath) => {
     if (

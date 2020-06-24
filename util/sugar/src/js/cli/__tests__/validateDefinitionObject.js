@@ -15,23 +15,6 @@ module.exports = (__checkDefinitionObject) => {
       done();
     });
 
-    it('Should check an invalid definition object due to a bad type correctly', (done) => {
-      const res = __checkDefinitionObject({
-        arg1: {
-          type: 'SCommand',
-          alias: 'a',
-          description: 'Something cool',
-          default: 'Hello world'
-        }
-      });
-
-      expect(res).toBe(
-        `The \"type\" property of an argument definition object has to be one of these values \"string,number,object,array,boolean\". You've passed \"SCommand\" for your argument \"arg1\"...`
-      );
-
-      done();
-    });
-
     it('Should check an invalid definition object due to a bad alias correctly', (done) => {
       const res = __checkDefinitionObject({
         arg1: {

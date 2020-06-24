@@ -6,7 +6,7 @@ let __decryptedConfig, __decryptedMeta;
 
 /**
  * @name                                            SApp
- * @namespace                                       sugar.js.class
+ * @namespace           js.class
  * @type                                            Class
  *
  * This class represent an application route class. This mean that you can create an application class that extend this one
@@ -23,7 +23,6 @@ let __decryptedConfig, __decryptedMeta;
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default class SApp {
-
   /**
    * @name                __settings
    * @type                Object
@@ -69,7 +68,6 @@ export default class SApp {
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(settings = {}) {
-
     // store the settings
     this.__settings = {
       name: 'SApp',
@@ -78,12 +76,11 @@ export default class SApp {
 
     // expose this instance in the "window" scope
     window[this.__settings.name] = this;
-
   }
 
   /**
    * @name                            config
-   * @namespace                       sugar.js.class.SApp
+   * @namespace           js.class.SApp
    * @type                            Function
    *
    * Get a configuration value from the backend using an ajax call
@@ -106,7 +103,7 @@ export default class SApp {
 
   /**
    * @name                            meta
-   * @namespace                       sugar.js.class.SApp
+   * @namespace           js.class.SApp
    * @type                            Function
    *
    * Usefull function that give you back an application meta taken depending on your passed dotted object path
@@ -148,53 +145,64 @@ export default class SApp {
    */
   log(message, type = 'info', transports = null) {
     return new Promise((resolve, reject) => {
-
       const _this = this;
 
       // __ensureExist('window.Squid._log');
 
       Promise.all([
-        import(/* webpackChunkName: "log" */ /* webpackMode: "lazy" */ '../log/log'),
-        import(/* webpackChunkName: "isTransportRegistered" */ /* webpackMode: "lazy" */ '../log/isTransportRegistered'),
-        import(/* webpackChunkName: "getRegisteredTransports" */ /* webpackMode: "lazy" */ '../log/getRegisteredTransports'),
-        import(/* webpackChunkName: "registerTransport" */ /* webpackMode: "lazy" */ '../log/registerTransport')
+        import(
+          /* webpackChunkName: "log" */ /* webpackMode: "lazy" */ '../log/log'
+        ),
+        import(
+          /* webpackChunkName: "isTransportRegistered" */ /* webpackMode: "lazy" */ '../log/isTransportRegistered'
+        ),
+        import(
+          /* webpackChunkName: "getRegisteredTransports" */ /* webpackMode: "lazy" */ '../log/getRegisteredTransports'
+        ),
+        import(
+          /* webpackChunkName: "registerTransport" */ /* webpackMode: "lazy" */ '../log/registerTransport'
+        )
       ]).then((modules) => {
-
         const __log = modules[0],
           __isTransportRegistered = modules[1],
           __getRegisteredTransports = modules[2],
           __registerTransport = modules[3];
 
         // get the transports needed for this type
-        const configTransports = (this.config('log.frontend.transportsByType'))[type] ? (this.config('log.frontend.transportsByType'))[type].split(' ') : [];
+        const configTransports = this.config('log.frontend.transportsByType')[
+          type
+        ]
+          ? this.config('log.frontend.transportsByType')[type].split(' ')
+          : [];
         let transp = transports ? transports : configTransports;
 
         if (!this.__log.sugarTransports) {
-          this.__log.sugarTransports = require.context(`@coffeekraken/sugar/js/log/transports`, true, /\.js$/, 'lazy');
+          this.__log.sugarTransports = require.context(
+            `@coffeekraken/sugar/js/log/transports`,
+            true,
+            /\.js$/,
+            'lazy'
+          );
         }
 
         const transportsImportPromises = [];
-        transp.forEach(t => {
+        transp.forEach((t) => {
           if (this.__log.sugarTransports.keys().indexOf(`./${t}.js`) !== -1) {
-            transportsImportPromises.push(this.__log.sugarTransports(`./${t}.js`).then(m => {
-              if (!__isTransportRegistered.default(t)) __registerTransport.default(t, m.default || m);
-            }));
+            transportsImportPromises.push(
+              this.__log.sugarTransports(`./${t}.js`).then((m) => {
+                if (!__isTransportRegistered.default(t))
+                  __registerTransport.default(t, m.default || m);
+              })
+            );
           }
         });
 
         Promise.all(transportsImportPromises).then(() => {
-
           __log.default(message, type, transp).then(() => {
             resolve();
           });
-
         });
-
       });
-
     });
-
   }
-
-
-};
+}

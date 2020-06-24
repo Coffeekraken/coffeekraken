@@ -1,5 +1,5 @@
 /**
- * @namespace       sugar.node.class
+ * @namespace           node.class
  * @src             ../../../js/class/getMethods.js
  */
 module.exports = require('../../../js/class/getMethods');

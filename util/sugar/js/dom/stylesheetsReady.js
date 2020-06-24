@@ -11,7 +11,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name      stylesheetsReady
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Wait until all the HTMLLinkElement's are properly loaded
@@ -85,7 +85,7 @@ function stylesheetsReady(links, cb = null) {
             }
           }, error => {
             // something goes wrong...
-            console.error("The following link as not been loaded properly...", error);
+            console.error('The following link as not been loaded properly...', error);
           });
         });
       }

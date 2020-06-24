@@ -7,7 +7,7 @@ exports.default = isVisible;
 
 /**
  * @name      isVisible
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Check if the passed HTMLElement is visible or not.
@@ -26,13 +26,13 @@ exports.default = isVisible;
  */
 function isVisible(elm) {
   // assume that the script tag is always visible
-  if (elm.nodeName.toLowerCase() === "script") return true; // get style
+  if (elm.nodeName.toLowerCase() === 'script') return true; // get style
 
   const style = window.getComputedStyle(elm, null),
-        opacity = style["opacity"],
-        visibility = style["visibility"],
-        display = style["display"];
-  return "0" !== opacity && "none" !== display && "hidden" !== visibility;
+        opacity = style['opacity'],
+        visibility = style['visibility'],
+        display = style['display'];
+  return '0' !== opacity && 'none' !== display && 'hidden' !== visibility;
 }
 
 window.__isVisible = isVisible;

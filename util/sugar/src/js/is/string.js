@@ -1,6 +1,6 @@
 /**
  * @name        isString
- * @namespace       sugar.js.is
+ * @namespace           js.is
  * @type      Function
  *
  * Check if the passed value is a js String
@@ -17,5 +17,5 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function isString(value) {
-  return typeof value === "string" || value instanceof String;
+  return typeof value === 'string' || value instanceof String;
 }

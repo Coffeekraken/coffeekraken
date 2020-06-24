@@ -15,7 +15,7 @@ const __path = require('path');
 
 /**
  * @name            SCommand
- * @namespace       sugar.node.terminal
+ * @namespace           node.terminal
  * @type            Class
  * @extends         SPromise
  *

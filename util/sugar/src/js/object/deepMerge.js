@@ -3,7 +3,7 @@ import __isPlainObject from '../is/plainObject';
 
 /**
  * @name                deepMerge
- * @namespace           sugar.js.object
+ * @namespace           js.object
  * @type                Function
  *
  * Deep merge one object with another and return the merged object result. This merging implementation support:
@@ -23,6 +23,9 @@ import __isPlainObject from '../is/plainObject';
 export default function deepMerge(...args) {
   function merge(firstObj, secondObj) {
     const newObj = {};
+    if (!firstObj && secondObj) return secondObj;
+    if (!secondObj && firstObj) return firstObj;
+    if (!firstObj && !secondObj) return {};
     __copyTo(firstObj).override(newObj);
     for (const key of Object.keys(secondObj)) {
       if (__isPlainObject(firstObj[key]) && __isPlainObject(secondObj[key])) {

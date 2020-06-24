@@ -23,15 +23,15 @@ const __SCache = require('../cache/SCache');
 const __cryptObject = require('../crypt/object');
 /**
  * @name                            SAuth
- * @namespace                       sugar.node.auth
+ * @namespace           node.auth
  * @type                            Class
- * 
+ *
  * Base class that gives you the ability to set/ask for some authentification informations like auth token, username-password, etc...
- * 
+ *
  * @example           js
  * const apiAuth = new SAuth('bitbucket');
  * const token = await apiAuth.ask('token');
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
@@ -41,9 +41,9 @@ module.exports = (_temp = /*#__PURE__*/function () {
    * @name                          _name
    * @type                          String
    * @private
-   * 
+   *
    * Store the instance name
-   * 
+   *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
@@ -51,9 +51,9 @@ module.exports = (_temp = /*#__PURE__*/function () {
    * @name                          _adapter
    * @type                          SAuthAdapter
    * @private
-   * 
+   *
    * Store the instance adapter
-   * 
+   *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
@@ -61,18 +61,18 @@ module.exports = (_temp = /*#__PURE__*/function () {
    * @name                          _settings
    * @type                          Object
    * @private
-   * 
+   *
    * Store the instance settings
-   * 
+   *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
   /**
    * @name                          constructor
    * @type                          Function
-   * 
+   *
    * Construct the SAuth instance
-   * 
+   *
    * @param           {String}                name                  The name of this SAuth instance
    * @param           {Object}                [settings={}]
    * An object of settings to configure this SAuth instance. Here's the list of available settings:
@@ -82,7 +82,7 @@ module.exports = (_temp = /*#__PURE__*/function () {
    * - adapter (SAuthTerminalAdapter) {SAuthAdapter}: The adapter instance you want to use to get the auth informations
    * - cache (null) {SCache}: An SCache instance to use to save the auth infos in. If null, a default filesystem cache instance will be created
    * - validator (null) {Function}: An async function that take as parameters the auth type like "basic" and the auth object to check if the authentification is correct. Has to return a promise that need to be resolved with true if all is ok, and false if not. Can be also an error message to display to the user
-   * 
+   *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   function SAuth(name, settings = {}) {
@@ -121,9 +121,9 @@ module.exports = (_temp = /*#__PURE__*/function () {
   /**
    * @name                          type
    * @type                          String
-   * 
+   *
    * Access the auth type like "basic", "bearer", "oauth2", etc...
-   * 
+   *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
@@ -134,19 +134,19 @@ module.exports = (_temp = /*#__PURE__*/function () {
     /**
      * @name                          authInfo
      * @type                          Object
-     * 
+     *
      * Get the authInfo object if already saved in memory or ask the user for this
-     * 
+     *
      * @param           {Object}            [settings={}]       An object of settings. Here's the options available:
      * - title (null) {String}: The title to display on top of the form
      * - type (settings.type) {String}: Specify the auth type that you want to ask to the user
      * - error (null) {String}: An error message to display to the user. Can be something like "Your credentials have been declined. Please try again..."
      * - info (null) {String}: An info message to display to the user
      * @return          {Promise}                               A promise resolved with the authInfo object
-     * 
+     *
      * @example         js
      * const authInfo = await myAuth.authInfo();
-     * 
+     *
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     value: async function authInfo(settings = {}) {
@@ -175,19 +175,19 @@ module.exports = (_temp = /*#__PURE__*/function () {
     /**
      * @name                          inject
      * @type                          Function
-     * 
+     *
      * This method take the passed requestConfig object and inject the auth parameters depending on the "injector" wanted that can be one of the described bellow
-     * 
+     *
      * @param           {String|Function}            injector              The injector wanted that can be one of these:
      * - axios: Inject the auth infos into an axio request config object
      * - Function: A function that take as parameters the requestConfig object and the authInfo object and has to return the updated requestConfig
      * @param           {Object}            requestConfig         The request config object into which inject the auth info
      * @param           {Object}            [authInfo=this.authInfo]      The authInfo object to use
      * @return          {Object}                                  The hooked requestConfig
-     * 
+     *
      * @example         js
      * myAuth.inject('axios', requestConfig);
-     * 
+     *
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
 
@@ -220,16 +220,16 @@ module.exports = (_temp = /*#__PURE__*/function () {
      * @name                          ask
      * @type                          Function
      * @async
-     * 
+     *
      * Allows you to request for some auth informations to the user.
-     * 
+     *
      * @param           {Object}            [settings={}]       An object of settings. Here's the options available:
      * - title (null) {String}: The title to display on top of the form
      * - type (settings.type) {String}: Specify the auth type that you want to ask to the user
      * - error (null) {String}: An error message to display to the user. Can be something like "Your credentials have been declined. Please try again..."
      * - info (null) {String}: An info message to display to the user
      * @return          {Promise}                         A promise that will be resolved once the user (or the api) has answer with the correct infos
-     * 
+     *
      * @example           js
      * const authInfos = await myAuthInstance.ask();
      * // {
@@ -240,7 +240,7 @@ module.exports = (_temp = /*#__PURE__*/function () {
      * //     Authorization: 'Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=='
      * //   }
      * // }
-     * 
+     *
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
 

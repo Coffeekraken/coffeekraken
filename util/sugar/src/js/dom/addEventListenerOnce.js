@@ -3,7 +3,7 @@ import __addEventListener from './addEventListener';
 
 /**
  * @name        addEventListenerOnce
- * @namespace       sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Add an event listener that will be trigerred only once
@@ -32,8 +32,10 @@ export default function addEventListenerOnce(
   options = {}
 ) {
   const sPromise = __addEventListener($elm, event, callback, options);
-  sPromise.then(() => {
-    sPromise.cancel();
-  }).start();
+  sPromise
+    .then(() => {
+      sPromise.cancel();
+    })
+    .start();
   return sPromise;
 }

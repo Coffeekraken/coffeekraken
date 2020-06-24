@@ -7,7 +7,7 @@ const __SApp = require('./SApp');
 
 /**
  * @name                                            SExpressApp
- * @namespace                                       sugar.node.class
+ * @namespace           node.class
  * @type                                            Class
  *
  * This class represent an express based application and gives you access to a lot of usefull routes like "/app/config/:path", "/app/meta/:path", etc...
@@ -22,7 +22,6 @@ const __SApp = require('./SApp');
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = class SExpressApp extends __SApp {
-
   /**
    * @constructor
    * @param               {Object}                      data                 The application data that you want to set like version, name, etc...
@@ -34,7 +33,6 @@ module.exports = class SExpressApp extends __SApp {
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(data, settings = {}, expressInstance) {
-
     // init SApp
     super(data, settings);
 
@@ -49,12 +47,11 @@ module.exports = class SExpressApp extends __SApp {
       // start the server
       this._startExpressServer();
     });
-
   }
 
   /**
    * @name                       _registerRoutes
-   * @namespace                  sugar.node.class.SExpressApp
+   * @namespace           node.class.SExpressApp
    * @type                       Function
    * @private
    *
@@ -62,7 +59,6 @@ module.exports = class SExpressApp extends __SApp {
    *
    */
   _registerRoutes() {
-
     // add the "config" internal squid route
     // this._express.get('/app/config', this._configController.bind(this));
     // this._express.get('/app/config/*', this._configController.bind(this));
@@ -78,12 +74,11 @@ module.exports = class SExpressApp extends __SApp {
     // add the "app" css internal squid route
     this._express.get('/app/css', this._cssController.bind(this));
     this._express.get('/app/css/*', this._cssController.bind(this));
-
   }
 
   /**
    * @name                 _startExpressServer
-   * @namespace            sugar.node.class.SExpressApp
+   * @namespace           node.class.SExpressApp
    * @type                 Function
    * @private
    *
@@ -92,13 +87,18 @@ module.exports = class SExpressApp extends __SApp {
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com
    */
   async _startExpressServer() {
-    this.log(`Starting the express server on port ${await this.config('server.port')}...`, 'info');
+    this.log(
+      `Starting the express server on port ${await this.config(
+        'server.port'
+      )}...`,
+      'info'
+    );
     this._express.listen(await this.config('server.port'));
   }
 
   // /**
   //  * @name                          _configController
-  //  * @namespace                     sugar.node.class.SExpressApp
+  //  * @namespace           node.class.SExpressApp
   //  * @type                          Function
   //  *
   //  * Return the whole configuration object or the specified value requested using the dot formated object key.
@@ -124,7 +124,7 @@ module.exports = class SExpressApp extends __SApp {
   //
   // /**
   //  * @name                          _metaController
-  //  * @namespace                     sugar.node.class.SExpressApp
+  //  * @namespace           node.class.SExpressApp
   //  * @type                          Function
   //  *
   //  * Return the application meta data
@@ -150,7 +150,7 @@ module.exports = class SExpressApp extends __SApp {
 
   /**
    * @name                _jsController
-   * @namespace           sugar.node.class.SExpressApp
+   * @namespace           node.class.SExpressApp
    * @type                Function
    *
    * Handle the base javascript route that serve the global and common files
@@ -161,13 +161,16 @@ module.exports = class SExpressApp extends __SApp {
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com
    */
   async _jsController(req, res) {
-
     // if we have a path to a js file, check if it exist and serve it
     if (req.params[0]) {
-
       // check if the file exist
       const squidFilePath = this.rootPath + '/dist/js/' + req.params[0];
-      const projectFilePath = process.cwd() + '/' + await this.config('dist.js.outputFolder') + '/' + req.params[0];
+      const projectFilePath =
+        process.cwd() +
+        '/' +
+        (await this.config('dist.js.outputFolder')) +
+        '/' +
+        req.params[0];
 
       if (__fs.existsSync(squidFilePath)) {
         res.sendFile(squidFilePath);
@@ -178,9 +181,17 @@ module.exports = class SExpressApp extends __SApp {
         return;
       }
 
-      this.log(`A client has requested the file "${await this.config('dist.js.outputFolder')}/${req.params[0]}" but this file does not exist either in Squid framework files, either in the ${this.__settings.name} project...`, 'error');
+      this.log(
+        `A client has requested the file "${await this.config(
+          'dist.js.outputFolder'
+        )}/${
+          req.params[0]
+        }" but this file does not exist either in Squid framework files, either in the ${
+          this.__settings.name
+        } project...`,
+        'error'
+      );
       return res.sendStatus(404);
-
     }
 
     // get the js content
@@ -188,12 +199,11 @@ module.exports = class SExpressApp extends __SApp {
 
     // send gziped javascript files Content
     res.send(js);
-
   }
 
   /**
    * @name                _cssController
-   * @namespace           sugar.node.class.SExpressApp
+   * @namespace           node.class.SExpressApp
    * @type                Function
    *
    * Handle the base stylesheet route that serve the global and common files
@@ -204,13 +214,16 @@ module.exports = class SExpressApp extends __SApp {
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com
    */
   async _cssController(req, res) {
-
     // if we have a path to a js file, check if it exist and serve it
     if (req.params[0]) {
-
       // check if the file exist
       const squidFilePath = this.rootPath + '/dist/css/' + req.params[0];
-      const projectFilePath = process.cwd() + '/' + await this.config('dist.css.outputFolder') + '/' + req.params[0];
+      const projectFilePath =
+        process.cwd() +
+        '/' +
+        (await this.config('dist.css.outputFolder')) +
+        '/' +
+        req.params[0];
 
       if (__fs.existsSync(squidFilePath)) {
         res.sendFile(squidFilePath);
@@ -221,9 +234,17 @@ module.exports = class SExpressApp extends __SApp {
         return;
       }
 
-      this.log(`A client has requested the file "${await this.config('dist.css.outputFolder')}/${req.params[0]}" but this file does not exist either in Squid framework files, either in the ${this.__settings.name} project...`, 'error');
+      this.log(
+        `A client has requested the file "${await this.config(
+          'dist.css.outputFolder'
+        )}/${
+          req.params[0]
+        }" but this file does not exist either in Squid framework files, either in the ${
+          this.__settings.name
+        } project...`,
+        'error'
+      );
       return res.sendStatus(404);
-
     }
 
     // get the js content
@@ -232,7 +253,5 @@ module.exports = class SExpressApp extends __SApp {
     // send gziped javascript files Content
     res.setHeader('content-type', 'text/css');
     res.send(css);
-
   }
-
-}
+};

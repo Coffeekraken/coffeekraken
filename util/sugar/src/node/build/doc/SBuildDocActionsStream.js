@@ -5,13 +5,12 @@ const __SFsOutputStreamAction = require('../../stream/actions/SFsOutputStreamAct
 const __SFsReadFileStreamAction = require('../../stream/actions/SFsReadFileStreamAction');
 const __SGlobResolverStreamAction = require('../../stream/actions/SGlobResolverStreamAction');
 const __SDocblockObjectsToMarkdownStreamAction = require('./actions/SDocblocksObjectsToMarkdownStreamAction');
-const __SDocMapStreamAction = require('./actions/SDocMapStreamActions');
 const __SUnlinkStreamAction = require('../../stream/actions/SUnlinkStreamAction');
 const __path = require('path');
 
 /**
  * @name            SBuildDocActionStream
- * @namespace       sugar.node.build.doc
+ * @namespace           node.build.doc
  * @type            Class
  * @extends         SActionsStream
  *
@@ -50,8 +49,7 @@ module.exports = class SBuildDocActionStream extends __SActionsStream {
         globResolver: __SGlobResolverStreamAction,
         fsReadFile: __SFsReadFileStreamAction,
         docblocksToMarkdown: __SDocblockObjectsToMarkdownStreamAction,
-        fsOutput: __SFsOutputStreamAction,
-        docMap: __SDocMapStreamAction
+        fsOutput: __SFsOutputStreamAction
       },
       __deepMerge(
         {

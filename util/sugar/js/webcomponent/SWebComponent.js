@@ -51,7 +51,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /**
  * @name              SWebComponent
- * @namespace         sugar.js.webcomponent
+ * @namespace           js.webcomponent
  * @type              Class
  * @extends           HTMLElement
  *

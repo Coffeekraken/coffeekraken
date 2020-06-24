@@ -4,10 +4,11 @@ const __express = require('express');
 const __uncamelize = require('../../string/uncamelize');
 const __request = require('../../http/request');
 const __packageRoot = require('../../path/packageRoot');
+const __subscribe = require('../../event/subscribe');
 
 /**
  * @name                express
- * @namespace           sugar.node.server.express
+ * @namespace           node.server.express
  * @type                Function
  *
  * This function take care of starting an express server
@@ -29,6 +30,12 @@ module.exports = (args = {}) => {
     settings.staticDir.replace(__packageRoot(process.cwd()), ''),
     __express.static(settings.staticDir)
   );
+
+  console.log('SUBV');
+  __subscribe('sugarwebpack', (compiler) => {
+    throw 'somefwef';
+    console.log('WEB PACK');
+  });
 
   Object.keys(settings).forEach((name) => {
     server.set(__uncamelize(name, ' ').toLowerCase(), settings[name]);

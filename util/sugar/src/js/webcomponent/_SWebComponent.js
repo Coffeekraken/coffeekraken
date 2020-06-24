@@ -1,7 +1,7 @@
 import native from './sNativeWebComponent';
 /**
  * @name 		SWebComponent
- * @namespace       sugar.js.core
+ * @namespace           js.core
  * @type      Class
  * @extends 	HTMLElement
  *

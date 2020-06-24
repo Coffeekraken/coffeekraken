@@ -7,7 +7,7 @@ exports.default = exitFullscreen;
 
 /**
  * @name      exitFullscreen
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Exit the fullscreen mode

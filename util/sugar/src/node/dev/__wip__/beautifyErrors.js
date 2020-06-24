@@ -3,7 +3,7 @@ const __parseError = require('./parseError');
 
 /**
  * @name                              beautifyErrors
- * @namespace                         sugar.node.dev
+ * @namespace           node.dev
  * @type                              Function
  *
  * Catch the basic errors from the node process and render them to be more readable
@@ -15,18 +15,17 @@ const __parseError = require('./parseError');
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function beautifyErrors() {
-
   // catch the errors to prettify them
   ['unhandledRejection', 'uncaughtException'].forEach((e) => {
     process.on(e, async (err) => {
-
       console.log(err);
       return;
 
       const error = __parseError(err);
 
       const substract = 12;
-      const columns = (process.env.STDOUT_COLUMNS || process.stdout.columns) - substract;
+      const columns =
+        (process.env.STDOUT_COLUMNS || process.stdout.columns) - substract;
 
       let finalStack = error.stack.filter((line) => {
         if (line.filename.includes('checkArgs.js')) return false;
@@ -61,7 +60,6 @@ module.exports = function beautifyErrors() {
       message += '<br/>';
 
       finalStack.forEach((line) => {
-
         const formatedFunc = `<yellow>${line.function}</yellow>`;
         const formatedPath = `${line.filename}`;
         const formatedPosition = `<bold><cyan>${line.line}</cyan></bold>:<cyan>${line.row}</cyan>`;
@@ -76,7 +74,6 @@ module.exports = function beautifyErrors() {
         message += `${formatedPosition}`;
         message += '<br/>';
         message += '<br/>';
-
       });
 
       message += '<br/>';
@@ -85,9 +82,6 @@ module.exports = function beautifyErrors() {
       await __log(message, 'error');
 
       process.exit(0);
-
     });
-
   });
-
-}
+};

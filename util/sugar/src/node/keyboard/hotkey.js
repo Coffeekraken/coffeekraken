@@ -5,7 +5,7 @@ const __activeSpace = require('../core/activeSpace');
 
 /**
  * @name                hotkey
- * @namespace           sugar.node.keyboard
+ * @namespace           node.keyboard
  * @type                Function
  *
  * This function allows you to add keyboard listening process and subscribe to some sequences

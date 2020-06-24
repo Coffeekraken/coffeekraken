@@ -28,7 +28,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 let __decryptedConfig, __decryptedMeta;
 /**
  * @name                                            SApp
- * @namespace                                       sugar.js.class
+ * @namespace           js.class
  * @type                                            Class
  *
  * This class represent an application route class. This mean that you can create an application class that extend this one
@@ -109,7 +109,7 @@ let SApp = /*#__PURE__*/function () {
   }
   /**
    * @name                            config
-   * @namespace                       sugar.js.class.SApp
+   * @namespace           js.class.SApp
    * @type                            Function
    *
    * Get a configuration value from the backend using an ajax call
@@ -137,7 +137,7 @@ let SApp = /*#__PURE__*/function () {
     }
     /**
      * @name                            meta
-     * @namespace                       sugar.js.class.SApp
+     * @namespace           js.class.SApp
      * @type                            Function
      *
      * Usefull function that give you back an application meta taken depending on your passed dotted object path
@@ -224,5 +224,4 @@ let SApp = /*#__PURE__*/function () {
 }();
 
 exports.default = SApp;
-;
 module.exports = exports.default;

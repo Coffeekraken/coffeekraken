@@ -1,9 +1,9 @@
-import requestFullscreen from "./requestFullscreen";
-import exitFullscreen from "./exitFullscreen";
+import requestFullscreen from './requestFullscreen';
+import exitFullscreen from './exitFullscreen';
 
 /**
  * @name      toggleFullscreen
- * @namespace     sugar.js.dom
+ * @namespace     js.dom
  * @type      Function
  *
  * Toggle the fullscreen mode

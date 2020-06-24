@@ -1,6 +1,6 @@
 /**
  * @name 		SLocalStorageFonts
- * @namespace      sugar.js.class
+ * @namespace           js.class
  * @type    Class
  *
  * This class allows to easily store and load custom fonts from the localStorage
@@ -42,7 +42,7 @@ class SLocalStorageFonts {
      * @type 		{String}
      * @default 	/fonts/fonts.json
      */
-    json_path: "/fonts/fonts.json",
+    json_path: '/fonts/fonts.json',
 
     /**
      * Set if want the debug messages in the console
@@ -71,58 +71,58 @@ class SLocalStorageFonts {
    */
   _init() {
     // check cachebuster
-    let cb = this._settings.json_path.split("#");
+    let cb = this._settings.json_path.split('#');
     if (cb.length == 2) {
       this._settings.version = cb[1];
       this._settings.json_path = cb[0];
     }
 
     try {
-      this._cache = window.localStorage.getItem("sugar-fonts");
+      this._cache = window.localStorage.getItem('sugar-fonts');
       if (this._cache) {
         this._cache = JSON.parse(this._cache);
         if (this._cache.version == this._settings.version) {
-          this._debug("No new version of you fonts");
+          this._debug('No new version of you fonts');
           this._insertFonts(this._cache.value);
         } else {
-          this._debug("New version of your fonts");
+          this._debug('New version of your fonts');
           // busting the cache
-          window.localStorage.removeItem("sugar-fonts");
+          window.localStorage.removeItem('sugar-fonts');
           this._cache = null;
         }
       }
     } catch (e) {
       // localstorage not available
-      this._debug("Your browser seems to not support the localStorage api");
+      this._debug('Your browser seems to not support the localStorage api');
     }
 
     // if no cache, load the fonts file
     if (!this._cache) {
-      window.addEventListener("load", e => {
+      window.addEventListener('load', (e) => {
         let request = new XMLHttpRequest(),
           response = undefined;
-        request.open("GET", this._settings.json_path, true);
+        request.open('GET', this._settings.json_path, true);
         request.onload = () => {
           if (request.status == 200) {
             try {
               response = JSON.parse(request.responseText);
-              let fontface = "";
-              response.fonts.forEach(font => {
-                fontface += "@font-face{";
+              let fontface = '';
+              response.fonts.forEach((font) => {
+                fontface += '@font-face{';
                 for (let prop in font) {
                   let value = font[prop];
-                  if (prop == "font-family") {
+                  if (prop == 'font-family') {
                     value = '"' + value + '"';
                   }
-                  fontface += prop + ":" + value + ";";
+                  fontface += prop + ':' + value + ';';
                 }
-                fontface += "}";
+                fontface += '}';
               });
               // insert fonts
               this._insertFonts(fontface);
               // save fonts in localstorage
               window.localStorage.setItem(
-                "sugar-fonts",
+                'sugar-fonts',
                 JSON.stringify({
                   version: this._settings.version,
                   value: fontface
@@ -140,8 +140,8 @@ class SLocalStorageFonts {
    * Insert font
    */
   _insertFonts(value) {
-    this._debug("inserting fonts");
-    let style = document.createElement("style");
+    this._debug('inserting fonts');
+    let style = document.createElement('style');
     style.innerHTML = value;
     document.head.appendChild(style);
   }
@@ -151,7 +151,7 @@ class SLocalStorageFonts {
    */
   _debug() {
     if (this._settings.debug) {
-      console.log("SUGAR-LOCALSTORAGEFONTS", arguments);
+      console.log('SUGAR-LOCALSTORAGEFONTS', arguments);
     }
   }
 }

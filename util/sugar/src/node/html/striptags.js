@@ -1,5 +1,5 @@
 /**
- * @namespace       sugar.node.html
+ * @namespace           node.html
  * @src             ../../../js/html/striptags.js
  */
 module.exports = require('../../../js/html/striptags');

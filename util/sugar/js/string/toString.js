@@ -25,7 +25,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name        toString
- * @namespace       sugar.js.string
+ * @namespace           js.string
  * @type      Function
  *
  * Convert passed value to a string
@@ -51,15 +51,15 @@ function toString(value) {
   } else if ((0, _object.default)(value) || (0, _array.default)(value) || (0, _json.default)(value)) {
     return JSON.stringify(value);
   } else if ((0, _boolean.default)(value)) {
-    if (value) return "true";else return "false";
+    if (value) return 'true';else return 'false';
   } else if ((0, _function.default)(value)) {
-    return "" + value;
+    return '' + value;
   } else if ((0, _regexp.default)(value)) {
     return value.toString();
   } else if ((0, _number.default)(value)) {
     return value.toString();
   } else if (value === undefined) {
-    return "undefined";
+    return 'undefined';
   } else {
     let returnVal;
 

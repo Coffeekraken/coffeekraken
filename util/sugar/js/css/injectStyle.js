@@ -7,7 +7,7 @@ exports.default = injectStyle;
 
 /**
  * @name            injectStyle
- * @namespace       sugar.js.css
+ * @namespace           js.css
  * @type            Function
  *
  * Inject a passed style string in the DOM
@@ -23,8 +23,8 @@ exports.default = injectStyle;
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function injectStyle(style, node = document.head) {
-  const $tag = document.createElement("style");
-  $tag.type = "text/css";
+  const $tag = document.createElement('style');
+  $tag.type = 'text/css';
   $tag.innerHTML = style;
   node.appendChild($tag);
   return $tag;

@@ -8,7 +8,7 @@ import __isJson from '../is/json';
 
 /**
  * @name                          config
- * @namespace                     sugar.js.core
+ * @namespace           js.core
  * @namespace                     Function
  *
  * Access the configuration setted using the "config(path, value)" function
@@ -23,13 +23,12 @@ import __isJson from '../is/json';
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com
  */
-let __sugarConfig = window.sConfig || localStorage.getItem('sConfig') || {};
+let __sugarConfig = window.sConfig || localStorage.getItem('sConfig') || {};
 // if (typeof __sugarConfig === 'string' && __isBase64(__sugarConfig)) __sugarConfig = __base64.decrypt(__sugarConfig);
 // if (typeof __sugarConfig === 'string' && __isJson(__sugarConfig)) __sugarConfig = JSON.parse(__sugarConfig);
 export default (path, value = null) => {
-
-    // process the path
-  if (path === '.' || path === '' || ! path) {
+  // process the path
+  if (path === '.' || path === '' || !path) {
     path = '';
   }
 
@@ -40,7 +39,7 @@ export default (path, value = null) => {
     value = JSON.parse(value);
   }
 
-  if (typeof value === 'object' && (path === '.' || path === '' || ! path)) {
+  if (typeof value === 'object' && (path === '.' || path === '' || !path)) {
     __sugarConfig = __deepMerge(__sugarConfig, value);
     return __sugarConfig;
   }
@@ -57,7 +56,8 @@ export default (path, value = null) => {
 
   // preparing the value to set in the storage
   let configToSave = __sugarConfig;
-  if (typeof configToSave !== 'string') configToSave = JSON.stringify(configToSave);
+  if (typeof configToSave !== 'string')
+    configToSave = JSON.stringify(configToSave);
   const encryptedConfig = __base64.encrypt(configToSave);
 
   // save the new settings
@@ -66,5 +66,4 @@ export default (path, value = null) => {
 
   // return the new settings value
   return newValue;
-
-}
+};

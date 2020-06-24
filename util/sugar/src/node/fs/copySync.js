@@ -4,7 +4,7 @@ const __fs = require('fs-extra');
 
 /**
  * @name        copySync
- * @namespace     sugar.node.fs
+ * @namespace           node.fs
  * @type          Function
  *
  * Copy a file or directory (sync)
@@ -23,4 +23,4 @@ const __fs = require('fs-extra');
  */
 module.exports = function copySync(src, dest) {
   __fs.copySync(src, dest);
-}
+};

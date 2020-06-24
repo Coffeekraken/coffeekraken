@@ -1,9 +1,9 @@
-import __addEventListenerOnce from "./addEventListenerOnce";
+import __addEventListenerOnce from './addEventListenerOnce';
 import __SPromise from '../promise/SPromise';
 
 /**
  * @name      removeClassOnAnimationEnd
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Remove some class on animation end
@@ -21,10 +21,10 @@ import __SPromise from '../promise/SPromise';
 export default function removeClassOnAnimationEnd($elm, cls) {
   return new __SPromise((resolve, reject, trigger, cancel) => {
     // listen for animation end on the element just once
-    __addEventListenerOnce($elm, "animationend", e => {
+    __addEventListenerOnce($elm, 'animationend', (e) => {
       if (!Array.isArray(cls)) cls = [cls];
       // remove the cls
-      cls.forEach(_cls => {
+      cls.forEach((_cls) => {
         $elm.classList.remove(_cls);
       });
       // resolve the process

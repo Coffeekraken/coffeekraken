@@ -11,7 +11,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name      whenTransitionEnd
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Monitor an HTMLElement to be notified when his transition has ended

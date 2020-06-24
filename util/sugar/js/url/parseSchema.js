@@ -11,7 +11,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name                                parseSchema
- * @namespace                           sugar.js.url
+ * @namespace           js.url
  * @type                                Function
  *
  * This function take two arguments. The first one is the url to parse and the second is a schema to scan the url with.

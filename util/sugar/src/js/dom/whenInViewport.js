@@ -2,7 +2,7 @@ import __inViewport from 'in-viewport';
 
 /**
  * @name      whenInViewport
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Monitor an HTMLElement to be notified when it is in the viewport
@@ -21,12 +21,14 @@ import __inViewport from 'in-viewport';
  */
 export default function whenInViewport(elm, offset = 50) {
   return new Promise((resolve, reject) => {
-
-    __inViewport(elm, {
-      offset: offset
-    }, () => {
-      resolve(elm);
-    });
-
+    __inViewport(
+      elm,
+      {
+        offset: offset
+      },
+      () => {
+        resolve(elm);
+      }
+    );
   });
 }

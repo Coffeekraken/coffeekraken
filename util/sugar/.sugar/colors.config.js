@@ -1,6 +1,6 @@
 /**
  * @name                colors
- * @namespace           sugar.config
+ * @namespace           config
  * @type                Object
  *
  * This config file delare the colors used in the project. Each colors are defined
@@ -40,7 +40,7 @@
 module.exports = {
   /**
    * @name                default
-   * @namespace           sugar.config.colors
+   * @namespace           config.colors
    * @type                Color
    * @default             #848e91
    *
@@ -55,7 +55,7 @@ module.exports = {
 
   /**
    * @name                title
-   * @namespace           sugar.config.colors
+   * @namespace           config.colors
    * @type                Color
    * @default             #2b3438
    *
@@ -70,7 +70,7 @@ module.exports = {
 
   /**
    * @name                text
-   * @namespace           sugar.config.colors
+   * @namespace           config.colors
    * @type                Color
    * @default             #848e91
    *
@@ -85,7 +85,7 @@ module.exports = {
 
   /**
    * @name                link
-   * @namespace           sugar.config.colors
+   * @namespace           config.colors
    * @type                Color
    * @default             primary
    *
@@ -100,7 +100,7 @@ module.exports = {
 
   /**
    * @name                primary
-   * @namespace           sugar.config.colors
+   * @namespace           config.colors
    * @type                Color
    * @default             #f2bc2b
    *
@@ -115,7 +115,7 @@ module.exports = {
 
   /**
    * @name                secondary
-   * @namespace           sugar.config.colors
+   * @namespace           config.colors
    * @type                Color
    * @default             #2b3438
    *
@@ -130,7 +130,7 @@ module.exports = {
 
   /**
    * @name                success
-   * @namespace           sugar.config.colors
+   * @namespace           config.colors
    * @type                Color
    * @default             #5cb85c
    *
@@ -145,7 +145,7 @@ module.exports = {
 
   /**
    * @name                warning
-   * @namespace           sugar.config.colors
+   * @namespace           config.colors
    * @type                Color
    * @default             #f0ad4e
    *
@@ -160,7 +160,7 @@ module.exports = {
 
   /**
    * @name                error
-   * @namespace           sugar.config.colors
+   * @namespace           config.colors
    * @type                Color
    * @default             #d9534f
    *
@@ -175,7 +175,7 @@ module.exports = {
 
   /**
    * @name                info
-   * @namespace           sugar.config.colors
+   * @namespace           config.colors
    * @type                Color
    * @default             #2199e8
    *

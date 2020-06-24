@@ -4,7 +4,7 @@ const __fs = require('fs-extra');
 
 /**
  * @name        emptyDirSync
- * @namespace     sugar.node.fs
+ * @namespace           node.fs
  * @type          Function
  *
  * Empty a directory (sync)
@@ -22,4 +22,4 @@ const __fs = require('fs-extra');
  */
 module.exports = function emptyDirSync(dir) {
   __fs.emptyDirSync(dir);
-}
+};

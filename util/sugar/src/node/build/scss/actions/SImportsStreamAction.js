@@ -4,7 +4,7 @@ const __getFilename = require('../../../fs/filename');
 
 /**
  * @name                SImportsStreamAction
- * @namespace           sugar.node.build.scss.actions
+ * @namespace           node.build.scss.actions
  * @type                Class
  * @extends             SActionsStreamAction
  *

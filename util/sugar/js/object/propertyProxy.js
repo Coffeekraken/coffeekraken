@@ -11,7 +11,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name        propertyProxy
- * @namespace       sugar.js.object
+ * @namespace           js.object
  * @type      Function
  *
  * Create a proxy for and object property.

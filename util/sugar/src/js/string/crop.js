@@ -3,41 +3,51 @@ import __countLine from './countLine';
 
 /**
  * @name                                        crop
- * @namespace                                   sugar.js.string
+ * @namespace           js.string
  * @type                                        Function
- * 
+ *
  * Allows you to crop a string at a certain length (this length take care of the croping characters like "...")
- * 
+ *
  * @param               {String}                  text                      The text to crop
  * @param               {Number}                  length                    The text length to have after the croping process
  * @param               {Object}                  [settings={}]             An object of settings described bellow:
  * - chars (...) {String}: The characters to use to signal the crop
  * - splitWords (false) {Boolean}: Specify if you want to split words or not. If not, the function will make sure the final text does not exceeds the wanted length
  * @return              {String}                                            The cropped text
- * 
+ *
  * @example         js
  * import crop from '@coffeekraken/sugar/js/string/crop';
  * crop('Hello World', 10); // => Hello w...
- * 
+ *
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function crop(text, length, settings = {}) {
-
-  settings = __deepMerge({
-    chars: '...',
-    splitWords: false
-  }, settings);
+  settings = __deepMerge(
+    {
+      chars: '...',
+      splitWords: false
+    },
+    settings
+  );
 
   text = text.replace(/\s/gm, '¯');
 
   // split the text on spaces or every characters if the splitWords settings is to true
   let splitReg = /(<([^>]+)>|\S|\s)/gm;
-  const parts = text.split(splitReg).filter(c => {
-    return c !== undefined && c !== ' ' && c !== '' && (c.length === 1 || c.match(/^</));
-  }).map(c => {
-    if (c === '¯') return ' ';
-    return c;
-  });
+  const parts = text
+    .split(splitReg)
+    .filter((c) => {
+      return (
+        c !== undefined &&
+        c !== ' ' &&
+        c !== '' &&
+        (c.length === 1 || c.match(/^</))
+      );
+    })
+    .map((c) => {
+      if (c === '¯') return ' ';
+      return c;
+    });
 
   // init the result text
   let result = '';
@@ -49,9 +59,7 @@ export default function crop(text, length, settings = {}) {
     const c = parts[i];
 
     if (c.length === 1) {
-
       if (settings.splitWords) {
-
         if (currentLength + 1 + settings.chars.length <= length) {
           result += c;
           currentLength += 1;
@@ -60,13 +68,16 @@ export default function crop(text, length, settings = {}) {
           currentLength += settings.chars.length;
           break;
         }
-
       } else {
-
         if (c !== ' ') {
           currentWord += c;
         } else {
-          if (__countLine(result) + __countLine(currentWord) + __countLine(settings.chars) <= length) {
+          if (
+            __countLine(result) +
+              __countLine(currentWord) +
+              __countLine(settings.chars) <=
+            length
+          ) {
             result += currentWord;
           } else {
             result = result.trim();
@@ -80,13 +91,11 @@ export default function crop(text, length, settings = {}) {
           // reset currentWord
           currentWord = '';
         }
-
       }
 
       // if it's not a character of 1 letter
       // meaning that it's surely an html tag
     } else {
-
       if (currentWord !== '') {
         result += currentWord;
         currentWord = '';
@@ -123,10 +132,9 @@ export default function crop(text, length, settings = {}) {
   // console.log(currentLength, result, __countLine(result));
 
   // if we take care of html, make sure the opened tags are closed
-  openedHtmlTagsArray.forEach(tag => {
+  openedHtmlTagsArray.forEach((tag) => {
     result += `</${tag}>`;
   });
 
   return result;
-
 }

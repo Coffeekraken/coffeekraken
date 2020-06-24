@@ -11,22 +11,22 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name                      delete
- * @namespace                 sugar.js.object
+ * @namespace           js.object
  * @type                      Function
- * 
+ *
  * Delete an object property using a dotPath like "something.else"
- * 
+ *
  * @param         {Object}          object            The object on which you want to delete the property
  * @param         {String}          dotPath           The dotpath to the property you want to delete
- * 
+ *
  * @example         js
  * import delete from '@coffeekraken/sugar/js/object/delete';
  * const myObject = {
- *    hello: 'world', 
+ *    hello: 'world',
  *    plop: 'yop'
  * };
  * delete(myObject, 'plop');
- * 
+ *
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function del(object, dotPath) {

@@ -1,5 +1,5 @@
 /**
- * @namespace       sugar.node.docblock
+ * @namespace           node.docblock
  * @src             ../../../js/docblock/SDocblockBlock.js
  */
 module.exports = require('../../../js/docblock/SDocblockBlock');

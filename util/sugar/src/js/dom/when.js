@@ -1,6 +1,6 @@
 /**
  * @name                              when
- * @namespace                         sugar.js.dom
+ * @namespace           js.dom
  * @type                              Function
  *
  * Return a promise that will be resolved when the wanted status has been applied on the passed HTMLElement.
@@ -38,31 +38,41 @@ export default function when($node, state, settings = {}) {
   return new Promise(async (resolve, reject) => {
     // check the state to detect
     let importPromise, args;
-    switch(state) {
+    switch (state) {
       case 'attribute':
-        importPromise = import(/* webpackChunkName: "whenAttribute" */ /* webpackMode: "lazy" */ './whenAttribute');
+        importPromise = import(
+          /* webpackChunkName: "whenAttribute" */ /* webpackMode: "lazy" */ './whenAttribute'
+        );
         args = [$node, settings.attribute, settings.checkFn];
-      break;
+        break;
       case 'inViewport':
-        importPromise = import(/* webpackChunkName: "whenInViewport" */ /* webpackMode: "lazy" */ './whenInViewport');
+        importPromise = import(
+          /* webpackChunkName: "whenInViewport" */ /* webpackMode: "lazy" */ './whenInViewport'
+        );
         args = [$node, settings.offset];
-      break;
+        break;
       case 'outOfViewport':
-        importPromise = import(/* webpackChunkName: "whenOutOfViewport" */ /* webpackMode: "lazy" */ './whenOutOfViewport');
+        importPromise = import(
+          /* webpackChunkName: "whenOutOfViewport" */ /* webpackMode: "lazy" */ './whenOutOfViewport'
+        );
         args = [$node, settings.offset];
-      break;
+        break;
       case 'transitionEnd':
-        importPromise = import(/* webpackChunkName: "whenTransitionEnd" */ /* webpackMode: "lazy" */ './whenTransitionEnd');
+        importPromise = import(
+          /* webpackChunkName: "whenTransitionEnd" */ /* webpackMode: "lazy" */ './whenTransitionEnd'
+        );
         args = [$node, settings.callback];
-      break;
+        break;
       case 'visible':
-        importPromise = import(/* webpackChunkName: "whenVisible" */ /* webpackMode: "lazy" */ './whenVisible');
+        importPromise = import(
+          /* webpackChunkName: "whenVisible" */ /* webpackMode: "lazy" */ './whenVisible'
+        );
         args = [$node, settings.callback];
-      break;
+        break;
       default:
         resolve($node);
         return;
-      break;
+        break;
     }
 
     // wait until the module is loaded
@@ -73,6 +83,5 @@ export default function when($node, state, settings = {}) {
       // resolve the promise
       resolve($node);
     });
-
   });
-};
+}

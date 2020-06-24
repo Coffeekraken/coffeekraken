@@ -11,7 +11,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name        closestNotVisible
- * @namespace       sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Go up the dom three to find the first element that is not visible.

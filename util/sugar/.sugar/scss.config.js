@@ -12,7 +12,7 @@ module.exports = {
 
   /**
    * @name          unit
-   * @namespace     sugar.config.scss
+   * @namespace     config.scss
    * @type          String
    * @default       rem
    *
@@ -25,7 +25,7 @@ module.exports = {
 
   /**
    * @name          reset
-   * @namspace      sugar.config.scss
+   * @namspace      config.scss
    * @type          Boolean
    * @default       true
    *
@@ -38,7 +38,7 @@ module.exports = {
 
   /**
    * @name            border-box
-   * @namespace       sugar.config.scss
+   * @namespace       config.scss
    * @type            Boolean
    * @default         true
    *
@@ -51,7 +51,7 @@ module.exports = {
 
   /**
    * @name              text-format-scope-class
-   * @namespace         sugar.config.scss
+   * @namespace         config.scss
    * @type              String
    * @default           tf
    *
@@ -65,7 +65,7 @@ module.exports = {
 
   /**
    * @name              vertical-rhythm-scope-class
-   * @namespace         sugar.config.scss
+   * @namespace         config.scss
    * @type              String
    * @default           vr
    *

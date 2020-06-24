@@ -7,7 +7,7 @@ exports.default = toPlainObject;
 
 /**
  * @name                          toPlainObject
- * @namespace                     sugar.js.class
+ * @namespace           js.class
  * @type                          Function
  *
  * This function take a instance as parameter and return a plain object of it

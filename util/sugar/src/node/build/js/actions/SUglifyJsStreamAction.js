@@ -4,7 +4,7 @@ const __uglifyJs = require('uglify-js');
 
 /**
  * @name                SUglifyJsStreamAction
- * @namespace           sugar.node.build.js.actions
+ * @namespace           node.build.js.actions
  * @type                Class
  * @extends             SActionsStreamAction
  *

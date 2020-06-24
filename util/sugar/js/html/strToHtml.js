@@ -7,7 +7,7 @@ exports.default = strToHtml;
 
 /**
  * @name        strToHtml
- * @namespace       sugar.js.html
+ * @namespace           js.html
  * @type      Function
  *
  * Return the html (dom) version of a string
@@ -24,7 +24,7 @@ exports.default = strToHtml;
  */
 function strToHtml(string) {
   if (document !== undefined && document.createElement !== undefined) {
-    const cont = document.createElement("div");
+    const cont = document.createElement('div');
     cont.innerHTML = string;
 
     if (cont.children.length === 1) {

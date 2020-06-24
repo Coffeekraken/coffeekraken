@@ -6,7 +6,7 @@ const __color = require('../color/color');
 
 /**
  * @name                  SFooter
- * @namespace             sugar.node.blessed
+ * @namespace           node.blessed
  * @type                  Class
  *
  * This class represent a footer that you can add to your blessed based UI

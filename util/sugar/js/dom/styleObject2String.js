@@ -11,7 +11,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name      styleObject2String
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Transform a style object to inline string separated by ;
@@ -37,7 +37,7 @@ function styleObject2String(styleObj) {
     const value = styleObj[key]; // if the value is ''
     // mean that we need to get rid of
 
-    if (value === undefined || value === "") {
+    if (value === undefined || value === '') {
       delete styleObj[key];
     } else {
       propertiesArray.push(`${(0, _uncamelize.default)(key)}:${value};`);
@@ -45,7 +45,7 @@ function styleObject2String(styleObj) {
   } // return the css text
 
 
-  return propertiesArray.join(" ");
+  return propertiesArray.join(' ');
 }
 
 module.exports = exports.default;

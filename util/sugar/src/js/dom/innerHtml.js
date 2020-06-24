@@ -7,7 +7,7 @@ import __convert from '../time/convert';
 
 /**
  * @name            innerHtml
- * @namespace       sugar.js.dom
+ * @namespace           js.dom
  * @type            Function
  *
  * Change the content of a Node with the possibility to animate the change using one of these animations:
@@ -43,7 +43,6 @@ import __convert from '../time/convert';
  */
 export default function innerHtml(node, content, settings = {}) {
   return new Promise((resolve, reject) => {
-
     // process the settings
     settings = {
       action: 'replace',
@@ -258,7 +257,6 @@ export default function innerHtml(node, content, settings = {}) {
 
         // waiting the animation out to be finished
         setTimeout(() => {
-
           // removing the animation out class
           node.classList.remove(_animOutClassName);
 
@@ -282,13 +280,10 @@ export default function innerHtml(node, content, settings = {}) {
             // removing the styles elements
             $styleAnimIn.parentNode.removeChild($styleAnimIn);
             $styleAnimOut.parentNode.removeChild($styleAnimOut);
-
           }, settings.animInDuration);
-
         }, settings.animOutDuration);
         break;
       case 'append':
-
         // append the new content inside a simple div to animate it
         $div = document.createElement('div');
         $div.classList.add(_animInClassName);
@@ -311,12 +306,10 @@ export default function innerHtml(node, content, settings = {}) {
           // removing the styles elements
           $styleAnimIn.parentNode.removeChild($styleAnimIn);
           $styleAnimOut.parentNode.removeChild($styleAnimOut);
-
         }, settings.animInDuration);
 
         break;
       case 'prepend':
-
         // append the new content inside a simple div to animate it
         $div = document.createElement('div');
         $div.classList.add(_animInClassName);
@@ -339,11 +332,9 @@ export default function innerHtml(node, content, settings = {}) {
           // removing the styles elements
           $styleAnimIn.parentNode.removeChild($styleAnimIn);
           $styleAnimOut.parentNode.removeChild($styleAnimOut);
-
         }, settings.animInDuration);
 
         break;
     }
-
   });
 }

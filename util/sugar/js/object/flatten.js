@@ -7,7 +7,7 @@ exports.default = flatten;
 
 /**
  * @name                              flatten
- * @namespace                         sugar.js.object
+ * @namespace           js.object
  * @type                              Function
  *
  * Transform the passed multiple level object into a single level one

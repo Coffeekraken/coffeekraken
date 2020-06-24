@@ -1,9 +1,9 @@
-import __scrollTo from "./scrollTo";
-import __easeing from "../easing/easeInOutQuint";
+import __scrollTo from './scrollTo';
+import __easeing from '../easing/easeInOutQuint';
 
 /**
  * @name      scrollToLocationHash
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Scroll to the location hash if an hash is present.
@@ -37,10 +37,10 @@ export default function scrollToLocationHash(
   if (!targetElm) return;
 
   // tell the browser that we handle the scroll restoration manually
-  if ("scrollRestoration" in history) {
-    history.scrollRestoration = "manual";
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
   }
 
   // scroll to target
-  __scrollTo(targetElm, duration, easing, offset, "top");
+  __scrollTo(targetElm, duration, easing, offset, 'top');
 }

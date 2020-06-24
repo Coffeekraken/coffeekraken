@@ -7,7 +7,7 @@ exports.default = matches;
 
 /**
  * @name      matches
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Polyfill for the Element.matches function
@@ -26,7 +26,7 @@ exports.default = matches;
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function matches(el, selector) {
-  if (el.nodeName == "#comment" || el.nodeName == "#text") {
+  if (el.nodeName == '#comment' || el.nodeName == '#text') {
     return false;
   }
 

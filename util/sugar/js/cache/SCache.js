@@ -29,21 +29,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /**
  * @name                                SCache
- * @namespace                           sugar.js.cache
+ * @namespace           js.cache
  * @type                                Class
- * 
+ *
  * Gives you the ability to manage cache through some defaults available adapters or using yours.
  * This cache class take care of these features:
  * - Standard and custom TTL by cache item
  * - Delete cache items on expires or not
- * 
+ *
  * @example             js
  * import SCache from '@coffeekraken/sugar/js/cache/SCache';
  * const cache = new SCache({
  *  ttl: '10s' // 10 seconds
  * });
  * cache.set('myCoolCacheItem', someData);
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 let SCache = /*#__PURE__*/function () {
@@ -51,9 +51,9 @@ let SCache = /*#__PURE__*/function () {
    * @name                              _name
    * @type                              String
    * @private
-   * 
+   *
    * Store the cache name
-   * 
+   *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
@@ -61,9 +61,9 @@ let SCache = /*#__PURE__*/function () {
    * @name                              _settings
    * @type                              Object
    * @private
-   * 
+   *
    * Store the default settings of the SCache instance
-   * 
+   *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
@@ -71,9 +71,9 @@ let SCache = /*#__PURE__*/function () {
    * @name                              _defaultAdaptersPaths
    * @type                              Object
    * @private
-   * 
+   *
    * List all the default adapters and their path
-   * 
+   *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
@@ -81,19 +81,19 @@ let SCache = /*#__PURE__*/function () {
    * @name                              _adapter
    * @type                              SCacheAdapter
    * @private
-   * 
+   *
    * Store this current instance adapter
-   * 
+   *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
   /**
    * @name                              constructor
    * @type                              Function
-   * 
+   *
    * Construct the SCache instance with the settings passed in object format. See description bellow.
-   * 
-   * @param         {Object}          [settings={}]             
+   *
+   * @param         {Object}          [settings={}]
    * The settings for the SCache instance
    * - ttl (-1) {Number|String}: Time to live for each cache items in seconds or in String like '10s', '20h', '300ms', etc...
    * - deleteOnExpire (true) {Boolean}: Specify if you want that the items are deleted on expire
@@ -102,7 +102,7 @@ let SCache = /*#__PURE__*/function () {
    *    - SCacheFsAdapter: An instance of the SCacheFsAdapter class that you can configure as you want
    * - parse (JSON.parse) {Function}: Specify the function used to parse the items once theirs get back from theirs save place
    * - stringify (JSON.stringify) {Function}: Specify the function used to stringify the item object before saving it
-   * 
+   *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   function SCache(settings = {}) {
@@ -141,9 +141,9 @@ let SCache = /*#__PURE__*/function () {
   /**
    * @name                            adapter
    * @type                            SCacheAdapter
-   * 
+   *
    * Access this cache instance adapter
-   * 
+   *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
@@ -173,16 +173,16 @@ let SCache = /*#__PURE__*/function () {
      * @name                            get
      * @type                            Function
      * @async
-     * 
+     *
      * Get a value back from the cache using the specified adapter in the settings
-     * 
+     *
      * @param               {String}              name              The name of the item to get back from the cache
      * @param               {Boolean}             [valueOnly=true]  Specify if you want the value only or the all cache object
      * @return              {Promise}                               A promise that will be resolved once the item has been getted
-     * 
+     *
      * @example             js
      * const myValue = myCache.get('coolValue');
-     * 
+     *
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
 
@@ -214,22 +214,22 @@ let SCache = /*#__PURE__*/function () {
      * @name                            set
      * @type                            Function
      * @async
-     * 
+     *
      * Set a value to the cache system using the specified adapter with some settings like described bellow
-     * 
+     *
      * @param               {String}              name              The name of the item to set in the cache system
      * @param               {Mixed}               value             The value to set.
-     * @param               {Object}              [settings={}]     
+     * @param               {Object}              [settings={}]
      * The settings for this particular item:
      * - ttl (-1) {Number}: Time to live in seconds
      * - deleteOnExpire (true) {Boolean}: Specify if this item has to be deleted on expire on not
      * @return              {Promise}                               A promise that will be resolved once the item has been saved
-     * 
+     *
      * @example             js
      * const myValue = myCache.set('coolValue', { hello: 'world' }, {
      *    ttl: 1000
      * });
-     * 
+     *
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
 
@@ -268,15 +268,15 @@ let SCache = /*#__PURE__*/function () {
     /**
      * @name                                delete
      * @type                                Function
-     * 
+     *
      * Delete an item in the cache by his name
-     * 
+     *
      * @param                 {String}               name               The name of the item to delete
      * @return                {Promise}                                  A promise that will return true if correctly deleted, false if not
-     * 
+     *
      * @example           js
      * await myCache.delete('coco');
-     * 
+     *
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
 
@@ -291,14 +291,14 @@ let SCache = /*#__PURE__*/function () {
     /**
      * @name                                clear
      * @type                                Function
-     * 
+     *
      * Delete all the items in the current cache instance
-     * 
+     *
      * @return                {Promise}                                  A promise that will return true if correctly deleted, false if not
-     * 
+     *
      * @example           js
      * await myCache.clear();
-     * 
+     *
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
 
@@ -314,13 +314,13 @@ let SCache = /*#__PURE__*/function () {
      * @name                                _parse
      * @type                                Function
      * @private
-     * 
+     *
      * Take the raw value getted from the cache system and parse it to his actual object format
      * You can hook how this method will act by specify the "settings.parse" property to a different function
-     * 
+     *
      * @param               {String}                      rawValue                    The raw value to transform into an object
      * @return              {Object}                                                  The object format of the value getted back from the cache system
-     * 
+     *
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
 
@@ -333,13 +333,13 @@ let SCache = /*#__PURE__*/function () {
      * @name                                _stringify
      * @type                                Function
      * @private
-     * 
+     *
      * Transform the passed object to a simple string in order to save it in the cache system using the specified adapter.
      * You can hook how this method will act by specify the "settings.stringify" property to a different function
-     * 
-     * @param               {Object}                      object                       The object to save to the cache system that have to transformed in string before...                
+     *
+     * @param               {Object}                      object                       The object to save to the cache system that have to transformed in string before...
      * @return              {String}                                                  The string format of the item to save to cache
-     * 
+     *
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
 

@@ -63,7 +63,7 @@
 @include register-class(pull-left, "sugar.helper.pull.left") {
   /**
    * @name 		pull-left
-   * @namespace 	sugar.scss.helper.class.pull
+   * @namespace           scss.helper.class.pull
    * @type        class
    *
 	 * Allows you to pull an element to the left side
@@ -80,7 +80,7 @@
 @include register-class(pull-right, "sugar.helper.pull.right") {
   /**
    * @name 		pull-right
-   * @namespace 	sugar.scss.helper.class.pull
+   * @namespace           scss.helper.class.pull
    * @type        class
    *
 	 * Allows you to pull an element to the right side
@@ -101,7 +101,7 @@
 @include register-class(relative, "sugar.helper.position.relative") {
   /**
    * @name 		relative
-   * @namespace 	sugar.scss.helper.class.position
+   * @namespace           scss.helper.class.position
    * @type        class
    *
 	 * Set an element position as ```relative```
@@ -118,7 +118,7 @@
 @include register-class(absolute, "sugar.helper.position.absolute") {
   /**
    * @name 		absolute
-   * @namespace 	sugar.scss.helper.class.position
+   * @namespace           scss.helper.class.position
    * @type        class
    *
 	 * Set an element position as ```absolute```
@@ -139,7 +139,7 @@
 @include register-class(clear-left, "sugar.helper.clear.left") {
   /**
    * @name 		clear-left
-   * @namespace 	sugar.scss.helper.class.float
+   * @namespace           scss.helper.class.float
    * @type        class
    *
 	 * Clear the left float on the element
@@ -156,7 +156,7 @@
 @include register-class(clear-right, "sugar.helper.clear.right") {
   /**
    * @name 		clear-right
-   * @namespace 	sugar.scss.helper.class.float
+   * @namespace           scss.helper.class.float
    * @type        class
    *
 	 * Clear the right float on the element
@@ -173,7 +173,7 @@
 @include register-class(clear, "sugar.helper.clear.both") {
   /**
    * @name 		clear
-   * @namespace 	sugar.scss.helper.class.float
+   * @namespace           scss.helper.class.float
    * @type        class
    *
 	 * Clear both float on the element
@@ -197,7 +197,7 @@
 ) {
   /**
    * @name 		pointer-events-none
-   * @namespace 	sugar.scss.helper.class.pointer.event
+   * @namespace           scss.helper.class.pointer.event
    * @type        class
    *
 	 * Disable any pointer events
@@ -217,7 +217,7 @@
 ) {
   /**
    * @name 		pointer-events-all
-   * @namespace 	sugar.scss.helper.class.pointer.event
+   * @namespace           scss.helper.class.pointer.event
    * @type        class
    *
 	 * Disable any pointer events
@@ -238,7 +238,7 @@
 @include register-class(block, "sugar.helper.display.block") {
   /**
    * @name 		block
-   * @namespace 	sugar.scss.helper.class.display
+   * @namespace           scss.helper.class.display
    * @type        class
    *
 	 * Display the element as ```block```
@@ -255,7 +255,7 @@
 @include register-class(inline, "sugar.helper.display.inline") {
   /**
    * @name 		inline
-   * @namespace 	sugar.scss.helper.class.display
+   * @namespace           scss.helper.class.display
    * @type        class
    *
 	 * Display the element as ```inline```
@@ -272,7 +272,7 @@
 @include register-class(inline-block, "sugar.helper.display.inline-block") {
   /**
    * @name 		inline-block
-   * @namespace 	sugar.scss.helper.class.display
+   * @namespace           scss.helper.class.display
    * @type        class
    *
 	 * Display the element as ```inline-block```
@@ -289,7 +289,7 @@
 @include register-class(show, "sugar.helper.display.show") {
   /**
    * @name 		show
-   * @namespace 	sugar.scss.helper.class.display
+   * @namespace           scss.helper.class.display
    * @type        class
    *
 	 * Display the element as ```block```
@@ -306,7 +306,7 @@
 @include register-class(show-inline, "sugar.helper.display.show-inline") {
   /**
    * @name 		show-inline
-   * @namespace 	sugar.scss.helper.class.display
+   * @namespace           scss.helper.class.display
    * @type        class
    *
 	 * Display the element as ```inline-block```
@@ -323,7 +323,7 @@
 @include register-class(hidden, "sugar.helper.display.hidden") {
   /**
    * @name 		hidden
-   * @namespace 	sugar.scss.helper.class.display
+   * @namespace           scss.helper.class.display
    * @type        class
    *
 	 * Hide the element by setting the display to ```none```
@@ -340,7 +340,7 @@
 @include register-class(hide, "sugar.helper.display.hide") {
   /**
    * @name 		hide
-   * @namespace 	sugar.scss.helper.class.display
+   * @namespace           scss.helper.class.display
    * @type        class
    *
 	 * Hide the element by setting the display to ```none```
@@ -357,7 +357,7 @@
 @include register-class(visible, "sugar.helper.display.visible") {
   /**
    * @name 		visible
-   * @namespace 	sugar.scss.helper.class.display
+   * @namespace           scss.helper.class.display
    * @type        class
    *
 	 * Display the element by setting the visibility to ```visible```
@@ -374,7 +374,7 @@
 @include register-class(invisible, "sugar.helper.display.invisible") {
   /**
    * @name 		invisible
-   * @namespace 	sugar.scss.helper.class.display
+   * @namespace           scss.helper.class.display
    * @type        class
    *
 	 * Display the element by setting the visibility to ```hidden```
@@ -394,7 +394,7 @@
 ) {
   /**
    * @name 		visually-hidden
-   * @namespace 	sugar.scss.helper.class.display
+   * @namespace           scss.helper.class.display
    * @type        class
    *
 	 * Hide the element from display but not for SEO.
@@ -416,7 +416,7 @@
 @include register-class(t-hidden, "sugar.helper.text.hidden") {
   /**
    * @name 		t-hidden
-   * @namespace 	sugar.scss.helper.class.text
+   * @namespace           scss.helper.class.text
    * @type        class
    *
 	 * Hide the text
@@ -433,7 +433,7 @@
 @include register-class(t-truncate, "sugar.helper.text.truncate") {
   /**
    * @name 		t-truncate
-   * @namespace 	sugar.scss.helper.class.text
+   * @namespace           scss.helper.class.text
    * @type        class
    *
 	 * Hide the text
@@ -450,7 +450,7 @@
 @include register-class(t-left, "sugar.helper.text.align.left") {
   /**
    * @name 		t-left
-   * @namespace 	sugar.scss.helper.class.text.align
+   * @namespace           scss.helper.class.text.align
    * @type        class
    *
 	 * Align the text to the left
@@ -467,7 +467,7 @@
 @include register-class(t-right, "sugar.helper.text.align.right") {
   /**
    * @name 		t-right
-   * @namespace 	sugar.scss.helper.class.text.align
+   * @namespace           scss.helper.class.text.align
    * @type        class
    *
 	 * Align the text to the right
@@ -484,7 +484,7 @@
 @include register-class(t-center, "sugar.helper.text.align.center") {
   /**
    * @name 		t-center
-   * @namespace 	sugar.scss.helper.class.text.align
+   * @namespace           scss.helper.class.text.align
    * @type        class
    *
 	 * Align the text to the center
@@ -501,7 +501,7 @@
 @include register-class(t-justify, "sugar.helper.text.align.justify") {
   /**
    * @name 		t-justify
-   * @namespace 	sugar.scss.helper.class.text.align
+   * @namespace           scss.helper.class.text.align
    * @type        class
    *
 	 * Make the text justified
@@ -521,7 +521,7 @@
 ) {
   /**
    * @name 		t-lowercase
-   * @namespace 	sugar.scss.helper.class.text.transform
+   * @namespace           scss.helper.class.text.transform
    * @type        class
    *
 	 * Transform the text to lowercase
@@ -541,7 +541,7 @@
 ) {
   /**
    * @name 		t-uppercase
-   * @namespace 	sugar.scss.helper.class.text.transform
+   * @namespace           scss.helper.class.text.transform
    * @type        class
    *
 	 * Transform the text to uppercase
@@ -561,7 +561,7 @@
 ) {
   /**
    * @name 		t-capitalize
-   * @namespace 	sugar.scss.helper.class.text.transform
+   * @namespace           scss.helper.class.text.transform
    * @type        class
    *
 	 * Capizalize the words
@@ -582,7 +582,7 @@
 @include register-class(f-bold, "sugar.helper.font.weight.bold") {
   /**
    * @name 		f-bold
-   * @namespace 	sugar.scss.helper.class.font.weight
+   * @namespace           scss.helper.class.font.weight
    * @type        class
    *
 	 * Set the font-weight to ```bold```
@@ -597,7 +597,7 @@
 @include register-class(f-lighter, "sugar.helper.font.weight.lighter") {
   /**
    * @name 		f-lighter
-   * @namespace 	sugar.scss.helper.class.font.weight
+   * @namespace           scss.helper.class.font.weight
    * @type        class
    *
 	 * Set the font-weight to ```lighter```
@@ -612,7 +612,7 @@
 @include register-class(f-bolder, "sugar.helper.font.weight.bolder") {
   /**
    * @name 		f-bolder
-   * @namespace 	sugar.scss.helper.class.font.weight
+   * @namespace           scss.helper.class.font.weight
    * @type        class
    *
 	 * Set the font-weight to ```bolder```
@@ -627,7 +627,7 @@
 @include register-class(f-normal, "sugar.helper.font.weight.normal") {
   /**
    * @name 		f-normal
-   * @namespace 	sugar.scss.helper.class.font.weight
+   * @namespace           scss.helper.class.font.weight
    * @type        class
    *
 	 * Set the font-weight to ```normal```
@@ -645,7 +645,7 @@
 @include register-class(f-italic, "sugar.helper.font.style.italic") {
   /**
    * @name 		f-italic
-   * @namespace 	sugar.scss.helper.class.font
+   * @namespace           scss.helper.class.font
    * @type        class
    *
 	 * Set the font-style to ```italic```
@@ -660,7 +660,7 @@
 @include register-class(f-oblique, "sugar.helper.font.style.oblique") {
   /**
    * @name 		f-oblique
-   * @namespace 	sugar.scss.helper.class.font.style
+   * @namespace           scss.helper.class.font.style
    * @type        class
    *
 	 * Set the font-style to ```oblique```
@@ -678,7 +678,7 @@
 ) {
   /**
    * @name 		f-small-caps
-   * @namespace 	sugar.scss.helper.class.font.variant
+   * @namespace           scss.helper.class.font.variant
    * @type        class
    *
 	 * Set the font-variant to ```small-caps```
@@ -697,7 +697,7 @@
 @include register-class(block-center, "sugar.helper.block.align.center") {
   /**
    * @name 		block-center
-   * @namespace 	sugar.scss.helper.class.block
+   * @namespace           scss.helper.class.block
    * @type        class
    *
 	 * Set the element to as ```display:block``` and center it
@@ -720,7 +720,7 @@
 @include register-class(abs-cover, "sugar.helper.size.abs.cover") {
   /**
    * @name 		abs-cover
-   * @namespace 	sugar.scss.helper.class.size
+   * @namespace           scss.helper.class.size
    * @type        class
    *
 	 * Set a size that will cover the entire parent surface by positionning it in absolute
@@ -737,7 +737,7 @@
 @include register-class(abs-contain, "sugar.helper.size.abs.contain") {
   /**
    * @name 		abs-contain
-   * @namespace 	sugar.scss.helper.class.size
+   * @namespace           scss.helper.class.size
    * @type        class
    *
 	 * Set a size that will contain the entire parent surface by positionning it in absolute
@@ -754,7 +754,7 @@
 @include register-class(abs-fit, "sugar.helper.size.abs.fit") {
   /**
    * @name 		abs-fit
-   * @namespace 	sugar.scss.helper.class.size
+   * @namespace           scss.helper.class.size
    * @type        class
    *
 	 * Set a size that will fit the entire parent surface by positionning it in absolute
@@ -775,7 +775,7 @@
 @include register-class(mo, "sugar.helper.media.object") {
   /**
    * @name 		mo .mo--center .mo__content
-   * @namespace 	sugar.scss.helper.class.media-object
+   * @namespace           scss.helper.class.media-object
    * @type        class
    *
 	 * Famous media object class
@@ -815,7 +815,7 @@
 @include register-class(clearfix, "sugar.helper.clearfix.default") {
   /**
    * @name 		clearfix
-   * @namespace 	sugar.scss.helper.class.clearfix
+   * @namespace           scss.helper.class.clearfix
    * @type        class
    *
 	 * Apply the micro clearfix on the element
@@ -835,7 +835,7 @@
 @include register-class(clearfix-float, "sugar.helper.clearfix.float") {
   /**
    * @name 		clearfix-float
-   * @namespace 	sugar.scss.helper.class.clearfix
+   * @namespace           scss.helper.class.clearfix
    * @type        class
    *
 	 * Apply the float clearfix on the element
@@ -855,7 +855,7 @@
 @include register-class(clearfix-micro, "sugar.helper.clearfix.micro") {
   /**
    * @name 		clearfix
-   * @namespace 	sugar.scss.helper.class.clearfix
+   * @namespace           scss.helper.class.clearfix
    * @type        class
    *
 	 * Apply the micro clearfix on the element
@@ -875,7 +875,7 @@
 @include register-class(clearfix-overflow, "sugar.helper.clearfix.overflow") {
   /**
    * @name 		clearfix-overflow
-   * @namespace 	sugar.scss.helper.class.clearfix
+   * @namespace           scss.helper.class.clearfix
    * @type        class
    *
 	 * Apply the overflow clearfix on the element
@@ -895,7 +895,7 @@
 @include register-class(clearfix-facebook, "sugar.helper.clearfix.facebook") {
   /**
    * @name 		clearfix-facebook
-   * @namespace 	sugar.scss.helper.class.clearfix
+   * @namespace           scss.helper.class.clearfix
    * @type        class
    *
 	 * Apply the facebook clearfix on the element
@@ -919,7 +919,7 @@
 @include register-class(ratio-21-9, "sugar.helper.ratio.21-9") {
   /**
    * @name 		ratio-21-9
-   * @namespace 	sugar.scss.helper.class.ratio
+   * @namespace           scss.helper.class.ratio
    * @type        class
    *
 	 * Keep a 16/9 ratio on a particular element. Applied by setting height to 0 and paddingtop to 100% / 16 * 9
@@ -934,7 +934,7 @@
 @include register-class(ratio-16-9, "sugar.helper.ratio.16-9") {
   /**
    * @name 		ratio-16-9
-   * @namespace 	sugar.scss.helper.class.ratio
+   * @namespace           scss.helper.class.ratio
    * @type        class
    *
 	 * Keep a 16/9 ratio on a particular element. Applied by setting height to 0 and paddingtop to 100% / 16 * 9
@@ -949,7 +949,7 @@
 @include register-class(ratio-4-3, "sugar.helper.ratio.4-3") {
   /**
    * @name 		ratio-4-3
-   * @namespace 	sugar.scss.helper.class.ratio
+   * @namespace           scss.helper.class.ratio
    * @type        class
    *
 	 * Keep a 4/3 ratio on a particular element. Applied by setting height to 0 and paddingtop to 100% / 4 * 3
@@ -964,7 +964,7 @@
 @include register-class(ratio-1-1, "sugar.helper.ratio.1-1") {
   /**
    * @name 		ratio-1-1
-   * @namespace 	sugar.scss.helper.class.ratio
+   * @namespace           scss.helper.class.ratio
    * @type        class
    *
 	 * Keep a 1/1 ratio on a particular element. Applied by setting height to 0 and paddingtop to 100%
@@ -983,7 +983,7 @@
 @include register-class(no-transition, "sugar.helper.no-transition") {
   /**
    * @name 		no-transition
-   * @namespace 	sugar.scss.helper.class.transition
+   * @namespace           scss.helper.class.transition
    * @type        class
    *
 	 * Disable the transitions **only on the element**
@@ -1005,7 +1005,7 @@
 @include register-class(clear-transition, "sugar.helper.clear-transition") {
   /**
    * @name 		clear-transition
-   * @namespace 	sugar.scss.helper.class.transition
+   * @namespace           scss.helper.class.transition
    * @type        class
    *
 	 * Disable the transitions **on the element and all his children**
@@ -1030,7 +1030,7 @@
 @include register-class(no-animation, "sugar.helper.no-animation") {
   /**
    * @name 		no-animation
-   * @namespace 	sugar.scss.helper.class.animation
+   * @namespace           scss.helper.class.animation
    * @type        class
    *
 	 * Disable the animations **only on the element**
@@ -1052,7 +1052,7 @@
 @include register-class(clear-animation, "sugar.helper.clear-animation") {
   /**
    * @name 		clear-animation
-   * @namespace 	sugar.scss.helper.class.animation
+   * @namespace           scss.helper.class.animation
    * @type        class
    *
 	 * Disable the transitions **on the element and all his children**
@@ -1077,7 +1077,7 @@
 @include register-class(no-transmation, "sugar.helper.no-transmation") {
   /**
    * @name 		no-transmation
-   * @namespace 	sugar.scss.helper.class.transmation
+   * @namespace           scss.helper.class.transmation
    * @type        class
    *
 	 * Disable the animations and transitions **only on the element**
@@ -1103,7 +1103,7 @@
 ) {
   /**
    * @name 		clear-transmation
-   * @namespace 	sugar.scss.helper.class.transmation
+   * @namespace           scss.helper.class.transmation
    * @type        class
    *
 	 * Disable the animations and transitions **on the element and all his children**

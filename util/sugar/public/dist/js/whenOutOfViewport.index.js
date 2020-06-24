@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["whenOutOfViewport"],{
 
-/***/ "./src/js/dom/closest.js":
-/*!*******************************!*\
-  !*** ./src/js/dom/closest.js ***!
-  \*******************************/
+/***/ "../src/js/dom/closest.js":
+/*!********************************!*\
+  !*** ../src/js/dom/closest.js ***!
+  \********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13,11 +13,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = closest;
+exports["default"] = closest;
 
-var _matches = _interopRequireDefault(__webpack_require__(/*! ./matches */ "./src/js/dom/matches.js"));
+var _matches = _interopRequireDefault(__webpack_require__(/*! ./matches */ "../src/js/dom/matches.js"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 /**
  * @name        closest
@@ -44,13 +44,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function closest($elm, selector) {
-  const originalElm = $elm;
+  var originalElm = $elm;
   $elm = $elm.parentNode;
 
   while ($elm && $elm != originalElm.ownerDocument) {
     if (typeof selector === "function") {
       if (selector($elm)) return $elm;
-    } else if (typeof selector === "string" && (0, _matches.default)($elm, selector)) {
+    } else if (typeof selector === "string" && (0, _matches["default"])($elm, selector)) {
       return $elm;
     }
 
@@ -64,10 +64,10 @@ module.exports = exports.default;
 
 /***/ }),
 
-/***/ "./src/js/dom/isInViewport.js":
-/*!************************************!*\
-  !*** ./src/js/dom/isInViewport.js ***!
-  \************************************/
+/***/ "../src/js/dom/isInViewport.js":
+/*!*************************************!*\
+  !*** ../src/js/dom/isInViewport.js ***!
+  \*************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -77,7 +77,9 @@ module.exports = exports.default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = isInViewport;
+exports["default"] = isInViewport;
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 // TODO tests
 
@@ -100,27 +102,28 @@ exports.default = isInViewport;
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function isInViewport(elm, offset = 50) {
+function isInViewport(elm) {
+  var offset = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 50;
   // handle offset
-  let offsetTop = offset;
-  let offsetRight = offset;
-  let offsetBottom = offset;
-  let offsetLeft = offset;
+  var offsetTop = offset;
+  var offsetRight = offset;
+  var offsetBottom = offset;
+  var offsetLeft = offset;
 
-  if (typeof offset === "object") {
+  if (_typeof(offset) === "object") {
     offsetTop = offset.top || 0;
     offsetRight = offset.right || 0;
     offsetBottom = offset.bottom || 0;
     offsetLeft = offset.left || 0;
   }
 
-  const containerHeight = window.innerHeight || document.documentElement.clientHeight;
-  const containerWidth = window.innerWidth || document.documentElement.clientWidth;
-  const rect = elm.getBoundingClientRect();
-  const isTopIn = rect.top - containerHeight - offsetBottom <= 0;
-  const isBottomIn = rect.bottom - offsetTop >= 0;
-  const isLeftIn = rect.left - containerWidth - offsetRight <= 0;
-  const isRightIn = rect.right - offsetLeft >= 0;
+  var containerHeight = window.innerHeight || document.documentElement.clientHeight;
+  var containerWidth = window.innerWidth || document.documentElement.clientWidth;
+  var rect = elm.getBoundingClientRect();
+  var isTopIn = rect.top - containerHeight - offsetBottom <= 0;
+  var isBottomIn = rect.bottom - offsetTop >= 0;
+  var isLeftIn = rect.left - containerWidth - offsetRight <= 0;
+  var isRightIn = rect.right - offsetLeft >= 0;
   return isTopIn && isBottomIn && isLeftIn && isRightIn;
 }
 
@@ -128,10 +131,10 @@ module.exports = exports.default;
 
 /***/ }),
 
-/***/ "./src/js/dom/matches.js":
-/*!*******************************!*\
-  !*** ./src/js/dom/matches.js ***!
-  \*******************************/
+/***/ "../src/js/dom/matches.js":
+/*!********************************!*\
+  !*** ../src/js/dom/matches.js ***!
+  \********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -141,7 +144,7 @@ module.exports = exports.default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = matches;
+exports["default"] = matches;
 
 /**
  * @name      matches
@@ -181,10 +184,10 @@ module.exports = exports.default;
 
 /***/ }),
 
-/***/ "./src/js/dom/whenOutOfViewport.js":
-/*!*****************************************!*\
-  !*** ./src/js/dom/whenOutOfViewport.js ***!
-  \*****************************************/
+/***/ "../src/js/dom/whenOutOfViewport.js":
+/*!******************************************!*\
+  !*** ../src/js/dom/whenOutOfViewport.js ***!
+  \******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -194,15 +197,15 @@ module.exports = exports.default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = whenOutOfViewport;
+exports["default"] = whenOutOfViewport;
 
-var _isInViewport = _interopRequireDefault(__webpack_require__(/*! ./isInViewport */ "./src/js/dom/isInViewport.js"));
+var _isInViewport2 = _interopRequireDefault(__webpack_require__(/*! ./isInViewport */ "../src/js/dom/isInViewport.js"));
 
-var _throttle = _interopRequireDefault(__webpack_require__(/*! ../function/throttle */ "./src/js/function/throttle.js"));
+var _throttle = _interopRequireDefault(__webpack_require__(/*! ../function/throttle */ "../src/js/function/throttle.js"));
 
-var _closest = _interopRequireDefault(__webpack_require__(/*! ./closest */ "./src/js/dom/closest.js"));
+var _closest = _interopRequireDefault(__webpack_require__(/*! ./closest */ "../src/js/dom/closest.js"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 // TODO tests
 
@@ -225,20 +228,21 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function whenOutOfViewport(elm, offset = 50) {
-  return new Promise((resolve, reject) => {
+function whenOutOfViewport(elm) {
+  var offset = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 50;
+  return new Promise(function (resolve, reject) {
     if (window.IntersectionObserver) {
-      let isInViewport = false,
-          _cb = () => {
+      var isInViewport = false,
+          _cb = function _cb() {
         if (!isInViewport) {
           observer.disconnect();
           resolve(elm);
         }
       };
 
-      const observer = new IntersectionObserver((entries, observer) => {
+      var observer = new IntersectionObserver(function (entries, observer) {
         if (!entries.length) return;
-        const entry = entries[0];
+        var entry = entries[0];
 
         if (entry.intersectionRatio > 0) {
           isInViewport = true;
@@ -250,16 +254,16 @@ function whenOutOfViewport(elm, offset = 50) {
       }, {
         root: null,
         // viewport
-        rootMargin: `${offset}px`,
+        rootMargin: "".concat(offset, "px"),
         threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
       });
       observer.observe(elm);
     } else {
       // try to get the closest element that has an overflow
-      let scrollContainerElm = document;
+      var scrollContainerElm = document;
 
       if (!elm._inViewportContainer) {
-        const overflowContainer = (0, _closest.default)(elm, "[data-in-viewport-container]");
+        var overflowContainer = (0, _closest["default"])(elm, "[data-in-viewport-container]");
 
         if (overflowContainer) {
           scrollContainerElm = overflowContainer;
@@ -269,24 +273,24 @@ function whenOutOfViewport(elm, offset = 50) {
         scrollContainerElm = elm._inViewportContainer;
       }
 
-      let isInViewport = true,
-          _cb = () => {
-        if (!isInViewport) {
+      var _isInViewport = true,
+          _cb2 = function _cb2() {
+        if (!_isInViewport) {
           scrollContainerElm.removeEventListener("scroll", checkViewport);
           window.removeEventListener("resize", checkViewport);
           resolve(elm);
         }
       };
 
-      let checkViewport = (0, _throttle.default)(e => {
-        isInViewport = (0, _isInViewport.default)(elm, offset);
+      var checkViewport = (0, _throttle["default"])(function (e) {
+        _isInViewport = (0, _isInViewport2["default"])(elm, offset);
 
-        _cb();
+        _cb2();
       }, 100); // listen for resize
 
       scrollContainerElm.addEventListener("scroll", checkViewport);
       window.addEventListener("resize", checkViewport);
-      setTimeout(() => {
+      setTimeout(function () {
         checkViewport(null);
       });
     }
@@ -297,10 +301,10 @@ module.exports = exports.default;
 
 /***/ }),
 
-/***/ "./src/js/function/throttle.js":
-/*!*************************************!*\
-  !*** ./src/js/function/throttle.js ***!
-  \*************************************/
+/***/ "../src/js/function/throttle.js":
+/*!**************************************!*\
+  !*** ../src/js/function/throttle.js ***!
+  \**************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -310,7 +314,7 @@ module.exports = exports.default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = throttle;
+exports["default"] = throttle;
 
 /**
  * @name        throttle

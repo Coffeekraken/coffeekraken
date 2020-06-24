@@ -3,7 +3,7 @@ const __rimraf = require('rimraf');
 
 /**
  * @name            SUnlinkStreamAction
- * @namespace       sugar.node.stream.actions
+ * @namespace           node.stream.actions
  * @type            Class
  * @extends         SActionsStreamAction
  *

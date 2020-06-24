@@ -2,7 +2,7 @@ const __uniquid = require('../string/uniqid');
 
 /**
  * @name              getRegisteredProcesses
- * @namespace         sugar.node.process
+ * @namespace           node.process
  * @type              Function
  *
  * This function gives you back the processes stack registered using the "registerProcess" function.

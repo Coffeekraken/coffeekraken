@@ -1,7 +1,7 @@
 module.exports = {
   /**
    * @name            font-family
-   * @namespace       sugar.config.typography
+   * @namespace       config.typography
    * @type            String
    * @default         default
    *
@@ -14,7 +14,7 @@ module.exports = {
 
   /**
    * @name            font-size
-   * @namespace       sugar.config.typography
+   * @namespace       config.typography
    * @type            String
    * @default         14px
    *
@@ -27,7 +27,7 @@ module.exports = {
 
   /**
    * @name            font-sizes
-   * @namespace       sugar.config.typography
+   * @namespace       config.typography
    * @type            Object
    * @default         null
    *
@@ -49,7 +49,7 @@ module.exports = {
 
   /**
    * @name            line-letters-count
-   * @namespace       sugar.config.typography
+   * @namespace       config.typography
    * @type            Number
    * @default         55
    *

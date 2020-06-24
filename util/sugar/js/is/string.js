@@ -7,7 +7,7 @@ exports.default = isString;
 
 /**
  * @name        isString
- * @namespace       sugar.js.is
+ * @namespace           js.is
  * @type      Function
  *
  * Check if the passed value is a js String
@@ -24,7 +24,7 @@ exports.default = isString;
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function isString(value) {
-  return typeof value === "string" || value instanceof String;
+  return typeof value === 'string' || value instanceof String;
 }
 
 module.exports = exports.default;

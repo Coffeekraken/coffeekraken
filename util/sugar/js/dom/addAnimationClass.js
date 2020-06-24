@@ -11,7 +11,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name        addAnimationClass
- * @namespace       sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Add a class that trigger an animation and remove it at the end

@@ -7,7 +7,7 @@ exports.default = decodeHtmlEntities;
 
 /**
  * @name        decodeHtmlEntities
- * @namespace       sugar.js.string
+ * @namespace           js.string
  * @type      Function
  *
  * Decode an htmlentities encoded string
@@ -23,7 +23,7 @@ exports.default = decodeHtmlEntities;
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function decodeHtmlEntities(string) {
-  const txt = document.createElement("textarea");
+  const txt = document.createElement('textarea');
   txt.innerHTML = string;
   return txt.value;
 }

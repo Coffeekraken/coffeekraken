@@ -1,6 +1,6 @@
 /**
  * @name                              flatten
- * @namespace                         sugar.js.object
+ * @namespace           js.object
  * @type                              Function
  *
  * Transform the passed multiple level object into a single level one
@@ -20,22 +20,29 @@
  *
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function flatten(object, separation = '.', flattenArrays = false) {
-	let toReturn = {};
+export default function flatten(
+  object,
+  separation = '.',
+  flattenArrays = false
+) {
+  let toReturn = {};
 
-	for (let i in object) {
-		if (!object.hasOwnProperty(i)) continue;
+  for (let i in object) {
+    if (!object.hasOwnProperty(i)) continue;
 
-		if ((Array.isArray(object[i]) && flattenArrays) || (!Array.isArray(object[i]) && typeof object[i]) == 'object') {
-			let flatObject = flatten(object[i], separation, flattenArrays);
-			for (let x in flatObject) {
-				if (!flatObject.hasOwnProperty(x)) continue;
+    if (
+      (Array.isArray(object[i]) && flattenArrays) ||
+      (!Array.isArray(object[i]) && typeof object[i]) == 'object'
+    ) {
+      let flatObject = flatten(object[i], separation, flattenArrays);
+      for (let x in flatObject) {
+        if (!flatObject.hasOwnProperty(x)) continue;
 
-				toReturn[i + separation + x] = flatObject[x];
-			}
-		} else {
-			toReturn[i] = object[i];
-		}
-	}
-	return toReturn;
+        toReturn[i + separation + x] = flatObject[x];
+      }
+    } else {
+      toReturn[i] = object[i];
+    }
+  }
+  return toReturn;
 }

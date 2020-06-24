@@ -1,8 +1,6 @@
-
-
 /**
  * @name                                  parseError
- * @namespace                             sugar.node.dev
+ * @namespace           node.dev
  * @type                                  Function
  *
  * Parse an error throwed in the terminal and return a nicely formated object like this:
@@ -37,7 +35,7 @@ module.exports = function parseError(error) {
   stackTrace.shift();
 
   error = error.toString();
-  error = error.split('\n').join('').replace(/\s+/g, " ");
+  error = error.split('\n').join('').replace(/\s+/g, ' ');
 
   const type = error.match(/([a-zA-Z0-9\s]+):/)[1];
 
@@ -61,7 +59,6 @@ module.exports = function parseError(error) {
       line: lines.split(':')[0],
       row: lines.split(':')[1]
     };
-
   });
 
   stackTrace = stackTrace.filter((s) => {
@@ -70,22 +67,24 @@ module.exports = function parseError(error) {
   });
 
   if (!stackTrace || !stackTrace[0]) {
-    stackTrace = [{
-      filename: 'Anonymous',
-      message: '...',
-      type: 'Error',
-      line: 0,
-      row: 0,
-      stack: []
-    }];
+    stackTrace = [
+      {
+        filename: 'Anonymous',
+        message: '...',
+        type: 'Error',
+        line: 0,
+        row: 0,
+        stack: []
+      }
+    ];
   }
 
   return {
     filename: stackTrace[0].filename ? stackTrace[0].filename : '',
-    message: message.split('\n').join('').replace(/\s+/g, " ").trim(),
+    message: message.split('\n').join('').replace(/\s+/g, ' ').trim(),
     type: type,
     line: stackTrace[0].line ? stackTrace[0].line : '',
     row: stackTrace[0].row ? stackTrace[0].row : '',
     stack: stackTrace
   };
-}
+};

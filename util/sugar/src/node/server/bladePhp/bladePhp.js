@@ -2,7 +2,7 @@ const __SBladePhpServerCli = require('./SBladePhpServerCli');
 
 /**
  * @name                bladePhp
- * @namespace           sugar.node.server.bladePhp
+ * @namespace           node.server.bladePhp
  * @type                Function
  *
  * This function take care of starting a local php server which render some blade templates

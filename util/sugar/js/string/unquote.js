@@ -7,7 +7,7 @@ exports.default = unquote;
 
 /**
  * @name        unquote
- * @namespace       sugar.js.string
+ * @namespace           js.string
  * @type      Function
  *
  * Remove the quotes of a string
@@ -24,7 +24,7 @@ exports.default = unquote;
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function unquote(string, quotesToRemove = ['"', "'", "”", '`']) {
+function unquote(string, quotesToRemove = ['"', "'", '”', '`']) {
   // trim the string just in case
   string = string.trim(); // loop on each quotes to remove
 

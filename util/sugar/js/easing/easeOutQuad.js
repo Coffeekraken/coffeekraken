@@ -7,7 +7,7 @@ exports.default = _default;
 
 /**
  * @name      easeOutQuad
- * @namespace     sugar.js.easing
+ * @namespace           js.easing
  * @type      Function
  *
  * Ease out quad function

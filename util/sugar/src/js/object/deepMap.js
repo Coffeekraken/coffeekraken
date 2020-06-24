@@ -2,7 +2,7 @@ import __isPlainObject from '../is/plainObject';
 
 /**
  * @name            deepMap
- * @namespace       sugar.js.object
+ * @namespace           js.object
  * @type            Function
  *
  * This function is the same as the "map" one. The only difference is that this one goes deep into the object

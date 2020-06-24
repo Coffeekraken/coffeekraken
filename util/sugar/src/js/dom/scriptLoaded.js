@@ -2,7 +2,7 @@ import __SPromise from '../promise/SPromise';
 
 /**
  * @name      scriptLoaded
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Detect when a script has been fully loaded
@@ -37,7 +37,7 @@ export default function loadScript($script) {
       var state;
       if (!done) {
         state = $script.readyState;
-        if (state === "complete") {
+        if (state === 'complete') {
           handleLoad();
         }
       }
@@ -48,9 +48,11 @@ export default function loadScript($script) {
         reject(new Error(e));
       }
     }
-  }).on('cancel,finally', () => {
-    $script.onload = null;
-    $script.onreadystatechange = null;
-    $script.onerror = null;
-  }).start();
+  })
+    .on('cancel,finally', () => {
+      $script.onload = null;
+      $script.onreadystatechange = null;
+      $script.onerror = null;
+    })
+    .start();
 }

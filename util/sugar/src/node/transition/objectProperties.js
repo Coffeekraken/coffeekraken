@@ -8,7 +8,7 @@ const __SPromise = require('../promise/SPromise');
 
 /**
  * @name              objectProperties
- * @namespace         sugar.node.transition
+ * @namespace           node.transition
  * @type              Function
  *
  * This function take a start object and a target object and proceed to the transition of all properties

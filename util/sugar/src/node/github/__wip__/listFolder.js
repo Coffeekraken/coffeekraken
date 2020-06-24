@@ -3,7 +3,7 @@ const __getAuthToken = require('./getAuthToken');
 
 /**
  * @name            listFolder
- * @namespace       sugar.node.github
+ * @namespace           node.github
  * @type            Function
  *
  * List a github folder and return the JSON formated github API response
@@ -20,16 +20,15 @@ const __getAuthToken = require('./getAuthToken');
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function(repo, path = '') {
+module.exports = function (repo, path = '') {
   return new Promise((resolve, reject) => {
-
     const authToken = __getAuthToken();
 
     const options = {
       url: `https://api.github.com/repos/${repo}/contents/${path}`,
       headers: {
         'User-Agent': 'coffeekraken-sugar-node-github-listFolder',
-        'Authorization': `token ${authToken.token}`
+        Authorization: `token ${authToken.token}`
       }
     };
 
@@ -40,6 +39,5 @@ module.exports = function(repo, path = '') {
       }
       resolve(JSON.parse(body));
     });
-
   });
-}
+};

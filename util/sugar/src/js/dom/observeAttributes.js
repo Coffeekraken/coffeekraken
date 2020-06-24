@@ -2,7 +2,7 @@ import __SPromise from '../promise/SPromise';
 
 /**
  * @name        observeAttributes
- * @namespace       sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Observe attributes on an HTMLElement and get mutations through the SPromise instance
@@ -24,12 +24,11 @@ import __SPromise from '../promise/SPromise';
  */
 export default function (target, settings = {}) {
   return new __SPromise((resolve, reject, trigger, cancel) => {
-
     // create a new observer
-    const mutationObserver = new MutationObserver(mutations => {
+    const mutationObserver = new MutationObserver((mutations) => {
       let mutedAttrs = {};
       // loop on mutations
-      mutations.forEach(mutation => {
+      mutations.forEach((mutation) => {
         // push mutation
         if (!mutedAttrs[mutation.attributeName]) {
           trigger('then', mutation);
@@ -43,9 +42,11 @@ export default function (target, settings = {}) {
       // characterData : true,
       ...settings
     });
-  }).on('cancel,finally', () => {
-    mutationObserver.disconnect();
-  }).start();
+  })
+    .on('cancel,finally', () => {
+      mutationObserver.disconnect();
+    })
+    .start();
 }
 
 /**

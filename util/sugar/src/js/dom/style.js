@@ -1,10 +1,10 @@
-import __uncamelize from "../string/uncamelize";
-import __styleString2Object from "./styleString2Object";
-import __styleObject2String from "./styleObject2String";
+import __uncamelize from '../string/uncamelize';
+import __styleString2Object from './styleString2Object';
+import __styleObject2String from './styleObject2String';
 
 /**
  * @name      style
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Set or remove a css style property on an HTMLElement
@@ -24,7 +24,7 @@ import __styleObject2String from "./styleObject2String";
  */
 export default function style(elm, styleObj) {
   // convert style string to object
-  const styleAttr = elm.getAttribute("style");
+  const styleAttr = elm.getAttribute('style');
 
   if (styleAttr) {
     styleObj = {

@@ -9,7 +9,7 @@ exports.default = linkLoaded;
 
 /**
  * @name      linkLoaded
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Wait until the passed HTMLLinkElement is fully loaded
@@ -50,13 +50,13 @@ function linkLoaded(link, callback = null) {
 
       callback != null && callback(link);
     } else {
-      const img = document.createElement("img"); // wait until loaded
+      const img = document.createElement('img'); // wait until loaded
       // console.log('CHECK LOADING', link.href);
       // we load the css into an image
       // when the image is in error more
       // that mean that the css is loaded
 
-      img.addEventListener("error", e => {
+      img.addEventListener('error', e => {
         // console.log('LOADED', e);
         // resolve the promise
         resolve(link); // callback if exist

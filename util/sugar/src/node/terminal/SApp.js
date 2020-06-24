@@ -11,7 +11,7 @@ const __packageRoot = require('../path/packageRoot');
 
 /**
  * @name                    SApp
- * @namespace               sugar.node.terminal
+ * @namespace           node.terminal
  * @type                    Class
  *
  * This class define an application in the terminal that you can easily configure to have the look and feel that you want

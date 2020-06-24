@@ -1,6 +1,6 @@
 /**
  * @name              getMethods
- * @namespace         sugar.node.class
+ * @namespace           node.class
  * @type              Function
  *
  * This function take an instance as parameter and return all the methods in array format

@@ -1,10 +1,10 @@
-import __isVisible from "./isVisible";
-import __isInViewport from "./isInViewport";
-import __closestNotVisible from "./closestNotVisible";
+import __isVisible from './isVisible';
+import __isInViewport from './isInViewport';
+import __closestNotVisible from './closestNotVisible';
 
 /**
  * @name      querySelectorAll
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Enhanced proxy of the Element.querySelectorAll function that let you specify
@@ -67,7 +67,7 @@ export default function querySelectorAll(selector, settings = {}) {
   const elms = settings.rootNode.querySelectorAll(selector);
 
   // loop on the found elements
-  [].forEach.call(elms, elm => {
+  [].forEach.call(elms, (elm) => {
     // check settings
     if (settings.visible) {
       if (!__isVisible(elm) || !__closestNotVisible(elm)) return;

@@ -9,7 +9,7 @@ module.exports = {
   scss: {
     /**
      * @name              input
-     * @namespace         sugar.config.build.scss
+     * @namespace         config.build.scss
      * @type              String
      * @default           <appRoot>/src/scss/[^_]*.scss
      *
@@ -25,7 +25,7 @@ module.exports = {
 
     /**
      * @name              outputDir
-     * @namespace         sugar.config.build.scss
+     * @namespace         config.build.scss
      * @type              String
      * @default           <appRoot>/dist/css
      *
@@ -40,7 +40,7 @@ module.exports = {
 
     /**
      * @name              watch
-     * @namespace         sugar.config.build.scss
+     * @namespace         config.build.scss
      * @type              String
      * @default           src/scss\/**\/*.scss
      *
@@ -55,7 +55,7 @@ module.exports = {
 
     /**
      * @name              style
-     * @namespace         sugar.config.build.scss
+     * @namespace         config.build.scss
      * @type              String
      * @default           expanded
      * @values            nested,expanded,compact,compressed
@@ -69,7 +69,7 @@ module.exports = {
 
     /**
      * @name              map
-     * @namespace         sugar.config.build.scss
+     * @namespace         config.build.scss
      * @type              Boolean
      * @default           true
      *
@@ -82,7 +82,7 @@ module.exports = {
 
     /**
      * @name              prod
-     * @namespace         sugar.config.build.scss
+     * @namespace         config.build.scss
      * @type              Boolean
      * @default           false
      *
@@ -97,7 +97,7 @@ module.exports = {
     import: {
       /**
        * @name                sugar
-       * @namespace           sugar.config.build.scss.import
+       * @namespace           config.build.scss.import
        * @type                Boolean
        * @default             true
        *
@@ -112,7 +112,7 @@ module.exports = {
     vendor: {
       /**
        * @name                sass
-       * @namespace           sugar.config.build.scss.vendor
+       * @namespace           config.build.scss.vendor
        * @type                Object
        * @default             {}
        *
@@ -133,7 +133,7 @@ module.exports = {
   js: {
     /**
      * @name              input
-     * @namespace         sugar.config.build.js
+     * @namespace         config.build.js
      * @type              String
      * @default           <appRoot>/src/js/*.js
      *
@@ -153,7 +153,7 @@ module.exports = {
 
     /**
      * @name              outputDir
-     * @namespace         sugar.config.build.js
+     * @namespace         config.build.js
      * @type              String
      * @default           <appRoot>/dist/js
      *
@@ -168,7 +168,7 @@ module.exports = {
 
     /**
      * @name              watch
-     * @namespace         sugar.config.build.js
+     * @namespace         config.build.js
      * @type              String
      * @default           src/js\/**\/*.js
      *
@@ -182,7 +182,7 @@ module.exports = {
       : `${__packageRoot()}/src/js/**/*.js`,
     /**
      * @name              map
-     * @namespace         sugar.config.build.js
+     * @namespace         config.build.js
      * @type              Boolean
      * @default           true
      *
@@ -195,7 +195,7 @@ module.exports = {
 
     /**
      * @name              pack
-     * @namespace         sugar.config.build.js
+     * @namespace         config.build.js
      * @type              Boolean
      * @default           true
      *
@@ -209,7 +209,7 @@ module.exports = {
 
     /**
      * @name              prod
-     * @namespace         sugar.config.build.js
+     * @namespace         config.build.js
      * @type              Boolean
      * @default           false
      *
@@ -225,7 +225,7 @@ module.exports = {
   config: {
     /**
      * @name              input
-     * @namespace         sugar.config.build.config
+     * @namespace         config.build.config
      * @type              String
      * @default           <appRoot>/src/config/*.js
      *
@@ -241,7 +241,7 @@ module.exports = {
 
     /**
      * @name              outputDir
-     * @namespace         sugar.config.build.config
+     * @namespace         config.build.config
      * @type              String
      * @default           <appRoot>/dist/config
      *
@@ -256,7 +256,7 @@ module.exports = {
 
     /**
      * @name              watch
-     * @namespace         sugar.config.build.config
+     * @namespace         config.build.config
      * @type              String
      * @default           src/config\/**\/*.config.js
      *
@@ -273,7 +273,7 @@ module.exports = {
   doc: {
     /**
      * @name              input
-     * @namespace         sugar.config.build.doc
+     * @namespace         config.build.doc
      * @type              String
      * @default           <appRoot>/src/**\/*
      *
@@ -288,7 +288,7 @@ module.exports = {
 
     /**
      * @name              outputDir
-     * @namespace         sugar.config.build.doc
+     * @namespace         config.build.doc
      * @type              String
      * @default           <appRoot>/dist/doc
      *
@@ -303,7 +303,7 @@ module.exports = {
 
     /**
      * @name              watch
-     * @namespace         sugar.config.build.doc
+     * @namespace         config.build.doc
      * @type              String
      * @default           src/**\/*
      *
@@ -318,10 +318,66 @@ module.exports = {
     //   : `${__packageRoot()}/src/**/*.*`
   },
 
+  docNav: {
+    /**
+     * @name              input
+     * @namespace         config.build.docNav
+     * @type              String|Array<String>
+     * @default           <appRoot>/**\/*
+     *
+     * Specify the root folder (or file) to check for docNav.json generation from docblocks
+     *
+     * @since             2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    input: [`${__packageRoot()}/src/**:@namespace`, '**/README.md'],
+
+    /**
+     * @name              outputDir
+     * @namespace         config.build.docNav
+     * @type              String
+     * @default           <appRoot>
+     *
+     * Specify the destination folder where to put the compiled files in
+     *
+     * @since             2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    outputDir: isInSugarPackage() ? `${__packageRoot()}` : `${__packageRoot()}`,
+
+    /**
+     * @name              watch
+     * @namespace         config.build.docNav
+     * @type              String
+     * @default           <appRoot>**\/*
+     *
+     * Set the watch files that you want to check
+     *
+     * @since             2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    watch: isInSugarPackage()
+      ? `${__packageRoot()}/**/*.*`
+      : `${__packageRoot()}/**/*.*`,
+
+    /**
+     * @name             ignoreFolders
+     * @namespace         config.build.docNav
+     * @type            Array<String>
+     * @default         @config.core.ignoreFolders
+     *
+     * Set the folders to exclude from searches, processing, etc...
+     *
+     * @since         2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    ignoreFolders: '@config.core.ignoreFolders'
+  },
+
   views: {
     /**
      * @name              input
-     * @namespace         sugar.views.build.views
+     * @namespace         views.build.views
      * @type              String
      * @default           <appRoot>/src/views/*.*
      *
@@ -337,7 +393,7 @@ module.exports = {
 
     /**
      * @name              outputDir
-     * @namespace         sugar.views.build.views
+     * @namespace         views.build.views
      * @type              String
      * @default           <appRoot>/dist/views
      *
@@ -352,7 +408,7 @@ module.exports = {
 
     /**
      * @name              watch
-     * @namespace         sugar.views.build.views
+     * @namespace         views.build.views
      * @type              String
      * @default           src/views\/**\/*.*
      *

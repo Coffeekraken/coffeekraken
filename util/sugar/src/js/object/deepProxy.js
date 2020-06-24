@@ -2,7 +2,7 @@ import __proxy from '../array/proxy';
 
 /**
  * @name                            deepProxy
- * @namespace                       sugar.js.object
+ * @namespace           js.object
  * @type                            Function
  *
  * This function allows you to add Proxy to an object in deep fashion.

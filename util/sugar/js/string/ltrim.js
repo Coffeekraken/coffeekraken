@@ -7,7 +7,7 @@ exports.default = ltrim;
 
 /**
  * @name        ltrim
- * @namespace       sugar.js.string
+ * @namespace           js.string
  * @type      Function
  *
  * Trim left a specified string

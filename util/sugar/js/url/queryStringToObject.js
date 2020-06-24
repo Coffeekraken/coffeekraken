@@ -11,7 +11,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name        queryStringToObject
- * @namespace       sugar.js.url
+ * @namespace           js.url
  * @type      Function
  *
  * Transform a query string into his object (key => pairs) representation
@@ -25,21 +25,21 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @snippet     js
  * Sugar.js.url.queryStringToObject($1)
- * 
+ *
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  * @see  	http://stackoverflow.com/questions/8648892/convert-url-parameters-to-a-javascript-object
  */
 function queryStringToObject(str) {
-  str = (0, _ltrim.default)(str, "?");
+  str = (0, _ltrim.default)(str, '?');
   str = decodeURIComponent(str);
-  var chunks = str.split("&"),
+  var chunks = str.split('&'),
       obj = {};
   chunks = chunks.filter(ch => {
-    return ch !== "";
+    return ch !== '';
   });
 
   for (var c = 0; c < chunks.length; c++) {
-    var split = chunks[c].split("=", 2);
+    var split = chunks[c].split('=', 2);
     obj[split[0]] = split[1];
   }
 

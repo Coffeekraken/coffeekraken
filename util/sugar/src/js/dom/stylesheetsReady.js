@@ -1,7 +1,7 @@
-import linkLoaded from "./linkLoaded";
+import linkLoaded from './linkLoaded';
 /**
  * @name      stylesheetsReady
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Wait until all the HTMLLinkElement's are properly loaded
@@ -60,10 +60,10 @@ export default function stylesheetsReady(links, cb = null) {
       loadedStylesheedsProcess = true;
 
       if (neededStylesheetsStack.length) {
-        [].forEach.call(neededStylesheetsStack, link => {
+        [].forEach.call(neededStylesheetsStack, (link) => {
           // check loaded
           linkLoaded(link).then(
-            link => {
+            (link) => {
               // update the loaded stylesheet count
               loadedStylesheedsCount++;
               // check if all stylesheets has been loaded
@@ -71,16 +71,16 @@ export default function stylesheetsReady(links, cb = null) {
                 // update the stylesheetsDependenciesStatus
                 stylesheetsDependenciesStatus = true;
                 // loop on all the loadedStylesheetsCallbacks
-                loadedStylesheetsCallbacks.forEach(callback => {
+                loadedStylesheetsCallbacks.forEach((callback) => {
                   // apply the callback
                   callback();
                 });
               }
             },
-            error => {
+            (error) => {
               // something goes wrong...
               console.error(
-                "The following link as not been loaded properly...",
+                'The following link as not been loaded properly...',
                 error
               );
             }

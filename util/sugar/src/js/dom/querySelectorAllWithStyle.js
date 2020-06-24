@@ -1,8 +1,8 @@
-import getStyleProperty from "./getStyleProperty";
+import getStyleProperty from './getStyleProperty';
 
 /**
  * @name      querySelectorAllWithStyle
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Select all node that match the style object passed as parameter
@@ -45,7 +45,7 @@ export default function querySelectorAllWithStyle(
   // init the ar$Elms stack that will be returned at the end
   const ar$Elms = [];
   // loop on each elements
-  Array.from($elms).forEach($elm => {
+  Array.from($elms).forEach(($elm) => {
     // track if the $elm match all the properties
     let match = true;
     // loop on each properties of the style object
@@ -66,7 +66,7 @@ export default function querySelectorAllWithStyle(
       ) {
         match = false;
         break;
-      } else if (typeof style[key] === "string" && style[key] !== value) {
+      } else if (typeof style[key] === 'string' && style[key] !== value) {
         match = false;
         break;
       }

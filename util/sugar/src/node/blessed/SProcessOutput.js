@@ -7,7 +7,7 @@ const __isChildProcess = require('../is/childProcess');
 
 /**
  * @name                  SProcessOutput
- * @namespace             sugar.node.blessed
+ * @namespace           node.blessed
  * @type                  Class
  *
  * This class is a simple SPanel extended one that accesp an SProcessOutput instance

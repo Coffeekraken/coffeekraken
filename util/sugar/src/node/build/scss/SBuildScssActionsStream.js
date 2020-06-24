@@ -17,7 +17,7 @@ const __isInPackage = require('../../is/inPackage');
 
 /**
  * @name            SBuildScssActionsStream
- * @namespace       sugar.node.build.scss
+ * @namespace           node.build.scss
  * @type            Class
  * @extends         SActionsStream
  *

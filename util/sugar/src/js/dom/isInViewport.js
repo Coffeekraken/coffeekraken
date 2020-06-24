@@ -2,7 +2,7 @@
 
 /**
  * @name      isInViewport
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Check if the passed HTMLElement is in the viewport or not
@@ -25,7 +25,7 @@ export default function isInViewport(elm, offset = 50) {
   let offsetRight = offset;
   let offsetBottom = offset;
   let offsetLeft = offset;
-  if (typeof offset === "object") {
+  if (typeof offset === 'object') {
     offsetTop = offset.top || 0;
     offsetRight = offset.right || 0;
     offsetBottom = offset.bottom || 0;

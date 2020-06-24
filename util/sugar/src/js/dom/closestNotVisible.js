@@ -1,8 +1,8 @@
-import __isVisible from "./isVisible";
+import __isVisible from './isVisible';
 
 /**
  * @name        closestNotVisible
- * @namespace       sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Go up the dom three to find the first element that is not visible.

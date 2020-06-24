@@ -9,7 +9,7 @@ const __isPlainObject = require('../is/plainObject');
 
 /**
  * @name                SCli
- * @namespace           sugar.node.cli
+ * @namespace           node.cli
  * @type                Class
  *
  * This class represent a basic CLI command with his definition object, his command string, etc...

@@ -11,7 +11,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name      offsetParent
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Get the offset top and left of the passed element from his parent top left point

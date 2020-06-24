@@ -1,6 +1,6 @@
 /**
  * @name      realHeight
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Return the full height of an element that has maybe a max-height, etc...
@@ -16,13 +16,13 @@
  */
 export default function realHeight(elm) {
   // apply an overflow-y to the element
-  elm.style.transition = "none";
-  elm.style.overflowY = "scroll";
+  elm.style.transition = 'none';
+  elm.style.overflowY = 'scroll';
   // get the actual height through the scrollHeight
   const height = elm.scrollHeight;
   // reset the overflowY
-  elm.style.overflowY = "";
-  elm.style.transition = "";
+  elm.style.overflowY = '';
+  elm.style.transition = '';
   // return the height
   return height;
 }

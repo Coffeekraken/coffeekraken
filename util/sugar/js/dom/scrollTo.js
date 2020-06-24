@@ -13,7 +13,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name      scrollTo
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Function that let you make a smooth page scroll to a specific element in the page
@@ -35,7 +35,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 let isUserScrolling = false;
 let userScrollingTimeout;
 let isScrollingHappening = false;
-document.addEventListener("mousewheel", e => {
+document.addEventListener('mousewheel', e => {
   if (!isScrollingHappening) return;
   isUserScrolling = true;
   clearTimeout(userScrollingTimeout);
@@ -48,17 +48,17 @@ function scrollTo(target, duration = 1000, easing = _easeInOutQuad.default, offs
   var docElem = document.documentElement; // to facilitate minification better
 
   var windowHeight = docElem.clientHeight;
-  var maxScroll = "scrollMaxY" in window ? window.scrollMaxY : docElem.scrollHeight - windowHeight;
+  var maxScroll = 'scrollMaxY' in window ? window.scrollMaxY : docElem.scrollHeight - windowHeight;
   var currentY = window.pageYOffset;
   isScrollingHappening = true;
   var targetY = currentY;
   var elementBounds = isNaN(target) ? target.getBoundingClientRect() : 0;
 
-  if (align === "center") {
+  if (align === 'center') {
     targetY += elementBounds.top + elementBounds.height / 2;
     targetY -= windowHeight / 2;
     targetY -= offset;
-  } else if (align === "bottom") {
+  } else if (align === 'bottom') {
     targetY += elementBounds.bottom;
     targetY -= windowHeight;
     targetY += offset;

@@ -11,7 +11,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name            validateDefinitionObject
- * @namespace       sugar.js.cli
+ * @namespace           js.cli
  * @type            Function
  *
  * This function take a definition object as parameter and check if all is valid.

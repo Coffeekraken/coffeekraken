@@ -11,7 +11,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name      querySelectorAllWithStyle
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Select all node that match the style object passed as parameter
@@ -68,7 +68,7 @@ function querySelectorAllWithStyle(selector, style, settings = {}) {
       } else if (style[key] instanceof RegExp && !value.toString().match(style[key])) {
         match = false;
         break;
-      } else if (typeof style[key] === "string" && style[key] !== value) {
+      } else if (typeof style[key] === 'string' && style[key] !== value) {
         match = false;
         break;
       }

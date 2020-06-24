@@ -17,11 +17,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name            aes
- * @namespace       sugar.js.crypt
+ * @namespace           js.crypt
  * @type            Object
- * 
+ *
  * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the aes algorithm
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 var _default = {

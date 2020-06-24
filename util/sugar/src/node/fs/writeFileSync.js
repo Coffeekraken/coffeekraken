@@ -4,7 +4,7 @@ const __fs = require('fs-extra');
 
 /**
  * @name        writeFileSync
- * @namespace     sugar.node.fs
+ * @namespace           node.fs
  * @type          Function
  *
  * Write a file. If don't exist, will be created as well as the directory structure if needed... (sync)
@@ -24,4 +24,4 @@ const __fs = require('fs-extra');
  */
 module.exports = function writeFileSync(path, data, options = {}) {
   return __fs.outputFileSync(path, data, options);
-}
+};

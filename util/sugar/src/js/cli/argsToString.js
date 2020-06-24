@@ -3,7 +3,7 @@ import __parseArgs from './parseArgs';
 
 /**
  * @name                  argsToString
- * @namespace             sugar.js.cli
+ * @namespace           js.cli
  * @type                  Function
  *
  * This function take a simple object, a definition object and return you the string version that you can pass

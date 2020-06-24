@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["whenVisible"],{
 
-/***/ "./src/js/dom/closestNotVisible.js":
-/*!*****************************************!*\
-  !*** ./src/js/dom/closestNotVisible.js ***!
-  \*****************************************/
+/***/ "../src/js/dom/closestNotVisible.js":
+/*!******************************************!*\
+  !*** ../src/js/dom/closestNotVisible.js ***!
+  \******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13,11 +13,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = closestNotVisible;
+exports["default"] = closestNotVisible;
 
-var _isVisible = _interopRequireDefault(__webpack_require__(/*! ./isVisible */ "./src/js/dom/isVisible.js"));
+var _isVisible = _interopRequireDefault(__webpack_require__(/*! ./isVisible */ "../src/js/dom/isVisible.js"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 /**
  * @name        closestNotVisible
@@ -40,11 +40,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function closestNotVisible(elm) {
-  const originalElm = elm;
+  var originalElm = elm;
   elm = elm.parentNode;
 
   while (elm && elm != originalElm.ownerDocument) {
-    if (!(0, _isVisible.default)(elm)) {
+    if (!(0, _isVisible["default"])(elm)) {
       return elm;
     }
 
@@ -58,10 +58,10 @@ module.exports = exports.default;
 
 /***/ }),
 
-/***/ "./src/js/dom/isVisible.js":
-/*!*********************************!*\
-  !*** ./src/js/dom/isVisible.js ***!
-  \*********************************/
+/***/ "../src/js/dom/isVisible.js":
+/*!**********************************!*\
+  !*** ../src/js/dom/isVisible.js ***!
+  \**********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -71,7 +71,7 @@ module.exports = exports.default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = isVisible;
+exports["default"] = isVisible;
 
 /**
  * @name      isVisible
@@ -96,10 +96,10 @@ function isVisible(elm) {
   // assume that the script tag is always visible
   if (elm.nodeName.toLowerCase() === "script") return true; // get style
 
-  const style = window.getComputedStyle(elm, null),
-        opacity = style["opacity"],
-        visibility = style["visibility"],
-        display = style["display"];
+  var style = window.getComputedStyle(elm, null),
+      opacity = style["opacity"],
+      visibility = style["visibility"],
+      display = style["display"];
   return "0" !== opacity && "none" !== display && "hidden" !== visibility;
 }
 
@@ -108,10 +108,10 @@ module.exports = exports.default;
 
 /***/ }),
 
-/***/ "./src/js/dom/whenVisible.js":
-/*!***********************************!*\
-  !*** ./src/js/dom/whenVisible.js ***!
-  \***********************************/
+/***/ "../src/js/dom/whenVisible.js":
+/*!************************************!*\
+  !*** ../src/js/dom/whenVisible.js ***!
+  \************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -121,13 +121,13 @@ module.exports = exports.default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = whenVisible;
+exports["default"] = whenVisible;
 
-var _isVisible = _interopRequireDefault(__webpack_require__(/*! ./isVisible */ "./src/js/dom/isVisible.js"));
+var _isVisible = _interopRequireDefault(__webpack_require__(/*! ./isVisible */ "../src/js/dom/isVisible.js"));
 
-var _closestNotVisible = _interopRequireDefault(__webpack_require__(/*! ./closestNotVisible */ "./src/js/dom/closestNotVisible.js"));
+var _closestNotVisible = _interopRequireDefault(__webpack_require__(/*! ./closestNotVisible */ "../src/js/dom/closestNotVisible.js"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 /**
  * @name      whenVisible
@@ -148,16 +148,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function whenVisible(elm, cb = null) {
-  return new Promise((resolve, reject) => {
+function whenVisible(elm) {
+  var cb = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  return new Promise(function (resolve, reject) {
     // variables
-    let isSelfVisible = false,
+    var isSelfVisible = false,
         areParentsVisible = false,
         closestNotVisible = null,
         selfObserver = null,
         parentObserver = null;
 
-    const _cb = () => {
+    var _cb = function _cb() {
       if (isSelfVisible && areParentsVisible) {
         // process callbacks
         if (cb) cb(elm);
@@ -176,11 +177,11 @@ function whenVisible(elm, cb = null) {
     }; // function called on each transitionend, start, etc...
 
 
-    const _eventCb = e => {
+    var _eventCb = function _eventCb(e) {
       // wait just a little time to check again
-      setTimeout(() => {
+      setTimeout(function () {
         if (e.target === elm) {
-          if ((0, _isVisible.default)(elm)) {
+          if ((0, _isVisible["default"])(elm)) {
             isSelfVisible = true;
 
             if (selfObserver && selfObserver.disconnect) {
@@ -193,7 +194,7 @@ function whenVisible(elm, cb = null) {
             elm.removeEventListener("animationend", _eventCb);
           }
         } else if (e.target === closestNotVisible) {
-          if ((0, _isVisible.default)(closestNotVisible)) {
+          if ((0, _isVisible["default"])(closestNotVisible)) {
             areParentsVisible = true;
 
             if (parentObserver && parentObserver.disconnect) {
@@ -213,13 +214,13 @@ function whenVisible(elm, cb = null) {
     }; // check if element itself is not visible
 
 
-    if (!(0, _isVisible.default)(elm)) {
-      selfObserver = new MutationObserver(mutations => {
-        mutations.forEach(mutation => {
+    if (!(0, _isVisible["default"])(elm)) {
+      selfObserver = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
           // check that is the style whos changed
           if (mutation.attributeName === "style" || mutation.attributeName === "class") {
             // check if is visible
-            if ((0, _isVisible.default)(mutation.target)) {
+            if ((0, _isVisible["default"])(mutation.target)) {
               // update
               isSelfVisible = true; // callback
 
@@ -244,15 +245,15 @@ function whenVisible(elm, cb = null) {
     // if found, we monitor it to check when it is visible
 
 
-    closestNotVisible = (0, _closestNotVisible.default)(elm);
+    closestNotVisible = (0, _closestNotVisible["default"])(elm);
 
     if (closestNotVisible) {
-      parentObserver = new MutationObserver(mutations => {
-        mutations.forEach(mutation => {
+      parentObserver = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
           // check that is the style whos changed
           if (mutation.attributeName === "style" || mutation.attributeName === "class") {
             // check if is visible
-            if ((0, _isVisible.default)(mutation.target)) {
+            if ((0, _isVisible["default"])(mutation.target)) {
               // update
               areParentsVisible = true; // callback
 

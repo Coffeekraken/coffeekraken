@@ -1,8 +1,8 @@
-import __matches from "./matches";
+import __matches from './matches';
 
 /**
  * @name        closest
- * @namespace       sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Go up the dom three to find the first element that matches the passed selector
@@ -28,9 +28,9 @@ export default function closest($elm, selector) {
   const originalElm = $elm;
   $elm = $elm.parentNode;
   while ($elm && $elm != originalElm.ownerDocument) {
-    if (typeof selector === "function") {
+    if (typeof selector === 'function') {
       if (selector($elm)) return $elm;
-    } else if (typeof selector === "string" && __matches($elm, selector)) {
+    } else if (typeof selector === 'string' && __matches($elm, selector)) {
       return $elm;
     }
     $elm = $elm.parentNode;

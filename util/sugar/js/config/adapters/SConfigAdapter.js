@@ -19,7 +19,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /**
  * @name                                SConfigAdapter
- * @namespace                           sugar.js.config.adapters
+ * @namespace           js.config.adapters
  * @type                                Class
  *
  * Base class for SCache adapters

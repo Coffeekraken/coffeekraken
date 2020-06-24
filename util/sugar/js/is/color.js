@@ -7,7 +7,7 @@ exports.default = isColor;
 
 /**
  * @name        isColor
- * @namespace       sugar.js.is
+ * @namespace           js.is
  * @type      Function
  *
  * Check if the passed value is a color
@@ -25,9 +25,9 @@ exports.default = isColor;
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function isColor(value) {
-  var ele = document.createElement("div");
+  var ele = document.createElement('div');
   ele.style.color = value;
-  return ele.style.color.split(/\s+/).join("").toLowerCase() !== '';
+  return ele.style.color.split(/\s+/).join('').toLowerCase() !== '';
 }
 
 module.exports = exports.default;

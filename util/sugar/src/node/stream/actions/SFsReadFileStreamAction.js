@@ -3,7 +3,7 @@ const __fs = require('fs');
 
 /**
  * @name            SFsReadFileStreamAction
- * @namespace       sugar.node.stream.actions
+ * @namespace           node.stream.actions
  * @type            Class
  * @extends         SActionsStreamAction
  *

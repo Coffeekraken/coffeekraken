@@ -6,7 +6,7 @@ import __validateWithDefinitionObject from '../object/validateWithDefinitionObje
 
 /**
  * @name          SActionStreamAction
- * @namespace     sugar.js.stream
+ * @namespace           js.stream
  * @type          Class
  * @extends       SPromise
  *

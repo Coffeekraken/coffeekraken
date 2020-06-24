@@ -2,7 +2,7 @@
 
 /**
  * @name                    extension
- * @namespace               sugar.node.fs
+ * @namespace           node.fs
  * @type                    Function
  *
  * Return the passed file path extension
@@ -18,4 +18,4 @@
  */
 module.exports = function extension(path) {
   return path.split('.').pop();
-}
+};

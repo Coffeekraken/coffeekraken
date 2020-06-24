@@ -11,7 +11,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name      observeMutations
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Observe mutations on an HTMLElement and get them through the observable subscription.

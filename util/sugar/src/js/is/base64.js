@@ -1,6 +1,6 @@
 /**
  * @name        isBase64
- * @namespace       sugar.js.is
+ * @namespace           js.is
  * @type      Function
  *
  * Check if the passed value is a base 64 string

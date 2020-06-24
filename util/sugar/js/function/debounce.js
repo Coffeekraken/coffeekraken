@@ -7,7 +7,7 @@ exports.default = debounce;
 
 /**
  * @name        debounce
- * @namespace       sugar.js.function
+ * @namespace           js.function
  * @type      Function
  *
  * This utils function allows you to make sure that a function that will normally be called

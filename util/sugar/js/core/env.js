@@ -17,20 +17,20 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name                    env
- * @namespace               sugar.js.core
+ * @namespace           js.core
  * @type                    Function
- * 
+ *
  * This function allows you to access environment variables through the same method in node and javascript
- * 
+ *
  * @param           {String}          dotPath         The dot path (something.else) to tell which variable you want
  * @param           {Mixed}           [value=null]    The value you want to assign. If null, you will just get the wanted variable back
  * @return          {Mixed}                           The variable value
- * 
+ *
  * @example         js
  * import env from '@coffeekraken/sugar/js/dev/env';
  * console.log(env('node_env')); // => production
  * env('something.cool', { hello: 'world' });
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function env(dotPath, value) {

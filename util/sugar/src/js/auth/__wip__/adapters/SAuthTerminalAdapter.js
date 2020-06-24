@@ -6,26 +6,24 @@ const __ora = require('ora');
 
 /**
  * @name                            STerminalAuthAdapter
- * @namespace                       sugar.node.auth.adapters
+ * @namespace           node.auth.adapters
  * @type                            Class
- * 
+ *
  * Terminal SAuth adapter that allows you to ask the auth informations through the terminal
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = class STerminalAuthAdapter extends __SAuthAdapter {
-
   /**
    * @name                          constructor
    * @type                          Function
-   * 
+   *
    * Construct the STerminalAuthAdapter instance
-   * 
+   *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor() {
     super(['basic', 'bearer']);
-
   }
 
   _resetScreen() {
@@ -56,23 +54,19 @@ module.exports = class STerminalAuthAdapter extends __SAuthAdapter {
       }
     });
     this._screen.append(this._container);
-
-
-
   }
 
   /**
    * @name                      _success
    * @type                      Function
    * @async
-   * 
+   *
    * Display the success message to the user
-   * 
+   *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _success() {
     return new Promise((resolve, reject) => {
-
       this._isValidating = false;
       clearTimeout(this._validationTimeout);
 
@@ -80,7 +74,9 @@ module.exports = class STerminalAuthAdapter extends __SAuthAdapter {
 
       const success = __blessed.box({
         width: '100%',
-        content: __parseHtml('<green>✓ Your auth info have been validated!</green>'),
+        content: __parseHtml(
+          '<green>✓ Your auth info have been validated!</green>'
+        ),
         align: 'center'
       });
 
@@ -92,9 +88,7 @@ module.exports = class STerminalAuthAdapter extends __SAuthAdapter {
         resolve();
 
         this._screen.destroy();
-
       }, 2000);
-
     });
   }
 
@@ -102,19 +96,20 @@ module.exports = class STerminalAuthAdapter extends __SAuthAdapter {
    * @name                      _validation
    * @type                      Function
    * @async
-   * 
+   *
    * Display the validation message to the user
-   * 
+   *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   async _validation() {
-
     if (!this._isValidating) this._isValidating = true;
 
     this._resetScreen();
 
     if (!this._oraLoader) {
-      this._oraLoader = __ora('Please wait while your auth info are validated...');
+      this._oraLoader = __ora(
+        'Please wait while your auth info are validated...'
+      );
     }
 
     const loading = __blessed.text({
@@ -133,27 +128,25 @@ module.exports = class STerminalAuthAdapter extends __SAuthAdapter {
     }
 
     return true;
-
   }
 
   /**
    * @name                      _basic
    * @type                      Function
    * @async
-   * 
+   *
    * Ask the user for username, password
-   * 
+   *
    * @param             {Object}              [settings={}]       An object of settings. Here's the options available:
    * - title (null) {String}: The title to display on top of the form
    * - error (null) {String}: An error message to display to the user. Can be something like "Your credentials have been declined. Please try again..."
    * - info (null) {String}: An info message to display to the user
    * @return            {Promise}                     A promise that will be resolved with the getted username, password
-   * 
+   *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _basic(settings = {}) {
     return new Promise((resolve, reject) => {
-
       this._resetScreen();
 
       this._isValidating = false;
@@ -214,8 +207,10 @@ module.exports = class STerminalAuthAdapter extends __SAuthAdapter {
         },
         inputOnFocus: true,
         padding: {
-          top: 1, bottom: 1,
-          left: 2, right: 2
+          top: 1,
+          bottom: 1,
+          left: 2,
+          right: 2
         }
       });
 
@@ -246,8 +241,10 @@ module.exports = class STerminalAuthAdapter extends __SAuthAdapter {
         censor: true,
         inputOnFocus: true,
         padding: {
-          top: 1, bottom: 1,
-          left: 2, right: 2
+          top: 1,
+          bottom: 1,
+          left: 2,
+          right: 2
         }
       });
 
@@ -255,7 +252,8 @@ module.exports = class STerminalAuthAdapter extends __SAuthAdapter {
       const button = __blessed.button({
         height: 3,
         width: 15,
-        top: buttonY, right: 0,
+        top: buttonY,
+        right: 0,
         align: 'center',
         mouse: true,
         style: {
@@ -267,11 +265,12 @@ module.exports = class STerminalAuthAdapter extends __SAuthAdapter {
         },
         content: '✔ Login',
         padding: {
-          top: 1, bottom: 1,
-          left: 2, right: 2
+          top: 1,
+          bottom: 1,
+          left: 2,
+          right: 2
         }
       });
-
 
       this._container.append(title);
 
@@ -308,29 +307,26 @@ module.exports = class STerminalAuthAdapter extends __SAuthAdapter {
           password: e.password
         });
       });
-
     });
-
   }
 
   /**
    * @name                      _bearer
    * @type                      Function
    * @async
-   * 
+   *
    * Ask the user for bearer auth info (token)
-   * 
+   *
    * @param             {Object}              [settings={}]       An object of settings. Here's the options available:
    * - title (null) {String}: The title displayed on top of the form
    * - error (null) {String}: An error message to display to the user. Can be something like "Your credentials have been declined. Please try again..."
    * - info (null) {String}: An info message to display to the user
    * @return            {Promise}                     A promise that will be resolved with the getted username, password
-   * 
+   *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _bearer(settings = {}) {
     return new Promise((resolve, reject) => {
-
       this._resetScreen();
 
       this._isValidating = false;
@@ -390,8 +386,10 @@ module.exports = class STerminalAuthAdapter extends __SAuthAdapter {
         },
         inputOnFocus: true,
         padding: {
-          top: 1, bottom: 1,
-          left: 2, right: 2
+          top: 1,
+          bottom: 1,
+          left: 2,
+          right: 2
         }
       });
 
@@ -399,7 +397,8 @@ module.exports = class STerminalAuthAdapter extends __SAuthAdapter {
       const button = __blessed.button({
         height: 3,
         width: 15,
-        top: buttonY, right: 0,
+        top: buttonY,
+        right: 0,
         align: 'center',
         mouse: true,
         style: {
@@ -411,11 +410,12 @@ module.exports = class STerminalAuthAdapter extends __SAuthAdapter {
         },
         content: '✔ Login',
         padding: {
-          top: 1, bottom: 1,
-          left: 2, right: 2
+          top: 1,
+          bottom: 1,
+          left: 2,
+          right: 2
         }
       });
-
 
       this._container.append(title);
 
@@ -446,10 +446,6 @@ module.exports = class STerminalAuthAdapter extends __SAuthAdapter {
           token: e.token
         });
       });
-
     });
-
   }
-
-
-}
+};

@@ -7,7 +7,7 @@ exports.default = uncamelize;
 
 /**
  * @name        uncamelize
- * @namespace       sugar.js.string
+ * @namespace           js.string
  * @type      Function
  *
  * Uncamelize a string
@@ -22,14 +22,14 @@ exports.default = uncamelize;
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function uncamelize(text, separator = "-") {
+function uncamelize(text, separator = '-') {
   // Replace all capital letters by separator followed by lowercase one
-  let res = "";
+  let res = '';
   res = text.replace(/[A-Z]/g, function (letter) {
     return separator + letter.toLowerCase();
   }); // Remove first separator (to avoid _hello_world name)
 
-  return res.replace("/^" + separator + "/", "").trim();
+  return res.replace('/^' + separator + '/', '').trim();
 }
 
 module.exports = exports.default;

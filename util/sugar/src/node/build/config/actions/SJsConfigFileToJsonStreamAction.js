@@ -9,7 +9,7 @@ const __SBuildJsCli = require('../../SBuildJsCli');
 
 /**
  * @name                SJsConfigFileToJsonStreamAction
- * @namespace           sugar.node.build.config.actions
+ * @namespace           node.build.config.actions
  * @type                Class
  * @extends             SActionsStreamAction
  *

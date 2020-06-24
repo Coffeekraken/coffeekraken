@@ -1,12 +1,12 @@
 const __downloadsFolder = require('downloads-folder');
 const __path = require('path');
-const __download = require('download-file')
+const __download = require('download-file');
 
 // TODO tests
 
 /**
  * @name              downloadFile
- * @namespace         sugar.node.fs
+ * @namespace           node.fs
  * @type              Function
  *
  * Download a file and save it on the file system
@@ -24,7 +24,11 @@ const __download = require('download-file')
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function (downloadUrl, destinationPath = __downloadsFolder(), callback = null) {
+module.exports = function (
+  downloadUrl,
+  destinationPath = __downloadsFolder(),
+  callback = null
+) {
   return new Promise((resolve, reject) => {
     let fileStreamDest;
     let parsedDestinationPath = __path.parse(destinationPath);
@@ -39,17 +43,21 @@ module.exports = function (downloadUrl, destinationPath = __downloadsFolder(), c
     }
 
     // download the file
-    __download(downloadUrl, {
-      directory: __path.parse(fileStreamDest).dir,
-      filename: __path.parse(fileStreamDest).base
-    }, function (err) {
-      if (err) {
-        reject(err);
-        if (callback) return callback(err);
-        return;
+    __download(
+      downloadUrl,
+      {
+        directory: __path.parse(fileStreamDest).dir,
+        filename: __path.parse(fileStreamDest).base
+      },
+      function (err) {
+        if (err) {
+          reject(err);
+          if (callback) return callback(err);
+          return;
+        }
+        resolve(fileStreamDest);
+        if (callback) return callback(fileStreamDest);
       }
-      resolve(fileStreamDest);
-      if (callback) return callback(fileStreamDest);
-    })
+    );
   });
-}
+};

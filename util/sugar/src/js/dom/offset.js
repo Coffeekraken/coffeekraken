@@ -2,7 +2,7 @@
 
 /**
  * @name      offset
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Get the offset top and left of the passed element from the document top left point

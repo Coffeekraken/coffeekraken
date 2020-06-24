@@ -11,7 +11,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name      dispatchEvent
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Helper to quickly display an event with some optional data attached to it

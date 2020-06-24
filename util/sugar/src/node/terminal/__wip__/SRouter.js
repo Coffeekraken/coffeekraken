@@ -1,10 +1,10 @@
-const __fs = require("fs");
+const __fs = require('fs');
 const __parse = require('../url/parse');
 const __isClass = require('../is/class');
 
 /**
  * @name                                SRouter
- * @namespace                           sugar.node.terminal
+ * @namespace           node.terminal
  * @type                                Class
  *
  * Provide a simple router class to switch between pages in the terminal
@@ -12,14 +12,13 @@ const __isClass = require('../is/class');
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = class SRouter {
-
   /**
    * @name                            _routes
    * @type                            Object
    * @private
-   *  
+   *
    * Store the routes available in this router instance
-   * 
+   *
    * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _routes = {};
@@ -28,9 +27,9 @@ module.exports = class SRouter {
    * @name                            _settings
    * @type                            Object
    * @private
-   *  
+   *
    * Store the settings available in this router instance
-   * 
+   *
    * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _settings = {};
@@ -38,13 +37,12 @@ module.exports = class SRouter {
   /**
    * @name                          constructor
    * @type                          Function
-   * 
+   *
    * Construct the router class with settings described bellow
-   * 
+   *
    * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(routes, settings = {}) {
-
     // save the routes
     this._routes = routes;
 
@@ -55,23 +53,22 @@ module.exports = class SRouter {
     if (this._settings.default.page) {
       this.goto(this._settings.default.page);
     }
-
   }
 
   /**
    * @name                          setOutput
    * @type                          Function
-   * 
+   *
    * Set where you want to output the router results.
    * Can be something like a "blessed" box object, or simple the console.log function by default.
-   * 
+   *
    * @param           {Mixed}                     output                    The output where you want to print the router results
-   * 
+   *
    * @example         js
    * myRouter.setOutput(console.log);
    * const myBox = blessed.box({});
    * myRouter.setOutput(myBox);
-   * 
+   *
    * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   setOutput(output) {
@@ -81,20 +78,19 @@ module.exports = class SRouter {
   /**
    * @name                          goto
    * @type                          Function
-   * 
+   *
    * Allows you to cvhange the displayed page by specify the route name wanted or by specify
    * a url with some params in it that will be analyzed by the router instance
-   * 
+   *
    * @param           {String}             path             The path where you want to go. Can be a simple route name or a full url with params
-   * 
+   *
    * @example         js
    * myRouter.goto('list');
    * myRouter.goto('something/cool/01');
-   * 
+   *
    * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   async goto(path) {
-
     let viewContent, viewData, route, parsedUrl;
 
     // check what is the path and if a route exist with the passed value name
@@ -123,7 +119,10 @@ module.exports = class SRouter {
     }
 
     // check if we have a data adapter specified
-    viewData = parsedUrl && parsedUrl.params ? parsedUrl.params : route.defaultParams || {};
+    viewData =
+      parsedUrl && parsedUrl.params
+        ? parsedUrl.params
+        : route.defaultParams || {};
     if (route.dataAdapter) {
       viewData = await require(route.dataAdapter)(viewData);
     }
@@ -143,7 +142,5 @@ module.exports = class SRouter {
         this._settings.output.screen.render();
       }
     }
-
   }
-
 };

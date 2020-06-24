@@ -1,6 +1,6 @@
 /**
  * @name                          get
- * @namespace                     sugar.js.object
+ * @namespace           js.object
  * @type                          Function
  *
  * Retreive an object value using a dotted path like "myObject.myProperty.myValue"
@@ -15,15 +15,15 @@
  *
  */
 export default (obj, path) => {
-  if ( ! path || path === '' || path === '.') return obj;
-  path = path.replace(/\[(\w+)\]/g, '.$1')
-  path = path.replace(/^\./, '')
-  var a = path.split('.')
-  var o = obj
+  if (!path || path === '' || path === '.') return obj;
+  path = path.replace(/\[(\w+)\]/g, '.$1');
+  path = path.replace(/^\./, '');
+  var a = path.split('.');
+  var o = obj;
   while (a.length) {
-    var n = a.shift()
-    if (!(n in o)) return
-    o = o[n]
+    var n = a.shift();
+    if (!(n in o)) return;
+    o = o[n];
   }
-  return o
-}
+  return o;
+};

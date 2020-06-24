@@ -1,8 +1,8 @@
-import __SEvent from "../event/SEvent";
+import __SEvent from '../event/SEvent';
 
 /**
  * @name      dispatchEvent
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Helper to quickly display an event with some optional data attached to it

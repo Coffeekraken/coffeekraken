@@ -3,7 +3,7 @@ import __innerHtml from '../dom/innerHtml';
 
 /**
  * @name            syncDom
- * @namespace       sugar.js.socket
+ * @namespace           js.socket
  * @type            Function
  *
  * Simply connect to a backend socket.io server and listen for specifics messages from it to refresh automatically the DOM.
@@ -13,7 +13,6 @@ import __innerHtml from '../dom/innerHtml';
  * - 'SSocketDom.style': Used to add a style tag to the page
  */
 class SSocketDom {
-
   /**
    * Server URL
    * @type      String
@@ -25,10 +24,9 @@ class SSocketDom {
    * @type    Object
    */
   _settings = {
-
     /**
      * @name      settings.node
-     * @namespace     sugar.js.class
+     * @namespace           js.class
      * @type        HTMLElement
      *
      * The root node where the html contents will be injected if no node is passed with the event
@@ -40,7 +38,7 @@ class SSocketDom {
 
     /**
      * @name        settings.action
-     * @namespace       sugar.js class
+     * @namespace           js class
      * @type        String
      *
      * Specify which action will be executed if no one is passed with the event.
@@ -56,7 +54,7 @@ class SSocketDom {
 
     /**
      * @name          settings.events
-     * @namespace       sugar.js.class
+     * @namespace           js.class
      * @type          Object
      *
      * Save the events scoped settings objects
@@ -65,7 +63,6 @@ class SSocketDom {
      * @default     {}
      */
     events: {}
-
   };
 
   /**
@@ -128,22 +125,22 @@ class SSocketDom {
     let $node = settings.node;
     if (typeof $node === 'string') $node = document.querySelector($node);
     // switch on the action to execute
-    switch(settings.action) {
+    switch (settings.action) {
       case 'append':
         __innerHtml($node, data, {
-          ...settings.innerHtml || {},
+          ...(settings.innerHtml || {}),
           action: 'append'
         });
-      break;
+        break;
       case 'replace':
         __innerHtml($node, data, settings.innerHtml);
-      break;
+        break;
       case 'prepend':
         __innerHtml($node, data, {
-          ...settings.innerHtml || {},
+          ...(settings.innerHtml || {}),
           action: 'prepend'
         });
-      break;
+        break;
     }
   }
 
@@ -168,14 +165,15 @@ class SSocketDom {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   _eventContent(data, settings) {
-    let $content = document.getElementById('content') || document.querySelector('[content]');
+    let $content =
+      document.getElementById('content') || document.querySelector('[content]');
     if (!$content) return;
     __innerHtml($content, data, settings.innerHtml || {});
   }
 
   /**
    * @name          emit
-   * @namespace         sugar.js.class
+   * @namespace           js.class
    * @type          Function
    *
    * Emit an event with an object containing some values to pass to the server
@@ -189,14 +187,14 @@ class SSocketDom {
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  emit(event, data={}) {
+  emit(event, data = {}) {
     this._socket.emit(`SSocketDom.${event}`, data);
     return this;
   }
 
   /**
    * @name          registerEvent
-   * @namespace       sugar.js.class
+   * @namespace           js.class
    * @type          Function
    *
    * Register a new event with an handler function that will handle the event content
@@ -225,13 +223,12 @@ class SSocketDom {
       handlerFn(d, {
         ...this._settings,
         ...this._settings.events[event],
-        ...data || {}
+        ...(data || {})
       });
     });
     // maintain chainability
     return this;
   }
-
 }
 
 export default SSocketDom;

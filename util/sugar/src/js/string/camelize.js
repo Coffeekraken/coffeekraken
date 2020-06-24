@@ -1,6 +1,6 @@
 /**
  * @name        camelize
- * @namespace       sugar.js.string
+ * @namespace           js.string
  * @type      Function
  *
  * Camelize a string
@@ -16,10 +16,10 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function camelize(text, chars = '_-\\s') {
-  let res = "";
+  let res = '';
   const reg = new RegExp(`(?:^|[${chars}])(\w)`, 'g');
   res = text.replace(reg, function (_, c) {
-    return c ? c.toUpperCase() : "";
+    return c ? c.toUpperCase() : '';
   });
   res = res.substr(0, 1).toLowerCase() + res.slice(1);
   return res.trim();

@@ -7,7 +7,7 @@ exports.default = constructorName;
 
 /**
  * @name        constructorName
- * @namespace       sugar.js.object
+ * @namespace           js.object
  * @type      Function
  *
  * Return the constructor name of the passed object

@@ -11,7 +11,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name        addEventListener
- * @namespace       sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Add an event listener on an element and return the function to remove the event listener

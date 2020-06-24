@@ -15,7 +15,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name      style
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Set or remove a css style property on an HTMLElement
@@ -35,7 +35,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 function style(elm, styleObj) {
   // convert style string to object
-  const styleAttr = elm.getAttribute("style");
+  const styleAttr = elm.getAttribute('style');
 
   if (styleAttr) {
     styleObj = { ...(0, _styleString2Object.default)(styleAttr),

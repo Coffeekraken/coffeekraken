@@ -23,7 +23,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name                          config
- * @namespace                     sugar.js.core
+ * @namespace           js.core
  * @namespace                     Function
  *
  * Access the configuration setted using the "config(path, value)" function

@@ -7,7 +7,7 @@ exports.default = insertAfter;
 
 /**
  * @name      insertAfter
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Insert an HTMLElement after another HTMLElement

@@ -1,6 +1,6 @@
 /**
  * @name        isRegexp
- * @namespace       sugar.js.is
+ * @namespace           js.is
  * @type      Function
  *
  * Check if the passed value is a js Regexp
@@ -17,5 +17,5 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function isRegexp(value) {
-  return value && typeof value === "object" && value.constructor === RegExp;
+  return value && typeof value === 'object' && value.constructor === RegExp;
 }

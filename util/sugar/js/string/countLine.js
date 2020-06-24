@@ -8,7 +8,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name                                  countLine
- * @namespace                             sugar.js.string
+ * @namespace           js.string
  * @type                                  Function
  *
  * Count how many characters their is in the passed line.

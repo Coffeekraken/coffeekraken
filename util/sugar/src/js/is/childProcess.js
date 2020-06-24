@@ -1,6 +1,6 @@
 /**
  * @name                            childProcess
- * @namespace                       sugar.js.is
+ * @namespace           js.is
  * @type                            Function
  *
  * Check if the current script is running as a child process or not by checking if the ```process.send``` exists, or is the environment variable ```IS_CHILD_PROCESS``` is true.

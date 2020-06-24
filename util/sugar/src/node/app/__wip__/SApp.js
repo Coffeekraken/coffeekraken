@@ -9,7 +9,7 @@ const __base64 = require('../crypt/base64');
 
 /**
  * @name                                            SApp
- * @namespace                                       sugar.node.class
+ * @namespace           node.class
  * @type                                            Class
  *
  * This class represent an application route class. This mean that you can create an application class that extend this one
@@ -26,7 +26,6 @@ const __base64 = require('../crypt/base64');
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = class SApp {
-
   /**
    * @name                __settings
    * @type                Object
@@ -52,13 +51,10 @@ module.exports = class SApp {
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(data, settings = {}) {
-
     // save the settings and the data
     this.__settings = {
       name: settings.name || 'SApp',
-      sources: [
-        process.cwd()
-      ],
+      sources: [process.cwd()],
       ...settings
     };
     this.__data = data || {};
@@ -68,12 +64,11 @@ module.exports = class SApp {
 
     // eat the data in the setted sources
     this.__eatData();
-
   }
 
   /**
    * @name                        config
-   * @namespace                   sugar.node.class.SApp
+   * @namespace           node.class.SApp
    * @type                        Function
    *
    * Access the configuration of the setted adapters in "settings.config". For more informations please check the SConfig adapters documentation...
@@ -84,28 +79,29 @@ module.exports = class SApp {
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com
    */
   async config(path) {
-
     if (!this._sConfig) {
-      this._sConfig = new __SConfig({
-        js: {
-          filename: process.cwd() + '/app.config.js'
+      this._sConfig = new __SConfig(
+        {
+          js: {
+            filename: process.cwd() + '/app.config.js'
+          },
+          ...(this.__settings.config || {})
         },
-        ...(this.__settings.config || {})
-      }, {
-        allowSet: false,
-        allowClear: false
-      });
+        {
+          allowSet: false,
+          allowClear: false
+        }
+      );
     }
 
     let value;
     value = await this._sConfig.get(path);
     return value;
-
   }
 
   /**
    * @name                 meta
-   * @namespace            sugar.node.class.SApp
+   * @namespace           node.class.SApp
    * @type                 Function
    *
    * Return a application meta taken from the stored datas
@@ -121,7 +117,10 @@ module.exports = class SApp {
   meta(path) {
     const value = __get(this.__data, path);
     if (!value) {
-      __log(`You try to get the application meta named "${path}" but this meta does not exist...`, 'error');
+      __log(
+        `You try to get the application meta named "${path}" but this meta does not exist...`,
+        'error'
+      );
       return undefined;
     }
     return value;
@@ -129,7 +128,7 @@ module.exports = class SApp {
 
   /**
    * @name               __eatData
-   * @namespace          sugar.node.class.SApp
+   * @namespace           node.class.SApp
    * @type               Function
    *
    * Search the setted sources to find the files like package.json, app.config.js, etc and build the __data object
@@ -138,7 +137,7 @@ module.exports = class SApp {
    */
   __eatData() {
     // loop on the setted sources
-    this.__settings.sources.forEach(source => {
+    this.__settings.sources.forEach((source) => {
       // check if a package.json file exist
       if (__fs.existsSync(process.cwd() + '/package.json')) {
         const packageJson = require(process.cwd() + '/package.json');
@@ -156,7 +155,7 @@ module.exports = class SApp {
 
   /**
    * @name                   _jsContent
-   * @namespace              sugar.node.class.SApp
+   * @namespace           node.class.SApp
    * @type                   Function
    *
    * Get all the configured js files content and return it in text format
@@ -164,7 +163,6 @@ module.exports = class SApp {
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   async _jsContent() {
-
     // get the "serve.js" config
     const serveJs = await this.config('app.serve.js');
 
@@ -172,7 +170,7 @@ module.exports = class SApp {
     const contentArray = [];
 
     // read every files
-    serveJs.forEach(file => {
+    serveJs.forEach((file) => {
       contentArray.push(__fs.readFileSync(file));
     });
 
@@ -191,12 +189,11 @@ module.exports = class SApp {
 
     // return the js content
     return contentArray.join('\n');
-
   }
 
   /**
    * @name                   _cssContent
-   * @namespace              sugar.node.class.SApp
+   * @namespace           node.class.SApp
    * @type                   Function
    *
    * Get all the configured js files content and return it in text format
@@ -204,7 +201,6 @@ module.exports = class SApp {
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   async _cssContent() {
-
     // get the "serve.js" config
     const serveCss = await this.config('app.serve.css');
 
@@ -212,13 +208,11 @@ module.exports = class SApp {
     const contentArray = [];
 
     // read every files
-    serveCss.forEach(file => {
+    serveCss.forEach((file) => {
       contentArray.push(__fs.readFileSync(file));
     });
 
     // return the js content
     return contentArray.join('\n');
-
   }
-
 };

@@ -1,6 +1,6 @@
 /**
  * @name      wrap
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Wrap an HTMLElement inside another `$wrapper` one
@@ -26,7 +26,7 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function wrap($elm, $wrapper) {
-  if (typeof $wrapper === "string") {
+  if (typeof $wrapper === 'string') {
     $wrapper = document.createElement($wrapper);
   }
   const $parent = $elm.parentNode;

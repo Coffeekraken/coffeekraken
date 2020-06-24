@@ -1,8 +1,8 @@
-import _map from "lodash/map";
+import _map from 'lodash/map';
 
 /**
  * @name      splitWords
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Split each words inside an HTMLElement by scoping them inside some tags.
@@ -28,8 +28,8 @@ import _map from "lodash/map";
  */
 export default function splitWords(
   elm,
-  tag = "span",
-  tagClass = "split-words"
+  tag = 'span',
+  tagClass = 'split-words'
 ) {
   // first call
   _splitWords(elm, tag, tagClass);
@@ -50,8 +50,8 @@ function _splitWords(elm, tag, tagClass) {
   let words = string.match(
     /<\s*(\w+\b)(?:(?!<\s*\/\s*\1\b)[\s\S])*<\s*\/\s*\1\s*>|\S+/g
   );
-  words = _map(words, word => {
+  words = _map(words, (word) => {
     return `<${tag} class="${tagClass}__word">${word}</${tag}>`;
-  }).join(" ");
+  }).join(' ');
   elm.innerHTML = words;
 }

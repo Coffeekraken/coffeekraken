@@ -1,7 +1,7 @@
-import __removeClassesOnAnimationEnd from "./removeClassOnAnimationEnd";
+import __removeClassesOnAnimationEnd from './removeClassOnAnimationEnd';
 /**
  * @name        addAnimationClass
- * @namespace       sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Add a class that trigger an animation and remove it at the end
@@ -22,7 +22,7 @@ export default function addAnimationClass($elm, cls) {
   // make sure the cls argument is an Array
   if (!Array.isArray(cls)) cls = [cls];
   // add the class to the element
-  cls.forEach(_cls => {
+  cls.forEach((_cls) => {
     $elm.classList.add(_cls);
   });
   // remove the class at the end of the animation

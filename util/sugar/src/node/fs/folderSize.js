@@ -5,7 +5,7 @@ const __filesize = require('filesize');
 
 /**
  * @name                            folderSize
- * @namespace                       sugar.node.fs
+ * @namespace           node.fs
  * @type                            Function
  * @async
  *
@@ -25,11 +25,9 @@ const __filesize = require('filesize');
  */
 module.exports = function folderSize(folderPath, rawFormat = false) {
   return new Promise((resolve, reject) => {
-
     __getSize(folderPath, (error, size) => {
       if (error) throw error;
       resolve(rawFormat ? size : __filesize(size));
     });
-
   });
-}
+};

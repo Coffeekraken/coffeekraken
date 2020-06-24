@@ -1,8 +1,8 @@
-import distanceBetween from "./distanceBetween";
+import distanceBetween from './distanceBetween';
 
 /**
  * @name 		circleConstrain
- * @namespace       sugar.js.geom.2d
+ * @namespace           js.geom.2d
  * @type      Function
  *
  * Take as parameter a central point, a radius and a points to constrain inside the circle defined by the radius

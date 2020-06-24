@@ -3,12 +3,12 @@ import __isEqual from 'is-equal';
 
 /**
  * @name                      diff
- * @namespace                 sugar.js.object
+ * @namespace           js.object
  * @type                      Function
- * 
+ *
  * This function take two objects and return an object that contains only what has been changed between the two.
  * This function is a simple wrapper around the nice object-diff package from Thomas Jensen that you can find here: https://www.npmjs.com/package/object-diff
- * 
+ *
  * @param         {Object}          object1            The first object used for the diff process
  * @param         {Object}          object2            The second object used for the diff process
  * @param         {Object}          [settings={}]      An object of settings to configure the diff process:
@@ -19,11 +19,11 @@ import __isEqual from 'is-equal';
  * - emptyObject (false) {Boolean}: Specify if you want to keep the empty objects in the resulting one
  * - updated (true) {Boolean}: Specify if you want to include the updated values
  * @return        {Object}                             The object that contains only the differences between the two
- * 
+ *
  * @example         js
  * import diff from '@coffeekraken/sugar/js/object/diff';
  * const myObject1 = {
- *    hello: 'world', 
+ *    hello: 'world',
  *    plop: 'yop'
  * };
  * const myObject2 = {
@@ -36,11 +36,10 @@ import __isEqual from 'is-equal';
  *    coco: 'plop',
  *    hello: 'hey!'
  * }
- * 
+ *
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function diff(object1, object2, settings = {}) {
-
   settings = {
     deep: true,
     added: true,
@@ -53,7 +52,9 @@ export default function diff(object1, object2, settings = {}) {
 
   const finalObj = {};
 
-  const keys = Array.from(new Set([...Object.keys(object1), ...Object.keys(object2)]));
+  const keys = Array.from(
+    new Set([...Object.keys(object1), ...Object.keys(object2)])
+  );
 
   for (let i = 0; i < keys.length; i++) {
     const _prop = keys[i];
@@ -89,7 +90,10 @@ export default function diff(object1, object2, settings = {}) {
     }
 
     if (settings.emptyObject) {
-      if (__isPlainObject(object1[_prop]) && Object.keys(object1[_prop]).length === 0) {
+      if (
+        __isPlainObject(object1[_prop]) &&
+        Object.keys(object1[_prop]).length === 0
+      ) {
         finalObj[_prop] = {};
         continue;
       }
@@ -104,9 +108,7 @@ export default function diff(object1, object2, settings = {}) {
         continue;
       }
     }
-
   }
 
   return finalObj;
-
 }

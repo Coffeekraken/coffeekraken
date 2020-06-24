@@ -1,6 +1,6 @@
 /**
  * @name                                  parse
- * @namespace                             sugar.js.string
+ * @namespace           js.string
  * @type                                  Function
  *
  * Parse a string and convert it into his native data type like date, number, boolean, etc...
@@ -21,7 +21,7 @@ export default (value) => {
       "use strict";
       return (${value});
     `)();
-  } catch(e) {
+  } catch (e) {
     return value;
   }
-}
+};

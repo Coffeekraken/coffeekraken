@@ -41,7 +41,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /**
  * @name 		SColor
- * @namespace      sugar.js.color
+ * @namespace           js.color
  * @type    Class
  *
  * Class that provide complete and simple to use color manupilation capabilities like:

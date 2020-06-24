@@ -21,7 +21,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /**
  * @name            syncDom
- * @namespace       sugar.js.socket
+ * @namespace           js.socket
  * @type            Function
  *
  * Simply connect to a backend socket.io server and listen for specifics messages from it to refresh automatically the DOM.
@@ -56,7 +56,7 @@ let SSocketDom = /*#__PURE__*/function () {
     _defineProperty(this, "_settings", {
       /**
        * @name      settings.node
-       * @namespace     sugar.js.class
+       * @namespace           js.class
        * @type        HTMLElement
        *
        * The root node where the html contents will be injected if no node is passed with the event
@@ -68,7 +68,7 @@ let SSocketDom = /*#__PURE__*/function () {
 
       /**
        * @name        settings.action
-       * @namespace       sugar.js class
+       * @namespace           js class
        * @type        String
        *
        * Specify which action will be executed if no one is passed with the event.
@@ -84,7 +84,7 @@ let SSocketDom = /*#__PURE__*/function () {
 
       /**
        * @name          settings.events
-       * @namespace       sugar.js.class
+       * @namespace           js.class
        * @type          Object
        *
        * Save the events scoped settings objects
@@ -204,7 +204,7 @@ let SSocketDom = /*#__PURE__*/function () {
     }
     /**
      * @name          emit
-     * @namespace         sugar.js.class
+     * @namespace           js.class
      * @type          Function
      *
      * Emit an event with an object containing some values to pass to the server
@@ -228,7 +228,7 @@ let SSocketDom = /*#__PURE__*/function () {
     }
     /**
      * @name          registerEvent
-     * @namespace       sugar.js.class
+     * @namespace           js.class
      * @type          Function
      *
      * Register a new event with an handler function that will handle the event content

@@ -1,8 +1,7 @@
-import __imagesLoaded from '../imagesLoaded';
-import __dispatchEvent from '../dispatchEvent';
+const __imagesLoaded = require('../imagesLoaded');
+const __dispatchEvent = require('../dispatchEvent');
 
 describe('sugar.js.dom.imagesLoaded', () => {
-
   document.head.innerHTML = `
     <img id="image1" src="src/data/tests/testing.jpg" />
     <img id="image2" src="src/data/tests/testing.jpg" />
@@ -12,17 +11,20 @@ describe('sugar.js.dom.imagesLoaded', () => {
   const $img2 = document.head.querySelector('#image2');
   const $img3 = document.head.querySelector('#image3');
 
-  let isLoaded = false, isError = false, imgsCount = 0;
+  let isLoaded = false,
+    isError = false,
+    imgsCount = 0;
 
-  __imagesLoaded([
-    $img1, $img2, $img3
-  ]).img(_$img => {
-    imgsCount++;
-  }).then(arrayImages => {
-    isLoaded = true;
-  }).catch(e => {
-    isError = true;
-  });
+  __imagesLoaded([$img1, $img2, $img3])
+    .on('img.loaded', (_$img) => {
+      imgsCount++;
+    })
+    .then((arrayImages) => {
+      isLoaded = true;
+    })
+    .catch((e) => {
+      isError = true;
+    });
 
   __dispatchEvent($img1, 'load');
   __dispatchEvent($img2, 'load');
@@ -33,5 +35,4 @@ describe('sugar.js.dom.imagesLoaded', () => {
     expect(isError).toBe(false);
     expect(imgsCount).toBe(3);
   });
-
 });

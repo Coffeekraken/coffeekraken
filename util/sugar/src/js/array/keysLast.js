@@ -1,8 +1,8 @@
-import uniq from "lodash/uniq";
+import uniq from 'lodash/uniq';
 
 /**
  * @name        keysLast
- * @namespace       sugar.js.array
+ * @namespace           js.array
  * @type      Function
  *
  * Make sure the passed array ends with the passed keys
@@ -20,7 +20,7 @@ import uniq from "lodash/uniq";
 export default function keysLast(array, keys) {
   // all the keys has to exist in the array stack
   // otherwise we filter it out
-  keys = keys.filter(key => {
+  keys = keys.filter((key) => {
     return array.indexOf(key) !== -1;
   });
   // add the keys at start

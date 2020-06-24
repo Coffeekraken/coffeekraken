@@ -13,7 +13,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name      splitLines
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Split each lines inside an HTMLElement by scoping them inside some tags.
@@ -38,9 +38,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function splitLines(elm, tag = "p", tagClass = "split-lines") {
+function splitLines(elm, tag = 'p', tagClass = 'split-lines') {
   // apply again on resize
-  window.addEventListener("resize", (0, _throttle.default)(e => {
+  window.addEventListener('resize', (0, _throttle.default)(e => {
     _splitLines(elm, tag, tagClass);
   }, 150)); // first call
 
@@ -62,9 +62,9 @@ function _splitLines(elm, tag, tagClass) {
   let words = string.match(/<\s*(\w+\b)(?:(?!<\s*\/\s*\1\b)[\s\S])*<\s*\/\s*\1\s*>|\S+/g);
   words = (0, _map2.default)(words, word => {
     return `<span class="s-split-lines">${word}</span>`;
-  }).join(" ");
+  }).join(' ');
   elm.innerHTML = words;
-  const spans = elm.querySelectorAll("span.s-split-lines");
+  const spans = elm.querySelectorAll('span.s-split-lines');
   let top = null;
   const lines = [];
   let line = [];
@@ -72,17 +72,17 @@ function _splitLines(elm, tag, tagClass) {
     const spanTop = spanElm.getBoundingClientRect().top;
 
     if (top && spanTop !== top) {
-      lines.push(line.join(" "));
+      lines.push(line.join(' '));
       line = [];
     }
 
     line.push(spanElm.innerHTML.trim());
     top = spanTop;
   });
-  lines.push(line.join(" "));
+  lines.push(line.join(' '));
   elm.innerHTML = lines.map(lineStr => {
     return `<${tag} class="${tagClass}__line">${lineStr}</${tag}>`;
-  }).join("");
+  }).join('');
 }
 
 module.exports = exports.default;

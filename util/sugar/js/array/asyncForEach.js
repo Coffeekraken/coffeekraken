@@ -7,7 +7,7 @@ exports.default = asyncForEach;
 
 /**
  * @name                              asyncForEach
- * @namespace                         sugar.js.array
+ * @namespace           js.array
  * @type                              Function
  *
  * Allow to make some async foreach on your arrays

@@ -2,7 +2,7 @@ import __SPromise from '../promise/SPromise';
 
 /**
  * @name        addEventListener
- * @namespace       sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Add an event listener on an element and return the function to remove the event listener
@@ -27,11 +27,9 @@ export default function addEventListener(
   callback = null,
   options = {}
 ) {
-
   let listenerFn = null;
 
   return new __SPromise((resolve, reject, trigger, cancel) => {
-
     listenerFn = (...args) => {
       if (callback) callback.apply(this, [...args]);
       trigger('then', ...args);

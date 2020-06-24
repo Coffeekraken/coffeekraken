@@ -31,7 +31,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /**
  * @name 		                    SRequest
- * @namespace                   sugar.js.http
+ * @namespace           js.http
  * @type                        Class
  *
  * Class that allows to simply handle ajax requests with ease.
@@ -62,9 +62,9 @@ let SRequest = /*#__PURE__*/function () {
    * @name                      _defaultRequestSettings
    * @type                      {SRequestConfig}
    * @private
-   * 
+   *
    * Store the request settings to use
-   * 
+   *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
@@ -72,9 +72,9 @@ let SRequest = /*#__PURE__*/function () {
    * @name                      _currentRequestSettings
    * @type                      {SRequestConfig}
    * @private
-   * 
+   *
    * Store the request settings to use
-   * 
+   *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
@@ -82,20 +82,20 @@ let SRequest = /*#__PURE__*/function () {
    * @name                      _requestsCount
    * @type                      Integer
    * @private
-   * 
+   *
    * Store how many requests have been sent
-   * 
+   *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
   /**
    * @name                              constructor
    * @type                              Function
-   * 
+   *
    * Constructor
-   * 
+   *
    * @param           	{SRequestConfig|Object} 		            request 	            	The request object used to make ajax call
-   * 
+   *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   function SRequest(request) {
@@ -118,11 +118,11 @@ let SRequest = /*#__PURE__*/function () {
    * @name                      _onSuccess
    * @type                      Function
    * @private
-   * 
+   *
    * Callback when the request has been a success
-   * 
+   *
    * @param           {Object}              response                  The axios response object
-   * 
+   *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
@@ -180,11 +180,11 @@ let SRequest = /*#__PURE__*/function () {
      * @name                      _onError
      * @type                      Function
      * @private
-     * 
+     *
      * Callback when the request return an error
-     * 
+     *
      * @param           {Object}              error                  The axios error object
-     * 
+     *
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
 
@@ -198,11 +198,11 @@ let SRequest = /*#__PURE__*/function () {
      * @name                          _send
      * @type                          Function
      * @private
-     * 
+     *
      * Send the actual request using axios
-     * 
+     *
      * @param         {Object}                [requestSettings={}]            The request settings for this particular request
-     * 
+     *
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
 
@@ -226,14 +226,14 @@ let SRequest = /*#__PURE__*/function () {
     /**
      * @name                retry
      * @type                Function
-     * 
+     *
      * Reset the request settings variables and relaunch the request
-     * 
+     *
      * @example           js
      * myAjax.retry().then(response => {
      *    // do something...
      * });
-     * 
+     *
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
 
@@ -245,19 +245,19 @@ let SRequest = /*#__PURE__*/function () {
     /**
      * @name              send
      * @type              Function
-     * 
+     *
      * Send the request and return a promise that will be resolved once all the requests
      * have been made or rejected if one of the requests has returned an error...
-     * 
+     *
      * @return 	      {Promise} 	          The promise through which you will be notified when data are here
-     * 
+     *
      * @example         js
      * myAjax.send().then(response => {
      *    // do something...
      * }).catch(error => {
      *    // do something...
      * });
-     * 
+     *
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
 

@@ -13,7 +13,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name      scrollToLocationHash
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Scroll to the location hash if an hash is present.
@@ -39,12 +39,12 @@ function scrollToLocationHash(duration = 500, offset = 0, easing = _easeInOutQui
 
   if (!targetElm) return; // tell the browser that we handle the scroll restoration manually
 
-  if ("scrollRestoration" in history) {
-    history.scrollRestoration = "manual";
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
   } // scroll to target
 
 
-  (0, _scrollTo.default)(targetElm, duration, easing, offset, "top");
+  (0, _scrollTo.default)(targetElm, duration, easing, offset, 'top');
 }
 
 module.exports = exports.default;

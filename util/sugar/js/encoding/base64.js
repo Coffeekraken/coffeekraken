@@ -7,17 +7,17 @@ exports.default = void 0;
 
 /**
  * @name                    base64
- * @namespace               sugar.js.encoding
+ * @namespace           js.encoding
  * @type                    Object
- * 
+ *
  * This return an object containing the "encode" and "decode" function that you can use
  * to encode/decode base64 Strings.
- * 
+ *
  * @example           js
  * import base64 from '@coffeekraken/sugar/js/encoding/base64';
  * base64.encode('Hello world');
  * base64.decode('SGVsbG8gV29ybGQh');
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 var _default = {

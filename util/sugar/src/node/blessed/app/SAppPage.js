@@ -4,7 +4,7 @@ const __deepMerge = require('../../object/deepMerge');
 
 /**
  * @name                    SAppPage
- * @namespace               sugar.node.blessed.app
+ * @namespace           node.blessed.app
  * @type                    Class
  * @extends                 SComponent
  *

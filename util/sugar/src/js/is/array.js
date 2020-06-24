@@ -1,6 +1,6 @@
 /**
  * @name        isArray
- * @namespace       sugar.js.is
+ * @namespace           js.is
  * @type      Function
  *
  * Check if the passed value is a js Array
@@ -17,5 +17,5 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function isArray(value) {
-  return value && typeof value === "object" && value.constructor === Array;
+  return value && typeof value === 'object' && value.constructor === Array;
 }

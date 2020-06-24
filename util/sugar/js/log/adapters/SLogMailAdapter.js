@@ -27,12 +27,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /**
  * @name                    SLogMailAdapter
- * @namespace               sugar.js.log
+ * @namespace           js.log
  * @type                    Class
- * 
+ *
  * This class allows you to log your messages, errors, etc... easily through some adapters that cover some targets like "console" of course,
  * "mail", "slack", etc...
- * 
+ *
  * @example               js
  * import SLog from '@coffeekraken/sugar/js/log/SLog';
  * import SLogMailAdapter from '@coffeekraken/sugar/js/log/adapters/SLogMailAdapter';
@@ -42,7 +42,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  *    }
  * });
  * logger.log('Something cool happend...');
- * 
+ *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 let SLogMailAdapter = /*#__PURE__*/function () {
@@ -50,18 +50,18 @@ let SLogMailAdapter = /*#__PURE__*/function () {
    * @name          _settings
    * @type          Object
    * @private
-   * 
+   *
    * Store this instance settings
-   * 
+   *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
   /**
    * @name          constructor
    * @type          Function
-   * 
+   *
    * Constructor
-   * 
+   *
    * @param         {Object}        [settings={}]           The settings object to configure your SLogMailAdapter instance. Here's the settings available:
    * - host (null) {String}: Your smtp server hostname
    * - username (null) {String}: Your smtp username if needed
@@ -72,7 +72,7 @@ let SLogMailAdapter = /*#__PURE__*/function () {
    * - subject ('[level] sugar.js.log') {String}: The mail title. You can use the [level] placeholder to be replaced with the actual log level
    * - body ('[content]') {String}: The mail body. You can use the [content] placeholder to be replaced with the actual log
    * - metas ({}) {Object}: An object that will be transformed into a list and place inside the mail [content]
-   * 
+   *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   function SLogMailAdapter(settings = {}) {
@@ -82,8 +82,8 @@ let SLogMailAdapter = /*#__PURE__*/function () {
 
     // extend settings
     this._settings = (0, _deepMerge.default)({
-      subject: "[level] sugar.js.log",
-      body: "[content]",
+      subject: '[level] sugar.js.log',
+      body: '[content]',
       metas: {}
     }, settings);
   }
@@ -91,16 +91,16 @@ let SLogMailAdapter = /*#__PURE__*/function () {
    * @name            log
    * @type            Function
    * @async
-   * 
+   *
    * This is the main method of the logger. It actually log the message passed as parameter to the console
-   * 
+   *
    * @param         {Mixed}          message            The message to log
    * @param         {String}         level              The log level. Can be "log", "info", "error", "debug" or "warn"
    * @return        {Promise}                           A promise that will be resolved once the message has been logged correctly
-   * 
+   *
    * @example         js
    * await consoleAdapter.log('hello world');
-   * 
+   *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 

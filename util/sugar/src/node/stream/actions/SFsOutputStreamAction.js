@@ -5,7 +5,7 @@ const __packageRoot = require('../../path/packageRoot');
 
 /**
  * @name            SFsOutputStreamAction
- * @namespace       sugar.node.stream.actions
+ * @namespace           node.stream.actions
  * @type            Class
  * @extends         SActionsStreamAction
  *

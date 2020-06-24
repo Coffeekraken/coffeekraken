@@ -8,7 +8,7 @@ function isInSugarPackage() {
 module.exports = {
   /**
    * @name            rootDir
-   * @namespace       sugar.config.doc
+   * @namespace       config.doc
    * @type            String
    * @default          ${__packageRoot(process.cwd())}/dist/doc
    *

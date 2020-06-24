@@ -1,7 +1,7 @@
 module.exports = {
   /**
    * @name            border-radius
-   * @namespace       sugar.config.look-and-feel
+   * @namespace       config.look-and-feel
    * @type            String
    * @default         0em
    *
@@ -14,7 +14,7 @@ module.exports = {
 
   /**
    * @name            padding-vertical
-   * @namespace       sugar.config.look-and-feel
+   * @namespace       config.look-and-feel
    * @type            String
    * @default         1.4em
    *
@@ -27,7 +27,7 @@ module.exports = {
 
   /**
    * @name            padding-horizontal
-   * @namespace       sugar.config.look-and-feel
+   * @namespace       config.look-and-feel
    * @type            String
    * @default         0.8em
    *
@@ -40,7 +40,7 @@ module.exports = {
 
   /**
    * @name            disabled-opacity
-   * @namespace       sugar.config.look-and-feel
+   * @namespace       config.look-and-feel
    * @type            Number
    * @default         0.5
    *
@@ -53,7 +53,7 @@ module.exports = {
 
   /**
    * @name            line-height
-   * @namespace       sugar.config.look-and-feel
+   * @namespace       config.look-and-feel
    * @type            Number
    * @default         1.4
    *

@@ -1,6 +1,6 @@
 /**
  * @name              argumentTypeDefinitionString
- * @namespace         sugar.js.parse
+ * @namespace           js.parse
  * @type              Function
  *
  * Thia function take an argument type definition string like "String", "Array<String>", "Array|String", etc... and return an object that represent this.

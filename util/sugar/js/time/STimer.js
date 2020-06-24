@@ -41,7 +41,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /**
  * @name 		            STimer
- * @namespace           sugar.js.time
+ * @namespace           js.time
  * @type                  Class
  * @extends               SPromise
  *

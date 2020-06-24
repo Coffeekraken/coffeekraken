@@ -15,7 +15,7 @@ const __SInputPopup = require('../popup/SInputPopup');
 
 /**
  * @name                  SCommandPanel
- * @namespace             sugar.node.blessed
+ * @namespace           node.blessed
  * @type                  Class
  *
  * This class is a simple SPanel extended one that accesp an SCommandPanel instance

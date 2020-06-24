@@ -1,10 +1,10 @@
-import uniqid from "../util/uniqid";
+import uniqid from '../util/uniqid';
 
 // TODO tests
 
 /**
  * @name 		          SGooeySvgFilter
- * @namespace       sugar.js.filter
+ * @namespace           js.filter
  * @type             Class
  *
  * This class allows you to create with ease some complexe SVG filters and to apply it on any HTMLElement that you want
@@ -27,15 +27,14 @@ import uniqid from "../util/uniqid";
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default class SSvgFilter {
-
   /**
    * @name          constructor
    * @type          Function
-   * 
+   *
    * Constructor
-   * 
+   *
    * @param 			{String} 			filter          The SVG filter string representation
-   * 
+   *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(filter_content) {
@@ -46,10 +45,10 @@ export default class SSvgFilter {
     this.filter_content = filter_content;
 
     // generate a uniqid
-    this.id = "s-svg-filter-" + uniqid();
+    this.id = 's-svg-filter-' + uniqid();
 
     // if need to inject svg
-    if (!document.body.querySelector("#s-svg-filters"))
+    if (!document.body.querySelector('#s-svg-filters'))
       SSvgFilter._injectFiltersContainer();
 
     // insert the filter
@@ -59,16 +58,16 @@ export default class SSvgFilter {
   /**
    * @name            applyTo
    * @type            Function
-   * 
+   *
    * Apply the filter to an element
-   * 
+   *
    * @param 		{HTMLElement} 			elm 			The element on which to apply the filter
-   * 
+   *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   applyTo(elm) {
-    ["-webkit-", "-moz-", "-ms-", "-o-", ""].forEach(vendor => {
-      elm.style[vendor + "filter"] = 'url("#' + this.id + '")';
+    ['-webkit-', '-moz-', '-ms-', '-o-', ''].forEach((vendor) => {
+      elm.style[vendor + 'filter'] = 'url("#' + this.id + '")';
     });
     this.elms.push(elm);
   }
@@ -76,17 +75,17 @@ export default class SSvgFilter {
   /**
    * @name          unapplyFrom
    * @type          Function
-   * 
+   *
    * Unapply from
-   * 
+   *
    * @param 		{HTMLElement} 			elm 			The element from which to remove the filter
-   * 
+   *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   unapplyFrom(elm) {
-    ["-webkit-", "-moz-", "-ms-", "-o-", ""].forEach(vendor => {
-      elm.style[vendor + "filter"] = null;
-      delete elm.style[vendor + "filter"];
+    ['-webkit-', '-moz-', '-ms-', '-o-', ''].forEach((vendor) => {
+      elm.style[vendor + 'filter'] = null;
+      delete elm.style[vendor + 'filter'];
     });
     // remove from stack
     let idx = this.elms.indexOf(elm);
@@ -97,9 +96,9 @@ export default class SSvgFilter {
    * @name          _insertFilter
    * @type          Function
    * @private
-   * 
+   *
    * Insert the filter
-   * 
+   *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _insertFilter() {
@@ -109,30 +108,30 @@ export default class SSvgFilter {
 				</defs>
 			</svg>
 		`;
-    let div = document.createElement("div");
+    let div = document.createElement('div');
     div.innerHTML = svg;
-    let defs = div.querySelector("defs");
+    let defs = div.querySelector('defs');
 
     // add the filter to the svg
     this.filter_content =
-      '<filter id="' + this.id + '">' + this.filter_content + "</filter>";
+      '<filter id="' + this.id + '">' + this.filter_content + '</filter>';
     defs.innerHTML = this.filter_content;
-    this.filter = defs.querySelector("#" + this.id);
-    this.svg = div.querySelector("svg");
+    this.filter = defs.querySelector('#' + this.id);
+    this.svg = div.querySelector('svg');
     SSvgFilter.filtersContainer.appendChild(this.svg);
   }
 
   /**
    * @name          destroy
    * @type          Function
-   * 
+   *
    * Destroy the filter
-   * 
+   *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   destroy() {
     // loop on each element savec in stack to remove the filter
-    this.elms.forEach(elm => {
+    this.elms.forEach((elm) => {
       this.unapplyFrom(elm);
     });
     // remove the filter from the html
@@ -144,22 +143,22 @@ export default class SSvgFilter {
    * @type          Function
    * @private
    * @static
-   * 
+   *
    * Inject the svg that will contains all the filters created through this class
-   * 
+   *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   static _injectFiltersContainer() {
-    let style = ["position:absolute;", "left:-1000px;", "top:-300px;"];
+    let style = ['position:absolute;', 'left:-1000px;', 'top:-300px;'];
     if (
       /Chrome/.test(navigator.userAgent) &&
       /Google Inc/.test(navigator.vendor)
     ) {
-      style.push("display:none;");
+      style.push('display:none;');
     }
-    SSvgFilter.filtersContainer = document.createElement("div");
-    SSvgFilter.filtersContainer.id = "s-svg-filters";
-    SSvgFilter.filtersContainer.style = style.join(" ");
+    SSvgFilter.filtersContainer = document.createElement('div');
+    SSvgFilter.filtersContainer.id = 's-svg-filters';
+    SSvgFilter.filtersContainer.style = style.join(' ');
     document.body.appendChild(SSvgFilter.filtersContainer);
   }
 }

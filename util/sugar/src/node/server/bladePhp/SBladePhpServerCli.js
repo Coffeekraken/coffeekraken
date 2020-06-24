@@ -6,7 +6,7 @@ const __sugarConfig = require('../../config/sugar');
 
 /**
  * @name            SBladePhpServerCli
- * @namespace       sugar.node.server.bladePhp
+ * @namespace           node.server.bladePhp
  * @type            Class
  * @extends         SPhpServerCli
  *

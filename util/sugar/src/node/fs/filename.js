@@ -4,7 +4,7 @@ const __extension = require('./extension');
 
 /**
  * @name                       filename
- * @namespace                   sugar.node.fs
+ * @namespace           node.fs
  * @type                        Function
  *
  * Return the filename from the passed path with or without the extension
@@ -25,4 +25,4 @@ module.exports = function filename(path, withExtension = true) {
     filename = filename.replace(__extension(filename), '');
   }
   return filename;
-}
+};

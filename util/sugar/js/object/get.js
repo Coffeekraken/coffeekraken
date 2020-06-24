@@ -7,7 +7,7 @@ exports.default = void 0;
 
 /**
  * @name                          get
- * @namespace                     sugar.js.object
+ * @namespace           js.object
  * @type                          Function
  *
  * Retreive an object value using a dotted path like "myObject.myProperty.myValue"

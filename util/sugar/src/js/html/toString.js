@@ -1,6 +1,6 @@
 /**
  * @name            toString
- * @namespace       sugar.js.html
+ * @namespace           js.html
  * @type      Function
  *
  * Return the string version of a dom node or the dom node and his children
@@ -18,7 +18,7 @@
  */
 export default function toString(html, deep = true) {
   if (document !== undefined && document.createElement !== undefined) {
-    const cont = document.createElement("div");
+    const cont = document.createElement('div');
     cont.appendChild(html.cloneNode(deep));
     return cont.innerHTML;
   }

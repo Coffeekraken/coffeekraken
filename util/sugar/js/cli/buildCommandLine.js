@@ -13,7 +13,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name            buildCommandLine
- * @namespace       sugar.js.cli
+ * @namespace           js.cli
  * @type            Function
  *
  * This function takes as parameters a command line (with tokens), an arguments object and a definition object to

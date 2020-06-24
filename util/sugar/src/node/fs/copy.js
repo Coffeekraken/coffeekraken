@@ -4,7 +4,7 @@ const __fs = require('fs-extra');
 
 /**
  * @name        copy
- * @namespace     sugar.node.fs
+ * @namespace           node.fs
  * @type          Function
  * @async
  *
@@ -25,4 +25,4 @@ const __fs = require('fs-extra');
  */
 module.exports = function copy(src, dest) {
   return __fs.copy(src, dest);
-}
+};

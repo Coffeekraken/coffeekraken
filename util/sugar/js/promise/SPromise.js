@@ -41,7 +41,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /**
  * @name                  SPromise
- * @namespace             sugar.js.promise
+ * @namespace           js.promise
  * @type                  Class
  *
  * This class works the same as the default Promise one. The difference is that you have more control on this one like
@@ -835,6 +835,42 @@ let SPromise = /*#__PURE__*/function (_Promise) {
 
         this._registerCallbackInStack(name, callNumber, callback);
       }); // maintain chainability
+
+      return this;
+    }
+    /**
+     * @name            off
+     * @type            Function
+     *
+     * This method allows you to unsubscribe to an event by passing the event name an optionally the callback function.
+     * If you don't pass the callback function, all the subscribed events the same as the passed one will be unsubscribed.
+     *
+     * @param       {String}        name        The event name to unsubscribe to
+     * @param       {Function}    [callback=null]     The callback function you want to unsubscribe
+     * @return      {SPromise}                The SPromise instance to maintain chainability
+     *
+     * @since     2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+
+  }, {
+    key: "off",
+    value: function off(name, callback = null) {
+      if (!callback) {
+        delete this._stacks[name];
+        return this;
+      } // get the stack
+
+
+      let stack = this._stacks[name];
+      if (!stack) return this; // loop on the stack registered callback to finc the one to delete
+
+      stack = stack.filter(item => {
+        if (item.callback === callback) return false;
+        return true;
+      }); // make sure we have saved the new stack
+
+      this._stacks[name] = stack; // maintain chainability
 
       return this;
     }

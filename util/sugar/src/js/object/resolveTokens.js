@@ -3,7 +3,7 @@ import __get from './get';
 
 /**
  * @name                      resolveTokens
- * @namespace                 sugar.js.object
+ * @namespace           js.object
  * @type                      Function
  *
  * This function take an object and propare it to accept tokens like:

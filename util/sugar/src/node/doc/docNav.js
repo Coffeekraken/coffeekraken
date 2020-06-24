@@ -12,7 +12,7 @@ const __sugarConfig = require('../config/sugar');
 
 /**
  * @name              docNav
- * @namespace         sugar.node.doc
+ * @namespace           node.doc
  * @type              Function
  *
  * This function take as parameter a docMap JSON data structure and convert it to an

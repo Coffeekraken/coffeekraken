@@ -7,7 +7,7 @@ const __exitCleanup = require('../process/exitCleanup');
 
 /**
  * @name            STermApp
- * @namespace       sugar.node.termapp
+ * @namespace           node.termapp
  * @type            Class
  * @extends         SApp
  *

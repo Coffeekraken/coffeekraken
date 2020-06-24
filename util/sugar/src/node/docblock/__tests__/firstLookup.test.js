@@ -3,9 +3,9 @@ describe('sugar.node.docblock.firstLookup', () => {
   it('Should search and extract the first docblock correctly', async (done) => {
     const firstLookup = await __firstLookup(`${__dirname}/doc`);
 
-    expect(firstLookup['sugar.some.thing.something']).toEqual({
+    expect(firstLookup['some.thing.something']).toEqual({
       name: 'something',
-      namespace: 'sugar.some.thing',
+      namespace: 'some.thing',
       description: 'This is something',
       param: {
         param1: {
@@ -29,9 +29,9 @@ describe('sugar.node.docblock.firstLookup', () => {
       },
       path: 'somethinf.md'
     });
-    expect(firstLookup['sugar.other.thing.coco.otherThing']).toEqual({
+    expect(firstLookup['other.thing.coco.otherThing']).toEqual({
       name: 'otherThing',
-      namespace: 'sugar.other.thing.coco',
+      namespace: 'other.thing.coco',
       description: 'This is another thing',
       param: {
         param1: {

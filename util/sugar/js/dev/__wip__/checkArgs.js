@@ -17,7 +17,7 @@ const __upperFirst = require('../string/upperFirst'); // TODO Make tests and pre
 
 /**
  * @name                        checkArgs
- * @namespace                   sugar.js.dev
+ * @namespace           js.dev
  * @type                        Function
  *
  * Check the arguments of a function by checking his type, his values, etc...

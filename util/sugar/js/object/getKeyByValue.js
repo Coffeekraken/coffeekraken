@@ -7,7 +7,7 @@ exports.default = getKeyByValue;
 
 /**
  * @name          getKeyByValue
- * @namespace     sugar.js.object
+ * @namespace           js.object
  * @type          Function
  *
  * Return the key that correspond to the passed value in the passed object

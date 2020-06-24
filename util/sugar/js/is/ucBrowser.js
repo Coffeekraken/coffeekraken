@@ -7,13 +7,13 @@ exports.default = isUcBrowser;
 
 /**
  * @name        isUcBrowser
- * @namespace       sugar.js.is
+ * @namespace           js.is
  * @type      Function
  *
  * Detect if is the UC stock browser that is running the page
  *
  * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test
- * 
+ *
  * @example    js
  * import isUcBrowser from '@coffeekraken/sugar/js/is/ucBrowser'
  * if (isUcBrowser()) {

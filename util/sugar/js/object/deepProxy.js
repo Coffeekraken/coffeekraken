@@ -11,7 +11,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name                            deepProxy
- * @namespace                       sugar.js.object
+ * @namespace           js.object
  * @type                            Function
  *
  * This function allows you to add Proxy to an object in deep fashion.

@@ -9,7 +9,7 @@ const __upperFirst = require('../string/upperFirst');
 
 /**
  * @name                        checkArgs
- * @namespace                   sugar.js.dev
+ * @namespace           js.dev
  * @type                        Function
  *
  * Check the arguments of a function by checking his type, his values, etc...
@@ -40,7 +40,6 @@ const __upperFirst = require('../string/upperFirst');
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function checkArgs(func, args, descriptor, throwError = true) {
-
   // get the function arguments names
   const argumentsNames = __getArgsNames(func);
 
@@ -68,12 +67,15 @@ export default function checkArgs(func, args, descriptor, throwError = true) {
     const descriptionObj = __parseArgs(descriptor[argName], {
       types: '["String","Array"] -t --types',
       values: 'Array -v --values',
-      of: 'Array -o --of /[a-zA-Z]+,?/ "Number,BigInt,String,Boolean,Null,Undefined,Object,Symbol,Function,Array"',
+      of:
+        'Array -o --of /[a-zA-Z]+,?/ "Number,BigInt,String,Boolean,Null,Undefined,Object,Symbol,Function,Array"',
       greater: 'Number -g --greater /^\\d$/',
       lower: 'Number -l --lower /^\\d$/',
       allowUndefined: 'Boolean -u --allow-undefined "false"',
       allowNull: 'Boolean -n --allow-null "false"',
-      default: `[${availableTypes.map((i) => `"${__upperFirst(i)}"`).toString()}] -d --default /\"[\\s\\S]+\"/`
+      default: `[${availableTypes
+        .map((i) => `"${__upperFirst(i)}"`)
+        .toString()}] -d --default /\"[\\s\\S]+\"/`
     });
 
     console.log(descriptionObj);
@@ -87,29 +89,49 @@ export default function checkArgs(func, args, descriptor, throwError = true) {
 
     // check allow undefined
     if (!descriptionObj.allowUndefined.value && argValue === undefined) {
-      throw new Error(`The argument <yellow><bold>"${argName}"</bold></yellow> of the function <cyan><bold>"${func.name}"</bold></cyan> cannot be undefined...`);
+      throw new Error(
+        `The argument <yellow><bold>"${argName}"</bold></yellow> of the function <cyan><bold>"${func.name}"</bold></cyan> cannot be undefined...`
+      );
     }
 
     // check allow null
     if (!descriptionObj.allowNull.value && argValue === null) {
-      throw new Error(`The argument <yellow><bold>"${argName}"</bold></yellow> of the function <cyan><bold>"${func.name}"</bold></cyan>cannot be null...`);
+      throw new Error(
+        `The argument <yellow><bold>"${argName}"</bold></yellow> of the function <cyan><bold>"${func.name}"</bold></cyan>cannot be null...`
+      );
     }
 
     // check type
-    const allowedTypes = typeof descriptionObj.types.value ? [descriptionObj.types.value] : descriptionObj.types.value;
+    const allowedTypes = typeof descriptionObj.types.value
+      ? [descriptionObj.types.value]
+      : descriptionObj.types.value;
     if (Array.isArray(allowedTypes)) {
-      const argType = Array.isArray(argValue) ? 'Array' : __upperFirst(typeof argValue);
-      let isValid = argValue === undefined && descriptionObj.allowUndefined.value ? true : false;
-      isValid = argValue === null && descriptionObj.allowNull.value ? true : isValid;
+      const argType = Array.isArray(argValue)
+        ? 'Array'
+        : __upperFirst(typeof argValue);
+      let isValid =
+        argValue === undefined && descriptionObj.allowUndefined.value
+          ? true
+          : false;
+      isValid =
+        argValue === null && descriptionObj.allowNull.value ? true : isValid;
       allowedTypes.forEach((type) => {
         if (__upperFirst(type) === argType) {
           isValid = true;
         }
       });
       if (!isValid) {
-        let argValueToDisplay = typeof argValue === 'function' ? argValue.name : argValue;
-        if (argValueToDisplay === '' && typeof argValue === 'function') argValueToDisplay = 'Anonymous function';
-        throw new Error(`The argument <yellow><bold>"${argName}"<bold></yellow> of the function <cyan><bold>"${func.name}"</bold></cyan> has to be of type <red>"${allowedTypes.join(',')}"</red> but the passed value <red>"${argValueToDisplay}"</red> is a "${argType}"...`);
+        let argValueToDisplay =
+          typeof argValue === 'function' ? argValue.name : argValue;
+        if (argValueToDisplay === '' && typeof argValue === 'function')
+          argValueToDisplay = 'Anonymous function';
+        throw new Error(
+          `The argument <yellow><bold>"${argName}"<bold></yellow> of the function <cyan><bold>"${
+            func.name
+          }"</bold></cyan> has to be of type <red>"${allowedTypes.join(
+            ','
+          )}"</red> but the passed value <red>"${argValueToDisplay}"</red> is a "${argType}"...`
+        );
       }
     }
 
@@ -129,51 +151,69 @@ export default function checkArgs(func, args, descriptor, throwError = true) {
         }
       });
       if (!isTypeValid) {
-        throw new Error(`The value <red>"${invalidValue}"</red> in the argument Array <yellow><bold>"${argName}"</bold></yellow> of the function <cyan><bold>"${func.name}"</bold></cyan> has to be of type <cyan><bold>"${descriptionObj.of.value.join(',')}"</bold></cyan> but is a <cyan><bold>"${invalidType}"</bold></cyan>...`);
+        throw new Error(
+          `The value <red>"${invalidValue}"</red> in the argument Array <yellow><bold>"${argName}"</bold></yellow> of the function <cyan><bold>"${
+            func.name
+          }"</bold></cyan> has to be of type <cyan><bold>"${descriptionObj.of.value.join(
+            ','
+          )}"</bold></cyan> but is a <cyan><bold>"${invalidType}"</bold></cyan>...`
+        );
       }
     }
 
     // check possible values
-    if (descriptionObj.values.value && Array.isArray(descriptionObj.values.value)) {
-
+    if (
+      descriptionObj.values.value &&
+      Array.isArray(descriptionObj.values.value)
+    ) {
       const argValueToCheck = Array.isArray(argValue) ? argValue : [argValue];
 
       argValueToCheck.forEach((v) => {
         if (descriptionObj.values.value.indexOf(v) === -1) {
-          throw new Error(`The argument <yellow><bold>"${argName}"</bold></yellow> of the function <cyan><bold>"${func.name}"</bold></cyan> has to be one of these values <red><bold>"${descriptionObj.values.value.join(',')}"</bold></red> but is <red><bold>"${v}"</bold></red>...`);
+          throw new Error(
+            `The argument <yellow><bold>"${argName}"</bold></yellow> of the function <cyan><bold>"${
+              func.name
+            }"</bold></cyan> has to be one of these values <red><bold>"${descriptionObj.values.value.join(
+              ','
+            )}"</bold></red> but is <red><bold>"${v}"</bold></red>...`
+          );
         }
       });
     }
 
     // check greater
-    if (typeof descriptionObj.greater.value === 'number' && typeof argValue === 'number') {
-
+    if (
+      typeof descriptionObj.greater.value === 'number' &&
+      typeof argValue === 'number'
+    ) {
       const argValueToCheck = Array.isArray(argValue) ? argValue : [argValue];
 
       argValueToCheck.forEach((v) => {
         if (v <= descriptionObj.greater.value) {
-          throw new Error(`The argument <yellow><bold>"${argName}"</bold></yellow> of the function <cyan><bold>"${func.name}"</bold></cyan> has to be greater than <red><bold>"${descriptionObj.greater.value}"</bold></red> but is <red><bold>"${v}"</bold></red>...`);
+          throw new Error(
+            `The argument <yellow><bold>"${argName}"</bold></yellow> of the function <cyan><bold>"${func.name}"</bold></cyan> has to be greater than <red><bold>"${descriptionObj.greater.value}"</bold></red> but is <red><bold>"${v}"</bold></red>...`
+          );
         }
       });
-
     }
 
     // check lower
-    if (typeof descriptionObj.lower.value === 'number' && typeof argValue === 'number') {
-
+    if (
+      typeof descriptionObj.lower.value === 'number' &&
+      typeof argValue === 'number'
+    ) {
       const argValueToCheck = Array.isArray(argValue) ? argValue : [argValue];
 
       argValueToCheck.forEach((v) => {
         if (v >= descriptionObj.lower.value) {
-          throw new Error(`The argument <yellow><bold>"${argName}"</bold></yellow> of the function <cyan><bold>"${func.name}"</bold></cyan> has to be lower than <red><bold>"${descriptionObj.lower.value}"</bold></red> but is <red><bold>"${v}"</bold></red>...`);
+          throw new Error(
+            `The argument <yellow><bold>"${argName}"</bold></yellow> of the function <cyan><bold>"${func.name}"</bold></cyan> has to be lower than <red><bold>"${descriptionObj.lower.value}"</bold></red> but is <red><bold>"${v}"</bold></red>...`
+          );
         }
       });
-
     }
-
   });
 
   // return the result object
   return resultObj;
-
 }

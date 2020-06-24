@@ -2,7 +2,7 @@ module.exports = {
   colors: {
     /**
      * @name                primary
-     * @namespace           sugar.config.terminal.colors
+     * @namespace           config.terminal.colors
      * @type                Color
      * @default             #343a43
      *
@@ -15,7 +15,7 @@ module.exports = {
 
     /**
      * @name                secondary
-     * @namespace           sugar.config.terminal.colors
+     * @namespace           config.terminal.colors
      * @type                Color
      * @default             #343a43
      *
@@ -28,7 +28,7 @@ module.exports = {
 
     /**
      * @name                black
-     * @namespace           sugar.config.terminal.colors
+     * @namespace           config.terminal.colors
      * @type                Color
      * @default             #343a43
      *
@@ -43,7 +43,7 @@ module.exports = {
 
     /**
      * @name                red
-     * @namespace           sugar.config.terminal.colors
+     * @namespace           config.terminal.colors
      * @type                Color
      * @default             #e78287
      *
@@ -58,7 +58,7 @@ module.exports = {
 
     /**
      * @name                green
-     * @namespace           sugar.config.terminal.colors
+     * @namespace           config.terminal.colors
      * @type                Color
      * @default             #a7cb8b
      *
@@ -73,7 +73,7 @@ module.exports = {
 
     /**
      * @name                yellow
-     * @namespace           sugar.config.terminal.colors
+     * @namespace           config.terminal.colors
      * @type                Color
      * @default             #ffdc89
      *
@@ -88,7 +88,7 @@ module.exports = {
 
     /**
      * @name                blue
-     * @namespace           sugar.config.terminal.colors
+     * @namespace           config.terminal.colors
      * @type                Color
      * @default             #71bdf2
      *
@@ -103,7 +103,7 @@ module.exports = {
 
     /**
      * @name                magenta
-     * @namespace           sugar.config.terminal.colors
+     * @namespace           config.terminal.colors
      * @type                Color
      * @default             #d190e3
      *
@@ -118,7 +118,7 @@ module.exports = {
 
     /**
      * @name                cyan
-     * @namespace           sugar.config.terminal.colors
+     * @namespace           config.terminal.colors
      * @type                Color
      * @default             #65c1cd
      *
@@ -133,7 +133,7 @@ module.exports = {
 
     /**
      * @name                white
-     * @namespace           sugar.config.terminal.colors
+     * @namespace           config.terminal.colors
      * @type                Color
      * @default             #e2e5e9
      *

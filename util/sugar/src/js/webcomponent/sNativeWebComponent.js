@@ -1,10 +1,10 @@
-import "document-register-element";
-import "@ungap/custom-elements-builtin";
-import { mix } from "../vendor/mixwith";
-import SWebComponentMixin from "./SWebComponentMixin";
+import 'document-register-element';
+import '@ungap/custom-elements-builtin';
+import { mix } from '../vendor/mixwith';
+import SWebComponentMixin from './SWebComponentMixin';
 /**
  * @name    sNativeWebComponent
- * @namespace     sugar.js.core
+ * @namespace           js.core
  * @type      Function
  *
  * Extend a native web element to create a new web component
@@ -22,7 +22,7 @@ import SWebComponentMixin from "./SWebComponentMixin";
  */
 const extendsStack = {};
 export default function sNativeWebComponent(HTMLElementToExtend) {
-  HTMLElementToExtend = (function(OriginalHTMLElement) {
+  HTMLElementToExtend = (function (OriginalHTMLElement) {
     if (!window[OriginalHTMLElement.name]) return OriginalHTMLElement;
     if (extendsStack[OriginalHTMLElement.name])
       return extendsStack[OriginalHTMLElement.name];

@@ -15,19 +15,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name                  convert
- * @namespace             sugar.js.unit
+ * @namespace           js.unit
  * @type                  Function
- * 
+ *
  * Convert a passed unit to the wanted one. If the passed unit is a number and not a string like "10rem", the unit is take as pixels
- * 
+ *
  * @param         {String|Number}           from            The base value to convert
  * @param         {String}                  [to='px']       The value unit you want back
  * @return        {Number}                                  The converted value
- * 
+ *
  * @example       js
  * import convert from '@coffeekraken/sugar/js/unit/convert';
  * convert('2rem', 'px');
- * 
+ *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function convert(from, to = 'px', $elm) {

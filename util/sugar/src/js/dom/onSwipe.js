@@ -1,6 +1,6 @@
 /**
  * @name      onSwipe
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Detect swipes gestures on touch devices.
@@ -32,8 +32,8 @@ export default function onSwipe(elm, cb, threshold = 100) {
   var touchendY = 0;
   var gesuredZone = elm;
   gesuredZone.addEventListener(
-    "touchstart",
-    function(event) {
+    'touchstart',
+    function (event) {
       touchstartX = event.changedTouches[0].screenX;
       touchstartY = event.changedTouches[0].screenY;
     },
@@ -41,8 +41,8 @@ export default function onSwipe(elm, cb, threshold = 100) {
   );
 
   gesuredZone.addEventListener(
-    "touchend",
-    function(event) {
+    'touchend',
+    function (event) {
       touchendX = event.changedTouches[0].screenX;
       touchendY = event.changedTouches[0].screenY;
       handleGesure();

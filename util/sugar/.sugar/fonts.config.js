@@ -1,7 +1,7 @@
 module.exports = {
   /**
    * @name            default
-   * @namespace       sugar.config.fonts
+   * @namespace       config.fonts
    * @type            Object
    *
    * Declare the <primary>default</primary> font face
@@ -16,7 +16,7 @@ module.exports = {
 
   /**
    * @name            title
-   * @namespace       sugar.config.fonts
+   * @namespace       config.fonts
    * @type            Object
    *
    * Declare the <primary>title</primary> font face
@@ -33,7 +33,7 @@ module.exports = {
 
   /**
    * @name            quote
-   * @namespace       sugar.config.fonts
+   * @namespace       config.fonts
    * @type            Object
    *
    * Declare the <primary>quote</primary> font face
@@ -51,7 +51,7 @@ module.exports = {
 
   /**
    * @name            code
-   * @namespace       sugar.config.fonts
+   * @namespace       config.fonts
    * @type            Object
    *
    * Declare the <primary>code</primary> font face

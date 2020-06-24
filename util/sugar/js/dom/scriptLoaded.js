@@ -11,7 +11,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name      scriptLoaded
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Detect when a script has been fully loaded
@@ -47,7 +47,7 @@ function loadScript($script) {
       if (!done) {
         state = $script.readyState;
 
-        if (state === "complete") {
+        if (state === 'complete') {
           handleLoad();
         }
       }

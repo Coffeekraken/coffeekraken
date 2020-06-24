@@ -6,7 +6,7 @@ const __resolveTokens = require('../object/resolveTokens');
 
 /**
  * @name                  sugar
- * @namespace             sugar.node.config
+ * @namespace           node.config
  * @type                  Function
  *
  * This function allows you to access easily the configurations stored in the ```sugar.config.js```.

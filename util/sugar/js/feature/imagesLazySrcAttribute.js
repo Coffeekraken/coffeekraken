@@ -10,7 +10,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name 		imagesLazySrcAttribute
- * @namespace       sugar.js.feature
+ * @namespace           js.feature
  * @type      Feature
  *
  * Add support for the `lazy-src` attribute on `img` elements.
@@ -21,8 +21,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-(0, _querySelectorLive.default)("img[lazy-src]:not([is])", $imgElm => {
+(0, _querySelectorLive.default)('img[lazy-src]:not([is])', $imgElm => {
   (0, _whenInViewport.default)($imgElm).then(() => {
-    $imgElm.setAttribute("src", $imgElm.getAttribute("lazy-src"));
+    $imgElm.setAttribute('src', $imgElm.getAttribute('lazy-src'));
   });
 });

@@ -7,7 +7,7 @@ exports.default = pad;
 
 /**
  * @name        pad
- * @namespace       sugar.js.number
+ * @namespace           js.number
  * @type      Function
  *
  * Pad a number n of x 0 or another passed character
@@ -22,8 +22,8 @@ exports.default = pad;
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function pad(number, width, character = "0") {
-  number = number + "";
+function pad(number, width, character = '0') {
+  number = number + '';
   return number.length >= width ? number : new Array(width - number.length + 1).join(character) + number;
 }
 

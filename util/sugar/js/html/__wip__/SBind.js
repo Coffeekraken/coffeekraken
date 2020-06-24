@@ -34,9 +34,9 @@ let SBind = /*#__PURE__*/function () {
    * @name              _bindStack
    * @type              Object
    * @private
-   * 
+   *
    * Store all the bind objects settings
-   * 
+   *
    * @author		Olivier Bossel<olivier.bossel@gmail.com>
    */
 
@@ -44,10 +44,10 @@ let SBind = /*#__PURE__*/function () {
    * @name                _mutationObservedElementsStack
    * @type                Array
    * @private
-   * 
+   *
    * Store all the mutation observers that are used to
    * be notified when attributes are updated
-   * 
+   *
    * @author		Olivier Bossel<olivier.bossel@gmail.com>
    */
 
@@ -55,11 +55,11 @@ let SBind = /*#__PURE__*/function () {
    * @name                _digestsMutation
    * @type                Map
    * @private
-   * 
+   *
    * Store for each binded HTMLElement if each binded attributes are
    * in digest phase to avoid multiple assignement of the same attribute
    * in each digest phase
-   * 
+   *
    * @author		Olivier Bossel<olivier.bossel@gmail.com>
    */
 
@@ -84,16 +84,16 @@ let SBind = /*#__PURE__*/function () {
   /**
    * @name                  bind
    * @type                  Function
-   * 
+   *
    * This method allows you to bind an Object|HTMLElement property to another Object|HTMLElement property
    * This mean that when the property of the first passed element is updated, the same property on the second
    * element will be updated as well
-   * 
+   *
    * @param       {Object|HTMLElement}        source            The source object
    * @param       {String}                    sourcePath        The source path to the property that you want to bind
    * @param       {Object|HTMLElement}        target            The target object
    * @param       {String}                    [targetPath=sourcePath]        The target path to the property that you want to be sync with the source element
-   * 
+   *
    * @author		Olivier Bossel<olivier.bossel@gmail.com>
    */
 

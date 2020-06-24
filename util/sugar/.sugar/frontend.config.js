@@ -7,7 +7,7 @@ module.exports = {
   menu: {
     /**
      * @name            doc
-     * @namespace       sugar.config.frontend.menu
+     * @namespace       config.frontend.menu
      * @type            Object
      *
      * List all the documentations views
@@ -18,7 +18,7 @@ module.exports = {
     doc: {
       /**
        * @name            generator
-       * @namespace       sugar.config.frontend.menu.doc
+       * @namespace       config.frontend.menu.doc
        * @type            Function
        * @async
        *
@@ -35,7 +35,7 @@ module.exports = {
 
     /**
      * @name            views
-     * @namespace       sugar.config.frontend.menu
+     * @namespace       config.frontend.menu
      * @type            Object
      *
      * List all the developed views
@@ -46,7 +46,7 @@ module.exports = {
     views: {
       /**
        * @name            generator
-       * @namespace       sugar.config.frontend.menu.views
+       * @namespace       config.frontend.menu.views
        * @type            Function
        * @async
        *
@@ -65,7 +65,7 @@ module.exports = {
   pages: {
     /**
      * @name            views
-     * @namespace       sugar.config.frontend.pages
+     * @namespace       config.frontend.pages
      * @type            Object
      *
      * Store all the "views" configuration access like the slug, the title, etc...
@@ -76,7 +76,7 @@ module.exports = {
     views: {
       /**
        * @name          slug
-       * @namespace     sugar.config.frontend.pages.views
+       * @namespace     config.frontend.pages.views
        * @type          String
        * @default       /views
        *
@@ -89,7 +89,7 @@ module.exports = {
 
       /**
        * @name          title
-       * @namespace     sugar.config.frontent.pages.views
+       * @namespace     config.frontent.pages.views
        * @type          String
        * @default       Views | [title]
        *
@@ -103,7 +103,7 @@ module.exports = {
 
       /**
        * @name            handler
-       * @namespace       sugar.config.frontend.pages.views
+       * @namespace       config.frontend.pages.views
        * @type            Function
        *
        * Specify the handler function that will take care of responding to this "section"
@@ -116,7 +116,7 @@ module.exports = {
 
     /**
      * @name            doc
-     * @namespace       sugar.config.frontend.pages
+     * @namespace       config.frontend.pages
      * @type            Object
      *
      * Store all the accessible pages of the frontend development website
@@ -127,7 +127,7 @@ module.exports = {
     doc: {
       /**
        * @name            slug
-       * @namespace       sugar.config.frontend.pages.doc
+       * @namespace       config.frontend.pages.doc
        * @type            String
        * @default         /doc
        *
@@ -140,7 +140,7 @@ module.exports = {
 
       /**
        * @name            title
-       * @namespace       sugar.config.frontend.pages.doc
+       * @namespace       config.frontend.pages.doc
        * @type            String
        * @default         Documentation | [title]
        *
@@ -153,7 +153,7 @@ module.exports = {
 
       /**
        * @name            handler
-       * @namespace       sugar.config.frontend.pages.doc
+       * @namespace       config.frontend.pages.doc
        * @type            Function
        *
        * Specify the handler function that will take care of responding to this "section"

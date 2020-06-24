@@ -5,7 +5,7 @@ const __activeSpace = require('../../core/activeSpace');
 
 /**
  * @name                  SInputPopup
- * @namespace             sugar.node.blessed.popup
+ * @namespace           node.blessed.popup
  * @type                  Class
  * @extends               SPopup
  *

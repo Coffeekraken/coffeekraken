@@ -1,6 +1,6 @@
 /**
  * @name      easeInOutQuint
- * @namespace     sugar.js.easing
+ * @namespace           js.easing
  * @type      Function
  * Ease in out quint function
  *
@@ -9,6 +9,6 @@
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function(t) {
+export default function (t) {
   return t < 0.5 ? 16 * t * t * t * t * t : 1 + 16 * --t * t * t * t * t;
 }

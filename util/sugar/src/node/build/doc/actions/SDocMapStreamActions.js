@@ -4,7 +4,7 @@ const __fs = require('fs');
 
 /**
  * @name                SDocMapStreamActions
- * @namespace           sugar.node.build.doc.actions
+ * @namespace           node.build.doc.actions
  * @type                Class
  * @extends             SActionsStreamAction
  *

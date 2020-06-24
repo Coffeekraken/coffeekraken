@@ -17,7 +17,7 @@ const tempDirectory = require('temp-dir');
 
 /**
  * @name                express
- * @namespace           sugar.node.server.frontend
+ * @namespace           node.server.frontend
  * @type                Function
  *
  * This function take care of starting a frontend express based server

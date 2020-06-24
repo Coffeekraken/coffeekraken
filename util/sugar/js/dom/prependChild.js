@@ -7,7 +7,7 @@ exports.default = prependChild;
 
 /**
  * @name      prependChild
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Prepend an HTMLElement into another HTMLElement

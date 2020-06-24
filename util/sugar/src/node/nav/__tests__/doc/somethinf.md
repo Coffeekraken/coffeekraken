@@ -1,6 +1,6 @@
 <!--
 * @name             something
-* @namespace        sugar.some.thing
+* @namespace           some.thing
 * 
 * This is something
 *

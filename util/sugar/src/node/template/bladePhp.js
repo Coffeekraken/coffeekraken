@@ -6,7 +6,7 @@ const __fs = require('fs');
 
 /**
  * @name                      bladePhp
- * @namespace                 sugar.node.template
+ * @namespace                 node.template
  * @type                      Function
  *
  * Compile a blade php view and return a promise with the

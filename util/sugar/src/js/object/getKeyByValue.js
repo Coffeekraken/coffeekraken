@@ -1,6 +1,6 @@
 /**
  * @name          getKeyByValue
- * @namespace     sugar.js.object
+ * @namespace           js.object
  * @type          Function
  *
  * Return the key that correspond to the passed value in the passed object
@@ -16,5 +16,5 @@
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function getKeyByValue(object, value) {
-  return Object.keys(object).find(key => object[key] === value);
+  return Object.keys(object).find((key) => object[key] === value);
 }

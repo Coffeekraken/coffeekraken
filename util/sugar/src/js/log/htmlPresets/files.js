@@ -2,7 +2,7 @@ import __replaceTags from '../../html/replaceTags';
 
 /**
  * @name                              files
- * @namespace                         sugar.js.log.htmlPresets
+ * @namespace           js.log.htmlPresets
  * @type                              Function
  *
  * Replace all the "log" html tags like "<red>", "<bold>", etc... with the corresponding syntax for the files
@@ -13,9 +13,7 @@ import __replaceTags from '../../html/replaceTags';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function files(text) {
-
   return __replaceTags(text, {
-
     black: (tag, content) => content,
     red: (tag, content) => content,
     green: (tag, content) => content,
@@ -41,7 +39,5 @@ export default function files(text) {
     strike: (tag, content) => content,
 
     br: (tag, content) => '\n'
-
   });
-
 }

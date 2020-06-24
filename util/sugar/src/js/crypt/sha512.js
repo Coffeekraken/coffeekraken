@@ -6,15 +6,14 @@ const __encryptedMessages = {};
 
 /**
  * @name            sha512
- * @namespace       sugar.js.crypt
+ * @namespace           js.crypt
  * @type            Object
- * 
+ *
  * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the sha512 algorithm
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default {
-
   /**
    * @name        encrypt
    * @type          Function
@@ -53,5 +52,4 @@ export default {
     delete __encryptedMessages[message];
     return parse(string);
   }
-
 };

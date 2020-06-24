@@ -8,7 +8,7 @@ const __firstLookup = require('../docblock/firstLookup');
 
 /**
  * @name                  namespaceSNav
- * @namespace             sugar.node.nav
+ * @namespace           node.nav
  * @type                  Function
  * @async
  *

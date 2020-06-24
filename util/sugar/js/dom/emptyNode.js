@@ -7,7 +7,7 @@ exports.default = emptyNode;
 
 /**
  * @name        emptyNode
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type        Function
  *
  * Empty a node by removing each childs one after the other

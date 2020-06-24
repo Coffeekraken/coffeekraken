@@ -9,7 +9,7 @@ exports.default = isInIframe;
 
 /**
  * @name      isInIframe
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Check if the page is loaded inside an iframe

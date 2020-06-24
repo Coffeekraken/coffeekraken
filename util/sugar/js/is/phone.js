@@ -11,13 +11,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name        isPhone
- * @namespace       sugar.js.is
+ * @namespace           js.is
  * @type      Function
  *
  * Detect if is a phone device
  *
  * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test
- * 
+ *
  * @return    {Boolean}    true if is a phone, false if not
  *
  * @example 	js

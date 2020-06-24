@@ -31,7 +31,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /**
  * @name 		            SWatch
- * @namespace           sugar.js.object
+ * @namespace           js.object
  * @type                Class
  *
  * This class allows you to easily monitor some object properties and get the new and old value of it
@@ -60,18 +60,18 @@ let SWatch = /*#__PURE__*/function () {
    * @name                    _watchStack
    * @type                    Object
    * @private
-   * 
+   *
    * Watch stack
-   * 
+   *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
   /**
    * @name                      constructor
    * @type                      Function
-   * 
+   *
    * Constructor
-   * 
+   *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   function SWatch(object) {
@@ -172,23 +172,23 @@ let SWatch = /*#__PURE__*/function () {
     /**
      * @name              watch
      * @type              Function
-     * 
+     *
      * This allows you to set a watch process on one or multiple properties of the object setted in the instance.
      * The "globs" parameter has to be a simple glob pattern or an array of glob patterns.
      * The only difference with basic glob is that you can replace the "/" with "." (optional).
      * It uses under the hood the "glob" package that you can find here: https://www.npmjs.com/package/glob
-     * 
+     *
      * @param     {String|Array}          globs         A glob or array of glob patterns to tell which propertie(s) you want to watch
      * @param     {Function}              handlerFn     A function that will be called with the watchObj that define the update
      * @param     {String}                [id=null]   The id you want to give to this watch process. It will be used to unwatch this process
-     * 
+     *
      * @example         js
      * myWatch.watch('**.*', {
      *    set: (object, prop, value) => {
      *      // do something
      *    }
      * });
-     * 
+     *
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
 
@@ -217,17 +217,17 @@ let SWatch = /*#__PURE__*/function () {
     /**
      * @name                unwatch
      * @type                Function
-     * 
+     *
      * Stop watching a watch process that you have created with the "watch" function
-     * 
+     *
      * @param       {String}        watchId             The watchId to stop watching. This came as return of the "watch" method
-     * 
+     *
      * @example         js
      * const watchId = myWatch.watch('**.*', {
      *    // etc...
      * });
      * myWatch.unwatch(watchId);
-     * 
+     *
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
 

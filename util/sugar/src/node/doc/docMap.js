@@ -11,7 +11,7 @@ const __minimatch = require('minimatch');
 
 /**
  * @name          docMap
- * @namespace     sugar.node.doc
+ * @namespace           node.doc
  * @type          Function
  * @async
  *

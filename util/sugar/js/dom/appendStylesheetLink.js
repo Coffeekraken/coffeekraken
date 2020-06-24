@@ -11,7 +11,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name        appendStylesheetLink
- * @namespace       sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Append a stylesheet link to the page head
@@ -26,9 +26,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function appendStylesheetLink(href) {
-  const $link = document.createElement("link");
-  $link.type = "text/css";
-  $link.rel = "stylesheet";
+  const $link = document.createElement('link');
+  $link.type = 'text/css';
+  $link.rel = 'stylesheet';
   $link.href = href;
   document.head.appendChild($link);
   return (0, _linkLoaded.default)($link);

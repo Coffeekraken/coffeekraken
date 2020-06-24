@@ -2,15 +2,14 @@ import __encodeObject from 'object-encode';
 
 /**
  * @name            object
- * @namespace       sugar.js.crypt
+ * @namespace           js.crypt
  * @type            Object
- * 
+ *
  * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the object algorithm
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default {
-
   /**
    * @name        encrypt
    * @type        Function
@@ -42,5 +41,4 @@ export default {
   decrypt: function (encodedObject, salt = 'coffeekraken.sugar.crypt.object') {
     return __encodeObject.decode_object(encodedObject, 'base64', salt);
   }
-
-}
+};

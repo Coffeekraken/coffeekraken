@@ -1,8 +1,8 @@
-import linkLoaded from "./linkLoaded";
+import linkLoaded from './linkLoaded';
 
 /**
  * @name        appendStylesheetLink
- * @namespace       sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Append a stylesheet link to the page head
@@ -17,9 +17,9 @@ import linkLoaded from "./linkLoaded";
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function appendStylesheetLink(href) {
-  const $link = document.createElement("link");
-  $link.type = "text/css";
-  $link.rel = "stylesheet";
+  const $link = document.createElement('link');
+  $link.type = 'text/css';
+  $link.rel = 'stylesheet';
   $link.href = href;
   document.head.appendChild($link);
   return linkLoaded($link);

@@ -1,6 +1,6 @@
 /**
  * @name        toQueryString
- * @namespace       sugar.js.object
+ * @namespace           js.object
  * @type      Function
  *
  * Transform an object (key => pairs) to a query string like "?var1=value1&var2"
@@ -20,12 +20,12 @@
  */
 export default function toQueryString(obj) {
   return (
-    "?" +
+    '?' +
     Object.keys(obj)
       .reduce(function (a, k) {
-        a.push(k + "=" + encodeURIComponent(obj[k]));
+        a.push(k + '=' + encodeURIComponent(obj[k]));
         return a;
       }, [])
-      .join("&")
+      .join('&')
   );
 }

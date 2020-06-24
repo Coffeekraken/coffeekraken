@@ -2,7 +2,7 @@ import __SPromise from '../promise/SPromise';
 
 /**
  * @name      observeMutations
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Observe mutations on an HTMLElement and get them through the observable subscription.
@@ -26,27 +26,28 @@ import __SPromise from '../promise/SPromise';
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function observeMutations($target, settings = {}) {
-
   settings = {
-    attributes: true, childList: false, subtree: false,
+    attributes: true,
+    childList: false,
+    subtree: false,
     ...settings
   };
 
   let mutationObserver;
 
   return new __SPromise((resolve, reject, trigger, cancel) => {
-
     // create a new observer
-    mutationObserver = new MutationObserver(mutations => {
+    mutationObserver = new MutationObserver((mutations) => {
       // loop on mutations
-      mutations.forEach(mutation => {
+      mutations.forEach((mutation) => {
         // trigger the then stack
         trigger('then', mutation);
       });
     });
     mutationObserver.observe($target, settings);
-
-  }).on('cancel,finally', () => {
-    mutationObserver && mutationObserver.disconnect();
-  }).start();
+  })
+    .on('cancel,finally', () => {
+      mutationObserver && mutationObserver.disconnect();
+    })
+    .start();
 }

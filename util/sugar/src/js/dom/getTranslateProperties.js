@@ -2,7 +2,7 @@ import __convert from '../unit/convert';
 
 /**
  * @name      getTranslateProperties
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Get a translate properties of an HTMLElement
@@ -40,7 +40,11 @@ export default function getTranslateProperties($elm, unit = 'px') {
   mat = transform.match(/^matrix3d\((.+)\)$/);
   if (mat) {
     // preparing the value
-    let val = mat[1].replace('matrix3d(', '').replace(')', '').split(',').map(v => v.trim());
+    let val = mat[1]
+      .replace('matrix3d(', '')
+      .replace(')', '')
+      .split(',')
+      .map((v) => v.trim());
     return {
       x: __convert(val[12], unit, $elm),
       y: __convert(val[13], unit, $elm),
@@ -50,7 +54,11 @@ export default function getTranslateProperties($elm, unit = 'px') {
   mat = transform.match(/^matrix\((.+)\)$/);
   if (mat) {
     // preparing the value
-    let val = mat[1].replace('matrix(', '').replace(')', '').split(',').map(v => v.trim());
+    let val = mat[1]
+      .replace('matrix(', '')
+      .replace(')', '')
+      .split(',')
+      .map((v) => v.trim());
     return {
       x: __convert(val[4], unit, $elm),
       y: __convert(val[5], unit, $elm),
@@ -61,7 +69,11 @@ export default function getTranslateProperties($elm, unit = 'px') {
   mat = transform.match(/^translate3d\((.+)\)$/);
   if (mat) {
     // preparing the value
-    let val = mat[1].replace('translate3d(', '').replace(')', '').split(',').map(v => v.trim());
+    let val = mat[1]
+      .replace('translate3d(', '')
+      .replace(')', '')
+      .split(',')
+      .map((v) => v.trim());
     return {
       x: __convert(val[0], unit, $elm),
       y: __convert(val[1], unit, $elm),
@@ -72,7 +84,11 @@ export default function getTranslateProperties($elm, unit = 'px') {
   mat = transform.match(/^translate\((.+)\)$/);
   if (mat) {
     // preparing the value
-    let val = mat[1].replace('translate(', '').replace(')', '').split(',').map(v => v.trim());
+    let val = mat[1]
+      .replace('translate(', '')
+      .replace(')', '')
+      .split(',')
+      .map((v) => v.trim());
     return {
       x: __convert(val[0], unit, $elm),
       y: __convert(val[1], unit, $elm),
@@ -110,9 +126,6 @@ export default function getTranslateProperties($elm, unit = 'px') {
       z: zRes
     };
   }
-
-
-
 
   return {
     x: 0,

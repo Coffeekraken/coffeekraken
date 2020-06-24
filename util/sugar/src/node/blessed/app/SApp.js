@@ -10,7 +10,7 @@ const __SUrl = require('../../url/SUrl');
 
 /**
  * @name                  SApp
- * @namespace             sugar.node.blessed.app
+ * @namespace           node.blessed.app
  * @type                  Class
  *
  * This class is the main one when you want to create a Sugar terminal based application.

@@ -1,6 +1,6 @@
 /**
  * @name      wrapInner
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Wrap the content of the passed `$parent` inside a the passed HTMLElement `$wrapper`
@@ -26,7 +26,7 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel@gmail.com)
  */
 export default function wrapInner($parent, $wrapper) {
-  if (typeof $wrapper === "string") {
+  if (typeof $wrapper === 'string') {
     $wrapper = document.createElement($wrapper);
   }
   $parent.appendChild($wrapper);

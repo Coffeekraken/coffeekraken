@@ -13,7 +13,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name                        ensureExists
- * @namespace                   sugar.js.object
+ * @namespace           js.object
  * @type                        Function
  *
  * Pass a string like "my.cool.object" and the value it has to be and this function will ensure that this deep object exist

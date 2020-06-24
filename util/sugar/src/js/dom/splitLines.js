@@ -1,9 +1,9 @@
-import _map from "lodash/map";
-import __throttle from "../function/throttle";
+import _map from 'lodash/map';
+import __throttle from '../function/throttle';
 
 /**
  * @name      splitLines
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Split each lines inside an HTMLElement by scoping them inside some tags.
@@ -28,11 +28,11 @@ import __throttle from "../function/throttle";
  *
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function splitLines(elm, tag = "p", tagClass = "split-lines") {
+export default function splitLines(elm, tag = 'p', tagClass = 'split-lines') {
   // apply again on resize
   window.addEventListener(
-    "resize",
-    __throttle(e => {
+    'resize',
+    __throttle((e) => {
       _splitLines(elm, tag, tagClass);
     }, 150)
   );
@@ -56,29 +56,29 @@ function _splitLines(elm, tag, tagClass) {
   let words = string.match(
     /<\s*(\w+\b)(?:(?!<\s*\/\s*\1\b)[\s\S])*<\s*\/\s*\1\s*>|\S+/g
   );
-  words = _map(words, word => {
+  words = _map(words, (word) => {
     return `<span class="s-split-lines">${word}</span>`;
-  }).join(" ");
+  }).join(' ');
   elm.innerHTML = words;
 
-  const spans = elm.querySelectorAll("span.s-split-lines");
+  const spans = elm.querySelectorAll('span.s-split-lines');
   let top = null;
   const lines = [];
   let line = [];
-  [].forEach.call(spans, spanElm => {
+  [].forEach.call(spans, (spanElm) => {
     const spanTop = spanElm.getBoundingClientRect().top;
     if (top && spanTop !== top) {
-      lines.push(line.join(" "));
+      lines.push(line.join(' '));
       line = [];
     }
     line.push(spanElm.innerHTML.trim());
     top = spanTop;
   });
-  lines.push(line.join(" "));
+  lines.push(line.join(' '));
 
   elm.innerHTML = lines
-    .map(lineStr => {
+    .map((lineStr) => {
       return `<${tag} class="${tagClass}__line">${lineStr}</${tag}>`;
     })
-    .join("");
+    .join('');
 }

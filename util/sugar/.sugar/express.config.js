@@ -3,7 +3,7 @@ const __packageRoot = require('../src/node/path/packageRoot');
 module.exports = {
   /**
    * @name              port
-   * @namespace         sugar.config.express
+   * @namespace         config.express
    * @type              Number
    * @default           3000
    *
@@ -16,7 +16,7 @@ module.exports = {
 
   /**
    * @name              hostname
-   * @namespace         sugar.config.express
+   * @namespace         config.express
    * @type              String
    * @default           127.0.0.1
    *
@@ -29,7 +29,7 @@ module.exports = {
 
   /**
    * @name              rootDir
-   * @namespace         sugar.config.express
+   * @namespace         config.express
    * @type              String
    * @default           ${__packageRoot(process.cwd())}
    *
@@ -42,7 +42,7 @@ module.exports = {
 
   /**
    * @name              staticDir
-   * @namespace         sugar.config.express
+   * @namespace         config.express
    * @type              String
    * @default           ${__packageRoot(process.cwd())}/dist
    *
@@ -55,7 +55,7 @@ module.exports = {
 
   /**
    * @name            viewsDir
-   * @namespace       sugar.config.express
+   * @namespace       config.express
    * @type            String
    * @default         views
    *
@@ -68,7 +68,7 @@ module.exports = {
 
   /**
    * @name           viewEngine
-   * @namespace       sugar.config.express
+   * @namespace       config.express
    * @type           String
    * @default        bladePhp
    *

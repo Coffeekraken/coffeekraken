@@ -11,7 +11,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name        keysFirst
- * @namespace       sugar.js.array
+ * @namespace           js.array
  * @type      Function
  *
  * Make sure the passed array start with the passed keys

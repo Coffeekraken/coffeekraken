@@ -7,21 +7,21 @@ exports.default = rgba2hsl;
 
 /**
  * @name                  rgba2hsl
- * @namespace             sugar.js.color
+ * @namespace           js.color
  * @type                  Function
- * 
+ *
  * RGBA to HSL
- * 
+ *
  * @param       	{Number|Object}        	r 	        	The red value between 0-255 or an object representing r, b, g, a
  * @param       	{Number}        	g 	        	The green value between 0-255
  * @param       	{Number}        	b 	        	The blue value between 0-255
  * @param       	{Number}        	a 	        	The alpha value between 0-100|0-1
  * @return 	      {object} 		                    	The hsl object representation
- * 
+ *
  * @example         js
  * import rgba2hsl from '@coffeekraken/sugar/js/color/rgba2hsl';
  * rgba2hsl(10,20,50,10);
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function rgba2hsl(r, g, b, a = 1) {

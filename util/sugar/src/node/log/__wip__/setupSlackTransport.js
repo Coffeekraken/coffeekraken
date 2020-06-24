@@ -1,10 +1,10 @@
 const __winston = require('winston');
-const SlackHook = require("winston-slack-webhook-transport");
+const SlackHook = require('winston-slack-webhook-transport');
 const __getAppMeta = require('../app/getAppMetas');
 
 /**
  * @name                    setupSlackTransport
- * @namespace               sugar.node.log
+ * @namespace           node.log
  * @type                    Function
  *
  * Setup a slack transport to send your logs into a certain slack channel
@@ -31,8 +31,11 @@ const __getAppMeta = require('../app/getAppMetas');
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function setupSlackTransport(webhookUrl = process.env.LOG_SLACK_WEBHOOKURL, level = 'error', winstonSlackSettings = {}) {
-
+module.exports = function setupSlackTransport(
+  webhookUrl = process.env.LOG_SLACK_WEBHOOKURL,
+  level = 'error',
+  winstonSlackSettings = {}
+) {
   // get the app meta
   const appMeta = __getAppMetas();
 
@@ -77,9 +80,10 @@ module.exports = function setupSlackTransport(webhookUrl = process.env.LOG_SLACK
   const slackTransport = new SlackHook({
     webhookUrl: webhookUrl,
     channel: process.env.LOG_SLACK_CHANNEL,
-    username: process.env.LOG_SLACK_USERNAME || appMeta.name || 'Coffeekraken logger',
+    username:
+      process.env.LOG_SLACK_USERNAME || appMeta.name || 'Coffeekraken logger',
     iconUrl: process.env.LOG_SLACK_STATUS_ICON,
-    formatter: info => {
+    formatter: (info) => {
       return {
         // text: `${info.level}: ${info.message}`,
         attachments: [
@@ -87,14 +91,16 @@ module.exports = function setupSlackTransport(webhookUrl = process.env.LOG_SLACK
             text: `- *Level:* ${info.level}`
           }
         ].concat(formatArray),
-        blocks: [{
-          type: "section",
-          text: {
-              type: "mrkdwn",
+        blocks: [
+          {
+            type: 'section',
+            text: {
+              type: 'mrkdwn',
               text: `${info.message}`
+            }
           }
-        }]
-      }
+        ]
+      };
     },
     level: level,
     unfurlLinks: false,
@@ -104,5 +110,4 @@ module.exports = function setupSlackTransport(webhookUrl = process.env.LOG_SLACK
   });
 
   global._sLogger.add(slackTransport);
-
-}
+};

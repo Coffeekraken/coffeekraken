@@ -4,7 +4,7 @@ const __SBladePhpServerCli = require('./SBladePhpServerCli');
 
 /**
  * @name              SBladePhpServerCommand
- * @namespace         sugar.node.server.bladePhp
+ * @namespace           node.server.bladePhp
  * @type              SCommand
  *
  * This class represent a command used start a Blade PHP server locally.

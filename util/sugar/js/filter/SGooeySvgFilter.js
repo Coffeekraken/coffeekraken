@@ -33,7 +33,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 /**
  * @name 		        SGooeySvgFilter
- * @namespace       sugar.js.filter
+ * @namespace           js.filter
  * @type           Class
  * @extends       SSvgFilter
  *
@@ -43,7 +43,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
  * - contrast: The amout of contrast you want
  * - shrink: The amount of shrink you want
  * - amout: The overall amount of effect you want
- * 
+ *
  * @example 		js
  * const filter = new SGooeySvgFilter();
  * filter.applyTo(myCoolHTMLElement);
@@ -58,11 +58,11 @@ let SGooeySvgFilter = /*#__PURE__*/function (_SSvgFilter) {
   /**
    * @name              constructor
    * @type              Function
-   * 
+   *
    * Constructor
-   * 
+   *
    * @param 		{Number} 		[amount=8] 		The amount of effect to apply
-   * 
+   *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   function SGooeySvgFilter(amount = 8) {
@@ -75,16 +75,16 @@ let SGooeySvgFilter = /*#__PURE__*/function (_SSvgFilter) {
 			<feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 ${parseInt(amount) + 9} -9" result="gooey" />
 			<feComposite in="SourceGraphic" in2="gooey" operator="atop"/>
 		`);
-    _this._blur = _this.filter.querySelector("feGaussianBlur");
-    _this._color_matrix = _this.filter.querySelector("feColorMatrix");
+    _this._blur = _this.filter.querySelector('feGaussianBlur');
+    _this._color_matrix = _this.filter.querySelector('feColorMatrix');
     return _this;
   }
   /**
    * @name                blur
    * @type                Number
-   * 
+   *
    * Get/Set the blur amount to produce the effect
-   * 
+   *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
@@ -92,7 +92,7 @@ let SGooeySvgFilter = /*#__PURE__*/function (_SSvgFilter) {
   _createClass(SGooeySvgFilter, [{
     key: "blur",
     set: function (value) {
-      this._blur.setAttribute("stdDeviation", value);
+      this._blur.setAttribute('stdDeviation', value);
     },
     get: function () {
       return parseFloat(this._blur.getAttribute('stdDeviation'));
@@ -100,9 +100,9 @@ let SGooeySvgFilter = /*#__PURE__*/function (_SSvgFilter) {
     /**
      * @name              contrast
      * @type              Number
-     * 
+     *
      * Get the contrast amount to produce the effect
-     * 
+     *
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
 
@@ -110,20 +110,20 @@ let SGooeySvgFilter = /*#__PURE__*/function (_SSvgFilter) {
     key: "contrast",
     set: function (value) {
       // get value
-      let v = this._color_matrix.getAttribute("values"); // process
+      let v = this._color_matrix.getAttribute('values'); // process
 
 
-      v = v.split(" ");
+      v = v.split(' ');
       v[v.length - 2] = value; // apply the new filter
 
-      this._color_matrix.setAttribute("values", v.join(" "));
+      this._color_matrix.setAttribute('values', v.join(' '));
     }
     /**
      * @name            shrink
      * @type            Number
-     * 
+     *
      * Get the shrink amount to produce the effect
-     * 
+     *
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
 
@@ -131,29 +131,29 @@ let SGooeySvgFilter = /*#__PURE__*/function (_SSvgFilter) {
     key: "shrink",
     set: function (value) {
       // get value
-      let v = this._color_matrix.getAttribute("values"); // process
+      let v = this._color_matrix.getAttribute('values'); // process
 
 
-      v = v.split(" ");
+      v = v.split(' ');
       v[v.length - 1] = value; // apply the new filter
 
-      this._color_matrix.setAttribute("values", v.join(" "));
+      this._color_matrix.setAttribute('values', v.join(' '));
     }
     /**
      * @name              amount
      * @type              Number
-     * 
+     *
      * Set the overall amount of effect to produce
-     * 
+     *
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
 
   }, {
     key: "amount",
     set: function (value) {
-      this._blur.setAttribute("stdDeviation", value);
+      this._blur.setAttribute('stdDeviation', value);
 
-      this._color_matrix.setAttribute("values", `1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 ${parseInt(value) + 9} -9`);
+      this._color_matrix.setAttribute('values', `1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 ${parseInt(value) + 9} -9`);
     }
   }]);
 

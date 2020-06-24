@@ -6,7 +6,7 @@ const __hotkey = require('../keyboard/hotkey');
 
 /**
  * @name              exitCleanup
- * @namespace         sugar.node.process
+ * @namespace           node.process
  * @type              Function
  *
  * This function register a handler on process exit and try to clean all the child process, etc...

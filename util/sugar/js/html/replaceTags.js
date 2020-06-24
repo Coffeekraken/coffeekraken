@@ -11,7 +11,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name                            replaceTags
- * @namespace                       sugar.js.html
+ * @namespace           js.html
  * @type                            Function
  *
  * Replace all the html tags that you specify by something else that you can fully choose

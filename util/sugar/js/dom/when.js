@@ -11,7 +11,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 /**
  * @name                              when
- * @namespace                         sugar.js.dom
+ * @namespace           js.dom
  * @type                              Function
  *
  * Return a promise that will be resolved when the wanted status has been applied on the passed HTMLElement.
@@ -92,5 +92,4 @@ function when($node, state, settings = {}) {
   });
 }
 
-;
 module.exports = exports.default;

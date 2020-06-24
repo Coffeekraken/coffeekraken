@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name        whenProperty
- * @namespace       sugar.js.object
+ * @namespace           js.object
  * @type      Function
  *
  * Resolve a promise when the wanted property on the passed object exist or pass the check function provided

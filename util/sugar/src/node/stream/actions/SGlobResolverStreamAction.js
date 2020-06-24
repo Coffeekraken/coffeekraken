@@ -6,7 +6,7 @@ const __getFilename = require('../../fs/filename');
 
 /**
  * @name            SGlobResolverStreamAction
- * @namespace       sugar.node.stream.actions
+ * @namespace           node.stream.actions
  * @type            Class
  * @extends         SActionsStreamAction
  *

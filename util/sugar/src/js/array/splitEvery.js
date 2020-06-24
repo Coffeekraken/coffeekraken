@@ -1,6 +1,6 @@
 /**
  * @name                                splitEvery
- * @namespace                           sugar.js.array
+ * @namespace           js.array
  * @type                                Function
  *
  * Split an array every N items
@@ -17,7 +17,9 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function splitEvery(array, every) {
-  let i, j, finalArray = [];
+  let i,
+    j,
+    finalArray = [];
   for (i = 0, j = array.length; i < j; i += every) {
     finalArray.push(array.slice(i, i + every));
   }

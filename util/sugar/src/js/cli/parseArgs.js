@@ -11,7 +11,7 @@ import __completeArgsObject from './completeArgsObject';
 
 /**
  * @name                        parseArgs
- * @namespace                   sugar.js.cli
+ * @namespace           js.cli
  * @type                        Function
  *
  * Parse a string to find the provided arguments into the list and return a corresponding object.

@@ -1,7 +1,7 @@
 module.exports = {
   /**
    * @name              base
-   * @namespace         sugar.config.module-scale
+   * @namespace         config.module-scale
    * @type              String
    * @default           1rem
    *
@@ -15,7 +15,7 @@ module.exports = {
 
   /**
    * @name              ratio
-   * @namespace         sugar.config.module-scale
+   * @namespace         config.module-scale
    * @type              Number
    * @default           1rem
    *

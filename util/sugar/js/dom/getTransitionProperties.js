@@ -15,7 +15,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name      getTransitionProperties
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Get the css transition properties from an HTMLElement in an object format

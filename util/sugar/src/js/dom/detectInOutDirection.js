@@ -2,7 +2,7 @@ import __SPromise from '../promise/SPromise';
 
 /**
  * @name      detectInOutDirection
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Detect the mouse direction when entered on the passed element. The direction can be up, down, left or right and will be passed to the two callbacks available.
@@ -23,40 +23,44 @@ import __SPromise from '../promise/SPromise';
  *    // do something
  *    console.log(value); // => { action: 'in', direction: 'up' };
  * });
- * 
+ *
  * // cancel the detection process
  * detect.cancel();
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function detectInOutDirection($elm) {
-
   let mouseEnterHandler, mouseLeaveHandler;
 
-  const promise = new __SPromise((resolve, reject, trigger, cancel) => {
-    mouseEnterHandler = e => {
-      trigger('in', direction);
-      trigger('then', {
-        action: 'in',
-        direction
-      });
-    };
-    mouseLeaveHandler = e => {
-      trigger('out', direction);
-      trigger('then', {
-        action: 'out',
-        direction
-      });
-    };
-    // detect when mouseenter/leave the element
-    $elm.addEventListener("mouseenter", mouseEnterHandler);
-    $elm.addEventListener("mouseleave", mouseLeaveHandler);
-  }, {
-    stacks: 'in,out'
-  }).on('cancel,finally', () => {
-    $elm.removeEventListener("mouseenter", mouseEnterHandler);
-    $elm.removeEventListener("mouseleave", mouseLeaveHandler);
-  }).start();
+  const promise = new __SPromise(
+    (resolve, reject, trigger, cancel) => {
+      mouseEnterHandler = (e) => {
+        trigger('in', direction);
+        trigger('then', {
+          action: 'in',
+          direction
+        });
+      };
+      mouseLeaveHandler = (e) => {
+        trigger('out', direction);
+        trigger('then', {
+          action: 'out',
+          direction
+        });
+      };
+      // detect when mouseenter/leave the element
+      $elm.addEventListener('mouseenter', mouseEnterHandler);
+      $elm.addEventListener('mouseleave', mouseLeaveHandler);
+    },
+    {
+      stacks: 'in,out'
+    }
+  )
+    .on('cancel,finally', () => {
+      $elm.removeEventListener('mouseenter', mouseEnterHandler);
+      $elm.removeEventListener('mouseleave', mouseLeaveHandler);
+    })
+    .start();
   return promise;
 }
 
@@ -64,10 +68,10 @@ let oldX = 0,
   oldY = 0,
   threshold = 0,
   direction = null;
-document.addEventListener("mousemove", e => {
+document.addEventListener('mousemove', (e) => {
   calculateDirection(e);
 });
-document.addEventListener("touchstart", e => {
+document.addEventListener('touchstart', (e) => {
   calculateDirection(e);
 });
 function calculateDirection(e) {
@@ -76,20 +80,20 @@ function calculateDirection(e) {
     diffX = 0,
     diffY = 0;
   if (e.pageX < oldX - threshold) {
-    directionX = "left";
+    directionX = 'left';
     diffX = oldX - e.pageX;
     oldX = e.pageX;
   } else if (e.pageX > oldX + threshold) {
-    directionX = "right";
+    directionX = 'right';
     diffX = e.pageX - oldX;
     oldX = e.pageX;
   }
   if (e.pageY < oldY - threshold) {
-    directionY = "up";
+    directionY = 'up';
     diffY = oldY - e.pageY;
     oldY = e.pageY;
   } else if (e.pageY > oldY + threshold) {
-    directionY = "down";
+    directionY = 'down';
     diffY = e.pageY - oldY;
     oldY = e.pageY;
   }

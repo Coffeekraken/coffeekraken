@@ -1,6 +1,6 @@
 /**
  * @name      requestAnimationFrame
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Proxy for the window.requestAnimationFrame function

@@ -13,7 +13,7 @@ import __convert from './convert';
 
 /**
  * @name 		SColor
- * @namespace      sugar.js.color
+ * @namespace           js.color
  * @type    Class
  *
  * Class that provide complete and simple to use color manupilation capabilities like:

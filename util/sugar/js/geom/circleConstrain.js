@@ -11,7 +11,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name 		circleConstrain
- * @namespace       sugar.js.geom.2d
+ * @namespace           js.geom.2d
  * @type      Function
  *
  * Take as parameter a central point, a radius and a points to constrain inside the circle defined by the radius

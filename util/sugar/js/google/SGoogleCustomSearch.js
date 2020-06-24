@@ -19,7 +19,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /**
  * @name 		                SGoogleCustomSearch
- * @namespace               sugar.js.google
+ * @namespace           js.google
  * @type                    Class
  *
  * This class let you make with ease search requests to the google custom search service
@@ -49,9 +49,9 @@ let SGoogleCustomSearch = /*#__PURE__*/function () {
    * @name              _apiKey
    * @type              String
    * @private
-   * 
+   *
    * Store the api key used to reach the google services
-   * 
+   *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
 
@@ -59,9 +59,9 @@ let SGoogleCustomSearch = /*#__PURE__*/function () {
    * @name              _cx
    * @type              String
    * @private
-   * 
+   *
    * Store the context key used to reach the good google search instance
-   * 
+   *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
 
@@ -69,10 +69,10 @@ let SGoogleCustomSearch = /*#__PURE__*/function () {
    * @name              _settings
    * @type              Object
    * @private
-   * 
+   *
    * Store the actual query object to be able to call
    * next page etc...
-   * 
+   *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
 
@@ -80,9 +80,9 @@ let SGoogleCustomSearch = /*#__PURE__*/function () {
    * @name            _searchUrl
    * @type            String
    * @private
-   * 
+   *
    * Store the google search url
-   * 
+   *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
 
@@ -90,9 +90,9 @@ let SGoogleCustomSearch = /*#__PURE__*/function () {
    * @name              _page
    * @type              Number
    * @private
-   * 
+   *
    * Store the current page
-   * 
+   *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
 
@@ -100,21 +100,21 @@ let SGoogleCustomSearch = /*#__PURE__*/function () {
    * @name        _keywords
    * @type        String
    * @private
-   * 
+   *
    * The keywords searched
-   * 
+   *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
 
   /**
    * @name                constructor
    * @type                Function
-   * 
+   *
    * Constructor
-   * 
+   *
    * @param 	        {String} 	        apiKey 		          The google api key to reach the services
    * @param 	        {String}        	cx 		            	The google custom search context
-   * 
+   *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   function SGoogleCustomSearch(apiKey, cx) {
@@ -129,10 +129,10 @@ let SGoogleCustomSearch = /*#__PURE__*/function () {
        * @name              num
        * @type              Number
        * @default           10
-       * 
+       *
        * How many results by page wanted
        * Can be between 1 and 10
-       * 
+       *
        * @author 		Olivier Bossel<olivier.bossel@gmail.com>
        */
       num: 10,
@@ -141,15 +141,15 @@ let SGoogleCustomSearch = /*#__PURE__*/function () {
        * @name                page
        * @type                Number
        * @default             1
-       * 
+       *
        * The page to request
-       * 
+       *
        * @author 		Olivier Bossel<olivier.bossel@gmail.com>
        */
       page: 1
     });
 
-    _defineProperty(this, "_searchUrl", "https://www.googleapis.com/customsearch/v1");
+    _defineProperty(this, "_searchUrl", 'https://www.googleapis.com/customsearch/v1');
 
     _defineProperty(this, "_page", 1);
 
@@ -163,12 +163,12 @@ let SGoogleCustomSearch = /*#__PURE__*/function () {
    * @name            _generateSearchUrl
    * @type            Function
    * @private
-   * 
+   *
    * Generate and return the correct search url depending on
    * parameters like the current page, etc...
-   * 
+   *
    * @return 	{String} 	The generated url
-   * 
+   *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
 
@@ -177,7 +177,7 @@ let SGoogleCustomSearch = /*#__PURE__*/function () {
     key: "_generateSearchUrl",
     value: function _generateSearchUrl() {
       // construct url
-      let queryString = "";
+      let queryString = '';
 
       for (let key in this._settings) {
         queryString += `&${key}=${this._settings[key]}`;
@@ -192,9 +192,9 @@ let SGoogleCustomSearch = /*#__PURE__*/function () {
      * @name              search
      * @type              Function
      * @async
-     * 
+     *
      * Launch a search
-     * 
+     *
      * @param 	      {String} 	          keywords 	            The keywords to search
      * @param       	{Object} 	          settings            	The settings object
      * @return      	{Promise} 		                        		A promise of results
@@ -222,7 +222,7 @@ let SGoogleCustomSearch = /*#__PURE__*/function () {
 
 
       const ajx = new _SRequest.default({
-        method: "GET",
+        method: 'GET',
         url
       }); // launch the request end send back the promise
 
@@ -232,11 +232,11 @@ let SGoogleCustomSearch = /*#__PURE__*/function () {
      * @name            next
      * @type            Function
      * @async
-     * 
+     *
      * Load the next page
-     * 
+     *
      * @return 		{Promise} 		The promise of next page results
-     * 
+     *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
 
@@ -252,11 +252,11 @@ let SGoogleCustomSearch = /*#__PURE__*/function () {
      * @name            previous
      * @type            Function
      * @async
-     * 
+     *
      * Load the previous page
-     * 
+     *
      * @return 		{Promise} 		The promise of previous page results
-     * 
+     *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
 

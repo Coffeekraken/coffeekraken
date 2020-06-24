@@ -15,7 +15,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name      querySelector
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Enhanced proxy of the Element.querySelector function that let you specify

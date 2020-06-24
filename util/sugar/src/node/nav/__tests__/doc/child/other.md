@@ -8,7 +8,7 @@ efqwiojefpw jeoij qwoifj woqijfew
 
 <!--
 * @name             otherThing
-* @namespace        sugar.other.thing.coco
+* @namespace           other.thing.coco
 * 
 * This is another thing
 *

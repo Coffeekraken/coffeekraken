@@ -11,7 +11,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name      textWidth
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Get the text width in px of a passed string or the passed HTMLElement
@@ -31,10 +31,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 function textWidth(source) {
   // create an element
-  const elm = document.createElement("span");
-  elm.style.whiteSpace = "nowrap";
-  elm.style.position = "absolute";
-  elm.style.visibility = "hidden";
+  const elm = document.createElement('span');
+  elm.style.whiteSpace = 'nowrap';
+  elm.style.position = 'absolute';
+  elm.style.visibility = 'hidden';
   let text = source; // if the source if an html element
 
   if (source.tagName) {
@@ -42,8 +42,8 @@ function textWidth(source) {
     const tagName = source.tagName.toLowerCase();
 
     switch (tagName) {
-      case "input":
-      case "textarea":
+      case 'input':
+      case 'textarea':
         text = source.value;
         break;
 
@@ -53,16 +53,16 @@ function textWidth(source) {
     } // get the font properties
 
 
-    const fs = (0, _getStyleProperty.default)(source, "font-size");
-    const ff = (0, _getStyleProperty.default)(source, "font-family");
-    const ls = (0, _getStyleProperty.default)(source, "letter-spacing");
+    const fs = (0, _getStyleProperty.default)(source, 'font-size');
+    const ff = (0, _getStyleProperty.default)(source, 'font-family');
+    const ls = (0, _getStyleProperty.default)(source, 'letter-spacing');
     elm.style.fontSize = fs;
     elm.style.fontFamily = ff;
     elm.style.letterSpacing = ls;
   } // replacing spaces
 
 
-  text = text.replace(/ /g, "\u00a0"); // set the element content
+  text = text.replace(/ /g, '\u00a0'); // set the element content
 
   elm.innerHTML = text; // append the element to the body
 

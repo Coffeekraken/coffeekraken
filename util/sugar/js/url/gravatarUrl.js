@@ -11,7 +11,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name            gravatarUrl
- * @namespace       sugar.js.url
+ * @namespace           js.url
  * @type            Function
  *
  * Return a gravatar url depending on the passed user email and size

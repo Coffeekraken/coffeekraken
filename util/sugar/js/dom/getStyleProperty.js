@@ -13,7 +13,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name      getStyleProperty
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Get a style property on the passed element through the computed style.
@@ -38,12 +38,12 @@ function getStyleProperty(elm, property) {
   });
   const computed = elm._sComputedStyle || window.getComputedStyle(elm);
   elm._sComputedStyle = computed;
-  const prefixes = ["", "webkit-", "moz-", "ms-", "o-", "khtml-"];
+  const prefixes = ['', 'webkit-', 'moz-', 'ms-', 'o-', 'khtml-'];
 
   for (let i = 0; i < prefixes.length; i++) {
     const prefix = prefixes[i];
     const value = computed[(0, _camelize.default)(`${prefix}${property}`)];
-    if (value && value.trim() !== "") return (0, _autoCast.default)(value);
+    if (value && value.trim() !== '') return (0, _autoCast.default)(value);
   }
 
   return null;

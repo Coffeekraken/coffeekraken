@@ -11,7 +11,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name                              files
- * @namespace                         sugar.js.log.htmlPresets
+ * @namespace           js.log.htmlPresets
  * @type                              Function
  *
  * Replace all the "log" html tags like "<red>", "<bold>", etc... with the corresponding syntax for the files

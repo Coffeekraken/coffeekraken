@@ -1,6 +1,6 @@
 /**
  * @name                    filters
- * @namespace               sugar.config
+ * @namespace               config
  * @type                    Object
  * @default                 {}
  *

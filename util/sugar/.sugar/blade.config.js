@@ -4,7 +4,7 @@ module.exports = {
   server: {
     /**
      * @name              port
-     * @namespace         sugar.config.blade.server
+     * @namespace         config.blade.server
      * @type              Number
      * @default           8888
      *
@@ -17,7 +17,7 @@ module.exports = {
 
     /**
      * @name              hostname
-     * @namespace         sugar.config.blade.server
+     * @namespace         config.blade.server
      * @type              String
      * @default           127.0.0.1
      *
@@ -30,7 +30,7 @@ module.exports = {
 
     /**
      * @name              rootDir
-     * @namespace         sugar.config.blade.server
+     * @namespace         config.blade.server
      * @type              String
      * @default           ${__packageRoot(process.cwd())}
      *

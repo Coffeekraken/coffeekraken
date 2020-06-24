@@ -8,10 +8,11 @@ const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
 const __SBuildJsCli = require('../SBuildJsCli');
 const __sugarConfig = require('../../../config/sugar');
 const __babel = require('@babel/core');
+const __trigger = require('../../../event/trigger');
 
 /**
  * @name                SWebpackStreamAction
- * @namespace           sugar.node.build.js.actions
+ * @namespace           node.build.js.actions
  * @type                Class
  * @extends             SActionsStreamAction
  *
@@ -112,7 +113,7 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
         )}</cyan>`
       );
 
-      __webpack(
+      const compiler = __webpack(
         __deepMerge(
           {
             mode: streamObj.prod ? 'production' : 'development',
@@ -186,44 +187,48 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
             context: __packageRoot(process.cwd())
           },
           settings
-        ),
-        (error, stats) => {
-          if (stats.hasErrors()) {
-            const sts = stats.toJson();
-            console.error(sts.errors);
-            return reject(sts.errors);
-          }
-          if (stats.hasWarnings()) {
-            const sts = stats.toJson();
-            console.error(sts.warnings);
-            return reject(sts.warnings);
-          }
+        )
+      );
 
-          // reading the outputed file
-          const output = __fs.readFileSync(
-            __path.resolve(streamObj.outputDir, __getFilename(streamObj.input)),
+      console.log('trigger');
+      __trigger('sugarwebpack', 'hello');
+
+      compiler.run((error, stats) => {
+        if (stats.hasErrors()) {
+          const sts = stats.toJson();
+          console.error(sts.errors);
+          return reject(sts.errors);
+        }
+        if (stats.hasWarnings()) {
+          const sts = stats.toJson();
+          console.error(sts.warnings);
+          return reject(sts.warnings);
+        }
+
+        // reading the outputed file
+        const output = __fs.readFileSync(
+          __path.resolve(streamObj.outputDir, __getFilename(streamObj.input)),
+          'utf8'
+        );
+
+        // check if is a sourcemap
+        let sourcemapOutput;
+        if (streamObj.map) {
+          sourcemapOutput = __fs.readFileSync(
+            __path.resolve(
+              streamObj.outputDir,
+              __getFilename(streamObj.input) + '.map'
+            ),
             'utf8'
           );
-
-          // check if is a sourcemap
-          let sourcemapOutput;
-          if (streamObj.map) {
-            sourcemapOutput = __fs.readFileSync(
-              __path.resolve(
-                streamObj.outputDir,
-                __getFilename(streamObj.input) + '.map'
-              ),
-              'utf8'
-            );
-          }
-
-          // // if (!streamObj.dataBefore) streamObj.dataBefore = {};
-          streamObj.data = output;
-          if (sourcemapOutput) streamObj.sourcemapData = sourcemapOutput;
-
-          resolve(streamObj);
         }
-      );
+
+        // // if (!streamObj.dataBefore) streamObj.dataBefore = {};
+        streamObj.data = output;
+        if (sourcemapOutput) streamObj.sourcemapData = sourcemapOutput;
+
+        resolve(streamObj);
+      });
     });
   }
 };

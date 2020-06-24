@@ -11,7 +11,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name        printf
- * @namespace       sugar.js.string
+ * @namespace           js.string
  * @type      Function
  *
  * printf php equavalent

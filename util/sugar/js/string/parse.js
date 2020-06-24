@@ -7,7 +7,7 @@ exports.default = void 0;
 
 /**
  * @name                                  parse
- * @namespace                             sugar.js.string
+ * @namespace           js.string
  * @type                                  Function
  *
  * Parse a string and convert it into his native data type like date, number, boolean, etc...

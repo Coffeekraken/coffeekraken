@@ -1,6 +1,6 @@
 /**
  * @name        includes
- * @namespace       sugar.js.string
+ * @namespace           js.string
  * @type      Function
  *
  * Same as the native String.includes function but accept either an array of items
@@ -17,9 +17,9 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function includes(string, values) {
-  if (!Array.isArray(values)) values = values.split(',').map(t => t.trim());
+  if (!Array.isArray(values)) values = values.split(',').map((t) => t.trim());
   const valuesThatExists = [];
-  values.forEach(v => {
+  values.forEach((v) => {
     if (string.includes(v)) {
       valuesThatExists.push(v);
     }

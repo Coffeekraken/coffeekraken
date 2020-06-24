@@ -4,7 +4,7 @@ const __sugarConfig = require('../../config/sugar');
 
 /**
  * @name            SExpressServerCli
- * @namespace       sugar.node.server.express
+ * @namespace           node.server.express
  * @type            Class
  * @extends         SCli
  *

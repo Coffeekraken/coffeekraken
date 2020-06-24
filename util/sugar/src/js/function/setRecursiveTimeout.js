@@ -1,6 +1,6 @@
 /**
  * @name        setRecursiveTimeout
- * @namespace       sugar.js.function
+ * @namespace           js.function
  * @type      Function
  *
  * This utils function allows you to call a passed function each x time during a certain duration

@@ -11,7 +11,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name            replaceTokens
- * @namespace       sugar.js.string
+ * @namespace           js.string
  * @type            Function
  *
  * This function takes as parameter a tokened string like "something [cool]", an object

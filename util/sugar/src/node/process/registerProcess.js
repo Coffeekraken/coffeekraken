@@ -2,7 +2,7 @@ const __uniquid = require('../string/uniqid');
 
 /**
  * @name              registerProcess
- * @namespace         sugar.node.process
+ * @namespace           node.process
  * @type              Function
  *
  * This function register a (child) process in a global stack.

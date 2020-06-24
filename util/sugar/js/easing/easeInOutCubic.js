@@ -7,7 +7,7 @@ exports.default = _default;
 
 /**
  * @name      easeInOutCubic
- * @namespace     sugar.js.easing
+ * @namespace           js.easing
  * @type      Function
  * Ease in out cubic function
  *

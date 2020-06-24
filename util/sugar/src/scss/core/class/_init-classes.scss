@@ -5,7 +5,7 @@
 $_sugar-classes-inited: false;
 /**
  * @name            init-classes
- * @namespace     sugar.scss.core.class
+ * @namespace           scss.core.class
  * @type      mixin
  *
  * Register all the dynamic helper classes that depends on the settings, etc...
@@ -24,7 +24,7 @@ $_sugar-classes-inited: false;
     @each $name, $filter in $filters {
       /**
 			 * @name       	fi-#{$name}
-       * @namespace  	sugar.scss.class.filter
+       * @namespace           scss.class.filter
        * @type        class
        *
        * Apply the filter **#{$name}**
@@ -49,7 +49,7 @@ $_sugar-classes-inited: false;
     @each $name, $transition in $transitions {
       /**
 			 * @name       	tr-#{$name}
-       * @namespace  	sugar.scss.class.transition
+       * @namespace           scss.class.transition
        * @type        class
        *
        * Apply the transition **#{$name}**
@@ -72,7 +72,7 @@ $_sugar-classes-inited: false;
     @each $name, $font in setting("fonts") {
       /**
 			 * @name       	  f-#{$name}
-       * @namespace  	sugar.scss.class.font
+       * @namespace           scss.class.font
        * @type        class
        *
        * Apply the font **#{$name}**
@@ -97,7 +97,7 @@ $_sugar-classes-inited: false;
       $cname: selector("m-b-#{$name}");
       /**
 			 * @name       	#{$cname}
-       * @namespace  	sugar.scss.class.margin.#{$name}
+       * @namespace           scss.class.margin.#{$name}
        * @type        class
        *
        * Set the **bottom** margin to the **#{$size}** size
@@ -117,7 +117,7 @@ $_sugar-classes-inited: false;
       $cname: selector("m-t-#{$name}");
       /**
 			 * @name          #{$cname}
-       * @namespace  	sugar.scss.class.margin.#{$name}
+       * @namespace           scss.class.margin.#{$name}
        * @type        class
        *
        * Set the **top** margin to the **#{$size}** size
@@ -137,7 +137,7 @@ $_sugar-classes-inited: false;
       $cname: selector("m-l-#{$name}");
       /**
 			 * @name       	#{$cname}
-       * @namespace  	sugar.scss.class.margin.#{$name}
+       * @namespace           scss.class.margin.#{$name}
        * @type        class
        *
        * Set the **left** margin to the **#{$size}** size
@@ -157,7 +157,7 @@ $_sugar-classes-inited: false;
       $cname: selector("m-r-#{$name}");
       /**
 			 * @name       	#{$cname}
-       * @namespace  	sugar.scss.class.margin.#{$name}
+       * @namespace           scss.class.margin.#{$name}
        * @type        class
        *
        * Set the **right* margin to the **#{$size}** size
@@ -177,7 +177,7 @@ $_sugar-classes-inited: false;
       $cname: selector("m-s-#{$name}");
       /**
 			 * @name       	#{$cname}
-       * @namespace  	sugar.scss.class.margin.#{$name}
+       * @namespace           scss.class.margin.#{$name}
        * @type        class
        *
        * Set the **side** margin to the **#{$size}** size
@@ -199,7 +199,7 @@ $_sugar-classes-inited: false;
       $cname: selector("p-#{$name}");
       /**
 			 * @name        #{$cname}
-       * @namespace  	sugar.scss.class.padding.#{$name}
+       * @namespace           scss.class.padding.#{$name}
        * @type        class
        *
        * Set the paddings to the **#{$size}** size
@@ -226,7 +226,7 @@ $_sugar-classes-inited: false;
       $cname: selector("p-b-#{$name}");
       /**
 			 * @name       	#{$cname}
-       * @namespace  	sugar.scss.class.padding.#{$name}
+       * @namespace           scss.class.padding.#{$name}
        * @type        class
        *
        * Set the **bottom** padding to the **#{$size}** size
@@ -247,7 +247,7 @@ $_sugar-classes-inited: false;
       $cname: selector("p-t-#{$name}");
       /**
 			 * @name       	#{$cname}
-       * @namespace  	sugar.scss.class.padding.#{$name}
+       * @namespace           scss.class.padding.#{$name}
        * @type        class
        *
        * Set the **top** padding to the **#{$size}** size
@@ -268,7 +268,7 @@ $_sugar-classes-inited: false;
       $cname: selector("p-l-#{$name}");
       /**
 			 * @name       	#{$cname}
-       * @namespace  	sugar.scss.class.padding.#{$name}
+       * @namespace           scss.class.padding.#{$name}
        * @type        class
        *
        * Set the **left** padding  to the **#{$size}** size
@@ -289,7 +289,7 @@ $_sugar-classes-inited: false;
       $cname: selector("p-r-#{$name}");
       /**
 			 * @name       	#{$cname}
-       * @namespace  	sugar.scss.class.padding.#{$name}
+       * @namespace           scss.class.padding.#{$name}
        * @type        class
        *
        * Set the **right** padding  to the **#{$size}** size
@@ -310,7 +310,7 @@ $_sugar-classes-inited: false;
       $cname: selector("p-s-#{$name}");
       /**
 			 * @name       	#{$cname}
-       * @namespace  	sugar.scss.class.padding.#{$name}
+       * @namespace           scss.class.padding.#{$name}
        * @type        class
        *
        * Set the **side** padding  to the **#{$size}** size
@@ -337,7 +337,7 @@ $_sugar-classes-inited: false;
     @each $size, $value in setting("sizes") {
       /**
 			 * @name       	s-#{$size}
-       * @namespace  	sugar.scss.class.size
+       * @namespace           scss.class.size
        * @type        class
        *
        * Set the size **#{$size}** relative to the root element
@@ -354,7 +354,7 @@ $_sugar-classes-inited: false;
       }
       /**
 			 * @name       	s-#{$size}-rel
-       * @namespace  	sugar.scss.class.size
+       * @namespace           scss.class.size
        * @type        class
        *
        * Set the size **#{$size}** relative to my parent
@@ -376,7 +376,7 @@ $_sugar-classes-inited: false;
 
     /**
 		 * @name       	no-p-t
-     * @namespace  	sugar.scss.class.padding.no
+     * @namespace           scss.class.padding.no
      * @type        class
      *
      * Reset **top** padding
@@ -391,7 +391,7 @@ $_sugar-classes-inited: false;
     }
     /**
 		 * @name       	no-p-r
-     * @namespace  	sugar.scss.class.padding.no
+     * @namespace           scss.class.padding.no
      * @type        class
      *
      * Reset **right** padding
@@ -406,7 +406,7 @@ $_sugar-classes-inited: false;
     }
     /**
 		 * @name       	no-p-b
-     * @namespace  	sugar.scss.class.padding.no
+     * @namespace           scss.class.padding.no
      * @type        class
      *
      * Reset **bottom** padding
@@ -421,7 +421,7 @@ $_sugar-classes-inited: false;
     }
     /**
 		 * @name       	no-p-l
-     * @namespace  	sugar.scss.class.padding.no
+     * @namespace           scss.class.padding.no
      * @type        class
      *
      * Reset **left** padding
@@ -436,7 +436,7 @@ $_sugar-classes-inited: false;
     }
     /**
 		 * @name       	no-p-s
-     * @namespace  	sugar.scss.class.padding.no
+     * @namespace           scss.class.padding.no
      * @type        class
      *
      * Reset **left** and **right** paddings
@@ -453,7 +453,7 @@ $_sugar-classes-inited: false;
 
     /**
 		 * @name       	no-m-t
-     * @namespace  	sugar.scss.class.margin.no
+     * @namespace           scss.class.margin.no
      * @type        class
      *
      * Reset **top** padding
@@ -468,7 +468,7 @@ $_sugar-classes-inited: false;
     }
     /**
 		 * @name       	no-m-r
-     * @namespace  	sugar.scss.class.margin.no
+     * @namespace           scss.class.margin.no
      * @type        class
      *
      * Reset **right** padding
@@ -483,7 +483,7 @@ $_sugar-classes-inited: false;
     }
     /**
 		 * @name       	no-m-b
-     * @namespace  	sugar.scss.class.margin.no
+     * @namespace           scss.class.margin.no
      * @type        class
      *
      * Reset **bottom** padding
@@ -498,7 +498,7 @@ $_sugar-classes-inited: false;
     }
     /**
 		 * @name       	no-m-l
-     * @namespace  	sugar.scss.class.margin.no
+     * @namespace           scss.class.margin.no
      * @type        class
      *
      * Reset **left** padding
@@ -513,7 +513,7 @@ $_sugar-classes-inited: false;
     }
     /**
 		 * @name       	no-m-s
-     * @namespace  	sugar.scss.class.padding.no
+     * @namespace           scss.class.padding.no
      * @type        class
      *
      * Reset **left** and **right** margins
@@ -540,7 +540,7 @@ $_sugar-classes-inited: false;
         $cls: string.unquote(selector("c-#{$name}"));
         /**
 				 * @name       	#{$cls}
-         * @namespace  	sugar.scss.class.color.#{$name}
+         * @namespace           scss.class.color.#{$name}
          * @type        class
          *
          * Specify the color to **#{$name}**
@@ -561,7 +561,7 @@ $_sugar-classes-inited: false;
         $cls: string.unquote(selector("bkg-#{$name}"));
         /**
 				 * @name       	#{$cls}
-         * @namespace  	sugar.scss.class.color.#{$name}
+         * @namespace           scss.class.color.#{$name}
          * @type        class
          *
          * Specify the background color to **#{$name}**
@@ -583,7 +583,7 @@ $_sugar-classes-inited: false;
         $cls: string.unquote(selector("b-#{$name}"));
         /**
 				 * @name       	#{$cls}
-         * @namespace  	sugar.scss.class.color.#{$name}
+         * @namespace           scss.class.color.#{$name}
          * @type        class
          *
          * Specify the border of 1px solid to **#{$name}**
@@ -605,7 +605,7 @@ $_sugar-classes-inited: false;
         $cls: string.unquote(selector("b-t-#{$name}"));
         /**
 				 * @name       	#{$cls}
-         * @namespace  	sugar.scss.class.color.#{$name}
+         * @namespace           scss.class.color.#{$name}
          * @type        class
          *
          * Specify the border top of 1px solid to **#{$name}**
@@ -627,7 +627,7 @@ $_sugar-classes-inited: false;
         $cls: string.unquote(selector("b-r-#{$name}"));
         /**
 				 * @name       	#{$cls}
-         * @namespace  	sugar.scss.class.color.#{$name}
+         * @namespace           scss.class.color.#{$name}
          * @type        class
          *
          * Specify the border right of 1px solid to **#{$name}**
@@ -649,7 +649,7 @@ $_sugar-classes-inited: false;
         $cls: string.unquote(selector("b-b-#{$name}"));
         /**
          * @name       	#{$cls}
-         * @namespace  	sugar.scss.class.color.#{$name}
+         * @namespace           scss.class.color.#{$name}
          * @type        class
          *
          * Specify the border bottom of 1px solid to **#{$name}**
@@ -671,7 +671,7 @@ $_sugar-classes-inited: false;
         $cls: string.unquote(selector("b-l-#{$name}"));
         /**
 				 * @name       	#{$cls}
-         * @namespace  	sugar.scss.class.color.#{$name}
+         * @namespace           scss.class.color.#{$name}
          * @type        class
          *
          * Specify the border left of 1px solid to **#{$name}**
@@ -693,7 +693,7 @@ $_sugar-classes-inited: false;
         $cls: string.unquote(selector("b-s-#{$name}"));
         /**
 				 * @name       	#{$cls}
-         * @namespace  	sugar.scss.class.color.#{$name}
+         * @namespace           scss.class.color.#{$name}
          * @type        class
          *
          * Specify the border side of 1px solid to **#{$name}**
@@ -719,7 +719,7 @@ $_sugar-classes-inited: false;
             $cls: string.unquote(selector("c-#{$name}--#{$mod-name}"));
             /**
              * @name       	#{$cls}
-             * @namespace  	sugar.scss.class.color.#{$name}.#{$mod-name}
+             * @namespace           scss.class.color.#{$name}.#{$mod-name}
              * @type        class
              *
 						 * Specify the color to **#{$name}--#{$mod-name}**
@@ -740,7 +740,7 @@ $_sugar-classes-inited: false;
             $cls: string.unquote(selector("bkg-#{$name}--#{$mod-name}"));
             /**
              * @name       	{$cls}
-             * @namespace  	sugar.scss.class.color.#{$name}.#{$mod-name}
+             * @namespace           scss.class.color.#{$name}.#{$mod-name}
              * @type        class
              *
 						 * Specify the background color to **#{$name}--#{$mod-name}**
@@ -762,7 +762,7 @@ $_sugar-classes-inited: false;
             $cls: string.unquote(selector("b-#{$name}--#{$mod-name}"));
             /**
              * @name       	#{$cls}
-             * @namespace  	sugar.scss.class.color.#{$name}.#{$mod-name}
+             * @namespace           scss.class.color.#{$name}.#{$mod-name}
              * @type        class
              *
 						 * Specify the border of 1px solid to **#{$name}--#{$mod-name}**
@@ -783,7 +783,7 @@ $_sugar-classes-inited: false;
             $cls: string.unquote(selector("b-t-#{$name}--#{$mod-name}"));
             /**
              * @name       	#{$cls}
-             * @namespace  	sugar.scss.class.color.#{$name}.#{$mod-name}
+             * @namespace           scss.class.color.#{$name}.#{$mod-name}
              * @type        class
              *
              * Specify the border top of 1px solid to **#{$name}--#{$mod-name}**
@@ -804,7 +804,7 @@ $_sugar-classes-inited: false;
             $cls: string.unquote(selector("b-r-#{$name}--#{$mod-name}"));
             /**
              * @name       	#{$cls}
-             * @namespace  	sugar.scss.class.color.#{$name}.#{$mod-name}
+             * @namespace           scss.class.color.#{$name}.#{$mod-name}
              * @type        class
              *
              * Specify the border right of 1px solid to **#{$name}--#{$mod-name}**
@@ -825,7 +825,7 @@ $_sugar-classes-inited: false;
             $cls: string.unquote(selector("b-b-#{$name}--#{$mod-name}"));
             /**
 						 * @name       	#{$cls}
-             * @namespace  	sugar.scss.class.color.#{$name}.#{$mod-name}
+             * @namespace           scss.class.color.#{$name}.#{$mod-name}
              * @type        class
              *
              * Specify the border bottom of 1px solid to **#{$name}--#{$mod-name}**
@@ -846,7 +846,7 @@ $_sugar-classes-inited: false;
             $cls: string.unquote(selector("b-l-#{$name}--#{$mod-name}"));
             /**
              * @name       	#{$cls}
-             * @namespace  	sugar.scss.class.color.#{$name}.#{$mod-name}
+             * @namespace           scss.class.color.#{$name}.#{$mod-name}
              * @type        class
              *
 						 * Specify the border left of 1px solid to **#{$name}--#{$mod-name}**
@@ -867,7 +867,7 @@ $_sugar-classes-inited: false;
             $cls: string.unquote(selector("b-s-#{$name}--#{$mod-name}"));
             /**
              * @name       	#{$cls}
-             * @namespace  	sugar.scss.class.color.#{$name}.#{$mod-name}
+             * @namespace           scss.class.color.#{$name}.#{$mod-name}
              * @type        class
              *
 						 * Specify the border side of 1px solid to **#{$name}--#{$mod-name}**

@@ -1,6 +1,6 @@
 /**
  * @name        constructorName
- * @namespace       sugar.js.object
+ * @namespace           js.object
  * @type      Function
  *
  * Return the constructor name of the passed object
@@ -19,5 +19,5 @@
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function constructorName(obj) {
-  return (obj.constructor && obj.constructor.name) ? obj.constructor.name : null;
+  return obj.constructor && obj.constructor.name ? obj.constructor.name : null;
 }

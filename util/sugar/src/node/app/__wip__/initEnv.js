@@ -4,7 +4,7 @@ const __fs = require('fs');
 
 /**
  * @name                          initEnv
- * @namespace                     sugar.node.app
+ * @namespace           node.app
  * @type                          Function
  *
  * Init the node environment by initialising "dotenv", "envinfo" and beautify the errors display.
@@ -21,18 +21,22 @@ const __fs = require('fs');
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function initEnv() {
-
   // init dotenv
   __dotenv.config();
 
   // init envinfo
-  process.env.ENV_INFO = __envinfo.run({
-        System: ['OS', 'CPU', 'Memory', 'Shell'],
-        Binaries: ['Node', 'npm'],
-        Browsers: ['Chrome', 'Firefox', 'Safari'],
-  }, {
-    json: true, console: false, showNotFound: false
-  });
+  process.env.ENV_INFO = __envinfo.run(
+    {
+      System: ['OS', 'CPU', 'Memory', 'Shell'],
+      Binaries: ['Node', 'npm'],
+      Browsers: ['Chrome', 'Firefox', 'Safari']
+    },
+    {
+      json: true,
+      console: false,
+      showNotFound: false
+    }
+  );
 
   // check if a package.json file exist at process root
   if (__fs.existsSync(`${process.cwd()}/package.json`)) {
@@ -42,5 +46,4 @@ module.exports = function initEnv() {
   }
 
   return process.env;
-
-}
+};

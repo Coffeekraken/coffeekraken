@@ -7,7 +7,7 @@ exports.default = sleep;
 
 /**
  * @name          sleep
- * @namespace      sugar.js.function
+ * @namespace           js.function
  * @type          Function
  *
  * Simple sleep function that can be used using "await" syntax in an "async" function

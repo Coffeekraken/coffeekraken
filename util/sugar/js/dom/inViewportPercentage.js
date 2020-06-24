@@ -11,7 +11,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name      inViewportPercentage
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Return how many percent the passed element is visible in the viewport

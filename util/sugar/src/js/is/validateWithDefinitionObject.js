@@ -3,7 +3,7 @@ import __isOfType from './ofType';
 
 /**
  * @name              validateWithDefinitionObject
- * @namespace         sugar.js.is
+ * @namespace           js.is
  * @type              Function
  *
  * This function take an property value and an argument definition object

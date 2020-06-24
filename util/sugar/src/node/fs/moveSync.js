@@ -4,7 +4,7 @@ const __fs = require('fs-extra');
 
 /**
  * @name        moveSync
- * @namespace     sugar.node.fs
+ * @namespace           node.fs
  * @type          Function
  *
  * Moves a file or directory, even across devices (sync)
@@ -22,5 +22,5 @@ const __fs = require('fs-extra');
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function moveSync(src, dest) {
-   _fs.moveSync(src, dest);
-}
+  _fs.moveSync(src, dest);
+};

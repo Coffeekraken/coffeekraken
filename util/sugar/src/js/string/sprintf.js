@@ -1,8 +1,8 @@
-import { sprintf as _sprintf } from "sprintf-js";
+import { sprintf as _sprintf } from 'sprintf-js';
 
 /**
  * @name        sprintf
- * @namespace       sugar.js.string
+ * @namespace           js.string
  * @type      Function
  *
  * Javascript implementation of the sprintf php function.

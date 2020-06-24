@@ -31,11 +31,11 @@ const __parseHtml = require('../../../terminal/parseHtml');
 const __ora = require('ora');
 /**
  * @name                            STerminalAuthAdapter
- * @namespace                       sugar.node.auth.adapters
+ * @namespace           node.auth.adapters
  * @type                            Class
- * 
+ *
  * Terminal SAuth adapter that allows you to ask the auth informations through the terminal
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
@@ -48,9 +48,9 @@ module.exports = /*#__PURE__*/function (_SAuthAdapter) {
   /**
    * @name                          constructor
    * @type                          Function
-   * 
+   *
    * Construct the STerminalAuthAdapter instance
-   * 
+   *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   function STerminalAuthAdapter() {
@@ -97,9 +97,9 @@ module.exports = /*#__PURE__*/function (_SAuthAdapter) {
      * @name                      _success
      * @type                      Function
      * @async
-     * 
+     *
      * Display the success message to the user
-     * 
+     *
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
 
@@ -135,9 +135,9 @@ module.exports = /*#__PURE__*/function (_SAuthAdapter) {
      * @name                      _validation
      * @type                      Function
      * @async
-     * 
+     *
      * Display the validation message to the user
-     * 
+     *
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
 
@@ -175,15 +175,15 @@ module.exports = /*#__PURE__*/function (_SAuthAdapter) {
      * @name                      _basic
      * @type                      Function
      * @async
-     * 
+     *
      * Ask the user for username, password
-     * 
+     *
      * @param             {Object}              [settings={}]       An object of settings. Here's the options available:
      * - title (null) {String}: The title to display on top of the form
      * - error (null) {String}: An error message to display to the user. Can be something like "Your credentials have been declined. Please try again..."
      * - info (null) {String}: An info message to display to the user
      * @return            {Promise}                     A promise that will be resolved with the getted username, password
-     * 
+     *
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
 
@@ -368,15 +368,15 @@ module.exports = /*#__PURE__*/function (_SAuthAdapter) {
      * @name                      _bearer
      * @type                      Function
      * @async
-     * 
+     *
      * Ask the user for bearer auth info (token)
-     * 
+     *
      * @param             {Object}              [settings={}]       An object of settings. Here's the options available:
      * - title (null) {String}: The title displayed on top of the form
      * - error (null) {String}: An error message to display to the user. Can be something like "Your credentials have been declined. Please try again..."
      * - info (null) {String}: An info message to display to the user
      * @return            {Promise}                     A promise that will be resolved with the getted username, password
-     * 
+     *
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
 

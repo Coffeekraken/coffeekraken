@@ -2,12 +2,12 @@ import __isNode from '../is/node';
 
 /**
  * @name                    dataTypesArray
- * @namespace               sugar.js.dev
+ * @namespace           js.dev
  * @type                    Array
- * 
+ *
  * This is just a list of data types available in the
  * current language (node/js)
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 if (__isNode()) {
@@ -35,5 +35,5 @@ if (__isNode()) {
     'Array',
     'JSON',
     'Function'
-  ]
+  ];
 }

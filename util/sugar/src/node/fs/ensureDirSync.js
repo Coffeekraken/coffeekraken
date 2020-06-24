@@ -4,7 +4,7 @@ const __fs = require('fs-extra');
 
 /**
  * @name        ensureDirSync
- * @namespace     sugar.node.fs
+ * @namespace           node.fs
  * @type          Function
  *
  * Ensure that the passed directory exists. If not, will be created recursively... (sync)
@@ -23,4 +23,4 @@ const __fs = require('fs-extra');
  */
 module.exports = function ensureDirSync(dir) {
   __fs.ensureDirSync(dir);
-}
+};

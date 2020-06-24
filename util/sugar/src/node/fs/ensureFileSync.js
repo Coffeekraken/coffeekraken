@@ -4,7 +4,7 @@ const __fs = require('fs-extra');
 
 /**
  * @name        ensureFileSync
- * @namespace     sugar.node.fs
+ * @namespace           node.fs
  * @type          Function
  *
  * Ensure that the passed file exists. If not, will be created... (async)
@@ -22,4 +22,4 @@ const __fs = require('fs-extra');
  */
 module.exports = function ensureFileSync(file) {
   __fs.ensureFileSync(file);
-}
+};

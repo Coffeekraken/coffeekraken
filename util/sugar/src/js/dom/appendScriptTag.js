@@ -1,8 +1,8 @@
-import scriptLoaded from "./scriptLoaded";
+import scriptLoaded from './scriptLoaded';
 
 /**
  * @name        appendScriptTag
- * @namespace       sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Append a script tag either to the head or the body
@@ -17,7 +17,7 @@ import scriptLoaded from "./scriptLoaded";
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function appendScriptTag(src, $parent = document.body) {
-  const $script = document.createElement("script");
+  const $script = document.createElement('script');
   $script.src = src;
   $parent.appendChild($script);
   return scriptLoaded($script);

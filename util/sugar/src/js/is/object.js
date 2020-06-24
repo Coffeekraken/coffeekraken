@@ -1,6 +1,6 @@
 /**
  * @name        isObject
- * @namespace       sugar.js.is
+ * @namespace           js.is
  * @type      Function
  *
  * Check if the passed value is a js object
@@ -17,5 +17,5 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function isObject(value) {
-  return value && typeof value === "object" && value.constructor === Object;
+  return value && typeof value === 'object' && value.constructor === Object;
 }

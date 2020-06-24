@@ -7,7 +7,7 @@ import __markdown from './markdown/index';
 
 /**
  * @name                  Dockblock
- * @namespace             sugar.js.docblock
+ * @namespace           js.docblock
  * @type                  Class
  *
  * This is the main class that expose the methods like "parse", etc...
@@ -90,6 +90,8 @@ export default class SDocblock {
       settings
     );
     this._source = source;
+    // parsing the source
+    this.parse();
   }
 
   /**

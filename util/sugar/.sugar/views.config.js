@@ -8,7 +8,7 @@ function isInSugarPackage() {
 module.exports = {
   /**
    * @name            rootDir
-   * @namespace       sugar.config.views
+   * @namespace       config.views
    * @type            String
    * @default          ${__packageRoot(process.cwd())}/dist/views
    *
@@ -23,7 +23,7 @@ module.exports = {
 
   /**
    * @name            cacheDir
-   * @namespace       sugar.config.views
+   * @namespace       config.views
    * @type            String
    * @default          ${__packageRoot(process.cwd())}/dist/views/.cache
    *

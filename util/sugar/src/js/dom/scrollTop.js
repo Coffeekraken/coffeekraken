@@ -1,6 +1,6 @@
 /**
  * @name      scrollTop
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Return the amount of scroll top that the user as made in the page

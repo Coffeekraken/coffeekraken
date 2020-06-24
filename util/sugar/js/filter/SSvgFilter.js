@@ -19,7 +19,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 /**
  * @name 		          SGooeySvgFilter
- * @namespace       sugar.js.filter
+ * @namespace           js.filter
  * @type             Class
  *
  * This class allows you to create with ease some complexe SVG filters and to apply it on any HTMLElement that you want
@@ -45,11 +45,11 @@ let SSvgFilter = /*#__PURE__*/function () {
   /**
    * @name          constructor
    * @type          Function
-   * 
+   *
    * Constructor
-   * 
+   *
    * @param 			{String} 			filter          The SVG filter string representation
-   * 
+   *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   function SSvgFilter(filter_content) {
@@ -60,20 +60,20 @@ let SSvgFilter = /*#__PURE__*/function () {
 
     this.filter_content = filter_content; // generate a uniqid
 
-    this.id = "s-svg-filter-" + (0, _uniqid.default)(); // if need to inject svg
+    this.id = 's-svg-filter-' + (0, _uniqid.default)(); // if need to inject svg
 
-    if (!document.body.querySelector("#s-svg-filters")) SSvgFilter._injectFiltersContainer(); // insert the filter
+    if (!document.body.querySelector('#s-svg-filters')) SSvgFilter._injectFiltersContainer(); // insert the filter
 
     this._insertFilter();
   }
   /**
    * @name            applyTo
    * @type            Function
-   * 
+   *
    * Apply the filter to an element
-   * 
+   *
    * @param 		{HTMLElement} 			elm 			The element on which to apply the filter
-   * 
+   *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
@@ -81,28 +81,28 @@ let SSvgFilter = /*#__PURE__*/function () {
   _createClass(SSvgFilter, [{
     key: "applyTo",
     value: function applyTo(elm) {
-      ["-webkit-", "-moz-", "-ms-", "-o-", ""].forEach(vendor => {
-        elm.style[vendor + "filter"] = 'url("#' + this.id + '")';
+      ['-webkit-', '-moz-', '-ms-', '-o-', ''].forEach(vendor => {
+        elm.style[vendor + 'filter'] = 'url("#' + this.id + '")';
       });
       this.elms.push(elm);
     }
     /**
      * @name          unapplyFrom
      * @type          Function
-     * 
+     *
      * Unapply from
-     * 
+     *
      * @param 		{HTMLElement} 			elm 			The element from which to remove the filter
-     * 
+     *
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
 
   }, {
     key: "unapplyFrom",
     value: function unapplyFrom(elm) {
-      ["-webkit-", "-moz-", "-ms-", "-o-", ""].forEach(vendor => {
-        elm.style[vendor + "filter"] = null;
-        delete elm.style[vendor + "filter"];
+      ['-webkit-', '-moz-', '-ms-', '-o-', ''].forEach(vendor => {
+        elm.style[vendor + 'filter'] = null;
+        delete elm.style[vendor + 'filter'];
       }); // remove from stack
 
       let idx = this.elms.indexOf(elm);
@@ -112,9 +112,9 @@ let SSvgFilter = /*#__PURE__*/function () {
      * @name          _insertFilter
      * @type          Function
      * @private
-     * 
+     *
      * Insert the filter
-     * 
+     *
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
 
@@ -127,22 +127,22 @@ let SSvgFilter = /*#__PURE__*/function () {
 				</defs>
 			</svg>
 		`;
-      let div = document.createElement("div");
+      let div = document.createElement('div');
       div.innerHTML = svg;
-      let defs = div.querySelector("defs"); // add the filter to the svg
+      let defs = div.querySelector('defs'); // add the filter to the svg
 
-      this.filter_content = '<filter id="' + this.id + '">' + this.filter_content + "</filter>";
+      this.filter_content = '<filter id="' + this.id + '">' + this.filter_content + '</filter>';
       defs.innerHTML = this.filter_content;
-      this.filter = defs.querySelector("#" + this.id);
-      this.svg = div.querySelector("svg");
+      this.filter = defs.querySelector('#' + this.id);
+      this.svg = div.querySelector('svg');
       SSvgFilter.filtersContainer.appendChild(this.svg);
     }
     /**
      * @name          destroy
      * @type          Function
-     * 
+     *
      * Destroy the filter
-     * 
+     *
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
 
@@ -161,24 +161,24 @@ let SSvgFilter = /*#__PURE__*/function () {
      * @type          Function
      * @private
      * @static
-     * 
+     *
      * Inject the svg that will contains all the filters created through this class
-     * 
+     *
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
 
   }], [{
     key: "_injectFiltersContainer",
     value: function _injectFiltersContainer() {
-      let style = ["position:absolute;", "left:-1000px;", "top:-300px;"];
+      let style = ['position:absolute;', 'left:-1000px;', 'top:-300px;'];
 
       if (/Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor)) {
-        style.push("display:none;");
+        style.push('display:none;');
       }
 
-      SSvgFilter.filtersContainer = document.createElement("div");
-      SSvgFilter.filtersContainer.id = "s-svg-filters";
-      SSvgFilter.filtersContainer.style = style.join(" ");
+      SSvgFilter.filtersContainer = document.createElement('div');
+      SSvgFilter.filtersContainer.id = 's-svg-filters';
+      SSvgFilter.filtersContainer.style = style.join(' ');
       document.body.appendChild(SSvgFilter.filtersContainer);
     }
   }]);

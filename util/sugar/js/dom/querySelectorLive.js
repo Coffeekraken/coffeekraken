@@ -13,7 +13,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name      querySelectorLive
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Observe the dom to get all the elements that matches a passed css selector at any point in time.

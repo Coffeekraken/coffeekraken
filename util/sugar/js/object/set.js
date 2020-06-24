@@ -11,7 +11,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name                                        set
- * @namespace                                   sugar.js.object
+ * @namespace           js.object
  * @type                                        Function
  *
  * Set an object value using a dotted object path like "myObject.myProperty.myValue" to set his position

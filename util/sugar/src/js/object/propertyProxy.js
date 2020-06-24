@@ -1,7 +1,7 @@
-import _get from "lodash/get";
+import _get from 'lodash/get';
 /**
  * @name        propertyProxy
- * @namespace       sugar.js.object
+ * @namespace           js.object
  * @type      Function
  *
  * Create a proxy for and object property.
@@ -39,7 +39,6 @@ export default function propertyProxy(
   descriptor,
   applySetterAtStart = false
 ) {
-
   // handle property like "something.cool"
   const objPath = property.split('.').slice(0, -1).join('.');
   if (objPath) {
@@ -55,7 +54,7 @@ export default function propertyProxy(
   );
 
   // custom setter check
-  const _set = value => {
+  const _set = (value) => {
     if (descriptor.set) {
       value = descriptor.set(value);
     }
@@ -89,7 +88,7 @@ export default function propertyProxy(
       }
       return _val;
     },
-    set: v => {
+    set: (v) => {
       // const oldValue = val;
       // internal set to use the good setter
       _set(v);
@@ -100,14 +99,14 @@ export default function propertyProxy(
       descriptor.configurable !== undefined
         ? descriptor.configurable
         : currentDescriptor && currentDescriptor.configurable !== undefined
-          ? currentDescriptor.configurable
-          : false,
+        ? currentDescriptor.configurable
+        : false,
     enumarable:
       descriptor.enumarable !== undefined
         ? descriptor.enumarable
         : currentDescriptor && currentDescriptor.enumarable !== undefined
-          ? currentDescriptor.enumarable
-          : true
+        ? currentDescriptor.enumarable
+        : true
     // writable : currentDescriptor && currentDescriptor.writable !== undefined ? currentDescriptor.writable : true
   });
 

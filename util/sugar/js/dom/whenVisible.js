@@ -13,7 +13,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name      whenVisible
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Monitor an HTMLElement to be notified when it is visible
@@ -45,14 +45,14 @@ function whenVisible(elm, cb = null) {
         if (cb) cb(elm);
         resolve(elm); // remove the event listeners
 
-        elm.removeEventListener("transitionend", _eventCb);
-        elm.removeEventListener("animationstart", _eventCb);
-        elm.removeEventListener("animationend", _eventCb); // remove the event listeners
+        elm.removeEventListener('transitionend', _eventCb);
+        elm.removeEventListener('animationstart', _eventCb);
+        elm.removeEventListener('animationend', _eventCb); // remove the event listeners
 
         if (closestNotVisible) {
-          closestNotVisible.removeEventListener("transitionend", _eventCb);
-          closestNotVisible.removeEventListener("animationstart", _eventCb);
-          closestNotVisible.removeEventListener("animationend", _eventCb);
+          closestNotVisible.removeEventListener('transitionend', _eventCb);
+          closestNotVisible.removeEventListener('animationstart', _eventCb);
+          closestNotVisible.removeEventListener('animationend', _eventCb);
         }
       }
     }; // function called on each transitionend, start, etc...
@@ -70,9 +70,9 @@ function whenVisible(elm, cb = null) {
             } // remove the event listeners
 
 
-            elm.removeEventListener("transitionend", _eventCb);
-            elm.removeEventListener("animationstart", _eventCb);
-            elm.removeEventListener("animationend", _eventCb);
+            elm.removeEventListener('transitionend', _eventCb);
+            elm.removeEventListener('animationstart', _eventCb);
+            elm.removeEventListener('animationend', _eventCb);
           }
         } else if (e.target === closestNotVisible) {
           if ((0, _isVisible.default)(closestNotVisible)) {
@@ -83,9 +83,9 @@ function whenVisible(elm, cb = null) {
             } // remove the event listeners
 
 
-            closestNotVisible.removeEventListener("transitionend", _eventCb);
-            closestNotVisible.removeEventListener("animationstart", _eventCb);
-            closestNotVisible.removeEventListener("animationend", _eventCb);
+            closestNotVisible.removeEventListener('transitionend', _eventCb);
+            closestNotVisible.removeEventListener('animationstart', _eventCb);
+            closestNotVisible.removeEventListener('animationend', _eventCb);
           }
         } // callback
 
@@ -99,7 +99,7 @@ function whenVisible(elm, cb = null) {
       selfObserver = new MutationObserver(mutations => {
         mutations.forEach(mutation => {
           // check that is the style whos changed
-          if (mutation.attributeName === "style" || mutation.attributeName === "class") {
+          if (mutation.attributeName === 'style' || mutation.attributeName === 'class') {
             // check if is visible
             if ((0, _isVisible.default)(mutation.target)) {
               // update
@@ -117,9 +117,9 @@ function whenVisible(elm, cb = null) {
         attributes: true
       }); // listen for animationstart to check if the element is visible
 
-      elm.addEventListener("animationstart", _eventCb);
-      elm.addEventListener("animationend", _eventCb);
-      elm.addEventListener("transitionend", _eventCb);
+      elm.addEventListener('animationstart', _eventCb);
+      elm.addEventListener('animationend', _eventCb);
+      elm.addEventListener('transitionend', _eventCb);
     } else {
       isSelfVisible = true;
     } // get the closest not visible element
@@ -132,7 +132,7 @@ function whenVisible(elm, cb = null) {
       parentObserver = new MutationObserver(mutations => {
         mutations.forEach(mutation => {
           // check that is the style whos changed
-          if (mutation.attributeName === "style" || mutation.attributeName === "class") {
+          if (mutation.attributeName === 'style' || mutation.attributeName === 'class') {
             // check if is visible
             if ((0, _isVisible.default)(mutation.target)) {
               // update
@@ -150,9 +150,9 @@ function whenVisible(elm, cb = null) {
         attributes: true
       }); // listen for animationstart to check if the element is visible
 
-      closestNotVisible.addEventListener("animationstart", _eventCb);
-      closestNotVisible.addEventListener("animationend", _eventCb);
-      closestNotVisible.addEventListener("transitionend", _eventCb);
+      closestNotVisible.addEventListener('animationstart', _eventCb);
+      closestNotVisible.addEventListener('animationend', _eventCb);
+      closestNotVisible.addEventListener('transitionend', _eventCb);
     } else {
       areParentsVisible = true;
     } // callback

@@ -1,9 +1,9 @@
-import camelize from "../string/camelize";
-import autoCast from "../string/autoCast";
+import camelize from '../string/camelize';
+import autoCast from '../string/autoCast';
 
 /**
  * @name      getStyleProperty
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Get a style property on the passed element through the computed style.
@@ -30,11 +30,11 @@ export default function getStyleProperty(elm, property) {
   const computed = elm._sComputedStyle || window.getComputedStyle(elm);
   elm._sComputedStyle = computed;
 
-  const prefixes = ["", "webkit-", "moz-", "ms-", "o-", "khtml-"];
+  const prefixes = ['', 'webkit-', 'moz-', 'ms-', 'o-', 'khtml-'];
   for (let i = 0; i < prefixes.length; i++) {
     const prefix = prefixes[i];
     const value = computed[camelize(`${prefix}${property}`)];
-    if (value && value.trim() !== "") return autoCast(value);
+    if (value && value.trim() !== '') return autoCast(value);
   }
   return null;
 }

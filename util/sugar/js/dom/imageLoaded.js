@@ -11,7 +11,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name      imageLoaded
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Wait until the passed image is fully loaded
@@ -32,7 +32,7 @@ function imageLoaded($img, callback = null) {
   let imgLoadedHandler, imgErrorHandler;
   return new _SPromise.default((resolve, reject, trigger, cancel) => {
     // check if image is already loaded
-    if ($img.hasAttribute("src") && $img.complete) {
+    if ($img.hasAttribute('src') && $img.complete) {
       // resolve promise
       resolve($img); // call the callback if exist
 
@@ -46,14 +46,14 @@ function imageLoaded($img, callback = null) {
         callback && callback($img);
       };
 
-      $img.addEventListener("load", imgLoadedHandler); // listen for error
+      $img.addEventListener('load', imgLoadedHandler); // listen for error
 
       imgErrorHandler = e => {
         // reject
         reject(e);
       };
 
-      $img.addEventListener("error", imgErrorHandler);
+      $img.addEventListener('error', imgErrorHandler);
     }
   }).on('cancel,finally', () => {
     imgLoadedHandler && $img.removeEventListener('load', imgLoadedHandler);

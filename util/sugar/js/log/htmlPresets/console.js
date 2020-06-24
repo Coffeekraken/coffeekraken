@@ -14,7 +14,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 _chalk.default.level = 3;
 /**
  * @name                              console
- * @namespace                         sugar.js.log.htmlPresets
+ * @namespace           js.log.htmlPresets
  * @type                              Function
  *
  * Replace all the "log" html tags like "<red>", "<bold>", etc... with the corresponding syntax for the terminal

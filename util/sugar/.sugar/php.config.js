@@ -3,7 +3,7 @@ const __packageRoot = require('../src/node/path/packageRoot');
 module.exports = {
   /**
    * @name              port
-   * @namespace         sugar.config.php
+   * @namespace         config.php
    * @type              Number
    * @default           8080
    *
@@ -16,7 +16,7 @@ module.exports = {
 
   /**
    * @name              hostname
-   * @namespace         sugar.config.php
+   * @namespace         config.php
    * @type              String
    * @default           localhost
    *
@@ -29,7 +29,7 @@ module.exports = {
 
   /**
    * @name              rootDir
-   * @namespace         sugar.config.php
+   * @namespace         config.php
    * @type              String
    * @default           ${__packageRoot(process.cwd())}
    *

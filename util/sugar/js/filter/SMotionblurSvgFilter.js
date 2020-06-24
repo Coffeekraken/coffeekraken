@@ -45,7 +45,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /**
  * @name 		SMotionblurSvgFilter
- * @namespace       sugar.js.filter
+ * @namespace           js.filter
  * @type      Class
  *
  * This class represent a motion blur svg filter that will blur your
@@ -67,38 +67,38 @@ let SMotionblurSvgFilter = /*#__PURE__*/function (_SSvgFilter) {
    * @name        amount
    * @type        Number
    * @default     0.5
-   * 
+   *
    * Store the amount of motion blur to apply
-   * 
+   *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
   /**
    * @name        _isMoving
    * @type        Boolean
-   * 
+   *
    * Store the status of the animation
-   * 
+   *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
   /**
    * @name        _startMoveTimeout
    * @type        Number
-   * 
+   *
    * Store the starting moment when the element move
-   * 
+   *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
   /**
    * @name          constructor
    * @type          Function
-   * 
+   *
    * Constructor
-   * 
+   *
    * @param 		{Number} 		[amount=0.5] 			The motion blur amount
-   * 
+   *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   function SMotionblurSvgFilter(amount = 0.5) {
@@ -120,18 +120,18 @@ let SMotionblurSvgFilter = /*#__PURE__*/function (_SSvgFilter) {
 
     _this._animationFrame = null; // filter elements
 
-    _this._blur = _this.filter.querySelector("feGaussianBlur");
+    _this._blur = _this.filter.querySelector('feGaussianBlur');
     return _this;
   }
   /**
    * @name      applyTo
    * @type      Function
    * @override
-   * 
+   *
    * Apply the filter to element
-   * 
+   *
    * @param 		{HTMLElement} 		elm 		The element on which to apply the filter
-   * 
+   *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
@@ -145,23 +145,23 @@ let SMotionblurSvgFilter = /*#__PURE__*/function (_SSvgFilter) {
 
       this._onMotionStartFn = this._onMotionStart.bind(this);
       this._onMotionStopFn = this._onMotionStop.bind(this);
-      elm.addEventListener("transitionstart", this._onMotionStartFn);
-      elm.addEventListener("animationstart", this._onMotionStartFn);
-      elm.addEventListener("dragstart", this._onMotionStartFn);
-      elm.addEventListener("transitionend", this._onMotionStopFn);
-      elm.addEventListener("animationend", this._onMotionStopFn);
-      elm.addEventListener("dragend", this._onMotionStopFn);
+      elm.addEventListener('transitionstart', this._onMotionStartFn);
+      elm.addEventListener('animationstart', this._onMotionStartFn);
+      elm.addEventListener('dragstart', this._onMotionStartFn);
+      elm.addEventListener('transitionend', this._onMotionStopFn);
+      elm.addEventListener('animationend', this._onMotionStopFn);
+      elm.addEventListener('dragend', this._onMotionStopFn);
       this._lastPos = (0, _offset.default)(this.elms[0]);
     }
     /**
      * @name            unapplyFrom
      * @type            Function
      * @override
-     * 
+     *
      * Remove the filter from element
-     * 
+     *
      * @param 	{HTMLElement} 	elm 	The element to unapply the filter from
-     * 
+     *
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
 
@@ -169,12 +169,12 @@ let SMotionblurSvgFilter = /*#__PURE__*/function (_SSvgFilter) {
     key: "unapplyFrom",
     value: function unapplyFrom(elm) {
       // remove event listeners
-      elm.removeEventListener("animationStart", this._onMotionStartFn);
-      elm.removeEventListener("transitionstart", this._onMotionStartFn);
-      elm.removeEventListener("dragstart", this._onMotionStartFn);
-      elm.removeEventListener("transitionend", this._onMotionStopFn);
-      elm.removeEventListener("animationend", this._onMotionStopFn);
-      elm.removeEventListener("dragend", this._onMotionStopFn); // call parent
+      elm.removeEventListener('animationStart', this._onMotionStartFn);
+      elm.removeEventListener('transitionstart', this._onMotionStartFn);
+      elm.removeEventListener('dragstart', this._onMotionStartFn);
+      elm.removeEventListener('transitionend', this._onMotionStopFn);
+      elm.removeEventListener('animationend', this._onMotionStopFn);
+      elm.removeEventListener('dragend', this._onMotionStopFn); // call parent
 
       _get(_getPrototypeOf(SMotionblurSvgFilter.prototype), "unapplyFrom", this).call(this, elm);
     }
@@ -182,9 +182,9 @@ let SMotionblurSvgFilter = /*#__PURE__*/function (_SSvgFilter) {
      * @name          _onMotionStart
      * @type          Function
      * @private
-     * 
+     *
      * When the animation, transition or draging start
-     * 
+     *
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
 
@@ -203,9 +203,9 @@ let SMotionblurSvgFilter = /*#__PURE__*/function (_SSvgFilter) {
      * @name          _onMotionStop
      * @type          Function
      * @private
-     * 
+     *
      * Transition / animation end
-     * 
+     *
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
 
@@ -219,7 +219,7 @@ let SMotionblurSvgFilter = /*#__PURE__*/function (_SSvgFilter) {
 
       _fastdom.default.mutate(() => {
         // set the blur
-        this._blur.setAttribute("stdDeviation", 0 + "," + 0); // redraw the element to ensure proper display
+        this._blur.setAttribute('stdDeviation', 0 + ',' + 0); // redraw the element to ensure proper display
 
 
         (0, _forceRedraw.default)(this.elms[0]);
@@ -229,11 +229,11 @@ let SMotionblurSvgFilter = /*#__PURE__*/function (_SSvgFilter) {
      * @name          _handleFilter
      * @type          Function
      * @private
-     * 
+     *
      * Handle filter
-     * 
+     *
      * @param 		{Boolean} 		recusrive 			If the function need to be called again at the end of it's execution
-     * 
+     *
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
 
@@ -254,9 +254,9 @@ let SMotionblurSvgFilter = /*#__PURE__*/function (_SSvgFilter) {
      * @name            _setMotionBlur
      * @type            Function
      * @private
-     * 
+     *
      * Set motion blur
-     * 
+     *
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
 
@@ -267,7 +267,7 @@ let SMotionblurSvgFilter = /*#__PURE__*/function (_SSvgFilter) {
       let xDiff = Math.abs(this._currentPos.left - this._lastPos.left) * this.amount;
       let yDiff = Math.abs(this._currentPos.top - this._lastPos.top) * this.amount; // set the blur
 
-      this._blur.setAttribute("stdDeviation", xDiff + "," + yDiff); // update lastPos
+      this._blur.setAttribute('stdDeviation', xDiff + ',' + yDiff); // update lastPos
 
 
       this._lastPos = (0, _offset.default)(this.elms[0]); // return the diff
@@ -281,9 +281,9 @@ let SMotionblurSvgFilter = /*#__PURE__*/function (_SSvgFilter) {
      * @name        destroy
      * @type        Function
      * @override
-     * 
+     *
      * Destroy the filter
-     * 
+     *
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
 

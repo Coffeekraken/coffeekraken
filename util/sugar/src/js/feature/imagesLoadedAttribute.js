@@ -1,6 +1,6 @@
 /**
  * @name 		imagesLoadedAttribute
- * @namespace       sugar.js.feature
+ * @namespace           js.feature
  * @type      Feature
  *
  * Add on every images the attribute "loaded" when it has been fully loaded. This is useful
@@ -14,20 +14,20 @@
 
 // TODO tests
 
-import __imageLoaded from "../dom/imageLoaded";
+import __imageLoaded from '../dom/imageLoaded';
 document.addEventListener(
-  "load",
-  e => {
+  'load',
+  (e) => {
     if (!e.target.tagName) return;
-    if (e.target.tagName.toLowerCase() !== "img") return;
-    if (e.target.hasAttribute("loaded")) return;
-    e.target.setAttribute("loaded", true);
+    if (e.target.tagName.toLowerCase() !== 'img') return;
+    if (e.target.hasAttribute('loaded')) return;
+    e.target.setAttribute('loaded', true);
   },
   true
 );
-[].forEach.call(document.querySelectorAll("img"), img => {
-  __imageLoaded(img).then(img => {
-    if (img.hasAttribute("loaded")) return;
-    img.setAttribute("loaded", true);
+[].forEach.call(document.querySelectorAll('img'), (img) => {
+  __imageLoaded(img).then((img) => {
+    if (img.hasAttribute('loaded')) return;
+    img.setAttribute('loaded', true);
   });
 });

@@ -3,7 +3,7 @@ import __observeAttribute from './observeAttributes';
 
 /**
  * @name      whenAttribute
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Resolve a promise when the wanted attribute on the passed HTMLElement exist or pass the check function provided

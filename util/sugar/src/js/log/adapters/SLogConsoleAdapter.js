@@ -2,12 +2,11 @@ import __deepMerge from '../../object/deepMerge';
 import __consoleHtmlPreset from '../htmlPresets/console';
 import __isChildProcess from '../../is/childProcess';
 import __toString from '../../string/toString';
-import __cliLog from '../../cli/log';
 import __formatObject from 'fmt-obj';
 
 /**
  * @name                    SLogConsoleAdapter
- * @namespace               sugar.js.log
+ * @namespace           js.log
  * @type                    Class
  *
  * This class allows you to log your messages, errors, etc... easily through some adapters that cover some targets like "console" of course,

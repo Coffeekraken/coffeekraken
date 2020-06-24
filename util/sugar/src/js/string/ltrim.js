@@ -1,6 +1,6 @@
 /**
  * @name        ltrim
- * @namespace       sugar.js.string
+ * @namespace           js.string
  * @type      Function
  *
  * Trim left a specified string
@@ -18,7 +18,9 @@
  */
 export default function ltrim(string, needle, trimResult = true) {
   if (string.substr(0, needle.length) === needle) {
-    return trimResult ? string.substr(needle.length).trim() : string.substr(needle.length);
+    return trimResult
+      ? string.substr(needle.length).trim()
+      : string.substr(needle.length);
   }
   // nothing to trim
   return string;

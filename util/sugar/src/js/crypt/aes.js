@@ -5,15 +5,14 @@ import parse from '../string/parse';
 
 /**
  * @name            aes
- * @namespace       sugar.js.crypt
+ * @namespace           js.crypt
  * @type            Object
- * 
+ *
  * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the aes algorithm
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default {
-
   /**
    * @name        encrypt
    * @type        Function
@@ -47,5 +46,4 @@ export default {
     let value = AES.decrypt(message, key).toString(utf8);
     return parse(value);
   }
-
-}
+};

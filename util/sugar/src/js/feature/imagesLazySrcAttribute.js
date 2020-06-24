@@ -1,11 +1,11 @@
-import whenInViewport from "../dom/whenInViewport";
-import querySelectorLive from "../dom/querySelectorLive";
+import whenInViewport from '../dom/whenInViewport';
+import querySelectorLive from '../dom/querySelectorLive';
 
 // TODO tests
 
 /**
  * @name 		imagesLazySrcAttribute
- * @namespace       sugar.js.feature
+ * @namespace           js.feature
  * @type      Feature
  *
  * Add support for the `lazy-src` attribute on `img` elements.
@@ -16,8 +16,8 @@ import querySelectorLive from "../dom/querySelectorLive";
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-querySelectorLive("img[lazy-src]:not([is])", $imgElm => {
+querySelectorLive('img[lazy-src]:not([is])', ($imgElm) => {
   whenInViewport($imgElm).then(() => {
-    $imgElm.setAttribute("src", $imgElm.getAttribute("lazy-src"));
+    $imgElm.setAttribute('src', $imgElm.getAttribute('lazy-src'));
   });
 });

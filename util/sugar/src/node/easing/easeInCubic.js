@@ -1,5 +1,5 @@
 /**
- * @namespace       sugar.node.easing
+ * @namespace           node.easing
  * @src             ../../../js/easing/easeInCubic.js
  */
 module.exports = require('../../../js/easing/easeInCubic');

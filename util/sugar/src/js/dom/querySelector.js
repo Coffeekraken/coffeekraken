@@ -1,10 +1,10 @@
-import __isVisible from "./isVisible";
-import __isInViewport from "./isInViewport";
-import __closestNotVisible from "./closestNotVisible";
+import __isVisible from './isVisible';
+import __isInViewport from './isInViewport';
+import __closestNotVisible from './closestNotVisible';
 
 /**
  * @name      querySelector
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Enhanced proxy of the Element.querySelector function that let you specify

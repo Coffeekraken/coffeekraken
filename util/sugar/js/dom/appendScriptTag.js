@@ -11,7 +11,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name        appendScriptTag
- * @namespace       sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Append a script tag either to the head or the body
@@ -26,7 +26,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function appendScriptTag(src, $parent = document.body) {
-  const $script = document.createElement("script");
+  const $script = document.createElement('script');
   $script.src = src;
   $parent.appendChild($script);
   return (0, _scriptLoaded.default)($script);

@@ -10,7 +10,7 @@ const __parse = require('../../string/parse');
 const __upperFirst = require('../../string/upperFirst');
 /**
  * @name              param
- * @namespace         sugar.js.docblock.tags
+ * @namespace           js.docblock.tags
  * @type              Function
  *
  * Parse the param tag

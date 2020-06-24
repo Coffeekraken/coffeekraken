@@ -3,7 +3,7 @@ const __packageRoot = require('../path/packageRoot');
 
 /**
  * @name            STermAppCli
- * @namespace       sugar.node.termapp
+ * @namespace           node.termapp
  * @type            Class
  * @extends         SCli
  *

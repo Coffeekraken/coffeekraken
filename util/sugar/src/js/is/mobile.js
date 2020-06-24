@@ -1,12 +1,12 @@
-import MobileDetect from "mobile-detect";
+import MobileDetect from 'mobile-detect';
 /**
  * @name        isMobile
- * @namespace       sugar.js.is
+ * @namespace           js.is
  * @type      Function
  *
  * Detect if is a mobile device (phone or tablet)
  *
- * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test * 
+ * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test *
  * @return    {Boolean}    true if is a mobile, false if not
  *
  * @example 	js

@@ -13,7 +13,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name      toggleFullscreen
- * @namespace     sugar.js.dom
+ * @namespace     js.dom
  * @type      Function
  *
  * Toggle the fullscreen mode

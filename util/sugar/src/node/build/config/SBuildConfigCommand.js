@@ -5,7 +5,7 @@ const __sugarConfig = require('../../config/sugar');
 
 /**
  * @name              SBuildConfigCommand
- * @namespace         sugar.node.build.config
+ * @namespace           node.build.config
  * @type              SCommand
  *
  * This class represent a command used to watch and build config files

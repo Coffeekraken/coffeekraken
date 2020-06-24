@@ -1,6 +1,6 @@
 /**
  * @name      nodeIndex
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Return the inde of the passed node inside the html

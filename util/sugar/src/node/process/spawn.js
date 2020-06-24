@@ -8,7 +8,7 @@ const __registerProcess = require('./registerProcess');
 
 /**
  * @name                                spawn
- * @namespace                           sugar.node.process
+ * @namespace           node.process
  * @type                                Function
  *
  * This function is a wrapper for the native "spawn" one that add the Promise support

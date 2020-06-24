@@ -1,52 +1,76 @@
 /**
  * @name                                  convert
- * @namespace                             sugar.js.time
+ * @namespace           js.time
  * @type                                  Function
- * 
+ *
  * This function allows you to convert time like seconds, ms, hours, minutes, etc... from one format to another
- * 
+ *
  * @param           {String|Number}             from                  The value to start from like "10s", "20ms", "2h", etc...
  * @param           {String}                    [to='ms']             The format you want to get back
  * @return          {Number}                                          The converted value
- * 
+ *
  * @example           js
  * import convert from '@coffeekraken/sugar/js/time/convert';
  * convert('10s', 'ms'); // => 10000
- * 
+ *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function convert(from, to = 'ms') {
-
   // init the fromMs variable
   let fromMs = from;
 
   // check if the time is a string to convert it to ms
   if (typeof from === 'string') {
-
     const fromNumber = parseFloat(from);
     const fromLength = fromNumber.toString().length;
     const fromString = from.slice(fromLength);
 
-    if (fromString === 'ms' || fromString === 'millisecond' || fromString === 'milliseconds') {
+    if (
+      fromString === 'ms' ||
+      fromString === 'millisecond' ||
+      fromString === 'milliseconds'
+    ) {
       fromMs = fromNumber;
-    } else if (fromString === 's' || fromString === 'second' || fromString === 'seconds') {
+    } else if (
+      fromString === 's' ||
+      fromString === 'second' ||
+      fromString === 'seconds'
+    ) {
       fromMs = fromNumber * 1000;
-    } else if (fromString === 'm' || fromString === 'minute' || fromString === 'minutes') {
+    } else if (
+      fromString === 'm' ||
+      fromString === 'minute' ||
+      fromString === 'minutes'
+    ) {
       fromMs = fromNumber * 60 * 1000;
-    } else if (fromString === 'h' || fromString === 'hour' || fromString === 'months') {
+    } else if (
+      fromString === 'h' ||
+      fromString === 'hour' ||
+      fromString === 'months'
+    ) {
       fromMs = fromNumber * 60 * 60 * 1000;
-    } else if (fromString === 'd' || fromString === 'day' || fromString === 'days') {
+    } else if (
+      fromString === 'd' ||
+      fromString === 'day' ||
+      fromString === 'days'
+    ) {
       fromMs = fromNumber * 24 * 60 * 60 * 1000;
-    } else if (fromString === 'w' || fromString === 'week' || fromString === 'weeks') {
+    } else if (
+      fromString === 'w' ||
+      fromString === 'week' ||
+      fromString === 'weeks'
+    ) {
       fromMs = fromNumber * 7 * 24 * 60 * 60 * 1000;
     } else if (fromString === 'month' || fromString === 'months') {
       fromMs = fromNumber * 31 * 24 * 60 * 60 * 1000;
-    } else if (fromString === 'y' || fromString === 'year' || fromString === 'years') {
+    } else if (
+      fromString === 'y' ||
+      fromString === 'year' ||
+      fromString === 'years'
+    ) {
       fromMs = fromNumber * 365 * 24 * 60 * 60 * 1000;
     }
   }
-
-
 
   // convert not the fromMs value to the requested format
   switch (to) {
@@ -90,8 +114,9 @@ export default function convert(from, to = 'ms') {
       return fromMs / 1000 / 60 / 60 / 24 / 365;
       break;
     default:
-      throw new Error(`You try to convert "${from}" to "${to}" but this format does not exist... The valids formats are "ms,s,m,h,d,w,month,y"...`);
+      throw new Error(
+        `You try to convert "${from}" to "${to}" but this format does not exist... The valids formats are "ms,s,m,h,d,w,month,y"...`
+      );
       break;
   }
-
 }

@@ -1,6 +1,6 @@
 /**
  * @name                                sort
- * @namespace                           sugar.js.object
+ * @namespace           js.object
  * @type                                Function
  *
  * Sort an object properties the same way as the Array.sort do it
@@ -27,7 +27,6 @@
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function sort(object, sort) {
-
   // get the object keys
   const keys = Object.keys(object);
 
@@ -47,5 +46,4 @@ export default function sort(object, sort) {
 
   // return the result sorted object
   return resultObj;
-
 }

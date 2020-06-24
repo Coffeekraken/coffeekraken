@@ -7,7 +7,7 @@ exports.default = includes;
 
 /**
  * @name        includes
- * @namespace       sugar.js.string
+ * @namespace           js.string
  * @type      Function
  *
  * Same as the native String.includes function but accept either an array of items

@@ -7,7 +7,7 @@ exports.default = description;
 
 /**
  * @name              description
- * @namespace         sugar.js.docblock.tags
+ * @namespace           js.docblock.tags
  * @type              Function
  *
  * Parse the description tag

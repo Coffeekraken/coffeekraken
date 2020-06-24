@@ -27,7 +27,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 /**
  * @name 		SWebComponent
- * @namespace       sugar.js.core
+ * @namespace           js.core
  * @type      Class
  * @extends 	HTMLElement
  *

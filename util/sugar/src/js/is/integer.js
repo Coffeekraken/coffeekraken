@@ -1,6 +1,6 @@
 /**
  * @name        isInteger
- * @namespace       sugar.js.is
+ * @namespace           js.is
  * @type      Function
  *
  * Check if the passed value is an integer
@@ -18,7 +18,7 @@
 export default function isInteger(data) {
   return (
     !isNaN(data) &&
-    (function(x) {
+    (function (x) {
       return (x | 0) === x;
     })(parseFloat(data))
   );

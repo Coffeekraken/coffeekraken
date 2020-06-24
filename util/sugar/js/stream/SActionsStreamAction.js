@@ -43,7 +43,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 /**
  * @name          SActionStreamAction
- * @namespace     sugar.js.stream
+ * @namespace           js.stream
  * @type          Class
  * @extends       SPromise
  *

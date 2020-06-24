@@ -3,7 +3,7 @@ const __countLine = require('../string/countLine');
 
 /**
  * @name                                    center
- * @namespace                               sugar.node.terminal
+ * @namespace           node.terminal
  * @type                                    Function
  *
  * Allow to center one or more lines in the terminal depending on the process.env.STDOUT_PADDING environment variable

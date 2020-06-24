@@ -7,7 +7,7 @@ exports.default = requestFullscreen;
 
 /**
  * @name      requestFullscreen
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Request fullscreen on the passed DOM element

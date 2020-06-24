@@ -7,7 +7,7 @@ exports.default = author;
 
 /**
  * @name              author
- * @namespace         sugar.js.docblock.tags
+ * @namespace           js.docblock.tags
  * @type              Function
  *
  * Parse the author tag

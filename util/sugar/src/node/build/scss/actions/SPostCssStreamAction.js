@@ -10,7 +10,7 @@ const __removeComments = require('postcss-discard-comments');
 
 /**
  * @name                SPostCssStreamAction
- * @namespace           sugar.node.build.scss.actions
+ * @namespace           node.build.scss.actions
  * @type                Class
  * @extends             SActionsStreamAction
  *

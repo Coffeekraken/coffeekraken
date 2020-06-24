@@ -9,7 +9,7 @@ const __SDocblock = require('./SDocblock');
 
 /**
  * @name                  firstLookup
- * @namespace             sugar.node.nav
+ * @namespace           node.nav
  * @type                  Function
  * @async
  *

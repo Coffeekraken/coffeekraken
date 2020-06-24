@@ -11,18 +11,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name              warn
- * @namespace         sugar.js.warn
+ * @namespace           js.warn
  * @type              Function
- * 
+ *
  * This function is a simple wrapper around the SLog class that let you use the warn features quickly
- * 
+ *
  * @param           {Mixed}             message           The message to log
  * @return          {Promise}                             A promise resolved once your message has been correctly logged
- * 
+ *
  * @example         js
  * import warn from '@coffeekraken/sugar/js/log/warn';
  * warn('Hello world');
- * 
+ *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function warn(message) {

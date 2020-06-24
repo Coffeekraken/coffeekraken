@@ -1,7 +1,7 @@
 import __uniqid from 'uniqid';
 /**
  * @name          uniqid
- * @namespace       sugar.js.string
+ * @namespace           js.string
  * @type          Function
  *
  * Generate a uniqid string of 8 bytes. Work using the [uniqid](https://www.npmjs.com/package/uniqid) npm package under the hood.

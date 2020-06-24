@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["whenInViewport"],{
 
-/***/ "./node_modules/in-viewport/in-viewport.js":
-/*!*************************************************!*\
-  !*** ./node_modules/in-viewport/in-viewport.js ***!
-  \*************************************************/
+/***/ "../node_modules/in-viewport/in-viewport.js":
+/*!**************************************************!*\
+  !*** ../node_modules/in-viewport/in-viewport.js ***!
+  \**************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -289,14 +289,14 @@ function observeDOM(watches, container, cb) {
   }
 }
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ "../node_modules/webpack/buildin/global.js")))
 
 /***/ }),
 
-/***/ "./src/js/dom/whenInViewport.js":
-/*!**************************************!*\
-  !*** ./src/js/dom/whenInViewport.js ***!
-  \**************************************/
+/***/ "../src/js/dom/whenInViewport.js":
+/*!***************************************!*\
+  !*** ../src/js/dom/whenInViewport.js ***!
+  \***************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -306,11 +306,11 @@ function observeDOM(watches, container, cb) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = whenInViewport;
+exports["default"] = whenInViewport;
 
-var _inViewport = _interopRequireDefault(__webpack_require__(/*! in-viewport */ "./node_modules/in-viewport/in-viewport.js"));
+var _inViewport = _interopRequireDefault(__webpack_require__(/*! in-viewport */ "../node_modules/in-viewport/in-viewport.js"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 /**
  * @name      whenInViewport
@@ -331,11 +331,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function whenInViewport(elm, offset = 50) {
-  return new Promise((resolve, reject) => {
-    (0, _inViewport.default)(elm, {
+function whenInViewport(elm) {
+  var offset = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 50;
+  return new Promise(function (resolve, reject) {
+    (0, _inViewport["default"])(elm, {
       offset: offset
-    }, () => {
+    }, function () {
       resolve(elm);
     });
   });

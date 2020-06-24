@@ -1,6 +1,6 @@
 /**
  * @name        isYyyymmddDate
- * @namespace       sugar.js.is
+ * @namespace           js.is
  * @type      Function
  *
  * Check if is a valid yyyy.mm.dd date

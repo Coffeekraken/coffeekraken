@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name    sNativeWebComponent
- * @namespace     sugar.js.core
+ * @namespace           js.core
  * @type      Function
  *
  * Extend a native web element to create a new web component

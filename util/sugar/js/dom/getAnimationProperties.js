@@ -15,7 +15,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name      getAnimationProperties
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Get the css animation properties from an HTMLElement in an object format
@@ -49,20 +49,20 @@ function splitIfNeeded(what, separator) {
 
 function getAnimationProperties(elm) {
   // get the animation properties
-  const name = (0, _getStyleProperty.default)(elm, "animation-name") || "";
-  const duration = (0, _getStyleProperty.default)(elm, "animation-duration") || "0s";
-  const timingFunction = (0, _getStyleProperty.default)(elm, "animation-timing-function") || "linear";
-  const delay = (0, _getStyleProperty.default)(elm, "animation-delay") || "0s";
-  const iterationCount = (0, _getStyleProperty.default)(elm, "animation-iteration-count") || 1;
-  const direction = (0, _getStyleProperty.default)(elm, "animation-direction") || "normal"; // return the animation object
+  const name = (0, _getStyleProperty.default)(elm, 'animation-name') || '';
+  const duration = (0, _getStyleProperty.default)(elm, 'animation-duration') || '0s';
+  const timingFunction = (0, _getStyleProperty.default)(elm, 'animation-timing-function') || 'linear';
+  const delay = (0, _getStyleProperty.default)(elm, 'animation-delay') || '0s';
+  const iterationCount = (0, _getStyleProperty.default)(elm, 'animation-iteration-count') || 1;
+  const direction = (0, _getStyleProperty.default)(elm, 'animation-direction') || 'normal'; // return the animation object
 
   const props = {
-    name: name.split(","),
-    duration: duration.split(",").map(value => (0, _convert.default)(value, 'ms')),
-    delay: `${delay}`.split(",").map(value => (0, _convert.default)(value, 'ms')),
-    timingFunction: timingFunction.split(","),
-    iterationCount: `${iterationCount}`.split(","),
-    direction: direction.split(",")
+    name: name.split(','),
+    duration: duration.split(',').map(value => (0, _convert.default)(value, 'ms')),
+    delay: `${delay}`.split(',').map(value => (0, _convert.default)(value, 'ms')),
+    timingFunction: timingFunction.split(','),
+    iterationCount: `${iterationCount}`.split(','),
+    direction: direction.split(',')
   };
   let totalDuration = 0;
   let i = 0;

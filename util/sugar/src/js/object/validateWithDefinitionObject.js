@@ -6,7 +6,7 @@ import __isPlainObject from '../is/plainObject';
 
 /**
  * @name            validateWithDefinitionObject
- * @namespace       sugar.js.object
+ * @namespace           js.object
  * @type            Function
  *
  * This function take an object, a definition object and validate this one depending on the definition...

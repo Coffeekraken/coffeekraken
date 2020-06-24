@@ -7,15 +7,15 @@ exports.default = methodExists;
 
 /**
  * @name                                    methodExists
- * @namespace                               sugar.js.class
+ * @namespace           js.class
  * @type                                    Function
- * 
+ *
  * Check if one or more methods exists on a class instance
- * 
+ *
  * @param           {Object}              instance                The instance to check the methods on
  * @param           {String}              ...methods              The methods to check
  * @return          {Boolean|Array}                               Return true if all is ok, and an array of missing methods if not
- * 
+ *
  * @example           js
  * class Coco {
  *    hello() {}
@@ -23,7 +23,7 @@ exports.default = methodExists;
  * import methodExists from '@coffeekraken/sugar/node/class/methodExists';
  * const myInstance = new Coco();
  * methodExists(myInstance, 'hello', 'world'); // => ['world'];
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function methodExists(instance, ...methods) {

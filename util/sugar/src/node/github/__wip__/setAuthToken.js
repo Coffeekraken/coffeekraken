@@ -1,6 +1,6 @@
 /**
  * @name              setAuthToken
- * @namespace         sugar.node.github
+ * @namespace           node.github
  * @type               Function
  *
  * Set the github authentification token that will be used by all the sugar github related functions
@@ -20,4 +20,4 @@ module.exports = function setAuthToken(username, token) {
     username,
     token
   };
-}
+};

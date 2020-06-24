@@ -7,7 +7,7 @@ exports.default = parseRgba;
 
 /**
  * @name                        parseRgba
- * @namespace             sugar.js.color
+ * @namespace           js.color
  * @type                        Function
  *
  * Parse RGBA string and return an object
@@ -23,8 +23,8 @@ exports.default = parseRgba;
  */
 function parseRgba(rgbaString) {
   rgbaString = rgbaString.toLowerCase();
-  let string = rgbaString.replace("rgba(", "").replace(")", "").replace(/\s/g, "");
-  let array = string.split(",");
+  let string = rgbaString.replace('rgba(', '').replace(')', '').replace(/\s/g, '');
+  let array = string.split(',');
   return {
     r: parseInt(array[0]),
     g: parseInt(array[1]),

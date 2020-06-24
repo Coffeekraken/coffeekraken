@@ -5,7 +5,7 @@ const __sugarConfig = require('../config/sugar');
 
 /**
  * @name                    SProcess
- * @namespace               sugar.node.terminal
+ * @namespace           node.terminal
  * @type                    Class
  *
  * TODO: documentation

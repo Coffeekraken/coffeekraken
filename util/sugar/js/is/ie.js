@@ -7,13 +7,13 @@ exports.default = isIe;
 
 /**
  * @name        isIe
- * @namespace       sugar.js.is
+ * @namespace           js.is
  * @type      Function
  *
  * Detect if is ie (internet explorer)
  *
  * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test
- * 
+ *
  * @example 	js
  * import isIe from '@coffeekraken/sugar/js/is/ie'
  * if (isIe()) {
@@ -24,7 +24,7 @@ exports.default = isIe;
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function isIe(ua = navigator.userAgent) {
-  return ua.indexOf("MSIE") > -1;
+  return ua.indexOf('MSIE') > -1;
 }
 
 module.exports = exports.default;

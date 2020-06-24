@@ -11,7 +11,7 @@ import __SConfigAdapter from './adapters/SConfigAdapter';
 
 /**
  * @name                                            config
- * @namespace                                       sugar.js.config
+ * @namespace           js.config
  * @type                                            Class
  *
  * This class allows you to quickly access/update some configuration depending on the data adapters specified.
@@ -301,7 +301,7 @@ export default class SConfig {
 
   /**
    * @name                                set
-   * @namespace                           sugar.node.config.SConfig
+   * @namespace           node.config.SConfig
    * @type                                Function
    *
    * Get a config depending on the dotted object path passed and either using the first registered adapter found, or the passed one

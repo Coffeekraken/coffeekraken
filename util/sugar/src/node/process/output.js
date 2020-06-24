@@ -4,7 +4,7 @@ const __parseHtml = require('../terminal/parseHtml');
 
 /**
  * @name            output
- * @namespace       sugar.node.process
+ * @namespace           node.process
  * @type            Function
  *
  * This function simply take a SProcess compatible process instance and display the output

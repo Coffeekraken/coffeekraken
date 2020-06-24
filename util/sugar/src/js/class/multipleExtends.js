@@ -1,6 +1,6 @@
 /**
  * @name                multipleExtends
- * @namespace           sugar.js.class
+ * @namespace           js.class
  * @type                Function
  *
  * This function allows you to extends your class with multiple other ones.

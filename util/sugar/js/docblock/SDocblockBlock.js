@@ -47,7 +47,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /**
  * @name          SDocblockBlock
- * @namespace     sugar.js.docblock
+ * @namespace           js.docblock
  * @type          Class
  *
  * This class represent a docblock object that contains all the "tags" values and some features like:

@@ -49,7 +49,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /**
  * @name          SActionStream
- * @namespace     sugar.js.stream
+ * @namespace           js.stream
  * @type          Class
  * @extends       SPromise
  *
@@ -191,7 +191,7 @@ let SActionStream = /*#__PURE__*/function (_SPromise) {
           if (canceled) break;
           const actionName = actionsOrderedNames[i];
           let actionInstance;
-          const actionSettings = settings.actions ? settings.actions[actionName] || {} : {}; // handle passed action that can be either a simple function, a extended SActionsStreamAction class or an instance of the SActionsStreamAction class
+          let actionSettings = settings.actions ? settings.actions[actionName] || {} : {}; // handle passed action that can be either a simple function, a extended SActionsStreamAction class or an instance of the SActionsStreamAction class
 
           let actionFn;
           let actionOnce = false;
@@ -299,7 +299,17 @@ let SActionStream = /*#__PURE__*/function (_SPromise) {
 
 
               if (settings.beforeActions[actionName] && typeof settings.beforeActions[actionName] === 'function') {
-                currentStreamObj = settings.beforeActions[actionName](currentStreamObj, Object.assign({}, actionObj));
+                const beforeActionResultObj = settings.beforeActions[actionName](currentStreamObj, Object.assign({}, actionObj));
+
+                if (beforeActionResultObj && beforeActionResultObj.settings) {
+                  actionSettings = beforeActionResultObj.settings;
+                }
+
+                if (beforeActionResultObj && beforeActionResultObj.streamObj) {
+                  currentStreamObj = beforeActionResultObj.streamObj;
+                } else {
+                  currentStreamObj = beforeActionResultObj;
+                }
               } // call the action and pass it the current stream object
 
 

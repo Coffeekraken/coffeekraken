@@ -7,7 +7,7 @@ exports.default = void 0;
 
 /**
  * @name                                      isJs
- * @namespace                                 sugar.js.is
+ * @namespace           js.is
  * @type                                      Function
  *
  * Check if the current script is running under javascript runtime or not...

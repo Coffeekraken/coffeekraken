@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["whenAttribute"],{
 
-/***/ "./src/js/dom/whenAttribute.js":
-/*!*************************************!*\
-  !*** ./src/js/dom/whenAttribute.js ***!
-  \*************************************/
+/***/ "../src/js/dom/observeAttributes.js":
+/*!******************************************!*\
+  !*** ../src/js/dom/observeAttributes.js ***!
+  \******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13,13 +13,96 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = whenAttribute;
+exports["default"] = _default;
 
-var _attributesObservable = _interopRequireDefault(__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module './attributesObservable'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _SPromise = _interopRequireDefault(__webpack_require__(/*! ../promise/SPromise */ "../src/js/promise/SPromise.js"));
 
-var _autoCast = _interopRequireDefault(__webpack_require__(/*! ../string/autoCast */ "./src/js/string/autoCast.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+/**
+ * @name        observeAttributes
+ * @namespace       sugar.js.dom
+ * @type      Function
+ *
+ * Observe attributes on an HTMLElement and get mutations through the SPromise instance
+ *
+ * @param 		{HTMLElement} 					target 		The element to observe
+ * @param 		{MutationObserverInit} 			settings 	The mutation observer settings
+ * @return 		{SPromise} 								The SPromise throught which you can have the mutations using the "then" callback
+ *
+ * @example  	js
+ * import observeAttributes from 'sugarcss/js/dom/observeAttributes'
+ * const observer = observeAttributes(myCoolHTMLElement).then(mutation => {
+ * 		// do something with the mutation
+ * });
+ * // cancel the observer
+ * observer.cancel();
+ *
+ * @see 		https://developer.mozilla.org/en/docs/Web/API/MutationObserver
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+function _default(target) {
+  var settings = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  return new _SPromise["default"](function (resolve, reject, trigger, cancel) {
+    // create a new observer
+    var mutationObserver = new MutationObserver(function (mutations) {
+      var mutedAttrs = {}; // loop on mutations
+
+      mutations.forEach(function (mutation) {
+        // push mutation
+        if (!mutedAttrs[mutation.attributeName]) {
+          trigger('then', mutation);
+          mutedAttrs[mutation.attributeName] = true;
+        }
+      });
+      mutedAttrs = {};
+    });
+    mutationObserver.observe(target, _objectSpread({
+      attributes: true
+    }, settings));
+  }).on('cancel,finally', function () {
+    mutationObserver.disconnect();
+  }).start();
+}
+/**
+ * List of attributes to observe
+ * @setting
+ * @name 		attributes
+ * @type 		{Array}
+ * @default 	null
+ */
+
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "../src/js/dom/whenAttribute.js":
+/*!**************************************!*\
+  !*** ../src/js/dom/whenAttribute.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = whenAttribute;
+
+var _autoCast = _interopRequireDefault(__webpack_require__(/*! ../string/autoCast */ "../src/js/string/autoCast.js"));
+
+var _observeAttributes = _interopRequireDefault(__webpack_require__(/*! ./observeAttributes */ "../src/js/dom/observeAttributes.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 /**
  * @name      whenAttribute
@@ -48,10 +131,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function whenAttribute(elm, attrName, checkFn = null) {
-  return new Promise((resolve, reject) => {
+function whenAttribute(elm, attrName) {
+  var checkFn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+  return new Promise(function (resolve, reject) {
     if (elm.hasAttribute(attrName)) {
-      const value = (0, _autoCast.default)(elm.getAttribute(attrName));
+      var value = (0, _autoCast["default"])(elm.getAttribute(attrName));
 
       if (checkFn && checkFn(value, value)) {
         resolve(value);
@@ -62,16 +146,16 @@ function whenAttribute(elm, attrName, checkFn = null) {
       }
     }
 
-    const obs = (0, _attributesObservable.default)(elm).subscribe(mutation => {
+    var obs = (0, _observeAttributes["default"])(elm).then(function (mutation) {
       if (mutation.attributeName === attrName) {
-        const value = (0, _autoCast.default)(mutation.target.getAttribute(mutation.attributeName));
+        var _value = (0, _autoCast["default"])(mutation.target.getAttribute(mutation.attributeName));
 
-        if (checkFn && checkFn(value, mutation.oldValue)) {
-          resolve(value);
-          obs.unsubscribe();
+        if (checkFn && checkFn(_value, mutation.oldValue)) {
+          resolve(_value);
+          obs.cancel();
         } else if (!checkFn) {
-          resolve(value);
-          obs.unsubscribe();
+          resolve(_value);
+          obs.cancel();
         }
       }
     });
@@ -82,10 +166,10 @@ module.exports = exports.default;
 
 /***/ }),
 
-/***/ "./src/js/string/autoCast.js":
-/*!***********************************!*\
-  !*** ./src/js/string/autoCast.js ***!
-  \***********************************/
+/***/ "../src/js/string/autoCast.js":
+/*!************************************!*\
+  !*** ../src/js/string/autoCast.js ***!
+  \************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -95,7 +179,7 @@ module.exports = exports.default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = autoCast;
+exports["default"] = autoCast;
 
 /**
  * @name        autoCast
@@ -125,7 +209,7 @@ function autoCast(string) {
   // before the window check cause window['0'] correspond to something
 
 
-  const presumedNumber = parseFloat(string);
+  var presumedNumber = parseFloat(string);
 
   if (!isNaN(presumedNumber)) {
     if (presumedNumber.toString() === string) {
@@ -142,7 +226,7 @@ function autoCast(string) {
 
 
   try {
-    const obj = eval(`(${string})`);
+    var obj = eval("(".concat(string, ")"));
     return obj;
   } catch (e) {
     // assume that the string passed is a string

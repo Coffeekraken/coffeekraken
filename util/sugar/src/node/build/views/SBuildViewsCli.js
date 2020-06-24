@@ -3,7 +3,7 @@ const __sugarConfig = require('../../config/sugar');
 
 /**
  * @name            SBuildViewsCli
- * @namespace       sugar.node.build.views
+ * @namespace           node.build.views
  * @type            Class
  * @extends         SCli
  *

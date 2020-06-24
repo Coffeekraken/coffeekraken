@@ -1,6 +1,6 @@
 /**
  * @name      scrollLeft
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Get the amount of scroll left

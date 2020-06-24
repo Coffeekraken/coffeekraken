@@ -11,7 +11,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name      splitWords
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Split each words inside an HTMLElement by scoping them inside some tags.
@@ -35,7 +35,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function splitWords(elm, tag = "span", tagClass = "split-words") {
+function splitWords(elm, tag = 'span', tagClass = 'split-words') {
   // first call
   _splitWords(elm, tag, tagClass);
 
@@ -55,7 +55,7 @@ function _splitWords(elm, tag, tagClass) {
   let words = string.match(/<\s*(\w+\b)(?:(?!<\s*\/\s*\1\b)[\s\S])*<\s*\/\s*\1\s*>|\S+/g);
   words = (0, _map2.default)(words, word => {
     return `<${tag} class="${tagClass}__word">${word}</${tag}>`;
-  }).join(" ");
+  }).join(' ');
   elm.innerHTML = words;
 }
 

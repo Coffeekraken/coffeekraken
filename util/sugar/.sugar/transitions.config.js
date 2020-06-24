@@ -1,6 +1,6 @@
 /**
  * @name                    transitions
- * @namespace               sugar.config.scss
+ * @namespace               config.scss
  * @type                    Object
  * @default                 { fast: 'all 0.1s ease-in-out 0s', default: 'all 0.2s ease-in-out 0s', slow: 'all 0.5s ease-in-out 0s' }
  *

@@ -1,8 +1,7 @@
 module.exports = {
-
   /**
    * @name                          config
-   * @namespace                     sugar.node.express.controllers.AppControllers
+   * @namespace           node.express.controllers.AppControllers
    * @type                          Function
    *
    * Return the whole configuration object or the specified value requested using the dot formated object key.
@@ -13,7 +12,6 @@ module.exports = {
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com
    */
   config: async (req, res) => {
-
     let value;
 
     if (req.params[0]) {
@@ -23,12 +21,11 @@ module.exports = {
     }
 
     res.send(value);
-
   },
 
   /**
    * @name                          meta
-   * @namespace                     sugar.node.express.controllers.AppControllers
+   * @namespace           node.express.controllers.AppControllers
    * @type                          Function
    *
    * Return the application meta data
@@ -39,7 +36,6 @@ module.exports = {
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com
    */
   meta: (req, res) => {
-
     let value;
 
     if (req.params[0]) {
@@ -49,12 +45,11 @@ module.exports = {
     }
 
     res.send(value);
-
   },
 
   /**
    * @name                js
-   * @namespace           sugar.node.express.controllers.AppControllers
+   * @namespace           node.express.controllers.AppControllers
    * @type                Function
    *
    * Handle the base javascript route that serve the global and common files
@@ -66,9 +61,17 @@ module.exports = {
    */
   js: async (req, res) => {
     // read the common squid framework file
-    const squidCommon = __fs.readFileSync(`${__dirname}/../../../../${await Squid.config('dist.js.outputFolder')}/common.bundle.js`);
+    const squidCommon = __fs.readFileSync(
+      `${__dirname}/../../../../${await Squid.config(
+        'dist.js.outputFolder'
+      )}/common.bundle.js`
+    );
     // read the common project file
-    const projectCommon = __fs.readFileSync(`${process.cwd()}/${await Squid.config('dist.js.outputFolder')}/common.bundle.js`);
+    const projectCommon = __fs.readFileSync(
+      `${process.cwd()}/${await Squid.config(
+        'dist.js.outputFolder'
+      )}/common.bundle.js`
+    );
 
     let resultingScript = `${squidCommon}${projectCommon}`;
     // resultingScript += `
@@ -79,6 +82,5 @@ module.exports = {
 
     // send gziped javascript files Content
     res.send(resultingScript);
-  },
-
+  }
 };

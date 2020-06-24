@@ -8,7 +8,7 @@ import __paramCase from '../string/paramCase';
 
 /**
  * @name              SWebComponent
- * @namespace         sugar.js.webcomponent
+ * @namespace           js.webcomponent
  * @type              Class
  * @extends           HTMLElement
  *

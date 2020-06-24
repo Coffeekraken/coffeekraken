@@ -1,7 +1,7 @@
 module.exports = {
   /**
    * @name            smaller
-   * @namespace       sugar.config.spaces
+   * @namespace       config.spaces
    * @type            String
    * @default         0.5rem
    *
@@ -14,7 +14,7 @@ module.exports = {
 
   /**
    * @name            small
-   * @namespace       sugar.config.spaces
+   * @namespace       config.spaces
    * @type            String
    * @default         1rem
    *
@@ -27,7 +27,7 @@ module.exports = {
 
   /**
    * @name            default
-   * @namespace       sugar.config.spaces
+   * @namespace       config.spaces
    * @type            String
    * @default         2rem
    *
@@ -40,7 +40,7 @@ module.exports = {
 
   /**
    * @name            medium
-   * @namespace       sugar.config.spaces
+   * @namespace       config.spaces
    * @type            String
    * @default         3rem
    *
@@ -53,7 +53,7 @@ module.exports = {
 
   /**
    * @name            big
-   * @namespace       sugar.config.spaces
+   * @namespace       config.spaces
    * @type            String
    * @default         4rem
    *
@@ -66,7 +66,7 @@ module.exports = {
 
   /**
    * @name            bigger
-   * @namespace       sugar.config.spaces
+   * @namespace       config.spaces
    * @type            String
    * @default         5rem
    *

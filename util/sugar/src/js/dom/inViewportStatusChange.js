@@ -7,7 +7,7 @@ import __whenOutOfViewport from './whenOutOfViewport';
 
 /**
  * @name      inViewportStatusChange
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Monitor when the passed element enter or exit the viewport
@@ -26,37 +26,38 @@ import __whenOutOfViewport from './whenOutOfViewport';
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function inViewportStatusChange($elm) {
-
   let isCanceled = false;
 
-  return new __SPromise((resolve, reject, trigger, cancel) => {
+  return new __SPromise(
+    (resolve, reject, trigger, cancel) => {
+      function _whenIn() {
+        __whenInViewport($elm).then(() => {
+          if (isCanceled) return;
+          trigger('enter', $elm);
+          _whenOut();
+        });
+      }
+      function _whenOut() {
+        __whenOutOfViewport($elm).then(() => {
+          if (isCanceled) return;
+          trigger('exit', $elm);
+          _whenIn();
+        });
+      }
 
-    function _whenIn() {
-      __whenInViewport($elm).then(() => {
-        if (isCanceled) return;
-        trigger('enter', $elm);
+      // if not in viewport at start
+      if (!__isInViewport($elm)) {
         _whenOut();
-      });
-    }
-    function _whenOut() {
-      __whenOutOfViewport($elm).then(() => {
-        if (isCanceled) return;
-        trigger('exit', $elm);
+      } else {
         _whenIn();
-      });
+      }
+    },
+    {
+      stacks: ['enter', 'exit']
     }
-
-    // if not in viewport at start
-    if (!__isInViewport($elm)) {
-      _whenOut();
-    } else {
-      _whenIn();
-    }
-
-  }, {
-    stacks: ['enter', 'exit']
-  }).on('cancel,finally', () => {
-    isCanceled = true;
-  }).start();
-
+  )
+    .on('cancel,finally', () => {
+      isCanceled = true;
+    })
+    .start();
 }

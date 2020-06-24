@@ -1,6 +1,6 @@
-import __constructorName from "./constructorName";
-import __get from "./get";
-import __set from "./set";
+import __constructorName from './constructorName';
+import __get from './get';
+import __set from './set';
 import __deepProxy from './deepProxy';
 import __parseString from '../string/parse';
 import __uniqid from '../string/uniqid';
@@ -8,7 +8,7 @@ import __micromatch from 'micromatch';
 
 /**
  * @name 		            SWatch
- * @namespace           sugar.js.object
+ * @namespace           js.object
  * @type                Class
  *
  * This class allows you to easily monitor some object properties and get the new and old value of it
@@ -33,14 +33,13 @@ import __micromatch from 'micromatch';
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default class SWatch {
-
   /**
    * @name                    _watchStack
    * @type                    Object
    * @private
-   * 
+   *
    * Watch stack
-   * 
+   *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _watchStack = {};
@@ -48,18 +47,16 @@ export default class SWatch {
   /**
    * @name                      constructor
    * @type                      Function
-   * 
+   *
    * Constructor
-   * 
+   *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(object) {
-
     // check if the passed object is already an SWatch instance
     if (object.__$SWatch) return object;
 
     this._proxiedObject = __deepProxy(object, (obj) => {
-
       let path = obj.path;
       let value = obj.value;
       let oldValue = obj.oldValue;
@@ -86,10 +83,9 @@ export default class SWatch {
       };
 
       // loop on all the watch processes that match the path
-      watchProcesses.forEach(watchProcess => {
+      watchProcesses.forEach((watchProcess) => {
         watchProcess.handlerFn(watchResult);
       });
-
     });
 
     const watchPropertyObj = {
@@ -103,7 +99,7 @@ export default class SWatch {
       configurable: false,
       enumerable: false,
       value: this.unwatch.bind(this)
-    }
+    };
     if (this._proxiedObject.watch !== undefined) {
       Object.defineProperties(this._proxiedObject, {
         $watch: watchPropertyObj
@@ -133,7 +129,6 @@ export default class SWatch {
     });
 
     return this._proxiedObject;
-
   }
 
   _getWatchStack(path) {
@@ -153,27 +148,26 @@ export default class SWatch {
   /**
    * @name              watch
    * @type              Function
-   * 
+   *
    * This allows you to set a watch process on one or multiple properties of the object setted in the instance.
    * The "globs" parameter has to be a simple glob pattern or an array of glob patterns.
    * The only difference with basic glob is that you can replace the "/" with "." (optional).
    * It uses under the hood the "glob" package that you can find here: https://www.npmjs.com/package/glob
-   * 
+   *
    * @param     {String|Array}          globs         A glob or array of glob patterns to tell which propertie(s) you want to watch
    * @param     {Function}              handlerFn     A function that will be called with the watchObj that define the update
    * @param     {String}                [id=null]   The id you want to give to this watch process. It will be used to unwatch this process
-   * 
+   *
    * @example         js
    * myWatch.watch('**.*', {
    *    set: (object, prop, value) => {
    *      // do something
    *    }
    * });
-   * 
+   *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   watch(globs, handlerFn, id = null) {
-
     if (!id) id = __uniqid();
 
     if (!this._proxiedObject.__$watchIds) {
@@ -192,32 +186,30 @@ export default class SWatch {
 
     // return the id to be able to remove the watching process
     return id;
-
   }
 
   /**
    * @name                unwatch
    * @type                Function
-   * 
+   *
    * Stop watching a watch process that you have created with the "watch" function
-   * 
+   *
    * @param       {String}        watchId             The watchId to stop watching. This came as return of the "watch" method
-   * 
+   *
    * @example         js
    * const watchId = myWatch.watch('**.*', {
    *    // etc...
    * });
    * myWatch.unwatch(watchId);
-   * 
+   *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   unwatch(watchId = this._proxiedObject.__$watchIds) {
     if (Array.isArray(watchId)) {
-      watchId.forEach(id => {
+      watchId.forEach((id) => {
         delete this._watchStack[id];
       });
     }
     delete this._watchStack[watchId];
   }
-
 }

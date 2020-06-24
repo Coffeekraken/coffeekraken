@@ -7,7 +7,7 @@ exports.default = void 0;
 
 /**
  * @name      requestAnimationFrame
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Proxy for the window.requestAnimationFrame function

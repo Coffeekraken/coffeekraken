@@ -27,7 +27,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /**
  * @name                  Dockblock
- * @namespace             sugar.js.docblock
+ * @namespace           js.docblock
  * @type                  Class
  *
  * This is the main class that expose the methods like "parse", etc...
@@ -112,7 +112,9 @@ let SDocblock = /*#__PURE__*/function () {
         markdown: _index.default
       }
     }, settings);
-    this._source = source;
+    this._source = source; // parsing the source
+
+    this.parse();
   }
   /**
    * @name        blocks

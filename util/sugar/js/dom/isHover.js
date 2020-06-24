@@ -9,7 +9,7 @@ exports.default = isHover;
 
 /**
  * @name      isHover
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Check if the mouse is hover the passed HTMLElement
@@ -26,7 +26,7 @@ exports.default = isHover;
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function isHover($elm) {
-  return $elm.parentElement.querySelector(":hover") === $elm;
+  return $elm.parentElement.querySelector(':hover') === $elm;
 }
 
 module.exports = exports.default;

@@ -4,7 +4,7 @@ __chalk.level = 3;
 
 /**
  * @name                                parseHtml
- * @namespace                           sugar.js.console
+ * @namespace           js.console
  * @type                                Function
  *
  * Parse the simple html tags to format the console message
@@ -15,7 +15,6 @@ __chalk.level = 3;
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function parseHtml(message) {
-
   let isArray = false;
   if (Array.isArray(message)) {
     isArray = true;
@@ -23,9 +22,8 @@ export default function parseHtml(message) {
     message = [message];
   }
 
-  message = message.map(m => {
+  message = message.map((m) => {
     return __replaceTags(m, {
-
       black: (tag, content) => __chalk.black(content),
       red: (tag, content) => __chalk.red(content),
       green: (tag, content) => __chalk.green(content),
@@ -51,9 +49,7 @@ export default function parseHtml(message) {
       strike: (tag, content) => __chalk.strike(content),
 
       br: (tag, content) => '\n'
-
     });
-
   });
 
   if (isArray) return message;

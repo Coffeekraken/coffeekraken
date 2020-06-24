@@ -7,7 +7,7 @@ exports.default = rtrim;
 
 /**
  * @name        rtrim
- * @namespace       sugar.js.string
+ * @namespace           js.string
  * @type      Function
  *
  * Trim right a specified string

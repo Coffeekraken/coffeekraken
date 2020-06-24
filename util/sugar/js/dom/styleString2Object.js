@@ -13,7 +13,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name      styleString2Object
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Transform a style string to an object representation
@@ -32,12 +32,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function styleString2Object(style) {
-  if (!style || style === "") return {};
+  if (!style || style === '') return {};
   let obj = {};
-  const split = style.replace(/\s/g, "").split(";");
+  const split = style.replace(/\s/g, '').split(';');
   split.forEach(statement => {
     // split statement by key value pairs
-    const spl = statement.split(":"),
+    const spl = statement.split(':'),
           key = (0, _camelize.default)(spl[0]),
           value = spl[1]; // add element into object
 

@@ -1,17 +1,21 @@
-"use strict";
+'use strict';
 
-Object.defineProperty(exports, "__esModule", {
+Object.defineProperty(exports, '__esModule', {
   value: true
 });
 exports.default = checkDefinitionObject;
 
-var _checkDefinitionObject = _interopRequireDefault(require("../object/checkDefinitionObject"));
+var _checkDefinitionObject = _interopRequireDefault(
+  require('../object/checkDefinitionObject')
+);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : { default: obj };
+}
 
 /**
  * @name            checkDefinitionObject
- * @namespace       sugar.js.cli
+ * @namespace       js.cli
  * @type            Function
  *
  * This function take a definition object as parameter and check if all is valid.
@@ -35,21 +39,33 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function checkDefinitionObject(definitionObj) {
-  return (0, _checkDefinitionObject.default)(definitionObj, (argName, argDefinition) => {
-    // check alias
-    if (argDefinition.alias) {
-      if (typeof argDefinition.alias !== 'string') return `The "alias" property of an argument definition object has to be a String. You've passed "${__toString(argDefinition.alias)}" which is a "${typeof argDefinition.alias}" for your argument "${argName}"...`;
-      if (argDefinition.alias.length !== 1) return `The "alias" property of an argument definition object has to be a 1 letter String. You've passed "${argDefinition.alias}" for your argument "${argName}"...`;
-    } // check description
+  return (0, _checkDefinitionObject.default)(
+    definitionObj,
+    (argName, argDefinition) => {
+      // check alias
+      if (argDefinition.alias) {
+        if (typeof argDefinition.alias !== 'string')
+          return `The "alias" property of an argument definition object has to be a String. You've passed "${__toString(
+            argDefinition.alias
+          )}" which is a "${typeof argDefinition.alias}" for your argument "${argName}"...`;
+        if (argDefinition.alias.length !== 1)
+          return `The "alias" property of an argument definition object has to be a 1 letter String. You've passed "${argDefinition.alias}" for your argument "${argName}"...`;
+      } // check description
 
+      if (!argDefinition.description)
+        return `The property "description" for your argument "${argName}" is missing...`;
+      if (typeof argDefinition.description !== 'string')
+        return `The property "description" of an argument definition object has to be a String. You've passed "${__toString(
+          argDefinition.description
+        )}" which is a "${typeof argDefinition.description}" for your argument "${argName}"...`; // check level
 
-    if (!argDefinition.description) return `The property "description" for your argument "${argName}" is missing...`;
-    if (typeof argDefinition.description !== 'string') return `The property "description" of an argument definition object has to be a String. You've passed "${__toString(argDefinition.description)}" which is a "${typeof argDefinition.description}" for your argument "${argName}"...`; // check level
-
-    if (argDefinition.level && typeof argDefinition.level !== 'number') {
-      return `The property "level" for your argument "${argName}" has to be a Number. You've passed "${__toString(argDefinition.level)}" which is a "${typeof argDefinition.level}"...`;
+      if (argDefinition.level && typeof argDefinition.level !== 'number') {
+        return `The property "level" for your argument "${argName}" has to be a Number. You've passed "${__toString(
+          argDefinition.level
+        )}" which is a "${typeof argDefinition.level}"...`;
+      }
     }
-  });
+  );
 }
 
 module.exports = exports.default;

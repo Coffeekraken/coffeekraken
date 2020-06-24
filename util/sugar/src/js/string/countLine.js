@@ -3,7 +3,7 @@ import __stripAnsi from 'strip-ansi';
 
 /**
  * @name                                  countLine
- * @namespace                             sugar.js.string
+ * @namespace           js.string
  * @type                                  Function
  *
  * Count how many characters their is in the passed line.

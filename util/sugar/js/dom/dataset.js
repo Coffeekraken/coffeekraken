@@ -15,7 +15,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name      dataset
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Get or set a value on the passed element with the passed name
@@ -35,7 +35,7 @@ function dataset($elm, key, value = null) {
   if (!$elm.getAttribute) return;
 
   if (!value) {
-    const v = $elm.dataset[key] || $elm.getAttribute("data-" + (0, _uncamelize.default)(key));
+    const v = $elm.dataset[key] || $elm.getAttribute('data-' + (0, _uncamelize.default)(key));
     return (0, _autoCast.default)(v);
   } else {
     // try to set the value
@@ -46,7 +46,7 @@ function dataset($elm, key, value = null) {
     } else {
       // set the data through setAttribute
       // cause no support for dataset
-      $elm.setAttribute("data-" + (0, _uncamelize.default)(key), (0, _toString.default)(value));
+      $elm.setAttribute('data-' + (0, _uncamelize.default)(key), (0, _toString.default)(value));
     } // return the element
 
 

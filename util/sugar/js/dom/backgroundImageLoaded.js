@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name        backgroundImageLoaded
- * @namespace       sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Detect when a background image has been loaded on an HTMLElement
@@ -38,11 +38,11 @@ function backgroundImageLoaded($elm) {
       $img;
   const promise = new _SPromise.default((resolve, reject, trigger, cancel) => {
     // get the background-image property from computed style
-    const backgroundImage = (0, _getStyleProperty.default)($elm, "background-image");
+    const backgroundImage = (0, _getStyleProperty.default)($elm, 'background-image');
     const matches = backgroundImage.match(/.*url\((.*)\).*/);
 
     if (!matches || !matches[1]) {
-      reject("No background image url found...");
+      reject('No background image url found...');
       return;
     } // process url
 

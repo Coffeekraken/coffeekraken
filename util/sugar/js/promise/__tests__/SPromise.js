@@ -14,6 +14,7 @@ module.exports = __SPromise => {
     const onThenStack = [],
           onThenCatchStack = [];
     let promiseWithPromisesIdx = 0;
+    let unsubscribedCallbackTestCallCount = 0;
     const secondPromiseStack = [];
     let myPromiseCancelResult;
     let myPromiseWithPromisesResult = null;
@@ -31,6 +32,13 @@ module.exports = __SPromise => {
       }).then(value => {
         secondPromiseStack.push(value);
       }).start();
+      const unsubscribePromise = new __SPromise(() => {}).start();
+      unsubscribePromise.on('unsubscribeCallbackTest', () => {
+        unsubscribedCallbackTestCallCount++;
+      });
+      unsubscribePromise.trigger('unsubscribeCallbackTest', true);
+      unsubscribePromise.off('unsubscribeCallbackTest');
+      unsubscribePromise.trigger('unsubscribeCallbackTest', true);
       const res = await new __SPromise((resolve, reject, trigger, cancel) => {
         trigger('then', 'world');
         trigger('then', 'hello');
@@ -106,6 +114,12 @@ module.exports = __SPromise => {
       }, 2000);
     });
     it('Should not have passed the tests on promise with promises returned by then function', done => {
+      setTimeout(() => {
+        expect(unsubscribedCallbackTestCallCount).toBe(1);
+        done();
+      }, 500);
+    });
+    it('Should not have called the unsubscribed callback', done => {
       setTimeout(() => {
         // expect(promiseWithPromisesIdx).toBe(2);
         // expect(isPassedPromiseWithPromises).toBe(true);

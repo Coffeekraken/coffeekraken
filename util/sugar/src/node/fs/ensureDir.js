@@ -4,7 +4,7 @@ const __fs = require('fs-extra');
 
 /**
  * @name        ensureDir
- * @namespace     sugar.node.fs
+ * @namespace           node.fs
  * @type          Function
  * @async
  *
@@ -24,4 +24,4 @@ const __fs = require('fs-extra');
  */
 module.exports = function ensureDir(dir) {
   return __fs.ensureDir(dir);
-}
+};

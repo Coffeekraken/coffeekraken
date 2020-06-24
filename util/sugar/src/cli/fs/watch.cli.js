@@ -5,7 +5,7 @@ const __path = require('path');
 
 /**
  * @name                watch
- * @namespace           sugar.cli.fs
+ * @namespace           cli.fs
  * @type                cli
  *
  * This command simply take some glob patterns to watch files.

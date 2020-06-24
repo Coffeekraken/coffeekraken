@@ -5,7 +5,7 @@ module.exports = (__SDocblockBlock) => {
     const docblock = `
       /**
        * @name                  SDocblockBlock
-       * @namespace             sugar.js.docblock
+       * @namespace           js.docblock
        * @type                  Class
        *
        * This is the main class that expose the methods like "parse", etc...
@@ -79,7 +79,7 @@ module.exports = (__SDocblockBlock) => {
         raw:
           '/**\n' +
           '       * @name                  SDocblockBlock\n' +
-          '       * @namespace             sugar.js.docblock\n' +
+          '       * @namespace           js.docblock\n' +
           '       * @type                  Class\n' +
           '       *\n' +
           '       * This is the main class that expose the methods like "parse", etc...\n' +

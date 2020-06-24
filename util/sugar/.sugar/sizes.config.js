@@ -1,7 +1,7 @@
 module.exports = {
   /**
    * @name              smaller
-   * @namespace         sugar.config.sizes
+   * @namespace         config.sizes
    * @type              Number
    * @default           0.3
    *
@@ -14,7 +14,7 @@ module.exports = {
 
   /**
    * @name              small
-   * @namespace         sugar.config.sizes
+   * @namespace         config.sizes
    * @type              Number
    * @default           0.6
    *
@@ -27,7 +27,7 @@ module.exports = {
 
   /**
    * @name              default
-   * @namespace         sugar.config.sizes
+   * @namespace         config.sizes
    * @type              Number
    * @default           1
    *
@@ -41,7 +41,7 @@ module.exports = {
 
   /**
    * @name              medium
-   * @namespace         sugar.config.sizes
+   * @namespace         config.sizes
    * @type              Number
    * @default           2
    *
@@ -54,7 +54,7 @@ module.exports = {
 
   /**
    * @name              big
-   * @namespace         sugar.config.sizes
+   * @namespace         config.sizes
    * @type              Number
    * @default           3
    *
@@ -67,7 +67,7 @@ module.exports = {
 
   /**
    * @name              bigger
-   * @namespace         sugar.config.sizes
+   * @namespace         config.sizes
    * @type              Number
    * @default           4
    *

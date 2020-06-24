@@ -11,7 +11,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name        closest
- * @namespace       sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Go up the dom three to find the first element that matches the passed selector
@@ -38,9 +38,9 @@ function closest($elm, selector) {
   $elm = $elm.parentNode;
 
   while ($elm && $elm != originalElm.ownerDocument) {
-    if (typeof selector === "function") {
+    if (typeof selector === 'function') {
       if (selector($elm)) return $elm;
-    } else if (typeof selector === "string" && (0, _matches.default)($elm, selector)) {
+    } else if (typeof selector === 'string' && (0, _matches.default)($elm, selector)) {
       return $elm;
     }
 

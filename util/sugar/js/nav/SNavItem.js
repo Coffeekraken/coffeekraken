@@ -21,7 +21,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /**
  * @name              SNavItem
- * @namespace         sugar.js.nav
+ * @namespace           js.nav
  * @type              Class
  *
  * This class represent a navigation item with some properties like the actions, the id, the text, etc...

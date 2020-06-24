@@ -7,7 +7,7 @@ exports.default = filter;
 
 /**
  * @name                        filter
- * @namespace                   sugar.js.object
+ * @namespace           js.object
  * @type                        Function
  *
  * Allow to filter an object using a function. It works the same as the filter method on the Array object type.

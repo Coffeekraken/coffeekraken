@@ -3,7 +3,7 @@ const __SDocblock = require('../../../docblock/SDocblock');
 
 /**
  * @name                SDocblocksObjectsToMarkdownStreamAction
- * @namespace           sugar.node.build.doc.actions
+ * @namespace           node.build.doc.actions
  * @type                Class
  * @extends             SActionsStreamAction
  *

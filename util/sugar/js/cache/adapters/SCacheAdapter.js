@@ -12,11 +12,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /**
  * @name                                SCacheAdapter
- * @namespace                           sugar.js.cache.cacheAdapters
+ * @namespace           js.cache.cacheAdapters
  * @type                                Class
- * 
+ *
  * Base class for SCache adapters
- * 
+ *
  * @example             js
  * class SCacheCoolAdapter extends SCacheAdapter {
  *    constructor(settings = {}) {
@@ -37,7 +37,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  *      return true; // return true or false if something goes wrong
  *    }
  * }
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = (_temp =
@@ -45,20 +45,20 @@ module.exports = (_temp =
  * @name                              _settings
  * @type                              Object
  * @private
- * 
+ *
  * Store the default settings of the SCacheAdapter instance
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
 /**
  * @name                              constructor
  * @type                              Function
- * 
+ *
  * Construct the SCacheAdapter instance with the settings passed in object format. See description bellow.
- * 
+ *
  * @param         {Object}          [settings={}]             An object to configure the SCacheAdapter instance. This is specific to each adapters.settings.settings...
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function SCacheAdapter(settings = {}) {

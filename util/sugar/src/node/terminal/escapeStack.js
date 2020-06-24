@@ -3,7 +3,7 @@ const __hotkey = require('../keyboard/hotkey');
 
 /**
  * @name                          escapeStack
- * @namespace                     sugar.node.blessed
+ * @namespace           node.blessed
  * @type                          Function
  *
  * This function allows you to register a callback to know when it's time to "close" or do whatever you want on escape click.

@@ -8,7 +8,7 @@ import __isChildProcess from '../is/childProcess';
 
 /**
  * @name          SActionStream
- * @namespace     sugar.js.stream
+ * @namespace           js.stream
  * @type          Class
  * @extends       SPromise
  *
@@ -157,7 +157,7 @@ export default class SActionStream extends __SPromise {
         if (canceled) break;
         const actionName = actionsOrderedNames[i];
         let actionInstance;
-        const actionSettings = settings.actions
+        let actionSettings = settings.actions
           ? settings.actions[actionName] || {}
           : {};
 
@@ -264,10 +264,18 @@ export default class SActionStream extends __SPromise {
               settings.beforeActions[actionName] &&
               typeof settings.beforeActions[actionName] === 'function'
             ) {
-              currentStreamObj = settings.beforeActions[actionName](
+              const beforeActionResultObj = settings.beforeActions[actionName](
                 currentStreamObj,
                 Object.assign({}, actionObj)
               );
+              if (beforeActionResultObj && beforeActionResultObj.settings) {
+                actionSettings = beforeActionResultObj.settings;
+              }
+              if (beforeActionResultObj && beforeActionResultObj.streamObj) {
+                currentStreamObj = beforeActionResultObj.streamObj;
+              } else {
+                currentStreamObj = beforeActionResultObj;
+              }
             }
 
             // call the action and pass it the current stream object

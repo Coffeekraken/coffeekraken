@@ -15,7 +15,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name                    activeSpace
- * @namespace               sugar.js.core
+ * @namespace           js.core
  * @type                    Object
  *
  * This object expose some functions that are usefull to manage the "active" space of your application.

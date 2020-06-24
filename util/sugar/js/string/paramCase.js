@@ -9,7 +9,7 @@ var _paramCase = require("param-case");
 
 /**
  * @name          paramCase
- * @namespace     sugar.js.string
+ * @namespace           js.string
  * @type          Function
  *
  * This function transform a string into a param case one like so "something-cool"

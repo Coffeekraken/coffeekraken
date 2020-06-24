@@ -5,7 +5,7 @@ import __toString from '../string/toString';
 
 /**
  * @name            validateDefinitionObject
- * @namespace       sugar.js.object
+ * @namespace           js.object
  * @type            Function
  *
  * This function take a definition object as parameter and check if all is valid.

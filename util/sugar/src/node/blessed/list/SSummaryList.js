@@ -13,7 +13,7 @@ const __escapeStack = require('../../terminal/escapeStack');
 
 /**
  * @name                  SSummaryList
- * @namespace             sugar.node.blessed.list
+ * @namespace           node.blessed.list
  * @type                  Class
  *
  * This class gives you the ability to display an editable list of informations.

@@ -13,7 +13,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name      removeClassOnAnimationEnd
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Remove some class on animation end
@@ -31,7 +31,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function removeClassOnAnimationEnd($elm, cls) {
   return new _SPromise.default((resolve, reject, trigger, cancel) => {
     // listen for animation end on the element just once
-    (0, _addEventListenerOnce.default)($elm, "animationend", e => {
+    (0, _addEventListenerOnce.default)($elm, 'animationend', e => {
       if (!Array.isArray(cls)) cls = [cls]; // remove the cls
 
       cls.forEach(_cls => {

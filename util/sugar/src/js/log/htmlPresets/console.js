@@ -4,7 +4,7 @@ __chalk.level = 3;
 
 /**
  * @name                              console
- * @namespace                         sugar.js.log.htmlPresets
+ * @namespace           js.log.htmlPresets
  * @type                              Function
  *
  * Replace all the "log" html tags like "<red>", "<bold>", etc... with the corresponding syntax for the terminal
@@ -15,9 +15,7 @@ __chalk.level = 3;
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function console(text) {
-
   return __replaceTags(text, {
-
     black: (tag, content) => __chalk.black(content),
     red: (tag, content) => __chalk.red(content),
     green: (tag, content) => __chalk.green(content),
@@ -43,7 +41,5 @@ export default function console(text) {
     strike: (tag, content) => __chalk.strike(content),
 
     br: (tag, content) => '\n'
-
   });
-
 }

@@ -2,7 +2,7 @@ import easeInOutQuad from '../easing/easeInOutQuad';
 import requestAnimationFrame from './requestAnimationFrame';
 /**
  * @name      scrollTo
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Function that let you make a smooth page scroll to a specific element in the page
@@ -24,7 +24,7 @@ import requestAnimationFrame from './requestAnimationFrame';
 let isUserScrolling = false;
 let userScrollingTimeout;
 let isScrollingHappening = false;
-document.addEventListener("mousewheel", e => {
+document.addEventListener('mousewheel', (e) => {
   if (!isScrollingHappening) return;
   isUserScrolling = true;
   clearTimeout(userScrollingTimeout);
@@ -44,7 +44,7 @@ function scrollTo(
   var docElem = document.documentElement; // to facilitate minification better
   var windowHeight = docElem.clientHeight;
   var maxScroll =
-    "scrollMaxY" in window
+    'scrollMaxY' in window
       ? window.scrollMaxY
       : docElem.scrollHeight - windowHeight;
   var currentY = window.pageYOffset;
@@ -54,11 +54,11 @@ function scrollTo(
   var targetY = currentY;
   var elementBounds = isNaN(target) ? target.getBoundingClientRect() : 0;
 
-  if (align === "center") {
+  if (align === 'center') {
     targetY += elementBounds.top + elementBounds.height / 2;
     targetY -= windowHeight / 2;
     targetY -= offset;
-  } else if (align === "bottom") {
+  } else if (align === 'bottom') {
     targetY += elementBounds.bottom;
     targetY -= windowHeight;
     targetY += offset;
@@ -84,7 +84,7 @@ function scrollTo(
   requestAnimationFrame(obj.step.bind(obj));
 }
 
-scrollTo.step = function() {
+scrollTo.step = function () {
   if (this.lastY !== window.pageYOffset && this.onFinish) {
     isScrollingHappening = false;
     this.onFinish();

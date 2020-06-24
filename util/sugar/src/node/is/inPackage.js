@@ -2,7 +2,7 @@ const __isInPackage = require('../path/isInPackage');
 
 /**
  * @name            inPackage
- * @namespace       sugar.node.is
+ * @namespace           node.is
  * @type            Function
  *
  * This function check if the we are in (one of) the package(s) passed as parameter

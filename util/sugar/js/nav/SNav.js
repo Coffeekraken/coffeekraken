@@ -25,7 +25,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /**
  * @name              SNav
- * @namespace         sugar.js.nav
+ * @namespace           js.nav
  * @type              Class
  *
  * This class represent a navigation tree that you can manage, add items, and display in multiple formats like html, markdown, and more to come

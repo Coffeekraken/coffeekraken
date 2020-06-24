@@ -8,7 +8,7 @@ exports.default = returnTag;
 const __upperFirst = require('../../string/upperFirst');
 /**
  * @name              return
- * @namespace         sugar.js.docblock.tags
+ * @namespace           js.docblock.tags
  * @type              Function
  *
  * Parse the return tag

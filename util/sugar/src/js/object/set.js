@@ -2,7 +2,7 @@ import __get from './get';
 
 /**
  * @name                                        set
- * @namespace                                   sugar.js.object
+ * @namespace           js.object
  * @type                                        Function
  *
  * Set an object value using a dotted object path like "myObject.myProperty.myValue" to set his position
@@ -22,13 +22,13 @@ export default (obj, path, value) => {
     obj = value;
     return;
   }
-  var a = path.split('.')
-  var o = obj
+  var a = path.split('.');
+  var o = obj;
   while (a.length - 1) {
-    var n = a.shift()
-    if (!(n in o)) o[n] = {}
-    o = o[n]
+    var n = a.shift();
+    if (!(n in o)) o[n] = {};
+    o = o[n];
   }
   o[a[0]] = value;
   return __get(obj, path);
-}
+};

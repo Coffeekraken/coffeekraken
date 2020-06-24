@@ -11,10 +11,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name        striptags
- * @namespace       sugar.js.html
+ * @namespace           js.html
  * @type      Function
  *
- * Strip tags of an html string. 
+ * Strip tags of an html string.
  * This is a simple wrapper of the nice "striptags" package that you can find here: https://www.npmjs.com/package/striptags
  *
  * @param    {String}    html    The html string to process

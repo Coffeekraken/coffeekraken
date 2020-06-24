@@ -10,7 +10,7 @@ const __path = require('path');
 
 /**
  * @name            SBuildJsActionsStream
- * @namespace       sugar.node.build.js
+ * @namespace           node.build.js
  * @type            Class
  * @extends         SActionsStream
  *

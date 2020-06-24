@@ -3,7 +3,7 @@ const __request = require('../../../http/request');
 
 /**
  * @name                views
- * @namespace           sugar.node.server.frontend.handlers
+ * @namespace           node.server.frontend.handlers
  * @type                Function
  *
  * This function is responsible of responding to express requests made on the "views" section

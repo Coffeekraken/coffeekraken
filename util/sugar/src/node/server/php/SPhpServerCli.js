@@ -4,7 +4,7 @@ const __sugarConfig = require('../../config/sugar');
 
 /**
  * @name            SPhpServerCli
- * @namespace       sugar.node.server.php
+ * @namespace           node.server.php
  * @type            Class
  * @extends         SCli
  *

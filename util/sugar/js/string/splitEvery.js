@@ -2,7 +2,7 @@
 
 /**
  * @name                          splitEvery
- * @namespace                     sugar.js.string
+ * @namespace           js.string
  * @type                          Function
  *
  * Split a string every n chars either by taking care of not spliting the words, or by simply spliting without any attention to that...

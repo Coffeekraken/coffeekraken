@@ -5,7 +5,7 @@ const __hotkey = require('../../keyboard/hotkey');
 
 /**
  * @name              STermAppCommandsPage
- * @namespace         sugar.node.termapp.pages
+ * @namespace           node.termapp.pages
  * @type              Class
  * @extends           SAppPage
  *

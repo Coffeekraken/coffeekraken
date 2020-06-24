@@ -5,7 +5,7 @@ const __exitCleanup = require('../node/process/exitCleanup');
 
 /**
  * @name            sugar.cli
- * @namespace       sugar.cli
+ * @namespace           cli
  * @type            File
  *
  * This is the main sugar cli file that split the commands

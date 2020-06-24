@@ -7,7 +7,7 @@ exports.default = isFunction;
 
 /**
  * @name        isFunction
- * @namespace       sugar.js.is
+ * @namespace       js.is
  * @type      Function
  *
  * Check if the passed value is a js function
@@ -24,7 +24,7 @@ exports.default = isFunction;
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function isFunction(value) {
-  return value && {}.toString.call(value) === "[object Function]";
+  return value && {}.toString.call(value) === '[object Function]';
 }
 
 module.exports = exports.default;

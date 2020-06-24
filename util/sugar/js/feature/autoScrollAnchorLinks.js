@@ -19,7 +19,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name        autoScrollAnchorLinks
- * @namespace       sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Listen for links contains an hash to init them for scroll to target on click
@@ -38,12 +38,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function autoScrollAnchorLinks(duration = 500, offset = 0, easing = _easeInOutQuint.default, checkPathnames = true) {
   (0, _querySelectorLive.default)('a:not([is])[href*="#"]', $link => {
     // listen for click
-    $link.addEventListener("click", e => {
+    $link.addEventListener('click', e => {
       // get the hash
-      const linkUrl = (0, _urlParse.default)($link.getAttribute("href"));
+      const linkUrl = (0, _urlParse.default)($link.getAttribute('href'));
       const currentUrl = (0, _urlParse.default)(); // chack that we have an hash
 
-      if (!linkUrl.hash || linkUrl.hash === "#") return; // if it's not the same pathname between the current url and the link one,
+      if (!linkUrl.hash || linkUrl.hash === '#') return; // if it's not the same pathname between the current url and the link one,
       // we do nothing and we let the link behave as he want
 
       if (checkPathnames && currentUrl.pathname !== linkUrl.pathname) return; // try to get the target from the hash
@@ -56,7 +56,7 @@ function autoScrollAnchorLinks(duration = 500, offset = 0, easing = _easeInOutQu
 
       history.pushState({}, null, linkUrl.hash); // all seems to be good, we can scroll to the target
 
-      (0, _scrollTo.default)($target, duration, easing || _easeInOutQuint.default, offset, "top");
+      (0, _scrollTo.default)($target, duration, easing || _easeInOutQuint.default, offset, 'top');
     });
   });
 }

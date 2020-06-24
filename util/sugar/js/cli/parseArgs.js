@@ -29,7 +29,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name                        parseArgs
- * @namespace                   sugar.js.cli
+ * @namespace           js.cli
  * @type                        Function
  *
  * Parse a string to find the provided arguments into the list and return a corresponding object.

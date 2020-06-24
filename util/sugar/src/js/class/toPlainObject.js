@@ -1,6 +1,6 @@
 /**
  * @name                          toPlainObject
- * @namespace                     sugar.js.class
+ * @namespace           js.class
  * @type                          Function
  *
  * This function take a instance as parameter and return a plain object of it
@@ -20,10 +20,10 @@
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 export default function toPlainObject(theClass) {
-  const originalClass = theClass || {}
+  const originalClass = theClass || {};
   const keys = Object.getOwnPropertyNames(originalClass);
   return keys.reduce((classAsObj, key) => {
-    classAsObj[key] = originalClass[key]
-    return classAsObj
+    classAsObj[key] = originalClass[key];
+    return classAsObj;
   }, {});
 }

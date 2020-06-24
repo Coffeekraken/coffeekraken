@@ -5,7 +5,7 @@ import __validateWithDefinitionObject from './validateWithDefinitionObject';
 
 /**
  * @name                completeArgsObject
- * @namespace           sugar.js.cli
+ * @namespace           js.cli
  * @type                Function
  *
  * This function take an arguments object and complete it with the definition object default values

@@ -3,7 +3,7 @@ const __sugarConfig = require('../../config/sugar');
 
 /**
  * @name            SBuildConfigCli
- * @namespace       sugar.node.build.config
+ * @namespace           node.build.config
  * @type            Class
  * @extends         SCli
  *

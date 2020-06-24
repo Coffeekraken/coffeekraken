@@ -7,7 +7,7 @@ exports.default = isInteger;
 
 /**
  * @name        isInteger
- * @namespace       sugar.js.is
+ * @namespace           js.is
  * @type      Function
  *
  * Check if the passed value is an integer

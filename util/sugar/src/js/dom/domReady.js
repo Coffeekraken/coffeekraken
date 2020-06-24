@@ -1,6 +1,6 @@
 /**
  * @name      domReady
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Wait that the dom is ready before resolving the promise
@@ -21,7 +21,7 @@
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-import __domReady from "domready";
+import __domReady from 'domready';
 export default function domReady(cb = null) {
   return new Promise((resolve, reject) => {
     __domReady(() => {

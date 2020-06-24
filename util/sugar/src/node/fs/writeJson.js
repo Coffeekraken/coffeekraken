@@ -4,10 +4,10 @@ const __fs = require('fs-extra');
 
 /**
  * @name        writeJson
- * @namespace     sugar.node.fs
+ * @namespace           node.fs
  * @type          Function
  * @async
- * 
+ *
  * Write a JSON file. If don't exist, will be created as well as the directory structure if needed... ( (async)
  *
  * @param       {String}              path           The file path to write
@@ -26,4 +26,4 @@ const __fs = require('fs-extra');
  */
 module.exports = function writeJson(path, data, options = {}) {
   return __fs.outputJson(path, data, options);
-}
+};

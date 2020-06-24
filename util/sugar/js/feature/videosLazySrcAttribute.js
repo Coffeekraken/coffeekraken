@@ -8,7 +8,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name 		videoLazySrcAttribute
- * @namespace       sugar.js.feature
+ * @namespace           js.feature
  * @type      Feature
  *
  * Add support for the `lazy-src` attribute on `video` elements.
@@ -20,8 +20,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 // TODO tests
-(0, _querySelectorLive.default)("video[lazy-src]:not([is])", $videoElm => {
+(0, _querySelectorLive.default)('video[lazy-src]:not([is])', $videoElm => {
   (0, _whenInViewport.default)($videoElm).then(() => {
-    $videoElm.setAttribute("src", $videoElm.getAttribute("lazy-src"));
+    $videoElm.setAttribute('src', $videoElm.getAttribute('lazy-src'));
   });
 });

@@ -3,7 +3,7 @@ const __SLog = require('./log/SLog');
 
 /**
  * @name                    index
- * @namespace               sugar.node
+ * @namespace           node
  *
  * This file is the "initialisation" one for the sugar node toolkit.
  * It's optional to include it but if you do, you will get these features "for free":

@@ -10,7 +10,7 @@ __chalk.level = 3;
 
 /**
  * @name                                parseHtml
- * @namespace                           sugar.node.terminal
+ * @namespace           node.terminal
  * @type                                Function
  *
  * Parse the simple html tags to format the terminal message

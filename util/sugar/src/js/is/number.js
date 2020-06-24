@@ -1,6 +1,6 @@
 /**
  * @name        isNumber
- * @namespace       sugar.js.is
+ * @namespace           js.is
  * @type      Function
  *
  * Check if the passed value is a number

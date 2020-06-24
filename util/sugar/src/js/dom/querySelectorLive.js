@@ -1,9 +1,9 @@
-import uniqid from "../util/uniqid";
-import matches from "./matches";
+import uniqid from '../util/uniqid';
+import matches from './matches';
 
 /**
  * @name      querySelectorLive
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Observe the dom to get all the elements that matches a passed css selector at any point in time.
@@ -25,7 +25,8 @@ import matches from "./matches";
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-let _observer, _selectors = {};
+let _observer,
+  _selectors = {};
 
 export default function querySelectorLive(selector, cb, settings = {}) {
   const id = `${selector} - ${uniqid()}`;
@@ -40,13 +41,15 @@ export default function querySelectorLive(selector, cb, settings = {}) {
     settings
   );
 
-  if ( ! _selectors[selector]) {
-    _selectors[selector] = [{
-      id: id,
-      selector: selector,
-      cb: cb,
-      settings: settings
-    }];
+  if (!_selectors[selector]) {
+    _selectors[selector] = [
+      {
+        id: id,
+        selector: selector,
+        cb: cb,
+        settings: settings
+      }
+    ];
   } else {
     _selectors[selector].push({
       id: id,
@@ -57,7 +60,6 @@ export default function querySelectorLive(selector, cb, settings = {}) {
   }
 
   function pushNewNode(node, sel) {
-
     const objs = _selectors[sel];
     if (!objs) return;
 
@@ -69,19 +71,19 @@ export default function querySelectorLive(selector, cb, settings = {}) {
         if (node._querySelectorLive[obj.id]) return;
         node._querySelectorLive[obj.id] = true;
       }
-      obj.cb && obj.cb(node, () => {
-        delete _selectors[obj.selector];
-      });
-    })
+      obj.cb &&
+        obj.cb(node, () => {
+          delete _selectors[obj.selector];
+        });
+    });
   }
 
   // listen for updates in document
-  if ( ! _observer) {
-    _observer = new MutationObserver(mutations => {
-      mutations.forEach(mutation => {
+  if (!_observer) {
+    _observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
         if (mutation.addedNodes) {
-          [].forEach.call(mutation.addedNodes, node => {
-
+          [].forEach.call(mutation.addedNodes, (node) => {
             // get all the selectors registered
             const selectors = Object.keys(_selectors);
 
@@ -94,11 +96,10 @@ export default function querySelectorLive(selector, cb, settings = {}) {
             if (!node.querySelectorAll) return;
             selectors.forEach((sel) => {
               const nestedNodes = node.querySelectorAll(sel);
-              [].forEach.call(nestedNodes, nestedNode => {
+              [].forEach.call(nestedNodes, (nestedNode) => {
                 pushNewNode(nestedNode, sel);
               });
             });
-
           });
         }
       });
@@ -110,7 +111,7 @@ export default function querySelectorLive(selector, cb, settings = {}) {
   }
 
   // first search
-  [].forEach.call(settings.rootNode.querySelectorAll(selector), node => {
+  [].forEach.call(settings.rootNode.querySelectorAll(selector), (node) => {
     pushNewNode(node, selector);
   });
 }

@@ -6,7 +6,7 @@ import __upperFirst from '../string/upperFirst';
 
 /**
  * @name              ofType
- * @namespace         sugar.js.is
+ * @namespace           js.is
  * @type              Function
  *
  * This function take the value to check and an argument type definition string like "String", "Array<String>", etc... and return true or false depending

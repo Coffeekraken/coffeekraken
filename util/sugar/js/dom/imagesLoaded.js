@@ -13,7 +13,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name      imagesLoaded
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Detect when some images are loaded. This function take advantage of the SPromise class

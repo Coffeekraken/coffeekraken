@@ -12,7 +12,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name 		dispatchEventAttribute
- * @namespace       sugar.js.feature
+ * @namespace           js.feature
  * @type      Feature
  *
  * Add the possibility to dispatch an event named as you want
@@ -161,6 +161,6 @@ function handleDispatchEventAttributes(e) {
 
 (0, _querySelectorLive.default)('[dispatch-event]', $elm => {
   console.log('ELM', $elm);
-  $elm.addEventListener("click", handleDispatchEventAttributes);
-  $elm.addEventListener("keyup", handleDispatchEventAttributes);
+  $elm.addEventListener('click', handleDispatchEventAttributes);
+  $elm.addEventListener('keyup', handleDispatchEventAttributes);
 });

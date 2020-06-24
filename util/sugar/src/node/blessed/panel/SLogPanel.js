@@ -15,7 +15,7 @@ const __SComponent = require('../SComponent');
 
 /**
  * @name                    SLogPanel
- * @namespace               sugar.node.blessed
+ * @namespace           node.blessed
  * @type                    Class
  *
  * This class define a "panel" in the terminal that you can easily configure to have the look and feel that you want

@@ -3,14 +3,14 @@
 const __base64 = require('../../crypt/base64');
 /**
  * @name                          bearerFormater
- * @namespace                     sugar.node.auth.formaters
+ * @namespace           node.auth.formaters
  * @type                          Function
- * 
+ *
  * This function simply take the bearer auth infos (token) and return the formated auth object with the headers, etc...
- * 
+ *
  * @param           {Object}            authInfo            The authentification informations (username, password)
  * @return          {Object}                                The formated auth infos object with headers, etc...
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 

@@ -1,12 +1,12 @@
-import __isInViewport from "./isInViewport";
-import __throttle from "../function/throttle";
-import __closest from "./closest";
+import __isInViewport from './isInViewport';
+import __throttle from '../function/throttle';
+import __closest from './closest';
 
 // TODO tests
 
 /**
  * @name      whenOutOfViewport
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Monitor an HTMLElement to be notified when it exit the viewport
@@ -59,7 +59,7 @@ export default function whenOutOfViewport(elm, offset = 50) {
       if (!elm._inViewportContainer) {
         const overflowContainer = __closest(
           elm,
-          "[data-in-viewport-container]"
+          '[data-in-viewport-container]'
         );
         if (overflowContainer) {
           scrollContainerElm = overflowContainer;
@@ -72,19 +72,19 @@ export default function whenOutOfViewport(elm, offset = 50) {
       let isInViewport = true,
         _cb = () => {
           if (!isInViewport) {
-            scrollContainerElm.removeEventListener("scroll", checkViewport);
-            window.removeEventListener("resize", checkViewport);
+            scrollContainerElm.removeEventListener('scroll', checkViewport);
+            window.removeEventListener('resize', checkViewport);
             resolve(elm);
           }
         };
-      let checkViewport = __throttle(e => {
+      let checkViewport = __throttle((e) => {
         isInViewport = __isInViewport(elm, offset);
         _cb();
       }, 100);
 
       // listen for resize
-      scrollContainerElm.addEventListener("scroll", checkViewport);
-      window.addEventListener("resize", checkViewport);
+      scrollContainerElm.addEventListener('scroll', checkViewport);
+      window.addEventListener('resize', checkViewport);
       setTimeout(() => {
         checkViewport(null);
       });

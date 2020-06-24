@@ -8,7 +8,7 @@ let __activeScreen = null;
 
 /**
  * @name                  SComponent
- * @namespace             sugar.node.blessed
+ * @namespace           node.blessed
  * @type                  Class
  *
  * This class is the base one for all the sugar blessed components like input, panel, etc...

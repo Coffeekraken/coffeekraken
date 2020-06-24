@@ -20,7 +20,7 @@ import __SDocblock from './SDocblock';
 
 /**
  * @name          SDocblockBlock
- * @namespace     sugar.js.docblock
+ * @namespace           js.docblock
  * @type          Class
  *
  * This class represent a docblock object that contains all the "tags" values and some features like:

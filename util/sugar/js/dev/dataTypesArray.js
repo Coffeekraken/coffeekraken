@@ -6,12 +6,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name                    dataTypesArray
- * @namespace               sugar.js.dev
+ * @namespace           js.dev
  * @type                    Array
- * 
+ *
  * This is just a list of data types available in the
  * current language (node/js)
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 if ((0, _node.default)()) {

@@ -10,13 +10,13 @@ var _map2 = _interopRequireDefault(require("lodash/map"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _decodeHtml(html) {
-  var txt = document.createElement("textarea");
+  var txt = document.createElement('textarea');
   txt.innerHTML = html;
   return txt.value;
 }
 /**
  * @name      splitLetters
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Split each letters inside an HTMLElement by scoping them inside multiple tags.
@@ -75,7 +75,7 @@ function _decodeHtml(html) {
  */
 
 
-function splitLetters(elm, tag = "span", tagClass = "split-letters") {
+function splitLetters(elm, tag = 'span', tagClass = 'split-letters') {
   let string = elm._splitLettersOriginalString;
 
   if (!string) {
@@ -89,22 +89,22 @@ function splitLetters(elm, tag = "span", tagClass = "split-letters") {
 
   words = (0, _map2.default)(words, word => {
     return `<${tag} style="white-space:nowrap">${word}</${tag}>`;
-  }).join(" ");
+  }).join(' ');
 
-  let letters = _decodeHtml(words).split("");
+  let letters = _decodeHtml(words).split('');
 
   let hasTagOpened = false;
   letters = (0, _map2.default)(letters, letter => {
     // check if a tag has started
-    if (letter === "<") hasTagOpened = true;else if (letter === ">") {
+    if (letter === '<') hasTagOpened = true;else if (letter === '>') {
       hasTagOpened = false;
       return letter;
     }
     if (hasTagOpened) return letter;
-    if (letter === " ") letter = "&nbsp;";
+    if (letter === ' ') letter = '&nbsp;';
     return `<${tag} class="${tagClass}__letter-container"><${tag} class="${tagClass}__letter">${letter}</${tag}></${tag}>`;
   });
-  elm.innerHTML = letters.join("");
+  elm.innerHTML = letters.join('');
   return elm;
 }
 

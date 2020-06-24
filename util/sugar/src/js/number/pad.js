@@ -1,6 +1,6 @@
 /**
  * @name        pad
- * @namespace       sugar.js.number
+ * @namespace           js.number
  * @type      Function
  *
  * Pad a number n of x 0 or another passed character
@@ -15,8 +15,8 @@
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function pad(number, width, character = "0") {
-  number = number + "";
+export default function pad(number, width, character = '0') {
+  number = number + '';
   return number.length >= width
     ? number
     : new Array(width - number.length + 1).join(character) + number;

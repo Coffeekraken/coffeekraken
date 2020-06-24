@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name      whenOutOfViewport
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Monitor an HTMLElement to be notified when it exit the viewport
@@ -68,7 +68,7 @@ function whenOutOfViewport(elm, offset = 50) {
       let scrollContainerElm = document;
 
       if (!elm._inViewportContainer) {
-        const overflowContainer = (0, _closest.default)(elm, "[data-in-viewport-container]");
+        const overflowContainer = (0, _closest.default)(elm, '[data-in-viewport-container]');
 
         if (overflowContainer) {
           scrollContainerElm = overflowContainer;
@@ -81,8 +81,8 @@ function whenOutOfViewport(elm, offset = 50) {
       let isInViewport = true,
           _cb = () => {
         if (!isInViewport) {
-          scrollContainerElm.removeEventListener("scroll", checkViewport);
-          window.removeEventListener("resize", checkViewport);
+          scrollContainerElm.removeEventListener('scroll', checkViewport);
+          window.removeEventListener('resize', checkViewport);
           resolve(elm);
         }
       };
@@ -93,8 +93,8 @@ function whenOutOfViewport(elm, offset = 50) {
         _cb();
       }, 100); // listen for resize
 
-      scrollContainerElm.addEventListener("scroll", checkViewport);
-      window.addEventListener("resize", checkViewport);
+      scrollContainerElm.addEventListener('scroll', checkViewport);
+      window.addEventListener('resize', checkViewport);
       setTimeout(() => {
         checkViewport(null);
       });

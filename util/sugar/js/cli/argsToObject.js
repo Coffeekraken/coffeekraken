@@ -8,7 +8,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name                  argsToObject
- * @namespace             sugar.js.cli
+ * @namespace           js.cli
  * @type                  Function
  *
  * This function take a simple object, a definitionObj object and return you the string version that you can pass

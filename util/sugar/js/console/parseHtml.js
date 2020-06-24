@@ -14,7 +14,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 _chalk.default.level = 3;
 /**
  * @name                                parseHtml
- * @namespace                           sugar.js.console
+ * @namespace           js.console
  * @type                                Function
  *
  * Parse the simple html tags to format the console message

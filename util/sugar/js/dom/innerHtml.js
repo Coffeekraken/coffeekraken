@@ -19,7 +19,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name            innerHtml
- * @namespace       sugar.js.dom
+ * @namespace           js.dom
  * @type            Function
  *
  * Change the content of a Node with the possibility to animate the change using one of these animations:

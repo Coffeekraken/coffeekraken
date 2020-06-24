@@ -19,15 +19,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name                autoPrefix
- * @namespace           sugar.js.css
+ * @namespace           js.css
  * @type                Function
- * 
+ *
  * Prefix your passed css style
- * 
+ *
  * @param         {String}            style             The style you want to prefix in string format
  * @param         {String}            [return=null]     You can tell what you want back between "string" and "object". By default it will return the same style type that you have passed
  * @return        {String}                              The prefixed style
- * 
+ *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function autoPrefix(style) {

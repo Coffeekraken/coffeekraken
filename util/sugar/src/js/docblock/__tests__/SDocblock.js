@@ -6,7 +6,7 @@ module.exports = (__SDocblock) => {
       const docblock = `
       /**
        * @name                  DockblockParser
-       * @namespace             sugar.js.docblock
+       * @namespace           js.docblock
        * @type                  Class
        *
        * This is the main class that expose the methods like "parse", etc...
@@ -24,7 +24,7 @@ module.exports = (__SDocblock) => {
 
       /**
        * @name        debounce
-       * @namespace       sugar.js.function
+       * @namespace           js.function
        * @type      Function
        *
        * This utils function allows you to make sure that a function that will normally be called
@@ -59,7 +59,7 @@ module.exports = (__SDocblock) => {
 
       /**
        * @name        includes
-       * @namespace       sugar.js.string
+       * @namespace           js.string
        * @type      Function
        *
        * Same as the native String.includes function but accept either an array of items

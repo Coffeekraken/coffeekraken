@@ -1,6 +1,6 @@
 /**
  * @name                    extension
- * @namespace               sugar.js.file
+ * @namespace           js.file
  * @type                    Function
  *
  * Return the passed file path extension

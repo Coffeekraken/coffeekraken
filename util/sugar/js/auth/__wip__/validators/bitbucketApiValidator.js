@@ -3,15 +3,15 @@
 const __axios = require('axios');
 /**
  * @name                            bitbucketApiValidator
- * @namespace                       sugar.node.auth
+ * @namespace           node.auth
  * @type                            Function
  * @async
  *
  * Make sure the bitbucket api authentification has been made correctly
- * 
+ *
  * @param           {Object}              authInfo            The authentification info
  * @return          {Promise}                                 true if ok, false (or error message) if it's not...
- * 
+ *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 

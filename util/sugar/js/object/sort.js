@@ -7,7 +7,7 @@ exports.default = sort;
 
 /**
  * @name                                sort
- * @namespace                           sugar.js.object
+ * @namespace           js.object
  * @type                                Function
  *
  * Sort an object properties the same way as the Array.sort do it

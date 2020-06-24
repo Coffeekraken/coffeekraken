@@ -40,7 +40,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 /**
  * @name                  SConfigLsAdapter
- * @namespace             sugar.js.config.adapters
+ * @namespace           js.config.adapters
  * @type                  Class
  *
  * This Local Storage adapter for the SConfig class let you define a name for your config and then you can just

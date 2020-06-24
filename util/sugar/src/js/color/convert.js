@@ -7,7 +7,7 @@ import __rgba2hex from './rgba2hex';
 
 /**
  * @name                  convert
- * @namespace             sugar.js.color
+ * @namespace           js.color
  * @type                  Function
  *
  * This function take as input any color format like rgba Object, hsl Object, hsv Object, hex String, rgba String, hsl String or hsv String
@@ -24,17 +24,28 @@ import __rgba2hex from './rgba2hex';
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function convert(input, format = 'rgba') {
-
   // transforming the input into rgba object
   let rgbaObj = {};
   if (typeof input === 'string') {
     rgbaObj = __parse(input, 'rgba');
   } else if (typeof input === 'object') {
-    if (input.r !== undefined && input.g !== undefined && input.b !== undefined) {
+    if (
+      input.r !== undefined &&
+      input.g !== undefined &&
+      input.b !== undefined
+    ) {
       rgbaObj = input;
-    } else if (input.h !== undefined && input.s !== undefined && input.l !== undefined) {
+    } else if (
+      input.h !== undefined &&
+      input.s !== undefined &&
+      input.l !== undefined
+    ) {
       rgbaObj = __hsl2rgba(input);
-    } else if (input.h !== undefined && input.s !== undefined && input.v !== undefined) {
+    } else if (
+      input.h !== undefined &&
+      input.s !== undefined &&
+      input.v !== undefined
+    ) {
       rgbaObj = __hsv2rgba(input);
     }
   }
@@ -68,5 +79,4 @@ export default function convert(input, format = 'rgba') {
 
   // if nothing supported
   return undefined;
-
 }

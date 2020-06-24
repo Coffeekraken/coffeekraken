@@ -1,6 +1,6 @@
 /**
  * @name        getAuthToken
- * @namespace     sugar.node.github
+ * @namespace           node.github
  * @type        Function
  *
  * Get back the authentification informations (username, token) setted using the 'setAuthToken' function
@@ -15,4 +15,4 @@
  */
 module.exports = function getAuthToken() {
   return global.githubAuthToken || false;
-}
+};

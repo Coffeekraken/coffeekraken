@@ -7,7 +7,7 @@ exports.default = _default;
 
 /**
  * @name      easeOutQuint
- * @namespace     sugar.js.easing
+ * @namespace           js.easing
  * @type      Function
  *
  * Ease out quint function

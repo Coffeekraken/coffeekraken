@@ -29,7 +29,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /**
  * @name                    SLogConsoleAdapter
- * @namespace               sugar.js.log
+ * @namespace           js.log
  * @type                    Class
  *
  * This class allows you to log your messages, errors, etc... easily through some adapters that cover some targets like "console" of course,

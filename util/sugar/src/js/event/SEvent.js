@@ -1,6 +1,6 @@
 /**
  * @name 		                SEvent
- * @namespace               sugar.js.event
+ * @namespace           js.event
  * @type                    Class
  *
  * Proxy class to create custom events that can be dispatched
@@ -20,7 +20,7 @@
  * @see 		https://www.npmjs.com/package/customevent
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-export default from "custom-event";
+export default from 'custom-event';
 
 /**
  * @name                        constructor

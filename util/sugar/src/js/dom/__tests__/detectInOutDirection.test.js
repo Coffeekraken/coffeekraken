@@ -2,22 +2,26 @@ import __detectInOutDirection from '../detectInOutDirection';
 import __dispatchEvent from '../dispatchEvent';
 
 describe('sugar.js.dom.detectInOutDirection', () => {
-
   document.body.innerHTML = `
       <div id="testing">
       </div>
   `;
   const $elm = document.querySelector('#testing');
 
-  let isInTriggered = false, isOutTriggered = false, isThenTriggered = false;
+  let isInTriggered = false,
+    isOutTriggered = false,
+    isThenTriggered = false;
 
-  __detectInOutDirection($elm).in(direction => {
-    isInTriggered = true;
-  }).out(direction => {
-    isOutTriggered = true;
-  }).then(value => {
-    isThenTriggered = true;
-  });
+  __detectInOutDirection($elm)
+    .on('in', (direction) => {
+      isInTriggered = true;
+    })
+    .on('out', (direction) => {
+      isOutTriggered = true;
+    })
+    .then((value) => {
+      isThenTriggered = true;
+    });
 
   __dispatchEvent($elm, 'mouseenter');
   __dispatchEvent($elm, 'mouseleave');
@@ -31,5 +35,4 @@ describe('sugar.js.dom.detectInOutDirection', () => {
   it('Should have trigger the "then" stack correctly', () => {
     expect(isThenTriggered).toBe(true);
   });
-
 });

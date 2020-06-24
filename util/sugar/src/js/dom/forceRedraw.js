@@ -1,8 +1,8 @@
-import __getStyleProperty from "./getStyleProperty";
+import __getStyleProperty from './getStyleProperty';
 
 /**
  * @name      forceRedraw
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Force the element to be painted again in case of visual issues
@@ -17,8 +17,8 @@ import __getStyleProperty from "./getStyleProperty";
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function forceRedraw($elm) {
-  const display = __getStyleProperty($elm, "display");
-  $elm.style.display = "none";
+  const display = __getStyleProperty($elm, 'display');
+  $elm.style.display = 'none';
   $elm.offsetHeight;
   $elm.style.display = display;
   return $elm;

@@ -8,7 +8,7 @@ const __SConfigAdapter = require('./SConfigAdapter');
 
 /**
  * @name                  SConfigFsAdapter
- * @namespace             sugar.node.config.adapters
+ * @namespace           node.config.adapters
  * @type                  Class
  *
  * The JSON data adapter for the SConfig class that let you define a filename where you want to save your configs, how you want to encrypt/decrypt it

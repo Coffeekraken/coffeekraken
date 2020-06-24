@@ -7,7 +7,7 @@ exports.default = isBoolean;
 
 /**
  * @name        isBoolean
- * @namespace       sugar.js.is
+ * @namespace           js.is
  * @type      Function
  *
  * Check if the passed value is a js Boolean
@@ -24,7 +24,7 @@ exports.default = isBoolean;
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function isBoolean(value) {
-  return typeof value === "boolean";
+  return typeof value === 'boolean';
 }
 
 module.exports = exports.default;

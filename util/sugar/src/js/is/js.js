@@ -1,6 +1,6 @@
 /**
  * @name                                      isJs
- * @namespace                                 sugar.js.is
+ * @namespace           js.is
  * @type                                      Function
  *
  * Check if the current script is running under javascript runtime or not...
@@ -14,5 +14,5 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default () => {
-  return (typeof window !== 'undefined');
-}
+  return typeof window !== 'undefined';
+};

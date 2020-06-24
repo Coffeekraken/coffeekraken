@@ -1,6 +1,6 @@
 /**
  * @name        unquote
- * @namespace       sugar.js.string
+ * @namespace           js.string
  * @type      Function
  *
  * Remove the quotes of a string
@@ -17,11 +17,11 @@
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function unquote(string, quotesToRemove = ['"', "'", "”", '`']) {
+export default function unquote(string, quotesToRemove = ['"', "'", '”', '`']) {
   // trim the string just in case
   string = string.trim();
   // loop on each quotes to remove
-  quotesToRemove.forEach(quote => {
+  quotesToRemove.forEach((quote) => {
     if (string.substr(0, 1) === quote && string.substr(-1) === quote) {
       string = string.substr(1);
       string = string.substr(0, string.length - 1);

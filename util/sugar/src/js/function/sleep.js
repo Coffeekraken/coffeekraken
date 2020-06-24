@@ -1,6 +1,6 @@
 /**
  * @name          sleep
- * @namespace      sugar.js.function
+ * @namespace           js.function
  * @type          Function
  *
  * Simple sleep function that can be used using "await" syntax in an "async" function
@@ -19,7 +19,7 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function sleep(time) {
-  return new Promise(resolve => {
-    setTimeout(resolve, time)
+  return new Promise((resolve) => {
+    setTimeout(resolve, time);
   });
 }

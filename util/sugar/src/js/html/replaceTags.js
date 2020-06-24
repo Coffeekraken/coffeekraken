@@ -2,7 +2,7 @@ import __toString from '../string/toString';
 
 /**
  * @name                            replaceTags
- * @namespace                       sugar.js.html
+ * @namespace           js.html
  * @type                            Function
  *
  * Replace all the html tags that you specify by something else that you can fully choose

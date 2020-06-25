@@ -27,3 +27,4 @@ jobs:
     - name: Sugar tests
       run: npm install && npm test
       shell: bash
+      working-directory: ./util/sugar

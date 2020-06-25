@@ -9,7 +9,7 @@ module.exports = (__color, __SColor) => {
     //   expect(color instanceof __SColor).toBe(true);
     // });
     it('Should return rgba(255,0,255,1) string when using the toString method', () => {
-      expect(color.toString()).toBe('rgba(255,0,255,1)');
+      expect(color.toString()).toBe('#ff00ff');
     });
   });
 };

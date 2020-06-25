@@ -46,7 +46,7 @@ export default function ofType(value, argTypeDefinition, returnError = false) {
       else
         error = `Regarding to the argument definition "<yellow>${argTypeDefinition}</yellow>", the passed value "<cyan>${__toString(
           value
-        )}</cyan>" has to be an <green>Array</green>...`;
+        )}</cyan>" of type "<magenta>${typeof value}</magenta>" has to be an <green>Array</green>...`;
     }
 
     // check object
@@ -55,7 +55,7 @@ export default function ofType(value, argTypeDefinition, returnError = false) {
       else
         error = `Regarding to the argument definition "<yellow>${argTypeDefinition}</yellow>", the passed value "<cyan>${__toString(
           value
-        )}</cyan>" has to be an <green>Object</green>...`;
+        )}</cyan>" of type "<magenta>${typeof value}</magenta>" has to be an <green>Object</green>...`;
     }
 
     // check if need to check the childs
@@ -76,7 +76,7 @@ export default function ofType(value, argTypeDefinition, returnError = false) {
             });
             error = `Regarding to the argument definition "<yellow>${argTypeDefinition}</yellow>", the passed value "<yellow>${__toString(
               value
-            )}</yellow>" has to contain only "<green>${ofTypesArray.join(
+            )}</yellow>" of type "<magenta>${typeof value}</magenta>" has to contain only "<green>${ofTypesArray.join(
               ','
             )}</green>"...`;
           }
@@ -94,7 +94,7 @@ export default function ofType(value, argTypeDefinition, returnError = false) {
       else
         error = `Regarding to the argument definition "<yellow>${argTypeDefinition}</yellow>", the passed value "<cyan>${__toString(
           value
-        )}</cyan>" has to be a <green>Class</green>...`;
+        )}</cyan>" of type "<magenta>${typeof value}</magenta>" has to be a <green>Class</green>...`;
     }
 
     // check if is an integer
@@ -102,7 +102,7 @@ export default function ofType(value, argTypeDefinition, returnError = false) {
       if (__isInt(value)) return true;
       error = `Regarding to the argument definition "<yellow>${argTypeDefinition}</yellow>", the passed value "<cyan>${__toString(
         value
-      )}</cyan>" has to be a <green>Integer</green>...`;
+      )}</cyan>" of type "<magenta>${typeof value}</magenta>" has to be a <green>Integer</green>...`;
     }
 
     // check default types
@@ -116,7 +116,7 @@ export default function ofType(value, argTypeDefinition, returnError = false) {
     } else {
       error = `Regarding to the argument definition "<yellow>${argTypeDefinition}</yellow>", the passed value "<cyan>${__toString(
         value
-      )}</cyan>" has to be a <green>${__upperFirst(
+      )}</cyan>" of type "<magenta>${typeof value}</magenta>" has to be a <green>${__upperFirst(
         definitionObj.type
       )}</green>...`;
     }
@@ -127,7 +127,7 @@ export default function ofType(value, argTypeDefinition, returnError = false) {
       else
         error = `Regarding to the argument definition "<yellow>${argTypeDefinition}</yellow>", the passed value "<cyan>${__toString(
           value
-        )}</cyan>" has to be a <green>${__upperFirst(
+        )}</cyan>" of type "<magenta>${typeof value}</magenta>" has to be a <green>${__upperFirst(
           definitionObj.type
         )}</green>...`;
     } else if (value && value.constructor && value.constructor.name) {
@@ -136,7 +136,7 @@ export default function ofType(value, argTypeDefinition, returnError = false) {
       else
         error = `Regarding to the argument definition "<yellow>${argTypeDefinition}</yellow>", the passed value "<cyan>${__toString(
           value
-        )}</cyan>" has to be a <green>${__upperFirst(
+        )}</cyan>" of type "<magenta>${typeof value}</magenta>" has to be a <green>${__upperFirst(
           definitionObj.type
         )}</green>...`;
     }

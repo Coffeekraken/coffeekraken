@@ -11,9 +11,12 @@ module.exports = __deepMap => {
           world: 'Yop'
         }
       };
-      expect(__deepMap(obj1, (value, prop, fullPath) => {
+
+      const res = __deepMap(obj1, (value, prop, fullPath) => {
         return `~ ${value}`;
-      })).toEqual({
+      });
+
+      expect(res).toEqual({
         hello: {
           world: '~ hello world'
         },

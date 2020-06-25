@@ -104,8 +104,10 @@ let SWatch = /*#__PURE__*/function () {
       }; // loop on all the watch processes that match the path
 
       watchProcesses.forEach(watchProcess => {
-        watchProcess.handlerFn(watchResult);
-      });
+        setTimeout(() => {
+          watchProcess.handlerFn(watchResult);
+        });
+      }); /// console.trace('coco');
     });
     const watchPropertyObj = {
       writable: false,
@@ -154,7 +156,7 @@ let SWatch = /*#__PURE__*/function () {
   _createClass(SWatch, [{
     key: "_getWatchStack",
     value: function _getWatchStack(path) {
-      const watchProcesses = [];
+      const watchProcesses = []; // console.log(Object.keys(this._watchStack).length);
 
       for (let i = 0; i < Object.keys(this._watchStack).length; i++) {
         const watchObj = this._watchStack[Object.keys(this._watchStack)[i]];

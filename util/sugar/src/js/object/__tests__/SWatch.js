@@ -1,5 +1,4 @@
 module.exports = (__SWatch) => {
-
   let obj = {
     a: 'hello',
     b: {
@@ -13,10 +12,18 @@ module.exports = (__SWatch) => {
   };
   const watchObj = new __SWatch(obj);
 
-  let doneAssign, doneUpdating, doneUpdatingDeep, doneDeleting, doneAddIntoArray;
+  let doneAssign,
+    doneUpdating,
+    doneUpdatingDeep,
+    doneDeleting,
+    doneAddIntoArray;
 
   const watchId = watchObj.watch('**', (obj) => {
-    if (obj.action === 'Object.set' && obj.path === 'coco' && watchObj.coco === 'plop') {
+    if (
+      obj.action === 'Object.set' &&
+      obj.path === 'coco' &&
+      watchObj.coco === 'plop'
+    ) {
       doneAssign();
     } else if (obj.path === 'a' && watchObj.a === 'bonjours') {
       doneUpdating();
@@ -30,29 +37,28 @@ module.exports = (__SWatch) => {
     }
   });
 
-  test('Assign a new value', done => {
+  test('Assign a new value', (done) => {
     doneAssign = done;
     watchObj.coco = 'plop';
   });
 
-  test('Update an existing value', done => {
+  test('Update an existing value', (done) => {
     doneUpdating = done;
     watchObj.a = 'bonjours';
   });
 
-  test('Update an existing deep value', done => {
+  test('Update an existing deep value', (done) => {
     doneUpdatingDeep = done;
     watchObj.b.bb = 'hola';
   });
 
-  test('Deleting a deep value', done => {
+  test('Deleting a deep value', (done) => {
     doneDeleting = done;
     delete watchObj.b.bb;
   });
 
-  test('Adding a value into an array using push', done => {
+  test('Adding a value into an array using push', (done) => {
     doneAddIntoArray = done;
     watchObj.c.cc.ccc.push('plop');
   });
-
-}
+};

@@ -1,5 +1,4 @@
 const __execPhp = require('exec-php');
-const rimraf = require('rimraf');
 const __deepMerge = require('../object/deepMerge');
 const __sugarConfig = require('../config/sugar');
 const __fs = require('fs');
@@ -54,7 +53,7 @@ module.exports = (view, data = {}, settings = {}) => {
         // execute the php engine and get back the result
         const result = php.compile(
           settings.rootDir,
-          view,
+          view.replace('.blade.php', ''),
           data,
           settings.cacheDir,
           (error, result, output, printed) => {

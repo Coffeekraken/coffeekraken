@@ -5,6 +5,7 @@ import __SActionsStreamAction from './SActionsStreamAction';
 import __isClass from '../is/class';
 import __checkDefinitionObj from '../cli/validateDefinitionObject';
 import __isChildProcess from '../is/childProcess';
+import __isTestEnv from '../is/testEnv';
 
 /**
  * @name          SActionStream
@@ -396,9 +397,7 @@ export default class SActionStream extends __SPromise {
       this.trigger('complete', completeObj);
       resolve(completeObj);
 
-      // console.log(process._getActiveHandles()[0]);
-      // console.log(process._getActiveRequests());
-      if (__isChildProcess()) process.exit();
+      if (!__isTestEnv() && __isChildProcess()) process.exit();
     })
       .on('cancel', () => {
         canceled = true;

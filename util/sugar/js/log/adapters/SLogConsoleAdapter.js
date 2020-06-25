@@ -13,8 +13,6 @@ var _childProcess = _interopRequireDefault(require("../../is/childProcess"));
 
 var _toString = _interopRequireDefault(require("../../string/toString"));
 
-var _log = _interopRequireDefault(require("../../cli/log"));
-
 var _fmtObj = _interopRequireDefault(require("fmt-obj"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }

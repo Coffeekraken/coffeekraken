@@ -76,6 +76,7 @@ module.exports = (__SNav, __SNavItem) => {
   <ul id="myCoolNav" class="s-nav s-nav--unordered">
   <li id="myCoolItem" class="s-nav__item"><a href="scroll:#something" class="s-nav__item-link" target="_blank">My Cool Item</a></li>
   <li class="s-nav__child">
+    <a href="#myOtherNav" class="s-nav__child-link">My Other Nav</a>
     <ul id="myOtherNav" class="s-nav s-nav--unordered">
       <li id="myCoolItem3" class="s-nav__item"><a href="mailto:#something" class="s-nav__item-link" target="_self">My Cool Item #3</a></li>
       <li id="myCoolItem4" class="s-nav__item"><a href="mailto:#something" class="s-nav__item-link" target="_self">My Cool Item #4</a></li>

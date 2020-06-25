@@ -34,10 +34,12 @@ module.exports = __whenProperty => {
       obj1.hello.welcome = 'iuwehf iuhw efuihwe ';
       obj1.plop.coco = {};
       obj1.plop.coco = 'www';
-      expect(watch1).toBe(true);
-      expect(watch2).toBe(true);
-      expect(watch3).toBe(false);
-      done();
+      setTimeout(() => {
+        expect(watch1).toBe(true);
+        expect(watch2).toBe(true);
+        expect(watch3).toBe(false);
+        done();
+      });
     });
   });
 };

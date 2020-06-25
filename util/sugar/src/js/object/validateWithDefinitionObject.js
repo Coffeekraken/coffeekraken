@@ -3,6 +3,7 @@ import __validateDefinitionObject from './validateDefinitionObject';
 import __toString from '../string/toString';
 import __isOfType from '../is/ofType';
 import __isPlainObject from '../is/plainObject';
+import __get from '../object/get';
 
 /**
  * @name            validateWithDefinitionObject
@@ -60,7 +61,7 @@ export default function validateWithDefinitionObject(
   for (let i = 0; i < Object.keys(definitionObj).length; i++) {
     const argName = Object.keys(definitionObj)[i];
     const argDefinition = definitionObj[argName];
-    const value = objectToCheck[argName];
+    const value = __get(objectToCheck, argName);
 
     // validate type
     if (value !== undefined && argDefinition.type) {

@@ -43,6 +43,7 @@ module.exports = __SActionsStream => {
       const streamPromise = stream.start({
         something: 'yopyop'
       }).on('cancel,finally', result => {
+        console.log('ENDED');
         expect(stepsCalled).toBe(2);
         expect(action1StepCalled).toBe(1);
         expect(startCalled).toBe(2);

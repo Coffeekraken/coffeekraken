@@ -22,6 +22,7 @@ exports.default = void 0;
  *
  */
 var _default = (obj, path) => {
+  if (obj[path] !== undefined) return obj[path];
   if (!path || path === '' || path === '.') return obj;
   path = path.replace(/\[(\w+)\]/g, '.$1');
   path = path.replace(/^\./, '');

@@ -5,8 +5,6 @@ module.exports = (__SDocMapItem) => {
 
       const item1 = new __SDocMapItem(`${__dirname}/doc/README.md`, {});
 
-      console.log(item);
-
       done();
     });
   });

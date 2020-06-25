@@ -1,6 +1,5 @@
 const __packageJson = require('../package.json');
 const __packageRoot = require('../node/path/packageRoot');
-const __CommandsAppPage = require('../');
 
 module.exports = {
   rootDir: `${__packageRoot(__dirname)}`,

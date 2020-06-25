@@ -410,8 +410,7 @@ let SActionStream = /*#__PURE__*/function (_SPromise) {
         this.trigger('complete', completeObj);
         resolve(completeObj); // console.log(process._getActiveHandles()[0]);
         // console.log(process._getActiveRequests());
-
-        if ((0, _childProcess.default)()) process.exit();
+        // if (__isChildProcess()) process.exit();
       }).on('cancel', () => {
         canceled = true; // check if the current action returned value is a promise cancelable
 

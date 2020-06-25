@@ -231,6 +231,7 @@ export default class SConfig {
    *
    * @param                 {String}                      path                 The dotted object path for the value wanted
    * @param                 {String}                      [adapter=null]       The data adapter that you want to use to retreive this value
+   * @param                 {Object}                      [settings={}]         The same object settings that you can pass in the constructor but just for this get process
    * @return                {Mixed}                                            The value getted
    *
    * @example               js
@@ -238,7 +239,9 @@ export default class SConfig {
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  get(path, adapter = this._settings.defaultAdapter) {
+  get(path, adapter = this._settings.defaultAdapter, settings = {}) {
+    settings = __deepMerge(this._settings, settings);
+
     if (adapter && !this._adapters[adapter]) {
       throw new Error(
         `You try to get the config value "${path}" using the adapter "${adapter}" but this adapter does not exists...`
@@ -290,7 +293,7 @@ export default class SConfig {
       value = this.get(value.replace('@config.', ''), adapter);
     }
 
-    if (this._settings.throwErrorOnUndefinedConfig && value === undefined) {
+    if (settings.throwErrorOnUndefinedConfig && value === undefined) {
       throw new Error(
         `You try to get the config "${path}" on the "${this._name}" SConfig instance but this config does not exists...`
       );

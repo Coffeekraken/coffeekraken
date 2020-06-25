@@ -8,6 +8,9 @@ import __isPlainObject from '../is/plainObject';
 import __deepMap from '../object/deepMap';
 import __validateWithDefinitionObject from '../object/validateWithDefinitionObject';
 import __completeArgsObject from './completeArgsObject';
+import __unquote from '../string/unquote';
+import __parseArgumentTypeDefinitionString from '../parse/argumentTypeDefinitionString';
+import __ofType from '../is/ofType';
 
 /**
  * @name                        parseArgs
@@ -20,6 +23,8 @@ import __completeArgsObject from './completeArgsObject';
  * @param             {Object}                    definitionObj                   The arguments object description
  * @param             {Object}                    [settings={}]               A settings object that configure how the string will be parsed. Here's the settings options:
  * @return            {Object}                                                The object of funded arguments and their values
+ *
+ * @todo            update example
  *
  * @example         js
  * import parseArgs from '@coffeekraken/sugar/js/string/parseArgs';
@@ -56,7 +61,7 @@ export default function parseArgsString(
 ) {
   settings = __deepMerge(
     {
-      defaultObj: null
+      defaultObj: {}
     },
     settings
   );
@@ -66,59 +71,83 @@ export default function parseArgsString(
   // process the passed string
   let stringArray =
     string.match(/(?:[^\s("|'|`)]+|("|'|`)[^("|'|`)]*("|'|`))+/gm) || [];
+  stringArray = stringArray.map((item) => {
+    return __unquote(item);
+  });
+  let currentArgName = null;
+  let currentArgType = null;
+  let currentArgDefinition = null;
   stringArray = stringArray.filter((part) => {
     const currentArg = part.replace(/^[-]{1,2}/, '');
+
     if (part.slice(0, 2) === '--' || part.slice(0, 1) === '-') {
       const realArgName =
         getArgNameByAlias(currentArg, definitionObj) || currentArg;
+      currentArgName = realArgName;
+
+      currentArgDefinition = definitionObj[realArgName];
+
+      currentArgType = __parseArgumentTypeDefinitionString(
+        currentArgDefinition.type
+      );
+
       argsObj[realArgName] = true;
+
       return false;
     }
+
     const lastArgObjKey = Object.keys(argsObj)[Object.keys(argsObj).length - 1];
-    if (lastArgObjKey) argsObj[lastArgObjKey] = __parse(part);
+
+    if (!lastArgObjKey) {
+      for (const key in definitionObj) {
+        const obj = definitionObj[key];
+        const value = __parse(part);
+        if (__ofType(value, obj.type)) {
+          if (obj.validator && !obj.validator(value)) {
+            continue;
+          }
+          argsObj[key] = value;
+          break;
+        }
+      }
+    } else if (lastArgObjKey) {
+      const value = __parse(part);
+      if (currentArgType[0].type.toLowerCase() === 'array') {
+        if (!Array.isArray(argsObj[lastArgObjKey])) argsObj[lastArgObjKey] = [];
+        if (currentArgType[0].of) {
+          if (__ofType(value, currentArgType[0].of)) {
+            if (
+              currentArgDefinition.validator &&
+              !currentArgDefinition.validator(value)
+            ) {
+              return true;
+            }
+            argsObj[lastArgObjKey].push(value);
+          }
+        } else {
+          argsObj[lastArgObjKey].push(value);
+        }
+      } else {
+        argsObj[lastArgObjKey] = value;
+        // __set(argsObj, lastArgObjKey, value);
+      }
+    }
     return true;
   });
 
-  return __completeArgsObject(argsObj, definitionObj);
+  const finalObj = {};
+  for (let key in definitionObj) {
+    const value = argsObj[key];
+    if (value === undefined && settings.defaultObj[key] !== undefined) {
+      // __set(finalObj, key, settings.defaultObj[key]);
+      finalObj[key] = settings.defaultObj[key];
+      continue;
+    }
+    // __set(finalObj, key, argsObj[key]);
+    finalObj[key] = argsObj[key];
+  }
 
-  // const flattenArgsDefinition = {};
-  // __deepMap(definitionObj, (value, prop, fullPath) => {
-  //   if (
-  //     value &&
-  //     typeof value === 'object' &&
-  //     value.type !== undefined &&
-  //     value.children === undefined
-  //   ) {
-  //     flattenArgsDefinition[fullPath.replace('.children', '')] = value;
-  //   }
-  //   return value;
-  // });
-
-  // // loop on all the arguments
-  // Object.keys(flattenArgsDefinition).forEach((argString) => {
-  //   const argDefinitionObj = flattenArgsDefinition[argString];
-
-  //   // check if we have an argument passed in the properties
-  //   if (argsObj[argString] !== undefined) {
-  //     // set the argument value in the final args object
-  //     __set(finalArgsObject, argString, __parse(argsObj[argString]));
-  //   } else {
-  //     // check if theirs a default value to set
-  //     if (argDefinitionObj.default !== undefined) {
-  //       __set(finalArgsObject, argString, argDefinitionObj.default);
-  //     }
-  //   }
-  // });
-
-  // // make sure all is ok
-  // const argsValidationResult = __validateWithDefinitionObject(
-  //   finalArgsObject,
-  //   definitionObj
-  // );
-  // if (argsValidationResult !== true) throw new Error(argsValidationResult);
-
-  // // return the argsObj
-  // return finalArgsObject;
+  return __completeArgsObject(finalObj, definitionObj);
 }
 
 function getArgNameByAlias(alias, definitionObj) {

@@ -2,6 +2,7 @@ import __get from '../object/get';
 import __set from '../object/set';
 import __deepMap from '../object/deepMap';
 import __validateWithDefinitionObject from './validateWithDefinitionObject';
+import __deepize from '../object/deepize';
 
 /**
  * @name                completeArgsObject
@@ -24,29 +25,16 @@ import __validateWithDefinitionObject from './validateWithDefinitionObject';
 export default function completeArgsObject(argsObj, definitionObj) {
   argsObj = Object.assign({}, argsObj);
 
-  const flattenArgsDefinition = {};
-  __deepMap(definitionObj, (value, prop, fullPath) => {
-    if (
-      value &&
-      typeof value === 'object' &&
-      value.type !== undefined &&
-      value.children === undefined
-    ) {
-      flattenArgsDefinition[fullPath.replace('.children', '')] = value;
-    }
-    return value;
-  });
-
   // loop on all the arguments
-  Object.keys(flattenArgsDefinition).forEach((argString) => {
-    const argDefinitionObj = flattenArgsDefinition[argString];
+  Object.keys(definitionObj).forEach((argString) => {
+    const argDefinitionObj = definitionObj[argString];
 
     // check if we have an argument passed in the properties
     if (
-      __get(argsObj, argString) === undefined &&
+      argsObj[argString] === undefined &&
       argDefinitionObj.default !== undefined
     ) {
-      __set(argsObj, argString, argDefinitionObj.default);
+      argsObj[argString] = argDefinitionObj.default;
     }
   });
 
@@ -58,5 +46,5 @@ export default function completeArgsObject(argsObj, definitionObj) {
   if (argsValidationResult !== true) throw new Error(argsValidationResult);
 
   // return the argsObj
-  return argsObj;
+  return __deepize(argsObj);
 }

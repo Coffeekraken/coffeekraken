@@ -60,18 +60,13 @@ export default class SWatch {
       let path = obj.path;
       let value = obj.value;
       let oldValue = obj.oldValue;
-
       if (path.slice(0, 1) === '.') path = path.slice(1);
-
       // check if that update has a watch process attached
       const watchProcesses = this._getWatchStack(path);
-
       // if no watch processes match the glob patterns, stop here
       if (!watchProcesses.length) return;
-
       // build object depending on action
       let individualWatchObj = {};
-
       // build the object to pass to the handler
       const watchResult = {
         object: this._proxiedObject,
@@ -81,11 +76,13 @@ export default class SWatch {
         value,
         ...individualWatchObj
       };
-
       // loop on all the watch processes that match the path
       watchProcesses.forEach((watchProcess) => {
-        watchProcess.handlerFn(watchResult);
+        setTimeout(() => {
+          watchProcess.handlerFn(watchResult);
+        });
       });
+      /// console.trace('coco');
     });
 
     const watchPropertyObj = {
@@ -133,6 +130,7 @@ export default class SWatch {
 
   _getWatchStack(path) {
     const watchProcesses = [];
+    // console.log(Object.keys(this._watchStack).length);
     for (let i = 0; i < Object.keys(this._watchStack).length; i++) {
       const watchObj = this._watchStack[Object.keys(this._watchStack)[i]];
       for (let j = 0; j < watchObj.globs.length; j++) {

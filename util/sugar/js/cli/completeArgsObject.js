@@ -13,6 +13,8 @@ var _deepMap = _interopRequireDefault(require("../object/deepMap"));
 
 var _validateWithDefinitionObject = _interopRequireDefault(require("./validateWithDefinitionObject"));
 
+var _deepize = _interopRequireDefault(require("../object/deepize"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -34,28 +36,20 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  */
 function completeArgsObject(argsObj, definitionObj) {
-  argsObj = Object.assign({}, argsObj);
-  const flattenArgsDefinition = {};
-  (0, _deepMap.default)(definitionObj, (value, prop, fullPath) => {
-    if (value && typeof value === 'object' && value.type !== undefined && value.children === undefined) {
-      flattenArgsDefinition[fullPath.replace('.children', '')] = value;
-    }
+  argsObj = Object.assign({}, argsObj); // loop on all the arguments
 
-    return value;
-  }); // loop on all the arguments
+  Object.keys(definitionObj).forEach(argString => {
+    const argDefinitionObj = definitionObj[argString]; // check if we have an argument passed in the properties
 
-  Object.keys(flattenArgsDefinition).forEach(argString => {
-    const argDefinitionObj = flattenArgsDefinition[argString]; // check if we have an argument passed in the properties
-
-    if ((0, _get.default)(argsObj, argString) === undefined && argDefinitionObj.default !== undefined) {
-      (0, _set.default)(argsObj, argString, argDefinitionObj.default);
+    if (argsObj[argString] === undefined && argDefinitionObj.default !== undefined) {
+      argsObj[argString] = argDefinitionObj.default;
     }
   }); // make sure all is ok
 
   const argsValidationResult = (0, _validateWithDefinitionObject.default)(argsObj, definitionObj);
   if (argsValidationResult !== true) throw new Error(argsValidationResult); // return the argsObj
 
-  return argsObj;
+  return (0, _deepize.default)(argsObj);
 }
 
 module.exports = exports.default;

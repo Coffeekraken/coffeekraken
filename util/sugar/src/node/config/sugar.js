@@ -39,5 +39,7 @@ module.exports = function sugar(dotPath) {
     });
   }
   // get the config
-  return sugarConfigInstance.get(dotPath);
+  return sugarConfigInstance.get(dotPath, undefined, {
+    throwErrorOnUndefinedConfig: false
+  });
 };

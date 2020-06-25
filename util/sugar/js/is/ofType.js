@@ -54,12 +54,12 @@ function ofType(value, argTypeDefinition, returnError = false) {
 
     if (definitionObj.type === 'array') {
       // make sure the value is an array
-      if (Array.isArray(value) && !definitionObj.of) return true;else error = `Regarding to the argument definition "<yellow>${argTypeDefinition}</yellow>", the passed value "<cyan>${(0, _toString.default)(value)}</cyan>" has to be an <green>Array</green>...`;
+      if (Array.isArray(value) && !definitionObj.of) return true;else error = `Regarding to the argument definition "<yellow>${argTypeDefinition}</yellow>", the passed value "<cyan>${(0, _toString.default)(value)}</cyan>" of type "<magenta>${typeof value}</magenta>" has to be an <green>Array</green>...`;
     } // check object
 
 
     if (definitionObj.type === 'object') {
-      if (typeof value === 'object' && !definitionObj.of) return true;else error = `Regarding to the argument definition "<yellow>${argTypeDefinition}</yellow>", the passed value "<cyan>${(0, _toString.default)(value)}</cyan>" has to be an <green>Object</green>...`;
+      if (typeof value === 'object' && !definitionObj.of) return true;else error = `Regarding to the argument definition "<yellow>${argTypeDefinition}</yellow>", the passed value "<cyan>${(0, _toString.default)(value)}</cyan>" of type "<magenta>${typeof value}</magenta>" has to be an <green>Object</green>...`;
     } // check if need to check the childs
 
 
@@ -77,7 +77,7 @@ function ofType(value, argTypeDefinition, returnError = false) {
             definitionObj.of.forEach(o => {
               ofTypesArray.push(o.type);
             });
-            error = `Regarding to the argument definition "<yellow>${argTypeDefinition}</yellow>", the passed value "<yellow>${(0, _toString.default)(value)}</yellow>" has to contain only "<green>${ofTypesArray.join(',')}</green>"...`;
+            error = `Regarding to the argument definition "<yellow>${argTypeDefinition}</yellow>", the passed value "<yellow>${(0, _toString.default)(value)}</yellow>" of type "<magenta>${typeof value}</magenta>" has to contain only "<green>${ofTypesArray.join(',')}</green>"...`;
           }
         }); // if one of the values does not correspond to the definition object, return false
 
@@ -89,27 +89,27 @@ function ofType(value, argTypeDefinition, returnError = false) {
 
 
     if (definitionObj.type === 'class') {
-      if ((0, _class.default)(value)) return true;else error = `Regarding to the argument definition "<yellow>${argTypeDefinition}</yellow>", the passed value "<cyan>${(0, _toString.default)(value)}</cyan>" has to be a <green>Class</green>...`;
+      if ((0, _class.default)(value)) return true;else error = `Regarding to the argument definition "<yellow>${argTypeDefinition}</yellow>", the passed value "<cyan>${(0, _toString.default)(value)}</cyan>" of type "<magenta>${typeof value}</magenta>" has to be a <green>Class</green>...`;
     } // check if is an integer
 
 
     if (definitionObj.type === 'int' || definitionObj.type === 'integer') {
       if ((0, _integer.default)(value)) return true;
-      error = `Regarding to the argument definition "<yellow>${argTypeDefinition}</yellow>", the passed value "<cyan>${(0, _toString.default)(value)}</cyan>" has to be a <green>Integer</green>...`;
+      error = `Regarding to the argument definition "<yellow>${argTypeDefinition}</yellow>", the passed value "<cyan>${(0, _toString.default)(value)}</cyan>" of type "<magenta>${typeof value}</magenta>" has to be a <green>Integer</green>...`;
     } // check default types
 
 
     if (['boolean', 'number', 'string', 'bigint', 'symbol', 'function'].indexOf(definitionObj.type) !== -1 && typeof value === definitionObj.type) {
       return true;
     } else {
-      error = `Regarding to the argument definition "<yellow>${argTypeDefinition}</yellow>", the passed value "<cyan>${(0, _toString.default)(value)}</cyan>" has to be a <green>${(0, _upperFirst.default)(definitionObj.type)}</green>...`;
+      error = `Regarding to the argument definition "<yellow>${argTypeDefinition}</yellow>", the passed value "<cyan>${(0, _toString.default)(value)}</cyan>" of type "<magenta>${typeof value}</magenta>" has to be a <green>${(0, _upperFirst.default)(definitionObj.type)}</green>...`;
     } // check for "custom" types
 
 
     if ((0, _class.default)(value) && value.name) {
-      if (definitionObj.type === value.name.toLowerCase()) return true;else error = `Regarding to the argument definition "<yellow>${argTypeDefinition}</yellow>", the passed value "<cyan>${(0, _toString.default)(value)}</cyan>" has to be a <green>${(0, _upperFirst.default)(definitionObj.type)}</green>...`;
+      if (definitionObj.type === value.name.toLowerCase()) return true;else error = `Regarding to the argument definition "<yellow>${argTypeDefinition}</yellow>", the passed value "<cyan>${(0, _toString.default)(value)}</cyan>" of type "<magenta>${typeof value}</magenta>" has to be a <green>${(0, _upperFirst.default)(definitionObj.type)}</green>...`;
     } else if (value && value.constructor && value.constructor.name) {
-      if (definitionObj.type === value.constructor.name.toLowerCase()) return true;else error = `Regarding to the argument definition "<yellow>${argTypeDefinition}</yellow>", the passed value "<cyan>${(0, _toString.default)(value)}</cyan>" has to be a <green>${(0, _upperFirst.default)(definitionObj.type)}</green>...`;
+      if (definitionObj.type === value.constructor.name.toLowerCase()) return true;else error = `Regarding to the argument definition "<yellow>${argTypeDefinition}</yellow>", the passed value "<cyan>${(0, _toString.default)(value)}</cyan>" of type "<magenta>${typeof value}</magenta>" has to be a <green>${(0, _upperFirst.default)(definitionObj.type)}</green>...`;
     }
   }
 

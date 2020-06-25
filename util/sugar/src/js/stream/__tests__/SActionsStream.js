@@ -58,16 +58,18 @@ module.exports = (__SActionsStream) => {
           expect(typeof result.actions.action1.start).toBe('number');
           expect(typeof result.actions.action1.end).toBe('number');
           expect(typeof result.actions.action1.duration).toBe('number');
-          expect(typeof result.actions.action1.streamObj).toBe('object');
+          expect(Array.isArray(result.actions.action1.streamObjArray)).toBe(
+            true
+          );
           expect(typeof result.actions.action1.action).toBe('string');
 
           expect(typeof result.start).toBe('number');
           expect(typeof result.end).toBe('number');
           expect(typeof result.duration).toBe('number');
 
-          expect(result.streamObj.something).toBe('yopyop');
-          expect(result.streamObj.action1).toBe('hello');
-          expect(result.streamObj.action2).toBe('world');
+          expect(result.streamObjArray[0].something).toBe('yopyop');
+          expect(result.streamObjArray[0].action1).toBe('hello');
+          expect(result.streamObjArray[0].action2).toBe('world');
 
           done();
         });

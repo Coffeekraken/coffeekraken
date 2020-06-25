@@ -13,6 +13,8 @@ var _ofType = _interopRequireDefault(require("../is/ofType"));
 
 var _plainObject = _interopRequireDefault(require("../is/plainObject"));
 
+var _get = _interopRequireDefault(require("../object/get"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // TODO: tests
@@ -63,7 +65,7 @@ function validateWithDefinitionObject(objectToCheck, definitionObj, extendsFn = 
   for (let i = 0; i < Object.keys(definitionObj).length; i++) {
     const argName = Object.keys(definitionObj)[i];
     const argDefinition = definitionObj[argName];
-    const value = objectToCheck[argName]; // validate type
+    const value = (0, _get.default)(objectToCheck, argName); // validate type
 
     if (value !== undefined && argDefinition.type) {
       const isOfTypeResult = (0, _ofType.default)(value, argDefinition.type, true);

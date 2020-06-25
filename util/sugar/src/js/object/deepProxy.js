@@ -92,25 +92,6 @@ export default function deepProxy(object, handlerFn) {
     };
   }
 
-  // function unproxy(obj = proxy, key = null) {
-
-  //   let o = key ? obj[key] : obj;
-
-  //   if (key) {
-  //     if (preproxy.has(o)) {
-  //       o = preproxy.get(o);
-  //       preproxy.delete(o);
-  //     }
-  //   }
-
-  //   for (let k of Object.keys(o)) {
-  //     if (typeof o[k] === 'object') {
-  //       unproxy(o, k);
-  //     }
-  //   }
-
-  // }
-
   function proxify(obj, path) {
     if (obj === null) return obj;
     for (let key of Object.keys(obj)) {

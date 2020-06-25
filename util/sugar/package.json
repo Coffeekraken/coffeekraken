@@ -18,8 +18,7 @@
   "license": "MIT",
   "scripts": {
     "test": "jest",
-    "build.js": "rm -rf dist && babel src/js -d js --ignore 'src/**/*.spec.js','src/**/*.test.js'",
-    "snippets.node": "node src/node/generateSnippetsFile.js"
+    "build.js": "rm -rf dist && babel src/js -d js --ignore 'src/**/*.spec.js','src/**/*.test.js'"
   },
   "dependencies": {
     "@babel/cli": "^7.8.4",

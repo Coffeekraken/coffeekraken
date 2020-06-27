@@ -72,7 +72,11 @@ module.exports = function argsToString(args, definition, includeAllArgs = true) 
     value = (0, _toString.default)(value);
     if (defObj.type.toLowerCase() === 'string') value = `"${value}"`;
     if (defObj.type.toLowerCase() === 'boolean') value = '';
-    if (defObj.type.toLowerCase() === 'object' || defObj.type.toLowerCase() === 'array') value = `"${value}"`;
+
+    if (defObj.type.toLowerCase().includes('object') || defObj.type.toLowerCase().includes('array')) {
+      value = `"${value.split('"').join("'")}"`;
+    }
+
     cliArray.push(`${prefix} ${value}`);
   });
   return cliArray.join(' ');

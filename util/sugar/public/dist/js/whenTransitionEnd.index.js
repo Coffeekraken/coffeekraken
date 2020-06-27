@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["whenTransitionEnd"],{
 
-/***/ "../src/js/dom/getStyleProperty.js":
-/*!*****************************************!*\
-  !*** ../src/js/dom/getStyleProperty.js ***!
-  \*****************************************/
+/***/ "./src/js/dom/getStyleProperty.js":
+/*!****************************************!*\
+  !*** ./src/js/dom/getStyleProperty.js ***!
+  \****************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15,15 +15,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = getStyleProperty;
 
-var _camelize = _interopRequireDefault(__webpack_require__(/*! ../string/camelize */ "../src/js/string/camelize.js"));
+var _camelize = _interopRequireDefault(__webpack_require__(/*! ../string/camelize */ "./src/js/string/camelize.js"));
 
-var _autoCast = _interopRequireDefault(__webpack_require__(/*! ../string/autoCast */ "../src/js/string/autoCast.js"));
+var _autoCast = _interopRequireDefault(__webpack_require__(/*! ../string/autoCast */ "./src/js/string/autoCast.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 /**
  * @name      getStyleProperty
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Get a style property on the passed element through the computed style.
@@ -48,12 +48,12 @@ function getStyleProperty(elm, property) {
   });
   var computed = elm._sComputedStyle || window.getComputedStyle(elm);
   elm._sComputedStyle = computed;
-  var prefixes = ["", "webkit-", "moz-", "ms-", "o-", "khtml-"];
+  var prefixes = ['', 'webkit-', 'moz-', 'ms-', 'o-', 'khtml-'];
 
   for (var i = 0; i < prefixes.length; i++) {
     var prefix = prefixes[i];
     var value = computed[(0, _camelize["default"])("".concat(prefix).concat(property))];
-    if (value && value.trim() !== "") return (0, _autoCast["default"])(value);
+    if (value && value.trim() !== '') return (0, _autoCast["default"])(value);
   }
 
   return null;
@@ -63,10 +63,10 @@ module.exports = exports.default;
 
 /***/ }),
 
-/***/ "../src/js/dom/getTransitionProperties.js":
-/*!************************************************!*\
-  !*** ../src/js/dom/getTransitionProperties.js ***!
-  \************************************************/
+/***/ "./src/js/dom/getTransitionProperties.js":
+/*!***********************************************!*\
+  !*** ./src/js/dom/getTransitionProperties.js ***!
+  \***********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -78,9 +78,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = getTransitionProperties;
 
-var _getStyleProperty = _interopRequireDefault(__webpack_require__(/*! ./getStyleProperty */ "../src/js/dom/getStyleProperty.js"));
+var _getStyleProperty = _interopRequireDefault(__webpack_require__(/*! ./getStyleProperty */ "./src/js/dom/getStyleProperty.js"));
 
-var _convert = _interopRequireDefault(__webpack_require__(/*! ../time/convert */ "../src/js/time/convert.js"));
+var _convert = _interopRequireDefault(__webpack_require__(/*! ../time/convert */ "./src/js/time/convert.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -88,7 +88,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 /**
  * @name      getTransitionProperties
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Get the css transition properties from an HTMLElement in an object format
@@ -155,10 +155,10 @@ module.exports = exports.default;
 
 /***/ }),
 
-/***/ "../src/js/dom/whenTransitionEnd.js":
-/*!******************************************!*\
-  !*** ../src/js/dom/whenTransitionEnd.js ***!
-  \******************************************/
+/***/ "./src/js/dom/whenTransitionEnd.js":
+/*!*****************************************!*\
+  !*** ./src/js/dom/whenTransitionEnd.js ***!
+  \*****************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -170,13 +170,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = whenTransitionEnd;
 
-var _getTransitionProperties = _interopRequireDefault(__webpack_require__(/*! ./getTransitionProperties */ "../src/js/dom/getTransitionProperties.js"));
+var _getTransitionProperties = _interopRequireDefault(__webpack_require__(/*! ./getTransitionProperties */ "./src/js/dom/getTransitionProperties.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 /**
  * @name      whenTransitionEnd
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Monitor an HTMLElement to be notified when his transition has ended
@@ -208,10 +208,10 @@ module.exports = exports.default;
 
 /***/ }),
 
-/***/ "../src/js/string/autoCast.js":
-/*!************************************!*\
-  !*** ../src/js/string/autoCast.js ***!
-  \************************************/
+/***/ "./src/js/string/autoCast.js":
+/*!***********************************!*\
+  !*** ./src/js/string/autoCast.js ***!
+  \***********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -225,7 +225,7 @@ exports["default"] = autoCast;
 
 /**
  * @name        autoCast
- * @namespace       sugar.js.string
+ * @namespace           js.string
  * @type      Function
  *
  * Auto cast the string into the correct variable type
@@ -243,7 +243,7 @@ exports["default"] = autoCast;
  */
 function autoCast(string) {
   // if the passed string is not a string, return the value
-  if (typeof string !== "string") return string; // handle the single quotes strings like '"hello world"'
+  if (typeof string !== 'string') return string; // handle the single quotes strings like '"hello world"'
 
   if (string.substr(0, 1) === "'" && string.substr(-1) === "'") {
     return string.substr(1, string.length - 2);
@@ -280,10 +280,10 @@ module.exports = exports.default;
 
 /***/ }),
 
-/***/ "../src/js/time/convert.js":
-/*!*********************************!*\
-  !*** ../src/js/time/convert.js ***!
-  \*********************************/
+/***/ "./src/js/time/convert.js":
+/*!********************************!*\
+  !*** ./src/js/time/convert.js ***!
+  \********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -297,19 +297,19 @@ exports["default"] = convert;
 
 /**
  * @name                                  convert
- * @namespace                             sugar.js.time
+ * @namespace           js.time
  * @type                                  Function
- * 
+ *
  * This function allows you to convert time like seconds, ms, hours, minutes, etc... from one format to another
- * 
+ *
  * @param           {String|Number}             from                  The value to start from like "10s", "20ms", "2h", etc...
  * @param           {String}                    [to='ms']             The format you want to get back
  * @return          {Number}                                          The converted value
- * 
+ *
  * @example           js
  * import convert from '@coffeekraken/sugar/js/time/convert';
  * convert('10s', 'ms'); // => 10000
- * 
+ *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function convert(from) {

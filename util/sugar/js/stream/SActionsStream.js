@@ -19,6 +19,8 @@ var _validateDefinitionObject = _interopRequireDefault(require("../cli/validateD
 
 var _childProcess = _interopRequireDefault(require("../is/childProcess"));
 
+var _testEnv = _interopRequireDefault(require("../is/testEnv"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -408,9 +410,8 @@ let SActionStream = /*#__PURE__*/function (_SPromise) {
         };
         trigger('complete', completeObj);
         this.trigger('complete', completeObj);
-        resolve(completeObj); // console.log(process._getActiveHandles()[0]);
-        // console.log(process._getActiveRequests());
-        // if (__isChildProcess()) process.exit();
+        resolve(completeObj);
+        if (!(0, _testEnv.default)() && (0, _childProcess.default)()) process.exit();
       }).on('cancel', () => {
         canceled = true; // check if the current action returned value is a promise cancelable
 

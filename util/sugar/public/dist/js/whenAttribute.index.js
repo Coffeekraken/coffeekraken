@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["whenAttribute"],{
 
-/***/ "../src/js/dom/observeAttributes.js":
-/*!******************************************!*\
-  !*** ../src/js/dom/observeAttributes.js ***!
-  \******************************************/
+/***/ "./src/js/dom/observeAttributes.js":
+/*!*****************************************!*\
+  !*** ./src/js/dom/observeAttributes.js ***!
+  \*****************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = _default;
 
-var _SPromise = _interopRequireDefault(__webpack_require__(/*! ../promise/SPromise */ "../src/js/promise/SPromise.js"));
+var _SPromise = _interopRequireDefault(__webpack_require__(/*! ../promise/SPromise */ "./src/js/promise/SPromise.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -27,7 +27,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /**
  * @name        observeAttributes
- * @namespace       sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Observe attributes on an HTMLElement and get mutations through the SPromise instance
@@ -83,10 +83,10 @@ module.exports = exports.default;
 
 /***/ }),
 
-/***/ "../src/js/dom/whenAttribute.js":
-/*!**************************************!*\
-  !*** ../src/js/dom/whenAttribute.js ***!
-  \**************************************/
+/***/ "./src/js/dom/whenAttribute.js":
+/*!*************************************!*\
+  !*** ./src/js/dom/whenAttribute.js ***!
+  \*************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -98,15 +98,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = whenAttribute;
 
-var _autoCast = _interopRequireDefault(__webpack_require__(/*! ../string/autoCast */ "../src/js/string/autoCast.js"));
+var _autoCast = _interopRequireDefault(__webpack_require__(/*! ../string/autoCast */ "./src/js/string/autoCast.js"));
 
-var _observeAttributes = _interopRequireDefault(__webpack_require__(/*! ./observeAttributes */ "../src/js/dom/observeAttributes.js"));
+var _observeAttributes = _interopRequireDefault(__webpack_require__(/*! ./observeAttributes */ "./src/js/dom/observeAttributes.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 /**
  * @name      whenAttribute
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Resolve a promise when the wanted attribute on the passed HTMLElement exist or pass the check function provided
@@ -166,10 +166,10 @@ module.exports = exports.default;
 
 /***/ }),
 
-/***/ "../src/js/string/autoCast.js":
-/*!************************************!*\
-  !*** ../src/js/string/autoCast.js ***!
-  \************************************/
+/***/ "./src/js/string/autoCast.js":
+/*!***********************************!*\
+  !*** ./src/js/string/autoCast.js ***!
+  \***********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -183,7 +183,7 @@ exports["default"] = autoCast;
 
 /**
  * @name        autoCast
- * @namespace       sugar.js.string
+ * @namespace           js.string
  * @type      Function
  *
  * Auto cast the string into the correct variable type
@@ -201,7 +201,7 @@ exports["default"] = autoCast;
  */
 function autoCast(string) {
   // if the passed string is not a string, return the value
-  if (typeof string !== "string") return string; // handle the single quotes strings like '"hello world"'
+  if (typeof string !== 'string') return string; // handle the single quotes strings like '"hello world"'
 
   if (string.substr(0, 1) === "'" && string.substr(-1) === "'") {
     return string.substr(1, string.length - 2);

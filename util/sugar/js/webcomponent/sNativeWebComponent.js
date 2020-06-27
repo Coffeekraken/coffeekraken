@@ -5,15 +5,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = sNativeWebComponent;
 
-require("document-register-element");
+var _mixClasses = require("mix-classes");
 
-require("@ungap/custom-elements-builtin");
-
-var _mixwith = require("../vendor/mixwith");
-
-var _SWebComponentMixin = _interopRequireDefault(require("./SWebComponentMixin"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+// import 'document-register-element';
+// import '@ungap/custom-elements-builtin';
+// import { mix } from '../vendor/mixwith';
+// import SWebComponentMixin from './SWebComponentMixin';
+// import __multiple from '../class/multipleExtends';
 
 /**
  * @name    sNativeWebComponent
@@ -35,23 +33,27 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 const extendsStack = {};
 
-function sNativeWebComponent(HTMLElementToExtend) {
-  HTMLElementToExtend = function (OriginalHTMLElement) {
-    if (!window[OriginalHTMLElement.name]) return OriginalHTMLElement;
-    if (extendsStack[OriginalHTMLElement.name]) return extendsStack[OriginalHTMLElement.name];
-
-    function BabelHTMLElement() {
-      const newTarget = this.__proto__.constructor;
-      return Reflect.construct(OriginalHTMLElement, [], newTarget);
-    }
-
-    Object.setPrototypeOf(BabelHTMLElement, OriginalHTMLElement);
-    Object.setPrototypeOf(BabelHTMLElement.prototype, OriginalHTMLElement.prototype);
-    extendsStack[HTMLElementToExtend.name] = BabelHTMLElement;
-    return BabelHTMLElement;
-  }(HTMLElementToExtend);
-
-  return (0, _mixwith.mix)(HTMLElementToExtend).with(_SWebComponentMixin.default);
+function sNativeWebComponent(HTMLElementToExtend, SWebComponent) {
+  // HTMLElementToExtend = (function (OriginalHTMLElement) {
+  //   if (!window[OriginalHTMLElement.name]) return OriginalHTMLElement;
+  //   if (extendsStack[OriginalHTMLElement.name])
+  //     return extendsStack[OriginalHTMLElement.name];
+  //   function BabelHTMLElement() {
+  //     const newTarget = this.__proto__.constructor;
+  //     return Reflect.construct(OriginalHTMLElement, [], newTarget);
+  //   }
+  //   Object.setPrototypeOf(BabelHTMLElement, OriginalHTMLElement);
+  //   Object.setPrototypeOf(
+  //     BabelHTMLElement.prototype,
+  //     OriginalHTMLElement.prototype
+  //   );
+  //   extendsStack[HTMLElementToExtend.name] = BabelHTMLElement;
+  //   return BabelHTMLElement;
+  // })(HTMLElementToExtend);
+  return SWebComponent;
+  return (0, _mixClasses.Mix)(HTMLElementToExtend, SWebComponent); // return __multiple(HTMLElementToExtend, SWebComponent);
+  // return mixins.Mixed(HTMLElementToExtend, SWebComponent);
+  // return mix(HTMLElementToExtend).with(SWebComponent);
 }
 
 module.exports = exports.default;

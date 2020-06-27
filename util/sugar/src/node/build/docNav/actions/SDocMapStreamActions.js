@@ -57,8 +57,6 @@ module.exports = class SDocMapStreamActions extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(streamObj, settings = this._settings) {
-    console.log(streamObj.outputDir);
-
     // make sure we have a correct streamObj
     this.checkStreamObject(streamObj);
 

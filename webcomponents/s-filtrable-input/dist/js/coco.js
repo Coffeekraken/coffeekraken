@@ -1,2 +1,3 @@
-"use strict";console.log("COCO");
-//# sourceMappingURL=coco.js.map
+"use strict";
+
+console.log('COCO');

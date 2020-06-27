@@ -93,7 +93,8 @@ module.exports = class SProcess {
         newCommandsObj[`command${i + 1}`] = {
           command,
           color:
-            Object.keys(__sugarConfig('terminal.colors'))[i + 1] || 'yellow',
+            Object.keys(__sugarConfig('terminal.colors'))[i + 1].color ||
+            'yellow',
           run: true
         };
       } else if (

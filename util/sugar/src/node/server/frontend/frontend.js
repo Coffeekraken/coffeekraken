@@ -35,6 +35,7 @@ const tempDirectory = require('temp-dir');
 module.exports = async (args = {}) => {
   const settings = __deepMerge(__sugarConfig('frontend'), args);
   const server = __expressServer(settings.express);
+  let sNavInstance;
 
   settings.assets = __deepMap(settings.assets, (value, prop) => {
     if (prop === 'path') return value.replace(settings.express.rootDir, '');
@@ -43,14 +44,16 @@ module.exports = async (args = {}) => {
 
   // generate menus
   const menuStack = {};
-  const sNavInstance = new __SNav('main', 'Main', []);
-  Object.keys(settings.menu).forEach(async (menuName) => {
-    // generate the menus
-    const generatorObj = settings.menu[menuName].generator;
-    menuStack[menuName] = await generatorObj.fn(generatorObj.directory);
-    // add the nav to the main navigation
-    sNavInstance.addItem(menuStack[menuName]);
-  });
+  if (settings.menu) {
+    sNavInstance = new __SNav('main', 'Main', []);
+    Object.keys(settings.menu).forEach(async (menuName) => {
+      // generate the menus
+      const generatorObj = settings.menu[menuName].generator;
+      menuStack[menuName] = await generatorObj.fn(generatorObj.directory);
+      // add the nav to the main navigation
+      sNavInstance.addItem(menuStack[menuName]);
+    });
+  }
 
   function renderTemplate(string, data = {}) {
     const lintRes = __ejsLint(string);
@@ -66,7 +69,7 @@ module.exports = async (args = {}) => {
   const templateData = {
     title: __packageJson.name,
     package: __packageJson,
-    menuHtml: sNavInstance.toHtml(),
+    menuHtml: sNavInstance ? sNavInstance.toHtml() : '',
     settings: settings
   };
 

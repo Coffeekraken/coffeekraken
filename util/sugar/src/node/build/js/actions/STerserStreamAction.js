@@ -1,21 +1,21 @@
 const __deepMerge = require('../../../object/deepMerge');
 const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
-const __uglifyJs = require('uglify-js');
+const __terser = require('terser');
 
 /**
- * @name                SUglifyJsStreamAction
+ * @name                STerserStreamAction
  * @namespace           node.build.js.actions
  * @type                Class
  * @extends             SActionsStreamAction
  *
- * This function is responsible of passing uglify js on the output files
+ * This function is responsible of passing terser js on the output files
  *
  * @param       {Object}        streamObj          The streamObj object with the properties described bellow:
  * @return      {Promise}                         A simple promise that will be resolved when the process is finished
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SUglifyJsStreamAction extends __SActionsStreamAction {
+module.exports = class STerserStreamAction extends __SActionsStreamAction {
   /**
    * @name            definitionObj
    * @type             Object
@@ -70,10 +70,15 @@ module.exports = class SUglifyJsStreamAction extends __SActionsStreamAction {
     return new Promise((resolve, reject) => {
       // minify the "data"
 
-      const uglifyResult = __uglifyJs.minify(
+      if (!streamObj.prod) return resolve(streamObj);
+
+      const terserResult = __terser.minify(
         streamObj.data,
         __deepMerge(
           {
+            output: {
+              comments: false
+            },
             sourceMap: {
               filename: streamObj.filename,
               url: streamObj.filename + '.map'
@@ -84,15 +89,15 @@ module.exports = class SUglifyJsStreamAction extends __SActionsStreamAction {
       );
 
       // check if has some error
-      if (uglifyResult.error) {
-        throw new Error(uglifyResult.error);
+      if (terserResult.error) {
+        throw new Error(terserResult.error);
       }
 
       // otherwise, save the new data in the streamObj
-      streamObj.data = uglifyResult.code;
+      streamObj.data = terserResult.code;
 
       // set the map if has been generated
-      if (uglifyResult.map) streamObj.sourcemapData = uglifyResult.map;
+      if (terserResult.map) streamObj.sourcemapData = terserResult.map;
 
       // resolve the new streamObj
       resolve(streamObj);

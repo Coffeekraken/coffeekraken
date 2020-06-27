@@ -4,63 +4,65 @@
 module.exports = {
   assets: '@config.assets',
 
-  menu: {
-    /**
-     * @name            doc
-     * @namespace       config.frontend.menu
-     * @type            Object
-     *
-     * List all the documentations views
-     *
-     * @since         2.0.0
-     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    doc: {
-      /**
-       * @name            generator
-       * @namespace       config.frontend.menu.doc
-       * @type            Function
-       * @async
-       *
-       * Specify the generator function to use to generate the documentation menu tree. Has to return an SNav instance
-       *
-       * @since         2.0.0
-       * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-      generator: {
-        // fn: __docNav,
-        directory: '@config.doc.rootDir'
-      }
-    },
+  // menu: {
+  //   /**
+  //    * @name            doc
+  //    * @namespace       config.frontend.menu
+  //    * @type            Object
+  //    *
+  //    * List all the documentations views
+  //    *
+  //    * @since         2.0.0
+  //    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  //    */
+  //   doc: {
+  //     /**
+  //      * @name            generator
+  //      * @namespace       config.frontend.menu.doc
+  //      * @type            Function
+  //      * @async
+  //      *
+  //      * Specify the generator function to use to generate the documentation menu tree. Has to return an SNav instance
+  //      *
+  //      * @since         2.0.0
+  //      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  //      */
+  //     generator: {
+  //       // fn: __docNav,
+  //       fn: () => {},
+  //       directory: '@config.doc.rootDir'
+  //     }
+  //   },
 
-    /**
-     * @name            views
-     * @namespace       config.frontend.menu
-     * @type            Object
-     *
-     * List all the developed views
-     *
-     * @since         2.0.0
-     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    views: {
-      /**
-       * @name            generator
-       * @namespace       config.frontend.menu.views
-       * @type            Function
-       * @async
-       *
-       * Specify the generator function to use to generate the views menu tree. Has to return an SNav instance
-       *
-       * @since         2.0.0
-       * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-      generator: {
-        // fn: __namespaceSNav,
-        directory: '@config.views.rootDir'
-      }
-    }
-  },
+  //   /**
+  //    * @name            views
+  //    * @namespace       config.frontend.menu
+  //    * @type            Object
+  //    *
+  //    * List all the developed views
+  //    *
+  //    * @since         2.0.0
+  //    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  //    */
+  //   views: {
+  //     /**
+  //      * @name            generator
+  //      * @namespace       config.frontend.menu.views
+  //      * @type            Function
+  //      * @async
+  //      *
+  //      * Specify the generator function to use to generate the views menu tree. Has to return an SNav instance
+  //      *
+  //      * @since         2.0.0
+  //      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  //      */
+  //     generator: {
+  //       // fn: __namespaceSNav,
+  //       fn: () => {},
+  //       directory: '@config.views.rootDir'
+  //     }
+  //   }
+  // },
 
   pages: {
     /**

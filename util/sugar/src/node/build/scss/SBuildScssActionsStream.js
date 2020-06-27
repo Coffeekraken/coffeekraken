@@ -102,7 +102,6 @@ module.exports = class SBuildScssActionsStream extends __SActionsStream {
                     : streamObj.filename.replace('.scss', '.css')
                 );
               }
-              console.log(streamObj.outputDir);
               return streamObj;
             }
           }

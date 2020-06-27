@@ -65,6 +65,15 @@ export default function validateWithDefinitionObject(
 
     // validate type
     if (value !== undefined && argDefinition.type) {
+      // if (argName === 'pack') {
+      //   console.log(
+      //     'ZYPE',
+      //     //argDefinition,
+      //     value,
+      //     typeof value,
+      //     Array.isArray(value)
+      //   );
+      // }
       const isOfTypeResult = __isOfType(value, argDefinition.type, true);
       if (isOfTypeResult !== true) {
         return `${argName}: ${isOfTypeResult}`;

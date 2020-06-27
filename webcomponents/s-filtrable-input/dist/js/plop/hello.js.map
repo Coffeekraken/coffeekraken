@@ -1,1 +1,1 @@
-{"version":3,"file":"hello.js","sources":["0"],"names":["console","log"],"mappings":"aAEAA,QAAQC,IAAI"}
+{"version":3,"sources":["hello.js"],"names":["console","log"],"mappings":";;AAAAA,OAAO,CAACC,GAAR,CAAY,OAAZ","sourcesContent":["console.log('hello');\n"]}

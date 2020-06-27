@@ -37,12 +37,12 @@ module.exports = class SColor extends __SColor {
   getColor(color) {
     // try to get the color from the sugar config
     let sugarConfigColor;
-    try {
-      sugarConfigColor = __sugarConfig(`colors.${color}`);
-    } catch (e) {
+    if (color.match(/terminal\./)) {
       sugarConfigColor = __sugarConfig(
         `terminal.colors.${color.replace('terminal.', '')}`
       );
+    } else {
+      sugarConfigColor = __sugarConfig(`colors.${color}`);
     }
     if (sugarConfigColor && sugarConfigColor.color)
       return sugarConfigColor.color;

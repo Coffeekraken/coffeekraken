@@ -80,19 +80,10 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
 
         const result = await __babel
           .transformAsync(streamObj.data, {
-            cwd: __packageRoot(process.cwd()),
-            filename: streamObj.filename,
             cwd: __packageRoot(__dirname),
-            presets: [
-              [
-                '@babel/preset-env',
-                {
-                  forceAllTransforms: true
-                }
-              ]
-            ],
-            plugins: ['@babel/plugin-proposal-class-properties'],
-            sourceMaps: true
+            filename: streamObj.filename,
+            sourceMaps: true,
+            ...__sugarConfig('babel')
           })
           .catch((error) => {
             return reject(err);
@@ -148,15 +139,7 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
                     loader: 'babel-loader',
                     options: {
                       cwd: __packageRoot(__dirname),
-                      presets: [
-                        [
-                          '@babel/preset-env',
-                          {
-                            forceAllTransforms: true
-                          }
-                        ]
-                      ],
-                      plugins: ['@babel/plugin-proposal-class-properties']
+                      ...__sugarConfig('babel')
                     }
                   }
                 }
@@ -190,7 +173,6 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
         )
       );
 
-      console.log('trigger');
       __trigger('sugarwebpack', 'hello');
 
       compiler.run((error, stats) => {

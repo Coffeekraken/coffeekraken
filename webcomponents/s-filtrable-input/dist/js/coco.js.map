@@ -1,1 +1,1 @@
-{"version":3,"file":"coco.js","sources":["0"],"names":["console","log"],"mappings":"aAEAA,QAAQC,IAAI"}
+{"version":3,"sources":["coco.js"],"names":["console","log"],"mappings":";;AAAAA,OAAO,CAACC,GAAR,CAAY,MAAZ","sourcesContent":["console.log('COCO');\n"]}

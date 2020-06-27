@@ -68,6 +68,15 @@ function validateWithDefinitionObject(objectToCheck, definitionObj, extendsFn = 
     const value = (0, _get.default)(objectToCheck, argName); // validate type
 
     if (value !== undefined && argDefinition.type) {
+      // if (argName === 'pack') {
+      //   console.log(
+      //     'ZYPE',
+      //     //argDefinition,
+      //     value,
+      //     typeof value,
+      //     Array.isArray(value)
+      //   );
+      // }
       const isOfTypeResult = (0, _ofType.default)(value, argDefinition.type, true);
 
       if (isOfTypeResult !== true) {

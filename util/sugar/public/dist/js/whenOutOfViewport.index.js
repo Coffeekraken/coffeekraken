@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["whenOutOfViewport"],{
 
-/***/ "../src/js/dom/closest.js":
-/*!********************************!*\
-  !*** ../src/js/dom/closest.js ***!
-  \********************************/
+/***/ "./src/js/dom/closest.js":
+/*!*******************************!*\
+  !*** ./src/js/dom/closest.js ***!
+  \*******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15,13 +15,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = closest;
 
-var _matches = _interopRequireDefault(__webpack_require__(/*! ./matches */ "../src/js/dom/matches.js"));
+var _matches = _interopRequireDefault(__webpack_require__(/*! ./matches */ "./src/js/dom/matches.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 /**
  * @name        closest
- * @namespace       sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Go up the dom three to find the first element that matches the passed selector
@@ -48,9 +48,9 @@ function closest($elm, selector) {
   $elm = $elm.parentNode;
 
   while ($elm && $elm != originalElm.ownerDocument) {
-    if (typeof selector === "function") {
+    if (typeof selector === 'function') {
       if (selector($elm)) return $elm;
-    } else if (typeof selector === "string" && (0, _matches["default"])($elm, selector)) {
+    } else if (typeof selector === 'string' && (0, _matches["default"])($elm, selector)) {
       return $elm;
     }
 
@@ -64,10 +64,10 @@ module.exports = exports.default;
 
 /***/ }),
 
-/***/ "../src/js/dom/isInViewport.js":
-/*!*************************************!*\
-  !*** ../src/js/dom/isInViewport.js ***!
-  \*************************************/
+/***/ "./src/js/dom/isInViewport.js":
+/*!************************************!*\
+  !*** ./src/js/dom/isInViewport.js ***!
+  \************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -85,7 +85,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
 /**
  * @name      isInViewport
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Check if the passed HTMLElement is in the viewport or not
@@ -110,7 +110,7 @@ function isInViewport(elm) {
   var offsetBottom = offset;
   var offsetLeft = offset;
 
-  if (_typeof(offset) === "object") {
+  if (_typeof(offset) === 'object') {
     offsetTop = offset.top || 0;
     offsetRight = offset.right || 0;
     offsetBottom = offset.bottom || 0;
@@ -131,10 +131,10 @@ module.exports = exports.default;
 
 /***/ }),
 
-/***/ "../src/js/dom/matches.js":
-/*!********************************!*\
-  !*** ../src/js/dom/matches.js ***!
-  \********************************/
+/***/ "./src/js/dom/matches.js":
+/*!*******************************!*\
+  !*** ./src/js/dom/matches.js ***!
+  \*******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -148,7 +148,7 @@ exports["default"] = matches;
 
 /**
  * @name      matches
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Polyfill for the Element.matches function
@@ -167,7 +167,7 @@ exports["default"] = matches;
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function matches(el, selector) {
-  if (el.nodeName == "#comment" || el.nodeName == "#text") {
+  if (el.nodeName == '#comment' || el.nodeName == '#text') {
     return false;
   }
 
@@ -184,10 +184,10 @@ module.exports = exports.default;
 
 /***/ }),
 
-/***/ "../src/js/dom/whenOutOfViewport.js":
-/*!******************************************!*\
-  !*** ../src/js/dom/whenOutOfViewport.js ***!
-  \******************************************/
+/***/ "./src/js/dom/whenOutOfViewport.js":
+/*!*****************************************!*\
+  !*** ./src/js/dom/whenOutOfViewport.js ***!
+  \*****************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -199,11 +199,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = whenOutOfViewport;
 
-var _isInViewport2 = _interopRequireDefault(__webpack_require__(/*! ./isInViewport */ "../src/js/dom/isInViewport.js"));
+var _isInViewport2 = _interopRequireDefault(__webpack_require__(/*! ./isInViewport */ "./src/js/dom/isInViewport.js"));
 
-var _throttle = _interopRequireDefault(__webpack_require__(/*! ../function/throttle */ "../src/js/function/throttle.js"));
+var _throttle = _interopRequireDefault(__webpack_require__(/*! ../function/throttle */ "./src/js/function/throttle.js"));
 
-var _closest = _interopRequireDefault(__webpack_require__(/*! ./closest */ "../src/js/dom/closest.js"));
+var _closest = _interopRequireDefault(__webpack_require__(/*! ./closest */ "./src/js/dom/closest.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -211,7 +211,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 /**
  * @name      whenOutOfViewport
- * @namespace     sugar.js.dom
+ * @namespace           js.dom
  * @type      Function
  *
  * Monitor an HTMLElement to be notified when it exit the viewport
@@ -263,7 +263,7 @@ function whenOutOfViewport(elm) {
       var scrollContainerElm = document;
 
       if (!elm._inViewportContainer) {
-        var overflowContainer = (0, _closest["default"])(elm, "[data-in-viewport-container]");
+        var overflowContainer = (0, _closest["default"])(elm, '[data-in-viewport-container]');
 
         if (overflowContainer) {
           scrollContainerElm = overflowContainer;
@@ -276,8 +276,8 @@ function whenOutOfViewport(elm) {
       var _isInViewport = true,
           _cb2 = function _cb2() {
         if (!_isInViewport) {
-          scrollContainerElm.removeEventListener("scroll", checkViewport);
-          window.removeEventListener("resize", checkViewport);
+          scrollContainerElm.removeEventListener('scroll', checkViewport);
+          window.removeEventListener('resize', checkViewport);
           resolve(elm);
         }
       };
@@ -288,8 +288,8 @@ function whenOutOfViewport(elm) {
         _cb2();
       }, 100); // listen for resize
 
-      scrollContainerElm.addEventListener("scroll", checkViewport);
-      window.addEventListener("resize", checkViewport);
+      scrollContainerElm.addEventListener('scroll', checkViewport);
+      window.addEventListener('resize', checkViewport);
       setTimeout(function () {
         checkViewport(null);
       });
@@ -301,10 +301,10 @@ module.exports = exports.default;
 
 /***/ }),
 
-/***/ "../src/js/function/throttle.js":
-/*!**************************************!*\
-  !*** ../src/js/function/throttle.js ***!
-  \**************************************/
+/***/ "./src/js/function/throttle.js":
+/*!*************************************!*\
+  !*** ./src/js/function/throttle.js ***!
+  \*************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -318,7 +318,7 @@ exports["default"] = throttle;
 
 /**
  * @name        throttle
- * @namespace       sugar.js.function
+ * @namespace           js.function
  * @type      Function
  *
  * This utils function allows you to make sure that a function that will normally be called

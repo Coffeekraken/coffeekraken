@@ -26,8 +26,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @snippet     js
  * Sugar.js.url.queryStringToObject($1)
  *
- * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  * @see  	http://stackoverflow.com/questions/8648892/convert-url-parameters-to-a-javascript-object
+ * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function queryStringToObject(str) {
   str = (0, _ltrim.default)(str, '?');

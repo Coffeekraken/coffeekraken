@@ -3,7 +3,20 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = register;
+exports.define = define;
+Object.defineProperty(exports, "SWebComponent", {
+  enumerable: true,
+  get: function () {
+    return _SWebComponent.default;
+  }
+});
+Object.defineProperty(exports, "SLitHtmlWebComponent", {
+  enumerable: true,
+  get: function () {
+    return _SLitHtmlWebComponent.default;
+  }
+});
+exports.stack = void 0;
 
 var _SWebComponent = _interopRequireDefault(require("./SWebComponent"));
 
@@ -11,38 +24,45 @@ var _SLitHtmlWebComponent = _interopRequireDefault(require("./SLitHtmlWebCompone
 
 var _getHtmlClassFromTagName = _interopRequireDefault(require("../html/getHtmlClassFromTagName"));
 
+var _uncamelize = _interopRequireDefault(require("../string/uncamelize"));
+
+var _htmlTagToHtmlClassMap = _interopRequireDefault(require("../html/htmlTagToHtmlClassMap"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function register(name, cls, settings = {}) {
-  // check to get if the custom element extends a basic html one or not
-  const splitedName = name.split(':');
+const _SWebComponentStack = {};
+exports.stack = _SWebComponentStack;
+
+function define(name, cls, settings = {}) {
+  if (!name) throw new Error(`SWebComponent: You must define a name for your webcomponent by setting either a static "name" property on your class, of by passing a name as first parameter of the static "define" function...`);
+  cls.componentName = name;
   let extend = null;
 
-  if (splitedName.length === 2) {
-    extend = splitedName[0];
-    name = splitedName[1];
+  for (let key in _htmlTagToHtmlClassMap.default) {
+    if (cls.prototype instanceof _htmlTagToHtmlClassMap.default[key]) {
+      extend = key;
+      break;
+    }
   }
 
-  const HtmlClassToExtend = (0, _getHtmlClassFromTagName.default)(extend);
-  if (HtmlClassToExtend !== HTMLElement) settings.extends = HtmlClassToExtend;
-  let BaseClass;
+  const uncamelizedName = (0, _uncamelize.default)(name);
+  _SWebComponentStack[uncamelizedName] = {
+    name,
+    class: cls,
+    extends: extend,
+    settings
+  };
 
-  if (settings.litHtml) {
-    BaseClass = (0, _SLitHtmlWebComponent.default)(HtmlClassToExtend);
+  if (window.customElements) {
+    window.customElements.define(uncamelizedName, cls, {
+      extends: extend
+    });
+  } else if (document.registerElement) {
+    document.registerElement(uncamelizedName, {
+      prototype: cls.prototype,
+      extends: extend
+    });
   } else {
-    BaseClass = (0, _SWebComponent.default)(HtmlClassToExtend);
+    throw `Your browser does not support either document.registerElement or window.customElements.define webcomponents specification...`;
   }
-
-  setTimeout(() => {
-    console.log(BaseClass.coco);
-    console.log(BaseClass);
-    console.log(BaseClass.constructor);
-    console.log(BaseClass.constructor.name); // BaseClass.define(name, cls, settings);
-  }, 1000);
-  return BaseClass; // function generateClass() {
-  //   return cls extends BaseClass;
-  // }
-  // class MyWebComponent extends BaseClass {}
 }
-
-module.exports = exports.default;

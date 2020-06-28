@@ -4,6 +4,7 @@ import __toString from '../string/toString';
 import __isOfType from '../is/ofType';
 import __isPlainObject from '../is/plainObject';
 import __get from '../object/get';
+import __validateWithDefinitionObject from '../value/validateWithDefinitionObject';
 
 /**
  * @name            validateWithDefinitionObject
@@ -55,38 +56,19 @@ export default function validateWithDefinitionObject(
       return validateDefinitionObjectResult;
   }
 
-  const errorHead = `<bold><red><iCross/>  Definition Object Error</red></bold>\n`;
-
   // loop on the definition object properties
   for (let i = 0; i < Object.keys(definitionObj).length; i++) {
     const argName = Object.keys(definitionObj)[i];
     const argDefinition = definitionObj[argName];
     const value = __get(objectToCheck, argName);
 
-    // validate type
-    if (value !== undefined && argDefinition.type) {
-      // if (argName === 'pack') {
-      //   console.log(
-      //     'ZYPE',
-      //     //argDefinition,
-      //     value,
-      //     typeof value,
-      //     Array.isArray(value)
-      //   );
-      // }
-      const isOfTypeResult = __isOfType(value, argDefinition.type, true);
-      if (isOfTypeResult !== true) {
-        return `${argName}: ${isOfTypeResult}`;
-      }
-    }
-    // check required
-    if (argDefinition.required === true) {
-      if (value === null || value === undefined) {
-        return `${errorHead}The property "<yellow>${
-          _argPath.length ? _argPath.join('.') + '.' : ''
-        }${argName}</yellow>" is <green>required</green>...`;
-      }
-    }
+    const validationRes = __validateWithDefinitionObject(
+      value,
+      argDefinition,
+      argName
+    );
+
+    if (validationRes !== true) return validationRes;
 
     // check if is an extendsFn
     if (extendsFn) {
@@ -96,20 +78,6 @@ export default function validateWithDefinitionObject(
 
     // check if we have some "children" properties
     if (argDefinition.children) {
-      // if (Array.isArray(objectToCheck[argName])) {
-      //   for (let i = 0; i < objectToCheck[argName].length; i++) {
-      //     const valueToCheck = objectToCheck[argName][i];
-      //     if (!__isPlainObject(valueToCheck)) continue;
-      //     const childrenValidation = validateWithDefinitionObject(
-      //       valueToCheck,
-      //       argDefinition.children,
-      //       extendsFn,
-      //       validateDefinitionObject,
-      //       [..._argPath, argName]
-      //     );
-      //     if (childrenValidation !== true) return childrenValidation;
-      //   }
-      // } else {
       const childrenValidation = validateWithDefinitionObject(
         objectToCheck[argName] || {},
         argDefinition.children,
@@ -118,7 +86,6 @@ export default function validateWithDefinitionObject(
         [..._argPath, argName]
       );
       if (childrenValidation !== true) return childrenValidation;
-      // }
     }
   }
 

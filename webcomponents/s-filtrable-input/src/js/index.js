@@ -1,7 +1,19 @@
-import __register from '@coffeekraken/sugar/js/webcomponent/register';
+import {
+  define,
+  SLitHtmlWebComponent
+} from '@coffeekraken/sugar/js/webcomponent/register';
 
-class SFiltrableInputWebComponent extends __register('SFiltrableInput') {
-  static coco = 'hello world';
+class SFiltrableInputWebComponent extends SLitHtmlWebComponent(
+  HTMLInputElement
+) {
+  static props = {
+    items: {
+      type: 'Array<Object>',
+      required: true,
+      physical: true,
+      default: [{ name: 'hello' }]
+    }
+  };
 
   /**
    * @name          constructor
@@ -14,14 +26,7 @@ class SFiltrableInputWebComponent extends __register('SFiltrableInput') {
    */
   constructor(settings = {}) {
     super(settings);
-    console.log('COCO');
   }
 }
 
-// __register('input:SFiltrableInput', SFiltrableInputWebComponent);
-
-// console.log(SFiltrableInputWebComponent);
-
-// __SWebComponent.define('input:sFiltrableInput', {
-//   name: 'cocococococococ'
-// });
+define('SFiltrableInput', SFiltrableInputWebComponent, {});

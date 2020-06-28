@@ -23,5 +23,7 @@ export default function uncamelize(text, separator = '-') {
   });
 
   // Remove first separator (to avoid _hello_world name)
-  return res.replace('/^' + separator + '/', '').trim();
+  if (res.slice(0, 1) === separator) res = res.slice(1);
+
+  return res;
 }

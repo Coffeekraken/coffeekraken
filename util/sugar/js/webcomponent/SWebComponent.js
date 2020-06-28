@@ -21,6 +21,10 @@ var _paramCase = _interopRequireDefault(require("../string/paramCase"));
 
 var _uncamelize = _interopRequireDefault(require("../string/uncamelize"));
 
+var _validateWithDefinitionObject = _interopRequireDefault(require("../value/validateWithDefinitionObject"));
+
+var _register = require("./register");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -90,80 +94,63 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function SWebComponent(extend = HTMLElement) {
-  var _class, _temp;
+  var _temp;
 
-  return _temp = _class = /*#__PURE__*/function (_extend) {
+  return _temp = /*#__PURE__*/function (_extend) {
     _inherits(SWebComponent, _extend);
 
     var _super = _createSuper(SWebComponent);
 
     _createClass(SWebComponent, null, [{
-      key: "define",
+      key: "observedAttributes",
 
       /**
-       * @name          _componentsStack
+       * @name          _promise
+       * @type          SPromise
+       * @private
+       *
+       * Store the SPromise instance used to "dispatch" some events
+       * that you can subscribe using the "on" exposed method
+       *
+       * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+
+      /**
+       * @name          _props
        * @type          Object
        * @private
-       * @static
        *
-       * Store all the registered components using the "define" static SWebComponent method
+       * Store all the computed properties setted using the "setProp" method or through the
+       * attributes
        *
        * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
 
       /**
-       * @name          define
-       * @type          Function
-       * @static
+       * @name          _settings
+       * @type          Object
+       * @private
        *
-       * This method can be used to define your component the same way
-       * as the "customElements.define" function but with some additional
-       * features like passing default props, etc...
-       *
-       * @param       {SWebComponent}     cls       Your webcomponent class
-       * @param       {Object}        [defaultProps={}]     Some default props that you want for this webcomponent
-       * @param       {String}        [name=ull        Your component name
+       * Store all the webcomponent settings like "physicalProps", "requiredProps", etc...
        *
        * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      value: function define(name, cls, settings = {}) {
-        // static define(cls, defaultProps = {}, name = null) {
-        name = name;
-        let extend = settings.extends;
-        if (!name) throw new Error(`SWebComponent: You must define a name for your webcomponent by setting either a static "name" property on your class, of by passing a name as first parameter of the static "define" function...`);
-        const uncamelizedName = (0, _uncamelize.default)(name);
-        SWebComponent._componentsStack[uncamelizedName] = {
-          name,
-          class: cls,
-          settings
-        };
-
-        if (window.customElements) {
-          window.customElements.define(uncamelizedName, cls, {
-            extends: extend
-          });
-        } else if (document.registerElement) {
-          document.registerElement(uncamelizedName, {
-            prototype: cls.prototype,
-            extends: extend
-          });
-        } else {
-          throw `Your browser does not support either document.registerElement or window.customElements.define webcomponents specification...`;
-        }
-
-        console.log(SWebComponent._componentsStack);
+      get: function () {
+        console.log('thguthught', this.props);
+        return Object.keys(this.props);
       }
+      /**
+       * @name          constructor
+       * @type          Function
+       * @constructor
+       *
+       * Constructor
+       *
+       * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+
     }]);
 
-    /**
-     * @name          constructor
-     * @type          Function
-     * @constructor
-     *
-     * Constructor
-     *
-     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
     function SWebComponent(settings = {}) {
       var _this;
 
@@ -182,13 +169,23 @@ function SWebComponent(extend = HTMLElement) {
 
       _this._settings = (0, _deepMerge.default)({
         name: null,
-        defaultProps: _this.constructor.defaultProps || {},
-        requiredProps: _this.constructor.requiredProps || [],
-        physicalProps: _this.constructor.physicalProps || []
-      }, settings); // create the SPromise instance
+        props: _this.constructor.props || {}
+      }, _register.stack[(0, _uncamelize.default)(_this.constructor.componentName)].settings || {}, settings); // create the SPromise instance
 
       _this._promise = new _SPromise.default(() => {}).start();
-      console.log(_this._settings); // launch the mounting process
+
+      for (const key in _this._settings.props) {
+        _this._props[key] = { ..._this._settings.props[key],
+          valuesStack: [],
+          value: _this._settings.props[key].default,
+          previousValue: undefined
+        };
+
+        if (_this._props[key].value !== undefined) {
+          _this._props[key].valuesStack.push(_this._props[key].value);
+        }
+      } // launch the mounting process
+
 
       setTimeout(_this._mount.bind(_assertThisInitialized(_this)));
       return _this;
@@ -211,12 +208,9 @@ function SWebComponent(extend = HTMLElement) {
         this._promise.trigger('mounting'); // wait until the component match the mountDependencies and mountWhen status
 
 
-        await this._mountDependencies(); // init the default props
+        await this._mountDependencies(); // check props definition
 
-        this._handleDefaultProps(); // check the required props
-
-
-        this._checkRequiredProps(); // handle physical props
+        this._checkPropsDefinition(); // handle physical props
 
 
         this._handlePhysicalProps();
@@ -342,17 +336,16 @@ function SWebComponent(extend = HTMLElement) {
       value: function attributeChangedCallback(attrName, oldVal, newVal) {
         if (this._settedAttributesStack[attrName]) return; // try to get the property
 
-        const currentPropObj = this._props[attrName];
+        const propObj = this._props[attrName];
         const previousValue = (0, _parse.default)(oldVal);
         const newValue = (0, _parse.default)(newVal); // save the old value and the new value
 
-        const newPropObj = {
-          value: newValue,
-          previousValue,
-          valuesStack: currentPropObj ? [...currentPropObj.valuesStack, newValue] : [newValue]
-        }; // save the prop
-
-        this._props[(0, _camelize.default)(attrName)] = newPropObj; // trigger a "prop" event
+        propObj.value = newValue;
+        propObj.previousValue = previousValue;
+        propObj.valuesStack.push(newValue);
+        console.log(propObj); // save the prop
+        // this._props[__camelize(attrName)] = newPropObj;
+        // trigger a "prop" event
 
         this._triggerPropsEvents((0, _camelize.default)(attrName));
       }
@@ -376,22 +369,13 @@ function SWebComponent(extend = HTMLElement) {
           return this._props[_prop] ? this._props[_prop].value : undefined;
         }
 
-        if (!this._props[_prop]) {
-          this._props[_prop] = {
-            value,
-            previousValue: null,
-            valuesStack: [value]
-          };
-        } else {
-          this._props[_prop] = {
-            value,
-            previousValue: this._props[_prop].value,
-            valuesStack: [...this._props[_prop].valuesStack, value]
-          };
-        } // handle physical props
+        this._props[_prop].previousValue = this._props[_prop].value;
+        this._props[_prop].value = value;
+
+        this._props[_prop].valuesStack.push(value); // handle physical props
 
 
-        this._handlePhysicalProps(); // trigger a "prop" event
+        this._handlePhysicalProps(_prop); // trigger a "prop" event
 
 
         this._triggerPropsEvents(_prop);
@@ -438,12 +422,11 @@ function SWebComponent(extend = HTMLElement) {
 
     }, {
       key: "_handlePhysicalProps",
-      value: function _handlePhysicalProps() {
-        // loop on each required props
-        console.log('PH', this._settings);
+      value: function _handlePhysicalProps(...props) {
+        if (!props || props.length === 0) props = Object.keys(this._props); // loop on each required props
 
-        this._settings.physicalProps.forEach(prop => {
-          const value = this._props[prop] && this._props[prop].value !== undefined ? this._props[prop].value : undefined;
+        props.forEach(prop => {
+          const value = this._props[prop].value;
 
           if (!this.getAttribute(prop)) {
             // set the attribute with the value
@@ -455,7 +438,6 @@ function SWebComponent(extend = HTMLElement) {
             const currentValueStringified = (0, _toString.default)(value);
 
             if (currentAttributeValue !== currentValueStringified) {
-              console.log('UPDATED', prop);
               this._settedAttributesStack[prop] = true;
               this.setAttribute(prop, currentValueStringified);
               delete this._settedAttributesStack[prop];
@@ -464,56 +446,32 @@ function SWebComponent(extend = HTMLElement) {
         });
       }
       /**
-       * @name        _handleDefaultProps
+       * @name        _checkPropsDefinition
        * @type        Function
        * @private
        *
-       * This method check for props that are not been setted through attributes
-       * and init them using the default props passed in the settings
+       * This method simply check a property value depending on his definition such as type, required, etc...
+       * If you pass no props to check, it will check all the registered ones.
+       *
+       * @param       {Array<String>|String}        ...props        The properties to check
        *
        * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
 
     }, {
-      key: "_handleDefaultProps",
-      value: function _handleDefaultProps() {
-        // loop on each required props
-        Object.keys(this._settings.defaultProps).forEach(prop => {
-          if (this._props[prop] === undefined || this._props[prop].value === undefined) {
-            if (this._props[prop] === undefined) this._props[prop] = {
-              value: this._settings.defaultProps[prop],
-              previousValue: null,
-              valuesStack: [this._settings.defaultProps[prop]]
-            };
-          }
-        });
-      }
-      /**
-       * @name        _checkRequiredProps
-       * @type        Function
-       * @private
-       *
-       * This method simply check if the required props specified in the settings
-       * are passed
-       *
-       * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-
-    }, {
-      key: "_checkRequiredProps",
-      value: function _checkRequiredProps() {
-        // loop on each required props
-        this._settings.requiredProps.forEach(prop => {
-          // check if the prop is missing
-          if (this._props[prop] === undefined || this._props[prop].value === undefined) {
-            throw new Error(`The property named "${prop}" on the "${this.constructor.name}" webcomponent is required but missing...`);
-          }
+      key: "_checkPropsDefinition",
+      value: function _checkPropsDefinition(...props) {
+        if (!props || props.length === 0) props = Object.keys(this._props);
+        props.forEach(prop => {
+          const propObj = this._props[prop];
+          const validationResult = (0, _validateWithDefinitionObject.default)(propObj.value, propObj, `${this.constructor.name}.props.${prop}`);
+          if (validationResult !== true) throw new Error(validationResult);
         });
       }
     }]);
 
     return SWebComponent;
-  }(extend), _defineProperty(_class, "_componentsStack", {}), _temp;
+  }(extend), _temp;
 }
 
 module.exports = exports.default;

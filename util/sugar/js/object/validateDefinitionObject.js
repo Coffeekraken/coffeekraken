@@ -53,14 +53,8 @@ function validateDefinitionObject(definitionObj, extendsFn = null) {
     const argName = argNames[i];
     const argDefinition = definitionObj[argName]; // check the type
 
-    const supportedTypes = ['string', 'number', 'object', 'array', 'boolean'];
     if (argDefinition.type === undefined) return `An argument definiion object has to contain a "type" property which is not the case for your argument "${argName}"...`;
-    if (typeof argDefinition.type !== 'string') return `The "type" property of an argument definition object has to be a String. You've passed "${(0, _toString.default)(argDefinition.type)}" which is a "${typeof argDefinition.type}" for your argument "${argName}"...`; // if (supportedTypes.indexOf(argDefinition.type.toLowerCase()) === -1)
-    //   return `The "type" property of an argument definition object has to be one of these values "${supportedTypes.join(
-    //     ','
-    //   )}". You've passed "${
-    //     argDefinition.type
-    //   }" for your argument "${argName}"...`;
+    if (typeof argDefinition.type !== 'string') return `The "type" property of an argument definition object has to be a String. You've passed "${(0, _toString.default)(argDefinition.type)}" which is a "${typeof argDefinition.type}" for your argument "${argName}"...`;
 
     if (argDefinition.required !== undefined) {
       if (typeof argDefinition.required !== 'boolean') {

@@ -1377,6 +1377,8 @@ exports.default = getHtmlClassFromTagName;
 
 var _upperFirst = _interopRequireDefault(__webpack_require__(/*! ../string/upperFirst */ "../../util/sugar/js/string/upperFirst.js"));
 
+var _htmlTagToHtmlClassMap = _interopRequireDefault(__webpack_require__(/*! ./htmlTagToHtmlClassMap */ "../../util/sugar/js/html/htmlTagToHtmlClassMap.js"));
+
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {
     default: obj
@@ -1398,7 +1400,7 @@ function _interopRequireDefault(obj) {
  * getHtmlClassFromTagName('a'); // => HTMLAnchorElement
  *
  * @since       2.0.0
- *
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
 
@@ -1406,78 +1408,107 @@ function getHtmlClassFromTagName(tagName) {
   if (!tagName) return HTMLElement;
   var tagNameUpperFirst = (0, _upperFirst.default)(tagName);
   if (window["HTML".concat(tagNameUpperFirst, "Element")]) return window["HTML".concat(tagNameUpperFirst, "Element")];
-  if (tagName === 'a') return HTMLAnchorElement;
-  if (tagName === 'audio') return HTMLAudioElement;
-  if (tagName === 'body') return HTMLBodyElement;
-  if (tagName === 'button') return HTMLButtonElement;
-  if (tagName === 'canvas') return HTMLCanvasElement;
-  if (tagName === 'dl') return HTMLDListElement;
-  if (tagName === 'data') return HTMLDataElement;
-  if (tagName === 'datalist') return HTMLDataListElement;
-  if (tagName === 'details') return HTMLDetailsElement;
-  if (tagName === 'dialog') return HTMLDialogElement;
-  if (tagName === 'dir') return HTMLDirectoryElement;
-  if (tagName === 'div') return HTMLDivElement;
-  if (tagName === 'html') return HTMLDocument;
-  if (tagName === 'embed') return HTMLEmbedElement;
-  if (tagName === 'fieldset') return HTMLFieldSetElement;
-  if (tagName === 'font') return HTMLFontElement;
-  if (tagName === 'form') return HTMLFormElement;
-  if (tagName === 'frame') return HTMLFrameElement;
-  if (tagName === 'head') return HTMLHeadElement;
-  if (tagName === 'html') return HTMLHtmlElement;
-  if (tagName === 'iframe') return HTMLIFrameElement;
-  if (tagName === 'img') return HTMLImageElement;
-  if (tagName === 'input') return HTMLInputElement;
-  if (tagName === 'label') return HTMLLabelElement;
-  if (tagName === 'legend') return HTMLLegendElement;
-  if (tagName === 'link') return HTMLLinkElement;
-  if (tagName === 'map') return HTMLMapElement;
-  if (tagName === 'marquee') return HTMLMarqueeElement;
-  if (tagName === 'media') return HTMLMediaElement;
-  if (tagName === 'menu') return HTMLMenuElement;
-  if (tagName === 'meta') return HTMLMetaElement;
-  if (tagName === 'meter') return HTMLMeterElement;
-  if (tagName === 'del') return HTMLModElement;
-  if (tagName === 'ins') return HTMLModElement;
-  if (tagName === 'dol') return HTMLOListElement;
-  if (tagName === 'object') return HTMLObjectElement;
-  if (tagName === 'optgroup') return HTMLOptGroupElement;
-  if (tagName === 'option') return HTMLOptionElement;
-  if (tagName === 'output') return HTMLOutputElement;
-  if (tagName === 'p') return HTMLParagraphElement;
-  if (tagName === 'param') return HTMLParamElement;
-  if (tagName === 'picture') return HTMLPictureElement;
-  if (tagName === 'pre') return HTMLPreElement;
-  if (tagName === 'progress') return HTMLProgressElement;
-  if (tagName === 'quote') return HTMLQuoteElement;
-  if (tagName === 'script') return HTMLScriptElement;
-  if (tagName === 'select') return HTMLSelectElement;
-  if (tagName === 'slot') return HTMLSlotElement;
-  if (tagName === 'source') return HTMLSourceElement;
-  if (tagName === 'span') return HTMLSpanElement;
-  if (tagName === 'style') return HTMLStyleElement;
-  if (tagName === 'td') return HTMLTableCellElement;
-  if (tagName === 'th') return HTMLTableHeaderCellElement;
-  if (tagName === 'col') return HTMLTableColElement;
-  if (tagName === 'colgroup') return HTMLTableColElement;
-  if (tagName === 'table') return HTMLTableElement;
-  if (tagName === 'tr') return HTMLTableRowElement;
-  if (tagName === 'tfoot') return HTMLTableSectionElement;
-  if (tagName === 'thead') return HTMLTableSectionElement;
-  if (tagName === 'tbody') return HTMLTableSectionElement;
-  if (tagName === 'template') return HTMLTemplateElement;
-  if (tagName === 'textarea') return HTMLTextAreaElement;
-  if (tagName === 'time') return HTMLTimeElement;
-  if (tagName === 'title') return HTMLTitleElement;
-  if (tagName === 'track') return HTMLTrackElement;
-  if (tagName === 'ul') return HTMLUListElement;
-  if (tagName === 'video') return HTMLVideoElement;
-  if (tagName === 'area') return HTMLAreaElement;
+  if (_htmlTagToHtmlClassMap.default[tagName]) return _htmlTagToHtmlClassMap.default[tagName];
   return HTMLElement;
 }
 
 module.exports = exports.default;
+
+/***/ }),
+
+/***/ "../../util/sugar/js/html/htmlTagToHtmlClassMap.js":
+/*!***********************************************************************************************************!*\
+  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/html/htmlTagToHtmlClassMap.js ***!
+  \***********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * @name            HtmlTagToHtmlClassMap
+ * @namespace       js.html
+ * @type            Object
+ *
+ * This export an object mapping the HTML tag name to his corresponding HTML class (object not css class)
+ *
+ * @example       js
+ * import HtmlTagToHtmlClassMap from '@coffeekraken/sugar/js/html/HtmlTagToHtmlClassMap';
+ *
+ * @since     2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+module.exports = {
+  a: HTMLAnchorElement,
+  audio: HTMLAudioElement,
+  body: HTMLBodyElement,
+  button: HTMLButtonElement,
+  canvas: HTMLCanvasElement,
+  dl: HTMLDListElement,
+  data: HTMLDataElement,
+  datalist: HTMLDataListElement,
+  details: HTMLDetailsElement,
+  dialog: HTMLDialogElement,
+  dir: HTMLDirectoryElement,
+  div: HTMLDivElement,
+  html: HTMLDocument,
+  embed: HTMLEmbedElement,
+  fieldset: HTMLFieldSetElement,
+  font: HTMLFontElement,
+  form: HTMLFormElement,
+  frame: HTMLFrameElement,
+  head: HTMLHeadElement,
+  html: HTMLHtmlElement,
+  iframe: HTMLIFrameElement,
+  img: HTMLImageElement,
+  input: HTMLInputElement,
+  label: HTMLLabelElement,
+  legend: HTMLLegendElement,
+  link: HTMLLinkElement,
+  map: HTMLMapElement,
+  marquee: HTMLMarqueeElement,
+  media: HTMLMediaElement,
+  menu: HTMLMenuElement,
+  meta: HTMLMetaElement,
+  meter: HTMLMeterElement,
+  del: HTMLModElement,
+  ins: HTMLModElement,
+  dol: HTMLOListElement,
+  object: HTMLObjectElement,
+  optgroup: HTMLOptGroupElement,
+  option: HTMLOptionElement,
+  output: HTMLOutputElement,
+  p: HTMLParagraphElement,
+  param: HTMLParamElement,
+  picture: HTMLPictureElement,
+  pre: HTMLPreElement,
+  progress: HTMLProgressElement,
+  quote: HTMLQuoteElement,
+  script: HTMLScriptElement,
+  select: HTMLSelectElement,
+  slot: HTMLSlotElement,
+  source: HTMLSourceElement,
+  span: HTMLSpanElement,
+  style: HTMLStyleElement,
+  td: HTMLTableCellElement,
+  th: HTMLTableCellElement,
+  col: HTMLTableColElement,
+  colgroup: HTMLTableColElement,
+  table: HTMLTableElement,
+  tr: HTMLTableRowElement,
+  tfoot: HTMLTableSectionElement,
+  thead: HTMLTableSectionElement,
+  tbody: HTMLTableSectionElement,
+  template: HTMLTemplateElement,
+  textarea: HTMLTextAreaElement,
+  time: HTMLTimeElement,
+  title: HTMLTitleElement,
+  track: HTMLTrackElement,
+  ul: HTMLUListElement,
+  video: HTMLVideoElement,
+  area: HTMLAreaElement
+};
 
 /***/ }),
 
@@ -1563,6 +1594,57 @@ module.exports = exports.default;
 
 /***/ }),
 
+/***/ "../../util/sugar/js/is/class.js":
+/*!*****************************************************************************************!*\
+  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/is/class.js ***!
+  \*****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = cls;
+
+var __isClass = __webpack_require__(/*! is-class */ "../../util/sugar/node_modules/is-class/is-class.js");
+/**
+ * @name                      class
+ * @namespace           js.is
+ * @type                      Function
+ *
+ * Check if the passed variable (or array of variables) is/are plain variable(s)
+ *
+ * @param         {Mixed|Array}            variable                  The variable(s) to check
+ * @return        {Boolean}                                         true if is class(es), false if not
+ *
+ * @example           js
+ * import isClass = from '@coffeekraken/sugar/js/is/class';
+ * isClass({ hello: 'world'}); // => false
+ * const myCoolClass = class Coco{};
+ * isClass(myCoolClass); // => true
+ *
+ * @see       https://www.npmjs.com/package/is-class
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+
+function cls(cls) {
+  if (!Array.isArray(cls)) cls = [cls];
+
+  for (var i = 0; i < cls.length; i++) {
+    if (!__isClass(cls[i])) return false;
+  }
+
+  return true;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
 /***/ "../../util/sugar/js/is/function.js":
 /*!********************************************************************************************!*\
   !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/is/function.js ***!
@@ -1598,6 +1680,48 @@ exports.default = isFunction;
 
 function isFunction(value) {
   return value && {}.toString.call(value) === '[object Function]';
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "../../util/sugar/js/is/integer.js":
+/*!*******************************************************************************************!*\
+  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/is/integer.js ***!
+  \*******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = isInteger;
+/**
+ * @name        isInteger
+ * @namespace           js.is
+ * @type      Function
+ *
+ * Check if the passed value is an integer
+ *
+ * @param 		{Mixed} 		value 		The value to check
+ * @return 		{Boolean} 					The check result
+ *
+ * @example 	js
+ * import isInteger from '@coffeekraken/sugar/js/is/integer';
+ * isInteger(10) => true
+ * isInteger('hello') => false
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+function isInteger(data) {
+  return !isNaN(data) && function (x) {
+    return (x | 0) === x;
+  }(parseFloat(data));
 }
 
 module.exports = exports.default;
@@ -1727,6 +1851,164 @@ exports.default = isObject;
 
 function isObject(value) {
   return value && typeof value === 'object' && value.constructor === Object;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "../../util/sugar/js/is/ofType.js":
+/*!******************************************************************************************!*\
+  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/is/ofType.js ***!
+  \******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = ofType;
+
+var _argumentTypeDefinitionString = _interopRequireDefault(__webpack_require__(/*! ../parse/argumentTypeDefinitionString */ "../../util/sugar/js/parse/argumentTypeDefinitionString.js"));
+
+var _toString = _interopRequireDefault(__webpack_require__(/*! ../string/toString */ "../../util/sugar/js/string/toString.js"));
+
+var _class = _interopRequireDefault(__webpack_require__(/*! ./class */ "../../util/sugar/js/is/class.js"));
+
+var _integer = _interopRequireDefault(__webpack_require__(/*! ./integer */ "../../util/sugar/js/is/integer.js"));
+
+var _upperFirst = _interopRequireDefault(__webpack_require__(/*! ../string/upperFirst */ "../../util/sugar/js/string/upperFirst.js"));
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {
+    default: obj
+  };
+}
+/**
+ * @name              ofType
+ * @namespace           js.is
+ * @type              Function
+ *
+ * This function take the value to check and an argument type definition string like "String", "Array<String>", etc... and return true or false depending
+ * if the value pass the test or not...
+ *
+ * @param       {Mixed}        value          The value to check
+ * @param       {String}       argTypeDefinition      The argument type definition string to use for the test
+ * @param       {Boolean}       [returnError=false]       Specify if you want the error string to be returned  in place of the simply false boolean
+ * @return      {Boolean}                     true if the value pass the test, false if not
+ *
+ * @example       js
+ * import isOfType from '@coffeekraken/sugar/js/is/ofType';
+ * ifOfType(true, 'Boolean'); // => true
+ * isOfType(12, 'String|Number'); // => true
+ * isOfType(['hello',true], 'Array<String>'); // => false
+ * isOfType(['hello',true], 'Array<String|Boolean>'); // => true
+ *
+ * @since       2.0.0
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+
+function ofType(value, argTypeDefinition) {
+  var returnError = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+  var definitionArray = argTypeDefinition; // parsing the argument definition string
+
+  if (typeof argTypeDefinition === 'string') {
+    definitionArray = (0, _argumentTypeDefinitionString.default)(argTypeDefinition);
+  }
+
+  var error = '';
+
+  var _loop = function _loop(i) {
+    var definitionObj = definitionArray[i]; // check array
+
+    if (definitionObj.type === 'array') {
+      // make sure the value is an array
+      if (Array.isArray(value) && !definitionObj.of) return {
+        v: true
+      };else error = "Regarding to the argument definition \"<yellow>".concat(argTypeDefinition, "</yellow>\", the passed value \"<cyan>").concat((0, _toString.default)(value), "</cyan>\" of type \"<magenta>").concat(typeof value, "</magenta>\" has to be an <green>Array</green>...");
+    } // check object
+
+
+    if (definitionObj.type === 'object') {
+      if (typeof value === 'object' && !definitionObj.of) return {
+        v: true
+      };else error = "Regarding to the argument definition \"<yellow>".concat(argTypeDefinition, "</yellow>\", the passed value \"<cyan>").concat((0, _toString.default)(value), "</cyan>\" of type \"<magenta>").concat(typeof value, "</magenta>\" has to be an <green>Object</green>...");
+    } // check if need to check the childs
+
+
+    if (definitionObj.of && definitionObj.of.length) {
+      if (definitionObj.type === 'array' || definitionObj.type === 'object') {
+        var loopOn = Array.isArray(value) ? [...value.keys()] : Object.keys(value);
+        var checkValuesResult = true;
+        loopOn.forEach(valueIndex => {
+          if (!checkValuesResult) return;
+          var valueToCheck = value[valueIndex];
+
+          if (!ofType(valueToCheck, definitionObj.of, false)) {
+            checkValuesResult = false;
+            var ofTypesArray = [];
+            definitionObj.of.forEach(o => {
+              ofTypesArray.push(o.type);
+            });
+            error = "Regarding to the argument definition \"<yellow>".concat(argTypeDefinition, "</yellow>\", the passed value \"<yellow>").concat((0, _toString.default)(value), "</yellow>\" of type \"<magenta>").concat(typeof value, "</magenta>\" has to contain only \"<green>").concat(ofTypesArray.join(','), "</green>\"...");
+          }
+        }); // if one of the values does not correspond to the definition object, return false
+
+        if (!checkValuesResult) {
+          return {
+            v: returnError ? error || false : false
+          };
+        }
+      }
+    } // check "class"
+
+
+    if (definitionObj.type === 'class') {
+      if ((0, _class.default)(value)) return {
+        v: true
+      };else error = "Regarding to the argument definition \"<yellow>".concat(argTypeDefinition, "</yellow>\", the passed value \"<cyan>").concat((0, _toString.default)(value), "</cyan>\" of type \"<magenta>").concat(typeof value, "</magenta>\" has to be a <green>Class</green>...");
+    } // check if is an integer
+
+
+    if (definitionObj.type === 'int' || definitionObj.type === 'integer') {
+      if ((0, _integer.default)(value)) return {
+        v: true
+      };
+      error = "Regarding to the argument definition \"<yellow>".concat(argTypeDefinition, "</yellow>\", the passed value \"<cyan>").concat((0, _toString.default)(value), "</cyan>\" of type \"<magenta>").concat(typeof value, "</magenta>\" has to be a <green>Integer</green>...");
+    } // check default types
+
+
+    if (['boolean', 'number', 'string', 'bigint', 'symbol', 'function'].indexOf(definitionObj.type) !== -1 && typeof value === definitionObj.type) {
+      return {
+        v: true
+      };
+    } else {
+      error = "Regarding to the argument definition \"<yellow>".concat(argTypeDefinition, "</yellow>\", the passed value \"<cyan>").concat((0, _toString.default)(value), "</cyan>\" of type \"<magenta>").concat(typeof value, "</magenta>\" has to be a <green>").concat((0, _upperFirst.default)(definitionObj.type), "</green>...");
+    } // check for "custom" types
+
+
+    if ((0, _class.default)(value) && value.name) {
+      if (definitionObj.type === value.name.toLowerCase()) return {
+        v: true
+      };else error = "Regarding to the argument definition \"<yellow>".concat(argTypeDefinition, "</yellow>\", the passed value \"<cyan>").concat((0, _toString.default)(value), "</cyan>\" of type \"<magenta>").concat(typeof value, "</magenta>\" has to be a <green>").concat((0, _upperFirst.default)(definitionObj.type), "</green>...");
+    } else if (value && value.constructor && value.constructor.name) {
+      if (definitionObj.type === value.constructor.name.toLowerCase()) return {
+        v: true
+      };else error = "Regarding to the argument definition \"<yellow>".concat(argTypeDefinition, "</yellow>\", the passed value \"<cyan>").concat((0, _toString.default)(value), "</cyan>\" of type \"<magenta>").concat(typeof value, "</magenta>\" has to be a <green>").concat((0, _upperFirst.default)(definitionObj.type), "</green>...");
+    }
+  };
+
+  for (var i = 0; i < definitionArray.length; i++) {
+    var _ret = _loop(i);
+
+    if (typeof _ret === "object") return _ret.v;
+  }
+
+  return returnError ? error || false : false;
 }
 
 module.exports = exports.default;
@@ -1933,6 +2215,104 @@ function deepMerge() {
   }
 
   return currentObj;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "../../util/sugar/js/parse/argumentTypeDefinitionString.js":
+/*!*******************************************************************************************************************!*\
+  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/parse/argumentTypeDefinitionString.js ***!
+  \*******************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = argumentTypeDefinitionString;
+/**
+ * @name              argumentTypeDefinitionString
+ * @namespace           js.parse
+ * @type              Function
+ *
+ * Thia function take an argument type definition string like "String", "Array<String>", "Array|String", etc... and return an object that represent this.
+ *
+ * @param       {String}        argTypeString         The argument type definition string
+ * @return      {Object}                              The argument type definition string in object format
+ *
+ * @example       js
+ * import argumentTypeDefinitionString from '@coffeekraken/sugar/js/parse/argumentTypeDefinitionString';
+ * argumentTypeDefinitionString('Array'); // => [{ type: 'array', of: null }] }
+ * argumentTypeDefinitionString('Array<String>'); // => [{ type: 'array', of: [{ type: 'string' }] }]
+ *
+ * @since       2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+function argumentTypeDefinitionString(argTypeString) {
+  // split the string by |
+  var inDepth = 0;
+  var currentPart = '',
+      typesArray = [];
+  argTypeString.split('').forEach(character => {
+    if (character === '>') {
+      if (inDepth <= 0) {
+        throw new Error("It seems that your argument type definition string \"".concat(argTypeString, "\" is invalid..."));
+      }
+
+      inDepth--;
+      currentPart += character;
+      return;
+    }
+
+    if (character === '<') {
+      inDepth++;
+      currentPart += character;
+      return;
+    }
+
+    if (character === '|') {
+      if (inDepth > 0) {
+        currentPart += character;
+        return;
+      }
+
+      typesArray.push(currentPart);
+      currentPart = '';
+      return;
+    }
+
+    currentPart += character;
+  });
+  typesArray.push(currentPart); // init the return array
+
+  var returnArray = []; // loop on each types array
+
+  typesArray.forEach(typeDefinitionString => {
+    // split the string by <
+    var parts = typeDefinitionString.split('<'); // get the "type"
+
+    var type = parts[0].toLowerCase(); // process the "of" part if exist
+
+    var ofArray = null;
+
+    if (parts[1]) {
+      var ofPart = parts[1].slice(0, -1);
+      ofArray = argumentTypeDefinitionString(ofPart);
+    } // build the type object and add it the the returnArray
+
+
+    returnArray.push({
+      type,
+      of: ofArray
+    });
+  });
+  return returnArray;
 }
 
 module.exports = exports.default;
@@ -3655,7 +4035,8 @@ function uncamelize(text) {
     return separator + letter.toLowerCase();
   }); // Remove first separator (to avoid _hello_world name)
 
-  return res.replace('/^' + separator + '/', '').trim();
+  if (res.slice(0, 1) === separator) res = res.slice(1);
+  return res;
 }
 
 module.exports = exports.default;
@@ -3815,6 +4196,80 @@ function convert(from) {
       throw new Error("You try to convert \"".concat(from, "\" to \"").concat(to, "\" but this format does not exist... The valids formats are \"ms,s,m,h,d,w,month,y\"..."));
       break;
   }
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "../../util/sugar/js/value/validateWithDefinitionObject.js":
+/*!*******************************************************************************************************************!*\
+  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/value/validateWithDefinitionObject.js ***!
+  \*******************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = validateWithDefinitionObject;
+
+var _ofType = _interopRequireDefault(__webpack_require__(/*! ../is/ofType */ "../../util/sugar/js/is/ofType.js"));
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {
+    default: obj
+  };
+}
+/**
+ * @name          validateWithDefinitionObject
+ * @namespace     js.value
+ * @type          Function
+ *
+ * This function take a value and check if it correspond to the passed definition object.
+ * If the value pass the test, the function will return true, otherwise it will return
+ * a string that describe the issue.
+ *
+ * @param         {Mixed}       value       The value to check
+ * @param         {Object}      definitionObj     THe definition object
+ * @param         {String}      [name=null]     A name for the check. Usefull for debugging purpose
+ * @return         {Boolean|String}           true if the check is passed, a string describing the issue if not
+ *
+ * @example       js
+ * import validateWithDefinitionObject from '@coffeekraken/sugar/js/value/validateWithDefinitionObject';
+ * validateWithDefinitionObject(true, {
+ *    type: 'Boolean|String',
+ *    required: true
+ * }); // => true
+ *
+ * @since     2.0.0
+ * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+
+function validateWithDefinitionObject(value, definitionObj) {
+  var name = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+
+  // validate type
+  if (value !== undefined && definitionObj.type) {
+    var isOfTypeResult = (0, _ofType.default)(value, definitionObj.type, true);
+
+    if (isOfTypeResult !== true) {
+      return "".concat(name, ": ").concat(isOfTypeResult);
+    }
+  } // check required
+
+
+  if (definitionObj.required === true) {
+    if (value === null || value === undefined) {
+      return "The property \"<yellow>".concat(name, "</yellow>\" is <green>required</green>...");
+    }
+  }
+
+  return true;
 }
 
 module.exports = exports.default;
@@ -4072,6 +4527,12 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty2(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty2(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -4092,6 +4553,10 @@ var _camelize = _interopRequireDefault(__webpack_require__(/*! ../string/cameliz
 var _paramCase = _interopRequireDefault(__webpack_require__(/*! ../string/paramCase */ "../../util/sugar/js/string/paramCase.js"));
 
 var _uncamelize = _interopRequireDefault(__webpack_require__(/*! ../string/uncamelize */ "../../util/sugar/js/string/uncamelize.js"));
+
+var _validateWithDefinitionObject = _interopRequireDefault(__webpack_require__(/*! ../value/validateWithDefinitionObject */ "../../util/sugar/js/value/validateWithDefinitionObject.js"));
+
+var _register = __webpack_require__(/*! ./register */ "../../util/sugar/js/webcomponent/register.js");
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {
@@ -4263,81 +4728,62 @@ function _defineProperty(obj, key, value) {
 function SWebComponent() {
   var extend = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : HTMLElement;
 
-  var _class, _temp;
+  var _temp;
 
-  return _temp = _class = /*#__PURE__*/function (_extend) {
+  return _temp = /*#__PURE__*/function (_extend) {
     _inherits(SWebComponent, _extend);
 
     var _super = _createSuper(SWebComponent);
 
     _createClass(SWebComponent, null, [{
-      key: "define",
+      key: "observedAttributes",
 
       /**
-       * @name          _componentsStack
+       * @name          _promise
+       * @type          SPromise
+       * @private
+       *
+       * Store the SPromise instance used to "dispatch" some events
+       * that you can subscribe using the "on" exposed method
+       *
+       * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+
+      /**
+       * @name          _props
        * @type          Object
        * @private
-       * @static
        *
-       * Store all the registered components using the "define" static SWebComponent method
+       * Store all the computed properties setted using the "setProp" method or through the
+       * attributes
        *
        * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
 
       /**
-       * @name          define
-       * @type          Function
-       * @static
+       * @name          _settings
+       * @type          Object
+       * @private
        *
-       * This method can be used to define your component the same way
-       * as the "customElements.define" function but with some additional
-       * features like passing default props, etc...
-       *
-       * @param       {SWebComponent}     cls       Your webcomponent class
-       * @param       {Object}        [defaultProps={}]     Some default props that you want for this webcomponent
-       * @param       {String}        [name=ull        Your component name
+       * Store all the webcomponent settings like "physicalProps", "requiredProps", etc...
        *
        * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      value: function define(name, cls) {
-        var settings = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-        // static define(cls, defaultProps = {}, name = null) {
-        name = name;
-        var extend = settings.extends;
-        if (!name) throw new Error("SWebComponent: You must define a name for your webcomponent by setting either a static \"name\" property on your class, of by passing a name as first parameter of the static \"define\" function...");
-        var uncamelizedName = (0, _uncamelize.default)(name);
-        SWebComponent._componentsStack[uncamelizedName] = {
-          name,
-          class: cls,
-          settings
-        };
-
-        if (window.customElements) {
-          window.customElements.define(uncamelizedName, cls, {
-            extends: extend
-          });
-        } else if (document.registerElement) {
-          document.registerElement(uncamelizedName, {
-            prototype: cls.prototype,
-            extends: extend
-          });
-        } else {
-          throw "Your browser does not support either document.registerElement or window.customElements.define webcomponents specification...";
-        }
-
-        console.log(SWebComponent._componentsStack);
+      get: function get() {
+        console.log('thguthught', this.props);
+        return Object.keys(this.props);
       }
-    }]);
-    /**
-     * @name          constructor
-     * @type          Function
-     * @constructor
-     *
-     * Constructor
-     *
-     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
+      /**
+       * @name          constructor
+       * @type          Function
+       * @constructor
+       *
+       * Constructor
+       *
+       * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
 
+    }]);
 
     function SWebComponent() {
       var settings = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -4359,13 +4805,23 @@ function SWebComponent() {
 
       _this._settings = (0, _deepMerge.default)({
         name: null,
-        defaultProps: _this.constructor.defaultProps || {},
-        requiredProps: _this.constructor.requiredProps || [],
-        physicalProps: _this.constructor.physicalProps || []
-      }, settings); // create the SPromise instance
+        props: _this.constructor.props || {}
+      }, _register.stack[(0, _uncamelize.default)(_this.constructor.componentName)].settings || {}, settings); // create the SPromise instance
 
       _this._promise = new _SPromise.default(() => {}).start();
-      console.log(_this._settings); // launch the mounting process
+
+      for (var key in _this._settings.props) {
+        _this._props[key] = _objectSpread(_objectSpread({}, _this._settings.props[key]), {}, {
+          valuesStack: [],
+          value: _this._settings.props[key].default,
+          previousValue: undefined
+        });
+
+        if (_this._props[key].value !== undefined) {
+          _this._props[key].valuesStack.push(_this._props[key].value);
+        }
+      } // launch the mounting process
+
 
       setTimeout(_this._mount.bind(_assertThisInitialized(_this)));
       return _this;
@@ -4389,12 +4845,9 @@ function SWebComponent() {
           this._promise.trigger('mounting'); // wait until the component match the mountDependencies and mountWhen status
 
 
-          yield this._mountDependencies(); // init the default props
+          yield this._mountDependencies(); // check props definition
 
-          this._handleDefaultProps(); // check the required props
-
-
-          this._checkRequiredProps(); // handle physical props
+          this._checkPropsDefinition(); // handle physical props
 
 
           this._handlePhysicalProps();
@@ -4527,17 +4980,16 @@ function SWebComponent() {
       value: function attributeChangedCallback(attrName, oldVal, newVal) {
         if (this._settedAttributesStack[attrName]) return; // try to get the property
 
-        var currentPropObj = this._props[attrName];
+        var propObj = this._props[attrName];
         var previousValue = (0, _parse.default)(oldVal);
         var newValue = (0, _parse.default)(newVal); // save the old value and the new value
 
-        var newPropObj = {
-          value: newValue,
-          previousValue,
-          valuesStack: currentPropObj ? [...currentPropObj.valuesStack, newValue] : [newValue]
-        }; // save the prop
-
-        this._props[(0, _camelize.default)(attrName)] = newPropObj; // trigger a "prop" event
+        propObj.value = newValue;
+        propObj.previousValue = previousValue;
+        propObj.valuesStack.push(newValue);
+        console.log(propObj); // save the prop
+        // this._props[__camelize(attrName)] = newPropObj;
+        // trigger a "prop" event
 
         this._triggerPropsEvents((0, _camelize.default)(attrName));
       }
@@ -4563,22 +5015,13 @@ function SWebComponent() {
           return this._props[_prop] ? this._props[_prop].value : undefined;
         }
 
-        if (!this._props[_prop]) {
-          this._props[_prop] = {
-            value,
-            previousValue: null,
-            valuesStack: [value]
-          };
-        } else {
-          this._props[_prop] = {
-            value,
-            previousValue: this._props[_prop].value,
-            valuesStack: [...this._props[_prop].valuesStack, value]
-          };
-        } // handle physical props
+        this._props[_prop].previousValue = this._props[_prop].value;
+        this._props[_prop].value = value;
+
+        this._props[_prop].valuesStack.push(value); // handle physical props
 
 
-        this._handlePhysicalProps(); // trigger a "prop" event
+        this._handlePhysicalProps(_prop); // trigger a "prop" event
 
 
         this._triggerPropsEvents(_prop);
@@ -4626,11 +5069,14 @@ function SWebComponent() {
     }, {
       key: "_handlePhysicalProps",
       value: function _handlePhysicalProps() {
-        // loop on each required props
-        console.log('PH', this._settings);
+        for (var _len = arguments.length, props = new Array(_len), _key = 0; _key < _len; _key++) {
+          props[_key] = arguments[_key];
+        }
 
-        this._settings.physicalProps.forEach(prop => {
-          var value = this._props[prop] && this._props[prop].value !== undefined ? this._props[prop].value : undefined;
+        if (!props || props.length === 0) props = Object.keys(this._props); // loop on each required props
+
+        props.forEach(prop => {
+          var value = this._props[prop].value;
 
           if (!this.getAttribute(prop)) {
             // set the attribute with the value
@@ -4642,7 +5088,6 @@ function SWebComponent() {
             var currentValueStringified = (0, _toString.default)(value);
 
             if (currentAttributeValue !== currentValueStringified) {
-              console.log('UPDATED', prop);
               this._settedAttributesStack[prop] = true;
               this.setAttribute(prop, currentValueStringified);
               delete this._settedAttributesStack[prop];
@@ -4651,56 +5096,36 @@ function SWebComponent() {
         });
       }
       /**
-       * @name        _handleDefaultProps
+       * @name        _checkPropsDefinition
        * @type        Function
        * @private
        *
-       * This method check for props that are not been setted through attributes
-       * and init them using the default props passed in the settings
+       * This method simply check a property value depending on his definition such as type, required, etc...
+       * If you pass no props to check, it will check all the registered ones.
+       *
+       * @param       {Array<String>|String}        ...props        The properties to check
        *
        * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
 
     }, {
-      key: "_handleDefaultProps",
-      value: function _handleDefaultProps() {
-        // loop on each required props
-        Object.keys(this._settings.defaultProps).forEach(prop => {
-          if (this._props[prop] === undefined || this._props[prop].value === undefined) {
-            if (this._props[prop] === undefined) this._props[prop] = {
-              value: this._settings.defaultProps[prop],
-              previousValue: null,
-              valuesStack: [this._settings.defaultProps[prop]]
-            };
-          }
-        });
-      }
-      /**
-       * @name        _checkRequiredProps
-       * @type        Function
-       * @private
-       *
-       * This method simply check if the required props specified in the settings
-       * are passed
-       *
-       * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
+      key: "_checkPropsDefinition",
+      value: function _checkPropsDefinition() {
+        for (var _len2 = arguments.length, props = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+          props[_key2] = arguments[_key2];
+        }
 
-    }, {
-      key: "_checkRequiredProps",
-      value: function _checkRequiredProps() {
-        // loop on each required props
-        this._settings.requiredProps.forEach(prop => {
-          // check if the prop is missing
-          if (this._props[prop] === undefined || this._props[prop].value === undefined) {
-            throw new Error("The property named \"".concat(prop, "\" on the \"").concat(this.constructor.name, "\" webcomponent is required but missing..."));
-          }
+        if (!props || props.length === 0) props = Object.keys(this._props);
+        props.forEach(prop => {
+          var propObj = this._props[prop];
+          var validationResult = (0, _validateWithDefinitionObject.default)(propObj.value, propObj, "".concat(this.constructor.name, ".props.").concat(prop));
+          if (validationResult !== true) throw new Error(validationResult);
         });
       }
     }]);
 
     return SWebComponent;
-  }(extend), _defineProperty(_class, "_componentsStack", {}), _temp;
+  }(extend), _temp;
 }
 
 module.exports = exports.default;
@@ -4720,7 +5145,20 @@ module.exports = exports.default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = register;
+exports.define = define;
+Object.defineProperty(exports, "SWebComponent", {
+  enumerable: true,
+  get: function get() {
+    return _SWebComponent.default;
+  }
+});
+Object.defineProperty(exports, "SLitHtmlWebComponent", {
+  enumerable: true,
+  get: function get() {
+    return _SLitHtmlWebComponent.default;
+  }
+});
+exports.stack = void 0;
 
 var _SWebComponent = _interopRequireDefault(__webpack_require__(/*! ./SWebComponent */ "../../util/sugar/js/webcomponent/SWebComponent.js"));
 
@@ -4728,46 +5166,53 @@ var _SLitHtmlWebComponent = _interopRequireDefault(__webpack_require__(/*! ./SLi
 
 var _getHtmlClassFromTagName = _interopRequireDefault(__webpack_require__(/*! ../html/getHtmlClassFromTagName */ "../../util/sugar/js/html/getHtmlClassFromTagName.js"));
 
+var _uncamelize = _interopRequireDefault(__webpack_require__(/*! ../string/uncamelize */ "../../util/sugar/js/string/uncamelize.js"));
+
+var _htmlTagToHtmlClassMap = _interopRequireDefault(__webpack_require__(/*! ../html/htmlTagToHtmlClassMap */ "../../util/sugar/js/html/htmlTagToHtmlClassMap.js"));
+
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {
     default: obj
   };
 }
 
-function register(name, cls) {
+var _SWebComponentStack = {};
+exports.stack = _SWebComponentStack;
+
+function define(name, cls) {
   var settings = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-  // check to get if the custom element extends a basic html one or not
-  var splitedName = name.split(':');
+  if (!name) throw new Error("SWebComponent: You must define a name for your webcomponent by setting either a static \"name\" property on your class, of by passing a name as first parameter of the static \"define\" function...");
+  cls.componentName = name;
   var extend = null;
 
-  if (splitedName.length === 2) {
-    extend = splitedName[0];
-    name = splitedName[1];
+  for (var key in _htmlTagToHtmlClassMap.default) {
+    if (cls.prototype instanceof _htmlTagToHtmlClassMap.default[key]) {
+      extend = key;
+      break;
+    }
   }
 
-  var HtmlClassToExtend = (0, _getHtmlClassFromTagName.default)(extend);
-  if (HtmlClassToExtend !== HTMLElement) settings.extends = HtmlClassToExtend;
-  var BaseClass;
+  var uncamelizedName = (0, _uncamelize.default)(name);
+  _SWebComponentStack[uncamelizedName] = {
+    name,
+    class: cls,
+    extends: extend,
+    settings
+  };
 
-  if (settings.litHtml) {
-    BaseClass = (0, _SLitHtmlWebComponent.default)(HtmlClassToExtend);
+  if (window.customElements) {
+    window.customElements.define(uncamelizedName, cls, {
+      extends: extend
+    });
+  } else if (document.registerElement) {
+    document.registerElement(uncamelizedName, {
+      prototype: cls.prototype,
+      extends: extend
+    });
   } else {
-    BaseClass = (0, _SWebComponent.default)(HtmlClassToExtend);
+    throw "Your browser does not support either document.registerElement or window.customElements.define webcomponents specification...";
   }
-
-  setTimeout(() => {
-    console.log(BaseClass.coco);
-    console.log(BaseClass);
-    console.log(BaseClass.constructor);
-    console.log(BaseClass.constructor.name); // BaseClass.define(name, cls, settings);
-  }, 1000);
-  return BaseClass; // function generateClass() {
-  //   return cls extends BaseClass;
-  // }
-  // class MyWebComponent extends BaseClass {}
 }
-
-module.exports = exports.default;
 
 /***/ }),
 
@@ -9524,6 +9969,45 @@ if (typeof Object.create === 'function') {
     }
   }
 }
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/is-class/is-class.js":
+/*!************************************************************************************************************!*\
+  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/is-class/is-class.js ***!
+  \************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+;(function (root) {
+  const toString = Function.prototype.toString
+
+  function fnBody (fn) {
+    return toString.call(fn).replace(/^[^{]*{\s*/, '').replace(/\s*}[^}]*$/, '')
+  }
+
+  function isClass (fn) {
+    if (typeof fn !== 'function') {
+      return false
+    }
+
+    if (/^class[\s{]/.test(toString.call(fn))) {
+      return true
+    }
+
+    // babel.js classCallCheck() & inlined
+    const body = fnBody(fn)
+    return (/classCallCheck\(/.test(body) || /TypeError\("Cannot call a class as a function"\)/.test(body))
+  }
+
+  if (true) {
+    if ( true && module.exports) {
+      exports = module.exports = isClass
+    }
+    exports.isClass = isClass
+  } else {}
+})(this);
 
 
 /***/ }),
@@ -20703,7 +21187,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-class SFiltrableInputWebComponent extends _coffeekraken_sugar_js_webcomponent_register__WEBPACK_IMPORTED_MODULE_0___default()('SFiltrableInput') {
+class SFiltrableInputWebComponent extends Object(_coffeekraken_sugar_js_webcomponent_register__WEBPACK_IMPORTED_MODULE_0__["SLitHtmlWebComponent"])(HTMLInputElement) {
   /**
    * @name          constructor
    * @type          Function
@@ -20716,17 +21200,22 @@ class SFiltrableInputWebComponent extends _coffeekraken_sugar_js_webcomponent_re
   constructor() {
     var settings = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
     super(settings);
-    console.log('COCO');
   }
 
-} // __register('input:SFiltrableInput', SFiltrableInputWebComponent);
-// console.log(SFiltrableInputWebComponent);
-// __SWebComponent.define('input:sFiltrableInput', {
-//   name: 'cocococococococ'
-// });
+}
 
+_defineProperty(SFiltrableInputWebComponent, "props", {
+  items: {
+    type: 'Array<Object>',
+    required: true,
+    physical: true,
+    default: [{
+      name: 'hello'
+    }]
+  }
+});
 
-_defineProperty(SFiltrableInputWebComponent, "coco", 'hello world');
+Object(_coffeekraken_sugar_js_webcomponent_register__WEBPACK_IMPORTED_MODULE_0__["define"])('SFiltrableInput', SFiltrableInputWebComponent, {});
 
 /***/ }),
 

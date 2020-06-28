@@ -17,8 +17,8 @@ import ltrim from '../string/ltrim';
  * @snippet     js
  * Sugar.js.url.queryStringToObject($1)
  *
- * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  * @see  	http://stackoverflow.com/questions/8648892/convert-url-parameters-to-a-javascript-object
+ * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function queryStringToObject(str) {
   str = ltrim(str, '?');

@@ -11,7 +11,8 @@ class SFiltrableInputWebComponent extends SLitHtmlWebComponent(
       type: 'Array<Object>',
       required: true,
       physical: true,
-      default: [{ name: 'hello' }]
+      default: [{ name: 'hello' }],
+      watch: true
     }
   };
 

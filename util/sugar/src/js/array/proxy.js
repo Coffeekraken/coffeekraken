@@ -16,7 +16,7 @@ import __uniqid from '../string/uniqid';
  * myArray.watch(['push','pop'], (watchObj) => {
  *    // check the watchObj action
  *    switch (watchObj.action) {
- *      case 'Array.push':
+ *      case 'push':
  *        // do something...
  *      break;
  *    }
@@ -45,7 +45,8 @@ export default function proxy(array) {
         handlerFn: watch.handlerFn,
         watchObj: {
           oldValue: [...array],
-          action: `Array.${name}`,
+          action: `${name}`,
+          fullAction: `Array.${name}`,
           args
         }
       });

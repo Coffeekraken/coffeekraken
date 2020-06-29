@@ -51,6 +51,7 @@ module.exports = function exitCleanup(handler = null, settings = {}) {
       const processesNames = Object.keys(__getRegisteredProcessed());
       for (let i = 0; i < processesNames.length; i++) {
         const processInstance = __getRegisteredProcessed()[processesNames[i]];
+        if (!processInstance) continue;
         const pid = processInstance.pid;
         if (pid) {
           await tkill(pid);

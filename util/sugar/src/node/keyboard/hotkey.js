@@ -124,7 +124,7 @@ module.exports = function hotkey(key, settings = {}) {
   }
 
   const promise = new __SPromise((resolve, reject, trigger, cancel) => {}, {})
-    .on('key', (key) => {
+    .on('key,press', (key) => {
       if (settings.once) {
         promise.cancel();
       }

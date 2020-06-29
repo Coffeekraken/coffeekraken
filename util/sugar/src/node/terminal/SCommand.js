@@ -447,7 +447,7 @@ module.exports = class SCommand extends __SPromise {
     }).on('press', (keyObj) => {
       if (this.isRunning() && !this._settings.concurrent) {
         this.kill();
-      } else {
+      } else if (!this.isRunning()) {
         this.run();
       }
     });
@@ -456,7 +456,7 @@ module.exports = class SCommand extends __SPromise {
     }).on('press', async (keyObj) => {
       if (this.isRunning() && !this._settings.concurrent) {
         this.kill();
-      } else {
+      } else if (!this.isRunning()) {
         this.run(this._settings.argsObj, false);
       }
     });
@@ -718,11 +718,15 @@ module.exports = class SCommand extends __SPromise {
     this._processesStack.push(this._currentProcess);
 
     // init the child process
-    this._currentProcess.childProcessPromise.on('*', (data) => {
+    this._currentProcess.childProcessPromise.on('*', (data, stack) => {
       this._processesStack[this._processesStack.length - 1] = {
         ...this._processesStack[this._processesStack.length - 1],
         ...(data && data.process ? data.process : data || {})
       };
+      // if (stack === 'success') {
+      //   console.log(this._processesStack[this._processesStack.length - 1]);
+      // }
+      // console.log(this._processesStack[this._processesStack.length - 1]);
     });
     this._currentProcess.childProcessPromise.on('close', (data) => {
       this._currentProcess = null;

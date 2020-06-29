@@ -86,9 +86,193 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "../../util/sugar/js/array/proxy.js":
+/*!********************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/array/proxy.js ***!
+  \********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = proxy;
+
+var _uniqid = _interopRequireDefault(__webpack_require__(/*! ../string/uniqid */ "../../util/sugar/js/string/uniqid.js"));
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {
+    default: obj
+  };
+}
+/**
+ * @name                  proxy
+ * @namespace           js.array
+ * @type                  Function
+ *
+ * This function override the passed array prototype to intercept changes made through
+ *
+ * @param         {Array}           array           The array to proxy
+ * @return        {Array}                           The same array with his prototype proxied
+ *
+ * @example       js
+ * import proxy from '@coffeekraken/sugar/js/array/proxy';
+ * const myArray = proxy([1,2,3]);
+ * myArray.watch(['push','pop'], (watchObj) => {
+ *    // check the watchObj action
+ *    switch (watchObj.action) {
+ *      case 'push':
+ *        // do something...
+ *      break;
+ *    }
+ * });
+ *
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+
+function proxy(array) {
+  if (array.__$proxied) return array;
+  var watchStack = {}; // mark that this array has already been proxied
+
+  Object.defineProperty(array, '__$proxied', {
+    value: true,
+    enumerable: false,
+    writable: false
+  });
+
+  function _proxyMethod(name) {
+    for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      args[_key - 1] = arguments[_key];
+    }
+
+    var handlersStack = [];
+    Object.keys(watchStack).forEach(watchId => {
+      var watch = watchStack[watchId];
+      if (watch.methods.indexOf(name) === -1) return;
+      handlersStack.push({
+        handlerFn: watch.handlerFn,
+        watchObj: {
+          oldValue: [...array],
+          action: "".concat(name),
+          fullAction: "Array.".concat(name),
+          args
+        }
+      });
+    });
+    var returnValue = Array.prototype[name].call(array, ...args);
+    handlersStack.forEach(handlerObj => {
+      handlerObj.watchObj = _objectSpread(_objectSpread({}, handlerObj.watchObj), {}, {
+        value: array,
+        returnedValue: returnValue
+      });
+      handlerObj.handlerFn(handlerObj.watchObj);
+    });
+    return returnValue;
+  } // console.log(Object.getOwnPropertyNames(Array.prototype));
+
+
+  Object.getOwnPropertyNames(Array.prototype).forEach(methodName => {
+    var unProxyMethods = ['length', 'constructor'];
+    if (unProxyMethods.indexOf(methodName) !== -1) return;
+    Object.defineProperty(array, methodName, {
+      writable: false,
+      configurable: false,
+      enumerable: false,
+      value: function value() {
+        for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+          args[_key2] = arguments[_key2];
+        }
+
+        return _proxyMethod(methodName, ...args);
+      }
+    });
+  });
+  /**
+   * @name                    watch
+   * @type                    Function
+   *
+   * This method allows you to specify which Array methods you want to watch by passing an array of methods names like ['push','pop'].
+   * You can also specify the handler function that will be called on each array updates, etc...
+   *
+   * @param         {Array|String}          methods               The methods you want to watch
+   * @param         {Function}              handler               The function that will be called on each updates. This function will be called with an object as parameters. Here's the list of properties available:
+   * - method (null) {String}: The method name that causes the watch trigger
+   * - args ([]) {Array}: An array of all the arguments passed to the method call
+   * - oldValue (null) {Array}: The array just before the method call
+   * - value (null) {Array}: The array after the method call
+   * - returnedValue (null) {Mixed}: This is the value that the method call has returned
+   * @return        {String}                                    Return a uniq watchid that you can use to unwatch this process
+   *
+   * @example         js
+   * const watchId = myProxiedArray.watch(['push', 'pop'], (watchObj) => {
+   *    // do something...
+   * });
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+
+  Object.defineProperty(array, 'watch', {
+    writable: false,
+    configurable: false,
+    enumerable: false,
+    value: (methods, handlerFn) => {
+      // create a watch id that we send back to the caller
+      var watchId = (0, _uniqid.default)(); // append this watch process
+
+      watchStack[watchId] = {
+        methods,
+        handlerFn
+      }; // return the watchId to be able to unwatcn this watch process
+
+      return watchId;
+    }
+  });
+  /**
+   * @name                  unwatch
+   * @type                  Function
+   *
+   * This methods allows you to unwatch a process started with the "watch" method.
+   * You have to pass as parameter the watchId that the "watch" method has returned you.
+   *
+   * @param       {String}          watchId         The watchId returned by the "watch" method
+   *
+   * @example       js
+   * const watchId = myArray.watch('push', (obj) => //...);
+   * myArray.unwatch(watchId);
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+
+  Object.defineProperty(array, 'unwatch', {
+    writable: false,
+    configurable: false,
+    enumerable: false,
+    value: watchId => {
+      // delete the watch process
+      delete watchStack[watchId];
+    }
+  }); // return the processed array
+
+  return array;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
 /***/ "../../util/sugar/js/dom/closest.js":
 /*!********************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/dom/closest.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/dom/closest.js ***!
   \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -157,7 +341,7 @@ module.exports = exports.default;
 
 /***/ "../../util/sugar/js/dom/closestNotVisible.js":
 /*!******************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/dom/closestNotVisible.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/dom/closestNotVisible.js ***!
   \******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -220,7 +404,7 @@ module.exports = exports.default;
 
 /***/ "../../util/sugar/js/dom/getStyleProperty.js":
 /*!*****************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/dom/getStyleProperty.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/dom/getStyleProperty.js ***!
   \*****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -288,7 +472,7 @@ module.exports = exports.default;
 
 /***/ "../../util/sugar/js/dom/getTransitionProperties.js":
 /*!************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/dom/getTransitionProperties.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/dom/getTransitionProperties.js ***!
   \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -378,7 +562,7 @@ module.exports = exports.default;
 
 /***/ "../../util/sugar/js/dom/isInViewport.js":
 /*!*************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/dom/isInViewport.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/dom/isInViewport.js ***!
   \*************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -442,7 +626,7 @@ module.exports = exports.default;
 
 /***/ "../../util/sugar/js/dom/isVisible.js":
 /*!**********************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/dom/isVisible.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/dom/isVisible.js ***!
   \**********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -492,7 +676,7 @@ module.exports = exports.default;
 
 /***/ "../../util/sugar/js/dom/matches.js":
 /*!********************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/dom/matches.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/dom/matches.js ***!
   \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -545,7 +729,7 @@ module.exports = exports.default;
 
 /***/ "../../util/sugar/js/dom/observeAttributes.js":
 /*!******************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/dom/observeAttributes.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/dom/observeAttributes.js ***!
   \******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -633,7 +817,7 @@ module.exports = exports.default;
 
 /***/ "../../util/sugar/js/dom/when.js":
 /*!*****************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/dom/when.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/dom/when.js ***!
   \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -799,7 +983,7 @@ module.exports = exports.default;
 
 /***/ "../../util/sugar/js/dom/whenAttribute.js":
 /*!**************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/dom/whenAttribute.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/dom/whenAttribute.js ***!
   \**************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -887,7 +1071,7 @@ module.exports = exports.default;
 
 /***/ "../../util/sugar/js/dom/whenInViewport.js":
 /*!***************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/dom/whenInViewport.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/dom/whenInViewport.js ***!
   \***************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -945,7 +1129,7 @@ module.exports = exports.default;
 
 /***/ "../../util/sugar/js/dom/whenOutOfViewport.js":
 /*!******************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/dom/whenOutOfViewport.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/dom/whenOutOfViewport.js ***!
   \******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -1066,7 +1250,7 @@ module.exports = exports.default;
 
 /***/ "../../util/sugar/js/dom/whenTransitionEnd.js":
 /*!******************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/dom/whenTransitionEnd.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/dom/whenTransitionEnd.js ***!
   \******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -1124,7 +1308,7 @@ module.exports = exports.default;
 
 /***/ "../../util/sugar/js/dom/whenVisible.js":
 /*!************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/dom/whenVisible.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/dom/whenVisible.js ***!
   \************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -1306,7 +1490,7 @@ module.exports = exports.default;
 
 /***/ "../../util/sugar/js/function/throttle.js":
 /*!**************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/function/throttle.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/function/throttle.js ***!
   \**************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -1362,7 +1546,7 @@ module.exports = exports.default;
 
 /***/ "../../util/sugar/js/html/getHtmlClassFromTagName.js":
 /*!*************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/html/getHtmlClassFromTagName.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/html/getHtmlClassFromTagName.js ***!
   \*************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -1418,7 +1602,7 @@ module.exports = exports.default;
 
 /***/ "../../util/sugar/js/html/htmlTagToHtmlClassMap.js":
 /*!***********************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/html/htmlTagToHtmlClassMap.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/html/htmlTagToHtmlClassMap.js ***!
   \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -1514,7 +1698,7 @@ module.exports = {
 
 /***/ "../../util/sugar/js/is/array.js":
 /*!*****************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/is/array.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/is/array.js ***!
   \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -1555,7 +1739,7 @@ module.exports = exports.default;
 
 /***/ "../../util/sugar/js/is/boolean.js":
 /*!*******************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/is/boolean.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/is/boolean.js ***!
   \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -1596,7 +1780,7 @@ module.exports = exports.default;
 
 /***/ "../../util/sugar/js/is/class.js":
 /*!*****************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/is/class.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/is/class.js ***!
   \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -1647,7 +1831,7 @@ module.exports = exports.default;
 
 /***/ "../../util/sugar/js/is/function.js":
 /*!********************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/is/function.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/is/function.js ***!
   \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -1688,7 +1872,7 @@ module.exports = exports.default;
 
 /***/ "../../util/sugar/js/is/integer.js":
 /*!*******************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/is/integer.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/is/integer.js ***!
   \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -1730,7 +1914,7 @@ module.exports = exports.default;
 
 /***/ "../../util/sugar/js/is/json.js":
 /*!****************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/is/json.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/is/json.js ***!
   \****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -1777,7 +1961,7 @@ module.exports = exports.default;
 
 /***/ "../../util/sugar/js/is/number.js":
 /*!******************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/is/number.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/is/number.js ***!
   \******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -1818,7 +2002,7 @@ module.exports = exports.default;
 
 /***/ "../../util/sugar/js/is/object.js":
 /*!******************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/is/object.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/is/object.js ***!
   \******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -1859,7 +2043,7 @@ module.exports = exports.default;
 
 /***/ "../../util/sugar/js/is/ofType.js":
 /*!******************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/is/ofType.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/is/ofType.js ***!
   \******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -2017,7 +2201,7 @@ module.exports = exports.default;
 
 /***/ "../../util/sugar/js/is/plainObject.js":
 /*!***********************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/is/plainObject.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/is/plainObject.js ***!
   \***********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -2062,7 +2246,7 @@ module.exports = exports.default;
 
 /***/ "../../util/sugar/js/is/regexp.js":
 /*!******************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/is/regexp.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/is/regexp.js ***!
   \******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -2103,7 +2287,7 @@ module.exports = exports.default;
 
 /***/ "../../util/sugar/js/is/string.js":
 /*!******************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/is/string.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/is/string.js ***!
   \******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -2142,9 +2326,406 @@ module.exports = exports.default;
 
 /***/ }),
 
+/***/ "../../util/sugar/js/object/SWatch.js":
+/*!**********************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/object/SWatch.js ***!
+  \**********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _constructorName = _interopRequireDefault(__webpack_require__(/*! ./constructorName */ "../../util/sugar/js/object/constructorName.js"));
+
+var _get = _interopRequireDefault(__webpack_require__(/*! ./get */ "../../util/sugar/js/object/get.js"));
+
+var _set = _interopRequireDefault(__webpack_require__(/*! ./set */ "../../util/sugar/js/object/set.js"));
+
+var _deepProxy = _interopRequireDefault(__webpack_require__(/*! ./deepProxy */ "../../util/sugar/js/object/deepProxy.js"));
+
+var _parse = _interopRequireDefault(__webpack_require__(/*! ../string/parse */ "../../util/sugar/js/string/parse.js"));
+
+var _uniqid = _interopRequireDefault(__webpack_require__(/*! ../string/uniqid */ "../../util/sugar/js/string/uniqid.js"));
+
+var _micromatch = _interopRequireDefault(__webpack_require__(/*! micromatch */ "../../util/sugar/node_modules/micromatch/index.js"));
+
+var _SPromise = _interopRequireDefault(__webpack_require__(/*! ../promise/SPromise */ "../../util/sugar/js/promise/SPromise.js"));
+
+var _clone = _interopRequireDefault(__webpack_require__(/*! ../object/clone */ "../../util/sugar/js/object/clone.js"));
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {
+    default: obj
+  };
+}
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+/**
+ * @name 		            SWatch
+ * @namespace           js.object
+ * @type                Class
+ *
+ * This class allows you to easily monitor some object properties and get the new and old value of it
+ *
+ * @example 	js
+ * // create the watcher instance
+ * const watchedObj = new SWatch({
+ * 		title : 'Hello World'
+ * });
+ *
+ * // watch the object
+ * watchedObj.on('title', watchResult => {
+ *  	// do something when the title changes
+ * });
+ *
+ * // update the title
+ * watchedObj.title = 'Hello Universe';
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+
+var SWatch = /*#__PURE__*/function () {
+  /**
+   * @name                    _watchStack
+   * @type                    Object
+   * @private
+   *
+   * Watch stack
+   *
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+
+  /**
+   * @name                      constructor
+   * @type                      Function
+   *
+   * Constructor
+   *
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  function SWatch(object) {
+    _classCallCheck(this, SWatch);
+
+    _defineProperty(this, "_watchStack", {}); // check if the passed object is already an SWatch instance
+
+
+    if (object.__$SWatch) return object;
+    this._promise = new _SPromise.default(() => {}).start();
+    this._proxiedObject = (0, _deepProxy.default)(object, obj => {
+      var path = obj.path;
+      var value = obj.value;
+      var oldValue = obj.oldValue;
+      if (path.slice(0, 1) === '.') path = path.slice(1); // build the object to pass to the handler
+
+      var watchResult = {
+        object: this._proxiedObject,
+        path,
+        action: obj.action,
+        oldValue,
+        value
+      };
+      if (watchResult.action === 'get' && (path === 'on' || path === 'unwatch')) return; // trigger event through promise
+
+      setTimeout(() => {
+        // this._promise.trigger(`${path}`, watchResult);
+        this._promise.trigger("".concat(path, ":").concat(watchResult.action), watchResult);
+      });
+    });
+    var onPropertyObj = {
+      writable: true,
+      configurable: false,
+      enumerable: false,
+      value: this._promise.on.bind(this._promise)
+    };
+
+    if (this._proxiedObject.on !== undefined) {
+      Object.defineProperties(this._proxiedObject, {
+        $on: onPropertyObj
+      });
+    } else {
+      Object.defineProperties(this._proxiedObject, {
+        on: onPropertyObj
+      });
+    }
+
+    var unwatchPropertyObj = {
+      writable: true,
+      configurable: false,
+      enumerable: false,
+      value: this.unwatch.bind(this)
+    };
+
+    if (this._proxiedObject.unwatch !== undefined) {
+      Object.defineProperties(this._proxiedObject, {
+        $unwatch: unwatchPropertyObj
+      });
+    } else {
+      Object.defineProperties(this._proxiedObject, {
+        unwatch: unwatchPropertyObj
+      });
+    } // set a property that is usefull to check if the object
+    // is a SWatch watched one...
+
+
+    Object.defineProperty(this._proxiedObject, '__$SWatch', {
+      writable: false,
+      configurable: false,
+      enumerable: false,
+      value: true
+    });
+    return this._proxiedObject;
+  }
+
+  _createClass(SWatch, [{
+    key: "unwatch",
+    value: function unwatch() {
+      // cancel the promise
+      this._promise.cancel(); // revoke proxy on the proxied object
+
+
+      return this._proxiedObject.revoke();
+    }
+  }]);
+
+  return SWatch;
+}();
+
+exports.default = SWatch;
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "../../util/sugar/js/object/clone.js":
+/*!*********************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/object/clone.js ***!
+  \*********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = clone;
+
+var _clone = _interopRequireDefault(__webpack_require__(/*! lodash/clone */ "../../util/sugar/node_modules/lodash/clone.js"));
+
+var _clonedeep = _interopRequireDefault(__webpack_require__(/*! lodash/clonedeep */ "../../util/sugar/node_modules/lodash/clonedeep.js"));
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {
+    default: obj
+  };
+}
+/**
+ * @name                clone
+ * @type                Function
+ *
+ * This function allows you to clone an object either at 1 level, or deeply.
+ *
+ * @param       {Object}        object        The object to copy
+ * @param       {Boolean}       [deep=false]  Specify if you want to clone the object deeply
+ *
+ * @example       js
+ * import clone from '@coffeekraken/sugar/js/object/clone';
+ * clone({
+ *    hello: 'world'
+ * });
+ *
+ * @see       https://www.npmjs.com/package/lodash
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+
+function clone(object) {
+  var deep = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+  if (deep) {
+    return (0, _clonedeep.default)(object);
+  }
+
+  return (0, _clone.default)(object);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "../../util/sugar/js/object/constructorName.js":
+/*!*******************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/object/constructorName.js ***!
+  \*******************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = constructorName;
+/**
+ * @name        constructorName
+ * @namespace           js.object
+ * @type      Function
+ *
+ * Return the constructor name of the passed object
+ *
+ * @param 		{Object} 			obj 		The object to get the constructor name from
+ * @return 		{String}						The constructor name
+ *
+ * @example 	js
+ * import constructorName from '@coffeekraken/sugar/js/object/constructorName';
+ * class MyCoolClass {
+ * 		// class implementation...
+ * }
+ * const myObj = new MyCoolClass();
+ * console.log(constructorName(myObj)); => MyCoolClass
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+function constructorName(obj) {
+  return obj.constructor && obj.constructor.name ? obj.constructor.name : null;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "../../util/sugar/js/object/deepMap.js":
+/*!***********************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/object/deepMap.js ***!
+  \***********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = deepMap;
+
+var _plainObject = _interopRequireDefault(__webpack_require__(/*! ../is/plainObject */ "../../util/sugar/js/is/plainObject.js"));
+
+var _deepMerge = _interopRequireDefault(__webpack_require__(/*! ../object/deepMerge */ "../../util/sugar/js/object/deepMerge.js"));
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {
+    default: obj
+  };
+}
+/**
+ * @name            deepMap
+ * @namespace           js.object
+ * @type            Function
+ *
+ * This function is the same as the "map" one. The only difference is that this one goes deep into the object
+ *
+ * @param         {Object}        object          The object you want to map through
+ * @param         {Function}      processor       The processor function that take as parameter the actual property value, the current property name and the full dotted path to the current property
+ * @param         {Object}        [settings={}]     An object of settings to configure your deepMap process:
+ * - processObjects (false) {Boolean}: Specify if you want the objects to be processed the same as other values
+ * - deepFirst (true) {Boolean}: Specify if you want to process deep values first
+ *
+ * @example       js
+ * import deepMap from '@coffeekraken/sugar/js/object/deepMap';
+ * deepMap({
+ *    hello: 'world'
+ * }, (value, prop, fullPath) => {
+ *    return '~ ' + value;
+ * });
+ *
+ * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+
+function deepMap(object, processor) {
+  var settings = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
+  var _path = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];
+
+  settings = (0, _deepMerge.default)({
+    deepFirst: true,
+    processObjects: false
+  }, settings);
+  Object.keys(object).forEach(prop => {
+    if (!settings.deepFirst) {
+      if ((0, _plainObject.default)(object[prop])) {
+        object[prop] = deepMap(object[prop], processor, settings, [..._path, prop]);
+        if (!settings.processObjects) return;
+      }
+
+      var res = processor(object[prop], prop, [..._path, prop].join('.'));
+      if (res === -1) delete object[prop];else object[prop] = res;
+    } else {
+      var _res = processor(object[prop], prop, [..._path, prop].join('.'));
+
+      if (_res === -1) delete object[prop];else object[prop] = _res;
+
+      if ((0, _plainObject.default)(object[prop])) {
+        object[prop] = deepMap(object[prop], processor, settings, [..._path, prop]);
+        if (!settings.processObjects) return;
+      }
+    }
+  });
+  return object;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
 /***/ "../../util/sugar/js/object/deepMerge.js":
 /*!*************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/object/deepMerge.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/object/deepMerge.js ***!
   \*************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -2221,9 +2802,472 @@ module.exports = exports.default;
 
 /***/ }),
 
+/***/ "../../util/sugar/js/object/deepProxy.js":
+/*!*************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/object/deepProxy.js ***!
+  \*************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = deepProxy;
+
+var _proxy = _interopRequireDefault(__webpack_require__(/*! ../array/proxy */ "../../util/sugar/js/array/proxy.js"));
+
+var _deepMap = _interopRequireDefault(__webpack_require__(/*! ../object/deepMap */ "../../util/sugar/js/object/deepMap.js"));
+
+var _clone = _interopRequireDefault(__webpack_require__(/*! ../object/clone */ "../../util/sugar/js/object/clone.js"));
+
+var _delete = _interopRequireDefault(__webpack_require__(/*! ../object/delete */ "../../util/sugar/js/object/delete.js"));
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {
+    default: obj
+  };
+}
+/**
+ * @name                            deepProxy
+ * @namespace           js.object
+ * @type                            Function
+ *
+ * This function allows you to add Proxy to an object in deep fashion.
+ * Normally the Proxy process only the level on which it has been added. Here we add Proxy to all the
+ * object levels and to new properties as well.
+ *
+ * On the returned proxied object, you will have access to the ```revoke``` method that you can call to revoke the proxy applied.
+ * This method will return you a shallow version of the proxied object that you can use as you want
+ *
+ * @param          {Object}                 object            The object on which to add the proxy
+ * @param           {Function}                handlerFn       The handler function that will be called with the update object. It can be a property deleted, an array item added, a property updated, etc...:
+ * - set: An object property added or updated
+ * - delete: An object property deleted
+ * - push: An item has been added inside an array
+ * - {methodName}: Every array actions
+ * @return          {Object}                                  The proxied object
+ *
+ * @example           js
+ * import deepProxy from '@coffeekraken/sugar/js/object/deepProxy';
+ * const a = deepProxy({
+ *    hello: 'world'
+ * }, (actionObj) => {
+ *    // do something with the actionObj...
+ * });
+ * a.hello = 'coco';
+ *
+ * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+
+function deepProxy(object, handlerFn) {
+  var preproxy = new WeakMap();
+  var isRevoked = false;
+
+  function makeHandler(path) {
+    return {
+      set(target, key, value) {
+        if (isRevoked) return true;
+
+        if (typeof value === 'object') {
+          value = proxify(value, [...path, key]);
+        }
+
+        var oldValue = target[key];
+        target[key] = value;
+        handlerFn({
+          object,
+          target,
+          key,
+          path: [...path, key].join('.'),
+          action: 'set',
+          fullAction: "Object.set",
+          oldValue,
+          value
+        });
+        return true;
+      },
+
+      // get(target, key, receiver) {
+      //   if (Reflect.has(target, key)) {
+      //     const value = handlerFn({
+      //       object,
+      //       target,
+      //       key,
+      //       path: [...path, key].join('.'),
+      //       action: 'get',
+      //       fullAction: 'Object.get'
+      //     });
+      //     if (key === 'revoke') return receiver.revoke;
+      //     console.log(value, key);
+      //     if (value === undefined) return target[key];
+      //     return value;
+      //   }
+      //   return undefined;
+      // },
+      deleteProperty(target, key) {
+        if (isRevoked) return true;
+
+        if (Reflect.has(target, key)) {
+          // unproxy(target, key);
+          var oldValue = target[key];
+          var deleted = Reflect.deleteProperty(target, key);
+
+          if (deleted) {
+            handlerFn({
+              object,
+              target,
+              key,
+              path: [...path, key].join('.'),
+              action: 'delete',
+              fullAction: 'Object.delete',
+              oldValue
+            });
+          }
+
+          return deleted;
+        }
+
+        return false;
+      }
+
+    };
+  }
+
+  function proxify(obj, path) {
+    if (obj === null) return obj;
+
+    var _loop = function _loop(key) {
+      if (Array.isArray(obj[key])) {
+        obj[key] = (0, _proxy.default)(obj[key]);
+        obj[key].watch(Object.getOwnPropertyNames(Array.prototype), watchObj => {
+          handlerFn(_objectSpread({
+            path: [...path, key].join('.')
+          }, watchObj));
+        });
+      } else if (typeof obj[key] === 'object') {
+        obj[key] = proxify(obj[key], [...path, key]);
+      }
+    };
+
+    for (var key of Object.keys(obj)) {
+      _loop(key);
+    }
+
+    var p = Proxy.revocable(obj, makeHandler(path));
+    preproxy.set(p, obj);
+    var revokePropertyObj = {
+      writable: true,
+      configurable: false,
+      enumerable: true,
+      value: () => {
+        // make a shallow copy of the proxy object
+        var __copy = (0, _clone.default)(p.proxy, true); // mark the proxy as revoked
+
+
+        isRevoked = true; // sanitize the copy
+
+        __copy = (0, _deepMap.default)(__copy, (val, key, path) => {
+          // console.log(path);
+          if (key === 'revoke' && typeof val === 'function') {
+            return -1;
+          }
+
+          return val;
+        }); // deep revoke the proxies
+
+        setTimeout(() => {
+          (0, _deepMap.default)(p.proxy, (val, key, path) => {
+            if (key === 'revoke' && typeof val === 'function') {
+              val();
+            }
+          }, {}); // revoke the proxy at first level
+
+          p.revoke();
+        }); // return the shallow copy
+
+        return __copy;
+      }
+    };
+    Object.defineProperties(p.proxy, {
+      revoke: revokePropertyObj
+    });
+    return p.proxy;
+  }
+
+  return proxify(object, []);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "../../util/sugar/js/object/delete.js":
+/*!**********************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/object/delete.js ***!
+  \**********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = del;
+
+var _set = _interopRequireDefault(__webpack_require__(/*! ./set */ "../../util/sugar/js/object/set.js"));
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {
+    default: obj
+  };
+}
+/**
+ * @name                      delete
+ * @namespace           js.object
+ * @type                      Function
+ *
+ * Delete an object property using a dotPath like "something.else"
+ *
+ * @param         {Object}          object            The object on which you want to delete the property
+ * @param         {String}          dotPath           The dotpath to the property you want to delete
+ *
+ * @example         js
+ * import delete from '@coffeekraken/sugar/js/object/delete';
+ * const myObject = {
+ *    hello: 'world',
+ *    plop: 'yop'
+ * };
+ * delete(myObject, 'plop');
+ *
+ * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+
+function del(object, dotPath) {
+  var parentDotPath = dotPath.split('.').slice(0, -1).join('.');
+  if (!dotPath || dotPath === '' || dotPath === '.') return object;
+  dotPath = dotPath.replace(/\[(\w+)\]/g, '.$1');
+  dotPath = dotPath.replace(/^\./, '');
+  var a = dotPath.split('.');
+  var o = object;
+
+  while (a.length) {
+    var n = a.shift();
+
+    if (a.length < 1) {
+      if (Array.isArray(o)) {
+        (function () {
+          var valueToDelete = o[n];
+          o = o.filter(v => {
+            return v !== valueToDelete;
+          });
+        })();
+      } else {
+        delete o[n];
+      }
+
+      (0, _set.default)(object, parentDotPath, o);
+    } else {
+      o = o[n];
+    }
+  }
+
+  return object;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "../../util/sugar/js/object/get.js":
+/*!*******************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/object/get.js ***!
+  \*******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/**
+ * @name                          get
+ * @namespace           js.object
+ * @type                          Function
+ *
+ * Retreive an object value using a dotted path like "myObject.myProperty.myValue"
+ *
+ * @param               {Object}                 obj                The object in which to set the value
+ * @param               {String}                path                The dotted object path to get
+ * @return              {Mixed}                                     The getted value or "undefined" if nothing found...
+ *
+ * @example             js
+ * import get from '@coffeekraken/sugar/js/object/get';
+ * get('myObject.cool.value'); // => 'Hello world'
+ *
+ */
+
+var _default = (obj, path) => {
+  if (obj[path] !== undefined) return obj[path];
+  if (!path || path === '' || path === '.') return obj;
+  path = path.replace(/\[(\w+)\]/g, '.$1');
+  path = path.replace(/^\./, '');
+  var a = path.split('.');
+  var o = obj;
+
+  while (a.length) {
+    var n = a.shift();
+    if (!(n in o)) return;
+    o = o[n];
+  }
+
+  return o;
+};
+
+exports.default = _default;
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "../../util/sugar/js/object/set.js":
+/*!*******************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/object/set.js ***!
+  \*******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _get = _interopRequireDefault(__webpack_require__(/*! ./get */ "../../util/sugar/js/object/get.js"));
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {
+    default: obj
+  };
+}
+/**
+ * @name                                        set
+ * @namespace           js.object
+ * @type                                        Function
+ *
+ * Set an object value using a dotted object path like "myObject.myProperty.myValue" to set his position
+ *
+ * @param                         {Object}                         obj                      The object in which to set the value
+ * @param                         {String}                        path                      The object path where to set the value
+ * @param                         {Mixed}                         value                     The value to set
+ * @return                        {Mixed}                                                   Return the setted value if setted correctly, or undefined if something goes wrong...
+ *
+ * @example               js
+ * import set from '@coffeekraken/sugar/js/object/set';
+ * set('myObject.cool.value', 'Hello world'); // => Hello world
+ *
+ */
+
+
+var _default = (obj, path, value) => {
+  if (!path || path === '' || path === '.') {
+    obj = value;
+    return;
+  }
+
+  var a = path.split('.');
+  var o = obj;
+
+  while (a.length - 1) {
+    var n = a.shift();
+    if (!(n in o)) o[n] = {};
+    o = o[n];
+  }
+
+  o[a[0]] = value;
+  return (0, _get.default)(obj, path);
+};
+
+exports.default = _default;
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "../../util/sugar/js/object/watch.js":
+/*!*********************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/object/watch.js ***!
+  \*********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = watch;
+
+var _SWatch = _interopRequireDefault(__webpack_require__(/*! ./SWatch */ "../../util/sugar/js/object/SWatch.js"));
+
+var _uniqid = _interopRequireDefault(__webpack_require__(/*! ../string/uniqid */ "../../util/sugar/js/string/uniqid.js"));
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {
+    default: obj
+  };
+}
+/**
+ * @name                      watch
+ * @namespace           js.object
+ * @type                      Function
+ *
+ * This method is a simple wrapper around the SWatch class that allows you to watch some action on object and arrays
+ *
+ * @param       {Object|Array}        target          The array or object to watch
+ * @return      {Object}                              Return the proxied object on which you can make all the updates that you want
+ *
+ * @example       js
+ * import watch from '@coffeekraken/sugar/js/object/watch';
+ * let myObj = watch({
+ *    hello: 'world'
+ * }).on('*', watchResult => {
+ *    // do something...
+ * });
+ * myObj.hello = 'plop';
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+
+function watch(target) {
+  var watchedObj = new _SWatch.default(target);
+  return watchedObj;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
 /***/ "../../util/sugar/js/parse/argumentTypeDefinitionString.js":
 /*!*******************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/parse/argumentTypeDefinitionString.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/parse/argumentTypeDefinitionString.js ***!
   \*******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -2321,7 +3365,7 @@ module.exports = exports.default;
 
 /***/ "../../util/sugar/js/promise/SPromise.js":
 /*!*************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/promise/SPromise.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/promise/SPromise.js ***!
   \*************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -2341,6 +3385,10 @@ exports.default = void 0;
 var _deepMerge = _interopRequireDefault(__webpack_require__(/*! ../object/deepMerge */ "../../util/sugar/js/object/deepMerge.js"));
 
 var _prettyError = _interopRequireDefault(__webpack_require__(/*! pretty-error */ "../../util/sugar/node_modules/pretty-error/lib/PrettyError.js"));
+
+var _minimatch = _interopRequireDefault(__webpack_require__(/*! minimatch */ "../../util/sugar/node_modules/minimatch/minimatch.js"));
+
+var _wait = _interopRequireDefault(__webpack_require__(/*! ../time/wait */ "../../util/sugar/js/time/wait.js"));
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {
@@ -2542,7 +3590,7 @@ function _defineProperty(obj, key, value) {
  *    - new SPromise((...)).then(1, value => { // do something... }).catch(3, error => { // do something... }).start();
  * - Expose a method called "on" that can be used to register callbacks the same as the "then", "catch", etc... methods but you can register a same callback function to multiple callbacks type at once:
  *    - new SPromise((...)).on('then', value => { ... }).on('then,catch', value => { ... }).start();
- *    - Specify the max number of time to call your callback function like so: new SPromise((...)).on('then:2', value => { ... }).on('then:1,catch', value => { ... }).start();
+ *    - Specify the max number of time to call your callback function like so: new SPromise((...)).on('then{2}', value => { ... }).on('then{1},catch', value => { ... }).start();
  * - A new method called "start" is exposed. This method is useful when you absolutely need that your executor function is launched right after the callbacks registrations.
  *    - If you don't call the "start" method, the executor function passed to the SPromise constructor will be called on the next javascript execution loop
  * - Support the Promises chaining through the callbacks like to:
@@ -3222,7 +4270,6 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      *
      * @param         {Array|String}             stack             The stack to execute. Can be the stack array directly, or just the stack name like "then", "catch", etc.stack.stack.
      * @param         {Mixed}             initialValue      The initial value to pass to the first stack callback
-     * @param         {String}            [as=null]         This parameter is useful when you want to trigger a stack as another one like when you trigger the stack "*"
      * @return        {Promise}                             A promise resolved with the stack result
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
@@ -3232,35 +4279,51 @@ var SPromise = /*#__PURE__*/function (_Promise) {
     key: "_triggerStack",
     value: function () {
       var _triggerStack2 = _asyncToGenerator(function* (stack, initialValue) {
-        var asName = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-        var currentCallbackReturnedValue = initialValue;
-        var stackName = asName || stack;
+        var currentCallbackReturnedValue = initialValue; // console.log(this._stacks);
+
         if (!this._stacks || Object.keys(this._stacks).length === 0) return currentCallbackReturnedValue;
+        var stackArray = [];
 
         if (typeof stack === 'string') {
           // make sure the stack exist
-          if (!this._stacks[stack]) {
-            this._registerNewStacks(stack);
-          }
+          // if (!this._stacks[stack]) {
+          //   this._registerNewStacks(stack);
+          // }
+          if (this._stacks[stack]) {
+            stackArray = [...stackArray, ...this._stacks[stack]];
+          } // check if the stack is a glob pattern
 
-          stack = this._stacks[stack];
+
+          Object.keys(this._stacks).forEach(stackName => {
+            if (stackName === stack) return;
+            var toAvoid = ['then', 'catch', 'resolve', 'reject', 'finally', 'cancel'];
+            if (toAvoid.indexOf(stack) !== -1 || toAvoid.indexOf(stackName) !== -1) return; // console.log('CHECK', stack, stackName);
+
+            if ((0, _minimatch.default)(stack, stackName)) {
+              // if (stackName === '*' && stack === 'start') {
+              //   console.log('SOMETHING GOOD', stackName, stack);
+              // }
+              // the glob pattern match the triggered stack so add it to the stack array
+              stackArray = [...stackArray, ...this._stacks[stackName]];
+            }
+          });
         } // filter the catchStack
 
 
-        stack.map(item => item.called++);
-        stack = stack.filter(item => {
+        stackArray.map(item => item.called++);
+        stackArray = stackArray.filter(item => {
           if (item.callNumber === -1) return true;
           if (item.called <= item.callNumber) return true;
           return false;
         });
 
-        for (var i = 0; i < stack.length; i++) {
+        for (var i = 0; i < stackArray.length; i++) {
           // get the actual item in the array
-          var item = stack[i]; // make sure the stack exist
+          var item = stackArray[i]; // make sure the stack exist
 
           if (!item.callback) return currentCallbackReturnedValue; // call the callback function
 
-          var callbackResult = item.callback(currentCallbackReturnedValue, stackName); // check if the callback result is a promise
+          var callbackResult = item.callback(currentCallbackReturnedValue, stack); // check if the callback result is a promise
 
           if (Promise.resolve(callbackResult) === callbackResult) {
             callbackResult = yield callbackResult;
@@ -3312,9 +4375,9 @@ var SPromise = /*#__PURE__*/function (_Promise) {
 
           if (stackResult !== undefined) {
             currentStackResult = stackResult;
-          }
+          } // await this._triggerStack('*', currentStackResult, stacks[i]);
+          // this._triggerAllStack(stacks[i], currentStackResult);
 
-          yield this._triggerStack('*', currentStackResult, stacks[i]); // this._triggerAllStack(stacks[i], currentStackResult);
         }
 
         return currentStackResult;
@@ -3363,12 +4426,12 @@ var SPromise = /*#__PURE__*/function (_Promise) {
 
       stacks.forEach(name => {
         // check if it has a callNumber specified using name:1
-        var splitedName = name.split(':');
+        var splitedName = name.split('{');
         var callNumber = -1;
 
         if (splitedName.length === 2) {
           name = splitedName[0];
-          callNumber = parseInt(splitedName[1]);
+          callNumber = parseInt(splitedName[1].replace('}', ''));
         } // calling the registration method
 
 
@@ -3692,7 +4755,7 @@ module.exports = exports.default;
 
 /***/ "../../util/sugar/js/string/autoCast.js":
 /*!************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/string/autoCast.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/string/autoCast.js ***!
   \************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -3764,7 +4827,7 @@ module.exports = exports.default;
 
 /***/ "../../util/sugar/js/string/camelize.js":
 /*!************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/string/camelize.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/string/camelize.js ***!
   \************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -3811,7 +4874,7 @@ module.exports = exports.default;
 
 /***/ "../../util/sugar/js/string/paramCase.js":
 /*!*************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/string/paramCase.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/string/paramCase.js ***!
   \*************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -3855,7 +4918,7 @@ module.exports = exports.default;
 
 /***/ "../../util/sugar/js/string/parse.js":
 /*!*********************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/string/parse.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/string/parse.js ***!
   \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -3901,7 +4964,7 @@ module.exports = exports.default;
 
 /***/ "../../util/sugar/js/string/toString.js":
 /*!************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/string/toString.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/string/toString.js ***!
   \************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -3997,7 +5060,7 @@ module.exports = exports.default;
 
 /***/ "../../util/sugar/js/string/uncamelize.js":
 /*!**************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/string/uncamelize.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/string/uncamelize.js ***!
   \**************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -4043,9 +5106,57 @@ module.exports = exports.default;
 
 /***/ }),
 
+/***/ "../../util/sugar/js/string/uniqid.js":
+/*!**********************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/string/uniqid.js ***!
+  \**********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = uniqid;
+
+var _uniqid = _interopRequireDefault(__webpack_require__(/*! uniqid */ "../../util/sugar/node_modules/uniqid/index.js"));
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {
+    default: obj
+  };
+}
+/**
+ * @name          uniqid
+ * @namespace           js.string
+ * @type          Function
+ *
+ * Generate a uniqid string of 8 bytes. Work using the [uniqid](https://www.npmjs.com/package/uniqid) npm package under the hood.
+ *
+ * @return          {String}                A 8 bytes uniqid string
+ *
+ * @example       js
+ * import uniqid from '@coffeekraken/sugar/js/string/uniqid';
+ * console.log(uniqid()); // => 4n5pxq24
+ *
+ * @see       https://www.npmjs.com/package/uniqid
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+
+function uniqid() {
+  return (0, _uniqid.default)();
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
 /***/ "../../util/sugar/js/string/upperFirst.js":
 /*!**************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/string/upperFirst.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/string/upperFirst.js ***!
   \**************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -4084,7 +5195,7 @@ module.exports = exports.default;
 
 /***/ "../../util/sugar/js/time/convert.js":
 /*!*********************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/time/convert.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/time/convert.js ***!
   \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -4202,9 +5313,53 @@ module.exports = exports.default;
 
 /***/ }),
 
+/***/ "../../util/sugar/js/time/wait.js":
+/*!******************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/time/wait.js ***!
+  \******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = wait;
+/**
+ * @name            wait
+ * @namespace           js.time
+ * @type            Function
+ * @async
+ *
+ * This function is a simple "setTimeout" wrapper inside a promise.
+ *
+ * @param         {Number}        timeout       The timeout to wait in ms
+ * @return        {Promise}                     A simple promise resolved once the timeout is finished
+ *
+ * @example       js
+ * import wait from '@coffeekraken/sugar/js/time/wait';
+ * await wait(2000);
+ *
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+function wait(timeout) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve();
+    }, timeout);
+  });
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
 /***/ "../../util/sugar/js/value/validateWithDefinitionObject.js":
 /*!*******************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/value/validateWithDefinitionObject.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/value/validateWithDefinitionObject.js ***!
   \*******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -4245,6 +5400,8 @@ function _interopRequireDefault(obj) {
  *    required: true
  * }); // => true
  *
+ * @todo      tests
+ *
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
@@ -4278,7 +5435,7 @@ module.exports = exports.default;
 
 /***/ "../../util/sugar/js/webcomponent/SLitHtmlWebComponent.js":
 /*!******************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/webcomponent/SLitHtmlWebComponent.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/webcomponent/SLitHtmlWebComponent.js ***!
   \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -4515,7 +5672,7 @@ module.exports = exports.default;
 
 /***/ "../../util/sugar/js/webcomponent/SWebComponent.js":
 /*!***********************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/webcomponent/SWebComponent.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/webcomponent/SWebComponent.js ***!
   \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -4555,6 +5712,8 @@ var _paramCase = _interopRequireDefault(__webpack_require__(/*! ../string/paramC
 var _uncamelize = _interopRequireDefault(__webpack_require__(/*! ../string/uncamelize */ "../../util/sugar/js/string/uncamelize.js"));
 
 var _validateWithDefinitionObject = _interopRequireDefault(__webpack_require__(/*! ../value/validateWithDefinitionObject */ "../../util/sugar/js/value/validateWithDefinitionObject.js"));
+
+var _watch = _interopRequireDefault(__webpack_require__(/*! ../object/watch */ "../../util/sugar/js/object/watch.js"));
 
 var _register = __webpack_require__(/*! ./register */ "../../util/sugar/js/webcomponent/register.js");
 
@@ -4769,8 +5928,19 @@ function SWebComponent() {
        *
        * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
+
+      /**
+       * @name        observedAttributes
+       * @type        Function
+       * @get
+       * @static
+       *
+       * This medhod simply return the list of props that will be
+       * observed by the customElements under the hood system.
+       *
+       * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
       get: function get() {
-        console.log('thguthught', this.props);
         return Object.keys(this.props);
       }
       /**
@@ -4810,7 +5980,7 @@ function SWebComponent() {
 
       _this._promise = new _SPromise.default(() => {}).start();
 
-      for (var key in _this._settings.props) {
+      var _loop = function _loop(key) {
         _this._props[key] = _objectSpread(_objectSpread({}, _this._settings.props[key]), {}, {
           valuesStack: [],
           value: _this._settings.props[key].default,
@@ -4819,7 +5989,24 @@ function SWebComponent() {
 
         if (_this._props[key].value !== undefined) {
           _this._props[key].valuesStack.push(_this._props[key].value);
+        } // if need to be watches deeply
+
+
+        if (_this._props[key].watch) {
+          _this._props[key] = (0, _watch.default)(_this._props[key]);
+
+          _this._props[key].on('*:set', update => {
+            console.trace('up', update);
+          });
+
+          setTimeout(() => {
+            _this._props[key].value.push('SOMTHINS');
+          }, 2000);
         }
+      };
+
+      for (var key in _this._settings.props) {
+        _loop(key);
       } // launch the mounting process
 
 
@@ -4942,7 +6129,6 @@ function SWebComponent() {
       key: "connectedCallback",
       value: function connectedCallback() {
         // dispatch "event"
-        console.log('CONNEE');
         setTimeout(() => {
           this._promise.trigger('attach');
         });
@@ -4986,8 +6172,7 @@ function SWebComponent() {
 
         propObj.value = newValue;
         propObj.previousValue = previousValue;
-        propObj.valuesStack.push(newValue);
-        console.log(propObj); // save the prop
+        propObj.valuesStack.push(newValue); // save the prop
         // this._props[__camelize(attrName)] = newPropObj;
         // trigger a "prop" event
 
@@ -5049,11 +6234,8 @@ function SWebComponent() {
           action: this._props[prop].previousValue !== null ? this._props[prop].value !== null ? 'update' : 'remove' : 'add',
           value: this._props[prop].value,
           previousValue: this._props[prop].previousValue
-        };
-
-        this._promise.trigger('prop', eventObj);
-
-        this._promise.trigger("prop.".concat(prop), eventObj);
+        }; // this._promise.trigger('prop', eventObj);
+        // this._promise.trigger(`prop.${prop}`, eventObj);
       }
       /**
        * @name        _handlePhysicalProps
@@ -5134,7 +6316,7 @@ module.exports = exports.default;
 
 /***/ "../../util/sugar/js/webcomponent/register.js":
 /*!******************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/js/webcomponent/register.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/webcomponent/register.js ***!
   \******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -5216,9 +6398,80 @@ function define(name, cls) {
 
 /***/ }),
 
+/***/ "../../util/sugar/node_modules/balanced-match/index.js":
+/*!***************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/balanced-match/index.js ***!
+  \***************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+module.exports = balanced;
+function balanced(a, b, str) {
+  if (a instanceof RegExp) a = maybeMatch(a, str);
+  if (b instanceof RegExp) b = maybeMatch(b, str);
+
+  var r = range(a, b, str);
+
+  return r && {
+    start: r[0],
+    end: r[1],
+    pre: str.slice(0, r[0]),
+    body: str.slice(r[0] + a.length, r[1]),
+    post: str.slice(r[1] + b.length)
+  };
+}
+
+function maybeMatch(reg, str) {
+  var m = str.match(reg);
+  return m ? m[0] : null;
+}
+
+balanced.range = range;
+function range(a, b, str) {
+  var begs, beg, left, right, result;
+  var ai = str.indexOf(a);
+  var bi = str.indexOf(b, ai + 1);
+  var i = ai;
+
+  if (ai >= 0 && bi > 0) {
+    begs = [];
+    left = str.length;
+
+    while (i >= 0 && !result) {
+      if (i == ai) {
+        begs.push(i);
+        ai = str.indexOf(a, i + 1);
+      } else if (begs.length == 1) {
+        result = [ begs.pop(), bi ];
+      } else {
+        beg = begs.pop();
+        if (beg < left) {
+          left = beg;
+          right = bi;
+        }
+
+        bi = str.indexOf(b, i + 1);
+      }
+
+      i = ai < bi && ai >= 0 ? ai : bi;
+    }
+
+    if (begs.length) {
+      result = [ left, right ];
+    }
+  }
+
+  return result;
+}
+
+
+/***/ }),
+
 /***/ "../../util/sugar/node_modules/base64-js/index.js":
 /*!**********************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/base64-js/index.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/base64-js/index.js ***!
   \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -5382,7 +6635,7 @@ function fromByteArray (uint8) {
 
 /***/ "../../util/sugar/node_modules/boolbase/index.js":
 /*!*********************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/boolbase/index.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/boolbase/index.js ***!
   \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -5398,9 +6651,1203 @@ module.exports = {
 
 /***/ }),
 
+/***/ "../../util/sugar/node_modules/brace-expansion/index.js":
+/*!****************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/brace-expansion/index.js ***!
+  \****************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var concatMap = __webpack_require__(/*! concat-map */ "../../util/sugar/node_modules/concat-map/index.js");
+var balanced = __webpack_require__(/*! balanced-match */ "../../util/sugar/node_modules/balanced-match/index.js");
+
+module.exports = expandTop;
+
+var escSlash = '\0SLASH'+Math.random()+'\0';
+var escOpen = '\0OPEN'+Math.random()+'\0';
+var escClose = '\0CLOSE'+Math.random()+'\0';
+var escComma = '\0COMMA'+Math.random()+'\0';
+var escPeriod = '\0PERIOD'+Math.random()+'\0';
+
+function numeric(str) {
+  return parseInt(str, 10) == str
+    ? parseInt(str, 10)
+    : str.charCodeAt(0);
+}
+
+function escapeBraces(str) {
+  return str.split('\\\\').join(escSlash)
+            .split('\\{').join(escOpen)
+            .split('\\}').join(escClose)
+            .split('\\,').join(escComma)
+            .split('\\.').join(escPeriod);
+}
+
+function unescapeBraces(str) {
+  return str.split(escSlash).join('\\')
+            .split(escOpen).join('{')
+            .split(escClose).join('}')
+            .split(escComma).join(',')
+            .split(escPeriod).join('.');
+}
+
+
+// Basically just str.split(","), but handling cases
+// where we have nested braced sections, which should be
+// treated as individual members, like {a,{b,c},d}
+function parseCommaParts(str) {
+  if (!str)
+    return [''];
+
+  var parts = [];
+  var m = balanced('{', '}', str);
+
+  if (!m)
+    return str.split(',');
+
+  var pre = m.pre;
+  var body = m.body;
+  var post = m.post;
+  var p = pre.split(',');
+
+  p[p.length-1] += '{' + body + '}';
+  var postParts = parseCommaParts(post);
+  if (post.length) {
+    p[p.length-1] += postParts.shift();
+    p.push.apply(p, postParts);
+  }
+
+  parts.push.apply(parts, p);
+
+  return parts;
+}
+
+function expandTop(str) {
+  if (!str)
+    return [];
+
+  // I don't know why Bash 4.3 does this, but it does.
+  // Anything starting with {} will have the first two bytes preserved
+  // but *only* at the top level, so {},a}b will not expand to anything,
+  // but a{},b}c will be expanded to [a}c,abc].
+  // One could argue that this is a bug in Bash, but since the goal of
+  // this module is to match Bash's rules, we escape a leading {}
+  if (str.substr(0, 2) === '{}') {
+    str = '\\{\\}' + str.substr(2);
+  }
+
+  return expand(escapeBraces(str), true).map(unescapeBraces);
+}
+
+function identity(e) {
+  return e;
+}
+
+function embrace(str) {
+  return '{' + str + '}';
+}
+function isPadded(el) {
+  return /^-?0\d/.test(el);
+}
+
+function lte(i, y) {
+  return i <= y;
+}
+function gte(i, y) {
+  return i >= y;
+}
+
+function expand(str, isTop) {
+  var expansions = [];
+
+  var m = balanced('{', '}', str);
+  if (!m || /\$$/.test(m.pre)) return [str];
+
+  var isNumericSequence = /^-?\d+\.\.-?\d+(?:\.\.-?\d+)?$/.test(m.body);
+  var isAlphaSequence = /^[a-zA-Z]\.\.[a-zA-Z](?:\.\.-?\d+)?$/.test(m.body);
+  var isSequence = isNumericSequence || isAlphaSequence;
+  var isOptions = m.body.indexOf(',') >= 0;
+  if (!isSequence && !isOptions) {
+    // {a},b}
+    if (m.post.match(/,.*\}/)) {
+      str = m.pre + '{' + m.body + escClose + m.post;
+      return expand(str);
+    }
+    return [str];
+  }
+
+  var n;
+  if (isSequence) {
+    n = m.body.split(/\.\./);
+  } else {
+    n = parseCommaParts(m.body);
+    if (n.length === 1) {
+      // x{{a,b}}y ==> x{a}y x{b}y
+      n = expand(n[0], false).map(embrace);
+      if (n.length === 1) {
+        var post = m.post.length
+          ? expand(m.post, false)
+          : [''];
+        return post.map(function(p) {
+          return m.pre + n[0] + p;
+        });
+      }
+    }
+  }
+
+  // at this point, n is the parts, and we know it's not a comma set
+  // with a single entry.
+
+  // no need to expand pre, since it is guaranteed to be free of brace-sets
+  var pre = m.pre;
+  var post = m.post.length
+    ? expand(m.post, false)
+    : [''];
+
+  var N;
+
+  if (isSequence) {
+    var x = numeric(n[0]);
+    var y = numeric(n[1]);
+    var width = Math.max(n[0].length, n[1].length)
+    var incr = n.length == 3
+      ? Math.abs(numeric(n[2]))
+      : 1;
+    var test = lte;
+    var reverse = y < x;
+    if (reverse) {
+      incr *= -1;
+      test = gte;
+    }
+    var pad = n.some(isPadded);
+
+    N = [];
+
+    for (var i = x; test(i, y); i += incr) {
+      var c;
+      if (isAlphaSequence) {
+        c = String.fromCharCode(i);
+        if (c === '\\')
+          c = '';
+      } else {
+        c = String(i);
+        if (pad) {
+          var need = width - c.length;
+          if (need > 0) {
+            var z = new Array(need + 1).join('0');
+            if (i < 0)
+              c = '-' + z + c.slice(1);
+            else
+              c = z + c;
+          }
+        }
+      }
+      N.push(c);
+    }
+  } else {
+    N = concatMap(n, function(el) { return expand(el, false) });
+  }
+
+  for (var j = 0; j < N.length; j++) {
+    for (var k = 0; k < post.length; k++) {
+      var expansion = pre + N[j] + post[k];
+      if (!isTop || isSequence || expansion)
+        expansions.push(expansion);
+    }
+  }
+
+  return expansions;
+}
+
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/braces/index.js":
+/*!*******************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/braces/index.js ***!
+  \*******************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+const stringify = __webpack_require__(/*! ./lib/stringify */ "../../util/sugar/node_modules/braces/lib/stringify.js");
+const compile = __webpack_require__(/*! ./lib/compile */ "../../util/sugar/node_modules/braces/lib/compile.js");
+const expand = __webpack_require__(/*! ./lib/expand */ "../../util/sugar/node_modules/braces/lib/expand.js");
+const parse = __webpack_require__(/*! ./lib/parse */ "../../util/sugar/node_modules/braces/lib/parse.js");
+
+/**
+ * Expand the given pattern or create a regex-compatible string.
+ *
+ * ```js
+ * const braces = require('braces');
+ * console.log(braces('{a,b,c}', { compile: true })); //=> ['(a|b|c)']
+ * console.log(braces('{a,b,c}')); //=> ['a', 'b', 'c']
+ * ```
+ * @param {String} `str`
+ * @param {Object} `options`
+ * @return {String}
+ * @api public
+ */
+
+const braces = (input, options = {}) => {
+  let output = [];
+
+  if (Array.isArray(input)) {
+    for (let pattern of input) {
+      let result = braces.create(pattern, options);
+      if (Array.isArray(result)) {
+        output.push(...result);
+      } else {
+        output.push(result);
+      }
+    }
+  } else {
+    output = [].concat(braces.create(input, options));
+  }
+
+  if (options && options.expand === true && options.nodupes === true) {
+    output = [...new Set(output)];
+  }
+  return output;
+};
+
+/**
+ * Parse the given `str` with the given `options`.
+ *
+ * ```js
+ * // braces.parse(pattern, [, options]);
+ * const ast = braces.parse('a/{b,c}/d');
+ * console.log(ast);
+ * ```
+ * @param {String} pattern Brace pattern to parse
+ * @param {Object} options
+ * @return {Object} Returns an AST
+ * @api public
+ */
+
+braces.parse = (input, options = {}) => parse(input, options);
+
+/**
+ * Creates a braces string from an AST, or an AST node.
+ *
+ * ```js
+ * const braces = require('braces');
+ * let ast = braces.parse('foo/{a,b}/bar');
+ * console.log(stringify(ast.nodes[2])); //=> '{a,b}'
+ * ```
+ * @param {String} `input` Brace pattern or AST.
+ * @param {Object} `options`
+ * @return {Array} Returns an array of expanded values.
+ * @api public
+ */
+
+braces.stringify = (input, options = {}) => {
+  if (typeof input === 'string') {
+    return stringify(braces.parse(input, options), options);
+  }
+  return stringify(input, options);
+};
+
+/**
+ * Compiles a brace pattern into a regex-compatible, optimized string.
+ * This method is called by the main [braces](#braces) function by default.
+ *
+ * ```js
+ * const braces = require('braces');
+ * console.log(braces.compile('a/{b,c}/d'));
+ * //=> ['a/(b|c)/d']
+ * ```
+ * @param {String} `input` Brace pattern or AST.
+ * @param {Object} `options`
+ * @return {Array} Returns an array of expanded values.
+ * @api public
+ */
+
+braces.compile = (input, options = {}) => {
+  if (typeof input === 'string') {
+    input = braces.parse(input, options);
+  }
+  return compile(input, options);
+};
+
+/**
+ * Expands a brace pattern into an array. This method is called by the
+ * main [braces](#braces) function when `options.expand` is true. Before
+ * using this method it's recommended that you read the [performance notes](#performance))
+ * and advantages of using [.compile](#compile) instead.
+ *
+ * ```js
+ * const braces = require('braces');
+ * console.log(braces.expand('a/{b,c}/d'));
+ * //=> ['a/b/d', 'a/c/d'];
+ * ```
+ * @param {String} `pattern` Brace pattern
+ * @param {Object} `options`
+ * @return {Array} Returns an array of expanded values.
+ * @api public
+ */
+
+braces.expand = (input, options = {}) => {
+  if (typeof input === 'string') {
+    input = braces.parse(input, options);
+  }
+
+  let result = expand(input, options);
+
+  // filter out empty strings if specified
+  if (options.noempty === true) {
+    result = result.filter(Boolean);
+  }
+
+  // filter out duplicates if specified
+  if (options.nodupes === true) {
+    result = [...new Set(result)];
+  }
+
+  return result;
+};
+
+/**
+ * Processes a brace pattern and returns either an expanded array
+ * (if `options.expand` is true), a highly optimized regex-compatible string.
+ * This method is called by the main [braces](#braces) function.
+ *
+ * ```js
+ * const braces = require('braces');
+ * console.log(braces.create('user-{200..300}/project-{a,b,c}-{1..10}'))
+ * //=> 'user-(20[0-9]|2[1-9][0-9]|300)/project-(a|b|c)-([1-9]|10)'
+ * ```
+ * @param {String} `pattern` Brace pattern
+ * @param {Object} `options`
+ * @return {Array} Returns an array of expanded values.
+ * @api public
+ */
+
+braces.create = (input, options = {}) => {
+  if (input === '' || input.length < 3) {
+    return [input];
+  }
+
+ return options.expand !== true
+    ? braces.compile(input, options)
+    : braces.expand(input, options);
+};
+
+/**
+ * Expose "braces"
+ */
+
+module.exports = braces;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/braces/lib/compile.js":
+/*!*************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/braces/lib/compile.js ***!
+  \*************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+const fill = __webpack_require__(/*! fill-range */ "../../util/sugar/node_modules/fill-range/index.js");
+const utils = __webpack_require__(/*! ./utils */ "../../util/sugar/node_modules/braces/lib/utils.js");
+
+const compile = (ast, options = {}) => {
+  let walk = (node, parent = {}) => {
+    let invalidBlock = utils.isInvalidBrace(parent);
+    let invalidNode = node.invalid === true && options.escapeInvalid === true;
+    let invalid = invalidBlock === true || invalidNode === true;
+    let prefix = options.escapeInvalid === true ? '\\' : '';
+    let output = '';
+
+    if (node.isOpen === true) {
+      return prefix + node.value;
+    }
+    if (node.isClose === true) {
+      return prefix + node.value;
+    }
+
+    if (node.type === 'open') {
+      return invalid ? (prefix + node.value) : '(';
+    }
+
+    if (node.type === 'close') {
+      return invalid ? (prefix + node.value) : ')';
+    }
+
+    if (node.type === 'comma') {
+      return node.prev.type === 'comma' ? '' : (invalid ? node.value : '|');
+    }
+
+    if (node.value) {
+      return node.value;
+    }
+
+    if (node.nodes && node.ranges > 0) {
+      let args = utils.reduce(node.nodes);
+      let range = fill(...args, { ...options, wrap: false, toRegex: true });
+
+      if (range.length !== 0) {
+        return args.length > 1 && range.length > 1 ? `(${range})` : range;
+      }
+    }
+
+    if (node.nodes) {
+      for (let child of node.nodes) {
+        output += walk(child, node);
+      }
+    }
+    return output;
+  };
+
+  return walk(ast);
+};
+
+module.exports = compile;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/braces/lib/constants.js":
+/*!***************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/braces/lib/constants.js ***!
+  \***************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = {
+  MAX_LENGTH: 1024 * 64,
+
+  // Digits
+  CHAR_0: '0', /* 0 */
+  CHAR_9: '9', /* 9 */
+
+  // Alphabet chars.
+  CHAR_UPPERCASE_A: 'A', /* A */
+  CHAR_LOWERCASE_A: 'a', /* a */
+  CHAR_UPPERCASE_Z: 'Z', /* Z */
+  CHAR_LOWERCASE_Z: 'z', /* z */
+
+  CHAR_LEFT_PARENTHESES: '(', /* ( */
+  CHAR_RIGHT_PARENTHESES: ')', /* ) */
+
+  CHAR_ASTERISK: '*', /* * */
+
+  // Non-alphabetic chars.
+  CHAR_AMPERSAND: '&', /* & */
+  CHAR_AT: '@', /* @ */
+  CHAR_BACKSLASH: '\\', /* \ */
+  CHAR_BACKTICK: '`', /* ` */
+  CHAR_CARRIAGE_RETURN: '\r', /* \r */
+  CHAR_CIRCUMFLEX_ACCENT: '^', /* ^ */
+  CHAR_COLON: ':', /* : */
+  CHAR_COMMA: ',', /* , */
+  CHAR_DOLLAR: '$', /* . */
+  CHAR_DOT: '.', /* . */
+  CHAR_DOUBLE_QUOTE: '"', /* " */
+  CHAR_EQUAL: '=', /* = */
+  CHAR_EXCLAMATION_MARK: '!', /* ! */
+  CHAR_FORM_FEED: '\f', /* \f */
+  CHAR_FORWARD_SLASH: '/', /* / */
+  CHAR_HASH: '#', /* # */
+  CHAR_HYPHEN_MINUS: '-', /* - */
+  CHAR_LEFT_ANGLE_BRACKET: '<', /* < */
+  CHAR_LEFT_CURLY_BRACE: '{', /* { */
+  CHAR_LEFT_SQUARE_BRACKET: '[', /* [ */
+  CHAR_LINE_FEED: '\n', /* \n */
+  CHAR_NO_BREAK_SPACE: '\u00A0', /* \u00A0 */
+  CHAR_PERCENT: '%', /* % */
+  CHAR_PLUS: '+', /* + */
+  CHAR_QUESTION_MARK: '?', /* ? */
+  CHAR_RIGHT_ANGLE_BRACKET: '>', /* > */
+  CHAR_RIGHT_CURLY_BRACE: '}', /* } */
+  CHAR_RIGHT_SQUARE_BRACKET: ']', /* ] */
+  CHAR_SEMICOLON: ';', /* ; */
+  CHAR_SINGLE_QUOTE: '\'', /* ' */
+  CHAR_SPACE: ' ', /*   */
+  CHAR_TAB: '\t', /* \t */
+  CHAR_UNDERSCORE: '_', /* _ */
+  CHAR_VERTICAL_LINE: '|', /* | */
+  CHAR_ZERO_WIDTH_NOBREAK_SPACE: '\uFEFF' /* \uFEFF */
+};
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/braces/lib/expand.js":
+/*!************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/braces/lib/expand.js ***!
+  \************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+const fill = __webpack_require__(/*! fill-range */ "../../util/sugar/node_modules/fill-range/index.js");
+const stringify = __webpack_require__(/*! ./stringify */ "../../util/sugar/node_modules/braces/lib/stringify.js");
+const utils = __webpack_require__(/*! ./utils */ "../../util/sugar/node_modules/braces/lib/utils.js");
+
+const append = (queue = '', stash = '', enclose = false) => {
+  let result = [];
+
+  queue = [].concat(queue);
+  stash = [].concat(stash);
+
+  if (!stash.length) return queue;
+  if (!queue.length) {
+    return enclose ? utils.flatten(stash).map(ele => `{${ele}}`) : stash;
+  }
+
+  for (let item of queue) {
+    if (Array.isArray(item)) {
+      for (let value of item) {
+        result.push(append(value, stash, enclose));
+      }
+    } else {
+      for (let ele of stash) {
+        if (enclose === true && typeof ele === 'string') ele = `{${ele}}`;
+        result.push(Array.isArray(ele) ? append(item, ele, enclose) : (item + ele));
+      }
+    }
+  }
+  return utils.flatten(result);
+};
+
+const expand = (ast, options = {}) => {
+  let rangeLimit = options.rangeLimit === void 0 ? 1000 : options.rangeLimit;
+
+  let walk = (node, parent = {}) => {
+    node.queue = [];
+
+    let p = parent;
+    let q = parent.queue;
+
+    while (p.type !== 'brace' && p.type !== 'root' && p.parent) {
+      p = p.parent;
+      q = p.queue;
+    }
+
+    if (node.invalid || node.dollar) {
+      q.push(append(q.pop(), stringify(node, options)));
+      return;
+    }
+
+    if (node.type === 'brace' && node.invalid !== true && node.nodes.length === 2) {
+      q.push(append(q.pop(), ['{}']));
+      return;
+    }
+
+    if (node.nodes && node.ranges > 0) {
+      let args = utils.reduce(node.nodes);
+
+      if (utils.exceedsLimit(...args, options.step, rangeLimit)) {
+        throw new RangeError('expanded array length exceeds range limit. Use options.rangeLimit to increase or disable the limit.');
+      }
+
+      let range = fill(...args, options);
+      if (range.length === 0) {
+        range = stringify(node, options);
+      }
+
+      q.push(append(q.pop(), range));
+      node.nodes = [];
+      return;
+    }
+
+    let enclose = utils.encloseBrace(node);
+    let queue = node.queue;
+    let block = node;
+
+    while (block.type !== 'brace' && block.type !== 'root' && block.parent) {
+      block = block.parent;
+      queue = block.queue;
+    }
+
+    for (let i = 0; i < node.nodes.length; i++) {
+      let child = node.nodes[i];
+
+      if (child.type === 'comma' && node.type === 'brace') {
+        if (i === 1) queue.push('');
+        queue.push('');
+        continue;
+      }
+
+      if (child.type === 'close') {
+        q.push(append(q.pop(), queue, enclose));
+        continue;
+      }
+
+      if (child.value && child.type !== 'open') {
+        queue.push(append(queue.pop(), child.value));
+        continue;
+      }
+
+      if (child.nodes) {
+        walk(child, node);
+      }
+    }
+
+    return queue;
+  };
+
+  return utils.flatten(walk(ast));
+};
+
+module.exports = expand;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/braces/lib/parse.js":
+/*!***********************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/braces/lib/parse.js ***!
+  \***********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+const stringify = __webpack_require__(/*! ./stringify */ "../../util/sugar/node_modules/braces/lib/stringify.js");
+
+/**
+ * Constants
+ */
+
+const {
+  MAX_LENGTH,
+  CHAR_BACKSLASH, /* \ */
+  CHAR_BACKTICK, /* ` */
+  CHAR_COMMA, /* , */
+  CHAR_DOT, /* . */
+  CHAR_LEFT_PARENTHESES, /* ( */
+  CHAR_RIGHT_PARENTHESES, /* ) */
+  CHAR_LEFT_CURLY_BRACE, /* { */
+  CHAR_RIGHT_CURLY_BRACE, /* } */
+  CHAR_LEFT_SQUARE_BRACKET, /* [ */
+  CHAR_RIGHT_SQUARE_BRACKET, /* ] */
+  CHAR_DOUBLE_QUOTE, /* " */
+  CHAR_SINGLE_QUOTE, /* ' */
+  CHAR_NO_BREAK_SPACE,
+  CHAR_ZERO_WIDTH_NOBREAK_SPACE
+} = __webpack_require__(/*! ./constants */ "../../util/sugar/node_modules/braces/lib/constants.js");
+
+/**
+ * parse
+ */
+
+const parse = (input, options = {}) => {
+  if (typeof input !== 'string') {
+    throw new TypeError('Expected a string');
+  }
+
+  let opts = options || {};
+  let max = typeof opts.maxLength === 'number' ? Math.min(MAX_LENGTH, opts.maxLength) : MAX_LENGTH;
+  if (input.length > max) {
+    throw new SyntaxError(`Input length (${input.length}), exceeds max characters (${max})`);
+  }
+
+  let ast = { type: 'root', input, nodes: [] };
+  let stack = [ast];
+  let block = ast;
+  let prev = ast;
+  let brackets = 0;
+  let length = input.length;
+  let index = 0;
+  let depth = 0;
+  let value;
+  let memo = {};
+
+  /**
+   * Helpers
+   */
+
+  const advance = () => input[index++];
+  const push = node => {
+    if (node.type === 'text' && prev.type === 'dot') {
+      prev.type = 'text';
+    }
+
+    if (prev && prev.type === 'text' && node.type === 'text') {
+      prev.value += node.value;
+      return;
+    }
+
+    block.nodes.push(node);
+    node.parent = block;
+    node.prev = prev;
+    prev = node;
+    return node;
+  };
+
+  push({ type: 'bos' });
+
+  while (index < length) {
+    block = stack[stack.length - 1];
+    value = advance();
+
+    /**
+     * Invalid chars
+     */
+
+    if (value === CHAR_ZERO_WIDTH_NOBREAK_SPACE || value === CHAR_NO_BREAK_SPACE) {
+      continue;
+    }
+
+    /**
+     * Escaped chars
+     */
+
+    if (value === CHAR_BACKSLASH) {
+      push({ type: 'text', value: (options.keepEscaping ? value : '') + advance() });
+      continue;
+    }
+
+    /**
+     * Right square bracket (literal): ']'
+     */
+
+    if (value === CHAR_RIGHT_SQUARE_BRACKET) {
+      push({ type: 'text', value: '\\' + value });
+      continue;
+    }
+
+    /**
+     * Left square bracket: '['
+     */
+
+    if (value === CHAR_LEFT_SQUARE_BRACKET) {
+      brackets++;
+
+      let closed = true;
+      let next;
+
+      while (index < length && (next = advance())) {
+        value += next;
+
+        if (next === CHAR_LEFT_SQUARE_BRACKET) {
+          brackets++;
+          continue;
+        }
+
+        if (next === CHAR_BACKSLASH) {
+          value += advance();
+          continue;
+        }
+
+        if (next === CHAR_RIGHT_SQUARE_BRACKET) {
+          brackets--;
+
+          if (brackets === 0) {
+            break;
+          }
+        }
+      }
+
+      push({ type: 'text', value });
+      continue;
+    }
+
+    /**
+     * Parentheses
+     */
+
+    if (value === CHAR_LEFT_PARENTHESES) {
+      block = push({ type: 'paren', nodes: [] });
+      stack.push(block);
+      push({ type: 'text', value });
+      continue;
+    }
+
+    if (value === CHAR_RIGHT_PARENTHESES) {
+      if (block.type !== 'paren') {
+        push({ type: 'text', value });
+        continue;
+      }
+      block = stack.pop();
+      push({ type: 'text', value });
+      block = stack[stack.length - 1];
+      continue;
+    }
+
+    /**
+     * Quotes: '|"|`
+     */
+
+    if (value === CHAR_DOUBLE_QUOTE || value === CHAR_SINGLE_QUOTE || value === CHAR_BACKTICK) {
+      let open = value;
+      let next;
+
+      if (options.keepQuotes !== true) {
+        value = '';
+      }
+
+      while (index < length && (next = advance())) {
+        if (next === CHAR_BACKSLASH) {
+          value += next + advance();
+          continue;
+        }
+
+        if (next === open) {
+          if (options.keepQuotes === true) value += next;
+          break;
+        }
+
+        value += next;
+      }
+
+      push({ type: 'text', value });
+      continue;
+    }
+
+    /**
+     * Left curly brace: '{'
+     */
+
+    if (value === CHAR_LEFT_CURLY_BRACE) {
+      depth++;
+
+      let dollar = prev.value && prev.value.slice(-1) === '$' || block.dollar === true;
+      let brace = {
+        type: 'brace',
+        open: true,
+        close: false,
+        dollar,
+        depth,
+        commas: 0,
+        ranges: 0,
+        nodes: []
+      };
+
+      block = push(brace);
+      stack.push(block);
+      push({ type: 'open', value });
+      continue;
+    }
+
+    /**
+     * Right curly brace: '}'
+     */
+
+    if (value === CHAR_RIGHT_CURLY_BRACE) {
+      if (block.type !== 'brace') {
+        push({ type: 'text', value });
+        continue;
+      }
+
+      let type = 'close';
+      block = stack.pop();
+      block.close = true;
+
+      push({ type, value });
+      depth--;
+
+      block = stack[stack.length - 1];
+      continue;
+    }
+
+    /**
+     * Comma: ','
+     */
+
+    if (value === CHAR_COMMA && depth > 0) {
+      if (block.ranges > 0) {
+        block.ranges = 0;
+        let open = block.nodes.shift();
+        block.nodes = [open, { type: 'text', value: stringify(block) }];
+      }
+
+      push({ type: 'comma', value });
+      block.commas++;
+      continue;
+    }
+
+    /**
+     * Dot: '.'
+     */
+
+    if (value === CHAR_DOT && depth > 0 && block.commas === 0) {
+      let siblings = block.nodes;
+
+      if (depth === 0 || siblings.length === 0) {
+        push({ type: 'text', value });
+        continue;
+      }
+
+      if (prev.type === 'dot') {
+        block.range = [];
+        prev.value += value;
+        prev.type = 'range';
+
+        if (block.nodes.length !== 3 && block.nodes.length !== 5) {
+          block.invalid = true;
+          block.ranges = 0;
+          prev.type = 'text';
+          continue;
+        }
+
+        block.ranges++;
+        block.args = [];
+        continue;
+      }
+
+      if (prev.type === 'range') {
+        siblings.pop();
+
+        let before = siblings[siblings.length - 1];
+        before.value += prev.value + value;
+        prev = before;
+        block.ranges--;
+        continue;
+      }
+
+      push({ type: 'dot', value });
+      continue;
+    }
+
+    /**
+     * Text
+     */
+
+    push({ type: 'text', value });
+  }
+
+  // Mark imbalanced braces and brackets as invalid
+  do {
+    block = stack.pop();
+
+    if (block.type !== 'root') {
+      block.nodes.forEach(node => {
+        if (!node.nodes) {
+          if (node.type === 'open') node.isOpen = true;
+          if (node.type === 'close') node.isClose = true;
+          if (!node.nodes) node.type = 'text';
+          node.invalid = true;
+        }
+      });
+
+      // get the location of the block on parent.nodes (block's siblings)
+      let parent = stack[stack.length - 1];
+      let index = parent.nodes.indexOf(block);
+      // replace the (invalid) block with it's nodes
+      parent.nodes.splice(index, 1, ...block.nodes);
+    }
+  } while (stack.length > 0);
+
+  push({ type: 'eos' });
+  return ast;
+};
+
+module.exports = parse;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/braces/lib/stringify.js":
+/*!***************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/braces/lib/stringify.js ***!
+  \***************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+const utils = __webpack_require__(/*! ./utils */ "../../util/sugar/node_modules/braces/lib/utils.js");
+
+module.exports = (ast, options = {}) => {
+  let stringify = (node, parent = {}) => {
+    let invalidBlock = options.escapeInvalid && utils.isInvalidBrace(parent);
+    let invalidNode = node.invalid === true && options.escapeInvalid === true;
+    let output = '';
+
+    if (node.value) {
+      if ((invalidBlock || invalidNode) && utils.isOpenOrClose(node)) {
+        return '\\' + node.value;
+      }
+      return node.value;
+    }
+
+    if (node.value) {
+      return node.value;
+    }
+
+    if (node.nodes) {
+      for (let child of node.nodes) {
+        output += stringify(child);
+      }
+    }
+    return output;
+  };
+
+  return stringify(ast);
+};
+
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/braces/lib/utils.js":
+/*!***********************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/braces/lib/utils.js ***!
+  \***********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.isInteger = num => {
+  if (typeof num === 'number') {
+    return Number.isInteger(num);
+  }
+  if (typeof num === 'string' && num.trim() !== '') {
+    return Number.isInteger(Number(num));
+  }
+  return false;
+};
+
+/**
+ * Find a node of the given type
+ */
+
+exports.find = (node, type) => node.nodes.find(node => node.type === type);
+
+/**
+ * Find a node of the given type
+ */
+
+exports.exceedsLimit = (min, max, step = 1, limit) => {
+  if (limit === false) return false;
+  if (!exports.isInteger(min) || !exports.isInteger(max)) return false;
+  return ((Number(max) - Number(min)) / Number(step)) >= limit;
+};
+
+/**
+ * Escape the given node with '\\' before node.value
+ */
+
+exports.escapeNode = (block, n = 0, type) => {
+  let node = block.nodes[n];
+  if (!node) return;
+
+  if ((type && node.type === type) || node.type === 'open' || node.type === 'close') {
+    if (node.escaped !== true) {
+      node.value = '\\' + node.value;
+      node.escaped = true;
+    }
+  }
+};
+
+/**
+ * Returns true if the given brace node should be enclosed in literal braces
+ */
+
+exports.encloseBrace = node => {
+  if (node.type !== 'brace') return false;
+  if ((node.commas >> 0 + node.ranges >> 0) === 0) {
+    node.invalid = true;
+    return true;
+  }
+  return false;
+};
+
+/**
+ * Returns true if a brace node is invalid.
+ */
+
+exports.isInvalidBrace = block => {
+  if (block.type !== 'brace') return false;
+  if (block.invalid === true || block.dollar) return true;
+  if ((block.commas >> 0 + block.ranges >> 0) === 0) {
+    block.invalid = true;
+    return true;
+  }
+  if (block.open !== true || block.close !== true) {
+    block.invalid = true;
+    return true;
+  }
+  return false;
+};
+
+/**
+ * Returns true if a node is an open or close node
+ */
+
+exports.isOpenOrClose = node => {
+  if (node.type === 'open' || node.type === 'close') {
+    return true;
+  }
+  return node.open === true || node.close === true;
+};
+
+/**
+ * Reduce an array of text nodes.
+ */
+
+exports.reduce = nodes => nodes.reduce((acc, node) => {
+  if (node.type === 'text') acc.push(node.value);
+  if (node.type === 'range') node.type = 'text';
+  return acc;
+}, []);
+
+/**
+ * Flatten an array
+ */
+
+exports.flatten = (...args) => {
+  const result = [];
+  const flat = arr => {
+    for (let i = 0; i < arr.length; i++) {
+      let ele = arr[i];
+      Array.isArray(ele) ? flat(ele, result) : ele !== void 0 && result.push(ele);
+    }
+    return result;
+  };
+  flat(args);
+  return result;
+};
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/concat-map/index.js":
+/*!***********************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/concat-map/index.js ***!
+  \***********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = function (xs, fn) {
+    var res = [];
+    for (var i = 0; i < xs.length; i++) {
+        var x = fn(xs[i], i);
+        if (isArray(x)) res.push.apply(res, x);
+        else res.push(x);
+    }
+    return res;
+};
+
+var isArray = Array.isArray || function (xs) {
+    return Object.prototype.toString.call(xs) === '[object Array]';
+};
+
+
+/***/ }),
+
 /***/ "../../util/sugar/node_modules/copy-to/index.js":
 /*!********************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/copy-to/index.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/copy-to/index.js ***!
   \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -5573,7 +8020,7 @@ function notDefined(obj, key) {
 
 /***/ "../../util/sugar/node_modules/dom-converter/lib/domConverter.js":
 /*!*************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/dom-converter/lib/domConverter.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/dom-converter/lib/domConverter.js ***!
   \*************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -5617,7 +8064,7 @@ module.exports = self = {
 
 /***/ "../../util/sugar/node_modules/dom-converter/lib/domToMarkup.js":
 /*!************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/dom-converter/lib/domToMarkup.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/dom-converter/lib/domToMarkup.js ***!
   \************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -5630,7 +8077,7 @@ module.exports = self = {
 
 /***/ "../../util/sugar/node_modules/dom-converter/lib/objectToSaneObject.js":
 /*!*******************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/dom-converter/lib/objectToSaneObject.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/dom-converter/lib/objectToSaneObject.js ***!
   \*******************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -5704,7 +8151,7 @@ module.exports = self = {
 
 /***/ "../../util/sugar/node_modules/dom-converter/lib/saneObjectToDom.js":
 /*!****************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/dom-converter/lib/saneObjectToDom.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/dom-converter/lib/saneObjectToDom.js ***!
   \****************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -5829,7 +8276,7 @@ module.exports = self = {
 
 /***/ "../../util/sugar/node_modules/dom-serializer/foreignNames.json":
 /*!************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/dom-serializer/foreignNames.json ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/dom-serializer/foreignNames.json ***!
   \************************************************************************************************************************/
 /*! exports provided: elementNames, attributeNames, default */
 /***/ (function(module) {
@@ -5840,7 +8287,7 @@ module.exports = JSON.parse("{\"elementNames\":{\"altglyph\":\"altGlyph\",\"altg
 
 /***/ "../../util/sugar/node_modules/dom-serializer/index.js":
 /*!***************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/dom-serializer/index.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/dom-serializer/index.js ***!
   \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -6034,7 +8481,7 @@ function renderComment(elem) {
 
 /***/ "../../util/sugar/node_modules/dom-serializer/node_modules/domelementtype/lib/index.js":
 /*!***********************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/dom-serializer/node_modules/domelementtype/lib/index.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/dom-serializer/node_modules/domelementtype/lib/index.js ***!
   \***********************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -6068,7 +8515,7 @@ exports.Doctype = "doctype" /* Doctype */;
 
 /***/ "../../util/sugar/node_modules/domelementtype/index.js":
 /*!***************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/domelementtype/index.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/domelementtype/index.js ***!
   \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -6094,7 +8541,7 @@ module.exports = {
 
 /***/ "../../util/sugar/node_modules/domhandler/index.js":
 /*!***********************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/domhandler/index.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/domhandler/index.js ***!
   \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -6322,7 +8769,7 @@ module.exports = DomHandler;
 
 /***/ "../../util/sugar/node_modules/domhandler/lib/element.js":
 /*!*****************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/domhandler/lib/element.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/domhandler/lib/element.js ***!
   \*****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -6353,7 +8800,7 @@ Object.keys(domLvl1).forEach(function(key) {
 
 /***/ "../../util/sugar/node_modules/domhandler/lib/node.js":
 /*!**************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/domhandler/lib/node.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/domhandler/lib/node.js ***!
   \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -6408,7 +8855,7 @@ Object.keys(domLvl1).forEach(function(key) {
 
 /***/ "../../util/sugar/node_modules/domutils/index.js":
 /*!*********************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/domutils/index.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/domutils/index.js ***!
   \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -6433,7 +8880,7 @@ var DomUtils = module.exports;
 
 /***/ "../../util/sugar/node_modules/domutils/lib/helpers.js":
 /*!***************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/domutils/lib/helpers.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/domutils/lib/helpers.js ***!
   \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -6585,7 +9032,7 @@ exports.uniqueSort = function(nodes) {
 
 /***/ "../../util/sugar/node_modules/domutils/lib/legacy.js":
 /*!**************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/domutils/lib/legacy.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/domutils/lib/legacy.js ***!
   \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -6683,7 +9130,7 @@ exports.getElementsByTagType = function(type, element, recurse, limit){
 
 /***/ "../../util/sugar/node_modules/domutils/lib/manipulation.js":
 /*!********************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/domutils/lib/manipulation.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/domutils/lib/manipulation.js ***!
   \********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -6771,7 +9218,7 @@ exports.prepend = function(elem, prev){
 
 /***/ "../../util/sugar/node_modules/domutils/lib/querying.js":
 /*!****************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/domutils/lib/querying.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/domutils/lib/querying.js ***!
   \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -6877,7 +9324,7 @@ function findAll(test, rootElems){
 
 /***/ "../../util/sugar/node_modules/domutils/lib/stringify.js":
 /*!*****************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/domutils/lib/stringify.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/domutils/lib/stringify.js ***!
   \*****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -6911,7 +9358,7 @@ function getText(elem){
 
 /***/ "../../util/sugar/node_modules/domutils/lib/traversal.js":
 /*!*****************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/domutils/lib/traversal.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/domutils/lib/traversal.js ***!
   \*****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -6946,7 +9393,7 @@ exports.getName = function(elem){
 
 /***/ "../../util/sugar/node_modules/entities/lib/decode.js":
 /*!**************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/entities/lib/decode.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/entities/lib/decode.js ***!
   \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -7012,7 +9459,7 @@ function getReplacer(map) {
 
 /***/ "../../util/sugar/node_modules/entities/lib/decode_codepoint.js":
 /*!************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/entities/lib/decode_codepoint.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/entities/lib/decode_codepoint.js ***!
   \************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -7048,7 +9495,7 @@ exports.default = decodeCodePoint;
 
 /***/ "../../util/sugar/node_modules/entities/lib/encode.js":
 /*!**************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/entities/lib/encode.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/entities/lib/encode.js ***!
   \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -7133,7 +9580,7 @@ exports.escape = escape;
 
 /***/ "../../util/sugar/node_modules/entities/lib/index.js":
 /*!*************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/entities/lib/index.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/entities/lib/index.js ***!
   \*************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -7197,7 +9644,7 @@ Object.defineProperty(exports, "decodeXMLStrict", { enumerable: true, get: funct
 
 /***/ "../../util/sugar/node_modules/entities/lib/maps/decode.json":
 /*!*********************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/entities/lib/maps/decode.json ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/entities/lib/maps/decode.json ***!
   \*********************************************************************************************************************/
 /*! exports provided: 0, 128, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 142, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 158, 159, default */
 /***/ (function(module) {
@@ -7208,7 +9655,7 @@ module.exports = JSON.parse("{\"0\":65533,\"128\":8364,\"130\":8218,\"131\":402,
 
 /***/ "../../util/sugar/node_modules/entities/lib/maps/entities.json":
 /*!***********************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/entities/lib/maps/entities.json ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/entities/lib/maps/entities.json ***!
   \***********************************************************************************************************************/
 /*! exports provided: Aacute, aacute, Abreve, abreve, ac, acd, acE, Acirc, acirc, acute, Acy, acy, AElig, aelig, af, Afr, afr, Agrave, agrave, alefsym, aleph, Alpha, alpha, Amacr, amacr, amalg, amp, AMP, andand, And, and, andd, andslope, andv, ang, ange, angle, angmsdaa, angmsdab, angmsdac, angmsdad, angmsdae, angmsdaf, angmsdag, angmsdah, angmsd, angrt, angrtvb, angrtvbd, angsph, angst, angzarr, Aogon, aogon, Aopf, aopf, apacir, ap, apE, ape, apid, apos, ApplyFunction, approx, approxeq, Aring, aring, Ascr, ascr, Assign, ast, asymp, asympeq, Atilde, atilde, Auml, auml, awconint, awint, backcong, backepsilon, backprime, backsim, backsimeq, Backslash, Barv, barvee, barwed, Barwed, barwedge, bbrk, bbrktbrk, bcong, Bcy, bcy, bdquo, becaus, because, Because, bemptyv, bepsi, bernou, Bernoullis, Beta, beta, beth, between, Bfr, bfr, bigcap, bigcirc, bigcup, bigodot, bigoplus, bigotimes, bigsqcup, bigstar, bigtriangledown, bigtriangleup, biguplus, bigvee, bigwedge, bkarow, blacklozenge, blacksquare, blacktriangle, blacktriangledown, blacktriangleleft, blacktriangleright, blank, blk12, blk14, blk34, block, bne, bnequiv, bNot, bnot, Bopf, bopf, bot, bottom, bowtie, boxbox, boxdl, boxdL, boxDl, boxDL, boxdr, boxdR, boxDr, boxDR, boxh, boxH, boxhd, boxHd, boxhD, boxHD, boxhu, boxHu, boxhU, boxHU, boxminus, boxplus, boxtimes, boxul, boxuL, boxUl, boxUL, boxur, boxuR, boxUr, boxUR, boxv, boxV, boxvh, boxvH, boxVh, boxVH, boxvl, boxvL, boxVl, boxVL, boxvr, boxvR, boxVr, boxVR, bprime, breve, Breve, brvbar, bscr, Bscr, bsemi, bsim, bsime, bsolb, bsol, bsolhsub, bull, bullet, bump, bumpE, bumpe, Bumpeq, bumpeq, Cacute, cacute, capand, capbrcup, capcap, cap, Cap, capcup, capdot, CapitalDifferentialD, caps, caret, caron, Cayleys, ccaps, Ccaron, ccaron, Ccedil, ccedil, Ccirc, ccirc, Cconint, ccups, ccupssm, Cdot, cdot, cedil, Cedilla, cemptyv, cent, centerdot, CenterDot, cfr, Cfr, CHcy, chcy, check, checkmark, Chi, chi, circ, circeq, circlearrowleft, circlearrowright, circledast, circledcirc, circleddash, CircleDot, circledR, circledS, CircleMinus, CirclePlus, CircleTimes, cir, cirE, cire, cirfnint, cirmid, cirscir, ClockwiseContourIntegral, CloseCurlyDoubleQuote, CloseCurlyQuote, clubs, clubsuit, colon, Colon, Colone, colone, coloneq, comma, commat, comp, compfn, complement, complexes, cong, congdot, Congruent, conint, Conint, ContourIntegral, copf, Copf, coprod, Coproduct, copy, COPY, copysr, CounterClockwiseContourIntegral, crarr, cross, Cross, Cscr, cscr, csub, csube, csup, csupe, ctdot, cudarrl, cudarrr, cuepr, cuesc, cularr, cularrp, cupbrcap, cupcap, CupCap, cup, Cup, cupcup, cupdot, cupor, cups, curarr, curarrm, curlyeqprec, curlyeqsucc, curlyvee, curlywedge, curren, curvearrowleft, curvearrowright, cuvee, cuwed, cwconint, cwint, cylcty, dagger, Dagger, daleth, darr, Darr, dArr, dash, Dashv, dashv, dbkarow, dblac, Dcaron, dcaron, Dcy, dcy, ddagger, ddarr, DD, dd, DDotrahd, ddotseq, deg, Del, Delta, delta, demptyv, dfisht, Dfr, dfr, dHar, dharl, dharr, DiacriticalAcute, DiacriticalDot, DiacriticalDoubleAcute, DiacriticalGrave, DiacriticalTilde, diam, diamond, Diamond, diamondsuit, diams, die, DifferentialD, digamma, disin, div, divide, divideontimes, divonx, DJcy, djcy, dlcorn, dlcrop, dollar, Dopf, dopf, Dot, dot, DotDot, doteq, doteqdot, DotEqual, dotminus, dotplus, dotsquare, doublebarwedge, DoubleContourIntegral, DoubleDot, DoubleDownArrow, DoubleLeftArrow, DoubleLeftRightArrow, DoubleLeftTee, DoubleLongLeftArrow, DoubleLongLeftRightArrow, DoubleLongRightArrow, DoubleRightArrow, DoubleRightTee, DoubleUpArrow, DoubleUpDownArrow, DoubleVerticalBar, DownArrowBar, downarrow, DownArrow, Downarrow, DownArrowUpArrow, DownBreve, downdownarrows, downharpoonleft, downharpoonright, DownLeftRightVector, DownLeftTeeVector, DownLeftVectorBar, DownLeftVector, DownRightTeeVector, DownRightVectorBar, DownRightVector, DownTeeArrow, DownTee, drbkarow, drcorn, drcrop, Dscr, dscr, DScy, dscy, dsol, Dstrok, dstrok, dtdot, dtri, dtrif, duarr, duhar, dwangle, DZcy, dzcy, dzigrarr, Eacute, eacute, easter, Ecaron, ecaron, Ecirc, ecirc, ecir, ecolon, Ecy, ecy, eDDot, Edot, edot, eDot, ee, efDot, Efr, efr, eg, Egrave, egrave, egs, egsdot, el, Element, elinters, ell, els, elsdot, Emacr, emacr, empty, emptyset, EmptySmallSquare, emptyv, EmptyVerySmallSquare, emsp13, emsp14, emsp, ENG, eng, ensp, Eogon, eogon, Eopf, eopf, epar, eparsl, eplus, epsi, Epsilon, epsilon, epsiv, eqcirc, eqcolon, eqsim, eqslantgtr, eqslantless, Equal, equals, EqualTilde, equest, Equilibrium, equiv, equivDD, eqvparsl, erarr, erDot, escr, Escr, esdot, Esim, esim, Eta, eta, ETH, eth, Euml, euml, euro, excl, exist, Exists, expectation, exponentiale, ExponentialE, fallingdotseq, Fcy, fcy, female, ffilig, fflig, ffllig, Ffr, ffr, filig, FilledSmallSquare, FilledVerySmallSquare, fjlig, flat, fllig, fltns, fnof, Fopf, fopf, forall, ForAll, fork, forkv, Fouriertrf, fpartint, frac12, frac13, frac14, frac15, frac16, frac18, frac23, frac25, frac34, frac35, frac38, frac45, frac56, frac58, frac78, frasl, frown, fscr, Fscr, gacute, Gamma, gamma, Gammad, gammad, gap, Gbreve, gbreve, Gcedil, Gcirc, gcirc, Gcy, gcy, Gdot, gdot, ge, gE, gEl, gel, geq, geqq, geqslant, gescc, ges, gesdot, gesdoto, gesdotol, gesl, gesles, Gfr, gfr, gg, Gg, ggg, gimel, GJcy, gjcy, gla, gl, glE, glj, gnap, gnapprox, gne, gnE, gneq, gneqq, gnsim, Gopf, gopf, grave, GreaterEqual, GreaterEqualLess, GreaterFullEqual, GreaterGreater, GreaterLess, GreaterSlantEqual, GreaterTilde, Gscr, gscr, gsim, gsime, gsiml, gtcc, gtcir, gt, GT, Gt, gtdot, gtlPar, gtquest, gtrapprox, gtrarr, gtrdot, gtreqless, gtreqqless, gtrless, gtrsim, gvertneqq, gvnE, Hacek, hairsp, half, hamilt, HARDcy, hardcy, harrcir, harr, hArr, harrw, Hat, hbar, Hcirc, hcirc, hearts, heartsuit, hellip, hercon, hfr, Hfr, HilbertSpace, hksearow, hkswarow, hoarr, homtht, hookleftarrow, hookrightarrow, hopf, Hopf, horbar, HorizontalLine, hscr, Hscr, hslash, Hstrok, hstrok, HumpDownHump, HumpEqual, hybull, hyphen, Iacute, iacute, ic, Icirc, icirc, Icy, icy, Idot, IEcy, iecy, iexcl, iff, ifr, Ifr, Igrave, igrave, ii, iiiint, iiint, iinfin, iiota, IJlig, ijlig, Imacr, imacr, image, ImaginaryI, imagline, imagpart, imath, Im, imof, imped, Implies, incare, in, infin, infintie, inodot, intcal, int, Int, integers, Integral, intercal, Intersection, intlarhk, intprod, InvisibleComma, InvisibleTimes, IOcy, iocy, Iogon, iogon, Iopf, iopf, Iota, iota, iprod, iquest, iscr, Iscr, isin, isindot, isinE, isins, isinsv, isinv, it, Itilde, itilde, Iukcy, iukcy, Iuml, iuml, Jcirc, jcirc, Jcy, jcy, Jfr, jfr, jmath, Jopf, jopf, Jscr, jscr, Jsercy, jsercy, Jukcy, jukcy, Kappa, kappa, kappav, Kcedil, kcedil, Kcy, kcy, Kfr, kfr, kgreen, KHcy, khcy, KJcy, kjcy, Kopf, kopf, Kscr, kscr, lAarr, Lacute, lacute, laemptyv, lagran, Lambda, lambda, lang, Lang, langd, langle, lap, Laplacetrf, laquo, larrb, larrbfs, larr, Larr, lArr, larrfs, larrhk, larrlp, larrpl, larrsim, larrtl, latail, lAtail, lat, late, lates, lbarr, lBarr, lbbrk, lbrace, lbrack, lbrke, lbrksld, lbrkslu, Lcaron, lcaron, Lcedil, lcedil, lceil, lcub, Lcy, lcy, ldca, ldquo, ldquor, ldrdhar, ldrushar, ldsh, le, lE, LeftAngleBracket, LeftArrowBar, leftarrow, LeftArrow, Leftarrow, LeftArrowRightArrow, leftarrowtail, LeftCeiling, LeftDoubleBracket, LeftDownTeeVector, LeftDownVectorBar, LeftDownVector, LeftFloor, leftharpoondown, leftharpoonup, leftleftarrows, leftrightarrow, LeftRightArrow, Leftrightarrow, leftrightarrows, leftrightharpoons, leftrightsquigarrow, LeftRightVector, LeftTeeArrow, LeftTee, LeftTeeVector, leftthreetimes, LeftTriangleBar, LeftTriangle, LeftTriangleEqual, LeftUpDownVector, LeftUpTeeVector, LeftUpVectorBar, LeftUpVector, LeftVectorBar, LeftVector, lEg, leg, leq, leqq, leqslant, lescc, les, lesdot, lesdoto, lesdotor, lesg, lesges, lessapprox, lessdot, lesseqgtr, lesseqqgtr, LessEqualGreater, LessFullEqual, LessGreater, lessgtr, LessLess, lesssim, LessSlantEqual, LessTilde, lfisht, lfloor, Lfr, lfr, lg, lgE, lHar, lhard, lharu, lharul, lhblk, LJcy, ljcy, llarr, ll, Ll, llcorner, Lleftarrow, llhard, lltri, Lmidot, lmidot, lmoustache, lmoust, lnap, lnapprox, lne, lnE, lneq, lneqq, lnsim, loang, loarr, lobrk, longleftarrow, LongLeftArrow, Longleftarrow, longleftrightarrow, LongLeftRightArrow, Longleftrightarrow, longmapsto, longrightarrow, LongRightArrow, Longrightarrow, looparrowleft, looparrowright, lopar, Lopf, lopf, loplus, lotimes, lowast, lowbar, LowerLeftArrow, LowerRightArrow, loz, lozenge, lozf, lpar, lparlt, lrarr, lrcorner, lrhar, lrhard, lrm, lrtri, lsaquo, lscr, Lscr, lsh, Lsh, lsim, lsime, lsimg, lsqb, lsquo, lsquor, Lstrok, lstrok, ltcc, ltcir, lt, LT, Lt, ltdot, lthree, ltimes, ltlarr, ltquest, ltri, ltrie, ltrif, ltrPar, lurdshar, luruhar, lvertneqq, lvnE, macr, male, malt, maltese, Map, map, mapsto, mapstodown, mapstoleft, mapstoup, marker, mcomma, Mcy, mcy, mdash, mDDot, measuredangle, MediumSpace, Mellintrf, Mfr, mfr, mho, micro, midast, midcir, mid, middot, minusb, minus, minusd, minusdu, MinusPlus, mlcp, mldr, mnplus, models, Mopf, mopf, mp, mscr, Mscr, mstpos, Mu, mu, multimap, mumap, nabla, Nacute, nacute, nang, nap, napE, napid, napos, napprox, natural, naturals, natur, nbsp, nbump, nbumpe, ncap, Ncaron, ncaron, Ncedil, ncedil, ncong, ncongdot, ncup, Ncy, ncy, ndash, nearhk, nearr, neArr, nearrow, ne, nedot, NegativeMediumSpace, NegativeThickSpace, NegativeThinSpace, NegativeVeryThinSpace, nequiv, nesear, nesim, NestedGreaterGreater, NestedLessLess, NewLine, nexist, nexists, Nfr, nfr, ngE, nge, ngeq, ngeqq, ngeqslant, nges, nGg, ngsim, nGt, ngt, ngtr, nGtv, nharr, nhArr, nhpar, ni, nis, nisd, niv, NJcy, njcy, nlarr, nlArr, nldr, nlE, nle, nleftarrow, nLeftarrow, nleftrightarrow, nLeftrightarrow, nleq, nleqq, nleqslant, nles, nless, nLl, nlsim, nLt, nlt, nltri, nltrie, nLtv, nmid, NoBreak, NonBreakingSpace, nopf, Nopf, Not, not, NotCongruent, NotCupCap, NotDoubleVerticalBar, NotElement, NotEqual, NotEqualTilde, NotExists, NotGreater, NotGreaterEqual, NotGreaterFullEqual, NotGreaterGreater, NotGreaterLess, NotGreaterSlantEqual, NotGreaterTilde, NotHumpDownHump, NotHumpEqual, notin, notindot, notinE, notinva, notinvb, notinvc, NotLeftTriangleBar, NotLeftTriangle, NotLeftTriangleEqual, NotLess, NotLessEqual, NotLessGreater, NotLessLess, NotLessSlantEqual, NotLessTilde, NotNestedGreaterGreater, NotNestedLessLess, notni, notniva, notnivb, notnivc, NotPrecedes, NotPrecedesEqual, NotPrecedesSlantEqual, NotReverseElement, NotRightTriangleBar, NotRightTriangle, NotRightTriangleEqual, NotSquareSubset, NotSquareSubsetEqual, NotSquareSuperset, NotSquareSupersetEqual, NotSubset, NotSubsetEqual, NotSucceeds, NotSucceedsEqual, NotSucceedsSlantEqual, NotSucceedsTilde, NotSuperset, NotSupersetEqual, NotTilde, NotTildeEqual, NotTildeFullEqual, NotTildeTilde, NotVerticalBar, nparallel, npar, nparsl, npart, npolint, npr, nprcue, nprec, npreceq, npre, nrarrc, nrarr, nrArr, nrarrw, nrightarrow, nRightarrow, nrtri, nrtrie, nsc, nsccue, nsce, Nscr, nscr, nshortmid, nshortparallel, nsim, nsime, nsimeq, nsmid, nspar, nsqsube, nsqsupe, nsub, nsubE, nsube, nsubset, nsubseteq, nsubseteqq, nsucc, nsucceq, nsup, nsupE, nsupe, nsupset, nsupseteq, nsupseteqq, ntgl, Ntilde, ntilde, ntlg, ntriangleleft, ntrianglelefteq, ntriangleright, ntrianglerighteq, Nu, nu, num, numero, numsp, nvap, nvdash, nvDash, nVdash, nVDash, nvge, nvgt, nvHarr, nvinfin, nvlArr, nvle, nvlt, nvltrie, nvrArr, nvrtrie, nvsim, nwarhk, nwarr, nwArr, nwarrow, nwnear, Oacute, oacute, oast, Ocirc, ocirc, ocir, Ocy, ocy, odash, Odblac, odblac, odiv, odot, odsold, OElig, oelig, ofcir, Ofr, ofr, ogon, Ograve, ograve, ogt, ohbar, ohm, oint, olarr, olcir, olcross, oline, olt, Omacr, omacr, Omega, omega, Omicron, omicron, omid, ominus, Oopf, oopf, opar, OpenCurlyDoubleQuote, OpenCurlyQuote, operp, oplus, orarr, Or, or, ord, order, orderof, ordf, ordm, origof, oror, orslope, orv, oS, Oscr, oscr, Oslash, oslash, osol, Otilde, otilde, otimesas, Otimes, otimes, Ouml, ouml, ovbar, OverBar, OverBrace, OverBracket, OverParenthesis, para, parallel, par, parsim, parsl, part, PartialD, Pcy, pcy, percnt, period, permil, perp, pertenk, Pfr, pfr, Phi, phi, phiv, phmmat, phone, Pi, pi, pitchfork, piv, planck, planckh, plankv, plusacir, plusb, pluscir, plus, plusdo, plusdu, pluse, PlusMinus, plusmn, plussim, plustwo, pm, Poincareplane, pointint, popf, Popf, pound, prap, Pr, pr, prcue, precapprox, prec, preccurlyeq, Precedes, PrecedesEqual, PrecedesSlantEqual, PrecedesTilde, preceq, precnapprox, precneqq, precnsim, pre, prE, precsim, prime, Prime, primes, prnap, prnE, prnsim, prod, Product, profalar, profline, profsurf, prop, Proportional, Proportion, propto, prsim, prurel, Pscr, pscr, Psi, psi, puncsp, Qfr, qfr, qint, qopf, Qopf, qprime, Qscr, qscr, quaternions, quatint, quest, questeq, quot, QUOT, rAarr, race, Racute, racute, radic, raemptyv, rang, Rang, rangd, range, rangle, raquo, rarrap, rarrb, rarrbfs, rarrc, rarr, Rarr, rArr, rarrfs, rarrhk, rarrlp, rarrpl, rarrsim, Rarrtl, rarrtl, rarrw, ratail, rAtail, ratio, rationals, rbarr, rBarr, RBarr, rbbrk, rbrace, rbrack, rbrke, rbrksld, rbrkslu, Rcaron, rcaron, Rcedil, rcedil, rceil, rcub, Rcy, rcy, rdca, rdldhar, rdquo, rdquor, rdsh, real, realine, realpart, reals, Re, rect, reg, REG, ReverseElement, ReverseEquilibrium, ReverseUpEquilibrium, rfisht, rfloor, rfr, Rfr, rHar, rhard, rharu, rharul, Rho, rho, rhov, RightAngleBracket, RightArrowBar, rightarrow, RightArrow, Rightarrow, RightArrowLeftArrow, rightarrowtail, RightCeiling, RightDoubleBracket, RightDownTeeVector, RightDownVectorBar, RightDownVector, RightFloor, rightharpoondown, rightharpoonup, rightleftarrows, rightleftharpoons, rightrightarrows, rightsquigarrow, RightTeeArrow, RightTee, RightTeeVector, rightthreetimes, RightTriangleBar, RightTriangle, RightTriangleEqual, RightUpDownVector, RightUpTeeVector, RightUpVectorBar, RightUpVector, RightVectorBar, RightVector, ring, risingdotseq, rlarr, rlhar, rlm, rmoustache, rmoust, rnmid, roang, roarr, robrk, ropar, ropf, Ropf, roplus, rotimes, RoundImplies, rpar, rpargt, rppolint, rrarr, Rrightarrow, rsaquo, rscr, Rscr, rsh, Rsh, rsqb, rsquo, rsquor, rthree, rtimes, rtri, rtrie, rtrif, rtriltri, RuleDelayed, ruluhar, rx, Sacute, sacute, sbquo, scap, Scaron, scaron, Sc, sc, sccue, sce, scE, Scedil, scedil, Scirc, scirc, scnap, scnE, scnsim, scpolint, scsim, Scy, scy, sdotb, sdot, sdote, searhk, searr, seArr, searrow, sect, semi, seswar, setminus, setmn, sext, Sfr, sfr, sfrown, sharp, SHCHcy, shchcy, SHcy, shcy, ShortDownArrow, ShortLeftArrow, shortmid, shortparallel, ShortRightArrow, ShortUpArrow, shy, Sigma, sigma, sigmaf, sigmav, sim, simdot, sime, simeq, simg, simgE, siml, simlE, simne, simplus, simrarr, slarr, SmallCircle, smallsetminus, smashp, smeparsl, smid, smile, smt, smte, smtes, SOFTcy, softcy, solbar, solb, sol, Sopf, sopf, spades, spadesuit, spar, sqcap, sqcaps, sqcup, sqcups, Sqrt, sqsub, sqsube, sqsubset, sqsubseteq, sqsup, sqsupe, sqsupset, sqsupseteq, square, Square, SquareIntersection, SquareSubset, SquareSubsetEqual, SquareSuperset, SquareSupersetEqual, SquareUnion, squarf, squ, squf, srarr, Sscr, sscr, ssetmn, ssmile, sstarf, Star, star, starf, straightepsilon, straightphi, strns, sub, Sub, subdot, subE, sube, subedot, submult, subnE, subne, subplus, subrarr, subset, Subset, subseteq, subseteqq, SubsetEqual, subsetneq, subsetneqq, subsim, subsub, subsup, succapprox, succ, succcurlyeq, Succeeds, SucceedsEqual, SucceedsSlantEqual, SucceedsTilde, succeq, succnapprox, succneqq, succnsim, succsim, SuchThat, sum, Sum, sung, sup1, sup2, sup3, sup, Sup, supdot, supdsub, supE, supe, supedot, Superset, SupersetEqual, suphsol, suphsub, suplarr, supmult, supnE, supne, supplus, supset, Supset, supseteq, supseteqq, supsetneq, supsetneqq, supsim, supsub, supsup, swarhk, swarr, swArr, swarrow, swnwar, szlig, Tab, target, Tau, tau, tbrk, Tcaron, tcaron, Tcedil, tcedil, Tcy, tcy, tdot, telrec, Tfr, tfr, there4, therefore, Therefore, Theta, theta, thetasym, thetav, thickapprox, thicksim, ThickSpace, ThinSpace, thinsp, thkap, thksim, THORN, thorn, tilde, Tilde, TildeEqual, TildeFullEqual, TildeTilde, timesbar, timesb, times, timesd, tint, toea, topbot, topcir, top, Topf, topf, topfork, tosa, tprime, trade, TRADE, triangle, triangledown, triangleleft, trianglelefteq, triangleq, triangleright, trianglerighteq, tridot, trie, triminus, TripleDot, triplus, trisb, tritime, trpezium, Tscr, tscr, TScy, tscy, TSHcy, tshcy, Tstrok, tstrok, twixt, twoheadleftarrow, twoheadrightarrow, Uacute, uacute, uarr, Uarr, uArr, Uarrocir, Ubrcy, ubrcy, Ubreve, ubreve, Ucirc, ucirc, Ucy, ucy, udarr, Udblac, udblac, udhar, ufisht, Ufr, ufr, Ugrave, ugrave, uHar, uharl, uharr, uhblk, ulcorn, ulcorner, ulcrop, ultri, Umacr, umacr, uml, UnderBar, UnderBrace, UnderBracket, UnderParenthesis, Union, UnionPlus, Uogon, uogon, Uopf, uopf, UpArrowBar, uparrow, UpArrow, Uparrow, UpArrowDownArrow, updownarrow, UpDownArrow, Updownarrow, UpEquilibrium, upharpoonleft, upharpoonright, uplus, UpperLeftArrow, UpperRightArrow, upsi, Upsi, upsih, Upsilon, upsilon, UpTeeArrow, UpTee, upuparrows, urcorn, urcorner, urcrop, Uring, uring, urtri, Uscr, uscr, utdot, Utilde, utilde, utri, utrif, uuarr, Uuml, uuml, uwangle, vangrt, varepsilon, varkappa, varnothing, varphi, varpi, varpropto, varr, vArr, varrho, varsigma, varsubsetneq, varsubsetneqq, varsupsetneq, varsupsetneqq, vartheta, vartriangleleft, vartriangleright, vBar, Vbar, vBarv, Vcy, vcy, vdash, vDash, Vdash, VDash, Vdashl, veebar, vee, Vee, veeeq, vellip, verbar, Verbar, vert, Vert, VerticalBar, VerticalLine, VerticalSeparator, VerticalTilde, VeryThinSpace, Vfr, vfr, vltri, vnsub, vnsup, Vopf, vopf, vprop, vrtri, Vscr, vscr, vsubnE, vsubne, vsupnE, vsupne, Vvdash, vzigzag, Wcirc, wcirc, wedbar, wedge, Wedge, wedgeq, weierp, Wfr, wfr, Wopf, wopf, wp, wr, wreath, Wscr, wscr, xcap, xcirc, xcup, xdtri, Xfr, xfr, xharr, xhArr, Xi, xi, xlarr, xlArr, xmap, xnis, xodot, Xopf, xopf, xoplus, xotime, xrarr, xrArr, Xscr, xscr, xsqcup, xuplus, xutri, xvee, xwedge, Yacute, yacute, YAcy, yacy, Ycirc, ycirc, Ycy, ycy, yen, Yfr, yfr, YIcy, yicy, Yopf, yopf, Yscr, yscr, YUcy, yucy, yuml, Yuml, Zacute, zacute, Zcaron, zcaron, Zcy, zcy, Zdot, zdot, zeetrf, ZeroWidthSpace, Zeta, zeta, zfr, Zfr, ZHcy, zhcy, zigrarr, zopf, Zopf, Zscr, zscr, zwj, zwnj, default */
 /***/ (function(module) {
@@ -7219,7 +9666,7 @@ module.exports = JSON.parse("{\"Aacute\":\"Á\",\"aacute\":\"á\",\"Abreve\":\"�
 
 /***/ "../../util/sugar/node_modules/entities/lib/maps/legacy.json":
 /*!*********************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/entities/lib/maps/legacy.json ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/entities/lib/maps/legacy.json ***!
   \*********************************************************************************************************************/
 /*! exports provided: Aacute, aacute, Acirc, acirc, acute, AElig, aelig, Agrave, agrave, amp, AMP, Aring, aring, Atilde, atilde, Auml, auml, brvbar, Ccedil, ccedil, cedil, cent, copy, COPY, curren, deg, divide, Eacute, eacute, Ecirc, ecirc, Egrave, egrave, ETH, eth, Euml, euml, frac12, frac14, frac34, gt, GT, Iacute, iacute, Icirc, icirc, iexcl, Igrave, igrave, iquest, Iuml, iuml, laquo, lt, LT, macr, micro, middot, nbsp, not, Ntilde, ntilde, Oacute, oacute, Ocirc, ocirc, Ograve, ograve, ordf, ordm, Oslash, oslash, Otilde, otilde, Ouml, ouml, para, plusmn, pound, quot, QUOT, raquo, reg, REG, sect, shy, sup1, sup2, sup3, szlig, THORN, thorn, times, Uacute, uacute, Ucirc, ucirc, Ugrave, ugrave, uml, Uuml, uuml, Yacute, yacute, yen, yuml, default */
 /***/ (function(module) {
@@ -7230,7 +9677,7 @@ module.exports = JSON.parse("{\"Aacute\":\"Á\",\"aacute\":\"á\",\"Acirc\":\"Â
 
 /***/ "../../util/sugar/node_modules/entities/lib/maps/xml.json":
 /*!******************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/entities/lib/maps/xml.json ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/entities/lib/maps/xml.json ***!
   \******************************************************************************************************************/
 /*! exports provided: amp, apos, gt, lt, quot, default */
 /***/ (function(module) {
@@ -7241,7 +9688,7 @@ module.exports = JSON.parse("{\"amp\":\"&\",\"apos\":\"'\",\"gt\":\">\",\"lt\":\
 
 /***/ "../../util/sugar/node_modules/events/events.js":
 /*!********************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/events/events.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/events/events.js ***!
   \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -7697,9 +10144,270 @@ function unwrapListeners(arr) {
 
 /***/ }),
 
+/***/ "../../util/sugar/node_modules/fill-range/index.js":
+/*!***********************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/fill-range/index.js ***!
+  \***********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/*!
+ * fill-range <https://github.com/jonschlinkert/fill-range>
+ *
+ * Copyright (c) 2014-present, Jon Schlinkert.
+ * Licensed under the MIT License.
+ */
+
+
+
+const util = __webpack_require__(/*! util */ "../../util/sugar/node_modules/util/util.js");
+const toRegexRange = __webpack_require__(/*! to-regex-range */ "../../util/sugar/node_modules/to-regex-range/index.js");
+
+const isObject = val => val !== null && typeof val === 'object' && !Array.isArray(val);
+
+const transform = toNumber => {
+  return value => toNumber === true ? Number(value) : String(value);
+};
+
+const isValidValue = value => {
+  return typeof value === 'number' || (typeof value === 'string' && value !== '');
+};
+
+const isNumber = num => Number.isInteger(+num);
+
+const zeros = input => {
+  let value = `${input}`;
+  let index = -1;
+  if (value[0] === '-') value = value.slice(1);
+  if (value === '0') return false;
+  while (value[++index] === '0');
+  return index > 0;
+};
+
+const stringify = (start, end, options) => {
+  if (typeof start === 'string' || typeof end === 'string') {
+    return true;
+  }
+  return options.stringify === true;
+};
+
+const pad = (input, maxLength, toNumber) => {
+  if (maxLength > 0) {
+    let dash = input[0] === '-' ? '-' : '';
+    if (dash) input = input.slice(1);
+    input = (dash + input.padStart(dash ? maxLength - 1 : maxLength, '0'));
+  }
+  if (toNumber === false) {
+    return String(input);
+  }
+  return input;
+};
+
+const toMaxLen = (input, maxLength) => {
+  let negative = input[0] === '-' ? '-' : '';
+  if (negative) {
+    input = input.slice(1);
+    maxLength--;
+  }
+  while (input.length < maxLength) input = '0' + input;
+  return negative ? ('-' + input) : input;
+};
+
+const toSequence = (parts, options) => {
+  parts.negatives.sort((a, b) => a < b ? -1 : a > b ? 1 : 0);
+  parts.positives.sort((a, b) => a < b ? -1 : a > b ? 1 : 0);
+
+  let prefix = options.capture ? '' : '?:';
+  let positives = '';
+  let negatives = '';
+  let result;
+
+  if (parts.positives.length) {
+    positives = parts.positives.join('|');
+  }
+
+  if (parts.negatives.length) {
+    negatives = `-(${prefix}${parts.negatives.join('|')})`;
+  }
+
+  if (positives && negatives) {
+    result = `${positives}|${negatives}`;
+  } else {
+    result = positives || negatives;
+  }
+
+  if (options.wrap) {
+    return `(${prefix}${result})`;
+  }
+
+  return result;
+};
+
+const toRange = (a, b, isNumbers, options) => {
+  if (isNumbers) {
+    return toRegexRange(a, b, { wrap: false, ...options });
+  }
+
+  let start = String.fromCharCode(a);
+  if (a === b) return start;
+
+  let stop = String.fromCharCode(b);
+  return `[${start}-${stop}]`;
+};
+
+const toRegex = (start, end, options) => {
+  if (Array.isArray(start)) {
+    let wrap = options.wrap === true;
+    let prefix = options.capture ? '' : '?:';
+    return wrap ? `(${prefix}${start.join('|')})` : start.join('|');
+  }
+  return toRegexRange(start, end, options);
+};
+
+const rangeError = (...args) => {
+  return new RangeError('Invalid range arguments: ' + util.inspect(...args));
+};
+
+const invalidRange = (start, end, options) => {
+  if (options.strictRanges === true) throw rangeError([start, end]);
+  return [];
+};
+
+const invalidStep = (step, options) => {
+  if (options.strictRanges === true) {
+    throw new TypeError(`Expected step "${step}" to be a number`);
+  }
+  return [];
+};
+
+const fillNumbers = (start, end, step = 1, options = {}) => {
+  let a = Number(start);
+  let b = Number(end);
+
+  if (!Number.isInteger(a) || !Number.isInteger(b)) {
+    if (options.strictRanges === true) throw rangeError([start, end]);
+    return [];
+  }
+
+  // fix negative zero
+  if (a === 0) a = 0;
+  if (b === 0) b = 0;
+
+  let descending = a > b;
+  let startString = String(start);
+  let endString = String(end);
+  let stepString = String(step);
+  step = Math.max(Math.abs(step), 1);
+
+  let padded = zeros(startString) || zeros(endString) || zeros(stepString);
+  let maxLen = padded ? Math.max(startString.length, endString.length, stepString.length) : 0;
+  let toNumber = padded === false && stringify(start, end, options) === false;
+  let format = options.transform || transform(toNumber);
+
+  if (options.toRegex && step === 1) {
+    return toRange(toMaxLen(start, maxLen), toMaxLen(end, maxLen), true, options);
+  }
+
+  let parts = { negatives: [], positives: [] };
+  let push = num => parts[num < 0 ? 'negatives' : 'positives'].push(Math.abs(num));
+  let range = [];
+  let index = 0;
+
+  while (descending ? a >= b : a <= b) {
+    if (options.toRegex === true && step > 1) {
+      push(a);
+    } else {
+      range.push(pad(format(a, index), maxLen, toNumber));
+    }
+    a = descending ? a - step : a + step;
+    index++;
+  }
+
+  if (options.toRegex === true) {
+    return step > 1
+      ? toSequence(parts, options)
+      : toRegex(range, null, { wrap: false, ...options });
+  }
+
+  return range;
+};
+
+const fillLetters = (start, end, step = 1, options = {}) => {
+  if ((!isNumber(start) && start.length > 1) || (!isNumber(end) && end.length > 1)) {
+    return invalidRange(start, end, options);
+  }
+
+
+  let format = options.transform || (val => String.fromCharCode(val));
+  let a = `${start}`.charCodeAt(0);
+  let b = `${end}`.charCodeAt(0);
+
+  let descending = a > b;
+  let min = Math.min(a, b);
+  let max = Math.max(a, b);
+
+  if (options.toRegex && step === 1) {
+    return toRange(min, max, false, options);
+  }
+
+  let range = [];
+  let index = 0;
+
+  while (descending ? a >= b : a <= b) {
+    range.push(format(a, index));
+    a = descending ? a - step : a + step;
+    index++;
+  }
+
+  if (options.toRegex === true) {
+    return toRegex(range, null, { wrap: false, options });
+  }
+
+  return range;
+};
+
+const fill = (start, end, step, options = {}) => {
+  if (end == null && isValidValue(start)) {
+    return [start];
+  }
+
+  if (!isValidValue(start) || !isValidValue(end)) {
+    return invalidRange(start, end, options);
+  }
+
+  if (typeof step === 'function') {
+    return fill(start, end, 1, { transform: step });
+  }
+
+  if (isObject(step)) {
+    return fill(start, end, 0, step);
+  }
+
+  let opts = { ...options };
+  if (opts.capture === true) opts.wrap = true;
+  step = step || opts.step || 1;
+
+  if (!isNumber(step)) {
+    if (step != null && !isObject(step)) return invalidStep(step, opts);
+    return fill(start, end, 1, step);
+  }
+
+  if (isNumber(start) && isNumber(end)) {
+    return fillNumbers(start, end, step, opts);
+  }
+
+  return fillLetters(start, end, Math.max(Math.abs(step), 1), opts);
+};
+
+module.exports = fill;
+
+
+/***/ }),
+
 /***/ "../../util/sugar/node_modules/htmlparser2/lib/CollectingHandler.js":
 /*!****************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/htmlparser2/lib/CollectingHandler.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/htmlparser2/lib/CollectingHandler.js ***!
   \****************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -7767,7 +10475,7 @@ CollectingHandler.prototype.restart = function() {
 
 /***/ "../../util/sugar/node_modules/htmlparser2/lib/FeedHandler.js":
 /*!**********************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/htmlparser2/lib/FeedHandler.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/htmlparser2/lib/FeedHandler.js ***!
   \**********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -7892,7 +10600,7 @@ module.exports = FeedHandler;
 
 /***/ "../../util/sugar/node_modules/htmlparser2/lib/Parser.js":
 /*!*****************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/htmlparser2/lib/Parser.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/htmlparser2/lib/Parser.js ***!
   \*****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -8285,7 +10993,7 @@ module.exports = Parser;
 
 /***/ "../../util/sugar/node_modules/htmlparser2/lib/ProxyHandler.js":
 /*!***********************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/htmlparser2/lib/ProxyHandler.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/htmlparser2/lib/ProxyHandler.js ***!
   \***********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -8323,7 +11031,7 @@ Object.keys(EVENTS).forEach(function(name) {
 
 /***/ "../../util/sugar/node_modules/htmlparser2/lib/Stream.js":
 /*!*****************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/htmlparser2/lib/Stream.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/htmlparser2/lib/Stream.js ***!
   \*****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -8369,7 +11077,7 @@ Object.keys(EVENTS).forEach(function(name) {
 
 /***/ "../../util/sugar/node_modules/htmlparser2/lib/Tokenizer.js":
 /*!********************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/htmlparser2/lib/Tokenizer.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/htmlparser2/lib/Tokenizer.js ***!
   \********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -9350,7 +12058,7 @@ Tokenizer.prototype._emitPartial = function(value) {
 
 /***/ "../../util/sugar/node_modules/htmlparser2/lib/WritableStream.js":
 /*!*************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/htmlparser2/lib/WritableStream.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/htmlparser2/lib/WritableStream.js ***!
   \*************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -9386,7 +12094,7 @@ Stream.prototype._write = function(chunk, encoding, cb) {
 
 /***/ "../../util/sugar/node_modules/htmlparser2/lib/index.js":
 /*!****************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/htmlparser2/lib/index.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/htmlparser2/lib/index.js ***!
   \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -9469,7 +12177,7 @@ module.exports = {
 
 /***/ "../../util/sugar/node_modules/htmlparser2/node_modules/entities/lib/decode_codepoint.js":
 /*!*************************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/htmlparser2/node_modules/entities/lib/decode_codepoint.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/htmlparser2/node_modules/entities/lib/decode_codepoint.js ***!
   \*************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -9505,7 +12213,7 @@ function decodeCodePoint(codePoint) {
 
 /***/ "../../util/sugar/node_modules/htmlparser2/node_modules/entities/maps/decode.json":
 /*!******************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/htmlparser2/node_modules/entities/maps/decode.json ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/htmlparser2/node_modules/entities/maps/decode.json ***!
   \******************************************************************************************************************************************/
 /*! exports provided: 0, 128, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 142, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 158, 159, default */
 /***/ (function(module) {
@@ -9516,7 +12224,7 @@ module.exports = JSON.parse("{\"0\":65533,\"128\":8364,\"130\":8218,\"131\":402,
 
 /***/ "../../util/sugar/node_modules/htmlparser2/node_modules/entities/maps/entities.json":
 /*!********************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/htmlparser2/node_modules/entities/maps/entities.json ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/htmlparser2/node_modules/entities/maps/entities.json ***!
   \********************************************************************************************************************************************/
 /*! exports provided: Aacute, aacute, Abreve, abreve, ac, acd, acE, Acirc, acirc, acute, Acy, acy, AElig, aelig, af, Afr, afr, Agrave, agrave, alefsym, aleph, Alpha, alpha, Amacr, amacr, amalg, amp, AMP, andand, And, and, andd, andslope, andv, ang, ange, angle, angmsdaa, angmsdab, angmsdac, angmsdad, angmsdae, angmsdaf, angmsdag, angmsdah, angmsd, angrt, angrtvb, angrtvbd, angsph, angst, angzarr, Aogon, aogon, Aopf, aopf, apacir, ap, apE, ape, apid, apos, ApplyFunction, approx, approxeq, Aring, aring, Ascr, ascr, Assign, ast, asymp, asympeq, Atilde, atilde, Auml, auml, awconint, awint, backcong, backepsilon, backprime, backsim, backsimeq, Backslash, Barv, barvee, barwed, Barwed, barwedge, bbrk, bbrktbrk, bcong, Bcy, bcy, bdquo, becaus, because, Because, bemptyv, bepsi, bernou, Bernoullis, Beta, beta, beth, between, Bfr, bfr, bigcap, bigcirc, bigcup, bigodot, bigoplus, bigotimes, bigsqcup, bigstar, bigtriangledown, bigtriangleup, biguplus, bigvee, bigwedge, bkarow, blacklozenge, blacksquare, blacktriangle, blacktriangledown, blacktriangleleft, blacktriangleright, blank, blk12, blk14, blk34, block, bne, bnequiv, bNot, bnot, Bopf, bopf, bot, bottom, bowtie, boxbox, boxdl, boxdL, boxDl, boxDL, boxdr, boxdR, boxDr, boxDR, boxh, boxH, boxhd, boxHd, boxhD, boxHD, boxhu, boxHu, boxhU, boxHU, boxminus, boxplus, boxtimes, boxul, boxuL, boxUl, boxUL, boxur, boxuR, boxUr, boxUR, boxv, boxV, boxvh, boxvH, boxVh, boxVH, boxvl, boxvL, boxVl, boxVL, boxvr, boxvR, boxVr, boxVR, bprime, breve, Breve, brvbar, bscr, Bscr, bsemi, bsim, bsime, bsolb, bsol, bsolhsub, bull, bullet, bump, bumpE, bumpe, Bumpeq, bumpeq, Cacute, cacute, capand, capbrcup, capcap, cap, Cap, capcup, capdot, CapitalDifferentialD, caps, caret, caron, Cayleys, ccaps, Ccaron, ccaron, Ccedil, ccedil, Ccirc, ccirc, Cconint, ccups, ccupssm, Cdot, cdot, cedil, Cedilla, cemptyv, cent, centerdot, CenterDot, cfr, Cfr, CHcy, chcy, check, checkmark, Chi, chi, circ, circeq, circlearrowleft, circlearrowright, circledast, circledcirc, circleddash, CircleDot, circledR, circledS, CircleMinus, CirclePlus, CircleTimes, cir, cirE, cire, cirfnint, cirmid, cirscir, ClockwiseContourIntegral, CloseCurlyDoubleQuote, CloseCurlyQuote, clubs, clubsuit, colon, Colon, Colone, colone, coloneq, comma, commat, comp, compfn, complement, complexes, cong, congdot, Congruent, conint, Conint, ContourIntegral, copf, Copf, coprod, Coproduct, copy, COPY, copysr, CounterClockwiseContourIntegral, crarr, cross, Cross, Cscr, cscr, csub, csube, csup, csupe, ctdot, cudarrl, cudarrr, cuepr, cuesc, cularr, cularrp, cupbrcap, cupcap, CupCap, cup, Cup, cupcup, cupdot, cupor, cups, curarr, curarrm, curlyeqprec, curlyeqsucc, curlyvee, curlywedge, curren, curvearrowleft, curvearrowright, cuvee, cuwed, cwconint, cwint, cylcty, dagger, Dagger, daleth, darr, Darr, dArr, dash, Dashv, dashv, dbkarow, dblac, Dcaron, dcaron, Dcy, dcy, ddagger, ddarr, DD, dd, DDotrahd, ddotseq, deg, Del, Delta, delta, demptyv, dfisht, Dfr, dfr, dHar, dharl, dharr, DiacriticalAcute, DiacriticalDot, DiacriticalDoubleAcute, DiacriticalGrave, DiacriticalTilde, diam, diamond, Diamond, diamondsuit, diams, die, DifferentialD, digamma, disin, div, divide, divideontimes, divonx, DJcy, djcy, dlcorn, dlcrop, dollar, Dopf, dopf, Dot, dot, DotDot, doteq, doteqdot, DotEqual, dotminus, dotplus, dotsquare, doublebarwedge, DoubleContourIntegral, DoubleDot, DoubleDownArrow, DoubleLeftArrow, DoubleLeftRightArrow, DoubleLeftTee, DoubleLongLeftArrow, DoubleLongLeftRightArrow, DoubleLongRightArrow, DoubleRightArrow, DoubleRightTee, DoubleUpArrow, DoubleUpDownArrow, DoubleVerticalBar, DownArrowBar, downarrow, DownArrow, Downarrow, DownArrowUpArrow, DownBreve, downdownarrows, downharpoonleft, downharpoonright, DownLeftRightVector, DownLeftTeeVector, DownLeftVectorBar, DownLeftVector, DownRightTeeVector, DownRightVectorBar, DownRightVector, DownTeeArrow, DownTee, drbkarow, drcorn, drcrop, Dscr, dscr, DScy, dscy, dsol, Dstrok, dstrok, dtdot, dtri, dtrif, duarr, duhar, dwangle, DZcy, dzcy, dzigrarr, Eacute, eacute, easter, Ecaron, ecaron, Ecirc, ecirc, ecir, ecolon, Ecy, ecy, eDDot, Edot, edot, eDot, ee, efDot, Efr, efr, eg, Egrave, egrave, egs, egsdot, el, Element, elinters, ell, els, elsdot, Emacr, emacr, empty, emptyset, EmptySmallSquare, emptyv, EmptyVerySmallSquare, emsp13, emsp14, emsp, ENG, eng, ensp, Eogon, eogon, Eopf, eopf, epar, eparsl, eplus, epsi, Epsilon, epsilon, epsiv, eqcirc, eqcolon, eqsim, eqslantgtr, eqslantless, Equal, equals, EqualTilde, equest, Equilibrium, equiv, equivDD, eqvparsl, erarr, erDot, escr, Escr, esdot, Esim, esim, Eta, eta, ETH, eth, Euml, euml, euro, excl, exist, Exists, expectation, exponentiale, ExponentialE, fallingdotseq, Fcy, fcy, female, ffilig, fflig, ffllig, Ffr, ffr, filig, FilledSmallSquare, FilledVerySmallSquare, fjlig, flat, fllig, fltns, fnof, Fopf, fopf, forall, ForAll, fork, forkv, Fouriertrf, fpartint, frac12, frac13, frac14, frac15, frac16, frac18, frac23, frac25, frac34, frac35, frac38, frac45, frac56, frac58, frac78, frasl, frown, fscr, Fscr, gacute, Gamma, gamma, Gammad, gammad, gap, Gbreve, gbreve, Gcedil, Gcirc, gcirc, Gcy, gcy, Gdot, gdot, ge, gE, gEl, gel, geq, geqq, geqslant, gescc, ges, gesdot, gesdoto, gesdotol, gesl, gesles, Gfr, gfr, gg, Gg, ggg, gimel, GJcy, gjcy, gla, gl, glE, glj, gnap, gnapprox, gne, gnE, gneq, gneqq, gnsim, Gopf, gopf, grave, GreaterEqual, GreaterEqualLess, GreaterFullEqual, GreaterGreater, GreaterLess, GreaterSlantEqual, GreaterTilde, Gscr, gscr, gsim, gsime, gsiml, gtcc, gtcir, gt, GT, Gt, gtdot, gtlPar, gtquest, gtrapprox, gtrarr, gtrdot, gtreqless, gtreqqless, gtrless, gtrsim, gvertneqq, gvnE, Hacek, hairsp, half, hamilt, HARDcy, hardcy, harrcir, harr, hArr, harrw, Hat, hbar, Hcirc, hcirc, hearts, heartsuit, hellip, hercon, hfr, Hfr, HilbertSpace, hksearow, hkswarow, hoarr, homtht, hookleftarrow, hookrightarrow, hopf, Hopf, horbar, HorizontalLine, hscr, Hscr, hslash, Hstrok, hstrok, HumpDownHump, HumpEqual, hybull, hyphen, Iacute, iacute, ic, Icirc, icirc, Icy, icy, Idot, IEcy, iecy, iexcl, iff, ifr, Ifr, Igrave, igrave, ii, iiiint, iiint, iinfin, iiota, IJlig, ijlig, Imacr, imacr, image, ImaginaryI, imagline, imagpart, imath, Im, imof, imped, Implies, incare, in, infin, infintie, inodot, intcal, int, Int, integers, Integral, intercal, Intersection, intlarhk, intprod, InvisibleComma, InvisibleTimes, IOcy, iocy, Iogon, iogon, Iopf, iopf, Iota, iota, iprod, iquest, iscr, Iscr, isin, isindot, isinE, isins, isinsv, isinv, it, Itilde, itilde, Iukcy, iukcy, Iuml, iuml, Jcirc, jcirc, Jcy, jcy, Jfr, jfr, jmath, Jopf, jopf, Jscr, jscr, Jsercy, jsercy, Jukcy, jukcy, Kappa, kappa, kappav, Kcedil, kcedil, Kcy, kcy, Kfr, kfr, kgreen, KHcy, khcy, KJcy, kjcy, Kopf, kopf, Kscr, kscr, lAarr, Lacute, lacute, laemptyv, lagran, Lambda, lambda, lang, Lang, langd, langle, lap, Laplacetrf, laquo, larrb, larrbfs, larr, Larr, lArr, larrfs, larrhk, larrlp, larrpl, larrsim, larrtl, latail, lAtail, lat, late, lates, lbarr, lBarr, lbbrk, lbrace, lbrack, lbrke, lbrksld, lbrkslu, Lcaron, lcaron, Lcedil, lcedil, lceil, lcub, Lcy, lcy, ldca, ldquo, ldquor, ldrdhar, ldrushar, ldsh, le, lE, LeftAngleBracket, LeftArrowBar, leftarrow, LeftArrow, Leftarrow, LeftArrowRightArrow, leftarrowtail, LeftCeiling, LeftDoubleBracket, LeftDownTeeVector, LeftDownVectorBar, LeftDownVector, LeftFloor, leftharpoondown, leftharpoonup, leftleftarrows, leftrightarrow, LeftRightArrow, Leftrightarrow, leftrightarrows, leftrightharpoons, leftrightsquigarrow, LeftRightVector, LeftTeeArrow, LeftTee, LeftTeeVector, leftthreetimes, LeftTriangleBar, LeftTriangle, LeftTriangleEqual, LeftUpDownVector, LeftUpTeeVector, LeftUpVectorBar, LeftUpVector, LeftVectorBar, LeftVector, lEg, leg, leq, leqq, leqslant, lescc, les, lesdot, lesdoto, lesdotor, lesg, lesges, lessapprox, lessdot, lesseqgtr, lesseqqgtr, LessEqualGreater, LessFullEqual, LessGreater, lessgtr, LessLess, lesssim, LessSlantEqual, LessTilde, lfisht, lfloor, Lfr, lfr, lg, lgE, lHar, lhard, lharu, lharul, lhblk, LJcy, ljcy, llarr, ll, Ll, llcorner, Lleftarrow, llhard, lltri, Lmidot, lmidot, lmoustache, lmoust, lnap, lnapprox, lne, lnE, lneq, lneqq, lnsim, loang, loarr, lobrk, longleftarrow, LongLeftArrow, Longleftarrow, longleftrightarrow, LongLeftRightArrow, Longleftrightarrow, longmapsto, longrightarrow, LongRightArrow, Longrightarrow, looparrowleft, looparrowright, lopar, Lopf, lopf, loplus, lotimes, lowast, lowbar, LowerLeftArrow, LowerRightArrow, loz, lozenge, lozf, lpar, lparlt, lrarr, lrcorner, lrhar, lrhard, lrm, lrtri, lsaquo, lscr, Lscr, lsh, Lsh, lsim, lsime, lsimg, lsqb, lsquo, lsquor, Lstrok, lstrok, ltcc, ltcir, lt, LT, Lt, ltdot, lthree, ltimes, ltlarr, ltquest, ltri, ltrie, ltrif, ltrPar, lurdshar, luruhar, lvertneqq, lvnE, macr, male, malt, maltese, Map, map, mapsto, mapstodown, mapstoleft, mapstoup, marker, mcomma, Mcy, mcy, mdash, mDDot, measuredangle, MediumSpace, Mellintrf, Mfr, mfr, mho, micro, midast, midcir, mid, middot, minusb, minus, minusd, minusdu, MinusPlus, mlcp, mldr, mnplus, models, Mopf, mopf, mp, mscr, Mscr, mstpos, Mu, mu, multimap, mumap, nabla, Nacute, nacute, nang, nap, napE, napid, napos, napprox, natural, naturals, natur, nbsp, nbump, nbumpe, ncap, Ncaron, ncaron, Ncedil, ncedil, ncong, ncongdot, ncup, Ncy, ncy, ndash, nearhk, nearr, neArr, nearrow, ne, nedot, NegativeMediumSpace, NegativeThickSpace, NegativeThinSpace, NegativeVeryThinSpace, nequiv, nesear, nesim, NestedGreaterGreater, NestedLessLess, NewLine, nexist, nexists, Nfr, nfr, ngE, nge, ngeq, ngeqq, ngeqslant, nges, nGg, ngsim, nGt, ngt, ngtr, nGtv, nharr, nhArr, nhpar, ni, nis, nisd, niv, NJcy, njcy, nlarr, nlArr, nldr, nlE, nle, nleftarrow, nLeftarrow, nleftrightarrow, nLeftrightarrow, nleq, nleqq, nleqslant, nles, nless, nLl, nlsim, nLt, nlt, nltri, nltrie, nLtv, nmid, NoBreak, NonBreakingSpace, nopf, Nopf, Not, not, NotCongruent, NotCupCap, NotDoubleVerticalBar, NotElement, NotEqual, NotEqualTilde, NotExists, NotGreater, NotGreaterEqual, NotGreaterFullEqual, NotGreaterGreater, NotGreaterLess, NotGreaterSlantEqual, NotGreaterTilde, NotHumpDownHump, NotHumpEqual, notin, notindot, notinE, notinva, notinvb, notinvc, NotLeftTriangleBar, NotLeftTriangle, NotLeftTriangleEqual, NotLess, NotLessEqual, NotLessGreater, NotLessLess, NotLessSlantEqual, NotLessTilde, NotNestedGreaterGreater, NotNestedLessLess, notni, notniva, notnivb, notnivc, NotPrecedes, NotPrecedesEqual, NotPrecedesSlantEqual, NotReverseElement, NotRightTriangleBar, NotRightTriangle, NotRightTriangleEqual, NotSquareSubset, NotSquareSubsetEqual, NotSquareSuperset, NotSquareSupersetEqual, NotSubset, NotSubsetEqual, NotSucceeds, NotSucceedsEqual, NotSucceedsSlantEqual, NotSucceedsTilde, NotSuperset, NotSupersetEqual, NotTilde, NotTildeEqual, NotTildeFullEqual, NotTildeTilde, NotVerticalBar, nparallel, npar, nparsl, npart, npolint, npr, nprcue, nprec, npreceq, npre, nrarrc, nrarr, nrArr, nrarrw, nrightarrow, nRightarrow, nrtri, nrtrie, nsc, nsccue, nsce, Nscr, nscr, nshortmid, nshortparallel, nsim, nsime, nsimeq, nsmid, nspar, nsqsube, nsqsupe, nsub, nsubE, nsube, nsubset, nsubseteq, nsubseteqq, nsucc, nsucceq, nsup, nsupE, nsupe, nsupset, nsupseteq, nsupseteqq, ntgl, Ntilde, ntilde, ntlg, ntriangleleft, ntrianglelefteq, ntriangleright, ntrianglerighteq, Nu, nu, num, numero, numsp, nvap, nvdash, nvDash, nVdash, nVDash, nvge, nvgt, nvHarr, nvinfin, nvlArr, nvle, nvlt, nvltrie, nvrArr, nvrtrie, nvsim, nwarhk, nwarr, nwArr, nwarrow, nwnear, Oacute, oacute, oast, Ocirc, ocirc, ocir, Ocy, ocy, odash, Odblac, odblac, odiv, odot, odsold, OElig, oelig, ofcir, Ofr, ofr, ogon, Ograve, ograve, ogt, ohbar, ohm, oint, olarr, olcir, olcross, oline, olt, Omacr, omacr, Omega, omega, Omicron, omicron, omid, ominus, Oopf, oopf, opar, OpenCurlyDoubleQuote, OpenCurlyQuote, operp, oplus, orarr, Or, or, ord, order, orderof, ordf, ordm, origof, oror, orslope, orv, oS, Oscr, oscr, Oslash, oslash, osol, Otilde, otilde, otimesas, Otimes, otimes, Ouml, ouml, ovbar, OverBar, OverBrace, OverBracket, OverParenthesis, para, parallel, par, parsim, parsl, part, PartialD, Pcy, pcy, percnt, period, permil, perp, pertenk, Pfr, pfr, Phi, phi, phiv, phmmat, phone, Pi, pi, pitchfork, piv, planck, planckh, plankv, plusacir, plusb, pluscir, plus, plusdo, plusdu, pluse, PlusMinus, plusmn, plussim, plustwo, pm, Poincareplane, pointint, popf, Popf, pound, prap, Pr, pr, prcue, precapprox, prec, preccurlyeq, Precedes, PrecedesEqual, PrecedesSlantEqual, PrecedesTilde, preceq, precnapprox, precneqq, precnsim, pre, prE, precsim, prime, Prime, primes, prnap, prnE, prnsim, prod, Product, profalar, profline, profsurf, prop, Proportional, Proportion, propto, prsim, prurel, Pscr, pscr, Psi, psi, puncsp, Qfr, qfr, qint, qopf, Qopf, qprime, Qscr, qscr, quaternions, quatint, quest, questeq, quot, QUOT, rAarr, race, Racute, racute, radic, raemptyv, rang, Rang, rangd, range, rangle, raquo, rarrap, rarrb, rarrbfs, rarrc, rarr, Rarr, rArr, rarrfs, rarrhk, rarrlp, rarrpl, rarrsim, Rarrtl, rarrtl, rarrw, ratail, rAtail, ratio, rationals, rbarr, rBarr, RBarr, rbbrk, rbrace, rbrack, rbrke, rbrksld, rbrkslu, Rcaron, rcaron, Rcedil, rcedil, rceil, rcub, Rcy, rcy, rdca, rdldhar, rdquo, rdquor, rdsh, real, realine, realpart, reals, Re, rect, reg, REG, ReverseElement, ReverseEquilibrium, ReverseUpEquilibrium, rfisht, rfloor, rfr, Rfr, rHar, rhard, rharu, rharul, Rho, rho, rhov, RightAngleBracket, RightArrowBar, rightarrow, RightArrow, Rightarrow, RightArrowLeftArrow, rightarrowtail, RightCeiling, RightDoubleBracket, RightDownTeeVector, RightDownVectorBar, RightDownVector, RightFloor, rightharpoondown, rightharpoonup, rightleftarrows, rightleftharpoons, rightrightarrows, rightsquigarrow, RightTeeArrow, RightTee, RightTeeVector, rightthreetimes, RightTriangleBar, RightTriangle, RightTriangleEqual, RightUpDownVector, RightUpTeeVector, RightUpVectorBar, RightUpVector, RightVectorBar, RightVector, ring, risingdotseq, rlarr, rlhar, rlm, rmoustache, rmoust, rnmid, roang, roarr, robrk, ropar, ropf, Ropf, roplus, rotimes, RoundImplies, rpar, rpargt, rppolint, rrarr, Rrightarrow, rsaquo, rscr, Rscr, rsh, Rsh, rsqb, rsquo, rsquor, rthree, rtimes, rtri, rtrie, rtrif, rtriltri, RuleDelayed, ruluhar, rx, Sacute, sacute, sbquo, scap, Scaron, scaron, Sc, sc, sccue, sce, scE, Scedil, scedil, Scirc, scirc, scnap, scnE, scnsim, scpolint, scsim, Scy, scy, sdotb, sdot, sdote, searhk, searr, seArr, searrow, sect, semi, seswar, setminus, setmn, sext, Sfr, sfr, sfrown, sharp, SHCHcy, shchcy, SHcy, shcy, ShortDownArrow, ShortLeftArrow, shortmid, shortparallel, ShortRightArrow, ShortUpArrow, shy, Sigma, sigma, sigmaf, sigmav, sim, simdot, sime, simeq, simg, simgE, siml, simlE, simne, simplus, simrarr, slarr, SmallCircle, smallsetminus, smashp, smeparsl, smid, smile, smt, smte, smtes, SOFTcy, softcy, solbar, solb, sol, Sopf, sopf, spades, spadesuit, spar, sqcap, sqcaps, sqcup, sqcups, Sqrt, sqsub, sqsube, sqsubset, sqsubseteq, sqsup, sqsupe, sqsupset, sqsupseteq, square, Square, SquareIntersection, SquareSubset, SquareSubsetEqual, SquareSuperset, SquareSupersetEqual, SquareUnion, squarf, squ, squf, srarr, Sscr, sscr, ssetmn, ssmile, sstarf, Star, star, starf, straightepsilon, straightphi, strns, sub, Sub, subdot, subE, sube, subedot, submult, subnE, subne, subplus, subrarr, subset, Subset, subseteq, subseteqq, SubsetEqual, subsetneq, subsetneqq, subsim, subsub, subsup, succapprox, succ, succcurlyeq, Succeeds, SucceedsEqual, SucceedsSlantEqual, SucceedsTilde, succeq, succnapprox, succneqq, succnsim, succsim, SuchThat, sum, Sum, sung, sup1, sup2, sup3, sup, Sup, supdot, supdsub, supE, supe, supedot, Superset, SupersetEqual, suphsol, suphsub, suplarr, supmult, supnE, supne, supplus, supset, Supset, supseteq, supseteqq, supsetneq, supsetneqq, supsim, supsub, supsup, swarhk, swarr, swArr, swarrow, swnwar, szlig, Tab, target, Tau, tau, tbrk, Tcaron, tcaron, Tcedil, tcedil, Tcy, tcy, tdot, telrec, Tfr, tfr, there4, therefore, Therefore, Theta, theta, thetasym, thetav, thickapprox, thicksim, ThickSpace, ThinSpace, thinsp, thkap, thksim, THORN, thorn, tilde, Tilde, TildeEqual, TildeFullEqual, TildeTilde, timesbar, timesb, times, timesd, tint, toea, topbot, topcir, top, Topf, topf, topfork, tosa, tprime, trade, TRADE, triangle, triangledown, triangleleft, trianglelefteq, triangleq, triangleright, trianglerighteq, tridot, trie, triminus, TripleDot, triplus, trisb, tritime, trpezium, Tscr, tscr, TScy, tscy, TSHcy, tshcy, Tstrok, tstrok, twixt, twoheadleftarrow, twoheadrightarrow, Uacute, uacute, uarr, Uarr, uArr, Uarrocir, Ubrcy, ubrcy, Ubreve, ubreve, Ucirc, ucirc, Ucy, ucy, udarr, Udblac, udblac, udhar, ufisht, Ufr, ufr, Ugrave, ugrave, uHar, uharl, uharr, uhblk, ulcorn, ulcorner, ulcrop, ultri, Umacr, umacr, uml, UnderBar, UnderBrace, UnderBracket, UnderParenthesis, Union, UnionPlus, Uogon, uogon, Uopf, uopf, UpArrowBar, uparrow, UpArrow, Uparrow, UpArrowDownArrow, updownarrow, UpDownArrow, Updownarrow, UpEquilibrium, upharpoonleft, upharpoonright, uplus, UpperLeftArrow, UpperRightArrow, upsi, Upsi, upsih, Upsilon, upsilon, UpTeeArrow, UpTee, upuparrows, urcorn, urcorner, urcrop, Uring, uring, urtri, Uscr, uscr, utdot, Utilde, utilde, utri, utrif, uuarr, Uuml, uuml, uwangle, vangrt, varepsilon, varkappa, varnothing, varphi, varpi, varpropto, varr, vArr, varrho, varsigma, varsubsetneq, varsubsetneqq, varsupsetneq, varsupsetneqq, vartheta, vartriangleleft, vartriangleright, vBar, Vbar, vBarv, Vcy, vcy, vdash, vDash, Vdash, VDash, Vdashl, veebar, vee, Vee, veeeq, vellip, verbar, Verbar, vert, Vert, VerticalBar, VerticalLine, VerticalSeparator, VerticalTilde, VeryThinSpace, Vfr, vfr, vltri, vnsub, vnsup, Vopf, vopf, vprop, vrtri, Vscr, vscr, vsubnE, vsubne, vsupnE, vsupne, Vvdash, vzigzag, Wcirc, wcirc, wedbar, wedge, Wedge, wedgeq, weierp, Wfr, wfr, Wopf, wopf, wp, wr, wreath, Wscr, wscr, xcap, xcirc, xcup, xdtri, Xfr, xfr, xharr, xhArr, Xi, xi, xlarr, xlArr, xmap, xnis, xodot, Xopf, xopf, xoplus, xotime, xrarr, xrArr, Xscr, xscr, xsqcup, xuplus, xutri, xvee, xwedge, Yacute, yacute, YAcy, yacy, Ycirc, ycirc, Ycy, ycy, yen, Yfr, yfr, YIcy, yicy, Yopf, yopf, Yscr, yscr, YUcy, yucy, yuml, Yuml, Zacute, zacute, Zcaron, zcaron, Zcy, zcy, Zdot, zdot, zeetrf, ZeroWidthSpace, Zeta, zeta, zfr, Zfr, ZHcy, zhcy, zigrarr, zopf, Zopf, Zscr, zscr, zwj, zwnj, default */
 /***/ (function(module) {
@@ -9527,7 +12235,7 @@ module.exports = JSON.parse("{\"Aacute\":\"Á\",\"aacute\":\"á\",\"Abreve\":\"�
 
 /***/ "../../util/sugar/node_modules/htmlparser2/node_modules/entities/maps/legacy.json":
 /*!******************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/htmlparser2/node_modules/entities/maps/legacy.json ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/htmlparser2/node_modules/entities/maps/legacy.json ***!
   \******************************************************************************************************************************************/
 /*! exports provided: Aacute, aacute, Acirc, acirc, acute, AElig, aelig, Agrave, agrave, amp, AMP, Aring, aring, Atilde, atilde, Auml, auml, brvbar, Ccedil, ccedil, cedil, cent, copy, COPY, curren, deg, divide, Eacute, eacute, Ecirc, ecirc, Egrave, egrave, ETH, eth, Euml, euml, frac12, frac14, frac34, gt, GT, Iacute, iacute, Icirc, icirc, iexcl, Igrave, igrave, iquest, Iuml, iuml, laquo, lt, LT, macr, micro, middot, nbsp, not, Ntilde, ntilde, Oacute, oacute, Ocirc, ocirc, Ograve, ograve, ordf, ordm, Oslash, oslash, Otilde, otilde, Ouml, ouml, para, plusmn, pound, quot, QUOT, raquo, reg, REG, sect, shy, sup1, sup2, sup3, szlig, THORN, thorn, times, Uacute, uacute, Ucirc, ucirc, Ugrave, ugrave, uml, Uuml, uuml, Yacute, yacute, yen, yuml, default */
 /***/ (function(module) {
@@ -9538,7 +12246,7 @@ module.exports = JSON.parse("{\"Aacute\":\"Á\",\"aacute\":\"á\",\"Acirc\":\"Â
 
 /***/ "../../util/sugar/node_modules/htmlparser2/node_modules/entities/maps/xml.json":
 /*!***************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/htmlparser2/node_modules/entities/maps/xml.json ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/htmlparser2/node_modules/entities/maps/xml.json ***!
   \***************************************************************************************************************************************/
 /*! exports provided: amp, apos, gt, lt, quot, default */
 /***/ (function(module) {
@@ -9549,7 +12257,7 @@ module.exports = JSON.parse("{\"amp\":\"&\",\"apos\":\"'\",\"gt\":\">\",\"lt\":\
 
 /***/ "../../util/sugar/node_modules/ieee754/index.js":
 /*!********************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/ieee754/index.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/ieee754/index.js ***!
   \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -9644,7 +12352,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 
 /***/ "../../util/sugar/node_modules/in-viewport/in-viewport.js":
 /*!******************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/in-viewport/in-viewport.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/in-viewport/in-viewport.js ***!
   \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -9937,7 +12645,7 @@ function observeDOM(watches, container, cb) {
 
 /***/ "../../util/sugar/node_modules/inherits/inherits_browser.js":
 /*!********************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/inherits/inherits_browser.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/inherits/inherits_browser.js ***!
   \********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -9975,7 +12683,7 @@ if (typeof Object.create === 'function') {
 
 /***/ "../../util/sugar/node_modules/is-class/is-class.js":
 /*!************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/is-class/is-class.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/is-class/is-class.js ***!
   \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -10012,9 +12720,39 @@ if (typeof Object.create === 'function') {
 
 /***/ }),
 
+/***/ "../../util/sugar/node_modules/is-number/index.js":
+/*!**********************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/is-number/index.js ***!
+  \**********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/*!
+ * is-number <https://github.com/jonschlinkert/is-number>
+ *
+ * Copyright (c) 2014-present, Jon Schlinkert.
+ * Released under the MIT License.
+ */
+
+
+
+module.exports = function(num) {
+  if (typeof num === 'number') {
+    return num - num === 0;
+  }
+  if (typeof num === 'string' && num.trim() !== '') {
+    return Number.isFinite ? Number.isFinite(+num) : isFinite(+num);
+  }
+  return false;
+};
+
+
+/***/ }),
+
 /***/ "../../util/sugar/node_modules/isarray/index.js":
 /*!********************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/isarray/index.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/isarray/index.js ***!
   \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -10030,7 +12768,7 @@ module.exports = Array.isArray || function (arr) {
 
 /***/ "../../util/sugar/node_modules/lit-html/lib/default-template-processor.js":
 /*!**********************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/lit-html/lib/default-template-processor.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lit-html/lib/default-template-processor.js ***!
   \**********************************************************************************************************************************/
 /*! exports provided: DefaultTemplateProcessor, defaultTemplateProcessor */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -10097,7 +12835,7 @@ const defaultTemplateProcessor = new DefaultTemplateProcessor();
 
 /***/ "../../util/sugar/node_modules/lit-html/lib/directive.js":
 /*!*****************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/lit-html/lib/directive.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lit-html/lib/directive.js ***!
   \*****************************************************************************************************************/
 /*! exports provided: directive, isDirective */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -10174,7 +12912,7 @@ const isDirective = (o) => {
 
 /***/ "../../util/sugar/node_modules/lit-html/lib/dom.js":
 /*!***********************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/lit-html/lib/dom.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lit-html/lib/dom.js ***!
   \***********************************************************************************************************/
 /*! exports provided: isCEPolyfill, reparentNodes, removeNodes */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -10233,7 +12971,7 @@ const removeNodes = (container, start, end = null) => {
 
 /***/ "../../util/sugar/node_modules/lit-html/lib/part.js":
 /*!************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/lit-html/lib/part.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lit-html/lib/part.js ***!
   \************************************************************************************************************/
 /*! exports provided: noChange, nothing */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -10270,7 +13008,7 @@ const nothing = {};
 
 /***/ "../../util/sugar/node_modules/lit-html/lib/parts.js":
 /*!*************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/lit-html/lib/parts.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lit-html/lib/parts.js ***!
   \*************************************************************************************************************/
 /*! exports provided: isPrimitive, isIterable, AttributeCommitter, AttributePart, NodePart, BooleanAttributePart, PropertyCommitter, PropertyPart, EventPart */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -10753,7 +13491,7 @@ const getOptions = (o) => o &&
 
 /***/ "../../util/sugar/node_modules/lit-html/lib/render.js":
 /*!**************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/lit-html/lib/render.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lit-html/lib/render.js ***!
   \**************************************************************************************************************/
 /*! exports provided: parts, render */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -10816,7 +13554,7 @@ const render = (result, container, options) => {
 
 /***/ "../../util/sugar/node_modules/lit-html/lib/template-factory.js":
 /*!************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/lit-html/lib/template-factory.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lit-html/lib/template-factory.js ***!
   \************************************************************************************************************************/
 /*! exports provided: templateFactory, templateCaches */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -10879,7 +13617,7 @@ const templateCaches = new Map();
 
 /***/ "../../util/sugar/node_modules/lit-html/lib/template-instance.js":
 /*!*************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/lit-html/lib/template-instance.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lit-html/lib/template-instance.js ***!
   \*************************************************************************************************************************/
 /*! exports provided: TemplateInstance */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -11031,7 +13769,7 @@ class TemplateInstance {
 
 /***/ "../../util/sugar/node_modules/lit-html/lib/template-result.js":
 /*!***********************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/lit-html/lib/template-result.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lit-html/lib/template-result.js ***!
   \***********************************************************************************************************************/
 /*! exports provided: TemplateResult, SVGTemplateResult */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -11160,7 +13898,7 @@ class SVGTemplateResult extends TemplateResult {
 
 /***/ "../../util/sugar/node_modules/lit-html/lib/template.js":
 /*!****************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/lit-html/lib/template.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lit-html/lib/template.js ***!
   \****************************************************************************************************************/
 /*! exports provided: marker, nodeMarker, markerRegex, boundAttributeSuffix, Template, isTemplatePartActive, createMarker, lastAttributeNameRegex */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -11395,7 +14133,7 @@ const lastAttributeNameRegex =
 
 /***/ "../../util/sugar/node_modules/lit-html/lit-html.js":
 /*!************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/lit-html/lit-html.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lit-html/lit-html.js ***!
   \************************************************************************************************************/
 /*! exports provided: DefaultTemplateProcessor, defaultTemplateProcessor, directive, isDirective, removeNodes, reparentNodes, noChange, nothing, AttributeCommitter, AttributePart, BooleanAttributePart, EventPart, isIterable, isPrimitive, NodePart, PropertyCommitter, PropertyPart, parts, render, templateCaches, templateFactory, TemplateInstance, SVGTemplateResult, TemplateResult, createMarker, isTemplatePartActive, Template, html, svg */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -11531,9 +14269,5293 @@ const svg = (strings, ...values) => new _lib_template_result_js__WEBPACK_IMPORTE
 
 /***/ }),
 
+/***/ "../../util/sugar/node_modules/lodash/_DataView.js":
+/*!***********************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_DataView.js ***!
+  \***********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getNative = __webpack_require__(/*! ./_getNative */ "../../util/sugar/node_modules/lodash/_getNative.js"),
+    root = __webpack_require__(/*! ./_root */ "../../util/sugar/node_modules/lodash/_root.js");
+
+/* Built-in method references that are verified to be native. */
+var DataView = getNative(root, 'DataView');
+
+module.exports = DataView;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_Hash.js":
+/*!*******************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_Hash.js ***!
+  \*******************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var hashClear = __webpack_require__(/*! ./_hashClear */ "../../util/sugar/node_modules/lodash/_hashClear.js"),
+    hashDelete = __webpack_require__(/*! ./_hashDelete */ "../../util/sugar/node_modules/lodash/_hashDelete.js"),
+    hashGet = __webpack_require__(/*! ./_hashGet */ "../../util/sugar/node_modules/lodash/_hashGet.js"),
+    hashHas = __webpack_require__(/*! ./_hashHas */ "../../util/sugar/node_modules/lodash/_hashHas.js"),
+    hashSet = __webpack_require__(/*! ./_hashSet */ "../../util/sugar/node_modules/lodash/_hashSet.js");
+
+/**
+ * Creates a hash object.
+ *
+ * @private
+ * @constructor
+ * @param {Array} [entries] The key-value pairs to cache.
+ */
+function Hash(entries) {
+  var index = -1,
+      length = entries == null ? 0 : entries.length;
+
+  this.clear();
+  while (++index < length) {
+    var entry = entries[index];
+    this.set(entry[0], entry[1]);
+  }
+}
+
+// Add methods to `Hash`.
+Hash.prototype.clear = hashClear;
+Hash.prototype['delete'] = hashDelete;
+Hash.prototype.get = hashGet;
+Hash.prototype.has = hashHas;
+Hash.prototype.set = hashSet;
+
+module.exports = Hash;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_ListCache.js":
+/*!************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_ListCache.js ***!
+  \************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var listCacheClear = __webpack_require__(/*! ./_listCacheClear */ "../../util/sugar/node_modules/lodash/_listCacheClear.js"),
+    listCacheDelete = __webpack_require__(/*! ./_listCacheDelete */ "../../util/sugar/node_modules/lodash/_listCacheDelete.js"),
+    listCacheGet = __webpack_require__(/*! ./_listCacheGet */ "../../util/sugar/node_modules/lodash/_listCacheGet.js"),
+    listCacheHas = __webpack_require__(/*! ./_listCacheHas */ "../../util/sugar/node_modules/lodash/_listCacheHas.js"),
+    listCacheSet = __webpack_require__(/*! ./_listCacheSet */ "../../util/sugar/node_modules/lodash/_listCacheSet.js");
+
+/**
+ * Creates an list cache object.
+ *
+ * @private
+ * @constructor
+ * @param {Array} [entries] The key-value pairs to cache.
+ */
+function ListCache(entries) {
+  var index = -1,
+      length = entries == null ? 0 : entries.length;
+
+  this.clear();
+  while (++index < length) {
+    var entry = entries[index];
+    this.set(entry[0], entry[1]);
+  }
+}
+
+// Add methods to `ListCache`.
+ListCache.prototype.clear = listCacheClear;
+ListCache.prototype['delete'] = listCacheDelete;
+ListCache.prototype.get = listCacheGet;
+ListCache.prototype.has = listCacheHas;
+ListCache.prototype.set = listCacheSet;
+
+module.exports = ListCache;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_Map.js":
+/*!******************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_Map.js ***!
+  \******************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getNative = __webpack_require__(/*! ./_getNative */ "../../util/sugar/node_modules/lodash/_getNative.js"),
+    root = __webpack_require__(/*! ./_root */ "../../util/sugar/node_modules/lodash/_root.js");
+
+/* Built-in method references that are verified to be native. */
+var Map = getNative(root, 'Map');
+
+module.exports = Map;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_MapCache.js":
+/*!***********************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_MapCache.js ***!
+  \***********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var mapCacheClear = __webpack_require__(/*! ./_mapCacheClear */ "../../util/sugar/node_modules/lodash/_mapCacheClear.js"),
+    mapCacheDelete = __webpack_require__(/*! ./_mapCacheDelete */ "../../util/sugar/node_modules/lodash/_mapCacheDelete.js"),
+    mapCacheGet = __webpack_require__(/*! ./_mapCacheGet */ "../../util/sugar/node_modules/lodash/_mapCacheGet.js"),
+    mapCacheHas = __webpack_require__(/*! ./_mapCacheHas */ "../../util/sugar/node_modules/lodash/_mapCacheHas.js"),
+    mapCacheSet = __webpack_require__(/*! ./_mapCacheSet */ "../../util/sugar/node_modules/lodash/_mapCacheSet.js");
+
+/**
+ * Creates a map cache object to store key-value pairs.
+ *
+ * @private
+ * @constructor
+ * @param {Array} [entries] The key-value pairs to cache.
+ */
+function MapCache(entries) {
+  var index = -1,
+      length = entries == null ? 0 : entries.length;
+
+  this.clear();
+  while (++index < length) {
+    var entry = entries[index];
+    this.set(entry[0], entry[1]);
+  }
+}
+
+// Add methods to `MapCache`.
+MapCache.prototype.clear = mapCacheClear;
+MapCache.prototype['delete'] = mapCacheDelete;
+MapCache.prototype.get = mapCacheGet;
+MapCache.prototype.has = mapCacheHas;
+MapCache.prototype.set = mapCacheSet;
+
+module.exports = MapCache;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_Promise.js":
+/*!**********************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_Promise.js ***!
+  \**********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getNative = __webpack_require__(/*! ./_getNative */ "../../util/sugar/node_modules/lodash/_getNative.js"),
+    root = __webpack_require__(/*! ./_root */ "../../util/sugar/node_modules/lodash/_root.js");
+
+/* Built-in method references that are verified to be native. */
+var Promise = getNative(root, 'Promise');
+
+module.exports = Promise;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_Set.js":
+/*!******************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_Set.js ***!
+  \******************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getNative = __webpack_require__(/*! ./_getNative */ "../../util/sugar/node_modules/lodash/_getNative.js"),
+    root = __webpack_require__(/*! ./_root */ "../../util/sugar/node_modules/lodash/_root.js");
+
+/* Built-in method references that are verified to be native. */
+var Set = getNative(root, 'Set');
+
+module.exports = Set;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_Stack.js":
+/*!********************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_Stack.js ***!
+  \********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var ListCache = __webpack_require__(/*! ./_ListCache */ "../../util/sugar/node_modules/lodash/_ListCache.js"),
+    stackClear = __webpack_require__(/*! ./_stackClear */ "../../util/sugar/node_modules/lodash/_stackClear.js"),
+    stackDelete = __webpack_require__(/*! ./_stackDelete */ "../../util/sugar/node_modules/lodash/_stackDelete.js"),
+    stackGet = __webpack_require__(/*! ./_stackGet */ "../../util/sugar/node_modules/lodash/_stackGet.js"),
+    stackHas = __webpack_require__(/*! ./_stackHas */ "../../util/sugar/node_modules/lodash/_stackHas.js"),
+    stackSet = __webpack_require__(/*! ./_stackSet */ "../../util/sugar/node_modules/lodash/_stackSet.js");
+
+/**
+ * Creates a stack cache object to store key-value pairs.
+ *
+ * @private
+ * @constructor
+ * @param {Array} [entries] The key-value pairs to cache.
+ */
+function Stack(entries) {
+  var data = this.__data__ = new ListCache(entries);
+  this.size = data.size;
+}
+
+// Add methods to `Stack`.
+Stack.prototype.clear = stackClear;
+Stack.prototype['delete'] = stackDelete;
+Stack.prototype.get = stackGet;
+Stack.prototype.has = stackHas;
+Stack.prototype.set = stackSet;
+
+module.exports = Stack;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_Symbol.js":
+/*!*********************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_Symbol.js ***!
+  \*********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var root = __webpack_require__(/*! ./_root */ "../../util/sugar/node_modules/lodash/_root.js");
+
+/** Built-in value references. */
+var Symbol = root.Symbol;
+
+module.exports = Symbol;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_Uint8Array.js":
+/*!*************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_Uint8Array.js ***!
+  \*************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var root = __webpack_require__(/*! ./_root */ "../../util/sugar/node_modules/lodash/_root.js");
+
+/** Built-in value references. */
+var Uint8Array = root.Uint8Array;
+
+module.exports = Uint8Array;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_WeakMap.js":
+/*!**********************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_WeakMap.js ***!
+  \**********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getNative = __webpack_require__(/*! ./_getNative */ "../../util/sugar/node_modules/lodash/_getNative.js"),
+    root = __webpack_require__(/*! ./_root */ "../../util/sugar/node_modules/lodash/_root.js");
+
+/* Built-in method references that are verified to be native. */
+var WeakMap = getNative(root, 'WeakMap');
+
+module.exports = WeakMap;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_arrayEach.js":
+/*!************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_arrayEach.js ***!
+  \************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * A specialized version of `_.forEach` for arrays without support for
+ * iteratee shorthands.
+ *
+ * @private
+ * @param {Array} [array] The array to iterate over.
+ * @param {Function} iteratee The function invoked per iteration.
+ * @returns {Array} Returns `array`.
+ */
+function arrayEach(array, iteratee) {
+  var index = -1,
+      length = array == null ? 0 : array.length;
+
+  while (++index < length) {
+    if (iteratee(array[index], index, array) === false) {
+      break;
+    }
+  }
+  return array;
+}
+
+module.exports = arrayEach;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_arrayFilter.js":
+/*!**************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_arrayFilter.js ***!
+  \**************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * A specialized version of `_.filter` for arrays without support for
+ * iteratee shorthands.
+ *
+ * @private
+ * @param {Array} [array] The array to iterate over.
+ * @param {Function} predicate The function invoked per iteration.
+ * @returns {Array} Returns the new filtered array.
+ */
+function arrayFilter(array, predicate) {
+  var index = -1,
+      length = array == null ? 0 : array.length,
+      resIndex = 0,
+      result = [];
+
+  while (++index < length) {
+    var value = array[index];
+    if (predicate(value, index, array)) {
+      result[resIndex++] = value;
+    }
+  }
+  return result;
+}
+
+module.exports = arrayFilter;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_arrayLikeKeys.js":
+/*!****************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_arrayLikeKeys.js ***!
+  \****************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseTimes = __webpack_require__(/*! ./_baseTimes */ "../../util/sugar/node_modules/lodash/_baseTimes.js"),
+    isArguments = __webpack_require__(/*! ./isArguments */ "../../util/sugar/node_modules/lodash/isArguments.js"),
+    isArray = __webpack_require__(/*! ./isArray */ "../../util/sugar/node_modules/lodash/isArray.js"),
+    isBuffer = __webpack_require__(/*! ./isBuffer */ "../../util/sugar/node_modules/lodash/isBuffer.js"),
+    isIndex = __webpack_require__(/*! ./_isIndex */ "../../util/sugar/node_modules/lodash/_isIndex.js"),
+    isTypedArray = __webpack_require__(/*! ./isTypedArray */ "../../util/sugar/node_modules/lodash/isTypedArray.js");
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * Creates an array of the enumerable property names of the array-like `value`.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @param {boolean} inherited Specify returning inherited property names.
+ * @returns {Array} Returns the array of property names.
+ */
+function arrayLikeKeys(value, inherited) {
+  var isArr = isArray(value),
+      isArg = !isArr && isArguments(value),
+      isBuff = !isArr && !isArg && isBuffer(value),
+      isType = !isArr && !isArg && !isBuff && isTypedArray(value),
+      skipIndexes = isArr || isArg || isBuff || isType,
+      result = skipIndexes ? baseTimes(value.length, String) : [],
+      length = result.length;
+
+  for (var key in value) {
+    if ((inherited || hasOwnProperty.call(value, key)) &&
+        !(skipIndexes && (
+           // Safari 9 has enumerable `arguments.length` in strict mode.
+           key == 'length' ||
+           // Node.js 0.10 has enumerable non-index properties on buffers.
+           (isBuff && (key == 'offset' || key == 'parent')) ||
+           // PhantomJS 2 has enumerable non-index properties on typed arrays.
+           (isType && (key == 'buffer' || key == 'byteLength' || key == 'byteOffset')) ||
+           // Skip index properties.
+           isIndex(key, length)
+        ))) {
+      result.push(key);
+    }
+  }
+  return result;
+}
+
+module.exports = arrayLikeKeys;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_arrayPush.js":
+/*!************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_arrayPush.js ***!
+  \************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * Appends the elements of `values` to `array`.
+ *
+ * @private
+ * @param {Array} array The array to modify.
+ * @param {Array} values The values to append.
+ * @returns {Array} Returns `array`.
+ */
+function arrayPush(array, values) {
+  var index = -1,
+      length = values.length,
+      offset = array.length;
+
+  while (++index < length) {
+    array[offset + index] = values[index];
+  }
+  return array;
+}
+
+module.exports = arrayPush;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_assignValue.js":
+/*!**************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_assignValue.js ***!
+  \**************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseAssignValue = __webpack_require__(/*! ./_baseAssignValue */ "../../util/sugar/node_modules/lodash/_baseAssignValue.js"),
+    eq = __webpack_require__(/*! ./eq */ "../../util/sugar/node_modules/lodash/eq.js");
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * Assigns `value` to `key` of `object` if the existing value is not equivalent
+ * using [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
+ * for equality comparisons.
+ *
+ * @private
+ * @param {Object} object The object to modify.
+ * @param {string} key The key of the property to assign.
+ * @param {*} value The value to assign.
+ */
+function assignValue(object, key, value) {
+  var objValue = object[key];
+  if (!(hasOwnProperty.call(object, key) && eq(objValue, value)) ||
+      (value === undefined && !(key in object))) {
+    baseAssignValue(object, key, value);
+  }
+}
+
+module.exports = assignValue;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_assocIndexOf.js":
+/*!***************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_assocIndexOf.js ***!
+  \***************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var eq = __webpack_require__(/*! ./eq */ "../../util/sugar/node_modules/lodash/eq.js");
+
+/**
+ * Gets the index at which the `key` is found in `array` of key-value pairs.
+ *
+ * @private
+ * @param {Array} array The array to inspect.
+ * @param {*} key The key to search for.
+ * @returns {number} Returns the index of the matched value, else `-1`.
+ */
+function assocIndexOf(array, key) {
+  var length = array.length;
+  while (length--) {
+    if (eq(array[length][0], key)) {
+      return length;
+    }
+  }
+  return -1;
+}
+
+module.exports = assocIndexOf;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_baseAssign.js":
+/*!*************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_baseAssign.js ***!
+  \*************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var copyObject = __webpack_require__(/*! ./_copyObject */ "../../util/sugar/node_modules/lodash/_copyObject.js"),
+    keys = __webpack_require__(/*! ./keys */ "../../util/sugar/node_modules/lodash/keys.js");
+
+/**
+ * The base implementation of `_.assign` without support for multiple sources
+ * or `customizer` functions.
+ *
+ * @private
+ * @param {Object} object The destination object.
+ * @param {Object} source The source object.
+ * @returns {Object} Returns `object`.
+ */
+function baseAssign(object, source) {
+  return object && copyObject(source, keys(source), object);
+}
+
+module.exports = baseAssign;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_baseAssignIn.js":
+/*!***************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_baseAssignIn.js ***!
+  \***************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var copyObject = __webpack_require__(/*! ./_copyObject */ "../../util/sugar/node_modules/lodash/_copyObject.js"),
+    keysIn = __webpack_require__(/*! ./keysIn */ "../../util/sugar/node_modules/lodash/keysIn.js");
+
+/**
+ * The base implementation of `_.assignIn` without support for multiple sources
+ * or `customizer` functions.
+ *
+ * @private
+ * @param {Object} object The destination object.
+ * @param {Object} source The source object.
+ * @returns {Object} Returns `object`.
+ */
+function baseAssignIn(object, source) {
+  return object && copyObject(source, keysIn(source), object);
+}
+
+module.exports = baseAssignIn;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_baseAssignValue.js":
+/*!******************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_baseAssignValue.js ***!
+  \******************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var defineProperty = __webpack_require__(/*! ./_defineProperty */ "../../util/sugar/node_modules/lodash/_defineProperty.js");
+
+/**
+ * The base implementation of `assignValue` and `assignMergeValue` without
+ * value checks.
+ *
+ * @private
+ * @param {Object} object The object to modify.
+ * @param {string} key The key of the property to assign.
+ * @param {*} value The value to assign.
+ */
+function baseAssignValue(object, key, value) {
+  if (key == '__proto__' && defineProperty) {
+    defineProperty(object, key, {
+      'configurable': true,
+      'enumerable': true,
+      'value': value,
+      'writable': true
+    });
+  } else {
+    object[key] = value;
+  }
+}
+
+module.exports = baseAssignValue;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_baseClone.js":
+/*!************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_baseClone.js ***!
+  \************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Stack = __webpack_require__(/*! ./_Stack */ "../../util/sugar/node_modules/lodash/_Stack.js"),
+    arrayEach = __webpack_require__(/*! ./_arrayEach */ "../../util/sugar/node_modules/lodash/_arrayEach.js"),
+    assignValue = __webpack_require__(/*! ./_assignValue */ "../../util/sugar/node_modules/lodash/_assignValue.js"),
+    baseAssign = __webpack_require__(/*! ./_baseAssign */ "../../util/sugar/node_modules/lodash/_baseAssign.js"),
+    baseAssignIn = __webpack_require__(/*! ./_baseAssignIn */ "../../util/sugar/node_modules/lodash/_baseAssignIn.js"),
+    cloneBuffer = __webpack_require__(/*! ./_cloneBuffer */ "../../util/sugar/node_modules/lodash/_cloneBuffer.js"),
+    copyArray = __webpack_require__(/*! ./_copyArray */ "../../util/sugar/node_modules/lodash/_copyArray.js"),
+    copySymbols = __webpack_require__(/*! ./_copySymbols */ "../../util/sugar/node_modules/lodash/_copySymbols.js"),
+    copySymbolsIn = __webpack_require__(/*! ./_copySymbolsIn */ "../../util/sugar/node_modules/lodash/_copySymbolsIn.js"),
+    getAllKeys = __webpack_require__(/*! ./_getAllKeys */ "../../util/sugar/node_modules/lodash/_getAllKeys.js"),
+    getAllKeysIn = __webpack_require__(/*! ./_getAllKeysIn */ "../../util/sugar/node_modules/lodash/_getAllKeysIn.js"),
+    getTag = __webpack_require__(/*! ./_getTag */ "../../util/sugar/node_modules/lodash/_getTag.js"),
+    initCloneArray = __webpack_require__(/*! ./_initCloneArray */ "../../util/sugar/node_modules/lodash/_initCloneArray.js"),
+    initCloneByTag = __webpack_require__(/*! ./_initCloneByTag */ "../../util/sugar/node_modules/lodash/_initCloneByTag.js"),
+    initCloneObject = __webpack_require__(/*! ./_initCloneObject */ "../../util/sugar/node_modules/lodash/_initCloneObject.js"),
+    isArray = __webpack_require__(/*! ./isArray */ "../../util/sugar/node_modules/lodash/isArray.js"),
+    isBuffer = __webpack_require__(/*! ./isBuffer */ "../../util/sugar/node_modules/lodash/isBuffer.js"),
+    isMap = __webpack_require__(/*! ./isMap */ "../../util/sugar/node_modules/lodash/isMap.js"),
+    isObject = __webpack_require__(/*! ./isObject */ "../../util/sugar/node_modules/lodash/isObject.js"),
+    isSet = __webpack_require__(/*! ./isSet */ "../../util/sugar/node_modules/lodash/isSet.js"),
+    keys = __webpack_require__(/*! ./keys */ "../../util/sugar/node_modules/lodash/keys.js");
+
+/** Used to compose bitmasks for cloning. */
+var CLONE_DEEP_FLAG = 1,
+    CLONE_FLAT_FLAG = 2,
+    CLONE_SYMBOLS_FLAG = 4;
+
+/** `Object#toString` result references. */
+var argsTag = '[object Arguments]',
+    arrayTag = '[object Array]',
+    boolTag = '[object Boolean]',
+    dateTag = '[object Date]',
+    errorTag = '[object Error]',
+    funcTag = '[object Function]',
+    genTag = '[object GeneratorFunction]',
+    mapTag = '[object Map]',
+    numberTag = '[object Number]',
+    objectTag = '[object Object]',
+    regexpTag = '[object RegExp]',
+    setTag = '[object Set]',
+    stringTag = '[object String]',
+    symbolTag = '[object Symbol]',
+    weakMapTag = '[object WeakMap]';
+
+var arrayBufferTag = '[object ArrayBuffer]',
+    dataViewTag = '[object DataView]',
+    float32Tag = '[object Float32Array]',
+    float64Tag = '[object Float64Array]',
+    int8Tag = '[object Int8Array]',
+    int16Tag = '[object Int16Array]',
+    int32Tag = '[object Int32Array]',
+    uint8Tag = '[object Uint8Array]',
+    uint8ClampedTag = '[object Uint8ClampedArray]',
+    uint16Tag = '[object Uint16Array]',
+    uint32Tag = '[object Uint32Array]';
+
+/** Used to identify `toStringTag` values supported by `_.clone`. */
+var cloneableTags = {};
+cloneableTags[argsTag] = cloneableTags[arrayTag] =
+cloneableTags[arrayBufferTag] = cloneableTags[dataViewTag] =
+cloneableTags[boolTag] = cloneableTags[dateTag] =
+cloneableTags[float32Tag] = cloneableTags[float64Tag] =
+cloneableTags[int8Tag] = cloneableTags[int16Tag] =
+cloneableTags[int32Tag] = cloneableTags[mapTag] =
+cloneableTags[numberTag] = cloneableTags[objectTag] =
+cloneableTags[regexpTag] = cloneableTags[setTag] =
+cloneableTags[stringTag] = cloneableTags[symbolTag] =
+cloneableTags[uint8Tag] = cloneableTags[uint8ClampedTag] =
+cloneableTags[uint16Tag] = cloneableTags[uint32Tag] = true;
+cloneableTags[errorTag] = cloneableTags[funcTag] =
+cloneableTags[weakMapTag] = false;
+
+/**
+ * The base implementation of `_.clone` and `_.cloneDeep` which tracks
+ * traversed objects.
+ *
+ * @private
+ * @param {*} value The value to clone.
+ * @param {boolean} bitmask The bitmask flags.
+ *  1 - Deep clone
+ *  2 - Flatten inherited properties
+ *  4 - Clone symbols
+ * @param {Function} [customizer] The function to customize cloning.
+ * @param {string} [key] The key of `value`.
+ * @param {Object} [object] The parent object of `value`.
+ * @param {Object} [stack] Tracks traversed objects and their clone counterparts.
+ * @returns {*} Returns the cloned value.
+ */
+function baseClone(value, bitmask, customizer, key, object, stack) {
+  var result,
+      isDeep = bitmask & CLONE_DEEP_FLAG,
+      isFlat = bitmask & CLONE_FLAT_FLAG,
+      isFull = bitmask & CLONE_SYMBOLS_FLAG;
+
+  if (customizer) {
+    result = object ? customizer(value, key, object, stack) : customizer(value);
+  }
+  if (result !== undefined) {
+    return result;
+  }
+  if (!isObject(value)) {
+    return value;
+  }
+  var isArr = isArray(value);
+  if (isArr) {
+    result = initCloneArray(value);
+    if (!isDeep) {
+      return copyArray(value, result);
+    }
+  } else {
+    var tag = getTag(value),
+        isFunc = tag == funcTag || tag == genTag;
+
+    if (isBuffer(value)) {
+      return cloneBuffer(value, isDeep);
+    }
+    if (tag == objectTag || tag == argsTag || (isFunc && !object)) {
+      result = (isFlat || isFunc) ? {} : initCloneObject(value);
+      if (!isDeep) {
+        return isFlat
+          ? copySymbolsIn(value, baseAssignIn(result, value))
+          : copySymbols(value, baseAssign(result, value));
+      }
+    } else {
+      if (!cloneableTags[tag]) {
+        return object ? value : {};
+      }
+      result = initCloneByTag(value, tag, isDeep);
+    }
+  }
+  // Check for circular references and return its corresponding clone.
+  stack || (stack = new Stack);
+  var stacked = stack.get(value);
+  if (stacked) {
+    return stacked;
+  }
+  stack.set(value, result);
+
+  if (isSet(value)) {
+    value.forEach(function(subValue) {
+      result.add(baseClone(subValue, bitmask, customizer, subValue, value, stack));
+    });
+  } else if (isMap(value)) {
+    value.forEach(function(subValue, key) {
+      result.set(key, baseClone(subValue, bitmask, customizer, key, value, stack));
+    });
+  }
+
+  var keysFunc = isFull
+    ? (isFlat ? getAllKeysIn : getAllKeys)
+    : (isFlat ? keysIn : keys);
+
+  var props = isArr ? undefined : keysFunc(value);
+  arrayEach(props || value, function(subValue, key) {
+    if (props) {
+      key = subValue;
+      subValue = value[key];
+    }
+    // Recursively populate clone (susceptible to call stack limits).
+    assignValue(result, key, baseClone(subValue, bitmask, customizer, key, value, stack));
+  });
+  return result;
+}
+
+module.exports = baseClone;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_baseCreate.js":
+/*!*************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_baseCreate.js ***!
+  \*************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isObject = __webpack_require__(/*! ./isObject */ "../../util/sugar/node_modules/lodash/isObject.js");
+
+/** Built-in value references. */
+var objectCreate = Object.create;
+
+/**
+ * The base implementation of `_.create` without support for assigning
+ * properties to the created object.
+ *
+ * @private
+ * @param {Object} proto The object to inherit from.
+ * @returns {Object} Returns the new object.
+ */
+var baseCreate = (function() {
+  function object() {}
+  return function(proto) {
+    if (!isObject(proto)) {
+      return {};
+    }
+    if (objectCreate) {
+      return objectCreate(proto);
+    }
+    object.prototype = proto;
+    var result = new object;
+    object.prototype = undefined;
+    return result;
+  };
+}());
+
+module.exports = baseCreate;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_baseGetAllKeys.js":
+/*!*****************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_baseGetAllKeys.js ***!
+  \*****************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayPush = __webpack_require__(/*! ./_arrayPush */ "../../util/sugar/node_modules/lodash/_arrayPush.js"),
+    isArray = __webpack_require__(/*! ./isArray */ "../../util/sugar/node_modules/lodash/isArray.js");
+
+/**
+ * The base implementation of `getAllKeys` and `getAllKeysIn` which uses
+ * `keysFunc` and `symbolsFunc` to get the enumerable property names and
+ * symbols of `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @param {Function} keysFunc The function to get the keys of `object`.
+ * @param {Function} symbolsFunc The function to get the symbols of `object`.
+ * @returns {Array} Returns the array of property names and symbols.
+ */
+function baseGetAllKeys(object, keysFunc, symbolsFunc) {
+  var result = keysFunc(object);
+  return isArray(object) ? result : arrayPush(result, symbolsFunc(object));
+}
+
+module.exports = baseGetAllKeys;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_baseGetTag.js":
+/*!*************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_baseGetTag.js ***!
+  \*************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Symbol = __webpack_require__(/*! ./_Symbol */ "../../util/sugar/node_modules/lodash/_Symbol.js"),
+    getRawTag = __webpack_require__(/*! ./_getRawTag */ "../../util/sugar/node_modules/lodash/_getRawTag.js"),
+    objectToString = __webpack_require__(/*! ./_objectToString */ "../../util/sugar/node_modules/lodash/_objectToString.js");
+
+/** `Object#toString` result references. */
+var nullTag = '[object Null]',
+    undefinedTag = '[object Undefined]';
+
+/** Built-in value references. */
+var symToStringTag = Symbol ? Symbol.toStringTag : undefined;
+
+/**
+ * The base implementation of `getTag` without fallbacks for buggy environments.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the `toStringTag`.
+ */
+function baseGetTag(value) {
+  if (value == null) {
+    return value === undefined ? undefinedTag : nullTag;
+  }
+  return (symToStringTag && symToStringTag in Object(value))
+    ? getRawTag(value)
+    : objectToString(value);
+}
+
+module.exports = baseGetTag;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_baseIsArguments.js":
+/*!******************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_baseIsArguments.js ***!
+  \******************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseGetTag = __webpack_require__(/*! ./_baseGetTag */ "../../util/sugar/node_modules/lodash/_baseGetTag.js"),
+    isObjectLike = __webpack_require__(/*! ./isObjectLike */ "../../util/sugar/node_modules/lodash/isObjectLike.js");
+
+/** `Object#toString` result references. */
+var argsTag = '[object Arguments]';
+
+/**
+ * The base implementation of `_.isArguments`.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an `arguments` object,
+ */
+function baseIsArguments(value) {
+  return isObjectLike(value) && baseGetTag(value) == argsTag;
+}
+
+module.exports = baseIsArguments;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_baseIsMap.js":
+/*!************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_baseIsMap.js ***!
+  \************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getTag = __webpack_require__(/*! ./_getTag */ "../../util/sugar/node_modules/lodash/_getTag.js"),
+    isObjectLike = __webpack_require__(/*! ./isObjectLike */ "../../util/sugar/node_modules/lodash/isObjectLike.js");
+
+/** `Object#toString` result references. */
+var mapTag = '[object Map]';
+
+/**
+ * The base implementation of `_.isMap` without Node.js optimizations.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a map, else `false`.
+ */
+function baseIsMap(value) {
+  return isObjectLike(value) && getTag(value) == mapTag;
+}
+
+module.exports = baseIsMap;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_baseIsNative.js":
+/*!***************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_baseIsNative.js ***!
+  \***************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isFunction = __webpack_require__(/*! ./isFunction */ "../../util/sugar/node_modules/lodash/isFunction.js"),
+    isMasked = __webpack_require__(/*! ./_isMasked */ "../../util/sugar/node_modules/lodash/_isMasked.js"),
+    isObject = __webpack_require__(/*! ./isObject */ "../../util/sugar/node_modules/lodash/isObject.js"),
+    toSource = __webpack_require__(/*! ./_toSource */ "../../util/sugar/node_modules/lodash/_toSource.js");
+
+/**
+ * Used to match `RegExp`
+ * [syntax characters](http://ecma-international.org/ecma-262/7.0/#sec-patterns).
+ */
+var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
+
+/** Used to detect host constructors (Safari). */
+var reIsHostCtor = /^\[object .+?Constructor\]$/;
+
+/** Used for built-in method references. */
+var funcProto = Function.prototype,
+    objectProto = Object.prototype;
+
+/** Used to resolve the decompiled source of functions. */
+var funcToString = funcProto.toString;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/** Used to detect if a method is native. */
+var reIsNative = RegExp('^' +
+  funcToString.call(hasOwnProperty).replace(reRegExpChar, '\\$&')
+  .replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
+);
+
+/**
+ * The base implementation of `_.isNative` without bad shim checks.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a native function,
+ *  else `false`.
+ */
+function baseIsNative(value) {
+  if (!isObject(value) || isMasked(value)) {
+    return false;
+  }
+  var pattern = isFunction(value) ? reIsNative : reIsHostCtor;
+  return pattern.test(toSource(value));
+}
+
+module.exports = baseIsNative;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_baseIsSet.js":
+/*!************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_baseIsSet.js ***!
+  \************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getTag = __webpack_require__(/*! ./_getTag */ "../../util/sugar/node_modules/lodash/_getTag.js"),
+    isObjectLike = __webpack_require__(/*! ./isObjectLike */ "../../util/sugar/node_modules/lodash/isObjectLike.js");
+
+/** `Object#toString` result references. */
+var setTag = '[object Set]';
+
+/**
+ * The base implementation of `_.isSet` without Node.js optimizations.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a set, else `false`.
+ */
+function baseIsSet(value) {
+  return isObjectLike(value) && getTag(value) == setTag;
+}
+
+module.exports = baseIsSet;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_baseIsTypedArray.js":
+/*!*******************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_baseIsTypedArray.js ***!
+  \*******************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseGetTag = __webpack_require__(/*! ./_baseGetTag */ "../../util/sugar/node_modules/lodash/_baseGetTag.js"),
+    isLength = __webpack_require__(/*! ./isLength */ "../../util/sugar/node_modules/lodash/isLength.js"),
+    isObjectLike = __webpack_require__(/*! ./isObjectLike */ "../../util/sugar/node_modules/lodash/isObjectLike.js");
+
+/** `Object#toString` result references. */
+var argsTag = '[object Arguments]',
+    arrayTag = '[object Array]',
+    boolTag = '[object Boolean]',
+    dateTag = '[object Date]',
+    errorTag = '[object Error]',
+    funcTag = '[object Function]',
+    mapTag = '[object Map]',
+    numberTag = '[object Number]',
+    objectTag = '[object Object]',
+    regexpTag = '[object RegExp]',
+    setTag = '[object Set]',
+    stringTag = '[object String]',
+    weakMapTag = '[object WeakMap]';
+
+var arrayBufferTag = '[object ArrayBuffer]',
+    dataViewTag = '[object DataView]',
+    float32Tag = '[object Float32Array]',
+    float64Tag = '[object Float64Array]',
+    int8Tag = '[object Int8Array]',
+    int16Tag = '[object Int16Array]',
+    int32Tag = '[object Int32Array]',
+    uint8Tag = '[object Uint8Array]',
+    uint8ClampedTag = '[object Uint8ClampedArray]',
+    uint16Tag = '[object Uint16Array]',
+    uint32Tag = '[object Uint32Array]';
+
+/** Used to identify `toStringTag` values of typed arrays. */
+var typedArrayTags = {};
+typedArrayTags[float32Tag] = typedArrayTags[float64Tag] =
+typedArrayTags[int8Tag] = typedArrayTags[int16Tag] =
+typedArrayTags[int32Tag] = typedArrayTags[uint8Tag] =
+typedArrayTags[uint8ClampedTag] = typedArrayTags[uint16Tag] =
+typedArrayTags[uint32Tag] = true;
+typedArrayTags[argsTag] = typedArrayTags[arrayTag] =
+typedArrayTags[arrayBufferTag] = typedArrayTags[boolTag] =
+typedArrayTags[dataViewTag] = typedArrayTags[dateTag] =
+typedArrayTags[errorTag] = typedArrayTags[funcTag] =
+typedArrayTags[mapTag] = typedArrayTags[numberTag] =
+typedArrayTags[objectTag] = typedArrayTags[regexpTag] =
+typedArrayTags[setTag] = typedArrayTags[stringTag] =
+typedArrayTags[weakMapTag] = false;
+
+/**
+ * The base implementation of `_.isTypedArray` without Node.js optimizations.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a typed array, else `false`.
+ */
+function baseIsTypedArray(value) {
+  return isObjectLike(value) &&
+    isLength(value.length) && !!typedArrayTags[baseGetTag(value)];
+}
+
+module.exports = baseIsTypedArray;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_baseKeys.js":
+/*!***********************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_baseKeys.js ***!
+  \***********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isPrototype = __webpack_require__(/*! ./_isPrototype */ "../../util/sugar/node_modules/lodash/_isPrototype.js"),
+    nativeKeys = __webpack_require__(/*! ./_nativeKeys */ "../../util/sugar/node_modules/lodash/_nativeKeys.js");
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * The base implementation of `_.keys` which doesn't treat sparse arrays as dense.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property names.
+ */
+function baseKeys(object) {
+  if (!isPrototype(object)) {
+    return nativeKeys(object);
+  }
+  var result = [];
+  for (var key in Object(object)) {
+    if (hasOwnProperty.call(object, key) && key != 'constructor') {
+      result.push(key);
+    }
+  }
+  return result;
+}
+
+module.exports = baseKeys;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_baseKeysIn.js":
+/*!*************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_baseKeysIn.js ***!
+  \*************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isObject = __webpack_require__(/*! ./isObject */ "../../util/sugar/node_modules/lodash/isObject.js"),
+    isPrototype = __webpack_require__(/*! ./_isPrototype */ "../../util/sugar/node_modules/lodash/_isPrototype.js"),
+    nativeKeysIn = __webpack_require__(/*! ./_nativeKeysIn */ "../../util/sugar/node_modules/lodash/_nativeKeysIn.js");
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * The base implementation of `_.keysIn` which doesn't treat sparse arrays as dense.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property names.
+ */
+function baseKeysIn(object) {
+  if (!isObject(object)) {
+    return nativeKeysIn(object);
+  }
+  var isProto = isPrototype(object),
+      result = [];
+
+  for (var key in object) {
+    if (!(key == 'constructor' && (isProto || !hasOwnProperty.call(object, key)))) {
+      result.push(key);
+    }
+  }
+  return result;
+}
+
+module.exports = baseKeysIn;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_baseTimes.js":
+/*!************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_baseTimes.js ***!
+  \************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * The base implementation of `_.times` without support for iteratee shorthands
+ * or max array length checks.
+ *
+ * @private
+ * @param {number} n The number of times to invoke `iteratee`.
+ * @param {Function} iteratee The function invoked per iteration.
+ * @returns {Array} Returns the array of results.
+ */
+function baseTimes(n, iteratee) {
+  var index = -1,
+      result = Array(n);
+
+  while (++index < n) {
+    result[index] = iteratee(index);
+  }
+  return result;
+}
+
+module.exports = baseTimes;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_baseUnary.js":
+/*!************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_baseUnary.js ***!
+  \************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * The base implementation of `_.unary` without support for storing metadata.
+ *
+ * @private
+ * @param {Function} func The function to cap arguments for.
+ * @returns {Function} Returns the new capped function.
+ */
+function baseUnary(func) {
+  return function(value) {
+    return func(value);
+  };
+}
+
+module.exports = baseUnary;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_cloneArrayBuffer.js":
+/*!*******************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_cloneArrayBuffer.js ***!
+  \*******************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Uint8Array = __webpack_require__(/*! ./_Uint8Array */ "../../util/sugar/node_modules/lodash/_Uint8Array.js");
+
+/**
+ * Creates a clone of `arrayBuffer`.
+ *
+ * @private
+ * @param {ArrayBuffer} arrayBuffer The array buffer to clone.
+ * @returns {ArrayBuffer} Returns the cloned array buffer.
+ */
+function cloneArrayBuffer(arrayBuffer) {
+  var result = new arrayBuffer.constructor(arrayBuffer.byteLength);
+  new Uint8Array(result).set(new Uint8Array(arrayBuffer));
+  return result;
+}
+
+module.exports = cloneArrayBuffer;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_cloneBuffer.js":
+/*!**************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_cloneBuffer.js ***!
+  \**************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(module) {var root = __webpack_require__(/*! ./_root */ "../../util/sugar/node_modules/lodash/_root.js");
+
+/** Detect free variable `exports`. */
+var freeExports =  true && exports && !exports.nodeType && exports;
+
+/** Detect free variable `module`. */
+var freeModule = freeExports && typeof module == 'object' && module && !module.nodeType && module;
+
+/** Detect the popular CommonJS extension `module.exports`. */
+var moduleExports = freeModule && freeModule.exports === freeExports;
+
+/** Built-in value references. */
+var Buffer = moduleExports ? root.Buffer : undefined,
+    allocUnsafe = Buffer ? Buffer.allocUnsafe : undefined;
+
+/**
+ * Creates a clone of  `buffer`.
+ *
+ * @private
+ * @param {Buffer} buffer The buffer to clone.
+ * @param {boolean} [isDeep] Specify a deep clone.
+ * @returns {Buffer} Returns the cloned buffer.
+ */
+function cloneBuffer(buffer, isDeep) {
+  if (isDeep) {
+    return buffer.slice();
+  }
+  var length = buffer.length,
+      result = allocUnsafe ? allocUnsafe(length) : new buffer.constructor(length);
+
+  buffer.copy(result);
+  return result;
+}
+
+module.exports = cloneBuffer;
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/module.js */ "../../util/sugar/node_modules/webpack/buildin/module.js")(module)))
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_cloneDataView.js":
+/*!****************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_cloneDataView.js ***!
+  \****************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var cloneArrayBuffer = __webpack_require__(/*! ./_cloneArrayBuffer */ "../../util/sugar/node_modules/lodash/_cloneArrayBuffer.js");
+
+/**
+ * Creates a clone of `dataView`.
+ *
+ * @private
+ * @param {Object} dataView The data view to clone.
+ * @param {boolean} [isDeep] Specify a deep clone.
+ * @returns {Object} Returns the cloned data view.
+ */
+function cloneDataView(dataView, isDeep) {
+  var buffer = isDeep ? cloneArrayBuffer(dataView.buffer) : dataView.buffer;
+  return new dataView.constructor(buffer, dataView.byteOffset, dataView.byteLength);
+}
+
+module.exports = cloneDataView;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_cloneRegExp.js":
+/*!**************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_cloneRegExp.js ***!
+  \**************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/** Used to match `RegExp` flags from their coerced string values. */
+var reFlags = /\w*$/;
+
+/**
+ * Creates a clone of `regexp`.
+ *
+ * @private
+ * @param {Object} regexp The regexp to clone.
+ * @returns {Object} Returns the cloned regexp.
+ */
+function cloneRegExp(regexp) {
+  var result = new regexp.constructor(regexp.source, reFlags.exec(regexp));
+  result.lastIndex = regexp.lastIndex;
+  return result;
+}
+
+module.exports = cloneRegExp;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_cloneSymbol.js":
+/*!**************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_cloneSymbol.js ***!
+  \**************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Symbol = __webpack_require__(/*! ./_Symbol */ "../../util/sugar/node_modules/lodash/_Symbol.js");
+
+/** Used to convert symbols to primitives and strings. */
+var symbolProto = Symbol ? Symbol.prototype : undefined,
+    symbolValueOf = symbolProto ? symbolProto.valueOf : undefined;
+
+/**
+ * Creates a clone of the `symbol` object.
+ *
+ * @private
+ * @param {Object} symbol The symbol object to clone.
+ * @returns {Object} Returns the cloned symbol object.
+ */
+function cloneSymbol(symbol) {
+  return symbolValueOf ? Object(symbolValueOf.call(symbol)) : {};
+}
+
+module.exports = cloneSymbol;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_cloneTypedArray.js":
+/*!******************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_cloneTypedArray.js ***!
+  \******************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var cloneArrayBuffer = __webpack_require__(/*! ./_cloneArrayBuffer */ "../../util/sugar/node_modules/lodash/_cloneArrayBuffer.js");
+
+/**
+ * Creates a clone of `typedArray`.
+ *
+ * @private
+ * @param {Object} typedArray The typed array to clone.
+ * @param {boolean} [isDeep] Specify a deep clone.
+ * @returns {Object} Returns the cloned typed array.
+ */
+function cloneTypedArray(typedArray, isDeep) {
+  var buffer = isDeep ? cloneArrayBuffer(typedArray.buffer) : typedArray.buffer;
+  return new typedArray.constructor(buffer, typedArray.byteOffset, typedArray.length);
+}
+
+module.exports = cloneTypedArray;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_copyArray.js":
+/*!************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_copyArray.js ***!
+  \************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * Copies the values of `source` to `array`.
+ *
+ * @private
+ * @param {Array} source The array to copy values from.
+ * @param {Array} [array=[]] The array to copy values to.
+ * @returns {Array} Returns `array`.
+ */
+function copyArray(source, array) {
+  var index = -1,
+      length = source.length;
+
+  array || (array = Array(length));
+  while (++index < length) {
+    array[index] = source[index];
+  }
+  return array;
+}
+
+module.exports = copyArray;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_copyObject.js":
+/*!*************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_copyObject.js ***!
+  \*************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var assignValue = __webpack_require__(/*! ./_assignValue */ "../../util/sugar/node_modules/lodash/_assignValue.js"),
+    baseAssignValue = __webpack_require__(/*! ./_baseAssignValue */ "../../util/sugar/node_modules/lodash/_baseAssignValue.js");
+
+/**
+ * Copies properties of `source` to `object`.
+ *
+ * @private
+ * @param {Object} source The object to copy properties from.
+ * @param {Array} props The property identifiers to copy.
+ * @param {Object} [object={}] The object to copy properties to.
+ * @param {Function} [customizer] The function to customize copied values.
+ * @returns {Object} Returns `object`.
+ */
+function copyObject(source, props, object, customizer) {
+  var isNew = !object;
+  object || (object = {});
+
+  var index = -1,
+      length = props.length;
+
+  while (++index < length) {
+    var key = props[index];
+
+    var newValue = customizer
+      ? customizer(object[key], source[key], key, object, source)
+      : undefined;
+
+    if (newValue === undefined) {
+      newValue = source[key];
+    }
+    if (isNew) {
+      baseAssignValue(object, key, newValue);
+    } else {
+      assignValue(object, key, newValue);
+    }
+  }
+  return object;
+}
+
+module.exports = copyObject;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_copySymbols.js":
+/*!**************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_copySymbols.js ***!
+  \**************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var copyObject = __webpack_require__(/*! ./_copyObject */ "../../util/sugar/node_modules/lodash/_copyObject.js"),
+    getSymbols = __webpack_require__(/*! ./_getSymbols */ "../../util/sugar/node_modules/lodash/_getSymbols.js");
+
+/**
+ * Copies own symbols of `source` to `object`.
+ *
+ * @private
+ * @param {Object} source The object to copy symbols from.
+ * @param {Object} [object={}] The object to copy symbols to.
+ * @returns {Object} Returns `object`.
+ */
+function copySymbols(source, object) {
+  return copyObject(source, getSymbols(source), object);
+}
+
+module.exports = copySymbols;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_copySymbolsIn.js":
+/*!****************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_copySymbolsIn.js ***!
+  \****************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var copyObject = __webpack_require__(/*! ./_copyObject */ "../../util/sugar/node_modules/lodash/_copyObject.js"),
+    getSymbolsIn = __webpack_require__(/*! ./_getSymbolsIn */ "../../util/sugar/node_modules/lodash/_getSymbolsIn.js");
+
+/**
+ * Copies own and inherited symbols of `source` to `object`.
+ *
+ * @private
+ * @param {Object} source The object to copy symbols from.
+ * @param {Object} [object={}] The object to copy symbols to.
+ * @returns {Object} Returns `object`.
+ */
+function copySymbolsIn(source, object) {
+  return copyObject(source, getSymbolsIn(source), object);
+}
+
+module.exports = copySymbolsIn;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_coreJsData.js":
+/*!*************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_coreJsData.js ***!
+  \*************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var root = __webpack_require__(/*! ./_root */ "../../util/sugar/node_modules/lodash/_root.js");
+
+/** Used to detect overreaching core-js shims. */
+var coreJsData = root['__core-js_shared__'];
+
+module.exports = coreJsData;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_defineProperty.js":
+/*!*****************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_defineProperty.js ***!
+  \*****************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getNative = __webpack_require__(/*! ./_getNative */ "../../util/sugar/node_modules/lodash/_getNative.js");
+
+var defineProperty = (function() {
+  try {
+    var func = getNative(Object, 'defineProperty');
+    func({}, '', {});
+    return func;
+  } catch (e) {}
+}());
+
+module.exports = defineProperty;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_freeGlobal.js":
+/*!*************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_freeGlobal.js ***!
+  \*************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {/** Detect free variable `global` from Node.js. */
+var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
+
+module.exports = freeGlobal;
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ "../../util/sugar/node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_getAllKeys.js":
+/*!*************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_getAllKeys.js ***!
+  \*************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseGetAllKeys = __webpack_require__(/*! ./_baseGetAllKeys */ "../../util/sugar/node_modules/lodash/_baseGetAllKeys.js"),
+    getSymbols = __webpack_require__(/*! ./_getSymbols */ "../../util/sugar/node_modules/lodash/_getSymbols.js"),
+    keys = __webpack_require__(/*! ./keys */ "../../util/sugar/node_modules/lodash/keys.js");
+
+/**
+ * Creates an array of own enumerable property names and symbols of `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property names and symbols.
+ */
+function getAllKeys(object) {
+  return baseGetAllKeys(object, keys, getSymbols);
+}
+
+module.exports = getAllKeys;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_getAllKeysIn.js":
+/*!***************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_getAllKeysIn.js ***!
+  \***************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseGetAllKeys = __webpack_require__(/*! ./_baseGetAllKeys */ "../../util/sugar/node_modules/lodash/_baseGetAllKeys.js"),
+    getSymbolsIn = __webpack_require__(/*! ./_getSymbolsIn */ "../../util/sugar/node_modules/lodash/_getSymbolsIn.js"),
+    keysIn = __webpack_require__(/*! ./keysIn */ "../../util/sugar/node_modules/lodash/keysIn.js");
+
+/**
+ * Creates an array of own and inherited enumerable property names and
+ * symbols of `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property names and symbols.
+ */
+function getAllKeysIn(object) {
+  return baseGetAllKeys(object, keysIn, getSymbolsIn);
+}
+
+module.exports = getAllKeysIn;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_getMapData.js":
+/*!*************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_getMapData.js ***!
+  \*************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isKeyable = __webpack_require__(/*! ./_isKeyable */ "../../util/sugar/node_modules/lodash/_isKeyable.js");
+
+/**
+ * Gets the data for `map`.
+ *
+ * @private
+ * @param {Object} map The map to query.
+ * @param {string} key The reference key.
+ * @returns {*} Returns the map data.
+ */
+function getMapData(map, key) {
+  var data = map.__data__;
+  return isKeyable(key)
+    ? data[typeof key == 'string' ? 'string' : 'hash']
+    : data.map;
+}
+
+module.exports = getMapData;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_getNative.js":
+/*!************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_getNative.js ***!
+  \************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseIsNative = __webpack_require__(/*! ./_baseIsNative */ "../../util/sugar/node_modules/lodash/_baseIsNative.js"),
+    getValue = __webpack_require__(/*! ./_getValue */ "../../util/sugar/node_modules/lodash/_getValue.js");
+
+/**
+ * Gets the native function at `key` of `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @param {string} key The key of the method to get.
+ * @returns {*} Returns the function if it's native, else `undefined`.
+ */
+function getNative(object, key) {
+  var value = getValue(object, key);
+  return baseIsNative(value) ? value : undefined;
+}
+
+module.exports = getNative;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_getPrototype.js":
+/*!***************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_getPrototype.js ***!
+  \***************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var overArg = __webpack_require__(/*! ./_overArg */ "../../util/sugar/node_modules/lodash/_overArg.js");
+
+/** Built-in value references. */
+var getPrototype = overArg(Object.getPrototypeOf, Object);
+
+module.exports = getPrototype;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_getRawTag.js":
+/*!************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_getRawTag.js ***!
+  \************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Symbol = __webpack_require__(/*! ./_Symbol */ "../../util/sugar/node_modules/lodash/_Symbol.js");
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+var nativeObjectToString = objectProto.toString;
+
+/** Built-in value references. */
+var symToStringTag = Symbol ? Symbol.toStringTag : undefined;
+
+/**
+ * A specialized version of `baseGetTag` which ignores `Symbol.toStringTag` values.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the raw `toStringTag`.
+ */
+function getRawTag(value) {
+  var isOwn = hasOwnProperty.call(value, symToStringTag),
+      tag = value[symToStringTag];
+
+  try {
+    value[symToStringTag] = undefined;
+    var unmasked = true;
+  } catch (e) {}
+
+  var result = nativeObjectToString.call(value);
+  if (unmasked) {
+    if (isOwn) {
+      value[symToStringTag] = tag;
+    } else {
+      delete value[symToStringTag];
+    }
+  }
+  return result;
+}
+
+module.exports = getRawTag;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_getSymbols.js":
+/*!*************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_getSymbols.js ***!
+  \*************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayFilter = __webpack_require__(/*! ./_arrayFilter */ "../../util/sugar/node_modules/lodash/_arrayFilter.js"),
+    stubArray = __webpack_require__(/*! ./stubArray */ "../../util/sugar/node_modules/lodash/stubArray.js");
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Built-in value references. */
+var propertyIsEnumerable = objectProto.propertyIsEnumerable;
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeGetSymbols = Object.getOwnPropertySymbols;
+
+/**
+ * Creates an array of the own enumerable symbols of `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of symbols.
+ */
+var getSymbols = !nativeGetSymbols ? stubArray : function(object) {
+  if (object == null) {
+    return [];
+  }
+  object = Object(object);
+  return arrayFilter(nativeGetSymbols(object), function(symbol) {
+    return propertyIsEnumerable.call(object, symbol);
+  });
+};
+
+module.exports = getSymbols;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_getSymbolsIn.js":
+/*!***************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_getSymbolsIn.js ***!
+  \***************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayPush = __webpack_require__(/*! ./_arrayPush */ "../../util/sugar/node_modules/lodash/_arrayPush.js"),
+    getPrototype = __webpack_require__(/*! ./_getPrototype */ "../../util/sugar/node_modules/lodash/_getPrototype.js"),
+    getSymbols = __webpack_require__(/*! ./_getSymbols */ "../../util/sugar/node_modules/lodash/_getSymbols.js"),
+    stubArray = __webpack_require__(/*! ./stubArray */ "../../util/sugar/node_modules/lodash/stubArray.js");
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeGetSymbols = Object.getOwnPropertySymbols;
+
+/**
+ * Creates an array of the own and inherited enumerable symbols of `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of symbols.
+ */
+var getSymbolsIn = !nativeGetSymbols ? stubArray : function(object) {
+  var result = [];
+  while (object) {
+    arrayPush(result, getSymbols(object));
+    object = getPrototype(object);
+  }
+  return result;
+};
+
+module.exports = getSymbolsIn;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_getTag.js":
+/*!*********************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_getTag.js ***!
+  \*********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var DataView = __webpack_require__(/*! ./_DataView */ "../../util/sugar/node_modules/lodash/_DataView.js"),
+    Map = __webpack_require__(/*! ./_Map */ "../../util/sugar/node_modules/lodash/_Map.js"),
+    Promise = __webpack_require__(/*! ./_Promise */ "../../util/sugar/node_modules/lodash/_Promise.js"),
+    Set = __webpack_require__(/*! ./_Set */ "../../util/sugar/node_modules/lodash/_Set.js"),
+    WeakMap = __webpack_require__(/*! ./_WeakMap */ "../../util/sugar/node_modules/lodash/_WeakMap.js"),
+    baseGetTag = __webpack_require__(/*! ./_baseGetTag */ "../../util/sugar/node_modules/lodash/_baseGetTag.js"),
+    toSource = __webpack_require__(/*! ./_toSource */ "../../util/sugar/node_modules/lodash/_toSource.js");
+
+/** `Object#toString` result references. */
+var mapTag = '[object Map]',
+    objectTag = '[object Object]',
+    promiseTag = '[object Promise]',
+    setTag = '[object Set]',
+    weakMapTag = '[object WeakMap]';
+
+var dataViewTag = '[object DataView]';
+
+/** Used to detect maps, sets, and weakmaps. */
+var dataViewCtorString = toSource(DataView),
+    mapCtorString = toSource(Map),
+    promiseCtorString = toSource(Promise),
+    setCtorString = toSource(Set),
+    weakMapCtorString = toSource(WeakMap);
+
+/**
+ * Gets the `toStringTag` of `value`.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the `toStringTag`.
+ */
+var getTag = baseGetTag;
+
+// Fallback for data views, maps, sets, and weak maps in IE 11 and promises in Node.js < 6.
+if ((DataView && getTag(new DataView(new ArrayBuffer(1))) != dataViewTag) ||
+    (Map && getTag(new Map) != mapTag) ||
+    (Promise && getTag(Promise.resolve()) != promiseTag) ||
+    (Set && getTag(new Set) != setTag) ||
+    (WeakMap && getTag(new WeakMap) != weakMapTag)) {
+  getTag = function(value) {
+    var result = baseGetTag(value),
+        Ctor = result == objectTag ? value.constructor : undefined,
+        ctorString = Ctor ? toSource(Ctor) : '';
+
+    if (ctorString) {
+      switch (ctorString) {
+        case dataViewCtorString: return dataViewTag;
+        case mapCtorString: return mapTag;
+        case promiseCtorString: return promiseTag;
+        case setCtorString: return setTag;
+        case weakMapCtorString: return weakMapTag;
+      }
+    }
+    return result;
+  };
+}
+
+module.exports = getTag;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_getValue.js":
+/*!***********************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_getValue.js ***!
+  \***********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * Gets the value at `key` of `object`.
+ *
+ * @private
+ * @param {Object} [object] The object to query.
+ * @param {string} key The key of the property to get.
+ * @returns {*} Returns the property value.
+ */
+function getValue(object, key) {
+  return object == null ? undefined : object[key];
+}
+
+module.exports = getValue;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_hashClear.js":
+/*!************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_hashClear.js ***!
+  \************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var nativeCreate = __webpack_require__(/*! ./_nativeCreate */ "../../util/sugar/node_modules/lodash/_nativeCreate.js");
+
+/**
+ * Removes all key-value entries from the hash.
+ *
+ * @private
+ * @name clear
+ * @memberOf Hash
+ */
+function hashClear() {
+  this.__data__ = nativeCreate ? nativeCreate(null) : {};
+  this.size = 0;
+}
+
+module.exports = hashClear;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_hashDelete.js":
+/*!*************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_hashDelete.js ***!
+  \*************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * Removes `key` and its value from the hash.
+ *
+ * @private
+ * @name delete
+ * @memberOf Hash
+ * @param {Object} hash The hash to modify.
+ * @param {string} key The key of the value to remove.
+ * @returns {boolean} Returns `true` if the entry was removed, else `false`.
+ */
+function hashDelete(key) {
+  var result = this.has(key) && delete this.__data__[key];
+  this.size -= result ? 1 : 0;
+  return result;
+}
+
+module.exports = hashDelete;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_hashGet.js":
+/*!**********************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_hashGet.js ***!
+  \**********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var nativeCreate = __webpack_require__(/*! ./_nativeCreate */ "../../util/sugar/node_modules/lodash/_nativeCreate.js");
+
+/** Used to stand-in for `undefined` hash values. */
+var HASH_UNDEFINED = '__lodash_hash_undefined__';
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * Gets the hash value for `key`.
+ *
+ * @private
+ * @name get
+ * @memberOf Hash
+ * @param {string} key The key of the value to get.
+ * @returns {*} Returns the entry value.
+ */
+function hashGet(key) {
+  var data = this.__data__;
+  if (nativeCreate) {
+    var result = data[key];
+    return result === HASH_UNDEFINED ? undefined : result;
+  }
+  return hasOwnProperty.call(data, key) ? data[key] : undefined;
+}
+
+module.exports = hashGet;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_hashHas.js":
+/*!**********************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_hashHas.js ***!
+  \**********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var nativeCreate = __webpack_require__(/*! ./_nativeCreate */ "../../util/sugar/node_modules/lodash/_nativeCreate.js");
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * Checks if a hash value for `key` exists.
+ *
+ * @private
+ * @name has
+ * @memberOf Hash
+ * @param {string} key The key of the entry to check.
+ * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+ */
+function hashHas(key) {
+  var data = this.__data__;
+  return nativeCreate ? (data[key] !== undefined) : hasOwnProperty.call(data, key);
+}
+
+module.exports = hashHas;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_hashSet.js":
+/*!**********************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_hashSet.js ***!
+  \**********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var nativeCreate = __webpack_require__(/*! ./_nativeCreate */ "../../util/sugar/node_modules/lodash/_nativeCreate.js");
+
+/** Used to stand-in for `undefined` hash values. */
+var HASH_UNDEFINED = '__lodash_hash_undefined__';
+
+/**
+ * Sets the hash `key` to `value`.
+ *
+ * @private
+ * @name set
+ * @memberOf Hash
+ * @param {string} key The key of the value to set.
+ * @param {*} value The value to set.
+ * @returns {Object} Returns the hash instance.
+ */
+function hashSet(key, value) {
+  var data = this.__data__;
+  this.size += this.has(key) ? 0 : 1;
+  data[key] = (nativeCreate && value === undefined) ? HASH_UNDEFINED : value;
+  return this;
+}
+
+module.exports = hashSet;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_initCloneArray.js":
+/*!*****************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_initCloneArray.js ***!
+  \*****************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * Initializes an array clone.
+ *
+ * @private
+ * @param {Array} array The array to clone.
+ * @returns {Array} Returns the initialized clone.
+ */
+function initCloneArray(array) {
+  var length = array.length,
+      result = new array.constructor(length);
+
+  // Add properties assigned by `RegExp#exec`.
+  if (length && typeof array[0] == 'string' && hasOwnProperty.call(array, 'index')) {
+    result.index = array.index;
+    result.input = array.input;
+  }
+  return result;
+}
+
+module.exports = initCloneArray;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_initCloneByTag.js":
+/*!*****************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_initCloneByTag.js ***!
+  \*****************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var cloneArrayBuffer = __webpack_require__(/*! ./_cloneArrayBuffer */ "../../util/sugar/node_modules/lodash/_cloneArrayBuffer.js"),
+    cloneDataView = __webpack_require__(/*! ./_cloneDataView */ "../../util/sugar/node_modules/lodash/_cloneDataView.js"),
+    cloneRegExp = __webpack_require__(/*! ./_cloneRegExp */ "../../util/sugar/node_modules/lodash/_cloneRegExp.js"),
+    cloneSymbol = __webpack_require__(/*! ./_cloneSymbol */ "../../util/sugar/node_modules/lodash/_cloneSymbol.js"),
+    cloneTypedArray = __webpack_require__(/*! ./_cloneTypedArray */ "../../util/sugar/node_modules/lodash/_cloneTypedArray.js");
+
+/** `Object#toString` result references. */
+var boolTag = '[object Boolean]',
+    dateTag = '[object Date]',
+    mapTag = '[object Map]',
+    numberTag = '[object Number]',
+    regexpTag = '[object RegExp]',
+    setTag = '[object Set]',
+    stringTag = '[object String]',
+    symbolTag = '[object Symbol]';
+
+var arrayBufferTag = '[object ArrayBuffer]',
+    dataViewTag = '[object DataView]',
+    float32Tag = '[object Float32Array]',
+    float64Tag = '[object Float64Array]',
+    int8Tag = '[object Int8Array]',
+    int16Tag = '[object Int16Array]',
+    int32Tag = '[object Int32Array]',
+    uint8Tag = '[object Uint8Array]',
+    uint8ClampedTag = '[object Uint8ClampedArray]',
+    uint16Tag = '[object Uint16Array]',
+    uint32Tag = '[object Uint32Array]';
+
+/**
+ * Initializes an object clone based on its `toStringTag`.
+ *
+ * **Note:** This function only supports cloning values with tags of
+ * `Boolean`, `Date`, `Error`, `Map`, `Number`, `RegExp`, `Set`, or `String`.
+ *
+ * @private
+ * @param {Object} object The object to clone.
+ * @param {string} tag The `toStringTag` of the object to clone.
+ * @param {boolean} [isDeep] Specify a deep clone.
+ * @returns {Object} Returns the initialized clone.
+ */
+function initCloneByTag(object, tag, isDeep) {
+  var Ctor = object.constructor;
+  switch (tag) {
+    case arrayBufferTag:
+      return cloneArrayBuffer(object);
+
+    case boolTag:
+    case dateTag:
+      return new Ctor(+object);
+
+    case dataViewTag:
+      return cloneDataView(object, isDeep);
+
+    case float32Tag: case float64Tag:
+    case int8Tag: case int16Tag: case int32Tag:
+    case uint8Tag: case uint8ClampedTag: case uint16Tag: case uint32Tag:
+      return cloneTypedArray(object, isDeep);
+
+    case mapTag:
+      return new Ctor;
+
+    case numberTag:
+    case stringTag:
+      return new Ctor(object);
+
+    case regexpTag:
+      return cloneRegExp(object);
+
+    case setTag:
+      return new Ctor;
+
+    case symbolTag:
+      return cloneSymbol(object);
+  }
+}
+
+module.exports = initCloneByTag;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_initCloneObject.js":
+/*!******************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_initCloneObject.js ***!
+  \******************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseCreate = __webpack_require__(/*! ./_baseCreate */ "../../util/sugar/node_modules/lodash/_baseCreate.js"),
+    getPrototype = __webpack_require__(/*! ./_getPrototype */ "../../util/sugar/node_modules/lodash/_getPrototype.js"),
+    isPrototype = __webpack_require__(/*! ./_isPrototype */ "../../util/sugar/node_modules/lodash/_isPrototype.js");
+
+/**
+ * Initializes an object clone.
+ *
+ * @private
+ * @param {Object} object The object to clone.
+ * @returns {Object} Returns the initialized clone.
+ */
+function initCloneObject(object) {
+  return (typeof object.constructor == 'function' && !isPrototype(object))
+    ? baseCreate(getPrototype(object))
+    : {};
+}
+
+module.exports = initCloneObject;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_isIndex.js":
+/*!**********************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_isIndex.js ***!
+  \**********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/** Used as references for various `Number` constants. */
+var MAX_SAFE_INTEGER = 9007199254740991;
+
+/** Used to detect unsigned integer values. */
+var reIsUint = /^(?:0|[1-9]\d*)$/;
+
+/**
+ * Checks if `value` is a valid array-like index.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @param {number} [length=MAX_SAFE_INTEGER] The upper bounds of a valid index.
+ * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
+ */
+function isIndex(value, length) {
+  var type = typeof value;
+  length = length == null ? MAX_SAFE_INTEGER : length;
+
+  return !!length &&
+    (type == 'number' ||
+      (type != 'symbol' && reIsUint.test(value))) &&
+        (value > -1 && value % 1 == 0 && value < length);
+}
+
+module.exports = isIndex;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_isKeyable.js":
+/*!************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_isKeyable.js ***!
+  \************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * Checks if `value` is suitable for use as unique object key.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is suitable, else `false`.
+ */
+function isKeyable(value) {
+  var type = typeof value;
+  return (type == 'string' || type == 'number' || type == 'symbol' || type == 'boolean')
+    ? (value !== '__proto__')
+    : (value === null);
+}
+
+module.exports = isKeyable;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_isMasked.js":
+/*!***********************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_isMasked.js ***!
+  \***********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var coreJsData = __webpack_require__(/*! ./_coreJsData */ "../../util/sugar/node_modules/lodash/_coreJsData.js");
+
+/** Used to detect methods masquerading as native. */
+var maskSrcKey = (function() {
+  var uid = /[^.]+$/.exec(coreJsData && coreJsData.keys && coreJsData.keys.IE_PROTO || '');
+  return uid ? ('Symbol(src)_1.' + uid) : '';
+}());
+
+/**
+ * Checks if `func` has its source masked.
+ *
+ * @private
+ * @param {Function} func The function to check.
+ * @returns {boolean} Returns `true` if `func` is masked, else `false`.
+ */
+function isMasked(func) {
+  return !!maskSrcKey && (maskSrcKey in func);
+}
+
+module.exports = isMasked;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_isPrototype.js":
+/*!**************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_isPrototype.js ***!
+  \**************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/**
+ * Checks if `value` is likely a prototype object.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a prototype, else `false`.
+ */
+function isPrototype(value) {
+  var Ctor = value && value.constructor,
+      proto = (typeof Ctor == 'function' && Ctor.prototype) || objectProto;
+
+  return value === proto;
+}
+
+module.exports = isPrototype;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_listCacheClear.js":
+/*!*****************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_listCacheClear.js ***!
+  \*****************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * Removes all key-value entries from the list cache.
+ *
+ * @private
+ * @name clear
+ * @memberOf ListCache
+ */
+function listCacheClear() {
+  this.__data__ = [];
+  this.size = 0;
+}
+
+module.exports = listCacheClear;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_listCacheDelete.js":
+/*!******************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_listCacheDelete.js ***!
+  \******************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var assocIndexOf = __webpack_require__(/*! ./_assocIndexOf */ "../../util/sugar/node_modules/lodash/_assocIndexOf.js");
+
+/** Used for built-in method references. */
+var arrayProto = Array.prototype;
+
+/** Built-in value references. */
+var splice = arrayProto.splice;
+
+/**
+ * Removes `key` and its value from the list cache.
+ *
+ * @private
+ * @name delete
+ * @memberOf ListCache
+ * @param {string} key The key of the value to remove.
+ * @returns {boolean} Returns `true` if the entry was removed, else `false`.
+ */
+function listCacheDelete(key) {
+  var data = this.__data__,
+      index = assocIndexOf(data, key);
+
+  if (index < 0) {
+    return false;
+  }
+  var lastIndex = data.length - 1;
+  if (index == lastIndex) {
+    data.pop();
+  } else {
+    splice.call(data, index, 1);
+  }
+  --this.size;
+  return true;
+}
+
+module.exports = listCacheDelete;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_listCacheGet.js":
+/*!***************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_listCacheGet.js ***!
+  \***************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var assocIndexOf = __webpack_require__(/*! ./_assocIndexOf */ "../../util/sugar/node_modules/lodash/_assocIndexOf.js");
+
+/**
+ * Gets the list cache value for `key`.
+ *
+ * @private
+ * @name get
+ * @memberOf ListCache
+ * @param {string} key The key of the value to get.
+ * @returns {*} Returns the entry value.
+ */
+function listCacheGet(key) {
+  var data = this.__data__,
+      index = assocIndexOf(data, key);
+
+  return index < 0 ? undefined : data[index][1];
+}
+
+module.exports = listCacheGet;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_listCacheHas.js":
+/*!***************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_listCacheHas.js ***!
+  \***************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var assocIndexOf = __webpack_require__(/*! ./_assocIndexOf */ "../../util/sugar/node_modules/lodash/_assocIndexOf.js");
+
+/**
+ * Checks if a list cache value for `key` exists.
+ *
+ * @private
+ * @name has
+ * @memberOf ListCache
+ * @param {string} key The key of the entry to check.
+ * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+ */
+function listCacheHas(key) {
+  return assocIndexOf(this.__data__, key) > -1;
+}
+
+module.exports = listCacheHas;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_listCacheSet.js":
+/*!***************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_listCacheSet.js ***!
+  \***************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var assocIndexOf = __webpack_require__(/*! ./_assocIndexOf */ "../../util/sugar/node_modules/lodash/_assocIndexOf.js");
+
+/**
+ * Sets the list cache `key` to `value`.
+ *
+ * @private
+ * @name set
+ * @memberOf ListCache
+ * @param {string} key The key of the value to set.
+ * @param {*} value The value to set.
+ * @returns {Object} Returns the list cache instance.
+ */
+function listCacheSet(key, value) {
+  var data = this.__data__,
+      index = assocIndexOf(data, key);
+
+  if (index < 0) {
+    ++this.size;
+    data.push([key, value]);
+  } else {
+    data[index][1] = value;
+  }
+  return this;
+}
+
+module.exports = listCacheSet;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_mapCacheClear.js":
+/*!****************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_mapCacheClear.js ***!
+  \****************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Hash = __webpack_require__(/*! ./_Hash */ "../../util/sugar/node_modules/lodash/_Hash.js"),
+    ListCache = __webpack_require__(/*! ./_ListCache */ "../../util/sugar/node_modules/lodash/_ListCache.js"),
+    Map = __webpack_require__(/*! ./_Map */ "../../util/sugar/node_modules/lodash/_Map.js");
+
+/**
+ * Removes all key-value entries from the map.
+ *
+ * @private
+ * @name clear
+ * @memberOf MapCache
+ */
+function mapCacheClear() {
+  this.size = 0;
+  this.__data__ = {
+    'hash': new Hash,
+    'map': new (Map || ListCache),
+    'string': new Hash
+  };
+}
+
+module.exports = mapCacheClear;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_mapCacheDelete.js":
+/*!*****************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_mapCacheDelete.js ***!
+  \*****************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getMapData = __webpack_require__(/*! ./_getMapData */ "../../util/sugar/node_modules/lodash/_getMapData.js");
+
+/**
+ * Removes `key` and its value from the map.
+ *
+ * @private
+ * @name delete
+ * @memberOf MapCache
+ * @param {string} key The key of the value to remove.
+ * @returns {boolean} Returns `true` if the entry was removed, else `false`.
+ */
+function mapCacheDelete(key) {
+  var result = getMapData(this, key)['delete'](key);
+  this.size -= result ? 1 : 0;
+  return result;
+}
+
+module.exports = mapCacheDelete;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_mapCacheGet.js":
+/*!**************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_mapCacheGet.js ***!
+  \**************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getMapData = __webpack_require__(/*! ./_getMapData */ "../../util/sugar/node_modules/lodash/_getMapData.js");
+
+/**
+ * Gets the map value for `key`.
+ *
+ * @private
+ * @name get
+ * @memberOf MapCache
+ * @param {string} key The key of the value to get.
+ * @returns {*} Returns the entry value.
+ */
+function mapCacheGet(key) {
+  return getMapData(this, key).get(key);
+}
+
+module.exports = mapCacheGet;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_mapCacheHas.js":
+/*!**************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_mapCacheHas.js ***!
+  \**************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getMapData = __webpack_require__(/*! ./_getMapData */ "../../util/sugar/node_modules/lodash/_getMapData.js");
+
+/**
+ * Checks if a map value for `key` exists.
+ *
+ * @private
+ * @name has
+ * @memberOf MapCache
+ * @param {string} key The key of the entry to check.
+ * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+ */
+function mapCacheHas(key) {
+  return getMapData(this, key).has(key);
+}
+
+module.exports = mapCacheHas;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_mapCacheSet.js":
+/*!**************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_mapCacheSet.js ***!
+  \**************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getMapData = __webpack_require__(/*! ./_getMapData */ "../../util/sugar/node_modules/lodash/_getMapData.js");
+
+/**
+ * Sets the map `key` to `value`.
+ *
+ * @private
+ * @name set
+ * @memberOf MapCache
+ * @param {string} key The key of the value to set.
+ * @param {*} value The value to set.
+ * @returns {Object} Returns the map cache instance.
+ */
+function mapCacheSet(key, value) {
+  var data = getMapData(this, key),
+      size = data.size;
+
+  data.set(key, value);
+  this.size += data.size == size ? 0 : 1;
+  return this;
+}
+
+module.exports = mapCacheSet;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_nativeCreate.js":
+/*!***************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_nativeCreate.js ***!
+  \***************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getNative = __webpack_require__(/*! ./_getNative */ "../../util/sugar/node_modules/lodash/_getNative.js");
+
+/* Built-in method references that are verified to be native. */
+var nativeCreate = getNative(Object, 'create');
+
+module.exports = nativeCreate;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_nativeKeys.js":
+/*!*************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_nativeKeys.js ***!
+  \*************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var overArg = __webpack_require__(/*! ./_overArg */ "../../util/sugar/node_modules/lodash/_overArg.js");
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeKeys = overArg(Object.keys, Object);
+
+module.exports = nativeKeys;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_nativeKeysIn.js":
+/*!***************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_nativeKeysIn.js ***!
+  \***************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * This function is like
+ * [`Object.keys`](http://ecma-international.org/ecma-262/7.0/#sec-object.keys)
+ * except that it includes inherited enumerable properties.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property names.
+ */
+function nativeKeysIn(object) {
+  var result = [];
+  if (object != null) {
+    for (var key in Object(object)) {
+      result.push(key);
+    }
+  }
+  return result;
+}
+
+module.exports = nativeKeysIn;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_nodeUtil.js":
+/*!***********************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_nodeUtil.js ***!
+  \***********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(module) {var freeGlobal = __webpack_require__(/*! ./_freeGlobal */ "../../util/sugar/node_modules/lodash/_freeGlobal.js");
+
+/** Detect free variable `exports`. */
+var freeExports =  true && exports && !exports.nodeType && exports;
+
+/** Detect free variable `module`. */
+var freeModule = freeExports && typeof module == 'object' && module && !module.nodeType && module;
+
+/** Detect the popular CommonJS extension `module.exports`. */
+var moduleExports = freeModule && freeModule.exports === freeExports;
+
+/** Detect free variable `process` from Node.js. */
+var freeProcess = moduleExports && freeGlobal.process;
+
+/** Used to access faster Node.js helpers. */
+var nodeUtil = (function() {
+  try {
+    // Use `util.types` for Node.js 10+.
+    var types = freeModule && freeModule.require && freeModule.require('util').types;
+
+    if (types) {
+      return types;
+    }
+
+    // Legacy `process.binding('util')` for Node.js < 10.
+    return freeProcess && freeProcess.binding && freeProcess.binding('util');
+  } catch (e) {}
+}());
+
+module.exports = nodeUtil;
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/module.js */ "../../util/sugar/node_modules/webpack/buildin/module.js")(module)))
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_objectToString.js":
+/*!*****************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_objectToString.js ***!
+  \*****************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+var nativeObjectToString = objectProto.toString;
+
+/**
+ * Converts `value` to a string using `Object.prototype.toString`.
+ *
+ * @private
+ * @param {*} value The value to convert.
+ * @returns {string} Returns the converted string.
+ */
+function objectToString(value) {
+  return nativeObjectToString.call(value);
+}
+
+module.exports = objectToString;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_overArg.js":
+/*!**********************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_overArg.js ***!
+  \**********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * Creates a unary function that invokes `func` with its argument transformed.
+ *
+ * @private
+ * @param {Function} func The function to wrap.
+ * @param {Function} transform The argument transform.
+ * @returns {Function} Returns the new function.
+ */
+function overArg(func, transform) {
+  return function(arg) {
+    return func(transform(arg));
+  };
+}
+
+module.exports = overArg;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_root.js":
+/*!*******************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_root.js ***!
+  \*******************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var freeGlobal = __webpack_require__(/*! ./_freeGlobal */ "../../util/sugar/node_modules/lodash/_freeGlobal.js");
+
+/** Detect free variable `self`. */
+var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
+
+/** Used as a reference to the global object. */
+var root = freeGlobal || freeSelf || Function('return this')();
+
+module.exports = root;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_stackClear.js":
+/*!*************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_stackClear.js ***!
+  \*************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var ListCache = __webpack_require__(/*! ./_ListCache */ "../../util/sugar/node_modules/lodash/_ListCache.js");
+
+/**
+ * Removes all key-value entries from the stack.
+ *
+ * @private
+ * @name clear
+ * @memberOf Stack
+ */
+function stackClear() {
+  this.__data__ = new ListCache;
+  this.size = 0;
+}
+
+module.exports = stackClear;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_stackDelete.js":
+/*!**************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_stackDelete.js ***!
+  \**************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * Removes `key` and its value from the stack.
+ *
+ * @private
+ * @name delete
+ * @memberOf Stack
+ * @param {string} key The key of the value to remove.
+ * @returns {boolean} Returns `true` if the entry was removed, else `false`.
+ */
+function stackDelete(key) {
+  var data = this.__data__,
+      result = data['delete'](key);
+
+  this.size = data.size;
+  return result;
+}
+
+module.exports = stackDelete;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_stackGet.js":
+/*!***********************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_stackGet.js ***!
+  \***********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * Gets the stack value for `key`.
+ *
+ * @private
+ * @name get
+ * @memberOf Stack
+ * @param {string} key The key of the value to get.
+ * @returns {*} Returns the entry value.
+ */
+function stackGet(key) {
+  return this.__data__.get(key);
+}
+
+module.exports = stackGet;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_stackHas.js":
+/*!***********************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_stackHas.js ***!
+  \***********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * Checks if a stack value for `key` exists.
+ *
+ * @private
+ * @name has
+ * @memberOf Stack
+ * @param {string} key The key of the entry to check.
+ * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+ */
+function stackHas(key) {
+  return this.__data__.has(key);
+}
+
+module.exports = stackHas;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_stackSet.js":
+/*!***********************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_stackSet.js ***!
+  \***********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var ListCache = __webpack_require__(/*! ./_ListCache */ "../../util/sugar/node_modules/lodash/_ListCache.js"),
+    Map = __webpack_require__(/*! ./_Map */ "../../util/sugar/node_modules/lodash/_Map.js"),
+    MapCache = __webpack_require__(/*! ./_MapCache */ "../../util/sugar/node_modules/lodash/_MapCache.js");
+
+/** Used as the size to enable large array optimizations. */
+var LARGE_ARRAY_SIZE = 200;
+
+/**
+ * Sets the stack `key` to `value`.
+ *
+ * @private
+ * @name set
+ * @memberOf Stack
+ * @param {string} key The key of the value to set.
+ * @param {*} value The value to set.
+ * @returns {Object} Returns the stack cache instance.
+ */
+function stackSet(key, value) {
+  var data = this.__data__;
+  if (data instanceof ListCache) {
+    var pairs = data.__data__;
+    if (!Map || (pairs.length < LARGE_ARRAY_SIZE - 1)) {
+      pairs.push([key, value]);
+      this.size = ++data.size;
+      return this;
+    }
+    data = this.__data__ = new MapCache(pairs);
+  }
+  data.set(key, value);
+  this.size = data.size;
+  return this;
+}
+
+module.exports = stackSet;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/_toSource.js":
+/*!***********************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/_toSource.js ***!
+  \***********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/** Used for built-in method references. */
+var funcProto = Function.prototype;
+
+/** Used to resolve the decompiled source of functions. */
+var funcToString = funcProto.toString;
+
+/**
+ * Converts `func` to its source code.
+ *
+ * @private
+ * @param {Function} func The function to convert.
+ * @returns {string} Returns the source code.
+ */
+function toSource(func) {
+  if (func != null) {
+    try {
+      return funcToString.call(func);
+    } catch (e) {}
+    try {
+      return (func + '');
+    } catch (e) {}
+  }
+  return '';
+}
+
+module.exports = toSource;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/clone.js":
+/*!*******************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/clone.js ***!
+  \*******************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseClone = __webpack_require__(/*! ./_baseClone */ "../../util/sugar/node_modules/lodash/_baseClone.js");
+
+/** Used to compose bitmasks for cloning. */
+var CLONE_SYMBOLS_FLAG = 4;
+
+/**
+ * Creates a shallow clone of `value`.
+ *
+ * **Note:** This method is loosely based on the
+ * [structured clone algorithm](https://mdn.io/Structured_clone_algorithm)
+ * and supports cloning arrays, array buffers, booleans, date objects, maps,
+ * numbers, `Object` objects, regexes, sets, strings, symbols, and typed
+ * arrays. The own enumerable properties of `arguments` objects are cloned
+ * as plain objects. An empty object is returned for uncloneable values such
+ * as error objects, functions, DOM nodes, and WeakMaps.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to clone.
+ * @returns {*} Returns the cloned value.
+ * @see _.cloneDeep
+ * @example
+ *
+ * var objects = [{ 'a': 1 }, { 'b': 2 }];
+ *
+ * var shallow = _.clone(objects);
+ * console.log(shallow[0] === objects[0]);
+ * // => true
+ */
+function clone(value) {
+  return baseClone(value, CLONE_SYMBOLS_FLAG);
+}
+
+module.exports = clone;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/clonedeep.js":
+/*!***********************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/clonedeep.js ***!
+  \***********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseClone = __webpack_require__(/*! ./_baseClone */ "../../util/sugar/node_modules/lodash/_baseClone.js");
+
+/** Used to compose bitmasks for cloning. */
+var CLONE_DEEP_FLAG = 1,
+    CLONE_SYMBOLS_FLAG = 4;
+
+/**
+ * This method is like `_.clone` except that it recursively clones `value`.
+ *
+ * @static
+ * @memberOf _
+ * @since 1.0.0
+ * @category Lang
+ * @param {*} value The value to recursively clone.
+ * @returns {*} Returns the deep cloned value.
+ * @see _.clone
+ * @example
+ *
+ * var objects = [{ 'a': 1 }, { 'b': 2 }];
+ *
+ * var deep = _.cloneDeep(objects);
+ * console.log(deep[0] === objects[0]);
+ * // => false
+ */
+function cloneDeep(value) {
+  return baseClone(value, CLONE_DEEP_FLAG | CLONE_SYMBOLS_FLAG);
+}
+
+module.exports = cloneDeep;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/eq.js":
+/*!****************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/eq.js ***!
+  \****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * Performs a
+ * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
+ * comparison between two values to determine if they are equivalent.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to compare.
+ * @param {*} other The other value to compare.
+ * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
+ * @example
+ *
+ * var object = { 'a': 1 };
+ * var other = { 'a': 1 };
+ *
+ * _.eq(object, object);
+ * // => true
+ *
+ * _.eq(object, other);
+ * // => false
+ *
+ * _.eq('a', 'a');
+ * // => true
+ *
+ * _.eq('a', Object('a'));
+ * // => false
+ *
+ * _.eq(NaN, NaN);
+ * // => true
+ */
+function eq(value, other) {
+  return value === other || (value !== value && other !== other);
+}
+
+module.exports = eq;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/isArguments.js":
+/*!*************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/isArguments.js ***!
+  \*************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseIsArguments = __webpack_require__(/*! ./_baseIsArguments */ "../../util/sugar/node_modules/lodash/_baseIsArguments.js"),
+    isObjectLike = __webpack_require__(/*! ./isObjectLike */ "../../util/sugar/node_modules/lodash/isObjectLike.js");
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/** Built-in value references. */
+var propertyIsEnumerable = objectProto.propertyIsEnumerable;
+
+/**
+ * Checks if `value` is likely an `arguments` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an `arguments` object,
+ *  else `false`.
+ * @example
+ *
+ * _.isArguments(function() { return arguments; }());
+ * // => true
+ *
+ * _.isArguments([1, 2, 3]);
+ * // => false
+ */
+var isArguments = baseIsArguments(function() { return arguments; }()) ? baseIsArguments : function(value) {
+  return isObjectLike(value) && hasOwnProperty.call(value, 'callee') &&
+    !propertyIsEnumerable.call(value, 'callee');
+};
+
+module.exports = isArguments;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/isArray.js":
+/*!*********************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/isArray.js ***!
+  \*********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * Checks if `value` is classified as an `Array` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an array, else `false`.
+ * @example
+ *
+ * _.isArray([1, 2, 3]);
+ * // => true
+ *
+ * _.isArray(document.body.children);
+ * // => false
+ *
+ * _.isArray('abc');
+ * // => false
+ *
+ * _.isArray(_.noop);
+ * // => false
+ */
+var isArray = Array.isArray;
+
+module.exports = isArray;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/isArrayLike.js":
+/*!*************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/isArrayLike.js ***!
+  \*************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isFunction = __webpack_require__(/*! ./isFunction */ "../../util/sugar/node_modules/lodash/isFunction.js"),
+    isLength = __webpack_require__(/*! ./isLength */ "../../util/sugar/node_modules/lodash/isLength.js");
+
+/**
+ * Checks if `value` is array-like. A value is considered array-like if it's
+ * not a function and has a `value.length` that's an integer greater than or
+ * equal to `0` and less than or equal to `Number.MAX_SAFE_INTEGER`.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is array-like, else `false`.
+ * @example
+ *
+ * _.isArrayLike([1, 2, 3]);
+ * // => true
+ *
+ * _.isArrayLike(document.body.children);
+ * // => true
+ *
+ * _.isArrayLike('abc');
+ * // => true
+ *
+ * _.isArrayLike(_.noop);
+ * // => false
+ */
+function isArrayLike(value) {
+  return value != null && isLength(value.length) && !isFunction(value);
+}
+
+module.exports = isArrayLike;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/isBuffer.js":
+/*!**********************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/isBuffer.js ***!
+  \**********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(module) {var root = __webpack_require__(/*! ./_root */ "../../util/sugar/node_modules/lodash/_root.js"),
+    stubFalse = __webpack_require__(/*! ./stubFalse */ "../../util/sugar/node_modules/lodash/stubFalse.js");
+
+/** Detect free variable `exports`. */
+var freeExports =  true && exports && !exports.nodeType && exports;
+
+/** Detect free variable `module`. */
+var freeModule = freeExports && typeof module == 'object' && module && !module.nodeType && module;
+
+/** Detect the popular CommonJS extension `module.exports`. */
+var moduleExports = freeModule && freeModule.exports === freeExports;
+
+/** Built-in value references. */
+var Buffer = moduleExports ? root.Buffer : undefined;
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeIsBuffer = Buffer ? Buffer.isBuffer : undefined;
+
+/**
+ * Checks if `value` is a buffer.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.3.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a buffer, else `false`.
+ * @example
+ *
+ * _.isBuffer(new Buffer(2));
+ * // => true
+ *
+ * _.isBuffer(new Uint8Array(2));
+ * // => false
+ */
+var isBuffer = nativeIsBuffer || stubFalse;
+
+module.exports = isBuffer;
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/module.js */ "../../util/sugar/node_modules/webpack/buildin/module.js")(module)))
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/isFunction.js":
+/*!************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/isFunction.js ***!
+  \************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseGetTag = __webpack_require__(/*! ./_baseGetTag */ "../../util/sugar/node_modules/lodash/_baseGetTag.js"),
+    isObject = __webpack_require__(/*! ./isObject */ "../../util/sugar/node_modules/lodash/isObject.js");
+
+/** `Object#toString` result references. */
+var asyncTag = '[object AsyncFunction]',
+    funcTag = '[object Function]',
+    genTag = '[object GeneratorFunction]',
+    proxyTag = '[object Proxy]';
+
+/**
+ * Checks if `value` is classified as a `Function` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a function, else `false`.
+ * @example
+ *
+ * _.isFunction(_);
+ * // => true
+ *
+ * _.isFunction(/abc/);
+ * // => false
+ */
+function isFunction(value) {
+  if (!isObject(value)) {
+    return false;
+  }
+  // The use of `Object#toString` avoids issues with the `typeof` operator
+  // in Safari 9 which returns 'object' for typed arrays and other constructors.
+  var tag = baseGetTag(value);
+  return tag == funcTag || tag == genTag || tag == asyncTag || tag == proxyTag;
+}
+
+module.exports = isFunction;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/isLength.js":
+/*!**********************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/isLength.js ***!
+  \**********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/** Used as references for various `Number` constants. */
+var MAX_SAFE_INTEGER = 9007199254740991;
+
+/**
+ * Checks if `value` is a valid array-like length.
+ *
+ * **Note:** This method is loosely based on
+ * [`ToLength`](http://ecma-international.org/ecma-262/7.0/#sec-tolength).
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
+ * @example
+ *
+ * _.isLength(3);
+ * // => true
+ *
+ * _.isLength(Number.MIN_VALUE);
+ * // => false
+ *
+ * _.isLength(Infinity);
+ * // => false
+ *
+ * _.isLength('3');
+ * // => false
+ */
+function isLength(value) {
+  return typeof value == 'number' &&
+    value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
+}
+
+module.exports = isLength;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/isMap.js":
+/*!*******************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/isMap.js ***!
+  \*******************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseIsMap = __webpack_require__(/*! ./_baseIsMap */ "../../util/sugar/node_modules/lodash/_baseIsMap.js"),
+    baseUnary = __webpack_require__(/*! ./_baseUnary */ "../../util/sugar/node_modules/lodash/_baseUnary.js"),
+    nodeUtil = __webpack_require__(/*! ./_nodeUtil */ "../../util/sugar/node_modules/lodash/_nodeUtil.js");
+
+/* Node.js helper references. */
+var nodeIsMap = nodeUtil && nodeUtil.isMap;
+
+/**
+ * Checks if `value` is classified as a `Map` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.3.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a map, else `false`.
+ * @example
+ *
+ * _.isMap(new Map);
+ * // => true
+ *
+ * _.isMap(new WeakMap);
+ * // => false
+ */
+var isMap = nodeIsMap ? baseUnary(nodeIsMap) : baseIsMap;
+
+module.exports = isMap;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/isObject.js":
+/*!**********************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/isObject.js ***!
+  \**********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * Checks if `value` is the
+ * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
+ * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+ * @example
+ *
+ * _.isObject({});
+ * // => true
+ *
+ * _.isObject([1, 2, 3]);
+ * // => true
+ *
+ * _.isObject(_.noop);
+ * // => true
+ *
+ * _.isObject(null);
+ * // => false
+ */
+function isObject(value) {
+  var type = typeof value;
+  return value != null && (type == 'object' || type == 'function');
+}
+
+module.exports = isObject;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/isObjectLike.js":
+/*!**************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/isObjectLike.js ***!
+  \**************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * Checks if `value` is object-like. A value is object-like if it's not `null`
+ * and has a `typeof` result of "object".
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+ * @example
+ *
+ * _.isObjectLike({});
+ * // => true
+ *
+ * _.isObjectLike([1, 2, 3]);
+ * // => true
+ *
+ * _.isObjectLike(_.noop);
+ * // => false
+ *
+ * _.isObjectLike(null);
+ * // => false
+ */
+function isObjectLike(value) {
+  return value != null && typeof value == 'object';
+}
+
+module.exports = isObjectLike;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/isSet.js":
+/*!*******************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/isSet.js ***!
+  \*******************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseIsSet = __webpack_require__(/*! ./_baseIsSet */ "../../util/sugar/node_modules/lodash/_baseIsSet.js"),
+    baseUnary = __webpack_require__(/*! ./_baseUnary */ "../../util/sugar/node_modules/lodash/_baseUnary.js"),
+    nodeUtil = __webpack_require__(/*! ./_nodeUtil */ "../../util/sugar/node_modules/lodash/_nodeUtil.js");
+
+/* Node.js helper references. */
+var nodeIsSet = nodeUtil && nodeUtil.isSet;
+
+/**
+ * Checks if `value` is classified as a `Set` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.3.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a set, else `false`.
+ * @example
+ *
+ * _.isSet(new Set);
+ * // => true
+ *
+ * _.isSet(new WeakSet);
+ * // => false
+ */
+var isSet = nodeIsSet ? baseUnary(nodeIsSet) : baseIsSet;
+
+module.exports = isSet;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/isTypedArray.js":
+/*!**************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/isTypedArray.js ***!
+  \**************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseIsTypedArray = __webpack_require__(/*! ./_baseIsTypedArray */ "../../util/sugar/node_modules/lodash/_baseIsTypedArray.js"),
+    baseUnary = __webpack_require__(/*! ./_baseUnary */ "../../util/sugar/node_modules/lodash/_baseUnary.js"),
+    nodeUtil = __webpack_require__(/*! ./_nodeUtil */ "../../util/sugar/node_modules/lodash/_nodeUtil.js");
+
+/* Node.js helper references. */
+var nodeIsTypedArray = nodeUtil && nodeUtil.isTypedArray;
+
+/**
+ * Checks if `value` is classified as a typed array.
+ *
+ * @static
+ * @memberOf _
+ * @since 3.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a typed array, else `false`.
+ * @example
+ *
+ * _.isTypedArray(new Uint8Array);
+ * // => true
+ *
+ * _.isTypedArray([]);
+ * // => false
+ */
+var isTypedArray = nodeIsTypedArray ? baseUnary(nodeIsTypedArray) : baseIsTypedArray;
+
+module.exports = isTypedArray;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/keys.js":
+/*!******************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/keys.js ***!
+  \******************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayLikeKeys = __webpack_require__(/*! ./_arrayLikeKeys */ "../../util/sugar/node_modules/lodash/_arrayLikeKeys.js"),
+    baseKeys = __webpack_require__(/*! ./_baseKeys */ "../../util/sugar/node_modules/lodash/_baseKeys.js"),
+    isArrayLike = __webpack_require__(/*! ./isArrayLike */ "../../util/sugar/node_modules/lodash/isArrayLike.js");
+
+/**
+ * Creates an array of the own enumerable property names of `object`.
+ *
+ * **Note:** Non-object values are coerced to objects. See the
+ * [ES spec](http://ecma-international.org/ecma-262/7.0/#sec-object.keys)
+ * for more details.
+ *
+ * @static
+ * @since 0.1.0
+ * @memberOf _
+ * @category Object
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property names.
+ * @example
+ *
+ * function Foo() {
+ *   this.a = 1;
+ *   this.b = 2;
+ * }
+ *
+ * Foo.prototype.c = 3;
+ *
+ * _.keys(new Foo);
+ * // => ['a', 'b'] (iteration order is not guaranteed)
+ *
+ * _.keys('hi');
+ * // => ['0', '1']
+ */
+function keys(object) {
+  return isArrayLike(object) ? arrayLikeKeys(object) : baseKeys(object);
+}
+
+module.exports = keys;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/keysIn.js":
+/*!********************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/keysIn.js ***!
+  \********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayLikeKeys = __webpack_require__(/*! ./_arrayLikeKeys */ "../../util/sugar/node_modules/lodash/_arrayLikeKeys.js"),
+    baseKeysIn = __webpack_require__(/*! ./_baseKeysIn */ "../../util/sugar/node_modules/lodash/_baseKeysIn.js"),
+    isArrayLike = __webpack_require__(/*! ./isArrayLike */ "../../util/sugar/node_modules/lodash/isArrayLike.js");
+
+/**
+ * Creates an array of the own and inherited enumerable property names of `object`.
+ *
+ * **Note:** Non-object values are coerced to objects.
+ *
+ * @static
+ * @memberOf _
+ * @since 3.0.0
+ * @category Object
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property names.
+ * @example
+ *
+ * function Foo() {
+ *   this.a = 1;
+ *   this.b = 2;
+ * }
+ *
+ * Foo.prototype.c = 3;
+ *
+ * _.keysIn(new Foo);
+ * // => ['a', 'b', 'c'] (iteration order is not guaranteed)
+ */
+function keysIn(object) {
+  return isArrayLike(object) ? arrayLikeKeys(object, true) : baseKeysIn(object);
+}
+
+module.exports = keysIn;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/stubArray.js":
+/*!***********************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/stubArray.js ***!
+  \***********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * This method returns a new empty array.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.13.0
+ * @category Util
+ * @returns {Array} Returns the new empty array.
+ * @example
+ *
+ * var arrays = _.times(2, _.stubArray);
+ *
+ * console.log(arrays);
+ * // => [[], []]
+ *
+ * console.log(arrays[0] === arrays[1]);
+ * // => false
+ */
+function stubArray() {
+  return [];
+}
+
+module.exports = stubArray;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/lodash/stubFalse.js":
+/*!***********************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/lodash/stubFalse.js ***!
+  \***********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * This method returns `false`.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.13.0
+ * @category Util
+ * @returns {boolean} Returns `false`.
+ * @example
+ *
+ * _.times(2, _.stubFalse);
+ * // => [false, false]
+ */
+function stubFalse() {
+  return false;
+}
+
+module.exports = stubFalse;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/micromatch/index.js":
+/*!***********************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/micromatch/index.js ***!
+  \***********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+const util = __webpack_require__(/*! util */ "../../util/sugar/node_modules/util/util.js");
+const braces = __webpack_require__(/*! braces */ "../../util/sugar/node_modules/braces/index.js");
+const picomatch = __webpack_require__(/*! picomatch */ "../../util/sugar/node_modules/picomatch/index.js");
+const utils = __webpack_require__(/*! picomatch/lib/utils */ "../../util/sugar/node_modules/picomatch/lib/utils.js");
+const isEmptyString = val => typeof val === 'string' && (val === '' || val === './');
+
+/**
+ * Returns an array of strings that match one or more glob patterns.
+ *
+ * ```js
+ * const mm = require('micromatch');
+ * // mm(list, patterns[, options]);
+ *
+ * console.log(mm(['a.js', 'a.txt'], ['*.js']));
+ * //=> [ 'a.js' ]
+ * ```
+ * @param {String|Array<string>} list List of strings to match.
+ * @param {String|Array<string>} patterns One or more glob patterns to use for matching.
+ * @param {Object} options See available [options](#options)
+ * @return {Array} Returns an array of matches
+ * @summary false
+ * @api public
+ */
+
+const micromatch = (list, patterns, options) => {
+  patterns = [].concat(patterns);
+  list = [].concat(list);
+
+  let omit = new Set();
+  let keep = new Set();
+  let items = new Set();
+  let negatives = 0;
+
+  let onResult = state => {
+    items.add(state.output);
+    if (options && options.onResult) {
+      options.onResult(state);
+    }
+  };
+
+  for (let i = 0; i < patterns.length; i++) {
+    let isMatch = picomatch(String(patterns[i]), { ...options, onResult }, true);
+    let negated = isMatch.state.negated || isMatch.state.negatedExtglob;
+    if (negated) negatives++;
+
+    for (let item of list) {
+      let matched = isMatch(item, true);
+
+      let match = negated ? !matched.isMatch : matched.isMatch;
+      if (!match) continue;
+
+      if (negated) {
+        omit.add(matched.output);
+      } else {
+        omit.delete(matched.output);
+        keep.add(matched.output);
+      }
+    }
+  }
+
+  let result = negatives === patterns.length ? [...items] : [...keep];
+  let matches = result.filter(item => !omit.has(item));
+
+  if (options && matches.length === 0) {
+    if (options.failglob === true) {
+      throw new Error(`No matches found for "${patterns.join(', ')}"`);
+    }
+
+    if (options.nonull === true || options.nullglob === true) {
+      return options.unescape ? patterns.map(p => p.replace(/\\/g, '')) : patterns;
+    }
+  }
+
+  return matches;
+};
+
+/**
+ * Backwards compatibility
+ */
+
+micromatch.match = micromatch;
+
+/**
+ * Returns a matcher function from the given glob `pattern` and `options`.
+ * The returned function takes a string to match as its only argument and returns
+ * true if the string is a match.
+ *
+ * ```js
+ * const mm = require('micromatch');
+ * // mm.matcher(pattern[, options]);
+ *
+ * const isMatch = mm.matcher('*.!(*a)');
+ * console.log(isMatch('a.a')); //=> false
+ * console.log(isMatch('a.b')); //=> true
+ * ```
+ * @param {String} `pattern` Glob pattern
+ * @param {Object} `options`
+ * @return {Function} Returns a matcher function.
+ * @api public
+ */
+
+micromatch.matcher = (pattern, options) => picomatch(pattern, options);
+
+/**
+ * Returns true if **any** of the given glob `patterns` match the specified `string`.
+ *
+ * ```js
+ * const mm = require('micromatch');
+ * // mm.isMatch(string, patterns[, options]);
+ *
+ * console.log(mm.isMatch('a.a', ['b.*', '*.a'])); //=> true
+ * console.log(mm.isMatch('a.a', 'b.*')); //=> false
+ * ```
+ * @param {String} str The string to test.
+ * @param {String|Array} patterns One or more glob patterns to use for matching.
+ * @param {Object} [options] See available [options](#options).
+ * @return {Boolean} Returns true if any patterns match `str`
+ * @api public
+ */
+
+micromatch.isMatch = (str, patterns, options) => picomatch(patterns, options)(str);
+
+/**
+ * Backwards compatibility
+ */
+
+micromatch.any = micromatch.isMatch;
+
+/**
+ * Returns a list of strings that _**do not match any**_ of the given `patterns`.
+ *
+ * ```js
+ * const mm = require('micromatch');
+ * // mm.not(list, patterns[, options]);
+ *
+ * console.log(mm.not(['a.a', 'b.b', 'c.c'], '*.a'));
+ * //=> ['b.b', 'c.c']
+ * ```
+ * @param {Array} `list` Array of strings to match.
+ * @param {String|Array} `patterns` One or more glob pattern to use for matching.
+ * @param {Object} `options` See available [options](#options) for changing how matches are performed
+ * @return {Array} Returns an array of strings that **do not match** the given patterns.
+ * @api public
+ */
+
+micromatch.not = (list, patterns, options = {}) => {
+  patterns = [].concat(patterns).map(String);
+  let result = new Set();
+  let items = [];
+
+  let onResult = state => {
+    if (options.onResult) options.onResult(state);
+    items.push(state.output);
+  };
+
+  let matches = micromatch(list, patterns, { ...options, onResult });
+
+  for (let item of items) {
+    if (!matches.includes(item)) {
+      result.add(item);
+    }
+  }
+  return [...result];
+};
+
+/**
+ * Returns true if the given `string` contains the given pattern. Similar
+ * to [.isMatch](#isMatch) but the pattern can match any part of the string.
+ *
+ * ```js
+ * var mm = require('micromatch');
+ * // mm.contains(string, pattern[, options]);
+ *
+ * console.log(mm.contains('aa/bb/cc', '*b'));
+ * //=> true
+ * console.log(mm.contains('aa/bb/cc', '*d'));
+ * //=> false
+ * ```
+ * @param {String} `str` The string to match.
+ * @param {String|Array} `patterns` Glob pattern to use for matching.
+ * @param {Object} `options` See available [options](#options) for changing how matches are performed
+ * @return {Boolean} Returns true if the patter matches any part of `str`.
+ * @api public
+ */
+
+micromatch.contains = (str, pattern, options) => {
+  if (typeof str !== 'string') {
+    throw new TypeError(`Expected a string: "${util.inspect(str)}"`);
+  }
+
+  if (Array.isArray(pattern)) {
+    return pattern.some(p => micromatch.contains(str, p, options));
+  }
+
+  if (typeof pattern === 'string') {
+    if (isEmptyString(str) || isEmptyString(pattern)) {
+      return false;
+    }
+
+    if (str.includes(pattern) || (str.startsWith('./') && str.slice(2).includes(pattern))) {
+      return true;
+    }
+  }
+
+  return micromatch.isMatch(str, pattern, { ...options, contains: true });
+};
+
+/**
+ * Filter the keys of the given object with the given `glob` pattern
+ * and `options`. Does not attempt to match nested keys. If you need this feature,
+ * use [glob-object][] instead.
+ *
+ * ```js
+ * const mm = require('micromatch');
+ * // mm.matchKeys(object, patterns[, options]);
+ *
+ * const obj = { aa: 'a', ab: 'b', ac: 'c' };
+ * console.log(mm.matchKeys(obj, '*b'));
+ * //=> { ab: 'b' }
+ * ```
+ * @param {Object} `object` The object with keys to filter.
+ * @param {String|Array} `patterns` One or more glob patterns to use for matching.
+ * @param {Object} `options` See available [options](#options) for changing how matches are performed
+ * @return {Object} Returns an object with only keys that match the given patterns.
+ * @api public
+ */
+
+micromatch.matchKeys = (obj, patterns, options) => {
+  if (!utils.isObject(obj)) {
+    throw new TypeError('Expected the first argument to be an object');
+  }
+  let keys = micromatch(Object.keys(obj), patterns, options);
+  let res = {};
+  for (let key of keys) res[key] = obj[key];
+  return res;
+};
+
+/**
+ * Returns true if some of the strings in the given `list` match any of the given glob `patterns`.
+ *
+ * ```js
+ * const mm = require('micromatch');
+ * // mm.some(list, patterns[, options]);
+ *
+ * console.log(mm.some(['foo.js', 'bar.js'], ['*.js', '!foo.js']));
+ * // true
+ * console.log(mm.some(['foo.js'], ['*.js', '!foo.js']));
+ * // false
+ * ```
+ * @param {String|Array} `list` The string or array of strings to test. Returns as soon as the first match is found.
+ * @param {String|Array} `patterns` One or more glob patterns to use for matching.
+ * @param {Object} `options` See available [options](#options) for changing how matches are performed
+ * @return {Boolean} Returns true if any patterns match `str`
+ * @api public
+ */
+
+micromatch.some = (list, patterns, options) => {
+  let items = [].concat(list);
+
+  for (let pattern of [].concat(patterns)) {
+    let isMatch = picomatch(String(pattern), options);
+    if (items.some(item => isMatch(item))) {
+      return true;
+    }
+  }
+  return false;
+};
+
+/**
+ * Returns true if every string in the given `list` matches
+ * any of the given glob `patterns`.
+ *
+ * ```js
+ * const mm = require('micromatch');
+ * // mm.every(list, patterns[, options]);
+ *
+ * console.log(mm.every('foo.js', ['foo.js']));
+ * // true
+ * console.log(mm.every(['foo.js', 'bar.js'], ['*.js']));
+ * // true
+ * console.log(mm.every(['foo.js', 'bar.js'], ['*.js', '!foo.js']));
+ * // false
+ * console.log(mm.every(['foo.js'], ['*.js', '!foo.js']));
+ * // false
+ * ```
+ * @param {String|Array} `list` The string or array of strings to test.
+ * @param {String|Array} `patterns` One or more glob patterns to use for matching.
+ * @param {Object} `options` See available [options](#options) for changing how matches are performed
+ * @return {Boolean} Returns true if any patterns match `str`
+ * @api public
+ */
+
+micromatch.every = (list, patterns, options) => {
+  let items = [].concat(list);
+
+  for (let pattern of [].concat(patterns)) {
+    let isMatch = picomatch(String(pattern), options);
+    if (!items.every(item => isMatch(item))) {
+      return false;
+    }
+  }
+  return true;
+};
+
+/**
+ * Returns true if **all** of the given `patterns` match
+ * the specified string.
+ *
+ * ```js
+ * const mm = require('micromatch');
+ * // mm.all(string, patterns[, options]);
+ *
+ * console.log(mm.all('foo.js', ['foo.js']));
+ * // true
+ *
+ * console.log(mm.all('foo.js', ['*.js', '!foo.js']));
+ * // false
+ *
+ * console.log(mm.all('foo.js', ['*.js', 'foo.js']));
+ * // true
+ *
+ * console.log(mm.all('foo.js', ['*.js', 'f*', '*o*', '*o.js']));
+ * // true
+ * ```
+ * @param {String|Array} `str` The string to test.
+ * @param {String|Array} `patterns` One or more glob patterns to use for matching.
+ * @param {Object} `options` See available [options](#options) for changing how matches are performed
+ * @return {Boolean} Returns true if any patterns match `str`
+ * @api public
+ */
+
+micromatch.all = (str, patterns, options) => {
+  if (typeof str !== 'string') {
+    throw new TypeError(`Expected a string: "${util.inspect(str)}"`);
+  }
+
+  return [].concat(patterns).every(p => picomatch(p, options)(str));
+};
+
+/**
+ * Returns an array of matches captured by `pattern` in `string, or `null` if the pattern did not match.
+ *
+ * ```js
+ * const mm = require('micromatch');
+ * // mm.capture(pattern, string[, options]);
+ *
+ * console.log(mm.capture('test/*.js', 'test/foo.js'));
+ * //=> ['foo']
+ * console.log(mm.capture('test/*.js', 'foo/bar.css'));
+ * //=> null
+ * ```
+ * @param {String} `glob` Glob pattern to use for matching.
+ * @param {String} `input` String to match
+ * @param {Object} `options` See available [options](#options) for changing how matches are performed
+ * @return {Boolean} Returns an array of captures if the input matches the glob pattern, otherwise `null`.
+ * @api public
+ */
+
+micromatch.capture = (glob, input, options) => {
+  let posix = utils.isWindows(options);
+  let regex = picomatch.makeRe(String(glob), { ...options, capture: true });
+  let match = regex.exec(posix ? utils.toPosixSlashes(input) : input);
+
+  if (match) {
+    return match.slice(1).map(v => v === void 0 ? '' : v);
+  }
+};
+
+/**
+ * Create a regular expression from the given glob `pattern`.
+ *
+ * ```js
+ * const mm = require('micromatch');
+ * // mm.makeRe(pattern[, options]);
+ *
+ * console.log(mm.makeRe('*.js'));
+ * //=> /^(?:(\.[\\\/])?(?!\.)(?=.)[^\/]*?\.js)$/
+ * ```
+ * @param {String} `pattern` A glob pattern to convert to regex.
+ * @param {Object} `options`
+ * @return {RegExp} Returns a regex created from the given pattern.
+ * @api public
+ */
+
+micromatch.makeRe = (...args) => picomatch.makeRe(...args);
+
+/**
+ * Scan a glob pattern to separate the pattern into segments. Used
+ * by the [split](#split) method.
+ *
+ * ```js
+ * const mm = require('micromatch');
+ * const state = mm.scan(pattern[, options]);
+ * ```
+ * @param {String} `pattern`
+ * @param {Object} `options`
+ * @return {Object} Returns an object with
+ * @api public
+ */
+
+micromatch.scan = (...args) => picomatch.scan(...args);
+
+/**
+ * Parse a glob pattern to create the source string for a regular
+ * expression.
+ *
+ * ```js
+ * const mm = require('micromatch');
+ * const state = mm(pattern[, options]);
+ * ```
+ * @param {String} `glob`
+ * @param {Object} `options`
+ * @return {Object} Returns an object with useful properties and output to be used as regex source string.
+ * @api public
+ */
+
+micromatch.parse = (patterns, options) => {
+  let res = [];
+  for (let pattern of [].concat(patterns || [])) {
+    for (let str of braces(String(pattern), options)) {
+      res.push(picomatch.parse(str, options));
+    }
+  }
+  return res;
+};
+
+/**
+ * Process the given brace `pattern`.
+ *
+ * ```js
+ * const { braces } = require('micromatch');
+ * console.log(braces('foo/{a,b,c}/bar'));
+ * //=> [ 'foo/(a|b|c)/bar' ]
+ *
+ * console.log(braces('foo/{a,b,c}/bar', { expand: true }));
+ * //=> [ 'foo/a/bar', 'foo/b/bar', 'foo/c/bar' ]
+ * ```
+ * @param {String} `pattern` String with brace pattern to process.
+ * @param {Object} `options` Any [options](#options) to change how expansion is performed. See the [braces][] library for all available options.
+ * @return {Array}
+ * @api public
+ */
+
+micromatch.braces = (pattern, options) => {
+  if (typeof pattern !== 'string') throw new TypeError('Expected a string');
+  if ((options && options.nobrace === true) || !/\{.*\}/.test(pattern)) {
+    return [pattern];
+  }
+  return braces(pattern, options);
+};
+
+/**
+ * Expand braces
+ */
+
+micromatch.braceExpand = (pattern, options) => {
+  if (typeof pattern !== 'string') throw new TypeError('Expected a string');
+  return micromatch.braces(pattern, { ...options, expand: true });
+};
+
+/**
+ * Expose micromatch
+ */
+
+module.exports = micromatch;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/minimatch/minimatch.js":
+/*!**************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/minimatch/minimatch.js ***!
+  \**************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = minimatch
+minimatch.Minimatch = Minimatch
+
+var path = { sep: '/' }
+try {
+  path = __webpack_require__(/*! path */ "../../util/sugar/node_modules/path-browserify/index.js")
+} catch (er) {}
+
+var GLOBSTAR = minimatch.GLOBSTAR = Minimatch.GLOBSTAR = {}
+var expand = __webpack_require__(/*! brace-expansion */ "../../util/sugar/node_modules/brace-expansion/index.js")
+
+var plTypes = {
+  '!': { open: '(?:(?!(?:', close: '))[^/]*?)'},
+  '?': { open: '(?:', close: ')?' },
+  '+': { open: '(?:', close: ')+' },
+  '*': { open: '(?:', close: ')*' },
+  '@': { open: '(?:', close: ')' }
+}
+
+// any single thing other than /
+// don't need to escape / when using new RegExp()
+var qmark = '[^/]'
+
+// * => any number of characters
+var star = qmark + '*?'
+
+// ** when dots are allowed.  Anything goes, except .. and .
+// not (^ or / followed by one or two dots followed by $ or /),
+// followed by anything, any number of times.
+var twoStarDot = '(?:(?!(?:\\\/|^)(?:\\.{1,2})($|\\\/)).)*?'
+
+// not a ^ or / followed by a dot,
+// followed by anything, any number of times.
+var twoStarNoDot = '(?:(?!(?:\\\/|^)\\.).)*?'
+
+// characters that need to be escaped in RegExp.
+var reSpecials = charSet('().*{}+?[]^$\\!')
+
+// "abc" -> { a:true, b:true, c:true }
+function charSet (s) {
+  return s.split('').reduce(function (set, c) {
+    set[c] = true
+    return set
+  }, {})
+}
+
+// normalizes slashes.
+var slashSplit = /\/+/
+
+minimatch.filter = filter
+function filter (pattern, options) {
+  options = options || {}
+  return function (p, i, list) {
+    return minimatch(p, pattern, options)
+  }
+}
+
+function ext (a, b) {
+  a = a || {}
+  b = b || {}
+  var t = {}
+  Object.keys(b).forEach(function (k) {
+    t[k] = b[k]
+  })
+  Object.keys(a).forEach(function (k) {
+    t[k] = a[k]
+  })
+  return t
+}
+
+minimatch.defaults = function (def) {
+  if (!def || !Object.keys(def).length) return minimatch
+
+  var orig = minimatch
+
+  var m = function minimatch (p, pattern, options) {
+    return orig.minimatch(p, pattern, ext(def, options))
+  }
+
+  m.Minimatch = function Minimatch (pattern, options) {
+    return new orig.Minimatch(pattern, ext(def, options))
+  }
+
+  return m
+}
+
+Minimatch.defaults = function (def) {
+  if (!def || !Object.keys(def).length) return Minimatch
+  return minimatch.defaults(def).Minimatch
+}
+
+function minimatch (p, pattern, options) {
+  if (typeof pattern !== 'string') {
+    throw new TypeError('glob pattern string required')
+  }
+
+  if (!options) options = {}
+
+  // shortcut: comments match nothing.
+  if (!options.nocomment && pattern.charAt(0) === '#') {
+    return false
+  }
+
+  // "" only matches ""
+  if (pattern.trim() === '') return p === ''
+
+  return new Minimatch(pattern, options).match(p)
+}
+
+function Minimatch (pattern, options) {
+  if (!(this instanceof Minimatch)) {
+    return new Minimatch(pattern, options)
+  }
+
+  if (typeof pattern !== 'string') {
+    throw new TypeError('glob pattern string required')
+  }
+
+  if (!options) options = {}
+  pattern = pattern.trim()
+
+  // windows support: need to use /, not \
+  if (path.sep !== '/') {
+    pattern = pattern.split(path.sep).join('/')
+  }
+
+  this.options = options
+  this.set = []
+  this.pattern = pattern
+  this.regexp = null
+  this.negate = false
+  this.comment = false
+  this.empty = false
+
+  // make the set of regexps etc.
+  this.make()
+}
+
+Minimatch.prototype.debug = function () {}
+
+Minimatch.prototype.make = make
+function make () {
+  // don't do it more than once.
+  if (this._made) return
+
+  var pattern = this.pattern
+  var options = this.options
+
+  // empty patterns and comments match nothing.
+  if (!options.nocomment && pattern.charAt(0) === '#') {
+    this.comment = true
+    return
+  }
+  if (!pattern) {
+    this.empty = true
+    return
+  }
+
+  // step 1: figure out negation, etc.
+  this.parseNegate()
+
+  // step 2: expand braces
+  var set = this.globSet = this.braceExpand()
+
+  if (options.debug) this.debug = console.error
+
+  this.debug(this.pattern, set)
+
+  // step 3: now we have a set, so turn each one into a series of path-portion
+  // matching patterns.
+  // These will be regexps, except in the case of "**", which is
+  // set to the GLOBSTAR object for globstar behavior,
+  // and will not contain any / characters
+  set = this.globParts = set.map(function (s) {
+    return s.split(slashSplit)
+  })
+
+  this.debug(this.pattern, set)
+
+  // glob --> regexps
+  set = set.map(function (s, si, set) {
+    return s.map(this.parse, this)
+  }, this)
+
+  this.debug(this.pattern, set)
+
+  // filter out everything that didn't compile properly.
+  set = set.filter(function (s) {
+    return s.indexOf(false) === -1
+  })
+
+  this.debug(this.pattern, set)
+
+  this.set = set
+}
+
+Minimatch.prototype.parseNegate = parseNegate
+function parseNegate () {
+  var pattern = this.pattern
+  var negate = false
+  var options = this.options
+  var negateOffset = 0
+
+  if (options.nonegate) return
+
+  for (var i = 0, l = pattern.length
+    ; i < l && pattern.charAt(i) === '!'
+    ; i++) {
+    negate = !negate
+    negateOffset++
+  }
+
+  if (negateOffset) this.pattern = pattern.substr(negateOffset)
+  this.negate = negate
+}
+
+// Brace expansion:
+// a{b,c}d -> abd acd
+// a{b,}c -> abc ac
+// a{0..3}d -> a0d a1d a2d a3d
+// a{b,c{d,e}f}g -> abg acdfg acefg
+// a{b,c}d{e,f}g -> abdeg acdeg abdeg abdfg
+//
+// Invalid sets are not expanded.
+// a{2..}b -> a{2..}b
+// a{b}c -> a{b}c
+minimatch.braceExpand = function (pattern, options) {
+  return braceExpand(pattern, options)
+}
+
+Minimatch.prototype.braceExpand = braceExpand
+
+function braceExpand (pattern, options) {
+  if (!options) {
+    if (this instanceof Minimatch) {
+      options = this.options
+    } else {
+      options = {}
+    }
+  }
+
+  pattern = typeof pattern === 'undefined'
+    ? this.pattern : pattern
+
+  if (typeof pattern === 'undefined') {
+    throw new TypeError('undefined pattern')
+  }
+
+  if (options.nobrace ||
+    !pattern.match(/\{.*\}/)) {
+    // shortcut. no need to expand.
+    return [pattern]
+  }
+
+  return expand(pattern)
+}
+
+// parse a component of the expanded set.
+// At this point, no pattern may contain "/" in it
+// so we're going to return a 2d array, where each entry is the full
+// pattern, split on '/', and then turned into a regular expression.
+// A regexp is made at the end which joins each array with an
+// escaped /, and another full one which joins each regexp with |.
+//
+// Following the lead of Bash 4.1, note that "**" only has special meaning
+// when it is the *only* thing in a path portion.  Otherwise, any series
+// of * is equivalent to a single *.  Globstar behavior is enabled by
+// default, and can be disabled by setting options.noglobstar.
+Minimatch.prototype.parse = parse
+var SUBPARSE = {}
+function parse (pattern, isSub) {
+  if (pattern.length > 1024 * 64) {
+    throw new TypeError('pattern is too long')
+  }
+
+  var options = this.options
+
+  // shortcuts
+  if (!options.noglobstar && pattern === '**') return GLOBSTAR
+  if (pattern === '') return ''
+
+  var re = ''
+  var hasMagic = !!options.nocase
+  var escaping = false
+  // ? => one single character
+  var patternListStack = []
+  var negativeLists = []
+  var stateChar
+  var inClass = false
+  var reClassStart = -1
+  var classStart = -1
+  // . and .. never match anything that doesn't start with .,
+  // even when options.dot is set.
+  var patternStart = pattern.charAt(0) === '.' ? '' // anything
+  // not (start or / followed by . or .. followed by / or end)
+  : options.dot ? '(?!(?:^|\\\/)\\.{1,2}(?:$|\\\/))'
+  : '(?!\\.)'
+  var self = this
+
+  function clearStateChar () {
+    if (stateChar) {
+      // we had some state-tracking character
+      // that wasn't consumed by this pass.
+      switch (stateChar) {
+        case '*':
+          re += star
+          hasMagic = true
+        break
+        case '?':
+          re += qmark
+          hasMagic = true
+        break
+        default:
+          re += '\\' + stateChar
+        break
+      }
+      self.debug('clearStateChar %j %j', stateChar, re)
+      stateChar = false
+    }
+  }
+
+  for (var i = 0, len = pattern.length, c
+    ; (i < len) && (c = pattern.charAt(i))
+    ; i++) {
+    this.debug('%s\t%s %s %j', pattern, i, re, c)
+
+    // skip over any that are escaped.
+    if (escaping && reSpecials[c]) {
+      re += '\\' + c
+      escaping = false
+      continue
+    }
+
+    switch (c) {
+      case '/':
+        // completely not allowed, even escaped.
+        // Should already be path-split by now.
+        return false
+
+      case '\\':
+        clearStateChar()
+        escaping = true
+      continue
+
+      // the various stateChar values
+      // for the "extglob" stuff.
+      case '?':
+      case '*':
+      case '+':
+      case '@':
+      case '!':
+        this.debug('%s\t%s %s %j <-- stateChar', pattern, i, re, c)
+
+        // all of those are literals inside a class, except that
+        // the glob [!a] means [^a] in regexp
+        if (inClass) {
+          this.debug('  in class')
+          if (c === '!' && i === classStart + 1) c = '^'
+          re += c
+          continue
+        }
+
+        // if we already have a stateChar, then it means
+        // that there was something like ** or +? in there.
+        // Handle the stateChar, then proceed with this one.
+        self.debug('call clearStateChar %j', stateChar)
+        clearStateChar()
+        stateChar = c
+        // if extglob is disabled, then +(asdf|foo) isn't a thing.
+        // just clear the statechar *now*, rather than even diving into
+        // the patternList stuff.
+        if (options.noext) clearStateChar()
+      continue
+
+      case '(':
+        if (inClass) {
+          re += '('
+          continue
+        }
+
+        if (!stateChar) {
+          re += '\\('
+          continue
+        }
+
+        patternListStack.push({
+          type: stateChar,
+          start: i - 1,
+          reStart: re.length,
+          open: plTypes[stateChar].open,
+          close: plTypes[stateChar].close
+        })
+        // negation is (?:(?!js)[^/]*)
+        re += stateChar === '!' ? '(?:(?!(?:' : '(?:'
+        this.debug('plType %j %j', stateChar, re)
+        stateChar = false
+      continue
+
+      case ')':
+        if (inClass || !patternListStack.length) {
+          re += '\\)'
+          continue
+        }
+
+        clearStateChar()
+        hasMagic = true
+        var pl = patternListStack.pop()
+        // negation is (?:(?!js)[^/]*)
+        // The others are (?:<pattern>)<type>
+        re += pl.close
+        if (pl.type === '!') {
+          negativeLists.push(pl)
+        }
+        pl.reEnd = re.length
+      continue
+
+      case '|':
+        if (inClass || !patternListStack.length || escaping) {
+          re += '\\|'
+          escaping = false
+          continue
+        }
+
+        clearStateChar()
+        re += '|'
+      continue
+
+      // these are mostly the same in regexp and glob
+      case '[':
+        // swallow any state-tracking char before the [
+        clearStateChar()
+
+        if (inClass) {
+          re += '\\' + c
+          continue
+        }
+
+        inClass = true
+        classStart = i
+        reClassStart = re.length
+        re += c
+      continue
+
+      case ']':
+        //  a right bracket shall lose its special
+        //  meaning and represent itself in
+        //  a bracket expression if it occurs
+        //  first in the list.  -- POSIX.2 2.8.3.2
+        if (i === classStart + 1 || !inClass) {
+          re += '\\' + c
+          escaping = false
+          continue
+        }
+
+        // handle the case where we left a class open.
+        // "[z-a]" is valid, equivalent to "\[z-a\]"
+        if (inClass) {
+          // split where the last [ was, make sure we don't have
+          // an invalid re. if so, re-walk the contents of the
+          // would-be class to re-translate any characters that
+          // were passed through as-is
+          // TODO: It would probably be faster to determine this
+          // without a try/catch and a new RegExp, but it's tricky
+          // to do safely.  For now, this is safe and works.
+          var cs = pattern.substring(classStart + 1, i)
+          try {
+            RegExp('[' + cs + ']')
+          } catch (er) {
+            // not a valid class!
+            var sp = this.parse(cs, SUBPARSE)
+            re = re.substr(0, reClassStart) + '\\[' + sp[0] + '\\]'
+            hasMagic = hasMagic || sp[1]
+            inClass = false
+            continue
+          }
+        }
+
+        // finish up the class.
+        hasMagic = true
+        inClass = false
+        re += c
+      continue
+
+      default:
+        // swallow any state char that wasn't consumed
+        clearStateChar()
+
+        if (escaping) {
+          // no need
+          escaping = false
+        } else if (reSpecials[c]
+          && !(c === '^' && inClass)) {
+          re += '\\'
+        }
+
+        re += c
+
+    } // switch
+  } // for
+
+  // handle the case where we left a class open.
+  // "[abc" is valid, equivalent to "\[abc"
+  if (inClass) {
+    // split where the last [ was, and escape it
+    // this is a huge pita.  We now have to re-walk
+    // the contents of the would-be class to re-translate
+    // any characters that were passed through as-is
+    cs = pattern.substr(classStart + 1)
+    sp = this.parse(cs, SUBPARSE)
+    re = re.substr(0, reClassStart) + '\\[' + sp[0]
+    hasMagic = hasMagic || sp[1]
+  }
+
+  // handle the case where we had a +( thing at the *end*
+  // of the pattern.
+  // each pattern list stack adds 3 chars, and we need to go through
+  // and escape any | chars that were passed through as-is for the regexp.
+  // Go through and escape them, taking care not to double-escape any
+  // | chars that were already escaped.
+  for (pl = patternListStack.pop(); pl; pl = patternListStack.pop()) {
+    var tail = re.slice(pl.reStart + pl.open.length)
+    this.debug('setting tail', re, pl)
+    // maybe some even number of \, then maybe 1 \, followed by a |
+    tail = tail.replace(/((?:\\{2}){0,64})(\\?)\|/g, function (_, $1, $2) {
+      if (!$2) {
+        // the | isn't already escaped, so escape it.
+        $2 = '\\'
+      }
+
+      // need to escape all those slashes *again*, without escaping the
+      // one that we need for escaping the | character.  As it works out,
+      // escaping an even number of slashes can be done by simply repeating
+      // it exactly after itself.  That's why this trick works.
+      //
+      // I am sorry that you have to see this.
+      return $1 + $1 + $2 + '|'
+    })
+
+    this.debug('tail=%j\n   %s', tail, tail, pl, re)
+    var t = pl.type === '*' ? star
+      : pl.type === '?' ? qmark
+      : '\\' + pl.type
+
+    hasMagic = true
+    re = re.slice(0, pl.reStart) + t + '\\(' + tail
+  }
+
+  // handle trailing things that only matter at the very end.
+  clearStateChar()
+  if (escaping) {
+    // trailing \\
+    re += '\\\\'
+  }
+
+  // only need to apply the nodot start if the re starts with
+  // something that could conceivably capture a dot
+  var addPatternStart = false
+  switch (re.charAt(0)) {
+    case '.':
+    case '[':
+    case '(': addPatternStart = true
+  }
+
+  // Hack to work around lack of negative lookbehind in JS
+  // A pattern like: *.!(x).!(y|z) needs to ensure that a name
+  // like 'a.xyz.yz' doesn't match.  So, the first negative
+  // lookahead, has to look ALL the way ahead, to the end of
+  // the pattern.
+  for (var n = negativeLists.length - 1; n > -1; n--) {
+    var nl = negativeLists[n]
+
+    var nlBefore = re.slice(0, nl.reStart)
+    var nlFirst = re.slice(nl.reStart, nl.reEnd - 8)
+    var nlLast = re.slice(nl.reEnd - 8, nl.reEnd)
+    var nlAfter = re.slice(nl.reEnd)
+
+    nlLast += nlAfter
+
+    // Handle nested stuff like *(*.js|!(*.json)), where open parens
+    // mean that we should *not* include the ) in the bit that is considered
+    // "after" the negated section.
+    var openParensBefore = nlBefore.split('(').length - 1
+    var cleanAfter = nlAfter
+    for (i = 0; i < openParensBefore; i++) {
+      cleanAfter = cleanAfter.replace(/\)[+*?]?/, '')
+    }
+    nlAfter = cleanAfter
+
+    var dollar = ''
+    if (nlAfter === '' && isSub !== SUBPARSE) {
+      dollar = '$'
+    }
+    var newRe = nlBefore + nlFirst + nlAfter + dollar + nlLast
+    re = newRe
+  }
+
+  // if the re is not "" at this point, then we need to make sure
+  // it doesn't match against an empty path part.
+  // Otherwise a/* will match a/, which it should not.
+  if (re !== '' && hasMagic) {
+    re = '(?=.)' + re
+  }
+
+  if (addPatternStart) {
+    re = patternStart + re
+  }
+
+  // parsing just a piece of a larger pattern.
+  if (isSub === SUBPARSE) {
+    return [re, hasMagic]
+  }
+
+  // skip the regexp for non-magical patterns
+  // unescape anything in it, though, so that it'll be
+  // an exact match against a file etc.
+  if (!hasMagic) {
+    return globUnescape(pattern)
+  }
+
+  var flags = options.nocase ? 'i' : ''
+  try {
+    var regExp = new RegExp('^' + re + '$', flags)
+  } catch (er) {
+    // If it was an invalid regular expression, then it can't match
+    // anything.  This trick looks for a character after the end of
+    // the string, which is of course impossible, except in multi-line
+    // mode, but it's not a /m regex.
+    return new RegExp('$.')
+  }
+
+  regExp._glob = pattern
+  regExp._src = re
+
+  return regExp
+}
+
+minimatch.makeRe = function (pattern, options) {
+  return new Minimatch(pattern, options || {}).makeRe()
+}
+
+Minimatch.prototype.makeRe = makeRe
+function makeRe () {
+  if (this.regexp || this.regexp === false) return this.regexp
+
+  // at this point, this.set is a 2d array of partial
+  // pattern strings, or "**".
+  //
+  // It's better to use .match().  This function shouldn't
+  // be used, really, but it's pretty convenient sometimes,
+  // when you just want to work with a regex.
+  var set = this.set
+
+  if (!set.length) {
+    this.regexp = false
+    return this.regexp
+  }
+  var options = this.options
+
+  var twoStar = options.noglobstar ? star
+    : options.dot ? twoStarDot
+    : twoStarNoDot
+  var flags = options.nocase ? 'i' : ''
+
+  var re = set.map(function (pattern) {
+    return pattern.map(function (p) {
+      return (p === GLOBSTAR) ? twoStar
+      : (typeof p === 'string') ? regExpEscape(p)
+      : p._src
+    }).join('\\\/')
+  }).join('|')
+
+  // must match entire pattern
+  // ending in a * or ** will make it less strict.
+  re = '^(?:' + re + ')$'
+
+  // can match anything, as long as it's not this.
+  if (this.negate) re = '^(?!' + re + ').*$'
+
+  try {
+    this.regexp = new RegExp(re, flags)
+  } catch (ex) {
+    this.regexp = false
+  }
+  return this.regexp
+}
+
+minimatch.match = function (list, pattern, options) {
+  options = options || {}
+  var mm = new Minimatch(pattern, options)
+  list = list.filter(function (f) {
+    return mm.match(f)
+  })
+  if (mm.options.nonull && !list.length) {
+    list.push(pattern)
+  }
+  return list
+}
+
+Minimatch.prototype.match = match
+function match (f, partial) {
+  this.debug('match', f, this.pattern)
+  // short-circuit in the case of busted things.
+  // comments, etc.
+  if (this.comment) return false
+  if (this.empty) return f === ''
+
+  if (f === '/' && partial) return true
+
+  var options = this.options
+
+  // windows: need to use /, not \
+  if (path.sep !== '/') {
+    f = f.split(path.sep).join('/')
+  }
+
+  // treat the test path as a set of pathparts.
+  f = f.split(slashSplit)
+  this.debug(this.pattern, 'split', f)
+
+  // just ONE of the pattern sets in this.set needs to match
+  // in order for it to be valid.  If negating, then just one
+  // match means that we have failed.
+  // Either way, return on the first hit.
+
+  var set = this.set
+  this.debug(this.pattern, 'set', set)
+
+  // Find the basename of the path by looking for the last non-empty segment
+  var filename
+  var i
+  for (i = f.length - 1; i >= 0; i--) {
+    filename = f[i]
+    if (filename) break
+  }
+
+  for (i = 0; i < set.length; i++) {
+    var pattern = set[i]
+    var file = f
+    if (options.matchBase && pattern.length === 1) {
+      file = [filename]
+    }
+    var hit = this.matchOne(file, pattern, partial)
+    if (hit) {
+      if (options.flipNegate) return true
+      return !this.negate
+    }
+  }
+
+  // didn't get any hits.  this is success if it's a negative
+  // pattern, failure otherwise.
+  if (options.flipNegate) return false
+  return this.negate
+}
+
+// set partial to true to test if, for example,
+// "/a/b" matches the start of "/*/b/*/d"
+// Partial means, if you run out of file before you run
+// out of pattern, then that's fine, as long as all
+// the parts match.
+Minimatch.prototype.matchOne = function (file, pattern, partial) {
+  var options = this.options
+
+  this.debug('matchOne',
+    { 'this': this, file: file, pattern: pattern })
+
+  this.debug('matchOne', file.length, pattern.length)
+
+  for (var fi = 0,
+      pi = 0,
+      fl = file.length,
+      pl = pattern.length
+      ; (fi < fl) && (pi < pl)
+      ; fi++, pi++) {
+    this.debug('matchOne loop')
+    var p = pattern[pi]
+    var f = file[fi]
+
+    this.debug(pattern, p, f)
+
+    // should be impossible.
+    // some invalid regexp stuff in the set.
+    if (p === false) return false
+
+    if (p === GLOBSTAR) {
+      this.debug('GLOBSTAR', [pattern, p, f])
+
+      // "**"
+      // a/**/b/**/c would match the following:
+      // a/b/x/y/z/c
+      // a/x/y/z/b/c
+      // a/b/x/b/x/c
+      // a/b/c
+      // To do this, take the rest of the pattern after
+      // the **, and see if it would match the file remainder.
+      // If so, return success.
+      // If not, the ** "swallows" a segment, and try again.
+      // This is recursively awful.
+      //
+      // a/**/b/**/c matching a/b/x/y/z/c
+      // - a matches a
+      // - doublestar
+      //   - matchOne(b/x/y/z/c, b/**/c)
+      //     - b matches b
+      //     - doublestar
+      //       - matchOne(x/y/z/c, c) -> no
+      //       - matchOne(y/z/c, c) -> no
+      //       - matchOne(z/c, c) -> no
+      //       - matchOne(c, c) yes, hit
+      var fr = fi
+      var pr = pi + 1
+      if (pr === pl) {
+        this.debug('** at the end')
+        // a ** at the end will just swallow the rest.
+        // We have found a match.
+        // however, it will not swallow /.x, unless
+        // options.dot is set.
+        // . and .. are *never* matched by **, for explosively
+        // exponential reasons.
+        for (; fi < fl; fi++) {
+          if (file[fi] === '.' || file[fi] === '..' ||
+            (!options.dot && file[fi].charAt(0) === '.')) return false
+        }
+        return true
+      }
+
+      // ok, let's see if we can swallow whatever we can.
+      while (fr < fl) {
+        var swallowee = file[fr]
+
+        this.debug('\nglobstar while', file, fr, pattern, pr, swallowee)
+
+        // XXX remove this slice.  Just pass the start index.
+        if (this.matchOne(file.slice(fr), pattern.slice(pr), partial)) {
+          this.debug('globstar found match!', fr, fl, swallowee)
+          // found a match.
+          return true
+        } else {
+          // can't swallow "." or ".." ever.
+          // can only swallow ".foo" when explicitly asked.
+          if (swallowee === '.' || swallowee === '..' ||
+            (!options.dot && swallowee.charAt(0) === '.')) {
+            this.debug('dot detected!', file, fr, pattern, pr)
+            break
+          }
+
+          // ** swallows a segment, and continue.
+          this.debug('globstar swallow a segment, and continue')
+          fr++
+        }
+      }
+
+      // no match was found.
+      // However, in partial mode, we can't say this is necessarily over.
+      // If there's more *pattern* left, then
+      if (partial) {
+        // ran out of file
+        this.debug('\n>>> no match, partial?', file, fr, pattern, pr)
+        if (fr === fl) return true
+      }
+      return false
+    }
+
+    // something other than **
+    // non-magic patterns just have to match exactly
+    // patterns with magic have been turned into regexps.
+    var hit
+    if (typeof p === 'string') {
+      if (options.nocase) {
+        hit = f.toLowerCase() === p.toLowerCase()
+      } else {
+        hit = f === p
+      }
+      this.debug('string match', p, f, hit)
+    } else {
+      hit = f.match(p)
+      this.debug('pattern match', p, f, hit)
+    }
+
+    if (!hit) return false
+  }
+
+  // Note: ending in / means that we'll get a final ""
+  // at the end of the pattern.  This can only match a
+  // corresponding "" at the end of the file.
+  // If the file ends in /, then it can only match a
+  // a pattern that ends in /, unless the pattern just
+  // doesn't have any more for it. But, a/b/ should *not*
+  // match "a/b/*", even though "" matches against the
+  // [^/]*? pattern, except in partial mode, where it might
+  // simply not be reached yet.
+  // However, a/b/ should still satisfy a/*
+
+  // now either we fell off the end of the pattern, or we're done.
+  if (fi === fl && pi === pl) {
+    // ran out of pattern and filename at the same time.
+    // an exact hit!
+    return true
+  } else if (fi === fl) {
+    // ran out of file, but still had pattern left.
+    // this is ok if we're doing the match as part of
+    // a glob fs traversal.
+    return partial
+  } else if (pi === pl) {
+    // ran out of pattern, still have file left.
+    // this is only acceptable if we're on the very last
+    // empty segment of a file with a trailing slash.
+    // a/* should match a/b/
+    var emptyFileEnd = (fi === fl - 1) && (file[fi] === '')
+    return emptyFileEnd
+  }
+
+  // should be unreachable.
+  throw new Error('wtf?')
+}
+
+// replace stuff like \* with *
+function globUnescape (s) {
+  return s.replace(/\\(.)/g, '$1')
+}
+
+function regExpEscape (s) {
+  return s.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')
+}
+
+
+/***/ }),
+
 /***/ "../../util/sugar/node_modules/node-libs-browser/node_modules/buffer/index.js":
 /*!**************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/node-libs-browser/node_modules/buffer/index.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/node-libs-browser/node_modules/buffer/index.js ***!
   \**************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -13335,7 +21357,7 @@ function isnan (val) {
 
 /***/ "../../util/sugar/node_modules/nth-check/compile.js":
 /*!************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/nth-check/compile.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/nth-check/compile.js ***!
   \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -13385,7 +21407,7 @@ function compile(parsed){
 
 /***/ "../../util/sugar/node_modules/nth-check/index.js":
 /*!**********************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/nth-check/index.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/nth-check/index.js ***!
   \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -13404,7 +21426,7 @@ module.exports.compile = compile;
 
 /***/ "../../util/sugar/node_modules/nth-check/parse.js":
 /*!**********************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/nth-check/parse.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/nth-check/parse.js ***!
   \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -13455,7 +21477,7 @@ function parse(formula){
 
 /***/ "../../util/sugar/node_modules/param-case/dist.es2015/index.js":
 /*!***********************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/param-case/dist.es2015/index.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/param-case/dist.es2015/index.js ***!
   \***********************************************************************************************************************/
 /*! exports provided: paramCase */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -13477,7 +21499,7 @@ function paramCase(input, options) {
 
 /***/ "../../util/sugar/node_modules/param-case/node_modules/dot-case/dist.es2015/index.js":
 /*!*********************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/param-case/node_modules/dot-case/dist.es2015/index.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/param-case/node_modules/dot-case/dist.es2015/index.js ***!
   \*********************************************************************************************************************************************/
 /*! exports provided: dotCase */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -13499,7 +21521,7 @@ function dotCase(input, options) {
 
 /***/ "../../util/sugar/node_modules/param-case/node_modules/lower-case/dist.es2015/index.js":
 /*!***********************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/param-case/node_modules/lower-case/dist.es2015/index.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/param-case/node_modules/lower-case/dist.es2015/index.js ***!
   \***********************************************************************************************************************************************/
 /*! exports provided: localeLowerCase, lowerCase */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -13561,7 +21583,7 @@ function lowerCase(str) {
 
 /***/ "../../util/sugar/node_modules/param-case/node_modules/no-case/dist.es2015/index.js":
 /*!********************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/param-case/node_modules/no-case/dist.es2015/index.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/param-case/node_modules/no-case/dist.es2015/index.js ***!
   \********************************************************************************************************************************************/
 /*! exports provided: noCase */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -13610,7 +21632,7 @@ function replace(input, re, value) {
 
 /***/ "../../util/sugar/node_modules/path-browserify/index.js":
 /*!****************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/path-browserify/index.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/path-browserify/index.js ***!
   \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -13922,9 +21944,2128 @@ var substr = 'ab'.substr(-1) === 'b'
 
 /***/ }),
 
+/***/ "../../util/sugar/node_modules/picomatch/index.js":
+/*!**********************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/picomatch/index.js ***!
+  \**********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = __webpack_require__(/*! ./lib/picomatch */ "../../util/sugar/node_modules/picomatch/lib/picomatch.js");
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/picomatch/lib/constants.js":
+/*!******************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/picomatch/lib/constants.js ***!
+  \******************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+const path = __webpack_require__(/*! path */ "../../util/sugar/node_modules/path-browserify/index.js");
+const WIN_SLASH = '\\\\/';
+const WIN_NO_SLASH = `[^${WIN_SLASH}]`;
+
+/**
+ * Posix glob regex
+ */
+
+const DOT_LITERAL = '\\.';
+const PLUS_LITERAL = '\\+';
+const QMARK_LITERAL = '\\?';
+const SLASH_LITERAL = '\\/';
+const ONE_CHAR = '(?=.)';
+const QMARK = '[^/]';
+const END_ANCHOR = `(?:${SLASH_LITERAL}|$)`;
+const START_ANCHOR = `(?:^|${SLASH_LITERAL})`;
+const DOTS_SLASH = `${DOT_LITERAL}{1,2}${END_ANCHOR}`;
+const NO_DOT = `(?!${DOT_LITERAL})`;
+const NO_DOTS = `(?!${START_ANCHOR}${DOTS_SLASH})`;
+const NO_DOT_SLASH = `(?!${DOT_LITERAL}{0,1}${END_ANCHOR})`;
+const NO_DOTS_SLASH = `(?!${DOTS_SLASH})`;
+const QMARK_NO_DOT = `[^.${SLASH_LITERAL}]`;
+const STAR = `${QMARK}*?`;
+
+const POSIX_CHARS = {
+  DOT_LITERAL,
+  PLUS_LITERAL,
+  QMARK_LITERAL,
+  SLASH_LITERAL,
+  ONE_CHAR,
+  QMARK,
+  END_ANCHOR,
+  DOTS_SLASH,
+  NO_DOT,
+  NO_DOTS,
+  NO_DOT_SLASH,
+  NO_DOTS_SLASH,
+  QMARK_NO_DOT,
+  STAR,
+  START_ANCHOR
+};
+
+/**
+ * Windows glob regex
+ */
+
+const WINDOWS_CHARS = {
+  ...POSIX_CHARS,
+
+  SLASH_LITERAL: `[${WIN_SLASH}]`,
+  QMARK: WIN_NO_SLASH,
+  STAR: `${WIN_NO_SLASH}*?`,
+  DOTS_SLASH: `${DOT_LITERAL}{1,2}(?:[${WIN_SLASH}]|$)`,
+  NO_DOT: `(?!${DOT_LITERAL})`,
+  NO_DOTS: `(?!(?:^|[${WIN_SLASH}])${DOT_LITERAL}{1,2}(?:[${WIN_SLASH}]|$))`,
+  NO_DOT_SLASH: `(?!${DOT_LITERAL}{0,1}(?:[${WIN_SLASH}]|$))`,
+  NO_DOTS_SLASH: `(?!${DOT_LITERAL}{1,2}(?:[${WIN_SLASH}]|$))`,
+  QMARK_NO_DOT: `[^.${WIN_SLASH}]`,
+  START_ANCHOR: `(?:^|[${WIN_SLASH}])`,
+  END_ANCHOR: `(?:[${WIN_SLASH}]|$)`
+};
+
+/**
+ * POSIX Bracket Regex
+ */
+
+const POSIX_REGEX_SOURCE = {
+  alnum: 'a-zA-Z0-9',
+  alpha: 'a-zA-Z',
+  ascii: '\\x00-\\x7F',
+  blank: ' \\t',
+  cntrl: '\\x00-\\x1F\\x7F',
+  digit: '0-9',
+  graph: '\\x21-\\x7E',
+  lower: 'a-z',
+  print: '\\x20-\\x7E ',
+  punct: '\\-!"#$%&\'()\\*+,./:;<=>?@[\\]^_`{|}~',
+  space: ' \\t\\r\\n\\v\\f',
+  upper: 'A-Z',
+  word: 'A-Za-z0-9_',
+  xdigit: 'A-Fa-f0-9'
+};
+
+module.exports = {
+  MAX_LENGTH: 1024 * 64,
+  POSIX_REGEX_SOURCE,
+
+  // regular expressions
+  REGEX_BACKSLASH: /\\(?![*+?^${}(|)[\]])/g,
+  REGEX_NON_SPECIAL_CHARS: /^[^@![\].,$*+?^{}()|\\/]+/,
+  REGEX_SPECIAL_CHARS: /[-*+?.^${}(|)[\]]/,
+  REGEX_SPECIAL_CHARS_BACKREF: /(\\?)((\W)(\3*))/g,
+  REGEX_SPECIAL_CHARS_GLOBAL: /([-*+?.^${}(|)[\]])/g,
+  REGEX_REMOVE_BACKSLASH: /(?:\[.*?[^\\]\]|\\(?=.))/g,
+
+  // Replace globs with equivalent patterns to reduce parsing time.
+  REPLACEMENTS: {
+    '***': '*',
+    '**/**': '**',
+    '**/**/**': '**'
+  },
+
+  // Digits
+  CHAR_0: 48, /* 0 */
+  CHAR_9: 57, /* 9 */
+
+  // Alphabet chars.
+  CHAR_UPPERCASE_A: 65, /* A */
+  CHAR_LOWERCASE_A: 97, /* a */
+  CHAR_UPPERCASE_Z: 90, /* Z */
+  CHAR_LOWERCASE_Z: 122, /* z */
+
+  CHAR_LEFT_PARENTHESES: 40, /* ( */
+  CHAR_RIGHT_PARENTHESES: 41, /* ) */
+
+  CHAR_ASTERISK: 42, /* * */
+
+  // Non-alphabetic chars.
+  CHAR_AMPERSAND: 38, /* & */
+  CHAR_AT: 64, /* @ */
+  CHAR_BACKWARD_SLASH: 92, /* \ */
+  CHAR_CARRIAGE_RETURN: 13, /* \r */
+  CHAR_CIRCUMFLEX_ACCENT: 94, /* ^ */
+  CHAR_COLON: 58, /* : */
+  CHAR_COMMA: 44, /* , */
+  CHAR_DOT: 46, /* . */
+  CHAR_DOUBLE_QUOTE: 34, /* " */
+  CHAR_EQUAL: 61, /* = */
+  CHAR_EXCLAMATION_MARK: 33, /* ! */
+  CHAR_FORM_FEED: 12, /* \f */
+  CHAR_FORWARD_SLASH: 47, /* / */
+  CHAR_GRAVE_ACCENT: 96, /* ` */
+  CHAR_HASH: 35, /* # */
+  CHAR_HYPHEN_MINUS: 45, /* - */
+  CHAR_LEFT_ANGLE_BRACKET: 60, /* < */
+  CHAR_LEFT_CURLY_BRACE: 123, /* { */
+  CHAR_LEFT_SQUARE_BRACKET: 91, /* [ */
+  CHAR_LINE_FEED: 10, /* \n */
+  CHAR_NO_BREAK_SPACE: 160, /* \u00A0 */
+  CHAR_PERCENT: 37, /* % */
+  CHAR_PLUS: 43, /* + */
+  CHAR_QUESTION_MARK: 63, /* ? */
+  CHAR_RIGHT_ANGLE_BRACKET: 62, /* > */
+  CHAR_RIGHT_CURLY_BRACE: 125, /* } */
+  CHAR_RIGHT_SQUARE_BRACKET: 93, /* ] */
+  CHAR_SEMICOLON: 59, /* ; */
+  CHAR_SINGLE_QUOTE: 39, /* ' */
+  CHAR_SPACE: 32, /*   */
+  CHAR_TAB: 9, /* \t */
+  CHAR_UNDERSCORE: 95, /* _ */
+  CHAR_VERTICAL_LINE: 124, /* | */
+  CHAR_ZERO_WIDTH_NOBREAK_SPACE: 65279, /* \uFEFF */
+
+  SEP: path.sep,
+
+  /**
+   * Create EXTGLOB_CHARS
+   */
+
+  extglobChars(chars) {
+    return {
+      '!': { type: 'negate', open: '(?:(?!(?:', close: `))${chars.STAR})` },
+      '?': { type: 'qmark', open: '(?:', close: ')?' },
+      '+': { type: 'plus', open: '(?:', close: ')+' },
+      '*': { type: 'star', open: '(?:', close: ')*' },
+      '@': { type: 'at', open: '(?:', close: ')' }
+    };
+  },
+
+  /**
+   * Create GLOB_CHARS
+   */
+
+  globChars(win32) {
+    return win32 === true ? WINDOWS_CHARS : POSIX_CHARS;
+  }
+};
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/picomatch/lib/parse.js":
+/*!**************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/picomatch/lib/parse.js ***!
+  \**************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+const constants = __webpack_require__(/*! ./constants */ "../../util/sugar/node_modules/picomatch/lib/constants.js");
+const utils = __webpack_require__(/*! ./utils */ "../../util/sugar/node_modules/picomatch/lib/utils.js");
+
+/**
+ * Constants
+ */
+
+const {
+  MAX_LENGTH,
+  POSIX_REGEX_SOURCE,
+  REGEX_NON_SPECIAL_CHARS,
+  REGEX_SPECIAL_CHARS_BACKREF,
+  REPLACEMENTS
+} = constants;
+
+/**
+ * Helpers
+ */
+
+const expandRange = (args, options) => {
+  if (typeof options.expandRange === 'function') {
+    return options.expandRange(...args, options);
+  }
+
+  args.sort();
+  const value = `[${args.join('-')}]`;
+
+  try {
+    /* eslint-disable-next-line no-new */
+    new RegExp(value);
+  } catch (ex) {
+    return args.map(v => utils.escapeRegex(v)).join('..');
+  }
+
+  return value;
+};
+
+/**
+ * Create the message for a syntax error
+ */
+
+const syntaxError = (type, char) => {
+  return `Missing ${type}: "${char}" - use "\\\\${char}" to match literal characters`;
+};
+
+/**
+ * Parse the given input string.
+ * @param {String} input
+ * @param {Object} options
+ * @return {Object}
+ */
+
+const parse = (input, options) => {
+  if (typeof input !== 'string') {
+    throw new TypeError('Expected a string');
+  }
+
+  input = REPLACEMENTS[input] || input;
+
+  const opts = { ...options };
+  const max = typeof opts.maxLength === 'number' ? Math.min(MAX_LENGTH, opts.maxLength) : MAX_LENGTH;
+
+  let len = input.length;
+  if (len > max) {
+    throw new SyntaxError(`Input length: ${len}, exceeds maximum allowed length: ${max}`);
+  }
+
+  const bos = { type: 'bos', value: '', output: opts.prepend || '' };
+  const tokens = [bos];
+
+  const capture = opts.capture ? '' : '?:';
+  const win32 = utils.isWindows(options);
+
+  // create constants based on platform, for windows or posix
+  const PLATFORM_CHARS = constants.globChars(win32);
+  const EXTGLOB_CHARS = constants.extglobChars(PLATFORM_CHARS);
+
+  const {
+    DOT_LITERAL,
+    PLUS_LITERAL,
+    SLASH_LITERAL,
+    ONE_CHAR,
+    DOTS_SLASH,
+    NO_DOT,
+    NO_DOT_SLASH,
+    NO_DOTS_SLASH,
+    QMARK,
+    QMARK_NO_DOT,
+    STAR,
+    START_ANCHOR
+  } = PLATFORM_CHARS;
+
+  const globstar = (opts) => {
+    return `(${capture}(?:(?!${START_ANCHOR}${opts.dot ? DOTS_SLASH : DOT_LITERAL}).)*?)`;
+  };
+
+  const nodot = opts.dot ? '' : NO_DOT;
+  const qmarkNoDot = opts.dot ? QMARK : QMARK_NO_DOT;
+  let star = opts.bash === true ? globstar(opts) : STAR;
+
+  if (opts.capture) {
+    star = `(${star})`;
+  }
+
+  // minimatch options support
+  if (typeof opts.noext === 'boolean') {
+    opts.noextglob = opts.noext;
+  }
+
+  const state = {
+    input,
+    index: -1,
+    start: 0,
+    dot: opts.dot === true,
+    consumed: '',
+    output: '',
+    prefix: '',
+    backtrack: false,
+    negated: false,
+    brackets: 0,
+    braces: 0,
+    parens: 0,
+    quotes: 0,
+    globstar: false,
+    tokens
+  };
+
+  input = utils.removePrefix(input, state);
+  len = input.length;
+
+  const extglobs = [];
+  const braces = [];
+  const stack = [];
+  let prev = bos;
+  let value;
+
+  /**
+   * Tokenizing helpers
+   */
+
+  const eos = () => state.index === len - 1;
+  const peek = state.peek = (n = 1) => input[state.index + n];
+  const advance = state.advance = () => input[++state.index];
+  const remaining = () => input.slice(state.index + 1);
+  const consume = (value = '', num = 0) => {
+    state.consumed += value;
+    state.index += num;
+  };
+  const append = token => {
+    state.output += token.output != null ? token.output : token.value;
+    consume(token.value);
+  };
+
+  const negate = () => {
+    let count = 1;
+
+    while (peek() === '!' && (peek(2) !== '(' || peek(3) === '?')) {
+      advance();
+      state.start++;
+      count++;
+    }
+
+    if (count % 2 === 0) {
+      return false;
+    }
+
+    state.negated = true;
+    state.start++;
+    return true;
+  };
+
+  const increment = type => {
+    state[type]++;
+    stack.push(type);
+  };
+
+  const decrement = type => {
+    state[type]--;
+    stack.pop();
+  };
+
+  /**
+   * Push tokens onto the tokens array. This helper speeds up
+   * tokenizing by 1) helping us avoid backtracking as much as possible,
+   * and 2) helping us avoid creating extra tokens when consecutive
+   * characters are plain text. This improves performance and simplifies
+   * lookbehinds.
+   */
+
+  const push = tok => {
+    if (prev.type === 'globstar') {
+      const isBrace = state.braces > 0 && (tok.type === 'comma' || tok.type === 'brace');
+      const isExtglob = tok.extglob === true || (extglobs.length && (tok.type === 'pipe' || tok.type === 'paren'));
+
+      if (tok.type !== 'slash' && tok.type !== 'paren' && !isBrace && !isExtglob) {
+        state.output = state.output.slice(0, -prev.output.length);
+        prev.type = 'star';
+        prev.value = '*';
+        prev.output = star;
+        state.output += prev.output;
+      }
+    }
+
+    if (extglobs.length && tok.type !== 'paren' && !EXTGLOB_CHARS[tok.value]) {
+      extglobs[extglobs.length - 1].inner += tok.value;
+    }
+
+    if (tok.value || tok.output) append(tok);
+    if (prev && prev.type === 'text' && tok.type === 'text') {
+      prev.value += tok.value;
+      prev.output = (prev.output || '') + tok.value;
+      return;
+    }
+
+    tok.prev = prev;
+    tokens.push(tok);
+    prev = tok;
+  };
+
+  const extglobOpen = (type, value) => {
+    const token = { ...EXTGLOB_CHARS[value], conditions: 1, inner: '' };
+
+    token.prev = prev;
+    token.parens = state.parens;
+    token.output = state.output;
+    const output = (opts.capture ? '(' : '') + token.open;
+
+    increment('parens');
+    push({ type, value, output: state.output ? '' : ONE_CHAR });
+    push({ type: 'paren', extglob: true, value: advance(), output });
+    extglobs.push(token);
+  };
+
+  const extglobClose = token => {
+    let output = token.close + (opts.capture ? ')' : '');
+
+    if (token.type === 'negate') {
+      let extglobStar = star;
+
+      if (token.inner && token.inner.length > 1 && token.inner.includes('/')) {
+        extglobStar = globstar(opts);
+      }
+
+      if (extglobStar !== star || eos() || /^\)+$/.test(remaining())) {
+        output = token.close = `)$))${extglobStar}`;
+      }
+
+      if (token.prev.type === 'bos' && eos()) {
+        state.negatedExtglob = true;
+      }
+    }
+
+    push({ type: 'paren', extglob: true, value, output });
+    decrement('parens');
+  };
+
+  /**
+   * Fast paths
+   */
+
+  if (opts.fastpaths !== false && !/(^[*!]|[/()[\]{}"])/.test(input)) {
+    let backslashes = false;
+
+    let output = input.replace(REGEX_SPECIAL_CHARS_BACKREF, (m, esc, chars, first, rest, index) => {
+      if (first === '\\') {
+        backslashes = true;
+        return m;
+      }
+
+      if (first === '?') {
+        if (esc) {
+          return esc + first + (rest ? QMARK.repeat(rest.length) : '');
+        }
+        if (index === 0) {
+          return qmarkNoDot + (rest ? QMARK.repeat(rest.length) : '');
+        }
+        return QMARK.repeat(chars.length);
+      }
+
+      if (first === '.') {
+        return DOT_LITERAL.repeat(chars.length);
+      }
+
+      if (first === '*') {
+        if (esc) {
+          return esc + first + (rest ? star : '');
+        }
+        return star;
+      }
+      return esc ? m : `\\${m}`;
+    });
+
+    if (backslashes === true) {
+      if (opts.unescape === true) {
+        output = output.replace(/\\/g, '');
+      } else {
+        output = output.replace(/\\+/g, m => {
+          return m.length % 2 === 0 ? '\\\\' : (m ? '\\' : '');
+        });
+      }
+    }
+
+    if (output === input && opts.contains === true) {
+      state.output = input;
+      return state;
+    }
+
+    state.output = utils.wrapOutput(output, state, options);
+    return state;
+  }
+
+  /**
+   * Tokenize input until we reach end-of-string
+   */
+
+  while (!eos()) {
+    value = advance();
+
+    if (value === '\u0000') {
+      continue;
+    }
+
+    /**
+     * Escaped characters
+     */
+
+    if (value === '\\') {
+      const next = peek();
+
+      if (next === '/' && opts.bash !== true) {
+        continue;
+      }
+
+      if (next === '.' || next === ';') {
+        continue;
+      }
+
+      if (!next) {
+        value += '\\';
+        push({ type: 'text', value });
+        continue;
+      }
+
+      // collapse slashes to reduce potential for exploits
+      const match = /^\\+/.exec(remaining());
+      let slashes = 0;
+
+      if (match && match[0].length > 2) {
+        slashes = match[0].length;
+        state.index += slashes;
+        if (slashes % 2 !== 0) {
+          value += '\\';
+        }
+      }
+
+      if (opts.unescape === true) {
+        value = advance() || '';
+      } else {
+        value += advance() || '';
+      }
+
+      if (state.brackets === 0) {
+        push({ type: 'text', value });
+        continue;
+      }
+    }
+
+    /**
+     * If we're inside a regex character class, continue
+     * until we reach the closing bracket.
+     */
+
+    if (state.brackets > 0 && (value !== ']' || prev.value === '[' || prev.value === '[^')) {
+      if (opts.posix !== false && value === ':') {
+        const inner = prev.value.slice(1);
+        if (inner.includes('[')) {
+          prev.posix = true;
+
+          if (inner.includes(':')) {
+            const idx = prev.value.lastIndexOf('[');
+            const pre = prev.value.slice(0, idx);
+            const rest = prev.value.slice(idx + 2);
+            const posix = POSIX_REGEX_SOURCE[rest];
+            if (posix) {
+              prev.value = pre + posix;
+              state.backtrack = true;
+              advance();
+
+              if (!bos.output && tokens.indexOf(prev) === 1) {
+                bos.output = ONE_CHAR;
+              }
+              continue;
+            }
+          }
+        }
+      }
+
+      if ((value === '[' && peek() !== ':') || (value === '-' && peek() === ']')) {
+        value = `\\${value}`;
+      }
+
+      if (value === ']' && (prev.value === '[' || prev.value === '[^')) {
+        value = `\\${value}`;
+      }
+
+      if (opts.posix === true && value === '!' && prev.value === '[') {
+        value = '^';
+      }
+
+      prev.value += value;
+      append({ value });
+      continue;
+    }
+
+    /**
+     * If we're inside a quoted string, continue
+     * until we reach the closing double quote.
+     */
+
+    if (state.quotes === 1 && value !== '"') {
+      value = utils.escapeRegex(value);
+      prev.value += value;
+      append({ value });
+      continue;
+    }
+
+    /**
+     * Double quotes
+     */
+
+    if (value === '"') {
+      state.quotes = state.quotes === 1 ? 0 : 1;
+      if (opts.keepQuotes === true) {
+        push({ type: 'text', value });
+      }
+      continue;
+    }
+
+    /**
+     * Parentheses
+     */
+
+    if (value === '(') {
+      increment('parens');
+      push({ type: 'paren', value });
+      continue;
+    }
+
+    if (value === ')') {
+      if (state.parens === 0 && opts.strictBrackets === true) {
+        throw new SyntaxError(syntaxError('opening', '('));
+      }
+
+      const extglob = extglobs[extglobs.length - 1];
+      if (extglob && state.parens === extglob.parens + 1) {
+        extglobClose(extglobs.pop());
+        continue;
+      }
+
+      push({ type: 'paren', value, output: state.parens ? ')' : '\\)' });
+      decrement('parens');
+      continue;
+    }
+
+    /**
+     * Square brackets
+     */
+
+    if (value === '[') {
+      if (opts.nobracket === true || !remaining().includes(']')) {
+        if (opts.nobracket !== true && opts.strictBrackets === true) {
+          throw new SyntaxError(syntaxError('closing', ']'));
+        }
+
+        value = `\\${value}`;
+      } else {
+        increment('brackets');
+      }
+
+      push({ type: 'bracket', value });
+      continue;
+    }
+
+    if (value === ']') {
+      if (opts.nobracket === true || (prev && prev.type === 'bracket' && prev.value.length === 1)) {
+        push({ type: 'text', value, output: `\\${value}` });
+        continue;
+      }
+
+      if (state.brackets === 0) {
+        if (opts.strictBrackets === true) {
+          throw new SyntaxError(syntaxError('opening', '['));
+        }
+
+        push({ type: 'text', value, output: `\\${value}` });
+        continue;
+      }
+
+      decrement('brackets');
+
+      const prevValue = prev.value.slice(1);
+      if (prev.posix !== true && prevValue[0] === '^' && !prevValue.includes('/')) {
+        value = `/${value}`;
+      }
+
+      prev.value += value;
+      append({ value });
+
+      // when literal brackets are explicitly disabled
+      // assume we should match with a regex character class
+      if (opts.literalBrackets === false || utils.hasRegexChars(prevValue)) {
+        continue;
+      }
+
+      const escaped = utils.escapeRegex(prev.value);
+      state.output = state.output.slice(0, -prev.value.length);
+
+      // when literal brackets are explicitly enabled
+      // assume we should escape the brackets to match literal characters
+      if (opts.literalBrackets === true) {
+        state.output += escaped;
+        prev.value = escaped;
+        continue;
+      }
+
+      // when the user specifies nothing, try to match both
+      prev.value = `(${capture}${escaped}|${prev.value})`;
+      state.output += prev.value;
+      continue;
+    }
+
+    /**
+     * Braces
+     */
+
+    if (value === '{' && opts.nobrace !== true) {
+      increment('braces');
+
+      const open = {
+        type: 'brace',
+        value,
+        output: '(',
+        outputIndex: state.output.length,
+        tokensIndex: state.tokens.length
+      };
+
+      braces.push(open);
+      push(open);
+      continue;
+    }
+
+    if (value === '}') {
+      const brace = braces[braces.length - 1];
+
+      if (opts.nobrace === true || !brace) {
+        push({ type: 'text', value, output: value });
+        continue;
+      }
+
+      let output = ')';
+
+      if (brace.dots === true) {
+        const arr = tokens.slice();
+        const range = [];
+
+        for (let i = arr.length - 1; i >= 0; i--) {
+          tokens.pop();
+          if (arr[i].type === 'brace') {
+            break;
+          }
+          if (arr[i].type !== 'dots') {
+            range.unshift(arr[i].value);
+          }
+        }
+
+        output = expandRange(range, opts);
+        state.backtrack = true;
+      }
+
+      if (brace.comma !== true && brace.dots !== true) {
+        const out = state.output.slice(0, brace.outputIndex);
+        const toks = state.tokens.slice(brace.tokensIndex);
+        brace.value = brace.output = '\\{';
+        value = output = '\\}';
+        state.output = out;
+        for (const t of toks) {
+          state.output += (t.output || t.value);
+        }
+      }
+
+      push({ type: 'brace', value, output });
+      decrement('braces');
+      braces.pop();
+      continue;
+    }
+
+    /**
+     * Pipes
+     */
+
+    if (value === '|') {
+      if (extglobs.length > 0) {
+        extglobs[extglobs.length - 1].conditions++;
+      }
+      push({ type: 'text', value });
+      continue;
+    }
+
+    /**
+     * Commas
+     */
+
+    if (value === ',') {
+      let output = value;
+
+      const brace = braces[braces.length - 1];
+      if (brace && stack[stack.length - 1] === 'braces') {
+        brace.comma = true;
+        output = '|';
+      }
+
+      push({ type: 'comma', value, output });
+      continue;
+    }
+
+    /**
+     * Slashes
+     */
+
+    if (value === '/') {
+      // if the beginning of the glob is "./", advance the start
+      // to the current index, and don't add the "./" characters
+      // to the state. This greatly simplifies lookbehinds when
+      // checking for BOS characters like "!" and "." (not "./")
+      if (prev.type === 'dot' && state.index === state.start + 1) {
+        state.start = state.index + 1;
+        state.consumed = '';
+        state.output = '';
+        tokens.pop();
+        prev = bos; // reset "prev" to the first token
+        continue;
+      }
+
+      push({ type: 'slash', value, output: SLASH_LITERAL });
+      continue;
+    }
+
+    /**
+     * Dots
+     */
+
+    if (value === '.') {
+      if (state.braces > 0 && prev.type === 'dot') {
+        if (prev.value === '.') prev.output = DOT_LITERAL;
+        const brace = braces[braces.length - 1];
+        prev.type = 'dots';
+        prev.output += value;
+        prev.value += value;
+        brace.dots = true;
+        continue;
+      }
+
+      if ((state.braces + state.parens) === 0 && prev.type !== 'bos' && prev.type !== 'slash') {
+        push({ type: 'text', value, output: DOT_LITERAL });
+        continue;
+      }
+
+      push({ type: 'dot', value, output: DOT_LITERAL });
+      continue;
+    }
+
+    /**
+     * Question marks
+     */
+
+    if (value === '?') {
+      const isGroup = prev && prev.value === '(';
+      if (!isGroup && opts.noextglob !== true && peek() === '(' && peek(2) !== '?') {
+        extglobOpen('qmark', value);
+        continue;
+      }
+
+      if (prev && prev.type === 'paren') {
+        const next = peek();
+        let output = value;
+
+        if (next === '<' && !utils.supportsLookbehinds()) {
+          throw new Error('Node.js v10 or higher is required for regex lookbehinds');
+        }
+
+        if ((prev.value === '(' && !/[!=<:]/.test(next)) || (next === '<' && !/<([!=]|\w+>)/.test(remaining()))) {
+          output = `\\${value}`;
+        }
+
+        push({ type: 'text', value, output });
+        continue;
+      }
+
+      if (opts.dot !== true && (prev.type === 'slash' || prev.type === 'bos')) {
+        push({ type: 'qmark', value, output: QMARK_NO_DOT });
+        continue;
+      }
+
+      push({ type: 'qmark', value, output: QMARK });
+      continue;
+    }
+
+    /**
+     * Exclamation
+     */
+
+    if (value === '!') {
+      if (opts.noextglob !== true && peek() === '(') {
+        if (peek(2) !== '?' || !/[!=<:]/.test(peek(3))) {
+          extglobOpen('negate', value);
+          continue;
+        }
+      }
+
+      if (opts.nonegate !== true && state.index === 0) {
+        negate();
+        continue;
+      }
+    }
+
+    /**
+     * Plus
+     */
+
+    if (value === '+') {
+      if (opts.noextglob !== true && peek() === '(' && peek(2) !== '?') {
+        extglobOpen('plus', value);
+        continue;
+      }
+
+      if ((prev && prev.value === '(') || opts.regex === false) {
+        push({ type: 'plus', value, output: PLUS_LITERAL });
+        continue;
+      }
+
+      if ((prev && (prev.type === 'bracket' || prev.type === 'paren' || prev.type === 'brace')) || state.parens > 0) {
+        push({ type: 'plus', value });
+        continue;
+      }
+
+      push({ type: 'plus', value: PLUS_LITERAL });
+      continue;
+    }
+
+    /**
+     * Plain text
+     */
+
+    if (value === '@') {
+      if (opts.noextglob !== true && peek() === '(' && peek(2) !== '?') {
+        push({ type: 'at', extglob: true, value, output: '' });
+        continue;
+      }
+
+      push({ type: 'text', value });
+      continue;
+    }
+
+    /**
+     * Plain text
+     */
+
+    if (value !== '*') {
+      if (value === '$' || value === '^') {
+        value = `\\${value}`;
+      }
+
+      const match = REGEX_NON_SPECIAL_CHARS.exec(remaining());
+      if (match) {
+        value += match[0];
+        state.index += match[0].length;
+      }
+
+      push({ type: 'text', value });
+      continue;
+    }
+
+    /**
+     * Stars
+     */
+
+    if (prev && (prev.type === 'globstar' || prev.star === true)) {
+      prev.type = 'star';
+      prev.star = true;
+      prev.value += value;
+      prev.output = star;
+      state.backtrack = true;
+      state.globstar = true;
+      consume(value);
+      continue;
+    }
+
+    let rest = remaining();
+    if (opts.noextglob !== true && /^\([^?]/.test(rest)) {
+      extglobOpen('star', value);
+      continue;
+    }
+
+    if (prev.type === 'star') {
+      if (opts.noglobstar === true) {
+        consume(value);
+        continue;
+      }
+
+      const prior = prev.prev;
+      const before = prior.prev;
+      const isStart = prior.type === 'slash' || prior.type === 'bos';
+      const afterStar = before && (before.type === 'star' || before.type === 'globstar');
+
+      if (opts.bash === true && (!isStart || (rest[0] && rest[0] !== '/'))) {
+        push({ type: 'star', value, output: '' });
+        continue;
+      }
+
+      const isBrace = state.braces > 0 && (prior.type === 'comma' || prior.type === 'brace');
+      const isExtglob = extglobs.length && (prior.type === 'pipe' || prior.type === 'paren');
+      if (!isStart && prior.type !== 'paren' && !isBrace && !isExtglob) {
+        push({ type: 'star', value, output: '' });
+        continue;
+      }
+
+      // strip consecutive `/**/`
+      while (rest.slice(0, 3) === '/**') {
+        const after = input[state.index + 4];
+        if (after && after !== '/') {
+          break;
+        }
+        rest = rest.slice(3);
+        consume('/**', 3);
+      }
+
+      if (prior.type === 'bos' && eos()) {
+        prev.type = 'globstar';
+        prev.value += value;
+        prev.output = globstar(opts);
+        state.output = prev.output;
+        state.globstar = true;
+        consume(value);
+        continue;
+      }
+
+      if (prior.type === 'slash' && prior.prev.type !== 'bos' && !afterStar && eos()) {
+        state.output = state.output.slice(0, -(prior.output + prev.output).length);
+        prior.output = `(?:${prior.output}`;
+
+        prev.type = 'globstar';
+        prev.output = globstar(opts) + (opts.strictSlashes ? ')' : '|$)');
+        prev.value += value;
+        state.globstar = true;
+        state.output += prior.output + prev.output;
+        consume(value);
+        continue;
+      }
+
+      if (prior.type === 'slash' && prior.prev.type !== 'bos' && rest[0] === '/') {
+        const end = rest[1] !== void 0 ? '|$' : '';
+
+        state.output = state.output.slice(0, -(prior.output + prev.output).length);
+        prior.output = `(?:${prior.output}`;
+
+        prev.type = 'globstar';
+        prev.output = `${globstar(opts)}${SLASH_LITERAL}|${SLASH_LITERAL}${end})`;
+        prev.value += value;
+
+        state.output += prior.output + prev.output;
+        state.globstar = true;
+
+        consume(value + advance());
+
+        push({ type: 'slash', value: '/', output: '' });
+        continue;
+      }
+
+      if (prior.type === 'bos' && rest[0] === '/') {
+        prev.type = 'globstar';
+        prev.value += value;
+        prev.output = `(?:^|${SLASH_LITERAL}|${globstar(opts)}${SLASH_LITERAL})`;
+        state.output = prev.output;
+        state.globstar = true;
+        consume(value + advance());
+        push({ type: 'slash', value: '/', output: '' });
+        continue;
+      }
+
+      // remove single star from output
+      state.output = state.output.slice(0, -prev.output.length);
+
+      // reset previous token to globstar
+      prev.type = 'globstar';
+      prev.output = globstar(opts);
+      prev.value += value;
+
+      // reset output with globstar
+      state.output += prev.output;
+      state.globstar = true;
+      consume(value);
+      continue;
+    }
+
+    const token = { type: 'star', value, output: star };
+
+    if (opts.bash === true) {
+      token.output = '.*?';
+      if (prev.type === 'bos' || prev.type === 'slash') {
+        token.output = nodot + token.output;
+      }
+      push(token);
+      continue;
+    }
+
+    if (prev && (prev.type === 'bracket' || prev.type === 'paren') && opts.regex === true) {
+      token.output = value;
+      push(token);
+      continue;
+    }
+
+    if (state.index === state.start || prev.type === 'slash' || prev.type === 'dot') {
+      if (prev.type === 'dot') {
+        state.output += NO_DOT_SLASH;
+        prev.output += NO_DOT_SLASH;
+
+      } else if (opts.dot === true) {
+        state.output += NO_DOTS_SLASH;
+        prev.output += NO_DOTS_SLASH;
+
+      } else {
+        state.output += nodot;
+        prev.output += nodot;
+      }
+
+      if (peek() !== '*') {
+        state.output += ONE_CHAR;
+        prev.output += ONE_CHAR;
+      }
+    }
+
+    push(token);
+  }
+
+  while (state.brackets > 0) {
+    if (opts.strictBrackets === true) throw new SyntaxError(syntaxError('closing', ']'));
+    state.output = utils.escapeLast(state.output, '[');
+    decrement('brackets');
+  }
+
+  while (state.parens > 0) {
+    if (opts.strictBrackets === true) throw new SyntaxError(syntaxError('closing', ')'));
+    state.output = utils.escapeLast(state.output, '(');
+    decrement('parens');
+  }
+
+  while (state.braces > 0) {
+    if (opts.strictBrackets === true) throw new SyntaxError(syntaxError('closing', '}'));
+    state.output = utils.escapeLast(state.output, '{');
+    decrement('braces');
+  }
+
+  if (opts.strictSlashes !== true && (prev.type === 'star' || prev.type === 'bracket')) {
+    push({ type: 'maybe_slash', value: '', output: `${SLASH_LITERAL}?` });
+  }
+
+  // rebuild the output if we had to backtrack at any point
+  if (state.backtrack === true) {
+    state.output = '';
+
+    for (const token of state.tokens) {
+      state.output += token.output != null ? token.output : token.value;
+
+      if (token.suffix) {
+        state.output += token.suffix;
+      }
+    }
+  }
+
+  return state;
+};
+
+/**
+ * Fast paths for creating regular expressions for common glob patterns.
+ * This can significantly speed up processing and has very little downside
+ * impact when none of the fast paths match.
+ */
+
+parse.fastpaths = (input, options) => {
+  const opts = { ...options };
+  const max = typeof opts.maxLength === 'number' ? Math.min(MAX_LENGTH, opts.maxLength) : MAX_LENGTH;
+  const len = input.length;
+  if (len > max) {
+    throw new SyntaxError(`Input length: ${len}, exceeds maximum allowed length: ${max}`);
+  }
+
+  input = REPLACEMENTS[input] || input;
+  const win32 = utils.isWindows(options);
+
+  // create constants based on platform, for windows or posix
+  const {
+    DOT_LITERAL,
+    SLASH_LITERAL,
+    ONE_CHAR,
+    DOTS_SLASH,
+    NO_DOT,
+    NO_DOTS,
+    NO_DOTS_SLASH,
+    STAR,
+    START_ANCHOR
+  } = constants.globChars(win32);
+
+  const nodot = opts.dot ? NO_DOTS : NO_DOT;
+  const slashDot = opts.dot ? NO_DOTS_SLASH : NO_DOT;
+  const capture = opts.capture ? '' : '?:';
+  const state = { negated: false, prefix: '' };
+  let star = opts.bash === true ? '.*?' : STAR;
+
+  if (opts.capture) {
+    star = `(${star})`;
+  }
+
+  const globstar = (opts) => {
+    if (opts.noglobstar === true) return star;
+    return `(${capture}(?:(?!${START_ANCHOR}${opts.dot ? DOTS_SLASH : DOT_LITERAL}).)*?)`;
+  };
+
+  const create = str => {
+    switch (str) {
+      case '*':
+        return `${nodot}${ONE_CHAR}${star}`;
+
+      case '.*':
+        return `${DOT_LITERAL}${ONE_CHAR}${star}`;
+
+      case '*.*':
+        return `${nodot}${star}${DOT_LITERAL}${ONE_CHAR}${star}`;
+
+      case '*/*':
+        return `${nodot}${star}${SLASH_LITERAL}${ONE_CHAR}${slashDot}${star}`;
+
+      case '**':
+        return nodot + globstar(opts);
+
+      case '**/*':
+        return `(?:${nodot}${globstar(opts)}${SLASH_LITERAL})?${slashDot}${ONE_CHAR}${star}`;
+
+      case '**/*.*':
+        return `(?:${nodot}${globstar(opts)}${SLASH_LITERAL})?${slashDot}${star}${DOT_LITERAL}${ONE_CHAR}${star}`;
+
+      case '**/.*':
+        return `(?:${nodot}${globstar(opts)}${SLASH_LITERAL})?${DOT_LITERAL}${ONE_CHAR}${star}`;
+
+      default: {
+        const match = /^(.*?)\.(\w+)$/.exec(str);
+        if (!match) return;
+
+        const source = create(match[1]);
+        if (!source) return;
+
+        return source + DOT_LITERAL + match[2];
+      }
+    }
+  };
+
+  const output = utils.removePrefix(input, state);
+  let source = create(output);
+
+  if (source && opts.strictSlashes !== true) {
+    source += `${SLASH_LITERAL}?`;
+  }
+
+  return source;
+};
+
+module.exports = parse;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/picomatch/lib/picomatch.js":
+/*!******************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/picomatch/lib/picomatch.js ***!
+  \******************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+const path = __webpack_require__(/*! path */ "../../util/sugar/node_modules/path-browserify/index.js");
+const scan = __webpack_require__(/*! ./scan */ "../../util/sugar/node_modules/picomatch/lib/scan.js");
+const parse = __webpack_require__(/*! ./parse */ "../../util/sugar/node_modules/picomatch/lib/parse.js");
+const utils = __webpack_require__(/*! ./utils */ "../../util/sugar/node_modules/picomatch/lib/utils.js");
+const constants = __webpack_require__(/*! ./constants */ "../../util/sugar/node_modules/picomatch/lib/constants.js");
+const isObject = val => val && typeof val === 'object' && !Array.isArray(val);
+
+/**
+ * Creates a matcher function from one or more glob patterns. The
+ * returned function takes a string to match as its first argument,
+ * and returns true if the string is a match. The returned matcher
+ * function also takes a boolean as the second argument that, when true,
+ * returns an object with additional information.
+ *
+ * ```js
+ * const picomatch = require('picomatch');
+ * // picomatch(glob[, options]);
+ *
+ * const isMatch = picomatch('*.!(*a)');
+ * console.log(isMatch('a.a')); //=> false
+ * console.log(isMatch('a.b')); //=> true
+ * ```
+ * @name picomatch
+ * @param {String|Array} `globs` One or more glob patterns.
+ * @param {Object=} `options`
+ * @return {Function=} Returns a matcher function.
+ * @api public
+ */
+
+const picomatch = (glob, options, returnState = false) => {
+  if (Array.isArray(glob)) {
+    const fns = glob.map(input => picomatch(input, options, returnState));
+    const arrayMatcher = str => {
+      for (const isMatch of fns) {
+        const state = isMatch(str);
+        if (state) return state;
+      }
+      return false;
+    };
+    return arrayMatcher;
+  }
+
+  const isState = isObject(glob) && glob.tokens && glob.input;
+
+  if (glob === '' || (typeof glob !== 'string' && !isState)) {
+    throw new TypeError('Expected pattern to be a non-empty string');
+  }
+
+  const opts = options || {};
+  const posix = utils.isWindows(options);
+  const regex = isState
+    ? picomatch.compileRe(glob, options)
+    : picomatch.makeRe(glob, options, false, true);
+
+  const state = regex.state;
+  delete regex.state;
+
+  let isIgnored = () => false;
+  if (opts.ignore) {
+    const ignoreOpts = { ...options, ignore: null, onMatch: null, onResult: null };
+    isIgnored = picomatch(opts.ignore, ignoreOpts, returnState);
+  }
+
+  const matcher = (input, returnObject = false) => {
+    const { isMatch, match, output } = picomatch.test(input, regex, options, { glob, posix });
+    const result = { glob, state, regex, posix, input, output, match, isMatch };
+
+    if (typeof opts.onResult === 'function') {
+      opts.onResult(result);
+    }
+
+    if (isMatch === false) {
+      result.isMatch = false;
+      return returnObject ? result : false;
+    }
+
+    if (isIgnored(input)) {
+      if (typeof opts.onIgnore === 'function') {
+        opts.onIgnore(result);
+      }
+      result.isMatch = false;
+      return returnObject ? result : false;
+    }
+
+    if (typeof opts.onMatch === 'function') {
+      opts.onMatch(result);
+    }
+    return returnObject ? result : true;
+  };
+
+  if (returnState) {
+    matcher.state = state;
+  }
+
+  return matcher;
+};
+
+/**
+ * Test `input` with the given `regex`. This is used by the main
+ * `picomatch()` function to test the input string.
+ *
+ * ```js
+ * const picomatch = require('picomatch');
+ * // picomatch.test(input, regex[, options]);
+ *
+ * console.log(picomatch.test('foo/bar', /^(?:([^/]*?)\/([^/]*?))$/));
+ * // { isMatch: true, match: [ 'foo/', 'foo', 'bar' ], output: 'foo/bar' }
+ * ```
+ * @param {String} `input` String to test.
+ * @param {RegExp} `regex`
+ * @return {Object} Returns an object with matching info.
+ * @api public
+ */
+
+picomatch.test = (input, regex, options, { glob, posix } = {}) => {
+  if (typeof input !== 'string') {
+    throw new TypeError('Expected input to be a string');
+  }
+
+  if (input === '') {
+    return { isMatch: false, output: '' };
+  }
+
+  const opts = options || {};
+  const format = opts.format || (posix ? utils.toPosixSlashes : null);
+  let match = input === glob;
+  let output = (match && format) ? format(input) : input;
+
+  if (match === false) {
+    output = format ? format(input) : input;
+    match = output === glob;
+  }
+
+  if (match === false || opts.capture === true) {
+    if (opts.matchBase === true || opts.basename === true) {
+      match = picomatch.matchBase(input, regex, options, posix);
+    } else {
+      match = regex.exec(output);
+    }
+  }
+
+  return { isMatch: Boolean(match), match, output };
+};
+
+/**
+ * Match the basename of a filepath.
+ *
+ * ```js
+ * const picomatch = require('picomatch');
+ * // picomatch.matchBase(input, glob[, options]);
+ * console.log(picomatch.matchBase('foo/bar.js', '*.js'); // true
+ * ```
+ * @param {String} `input` String to test.
+ * @param {RegExp|String} `glob` Glob pattern or regex created by [.makeRe](#makeRe).
+ * @return {Boolean}
+ * @api public
+ */
+
+picomatch.matchBase = (input, glob, options, posix = utils.isWindows(options)) => {
+  const regex = glob instanceof RegExp ? glob : picomatch.makeRe(glob, options);
+  return regex.test(path.basename(input));
+};
+
+/**
+ * Returns true if **any** of the given glob `patterns` match the specified `string`.
+ *
+ * ```js
+ * const picomatch = require('picomatch');
+ * // picomatch.isMatch(string, patterns[, options]);
+ *
+ * console.log(picomatch.isMatch('a.a', ['b.*', '*.a'])); //=> true
+ * console.log(picomatch.isMatch('a.a', 'b.*')); //=> false
+ * ```
+ * @param {String|Array} str The string to test.
+ * @param {String|Array} patterns One or more glob patterns to use for matching.
+ * @param {Object} [options] See available [options](#options).
+ * @return {Boolean} Returns true if any patterns match `str`
+ * @api public
+ */
+
+picomatch.isMatch = (str, patterns, options) => picomatch(patterns, options)(str);
+
+/**
+ * Parse a glob pattern to create the source string for a regular
+ * expression.
+ *
+ * ```js
+ * const picomatch = require('picomatch');
+ * const result = picomatch.parse(pattern[, options]);
+ * ```
+ * @param {String} `pattern`
+ * @param {Object} `options`
+ * @return {Object} Returns an object with useful properties and output to be used as a regex source string.
+ * @api public
+ */
+
+picomatch.parse = (pattern, options) => {
+  if (Array.isArray(pattern)) return pattern.map(p => picomatch.parse(p, options));
+  return parse(pattern, { ...options, fastpaths: false });
+};
+
+/**
+ * Scan a glob pattern to separate the pattern into segments.
+ *
+ * ```js
+ * const picomatch = require('picomatch');
+ * // picomatch.scan(input[, options]);
+ *
+ * const result = picomatch.scan('!./foo/*.js');
+ * console.log(result);
+ * { prefix: '!./',
+ *   input: '!./foo/*.js',
+ *   start: 3,
+ *   base: 'foo',
+ *   glob: '*.js',
+ *   isBrace: false,
+ *   isBracket: false,
+ *   isGlob: true,
+ *   isExtglob: false,
+ *   isGlobstar: false,
+ *   negated: true }
+ * ```
+ * @param {String} `input` Glob pattern to scan.
+ * @param {Object} `options`
+ * @return {Object} Returns an object with
+ * @api public
+ */
+
+picomatch.scan = (input, options) => scan(input, options);
+
+/**
+ * Create a regular expression from a parsed glob pattern.
+ *
+ * ```js
+ * const picomatch = require('picomatch');
+ * const state = picomatch.parse('*.js');
+ * // picomatch.compileRe(state[, options]);
+ *
+ * console.log(picomatch.compileRe(state));
+ * //=> /^(?:(?!\.)(?=.)[^/]*?\.js)$/
+ * ```
+ * @param {String} `state` The object returned from the `.parse` method.
+ * @param {Object} `options`
+ * @return {RegExp} Returns a regex created from the given pattern.
+ * @api public
+ */
+
+picomatch.compileRe = (parsed, options, returnOutput = false, returnState = false) => {
+  if (returnOutput === true) {
+    return parsed.output;
+  }
+
+  const opts = options || {};
+  const prepend = opts.contains ? '' : '^';
+  const append = opts.contains ? '' : '$';
+
+  let source = `${prepend}(?:${parsed.output})${append}`;
+  if (parsed && parsed.negated === true) {
+    source = `^(?!${source}).*$`;
+  }
+
+  const regex = picomatch.toRegex(source, options);
+  if (returnState === true) {
+    regex.state = parsed;
+  }
+
+  return regex;
+};
+
+picomatch.makeRe = (input, options, returnOutput = false, returnState = false) => {
+  if (!input || typeof input !== 'string') {
+    throw new TypeError('Expected a non-empty string');
+  }
+
+  const opts = options || {};
+  let parsed = { negated: false, fastpaths: true };
+  let prefix = '';
+  let output;
+
+  if (input.startsWith('./')) {
+    input = input.slice(2);
+    prefix = parsed.prefix = './';
+  }
+
+  if (opts.fastpaths !== false && (input[0] === '.' || input[0] === '*')) {
+    output = parse.fastpaths(input, options);
+  }
+
+  if (output === undefined) {
+    parsed = parse(input, options);
+    parsed.prefix = prefix + (parsed.prefix || '');
+  } else {
+    parsed.output = output;
+  }
+
+  return picomatch.compileRe(parsed, options, returnOutput, returnState);
+};
+
+/**
+ * Create a regular expression from the given regex source string.
+ *
+ * ```js
+ * const picomatch = require('picomatch');
+ * // picomatch.toRegex(source[, options]);
+ *
+ * const { output } = picomatch.parse('*.js');
+ * console.log(picomatch.toRegex(output));
+ * //=> /^(?:(?!\.)(?=.)[^/]*?\.js)$/
+ * ```
+ * @param {String} `source` Regular expression source string.
+ * @param {Object} `options`
+ * @return {RegExp}
+ * @api public
+ */
+
+picomatch.toRegex = (source, options) => {
+  try {
+    const opts = options || {};
+    return new RegExp(source, opts.flags || (opts.nocase ? 'i' : ''));
+  } catch (err) {
+    if (options && options.debug === true) throw err;
+    return /$^/;
+  }
+};
+
+/**
+ * Picomatch constants.
+ * @return {Object}
+ */
+
+picomatch.constants = constants;
+
+/**
+ * Expose "picomatch"
+ */
+
+module.exports = picomatch;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/picomatch/lib/scan.js":
+/*!*************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/picomatch/lib/scan.js ***!
+  \*************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+const utils = __webpack_require__(/*! ./utils */ "../../util/sugar/node_modules/picomatch/lib/utils.js");
+const {
+  CHAR_ASTERISK,             /* * */
+  CHAR_AT,                   /* @ */
+  CHAR_BACKWARD_SLASH,       /* \ */
+  CHAR_COMMA,                /* , */
+  CHAR_DOT,                  /* . */
+  CHAR_EXCLAMATION_MARK,     /* ! */
+  CHAR_FORWARD_SLASH,        /* / */
+  CHAR_LEFT_CURLY_BRACE,     /* { */
+  CHAR_LEFT_PARENTHESES,     /* ( */
+  CHAR_LEFT_SQUARE_BRACKET,  /* [ */
+  CHAR_PLUS,                 /* + */
+  CHAR_QUESTION_MARK,        /* ? */
+  CHAR_RIGHT_CURLY_BRACE,    /* } */
+  CHAR_RIGHT_PARENTHESES,    /* ) */
+  CHAR_RIGHT_SQUARE_BRACKET  /* ] */
+} = __webpack_require__(/*! ./constants */ "../../util/sugar/node_modules/picomatch/lib/constants.js");
+
+const isPathSeparator = code => {
+  return code === CHAR_FORWARD_SLASH || code === CHAR_BACKWARD_SLASH;
+};
+
+const depth = token => {
+  if (token.isPrefix !== true) {
+    token.depth = token.isGlobstar ? Infinity : 1;
+  }
+};
+
+/**
+ * Quickly scans a glob pattern and returns an object with a handful of
+ * useful properties, like `isGlob`, `path` (the leading non-glob, if it exists),
+ * `glob` (the actual pattern), and `negated` (true if the path starts with `!`).
+ *
+ * ```js
+ * const pm = require('picomatch');
+ * console.log(pm.scan('foo/bar/*.js'));
+ * { isGlob: true, input: 'foo/bar/*.js', base: 'foo/bar', glob: '*.js' }
+ * ```
+ * @param {String} `str`
+ * @param {Object} `options`
+ * @return {Object} Returns an object with tokens and regex source string.
+ * @api public
+ */
+
+const scan = (input, options) => {
+  const opts = options || {};
+
+  const length = input.length - 1;
+  const scanToEnd = opts.parts === true || opts.scanToEnd === true;
+  const slashes = [];
+  const tokens = [];
+  const parts = [];
+
+  let str = input;
+  let index = -1;
+  let start = 0;
+  let lastIndex = 0;
+  let isBrace = false;
+  let isBracket = false;
+  let isGlob = false;
+  let isExtglob = false;
+  let isGlobstar = false;
+  let braceEscaped = false;
+  let backslashes = false;
+  let negated = false;
+  let finished = false;
+  let braces = 0;
+  let prev;
+  let code;
+  let token = { value: '', depth: 0, isGlob: false };
+
+  const eos = () => index >= length;
+  const peek = () => str.charCodeAt(index + 1);
+  const advance = () => {
+    prev = code;
+    return str.charCodeAt(++index);
+  };
+
+  while (index < length) {
+    code = advance();
+    let next;
+
+    if (code === CHAR_BACKWARD_SLASH) {
+      backslashes = token.backslashes = true;
+      code = advance();
+
+      if (code === CHAR_LEFT_CURLY_BRACE) {
+        braceEscaped = true;
+      }
+      continue;
+    }
+
+    if (braceEscaped === true || code === CHAR_LEFT_CURLY_BRACE) {
+      braces++;
+
+      while (eos() !== true && (code = advance())) {
+        if (code === CHAR_BACKWARD_SLASH) {
+          backslashes = token.backslashes = true;
+          advance();
+          continue;
+        }
+
+        if (code === CHAR_LEFT_CURLY_BRACE) {
+          braces++;
+          continue;
+        }
+
+        if (braceEscaped !== true && code === CHAR_DOT && (code = advance()) === CHAR_DOT) {
+          isBrace = token.isBrace = true;
+          isGlob = token.isGlob = true;
+          finished = true;
+
+          if (scanToEnd === true) {
+            continue;
+          }
+
+          break;
+        }
+
+        if (braceEscaped !== true && code === CHAR_COMMA) {
+          isBrace = token.isBrace = true;
+          isGlob = token.isGlob = true;
+          finished = true;
+
+          if (scanToEnd === true) {
+            continue;
+          }
+
+          break;
+        }
+
+        if (code === CHAR_RIGHT_CURLY_BRACE) {
+          braces--;
+
+          if (braces === 0) {
+            braceEscaped = false;
+            isBrace = token.isBrace = true;
+            finished = true;
+            break;
+          }
+        }
+      }
+
+      if (scanToEnd === true) {
+        continue;
+      }
+
+      break;
+    }
+
+    if (code === CHAR_FORWARD_SLASH) {
+      slashes.push(index);
+      tokens.push(token);
+      token = { value: '', depth: 0, isGlob: false };
+
+      if (finished === true) continue;
+      if (prev === CHAR_DOT && index === (start + 1)) {
+        start += 2;
+        continue;
+      }
+
+      lastIndex = index + 1;
+      continue;
+    }
+
+    if (opts.noext !== true) {
+      const isExtglobChar = code === CHAR_PLUS
+        || code === CHAR_AT
+        || code === CHAR_ASTERISK
+        || code === CHAR_QUESTION_MARK
+        || code === CHAR_EXCLAMATION_MARK;
+
+      if (isExtglobChar === true && peek() === CHAR_LEFT_PARENTHESES) {
+        isGlob = token.isGlob = true;
+        isExtglob = token.isExtglob = true;
+        finished = true;
+
+        if (scanToEnd === true) {
+          while (eos() !== true && (code = advance())) {
+            if (code === CHAR_BACKWARD_SLASH) {
+              backslashes = token.backslashes = true;
+              code = advance();
+              continue;
+            }
+
+            if (code === CHAR_RIGHT_PARENTHESES) {
+              isGlob = token.isGlob = true;
+              finished = true;
+              break;
+            }
+          }
+          continue;
+        }
+        break;
+      }
+    }
+
+    if (code === CHAR_ASTERISK) {
+      if (prev === CHAR_ASTERISK) isGlobstar = token.isGlobstar = true;
+      isGlob = token.isGlob = true;
+      finished = true;
+
+      if (scanToEnd === true) {
+        continue;
+      }
+      break;
+    }
+
+    if (code === CHAR_QUESTION_MARK) {
+      isGlob = token.isGlob = true;
+      finished = true;
+
+      if (scanToEnd === true) {
+        continue;
+      }
+      break;
+    }
+
+    if (code === CHAR_LEFT_SQUARE_BRACKET) {
+      while (eos() !== true && (next = advance())) {
+        if (next === CHAR_BACKWARD_SLASH) {
+          backslashes = token.backslashes = true;
+          advance();
+          continue;
+        }
+
+        if (next === CHAR_RIGHT_SQUARE_BRACKET) {
+          isBracket = token.isBracket = true;
+          isGlob = token.isGlob = true;
+          finished = true;
+
+          if (scanToEnd === true) {
+            continue;
+          }
+          break;
+        }
+      }
+    }
+
+    if (opts.nonegate !== true && code === CHAR_EXCLAMATION_MARK && index === start) {
+      negated = token.negated = true;
+      start++;
+      continue;
+    }
+
+    if (opts.noparen !== true && code === CHAR_LEFT_PARENTHESES) {
+      isGlob = token.isGlob = true;
+
+      if (scanToEnd === true) {
+        while (eos() !== true && (code = advance())) {
+          if (code === CHAR_LEFT_PARENTHESES) {
+            backslashes = token.backslashes = true;
+            code = advance();
+            continue;
+          }
+
+          if (code === CHAR_RIGHT_PARENTHESES) {
+            finished = true;
+            break;
+          }
+        }
+        continue;
+      }
+      break;
+    }
+
+    if (isGlob === true) {
+      finished = true;
+
+      if (scanToEnd === true) {
+        continue;
+      }
+
+      break;
+    }
+  }
+
+  if (opts.noext === true) {
+    isExtglob = false;
+    isGlob = false;
+  }
+
+  let base = str;
+  let prefix = '';
+  let glob = '';
+
+  if (start > 0) {
+    prefix = str.slice(0, start);
+    str = str.slice(start);
+    lastIndex -= start;
+  }
+
+  if (base && isGlob === true && lastIndex > 0) {
+    base = str.slice(0, lastIndex);
+    glob = str.slice(lastIndex);
+  } else if (isGlob === true) {
+    base = '';
+    glob = str;
+  } else {
+    base = str;
+  }
+
+  if (base && base !== '' && base !== '/' && base !== str) {
+    if (isPathSeparator(base.charCodeAt(base.length - 1))) {
+      base = base.slice(0, -1);
+    }
+  }
+
+  if (opts.unescape === true) {
+    if (glob) glob = utils.removeBackslashes(glob);
+
+    if (base && backslashes === true) {
+      base = utils.removeBackslashes(base);
+    }
+  }
+
+  const state = {
+    prefix,
+    input,
+    start,
+    base,
+    glob,
+    isBrace,
+    isBracket,
+    isGlob,
+    isExtglob,
+    isGlobstar,
+    negated
+  };
+
+  if (opts.tokens === true) {
+    state.maxDepth = 0;
+    if (!isPathSeparator(code)) {
+      tokens.push(token);
+    }
+    state.tokens = tokens;
+  }
+
+  if (opts.parts === true || opts.tokens === true) {
+    let prevIndex;
+
+    for (let idx = 0; idx < slashes.length; idx++) {
+      const n = prevIndex ? prevIndex + 1 : start;
+      const i = slashes[idx];
+      const value = input.slice(n, i);
+      if (opts.tokens) {
+        if (idx === 0 && start !== 0) {
+          tokens[idx].isPrefix = true;
+          tokens[idx].value = prefix;
+        } else {
+          tokens[idx].value = value;
+        }
+        depth(tokens[idx]);
+        state.maxDepth += tokens[idx].depth;
+      }
+      if (idx !== 0 || value !== '') {
+        parts.push(value);
+      }
+      prevIndex = i;
+    }
+
+    if (prevIndex && prevIndex + 1 < input.length) {
+      const value = input.slice(prevIndex + 1);
+      parts.push(value);
+
+      if (opts.tokens) {
+        tokens[tokens.length - 1].value = value;
+        depth(tokens[tokens.length - 1]);
+        state.maxDepth += tokens[tokens.length - 1].depth;
+      }
+    }
+
+    state.slashes = slashes;
+    state.parts = parts;
+  }
+
+  return state;
+};
+
+module.exports = scan;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/picomatch/lib/utils.js":
+/*!**************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/picomatch/lib/utils.js ***!
+  \**************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+const path = __webpack_require__(/*! path */ "../../util/sugar/node_modules/path-browserify/index.js");
+const win32 = process.platform === 'win32';
+const {
+  REGEX_BACKSLASH,
+  REGEX_REMOVE_BACKSLASH,
+  REGEX_SPECIAL_CHARS,
+  REGEX_SPECIAL_CHARS_GLOBAL
+} = __webpack_require__(/*! ./constants */ "../../util/sugar/node_modules/picomatch/lib/constants.js");
+
+exports.isObject = val => val !== null && typeof val === 'object' && !Array.isArray(val);
+exports.hasRegexChars = str => REGEX_SPECIAL_CHARS.test(str);
+exports.isRegexChar = str => str.length === 1 && exports.hasRegexChars(str);
+exports.escapeRegex = str => str.replace(REGEX_SPECIAL_CHARS_GLOBAL, '\\$1');
+exports.toPosixSlashes = str => str.replace(REGEX_BACKSLASH, '/');
+
+exports.removeBackslashes = str => {
+  return str.replace(REGEX_REMOVE_BACKSLASH, match => {
+    return match === '\\' ? '' : match;
+  });
+};
+
+exports.supportsLookbehinds = () => {
+  const segs = process.version.slice(1).split('.').map(Number);
+  if (segs.length === 3 && segs[0] >= 9 || (segs[0] === 8 && segs[1] >= 10)) {
+    return true;
+  }
+  return false;
+};
+
+exports.isWindows = options => {
+  if (options && typeof options.windows === 'boolean') {
+    return options.windows;
+  }
+  return win32 === true || path.sep === '\\';
+};
+
+exports.escapeLast = (input, char, lastIdx) => {
+  const idx = input.lastIndexOf(char, lastIdx);
+  if (idx === -1) return input;
+  if (input[idx - 1] === '\\') return exports.escapeLast(input, char, idx - 1);
+  return `${input.slice(0, idx)}\\${input.slice(idx)}`;
+};
+
+exports.removePrefix = (input, state = {}) => {
+  let output = input;
+  if (output.startsWith('./')) {
+    output = output.slice(2);
+    state.prefix = './';
+  }
+  return output;
+};
+
+exports.wrapOutput = (input, state = {}, options = {}) => {
+  const prepend = options.contains ? '' : '^';
+  const append = options.contains ? '' : '$';
+
+  let output = `${prepend}(?:${input})${append}`;
+  if (state.negated === true) {
+    output = `(?:^(?!${output}).*$)`;
+  }
+  return output;
+};
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../process/browser.js */ "../../util/sugar/node_modules/process/browser.js")))
+
+/***/ }),
+
 /***/ "../../util/sugar/node_modules/pretty-error/lib/ParsedError.js":
 /*!***********************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/pretty-error/lib/ParsedError.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/pretty-error/lib/ParsedError.js ***!
   \***********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -14181,7 +24322,7 @@ for (_i = 0, _len = _ref.length; _i < _len; _i++) {
 
 /***/ "../../util/sugar/node_modules/pretty-error/lib/PrettyError.js":
 /*!***********************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/pretty-error/lib/PrettyError.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/pretty-error/lib/PrettyError.js ***!
   \***********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -14696,7 +24837,7 @@ for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
 
 /***/ "../../util/sugar/node_modules/pretty-error/lib/defaultStyle.js":
 /*!************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/pretty-error/lib/defaultStyle.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/pretty-error/lib/defaultStyle.js ***!
   \************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -14771,7 +24912,7 @@ module.exports = function() {
 
 /***/ "../../util/sugar/node_modules/pretty-error/lib/nodePaths.js":
 /*!*********************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/pretty-error/lib/nodePaths.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/pretty-error/lib/nodePaths.js ***!
   \*********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -14784,7 +24925,7 @@ module.exports = ['_debugger.js', '_http_agent.js', '_http_client.js', '_http_co
 
 /***/ "../../util/sugar/node_modules/process/browser.js":
 /*!**********************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/process/browser.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/process/browser.js ***!
   \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -14979,7 +25120,7 @@ process.umask = function() { return 0; };
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/AnsiPainter.js":
 /*!********************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/AnsiPainter.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/AnsiPainter.js ***!
   \********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -15115,7 +25256,7 @@ module.exports = AnsiPainter = (function() {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/Layout.js":
 /*!***************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/Layout.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/Layout.js ***!
   \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -15236,7 +25377,7 @@ for (i = 0, len = ref.length; i < len; i++) {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/RenderKid.js":
 /*!******************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/RenderKid.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/RenderKid.js ***!
   \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -15444,7 +25585,7 @@ module.exports = RenderKid = (function() {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/ansiPainter/styles.js":
 /*!***************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/ansiPainter/styles.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/ansiPainter/styles.js ***!
   \***************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -15523,7 +25664,7 @@ styles.none = function(str) {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/ansiPainter/tags.js":
 /*!*************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/ansiPainter/tags.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/ansiPainter/tags.js ***!
   \*************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -15569,7 +25710,7 @@ for (i = 0, len = colors.length; i < len; i++) {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/layout/Block.js":
 /*!*********************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/layout/Block.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/layout/Block.js ***!
   \*********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -15833,7 +25974,7 @@ module.exports = Block = (function() {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/layout/SpecialString.js":
 /*!*****************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/layout/SpecialString.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/layout/SpecialString.js ***!
   \*****************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -16020,7 +26161,7 @@ for (i = 0, len = ref.length; i < len; i++) {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/layout/block/blockAppendor/Default.js":
 /*!*******************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/layout/block/blockAppendor/Default.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/layout/block/blockAppendor/Default.js ***!
   \*******************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16052,7 +26193,7 @@ module.exports = DefaultBlockAppendor = (function(superClass) {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/layout/block/blockAppendor/_BlockAppendor.js":
 /*!**************************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/layout/block/blockAppendor/_BlockAppendor.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/layout/block/blockAppendor/_BlockAppendor.js ***!
   \**************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -16078,7 +26219,7 @@ module.exports = _BlockAppendor = (function() {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/layout/block/blockPrependor/Default.js":
 /*!********************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/layout/block/blockPrependor/Default.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/layout/block/blockPrependor/Default.js ***!
   \********************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16110,7 +26251,7 @@ module.exports = DefaultBlockPrependor = (function(superClass) {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/layout/block/blockPrependor/_BlockPrependor.js":
 /*!****************************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/layout/block/blockPrependor/_BlockPrependor.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/layout/block/blockPrependor/_BlockPrependor.js ***!
   \****************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -16136,7 +26277,7 @@ module.exports = _BlockPrependor = (function() {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/layout/block/lineAppendor/Default.js":
 /*!******************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/layout/block/lineAppendor/Default.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/layout/block/lineAppendor/Default.js ***!
   \******************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16168,7 +26309,7 @@ module.exports = DefaultLineAppendor = (function(superClass) {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/layout/block/lineAppendor/_LineAppendor.js":
 /*!************************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/layout/block/lineAppendor/_LineAppendor.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/layout/block/lineAppendor/_LineAppendor.js ***!
   \************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -16196,7 +26337,7 @@ module.exports = _LineAppendor = (function() {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/layout/block/linePrependor/Default.js":
 /*!*******************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/layout/block/linePrependor/Default.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/layout/block/linePrependor/Default.js ***!
   \*******************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16265,7 +26406,7 @@ module.exports = DefaultLinePrependor = (function(superClass) {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/layout/block/linePrependor/_LinePrependor.js":
 /*!**************************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/layout/block/linePrependor/_LinePrependor.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/layout/block/linePrependor/_LinePrependor.js ***!
   \**************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -16293,7 +26434,7 @@ module.exports = _LinePrependor = (function() {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/layout/block/lineWrapper/Default.js":
 /*!*****************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/layout/block/lineWrapper/Default.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/layout/block/lineWrapper/Default.js ***!
   \*****************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16321,7 +26462,7 @@ module.exports = DefaultLineWrapper = (function(superClass) {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/layout/block/lineWrapper/_LineWrapper.js":
 /*!**********************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/layout/block/lineWrapper/_LineWrapper.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/layout/block/lineWrapper/_LineWrapper.js ***!
   \**********************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -16345,7 +26486,7 @@ module.exports = _LineWrapper = (function() {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/renderKid/Styles.js":
 /*!*************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/Styles.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/Styles.js ***!
   \*************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16432,7 +26573,7 @@ module.exports = Styles = (function() {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/renderKid/styleApplier/_common.js":
 /*!***************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styleApplier/_common.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styleApplier/_common.js ***!
   \***************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16478,7 +26619,7 @@ module.exports = _common = {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/renderKid/styleApplier/block.js":
 /*!*************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styleApplier/block.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styleApplier/block.js ***!
   \*************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16572,7 +26713,7 @@ module.exports = blockStyleApplier = self = {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/renderKid/styleApplier/inline.js":
 /*!**************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styleApplier/inline.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styleApplier/inline.js ***!
   \**************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16609,7 +26750,7 @@ module.exports = inlineStyleApplier = self = {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/renderKid/styles/Rule.js":
 /*!******************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/Rule.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/Rule.js ***!
   \******************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16641,7 +26782,7 @@ module.exports = Rule = (function() {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/renderKid/styles/StyleSheet.js":
 /*!************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/StyleSheet.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/StyleSheet.js ***!
   \************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16724,7 +26865,7 @@ module.exports = StyleSheet = (function() {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/DeclarationBlock.js":
 /*!***********************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/DeclarationBlock.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/DeclarationBlock.js ***!
   \***********************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16800,7 +26941,7 @@ declarationClasses = {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/MixedDeclarationSet.js":
 /*!**************************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/MixedDeclarationSet.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/MixedDeclarationSet.js ***!
   \**************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -16889,7 +27030,7 @@ module.exports = MixedDeclarationSet = (function() {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/Selector.js":
 /*!***************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/Selector.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/Selector.js ***!
   \***************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16938,7 +27079,7 @@ module.exports = Selector = (function() {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/Arbitrary.js":
 /*!*********************************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/Arbitrary.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/Arbitrary.js ***!
   \*********************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16966,7 +27107,7 @@ module.exports = Arbitrary = (function(superClass) {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/Background.js":
 /*!**********************************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/Background.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/Background.js ***!
   \**********************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16994,7 +27135,7 @@ module.exports = Background = (function(superClass) {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/Bullet.js":
 /*!******************************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/Bullet.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/Bullet.js ***!
   \******************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17068,7 +27209,7 @@ module.exports = Bullet = (function(superClass) {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/Color.js":
 /*!*****************************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/Color.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/Color.js ***!
   \*****************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17096,7 +27237,7 @@ module.exports = Color = (function(superClass) {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/Display.js":
 /*!*******************************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/Display.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/Display.js ***!
   \*******************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17139,7 +27280,7 @@ module.exports = Display = (function(superClass) {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/Height.js":
 /*!******************************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/Height.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/Height.js ***!
   \******************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17167,7 +27308,7 @@ module.exports = Height = (function(superClass) {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/Margin.js":
 /*!******************************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/Margin.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/Margin.js ***!
   \******************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17242,7 +27383,7 @@ module.exports = Margin = (function(superClass) {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/MarginBottom.js":
 /*!************************************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/MarginBottom.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/MarginBottom.js ***!
   \************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17270,7 +27411,7 @@ module.exports = MarginBottom = (function(superClass) {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/MarginLeft.js":
 /*!**********************************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/MarginLeft.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/MarginLeft.js ***!
   \**********************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17298,7 +27439,7 @@ module.exports = MarginLeft = (function(superClass) {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/MarginRight.js":
 /*!***********************************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/MarginRight.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/MarginRight.js ***!
   \***********************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17326,7 +27467,7 @@ module.exports = MarginRight = (function(superClass) {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/MarginTop.js":
 /*!*********************************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/MarginTop.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/MarginTop.js ***!
   \*********************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17354,7 +27495,7 @@ module.exports = MarginTop = (function(superClass) {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/Padding.js":
 /*!*******************************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/Padding.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/Padding.js ***!
   \*******************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17429,7 +27570,7 @@ module.exports = Padding = (function(superClass) {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/PaddingBottom.js":
 /*!*************************************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/PaddingBottom.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/PaddingBottom.js ***!
   \*************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17457,7 +27598,7 @@ module.exports = PaddingBottom = (function(superClass) {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/PaddingLeft.js":
 /*!***********************************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/PaddingLeft.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/PaddingLeft.js ***!
   \***********************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17485,7 +27626,7 @@ module.exports = PaddingLeft = (function(superClass) {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/PaddingRight.js":
 /*!************************************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/PaddingRight.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/PaddingRight.js ***!
   \************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17513,7 +27654,7 @@ module.exports = PaddingRight = (function(superClass) {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/PaddingTop.js":
 /*!**********************************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/PaddingTop.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/PaddingTop.js ***!
   \**********************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17541,7 +27682,7 @@ module.exports = PaddingTop = (function(superClass) {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/Width.js":
 /*!*****************************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/Width.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/Width.js ***!
   \*****************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17569,7 +27710,7 @@ module.exports = Width = (function(superClass) {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/_Declaration.js":
 /*!************************************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/_Declaration.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/_Declaration.js ***!
   \************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -17664,7 +27805,7 @@ module.exports = _Declaration = (function() {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/_Length.js":
 /*!*******************************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/_Length.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/renderKid/styles/rule/declarationBlock/_Length.js ***!
   \*******************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17699,7 +27840,7 @@ module.exports = _Length = (function(superClass) {
 
 /***/ "../../util/sugar/node_modules/renderkid/lib/tools.js":
 /*!**************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/tools.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/lib/tools.js ***!
   \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17799,7 +27940,7 @@ module.exports = self = {
 
 /***/ "../../util/sugar/node_modules/renderkid/node_modules/ansi-regex/index.js":
 /*!**********************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/node_modules/ansi-regex/index.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/node_modules/ansi-regex/index.js ***!
   \**********************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17815,7 +27956,7 @@ module.exports = function () {
 
 /***/ "../../util/sugar/node_modules/renderkid/node_modules/css-select/index.js":
 /*!**********************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/node_modules/css-select/index.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/node_modules/css-select/index.js ***!
   \**********************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17886,7 +28027,7 @@ CSSselect._compileToken = compileToken;
 
 /***/ "../../util/sugar/node_modules/renderkid/node_modules/css-select/lib/attributes.js":
 /*!*******************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/node_modules/css-select/lib/attributes.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/node_modules/css-select/lib/attributes.js ***!
   \*******************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -18078,7 +28219,7 @@ module.exports = {
 
 /***/ "../../util/sugar/node_modules/renderkid/node_modules/css-select/lib/compile.js":
 /*!****************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/node_modules/css-select/lib/compile.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/node_modules/css-select/lib/compile.js ***!
   \****************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -18281,7 +28422,7 @@ filters.matches = function(next, token, options, context){
 
 /***/ "../../util/sugar/node_modules/renderkid/node_modules/css-select/lib/general.js":
 /*!****************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/node_modules/css-select/lib/general.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/node_modules/css-select/lib/general.js ***!
   \****************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -18380,7 +28521,7 @@ module.exports = {
 
 /***/ "../../util/sugar/node_modules/renderkid/node_modules/css-select/lib/procedure.json":
 /*!********************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/node_modules/css-select/lib/procedure.json ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/node_modules/css-select/lib/procedure.json ***!
   \********************************************************************************************************************************************/
 /*! exports provided: universal, tag, attribute, pseudo, descendant, child, parent, sibling, adjacent, default */
 /***/ (function(module) {
@@ -18391,7 +28532,7 @@ module.exports = JSON.parse("{\"universal\":50,\"tag\":30,\"attribute\":1,\"pseu
 
 /***/ "../../util/sugar/node_modules/renderkid/node_modules/css-select/lib/pseudos.js":
 /*!****************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/node_modules/css-select/lib/pseudos.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/node_modules/css-select/lib/pseudos.js ***!
   \****************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -18795,7 +28936,7 @@ module.exports = {
 
 /***/ "../../util/sugar/node_modules/renderkid/node_modules/css-select/lib/sort.js":
 /*!*************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/node_modules/css-select/lib/sort.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/node_modules/css-select/lib/sort.js ***!
   \*************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -18886,7 +29027,7 @@ function getProcedure(token){
 
 /***/ "../../util/sugar/node_modules/renderkid/node_modules/css-what/index.js":
 /*!********************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/node_modules/css-what/index.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/node_modules/css-what/index.js ***!
   \********************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -19172,7 +29313,7 @@ function addToken(subselects, tokens){
 
 /***/ "../../util/sugar/node_modules/renderkid/node_modules/domutils/index.js":
 /*!********************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/node_modules/domutils/index.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/node_modules/domutils/index.js ***!
   \********************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -19197,7 +29338,7 @@ var DomUtils = module.exports;
 
 /***/ "../../util/sugar/node_modules/renderkid/node_modules/domutils/lib/helpers.js":
 /*!**************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/node_modules/domutils/lib/helpers.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/node_modules/domutils/lib/helpers.js ***!
   \**************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -19349,7 +29490,7 @@ exports.uniqueSort = function(nodes) {
 
 /***/ "../../util/sugar/node_modules/renderkid/node_modules/domutils/lib/legacy.js":
 /*!*************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/node_modules/domutils/lib/legacy.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/node_modules/domutils/lib/legacy.js ***!
   \*************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -19447,7 +29588,7 @@ exports.getElementsByTagType = function(type, element, recurse, limit){
 
 /***/ "../../util/sugar/node_modules/renderkid/node_modules/domutils/lib/manipulation.js":
 /*!*******************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/node_modules/domutils/lib/manipulation.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/node_modules/domutils/lib/manipulation.js ***!
   \*******************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -19535,7 +29676,7 @@ exports.prepend = function(elem, prev){
 
 /***/ "../../util/sugar/node_modules/renderkid/node_modules/domutils/lib/querying.js":
 /*!***************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/node_modules/domutils/lib/querying.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/node_modules/domutils/lib/querying.js ***!
   \***************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -19640,7 +29781,7 @@ function findAll(test, elems){
 
 /***/ "../../util/sugar/node_modules/renderkid/node_modules/domutils/lib/stringify.js":
 /*!****************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/node_modules/domutils/lib/stringify.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/node_modules/domutils/lib/stringify.js ***!
   \****************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -19673,7 +29814,7 @@ function getText(elem){
 
 /***/ "../../util/sugar/node_modules/renderkid/node_modules/domutils/lib/traversal.js":
 /*!****************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/node_modules/domutils/lib/traversal.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/node_modules/domutils/lib/traversal.js ***!
   \****************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -19708,7 +29849,7 @@ exports.getName = function(elem){
 
 /***/ "../../util/sugar/node_modules/renderkid/node_modules/strip-ansi/index.js":
 /*!**********************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/node_modules/strip-ansi/index.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/renderkid/node_modules/strip-ansi/index.js ***!
   \**********************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -19726,7 +29867,7 @@ module.exports = function (str) {
 
 /***/ "../../util/sugar/node_modules/safe-buffer/index.js":
 /*!************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/safe-buffer/index.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/safe-buffer/index.js ***!
   \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -19802,7 +29943,7 @@ SafeBuffer.allocUnsafeSlow = function (size) {
 
 /***/ "../../util/sugar/node_modules/string_decoder/lib/string_decoder.js":
 /*!****************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/string_decoder/lib/string_decoder.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/string_decoder/lib/string_decoder.js ***!
   \****************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -20107,9 +30248,309 @@ function simpleEnd(buf) {
 
 /***/ }),
 
+/***/ "../../util/sugar/node_modules/to-regex-range/index.js":
+/*!***************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/to-regex-range/index.js ***!
+  \***************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/*!
+ * to-regex-range <https://github.com/micromatch/to-regex-range>
+ *
+ * Copyright (c) 2015-present, Jon Schlinkert.
+ * Released under the MIT License.
+ */
+
+
+
+const isNumber = __webpack_require__(/*! is-number */ "../../util/sugar/node_modules/is-number/index.js");
+
+const toRegexRange = (min, max, options) => {
+  if (isNumber(min) === false) {
+    throw new TypeError('toRegexRange: expected the first argument to be a number');
+  }
+
+  if (max === void 0 || min === max) {
+    return String(min);
+  }
+
+  if (isNumber(max) === false) {
+    throw new TypeError('toRegexRange: expected the second argument to be a number.');
+  }
+
+  let opts = { relaxZeros: true, ...options };
+  if (typeof opts.strictZeros === 'boolean') {
+    opts.relaxZeros = opts.strictZeros === false;
+  }
+
+  let relax = String(opts.relaxZeros);
+  let shorthand = String(opts.shorthand);
+  let capture = String(opts.capture);
+  let wrap = String(opts.wrap);
+  let cacheKey = min + ':' + max + '=' + relax + shorthand + capture + wrap;
+
+  if (toRegexRange.cache.hasOwnProperty(cacheKey)) {
+    return toRegexRange.cache[cacheKey].result;
+  }
+
+  let a = Math.min(min, max);
+  let b = Math.max(min, max);
+
+  if (Math.abs(a - b) === 1) {
+    let result = min + '|' + max;
+    if (opts.capture) {
+      return `(${result})`;
+    }
+    if (opts.wrap === false) {
+      return result;
+    }
+    return `(?:${result})`;
+  }
+
+  let isPadded = hasPadding(min) || hasPadding(max);
+  let state = { min, max, a, b };
+  let positives = [];
+  let negatives = [];
+
+  if (isPadded) {
+    state.isPadded = isPadded;
+    state.maxLen = String(state.max).length;
+  }
+
+  if (a < 0) {
+    let newMin = b < 0 ? Math.abs(b) : 1;
+    negatives = splitToPatterns(newMin, Math.abs(a), state, opts);
+    a = state.a = 0;
+  }
+
+  if (b >= 0) {
+    positives = splitToPatterns(a, b, state, opts);
+  }
+
+  state.negatives = negatives;
+  state.positives = positives;
+  state.result = collatePatterns(negatives, positives, opts);
+
+  if (opts.capture === true) {
+    state.result = `(${state.result})`;
+  } else if (opts.wrap !== false && (positives.length + negatives.length) > 1) {
+    state.result = `(?:${state.result})`;
+  }
+
+  toRegexRange.cache[cacheKey] = state;
+  return state.result;
+};
+
+function collatePatterns(neg, pos, options) {
+  let onlyNegative = filterPatterns(neg, pos, '-', false, options) || [];
+  let onlyPositive = filterPatterns(pos, neg, '', false, options) || [];
+  let intersected = filterPatterns(neg, pos, '-?', true, options) || [];
+  let subpatterns = onlyNegative.concat(intersected).concat(onlyPositive);
+  return subpatterns.join('|');
+}
+
+function splitToRanges(min, max) {
+  let nines = 1;
+  let zeros = 1;
+
+  let stop = countNines(min, nines);
+  let stops = new Set([max]);
+
+  while (min <= stop && stop <= max) {
+    stops.add(stop);
+    nines += 1;
+    stop = countNines(min, nines);
+  }
+
+  stop = countZeros(max + 1, zeros) - 1;
+
+  while (min < stop && stop <= max) {
+    stops.add(stop);
+    zeros += 1;
+    stop = countZeros(max + 1, zeros) - 1;
+  }
+
+  stops = [...stops];
+  stops.sort(compare);
+  return stops;
+}
+
+/**
+ * Convert a range to a regex pattern
+ * @param {Number} `start`
+ * @param {Number} `stop`
+ * @return {String}
+ */
+
+function rangeToPattern(start, stop, options) {
+  if (start === stop) {
+    return { pattern: start, count: [], digits: 0 };
+  }
+
+  let zipped = zip(start, stop);
+  let digits = zipped.length;
+  let pattern = '';
+  let count = 0;
+
+  for (let i = 0; i < digits; i++) {
+    let [startDigit, stopDigit] = zipped[i];
+
+    if (startDigit === stopDigit) {
+      pattern += startDigit;
+
+    } else if (startDigit !== '0' || stopDigit !== '9') {
+      pattern += toCharacterClass(startDigit, stopDigit, options);
+
+    } else {
+      count++;
+    }
+  }
+
+  if (count) {
+    pattern += options.shorthand === true ? '\\d' : '[0-9]';
+  }
+
+  return { pattern, count: [count], digits };
+}
+
+function splitToPatterns(min, max, tok, options) {
+  let ranges = splitToRanges(min, max);
+  let tokens = [];
+  let start = min;
+  let prev;
+
+  for (let i = 0; i < ranges.length; i++) {
+    let max = ranges[i];
+    let obj = rangeToPattern(String(start), String(max), options);
+    let zeros = '';
+
+    if (!tok.isPadded && prev && prev.pattern === obj.pattern) {
+      if (prev.count.length > 1) {
+        prev.count.pop();
+      }
+
+      prev.count.push(obj.count[0]);
+      prev.string = prev.pattern + toQuantifier(prev.count);
+      start = max + 1;
+      continue;
+    }
+
+    if (tok.isPadded) {
+      zeros = padZeros(max, tok, options);
+    }
+
+    obj.string = zeros + obj.pattern + toQuantifier(obj.count);
+    tokens.push(obj);
+    start = max + 1;
+    prev = obj;
+  }
+
+  return tokens;
+}
+
+function filterPatterns(arr, comparison, prefix, intersection, options) {
+  let result = [];
+
+  for (let ele of arr) {
+    let { string } = ele;
+
+    // only push if _both_ are negative...
+    if (!intersection && !contains(comparison, 'string', string)) {
+      result.push(prefix + string);
+    }
+
+    // or _both_ are positive
+    if (intersection && contains(comparison, 'string', string)) {
+      result.push(prefix + string);
+    }
+  }
+  return result;
+}
+
+/**
+ * Zip strings
+ */
+
+function zip(a, b) {
+  let arr = [];
+  for (let i = 0; i < a.length; i++) arr.push([a[i], b[i]]);
+  return arr;
+}
+
+function compare(a, b) {
+  return a > b ? 1 : b > a ? -1 : 0;
+}
+
+function contains(arr, key, val) {
+  return arr.some(ele => ele[key] === val);
+}
+
+function countNines(min, len) {
+  return Number(String(min).slice(0, -len) + '9'.repeat(len));
+}
+
+function countZeros(integer, zeros) {
+  return integer - (integer % Math.pow(10, zeros));
+}
+
+function toQuantifier(digits) {
+  let [start = 0, stop = ''] = digits;
+  if (stop || start > 1) {
+    return `{${start + (stop ? ',' + stop : '')}}`;
+  }
+  return '';
+}
+
+function toCharacterClass(a, b, options) {
+  return `[${a}${(b - a === 1) ? '' : '-'}${b}]`;
+}
+
+function hasPadding(str) {
+  return /^-?(0+)\d/.test(str);
+}
+
+function padZeros(value, tok, options) {
+  if (!tok.isPadded) {
+    return value;
+  }
+
+  let diff = Math.abs(tok.maxLen - String(value).length);
+  let relax = options.relaxZeros !== false;
+
+  switch (diff) {
+    case 0:
+      return '';
+    case 1:
+      return relax ? '0?' : '0';
+    case 2:
+      return relax ? '0{0,2}' : '00';
+    default: {
+      return relax ? `0{0,${diff}}` : `0{${diff}}`;
+    }
+  }
+}
+
+/**
+ * Cache
+ */
+
+toRegexRange.cache = {};
+toRegexRange.clearCache = () => (toRegexRange.cache = {});
+
+/**
+ * Expose `toRegexRange`
+ */
+
+module.exports = toRegexRange;
+
+
+/***/ }),
+
 /***/ "../../util/sugar/node_modules/tslib/tslib.es6.js":
 /*!**********************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/tslib/tslib.es6.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/tslib/tslib.es6.js ***!
   \**********************************************************************************************************/
 /*! exports provided: __extends, __assign, __rest, __decorate, __param, __metadata, __awaiter, __generator, __createBinding, __exportStar, __values, __read, __spread, __spreadArrays, __await, __asyncGenerator, __asyncDelegator, __asyncValues, __makeTemplateObject, __importStar, __importDefault, __classPrivateFieldGet, __classPrivateFieldSet */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -20363,7 +30804,7 @@ function __classPrivateFieldSet(receiver, privateMap, value) {
 
 /***/ "../../util/sugar/node_modules/tty-browserify/index.js":
 /*!***************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/tty-browserify/index.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/tty-browserify/index.js ***!
   \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -20383,9 +30824,816 @@ exports.WriteStream = WriteStream;
 
 /***/ }),
 
+/***/ "../../util/sugar/node_modules/uniqid/index.js":
+/*!*******************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/uniqid/index.js ***!
+  \*******************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(process) {/* 
+(The MIT License)
+Copyright (c) 2014-2019 Halász Ádám <mail@adamhalasz.com>
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+
+//  Unique Hexatridecimal ID Generator
+// ================================================
+
+//  Dependencies
+// ================================================
+var pid = process && process.pid ? process.pid.toString(36) : '' ;
+var address = '';
+if(false){ var i, mac, networkInterfaces; } 
+
+//  Exports
+// ================================================
+module.exports = module.exports.default = function(prefix, suffix){ return (prefix ? prefix : '') + address + pid + now().toString(36) + (suffix ? suffix : ''); }
+module.exports.process = function(prefix, suffix){ return (prefix ? prefix : '') + pid + now().toString(36) + (suffix ? suffix : ''); }
+module.exports.time    = function(prefix, suffix){ return (prefix ? prefix : '') + now().toString(36) + (suffix ? suffix : ''); }
+
+//  Helpers
+// ================================================
+function now(){
+    var time = Date.now();
+    var last = now.last || time;
+    return now.last = time > last ? time : last + 1;
+}
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../process/browser.js */ "../../util/sugar/node_modules/process/browser.js")))
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/util/node_modules/inherits/inherits_browser.js":
+/*!**************************************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/util/node_modules/inherits/inherits_browser.js ***!
+  \**************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+if (typeof Object.create === 'function') {
+  // implementation from standard node.js 'util' module
+  module.exports = function inherits(ctor, superCtor) {
+    ctor.super_ = superCtor
+    ctor.prototype = Object.create(superCtor.prototype, {
+      constructor: {
+        value: ctor,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }
+    });
+  };
+} else {
+  // old school shim for old browsers
+  module.exports = function inherits(ctor, superCtor) {
+    ctor.super_ = superCtor
+    var TempCtor = function () {}
+    TempCtor.prototype = superCtor.prototype
+    ctor.prototype = new TempCtor()
+    ctor.prototype.constructor = ctor
+  }
+}
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/util/support/isBufferBrowser.js":
+/*!***********************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/util/support/isBufferBrowser.js ***!
+  \***********************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = function isBuffer(arg) {
+  return arg && typeof arg === 'object'
+    && typeof arg.copy === 'function'
+    && typeof arg.fill === 'function'
+    && typeof arg.readUInt8 === 'function';
+}
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/util/util.js":
+/*!****************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/util/util.js ***!
+  \****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+var getOwnPropertyDescriptors = Object.getOwnPropertyDescriptors ||
+  function getOwnPropertyDescriptors(obj) {
+    var keys = Object.keys(obj);
+    var descriptors = {};
+    for (var i = 0; i < keys.length; i++) {
+      descriptors[keys[i]] = Object.getOwnPropertyDescriptor(obj, keys[i]);
+    }
+    return descriptors;
+  };
+
+var formatRegExp = /%[sdj%]/g;
+exports.format = function(f) {
+  if (!isString(f)) {
+    var objects = [];
+    for (var i = 0; i < arguments.length; i++) {
+      objects.push(inspect(arguments[i]));
+    }
+    return objects.join(' ');
+  }
+
+  var i = 1;
+  var args = arguments;
+  var len = args.length;
+  var str = String(f).replace(formatRegExp, function(x) {
+    if (x === '%%') return '%';
+    if (i >= len) return x;
+    switch (x) {
+      case '%s': return String(args[i++]);
+      case '%d': return Number(args[i++]);
+      case '%j':
+        try {
+          return JSON.stringify(args[i++]);
+        } catch (_) {
+          return '[Circular]';
+        }
+      default:
+        return x;
+    }
+  });
+  for (var x = args[i]; i < len; x = args[++i]) {
+    if (isNull(x) || !isObject(x)) {
+      str += ' ' + x;
+    } else {
+      str += ' ' + inspect(x);
+    }
+  }
+  return str;
+};
+
+
+// Mark that a method should not be used.
+// Returns a modified function which warns once by default.
+// If --no-deprecation is set, then it is a no-op.
+exports.deprecate = function(fn, msg) {
+  if (typeof process !== 'undefined' && process.noDeprecation === true) {
+    return fn;
+  }
+
+  // Allow for deprecating things in the process of starting up.
+  if (typeof process === 'undefined') {
+    return function() {
+      return exports.deprecate(fn, msg).apply(this, arguments);
+    };
+  }
+
+  var warned = false;
+  function deprecated() {
+    if (!warned) {
+      if (process.throwDeprecation) {
+        throw new Error(msg);
+      } else if (process.traceDeprecation) {
+        console.trace(msg);
+      } else {
+        console.error(msg);
+      }
+      warned = true;
+    }
+    return fn.apply(this, arguments);
+  }
+
+  return deprecated;
+};
+
+
+var debugs = {};
+var debugEnviron;
+exports.debuglog = function(set) {
+  if (isUndefined(debugEnviron))
+    debugEnviron = process.env.NODE_DEBUG || '';
+  set = set.toUpperCase();
+  if (!debugs[set]) {
+    if (new RegExp('\\b' + set + '\\b', 'i').test(debugEnviron)) {
+      var pid = process.pid;
+      debugs[set] = function() {
+        var msg = exports.format.apply(exports, arguments);
+        console.error('%s %d: %s', set, pid, msg);
+      };
+    } else {
+      debugs[set] = function() {};
+    }
+  }
+  return debugs[set];
+};
+
+
+/**
+ * Echos the value of a value. Trys to print the value out
+ * in the best way possible given the different types.
+ *
+ * @param {Object} obj The object to print out.
+ * @param {Object} opts Optional options object that alters the output.
+ */
+/* legacy: obj, showHidden, depth, colors*/
+function inspect(obj, opts) {
+  // default options
+  var ctx = {
+    seen: [],
+    stylize: stylizeNoColor
+  };
+  // legacy...
+  if (arguments.length >= 3) ctx.depth = arguments[2];
+  if (arguments.length >= 4) ctx.colors = arguments[3];
+  if (isBoolean(opts)) {
+    // legacy...
+    ctx.showHidden = opts;
+  } else if (opts) {
+    // got an "options" object
+    exports._extend(ctx, opts);
+  }
+  // set default options
+  if (isUndefined(ctx.showHidden)) ctx.showHidden = false;
+  if (isUndefined(ctx.depth)) ctx.depth = 2;
+  if (isUndefined(ctx.colors)) ctx.colors = false;
+  if (isUndefined(ctx.customInspect)) ctx.customInspect = true;
+  if (ctx.colors) ctx.stylize = stylizeWithColor;
+  return formatValue(ctx, obj, ctx.depth);
+}
+exports.inspect = inspect;
+
+
+// http://en.wikipedia.org/wiki/ANSI_escape_code#graphics
+inspect.colors = {
+  'bold' : [1, 22],
+  'italic' : [3, 23],
+  'underline' : [4, 24],
+  'inverse' : [7, 27],
+  'white' : [37, 39],
+  'grey' : [90, 39],
+  'black' : [30, 39],
+  'blue' : [34, 39],
+  'cyan' : [36, 39],
+  'green' : [32, 39],
+  'magenta' : [35, 39],
+  'red' : [31, 39],
+  'yellow' : [33, 39]
+};
+
+// Don't use 'blue' not visible on cmd.exe
+inspect.styles = {
+  'special': 'cyan',
+  'number': 'yellow',
+  'boolean': 'yellow',
+  'undefined': 'grey',
+  'null': 'bold',
+  'string': 'green',
+  'date': 'magenta',
+  // "name": intentionally not styling
+  'regexp': 'red'
+};
+
+
+function stylizeWithColor(str, styleType) {
+  var style = inspect.styles[styleType];
+
+  if (style) {
+    return '\u001b[' + inspect.colors[style][0] + 'm' + str +
+           '\u001b[' + inspect.colors[style][1] + 'm';
+  } else {
+    return str;
+  }
+}
+
+
+function stylizeNoColor(str, styleType) {
+  return str;
+}
+
+
+function arrayToHash(array) {
+  var hash = {};
+
+  array.forEach(function(val, idx) {
+    hash[val] = true;
+  });
+
+  return hash;
+}
+
+
+function formatValue(ctx, value, recurseTimes) {
+  // Provide a hook for user-specified inspect functions.
+  // Check that value is an object with an inspect function on it
+  if (ctx.customInspect &&
+      value &&
+      isFunction(value.inspect) &&
+      // Filter out the util module, it's inspect function is special
+      value.inspect !== exports.inspect &&
+      // Also filter out any prototype objects using the circular check.
+      !(value.constructor && value.constructor.prototype === value)) {
+    var ret = value.inspect(recurseTimes, ctx);
+    if (!isString(ret)) {
+      ret = formatValue(ctx, ret, recurseTimes);
+    }
+    return ret;
+  }
+
+  // Primitive types cannot have properties
+  var primitive = formatPrimitive(ctx, value);
+  if (primitive) {
+    return primitive;
+  }
+
+  // Look up the keys of the object.
+  var keys = Object.keys(value);
+  var visibleKeys = arrayToHash(keys);
+
+  if (ctx.showHidden) {
+    keys = Object.getOwnPropertyNames(value);
+  }
+
+  // IE doesn't make error fields non-enumerable
+  // http://msdn.microsoft.com/en-us/library/ie/dww52sbt(v=vs.94).aspx
+  if (isError(value)
+      && (keys.indexOf('message') >= 0 || keys.indexOf('description') >= 0)) {
+    return formatError(value);
+  }
+
+  // Some type of object without properties can be shortcutted.
+  if (keys.length === 0) {
+    if (isFunction(value)) {
+      var name = value.name ? ': ' + value.name : '';
+      return ctx.stylize('[Function' + name + ']', 'special');
+    }
+    if (isRegExp(value)) {
+      return ctx.stylize(RegExp.prototype.toString.call(value), 'regexp');
+    }
+    if (isDate(value)) {
+      return ctx.stylize(Date.prototype.toString.call(value), 'date');
+    }
+    if (isError(value)) {
+      return formatError(value);
+    }
+  }
+
+  var base = '', array = false, braces = ['{', '}'];
+
+  // Make Array say that they are Array
+  if (isArray(value)) {
+    array = true;
+    braces = ['[', ']'];
+  }
+
+  // Make functions say that they are functions
+  if (isFunction(value)) {
+    var n = value.name ? ': ' + value.name : '';
+    base = ' [Function' + n + ']';
+  }
+
+  // Make RegExps say that they are RegExps
+  if (isRegExp(value)) {
+    base = ' ' + RegExp.prototype.toString.call(value);
+  }
+
+  // Make dates with properties first say the date
+  if (isDate(value)) {
+    base = ' ' + Date.prototype.toUTCString.call(value);
+  }
+
+  // Make error with message first say the error
+  if (isError(value)) {
+    base = ' ' + formatError(value);
+  }
+
+  if (keys.length === 0 && (!array || value.length == 0)) {
+    return braces[0] + base + braces[1];
+  }
+
+  if (recurseTimes < 0) {
+    if (isRegExp(value)) {
+      return ctx.stylize(RegExp.prototype.toString.call(value), 'regexp');
+    } else {
+      return ctx.stylize('[Object]', 'special');
+    }
+  }
+
+  ctx.seen.push(value);
+
+  var output;
+  if (array) {
+    output = formatArray(ctx, value, recurseTimes, visibleKeys, keys);
+  } else {
+    output = keys.map(function(key) {
+      return formatProperty(ctx, value, recurseTimes, visibleKeys, key, array);
+    });
+  }
+
+  ctx.seen.pop();
+
+  return reduceToSingleString(output, base, braces);
+}
+
+
+function formatPrimitive(ctx, value) {
+  if (isUndefined(value))
+    return ctx.stylize('undefined', 'undefined');
+  if (isString(value)) {
+    var simple = '\'' + JSON.stringify(value).replace(/^"|"$/g, '')
+                                             .replace(/'/g, "\\'")
+                                             .replace(/\\"/g, '"') + '\'';
+    return ctx.stylize(simple, 'string');
+  }
+  if (isNumber(value))
+    return ctx.stylize('' + value, 'number');
+  if (isBoolean(value))
+    return ctx.stylize('' + value, 'boolean');
+  // For some reason typeof null is "object", so special case here.
+  if (isNull(value))
+    return ctx.stylize('null', 'null');
+}
+
+
+function formatError(value) {
+  return '[' + Error.prototype.toString.call(value) + ']';
+}
+
+
+function formatArray(ctx, value, recurseTimes, visibleKeys, keys) {
+  var output = [];
+  for (var i = 0, l = value.length; i < l; ++i) {
+    if (hasOwnProperty(value, String(i))) {
+      output.push(formatProperty(ctx, value, recurseTimes, visibleKeys,
+          String(i), true));
+    } else {
+      output.push('');
+    }
+  }
+  keys.forEach(function(key) {
+    if (!key.match(/^\d+$/)) {
+      output.push(formatProperty(ctx, value, recurseTimes, visibleKeys,
+          key, true));
+    }
+  });
+  return output;
+}
+
+
+function formatProperty(ctx, value, recurseTimes, visibleKeys, key, array) {
+  var name, str, desc;
+  desc = Object.getOwnPropertyDescriptor(value, key) || { value: value[key] };
+  if (desc.get) {
+    if (desc.set) {
+      str = ctx.stylize('[Getter/Setter]', 'special');
+    } else {
+      str = ctx.stylize('[Getter]', 'special');
+    }
+  } else {
+    if (desc.set) {
+      str = ctx.stylize('[Setter]', 'special');
+    }
+  }
+  if (!hasOwnProperty(visibleKeys, key)) {
+    name = '[' + key + ']';
+  }
+  if (!str) {
+    if (ctx.seen.indexOf(desc.value) < 0) {
+      if (isNull(recurseTimes)) {
+        str = formatValue(ctx, desc.value, null);
+      } else {
+        str = formatValue(ctx, desc.value, recurseTimes - 1);
+      }
+      if (str.indexOf('\n') > -1) {
+        if (array) {
+          str = str.split('\n').map(function(line) {
+            return '  ' + line;
+          }).join('\n').substr(2);
+        } else {
+          str = '\n' + str.split('\n').map(function(line) {
+            return '   ' + line;
+          }).join('\n');
+        }
+      }
+    } else {
+      str = ctx.stylize('[Circular]', 'special');
+    }
+  }
+  if (isUndefined(name)) {
+    if (array && key.match(/^\d+$/)) {
+      return str;
+    }
+    name = JSON.stringify('' + key);
+    if (name.match(/^"([a-zA-Z_][a-zA-Z_0-9]*)"$/)) {
+      name = name.substr(1, name.length - 2);
+      name = ctx.stylize(name, 'name');
+    } else {
+      name = name.replace(/'/g, "\\'")
+                 .replace(/\\"/g, '"')
+                 .replace(/(^"|"$)/g, "'");
+      name = ctx.stylize(name, 'string');
+    }
+  }
+
+  return name + ': ' + str;
+}
+
+
+function reduceToSingleString(output, base, braces) {
+  var numLinesEst = 0;
+  var length = output.reduce(function(prev, cur) {
+    numLinesEst++;
+    if (cur.indexOf('\n') >= 0) numLinesEst++;
+    return prev + cur.replace(/\u001b\[\d\d?m/g, '').length + 1;
+  }, 0);
+
+  if (length > 60) {
+    return braces[0] +
+           (base === '' ? '' : base + '\n ') +
+           ' ' +
+           output.join(',\n  ') +
+           ' ' +
+           braces[1];
+  }
+
+  return braces[0] + base + ' ' + output.join(', ') + ' ' + braces[1];
+}
+
+
+// NOTE: These type checking functions intentionally don't use `instanceof`
+// because it is fragile and can be easily faked with `Object.create()`.
+function isArray(ar) {
+  return Array.isArray(ar);
+}
+exports.isArray = isArray;
+
+function isBoolean(arg) {
+  return typeof arg === 'boolean';
+}
+exports.isBoolean = isBoolean;
+
+function isNull(arg) {
+  return arg === null;
+}
+exports.isNull = isNull;
+
+function isNullOrUndefined(arg) {
+  return arg == null;
+}
+exports.isNullOrUndefined = isNullOrUndefined;
+
+function isNumber(arg) {
+  return typeof arg === 'number';
+}
+exports.isNumber = isNumber;
+
+function isString(arg) {
+  return typeof arg === 'string';
+}
+exports.isString = isString;
+
+function isSymbol(arg) {
+  return typeof arg === 'symbol';
+}
+exports.isSymbol = isSymbol;
+
+function isUndefined(arg) {
+  return arg === void 0;
+}
+exports.isUndefined = isUndefined;
+
+function isRegExp(re) {
+  return isObject(re) && objectToString(re) === '[object RegExp]';
+}
+exports.isRegExp = isRegExp;
+
+function isObject(arg) {
+  return typeof arg === 'object' && arg !== null;
+}
+exports.isObject = isObject;
+
+function isDate(d) {
+  return isObject(d) && objectToString(d) === '[object Date]';
+}
+exports.isDate = isDate;
+
+function isError(e) {
+  return isObject(e) &&
+      (objectToString(e) === '[object Error]' || e instanceof Error);
+}
+exports.isError = isError;
+
+function isFunction(arg) {
+  return typeof arg === 'function';
+}
+exports.isFunction = isFunction;
+
+function isPrimitive(arg) {
+  return arg === null ||
+         typeof arg === 'boolean' ||
+         typeof arg === 'number' ||
+         typeof arg === 'string' ||
+         typeof arg === 'symbol' ||  // ES6 symbol
+         typeof arg === 'undefined';
+}
+exports.isPrimitive = isPrimitive;
+
+exports.isBuffer = __webpack_require__(/*! ./support/isBuffer */ "../../util/sugar/node_modules/util/support/isBufferBrowser.js");
+
+function objectToString(o) {
+  return Object.prototype.toString.call(o);
+}
+
+
+function pad(n) {
+  return n < 10 ? '0' + n.toString(10) : n.toString(10);
+}
+
+
+var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
+              'Oct', 'Nov', 'Dec'];
+
+// 26 Feb 16:19:34
+function timestamp() {
+  var d = new Date();
+  var time = [pad(d.getHours()),
+              pad(d.getMinutes()),
+              pad(d.getSeconds())].join(':');
+  return [d.getDate(), months[d.getMonth()], time].join(' ');
+}
+
+
+// log is just a thin wrapper to console.log that prepends a timestamp
+exports.log = function() {
+  console.log('%s - %s', timestamp(), exports.format.apply(exports, arguments));
+};
+
+
+/**
+ * Inherit the prototype methods from one constructor into another.
+ *
+ * The Function.prototype.inherits from lang.js rewritten as a standalone
+ * function (not on Function.prototype). NOTE: If this file is to be loaded
+ * during bootstrapping this function needs to be rewritten using some native
+ * functions as prototype setup using normal JavaScript does not work as
+ * expected during bootstrapping (see mirror.js in r114903).
+ *
+ * @param {function} ctor Constructor function which needs to inherit the
+ *     prototype.
+ * @param {function} superCtor Constructor function to inherit prototype from.
+ */
+exports.inherits = __webpack_require__(/*! inherits */ "../../util/sugar/node_modules/util/node_modules/inherits/inherits_browser.js");
+
+exports._extend = function(origin, add) {
+  // Don't do anything if add isn't an object
+  if (!add || !isObject(add)) return origin;
+
+  var keys = Object.keys(add);
+  var i = keys.length;
+  while (i--) {
+    origin[keys[i]] = add[keys[i]];
+  }
+  return origin;
+};
+
+function hasOwnProperty(obj, prop) {
+  return Object.prototype.hasOwnProperty.call(obj, prop);
+}
+
+var kCustomPromisifiedSymbol = typeof Symbol !== 'undefined' ? Symbol('util.promisify.custom') : undefined;
+
+exports.promisify = function promisify(original) {
+  if (typeof original !== 'function')
+    throw new TypeError('The "original" argument must be of type Function');
+
+  if (kCustomPromisifiedSymbol && original[kCustomPromisifiedSymbol]) {
+    var fn = original[kCustomPromisifiedSymbol];
+    if (typeof fn !== 'function') {
+      throw new TypeError('The "util.promisify.custom" argument must be of type Function');
+    }
+    Object.defineProperty(fn, kCustomPromisifiedSymbol, {
+      value: fn, enumerable: false, writable: false, configurable: true
+    });
+    return fn;
+  }
+
+  function fn() {
+    var promiseResolve, promiseReject;
+    var promise = new Promise(function (resolve, reject) {
+      promiseResolve = resolve;
+      promiseReject = reject;
+    });
+
+    var args = [];
+    for (var i = 0; i < arguments.length; i++) {
+      args.push(arguments[i]);
+    }
+    args.push(function (err, value) {
+      if (err) {
+        promiseReject(err);
+      } else {
+        promiseResolve(value);
+      }
+    });
+
+    try {
+      original.apply(this, args);
+    } catch (err) {
+      promiseReject(err);
+    }
+
+    return promise;
+  }
+
+  Object.setPrototypeOf(fn, Object.getPrototypeOf(original));
+
+  if (kCustomPromisifiedSymbol) Object.defineProperty(fn, kCustomPromisifiedSymbol, {
+    value: fn, enumerable: false, writable: false, configurable: true
+  });
+  return Object.defineProperties(
+    fn,
+    getOwnPropertyDescriptors(original)
+  );
+}
+
+exports.promisify.custom = kCustomPromisifiedSymbol
+
+function callbackifyOnRejected(reason, cb) {
+  // `!reason` guard inspired by bluebird (Ref: https://goo.gl/t5IS6M).
+  // Because `null` is a special error value in callbacks which means "no error
+  // occurred", we error-wrap so the callback consumer can distinguish between
+  // "the promise rejected with null" or "the promise fulfilled with undefined".
+  if (!reason) {
+    var newReason = new Error('Promise was rejected with a falsy value');
+    newReason.reason = reason;
+    reason = newReason;
+  }
+  return cb(reason);
+}
+
+function callbackify(original) {
+  if (typeof original !== 'function') {
+    throw new TypeError('The "original" argument must be of type Function');
+  }
+
+  // We DO NOT return the promise as it gives the user a false sense that
+  // the promise is actually somehow related to the callback's execution
+  // and that the callback throwing will reject the promise.
+  function callbackified() {
+    var args = [];
+    for (var i = 0; i < arguments.length; i++) {
+      args.push(arguments[i]);
+    }
+
+    var maybeCb = args.pop();
+    if (typeof maybeCb !== 'function') {
+      throw new TypeError('The last argument must be of type Function');
+    }
+    var self = this;
+    var cb = function() {
+      return maybeCb.apply(self, arguments);
+    };
+    // In true node style we process the callback on `nextTick` with all the
+    // implications (stack, `uncaughtException`, `async_hooks`)
+    original.apply(this, args)
+      .then(function(ret) { process.nextTick(cb, null, ret) },
+            function(rej) { process.nextTick(callbackifyOnRejected, rej, cb) });
+  }
+
+  Object.setPrototypeOf(callbackified, Object.getPrototypeOf(original));
+  Object.defineProperties(callbackified,
+                          getOwnPropertyDescriptors(original));
+  return callbackified;
+}
+exports.callbackify = callbackify;
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../process/browser.js */ "../../util/sugar/node_modules/process/browser.js")))
+
+/***/ }),
+
 /***/ "../../util/sugar/node_modules/utila/lib/Emitter.js":
 /*!************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/utila/lib/Emitter.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/utila/lib/Emitter.js ***!
   \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -20533,7 +31781,7 @@ module.exports = Emitter = (function() {
 
 /***/ "../../util/sugar/node_modules/utila/lib/_common.js":
 /*!************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/utila/lib/_common.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/utila/lib/_common.js ***!
   \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -20655,7 +31903,7 @@ module.exports = common = {
 
 /***/ "../../util/sugar/node_modules/utila/lib/array.js":
 /*!**********************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/utila/lib/array.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/utila/lib/array.js ***!
   \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -20831,7 +32079,7 @@ module.exports = array = {
 
 /***/ "../../util/sugar/node_modules/utila/lib/classic.js":
 /*!************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/utila/lib/classic.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/utila/lib/classic.js ***!
   \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -20928,7 +32176,7 @@ classic.mix = function() {
 
 /***/ "../../util/sugar/node_modules/utila/lib/object.js":
 /*!***********************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/utila/lib/object.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/utila/lib/object.js ***!
   \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -21097,7 +32345,7 @@ module.exports = object = {
 
 /***/ "../../util/sugar/node_modules/utila/lib/string.js":
 /*!***********************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/utila/lib/string.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/utila/lib/string.js ***!
   \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -21122,7 +32370,7 @@ module.exports = {
 
 /***/ "../../util/sugar/node_modules/utila/lib/utila.js":
 /*!**********************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/util/sugar/node_modules/utila/lib/utila.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/utila/lib/utila.js ***!
   \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -21172,6 +32420,39 @@ module.exports = g;
 
 /***/ }),
 
+/***/ "../../util/sugar/node_modules/webpack/buildin/module.js":
+/*!***********************************!*\
+  !*** (webpack)/buildin/module.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = function(module) {
+	if (!module.webpackPolyfill) {
+		module.deprecate = function() {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if (!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
+
+/***/ }),
+
 /***/ "./src/js/index.js":
 /*!*************************!*\
   !*** ./src/js/index.js ***!
@@ -21211,7 +32492,8 @@ _defineProperty(SFiltrableInputWebComponent, "props", {
     physical: true,
     default: [{
       name: 'hello'
-    }]
+    }],
+    watch: true
   }
 });
 

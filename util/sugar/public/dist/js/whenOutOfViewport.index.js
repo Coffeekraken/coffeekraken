@@ -13,11 +13,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = closest;
+exports.default = closest;
 
 var _matches = _interopRequireDefault(__webpack_require__(/*! ./matches */ "./src/js/dom/matches.js"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name        closest
@@ -50,7 +50,7 @@ function closest($elm, selector) {
   while ($elm && $elm != originalElm.ownerDocument) {
     if (typeof selector === 'function') {
       if (selector($elm)) return $elm;
-    } else if (typeof selector === 'string' && (0, _matches["default"])($elm, selector)) {
+    } else if (typeof selector === 'string' && (0, _matches.default)($elm, selector)) {
       return $elm;
     }
 
@@ -77,9 +77,7 @@ module.exports = exports.default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = isInViewport;
-
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+exports.default = isInViewport;
 
 // TODO tests
 
@@ -110,7 +108,7 @@ function isInViewport(elm) {
   var offsetBottom = offset;
   var offsetLeft = offset;
 
-  if (_typeof(offset) === 'object') {
+  if (typeof offset === 'object') {
     offsetTop = offset.top || 0;
     offsetRight = offset.right || 0;
     offsetBottom = offset.bottom || 0;
@@ -144,7 +142,7 @@ module.exports = exports.default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = matches;
+exports.default = matches;
 
 /**
  * @name      matches
@@ -197,7 +195,7 @@ module.exports = exports.default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = whenOutOfViewport;
+exports.default = whenOutOfViewport;
 
 var _isInViewport2 = _interopRequireDefault(__webpack_require__(/*! ./isInViewport */ "./src/js/dom/isInViewport.js"));
 
@@ -205,7 +203,7 @@ var _throttle = _interopRequireDefault(__webpack_require__(/*! ../function/throt
 
 var _closest = _interopRequireDefault(__webpack_require__(/*! ./closest */ "./src/js/dom/closest.js"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // TODO tests
 
@@ -230,17 +228,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
  */
 function whenOutOfViewport(elm) {
   var offset = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 50;
-  return new Promise(function (resolve, reject) {
+  return new Promise((resolve, reject) => {
     if (window.IntersectionObserver) {
       var isInViewport = false,
-          _cb = function _cb() {
+          _cb = () => {
         if (!isInViewport) {
           observer.disconnect();
           resolve(elm);
         }
       };
 
-      var observer = new IntersectionObserver(function (entries, observer) {
+      var observer = new IntersectionObserver((entries, observer) => {
         if (!entries.length) return;
         var entry = entries[0];
 
@@ -263,7 +261,7 @@ function whenOutOfViewport(elm) {
       var scrollContainerElm = document;
 
       if (!elm._inViewportContainer) {
-        var overflowContainer = (0, _closest["default"])(elm, '[data-in-viewport-container]');
+        var overflowContainer = (0, _closest.default)(elm, '[data-in-viewport-container]');
 
         if (overflowContainer) {
           scrollContainerElm = overflowContainer;
@@ -274,7 +272,7 @@ function whenOutOfViewport(elm) {
       }
 
       var _isInViewport = true,
-          _cb2 = function _cb2() {
+          _cb2 = () => {
         if (!_isInViewport) {
           scrollContainerElm.removeEventListener('scroll', checkViewport);
           window.removeEventListener('resize', checkViewport);
@@ -282,15 +280,15 @@ function whenOutOfViewport(elm) {
         }
       };
 
-      var checkViewport = (0, _throttle["default"])(function (e) {
-        _isInViewport = (0, _isInViewport2["default"])(elm, offset);
+      var checkViewport = (0, _throttle.default)(e => {
+        _isInViewport = (0, _isInViewport2.default)(elm, offset);
 
         _cb2();
       }, 100); // listen for resize
 
       scrollContainerElm.addEventListener('scroll', checkViewport);
       window.addEventListener('resize', checkViewport);
-      setTimeout(function () {
+      setTimeout(() => {
         checkViewport(null);
       });
     }
@@ -314,7 +312,7 @@ module.exports = exports.default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = throttle;
+exports.default = throttle;
 
 /**
  * @name        throttle

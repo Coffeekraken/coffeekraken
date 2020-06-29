@@ -163,9 +163,8 @@ module.exports = function spawn(
         value: error.toString()
       });
     });
-  })
-    .on('cancel,finally', () => {})
-    .start();
+  }).on('cancel,finally', () => {});
+  // .start();
 
   // save the process
   __registerProcess(childProcess);

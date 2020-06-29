@@ -13,13 +13,13 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = getStyleProperty;
+exports.default = getStyleProperty;
 
 var _camelize = _interopRequireDefault(__webpack_require__(/*! ../string/camelize */ "./src/js/string/camelize.js"));
 
 var _autoCast = _interopRequireDefault(__webpack_require__(/*! ../string/autoCast */ "./src/js/string/autoCast.js"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name      getStyleProperty
@@ -43,7 +43,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
  */
 function getStyleProperty(elm, property) {
   // caching mecanisme
-  setTimeout(function () {
+  setTimeout(() => {
     elm._sComputedStyle = null;
   });
   var computed = elm._sComputedStyle || window.getComputedStyle(elm);
@@ -52,8 +52,8 @@ function getStyleProperty(elm, property) {
 
   for (var i = 0; i < prefixes.length; i++) {
     var prefix = prefixes[i];
-    var value = computed[(0, _camelize["default"])("".concat(prefix).concat(property))];
-    if (value && value.trim() !== '') return (0, _autoCast["default"])(value);
+    var value = computed[(0, _camelize.default)("".concat(prefix).concat(property))];
+    if (value && value.trim() !== '') return (0, _autoCast.default)(value);
   }
 
   return null;
@@ -76,13 +76,13 @@ module.exports = exports.default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = getTransitionProperties;
+exports.default = getTransitionProperties;
 
 var _getStyleProperty = _interopRequireDefault(__webpack_require__(/*! ./getStyleProperty */ "./src/js/dom/getStyleProperty.js"));
 
 var _convert = _interopRequireDefault(__webpack_require__(/*! ../time/convert */ "./src/js/time/convert.js"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // TODO tests
 
@@ -112,9 +112,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
  */
 function splitIfNeeded(what, separator) {
   if (what.indexOf(separator) !== -1) {
-    return what.split(separator).map(function (item) {
-      return item.trim();
-    });
+    return what.split(separator).map(item => item.trim());
   }
 
   return [what];
@@ -122,25 +120,21 @@ function splitIfNeeded(what, separator) {
 
 function getTransitionProperties(elm) {
   // get the transition properties
-  var property = (0, _getStyleProperty["default"])(elm, 'transition-property');
-  var duration = (0, _getStyleProperty["default"])(elm, 'transition-duration') || 0;
-  var timingFunction = (0, _getStyleProperty["default"])(elm, 'transition-timing-function');
-  var delay = (0, _getStyleProperty["default"])(elm, 'transition-delay'); // return the transition object
+  var property = (0, _getStyleProperty.default)(elm, 'transition-property');
+  var duration = (0, _getStyleProperty.default)(elm, 'transition-duration') || 0;
+  var timingFunction = (0, _getStyleProperty.default)(elm, 'transition-timing-function');
+  var delay = (0, _getStyleProperty.default)(elm, 'transition-delay'); // return the transition object
 
   var props = {
     property: splitIfNeeded(property, ','),
-    duration: splitIfNeeded(duration, ',').map(function (value) {
-      return (0, _convert["default"])(value, 'ms');
-    }),
-    delay: splitIfNeeded(delay, ',').map(function (value) {
-      return (0, _convert["default"])(value, 'ms');
-    }),
+    duration: splitIfNeeded(duration, ',').map(value => (0, _convert.default)(value, 'ms')),
+    delay: splitIfNeeded(delay, ',').map(value => (0, _convert.default)(value, 'ms')),
     timingFunction: splitIfNeeded(timingFunction, ',')
   };
   var totalDuration = 0;
   var i = 0;
   var delays = [0].concat(props.delay);
-  [0].concat(props.duration).forEach(function (val) {
+  [0].concat(props.duration).forEach(val => {
     if (val + delays[i] > totalDuration) {
       totalDuration = val + delays[i];
     }
@@ -168,11 +162,11 @@ module.exports = exports.default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = whenTransitionEnd;
+exports.default = whenTransitionEnd;
 
 var _getTransitionProperties = _interopRequireDefault(__webpack_require__(/*! ./getTransitionProperties */ "./src/js/dom/getTransitionProperties.js"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name      whenTransitionEnd
@@ -195,9 +189,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
  */
 function whenTransitionEnd(elm) {
   var cb = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-  return new Promise(function (resolve, reject) {
-    var transition = (0, _getTransitionProperties["default"])(elm);
-    setTimeout(function () {
+  return new Promise((resolve, reject) => {
+    var transition = (0, _getTransitionProperties.default)(elm);
+    setTimeout(() => {
       resolve();
       cb && cb();
     }, transition.totalDuration);
@@ -221,7 +215,7 @@ module.exports = exports.default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = autoCast;
+exports.default = autoCast;
 
 /**
  * @name        autoCast
@@ -293,7 +287,7 @@ module.exports = exports.default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = convert;
+exports.default = convert;
 
 /**
  * @name                                  convert

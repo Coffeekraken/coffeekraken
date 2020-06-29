@@ -1,5 +1,7 @@
 import __deepMerge from '../object/deepMerge';
 import __prettyError from 'pretty-error';
+import __minimatch from 'minimatch';
+import __wait from '../time/wait';
 
 /**
  * @name                  SPromise
@@ -25,7 +27,7 @@ import __prettyError from 'pretty-error';
  *    - new SPromise((...)).then(1, value => { // do something... }).catch(3, error => { // do something... }).start();
  * - Expose a method called "on" that can be used to register callbacks the same as the "then", "catch", etc... methods but you can register a same callback function to multiple callbacks type at once:
  *    - new SPromise((...)).on('then', value => { ... }).on('then,catch', value => { ... }).start();
- *    - Specify the max number of time to call your callback function like so: new SPromise((...)).on('then:2', value => { ... }).on('then:1,catch', value => { ... }).start();
+ *    - Specify the max number of time to call your callback function like so: new SPromise((...)).on('then{2}', value => { ... }).on('then{1},catch', value => { ... }).start();
  * - A new method called "start" is exposed. This method is useful when you absolutely need that your executor function is launched right after the callbacks registrations.
  *    - If you don't call the "start" method, the executor function passed to the SPromise constructor will be called on the next javascript execution loop
  * - Support the Promises chaining through the callbacks like to:
@@ -551,6 +553,7 @@ export default class SPromise extends Promise {
    */
   async trigger(what, arg) {
     if (this._isDestroyed) return;
+
     // triger the passed stacks
     return this._triggerStacks(what, arg);
   }
@@ -628,44 +631,70 @@ export default class SPromise extends Promise {
    *
    * @param         {Array|String}             stack             The stack to execute. Can be the stack array directly, or just the stack name like "then", "catch", etc.stack.stack.
    * @param         {Mixed}             initialValue      The initial value to pass to the first stack callback
-   * @param         {String}            [as=null]         This parameter is useful when you want to trigger a stack as another one like when you trigger the stack "*"
    * @return        {Promise}                             A promise resolved with the stack result
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  async _triggerStack(stack, initialValue, asName = null) {
+  async _triggerStack(stack, initialValue) {
     let currentCallbackReturnedValue = initialValue;
-    const stackName = asName || stack;
+
+    // console.log(this._stacks);
 
     if (!this._stacks || Object.keys(this._stacks).length === 0)
       return currentCallbackReturnedValue;
 
+    let stackArray = [];
+
     if (typeof stack === 'string') {
       // make sure the stack exist
-      if (!this._stacks[stack]) {
-        this._registerNewStacks(stack);
+      // if (!this._stacks[stack]) {
+      //   this._registerNewStacks(stack);
+      // }
+
+      if (this._stacks[stack]) {
+        stackArray = [...stackArray, ...this._stacks[stack]];
       }
-      stack = this._stacks[stack];
+
+      // check if the stack is a glob pattern
+      Object.keys(this._stacks).forEach((stackName) => {
+        if (stackName === stack) return;
+        const toAvoid = [
+          'then',
+          'catch',
+          'resolve',
+          'reject',
+          'finally',
+          'cancel'
+        ];
+        if (toAvoid.indexOf(stack) !== -1 || toAvoid.indexOf(stackName) !== -1)
+          return;
+
+        // console.log('CHECK', stack, stackName);
+        if (__minimatch(stack, stackName)) {
+          // if (stackName === '*' && stack === 'start') {
+          //   console.log('SOMETHING GOOD', stackName, stack);
+          // }
+          // the glob pattern match the triggered stack so add it to the stack array
+          stackArray = [...stackArray, ...this._stacks[stackName]];
+        }
+      });
     }
 
     // filter the catchStack
-    stack.map((item) => item.called++);
-    stack = stack.filter((item) => {
+    stackArray.map((item) => item.called++);
+    stackArray = stackArray.filter((item) => {
       if (item.callNumber === -1) return true;
       if (item.called <= item.callNumber) return true;
       return false;
     });
 
-    for (let i = 0; i < stack.length; i++) {
+    for (let i = 0; i < stackArray.length; i++) {
       // get the actual item in the array
-      const item = stack[i];
+      const item = stackArray[i];
       // make sure the stack exist
       if (!item.callback) return currentCallbackReturnedValue;
       // call the callback function
-      let callbackResult = item.callback(
-        currentCallbackReturnedValue,
-        stackName
-      );
+      let callbackResult = item.callback(currentCallbackReturnedValue, stack);
       // check if the callback result is a promise
       if (Promise.resolve(callbackResult) === callbackResult) {
         callbackResult = await callbackResult;
@@ -711,7 +740,7 @@ export default class SPromise extends Promise {
       if (stackResult !== undefined) {
         currentStackResult = stackResult;
       }
-      await this._triggerStack('*', currentStackResult, stacks[i]);
+      // await this._triggerStack('*', currentStackResult, stacks[i]);
       // this._triggerAllStack(stacks[i], currentStackResult);
     }
 
@@ -756,11 +785,11 @@ export default class SPromise extends Promise {
     // loop on each stacks
     stacks.forEach((name) => {
       // check if it has a callNumber specified using name:1
-      const splitedName = name.split(':');
+      const splitedName = name.split('{');
       let callNumber = -1;
       if (splitedName.length === 2) {
         name = splitedName[0];
-        callNumber = parseInt(splitedName[1]);
+        callNumber = parseInt(splitedName[1].replace('}', ''));
       }
       // calling the registration method
       this._registerCallbackInStack(name, callNumber, callback);

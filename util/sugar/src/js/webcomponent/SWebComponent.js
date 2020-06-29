@@ -7,6 +7,7 @@ import __camelize from '../string/camelize';
 import __paramCase from '../string/paramCase';
 import __uncamelize from '../string/uncamelize';
 import __validateWithDefinitionObject from '../value/validateWithDefinitionObject';
+import __watch from '../object/watch';
 import { stack } from './register';
 
 /**
@@ -141,6 +142,16 @@ export default function SWebComponent(extend = HTMLElement) {
         if (this._props[key].value !== undefined) {
           this._props[key].valuesStack.push(this._props[key].value);
         }
+        // if need to be watches deeply
+        if (this._props[key].watch) {
+          this._props[key] = __watch(this._props[key]);
+          this._props[key].on('*:set', (update) => {
+            console.trace('up', update);
+          });
+          setTimeout(() => {
+            this._props[key].value.push('SOMTHINS');
+          }, 2000);
+        }
       }
 
       // launch the mounting process
@@ -247,7 +258,6 @@ export default function SWebComponent(extend = HTMLElement) {
      */
     connectedCallback() {
       // dispatch "event"
-      console.log('CONNEE');
       setTimeout(() => {
         this._promise.trigger('attach');
       });
@@ -291,8 +301,6 @@ export default function SWebComponent(extend = HTMLElement) {
       propObj.value = newValue;
       propObj.previousValue = previousValue;
       propObj.valuesStack.push(newValue);
-
-      console.log(propObj);
 
       // save the prop
       // this._props[__camelize(attrName)] = newPropObj;
@@ -354,8 +362,8 @@ export default function SWebComponent(extend = HTMLElement) {
         value: this._props[prop].value,
         previousValue: this._props[prop].previousValue
       };
-      this._promise.trigger('prop', eventObj);
-      this._promise.trigger(`prop.${prop}`, eventObj);
+      // this._promise.trigger('prop', eventObj);
+      // this._promise.trigger(`prop.${prop}`, eventObj);
     }
 
     /**

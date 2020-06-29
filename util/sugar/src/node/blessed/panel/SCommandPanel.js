@@ -142,7 +142,7 @@ module.exports = class SCommandPanel extends __SComponent {
   _subscribeToCommandsEvents() {
     // subscribe to data
     this._sPromise
-      .on('start', (data) => {
+      .on('start,success,error', (data) => {
         this.update();
       })
       .on('close', (data) => {
@@ -171,14 +171,14 @@ module.exports = class SCommandPanel extends __SComponent {
             question.resolve && question.resolve(answer);
           });
         }
-      })
-      // subscribe to answer
-      .on('answer', (answer) => {
-        // console.log(answer);
-        // for (let i = 0; i < currentAskLinesCount; i++) {
-        //   this._settings.logBox.deleteBottom();
-        // }
       });
+    // subscribe to answer
+    // .on('answer', (answer) => {
+    //   // console.log(answer);
+    //   // for (let i = 0; i < currentAskLinesCount; i++) {
+    //   //   this._settings.logBox.deleteBottom();
+    //   // }
+    // });
   }
 
   /**
@@ -687,11 +687,19 @@ module.exports = class SCommandPanel extends __SComponent {
       } else {
         // take care of the content of the processBox
         boxObj.$log.setContent('');
-        if (lastProcessObj && lastProcessObj.stderr.length) {
+        if (
+          lastProcessObj &&
+          lastProcessObj.stderr &&
+          lastProcessObj.stderr.length
+        ) {
           lastProcessObj.stderr.forEach((logItem) => {
             boxObj.$log.pushLine(__parseHtml(logItem.value || logItem));
           });
-        } else if (lastProcessObj) {
+        } else if (
+          lastProcessObj &&
+          lastProcessObj.stdout &&
+          lastProcessObj.stdout.length
+        ) {
           lastProcessObj.stdout.forEach((logItem) => {
             boxObj.$log.pushLine(__parseHtml(logItem.value || logItem));
           });

@@ -13,11 +13,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = closestNotVisible;
+exports.default = closestNotVisible;
 
 var _isVisible = _interopRequireDefault(__webpack_require__(/*! ./isVisible */ "./src/js/dom/isVisible.js"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name        closestNotVisible
@@ -44,7 +44,7 @@ function closestNotVisible(elm) {
   elm = elm.parentNode;
 
   while (elm && elm != originalElm.ownerDocument) {
-    if (!(0, _isVisible["default"])(elm)) {
+    if (!(0, _isVisible.default)(elm)) {
       return elm;
     }
 
@@ -71,7 +71,7 @@ module.exports = exports.default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = isVisible;
+exports.default = isVisible;
 
 /**
  * @name      isVisible
@@ -121,13 +121,13 @@ module.exports = exports.default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = whenVisible;
+exports.default = whenVisible;
 
 var _isVisible = _interopRequireDefault(__webpack_require__(/*! ./isVisible */ "./src/js/dom/isVisible.js"));
 
 var _closestNotVisible = _interopRequireDefault(__webpack_require__(/*! ./closestNotVisible */ "./src/js/dom/closestNotVisible.js"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name      whenVisible
@@ -150,7 +150,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
  */
 function whenVisible(elm) {
   var cb = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-  return new Promise(function (resolve, reject) {
+  return new Promise((resolve, reject) => {
     // variables
     var isSelfVisible = false,
         areParentsVisible = false,
@@ -158,7 +158,7 @@ function whenVisible(elm) {
         selfObserver = null,
         parentObserver = null;
 
-    var _cb = function _cb() {
+    var _cb = () => {
       if (isSelfVisible && areParentsVisible) {
         // process callbacks
         if (cb) cb(elm);
@@ -177,11 +177,11 @@ function whenVisible(elm) {
     }; // function called on each transitionend, start, etc...
 
 
-    var _eventCb = function _eventCb(e) {
+    var _eventCb = e => {
       // wait just a little time to check again
-      setTimeout(function () {
+      setTimeout(() => {
         if (e.target === elm) {
-          if ((0, _isVisible["default"])(elm)) {
+          if ((0, _isVisible.default)(elm)) {
             isSelfVisible = true;
 
             if (selfObserver && selfObserver.disconnect) {
@@ -194,7 +194,7 @@ function whenVisible(elm) {
             elm.removeEventListener('animationend', _eventCb);
           }
         } else if (e.target === closestNotVisible) {
-          if ((0, _isVisible["default"])(closestNotVisible)) {
+          if ((0, _isVisible.default)(closestNotVisible)) {
             areParentsVisible = true;
 
             if (parentObserver && parentObserver.disconnect) {
@@ -214,13 +214,13 @@ function whenVisible(elm) {
     }; // check if element itself is not visible
 
 
-    if (!(0, _isVisible["default"])(elm)) {
-      selfObserver = new MutationObserver(function (mutations) {
-        mutations.forEach(function (mutation) {
+    if (!(0, _isVisible.default)(elm)) {
+      selfObserver = new MutationObserver(mutations => {
+        mutations.forEach(mutation => {
           // check that is the style whos changed
           if (mutation.attributeName === 'style' || mutation.attributeName === 'class') {
             // check if is visible
-            if ((0, _isVisible["default"])(mutation.target)) {
+            if ((0, _isVisible.default)(mutation.target)) {
               // update
               isSelfVisible = true; // callback
 
@@ -245,15 +245,15 @@ function whenVisible(elm) {
     // if found, we monitor it to check when it is visible
 
 
-    closestNotVisible = (0, _closestNotVisible["default"])(elm);
+    closestNotVisible = (0, _closestNotVisible.default)(elm);
 
     if (closestNotVisible) {
-      parentObserver = new MutationObserver(function (mutations) {
-        mutations.forEach(function (mutation) {
+      parentObserver = new MutationObserver(mutations => {
+        mutations.forEach(mutation => {
           // check that is the style whos changed
           if (mutation.attributeName === 'style' || mutation.attributeName === 'class') {
             // check if is visible
-            if ((0, _isVisible["default"])(mutation.target)) {
+            if ((0, _isVisible.default)(mutation.target)) {
               // update
               areParentsVisible = true; // callback
 

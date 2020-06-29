@@ -13,11 +13,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = _default;
+exports.default = _default;
 
 var _SPromise = _interopRequireDefault(__webpack_require__(/*! ../promise/SPromise */ "./src/js/promise/SPromise.js"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -49,12 +49,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  */
 function _default(target) {
   var settings = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  return new _SPromise["default"](function (resolve, reject, trigger, cancel) {
+  return new _SPromise.default((resolve, reject, trigger, cancel) => {
     // create a new observer
-    var mutationObserver = new MutationObserver(function (mutations) {
+    var mutationObserver = new MutationObserver(mutations => {
       var mutedAttrs = {}; // loop on mutations
 
-      mutations.forEach(function (mutation) {
+      mutations.forEach(mutation => {
         // push mutation
         if (!mutedAttrs[mutation.attributeName]) {
           trigger('then', mutation);
@@ -66,7 +66,7 @@ function _default(target) {
     mutationObserver.observe(target, _objectSpread({
       attributes: true
     }, settings));
-  }).on('cancel,finally', function () {
+  }).on('cancel,finally', () => {
     mutationObserver.disconnect();
   }).start();
 }
@@ -96,13 +96,13 @@ module.exports = exports.default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = whenAttribute;
+exports.default = whenAttribute;
 
 var _autoCast = _interopRequireDefault(__webpack_require__(/*! ../string/autoCast */ "./src/js/string/autoCast.js"));
 
 var _observeAttributes = _interopRequireDefault(__webpack_require__(/*! ./observeAttributes */ "./src/js/dom/observeAttributes.js"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name      whenAttribute
@@ -133,9 +133,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
  */
 function whenAttribute(elm, attrName) {
   var checkFn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-  return new Promise(function (resolve, reject) {
+  return new Promise((resolve, reject) => {
     if (elm.hasAttribute(attrName)) {
-      var value = (0, _autoCast["default"])(elm.getAttribute(attrName));
+      var value = (0, _autoCast.default)(elm.getAttribute(attrName));
 
       if (checkFn && checkFn(value, value)) {
         resolve(value);
@@ -146,9 +146,9 @@ function whenAttribute(elm, attrName) {
       }
     }
 
-    var obs = (0, _observeAttributes["default"])(elm).then(function (mutation) {
+    var obs = (0, _observeAttributes.default)(elm).then(mutation => {
       if (mutation.attributeName === attrName) {
-        var _value = (0, _autoCast["default"])(mutation.target.getAttribute(mutation.attributeName));
+        var _value = (0, _autoCast.default)(mutation.target.getAttribute(mutation.attributeName));
 
         if (checkFn && checkFn(_value, mutation.oldValue)) {
           resolve(_value);
@@ -179,7 +179,7 @@ module.exports = exports.default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = autoCast;
+exports.default = autoCast;
 
 /**
  * @name        autoCast

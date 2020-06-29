@@ -4,61 +4,100 @@ module.exports = (__SWatch) => {
     b: {
       bb: 'world'
     },
+    glob: {
+      something: {
+        cool: 'Hello',
+        other: 'Yop'
+      }
+    },
     c: {
       cc: {
         ccc: ['hello', 'world']
       }
     }
   };
-  const watchObj = new __SWatch(obj);
 
   let doneAssign,
     doneUpdating,
     doneUpdatingDeep,
     doneDeleting,
-    doneAddIntoArray;
+    doneAddIntoArray,
+    doneGlobAction,
+    doneGlobPattern;
 
-  const watchId = watchObj.watch('**', (obj) => {
-    if (
-      obj.action === 'Object.set' &&
-      obj.path === 'coco' &&
-      watchObj.coco === 'plop'
-    ) {
-      doneAssign();
-    } else if (obj.path === 'a' && watchObj.a === 'bonjours') {
-      doneUpdating();
-    } else if (obj.path === 'b.bb' && watchObj.b.bb === 'hola') {
-      doneUpdatingDeep();
-    } else if (obj.action === 'Object.delete' && !watchObj.b.bb) {
-      doneDeleting();
-    } else if (obj.action === 'Array.push') {
-      expect(watchObj.c.cc.ccc).toEqual(['hello', 'world', 'plop']);
-      doneAddIntoArray();
+  let hasUnwatchedObjectBeenWatched = false;
+
+  const watchedObj = new __SWatch(obj);
+
+  watchedObj.on('coco:set', (update) => {
+    doneAssign();
+  });
+  watchedObj.on('a', (update) => {
+    if (watchedObj.a === 'bonjours') doneUpdating();
+  });
+  watchedObj.on('b.bb', (update) => {
+    if (watchedObj.b.bb === 'hola') doneUpdatingDeep();
+  });
+  watchedObj.on('*:delete', (update) => {
+    if (!update.target) doneDeleting();
+  });
+  watchedObj.on('*.cool', (update) => {
+    doneGlobPattern();
+  });
+  watchedObj.on('*.other:set', (update) => {
+    doneGlobAction();
+  });
+  watchedObj.on('*:push', (update) => {
+    expect(watchedObj.c.cc.ccc).toEqual(['hello', 'world', 'plop']);
+    doneAddIntoArray();
+  });
+  watchedObj.on('b.plop', (update) => {
+    if (watchedObj.b.plop === 'yop') {
+      hasUnwatchedObjectBeenWatched = true;
     }
   });
 
   test('Assign a new value', (done) => {
     doneAssign = done;
-    watchObj.coco = 'plop';
+    watchedObj.coco = 'plop';
   });
 
   test('Update an existing value', (done) => {
     doneUpdating = done;
-    watchObj.a = 'bonjours';
+    watchedObj.a = 'bonjours';
   });
 
   test('Update an existing deep value', (done) => {
     doneUpdatingDeep = done;
-    watchObj.b.bb = 'hola';
+    watchedObj.b.bb = 'hola';
   });
 
   test('Deleting a deep value', (done) => {
     doneDeleting = done;
-    delete watchObj.b.bb;
+    delete watchedObj.b.bb;
   });
 
   test('Adding a value into an array using push', (done) => {
     doneAddIntoArray = done;
-    watchObj.c.cc.ccc.push('plop');
+    watchedObj.c.cc.ccc.push('plop');
+  });
+
+  test('Adding a value to a deep variable to trigger the corresponding glob', (done) => {
+    doneGlobPattern = done;
+    watchedObj.glob.something.cool = 'hola';
+  });
+
+  test('Adding a value to a deep variable to trigger the corresponding glob action', (done) => {
+    doneGlobAction = done;
+    watchedObj.glob.something.other = 'plop';
+  });
+
+  test('Unwatch the watchedObject', (done) => {
+    const obj = watchedObj.unwatch();
+    obj.b.plop = 'yop';
+    setTimeout(() => {
+      expect(hasUnwatchedObjectBeenWatched).toBe(false);
+      done();
+    });
   });
 };

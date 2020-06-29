@@ -23,6 +23,8 @@ var _uncamelize = _interopRequireDefault(require("../string/uncamelize"));
 
 var _validateWithDefinitionObject = _interopRequireDefault(require("../value/validateWithDefinitionObject"));
 
+var _watch = _interopRequireDefault(require("../object/watch"));
+
 var _register = require("./register");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -135,8 +137,19 @@ function SWebComponent(extend = HTMLElement) {
        *
        * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
+
+      /**
+       * @name        observedAttributes
+       * @type        Function
+       * @get
+       * @static
+       *
+       * This medhod simply return the list of props that will be
+       * observed by the customElements under the hood system.
+       *
+       * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
       get: function () {
-        console.log('thguthught', this.props);
         return Object.keys(this.props);
       }
       /**
@@ -183,6 +196,19 @@ function SWebComponent(extend = HTMLElement) {
 
         if (_this._props[key].value !== undefined) {
           _this._props[key].valuesStack.push(_this._props[key].value);
+        } // if need to be watches deeply
+
+
+        if (_this._props[key].watch) {
+          _this._props[key] = (0, _watch.default)(_this._props[key]);
+
+          _this._props[key].on('*:set', update => {
+            console.trace('up', update);
+          });
+
+          setTimeout(() => {
+            _this._props[key].value.push('SOMTHINS');
+          }, 2000);
         }
       } // launch the mounting process
 
@@ -298,7 +324,6 @@ function SWebComponent(extend = HTMLElement) {
       key: "connectedCallback",
       value: function connectedCallback() {
         // dispatch "event"
-        console.log('CONNEE');
         setTimeout(() => {
           this._promise.trigger('attach');
         });
@@ -342,8 +367,7 @@ function SWebComponent(extend = HTMLElement) {
 
         propObj.value = newValue;
         propObj.previousValue = previousValue;
-        propObj.valuesStack.push(newValue);
-        console.log(propObj); // save the prop
+        propObj.valuesStack.push(newValue); // save the prop
         // this._props[__camelize(attrName)] = newPropObj;
         // trigger a "prop" event
 
@@ -403,11 +427,8 @@ function SWebComponent(extend = HTMLElement) {
           action: this._props[prop].previousValue !== null ? this._props[prop].value !== null ? 'update' : 'remove' : 'add',
           value: this._props[prop].value,
           previousValue: this._props[prop].previousValue
-        };
-
-        this._promise.trigger('prop', eventObj);
-
-        this._promise.trigger(`prop.${prop}`, eventObj);
+        }; // this._promise.trigger('prop', eventObj);
+        // this._promise.trigger(`prop.${prop}`, eventObj);
       }
       /**
        * @name        _handlePhysicalProps

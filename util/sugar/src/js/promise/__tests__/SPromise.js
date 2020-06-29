@@ -1,3 +1,5 @@
+const { italic } = require('chalk');
+
 module.exports = (__SPromise) => {
   describe('sugar.js.promise.SPromise', () => {
     const finallyStack = [],
@@ -22,7 +24,19 @@ module.exports = (__SPromise) => {
 
     let notRegisteredrigger = false;
 
+    let callStarTrigger = 0;
+
     (async () => {
+      const myPromise = new __SPromise((resolve, reject, trigger, cancel) => {
+        setTimeout(() => {
+          trigger('start', 'coco');
+          trigger('youhou', 'Hello');
+        }, 10);
+      }).on('*', (value) => {
+        callStarTrigger++;
+      });
+      myPromise.trigger('sss', true);
+
       myPromiseCancelResult = await new __SPromise(
         (resolve, reject, trigger, cancel) => {
           trigger('then', 'hello');
@@ -56,7 +70,7 @@ module.exports = (__SPromise) => {
         trigger('catch', 'plop');
         setTimeout(() => {
           resolve('nelson');
-        }, 10);
+        }, 100);
       })
         .then((value) => {
           thenStack.push(`${value}`);
@@ -82,7 +96,7 @@ module.exports = (__SPromise) => {
         .on('then', (value) => {
           onThenStack.push(value + 'onThen');
         })
-        .on('then:1,catch:1', (value) => {
+        .on('then{1},catch{1}', (value) => {
           onThenCatchStack.push(value + 'onThenCatch');
         })
         .start();
@@ -120,6 +134,13 @@ module.exports = (__SPromise) => {
 
       isPassedPromiseWithPromises = true;
     })();
+
+    it('Should trigger the * callback n times', (done) => {
+      setTimeout(() => {
+        expect(callStarTrigger).toBe(3);
+        done();
+      }, 50);
+    });
 
     it('Should not have passed the await point in the source code before having calling the release function', (done) => {
       expect(isPassedAwait).toBe(false);

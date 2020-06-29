@@ -306,11 +306,11 @@ function observeDOM(watches, container, cb) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = whenInViewport;
+exports.default = whenInViewport;
 
 var _inViewport = _interopRequireDefault(__webpack_require__(/*! in-viewport */ "./node_modules/in-viewport/in-viewport.js"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name      whenInViewport
@@ -333,10 +333,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
  */
 function whenInViewport(elm) {
   var offset = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 50;
-  return new Promise(function (resolve, reject) {
-    (0, _inViewport["default"])(elm, {
+  return new Promise((resolve, reject) => {
+    (0, _inViewport.default)(elm, {
       offset: offset
-    }, function () {
+    }, () => {
       resolve(elm);
     });
   });

@@ -6,31 +6,58 @@ module.exports = __watch => {
     b: {
       bb: 'world'
     },
+    glob: {
+      something: {
+        cool: 'Hello',
+        other: 'Yop'
+      }
+    },
     c: {
       cc: {
         ccc: ['hello', 'world']
       }
     }
   };
-  let doneAssign, doneUpdating, doneUpdatingDeep, doneDeleting, doneAddIntoArray;
+  let doneAssign, doneUpdating, doneUpdatingDeep, doneDeleting, doneAddIntoArray, doneGlobAction, doneGlobPattern;
   let hasUnwatchedObjectBeenWatched = false;
 
-  const watchedObj = __watch(obj, '**', update => {
-    if (update.action === 'Object.set' && update.path === 'coco' && watchedObj.coco === 'plop') {
-      doneAssign();
-    } else if (update.path === 'a' && watchedObj.a === 'bonjours') {
-      doneUpdating();
-    } else if (update.path === 'b.bb' && watchedObj.b.bb === 'hola') {
-      doneUpdatingDeep();
-    } else if (update.action === 'Object.delete' && !watchedObj.b.bb) {
-      doneDeleting();
-    } else if (update.action === 'Array.push') {
-      expect(watchedObj.c.cc.ccc).toEqual(['hello', 'world', 'plop']);
-      doneAddIntoArray();
-    } else if (update.path === 'b.plop' && watchedObj.b.plop === 'yop') {
+  const watchedObj = __watch(obj);
+
+  watchedObj.on('coco:set', update => {
+    doneAssign();
+  });
+  watchedObj.on('a', update => {
+    if (watchedObj.a === 'bonjours') doneUpdating();
+  });
+  watchedObj.on('b.bb', update => {
+    if (watchedObj.b.bb === 'hola') doneUpdatingDeep();
+  });
+  watchedObj.on('*:delete', update => {
+    if (!update.target) doneDeleting();
+  });
+  watchedObj.on('*.cool', update => {
+    doneGlobPattern();
+  });
+  watchedObj.on('*.other:set', update => {
+    doneGlobAction();
+  });
+  watchedObj.on('*:push', update => {
+    expect(watchedObj.c.cc.ccc).toEqual(['hello', 'world', 'plop']);
+    doneAddIntoArray();
+  });
+  watchedObj.on('b.plop', update => {
+    if (watchedObj.b.plop === 'yop') {
       hasUnwatchedObjectBeenWatched = true;
     }
-  });
+  }); // if (update.action === 'Object.set' && update.path === 'coco' && watchedObj.coco === 'plop') {
+  // } else if (update.path === 'a' && watchedObj.a === 'bonjours') {
+  // } else if (update.path === 'b.bb' && watchedObj.b.bb === 'hola') {
+  // } else if (update.action === 'Object.delete' && !watchedObj.b.bb) {
+  // } else if (update.action === 'Array.push') {
+  // } else if (update.path === 'b.plop' && watchedObj.b.plop === 'yop') {
+  //   hasUnwatchedObjectBeenWatched = true;
+  // }
+  // });
 
   test('Assign a new value', done => {
     doneAssign = done;
@@ -52,9 +79,17 @@ module.exports = __watch => {
     doneAddIntoArray = done;
     watchedObj.c.cc.ccc.push('plop');
   });
+  test('Adding a value to a deep variable to trigger the corresponding glob', done => {
+    doneGlobPattern = done;
+    watchedObj.glob.something.cool = 'hola';
+  });
+  test('Adding a value to a deep variable to trigger the corresponding glob action', done => {
+    doneGlobAction = done;
+    watchedObj.glob.something.other = 'plop';
+  });
   test('Unwatch the watchedObject', done => {
-    watchedObj.unwatch();
-    watchedObj.b.plop = 'yop';
+    const obj = watchedObj.unwatch();
+    obj.b.plop = 'yop';
     setTimeout(() => {
       expect(hasUnwatchedObjectBeenWatched).toBe(false);
       done();

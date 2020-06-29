@@ -25,7 +25,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * myArray.watch(['push','pop'], (watchObj) => {
  *    // check the watchObj action
  *    switch (watchObj.action) {
- *      case 'Array.push':
+ *      case 'push':
  *        // do something...
  *      break;
  *    }
@@ -52,7 +52,8 @@ function proxy(array) {
         handlerFn: watch.handlerFn,
         watchObj: {
           oldValue: [...array],
-          action: `Array.${name}`,
+          action: `${name}`,
+          fullAction: `Array.${name}`,
           args
         }
       });

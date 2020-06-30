@@ -8,12 +8,22 @@ const __SFrontendServerCommand = require('../src/node/server/frontend/SFrontendS
 const __SBladePhpServerCommand = require('../src/node/server/bladePhp/SBladePhpServerCommand');
 const __SBuildJsCommand = require('../src/node/build/js/SBuildJsCommand');
 const __SBuildConfigCommand = require('../src/node/build/config/SBuildConfigCommand');
-const __sugarConfig = require('../src/node/config/sugar');
+// const __sugarConfig = require('../src/node/config/sugar');
 
 module.exports = {
   rootDir: __dirname,
   header: {
     title: `<bgBlack><white> MIT </white></bgBlack> <bold>Coffeekraken</bold> <bgWhite><black> Sugar </black></bgWhite> <black>v${__packageJson.version}</black>`
+  },
+  features: {
+    commands: [
+      'server.frontend',
+      // 'build.config',
+      'build.scss',
+      'build.js'
+      // 'build.views',
+      // 'build.doc'
+    ]
   },
   footer: {
     authors: [

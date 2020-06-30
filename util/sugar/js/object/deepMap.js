@@ -36,7 +36,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 function deepMap(object, processor, settings = {}, _path = []) {
   settings = (0, _deepMerge.default)({
-    deepFirst: true,
+    deepFirst: false,
     processObjects: false
   }, settings);
   Object.keys(object).forEach(prop => {

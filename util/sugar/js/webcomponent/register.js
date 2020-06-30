@@ -4,6 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.define = define;
+exports.getComponentMetas = getComponentMetas;
 Object.defineProperty(exports, "SWebComponent", {
   enumerable: true,
   get: function () {
@@ -33,9 +34,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 const _SWebComponentStack = {};
 exports.stack = _SWebComponentStack;
 
+function getComponentMetas(name) {
+  return _SWebComponentStack[(0, _uncamelize.default)(name)] || {};
+}
+
 function define(name, cls, settings = {}) {
   if (!name) throw new Error(`SWebComponent: You must define a name for your webcomponent by setting either a static "name" property on your class, of by passing a name as first parameter of the static "define" function...`);
-  cls.componentName = name;
   let extend = null;
 
   for (let key in _htmlTagToHtmlClassMap.default) {
@@ -46,8 +50,10 @@ function define(name, cls, settings = {}) {
   }
 
   const uncamelizedName = (0, _uncamelize.default)(name);
+  cls.componentName = name;
   _SWebComponentStack[uncamelizedName] = {
     name,
+    dashName: uncamelizedName,
     class: cls,
     extends: extend,
     settings

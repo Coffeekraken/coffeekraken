@@ -22,7 +22,7 @@ import __clone from '../object/clone';
  * });
  *
  * // watch the object
- * watchedObj.on('title', watchResult => {
+ * watchedObj.on('title:set', watchResult => {
  *  	// do something when the title changes
  * });
  *

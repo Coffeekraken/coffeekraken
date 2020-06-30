@@ -2,6 +2,7 @@ import __proxy from '../array/proxy';
 import __deepMap from '../object/deepMap';
 import __clone from '../object/clone';
 import __delete from '../object/delete';
+import __deepMerge from '../object/deepMerge';
 
 /**
  * @name                            deepProxy
@@ -21,6 +22,10 @@ import __delete from '../object/delete';
  * - delete: An object property deleted
  * - push: An item has been added inside an array
  * - {methodName}: Every array actions
+ * @param         {Object}                [settings={}]         An object of settings to configure your proxy:
+ * - handleSet (true) {Boolean}: Specify if you want to handle the "set" action
+ * - handleGet (false) {Boolean}: Specify if you want to handle the "get" action
+ * - handleDelete (true) {Boolean}: Specify if you want to handle the "delete" action
  * @return          {Object}                                  The proxied object
  *
  * @example           js
@@ -34,14 +39,22 @@ import __delete from '../object/delete';
  *
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function deepProxy(object, handlerFn) {
+export default function deepProxy(object, handlerFn, settings = {}) {
   const preproxy = new WeakMap();
   let isRevoked = false;
+  settings = __deepMerge(
+    {
+      handleSet: true,
+      handleGet: false,
+      handleDelete: true
+    },
+    settings
+  );
 
   function makeHandler(path) {
     return {
       set(target, key, value) {
-        if (isRevoked) return true;
+        if (isRevoked || !settings.handleSet) return true;
 
         if (typeof value === 'object') {
           value = proxify(value, [...path, key]);
@@ -65,26 +78,27 @@ export default function deepProxy(object, handlerFn) {
         return true;
       },
 
-      // get(target, key, receiver) {
-      //   if (Reflect.has(target, key)) {
-      //     const value = handlerFn({
-      //       object,
-      //       target,
-      //       key,
-      //       path: [...path, key].join('.'),
-      //       action: 'get',
-      //       fullAction: 'Object.get'
-      //     });
-      //     if (key === 'revoke') return receiver.revoke;
-      //     console.log(value, key);
-      //     if (value === undefined) return target[key];
-      //     return value;
-      //   }
-      //   return undefined;
-      // },
+      get(target, key, receiver) {
+        if (Reflect.has(target, key)) {
+          if (!settings.handleGet) return target[key];
+
+          const value = handlerFn({
+            object,
+            target,
+            key,
+            path: [...path, key].join('.'),
+            action: 'get',
+            fullAction: 'Object.get'
+          });
+          if (key === 'revoke') return receiver.revoke;
+          if (value === undefined) return target[key];
+          return value;
+        }
+        return undefined;
+      },
 
       deleteProperty(target, key) {
-        if (isRevoked) return true;
+        if (isRevoked || !settings.handleDelete) return true;
 
         if (Reflect.has(target, key)) {
           // unproxy(target, key);
@@ -127,7 +141,7 @@ export default function deepProxy(object, handlerFn) {
       }
     }
     let p = Proxy.revocable(obj, makeHandler(path));
-    preproxy.set(p, obj);
+    // preproxy.set(p, obj);
     const revokePropertyObj = {
       writable: true,
       configurable: false,
@@ -138,13 +152,19 @@ export default function deepProxy(object, handlerFn) {
         // mark the proxy as revoked
         isRevoked = true;
         // sanitize the copy
-        __copy = __deepMap(__copy, (val, key, path) => {
-          // console.log(path);
-          if (key === 'revoke' && typeof val === 'function') {
-            return -1;
+        __copy = __deepMap(
+          __copy,
+          (val, key, path) => {
+            // console.log(path);
+            if (key === 'revoke' && typeof val === 'function') {
+              return -1;
+            }
+            return val;
+          },
+          {
+            // deepFirst: true
           }
-          return val;
-        });
+        );
         // deep revoke the proxies
         setTimeout(() => {
           __deepMap(

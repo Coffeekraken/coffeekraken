@@ -36,7 +36,7 @@ module.exports = (__argsToString) => {
       );
 
       expect(string).toBe(
-        '-a "Hello world" -b  --objArg "{"content":"Nelson"}" --arrayArg "["item0","item 1","item 2"]"'
+        "-a \"Hello world\" -b  --objArg \"{'content':'Nelson'}\" --arrayArg \"['item0','item 1','item 2']\""
       );
 
       done();
@@ -44,7 +44,7 @@ module.exports = (__argsToString) => {
 
     it('Should process the passed args string correctly', (done) => {
       const string = __argsToString(
-        `--arg1 "Hello world" -b --objArg "{"content":"Nelson"}"`,
+        `--arg1 "Hello world" -b --objArg "{'content':'Nelson'}"`,
         {
           arg1: {
             type: 'String',
@@ -71,7 +71,7 @@ module.exports = (__argsToString) => {
       );
 
       expect(string).toBe(
-        '-a "Hello world" -b  --objArg "{"content":"Nelson"}"'
+        '-a "Hello world" -b  --objArg "{\'content\':\'Nelson\'}"'
       );
 
       done();

@@ -13,6 +13,8 @@ var _clone = _interopRequireDefault(require("../object/clone"));
 
 var _delete = _interopRequireDefault(require("../object/delete"));
 
+var _deepMerge = _interopRequireDefault(require("../object/deepMerge"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -33,6 +35,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * - delete: An object property deleted
  * - push: An item has been added inside an array
  * - {methodName}: Every array actions
+ * @param         {Object}                [settings={}]         An object of settings to configure your proxy:
+ * - handleSet (true) {Boolean}: Specify if you want to handle the "set" action
+ * - handleGet (false) {Boolean}: Specify if you want to handle the "get" action
+ * - handleDelete (true) {Boolean}: Specify if you want to handle the "delete" action
  * @return          {Object}                                  The proxied object
  *
  * @example           js
@@ -46,14 +52,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function deepProxy(object, handlerFn) {
+function deepProxy(object, handlerFn, settings = {}) {
   const preproxy = new WeakMap();
   let isRevoked = false;
+  settings = (0, _deepMerge.default)({
+    handleSet: true,
+    handleGet: false,
+    handleDelete: true
+  }, settings);
 
   function makeHandler(path) {
     return {
       set(target, key, value) {
-        if (isRevoked) return true;
+        if (isRevoked || !settings.handleSet) return true;
 
         if (typeof value === 'object') {
           value = proxify(value, [...path, key]);
@@ -74,25 +85,27 @@ function deepProxy(object, handlerFn) {
         return true;
       },
 
-      // get(target, key, receiver) {
-      //   if (Reflect.has(target, key)) {
-      //     const value = handlerFn({
-      //       object,
-      //       target,
-      //       key,
-      //       path: [...path, key].join('.'),
-      //       action: 'get',
-      //       fullAction: 'Object.get'
-      //     });
-      //     if (key === 'revoke') return receiver.revoke;
-      //     console.log(value, key);
-      //     if (value === undefined) return target[key];
-      //     return value;
-      //   }
-      //   return undefined;
-      // },
+      get(target, key, receiver) {
+        if (Reflect.has(target, key)) {
+          if (!settings.handleGet) return target[key];
+          const value = handlerFn({
+            object,
+            target,
+            key,
+            path: [...path, key].join('.'),
+            action: 'get',
+            fullAction: 'Object.get'
+          });
+          if (key === 'revoke') return receiver.revoke;
+          if (value === undefined) return target[key];
+          return value;
+        }
+
+        return undefined;
+      },
+
       deleteProperty(target, key) {
-        if (isRevoked) return true;
+        if (isRevoked || !settings.handleDelete) return true;
 
         if (Reflect.has(target, key)) {
           // unproxy(target, key);
@@ -137,8 +150,8 @@ function deepProxy(object, handlerFn) {
       }
     }
 
-    let p = Proxy.revocable(obj, makeHandler(path));
-    preproxy.set(p, obj);
+    let p = Proxy.revocable(obj, makeHandler(path)); // preproxy.set(p, obj);
+
     const revokePropertyObj = {
       writable: true,
       configurable: false,
@@ -157,6 +170,7 @@ function deepProxy(object, handlerFn) {
           }
 
           return val;
+        }, {// deepFirst: true
         }); // deep revoke the proxies
 
         setTimeout(() => {

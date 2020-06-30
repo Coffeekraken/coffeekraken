@@ -27,7 +27,7 @@ import __deepMerge from '../object/deepMerge';
 export default function deepMap(object, processor, settings = {}, _path = []) {
   settings = __deepMerge(
     {
-      deepFirst: true,
+      deepFirst: false,
       processObjects: false
     },
     settings

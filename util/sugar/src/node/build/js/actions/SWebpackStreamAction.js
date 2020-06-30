@@ -8,7 +8,7 @@ const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
 const __SBuildJsCli = require('../SBuildJsCli');
 const __sugarConfig = require('../../../config/sugar');
 const __babel = require('@babel/core');
-const __trigger = require('../../../event/trigger');
+const __getImportsArray = require('../../scss/getImportsArray');
 
 /**
  * @name                SWebpackStreamAction
@@ -97,12 +97,17 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
         return resolve(streamObj);
       }
 
+      const scssImportsString = '';
+      // const scssImportsString = __getImportsArray('string');
+
       this.log(
         `Processing the <yellow>webpack</yellow> action for the file <cyan>${streamObj.input.replace(
           __packageRoot(),
           ''
         )}</cyan>`
       );
+
+      this.log('COCOCO');
 
       const compiler = __webpack(
         __deepMerge(
@@ -129,7 +134,14 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
                     // Translates CSS into CommonJS
                     'css-loader',
                     // Compiles Sass to CSS
-                    'sass-loader'
+                    {
+                      loader: 'sass-loader',
+                      options: {
+                        prependData: `
+                          ${scssImportsString}
+                        `
+                      }
+                    }
                   ]
                 },
                 {
@@ -172,8 +184,6 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
           settings
         )
       );
-
-      __trigger('sugarwebpack', 'hello');
 
       compiler.run((error, stats) => {
         if (stats.hasErrors()) {

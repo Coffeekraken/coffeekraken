@@ -4,9 +4,10 @@ const __color = require('../../color/color');
 const __SComponent = require('../SComponent');
 const __SHeader = require('../SHeader');
 const __SFooter = require('../SFooter');
-const __get = require('../../object/get');
 const __activeSpace = require('../../core/activeSpace');
 const __SUrl = require('../../url/SUrl');
+const __sugarConfig = require('../../config/sugar');
+const __get = require('../../object/get');
 
 /**
  * @name                  SApp
@@ -75,19 +76,19 @@ module.exports = class SApp extends __SComponent {
     // store the settings
     settings = __deepMerge(
       {
+        id: 'sugarapp',
+        name: 'Sugar',
         appendToScreen: true,
         header: {
           title: 'Coffeekraken Sugar based application'
         },
         footer: {}
       },
+      // __sugarConfig(settings.id || 'sugarapp'),
       settings
     );
 
-    // check if we have a config object to different config files
-    if (settings.sConfigInstance) {
-      settings = __deepMerge(settings.sConfigInstance.get(''), settings);
-    }
+    const l = __sugarConfig(settings.id || 'sugarapp');
 
     // extends parent
     super(settings);

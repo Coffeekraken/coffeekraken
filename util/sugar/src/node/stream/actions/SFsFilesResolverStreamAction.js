@@ -1,11 +1,6 @@
 const __SActionsStreamAction = require('../SActionsStreamAction');
 const __glob = require('glob');
-const __sugarConfig = require('../../config/sugar');
-const __clone = require('../../object/clone');
-const __extractSame = require('../../string/extractSame');
-const __getFilename = require('../../fs/filename');
-const __findInFile = require('find-in-files');
-const __globToRegex = require('glob-to-regexp');
+const __deepMerge = require('../../object/deepMerge');
 const __fs = require('fs');
 const __isDirectory = require('../../is/directory');
 const __isSymlink = require('../../is/symlink');
@@ -51,7 +46,14 @@ module.exports = class SFindInFileStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(settings = {}) {
-    super(settings);
+    super(
+      __deepMerge(
+        {
+          ignoreFolders: []
+        },
+        settings
+      )
+    );
   }
 
   /**
@@ -82,7 +84,7 @@ module.exports = class SFindInFileStreamAction extends __SActionsStreamAction {
         const searchPattern = inputSplits[1] ? inputSplits[1] : null;
 
         const path = __glob.sync(searchPath, {
-          ignore: __sugarConfig('build.docNav.ignoreFolders').map((f) => {
+          ignore: settings.ignoreFolders.map((f) => {
             return `**/${f}/**`;
           })
         });

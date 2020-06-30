@@ -9,6 +9,12 @@ var _SWebComponent2 = _interopRequireDefault(require("./SWebComponent"));
 
 var _litHtml = require("lit-html");
 
+var _throttle = _interopRequireDefault(require("../function/throttle"));
+
+var _insertAfter = _interopRequireDefault(require("../dom/insertAfter"));
+
+var _deepMerge = _interopRequireDefault(require("../object/deepMerge"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -59,6 +65,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * }
  *
  * @since       2.0.0
+ * @see       https://lit-html.polymer-project.org/
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function SLitHtmlWebComponent(extend = HTMLElement) {
@@ -96,8 +103,22 @@ function SLitHtmlWebComponent(extend = HTMLElement) {
 
       _classCallCheck(this, SLitHtmlWebComponent);
 
-      _this = _super.call(this, settings);
-      console.log('LIPT');
+      _this = _super.call(this, (0, _deepMerge.default)({}, settings)); // wait until mounted to render the component first time
+
+      _defineProperty(_assertThisInitialized(_this), "render", (0, _throttle.default)(function () {
+        const tpl = this.constructor.template(this._props, this.metas, _litHtml.html);
+        (0, _litHtml.render)(tpl, this._$container);
+      }, 50));
+
+      _this.on('mounted{1}', () => {
+        // generate a container for the component
+        _this._$container = document.createElement('div');
+        _this._$container.className = `${_this.metas.dashName}__container`;
+        (0, _insertAfter.default)(_this._$container, _assertThisInitialized(_this)); // render for the first time
+
+        _this.render();
+      });
+
       return _this;
     }
     /**
@@ -111,13 +132,48 @@ function SLitHtmlWebComponent(extend = HTMLElement) {
 
 
     _createClass(SLitHtmlWebComponent, [{
-      key: "render",
-      value: function render() {}
+      key: "handleProp",
+
+      /**
+       * @name          handleProp
+       * @type          Function
+       * @async
+       *
+       * This method is supposed to be overrided by your component integration
+       * to handle the props updates and delete actions.
+       * The passed description object has this format:
+       * ```js
+       * {
+       *    action: 'set|delete',
+       *    path: 'something.cool',
+       *    oldValue: '...',
+       *    value: '...'
+       * }
+       * ```
+       *
+       * @param     {String}      prop      The property name that has been updated or deleted
+       * @param     {Object}      descriptionObj      The description object that describe the update or delete action
+       * @return    {Promise}                A promise that has to be resolved once the update has been handled correctly. You have to pass the prop variable to the resolve function
+       *
+       * @since     2.0.0
+       * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      value: function handleProp(prop, propObj) {
+        return new Promise((resolve, reject) => {
+          this.render();
+          setTimeout(() => {
+            this.render();
+          }, 100);
+          resolve(prop);
+        });
+      }
     }]);
 
     return SLitHtmlWebComponent;
-  }((0, _SWebComponent2.default)(extend)), _defineProperty(_class, "template", (state, html) => `
-
+  }((0, _SWebComponent2.default)(extend)), _defineProperty(_class, "template", (props, component, html) => html`
+      <p>
+        You need to specify a static template property for your component...
+      </p>
     `), _temp;
 }
 

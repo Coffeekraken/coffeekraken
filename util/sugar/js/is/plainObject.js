@@ -22,11 +22,9 @@ exports.default = plainObject;
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function plainObject(object) {
-  if (!Array.isArray(object)) object = [object];
-
-  for (let i = 0; i < object.length; i++) {
-    return typeof object[i] == 'object' && object[i] !== null && object[i].constructor == Object;
-  }
+  if (!object) return false;
+  if (typeof object !== 'object') return false; // if (object === Object(object)) return true;
+  // if (object.constructor === Object) return true;
 
   return true;
 }

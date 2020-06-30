@@ -39,7 +39,16 @@ function deepMerge(...args) {
     (0, _copyTo.default)(firstObj).override(newObj);
 
     for (const key of Object.keys(secondObj)) {
-      if ((0, _plainObject.default)(firstObj[key]) && (0, _plainObject.default)(secondObj[key])) {
+      // continue;
+      // if (!firstObj) continue;
+      // if (!secondObj) continue;
+      // if (key === 'features') {
+      //   console.log(key, typeof firstObj[key]);
+      // }
+      // const coco = firstObj[key];
+      // const l = secondObj[key];
+      if (firstObj[key] !== null && typeof firstObj[key] === 'object' && secondObj[key] !== null && typeof secondObj[key] === 'object') {
+        // if (__isPlainObject(firstObj[key]) && __isPlainObject(secondObj[key])) {
         newObj[key] = merge(firstObj[key], secondObj[key]);
         continue;
       }

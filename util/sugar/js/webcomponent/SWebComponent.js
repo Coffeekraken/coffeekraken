@@ -27,6 +27,10 @@ var _watch = _interopRequireDefault(require("../object/watch"));
 
 var _register = require("./register");
 
+var _uniqid = _interopRequireDefault(require("../string/uniqid"));
+
+var _dispatch2 = _interopRequireDefault(require("../event/dispatch"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -170,7 +174,7 @@ function SWebComponent(extend = HTMLElement) {
       _classCallCheck(this, SWebComponent);
 
       // init base html element
-      _this = _super.call(this); // save the settings
+      _this = _super.call(this); // get component metas
 
       _defineProperty(_assertThisInitialized(_this), "_settedAttributesStack", {});
 
@@ -180,35 +184,42 @@ function SWebComponent(extend = HTMLElement) {
 
       _defineProperty(_assertThisInitialized(_this), "_settings", {});
 
+      _this._metas = (0, _register.getComponentMetas)(_this.constructor.componentName); // save the settings
+
       _this._settings = (0, _deepMerge.default)({
-        name: null,
+        id: (0, _uniqid.default)(),
         props: _this.constructor.props || {}
-      }, _register.stack[(0, _uncamelize.default)(_this.constructor.componentName)].settings || {}, settings); // create the SPromise instance
+      }, _this._metas.settings || {}, settings); // create the SPromise instance
 
       _this._promise = new _SPromise.default(() => {}).start();
 
       for (const key in _this._settings.props) {
         _this._props[key] = { ..._this._settings.props[key],
-          valuesStack: [],
+          // valuesStack: [],
           value: _this._settings.props[key].default,
           previousValue: undefined
-        };
-
-        if (_this._props[key].value !== undefined) {
-          _this._props[key].valuesStack.push(_this._props[key].value);
-        } // if need to be watches deeply
-
+        }; // if (this._props[key].value !== undefined) {
+        //   let valueToStack = this._props[key].value;
+        //   if (
+        //     valueToStack &&
+        //     valueToStack.revoke &&
+        //     typeof valueToStack.revoke === 'function'
+        //   )
+        //     valueToStack = valueToStack.revoke();
+        //   // this._props[key].valuesStack.push(valueToStack);
+        // }
+        // if need to be watches deeply
 
         if (_this._props[key].watch) {
           _this._props[key] = (0, _watch.default)(_this._props[key]);
 
-          _this._props[key].on('*:set', update => {
-            console.trace('up', update);
+          _this._props[key].on('value.*:+(set|delete|push|pop)', update => {
+            if (update.path.split('.').length === 1) {
+              _this.prop(update.path, update.value);
+            } else {
+              _this.handleProp(update.path, _this._props[key]);
+            }
           });
-
-          setTimeout(() => {
-            _this._props[key].value.push('SOMTHINS');
-          }, 2000);
         }
       } // launch the mounting process
 
@@ -217,21 +228,35 @@ function SWebComponent(extend = HTMLElement) {
       return _this;
     }
     /**
-     * @name          _mount
-     * @type          Function
-     * @private
-     * @async
+     * @name          metas
+     * @type          Object
+     * @get
      *
-     * This method handle the mounting of the component
+     * This property store all the component metas informations like the name,
+     * the type, what it is extending, etc...
      *
+     * @since       2.0.0
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
 
 
     _createClass(SWebComponent, [{
       key: "_mount",
+
+      /**
+       * @name          _mount
+       * @type          Function
+       * @private
+       * @async
+       *
+       * This method handle the mounting of the component
+       *
+       * @since       2.0.0
+       * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
       value: async function _mount() {
-        this._promise.trigger('mounting'); // wait until the component match the mountDependencies and mountWhen status
+        // dispatch mounting event
+        this._dispatch('mounting', this); // wait until the component match the mountDependencies and mountWhen status
 
 
         await this._mountDependencies(); // check props definition
@@ -239,9 +264,42 @@ function SWebComponent(extend = HTMLElement) {
         this._checkPropsDefinition(); // handle physical props
 
 
-        this._handlePhysicalProps();
+        this._handlePhysicalProps(); // dispatch mounted event
 
-        this._promise.trigger('mounted');
+
+        this._dispatch('mounted', this);
+      }
+      /**
+       * @name          handleProp
+       * @type          Function
+       * @async
+       *
+       * This method is supposed to be overrided by your component integration
+       * to handle the props updates and delete actions.
+       * The passed description object has this format:
+       * ```js
+       * {
+       *    action: 'set|delete',
+       *    path: 'something.cool',
+       *    oldValue: '...',
+       *    value: '...'
+       * }
+       * ```
+       *
+       * @param     {String}      prop      The property name that has been updated or deleted
+       * @param     {Object}      descriptionObj      The description object that describe the update or delete action
+       * @return    {Promise}                A promise that has to be resolved once the update has been handled correctly. You have to pass the prop variable to the resolve function
+       *
+       * @since     2.0.0
+       * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+
+    }, {
+      key: "handleProp",
+      value: function handleProp(prop, descriptionObj) {
+        return new Promise((resolve, reject) => {
+          resolve(prop);
+        });
       }
       /**
        * @name          on
@@ -260,12 +318,39 @@ function SWebComponent(extend = HTMLElement) {
        * @param       {String}        event         The event you want to subscribe to
        * @param       {Function}      callback      The callback function that has to be called
        * @return      {SPromise}                    The SPromise used in this instance
+       *
+       * @since       2.0.0
+       * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
 
     }, {
       key: "on",
       value: function on(event, callback) {
         return this._promise.on(event, callback);
+      }
+      /**
+       * @name          _dispatch
+       * @type          Function
+       * @private
+       *
+       * This method is used to dispatch events simultaneously through the SPromise internal instance on which you can subscribe using the "on" method,
+       * and through the global "sugar.js.event.dispatch" function on which you can subscribe using the function "sugar.js.event.on"
+       *
+       * @param       {String}        name          The event name to dispatch
+       * @param       {Mixed}         value         The value to attach to the event
+       *
+       * @since       2.0.0
+       * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+
+    }, {
+      key: "_dispatch",
+      value: function _dispatch(name, value) {
+        // dispatch event through the SPromise internal instance
+        this._promise.trigger(name, this); // dispatch a general event
+
+
+        (0, _dispatch2.default)(`${this.metas.dashName}.${name}`, this);
       }
       /**
        * @name          _mountDependencies
@@ -284,6 +369,7 @@ function SWebComponent(extend = HTMLElement) {
        *
        * @return      {Promise}               Return a promise that will be resolved once every "dependencies" are satisfied
        *
+       * @since       2.0.0
        * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
 
@@ -298,8 +384,8 @@ function SWebComponent(extend = HTMLElement) {
           } // check if we have one/some "mountDependencies" setting specified
 
 
-          if (this._settings._mountDependencies) {
-            const depsFns = [...this._settings._mountDependencies];
+          if (this._settings.mountDependencies) {
+            const depsFns = [...this._settings.mountDependencies];
             depsFns.forEach(fn => {
               promises.push(fn());
             });
@@ -325,7 +411,7 @@ function SWebComponent(extend = HTMLElement) {
       value: function connectedCallback() {
         // dispatch "event"
         setTimeout(() => {
-          this._promise.trigger('attach');
+          this._dispatch('attach', this);
         });
       }
       /**
@@ -341,7 +427,7 @@ function SWebComponent(extend = HTMLElement) {
       key: "disconnectedCallback",
       value: function disconnectedCallback() {
         // dispatch "event"
-        this._promise.trigger('detach');
+        this._dispatch('detach', this);
       }
       /**
        * @name            attributeChangedCallback
@@ -360,14 +446,23 @@ function SWebComponent(extend = HTMLElement) {
       key: "attributeChangedCallback",
       value: function attributeChangedCallback(attrName, oldVal, newVal) {
         if (this._settedAttributesStack[attrName]) return; // try to get the property
+        // const propObj = this._props[attrName];
+        // const previousValue = __parse(oldVal);
 
-        const propObj = this._props[attrName];
-        const previousValue = (0, _parse.default)(oldVal);
-        const newValue = (0, _parse.default)(newVal); // save the old value and the new value
+        const newValue = (0, _parse.default)(newVal); // set the value into the props
 
-        propObj.value = newValue;
-        propObj.previousValue = previousValue;
-        propObj.valuesStack.push(newValue); // save the prop
+        this.prop(attrName, newValue); // save the old value and the new value
+        // propObj.value = newValue;
+        // propObj.previousValue = previousValue;
+        // let valueToStack = newValue;
+        // if (
+        //   valueToStack &&
+        //   valueToStack.revoke &&
+        //   typeof valueToStack.revoke === 'function'
+        // )
+        //   valueToStack = valueToStack.revoke();
+        // propObj.valuesStack.push(valueToStack);
+        // save the prop
         // this._props[__camelize(attrName)] = newPropObj;
         // trigger a "prop" event
 
@@ -394,10 +489,16 @@ function SWebComponent(extend = HTMLElement) {
         }
 
         this._props[_prop].previousValue = this._props[_prop].value;
-        this._props[_prop].value = value;
+        this._props[_prop].value = value; // let valueToStack = value;
+        // if (
+        //   valueToStack &&
+        //   valueToStack.revoke &&
+        //   typeof valueToStack.revoke === 'function'
+        // )
+        //   valueToStack = valueToStack.revoke();
+        // this._props[prop].valuesStack.push(valueToStack);
 
-        this._props[_prop].valuesStack.push(value); // handle physical props
-
+        this.handleProp(_prop, this._props[_prop]); // handle physical props
 
         this._handlePhysicalProps(_prop); // trigger a "prop" event
 
@@ -424,11 +525,14 @@ function SWebComponent(extend = HTMLElement) {
         // trigger a "prop" event
         const eventObj = {
           prop,
-          action: this._props[prop].previousValue !== null ? this._props[prop].value !== null ? 'update' : 'remove' : 'add',
+          action: this._props[prop].previousValue !== null ? this._props[prop].value !== null ? 'set' : 'delete' : 'set',
           value: this._props[prop].value,
           previousValue: this._props[prop].previousValue
-        }; // this._promise.trigger('prop', eventObj);
+        };
+
+        this._dispatch(`prop.${prop}:${eventObj.action}`, eventObj); // this._promise.trigger('prop', eventObj);
         // this._promise.trigger(`prop.${prop}`, eventObj);
+
       }
       /**
        * @name        _handlePhysicalProps
@@ -447,7 +551,13 @@ function SWebComponent(extend = HTMLElement) {
         if (!props || props.length === 0) props = Object.keys(this._props); // loop on each required props
 
         props.forEach(prop => {
-          const value = this._props[prop].value;
+          if (!this._props[prop].physical) return;
+          const value = this._props[prop].value; // if the value is false, remove the attributee from the dom node
+
+          if (value === false) {
+            this.removeAttribute(prop);
+            return;
+          }
 
           if (!this.getAttribute(prop)) {
             // set the attribute with the value
@@ -488,6 +598,14 @@ function SWebComponent(extend = HTMLElement) {
           const validationResult = (0, _validateWithDefinitionObject.default)(propObj.value, propObj, `${this.constructor.name}.props.${prop}`);
           if (validationResult !== true) throw new Error(validationResult);
         });
+      }
+    }, {
+      key: "metas",
+      get: function () {
+        return {
+          $node: this,
+          ...this._metas
+        };
       }
     }]);
 

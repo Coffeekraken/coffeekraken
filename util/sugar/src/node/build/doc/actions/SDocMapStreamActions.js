@@ -1,6 +1,7 @@
 const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
 const __docMap = require('../../../doc/docMap');
 const __fs = require('fs');
+const __SDocMapItem = require('../../../doc/SDocMapItem');
 
 /**
  * @name                SDocMapStreamActions
@@ -26,7 +27,11 @@ module.exports = class SDocMapStreamActions extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   static definitionObj = {
-    outputDir: {
+    files: {
+      type: 'Array<String>',
+      required: true
+    },
+    output: {
       type: 'String',
       required: true
     }
@@ -62,13 +67,17 @@ module.exports = class SDocMapStreamActions extends __SActionsStreamAction {
 
     // return the promise for this action
     return new Promise(async (resolve, reject) => {
-      // get the docmap object
-      const docMap = await __docMap(streamObj.outputDir);
+      // create the items array
+      const itemsArray = [];
 
-      __fs.writeFileSync(
-        streamObj.outputDir + '/docMap.json',
-        JSON.stringify(docMap, null, 4)
-      );
+      // loop on files
+      streamObj.files.forEach((filePath) => {
+        // create a docMap item
+        const item = new __SDocMapItem(filePath);
+        itemsArray.push(item.toJson());
+      });
+
+      streamObj.data = JSON.stringify(itemsArray, null, 4);
 
       resolve(streamObj);
     });

@@ -26,16 +26,16 @@ module.exports = __watch => {
   watchedObj.on('coco:set', update => {
     doneAssign();
   });
-  watchedObj.on('a', update => {
+  watchedObj.on('a:*', update => {
     if (watchedObj.a === 'bonjours') doneUpdating();
   });
-  watchedObj.on('b.bb', update => {
+  watchedObj.on('b.bb:*', update => {
     if (watchedObj.b.bb === 'hola') doneUpdatingDeep();
   });
   watchedObj.on('*:delete', update => {
     if (!update.target) doneDeleting();
   });
-  watchedObj.on('*.cool', update => {
+  watchedObj.on('*.cool:set', update => {
     doneGlobPattern();
   });
   watchedObj.on('*.other:set', update => {
@@ -45,7 +45,7 @@ module.exports = __watch => {
     expect(watchedObj.c.cc.ccc).toEqual(['hello', 'world', 'plop']);
     doneAddIntoArray();
   });
-  watchedObj.on('b.plop', update => {
+  watchedObj.on('b.plop:*', update => {
     if (watchedObj.b.plop === 'yop') {
       hasUnwatchedObjectBeenWatched = true;
     }

@@ -29,20 +29,6 @@ module.exports = class SImportsStreamAction extends __SActionsStreamAction {
     imports: {
       type: 'Array<Object>',
       required: false
-      // children: {
-      //   name: {
-      //     type: 'String',
-      //     required: true
-      //   },
-      //   path: {
-      //     type: 'String',
-      //     required: true
-      //   },
-      //   scss: {
-      //     type: 'String',
-      //     required: false
-      //   }
-      // }
     }
   };
 

@@ -313,66 +313,91 @@ module.exports = {
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     watch: false
-    // watch: isInSugarPackage()
-    //   ? `${__packageRoot()}/public/src/**/*.*`
-    //   : `${__packageRoot()}/src/**/*.*`
   },
 
-  docNav: {
+  docMap: {
     /**
-     * @name              input
-     * @namespace         config.build.docNav
-     * @type              String|Array<String>
-     * @default           <appRoot>/**\/*
+     * @name         input
+     * @namespace     config.build.docMap
+     * @type          String
+     * @default       ${__packageRoot()/src/*\*\/\*}
      *
-     * Specify the root folder (or file) to check for docNav.json generation from docblocks
+     * Specify the rootDir where to start for the docMap generation
      *
-     * @since             2.0.0
+     * @since       2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    input: [`${__packageRoot()}/src/**:@namespace`, '**/README.md'],
+    input: `${__packageRoot()}/src/**/*:@namespace`,
 
     /**
-     * @name              outputDir
-     * @namespace         config.build.docNav
-     * @type              String
-     * @default           <appRoot>
+     * @name          output
+     * @namespace     config.build.docMap
+     * @type          String
+     * @default       ${__packageRoot()}/docMap.json
      *
-     * Specify the destination folder where to put the compiled files in
+     * Specify where you want to save the docMap data
      *
-     * @since             2.0.0
+     * @since       2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    outputDir: isInSugarPackage() ? `${__packageRoot()}` : `${__packageRoot()}`,
-
-    /**
-     * @name              watch
-     * @namespace         config.build.docNav
-     * @type              String
-     * @default           <appRoot>**\/*
-     *
-     * Set the watch files that you want to check
-     *
-     * @since             2.0.0
-     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    watch: isInSugarPackage()
-      ? `${__packageRoot()}/**/*.*`
-      : `${__packageRoot()}/**/*.*`,
-
-    /**
-     * @name             ignoreFolders
-     * @namespace         config.build.docNav
-     * @type            Array<String>
-     * @default         @config.core.ignoreFolders
-     *
-     * Set the folders to exclude from searches, processing, etc...
-     *
-     * @since         2.0.0
-     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    ignoreFolders: '@config.core.ignoreFolders'
+    output: `${__packageRoot()}/docMap.json`
   },
+
+  // docNav: {
+  //   /**
+  //    * @name              input
+  //    * @namespace         config.build.docNav
+  //    * @type              String|Array<String>
+  //    * @default           <appRoot>/**\/*
+  //    *
+  //    * Specify the root folder (or file) to check for docNav.json generation from docblocks
+  //    *
+  //    * @since             2.0.0
+  //    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  //    */
+  //   input: [`${__packageRoot()}/src/**:@namespace`, '**/README.md'],
+
+  //   /**
+  //    * @name              outputDir
+  //    * @namespace         config.build.docNav
+  //    * @type              String
+  //    * @default           <appRoot>
+  //    *
+  //    * Specify the destination folder where to put the compiled files in
+  //    *
+  //    * @since             2.0.0
+  //    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  //    */
+  //   outputDir: isInSugarPackage() ? `${__packageRoot()}` : `${__packageRoot()}`,
+
+  //   /**
+  //    * @name              watch
+  //    * @namespace         config.build.docNav
+  //    * @type              String
+  //    * @default           <appRoot>**\/*
+  //    *
+  //    * Set the watch files that you want to check
+  //    *
+  //    * @since             2.0.0
+  //    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  //    */
+  //   watch: isInSugarPackage()
+  //     ? `${__packageRoot()}/**/*.*`
+  //     : `${__packageRoot()}/**/*.*`,
+
+  //   /**
+  //    * @name             ignoreFolders
+  //    * @namespace         config.build.docNav
+  //    * @type            Array<String>
+  //    * @default         @config.core.ignoreFolders
+  //    *
+  //    * Set the folders to exclude from searches, processing, etc...
+  //    *
+  //    * @since         2.0.0
+  //    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  //    */
+  //   ignoreFolders: '@config.core.ignoreFolders'
+  // },
 
   views: {
     /**

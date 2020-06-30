@@ -9,10 +9,10 @@ module.exports = (__proxy) => {
 
       myArray.watch(['push', 'pop'], (watchObj) => {
         switch (watchObj.action) {
-          case 'Array.push':
+          case 'push':
             pushCount++;
             break;
-          case 'Array.pop':
+          case 'pop':
             popCount++;
             break;
         }

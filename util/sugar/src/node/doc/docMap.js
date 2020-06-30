@@ -8,6 +8,7 @@ const __fs = require('fs');
 const __extension = require('../fs/extension');
 const __get = require('../object/get');
 const __minimatch = require('minimatch');
+const __sugarConfig = require('../config/sugar');
 
 /**
  * @name          docMap
@@ -30,7 +31,10 @@ const __minimatch = require('minimatch');
  * @since       2.0.0
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = async function docMap(rootDir, settings = {}) {
+module.exports = async function docMap(
+  rootDir = __sugarConfig('doc.build.inputDir'),
+  settings = {}
+) {
   settings = __deepMerge(
     {
       tag: 'namespace',

@@ -164,11 +164,25 @@ module.exports = class SDocMapItem {
     if (!docblock.blocks[0]) return;
     const firstBlock = docblock.blocks[0];
 
-    console.log(firstBlock.object.namespace);
-
     // extract the infos
-    this._namespace = __namespace(firstBlock.object.namespace);
+    this._namespace = __namespace(firstBlock.object.namespace || '');
     this._name = firstBlock.object.name;
+  }
+
+  /**
+   * @name            toJson
+   * @type            Function
+   *
+   * This method return a JSON version of the docMap item
+   *
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  toJson() {
+    return {
+      name: this.name,
+      namespace: this.namespace,
+      path: this.path
+    };
   }
 
   /**

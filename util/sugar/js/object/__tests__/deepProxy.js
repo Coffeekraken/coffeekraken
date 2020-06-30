@@ -13,7 +13,7 @@ module.exports = __deepProxy => {
           array: [0, 1, 2]
         }
       }, obj => {
-        if (obj.action === 'Object.get') return;
+        if (obj.action === 'get') return;
         updatesCount++;
       });
 

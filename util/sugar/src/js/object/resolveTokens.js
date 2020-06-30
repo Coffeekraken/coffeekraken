@@ -24,31 +24,37 @@ import __get from './get';
  */
 export default function resolveTokens(object) {
   // proxy the object
-  const proxiedObject = __deepProxy(object, (getObj) => {
-    // get the raw value
-    const rawValue = __get(getObj.target, getObj.key);
-    // check if it's a string
-    if (typeof rawValue !== 'string') return rawValue;
-    // check if we have some tokens
-    const reg = /\{([a-zA-Z0-9\.-_]+)\}/g;
-    const tokens = rawValue.match(reg);
-    let finalValue = rawValue;
+  const proxiedObject = __deepProxy(
+    object,
+    (getObj) => {
+      // get the raw value
+      const rawValue = __get(getObj.target, getObj.key);
+      // check if it's a string
+      if (typeof rawValue !== 'string') return rawValue;
+      // check if we have some tokens
+      const reg = /\{([a-zA-Z0-9\.-_]+)\}/g;
+      const tokens = rawValue.match(reg);
+      let finalValue = rawValue;
 
-    if (!tokens) return rawValue;
+      if (!tokens) return rawValue;
 
-    // console.log(tokens);
-    tokens.forEach((token) => {
-      finalValue = finalValue.replace(
-        token,
-        __get(
-          object,
-          token.replace('{', '').replace('}', '').replace('this.', '')
-        )
-      );
-    });
+      // console.log(tokens);
+      tokens.forEach((token) => {
+        finalValue = finalValue.replace(
+          token,
+          __get(
+            object,
+            token.replace('{', '').replace('}', '').replace('this.', '')
+          )
+        );
+      });
 
-    return finalValue;
-  });
+      return finalValue;
+    },
+    {
+      handleGet: true
+    }
+  );
   // return the proxied object
   return proxiedObject;
 }

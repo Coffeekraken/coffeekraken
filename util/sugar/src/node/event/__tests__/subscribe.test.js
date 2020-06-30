@@ -1,17 +1,17 @@
-const __trigger = require('../trigger');
-const __subscribe = require('../subscribe');
+const __dispatch = require('../dispatch');
+const __subscribe = require('../on');
 
 describe('sugar.node.event.subscribe', () => {
-  it('Should trigger and subscribe to events correctly', (done) => {
+  it('Should dispatch and subscribe to events correctly', (done) => {
     let sendedValue = null;
 
     const unsubscribe = __subscribe('somethingcool', (v) => {
       sendedValue = v;
     });
 
-    __trigger('somethingcool', 'hello world');
+    __dispatch('somethingcool', 'hello world');
     unsubscribe();
-    __trigger('somethingcool', 'plop');
+    __dispatch('somethingcool', 'plop');
 
     expect(sendedValue).toBe('hello world');
 

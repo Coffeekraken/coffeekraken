@@ -30,42 +30,11 @@ module.exports = class STermApp extends __SApp {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(settings = {}) {
-    settings = __deepMerge(
-      {
-        name: 'sugar',
-        configFolderPath: `${__packageRoot(process.cwd())}`
-      },
-      settings
-    );
-
-    const adapter = new __SConfigFsAdapter({
-      name: settings.name,
-      filename: '[name].config.js',
-      defaultConfigPath: `${__packageRoot(__dirname)}/.sugar/[filename]`,
-      appConfigPath: `${settings.configFolderPath}/[filename]`,
-      userConfigPath: null
-    });
-    const sConfigInstance = new __SConfig(settings.name, {
-      adapters: [adapter],
-      allowSave: false,
-      allowSet: false,
-      allowReset: false,
-      allowNew: false,
-      autoLoad: true,
-      autoSave: false
-    });
+    settings = __deepMerge({}, settings);
 
     // exit cleanup
     __exitCleanup();
 
-    super(
-      __deepMerge(
-        {
-          ...sConfigInstance.get(''),
-          sConfigInstance
-        },
-        settings
-      )
-    );
+    super(__deepMerge({}, settings));
   }
 };

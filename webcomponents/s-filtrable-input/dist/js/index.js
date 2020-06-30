@@ -560,6 +560,52 @@ module.exports = exports.default;
 
 /***/ }),
 
+/***/ "../../util/sugar/js/dom/insertAfter.js":
+/*!************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/dom/insertAfter.js ***!
+  \************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = insertAfter;
+/**
+ * @name      insertAfter
+ * @namespace           js.dom
+ * @type      Function
+ *
+ * Insert an HTMLElement after another HTMLElement
+ *
+ * @param 		{HTMLElement} 				elm  		The element to insert
+ * @param 		{HTMLElement} 				refElm 		The element after which to insert the passed element
+ *
+ * @example  	js
+ * import insertAfter from '@coffeekraken/sugar/js/dom/insertAfter'
+ * insertAfter(myElementToInsert, theReferenceElement);
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+function insertAfter(elm, refElm) {
+  // next sibling of ref elm
+  var nextSibling = refElm.nextSibling;
+
+  if (!nextSibling) {
+    refElm.parentNode.appendChild(elm);
+  } else {
+    refElm.parentNode.insertBefore(elm, nextSibling);
+  }
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
 /***/ "../../util/sugar/js/dom/isInViewport.js":
 /*!*************************************************************************************************!*\
   !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/dom/isInViewport.js ***!
@@ -1485,6 +1531,115 @@ function whenVisible(elm) {
 }
 
 module.exports = exports.default;
+
+/***/ }),
+
+/***/ "../../util/sugar/js/event/dispatch.js":
+/*!***********************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/event/dispatch.js ***!
+  \***********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = trigger;
+
+var _SPromise = _interopRequireDefault(__webpack_require__(/*! ../promise/SPromise */ "../../util/sugar/js/promise/SPromise.js"));
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {
+    default: obj
+  };
+}
+/**
+ * @name        trigger
+ * @namespace           js.event
+ * @type          Function
+ *
+ * This function can ben used to trigger an event globally.
+ * You can subscribe to these events using the "sugar.js.event.subscribe" function
+ *
+ * @param         {String}        name          The event name you want to trigger to
+ * @param         {Mixed}        value          The value you want to send alongside the event
+ *
+ * @example       js
+ * const trigger = require('@coffeekraken/sugar/js/event/trigger');
+ * trigger('something', 'Hello world');
+ *
+ * @since       2.0.0
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+
+function trigger(name, value) {
+  // check that the global SPromise exists
+  if (!window._sugarEventSPromise) window._sugarEventSPromise = new _SPromise.default(() => {}).start(); // trigger to the event
+
+  window._sugarEventSPromise.trigger(name, value);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "../../util/sugar/js/event/on.js":
+/*!*****************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/js/event/on.js ***!
+  \*****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(global) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = on;
+
+var __SPromise = __webpack_require__(/*! ../promise/SPromise */ "../../util/sugar/js/promise/SPromise.js");
+/**
+ * @name        on
+ * @namespace           js.event
+ * @type          Function
+ *
+ * This function allows you to subscribe to global events triggered by the "sugar.js.event.dispatch" function
+ * It use under the hood an SPromise instance
+ *
+ * @param         {String}        name          The event name you want to subscribe to
+ * @param         {Function}      callback      The callback function you want to call
+ * @return        {Function}                    Return an "unsubscribe" function callable when you want to stop executing the callback
+ *
+ * @example       js
+ * const on = require('@coffeekraken/sugar/js/event/on');
+ * on('something', () => {
+ *    // do something
+ * });
+ *
+ * @since       2.0.0
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+
+function on(name, callback) {
+  // check that the global SPromise exists
+  if (!global._sugarEventSPromise) global._sugarEventSPromise = new __SPromise(() => {}).start(); // subscribe to the event
+
+  global._sugarEventSPromise.on(name, callback); // return the unsubscribe function
+
+
+  return () => {
+    global._sugarEventSPromise.off(name, callback);
+  };
+}
+
+module.exports = exports.default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../node_modules/webpack/buildin/global.js */ "../../util/sugar/node_modules/webpack/buildin/global.js")))
 
 /***/ }),
 
@@ -2415,7 +2570,7 @@ function _defineProperty(obj, key, value) {
  * });
  *
  * // watch the object
- * watchedObj.on('title', watchResult => {
+ * watchedObj.on('title:set', watchResult => {
  *  	// do something when the title changes
  * });
  *
@@ -2693,7 +2848,7 @@ function deepMap(object, processor) {
   var _path = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];
 
   settings = (0, _deepMerge.default)({
-    deepFirst: true,
+    deepFirst: false,
     processObjects: false
   }, settings);
   Object.keys(object).forEach(prop => {
@@ -2831,6 +2986,8 @@ var _clone = _interopRequireDefault(__webpack_require__(/*! ../object/clone */ "
 
 var _delete = _interopRequireDefault(__webpack_require__(/*! ../object/delete */ "../../util/sugar/js/object/delete.js"));
 
+var _deepMerge = _interopRequireDefault(__webpack_require__(/*! ../object/deepMerge */ "../../util/sugar/js/object/deepMerge.js"));
+
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {
     default: obj
@@ -2854,6 +3011,10 @@ function _interopRequireDefault(obj) {
  * - delete: An object property deleted
  * - push: An item has been added inside an array
  * - {methodName}: Every array actions
+ * @param         {Object}                [settings={}]         An object of settings to configure your proxy:
+ * - handleSet (true) {Boolean}: Specify if you want to handle the "set" action
+ * - handleGet (false) {Boolean}: Specify if you want to handle the "get" action
+ * - handleDelete (true) {Boolean}: Specify if you want to handle the "delete" action
  * @return          {Object}                                  The proxied object
  *
  * @example           js
@@ -2870,13 +3031,19 @@ function _interopRequireDefault(obj) {
 
 
 function deepProxy(object, handlerFn) {
+  var settings = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
   var preproxy = new WeakMap();
   var isRevoked = false;
+  settings = (0, _deepMerge.default)({
+    handleSet: true,
+    handleGet: false,
+    handleDelete: true
+  }, settings);
 
   function makeHandler(path) {
     return {
       set(target, key, value) {
-        if (isRevoked) return true;
+        if (isRevoked || !settings.handleSet) return true;
 
         if (typeof value === 'object') {
           value = proxify(value, [...path, key]);
@@ -2897,25 +3064,27 @@ function deepProxy(object, handlerFn) {
         return true;
       },
 
-      // get(target, key, receiver) {
-      //   if (Reflect.has(target, key)) {
-      //     const value = handlerFn({
-      //       object,
-      //       target,
-      //       key,
-      //       path: [...path, key].join('.'),
-      //       action: 'get',
-      //       fullAction: 'Object.get'
-      //     });
-      //     if (key === 'revoke') return receiver.revoke;
-      //     console.log(value, key);
-      //     if (value === undefined) return target[key];
-      //     return value;
-      //   }
-      //   return undefined;
-      // },
+      get(target, key, receiver) {
+        if (Reflect.has(target, key)) {
+          if (!settings.handleGet) return target[key];
+          var value = handlerFn({
+            object,
+            target,
+            key,
+            path: [...path, key].join('.'),
+            action: 'get',
+            fullAction: 'Object.get'
+          });
+          if (key === 'revoke') return receiver.revoke;
+          if (value === undefined) return target[key];
+          return value;
+        }
+
+        return undefined;
+      },
+
       deleteProperty(target, key) {
-        if (isRevoked) return true;
+        if (isRevoked || !settings.handleDelete) return true;
 
         if (Reflect.has(target, key)) {
           // unproxy(target, key);
@@ -2963,8 +3132,8 @@ function deepProxy(object, handlerFn) {
       _loop(key);
     }
 
-    var p = Proxy.revocable(obj, makeHandler(path));
-    preproxy.set(p, obj);
+    var p = Proxy.revocable(obj, makeHandler(path)); // preproxy.set(p, obj);
+
     var revokePropertyObj = {
       writable: true,
       configurable: false,
@@ -2983,6 +3152,7 @@ function deepProxy(object, handlerFn) {
           }
 
           return val;
+        }, {// deepFirst: true
         }); // deep revoke the proxies
 
         setTimeout(() => {
@@ -5443,6 +5613,18 @@ module.exports = exports.default;
 "use strict";
 
 
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n      <p>\n        You need to specify a static template property for your component...\n      </p>\n    "]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -5451,6 +5633,12 @@ exports.default = SLitHtmlWebComponent;
 var _SWebComponent2 = _interopRequireDefault(__webpack_require__(/*! ./SWebComponent */ "../../util/sugar/js/webcomponent/SWebComponent.js"));
 
 var _litHtml = __webpack_require__(/*! lit-html */ "../../util/sugar/node_modules/lit-html/lit-html.js");
+
+var _throttle = _interopRequireDefault(__webpack_require__(/*! ../function/throttle */ "../../util/sugar/js/function/throttle.js"));
+
+var _insertAfter = _interopRequireDefault(__webpack_require__(/*! ../dom/insertAfter */ "../../util/sugar/js/dom/insertAfter.js"));
+
+var _deepMerge = _interopRequireDefault(__webpack_require__(/*! ../object/deepMerge */ "../../util/sugar/js/object/deepMerge.js"));
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {
@@ -5599,6 +5787,7 @@ function _defineProperty(obj, key, value) {
  * }
  *
  * @since       2.0.0
+ * @see       https://lit-html.polymer-project.org/
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
@@ -5643,8 +5832,22 @@ function SLitHtmlWebComponent() {
 
       _classCallCheck(this, SLitHtmlWebComponent);
 
-      _this = _super.call(this, settings);
-      console.log('LIPT');
+      _this = _super.call(this, (0, _deepMerge.default)({}, settings)); // wait until mounted to render the component first time
+
+      _defineProperty(_assertThisInitialized(_this), "render", (0, _throttle.default)(function () {
+        var tpl = this.constructor.template(this._props, this.metas, _litHtml.html);
+        (0, _litHtml.render)(tpl, this._$container);
+      }, 50));
+
+      _this.on('mounted{1}', () => {
+        // generate a container for the component
+        _this._$container = document.createElement('div');
+        _this._$container.className = "".concat(_this.metas.dashName, "__container");
+        (0, _insertAfter.default)(_this._$container, _assertThisInitialized(_this)); // render for the first time
+
+        _this.render();
+      });
+
       return _this;
     }
     /**
@@ -5658,12 +5861,45 @@ function SLitHtmlWebComponent() {
 
 
     _createClass(SLitHtmlWebComponent, [{
-      key: "render",
-      value: function render() {}
+      key: "handleProp",
+
+      /**
+       * @name          handleProp
+       * @type          Function
+       * @async
+       *
+       * This method is supposed to be overrided by your component integration
+       * to handle the props updates and delete actions.
+       * The passed description object has this format:
+       * ```js
+       * {
+       *    action: 'set|delete',
+       *    path: 'something.cool',
+       *    oldValue: '...',
+       *    value: '...'
+       * }
+       * ```
+       *
+       * @param     {String}      prop      The property name that has been updated or deleted
+       * @param     {Object}      descriptionObj      The description object that describe the update or delete action
+       * @return    {Promise}                A promise that has to be resolved once the update has been handled correctly. You have to pass the prop variable to the resolve function
+       *
+       * @since     2.0.0
+       * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      value: function handleProp(prop, propObj) {
+        return new Promise((resolve, reject) => {
+          this.render();
+          setTimeout(() => {
+            this.render();
+          }, 100);
+          resolve(prop);
+        });
+      }
     }]);
 
     return SLitHtmlWebComponent;
-  }((0, _SWebComponent2.default)(extend)), _defineProperty(_class, "template", (state, html) => "\n\n    "), _temp;
+  }((0, _SWebComponent2.default)(extend)), _defineProperty(_class, "template", (props, component, html) => html(_templateObject())), _temp;
 }
 
 module.exports = exports.default;
@@ -5716,6 +5952,10 @@ var _validateWithDefinitionObject = _interopRequireDefault(__webpack_require__(/
 var _watch = _interopRequireDefault(__webpack_require__(/*! ../object/watch */ "../../util/sugar/js/object/watch.js"));
 
 var _register = __webpack_require__(/*! ./register */ "../../util/sugar/js/webcomponent/register.js");
+
+var _uniqid = _interopRequireDefault(__webpack_require__(/*! ../string/uniqid */ "../../util/sugar/js/string/uniqid.js"));
+
+var _dispatch2 = _interopRequireDefault(__webpack_require__(/*! ../event/dispatch */ "../../util/sugar/js/event/dispatch.js"));
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {
@@ -5963,7 +6203,7 @@ function SWebComponent() {
       _classCallCheck(this, SWebComponent); // init base html element
 
 
-      _this = _super.call(this); // save the settings
+      _this = _super.call(this); // get component metas
 
       _defineProperty(_assertThisInitialized(_this), "_settedAttributesStack", {});
 
@@ -5973,35 +6213,42 @@ function SWebComponent() {
 
       _defineProperty(_assertThisInitialized(_this), "_settings", {});
 
+      _this._metas = (0, _register.getComponentMetas)(_this.constructor.componentName); // save the settings
+
       _this._settings = (0, _deepMerge.default)({
-        name: null,
+        id: (0, _uniqid.default)(),
         props: _this.constructor.props || {}
-      }, _register.stack[(0, _uncamelize.default)(_this.constructor.componentName)].settings || {}, settings); // create the SPromise instance
+      }, _this._metas.settings || {}, settings); // create the SPromise instance
 
       _this._promise = new _SPromise.default(() => {}).start();
 
       var _loop = function _loop(key) {
         _this._props[key] = _objectSpread(_objectSpread({}, _this._settings.props[key]), {}, {
-          valuesStack: [],
+          // valuesStack: [],
           value: _this._settings.props[key].default,
           previousValue: undefined
-        });
-
-        if (_this._props[key].value !== undefined) {
-          _this._props[key].valuesStack.push(_this._props[key].value);
-        } // if need to be watches deeply
-
+        }); // if (this._props[key].value !== undefined) {
+        //   let valueToStack = this._props[key].value;
+        //   if (
+        //     valueToStack &&
+        //     valueToStack.revoke &&
+        //     typeof valueToStack.revoke === 'function'
+        //   )
+        //     valueToStack = valueToStack.revoke();
+        //   // this._props[key].valuesStack.push(valueToStack);
+        // }
+        // if need to be watches deeply
 
         if (_this._props[key].watch) {
           _this._props[key] = (0, _watch.default)(_this._props[key]);
 
-          _this._props[key].on('*:set', update => {
-            console.trace('up', update);
+          _this._props[key].on('value.*:+(set|delete|push|pop)', update => {
+            if (update.path.split('.').length === 1) {
+              _this.prop(update.path, update.value);
+            } else {
+              _this.handleProp(update.path, _this._props[key]);
+            }
           });
-
-          setTimeout(() => {
-            _this._props[key].value.push('SOMTHINS');
-          }, 2000);
         }
       };
 
@@ -6014,22 +6261,36 @@ function SWebComponent() {
       return _this;
     }
     /**
-     * @name          _mount
-     * @type          Function
-     * @private
-     * @async
+     * @name          metas
+     * @type          Object
+     * @get
      *
-     * This method handle the mounting of the component
+     * This property store all the component metas informations like the name,
+     * the type, what it is extending, etc...
      *
+     * @since       2.0.0
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
 
 
     _createClass(SWebComponent, [{
       key: "_mount",
+
+      /**
+       * @name          _mount
+       * @type          Function
+       * @private
+       * @async
+       *
+       * This method handle the mounting of the component
+       *
+       * @since       2.0.0
+       * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
       value: function () {
         var _mount2 = _asyncToGenerator(function* () {
-          this._promise.trigger('mounting'); // wait until the component match the mountDependencies and mountWhen status
+          // dispatch mounting event
+          this._dispatch('mounting', this); // wait until the component match the mountDependencies and mountWhen status
 
 
           yield this._mountDependencies(); // check props definition
@@ -6037,9 +6298,10 @@ function SWebComponent() {
           this._checkPropsDefinition(); // handle physical props
 
 
-          this._handlePhysicalProps();
+          this._handlePhysicalProps(); // dispatch mounted event
 
-          this._promise.trigger('mounted');
+
+          this._dispatch('mounted', this);
         });
 
         function _mount() {
@@ -6048,6 +6310,38 @@ function SWebComponent() {
 
         return _mount;
       }()
+      /**
+       * @name          handleProp
+       * @type          Function
+       * @async
+       *
+       * This method is supposed to be overrided by your component integration
+       * to handle the props updates and delete actions.
+       * The passed description object has this format:
+       * ```js
+       * {
+       *    action: 'set|delete',
+       *    path: 'something.cool',
+       *    oldValue: '...',
+       *    value: '...'
+       * }
+       * ```
+       *
+       * @param     {String}      prop      The property name that has been updated or deleted
+       * @param     {Object}      descriptionObj      The description object that describe the update or delete action
+       * @return    {Promise}                A promise that has to be resolved once the update has been handled correctly. You have to pass the prop variable to the resolve function
+       *
+       * @since     2.0.0
+       * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+
+    }, {
+      key: "handleProp",
+      value: function handleProp(prop, descriptionObj) {
+        return new Promise((resolve, reject) => {
+          resolve(prop);
+        });
+      }
       /**
        * @name          on
        * @type          Function
@@ -6065,12 +6359,39 @@ function SWebComponent() {
        * @param       {String}        event         The event you want to subscribe to
        * @param       {Function}      callback      The callback function that has to be called
        * @return      {SPromise}                    The SPromise used in this instance
+       *
+       * @since       2.0.0
+       * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
 
     }, {
       key: "on",
       value: function on(event, callback) {
         return this._promise.on(event, callback);
+      }
+      /**
+       * @name          _dispatch
+       * @type          Function
+       * @private
+       *
+       * This method is used to dispatch events simultaneously through the SPromise internal instance on which you can subscribe using the "on" method,
+       * and through the global "sugar.js.event.dispatch" function on which you can subscribe using the function "sugar.js.event.on"
+       *
+       * @param       {String}        name          The event name to dispatch
+       * @param       {Mixed}         value         The value to attach to the event
+       *
+       * @since       2.0.0
+       * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+
+    }, {
+      key: "_dispatch",
+      value: function _dispatch(name, value) {
+        // dispatch event through the SPromise internal instance
+        this._promise.trigger(name, this); // dispatch a general event
+
+
+        (0, _dispatch2.default)("".concat(this.metas.dashName, ".").concat(name), this);
       }
       /**
        * @name          _mountDependencies
@@ -6089,6 +6410,7 @@ function SWebComponent() {
        *
        * @return      {Promise}               Return a promise that will be resolved once every "dependencies" are satisfied
        *
+       * @since       2.0.0
        * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
 
@@ -6103,8 +6425,8 @@ function SWebComponent() {
           } // check if we have one/some "mountDependencies" setting specified
 
 
-          if (this._settings._mountDependencies) {
-            var depsFns = [...this._settings._mountDependencies];
+          if (this._settings.mountDependencies) {
+            var depsFns = [...this._settings.mountDependencies];
             depsFns.forEach(fn => {
               promises.push(fn());
             });
@@ -6130,7 +6452,7 @@ function SWebComponent() {
       value: function connectedCallback() {
         // dispatch "event"
         setTimeout(() => {
-          this._promise.trigger('attach');
+          this._dispatch('attach', this);
         });
       }
       /**
@@ -6146,7 +6468,7 @@ function SWebComponent() {
       key: "disconnectedCallback",
       value: function disconnectedCallback() {
         // dispatch "event"
-        this._promise.trigger('detach');
+        this._dispatch('detach', this);
       }
       /**
        * @name            attributeChangedCallback
@@ -6165,14 +6487,23 @@ function SWebComponent() {
       key: "attributeChangedCallback",
       value: function attributeChangedCallback(attrName, oldVal, newVal) {
         if (this._settedAttributesStack[attrName]) return; // try to get the property
+        // const propObj = this._props[attrName];
+        // const previousValue = __parse(oldVal);
 
-        var propObj = this._props[attrName];
-        var previousValue = (0, _parse.default)(oldVal);
-        var newValue = (0, _parse.default)(newVal); // save the old value and the new value
+        var newValue = (0, _parse.default)(newVal); // set the value into the props
 
-        propObj.value = newValue;
-        propObj.previousValue = previousValue;
-        propObj.valuesStack.push(newValue); // save the prop
+        this.prop(attrName, newValue); // save the old value and the new value
+        // propObj.value = newValue;
+        // propObj.previousValue = previousValue;
+        // let valueToStack = newValue;
+        // if (
+        //   valueToStack &&
+        //   valueToStack.revoke &&
+        //   typeof valueToStack.revoke === 'function'
+        // )
+        //   valueToStack = valueToStack.revoke();
+        // propObj.valuesStack.push(valueToStack);
+        // save the prop
         // this._props[__camelize(attrName)] = newPropObj;
         // trigger a "prop" event
 
@@ -6201,10 +6532,16 @@ function SWebComponent() {
         }
 
         this._props[_prop].previousValue = this._props[_prop].value;
-        this._props[_prop].value = value;
+        this._props[_prop].value = value; // let valueToStack = value;
+        // if (
+        //   valueToStack &&
+        //   valueToStack.revoke &&
+        //   typeof valueToStack.revoke === 'function'
+        // )
+        //   valueToStack = valueToStack.revoke();
+        // this._props[prop].valuesStack.push(valueToStack);
 
-        this._props[_prop].valuesStack.push(value); // handle physical props
-
+        this.handleProp(_prop, this._props[_prop]); // handle physical props
 
         this._handlePhysicalProps(_prop); // trigger a "prop" event
 
@@ -6231,11 +6568,14 @@ function SWebComponent() {
         // trigger a "prop" event
         var eventObj = {
           prop,
-          action: this._props[prop].previousValue !== null ? this._props[prop].value !== null ? 'update' : 'remove' : 'add',
+          action: this._props[prop].previousValue !== null ? this._props[prop].value !== null ? 'set' : 'delete' : 'set',
           value: this._props[prop].value,
           previousValue: this._props[prop].previousValue
-        }; // this._promise.trigger('prop', eventObj);
+        };
+
+        this._dispatch("prop.".concat(prop, ":").concat(eventObj.action), eventObj); // this._promise.trigger('prop', eventObj);
         // this._promise.trigger(`prop.${prop}`, eventObj);
+
       }
       /**
        * @name        _handlePhysicalProps
@@ -6258,7 +6598,13 @@ function SWebComponent() {
         if (!props || props.length === 0) props = Object.keys(this._props); // loop on each required props
 
         props.forEach(prop => {
-          var value = this._props[prop].value;
+          if (!this._props[prop].physical) return;
+          var value = this._props[prop].value; // if the value is false, remove the attributee from the dom node
+
+          if (value === false) {
+            this.removeAttribute(prop);
+            return;
+          }
 
           if (!this.getAttribute(prop)) {
             // set the attribute with the value
@@ -6304,6 +6650,13 @@ function SWebComponent() {
           if (validationResult !== true) throw new Error(validationResult);
         });
       }
+    }, {
+      key: "metas",
+      get: function get() {
+        return _objectSpread({
+          $node: this
+        }, this._metas);
+      }
     }]);
 
     return SWebComponent;
@@ -6328,6 +6681,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.define = define;
+exports.getComponentMetas = getComponentMetas;
 Object.defineProperty(exports, "SWebComponent", {
   enumerable: true,
   get: function get() {
@@ -6361,10 +6715,13 @@ function _interopRequireDefault(obj) {
 var _SWebComponentStack = {};
 exports.stack = _SWebComponentStack;
 
+function getComponentMetas(name) {
+  return _SWebComponentStack[(0, _uncamelize.default)(name)] || {};
+}
+
 function define(name, cls) {
   var settings = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
   if (!name) throw new Error("SWebComponent: You must define a name for your webcomponent by setting either a static \"name\" property on your class, of by passing a name as first parameter of the static \"define\" function...");
-  cls.componentName = name;
   var extend = null;
 
   for (var key in _htmlTagToHtmlClassMap.default) {
@@ -6375,8 +6732,10 @@ function define(name, cls) {
   }
 
   var uncamelizedName = (0, _uncamelize.default)(name);
+  cls.componentName = name;
   _SWebComponentStack[uncamelizedName] = {
     name,
+    dashName: uncamelizedName,
     class: cls,
     extends: extend,
     settings
@@ -8015,6 +8374,129 @@ function notDefined(obj, key) {
     && obj.__lookupSetter__(key) === undefined;
 }
 
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/css-loader/dist/cjs.js!../../util/sugar/node_modules/sass-loader/dist/cjs.js?!./src/scss/index.scss":
+/*!******************************************************************************************************************************************************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/css-loader/dist/cjs.js!/Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/sass-loader/dist/cjs.js??ref--4-2!./src/scss/index.scss ***!
+  \******************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../util/sugar/node_modules/css-loader/dist/runtime/api.js */ "../../util/sugar/node_modules/css-loader/dist/runtime/api.js");
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ "../../util/sugar/node_modules/css-loader/dist/runtime/api.js":
+/*!**********************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/css-loader/dist/runtime/api.js ***!
+  \**********************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/*
+  MIT License http://www.opensource.org/licenses/mit-license.php
+  Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+// eslint-disable-next-line func-names
+module.exports = function (useSourceMap) {
+  var list = []; // return the list of modules as css string
+
+  list.toString = function toString() {
+    return this.map(function (item) {
+      var content = cssWithMappingToString(item, useSourceMap);
+
+      if (item[2]) {
+        return "@media ".concat(item[2], " {").concat(content, "}");
+      }
+
+      return content;
+    }).join('');
+  }; // import a list of modules into the list
+  // eslint-disable-next-line func-names
+
+
+  list.i = function (modules, mediaQuery, dedupe) {
+    if (typeof modules === 'string') {
+      // eslint-disable-next-line no-param-reassign
+      modules = [[null, modules, '']];
+    }
+
+    var alreadyImportedModules = {};
+
+    if (dedupe) {
+      for (var i = 0; i < this.length; i++) {
+        // eslint-disable-next-line prefer-destructuring
+        var id = this[i][0];
+
+        if (id != null) {
+          alreadyImportedModules[id] = true;
+        }
+      }
+    }
+
+    for (var _i = 0; _i < modules.length; _i++) {
+      var item = [].concat(modules[_i]);
+
+      if (dedupe && alreadyImportedModules[item[0]]) {
+        // eslint-disable-next-line no-continue
+        continue;
+      }
+
+      if (mediaQuery) {
+        if (!item[2]) {
+          item[2] = mediaQuery;
+        } else {
+          item[2] = "".concat(mediaQuery, " and ").concat(item[2]);
+        }
+      }
+
+      list.push(item);
+    }
+  };
+
+  return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+  var content = item[1] || ''; // eslint-disable-next-line prefer-destructuring
+
+  var cssMapping = item[3];
+
+  if (!cssMapping) {
+    return content;
+  }
+
+  if (useSourceMap && typeof btoa === 'function') {
+    var sourceMapping = toComment(cssMapping);
+    var sourceURLs = cssMapping.sources.map(function (source) {
+      return "/*# sourceURL=".concat(cssMapping.sourceRoot || '').concat(source, " */");
+    });
+    return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+  }
+
+  return [content].join('\n');
+} // Adapted from convert-source-map (MIT)
+
+
+function toComment(sourceMap) {
+  // eslint-disable-next-line no-undef
+  var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+  var data = "sourceMappingURL=data:application/json;charset=utf-8;base64,".concat(base64);
+  return "/*# ".concat(data, " */");
+}
 
 /***/ }),
 
@@ -30248,6 +30730,286 @@ function simpleEnd(buf) {
 
 /***/ }),
 
+/***/ "../../util/sugar/node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js":
+/*!*********************************************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js ***!
+  \*********************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var isOldIE = function isOldIE() {
+  var memo;
+  return function memorize() {
+    if (typeof memo === 'undefined') {
+      // Test for IE <= 9 as proposed by Browserhacks
+      // @see http://browserhacks.com/#hack-e71d8692f65334173fee715c222cb805
+      // Tests for existence of standard globals is to allow style-loader
+      // to operate correctly into non-standard environments
+      // @see https://github.com/webpack-contrib/style-loader/issues/177
+      memo = Boolean(window && document && document.all && !window.atob);
+    }
+
+    return memo;
+  };
+}();
+
+var getTarget = function getTarget() {
+  var memo = {};
+  return function memorize(target) {
+    if (typeof memo[target] === 'undefined') {
+      var styleTarget = document.querySelector(target); // Special case to return head of iframe instead of iframe itself
+
+      if (window.HTMLIFrameElement && styleTarget instanceof window.HTMLIFrameElement) {
+        try {
+          // This will throw an exception if access to iframe is blocked
+          // due to cross-origin restrictions
+          styleTarget = styleTarget.contentDocument.head;
+        } catch (e) {
+          // istanbul ignore next
+          styleTarget = null;
+        }
+      }
+
+      memo[target] = styleTarget;
+    }
+
+    return memo[target];
+  };
+}();
+
+var stylesInDom = [];
+
+function getIndexByIdentifier(identifier) {
+  var result = -1;
+
+  for (var i = 0; i < stylesInDom.length; i++) {
+    if (stylesInDom[i].identifier === identifier) {
+      result = i;
+      break;
+    }
+  }
+
+  return result;
+}
+
+function modulesToDom(list, options) {
+  var idCountMap = {};
+  var identifiers = [];
+
+  for (var i = 0; i < list.length; i++) {
+    var item = list[i];
+    var id = options.base ? item[0] + options.base : item[0];
+    var count = idCountMap[id] || 0;
+    var identifier = "".concat(id, " ").concat(count);
+    idCountMap[id] = count + 1;
+    var index = getIndexByIdentifier(identifier);
+    var obj = {
+      css: item[1],
+      media: item[2],
+      sourceMap: item[3]
+    };
+
+    if (index !== -1) {
+      stylesInDom[index].references++;
+      stylesInDom[index].updater(obj);
+    } else {
+      stylesInDom.push({
+        identifier: identifier,
+        updater: addStyle(obj, options),
+        references: 1
+      });
+    }
+
+    identifiers.push(identifier);
+  }
+
+  return identifiers;
+}
+
+function insertStyleElement(options) {
+  var style = document.createElement('style');
+  var attributes = options.attributes || {};
+
+  if (typeof attributes.nonce === 'undefined') {
+    var nonce =  true ? __webpack_require__.nc : undefined;
+
+    if (nonce) {
+      attributes.nonce = nonce;
+    }
+  }
+
+  Object.keys(attributes).forEach(function (key) {
+    style.setAttribute(key, attributes[key]);
+  });
+
+  if (typeof options.insert === 'function') {
+    options.insert(style);
+  } else {
+    var target = getTarget(options.insert || 'head');
+
+    if (!target) {
+      throw new Error("Couldn't find a style target. This probably means that the value for the 'insert' parameter is invalid.");
+    }
+
+    target.appendChild(style);
+  }
+
+  return style;
+}
+
+function removeStyleElement(style) {
+  // istanbul ignore if
+  if (style.parentNode === null) {
+    return false;
+  }
+
+  style.parentNode.removeChild(style);
+}
+/* istanbul ignore next  */
+
+
+var replaceText = function replaceText() {
+  var textStore = [];
+  return function replace(index, replacement) {
+    textStore[index] = replacement;
+    return textStore.filter(Boolean).join('\n');
+  };
+}();
+
+function applyToSingletonTag(style, index, remove, obj) {
+  var css = remove ? '' : obj.media ? "@media ".concat(obj.media, " {").concat(obj.css, "}") : obj.css; // For old IE
+
+  /* istanbul ignore if  */
+
+  if (style.styleSheet) {
+    style.styleSheet.cssText = replaceText(index, css);
+  } else {
+    var cssNode = document.createTextNode(css);
+    var childNodes = style.childNodes;
+
+    if (childNodes[index]) {
+      style.removeChild(childNodes[index]);
+    }
+
+    if (childNodes.length) {
+      style.insertBefore(cssNode, childNodes[index]);
+    } else {
+      style.appendChild(cssNode);
+    }
+  }
+}
+
+function applyToTag(style, options, obj) {
+  var css = obj.css;
+  var media = obj.media;
+  var sourceMap = obj.sourceMap;
+
+  if (media) {
+    style.setAttribute('media', media);
+  } else {
+    style.removeAttribute('media');
+  }
+
+  if (sourceMap && btoa) {
+    css += "\n/*# sourceMappingURL=data:application/json;base64,".concat(btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))), " */");
+  } // For old IE
+
+  /* istanbul ignore if  */
+
+
+  if (style.styleSheet) {
+    style.styleSheet.cssText = css;
+  } else {
+    while (style.firstChild) {
+      style.removeChild(style.firstChild);
+    }
+
+    style.appendChild(document.createTextNode(css));
+  }
+}
+
+var singleton = null;
+var singletonCounter = 0;
+
+function addStyle(obj, options) {
+  var style;
+  var update;
+  var remove;
+
+  if (options.singleton) {
+    var styleIndex = singletonCounter++;
+    style = singleton || (singleton = insertStyleElement(options));
+    update = applyToSingletonTag.bind(null, style, styleIndex, false);
+    remove = applyToSingletonTag.bind(null, style, styleIndex, true);
+  } else {
+    style = insertStyleElement(options);
+    update = applyToTag.bind(null, style, options);
+
+    remove = function remove() {
+      removeStyleElement(style);
+    };
+  }
+
+  update(obj);
+  return function updateStyle(newObj) {
+    if (newObj) {
+      if (newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap) {
+        return;
+      }
+
+      update(obj = newObj);
+    } else {
+      remove();
+    }
+  };
+}
+
+module.exports = function (list, options) {
+  options = options || {}; // Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+  // tags it will allow on a page
+
+  if (!options.singleton && typeof options.singleton !== 'boolean') {
+    options.singleton = isOldIE();
+  }
+
+  list = list || [];
+  var lastIdentifiers = modulesToDom(list, options);
+  return function update(newList) {
+    newList = newList || [];
+
+    if (Object.prototype.toString.call(newList) !== '[object Array]') {
+      return;
+    }
+
+    for (var i = 0; i < lastIdentifiers.length; i++) {
+      var identifier = lastIdentifiers[i];
+      var index = getIndexByIdentifier(identifier);
+      stylesInDom[index].references--;
+    }
+
+    var newLastIdentifiers = modulesToDom(newList, options);
+
+    for (var _i = 0; _i < lastIdentifiers.length; _i++) {
+      var _identifier = lastIdentifiers[_i];
+
+      var _index = getIndexByIdentifier(_identifier);
+
+      if (stylesInDom[_index].references === 0) {
+        stylesInDom[_index].updater();
+
+        stylesInDom.splice(_index, 1);
+      }
+    }
+
+    lastIdentifiers = newLastIdentifiers;
+  };
+};
+
+/***/ }),
+
 /***/ "../../util/sugar/node_modules/to-regex-range/index.js":
 /*!***************************************************************************************************************!*\
   !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/util/sugar/node_modules/to-regex-range/index.js ***!
@@ -32453,6 +33215,17 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./src/data/docMap.json":
+/*!******************************!*\
+  !*** ./src/data/docMap.json ***!
+  \******************************/
+/*! exports provided: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 290, 291, 292, 293, 294, 295, 296, 297, 298, 299, 300, 301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 319, 320, 321, 322, 323, 324, 325, 326, 327, 328, 329, 330, 331, 332, 333, 334, 335, 336, 337, 338, 339, 340, 341, 342, 343, 344, 345, 346, 347, 348, 349, 350, 351, 352, 353, 354, 355, 356, 357, 358, 359, 360, 361, 362, 363, 364, 365, 366, 367, 368, 369, 370, 371, 372, 373, 374, 375, 376, 377, 378, 379, 380, 381, 382, 383, 384, 385, 386, 387, 388, 389, 390, 391, 392, 393, 394, 395, 396, 397, 398, 399, 400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, 418, 419, 420, 421, 422, 423, 424, 425, 426, 427, 428, 429, 430, 431, 432, 433, 434, 435, 436, 437, 438, 439, 440, 441, 442, 443, 444, 445, 446, 447, 448, 449, 450, 451, 452, 453, 454, 455, 456, 457, 458, 459, 460, 461, 462, 463, 464, 465, 466, 467, 468, 469, 470, 471, 472, 473, 474, 475, 476, 477, 478, 479, 480, 481, 482, 483, 484, 485, 486, 487, 488, 489, 490, 491, 492, 493, 494, 495, 496, 497, 498, 499, 500, 501, 502, 503, 504, 505, 506, 507, 508, 509, 510, 511, 512, 513, 514, 515, 516, 517, 518, 519, 520, 521, 522, 523, 524, 525, 526, 527, 528, 529, 530, 531, 532, 533, 534, 535, 536, 537, 538, 539, 540, 541, 542, 543, 544, 545, 546, 547, 548, 549, 550, 551, 552, 553, 554, 555, 556, 557, 558, 559, 560, 561, 562, 563, 564, 565, 566, 567, 568, 569, 570, 571, 572, 573, 574, 575, 576, 577, 578, 579, 580, 581, 582, 583, 584, 585, 586, 587, 588, 589, 590, 591, 592, 593, 594, 595, 596, 597, 598, 599, 600, 601, 602, 603, 604, 605, 606, 607, 608, 609, 610, 611, 612, 613, 614, 615, 616, 617, 618, 619, 620, 621, 622, 623, 624, 625, 626, 627, 628, 629, 630, 631, 632, 633, 634, 635, 636, 637, 638, 639, 640, 641, 642, 643, 644, 645, 646, 647, 648, 649, 650, 651, 652, 653, 654, 655, 656, 657, 658, 659, 660, 661, 662, 663, 664, 665, 666, 667, 668, 669, 670, 671, 672, 673, 674, 675, 676, 677, 678, 679, 680, 681, 682, 683, 684, 685, 686, 687, 688, 689, 690, 691, 692, 693, 694, 695, 696, 697, 698, 699, 700, 701, 702, 703, 704, 705, 706, 707, 708, 709, 710, 711, 712, 713, 714, 715, 716, 717, 718, 719, 720, 721, 722, 723, 724, 725, 726, 727, 728, 729, 730, 731, 732, 733, 734, 735, 736, 737, 738, 739, 740, 741, 742, 743, 744, 745, 746, 747, 748, 749, 750, 751, 752, 753, 754, 755, 756, 757, 758, 759, 760, 761, 762, 763, 764, 765, 766, 767, 768, 769, 770, 771, 772, 773, 774, 775, 776, 777, 778, 779, 780, 781, 782, 783, 784, 785, 786, 787, 788, 789, 790, 791, 792, 793, 794, 795, 796, 797, 798, 799, 800, 801, 802, 803, 804, 805, 806, 807, 808, 809, 810, 811, 812, 813, 814, 815, 816, 817, 818, 819, 820, 821, 822, 823, 824, 825, 826, 827, 828, 829, 830, 831, 832, 833, 834, 835, 836, 837, 838, 839, 840, 841, 842, 843, 844, 845, 846, 847, 848, 849, 850, 851, 852, 853, 854, 855, 856, 857, 858, 859, 860, 861, 862, 863, 864, 865, 866, 867, 868, 869, 870, 871, 872, 873, 874, 875, 876, 877, 878, 879, 880, 881, 882, 883, 884, 885, 886, 887, 888, 889, 890, 891, 892, 893, 894, 895, 896, 897, 898, 899, 900, 901, 902, 903, 904, 905, 906, 907, 908, 909, 910, 911, 912, 913, 914, 915, 916, 917, 918, 919, 920, 921, 922, 923, 924, 925, 926, 927, 928, 929, 930, 931, 932, 933, 934, 935, 936, 937, 938, 939, 940, 941, 942, 943, 944, 945, 946, 947, 948, 949, 950, 951, 952, 953, 954, 955, 956, 957, 958, 959, 960, 961, 962, 963, 964, 965, 966, 967, 968, 969, 970, 971, 972, 973, 974, 975, 976, 977, 978, 979, 980, 981, 982, 983, 984, 985, 986, 987, 988, 989, 990, 991, 992, 993, 994, 995, 996, 997, 998, 999, 1000, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015, 1016, 1017, 1018, 1019, 1020, 1021, 1022, 1023, 1024, 1025, 1026, 1027, 1028, 1029, 1030, 1031, 1032, 1033, 1034, 1035, 1036, 1037, 1038, 1039, 1040, 1041, 1042, 1043, 1044, 1045, 1046, 1047, 1048, 1049, 1050, 1051, 1052, 1053, 1054, 1055, 1056, 1057, 1058, 1059, 1060, 1061, 1062, 1063, 1064, 1065, 1066, 1067, 1068, 1069, 1070, 1071, 1072, 1073, 1074, 1075, 1076, 1077, 1078, 1079, 1080, 1081, 1082, 1083, 1084, 1085, 1086, 1087, 1088, 1089, 1090, 1091, 1092, 1093, 1094, 1095, 1096, 1097, 1098, 1099, 1100, 1101, 1102, 1103, 1104, 1105, 1106, 1107, 1108, 1109, 1110, 1111, 1112, 1113, 1114, 1115, 1116, 1117, 1118, 1119, 1120, 1121, 1122, 1123, 1124, 1125, 1126, 1127, 1128, 1129, 1130, 1131, 1132, 1133, 1134, 1135, 1136, 1137, 1138, 1139, 1140, 1141, 1142, 1143, 1144, 1145, 1146, 1147, 1148, 1149, 1150, 1151, 1152, 1153, 1154, 1155, 1156, 1157, 1158, 1159, 1160, 1161, 1162, 1163, 1164, 1165, 1166, 1167, 1168, 1169, 1170, 1171, 1172, 1173, 1174, 1175, 1176, 1177, 1178, 1179, 1180, 1181, 1182, 1183, 1184, 1185, 1186, 1187, 1188, 1189, 1190, 1191, 1192, 1193, 1194, 1195, 1196, 1197, 1198, 1199, 1200, 1201, 1202, 1203, 1204, 1205, 1206, 1207, 1208, 1209, 1210, 1211, 1212, 1213, 1214, 1215, 1216, 1217, 1218, 1219, 1220, 1221, 1222, 1223, 1224, 1225, 1226, 1227, 1228, 1229, 1230, 1231, 1232, 1233, 1234, 1235, 1236, 1237, 1238, 1239, 1240, 1241, 1242, 1243, 1244, 1245, 1246, 1247, 1248, 1249, 1250, 1251, 1252, 1253, 1254, 1255, 1256, 1257, 1258, 1259, 1260, 1261, 1262, 1263, 1264, 1265, 1266, 1267, 1268, 1269, 1270, 1271, 1272, 1273, 1274, 1275, 1276, 1277, 1278, 1279, 1280, 1281, 1282, 1283, 1284, 1285, 1286, 1287, 1288, 1289, 1290, 1291, 1292, 1293, 1294, 1295, 1296, 1297, 1298, 1299, 1300, 1301, 1302, 1303, 1304, 1305, 1306, 1307, 1308, 1309, 1310, 1311, 1312, 1313, 1314, 1315, 1316, 1317, 1318, 1319, 1320, 1321, 1322, 1323, 1324, 1325, 1326, 1327, 1328, 1329, 1330, 1331, 1332, 1333, 1334, 1335, 1336, 1337, 1338, 1339, 1340, 1341, 1342, 1343, 1344, 1345, 1346, 1347, 1348, 1349, 1350, 1351, 1352, 1353, 1354, 1355, 1356, 1357, 1358, 1359, 1360, 1361, 1362, 1363, 1364, 1365, 1366, 1367, 1368, 1369, 1370, 1371, 1372, 1373, 1374, 1375, 1376, 1377, 1378, 1379, 1380, 1381, 1382, 1383, 1384, 1385, 1386, 1387, 1388, 1389, 1390, 1391, 1392, 1393, 1394, 1395, 1396, 1397, 1398, 1399, 1400, 1401, 1402, 1403, 1404, 1405, 1406, 1407, 1408, 1409, 1410, 1411, 1412, 1413, 1414, 1415, 1416, 1417, 1418, 1419, 1420, 1421, 1422, 1423, 1424, 1425, 1426, 1427, 1428, 1429, 1430, 1431, 1432, 1433, 1434, 1435, 1436, 1437, 1438, 1439, 1440, 1441, 1442, 1443, 1444, 1445, 1446, 1447, 1448, 1449, 1450, 1451, 1452, 1453, 1454, 1455, 1456, 1457, 1458, 1459, 1460, 1461, 1462, 1463, 1464, 1465, 1466, 1467, 1468, 1469, 1470, 1471, 1472, 1473, 1474, 1475, 1476, 1477, 1478, 1479, 1480, 1481, 1482, 1483, 1484, 1485, 1486, 1487, 1488, 1489, 1490, 1491, 1492, 1493, 1494, 1495, 1496, 1497, 1498, 1499, 1500, 1501, 1502, 1503, 1504, 1505, 1506, 1507, 1508, 1509, 1510, 1511, 1512, 1513, 1514, 1515, 1516, 1517, 1518, 1519, 1520, 1521, 1522, 1523, 1524, 1525, 1526, 1527, 1528, 1529, 1530, 1531, 1532, 1533, 1534, 1535, 1536, 1537, 1538, 1539, 1540, 1541, 1542, 1543, 1544, 1545, 1546, 1547, 1548, 1549, 1550, 1551, 1552, 1553, 1554, 1555, 1556, 1557, 1558, 1559, 1560, 1561, 1562, 1563, 1564, 1565, 1566, 1567, 1568, 1569, 1570, 1571, 1572, 1573, 1574, 1575, 1576, 1577, 1578, 1579, 1580, 1581, 1582, 1583, 1584, 1585, 1586, 1587, 1588, 1589, 1590, 1591, 1592, 1593, 1594, 1595, 1596, 1597, 1598, 1599, 1600, 1601, 1602, 1603, 1604, 1605, 1606, 1607, 1608, 1609, 1610, 1611, 1612, 1613, 1614, 1615, 1616, 1617, 1618, 1619, 1620, 1621, 1622, 1623, 1624, 1625, 1626, 1627, 1628, 1629, 1630, 1631, 1632, 1633, 1634, 1635, 1636, 1637, 1638, 1639, 1640, 1641, 1642, 1643, 1644, 1645, 1646, 1647, 1648, 1649, 1650, 1651, 1652, 1653, 1654, 1655, 1656, 1657, 1658, 1659, 1660, 1661, 1662, 1663, 1664, 1665, 1666, 1667, 1668, 1669, 1670, 1671, 1672, 1673, 1674, 1675, 1676, 1677, 1678, 1679, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("[{\"name\":\"sugar.cli\",\"namespace\":\"coffeekraken.sugar.cli\",\"path\":\"src/cli/sugar.cli.js\"},{\"name\":\"watch\",\"namespace\":\"coffeekraken.sugar.cli.fs\",\"path\":\"src/cli/fs/watch.cli.js\"},{\"name\":\"watch\",\"namespace\":\"coffeekraken.sugar.cli.fs\",\"path\":\"src/cli/fs/watch.cli.js\"},{\"name\":null,\"namespace\":\"coffeekraken.sugar.src.cli.main\",\"path\":\"src/cli/main/node.cli.js\"},{\"name\":null,\"namespace\":\"coffeekraken.sugar.src.cli.main\",\"path\":\"src/cli/main/node.cli.js\"},{\"name\":null,\"namespace\":\"coffeekraken.sugar.src.cli.snippet\",\"path\":\"src/cli/snippet/generateFile.js\"},{\"name\":null,\"namespace\":\"coffeekraken.sugar.src.cli.snippet\",\"path\":\"src/cli/snippet/generateFile.js\"},{\"name\":\"sugar.cli\",\"namespace\":\"coffeekraken.sugar.cli\",\"path\":\"src/cli/sugar.cli.js\"},{\"name\":\"DrawerWebcomponent\",\"namespace\":\"coffeekraken.sugar.drawer-webcomponent\",\"path\":\"src/data/tests/testing.js\"},{\"name\":\"DrawerWebcomponent\",\"namespace\":\"coffeekraken.sugar.drawer-webcomponent\",\"path\":\"src/data/tests/testing.js\"},{\"name\":\"asyncForEach\",\"namespace\":\"coffeekraken.sugar.js.array\",\"path\":\"src/js/array/asyncForEach.js\"},{\"name\":\"keysFirst\",\"namespace\":\"coffeekraken.sugar.js.array\",\"path\":\"src/js/array/keysFirst.js\"},{\"name\":\"keysLast\",\"namespace\":\"coffeekraken.sugar.js.array\",\"path\":\"src/js/array/keysLast.js\"},{\"name\":\"proxy\",\"namespace\":\"coffeekraken.sugar.js.array\",\"path\":\"src/js/array/proxy.js\"},{\"name\":\"splitEvery\",\"namespace\":\"coffeekraken.sugar.js.array\",\"path\":\"src/js/array/splitEvery.js\"},{\"name\":\"asyncForEach\",\"namespace\":\"coffeekraken.sugar.js.array\",\"path\":\"src/js/array/asyncForEach.js\"},{\"name\":\"keysFirst\",\"namespace\":\"coffeekraken.sugar.js.array\",\"path\":\"src/js/array/keysFirst.js\"},{\"name\":\"keysLast\",\"namespace\":\"coffeekraken.sugar.js.array\",\"path\":\"src/js/array/keysLast.js\"},{\"name\":\"proxy\",\"namespace\":\"coffeekraken.sugar.js.array\",\"path\":\"src/js/array/proxy.js\"},{\"name\":\"splitEvery\",\"namespace\":\"coffeekraken.sugar.js.array\",\"path\":\"src/js/array/splitEvery.js\"},{\"name\":\"SAuth\",\"namespace\":\"coffeekraken.sugar.node.auth\",\"path\":\"src/js/auth/__wip__/SAuth.js\"},{\"name\":\"SAuthAdapter\",\"namespace\":\"coffeekraken.sugar.node.auth.adapters\",\"path\":\"src/js/auth/__wip__/adapters/SAuthAdapter.js\"},{\"name\":\"STerminalAuthAdapter\",\"namespace\":\"coffeekraken.sugar.node.auth.adapters\",\"path\":\"src/js/auth/__wip__/adapters/SAuthTerminalAdapter.js\"},{\"name\":\"SAuthAdapter\",\"namespace\":\"coffeekraken.sugar.node.auth.adapters\",\"path\":\"src/js/auth/__wip__/adapters/SAuthAdapter.js\"},{\"name\":\"STerminalAuthAdapter\",\"namespace\":\"coffeekraken.sugar.node.auth.adapters\",\"path\":\"src/js/auth/__wip__/adapters/SAuthTerminalAdapter.js\"},{\"name\":\"basicFormater\",\"namespace\":\"coffeekraken.sugar.node.auth.formaters\",\"path\":\"src/js/auth/__wip__/formaters/basicFormater.js\"},{\"name\":\"bearerFormater\",\"namespace\":\"coffeekraken.sugar.node.auth.formaters\",\"path\":\"src/js/auth/__wip__/formaters/bearerFormater.js\"},{\"name\":\"basicFormater\",\"namespace\":\"coffeekraken.sugar.node.auth.formaters\",\"path\":\"src/js/auth/__wip__/formaters/basicFormater.js\"},{\"name\":\"bearerFormater\",\"namespace\":\"coffeekraken.sugar.node.auth.formaters\",\"path\":\"src/js/auth/__wip__/formaters/bearerFormater.js\"},{\"name\":\"axiosInjector\",\"namespace\":\"coffeekraken.sugar.node.auth.injectors\",\"path\":\"src/js/auth/__wip__/injectors/axiosInjector.js\"},{\"name\":\"axiosInjector\",\"namespace\":\"coffeekraken.sugar.node.auth.injectors\",\"path\":\"src/js/auth/__wip__/injectors/axiosInjector.js\"},{\"name\":\"SAuth\",\"namespace\":\"coffeekraken.sugar.node.auth\",\"path\":\"src/js/auth/__wip__/SAuth.js\"},{\"name\":\"bitbucketApiValidator\",\"namespace\":\"coffeekraken.sugar.node.auth\",\"path\":\"src/js/auth/__wip__/validators/bitbucketApiValidator.js\"},{\"name\":\"bitbucketApiValidator\",\"namespace\":\"coffeekraken.sugar.node.auth\",\"path\":\"src/js/auth/__wip__/validators/bitbucketApiValidator.js\"},{\"name\":\"SCache\",\"namespace\":\"coffeekraken.sugar.js.cache\",\"path\":\"src/js/cache/SCache.js\"},{\"name\":\"SCacheAdapter\",\"namespace\":\"coffeekraken.sugar.js.cache.cacheAdapters\",\"path\":\"src/js/cache/adapters/SCacheAdapter.js\"},{\"name\":\"SCacheFsAdapter\",\"namespace\":\"coffeekraken.sugar.node.fs.cacheAdapters\",\"path\":\"src/js/cache/adapters/SCacheLsAdapter.js\"},{\"name\":\"SCacheAdapter\",\"namespace\":\"coffeekraken.sugar.js.cache.cacheAdapters\",\"path\":\"src/js/cache/adapters/SCacheAdapter.js\"},{\"name\":\"SCacheFsAdapter\",\"namespace\":\"coffeekraken.sugar.node.fs.cacheAdapters\",\"path\":\"src/js/cache/adapters/SCacheLsAdapter.js\"},{\"name\":\"SCache\",\"namespace\":\"coffeekraken.sugar.js.cache\",\"path\":\"src/js/cache/SCache.js\"},{\"name\":\"getMethods\",\"namespace\":\"coffeekraken.sugar.node.class\",\"path\":\"src/js/class/getMethods.js\"},{\"name\":\"methodExists\",\"namespace\":\"coffeekraken.sugar.js.class\",\"path\":\"src/js/class/methodExists.js\"},{\"name\":\"multipleExtends\",\"namespace\":\"coffeekraken.sugar.js.class\",\"path\":\"src/js/class/multipleExtends.js\"},{\"name\":\"toPlainObject\",\"namespace\":\"coffeekraken.sugar.js.class\",\"path\":\"src/js/class/toPlainObject.js\"},{\"name\":\"getMethods\",\"namespace\":\"coffeekraken.sugar.node.class\",\"path\":\"src/js/class/getMethods.js\"},{\"name\":\"methodExists\",\"namespace\":\"coffeekraken.sugar.js.class\",\"path\":\"src/js/class/methodExists.js\"},{\"name\":\"multipleExtends\",\"namespace\":\"coffeekraken.sugar.js.class\",\"path\":\"src/js/class/multipleExtends.js\"},{\"name\":\"toPlainObject\",\"namespace\":\"coffeekraken.sugar.js.class\",\"path\":\"src/js/class/toPlainObject.js\"},{\"name\":\"argsToObject\",\"namespace\":\"coffeekraken.sugar.js.cli\",\"path\":\"src/js/cli/argsToObject.js\"},{\"name\":\"argsToString\",\"namespace\":\"coffeekraken.sugar.js.cli\",\"path\":\"src/js/cli/argsToString.js\"},{\"name\":\"buildCommandLine\",\"namespace\":\"coffeekraken.sugar.js.cli\",\"path\":\"src/js/cli/buildCommandLine.js\"},{\"name\":\"completeArgsObject\",\"namespace\":\"coffeekraken.sugar.js.cli\",\"path\":\"src/js/cli/completeArgsObject.js\"},{\"name\":\"parseArgs\",\"namespace\":\"coffeekraken.sugar.js.cli\",\"path\":\"src/js/cli/parseArgs.js\"},{\"name\":\"validateDefinitionObject\",\"namespace\":\"coffeekraken.sugar.js.cli\",\"path\":\"src/js/cli/validateDefinitionObject.js\"},{\"name\":\"validateWithDefinitionObject\",\"namespace\":\"coffeekraken.sugar.js.cli\",\"path\":\"src/js/cli/validateWithDefinitionObject.js\"},{\"name\":\"argsToObject\",\"namespace\":\"coffeekraken.sugar.js.cli\",\"path\":\"src/js/cli/argsToObject.js\"},{\"name\":\"argsToString\",\"namespace\":\"coffeekraken.sugar.js.cli\",\"path\":\"src/js/cli/argsToString.js\"},{\"name\":\"buildCommandLine\",\"namespace\":\"coffeekraken.sugar.js.cli\",\"path\":\"src/js/cli/buildCommandLine.js\"},{\"name\":\"completeArgsObject\",\"namespace\":\"coffeekraken.sugar.js.cli\",\"path\":\"src/js/cli/completeArgsObject.js\"},{\"name\":\"parseArgs\",\"namespace\":\"coffeekraken.sugar.js.cli\",\"path\":\"src/js/cli/parseArgs.js\"},{\"name\":\"validateDefinitionObject\",\"namespace\":\"coffeekraken.sugar.js.cli\",\"path\":\"src/js/cli/validateDefinitionObject.js\"},{\"name\":\"validateWithDefinitionObject\",\"namespace\":\"coffeekraken.sugar.js.cli\",\"path\":\"src/js/cli/validateWithDefinitionObject.js\"},{\"name\":\"color\",\"namespace\":\"coffeekraken.sugar.js.color\",\"path\":\"src/js/color/color.js\"},{\"name\":\"convert\",\"namespace\":\"coffeekraken.sugar.js.color\",\"path\":\"src/js/color/convert.js\"},{\"name\":\"hex2rgba\",\"namespace\":\"coffeekraken.sugar.js.color\",\"path\":\"src/js/color/hex2rgba.js\"},{\"name\":\"hsl2rgba\",\"namespace\":\"coffeekraken.sugar.js.color\",\"path\":\"src/js/color/hsl2rgba.js\"},{\"name\":\"hsv2rgba\",\"namespace\":\"coffeekraken.sugar.js.color\",\"path\":\"src/js/color/hsv2rgba.js\"},{\"name\":\"parse\",\"namespace\":\"coffeekraken.sugar.js.color\",\"path\":\"src/js/color/parse.js\"},{\"name\":\"parseHsl\",\"namespace\":\"coffeekraken.sugar.js.color\",\"path\":\"src/js/color/parseHsl.js\"},{\"name\":\"parseHsv\",\"namespace\":\"coffeekraken.sugar.js.color\",\"path\":\"src/js/color/parseHsv.js\"},{\"name\":\"parseRgba\",\"namespace\":\"coffeekraken.sugar.js.color\",\"path\":\"src/js/color/parseRgba.js\"},{\"name\":\"rgba2hex\",\"namespace\":\"coffeekraken.sugar.js.color\",\"path\":\"src/js/color/rgba2hex.js\"},{\"name\":\"rgba2hsl\",\"namespace\":\"coffeekraken.sugar.js.color\",\"path\":\"src/js/color/rgba2hsl.js\"},{\"name\":\"rgba2hsv\",\"namespace\":\"coffeekraken.sugar.js.color\",\"path\":\"src/js/color/rgba2hsv.js\"},{\"name\":\"SColor\",\"namespace\":\"coffeekraken.sugar.js.color\",\"path\":\"src/js/color/SColor.js\"},{\"name\":\"color\",\"namespace\":\"coffeekraken.sugar.js.color\",\"path\":\"src/js/color/color.js\"},{\"name\":\"convert\",\"namespace\":\"coffeekraken.sugar.js.color\",\"path\":\"src/js/color/convert.js\"},{\"name\":\"hex2rgba\",\"namespace\":\"coffeekraken.sugar.js.color\",\"path\":\"src/js/color/hex2rgba.js\"},{\"name\":\"hsl2rgba\",\"namespace\":\"coffeekraken.sugar.js.color\",\"path\":\"src/js/color/hsl2rgba.js\"},{\"name\":\"hsv2rgba\",\"namespace\":\"coffeekraken.sugar.js.color\",\"path\":\"src/js/color/hsv2rgba.js\"},{\"name\":\"parse\",\"namespace\":\"coffeekraken.sugar.js.color\",\"path\":\"src/js/color/parse.js\"},{\"name\":\"parseHsl\",\"namespace\":\"coffeekraken.sugar.js.color\",\"path\":\"src/js/color/parseHsl.js\"},{\"name\":\"parseHsv\",\"namespace\":\"coffeekraken.sugar.js.color\",\"path\":\"src/js/color/parseHsv.js\"},{\"name\":\"parseRgba\",\"namespace\":\"coffeekraken.sugar.js.color\",\"path\":\"src/js/color/parseRgba.js\"},{\"name\":\"rgba2hex\",\"namespace\":\"coffeekraken.sugar.js.color\",\"path\":\"src/js/color/rgba2hex.js\"},{\"name\":\"rgba2hsl\",\"namespace\":\"coffeekraken.sugar.js.color\",\"path\":\"src/js/color/rgba2hsl.js\"},{\"name\":\"rgba2hsv\",\"namespace\":\"coffeekraken.sugar.js.color\",\"path\":\"src/js/color/rgba2hsv.js\"},{\"name\":\"SColor\",\"namespace\":\"coffeekraken.sugar.js.color\",\"path\":\"src/js/color/SColor.js\"},{\"name\":\"config\",\"namespace\":\"coffeekraken.sugar.js.config\",\"path\":\"src/js/config/SConfig.js\"},{\"name\":\"SConfigAdapter\",\"namespace\":\"coffeekraken.sugar.js.config.adapters\",\"path\":\"src/js/config/adapters/SConfigAdapter.js\"},{\"name\":\"SConfigLsAdapter\",\"namespace\":\"coffeekraken.sugar.js.config.adapters\",\"path\":\"src/js/config/adapters/SConfigLsAdapter.js\"},{\"name\":\"SConfigAdapter\",\"namespace\":\"coffeekraken.sugar.js.config.adapters\",\"path\":\"src/js/config/adapters/SConfigAdapter.js\"},{\"name\":\"SConfigLsAdapter\",\"namespace\":\"coffeekraken.sugar.js.config.adapters\",\"path\":\"src/js/config/adapters/SConfigLsAdapter.js\"},{\"name\":\"config\",\"namespace\":\"coffeekraken.sugar.js.config\",\"path\":\"src/js/config/SConfig.js\"},{\"name\":\"parseHtml\",\"namespace\":\"coffeekraken.sugar.js.console\",\"path\":\"src/js/console/parseHtml.js\"},{\"name\":\"parseHtml\",\"namespace\":\"coffeekraken.sugar.js.console\",\"path\":\"src/js/console/parseHtml.js\"},{\"name\":\"activeSpace\",\"namespace\":\"coffeekraken.sugar.js.core\",\"path\":\"src/js/core/activeSpace.js\"},{\"name\":\"env\",\"namespace\":\"coffeekraken.sugar.js.core\",\"path\":\"src/js/core/env.js\"},{\"name\":\"config\",\"namespace\":\"coffeekraken.sugar.\",\"path\":\"src/js/core/__wip__/config.js\"},{\"name\":\"settings\",\"namespace\":\"coffeekraken.sugar.js.core\",\"path\":\"src/js/core/__wip__/settings.js\"},{\"name\":\"config\",\"namespace\":\"coffeekraken.sugar.\",\"path\":\"src/js/core/__wip__/config.js\"},{\"name\":\"settings\",\"namespace\":\"coffeekraken.sugar.js.core\",\"path\":\"src/js/core/__wip__/settings.js\"},{\"name\":\"activeSpace\",\"namespace\":\"coffeekraken.sugar.js.core\",\"path\":\"src/js/core/activeSpace.js\"},{\"name\":\"env\",\"namespace\":\"coffeekraken.sugar.js.core\",\"path\":\"src/js/core/env.js\"},{\"name\":\"aes\",\"namespace\":\"coffeekraken.sugar.js.crypt\",\"path\":\"src/js/crypt/aes.js\"},{\"name\":\"base64\",\"namespace\":\"coffeekraken.sugar.js.crypt\",\"path\":\"src/js/crypt/base64.js\"},{\"name\":\"md5\",\"namespace\":\"coffeekraken.sugar.js.crypt\",\"path\":\"src/js/crypt/md5.js\"},{\"name\":\"object\",\"namespace\":\"coffeekraken.sugar.js.crypt\",\"path\":\"src/js/crypt/object.js\"},{\"name\":\"sha256\",\"namespace\":\"coffeekraken.sugar.js.crypt\",\"path\":\"src/js/crypt/sha256.js\"},{\"name\":\"sha512\",\"namespace\":\"coffeekraken.sugar.js.crypt\",\"path\":\"src/js/crypt/sha512.js\"},{\"name\":\"aes\",\"namespace\":\"coffeekraken.sugar.js.crypt\",\"path\":\"src/js/crypt/aes.js\"},{\"name\":\"base64\",\"namespace\":\"coffeekraken.sugar.js.crypt\",\"path\":\"src/js/crypt/base64.js\"},{\"name\":\"md5\",\"namespace\":\"coffeekraken.sugar.js.crypt\",\"path\":\"src/js/crypt/md5.js\"},{\"name\":\"object\",\"namespace\":\"coffeekraken.sugar.js.crypt\",\"path\":\"src/js/crypt/object.js\"},{\"name\":\"sha256\",\"namespace\":\"coffeekraken.sugar.js.crypt\",\"path\":\"src/js/crypt/sha256.js\"},{\"name\":\"sha512\",\"namespace\":\"coffeekraken.sugar.js.crypt\",\"path\":\"src/js/crypt/sha512.js\"},{\"name\":\"injectStyle\",\"namespace\":\"coffeekraken.sugar.js.css\",\"path\":\"src/js/css/injectStyle.js\"},{\"name\":\"autoPrefix\",\"namespace\":\"coffeekraken.sugar.js.css\",\"path\":\"src/js/css/__wip__/autoPrefix.js\"},{\"name\":\"autoPrefix\",\"namespace\":\"coffeekraken.sugar.js.css\",\"path\":\"src/js/css/__wip__/autoPrefix.js\"},{\"name\":\"injectStyle\",\"namespace\":\"coffeekraken.sugar.js.css\",\"path\":\"src/js/css/injectStyle.js\"},{\"name\":\"dataTypesArray\",\"namespace\":\"coffeekraken.sugar.js.dev\",\"path\":\"src/js/dev/dataTypesArray.js\"},{\"name\":\"getArgsNames\",\"namespace\":\"coffeekraken.sugar.js.dev\",\"path\":\"src/js/dev/getArgsNames.js\"},{\"name\":\"checkArgs\",\"namespace\":\"coffeekraken.sugar.js.dev\",\"path\":\"src/js/dev/__wip__/checkArgs.js\"},{\"name\":\"checkArgs\",\"namespace\":\"coffeekraken.sugar.js.dev\",\"path\":\"src/js/dev/__wip__/checkArgs.js\"},{\"name\":\"dataTypesArray\",\"namespace\":\"coffeekraken.sugar.js.dev\",\"path\":\"src/js/dev/dataTypesArray.js\"},{\"name\":\"getArgsNames\",\"namespace\":\"coffeekraken.sugar.js.dev\",\"path\":\"src/js/dev/getArgsNames.js\"},{\"name\":\"Dockblock\",\"namespace\":\"coffeekraken.sugar.js.docblock\",\"path\":\"src/js/docblock/SDocblock.js\"},{\"name\":\"SDocblockBlock\",\"namespace\":\"coffeekraken.sugar.js.docblock\",\"path\":\"src/js/docblock/SDocblockBlock.js\"},{\"name\":\"DockblockParser\",\"namespace\":\"coffeekraken.sugar.js.docblock\",\"path\":\"src/js/docblock/__tests__/SDocblock.js\"},{\"name\":\"SDocblockBlock\",\"namespace\":\"coffeekraken.sugar.js.docblock\",\"path\":\"src/js/docblock/__tests__/SDocblockBlock.js\"},{\"name\":\"DockblockParser\",\"namespace\":\"coffeekraken.sugar.js.docblock\",\"path\":\"src/js/docblock/__tests__/SDocblock.js\"},{\"name\":\"SDocblockBlock\",\"namespace\":\"coffeekraken.sugar.js.docblock\",\"path\":\"src/js/docblock/__tests__/SDocblockBlock.js\"},{\"name\":\"{{name}} {{/if}}\",\"namespace\":\"coffeekraken.sugar.{{namespace}}{{\",\"path\":\"src/js/docblock/markdown/blocks/class.js\"},{\"name\":\"{{name}} {{/if}}\",\"namespace\":\"coffeekraken.sugar.{{namespace}}{{\",\"path\":\"src/js/docblock/markdown/blocks/default.js\"},{\"name\":\"{{name}} {{/if}}\",\"namespace\":\"coffeekraken.sugar.{{namespace}}{{\",\"path\":\"src/js/docblock/markdown/blocks/function.js\"},{\"name\":\"{{name}} {{/if}}\",\"namespace\":\"coffeekraken.sugar.{{namespace}}{{\",\"path\":\"src/js/docblock/markdown/blocks/class.js\"},{\"name\":\"{{name}} {{/if}}\",\"namespace\":\"coffeekraken.sugar.{{namespace}}{{\",\"path\":\"src/js/docblock/markdown/blocks/default.js\"},{\"name\":\"{{name}} {{/if}}\",\"namespace\":\"coffeekraken.sugar.{{namespace}}{{\",\"path\":\"src/js/docblock/markdown/blocks/function.js\"},{\"name\":\"Dockblock\",\"namespace\":\"coffeekraken.sugar.js.docblock\",\"path\":\"src/js/docblock/SDocblock.js\"},{\"name\":\"SDocblockBlock\",\"namespace\":\"coffeekraken.sugar.js.docblock\",\"path\":\"src/js/docblock/SDocblockBlock.js\"},{\"name\":\"author\",\"namespace\":\"coffeekraken.sugar.js.docblock.tags\",\"path\":\"src/js/docblock/tags/author.js\"},{\"name\":\"description\",\"namespace\":\"coffeekraken.sugar.js.docblock.tags\",\"path\":\"src/js/docblock/tags/description.js\"},{\"name\":\"example\",\"namespace\":\"coffeekraken.sugar.js.docblock.tags\",\"path\":\"src/js/docblock/tags/example.js\"},{\"name\":\"param\",\"namespace\":\"coffeekraken.sugar.js.docblock.tags\",\"path\":\"src/js/docblock/tags/param.js\"},{\"name\":\"return\",\"namespace\":\"coffeekraken.sugar.js.docblock.tags\",\"path\":\"src/js/docblock/tags/return.js\"},{\"name\":\"simpleValue\",\"namespace\":\"coffeekraken.sugar.js.docblock.tags\",\"path\":\"src/js/docblock/tags/simpleValue.js\"},{\"name\":\"snippet\",\"namespace\":\"coffeekraken.sugar.js.docblock.tags\",\"path\":\"src/js/docblock/tags/snippet.js\"},{\"name\":\"author\",\"namespace\":\"coffeekraken.sugar.js.docblock.tags\",\"path\":\"src/js/docblock/tags/author.js\"},{\"name\":\"description\",\"namespace\":\"coffeekraken.sugar.js.docblock.tags\",\"path\":\"src/js/docblock/tags/description.js\"},{\"name\":\"example\",\"namespace\":\"coffeekraken.sugar.js.docblock.tags\",\"path\":\"src/js/docblock/tags/example.js\"},{\"name\":\"param\",\"namespace\":\"coffeekraken.sugar.js.docblock.tags\",\"path\":\"src/js/docblock/tags/param.js\"},{\"name\":\"return\",\"namespace\":\"coffeekraken.sugar.js.docblock.tags\",\"path\":\"src/js/docblock/tags/return.js\"},{\"name\":\"simpleValue\",\"namespace\":\"coffeekraken.sugar.js.docblock.tags\",\"path\":\"src/js/docblock/tags/simpleValue.js\"},{\"name\":\"snippet\",\"namespace\":\"coffeekraken.sugar.js.docblock.tags\",\"path\":\"src/js/docblock/tags/snippet.js\"},{\"name\":\"addAnimationClass\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/addAnimationClass.js\"},{\"name\":\"addEventListener\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/addEventListener.js\"},{\"name\":\"addEventListenerOnce\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/addEventListenerOnce.js\"},{\"name\":\"appendScriptTag\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/appendScriptTag.js\"},{\"name\":\"appendStylesheetLink\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/appendStylesheetLink.js\"},{\"name\":\"backgroundImageLoaded\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/backgroundImageLoaded.js\"},{\"name\":\"closest\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/closest.js\"},{\"name\":\"closestNotVisible\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/closestNotVisible.js\"},{\"name\":\"dataset\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/dataset.js\"},{\"name\":\"detectInOutDirection\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/detectInOutDirection.js\"},{\"name\":\"dispatchEvent\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/dispatchEvent.js\"},{\"name\":\"domReady\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/domReady.js\"},{\"name\":\"emptyNode\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/emptyNode.js\"},{\"name\":\"exitFullscreen\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/exitFullscreen.js\"},{\"name\":\"forceRedraw\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/forceRedraw.js\"},{\"name\":\"getAnimationProperties\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/getAnimationProperties.js\"},{\"name\":\"getStyleProperty\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/getStyleProperty.js\"},{\"name\":\"getTransitionProperties\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/getTransitionProperties.js\"},{\"name\":\"getTranslateProperties\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/getTranslateProperties.js\"},{\"name\":\"imageLoaded\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/imageLoaded.js\"},{\"name\":\"imagesLoaded\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/imagesLoaded.js\"},{\"name\":\"innerHtml\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/innerHtml.js\"},{\"name\":\"insertAfter\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/insertAfter.js\"},{\"name\":\"inViewportPercentage\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/inViewportPercentage.js\"},{\"name\":\"inViewportStatusChange\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/inViewportStatusChange.js\"},{\"name\":\"isHover\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/isHover.js\"},{\"name\":\"isInIframe\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/isInIframe.js\"},{\"name\":\"isInViewport\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/isInViewport.js\"},{\"name\":\"isVisible\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/isVisible.js\"},{\"name\":\"linkLoaded\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/linkLoaded.js\"},{\"name\":\"matches\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/matches.js\"},{\"name\":\"next\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/next.js\"},{\"name\":\"nodeIndex\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/nodeIndex.js\"},{\"name\":\"observeAttributes\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/observeAttributes.js\"},{\"name\":\"observeMutations\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/observeMutations.js\"},{\"name\":\"offset\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/offset.js\"},{\"name\":\"offsetParent\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/offsetParent.js\"},{\"name\":\"onSwipe\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/onSwipe.js\"},{\"name\":\"prependChild\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/prependChild.js\"},{\"name\":\"previous\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/previous.js\"},{\"name\":\"querySelector\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/querySelector.js\"},{\"name\":\"querySelectorAll\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/querySelectorAll.js\"},{\"name\":\"querySelectorAllWithStyle\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/querySelectorAllWithStyle.js\"},{\"name\":\"querySelectorLive\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/querySelectorLive.js\"},{\"name\":\"realHeight\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/realHeight.js\"},{\"name\":\"removeClassOnAnimationEnd\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/removeClassOnAnimationEnd.js\"},{\"name\":\"requestAnimationFrame\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/requestAnimationFrame.js\"},{\"name\":\"requestFullscreen\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/requestFullscreen.js\"},{\"name\":\"scriptLoaded\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/scriptLoaded.js\"},{\"name\":\"scrollLeft\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/scrollLeft.js\"},{\"name\":\"scrollTo\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/scrollTo.js\"},{\"name\":\"scrollToLocationHash\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/scrollToLocationHash.js\"},{\"name\":\"scrollTop\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/scrollTop.js\"},{\"name\":\"sendForm\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/sendForm.js\"},{\"name\":\"splitLetters\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/splitLetters.js\"},{\"name\":\"splitLines\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/splitLines.js\"},{\"name\":\"splitWords\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/splitWords.js\"},{\"name\":\"stripTags\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/stripTags.js\"},{\"name\":\"style\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/style.js\"},{\"name\":\"styleObject2String\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/styleObject2String.js\"},{\"name\":\"stylesheetsReady\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/stylesheetsReady.js\"},{\"name\":\"styleString2Object\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/styleString2Object.js\"},{\"name\":\"textWidth\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/textWidth.js\"},{\"name\":\"toDomNodes\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/toDomNodes.js\"},{\"name\":\"toggleFullscreen\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/toggleFullscreen.js\"},{\"name\":\"when\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/when.js\"},{\"name\":\"whenAttribute\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/whenAttribute.js\"},{\"name\":\"whenInViewport\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/whenInViewport.js\"},{\"name\":\"whenOutOfViewport\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/whenOutOfViewport.js\"},{\"name\":\"whenTransitionEnd\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/whenTransitionEnd.js\"},{\"name\":\"whenVisible\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/whenVisible.js\"},{\"name\":\"wrap\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/wrap.js\"},{\"name\":\"wrapInner\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/wrapInner.js\"},{\"name\":\"addAnimationClass\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/addAnimationClass.js\"},{\"name\":\"addEventListener\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/addEventListener.js\"},{\"name\":\"addEventListenerOnce\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/addEventListenerOnce.js\"},{\"name\":\"appendScriptTag\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/appendScriptTag.js\"},{\"name\":\"appendStylesheetLink\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/appendStylesheetLink.js\"},{\"name\":\"backgroundImageLoaded\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/backgroundImageLoaded.js\"},{\"name\":\"closest\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/closest.js\"},{\"name\":\"closestNotVisible\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/closestNotVisible.js\"},{\"name\":\"dataset\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/dataset.js\"},{\"name\":\"detectInOutDirection\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/detectInOutDirection.js\"},{\"name\":\"dispatchEvent\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/dispatchEvent.js\"},{\"name\":\"domReady\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/domReady.js\"},{\"name\":\"emptyNode\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/emptyNode.js\"},{\"name\":\"exitFullscreen\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/exitFullscreen.js\"},{\"name\":\"forceRedraw\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/forceRedraw.js\"},{\"name\":\"getAnimationProperties\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/getAnimationProperties.js\"},{\"name\":\"getStyleProperty\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/getStyleProperty.js\"},{\"name\":\"getTransitionProperties\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/getTransitionProperties.js\"},{\"name\":\"getTranslateProperties\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/getTranslateProperties.js\"},{\"name\":\"imageLoaded\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/imageLoaded.js\"},{\"name\":\"imagesLoaded\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/imagesLoaded.js\"},{\"name\":\"innerHtml\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/innerHtml.js\"},{\"name\":\"insertAfter\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/insertAfter.js\"},{\"name\":\"inViewportPercentage\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/inViewportPercentage.js\"},{\"name\":\"inViewportStatusChange\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/inViewportStatusChange.js\"},{\"name\":\"isHover\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/isHover.js\"},{\"name\":\"isInIframe\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/isInIframe.js\"},{\"name\":\"isInViewport\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/isInViewport.js\"},{\"name\":\"isVisible\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/isVisible.js\"},{\"name\":\"linkLoaded\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/linkLoaded.js\"},{\"name\":\"matches\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/matches.js\"},{\"name\":\"next\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/next.js\"},{\"name\":\"nodeIndex\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/nodeIndex.js\"},{\"name\":\"observeAttributes\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/observeAttributes.js\"},{\"name\":\"observeMutations\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/observeMutations.js\"},{\"name\":\"offset\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/offset.js\"},{\"name\":\"offsetParent\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/offsetParent.js\"},{\"name\":\"onSwipe\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/onSwipe.js\"},{\"name\":\"prependChild\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/prependChild.js\"},{\"name\":\"previous\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/previous.js\"},{\"name\":\"querySelector\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/querySelector.js\"},{\"name\":\"querySelectorAll\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/querySelectorAll.js\"},{\"name\":\"querySelectorAllWithStyle\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/querySelectorAllWithStyle.js\"},{\"name\":\"querySelectorLive\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/querySelectorLive.js\"},{\"name\":\"realHeight\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/realHeight.js\"},{\"name\":\"removeClassOnAnimationEnd\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/removeClassOnAnimationEnd.js\"},{\"name\":\"requestAnimationFrame\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/requestAnimationFrame.js\"},{\"name\":\"requestFullscreen\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/requestFullscreen.js\"},{\"name\":\"scriptLoaded\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/scriptLoaded.js\"},{\"name\":\"scrollLeft\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/scrollLeft.js\"},{\"name\":\"scrollTo\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/scrollTo.js\"},{\"name\":\"scrollToLocationHash\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/scrollToLocationHash.js\"},{\"name\":\"scrollTop\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/scrollTop.js\"},{\"name\":\"sendForm\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/sendForm.js\"},{\"name\":\"splitLetters\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/splitLetters.js\"},{\"name\":\"splitLines\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/splitLines.js\"},{\"name\":\"splitWords\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/splitWords.js\"},{\"name\":\"stripTags\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/stripTags.js\"},{\"name\":\"style\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/style.js\"},{\"name\":\"styleObject2String\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/styleObject2String.js\"},{\"name\":\"stylesheetsReady\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/stylesheetsReady.js\"},{\"name\":\"styleString2Object\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/styleString2Object.js\"},{\"name\":\"textWidth\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/textWidth.js\"},{\"name\":\"toDomNodes\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/toDomNodes.js\"},{\"name\":\"toggleFullscreen\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/toggleFullscreen.js\"},{\"name\":\"when\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/when.js\"},{\"name\":\"whenAttribute\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/whenAttribute.js\"},{\"name\":\"whenInViewport\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/whenInViewport.js\"},{\"name\":\"whenOutOfViewport\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/whenOutOfViewport.js\"},{\"name\":\"whenTransitionEnd\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/whenTransitionEnd.js\"},{\"name\":\"whenVisible\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/whenVisible.js\"},{\"name\":\"wrap\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/wrap.js\"},{\"name\":\"wrapInner\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/dom/wrapInner.js\"},{\"name\":\"availableEasingsArray\",\"namespace\":\"coffeekraken.sugar.js.easing\",\"path\":\"src/js/easing/availableEasingsArray.js\"},{\"name\":\"easeInCubic\",\"namespace\":\"coffeekraken.sugar.js.easing\",\"path\":\"src/js/easing/easeInCubic.js\"},{\"name\":\"easeInOutCubic\",\"namespace\":\"coffeekraken.sugar.js.easing\",\"path\":\"src/js/easing/easeInOutCubic.js\"},{\"name\":\"easeInOutQuad\",\"namespace\":\"coffeekraken.sugar.js.easing\",\"path\":\"src/js/easing/easeInOutQuad.js\"},{\"name\":\"easeInOutQuart\",\"namespace\":\"coffeekraken.sugar.js.easing\",\"path\":\"src/js/easing/easeInOutQuart.js\"},{\"name\":\"easeInOutQuint\",\"namespace\":\"coffeekraken.sugar.js.easing\",\"path\":\"src/js/easing/easeInOutQuint.js\"},{\"name\":\"easeInQuad\",\"namespace\":\"coffeekraken.sugar.js.easing\",\"path\":\"src/js/easing/easeInQuad.js\"},{\"name\":\"easeInQuart\",\"namespace\":\"coffeekraken.sugar.js.easing\",\"path\":\"src/js/easing/easeInQuart.js\"},{\"name\":\"easeInQuint\",\"namespace\":\"coffeekraken.sugar.js.easing\",\"path\":\"src/js/easing/easeInQuint.js\"},{\"name\":\"easeOutCubic\",\"namespace\":\"coffeekraken.sugar.js.easing\",\"path\":\"src/js/easing/easeOutCubic.js\"},{\"name\":\"easeOutQuad\",\"namespace\":\"coffeekraken.sugar.js.easing\",\"path\":\"src/js/easing/easeOutQuad.js\"},{\"name\":\"easeOutQuart\",\"namespace\":\"coffeekraken.sugar.js.easing\",\"path\":\"src/js/easing/easeOutQuart.js\"},{\"name\":\"easeOutQuint\",\"namespace\":\"coffeekraken.sugar.js.easing\",\"path\":\"src/js/easing/easeOutQuint.js\"},{\"name\":\"linear\",\"namespace\":\"coffeekraken.sugar.js.easing\",\"path\":\"src/js/easing/linear.js\"},{\"name\":\"availableEasingsArray\",\"namespace\":\"coffeekraken.sugar.js.easing\",\"path\":\"src/js/easing/availableEasingsArray.js\"},{\"name\":\"easeInCubic\",\"namespace\":\"coffeekraken.sugar.js.easing\",\"path\":\"src/js/easing/easeInCubic.js\"},{\"name\":\"easeInOutCubic\",\"namespace\":\"coffeekraken.sugar.js.easing\",\"path\":\"src/js/easing/easeInOutCubic.js\"},{\"name\":\"easeInOutQuad\",\"namespace\":\"coffeekraken.sugar.js.easing\",\"path\":\"src/js/easing/easeInOutQuad.js\"},{\"name\":\"easeInOutQuart\",\"namespace\":\"coffeekraken.sugar.js.easing\",\"path\":\"src/js/easing/easeInOutQuart.js\"},{\"name\":\"easeInOutQuint\",\"namespace\":\"coffeekraken.sugar.js.easing\",\"path\":\"src/js/easing/easeInOutQuint.js\"},{\"name\":\"easeInQuad\",\"namespace\":\"coffeekraken.sugar.js.easing\",\"path\":\"src/js/easing/easeInQuad.js\"},{\"name\":\"easeInQuart\",\"namespace\":\"coffeekraken.sugar.js.easing\",\"path\":\"src/js/easing/easeInQuart.js\"},{\"name\":\"easeInQuint\",\"namespace\":\"coffeekraken.sugar.js.easing\",\"path\":\"src/js/easing/easeInQuint.js\"},{\"name\":\"easeOutCubic\",\"namespace\":\"coffeekraken.sugar.js.easing\",\"path\":\"src/js/easing/easeOutCubic.js\"},{\"name\":\"easeOutQuad\",\"namespace\":\"coffeekraken.sugar.js.easing\",\"path\":\"src/js/easing/easeOutQuad.js\"},{\"name\":\"easeOutQuart\",\"namespace\":\"coffeekraken.sugar.js.easing\",\"path\":\"src/js/easing/easeOutQuart.js\"},{\"name\":\"easeOutQuint\",\"namespace\":\"coffeekraken.sugar.js.easing\",\"path\":\"src/js/easing/easeOutQuint.js\"},{\"name\":\"linear\",\"namespace\":\"coffeekraken.sugar.js.easing\",\"path\":\"src/js/easing/linear.js\"},{\"name\":\"base64\",\"namespace\":\"coffeekraken.sugar.js.encoding\",\"path\":\"src/js/encoding/base64.js\"},{\"name\":\"base64\",\"namespace\":\"coffeekraken.sugar.js.encoding\",\"path\":\"src/js/encoding/base64.js\"},{\"name\":\"SEvent\",\"namespace\":\"coffeekraken.sugar.js.event\",\"path\":\"src/js/event/SEvent.js\"},{\"name\":\"SEvent\",\"namespace\":\"coffeekraken.sugar.js.event\",\"path\":\"src/js/event/SEvent.js\"},{\"name\":\"autoScrollAnchorLinks\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/feature/autoScrollAnchorLinks.js\"},{\"name\":\"imagesLazySrcAttribute\",\"namespace\":\"coffeekraken.sugar.js.feature\",\"path\":\"src/js/feature/imagesLazySrcAttribute.js\"},{\"name\":\"imagesLoadedAttribute\",\"namespace\":\"coffeekraken.sugar.js.feature\",\"path\":\"src/js/feature/imagesLoadedAttribute.js\"},{\"name\":\"handleInputAttributes\",\"namespace\":\"coffeekraken.sugar.js.feature\",\"path\":\"src/js/feature/inputAdditionalAttributes.js\"},{\"name\":\"handleInputAttributes\",\"namespace\":\"coffeekraken.sugar.js.feature\",\"path\":\"src/js/feature/inputAdditionalEvents.js\"},{\"name\":\"linksScrollHrefAttribute\",\"namespace\":\"coffeekraken.sugar.js.feature\",\"path\":\"src/js/feature/linksScrollHrefAttribute.js\"},{\"name\":\"videoLazySrcAttribute\",\"namespace\":\"coffeekraken.sugar.js.feature\",\"path\":\"src/js/feature/videosLazySrcAttribute.js\"},{\"name\":\"dispatchEventAttribute\",\"namespace\":\"coffeekraken.sugar.js.feature\",\"path\":\"src/js/feature/__wip__/dispatchEventAttribute.js\"},{\"name\":\"dispatchEventAttribute\",\"namespace\":\"coffeekraken.sugar.js.feature\",\"path\":\"src/js/feature/__wip__/dispatchEventAttribute.js\"},{\"name\":\"autoScrollAnchorLinks\",\"namespace\":\"coffeekraken.sugar.js.dom\",\"path\":\"src/js/feature/autoScrollAnchorLinks.js\"},{\"name\":\"imagesLazySrcAttribute\",\"namespace\":\"coffeekraken.sugar.js.feature\",\"path\":\"src/js/feature/imagesLazySrcAttribute.js\"},{\"name\":\"imagesLoadedAttribute\",\"namespace\":\"coffeekraken.sugar.js.feature\",\"path\":\"src/js/feature/imagesLoadedAttribute.js\"},{\"name\":\"handleInputAttributes\",\"namespace\":\"coffeekraken.sugar.js.feature\",\"path\":\"src/js/feature/inputAdditionalAttributes.js\"},{\"name\":\"handleInputAttributes\",\"namespace\":\"coffeekraken.sugar.js.feature\",\"path\":\"src/js/feature/inputAdditionalEvents.js\"},{\"name\":\"linksScrollHrefAttribute\",\"namespace\":\"coffeekraken.sugar.js.feature\",\"path\":\"src/js/feature/linksScrollHrefAttribute.js\"},{\"name\":\"videoLazySrcAttribute\",\"namespace\":\"coffeekraken.sugar.js.feature\",\"path\":\"src/js/feature/videosLazySrcAttribute.js\"},{\"name\":\"extension\",\"namespace\":\"coffeekraken.sugar.js.file\",\"path\":\"src/js/file/extension.js\"},{\"name\":\"extension\",\"namespace\":\"coffeekraken.sugar.js.file\",\"path\":\"src/js/file/extension.js\"},{\"name\":\"SGooeySvgFilter\",\"namespace\":\"coffeekraken.sugar.js.filter\",\"path\":\"src/js/filter/SGooeySvgFilter.js\"},{\"name\":\"SGradientSvgFilter\",\"namespace\":\"coffeekraken.sugar.js.filter\",\"path\":\"src/js/filter/SGradientSvgFilter.js\"},{\"name\":\"SMotionblurSvgFilter\",\"namespace\":\"coffeekraken.sugar.js.filter\",\"path\":\"src/js/filter/SMotionblurSvgFilter.js\"},{\"name\":\"SOutlineSvgFilter\",\"namespace\":\"coffeekraken.sugar.js.filter\",\"path\":\"src/js/filter/SOutlineSvgFilter.js\"},{\"name\":\"SGooeySvgFilter\",\"namespace\":\"coffeekraken.sugar.js.filter\",\"path\":\"src/js/filter/SSvgFilter.js\"},{\"name\":\"SGooeySvgFilter\",\"namespace\":\"coffeekraken.sugar.js.filter\",\"path\":\"src/js/filter/SGooeySvgFilter.js\"},{\"name\":\"SGradientSvgFilter\",\"namespace\":\"coffeekraken.sugar.js.filter\",\"path\":\"src/js/filter/SGradientSvgFilter.js\"},{\"name\":\"SMotionblurSvgFilter\",\"namespace\":\"coffeekraken.sugar.js.filter\",\"path\":\"src/js/filter/SMotionblurSvgFilter.js\"},{\"name\":\"SOutlineSvgFilter\",\"namespace\":\"coffeekraken.sugar.js.filter\",\"path\":\"src/js/filter/SOutlineSvgFilter.js\"},{\"name\":\"SGooeySvgFilter\",\"namespace\":\"coffeekraken.sugar.js.filter\",\"path\":\"src/js/filter/SSvgFilter.js\"},{\"name\":\"debounce\",\"namespace\":\"coffeekraken.sugar.js.function\",\"path\":\"src/js/function/debounce.js\"},{\"name\":\"setRecursiveTimeout\",\"namespace\":\"coffeekraken.sugar.js.function\",\"path\":\"src/js/function/setRecursiveTimeout.js\"},{\"name\":\"sleep\",\"namespace\":\"coffeekraken.sugar.js.function\",\"path\":\"src/js/function/sleep.js\"},{\"name\":\"throttle\",\"namespace\":\"coffeekraken.sugar.js.function\",\"path\":\"src/js/function/throttle.js\"},{\"name\":\"debounce\",\"namespace\":\"coffeekraken.sugar.js.function\",\"path\":\"src/js/function/debounce.js\"},{\"name\":\"setRecursiveTimeout\",\"namespace\":\"coffeekraken.sugar.js.function\",\"path\":\"src/js/function/setRecursiveTimeout.js\"},{\"name\":\"sleep\",\"namespace\":\"coffeekraken.sugar.js.function\",\"path\":\"src/js/function/sleep.js\"},{\"name\":\"throttle\",\"namespace\":\"coffeekraken.sugar.js.function\",\"path\":\"src/js/function/throttle.js\"},{\"name\":\"circleConstrain\",\"namespace\":\"coffeekraken.sugar.js.geom.2d\",\"path\":\"src/js/geom/circleConstrain.js\"},{\"name\":\"distanceBetween\",\"namespace\":\"coffeekraken.sugar.js.geom.2d\",\"path\":\"src/js/geom/distanceBetween.js\"},{\"name\":\"circleConstrain\",\"namespace\":\"coffeekraken.sugar.js.geom.2d\",\"path\":\"src/js/geom/circleConstrain.js\"},{\"name\":\"distanceBetween\",\"namespace\":\"coffeekraken.sugar.js.geom.2d\",\"path\":\"src/js/geom/distanceBetween.js\"},{\"name\":\"SGoogleCustomSearch\",\"namespace\":\"coffeekraken.sugar.js.google\",\"path\":\"src/js/google/SGoogleCustomSearch.js\"},{\"name\":\"SGoogleCustomSearch\",\"namespace\":\"coffeekraken.sugar.js.google\",\"path\":\"src/js/google/SGoogleCustomSearch.js\"},{\"name\":\"decodeHtmlEntities\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/html/decodeHtmlEntities.js\"},{\"name\":\"getHtmlClassFromTagName\",\"namespace\":\"coffeekraken.sugar.sugar.js.html\",\"path\":\"src/js/html/getHtmlClassFromTagName.js\"},{\"name\":\"getHtmlhtmlClassFromHtmlClass\",\"namespace\":\"coffeekraken.sugar.sugar.js.html\",\"path\":\"src/js/html/getTagNameFromHtmlClass.js\"},{\"name\":\"HtmlTagToHtmlClassMap\",\"namespace\":\"coffeekraken.sugar.js.html\",\"path\":\"src/js/html/htmlTagToHtmlClassMap.js\"},{\"name\":\"replaceTags\",\"namespace\":\"coffeekraken.sugar.js.html\",\"path\":\"src/js/html/replaceTags.js\"},{\"name\":\"striptags\",\"namespace\":\"coffeekraken.sugar.js.html\",\"path\":\"src/js/html/striptags.js\"},{\"name\":\"strToHtml\",\"namespace\":\"coffeekraken.sugar.js.html\",\"path\":\"src/js/html/strToHtml.js\"},{\"name\":\"toString\",\"namespace\":\"coffeekraken.sugar.js.html\",\"path\":\"src/js/html/toString.js\"},{\"name\":\"SApp\",\"namespace\":\"coffeekraken.sugar.js.class\",\"path\":\"src/js/html/__wip__/SApp.js\"},{\"name\":\"SBind\",\"namespace\":\"coffeekraken.sugar.js.class\",\"path\":\"src/js/html/__wip__/SBind.js\"},{\"name\":\"SLocalStorageFonts\",\"namespace\":\"coffeekraken.sugar.js.class\",\"path\":\"src/js/html/__wip__/SLocalStorageFonts.js\"},{\"name\":\"syncDom\",\"namespace\":\"coffeekraken.sugar.js.socket\",\"path\":\"src/js/html/__wip__/SSocketDom.js\"},{\"name\":\"SApp\",\"namespace\":\"coffeekraken.sugar.js.class\",\"path\":\"src/js/html/__wip__/SApp.js\"},{\"name\":\"SBind\",\"namespace\":\"coffeekraken.sugar.js.class\",\"path\":\"src/js/html/__wip__/SBind.js\"},{\"name\":\"SLocalStorageFonts\",\"namespace\":\"coffeekraken.sugar.js.class\",\"path\":\"src/js/html/__wip__/SLocalStorageFonts.js\"},{\"name\":\"syncDom\",\"namespace\":\"coffeekraken.sugar.js.socket\",\"path\":\"src/js/html/__wip__/SSocketDom.js\"},{\"name\":\"decodeHtmlEntities\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/html/decodeHtmlEntities.js\"},{\"name\":\"getHtmlClassFromTagName\",\"namespace\":\"coffeekraken.sugar.sugar.js.html\",\"path\":\"src/js/html/getHtmlClassFromTagName.js\"},{\"name\":\"getHtmlhtmlClassFromHtmlClass\",\"namespace\":\"coffeekraken.sugar.sugar.js.html\",\"path\":\"src/js/html/getTagNameFromHtmlClass.js\"},{\"name\":\"HtmlTagToHtmlClassMap\",\"namespace\":\"coffeekraken.sugar.js.html\",\"path\":\"src/js/html/htmlTagToHtmlClassMap.js\"},{\"name\":\"replaceTags\",\"namespace\":\"coffeekraken.sugar.js.html\",\"path\":\"src/js/html/replaceTags.js\"},{\"name\":\"striptags\",\"namespace\":\"coffeekraken.sugar.js.html\",\"path\":\"src/js/html/striptags.js\"},{\"name\":\"strToHtml\",\"namespace\":\"coffeekraken.sugar.js.html\",\"path\":\"src/js/html/strToHtml.js\"},{\"name\":\"toString\",\"namespace\":\"coffeekraken.sugar.js.html\",\"path\":\"src/js/html/toString.js\"},{\"name\":\"request\",\"namespace\":\"coffeekraken.sugar.js.http\",\"path\":\"src/js/http/request.js\"},{\"name\":\"SRequest\",\"namespace\":\"coffeekraken.sugar.js.http\",\"path\":\"src/js/http/SRequest.js\"},{\"name\":\"SRequestConfig\",\"namespace\":\"coffeekraken.sugar.js.http\",\"path\":\"src/js/http/SRequestConfig.js\"},{\"name\":\"request\",\"namespace\":\"coffeekraken.sugar.js.http\",\"path\":\"src/js/http/request.js\"},{\"name\":\"SRequest\",\"namespace\":\"coffeekraken.sugar.js.http\",\"path\":\"src/js/http/SRequest.js\"},{\"name\":\"SRequestConfig\",\"namespace\":\"coffeekraken.sugar.js.http\",\"path\":\"src/js/http/SRequestConfig.js\"},{\"name\":\"isArray\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/array.js\"},{\"name\":\"isBase64\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/base64.js\"},{\"name\":\"isBoolean\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/boolean.js\"},{\"name\":\"childProcess\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/childProcess.js\"},{\"name\":\"isChrome\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/chrome.js\"},{\"name\":\"class\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/class.js\"},{\"name\":\"isColor\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/color.js\"},{\"name\":\"isDdmmyyyyDate\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/ddmmyyyyDate.js\"},{\"name\":\"isEdge\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/edge.js\"},{\"name\":\"isEmail\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/email.js\"},{\"name\":\"isEven\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/even.js\"},{\"name\":\"isFirefox\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/firefox.js\"},{\"name\":\"isFunction\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/function.js\"},{\"name\":\"isIe\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/ie.js\"},{\"name\":\"isInteger\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/integer.js\"},{\"name\":\"isJs\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/js.js\"},{\"name\":\"isJson\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/json.js\"},{\"name\":\"linux\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/linux.js\"},{\"name\":\"isMmddyyyyDate\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/mmddyyyyDate.js\"},{\"name\":\"isMobile\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/mobile.js\"},{\"name\":\"isNode\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/node.js\"},{\"name\":\"isNumber\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/number.js\"},{\"name\":\"isObject\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/object.js\"},{\"name\":\"isOdd\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/odd.js\"},{\"name\":\"ofType\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/ofType.js\"},{\"name\":\"isOpera\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/opera.js\"},{\"name\":\"osx\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/osx.js\"},{\"name\":\"path\",\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/js/is/path.js\"},{\"name\":\"isPhone\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/phone.js\"},{\"name\":\"plainObject\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/plainObject.js\"},{\"name\":\"isRegexp\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/regexp.js\"},{\"name\":\"isSafari\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/safari.js\"},{\"name\":\"isSamsumgBrowser\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/samsungBrowser.js\"},{\"name\":\"isString\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/string.js\"},{\"name\":\"isTablet\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/tablet.js\"},{\"name\":\"testEnv\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/testEnv.js\"},{\"name\":\"isUcBrowser\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/ucBrowser.js\"},{\"name\":\"isUrl\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/url.js\"},{\"name\":\"validateWithDefinitionObject\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/validateWithDefinitionObject.js\"},{\"name\":\"windows\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/windows.js\"},{\"name\":\"isYyyymmddDate\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/yyyymmddDate.js\"},{\"name\":\"isArray\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/array.js\"},{\"name\":\"isBase64\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/base64.js\"},{\"name\":\"isBoolean\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/boolean.js\"},{\"name\":\"childProcess\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/childProcess.js\"},{\"name\":\"isChrome\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/chrome.js\"},{\"name\":\"class\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/class.js\"},{\"name\":\"isColor\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/color.js\"},{\"name\":\"isDdmmyyyyDate\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/ddmmyyyyDate.js\"},{\"name\":\"isEdge\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/edge.js\"},{\"name\":\"isEmail\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/email.js\"},{\"name\":\"isEven\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/even.js\"},{\"name\":\"isFirefox\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/firefox.js\"},{\"name\":\"isFunction\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/function.js\"},{\"name\":\"isIe\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/ie.js\"},{\"name\":\"isInteger\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/integer.js\"},{\"name\":\"isJs\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/js.js\"},{\"name\":\"isJson\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/json.js\"},{\"name\":\"linux\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/linux.js\"},{\"name\":\"isMmddyyyyDate\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/mmddyyyyDate.js\"},{\"name\":\"isMobile\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/mobile.js\"},{\"name\":\"isNode\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/node.js\"},{\"name\":\"isNumber\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/number.js\"},{\"name\":\"isObject\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/object.js\"},{\"name\":\"isOdd\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/odd.js\"},{\"name\":\"ofType\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/ofType.js\"},{\"name\":\"isOpera\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/opera.js\"},{\"name\":\"osx\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/osx.js\"},{\"name\":\"path\",\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/js/is/path.js\"},{\"name\":\"isPhone\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/phone.js\"},{\"name\":\"plainObject\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/plainObject.js\"},{\"name\":\"isRegexp\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/regexp.js\"},{\"name\":\"isSafari\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/safari.js\"},{\"name\":\"isSamsumgBrowser\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/samsungBrowser.js\"},{\"name\":\"isString\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/string.js\"},{\"name\":\"isTablet\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/tablet.js\"},{\"name\":\"testEnv\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/testEnv.js\"},{\"name\":\"isUcBrowser\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/ucBrowser.js\"},{\"name\":\"isUrl\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/url.js\"},{\"name\":\"validateWithDefinitionObject\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/validateWithDefinitionObject.js\"},{\"name\":\"windows\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/windows.js\"},{\"name\":\"isYyyymmddDate\",\"namespace\":\"coffeekraken.sugar.js.is\",\"path\":\"src/js/is/yyyymmddDate.js\"},{\"name\":\"hotkey\",\"namespace\":\"coffeekraken.sugar.js.keyboard\",\"path\":\"src/js/keyboard/hotkey.js\"},{\"name\":\"hotkey\",\"namespace\":\"coffeekraken.sugar.js.keyboard\",\"path\":\"src/js/keyboard/hotkey.js\"},{\"name\":\"debug\",\"namespace\":\"coffeekraken.sugar.js.debug\",\"path\":\"src/js/log/debug.js\"},{\"name\":\"error\",\"namespace\":\"coffeekraken.sugar.js.error\",\"path\":\"src/js/log/error.js\"},{\"name\":\"info\",\"namespace\":\"coffeekraken.sugar.js.info\",\"path\":\"src/js/log/info.js\"},{\"name\":\"log\",\"namespace\":\"coffeekraken.sugar.js.log\",\"path\":\"src/js/log/log.js\"},{\"name\":\"SLog\",\"namespace\":\"coffeekraken.sugar.js.log\",\"path\":\"src/js/log/SLog.js\"},{\"name\":\"warn\",\"namespace\":\"coffeekraken.sugar.js.warn\",\"path\":\"src/js/log/warn.js\"},{\"name\":\"SLogConsoleAdapter\",\"namespace\":\"coffeekraken.sugar.js.log\",\"path\":\"src/js/log/adapters/SLogConsoleAdapter.js\"},{\"name\":\"SLogMailAdapter\",\"namespace\":\"coffeekraken.sugar.js.log\",\"path\":\"src/js/log/adapters/SLogMailAdapter.js\"},{\"name\":\"SLogConsoleAdapter\",\"namespace\":\"coffeekraken.sugar.js.log\",\"path\":\"src/js/log/adapters/SLogConsoleAdapter.js\"},{\"name\":\"SLogMailAdapter\",\"namespace\":\"coffeekraken.sugar.js.log\",\"path\":\"src/js/log/adapters/SLogMailAdapter.js\"},{\"name\":\"debug\",\"namespace\":\"coffeekraken.sugar.js.debug\",\"path\":\"src/js/log/debug.js\"},{\"name\":\"error\",\"namespace\":\"coffeekraken.sugar.js.error\",\"path\":\"src/js/log/error.js\"},{\"name\":\"console\",\"namespace\":\"coffeekraken.sugar.js.log.htmlPresets\",\"path\":\"src/js/log/htmlPresets/console.js\"},{\"name\":\"files\",\"namespace\":\"coffeekraken.sugar.js.log.htmlPresets\",\"path\":\"src/js/log/htmlPresets/files.js\"},{\"name\":\"mail\",\"namespace\":\"coffeekraken.sugar.js.log.htmlPresets\",\"path\":\"src/js/log/htmlPresets/mail.js\"},{\"name\":\"console\",\"namespace\":\"coffeekraken.sugar.js.log.htmlPresets\",\"path\":\"src/js/log/htmlPresets/console.js\"},{\"name\":\"files\",\"namespace\":\"coffeekraken.sugar.js.log.htmlPresets\",\"path\":\"src/js/log/htmlPresets/files.js\"},{\"name\":\"mail\",\"namespace\":\"coffeekraken.sugar.js.log.htmlPresets\",\"path\":\"src/js/log/htmlPresets/mail.js\"},{\"name\":\"info\",\"namespace\":\"coffeekraken.sugar.js.info\",\"path\":\"src/js/log/info.js\"},{\"name\":\"log\",\"namespace\":\"coffeekraken.sugar.js.log\",\"path\":\"src/js/log/log.js\"},{\"name\":\"SLog\",\"namespace\":\"coffeekraken.sugar.js.log\",\"path\":\"src/js/log/SLog.js\"},{\"name\":\"warn\",\"namespace\":\"coffeekraken.sugar.js.warn\",\"path\":\"src/js/log/warn.js\"},{\"name\":\"SNav\",\"namespace\":\"coffeekraken.sugar.js.nav\",\"path\":\"src/js/nav/SNav.js\"},{\"name\":\"SNavItem\",\"namespace\":\"coffeekraken.sugar.js.nav\",\"path\":\"src/js/nav/SNavItem.js\"},{\"name\":\"SNav\",\"namespace\":\"coffeekraken.sugar.js.nav\",\"path\":\"src/js/nav/SNav.js\"},{\"name\":\"SNavItem\",\"namespace\":\"coffeekraken.sugar.js.nav\",\"path\":\"src/js/nav/SNavItem.js\"},{\"name\":\"constrain\",\"namespace\":\"coffeekraken.sugar.js.number\",\"path\":\"src/js/number/constrain.js\"},{\"name\":\"pad\",\"namespace\":\"coffeekraken.sugar.js.number\",\"path\":\"src/js/number/pad.js\"},{\"name\":\"constrain\",\"namespace\":\"coffeekraken.sugar.js.number\",\"path\":\"src/js/number/constrain.js\"},{\"name\":\"pad\",\"namespace\":\"coffeekraken.sugar.js.number\",\"path\":\"src/js/number/pad.js\"},{\"name\":\"constructorName\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/constructorName.js\"},{\"name\":\"deepize\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/deepize.js\"},{\"name\":\"deepMap\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/deepMap.js\"},{\"name\":\"deepMerge\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/deepMerge.js\"},{\"name\":\"deepProxy\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/deepProxy.js\"},{\"name\":\"delete\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/delete.js\"},{\"name\":\"diff\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/diff.js\"},{\"name\":\"ensureExists\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/ensureExists.js\"},{\"name\":\"filter\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/filter.js\"},{\"name\":\"flatten\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/flatten.js\"},{\"name\":\"get\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/get.js\"},{\"name\":\"getKeyByValue\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/getKeyByValue.js\"},{\"name\":\"map\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/map.js\"},{\"name\":\"propertyProxy\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/propertyProxy.js\"},{\"name\":\"resolveTokens\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/resolveTokens.js\"},{\"name\":\"set\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/set.js\"},{\"name\":\"sort\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/sort.js\"},{\"name\":\"SWatch\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/SWatch.js\"},{\"name\":\"toQueryString\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/toQueryString.js\"},{\"name\":\"uid\",\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/js/object/uid.js\"},{\"name\":\"validateDefinitionObject\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/validateDefinitionObject.js\"},{\"name\":\"validateWithDefinitionObject\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/validateWithDefinitionObject.js\"},{\"name\":\"watch\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/watch.js\"},{\"name\":\"deepDiff\",\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/js/object/__wip__/deepDiff.js\"},{\"name\":\"deepDiff\",\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/js/object/__wip__/deepDiff.js\"},{\"name\":\"constructorName\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/constructorName.js\"},{\"name\":\"deepize\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/deepize.js\"},{\"name\":\"deepMap\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/deepMap.js\"},{\"name\":\"deepMerge\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/deepMerge.js\"},{\"name\":\"deepProxy\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/deepProxy.js\"},{\"name\":\"delete\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/delete.js\"},{\"name\":\"diff\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/diff.js\"},{\"name\":\"ensureExists\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/ensureExists.js\"},{\"name\":\"filter\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/filter.js\"},{\"name\":\"flatten\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/flatten.js\"},{\"name\":\"get\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/get.js\"},{\"name\":\"getKeyByValue\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/getKeyByValue.js\"},{\"name\":\"map\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/map.js\"},{\"name\":\"propertyProxy\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/propertyProxy.js\"},{\"name\":\"resolveTokens\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/resolveTokens.js\"},{\"name\":\"set\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/set.js\"},{\"name\":\"sort\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/sort.js\"},{\"name\":\"SWatch\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/SWatch.js\"},{\"name\":\"toQueryString\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/toQueryString.js\"},{\"name\":\"uid\",\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/js/object/uid.js\"},{\"name\":\"validateDefinitionObject\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/validateDefinitionObject.js\"},{\"name\":\"validateWithDefinitionObject\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/validateWithDefinitionObject.js\"},{\"name\":\"watch\",\"namespace\":\"coffeekraken.sugar.js.object\",\"path\":\"src/js/object/watch.js\"},{\"name\":\"argumentTypeDefinitionString\",\"namespace\":\"coffeekraken.sugar.js.parse\",\"path\":\"src/js/parse/argumentTypeDefinitionString.js\"},{\"name\":\"argumentTypeDefinitionString\",\"namespace\":\"coffeekraken.sugar.js.parse\",\"path\":\"src/js/parse/argumentTypeDefinitionString.js\"},{\"name\":\"queryselector-scope\",\"namespace\":\"coffeekraken.sugar.js.polyfill\",\"path\":\"src/js/polyfill/queryselector-scope.js\"},{\"name\":\"queryselector-scope\",\"namespace\":\"coffeekraken.sugar.js.polyfill\",\"path\":\"src/js/polyfill/queryselector-scope.js\"},{\"name\":\"SPromise\",\"namespace\":\"coffeekraken.sugar.js.promise\",\"path\":\"src/js/promise/SPromise.js\"},{\"name\":\"SPromise\",\"namespace\":\"coffeekraken.sugar.js.promise\",\"path\":\"src/js/promise/SPromise.js\"},{\"name\":\"SActionStream\",\"namespace\":\"coffeekraken.sugar.js.stream\",\"path\":\"src/js/stream/SActionsStream.js\"},{\"name\":\"SActionStreamAction\",\"namespace\":\"coffeekraken.sugar.js.stream\",\"path\":\"src/js/stream/SActionsStreamAction.js\"},{\"name\":\"SActionStream\",\"namespace\":\"coffeekraken.sugar.js.stream\",\"path\":\"src/js/stream/SActionsStream.js\"},{\"name\":\"SActionStreamAction\",\"namespace\":\"coffeekraken.sugar.js.stream\",\"path\":\"src/js/stream/SActionsStreamAction.js\"},{\"name\":\"autoCast\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/string/autoCast.js\"},{\"name\":\"camelize\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/string/camelize.js\"},{\"name\":\"countLine\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/string/countLine.js\"},{\"name\":\"crop\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/string/crop.js\"},{\"name\":\"extractSame\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/string/extractSame.js\"},{\"name\":\"includes\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/string/includes.js\"},{\"name\":\"lowerFirst\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/string/lowerFirst.js\"},{\"name\":\"ltrim\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/string/ltrim.js\"},{\"name\":\"paramCase\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/string/paramCase.js\"},{\"name\":\"parse\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/string/parse.js\"},{\"name\":\"printf\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/string/printf.js\"},{\"name\":\"replaceTokens\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/string/replaceTokens.js\"},{\"name\":\"rtrim\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/string/rtrim.js\"},{\"name\":\"splitEvery\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/string/splitEvery.js\"},{\"name\":\"sprintf\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/string/sprintf.js\"},{\"name\":\"toString\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/string/toString.js\"},{\"name\":\"uncamelize\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/string/uncamelize.js\"},{\"name\":\"uniqid\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/string/uniqid.js\"},{\"name\":\"unquote\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/string/unquote.js\"},{\"name\":\"upperFirst\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/string/upperFirst.js\"},{\"name\":\"autoCast\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/string/autoCast.js\"},{\"name\":\"camelize\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/string/camelize.js\"},{\"name\":\"countLine\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/string/countLine.js\"},{\"name\":\"crop\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/string/crop.js\"},{\"name\":\"extractSame\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/string/extractSame.js\"},{\"name\":\"includes\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/string/includes.js\"},{\"name\":\"lowerFirst\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/string/lowerFirst.js\"},{\"name\":\"ltrim\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/string/ltrim.js\"},{\"name\":\"paramCase\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/string/paramCase.js\"},{\"name\":\"parse\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/string/parse.js\"},{\"name\":\"printf\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/string/printf.js\"},{\"name\":\"replaceTokens\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/string/replaceTokens.js\"},{\"name\":\"rtrim\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/string/rtrim.js\"},{\"name\":\"splitEvery\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/string/splitEvery.js\"},{\"name\":\"sprintf\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/string/sprintf.js\"},{\"name\":\"toString\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/string/toString.js\"},{\"name\":\"uncamelize\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/string/uncamelize.js\"},{\"name\":\"uniqid\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/string/uniqid.js\"},{\"name\":\"unquote\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/string/unquote.js\"},{\"name\":\"upperFirst\",\"namespace\":\"coffeekraken.sugar.js.string\",\"path\":\"src/js/string/upperFirst.js\"},{\"name\":\"convert\",\"namespace\":\"coffeekraken.sugar.js.time\",\"path\":\"src/js/time/convert.js\"},{\"name\":\"STimer\",\"namespace\":\"coffeekraken.sugar.js.time\",\"path\":\"src/js/time/STimer.js\"},{\"name\":\"wait\",\"namespace\":\"coffeekraken.sugar.js.time\",\"path\":\"src/js/time/wait.js\"},{\"name\":\"convert\",\"namespace\":\"coffeekraken.sugar.js.time\",\"path\":\"src/js/time/convert.js\"},{\"name\":\"STimer\",\"namespace\":\"coffeekraken.sugar.js.time\",\"path\":\"src/js/time/STimer.js\"},{\"name\":\"wait\",\"namespace\":\"coffeekraken.sugar.js.time\",\"path\":\"src/js/time/wait.js\"},{\"name\":\"convert\",\"namespace\":\"coffeekraken.sugar.js.unit\",\"path\":\"src/js/unit/convert.js\"},{\"name\":\"em2px\",\"namespace\":\"coffeekraken.sugar.js.unit\",\"path\":\"src/js/unit/em2px.js\"},{\"name\":\"px2em\",\"namespace\":\"coffeekraken.sugar.js.unit\",\"path\":\"src/js/unit/px2em.js\"},{\"name\":\"px2rem\",\"namespace\":\"coffeekraken.sugar.js.unit\",\"path\":\"src/js/unit/px2rem.js\"},{\"name\":\"rem2px\",\"namespace\":\"coffeekraken.sugar.js.unit\",\"path\":\"src/js/unit/rem2px.js\"},{\"name\":\"convert\",\"namespace\":\"coffeekraken.sugar.js.unit\",\"path\":\"src/js/unit/convert.js\"},{\"name\":\"em2px\",\"namespace\":\"coffeekraken.sugar.js.unit\",\"path\":\"src/js/unit/em2px.js\"},{\"name\":\"px2em\",\"namespace\":\"coffeekraken.sugar.js.unit\",\"path\":\"src/js/unit/px2em.js\"},{\"name\":\"px2rem\",\"namespace\":\"coffeekraken.sugar.js.unit\",\"path\":\"src/js/unit/px2rem.js\"},{\"name\":\"rem2px\",\"namespace\":\"coffeekraken.sugar.js.unit\",\"path\":\"src/js/unit/rem2px.js\"},{\"name\":\"gravatarUrl\",\"namespace\":\"coffeekraken.sugar.js.url\",\"path\":\"src/js/url/gravatarUrl.js\"},{\"name\":\"parseSchema\",\"namespace\":\"coffeekraken.sugar.js.url\",\"path\":\"src/js/url/parseSchema.js\"},{\"name\":\"queryStringToObject\",\"namespace\":\"coffeekraken.sugar.js.url\",\"path\":\"src/js/url/queryStringToObject.js\"},{\"name\":\"SUrl\",\"namespace\":\"coffeekraken.sugar.js.url\",\"path\":\"src/js/url/SUrl.js\"},{\"name\":\"gravatarUrl\",\"namespace\":\"coffeekraken.sugar.js.url\",\"path\":\"src/js/url/gravatarUrl.js\"},{\"name\":\"parseSchema\",\"namespace\":\"coffeekraken.sugar.js.url\",\"path\":\"src/js/url/parseSchema.js\"},{\"name\":\"queryStringToObject\",\"namespace\":\"coffeekraken.sugar.js.url\",\"path\":\"src/js/url/queryStringToObject.js\"},{\"name\":\"SUrl\",\"namespace\":\"coffeekraken.sugar.js.url\",\"path\":\"src/js/url/SUrl.js\"},{\"name\":\"validateWithDefinitionObject\",\"namespace\":\"coffeekraken.sugar.js.value\",\"path\":\"src/js/value/validateWithDefinitionObject.js\"},{\"name\":\"validateWithDefinitionObject\",\"namespace\":\"coffeekraken.sugar.js.value\",\"path\":\"src/js/value/validateWithDefinitionObject.js\"},{\"name\":\"SWebComponent\",\"namespace\":\"coffeekraken.sugar.js.core\",\"path\":\"src/js/webcomponent/_SWebComponent.js\"},{\"name\":\"SLitHtmlWebComponent\",\"namespace\":\"coffeekraken.sugar.js.webcomponent\",\"path\":\"src/js/webcomponent/SLitHtmlWebComponent.js\"},{\"name\":\"SWebComponent\",\"namespace\":\"coffeekraken.sugar.js.webcomponent\",\"path\":\"src/js/webcomponent/SWebComponent.js\"},{\"name\":\"SWebComponent\",\"namespace\":\"coffeekraken.sugar.js.core\",\"path\":\"src/js/webcomponent/_SWebComponent.js\"},{\"name\":\"SLitHtmlWebComponent\",\"namespace\":\"coffeekraken.sugar.js.webcomponent\",\"path\":\"src/js/webcomponent/SLitHtmlWebComponent.js\"},{\"name\":\"SWebComponent\",\"namespace\":\"coffeekraken.sugar.js.webcomponent\",\"path\":\"src/js/webcomponent/SWebComponent.js\"},{\"name\":\"index\",\"namespace\":\"coffeekraken.sugar.node\",\"path\":\"src/node/index.js\"},{\"name\":\"SApi\",\"namespace\":\"coffeekraken.sugar.node.api\",\"path\":\"src/node/api/__wip__/SApi.js\"},{\"name\":\"SBitbucketApi\",\"namespace\":\"coffeekraken.sugar.node.api\",\"path\":\"src/node/api/__wip__/SBitbucketApi.js\"},{\"name\":\"SApi\",\"namespace\":\"coffeekraken.sugar.node.api\",\"path\":\"src/node/api/__wip__/SApi.js\"},{\"name\":\"SBitbucketApi\",\"namespace\":\"coffeekraken.sugar.node.api\",\"path\":\"src/node/api/__wip__/SBitbucketApi.js\"},{\"name\":\"initEnv\",\"namespace\":\"coffeekraken.sugar.node.app\",\"path\":\"src/node/app/__wip__/initEnv.js\"},{\"name\":\"SApp\",\"namespace\":\"coffeekraken.sugar.node.class\",\"path\":\"src/node/app/__wip__/SApp.js\"},{\"name\":\"SExpressApp\",\"namespace\":\"coffeekraken.sugar.node.class\",\"path\":\"src/node/app/__wip__/SExpressApp.js\"},{\"name\":\"initEnv\",\"namespace\":\"coffeekraken.sugar.node.app\",\"path\":\"src/node/app/__wip__/initEnv.js\"},{\"name\":\"SApp\",\"namespace\":\"coffeekraken.sugar.node.class\",\"path\":\"src/node/app/__wip__/SApp.js\"},{\"name\":\"SExpressApp\",\"namespace\":\"coffeekraken.sugar.node.class\",\"path\":\"src/node/app/__wip__/SExpressApp.js\"},{\"namespace\":\"coffeekraken.sugar.node.array\",\"path\":\"src/node/array/asyncForEach.js\"},{\"namespace\":\"coffeekraken.sugar.node.array\",\"path\":\"src/node/array/keysFirst.js\"},{\"namespace\":\"coffeekraken.sugar.node.array\",\"path\":\"src/node/array/keysLast.js\"},{\"namespace\":\"coffeekraken.sugar.node.array\",\"path\":\"src/node/array/splitEvery.js\"},{\"namespace\":\"coffeekraken.sugar.node.array\",\"path\":\"src/node/array/asyncForEach.js\"},{\"namespace\":\"coffeekraken.sugar.node.array\",\"path\":\"src/node/array/keysFirst.js\"},{\"namespace\":\"coffeekraken.sugar.node.array\",\"path\":\"src/node/array/keysLast.js\"},{\"namespace\":\"coffeekraken.sugar.node.array\",\"path\":\"src/node/array/splitEvery.js\"},{\"name\":\"SComponent\",\"namespace\":\"coffeekraken.sugar.node.blessed\",\"path\":\"src/node/blessed/SComponent.js\"},{\"name\":\"SFooter\",\"namespace\":\"coffeekraken.sugar.node.blessed\",\"path\":\"src/node/blessed/SFooter.js\"},{\"name\":\"SComponent\",\"namespace\":\"coffeekraken.sugar.node.blessed\",\"path\":\"src/node/blessed/SHeader.js\"},{\"name\":\"SProcessOutput\",\"namespace\":\"coffeekraken.sugar.node.blessed\",\"path\":\"src/node/blessed/SProcessOutput.js\"},{\"name\":\"SSidePanel\",\"namespace\":\"coffeekraken.sugar.node.blessed.panel\",\"path\":\"src/node/blessed/__wip__/SSidePanel.js\"},{\"name\":\"SSidePanel\",\"namespace\":\"coffeekraken.sugar.node.blessed.panel\",\"path\":\"src/node/blessed/__wip__/SSidePanel.js\"},{\"name\":\"SApp\",\"namespace\":\"coffeekraken.sugar.node.blessed.app\",\"path\":\"src/node/blessed/app/SApp.js\"},{\"name\":\"SAppPage\",\"namespace\":\"coffeekraken.sugar.node.blessed.app\",\"path\":\"src/node/blessed/app/SAppPage.js\"},{\"name\":\"SApp\",\"namespace\":\"coffeekraken.sugar.node.blessed.app\",\"path\":\"src/node/blessed/app/SApp.js\"},{\"name\":\"SAppPage\",\"namespace\":\"coffeekraken.sugar.node.blessed.app\",\"path\":\"src/node/blessed/app/SAppPage.js\"},{\"name\":\"SInput\",\"namespace\":\"coffeekraken.sugar.node.blessed.input\",\"path\":\"src/node/blessed/form/SInput.js\"},{\"name\":\"SInput\",\"namespace\":\"coffeekraken.sugar.node.blessed.input\",\"path\":\"src/node/blessed/form/SInput.js\"},{\"name\":\"SSummaryList\",\"namespace\":\"coffeekraken.sugar.node.blessed.list\",\"path\":\"src/node/blessed/list/SSummaryList.js\"},{\"name\":\"summaryListPopup\",\"namespace\":\"coffeekraken.sugar.node.blessed.list\",\"path\":\"src/node/blessed/list/summaryListPopup.js\"},{\"name\":\"SSummaryList\",\"namespace\":\"coffeekraken.sugar.node.blessed.list\",\"path\":\"src/node/blessed/list/SSummaryList.js\"},{\"name\":\"summaryListPopup\",\"namespace\":\"coffeekraken.sugar.node.blessed.list\",\"path\":\"src/node/blessed/list/summaryListPopup.js\"},{\"name\":\"SCommandPanel\",\"namespace\":\"coffeekraken.sugar.node.blessed\",\"path\":\"src/node/blessed/panel/SCommandPanel.js\"},{\"name\":\"SLogPanel\",\"namespace\":\"coffeekraken.sugar.node.blessed\",\"path\":\"src/node/blessed/panel/SLogPanel.js\"},{\"name\":\"SCommandPanel\",\"namespace\":\"coffeekraken.sugar.node.blessed\",\"path\":\"src/node/blessed/panel/SCommandPanel.js\"},{\"name\":\"SLogPanel\",\"namespace\":\"coffeekraken.sugar.node.blessed\",\"path\":\"src/node/blessed/panel/SLogPanel.js\"},{\"name\":\"SInputPopup\",\"namespace\":\"coffeekraken.sugar.node.blessed.popup\",\"path\":\"src/node/blessed/popup/SInputPopup.js\"},{\"name\":\"SPopup\",\"namespace\":\"coffeekraken.sugar.node.blessed.popup\",\"path\":\"src/node/blessed/popup/SPopup.js\"},{\"name\":\"SInputPopup\",\"namespace\":\"coffeekraken.sugar.node.blessed.popup\",\"path\":\"src/node/blessed/popup/SInputPopup.js\"},{\"name\":\"SPopup\",\"namespace\":\"coffeekraken.sugar.node.blessed.popup\",\"path\":\"src/node/blessed/popup/SPopup.js\"},{\"name\":\"SComponent\",\"namespace\":\"coffeekraken.sugar.node.blessed\",\"path\":\"src/node/blessed/SComponent.js\"},{\"name\":\"SFooter\",\"namespace\":\"coffeekraken.sugar.node.blessed\",\"path\":\"src/node/blessed/SFooter.js\"},{\"name\":\"SComponent\",\"namespace\":\"coffeekraken.sugar.node.blessed\",\"path\":\"src/node/blessed/SHeader.js\"},{\"name\":\"SProcessOutput\",\"namespace\":\"coffeekraken.sugar.node.blessed\",\"path\":\"src/node/blessed/SProcessOutput.js\"},{\"name\":\"SBuildDocNavActionStream\",\"namespace\":\"coffeekraken.sugar.node.build.docNav\",\"path\":\"src/node/build/__wip__/docNav/SBuildDocNavActionsStream.js\"},{\"name\":\"SBuildDocNavCli\",\"namespace\":\"coffeekraken.sugar.node.build.docNav\",\"path\":\"src/node/build/__wip__/docNav/SBuildDocNavCli.js\"},{\"name\":\"SBuildDocNavCommand\",\"namespace\":\"coffeekraken.sugar.node.build.docNav\",\"path\":\"src/node/build/__wip__/docNav/SBuildDocNavCommand.js\"},{\"name\":\"SDocMapStreamActions\",\"namespace\":\"coffeekraken.sugar.node.build.doc.actions\",\"path\":\"src/node/build/__wip__/docNav/actions/SDocMapStreamActions.js\"},{\"name\":\"SDocMapStreamActions\",\"namespace\":\"coffeekraken.sugar.node.build.doc.actions\",\"path\":\"src/node/build/__wip__/docNav/actions/SDocMapStreamActions.js\"},{\"name\":\"SBuildDocNavActionStream\",\"namespace\":\"coffeekraken.sugar.node.build.docNav\",\"path\":\"src/node/build/__wip__/docNav/SBuildDocNavActionsStream.js\"},{\"name\":\"SBuildDocNavCli\",\"namespace\":\"coffeekraken.sugar.node.build.docNav\",\"path\":\"src/node/build/__wip__/docNav/SBuildDocNavCli.js\"},{\"name\":\"SBuildDocNavCommand\",\"namespace\":\"coffeekraken.sugar.node.build.docNav\",\"path\":\"src/node/build/__wip__/docNav/SBuildDocNavCommand.js\"},{\"name\":\"SBuildConfigActionsStream\",\"namespace\":\"coffeekraken.sugar.node.build.config\",\"path\":\"src/node/build/config/SBuildConfigActionsStream.js\"},{\"name\":\"SBuildConfigCli\",\"namespace\":\"coffeekraken.sugar.node.build.config\",\"path\":\"src/node/build/config/SBuildConfigCli.js\"},{\"name\":\"SBuildConfigCommand\",\"namespace\":\"coffeekraken.sugar.node.build.config\",\"path\":\"src/node/build/config/SBuildConfigCommand.js\"},{\"name\":\"SJsConfigFileToJsonStreamAction\",\"namespace\":\"coffeekraken.sugar.node.build.config.actions\",\"path\":\"src/node/build/config/actions/SJsConfigFileToJsonStreamAction.js\"},{\"name\":\"SJsConfigFileToJsonStreamAction\",\"namespace\":\"coffeekraken.sugar.node.build.config.actions\",\"path\":\"src/node/build/config/actions/SJsConfigFileToJsonStreamAction.js\"},{\"name\":\"SBuildConfigActionsStream\",\"namespace\":\"coffeekraken.sugar.node.build.config\",\"path\":\"src/node/build/config/SBuildConfigActionsStream.js\"},{\"name\":\"SBuildConfigCli\",\"namespace\":\"coffeekraken.sugar.node.build.config\",\"path\":\"src/node/build/config/SBuildConfigCli.js\"},{\"name\":\"SBuildConfigCommand\",\"namespace\":\"coffeekraken.sugar.node.build.config\",\"path\":\"src/node/build/config/SBuildConfigCommand.js\"},{\"name\":\"SBuildDocActionStream\",\"namespace\":\"coffeekraken.sugar.node.build.doc\",\"path\":\"src/node/build/doc/SBuildDocActionsStream.js\"},{\"name\":\"SBuildDocCli\",\"namespace\":\"coffeekraken.sugar.node.build.doc\",\"path\":\"src/node/build/doc/SBuildDocCli.js\"},{\"name\":\"SBuildDocCommand\",\"namespace\":\"coffeekraken.sugar.node.build.doc\",\"path\":\"src/node/build/doc/SBuildDocCommand.js\"},{\"name\":\"SDocblocksObjectsToMarkdownStreamAction\",\"namespace\":\"coffeekraken.sugar.node.build.doc.actions\",\"path\":\"src/node/build/doc/actions/SDocblocksObjectsToMarkdownStreamAction.js\"},{\"name\":\"SDocMapStreamActions\",\"namespace\":\"coffeekraken.sugar.node.build.doc.actions\",\"path\":\"src/node/build/doc/actions/SDocMapStreamActions.js\"},{\"name\":\"SDocblocksObjectsToMarkdownStreamAction\",\"namespace\":\"coffeekraken.sugar.node.build.doc.actions\",\"path\":\"src/node/build/doc/actions/SDocblocksObjectsToMarkdownStreamAction.js\"},{\"name\":\"SDocMapStreamActions\",\"namespace\":\"coffeekraken.sugar.node.build.doc.actions\",\"path\":\"src/node/build/doc/actions/SDocMapStreamActions.js\"},{\"name\":\"SBuildDocActionStream\",\"namespace\":\"coffeekraken.sugar.node.build.doc\",\"path\":\"src/node/build/doc/SBuildDocActionsStream.js\"},{\"name\":\"SBuildDocCli\",\"namespace\":\"coffeekraken.sugar.node.build.doc\",\"path\":\"src/node/build/doc/SBuildDocCli.js\"},{\"name\":\"SBuildDocCommand\",\"namespace\":\"coffeekraken.sugar.node.build.doc\",\"path\":\"src/node/build/doc/SBuildDocCommand.js\"},{\"name\":\"SBuildDocMapActionsStream\",\"namespace\":\"coffeekraken.sugar.node.build.docMap\",\"path\":\"src/node/build/docMap/SBuildDocMapActionsStream.js\"},{\"name\":\"SBuildDocMapCli\",\"namespace\":\"coffeekraken.sugar.node.build.docMap\",\"path\":\"src/node/build/docMap/SBuildDocMapCli.js\"},{\"name\":\"SBuildDocMapCommand\",\"namespace\":\"coffeekraken.sugar.node.build.docMap\",\"path\":\"src/node/build/docMap/SBuildDocMapCommand.js\"},{\"name\":\"SBuildDocMapActionsStream\",\"namespace\":\"coffeekraken.sugar.node.build.docMap\",\"path\":\"src/node/build/docMap/SBuildDocMapActionsStream.js\"},{\"name\":\"SBuildDocMapCli\",\"namespace\":\"coffeekraken.sugar.node.build.docMap\",\"path\":\"src/node/build/docMap/SBuildDocMapCli.js\"},{\"name\":\"SBuildDocMapCommand\",\"namespace\":\"coffeekraken.sugar.node.build.docMap\",\"path\":\"src/node/build/docMap/SBuildDocMapCommand.js\"},{\"name\":\"moduleAliases\",\"namespace\":\"coffeekraken.sugar.node.build.js\",\"path\":\"src/node/build/js/moduleAliases.js\"},{\"name\":\"SBuildJsActionsStream\",\"namespace\":\"coffeekraken.sugar.node.build.js\",\"path\":\"src/node/build/js/SBuildJsActionsStream.js\"},{\"name\":\"SBuildJsCli\",\"namespace\":\"coffeekraken.sugar.node.build.js\",\"path\":\"src/node/build/js/SBuildJsCli.js\"},{\"name\":\"SBuildJsCommand\",\"namespace\":\"coffeekraken.sugar.node.build.js\",\"path\":\"src/node/build/js/SBuildJsCommand.js\"},{\"name\":\"STerserStreamAction\",\"namespace\":\"coffeekraken.sugar.node.build.js.actions\",\"path\":\"src/node/build/js/actions/STerserStreamAction.js\"},{\"name\":\"SWebpackStreamAction\",\"namespace\":\"coffeekraken.sugar.node.build.js.actions\",\"path\":\"src/node/build/js/actions/SWebpackStreamAction.js\"},{\"name\":\"STerserStreamAction\",\"namespace\":\"coffeekraken.sugar.node.build.js.actions\",\"path\":\"src/node/build/js/actions/STerserStreamAction.js\"},{\"name\":\"SWebpackStreamAction\",\"namespace\":\"coffeekraken.sugar.node.build.js.actions\",\"path\":\"src/node/build/js/actions/SWebpackStreamAction.js\"},{\"name\":\"moduleAliases\",\"namespace\":\"coffeekraken.sugar.node.build.js\",\"path\":\"src/node/build/js/moduleAliases.js\"},{\"name\":\"SBuildJsActionsStream\",\"namespace\":\"coffeekraken.sugar.node.build.js\",\"path\":\"src/node/build/js/SBuildJsActionsStream.js\"},{\"name\":\"SBuildJsCli\",\"namespace\":\"coffeekraken.sugar.node.build.js\",\"path\":\"src/node/build/js/SBuildJsCli.js\"},{\"name\":\"SBuildJsCommand\",\"namespace\":\"coffeekraken.sugar.node.build.js\",\"path\":\"src/node/build/js/SBuildJsCommand.js\"},{\"name\":\"SBuildScssActionsStream\",\"namespace\":\"coffeekraken.sugar.node.build.scss\",\"path\":\"src/node/build/scss/SBuildScssActionsStream.js\"},{\"name\":\"SBuildScssCli\",\"namespace\":\"coffeekraken.sugar.node.build.scss\",\"path\":\"src/node/build/scss/SBuildScssCli.js\"},{\"name\":\"SBuildScssCommand\",\"namespace\":\"coffeekraken.sugar.node.build.scss\",\"path\":\"src/node/build/scss/SBuildScssCommand.js\"},{\"name\":\"SBundleScssStreamAction\",\"namespace\":\"coffeekraken.sugar.node.build.scss.actions\",\"path\":\"src/node/build/scss/actions/SBundleScssStreamAction.js\"},{\"name\":\"SImportsStreamAction\",\"namespace\":\"coffeekraken.sugar.node.build.scss.actions\",\"path\":\"src/node/build/scss/actions/SImportsStreamAction.js\"},{\"name\":\"SJsObjectToScssStreamAction\",\"namespace\":\"coffeekraken.sugar.node.build.scss.actions\",\"path\":\"src/node/build/scss/actions/SJsObjectToScssStreamAction.js\"},{\"name\":\"SPostCssStreamAction\",\"namespace\":\"coffeekraken.sugar.node.build.scss.actions\",\"path\":\"src/node/build/scss/actions/SPostCssStreamAction.js\"},{\"name\":\"SRenderSassStreamAction\",\"namespace\":\"coffeekraken.sugar.node.build.scss.actions\",\"path\":\"src/node/build/scss/actions/SRenderSassStreamAction.js\"},{\"name\":\"SBundleScssStreamAction\",\"namespace\":\"coffeekraken.sugar.node.build.scss.actions\",\"path\":\"src/node/build/scss/actions/SBundleScssStreamAction.js\"},{\"name\":\"SImportsStreamAction\",\"namespace\":\"coffeekraken.sugar.node.build.scss.actions\",\"path\":\"src/node/build/scss/actions/SImportsStreamAction.js\"},{\"name\":\"SJsObjectToScssStreamAction\",\"namespace\":\"coffeekraken.sugar.node.build.scss.actions\",\"path\":\"src/node/build/scss/actions/SJsObjectToScssStreamAction.js\"},{\"name\":\"SPostCssStreamAction\",\"namespace\":\"coffeekraken.sugar.node.build.scss.actions\",\"path\":\"src/node/build/scss/actions/SPostCssStreamAction.js\"},{\"name\":\"SRenderSassStreamAction\",\"namespace\":\"coffeekraken.sugar.node.build.scss.actions\",\"path\":\"src/node/build/scss/actions/SRenderSassStreamAction.js\"},{\"name\":\"SBuildScssActionsStream\",\"namespace\":\"coffeekraken.sugar.node.build.scss\",\"path\":\"src/node/build/scss/SBuildScssActionsStream.js\"},{\"name\":\"SBuildScssCli\",\"namespace\":\"coffeekraken.sugar.node.build.scss\",\"path\":\"src/node/build/scss/SBuildScssCli.js\"},{\"name\":\"SBuildScssCommand\",\"namespace\":\"coffeekraken.sugar.node.build.scss\",\"path\":\"src/node/build/scss/SBuildScssCommand.js\"},{\"name\":\"SBuildViewsActionsStream\",\"namespace\":\"coffeekraken.sugar.node.build.views\",\"path\":\"src/node/build/views/SBuildViewsActionsStream.js\"},{\"name\":\"SBuildViewsCli\",\"namespace\":\"coffeekraken.sugar.node.build.views\",\"path\":\"src/node/build/views/SBuildViewsCli.js\"},{\"name\":\"SBuildViewsCommand\",\"namespace\":\"coffeekraken.sugar.node.build.views\",\"path\":\"src/node/build/views/SBuildViewsCommand.js\"},{\"name\":\"SBuildViewsActionsStream\",\"namespace\":\"coffeekraken.sugar.node.build.views\",\"path\":\"src/node/build/views/SBuildViewsActionsStream.js\"},{\"name\":\"SBuildViewsCli\",\"namespace\":\"coffeekraken.sugar.node.build.views\",\"path\":\"src/node/build/views/SBuildViewsCli.js\"},{\"name\":\"SBuildViewsCommand\",\"namespace\":\"coffeekraken.sugar.node.build.views\",\"path\":\"src/node/build/views/SBuildViewsCommand.js\"},{\"namespace\":\"coffeekraken.sugar.node.cache\",\"path\":\"src/node/cache/SCache.js\"},{\"name\":\"SCacheFsAdapter\",\"namespace\":\"coffeekraken.sugar.node.fs.cacheAdapters\",\"path\":\"src/node/cache/adapters/SCacheFsAdapter.js\"},{\"name\":\"SCacheFsAdapter\",\"namespace\":\"coffeekraken.sugar.node.fs.cacheAdapters\",\"path\":\"src/node/cache/adapters/SCacheFsAdapter.js\"},{\"namespace\":\"coffeekraken.sugar.node.cache\",\"path\":\"src/node/cache/SCache.js\"},{\"namespace\":\"coffeekraken.sugar.node.class\",\"path\":\"src/node/class/functionToClass.js\"},{\"namespace\":\"coffeekraken.sugar.node.class\",\"path\":\"src/node/class/getMethods.js\"},{\"namespace\":\"coffeekraken.sugar.node.class\",\"path\":\"src/node/class/methodExists.js\"},{\"namespace\":\"coffeekraken.sugar.node.class\",\"path\":\"src/node/class/multipleExtends.js\"},{\"namespace\":\"coffeekraken.sugar.node.class\",\"path\":\"src/node/class/toPlainObject.js\"},{\"namespace\":\"coffeekraken.sugar.node.class\",\"path\":\"src/node/class/functionToClass.js\"},{\"namespace\":\"coffeekraken.sugar.node.class\",\"path\":\"src/node/class/getMethods.js\"},{\"namespace\":\"coffeekraken.sugar.node.class\",\"path\":\"src/node/class/methodExists.js\"},{\"namespace\":\"coffeekraken.sugar.node.class\",\"path\":\"src/node/class/multipleExtends.js\"},{\"namespace\":\"coffeekraken.sugar.node.class\",\"path\":\"src/node/class/toPlainObject.js\"},{\"namespace\":\"coffeekraken.sugar.node.cli\",\"path\":\"src/node/cli/argsToObject.js\"},{\"namespace\":\"coffeekraken.sugar.node.cli\",\"path\":\"src/node/cli/argsToString.js\"},{\"namespace\":\"coffeekraken.sugar.node.cli\",\"path\":\"src/node/cli/buildCommandLine.js\"},{\"namespace\":\"coffeekraken.sugar.node.cli\",\"path\":\"src/node/cli/parseArgs.js\"},{\"name\":\"SCli\",\"namespace\":\"coffeekraken.sugar.node.cli\",\"path\":\"src/node/cli/SCli.js\"},{\"namespace\":\"coffeekraken.sugar.node.cli\",\"path\":\"src/node/cli/validateDefinitionObject.js\"},{\"namespace\":\"coffeekraken.sugar.node.cli\",\"path\":\"src/node/cli/validateWithDefinitionObject.js\"},{\"namespace\":\"coffeekraken.sugar.node.cli\",\"path\":\"src/node/cli/argsToObject.js\"},{\"namespace\":\"coffeekraken.sugar.node.cli\",\"path\":\"src/node/cli/argsToString.js\"},{\"namespace\":\"coffeekraken.sugar.node.cli\",\"path\":\"src/node/cli/buildCommandLine.js\"},{\"namespace\":\"coffeekraken.sugar.node.cli\",\"path\":\"src/node/cli/parseArgs.js\"},{\"name\":\"SCli\",\"namespace\":\"coffeekraken.sugar.node.cli\",\"path\":\"src/node/cli/SCli.js\"},{\"namespace\":\"coffeekraken.sugar.node.cli\",\"path\":\"src/node/cli/validateDefinitionObject.js\"},{\"namespace\":\"coffeekraken.sugar.node.cli\",\"path\":\"src/node/cli/validateWithDefinitionObject.js\"},{\"name\":\"color\",\"namespace\":\"coffeekraken.sugar.node.color\",\"path\":\"src/node/color/color.js\"},{\"namespace\":\"coffeekraken.sugar.node.color\",\"path\":\"src/node/color/convert.js\"},{\"namespace\":\"coffeekraken.sugar.node.color\",\"path\":\"src/node/color/hex2rgba.js\"},{\"namespace\":\"coffeekraken.sugar.node.color\",\"path\":\"src/node/color/hsl2rgba.js\"},{\"namespace\":\"coffeekraken.sugar.node.color\",\"path\":\"src/node/color/hsv2rgba.js\"},{\"namespace\":\"coffeekraken.sugar.node.color\",\"path\":\"src/node/color/parse.js\"},{\"namespace\":\"coffeekraken.sugar.node.color\",\"path\":\"src/node/color/parseHsl.js\"},{\"namespace\":\"coffeekraken.sugar.node.color\",\"path\":\"src/node/color/parseHsv.js\"},{\"namespace\":\"coffeekraken.sugar.node.color\",\"path\":\"src/node/color/parseRgba.js\"},{\"namespace\":\"coffeekraken.sugar.node.color\",\"path\":\"src/node/color/rgba2hex.js\"},{\"namespace\":\"coffeekraken.sugar.node.color\",\"path\":\"src/node/color/rgba2hsl.js\"},{\"namespace\":\"coffeekraken.sugar.node.color\",\"path\":\"src/node/color/rgba2hsv.js\"},{\"namespace\":\"coffeekraken.sugar.node.color\",\"path\":\"src/node/color/SColor.js\"},{\"name\":\"color\",\"namespace\":\"coffeekraken.sugar.node.color\",\"path\":\"src/node/color/color.js\"},{\"namespace\":\"coffeekraken.sugar.node.color\",\"path\":\"src/node/color/convert.js\"},{\"namespace\":\"coffeekraken.sugar.node.color\",\"path\":\"src/node/color/hex2rgba.js\"},{\"namespace\":\"coffeekraken.sugar.node.color\",\"path\":\"src/node/color/hsl2rgba.js\"},{\"namespace\":\"coffeekraken.sugar.node.color\",\"path\":\"src/node/color/hsv2rgba.js\"},{\"namespace\":\"coffeekraken.sugar.node.color\",\"path\":\"src/node/color/parse.js\"},{\"namespace\":\"coffeekraken.sugar.node.color\",\"path\":\"src/node/color/parseHsl.js\"},{\"namespace\":\"coffeekraken.sugar.node.color\",\"path\":\"src/node/color/parseHsv.js\"},{\"namespace\":\"coffeekraken.sugar.node.color\",\"path\":\"src/node/color/parseRgba.js\"},{\"namespace\":\"coffeekraken.sugar.node.color\",\"path\":\"src/node/color/rgba2hex.js\"},{\"namespace\":\"coffeekraken.sugar.node.color\",\"path\":\"src/node/color/rgba2hsl.js\"},{\"namespace\":\"coffeekraken.sugar.node.color\",\"path\":\"src/node/color/rgba2hsv.js\"},{\"namespace\":\"coffeekraken.sugar.node.color\",\"path\":\"src/node/color/SColor.js\"},{\"namespace\":\"coffeekraken.sugar.node.config\",\"path\":\"src/node/config/SConfig.js\"},{\"name\":\"sugar\",\"namespace\":\"coffeekraken.sugar.node.config\",\"path\":\"src/node/config/sugar.js\"},{\"namespace\":\"coffeekraken.sugar.node.config.adapters\",\"path\":\"src/node/config/adapters/SConfigAdapter.js\"},{\"name\":\"SConfigFolderAdapter\",\"namespace\":\"coffeekraken.sugar.node.config.adapters\",\"path\":\"src/node/config/adapters/SConfigFolderAdapter.js\"},{\"name\":\"SConfigFsAdapter\",\"namespace\":\"coffeekraken.sugar.node.config.adapters\",\"path\":\"src/node/config/adapters/SConfigFsAdapter.js\"},{\"namespace\":\"coffeekraken.sugar.node.config.adapters\",\"path\":\"src/node/config/adapters/SConfigAdapter.js\"},{\"name\":\"SConfigFolderAdapter\",\"namespace\":\"coffeekraken.sugar.node.config.adapters\",\"path\":\"src/node/config/adapters/SConfigFolderAdapter.js\"},{\"name\":\"SConfigFsAdapter\",\"namespace\":\"coffeekraken.sugar.node.config.adapters\",\"path\":\"src/node/config/adapters/SConfigFsAdapter.js\"},{\"namespace\":\"coffeekraken.sugar.node.config\",\"path\":\"src/node/config/SConfig.js\"},{\"name\":\"sugar\",\"namespace\":\"coffeekraken.sugar.node.config\",\"path\":\"src/node/config/sugar.js\"},{\"namespace\":\"coffeekraken.sugar.node.core\",\"path\":\"src/node/core/activeSpace.js\"},{\"namespace\":\"coffeekraken.sugar.node.core\",\"path\":\"src/node/core/env.js\"},{\"namespace\":\"coffeekraken.sugar.node.core\",\"path\":\"src/node/core/activeSpace.js\"},{\"namespace\":\"coffeekraken.sugar.node.core\",\"path\":\"src/node/core/env.js\"},{\"namespace\":\"coffeekraken.sugar.node.crypt\",\"path\":\"src/node/crypt/aes.js\"},{\"namespace\":\"coffeekraken.sugar.node.crypt\",\"path\":\"src/node/crypt/base64.js\"},{\"namespace\":\"coffeekraken.sugar.node.crypt\",\"path\":\"src/node/crypt/md5.js\"},{\"namespace\":\"coffeekraken.sugar.node.crypt\",\"path\":\"src/node/crypt/object.js\"},{\"namespace\":\"coffeekraken.sugar.node.crypt\",\"path\":\"src/node/crypt/sha256.js\"},{\"namespace\":\"coffeekraken.sugar.node.crypt\",\"path\":\"src/node/crypt/sha512.js\"},{\"namespace\":\"coffeekraken.sugar.node.crypt\",\"path\":\"src/node/crypt/aes.js\"},{\"namespace\":\"coffeekraken.sugar.node.crypt\",\"path\":\"src/node/crypt/base64.js\"},{\"namespace\":\"coffeekraken.sugar.node.crypt\",\"path\":\"src/node/crypt/md5.js\"},{\"namespace\":\"coffeekraken.sugar.node.crypt\",\"path\":\"src/node/crypt/object.js\"},{\"namespace\":\"coffeekraken.sugar.node.crypt\",\"path\":\"src/node/crypt/sha256.js\"},{\"namespace\":\"coffeekraken.sugar.node.crypt\",\"path\":\"src/node/crypt/sha512.js\"},{\"name\":\"SDependency\",\"namespace\":\"coffeekraken.sugar.node.dependency\",\"path\":\"src/node/dependency/SDependency.js\"},{\"name\":\"SPhpDependency\",\"namespace\":\"coffeekraken.sugar.node.dependency\",\"path\":\"src/node/dependency/SPhpDependency.js\"},{\"name\":\"SDependency\",\"namespace\":\"coffeekraken.sugar.node.dependency\",\"path\":\"src/node/dependency/SDependency.js\"},{\"name\":\"SPhpDependency\",\"namespace\":\"coffeekraken.sugar.node.dependency\",\"path\":\"src/node/dependency/SPhpDependency.js\"},{\"namespace\":\"coffeekraken.sugar.node.dev\",\"path\":\"src/node/dev/dataTypesArray.js\"},{\"namespace\":\"coffeekraken.sugar.node.dev\",\"path\":\"src/node/dev/getArgsNames.js\"},{\"name\":\"beautifyErrors\",\"namespace\":\"coffeekraken.sugar.node.dev\",\"path\":\"src/node/dev/__wip__/beautifyErrors.js\"},{\"name\":\"parseError\",\"namespace\":\"coffeekraken.sugar.node.dev\",\"path\":\"src/node/dev/__wip__/parseError.js\"},{\"name\":\"beautifyErrors\",\"namespace\":\"coffeekraken.sugar.node.dev\",\"path\":\"src/node/dev/__wip__/beautifyErrors.js\"},{\"name\":\"parseError\",\"namespace\":\"coffeekraken.sugar.node.dev\",\"path\":\"src/node/dev/__wip__/parseError.js\"},{\"namespace\":\"coffeekraken.sugar.node.dev\",\"path\":\"src/node/dev/dataTypesArray.js\"},{\"namespace\":\"coffeekraken.sugar.node.dev\",\"path\":\"src/node/dev/getArgsNames.js\"},{\"name\":\"docMap\",\"namespace\":\"coffeekraken.sugar.node.doc\",\"path\":\"src/node/doc/docMap.js\"},{\"name\":\"docNav\",\"namespace\":\"coffeekraken.sugar.node.doc\",\"path\":\"src/node/doc/docNav.js\"},{\"name\":\"SDocMapItem\",\"namespace\":\"coffeekraken.sugar.node.doc\",\"path\":\"src/node/doc/SDocMapItem.js\"},{\"name\":null,\"namespace\":\"coffeekraken.sugar.src.node.doc.__tests__\",\"path\":\"src/node/doc/__tests__/docMap.js\"},{\"name\":\"coco\",\"namespace\":\"coffeekraken.sugar.sugar.cool.thing\",\"path\":\"src/node/doc/__tests__/doc/somethinf.md\"},{\"name\":\"Other thing\",\"namespace\":\"coffeekraken.sugar.src.node.doc.__tests__.doc.child\",\"path\":\"src/node/doc/__tests__/doc/child/other.md\"},{\"name\":\"Other thing\",\"namespace\":\"coffeekraken.sugar.src.node.doc.__tests__.doc.child\",\"path\":\"src/node/doc/__tests__/doc/child/other.md\"},{\"name\":\"coco\",\"namespace\":\"coffeekraken.sugar.sugar.cool.thing\",\"path\":\"src/node/doc/__tests__/doc/somethinf.md\"},{\"name\":null,\"namespace\":\"coffeekraken.sugar.src.node.doc.__tests__\",\"path\":\"src/node/doc/__tests__/docMap.js\"},{\"name\":\"docMap\",\"namespace\":\"coffeekraken.sugar.node.doc\",\"path\":\"src/node/doc/docMap.js\"},{\"name\":\"docNav\",\"namespace\":\"coffeekraken.sugar.node.doc\",\"path\":\"src/node/doc/docNav.js\"},{\"name\":\"SDocMapItem\",\"namespace\":\"coffeekraken.sugar.node.doc\",\"path\":\"src/node/doc/SDocMapItem.js\"},{\"name\":\"firstLookup\",\"namespace\":\"coffeekraken.sugar.node.nav\",\"path\":\"src/node/docblock/firstLookup.js\"},{\"namespace\":\"coffeekraken.sugar.node.docblock\",\"path\":\"src/node/docblock/SDocblock.js\"},{\"namespace\":\"coffeekraken.sugar.node.docblock\",\"path\":\"src/node/docblock/SDocblockBlock.js\"},{\"name\":\"something\",\"namespace\":\"coffeekraken.sugar.some.thing\",\"path\":\"src/node/docblock/__tests__/doc/somethinf.md\"},{\"name\":\"otherThing\",\"namespace\":\"coffeekraken.sugar.other.thing.coco\",\"path\":\"src/node/docblock/__tests__/doc/child/other.md\"},{\"name\":\"otherThing\",\"namespace\":\"coffeekraken.sugar.other.thing.coco\",\"path\":\"src/node/docblock/__tests__/doc/child/other.md\"},{\"name\":\"something\",\"namespace\":\"coffeekraken.sugar.some.thing\",\"path\":\"src/node/docblock/__tests__/doc/somethinf.md\"},{\"name\":\"firstLookup\",\"namespace\":\"coffeekraken.sugar.node.nav\",\"path\":\"src/node/docblock/firstLookup.js\"},{\"namespace\":\"coffeekraken.sugar.node.docblock\",\"path\":\"src/node/docblock/SDocblock.js\"},{\"namespace\":\"coffeekraken.sugar.node.docblock\",\"path\":\"src/node/docblock/SDocblockBlock.js\"},{\"namespace\":\"coffeekraken.sugar.node.easing\",\"path\":\"src/node/easing/availableEasingsArray.js\"},{\"namespace\":\"coffeekraken.sugar.node.easing\",\"path\":\"src/node/easing/easeInCubic.js\"},{\"namespace\":\"coffeekraken.sugar.node.easing\",\"path\":\"src/node/easing/easeInOutCubic.js\"},{\"namespace\":\"coffeekraken.sugar.node.easing\",\"path\":\"src/node/easing/easeInOutQuad.js\"},{\"namespace\":\"coffeekraken.sugar.node.easing\",\"path\":\"src/node/easing/easeInOutQuart.js\"},{\"namespace\":\"coffeekraken.sugar.node.easing\",\"path\":\"src/node/easing/easeInOutQuint.js\"},{\"namespace\":\"coffeekraken.sugar.node.easing\",\"path\":\"src/node/easing/easeInQuad.js\"},{\"namespace\":\"coffeekraken.sugar.node.easing\",\"path\":\"src/node/easing/easeInQuart.js\"},{\"namespace\":\"coffeekraken.sugar.node.easing\",\"path\":\"src/node/easing/easeInQuint.js\"},{\"namespace\":\"coffeekraken.sugar.node.easing\",\"path\":\"src/node/easing/easeOutCubic.js\"},{\"namespace\":\"coffeekraken.sugar.node.easing\",\"path\":\"src/node/easing/easeOutQuad.js\"},{\"namespace\":\"coffeekraken.sugar.node.easing\",\"path\":\"src/node/easing/easeOutQuart.js\"},{\"namespace\":\"coffeekraken.sugar.node.easing\",\"path\":\"src/node/easing/easeOutQuint.js\"},{\"namespace\":\"coffeekraken.sugar.node.easing\",\"path\":\"src/node/easing/availableEasingsArray.js\"},{\"namespace\":\"coffeekraken.sugar.node.easing\",\"path\":\"src/node/easing/easeInCubic.js\"},{\"namespace\":\"coffeekraken.sugar.node.easing\",\"path\":\"src/node/easing/easeInOutCubic.js\"},{\"namespace\":\"coffeekraken.sugar.node.easing\",\"path\":\"src/node/easing/easeInOutQuad.js\"},{\"namespace\":\"coffeekraken.sugar.node.easing\",\"path\":\"src/node/easing/easeInOutQuart.js\"},{\"namespace\":\"coffeekraken.sugar.node.easing\",\"path\":\"src/node/easing/easeInOutQuint.js\"},{\"namespace\":\"coffeekraken.sugar.node.easing\",\"path\":\"src/node/easing/easeInQuad.js\"},{\"namespace\":\"coffeekraken.sugar.node.easing\",\"path\":\"src/node/easing/easeInQuart.js\"},{\"namespace\":\"coffeekraken.sugar.node.easing\",\"path\":\"src/node/easing/easeInQuint.js\"},{\"namespace\":\"coffeekraken.sugar.node.easing\",\"path\":\"src/node/easing/easeOutCubic.js\"},{\"namespace\":\"coffeekraken.sugar.node.easing\",\"path\":\"src/node/easing/easeOutQuad.js\"},{\"namespace\":\"coffeekraken.sugar.node.easing\",\"path\":\"src/node/easing/easeOutQuart.js\"},{\"namespace\":\"coffeekraken.sugar.node.easing\",\"path\":\"src/node/easing/easeOutQuint.js\"},{\"namespace\":\"coffeekraken.sugar.node.encoding\",\"path\":\"src/node/encoding/base64.js\"},{\"namespace\":\"coffeekraken.sugar.node.encoding\",\"path\":\"src/node/encoding/base64.js\"},{\"name\":\"subscribe\",\"namespace\":\"coffeekraken.sugar.node.event\",\"path\":\"src/node/event/subscribe.js\"},{\"name\":\"trigger\",\"namespace\":\"coffeekraken.sugar.node.event\",\"path\":\"src/node/event/trigger.js\"},{\"name\":\"subscribe\",\"namespace\":\"coffeekraken.sugar.node.event\",\"path\":\"src/node/event/subscribe.js\"},{\"name\":\"trigger\",\"namespace\":\"coffeekraken.sugar.node.event\",\"path\":\"src/node/event/trigger.js\"},{\"name\":\"appRoutes\",\"namespace\":\"coffeekraken.sugar.node.express\",\"path\":\"src/node/express/__wip__/appRoutes.js\"},{\"name\":\"appRoutes\",\"namespace\":\"coffeekraken.sugar.node.express\",\"path\":\"src/node/express/__wip__/appRoutes.js\"},{\"name\":\"config\",\"namespace\":\"coffeekraken.sugar.node.express.controllers.AppControllers\",\"path\":\"src/node/express/__wip__/controllers/AppControllers.js\"},{\"name\":\"config\",\"namespace\":\"coffeekraken.sugar.node.express.controllers.AppControllers\",\"path\":\"src/node/express/__wip__/controllers/AppControllers.js\"},{\"name\":\"copy\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/copy.js\"},{\"name\":\"copySync\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/copySync.js\"},{\"name\":\"downloadFile\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/downloadFile.js\"},{\"name\":\"emptyDir\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/emptyDir.js\"},{\"name\":\"emptyDirSync\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/emptyDirSync.js\"},{\"name\":\"ensureDir\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/ensureDir.js\"},{\"name\":\"ensureDirSync\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/ensureDirSync.js\"},{\"name\":\"ensureFile\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/ensureFile.js\"},{\"name\":\"ensureFileSync\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/ensureFileSync.js\"},{\"name\":\"extension\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/extension.js\"},{\"name\":\"filename\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/filename.js\"},{\"name\":\"folderSize\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/folderSize.js\"},{\"name\":\"formatFileSize\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/formatFileSize.js\"},{\"name\":\"isPath\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/isPath.js\"},{\"name\":\"move\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/move.js\"},{\"name\":\"moveSync\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/moveSync.js\"},{\"name\":\"remove\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/remove.js\"},{\"name\":\"removeSync\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/removeSync.js\"},{\"name\":\"tmpDir\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/tmpDir.js\"},{\"name\":\"writeFile\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/writeFile.js\"},{\"name\":\"writeFileSync\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/writeFileSync.js\"},{\"name\":\"writeJson\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/writeJson.js\"},{\"name\":\"writeJsonSync\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/writeJsonSync.js\"},{\"name\":\"copy\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/copy.js\"},{\"name\":\"copySync\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/copySync.js\"},{\"name\":\"downloadFile\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/downloadFile.js\"},{\"name\":\"emptyDir\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/emptyDir.js\"},{\"name\":\"emptyDirSync\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/emptyDirSync.js\"},{\"name\":\"ensureDir\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/ensureDir.js\"},{\"name\":\"ensureDirSync\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/ensureDirSync.js\"},{\"name\":\"ensureFile\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/ensureFile.js\"},{\"name\":\"ensureFileSync\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/ensureFileSync.js\"},{\"name\":\"extension\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/extension.js\"},{\"name\":\"filename\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/filename.js\"},{\"name\":\"folderSize\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/folderSize.js\"},{\"name\":\"formatFileSize\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/formatFileSize.js\"},{\"name\":\"isPath\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/isPath.js\"},{\"name\":\"move\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/move.js\"},{\"name\":\"moveSync\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/moveSync.js\"},{\"name\":\"remove\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/remove.js\"},{\"name\":\"removeSync\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/removeSync.js\"},{\"name\":\"tmpDir\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/tmpDir.js\"},{\"name\":\"writeFile\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/writeFile.js\"},{\"name\":\"writeFileSync\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/writeFileSync.js\"},{\"name\":\"writeJson\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/writeJson.js\"},{\"name\":\"writeJsonSync\",\"namespace\":\"coffeekraken.sugar.node.fs\",\"path\":\"src/node/fs/writeJsonSync.js\"},{\"namespace\":\"coffeekraken.sugar.node.function\",\"path\":\"src/node/function/debounce.js\"},{\"namespace\":\"coffeekraken.sugar.node.function\",\"path\":\"src/node/function/setRecursiveTimeout.js\"},{\"namespace\":\"coffeekraken.sugar.node.function\",\"path\":\"src/node/function/sleep.js\"},{\"namespace\":\"coffeekraken.sugar.node.function\",\"path\":\"src/node/function/throttle.js\"},{\"namespace\":\"coffeekraken.sugar.node.function\",\"path\":\"src/node/function/debounce.js\"},{\"namespace\":\"coffeekraken.sugar.node.function\",\"path\":\"src/node/function/setRecursiveTimeout.js\"},{\"namespace\":\"coffeekraken.sugar.node.function\",\"path\":\"src/node/function/sleep.js\"},{\"namespace\":\"coffeekraken.sugar.node.function\",\"path\":\"src/node/function/throttle.js\"},{\"namespace\":\"coffeekraken.sugar.node.geom\",\"path\":\"src/node/geom/circleConstrain.js\"},{\"namespace\":\"coffeekraken.sugar.node.geom\",\"path\":\"src/node/geom/distanceBetween.js\"},{\"namespace\":\"coffeekraken.sugar.node.geom\",\"path\":\"src/node/geom/circleConstrain.js\"},{\"namespace\":\"coffeekraken.sugar.node.geom\",\"path\":\"src/node/geom/distanceBetween.js\"},{\"name\":\"downloadFolder\",\"namespace\":\"coffeekraken.sugar.node.github\",\"path\":\"src/node/github/__wip__/downloadFolder.js\"},{\"name\":\"getAuthToken\",\"namespace\":\"coffeekraken.sugar.node.github\",\"path\":\"src/node/github/__wip__/getAuthToken.js\"},{\"name\":\"listFolder\",\"namespace\":\"coffeekraken.sugar.node.github\",\"path\":\"src/node/github/__wip__/listFolder.js\"},{\"name\":\"setAuthToken\",\"namespace\":\"coffeekraken.sugar.node.github\",\"path\":\"src/node/github/__wip__/setAuthToken.js\"},{\"name\":\"downloadFolder\",\"namespace\":\"coffeekraken.sugar.node.github\",\"path\":\"src/node/github/__wip__/downloadFolder.js\"},{\"name\":\"getAuthToken\",\"namespace\":\"coffeekraken.sugar.node.github\",\"path\":\"src/node/github/__wip__/getAuthToken.js\"},{\"name\":\"listFolder\",\"namespace\":\"coffeekraken.sugar.node.github\",\"path\":\"src/node/github/__wip__/listFolder.js\"},{\"name\":\"setAuthToken\",\"namespace\":\"coffeekraken.sugar.node.github\",\"path\":\"src/node/github/__wip__/setAuthToken.js\"},{\"namespace\":\"coffeekraken.sugar.node.google\",\"path\":\"src/node/google/SGoogleCustomSearch.js\"},{\"namespace\":\"coffeekraken.sugar.node.google\",\"path\":\"src/node/google/SGoogleCustomSearch.js\"},{\"namespace\":\"coffeekraken.sugar.node.html\",\"path\":\"src/node/html/replaceTags.js\"},{\"namespace\":\"coffeekraken.sugar.node.html\",\"path\":\"src/node/html/striptags.js\"},{\"namespace\":\"coffeekraken.sugar.node.html\",\"path\":\"src/node/html/toString.js\"},{\"namespace\":\"coffeekraken.sugar.node.html\",\"path\":\"src/node/html/replaceTags.js\"},{\"namespace\":\"coffeekraken.sugar.node.html\",\"path\":\"src/node/html/striptags.js\"},{\"namespace\":\"coffeekraken.sugar.node.html\",\"path\":\"src/node/html/toString.js\"},{\"namespace\":\"coffeekraken.sugar.node.http\",\"path\":\"src/node/http/request.js\"},{\"namespace\":\"coffeekraken.sugar.node.http\",\"path\":\"src/node/http/SRequest.js\"},{\"namespace\":\"coffeekraken.sugar.node.http\",\"path\":\"src/node/http/SRequestConfig.js\"},{\"namespace\":\"coffeekraken.sugar.node.http\",\"path\":\"src/node/http/request.js\"},{\"namespace\":\"coffeekraken.sugar.node.http\",\"path\":\"src/node/http/SRequest.js\"},{\"namespace\":\"coffeekraken.sugar.node.http\",\"path\":\"src/node/http/SRequestConfig.js\"},{\"name\":\"index\",\"namespace\":\"coffeekraken.sugar.node\",\"path\":\"src/node/index.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/array.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/base64.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/boolean.js\"},{\"name\":\"childProcess\",\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/childProcess.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/chrome.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/class.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/color.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/ddmmyyyyDate.js\"},{\"name\":\"directory\",\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/directory.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/edge.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/email.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/even.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/firefox.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/function.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/ie.js\"},{\"name\":\"inPackage\",\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/inPackage.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/integer.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/js.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/json.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/linux.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/mmddyyyyDate.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/mobile.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/node.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/number.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/object.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/odd.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/ofType.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/opera.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/osx.js\"},{\"name\":\"path\",\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/path.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/phone.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/plainObject.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/regexp.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/safari.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/samsungBrowser.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/string.js\"},{\"name\":\"symlink\",\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/symlink.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/tablet.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/testEnv.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/ucBrowser.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/url.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/windows.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/yyyymmddDate.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/array.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/base64.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/boolean.js\"},{\"name\":\"childProcess\",\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/childProcess.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/chrome.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/class.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/color.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/ddmmyyyyDate.js\"},{\"name\":\"directory\",\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/directory.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/edge.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/email.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/even.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/firefox.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/function.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/ie.js\"},{\"name\":\"inPackage\",\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/inPackage.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/integer.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/js.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/json.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/linux.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/mmddyyyyDate.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/mobile.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/node.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/number.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/object.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/odd.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/ofType.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/opera.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/osx.js\"},{\"name\":\"path\",\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/path.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/phone.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/plainObject.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/regexp.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/safari.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/samsungBrowser.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/string.js\"},{\"name\":\"symlink\",\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/symlink.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/tablet.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/testEnv.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/ucBrowser.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/url.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/windows.js\"},{\"namespace\":\"coffeekraken.sugar.node.is\",\"path\":\"src/node/is/yyyymmddDate.js\"},{\"name\":\"hotkey\",\"namespace\":\"coffeekraken.sugar.node.keyboard\",\"path\":\"src/node/keyboard/hotkey.js\"},{\"name\":\"hotkey\",\"namespace\":\"coffeekraken.sugar.node.keyboard\",\"path\":\"src/node/keyboard/hotkey.js\"},{\"namespace\":\"coffeekraken.sugar.node.log\",\"path\":\"src/node/log/debug.js\"},{\"namespace\":\"coffeekraken.sugar.node.log\",\"path\":\"src/node/log/error.js\"},{\"namespace\":\"coffeekraken.sugar.node.log\",\"path\":\"src/node/log/info.js\"},{\"namespace\":\"coffeekraken.sugar.node.log\",\"path\":\"src/node/log/log.js\"},{\"namespace\":\"coffeekraken.sugar.node.log\",\"path\":\"src/node/log/SLog.js\"},{\"namespace\":\"coffeekraken.sugar.node.log\",\"path\":\"src/node/log/warn.js\"},{\"name\":\"setupSlackTransport\",\"namespace\":\"coffeekraken.sugar.node.log\",\"path\":\"src/node/log/__wip__/setupSlackTransport.js\"},{\"name\":\"header\",\"namespace\":\"coffeekraken.sugar.node.log.presets\",\"path\":\"src/node/log/__wip__/presets/header.js\"},{\"name\":\"header\",\"namespace\":\"coffeekraken.sugar.node.log.presets\",\"path\":\"src/node/log/__wip__/presets/header.js\"},{\"name\":\"setupSlackTransport\",\"namespace\":\"coffeekraken.sugar.node.log\",\"path\":\"src/node/log/__wip__/setupSlackTransport.js\"},{\"namespace\":\"coffeekraken.sugar.node.log.adapters\",\"path\":\"src/node/log/adapters/SLogConsoleAdapter.js\"},{\"name\":\"SLogFilesAdapter\",\"namespace\":\"coffeekraken.sugar.js.log\",\"path\":\"src/node/log/adapters/SLogFilesAdapter.js\"},{\"namespace\":\"coffeekraken.sugar.node.log.adapters\",\"path\":\"src/node/log/adapters/SLogConsoleAdapter.js\"},{\"name\":\"SLogFilesAdapter\",\"namespace\":\"coffeekraken.sugar.js.log\",\"path\":\"src/node/log/adapters/SLogFilesAdapter.js\"},{\"namespace\":\"coffeekraken.sugar.node.log\",\"path\":\"src/node/log/debug.js\"},{\"namespace\":\"coffeekraken.sugar.node.log\",\"path\":\"src/node/log/error.js\"},{\"namespace\":\"coffeekraken.sugar.node.log.htmlPresets\",\"path\":\"src/node/log/htmlPresets/console.js\"},{\"namespace\":\"coffeekraken.sugar.node.log.htmlPresets\",\"path\":\"src/node/log/htmlPresets/files.js\"},{\"namespace\":\"coffeekraken.sugar.node.log.htmlPresets\",\"path\":\"src/node/log/htmlPresets/mail.js\"},{\"namespace\":\"coffeekraken.sugar.node.log.htmlPresets\",\"path\":\"src/node/log/htmlPresets/console.js\"},{\"namespace\":\"coffeekraken.sugar.node.log.htmlPresets\",\"path\":\"src/node/log/htmlPresets/files.js\"},{\"namespace\":\"coffeekraken.sugar.node.log.htmlPresets\",\"path\":\"src/node/log/htmlPresets/mail.js\"},{\"namespace\":\"coffeekraken.sugar.node.log\",\"path\":\"src/node/log/info.js\"},{\"namespace\":\"coffeekraken.sugar.node.log\",\"path\":\"src/node/log/log.js\"},{\"namespace\":\"coffeekraken.sugar.node.log\",\"path\":\"src/node/log/SLog.js\"},{\"namespace\":\"coffeekraken.sugar.node.log\",\"path\":\"src/node/log/warn.js\"},{\"namespace\":\"coffeekraken.sugar.node.nav\",\"path\":\"src/node/nav/SNav.js\"},{\"namespace\":\"coffeekraken.sugar.node.nav\",\"path\":\"src/node/nav/SNavItem.js\"},{\"name\":\"something\",\"namespace\":\"coffeekraken.sugar.some.thing\",\"path\":\"src/node/nav/__tests__/doc/somethinf.md\"},{\"name\":\"otherThing\",\"namespace\":\"coffeekraken.sugar.other.thing.coco\",\"path\":\"src/node/nav/__tests__/doc/child/other.md\"},{\"name\":\"otherThing\",\"namespace\":\"coffeekraken.sugar.other.thing.coco\",\"path\":\"src/node/nav/__tests__/doc/child/other.md\"},{\"name\":\"something\",\"namespace\":\"coffeekraken.sugar.some.thing\",\"path\":\"src/node/nav/__tests__/doc/somethinf.md\"},{\"name\":\"namespaceSNav\",\"namespace\":\"coffeekraken.sugar.node.nav\",\"path\":\"src/node/nav/__wip__/namespaceSNav.js\"},{\"name\":\"namespaceSNav\",\"namespace\":\"coffeekraken.sugar.node.nav\",\"path\":\"src/node/nav/__wip__/namespaceSNav.js\"},{\"namespace\":\"coffeekraken.sugar.node.nav\",\"path\":\"src/node/nav/SNav.js\"},{\"namespace\":\"coffeekraken.sugar.node.nav\",\"path\":\"src/node/nav/SNavItem.js\"},{\"namespace\":\"coffeekraken.sugar.node.number\",\"path\":\"src/node/number/constrain.js\"},{\"namespace\":\"coffeekraken.sugar.node.number\",\"path\":\"src/node/number/pad.js\"},{\"namespace\":\"coffeekraken.sugar.node.number\",\"path\":\"src/node/number/constrain.js\"},{\"namespace\":\"coffeekraken.sugar.node.number\",\"path\":\"src/node/number/pad.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/clone.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/constructorName.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/deepize.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/deepMap.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/deepMerge.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/deepProxy.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/delete.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/diff.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/ensureExists.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/filter.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/flatten.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/get.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/getKeyByValue.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/map.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/propertyProxy.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/resolveTokens.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/set.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/sort.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/SWatch.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/toQueryString.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/uid.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/validateDefinitionObject.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/validateWithDefinitionObject.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/watch.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/clone.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/constructorName.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/deepize.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/deepMap.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/deepMerge.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/deepProxy.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/delete.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/diff.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/ensureExists.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/filter.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/flatten.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/get.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/getKeyByValue.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/map.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/propertyProxy.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/resolveTokens.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/set.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/sort.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/SWatch.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/toQueryString.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/uid.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/validateDefinitionObject.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/validateWithDefinitionObject.js\"},{\"namespace\":\"coffeekraken.sugar.node.object\",\"path\":\"src/node/object/watch.js\"},{\"name\":\"json\",\"namespace\":\"coffeekraken.sugar.node.package\",\"path\":\"src/node/package/json.js\"},{\"name\":\"namespace\",\"namespace\":\"coffeekraken.sugar.node.package\",\"path\":\"src/node/package/namespace.js\"},{\"name\":\"rootPath\",\"namespace\":\"coffeekraken.sugar.node.package\",\"path\":\"src/node/package/rootPath.js\"},{\"name\":\"json\",\"namespace\":\"coffeekraken.sugar.node.package\",\"path\":\"src/node/package/json.js\"},{\"name\":\"namespace\",\"namespace\":\"coffeekraken.sugar.node.package\",\"path\":\"src/node/package/namespace.js\"},{\"name\":\"rootPath\",\"namespace\":\"coffeekraken.sugar.node.package\",\"path\":\"src/node/package/rootPath.js\"},{\"namespace\":\"coffeekraken.sugar.node.parse\",\"path\":\"src/node/parse/argumentTypeDefinitionString.js\"},{\"namespace\":\"coffeekraken.sugar.node.parse\",\"path\":\"src/node/parse/argumentTypeDefinitionString.js\"},{\"name\":\"isInPackage\",\"namespace\":\"coffeekraken.sugar.node.path\",\"path\":\"src/node/path/isInPackage.js\"},{\"name\":\"packageRoot\",\"namespace\":\"coffeekraken.sugar.node.path\",\"path\":\"src/node/path/packageRoot.js\"},{\"name\":\"isInPackage\",\"namespace\":\"coffeekraken.sugar.node.path\",\"path\":\"src/node/path/isInPackage.js\"},{\"name\":\"packageRoot\",\"namespace\":\"coffeekraken.sugar.node.path\",\"path\":\"src/node/path/packageRoot.js\"},{\"name\":\"exitCleanup\",\"namespace\":\"coffeekraken.sugar.node.process\",\"path\":\"src/node/process/exitCleanup.js\"},{\"name\":\"getRegisteredProcesses\",\"namespace\":\"coffeekraken.sugar.node.process\",\"path\":\"src/node/process/getRegisteredProcesses.js\"},{\"name\":\"output\",\"namespace\":\"coffeekraken.sugar.node.process\",\"path\":\"src/node/process/output.js\"},{\"name\":\"registerProcess\",\"namespace\":\"coffeekraken.sugar.node.process\",\"path\":\"src/node/process/registerProcess.js\"},{\"name\":\"spawn\",\"namespace\":\"coffeekraken.sugar.node.process\",\"path\":\"src/node/process/spawn.js\"},{\"name\":\"exitCleanup\",\"namespace\":\"coffeekraken.sugar.node.process\",\"path\":\"src/node/process/exitCleanup.js\"},{\"name\":\"getRegisteredProcesses\",\"namespace\":\"coffeekraken.sugar.node.process\",\"path\":\"src/node/process/getRegisteredProcesses.js\"},{\"name\":\"output\",\"namespace\":\"coffeekraken.sugar.node.process\",\"path\":\"src/node/process/output.js\"},{\"name\":\"registerProcess\",\"namespace\":\"coffeekraken.sugar.node.process\",\"path\":\"src/node/process/registerProcess.js\"},{\"name\":\"spawn\",\"namespace\":\"coffeekraken.sugar.node.process\",\"path\":\"src/node/process/spawn.js\"},{\"namespace\":\"coffeekraken.sugar.node.promise\",\"path\":\"src/node/promise/SPromise.js\"},{\"namespace\":\"coffeekraken.sugar.node.promise\",\"path\":\"src/node/promise/SPromise.js\"},{\"name\":\"bladePhp\",\"namespace\":\"coffeekraken.sugar.node.server.bladePhp\",\"path\":\"src/node/server/bladePhp/bladePhp.js\"},{\"name\":\"SBladePhpServerCli\",\"namespace\":\"coffeekraken.sugar.node.server.bladePhp\",\"path\":\"src/node/server/bladePhp/SBladePhpServerCli.js\"},{\"name\":\"SBladePhpServerCommand\",\"namespace\":\"coffeekraken.sugar.node.server.bladePhp\",\"path\":\"src/node/server/bladePhp/SBladePhpServerCommand.js\"},{\"name\":\"bladePhp\",\"namespace\":\"coffeekraken.sugar.node.server.bladePhp\",\"path\":\"src/node/server/bladePhp/bladePhp.js\"},{\"name\":\"SBladePhpServerCli\",\"namespace\":\"coffeekraken.sugar.node.server.bladePhp\",\"path\":\"src/node/server/bladePhp/SBladePhpServerCli.js\"},{\"name\":\"SBladePhpServerCommand\",\"namespace\":\"coffeekraken.sugar.node.server.bladePhp\",\"path\":\"src/node/server/bladePhp/SBladePhpServerCommand.js\"},{\"name\":\"express\",\"namespace\":\"coffeekraken.sugar.node.server.express\",\"path\":\"src/node/server/express/express.js\"},{\"name\":\"SExpressServerCli\",\"namespace\":\"coffeekraken.sugar.node.server.express\",\"path\":\"src/node/server/express/SExpressServerCli.js\"},{\"name\":\"SExpressServerCommand\",\"namespace\":\"coffeekraken.sugar.node.server.express\",\"path\":\"src/node/server/express/SExpressServerCommand.js\"},{\"name\":\"express\",\"namespace\":\"coffeekraken.sugar.node.server.express\",\"path\":\"src/node/server/express/express.js\"},{\"name\":\"SExpressServerCli\",\"namespace\":\"coffeekraken.sugar.node.server.express\",\"path\":\"src/node/server/express/SExpressServerCli.js\"},{\"name\":\"SExpressServerCommand\",\"namespace\":\"coffeekraken.sugar.node.server.express\",\"path\":\"src/node/server/express/SExpressServerCommand.js\"},{\"name\":\"express\",\"namespace\":\"coffeekraken.sugar.node.server.frontend\",\"path\":\"src/node/server/frontend/frontend.js\"},{\"name\":\"SFrontendServerCli\",\"namespace\":\"coffeekraken.sugar.node.server.frontend\",\"path\":\"src/node/server/frontend/SFrontendServerCli.js\"},{\"name\":\"SFrontendServerCommand\",\"namespace\":\"coffeekraken.sugar.node.server.express\",\"path\":\"src/node/server/frontend/SFrontendServerCommand.js\"},{\"name\":\"express\",\"namespace\":\"coffeekraken.sugar.node.server.frontend\",\"path\":\"src/node/server/frontend/frontend.js\"},{\"name\":\"doc\",\"namespace\":\"coffeekraken.sugar.node.server.frontend.handlers\",\"path\":\"src/node/server/frontend/handlers/doc.js\"},{\"name\":\"views\",\"namespace\":\"coffeekraken.sugar.node.server.frontend.handlers\",\"path\":\"src/node/server/frontend/handlers/views.js\"},{\"name\":\"doc\",\"namespace\":\"coffeekraken.sugar.node.server.frontend.handlers\",\"path\":\"src/node/server/frontend/handlers/doc.js\"},{\"name\":\"views\",\"namespace\":\"coffeekraken.sugar.node.server.frontend.handlers\",\"path\":\"src/node/server/frontend/handlers/views.js\"},{\"name\":\"SFrontendServerCli\",\"namespace\":\"coffeekraken.sugar.node.server.frontend\",\"path\":\"src/node/server/frontend/SFrontendServerCli.js\"},{\"name\":\"SFrontendServerCommand\",\"namespace\":\"coffeekraken.sugar.node.server.express\",\"path\":\"src/node/server/frontend/SFrontendServerCommand.js\"},{\"name\":\"php\",\"namespace\":\"coffeekraken.sugar.node.server.php\",\"path\":\"src/node/server/php/php.js\"},{\"name\":\"SPhpServerCli\",\"namespace\":\"coffeekraken.sugar.node.server.php\",\"path\":\"src/node/server/php/SPhpServerCli.js\"},{\"name\":\"SPhpServerCommand\",\"namespace\":\"coffeekraken.sugar.node.server.php\",\"path\":\"src/node/server/php/SPhpServerCommand.js\"},{\"name\":\"php\",\"namespace\":\"coffeekraken.sugar.node.server.php\",\"path\":\"src/node/server/php/php.js\"},{\"name\":\"SPhpServerCli\",\"namespace\":\"coffeekraken.sugar.node.server.php\",\"path\":\"src/node/server/php/SPhpServerCli.js\"},{\"name\":\"SPhpServerCommand\",\"namespace\":\"coffeekraken.sugar.node.server.php\",\"path\":\"src/node/server/php/SPhpServerCommand.js\"},{\"namespace\":\"coffeekraken.sugar.node.stream\",\"path\":\"src/node/stream/SActionsStream.js\"},{\"namespace\":\"coffeekraken.sugar.node.stream\",\"path\":\"src/node/stream/SActionsStreamAction.js\"},{\"name\":\"SFindInFileStreamAction\",\"namespace\":\"coffeekraken.sugar.node.stream.actions\",\"path\":\"src/node/stream/actions/SFsFilesResolverStreamAction.js\"},{\"name\":\"SFsOutputStreamAction\",\"namespace\":\"coffeekraken.sugar.node.stream.actions\",\"path\":\"src/node/stream/actions/SFsOutputStreamAction.js\"},{\"name\":\"SFsReadFileStreamAction\",\"namespace\":\"coffeekraken.sugar.node.stream.actions\",\"path\":\"src/node/stream/actions/SFsReadFileStreamAction.js\"},{\"name\":\"SGlobResolverStreamAction\",\"namespace\":\"coffeekraken.sugar.node.stream.actions\",\"path\":\"src/node/stream/actions/SGlobResolverStreamAction.js\"},{\"name\":\"SUnlinkStreamAction\",\"namespace\":\"coffeekraken.sugar.node.stream.actions\",\"path\":\"src/node/stream/actions/SUnlinkStreamAction.js\"},{\"name\":\"SFindInFileStreamAction\",\"namespace\":\"coffeekraken.sugar.node.stream.actions\",\"path\":\"src/node/stream/actions/SFsFilesResolverStreamAction.js\"},{\"name\":\"SFsOutputStreamAction\",\"namespace\":\"coffeekraken.sugar.node.stream.actions\",\"path\":\"src/node/stream/actions/SFsOutputStreamAction.js\"},{\"name\":\"SFsReadFileStreamAction\",\"namespace\":\"coffeekraken.sugar.node.stream.actions\",\"path\":\"src/node/stream/actions/SFsReadFileStreamAction.js\"},{\"name\":\"SGlobResolverStreamAction\",\"namespace\":\"coffeekraken.sugar.node.stream.actions\",\"path\":\"src/node/stream/actions/SGlobResolverStreamAction.js\"},{\"name\":\"SUnlinkStreamAction\",\"namespace\":\"coffeekraken.sugar.node.stream.actions\",\"path\":\"src/node/stream/actions/SUnlinkStreamAction.js\"},{\"namespace\":\"coffeekraken.sugar.node.stream\",\"path\":\"src/node/stream/SActionsStream.js\"},{\"namespace\":\"coffeekraken.sugar.node.stream\",\"path\":\"src/node/stream/SActionsStreamAction.js\"},{\"namespace\":\"coffeekraken.sugar.node.string\",\"path\":\"src/node/string/autoCast.js\"},{\"namespace\":\"coffeekraken.sugar.node.string\",\"path\":\"src/node/string/camelize.js\"},{\"namespace\":\"coffeekraken.sugar.node.string\",\"path\":\"src/node/string/countLine.js\"},{\"namespace\":\"coffeekraken.sugar.node.string\",\"path\":\"src/node/string/crop.js\"},{\"namespace\":\"coffeekraken.sugar.node.string\",\"path\":\"src/node/string/extractSame.js\"},{\"namespace\":\"coffeekraken.sugar.node.string\",\"path\":\"src/node/string/includes.js\"},{\"namespace\":\"coffeekraken.sugar.node.string\",\"path\":\"src/node/string/lowerFirst.js\"},{\"namespace\":\"coffeekraken.sugar.node.string\",\"path\":\"src/node/string/ltrim.js\"},{\"namespace\":\"coffeekraken.sugar.node.string\",\"path\":\"src/node/string/paramCase.js\"},{\"namespace\":\"coffeekraken.sugar.node.string\",\"path\":\"src/node/string/parse.js\"},{\"namespace\":\"coffeekraken.sugar.node.string\",\"path\":\"src/node/string/printf.js\"},{\"namespace\":\"coffeekraken.sugar.node.string\",\"path\":\"src/node/string/replaceTokens.js\"},{\"namespace\":\"coffeekraken.sugar.node.string\",\"path\":\"src/node/string/rtrim.js\"},{\"namespace\":\"coffeekraken.sugar.node.string\",\"path\":\"src/node/string/splitEvery.js\"},{\"namespace\":\"coffeekraken.sugar.node.string\",\"path\":\"src/node/string/sprintf.js\"},{\"namespace\":\"coffeekraken.sugar.node.string\",\"path\":\"src/node/string/toString.js\"},{\"namespace\":\"coffeekraken.sugar.node.string\",\"path\":\"src/node/string/uncamelize.js\"},{\"namespace\":\"coffeekraken.sugar.node.string\",\"path\":\"src/node/string/uniqid.js\"},{\"namespace\":\"coffeekraken.sugar.node.string\",\"path\":\"src/node/string/unquote.js\"},{\"namespace\":\"coffeekraken.sugar.node.string\",\"path\":\"src/node/string/upperFirst.js\"},{\"namespace\":\"coffeekraken.sugar.node.string\",\"path\":\"src/node/string/autoCast.js\"},{\"namespace\":\"coffeekraken.sugar.node.string\",\"path\":\"src/node/string/camelize.js\"},{\"namespace\":\"coffeekraken.sugar.node.string\",\"path\":\"src/node/string/countLine.js\"},{\"namespace\":\"coffeekraken.sugar.node.string\",\"path\":\"src/node/string/crop.js\"},{\"namespace\":\"coffeekraken.sugar.node.string\",\"path\":\"src/node/string/extractSame.js\"},{\"namespace\":\"coffeekraken.sugar.node.string\",\"path\":\"src/node/string/includes.js\"},{\"namespace\":\"coffeekraken.sugar.node.string\",\"path\":\"src/node/string/lowerFirst.js\"},{\"namespace\":\"coffeekraken.sugar.node.string\",\"path\":\"src/node/string/ltrim.js\"},{\"namespace\":\"coffeekraken.sugar.node.string\",\"path\":\"src/node/string/paramCase.js\"},{\"namespace\":\"coffeekraken.sugar.node.string\",\"path\":\"src/node/string/parse.js\"},{\"namespace\":\"coffeekraken.sugar.node.string\",\"path\":\"src/node/string/printf.js\"},{\"namespace\":\"coffeekraken.sugar.node.string\",\"path\":\"src/node/string/replaceTokens.js\"},{\"namespace\":\"coffeekraken.sugar.node.string\",\"path\":\"src/node/string/rtrim.js\"},{\"namespace\":\"coffeekraken.sugar.node.string\",\"path\":\"src/node/string/splitEvery.js\"},{\"namespace\":\"coffeekraken.sugar.node.string\",\"path\":\"src/node/string/sprintf.js\"},{\"namespace\":\"coffeekraken.sugar.node.string\",\"path\":\"src/node/string/toString.js\"},{\"namespace\":\"coffeekraken.sugar.node.string\",\"path\":\"src/node/string/uncamelize.js\"},{\"namespace\":\"coffeekraken.sugar.node.string\",\"path\":\"src/node/string/uniqid.js\"},{\"namespace\":\"coffeekraken.sugar.node.string\",\"path\":\"src/node/string/unquote.js\"},{\"namespace\":\"coffeekraken.sugar.node.string\",\"path\":\"src/node/string/upperFirst.js\"},{\"name\":\"bladePhp\",\"namespace\":\"coffeekraken.sugar.node.template\",\"path\":\"src/node/template/bladePhp.js\"},{\"name\":\"bladePhp\",\"namespace\":\"coffeekraken.sugar.node.template\",\"path\":\"src/node/template/bladePhp.js\"},{\"name\":\"STermApp\",\"namespace\":\"coffeekraken.sugar.node.termapp\",\"path\":\"src/node/termapp/STermApp.js\"},{\"name\":\"STermAppCli\",\"namespace\":\"coffeekraken.sugar.node.termapp\",\"path\":\"src/node/termapp/STermAppCli.js\"},{\"name\":\"STermAppAboutPage\",\"namespace\":\"coffeekraken.sugar.node.termapp.pages\",\"path\":\"src/node/termapp/pages/STermAppAboutPage.js\"},{\"name\":\"STermAppCommandsPage\",\"namespace\":\"coffeekraken.sugar.node.termapp.pages\",\"path\":\"src/node/termapp/pages/STermAppCommandsPage.js\"},{\"name\":\"STermAppAboutPage\",\"namespace\":\"coffeekraken.sugar.node.termapp.pages\",\"path\":\"src/node/termapp/pages/STermAppAboutPage.js\"},{\"name\":\"STermAppCommandsPage\",\"namespace\":\"coffeekraken.sugar.node.termapp.pages\",\"path\":\"src/node/termapp/pages/STermAppCommandsPage.js\"},{\"name\":\"STermApp\",\"namespace\":\"coffeekraken.sugar.node.termapp\",\"path\":\"src/node/termapp/STermApp.js\"},{\"name\":\"STermAppCli\",\"namespace\":\"coffeekraken.sugar.node.termapp\",\"path\":\"src/node/termapp/STermAppCli.js\"},{\"name\":\"center\",\"namespace\":\"coffeekraken.sugar.node.terminal\",\"path\":\"src/node/terminal/center.js\"},{\"name\":\"columns\",\"namespace\":\"coffeekraken.sugar.node.terminal\",\"path\":\"src/node/terminal/columns.js\"},{\"name\":\"cursorPos\",\"namespace\":\"coffeekraken.sugar.node.terminal\",\"path\":\"src/node/terminal/cursorPos.js\"},{\"name\":\"escapeStack\",\"namespace\":\"coffeekraken.sugar.node.blessed\",\"path\":\"src/node/terminal/escapeStack.js\"},{\"name\":\"parseHtml\",\"namespace\":\"coffeekraken.sugar.node.terminal\",\"path\":\"src/node/terminal/parseHtml.js\"},{\"name\":\"SApp\",\"namespace\":\"coffeekraken.sugar.node.terminal\",\"path\":\"src/node/terminal/SApp.js\"},{\"name\":\"SCommand\",\"namespace\":\"coffeekraken.sugar.node.terminal\",\"path\":\"src/node/terminal/SCommand.js\"},{\"name\":\"SHeader\",\"namespace\":\"coffeekraken.sugar.node.terminal\",\"path\":\"src/node/terminal/SHeader.js\"},{\"name\":\"SProcess\",\"namespace\":\"coffeekraken.sugar.node.terminal\",\"path\":\"src/node/terminal/SProcess.js\"},{\"name\":\"SSimpleApp\",\"namespace\":\"coffeekraken.sugar.node.terminal\",\"path\":\"src/node/terminal/SSimpleApp.js\"},{\"name\":\"image\",\"namespace\":\"coffeekraken.sugar.node.terminal\",\"path\":\"src/node/terminal/__wip__/image.js\"},{\"name\":\"SFiltrableList\",\"namespace\":\"coffeekraken.sugar.node.terminal\",\"path\":\"src/node/terminal/__wip__/SFiltrableList.js\"},{\"name\":\"SForm\",\"namespace\":\"coffeekraken.sugar.node.terminal\",\"path\":\"src/node/terminal/__wip__/SForm.js\"},{\"name\":\"SInput\",\"namespace\":\"coffeekraken.sugar.node.terminal\",\"path\":\"src/node/terminal/__wip__/SInputContainer.js\"},{\"name\":\"SLayout\",\"namespace\":\"coffeekraken.sugar.node.terminal\",\"path\":\"src/node/terminal/__wip__/SLayout.js\"},{\"name\":\"list\",\"namespace\":\"coffeekraken.sugar.node.terminal\",\"path\":\"src/node/terminal/__wip__/SList.js\"},{\"name\":\"splitLineEvery\",\"namespace\":\"coffeekraken.sugar.node.terminal\",\"path\":\"src/node/terminal/__wip__/splitLineEvery.js\"},{\"name\":\"SRouter\",\"namespace\":\"coffeekraken.sugar.node.terminal\",\"path\":\"src/node/terminal/__wip__/SRouter.js\"},{\"name\":\"STerminalScreen\",\"namespace\":\"coffeekraken.sugar.node.terminal\",\"path\":\"src/node/terminal/__wip__/SScreen.js\"},{\"name\":\"image\",\"namespace\":\"coffeekraken.sugar.node.terminal\",\"path\":\"src/node/terminal/__wip__/image.js\"},{\"name\":\"SFiltrableList\",\"namespace\":\"coffeekraken.sugar.node.terminal\",\"path\":\"src/node/terminal/__wip__/SFiltrableList.js\"},{\"name\":\"SForm\",\"namespace\":\"coffeekraken.sugar.node.terminal\",\"path\":\"src/node/terminal/__wip__/SForm.js\"},{\"name\":\"SInput\",\"namespace\":\"coffeekraken.sugar.node.terminal\",\"path\":\"src/node/terminal/__wip__/SInputContainer.js\"},{\"name\":\"SLayout\",\"namespace\":\"coffeekraken.sugar.node.terminal\",\"path\":\"src/node/terminal/__wip__/SLayout.js\"},{\"name\":\"list\",\"namespace\":\"coffeekraken.sugar.node.terminal\",\"path\":\"src/node/terminal/__wip__/SList.js\"},{\"name\":\"splitLineEvery\",\"namespace\":\"coffeekraken.sugar.node.terminal\",\"path\":\"src/node/terminal/__wip__/splitLineEvery.js\"},{\"name\":\"SRouter\",\"namespace\":\"coffeekraken.sugar.node.terminal\",\"path\":\"src/node/terminal/__wip__/SRouter.js\"},{\"name\":\"STerminalScreen\",\"namespace\":\"coffeekraken.sugar.node.terminal\",\"path\":\"src/node/terminal/__wip__/SScreen.js\"},{\"name\":\"center\",\"namespace\":\"coffeekraken.sugar.node.terminal\",\"path\":\"src/node/terminal/center.js\"},{\"name\":\"columns\",\"namespace\":\"coffeekraken.sugar.node.terminal\",\"path\":\"src/node/terminal/columns.js\"},{\"name\":\"cursorPos\",\"namespace\":\"coffeekraken.sugar.node.terminal\",\"path\":\"src/node/terminal/cursorPos.js\"},{\"name\":\"escapeStack\",\"namespace\":\"coffeekraken.sugar.node.blessed\",\"path\":\"src/node/terminal/escapeStack.js\"},{\"name\":\"parseHtml\",\"namespace\":\"coffeekraken.sugar.node.terminal\",\"path\":\"src/node/terminal/parseHtml.js\"},{\"name\":\"SApp\",\"namespace\":\"coffeekraken.sugar.node.terminal\",\"path\":\"src/node/terminal/SApp.js\"},{\"name\":\"SCommand\",\"namespace\":\"coffeekraken.sugar.node.terminal\",\"path\":\"src/node/terminal/SCommand.js\"},{\"name\":\"SHeader\",\"namespace\":\"coffeekraken.sugar.node.terminal\",\"path\":\"src/node/terminal/SHeader.js\"},{\"name\":\"SProcess\",\"namespace\":\"coffeekraken.sugar.node.terminal\",\"path\":\"src/node/terminal/SProcess.js\"},{\"name\":\"SSimpleApp\",\"namespace\":\"coffeekraken.sugar.node.terminal\",\"path\":\"src/node/terminal/SSimpleApp.js\"},{\"namespace\":\"coffeekraken.sugar.node.time\",\"path\":\"src/node/time/convert.js\"},{\"namespace\":\"coffeekraken.sugar.node.time\",\"path\":\"src/node/time/STimer.js\"},{\"namespace\":\"coffeekraken.sugar.node.time\",\"path\":\"src/node/time/wait.js\"},{\"namespace\":\"coffeekraken.sugar.node.time\",\"path\":\"src/node/time/convert.js\"},{\"namespace\":\"coffeekraken.sugar.node.time\",\"path\":\"src/node/time/STimer.js\"},{\"namespace\":\"coffeekraken.sugar.node.time\",\"path\":\"src/node/time/wait.js\"},{\"name\":\"objectProperties\",\"namespace\":\"coffeekraken.sugar.node.transition\",\"path\":\"src/node/transition/objectProperties.js\"},{\"name\":\"objectProperties\",\"namespace\":\"coffeekraken.sugar.node.transition\",\"path\":\"src/node/transition/objectProperties.js\"},{\"namespace\":\"coffeekraken.sugar.node.url\",\"path\":\"src/node/url/gravatarUrl.js\"},{\"namespace\":\"coffeekraken.sugar.node.url\",\"path\":\"src/node/url/parseSchema.js\"},{\"namespace\":\"coffeekraken.sugar.node.url\",\"path\":\"src/node/url/queryStringToObject.js\"},{\"namespace\":\"coffeekraken.sugar.node.url\",\"path\":\"src/node/url/SUrl.js\"},{\"namespace\":\"coffeekraken.sugar.node.url\",\"path\":\"src/node/url/gravatarUrl.js\"},{\"namespace\":\"coffeekraken.sugar.node.url\",\"path\":\"src/node/url/parseSchema.js\"},{\"namespace\":\"coffeekraken.sugar.node.url\",\"path\":\"src/node/url/queryStringToObject.js\"},{\"namespace\":\"coffeekraken.sugar.node.url\",\"path\":\"src/node/url/SUrl.js\"},{\"namespace\":\"coffeekraken.sugar.node.value\",\"path\":\"src/node/value/validateWithDefinitionObject.js\"},{\"namespace\":\"coffeekraken.sugar.node.value\",\"path\":\"src/node/value/validateWithDefinitionObject.js\"},{\"name\":\"color-hue\",\"namespace\":\"coffeekraken.sugar.scss.core.color\",\"path\":\"src/scss/_primitive/color/_color-hue.scss\"},{\"name\":\"color-lightness\",\"namespace\":\"coffeekraken.sugar.scss.core.color\",\"path\":\"src/scss/_primitive/color/_color-lightness.scss\"},{\"name\":\"color-opacity\",\"namespace\":\"coffeekraken.sugar.scss.core.color\",\"path\":\"src/scss/_primitive/color/_color-opacity.scss\"},{\"name\":\"color-saturation\",\"namespace\":\"coffeekraken.sugar.scss.core.color\",\"path\":\"src/scss/_primitive/color/_color-saturation.scss\"},{\"name\":\"color-transparentize\",\"namespace\":\"coffeekraken.sugar.scss.color\",\"path\":\"src/scss/_primitive/color/_color-transparentize.scss\"},{\"name\":\"color-hue\",\"namespace\":\"coffeekraken.sugar.scss.core.color\",\"path\":\"src/scss/_primitive/color/_color-hue.scss\"},{\"name\":\"color-lightness\",\"namespace\":\"coffeekraken.sugar.scss.core.color\",\"path\":\"src/scss/_primitive/color/_color-lightness.scss\"},{\"name\":\"color-opacity\",\"namespace\":\"coffeekraken.sugar.scss.core.color\",\"path\":\"src/scss/_primitive/color/_color-opacity.scss\"},{\"name\":\"color-saturation\",\"namespace\":\"coffeekraken.sugar.scss.core.color\",\"path\":\"src/scss/_primitive/color/_color-saturation.scss\"},{\"name\":\"color-transparentize\",\"namespace\":\"coffeekraken.sugar.scss.color\",\"path\":\"src/scss/_primitive/color/_color-transparentize.scss\"},{\"name\":\"list-append\",\"namespace\":\"coffeekraken.sugar.scss.list\",\"path\":\"src/scss/_primitive/list/_list-append.scss\"},{\"name\":\"list-first\",\"namespace\":\"coffeekraken.sugar.scss.list\",\"path\":\"src/scss/_primitive/list/_list-first.scss\"},{\"name\":\"list-implode\",\"namespace\":\"coffeekraken.sugar.scss.list\",\"path\":\"src/scss/_primitive/list/_list-implode.scss\"},{\"name\":\"list-index\",\"namespace\":\"coffeekraken.sugar.scss.list\",\"path\":\"src/scss/_primitive/list/_list-index.scss\"},{\"name\":\"list-join\",\"namespace\":\"coffeekraken.sugar.scss.list\",\"path\":\"src/scss/_primitive/list/_list-join.scss\"},{\"name\":\"list-last-nth\",\"namespace\":\"coffeekraken.sugar.scss.list\",\"path\":\"src/scss/_primitive/list/_list-last-nth.scss\"},{\"name\":\"list-length\",\"namespace\":\"coffeekraken.sugar.scss.list\",\"path\":\"src/scss/_primitive/list/_list-length.scss\"},{\"name\":\"list-nth\",\"namespace\":\"coffeekraken.sugar.scss.list\",\"path\":\"src/scss/_primitive/list/_list-nth.scss\"},{\"name\":\"list-pop\",\"namespace\":\"coffeekraken.sugar.scss.list\",\"path\":\"src/scss/_primitive/list/_list-pop.scss\"},{\"name\":\"list-prepend\",\"namespace\":\"coffeekraken.sugar.scss.list\",\"path\":\"src/scss/_primitive/list/_list-prepend.scss\"},{\"name\":\"list-remove-nth\",\"namespace\":\"coffeekraken.sugar.scss.list\",\"path\":\"src/scss/_primitive/list/_list-remove-nth.scss\"},{\"name\":\"list-search\",\"namespace\":\"coffeekraken.sugar.scss.list\",\"path\":\"src/scss/_primitive/list/_list-search.scss\"},{\"name\":\"list-set-nth\",\"namespace\":\"coffeekraken.sugar.scss.list\",\"path\":\"src/scss/_primitive/list/_list-set-nth.scss\"},{\"name\":\"list-append\",\"namespace\":\"coffeekraken.sugar.scss.list\",\"path\":\"src/scss/_primitive/list/_list-append.scss\"},{\"name\":\"list-first\",\"namespace\":\"coffeekraken.sugar.scss.list\",\"path\":\"src/scss/_primitive/list/_list-first.scss\"},{\"name\":\"list-implode\",\"namespace\":\"coffeekraken.sugar.scss.list\",\"path\":\"src/scss/_primitive/list/_list-implode.scss\"},{\"name\":\"list-index\",\"namespace\":\"coffeekraken.sugar.scss.list\",\"path\":\"src/scss/_primitive/list/_list-index.scss\"},{\"name\":\"list-join\",\"namespace\":\"coffeekraken.sugar.scss.list\",\"path\":\"src/scss/_primitive/list/_list-join.scss\"},{\"name\":\"list-last-nth\",\"namespace\":\"coffeekraken.sugar.scss.list\",\"path\":\"src/scss/_primitive/list/_list-last-nth.scss\"},{\"name\":\"list-length\",\"namespace\":\"coffeekraken.sugar.scss.list\",\"path\":\"src/scss/_primitive/list/_list-length.scss\"},{\"name\":\"list-nth\",\"namespace\":\"coffeekraken.sugar.scss.list\",\"path\":\"src/scss/_primitive/list/_list-nth.scss\"},{\"name\":\"list-pop\",\"namespace\":\"coffeekraken.sugar.scss.list\",\"path\":\"src/scss/_primitive/list/_list-pop.scss\"},{\"name\":\"list-prepend\",\"namespace\":\"coffeekraken.sugar.scss.list\",\"path\":\"src/scss/_primitive/list/_list-prepend.scss\"},{\"name\":\"list-remove-nth\",\"namespace\":\"coffeekraken.sugar.scss.list\",\"path\":\"src/scss/_primitive/list/_list-remove-nth.scss\"},{\"name\":\"list-search\",\"namespace\":\"coffeekraken.sugar.scss.list\",\"path\":\"src/scss/_primitive/list/_list-search.scss\"},{\"name\":\"list-set-nth\",\"namespace\":\"coffeekraken.sugar.scss.list\",\"path\":\"src/scss/_primitive/list/_list-set-nth.scss\"},{\"name\":\"map-deep-values\",\"namespace\":\"coffeekraken.sugar.scss.map\",\"path\":\"src/scss/_primitive/map/_map-deep-values.scss\"},{\"name\":\"map-extend\",\"namespace\":\"coffeekraken.sugar.scss.map\",\"path\":\"src/scss/_primitive/map/_map-extend.scss\"},{\"name\":\"map-filter-by-namespace\",\"namespace\":\"coffeekraken.sugar.scss.map\",\"path\":\"src/scss/_primitive/map/_map-filter-by-namespace.scss\"},{\"name\":\"map-get-or\",\"namespace\":\"coffeekraken.sugar.scss.map\",\"path\":\"src/scss/_primitive/map/_map-get-or.scss\"},{\"name\":\"map-get-path\",\"namespace\":\"coffeekraken.sugar.scss.map\",\"path\":\"src/scss/_primitive/map/_map-get-path.scss\"},{\"name\":\"map-get\",\"namespace\":\"coffeekraken.sugar.scss.map\",\"path\":\"src/scss/_primitive/map/_map-get.scss\"},{\"name\":\"map-has-key\",\"namespace\":\"coffeekraken.sugar.scss.map\",\"path\":\"src/scss/_primitive/map/_map-has-key.scss\"},{\"name\":\"map-keys\",\"namespace\":\"coffeekraken.sugar.scss.map\",\"path\":\"src/scss/_primitive/map/_map-keys.scss\"},{\"name\":\"map-merge\",\"namespace\":\"coffeekraken.sugar.scss.map\",\"path\":\"src/scss/_primitive/map/_map-merge.scss\"},{\"name\":\"map-remove\",\"namespace\":\"coffeekraken.sugar.scss.map\",\"path\":\"src/scss/_primitive/map/_map-remove.scss\"},{\"name\":\"map-set\",\"namespace\":\"coffeekraken.sugar.scss.map\",\"path\":\"src/scss/_primitive/map/_map-set.scss\"},{\"name\":\"map-deep-values\",\"namespace\":\"coffeekraken.sugar.scss.map\",\"path\":\"src/scss/_primitive/map/_map-deep-values.scss\"},{\"name\":\"map-extend\",\"namespace\":\"coffeekraken.sugar.scss.map\",\"path\":\"src/scss/_primitive/map/_map-extend.scss\"},{\"name\":\"map-filter-by-namespace\",\"namespace\":\"coffeekraken.sugar.scss.map\",\"path\":\"src/scss/_primitive/map/_map-filter-by-namespace.scss\"},{\"name\":\"map-get-or\",\"namespace\":\"coffeekraken.sugar.scss.map\",\"path\":\"src/scss/_primitive/map/_map-get-or.scss\"},{\"name\":\"map-get-path\",\"namespace\":\"coffeekraken.sugar.scss.map\",\"path\":\"src/scss/_primitive/map/_map-get-path.scss\"},{\"name\":\"map-get\",\"namespace\":\"coffeekraken.sugar.scss.map\",\"path\":\"src/scss/_primitive/map/_map-get.scss\"},{\"name\":\"map-has-key\",\"namespace\":\"coffeekraken.sugar.scss.map\",\"path\":\"src/scss/_primitive/map/_map-has-key.scss\"},{\"name\":\"map-keys\",\"namespace\":\"coffeekraken.sugar.scss.map\",\"path\":\"src/scss/_primitive/map/_map-keys.scss\"},{\"name\":\"map-merge\",\"namespace\":\"coffeekraken.sugar.scss.map\",\"path\":\"src/scss/_primitive/map/_map-merge.scss\"},{\"name\":\"map-remove\",\"namespace\":\"coffeekraken.sugar.scss.map\",\"path\":\"src/scss/_primitive/map/_map-remove.scss\"},{\"name\":\"map-set\",\"namespace\":\"coffeekraken.sugar.scss.map\",\"path\":\"src/scss/_primitive/map/_map-set.scss\"},{\"name\":\"math-abs\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-abs.scss\"},{\"name\":\"math-acos\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-acos.scss\"},{\"name\":\"math-asin\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-asin.scss\"},{\"name\":\"math-atan\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-atan.scss\"},{\"name\":\"math-ceil\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-ceil.scss\"},{\"name\":\"math-convert-angle\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-convert-angle.scss\"},{\"name\":\"math-cos\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-cos.scss\"},{\"name\":\"math-deg\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-deg.scss\"},{\"name\":\"math-even\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-even.scss\"},{\"name\":\"math-fact\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-fact.scss\"},{\"name\":\"math-grad\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-grad.scss\"},{\"name\":\"math-odd\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-odd.scss\"},{\"name\":\"math-percentage\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-percentage.scss\"},{\"name\":\"math-pow\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-pow.scss\"},{\"name\":\"math-rad\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-rad.scss\"},{\"name\":\"math-random\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-random.scss\"},{\"name\":\"math-round\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-round.scss\"},{\"name\":\"math-sin\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-sin.scss\"},{\"name\":\"math-sqrt\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-sqrt.scss\"},{\"name\":\"math-tan\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-tan.scss\"},{\"name\":\"math-turn\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-turn.scss\"},{\"name\":\"math-abs\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-abs.scss\"},{\"name\":\"math-acos\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-acos.scss\"},{\"name\":\"math-asin\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-asin.scss\"},{\"name\":\"math-atan\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-atan.scss\"},{\"name\":\"math-ceil\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-ceil.scss\"},{\"name\":\"math-convert-angle\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-convert-angle.scss\"},{\"name\":\"math-cos\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-cos.scss\"},{\"name\":\"math-deg\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-deg.scss\"},{\"name\":\"math-even\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-even.scss\"},{\"name\":\"math-fact\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-fact.scss\"},{\"name\":\"math-grad\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-grad.scss\"},{\"name\":\"math-odd\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-odd.scss\"},{\"name\":\"math-percentage\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-percentage.scss\"},{\"name\":\"math-pow\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-pow.scss\"},{\"name\":\"math-rad\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-rad.scss\"},{\"name\":\"math-random\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-random.scss\"},{\"name\":\"math-round\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-round.scss\"},{\"name\":\"math-sin\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-sin.scss\"},{\"name\":\"math-sqrt\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-sqrt.scss\"},{\"name\":\"math-tan\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-tan.scss\"},{\"name\":\"math-turn\",\"namespace\":\"coffeekraken.sugar.scss.math\",\"path\":\"src/scss/_primitive/math/_math-turn.scss\"},{\"name\":\"str-index\",\"namespace\":\"coffeekraken.sugar.scss.string\",\"path\":\"src/scss/_primitive/string/_str-index.scss\"},{\"name\":\"str-is-url\",\"namespace\":\"coffeekraken.sugar.scss.string\",\"path\":\"src/scss/_primitive/string/_str-is-url.scss\"},{\"name\":\"str-length\",\"namespace\":\"coffeekraken.sugar.scss.string\",\"path\":\"src/scss/_primitive/string/_str-length.scss\"},{\"name\":\"str-replace\",\"namespace\":\"coffeekraken.sugar.scss.string\",\"path\":\"src/scss/_primitive/string/_str-replace.scss\"},{\"name\":\"str-slice\",\"namespace\":\"coffeekraken.sugar.scss.string\",\"path\":\"src/scss/_primitive/string/_str-slice.scss\"},{\"name\":\"str-split\",\"namespace\":\"coffeekraken.sugar.scss.string\",\"path\":\"src/scss/_primitive/string/_str-split.scss\"},{\"name\":\"str-trim\",\"namespace\":\"coffeekraken.sugar.scss.string\",\"path\":\"src/scss/_primitive/string/_str-trim.scss\"},{\"name\":\"str-unique-id\",\"namespace\":\"coffeekraken.sugar.scss.string\",\"path\":\"src/scss/_primitive/string/_str-unique-id.scss\"},{\"name\":\"str-unquote\",\"namespace\":\"coffeekraken.sugar.scss.string\",\"path\":\"src/scss/_primitive/string/_str-unquote.scss\"},{\"name\":\"str-url-ext\",\"namespace\":\"coffeekraken.sugar.scss.string\",\"path\":\"src/scss/_primitive/string/_str-url-ext.scss\"},{\"name\":\"str-index\",\"namespace\":\"coffeekraken.sugar.scss.string\",\"path\":\"src/scss/_primitive/string/_str-index.scss\"},{\"name\":\"str-is-url\",\"namespace\":\"coffeekraken.sugar.scss.string\",\"path\":\"src/scss/_primitive/string/_str-is-url.scss\"},{\"name\":\"str-length\",\"namespace\":\"coffeekraken.sugar.scss.string\",\"path\":\"src/scss/_primitive/string/_str-length.scss\"},{\"name\":\"str-replace\",\"namespace\":\"coffeekraken.sugar.scss.string\",\"path\":\"src/scss/_primitive/string/_str-replace.scss\"},{\"name\":\"str-slice\",\"namespace\":\"coffeekraken.sugar.scss.string\",\"path\":\"src/scss/_primitive/string/_str-slice.scss\"},{\"name\":\"str-split\",\"namespace\":\"coffeekraken.sugar.scss.string\",\"path\":\"src/scss/_primitive/string/_str-split.scss\"},{\"name\":\"str-trim\",\"namespace\":\"coffeekraken.sugar.scss.string\",\"path\":\"src/scss/_primitive/string/_str-trim.scss\"},{\"name\":\"str-unique-id\",\"namespace\":\"coffeekraken.sugar.scss.string\",\"path\":\"src/scss/_primitive/string/_str-unique-id.scss\"},{\"name\":\"str-unquote\",\"namespace\":\"coffeekraken.sugar.scss.string\",\"path\":\"src/scss/_primitive/string/_str-unquote.scss\"},{\"name\":\"str-url-ext\",\"namespace\":\"coffeekraken.sugar.scss.string\",\"path\":\"src/scss/_primitive/string/_str-url-ext.scss\"},{\"name\":\"coffeekraken-logo\",\"namespace\":\"coffeekraken.sugar.scss.coffeekraken\",\"path\":\"src/scss/coffeekraken/_coffeekraken-logo.scss\"},{\"name\":\"coffeekraken-logo\",\"namespace\":\"coffeekraken.sugar.scss.coffeekraken\",\"path\":\"src/scss/coffeekraken/_coffeekraken-logo.scss\"},{\"namespace\":\"coffeekraken.sugar.\",\"path\":\"src/scss/core/_helper-classes.scss\"},{\"name\":\"init\",\"namespace\":\"coffeekraken.sugar.scss.core.mixin\",\"path\":\"src/scss/core/_init.scss\"},{\"name\":\"setup\",\"namespace\":\"coffeekraken.sugar.scss.core.mixin\",\"path\":\"src/scss/core/_setup.scss\"},{\"namespace\":\"coffeekraken.sugar.\",\"path\":\"src/scss/core/_helper-classes.scss\"},{\"name\":\"init\",\"namespace\":\"coffeekraken.sugar.scss.core.mixin\",\"path\":\"src/scss/core/_init.scss\"},{\"name\":\"setup\",\"namespace\":\"coffeekraken.sugar.scss.core.mixin\",\"path\":\"src/scss/core/_setup.scss\"},{\"name\":\"animation\",\"namespace\":\"coffeekraken.sugar.scss.core.mixin\",\"path\":\"src/scss/core/animation/_animation.scss\"},{\"name\":\"animation\",\"namespace\":\"coffeekraken.sugar.scss.core.mixin\",\"path\":\"src/scss/core/animation/_animation.scss\"},{\"name\":\"classes\",\"namespace\":\"coffeekraken.sugar.scss.core.class\",\"path\":\"src/scss/core/class/_classes.scss\"},{\"name\":\"init-classes\",\"namespace\":\"coffeekraken.sugar.scss.core.class\",\"path\":\"src/scss/core/class/_init-classes.scss\"},{\"name\":\"register-class\",\"namespace\":\"coffeekraken.sugar.scss.core.class\",\"path\":\"src/scss/core/class/_register-class.scss\"},{\"name\":\"classes\",\"namespace\":\"coffeekraken.sugar.scss.core.class\",\"path\":\"src/scss/core/class/_classes.scss\"},{\"name\":\"init-classes\",\"namespace\":\"coffeekraken.sugar.scss.core.class\",\"path\":\"src/scss/core/class/_init-classes.scss\"},{\"name\":\"register-class\",\"namespace\":\"coffeekraken.sugar.scss.core.class\",\"path\":\"src/scss/core/class/_register-class.scss\"},{\"name\":\"color-modifier\",\"namespace\":\"coffeekraken.sugar.scss.core.color\",\"path\":\"src/scss/core/color/_color-modifier.scss\"},{\"name\":\"color-schema\",\"namespace\":\"coffeekraken.sugar.scss.core.color\",\"path\":\"src/scss/core/color/_color-schema.scss\"},{\"name\":\"color\",\"namespace\":\"coffeekraken.sugar.scss.core.color\",\"path\":\"src/scss/core/color/_color.scss\"},{\"name\":\"docblock-colors\",\"namespace\":\"coffeekraken.sugar.scss.core.color\",\"path\":\"src/scss/core/color/_docblock-colors.scss\"},{\"name\":\"has-color\",\"namespace\":\"coffeekraken.sugar.scss.core.color\",\"path\":\"src/scss/core/color/_has-color.scss\"},{\"name\":\"color-modifier\",\"namespace\":\"coffeekraken.sugar.scss.core.color\",\"path\":\"src/scss/core/color/_color-modifier.scss\"},{\"name\":\"color-schema\",\"namespace\":\"coffeekraken.sugar.scss.core.color\",\"path\":\"src/scss/core/color/_color-schema.scss\"},{\"name\":\"color\",\"namespace\":\"coffeekraken.sugar.scss.core.color\",\"path\":\"src/scss/core/color/_color.scss\"},{\"name\":\"docblock-colors\",\"namespace\":\"coffeekraken.sugar.scss.core.color\",\"path\":\"src/scss/core/color/_docblock-colors.scss\"},{\"name\":\"has-color\",\"namespace\":\"coffeekraken.sugar.scss.core.color\",\"path\":\"src/scss/core/color/_has-color.scss\"},{\"name\":\"context\",\"namespace\":\"coffeekraken.sugar.scss.core.context\",\"path\":\"src/scss/core/context/_context-fn.scss\"},{\"name\":\"context\",\"namespace\":\"coffeekraken.sugar.scss.core.context\",\"path\":\"src/scss/core/context/_context-mx.scss\"},{\"name\":\"context-setup\",\"namespace\":\"coffeekraken.sugar.scss.core.context\",\"path\":\"src/scss/core/context/_context-setup.scss\"},{\"name\":\"context\",\"namespace\":\"coffeekraken.sugar.scss.core.context\",\"path\":\"src/scss/core/context/_context-fn.scss\"},{\"name\":\"context\",\"namespace\":\"coffeekraken.sugar.scss.core.context\",\"path\":\"src/scss/core/context/_context-mx.scss\"},{\"name\":\"context-setup\",\"namespace\":\"coffeekraken.sugar.scss.core.context\",\"path\":\"src/scss/core/context/_context-setup.scss\"},{\"name\":\"_check-property\",\"namespace\":\"coffeekraken.sugar.scss.core.dev\",\"path\":\"src/scss/core/dev/_check-property.scss\"},{\"name\":\"_get-property-name\",\"namespace\":\"coffeekraken.sugar.scss.core.dev\",\"path\":\"src/scss/core/dev/_get-property-name.scss\"},{\"name\":\"_get-property-type\",\"namespace\":\"coffeekraken.sugar.scss.core.dev\",\"path\":\"src/scss/core/dev/_get-property-type.scss\"},{\"name\":\"test-argument\",\"namespace\":\"coffeekraken.sugar.scss.core.dev\",\"path\":\"src/scss/core/dev/_test-argument.scss\"},{\"name\":\"_check-property\",\"namespace\":\"coffeekraken.sugar.scss.core.dev\",\"path\":\"src/scss/core/dev/_check-property.scss\"},{\"name\":\"_get-property-name\",\"namespace\":\"coffeekraken.sugar.scss.core.dev\",\"path\":\"src/scss/core/dev/_get-property-name.scss\"},{\"name\":\"_get-property-type\",\"namespace\":\"coffeekraken.sugar.scss.core.dev\",\"path\":\"src/scss/core/dev/_get-property-type.scss\"},{\"name\":\"test-argument\",\"namespace\":\"coffeekraken.sugar.scss.core.dev\",\"path\":\"src/scss/core/dev/_test-argument.scss\"},{\"name\":\"filter\",\"namespace\":\"coffeekraken.sugar.scss.core.filter\",\"path\":\"src/scss/core/filter/_filter-fn.scss\"},{\"name\":\"filter\",\"namespace\":\"coffeekraken.sugar.scss.core.filter\",\"path\":\"src/scss/core/filter/_filter-mx.scss\"},{\"name\":\"filter\",\"namespace\":\"coffeekraken.sugar.scss.core.filter\",\"path\":\"src/scss/core/filter/_filter-fn.scss\"},{\"name\":\"filter\",\"namespace\":\"coffeekraken.sugar.scss.core.filter\",\"path\":\"src/scss/core/filter/_filter-mx.scss\"},{\"name\":\"font-face\",\"namespace\":\"coffeekraken.sugar.scss.core.font\",\"path\":\"src/scss/core/font/_font-face.scss\"},{\"name\":\"font-family\",\"namespace\":\"coffeekraken.sugar.scss.core.font\",\"path\":\"src/scss/core/font/_font-family.scss\"},{\"name\":\"font\",\"namespace\":\"coffeekraken.sugar.scss.core.font\",\"path\":\"src/scss/core/font/_font-fn.scss\"},{\"name\":\"font\",\"namespace\":\"coffeekraken.sugar.scss.core.font\",\"path\":\"src/scss/core/font/_font-mx.scss\"},{\"name\":\"font-face\",\"namespace\":\"coffeekraken.sugar.scss.core.font\",\"path\":\"src/scss/core/font/_font-face.scss\"},{\"name\":\"font-family\",\"namespace\":\"coffeekraken.sugar.scss.core.font\",\"path\":\"src/scss/core/font/_font-family.scss\"},{\"name\":\"font\",\"namespace\":\"coffeekraken.sugar.scss.core.font\",\"path\":\"src/scss/core/font/_font-fn.scss\"},{\"name\":\"font\",\"namespace\":\"coffeekraken.sugar.scss.core.font\",\"path\":\"src/scss/core/font/_font-mx.scss\"},{\"name\":\"lnf\",\"namespace\":\"coffeekraken.sugar.scss.core.look-and-feel\",\"path\":\"src/scss/core/look-and-feel/_lnf.scss\"},{\"name\":\"look-and-feel\",\"namespace\":\"coffeekraken.sugar.scss.core.look-and-feel\",\"path\":\"src/scss/core/look-and-feel/_look-and-feel.scss\"},{\"name\":\"lnf\",\"namespace\":\"coffeekraken.sugar.scss.core.look-and-feel\",\"path\":\"src/scss/core/look-and-feel/_lnf.scss\"},{\"name\":\"look-and-feel\",\"namespace\":\"coffeekraken.sugar.scss.core.look-and-feel\",\"path\":\"src/scss/core/look-and-feel/_look-and-feel.scss\"},{\"name\":\"dash-to-map\",\"namespace\":\"coffeekraken.sugar.scss.core.map\",\"path\":\"src/scss/core/map/_dash-to-map.scss\"},{\"name\":\"filter-map\",\"namespace\":\"coffeekraken.sugar.scss.core.map\",\"path\":\"src/scss/core/map/_filter-map.scss\"},{\"name\":\"dash-to-map\",\"namespace\":\"coffeekraken.sugar.scss.core.map\",\"path\":\"src/scss/core/map/_dash-to-map.scss\"},{\"name\":\"filter-map\",\"namespace\":\"coffeekraken.sugar.scss.core.map\",\"path\":\"src/scss/core/map/_filter-map.scss\"},{\"name\":\"render-round-even\",\"namespace\":\"coffeekraken.sugar.scss.core.math\",\"path\":\"src/scss/core/math/_render-round-even.scss\"},{\"name\":\"render-round-odd\",\"namespace\":\"coffeekraken.sugar.scss.core.math\",\"path\":\"src/scss/core/math/_render-round-odd.scss\"},{\"name\":\"render-round\",\"namespace\":\"coffeekraken.sugar.scss.core.math\",\"path\":\"src/scss/core/math/_render-round.scss\"},{\"name\":\"render-round-even\",\"namespace\":\"coffeekraken.sugar.scss.core.math\",\"path\":\"src/scss/core/math/_render-round-even.scss\"},{\"name\":\"render-round-odd\",\"namespace\":\"coffeekraken.sugar.scss.core.math\",\"path\":\"src/scss/core/math/_render-round-odd.scss\"},{\"name\":\"render-round\",\"namespace\":\"coffeekraken.sugar.scss.core.math\",\"path\":\"src/scss/core/math/_render-round.scss\"},{\"name\":\"modular-scale\",\"namespace\":\"coffeekraken.sugar.scss.core.modular-scale\",\"path\":\"src/scss/core/modular-scale/_modular-scale.scss\"},{\"name\":\"modular-scale\",\"namespace\":\"coffeekraken.sugar.scss.core.modular-scale\",\"path\":\"src/scss/core/modular-scale/_modular-scale.scss\"},{\"name\":\"setting\",\"namespace\":\"coffeekraken.sugar.scss.core.setting\",\"path\":\"src/scss/core/setting/_setting.scss\"},{\"name\":\"setting\",\"namespace\":\"coffeekraken.sugar.scss.core.setting\",\"path\":\"src/scss/core/setting/_setting.scss\"},{\"name\":\"interpolate\",\"namespace\":\"coffeekraken.sugar.scss.core.size\",\"path\":\"src/scss/core/size/_interpolate.scss\"},{\"name\":\"interpolate\",\"namespace\":\"coffeekraken.sugar.scss.core.size\",\"path\":\"src/scss/core/size/_interpolate.scss\"},{\"name\":\"space\",\"namespace\":\"coffeekraken.sugar.scss.core.space\",\"path\":\"src/scss/core/space/_space.scss\"},{\"name\":\"space\",\"namespace\":\"coffeekraken.sugar.scss.core.space\",\"path\":\"src/scss/core/space/_space.scss\"},{\"name\":\"parse-properties\",\"namespace\":\"coffeekraken.sugar.scss.core.string\",\"path\":\"src/scss/core/string/_parse-properties.scss\"},{\"name\":\"replace-tokens\",\"namespace\":\"coffeekraken.sugar.scss.core.string\",\"path\":\"src/scss/core/string/_replace-tokens.scss\"},{\"name\":\"selector\",\"namespace\":\"coffeekraken.sugar.scss.core.string\",\"path\":\"src/scss/core/string/_selector.scss\"},{\"name\":\"parse-properties\",\"namespace\":\"coffeekraken.sugar.scss.core.string\",\"path\":\"src/scss/core/string/_parse-properties.scss\"},{\"name\":\"replace-tokens\",\"namespace\":\"coffeekraken.sugar.scss.core.string\",\"path\":\"src/scss/core/string/_replace-tokens.scss\"},{\"name\":\"selector\",\"namespace\":\"coffeekraken.sugar.scss.core.string\",\"path\":\"src/scss/core/string/_selector.scss\"},{\"name\":\"transition\",\"namespace\":\"coffeekraken.sugar.scss.core.transition\",\"path\":\"src/scss/core/transition/_transition-fn.scss\"},{\"name\":\"transition-map\",\"namespace\":\"coffeekraken.sugar.scss.core.transition\",\"path\":\"src/scss/core/transition/_transition-map.scss\"},{\"name\":\"transition\",\"namespace\":\"coffeekraken.sugar.scss.core.transition\",\"path\":\"src/scss/core/transition/_transition-mx.scss\"},{\"name\":\"transition\",\"namespace\":\"coffeekraken.sugar.scss.core.transition\",\"path\":\"src/scss/core/transition/_transition-fn.scss\"},{\"name\":\"transition-map\",\"namespace\":\"coffeekraken.sugar.scss.core.transition\",\"path\":\"src/scss/core/transition/_transition-map.scss\"},{\"name\":\"transition\",\"namespace\":\"coffeekraken.sugar.scss.core.transition\",\"path\":\"src/scss/core/transition/_transition-mx.scss\"},{\"name\":\"show-vertical-rhythm\",\"namespace\":\"coffeekraken.sugar.scss.core.typography\",\"path\":\"src/scss/core/typography/_show-vertical-rhythm.scss\"},{\"name\":\"text-format-class\",\"namespace\":\"coffeekraken.sugar.scss.core.typography\",\"path\":\"src/scss/core/typography/_text-format-class.scss\"},{\"name\":\"text-format-scope\",\"namespace\":\"coffeekraken.sugar.scss.core.typography\",\"path\":\"src/scss/core/typography/_text-format-scope.scss\"},{\"name\":\"vertical-rhythm-class\",\"namespace\":\"coffeekraken.sugar.scss.core.typography\",\"path\":\"src/scss/core/typography/_vertical-rhythm-class.scss\"},{\"name\":\"vertical-rhythm-scope\",\"namespace\":\"coffeekraken.sugar.scss.core.typography\",\"path\":\"src/scss/core/typography/_vertical-rhythm-scope.scss\"},{\"name\":\"show-vertical-rhythm\",\"namespace\":\"coffeekraken.sugar.scss.core.typography\",\"path\":\"src/scss/core/typography/_show-vertical-rhythm.scss\"},{\"name\":\"text-format-class\",\"namespace\":\"coffeekraken.sugar.scss.core.typography\",\"path\":\"src/scss/core/typography/_text-format-class.scss\"},{\"name\":\"text-format-scope\",\"namespace\":\"coffeekraken.sugar.scss.core.typography\",\"path\":\"src/scss/core/typography/_text-format-scope.scss\"},{\"name\":\"vertical-rhythm-class\",\"namespace\":\"coffeekraken.sugar.scss.core.typography\",\"path\":\"src/scss/core/typography/_vertical-rhythm-class.scss\"},{\"name\":\"vertical-rhythm-scope\",\"namespace\":\"coffeekraken.sugar.scss.core.typography\",\"path\":\"src/scss/core/typography/_vertical-rhythm-scope.scss\"},{\"name\":\"effect-bubble\",\"namespace\":\"coffeekraken.sugar.scss.effect\",\"path\":\"src/scss/effect/_effect-bubble.scss\"},{\"name\":\"effect-depth\",\"namespace\":\"coffeekraken.sugar.scss.effect\",\"path\":\"src/scss/effect/_effect-depth.scss\"},{\"name\":\"effect-hey\",\"namespace\":\"coffeekraken.sugar.scss.effect\",\"path\":\"src/scss/effect/_effect-hey.scss\"},{\"name\":\"effect-long-shadow\",\"namespace\":\"coffeekraken.sugar.scss.effect\",\"path\":\"src/scss/effect/_effect-long-shadow.scss\"},{\"name\":\"effect-side-lined\",\"namespace\":\"coffeekraken.sugar.scss.effect\",\"path\":\"src/scss/effect/_effect-side-lined.scss\"},{\"name\":\"effect-bubble\",\"namespace\":\"coffeekraken.sugar.scss.effect\",\"path\":\"src/scss/effect/_effect-bubble.scss\"},{\"name\":\"effect-depth\",\"namespace\":\"coffeekraken.sugar.scss.effect\",\"path\":\"src/scss/effect/_effect-depth.scss\"},{\"name\":\"effect-hey\",\"namespace\":\"coffeekraken.sugar.scss.effect\",\"path\":\"src/scss/effect/_effect-hey.scss\"},{\"name\":\"effect-long-shadow\",\"namespace\":\"coffeekraken.sugar.scss.effect\",\"path\":\"src/scss/effect/_effect-long-shadow.scss\"},{\"name\":\"effect-side-lined\",\"namespace\":\"coffeekraken.sugar.scss.effect\",\"path\":\"src/scss/effect/_effect-side-lined.scss\"},{\"name\":\"input-placeholder\",\"namespace\":\"coffeekraken.sugar.scss.form\",\"path\":\"src/scss/form/_input-placeholder.scss\"},{\"name\":\"input-placeholder\",\"namespace\":\"coffeekraken.sugar.scss.form\",\"path\":\"src/scss/form/_input-placeholder.scss\"},{\"name\":\"format-marked\",\"namespace\":\"coffeekraken.sugar.scss.format\",\"path\":\"src/scss/format/_marked.scss\"},{\"name\":\"format-marked\",\"namespace\":\"coffeekraken.sugar.scss.format\",\"path\":\"src/scss/format/_marked.scss\"},{\"name\":\"border-radius\",\"namespace\":\"coffeekraken.sugar.scss.helper\",\"path\":\"src/scss/helper/_border-radius.scss\"},{\"name\":\"center-block\",\"namespace\":\"coffeekraken.sugar.scss.helper\",\"path\":\"src/scss/helper/_center-block.scss\"},{\"name\":\"clearfix\",\"namespace\":\"coffeekraken.sugar.scss.helper\",\"path\":\"src/scss/helper/_clearfix.scss\"},{\"name\":\"corner\",\"namespace\":\"coffeekraken.sugar.scss.helper\",\"path\":\"src/scss/helper/_corner.scss\"},{\"name\":\"fit\",\"namespace\":\"coffeekraken.sugar.scss.helper\",\"path\":\"src/scss/helper/_fit.scss\"},{\"name\":\"is\",\"namespace\":\"coffeekraken.sugar.scss.helper\",\"path\":\"src/scss/helper/_is.scss\"},{\"name\":\"normalize\",\"namespace\":\"coffeekraken.sugar.scss.helper\",\"path\":\"src/scss/helper/_normalize.scss\"},{\"name\":\"position\",\"namespace\":\"coffeekraken.sugar.scss.helper\",\"path\":\"src/scss/helper/_position.scss\"},{\"name\":\"reset\",\"namespace\":\"coffeekraken.sugar.scss.helper\",\"path\":\"src/scss/helper/_reset.scss\"},{\"name\":\"sanitize\",\"namespace\":\"coffeekraken.sugar.scss.helper\",\"path\":\"src/scss/helper/_sanitize.scss\"},{\"name\":\"size\",\"namespace\":\"coffeekraken.sugar.scss.helper\",\"path\":\"src/scss/helper/_size.scss\"},{\"name\":\"translate\",\"namespace\":\"coffeekraken.sugar.scss.helper\",\"path\":\"src/scss/helper/_translate.scss\"},{\"name\":\"type-of\",\"namespace\":\"coffeekraken.sugar.scss.helper\",\"path\":\"src/scss/helper/_type-of.scss\"},{\"name\":\"vertical-aligner\",\"namespace\":\"coffeekraken.sugar.scss.helper\",\"path\":\"src/scss/helper/_vertical-aligner.scss\"},{\"name\":\"visually-hidden\",\"namespace\":\"coffeekraken.sugar.scss.helper\",\"path\":\"src/scss/helper/_visually-hidden.scss\"},{\"name\":\"border-radius\",\"namespace\":\"coffeekraken.sugar.scss.helper\",\"path\":\"src/scss/helper/_border-radius.scss\"},{\"name\":\"center-block\",\"namespace\":\"coffeekraken.sugar.scss.helper\",\"path\":\"src/scss/helper/_center-block.scss\"},{\"name\":\"clearfix\",\"namespace\":\"coffeekraken.sugar.scss.helper\",\"path\":\"src/scss/helper/_clearfix.scss\"},{\"name\":\"corner\",\"namespace\":\"coffeekraken.sugar.scss.helper\",\"path\":\"src/scss/helper/_corner.scss\"},{\"name\":\"fit\",\"namespace\":\"coffeekraken.sugar.scss.helper\",\"path\":\"src/scss/helper/_fit.scss\"},{\"name\":\"is\",\"namespace\":\"coffeekraken.sugar.scss.helper\",\"path\":\"src/scss/helper/_is.scss\"},{\"name\":\"normalize\",\"namespace\":\"coffeekraken.sugar.scss.helper\",\"path\":\"src/scss/helper/_normalize.scss\"},{\"name\":\"position\",\"namespace\":\"coffeekraken.sugar.scss.helper\",\"path\":\"src/scss/helper/_position.scss\"},{\"name\":\"reset\",\"namespace\":\"coffeekraken.sugar.scss.helper\",\"path\":\"src/scss/helper/_reset.scss\"},{\"name\":\"sanitize\",\"namespace\":\"coffeekraken.sugar.scss.helper\",\"path\":\"src/scss/helper/_sanitize.scss\"},{\"name\":\"size\",\"namespace\":\"coffeekraken.sugar.scss.helper\",\"path\":\"src/scss/helper/_size.scss\"},{\"name\":\"translate\",\"namespace\":\"coffeekraken.sugar.scss.helper\",\"path\":\"src/scss/helper/_translate.scss\"},{\"name\":\"type-of\",\"namespace\":\"coffeekraken.sugar.scss.helper\",\"path\":\"src/scss/helper/_type-of.scss\"},{\"name\":\"vertical-aligner\",\"namespace\":\"coffeekraken.sugar.scss.helper\",\"path\":\"src/scss/helper/_vertical-aligner.scss\"},{\"name\":\"visually-hidden\",\"namespace\":\"coffeekraken.sugar.scss.helper\",\"path\":\"src/scss/helper/_visually-hidden.scss\"},{\"name\":\"icon\",\"namespace\":\"coffeekraken.sugar.scss.icon\",\"path\":\"src/scss/icon/_icon.scss\"},{\"name\":\"icons\",\"namespace\":\"coffeekraken.sugar.scss.icon\",\"path\":\"src/scss/icon/_icons.scss\"},{\"name\":\"register-svg-icon\",\"namespace\":\"coffeekraken.sugar.scss.icon\",\"path\":\"src/scss/icon/_register-svg-icon.scss\"},{\"name\":\"icon\",\"namespace\":\"coffeekraken.sugar.scss.icon\",\"path\":\"src/scss/icon/_icon.scss\"},{\"name\":\"icons\",\"namespace\":\"coffeekraken.sugar.scss.icon\",\"path\":\"src/scss/icon/_icons.scss\"},{\"name\":\"register-svg-icon\",\"namespace\":\"coffeekraken.sugar.scss.icon\",\"path\":\"src/scss/icon/_register-svg-icon.scss\"},{\"name\":\"background\",\"namespace\":\"coffeekraken.sugar.scss.image\",\"path\":\"src/scss/image/_background.scss\"},{\"name\":\"image-rendering\",\"namespace\":\"coffeekraken.sugar.scss.image\",\"path\":\"src/scss/image/_image-rendering.scss\"},{\"name\":\"background\",\"namespace\":\"coffeekraken.sugar.scss.image\",\"path\":\"src/scss/image/_background.scss\"},{\"name\":\"image-rendering\",\"namespace\":\"coffeekraken.sugar.scss.image\",\"path\":\"src/scss/image/_image-rendering.scss\"},{\"name\":\"columns\",\"namespace\":\"coffeekraken.sugar.scss.layout\",\"path\":\"src/scss/layout/_columns.scss\"},{\"name\":\"ratio\",\"namespace\":\"coffeekraken.sugar.scss.ratio\",\"path\":\"src/scss/layout/_ratio.scss\"},{\"name\":\"columns\",\"namespace\":\"coffeekraken.sugar.scss.layout\",\"path\":\"src/scss/layout/_columns.scss\"},{\"name\":\"ratio\",\"namespace\":\"coffeekraken.sugar.scss.ratio\",\"path\":\"src/scss/layout/_ratio.scss\"},{\"name\":\"list-bullet\",\"namespace\":\"coffeekraken.sugar.scss.list\",\"path\":\"src/scss/list/_list-bullet.scss\"},{\"name\":\"list-start\",\"namespace\":\"coffeekraken.sugar.scss.list\",\"path\":\"src/scss/list/_list-start.scss\"},{\"name\":\"list-bullet\",\"namespace\":\"coffeekraken.sugar.scss.list\",\"path\":\"src/scss/list/_list-bullet.scss\"},{\"name\":\"list-start\",\"namespace\":\"coffeekraken.sugar.scss.list\",\"path\":\"src/scss/list/_list-start.scss\"},{\"name\":\"loader-bars\",\"namespace\":\"coffeekraken.sugar.scss.loader\",\"path\":\"src/scss/loader/_loader-bars.scss\"},{\"name\":\"loader-circle\",\"namespace\":\"coffeekraken.sugar.scss.loader\",\"path\":\"src/scss/loader/_loader-circle.scss\"},{\"name\":\"loader-couch-potato\",\"namespace\":\"coffeekraken.sugar.scss.loader\",\"path\":\"src/scss/loader/_loader-couch-potato.scss\"},{\"name\":\"loader-flip-ball\",\"namespace\":\"coffeekraken.sugar.scss.loader\",\"path\":\"src/scss/loader/_loader-flip-ball.scss\"},{\"name\":\"loader-grid\",\"namespace\":\"coffeekraken.sugar.scss.loader\",\"path\":\"src/scss/loader/_loader-grid.scss\"},{\"name\":\"loader-radial\",\"namespace\":\"coffeekraken.sugar.scss.loader\",\"path\":\"src/scss/loader/_loader-radial.scss\"},{\"name\":\"loader-spinner\",\"namespace\":\"coffeekraken.sugar.scss.loader\",\"path\":\"src/scss/loader/_loader-spinner.scss\"},{\"name\":\"loader-bars\",\"namespace\":\"coffeekraken.sugar.scss.loader\",\"path\":\"src/scss/loader/_loader-bars.scss\"},{\"name\":\"loader-circle\",\"namespace\":\"coffeekraken.sugar.scss.loader\",\"path\":\"src/scss/loader/_loader-circle.scss\"},{\"name\":\"loader-couch-potato\",\"namespace\":\"coffeekraken.sugar.scss.loader\",\"path\":\"src/scss/loader/_loader-couch-potato.scss\"},{\"name\":\"loader-flip-ball\",\"namespace\":\"coffeekraken.sugar.scss.loader\",\"path\":\"src/scss/loader/_loader-flip-ball.scss\"},{\"name\":\"loader-grid\",\"namespace\":\"coffeekraken.sugar.scss.loader\",\"path\":\"src/scss/loader/_loader-grid.scss\"},{\"name\":\"loader-radial\",\"namespace\":\"coffeekraken.sugar.scss.loader\",\"path\":\"src/scss/loader/_loader-radial.scss\"},{\"name\":\"loader-spinner\",\"namespace\":\"coffeekraken.sugar.scss.loader\",\"path\":\"src/scss/loader/_loader-spinner.scss\"},{\"name\":\"to-base64-url\",\"namespace\":\"coffeekraken.sugar.scss.meta\",\"path\":\"src/scss/meta/_to-base64-url.scss\"},{\"name\":\"to-base64\",\"namespace\":\"coffeekraken.sugar.scss.meta\",\"path\":\"src/scss/meta/_to-base64.scss\"},{\"name\":\"to-base64-url\",\"namespace\":\"coffeekraken.sugar.scss.meta\",\"path\":\"src/scss/meta/_to-base64-url.scss\"},{\"name\":\"to-base64\",\"namespace\":\"coffeekraken.sugar.scss.meta\",\"path\":\"src/scss/meta/_to-base64.scss\"},{\"name\":\"media\",\"namespace\":\"coffeekraken.sugar.scss.responsive\",\"path\":\"src/scss/responsive/_media.scss\"},{\"name\":\"media\",\"namespace\":\"coffeekraken.sugar.scss.responsive\",\"path\":\"src/scss/responsive/_media.scss\"},{\"name\":\"round-overflow\",\"namespace\":\"coffeekraken.sugar.scss.shape\",\"path\":\"src/scss/shape/_round-overflow.scss\"},{\"name\":\"triangle\",\"namespace\":\"coffeekraken.sugar.scss.shape\",\"path\":\"src/scss/shape/_triangle.scss\"},{\"name\":\"round-overflow\",\"namespace\":\"coffeekraken.sugar.scss.shape\",\"path\":\"src/scss/shape/_round-overflow.scss\"},{\"name\":\"triangle\",\"namespace\":\"coffeekraken.sugar.scss.shape\",\"path\":\"src/scss/shape/_triangle.scss\"},{\"name\":\"rhythm-width\",\"namespace\":\"coffeekraken.sugar.scss.typography\",\"path\":\"src/scss/typography/_rhythm-width-fn.scss\"},{\"name\":\"rhythm-width\",\"namespace\":\"coffeekraken.sugar.scss.typography\",\"path\":\"src/scss/typography/_rhythm-width-mx.scss\"},{\"name\":\"selection\",\"namespace\":\"coffeekraken.sugar.scss.typography\",\"path\":\"src/scss/typography/_selection.scss\"},{\"name\":\"text-hide\",\"namespace\":\"coffeekraken.sugar.scss.typography\",\"path\":\"src/scss/typography/_text-hide.scss\"},{\"name\":\"text-truncate\",\"namespace\":\"coffeekraken.sugar.scss.typography\",\"path\":\"src/scss/typography/_text-truncate.scss\"},{\"name\":\"rhythm-width\",\"namespace\":\"coffeekraken.sugar.scss.typography\",\"path\":\"src/scss/typography/_rhythm-width-fn.scss\"},{\"name\":\"rhythm-width\",\"namespace\":\"coffeekraken.sugar.scss.typography\",\"path\":\"src/scss/typography/_rhythm-width-mx.scss\"},{\"name\":\"selection\",\"namespace\":\"coffeekraken.sugar.scss.typography\",\"path\":\"src/scss/typography/_selection.scss\"},{\"name\":\"text-hide\",\"namespace\":\"coffeekraken.sugar.scss.typography\",\"path\":\"src/scss/typography/_text-hide.scss\"},{\"name\":\"text-truncate\",\"namespace\":\"coffeekraken.sugar.scss.typography\",\"path\":\"src/scss/typography/_text-truncate.scss\"},{\"name\":\"convert\",\"namespace\":\"coffeekraken.sugar.scss.unit\",\"path\":\"src/scss/unit/_convert.scss\"},{\"name\":\"is-unitless\",\"namespace\":\"coffeekraken.sugar.scss.unit\",\"path\":\"src/scss/unit/_is-unitless.scss\"},{\"name\":\"strip-units\",\"namespace\":\"coffeekraken.sugar.scss.unit\",\"path\":\"src/scss/unit/_strip-units.scss\"},{\"name\":\"to-em\",\"namespace\":\"coffeekraken.sugar.scss.unit\",\"path\":\"src/scss/unit/_to-em.scss\"},{\"name\":\"to-percent\",\"namespace\":\"coffeekraken.sugar.scss.unit\",\"path\":\"src/scss/unit/_to-percent.scss\"},{\"name\":\"to-pt\",\"namespace\":\"coffeekraken.sugar.scss.unit\",\"path\":\"src/scss/unit/_to-pt.scss\"},{\"name\":\"to-px\",\"namespace\":\"coffeekraken.sugar.scss.unit\",\"path\":\"src/scss/unit/_to-px.scss\"},{\"name\":\"to-rem\",\"namespace\":\"coffeekraken.sugar.scss.unit\",\"path\":\"src/scss/unit/_to-rem.scss\"},{\"name\":\"unit\",\"namespace\":\"coffeekraken.sugar.scss.unit\",\"path\":\"src/scss/unit/_unit.scss\"},{\"name\":\"convert\",\"namespace\":\"coffeekraken.sugar.scss.unit\",\"path\":\"src/scss/unit/_convert.scss\"},{\"name\":\"is-unitless\",\"namespace\":\"coffeekraken.sugar.scss.unit\",\"path\":\"src/scss/unit/_is-unitless.scss\"},{\"name\":\"strip-units\",\"namespace\":\"coffeekraken.sugar.scss.unit\",\"path\":\"src/scss/unit/_strip-units.scss\"},{\"name\":\"to-em\",\"namespace\":\"coffeekraken.sugar.scss.unit\",\"path\":\"src/scss/unit/_to-em.scss\"},{\"name\":\"to-percent\",\"namespace\":\"coffeekraken.sugar.scss.unit\",\"path\":\"src/scss/unit/_to-percent.scss\"},{\"name\":\"to-pt\",\"namespace\":\"coffeekraken.sugar.scss.unit\",\"path\":\"src/scss/unit/_to-pt.scss\"},{\"name\":\"to-px\",\"namespace\":\"coffeekraken.sugar.scss.unit\",\"path\":\"src/scss/unit/_to-px.scss\"},{\"name\":\"to-rem\",\"namespace\":\"coffeekraken.sugar.scss.unit\",\"path\":\"src/scss/unit/_to-rem.scss\"},{\"name\":\"unit\",\"namespace\":\"coffeekraken.sugar.scss.unit\",\"path\":\"src/scss/unit/_unit.scss\"},{\"name\":\"border-map\",\"namespace\":\"coffeekraken.sugar.scss.util\",\"path\":\"src/scss/util/_border-map.scss\"},{\"name\":\"columns-util\",\"namespace\":\"coffeekraken.sugar.scss.util\",\"path\":\"src/scss/util/_columns-map.scss\"},{\"name\":\"margin-map\",\"namespace\":\"coffeekraken.sugar.scss.util\",\"path\":\"src/scss/util/_margin-map.scss\"},{\"name\":\"position-map\",\"namespace\":\"coffeekraken.sugar.scss.util\",\"path\":\"src/scss/util/_position-map.scss\"},{\"name\":\"translate-map\",\"namespace\":\"coffeekraken.sugar.scss.util\",\"path\":\"src/scss/util/_translate-map.scss\"},{\"name\":\"border-map\",\"namespace\":\"coffeekraken.sugar.scss.util\",\"path\":\"src/scss/util/_border-map.scss\"},{\"name\":\"columns-util\",\"namespace\":\"coffeekraken.sugar.scss.util\",\"path\":\"src/scss/util/_columns-map.scss\"},{\"name\":\"margin-map\",\"namespace\":\"coffeekraken.sugar.scss.util\",\"path\":\"src/scss/util/_margin-map.scss\"},{\"name\":\"position-map\",\"namespace\":\"coffeekraken.sugar.scss.util\",\"path\":\"src/scss/util/_position-map.scss\"},{\"name\":\"translate-map\",\"namespace\":\"coffeekraken.sugar.scss.util\",\"path\":\"src/scss/util/_translate-map.scss\"}]");
+
+/***/ }),
+
 /***/ "./src/js/index.js":
 /*!*************************!*\
   !*** ./src/js/index.js ***!
@@ -32462,13 +33235,55 @@ module.exports = function(module) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _coffeekraken_sugar_js_webcomponent_register__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @coffeekraken/sugar/js/webcomponent/register */ "../../util/sugar/js/webcomponent/register.js");
-/* harmony import */ var _coffeekraken_sugar_js_webcomponent_register__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_coffeekraken_sugar_js_webcomponent_register__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _coffeekraken_sugar_js_event_on__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @coffeekraken/sugar/js/event/on */ "../../util/sugar/js/event/on.js");
+/* harmony import */ var _coffeekraken_sugar_js_event_on__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_coffeekraken_sugar_js_event_on__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _data_docMap_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../data/docMap.json */ "./src/data/docMap.json");
+var _data_docMap_json__WEBPACK_IMPORTED_MODULE_1___namespace = /*#__PURE__*/__webpack_require__.t(/*! ../data/docMap.json */ "./src/data/docMap.json", 1);
+/* harmony import */ var _scss_index_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../scss/index.scss */ "./src/scss/index.scss");
+/* harmony import */ var _scss_index_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_scss_index_scss__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _coffeekraken_sugar_js_webcomponent_register__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @coffeekraken/sugar/js/webcomponent/register */ "../../util/sugar/js/webcomponent/register.js");
+/* harmony import */ var _coffeekraken_sugar_js_webcomponent_register__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_coffeekraken_sugar_js_webcomponent_register__WEBPACK_IMPORTED_MODULE_3__);
+function _templateObject2() {
+  var data = _taggedTemplateLiteral(["\n              <li class=\"", "__list-item\">", "</li>\n            "]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n      ", "\n      <ul class=\"", "__list\">\n        ", "\n      </ul>\n    "]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
-class SFiltrableInputWebComponent extends Object(_coffeekraken_sugar_js_webcomponent_register__WEBPACK_IMPORTED_MODULE_0__["SLitHtmlWebComponent"])(HTMLInputElement) {
+
+
+
+_coffeekraken_sugar_js_event_on__WEBPACK_IMPORTED_MODULE_0___default()('s-filtrable-input.attach', comp => {
+  // rework the items
+  var itemsArray = _data_docMap_json__WEBPACK_IMPORTED_MODULE_1__.map(item => {
+    return {
+      name: item.path
+    };
+  });
+
+  comp.prop('items', itemsArray);
+});
+
+class SFiltrableInputWebComponent extends Object(_coffeekraken_sugar_js_webcomponent_register__WEBPACK_IMPORTED_MODULE_3__["SLitHtmlWebComponent"])(HTMLInputElement) {
   /**
    * @name          constructor
    * @type          Function
@@ -32480,7 +33295,18 @@ class SFiltrableInputWebComponent extends Object(_coffeekraken_sugar_js_webcompo
    */
   constructor() {
     var settings = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-    super(settings);
+    super(settings); // this.addEventListener('input', (e) => {
+    //   console.log('event', e);
+    // });
+
+    setTimeout(() => {
+      this._props.items.value.push({
+        name: 'Hello world'
+      });
+    }, 2000);
+    setTimeout(() => {
+      this._props.items.value.pop();
+    }, 4000);
   }
 
 }
@@ -32489,15 +33315,53 @@ _defineProperty(SFiltrableInputWebComponent, "props", {
   items: {
     type: 'Array<Object>',
     required: true,
+    physical: false,
+    default: [],
+    watch: true
+  },
+  loading: {
+    type: 'Boolean',
+    required: false,
     physical: true,
-    default: [{
-      name: 'hello'
-    }],
+    default: false,
     watch: true
   }
 });
 
-Object(_coffeekraken_sugar_js_webcomponent_register__WEBPACK_IMPORTED_MODULE_0__["define"])('SFiltrableInput', SFiltrableInputWebComponent, {});
+_defineProperty(SFiltrableInputWebComponent, "template", (props, component, html) => {
+  return html(_templateObject(), component.$node, component.dashName, props.items.value.map(item => html(_templateObject2(), component.dashName, item.name)));
+});
+
+Object(_coffeekraken_sugar_js_webcomponent_register__WEBPACK_IMPORTED_MODULE_3__["define"])('SFiltrableInput', SFiltrableInputWebComponent, {});
+
+/***/ }),
+
+/***/ "./src/scss/index.scss":
+/*!*****************************!*\
+  !*** ./src/scss/index.scss ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(/*! ../../../../util/sugar/node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "../../util/sugar/node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+            var content = __webpack_require__(/*! !../../../../util/sugar/node_modules/css-loader/dist/cjs.js!../../../../util/sugar/node_modules/sass-loader/dist/cjs.js??ref--4-2!./index.scss */ "../../util/sugar/node_modules/css-loader/dist/cjs.js!../../util/sugar/node_modules/sass-loader/dist/cjs.js?!./src/scss/index.scss");
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = api(content, options);
+
+
+
+module.exports = content.locals || {};
 
 /***/ }),
 

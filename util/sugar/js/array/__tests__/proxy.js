@@ -11,11 +11,11 @@ module.exports = __proxy => {
       let popCount = 0;
       myArray.watch(['push', 'pop'], watchObj => {
         switch (watchObj.action) {
-          case 'Array.push':
+          case 'push':
             pushCount++;
             break;
 
-          case 'Array.pop':
+          case 'pop':
             popCount++;
             break;
         }

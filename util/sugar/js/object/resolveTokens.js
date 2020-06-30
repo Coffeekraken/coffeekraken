@@ -49,6 +49,8 @@ function resolveTokens(object) {
       finalValue = finalValue.replace(token, (0, _get.default)(object, token.replace('{', '').replace('}', '').replace('this.', '')));
     });
     return finalValue;
+  }, {
+    handleGet: true
   }); // return the proxied object
 
   return proxiedObject;

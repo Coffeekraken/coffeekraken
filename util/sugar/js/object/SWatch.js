@@ -47,7 +47,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * });
  *
  * // watch the object
- * watchedObj.on('title', watchResult => {
+ * watchedObj.on('title:set', watchResult => {
  *  	// do something when the title changes
  * });
  *

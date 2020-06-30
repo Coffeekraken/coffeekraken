@@ -1,18 +1,19 @@
-const __SCli = require('../cli/SCli');
-const __packageRoot = require('../path/packageRoot');
+const __SCli = require('../../cli/SCli');
+const __sugarConfig = require('../../config/sugar');
+const __packageRoot = require('../../path/packageRoot');
 
 /**
- * @name            STermAppCli
- * @namespace           node.termapp
+ * @name            SBuildDocMapCli
+ * @namespace       node.build.docMap
  * @type            Class
  * @extends         SCli
  *
- * This class represent the STermApp cli
+ * This class represent the build documentation cli
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class STermAppCli extends __SCli {
+module.exports = class SBuildDocMapCli extends __SCli {
   /**
    * @name          command
    * @type          String
@@ -22,7 +23,7 @@ module.exports = class STermAppCli extends __SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static command = 'sugar termapp.run [arguments]';
+  static command = 'sugar build.docMap [arguments]';
 
   /**
    * @name          definitionObj
@@ -34,11 +35,20 @@ module.exports = class STermAppCli extends __SCli {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   static definitionObj = {
-    name: {
+    input: {
+      type: 'String|Array<String>',
+      alias: 'i',
+      description: 'Input files glob pattern',
+      default: __sugarConfig('build.docMap.input') || 'src/**/*',
+      level: 1
+    },
+    output: {
       type: 'String',
-      alias: 'n',
-      description: 'STerm application name',
-      default: 'sugarapp',
+      alias: 'o',
+      description: 'Output file path',
+      default:
+        __sugarConfig('build.docMap.output') ||
+        `${__packageRoot()}/docMap.json`,
       level: 1
     }
   };

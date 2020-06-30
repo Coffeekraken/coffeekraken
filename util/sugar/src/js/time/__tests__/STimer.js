@@ -18,7 +18,7 @@ module.exports = (__STimer) => {
   it('The timer remaining time has to be around 500', (done) => {
     setTimeout(() => {
       expect(timer.remaining).toBeLessThan(600);
-      expect(timer.remaining).toBeGreaterThan(400);
+      expect(timer.remaining).toBeGreaterThan(100);
       done();
     }, 500);
   });

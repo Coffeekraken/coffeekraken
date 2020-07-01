@@ -1,7 +1,6 @@
 const __deepMerge = require('../object/deepMerge');
 const __getRegisteredProcessed = require('./getRegisteredProcesses');
 const __tkill = require('tree-kill');
-const __exitHook = require('async-exit-hook');
 const __hotkey = require('../keyboard/hotkey');
 
 /**

@@ -8,6 +8,7 @@ const __activeSpace = require('../../core/activeSpace');
 const __SUrl = require('../../url/SUrl');
 const __sugarConfig = require('../../config/sugar');
 const __get = require('../../object/get');
+const __fs = require('fs');
 
 /**
  * @name                  SApp
@@ -84,11 +85,9 @@ module.exports = class SApp extends __SComponent {
         },
         footer: {}
       },
-      // __sugarConfig(settings.id || 'sugarapp'),
+      __sugarConfig(settings.id || 'sugarapp'),
       settings
     );
-
-    const l = __sugarConfig(settings.id || 'sugarapp');
 
     // extends parent
     super(settings);
@@ -109,7 +108,6 @@ module.exports = class SApp extends __SComponent {
     }
 
     if (this._settings.header) {
-      console.log(this._settings.header);
       this._headerBox = new __SHeader({
         style: {
           bg: __color('terminal.primary').toString(),
@@ -244,6 +242,11 @@ module.exports = class SApp extends __SComponent {
    */
   _goTo(sUrl, history = true) {
     const pageObj = this.config(`pages.urls.${sUrl.schema.schema}`);
+    if (!__fs.existsSync(pageObj.page.path.replace('.js', '') + '.js'))
+      throw new Error(
+        `SApp: You try to load a page class using the path "${pageObj.page.path}" but no file exists at this location...`
+      );
+    const pageClass = require(pageObj.page.path);
 
     // check if the pageObj exist
     if (!pageObj && this.config('pages.url.404')) {
@@ -271,10 +274,7 @@ module.exports = class SApp extends __SComponent {
     // check if we have already the page instance
     let currentPageInstance = this._pagesStack[sUrl.schema.schema];
     if (!currentPageInstance) {
-      currentPageInstance = new pageObj.page.class(
-        pageObj.page.id,
-        pageObj.page.title
-      );
+      currentPageInstance = new pageClass(pageObj.page.id, pageObj.page.title);
       this._pagesStack[sUrl.schema.schema] = currentPageInstance;
     }
 
@@ -320,6 +320,9 @@ module.exports = class SApp extends __SComponent {
   _initCommands() {
     const commandsObj = this.config('commands');
     Object.keys(commandsObj).forEach((commandName) => {
+      // filter commands using the features.commands config
+      if (this.config('features.commands').indexOf(commandName) === -1) return;
+
       const commandObj = commandsObj[commandName];
       commandObj.settings.namespace = commandName.toLowerCase();
       if (!commandObj.settings.activeSpace) {
@@ -334,12 +337,16 @@ module.exports = class SApp extends __SComponent {
         //   '|'
         // )})`;
       }
-      this._commandsStack[commandName] = new commandObj.class(
+      if (!__fs.existsSync(commandObj.path.replace('.js', '') + '.js'))
+        throw new Error(
+          `SApp: You try to load a command class using the path "${commandObj.path}" but no file exists at this location...`
+        );
+      const commandClass = require(commandObj.path);
+      this._commandsStack[commandName] = new commandClass(
         commandObj.argsObj,
         commandObj.settings
       );
     });
-    console.log(this._commandsStack);
   }
 
   /**

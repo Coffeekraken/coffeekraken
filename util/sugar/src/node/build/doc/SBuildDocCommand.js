@@ -46,10 +46,7 @@ module.exports = class SBuildDocCommand extends __SCommand {
           key: 'd',
           concurrent: false,
           namespace: 'build.doc',
-          watch: {
-            patterns: __sugarConfig('build.doc.watch'),
-            mapToProperty: 'input'
-          }
+          watch: __sugarConfig('build.doc.watch')
         },
         commandSettings
       )

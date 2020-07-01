@@ -198,17 +198,7 @@ function SWebComponent(extend = HTMLElement) {
           // valuesStack: [],
           value: _this._settings.props[key].default,
           previousValue: undefined
-        }; // if (this._props[key].value !== undefined) {
-        //   let valueToStack = this._props[key].value;
-        //   if (
-        //     valueToStack &&
-        //     valueToStack.revoke &&
-        //     typeof valueToStack.revoke === 'function'
-        //   )
-        //     valueToStack = valueToStack.revoke();
-        //   // this._props[key].valuesStack.push(valueToStack);
-        // }
-        // if need to be watches deeply
+        }; // if need to be watches deeply
 
         if (_this._props[key].watch) {
           _this._props[key] = (0, _watch.default)(_this._props[key]);
@@ -221,7 +211,10 @@ function SWebComponent(extend = HTMLElement) {
             }
           });
         }
-      } // launch the mounting process
+      } // apply the $node class
+
+
+      _this.classList.add(`${_this.metas.dashName}__$node`); // launch the mounting process
 
 
       setTimeout(_this._mount.bind(_assertThisInitialized(_this)));
@@ -351,6 +344,7 @@ function SWebComponent(extend = HTMLElement) {
 
 
         (0, _dispatch2.default)(`${this.metas.dashName}.${name}`, this);
+        (0, _dispatch2.default)(`${this.metas.dashName}#${this._settings.id}.${name}`, this);
       }
       /**
        * @name          _mountDependencies
@@ -445,26 +439,11 @@ function SWebComponent(extend = HTMLElement) {
     }, {
       key: "attributeChangedCallback",
       value: function attributeChangedCallback(attrName, oldVal, newVal) {
-        if (this._settedAttributesStack[attrName]) return; // try to get the property
-        // const propObj = this._props[attrName];
-        // const previousValue = __parse(oldVal);
+        if (this._settedAttributesStack[attrName]) return; // const previousValue = __parse(oldVal);
 
         const newValue = (0, _parse.default)(newVal); // set the value into the props
 
-        this.prop(attrName, newValue); // save the old value and the new value
-        // propObj.value = newValue;
-        // propObj.previousValue = previousValue;
-        // let valueToStack = newValue;
-        // if (
-        //   valueToStack &&
-        //   valueToStack.revoke &&
-        //   typeof valueToStack.revoke === 'function'
-        // )
-        //   valueToStack = valueToStack.revoke();
-        // propObj.valuesStack.push(valueToStack);
-        // save the prop
-        // this._props[__camelize(attrName)] = newPropObj;
-        // trigger a "prop" event
+        this.prop(attrName, newValue); // trigger a "prop" event
 
         this._triggerPropsEvents((0, _camelize.default)(attrName));
       }
@@ -489,15 +468,7 @@ function SWebComponent(extend = HTMLElement) {
         }
 
         this._props[_prop].previousValue = this._props[_prop].value;
-        this._props[_prop].value = value; // let valueToStack = value;
-        // if (
-        //   valueToStack &&
-        //   valueToStack.revoke &&
-        //   typeof valueToStack.revoke === 'function'
-        // )
-        //   valueToStack = valueToStack.revoke();
-        // this._props[prop].valuesStack.push(valueToStack);
-
+        this._props[_prop].value = value;
         this.handleProp(_prop, this._props[_prop]); // handle physical props
 
         this._handlePhysicalProps(_prop); // trigger a "prop" event
@@ -530,9 +501,7 @@ function SWebComponent(extend = HTMLElement) {
           previousValue: this._props[prop].previousValue
         };
 
-        this._dispatch(`prop.${prop}:${eventObj.action}`, eventObj); // this._promise.trigger('prop', eventObj);
-        // this._promise.trigger(`prop.${prop}`, eventObj);
-
+        this._dispatch(`prop.${prop}:${eventObj.action}`, eventObj);
       }
       /**
        * @name        _handlePhysicalProps
@@ -603,6 +572,7 @@ function SWebComponent(extend = HTMLElement) {
       key: "metas",
       get: function () {
         return {
+          instance: this,
           $node: this,
           ...this._metas
         };

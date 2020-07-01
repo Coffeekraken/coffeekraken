@@ -1,8 +1,20 @@
 import __SWebComponent from './SWebComponent';
-import { html, render } from 'lit-html';
+import { render, html } from 'lit-html';
 import __throttle from '../function/throttle';
 import __insertAfter from '../dom/insertAfter';
 import __deepMerge from '../object/deepMerge';
+import { asyncReplace } from 'lit-html/directives/async-replace.js';
+import { asyncAppend } from 'lit-html/directives/async-append.js';
+import { cache } from 'lit-html/directives/cache.js';
+import { classMap } from 'lit-html/directives/class-map.js';
+import { ifDefined } from 'lit-html/directives/if-defined';
+import { guard } from 'lit-html/directives/guard';
+import { repeat } from 'lit-html/directives/repeat';
+import { styleMap } from 'lit-html/directives/style-map.js';
+import { templateContent } from 'lit-html/directives/template-content';
+import { unsafeHTML } from 'lit-html/directives/unsafe-html.js';
+import { unsafeSVG } from 'lit-html/directives/unsafe-svg';
+import { until } from 'lit-html/directives/until.js';
 
 /**
  * @name              SLitHtmlWebComponent
@@ -54,6 +66,32 @@ export default function SLitHtmlWebComponent(extend = HTMLElement) {
     `;
 
     /**
+     * @name        litHtml
+     * @type        Object
+     *
+     * Store all the litHtml functions that you may need
+     *
+     * @see       https://lit-html.polymer-project.org/guide/template-reference
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    litHtml = {
+      html,
+      render,
+      asyncReplace,
+      asyncAppend,
+      cache,
+      classMap,
+      ifDefined,
+      guard,
+      repeat,
+      styleMap,
+      templateContent,
+      unsafeHTML,
+      unsafeSVG,
+      until
+    };
+
+    /**
      * @name        constructor
      * @type        Function
      * @constructor
@@ -67,12 +105,13 @@ export default function SLitHtmlWebComponent(extend = HTMLElement) {
       // wait until mounted to render the component first time
       this.on('mounted{1}', () => {
         // generate a container for the component
-        this._$container = document.createElement('div');
-        this._$container.className = `${this.metas.dashName}__container`;
-        __insertAfter(this._$container, this);
-
+        this.$container = document.createElement('div');
+        this.$container.className = `${this.metas.dashName}`;
+        __insertAfter(this.$container, this);
         // render for the first time
         this.render();
+        // dispatch a ready event
+        this._dispatch('ready', this);
       });
     }
 
@@ -85,9 +124,39 @@ export default function SLitHtmlWebComponent(extend = HTMLElement) {
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     render = __throttle(function () {
-      const tpl = this.constructor.template(this._props, this.metas, html);
-      render(tpl, this._$container);
+      const tpl = this.constructor.template(
+        this._props,
+        this.metas,
+        this._settings,
+        this.litHtml
+      );
+      render(tpl, this.$container);
     }, 50);
+
+    $(path) {
+      let $result = this.$container.querySelector(path);
+      if (!$result && !path.includes(`.${this.metas.dashName}__`)) {
+        path = path.replace(/^\./, `.${this.metas.dashName}__`);
+        $result = this.$container.querySelector(path);
+      }
+      return $result;
+    }
+    $$(path) {
+      console.log(path);
+      let $result = this.$container.querySelectorAll(path);
+      if (!$result && !path.includes(`.${this.metas.dashName}__`)) {
+        path = path.replace(/^\./, `.${this.metas.dashName}__`);
+        $result = this.$container.querySelectorAll(path);
+      }
+      return $result;
+    }
+    className(cls) {
+      const hasDot = cls.match(/^\./);
+      cls = cls.replace('.', '');
+      if (cls.match(/^(--)/))
+        return `${hasDot ? '.' : ''}${this.metas.dashName}${cls}`;
+      return `${hasDot ? '.' : ''}${this.metas.dashName}__${cls}`;
+    }
 
     /**
      * @name          handleProp

@@ -3,6 +3,7 @@ const __STermAppCli = require('../../node/termapp/STermAppCli');
 const __STermApp = require('../../node/termapp/STermApp');
 const __deepMerge = require('../../node/object/deepMerge');
 const __packageRoot = require('../../node/path/packageRoot');
+const __sugarConfig = require('../../node/config/sugar');
 
 module.exports = (stringArgs = '') => {
   const args = __deepMerge(

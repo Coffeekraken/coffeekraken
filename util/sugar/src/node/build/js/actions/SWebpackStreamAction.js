@@ -8,7 +8,8 @@ const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
 const __SBuildJsCli = require('../SBuildJsCli');
 const __sugarConfig = require('../../../config/sugar');
 const __babel = require('@babel/core');
-const __getImportsArray = require('../../scss/getImportsArray');
+const getScssImportsString = require('../../scss/getScssImportsString');
+const __jsObjectToScssMap = require('../../scss/jsObjectToScssMap');
 
 /**
  * @name                SWebpackStreamAction
@@ -60,6 +61,16 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(streamObj, settings = this._settings) {
+    settings = __deepMerge(
+      {
+        scss: {
+          Config: {},
+          imports: null
+        }
+      },
+      settings
+    );
+
     // make sure we have a correct streamObj
     this.checkStreamObject(streamObj);
 
@@ -97,8 +108,11 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
         return resolve(streamObj);
       }
 
-      const scssImportsString = '';
-      // const scssImportsString = __getImportsArray('string');
+      const scssImportsString = getScssImportsString(settings.scss.imports);
+      const scssConfig = __jsObjectToScssMap(
+        __sugarConfig('scss'),
+        settings.scss.config
+      );
 
       this.log(
         `Processing the <yellow>webpack</yellow> action for the file <cyan>${streamObj.input.replace(
@@ -107,8 +121,8 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
         )}</cyan>`
       );
 
-      this.log('COCOCO');
-
+      let webpackSettings = Object.assign({}, settings);
+      delete webpackSettings.scss;
       const compiler = __webpack(
         __deepMerge(
           {
@@ -137,7 +151,9 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
                     {
                       loader: 'sass-loader',
                       options: {
+                        implementation: require('sass'),
                         prependData: `
+                          ${scssConfig}
                           ${scssImportsString}
                         `
                       }
@@ -181,7 +197,7 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
             devtool: streamObj.map ? 'source-map' : false,
             context: __packageRoot(process.cwd())
           },
-          settings
+          webpackSettings
         )
       );
 

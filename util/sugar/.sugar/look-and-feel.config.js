@@ -13,30 +13,43 @@ module.exports = {
   'border-radius': '0.5em',
 
   /**
-   * @name            padding-vertical
+   * @name            padding
    * @namespace       config.look-and-feel
    * @type            String
-   * @default         1.4em
+   * @default         [config.look-and-feel.padding-vertical] [config.look-and-feel.padding-horizontal]
    *
    * Specify the vertical padding that have to be applied on most of the components
    *
    * @since           1.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  'padding-vertical': '1.4em',
+  padding: '0.8em 1.4em',
+
+  /**
+   * @name            padding-vertical
+   * @namespace       config.look-and-feel
+   * @type            String
+   * @default         0.8em
+   *
+   * Specify the vertical padding that have to be applied on most of the components
+   *
+   * @since           1.0.0
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  'padding-vertical': '0.8em',
 
   /**
    * @name            padding-horizontal
    * @namespace       config.look-and-feel
    * @type            String
-   * @default         0.8em
+   * @default         1.4em
    *
    * Specify the horizontal padding that have to be applied on most of the components
    *
    * @since           1.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  'padding-horizontal': '0.8em',
+  'padding-horizontal': '1.4em',
 
   /**
    * @name            disabled-opacity

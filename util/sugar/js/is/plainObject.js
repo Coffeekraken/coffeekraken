@@ -5,6 +5,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = plainObject;
 
+var _isPlainObject = _interopRequireDefault(require("is-plain-object"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 /**
  * @name                      plainObject
  * @namespace           js.is
@@ -23,9 +27,11 @@ exports.default = plainObject;
  */
 function plainObject(object) {
   if (!object) return false;
-  if (typeof object !== 'object') return false; // if (object === Object(object)) return true;
-  // if (object.constructor === Object) return true;
-
+  if (typeof object !== 'object') return false;
+  if (object.constructor && object.constructor.name !== 'Object') return false;
+  if (Object.prototype.toString.call(object) !== '[object Object]') return false;
+  if (object !== Object(object)) return false;
+  if (object.constructor !== Object) return false;
   return true;
 }
 

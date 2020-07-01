@@ -23,6 +23,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @param         {Object}        [settings={}]     An object of settings to configure your deepMap process:
  * - processObjects (false) {Boolean}: Specify if you want the objects to be processed the same as other values
  * - deepFirst (true) {Boolean}: Specify if you want to process deep values first
+ * - handleArray (true) {Boolean}: Specify if we have to treat array like simple value to process of treat them as an object and continue our map down
  *
  * @example       js
  * import deepMap from '@coffeekraken/sugar/js/object/deepMap';
@@ -37,11 +38,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function deepMap(object, processor, settings = {}, _path = []) {
   settings = (0, _deepMerge.default)({
     deepFirst: false,
-    processObjects: false
+    processObjects: false,
+    handleArray: true
   }, settings);
   Object.keys(object).forEach(prop => {
     if (!settings.deepFirst) {
-      if ((0, _plainObject.default)(object[prop])) {
+      if ((0, _plainObject.default)(object[prop]) || Array.isArray(object[prop]) && settings.handleArray) {
         object[prop] = deepMap(object[prop], processor, settings, [..._path, prop]);
         if (!settings.processObjects) return;
       }
@@ -52,7 +54,7 @@ function deepMap(object, processor, settings = {}, _path = []) {
       const res = processor(object[prop], prop, [..._path, prop].join('.'));
       if (res === -1) delete object[prop];else object[prop] = res;
 
-      if ((0, _plainObject.default)(object[prop])) {
+      if ((0, _plainObject.default)(object[prop]) || Array.isArray(object[prop]) && settings.handleArray) {
         object[prop] = deepMap(object[prop], processor, settings, [..._path, prop]);
         if (!settings.processObjects) return;
       }

@@ -65,26 +65,10 @@ module.exports = class SBuildScssActionsStream extends __SActionsStream {
           before: (streamObj) => {
             streamObj.jsObjectToScss = __sugarConfig('scss');
             streamObj.globProperty = 'input';
-            if (streamObj.import && streamObj.import.sugar) {
-              streamObj.imports = [
-                {
-                  name: 'Sugar',
-                  path: __isInPackage('@coffeekraken/sugar')
-                    ? __path.resolve(__packageRoot(__dirname), 'index')
-                    : '@coffeekraken/sugar/index',
-                  scss: `
-                    @include Sugar.setup($sugarUserSettings);
-                    @include Sugar.init();
-                  `
-                }
-              ];
-            }
-
             return streamObj;
           },
           afterActions: {
             globResolver: (streamObj) => {
-              // console.log(streamObj);
               if (streamObj.input) {
                 streamObj.filename = __getFilename(streamObj.input);
               }
@@ -92,6 +76,9 @@ module.exports = class SBuildScssActionsStream extends __SActionsStream {
             }
           },
           beforeActions: {
+            globResolver: (streamObj) => {
+              return streamObj;
+            },
             fsOutput: (streamObj) => {
               if (!streamObj.outputStack) streamObj.outputStack = {};
               if (streamObj.outputDir && streamObj.filename && streamObj.data) {

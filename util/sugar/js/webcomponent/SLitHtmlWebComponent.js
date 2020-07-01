@@ -15,6 +15,30 @@ var _insertAfter = _interopRequireDefault(require("../dom/insertAfter"));
 
 var _deepMerge = _interopRequireDefault(require("../object/deepMerge"));
 
+var _asyncReplace = require("lit-html/directives/async-replace.js");
+
+var _asyncAppend = require("lit-html/directives/async-append.js");
+
+var _cache = require("lit-html/directives/cache.js");
+
+var _classMap = require("lit-html/directives/class-map.js");
+
+var _ifDefined = require("lit-html/directives/if-defined");
+
+var _guard = require("lit-html/directives/guard");
+
+var _repeat = require("lit-html/directives/repeat");
+
+var _styleMap = require("lit-html/directives/style-map.js");
+
+var _templateContent = require("lit-html/directives/template-content");
+
+var _unsafeHtml = require("lit-html/directives/unsafe-html.js");
+
+var _unsafeSvg = require("lit-html/directives/unsafe-svg");
+
+var _until = require("lit-html/directives/until.js");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -90,6 +114,16 @@ function SLitHtmlWebComponent(extend = HTMLElement) {
      */
 
     /**
+     * @name        litHtml
+     * @type        Object
+     *
+     * Store all the litHtml functions that you may need
+     *
+     * @see       https://lit-html.polymer-project.org/guide/template-reference
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+    /**
      * @name        constructor
      * @type        Function
      * @constructor
@@ -105,18 +139,38 @@ function SLitHtmlWebComponent(extend = HTMLElement) {
 
       _this = _super.call(this, (0, _deepMerge.default)({}, settings)); // wait until mounted to render the component first time
 
+      _defineProperty(_assertThisInitialized(_this), "litHtml", {
+        html: _litHtml.html,
+        render: _litHtml.render,
+        asyncReplace: _asyncReplace.asyncReplace,
+        asyncAppend: _asyncAppend.asyncAppend,
+        cache: _cache.cache,
+        classMap: _classMap.classMap,
+        ifDefined: _ifDefined.ifDefined,
+        guard: _guard.guard,
+        repeat: _repeat.repeat,
+        styleMap: _styleMap.styleMap,
+        templateContent: _templateContent.templateContent,
+        unsafeHTML: _unsafeHtml.unsafeHTML,
+        unsafeSVG: _unsafeSvg.unsafeSVG,
+        until: _until.until
+      });
+
       _defineProperty(_assertThisInitialized(_this), "render", (0, _throttle.default)(function () {
-        const tpl = this.constructor.template(this._props, this.metas, _litHtml.html);
-        (0, _litHtml.render)(tpl, this._$container);
+        const tpl = this.constructor.template(this._props, this.metas, this._settings, this.litHtml);
+        (0, _litHtml.render)(tpl, this.$container);
       }, 50));
 
       _this.on('mounted{1}', () => {
         // generate a container for the component
-        _this._$container = document.createElement('div');
-        _this._$container.className = `${_this.metas.dashName}__container`;
-        (0, _insertAfter.default)(_this._$container, _assertThisInitialized(_this)); // render for the first time
+        _this.$container = document.createElement('div');
+        _this.$container.className = `${_this.metas.dashName}`;
+        (0, _insertAfter.default)(_this.$container, _assertThisInitialized(_this)); // render for the first time
 
-        _this.render();
+        _this.render(); // dispatch a ready event
+
+
+        _this._dispatch('ready', _assertThisInitialized(_this));
       });
 
       return _this;
@@ -132,8 +186,38 @@ function SLitHtmlWebComponent(extend = HTMLElement) {
 
 
     _createClass(SLitHtmlWebComponent, [{
-      key: "handleProp",
+      key: "$",
+      value: function $(path) {
+        let $result = this.$container.querySelector(path);
 
+        if (!$result && !path.includes(`.${this.metas.dashName}__`)) {
+          path = path.replace(/^\./, `.${this.metas.dashName}__`);
+          $result = this.$container.querySelector(path);
+        }
+
+        return $result;
+      }
+    }, {
+      key: "$$",
+      value: function $$(path) {
+        console.log(path);
+        let $result = this.$container.querySelectorAll(path);
+
+        if (!$result && !path.includes(`.${this.metas.dashName}__`)) {
+          path = path.replace(/^\./, `.${this.metas.dashName}__`);
+          $result = this.$container.querySelectorAll(path);
+        }
+
+        return $result;
+      }
+    }, {
+      key: "className",
+      value: function className(cls) {
+        const hasDot = cls.match(/^\./);
+        cls = cls.replace('.', '');
+        if (cls.match(/^(--)/)) return `${hasDot ? '.' : ''}${this.metas.dashName}${cls}`;
+        return `${hasDot ? '.' : ''}${this.metas.dashName}__${cls}`;
+      }
       /**
        * @name          handleProp
        * @type          Function
@@ -158,6 +242,9 @@ function SLitHtmlWebComponent(extend = HTMLElement) {
        * @since     2.0.0
        * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
+
+    }, {
+      key: "handleProp",
       value: function handleProp(prop, propObj) {
         return new Promise((resolve, reject) => {
           this.render();

@@ -5,6 +5,7 @@ const __uniqid = require('../string/uniqid');
 const __hotkey = require('../keyboard/hotkey');
 const __tkill = require('tree-kill');
 const __registerProcess = require('./registerProcess');
+const __getRegisteredProcesses = require('./getRegisteredProcesses');
 
 /**
  * @name                                spawn
@@ -163,11 +164,11 @@ module.exports = function spawn(
         value: error.toString()
       });
     });
+
+    // save the process
+    __registerProcess(childProcess);
   }).on('cancel,finally', () => {});
   // .start();
-
-  // save the process
-  __registerProcess(childProcess);
 
   promise.log = (...args) => {
     args.forEach((arg) => {

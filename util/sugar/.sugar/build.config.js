@@ -94,25 +94,25 @@ module.exports = {
      */
     prod: false,
 
-    import: {
-      /**
-       * @name                sugar
-       * @namespace           config.build.scss.import
-       * @type                Boolean
-       * @default             true
-       *
-       * This options tells the sugar scss compiler process if you want to import the sugar toolkit or not
-       *
-       * @since             2.0.0
-       * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-      sugar: true
-    },
+    /**
+     * @name                imports
+     * @namespace           config.build.scss
+     * @type                Boolean
+     * @default             ['sugar']
+     *
+     * This options tells the sugar scss compiler which "frameworks" or "toolkit" you want to imports automatically.
+     * For now you can specify these:
+     * - sugar: Import the coffeekraken sugar scss toolkit in your scss
+     *
+     * @since             2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    imports: ['sugar'],
 
-    vendor: {
+    vendors: {
       /**
        * @name                sass
-       * @namespace           config.build.scss.vendor
+       * @namespace           config.build.scss.vendors
        * @type                Object
        * @default             {}
        *

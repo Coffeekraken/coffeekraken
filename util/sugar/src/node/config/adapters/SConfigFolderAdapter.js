@@ -1,6 +1,5 @@
 const __fs = require('fs');
 const __deepMerge = require('../../object/deepMerge');
-const __tmpDir = require('../../fs/tmpDir');
 const __writeFileSync = require('../../fs/writeFileSync');
 const __diff = require('../../object/diff');
 
@@ -28,17 +27,6 @@ const __SConfigAdapter = require('./SConfigAdapter');
 
 module.exports = class SConfigFolderAdapter extends __SConfigAdapter {
   constructor(settings = {}) {
-    // settings = __deepMerge(
-    //   {
-    //     name: null,
-    //     foldername: '.[name]',
-    //     filename: '[name].config.js',
-    //     defaultConfigPath: null,
-    //     appConfigPath: `${process.cwd()}/[foldername]`,
-    //     userConfigPath: `${__tmpDir()}/[foldername]`
-    //   },
-    //   settings
-    // );
     super(settings);
 
     this.settings.foldername = this.settings.foldername.replace(
@@ -74,6 +62,8 @@ module.exports = class SConfigFolderAdapter extends __SConfigAdapter {
     ) {
       __fs.readdirSync(this.settings.defaultConfigPath).forEach((file) => {
         if (!file.includes(this.settings.filename.replace('[name]', '')))
+          return;
+        if (this._defaultConfig[file.replace('.config.js', '')] !== undefined)
           return;
         this._defaultConfig[file.replace('.config.js', '')] = require(this
           .settings.defaultConfigPath +

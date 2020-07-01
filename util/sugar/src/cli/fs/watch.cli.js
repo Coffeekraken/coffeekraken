@@ -23,7 +23,7 @@ const __path = require('path');
  */
 
 const definition = {
-  patterns: {
+  pattern: {
     type: 'String',
     alias: 'p',
     description: 'Files glob pattern(s)',
@@ -48,7 +48,7 @@ const definition = {
 };
 module.exports = (stringArgs = '') => {
   const args = __argsToObject(stringArgs, definition);
-  const watcher = __chokidar.watch(args.patterns.split(','), {
+  const watcher = __chokidar.watch(args.pattern.split(','), {
     persistent: args.persistent,
     ignored: args.ignore,
     ignoreInitial: true,
@@ -58,6 +58,9 @@ module.exports = (stringArgs = '') => {
   });
 
   watcher
+    // .on('all', (e) => {
+    //   console.log('EVEN', e);
+    // })
     .on('add', (path) => {
       if (args.type.split(',').indexOf('new') === -1) return;
       console.log(`new:${__path.resolve(path)}`);

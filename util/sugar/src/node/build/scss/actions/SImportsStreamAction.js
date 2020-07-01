@@ -1,6 +1,8 @@
 const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
 const __Bundler = require('scss-bundle').Bundler;
 const __getFilename = require('../../../fs/filename');
+const __sugarConfig = require('../../../config/sugar');
+const __getScssImportsString = require('../getScssImportsString');
 
 /**
  * @name                SImportsStreamAction
@@ -59,18 +61,11 @@ module.exports = class SImportsStreamAction extends __SActionsStreamAction {
     this.checkStreamObject(streamObj);
 
     return new Promise(async (resolve, reject) => {
-      if (!streamObj.imports) return resolve(streamObj);
+      const importsString = __getScssImportsString(streamObj.imports);
 
-      streamObj.imports.forEach((importObj) => {
-        const importString = `
-          @use "${importObj.path}" as ${importObj.name};
-          ${importObj.scss ? importObj.scss : ''}
-        `;
-
-        // add this to the "data" property
-        if (streamObj.data) streamObj.data = importString + streamObj.data;
-        else streamObj.data = importString;
-      });
+      // add this to the "data" property
+      if (streamObj.data) streamObj.data = importsString + streamObj.data;
+      else streamObj.data = importsString;
 
       // resolve the action
       resolve(streamObj);

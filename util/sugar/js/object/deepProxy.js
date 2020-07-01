@@ -170,7 +170,6 @@ function deepProxy(object, handlerFn, settings = {}) {
           }
 
           return val;
-        }, {// deepFirst: true
         }); // deep revoke the proxies
 
         setTimeout(() => {
@@ -186,9 +185,15 @@ function deepProxy(object, handlerFn, settings = {}) {
         return __copy;
       }
     };
-    Object.defineProperties(p.proxy, {
-      revoke: revokePropertyObj
-    });
+
+    if (Array.isArray(p.proxy)) {
+      p.proxy.revoke = revokePropertyObj.value;
+    } else {
+      Object.defineProperties(p.proxy, {
+        revoke: revokePropertyObj
+      });
+    }
+
     return p.proxy;
   }
 

@@ -533,9 +533,9 @@ module.exports = class SCommand extends __SPromise {
 
     const commandLine = __argsToString(
       {
-        patterns:
+        pattern:
           typeof this._settings.watch === 'object'
-            ? this._settings.watch.patterns
+            ? this._settings.watch.pattern
             : this._settings.watch
       },
       __watchCli.definition
@@ -596,6 +596,9 @@ module.exports = class SCommand extends __SPromise {
           this.run(argsObj);
         }, 200);
       }
+    });
+    this._watchProcess.on('error', (...args) => {
+      throw args;
     });
     this._watchProcess.on('close', (code, signal) => {
       this._isWatching = false;

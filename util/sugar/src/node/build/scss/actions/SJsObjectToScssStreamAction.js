@@ -1,6 +1,6 @@
 const __deepMerge = require('../../../object/deepMerge');
 const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
-const __jsonSass = require('json-sass-vars');
+const __jsObjectToScssMap = require('../jsObjectToScssMap');
 
 /**
  * @name                SJsObjectToScssStreamAction
@@ -58,39 +58,14 @@ module.exports = class SJsObjectToScssStreamAction extends __SActionsStreamActio
     // make sure we have a correct streamObj
     this.checkStreamObject(streamObj);
 
-    settings = __deepMerge(
-      {
-        quoteKeys: ['src', 'import', 'font-family']
-      },
-      settings
-    );
+    settings = __deepMerge({}, settings);
 
     return new Promise(async (resolve, reject) => {
-      let scssConfigString = __jsonSass.convertJs(streamObj.jsObjectToScss);
-
-      scssConfigString = `$sugarUserSettings: ${scssConfigString};`;
-
-      scssConfigString.split('\n').forEach((line) => {
-        line = line.trim();
-        const isComma = line.substr(-1) === ',';
-        if (isComma) {
-          line = line.slice(0, -1);
-        }
-        const prop = line.split(':')[0];
-        const value = line.split(':').slice(1).join(':').trim();
-        if (prop === '),' || prop === ')' || value === '(') return;
-
-        if (settings.quoteKeys.indexOf(prop) === -1) return;
-
-        scssConfigString = scssConfigString.replace(
-          line,
-          `${prop}: "${value}"`
-        );
-      });
+      const result = __jsObjectToScssMap(streamObj.jsObjectToScss, settings);
 
       // set or append in the "data" property
-      if (streamObj.data) streamObj.data = scssConfigString + streamObj.data;
-      else streamObj.data = scssConfigString;
+      if (streamObj.data) streamObj.data = result + streamObj.data;
+      else streamObj.data = result;
 
       // resolving the action
       resolve(streamObj);

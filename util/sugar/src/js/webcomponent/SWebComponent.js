@@ -143,16 +143,6 @@ export default function SWebComponent(extend = HTMLElement) {
           value: this._settings.props[key].default,
           previousValue: undefined
         };
-        // if (this._props[key].value !== undefined) {
-        //   let valueToStack = this._props[key].value;
-        //   if (
-        //     valueToStack &&
-        //     valueToStack.revoke &&
-        //     typeof valueToStack.revoke === 'function'
-        //   )
-        //     valueToStack = valueToStack.revoke();
-        //   // this._props[key].valuesStack.push(valueToStack);
-        // }
         // if need to be watches deeply
         if (this._props[key].watch) {
           this._props[key] = __watch(this._props[key]);
@@ -165,6 +155,9 @@ export default function SWebComponent(extend = HTMLElement) {
           });
         }
       }
+
+      // apply the $node class
+      this.classList.add(`${this.metas.dashName}__$node`);
 
       // launch the mounting process
       setTimeout(this._mount.bind(this));
@@ -183,6 +176,7 @@ export default function SWebComponent(extend = HTMLElement) {
      */
     get metas() {
       return {
+        instance: this,
         $node: this,
         ...this._metas
       };
@@ -290,6 +284,7 @@ export default function SWebComponent(extend = HTMLElement) {
       this._promise.trigger(name, this);
       // dispatch a general event
       __dispatch(`${this.metas.dashName}.${name}`, this);
+      __dispatch(`${this.metas.dashName}#${this._settings.id}.${name}`, this);
     }
 
     /**
@@ -379,30 +374,11 @@ export default function SWebComponent(extend = HTMLElement) {
     attributeChangedCallback(attrName, oldVal, newVal) {
       if (this._settedAttributesStack[attrName]) return;
 
-      // try to get the property
-      // const propObj = this._props[attrName];
-
       // const previousValue = __parse(oldVal);
       const newValue = __parse(newVal);
 
       // set the value into the props
       this.prop(attrName, newValue);
-
-      // save the old value and the new value
-      // propObj.value = newValue;
-      // propObj.previousValue = previousValue;
-
-      // let valueToStack = newValue;
-      // if (
-      //   valueToStack &&
-      //   valueToStack.revoke &&
-      //   typeof valueToStack.revoke === 'function'
-      // )
-      //   valueToStack = valueToStack.revoke();
-      // propObj.valuesStack.push(valueToStack);
-
-      // save the prop
-      // this._props[__camelize(attrName)] = newPropObj;
 
       // trigger a "prop" event
       this._triggerPropsEvents(__camelize(attrName));
@@ -426,15 +402,6 @@ export default function SWebComponent(extend = HTMLElement) {
       }
       this._props[prop].previousValue = this._props[prop].value;
       this._props[prop].value = value;
-
-      // let valueToStack = value;
-      // if (
-      //   valueToStack &&
-      //   valueToStack.revoke &&
-      //   typeof valueToStack.revoke === 'function'
-      // )
-      //   valueToStack = valueToStack.revoke();
-      // this._props[prop].valuesStack.push(valueToStack);
 
       this.handleProp(prop, this._props[prop]);
 
@@ -472,8 +439,6 @@ export default function SWebComponent(extend = HTMLElement) {
         previousValue: this._props[prop].previousValue
       };
       this._dispatch(`prop.${prop}:${eventObj.action}`, eventObj);
-      // this._promise.trigger('prop', eventObj);
-      // this._promise.trigger(`prop.${prop}`, eventObj);
     }
 
     /**

@@ -46,10 +46,7 @@ module.exports = class SBuildConfigCommand extends __SCommand {
           key: 'c',
           concurrent: false,
           namespace: 'build.config',
-          watch: {
-            patterns: __sugarConfig('build.config.watch'),
-            mapToProperty: 'input'
-          }
+          watch: __sugarConfig('build.config.watch')
         },
         commandSettings
       )

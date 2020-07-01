@@ -56,6 +56,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+const _SConfigLoadingByAdapter = {};
+
 let SConfig = /*#__PURE__*/function () {
   /**
    * @name              _name
@@ -186,24 +188,38 @@ let SConfig = /*#__PURE__*/function () {
   _createClass(SConfig, [{
     key: "load",
     value: function load(adapter = this._settings.defaultAdapter) {
+      // make sure we load only once the config
+      // if (_SConfigLoadingByAdapter[adapter]) {
+      //   return null;
+      // }
+      // _SConfigLoadingByAdapter[adapter] = true;
       if (!this._adapters[adapter]) {
         throw new Error(`You try to load the config from the adapter "${adapter}" but this adapter does not exists...`);
       }
 
-      const config = this._adapters[adapter].instance.load();
+      if (Object.keys(this._adapters[adapter].config).length !== 0) {
+        return this._adapters[adapter].config;
+      }
+
+      let config = this._adapters[adapter].instance.load();
 
       if (config instanceof Promise) {
         return new Promise(resolve => {
           config.then(c => {
-            c = (0, _resolveTokens.default)(JSON.parse(JSON.stringify(c)));
-            this._adapters[adapter].config = c;
-            resolve(c);
+            if (Object.keys(this._adapters[adapter].config).length === 0 && c) {
+              this._adapters[adapter].config = c;
+              return resolve(c);
+            }
+
+            return resolve(this._adapters[adapter].config);
           });
         });
+      } else if ((0, _plainObject.default)(config)) {
+        this._adapters[adapter].config = config;
+        return config;
+      } else if (config !== null && config !== undefined) {
+        throw new Error(`SConfig: Your "load" method of the "${adapter}" adapter has to return either a plain object, or a Promise resolved with a plain object. The returned value is "${config}" which is of type "${typeof config}"...`);
       }
-
-      this._adapters[adapter].config = config;
-      return config;
     }
     /**
      * @name                          save
@@ -266,6 +282,10 @@ let SConfig = /*#__PURE__*/function () {
         throw new Error(`You try to get the config value "${path}" using the adapter "${adapter}" but this adapter does not exists...`);
       }
 
+      if (Object.keys(this._adapters[adapter].config).length === 0) {
+        this.load();
+      }
+
       let value = (0, _get.default)(this._adapters[adapter].config, path);
 
       if ((0, _plainObject.default)(value)) {
@@ -292,11 +312,7 @@ let SConfig = /*#__PURE__*/function () {
 
               return val;
             }
-          } // if (typeof val === 'string' /& val.slice(0,1) === '<')
-          // if (typeof val === 'string' && val.substr(0, 7) === '@config') {
-          //   return this.get(val.replace('@config.', ''), adapter);
-          // }
-
+          }
 
           return val;
         });

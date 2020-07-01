@@ -140,7 +140,9 @@ export default function deepProxy(object, handlerFn, settings = {}) {
         obj[key] = proxify(obj[key], [...path, key]);
       }
     }
+
     let p = Proxy.revocable(obj, makeHandler(path));
+
     // preproxy.set(p, obj);
     const revokePropertyObj = {
       writable: true,
@@ -152,19 +154,13 @@ export default function deepProxy(object, handlerFn, settings = {}) {
         // mark the proxy as revoked
         isRevoked = true;
         // sanitize the copy
-        __copy = __deepMap(
-          __copy,
-          (val, key, path) => {
-            // console.log(path);
-            if (key === 'revoke' && typeof val === 'function') {
-              return -1;
-            }
-            return val;
-          },
-          {
-            // deepFirst: true
+        __copy = __deepMap(__copy, (val, key, path) => {
+          // console.log(path);
+          if (key === 'revoke' && typeof val === 'function') {
+            return -1;
           }
-        );
+          return val;
+        });
         // deep revoke the proxies
         setTimeout(() => {
           __deepMap(
@@ -183,9 +179,13 @@ export default function deepProxy(object, handlerFn, settings = {}) {
         return __copy;
       }
     };
-    Object.defineProperties(p.proxy, {
-      revoke: revokePropertyObj
-    });
+    if (Array.isArray(p.proxy)) {
+      p.proxy.revoke = revokePropertyObj.value;
+    } else {
+      Object.defineProperties(p.proxy, {
+        revoke: revokePropertyObj
+      });
+    }
     return p.proxy;
   }
   return proxify(object, []);

@@ -1,6 +1,7 @@
 import __deepMerge from '../object/deepMerge';
 import __SLogConsoleAdapter from './adapters/SLogConsoleAdapter';
 import __env from '../core/env';
+import __isPlainObject from '../is/plainObject';
 
 /**
  * @name                    SLog

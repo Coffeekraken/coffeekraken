@@ -26,15 +26,15 @@
   // initial value
   $value: setting("look-and-feel.#{$name}");
 
-  @if meta.type-of($value) != number {
-    @error ('Your look-and-feel value "#{$name}" setted to "#{$value}" need to be a number in "em" or unitless');
-  }
+  // @if meta.type-of($value) != number {
+  //   @error ('Your look-and-feel value "#{$name}" setted to "#{$value}" need to be a number in "em" or unitless');
+  // }
 
-  // make sure value is in em unit
-  @if meta.type-of($value) == number and not math.is-unitless($value) and math.unit($value) != em
-  {
-    @error ('Your look-and-feel value "#{$name}" setted to "#{$value}" need to be in "em"');
-  }
+  // // make sure value is in em unit
+  // @if meta.type-of($value) == number and not math.is-unitless($value) and math.unit($value) != em
+  // {
+  //   @error ('Your look-and-feel value "#{$name}" setted to "#{$value}" need to be in "em"');
+  // }
 
   // return the value
   @return $value;

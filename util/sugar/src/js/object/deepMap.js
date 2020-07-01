@@ -13,6 +13,7 @@ import __deepMerge from '../object/deepMerge';
  * @param         {Object}        [settings={}]     An object of settings to configure your deepMap process:
  * - processObjects (false) {Boolean}: Specify if you want the objects to be processed the same as other values
  * - deepFirst (true) {Boolean}: Specify if you want to process deep values first
+ * - handleArray (true) {Boolean}: Specify if we have to treat array like simple value to process of treat them as an object and continue our map down
  *
  * @example       js
  * import deepMap from '@coffeekraken/sugar/js/object/deepMap';
@@ -28,13 +29,17 @@ export default function deepMap(object, processor, settings = {}, _path = []) {
   settings = __deepMerge(
     {
       deepFirst: false,
-      processObjects: false
+      processObjects: false,
+      handleArray: true
     },
     settings
   );
   Object.keys(object).forEach((prop) => {
     if (!settings.deepFirst) {
-      if (__isPlainObject(object[prop])) {
+      if (
+        __isPlainObject(object[prop]) ||
+        (Array.isArray(object[prop]) && settings.handleArray)
+      ) {
         object[prop] = deepMap(object[prop], processor, settings, [
           ..._path,
           prop
@@ -49,7 +54,10 @@ export default function deepMap(object, processor, settings = {}, _path = []) {
       if (res === -1) delete object[prop];
       else object[prop] = res;
 
-      if (__isPlainObject(object[prop])) {
+      if (
+        __isPlainObject(object[prop]) ||
+        (Array.isArray(object[prop]) && settings.handleArray)
+      ) {
         object[prop] = deepMap(object[prop], processor, settings, [
           ..._path,
           prop

@@ -1,4 +1,3 @@
-@use 'variables' as sugar;
 /**
  * @name      math-acos
  * @namespace           scss.math
@@ -11,22 +10,22 @@
  * @return         {Number}                       The calculated cosinus inverse
  *
  * @example     scss
- * sugar.math-acos(1, deg); // 0.0559529097deg
+ * Sugar.math-acos(1, deg); // 0.0559529097deg
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function math-acos($angle, $unit: deg) {
   $angle: test-argument(
-    'sugar.math-acos',
+    'Sugar.math-acos',
     'angle',
     number,
     $angle
   );
   $unit: test-argument(
-    'sugar.math-acos',
+    'Sugar.math-acos',
     'unit',
     (deg,rad,grad,turn),
     $unit
   );
-  @return math-convert-angle(sugar.$math-pi/2, $unit) - math-asin($angle, $unit);
+  @return math-convert-angle($__math-pi/2, $unit) - math-asin($angle, $unit);
 }

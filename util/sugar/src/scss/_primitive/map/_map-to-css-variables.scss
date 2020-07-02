@@ -1,0 +1,10 @@
+@use 'sass:meta';
+@mixin map-to-css-variables($map) {
+  :root {
+    @each $key, $value in $map {
+      @if $value != () {
+        @include var-define($key, $value);
+      }
+    }
+  }
+}

@@ -13,7 +13,7 @@
  *
  * @example
  * // register a filter
- * \@include sugar.setup((
+ * \@include Sugar.setup((
  * 		filters : (
  * 			myCoolFilter : box-shadow(#000 0 0 10px) blur(30px),
  * 			// other filters...
@@ -22,13 +22,13 @@
  *
  * // registered filter
  * .my-cool-elememt {
- * 		filter : sugar.filter(myCoolFilter);
+ * 		filter : Sugar.filter(myCoolFilter);
  * 		// filter : box-shadow(#000 0 0 10px) blur(30px);
  * }
  *
  * // custom filter
  * .my-cool-element {
- * 		filter : sugar.filter(myCoolFilter invert(100%));
+ * 		filter : Sugar.filter(myCoolFilter invert(100%));
  * 		// filter : box-shadow(#000 0 0 10px) blur(30px) invert(100%);
  * }
  *

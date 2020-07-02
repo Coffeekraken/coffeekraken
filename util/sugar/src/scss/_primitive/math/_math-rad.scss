@@ -9,13 +9,13 @@
  * @return        {Number}                    The radian version of the angle
  *
  * @example     scss
- * sugar.math-rad(10); // => 10rad
+ * Sugar.math-rad(10); // => 10rad
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function math-rad($angle) {
   $angle: test-argument(
-    'sugar.math-rad',
+    'Sugar.math-rad',
     'angle',
     number,
     $angle

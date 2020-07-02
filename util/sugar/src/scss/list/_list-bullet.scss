@@ -16,7 +16,7 @@
  *
  * @example 	scss
  * .my-cool-list__item {
- * 	@\include sugar.list-bullet(
+ * 	@\include Sugar.list-bullet(
  * 		$image : '../img/my-cool-bullet.svg',
  * 		$offset : 5px 10px,
  * 		$size : 1em,
@@ -37,7 +37,7 @@
   $space: null
 ) {
   $type: test-argument(
-    "sugar.list-bullet",
+    "Sugar.list-bullet",
     "type",
     (
       disc,
@@ -58,23 +58,23 @@
     ),
     $type
   );
-  $image: test-argument("sugar.list-bullet", "image", url, $image);
-  $icon: test-argument("sugar.list-bullet", "icon", string, $icon);
-  $color: test-argument("sugar.list-bullet", "color", color, $color);
+  $image: test-argument("Sugar.list-bullet", "image", url, $image);
+  $icon: test-argument("Sugar.list-bullet", "icon", string, $icon);
+  $color: test-argument("Sugar.list-bullet", "color", color, $color);
   $size: test-argument(
-    "sugar.list-bullet",
+    "Sugar.list-bullet",
     "size",
     "list-number|number",
     $size
   );
   $offset: test-argument(
-    "sugar.list-bullet",
+    "Sugar.list-bullet",
     "offset",
     "list-number|number",
     $offset
   );
-  $font: test-argument("sugar.list-bullet", "font", map, $font);
-  $space: test-argument("sugar.list-bullet", "space ", number, $space);
+  $font: test-argument("Sugar.list-bullet", "font", map, $font);
+  $space: test-argument("Sugar.list-bullet", "space ", number, $space);
 
   // padding
   @if $space {

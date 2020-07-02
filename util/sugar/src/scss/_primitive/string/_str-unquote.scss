@@ -10,13 +10,13 @@
  * @return        {String}                          The unquoted string
  *
  * @example       scss
- * sugar.str-unquote('hello world'); // => hello world
+ * Sugar.str-unquote('hello world'); // => hello world
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function str-unquote($string) {
   $string: test-argument(
-    'sugar.str-unquote',
+    'Sugar.str-unquote',
     'string',
     string,
     $string

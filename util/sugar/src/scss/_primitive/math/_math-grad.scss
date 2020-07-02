@@ -9,13 +9,13 @@
  * @return        {Number}                    The gradian version of the angle
  *
  * @example     scss
- * sugar.math-grad(10); // => 636.6197723675grad
+ * Sugar.math-grad(10); // => 636.6197723675grad
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function math-grad($angle) {
   $angle: test-argument(
-    'sugar.math-grad',
+    'Sugar.math-grad',
     'angle',
     number,
     $angle

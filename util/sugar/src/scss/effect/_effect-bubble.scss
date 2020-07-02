@@ -15,8 +15,8 @@
  *
  * @example     scss
  * .my-cool-bubble {
- * 		\@include sugar.effect-bubble(
- * 			$color : sugar.color(secondary)
+ * 		\@include Sugar.effect-bubble(
+ * 			$color : Sugar.color(secondary)
  * 		);
  * 		color : white;
  * }
@@ -34,33 +34,33 @@
   $border-color: null
 ) {
   $side: test-argument(
-    "sugar.effect-bubble",
+    "Sugar.effect-bubble",
     "side",
     (top, right, bottom, left),
     $side
   );
   $align: test-argument(
-    "sugar.effect-bubble",
+    "Sugar.effect-bubble",
     "align",
     (left, center, right, top, middle, bottom),
     $align
   );
-  $size: test-argument("sugar.effect-bubble", "size", number, $size);
-  $color: test-argument("sugar.effect-bubble", "color", color, $color);
+  $size: test-argument("Sugar.effect-bubble", "size", number, $size);
+  $color: test-argument("Sugar.effect-bubble", "color", color, $color);
   $arrow-offset: test-argument(
-    "sugar.effect-bubble",
+    "Sugar.effect-bubble",
     "arrow-offset",
     number,
     $arrow-offset
   );
   $border-width: test-argument(
-    "sugar.effect-bubble",
+    "Sugar.effect-bubble",
     "border-width",
     number,
     $border-width
   );
   $border-color: test-argument(
-    "sugar.effect-bubble",
+    "Sugar.effect-bubble",
     "border-color",
     color,
     $border-color

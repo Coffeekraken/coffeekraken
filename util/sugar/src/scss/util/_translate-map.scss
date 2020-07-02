@@ -11,7 +11,7 @@
  * @return 			{Map} 								The translate Map representation
  *
  * @example     scss
- * sugar.translate-map(10px,20px);
+ * Sugar.translate-map(10px,20px);
  * // return
  * // (
  * // 	transform: translateX(10px) translateY(20px) translateZ(0)
@@ -21,9 +21,9 @@
  */
 @function translate-map($x: 0, $y: 0, $z: 0) {
 
-  $x: test-argument("sugar.translate-map", "x", number, $x);
-  $y: test-argument("sugar.translate-map", "y", number, $y);
-  $z: test-argument("sugar.translate-map", "z", number, $z);
+  $x: test-argument("Sugar.translate-map", "x", number, $x);
+  $y: test-argument("Sugar.translate-map", "y", number, $y);
+  $z: test-argument("Sugar.translate-map", "z", number, $z);
 
   // build translate
   $translates: ();

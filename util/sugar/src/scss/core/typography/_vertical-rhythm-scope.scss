@@ -7,7 +7,7 @@
  *
  * @example       scss
  * .my-cool-item {
- * 	@include sugar.vertical-rhythm-scope() {
+ * 	@include Sugar.vertical-rhythm-scope() {
  * 		margin-bottom: 2em; // will be applied only if .my-cool-item is in the .vr scope
  * 	}
  * }

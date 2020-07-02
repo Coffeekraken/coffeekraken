@@ -9,13 +9,13 @@
  * @return      {Number}                The color saturation
  *
  * @example   scss
- * sugar.color-saturation(#e1d7d2); // => 20%
+ * Sugar.color-saturation(#e1d7d2); // => 20%
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function color-saturation($color) {
   $color: test-argument(
-    'sugar.color-saturation',
+    'Sugar.color-saturation',
     'color',
     color,
     $color

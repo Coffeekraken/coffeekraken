@@ -16,10 +16,10 @@
  * @return 		{Map} 												The map representation of the position wanted
  *
  * @example   scss
- * sugar.position-map(absolute, top, right);
- * sugar.position-map(absolute, middle, center);
- * sugar.position-map(relative, bottom, right);
- * sugar.position-map(absolute, bottom, center);
+ * Sugar.position-map(absolute, top, right);
+ * Sugar.position-map(absolute, middle, center);
+ * Sugar.position-map(relative, bottom, right);
+ * Sugar.position-map(absolute, bottom, center);
  * // etc...
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -34,27 +34,27 @@
   $left: null
 ) {
   $position: test-argument(
-    "sugar.position-map",
+    "Sugar.position-map",
     "position",
     (fixed, relative, absolute),
     $position
   );
   $vertical-align: test-argument(
-    "sugar.position-map",
+    "Sugar.position-map",
     "vertical-align",
     (top, middle, bottom),
     $vertical-align
   );
   $align: test-argument(
-    "sugar.position-map",
+    "Sugar.position-map",
     "align",
     (left, center, right),
     $align
   );
-  $top: test-argument("sugar.position-map", "top", "number|null", $top);
-  $right: test-argument("sugar.position-map", "right", "number|null", $right);
-  $bottom: test-argument("sugar.position-map", "bottom", "number|null", $bottom);
-  $left: test-argument("sugar.position-map", "left", "number|null", $left);
+  $top: test-argument("Sugar.position-map", "top", "number|null", $top);
+  $right: test-argument("Sugar.position-map", "right", "number|null", $right);
+  $bottom: test-argument("Sugar.position-map", "bottom", "number|null", $bottom);
+  $left: test-argument("Sugar.position-map", "left", "number|null", $left);
 
   $return: ();
 

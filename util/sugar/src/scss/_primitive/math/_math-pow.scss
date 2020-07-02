@@ -10,19 +10,19 @@
  * @return        {Number}                      The calculated power number
  *
  * @example    scss
- * sugar.math.pow(7, 3); // => 343
+ * Sugar.math.pow(7, 3); // => 343
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function math-pow($base, $exponent) {
   $base: test-argument(
-    'sugar.math-pow',
+    'Sugar.math-pow',
     'base',
     number,
     $base
   );
   $exponent: test-argument(
-    'sugar.math-pow',
+    'Sugar.math-pow',
     'exponent',
     number,
     $exponent

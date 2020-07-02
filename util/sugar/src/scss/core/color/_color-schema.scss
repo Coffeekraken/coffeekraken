@@ -8,7 +8,7 @@
  * @param 		{String} 			$name 			The color schema name
  *
  * @example       scss
- * \@include sugar.color-schema(light) {
+ * \@include Sugar.color-schema(light) {
  * 		h1, h2 {
  * 			color : white;
  * 		}
@@ -20,7 +20,7 @@
  * }
  *
  * h1, h2 {
- * 		\@include sugar.color-schema(light) {
+ * 		\@include Sugar.color-schema(light) {
  * 			color : white;
  * 		}
  * }
@@ -34,7 +34,7 @@
  */
 @mixin color-schema($name) {
   $name: test-argument(
-    'sugar.color-schema',
+    'Sugar.color-schema',
     'name',
     string,
     $name

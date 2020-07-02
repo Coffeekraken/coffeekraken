@@ -8,7 +8,7 @@
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
  */
- $settings: (
+$__settings: (
   // set the base unit to use across the system
   unit: rem,
   // by default, a reset will be applied
@@ -136,8 +136,8 @@
     default: all 0.2s ease-in-out 0s, // default transition
     slow: all 0.5s ease-in-out 0s
   )
-) !default;
+) !global;
 
 @if global-variable-exists(sugarUserSettings) and meta.type-of($sugarUserSettings) == 'map' {
-  $settings: map-extend($settings, $sugarUserSettings);
+  $__settings: map-extend($__settings, $sugarUserSettings) !global;
 }

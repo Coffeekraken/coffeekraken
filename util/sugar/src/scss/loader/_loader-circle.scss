@@ -21,8 +21,8 @@
  *
  * @example     scss
  * .my-cool-loader {
- *    @include sugar.loader-circle(
- *      $color: sugar.color(primary)
+ *    @include Sugar.loader-circle(
+ *      $color: Sugar.color(primary)
  *    );
  * }
  *
@@ -44,43 +44,43 @@
   $a-scale: 1em
 ) {
   $color: test-argument(
-    "sugar.loader-circle",
+    "Sugar.loader-circle",
     "color",
     "color|list-color|list-string",
     $color
   );
-  $size: test-argument("sugar.loader-circle", "size", number, $size);
-  $radius: test-argument("sugar.loader-circle", "radius", number, $radius);
-  $count: test-argument("sugar.loader-circle", "count", integer, $count);
-  $opacity: test-argument("sugar.loader-circle", "opacity", number, $opacity);
+  $size: test-argument("Sugar.loader-circle", "size", number, $size);
+  $radius: test-argument("Sugar.loader-circle", "radius", number, $radius);
+  $count: test-argument("Sugar.loader-circle", "count", integer, $count);
+  $opacity: test-argument("Sugar.loader-circle", "opacity", number, $opacity);
   $a-spread: test-argument(
-    "sugar.loader-circle",
+    "Sugar.loader-circle",
     "a-spread",
     number,
     $a-spread
   );
   $a-rotate: test-argument(
-    "sugar.loader-circle",
+    "Sugar.loader-circle",
     "a-rotate",
     degree,
     $a-rotate
   );
-  $a-scale: test-argument("sugar.loader-circle", "a-scale", number, $a-scale);
+  $a-scale: test-argument("Sugar.loader-circle", "a-scale", number, $a-scale);
   $a-opacity: test-argument(
-    "sugar.loader-circle",
+    "Sugar.loader-circle",
     "a-opacity",
     number,
     $a-opacity
   );
-  $a-near: test-argument("sugar.loader-circle", "a-near", number, $a-near);
-  $a-ease: test-argument("sugar.loader-circle", "a-ease", string, $a-ease);
+  $a-near: test-argument("Sugar.loader-circle", "a-near", number, $a-near);
+  $a-ease: test-argument("Sugar.loader-circle", "a-ease", string, $a-ease);
   $a-duration: test-argument(
-    "sugar.loader-circle",
+    "Sugar.loader-circle",
     "a-duration",
     second,
     $a-duration
   );
-  $a-delay: test-argument("sugar.loader-circle", "a-delay", second, $a-delay);
+  $a-delay: test-argument("Sugar.loader-circle", "a-delay", second, $a-delay);
 
   // handle colors
   $colors: null;

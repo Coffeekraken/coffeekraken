@@ -10,9 +10,9 @@
  * @return 			{Map} 										The map representation
  *
  * @example   scss
- * sugar.margin-map(10px); // => ( top:10px, right:10px, bottom:10px, left:10px )
- * sugar.margin-map(10px 20px); // => ( top:10px, right:20px, bottom:10px, left:20px )
- * sugar.margin-map(5px 10px 15px 20px); // => ( top:5px, right:10px, bottom:15px, left:20px )
+ * Sugar.margin-map(10px); // => ( top:10px, right:10px, bottom:10px, left:10px )
+ * Sugar.margin-map(10px 20px); // => ( top:10px, right:20px, bottom:10px, left:20px )
+ * Sugar.margin-map(5px 10px 15px 20px); // => ( top:5px, right:10px, bottom:15px, left:20px )
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */

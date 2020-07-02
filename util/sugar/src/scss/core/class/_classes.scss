@@ -94,16 +94,16 @@
  * @param 			{List}<string> 			$namespaces 		The classes namespaces wanted
  *
  * @example     scss
- * \@include sugar.classes(); // will print out all the classes
- * \@include sugar.classes('sugar.font'); // will print all the font classes
- * \@include sugar.classes('sugar.clearfix' 'sugar.pull'); // the clearfixes and the pull classes
+ * \@include Sugar.classes(); // will print out all the classes
+ * \@include Sugar.classes('sugar.font'); // will print all the font classes
+ * \@include Sugar.classes('sugar.clearfix' 'sugar.pull'); // the clearfixes and the pull classes
  * // etc...
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @mixin classes($namespaces: "sugar") {
   $namespaces: test-argument(
-    'sugar.classes',
+    'Sugar.classes',
     'namespaces',
     'string|list-string',
     $namespaces
@@ -116,7 +116,7 @@
   @if $namespaces {
     @each $namespace in $namespaces {
       // filter the classes map with the wanted namespace
-      $wanted-classes-map: map-filter-by-namespace(sugar.$classes, $namespace);
+      $wanted-classes-map: map-filter-by-namespace($__classes, $namespace);
 
       // loop on each wanted classes namespace
       @each $wanted-namespace in map.keys($wanted-classes-map) {

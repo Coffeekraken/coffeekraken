@@ -66,7 +66,7 @@ export default function SLitHtmlWebComponent(extend = HTMLElement) {
     `;
 
     /**
-     * @name        litHtml
+     * @name        lit
      * @type        Object
      *
      * Store all the litHtml functions that you may need
@@ -74,7 +74,7 @@ export default function SLitHtmlWebComponent(extend = HTMLElement) {
      * @see       https://lit-html.polymer-project.org/guide/template-reference
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    litHtml = {
+    lit = {
       html,
       render,
       asyncReplace,
@@ -111,7 +111,7 @@ export default function SLitHtmlWebComponent(extend = HTMLElement) {
         // render for the first time
         this.render();
         // dispatch a ready event
-        this._dispatch('ready', this);
+        this.dispatch('ready', this);
       });
     }
 
@@ -128,7 +128,7 @@ export default function SLitHtmlWebComponent(extend = HTMLElement) {
         this._props,
         this.metas,
         this._settings,
-        this.litHtml
+        this.lit
       );
       render(tpl, this.$container);
     }, 50);
@@ -142,7 +142,6 @@ export default function SLitHtmlWebComponent(extend = HTMLElement) {
       return $result;
     }
     $$(path) {
-      console.log(path);
       let $result = this.$container.querySelectorAll(path);
       if (!$result && !path.includes(`.${this.metas.dashName}__`)) {
         path = path.replace(/^\./, `.${this.metas.dashName}__`);

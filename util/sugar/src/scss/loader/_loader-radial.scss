@@ -18,7 +18,7 @@
  *
  * @example       scss
  * .my-cool-loader {
- *    @include sugar.loader-radial();
+ *    @include Sugar.loader-radial();
  * }
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -35,11 +35,11 @@
   $a-spread: 1em,
   $a-ease: linear
 ) {
-  $shape: test-argument("sugar.loader-radial", "shape", (circle, rect), $shape);
-  $size: test-argument("sugar.loader-radial", "size", number, $size);
-  $width: test-argument("sugar.loader-radial", "width", number, $width);
+  $shape: test-argument("Sugar.loader-radial", "shape", (circle, rect), $shape);
+  $size: test-argument("Sugar.loader-radial", "size", number, $size);
+  $width: test-argument("Sugar.loader-radial", "width", number, $width);
   $style: test-argument(
-    "sugar.loader-radial",
+    "Sugar.loader-radial",
     "style",
     (
       none,
@@ -58,26 +58,26 @@
     $style
   );
   $color: test-argument(
-    "sugar.loader-radial",
+    "Sugar.loader-radial",
     "color",
     "color|list-color|list-string",
     $color
   );
   $a-duration: test-argument(
-    "sugar.loader-radial",
+    "Sugar.loader-radial",
     "a-duration",
     second,
     $a-duration
   );
-  $a-delay: test-argument("sugar.loader-radial", "a-delay", second, $a-delay);
-  $a-count: test-argument("sugar.loader-radial", "a-count", integer, $a-count);
+  $a-delay: test-argument("Sugar.loader-radial", "a-delay", second, $a-delay);
+  $a-count: test-argument("Sugar.loader-radial", "a-count", integer, $a-count);
   $a-spread: test-argument(
-    "sugar.loader-radial",
+    "Sugar.loader-radial",
     "a-spread",
     number,
     $a-spread
   );
-  $a-ease: test-argument("sugar.loader-radial", "a-ease", string, $a-ease);
+  $a-ease: test-argument("Sugar.loader-radial", "a-ease", string, $a-ease);
 
   // handle colors
   $colors: null;

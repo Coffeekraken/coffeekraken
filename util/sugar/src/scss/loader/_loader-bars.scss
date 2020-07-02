@@ -23,7 +23,7 @@
  *
  * @example     scss
  * .my-cool-loader {
- * 		\@include sugar.loader-bars(
+ * 		\@include Sugar.loader-bars(
  * 			$color : primary,
  * 			$a-offset : .5em
  * 		);
@@ -48,41 +48,41 @@
   $a-direction: both,
   $a-continuous: true
 ) {
-  $shape: test-argument("sugar.loader-bars", "shape", (circle, rect), $shape);
+  $shape: test-argument("Sugar.loader-bars", "shape", (circle, rect), $shape);
   $color: test-argument(
-    "sugar.loader-bars",
+    "Sugar.loader-bars",
     "color",
     "color|list-color|list-string",
     $color
   );
-  $width: test-argument("sugar.loader-bars", "width", number, $width);
-  $height: test-argument("sugar.loader-bars", "height", number, $height);
-  $count: test-argument("sugar.loader-bars", "count", integer, $count);
-  $gap: test-argument("sugar.loader-bars", "gap", number, $gap);
-  $opacity: test-argument("sugar.loader-bars", "opacity", number, $opacity);
+  $width: test-argument("Sugar.loader-bars", "width", number, $width);
+  $height: test-argument("Sugar.loader-bars", "height", number, $height);
+  $count: test-argument("Sugar.loader-bars", "count", integer, $count);
+  $gap: test-argument("Sugar.loader-bars", "gap", number, $gap);
+  $opacity: test-argument("Sugar.loader-bars", "opacity", number, $opacity);
   $a-opacity: test-argument(
-    "sugar.loader-bars",
+    "Sugar.loader-bars",
     "a-opacity",
     number,
     $a-opacity
   );
   $a-duration: test-argument(
-    "sugar.loader-bars",
+    "Sugar.loader-bars",
     "a-duration",
     second,
     $a-duration
   );
-  $a-delay: test-argument("sugar.loader-bars", "a-delay", second, $a-delay);
-  $a-near: test-argument("sugar.loader-bars", "a-near", integer, $a-near);
-  $a-ease: test-argument("sugar.loader-bars", "a-ease", string, $a-ease);
+  $a-delay: test-argument("Sugar.loader-bars", "a-delay", second, $a-delay);
+  $a-near: test-argument("Sugar.loader-bars", "a-near", integer, $a-near);
+  $a-ease: test-argument("Sugar.loader-bars", "a-ease", string, $a-ease);
   $a-direction: test-argument(
-    "sugar.loader-bars",
+    "Sugar.loader-bars",
     "a-direction",
     (up, down, both),
     $a-direction
   );
   $a-continuous: test-argument(
-    "sugar.loader-bars",
+    "Sugar.loader-bars",
     "a-continuous",
     boolean,
     $a-continuous

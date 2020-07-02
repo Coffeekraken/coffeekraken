@@ -30,19 +30,24 @@
  *
  * @example 	 	scss
  * // default color (settings.colors.default)
- * $myColor : sugar.color(default);
+ * $myColor : Sugar.color(default);
  * // primary color (settings.colors.primary)
- * $primary : sugar.color(primary);
+ * $primary : Sugar.color(primary);
  * // manipulate
- * $primary-dark : sugar.color(primary, -darken 10%);
+ * $primary-dark : Sugar.color(primary, -darken 10%);
  * // registered modifier
- * $primary-light : sugar.color(primary, light);
+ * $primary-light : Sugar.color(primary, light);
  * // $name as list
- * $modified primary : sugar.color((primary, -darken 10%));
+ * $modified primary : Sugar.color((primary, -darken 10%));
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function color($name, $actions: null) {
+
+  @if $actions == null {
+    // @debug($name);
+    @return setting-var('colors.#{$name}.color');
+  }
 
   // dash syntax
   @if $actions and meta.type-of($actions) == list {
@@ -96,11 +101,11 @@
       $color: $mod;
       $actions: null;
     } @else if meta.type-of($mod) == list {
-      $actions: sugar.dash-to-map($mod);
+      $actions: dash-to-map($mod);
     } @else if meta.type-of($mod) == map {
       $actions: $mod;
     } @else {
-      @error ('The color "#{$name}" "actions" parameter set as "#{$actions}" for the "sugar.color" function is not valid');
+      @error ('The color "#{$name}" "actions" parameter set as "#{$actions}" for the "Sugar.color" function is not valid');
     }
   }
 
@@ -188,7 +193,7 @@
       $actions: test-argument(
         "color",
         "actions",
-        map.keys(sugar.setting("colors.#{$name}.modifiers")),
+        map.keys(setting("colors.#{$name}.modifiers")),
         $actions
       );
     }

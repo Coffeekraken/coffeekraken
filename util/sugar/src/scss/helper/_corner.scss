@@ -17,11 +17,11 @@
  * @example 	scss
  * .my-cool-item {
  * 	// apply on top left and right corners
- * 	\@include sugar.corner(
+ * 	\@include Sugar.corner(
  * 		$top : 10px;
  * 	);
  * 	// apply on each corners
- * 	\@include sugar.corner(10px);
+ * 	\@include Sugar.corner(10px);
  * 	// etc...
  * }
  *
@@ -39,40 +39,40 @@
   $bottom-right: null
 ) {
   $radius: test-argument(
-    "sugar.corner",
+    "Sugar.corner",
     "radius",
     "number|list-number",
     $radius
   );
-  $top: test-argument("sugar.corner", "top", "number|list-number", $top);
-  $right: test-argument("sugar.corner", "right", "number|list-number", $right);
+  $top: test-argument("Sugar.corner", "top", "number|list-number", $top);
+  $right: test-argument("Sugar.corner", "right", "number|list-number", $right);
   $bottom: test-argument(
-    "sugar.corner",
+    "Sugar.corner",
     "bottom",
     "number|list-number",
     $bottom
   );
-  $left: test-argument("sugar.corner", "left", "number|list-number", $left);
+  $left: test-argument("Sugar.corner", "left", "number|list-number", $left);
   $top-left: test-argument(
-    "sugar.corner",
+    "Sugar.corner",
     "top-left",
     "number|list-number",
     $top-left
   );
   $top-right: test-argument(
-    "sugar.corner",
+    "Sugar.corner",
     "top-right",
     "number|list-number",
     $top-right
   );
   $bottom-left: test-argument(
-    "sugar.corner",
+    "Sugar.corner",
     "bottom-left",
     "number|list-number",
     $bottom-left
   );
   $bottom-right: test-argument(
-    "sugar.corner",
+    "Sugar.corner",
     "bottom-right",
     "number|list-number",
     $bottom-right

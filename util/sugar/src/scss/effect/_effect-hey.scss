@@ -18,7 +18,7 @@
  *
  * @example       scss
  * .my-cool-element {
- * 		\@include sugar.effect-hey(
+ * 		\@include Sugar.effect-hey(
  * 			$align : right,
  * 			$color : secondary,
  * 			$size : 10px,
@@ -40,18 +40,18 @@
   $offset-left: 0
 ) {
   $vertical-align: test-argument(
-    "sugar.effect-hey",
+    "Sugar.effect-hey",
     "vertical-align",
     (top, middle, bottom),
     $vertical-align
   );
-  $align: test-argument("sugar.effect-hey", "align", (left, center, right), $align);
-  $size: test-argument("sugar.effect-hey", "size", number, $size);
-  $color: test-argument("sugar.effect-hey", "color", 'string|color', $color);
-  $offset-left: test-argument("sugar.effect-hey", "offset-left", number, $offset-left);
-  $offset-top: test-argument("sugar.effect-hey", "offset-top", number, $offset-top);
-  $offset-bottom: test-argument("sugar.effect-hey", "offset-bottom", number, $offset-bottom);
-  $offset-right: test-argument("sugar.effect-hey", "offset-right", number, $offset-right);
+  $align: test-argument("Sugar.effect-hey", "align", (left, center, right), $align);
+  $size: test-argument("Sugar.effect-hey", "size", number, $size);
+  $color: test-argument("Sugar.effect-hey", "color", 'string|color', $color);
+  $offset-left: test-argument("Sugar.effect-hey", "offset-left", number, $offset-left);
+  $offset-top: test-argument("Sugar.effect-hey", "offset-top", number, $offset-top);
+  $offset-bottom: test-argument("Sugar.effect-hey", "offset-bottom", number, $offset-bottom);
+  $offset-right: test-argument("Sugar.effect-hey", "offset-right", number, $offset-right);
 
   $color: color($color);
 

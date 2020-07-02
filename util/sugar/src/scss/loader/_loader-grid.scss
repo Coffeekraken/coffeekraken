@@ -25,7 +25,7 @@
  *
  * @example     scss
  * .my-cool-loader {
- *    @include sugar.loader-grid();
+ *    @include Sugar.loader-grid();
  * }
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -49,43 +49,43 @@
   $a-delay: 0s,
   $a-ease: ease-in-out
 ) {
-  $shape: test-argument("sugar.loader-grid", "shape", (rect, circle), $shape);
+  $shape: test-argument("Sugar.loader-grid", "shape", (rect, circle), $shape);
   $color: test-argument(
-    "sugar.loader-grid",
+    "Sugar.loader-grid",
     "color",
     "color|list-color|list-string",
     $color
   );
-  $cols: test-argument("sugar.loader-grid", "cols", integer, $cols);
-  $rows: test-argument("sugar.loader-grid", "rows", integer, $rows);
-  $size: test-argument("sugar.loader-grid", "size", number, $size);
-  $gap: test-argument("sugar.loader-grid", "gap", number, $gap);
-  $offset: test-argument("sugar.loader-grid", "offset", number, $offset);
-  $rotate: test-argument("sugar.loader-grid", "rotate", degree, $rotate);
+  $cols: test-argument("Sugar.loader-grid", "cols", integer, $cols);
+  $rows: test-argument("Sugar.loader-grid", "rows", integer, $rows);
+  $size: test-argument("Sugar.loader-grid", "size", number, $size);
+  $gap: test-argument("Sugar.loader-grid", "gap", number, $gap);
+  $offset: test-argument("Sugar.loader-grid", "offset", number, $offset);
+  $rotate: test-argument("Sugar.loader-grid", "rotate", degree, $rotate);
   $a-shape: test-argument(
-    "sugar.loader-grid",
+    "Sugar.loader-grid",
     "a-shape",
     (rect, circle),
     $a-shape
   );
-  $a-steps: test-argument("sugar.loader-grid", "a-steps", integer, $a-steps);
-  $a-spread: test-argument("sugar.loader-grid", "a-spread", number, $a-spread);
-  $a-rotate: test-argument("sugar.loader-grid", "a-rotate", degree, $a-rotate);
-  $a-scale: test-argument("sugar.loader-grid", "a-scale", number, $a-scale);
+  $a-steps: test-argument("Sugar.loader-grid", "a-steps", integer, $a-steps);
+  $a-spread: test-argument("Sugar.loader-grid", "a-spread", number, $a-spread);
+  $a-rotate: test-argument("Sugar.loader-grid", "a-rotate", degree, $a-rotate);
+  $a-scale: test-argument("Sugar.loader-grid", "a-scale", number, $a-scale);
   $a-opacity: test-argument(
-    "sugar.loader-grid",
+    "Sugar.loader-grid",
     "a-opacity",
     number,
     $a-opacity
   );
   $a-duration: test-argument(
-    "sugar.loader-grid",
+    "Sugar.loader-grid",
     "a-duration",
     second,
     $a-duration
   );
-  $a-delay: test-argument("sugar.loader-grid", "a-delay", second, $a-delay);
-  $a-ease: test-argument("sugar.loader-grid", "a-ease", string, $a-ease);
+  $a-delay: test-argument("Sugar.loader-grid", "a-delay", second, $a-delay);
+  $a-ease: test-argument("Sugar.loader-grid", "a-ease", string, $a-ease);
 
   // handle colors
   $colors: null;

@@ -11,19 +11,19 @@
  * @return      {Number}                    The index of the finded substring or null if not exist...
  *
  * @example      scss
- * sugar.str-index('Hello world', 'world'); // => 7
+ * Sugar.str-index('Hello world', 'world'); // => 7
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function str-index($string, $substring) {
   $string: test-argument(
-    'sugar.str-index',
+    'Sugar.str-index',
     'string',
     string,
     $string
   );
   $string: test-argument(
-    'sugar.str-index',
+    'Sugar.str-index',
     'substring',
     string,
     $substring

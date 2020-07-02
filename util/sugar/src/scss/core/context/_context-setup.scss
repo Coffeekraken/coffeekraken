@@ -1,5 +1,4 @@
 @use 'sass:map';
-@use '../variables' as sugar;
 /**
  * @name      context-setup
  * @namespace           scss.core.context
@@ -11,7 +10,7 @@
  * @param 			{Map} 			$settings 		The settings to override for this context
  *
  * @example       scss
- * \@include sugar.context-setup(my-cool-context, (
+ * \@include Sugar.context-setup(my-cool-context, (
  * 		look-and-feel : (
  * 			padding-vertical : (
  * 				default : 0.6em
@@ -20,21 +19,21 @@
  * ));
  *
  * // using your context
- * \@include sugar.context(my-cool-context) {
- * 		sugar.look-and-feel(padding-vertical); // => 0.6em
+ * \@include Sugar.context(my-cool-context) {
+ * 		Sugar.look-and-feel(padding-vertical); // => 0.6em
  * }
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @mixin context-setup($contextName, $settings) {
   $contextName: test-argument(
-    'sugar.context-setup',
+    'Sugar.context-setup',
     'contextName',
     string,
     $contextName
   );
   $settings: test-argument(
-    'sugar.context-setup',
+    'Sugar.context-setup',
     'settings',
     map,
     $settings
@@ -43,10 +42,10 @@
   @if $current-settings {
     $settings: map-extend($current-settings, $settings);
   }
-  @if not map.get(sugar.$settings, contexts) {
-    sugar.$settings: map-set(sugar.$settings, contexts, ());
+  @if not map.get($__settings, contexts) {
+    $__settings: map-set($__settings, contexts, ()) !global;
   }
-  $contexts: map.get(sugar.$settings, contexts);
+  $contexts: map.get($__settings, contexts);
   $contexts: map-set($contexts, $contextName, $settings);
-  sugar.$settings: map-set(sugar.$settings, contexts, $contexts);
+  $__settings: map-set($__settings, contexts, $contexts) !global;
 }

@@ -9,14 +9,14 @@
  *
  * @example 	scss
  * img {
- * 	\@include sugar.image-rendering(crips-edges);
+ * 	\@include Sugar.image-rendering(crips-edges);
  * }
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @mixin image-rendering($mode: auto) {
   $mode: test-argument(
-    'sugar.image-rendering',
+    'Sugar.image-rendering',
     'mode',
     (crisp-edges, auto),
     $mode

@@ -12,20 +12,20 @@
  * @return        {List}                                A list a the splited string
  *
  * @example       scss
- * sugar.str-split('hello.world', '.'); // ('hello', 'world')
+ * Sugar.str-split('hello.world', '.'); // ('hello', 'world')
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function str-split($string, $delimiter: "") {
 
   $string: test-argument(
-    'sugar.str-split',
+    'Sugar.str-split',
     'string',
     string,
     $string
   );
   $delimiter: test-argument(
-    'sugar.str-split',
+    'Sugar.str-split',
     'delimiter',
     string,
     $delimiter

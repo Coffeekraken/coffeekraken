@@ -10,19 +10,19 @@
  * @return      {Number}                    The calculated tangent inverse of the passed angle
  *
  * @example       scss
- * sugar.math-atan(10, deg); // => 84.2988568542deg
+ * Sugar.math-atan(10, deg); // => 84.2988568542deg
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function math-atan($angle, $unit: deg) {
   $angle: test-argument(
-    'sugar.math-acos',
+    'Sugar.math-acos',
     'angle',
     number,
     $angle
   );
   $unit: test-argument(
-    'sugar.math-acos',
+    'Sugar.math-acos',
     'unit',
     (deg,rad,grad,turn),
     $unit

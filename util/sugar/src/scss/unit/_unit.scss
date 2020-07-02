@@ -10,13 +10,13 @@
  * @return      {String}                    The unit
  *
  * @example     scss
- * sugar.unit(10px); // => px
+ * Sugar.unit(10px); // => px
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function unit($number) {
   $number: test-argument(
-    'sugar.unit',
+    'Sugar.unit',
     'number',
     number,
     $number

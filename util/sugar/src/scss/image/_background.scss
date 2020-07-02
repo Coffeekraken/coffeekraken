@@ -23,7 +23,7 @@
  *
  * @example     scss
  * .my-cool-element {
- * 		\@include sugar.background(
+ * 		\@include Sugar.background(
  * 			$url : 'img/my-cool-image.jpg',
  * 			$size : cover,
  * 			$resolution : 2x 3x 4x
@@ -51,25 +51,25 @@
   $position: null
 ) {
   $repeat: test-argument(
-    "sugar.background",
+    "Sugar.background",
     "repeat",
     (repeat, repeat-x, repeat-y, no-repeat),
     $repeat
   );
   $size: test-argument(
-    "sugar.background",
+    "Sugar.background",
     "size",
     (auto, length, cover, contain, initial, inherit),
     $size
   );
   $attachment: test-argument(
-    "sugar.background",
+    "Sugar.background",
     "attachment",
     (scroll, fixed, local, initial, inherit),
     $attachment
   );
   $blend-mode: test-argument(
-    "sugar.background",
+    "Sugar.background",
     "blend-mode",
     (
       normal,
@@ -86,27 +86,27 @@
     $blend-mode
   );
   $clip: test-argument(
-    "sugar.background",
+    "Sugar.background",
     "clip",
     (border-box, padding-box, content-box, initial, inherit),
     $clip
   );
   $origin: test-argument(
-    "sugar.background",
+    "Sugar.background",
     "origin",
     (padding-box, border-box, content-box, initial, inherit),
     $origin
   );
-  $url: test-argument("sugar.background", "url", string, $url);
-  $width: test-argument("sugar.background", "width", number, $width);
-  $height: test-argument("sugar.background", "height", number, $height);
+  $url: test-argument("Sugar.background", "url", string, $url);
+  $width: test-argument("Sugar.background", "width", number, $width);
+  $height: test-argument("Sugar.background", "height", number, $height);
   $resolution: test-argument(
-    "sugar.background",
+    "Sugar.background",
     "resolution",
     "string|list-string|list",
     $resolution
   );
-  $position: test-argument("sugar.background", "position", mixed, $position);
+  $position: test-argument("Sugar.background", "position", mixed, $position);
 
   // manage resolutions
   $x2: false;

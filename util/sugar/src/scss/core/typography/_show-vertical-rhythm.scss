@@ -9,14 +9,14 @@
  *
  * @example     scss
  * body {
- * 		@include sugar.show-vertical-rhythm();
+ * 		@include Sugar.show-vertical-rhythm();
  * }
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @mixin show-vertical-rhythm($color: #0ff) {
   $color: test-argument(
-    'sugar.show-vertical-rhythm',
+    'Sugar.show-vertical-rhythm',
     'color',
     color,
     $color

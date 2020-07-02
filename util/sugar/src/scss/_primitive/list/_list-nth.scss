@@ -11,19 +11,19 @@
  * @return        {Mixed}                     The value at the passed index
  *
  * @example     scss
- * sugar.list-nth(('hello','world'), 2); // => 'world'
+ * Sugar.list-nth(('hello','world'), 2); // => 'world'
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function list-nth($list, $index) {
   $list: test-argument(
-    'sugar.list-nth',
+    'Sugar.list-nth',
     'list',
     mixed,
     $list
   );
   $index: test-argument(
-    'sugar.list-nth',
+    'Sugar.list-nth',
     'index',
     number,
     $index

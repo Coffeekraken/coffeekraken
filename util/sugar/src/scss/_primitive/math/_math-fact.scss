@@ -9,13 +9,13 @@
  * @return        {Number}                          The calculated factorial of the passed number
  *
  * @example     scss
- * sugar.math-fact(5); // => 120
+ * Sugar.math-fact(5); // => 120
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function math-fact($number) {
   $number: test-argument(
-    'sugar.math-fact',
+    'Sugar.math-fact',
     'number',
     number,
     $number

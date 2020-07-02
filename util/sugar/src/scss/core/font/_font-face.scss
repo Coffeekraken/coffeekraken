@@ -18,7 +18,7 @@
  *
  * @example     scss
  * // if you have these extensions files : .woff .eot .woff2
- * \@include sugar.font-face(
+ * \@include Sugar.font-face(
  * 		$name : my-cool-font,
  * 		$src : '/fonts/my-font.eot',
  * 		$extensions : eot woff woff2
@@ -35,37 +35,37 @@
   $font-display: auto
 ) {
   $font-family: test-argument(
-    "sugar.font-face",
+    "Sugar.font-face",
     "font-family",
     string,
     $font-family
   );
   $src : test-argument(
-    'sugar.font-face',
+    'Sugar.font-face',
     'src',
     mixed,
     $src
   );
   $extensions: test-argument(
-    "sugar.font-face",
+    "Sugar.font-face",
     "extensions",
     "string|list",
     $extensions
   );
   $font-weight: test-argument(
-    "sugar.font-face",
+    "Sugar.font-face",
     "font-weight",
     (normal, bold, bolder, lighter, number, initial, inherit),
     $font-weight
   );
   $font-style: test-argument(
-    "sugar.font-face",
+    "Sugar.font-face",
     "font-style",
     (normal, italic, oblique, initial, inherit),
     $font-style
   );
   $font-display: test-argument(
-    "sugar.font-face",
+    "Sugar.font-face",
     "font-display",
     (auto, block, swap, fallback, optional),
     $font-display

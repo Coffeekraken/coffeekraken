@@ -13,7 +13,7 @@
  *
  * @example     scss
  * // register a transition
- * \@include sugar.setup((
+ * \@include Sugar.setup((
  * 		transitions : (
  * 			fast : all .2s ease-in-out,
  * 			// other transitions...
@@ -21,7 +21,7 @@
  * ));
  *
  * // registered transition
- * sugar.transition-map(fast);
+ * Sugar.transition-map(fast);
  * // {
  * // 	property : all,
  * // 	duration : .2s,
@@ -29,7 +29,7 @@
  * // }
  *
  * // custom transition
- * sugar.transition-map(fast -delay .5s);
+ * Sugar.transition-map(fast -delay .5s);
  * // {
  * // 	property : all,
  * // 	duration : .2s,

@@ -10,13 +10,13 @@
  * @return      {Number}                        The generated number
  *
  * @example     scss
- * sugar.math-random(); // => 0.2821251858
+ * Sugar.math-random(); // => 0.2821251858
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function math-random($limit: null) {
   $limit: test-argument(
-    'sugar.math-random',
+    'Sugar.math-random',
     'limit',
     number,
     $limit

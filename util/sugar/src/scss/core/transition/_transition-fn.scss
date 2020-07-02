@@ -14,7 +14,7 @@
  *
  * @example   scss
  * // register a transition
- * \@include sugar.setup((
+ * \@include Sugar.setup((
  * 		transitions : (
  * 			fast : all .2s ease-in-out 0s,
  * 			// other transitions...
@@ -23,13 +23,13 @@
  *
  * // registered transition
  * .my-cool-element {
- * 		transition : sugar.transition(fast);
+ * 		transition : Sugar.transition(fast);
  * 		// transition : all .2s ease-in-out 0s;
  * }
  *
  * // custom transition
  * .my-cool-element {
- *  	transition : sugar.transition(fast -delay .5s, fast width ease-in);
+ *  	transition : Sugar.transition(fast -delay .5s, fast width ease-in);
  *  	// transition : all .2s ease-in-out .5s, width .2s ease-in 0s;
  * }
  *

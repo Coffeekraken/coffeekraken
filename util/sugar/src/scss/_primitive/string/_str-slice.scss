@@ -11,25 +11,25 @@
  * @param         {Number}        [$end-at=-1]    Where to end to slice the string
  *
  * @param       scss
- * sugar.str-slice('Hello world', 1, 4); // => Hell
+ * Sugar.str-slice('Hello world', 1, 4); // => Hell
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function str-slice($string, $start-at, $end-at: -1) {
   $string: test-argument(
-    'sugar.str-slice',
+    'Sugar.str-slice',
     'string',
     string,
     $string
   );
   $start-at: test-argument(
-    'sugar.str-slice',
+    'Sugar.str-slice',
     'start-at',
     number,
     $start-at
   );
   $end-at: test-argument(
-    'sugar.str-slice',
+    'Sugar.str-slice',
     'end-at',
     number,
     $end-at

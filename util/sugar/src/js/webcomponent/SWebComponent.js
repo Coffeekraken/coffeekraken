@@ -157,7 +157,7 @@ export default function SWebComponent(extend = HTMLElement) {
       }
 
       // apply the $node class
-      this.classList.add(`${this.metas.dashName}__$node`);
+      this.classList.add(`${this.metas.dashName}__node`);
 
       // launch the mounting process
       setTimeout(this._mount.bind(this));
@@ -195,7 +195,7 @@ export default function SWebComponent(extend = HTMLElement) {
      */
     async _mount() {
       // dispatch mounting event
-      this._dispatch('mounting', this);
+      this.dispatch('mounting', this);
 
       // wait until the component match the mountDependencies and mountWhen status
       await this._mountDependencies();
@@ -207,7 +207,7 @@ export default function SWebComponent(extend = HTMLElement) {
       this._handlePhysicalProps();
 
       // dispatch mounted event
-      this._dispatch('mounted', this);
+      this.dispatch('mounted', this);
     }
 
     /**
@@ -266,7 +266,7 @@ export default function SWebComponent(extend = HTMLElement) {
     }
 
     /**
-     * @name          _dispatch
+     * @name          dispatch
      * @type          Function
      * @private
      *
@@ -279,12 +279,15 @@ export default function SWebComponent(extend = HTMLElement) {
      * @since       2.0.0
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    _dispatch(name, value) {
+    dispatch(name, value) {
       // dispatch event through the SPromise internal instance
-      this._promise.trigger(name, this);
+      this._promise.trigger(name, value || this);
       // dispatch a general event
-      __dispatch(`${this.metas.dashName}.${name}`, this);
-      __dispatch(`${this.metas.dashName}#${this._settings.id}.${name}`, this);
+      __dispatch(`${this.metas.dashName}.${name}`, value || this);
+      __dispatch(
+        `${this.metas.dashName}#${this._settings.id}.${name}`,
+        value || this
+      );
     }
 
     /**
@@ -342,7 +345,7 @@ export default function SWebComponent(extend = HTMLElement) {
     connectedCallback() {
       // dispatch "event"
       setTimeout(() => {
-        this._dispatch('attach', this);
+        this.dispatch('attach', this);
       });
     }
 
@@ -356,7 +359,7 @@ export default function SWebComponent(extend = HTMLElement) {
      */
     disconnectedCallback() {
       // dispatch "event"
-      this._dispatch('detach', this);
+      this.dispatch('detach', this);
     }
 
     /**
@@ -375,7 +378,7 @@ export default function SWebComponent(extend = HTMLElement) {
       if (this._settedAttributesStack[attrName]) return;
 
       // const previousValue = __parse(oldVal);
-      const newValue = __parse(newVal);
+      const newValue = __parse(newVal) || false;
 
       // set the value into the props
       this.prop(attrName, newValue);
@@ -438,7 +441,7 @@ export default function SWebComponent(extend = HTMLElement) {
         value: this._props[prop].value,
         previousValue: this._props[prop].previousValue
       };
-      this._dispatch(`prop.${prop}:${eventObj.action}`, eventObj);
+      this.dispatch(`prop.${prop}:${eventObj.action}`, eventObj);
     }
 
     /**
@@ -461,7 +464,7 @@ export default function SWebComponent(extend = HTMLElement) {
         const value = this._props[prop].value;
 
         // if the value is false, remove the attributee from the dom node
-        if (value === false) {
+        if (!value) {
           this.removeAttribute(prop);
           return;
         }

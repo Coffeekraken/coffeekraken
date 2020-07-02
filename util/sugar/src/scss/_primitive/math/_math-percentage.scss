@@ -10,13 +10,13 @@
  * @return        {Number}                            The percentage converted
  *
  * @example
- * sugar.math-percentage(0.2); // => 20%
+ * Sugar.math-percentage(0.2); // => 20%
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function math-percentage($number) {
   $percentage: test-argument(
-    'sugar.percentage',
+    'Sugar.percentage',
     'number',
     number,
     $number

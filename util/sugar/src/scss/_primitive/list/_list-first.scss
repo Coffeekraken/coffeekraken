@@ -10,13 +10,13 @@
  * @return        {Mixed}                     The first element of the list
  *
  * @example       scss
- * sugar.list-first(('hello', 'world')); // => 'hello'
+ * Sugar.list-first(('hello', 'world')); // => 'hello'
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function list-first($list) {
   $list: test-argument(
-    'sugar.list-first',
+    'Sugar.list-first',
     'list',
     list,
     $list

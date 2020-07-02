@@ -9,13 +9,13 @@
  * @param         {Color}         [$color=null]         The color wanted for the generated icons
  *
  * @example       scss
- * \@include sugar.icons(fa-user fa-bell fa-circle);
+ * \@include Sugar.icons(fa-user fa-bell fa-circle);
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @mixin icons($icons-names, $color: null) {
   $icons-names: test-argument(
-    'sugar.icons',
+    'Sugar.icons',
     'icons-names',
     'list-string',
     $icons-names

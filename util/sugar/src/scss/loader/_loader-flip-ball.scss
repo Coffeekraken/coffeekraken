@@ -14,7 +14,7 @@
  *
  * @example       scss
  * .my-cool-loader {
- * 		\@include sugar.loader-flip-ball();
+ * 		\@include Sugar.loader-flip-ball();
  * }
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -29,31 +29,31 @@
 ) {
 
   $shape: test-argument(
-    "sugar.loader-flip-ball",
+    "Sugar.loader-flip-ball",
     "shape",
     (circle, rect),
     $shape
   );
-  $size: test-argument("sugar.loader-flip-ball", "size", number, $size);
+  $size: test-argument("Sugar.loader-flip-ball", "size", number, $size);
   $colors: test-argument(
-    "sugar.loader-flip-ball",
+    "Sugar.loader-flip-ball",
     "colors",
     "color|list-color|list-string",
     $colors
   );
   $a-duration: test-argument(
-    "sugar.loader-flip-ball",
+    "Sugar.loader-flip-ball",
     "a-duration",
     second,
     $a-duration
   );
   $a-delay: test-argument(
-    "sugar.loader-flip-ball",
+    "Sugar.loader-flip-ball",
     "a-delay",
     second,
     $a-delay
   );
-  $a-ease: test-argument("sugar.loader-flip-ball", "a-ease", string, $a-ease);
+  $a-ease: test-argument("Sugar.loader-flip-ball", "a-ease", string, $a-ease);
 
   $a-duration: $a-duration + $a-delay;
 

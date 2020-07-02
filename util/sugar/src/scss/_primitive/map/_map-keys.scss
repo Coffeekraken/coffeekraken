@@ -10,7 +10,7 @@
  * @return      {List}                The list of map keys
  *
  * @example     scss
- * sugar.map-keys((
+ * Sugar.map-keys((
  *  'hello': 'world',
  *  'coco': 'plop'
  * )); // => ('hello','coco')
@@ -19,7 +19,7 @@
  */
 @function map-keys($map) {
   $map: test-argument(
-    'sugar.map-keys',
+    'Sugar.map-keys',
     'keys',
     map,
     $map

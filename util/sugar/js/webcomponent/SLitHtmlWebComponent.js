@@ -114,7 +114,7 @@ function SLitHtmlWebComponent(extend = HTMLElement) {
      */
 
     /**
-     * @name        litHtml
+     * @name        lit
      * @type        Object
      *
      * Store all the litHtml functions that you may need
@@ -139,7 +139,7 @@ function SLitHtmlWebComponent(extend = HTMLElement) {
 
       _this = _super.call(this, (0, _deepMerge.default)({}, settings)); // wait until mounted to render the component first time
 
-      _defineProperty(_assertThisInitialized(_this), "litHtml", {
+      _defineProperty(_assertThisInitialized(_this), "lit", {
         html: _litHtml.html,
         render: _litHtml.render,
         asyncReplace: _asyncReplace.asyncReplace,
@@ -157,7 +157,7 @@ function SLitHtmlWebComponent(extend = HTMLElement) {
       });
 
       _defineProperty(_assertThisInitialized(_this), "render", (0, _throttle.default)(function () {
-        const tpl = this.constructor.template(this._props, this.metas, this._settings, this.litHtml);
+        const tpl = this.constructor.template(this._props, this.metas, this._settings, this.lit);
         (0, _litHtml.render)(tpl, this.$container);
       }, 50));
 
@@ -170,7 +170,7 @@ function SLitHtmlWebComponent(extend = HTMLElement) {
         _this.render(); // dispatch a ready event
 
 
-        _this._dispatch('ready', _assertThisInitialized(_this));
+        _this.dispatch('ready', _assertThisInitialized(_this));
       });
 
       return _this;
@@ -200,7 +200,6 @@ function SLitHtmlWebComponent(extend = HTMLElement) {
     }, {
       key: "$$",
       value: function $$(path) {
-        console.log(path);
         let $result = this.$container.querySelectorAll(path);
 
         if (!$result && !path.includes(`.${this.metas.dashName}__`)) {

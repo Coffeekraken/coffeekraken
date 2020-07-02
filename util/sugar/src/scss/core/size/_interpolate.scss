@@ -35,13 +35,13 @@
 @function interpolate($value, $size) {
 
   $value: test-argument(
-    'sugar.interpolate',
+    'Sugar.interpolate',
     'value',
     number,
     $value
   );
   $size: test-argument(
-    'sugar.interpolate',
+    'Sugar.interpolate',
     'size',
     string,
     $size

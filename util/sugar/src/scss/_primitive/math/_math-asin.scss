@@ -1,5 +1,4 @@
 @use 'sass:math';
-@use 'variables' as sugar;
 /**
  * @name      math-asin
  * @namespace           scss.math
@@ -12,25 +11,25 @@
  * @return        {Number}                      The calculated asin
  *
  * @example     scss
- * sugar.math-asin(1, rad); // => 1.5698197643rad
+ * Sugar.math-asin(1, rad); // => 1.5698197643rad
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function math-asin($value, $unit: deg) {
   $value: test-argument(
-    'sugar.math-asin',
+    'Sugar.math-asin',
     'value',
     number,
     $value
   );
   $unit: test-argument(
-    'sugar.math-asin',
+    'Sugar.math-asin',
     'unit',
     (deg,rad,grad,turn),
     $unit
   );
 
-  $threshold: sugar.$math-default-threshold;
+  $threshold: $__math-default-threshold;
   $z: $value;
   $sum: 0;
   $complement: false;
@@ -43,7 +42,7 @@
     @return false;
   }
 
-  @if $z > math-sin(sugar.$math-pi/4) {
+  @if $z > math-sin($__math-pi/4) {
     $complement: true;
     $z: math-sqrt(1 - math-pow($z, 2));
   }
@@ -63,7 +62,7 @@
   }
 
   @return math-convert-angle(
-    $sign * (if($complement, sugar.$math-pi/2 - $sum, $sum)),
+    $sign * (if($complement, $__math-pi/2 - $sum, $sum)),
     $unit
   );
 

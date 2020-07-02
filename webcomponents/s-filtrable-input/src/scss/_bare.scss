@@ -1,0 +1,46 @@
+.s-filtrable-input {
+  display: inline-block;
+  position: relative;
+}
+
+  .s-filtrable-input__list {
+    position: absolute;
+    top: 100%; left:0;
+    background: Sugar.color(primary);
+    overflow-x: hidden;
+    overflow-y: auto;
+    opacity: 0;
+    pointer-events: none;
+    transition: max-height .2s ease-in-out;
+
+    .s-filtrable-input__node:focus + &,
+    &:focus {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .s-filtrable-input--ontop & {
+      bottom: 100%;
+      top: initial;
+    }
+
+  }
+
+  .s-filtrable-input__list-item {
+    padding: Sugar.lnf(padding);
+
+    * {
+      pointer-events: none; // disable pointer events inside each list items to detect the click correctly
+    }
+
+    &--selected {
+      color: red;
+    }
+    &:hover {
+      color: blue;
+    }
+  }
+
+  .s-filtrable-input__list-item__highlighted {
+    color: red;
+    font-weight: bold;
+  }

@@ -10,13 +10,13 @@
  * @return      {Number}                    The number of characters that compose the string
  *
  * @example     scss
- * sugar.str-length('hello'); // => 4
+ * Sugar.str-length('hello'); // => 4
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function str-length($string) {
   $string: test-argument(
-    'sugar.str-length',
+    'Sugar.str-length',
     'string',
     string,
     $string

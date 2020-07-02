@@ -29,7 +29,7 @@ var _register = require("./register");
 
 var _uniqid = _interopRequireDefault(require("../string/uniqid"));
 
-var _dispatch2 = _interopRequireDefault(require("../event/dispatch"));
+var _dispatch = _interopRequireDefault(require("../event/dispatch"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -214,7 +214,7 @@ function SWebComponent(extend = HTMLElement) {
       } // apply the $node class
 
 
-      _this.classList.add(`${_this.metas.dashName}__$node`); // launch the mounting process
+      _this.classList.add(`${_this.metas.dashName}__node`); // launch the mounting process
 
 
       setTimeout(_this._mount.bind(_assertThisInitialized(_this)));
@@ -249,8 +249,7 @@ function SWebComponent(extend = HTMLElement) {
        */
       value: async function _mount() {
         // dispatch mounting event
-        this._dispatch('mounting', this); // wait until the component match the mountDependencies and mountWhen status
-
+        this.dispatch('mounting', this); // wait until the component match the mountDependencies and mountWhen status
 
         await this._mountDependencies(); // check props definition
 
@@ -260,7 +259,7 @@ function SWebComponent(extend = HTMLElement) {
         this._handlePhysicalProps(); // dispatch mounted event
 
 
-        this._dispatch('mounted', this);
+        this.dispatch('mounted', this);
       }
       /**
        * @name          handleProp
@@ -322,7 +321,7 @@ function SWebComponent(extend = HTMLElement) {
         return this._promise.on(event, callback);
       }
       /**
-       * @name          _dispatch
+       * @name          dispatch
        * @type          Function
        * @private
        *
@@ -337,14 +336,14 @@ function SWebComponent(extend = HTMLElement) {
        */
 
     }, {
-      key: "_dispatch",
-      value: function _dispatch(name, value) {
+      key: "dispatch",
+      value: function dispatch(name, value) {
         // dispatch event through the SPromise internal instance
-        this._promise.trigger(name, this); // dispatch a general event
+        this._promise.trigger(name, value || this); // dispatch a general event
 
 
-        (0, _dispatch2.default)(`${this.metas.dashName}.${name}`, this);
-        (0, _dispatch2.default)(`${this.metas.dashName}#${this._settings.id}.${name}`, this);
+        (0, _dispatch.default)(`${this.metas.dashName}.${name}`, value || this);
+        (0, _dispatch.default)(`${this.metas.dashName}#${this._settings.id}.${name}`, value || this);
       }
       /**
        * @name          _mountDependencies
@@ -405,7 +404,7 @@ function SWebComponent(extend = HTMLElement) {
       value: function connectedCallback() {
         // dispatch "event"
         setTimeout(() => {
-          this._dispatch('attach', this);
+          this.dispatch('attach', this);
         });
       }
       /**
@@ -421,7 +420,7 @@ function SWebComponent(extend = HTMLElement) {
       key: "disconnectedCallback",
       value: function disconnectedCallback() {
         // dispatch "event"
-        this._dispatch('detach', this);
+        this.dispatch('detach', this);
       }
       /**
        * @name            attributeChangedCallback
@@ -441,7 +440,7 @@ function SWebComponent(extend = HTMLElement) {
       value: function attributeChangedCallback(attrName, oldVal, newVal) {
         if (this._settedAttributesStack[attrName]) return; // const previousValue = __parse(oldVal);
 
-        const newValue = (0, _parse.default)(newVal); // set the value into the props
+        const newValue = (0, _parse.default)(newVal) || false; // set the value into the props
 
         this.prop(attrName, newValue); // trigger a "prop" event
 
@@ -500,8 +499,7 @@ function SWebComponent(extend = HTMLElement) {
           value: this._props[prop].value,
           previousValue: this._props[prop].previousValue
         };
-
-        this._dispatch(`prop.${prop}:${eventObj.action}`, eventObj);
+        this.dispatch(`prop.${prop}:${eventObj.action}`, eventObj);
       }
       /**
        * @name        _handlePhysicalProps
@@ -523,7 +521,7 @@ function SWebComponent(extend = HTMLElement) {
           if (!this._props[prop].physical) return;
           const value = this._props[prop].value; // if the value is false, remove the attributee from the dom node
 
-          if (value === false) {
+          if (!value) {
             this.removeAttribute(prop);
             return;
           }

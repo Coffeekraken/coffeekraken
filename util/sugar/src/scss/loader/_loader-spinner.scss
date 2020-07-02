@@ -15,7 +15,7 @@
  *
  * @example     scss
  * .my-cool-loader {
- *    @include sugar.loader-spinner();
+ *    @include Sugar.loader-spinner();
  * }
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -32,20 +32,20 @@
 
   $color: color($color);
 
-  $size: test-argument("sugar.loader-spinner", "size", number, $size);
-  $width: test-argument("sugar.loader-spinner", "width", number, $width);
-  $color: test-argument("sugar.loader-spinner", "color", color, $color);
+  $size: test-argument("Sugar.loader-spinner", "size", number, $size);
+  $width: test-argument("Sugar.loader-spinner", "width", number, $width);
+  $color: test-argument("Sugar.loader-spinner", "color", color, $color);
   @if $bgcolor != inherit {
-    $bgcolor: test-argument("sugar.loader-spinner", "bgcolor", color, $bgcolor);
+    $bgcolor: test-argument("Sugar.loader-spinner", "bgcolor", color, $bgcolor);
   }
-  $length: test-argument("sugar.loader-spinner", "length", number, $length);
+  $length: test-argument("Sugar.loader-spinner", "length", number, $length);
   $a-duration: test-argument(
-    "sugar.loader-spinner",
+    "Sugar.loader-spinner",
     "a-duration",
     second,
     $a-duration
   );
-  $a-ease: test-argument("sugar.loader-spinner", "a-ease", string, $a-ease);
+  $a-ease: test-argument("Sugar.loader-spinner", "a-ease", string, $a-ease);
   $a-name: str-unquote("spinner-#{str-unique-id()}");
   $p-step: 1 / $a-duration;
 

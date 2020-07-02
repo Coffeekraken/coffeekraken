@@ -3,7 +3,7 @@
   // settings
   .s-settings:after {
     // process colors
-    $settings-to-process: map-extend((), sugar.$settings);
+    $settings-to-process: map-extend((), $__settings);
     // get colors
     $colors: setting("colors");
     @each $color-name, $color in $colors {

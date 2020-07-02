@@ -43,11 +43,11 @@
  * @return 			{Boolean} 							true if match the type, false if not
  *
  * @example       scss
- * sugar.is(hello, string) // => true
- * sugar.is('hello', string) // => true
- * sugar.is(#fff, color) // => true
- * sugar.is(hello #fff, list-color) // => false
- * sugar.is(#fff #ddd, list-color) // => true
+ * Sugar.is(hello, string) // => true
+ * Sugar.is('hello', string) // => true
+ * Sugar.is(#fff, color) // => true
+ * Sugar.is(hello #fff, list-color) // => false
+ * Sugar.is(#fff #ddd, list-color) // => true
  * // etc...
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

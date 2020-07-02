@@ -10,13 +10,13 @@
  * @return      {Number}                    The up rounded number
  *
  * @example     scss
- * sugar.math-ceil(4.2); // => 5
+ * Sugar.math-ceil(4.2); // => 5
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function math-ceil($number) {
   $number: test-argument(
-    'sugar.math-ceil',
+    'Sugar.math-ceil',
     'number',
     number,
     $number

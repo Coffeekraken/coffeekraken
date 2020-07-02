@@ -11,19 +11,19 @@
  * @return      {Number}                The index of the founded value or null
  *
  * @example     scss
- * sugar.list-index(('hello','world'), 'world'); // => 2
+ * Sugar.list-index(('hello','world'), 'world'); // => 2
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function list-index($list, $value) {
   $list: test-argument(
-    'sugar.list-index',
+    'Sugar.list-index',
     'list',
     list,
     $list
   );
   $index: test-argument(
-    'sugar.list-index',
+    'Sugar.list-index',
     'value',
     mixed,
     $value

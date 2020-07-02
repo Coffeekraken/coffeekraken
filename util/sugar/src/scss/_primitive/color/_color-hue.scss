@@ -9,13 +9,13 @@
  * @return      {Number}                The color hue
  *
  * @example   scss
- * sugar.color-hue(#e1d7d2); // => 20deg
+ * Sugar.color-hue(#e1d7d2); // => 20deg
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function color-hue($color) {
   $color: test-argument(
-    'sugar.color-hue',
+    'Sugar.color-hue',
     'color',
     color,
     $color

@@ -1,7 +1,5 @@
 @use "sass:map";
 @use "sass:math";
-@use "../core/variables" as sugar;
-
 
 /**
  * @name      convert
@@ -43,8 +41,8 @@
  *
  * @example     scss
  * // if the settings.typography.font-size === 16px
- * sugar.convert(24px, rem) // 1.5rem
- * sugar.convert(3rem, pt) // 36pt
+ * Sugar.convert(24px, rem) // 1.5rem
+ * Sugar.convert(3rem, pt) // 36pt
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
@@ -54,7 +52,7 @@
 
   // get the default unit if not specified
   @if not $unit {
-    $unit: map.get(sugar.$settings, unit);
+    $unit: map.get($__settings, unit);
   }
 
   // get the unit
@@ -62,12 +60,12 @@
 
   // put font size in cache to avoid
   // unit conversion recursion
-  @if not sugar.$font-size {
-    $fs: map.get(sugar.$settings, typography);
+  @if not $__font-size {
+    $fs: map.get($__settings, typography);
     $fs: map.get($fs, font-size);
-    sugar.$font-size: $fs;
+    $__font-size: $fs !global;
   }
-  $font-size: strip-units(sugar.$font-size);
+  $font-size: strip-units($__font-size);
 
   // return the value if same units
   @if $baseUnit and $baseUnit == $unit {

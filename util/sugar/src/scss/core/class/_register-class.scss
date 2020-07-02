@@ -10,15 +10,15 @@
  * @param 			{String} 		$namespace 		The dots separated namespace under which the class will live
  *
  * @example       scss
- * \@include sugar.register-class(my-cool-class, 'my.cool.namespace') {
+ * \@include Sugar.register-class(my-cool-class, 'my.cool.namespace') {
  * 		background : pink;
  * }
- * \@include sugar.register-class(another-cool-class, 'my.another.namespace') {
+ * \@include Sugar.register-class(another-cool-class, 'my.another.namespace') {
  * 		background : red;
  * }
  *
  * // print out my helpers classes
- * \@include sugar.classes('my');
+ * \@include Sugar.classes('my');
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
@@ -37,9 +37,9 @@
   );
   // register the class
   // $split: str-split($namespace, ".");
-  sugar.$classes: map-merge(sugar.$classes, (
+  $__classes: map-merge($__classes, (
     $namespace: $classname
-  ));
+  )) !global;
   %#{$classname} {
     @content;
   }

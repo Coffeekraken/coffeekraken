@@ -1,0 +1,7 @@
+@mixin init-settings-to-css-variables() {
+  $flattenSettings: map-flatten($__settings, '-');
+  // @debug($flattenSettings);
+  @each $key, $value in $flattenSettings {
+    $res: var-define($key, $value);
+  }
+}

@@ -15,7 +15,7 @@
  *
  * @example     scss
  * h1 {
- * 		\@include sugar.effect-side-lined(
+ * 		\@include Sugar.effect-side-lined(
  * 			$padding : 20px,
  * 			$side : right,
  * 			$width : 100%
@@ -36,7 +36,7 @@
   $color: color($color);
 
   $style: test-argument(
-    "sugar.effect-side-lined",
+    "Sugar.effect-side-lined",
     "style",
     none
       hidden
@@ -52,13 +52,13 @@
       inherit,
     $style
   );
-  $side: test-argument("sugar.effect-side-lined", "side", left right both, $side);
-  $height: test-argument("sugar.effect-side-lined", "height", number, $height);
-  $width: test-argument("sugar.effect-side-lined", "width", number, $width);
-  $color: test-argument("sugar.effect-side-lined", "color", color, $color);
-  $padding: test-argument("sugar.effect-side-lined", "padding", number, $padding);
+  $side: test-argument("Sugar.effect-side-lined", "side", left right both, $side);
+  $height: test-argument("Sugar.effect-side-lined", "height", number, $height);
+  $width: test-argument("Sugar.effect-side-lined", "width", number, $width);
+  $color: test-argument("Sugar.effect-side-lined", "color", color, $color);
+  $padding: test-argument("Sugar.effect-side-lined", "padding", number, $padding);
   $offset-top: test-argument(
-    "sugar.effect-side-lined",
+    "Sugar.effect-side-lined",
     "offset-top",
     number,
     $offset-top

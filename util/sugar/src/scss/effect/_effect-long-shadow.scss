@@ -15,12 +15,12 @@
  *
  * @example       scss
  * .my-cool-title {
- * 		\@include sugar.effect-long-shadow(
+ * 		\@include Sugar.effect-long-shadow(
  * 			$depth : 10
  * 		);
  * }
  * .my-cool-box {
- * 		\@include sugar.effect-long-shadow(
+ * 		\@include Sugar.effect-long-shadow(
  * 			$type : box
  * 		);
  * }
@@ -36,14 +36,14 @@
   $blur: 0,
   $blur-ratio: 0
 ) {
-  $color: test-argument("sugar.effect-long-shadow", "color", color, $color);
-  $type: test-argument("sugar.effect-long-shadow", "type", (text, box), $type);
-  $angle: test-argument("sugar.effect-long-shadow", "angle", degree, $angle);
-  $depth: test-argument("sugar.effect-long-shadow", "depth", integer, $depth);
-  $fade: test-argument("sugar.effect-long-shadow", "fade", boolean, $fade);
-  $blur: test-argument("sugar.effect-long-shadow", "blur", number, $blur);
+  $color: test-argument("Sugar.effect-long-shadow", "color", color, $color);
+  $type: test-argument("Sugar.effect-long-shadow", "type", (text, box), $type);
+  $angle: test-argument("Sugar.effect-long-shadow", "angle", degree, $angle);
+  $depth: test-argument("Sugar.effect-long-shadow", "depth", integer, $depth);
+  $fade: test-argument("Sugar.effect-long-shadow", "fade", boolean, $fade);
+  $blur: test-argument("Sugar.effect-long-shadow", "blur", number, $blur);
   $blur-ratio: test-argument(
-    "sugar.effect-long-shadow",
+    "Sugar.effect-long-shadow",
     "blur-ratio",
     number,
     $blur-ratio

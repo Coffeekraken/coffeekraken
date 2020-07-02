@@ -2,7 +2,6 @@
 @use "sass:math";
 @use "sass:meta";
 @use "sass:string";
-@use '../variables' as sugar;
 /**
  * @name      setting
  * @namespace           scss.core.setting
@@ -16,12 +15,12 @@
  * @return 				{Mixed} 										The setting value¨
  *
  * @example
- * $font-size : sugar.setting('typography.font-size');
+ * $font-size : Sugar.setting('typography.font-size');
  * // etc...
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@function setting($path, $context: sugar.$current-context, $default: null) {
+@function setting($path, $context: $__current-context, $default: null) {
   $base_path: $path;
   @if $context == default {
     $context: null;
@@ -32,7 +31,7 @@
     $path: "contexts.#{$context}.#{$path}";
   }
 
-  $value: map-get-path(sugar.$settings, $path);
+  $value: map-get-path($__settings, $path);
 
   @if not $value and $context {
     // try to get the value from the base component

@@ -61,32 +61,40 @@ module.exports = {
   'line-letters-count': 55,
 
   format: {
-    'h1 h2 h3 h4 h5 h6': {
-      'font-family': 'title'
-    },
     h1: {
+      'font-family': 'title',
       'font-size': 'bigger'
     },
     h2: {
+      'font-family': 'title',
       'font-size': 'big'
     },
     h3: {
+      'font-family': 'title',
       'font-size': 'medium'
     },
     h4: {
+      'font-family': 'title',
       'font-size': 'default'
     },
     h5: {
+      'font-family': 'title',
       'font-size': 'small'
     },
     h6: {
+      'font-family': 'title',
       'font-size': 'smaller'
     },
     p: {
+      'font-family': 'title',
       'font-size': 'medium',
       'line-height': '2rem'
     },
-    'blockquote code': {
+    blockquote: {
+      'font-family': 'code',
+      'font-size': 'default'
+    },
+    code: {
       'font-family': 'code',
       'font-size': 'default'
     }

@@ -18,9 +18,9 @@
  * @example       scss
  * .my-cool-element {
  * 	// absolute top right
- * 	\@include sugar.position(absolute, top, right);
+ * 	\@include Sugar.position(absolute, top, right);
  * 	// custom right and bottom values
- * 	\@include sugar.position(absolute,
+ * 	\@include Sugar.position(absolute,
  * 		$bottom : 20px,
  * 		$right : 20px
  * 	);

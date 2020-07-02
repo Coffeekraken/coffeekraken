@@ -9,13 +9,13 @@
  * @return      {Number}                    The color opacity
  *
  * @example     scss
- * sugar.color-opacity(#e1d7d2); // => 1
+ * Sugar.color-opacity(#e1d7d2); // => 1
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function color-opacity($color) {
   $color: test-argument(
-    'sugar.color-opacity',
+    'Sugar.color-opacity',
     'color',
     color,
     $color

@@ -15,7 +15,7 @@
  *
  * @example
  * // register a filter
- * \@include sugar.setup((
+ * \@include Sugar.setup((
  * 		filters : (
  * 			myCoolFilter : box-shadow(#000 0 0 10px) blur(30px),
  * 			// other filters...
@@ -23,14 +23,14 @@
  * ));
  *
  * // registered filter
- * sugar.filter-map(myCoolFilter);
+ * Sugar.filter-map(myCoolFilter);
  * // {
  * // 	box-shadow : #000 0 0 10px,
  * // 	blur : 30px
  * // }
  *
  * // custom filter
- * sugar.filter-map(blur(10px));
+ * Sugar.filter-map(blur(10px));
  * // {
  * // 	blur : 10px
  * // }

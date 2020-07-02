@@ -1,4 +1,3 @@
-@use 'variables' as sugar;
 /**
  * @name    math-convert-angle
  * @namespace           scss.math
@@ -11,19 +10,19 @@
  * @return          {Number}                            The converted angle value
  *
  * @example   scss
- * sugar.math-convert-angle()
+ * Sugar.math-convert-angle()
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function math-convert-angle($value, $unit) {
   $value: test-argument(
-    'sugar.math-convert-angle',
+    'Sugar.math-convert-angle',
     'value',
     number,
     $value
   );
   $unit: test-argument(
-    'sugar.math-convert-angle',
+    'Sugar.math-convert-angle',
     'unit',
     (rad,deg,grad,turn),
     $unit
@@ -31,9 +30,9 @@
 
   $factors: (
     rad: 1rad,
-    deg: 180deg / sugar.$math-pi,
-    grad: 200grad / sugar.$math-pi,
-    turn: 0.5turn / sugar.$math-pi
+    deg: 180deg / $__math-pi,
+    grad: 200grad / $__math-pi,
+    turn: 0.5turn / $__math-pi
   );
 
   @if not is-unitless($value) {

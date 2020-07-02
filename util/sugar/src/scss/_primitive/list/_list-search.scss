@@ -11,13 +11,13 @@
  * @return          {Boolean}                       true if the value exist in the list, false if not
  *
  * @example   scss
- * sugar.list-search(('hello', 'world'), 'hello'); // => true
+ * Sugar.list-search(('hello', 'world'), 'hello'); // => true
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function list-search($list, $value) {
   $list: test-argument(
-    'sugar.list-search',
+    'Sugar.list-search',
     'list',
     list,
     $list

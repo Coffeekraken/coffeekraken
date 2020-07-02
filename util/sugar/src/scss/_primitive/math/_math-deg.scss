@@ -9,13 +9,13 @@
  * @return        {Number}                    The degree version of the angle
  *
  * @example     scss
- * sugar.math-deg(10); // => 572.9577951308deg
+ * Sugar.math-deg(10); // => 572.9577951308deg
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function math-deg($angle) {
   $angle: test-argument(
-    'sugar.math-deg',
+    'Sugar.math-deg',
     'angle',
     number,
     $angle

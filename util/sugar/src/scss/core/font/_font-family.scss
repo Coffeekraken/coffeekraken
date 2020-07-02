@@ -11,7 +11,7 @@
  *
  * @example
  * // register a font
- * \@include sugar.setup((
+ * \@include Sugar.setup((
  * 		fonts : (
  * 			myCoolFont : (
  * 				font-family : 'Helvetica Neue',
@@ -24,7 +24,7 @@
  *
  * // apply the font
  * .my-cool-element {
- * 		font-family : sugar.font-family(myCoolFont);
+ * 		font-family : Sugar.font-family(myCoolFont);
  * 		// 'Helvetica Neue';
  * }
  *

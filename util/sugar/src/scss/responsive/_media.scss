@@ -52,14 +52,14 @@ $media-keywords: (
  *
  * @example 	scss
  * // simple min width
- * \@include sugar.media(
+ * \@include Sugar.media(
  * 	$min-width : 200px
  * ) {
  * 	// custom css here...
  * }
  *
  * // target a specific engine
- * \@include sugar.media(
+ * \@include Sugar.media(
  * 	$engine : gecko webkit
  * ) {
  * 	// custom css here
@@ -81,7 +81,7 @@ $media-keywords: (
   $system: null
 ) {
   $screen: test-argument(
-    "sugar.media",
+    "Sugar.media",
     "screen",
     (
       screen,
@@ -97,42 +97,42 @@ $media-keywords: (
     ),
     $screen
   );
-  $min-width: test-argument("sugar.media", "min-width", number, $min-width);
-  $max-width: test-argument("sugar.media", "max-width", number, $max-width);
-  $min-height: test-argument("sugar.media", "min-height", number, $min-height);
-  $max-height: test-argument("sugar.media", "max-height", number, $max-height);
+  $min-width: test-argument("Sugar.media", "min-width", number, $min-width);
+  $max-width: test-argument("Sugar.media", "max-width", number, $max-width);
+  $min-height: test-argument("Sugar.media", "min-height", number, $min-height);
+  $max-height: test-argument("Sugar.media", "max-height", number, $max-height);
   $orientation: test-argument(
-    "sugar.media",
+    "Sugar.media",
     "orientation",
     (landscape, portrait),
     $orientation
   );
   $resolution: test-argument(
-    "sugar.media",
+    "Sugar.media",
     "resolution",
     "number|list-number|list",
     $resolution
   );
   $engine: test-argument(
-    "sugar.media",
+    "Sugar.media",
     "engine",
     "string|list-string",
     $engine
   );
   $device: test-argument(
-    "sugar.media",
+    "Sugar.media",
     "device",
     "string|list-string",
     $device
   );
   $browser: test-argument(
-    "sugar.media",
+    "Sugar.media",
     "browser",
     "string|list-string",
     $browser
   );
   $system: test-argument(
-    "sugar.media",
+    "Sugar.media",
     "system",
     "string|list-string",
     $system

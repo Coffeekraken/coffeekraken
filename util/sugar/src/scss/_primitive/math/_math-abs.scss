@@ -10,13 +10,13 @@
  * @return        {Number}                      The absolute version of the number
  *
  * @example     scss
- * sugar.math-abs(-10); // => 10
+ * Sugar.math-abs(-10); // => 10
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function math-abs($number) {
   $number: test-argument(
-    'sugar.math-abs',
+    'Sugar.math-abs',
     'number',
     number,
     $number

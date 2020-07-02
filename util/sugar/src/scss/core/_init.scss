@@ -11,7 +11,7 @@ $_sugar-inited: false;
  * and **BEFORE** all the others sugar mixins and functions calls
  *
  * @example     scss
- * \@include sugar.init();
+ * \@include Sugar.init();
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
@@ -32,7 +32,10 @@ $_sugar-inited: false;
     // dom settings (put sugar settings in a "content" property of the .s-settings element
     // @include init-dom-settings();
 
-    // border box
+    // settings to css variables
+    @include init-settings-to-css-variables();
+
+    // // border box
     @if setting("border-box") == true {
       @include init-border-box();
     }
@@ -51,5 +54,6 @@ $_sugar-inited: false;
 
     // modular scale
     @include init-modular-scale();
+
   }
 }

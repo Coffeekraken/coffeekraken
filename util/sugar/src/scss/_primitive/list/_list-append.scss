@@ -12,25 +12,25 @@
  * @return          {List}                            The new list with the appended value
  *
  * @example     scss
- * sugar.list-append(hello world, coco, comma); // hello, world, coco
+ * Sugar.list-append(hello world, coco, comma); // hello, world, coco
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function list-append($list, $value, $separator: auto) {
   $list: test-argument(
-    'sugar.list-append',
+    'Sugar.list-append',
     'list',
     'list|string',
     $list
   );
   $value: test-argument(
-    'sugar.list-append',
+    'Sugar.list-append',
     'value',
     mixed,
     $value
   );
   $separator: test-argument(
-    'sugar.list-append',
+    'Sugar.list-append',
     'separator',
     (auto,space,comma),
     $separator

@@ -1,4 +1,3 @@
-@use 'variables' as sugar;
 /**
  * @name      setup
  * @namespace           scss.core.mixin
@@ -7,10 +6,10 @@
  * Setup sugar toolkit by overriding the default [settings](../_settings.scss)
  * This has to be called **BEFORE** the [s-init mixin](./_s-init.scss)
  *
- * @param 			{Map} 			$settings 		The settings to override
+ * @param 			{Map} 			$newSettings 		The settings to override the default one with
  *
  * @example       scss
- * \@include sugar.setup((
+ * \@include Sugar.setup((
  * 		typo : (
  * 			font-size : 12px
  * 		),
@@ -25,6 +24,6 @@
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@mixin setup($settings) {
-  sugar.$settings: map-extend(sugar.$settings, $settings, true);
+@mixin setup($newSettings) {
+  $__settings: map-extend($__settings, $newSettings, true) !global;
 }

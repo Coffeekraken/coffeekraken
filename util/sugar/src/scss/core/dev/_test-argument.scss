@@ -18,8 +18,8 @@
  *
  * @example     scss
  * \@mixin my-cool-mixin($argument1, $argument2) {
- *        $argument1 : sugar.test-argument(my-cool-mixin, argument1, string, $argument1);
- *        $argument2 : sugar.test-argument(my-cool-mixin, argument2, (hello,world,12), $argument2);
+ *        $argument1 : Sugar.test-argument(my-cool-mixin, argument1, string, $argument1);
+ *        $argument2 : Sugar.test-argument(my-cool-mixin, argument2, (hello,world,12), $argument2);
  * }
  * \@mixin my-cool-mixin(hello, world); // ok
  * \@mixin my-cool-mixin(hello, universe); // throw an error

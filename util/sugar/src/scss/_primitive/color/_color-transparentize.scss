@@ -10,19 +10,19 @@
  * @param       {Number}      $amount       The amount to transparentize the color. Must be between 0 and 1
  *
  * @example       scss
- * sugar.color-transparentize(rgba(#036, 0.3), 0.3); // => rgba(0, 51, 102, 0)
+ * Sugar.color-transparentize(rgba(#036, 0.3), 0.3); // => rgba(0, 51, 102, 0)
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function color-transparentize($color, $amount) {
   $color: test-argument(
-    'sugar.color-transparentize',
+    'Sugar.color-transparentize',
     'color',
     color,
     $color
   );
   $amount: test-argument(
-    'sugar.color-transparentize',
+    'Sugar.color-transparentize',
     'amount',
     number,
     $amount

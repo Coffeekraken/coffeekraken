@@ -11,7 +11,7 @@
  * @return          {Boolean}                 true if has the key, false if not
  *
  * @example     scss
- * sugar.map-has-key((
+ * Sugar.map-has-key((
  *    'hello': 'world',
  *    'coco': 'plop'
  * ), 'hello'); // => true
@@ -20,13 +20,13 @@
  */
 @function map-has-key($map, $key) {
   $map: test-argument(
-    'sugar.map-has-key',
+    'Sugar.map-has-key',
     'map',
     map,
     $map
   );
   $key: test-argument(
-    'sugar.map-has-key',
+    'Sugar.map-has-key',
     'key',
     string,
     $key

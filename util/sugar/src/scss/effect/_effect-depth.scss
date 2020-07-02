@@ -10,20 +10,20 @@
  *
  * @example     scss
  * .my-cool-element {
- * 		\@include sugar.effect-depth(2);
+ * 		\@include Sugar.effect-depth(2);
  * }
  *
  * @author 	 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @mixin effect-depth($depth, $color: rgba(0, 0, 0, 0.2)) {
   $depth: test-argument(
-    'sugar.effect-depth',
+    'Sugar.effect-depth',
     'depth',
     number,
     $depth
   );
   $color: test-argument(
-    'sugar.effect-depth',
+    'Sugar.effect-depth',
     'color',
     color,
     $color

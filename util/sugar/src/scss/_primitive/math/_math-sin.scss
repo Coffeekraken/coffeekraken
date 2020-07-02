@@ -1,5 +1,4 @@
 @use 'sass:math';
-@use 'variables' as sugar;
 /**
  * @name    math-sin
  * @namespace           scss.math
@@ -11,13 +10,13 @@
  * @return      {Number}                    The calculated sinus
  *
  * @example     scss
- * sugar.math-sin(10); // => 2.761090926
+ * Sugar.math-sin(10); // => 2.761090926
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function math-sin($angle) {
   $angle: test-argument(
-    'sugar.math-sin',
+    'Sugar.math-sin',
     'angle',
     number,
     $angle
@@ -25,7 +24,7 @@
 
   $a: math-to-unitless-rad($angle);
   $sin: $a;
-  @for $n from 1 through sugar.$math-precision {
+  @for $n from 1 through $__math-precision {
     $sin: $sin + (math-pow(-1, $n) / math-fact(2 * $n + 1) ) * math-pow($a, (2 * $n + 1));
   }
   @return $sin;

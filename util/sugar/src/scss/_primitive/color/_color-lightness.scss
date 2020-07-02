@@ -9,13 +9,13 @@
  * @return        {Number}                  The color lightness
  *
  * @example     scss
- * sugar.color-lightness(#e1d7d2); // => 85.2941176471%
+ * Sugar.color-lightness(#e1d7d2); // => 85.2941176471%
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function color-lightness($color) {
   $color: test-argument(
-    'sugar.color-lightness',
+    'Sugar.color-lightness',
     'color',
     color,
     $color

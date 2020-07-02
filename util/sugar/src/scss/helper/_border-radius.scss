@@ -18,11 +18,11 @@
  * @example 	scss
  * .my-cool-item {
  * 	// apply on top left and right corners
- * 	\@include sugar.border-radius(
+ * 	\@include Sugar.border-radius(
  * 		$top : 10px;
  * 	);
  * 	// apply on each corners
- * 	\@include sugar.border-radius(10px);
+ * 	\@include Sugar.border-radius(10px);
  * 	// etc...
  * }
  *

@@ -1,5 +1,4 @@
 @use '../vendor/font-awesome/fontawesome' as font-awesome;
-@use '../core/variables' as sugar;
 
 // TODO check font-awesome updates
 
@@ -16,7 +15,7 @@
  *
  * @example 	scss
  * .my-cool-icon {
- * 	\@include sugar.icon(fa-user, primary);
+ * 	\@include Sugar.icon(fa-user, primary);
  * }
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -58,10 +57,10 @@
     }
   } @else if str-slice($name, 1, 4) == 'svg-' {
     $svg-name: str-slice($name, 5);
-    @if map-get(sugar.$svg-icons, $svg-name) == null {
-      @error('The svg icon named #{$svg-name} does not exist. You need to register it first using the mixin "sugar.register-svg-icon"');
+    @if map-get($__svg-icons, $svg-name) == null {
+      @error('The svg icon named #{$svg-name} does not exist. You need to register it first using the mixin "Sugar.register-svg-icon"');
     }
-    $svg-code: map-get(sugar.$svg-icons, $svg-name);
+    $svg-code: map-get($__svg-icons, $svg-name);
     // if has a color passed
     @if $color {
       $svg-code: str-replace($svg-code, '<svg', '<svg style="fill:#{$color}"');

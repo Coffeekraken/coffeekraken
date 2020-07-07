@@ -4,7 +4,7 @@ module.exports = {
   fonts: '@config.fonts',
   filters: '@config.filters',
   'look-and-feel': '@config.look-and-feel',
-  'modular-scale': '@config.modular-scale',
+  media: '@config.media',
   sizes: '@config.sizes',
   spaces: '@config.spaces',
   transitions: '@config.transitions',

@@ -71,7 +71,7 @@ $flattenMapValues: ();
   @each $key, $value in $flattenMap {
     @if $key != null {
       $setKey: str-replace($key, '.', $separator);
-      $finalMap: map-set($finalMap, $setKey, map-get($map, $key));
+      $finalMap: map-set($finalMap, $setKey, map-get($flattenMap, $key));
     }
   }
 

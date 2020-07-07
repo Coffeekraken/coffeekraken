@@ -31,6 +31,8 @@ module.exports = function jsObjectToScssMap(object, settings = {}) {
     scssConfigString = scssConfigString.replace(line, `${prop}: "${value}"`);
   });
 
+  // console.log(scssConfigString);
+
   // set or append in the "data" property
   return scssConfigString;
 };

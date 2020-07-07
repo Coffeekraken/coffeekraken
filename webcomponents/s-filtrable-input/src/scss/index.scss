@@ -1,1 +1,13 @@
+
+body {
+
+  @include Sugar.media('>tablet desktop') {
+    .coco {
+      content: 'tablet';
+    }
+  }
+
+}
+
+
 @include Sugar.var-output();

@@ -1,13 +1,11 @@
+// @use './style' as SFiltrableInput;
+@import './style';
 
-body {
+@include style();
 
-  @include Sugar.media('>tablet desktop') {
-    .coco {
-      content: 'tablet';
-    }
-  }
+
+.s-filtrable-input__list {
+
+  left: 300px !important;
 
 }
-
-
-@include Sugar.var-output();

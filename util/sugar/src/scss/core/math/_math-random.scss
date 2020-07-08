@@ -1,0 +1,26 @@
+@use 'sass:math';
+/**
+ * @name    math-random
+ * @namespace           scss.core.math
+ * @type      function
+ *
+ * If $limit is null, returns a random decimal number between 0 and 1.
+ *
+ * @param       {Number}      [$limit:null]     The limit to generate a number under that
+ * @return      {Number}                        The generated number
+ *
+ * @example     scss
+ * Sugar.math-random(); // => 0.2821251858
+ *
+ * @since       1.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function math-random($limit: null) {
+  $limit: test-argument(
+    'Sugar.math-random',
+    'limit',
+    number,
+    $limit
+  );
+  @return math.random($limit);
+}

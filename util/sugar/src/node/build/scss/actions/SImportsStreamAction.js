@@ -2,7 +2,7 @@ const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
 const __Bundler = require('scss-bundle').Bundler;
 const __getFilename = require('../../../fs/filename');
 const __sugarConfig = require('../../../config/sugar');
-const __getScssImportsString = require('../getScssImportsString');
+const __getScssImportsStrings = require('../getScssImportsStrings');
 
 /**
  * @name                SImportsStreamAction
@@ -61,11 +61,30 @@ module.exports = class SImportsStreamAction extends __SActionsStreamAction {
     this.checkStreamObject(streamObj);
 
     return new Promise(async (resolve, reject) => {
-      const importsString = __getScssImportsString(streamObj.imports);
+      const importsStrings = __getScssImportsStrings(streamObj.imports);
 
-      // add this to the "data" property
-      if (streamObj.data) streamObj.data = importsString + streamObj.data;
-      else streamObj.data = importsString;
+      streamObj.data = streamObj.data
+        ? `
+        ${importsStrings.prepend}
+        ${streamObj.data}
+        ${importsStrings.append}
+      `
+        : importsString.prepend + importsStrings.append;
+
+      const atUseReg = /\s?@use.+/gm;
+      const atUseMatches = streamObj.data.match(atUseReg);
+
+      if (atUseMatches) {
+        // remove all the lines from the string
+        atUseMatches.forEach((atUseLine) => {
+          streamObj.data = streamObj.data.replace(atUseLine, '');
+        });
+        // prepend all the @use statements
+        streamObj.data = `
+          ${atUseMatches.join('\n')}
+          ${streamObj.data}
+        `;
+      }
 
       // resolve the action
       resolve(streamObj);

@@ -1,0 +1,30 @@
+@mixin style(
+  $name: s-filtrable-input
+) {
+
+  .#{$name} {}
+
+  .#{$name}__list {
+    background: white;
+    border-radius: Sugar.lnf(border-radius);
+    border: 2px solid white;
+
+    @include Sugar.smooth-shadow();
+    @include Sugar.scrollbar();
+  }
+  .#{$name}__list-item {
+    padding: Sugar.lnf(padding);
+
+    &:hover {
+      background-color: Sugar.color(primary, light);
+    }
+    &--selected {
+      font-weight: bold;
+      background-color: Sugar.color(primary);
+    }
+    &--selected:hover {
+      background-color: Sugar.color(primary, dark);
+    }
+  }
+
+}

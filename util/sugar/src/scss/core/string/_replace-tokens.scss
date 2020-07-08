@@ -13,6 +13,7 @@
  * @example     scss
  * Sugar.replace-tokens(12px #primary hello #secondary); // > 12px #ddd hello #fff;
  *
+ * @since       1.0.0
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function replace-tokens($in) {

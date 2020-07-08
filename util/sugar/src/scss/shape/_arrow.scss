@@ -1,3 +1,6 @@
+/**
+ * @todo          Mixin header and documentation
+ */
 @mixin _arrow_helper($arrowSize, $arrowColor, $margin, $side, $align) {
   @if $side == "top" {
     border-bottom-color: $arrowColor;

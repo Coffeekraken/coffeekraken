@@ -1,0 +1,40 @@
+@use 'sass:list';
+/**
+ * @name    list-prepend
+ * @namespace           scss.core.list
+ * @type      function
+ *
+ * Prepend a value in the passed list
+ *
+ * @param         {List}        $list           The list to process
+ * @param         {Mixed}       $value          The value to prepend in the list
+ * @param         {String}      [$separator=auto]   The separator to use. Can be auto, space or comma
+ * @return        {List}                        The new list with his new value
+ *
+ * @example   scss
+ * Sugar.list-prepend(('hello','world'), 'coco'); // => ('coco','hello','world')
+ *
+ * @since       1.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function list-prepend($list, $value, $separator: auto) {
+  $list: test-argument(
+    'Sugar.list-prepend',
+    'list',
+    'list|string',
+    $list
+  );
+  $value: test-argument(
+    'Sugar.list-prepend',
+    'value',
+    mixed,
+    $value
+  );
+  $separator: test-argument(
+    'Sugar.list-prepend',
+    'separator',
+    (auto,space,comma),
+    $separator
+  );
+  @return list.join($value, $list, $separator);
+}

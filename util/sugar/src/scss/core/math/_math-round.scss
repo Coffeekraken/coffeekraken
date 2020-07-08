@@ -1,0 +1,26 @@
+@use 'sass:math';
+/**
+ * @name    math-round
+ * @namespace           scss.core.math
+ * @type      function
+ *
+ * Rounds $number to the nearest whole number.
+ *
+ * @param       {Number}      $number       The number to round
+ * @return      {Number}                    The rounded number
+ *
+ * @example     scss
+ * Sugar.math-round(4.2); // => 4
+ *
+ * @since       1.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function math-round($number) {
+  $number: test-argument(
+    'Sugar.math-round',
+    'number',
+    number,
+    $number
+  );
+  @return math.round($number);
+}

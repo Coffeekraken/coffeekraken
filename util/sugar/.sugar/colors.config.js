@@ -110,7 +110,11 @@ module.exports = {
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   primary: {
-    color: '#f2bc2b'
+    color: '#f2bc2b',
+    modifiers: {
+      light: '-opacity 33%',
+      dark: '-darken 10%'
+    }
   },
 
   /**

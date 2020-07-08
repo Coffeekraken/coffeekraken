@@ -69,6 +69,8 @@ module.exports = class SPostCssStreamAction extends __SActionsStreamAction {
     this.checkStreamObject(streamObj);
 
     return new Promise(async (resolve, reject) => {
+      if (!streamObj.prod) return resolve(streamObj);
+
       const postCssResult = await __postcss([
         __precss,
         __autoprefixer,

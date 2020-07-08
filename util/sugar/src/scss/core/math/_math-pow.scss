@@ -1,0 +1,44 @@
+/**
+ * @name      math-pow
+ * @namespace           scss.core.math
+ * @type      function
+ *
+ * Return the calculated power of the passed base using the passed exponent
+ *
+ * @param         {Number}        $base         The base number
+ * @param         {Number}        $exponent     The exponent used to raise the base
+ * @return        {Number}                      The calculated power number
+ *
+ * @example    scss
+ * Sugar.math.pow(7, 3); // => 343
+ *
+ * @since       1.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function math-pow($base, $exponent) {
+  $base: test-argument(
+    'Sugar.math-pow',
+    'base',
+    number,
+    $base
+  );
+  $exponent: test-argument(
+    'Sugar.math-pow',
+    'exponent',
+    number,
+    $exponent
+  );
+
+  $value: $base;
+  @if $exponent > 1 {
+    @for $i from 2 through $exponent {
+      $value: $value * $base;
+    }
+  }
+  @if $exponent < 1{
+    @for $i from 0 through -$exponent {
+      $value: $value / $base;
+    }
+  }
+  @return $value;
+}

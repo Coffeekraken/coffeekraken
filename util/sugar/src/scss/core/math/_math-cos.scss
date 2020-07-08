@@ -1,0 +1,32 @@
+@use 'sass:math';
+/**
+ * @name      math-cos
+ * @namespace           scss.core.math
+ * @type      function
+ *
+ * Calculate the cosinus of the passed angle
+ *
+ * @param         {Number}        $angle      The angle to calculate the cosinus from
+ * @return        {Number}                    The calculated cosinus
+ *
+ * @example     scss
+ * Sugar.math-cos(10); // => 6.6645643378
+ *
+ * @since       1.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function math-cos($angle) {
+  $angle: test-argument(
+    'Sugar.math-cos',
+    'angle',
+    number,
+    $angle
+  );
+
+  $a: math-to-unitless-rad($angle);
+  $cos: 1;
+  @for $n from 1 through $__math-precision {
+    $cos: $cos + ( math-pow(-1,$n) / math-fact(2*$n) ) * math-pow($a,2*$n);
+  }
+  @return $cos;
+}

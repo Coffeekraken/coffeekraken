@@ -1,0 +1,26 @@
+@use 'sass:math';
+/**
+ * @name    math-ceil
+ * @namespace           scss.core.math
+ * @type      function
+ *
+ * Rounds $number up to the next highest whole number
+ *
+ * @param       {Number}      $number       The number to process
+ * @return      {Number}                    The up rounded number
+ *
+ * @example     scss
+ * Sugar.math-ceil(4.2); // => 5
+ *
+ * @since       1.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function math-ceil($number) {
+  $number: test-argument(
+    'Sugar.math-ceil',
+    'number',
+    number,
+    $number
+  );
+  @return math.ceil($number);
+}

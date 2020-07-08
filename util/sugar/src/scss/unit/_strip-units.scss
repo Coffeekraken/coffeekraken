@@ -12,6 +12,7 @@
  * Sugar.strip-units(12px); // => 12
  * Sugar.strip-units(30rem); // => 30
  *
+ * @since      1.0.0
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function strip-units($number) {

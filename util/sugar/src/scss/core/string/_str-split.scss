@@ -1,0 +1,62 @@
+@use 'sass:string';
+@use 'sass:list';
+/**
+ * @name    str-split
+ * @namespace           scss.core.string
+ * @type      function
+ *
+ * Split a string using a delimiter
+ *
+ * @param         {String}          $string             The string to split
+ * @param         {String}          [$delimiter=""]     The delimiter to split the string
+ * @return        {List}                                A list a the splited string
+ *
+ * @example       scss
+ * Sugar.str-split('hello.world', '.'); // ('hello', 'world')
+ *
+ * @since       1.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function str-split($string, $delimiter: "") {
+
+  $string: test-argument(
+    'Sugar.str-split',
+    'string',
+    string,
+    $string
+  );
+  $delimiter: test-argument(
+    'Sugar.str-split',
+    'delimiter',
+    string,
+    $delimiter
+  );
+
+  $result: ();
+  $length: string.length($string);
+
+  @if string.length($delimiter) == 0 {
+    @for $i from 1 through $length {
+      $result: list.append($result, string.slice($string, $i, $i));
+    }
+
+    @return $result;
+  }
+
+  $running: true;
+  $remaining: $string;
+
+  @while $running {
+    $index: string.index($remaining, $delimiter);
+
+    @if $index {
+      $slice: string.slice($remaining, 1, $index - 1);
+      $result: list.append($result, $slice);
+      $remaining: string.slice($remaining, $index + string.length($delimiter));
+    } @else {
+      $running: false;
+    }
+  }
+
+  @return list.append($result, $remaining);
+}

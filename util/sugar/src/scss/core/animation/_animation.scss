@@ -67,14 +67,14 @@
       )
     );
 
-    $name: map-get-or($animation, name);
-    $duration: map-get-or($animation, duration, 1s);
-    $delay: map-get-or($animation, delay, 0s);
-    $ease: map-get-or($animation, ease, ease-in-out);
-    $iteration: map-get-or($animation, iteration, 1);
-    $direction: map-get-or($animation, direction, normal);
-    $fill-mode: map-get-or($animation, fill-mode, forwards);
-    $parallel: map-get-or($animation, parallel, false);
+    $name: map-get($animation, name);
+    $duration: map-get($animation, duration, 1s);
+    $delay: map-get($animation, delay, 0s);
+    $ease: map-get($animation, ease, ease-in-out);
+    $iteration: map-get($animation, iteration, 1);
+    $direction: map-get($animation, direction, normal);
+    $fill-mode: map-get($animation, fill-mode, forwards);
+    $parallel: map-get($animation, parallel, false);
 
     // update delay
     $current_delay: $current_delay + $delay;

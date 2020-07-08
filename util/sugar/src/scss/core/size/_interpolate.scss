@@ -30,6 +30,7 @@
  * Sugar.interpolate($myStack, big) // 6rem cause specified in the $myStack value
  * Sugar.interpolate($myStack, small) // 1.5rem => calculated like : 3rem * 0.5 = 1.5rem
  *
+ * @since       1.0.0
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function interpolate($value, $size) {

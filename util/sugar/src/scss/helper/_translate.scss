@@ -13,6 +13,7 @@
  * 	\@include Sugar.translate(50%, 20px);
  * }
  *
+ * @since       1.0.0
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @mixin translate($x: 0, $y: 0, $z: 0) {

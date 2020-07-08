@@ -45,7 +45,7 @@
       @if not map-get($areasCountedByCol, "#{$currentCol}-#{$areaId}") {
         $areasCountedByCol: map-set($areasCountedByCol, "#{$currentCol}-#{$areaId}", true);
 
-        $currentColsCount: map-get-or($colsCountByArea, $areaId, 0);
+        $currentColsCount: map-get($colsCountByArea, $areaId, 0);
         $currentColsCount: $currentColsCount + 1;
         $colsCountByArea: map-set($colsCountByArea, $areaId, $currentColsCount);
       }
@@ -53,7 +53,7 @@
       @if not map-get($areasCountedByLine, "#{$currentRow}-#{$areaId}") {
         $areasCountedByLine: map-set($areasCountedByLine, "#{$currentRow}-#{$areaId}", true);
 
-        $currentRowsCount: map-get-or($rowsCountByArea, $areaId, 0);
+        $currentRowsCount: map-get($rowsCountByArea, $areaId, 0);
         $currentRowsCount: $currentRowsCount + 1;
         $rowsCountByArea: map-set($rowsCountByArea, $areaId, $currentRowsCount);
       }

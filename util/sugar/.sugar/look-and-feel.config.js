@@ -75,5 +75,13 @@ module.exports = {
    * @since           1.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  'line-height': 1.4
+  'line-height': 1.4,
+
+  shadow: {
+    layers: 6,
+    startX: 0,
+    startY: '1px',
+    startBlur: '2px',
+    color: 'rgba(0,0,0,0.08)'
+  }
 };

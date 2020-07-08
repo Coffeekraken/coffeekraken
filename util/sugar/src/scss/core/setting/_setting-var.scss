@@ -16,6 +16,7 @@
  * }
  * // etc...
  *
+ * @since       2.0.0
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function setting-var($path, $context: $__current-context, $default: null) {
@@ -30,7 +31,7 @@
   }
 
   $var-name: var-name($path);
-  $value: map-get-path($__settings, $path);
+  $value: map-get($__settings, $path);
   @if not $value and $context {
     // try to get the value from the base component
     $value: setting($base_path, default, $default);

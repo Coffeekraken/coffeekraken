@@ -5,7 +5,6 @@
   .s-filtrable-input__list {
     position: absolute;
     top: 100%; left:0;
-    background: Sugar.color(primary);
     overflow-x: hidden;
     overflow-y: auto;
     opacity: 0;
@@ -25,21 +24,13 @@
   }
 
   .s-filtrable-input__list-item {
-    padding: Sugar.lnf(padding);
+    cursor: pointer;
 
     * {
       pointer-events: none; // disable pointer events inside each list items to detect the click correctly
     }
-
-    &--selected {
-      color: red;
-    }
-    &:hover {
-      color: blue;
-    }
   }
 
-  .s-filtrable-input__list-item__highlighted {
-    color: red;
-    font-weight: bold;
+  .s-filtrable-input__list-item__selected {
+
   }

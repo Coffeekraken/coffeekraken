@@ -1,0 +1,14 @@
+@use 'sass:math';
+$pi: 3.14159265359;
+/**
+ * @todo      Function header and documentation
+ */
+@function math-to-unitless-rad($angle) {
+  @if math.unit($angle) == "deg" {
+    $angle: $angle / 180deg * $pi;
+  }
+  @if math.unit($angle) == "rad" {
+    $angle: $angle / 1rad;
+  }
+  @return $angle;
+}

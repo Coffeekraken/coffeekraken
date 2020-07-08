@@ -32,6 +32,7 @@
  *  	// transition : all .2s ease-in-out .5s, width .2s ease-in 0s;
  * }
  *
+ * @since       1.0.0
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @mixin transition($transitions...) {

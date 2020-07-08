@@ -1,0 +1,30 @@
+/**
+ * @todo        Mixin header and documentation
+ */
+@mixin scrollbar(
+  $track: color(primary, light),
+  $handle: color(primary),
+  $radius: lnf(border-radius),
+  $width: 5px
+) {
+
+  /* The emerging W3C standard
+   that is currently Firefox-only */
+  & {
+    scrollbar-width: thin;
+    scrollbar-color: $track $handle;
+  }
+
+  /* Works on Chrome/Edge/Safari */
+  &::-webkit-scrollbar {
+    width: $width;
+  }
+  &::-webkit-scrollbar-track {
+    background: $track;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: $handle;
+    border-radius: $radius;
+  }
+
+}

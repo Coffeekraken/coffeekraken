@@ -21,7 +21,7 @@
   // check if is a map
   @if meta.type-of($type) == map {
     $type: map.get($type, type);
-    $required: map-get-or($type, required, $required);
+    $required: map-get($type, required, $required);
   }
 
   // check required

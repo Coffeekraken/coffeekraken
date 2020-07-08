@@ -18,6 +18,7 @@
  *    @include Sugar.triangle();
  * }
  *
+ * @since      1.0.0
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @mixin triangle(
@@ -29,13 +30,13 @@
   $border-width: 0,
   $border-color: null
 ) {
-  // $direction: map-get-or($triangle, direction, top);
-  // $width: map-get-or($triangle, width, 100px);
-  // $height: map-get-or($triangle, height, 100px);
-  // $color: map-get-or($triangle, color, red);
-  // $border-width: map-get-or($border, width);
-  // $border-color: map-get-or($border, color, darken(red, 20%));
-  // $transform-origin: map-get-or($triangle, transform-origin, center);
+  // $direction: map-get($triangle, direction, top);
+  // $width: map-get($triangle, width, 100px);
+  // $height: map-get($triangle, height, 100px);
+  // $color: map-get($triangle, color, red);
+  // $border-width: map-get($border, width);
+  // $border-color: map-get($border, color, darken(red, 20%));
+  // $transform-origin: map-get($triangle, transform-origin, center);
 
   // swap width and height of arrow
   @if $direction == right or $direction == left {

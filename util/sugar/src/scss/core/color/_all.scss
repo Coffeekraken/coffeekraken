@@ -1,5 +1,10 @@
-@import "color-modifier";
-@import "color-schema";
 @import "color";
+@import "color-hue";
+@import "color-lightness";
+@import "color-modifier";
+@import "color-opacity";
+@import "color-saturation";
+@import "color-schema";
+@import "color-transparentize";
 @import "docblock-colors";
 @import "has-color";

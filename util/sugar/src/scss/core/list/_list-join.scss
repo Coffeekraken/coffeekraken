@@ -1,0 +1,23 @@
+@use 'sass:list';
+/**
+ * @name      list-join
+ * @namespace           scss.core.list
+ * @type      function
+ *
+ * Return a string representing all the list items
+ *
+ * @param         {List}        $list1         The list to process
+ * @param         {List}        $list2         The list to join with the first one
+ * @param         {String}      [$separator=auto]     The separator to use for the list. Can be auto, comma or space
+ * @param         {String|Boolean}    [$bracketed=auto]     If true is passed, the list will be bracketed
+ * @return        {String}                    The new list
+ *
+ * @example     scss
+ * Sugar.list-join(('hello','world'), ('coco'), space); // ('hello' 'world' 'coco')
+ *
+ * @since       1.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function list-join($list1, $list2, $separator: auto, $bracketed: auto) {
+  @return list.join($list1, $list2, $separator, $bracketed);
+}

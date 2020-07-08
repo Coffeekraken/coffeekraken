@@ -50,6 +50,7 @@
  * Sugar.is(#fff #ddd, list-color) // => true
  * // etc...
  *
+ * @since       1.0.0
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function is($value, $type) {
@@ -146,7 +147,7 @@
     } @else if $type == string or $type == String or $type == 'string' or $type == 'String' {
       @return meta.type-of($value) == string;
     } @else if $type == color or $type == 'color' or $type == Color or $type == 'Color' {
-      @if meta.type-of($value) == color or (meta.type-of($value) == string and setting("colors.#{$value}") != null) {
+      @if meta.type-of($value) == color {
         @return true;
       } @else {
         @return false;

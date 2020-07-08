@@ -5,7 +5,7 @@ module.exports = function jsObjectToScssMap(object, settings = {}) {
   settings = __deepMerge(
     {
       settingsVariable: '$sugarUserSettings',
-      quoteKeys: ['src', 'import', 'font-family']
+      quoteKeys: ['src', 'import', 'font-family', 'defaultAction']
     },
     settings
   );

@@ -14,6 +14,7 @@
  * 	\@include Sugar.size(cover);
  * }
  *
+ * @since       1.0.0
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @mixin size($size-width, $height: null, $position: absolute) {

@@ -11,6 +11,7 @@
  * @example       scss
  * \@include Sugar.icons(fa-user fa-bell fa-circle);
  *
+ * @since       1.0.0
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @mixin icons($icons-names, $color: null) {

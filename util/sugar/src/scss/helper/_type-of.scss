@@ -12,6 +12,7 @@
  * @example     scss
  * Sugar.type-of('hello world'); // => string
  *
+ * @since       1.0.0
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function type-of($variable) {

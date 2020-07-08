@@ -147,7 +147,7 @@
   @if meta.type-of($f) == string {
     $f: map.get($fonts, $f);
   }
-  $cap-height: map-get-or($f, cap-height, 0);
+  $cap-height: map-get($f, cap-height, 0);
 
   // if a font family is passed
   @if $family {
@@ -156,13 +156,13 @@
       @if meta.type-of($f) == string {
         $f: map.get($fonts, $f);
       }
-      $cap-height: map-get-or($f, cap-height, 0);
-      $family: map-get-or($f, font-family, map-get-or($f, family, $family));
+      $cap-height: map-get($f, cap-height, 0);
+      $family: map-get($f, font-family, map-get($f, family, $family));
       @if not $style {
-        $style: map-get-or($f, font-style, map.get($f, style));
+        $style: map-get($f, font-style, map.get($f, style));
       }
       @if not $weight {
-        $weight: map-get-or($f, font-weight, map.get($f, weight));
+        $weight: map-get($f, font-weight, map.get($f, weight));
       }
     }
   }

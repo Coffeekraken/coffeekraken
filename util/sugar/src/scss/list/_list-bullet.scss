@@ -14,6 +14,8 @@
  * @param 		{String} 		[$font=null] 				The font name to use for the bullet
  * @param 		{Number} 		[$space=null] 				The space between the bullet and the content
  *
+ * @todo      Add fontawesome icon support
+ *
  * @example 	scss
  * .my-cool-list__item {
  * 	@\include Sugar.list-bullet(
@@ -24,6 +26,7 @@
  * 	);
  * }
  *
+ * @since       1.0.0
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @mixin list-bullet(

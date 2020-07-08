@@ -1,9 +1,9 @@
 const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
-const __getFilename = require('../../../fs/filename');
 const __sass = require('sass');
 const __deepMerge = require('../../../object/deepMerge');
 const __packageRoot = require('../../../path/packageRoot');
 const __globImporter = require('node-sass-glob-importer');
+const __getFilename = require('../../../fs/filename');
 
 /**
  * @name                SRenderSassStreamAction
@@ -70,7 +70,10 @@ module.exports = class SRenderSassStreamAction extends __SActionsStreamAction {
           {
             importer: __globImporter(),
             data: streamObj.data,
-            includePaths: [`${__packageRoot(process.cwd())}/node_modules`],
+            includePaths: [
+              `${streamObj.input.replace(__getFilename(streamObj.input), '')}`,
+              `${__packageRoot(process.cwd())}/node_modules`
+            ],
             sourceMap: streamObj.map
           },
           settings

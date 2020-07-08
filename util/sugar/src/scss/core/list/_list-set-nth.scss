@@ -1,0 +1,34 @@
+@use 'sass:list';
+/**
+ * @name      list-set-nth
+ * @namespace           scss.core.list
+ * @type      function
+ *
+ * Set a value in the passed list at the passed index. The original value at the passed index will be replaced with the passed value
+ *
+ * @param       {List}      $list       The list to process
+ * @param       {Number}    $index      The index to set the value in the list
+ * @param       {Mixed}     $value      The value to set in the list
+ * @return      {List}                  The new processed list
+ *
+ * @example       scss
+ * Sugar.list-set-nth(('hello','world'), 1, 'coco'); // => ('coco','world')
+ *
+ * @since       1.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function list-set-nth($list, $index, $value) {
+  $list: test-argument(
+    'Sugar.list-set-nth',
+    'list',
+    list,
+    $list
+  );
+  $index: test-argument(
+    'Sugar.list-set-nth',
+    'index',
+    number,
+    $index
+  );
+  @return list.set-nth($list, $index, $value);
+}

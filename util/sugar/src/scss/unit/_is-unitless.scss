@@ -13,6 +13,7 @@
  * Sugar.is-unitless(20); // => true
  * Sugar.is-unitless(10px); // => false
  *
+ * @since      1.0.0
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function is-unitless($number) {

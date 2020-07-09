@@ -1,0 +1,114 @@
+@mixin register-helper-clearfix() {
+
+  @include register-class(clearfix, "sugar.helper.clearfix") {
+    /**
+    * @name 		clearfix
+    * @namespace           scss.core.class.helper
+    * @class-namespace     sugar.helper.clearfix
+    * @type        class
+    *
+    * Apply the micro clearfix on the element
+    *
+    * @example 	html
+    * <div class="clearfix bkg-primary">
+    * 	<div class="pull-right">right pulled</div>
+    * </div>
+    * <div class="bkg-primary">
+    * 	<div class="pull-right">right pulled without clearfix</div>
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    @include clearfix(micro);
+  }
+  @include register-class(clearfix-float, "sugar.helper.clearfix.float") {
+    /**
+    * @name 		clearfix-float
+    * @namespace           scss.core.class.helper
+    * @class-namespace     sugar.helper.clearfix.float
+    * @type        class
+    *
+    * Apply the float clearfix on the element
+    *
+    * @example 	html
+    * <div class="clearfix-float bkg-primary">
+    * 	<div class="pull-right">right pulled</div>
+    * </div>
+    * <div class="bkg-primary">
+    * 	<div class="pull-right">right pulled without clearfix</div>
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    @include clearfix(float);
+  }
+  @include register-class(clearfix-micro, "sugar.helper.clearfix.micro") {
+    /**
+    * @name 		clearfix
+    * @namespace           scss.core.class.helper
+    * @class-namespace     sugar.helper.clearfix.micro
+    * @type        class
+    *
+    * Apply the micro clearfix on the element
+    *
+    * @example 	html
+    * <div class="clearfix bkg-primary">
+    * 	<div class="pull-right">right pulled</div>
+    * </div>
+    * <div class="bkg-primary">
+    * 	<div class="pull-right">right pulled without clearfix</div>
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    @include clearfix(micro);
+  }
+  @include register-class(clearfix-overflow, "sugar.helper.clearfix.overflow") {
+    /**
+    * @name 		clearfix-overflow
+    * @namespace           scss.core.class.helper
+    * @class-namespace     sugar.helper.clearfix.overflow
+    * @type        class
+    *
+    * Apply the overflow clearfix on the element
+    *
+    * @example 	html
+    * <div class="clearfix-overflow bkg-primary">
+    * 	<div class="pull-right">right pulled</div>
+    * </div>
+    * <div class="bkg-primary">
+    * 	<div class="pull-right">right pulled without clearfix</div>
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    @include clearfix(overflow);
+  }
+  @include register-class(clearfix-facebook, "sugar.helper.clearfix.facebook") {
+    /**
+    * @name 		clearfix-facebook
+    * @namespace           scss.core.class.helper
+    * @class-namespace     sugar.helper.clearfix.facebook
+    * @type        class
+    *
+    * Apply the facebook clearfix on the element
+    *
+    * @example 	html
+    * <div class="clearfix-facebook bkg-primary">
+    * 	<div class="pull-right">right pulled</div>
+    * </div>
+    * <div class="bkg-primary">
+    * 	<div class="pull-right">right pulled without clearfix</div>
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    @include clearfix(facebook);
+  }
+
+}

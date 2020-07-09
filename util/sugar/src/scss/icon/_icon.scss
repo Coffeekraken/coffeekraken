@@ -1,6 +1,4 @@
-@use '../vendor/fontawesome/fontawesome' as font-awesome;
-
-// TODO check font-awesome updates
+@use '../vendor/fontawesome' as font-awesome;
 
 /**
  * @name      icon
@@ -18,7 +16,6 @@
  * 	\@include Sugar.icon(fa-user, primary);
  * }
  *
- * @since       1.0.0
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @mixin icon($name, $color: null) {

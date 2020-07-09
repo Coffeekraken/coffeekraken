@@ -1,0 +1,61 @@
+@mixin register-helper-clear() {
+
+  @include register-class(clear-left, "sugar.helper.clear.left") {
+    /**
+    * @name 		clear-left
+    * @namespace       scss.core.class.helper
+    * @class-namespace     sugar.helper.clear.left
+    * @type        class
+    *
+    * Clear the left float on the element
+    *
+    * @example 	html
+    * <div class="clear-left">
+    * 	I clear the left float
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    clear: left;
+  }
+  @include register-class(clear-right, "sugar.helper.clear.right") {
+    /**
+    * @name 		clear-right
+    * @namespace       scss.core.class.helper
+    * @class-namespace     sugar.helper.clear.right
+    * @type        class
+    *
+    * Clear the right float on the element
+    *
+    * @example 	html
+    * <div class="clear-right">
+    * 	I clear the right float
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    clear: right;
+  }
+  @include register-class(clear, "sugar.helper.clear.both") {
+    /**
+    * @name 		clear
+    * @namespace       scss.core.class.helper
+    * @class-namespace     sugar.helper.clear.both
+    * @type        class
+    *
+    * Clear both float on the element
+    *
+    * @example 	html
+    * <div class="clear">
+    * 	I clear both floats
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    clear: both;
+  }
+
+}

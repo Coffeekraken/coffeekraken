@@ -1,0 +1,41 @@
+@mixin register-helper-pull() {
+
+  @include register-class(pull-left, "sugar.helper.pull.left") {
+    /**
+    * @name 		pull-left
+    * @namespace         scss.core.class.helper
+    * @class-namespace     sugar.helper.pull.left
+    * @type        class
+    *
+    * Allows you to pull an element to the left side
+    *
+    * @example 	html
+    * <div>
+    * 	<span class="pull-left">Hello world</span>
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    float: left;
+  }
+  @include register-class(pull-right, "sugar.helper.pull.right") {
+    /**
+    * @name 		pull-right
+    * @namespace         scss.core.class.helper
+    * @class-namespace     sugar.helper.pull.right
+    * @type        class
+    *
+    * Allows you to pull an element to the right side
+    *
+    * @example 	html
+    * <div>
+    * 	<span class="pull-right">Hello world</span>
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    float: right;
+  }
+}

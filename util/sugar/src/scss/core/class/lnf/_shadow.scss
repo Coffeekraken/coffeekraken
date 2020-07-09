@@ -1,0 +1,66 @@
+@mixin register-lnf-shadow() {
+
+  @include register-class(lnf-shadow, "sugar.lnf.shadow") {
+    /**
+    * @name 		lnf-shadow
+    * @namespace           scss.core.class.lnf
+    * @class-namespace     sugar.lnf.shadow
+    * @type        class
+    *
+    * Apply the default shadow to the element
+    *
+    * @example 	html
+    * <div class="ratio-16-9">
+    *    <div class="lnf-shadow ratio-1-1" style="width:33%">
+    * 	    I'm a shadowed block
+    *    </div>
+    * </div>
+    *
+    * @since       2.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    @include smooth-shadow();
+  }
+  @include register-class(lnf-shadow--small, "sugar.lnf.shadow.small") {
+    /**
+    * @name 		lnf-shadow--small
+    * @namespace           scss.core.class.lnf
+    * @class-namespace     sugar.lnf.shadow.small
+    * @type        class
+    *
+    * Apply the small shadow to the element
+    *
+    * @example 	html
+    * <div class="ratio-16-9">
+    *    <div class="lnf-shadow--small ratio-1-1" style="width:33%">
+    * 	    I'm a shadowed block
+    *    </div>
+    * </div>
+    *
+    * @since       2.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    @include smooth-shadow($layers: 3);
+  }
+  @include register-class(lnf-shadow--big, "sugar.lnf.shadow.big") {
+    /**
+    * @name 		lnf-shadow--big
+    * @namespace           scss.core.class.lnf
+    * @class-namespace     sugar.lnf.shadow.big
+    * @type        class
+    *
+    * Apply the big shadow to the element
+    *
+    * @example 	html
+    * <div class="ratio-16-9">
+    *    <div class="lnf-shadow--big ratio-1-1" style="width:33%">
+    * 	    I'm a shadowed block
+    *    </div>
+    * </div>
+    *
+    * @since       2.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    @include smooth-shadow($layers: 9);
+  }
+}

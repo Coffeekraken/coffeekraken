@@ -1,0 +1,161 @@
+@mixin register-helper-transmation() {
+
+  @include register-class(no-transition, "sugar.helper.transition.no") {
+    /**
+    * @name 		no-transition
+    * @namespace         scss.core.class.helper
+    * @class-namespace       sugar.helper.transition.no
+    * @type        class
+    *
+    * Disable the transitions **only on the element**
+    *
+    * @example 	html
+    * <div class="no-transition">
+    * 	I have no more transitions
+    * 	<div>But I have</div>
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    &,
+    &:before,
+    &:after {
+      transition: none !important;
+    }
+  }
+  @include register-class(clear-transition, "sugar.helper.transition.clear") {
+    /**
+    * @name 		clear-transition
+    * @namespace         scss.core.class.helper
+    * @class-namespace       sugar.helper.transition.clear
+    * @type        class
+    *
+    * Disable the transitions **on the element and all his children**
+    *
+    * @example 	html
+    * <div class="clear-transition">
+    * 	I have no more transitions
+    * 	<div>Me neither</div>
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    &,
+    &:before,
+    &:after,
+    & *,
+    & *:before,
+    & *:after {
+      transition: none !important;
+    }
+  }
+  @include register-class(no-animation, "sugar.helper.animation.no") {
+    /**
+    * @name 		no-animation
+    * @namespace         scss.core.class.helper
+    * @class-namespace       sugar.helper.animation.no
+    * @type        class
+    *
+    * Disable the animations **only on the element**
+    *
+    * @example 	html
+    * <div class="no-animation">
+    * 	I have no more animations
+    * 	<div>But I have</div>
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    &,
+    &:before,
+    &:after {
+      animation: none !important;
+    }
+  }
+  @include register-class(clear-animation, "sugar.helper.animation.clear") {
+    /**
+    * @name 		clear-animation
+    * @namespace         scss.core.class.helper
+    * @class-namespace       sugar.helper.animation.clear
+    * @type        class
+    *
+    * Disable the transitions **on the element and all his children**
+    *
+    * @example 	html
+    * <div class="clear-animation">
+    * 	I have no more animations
+    * 	<div>Me neither</div>
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    &,
+    &:before,
+    &:after,
+    & *,
+    & *:before,
+    & *:after {
+      animation: none !important;
+    }
+  }
+  @include register-class(no-transmation, "sugar.helper.transmation.no") {
+    /**
+    * @name 		no-transmation
+    * @namespace         scss.core.class.helper
+    * @class-namespace       sugar.helper.transmation.no
+    * @type        class
+    *
+    * Disable the animations and transitions **only on the element**
+    *
+    * @example 	html
+    * <div class="no-transmation">
+    * 	I have no more animations or transitions
+    * 	<div>But I have</div>
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    &,
+    &:before,
+    &:after {
+      transition: none !important;
+      animation: none !important;
+    }
+  }
+  @include register-class(
+    clear-transmation,
+    "sugar.helper.transmation.clear"
+  ) {
+    /**
+    * @name 		clear-transmation
+    * @namespace         scss.core.class.helper
+    * @class-namespace       sugar.helper.transmation.clear
+    * @type        class
+    *
+    * Disable the animations and transitions **on the element and all his children**
+    *
+    * @example 	html
+    * <div class="clear-transmation">
+    * 	I have no more animations or transitions
+    * 	<div>Me neither</div>
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    &,
+    &:before,
+    &:after,
+    & *,
+    & *:before,
+    & *:after {
+      transition: none !important;
+      animation: none !important;
+    }
+  }
+}

@@ -53,13 +53,21 @@
     $actions
   );
 
-  $colorColor: setting('colors.#{$name}.color');
+  $colorColor: null;
+
   @if is($name, color) {
     $colorColor: $name;
     $name: null;
+  } @else if is($name, string) {
+    $colorColor: setting('colors.#{$name}.color');
   }
+
+  @if $colorColor != null and is($colorColor, string) {
+    @return color($colorColor, $actions);
+  }
+
   @if not is($colorColor, color) {
-    @error("It seem's that you have passed a color argument "#{$colorColor}" that is neither not a registered color, neither a valid color code...");
+    @error("It seem's that you have passed a color argument "#{$colorColor}" that is neither a registered color, neither a valid color code...");
   }
 
   $modifier: null;
@@ -77,17 +85,17 @@
     }
   }
 
-  @if $name != null and $modifier != null {
-    $varName: var-name('colors.#{$name}.#{$modifier}');
-    $color: _color-process($colorColor, $actionsMap);
-    $res: var-define($varName, $color);
-    @return unquote('var(#{$varName})');
-  } @else if $name != null and $modifier == null and $actionsMap == null {
-    $varName: var-name('colors.#{$name}');
-    $color: _color-process($colorColor, $actionsMap);
-    $res: var-define($varName, $color);
-    @return unquote('var(#{$varName})');
-  }
+  // @if $name != null and $modifier != null {
+  //   $varName: var-name('colors.#{$name}.#{$modifier}');
+  //   $color: _color-process($colorColor, $actionsMap);
+  //   $res: var-define($varName, $color);
+  //   @return unquote('var(#{$varName})');
+  // } @else if $name != null and $modifier == null and $actionsMap == null {
+  //   $varName: var-name('colors.#{$name}');
+  //   $color: _color-process($colorColor, $actionsMap);
+  //   $res: var-define($varName, $color);
+  //   @return unquote('var(#{$varName})');
+  // }
 
   // return the color
   $color: _color-process($colorColor, $actionsMap);

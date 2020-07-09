@@ -1,0 +1,60 @@
+@mixin register-helper-size() {
+
+  @include register-class(abs-cover, "sugar.helper.size.abs.cover") {
+    /**
+    * @name 		abs-cover
+    * @namespace         scss.core.class.helper
+    * @class-namespace     sugar.helper.size.abs.cover
+    * @type        class
+    *
+    * Set a size that will cover the entire parent surface by positionning it in absolute
+    *
+    * @example 	html
+    * <div class="ratio-16-9">
+    * 	<img src="https://source.unsplash.com/random" class="abs-cover" />
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    @include size(cover, $position: absolute);
+  }
+  @include register-class(abs-contain, "sugar.helper.size.abs.contain") {
+    /**
+    * @name 		abs-contain
+    * @namespace         scss.core.class.helper
+    * @class-namespace     sugar.helper.size.abs.contain
+    * @type        class
+    *
+    * Set a size that will contain the entire parent surface by positionning it in absolute
+    *
+    * @example 	html
+    * <div class="ratio-16-9">
+    * 	<img src="https://source.unsplash.com/random" class="abs-contain" />
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    @include size(contain, $position: absolute);
+  }
+  @include register-class(abs-fit, "sugar.helper.size.abs.fit") {
+    /**
+    * @name 		abs-fit
+    * @namespace         scss.core.class.helper
+    * @class-namespace     sugar.helper.size.abs.fit
+    * @type        class
+    *
+    * Set a size that will fit the entire parent surface by positionning it in absolute
+    *
+    * @example 	html
+    * <div class="ratio-16-9">
+    * 	<img src="https://source.unsplash.com/random" class="abs-fit" />
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    @include size(fit, $position: absolute);
+  }
+}

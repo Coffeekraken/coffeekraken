@@ -1,0 +1,129 @@
+@mixin register-helper-font() {
+
+  @include register-class(f-bold, "sugar.helper.font.weight.bold") {
+    /**
+    * @name 		f-bold
+    * @namespace           scss.core.class.helper
+    * @class-namespace     sugar.helper.font.weight.bold
+    * @type        class
+    *
+    * Set the font-weight to ```bold```
+    *
+    * @example 	html
+    * This <span class="f-bold">word</span> is bold
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    font-weight: bold;
+  }
+  @include register-class(f-lighter, "sugar.helper.font.weight.lighter") {
+    /**
+    * @name 		f-lighter
+    * @namespace           scss.core.class.helper
+    * @class-namespace     sugar.helper.font.weight.lighter
+    * @type        class
+    *
+    * Set the font-weight to ```lighter```
+    *
+    * @example 	html
+    * 	This <span class="f-lighter">word</span> is lighter
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    font-weight: lighter;
+  }
+  @include register-class(f-bolder, "sugar.helper.font.weight.bolder") {
+    /**
+    * @name 		f-bolder
+    * @namespace           scss.core.class.helper
+    * @class-namespace     sugar.helper.font.weight.bolder
+    * @type        class
+    *
+    * Set the font-weight to ```bolder```
+    *
+    * @example 	html
+    * This <span class="f-bolder">word</span> is bolder
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    font-weight: bolder;
+  }
+  @include register-class(f-normal, "sugar.helper.font.weight.normal") {
+    /**
+    * @name 		f-normal
+    * @namespace           scss.core.class.helper
+    * @class-namespace     sugar.helper.font.weight.normal
+    * @type        class
+    *
+    * Set the font-weight to ```normal```
+    *
+    * @example 	html
+    * <div class="f-bold">
+    * 	This <span class="f-normal">word</span> is normal
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    font-weight: normal;
+    font-style: normal;
+  }
+  @include register-class(f-italic, "sugar.helper.font.style.italic") {
+    /**
+    * @name 		f-italic
+    * @namespace           scss.core.class.helper
+    * @class-namespace     sugar.helper.font.style.italic
+    * @type        class
+    *
+    * Set the font-style to ```italic```
+    *
+    * @example 	html
+    * This <span class="f-italic">word</span> is italic
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    font-style: italic;
+  }
+  @include register-class(f-oblique, "sugar.helper.font.style.oblique") {
+    /**
+    * @name 		f-oblique
+    * @namespace           scss.core.class.helper
+    * @class-namespace     sugar.helper.font.style.oblique
+    * @type        class
+    *
+    * Set the font-style to ```oblique```
+    *
+    * @example 	html
+    * This <span class="f-oblique">word</span> is oblique
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    font-style: oblique;
+  }
+  @include register-class(
+    f-small-caps,
+    "sugar.helper.font.variant.small-caps"
+  ) {
+    /**
+    * @name 		f-small-caps
+    * @namespace           scss.core.class.helper
+    * @class-namespace     sugar.helper.font.variant.small-caps
+    * @type        class
+    *
+    * Set the font-variant to ```small-caps```
+    *
+    * @example 	html
+    * This <span class="f-small-caps">word</span> is small-caps
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    font-variant: small-caps;
+  }
+
+}

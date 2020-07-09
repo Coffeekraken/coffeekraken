@@ -1,0 +1,42 @@
+@mixin register-helper-position() {
+
+  @include register-class(relative, "sugar.helper.position.relative") {
+    /**
+    * @name 		relative
+    * @namespace         scss.core.class.helper
+    * @class-namespace     sugar.helper.position.relative
+    * @type        class
+    *
+    * Set an element position as ```relative```
+    *
+    * @example 	html
+    * <div class="relative">
+    * 	I'm relative now
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    position: relative;
+  }
+  @include register-class(absolute, "sugar.helper.position.absolute") {
+    /**
+    * @name 		absolute
+    * @namespace         scss.core.class.helper
+    * @class-namespace     sugar.helper.position.absolute
+    * @type        class
+    *
+    * Set an element position as ```absolute```
+    *
+    * @example 	html
+    * <div class="absolute">
+    * 	I'm absolute now
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    position: absolute;
+  }
+
+}

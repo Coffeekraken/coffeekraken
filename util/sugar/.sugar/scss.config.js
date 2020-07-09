@@ -1,5 +1,6 @@
 module.exports = {
   // import some settings
+  classes: '@config.classes',
   colors: '@config.colors',
   fonts: '@config.fonts',
   filters: '@config.filters',

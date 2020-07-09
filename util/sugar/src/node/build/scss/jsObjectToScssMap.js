@@ -23,15 +23,27 @@ module.exports = function jsObjectToScssMap(object, settings = {}) {
       line = line.slice(0, -1);
     }
     const prop = line.split(':')[0];
-    const value = line.split(':').slice(1).join(':').trim();
+    let value = line.split(':').slice(1).join(':').trim();
+
     if (prop === '),' || prop === ')' || value === '(') return;
 
+    // process arrays
+    const arrayReg = /^\((.*)\),?/;
+    const arrayMatches = value.match(arrayReg);
+    if (arrayMatches) {
+      const res = arrayMatches[1]
+        .split(',')
+        .map((val) => {
+          return `'${val.trim()}'`;
+        })
+        .join(', ');
+      value = value.replace(arrayMatches[1], res);
+      scssConfigString = scssConfigString.replace(line, `${prop}: ${value}`);
+      return;
+    }
     if (settings.quoteKeys.indexOf(prop) === -1) return;
-
     scssConfigString = scssConfigString.replace(line, `${prop}: "${value}"`);
   });
-
-  // console.log(scssConfigString);
 
   // set or append in the "data" property
   return scssConfigString;

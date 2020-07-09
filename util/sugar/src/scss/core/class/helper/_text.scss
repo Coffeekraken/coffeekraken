@@ -1,0 +1,183 @@
+@mixin register-helper-text() {
+
+  @include register-class(t-hidden, "sugar.helper.text.hidden") {
+    /**
+    * @name 		t-hidden
+    * @namespace         scss.core.class.helper
+    * @class-namespace     sugar.helper.text.hidden
+    * @type        class
+    *
+    * Hide the text
+    *
+    * @example 	html
+    * <div class="t-hidden">
+    * 	I'm not visible
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    @include text-hide();
+  }
+  @include register-class(t-truncate, "sugar.helper.text.truncate") {
+    /**
+    * @name 		t-truncate
+    * @namespace         scss.core.class.helper
+    * @class-namespace     sugar.helper.text.truncate
+    * @type        class
+    *
+    * Hide the text
+    *
+    * @example 	html
+    * <div class="t-truncate">
+    * 	I'm truncated cause I talk a lot too much Nulla mauris eros, finibus ac faucibus et, tempus quis risus. Praesent sit amet nulla vel libero euismod sodales eu nec.
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    @include text-truncate();
+  }
+  @include register-class(t-left, "sugar.helper.text.align.left") {
+    /**
+    * @name 		t-left
+    * @namespace         scss.core.class.helper
+    * @class-namespace     sugar.helper.text.align.left
+    * @type        class
+    *
+    * Align the text to the left
+    *
+    * @example 	html
+    * <div class="t-left">
+    * 	I'm left aligned
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    text-align: left;
+  }
+  @include register-class(t-right, "sugar.helper.text.align.right") {
+    /**
+    * @name 		t-right
+    * @namespace         scss.core.class.helper
+    * @class-namespace     sugar.helper.text.align.right
+    * @type        class
+    *
+    * Align the text to the right
+    *
+    * @example 	html
+    * <div class="t-right">
+    * 	I'm right aligned
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    text-align: right;
+  }
+  @include register-class(t-center, "sugar.helper.text.align.center") {
+    /**
+    * @name 		t-center
+    * @namespace         scss.core.class.helper
+    * @class-namespace     sugar.helper.text.align.center
+    * @type        class
+    *
+    * Align the text to the center
+    *
+    * @example 	html
+    * <div class="t-center">
+    * 	I'm centered
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    text-align: center;
+  }
+  @include register-class(t-justify, "sugar.helper.text.align.justify") {
+    /**
+    * @name 		t-justify
+    * @namespace         scss.core.class.helper
+    * @class-namespace     sugar.helper.text.align.justify
+    * @type        class
+    *
+    * Make the text justified
+    *
+    * @example 	html
+    * <div class="t-justify">
+    * 	Nullam vel feugiat nunc. Phasellus facilisis, nisi sit amet viverra rhoncus, arcu risus volutpat dolor, sed euismod magna tellus ac purus. Praesent augue lorem, ullamcorper ac accumsan nec, suscipit eu.
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    text-align: justify;
+  }
+  @include register-class(
+    t-lowercase,
+    "sugar.helper.text.transform.lowercase"
+  ) {
+    /**
+    * @name 		t-lowercase
+    * @namespace         scss.core.class.helper
+    * @class-namespace     sugar.helper.text.transform.lowercase
+    * @type        class
+    *
+    * Transform the text to lowercase
+    *
+    * @example 	html
+    * <div class="t-lowercase">
+    * 	I'M LOWERCASE
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    text-transform: lowercase;
+  }
+  @include register-class(
+    t-uppercase,
+    "sugar.helper.text.transform.uppercase"
+  ) {
+    /**
+    * @name 		t-uppercase
+    * @namespace         scss.core.class.helper
+    * @class-namespace     sugar.helper.text.transform.uppercase
+    * @type        class
+    *
+    * Transform the text to uppercase
+    *
+    * @example 	html
+    * <div class="t-uppercase">
+    * 	I'm uppercase
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    text-transform: uppercase;
+  }
+  @include register-class(
+    t-capitalize,
+    "sugar.helper.text.transform.capitalize"
+  ) {
+    /**
+    * @name 		t-capitalize
+    * @namespace         scss.core.class.helper
+    * @class-namespace     sugar.helper.text.transform.capitalize
+    * @type        class
+    *
+    * Capizalize the words
+    *
+    * @example 	html
+    * <div class="t-capitalize">
+    * 	I'm capitalized
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    text-transform: capitalize;
+  }
+}

@@ -34,9 +34,7 @@ module.exports = function getScssImportsStrings(array = null) {
           @include Sugar.setup($sugarUserSettings);
           @include Sugar.init();
         `;
-        importsStrings.append += `
-          @include Sugar.var-output();
-        `;
+        importsStrings.append += ``;
       }
     }
   });

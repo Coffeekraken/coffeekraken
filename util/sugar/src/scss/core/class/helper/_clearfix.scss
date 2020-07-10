@@ -1,6 +1,6 @@
-@mixin register-helper-clearfix() {
+@mixin classes-helper-clearfix() {
 
-  @include register-class(clearfix, "sugar.helper.clearfix") {
+  @if class-match-namespace("sugar.helper.clearfix") {
     /**
     * @name 		clearfix
     * @namespace           scss.core.class.helper
@@ -20,9 +20,11 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    @include clearfix(micro);
+    .clearfix {
+      @include clearfix(micro);
+    }
   }
-  @include register-class(clearfix-float, "sugar.helper.clearfix.float") {
+  @if class-match-namespace("sugar.helper.clearfix.float") {
     /**
     * @name 		clearfix-float
     * @namespace           scss.core.class.helper
@@ -42,11 +44,13 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    @include clearfix(float);
+    .clearfix-float {
+      @include clearfix(float);
+    }
   }
-  @include register-class(clearfix-micro, "sugar.helper.clearfix.micro") {
+  @if class-match-namespace("sugar.helper.clearfix.micro") {
     /**
-    * @name 		clearfix
+    * @name 		clearfix-micro
     * @namespace           scss.core.class.helper
     * @class-namespace     sugar.helper.clearfix.micro
     * @type        class
@@ -64,9 +68,11 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    @include clearfix(micro);
+    .clearfix-micro {
+      @include clearfix(micro);
+    }
   }
-  @include register-class(clearfix-overflow, "sugar.helper.clearfix.overflow") {
+  @if class-match-namespace("sugar.helper.clearfix.overflow") {
     /**
     * @name 		clearfix-overflow
     * @namespace           scss.core.class.helper
@@ -86,9 +92,11 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    @include clearfix(overflow);
+    .clearfix-overflow {
+     @include clearfix(overflow);
+    }
   }
-  @include register-class(clearfix-facebook, "sugar.helper.clearfix.facebook") {
+  @if class-match-namespace("sugar.helper.clearfix.facebook") {
     /**
     * @name 		clearfix-facebook
     * @namespace           scss.core.class.helper
@@ -108,7 +116,8 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    @include clearfix(facebook);
+    .clearfix-facebook {
+      @include clearfix(facebook);
+    }
   }
-
 }

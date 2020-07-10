@@ -1,6 +1,6 @@
-@mixin register-helper-display() {
+@mixin classes-helper-display() {
 
-  @include register-class(block, "sugar.helper.display.block") {
+  @if class-match-namespace("sugar.helper.display.block") {
     /**
     * @name 		block
     * @namespace             scss.core.class.helper
@@ -17,9 +17,11 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    display: block;
+    .block {
+      display: block;
+    }
   }
-  @include register-class(inline, "sugar.helper.display.inline") {
+  @if class-match-namespace("sugar.helper.display.inline") {
     /**
     * @name 		inline
     * @namespace             scss.core.class.helper
@@ -36,9 +38,11 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    display: inline;
+    .inline {
+     display: inline;
+    }
   }
-  @include register-class(inline-block, "sugar.helper.display.inline-block") {
+  @if class-match-namespace("sugar.helper.display.inline-block") {
     /**
     * @name 		inline-block
     * @namespace             scss.core.class.helper
@@ -55,9 +59,11 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    display: inline-block;
+    .inline-block {
+      display: inline-block;
+    }
   }
-  @include register-class(show, "sugar.helper.display.show") {
+  @if class-match-namespace("sugar.helper.display.show") {
     /**
     * @name 		show
     * @namespace             scss.core.class.helper
@@ -74,9 +80,11 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    display: block;
+    .show {
+      display: block;
+    }
   }
-  @include register-class(show-inline, "sugar.helper.display.show-inline") {
+  @if class-match-namespace("sugar.helper.display.show-inline") {
     /**
     * @name 		show-inline
     * @namespace             scss.core.class.helper
@@ -93,9 +101,11 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    display: inline-block;
+    .show-inline {
+      display: inline-block;
+    }
   }
-  @include register-class(hidden, "sugar.helper.display.hidden") {
+  @if class-match-namespace("sugar.helper.display.hidden") {
     /**
     * @name 		hidden
     * @namespace             scss.core.class.helper
@@ -112,9 +122,11 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    display: none;
+    .hidden {
+      display: none;
+    }
   }
-  @include register-class(hide, "sugar.helper.display.hide") {
+  @if class-match-namespace("sugar.helper.display.hide") {
     /**
     * @name 		hide
     * @namespace             scss.core.class.helper
@@ -131,9 +143,11 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    display: none;
+    .hide {
+      display: none;
+    }
   }
-  @include register-class(visible, "sugar.helper.display.visible") {
+  @if class-match-namespace("sugar.helper.display.visible") {
     /**
     * @name 		visible
     * @namespace             scss.core.class.helper
@@ -150,9 +164,11 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    visibility: visible;
+    .visible {
+      visibility: visible;
+    }
   }
-  @include register-class(invisible, "sugar.helper.display.invisible") {
+  @if class-match-namespace("sugar.helper.display.invisible") {
     /**
     * @name 		invisible
     * @namespace             scss.core.class.helper
@@ -169,10 +185,11 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    visibility: hidden;
+    .invisible {
+      visibility: hidden;
+    }
   }
-  @include register-class(
-    visually-hidden,
+  @if class-match-namespace(
     "sugar.helper.display.visually-hidden"
   ) {
     /**
@@ -192,6 +209,8 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    @include visually-hidden();
+    .visually-hidden {
+     @include visually-hidden();
+    }
   }
 }

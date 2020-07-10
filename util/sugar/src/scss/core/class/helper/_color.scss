@@ -1,0 +1,119 @@
+@mixin classes-helper-color() {
+
+  @if class-match-namespace('sugar.helper.color') {
+
+    // colors
+    $colors: setting("colors");
+    @each $name, $color in $colors {
+      @if $name != classes {
+        $modifiers: ();
+        @if type-of($color) == map {
+          $modifiers: map-get($color, modifiers);
+          $color: map-get($color, color);
+        }
+
+
+        @if class-match-namespace("sugar.helper.color.#{$name}.color") {
+          $cls: unquote(selector("c-#{$name}"));
+          /**
+            * @name       	#{$cls}
+            * @namespace       scss.core.class
+            * @class-namespace           sugar.helper.color.#{$name}
+            * @type        class
+            *
+            * Specify the color to **#{$name}**
+            *
+            * @example 	html
+            * <div class="#{$cls}">
+            * 	I'm in "#{$name}" color
+            * </div>
+            *
+            * @since       1.0.0
+            * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */
+          .#{$cls} {
+            color: color($name);
+          }
+        }
+
+
+        @if class-match-namespace("sugar.helper.color.#{$name}.bkg") {
+          $cls: unquote(selector("bkg-#{$name}"));
+          /**
+            * @name       	#{$cls}
+            * @namespace       scss.core.class
+            * @class-namespace           sugar.helper.color.#{$name}.bkg
+            * @type        class
+            *
+            * Specify the background color to **#{$name}**
+            *
+            * @example 	html
+            * <div class="#{$cls} p" style="color:white">
+            * 	My background color is "#{$name}"
+            * </div>
+            *
+            * @since       1.0.0
+            * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */
+          .#{$cls} {
+            background-color: color($name);
+          }
+        }
+
+        // modifiers
+        @if $modifiers {
+          @each $mod-name, $mod in $modifiers {
+
+            @if class-match-namespace("sugar.helper.color.#{$name}.#{$mod-name}") {
+              $cls: unquote(selector("c-#{$name}--#{$mod-name}"));
+              /**
+                * @name       	#{$cls}
+                * @namespace       scss.core.class
+                * @class-namespace           sugar.helper.color.#{$name}.#{$mod-name}
+                * @type        class
+                *
+                * Specify the color to **#{$name}--#{$mod-name}**
+                *
+                * @example 	html
+                * <div class="#{$cls}">
+                * 	I'm in "#{$name}--#{$mod-name}" color
+                * </div>
+                *
+                * @since       1.0.0
+                * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                */
+             .#{$cls} {
+                color: color($name, $mod-name);
+              }
+            }
+
+
+            @if class-match-namespace("sugar.helper.color.#{$name}.#{$mod-name}.bkg") {
+              $cls: unquote(selector("bkg-#{$name}--#{$mod-name}"));
+              /**
+                * @name       	{$cls}
+                * @namespace       scss.core.class
+                * @class-namespace           sugar.helper.color.#{$name}.#{$mod-name}.bkg
+                * @type        class
+                *
+                * Specify the background color to **#{$name}--#{$mod-name}**
+                *
+                * @example 	html
+                * <div class="#{$cls} p" style="color:white">
+                * 	My background color is "#{$name}--#{$mod-name}"
+                * </div>
+                *
+                * @since       1.0.0
+                * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                */
+              .#{$cls} {
+                background-color: color($name, $mod-name);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+}

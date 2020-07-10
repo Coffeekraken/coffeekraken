@@ -1,27 +1,23 @@
-@use '../../../vendor/fontawesome' as fa;
+@mixin classes-icons-icons() {
 
-@mixin register-icons-icons() {
-
-  @each $name, $value in module-variables('fa') {
-    @if str-slice($name, 0, 6) == 'fa-var' {
-      $name: str-slice($name,8);
-      @include register-class(icon-fa-#{$name}, "sugar.icon.fa.#{$name}") {
-        /**
-        * @name 		clear
-        * @namespace       scss.core.class.icons
-        * @class-namespace     sugar.icon.fa.#{$name}
-        * @type        class
-        *
-        * ```.icon-fa-#{$name}``` icon class
-        *
-        * @example 	html
-        * <i class="icon-fa-#{$name}" />
-        *
-        * @since       1.0.0
-        * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-        */
-       @include icon(fa-#{$name});
-      }
+  $icons: setting('classes.generate.icons');
+  @each $name in $icons {
+     /**
+      * @name 		.icon-#{$name}
+      * @namespace       scss.core.class.icons
+      * @type        class
+      *
+      * ```.icon-#{$name}``` icon class
+      *
+      * @example 	html
+      * <i class="icon-#{$name}" />
+      *
+      * @since       2.0.0
+      * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+      */
+    .icon-#{$name} {
+      @include icon($name);
     }
   }
+
 }

@@ -1,7 +1,6 @@
-@mixin register-helper-pointer() {
+@mixin classes-helper-pointer() {
 
-  @include register-class(
-    pointer-events-none,
+  @if class-match-namespace(
     "sugar.helper.pointer.events.none"
   ) {
     /**
@@ -20,10 +19,11 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    pointer-events: none;
+    .pointer-events-none {
+      pointer-events: none;
+    }
   }
-  @include register-class(
-    pointer-events-all,
+  @if class-match-namespace(
     "sugar.helper.pointer.events.all"
   ) {
     /**
@@ -42,7 +42,9 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    pointer-events: all;
+    .pointer-events-all {
+      pointer-events: all;
+    }
   }
 
 }

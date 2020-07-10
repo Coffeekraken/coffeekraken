@@ -72,7 +72,9 @@ module.exports = class SRenderSassStreamAction extends __SActionsStreamAction {
             data: streamObj.data,
             includePaths: [
               `${streamObj.input.replace(__getFilename(streamObj.input), '')}`,
-              `${__packageRoot(process.cwd())}/node_modules`
+              `${__packageRoot(process.cwd())}/node_modules`,
+              `${__packageRoot(__dirname)}/src/scss`,
+              `${__packageRoot(process.cwd())}/src/scss`
             ],
             sourceMap: streamObj.map
           },

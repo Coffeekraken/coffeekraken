@@ -1,6 +1,57 @@
-@mixin register-helper-text() {
+@mixin classes-helper-text() {
 
-  @include register-class(t-hidden, "sugar.helper.text.hidden") {
+  @if class-match-namespace('sugar.helper.size') {
+    @each $size, $value in setting("sizes") {
+      @if class-match-namespace("sugar.helper.size.#{$size}") {
+        /**
+          * @name       	s-#{$size}
+          * @namespace       scss.core.class
+          * @class-namespace           sugar.helper.size.#{$size}
+          * @type        class
+          *
+          * Set the size **#{$size}** relative to the root element
+          *
+          * @example 	html
+          * <div class="s-#{$size}">
+          * 	I have the size "#{$size}" defined
+          * </div>
+          *
+          * @since       1.0.0
+          * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+          */
+        .#{selector('s-#{$size}')} {
+          font-size: to-rem($value);
+        }
+      }
+
+
+      @if class-match-namespace("sugar.helper.size.rel.#{$size}") {
+        /**
+          * @name       	s-#{$size}-rel
+          * @namespace       scss.core.class
+          * @class-namespace           sugar.helper.size.rel.#{$size}
+          * @type        class
+          *
+          * Set the size **#{$size}** relative to my parent
+          *
+          * @example 	html
+          * <div class="s-#{$size}-rel">
+          * 	I have the size "#{$size}" defined relative to my parent
+          * </div>
+          *
+          * @since       1.0.0
+          * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+          */
+        .#{selector('s-#{$size}-rel')} {
+          font-size: to-em($value);
+        }
+      }
+    }
+  }
+
+
+
+  @if class-match-namespace("sugar.helper.text.hidden") {
     /**
     * @name 		t-hidden
     * @namespace         scss.core.class.helper
@@ -17,9 +68,11 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    @include text-hide();
+    .t-hidden {
+      @include text-hide();
+    }
   }
-  @include register-class(t-truncate, "sugar.helper.text.truncate") {
+  @if class-match-namespace("sugar.helper.text.truncate") {
     /**
     * @name 		t-truncate
     * @namespace         scss.core.class.helper
@@ -36,9 +89,11 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    @include text-truncate();
+    .t-truncate {
+      @include text-truncate();
+    }
   }
-  @include register-class(t-left, "sugar.helper.text.align.left") {
+  @if class-match-namespace("sugar.helper.text.align.left") {
     /**
     * @name 		t-left
     * @namespace         scss.core.class.helper
@@ -55,9 +110,11 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    text-align: left;
+    .t-left {
+      text-align: left;
+    }
   }
-  @include register-class(t-right, "sugar.helper.text.align.right") {
+  @if class-match-namespace("sugar.helper.text.align.right") {
     /**
     * @name 		t-right
     * @namespace         scss.core.class.helper
@@ -74,9 +131,11 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    text-align: right;
+    .t-right {
+      text-align: right;
+    }
   }
-  @include register-class(t-center, "sugar.helper.text.align.center") {
+  @if class-match-namespace("sugar.helper.text.align.center") {
     /**
     * @name 		t-center
     * @namespace         scss.core.class.helper
@@ -93,9 +152,11 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    text-align: center;
+    .t-center {
+       text-align: center;
+    }
   }
-  @include register-class(t-justify, "sugar.helper.text.align.justify") {
+  @if class-match-namespace("sugar.helper.text.align.justify") {
     /**
     * @name 		t-justify
     * @namespace         scss.core.class.helper
@@ -112,10 +173,11 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    text-align: justify;
+    .t-justify {
+      text-align: justify;
+    }
   }
-  @include register-class(
-    t-lowercase,
+  @if class-match-namespace(
     "sugar.helper.text.transform.lowercase"
   ) {
     /**
@@ -134,10 +196,11 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    text-transform: lowercase;
+    .t-lowercase {
+      text-transform: lowercase;
+    }
   }
-  @include register-class(
-    t-uppercase,
+  @if class-match-namespace(
     "sugar.helper.text.transform.uppercase"
   ) {
     /**
@@ -156,10 +219,11 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    text-transform: uppercase;
+    .t-uppercase {
+      text-transform: uppercase;
+    }
   }
-  @include register-class(
-    t-capitalize,
+  @if class-match-namespace(
     "sugar.helper.text.transform.capitalize"
   ) {
     /**
@@ -178,6 +242,8 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    text-transform: capitalize;
+    .t-capitalize {
+      text-transform: capitalize;
+    }
   }
 }

@@ -1,6 +1,32 @@
-@mixin register-helper-font() {
+@mixin classes-helper-font() {
 
-  @include register-class(f-bold, "sugar.helper.font.weight.bold") {
+  @if class-match-namespace('sugar.helper.font.family') {
+    @each $name, $font in setting("fonts") {
+      @if class-match-namespace("sugar.helper.font.family.#{$name}") {
+        /**
+          * @name       	  f-#{$name}
+          * @namespace       scss.core.class
+          * @class-namespace           sugar.helper.font.family.#{$name}
+          * @type        class
+          *
+          * Apply the font **#{$name}**
+          *
+          * @example 	html
+          * <div class="f-#{$name}">
+          * 	I have the font "#{$name}" applied
+          * </div>
+          *
+          * @since       1.0.0
+          * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+          */
+        .#{selector("f-#{$name}")} {
+          @include font($name);
+        }
+      }
+    }
+  }
+
+  @if class-match-namespace("sugar.helper.font.weight.bold") {
     /**
     * @name 		f-bold
     * @namespace           scss.core.class.helper
@@ -15,9 +41,11 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    font-weight: bold;
+    .f-bold {
+      font-weight: bold;
+    }
   }
-  @include register-class(f-lighter, "sugar.helper.font.weight.lighter") {
+  @if class-match-namespace("sugar.helper.font.weight.lighter") {
     /**
     * @name 		f-lighter
     * @namespace           scss.core.class.helper
@@ -32,9 +60,11 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    font-weight: lighter;
+    .f-lighter {
+      font-weight: lighter;
+    }
   }
-  @include register-class(f-bolder, "sugar.helper.font.weight.bolder") {
+  @if class-match-namespace("sugar.helper.font.weight.bolder") {
     /**
     * @name 		f-bolder
     * @namespace           scss.core.class.helper
@@ -49,9 +79,11 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    font-weight: bolder;
+    .f-bolder {
+      font-weight: bolder;
+    }
   }
-  @include register-class(f-normal, "sugar.helper.font.weight.normal") {
+  @if class-match-namespace("sugar.helper.font.weight.normal") {
     /**
     * @name 		f-normal
     * @namespace           scss.core.class.helper
@@ -68,10 +100,12 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    font-weight: normal;
-    font-style: normal;
+    .f-normal {
+      font-weight: normal;
+      font-style: normal;
+    }
   }
-  @include register-class(f-italic, "sugar.helper.font.style.italic") {
+  @if class-match-namespace("sugar.helper.font.style.italic") {
     /**
     * @name 		f-italic
     * @namespace           scss.core.class.helper
@@ -86,9 +120,11 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    font-style: italic;
+    .f-italic {
+      font-style: italic;
+    }
   }
-  @include register-class(f-oblique, "sugar.helper.font.style.oblique") {
+  @if class-match-namespace("sugar.helper.font.style.oblique") {
     /**
     * @name 		f-oblique
     * @namespace           scss.core.class.helper
@@ -103,10 +139,11 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    font-style: oblique;
+    .f-oblique {
+      font-style: oblique;
+    }
   }
-  @include register-class(
-    f-small-caps,
+  @if class-match-namespace(
     "sugar.helper.font.variant.small-caps"
   ) {
     /**
@@ -123,7 +160,9 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    font-variant: small-caps;
+    .f-small-caps {
+      font-variant: small-caps;
+    }
   }
 
 }

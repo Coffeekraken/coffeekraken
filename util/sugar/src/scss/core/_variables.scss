@@ -65,3 +65,31 @@ $__svg-icons: (
  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
  */
 $__classes: () !default; // store all the classes in their namespaces
+
+/**
+ * @name          __classesFiles
+ * @type          {Map}
+ * @private
+ *
+ * Store all the classes files that have been registered to be called
+ * when the ```Sugar.classes()``` mixin has been called
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+$__classesFiles: () !default;
+
+ /**
+ * @name          __classNamespacesWanted
+ * @type          {List}
+ * @private
+ *
+ * Store the list of namespaces wanted to be used across the system.
+ * By default the value is the ```config.classes.generate.namespace``` setting
+ * But will be overrided by the passed value to the ```Sugar.classes({namespaces})``` passed value.
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+$__classNamespacesWanted: setting('classes.generate.namespace') !default;
+
+
+$classesImportString: null !default;

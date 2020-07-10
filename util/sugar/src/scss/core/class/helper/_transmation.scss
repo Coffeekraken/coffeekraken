@@ -1,6 +1,6 @@
-@mixin register-helper-transmation() {
+@mixin classes-helper-transmation() {
 
-  @include register-class(no-transition, "sugar.helper.transition.no") {
+  @if class-match-namespace("sugar.helper.transition.no") {
     /**
     * @name 		no-transition
     * @namespace         scss.core.class.helper
@@ -18,13 +18,15 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    &,
-    &:before,
-    &:after {
-      transition: none !important;
+    .no-transition {
+      &,
+      &:before,
+      &:after {
+        transition: none !important;
+      }
     }
   }
-  @include register-class(clear-transition, "sugar.helper.transition.clear") {
+  @if class-match-namespace("sugar.helper.transition.clear") {
     /**
     * @name 		clear-transition
     * @namespace         scss.core.class.helper
@@ -42,16 +44,18 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    &,
-    &:before,
-    &:after,
-    & *,
-    & *:before,
-    & *:after {
-      transition: none !important;
+    .clear-transition {
+      &,
+      &:before,
+      &:after,
+      & *,
+      & *:before,
+      & *:after {
+        transition: none !important;
+      }
     }
   }
-  @include register-class(no-animation, "sugar.helper.animation.no") {
+  @if class-match-namespace("sugar.helper.animation.no") {
     /**
     * @name 		no-animation
     * @namespace         scss.core.class.helper
@@ -69,13 +73,15 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    &,
-    &:before,
-    &:after {
-      animation: none !important;
+    .no-animation {
+      &,
+      &:before,
+      &:after {
+        animation: none !important;
+      }
     }
   }
-  @include register-class(clear-animation, "sugar.helper.animation.clear") {
+  @if class-match-namespace("sugar.helper.animation.clear") {
     /**
     * @name 		clear-animation
     * @namespace         scss.core.class.helper
@@ -93,16 +99,18 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    &,
-    &:before,
-    &:after,
-    & *,
-    & *:before,
-    & *:after {
-      animation: none !important;
+    .clear-animation {
+      &,
+      &:before,
+      &:after,
+      & *,
+      & *:before,
+      & *:after {
+        animation: none !important;
+      }
     }
   }
-  @include register-class(no-transmation, "sugar.helper.transmation.no") {
+  @if class-match-namespace("sugar.helper.transmation.no") {
     /**
     * @name 		no-transmation
     * @namespace         scss.core.class.helper
@@ -120,15 +128,16 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    &,
-    &:before,
-    &:after {
-      transition: none !important;
-      animation: none !important;
+    .no-transmation {
+      &,
+      &:before,
+      &:after {
+        transition: none !important;
+        animation: none !important;
+      }
     }
   }
-  @include register-class(
-    clear-transmation,
+  @if class-match-namespace(
     "sugar.helper.transmation.clear"
   ) {
     /**
@@ -148,14 +157,16 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    &,
-    &:before,
-    &:after,
-    & *,
-    & *:before,
-    & *:after {
-      transition: none !important;
-      animation: none !important;
+    .clear-transmation {
+      &,
+      &:before,
+      &:after,
+      & *,
+      & *:before,
+      & *:after {
+        transition: none !important;
+        animation: none !important;
+      }
     }
   }
 }

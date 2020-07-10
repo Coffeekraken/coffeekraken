@@ -18,32 +18,40 @@
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@mixin classes($namespaces: setting('classes.generate.namespace')) {
-  $namespaces: test-argument(
-    'Sugar.classes',
-    'namespaces',
-    'string|list-string',
-    $namespaces
-  );
+ @mixin classes($namespaces: setting('classes.generate.namespace')) {
+   $namespaces: test-argument(
+     'Sugar.classes',
+     'namespaces',
+     'string|list-string',
+     $namespaces
+     );
 
-  // init classes
-  @include init-classes();
+  // override the $__classNamespacesWanted global variable
+  $__classNamespacesWanted: $namespaces !global;
 
-  // classes
-  @if $namespaces {
-    @each $namespace in $namespaces {
+  @include classes-helper-block();
+  @include classes-helper-clear();
+  @include classes-helper-clearfix();
+  @include classes-helper-color();
+  @include classes-helper-display();
+  @include classes-helper-filter();
+  @include classes-helper-font();
+  @include classes-helper-margin();
+  @include classes-helper-media();
+  @include classes-helper-padding();
+  @include classes-helper-pointer();
+  @include classes-helper-position();
+  @include classes-helper-pull();
+  @include classes-helper-ratio();
+  @include classes-helper-size();
+  @include classes-helper-text();
+  @include classes-helper-transition();
+  @include classes-helper-transmation();
 
-      // filter the classes map with the wanted namespace
-      $wanted-classes-map: map-filter-by-namespace($__classes, $namespace);
+  // lnf
+  @include classes-lnf-shadow();
 
-      // loop on each wanted classes namespace
-      @each $wanted-namespace in map.keys($wanted-classes-map) {
-        // get the classname
-        $classname: map.get($wanted-classes-map, $wanted-namespace);
-        .#{$classname} {
-          @extend %#{$classname} !optional;
-        }
-      }
-    }
-  }
+  // icons
+  @include classes-icons-icons();
+
 }

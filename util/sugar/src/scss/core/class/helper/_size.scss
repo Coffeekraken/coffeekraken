@@ -1,6 +1,6 @@
-@mixin register-helper-size() {
+@mixin classes-helper-size() {
 
-  @include register-class(abs-cover, "sugar.helper.size.abs.cover") {
+  @if class-match-namespace("sugar.helper.size.abs.cover") {
     /**
     * @name 		abs-cover
     * @namespace         scss.core.class.helper
@@ -17,9 +17,11 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    @include size(cover, $position: absolute);
+    .abs-cover {
+      @include size(cover, $position: absolute);
+    }
   }
-  @include register-class(abs-contain, "sugar.helper.size.abs.contain") {
+  @if class-match-namespace("sugar.helper.size.abs.contain") {
     /**
     * @name 		abs-contain
     * @namespace         scss.core.class.helper
@@ -36,9 +38,11 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    @include size(contain, $position: absolute);
+    .abs-contain {
+      @include size(contain, $position: absolute);
+    }
   }
-  @include register-class(abs-fit, "sugar.helper.size.abs.fit") {
+  @if class-match-namespace("sugar.helper.size.abs.fit") {
     /**
     * @name 		abs-fit
     * @namespace         scss.core.class.helper
@@ -55,6 +59,8 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    @include size(fit, $position: absolute);
+    .abs-fit {
+      @include size(fit, $position: absolute);
+    }
   }
 }

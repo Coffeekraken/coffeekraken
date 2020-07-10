@@ -1,0 +1,229 @@
+@mixin classes-helper-margin() {
+
+  @if class-match-namespace('sugar.helper.margin') {
+
+    $sizes: setting("sizes");
+    @each $name, $size in $sizes {
+
+      @if class-match-namespace("sugar.helper.margin.bottom.#{$name}") {
+        $cname: selector("m-b-#{$name}");
+        /**
+          * @name       	#{$cname}
+          * @namespace       scss.core.class
+          * @class-namespace           sugar.helper.margin.#{$name}
+          * @type        class
+          *
+          * Set the **bottom** margin to the **#{$size}** size
+          *
+          * @example 	html
+          * <div class="#{$cname}" style="background:#{color(primary)}; width:100px; height:5px"></div>
+          * <div style="background:#{color(secondary)}; width:100px; height:5px"></div>
+          *
+          * @since       1.0.0
+          * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+          */
+        .#{$cname} {
+          margin-bottom: space($name);
+        }
+      }
+
+      @if class-match-namespace("sugar.helper.margin.top.#{$name}") {
+        $cname: selector("m-t-#{$name}");
+        /**
+          * @name          #{$cname}
+          * @namespace       scss.core.class
+          * @class-namespace           sugar.helper.margin.#{$name}
+          * @type        class
+          *
+          * Set the **top** margin to the **#{$size}** size
+          *
+          * @example 	html
+          * <div style="background:#{color(primary)}; width:100px; height:5px"></div>
+          * <div class="#{$cname}" style="background:#{color(secondary)}; width:100px; height:5px"></div>
+          *
+          * @since       1.0.0
+          * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+          */
+        .#{$cname} {
+          margin-top: space($name);
+        }
+      }
+
+      @if class-match-namespace("sugar.helper.margin.left.#{$name}") {
+        $cname: selector("m-l-#{$name}");
+        /**
+          * @name       	#{$cname}
+          * @namespace       scss.core.class
+          * @class-namespace           sugar.helper.margin.left.#{$name}
+          * @type        class
+          *
+          * Set the **left** margin to the **#{$size}** size
+          *
+          * @example 	html
+          * <div style="display:inline-block; background:#{color(primary)}; width:50px; height:50px"></div>
+          * <div class="#{$cname}" style="display:inline-block; background:#{color(secondary)}; width:50px; height:50px"></div>
+          *
+          * @since       1.0.0
+          * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+          */
+        .#{$cname} {
+          margin-left: space($name);
+        }
+      }
+
+      @if class-match-namespace("sugar.helper.margin.right.#{$name}") {
+        $cname: selector("m-r-#{$name}");
+        /**
+          * @name       	#{$cname}
+          * @namespace       scss.core.class
+          * @class-namespace           sugar.helper.margin.right.#{$name}
+          * @type        class
+          *
+          * Set the **right* margin to the **#{$size}** size
+          *
+          * @example 	html
+          * <div class="#{$cname}" style="display:inline-block; background:#{color(primary)}; width:50px; height:50px"></div>
+          * <div style="display:inline-block; background:#{color(secondary)}; width:50px; height:50px"></div>
+          *
+          * @since       1.0.0
+          * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+          */
+        .#{$cname} {
+          margin-right: space($name);
+        }
+      }
+
+      @if class-match-namespace("sugar.helper.margin.side.#{$name}") {
+        $cname: selector("m-s-#{$name}");
+        /**
+          * @name       	#{$cname}
+          * @namespace       scss.core.class
+          * @class-namespace           sugar.helper.margin.side.#{$name}
+          * @type        class
+          *
+          * Set the **side** margin to the **#{$size}** size
+          *
+          * @example 	html
+          * <div class="#{$cname}" style="display:inline-block; background:#{color(primary)}; width:50px; height:50px"></div>
+          * <div style="display:inline-block; background:#{color(secondary)}; width:50px; height:50px"></div>
+          *
+          * @since       1.0.0
+          * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+          */
+        .#{$cname} {
+          margin-left: space($name);
+          margin-right: space($name);
+        }
+      }
+
+    }
+
+    @if class-match-namespace("sugar.helper.margin.no.top") {
+      /**
+      * @name       	no-m-t
+      * @namespace       scss.core.class
+      * @class-namespace           sugar.helper.margin.no.top
+      * @type        class
+      *
+      * Reset **top** padding
+      *
+      * @example 	html
+      * <div class="no-m-t" style="display:inline-block; background:#{color(primary)}; width:50px; height:50px;"></div>
+      *
+      * @since       1.0.0
+      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+      */
+      .no-m-t {
+        margin-top: 0 !important;
+      }
+    }
+
+
+    @if class-match-namespace("sugar.helper.margin.no.right") {
+      /**
+        * @name       	no-m-r
+        * @namespace       scss.core.class
+        * @class-namespace           sugar.helper.margin.no.right
+        * @type        class
+        *
+        * Reset **right** padding
+        *
+        * @example 	html
+        * <div class="no-m-r" style="display:inline-block; background:#{color(primary)}; width:50px; height:50px;"></div>
+        *
+        * @since       1.0.0
+        * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+      .no-m-r {
+        margin-right: 0 !important;
+      }
+    }
+
+
+    @if class-match-namespace("sugar.helper.margin.no.bottom") {
+      /**
+        * @name       	no-m-b
+        * @namespace       scss.core.class
+        * @class-namespace           sugar.helper.margin.no.bottom
+        * @type        class
+        *
+        * Reset **bottom** padding
+        *
+        * @example 	html
+        * <div class="no-m-b" style="display:inline-block; background:#{color(primary)}; width:50px; height:50px;"></div>
+        *
+        * @since       1.0.0
+        * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+      .no-m-b {
+        margin-bottom: 0 !important;
+      }
+    }
+
+
+    @if class-match-namespace("sugar.helper.margin.no.left") {
+      /**
+        * @name       	no-m-l
+        * @namespace       scss.core.class
+        * @class-namespace           sugar.helper.margin.no.left
+        * @type        class
+        *
+        * Reset **left** padding
+        *
+        * @example 	html
+        * <div class="no-m-l" style="display:inline-block; background:#{color(primary)}; width:50px; height:50px;"></div>
+        *
+        * @since       1.0.0
+        * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+      .no-m-l {
+        margin-left: 0 !important;
+      }
+    }
+
+
+    @if class-match-namespace("sugar.helper.margin.no.side") {
+      /**
+        * @name       	no-m-s
+        * @namespace       scss.core.class
+        * @class-namespace           sugar.helper.padding.no.side
+        * @type        class
+        *
+        * Reset **left** and **right** margins
+        *
+        * @example 	html
+        * <div class="no-m-s" style="display:inline-block; background:#{color(primary)}; width:50px; height:50px;"></div>
+        *
+        * @since       1.0.0
+        * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+      .no-m-s {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+    }
+
+
+  }
+
+}

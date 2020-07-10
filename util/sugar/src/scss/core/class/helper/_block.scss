@@ -1,25 +1,25 @@
-@mixin register-helper-block() {
-
-  @include register-class(block-center, "sugar.helper.block.align.center") {
+@mixin classes-helper-block() {
+  @if class-match-namespace('sugar.helper.block.align.center') {
     /**
-    * @name 		block-center
-    * @namespace           scss.core.class.helper
-    * @class-namespace     sugar.helper.block.align.center
-    * @type        class
-    *
-    * Set the element to as ```display:block``` and center it
-    *
-    * @example 	html
-    * <div class="block-center bkg-primary" style="width:100px;">
-    * 	I'm a centered block
-    * </div>
-    *
-    * @since       1.0.0
-    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-    */
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+      * @name 		block-center
+      * @namespace           scss.core.class.helper
+      * @class-namespace     sugar.helper.block.align.center
+      * @type        class
+      *
+      * Set the element to as ```display:block``` and center it
+      *
+      * @example 	html
+      * <div class="block-center bkg-primary" style="width:100px;">
+      * 	I'm a centered block
+      * </div>
+      *
+      * @since       1.0.0
+      * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+      */
+    .block-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
-
 }

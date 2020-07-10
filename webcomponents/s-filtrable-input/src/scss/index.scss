@@ -1,14 +1,8 @@
-// @use './style' as SFiltrableInput;
 @import './style';
 
 @include style();
 
 @include Sugar.classes();
-
 .s-filtrable-input__list {
-
-  @include Sugar.icon(fa-user);
-
   left: 300px !important;
-
 }

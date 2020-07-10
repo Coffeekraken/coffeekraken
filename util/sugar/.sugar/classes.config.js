@@ -3,7 +3,7 @@ module.exports = {
     /**
      * @name          namespace
      * @namespace     config.classes.generate
-     * @type          Array
+     * @type          Array<String>
      * @default       ['sugar']
      *
      * Specify which classes registered with the "Sugar.register-class" mixin
@@ -12,21 +12,22 @@ module.exports = {
      * @since       2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    namespace: ['sugar']
+    namespace: ['sugar.lnf', 'sugar.helper'],
 
     /**
      * @name          icons
      * @namespace     config.classes.generate
-     * @type          String
+     * @type          Array<String>
      * @default       ''
      *
      * Specify which icons you want to be generated as a class ```.icon-{name}```.
      * By default no classes are generated like that but you can have them using these options:
      * 1. Using the ```@include Sugar.icon(fa-user);``` mixin
-     * 2. Adding the icons you want in this setting options like for example "fa-user fa-star" and then use the generated classes like ```.icon-fa-user``` and ```.icon-fa-star```
+     * 2. Adding the icons you want in this setting options like for example ```["fa-user", "fa-star"]``` and then use the generated classes like ```.icon-fa-user``` and ```.icon-fa-star```
      *
      * @since       2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
+    icons: ['fa-user', 'fa-star']
   }
 };

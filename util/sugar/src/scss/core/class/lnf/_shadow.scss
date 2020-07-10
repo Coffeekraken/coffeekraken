@@ -1,6 +1,6 @@
-@mixin register-lnf-shadow() {
+@mixin classes-lnf-shadow() {
 
-  @include register-class(lnf-shadow, "sugar.lnf.shadow") {
+  @if class-match-namespace("sugar.lnf.shadow") {
     /**
     * @name 		lnf-shadow
     * @namespace           scss.core.class.lnf
@@ -19,9 +19,11 @@
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    @include smooth-shadow();
+    .lnf-shadow {
+      @include smooth-shadow();
+    }
   }
-  @include register-class(lnf-shadow--small, "sugar.lnf.shadow.small") {
+  @if class-match-namespace("sugar.lnf.shadow.small") {
     /**
     * @name 		lnf-shadow--small
     * @namespace           scss.core.class.lnf
@@ -40,9 +42,11 @@
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    @include smooth-shadow($layers: 3);
+    .lnf-shadow--small {
+      @include smooth-shadow($layers: 3);
+    }
   }
-  @include register-class(lnf-shadow--big, "sugar.lnf.shadow.big") {
+  @if class-match-namespace("sugar.lnf.shadow.big") {
     /**
     * @name 		lnf-shadow--big
     * @namespace           scss.core.class.lnf
@@ -61,6 +65,8 @@
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    @include smooth-shadow($layers: 9);
+    .lnf-shadow--big {
+      @include smooth-shadow($layers: 9);
+    }
   }
 }

@@ -1,6 +1,6 @@
-@mixin register-helper-pull() {
+@mixin classes-helper-pull() {
 
-  @include register-class(pull-left, "sugar.helper.pull.left") {
+  @if class-match-namespace("sugar.helper.pull.left") {
     /**
     * @name 		pull-left
     * @namespace         scss.core.class.helper
@@ -17,9 +17,11 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    float: left;
+    .pull-left {
+      float: left;
+    }
   }
-  @include register-class(pull-right, "sugar.helper.pull.right") {
+  @if class-match-namespace("sugar.helper.pull.right") {
     /**
     * @name 		pull-right
     * @namespace         scss.core.class.helper
@@ -36,6 +38,8 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    float: right;
+    .pull-right {
+      float: right;
+    }
   }
 }

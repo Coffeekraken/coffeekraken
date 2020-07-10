@@ -1,6 +1,6 @@
-@mixin register-helper-position() {
+@mixin classes-helper-position() {
 
-  @include register-class(relative, "sugar.helper.position.relative") {
+  @if class-match-namespace("sugar.helper.position.relative") {
     /**
     * @name 		relative
     * @namespace         scss.core.class.helper
@@ -17,9 +17,11 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    position: relative;
+    .relative {
+      position: relative;
+    }
   }
-  @include register-class(absolute, "sugar.helper.position.absolute") {
+  @if class-match-namespace("sugar.helper.position.absolute") {
     /**
     * @name 		absolute
     * @namespace         scss.core.class.helper
@@ -36,7 +38,9 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    position: absolute;
+    .absolute {
+      position: absolute;
+    }
   }
 
 }

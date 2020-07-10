@@ -1,0 +1,27 @@
+@mixin classes-helper-filter() {
+
+  $filters: setting("filters");
+  @each $name, $filter in $filters {
+    @if class-match-namespace("sugar.helper.filter.#{$name}") {
+      /**
+        * @name       	fi-#{$name}
+        * @namespace       scss.core.class
+        * @class-namespace           sugar.helper.filter.#{$name}
+        * @type        class
+        *
+        * Apply the filter **#{$name}**
+        *
+        * @example 	html
+        * <div class="fi-#{$name}">
+        * 	I'm filtered with #{$name}
+        * </div>
+        *
+        * @since       1.0.0
+        * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+      .#{selector("fi-#{$name}")} {
+        @include filter($filter);
+      }
+    }
+  }
+}

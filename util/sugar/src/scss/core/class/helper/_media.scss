@@ -1,6 +1,6 @@
-@mixin register-helper-media() {
+@mixin classes-helper-media() {
 
-  @include register-class(mo, "sugar.helper.media.object") {
+  @if class-match-namespace("sugar.helper.media.object") {
     /**
     * @name 		mo .mo--center .mo__content
     * @namespace         scss.core.class.helper
@@ -23,18 +23,20 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    display: flex;
-    flex-wrap: nowrap;
+    .mo {
+      display: flex;
+      flex-wrap: nowrap;
 
-    @at-root {
-      .mo--center {
-        align-items: center;
-      }
-      .mo--end {
-        align-items: flex-end;
-      }
-      .mo__content {
-        flex: 0 1 auto;
+      @at-root {
+        .mo--center {
+          align-items: center;
+        }
+        .mo--end {
+          align-items: flex-end;
+        }
+        .mo__content {
+          flex: 0 1 auto;
+        }
       }
     }
   }

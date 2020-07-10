@@ -60,6 +60,27 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
  */
 /**
+ * @name          __classesFiles
+ * @type          {Map}
+ * @private
+ *
+ * Store all the classes files that have been registered to be called
+ * when the ```Sugar.classes()``` mixin has been called
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+* @name          __classNamespacesWanted
+* @type          {List}
+* @private
+*
+* Store the list of namespaces wanted to be used across the system.
+* By default the value is the ```config.classes.generate.namespace``` setting
+* But will be overrided by the passed value to the ```Sugar.classes({namespaces})``` passed value.
+*
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
+/**
  * @name        settings
  * @type        {Map}
  *
@@ -185,178 +206,6 @@
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-/**
- * @name            init-classes
- * @namespace       scss.core.class
- * @class-namespace           scss.core.class
- * @type      mixin
- *
- * Register all the dynamic helper classes that depends on the settings, etc...
- * This is used internaly
- *
- * @example     scss
- * \@include Sugar.init-classes();
- *
- * @todo      check for performance increase
- *
- * @since       1.0.0
- * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-/**
- * @name        __settings
- * @type        {String}
- * @private
- *
- * Store the settings
- *
- * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
- */
-/**
- * @name        __current-context
- * @type        {String}
- * @private
- *
- * Store the current context
- *
- * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
- */
-/**
- * @name        __generated-vars
- * @type        Map
- * @private
- *
- * Store the map of the generated css vars names to avoid generating another one if already exist
- *
- * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
- */
-/**
- * @name          __font-size
- * @type          {Number}
- * @private
- *
- * Store the current registered font size
- *
- * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
- */
-/**
- * @name            __svg-icons
- * @type            {Map}
- * @private
- *
- * Store all the registered svg icons
- *
- * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
- */
-/**
- * @name          __classes
- * @type          {Map}
- * @private
- *
- * Store all the classes in their namespaces
- *
- * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
- */
-/**
- * @name      register-class
- * @namespace           scss.core.class
- * @type      mixin
- *
- * Register a class under a certain namespace
- *
- * @param 			{String} 		$classname 		The classname that will be printed out
- * @param 			{String} 		$namespace 		The dots separated namespace under which the class will live
- *
- * @example       scss
- * \@include Sugar.register-class(my-cool-class, 'my.cool.namespace') {
- * 		background : pink;
- * }
- * \@include Sugar.register-class(another-cool-class, 'my.another.namespace') {
- * 		background : red;
- * }
- *
- * // print out my helpers classes
- * \@include Sugar.classes('my');
- *
- * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-.fa,
-.fas,
-.far,
-.s-filtrable-input__list,
-.fal,
-.fad,
-.fab {
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  display: inline-block;
-  font-style: normal;
-  font-variant: normal;
-  text-rendering: auto;
-  line-height: 1;
-}
-
-.s-filtrable-input__list {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  display: inline-block;
-  font-style: normal;
-  font-variant: normal;
-  font-weight: normal;
-  line-height: 1;
-}
-
-/*!
- * Font Awesome Free 5.13.1 by @fontawesome - https://fontawesome.com
- * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
- */
-@font-face {
-  font-family: "Font Awesome 5 Brands";
-  font-style: normal;
-  font-weight: 400;
-  font-display: block;
-  src: url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-brands-400.eot");
-  src: url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-brands-400.eot?#iefix") format("embedded-opentype"), url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-brands-400.woff2") format("woff2"), url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-brands-400.woff") format("woff"), url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-brands-400.ttf") format("truetype"), url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-brands-400.svg#fontawesome") format("svg");
-}
-.fab {
-  font-family: "Font Awesome 5 Brands";
-  font-weight: 400;
-}
-
-/*!
- * Font Awesome Free 5.13.1 by @fontawesome - https://fontawesome.com
- * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
- */
-@font-face {
-  font-family: "Font Awesome 5 Free";
-  font-style: normal;
-  font-weight: 400;
-  font-display: block;
-  src: url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-regular-400.eot");
-  src: url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-regular-400.eot?#iefix") format("embedded-opentype"), url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-regular-400.woff2") format("woff2"), url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-regular-400.woff") format("woff"), url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-regular-400.ttf") format("truetype"), url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-regular-400.svg#fontawesome") format("svg");
-}
-.far, .s-filtrable-input__list {
-  font-family: "Font Awesome 5 Free";
-  font-weight: 400;
-}
-
-/*!
- * Font Awesome Free 5.13.1 by @fontawesome - https://fontawesome.com
- * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
- */
-@font-face {
-  font-family: "Font Awesome 5 Free";
-  font-style: normal;
-  font-weight: 900;
-  font-display: block;
-  src: url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-solid-900.eot");
-  src: url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-solid-900.eot?#iefix") format("embedded-opentype"), url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-solid-900.woff2") format("woff2"), url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-solid-900.woff") format("woff"), url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-solid-900.ttf") format("truetype"), url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-solid-900.svg#fontawesome") format("svg");
-}
-.fa,
-.fas {
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-}
-
 /**
  * @name      color
  * @namespace           scss.core.color
@@ -607,6 +456,27 @@
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
  */
+/**
+ * @name          __classesFiles
+ * @type          {Map}
+ * @private
+ *
+ * Store all the classes files that have been registered to be called
+ * when the ```Sugar.classes()``` mixin has been called
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+/**
+* @name          __classNamespacesWanted
+* @type          {List}
+* @private
+*
+* Store the list of namespaces wanted to be used across the system.
+* By default the value is the ```config.classes.generate.namespace``` setting
+* But will be overrided by the passed value to the ```Sugar.classes({namespaces})``` passed value.
+*
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 /**
  * @name      context
  * @namespace           scss.core.context
@@ -1315,6 +1185,36 @@
  * )
  *
  * @since       1.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name      map-filter
+ * @namespace           scss.core.map
+ * @type      function
+ *
+ * Filter a map by key, value and the passed processor function
+ *
+ * @param           {Map}         $map          The map to process
+ * @param           {String}      $processor    The processor function name you want to invoke on each values
+ * @return          {Map}                       The filtered map
+ *
+ * @example     scss
+ * @function my-cool-function($key, value) {
+ *    @return true;
+ * }
+ * Sugar.map-filter((
+ *  'hello.world': 'Hello',
+ *  'coco.world': 'Coco',
+ *  'hello.that': 'That is cool'
+ * ), 'my-cool-function');
+ * // return that map:
+ * (
+ *  'hello.world': 'Hello',
+ *  'coco.world': 'Coco',
+ *  'hello.that': 'That is cool'
+ * )
+ *
+ * @since       2.0.0
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /**
@@ -2988,7 +2888,8 @@
 .fa,
 .fas,
 .far,
-.s-filtrable-input__list,
+.icon-fa-user,
+.icon-fa-star,
 .fal,
 .fad,
 .fab {
@@ -3001,7 +2902,7 @@
   line-height: 1;
 }
 
-.s-filtrable-input__list {
+.icon-fa-user, .icon-fa-star {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   display: inline-block;
@@ -3040,7 +2941,7 @@
   src: url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-regular-400.eot");
   src: url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-regular-400.eot?#iefix") format("embedded-opentype"), url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-regular-400.woff2") format("woff2"), url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-regular-400.woff") format("woff"), url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-regular-400.ttf") format("truetype"), url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-regular-400.svg#fontawesome") format("svg");
 }
-.far, .s-filtrable-input__list {
+.far, .icon-fa-user, .icon-fa-star {
   font-family: "Font Awesome 5 Free";
   font-weight: 400;
 }
@@ -4498,8 +4399,7 @@ html {
   background-color: #dca40e;
 }
 
-.block-center {
-  /**
+/**
   * @name 		block-center
   * @namespace           scss.core.class.helper
   * @class-namespace     sugar.helper.block.align.center
@@ -4515,379 +4415,1805 @@ html {
   * @since       1.0.0
   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
   */
+.block-center {
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
 
+/**
+* @name 		clear-left
+* @namespace       scss.core.class.helper
+* @class-namespace     sugar.helper.clear.left
+* @type        class
+*
+* Clear the left float on the element
+*
+* @example 	html
+* <div class="clear-left">
+* 	I clear the left float
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .clear-left {
-  /**
-  * @name 		clear-left
-  * @namespace       scss.core.class.helper
-  * @class-namespace     sugar.helper.clear.left
-  * @type        class
-  *
-  * Clear the left float on the element
-  *
-  * @example 	html
-  * <div class="clear-left">
-  * 	I clear the left float
-  * </div>
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
   clear: left;
 }
 
+/**
+* @name 		clear-right
+* @namespace       scss.core.class.helper
+* @class-namespace     sugar.helper.clear.right
+* @type        class
+*
+* Clear the right float on the element
+*
+* @example 	html
+* <div class="clear-right">
+* 	I clear the right float
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .clear-right {
-  /**
-  * @name 		clear-right
-  * @namespace       scss.core.class.helper
-  * @class-namespace     sugar.helper.clear.right
-  * @type        class
-  *
-  * Clear the right float on the element
-  *
-  * @example 	html
-  * <div class="clear-right">
-  * 	I clear the right float
-  * </div>
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
   clear: right;
 }
 
+/**
+* @name 		clear
+* @namespace       scss.core.class.helper
+* @class-namespace     sugar.helper.clear.both
+* @type        class
+*
+* Clear both float on the element
+*
+* @example 	html
+* <div class="clear">
+* 	I clear both floats
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .clear {
-  /**
-  * @name 		clear
-  * @namespace       scss.core.class.helper
-  * @class-namespace     sugar.helper.clear.both
-  * @type        class
-  *
-  * Clear both float on the element
-  *
-  * @example 	html
-  * <div class="clear">
-  * 	I clear both floats
-  * </div>
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
   clear: both;
 }
 
-.clearfix {
-  /**
-  * @name 		clearfix
-  * @namespace           scss.core.class.helper
-  * @class-namespace     sugar.helper.clearfix
+/**
+* @name 		clearfix
+* @namespace           scss.core.class.helper
+* @class-namespace     sugar.helper.clearfix
+* @type        class
+*
+* Apply the micro clearfix on the element
+*
+* @example 	html
+* <div class="clearfix bkg-primary">
+* 	<div class="pull-right">right pulled</div>
+* </div>
+* <div class="bkg-primary">
+* 	<div class="pull-right">right pulled without clearfix</div>
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
+/**
+* @name 		clearfix-float
+* @namespace           scss.core.class.helper
+* @class-namespace     sugar.helper.clearfix.float
+* @type        class
+*
+* Apply the float clearfix on the element
+*
+* @example 	html
+* <div class="clearfix-float bkg-primary">
+* 	<div class="pull-right">right pulled</div>
+* </div>
+* <div class="bkg-primary">
+* 	<div class="pull-right">right pulled without clearfix</div>
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
+/**
+* @name 		clearfix-micro
+* @namespace           scss.core.class.helper
+* @class-namespace     sugar.helper.clearfix.micro
+* @type        class
+*
+* Apply the micro clearfix on the element
+*
+* @example 	html
+* <div class="clearfix bkg-primary">
+* 	<div class="pull-right">right pulled</div>
+* </div>
+* <div class="bkg-primary">
+* 	<div class="pull-right">right pulled without clearfix</div>
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
+/**
+* @name 		clearfix-overflow
+* @namespace           scss.core.class.helper
+* @class-namespace     sugar.helper.clearfix.overflow
+* @type        class
+*
+* Apply the overflow clearfix on the element
+*
+* @example 	html
+* <div class="clearfix-overflow bkg-primary">
+* 	<div class="pull-right">right pulled</div>
+* </div>
+* <div class="bkg-primary">
+* 	<div class="pull-right">right pulled without clearfix</div>
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
+/**
+* @name 		clearfix-facebook
+* @namespace           scss.core.class.helper
+* @class-namespace     sugar.helper.clearfix.facebook
+* @type        class
+*
+* Apply the facebook clearfix on the element
+*
+* @example 	html
+* <div class="clearfix-facebook bkg-primary">
+* 	<div class="pull-right">right pulled</div>
+* </div>
+* <div class="bkg-primary">
+* 	<div class="pull-right">right pulled without clearfix</div>
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
+/**
+  * @name       	c
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.default
   * @type        class
   *
-  * Apply the micro clearfix on the element
+  * Specify the color to **default**
   *
   * @example 	html
-  * <div class="clearfix bkg-primary">
-  * 	<div class="pull-right">right pulled</div>
-  * </div>
-  * <div class="bkg-primary">
-  * 	<div class="pull-right">right pulled without clearfix</div>
+  * <div class="c">
+  * 	I'm in "default" color
   * </div>
   *
   * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
   */
+.c {
+  color: #848e91;
 }
 
-.clearfix-float {
-  /**
-  * @name 		clearfix-float
-  * @namespace           scss.core.class.helper
-  * @class-namespace     sugar.helper.clearfix.float
+/**
+  * @name       	bkg
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.default.bkg
   * @type        class
   *
-  * Apply the float clearfix on the element
+  * Specify the background color to **default**
   *
   * @example 	html
-  * <div class="clearfix-float bkg-primary">
-  * 	<div class="pull-right">right pulled</div>
-  * </div>
-  * <div class="bkg-primary">
-  * 	<div class="pull-right">right pulled without clearfix</div>
+  * <div class="bkg p" style="color:white">
+  * 	My background color is "default"
   * </div>
   *
   * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
   */
+.bkg {
+  background-color: #848e91;
 }
 
-.clearfix-micro, .clearfix {
-  /**
-  * @name 		clearfix
-  * @namespace           scss.core.class.helper
-  * @class-namespace     sugar.helper.clearfix.micro
+/**
+  * @name       	c--light
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.default.light
   * @type        class
   *
-  * Apply the micro clearfix on the element
+  * Specify the color to **default--light**
   *
   * @example 	html
-  * <div class="clearfix bkg-primary">
-  * 	<div class="pull-right">right pulled</div>
-  * </div>
-  * <div class="bkg-primary">
-  * 	<div class="pull-right">right pulled without clearfix</div>
+  * <div class="c--light">
+  * 	I'm in "default--light" color
   * </div>
   *
   * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
   */
+.c--light {
+  color: rgba(132, 142, 145, 0.33);
 }
 
-.clearfix-overflow {
-  /**
-  * @name 		clearfix-overflow
-  * @namespace           scss.core.class.helper
-  * @class-namespace     sugar.helper.clearfix.overflow
+/**
+  * @name       	{$cls}
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.default.light.bkg
   * @type        class
   *
-  * Apply the overflow clearfix on the element
+  * Specify the background color to **default--light**
   *
   * @example 	html
-  * <div class="clearfix-overflow bkg-primary">
-  * 	<div class="pull-right">right pulled</div>
-  * </div>
-  * <div class="bkg-primary">
-  * 	<div class="pull-right">right pulled without clearfix</div>
+  * <div class="bkg--light p" style="color:white">
+  * 	My background color is "default--light"
   * </div>
   *
   * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
   */
+.bkg--light {
+  background-color: rgba(132, 142, 145, 0.33);
 }
 
-.clearfix-facebook {
-  /**
-  * @name 		clearfix-facebook
-  * @namespace           scss.core.class.helper
-  * @class-namespace     sugar.helper.clearfix.facebook
+/**
+  * @name       	c--dark
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.default.dark
   * @type        class
   *
-  * Apply the facebook clearfix on the element
+  * Specify the color to **default--dark**
   *
   * @example 	html
-  * <div class="clearfix-facebook bkg-primary">
-  * 	<div class="pull-right">right pulled</div>
-  * </div>
-  * <div class="bkg-primary">
-  * 	<div class="pull-right">right pulled without clearfix</div>
+  * <div class="c--dark">
+  * 	I'm in "default--dark" color
   * </div>
   *
   * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
   */
+.c--dark {
+  color: #6b7477;
 }
 
+/**
+  * @name       	{$cls}
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.default.dark.bkg
+  * @type        class
+  *
+  * Specify the background color to **default--dark**
+  *
+  * @example 	html
+  * <div class="bkg--dark p" style="color:white">
+  * 	My background color is "default--dark"
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.bkg--dark {
+  background-color: #6b7477;
+}
+
+/**
+  * @name       	c-title
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.title
+  * @type        class
+  *
+  * Specify the color to **title**
+  *
+  * @example 	html
+  * <div class="c-title">
+  * 	I'm in "title" color
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.c-title {
+  color: #2b3438;
+}
+
+/**
+  * @name       	bkg-title
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.title.bkg
+  * @type        class
+  *
+  * Specify the background color to **title**
+  *
+  * @example 	html
+  * <div class="bkg-title p" style="color:white">
+  * 	My background color is "title"
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.bkg-title {
+  background-color: #2b3438;
+}
+
+/**
+  * @name       	c-title--light
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.title.light
+  * @type        class
+  *
+  * Specify the color to **title--light**
+  *
+  * @example 	html
+  * <div class="c-title--light">
+  * 	I'm in "title--light" color
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.c-title--light {
+  color: rgba(43, 52, 56, 0.33);
+}
+
+/**
+  * @name       	{$cls}
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.title.light.bkg
+  * @type        class
+  *
+  * Specify the background color to **title--light**
+  *
+  * @example 	html
+  * <div class="bkg-title--light p" style="color:white">
+  * 	My background color is "title--light"
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.bkg-title--light {
+  background-color: rgba(43, 52, 56, 0.33);
+}
+
+/**
+  * @name       	c-title--dark
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.title.dark
+  * @type        class
+  *
+  * Specify the color to **title--dark**
+  *
+  * @example 	html
+  * <div class="c-title--dark">
+  * 	I'm in "title--dark" color
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.c-title--dark {
+  color: #15191b;
+}
+
+/**
+  * @name       	{$cls}
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.title.dark.bkg
+  * @type        class
+  *
+  * Specify the background color to **title--dark**
+  *
+  * @example 	html
+  * <div class="bkg-title--dark p" style="color:white">
+  * 	My background color is "title--dark"
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.bkg-title--dark {
+  background-color: #15191b;
+}
+
+/**
+  * @name       	c-text
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.text
+  * @type        class
+  *
+  * Specify the color to **text**
+  *
+  * @example 	html
+  * <div class="c-text">
+  * 	I'm in "text" color
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.c-text {
+  color: #848e91;
+}
+
+/**
+  * @name       	bkg-text
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.text.bkg
+  * @type        class
+  *
+  * Specify the background color to **text**
+  *
+  * @example 	html
+  * <div class="bkg-text p" style="color:white">
+  * 	My background color is "text"
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.bkg-text {
+  background-color: #848e91;
+}
+
+/**
+  * @name       	c-text--light
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.text.light
+  * @type        class
+  *
+  * Specify the color to **text--light**
+  *
+  * @example 	html
+  * <div class="c-text--light">
+  * 	I'm in "text--light" color
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.c-text--light {
+  color: rgba(132, 142, 145, 0.33);
+}
+
+/**
+  * @name       	{$cls}
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.text.light.bkg
+  * @type        class
+  *
+  * Specify the background color to **text--light**
+  *
+  * @example 	html
+  * <div class="bkg-text--light p" style="color:white">
+  * 	My background color is "text--light"
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.bkg-text--light {
+  background-color: rgba(132, 142, 145, 0.33);
+}
+
+/**
+  * @name       	c-text--dark
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.text.dark
+  * @type        class
+  *
+  * Specify the color to **text--dark**
+  *
+  * @example 	html
+  * <div class="c-text--dark">
+  * 	I'm in "text--dark" color
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.c-text--dark {
+  color: #6b7477;
+}
+
+/**
+  * @name       	{$cls}
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.text.dark.bkg
+  * @type        class
+  *
+  * Specify the background color to **text--dark**
+  *
+  * @example 	html
+  * <div class="bkg-text--dark p" style="color:white">
+  * 	My background color is "text--dark"
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.bkg-text--dark {
+  background-color: #6b7477;
+}
+
+/**
+  * @name       	c-link
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.link
+  * @type        class
+  *
+  * Specify the color to **link**
+  *
+  * @example 	html
+  * <div class="c-link">
+  * 	I'm in "link" color
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.c-link {
+  color: #f2bc2b;
+}
+
+/**
+  * @name       	bkg-link
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.link.bkg
+  * @type        class
+  *
+  * Specify the background color to **link**
+  *
+  * @example 	html
+  * <div class="bkg-link p" style="color:white">
+  * 	My background color is "link"
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.bkg-link {
+  background-color: #f2bc2b;
+}
+
+/**
+  * @name       	c-link--light
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.link.light
+  * @type        class
+  *
+  * Specify the color to **link--light**
+  *
+  * @example 	html
+  * <div class="c-link--light">
+  * 	I'm in "link--light" color
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.c-link--light {
+  color: rgba(242, 188, 43, 0.33);
+}
+
+/**
+  * @name       	{$cls}
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.link.light.bkg
+  * @type        class
+  *
+  * Specify the background color to **link--light**
+  *
+  * @example 	html
+  * <div class="bkg-link--light p" style="color:white">
+  * 	My background color is "link--light"
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.bkg-link--light {
+  background-color: rgba(242, 188, 43, 0.33);
+}
+
+/**
+  * @name       	c-link--dark
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.link.dark
+  * @type        class
+  *
+  * Specify the color to **link--dark**
+  *
+  * @example 	html
+  * <div class="c-link--dark">
+  * 	I'm in "link--dark" color
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.c-link--dark {
+  color: #dca40e;
+}
+
+/**
+  * @name       	{$cls}
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.link.dark.bkg
+  * @type        class
+  *
+  * Specify the background color to **link--dark**
+  *
+  * @example 	html
+  * <div class="bkg-link--dark p" style="color:white">
+  * 	My background color is "link--dark"
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.bkg-link--dark {
+  background-color: #dca40e;
+}
+
+/**
+  * @name       	c-primary
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.primary
+  * @type        class
+  *
+  * Specify the color to **primary**
+  *
+  * @example 	html
+  * <div class="c-primary">
+  * 	I'm in "primary" color
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.c-primary {
+  color: #f2bc2b;
+}
+
+/**
+  * @name       	bkg-primary
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.primary.bkg
+  * @type        class
+  *
+  * Specify the background color to **primary**
+  *
+  * @example 	html
+  * <div class="bkg-primary p" style="color:white">
+  * 	My background color is "primary"
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.bkg-primary {
+  background-color: #f2bc2b;
+}
+
+/**
+  * @name       	c-primary--light
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.primary.light
+  * @type        class
+  *
+  * Specify the color to **primary--light**
+  *
+  * @example 	html
+  * <div class="c-primary--light">
+  * 	I'm in "primary--light" color
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.c-primary--light {
+  color: rgba(242, 188, 43, 0.33);
+}
+
+/**
+  * @name       	{$cls}
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.primary.light.bkg
+  * @type        class
+  *
+  * Specify the background color to **primary--light**
+  *
+  * @example 	html
+  * <div class="bkg-primary--light p" style="color:white">
+  * 	My background color is "primary--light"
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.bkg-primary--light {
+  background-color: rgba(242, 188, 43, 0.33);
+}
+
+/**
+  * @name       	c-primary--dark
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.primary.dark
+  * @type        class
+  *
+  * Specify the color to **primary--dark**
+  *
+  * @example 	html
+  * <div class="c-primary--dark">
+  * 	I'm in "primary--dark" color
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.c-primary--dark {
+  color: #dca40e;
+}
+
+/**
+  * @name       	{$cls}
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.primary.dark.bkg
+  * @type        class
+  *
+  * Specify the background color to **primary--dark**
+  *
+  * @example 	html
+  * <div class="bkg-primary--dark p" style="color:white">
+  * 	My background color is "primary--dark"
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.bkg-primary--dark {
+  background-color: #dca40e;
+}
+
+/**
+  * @name       	c-secondary
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.secondary
+  * @type        class
+  *
+  * Specify the color to **secondary**
+  *
+  * @example 	html
+  * <div class="c-secondary">
+  * 	I'm in "secondary" color
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.c-secondary {
+  color: #2b3438;
+}
+
+/**
+  * @name       	bkg-secondary
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.secondary.bkg
+  * @type        class
+  *
+  * Specify the background color to **secondary**
+  *
+  * @example 	html
+  * <div class="bkg-secondary p" style="color:white">
+  * 	My background color is "secondary"
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.bkg-secondary {
+  background-color: #2b3438;
+}
+
+/**
+  * @name       	c-secondary--light
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.secondary.light
+  * @type        class
+  *
+  * Specify the color to **secondary--light**
+  *
+  * @example 	html
+  * <div class="c-secondary--light">
+  * 	I'm in "secondary--light" color
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.c-secondary--light {
+  color: rgba(43, 52, 56, 0.33);
+}
+
+/**
+  * @name       	{$cls}
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.secondary.light.bkg
+  * @type        class
+  *
+  * Specify the background color to **secondary--light**
+  *
+  * @example 	html
+  * <div class="bkg-secondary--light p" style="color:white">
+  * 	My background color is "secondary--light"
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.bkg-secondary--light {
+  background-color: rgba(43, 52, 56, 0.33);
+}
+
+/**
+  * @name       	c-secondary--dark
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.secondary.dark
+  * @type        class
+  *
+  * Specify the color to **secondary--dark**
+  *
+  * @example 	html
+  * <div class="c-secondary--dark">
+  * 	I'm in "secondary--dark" color
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.c-secondary--dark {
+  color: #15191b;
+}
+
+/**
+  * @name       	{$cls}
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.secondary.dark.bkg
+  * @type        class
+  *
+  * Specify the background color to **secondary--dark**
+  *
+  * @example 	html
+  * <div class="bkg-secondary--dark p" style="color:white">
+  * 	My background color is "secondary--dark"
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.bkg-secondary--dark {
+  background-color: #15191b;
+}
+
+/**
+  * @name       	c-success
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.success
+  * @type        class
+  *
+  * Specify the color to **success**
+  *
+  * @example 	html
+  * <div class="c-success">
+  * 	I'm in "success" color
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.c-success {
+  color: #5cb85c;
+}
+
+/**
+  * @name       	bkg-success
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.success.bkg
+  * @type        class
+  *
+  * Specify the background color to **success**
+  *
+  * @example 	html
+  * <div class="bkg-success p" style="color:white">
+  * 	My background color is "success"
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.bkg-success {
+  background-color: #5cb85c;
+}
+
+/**
+  * @name       	c-success--light
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.success.light
+  * @type        class
+  *
+  * Specify the color to **success--light**
+  *
+  * @example 	html
+  * <div class="c-success--light">
+  * 	I'm in "success--light" color
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.c-success--light {
+  color: rgba(92, 184, 92, 0.33);
+}
+
+/**
+  * @name       	{$cls}
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.success.light.bkg
+  * @type        class
+  *
+  * Specify the background color to **success--light**
+  *
+  * @example 	html
+  * <div class="bkg-success--light p" style="color:white">
+  * 	My background color is "success--light"
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.bkg-success--light {
+  background-color: rgba(92, 184, 92, 0.33);
+}
+
+/**
+  * @name       	c-success--dark
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.success.dark
+  * @type        class
+  *
+  * Specify the color to **success--dark**
+  *
+  * @example 	html
+  * <div class="c-success--dark">
+  * 	I'm in "success--dark" color
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.c-success--dark {
+  color: #449d44;
+}
+
+/**
+  * @name       	{$cls}
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.success.dark.bkg
+  * @type        class
+  *
+  * Specify the background color to **success--dark**
+  *
+  * @example 	html
+  * <div class="bkg-success--dark p" style="color:white">
+  * 	My background color is "success--dark"
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.bkg-success--dark {
+  background-color: #449d44;
+}
+
+/**
+  * @name       	c-warning
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.warning
+  * @type        class
+  *
+  * Specify the color to **warning**
+  *
+  * @example 	html
+  * <div class="c-warning">
+  * 	I'm in "warning" color
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.c-warning {
+  color: #f0ad4e;
+}
+
+/**
+  * @name       	bkg-warning
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.warning.bkg
+  * @type        class
+  *
+  * Specify the background color to **warning**
+  *
+  * @example 	html
+  * <div class="bkg-warning p" style="color:white">
+  * 	My background color is "warning"
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.bkg-warning {
+  background-color: #f0ad4e;
+}
+
+/**
+  * @name       	c-warning--light
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.warning.light
+  * @type        class
+  *
+  * Specify the color to **warning--light**
+  *
+  * @example 	html
+  * <div class="c-warning--light">
+  * 	I'm in "warning--light" color
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.c-warning--light {
+  color: rgba(240, 173, 78, 0.33);
+}
+
+/**
+  * @name       	{$cls}
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.warning.light.bkg
+  * @type        class
+  *
+  * Specify the background color to **warning--light**
+  *
+  * @example 	html
+  * <div class="bkg-warning--light p" style="color:white">
+  * 	My background color is "warning--light"
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.bkg-warning--light {
+  background-color: rgba(240, 173, 78, 0.33);
+}
+
+/**
+  * @name       	c-warning--dark
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.warning.dark
+  * @type        class
+  *
+  * Specify the color to **warning--dark**
+  *
+  * @example 	html
+  * <div class="c-warning--dark">
+  * 	I'm in "warning--dark" color
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.c-warning--dark {
+  color: #ec971f;
+}
+
+/**
+  * @name       	{$cls}
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.warning.dark.bkg
+  * @type        class
+  *
+  * Specify the background color to **warning--dark**
+  *
+  * @example 	html
+  * <div class="bkg-warning--dark p" style="color:white">
+  * 	My background color is "warning--dark"
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.bkg-warning--dark {
+  background-color: #ec971f;
+}
+
+/**
+  * @name       	c-error
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.error
+  * @type        class
+  *
+  * Specify the color to **error**
+  *
+  * @example 	html
+  * <div class="c-error">
+  * 	I'm in "error" color
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.c-error {
+  color: #d9534f;
+}
+
+/**
+  * @name       	bkg-error
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.error.bkg
+  * @type        class
+  *
+  * Specify the background color to **error**
+  *
+  * @example 	html
+  * <div class="bkg-error p" style="color:white">
+  * 	My background color is "error"
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.bkg-error {
+  background-color: #d9534f;
+}
+
+/**
+  * @name       	c-error--light
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.error.light
+  * @type        class
+  *
+  * Specify the color to **error--light**
+  *
+  * @example 	html
+  * <div class="c-error--light">
+  * 	I'm in "error--light" color
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.c-error--light {
+  color: rgba(217, 83, 79, 0.33);
+}
+
+/**
+  * @name       	{$cls}
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.error.light.bkg
+  * @type        class
+  *
+  * Specify the background color to **error--light**
+  *
+  * @example 	html
+  * <div class="bkg-error--light p" style="color:white">
+  * 	My background color is "error--light"
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.bkg-error--light {
+  background-color: rgba(217, 83, 79, 0.33);
+}
+
+/**
+  * @name       	c-error--dark
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.error.dark
+  * @type        class
+  *
+  * Specify the color to **error--dark**
+  *
+  * @example 	html
+  * <div class="c-error--dark">
+  * 	I'm in "error--dark" color
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.c-error--dark {
+  color: #c9302c;
+}
+
+/**
+  * @name       	{$cls}
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.error.dark.bkg
+  * @type        class
+  *
+  * Specify the background color to **error--dark**
+  *
+  * @example 	html
+  * <div class="bkg-error--dark p" style="color:white">
+  * 	My background color is "error--dark"
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.bkg-error--dark {
+  background-color: #c9302c;
+}
+
+/**
+  * @name       	c-info
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.info
+  * @type        class
+  *
+  * Specify the color to **info**
+  *
+  * @example 	html
+  * <div class="c-info">
+  * 	I'm in "info" color
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.c-info {
+  color: #2199e8;
+}
+
+/**
+  * @name       	bkg-info
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.info.bkg
+  * @type        class
+  *
+  * Specify the background color to **info**
+  *
+  * @example 	html
+  * <div class="bkg-info p" style="color:white">
+  * 	My background color is "info"
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.bkg-info {
+  background-color: #2199e8;
+}
+
+/**
+  * @name       	c-info--light
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.info.light
+  * @type        class
+  *
+  * Specify the color to **info--light**
+  *
+  * @example 	html
+  * <div class="c-info--light">
+  * 	I'm in "info--light" color
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.c-info--light {
+  color: rgba(33, 153, 232, 0.33);
+}
+
+/**
+  * @name       	{$cls}
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.info.light.bkg
+  * @type        class
+  *
+  * Specify the background color to **info--light**
+  *
+  * @example 	html
+  * <div class="bkg-info--light p" style="color:white">
+  * 	My background color is "info--light"
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.bkg-info--light {
+  background-color: rgba(33, 153, 232, 0.33);
+}
+
+/**
+  * @name       	c-info--dark
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.info.dark
+  * @type        class
+  *
+  * Specify the color to **info--dark**
+  *
+  * @example 	html
+  * <div class="c-info--dark">
+  * 	I'm in "info--dark" color
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.c-info--dark {
+  color: #147dc2;
+}
+
+/**
+  * @name       	{$cls}
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.info.dark.bkg
+  * @type        class
+  *
+  * Specify the background color to **info--dark**
+  *
+  * @example 	html
+  * <div class="bkg-info--dark p" style="color:white">
+  * 	My background color is "info--dark"
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.bkg-info--dark {
+  background-color: #147dc2;
+}
+
+/**
+  * @name       	c-light
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.light
+  * @type        class
+  *
+  * Specify the color to **light**
+  *
+  * @example 	html
+  * <div class="c-light">
+  * 	I'm in "light" color
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.c-light {
+  color: #f8f9fa;
+}
+
+/**
+  * @name       	bkg-light
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.light.bkg
+  * @type        class
+  *
+  * Specify the background color to **light**
+  *
+  * @example 	html
+  * <div class="bkg-light p" style="color:white">
+  * 	My background color is "light"
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.bkg-light {
+  background-color: #f8f9fa;
+}
+
+/**
+  * @name       	c-light--light
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.light.light
+  * @type        class
+  *
+  * Specify the color to **light--light**
+  *
+  * @example 	html
+  * <div class="c-light--light">
+  * 	I'm in "light--light" color
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.c-light--light {
+  color: rgba(248, 249, 250, 0.33);
+}
+
+/**
+  * @name       	{$cls}
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.light.light.bkg
+  * @type        class
+  *
+  * Specify the background color to **light--light**
+  *
+  * @example 	html
+  * <div class="bkg-light--light p" style="color:white">
+  * 	My background color is "light--light"
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.bkg-light--light {
+  background-color: rgba(248, 249, 250, 0.33);
+}
+
+/**
+  * @name       	c-light--dark
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.light.dark
+  * @type        class
+  *
+  * Specify the color to **light--dark**
+  *
+  * @example 	html
+  * <div class="c-light--dark">
+  * 	I'm in "light--dark" color
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.c-light--dark {
+  color: #dae0e5;
+}
+
+/**
+  * @name       	{$cls}
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.light.dark.bkg
+  * @type        class
+  *
+  * Specify the background color to **light--dark**
+  *
+  * @example 	html
+  * <div class="bkg-light--dark p" style="color:white">
+  * 	My background color is "light--dark"
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.bkg-light--dark {
+  background-color: #dae0e5;
+}
+
+/**
+  * @name       	c-dark
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.dark
+  * @type        class
+  *
+  * Specify the color to **dark**
+  *
+  * @example 	html
+  * <div class="c-dark">
+  * 	I'm in "dark" color
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.c-dark {
+  color: #343a40;
+}
+
+/**
+  * @name       	bkg-dark
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.dark.bkg
+  * @type        class
+  *
+  * Specify the background color to **dark**
+  *
+  * @example 	html
+  * <div class="bkg-dark p" style="color:white">
+  * 	My background color is "dark"
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.bkg-dark {
+  background-color: #343a40;
+}
+
+/**
+  * @name       	c-dark--light
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.dark.light
+  * @type        class
+  *
+  * Specify the color to **dark--light**
+  *
+  * @example 	html
+  * <div class="c-dark--light">
+  * 	I'm in "dark--light" color
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.c-dark--light {
+  color: rgba(52, 58, 64, 0.33);
+}
+
+/**
+  * @name       	{$cls}
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.dark.light.bkg
+  * @type        class
+  *
+  * Specify the background color to **dark--light**
+  *
+  * @example 	html
+  * <div class="bkg-dark--light p" style="color:white">
+  * 	My background color is "dark--light"
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.bkg-dark--light {
+  background-color: rgba(52, 58, 64, 0.33);
+}
+
+/**
+  * @name       	c-dark--dark
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.dark.dark
+  * @type        class
+  *
+  * Specify the color to **dark--dark**
+  *
+  * @example 	html
+  * <div class="c-dark--dark">
+  * 	I'm in "dark--dark" color
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.c-dark--dark {
+  color: #1d2124;
+}
+
+/**
+  * @name       	{$cls}
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.dark.dark.bkg
+  * @type        class
+  *
+  * Specify the background color to **dark--dark**
+  *
+  * @example 	html
+  * <div class="bkg-dark--dark p" style="color:white">
+  * 	My background color is "dark--dark"
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.bkg-dark--dark {
+  background-color: #1d2124;
+}
+
+/**
+* @name 		block
+* @namespace             scss.core.class.helper
+* @class-namespace         sugar.helper.display.block
+* @type        class
+*
+* Display the element as ```block```
+*
+* @example 	html
+* <div class="block">
+* 	I'm displayed as block
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .block {
-  /**
-  * @name 		block
-  * @namespace             scss.core.class.helper
-  * @class-namespace         sugar.helper.display.block
-  * @type        class
-  *
-  * Display the element as ```block```
-  *
-  * @example 	html
-  * <div class="block">
-  * 	I'm displayed as block
-  * </div>
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
   display: block;
 }
 
+/**
+* @name 		inline
+* @namespace             scss.core.class.helper
+* @class-namespace         sugar.helper.display.inline
+* @type        class
+*
+* Display the element as ```inline```
+*
+* @example 	html
+* <div class="inline">
+* 	I'm displayed as inline
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .inline {
-  /**
-  * @name 		inline
-  * @namespace             scss.core.class.helper
-  * @class-namespace         sugar.helper.display.inline
-  * @type        class
-  *
-  * Display the element as ```inline```
-  *
-  * @example 	html
-  * <div class="inline">
-  * 	I'm displayed as inline
-  * </div>
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
   display: inline;
 }
 
+/**
+* @name 		inline-block
+* @namespace             scss.core.class.helper
+* @class-namespace         sugar.helper.display.inline-block
+* @type        class
+*
+* Display the element as ```inline-block```
+*
+* @example 	html
+* <div class="inline-block">
+* 	I'm displayed as inline-block
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .inline-block {
-  /**
-  * @name 		inline-block
-  * @namespace             scss.core.class.helper
-  * @class-namespace         sugar.helper.display.inline-block
-  * @type        class
-  *
-  * Display the element as ```inline-block```
-  *
-  * @example 	html
-  * <div class="inline-block">
-  * 	I'm displayed as inline-block
-  * </div>
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
   display: inline-block;
 }
 
+/**
+* @name 		show
+* @namespace             scss.core.class.helper
+* @class-namespace         sugar.helper.display.show
+* @type        class
+*
+* Display the element as ```block```
+*
+* @example 	html
+* <div class="show">
+* 	I'm displayed
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .show {
-  /**
-  * @name 		show
-  * @namespace             scss.core.class.helper
-  * @class-namespace         sugar.helper.display.show
-  * @type        class
-  *
-  * Display the element as ```block```
-  *
-  * @example 	html
-  * <div class="show">
-  * 	I'm displayed
-  * </div>
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
   display: block;
 }
 
+/**
+* @name 		show-inline
+* @namespace             scss.core.class.helper
+* @class-namespace         sugar.helper.display.show-inline
+* @type        class
+*
+* Display the element as ```inline-block```
+*
+* @example 	html
+* <div class="show-inline">
+* 	I'm inline displayed
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .show-inline {
-  /**
-  * @name 		show-inline
-  * @namespace             scss.core.class.helper
-  * @class-namespace         sugar.helper.display.show-inline
-  * @type        class
-  *
-  * Display the element as ```inline-block```
-  *
-  * @example 	html
-  * <div class="show-inline">
-  * 	I'm inline displayed
-  * </div>
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
   display: inline-block;
 }
 
+/**
+* @name 		hidden
+* @namespace             scss.core.class.helper
+* @class-namespace         sugar.helper.display.hidden
+* @type        class
+*
+* Hide the element by setting the display to ```none```
+*
+* @example 	html
+* <div class="hidden">
+* 	I'm hidden
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .hidden {
-  /**
-  * @name 		hidden
-  * @namespace             scss.core.class.helper
-  * @class-namespace         sugar.helper.display.hidden
-  * @type        class
-  *
-  * Hide the element by setting the display to ```none```
-  *
-  * @example 	html
-  * <div class="hidden">
-  * 	I'm hidden
-  * </div>
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
   display: none;
 }
 
+/**
+* @name 		hide
+* @namespace             scss.core.class.helper
+* @class-namespace         sugar.helper.display.hide
+* @type        class
+*
+* Hide the element by setting the display to ```none```
+*
+* @example 	html
+* <div class="hide">
+* 	I'm hidden
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .hide {
-  /**
-  * @name 		hide
-  * @namespace             scss.core.class.helper
-  * @class-namespace         sugar.helper.display.hide
-  * @type        class
-  *
-  * Hide the element by setting the display to ```none```
-  *
-  * @example 	html
-  * <div class="hide">
-  * 	I'm hidden
-  * </div>
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
   display: none;
 }
 
+/**
+* @name 		visible
+* @namespace             scss.core.class.helper
+* @class-namespace         sugar.helper.display.visible
+* @type        class
+*
+* Display the element by setting the visibility to ```visible```
+*
+* @example 	html
+* <div class="visible">
+* 	I'm visible
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .visible {
-  /**
-  * @name 		visible
-  * @namespace             scss.core.class.helper
-  * @class-namespace         sugar.helper.display.visible
-  * @type        class
-  *
-  * Display the element by setting the visibility to ```visible```
-  *
-  * @example 	html
-  * <div class="visible">
-  * 	I'm visible
-  * </div>
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
   visibility: visible;
 }
 
+/**
+* @name 		invisible
+* @namespace             scss.core.class.helper
+* @class-namespace         sugar.helper.display.invisible
+* @type        class
+*
+* Display the element by setting the visibility to ```hidden```
+*
+* @example 	html
+* <div class="invisible">
+* 	I'm invisible
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .invisible {
-  /**
-  * @name 		invisible
-  * @namespace             scss.core.class.helper
-  * @class-namespace         sugar.helper.display.invisible
-  * @type        class
-  *
-  * Display the element by setting the visibility to ```hidden```
-  *
-  * @example 	html
-  * <div class="invisible">
-  * 	I'm invisible
-  * </div>
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
   visibility: hidden;
 }
 
+/**
+* @name 		visually-hidden
+* @namespace             scss.core.class.helper
+* @class-namespace         sugar.helper.display.visually-hidden
+* @type        class
+*
+* Hide the element from display but not for SEO.
+* This class use some tricks to make the element dissapear without using some ```display:none;```, etc...
+*
+* @example 	html
+* <div class="visually-hidden">
+* 	I'm only visually hidden
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .visually-hidden {
-  /**
-  * @name 		visually-hidden
-  * @namespace             scss.core.class.helper
-  * @class-namespace         sugar.helper.display.visually-hidden
-  * @type        class
-  *
-  * Hide the element from display but not for SEO.
-  * This class use some tricks to make the element dissapear without using some ```display:none;```, etc...
-  *
-  * @example 	html
-  * <div class="visually-hidden">
-  * 	I'm only visually hidden
-  * </div>
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
   margin: -1px;
   padding: 0;
   width: 1px;
@@ -4898,158 +6224,911 @@ html {
   position: absolute;
 }
 
-.f-bold {
-  /**
-  * @name 		f-bold
-  * @namespace           scss.core.class.helper
-  * @class-namespace     sugar.helper.font.weight.bold
+/**
+  * @name       	  f-default
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.font.family.default
   * @type        class
   *
-  * Set the font-weight to ```bold```
+  * Apply the font **default**
   *
   * @example 	html
-  * This <span class="f-bold">word</span> is bold
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
-  font-weight: bold;
-}
-
-.f-lighter {
-  /**
-  * @name 		f-lighter
-  * @namespace           scss.core.class.helper
-  * @class-namespace     sugar.helper.font.weight.lighter
-  * @type        class
-  *
-  * Set the font-weight to ```lighter```
-  *
-  * @example 	html
-  * 	This <span class="f-lighter">word</span> is lighter
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
-  font-weight: lighter;
-}
-
-.f-bolder {
-  /**
-  * @name 		f-bolder
-  * @namespace           scss.core.class.helper
-  * @class-namespace     sugar.helper.font.weight.bolder
-  * @type        class
-  *
-  * Set the font-weight to ```bolder```
-  *
-  * @example 	html
-  * This <span class="f-bolder">word</span> is bolder
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
-  font-weight: bolder;
-}
-
-.f-normal {
-  /**
-  * @name 		f-normal
-  * @namespace           scss.core.class.helper
-  * @class-namespace     sugar.helper.font.weight.normal
-  * @type        class
-  *
-  * Set the font-weight to ```normal```
-  *
-  * @example 	html
-  * <div class="f-bold">
-  * 	This <span class="f-normal">word</span> is normal
+  * <div class="f-default">
+  * 	I have the font "default" applied
   * </div>
   *
   * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
   */
+.f {
+  font-family: "Roboto";
+  font-weight: normal;
+}
+
+/**
+  * @name       	  f-quote
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.font.family.quote
+  * @type        class
+  *
+  * Apply the font **quote**
+  *
+  * @example 	html
+  * <div class="f-quote">
+  * 	I have the font "quote" applied
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.f-quote {
+  font-family: "Palatino, Times, Georgia, serif";
+  font-style: normal;
+  font-weight: normal;
+}
+
+/**
+  * @name       	  f-code
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.font.family.code
+  * @type        class
+  *
+  * Apply the font **code**
+  *
+  * @example 	html
+  * <div class="f-code">
+  * 	I have the font "code" applied
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.f-code {
+  font-family: "Menlo, Monaco, Consolas, Courier New, monospace";
+  font-style: normal;
+  font-weight: normal;
+}
+
+/**
+  * @name       	  f-title
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.font.family.title
+  * @type        class
+  *
+  * Apply the font **title**
+  *
+  * @example 	html
+  * <div class="f-title">
+  * 	I have the font "title" applied
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.f-title {
+  font-family: "Roboto";
+  font-weight: 700;
+}
+
+/**
+* @name 		f-bold
+* @namespace           scss.core.class.helper
+* @class-namespace     sugar.helper.font.weight.bold
+* @type        class
+*
+* Set the font-weight to ```bold```
+*
+* @example 	html
+* This <span class="f-bold">word</span> is bold
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
+.f-bold {
+  font-weight: bold;
+}
+
+/**
+* @name 		f-lighter
+* @namespace           scss.core.class.helper
+* @class-namespace     sugar.helper.font.weight.lighter
+* @type        class
+*
+* Set the font-weight to ```lighter```
+*
+* @example 	html
+* 	This <span class="f-lighter">word</span> is lighter
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
+.f-lighter {
+  font-weight: lighter;
+}
+
+/**
+* @name 		f-bolder
+* @namespace           scss.core.class.helper
+* @class-namespace     sugar.helper.font.weight.bolder
+* @type        class
+*
+* Set the font-weight to ```bolder```
+*
+* @example 	html
+* This <span class="f-bolder">word</span> is bolder
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
+.f-bolder {
+  font-weight: bolder;
+}
+
+/**
+* @name 		f-normal
+* @namespace           scss.core.class.helper
+* @class-namespace     sugar.helper.font.weight.normal
+* @type        class
+*
+* Set the font-weight to ```normal```
+*
+* @example 	html
+* <div class="f-bold">
+* 	This <span class="f-normal">word</span> is normal
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
+.f-normal {
   font-weight: normal;
   font-style: normal;
 }
 
+/**
+* @name 		f-italic
+* @namespace           scss.core.class.helper
+* @class-namespace     sugar.helper.font.style.italic
+* @type        class
+*
+* Set the font-style to ```italic```
+*
+* @example 	html
+* This <span class="f-italic">word</span> is italic
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .f-italic {
-  /**
-  * @name 		f-italic
-  * @namespace           scss.core.class.helper
-  * @class-namespace     sugar.helper.font.style.italic
-  * @type        class
-  *
-  * Set the font-style to ```italic```
-  *
-  * @example 	html
-  * This <span class="f-italic">word</span> is italic
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
   font-style: italic;
 }
 
+/**
+* @name 		f-oblique
+* @namespace           scss.core.class.helper
+* @class-namespace     sugar.helper.font.style.oblique
+* @type        class
+*
+* Set the font-style to ```oblique```
+*
+* @example 	html
+* This <span class="f-oblique">word</span> is oblique
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .f-oblique {
-  /**
-  * @name 		f-oblique
-  * @namespace           scss.core.class.helper
-  * @class-namespace     sugar.helper.font.style.oblique
-  * @type        class
-  *
-  * Set the font-style to ```oblique```
-  *
-  * @example 	html
-  * This <span class="f-oblique">word</span> is oblique
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
   font-style: oblique;
 }
 
+/**
+* @name 		f-small-caps
+* @namespace           scss.core.class.helper
+* @class-namespace     sugar.helper.font.variant.small-caps
+* @type        class
+*
+* Set the font-variant to ```small-caps```
+*
+* @example 	html
+* This <span class="f-small-caps">word</span> is small-caps
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .f-small-caps {
-  /**
-  * @name 		f-small-caps
-  * @namespace           scss.core.class.helper
-  * @class-namespace     sugar.helper.font.variant.small-caps
-  * @type        class
-  *
-  * Set the font-variant to ```small-caps```
-  *
-  * @example 	html
-  * This <span class="f-small-caps">word</span> is small-caps
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
   font-variant: small-caps;
 }
 
-.mo {
-  /**
-  * @name 		mo .mo--center .mo__content
-  * @namespace         scss.core.class.helper
-  * @class-namespace     sugar.helper.media.object
+/**
+  * @name       	m-b-smaller
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.margin.smaller
   * @type        class
   *
-  * Famous media object class
+  * Set the **bottom** margin to the **0.3** size
   *
   * @example 	html
-  * <div class="mo">
-  *   <div class="mo__content">
-  *     <img src="https://source.unsplash.com/random/100x100" />
-  *   </div>
-  *   <div class="mo__content">
-  *     <h2 class="h3">Hello World</h2>
-  *     <p class="p">Phasellus fringilla aliquet justo eget pulvinar. Donec in justo leo.</p>
-  *   </div>
-  * </div>
+  * <div class="m-b-smaller" style="background:#f2bc2b; width:100px; height:5px"></div>
+  * <div style="background:#2b3438; width:100px; height:5px"></div>
   *
   * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
   */
+.m-b-smaller {
+  margin-bottom: 0.5rem;
+}
+
+/**
+  * @name          m-t-smaller
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.margin.smaller
+  * @type        class
+  *
+  * Set the **top** margin to the **0.3** size
+  *
+  * @example 	html
+  * <div style="background:#f2bc2b; width:100px; height:5px"></div>
+  * <div class="m-t-smaller" style="background:#2b3438; width:100px; height:5px"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.m-t-smaller {
+  margin-top: 0.5rem;
+}
+
+/**
+  * @name       	m-l-smaller
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.margin.left.smaller
+  * @type        class
+  *
+  * Set the **left** margin to the **0.3** size
+  *
+  * @example 	html
+  * <div style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+  * <div class="m-l-smaller" style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.m-l-smaller {
+  margin-left: 0.5rem;
+}
+
+/**
+  * @name       	m-r-smaller
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.margin.right.smaller
+  * @type        class
+  *
+  * Set the **right* margin to the **0.3** size
+  *
+  * @example 	html
+  * <div class="m-r-smaller" style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+  * <div style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.m-r-smaller {
+  margin-right: 0.5rem;
+}
+
+/**
+  * @name       	m-s-smaller
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.margin.side.smaller
+  * @type        class
+  *
+  * Set the **side** margin to the **0.3** size
+  *
+  * @example 	html
+  * <div class="m-s-smaller" style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+  * <div style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.m-s-smaller {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+/**
+  * @name       	m-b-small
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.margin.small
+  * @type        class
+  *
+  * Set the **bottom** margin to the **0.6** size
+  *
+  * @example 	html
+  * <div class="m-b-small" style="background:#f2bc2b; width:100px; height:5px"></div>
+  * <div style="background:#2b3438; width:100px; height:5px"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.m-b-small {
+  margin-bottom: 1rem;
+}
+
+/**
+  * @name          m-t-small
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.margin.small
+  * @type        class
+  *
+  * Set the **top** margin to the **0.6** size
+  *
+  * @example 	html
+  * <div style="background:#f2bc2b; width:100px; height:5px"></div>
+  * <div class="m-t-small" style="background:#2b3438; width:100px; height:5px"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.m-t-small {
+  margin-top: 1rem;
+}
+
+/**
+  * @name       	m-l-small
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.margin.left.small
+  * @type        class
+  *
+  * Set the **left** margin to the **0.6** size
+  *
+  * @example 	html
+  * <div style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+  * <div class="m-l-small" style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.m-l-small {
+  margin-left: 1rem;
+}
+
+/**
+  * @name       	m-r-small
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.margin.right.small
+  * @type        class
+  *
+  * Set the **right* margin to the **0.6** size
+  *
+  * @example 	html
+  * <div class="m-r-small" style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+  * <div style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.m-r-small {
+  margin-right: 1rem;
+}
+
+/**
+  * @name       	m-s-small
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.margin.side.small
+  * @type        class
+  *
+  * Set the **side** margin to the **0.6** size
+  *
+  * @example 	html
+  * <div class="m-s-small" style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+  * <div style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.m-s-small {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+/**
+  * @name       	m-b
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.margin.default
+  * @type        class
+  *
+  * Set the **bottom** margin to the **1** size
+  *
+  * @example 	html
+  * <div class="m-b" style="background:#f2bc2b; width:100px; height:5px"></div>
+  * <div style="background:#2b3438; width:100px; height:5px"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.m-b {
+  margin-bottom: 2rem;
+}
+
+/**
+  * @name          m-t
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.margin.default
+  * @type        class
+  *
+  * Set the **top** margin to the **1** size
+  *
+  * @example 	html
+  * <div style="background:#f2bc2b; width:100px; height:5px"></div>
+  * <div class="m-t" style="background:#2b3438; width:100px; height:5px"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.m-t {
+  margin-top: 2rem;
+}
+
+/**
+  * @name       	m-l
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.margin.left.default
+  * @type        class
+  *
+  * Set the **left** margin to the **1** size
+  *
+  * @example 	html
+  * <div style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+  * <div class="m-l" style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.m-l {
+  margin-left: 2rem;
+}
+
+/**
+  * @name       	m-r
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.margin.right.default
+  * @type        class
+  *
+  * Set the **right* margin to the **1** size
+  *
+  * @example 	html
+  * <div class="m-r" style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+  * <div style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.m-r {
+  margin-right: 2rem;
+}
+
+/**
+  * @name       	m-s
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.margin.side.default
+  * @type        class
+  *
+  * Set the **side** margin to the **1** size
+  *
+  * @example 	html
+  * <div class="m-s" style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+  * <div style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.m-s {
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+/**
+  * @name       	m-b-medium
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.margin.medium
+  * @type        class
+  *
+  * Set the **bottom** margin to the **1.5** size
+  *
+  * @example 	html
+  * <div class="m-b-medium" style="background:#f2bc2b; width:100px; height:5px"></div>
+  * <div style="background:#2b3438; width:100px; height:5px"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.m-b-medium {
+  margin-bottom: 3rem;
+}
+
+/**
+  * @name          m-t-medium
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.margin.medium
+  * @type        class
+  *
+  * Set the **top** margin to the **1.5** size
+  *
+  * @example 	html
+  * <div style="background:#f2bc2b; width:100px; height:5px"></div>
+  * <div class="m-t-medium" style="background:#2b3438; width:100px; height:5px"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.m-t-medium {
+  margin-top: 3rem;
+}
+
+/**
+  * @name       	m-l-medium
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.margin.left.medium
+  * @type        class
+  *
+  * Set the **left** margin to the **1.5** size
+  *
+  * @example 	html
+  * <div style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+  * <div class="m-l-medium" style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.m-l-medium {
+  margin-left: 3rem;
+}
+
+/**
+  * @name       	m-r-medium
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.margin.right.medium
+  * @type        class
+  *
+  * Set the **right* margin to the **1.5** size
+  *
+  * @example 	html
+  * <div class="m-r-medium" style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+  * <div style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.m-r-medium {
+  margin-right: 3rem;
+}
+
+/**
+  * @name       	m-s-medium
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.margin.side.medium
+  * @type        class
+  *
+  * Set the **side** margin to the **1.5** size
+  *
+  * @example 	html
+  * <div class="m-s-medium" style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+  * <div style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.m-s-medium {
+  margin-left: 3rem;
+  margin-right: 3rem;
+}
+
+/**
+  * @name       	m-b-big
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.margin.big
+  * @type        class
+  *
+  * Set the **bottom** margin to the **2** size
+  *
+  * @example 	html
+  * <div class="m-b-big" style="background:#f2bc2b; width:100px; height:5px"></div>
+  * <div style="background:#2b3438; width:100px; height:5px"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.m-b-big {
+  margin-bottom: 4rem;
+}
+
+/**
+  * @name          m-t-big
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.margin.big
+  * @type        class
+  *
+  * Set the **top** margin to the **2** size
+  *
+  * @example 	html
+  * <div style="background:#f2bc2b; width:100px; height:5px"></div>
+  * <div class="m-t-big" style="background:#2b3438; width:100px; height:5px"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.m-t-big {
+  margin-top: 4rem;
+}
+
+/**
+  * @name       	m-l-big
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.margin.left.big
+  * @type        class
+  *
+  * Set the **left** margin to the **2** size
+  *
+  * @example 	html
+  * <div style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+  * <div class="m-l-big" style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.m-l-big {
+  margin-left: 4rem;
+}
+
+/**
+  * @name       	m-r-big
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.margin.right.big
+  * @type        class
+  *
+  * Set the **right* margin to the **2** size
+  *
+  * @example 	html
+  * <div class="m-r-big" style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+  * <div style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.m-r-big {
+  margin-right: 4rem;
+}
+
+/**
+  * @name       	m-s-big
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.margin.side.big
+  * @type        class
+  *
+  * Set the **side** margin to the **2** size
+  *
+  * @example 	html
+  * <div class="m-s-big" style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+  * <div style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.m-s-big {
+  margin-left: 4rem;
+  margin-right: 4rem;
+}
+
+/**
+  * @name       	m-b-bigger
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.margin.bigger
+  * @type        class
+  *
+  * Set the **bottom** margin to the **3** size
+  *
+  * @example 	html
+  * <div class="m-b-bigger" style="background:#f2bc2b; width:100px; height:5px"></div>
+  * <div style="background:#2b3438; width:100px; height:5px"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.m-b-bigger {
+  margin-bottom: 5rem;
+}
+
+/**
+  * @name          m-t-bigger
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.margin.bigger
+  * @type        class
+  *
+  * Set the **top** margin to the **3** size
+  *
+  * @example 	html
+  * <div style="background:#f2bc2b; width:100px; height:5px"></div>
+  * <div class="m-t-bigger" style="background:#2b3438; width:100px; height:5px"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.m-t-bigger {
+  margin-top: 5rem;
+}
+
+/**
+  * @name       	m-l-bigger
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.margin.left.bigger
+  * @type        class
+  *
+  * Set the **left** margin to the **3** size
+  *
+  * @example 	html
+  * <div style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+  * <div class="m-l-bigger" style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.m-l-bigger {
+  margin-left: 5rem;
+}
+
+/**
+  * @name       	m-r-bigger
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.margin.right.bigger
+  * @type        class
+  *
+  * Set the **right* margin to the **3** size
+  *
+  * @example 	html
+  * <div class="m-r-bigger" style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+  * <div style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.m-r-bigger {
+  margin-right: 5rem;
+}
+
+/**
+  * @name       	m-s-bigger
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.margin.side.bigger
+  * @type        class
+  *
+  * Set the **side** margin to the **3** size
+  *
+  * @example 	html
+  * <div class="m-s-bigger" style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+  * <div style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.m-s-bigger {
+  margin-left: 5rem;
+  margin-right: 5rem;
+}
+
+/**
+* @name       	no-m-t
+* @namespace       scss.core.class
+* @class-namespace           sugar.helper.margin.no.top
+* @type        class
+*
+* Reset **top** padding
+*
+* @example 	html
+* <div class="no-m-t" style="display:inline-block; background:#f2bc2b; width:50px; height:50px;"></div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+*/
+.no-m-t {
+  margin-top: 0 !important;
+}
+
+/**
+  * @name       	no-m-r
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.margin.no.right
+  * @type        class
+  *
+  * Reset **right** padding
+  *
+  * @example 	html
+  * <div class="no-m-r" style="display:inline-block; background:#f2bc2b; width:50px; height:50px;"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.no-m-r {
+  margin-right: 0 !important;
+}
+
+/**
+  * @name       	no-m-b
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.margin.no.bottom
+  * @type        class
+  *
+  * Reset **bottom** padding
+  *
+  * @example 	html
+  * <div class="no-m-b" style="display:inline-block; background:#f2bc2b; width:50px; height:50px;"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.no-m-b {
+  margin-bottom: 0 !important;
+}
+
+/**
+  * @name       	no-m-l
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.margin.no.left
+  * @type        class
+  *
+  * Reset **left** padding
+  *
+  * @example 	html
+  * <div class="no-m-l" style="display:inline-block; background:#f2bc2b; width:50px; height:50px;"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.no-m-l {
+  margin-left: 0 !important;
+}
+
+/**
+  * @name       	no-m-s
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.no.side
+  * @type        class
+  *
+  * Reset **left** and **right** margins
+  *
+  * @example 	html
+  * <div class="no-m-s" style="display:inline-block; background:#f2bc2b; width:50px; height:50px;"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.no-m-s {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/**
+* @name 		mo .mo--center .mo__content
+* @namespace         scss.core.class.helper
+* @class-namespace     sugar.helper.media.object
+* @type        class
+*
+* Famous media object class
+*
+* @example 	html
+* <div class="mo">
+*   <div class="mo__content">
+*     <img src="https://source.unsplash.com/random/100x100" />
+*   </div>
+*   <div class="mo__content">
+*     <h2 class="h3">Hello World</h2>
+*     <p class="p">Phasellus fringilla aliquet justo eget pulvinar. Donec in justo leo.</p>
+*   </div>
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
+.mo {
   display: flex;
   flex-wrap: nowrap;
 }
@@ -5065,141 +7144,958 @@ html {
   flex: 0 1 auto;
 }
 
-.pointer-events-none {
-  /**
-  * @name 		pointer-events-none
-  * @namespace         scss.core.class.helper
-  * @class-namespace     sugar.helper.pointer.event.none
+/**
+  * @name        p-smaller
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.smaller
   * @type        class
   *
-  * Disable any pointer events
+  * Set the paddings to the **0.3** size
   *
   * @example 	html
-  * <div class="pointer-events-none">
-  * 	I will not react to any pointer events
+  * <div class="p-smaller" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+  * 	<div style="background:#2b3438; width:100%; height:100%"></div>
   * </div>
   *
   * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
   */
+.p-smaller {
+  padding: 0.5rem;
+}
+
+/**
+  * @name       	p-b-smaller
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.bottom.smaller
+  * @type        class
+  *
+  * Set the **bottom** padding to the **0.3** size
+  *
+  * @example 	html
+  * <div class="p-b-smaller" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+  * 	<div style="background:#2b3438; width:100%; height:100%"></div>
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.p-b-smaller {
+  padding-bottom: 0.5rem;
+}
+
+/**
+  * @name       	p-t-smaller
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.top.smaller
+  * @type        class
+  *
+  * Set the **top** padding to the **0.3** size
+  *
+  * @example 	html
+  * <div class="p-t-smaller" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+  * 	<div style="background:#2b3438; width:100%; height:100%"></div>
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.p-t-smaller {
+  padding-top: 0.5rem;
+}
+
+/**
+  * @name       	p-l-smaller
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.left.smaller
+  * @type        class
+  *
+  * Set the **left** padding  to the **0.3** size
+  *
+  * @example 	html
+  * <div class="p-l-smaller" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+  * 	<div style="background:#2b3438; width:100%; height:100%"></div>
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.p-l-smaller {
+  padding-left: 0.5rem;
+}
+
+/**
+  * @name       	p-r-smaller
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.right.smaller
+  * @type        class
+  *
+  * Set the **right** padding  to the **0.3** size
+  *
+  * @example 	html
+  * <div class="p-r-smaller" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+  * 	<div style="background:#2b3438; width:100%; height:100%"></div>
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.p-r-smaller {
+  padding-right: 0.5rem;
+}
+
+/**
+  * @name       	p-s-smaller
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.side.smaller
+  * @type        class
+  *
+  * Set the **side** padding  to the **0.3** size
+  *
+  * @example 	html
+  * <div class="p-s-smaller" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+  * 	<div style="background:#2b3438; width:100%; height:100%"></div>
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.p-s-smaller {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+/**
+  * @name        p-small
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.small
+  * @type        class
+  *
+  * Set the paddings to the **0.6** size
+  *
+  * @example 	html
+  * <div class="p-small" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+  * 	<div style="background:#2b3438; width:100%; height:100%"></div>
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.p-small {
+  padding: 1rem;
+}
+
+/**
+  * @name       	p-b-small
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.bottom.small
+  * @type        class
+  *
+  * Set the **bottom** padding to the **0.6** size
+  *
+  * @example 	html
+  * <div class="p-b-small" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+  * 	<div style="background:#2b3438; width:100%; height:100%"></div>
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.p-b-small {
+  padding-bottom: 1rem;
+}
+
+/**
+  * @name       	p-t-small
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.top.small
+  * @type        class
+  *
+  * Set the **top** padding to the **0.6** size
+  *
+  * @example 	html
+  * <div class="p-t-small" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+  * 	<div style="background:#2b3438; width:100%; height:100%"></div>
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.p-t-small {
+  padding-top: 1rem;
+}
+
+/**
+  * @name       	p-l-small
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.left.small
+  * @type        class
+  *
+  * Set the **left** padding  to the **0.6** size
+  *
+  * @example 	html
+  * <div class="p-l-small" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+  * 	<div style="background:#2b3438; width:100%; height:100%"></div>
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.p-l-small {
+  padding-left: 1rem;
+}
+
+/**
+  * @name       	p-r-small
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.right.small
+  * @type        class
+  *
+  * Set the **right** padding  to the **0.6** size
+  *
+  * @example 	html
+  * <div class="p-r-small" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+  * 	<div style="background:#2b3438; width:100%; height:100%"></div>
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.p-r-small {
+  padding-right: 1rem;
+}
+
+/**
+  * @name       	p-s-small
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.side.small
+  * @type        class
+  *
+  * Set the **side** padding  to the **0.6** size
+  *
+  * @example 	html
+  * <div class="p-s-small" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+  * 	<div style="background:#2b3438; width:100%; height:100%"></div>
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.p-s-small {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/**
+  * @name        p
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.default
+  * @type        class
+  *
+  * Set the paddings to the **1** size
+  *
+  * @example 	html
+  * <div class="p" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+  * 	<div style="background:#2b3438; width:100%; height:100%"></div>
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.p:not(p) {
+  padding: 2rem;
+}
+
+/**
+  * @name       	p-b
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.bottom.default
+  * @type        class
+  *
+  * Set the **bottom** padding to the **1** size
+  *
+  * @example 	html
+  * <div class="p-b" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+  * 	<div style="background:#2b3438; width:100%; height:100%"></div>
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.p-b {
+  padding-bottom: 2rem;
+}
+
+/**
+  * @name       	p-t
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.top.default
+  * @type        class
+  *
+  * Set the **top** padding to the **1** size
+  *
+  * @example 	html
+  * <div class="p-t" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+  * 	<div style="background:#2b3438; width:100%; height:100%"></div>
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.p-t {
+  padding-top: 2rem;
+}
+
+/**
+  * @name       	p-l
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.left.default
+  * @type        class
+  *
+  * Set the **left** padding  to the **1** size
+  *
+  * @example 	html
+  * <div class="p-l" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+  * 	<div style="background:#2b3438; width:100%; height:100%"></div>
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.p-l {
+  padding-left: 2rem;
+}
+
+/**
+  * @name       	p-r
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.right.default
+  * @type        class
+  *
+  * Set the **right** padding  to the **1** size
+  *
+  * @example 	html
+  * <div class="p-r" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+  * 	<div style="background:#2b3438; width:100%; height:100%"></div>
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.p-r {
+  padding-right: 2rem;
+}
+
+/**
+  * @name       	p-s
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.side.default
+  * @type        class
+  *
+  * Set the **side** padding  to the **1** size
+  *
+  * @example 	html
+  * <div class="p-s" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+  * 	<div style="background:#2b3438; width:100%; height:100%"></div>
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.p-s {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+/**
+  * @name        p-medium
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.medium
+  * @type        class
+  *
+  * Set the paddings to the **1.5** size
+  *
+  * @example 	html
+  * <div class="p-medium" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+  * 	<div style="background:#2b3438; width:100%; height:100%"></div>
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.p-medium {
+  padding: 3rem;
+}
+
+/**
+  * @name       	p-b-medium
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.bottom.medium
+  * @type        class
+  *
+  * Set the **bottom** padding to the **1.5** size
+  *
+  * @example 	html
+  * <div class="p-b-medium" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+  * 	<div style="background:#2b3438; width:100%; height:100%"></div>
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.p-b-medium {
+  padding-bottom: 3rem;
+}
+
+/**
+  * @name       	p-t-medium
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.top.medium
+  * @type        class
+  *
+  * Set the **top** padding to the **1.5** size
+  *
+  * @example 	html
+  * <div class="p-t-medium" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+  * 	<div style="background:#2b3438; width:100%; height:100%"></div>
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.p-t-medium {
+  padding-top: 3rem;
+}
+
+/**
+  * @name       	p-l-medium
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.left.medium
+  * @type        class
+  *
+  * Set the **left** padding  to the **1.5** size
+  *
+  * @example 	html
+  * <div class="p-l-medium" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+  * 	<div style="background:#2b3438; width:100%; height:100%"></div>
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.p-l-medium {
+  padding-left: 3rem;
+}
+
+/**
+  * @name       	p-r-medium
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.right.medium
+  * @type        class
+  *
+  * Set the **right** padding  to the **1.5** size
+  *
+  * @example 	html
+  * <div class="p-r-medium" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+  * 	<div style="background:#2b3438; width:100%; height:100%"></div>
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.p-r-medium {
+  padding-right: 3rem;
+}
+
+/**
+  * @name       	p-s-medium
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.side.medium
+  * @type        class
+  *
+  * Set the **side** padding  to the **1.5** size
+  *
+  * @example 	html
+  * <div class="p-s-medium" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+  * 	<div style="background:#2b3438; width:100%; height:100%"></div>
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.p-s-medium {
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
+/**
+  * @name        p-big
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.big
+  * @type        class
+  *
+  * Set the paddings to the **2** size
+  *
+  * @example 	html
+  * <div class="p-big" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+  * 	<div style="background:#2b3438; width:100%; height:100%"></div>
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.p-big {
+  padding: 4rem;
+}
+
+/**
+  * @name       	p-b-big
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.bottom.big
+  * @type        class
+  *
+  * Set the **bottom** padding to the **2** size
+  *
+  * @example 	html
+  * <div class="p-b-big" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+  * 	<div style="background:#2b3438; width:100%; height:100%"></div>
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.p-b-big {
+  padding-bottom: 4rem;
+}
+
+/**
+  * @name       	p-t-big
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.top.big
+  * @type        class
+  *
+  * Set the **top** padding to the **2** size
+  *
+  * @example 	html
+  * <div class="p-t-big" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+  * 	<div style="background:#2b3438; width:100%; height:100%"></div>
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.p-t-big {
+  padding-top: 4rem;
+}
+
+/**
+  * @name       	p-l-big
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.left.big
+  * @type        class
+  *
+  * Set the **left** padding  to the **2** size
+  *
+  * @example 	html
+  * <div class="p-l-big" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+  * 	<div style="background:#2b3438; width:100%; height:100%"></div>
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.p-l-big {
+  padding-left: 4rem;
+}
+
+/**
+  * @name       	p-r-big
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.right.big
+  * @type        class
+  *
+  * Set the **right** padding  to the **2** size
+  *
+  * @example 	html
+  * <div class="p-r-big" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+  * 	<div style="background:#2b3438; width:100%; height:100%"></div>
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.p-r-big {
+  padding-right: 4rem;
+}
+
+/**
+  * @name       	p-s-big
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.side.big
+  * @type        class
+  *
+  * Set the **side** padding  to the **2** size
+  *
+  * @example 	html
+  * <div class="p-s-big" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+  * 	<div style="background:#2b3438; width:100%; height:100%"></div>
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.p-s-big {
+  padding-left: 4rem;
+  padding-right: 4rem;
+}
+
+/**
+  * @name        p-bigger
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.bigger
+  * @type        class
+  *
+  * Set the paddings to the **3** size
+  *
+  * @example 	html
+  * <div class="p-bigger" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+  * 	<div style="background:#2b3438; width:100%; height:100%"></div>
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.p-bigger {
+  padding: 5rem;
+}
+
+/**
+  * @name       	p-b-bigger
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.bottom.bigger
+  * @type        class
+  *
+  * Set the **bottom** padding to the **3** size
+  *
+  * @example 	html
+  * <div class="p-b-bigger" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+  * 	<div style="background:#2b3438; width:100%; height:100%"></div>
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.p-b-bigger {
+  padding-bottom: 5rem;
+}
+
+/**
+  * @name       	p-t-bigger
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.top.bigger
+  * @type        class
+  *
+  * Set the **top** padding to the **3** size
+  *
+  * @example 	html
+  * <div class="p-t-bigger" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+  * 	<div style="background:#2b3438; width:100%; height:100%"></div>
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.p-t-bigger {
+  padding-top: 5rem;
+}
+
+/**
+  * @name       	p-l-bigger
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.left.bigger
+  * @type        class
+  *
+  * Set the **left** padding  to the **3** size
+  *
+  * @example 	html
+  * <div class="p-l-bigger" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+  * 	<div style="background:#2b3438; width:100%; height:100%"></div>
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.p-l-bigger {
+  padding-left: 5rem;
+}
+
+/**
+  * @name       	p-r-bigger
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.right.bigger
+  * @type        class
+  *
+  * Set the **right** padding  to the **3** size
+  *
+  * @example 	html
+  * <div class="p-r-bigger" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+  * 	<div style="background:#2b3438; width:100%; height:100%"></div>
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.p-r-bigger {
+  padding-right: 5rem;
+}
+
+/**
+  * @name       	p-s-bigger
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.side.bigger
+  * @type        class
+  *
+  * Set the **side** padding  to the **3** size
+  *
+  * @example 	html
+  * <div class="p-s-bigger" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+  * 	<div style="background:#2b3438; width:100%; height:100%"></div>
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.p-s-bigger {
+  padding-left: 5rem;
+  padding-right: 5rem;
+}
+
+/**
+* @name       	no-p-t
+* @namespace       scss.core.class
+* @class-namespace           sugar.helper.padding.no.top
+* @type        class
+*
+* Reset **top** padding
+*
+* @example 	html
+* <div class="no-p-t" style="display:inline-block; background:#f2bc2b; width:50px; height:50px;"></div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+*/
+.no-p-t {
+  padding-top: 0 !important;
+}
+
+/**
+  * @name       	no-p-r
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.no.right
+  * @type        class
+  *
+  * Reset **right** padding
+  *
+  * @example 	html
+  * <div class="no-p-r" style="display:inline-block; background:#f2bc2b; width:50px; height:50px;"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.np-p-r {
+  padding-right: 0 !important;
+}
+
+/**
+  * @name       	no-p-b
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.no.bottom
+  * @type        class
+  *
+  * Reset **bottom** padding
+  *
+  * @example 	html
+  * <div class="no-p-b" style="display:inline-block; background:#f2bc2b; width:50px; height:50px;"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.no-p-b {
+  padding-bottom: 0 !important;
+}
+
+/**
+  * @name       	no-p-l
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.no.left
+  * @type        class
+  *
+  * Reset **left** padding
+  *
+  * @example 	html
+  * <div class="no-p-l" style="display:inline-block; background:#f2bc2b; width:50px; height:50px;"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.no-p-l {
+  padding-left: 0 !important;
+}
+
+/**
+  * @name       	no-p-s
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.no.side
+  * @type        class
+  *
+  * Reset **left** and **right** paddings
+  *
+  * @example 	html
+  * <div class="no-p-s" style="display:inline-block; background:#f2bc2b; width:50px; height:50px;"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.no-p-s {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/**
+* @name 		pointer-events-none
+* @namespace         scss.core.class.helper
+* @class-namespace     sugar.helper.pointer.event.none
+* @type        class
+*
+* Disable any pointer events
+*
+* @example 	html
+* <div class="pointer-events-none">
+* 	I will not react to any pointer events
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
+.pointer-events-none {
   pointer-events: none;
 }
 
+/**
+* @name 		pointer-events-all
+* @namespace         scss.core.class.helper
+* @class-namespace     sugar.helper.pointer.event.all
+* @type        class
+*
+* Disable any pointer events
+*
+* @example 	html
+* <div class="pointer-events-all">
+* 	I will not react to any pointer events
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .pointer-events-all {
-  /**
-  * @name 		pointer-events-all
-  * @namespace         scss.core.class.helper
-  * @class-namespace     sugar.helper.pointer.event.all
-  * @type        class
-  *
-  * Disable any pointer events
-  *
-  * @example 	html
-  * <div class="pointer-events-all">
-  * 	I will not react to any pointer events
-  * </div>
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
   pointer-events: all;
 }
 
+/**
+* @name 		relative
+* @namespace         scss.core.class.helper
+* @class-namespace     sugar.helper.position.relative
+* @type        class
+*
+* Set an element position as ```relative```
+*
+* @example 	html
+* <div class="relative">
+* 	I'm relative now
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .relative {
-  /**
-  * @name 		relative
-  * @namespace         scss.core.class.helper
-  * @class-namespace     sugar.helper.position.relative
-  * @type        class
-  *
-  * Set an element position as ```relative```
-  *
-  * @example 	html
-  * <div class="relative">
-  * 	I'm relative now
-  * </div>
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
   position: relative;
 }
 
+/**
+* @name 		absolute
+* @namespace         scss.core.class.helper
+* @class-namespace     sugar.helper.position.absolute
+* @type        class
+*
+* Set an element position as ```absolute```
+*
+* @example 	html
+* <div class="absolute">
+* 	I'm absolute now
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .absolute {
-  /**
-  * @name 		absolute
-  * @namespace         scss.core.class.helper
-  * @class-namespace     sugar.helper.position.absolute
-  * @type        class
-  *
-  * Set an element position as ```absolute```
-  *
-  * @example 	html
-  * <div class="absolute">
-  * 	I'm absolute now
-  * </div>
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
   position: absolute;
 }
 
+/**
+* @name 		pull-left
+* @namespace         scss.core.class.helper
+* @class-namespace     sugar.helper.pull.left
+* @type        class
+*
+* Allows you to pull an element to the left side
+*
+* @example 	html
+* <div>
+* 	<span class="pull-left">Hello world</span>
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .pull-left {
-  /**
-  * @name 		pull-left
-  * @namespace         scss.core.class.helper
-  * @class-namespace     sugar.helper.pull.left
-  * @type        class
-  *
-  * Allows you to pull an element to the left side
-  *
-  * @example 	html
-  * <div>
-  * 	<span class="pull-left">Hello world</span>
-  * </div>
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
   float: left;
 }
 
+/**
+* @name 		pull-right
+* @namespace         scss.core.class.helper
+* @class-namespace     sugar.helper.pull.right
+* @type        class
+*
+* Allows you to pull an element to the right side
+*
+* @example 	html
+* <div>
+* 	<span class="pull-right">Hello world</span>
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .pull-right {
-  /**
-  * @name 		pull-right
-  * @namespace         scss.core.class.helper
-  * @class-namespace     sugar.helper.pull.right
-  * @type        class
-  *
-  * Allows you to pull an element to the right side
-  *
-  * @example 	html
-  * <div>
-  * 	<span class="pull-right">Hello world</span>
-  * </div>
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
   float: right;
 }
 
+/**
+* @name 		ratio-21-9
+* @namespace         scss.core.class.helper
+* @class-namespace     sugar.helper.ratio.21-9
+* @type        class
+*
+* Keep a 16/9 ratio on a particular element. Applied by setting height to 0 and paddingtop to 100% / 16 * 9
+*
+* @example 	html
+* <div class="bkg-primary ratio-21-9"></div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .ratio-21-9 {
-  /**
-  * @name 		ratio-21-9
-  * @namespace         scss.core.class.helper
-  * @class-namespace     sugar.helper.ratio.21-9
-  * @type        class
-  *
-  * Keep a 16/9 ratio on a particular element. Applied by setting height to 0 and paddingtop to 100% / 16 * 9
-  *
-  * @example 	html
-  * <div class="bkg-primary ratio-21-9"></div>
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
   position: relative;
 }
 .ratio-21-9::before {
@@ -5215,21 +8111,21 @@ html {
   padding: 0 0 42.8571428571%;
 }
 
+/**
+* @name 		ratio-16-9
+* @namespace         scss.core.class.helper
+* @class-namespace     sugar.helper.ratio.16-9
+* @type        class
+*
+* Keep a 16/9 ratio on a particular element. Applied by setting height to 0 and paddingtop to 100% / 16 * 9
+*
+* @example 	html
+* <div class="bkg-primary ratio-16-9"></div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .ratio-16-9 {
-  /**
-  * @name 		ratio-16-9
-  * @namespace         scss.core.class.helper
-  * @class-namespace     sugar.helper.ratio.16-9
-  * @type        class
-  *
-  * Keep a 16/9 ratio on a particular element. Applied by setting height to 0 and paddingtop to 100% / 16 * 9
-  *
-  * @example 	html
-  * <div class="bkg-primary ratio-16-9"></div>
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
   position: relative;
 }
 .ratio-16-9::before {
@@ -5245,21 +8141,21 @@ html {
   padding: 0 0 56.25%;
 }
 
+/**
+* @name 		ratio-4-3
+* @namespace         scss.core.class.helper
+* @class-namespace     sugar.helper.ratio.4-3
+* @type        class
+*
+* Keep a 4/3 ratio on a particular element. Applied by setting height to 0 and paddingtop to 100% / 4 * 3
+*
+* @example 	html
+* <div class="bkg-primary ratio-4-3"></div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .ratio-4-3 {
-  /**
-  * @name 		ratio-4-3
-  * @namespace         scss.core.class.helper
-  * @class-namespace     sugar.helper.ratio.4-3
-  * @type        class
-  *
-  * Keep a 4/3 ratio on a particular element. Applied by setting height to 0 and paddingtop to 100% / 4 * 3
-  *
-  * @example 	html
-  * <div class="bkg-primary ratio-4-3"></div>
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
   position: relative;
 }
 .ratio-4-3::before {
@@ -5275,21 +8171,21 @@ html {
   padding: 0 0 75%;
 }
 
+/**
+* @name 		ratio-1-1
+* @namespace         scss.core.class.helper
+* @class-namespace     sugar.helper.ratio.1-1
+* @type        class
+*
+* Keep a 1/1 ratio on a particular element. Applied by setting height to 0 and paddingtop to 100%
+*
+* @example 	html
+* <div class="bkg-primary ratio-1-1"></div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .ratio-1-1 {
-  /**
-  * @name 		ratio-1-1
-  * @namespace         scss.core.class.helper
-  * @class-namespace     sugar.helper.ratio.1-1
-  * @type        class
-  *
-  * Keep a 1/1 ratio on a particular element. Applied by setting height to 0 and paddingtop to 100%
-  *
-  * @example 	html
-  * <div class="bkg-primary ratio-1-1"></div>
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
   position: relative;
 }
 .ratio-1-1::before {
@@ -5305,23 +8201,23 @@ html {
   padding: 0 0 100%;
 }
 
+/**
+* @name 		abs-cover
+* @namespace         scss.core.class.helper
+* @class-namespace     sugar.helper.size.abs.cover
+* @type        class
+*
+* Set a size that will cover the entire parent surface by positionning it in absolute
+*
+* @example 	html
+* <div class="ratio-16-9">
+* 	<img src="https://source.unsplash.com/random" class="abs-cover" />
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .abs-cover {
-  /**
-  * @name 		abs-cover
-  * @namespace         scss.core.class.helper
-  * @class-namespace     sugar.helper.size.abs.cover
-  * @type        class
-  *
-  * Set a size that will cover the entire parent surface by positionning it in absolute
-  *
-  * @example 	html
-  * <div class="ratio-16-9">
-  * 	<img src="https://source.unsplash.com/random" class="abs-cover" />
-  * </div>
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
   position: absolute;
   top: 50%;
   left: 50%;
@@ -5330,23 +8226,23 @@ html {
   min-height: 100%;
 }
 
+/**
+* @name 		abs-contain
+* @namespace         scss.core.class.helper
+* @class-namespace     sugar.helper.size.abs.contain
+* @type        class
+*
+* Set a size that will contain the entire parent surface by positionning it in absolute
+*
+* @example 	html
+* <div class="ratio-16-9">
+* 	<img src="https://source.unsplash.com/random" class="abs-contain" />
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .abs-contain {
-  /**
-  * @name 		abs-contain
-  * @namespace         scss.core.class.helper
-  * @class-namespace     sugar.helper.size.abs.contain
-  * @type        class
-  *
-  * Set a size that will contain the entire parent surface by positionning it in absolute
-  *
-  * @example 	html
-  * <div class="ratio-16-9">
-  * 	<img src="https://source.unsplash.com/random" class="abs-contain" />
-  * </div>
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
   position: absolute;
   top: 50%;
   left: 50%;
@@ -5355,23 +8251,23 @@ html {
   max-height: 100%;
 }
 
+/**
+* @name 		abs-fit
+* @namespace         scss.core.class.helper
+* @class-namespace     sugar.helper.size.abs.fit
+* @type        class
+*
+* Set a size that will fit the entire parent surface by positionning it in absolute
+*
+* @example 	html
+* <div class="ratio-16-9">
+* 	<img src="https://source.unsplash.com/random" class="abs-fit" />
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .abs-fit {
-  /**
-  * @name 		abs-fit
-  * @namespace         scss.core.class.helper
-  * @class-namespace     sugar.helper.size.abs.fit
-  * @type        class
-  *
-  * Set a size that will fit the entire parent surface by positionning it in absolute
-  *
-  * @example 	html
-  * <div class="ratio-16-9">
-  * 	<img src="https://source.unsplash.com/random" class="abs-fit" />
-  * </div>
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
   position: absolute;
   width: 100%;
   height: 100%;
@@ -5379,45 +8275,285 @@ html {
   left: 0;
 }
 
-.t-hidden {
-  /**
-  * @name 		t-hidden
-  * @namespace         scss.core.class.helper
-  * @class-namespace     sugar.helper.text.hidden
+/**
+  * @name       	s-smaller
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.size.smaller
   * @type        class
   *
-  * Hide the text
+  * Set the size **smaller** relative to the root element
   *
   * @example 	html
-  * <div class="t-hidden">
-  * 	I'm not visible
+  * <div class="s-smaller">
+  * 	I have the size "smaller" defined
   * </div>
   *
   * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
   */
+.s-smaller {
+  font-size: 0.3rem;
+}
+
+/**
+  * @name       	s-smaller-rel
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.size.rel.smaller
+  * @type        class
+  *
+  * Set the size **smaller** relative to my parent
+  *
+  * @example 	html
+  * <div class="s-smaller-rel">
+  * 	I have the size "smaller" defined relative to my parent
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.s-smaller-rel {
+  font-size: 0.3em;
+}
+
+/**
+  * @name       	s-small
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.size.small
+  * @type        class
+  *
+  * Set the size **small** relative to the root element
+  *
+  * @example 	html
+  * <div class="s-small">
+  * 	I have the size "small" defined
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.s-small {
+  font-size: 0.6rem;
+}
+
+/**
+  * @name       	s-small-rel
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.size.rel.small
+  * @type        class
+  *
+  * Set the size **small** relative to my parent
+  *
+  * @example 	html
+  * <div class="s-small-rel">
+  * 	I have the size "small" defined relative to my parent
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.s-small-rel {
+  font-size: 0.6em;
+}
+
+/**
+  * @name       	s-default
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.size.default
+  * @type        class
+  *
+  * Set the size **default** relative to the root element
+  *
+  * @example 	html
+  * <div class="s-default">
+  * 	I have the size "default" defined
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.s {
+  font-size: 1rem;
+}
+
+/**
+  * @name       	s-default-rel
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.size.rel.default
+  * @type        class
+  *
+  * Set the size **default** relative to my parent
+  *
+  * @example 	html
+  * <div class="s-default-rel">
+  * 	I have the size "default" defined relative to my parent
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.s-rel {
+  font-size: 1em;
+}
+
+/**
+  * @name       	s-medium
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.size.medium
+  * @type        class
+  *
+  * Set the size **medium** relative to the root element
+  *
+  * @example 	html
+  * <div class="s-medium">
+  * 	I have the size "medium" defined
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.s-medium {
+  font-size: 1.5rem;
+}
+
+/**
+  * @name       	s-medium-rel
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.size.rel.medium
+  * @type        class
+  *
+  * Set the size **medium** relative to my parent
+  *
+  * @example 	html
+  * <div class="s-medium-rel">
+  * 	I have the size "medium" defined relative to my parent
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.s-medium-rel {
+  font-size: 1.5em;
+}
+
+/**
+  * @name       	s-big
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.size.big
+  * @type        class
+  *
+  * Set the size **big** relative to the root element
+  *
+  * @example 	html
+  * <div class="s-big">
+  * 	I have the size "big" defined
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.s-big {
+  font-size: 2rem;
+}
+
+/**
+  * @name       	s-big-rel
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.size.rel.big
+  * @type        class
+  *
+  * Set the size **big** relative to my parent
+  *
+  * @example 	html
+  * <div class="s-big-rel">
+  * 	I have the size "big" defined relative to my parent
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.s-big-rel {
+  font-size: 2em;
+}
+
+/**
+  * @name       	s-bigger
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.size.bigger
+  * @type        class
+  *
+  * Set the size **bigger** relative to the root element
+  *
+  * @example 	html
+  * <div class="s-bigger">
+  * 	I have the size "bigger" defined
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.s-bigger {
+  font-size: 3rem;
+}
+
+/**
+  * @name       	s-bigger-rel
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.size.rel.bigger
+  * @type        class
+  *
+  * Set the size **bigger** relative to my parent
+  *
+  * @example 	html
+  * <div class="s-bigger-rel">
+  * 	I have the size "bigger" defined relative to my parent
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.s-bigger-rel {
+  font-size: 3em;
+}
+
+/**
+* @name 		t-hidden
+* @namespace         scss.core.class.helper
+* @class-namespace     sugar.helper.text.hidden
+* @type        class
+*
+* Hide the text
+*
+* @example 	html
+* <div class="t-hidden">
+* 	I'm not visible
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
+.t-hidden {
   overflow: hidden;
   text-indent: -9000px;
   display: block;
 }
 
+/**
+* @name 		t-truncate
+* @namespace         scss.core.class.helper
+* @class-namespace     sugar.helper.text.truncate
+* @type        class
+*
+* Hide the text
+*
+* @example 	html
+* <div class="t-truncate">
+* 	I'm truncated cause I talk a lot too much Nulla mauris eros, finibus ac faucibus et, tempus quis risus. Praesent sit amet nulla vel libero euismod sodales eu nec.
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .t-truncate {
-  /**
-  * @name 		t-truncate
-  * @namespace         scss.core.class.helper
-  * @class-namespace     sugar.helper.text.truncate
-  * @type        class
-  *
-  * Hide the text
-  *
-  * @example 	html
-  * <div class="t-truncate">
-  * 	I'm truncated cause I talk a lot too much Nulla mauris eros, finibus ac faucibus et, tempus quis risus. Praesent sit amet nulla vel libero euismod sodales eu nec.
-  * </div>
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
   display: inline-block;
   max-width: 100%;
   overflow: hidden;
@@ -5429,355 +8565,437 @@ html {
   overflow: hidden;
 }
 
+/**
+* @name 		t-left
+* @namespace         scss.core.class.helper
+* @class-namespace     sugar.helper.text.align.left
+* @type        class
+*
+* Align the text to the left
+*
+* @example 	html
+* <div class="t-left">
+* 	I'm left aligned
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .t-left {
-  /**
-  * @name 		t-left
-  * @namespace         scss.core.class.helper
-  * @class-namespace     sugar.helper.text.align.left
-  * @type        class
-  *
-  * Align the text to the left
-  *
-  * @example 	html
-  * <div class="t-left">
-  * 	I'm left aligned
-  * </div>
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
   text-align: left;
 }
 
+/**
+* @name 		t-right
+* @namespace         scss.core.class.helper
+* @class-namespace     sugar.helper.text.align.right
+* @type        class
+*
+* Align the text to the right
+*
+* @example 	html
+* <div class="t-right">
+* 	I'm right aligned
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .t-right {
-  /**
-  * @name 		t-right
-  * @namespace         scss.core.class.helper
-  * @class-namespace     sugar.helper.text.align.right
-  * @type        class
-  *
-  * Align the text to the right
-  *
-  * @example 	html
-  * <div class="t-right">
-  * 	I'm right aligned
-  * </div>
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
   text-align: right;
 }
 
+/**
+* @name 		t-center
+* @namespace         scss.core.class.helper
+* @class-namespace     sugar.helper.text.align.center
+* @type        class
+*
+* Align the text to the center
+*
+* @example 	html
+* <div class="t-center">
+* 	I'm centered
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .t-center {
-  /**
-  * @name 		t-center
-  * @namespace         scss.core.class.helper
-  * @class-namespace     sugar.helper.text.align.center
-  * @type        class
-  *
-  * Align the text to the center
-  *
-  * @example 	html
-  * <div class="t-center">
-  * 	I'm centered
-  * </div>
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
   text-align: center;
 }
 
+/**
+* @name 		t-justify
+* @namespace         scss.core.class.helper
+* @class-namespace     sugar.helper.text.align.justify
+* @type        class
+*
+* Make the text justified
+*
+* @example 	html
+* <div class="t-justify">
+* 	Nullam vel feugiat nunc. Phasellus facilisis, nisi sit amet viverra rhoncus, arcu risus volutpat dolor, sed euismod magna tellus ac purus. Praesent augue lorem, ullamcorper ac accumsan nec, suscipit eu.
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .t-justify {
-  /**
-  * @name 		t-justify
-  * @namespace         scss.core.class.helper
-  * @class-namespace     sugar.helper.text.align.justify
-  * @type        class
-  *
-  * Make the text justified
-  *
-  * @example 	html
-  * <div class="t-justify">
-  * 	Nullam vel feugiat nunc. Phasellus facilisis, nisi sit amet viverra rhoncus, arcu risus volutpat dolor, sed euismod magna tellus ac purus. Praesent augue lorem, ullamcorper ac accumsan nec, suscipit eu.
-  * </div>
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
   text-align: justify;
 }
 
+/**
+* @name 		t-lowercase
+* @namespace         scss.core.class.helper
+* @class-namespace     sugar.helper.text.transform.lowercase
+* @type        class
+*
+* Transform the text to lowercase
+*
+* @example 	html
+* <div class="t-lowercase">
+* 	I'M LOWERCASE
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .t-lowercase {
-  /**
-  * @name 		t-lowercase
-  * @namespace         scss.core.class.helper
-  * @class-namespace     sugar.helper.text.transform.lowercase
-  * @type        class
-  *
-  * Transform the text to lowercase
-  *
-  * @example 	html
-  * <div class="t-lowercase">
-  * 	I'M LOWERCASE
-  * </div>
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
   text-transform: lowercase;
 }
 
+/**
+* @name 		t-uppercase
+* @namespace         scss.core.class.helper
+* @class-namespace     sugar.helper.text.transform.uppercase
+* @type        class
+*
+* Transform the text to uppercase
+*
+* @example 	html
+* <div class="t-uppercase">
+* 	I'm uppercase
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .t-uppercase {
-  /**
-  * @name 		t-uppercase
-  * @namespace         scss.core.class.helper
-  * @class-namespace     sugar.helper.text.transform.uppercase
-  * @type        class
-  *
-  * Transform the text to uppercase
-  *
-  * @example 	html
-  * <div class="t-uppercase">
-  * 	I'm uppercase
-  * </div>
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
   text-transform: uppercase;
 }
 
+/**
+* @name 		t-capitalize
+* @namespace         scss.core.class.helper
+* @class-namespace     sugar.helper.text.transform.capitalize
+* @type        class
+*
+* Capizalize the words
+*
+* @example 	html
+* <div class="t-capitalize">
+* 	I'm capitalized
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .t-capitalize {
-  /**
-  * @name 		t-capitalize
-  * @namespace         scss.core.class.helper
-  * @class-namespace     sugar.helper.text.transform.capitalize
-  * @type        class
-  *
-  * Capizalize the words
-  *
-  * @example 	html
-  * <div class="t-capitalize">
-  * 	I'm capitalized
-  * </div>
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
   text-transform: capitalize;
 }
 
-.no-transition {
-  /**
-  * @name 		no-transition
-  * @namespace         scss.core.class.helper
-  * @class-namespace       sugar.helper.transition.no
+/**
+  * @name       	tr-fast
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.transition.fast
   * @type        class
   *
-  * Disable the transitions **only on the element**
+  * Apply the transition **fast**
   *
   * @example 	html
-  * <div class="no-transition">
-  * 	I have no more transitions
-  * 	<div>But I have</div>
+  * <div class="tr-fast">
+  * 	I'm transitionned with fast
   * </div>
   *
   * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
   */
+.tr-fast {
+  transition: all 0.1s ease-in-out 0s, outline-color 0.000001s linear 0s;
+  outline-color: black;
 }
+
+/**
+  * @name       	tr-default
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.transition.default
+  * @type        class
+  *
+  * Apply the transition **default**
+  *
+  * @example 	html
+  * <div class="tr-default">
+  * 	I'm transitionned with default
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.tr {
+  transition: all 0.2s ease-in-out 0s, outline-color 0.000001s linear 0s;
+  outline-color: black;
+}
+
+/**
+  * @name       	tr-slow
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.transition.slow
+  * @type        class
+  *
+  * Apply the transition **slow**
+  *
+  * @example 	html
+  * <div class="tr-slow">
+  * 	I'm transitionned with slow
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.tr-slow {
+  transition: all 0.5s ease-in-out 0s, outline-color 0.000001s linear 0s;
+  outline-color: black;
+}
+
+/**
+* @name 		no-transition
+* @namespace         scss.core.class.helper
+* @class-namespace       sugar.helper.transition.no
+* @type        class
+*
+* Disable the transitions **only on the element**
+*
+* @example 	html
+* <div class="no-transition">
+* 	I have no more transitions
+* 	<div>But I have</div>
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .no-transition, .no-transition:before, .no-transition:after {
   transition: none !important;
 }
 
-.clear-transition {
-  /**
-  * @name 		clear-transition
-  * @namespace         scss.core.class.helper
-  * @class-namespace       sugar.helper.transition.clear
-  * @type        class
-  *
-  * Disable the transitions **on the element and all his children**
-  *
-  * @example 	html
-  * <div class="clear-transition">
-  * 	I have no more transitions
-  * 	<div>Me neither</div>
-  * </div>
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
-}
+/**
+* @name 		clear-transition
+* @namespace         scss.core.class.helper
+* @class-namespace       sugar.helper.transition.clear
+* @type        class
+*
+* Disable the transitions **on the element and all his children**
+*
+* @example 	html
+* <div class="clear-transition">
+* 	I have no more transitions
+* 	<div>Me neither</div>
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .clear-transition, .clear-transition:before, .clear-transition:after, .clear-transition *, .clear-transition *:before, .clear-transition *:after {
   transition: none !important;
 }
 
-.no-animation {
-  /**
-  * @name 		no-animation
-  * @namespace         scss.core.class.helper
-  * @class-namespace       sugar.helper.animation.no
-  * @type        class
-  *
-  * Disable the animations **only on the element**
-  *
-  * @example 	html
-  * <div class="no-animation">
-  * 	I have no more animations
-  * 	<div>But I have</div>
-  * </div>
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
-}
+/**
+* @name 		no-animation
+* @namespace         scss.core.class.helper
+* @class-namespace       sugar.helper.animation.no
+* @type        class
+*
+* Disable the animations **only on the element**
+*
+* @example 	html
+* <div class="no-animation">
+* 	I have no more animations
+* 	<div>But I have</div>
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .no-animation, .no-animation:before, .no-animation:after {
   animation: none !important;
 }
 
-.clear-animation {
-  /**
-  * @name 		clear-animation
-  * @namespace         scss.core.class.helper
-  * @class-namespace       sugar.helper.animation.clear
-  * @type        class
-  *
-  * Disable the transitions **on the element and all his children**
-  *
-  * @example 	html
-  * <div class="clear-animation">
-  * 	I have no more animations
-  * 	<div>Me neither</div>
-  * </div>
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
-}
+/**
+* @name 		clear-animation
+* @namespace         scss.core.class.helper
+* @class-namespace       sugar.helper.animation.clear
+* @type        class
+*
+* Disable the transitions **on the element and all his children**
+*
+* @example 	html
+* <div class="clear-animation">
+* 	I have no more animations
+* 	<div>Me neither</div>
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .clear-animation, .clear-animation:before, .clear-animation:after, .clear-animation *, .clear-animation *:before, .clear-animation *:after {
   animation: none !important;
 }
 
-.no-transmation {
-  /**
-  * @name 		no-transmation
-  * @namespace         scss.core.class.helper
-  * @class-namespace       sugar.helper.transmation.no
-  * @type        class
-  *
-  * Disable the animations and transitions **only on the element**
-  *
-  * @example 	html
-  * <div class="no-transmation">
-  * 	I have no more animations or transitions
-  * 	<div>But I have</div>
-  * </div>
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
-}
+/**
+* @name 		no-transmation
+* @namespace         scss.core.class.helper
+* @class-namespace       sugar.helper.transmation.no
+* @type        class
+*
+* Disable the animations and transitions **only on the element**
+*
+* @example 	html
+* <div class="no-transmation">
+* 	I have no more animations or transitions
+* 	<div>But I have</div>
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .no-transmation, .no-transmation:before, .no-transmation:after {
   transition: none !important;
   animation: none !important;
 }
 
-.clear-transmation {
-  /**
-  * @name 		clear-transmation
-  * @namespace         scss.core.class.helper
-  * @class-namespace       sugar.helper.transmation.clear
-  * @type        class
-  *
-  * Disable the animations and transitions **on the element and all his children**
-  *
-  * @example 	html
-  * <div class="clear-transmation">
-  * 	I have no more animations or transitions
-  * 	<div>Me neither</div>
-  * </div>
-  *
-  * @since       1.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
-}
+/**
+* @name 		clear-transmation
+* @namespace         scss.core.class.helper
+* @class-namespace       sugar.helper.transmation.clear
+* @type        class
+*
+* Disable the animations and transitions **on the element and all his children**
+*
+* @example 	html
+* <div class="clear-transmation">
+* 	I have no more animations or transitions
+* 	<div>Me neither</div>
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .clear-transmation, .clear-transmation:before, .clear-transmation:after, .clear-transmation *, .clear-transmation *:before, .clear-transmation *:after {
   transition: none !important;
   animation: none !important;
 }
 
+/**
+* @name 		lnf-shadow
+* @namespace           scss.core.class.lnf
+* @class-namespace     sugar.lnf.shadow
+* @type        class
+*
+* Apply the default shadow to the element
+*
+* @example 	html
+* <div class="ratio-16-9">
+*    <div class="lnf-shadow ratio-1-1" style="width:33%">
+* 	    I'm a shadowed block
+*    </div>
+* </div>
+*
+* @since       2.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .lnf-shadow {
-  /**
-  * @name 		lnf-shadow
-  * @namespace           scss.core.class.lnf
-  * @class-namespace     sugar.lnf.shadow
-  * @type        class
-  *
-  * Apply the default shadow to the element
-  *
-  * @example 	html
-  * <div class="ratio-16-9">
-  *    <div class="lnf-shadow ratio-1-1" style="width:33%">
-  * 	    I'm a shadowed block
-  *    </div>
-  * </div>
-  *
-  * @since       2.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08),0 2px 4px rgba(0, 0, 0, 0.08),0 4px 8px rgba(0, 0, 0, 0.08),0 8px 16px rgba(0, 0, 0, 0.08),0 16px 32px rgba(0, 0, 0, 0.08),0 32px 64px rgba(0, 0, 0, 0.08);
 }
 
+/**
+* @name 		lnf-shadow--small
+* @namespace           scss.core.class.lnf
+* @class-namespace     sugar.lnf.shadow.small
+* @type        class
+*
+* Apply the small shadow to the element
+*
+* @example 	html
+* <div class="ratio-16-9">
+*    <div class="lnf-shadow--small ratio-1-1" style="width:33%">
+* 	    I'm a shadowed block
+*    </div>
+* </div>
+*
+* @since       2.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .lnf-shadow--small {
-  /**
-  * @name 		lnf-shadow--small
-  * @namespace           scss.core.class.lnf
-  * @class-namespace     sugar.lnf.shadow.small
-  * @type        class
-  *
-  * Apply the small shadow to the element
-  *
-  * @example 	html
-  * <div class="ratio-16-9">
-  *    <div class="lnf-shadow--small ratio-1-1" style="width:33%">
-  * 	    I'm a shadowed block
-  *    </div>
-  * </div>
-  *
-  * @since       2.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08),0 2px 4px rgba(0, 0, 0, 0.08),0 4px 8px rgba(0, 0, 0, 0.08);
 }
 
+/**
+* @name 		lnf-shadow--big
+* @namespace           scss.core.class.lnf
+* @class-namespace     sugar.lnf.shadow.big
+* @type        class
+*
+* Apply the big shadow to the element
+*
+* @example 	html
+* <div class="ratio-16-9">
+*    <div class="lnf-shadow--big ratio-1-1" style="width:33%">
+* 	    I'm a shadowed block
+*    </div>
+* </div>
+*
+* @since       2.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
 .lnf-shadow--big {
-  /**
-  * @name 		lnf-shadow--big
-  * @namespace           scss.core.class.lnf
-  * @class-namespace     sugar.lnf.shadow.big
-  * @type        class
-  *
-  * Apply the big shadow to the element
-  *
-  * @example 	html
-  * <div class="ratio-16-9">
-  *    <div class="lnf-shadow--big ratio-1-1" style="width:33%">
-  * 	    I'm a shadowed block
-  *    </div>
-  * </div>
-  *
-  * @since       2.0.0
-  * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  */
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08),0 2px 4px rgba(0, 0, 0, 0.08),0 4px 8px rgba(0, 0, 0, 0.08),0 8px 16px rgba(0, 0, 0, 0.08),0 16px 32px rgba(0, 0, 0, 0.08),0 32px 64px rgba(0, 0, 0, 0.08),0 64px 128px rgba(0, 0, 0, 0.08),0 128px 256px rgba(0, 0, 0, 0.08),0 256px 512px rgba(0, 0, 0, 0.08);
+}
+
+/**
+ * @name 		.icon-fa-user
+ * @namespace       scss.core.class.icons
+ * @type        class
+ *
+ * ```.icon-fa-user``` icon class
+ *
+ * @example 	html
+ * <i class="icon-fa-user" />
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+.icon-fa-user:before {
+  content: "";
+}
+
+/**
+ * @name 		.icon-fa-star
+ * @namespace       scss.core.class.icons
+ * @type        class
+ *
+ * ```.icon-fa-star``` icon class
+ *
+ * @example 	html
+ * <i class="icon-fa-star" />
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+.icon-fa-star:before {
+  content: "";
 }
 
 .s-filtrable-input__list {
   left: 300px !important;
-}
-.s-filtrable-input__list:before {
-  content: "";
 }

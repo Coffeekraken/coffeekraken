@@ -1,6 +1,6 @@
-@mixin register-helper-ratio() {
+@mixin classes-helper-ratio() {
 
-  @include register-class(ratio-21-9, "sugar.helper.ratio.21-9") {
+  @if class-match-namespace("sugar.helper.ratio.21-9") {
     /**
     * @name 		ratio-21-9
     * @namespace         scss.core.class.helper
@@ -15,9 +15,11 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    @include ratio(21/9);
+    .ratio-21-9 {
+     @include ratio(21/9);
+    }
   }
-  @include register-class(ratio-16-9, "sugar.helper.ratio.16-9") {
+  @if class-match-namespace("sugar.helper.ratio.16-9") {
     /**
     * @name 		ratio-16-9
     * @namespace         scss.core.class.helper
@@ -32,9 +34,11 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    @include ratio(16/9);
+    .ratio-16-9 {
+      @include ratio(16/9);
+    }
   }
-  @include register-class(ratio-4-3, "sugar.helper.ratio.4-3") {
+  @if class-match-namespace("sugar.helper.ratio.4-3") {
     /**
     * @name 		ratio-4-3
     * @namespace         scss.core.class.helper
@@ -49,9 +53,11 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    @include ratio(4/3);
+    .ratio-4-3 {
+      @include ratio(4/3);
+    }
   }
-  @include register-class(ratio-1-1, "sugar.helper.ratio.1-1") {
+  @if class-match-namespace("sugar.helper.ratio.1-1") {
     /**
     * @name 		ratio-1-1
     * @namespace         scss.core.class.helper
@@ -66,6 +72,8 @@
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    @include ratio(1);
+    .ratio-1-1 {
+      @include ratio(1);
+    }
   }
 }

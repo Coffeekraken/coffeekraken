@@ -1,0 +1,69 @@
+@mixin classes-helper-user-select() {
+
+  @if class-match-namespace("sugar.helper.user-select.none") {
+    /**
+    * @name 		s-user-select-none
+    * @namespace           scss.core.class.helper
+    * @class-namespace     sugar.helper.user-select.none
+    * @type        class
+    *
+    * Disable the selection for this element
+    *
+    * @example 	html
+    * <p class="s-user-select-none">
+    *   I cannot be selected
+    * </p>
+    *
+    * @since       2.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .s-user-select-none {
+      user-select: none;
+    }
+  }
+
+  @if class-match-namespace("sugar.helper.user-select.all") {
+    /**
+    * @name 		s-user-select-all
+    * @namespace           scss.core.class.helper
+    * @class-namespace     sugar.helper.user-select.all
+    * @type        class
+    *
+    * Disable the selection for this element
+    *
+    * @example 	html
+    * <p class="s-user-select-all">
+    *   I will be all selected in 1 click
+    * </p>
+    *
+    * @since       2.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .s-user-select-all {
+      user-select: all;
+    }
+  }
+
+  @if class-match-namespace("sugar.helper.user-select.text") {
+    /**
+    * @name 		s-user-select-text
+    * @namespace           scss.core.class.helper
+    * @class-namespace     sugar.helper.user-select.text
+    * @type        class
+    *
+    * The text can be selected only
+    *
+    * @example 	html
+    * <p class="s-user-select-text">
+    *   I cannot be selected
+    * </p>
+    *
+    * @since       2.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .s-user-select-text {
+      user-select: text;
+    }
+  }
+
+}

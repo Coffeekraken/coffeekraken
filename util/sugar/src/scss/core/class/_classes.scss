@@ -36,17 +36,22 @@
   @include classes-helper-display();
   @include classes-helper-filter();
   @include classes-helper-font();
+  @include classes-helper-link();
   @include classes-helper-margin();
   @include classes-helper-media();
+  @include classes-helper-overflow();
   @include classes-helper-padding();
   @include classes-helper-pointer();
   @include classes-helper-position();
   @include classes-helper-pull();
   @include classes-helper-ratio();
+  @include classes-helper-screen-reader();
   @include classes-helper-size();
   @include classes-helper-text();
   @include classes-helper-transition();
   @include classes-helper-transmation();
+  @include classes-helper-user-select();
+  @include classes-helper-vertical-align();
 
   // lnf
   @include classes-lnf-shadow();

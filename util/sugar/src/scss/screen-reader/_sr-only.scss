@@ -1,0 +1,21 @@
+/**
+ * @name            sr-only
+ * @namespace       scss.screen-reader
+ * @type            Mixin
+ *
+ * Make the element visible only for the screen readers
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@mixin sr-only() {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

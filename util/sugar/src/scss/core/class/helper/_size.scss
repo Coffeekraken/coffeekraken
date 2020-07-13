@@ -2,7 +2,7 @@
 
   @if class-match-namespace("sugar.helper.size.abs.cover") {
     /**
-    * @name 		abs-cover
+    * @name 		s-abs-cover
     * @namespace         scss.core.class.helper
     * @class-namespace     sugar.helper.size.abs.cover
     * @type        class
@@ -11,19 +11,19 @@
     *
     * @example 	html
     * <div class="ratio-16-9">
-    * 	<img src="https://source.unsplash.com/random" class="abs-cover" />
+    * 	<img src="https://source.unsplash.com/random" class="s-abs-cover" />
     * </div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .abs-cover {
+    .s-abs-cover {
       @include size(cover, $position: absolute);
     }
   }
   @if class-match-namespace("sugar.helper.size.abs.contain") {
     /**
-    * @name 		abs-contain
+    * @name 		s-abs-contain
     * @namespace         scss.core.class.helper
     * @class-namespace     sugar.helper.size.abs.contain
     * @type        class
@@ -32,19 +32,19 @@
     *
     * @example 	html
     * <div class="ratio-16-9">
-    * 	<img src="https://source.unsplash.com/random" class="abs-contain" />
+    * 	<img src="https://source.unsplash.com/random" class="s-abs-contain" />
     * </div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .abs-contain {
+    .s-abs-contain {
       @include size(contain, $position: absolute);
     }
   }
   @if class-match-namespace("sugar.helper.size.abs.fit") {
     /**
-    * @name 		abs-fit
+    * @name 		s-abs-fit
     * @namespace         scss.core.class.helper
     * @class-namespace     sugar.helper.size.abs.fit
     * @type        class
@@ -53,13 +53,13 @@
     *
     * @example 	html
     * <div class="ratio-16-9">
-    * 	<img src="https://source.unsplash.com/random" class="abs-fit" />
+    * 	<img src="https://source.unsplash.com/random" class="s-abs-fit" />
     * </div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .abs-fit {
+    .s-abs-fit {
       @include size(fit, $position: absolute);
     }
   }

@@ -2,7 +2,7 @@
 
   @if class-match-namespace("sugar.helper.position.relative") {
     /**
-    * @name 		relative
+    * @name 		s-relative
     * @namespace         scss.core.class.helper
     * @class-namespace     sugar.helper.position.relative
     * @type        class
@@ -10,20 +10,22 @@
     * Set an element position as ```relative```
     *
     * @example 	html
-    * <div class="relative">
+    * <div class="s-relative">
     * 	I'm relative now
     * </div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .relative {
+    .s-relative {
       position: relative;
     }
   }
+
+
   @if class-match-namespace("sugar.helper.position.absolute") {
     /**
-    * @name 		absolute
+    * @name 		s-absolute
     * @namespace         scss.core.class.helper
     * @class-namespace     sugar.helper.position.absolute
     * @type        class
@@ -31,15 +33,142 @@
     * Set an element position as ```absolute```
     *
     * @example 	html
-    * <div class="absolute">
+    * <div class="s-absolute">
     * 	I'm absolute now
     * </div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .absolute {
+    .s-absolute {
       position: absolute;
+    }
+  }
+
+
+  @if class-match-namespace("sugar.helper.position.fixed") {
+    /**
+    * @name 		s-fixed
+    * @namespace         scss.core.class.helper
+    * @class-namespace     sugar.helper.position.fixed
+    * @type        class
+    *
+    * Set an element position as ```fixed```
+    *
+    * @example 	html
+    * <div class="s-fixed">
+    * 	I'm fixed now
+    * </div>
+    *
+    * @since       2.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .s-fixed {
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+
+  @if class-match-namespace("sugar.helper.position.fixed.top") {
+    /**
+    * @name 		s-fixed-top
+    * @namespace         scss.core.class.helper
+    * @class-namespace     sugar.helper.position.fixed.top
+    * @type        class
+    *
+    * Set an element position as ```fixed``` top
+    *
+    * @example 	html
+    * <div class="s-fixed-top">
+    * 	I'm fixed now
+    * </div>
+    *
+    * @since       2.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .s-fixed-top {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+    }
+  }
+
+
+  @if class-match-namespace("sugar.helper.position.fixed.bottom") {
+    /**
+    * @name 		s-fixed-bottom
+    * @namespace         scss.core.class.helper
+    * @class-namespace     sugar.helper.position.fixed.bottom
+    * @type        class
+    *
+    * Set an element position as ```fixed``` bottom
+    *
+    * @example 	html
+    * <div class="s-fixed-bottom">
+    * 	I'm fixed now
+    * </div>
+    *
+    * @since       2.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .s-fixed-bottom {
+      position: fixed;
+      bottom: 0; left: 0;
+      width: 100%;
+    }
+  }
+
+
+  @if class-match-namespace("sugar.helper.position.sticky") {
+    /**
+    * @name 		s-sticky
+    * @namespace         scss.core.class.helper
+    * @class-namespace     sugar.helper.position.sticky
+    * @type        class
+    *
+    * Set an element position as ```sticky```
+    *
+    * @example 	html
+    * <div class="s-sticky">
+    * 	I'm sticky now
+    * </div>
+    *
+    * @since       2.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .s-sticky {
+      @supports (position: sticky) {
+        position: sticky;
+      }
+    }
+  }
+
+
+  @if class-match-namespace("sugar.helper.position.sticky.top") {
+    /**
+    * @name 		s-sticky-top
+    * @namespace         scss.core.class.helper
+    * @class-namespace     sugar.helper.position.sticky.top
+    * @type        class
+    *
+    * Set an element position as ```sticky``` top
+    *
+    * @example 	html
+    * <div class="s-sticky-top">
+    * 	I'm sticky on top now
+    * </div>
+    *
+    * @since       2.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .s-sticky-top {
+      @supports (position: sticky) {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+      }
     }
   }
 

@@ -1,0 +1,150 @@
+@mixin classes-helper-vertical-align() {
+
+  @if class-match-namespace("sugar.helper.vertical-align.top") {
+    /**
+    * @name 		.s-align-top
+    * @namespace         scss.core.class.helper
+    * @class-namespace     sugar.helper.vertical-align.top
+    * @type        class
+    *
+    * Align vertically top
+    *
+    * @example 	html
+    * <div class="s-border style="height:200px">
+    *   <div class="s-align-top">
+    *     Hello world
+    *   </div>
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .s-align-top {
+      vertical-align: top !important;
+    }
+  }
+
+
+  @if class-match-namespace("sugar.helper.vertical-align.bottom") {
+    /**
+    * @name 		.s-align-bottom
+    * @namespace         scss.core.class.helper
+    * @class-namespace     sugar.helper.vertical-align.bottom
+    * @type        class
+    *
+    * Align vertically bottom
+    *
+    * @example 	html
+    * <div class="s-border style="height:200px">
+    *   <div class="s-align-bottom">
+    *     Hello world
+    *   </div>
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .s-align-bottom {
+      vertical-align: bottom !important;
+    }
+  }
+
+
+  @if class-match-namespace("sugar.helper.vertical-align.middle") {
+    /**
+    * @name 		.s-align-middle
+    * @namespace         scss.core.class.helper
+    * @class-namespace     sugar.helper.vertical-align.middle
+    * @type        class
+    *
+    * Align vertically middle
+    *
+    * @example 	html
+    * <div class="s-border style="height:200px">
+    *   <div class="s-align-middle">
+    *     Hello world
+    *   </div>
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .s-align-middle {
+      vertical-align: middle !important;
+    }
+  }
+
+  @if class-match-namespace("sugar.helper.vertical-align.baseline") {
+    /**
+    * @name 		.s-align-baseline
+    * @namespace         scss.core.class.helper
+    * @class-namespace     sugar.helper.vertical-align.baseline
+    * @type        class
+    *
+    * Align vertically baseline
+    *
+    * @example 	html
+    * <div class="s-border style="height:200px">
+    *   <div class="s-align-baseline">
+    *     Hello world
+    *   </div>
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .s-align-baseline {
+      vertical-align: baseline !important;
+    }
+  }
+
+
+  @if class-match-namespace("sugar.helper.vertical-align.text-top") {
+    /**
+    * @name 		.s-align-text-top
+    * @namespace         scss.core.class.helper
+    * @class-namespace     sugar.helper.vertical-align.text-top
+    * @type        class
+    *
+    * Align vertically text-top
+    *
+    * @example 	html
+    * <div class="s-border style="height:200px">
+    *   <div class="s-align-text-top">
+    *     Hello world
+    *   </div>
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .s-align-text-top {
+      vertical-align: text-top !important;
+    }
+  }
+
+
+  @if class-match-namespace("sugar.helper.vertical-align.text-bottom") {
+    /**
+    * @name 		.s-align-text-bottom
+    * @namespace         scss.core.class.helper
+    * @class-namespace     sugar.helper.vertical-align.text-bottom
+    * @type        class
+    *
+    * Align vertically text-bottom
+    *
+    * @example 	html
+    * <div class="s-border style="height:200px">
+    *   <div class="s-align-text-bottom">
+    *     Hello world
+    *   </div>
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .s-align-text-bottom {
+      vertical-align: text-bottom !important;
+    }
+  }
+}

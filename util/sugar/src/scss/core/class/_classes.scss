@@ -30,11 +30,13 @@
   $__classNamespacesWanted: $namespaces !global;
 
   @include classes-helper-block();
+  @include classes-helper-border();
   @include classes-helper-clear();
   @include classes-helper-clearfix();
   @include classes-helper-color();
   @include classes-helper-display();
   @include classes-helper-filter();
+  @include classes-helper-flex();
   @include classes-helper-font();
   @include classes-helper-link();
   @include classes-helper-margin();

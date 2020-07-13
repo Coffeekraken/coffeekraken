@@ -14,7 +14,7 @@
 
 
         @if class-match-namespace("sugar.helper.color.#{$name}.color") {
-          $cls: unquote(selector("c-#{$name}"));
+          $cls: unquote(selector("s-c-#{$name}"));
           /**
             * @name       	#{$cls}
             * @namespace       scss.core.class
@@ -37,12 +37,12 @@
         }
 
 
-        @if class-match-namespace("sugar.helper.color.#{$name}.bkg") {
-          $cls: unquote(selector("bkg-#{$name}"));
+        @if class-match-namespace("sugar.helper.color.#{$name}.bg") {
+          $cls: unquote(selector("s-bg-#{$name}"));
           /**
             * @name       	#{$cls}
             * @namespace       scss.core.class
-            * @class-namespace           sugar.helper.color.#{$name}.bkg
+            * @class-namespace           sugar.helper.color.#{$name}.bg
             * @type        class
             *
             * Specify the background color to **#{$name}**
@@ -65,7 +65,7 @@
           @each $mod-name, $mod in $modifiers {
 
             @if class-match-namespace("sugar.helper.color.#{$name}.#{$mod-name}") {
-              $cls: unquote(selector("c-#{$name}--#{$mod-name}"));
+              $cls: unquote(selector("s-c-#{$name}--#{$mod-name}"));
               /**
                 * @name       	#{$cls}
                 * @namespace       scss.core.class
@@ -88,12 +88,12 @@
             }
 
 
-            @if class-match-namespace("sugar.helper.color.#{$name}.#{$mod-name}.bkg") {
-              $cls: unquote(selector("bkg-#{$name}--#{$mod-name}"));
+            @if class-match-namespace("sugar.helper.color.#{$name}.#{$mod-name}.bg") {
+              $cls: unquote(selector("s-bg-#{$name}--#{$mod-name}"));
               /**
                 * @name       	{$cls}
                 * @namespace       scss.core.class
-                * @class-namespace           sugar.helper.color.#{$name}.#{$mod-name}.bkg
+                * @class-namespace           sugar.helper.color.#{$name}.#{$mod-name}.bg
                 * @type        class
                 *
                 * Specify the background color to **#{$name}--#{$mod-name}**

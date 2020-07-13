@@ -2,7 +2,7 @@
 
   @if class-match-namespace("sugar.helper.clearfix") {
     /**
-    * @name 		clearfix
+    * @name 		s-clearfix
     * @namespace           scss.core.class.helper
     * @class-namespace     sugar.helper.clearfix
     * @type        class
@@ -10,23 +10,23 @@
     * Apply the micro clearfix on the element
     *
     * @example 	html
-    * <div class="clearfix bkg-primary">
-    * 	<div class="pull-right">right pulled</div>
+    * <div class="s-clearfix s-bg-primary">
+    * 	<div class="s-pull-right">right pulled</div>
     * </div>
-    * <div class="bkg-primary">
-    * 	<div class="pull-right">right pulled without clearfix</div>
+    * <div class="s-bg-primary">
+    * 	<div class="s-pull-right">right pulled without clearfix</div>
     * </div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .clearfix {
+    .s-clearfix {
       @include clearfix(micro);
     }
   }
   @if class-match-namespace("sugar.helper.clearfix.float") {
     /**
-    * @name 		clearfix-float
+    * @name 		s-clearfix-float
     * @namespace           scss.core.class.helper
     * @class-namespace     sugar.helper.clearfix.float
     * @type        class
@@ -34,23 +34,23 @@
     * Apply the float clearfix on the element
     *
     * @example 	html
-    * <div class="clearfix-float bkg-primary">
-    * 	<div class="pull-right">right pulled</div>
+    * <div class="s-clearfix-float s-bg-primary">
+    * 	<div class="s-pull-right">right pulled</div>
     * </div>
-    * <div class="bkg-primary">
-    * 	<div class="pull-right">right pulled without clearfix</div>
+    * <div class="s-bg-primary">
+    * 	<div class="s-pull-right">right pulled without clearfix</div>
     * </div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .clearfix-float {
+    .s-clearfix-float {
       @include clearfix(float);
     }
   }
   @if class-match-namespace("sugar.helper.clearfix.micro") {
     /**
-    * @name 		clearfix-micro
+    * @name 		s-clearfix-micro
     * @namespace           scss.core.class.helper
     * @class-namespace     sugar.helper.clearfix.micro
     * @type        class
@@ -58,11 +58,11 @@
     * Apply the micro clearfix on the element
     *
     * @example 	html
-    * <div class="clearfix bkg-primary">
-    * 	<div class="pull-right">right pulled</div>
+    * <div class="s-clearfix s-bg-primary">
+    * 	<div class="s-pull-right">right pulled</div>
     * </div>
-    * <div class="bkg-primary">
-    * 	<div class="pull-right">right pulled without clearfix</div>
+    * <div class="s-bg-primary">
+    * 	<div class="s-pull-right">right pulled without clearfix</div>
     * </div>
     *
     * @since       1.0.0
@@ -74,7 +74,7 @@
   }
   @if class-match-namespace("sugar.helper.clearfix.overflow") {
     /**
-    * @name 		clearfix-overflow
+    * @name 		s-clearfix-overflow
     * @namespace           scss.core.class.helper
     * @class-namespace     sugar.helper.clearfix.overflow
     * @type        class
@@ -82,23 +82,23 @@
     * Apply the overflow clearfix on the element
     *
     * @example 	html
-    * <div class="clearfix-overflow bkg-primary">
-    * 	<div class="pull-right">right pulled</div>
+    * <div class="s-clearfix-overflow s-bg-primary">
+    * 	<div class="s-pull-right">right pulled</div>
     * </div>
-    * <div class="bkg-primary">
-    * 	<div class="pull-right">right pulled without clearfix</div>
+    * <div class="s-bg-primary">
+    * 	<div class="s-pull-right">right pulled without clearfix</div>
     * </div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .clearfix-overflow {
+    .s-clearfix-overflow {
      @include clearfix(overflow);
     }
   }
   @if class-match-namespace("sugar.helper.clearfix.facebook") {
     /**
-    * @name 		clearfix-facebook
+    * @name 		s-clearfix-facebook
     * @namespace           scss.core.class.helper
     * @class-namespace     sugar.helper.clearfix.facebook
     * @type        class
@@ -106,17 +106,17 @@
     * Apply the facebook clearfix on the element
     *
     * @example 	html
-    * <div class="clearfix-facebook bkg-primary">
-    * 	<div class="pull-right">right pulled</div>
+    * <div class="s-clearfix-facebook s-bg-primary">
+    * 	<div class="s-pull-right">right pulled</div>
     * </div>
-    * <div class="bkg-primary">
-    * 	<div class="pull-right">right pulled without clearfix</div>
+    * <div class="s-bg-primary">
+    * 	<div class="s-pull-right">right pulled without clearfix</div>
     * </div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .clearfix-facebook {
+    .s-clearfix-facebook {
       @include clearfix(facebook);
     }
   }

@@ -1,5 +1,6 @@
 module.exports = {
   // import some settings
+  borders: '@config.borders',
   classes: '@config.classes',
   colors: '@config.colors',
   fonts: '@config.fonts',
@@ -10,6 +11,23 @@ module.exports = {
   spaces: '@config.spaces',
   transitions: '@config.transitions',
   typography: '@config.typography',
+
+  helpers: {
+    flex: {
+      /**
+       * @name        order-count
+       * @namespace   config.scss.helpers.flex
+       * @type        Number
+       * @default     20
+       *
+       * Specify how many flex order ```.s-flex-order-{i}``` you want to be generated
+       *
+       * @since       2.0.0
+       * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      'order-count': 20
+    }
+  },
 
   /**
    * @name          unit

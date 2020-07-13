@@ -2,7 +2,7 @@
 
   @if class-match-namespace("sugar.helper.pull.left") {
     /**
-    * @name 		pull-left
+    * @name 		s-pull-left
     * @namespace         scss.core.class.helper
     * @class-namespace     sugar.helper.pull.left
     * @type        class
@@ -11,19 +11,19 @@
     *
     * @example 	html
     * <div>
-    * 	<span class="pull-left">Hello world</span>
+    * 	<span class="s-pull-left">Hello world</span>
     * </div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .pull-left {
+    .s-pull-left {
       float: left;
     }
   }
   @if class-match-namespace("sugar.helper.pull.right") {
     /**
-    * @name 		pull-right
+    * @name 		s-pull-right
     * @namespace         scss.core.class.helper
     * @class-namespace     sugar.helper.pull.right
     * @type        class
@@ -32,14 +32,37 @@
     *
     * @example 	html
     * <div>
-    * 	<span class="pull-right">Hello world</span>
+    * 	<span class="s-pull-right">Hello world</span>
     * </div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .pull-right {
+    .s-pull-right {
       float: right;
     }
   }
+
+  @if class-match-namespace("sugar.helper.pull.none") {
+    /**
+    * @name 		s-pull-none
+    * @namespace         scss.core.class.helper
+    * @class-namespace     sugar.helper.pull.none
+    * @type        class
+    *
+    * Reset the pull (float) styling on the element
+    *
+    * @example 	html
+    * <div>
+    * 	<span class="s-pull-none">Hello world</span>
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .s-pull-none {
+      float: none;
+    }
+  }
+
 }

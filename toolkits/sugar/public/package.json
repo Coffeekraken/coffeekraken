@@ -9,7 +9,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@coffeekraken/sugar": "*",
+    "@coffeekraken/sugar": "file:..",
     "json-to-scss": "^1.5.0"
   }
 }

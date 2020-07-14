@@ -6,6 +6,7 @@
   "command": {
     "bootstrap": {
       "ignore": [
+        "node_modules",
         ".old/**"
       ],
       "npmClientArgs": [

@@ -46,6 +46,17 @@ module.exports = class SCommandPanel extends __SComponent {
   _commands = null;
 
   /**
+   * @name          $list
+   * @type          blessed.Box
+   * @private
+   *
+   * Store the actual box where the commands list will be pushed
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  $list = null;
+
+  /**
    * @name          $log
    * @type          blessed.Box
    * @private
@@ -57,17 +68,6 @@ module.exports = class SCommandPanel extends __SComponent {
   $log = null;
 
   /**
-   * @name          $namespace
-   * @type          blessed.box
-   * @private
-   *
-   * Store the "namespace" panel that display which is the current namespace displayed
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  $namespace = null;
-
-  /**
    * @name          _namespace
    * @type          String
    * @private
@@ -77,6 +77,17 @@ module.exports = class SCommandPanel extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _namespace = null;
+
+  /**
+   * @name          _updateListInterval
+   * @type          String
+   * @private
+   *
+   * Store the update list interval
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _updateListInterval = null;
 
   /**
    * @name          constructor
@@ -127,6 +138,9 @@ module.exports = class SCommandPanel extends __SComponent {
 
     // generate the UI
     this._generateUI();
+
+    // update the list continusly
+    this._updateListInterval = setInterval(this._updateList.bind(this), 100);
   }
 
   /**
@@ -172,13 +186,6 @@ module.exports = class SCommandPanel extends __SComponent {
           });
         }
       });
-    // subscribe to answer
-    // .on('answer', (answer) => {
-    //   // console.log(answer);
-    //   // for (let i = 0; i < currentAskLinesCount; i++) {
-    //   //   this._settings.logBox.deleteBottom();
-    //   // }
-    // });
   }
 
   /**
@@ -245,47 +252,41 @@ module.exports = class SCommandPanel extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   filterByNamespace(namespace) {
-    setTimeout(() => {
-      // get the commands to display using the passed namespace
-      const filteredCommandsInstances = __SCommand.getCommandsByNamespace(
-        `+(${namespace}|${namespace}.**)`
-      );
-
-      // check if we have some commands to display
-      if (!filteredCommandsInstances.length) {
-        const $popup = new __SPopup({
-          title: 'No commands to display',
-          description: `Sorry but the passed namespace "${namespace}" does not return any commands...`,
-          style: {
-            bg: 'red'
-          },
-          width: '50%'
-        });
-        this.append($popup);
-        setTimeout(() => {
-          $popup.detach();
-          $popup.destroy();
-        }, 3000);
-        return;
-      }
-
-      // save the current namespace
-      this._namespace = namespace;
-
-      // clear all existing boxes
-      this._clearCommands();
-
-      // register new commands
-      this._commands = filteredCommandsInstances;
-
-      // generate the panel object for each commands
-      this._commands.forEach((commandInstance) => {
-        this._boxesObjectsMap.set(commandInstance, {});
-      });
-
-      // update
-      this.update();
-    });
+    // setTimeout(() => {
+    //   // get the commands to display using the passed namespace
+    //   const filteredCommandsInstances = __SCommand.getCommandsByNamespace(
+    //     `+(${namespace}|${namespace}.**)`
+    //   );
+    //   // check if we have some commands to display
+    //   if (!filteredCommandsInstances.length) {
+    //     const $popup = new __SPopup({
+    //       title: 'No commands to display',
+    //       description: `Sorry but the passed namespace "${namespace}" does not return any commands...`,
+    //       style: {
+    //         bg: 'red'
+    //       },
+    //       width: '50%'
+    //     });
+    //     this.append($popup);
+    //     setTimeout(() => {
+    //       $popup.detach();
+    //       $popup.destroy();
+    //     }, 3000);
+    //     return;
+    //   }
+    //   // save the current namespace
+    //   this._namespace = namespace;
+    //   // clear all existing boxes
+    //   this._clearCommands();
+    //   // register new commands
+    //   this._commands = filteredCommandsInstances;
+    //   // generate the panel object for each commands
+    //   this._commands.forEach((commandInstance) => {
+    //     this._boxesObjectsMap.set(commandInstance, {});
+    //   });
+    //   // update
+    //   this.update();
+    // });
   }
 
   /**
@@ -324,10 +325,59 @@ module.exports = class SCommandPanel extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _generateUI() {
-    this.$log = __blessed.box({
-      width: '100%+1',
-      top: 4,
+    const itemsArray = [];
+    this._commands.forEach((commandInstance) => {
+      commandInstance._spinner = {
+        ora: __ora({
+          text: __parseHtml(commandInstance.name),
+          color: 'white'
+        })
+      };
+
+      let name = commandInstance.name;
+      if (commandInstance.isRunning()) {
+        name = commandInstance._spinner.ora.frame();
+      }
+
+      itemsArray.push(name);
+    });
+
+    this.$list = __blessed.list({
+      width: '20%',
+      top: 1,
       left: 0,
+      right: 0,
+      bottom: 0,
+      mouse: true,
+      keys: true,
+      scrollable: true,
+      scrollbar: {
+        ch: ' ',
+        inverse: true
+      },
+      style: {
+        fg: 'white',
+        selected: {
+          fg: __color('terminal.primary').toString()
+        },
+        item: {},
+        scrollbar: {
+          bg: __color('terminal.primary').toString()
+        }
+      },
+      items: itemsArray,
+      padding: {
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0
+      }
+    });
+
+    this.$log = __blessed.box({
+      width: '80%',
+      top: 1,
+      left: '20%',
       right: 0,
       bottom: 0,
       style: {
@@ -354,27 +404,29 @@ module.exports = class SCommandPanel extends __SComponent {
       }
     });
 
-    this.$namespace = __blessed.box({
-      width: '100%+1',
-      height: 1,
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      style: {
-        fg: 'black',
-        bg: 'cyan'
-      },
-      padding: {
-        top: 0,
-        left: 2,
-        right: 2,
-        bottom: 0
-      }
-    });
-
-    this.append(this.$namespace);
+    this.append(this.$list);
     this.append(this.$log);
+
+    this.$list.focus();
+  }
+
+  _updateList() {
+    this._commands.forEach((commandInstance, i) => {
+      const key = ` (${commandInstance.key})`;
+      let name = commandInstance.name + key;
+      const item = this.$list.getItem(i);
+      if (commandInstance.state === 'running') {
+        name = commandInstance._spinner.ora.frame() + key;
+        item.style.fg = __color('terminal.primary').toString();
+      } else if (commandInstance.state === 'error') {
+        name = __parseHtml(`× ${commandInstance.name}${key}`);
+        item.style.fg = 'red';
+      } else if (commandInstance.state === 'success') {
+        name = __parseHtml(`× ${commandInstance.name}${key}`);
+        item.style.fg = __color('terminal.green').toString();
+      }
+      this.$list.setItem(i, name);
+    });
   }
 
   /**
@@ -863,19 +915,6 @@ module.exports = class SCommandPanel extends __SComponent {
 
     // update the content
     this._updateCommandBoxesContent();
-
-    if (this._namespace) {
-      this.$namespace.height = 1;
-      this.$log.top = 2;
-      this.$namespace.setContent(
-        __parseHtml(
-          `<white>Currently displayed namespace:</white> <yellow>${this._namespace}</yellow>`
-        )
-      );
-    } else {
-      this.$namespace.height = 0;
-      this.$log.top = 0;
-    }
 
     super.update();
   }

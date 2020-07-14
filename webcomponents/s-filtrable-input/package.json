@@ -9,7 +9,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@coffeekraken/sugar": "^2.0.0",
+    "@coffeekraken/sugar": "file:../../toolkits/sugar",
     "aggregation": "^1.2.6"
   }
 }

@@ -361,6 +361,25 @@ module.exports = class SCommand extends __SPromise {
   }
 
   /**
+   * @name                    state
+   * @type                    String
+   * @get
+   *
+   * Get the state of the last process runned.
+   * Can be:
+   * - idle
+   * - running
+   * - killed
+   * - success
+   * - error
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get state() {
+    return this.lastProcessObj ? this.lastProcessObj.state : 'idle';
+  }
+
+  /**
    * @name                    concurrent
    * @type                    Function
    * @get

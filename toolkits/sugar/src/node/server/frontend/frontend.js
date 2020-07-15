@@ -110,10 +110,14 @@ module.exports = async (args = {}) => {
         view = 'tmp.index';
       }
 
+      console.log(view);
+
       // render the view
       let result = await __bladePhp(view, {
         ...templateData
       });
+
+      console.log('RESULT', result);
 
       // remove tmp folder
       __rimraf.sync(tmpDir);
@@ -138,6 +142,13 @@ module.exports = async (args = {}) => {
         const result = renderTemplate(content, templateData);
         res.send(result);
       }
+    } else {
+      res.send(`You need to create at least one of these files:
+      <ul>
+        <li>${indexHtmlPath}</li>
+        <li>${indexViewPath}</li>
+      </ul>
+      `);
     }
   });
 

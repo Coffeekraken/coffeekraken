@@ -1,6 +1,4 @@
 const __SExpressServerCli = require('../express/SExpressServerCli');
-const __packageRoot = require('../../path/packageRoot');
-const __sugarConfig = require('../../config/sugar');
 
 /**
  * @name            SFrontendServerCli
@@ -24,6 +22,18 @@ module.exports = class SFrontendServerCli extends __SExpressServerCli {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   static command = 'sugar server.frontend [arguments]';
+
+  /**
+   * @name          prepareCommand
+   * @type          String
+   * @static
+   *
+   * Store a command that you want to launch before the actual one
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static prepareCommand = 'sugar util.kill server.frontend';
+  static cleanCommand = 'sugar util.kill server.frontend';
 
   /**
    * @name          definitionObj
@@ -67,15 +77,15 @@ module.exports = class SFrontendServerCli extends __SExpressServerCli {
   ) {
     const process = super.run(argsObj, includeAllArgs, false);
 
-    setTimeout(() => {
+    process.on('start', () => {
       this.log(`<green>Your Frontend Express server is up and running</green>:
 
-Hostname        : <yellow>${this.runningArgsObj.hostname}</yellow>
-Port            : <yellow>${this.runningArgsObj.port}</yellow>
-Root directory  : <yellow>${this.runningArgsObj.rootDir}</yellow>
-Views directory : <yellow>${this.runningArgsObj.viewsDir}</yellow>
-Views engine    : <yellow>${this.runningArgsObj.viewEngine}</yellow>
-URL             : <cyan>http://${this.runningArgsObj.hostname}:${this.runningArgsObj.port}</cyan>`);
+  Hostname        : <yellow>${this.runningArgsObj.hostname}</yellow>
+  Port            : <yellow>${this.runningArgsObj.port}</yellow>
+  Root directory  : <yellow>${this.runningArgsObj.rootDir}</yellow>
+  Views directory : <yellow>${this.runningArgsObj.viewsDir}</yellow>
+  Views engine    : <yellow>${this.runningArgsObj.viewEngine}</yellow>
+  URL             : <cyan>http://${this.runningArgsObj.hostname}:${this.runningArgsObj.port}</cyan>`);
     });
     return process;
   }

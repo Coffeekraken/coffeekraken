@@ -6,9 +6,8 @@ const __sugarConfig = require('../../node/config/sugar');
 
 module.exports = (stringArgs = '') => {
   if (__isChildProcess()) {
-    const server = __frontendServer(
-      __argsToObject(stringArgs, __FrontendServerCli.definitionObj)
-    );
+    const server = __frontendServer();
+    __argsToObject(stringArgs, __FrontendServerCli.definitionObj);
     return;
   }
   const cli = new __FrontendServerCli();

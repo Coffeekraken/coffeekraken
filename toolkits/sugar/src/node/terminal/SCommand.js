@@ -252,6 +252,8 @@ module.exports = class SCommand extends __SPromise {
           argsObj: {},
           concurrent: false,
           color: 'white',
+          before: null,
+          after: null,
           title: null,
           notification: {
             successIconPath: __path.join(
@@ -702,6 +704,14 @@ module.exports = class SCommand extends __SPromise {
 
     if (this._settings.watch) this.unwatch();
 
+    // check if we have a before function to launch
+    if (this._settings.before && typeof this._settings.before === 'function') {
+      const result = await this._settings.before(this);
+      if (result !== true) {
+        throw new Error(result);
+      }
+    }
+
     clearTimeout(this._currentProcessSuccessTimeout);
     this._currentProcess = {};
 
@@ -791,6 +801,14 @@ module.exports = class SCommand extends __SPromise {
 
     __SPromise.pipe(this._currentProcess.childProcessPromise, promise, {});
     __SPromise.pipe(this._currentProcess.childProcessPromise, this, {});
+
+    // check if we have an after function to launch
+    if (this._settings.after && typeof this._settings.after === 'function') {
+      const result = await this._settings.after(this);
+      if (result !== true) {
+        throw new Error(result);
+      }
+    }
 
     // return the promise
     return promise;

@@ -103,7 +103,9 @@ module.exports = class SProcessOutput extends __SComponent {
       })
       .on('stderr.data', (data) => {
         if (data.error) {
-          this.log(`<red>${data.error.message}</red>`);
+          if (data.error.message) {
+            this.log(`<red>${data.error.message}</red>`);
+          }
           if (data.error.stack) this.log(data.error.stack);
           if (data.error.trace) this.log(data.error.trace);
         } else {
@@ -123,6 +125,20 @@ module.exports = class SProcessOutput extends __SComponent {
         this.log(data.error ? data.error : data);
         this.update();
       });
+  }
+
+  /**
+   *
+   * @name          clear
+   * @type          Function
+   *
+   * This method simply clear the output
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  clear() {
+    this._logBox.setContent('');
   }
 
   /**

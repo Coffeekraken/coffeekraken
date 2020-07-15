@@ -244,13 +244,44 @@ module.exports = class SCli {
       );
     }
     argsObj = __argsToObject(argsObj, this.definitionObj);
-
     const commandLine = this.toString(argsObj, includeAllArgs);
     this._runningArgsObj = Object.assign({}, argsObj);
-    this._childProcess = __spawn(commandLine).on('cancel,finally', () => {
+    this._childProcess = __spawn(commandLine, {
+      lazy: this.constructor.prepareCommand !== undefined
+    }).on('cancel,finally', () => {
       this._runningArgsObj = null;
       this._childProcess = null;
     });
+
+    this._childProcess.on('error', (e) => {});
+
+    if (this.constructor.prepareCommand) {
+      setTimeout(async () => {
+        // launch the prepare command
+        this.log(`Preparing the process to be correctly executed...`);
+        const result = await __spawn(this.constructor.prepareCommand);
+        if (this._output) this._output.clear();
+        this._childProcess.run();
+      });
+    }
+
+    process.stdin.resume();
+    process.on('exit', () => {
+      setTimeout(() => {
+        console.log('CLOSE');
+        process.exit();
+      }, 1000);
+    });
+
+    if (this.constructor.cleanCommand) {
+      this._childProcess.on('close', async () => {
+        // launch the prepare command
+        this.log(`Cleaning the system after command execution...`);
+        const result = await __spawn(this.constructor.cleanCommand);
+        if (this._output) this._output.clear();
+      });
+    }
+
     return this._childProcess;
   }
 
@@ -281,8 +312,8 @@ module.exports = class SCli {
     includeAllArgs = this._settings.includeAllArgs
   ) {
     const serverProcess = this.run(argsObj, includeAllArgs);
-    const output = new __SProcessOutput(serverProcess, {});
-    output.attach();
+    this._output = new __SProcessOutput(serverProcess, {});
+    this._output.attach();
     return serverProcess;
   }
 

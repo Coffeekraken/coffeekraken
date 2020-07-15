@@ -18,6 +18,9 @@ const __getRegisteredProcesses = require('./getRegisteredProcesses');
  * @param       {Array|Object}    [argsOrSettings=null]     Either an Array of args, or an object of settings
  * @param       {Object}        [settings=null]               An object of settings for your spawn command. This is the same as the settings of the native spawn
  *
+ * @TODO        settings documentation
+ * @TODO        API documentation (isClosed, etc...)
+ *
  * @example       js
  * const spawn = require('@coffeekraken/sugar/node/process/spawn');
  *
@@ -42,32 +45,44 @@ module.exports = function spawn(
     args: Array.isArray(argsOrSettings) ? argsOrSettings : []
   };
 
-  const promise = new __SPromise((resolve, reject, trigger, cancel) => {
-    const defaultSettings = {
-      shell: true,
-      // detached: true,
-      // stdio: 'inherit',
-      env: {
-        ...process.env,
-        IS_CHILD_PROCESS: true
-      }
-    };
-    if (typeof argsOrSettings === 'object') {
-      argsOrSettings = __deepMerge(defaultSettings, argsOrSettings);
+  let argsArray = [];
+  const defaultSettings = {
+    lazy: false,
+    shell: true,
+    env: {
+      ...process.env,
+      IS_CHILD_PROCESS: true
     }
-    if (typeof settings === 'object') {
-      settings = __deepMerge(defaultSettings, settings);
-    }
+  };
+  if (typeof argsOrSettings === 'object') {
+    settings = __deepMerge(defaultSettings, argsOrSettings);
+  } else if (Array.isArray(argsOrSettings)) {
+    argsArray = argsOrSettings;
+  }
+  if (typeof settings === 'object') {
+    settings = __deepMerge(defaultSettings, settings);
+  }
 
-    childProcess = __childProcess.spawn(command, argsOrSettings, settings);
+  const promise = new __SPromise((resolve, reject, trigger, cancel) => {
+    // check if not lazy
+    if (settings.lazy === false) run();
+  }).on('cancel,finally', () => {});
+
+  function run() {
+    const spawnSettings = Object.assign({}, settings);
+    delete spawnSettings.lazy;
+    childProcess = __childProcess.spawn(command, argsArray, spawnSettings);
     // runningProcess.childProcess = childProcess;
     // __hotkey('ctrl+c').on('press', () => {
     //   // childProcess.kill();
     // });
 
+    // save the process
+    __registerProcess(childProcess);
+
     // start
     runningProcess.state = 'running';
-    trigger('start', {
+    promise.trigger('start', {
       time: Date.now(),
       process: runningProcess
     });
@@ -76,21 +91,23 @@ module.exports = function spawn(
     childProcess.on('close', (code, signal) => {
       runningProcess.end = Date.now();
       runningProcess.duration = runningProcess.end - runningProcess.start;
-      trigger('close', {
-        code,
-        signal,
-        time: Date.now(),
-        process: runningProcess
-      });
-      if (!code && signal) {
-        runningProcess.state = 'killed';
-        trigger('kill', {
+      if (!global.isExitCleanupProcess) {
+        promise.trigger('close', {
           code,
           signal,
           time: Date.now(),
           process: runningProcess
         });
-        reject({
+      }
+      if (!code && signal) {
+        runningProcess.state = 'killed';
+        promise.trigger('kill', {
+          code,
+          signal,
+          time: Date.now(),
+          process: runningProcess
+        });
+        promise.reject({
           code,
           signal,
           time: Date.now(),
@@ -98,13 +115,13 @@ module.exports = function spawn(
         });
       } else if (code === 0 && !signal) {
         runningProcess.state = 'success';
-        trigger('success', {
+        promise.trigger('success', {
           code,
           signal,
           time: Date.now(),
           process: runningProcess
         });
-        resolve({
+        promise.resolve({
           code,
           signal,
           time: Date.now(),
@@ -112,13 +129,15 @@ module.exports = function spawn(
         });
       } else {
         runningProcess.state = 'error';
-        trigger('error', {
+        promise.trigger('error', {
+          error: runningProcess.stderr.join('\n'),
           code,
           signal,
           time: Date.now(),
           process: runningProcess
         });
-        reject({
+        promise.reject({
+          error: runningProcess.stderr.join('\n'),
           code,
           signal,
           time: Date.now(),
@@ -132,12 +151,12 @@ module.exports = function spawn(
       runningProcess.end = Date.now();
       runningProcess.duration = runningProcess.end - runningProcess.start;
       runningProcess.state = 'error';
-      trigger('error', {
+      promise.trigger('error', {
         error,
         time: Date.now(),
         process: runningProcess
       });
-      reject({
+      promise.reject({
         error,
         time: Date.now(),
         process: runningProcess
@@ -147,7 +166,7 @@ module.exports = function spawn(
     // stdout data
     childProcess.stdout.on('data', (value) => {
       runningProcess.stdout.push(value.toString());
-      trigger('stdout.data', {
+      promise.trigger('stdout.data', {
         process: runningProcess,
         time: Date.now(),
         value: value.toString()
@@ -157,18 +176,27 @@ module.exports = function spawn(
     // stderr data
     childProcess.stderr.on('data', (error) => {
       runningProcess.stderr.push(error.toString());
-      trigger('stderr.data', {
+      promise.trigger('stderr.data', {
         process: runningProcess,
         time: Date.now(),
         error: error.toString(),
         value: error.toString()
       });
     });
+  }
 
-    // save the process
-    __registerProcess(childProcess);
-  }).on('cancel,finally', () => {});
   // .start();
+
+  promise.run = run;
+
+  promise.isClosed = () => {
+    return (
+      runningProcess.state === 'killed' ||
+      runningProcess.state === 'success' ||
+      runningProcess.state === 'error'
+    );
+  };
+  promise.process = runningProcess;
 
   promise.log = (...args) => {
     args.forEach((arg) => {

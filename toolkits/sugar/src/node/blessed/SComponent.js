@@ -86,17 +86,40 @@ module.exports = class SComponent extends __blessed.box {
     // extends parent
     super(settings);
 
+    this._screen = __activeScreen;
+    global.screen = __activeScreen;
+
     // save the settings
     this._settings = settings;
 
+    let container;
     if (settings.container) {
-      const container = __blessed.box(settings.container);
+      container = __blessed.box(settings.container);
       __activeScreen.container = container;
       __activeScreen.append(container);
     }
 
-    this._screen = __activeScreen;
-    global.screen = __activeScreen;
+  __hotkey('ctrl+c', {
+    once: true
+  }).on('press', async () => {
+    setTimeout(() => {
+      const overlay = __blessed.box({
+        width: '100%', height: '100%',
+        top: 0, left: 0,
+        style: {
+          bg: 'black'
+        }
+      });
+      __activeScreen.append(overlay);
+      this._stopRendering = true;
+      if (container) {
+        __activeScreen.containr.detach();
+      }
+      __activeScreen.render();
+    });
+  });
+
+    
 
     if (this._settings.appendToScreen) {
       (__activeScreen.container || __activeScreen).append(this);

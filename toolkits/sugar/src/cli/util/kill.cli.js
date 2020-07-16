@@ -1,14 +1,31 @@
 const __parseHtml = require('../../node/terminal/parseHtml');
 const __fkill = require('fkill');
 const psList = require('ps-list');
+const __SPromise = require('../../node/promise/SPromise');
 
 module.exports = async (stringArgs = '') => {
+  // const promise = new __SPromise(() => {
+  //   console.log('COCO');
+  // });
+
+  // setTimeout(() => {
+  //   promise.resolve();
+  // });
+
+  // await promise;
+
+  // console.log('FINISHED');
+
+  // return;
+
   if (!stringArgs) {
     throw new Error(`You must specify a sugar process(s) to kill using the following format:
       - sugar util.kill server // this will kill all the sugar processes that starts with "server"
       - sugar util.kill server.frontend // this will kill the sugar process called "server.frontend"
       - sugar util.kill all // this will kill all the sugar processes
     `);
+  } else if (stringArgs.trim() === 'all') {
+    stringArgs = '';
   }
 
   const processesArray = [];
@@ -33,7 +50,7 @@ module.exports = async (stringArgs = '') => {
       return;
 
     let filterReg = new RegExp(
-      `^(.*)?sugar\\s()${stringArgs.split('.').join('\\.')}(.*?)$`,
+      `^(.*)?sugar\\s${stringArgs.split('.').join('\\.')}(.*?)$`,
       'gi'
     );
     if (!processObj.cmd.match(filterReg)) return;
@@ -56,7 +73,7 @@ module.exports = async (stringArgs = '') => {
     const processObj = processesArray[obj];
     console.log(
       __parseHtml(
-        `- Killing the process called <primary>${stringArgs}</primary> with the PID <cyan>${processObj.pid}</cyan>`
+        `Killing the process <primary>${processObj.cmd}</primary> with the PID <cyan>${processObj.pid}</cyan>`
       )
     );
     await __fkill(parseInt(processObj.pid), {

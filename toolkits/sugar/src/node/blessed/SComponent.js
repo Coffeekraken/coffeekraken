@@ -25,7 +25,13 @@ let __activeScreen = null;
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-let _isCtrlCInited = false;
+
+__hotkey('ctrl+c', {
+  once: true
+}).on('press', async () => {
+  if (!global.screen) return;
+  global.screen.destroy();
+});
 module.exports = class SComponent extends __blessed.box {
   /**
    * @name                  _settings
@@ -74,9 +80,7 @@ module.exports = class SComponent extends __blessed.box {
             right: 0,
             bottom: 0
           },
-          style: {
-            bg: 'red'
-          }
+          style: {}
         }
       });
     }
@@ -99,27 +103,12 @@ module.exports = class SComponent extends __blessed.box {
       __activeScreen.append(container);
     }
 
-  __hotkey('ctrl+c', {
-    once: true
-  }).on('press', async () => {
-    setTimeout(() => {
-      const overlay = __blessed.box({
-        width: '100%', height: '100%',
-        top: 0, left: 0,
-        style: {
-          bg: 'black'
-        }
-      });
-      __activeScreen.append(overlay);
-      this._stopRendering = true;
-      if (container) {
-        __activeScreen.containr.detach();
-      }
-      __activeScreen.render();
+    __hotkey('ctrl+c', {
+      once: true
+    }).on('press', async () => {
+      this._destroyed = true;
+      this.detach();
     });
-  });
-
-    
 
     if (this._settings.appendToScreen) {
       (__activeScreen.container || __activeScreen).append(this);
@@ -163,6 +152,20 @@ module.exports = class SComponent extends __blessed.box {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   update() {
+    if (this.isDestroyed()) return;
     if (this._screen) this._screen.render();
+  }
+
+  /**
+   * @name                  isDestroyed
+   * @type                  Function
+   *
+   * Check if the component (screen) has been destroyed
+   *
+   * @since         2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  isDestroyed() {
+    return this._destroyed === true;
   }
 };

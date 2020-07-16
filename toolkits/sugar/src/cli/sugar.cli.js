@@ -1,6 +1,7 @@
-#!/usr/bin/env node
+#!/usr/bin/env node --trace-warnings
 
 require('../node/index');
+const __isChildProcess = require('../node/is/childProcess');
 const __exitCleanup = require('../node/process/exitCleanup');
 
 /**
@@ -19,7 +20,9 @@ let action = command.split('.')[1] || null;
 const args = process.argv.slice(3).join(' ') || '';
 
 // handle clean exit
-__exitCleanup();
+if (!__isChildProcess()) {
+  __exitCleanup();
+}
 
 // if no action, try to get the default one
 if (!action) {

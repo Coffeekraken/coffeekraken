@@ -2,6 +2,7 @@ import __deepMerge from '../object/deepMerge';
 import __prettyError from 'pretty-error';
 import __minimatch from 'minimatch';
 import __wait from '../time/wait';
+import __uniqid from '../string/uniqid';
 
 /**
  * @name                  SPromise
@@ -236,12 +237,12 @@ export default class SPromise extends Promise {
     // extend settings
     this._settings = __deepMerge(
       {
+        id: __uniqid(),
         safeReject: true,
         cancelDefaultReturn: null
       },
       settings
     );
-
     setTimeout(() => {
       if (!this._isExecutorStarted) {
         this._executorFn(
@@ -901,7 +902,7 @@ export default class SPromise extends Promise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   catch(...args) {
-    // super.catch(...args);
+    super.catch(...args);
     return this._registerCallbackInStack('catch', ...args);
   }
 

@@ -13,9 +13,15 @@ var _minimatch = _interopRequireDefault(require("minimatch"));
 
 var _wait = _interopRequireDefault(require("../time/wait"));
 
+var _uniqid = _interopRequireDefault(require("../string/uniqid"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
@@ -292,6 +298,7 @@ let SPromise = /*#__PURE__*/function (_Promise) {
     _this._executorFn = executorFn; // extend settings
 
     _this._settings = (0, _deepMerge.default)({
+      id: (0, _uniqid.default)(),
       safeReject: true,
       cancelDefaultReturn: null
     }, settings);
@@ -964,7 +971,8 @@ let SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "catch",
     value: function _catch(...args) {
-      // super.catch(...args);
+      _get(_getPrototypeOf(SPromise.prototype), "catch", this).call(this, ...args);
+
       return this._registerCallbackInStack('catch', ...args);
     }
     /**

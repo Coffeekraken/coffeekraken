@@ -24,16 +24,15 @@ module.exports = class SFrontendServerCli extends __SExpressServerCli {
   static command = 'sugar server.frontend [arguments]';
 
   /**
-   * @name          prepareCommand
+   * @name          afterCommand
    * @type          String
    * @static
    *
-   * Store a command that you want to launch before the actual one
+   * Store a command that you want to launch after the actual one
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static prepareCommand = 'sugar util.kill server.frontend';
-  static cleanCommand = 'sugar util.kill server.frontend';
+  // static afterCommand = 'sugar util.kill server.frontend';
 
   /**
    * @name          definitionObj
@@ -58,7 +57,10 @@ module.exports = class SFrontendServerCli extends __SExpressServerCli {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(settings = {}) {
-    super(settings);
+    super({
+      id: 'server.frontend',
+      ...settings
+    });
   }
 
   /**

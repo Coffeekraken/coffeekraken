@@ -32,13 +32,10 @@ module.exports = function exitCleanup(handler = null, settings = {}) {
   __hotkey('ctrl+c', {
     once: true
   }).on('press', async () => {
-
-  // if (global.screen) global.screen.clearRegion(0, global.screen.width, 0, global.screen.height);
-  // __clear();
-
     // check if all processes are closed
     const processes = __getRegisteredProcessed();
     const processesCount = Object.keys(processes).length;
+
     let remainingProcessesCount = Object.keys(processes).length;
 
     console.log(
@@ -50,24 +47,43 @@ module.exports = function exitCleanup(handler = null, settings = {}) {
     async function processKilled() {
       remainingProcessesCount--;
       if (remainingProcessesCount <= 0) {
-        await __spawn('sugar util.kill all');
-        console.log('\00');
-        console.log(
-          __parseHtml(
-            `  All of the <cyan>${processesCount}</cyan> process(es) have been <green>successfully</green> closed`
-          )
-        );
-        setTimeout(() => {
-          process.exit();
-        }, 2000);
+        console.log(__parseHtml('  Cleaning the forgotten process(es)...'));
+        const pro = __spawn('sugar util.kill all', {
+          id: 'cleanup'
+        })
+          .on('stdout.data,stderr.data', (value) => {
+            console.log(__parseHtml(`    - ${value.value}`));
+          })
+          .on('cancel,finally', () => {
+            console.log(
+              __parseHtml(
+                `  All of the <cyan>${processesCount}</cyan> process(es) have been <green>successfully</green> closed`
+              )
+            );
+            process.exit();
+          });
       }
     }
 
     if (remainingProcessesCount > 0) {
       Object.keys(processes).forEach(async (key) => {
         const processObj = processes[key];
-        if (!processObj.exitCode && process.pid !== processObj.pid) {
-          console.log('\00');
+        if (processObj.hasAfterCommand()) {
+          function waitForClose() {
+            const p = new Promise((resolve) => {
+              processObj
+                .on('close', () => {
+                  resolve();
+                })
+                .on('stdout.data,stderr.data', (value) => {
+                  console.log(__parseHtml(`  ${value.value}`));
+                });
+            });
+            return p;
+          }
+          await waitForClose();
+          processKilled();
+        } else if (!processObj.exitCode && process.pid !== processObj.pid) {
           console.log(
             __parseHtml(
               `  Killing the process with the PID <cyan>${processObj.pid}</cyan>`
@@ -80,65 +96,19 @@ module.exports = function exitCleanup(handler = null, settings = {}) {
         }
       });
     } else {
-      await __spawn('sugar util.kill all');
-      process.exit();
+      console.log(__parseHtml('  Cleaning the forgotten process(es)...'));
+      await __spawn('sugar util.kill all')
+        .on('stdout.data,stderr.data', (value) => {
+          console.log(__parseHtml(`    - ${value.value}`));
+        })
+        .on('cancel,finally', () => {
+          console.log(
+            __parseHtml(
+              `  All of the <cyan>${processesCount}</cyan> process(es) have been <green>successfully</green> closed`
+            )
+          );
+          process.exit();
+        });
     }
   });
-
-  // settings = __deepMerge(
-  //   {
-  //     childProcess: true
-  //   },
-  //   settings
-  // );
-
-  // function tkill(pid) {
-  //   return new Promise((resolve, reject) => {
-  //     __tkill(pid, 'SIGTERM', () => {
-  //       resolve();
-  //     });
-  //   });
-  // }
-
-  // async function terminate() {
-  //   // handle the custom cleanup if their's one
-  //   if (handler) await handler();
-
-  //   // clean the child process
-  //   if (settings.childProcess) {
-  //     const processesNames = Object.keys(__getRegisteredProcessed());
-  //     for (let i = 0; i < processesNames.length; i++) {
-  //       const processInstance = __getRegisteredProcessed()[processesNames[i]];
-  //       if (!processInstance) continue;
-  //       const pid = processInstance.pid;
-  //       if (pid) {
-  //         await tkill(pid);
-  //       }
-  //     }
-  //   }
-  //   // we can not shut the process down
-  //   return true;
-  // }
-
-  // __hotkey('ctrl+c', {
-  //   once: true
-  // }).on('press', async () => {
-  //   await terminate();
-  //   process.exit();
-  // });
-
-  // // do something when app is closing
-  // [
-  //   `exit`,
-  //   // `SIGINT`,
-  //   `SIGUSR1`,
-  //   `SIGUSR2`,
-  //   // `uncaughtException`,
-  //   `SIGTERM`
-  // ].forEach((eventName) => {
-  //   process.on(eventName, async () => {
-  //     await terminate();
-  //     process.exit();
-  //   });
-  // });
 };

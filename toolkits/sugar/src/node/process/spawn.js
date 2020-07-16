@@ -6,6 +6,8 @@ const __hotkey = require('../keyboard/hotkey');
 const __tkill = require('tree-kill');
 const __registerProcess = require('./registerProcess');
 const __getRegisteredProcesses = require('./getRegisteredProcesses');
+const __wait = require('../time/wait');
+const __clone = require('../object/clone');
 
 /**
  * @name                                spawn
@@ -48,6 +50,8 @@ module.exports = function spawn(
   let argsArray = [];
   const defaultSettings = {
     lazy: false,
+    before: null,
+    after: null,
     shell: true,
     env: {
       ...process.env,
@@ -63,22 +67,87 @@ module.exports = function spawn(
     settings = __deepMerge(defaultSettings, settings);
   }
 
-  const promise = new __SPromise((resolve, reject, trigger, cancel) => {
-    // check if not lazy
-    if (settings.lazy === false) run();
-  }).on('cancel,finally', () => {});
+  if (settings.id) runningProcess.id = settings.id;
 
-  function run() {
-    const spawnSettings = Object.assign({}, settings);
+  const promise = new __SPromise(
+    (resolve, reject, trigger, cancel) => {
+      // check if not lazy
+      if (settings.lazy === false) run();
+    },
+    {
+      id: runningProcess.id
+    }
+  );
+
+  function runBeforeAfterCommand(
+    when,
+    command,
+    argsArray = [],
+    spawnSettings = {}
+  ) {
+    const pro = new Promise(async (resolve, reject) => {
+      let result = true;
+      promise.trigger(`${when}.start`, {
+        time: Date.now()
+      });
+
+      promise.log(`Cleaning the <cyan>${runningProcess.id}</cyan>...`);
+
+      if (typeof settings[when] === 'function') {
+        result = await settings[when](command, argsArray, spawnSettings);
+      } else if (typeof settings[when] === 'string') {
+        const pro = spawn(settings[when], [], {
+          id: settings.id + '.' + when,
+          ...spawnSettings
+        }).start();
+        pro.on('stdout.data,stderr.data', (value) => {
+          if (!value) return;
+          value.value = `  - ${value.value}`;
+          promise.trigger('stdout.data', value);
+        });
+        // __SPromise.pipe(pro, promise, {
+        //   stacks: 'stdout.data,stderr.data'
+        // });
+        result = await pro;
+      }
+
+      await __wait(1500);
+      promise.trigger(`${when}.end`, {
+        time: Date.now()
+      });
+
+      resolve(result);
+    });
+    return pro;
+  }
+
+  async function run() {
+    const spawnSettings = __clone(settings);
     delete spawnSettings.lazy;
+    delete spawnSettings.before;
+    delete spawnSettings.after;
+    delete spawnSettings.id;
+
+    if (settings.before) {
+      const res = await runBeforeAfterCommand(
+        'before',
+        command,
+        [],
+        spawnSettings
+      );
+    }
+
     childProcess = __childProcess.spawn(command, argsArray, spawnSettings);
+    promise.childProcess = childProcess;
     // runningProcess.childProcess = childProcess;
-    // __hotkey('ctrl+c').on('press', () => {
-    //   // childProcess.kill();
-    // });
+    __hotkey('ctrl+c', {
+      once: true
+    }).on('press', () => {
+      childProcess.kill();
+    });
 
     // save the process
-    __registerProcess(childProcess);
+    __registerProcess(promise);
 
     // start
     runningProcess.state = 'running';
@@ -91,14 +160,26 @@ module.exports = function spawn(
     childProcess.on('close', (code, signal) => {
       runningProcess.end = Date.now();
       runningProcess.duration = runningProcess.end - runningProcess.start;
-      if (!global.isExitCleanupProcess) {
+
+      const resolveOrReject = async (what, extendObj = {}) => {
+        if (settings.after) {
+          await runBeforeAfterCommand('after', command, [], spawnSettings);
+        }
         promise.trigger('close', {
           code,
           signal,
           time: Date.now(),
           process: runningProcess
         });
-      }
+        promise[what]({
+          ...extendObj,
+          code,
+          signal,
+          time: Date.now(),
+          process: runningProcess
+        });
+      };
+
       if (!code && signal) {
         runningProcess.state = 'killed';
         promise.trigger('kill', {
@@ -107,12 +188,7 @@ module.exports = function spawn(
           time: Date.now(),
           process: runningProcess
         });
-        promise.reject({
-          code,
-          signal,
-          time: Date.now(),
-          process: runningProcess
-        });
+        resolveOrReject('reject');
       } else if (code === 0 && !signal) {
         runningProcess.state = 'success';
         promise.trigger('success', {
@@ -121,12 +197,7 @@ module.exports = function spawn(
           time: Date.now(),
           process: runningProcess
         });
-        promise.resolve({
-          code,
-          signal,
-          time: Date.now(),
-          process: runningProcess
-        });
+        resolveOrReject('resolve');
       } else {
         runningProcess.state = 'error';
         promise.trigger('error', {
@@ -136,12 +207,8 @@ module.exports = function spawn(
           time: Date.now(),
           process: runningProcess
         });
-        promise.reject({
-          error: runningProcess.stderr.join('\n'),
-          code,
-          signal,
-          time: Date.now(),
-          process: runningProcess
+        resolveOrReject('reject', {
+          error: runningProcess.stderr.join('\n')
         });
       }
     });
@@ -156,10 +223,8 @@ module.exports = function spawn(
         time: Date.now(),
         process: runningProcess
       });
-      promise.reject({
-        error,
-        time: Date.now(),
-        process: runningProcess
+      resolveOrReject({
+        error
       });
     });
 
@@ -183,11 +248,14 @@ module.exports = function spawn(
         value: error.toString()
       });
     });
+
+    // return the promise
+    return promise;
   }
 
-  // .start();
-
   promise.run = run;
+
+  promise.hasAfterCommand = () => settings.after !== null;
 
   promise.isClosed = () => {
     return (

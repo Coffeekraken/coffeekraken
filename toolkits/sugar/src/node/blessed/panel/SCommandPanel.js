@@ -69,15 +69,15 @@ module.exports = class SCommandPanel extends __SComponent {
   $log = null;
 
   /**
-   * @name          _namespace
+   * @name          _displayedCommands
    * @type          String
    * @private
    *
-   * Store the current displayed namespace
+   * Store the current displayed commands
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _namespace = null;
+  _displayedCommands = [];
 
   /**
    * @name          _updateListInterval
@@ -135,13 +135,20 @@ module.exports = class SCommandPanel extends __SComponent {
     this._subscribeToCommandsEvents();
 
     // init filter popup
-    this._initFilterPopup();
+    // this._initFilterPopup();
 
     // generate the UI
     this._generateUI();
 
+    // add the first commands in the display list
+    this._displayedCommands.push(this._commands[0]);
+
     // update the list continusly
     this._updateListInterval = setInterval(this._updateList.bind(this), 100);
+
+    this.screen.on('destroy', () => {
+      clearInterval(this._updateListInterval);
+    });
   }
 
   /**
@@ -198,30 +205,30 @@ module.exports = class SCommandPanel extends __SComponent {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _initFilterPopup() {
-    let inputPopup;
-    __hotkey('shift+n', {
-      active: () => {
-        return this.parent !== null;
-      }
-    }).on('press', () => {
-      if (inputPopup && inputPopup.parent) return;
-      inputPopup = new __SInputPopup({
-        id: 'filterCommandsByNamespace',
-        title: 'Filter commands by namespace',
-        $input: {
-          placeholder: this._namespace
-        }
-      });
-      inputPopup.promise.on('resolve', (value) => {
-        // change page
-        // emit an event
-        this.promise.trigger('namespace', value);
-        // this.filterByNamespace(value);
-      });
-      this.append(inputPopup);
-    });
-  }
+  // _initFilterPopup() {
+  //   let inputPopup;
+  //   __hotkey('shift+n', {
+  //     active: () => {
+  //       return this.parent !== null;
+  //     }
+  //   }).on('press', () => {
+  //     if (inputPopup && inputPopup.parent) return;
+  //     inputPopup = new __SInputPopup({
+  //       id: 'filterCommandsByNamespace',
+  //       title: 'Filter commands by namespace',
+  //       $input: {
+  //         placeholder: this._namespace
+  //       }
+  //     });
+  //     inputPopup.promise.on('resolve', (value) => {
+  //       // change page
+  //       // emit an event
+  //       this.promise.trigger('namespace', value);
+  //       // this.filterByNamespace(value);
+  //     });
+  //     this.append(inputPopup);
+  //   });
+  // }
 
   /**
    * @name          summary
@@ -344,8 +351,8 @@ module.exports = class SCommandPanel extends __SComponent {
     });
 
     this.$list = __blessed.list({
-      width: '20%-1',
-      top: 1,
+      width: '15%-1',
+      top: 0,
       left: 0,
       right: 0,
       bottom: 0,
@@ -377,10 +384,21 @@ module.exports = class SCommandPanel extends __SComponent {
     });
     this.$list.on('select', (e, i) => {
       this.$list.items.forEach((item, j) => {
-        if (i === j) item.selected = true;
-        else delete item.selected;
+        if (i === j) {
+          item.selected = true;
+          this._displayedCommands.push(item.commandInstance);
+        } else if (!this._multiSelect) {
+          const displayCommandIdx = this._displayedCommands.indexOf(
+            item.commandInstance
+          );
+          if (displayCommandIdx !== -1) {
+            this._displayedCommands.splice(displayCommandIdx, 1);
+          }
+          delete item.selected;
+        }
       });
       this._updateList();
+      this.update();
     });
     this.$list.items[0].active = true;
     this.$list.items[0].selected = true;
@@ -389,10 +407,40 @@ module.exports = class SCommandPanel extends __SComponent {
       left: 1
     };
 
+    let pressTimeout, pressInitialiser;
+    const pressed = () => {
+      this._multiSelect = true;
+      setTimeout(() => {
+        this._multiSelect = false;
+      });
+    };
+    __hotkey('tab').on('press', () => {
+      if (!pressTimeout) {
+        pressInitialiser = 'tab';
+        pressTimeout = setTimeout(() => {
+          pressTimeout = null;
+          pressInitialiser = null;
+        }, 300);
+      } else if (pressInitialiser !== 'tab') {
+        pressed();
+      }
+    });
+    __hotkey('return').on('press', () => {
+      if (!pressTimeout) {
+        pressInitialiser = 'return';
+        pressTimeout = setTimeout(() => {
+          pressTimeout = null;
+          pressInitialiser = null;
+        }, 300);
+      } else if (pressInitialiser !== 'return') {
+        pressed();
+      }
+    });
+
     this.$log = __blessed.box({
-      width: '80%',
-      top: 1,
-      left: '20%',
+      width: '85%+1',
+      top: 0,
+      left: '15%',
       right: 0,
       bottom: 0,
       style: {
@@ -460,6 +508,7 @@ module.exports = class SCommandPanel extends __SComponent {
   _updateList() {
     this._commands.forEach((commandInstance, i) => {
       const item = this.$list.getItem(i);
+      if (!item.commandInstance) item.commandInstance = commandInstance;
 
       if (!item.$key) {
         item.$key = __blessed.box({
@@ -549,13 +598,19 @@ module.exports = class SCommandPanel extends __SComponent {
         item.$state.setContent('-');
       }
 
-      const spaces =
+      // if (item.active) {
+      //   name = '═ ' + name;
+      // }
+
+      let spaces = Math.round(
         this.$list.width -
-        item.padding.left -
-        item.padding.right -
-        __countLine(name) -
-        __countLine(key) -
-        1;
+          item.padding.left -
+          item.padding.right -
+          __countLine(name) -
+          __countLine(key) -
+          1
+      );
+      if (spaces < 0) spaces = 0;
 
       name = name + ' '.repeat(spaces) + key;
 
@@ -563,9 +618,9 @@ module.exports = class SCommandPanel extends __SComponent {
         // item.$key.style.fg = __color('terminal.white').toString();
         // item.$key.style.bg = __color('terminal.black').toString();
         item.$key.style.fg = __color('terminal.black').toString();
-        item.$key.style.bg = __color('terminal.white').toString();
+        item.$key.style.bg = __color('terminal.primary').toString();
         item.$state.style.fg = __color('terminal.black').toString();
-        item.$state.style.bg = __color('terminal.white').toString();
+        item.$state.style.bg = __color('terminal.primary').toString();
         // item.$state.style.bg = __color('terminal.black').toString();
       } else {
         item.$key.style.fg = __color('terminal.white').toString();
@@ -577,12 +632,12 @@ module.exports = class SCommandPanel extends __SComponent {
       }
 
       if (item.active && !item.selected) {
-        item.style.fg = __color('terminal.black').toString();
-        item.style.bg = __color('terminal.white').toString();
-        item.$state.style.fg = __color('terminal.black').toString();
-        item.$state.style.bg = __color('terminal.white').toString();
-        item.$key.style.fg = __color('terminal.black').toString();
-        item.$key.style.bg = __color('terminal.white').toString();
+        item.style.fg = __color('terminal.primary').toString();
+        item.style.bg = __color('terminal.black').toString();
+        item.$state.style.fg = __color('terminal.primary').toString();
+        item.$state.style.bg = __color('terminal.black').toString();
+        item.$key.style.fg = __color('terminal.primary').toString();
+        item.$key.style.bg = __color('terminal.black').toString();
       } else if (commandInstance.state === 'running') {
         if (item.active || item.selected) {
           item.style.fg = __color('terminal.black').toString();
@@ -663,7 +718,7 @@ module.exports = class SCommandPanel extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _updateCommandBoxesStyle() {
-    this._commands.forEach((commandInstance) => {
+    this._displayedCommands.forEach((commandInstance) => {
       const lastProcessObj = commandInstance.lastProcessObj;
       let boxObj = this._boxesObjectsMap.get(commandInstance);
 
@@ -950,7 +1005,7 @@ module.exports = class SCommandPanel extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _updateCommandBoxesContent() {
-    this._commands.forEach((commandInstance, i) => {
+    this._displayedCommands.forEach((commandInstance, i) => {
       const boxObj = this._boxesObjectsMap.get(commandInstance);
       const lastProcessObj = commandInstance.lastProcessObj;
 
@@ -1000,16 +1055,26 @@ module.exports = class SCommandPanel extends __SComponent {
   _updateCommandBoxesLayout() {
     let currentTop = 0;
 
-    this._commands.forEach((commandInstance, i) => {
+    this._commands.forEach((commandInstance) => {
+      let boxObj = this._boxesObjectsMap.get(commandInstance);
+      if (this._displayedCommands.indexOf(commandInstance) === -1) {
+        if (!boxObj.$box) return;
+        boxObj.$box.detach();
+      } else {
+        this.$log.append(boxObj.$box);
+      }
+    });
+
+    this._displayedCommands.forEach((commandInstance, i) => {
       const boxObj = this._boxesObjectsMap.get(commandInstance);
       const lastProcessObj = commandInstance.lastProcessObj;
       let layout = 'default';
-      if (this._commands.length === 2) layout = 'two';
-      if (this._commands.length === 3) layout = 'three';
-      if (this._commands.length === 4) layout = 'four';
-      if (this._commands.length === 5) layout = 'five';
-      if (this._commands.length === 6) layout = 'six';
-      if (this._commands.length === 7) layout = 'seven';
+      if (this._displayedCommands.length === 2) layout = 'two';
+      if (this._displayedCommands.length === 3) layout = 'three';
+      if (this._displayedCommands.length === 4) layout = 'four';
+      if (this._displayedCommands.length === 5) layout = 'five';
+      if (this._displayedCommands.length === 6) layout = 'six';
+      if (this._displayedCommands.length === 7) layout = 'seven';
 
       let width, height, top, left, right, bottom;
 
@@ -1131,6 +1196,8 @@ module.exports = class SCommandPanel extends __SComponent {
   }
 
   update() {
+    if (this.isDestroyed()) return;
+
     // init and update command boxes
     this._updateCommandBoxesStyle();
 

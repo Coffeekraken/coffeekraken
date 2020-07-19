@@ -66,6 +66,7 @@ module.exports = function hotkey(key, settings = {}) {
           if (__activeSpace.is('**.form.*')) return;
         }
         if (obj.settings.activeSpace) {
+          console.log('act', obj.settings.activeSpace);
           if (!__activeSpace.is(obj.settings.activeSpace)) return;
         }
         // check if an "active" function exists

@@ -1,5 +1,4 @@
 import __deepMerge from '../object/deepMerge';
-import __prettyError from 'pretty-error';
 import __minimatch from 'minimatch';
 import __wait from '../time/wait';
 import __uniqid from '../string/uniqid';

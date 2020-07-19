@@ -7,8 +7,6 @@ exports.default = void 0;
 
 var _deepMerge = _interopRequireDefault(require("../object/deepMerge"));
 
-var _prettyError = _interopRequireDefault(require("pretty-error"));
-
 var _minimatch = _interopRequireDefault(require("minimatch"));
 
 var _wait = _interopRequireDefault(require("../time/wait"));

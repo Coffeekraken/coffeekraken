@@ -41,17 +41,8 @@ module.exports = class STermAppCommandsPage extends __SAppPage {
     const panel = new __SCommandPanel('+(build|server).**');
     this.append(panel);
 
-    // listen for namespace filtering
-    panel.promise.on('namespace', (namespace) => {
-      this.app.goTo(`/commands/${namespace}`);
-    });
-
     __hotkey('backspace').on('press', () => {
       this.app.back();
-    });
-
-    this.on('arg.namespace', (argObj) => {
-      panel.filterByNamespace(argObj.newValue || '');
     });
   }
 };

@@ -273,7 +273,8 @@ module.exports = class SCommand extends __SPromise {
           watch: null,
           key: null,
           namespace: null,
-          activeSpace: null
+          activeSpace: null,
+          onKeyPress: null
         },
         settings
       )
@@ -466,6 +467,11 @@ module.exports = class SCommand extends __SPromise {
     __hotkey(`${this._settings.key}`, {
       activeSpace: this._settings.activeSpace || null
     }).on('press', (keyObj) => {
+      if (
+        this._settings.onKeyPress &&
+        this._settings.onKeyPress(this) === false
+      )
+        return;
       if (this.isRunning() && !this._settings.concurrent) {
         this.kill();
       } else if (!this.isRunning()) {
@@ -475,6 +481,11 @@ module.exports = class SCommand extends __SPromise {
     __hotkey(`shift+${this._settings.key}`, {
       activeSpace: this._settings.activeSpace || null
     }).on('press', async (keyObj) => {
+      if (
+        this._settings.onKeyPress &&
+        this._settings.onKeyPress(this) === false
+      )
+        return;
       if (this.isRunning() && !this._settings.concurrent) {
         this.kill();
       } else if (!this.isRunning()) {

@@ -11,11 +11,11 @@ module.exports = {
   features: {
     commands: [
       'server.frontend',
-      // 'build.config',
+      'build.config',
       'build.scss',
-      'build.js'
-      // 'build.views',
-      // 'build.doc'
+      'build.js',
+      'build.views',
+      'build.doc'
     ]
   },
   footer: {

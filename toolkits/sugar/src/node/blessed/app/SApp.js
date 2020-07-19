@@ -324,19 +324,6 @@ module.exports = class SApp extends __SComponent {
       if (this.config('features.commands').indexOf(commandName) === -1) return;
 
       const commandObj = commandsObj[commandName];
-      commandObj.settings.namespace = commandName.toLowerCase();
-      if (!commandObj.settings.activeSpace) {
-        // const split = commandName.split('.');
-        // let current = '',
-        //   activeSpacesArray = [];
-        // split.forEach((part) => {
-        //   activeSpacesArray.push([...activeSpacesArray, part].join('.'));
-        // });
-        commandObj.settings.activeSpace = '+(commands|commands.**)';
-        // commandObj.settings.activeSpace = `commands.+(${activeSpacesArray.join(
-        //   '|'
-        // )})`;
-      }
       if (!__fs.existsSync(commandObj.path.replace('.js', '') + '.js'))
         throw new Error(
           `SApp: You try to load a command class using the path "${commandObj.path}" but no file exists at this location...`

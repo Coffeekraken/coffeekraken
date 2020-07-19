@@ -13,6 +13,7 @@ const __transitionObjectProperties = require('../../transition/objectProperties'
 const __SPopup = require('../../blessed/popup/SPopup');
 const __hotkey = require('../../keyboard/hotkey');
 const __SInputPopup = require('../popup/SInputPopup');
+const __activeSpace = require('../../core/activeSpace');
 
 /**
  * @name                  SCommandPanel
@@ -119,9 +120,20 @@ module.exports = class SCommandPanel extends __SComponent {
     }
 
     // generate the panel object for each commands
-    this._commands.forEach((commandInstance) => {
+    this._commands.forEach((commandInstance, i) => {
+      __hotkey(`${commandInstance.key}`).on('press', () => {
+        __activeSpace.set(`SCommandPanel.${commandInstance.key}`);
+        this._selectListItem(i);
+      });
+      commandInstance._settings.onKeyPress = (instance) => {
+        if (__activeSpace.is(`SCommandPanel.${commandInstance.key}`))
+          return true;
+        return false;
+      };
       this._boxesObjectsMap.set(commandInstance, {});
     });
+    // set the first active space to the first command key
+    __activeSpace.set(`SCommandPanel.${this._commands[0].key}`);
 
     // pipe all commands "events" to the _sPromise internal promise
     this._sPromise = new __SPromise(() => {}).start();
@@ -134,9 +146,6 @@ module.exports = class SCommandPanel extends __SComponent {
     // subscribe to the commands instances
     this._subscribeToCommandsEvents();
 
-    // init filter popup
-    // this._initFilterPopup();
-
     // generate the UI
     this._generateUI();
 
@@ -145,7 +154,6 @@ module.exports = class SCommandPanel extends __SComponent {
 
     // update the list continusly
     this._updateListInterval = setInterval(this._updateList.bind(this), 100);
-
     this.screen.on('destroy', () => {
       clearInterval(this._updateListInterval);
     });
@@ -197,40 +205,6 @@ module.exports = class SCommandPanel extends __SComponent {
   }
 
   /**
-   * @name        _initFilterPopup
-   * @type        Function
-   * @private
-   *
-   * This method initialize the filter popup
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  // _initFilterPopup() {
-  //   let inputPopup;
-  //   __hotkey('shift+n', {
-  //     active: () => {
-  //       return this.parent !== null;
-  //     }
-  //   }).on('press', () => {
-  //     if (inputPopup && inputPopup.parent) return;
-  //     inputPopup = new __SInputPopup({
-  //       id: 'filterCommandsByNamespace',
-  //       title: 'Filter commands by namespace',
-  //       $input: {
-  //         placeholder: this._namespace
-  //       }
-  //     });
-  //     inputPopup.promise.on('resolve', (value) => {
-  //       // change page
-  //       // emit an event
-  //       this.promise.trigger('namespace', value);
-  //       // this.filterByNamespace(value);
-  //     });
-  //     this.append(inputPopup);
-  //   });
-  // }
-
-  /**
    * @name          summary
    * @type          Function
    *
@@ -247,54 +221,6 @@ module.exports = class SCommandPanel extends __SComponent {
     });
     summaryListPopup.attach(this);
     return summaryListPopup;
-  }
-
-  /**
-   * @name              filterByNamespace
-   * @type              Function
-   *
-   * This method simply takes a namespae and filter the displayed commands
-   *
-   * @param     {String}        namespace         The namespace to apply
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  filterByNamespace(namespace) {
-    // setTimeout(() => {
-    //   // get the commands to display using the passed namespace
-    //   const filteredCommandsInstances = __SCommand.getCommandsByNamespace(
-    //     `+(${namespace}|${namespace}.**)`
-    //   );
-    //   // check if we have some commands to display
-    //   if (!filteredCommandsInstances.length) {
-    //     const $popup = new __SPopup({
-    //       title: 'No commands to display',
-    //       description: `Sorry but the passed namespace "${namespace}" does not return any commands...`,
-    //       style: {
-    //         bg: 'red'
-    //       },
-    //       width: '50%'
-    //     });
-    //     this.append($popup);
-    //     setTimeout(() => {
-    //       $popup.detach();
-    //       $popup.destroy();
-    //     }, 3000);
-    //     return;
-    //   }
-    //   // save the current namespace
-    //   this._namespace = namespace;
-    //   // clear all existing boxes
-    //   this._clearCommands();
-    //   // register new commands
-    //   this._commands = filteredCommandsInstances;
-    //   // generate the panel object for each commands
-    //   this._commands.forEach((commandInstance) => {
-    //     this._boxesObjectsMap.set(commandInstance, {});
-    //   });
-    //   // update
-    //   this.update();
-    // });
   }
 
   /**
@@ -324,6 +250,38 @@ module.exports = class SCommandPanel extends __SComponent {
   }
 
   /**
+   * @name          _selectListItem
+   * @type          Function
+   * @private
+   *
+   * Call this function to select a list item
+   *
+   * @param       {Number}      idx       The item idx to select
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _selectListItem(idx) {
+    this.$list.items.forEach((item, j) => {
+      if (idx === j) {
+        item.selected = true;
+        item.active = true;
+        this._displayedCommands.push(item.commandInstance);
+      } else if (!this._multiSelect) {
+        const displayCommandIdx = this._displayedCommands.indexOf(
+          item.commandInstance
+        );
+        if (displayCommandIdx !== -1) {
+          this._displayedCommands.splice(displayCommandIdx, 1);
+        }
+        delete item.active;
+        delete item.selected;
+      }
+    });
+    this._updateList();
+    this.update();
+  }
+
+  /**
    * @name          _generateUI
    * @type          Function
    * @private
@@ -333,6 +291,10 @@ module.exports = class SCommandPanel extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _generateUI() {
+    const medias = {
+      0: 20,
+      180: 15
+    };
     const itemsArray = [];
     this._commands.forEach((commandInstance) => {
       commandInstance._spinner = {
@@ -350,8 +312,15 @@ module.exports = class SCommandPanel extends __SComponent {
       itemsArray.push(name);
     });
 
+    let media;
+    Object.keys(medias).forEach((width) => {
+      if (this.screen.width >= parseInt(width)) {
+        media = medias[width];
+      }
+    });
+
     this.$list = __blessed.list({
-      width: '15%-1',
+      width: `${media}%-1`,
       top: 0,
       left: 0,
       right: 0,
@@ -383,29 +352,10 @@ module.exports = class SCommandPanel extends __SComponent {
       handleListActiveAndSelectedProperty(key.name);
     });
     this.$list.on('select', (e, i) => {
-      this.$list.items.forEach((item, j) => {
-        if (i === j) {
-          item.selected = true;
-          this._displayedCommands.push(item.commandInstance);
-        } else if (!this._multiSelect) {
-          const displayCommandIdx = this._displayedCommands.indexOf(
-            item.commandInstance
-          );
-          if (displayCommandIdx !== -1) {
-            this._displayedCommands.splice(displayCommandIdx, 1);
-          }
-          delete item.selected;
-        }
-      });
-      this._updateList();
-      this.update();
+      this._selectListItem(i);
     });
     this.$list.items[0].active = true;
     this.$list.items[0].selected = true;
-    this.$list.items[0].padding = {
-      top: 1,
-      left: 1
-    };
 
     let pressTimeout, pressInitialiser;
     const pressed = () => {
@@ -438,9 +388,9 @@ module.exports = class SCommandPanel extends __SComponent {
     });
 
     this.$log = __blessed.box({
-      width: '85%+1',
+      width: `${100 - media}%`,
       top: 0,
-      left: '15%',
+      left: `${media}%+1`,
       right: 0,
       bottom: 0,
       style: {
@@ -515,7 +465,7 @@ module.exports = class SCommandPanel extends __SComponent {
           width: 3,
           height: 1,
           top: 0,
-          left: '100%-7',
+          left: '100%',
           right: 0,
           bottom: 0,
           style: {
@@ -539,7 +489,7 @@ module.exports = class SCommandPanel extends __SComponent {
           width: 3,
           height: 1,
           top: 0,
-          left: '100%-10',
+          left: '100%-3',
           right: 0,
           bottom: 0,
           style: {
@@ -558,16 +508,15 @@ module.exports = class SCommandPanel extends __SComponent {
         item.append(item.$state);
       }
 
-      item.height = 3;
       item.padding = {
-        top: 1,
-        left: 2,
-        bottom: 1,
-        right: 2
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0
       };
-      item.top = i * 3;
+      item.top = i * 2;
 
-      let key = `(${commandInstance.key})`;
+      let key = `${commandInstance.key}`;
       item.$key.setContent(key);
 
       let name = commandInstance.name;
@@ -575,19 +524,19 @@ module.exports = class SCommandPanel extends __SComponent {
         commandInstance._spinner.ora.text = '';
         commandInstance._spinner.ora.color = 'black';
         name = `${commandInstance.name}`;
-        if (!item.selected && !item.active) {
-          if (commandInstance.state === 'running')
-            commandInstance._spinner.ora.color = 'cyan';
-          if (commandInstance.state === 'error')
-            commandInstance._spinner.ora.color = 'red';
-          if (commandInstance.state === 'success')
-            commandInstance._spinner.ora.color = 'green';
-        }
+        // if (!item.selected && !item.active) {
+        if (commandInstance.state === 'running')
+          commandInstance._spinner.ora.color = 'cyan';
+        if (commandInstance.state === 'error')
+          commandInstance._spinner.ora.color = 'red';
+        if (commandInstance.state === 'success')
+          commandInstance._spinner.ora.color = 'green';
+        // }
         item.$state.setContent(commandInstance._spinner.ora.frame());
       } else if (commandInstance.state === 'error') {
         name = `${commandInstance.name}`;
         item.$state.setContent('×');
-        item.$state.style.fg = __color('terminal.white').toString();
+        item.$state.style.fg = __color('terminal.red').toString();
         // item.$state.style.bg = __color('terminal.red').toString();
       } else if (commandInstance.state === 'success') {
         name = `${commandInstance.name}`;
@@ -601,107 +550,104 @@ module.exports = class SCommandPanel extends __SComponent {
       // if (item.active) {
       //   name = '═ ' + name;
       // }
+      if (item.active) {
+        name = `> ${name}`;
+      }
 
-      let spaces = Math.round(
-        this.$list.width -
-          item.padding.left -
-          item.padding.right -
-          __countLine(name) -
-          __countLine(key) -
-          1
-      );
+      let spaces = Math.round(this.$list.width - __countLine(name) - 1);
       if (spaces < 0) spaces = 0;
-
-      name = name + ' '.repeat(spaces) + key;
+      name = name + ' '.repeat(spaces);
 
       if (item.active || item.selected) {
+        item.style.fg = __color('terminal.primary').toString();
         // item.$key.style.fg = __color('terminal.white').toString();
         // item.$key.style.bg = __color('terminal.black').toString();
-        item.$key.style.fg = __color('terminal.black').toString();
-        item.$key.style.bg = __color('terminal.primary').toString();
-        item.$state.style.fg = __color('terminal.black').toString();
-        item.$state.style.bg = __color('terminal.primary').toString();
+        // item.$key.style.fg = __color('terminal.black').toString();
+        // item.$key.style.bg = __color('terminal.primary').toString();
+        // item.$state.style.fg = __color('terminal.black').toString();
+        // item.$state.style.bg = __color('terminal.primary').toString();
         // item.$state.style.bg = __color('terminal.black').toString();
       } else {
-        item.$key.style.fg = __color('terminal.white').toString();
-        item.$key.style.bg = __color('terminal.black').toString();
-        item.$state.style.fg = __color('terminal.white').toString();
-        item.$state.style.bg = __color('terminal.black').toString();
+        item.style.fg = __color('terminal.white').toString();
+        // item.$key.style.fg = __color('terminal.white').toString();
+        // item.$key.style.bg = __color('terminal.black').toString();
+        // item.$state.style.fg = __color('terminal.white').toString();
+        // item.$state.style.bg = __color('terminal.black').toString();
         // item.$key.style.fg = __color('terminal.black').toString();
         // item.$key.style.bg = __color('terminal.primary').toString();
       }
 
       if (item.active && !item.selected) {
-        item.style.fg = __color('terminal.primary').toString();
-        item.style.bg = __color('terminal.black').toString();
-        item.$state.style.fg = __color('terminal.primary').toString();
-        item.$state.style.bg = __color('terminal.black').toString();
-        item.$key.style.fg = __color('terminal.primary').toString();
-        item.$key.style.bg = __color('terminal.black').toString();
+        // item.style.fg = __color('terminal.primary').toString();
+        // item.style.bg = __color('terminal.black').toString();
+        // item.$state.style.fg = __color('terminal.primary').toString();
+        // item.$state.style.bg = __color('terminal.black').toString();
+        // item.$key.style.fg = __color('terminal.primary').toString();
+        // item.$key.style.bg = __color('terminal.black').toString();
       } else if (commandInstance.state === 'running') {
-        if (item.active || item.selected) {
-          item.style.fg = __color('terminal.black').toString();
-          item.style.bg = __color('terminal.cyan').toString();
-          item.$state.style.fg = __color('terminal.black').toString();
-          item.$state.style.bg = __color('terminal.cyan').toString();
-          item.$key.style.fg = __color('terminal.black').toString();
-          item.$key.style.bg = __color('terminal.cyan').toString();
-        } else {
-          item.style.fg = __color('terminal.cyan').toString();
-          delete item.style.bg;
-          item.$state.style.fg = __color('terminal.cyan').toString();
-          delete item.$state.style.bg;
-          item.$key.style.fg = __color('terminal.cyan').toString();
-          delete item.$key.style.bg;
-        }
+        // if (item.active || item.selected) {
+        item.style.fg = __color('terminal.cyan').toString();
+        //   item.style.bg = __color('terminal.cyan').toString();
+        //   item.$state.style.fg = __color('terminal.black').toString();
+        //   item.$state.style.bg = __color('terminal.cyan').toString();
+        //   item.$key.style.fg = __color('terminal.black').toString();
+        //   item.$key.style.bg = __color('terminal.cyan').toString();
+        // } else {
+        //   item.style.fg = __color('terminal.cyan').toString();
+        //   delete item.style.bg;
+        //   item.$state.style.fg = __color('terminal.cyan').toString();
+        //   delete item.$state.style.bg;
+        //   item.$key.style.fg = __color('terminal.cyan').toString();
+        //   delete item.$key.style.bg;
+        // }
       } else if (commandInstance.state === 'error') {
-        if (item.active || item.selected) {
-          item.style.fg = __color('terminal.black').toString();
-          item.style.bg = __color('terminal.red').toString();
-          item.$state.style.fg = __color('terminal.black').toString();
-          item.$state.style.bg = __color('terminal.red').toString();
-          item.$key.style.fg = __color('terminal.black').toString();
-          item.$key.style.bg = __color('terminal.red').toString();
-        } else {
-          item.style.fg = __color('terminal.red').toString();
-          delete item.style.bg;
-          item.$state.style.fg = __color('terminal.red').toString();
-          delete item.$state.style.bg;
-          item.$key.style.fg = __color('terminal.red').toString();
-          delete item.$key.style.bg;
-        }
+        // if (item.active || item.selected) {
+        item.style.fg = __color('terminal.red').toString();
+        //   item.style.bg = __color('terminal.red').toString();
+        //   item.$state.style.fg = __color('terminal.black').toString();
+        //   item.$state.style.bg = __color('terminal.red').toString();
+        //   item.$key.style.fg = __color('terminal.black').toString();
+        //   item.$key.style.bg = __color('terminal.red').toString();
+        // } else {
+        //   item.style.fg = __color('terminal.red').toString();
+        //   delete item.style.bg;
+        //   item.$state.style.fg = __color('terminal.red').toString();
+        //   delete item.$state.style.bg;
+        //   item.$key.style.fg = __color('terminal.red').toString();
+        //   delete item.$key.style.bg;
+        // }
       } else if (commandInstance.state === 'success') {
-        if (item.active || item.selected) {
-          item.style.fg = __color('terminal.black').toString();
-          item.style.bg = __color('terminal.green').toString();
-          item.$state.style.fg = __color('terminal.black').toString();
-          item.$state.style.bg = __color('terminal.green').toString();
-          item.$key.style.fg = __color('terminal.black').toString();
-          item.$key.style.bg = __color('terminal.green').toString();
-        } else {
-          item.style.fg = __color('terminal.green').toString();
-          delete item.style.bg;
-          item.$state.style.fg = __color('terminal.green').toString();
-          delete item.$state.style.bg;
-          item.$key.style.fg = __color('terminal.green').toString();
-          delete item.$key.style.bg;
-        }
+        // if (item.active || item.selected) {
+        item.style.fg = __color('terminal.green').toString();
+        //   item.style.bg = __color('terminal.green').toString();
+        //   item.$state.style.fg = __color('terminal.black').toString();
+        //   item.$state.style.bg = __color('terminal.green').toString();
+        //   item.$key.style.fg = __color('terminal.black').toString();
+        //   item.$key.style.bg = __color('terminal.green').toString();
+        // } else {
+        //   item.style.fg = __color('terminal.green').toString();
+        //   delete item.style.bg;
+        //   item.$state.style.fg = __color('terminal.green').toString();
+        //   delete item.$state.style.bg;
+        //   item.$key.style.fg = __color('terminal.green').toString();
+        //   delete item.$key.style.bg;
+        // }
       } else {
-        if (item.selected) {
-          item.style.fg = __color('terminal.black').toString();
-          item.style.bg = __color('terminal.primary').toString();
-          item.$state.style.fg = __color('terminal.black').toString();
-          item.$state.style.bg = __color('terminal.primary').toString();
-          item.$key.style.fg = __color('terminal.black').toString();
-          item.$key.style.bg = __color('terminal.primary').toString();
-        } else {
-          item.style.fg = __color('terminal.white').toString();
-          delete item.style.bg;
-          item.$state.style.fg = __color('terminal.white').toString();
-          delete item.$state.style.fg;
-          item.$key.style.fg = __color('terminal.white').toString();
-          delete item.$key.style.fg;
-        }
+        // if (item.selected) {
+        //   item.style.fg = __color('terminal.black').toString();
+        //   item.style.bg = __color('terminal.primary').toString();
+        //   item.$state.style.fg = __color('terminal.black').toString();
+        //   item.$state.style.bg = __color('terminal.primary').toString();
+        //   item.$key.style.fg = __color('terminal.black').toString();
+        //   item.$key.style.bg = __color('terminal.primary').toString();
+        // } else {
+        //   item.style.fg = __color('terminal.white').toString();
+        //   delete item.style.bg;
+        //   item.$state.style.fg = __color('terminal.white').toString();
+        //   delete item.$state.style.fg;
+        //   item.$key.style.fg = __color('terminal.white').toString();
+        //   delete item.$key.style.fg;
+        // }
       }
 
       this.$list.setItem(i, __parseHtml(name));

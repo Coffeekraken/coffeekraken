@@ -27,7 +27,10 @@ module.exports = function getScssImportsStrings(array = null) {
     if (typeof importItem === 'string') {
       if (importItem === 'sugar') {
         const path = __isInPackage('coffeekraken', process.cwd(), true)
-          ? __path.resolve(__packageRoot(__dirname, true), 'util/sugar/index')
+          ? __path.resolve(
+              __packageRoot(__dirname, true),
+              'toolkits/sugar/index'
+            )
           : '@coffeekraken/sugar/index';
         importsStrings.prepend += `
           @use "${path}" as Sugar;

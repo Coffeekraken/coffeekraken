@@ -44,19 +44,9 @@ module.exports = function hotkey(key, settings = {}) {
   if (!isListenerAlreadyAdded) {
     isListenerAlreadyAdded = true;
 
-    function _terminate() {
-      setTimeout(function () {
-        process.exit();
-      }, 100);
-    }
-
     __keypress(process.stdin);
 
     process.stdin.on('keypress', function (ch, keyObj) {
-      // if (keyObj && keyObj.ctrl && keyObj.name == 'c') {
-      //   // _terminate();
-      // }
-
       // loop on each promises registered
       Object.keys(hotkeyStack).forEach((id) => {
         const obj = hotkeyStack[id];
@@ -66,7 +56,6 @@ module.exports = function hotkey(key, settings = {}) {
           if (__activeSpace.is('**.form.*')) return;
         }
         if (obj.settings.activeSpace) {
-          console.log('act', obj.settings.activeSpace);
           if (!__activeSpace.is(obj.settings.activeSpace)) return;
         }
         // check if an "active" function exists
@@ -84,13 +73,13 @@ module.exports = function hotkey(key, settings = {}) {
                 key,
                 ctrl: keyObj ? keyObj.ctrl : false,
                 meta: keyObj ? keyObj.meta : false,
-                shifr: keyObj ? keyObj.shifr : false
+                shift: keyObj ? keyObj.shift : false
               });
               obj.promise.trigger('press', {
                 key,
                 ctrl: keyObj ? keyObj.ctrl : false,
                 meta: keyObj ? keyObj.meta : false,
-                shifr: keyObj ? keyObj.shifr : false
+                shift: keyObj ? keyObj.shift : false
               });
               return;
             }
@@ -110,13 +99,13 @@ module.exports = function hotkey(key, settings = {}) {
                 key,
                 ctrl: keyObj ? keyObj.ctrl : false,
                 meta: keyObj ? keyObj.meta : false,
-                shifr: keyObj ? keyObj.shifr : false
+                shift: keyObj ? keyObj.shift : false
               });
               obj.promise.trigger('press', {
                 key,
                 ctrl: keyObj ? keyObj.ctrl : false,
                 meta: keyObj ? keyObj.meta : false,
-                shifr: keyObj ? keyObj.shifr : false
+                shift: keyObj ? keyObj.shift : false
               });
             }
           });

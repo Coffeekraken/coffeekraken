@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["whenInViewport"],{
 
-/***/ "./node_modules/in-viewport/in-viewport.js":
-/*!*************************************************!*\
-  !*** ./node_modules/in-viewport/in-viewport.js ***!
-  \*************************************************/
+/***/ "../node_modules/in-viewport/in-viewport.js":
+/*!**************************************************!*\
+  !*** ../node_modules/in-viewport/in-viewport.js ***!
+  \**************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -289,14 +289,14 @@ function observeDOM(watches, container, cb) {
   }
 }
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ "../node_modules/webpack/buildin/global.js")))
 
 /***/ }),
 
-/***/ "./src/js/dom/whenInViewport.js":
-/*!**************************************!*\
-  !*** ./src/js/dom/whenInViewport.js ***!
-  \**************************************/
+/***/ "../src/js/dom/whenInViewport.js":
+/*!***************************************!*\
+  !*** ../src/js/dom/whenInViewport.js ***!
+  \***************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -308,7 +308,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = whenInViewport;
 
-var _inViewport = _interopRequireDefault(__webpack_require__(/*! in-viewport */ "./node_modules/in-viewport/in-viewport.js"));
+var _inViewport = _interopRequireDefault(__webpack_require__(/*! in-viewport */ "../node_modules/in-viewport/in-viewport.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

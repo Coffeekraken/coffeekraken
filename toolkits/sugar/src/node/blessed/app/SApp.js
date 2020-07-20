@@ -9,6 +9,7 @@ const __SUrl = require('../../url/SUrl');
 const __sugarConfig = require('../../config/sugar');
 const __get = require('../../object/get');
 const __fs = require('fs');
+const __filter = require('../../object/filter');
 
 /**
  * @name                  SApp
@@ -124,6 +125,9 @@ module.exports = class SApp extends __SComponent {
           bg: __color('terminal.primary').toString(),
           fg: __color('terminal.black').toString()
         },
+        commands: __filter(this._commandsStack, (commandInstance) => {
+          return commandInstance._settings.statusBar === true;
+        }),
         ...this._settings.footer
       });
       this.append(this._footerBox, true);
@@ -431,7 +435,7 @@ module.exports = class SApp extends __SComponent {
       this._headerBox.position.top = 0;
       this._headerBox.position.left = 0;
       if (this._contentBox) {
-        this._contentBox.position.top = this._headerBox.position.height;
+        this._contentBox.position.top = this._headerBox.height;
       }
     }
     if (this._footerBox) {
@@ -439,7 +443,7 @@ module.exports = class SApp extends __SComponent {
       this._footerBox.position.left = 0;
 
       if (this._contentBox) {
-        this._contentBox.position.bottom = this._footerBox.position.height;
+        this._contentBox.position.bottom = this._footerBox.height;
       }
     }
 

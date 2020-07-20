@@ -14,14 +14,20 @@ const __exitCleanup = require('../node/process/exitCleanup');
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-const command = process.argv[2].split(' ')[0];
-const stack = command.split('.')[0];
+const command =
+  process.argv && process.argv[2] ? process.argv[2].split(' ')[0] : '';
+let stack = command.split('.')[0];
 let action = command.split('.')[1] || null;
 const args = process.argv.slice(3).join(' ') || '';
 
 // handle clean exit
 if (!__isChildProcess()) {
   __exitCleanup();
+}
+
+// if theirs nothing as stack or action
+if (!stack) {
+  stack = 'app';
 }
 
 // if no action, try to get the default one

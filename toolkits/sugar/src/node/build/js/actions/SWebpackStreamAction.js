@@ -8,7 +8,7 @@ const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
 const __SBuildJsCli = require('../SBuildJsCli');
 const __sugarConfig = require('../../../config/sugar');
 const __babel = require('@babel/core');
-const getScssImportsString = require('../../scss/getScssImportsString');
+const __getScssImportsStrings = require('../../scss/getScssImportsStrings');
 const __jsObjectToScssMap = require('../../scss/jsObjectToScssMap');
 
 /**
@@ -108,7 +108,10 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
         return resolve(streamObj);
       }
 
-      const scssImportsString = getScssImportsString(settings.scss.imports);
+      const scssImportsString = __getScssImportsStrings(settings.scss.imports);
+
+      console.log(scssImportsString);
+
       const scssConfig = __jsObjectToScssMap(
         __sugarConfig('scss'),
         settings.scss.config
@@ -154,7 +157,7 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
                         implementation: require('sass'),
                         prependData: `
                           ${scssConfig}
-                          ${scssImportsString}
+                          ${scssImportsString.prepend}
                         `
                       }
                     }

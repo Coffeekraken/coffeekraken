@@ -68,9 +68,10 @@ module.exports = async (args = {}) => {
   // build the "templateData" object to pass to the render engines
   const templateData = {
     title: __packageJson.name,
-    package: __packageJson,
+    env: process.env.NODE_ENV || 'development',
+    package: JSON.stringify(__packageJson),
     menuHtml: sNavInstance ? sNavInstance.toHtml() : '',
-    settings: settings
+    settings: JSON.stringify(settings)
   };
 
   server.get('/', async (req, res) => {

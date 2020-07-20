@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["whenTransitionEnd"],{
 
-/***/ "./src/js/dom/getStyleProperty.js":
-/*!****************************************!*\
-  !*** ./src/js/dom/getStyleProperty.js ***!
-  \****************************************/
+/***/ "../src/js/dom/getStyleProperty.js":
+/*!*****************************************!*\
+  !*** ../src/js/dom/getStyleProperty.js ***!
+  \*****************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15,9 +15,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = getStyleProperty;
 
-var _camelize = _interopRequireDefault(__webpack_require__(/*! ../string/camelize */ "./src/js/string/camelize.js"));
+var _camelize = _interopRequireDefault(__webpack_require__(/*! ../string/camelize */ "../src/js/string/camelize.js"));
 
-var _autoCast = _interopRequireDefault(__webpack_require__(/*! ../string/autoCast */ "./src/js/string/autoCast.js"));
+var _autoCast = _interopRequireDefault(__webpack_require__(/*! ../string/autoCast */ "../src/js/string/autoCast.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -63,10 +63,10 @@ module.exports = exports.default;
 
 /***/ }),
 
-/***/ "./src/js/dom/getTransitionProperties.js":
-/*!***********************************************!*\
-  !*** ./src/js/dom/getTransitionProperties.js ***!
-  \***********************************************/
+/***/ "../src/js/dom/getTransitionProperties.js":
+/*!************************************************!*\
+  !*** ../src/js/dom/getTransitionProperties.js ***!
+  \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -78,9 +78,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = getTransitionProperties;
 
-var _getStyleProperty = _interopRequireDefault(__webpack_require__(/*! ./getStyleProperty */ "./src/js/dom/getStyleProperty.js"));
+var _getStyleProperty = _interopRequireDefault(__webpack_require__(/*! ./getStyleProperty */ "../src/js/dom/getStyleProperty.js"));
 
-var _convert = _interopRequireDefault(__webpack_require__(/*! ../time/convert */ "./src/js/time/convert.js"));
+var _convert = _interopRequireDefault(__webpack_require__(/*! ../time/convert */ "../src/js/time/convert.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -149,10 +149,10 @@ module.exports = exports.default;
 
 /***/ }),
 
-/***/ "./src/js/dom/whenTransitionEnd.js":
-/*!*****************************************!*\
-  !*** ./src/js/dom/whenTransitionEnd.js ***!
-  \*****************************************/
+/***/ "../src/js/dom/whenTransitionEnd.js":
+/*!******************************************!*\
+  !*** ../src/js/dom/whenTransitionEnd.js ***!
+  \******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -164,7 +164,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = whenTransitionEnd;
 
-var _getTransitionProperties = _interopRequireDefault(__webpack_require__(/*! ./getTransitionProperties */ "./src/js/dom/getTransitionProperties.js"));
+var _getTransitionProperties = _interopRequireDefault(__webpack_require__(/*! ./getTransitionProperties */ "../src/js/dom/getTransitionProperties.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -202,10 +202,10 @@ module.exports = exports.default;
 
 /***/ }),
 
-/***/ "./src/js/string/autoCast.js":
-/*!***********************************!*\
-  !*** ./src/js/string/autoCast.js ***!
-  \***********************************/
+/***/ "../src/js/string/autoCast.js":
+/*!************************************!*\
+  !*** ../src/js/string/autoCast.js ***!
+  \************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -274,10 +274,10 @@ module.exports = exports.default;
 
 /***/ }),
 
-/***/ "./src/js/time/convert.js":
-/*!********************************!*\
-  !*** ./src/js/time/convert.js ***!
-  \********************************/
+/***/ "../src/js/time/convert.js":
+/*!*********************************!*\
+  !*** ../src/js/time/convert.js ***!
+  \*********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

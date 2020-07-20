@@ -463,33 +463,13 @@ module.exports = class SCommand extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _initKey() {
-    if (!this._settings.key) return;
-    __hotkey(`${this._settings.key}`, {
+    __hotkey(`shift+${this._settings.key}`, {
       activeSpace: this._settings.activeSpace || null
     }).on('press', (keyObj) => {
-      if (
-        this._settings.onKeyPress &&
-        this._settings.onKeyPress(this) === false
-      )
-        return;
       if (this.isRunning() && !this._settings.concurrent) {
         this.kill();
       } else if (!this.isRunning()) {
         this.run();
-      }
-    });
-    __hotkey(`shift+${this._settings.key}`, {
-      activeSpace: this._settings.activeSpace || null
-    }).on('press', async (keyObj) => {
-      if (
-        this._settings.onKeyPress &&
-        this._settings.onKeyPress(this) === false
-      )
-        return;
-      if (this.isRunning() && !this._settings.concurrent) {
-        this.kill();
-      } else if (!this.isRunning()) {
-        this.run(this._settings.argsObj, false);
       }
     });
   }
@@ -561,7 +541,10 @@ module.exports = class SCommand extends __SPromise {
     this.lastProcessObj.stdout.push(
       `Starting the watch process for the command "<yellow>${this.name}</yellow>"...`
     );
-    this.trigger('stdout.data', this.lastProcessObj);
+    this.trigger('stdout.data', {
+      name: this.name,
+      ...this.lastProcessObj
+    });
 
     const commandLine = __argsToString(
       {
@@ -590,6 +573,7 @@ module.exports = class SCommand extends __SPromise {
           `A file has been <green>created</green>: <cyan>${path}</cyan>`
         );
         this.trigger('stdout.data', {
+          name: this.name,
           ...this.lastProcessObj,
           path
         });
@@ -598,6 +582,7 @@ module.exports = class SCommand extends __SPromise {
           `A file has been <yellow>updated</yellow>: <cyan>${path}</cyan>`
         );
         this.trigger('stdout.data', {
+          name: this.name,
           ...this.lastProcessObj,
           path
         });
@@ -606,6 +591,7 @@ module.exports = class SCommand extends __SPromise {
           `A file has been <red>deleted</red>: <cyan>${path}</cyan>`
         );
         this.trigger('stdout.data', {
+          name: this.name,
           ...this.lastProcessObj,
           path
         });
@@ -635,6 +621,7 @@ module.exports = class SCommand extends __SPromise {
     this._watchProcess.on('close', (code, signal) => {
       this._isWatching = false;
       this.trigger('stdout.data', {
+        name: this.name,
         value: `The watch process has been stopped`
       });
     });
@@ -810,8 +797,18 @@ module.exports = class SCommand extends __SPromise {
       .on('cancel,finally', () => {})
       .start();
 
-    __SPromise.pipe(this._currentProcess.childProcessPromise, promise, {});
-    __SPromise.pipe(this._currentProcess.childProcessPromise, this, {});
+    __SPromise.pipe(this._currentProcess.childProcessPromise, promise, {
+      processor: (value, stacks) => {
+        value.name = this.name;
+        return value;
+      }
+    });
+    __SPromise.pipe(this._currentProcess.childProcessPromise, this, {
+      processor: (value, stacks) => {
+        value.name = this.name;
+        return value;
+      }
+    });
 
     // check if we have an after function to launch
     if (this._settings.after && typeof this._settings.after === 'function') {
@@ -859,6 +856,7 @@ module.exports = class SCommand extends __SPromise {
         switch (question.type) {
           case 'summary':
             this.trigger('ask', {
+              name: this.name,
               get commandInstance() {
                 return _this;
               },

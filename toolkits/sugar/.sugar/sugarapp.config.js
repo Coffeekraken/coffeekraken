@@ -34,7 +34,8 @@ module.exports = {
       )}/src/node/server/frontend/SFrontendServerCommand`,
       argsObj: {},
       settings: {
-        run: true
+        run: true,
+        statusBar: true
       }
     },
     'build.config': {
@@ -47,12 +48,16 @@ module.exports = {
     'build.scss': {
       path: `${__packageRoot(__dirname)}/src/node/build/scss/SBuildScssCommand`,
       argsObj: {},
-      settings: {}
+      settings: {
+        statusBar: true
+      }
     },
     'build.js': {
       path: `${__packageRoot(__dirname)}/src/node/build/js/SBuildJsCommand`,
       argsObj: {},
-      settings: {}
+      settings: {
+        statusBar: true
+      }
     },
     'build.views': {
       path: `${__packageRoot(

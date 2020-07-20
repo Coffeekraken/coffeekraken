@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["whenOutOfViewport"],{
 
-/***/ "./src/js/dom/closest.js":
-/*!*******************************!*\
-  !*** ./src/js/dom/closest.js ***!
-  \*******************************/
+/***/ "../src/js/dom/closest.js":
+/*!********************************!*\
+  !*** ../src/js/dom/closest.js ***!
+  \********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = closest;
 
-var _matches = _interopRequireDefault(__webpack_require__(/*! ./matches */ "./src/js/dom/matches.js"));
+var _matches = _interopRequireDefault(__webpack_require__(/*! ./matches */ "../src/js/dom/matches.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -64,10 +64,10 @@ module.exports = exports.default;
 
 /***/ }),
 
-/***/ "./src/js/dom/isInViewport.js":
-/*!************************************!*\
-  !*** ./src/js/dom/isInViewport.js ***!
-  \************************************/
+/***/ "../src/js/dom/isInViewport.js":
+/*!*************************************!*\
+  !*** ../src/js/dom/isInViewport.js ***!
+  \*************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -129,10 +129,10 @@ module.exports = exports.default;
 
 /***/ }),
 
-/***/ "./src/js/dom/matches.js":
-/*!*******************************!*\
-  !*** ./src/js/dom/matches.js ***!
-  \*******************************/
+/***/ "../src/js/dom/matches.js":
+/*!********************************!*\
+  !*** ../src/js/dom/matches.js ***!
+  \********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -182,10 +182,10 @@ module.exports = exports.default;
 
 /***/ }),
 
-/***/ "./src/js/dom/whenOutOfViewport.js":
-/*!*****************************************!*\
-  !*** ./src/js/dom/whenOutOfViewport.js ***!
-  \*****************************************/
+/***/ "../src/js/dom/whenOutOfViewport.js":
+/*!******************************************!*\
+  !*** ../src/js/dom/whenOutOfViewport.js ***!
+  \******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -197,11 +197,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = whenOutOfViewport;
 
-var _isInViewport2 = _interopRequireDefault(__webpack_require__(/*! ./isInViewport */ "./src/js/dom/isInViewport.js"));
+var _isInViewport2 = _interopRequireDefault(__webpack_require__(/*! ./isInViewport */ "../src/js/dom/isInViewport.js"));
 
-var _throttle = _interopRequireDefault(__webpack_require__(/*! ../function/throttle */ "./src/js/function/throttle.js"));
+var _throttle = _interopRequireDefault(__webpack_require__(/*! ../function/throttle */ "../src/js/function/throttle.js"));
 
-var _closest = _interopRequireDefault(__webpack_require__(/*! ./closest */ "./src/js/dom/closest.js"));
+var _closest = _interopRequireDefault(__webpack_require__(/*! ./closest */ "../src/js/dom/closest.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -293,62 +293,6 @@ function whenOutOfViewport(elm) {
       });
     }
   });
-}
-
-module.exports = exports.default;
-
-/***/ }),
-
-/***/ "./src/js/function/throttle.js":
-/*!*************************************!*\
-  !*** ./src/js/function/throttle.js ***!
-  \*************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = throttle;
-
-/**
- * @name        throttle
- * @namespace           js.function
- * @type      Function
- *
- * This utils function allows you to make sure that a function that will normally be called
- * several times, for example during a scroll event, to be called once each threshhold time
- *
- * @example 		js
- * import throttle from '@coffeekraken/sugar/js/function/throttle';
- * const myThrottledFn = throttle(() => {
- * 		// my function content that will be
- * 		// executed only once each second
- * }, 1000);
- *
- * document.addEventListener('scroll', (e) => {
- * 		// call my throttled function
- * 		myThrottledFn();
- * });
- *
- * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-function throttle(fn, threshhold) {
-  threshhold || (threshhold = 250);
-  var last;
-  return function () {
-    var context = this;
-    var now = new Date(),
-        args = arguments;
-
-    if (!last || last <= now - threshhold) {
-      last = now;
-      fn.apply(context, args);
-    }
-  };
 }
 
 module.exports = exports.default;

@@ -25,10 +25,12 @@ module.exports = function isInPackage(
   from = process.cwd(),
   highest = false
 ) {
-  const packageRoot = __packageRoot(from, highest);
+  const packageRoot = __packageRoot(from);
   if (!packageRoot) return false;
+
   if (!__fs.existsSync(`${packageRoot}/package.json`)) return false;
   const pkg = require(`${packageRoot}/package.json`);
+
   let names = name;
   if (typeof names === 'string') names = names.split(',').map((f) => f.trim());
   for (let i = 0; i < names.length; i++) {
@@ -36,5 +38,17 @@ module.exports = function isInPackage(
       return true;
     }
   }
+
+  let newPath = packageRoot
+    .split('/')
+    .slice(0, -1)
+    // .filter((i) => i !== '')
+    .join('/');
+
+  // no package found... check if we need to check higher
+  if (highest) {
+    return isInPackage(name, newPath, highest);
+  }
+
   return false;
 };

@@ -191,28 +191,7 @@ function SWebComponent(extend = HTMLElement) {
         props: _this.constructor.props || {}
       }, _this._metas.settings || {}, settings); // create the SPromise instance
 
-      _this._promise = new _SPromise.default(() => {}).start();
-
-      for (const key in _this._settings.props) {
-        _this._props[key] = { ..._this._settings.props[key],
-          // valuesStack: [],
-          value: _this._settings.props[key].default,
-          previousValue: undefined
-        }; // if need to be watches deeply
-
-        if (_this._props[key].watch) {
-          _this._props[key] = (0, _watch.default)(_this._props[key]);
-
-          _this._props[key].on('value.*:+(set|delete|push|pop)', update => {
-            if (update.path.split('.').length === 1) {
-              _this.prop(update.path, update.value);
-            } else {
-              _this.handleProp(update.path, _this._props[key]);
-            }
-          });
-        }
-      } // apply the $node class
-
+      _this._promise = new _SPromise.default(() => {}).start(); // apply the $node class
 
       _this.classList.add(`${_this.metas.dashName}__node`); // launch the mounting process
 
@@ -249,7 +228,28 @@ function SWebComponent(extend = HTMLElement) {
        */
       value: async function _mount() {
         // dispatch mounting event
-        this.dispatch('mounting', this); // wait until the component match the mountDependencies and mountWhen status
+        this.dispatch('mounting', this); // handle props
+
+        for (const key in this._settings.props) {
+          const attr = this.getAttribute((0, _uncamelize.default)(key));
+          this._props[key] = { ...this._settings.props[key],
+            value: attr ? (0, _parse.default)(attr) : this._settings.props[key].default,
+            previousValue: undefined
+          }; // if need to be watches deeply
+
+          if (this._props[key].watch) {
+            this._props[key] = (0, _watch.default)(this._props[key]);
+
+            this._props[key].on('value.*:+(set|delete|push|pop)', update => {
+              if (update.path.split('.').length === 1) {
+                this.prop(update.path, update.value);
+              } else {
+                this.handleProp(update.path, this._props[key]);
+              }
+            });
+          }
+        } // wait until the component match the mountDependencies and mountWhen status
+
 
         await this._mountDependencies(); // check props definition
 

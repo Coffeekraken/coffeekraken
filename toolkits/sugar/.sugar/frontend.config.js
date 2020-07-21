@@ -1,5 +1,6 @@
 // const __docNav = require('../src/node/doc/docNav');
 // const __namespaceSNav = require('../src/node/nav/namespaceSNav');
+const __packageRoot = require('../node/path/packageRoot');
 
 module.exports = {
   assets: '@config.assets',
@@ -64,10 +65,10 @@ module.exports = {
   //   }
   // },
 
-  pages: {
+  handlers: {
     /**
      * @name            views
-     * @namespace       config.frontend.pages
+     * @namespace       config.frontend.handlers
      * @type            Object
      *
      * Store all the "views" configuration access like the slug, the title, etc...
@@ -78,7 +79,7 @@ module.exports = {
     views: {
       /**
        * @name          slug
-       * @namespace     config.frontend.pages.views
+       * @namespace     config.frontend.handlers.views
        * @type          String
        * @default       /views
        *
@@ -105,7 +106,7 @@ module.exports = {
 
       /**
        * @name            handler
-       * @namespace       config.frontend.pages.views
+       * @namespace       config.frontend.handlers.views
        * @type            Function
        *
        * Specify the handler function that will take care of responding to this "section"
@@ -118,7 +119,7 @@ module.exports = {
 
     /**
      * @name            doc
-     * @namespace       config.frontend.pages
+     * @namespace       config.frontend.handlers
      * @type            Object
      *
      * Store all the accessible pages of the frontend development website
@@ -129,7 +130,7 @@ module.exports = {
     doc: {
       /**
        * @name            slug
-       * @namespace       config.frontend.pages.doc
+       * @namespace       config.frontend.handlers.doc
        * @type            String
        * @default         /doc
        *
@@ -142,7 +143,7 @@ module.exports = {
 
       /**
        * @name            title
-       * @namespace       config.frontend.pages.doc
+       * @namespace       config.frontend.handlers.doc
        * @type            String
        * @default         Documentation | [title]
        *
@@ -155,7 +156,7 @@ module.exports = {
 
       /**
        * @name            handler
-       * @namespace       config.frontend.pages.doc
+       * @namespace       config.frontend.handlers.doc
        * @type            Function
        *
        * Specify the handler function that will take care of responding to this "section"
@@ -164,6 +165,80 @@ module.exports = {
        * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
       handler: require('../src/node/server/frontend/handlers/doc')
+    },
+
+    /**
+     * @name            search
+     * @namespace       config.frontend.handlers
+     * @type            Object
+     *
+     * Store all the accessible pages of the frontend development website
+     *
+     * @since         2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    search: {
+      /**
+       * @name            slug
+       * @namespace       config.frontend.handlers.search
+       * @type            String
+       * @default         /search
+       *
+       * Search handler that handle the response to search requests
+       *
+       * @since           2.0.0
+       * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      slug: '/search',
+
+      /**
+       * @name            title
+       * @namespace       config.frontend.handlers.search
+       * @type            String
+       * @default         Search | [title]
+       *
+       * Specify the title to use for this "section"
+       *
+       * @since         2.0.0
+       * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      title: 'Search | [title]',
+
+      /**
+       * @name            handler
+       * @namespace       config.frontend.handlers.search
+       * @type            Function
+       *
+       * Specify the handler function that will take care of responding to this "section"
+       *
+       * @since         2.0.0
+       * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      handler: require('../src/node/server/frontend/handlers/search'),
+
+      /**
+       * @name        settings
+       * @namespace   config.frontend.handlers.search
+       * @type        Object
+       *
+       * Specify the settings passes to the handle function.
+       * For more documentation about these settings, please see the
+       * handler function documentation.
+       *
+       * @since           2.0.0
+       * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      settings: {
+        rules: {
+          docMap: {
+            keyword: 'doc',
+            handler: require('../src/node/search/handlers/docMap'),
+            settings: {
+              filePath: `${__packageRoot()}/docMap.json`
+            }
+          }
+        }
+      }
     }
   },
 

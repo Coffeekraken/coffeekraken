@@ -96,7 +96,10 @@ module.exports = class SDocMapItem {
 
     // check if the passed source is a file or not
     if (__isPath(source, true)) {
-      this._path = __path.relative(__packageRoot(), source);
+      let path = __packageRoot();
+      if (settings.output && typeof settings.output === 'string')
+        path = settings.output.split('/').slice(0, -1).join('/');
+      this._path = __path.relative(path, source);
       this._source = __fs.readFileSync(source, 'utf8');
     } else {
       this._source = source;

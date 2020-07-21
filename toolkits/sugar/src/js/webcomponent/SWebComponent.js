@@ -133,28 +133,9 @@ export default function SWebComponent(extend = HTMLElement) {
         this._metas.settings || {},
         settings
       );
+
       // create the SPromise instance
       this._promise = new __SPromise(() => {}).start();
-
-      for (const key in this._settings.props) {
-        this._props[key] = {
-          ...this._settings.props[key],
-          // valuesStack: [],
-          value: this._settings.props[key].default,
-          previousValue: undefined
-        };
-        // if need to be watches deeply
-        if (this._props[key].watch) {
-          this._props[key] = __watch(this._props[key]);
-          this._props[key].on('value.*:+(set|delete|push|pop)', (update) => {
-            if (update.path.split('.').length === 1) {
-              this.prop(update.path, update.value);
-            } else {
-              this.handleProp(update.path, this._props[key]);
-            }
-          });
-        }
-      }
 
       // apply the $node class
       this.classList.add(`${this.metas.dashName}__node`);
@@ -196,6 +177,27 @@ export default function SWebComponent(extend = HTMLElement) {
     async _mount() {
       // dispatch mounting event
       this.dispatch('mounting', this);
+
+      // handle props
+      for (const key in this._settings.props) {
+        const attr = this.getAttribute(__uncamelize(key));
+        this._props[key] = {
+          ...this._settings.props[key],
+          value: attr ? __parse(attr) : this._settings.props[key].default,
+          previousValue: undefined
+        };
+        // if need to be watches deeply
+        if (this._props[key].watch) {
+          this._props[key] = __watch(this._props[key]);
+          this._props[key].on('value.*:+(set|delete|push|pop)', (update) => {
+            if (update.path.split('.').length === 1) {
+              this.prop(update.path, update.value);
+            } else {
+              this.handleProp(update.path, this._props[key]);
+            }
+          });
+        }
+      }
 
       // wait until the component match the mountDependencies and mountWhen status
       await this._mountDependencies();

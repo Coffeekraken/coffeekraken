@@ -65,7 +65,8 @@ module.exports = class SFindInFileStreamAction extends __SActionsStreamAction {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  run(streamObj, settings = this._settings) {
+  run(streamObj, settings = {}) {
+    settings = __deepMerge(this._settings, settings);
     // make sure we have a correct streamObj
     this.checkStreamObject(streamObj);
 

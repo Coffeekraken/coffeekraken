@@ -1,8 +1,10 @@
 <?php
 // require the vendors
 require_once realpath(__DIR__.'/../../../../vendor/autoload.php');
-use Jenssegers\Blade\Blade;
+// use Jenssegers\Blade\Blade;
+use eftec\bladeone\BladeOne;
 function compile($viewsPath, $view, $data, $tmpPath) {
+
   // prepare data to pass it to the template engine
 	$data = json_decode(json_encode($data), FALSE);
   $data = (array) $data;
@@ -11,11 +13,11 @@ function compile($viewsPath, $view, $data, $tmpPath) {
   // render the view using blade
 	$views = $viewsPath;
   $cache = $tmpPath;
-  $blade = new Blade($views, $cache);
+
+  $blade = new BladeOne($views, $cache, BladeOne::MODE_AUTO);
   try {
-    $res = $blade->render($view, $data);
+    return $blade->run($view, $data);
   } catch(Exception $e) {
     return var_dump('<pre>' . $e . '</pre>');
   }
-  return $res;
 }

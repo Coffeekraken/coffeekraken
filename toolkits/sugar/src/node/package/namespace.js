@@ -25,7 +25,7 @@ const __sugarConfig = require('../config/sugar');
 module.exports = function namespace(path, settings = {}) {
   settings = __deepMerge(__sugarConfig('core.namespace') || {}, settings);
   // get the package json content
-  const json = __json();
+  const json = __json(settings.context || process.cwd());
   let packageName = '',
     packageVersion = '';
   if (json && json.name)

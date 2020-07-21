@@ -1,3 +1,5 @@
+const __packageRoot = require('../src/node/path/packageRoot');
+
 module.exports = {
   /**
    * @name             ignoreFolders
@@ -37,6 +39,21 @@ module.exports = {
      * @since       2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    pattern: '{package.name}.{path}'
+    pattern: '{package.name}.{path}',
+
+    /**
+     * @name            context
+     * @namespace       config.core.namespace
+     * @type            String
+     * @default         __packageRoot()
+     *
+     * Specify the context in which to generate the namespace.
+     * The context is simply a root folder from which to search for the package.json
+     * file to get the name that serve to the namespace generation
+     *
+     * @since       2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    context: __packageRoot()
   }
 };

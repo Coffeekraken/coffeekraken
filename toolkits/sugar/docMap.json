@@ -1650,9 +1650,29 @@
         "path": "src/js/encoding/base64.js"
     },
     {
+        "name": "trigger",
+        "namespace": "coffeekraken.sugar.js.event",
+        "path": "src/js/event/dispatch.js"
+    },
+    {
+        "name": "on",
+        "namespace": "coffeekraken.sugar.js.event",
+        "path": "src/js/event/on.js"
+    },
+    {
         "name": "SEvent",
         "namespace": "coffeekraken.sugar.js.event",
         "path": "src/js/event/SEvent.js"
+    },
+    {
+        "name": "trigger",
+        "namespace": "coffeekraken.sugar.js.event",
+        "path": "src/js/event/dispatch.js"
+    },
+    {
+        "name": "on",
+        "namespace": "coffeekraken.sugar.js.event",
+        "path": "src/js/event/on.js"
     },
     {
         "name": "SEvent",
@@ -2945,6 +2965,11 @@
         "path": "src/js/string/rtrim.js"
     },
     {
+        "name": "simply",
+        "namespace": "coffeekraken.sugar.js.string",
+        "path": "src/js/string/simplify.js"
+    },
+    {
         "name": "splitEvery",
         "namespace": "coffeekraken.sugar.js.string",
         "path": "src/js/string/splitEvery.js"
@@ -3045,6 +3070,11 @@
         "path": "src/js/string/rtrim.js"
     },
     {
+        "name": "simply",
+        "namespace": "coffeekraken.sugar.js.string",
+        "path": "src/js/string/simplify.js"
+    },
+    {
         "name": "splitEvery",
         "namespace": "coffeekraken.sugar.js.string",
         "path": "src/js/string/splitEvery.js"
@@ -3210,11 +3240,6 @@
         "path": "src/js/value/validateWithDefinitionObject.js"
     },
     {
-        "name": "SWebComponent",
-        "namespace": "coffeekraken.sugar.js.core",
-        "path": "src/js/webcomponent/_SWebComponent.js"
-    },
-    {
         "name": "SLitHtmlWebComponent",
         "namespace": "coffeekraken.sugar.js.webcomponent",
         "path": "src/js/webcomponent/SLitHtmlWebComponent.js"
@@ -3223,11 +3248,6 @@
         "name": "SWebComponent",
         "namespace": "coffeekraken.sugar.js.webcomponent",
         "path": "src/js/webcomponent/SWebComponent.js"
-    },
-    {
-        "name": "SWebComponent",
-        "namespace": "coffeekraken.sugar.js.core",
-        "path": "src/js/webcomponent/_SWebComponent.js"
     },
     {
         "name": "SLitHtmlWebComponent",
@@ -3377,6 +3397,16 @@
         "path": "src/node/blessed/app/SAppPage.js"
     },
     {
+        "name": "SWindowBox",
+        "namespace": "coffeekraken.sugar.node.blessed.box",
+        "path": "src/node/blessed/box/SWindowBox.js"
+    },
+    {
+        "name": "SWindowBox",
+        "namespace": "coffeekraken.sugar.node.blessed.box",
+        "path": "src/node/blessed/box/SWindowBox.js"
+    },
+    {
         "name": "SInput",
         "namespace": "coffeekraken.sugar.node.blessed.input",
         "path": "src/node/blessed/form/SInput.js"
@@ -3467,6 +3497,46 @@
         "path": "src/node/blessed/SProcessOutput.js"
     },
     {
+        "name": "SBuildDocActionStream",
+        "namespace": "coffeekraken.sugar.node.build.doc",
+        "path": "src/node/build/__wip__/doc/SBuildDocActionsStream.js"
+    },
+    {
+        "name": "SBuildDocCli",
+        "namespace": "coffeekraken.sugar.node.build.doc",
+        "path": "src/node/build/__wip__/doc/SBuildDocCli.js"
+    },
+    {
+        "name": "SBuildDocCommand",
+        "namespace": "coffeekraken.sugar.node.build.doc",
+        "path": "src/node/build/__wip__/doc/SBuildDocCommand.js"
+    },
+    {
+        "name": "SDocblocksObjectsToMarkdownStreamAction",
+        "namespace": "coffeekraken.sugar.node.build.doc.actions",
+        "path": "src/node/build/__wip__/doc/actions/SDocblocksObjectsToMarkdownStreamAction.js"
+    },
+    {
+        "name": "SDocblocksObjectsToMarkdownStreamAction",
+        "namespace": "coffeekraken.sugar.node.build.doc.actions",
+        "path": "src/node/build/__wip__/doc/actions/SDocblocksObjectsToMarkdownStreamAction.js"
+    },
+    {
+        "name": "SBuildDocActionStream",
+        "namespace": "coffeekraken.sugar.node.build.doc",
+        "path": "src/node/build/__wip__/doc/SBuildDocActionsStream.js"
+    },
+    {
+        "name": "SBuildDocCli",
+        "namespace": "coffeekraken.sugar.node.build.doc",
+        "path": "src/node/build/__wip__/doc/SBuildDocCli.js"
+    },
+    {
+        "name": "SBuildDocCommand",
+        "namespace": "coffeekraken.sugar.node.build.doc",
+        "path": "src/node/build/__wip__/doc/SBuildDocCommand.js"
+    },
+    {
         "name": "SBuildDocNavActionStream",
         "namespace": "coffeekraken.sugar.node.build.docNav",
         "path": "src/node/build/__wip__/docNav/SBuildDocNavActionsStream.js"
@@ -3547,56 +3617,6 @@
         "path": "src/node/build/config/SBuildConfigCommand.js"
     },
     {
-        "name": "SBuildDocActionStream",
-        "namespace": "coffeekraken.sugar.node.build.doc",
-        "path": "src/node/build/doc/SBuildDocActionsStream.js"
-    },
-    {
-        "name": "SBuildDocCli",
-        "namespace": "coffeekraken.sugar.node.build.doc",
-        "path": "src/node/build/doc/SBuildDocCli.js"
-    },
-    {
-        "name": "SBuildDocCommand",
-        "namespace": "coffeekraken.sugar.node.build.doc",
-        "path": "src/node/build/doc/SBuildDocCommand.js"
-    },
-    {
-        "name": "SDocblocksObjectsToMarkdownStreamAction",
-        "namespace": "coffeekraken.sugar.node.build.doc.actions",
-        "path": "src/node/build/doc/actions/SDocblocksObjectsToMarkdownStreamAction.js"
-    },
-    {
-        "name": "SDocMapStreamActions",
-        "namespace": "coffeekraken.sugar.node.build.doc.actions",
-        "path": "src/node/build/doc/actions/SDocMapStreamActions.js"
-    },
-    {
-        "name": "SDocblocksObjectsToMarkdownStreamAction",
-        "namespace": "coffeekraken.sugar.node.build.doc.actions",
-        "path": "src/node/build/doc/actions/SDocblocksObjectsToMarkdownStreamAction.js"
-    },
-    {
-        "name": "SDocMapStreamActions",
-        "namespace": "coffeekraken.sugar.node.build.doc.actions",
-        "path": "src/node/build/doc/actions/SDocMapStreamActions.js"
-    },
-    {
-        "name": "SBuildDocActionStream",
-        "namespace": "coffeekraken.sugar.node.build.doc",
-        "path": "src/node/build/doc/SBuildDocActionsStream.js"
-    },
-    {
-        "name": "SBuildDocCli",
-        "namespace": "coffeekraken.sugar.node.build.doc",
-        "path": "src/node/build/doc/SBuildDocCli.js"
-    },
-    {
-        "name": "SBuildDocCommand",
-        "namespace": "coffeekraken.sugar.node.build.doc",
-        "path": "src/node/build/doc/SBuildDocCommand.js"
-    },
-    {
         "name": "SBuildDocMapActionsStream",
         "namespace": "coffeekraken.sugar.node.build.docMap",
         "path": "src/node/build/docMap/SBuildDocMapActionsStream.js"
@@ -3610,6 +3630,16 @@
         "name": "SBuildDocMapCommand",
         "namespace": "coffeekraken.sugar.node.build.docMap",
         "path": "src/node/build/docMap/SBuildDocMapCommand.js"
+    },
+    {
+        "name": "SDocMapStreamActions",
+        "namespace": "coffeekraken.sugar.node.build.doc.actions",
+        "path": "src/node/build/docMap/actions/SDocMapStreamActions.js"
+    },
+    {
+        "name": "SDocMapStreamActions",
+        "namespace": "coffeekraken.sugar.node.build.doc.actions",
+        "path": "src/node/build/docMap/actions/SDocMapStreamActions.js"
     },
     {
         "name": "SBuildDocMapActionsStream",
@@ -3685,6 +3715,11 @@
         "name": "SBuildJsCommand",
         "namespace": "coffeekraken.sugar.node.build.js",
         "path": "src/node/build/js/SBuildJsCommand.js"
+    },
+    {
+        "name": "getScssImportsStrings",
+        "namespace": "coffeekraken.sugar.node.build.scss",
+        "path": "src/node/build/scss/getScssImportsStrings.js"
     },
     {
         "name": "SBuildScssActionsStream",
@@ -3750,6 +3785,11 @@
         "name": "SRenderSassStreamAction",
         "namespace": "coffeekraken.sugar.node.build.scss.actions",
         "path": "src/node/build/scss/actions/SRenderSassStreamAction.js"
+    },
+    {
+        "name": "getScssImportsStrings",
+        "namespace": "coffeekraken.sugar.node.build.scss",
+        "path": "src/node/build/scss/getScssImportsStrings.js"
     },
     {
         "name": "SBuildScssActionsStream",
@@ -4185,11 +4225,6 @@
         "path": "src/node/dev/getArgsNames.js"
     },
     {
-        "name": "docMap",
-        "namespace": "coffeekraken.sugar.node.doc",
-        "path": "src/node/doc/docMap.js"
-    },
-    {
         "name": "docNav",
         "namespace": "coffeekraken.sugar.node.doc",
         "path": "src/node/doc/docNav.js"
@@ -4228,11 +4263,6 @@
         "name": null,
         "namespace": "coffeekraken.sugar.src.node.doc.__tests__",
         "path": "src/node/doc/__tests__/docMap.js"
-    },
-    {
-        "name": "docMap",
-        "namespace": "coffeekraken.sugar.node.doc",
-        "path": "src/node/doc/docMap.js"
     },
     {
         "name": "docNav",
@@ -4403,24 +4433,24 @@
         "path": "src/node/encoding/base64.js"
     },
     {
-        "name": "subscribe",
+        "name": "dispatch",
         "namespace": "coffeekraken.sugar.node.event",
-        "path": "src/node/event/subscribe.js"
+        "path": "src/node/event/dispatch.js"
     },
     {
-        "name": "trigger",
+        "name": "on",
         "namespace": "coffeekraken.sugar.node.event",
-        "path": "src/node/event/trigger.js"
+        "path": "src/node/event/on.js"
     },
     {
-        "name": "subscribe",
+        "name": "dispatch",
         "namespace": "coffeekraken.sugar.node.event",
-        "path": "src/node/event/subscribe.js"
+        "path": "src/node/event/dispatch.js"
     },
     {
-        "name": "trigger",
+        "name": "on",
         "namespace": "coffeekraken.sugar.node.event",
-        "path": "src/node/event/trigger.js"
+        "path": "src/node/event/on.js"
     },
     {
         "name": "appRoutes",
@@ -5666,6 +5696,46 @@
         "path": "src/node/promise/SPromise.js"
     },
     {
+        "name": "SSearchResultAction",
+        "namespace": "coffeekraken.sugar.node.search",
+        "path": "src/node/search/SSearchResultAction.js"
+    },
+    {
+        "name": "SSearchResultItem",
+        "namespace": "coffeekraken.sugar.node.search",
+        "path": "src/node/search/SSearchResultItem.js"
+    },
+    {
+        "name": "SSearchResultGotoAction",
+        "namespace": "coffeekraken.sugar.node.search.actions",
+        "path": "src/node/search/actions/SSearchResultGotoAction.js"
+    },
+    {
+        "name": "SSearchResultGotoAction",
+        "namespace": "coffeekraken.sugar.node.search.actions",
+        "path": "src/node/search/actions/SSearchResultGotoAction.js"
+    },
+    {
+        "name": "search",
+        "namespace": "coffeekraken.sugar.node.search.handlers",
+        "path": "src/node/search/handlers/docMap.js"
+    },
+    {
+        "name": "search",
+        "namespace": "coffeekraken.sugar.node.search.handlers",
+        "path": "src/node/search/handlers/docMap.js"
+    },
+    {
+        "name": "SSearchResultAction",
+        "namespace": "coffeekraken.sugar.node.search",
+        "path": "src/node/search/SSearchResultAction.js"
+    },
+    {
+        "name": "SSearchResultItem",
+        "namespace": "coffeekraken.sugar.node.search",
+        "path": "src/node/search/SSearchResultItem.js"
+    },
+    {
         "name": "bladePhp",
         "namespace": "coffeekraken.sugar.node.server.bladePhp",
         "path": "src/node/server/bladePhp/bladePhp.js"
@@ -5751,6 +5821,11 @@
         "path": "src/node/server/frontend/handlers/doc.js"
     },
     {
+        "name": "search",
+        "namespace": "coffeekraken.sugar.node.server.frontend.handlers",
+        "path": "src/node/server/frontend/handlers/search.js"
+    },
+    {
         "name": "views",
         "namespace": "coffeekraken.sugar.node.server.frontend.handlers",
         "path": "src/node/server/frontend/handlers/views.js"
@@ -5759,6 +5834,11 @@
         "name": "doc",
         "namespace": "coffeekraken.sugar.node.server.frontend.handlers",
         "path": "src/node/server/frontend/handlers/doc.js"
+    },
+    {
+        "name": "search",
+        "namespace": "coffeekraken.sugar.node.server.frontend.handlers",
+        "path": "src/node/server/frontend/handlers/search.js"
     },
     {
         "name": "views",
@@ -5922,6 +6002,10 @@
     {
         "namespace": "coffeekraken.sugar.node.string",
         "path": "src/node/string/rtrim.js"
+    },
+    {
+        "namespace": "coffeekraken.sugar.node.string",
+        "path": "src/node/string/simplify.js"
     },
     {
         "namespace": "coffeekraken.sugar.node.string",
@@ -6002,6 +6086,10 @@
     {
         "namespace": "coffeekraken.sugar.node.string",
         "path": "src/node/string/rtrim.js"
+    },
+    {
+        "namespace": "coffeekraken.sugar.node.string",
+        "path": "src/node/string/simplify.js"
     },
     {
         "namespace": "coffeekraken.sugar.node.string",
@@ -6346,606 +6434,6 @@
         "path": "src/node/value/validateWithDefinitionObject.js"
     },
     {
-        "name": "color-hue",
-        "namespace": "coffeekraken.sugar.scss.core.color",
-        "path": "src/scss/_primitive/color/_color-hue.scss"
-    },
-    {
-        "name": "color-lightness",
-        "namespace": "coffeekraken.sugar.scss.core.color",
-        "path": "src/scss/_primitive/color/_color-lightness.scss"
-    },
-    {
-        "name": "color-opacity",
-        "namespace": "coffeekraken.sugar.scss.core.color",
-        "path": "src/scss/_primitive/color/_color-opacity.scss"
-    },
-    {
-        "name": "color-saturation",
-        "namespace": "coffeekraken.sugar.scss.core.color",
-        "path": "src/scss/_primitive/color/_color-saturation.scss"
-    },
-    {
-        "name": "color-transparentize",
-        "namespace": "coffeekraken.sugar.scss.color",
-        "path": "src/scss/_primitive/color/_color-transparentize.scss"
-    },
-    {
-        "name": "color-hue",
-        "namespace": "coffeekraken.sugar.scss.core.color",
-        "path": "src/scss/_primitive/color/_color-hue.scss"
-    },
-    {
-        "name": "color-lightness",
-        "namespace": "coffeekraken.sugar.scss.core.color",
-        "path": "src/scss/_primitive/color/_color-lightness.scss"
-    },
-    {
-        "name": "color-opacity",
-        "namespace": "coffeekraken.sugar.scss.core.color",
-        "path": "src/scss/_primitive/color/_color-opacity.scss"
-    },
-    {
-        "name": "color-saturation",
-        "namespace": "coffeekraken.sugar.scss.core.color",
-        "path": "src/scss/_primitive/color/_color-saturation.scss"
-    },
-    {
-        "name": "color-transparentize",
-        "namespace": "coffeekraken.sugar.scss.color",
-        "path": "src/scss/_primitive/color/_color-transparentize.scss"
-    },
-    {
-        "name": "list-append",
-        "namespace": "coffeekraken.sugar.scss.list",
-        "path": "src/scss/_primitive/list/_list-append.scss"
-    },
-    {
-        "name": "list-first",
-        "namespace": "coffeekraken.sugar.scss.list",
-        "path": "src/scss/_primitive/list/_list-first.scss"
-    },
-    {
-        "name": "list-implode",
-        "namespace": "coffeekraken.sugar.scss.list",
-        "path": "src/scss/_primitive/list/_list-implode.scss"
-    },
-    {
-        "name": "list-index",
-        "namespace": "coffeekraken.sugar.scss.list",
-        "path": "src/scss/_primitive/list/_list-index.scss"
-    },
-    {
-        "name": "list-join",
-        "namespace": "coffeekraken.sugar.scss.list",
-        "path": "src/scss/_primitive/list/_list-join.scss"
-    },
-    {
-        "name": "list-last-nth",
-        "namespace": "coffeekraken.sugar.scss.list",
-        "path": "src/scss/_primitive/list/_list-last-nth.scss"
-    },
-    {
-        "name": "list-length",
-        "namespace": "coffeekraken.sugar.scss.list",
-        "path": "src/scss/_primitive/list/_list-length.scss"
-    },
-    {
-        "name": "list-nth",
-        "namespace": "coffeekraken.sugar.scss.list",
-        "path": "src/scss/_primitive/list/_list-nth.scss"
-    },
-    {
-        "name": "list-pop",
-        "namespace": "coffeekraken.sugar.scss.list",
-        "path": "src/scss/_primitive/list/_list-pop.scss"
-    },
-    {
-        "name": "list-prepend",
-        "namespace": "coffeekraken.sugar.scss.list",
-        "path": "src/scss/_primitive/list/_list-prepend.scss"
-    },
-    {
-        "name": "list-remove-nth",
-        "namespace": "coffeekraken.sugar.scss.list",
-        "path": "src/scss/_primitive/list/_list-remove-nth.scss"
-    },
-    {
-        "name": "list-search",
-        "namespace": "coffeekraken.sugar.scss.list",
-        "path": "src/scss/_primitive/list/_list-search.scss"
-    },
-    {
-        "name": "list-set-nth",
-        "namespace": "coffeekraken.sugar.scss.list",
-        "path": "src/scss/_primitive/list/_list-set-nth.scss"
-    },
-    {
-        "name": "list-append",
-        "namespace": "coffeekraken.sugar.scss.list",
-        "path": "src/scss/_primitive/list/_list-append.scss"
-    },
-    {
-        "name": "list-first",
-        "namespace": "coffeekraken.sugar.scss.list",
-        "path": "src/scss/_primitive/list/_list-first.scss"
-    },
-    {
-        "name": "list-implode",
-        "namespace": "coffeekraken.sugar.scss.list",
-        "path": "src/scss/_primitive/list/_list-implode.scss"
-    },
-    {
-        "name": "list-index",
-        "namespace": "coffeekraken.sugar.scss.list",
-        "path": "src/scss/_primitive/list/_list-index.scss"
-    },
-    {
-        "name": "list-join",
-        "namespace": "coffeekraken.sugar.scss.list",
-        "path": "src/scss/_primitive/list/_list-join.scss"
-    },
-    {
-        "name": "list-last-nth",
-        "namespace": "coffeekraken.sugar.scss.list",
-        "path": "src/scss/_primitive/list/_list-last-nth.scss"
-    },
-    {
-        "name": "list-length",
-        "namespace": "coffeekraken.sugar.scss.list",
-        "path": "src/scss/_primitive/list/_list-length.scss"
-    },
-    {
-        "name": "list-nth",
-        "namespace": "coffeekraken.sugar.scss.list",
-        "path": "src/scss/_primitive/list/_list-nth.scss"
-    },
-    {
-        "name": "list-pop",
-        "namespace": "coffeekraken.sugar.scss.list",
-        "path": "src/scss/_primitive/list/_list-pop.scss"
-    },
-    {
-        "name": "list-prepend",
-        "namespace": "coffeekraken.sugar.scss.list",
-        "path": "src/scss/_primitive/list/_list-prepend.scss"
-    },
-    {
-        "name": "list-remove-nth",
-        "namespace": "coffeekraken.sugar.scss.list",
-        "path": "src/scss/_primitive/list/_list-remove-nth.scss"
-    },
-    {
-        "name": "list-search",
-        "namespace": "coffeekraken.sugar.scss.list",
-        "path": "src/scss/_primitive/list/_list-search.scss"
-    },
-    {
-        "name": "list-set-nth",
-        "namespace": "coffeekraken.sugar.scss.list",
-        "path": "src/scss/_primitive/list/_list-set-nth.scss"
-    },
-    {
-        "name": "map-deep-values",
-        "namespace": "coffeekraken.sugar.scss.map",
-        "path": "src/scss/_primitive/map/_map-deep-values.scss"
-    },
-    {
-        "name": "map-extend",
-        "namespace": "coffeekraken.sugar.scss.map",
-        "path": "src/scss/_primitive/map/_map-extend.scss"
-    },
-    {
-        "name": "map-filter-by-namespace",
-        "namespace": "coffeekraken.sugar.scss.map",
-        "path": "src/scss/_primitive/map/_map-filter-by-namespace.scss"
-    },
-    {
-        "name": "map-get-or",
-        "namespace": "coffeekraken.sugar.scss.map",
-        "path": "src/scss/_primitive/map/_map-get-or.scss"
-    },
-    {
-        "name": "map-get-path",
-        "namespace": "coffeekraken.sugar.scss.map",
-        "path": "src/scss/_primitive/map/_map-get-path.scss"
-    },
-    {
-        "name": "map-get",
-        "namespace": "coffeekraken.sugar.scss.map",
-        "path": "src/scss/_primitive/map/_map-get.scss"
-    },
-    {
-        "name": "map-has-key",
-        "namespace": "coffeekraken.sugar.scss.map",
-        "path": "src/scss/_primitive/map/_map-has-key.scss"
-    },
-    {
-        "name": "map-keys",
-        "namespace": "coffeekraken.sugar.scss.map",
-        "path": "src/scss/_primitive/map/_map-keys.scss"
-    },
-    {
-        "name": "map-merge",
-        "namespace": "coffeekraken.sugar.scss.map",
-        "path": "src/scss/_primitive/map/_map-merge.scss"
-    },
-    {
-        "name": "map-remove",
-        "namespace": "coffeekraken.sugar.scss.map",
-        "path": "src/scss/_primitive/map/_map-remove.scss"
-    },
-    {
-        "name": "map-set",
-        "namespace": "coffeekraken.sugar.scss.map",
-        "path": "src/scss/_primitive/map/_map-set.scss"
-    },
-    {
-        "name": "map-deep-values",
-        "namespace": "coffeekraken.sugar.scss.map",
-        "path": "src/scss/_primitive/map/_map-deep-values.scss"
-    },
-    {
-        "name": "map-extend",
-        "namespace": "coffeekraken.sugar.scss.map",
-        "path": "src/scss/_primitive/map/_map-extend.scss"
-    },
-    {
-        "name": "map-filter-by-namespace",
-        "namespace": "coffeekraken.sugar.scss.map",
-        "path": "src/scss/_primitive/map/_map-filter-by-namespace.scss"
-    },
-    {
-        "name": "map-get-or",
-        "namespace": "coffeekraken.sugar.scss.map",
-        "path": "src/scss/_primitive/map/_map-get-or.scss"
-    },
-    {
-        "name": "map-get-path",
-        "namespace": "coffeekraken.sugar.scss.map",
-        "path": "src/scss/_primitive/map/_map-get-path.scss"
-    },
-    {
-        "name": "map-get",
-        "namespace": "coffeekraken.sugar.scss.map",
-        "path": "src/scss/_primitive/map/_map-get.scss"
-    },
-    {
-        "name": "map-has-key",
-        "namespace": "coffeekraken.sugar.scss.map",
-        "path": "src/scss/_primitive/map/_map-has-key.scss"
-    },
-    {
-        "name": "map-keys",
-        "namespace": "coffeekraken.sugar.scss.map",
-        "path": "src/scss/_primitive/map/_map-keys.scss"
-    },
-    {
-        "name": "map-merge",
-        "namespace": "coffeekraken.sugar.scss.map",
-        "path": "src/scss/_primitive/map/_map-merge.scss"
-    },
-    {
-        "name": "map-remove",
-        "namespace": "coffeekraken.sugar.scss.map",
-        "path": "src/scss/_primitive/map/_map-remove.scss"
-    },
-    {
-        "name": "map-set",
-        "namespace": "coffeekraken.sugar.scss.map",
-        "path": "src/scss/_primitive/map/_map-set.scss"
-    },
-    {
-        "name": "math-abs",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-abs.scss"
-    },
-    {
-        "name": "math-acos",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-acos.scss"
-    },
-    {
-        "name": "math-asin",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-asin.scss"
-    },
-    {
-        "name": "math-atan",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-atan.scss"
-    },
-    {
-        "name": "math-ceil",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-ceil.scss"
-    },
-    {
-        "name": "math-convert-angle",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-convert-angle.scss"
-    },
-    {
-        "name": "math-cos",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-cos.scss"
-    },
-    {
-        "name": "math-deg",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-deg.scss"
-    },
-    {
-        "name": "math-even",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-even.scss"
-    },
-    {
-        "name": "math-fact",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-fact.scss"
-    },
-    {
-        "name": "math-grad",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-grad.scss"
-    },
-    {
-        "name": "math-odd",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-odd.scss"
-    },
-    {
-        "name": "math-percentage",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-percentage.scss"
-    },
-    {
-        "name": "math-pow",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-pow.scss"
-    },
-    {
-        "name": "math-rad",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-rad.scss"
-    },
-    {
-        "name": "math-random",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-random.scss"
-    },
-    {
-        "name": "math-round",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-round.scss"
-    },
-    {
-        "name": "math-sin",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-sin.scss"
-    },
-    {
-        "name": "math-sqrt",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-sqrt.scss"
-    },
-    {
-        "name": "math-tan",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-tan.scss"
-    },
-    {
-        "name": "math-turn",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-turn.scss"
-    },
-    {
-        "name": "math-abs",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-abs.scss"
-    },
-    {
-        "name": "math-acos",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-acos.scss"
-    },
-    {
-        "name": "math-asin",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-asin.scss"
-    },
-    {
-        "name": "math-atan",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-atan.scss"
-    },
-    {
-        "name": "math-ceil",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-ceil.scss"
-    },
-    {
-        "name": "math-convert-angle",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-convert-angle.scss"
-    },
-    {
-        "name": "math-cos",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-cos.scss"
-    },
-    {
-        "name": "math-deg",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-deg.scss"
-    },
-    {
-        "name": "math-even",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-even.scss"
-    },
-    {
-        "name": "math-fact",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-fact.scss"
-    },
-    {
-        "name": "math-grad",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-grad.scss"
-    },
-    {
-        "name": "math-odd",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-odd.scss"
-    },
-    {
-        "name": "math-percentage",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-percentage.scss"
-    },
-    {
-        "name": "math-pow",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-pow.scss"
-    },
-    {
-        "name": "math-rad",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-rad.scss"
-    },
-    {
-        "name": "math-random",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-random.scss"
-    },
-    {
-        "name": "math-round",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-round.scss"
-    },
-    {
-        "name": "math-sin",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-sin.scss"
-    },
-    {
-        "name": "math-sqrt",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-sqrt.scss"
-    },
-    {
-        "name": "math-tan",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-tan.scss"
-    },
-    {
-        "name": "math-turn",
-        "namespace": "coffeekraken.sugar.scss.math",
-        "path": "src/scss/_primitive/math/_math-turn.scss"
-    },
-    {
-        "name": "str-index",
-        "namespace": "coffeekraken.sugar.scss.string",
-        "path": "src/scss/_primitive/string/_str-index.scss"
-    },
-    {
-        "name": "str-is-url",
-        "namespace": "coffeekraken.sugar.scss.string",
-        "path": "src/scss/_primitive/string/_str-is-url.scss"
-    },
-    {
-        "name": "str-length",
-        "namespace": "coffeekraken.sugar.scss.string",
-        "path": "src/scss/_primitive/string/_str-length.scss"
-    },
-    {
-        "name": "str-replace",
-        "namespace": "coffeekraken.sugar.scss.string",
-        "path": "src/scss/_primitive/string/_str-replace.scss"
-    },
-    {
-        "name": "str-slice",
-        "namespace": "coffeekraken.sugar.scss.string",
-        "path": "src/scss/_primitive/string/_str-slice.scss"
-    },
-    {
-        "name": "str-split",
-        "namespace": "coffeekraken.sugar.scss.string",
-        "path": "src/scss/_primitive/string/_str-split.scss"
-    },
-    {
-        "name": "str-trim",
-        "namespace": "coffeekraken.sugar.scss.string",
-        "path": "src/scss/_primitive/string/_str-trim.scss"
-    },
-    {
-        "name": "str-unique-id",
-        "namespace": "coffeekraken.sugar.scss.string",
-        "path": "src/scss/_primitive/string/_str-unique-id.scss"
-    },
-    {
-        "name": "str-unquote",
-        "namespace": "coffeekraken.sugar.scss.string",
-        "path": "src/scss/_primitive/string/_str-unquote.scss"
-    },
-    {
-        "name": "str-url-ext",
-        "namespace": "coffeekraken.sugar.scss.string",
-        "path": "src/scss/_primitive/string/_str-url-ext.scss"
-    },
-    {
-        "name": "str-index",
-        "namespace": "coffeekraken.sugar.scss.string",
-        "path": "src/scss/_primitive/string/_str-index.scss"
-    },
-    {
-        "name": "str-is-url",
-        "namespace": "coffeekraken.sugar.scss.string",
-        "path": "src/scss/_primitive/string/_str-is-url.scss"
-    },
-    {
-        "name": "str-length",
-        "namespace": "coffeekraken.sugar.scss.string",
-        "path": "src/scss/_primitive/string/_str-length.scss"
-    },
-    {
-        "name": "str-replace",
-        "namespace": "coffeekraken.sugar.scss.string",
-        "path": "src/scss/_primitive/string/_str-replace.scss"
-    },
-    {
-        "name": "str-slice",
-        "namespace": "coffeekraken.sugar.scss.string",
-        "path": "src/scss/_primitive/string/_str-slice.scss"
-    },
-    {
-        "name": "str-split",
-        "namespace": "coffeekraken.sugar.scss.string",
-        "path": "src/scss/_primitive/string/_str-split.scss"
-    },
-    {
-        "name": "str-trim",
-        "namespace": "coffeekraken.sugar.scss.string",
-        "path": "src/scss/_primitive/string/_str-trim.scss"
-    },
-    {
-        "name": "str-unique-id",
-        "namespace": "coffeekraken.sugar.scss.string",
-        "path": "src/scss/_primitive/string/_str-unique-id.scss"
-    },
-    {
-        "name": "str-unquote",
-        "namespace": "coffeekraken.sugar.scss.string",
-        "path": "src/scss/_primitive/string/_str-unquote.scss"
-    },
-    {
-        "name": "str-url-ext",
-        "namespace": "coffeekraken.sugar.scss.string",
-        "path": "src/scss/_primitive/string/_str-url-ext.scss"
-    },
-    {
         "name": "coffeekraken-logo",
         "namespace": "coffeekraken.sugar.scss.coffeekraken",
         "path": "src/scss/coffeekraken/_coffeekraken-logo.scss"
@@ -6954,10 +6442,6 @@
         "name": "coffeekraken-logo",
         "namespace": "coffeekraken.sugar.scss.coffeekraken",
         "path": "src/scss/coffeekraken/_coffeekraken-logo.scss"
-    },
-    {
-        "namespace": "coffeekraken.sugar.",
-        "path": "src/scss/core/_helper-classes.scss"
     },
     {
         "name": "init",
@@ -6968,10 +6452,6 @@
         "name": "setup",
         "namespace": "coffeekraken.sugar.scss.core.mixin",
         "path": "src/scss/core/_setup.scss"
-    },
-    {
-        "namespace": "coffeekraken.sugar.",
-        "path": "src/scss/core/_helper-classes.scss"
     },
     {
         "name": "init",
@@ -6999,29 +6479,289 @@
         "path": "src/scss/core/class/_classes.scss"
     },
     {
-        "name": "init-classes",
-        "namespace": "coffeekraken.sugar.scss.core.class",
-        "path": "src/scss/core/class/_init-classes.scss"
-    },
-    {
-        "name": "register-class",
-        "namespace": "coffeekraken.sugar.scss.core.class",
-        "path": "src/scss/core/class/_register-class.scss"
-    },
-    {
         "name": "classes",
         "namespace": "coffeekraken.sugar.scss.core.class",
         "path": "src/scss/core/class/_classes.scss"
     },
     {
-        "name": "init-classes",
-        "namespace": "coffeekraken.sugar.scss.core.class",
-        "path": "src/scss/core/class/_init-classes.scss"
+        "name": "s-block-center",
+        "namespace": "coffeekraken.sugar.scss.core.class.helper",
+        "path": "src/scss/core/class/helper/_block.scss"
     },
     {
-        "name": "register-class",
+        "name": "//    \t\ts-border",
+        "namespace": "coffeekraken.sugar.",
+        "path": "src/scss/core/class/helper/_border.scss"
+    },
+    {
+        "name": "clear-left",
+        "namespace": "coffeekraken.sugar.scss.core.class.helper",
+        "path": "src/scss/core/class/helper/_clear.scss"
+    },
+    {
+        "name": "s-clearfix",
+        "namespace": "coffeekraken.sugar.scss.core.class.helper",
+        "path": "src/scss/core/class/helper/_clearfix.scss"
+    },
+    {
+        "name": "#{$cls}",
         "namespace": "coffeekraken.sugar.scss.core.class",
-        "path": "src/scss/core/class/_register-class.scss"
+        "path": "src/scss/core/class/helper/_color.scss"
+    },
+    {
+        "name": "s-block",
+        "namespace": "coffeekraken.sugar.scss.core.class.helper",
+        "path": "src/scss/core/class/helper/_display.scss"
+    },
+    {
+        "name": "fi-#{$name}",
+        "namespace": "coffeekraken.sugar.scss.core.class",
+        "path": "src/scss/core/class/helper/_filter.scss"
+    },
+    {
+        "name": "s-flex",
+        "namespace": "coffeekraken.sugar.scss.core.class.helper",
+        "path": "src/scss/core/class/helper/_flex.scss"
+    },
+    {
+        "name": "f-#{$name}",
+        "namespace": "coffeekraken.sugar.scss.core.class",
+        "path": "src/scss/core/class/helper/_font.scss"
+    },
+    {
+        "name": "s-link-stretched",
+        "namespace": "coffeekraken.sugar.scss.core.class.helper",
+        "path": "src/scss/core/class/helper/_link.scss"
+    },
+    {
+        "name": "#{$cname}",
+        "namespace": "coffeekraken.sugar.scss.core.class",
+        "path": "src/scss/core/class/helper/_margin.scss"
+    },
+    {
+        "name": "mo .mo--center .mo__content",
+        "namespace": "coffeekraken.sugar.scss.core.class.helper",
+        "path": "src/scss/core/class/helper/_media.scss"
+    },
+    {
+        "name": "s-overflow-hidden",
+        "namespace": "coffeekraken.sugar.scss.core.class.helper",
+        "path": "src/scss/core/class/helper/_overflow.scss"
+    },
+    {
+        "name": "#{$cname}",
+        "namespace": "coffeekraken.sugar.scss.core.class",
+        "path": "src/scss/core/class/helper/_padding.scss"
+    },
+    {
+        "name": "pointer-events-none",
+        "namespace": "coffeekraken.sugar.scss.core.class.helper",
+        "path": "src/scss/core/class/helper/_pointer.scss"
+    },
+    {
+        "name": "s-relative",
+        "namespace": "coffeekraken.sugar.scss.core.class.helper",
+        "path": "src/scss/core/class/helper/_position.scss"
+    },
+    {
+        "name": "s-pull-left",
+        "namespace": "coffeekraken.sugar.scss.core.class.helper",
+        "path": "src/scss/core/class/helper/_pull.scss"
+    },
+    {
+        "name": "s-ratio-21-9",
+        "namespace": "coffeekraken.sugar.scss.core.class.helper",
+        "path": "src/scss/core/class/helper/_ratio.scss"
+    },
+    {
+        "name": "s-sr-only",
+        "namespace": "coffeekraken.sugar.scss.core.class.helper",
+        "path": "src/scss/core/class/helper/_screen-reader.scss"
+    },
+    {
+        "name": "s-abs-cover",
+        "namespace": "coffeekraken.sugar.scss.core.class.helper",
+        "path": "src/scss/core/class/helper/_size.scss"
+    },
+    {
+        "name": "s-t-#{$size}",
+        "namespace": "coffeekraken.sugar.scss.core.class",
+        "path": "src/scss/core/class/helper/_text.scss"
+    },
+    {
+        "name": "tr-#{$name}",
+        "namespace": "coffeekraken.sugar.scss.core.class",
+        "path": "src/scss/core/class/helper/_transition.scss"
+    },
+    {
+        "name": "no-transition",
+        "namespace": "coffeekraken.sugar.scss.core.class.helper",
+        "path": "src/scss/core/class/helper/_transmation.scss"
+    },
+    {
+        "name": "s-user-select-none",
+        "namespace": "coffeekraken.sugar.scss.core.class.helper",
+        "path": "src/scss/core/class/helper/_user-select.scss"
+    },
+    {
+        "name": ".s-align-top",
+        "namespace": "coffeekraken.sugar.scss.core.class.helper",
+        "path": "src/scss/core/class/helper/_vertical-align.scss"
+    },
+    {
+        "name": "s-block-center",
+        "namespace": "coffeekraken.sugar.scss.core.class.helper",
+        "path": "src/scss/core/class/helper/_block.scss"
+    },
+    {
+        "name": "//    \t\ts-border",
+        "namespace": "coffeekraken.sugar.",
+        "path": "src/scss/core/class/helper/_border.scss"
+    },
+    {
+        "name": "clear-left",
+        "namespace": "coffeekraken.sugar.scss.core.class.helper",
+        "path": "src/scss/core/class/helper/_clear.scss"
+    },
+    {
+        "name": "s-clearfix",
+        "namespace": "coffeekraken.sugar.scss.core.class.helper",
+        "path": "src/scss/core/class/helper/_clearfix.scss"
+    },
+    {
+        "name": "#{$cls}",
+        "namespace": "coffeekraken.sugar.scss.core.class",
+        "path": "src/scss/core/class/helper/_color.scss"
+    },
+    {
+        "name": "s-block",
+        "namespace": "coffeekraken.sugar.scss.core.class.helper",
+        "path": "src/scss/core/class/helper/_display.scss"
+    },
+    {
+        "name": "fi-#{$name}",
+        "namespace": "coffeekraken.sugar.scss.core.class",
+        "path": "src/scss/core/class/helper/_filter.scss"
+    },
+    {
+        "name": "s-flex",
+        "namespace": "coffeekraken.sugar.scss.core.class.helper",
+        "path": "src/scss/core/class/helper/_flex.scss"
+    },
+    {
+        "name": "f-#{$name}",
+        "namespace": "coffeekraken.sugar.scss.core.class",
+        "path": "src/scss/core/class/helper/_font.scss"
+    },
+    {
+        "name": "s-link-stretched",
+        "namespace": "coffeekraken.sugar.scss.core.class.helper",
+        "path": "src/scss/core/class/helper/_link.scss"
+    },
+    {
+        "name": "#{$cname}",
+        "namespace": "coffeekraken.sugar.scss.core.class",
+        "path": "src/scss/core/class/helper/_margin.scss"
+    },
+    {
+        "name": "mo .mo--center .mo__content",
+        "namespace": "coffeekraken.sugar.scss.core.class.helper",
+        "path": "src/scss/core/class/helper/_media.scss"
+    },
+    {
+        "name": "s-overflow-hidden",
+        "namespace": "coffeekraken.sugar.scss.core.class.helper",
+        "path": "src/scss/core/class/helper/_overflow.scss"
+    },
+    {
+        "name": "#{$cname}",
+        "namespace": "coffeekraken.sugar.scss.core.class",
+        "path": "src/scss/core/class/helper/_padding.scss"
+    },
+    {
+        "name": "pointer-events-none",
+        "namespace": "coffeekraken.sugar.scss.core.class.helper",
+        "path": "src/scss/core/class/helper/_pointer.scss"
+    },
+    {
+        "name": "s-relative",
+        "namespace": "coffeekraken.sugar.scss.core.class.helper",
+        "path": "src/scss/core/class/helper/_position.scss"
+    },
+    {
+        "name": "s-pull-left",
+        "namespace": "coffeekraken.sugar.scss.core.class.helper",
+        "path": "src/scss/core/class/helper/_pull.scss"
+    },
+    {
+        "name": "s-ratio-21-9",
+        "namespace": "coffeekraken.sugar.scss.core.class.helper",
+        "path": "src/scss/core/class/helper/_ratio.scss"
+    },
+    {
+        "name": "s-sr-only",
+        "namespace": "coffeekraken.sugar.scss.core.class.helper",
+        "path": "src/scss/core/class/helper/_screen-reader.scss"
+    },
+    {
+        "name": "s-abs-cover",
+        "namespace": "coffeekraken.sugar.scss.core.class.helper",
+        "path": "src/scss/core/class/helper/_size.scss"
+    },
+    {
+        "name": "s-t-#{$size}",
+        "namespace": "coffeekraken.sugar.scss.core.class",
+        "path": "src/scss/core/class/helper/_text.scss"
+    },
+    {
+        "name": "tr-#{$name}",
+        "namespace": "coffeekraken.sugar.scss.core.class",
+        "path": "src/scss/core/class/helper/_transition.scss"
+    },
+    {
+        "name": "no-transition",
+        "namespace": "coffeekraken.sugar.scss.core.class.helper",
+        "path": "src/scss/core/class/helper/_transmation.scss"
+    },
+    {
+        "name": "s-user-select-none",
+        "namespace": "coffeekraken.sugar.scss.core.class.helper",
+        "path": "src/scss/core/class/helper/_user-select.scss"
+    },
+    {
+        "name": ".s-align-top",
+        "namespace": "coffeekraken.sugar.scss.core.class.helper",
+        "path": "src/scss/core/class/helper/_vertical-align.scss"
+    },
+    {
+        "name": ".icon-#{$name}",
+        "namespace": "coffeekraken.sugar.scss.core.class.icons",
+        "path": "src/scss/core/class/icons/_icons.scss"
+    },
+    {
+        "name": ".icon-#{$name}",
+        "namespace": "coffeekraken.sugar.scss.core.class.icons",
+        "path": "src/scss/core/class/icons/_icons.scss"
+    },
+    {
+        "name": "lnf-shadow",
+        "namespace": "coffeekraken.sugar.scss.core.class.lnf",
+        "path": "src/scss/core/class/lnf/_shadow.scss"
+    },
+    {
+        "name": "lnf-shadow",
+        "namespace": "coffeekraken.sugar.scss.core.class.lnf",
+        "path": "src/scss/core/class/lnf/_shadow.scss"
+    },
+    {
+        "name": "color-hue",
+        "namespace": "coffeekraken.sugar.scss.core.color",
+        "path": "src/scss/core/color/_color-hue.scss"
+    },
+    {
+        "name": "color-lightness",
+        "namespace": "coffeekraken.sugar.scss.core.color",
+        "path": "src/scss/core/color/_color-lightness.scss"
     },
     {
         "name": "color-modifier",
@@ -7029,9 +6769,24 @@
         "path": "src/scss/core/color/_color-modifier.scss"
     },
     {
+        "name": "color-opacity",
+        "namespace": "coffeekraken.sugar.scss.core.color",
+        "path": "src/scss/core/color/_color-opacity.scss"
+    },
+    {
+        "name": "color-saturation",
+        "namespace": "coffeekraken.sugar.scss.core.color",
+        "path": "src/scss/core/color/_color-saturation.scss"
+    },
+    {
         "name": "color-schema",
         "namespace": "coffeekraken.sugar.scss.core.color",
         "path": "src/scss/core/color/_color-schema.scss"
+    },
+    {
+        "name": "color-transparentize",
+        "namespace": "coffeekraken.sugar.scss.core.color",
+        "path": "src/scss/core/color/_color-transparentize.scss"
     },
     {
         "name": "color",
@@ -7049,14 +6804,39 @@
         "path": "src/scss/core/color/_has-color.scss"
     },
     {
+        "name": "color-hue",
+        "namespace": "coffeekraken.sugar.scss.core.color",
+        "path": "src/scss/core/color/_color-hue.scss"
+    },
+    {
+        "name": "color-lightness",
+        "namespace": "coffeekraken.sugar.scss.core.color",
+        "path": "src/scss/core/color/_color-lightness.scss"
+    },
+    {
         "name": "color-modifier",
         "namespace": "coffeekraken.sugar.scss.core.color",
         "path": "src/scss/core/color/_color-modifier.scss"
     },
     {
+        "name": "color-opacity",
+        "namespace": "coffeekraken.sugar.scss.core.color",
+        "path": "src/scss/core/color/_color-opacity.scss"
+    },
+    {
+        "name": "color-saturation",
+        "namespace": "coffeekraken.sugar.scss.core.color",
+        "path": "src/scss/core/color/_color-saturation.scss"
+    },
+    {
         "name": "color-schema",
         "namespace": "coffeekraken.sugar.scss.core.color",
         "path": "src/scss/core/color/_color-schema.scss"
+    },
+    {
+        "name": "color-transparentize",
+        "namespace": "coffeekraken.sugar.scss.core.color",
+        "path": "src/scss/core/color/_color-transparentize.scss"
     },
     {
         "name": "color",
@@ -7149,6 +6929,11 @@
         "path": "src/scss/core/filter/_filter-fn.scss"
     },
     {
+        "name": "filter-map",
+        "namespace": "coffeekraken.sugar.scss.core.map",
+        "path": "src/scss/core/filter/_filter-map.scss"
+    },
+    {
         "name": "filter",
         "namespace": "coffeekraken.sugar.scss.core.filter",
         "path": "src/scss/core/filter/_filter-mx.scss"
@@ -7159,6 +6944,11 @@
         "path": "src/scss/core/filter/_filter-fn.scss"
     },
     {
+        "name": "filter-map",
+        "namespace": "coffeekraken.sugar.scss.core.map",
+        "path": "src/scss/core/filter/_filter-map.scss"
+    },
+    {
         "name": "filter",
         "namespace": "coffeekraken.sugar.scss.core.filter",
         "path": "src/scss/core/filter/_filter-mx.scss"
@@ -7204,6 +6994,136 @@
         "path": "src/scss/core/font/_font-mx.scss"
     },
     {
+        "name": "list-append",
+        "namespace": "coffeekraken.sugar.scss.core.list",
+        "path": "src/scss/core/list/_list-append.scss"
+    },
+    {
+        "name": "list-first",
+        "namespace": "coffeekraken.sugar.scss.core.list",
+        "path": "src/scss/core/list/_list-first.scss"
+    },
+    {
+        "name": "list-implode",
+        "namespace": "coffeekraken.sugar.scss.core.list",
+        "path": "src/scss/core/list/_list-implode.scss"
+    },
+    {
+        "name": "list-index",
+        "namespace": "coffeekraken.sugar.scss.core.list",
+        "path": "src/scss/core/list/_list-index.scss"
+    },
+    {
+        "name": "list-join",
+        "namespace": "coffeekraken.sugar.scss.core.list",
+        "path": "src/scss/core/list/_list-join.scss"
+    },
+    {
+        "name": "list-last-nth",
+        "namespace": "coffeekraken.sugar.scss.core.list",
+        "path": "src/scss/core/list/_list-last-nth.scss"
+    },
+    {
+        "name": "list-length",
+        "namespace": "coffeekraken.sugar.scss.core.list",
+        "path": "src/scss/core/list/_list-length.scss"
+    },
+    {
+        "name": "list-nth",
+        "namespace": "coffeekraken.sugar.scss.core.list",
+        "path": "src/scss/core/list/_list-nth.scss"
+    },
+    {
+        "name": "list-pop",
+        "namespace": "coffeekraken.sugar.scss.core.list",
+        "path": "src/scss/core/list/_list-pop.scss"
+    },
+    {
+        "name": "list-prepend",
+        "namespace": "coffeekraken.sugar.scss.core.list",
+        "path": "src/scss/core/list/_list-prepend.scss"
+    },
+    {
+        "name": "list-remove-nth",
+        "namespace": "coffeekraken.sugar.scss.core.list",
+        "path": "src/scss/core/list/_list-remove-nth.scss"
+    },
+    {
+        "name": "list-search",
+        "namespace": "coffeekraken.sugar.scss.core.list",
+        "path": "src/scss/core/list/_list-search.scss"
+    },
+    {
+        "name": "list-set-nth",
+        "namespace": "coffeekraken.sugar.scss.core.list",
+        "path": "src/scss/core/list/_list-set-nth.scss"
+    },
+    {
+        "name": "list-append",
+        "namespace": "coffeekraken.sugar.scss.core.list",
+        "path": "src/scss/core/list/_list-append.scss"
+    },
+    {
+        "name": "list-first",
+        "namespace": "coffeekraken.sugar.scss.core.list",
+        "path": "src/scss/core/list/_list-first.scss"
+    },
+    {
+        "name": "list-implode",
+        "namespace": "coffeekraken.sugar.scss.core.list",
+        "path": "src/scss/core/list/_list-implode.scss"
+    },
+    {
+        "name": "list-index",
+        "namespace": "coffeekraken.sugar.scss.core.list",
+        "path": "src/scss/core/list/_list-index.scss"
+    },
+    {
+        "name": "list-join",
+        "namespace": "coffeekraken.sugar.scss.core.list",
+        "path": "src/scss/core/list/_list-join.scss"
+    },
+    {
+        "name": "list-last-nth",
+        "namespace": "coffeekraken.sugar.scss.core.list",
+        "path": "src/scss/core/list/_list-last-nth.scss"
+    },
+    {
+        "name": "list-length",
+        "namespace": "coffeekraken.sugar.scss.core.list",
+        "path": "src/scss/core/list/_list-length.scss"
+    },
+    {
+        "name": "list-nth",
+        "namespace": "coffeekraken.sugar.scss.core.list",
+        "path": "src/scss/core/list/_list-nth.scss"
+    },
+    {
+        "name": "list-pop",
+        "namespace": "coffeekraken.sugar.scss.core.list",
+        "path": "src/scss/core/list/_list-pop.scss"
+    },
+    {
+        "name": "list-prepend",
+        "namespace": "coffeekraken.sugar.scss.core.list",
+        "path": "src/scss/core/list/_list-prepend.scss"
+    },
+    {
+        "name": "list-remove-nth",
+        "namespace": "coffeekraken.sugar.scss.core.list",
+        "path": "src/scss/core/list/_list-remove-nth.scss"
+    },
+    {
+        "name": "list-search",
+        "namespace": "coffeekraken.sugar.scss.core.list",
+        "path": "src/scss/core/list/_list-search.scss"
+    },
+    {
+        "name": "list-set-nth",
+        "namespace": "coffeekraken.sugar.scss.core.list",
+        "path": "src/scss/core/list/_list-set-nth.scss"
+    },
+    {
         "name": "lnf",
         "namespace": "coffeekraken.sugar.scss.core.look-and-feel",
         "path": "src/scss/core/look-and-feel/_lnf.scss"
@@ -7229,9 +7149,64 @@
         "path": "src/scss/core/map/_dash-to-map.scss"
     },
     {
-        "name": "filter-map",
+        "name": "map-deep-values",
         "namespace": "coffeekraken.sugar.scss.core.map",
-        "path": "src/scss/core/map/_filter-map.scss"
+        "path": "src/scss/core/map/_map-deep-values.scss"
+    },
+    {
+        "name": "map-extend",
+        "namespace": "coffeekraken.sugar.scss.core.map",
+        "path": "src/scss/core/map/_map-extend.scss"
+    },
+    {
+        "name": "map-filter-by-namespace",
+        "namespace": "coffeekraken.sugar.scss.core.map",
+        "path": "src/scss/core/map/_map-filter-by-namespace.scss"
+    },
+    {
+        "name": "map-filter",
+        "namespace": "coffeekraken.sugar.scss.core.map",
+        "path": "src/scss/core/map/_map-filter.scss"
+    },
+    {
+        "name": "map-flatten",
+        "namespace": "coffeekraken.sugar.scss.core.map",
+        "path": "src/scss/core/map/_map-flatten.scss"
+    },
+    {
+        "name": "map-get",
+        "namespace": "coffeekraken.sugar.scss.core.map",
+        "path": "src/scss/core/map/_map-get.scss"
+    },
+    {
+        "name": "map-has-key",
+        "namespace": "coffeekraken.sugar.scss.core.map",
+        "path": "src/scss/core/map/_map-has-key.scss"
+    },
+    {
+        "name": "map-keys",
+        "namespace": "coffeekraken.sugar.scss.core.map",
+        "path": "src/scss/core/map/_map-keys.scss"
+    },
+    {
+        "name": "map-merge",
+        "namespace": "coffeekraken.sugar.scss.core.map",
+        "path": "src/scss/core/map/_map-merge.scss"
+    },
+    {
+        "name": "map-remove",
+        "namespace": "coffeekraken.sugar.scss.core.map",
+        "path": "src/scss/core/map/_map-remove.scss"
+    },
+    {
+        "name": "map-set",
+        "namespace": "coffeekraken.sugar.scss.core.map",
+        "path": "src/scss/core/map/_map-set.scss"
+    },
+    {
+        "name": "map-to-css-variables",
+        "namespace": "coffeekraken.sugar.scss.core.map",
+        "path": "src/scss/core/map/_map-to-css-variables.scss"
     },
     {
         "name": "dash-to-map",
@@ -7239,54 +7214,329 @@
         "path": "src/scss/core/map/_dash-to-map.scss"
     },
     {
-        "name": "filter-map",
+        "name": "map-deep-values",
         "namespace": "coffeekraken.sugar.scss.core.map",
-        "path": "src/scss/core/map/_filter-map.scss"
+        "path": "src/scss/core/map/_map-deep-values.scss"
+    },
+    {
+        "name": "map-extend",
+        "namespace": "coffeekraken.sugar.scss.core.map",
+        "path": "src/scss/core/map/_map-extend.scss"
+    },
+    {
+        "name": "map-filter-by-namespace",
+        "namespace": "coffeekraken.sugar.scss.core.map",
+        "path": "src/scss/core/map/_map-filter-by-namespace.scss"
+    },
+    {
+        "name": "map-filter",
+        "namespace": "coffeekraken.sugar.scss.core.map",
+        "path": "src/scss/core/map/_map-filter.scss"
+    },
+    {
+        "name": "map-flatten",
+        "namespace": "coffeekraken.sugar.scss.core.map",
+        "path": "src/scss/core/map/_map-flatten.scss"
+    },
+    {
+        "name": "map-get",
+        "namespace": "coffeekraken.sugar.scss.core.map",
+        "path": "src/scss/core/map/_map-get.scss"
+    },
+    {
+        "name": "map-has-key",
+        "namespace": "coffeekraken.sugar.scss.core.map",
+        "path": "src/scss/core/map/_map-has-key.scss"
+    },
+    {
+        "name": "map-keys",
+        "namespace": "coffeekraken.sugar.scss.core.map",
+        "path": "src/scss/core/map/_map-keys.scss"
+    },
+    {
+        "name": "map-merge",
+        "namespace": "coffeekraken.sugar.scss.core.map",
+        "path": "src/scss/core/map/_map-merge.scss"
+    },
+    {
+        "name": "map-remove",
+        "namespace": "coffeekraken.sugar.scss.core.map",
+        "path": "src/scss/core/map/_map-remove.scss"
+    },
+    {
+        "name": "map-set",
+        "namespace": "coffeekraken.sugar.scss.core.map",
+        "path": "src/scss/core/map/_map-set.scss"
+    },
+    {
+        "name": "map-to-css-variables",
+        "namespace": "coffeekraken.sugar.scss.core.map",
+        "path": "src/scss/core/map/_map-to-css-variables.scss"
+    },
+    {
+        "name": "math-abs",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-abs.scss"
+    },
+    {
+        "name": "math-acos",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-acos.scss"
+    },
+    {
+        "name": "math-asin",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-asin.scss"
+    },
+    {
+        "name": "math-atan",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-atan.scss"
+    },
+    {
+        "name": "math-ceil",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-ceil.scss"
+    },
+    {
+        "name": "math-convert-angle",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-convert-angle.scss"
+    },
+    {
+        "name": "math-cos",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-cos.scss"
+    },
+    {
+        "name": "math-deg",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-deg.scss"
+    },
+    {
+        "name": "math-even",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-even.scss"
+    },
+    {
+        "name": "math-fact",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-fact.scss"
+    },
+    {
+        "name": "math-grad",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-grad.scss"
+    },
+    {
+        "name": "math-odd",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-odd.scss"
+    },
+    {
+        "name": "math-percentage",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-percentage.scss"
+    },
+    {
+        "name": "math-pow",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-pow.scss"
+    },
+    {
+        "name": "math-rad",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-rad.scss"
+    },
+    {
+        "name": "math-random",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-random.scss"
     },
     {
         "name": "render-round-even",
         "namespace": "coffeekraken.sugar.scss.core.math",
-        "path": "src/scss/core/math/_render-round-even.scss"
+        "path": "src/scss/core/math/_math-render-round-even.scss"
     },
     {
         "name": "render-round-odd",
         "namespace": "coffeekraken.sugar.scss.core.math",
-        "path": "src/scss/core/math/_render-round-odd.scss"
+        "path": "src/scss/core/math/_math-render-round-odd.scss"
     },
     {
         "name": "render-round",
         "namespace": "coffeekraken.sugar.scss.core.math",
-        "path": "src/scss/core/math/_render-round.scss"
+        "path": "src/scss/core/math/_math-render-round.scss"
+    },
+    {
+        "name": "math-round",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-round.scss"
+    },
+    {
+        "name": "math-sin",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-sin.scss"
+    },
+    {
+        "name": "math-sqrt",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-sqrt.scss"
+    },
+    {
+        "name": "math-tan",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-tan.scss"
+    },
+    {
+        "name": "math-turn",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-turn.scss"
+    },
+    {
+        "name": "math-abs",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-abs.scss"
+    },
+    {
+        "name": "math-acos",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-acos.scss"
+    },
+    {
+        "name": "math-asin",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-asin.scss"
+    },
+    {
+        "name": "math-atan",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-atan.scss"
+    },
+    {
+        "name": "math-ceil",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-ceil.scss"
+    },
+    {
+        "name": "math-convert-angle",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-convert-angle.scss"
+    },
+    {
+        "name": "math-cos",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-cos.scss"
+    },
+    {
+        "name": "math-deg",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-deg.scss"
+    },
+    {
+        "name": "math-even",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-even.scss"
+    },
+    {
+        "name": "math-fact",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-fact.scss"
+    },
+    {
+        "name": "math-grad",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-grad.scss"
+    },
+    {
+        "name": "math-odd",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-odd.scss"
+    },
+    {
+        "name": "math-percentage",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-percentage.scss"
+    },
+    {
+        "name": "math-pow",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-pow.scss"
+    },
+    {
+        "name": "math-rad",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-rad.scss"
+    },
+    {
+        "name": "math-random",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-random.scss"
     },
     {
         "name": "render-round-even",
         "namespace": "coffeekraken.sugar.scss.core.math",
-        "path": "src/scss/core/math/_render-round-even.scss"
+        "path": "src/scss/core/math/_math-render-round-even.scss"
     },
     {
         "name": "render-round-odd",
         "namespace": "coffeekraken.sugar.scss.core.math",
-        "path": "src/scss/core/math/_render-round-odd.scss"
+        "path": "src/scss/core/math/_math-render-round-odd.scss"
     },
     {
         "name": "render-round",
         "namespace": "coffeekraken.sugar.scss.core.math",
-        "path": "src/scss/core/math/_render-round.scss"
+        "path": "src/scss/core/math/_math-render-round.scss"
     },
     {
-        "name": "modular-scale",
-        "namespace": "coffeekraken.sugar.scss.core.modular-scale",
-        "path": "src/scss/core/modular-scale/_modular-scale.scss"
+        "name": "math-round",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-round.scss"
     },
     {
-        "name": "modular-scale",
-        "namespace": "coffeekraken.sugar.scss.core.modular-scale",
-        "path": "src/scss/core/modular-scale/_modular-scale.scss"
+        "name": "math-sin",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-sin.scss"
+    },
+    {
+        "name": "math-sqrt",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-sqrt.scss"
+    },
+    {
+        "name": "math-tan",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-tan.scss"
+    },
+    {
+        "name": "math-turn",
+        "namespace": "coffeekraken.sugar.scss.core.math",
+        "path": "src/scss/core/math/_math-turn.scss"
+    },
+    {
+        "name": "selector",
+        "namespace": "coffeekraken.sugar.scss.core.string",
+        "path": "src/scss/core/selector/_selector.scss"
+    },
+    {
+        "name": "selector",
+        "namespace": "coffeekraken.sugar.scss.core.string",
+        "path": "src/scss/core/selector/_selector.scss"
+    },
+    {
+        "name": "setting-var",
+        "namespace": "coffeekraken.sugar.scss.core.setting",
+        "path": "src/scss/core/setting/_setting-var.scss"
     },
     {
         "name": "setting",
         "namespace": "coffeekraken.sugar.scss.core.setting",
         "path": "src/scss/core/setting/_setting.scss"
+    },
+    {
+        "name": "setting-var",
+        "namespace": "coffeekraken.sugar.scss.core.setting",
+        "path": "src/scss/core/setting/_setting-var.scss"
     },
     {
         "name": "setting",
@@ -7324,9 +7574,54 @@
         "path": "src/scss/core/string/_replace-tokens.scss"
     },
     {
-        "name": "selector",
+        "name": "str-index",
         "namespace": "coffeekraken.sugar.scss.core.string",
-        "path": "src/scss/core/string/_selector.scss"
+        "path": "src/scss/core/string/_str-index.scss"
+    },
+    {
+        "name": "str-is-url",
+        "namespace": "coffeekraken.sugar.scss.core.string",
+        "path": "src/scss/core/string/_str-is-url.scss"
+    },
+    {
+        "name": "str-length",
+        "namespace": "coffeekraken.sugar.scss.core.string",
+        "path": "src/scss/core/string/_str-length.scss"
+    },
+    {
+        "name": "str-replace",
+        "namespace": "coffeekraken.sugar.scss.core.string",
+        "path": "src/scss/core/string/_str-replace.scss"
+    },
+    {
+        "name": "str-slice",
+        "namespace": "coffeekraken.sugar.scss.core.string",
+        "path": "src/scss/core/string/_str-slice.scss"
+    },
+    {
+        "name": "str-split",
+        "namespace": "coffeekraken.sugar.scss.core.string",
+        "path": "src/scss/core/string/_str-split.scss"
+    },
+    {
+        "name": "str-trim",
+        "namespace": "coffeekraken.sugar.scss.core.string",
+        "path": "src/scss/core/string/_str-trim.scss"
+    },
+    {
+        "name": "str-unique-id",
+        "namespace": "coffeekraken.sugar.scss.core.string",
+        "path": "src/scss/core/string/_str-unique-id.scss"
+    },
+    {
+        "name": "str-unquote",
+        "namespace": "coffeekraken.sugar.scss.core.string",
+        "path": "src/scss/core/string/_str-unquote.scss"
+    },
+    {
+        "name": "str-url-ext",
+        "namespace": "coffeekraken.sugar.scss.core.string",
+        "path": "src/scss/core/string/_str-url-ext.scss"
     },
     {
         "name": "parse-properties",
@@ -7339,9 +7634,54 @@
         "path": "src/scss/core/string/_replace-tokens.scss"
     },
     {
-        "name": "selector",
+        "name": "str-index",
         "namespace": "coffeekraken.sugar.scss.core.string",
-        "path": "src/scss/core/string/_selector.scss"
+        "path": "src/scss/core/string/_str-index.scss"
+    },
+    {
+        "name": "str-is-url",
+        "namespace": "coffeekraken.sugar.scss.core.string",
+        "path": "src/scss/core/string/_str-is-url.scss"
+    },
+    {
+        "name": "str-length",
+        "namespace": "coffeekraken.sugar.scss.core.string",
+        "path": "src/scss/core/string/_str-length.scss"
+    },
+    {
+        "name": "str-replace",
+        "namespace": "coffeekraken.sugar.scss.core.string",
+        "path": "src/scss/core/string/_str-replace.scss"
+    },
+    {
+        "name": "str-slice",
+        "namespace": "coffeekraken.sugar.scss.core.string",
+        "path": "src/scss/core/string/_str-slice.scss"
+    },
+    {
+        "name": "str-split",
+        "namespace": "coffeekraken.sugar.scss.core.string",
+        "path": "src/scss/core/string/_str-split.scss"
+    },
+    {
+        "name": "str-trim",
+        "namespace": "coffeekraken.sugar.scss.core.string",
+        "path": "src/scss/core/string/_str-trim.scss"
+    },
+    {
+        "name": "str-unique-id",
+        "namespace": "coffeekraken.sugar.scss.core.string",
+        "path": "src/scss/core/string/_str-unique-id.scss"
+    },
+    {
+        "name": "str-unquote",
+        "namespace": "coffeekraken.sugar.scss.core.string",
+        "path": "src/scss/core/string/_str-unquote.scss"
+    },
+    {
+        "name": "str-url-ext",
+        "namespace": "coffeekraken.sugar.scss.core.string",
+        "path": "src/scss/core/string/_str-url-ext.scss"
     },
     {
         "name": "transition",
@@ -7422,6 +7762,36 @@
         "name": "vertical-rhythm-scope",
         "namespace": "coffeekraken.sugar.scss.core.typography",
         "path": "src/scss/core/typography/_vertical-rhythm-scope.scss"
+    },
+    {
+        "name": "var-define",
+        "namespace": "coffeekraken.sugar.scss.core.var",
+        "path": "src/scss/core/var/_define.scss"
+    },
+    {
+        "name": "var-name",
+        "namespace": "coffeekraken.sugar.scss.core.var",
+        "path": "src/scss/core/var/_name.scss"
+    },
+    {
+        "name": "var-output",
+        "namespace": "coffeekraken.sugar.scss.core.var",
+        "path": "src/scss/core/var/_output.scss"
+    },
+    {
+        "name": "var-define",
+        "namespace": "coffeekraken.sugar.scss.core.var",
+        "path": "src/scss/core/var/_define.scss"
+    },
+    {
+        "name": "var-name",
+        "namespace": "coffeekraken.sugar.scss.core.var",
+        "path": "src/scss/core/var/_name.scss"
+    },
+    {
+        "name": "var-output",
+        "namespace": "coffeekraken.sugar.scss.core.var",
+        "path": "src/scss/core/var/_output.scss"
     },
     {
         "name": "effect-bubble",
@@ -7694,14 +8064,24 @@
         "path": "src/scss/image/_image-rendering.scss"
     },
     {
+        "name": "columns-map",
+        "namespace": "coffeekraken.sugar.scss.layout",
+        "path": "src/scss/layout/_columns-map.scss"
+    },
+    {
         "name": "columns",
         "namespace": "coffeekraken.sugar.scss.layout",
         "path": "src/scss/layout/_columns.scss"
     },
     {
         "name": "ratio",
-        "namespace": "coffeekraken.sugar.scss.ratio",
+        "namespace": "coffeekraken.sugar.scss.layout",
         "path": "src/scss/layout/_ratio.scss"
+    },
+    {
+        "name": "columns-map",
+        "namespace": "coffeekraken.sugar.scss.layout",
+        "path": "src/scss/layout/_columns-map.scss"
     },
     {
         "name": "columns",
@@ -7710,8 +8090,18 @@
     },
     {
         "name": "ratio",
-        "namespace": "coffeekraken.sugar.scss.ratio",
+        "namespace": "coffeekraken.sugar.scss.layout",
         "path": "src/scss/layout/_ratio.scss"
+    },
+    {
+        "name": "link-stretched",
+        "namespace": "coffeekraken.sugar.scss.link",
+        "path": "src/scss/link/_link-stretched.scss"
+    },
+    {
+        "name": "link-stretched",
+        "namespace": "coffeekraken.sugar.scss.link",
+        "path": "src/scss/link/_link-stretched.scss"
     },
     {
         "name": "list-bullet",
@@ -7826,12 +8216,32 @@
     {
         "name": "media",
         "namespace": "coffeekraken.sugar.scss.responsive",
-        "path": "src/scss/responsive/_media.scss"
+        "path": "src/scss/responsive/_media.old.scss"
     },
     {
         "name": "media",
         "namespace": "coffeekraken.sugar.scss.responsive",
         "path": "src/scss/responsive/_media.scss"
+    },
+    {
+        "name": "media",
+        "namespace": "coffeekraken.sugar.scss.responsive",
+        "path": "src/scss/responsive/_media.old.scss"
+    },
+    {
+        "name": "media",
+        "namespace": "coffeekraken.sugar.scss.responsive",
+        "path": "src/scss/responsive/_media.scss"
+    },
+    {
+        "name": "sr-only",
+        "namespace": "coffeekraken.sugar.scss.screen-reader",
+        "path": "src/scss/screen-reader/_sr-only.scss"
+    },
+    {
+        "name": "sr-only",
+        "namespace": "coffeekraken.sugar.scss.screen-reader",
+        "path": "src/scss/screen-reader/_sr-only.scss"
     },
     {
         "name": "round-overflow",
@@ -7997,11 +8407,6 @@
         "name": "border-map",
         "namespace": "coffeekraken.sugar.scss.util",
         "path": "src/scss/util/_border-map.scss"
-    },
-    {
-        "name": "columns-util",
-        "namespace": "coffeekraken.sugar.scss.util",
-        "path": "src/scss/util/_columns-map.scss"
     },
     {
         "name": "margin-map",
@@ -8022,11 +8427,6 @@
         "name": "border-map",
         "namespace": "coffeekraken.sugar.scss.util",
         "path": "src/scss/util/_border-map.scss"
-    },
-    {
-        "name": "columns-util",
-        "namespace": "coffeekraken.sugar.scss.util",
-        "path": "src/scss/util/_columns-map.scss"
     },
     {
         "name": "margin-map",

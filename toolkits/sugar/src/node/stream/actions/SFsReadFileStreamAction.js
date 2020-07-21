@@ -1,5 +1,6 @@
 const __SActionsStreamAction = require('../SActionsStreamAction');
 const __fs = require('fs');
+const __isDirectory = require('../../is/directory');
 
 /**
  * @name            SFsReadFileStreamAction
@@ -67,6 +68,8 @@ module.exports = class SFsReadFileStreamAction extends __SActionsStreamAction {
         throw new Error(
           `The given "<yellow>input</yellow>" streamObj file path property "<red>${streamObj}</red>" does not exists...`
         );
+
+      if (__isDirectory(streamObj.input)) return resolve(streamObj);
 
       streamObj[
         streamObj.dataProperty ||

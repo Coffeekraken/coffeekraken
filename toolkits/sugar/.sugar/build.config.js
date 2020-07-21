@@ -2,8 +2,10 @@ const __packageRoot = require('../node/path/packageRoot');
 const __isInPackage = require('../node/path/isInPackage');
 
 function isInSugarPackage() {
-  return __isInPackage('@coffeekraken/sugar');
+  return __isInPackage('@coffeekraken/sugar', process.cwd(), true);
 }
+
+console.log(isInSugarPackage());
 
 module.exports = {
   scss: {
@@ -270,50 +272,50 @@ module.exports = {
       : `${__packageRoot()}/src/config/**/*.config.js`
   },
 
-  doc: {
-    /**
-     * @name              input
-     * @namespace         config.build.doc
-     * @type              String
-     * @default           <appRoot>/src/**\/*
-     *
-     * Specify the root folder (or file) to check for documentation build from docblocks
-     *
-     * @since             2.0.0
-     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    input: isInSugarPackage()
-      ? `${__packageRoot()}/src/**/*.*`
-      : `${__packageRoot()}/src/**/*.*`,
+  // doc: {
+  //   /**
+  //    * @name              input
+  //    * @namespace         config.build.doc
+  //    * @type              String
+  //    * @default           <appRoot>/src/**\/*
+  //    *
+  //    * Specify the root folder (or file) to check for documentation build from docblocks
+  //    *
+  //    * @since             2.0.0
+  //    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  //    */
+  //   input: isInSugarPackage()
+  //     ? `${__packageRoot()}/src/**/*.*`
+  //     : `${__packageRoot()}/src/**/*.*`,
 
-    /**
-     * @name              outputDir
-     * @namespace         config.build.doc
-     * @type              String
-     * @default           <appRoot>/dist/doc
-     *
-     * Specify the destination folder where to put the compiled files in
-     *
-     * @since             2.0.0
-     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    outputDir: isInSugarPackage()
-      ? `${__packageRoot()}/public/dist/doc`
-      : `${__packageRoot()}/dist/doc`,
+  //   /**
+  //    * @name              outputDir
+  //    * @namespace         config.build.doc
+  //    * @type              String
+  //    * @default           <appRoot>/dist/doc
+  //    *
+  //    * Specify the destination folder where to put the compiled files in
+  //    *
+  //    * @since             2.0.0
+  //    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  //    */
+  //   outputDir: isInSugarPackage()
+  //     ? `${__packageRoot()}/public/dist/doc`
+  //     : `${__packageRoot()}/dist/doc`,
 
-    /**
-     * @name              watch
-     * @namespace         config.build.doc
-     * @type              String
-     * @default           src/**\/*
-     *
-     * Set the watch files that you want to check
-     *
-     * @since             2.0.0
-     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    watch: false
-  },
+  //   /**
+  //    * @name              watch
+  //    * @namespace         config.build.doc
+  //    * @type              String
+  //    * @default           src/**\/*
+  //    *
+  //    * Set the watch files that you want to check
+  //    *
+  //    * @since             2.0.0
+  //    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  //    */
+  //   watch: false
+  // },
 
   docMap: {
     /**
@@ -327,7 +329,9 @@ module.exports = {
      * @since       2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    input: `${__packageRoot()}/src/**/*:@namespace`,
+    input: isInSugarPackage()
+      ? `${__packageRoot(__dirname)}/src/**/*:@namespace`
+      : `${__packageRoot()}/src/**/*:@namespace`,
 
     /**
      * @name          output
@@ -340,7 +344,9 @@ module.exports = {
      * @since       2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    output: `${__packageRoot()}/docMap.json`
+    output: isInSugarPackage()
+      ? `${__packageRoot(__dirname)}/docMap.json`
+      : `${__packageRoot()}/docMap.json`
   },
 
   // docNav: {
@@ -412,9 +418,7 @@ module.exports = {
      * @since             2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    input: isInSugarPackage()
-      ? `${__packageRoot()}/public/src/views/**/*.*`
-      : `${__packageRoot()}/src/views/**/*.*`,
+    input: `${__packageRoot()}/src/views/**/*.*`,
 
     /**
      * @name              outputDir
@@ -427,9 +431,7 @@ module.exports = {
      * @since             2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    outputDir: isInSugarPackage()
-      ? `${__packageRoot()}/public/dist/views`
-      : `${__packageRoot()}/dist/views`,
+    outputDir: `${__packageRoot()}/dist/views`,
 
     /**
      * @name              watch

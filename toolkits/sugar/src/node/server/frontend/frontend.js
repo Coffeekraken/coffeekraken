@@ -55,22 +55,21 @@ module.exports = async (args = {}) => {
     });
   }
 
-  function renderTemplate(string, data = {}) {
-    const lintRes = __ejsLint(string);
-    if (lintRes) {
-      throw new Error(lintRes);
-    }
-    // rendering the template
-    const result = __ejs.render(string, data);
-    return result;
-  }
+  // function renderTemplate(string, data = {}) {
+  //   const lintRes = __ejsLint(string);
+  //   if (lintRes) {
+  //     throw new Error(lintRes);
+  //   }
+  //   // rendering the template
+  //   const result = __ejs.render(string, data);
+  //   return result;
+  // }
 
   // build the "templateData" object to pass to the render engines
   const templateData = {
     title: __packageJson.name,
     env: process.env.NODE_ENV || 'development',
     package: JSON.stringify(__packageJson),
-    menuHtml: sNavInstance ? sNavInstance.toHtml() : '',
     settings: JSON.stringify(settings)
   };
 
@@ -111,22 +110,18 @@ module.exports = async (args = {}) => {
         view = 'tmp.index';
       }
 
-      console.log(view);
-
       // render the view
       let result = await __bladePhp(view, {
         ...templateData
       });
 
-      console.log('RESULT', result);
-
       // remove tmp folder
       __rimraf.sync(tmpDir);
 
       // render using ejs
-      result = renderTemplate(result, {
-        ...templateData
-      });
+      // result = renderTemplate(result, {
+      //   ...templateData
+      // });
 
       res.send(result);
     } else if (__fs.existsSync(indexHtmlPath)) {
@@ -137,10 +132,10 @@ module.exports = async (args = {}) => {
           'utf8'
         );
         const stringToCompile = baseContent.replace('[content]', content);
-        const result = renderTemplate(stringToCompile, templateData);
+        // const result = renderTemplate(stringToCompile, templateData);
         res.send(result);
       } else {
-        const result = renderTemplate(content, templateData);
+        // const result = renderTemplate(content, templateData);
         res.send(result);
       }
     } else {
@@ -153,34 +148,46 @@ module.exports = async (args = {}) => {
     }
   });
 
-  // loop on pages
-  Object.keys(settings.pages).forEach(async (pageName) => {
-    const pageSettings = settings.pages[pageName];
+  // loop on handlers
+  Object.keys(settings.handlers).forEach(async (pageName) => {
+    const handlerSettings = settings.handlers[pageName];
 
-    server.get(`${pageSettings.slug}/*`, async (req, res) => {
+    server.get(`${handlerSettings.slug}/*`, async (req, res) => {
       try {
-        const response = await pageSettings.handler(req, server);
+        const response = await handlerSettings.handler(req, server);
 
         // handle response
-        const view = response.page || 'pages.default';
+        const view = response.view || 'pages.default';
         const content = response.content || '404';
         const title = response.title || 'Welcome';
+        const type = response.type || 'blade/php';
 
-        // render the view
-        let result = await __bladePhp(view, {
-          ...templateData,
-          title,
-          content
-        });
+        // prepariong the result
+        let result;
 
-        // render using ejs
-        result = renderTemplate(result, {
-          ...templateData
-        });
+        // check the handler content type
+        switch (type.toLowerCase()) {
+          case 'blade/php':
+            // render the view
+            result = await __bladePhp(view, {
+              ...templateData,
+              title,
+              content
+            });
+            break;
+          case 'application/json':
+            result = content;
+            break;
+        }
+
+        // // render using ejs
+        // result = renderTemplate(result, {
+        //   ...templateData
+        // });
 
         res.send(result);
       } catch (e) {
-        console.log(e);
+        throw new Error(e);
         // res.redirect('/404');
       }
     });

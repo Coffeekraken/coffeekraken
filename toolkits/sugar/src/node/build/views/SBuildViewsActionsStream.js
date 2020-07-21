@@ -1,10 +1,10 @@
 const __SActionsStream = require('../../stream/SActionsStream');
 const __deepMerge = require('../../object/deepMerge');
-const __getFilename = require('../../fs/filename');
-const __SFsOutputStreamAction = require('../../stream/actions/SFsOutputStreamAction');
+const __SFsFilesResolverStreamAction = require('../../stream/actions/SFsFilesResolverStreamAction');
 const __SFsReadFileStreamAction = require('../../stream/actions/SFsReadFileStreamAction');
-const __SGlobResolverStreamAction = require('../../stream/actions/SGlobResolverStreamAction');
 const __SUnlinkStreamAction = require('../../stream/actions/SUnlinkStreamAction');
+const __globParent = require('glob-parent');
+const __SFsOutputStreamAction = require('../../stream/actions/SFsOutputStreamAction');
 const __path = require('path');
 
 /**
@@ -45,32 +45,34 @@ module.exports = class SBuildViewsActionsStream extends __SActionsStream {
     super(
       {
         unlink: __SUnlinkStreamAction,
-        globResolver: __SGlobResolverStreamAction,
-        fsReadFile: __SFsReadFileStreamAction,
+        filesResolver: __SFsFilesResolverStreamAction,
+        readFile: __SFsReadFileStreamAction,
         fsOutput: __SFsOutputStreamAction
       },
       __deepMerge(
         {
+          actions: {
+            filesResolver: {
+              ignoreFolders: [],
+              out: 'array'
+            }
+          },
           before: (streamObj) => {
-            streamObj.globProperty = 'input';
+            streamObj.inputDir = __globParent(streamObj.input);
             streamObj.unlink = streamObj.outputDir;
             return streamObj;
           },
-          afterActions: {
-            globResolver: (streamObj) => {
-              if (streamObj.input) {
-                streamObj.filename = __getFilename(streamObj.input);
-              }
-              return streamObj;
-            }
-          },
           beforeActions: {
             fsOutput: (streamObj) => {
+              let outputPath = streamObj.input.replace(streamObj.inputDir, '');
+              if (outputPath.slice(0, 1) === '/')
+                outputPath = outputPath.slice(1);
+
               if (!streamObj.outputStack) streamObj.outputStack = {};
-              if (streamObj.outputDir && streamObj.filename && streamObj.data) {
+              if (streamObj.outputDir && outputPath && streamObj.data) {
                 streamObj.outputStack.data = __path.resolve(
                   streamObj.outputDir,
-                  streamObj.filename
+                  outputPath
                 );
               }
               return streamObj;

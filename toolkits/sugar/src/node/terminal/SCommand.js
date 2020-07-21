@@ -565,6 +565,9 @@ module.exports = class SCommand extends __SPromise {
     let watchTimeout;
     this._watchProcess.stdout.on('data', (data) => {
       // split the logged value
+
+      if (Object.keys(data).length === 6) return; // @TODO weird protection... to check
+
       const action = data.toString().split(':')[0];
       const path = data.toString().split(':')[1];
 

@@ -10,21 +10,21 @@ import __clone from '@coffeekraken/sugar/js/object/clone';
 import __throttle from '@coffeekraken/sugar/js/function/throttle';
 import __nodeIndex from '@coffeekraken/sugar/js/dom/nodeIndex';
 
-__on('s-filtrable-input.attach', (comp) => {
-  // rework the items
-  const itemsArray = __docMap.map((item) => {
-    return {
-      title: item.namespace,
-      description: item.path
-    };
-  });
-  comp.prop('items', itemsArray);
-});
-__on('s-filtrable-input.validate', (selectedItem) => {
-  console.log('SELET', selectedItem);
-});
+// __on('s-filtrable-input.attach', (comp) => {
+//   // rework the items
+//   const itemsArray = __docMap.map((item) => {
+//     return {
+//       title: item.namespace,
+//       description: item.path
+//     };
+//   });
+//   comp.prop('items', itemsArray);
+// });
+// __on('s-filtrable-input.validate', (selectedItem) => {
+//   console.log('SELET', selectedItem);
+// });
 
-class SFiltrableInputWebComponent extends SLitHtmlWebComponent(
+export default class SFiltrableInputWebComponent extends SLitHtmlWebComponent(
   HTMLInputElement
 ) {
   static props = {
@@ -33,6 +33,11 @@ class SFiltrableInputWebComponent extends SLitHtmlWebComponent(
       required: true,
       physical: false,
       default: [],
+      watch: true
+    },
+    inputThrottle: {
+      type: 'Number',
+      default: 0,
       watch: true
     },
     loading: {
@@ -156,6 +161,14 @@ class SFiltrableInputWebComponent extends SLitHtmlWebComponent(
 
     this.on('ready', () => {
       this._$list = this.$('.list');
+
+      let inputThrottleTimeout;
+      this.addEventListener('input', (e) => {
+        clearTimeout(inputThrottleTimeout);
+        inputThrottleTimeout = setTimeout(() => {
+          this.dispatch('input', this.value);
+        }, this.prop('inputThrottle'));
+      });
 
       let filterTimeout;
       this.addEventListener('input', (e) => {

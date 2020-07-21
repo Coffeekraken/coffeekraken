@@ -15,7 +15,7 @@ module.exports = {
       'build.scss',
       'build.js',
       'build.views',
-      'build.doc'
+      'build.docMap'
     ]
   },
   footer: {
@@ -66,8 +66,10 @@ module.exports = {
       argsObj: {},
       settings: {}
     },
-    'build.doc': {
-      path: `${__packageRoot(__dirname)}/src/node/build/doc/SBuildDocCommand`,
+    'build.docMap': {
+      path: `${__packageRoot(
+        __dirname
+      )}/src/node/build/docMap/SBuildDocMapCommand`,
       argsObj: {},
       settings: {}
     }

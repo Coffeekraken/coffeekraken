@@ -54,7 +54,7 @@ module.exports = (stringArgs = '') => {
     ignoreInitial: true,
     followSymlinks: true,
     cwd: __packageRoot(process.cwd()),
-    ignorePermissionErrors: true
+    ignorePermissionErrors: false
   });
 
   watcher

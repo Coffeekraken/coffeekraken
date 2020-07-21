@@ -1,6 +1,4 @@
 const __SActionsStream = require('../../stream/SActionsStream');
-const __glob = require('glob');
-const __SPromise = require('../../promise/SPromise');
 const __deepMerge = require('../../object/deepMerge');
 const __getFilename = require('../../fs/filename');
 const __SFsOutputStreamAction = require('../../stream/actions/SFsOutputStreamAction');
@@ -11,9 +9,7 @@ const __SRenderSassStreamAction = require('./actions/SRenderSassStreamAction');
 const __SPostCssStreamAction = require('./actions/SPostCssStreamAction');
 const __SGlobResolverStreamAction = require('../../stream/actions/SGlobResolverStreamAction');
 const __path = require('path');
-const __packageRoot = require('../../path/packageRoot');
 const __sugarConfig = require('../../config/sugar');
-const __isInPackage = require('../../is/inPackage');
 
 /**
  * @name            SBuildScssActionsStream

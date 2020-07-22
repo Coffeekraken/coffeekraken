@@ -22,8 +22,8 @@ module.exports = function search(req, server) {
   return new Promise(async (resolve, reject) => {
     let title = `Search results | 18 results`;
 
-    const query = req.query || {};
-    let path = req.params[0];
+    let keyword = req.params[0] ? req.params[0].split(' ')[0] : 'doc';
+    let searchString = req.params[0] ? req.params[0].replace(keyword, '') : '';
 
     const searchRules = __sugarConfig(
       'frontend.handlers.search.settings.rules'
@@ -31,7 +31,7 @@ module.exports = function search(req, server) {
 
     // preparing the handlers to use for the research
     let handlers = __filter(searchRules, (rule) => {
-      if (rule.keyword && rule.keyword === path) return true;
+      if (rule.keyword && rule.keyword === keyword) return true;
       return false;
     });
 
@@ -39,7 +39,7 @@ module.exports = function search(req, server) {
     let resultsArray = [];
     for (let key in handlers) {
       const handler = handlers[key];
-      const results = await handler.handler(path, query, handler.settings);
+      const results = await handler.handler(searchString, handler.settings);
       resultsArray = [...resultsArray, ...results];
     }
 

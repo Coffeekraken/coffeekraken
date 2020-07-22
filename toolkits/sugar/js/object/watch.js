@@ -19,6 +19,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * This method is a simple wrapper around the SWatch class that allows you to watch some action on object and arrays
  *
  * @param       {Object|Array}        target          The array or object to watch
+ * @param       {Object}          [settings={}]       A settings object to configure your watch process. Check the SWatch class documentation for more.
  * @return      {Object}                              Return the proxied object on which you can make all the updates that you want
  *
  * @example       js
@@ -32,8 +33,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function watch(target) {
-  const watchedObj = new _SWatch.default(target);
+function watch(target, settings = {}) {
+  const watchedObj = new _SWatch.default(target, settings);
   return watchedObj;
 }
 

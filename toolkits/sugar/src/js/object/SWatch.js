@@ -2,6 +2,7 @@ import __constructorName from './constructorName';
 import __get from './get';
 import __set from './set';
 import __deepProxy from './deepProxy';
+import __deepMerge from '../object/deepMerge';
 import __parseString from '../string/parse';
 import __uniqid from '../string/uniqid';
 import __micromatch from 'micromatch';
@@ -14,6 +15,10 @@ import __clone from '../object/clone';
  * @type                Class
  *
  * This class allows you to easily monitor some object properties and get the new and old value of it
+ *
+ * @param       {Object}      object        The object to watch
+ * @param       {Object}      [settings={}]       An object of settings to configure your watch process
+ * - deep (true) {Boolean}: Specify if you want to watch the object deeply or just the first level
  *
  * @example 	js
  * // create the watcher instance
@@ -44,6 +49,18 @@ export default class SWatch {
   _watchStack = {};
 
   /**
+   * @name            _settings
+   * @type            Object
+   * @private
+   *
+   * Store the settings object to configure your watch instance
+   *
+   * @since         2.0.0
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _settings = {};
+
+  /**
    * @name                      constructor
    * @type                      Function
    *
@@ -51,35 +68,51 @@ export default class SWatch {
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(object) {
+  constructor(object, settings = {}) {
     // check if the passed object is already an SWatch instance
     if (object.__$SWatch) return object;
 
+    this._settings = __deepMerge(
+      {
+        deep: true
+      },
+      settings
+    );
+
     this._promise = new __SPromise(() => {}).start();
 
-    this._proxiedObject = __deepProxy(object, (obj) => {
-      let path = obj.path;
-      let value = obj.value;
-      let oldValue = obj.oldValue;
-      if (path.slice(0, 1) === '.') path = path.slice(1);
-      // build the object to pass to the handler
-      const watchResult = {
-        object: this._proxiedObject,
-        path,
-        action: obj.action,
-        oldValue,
-        value
-      };
+    this._proxiedObject = __deepProxy(
+      object,
+      (obj) => {
+        let path = obj.path;
+        let value = obj.value;
+        let oldValue = obj.oldValue;
+        if (path.slice(0, 1) === '.') path = path.slice(1);
+        // build the object to pass to the handler
+        const watchResult = {
+          object: this._proxiedObject,
+          path,
+          action: obj.action,
+          oldValue,
+          value
+        };
 
-      if (watchResult.action === 'get' && (path === 'on' || path === 'unwatch'))
-        return;
+        if (
+          watchResult.action === 'get' &&
+          (path === 'on' || path === 'unwatch')
+        )
+          return;
 
-      // trigger event through promise
-      setTimeout(() => {
-        // this._promise.trigger(`${path}`, watchResult);
-        this._promise.trigger(`${path}:${watchResult.action}`, watchResult);
-      });
-    });
+        // trigger event through promise
+        setTimeout(() => {
+          // this._promise.trigger(`${path}`, watchResult);
+          this._promise.trigger(`${path}:${watchResult.action}`, watchResult);
+        });
+      },
+      {
+        deep: this._settings.deep
+      }
+    );
 
     const onPropertyObj = {
       writable: true,

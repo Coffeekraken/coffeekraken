@@ -61,8 +61,6 @@ module.exports = (view, data = {}, settings = {}) => {
   if (!__fs.existsSync(settings.cacheDir)) __fs.mkdirSync(settings.cacheDir);
 
   return new Promise((resolve, reject) => {
-    // create a new tmp folder for blade cache
-    // var tmpobj = tmp.dirSync();
     // preparing the php execution
     __execPhp(
       __dirname + '/bladePhp/compile.php',
@@ -72,9 +70,9 @@ module.exports = (view, data = {}, settings = {}) => {
           throw new Error(error);
         }
         // execute the php engine and get back the result
-        const result = php.compile(
+        php.compile(
           [settings.rootDir, sugarViewsDir],
-          view.replace('.blade.php', ''),
+          view.replace('.blade.php', '').split('/').join('.'),
           data,
           settings.cacheDir,
           (error, result, output, printed) => {
@@ -82,8 +80,6 @@ module.exports = (view, data = {}, settings = {}) => {
             const ret = result || printed || output || error;
             // resolve the promise with the best result possible
             resolve(ret);
-            // remove temp folder
-            // rimraf.sync(tmpobj.name);
           }
         );
       }

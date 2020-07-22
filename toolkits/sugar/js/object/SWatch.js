@@ -13,6 +13,8 @@ var _set = _interopRequireDefault(require("./set"));
 
 var _deepProxy = _interopRequireDefault(require("./deepProxy"));
 
+var _deepMerge = _interopRequireDefault(require("../object/deepMerge"));
+
 var _parse = _interopRequireDefault(require("../string/parse"));
 
 var _uniqid = _interopRequireDefault(require("../string/uniqid"));
@@ -39,6 +41,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * @type                Class
  *
  * This class allows you to easily monitor some object properties and get the new and old value of it
+ *
+ * @param       {Object}      object        The object to watch
+ * @param       {Object}      [settings={}]       An object of settings to configure your watch process
+ * - deep (true) {Boolean}: Specify if you want to watch the object deeply or just the first level
  *
  * @example 	js
  * // create the watcher instance
@@ -68,6 +74,17 @@ let SWatch = /*#__PURE__*/function () {
    */
 
   /**
+   * @name            _settings
+   * @type            Object
+   * @private
+   *
+   * Store the settings object to configure your watch instance
+   *
+   * @since         2.0.0
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+
+  /**
    * @name                      constructor
    * @type                      Function
    *
@@ -75,13 +92,18 @@ let SWatch = /*#__PURE__*/function () {
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  function SWatch(object) {
+  function SWatch(object, settings = {}) {
     _classCallCheck(this, SWatch);
 
     _defineProperty(this, "_watchStack", {});
 
+    _defineProperty(this, "_settings", {});
+
     // check if the passed object is already an SWatch instance
     if (object.__$SWatch) return object;
+    this._settings = (0, _deepMerge.default)({
+      deep: true
+    }, settings);
     this._promise = new _SPromise.default(() => {}).start();
     this._proxiedObject = (0, _deepProxy.default)(object, obj => {
       let path = obj.path;
@@ -102,6 +124,8 @@ let SWatch = /*#__PURE__*/function () {
         // this._promise.trigger(`${path}`, watchResult);
         this._promise.trigger(`${path}:${watchResult.action}`, watchResult);
       });
+    }, {
+      deep: this._settings.deep
     });
     const onPropertyObj = {
       writable: true,

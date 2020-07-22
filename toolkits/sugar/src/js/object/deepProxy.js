@@ -23,6 +23,7 @@ import __deepMerge from '../object/deepMerge';
  * - push: An item has been added inside an array
  * - {methodName}: Every array actions
  * @param         {Object}                [settings={}]         An object of settings to configure your proxy:
+ * - deep (true) {Boolean}: Specify if you want to watch the passed object deeply or juste the first level
  * - handleSet (true) {Boolean}: Specify if you want to handle the "set" action
  * - handleGet (false) {Boolean}: Specify if you want to handle the "get" action
  * - handleDelete (true) {Boolean}: Specify if you want to handle the "delete" action
@@ -44,6 +45,7 @@ export default function deepProxy(object, handlerFn, settings = {}) {
   let isRevoked = false;
   settings = __deepMerge(
     {
+      deep: true,
       handleSet: true,
       handleGet: false,
       handleDelete: true
@@ -56,7 +58,7 @@ export default function deepProxy(object, handlerFn, settings = {}) {
       set(target, key, value) {
         if (isRevoked || !settings.handleSet) return true;
 
-        if (typeof value === 'object') {
+        if (settings.deep && typeof value === 'object') {
           value = proxify(value, [...path, key]);
         }
 
@@ -124,20 +126,23 @@ export default function deepProxy(object, handlerFn, settings = {}) {
 
   function proxify(obj, path) {
     if (obj === null) return obj;
-    for (let key of Object.keys(obj)) {
-      if (Array.isArray(obj[key])) {
-        obj[key] = __proxy(obj[key]);
-        obj[key].watch(
-          Object.getOwnPropertyNames(Array.prototype),
-          (watchObj) => {
-            handlerFn({
-              path: [...path, key].join('.'),
-              ...watchObj
-            });
-          }
-        );
-      } else if (typeof obj[key] === 'object') {
-        obj[key] = proxify(obj[key], [...path, key]);
+
+    if (settings.deep) {
+      for (let key of Object.keys(obj)) {
+        if (Array.isArray(obj[key])) {
+          obj[key] = __proxy(obj[key]);
+          obj[key].watch(
+            Object.getOwnPropertyNames(Array.prototype),
+            (watchObj) => {
+              handlerFn({
+                path: [...path, key].join('.'),
+                ...watchObj
+              });
+            }
+          );
+        } else if (typeof obj[key] === 'object') {
+          obj[key] = proxify(obj[key], [...path, key]);
+        }
       }
     }
 

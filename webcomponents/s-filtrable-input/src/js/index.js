@@ -1,6 +1,5 @@
 import __deepMerge from '@coffeekraken/sugar/js/object/deepMerge';
 import __on from '@coffeekraken/sugar/js/event/on';
-import __docMap from '../data/docMap.json';
 import '../scss/_bare.scss';
 import {
   define,

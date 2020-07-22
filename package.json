@@ -46,8 +46,7 @@
   },
   "dependencies": {
     "@coffeekraken/s-filtrable-input": "file:webcomponents/s-filtrable-input",
-    "@coffeekraken/sugar": "file:toolkits/sugar",
-    "@coffeekraken/sugar-webapp": "file:toolkits/sugar/public"
+    "@coffeekraken/sugar": "file:toolkits/sugar"
   },
   "globalDependencies": {},
   "devDependencies": {

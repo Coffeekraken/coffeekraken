@@ -10,6 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "@coffeekraken/sugar": "file:../sugar",
-    "@coffeekraken/s-filtrable-input": "file:../../webcomponents/s-filtrable-input"
+    "@coffeekraken/s-filtrable-input": "file:../../webcomponents/s-filtrable-input",
+    "@coffeekraken/s-iframe-webcomponent": "file:../../webcomponents/s-iframe"
   }
 }

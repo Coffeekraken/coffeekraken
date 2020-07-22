@@ -1,16 +1,24 @@
 import __request from '@coffeekraken/sugar/js/http/request';
+import __SWebComponent from '@coffeekraken/sugar/js/webcomponent/SWebComponent';
 
-document.addEventListener('DOMContentLoaded', () => {
-  const $searchInput = document.querySelector('input#search');
-
-  $searchInput.on('input', (value) => {
-    console.log('d', value);
-
+__SWebComponent.on('s-filtrable-input.ready', ({ target, value }) => {
+  target.on('input', (value) => {
     __request({
       url: `/search/${value}`,
       method: 'get'
     }).then((response) => {
-      console.log('res', response);
+      // set the items in the search dropdown
+      const items = response.data.map((item) => {
+        return {
+          title: item.title,
+          description: item.description
+        };
+      });
+
+      target.prop('items', items);
+
+      console.log(items);
+
       // do something...
     });
   });

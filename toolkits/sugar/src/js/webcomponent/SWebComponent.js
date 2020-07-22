@@ -11,6 +11,8 @@ import __watch from '../object/watch';
 import { getComponentMetas } from './register';
 import __uniqid from '../string/uniqid';
 import __dispatch from '../event/dispatch';
+import __on from '../event/on';
+import __SLitHtmlWebComponent from './SLitHtmlWebComponent';
 
 /**
  * @name              SWebComponent
@@ -56,7 +58,10 @@ import __dispatch from '../event/dispatch';
  * @since       2.0.0
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function SWebComponent(extend = HTMLElement) {
+
+const _sWebComponentPromise = new __SPromise(() => {}).start();
+
+function SWebComponent(extend = HTMLElement) {
   return class SWebComponent extends extend {
     _settedAttributesStack = {};
 
@@ -127,7 +132,7 @@ export default function SWebComponent(extend = HTMLElement) {
       // save the settings
       this._settings = __deepMerge(
         {
-          id: __uniqid(),
+          id: this.getAttribute('id') || __uniqid(),
           props: this.constructor.props || {}
         },
         this._metas.settings || {},
@@ -139,6 +144,15 @@ export default function SWebComponent(extend = HTMLElement) {
 
       // apply the $node class
       this.classList.add(`${this.metas.dashName}__node`);
+
+      this.on('mounted{1}', () => {
+        // dispatch a ready event
+        if (!this.lit) {
+          console.log('coco', this.lit);
+          // the Lit HTML class dispatch the ready event after having rendering the template the first time
+          this.dispatch('ready', this);
+        }
+      });
 
       // launch the mounting process
       setTimeout(this._mount.bind(this));
@@ -188,7 +202,9 @@ export default function SWebComponent(extend = HTMLElement) {
         };
         // if need to be watches deeply
         if (this._props[key].watch) {
-          this._props[key] = __watch(this._props[key]);
+          this._props[key] = __watch(this._props[key], {
+            deep: this._props[key].watch === 'deep'
+          });
           this._props[key].on('value.*:+(set|delete|push|pop)', (update) => {
             if (update.path.split('.').length === 1) {
               this.prop(update.path, update.value);
@@ -285,11 +301,28 @@ export default function SWebComponent(extend = HTMLElement) {
       // dispatch event through the SPromise internal instance
       this._promise.trigger(name, value || this);
       // dispatch a general event
-      __dispatch(`${this.metas.dashName}.${name}`, value || this);
-      __dispatch(
-        `${this.metas.dashName}#${this._settings.id}.${name}`,
-        value || this
-      );
+      __dispatch(`${this.metas.dashName}.${name}`, {
+        target: this,
+        value
+      });
+      __dispatch(`${this.metas.dashName}#${this._settings.id}.${name}`, {
+        target: this,
+        value
+      });
+      setTimeout(() => {
+        // dispatch an SWebComponent level event
+        _sWebComponentPromise.trigger(`${this.metas.dashName}.${name}`, {
+          target: this,
+          value
+        });
+        _sWebComponentPromise.trigger(
+          `${this.metas.dashName}#${this._settings.id}.${name}`,
+          {
+            target: this,
+            value
+          }
+        );
+      });
     }
 
     /**
@@ -515,3 +548,27 @@ export default function SWebComponent(extend = HTMLElement) {
     }
   };
 }
+
+/**
+ * @name        on
+ * @type        Function
+ * @static
+ *
+ * This method can be used to subscribe to some SWebComponent instances events
+ * like "SFiltrableInput.ready", etc...
+ *
+ * @param       {String}      name        The event name to subscribe to
+ * @param       {Function}    callback    The callback function to call
+ * @return      {Function}                A function that you can use to unsubscribe to this particular event
+ *
+ * @since       2.0.0
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+SWebComponent.on = (name, callback) => {
+  _sWebComponentPromise.on(name, callback);
+  return () => {
+    _sWebComponentPromise.off(name, callback);
+  };
+};
+
+export default SWebComponent;

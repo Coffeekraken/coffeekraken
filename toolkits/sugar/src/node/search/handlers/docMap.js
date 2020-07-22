@@ -3,7 +3,8 @@ const __packageRoot = require('../../path/packageRoot');
 const __fs = require('fs');
 const __Fuse = require('fuse.js');
 const __SSearchResultItem = require('../SSearchResultItem');
-const __SSearchResultGotoAction = require('../actions/SSearchResultGotoAction');
+const __searchQueryParser = require('search-query-parser');
+const __SUrlAction = require('../../action/browser/SUrlAction');
 
 /**
  * @name                search
@@ -20,17 +21,26 @@ const __SSearchResultGotoAction = require('../actions/SSearchResultGotoAction');
  * @since       2.0.0
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function search(path, query, settings = {}) {
+module.exports = function search(searchString, settings = {}) {
   settings = __deepMerge(
     {
       filePath: __packageRoot() + '/docMap.json',
       action: {
-        url: '/doc[path]',
-        settings: {}
+        url: '/doc[path]'
       }
     },
     settings
   );
+
+  let queryObj = __searchQueryParser.parse(searchString.trim(), {
+    keywords: ['name', 'namespace', 'path']
+  });
+  delete queryObj.offsets;
+  delete queryObj.exclude;
+  if (typeof queryObj !== 'object' || !Object.keys(queryObj).length) {
+    queryObj = {};
+    queryObj.namespace = searchString;
+  }
 
   return new Promise((resolve, reject) => {
     // load the docmap
@@ -46,13 +56,13 @@ module.exports = function search(path, query, settings = {}) {
       includeMatches: true,
       minMatchCharLength: 2,
       shouldSort: true,
-      keys: Object.keys(query)
+      keys: Object.keys(queryObj)
     });
 
     const operators = [];
-    Object.keys(query).forEach((key) => {
+    Object.keys(queryObj).forEach((key) => {
       operators.push({
-        [key]: query[key]
+        [key]: queryObj[key]
       });
     });
 
@@ -78,17 +88,15 @@ module.exports = function search(path, query, settings = {}) {
         if (typeof settings.action === 'function') {
           action = settings.action(item);
         } else if (typeof settings.action === 'object') {
-          action = new __SSearchResultGotoAction(
-            settings.action.url.replace('[path]', item.path),
-            settings.action.settings
-          );
+          action = new __SUrlAction({
+            url: settings.action.url.replace('[path]', item.path),
+            target: '_self'
+          });
         }
         return new __SSearchResultItem(item.name, item.namespace, action, {});
       });
 
     // resolving the handler with the results array
     resolve(results);
-
-    // console.log(resultsArray);
   });
 };

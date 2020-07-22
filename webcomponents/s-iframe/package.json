@@ -1,0 +1,14 @@
+{
+  "name": "@coffeekraken/s-iframe-webcomponent",
+  "version": "1.0.0",
+  "description": "Extended iframe features like auto-resize, etc...",
+  "main": "src/js/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@coffeekraken/sugar": "file:../../toolkits/sugar"
+  }
+}

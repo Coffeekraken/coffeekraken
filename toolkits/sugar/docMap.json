@@ -50,6 +50,36 @@
         "path": "src/data/tests/testing.js"
     },
     {
+        "name": "SAction",
+        "namespace": "coffeekraken.sugar.js.action",
+        "path": "src/js/action/SAction.js"
+    },
+    {
+        "name": "typeMap",
+        "namespace": "coffeekraken.sugar.js.action",
+        "path": "src/js/action/typeMap.js"
+    },
+    {
+        "name": "SUrlAction",
+        "namespace": "coffeekraken.sugar.js.action.browser",
+        "path": "src/js/action/browser/SUrlAction.js"
+    },
+    {
+        "name": "SUrlAction",
+        "namespace": "coffeekraken.sugar.js.action.browser",
+        "path": "src/js/action/browser/SUrlAction.js"
+    },
+    {
+        "name": "SAction",
+        "namespace": "coffeekraken.sugar.js.action",
+        "path": "src/js/action/SAction.js"
+    },
+    {
+        "name": "typeMap",
+        "namespace": "coffeekraken.sugar.js.action",
+        "path": "src/js/action/typeMap.js"
+    },
+    {
         "name": "asyncForEach",
         "namespace": "coffeekraken.sugar.js.array",
         "path": "src/js/array/asyncForEach.js"
@@ -2053,6 +2083,11 @@
         "name": "isBoolean",
         "namespace": "coffeekraken.sugar.js.is",
         "path": "src/js/is/boolean.js"
+    },
+    {
+        "name": "isBrowser",
+        "namespace": "coffeekraken.sugar.js.is",
+        "path": "src/js/is/browser.js"
     },
     {
         "name": "childProcess",
@@ -2258,6 +2293,11 @@
         "name": "isBoolean",
         "namespace": "coffeekraken.sugar.js.is",
         "path": "src/js/is/boolean.js"
+    },
+    {
+        "name": "isBrowser",
+        "namespace": "coffeekraken.sugar.js.is",
+        "path": "src/js/is/browser.js"
     },
     {
         "name": "childProcess",
@@ -3263,6 +3303,14 @@
         "name": "index",
         "namespace": "coffeekraken.sugar.node",
         "path": "src/node/index.js"
+    },
+    {
+        "namespace": "coffeekraken.sugar.node.action",
+        "path": "src/node/action/browser/SUrlAction.js"
+    },
+    {
+        "namespace": "coffeekraken.sugar.node.action",
+        "path": "src/node/action/browser/SUrlAction.js"
     },
     {
         "name": "SApi",
@@ -5696,26 +5744,11 @@
         "path": "src/node/promise/SPromise.js"
     },
     {
-        "name": "SSearchResultAction",
-        "namespace": "coffeekraken.sugar.node.search",
-        "path": "src/node/search/SSearchResultAction.js"
-    },
-    {
         "name": "SSearchResultItem",
         "namespace": "coffeekraken.sugar.node.search",
         "path": "src/node/search/SSearchResultItem.js"
     },
     {
-        "name": "SSearchResultGotoAction",
-        "namespace": "coffeekraken.sugar.node.search.actions",
-        "path": "src/node/search/actions/SSearchResultGotoAction.js"
-    },
-    {
-        "name": "SSearchResultGotoAction",
-        "namespace": "coffeekraken.sugar.node.search.actions",
-        "path": "src/node/search/actions/SSearchResultGotoAction.js"
-    },
-    {
         "name": "search",
         "namespace": "coffeekraken.sugar.node.search.handlers",
         "path": "src/node/search/handlers/docMap.js"
@@ -5724,11 +5757,6 @@
         "name": "search",
         "namespace": "coffeekraken.sugar.node.search.handlers",
         "path": "src/node/search/handlers/docMap.js"
-    },
-    {
-        "name": "SSearchResultAction",
-        "namespace": "coffeekraken.sugar.node.search",
-        "path": "src/node/search/SSearchResultAction.js"
     },
     {
         "name": "SSearchResultItem",
@@ -5826,6 +5854,11 @@
         "path": "src/node/server/frontend/handlers/search.js"
     },
     {
+        "name": "styleguide",
+        "namespace": "coffeekraken.sugar.node.server.frontend.handlers",
+        "path": "src/node/server/frontend/handlers/styleguide.js"
+    },
+    {
         "name": "views",
         "namespace": "coffeekraken.sugar.node.server.frontend.handlers",
         "path": "src/node/server/frontend/handlers/views.js"
@@ -5839,6 +5872,11 @@
         "name": "search",
         "namespace": "coffeekraken.sugar.node.server.frontend.handlers",
         "path": "src/node/server/frontend/handlers/search.js"
+    },
+    {
+        "name": "styleguide",
+        "namespace": "coffeekraken.sugar.node.server.frontend.handlers",
+        "path": "src/node/server/frontend/handlers/styleguide.js"
     },
     {
         "name": "views",
@@ -5894,6 +5932,11 @@
         "path": "src/node/stream/SActionsStreamAction.js"
     },
     {
+        "name": "SFsCopyStreamAction",
+        "namespace": "coffeekraken.sugar.node.stream.actions",
+        "path": "src/node/stream/actions/SFsCopyStreamAction.js"
+    },
+    {
         "name": "SFindInFileStreamAction",
         "namespace": "coffeekraken.sugar.node.stream.actions",
         "path": "src/node/stream/actions/SFsFilesResolverStreamAction.js"
@@ -5917,6 +5960,11 @@
         "name": "SUnlinkStreamAction",
         "namespace": "coffeekraken.sugar.node.stream.actions",
         "path": "src/node/stream/actions/SUnlinkStreamAction.js"
+    },
+    {
+        "name": "SFsCopyStreamAction",
+        "namespace": "coffeekraken.sugar.node.stream.actions",
+        "path": "src/node/stream/actions/SFsCopyStreamAction.js"
     },
     {
         "name": "SFindInFileStreamAction",
@@ -6125,9 +6173,19 @@
         "path": "src/node/template/bladePhp.js"
     },
     {
+        "name": "render",
+        "namespace": "coffeekraken.sugar.node.template",
+        "path": "src/node/template/render.js"
+    },
+    {
         "name": "bladePhp",
         "namespace": "coffeekraken.sugar.node.template",
         "path": "src/node/template/bladePhp.js"
+    },
+    {
+        "name": "render",
+        "namespace": "coffeekraken.sugar.node.template",
+        "path": "src/node/template/render.js"
     },
     {
         "name": "STermApp",
@@ -6432,6 +6490,16 @@
     {
         "namespace": "coffeekraken.sugar.node.value",
         "path": "src/node/value/validateWithDefinitionObject.js"
+    },
+    {
+        "name": "main",
+        "namespace": "coffeekraken.sugar.php.views.layouts",
+        "path": "src/php/views/layouts/main.blade.php"
+    },
+    {
+        "name": "main",
+        "namespace": "coffeekraken.sugar.php.views.layouts",
+        "path": "src/php/views/layouts/main.blade.php"
     },
     {
         "name": "coffeekraken-logo",

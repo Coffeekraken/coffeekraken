@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = SWebComponent;
+exports.default = void 0;
 
 var _deepMerge = _interopRequireDefault(require("../object/deepMerge"));
 
@@ -30,6 +30,10 @@ var _register = require("./register");
 var _uniqid = _interopRequireDefault(require("../string/uniqid"));
 
 var _dispatch = _interopRequireDefault(require("../event/dispatch"));
+
+var _on = _interopRequireDefault(require("../event/on"));
+
+var _SLitHtmlWebComponent = _interopRequireDefault(require("./SLitHtmlWebComponent"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -99,6 +103,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * @since       2.0.0
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+const _sWebComponentPromise = new _SPromise.default(() => {}).start();
+
 function SWebComponent(extend = HTMLElement) {
   var _temp;
 
@@ -187,13 +193,22 @@ function SWebComponent(extend = HTMLElement) {
       _this._metas = (0, _register.getComponentMetas)(_this.constructor.componentName); // save the settings
 
       _this._settings = (0, _deepMerge.default)({
-        id: (0, _uniqid.default)(),
+        id: _this.getAttribute('id') || (0, _uniqid.default)(),
         props: _this.constructor.props || {}
       }, _this._metas.settings || {}, settings); // create the SPromise instance
 
       _this._promise = new _SPromise.default(() => {}).start(); // apply the $node class
 
-      _this.classList.add(`${_this.metas.dashName}__node`); // launch the mounting process
+      _this.classList.add(`${_this.metas.dashName}__node`);
+
+      _this.on('mounted{1}', () => {
+        // dispatch a ready event
+        if (!_this.lit) {
+          console.log('coco', _this.lit); // the Lit HTML class dispatch the ready event after having rendering the template the first time
+
+          _this.dispatch('ready', _assertThisInitialized(_this));
+        }
+      }); // launch the mounting process
 
 
       setTimeout(_this._mount.bind(_assertThisInitialized(_this)));
@@ -238,7 +253,9 @@ function SWebComponent(extend = HTMLElement) {
           }; // if need to be watches deeply
 
           if (this._props[key].watch) {
-            this._props[key] = (0, _watch.default)(this._props[key]);
+            this._props[key] = (0, _watch.default)(this._props[key], {
+              deep: this._props[key].watch === 'deep'
+            });
 
             this._props[key].on('value.*:+(set|delete|push|pop)', update => {
               if (update.path.split('.').length === 1) {
@@ -342,8 +359,26 @@ function SWebComponent(extend = HTMLElement) {
         this._promise.trigger(name, value || this); // dispatch a general event
 
 
-        (0, _dispatch.default)(`${this.metas.dashName}.${name}`, value || this);
-        (0, _dispatch.default)(`${this.metas.dashName}#${this._settings.id}.${name}`, value || this);
+        (0, _dispatch.default)(`${this.metas.dashName}.${name}`, {
+          target: this,
+          value
+        });
+        (0, _dispatch.default)(`${this.metas.dashName}#${this._settings.id}.${name}`, {
+          target: this,
+          value
+        });
+        setTimeout(() => {
+          // dispatch an SWebComponent level event
+          _sWebComponentPromise.trigger(`${this.metas.dashName}.${name}`, {
+            target: this,
+            value
+          });
+
+          _sWebComponentPromise.trigger(`${this.metas.dashName}#${this._settings.id}.${name}`, {
+            target: this,
+            value
+          });
+        });
       }
       /**
        * @name          _mountDependencies
@@ -580,5 +615,31 @@ function SWebComponent(extend = HTMLElement) {
     return SWebComponent;
   }(extend), _temp;
 }
+/**
+ * @name        on
+ * @type        Function
+ * @static
+ *
+ * This method can be used to subscribe to some SWebComponent instances events
+ * like "SFiltrableInput.ready", etc...
+ *
+ * @param       {String}      name        The event name to subscribe to
+ * @param       {Function}    callback    The callback function to call
+ * @return      {Function}                A function that you can use to unsubscribe to this particular event
+ *
+ * @since       2.0.0
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
 
+
+SWebComponent.on = (name, callback) => {
+  _sWebComponentPromise.on(name, callback);
+
+  return () => {
+    _sWebComponentPromise.off(name, callback);
+  };
+};
+
+var _default = SWebComponent;
+exports.default = _default;
 module.exports = exports.default;

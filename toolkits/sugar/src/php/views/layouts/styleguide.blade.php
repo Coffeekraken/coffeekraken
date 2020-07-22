@@ -1,9 +1,9 @@
 <!--
-* @name               main
-* @namespace          layouts
+* @name               styleguide
+* @namespace          php.views.layouts
 * @type               blade
 *
-* Main layout that handle things like scripts import, stylesheets import, etc...
+* styleguide layout that handle things like scripts import, stylesheets import, etc...
 *
 * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
 -->
@@ -36,14 +36,6 @@ $package = $package ? json_decode($package) : null;
     </head>
     <body>
 
-      <header class="ck-header">
-        <span class="ck-header__logo"></span>
-        <h1 class="ck-header__title">{{ $package->name }}</h1>
-        <s-filtrable-input id="search" />
-      </header>
-
-      @section('sidebar')
-      @show
       <div class="container">
         @yield('content')
       </div>

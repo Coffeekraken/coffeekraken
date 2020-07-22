@@ -1,7 +1,6 @@
 const __sugarConfig = require('../../config/sugar');
 const __deepMerge = require('../../object/deepMerge');
 const __expressServer = require('../express/express');
-const __express = require('express');
 const __bladePhp = require('../../template/bladePhp');
 const __SNav = require('../../nav/SNav');
 const __deepMap = require('../../object/deepMap');
@@ -9,11 +8,8 @@ const __packageRoot = require('../../path/packageRoot');
 const __packageJson = require(__packageRoot(process.cwd()) + '/package.json');
 const __fs = require('fs');
 const __path = require('path');
-const __ejs = require('ejs');
-const __ejsLint = require('ejs-lint');
-const tmpDir = require('../../fs/tmpDir');
 const __rimraf = require('rimraf');
-const tempDirectory = require('temp-dir');
+const __render = require('../../template/render');
 
 /**
  * @name                express
@@ -152,45 +148,41 @@ module.exports = async (args = {}) => {
   Object.keys(settings.handlers).forEach(async (pageName) => {
     const handlerSettings = settings.handlers[pageName];
 
-    server.get(`${handlerSettings.slug}/*`, async (req, res) => {
-      try {
-        const response = await handlerSettings.handler(req, server);
+    server.get(
+      [`${handlerSettings.slug}/*`, `${handlerSettings.slug}`],
+      async (req, res) => {
+        try {
+          const response = await handlerSettings.handler(req, server);
 
-        // handle response
-        const view = response.view || 'pages.default';
-        const content = response.content || '404';
-        const title = response.title || 'Welcome';
-        const type = response.type || 'blade/php';
+          // handle response
+          const view = response.view || 'pages.404';
+          const content = response.content || null;
+          const title = response.title || 'Page not found';
+          const type = response.type || 'text/html';
 
-        // prepariong the result
-        let result;
+          // prepariong the result
+          let result;
+          switch (type.toLowerCase()) {
+            case 'application/json':
+              result = content;
+              break;
+            case 'text/html':
+            default:
+              result = await __render(view, {
+                ...templateData,
+                ...content
+              });
+              break;
+          }
 
-        // check the handler content type
-        switch (type.toLowerCase()) {
-          case 'blade/php':
-            // render the view
-            result = await __bladePhp(view, {
-              ...templateData,
-              title,
-              content
-            });
-            break;
-          case 'application/json':
-            result = content;
-            break;
+          // send the result to the client
+          res.send(result);
+        } catch (e) {
+          throw new Error(e);
+          // res.redirect('/404');
         }
-
-        // // render using ejs
-        // result = renderTemplate(result, {
-        //   ...templateData
-        // });
-
-        res.send(result);
-      } catch (e) {
-        throw new Error(e);
-        // res.redirect('/404');
       }
-    });
+    );
   });
   return server;
 };

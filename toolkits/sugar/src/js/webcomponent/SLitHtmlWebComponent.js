@@ -102,11 +102,12 @@ export default function SLitHtmlWebComponent(extend = HTMLElement) {
      */
     constructor(settings = {}) {
       super(__deepMerge({}, settings));
+      // generate a container for the component
+      this.$container = document.createElement('div');
+      this.$container.className = `${this.metas.dashName}`;
       // wait until mounted to render the component first time
       this.on('mounted{1}', () => {
-        // generate a container for the component
-        this.$container = document.createElement('div');
-        this.$container.className = `${this.metas.dashName}`;
+        // insert the container in the document
         __insertAfter(this.$container, this);
         // render for the first time
         this.render();
@@ -183,10 +184,10 @@ export default function SLitHtmlWebComponent(extend = HTMLElement) {
      */
     handleProp(prop, propObj) {
       return new Promise((resolve, reject) => {
-        this.render();
+        // this.render();
         setTimeout(() => {
           this.render();
-        }, 100);
+        });
         resolve(prop);
       });
     }

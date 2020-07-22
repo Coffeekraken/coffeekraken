@@ -137,7 +137,7 @@ function SLitHtmlWebComponent(extend = HTMLElement) {
 
       _classCallCheck(this, SLitHtmlWebComponent);
 
-      _this = _super.call(this, (0, _deepMerge.default)({}, settings)); // wait until mounted to render the component first time
+      _this = _super.call(this, (0, _deepMerge.default)({}, settings)); // generate a container for the component
 
       _defineProperty(_assertThisInitialized(_this), "lit", {
         html: _litHtml.html,
@@ -161,10 +161,11 @@ function SLitHtmlWebComponent(extend = HTMLElement) {
         (0, _litHtml.render)(tpl, this.$container);
       }, 50));
 
+      _this.$container = document.createElement('div');
+      _this.$container.className = `${_this.metas.dashName}`; // wait until mounted to render the component first time
+
       _this.on('mounted{1}', () => {
-        // generate a container for the component
-        _this.$container = document.createElement('div');
-        _this.$container.className = `${_this.metas.dashName}`;
+        // insert the container in the document
         (0, _insertAfter.default)(_this.$container, _assertThisInitialized(_this)); // render for the first time
 
         _this.render(); // dispatch a ready event
@@ -246,10 +247,10 @@ function SLitHtmlWebComponent(extend = HTMLElement) {
       key: "handleProp",
       value: function handleProp(prop, propObj) {
         return new Promise((resolve, reject) => {
-          this.render();
+          // this.render();
           setTimeout(() => {
             this.render();
-          }, 100);
+          });
           resolve(prop);
         });
       }

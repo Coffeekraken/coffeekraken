@@ -1,59 +1,29 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, '__esModule', {
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
 
-var _deepMerge = _interopRequireDefault(require('../../object/deepMerge'));
+var _deepMerge = _interopRequireDefault(require("../../object/deepMerge"));
 
-var _console = _interopRequireDefault(require('../htmlPresets/console'));
+var _console = _interopRequireDefault(require("../htmlPresets/console"));
 
-var _childProcess = _interopRequireDefault(require('../../is/childProcess'));
+var _childProcess = _interopRequireDefault(require("../../is/childProcess"));
 
-var _toString = _interopRequireDefault(require('../../string/toString'));
+var _toString = _interopRequireDefault(require("../../string/toString"));
 
-var _fmtObj = _interopRequireDefault(require('fmt-obj'));
+var _fmtObj = _interopRequireDefault(require("fmt-obj"));
 
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
-}
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError('Cannot call a class as a function');
-  }
-}
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _defineProperties(target, props) {
-  for (var i = 0; i < props.length; i++) {
-    var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || false;
-    descriptor.configurable = true;
-    if ('value' in descriptor) descriptor.writable = true;
-    Object.defineProperty(target, descriptor.key, descriptor);
-  }
-}
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _createClass(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties(Constructor, staticProps);
-  return Constructor;
-}
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-  return obj;
-}
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 /**
  * @name                    SLogConsoleAdapter
@@ -75,7 +45,7 @@ function _defineProperty(obj, key, value) {
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-let SLogConsoleAdapter = /*#__PURE__*/ (function () {
+let SLogConsoleAdapter = /*#__PURE__*/function () {
   /**
    * @name          _settings
    * @type          Object
@@ -101,22 +71,19 @@ let SLogConsoleAdapter = /*#__PURE__*/ (function () {
   function SLogConsoleAdapter(settings = {}) {
     _classCallCheck(this, SLogConsoleAdapter);
 
-    _defineProperty(this, '_settings', {});
+    _defineProperty(this, "_settings", {});
 
     // extend settings
-    this._settings = (0, _deepMerge.default)(
-      {
-        enableChildProcessLogs: true,
-        logMethods: {
-          log: console.log,
-          info: console.info,
-          warn: console.warn,
-          debug: console.debug,
-          error: console.error
-        }
-      },
-      settings
-    );
+    this._settings = (0, _deepMerge.default)({
+      enableChildProcessLogs: true,
+      logMethods: {
+        log: console.log,
+        info: console.info,
+        warn: console.warn,
+        debug: console.debug,
+        error: console.error
+      }
+    }, settings);
   }
   /**
    * @name            log
@@ -135,54 +102,49 @@ let SLogConsoleAdapter = /*#__PURE__*/ (function () {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
 
-  _createClass(SLogConsoleAdapter, [
-    {
-      key: 'log',
-      value: async function log(message, level) {
-        return new Promise((resolve, reject) => {
-          // init the console method to use
-          let consoleMethod = 'log'; // adapting the console method to use depending on the type
 
-          switch (level) {
-            case 'error':
-              consoleMethod = 'error';
-              break;
+  _createClass(SLogConsoleAdapter, [{
+    key: "log",
+    value: async function log(message, level) {
+      return new Promise((resolve, reject) => {
+        // init the console method to use
+        let consoleMethod = 'log'; // adapting the console method to use depending on the type
 
-            case 'warn':
-              consoleMethod = 'warn';
-              break;
+        switch (level) {
+          case 'error':
+            consoleMethod = 'error';
+            break;
 
-            case 'info':
-              consoleMethod = 'info';
-              break;
+          case 'warn':
+            consoleMethod = 'warn';
+            break;
 
-            case 'debug':
-              consoleMethod = 'debug';
-              break;
-          } // log the message
+          case 'info':
+            consoleMethod = 'info';
+            break;
 
-          if (typeof message === 'string') {
-            ((global || window).nativeConsole || console)[consoleMethod](
-              (0, _console.default)(message)
-            );
-          } else if (typeof message === 'object') {
-            ((global || window).nativeConsole || console)[consoleMethod](
-              (0, _fmtObj.default)(message)
-            );
-          } else {
-            ((global || window).nativeConsole || console)[consoleMethod](
-              message
-            );
-          } // resolve the promise
+          case 'debug':
+            consoleMethod = 'debug';
+            break;
+        } // log the message
 
-          resolve();
-        });
-      }
+
+        if (typeof message === 'string') {
+          ((global || window).nativeConsole || console)[consoleMethod]((0, _console.default)(message));
+        } else if (typeof message === 'object') {
+          ((global || window).nativeConsole || console)[consoleMethod]((0, _fmtObj.default)(message));
+        } else {
+          ((global || window).nativeConsole || console)[consoleMethod](message);
+        } // resolve the promise
+
+
+        resolve();
+      });
     }
-  ]);
+  }]);
 
   return SLogConsoleAdapter;
-})();
+}();
 
 exports.default = SLogConsoleAdapter;
 module.exports = exports.default;

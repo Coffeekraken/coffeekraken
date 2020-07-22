@@ -2,10 +2,11 @@ import __deepMerge from '@coffeekraken/sugar/js/object/deepMerge';
 import '../scss/_bare.scss';
 import {
   define,
-  SWebComponent
+  SWebComponent,
+  SLitHtmlWebComponent
 } from '@coffeekraken/sugar/js/webcomponent/register';
 
-export default class SIframeWebComponent extends SWebComponent(
+export default class SIframeWebComponent extends SLitHtmlWebComponent(
   HTMLIFrameElement
 ) {
   static props = {
@@ -18,8 +19,15 @@ export default class SIframeWebComponent extends SWebComponent(
       default: 'yes'
     },
     autoResize: {
-      default: false
+      default: false,
+      watch: true
     }
+  };
+
+  static template = (props, component, settings, lit) => {
+    return lit.html`
+      ${component.$node}
+    `;
   };
 
   /**
@@ -41,9 +49,9 @@ export default class SIframeWebComponent extends SWebComponent(
       }
     });
 
-    // setTimeout(() => {
-    //   this.contentWindow.document.body.innerHTML = this.innerHTML;
-    // });
+    this.on('prop.autoResize:set', (value) => {
+      console.log('value', value);
+    });
   }
 
   /**

@@ -160,7 +160,7 @@ function SWebComponent(extend = HTMLElement) {
        * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
       get: function () {
-        return Object.keys(this.props);
+        return Object.keys(this.props).map(name => (0, _uncamelize.default)(name));
       }
       /**
        * @name          constructor
@@ -199,13 +199,22 @@ function SWebComponent(extend = HTMLElement) {
 
       _this._promise = new _SPromise.default(() => {}).start(); // apply the $node class
 
-      _this.classList.add(`${_this.metas.dashName}__node`);
+      _this.classList.add(`${_this.metas.dashName}__node`); // handle props
+
+
+      for (const key in _this._settings.props) {
+        const attr = _this.getAttribute((0, _uncamelize.default)(key));
+
+        _this._props[key] = { ..._this._settings.props[key],
+          value: attr ? (0, _parse.default)(attr) : _this._settings.props[key].default,
+          previousValue: undefined
+        };
+      }
 
       _this.on('mounted{1}', () => {
         // dispatch a ready event
         if (!_this.lit) {
-          console.log('coco', _this.lit); // the Lit HTML class dispatch the ready event after having rendering the template the first time
-
+          // the Lit HTML class dispatch the ready event after having rendering the template the first time
           _this.dispatch('ready', _assertThisInitialized(_this));
         }
       }); // launch the mounting process
@@ -246,12 +255,7 @@ function SWebComponent(extend = HTMLElement) {
         this.dispatch('mounting', this); // handle props
 
         for (const key in this._settings.props) {
-          const attr = this.getAttribute((0, _uncamelize.default)(key));
-          this._props[key] = { ...this._settings.props[key],
-            value: attr ? (0, _parse.default)(attr) : this._settings.props[key].default,
-            previousValue: undefined
-          }; // if need to be watches deeply
-
+          // if need to be watches deeply
           if (this._props[key].watch) {
             this._props[key] = (0, _watch.default)(this._props[key], {
               deep: this._props[key].watch === 'deep'
@@ -475,7 +479,8 @@ function SWebComponent(extend = HTMLElement) {
       value: function attributeChangedCallback(attrName, oldVal, newVal) {
         if (this._settedAttributesStack[attrName]) return; // const previousValue = __parse(oldVal);
 
-        const newValue = (0, _parse.default)(newVal) || false; // set the value into the props
+        const newValue = (0, _parse.default)(newVal) || false;
+        console.log('NEW', attrName, Object.assign({}, this._props)); // set the value into the props
 
         this.prop(attrName, newValue); // trigger a "prop" event
 
@@ -497,11 +502,14 @@ function SWebComponent(extend = HTMLElement) {
     }, {
       key: "prop",
       value: function prop(_prop, value = undefined) {
+        // camelize the attribute name
+        _prop = (0, _camelize.default)(_prop);
+
         if (value === undefined) {
           return this._props[_prop] ? this._props[_prop].value : undefined;
         }
 
-        this._props[_prop].previousValue = this._props[_prop].value;
+        this._props[_prop].previousValue = this._props[_prop] ? this._props[_prop].value : undefined;
         this._props[_prop].value = value;
         this.handleProp(_prop, this._props[_prop]); // handle physical props
 
@@ -534,6 +542,7 @@ function SWebComponent(extend = HTMLElement) {
           value: this._props[prop].value,
           previousValue: this._props[prop].previousValue
         };
+        console.log('EV', eventObj);
         this.dispatch(`prop.${prop}:${eventObj.action}`, eventObj);
       }
       /**
@@ -556,7 +565,7 @@ function SWebComponent(extend = HTMLElement) {
           if (!this._props[prop].physical) return;
           const value = this._props[prop].value; // if the value is false, remove the attributee from the dom node
 
-          if (!value) {
+          if (value === undefined || value === null || value === false) {
             this.removeAttribute(prop);
             return;
           }

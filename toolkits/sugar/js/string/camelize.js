@@ -13,7 +13,6 @@ exports.default = camelize;
  * Camelize a string
  *
  * @param         {String}          text        The string to camelize
- * @param         {String}          [charsRange='_-\\s']      The regex chars range to remove and camelize the next character
  * @return        {String}                      The camelized string
  *
  * @example     js
@@ -22,9 +21,9 @@ exports.default = camelize;
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function camelize(text, chars = '_-\\s') {
+function camelize(text) {
   let res = '';
-  const reg = new RegExp(`(?:^|[${chars}])(\w)`, 'g');
+  const reg = /(?:^|[_-\s])(\w)/g;
   res = text.replace(reg, function (_, c) {
     return c ? c.toUpperCase() : '';
   });

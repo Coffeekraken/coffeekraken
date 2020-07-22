@@ -88,7 +88,7 @@
 
 /***/ "../../webcomponents/s-filtrable-input/src/js/index.js":
 /*!***************************************************************************************************************!*\
-  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/webcomponents/s-filtrable-input/src/js/index.js ***!
+  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/webcomponents/s-filtrable-input/src/js/index.js ***!
   \***************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -572,7 +572,7 @@ Object(_coffeekraken_sugar_js_webcomponent_register__WEBPACK_IMPORTED_MODULE_3__
 
 /***/ "../../webcomponents/s-filtrable-input/src/scss/_bare.scss":
 /*!*******************************************************************************************************************!*\
-  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/webcomponents/s-filtrable-input/src/scss/_bare.scss ***!
+  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/webcomponents/s-filtrable-input/src/scss/_bare.scss ***!
   \*******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -601,7 +601,7 @@ module.exports = content.locals || {};
 
 /***/ "../../webcomponents/s-iframe/src/js/index.js":
 /*!******************************************************************************************************!*\
-  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/webcomponents/s-iframe/src/js/index.js ***!
+  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/webcomponents/s-iframe/src/js/index.js ***!
   \******************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -615,12 +615,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _scss_bare_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_scss_bare_scss__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _coffeekraken_sugar_js_webcomponent_register__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @coffeekraken/sugar/js/webcomponent/register */ "../sugar/js/webcomponent/register.js");
 /* harmony import */ var _coffeekraken_sugar_js_webcomponent_register__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_coffeekraken_sugar_js_webcomponent_register__WEBPACK_IMPORTED_MODULE_2__);
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n      ", "\n    "]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
 
-class SIframeWebComponent extends Object(_coffeekraken_sugar_js_webcomponent_register__WEBPACK_IMPORTED_MODULE_2__["SWebComponent"])(HTMLIFrameElement) {
+class SIframeWebComponent extends Object(_coffeekraken_sugar_js_webcomponent_register__WEBPACK_IMPORTED_MODULE_2__["SLitHtmlWebComponent"])(HTMLIFrameElement) {
   /**
    * @name          constructor
    * @type          Function
@@ -638,9 +650,10 @@ class SIframeWebComponent extends Object(_coffeekraken_sugar_js_webcomponent_reg
       if (this.prop('autoResize')) {
         this._initAutoResize();
       }
-    }); // setTimeout(() => {
-    //   this.contentWindow.document.body.innerHTML = this.innerHTML;
-    // });
+    });
+    this.on('prop.autoResize:set', value => {
+      console.log('value', value);
+    });
   }
   /**
    * @name        _initAutoResize
@@ -698,8 +711,13 @@ _defineProperty(SIframeWebComponent, "props", {
     default: 'yes'
   },
   autoResize: {
-    default: false
+    default: false,
+    watch: true
   }
+});
+
+_defineProperty(SIframeWebComponent, "template", (props, component, settings, lit) => {
+  return lit.html(_templateObject(), component.$node);
 });
 
 Object(_coffeekraken_sugar_js_webcomponent_register__WEBPACK_IMPORTED_MODULE_2__["define"])('SIframe', SIframeWebComponent, {});
@@ -708,7 +726,7 @@ Object(_coffeekraken_sugar_js_webcomponent_register__WEBPACK_IMPORTED_MODULE_2__
 
 /***/ "../../webcomponents/s-iframe/src/scss/_bare.scss":
 /*!**********************************************************************************************************!*\
-  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/webcomponents/s-iframe/src/scss/_bare.scss ***!
+  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/webcomponents/s-iframe/src/scss/_bare.scss ***!
   \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -7523,7 +7541,6 @@ exports.default = camelize;
  * Camelize a string
  *
  * @param         {String}          text        The string to camelize
- * @param         {String}          [charsRange='_-\\s']      The regex chars range to remove and camelize the next character
  * @return        {String}                      The camelized string
  *
  * @example     js
@@ -7534,9 +7551,8 @@ exports.default = camelize;
  */
 
 function camelize(text) {
-  var chars = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '_-\\s';
   var res = '';
-  var reg = new RegExp("(?:^|[".concat(chars, "])(w)"), 'g');
+  var reg = /(?:^|[_-\s])(\w)/g;
   res = text.replace(reg, function (_, c) {
     return c ? c.toUpperCase() : '';
   });
@@ -8372,7 +8388,7 @@ function SLitHtmlWebComponent() {
 
       _classCallCheck(this, SLitHtmlWebComponent);
 
-      _this = _super.call(this, (0, _deepMerge.default)({}, settings)); // wait until mounted to render the component first time
+      _this = _super.call(this, (0, _deepMerge.default)({}, settings)); // generate a container for the component
 
       _defineProperty(_assertThisInitialized(_this), "lit", {
         html: _litHtml.html,
@@ -8396,10 +8412,11 @@ function SLitHtmlWebComponent() {
         (0, _litHtml.render)(tpl, this.$container);
       }, 50));
 
+      _this.$container = document.createElement('div');
+      _this.$container.className = "".concat(_this.metas.dashName); // wait until mounted to render the component first time
+
       _this.on('mounted{1}', () => {
-        // generate a container for the component
-        _this.$container = document.createElement('div');
-        _this.$container.className = "".concat(_this.metas.dashName);
+        // insert the container in the document
         (0, _insertAfter.default)(_this.$container, _assertThisInitialized(_this)); // render for the first time
 
         _this.render(); // dispatch a ready event
@@ -8481,10 +8498,10 @@ function SLitHtmlWebComponent() {
       key: "handleProp",
       value: function handleProp(prop, propObj) {
         return new Promise((resolve, reject) => {
-          this.render();
+          // this.render();
           setTimeout(() => {
             this.render();
-          }, 100);
+          });
           resolve(prop);
         });
       }
@@ -8508,15 +8525,15 @@ module.exports = exports.default;
 "use strict";
 
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty2(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty2(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -8779,7 +8796,7 @@ function SWebComponent() {
        * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
       get: function get() {
-        return Object.keys(this.props);
+        return Object.keys(this.props).map(name => (0, _uncamelize.default)(name));
       }
       /**
        * @name          constructor
@@ -8820,13 +8837,22 @@ function SWebComponent() {
 
       _this._promise = new _SPromise.default(() => {}).start(); // apply the $node class
 
-      _this.classList.add("".concat(_this.metas.dashName, "__node"));
+      _this.classList.add("".concat(_this.metas.dashName, "__node")); // handle props
+
+
+      for (var key in _this._settings.props) {
+        var attr = _this.getAttribute((0, _uncamelize.default)(key));
+
+        _this._props[key] = _objectSpread(_objectSpread({}, _this._settings.props[key]), {}, {
+          value: attr ? (0, _parse.default)(attr) : _this._settings.props[key].default,
+          previousValue: undefined
+        });
+      }
 
       _this.on('mounted{1}', () => {
         // dispatch a ready event
         if (!_this.lit) {
-          console.log('coco', _this.lit); // the Lit HTML class dispatch the ready event after having rendering the template the first time
-
+          // the Lit HTML class dispatch the ready event after having rendering the template the first time
           _this.dispatch('ready', _assertThisInitialized(_this));
         }
       }); // launch the mounting process
@@ -8870,13 +8896,7 @@ function SWebComponent() {
           this.dispatch('mounting', this); // handle props
 
           var _loop = function _loop(key) {
-            var attr = _this2.getAttribute((0, _uncamelize.default)(key));
-
-            _this2._props[key] = _objectSpread(_objectSpread({}, _this2._settings.props[key]), {}, {
-              value: attr ? (0, _parse.default)(attr) : _this2._settings.props[key].default,
-              previousValue: undefined
-            }); // if need to be watches deeply
-
+            // if need to be watches deeply
             if (_this2._props[key].watch) {
               _this2._props[key] = (0, _watch.default)(_this2._props[key], {
                 deep: _this2._props[key].watch === 'deep'
@@ -9111,7 +9131,8 @@ function SWebComponent() {
       value: function attributeChangedCallback(attrName, oldVal, newVal) {
         if (this._settedAttributesStack[attrName]) return; // const previousValue = __parse(oldVal);
 
-        var newValue = (0, _parse.default)(newVal) || false; // set the value into the props
+        var newValue = (0, _parse.default)(newVal) || false;
+        console.log('NEW', attrName, Object.assign({}, this._props)); // set the value into the props
 
         this.prop(attrName, newValue); // trigger a "prop" event
 
@@ -9134,12 +9155,14 @@ function SWebComponent() {
       key: "prop",
       value: function prop(_prop) {
         var value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
+        // camelize the attribute name
+        _prop = (0, _camelize.default)(_prop);
 
         if (value === undefined) {
           return this._props[_prop] ? this._props[_prop].value : undefined;
         }
 
-        this._props[_prop].previousValue = this._props[_prop].value;
+        this._props[_prop].previousValue = this._props[_prop] ? this._props[_prop].value : undefined;
         this._props[_prop].value = value;
         this.handleProp(_prop, this._props[_prop]); // handle physical props
 
@@ -9172,6 +9195,7 @@ function SWebComponent() {
           value: this._props[prop].value,
           previousValue: this._props[prop].previousValue
         };
+        console.log('EV', eventObj);
         this.dispatch("prop.".concat(prop, ":").concat(eventObj.action), eventObj);
       }
       /**
@@ -9198,7 +9222,7 @@ function SWebComponent() {
           if (!this._props[prop].physical) return;
           var value = this._props[prop].value; // if the value is false, remove the attributee from the dom node
 
-          if (!value) {
+          if (value === undefined || value === null || value === false) {
             this.removeAttribute(prop);
             return;
           }
@@ -12634,7 +12658,7 @@ function notDefined(obj, key) {
 
 /***/ "../sugar/node_modules/css-loader/dist/cjs.js!../sugar/node_modules/sass-loader/dist/cjs.js?!../../webcomponents/s-filtrable-input/src/scss/_bare.scss":
 /*!************************************************************************************************************************************************************************************************************************!*\
-  !*** ../sugar/node_modules/css-loader/dist/cjs.js!../sugar/node_modules/sass-loader/dist/cjs.js??ref--4-2!/Users/olivierbossel/data/web/coffeekraken/coffeekraken/webcomponents/s-filtrable-input/src/scss/_bare.scss ***!
+  !*** ../sugar/node_modules/css-loader/dist/cjs.js!../sugar/node_modules/sass-loader/dist/cjs.js??ref--4-2!/Users/olivierbossel/Home/web/coffeekraken/coffeekraken/webcomponents/s-filtrable-input/src/scss/_bare.scss ***!
   \************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -12654,7 +12678,7 @@ module.exports = exports;
 
 /***/ "../sugar/node_modules/css-loader/dist/cjs.js!../sugar/node_modules/sass-loader/dist/cjs.js?!../../webcomponents/s-iframe/src/scss/_bare.scss":
 /*!***************************************************************************************************************************************************************************************************************!*\
-  !*** ../sugar/node_modules/css-loader/dist/cjs.js!../sugar/node_modules/sass-loader/dist/cjs.js??ref--4-2!/Users/olivierbossel/data/web/coffeekraken/coffeekraken/webcomponents/s-iframe/src/scss/_bare.scss ***!
+  !*** ../sugar/node_modules/css-loader/dist/cjs.js!../sugar/node_modules/sass-loader/dist/cjs.js??ref--4-2!/Users/olivierbossel/Home/web/coffeekraken/coffeekraken/webcomponents/s-iframe/src/scss/_bare.scss ***!
   \***************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {

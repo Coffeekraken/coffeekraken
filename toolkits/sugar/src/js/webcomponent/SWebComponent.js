@@ -112,7 +112,7 @@ function SWebComponent(extend = HTMLElement) {
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     static get observedAttributes() {
-      return Object.keys(this.props);
+      return Object.keys(this.props).map((name) => __uncamelize(name));
     }
 
     /**
@@ -145,10 +145,19 @@ function SWebComponent(extend = HTMLElement) {
       // apply the $node class
       this.classList.add(`${this.metas.dashName}__node`);
 
+      // handle props
+      for (const key in this._settings.props) {
+        const attr = this.getAttribute(__uncamelize(key));
+        this._props[key] = {
+          ...this._settings.props[key],
+          value: attr ? __parse(attr) : this._settings.props[key].default,
+          previousValue: undefined
+        };
+      }
+
       this.on('mounted{1}', () => {
         // dispatch a ready event
         if (!this.lit) {
-          console.log('coco', this.lit);
           // the Lit HTML class dispatch the ready event after having rendering the template the first time
           this.dispatch('ready', this);
         }
@@ -194,12 +203,6 @@ function SWebComponent(extend = HTMLElement) {
 
       // handle props
       for (const key in this._settings.props) {
-        const attr = this.getAttribute(__uncamelize(key));
-        this._props[key] = {
-          ...this._settings.props[key],
-          value: attr ? __parse(attr) : this._settings.props[key].default,
-          previousValue: undefined
-        };
         // if need to be watches deeply
         if (this._props[key].watch) {
           this._props[key] = __watch(this._props[key], {
@@ -415,6 +418,8 @@ function SWebComponent(extend = HTMLElement) {
       // const previousValue = __parse(oldVal);
       const newValue = __parse(newVal) || false;
 
+      console.log('NEW', attrName, Object.assign({}, this._props));
+
       // set the value into the props
       this.prop(attrName, newValue);
 
@@ -435,10 +440,15 @@ function SWebComponent(extend = HTMLElement) {
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     prop(prop, value = undefined) {
+      // camelize the attribute name
+      prop = __camelize(prop);
+
       if (value === undefined) {
         return this._props[prop] ? this._props[prop].value : undefined;
       }
-      this._props[prop].previousValue = this._props[prop].value;
+      this._props[prop].previousValue = this._props[prop]
+        ? this._props[prop].value
+        : undefined;
       this._props[prop].value = value;
 
       this.handleProp(prop, this._props[prop]);
@@ -476,6 +486,9 @@ function SWebComponent(extend = HTMLElement) {
         value: this._props[prop].value,
         previousValue: this._props[prop].previousValue
       };
+
+      console.log('EV', eventObj);
+
       this.dispatch(`prop.${prop}:${eventObj.action}`, eventObj);
     }
 
@@ -499,7 +512,7 @@ function SWebComponent(extend = HTMLElement) {
         const value = this._props[prop].value;
 
         // if the value is false, remove the attributee from the dom node
-        if (!value) {
+        if (value === undefined || value === null || value === false) {
           this.removeAttribute(prop);
           return;
         }

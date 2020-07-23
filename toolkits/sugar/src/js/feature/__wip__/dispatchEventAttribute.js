@@ -20,13 +20,9 @@ import fastdom from 'fastdom';
 import __dispatchEvent from '../../dom/dispatchEvent';
 
 function handleDispatchEventAttributes(e) {
-  console.log('e', e);
-
   e.preventDefault();
   const field = e.target ? e.target : e;
   if (!field || !field.tagName) return;
-
-  // console.log('COCO', field);
 
   const dispatchEventValue = field.getAttribute('dispatch-event');
 
@@ -162,7 +158,6 @@ function handleDispatchEventAttributes(e) {
 }
 
 __querySelectorLive('[dispatch-event]', ($elm) => {
-  console.log('ELM', $elm);
   $elm.addEventListener('click', handleDispatchEventAttributes);
   $elm.addEventListener('keyup', handleDispatchEventAttributes);
 });

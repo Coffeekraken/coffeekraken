@@ -6,6 +6,7 @@ const __deepMerge = require('../../object/deepMerge');
 const __getFilename = require('../../fs/filename');
 const __SFsOutputStreamAction = require('../../stream/actions/SFsOutputStreamAction');
 const __SGlobResolverStreamAction = require('../../stream/actions/SGlobResolverStreamAction');
+const __SSugarJsonStreamAction = require('./actions/SSugarJsonStreamAction');
 const __path = require('path');
 
 /**
@@ -47,6 +48,7 @@ module.exports = class SBuildJsActionsStream extends __SActionsStream {
       {
         globResolver: __SGlobResolverStreamAction,
         readFile: __SFsReadFileStreamAction,
+        sugarJson: __SSugarJsonStreamAction,
         webpack: __SWebpackStreamAction,
         terser: __STerserStreamAction,
         fsOutput: __SFsOutputStreamAction

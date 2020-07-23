@@ -1,0 +1,16 @@
+@mixin s-iframe-style($name: 's-iframe') {
+
+   .#{$name} {
+
+   }
+    .#{$name}__node {
+
+    }
+    .#{$name}__loading {
+      background: Sugar.color(dark, -opacity .5);
+    }
+    .#{$name}__loading__loader {
+      @include Sugar.loader-spinner();
+    }
+
+}

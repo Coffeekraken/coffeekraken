@@ -59,8 +59,6 @@ function checkArgs(func, args, descriptor, throwError = true) {
 
   argumentsNames.forEach((argName, i) => {
     // get the argument description object
-    console.log(descriptor[argName]);
-
     const descriptionObj = __parseArgs(descriptor[argName], {
       types: '["String","Array"] -t --types',
       values: 'Array -v --values',
@@ -72,7 +70,6 @@ function checkArgs(func, args, descriptor, throwError = true) {
       default: `[${availableTypes.map(i => `"${__upperFirst(i)}"`).toString()}] -d --default /\"[\\s\\S]+\"/`
     });
 
-    console.log(descriptionObj);
     if (!descriptor[argName]) return;
     const argValue = args[i]; // construct the resultObj
 

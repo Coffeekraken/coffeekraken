@@ -143,17 +143,11 @@ function SWebComponent(extend = HTMLElement) {
       this._promise = new __SPromise(() => {}).start();
 
       // apply the $node class
-      this.classList.add(`${this.metas.dashName}__node`);
-
-      // handle props
-      for (const key in this._settings.props) {
-        const attr = this.getAttribute(__uncamelize(key));
-        this._props[key] = {
-          ...this._settings.props[key],
-          value: attr ? __parse(attr) : this._settings.props[key].default,
-          previousValue: undefined
-        };
-      }
+      const currentClassName = this.getAttribute('class') || '';
+      this.setAttribute(
+        'class',
+        `${currentClassName} ${this.className(`node`)}`
+      );
 
       this.on('mounted{1}', () => {
         // dispatch a ready event
@@ -203,6 +197,19 @@ function SWebComponent(extend = HTMLElement) {
 
       // handle props
       for (const key in this._settings.props) {
+        let attr = this.getAttribute(__uncamelize(key));
+        if (!attr && this.hasAttribute(__uncamelize(key))) {
+          attr = true;
+        }
+        this._props[key] = {
+          ...this._settings.props[key],
+          value: attr ? __parse(attr) : this._settings.props[key].default,
+          previousValue: undefined
+        };
+      }
+
+      // handle props
+      for (const key in this._settings.props) {
         // if need to be watches deeply
         if (this._props[key].watch) {
           this._props[key] = __watch(this._props[key], {
@@ -228,6 +235,7 @@ function SWebComponent(extend = HTMLElement) {
       this._handlePhysicalProps();
 
       // dispatch mounted event
+      this._isMounted = true;
       this.dispatch('mounted', this);
     }
 
@@ -413,18 +421,58 @@ function SWebComponent(extend = HTMLElement) {
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     attributeChangedCallback(attrName, oldVal, newVal) {
+      if (!this._isMounted) return;
       if (this._settedAttributesStack[attrName]) return;
 
       // const previousValue = __parse(oldVal);
       const newValue = __parse(newVal) || false;
 
-      console.log('NEW', attrName, Object.assign({}, this._props));
-
       // set the value into the props
       this.prop(attrName, newValue);
+    }
 
-      // trigger a "prop" event
-      this._triggerPropsEvents(__camelize(attrName));
+    /**
+     * @name            className
+     * @type            Function
+     *
+     * This method return you a className generated depending on the
+     * webcomponent name
+     *
+     * @param       {String}      cls         The class name to use
+     * @return      {String}                  The generated class name
+     *
+     * @since       2.0.0
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    className(cls = '') {
+      const originalName = __uncamelize(this.constructor.name).replace(
+        '-web-component',
+        ''
+      );
+
+      const hasDot = cls.match(/^\./);
+      cls = cls.replace('.', '');
+
+      let finalCls;
+      if (cls.match(/^(--)/)) finalCls = `${this.metas.dashName}${cls}`;
+      else if (cls !== '') finalCls = `${this.metas.dashName}__${cls}`;
+      else finalCls = this.metas.dashName;
+
+      if (cls.match(/^(--)/)) {
+        finalCls = `${hasDot ? '.' : ''}${originalName}-bare${cls} ${
+          hasDot ? '.' : ''
+        }${finalCls}`;
+      } else if (cls !== '') {
+        finalCls = `${hasDot ? '.' : ''}${originalName}-bare__${cls} ${
+          hasDot ? '.' : ''
+        }${finalCls}`;
+      } else {
+        finalCls = `${hasDot ? '.' : ''}${originalName}-bare ${
+          hasDot ? '.' : ''
+        }${finalCls}`;
+      }
+
+      return finalCls;
     }
 
     /**
@@ -487,9 +535,7 @@ function SWebComponent(extend = HTMLElement) {
         previousValue: this._props[prop].previousValue
       };
 
-      console.log('EV', eventObj);
-
-      this.dispatch(`prop.${prop}:${eventObj.action}`, eventObj);
+      this.dispatch(`prop.${prop}.${eventObj.action}`, eventObj);
     }
 
     /**

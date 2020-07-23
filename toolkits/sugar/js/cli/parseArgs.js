@@ -120,7 +120,7 @@ function parseArgsString(string, definitionObj = {}, settings = {}) {
       const value = (0, _parse.default)(part);
 
       if (currentArgType[0].type.toLowerCase() === 'array') {
-        if (!Array.isArray(argsObj[lastArgObjKey])) argsObj[lastArgObjKey] = [];
+        if (Array.isArray(value)) argsObj[lastArgObjKey] = value;else if (!Array.isArray(argsObj[lastArgObjKey])) argsObj[lastArgObjKey] = [];
 
         if (currentArgType[0].of) {
           if ((0, _ofType.default)(value, currentArgType[0].of)) {
@@ -130,8 +130,7 @@ function parseArgsString(string, definitionObj = {}, settings = {}) {
 
             argsObj[lastArgObjKey].push(value);
           }
-        } else {
-          argsObj[lastArgObjKey].push(value);
+        } else {// argsObj[lastArgObjKey].push(value);
         }
       } else {
         argsObj[lastArgObjKey] = value; // __set(argsObj, lastArgObjKey, value);

@@ -50,14 +50,14 @@ export default class SFiltrableInputWebComponent extends SLitHtmlWebComponent(
 
   static template = (props, component, settings, lit) => {
     return lit.html`
-      ${component.$node}
-      <ul class="${component.dashName}__list" tabindex="1">
+      ${component}
+      <ul class="${component.metas.dashName}__list" tabindex="1">
         ${props.items.value.map((item, i) =>
-          i < component.instance._maxDisplayItems
+          i < component._maxDisplayItems
             ? lit.html`
-                <li class="${component.dashName}__list-item ${
-                component.instance._selectedItemIdx === i
-                  ? component.instance.className('list-item--selected')
+                <li class="${omponent.metas.dashName}__list-item ${
+                component._selectedItemIdx === i
+                  ? component.className('list-item--selected')
                   : ''
               }">
                   ${settings.template.item(
@@ -65,7 +65,7 @@ export default class SFiltrableInputWebComponent extends SLitHtmlWebComponent(
                     component,
                     settings,
                     lit,
-                    component.instance.highlightFilter.bind(component.instance)
+                    component.highlightFilter.bind(component)
                   )}
                 </li>
               `
@@ -128,9 +128,7 @@ export default class SFiltrableInputWebComponent extends SLitHtmlWebComponent(
               ${
                 itemObj.title
                   ? lit.html`
-                <div class="${component.instance.className(
-                  'list-item__title'
-                )}">
+                <div class="${component.className('list-item__title')}">
                     ${highlightFilter(itemObj.title)}
                 </div>
               `
@@ -139,9 +137,7 @@ export default class SFiltrableInputWebComponent extends SLitHtmlWebComponent(
               ${
                 itemObj.description
                   ? lit.html`
-                <div class="${component.instance.className(
-                  'list-item__description'
-                )}">
+                <div class="${component.className('list-item__description')}">
                   ${highlightFilter(itemObj.description)}
                 </div>
               `

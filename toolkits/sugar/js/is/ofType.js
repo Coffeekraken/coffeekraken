@@ -54,12 +54,12 @@ function ofType(value, argTypeDefinition, returnError = false) {
 
     if (definitionObj.type === 'array') {
       // make sure the value is an array
-      if (Array.isArray(value) && !definitionObj.of) return true;else error = `Regarding to the argument definition "<yellow>${argTypeDefinition}</yellow>", the passed value "<cyan>${(0, _toString.default)(value)}</cyan>" of type "<magenta>${typeof value}</magenta>" has to be an <green>Array</green>...`;
+      if (Array.isArray(value) && !definitionObj.of) return true;else if (Array.isArray(value) && definitionObj.of) {} else error = `Regarding to the argument definition "<yellow>${argTypeDefinition}</yellow>", the passed value "<cyan>${(0, _toString.default)(value)}</cyan>" of type "<magenta>${typeof value}</magenta>" has to be an <green>Array</green>...`;
     } // check object
 
 
     if (definitionObj.type === 'object') {
-      if (typeof value === 'object' && !definitionObj.of) return true;else error = `Regarding to the argument definition "<yellow>${argTypeDefinition}</yellow>", the passed value "<cyan>${(0, _toString.default)(value)}</cyan>" of type "<magenta>${typeof value}</magenta>" has to be an <green>Object</green>...`;
+      if (typeof value === 'object' && !definitionObj.of) return true;else if (typeof value === 'object' && definitionObj.of) {} else error = `Regarding to theargument definition "<yellow>${argTypeDefinition}</yellow>", the passed value "<cyan>${(0, _toString.default)(value)}</cyan>" of type "<magenta>${typeof value}</magenta>" has to be an <green>Object</green>...`;
     } // check if need to check the childs
 
 

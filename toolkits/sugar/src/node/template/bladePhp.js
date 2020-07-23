@@ -40,23 +40,23 @@ module.exports = (view, data = {}, settings = {}) => {
 
   const sugarViewsDir = __path.resolve(`${__dirname}/../../php/views`);
 
-  const viewPath = `${settings.rootDir}/${view
-    .replace('.blade.php', '')
-    .split('.')
-    .join('/')}.blade.php`;
-  const sugarViewPath = `${sugarViewsDir}/${view
-    .replace('.blade.php', '')
-    .split('.')
-    .join('/')}.blade.php`;
+  // const viewPath = `${settings.rootDir}/${view
+  //   .replace('.blade.php', '')
+  //   .split('.')
+  //   .join('/')}.blade.php`;
+  // const sugarViewPath = `${sugarViewsDir}/${view
+  //   .replace('.blade.php', '')
+  //   .split('.')
+  //   .join('/')}.blade.php`;
 
-  if (!__fs.existsSync(viewPath)) {
-    if (!__fs.existsSync(sugarViewPath)) {
-      throw new Error(
-        `It seems thats the view "<primary>${view}</primary>" does not exists either in your project views folder "<cyan>${settings.rootDir}</cyan>", nor in the Sugar package folder "<magenta>${sugarViewsDir}</magenta>"...`
-      );
-    }
-    settings.rootDir = sugarViewsDir;
-  }
+  // if (!__fs.existsSync(viewPath)) {
+  //   if (!__fs.existsSync(sugarViewPath)) {
+  //     throw new Error(
+  //       `It seems thats the view "<primary>${view}</primary>" does not exists either in your project views folder "<cyan>${settings.rootDir}</cyan>", nor in the Sugar package folder "<magenta>${sugarViewsDir}</magenta>"...`
+  //     );
+  //   }
+  //   settings.rootDir = sugarViewsDir;
+  // }
 
   if (!__fs.existsSync(settings.cacheDir)) __fs.mkdirSync(settings.cacheDir);
 
@@ -71,7 +71,7 @@ module.exports = (view, data = {}, settings = {}) => {
         }
         // execute the php engine and get back the result
         php.compile(
-          [settings.rootDir, sugarViewsDir],
+          [settings.rootDir, sugarViewsDir, '/'],
           view.replace('.blade.php', '').split('/').join('.'),
           data,
           settings.cacheDir,

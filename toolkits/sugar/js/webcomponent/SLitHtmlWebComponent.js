@@ -157,12 +157,12 @@ function SLitHtmlWebComponent(extend = HTMLElement) {
       });
 
       _defineProperty(_assertThisInitialized(_this), "render", (0, _throttle.default)(function () {
-        const tpl = this.constructor.template(this._props, this.metas, this._settings, this.lit);
+        const tpl = this.constructor.template(this._props, this, this._settings, this.lit);
         (0, _litHtml.render)(tpl, this.$container);
       }, 50));
 
       _this.$container = document.createElement('div');
-      _this.$container.className = `${_this.metas.dashName}`; // wait until mounted to render the component first time
+      _this.$container.className = _this.className(); // wait until mounted to render the component first time
 
       _this.on('mounted{1}', () => {
         // insert the container in the document
@@ -209,14 +209,6 @@ function SLitHtmlWebComponent(extend = HTMLElement) {
         }
 
         return $result;
-      }
-    }, {
-      key: "className",
-      value: function className(cls) {
-        const hasDot = cls.match(/^\./);
-        cls = cls.replace('.', '');
-        if (cls.match(/^(--)/)) return `${hasDot ? '.' : ''}${this.metas.dashName}${cls}`;
-        return `${hasDot ? '.' : ''}${this.metas.dashName}__${cls}`;
       }
       /**
        * @name          handleProp

@@ -8,6 +8,7 @@ const __SBundleScssStreamAction = require('./actions/SBundleScssStreamAction');
 const __SRenderSassStreamAction = require('./actions/SRenderSassStreamAction');
 const __SPostCssStreamAction = require('./actions/SPostCssStreamAction');
 const __SGlobResolverStreamAction = require('../../stream/actions/SGlobResolverStreamAction');
+const __SSugarJsonStreamAction = require('./actions/SSugarJsonStreamAction');
 const __path = require('path');
 const __sugarConfig = require('../../config/sugar');
 
@@ -50,6 +51,7 @@ module.exports = class SBuildScssActionsStream extends __SActionsStream {
       {
         globResolver: __SGlobResolverStreamAction,
         bundle: __SBundleScssStreamAction,
+        sugarJson: __SSugarJsonStreamAction,
         imports: __SImportsStreamAction,
         jsConfig: __SJsObjectToScssStreamAction,
         render: __SRenderSassStreamAction,

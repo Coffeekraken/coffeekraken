@@ -5,7 +5,7 @@ const __bladePhp = require('../../template/bladePhp');
 const __SNav = require('../../nav/SNav');
 const __deepMap = require('../../object/deepMap');
 const __packageRoot = require('../../path/packageRoot');
-const __packageJson = require(__packageRoot(process.cwd()) + '/package.json');
+const __standardizeJson = require('../../npm/standardizeJson');
 const __fs = require('fs');
 const __path = require('path');
 const __rimraf = require('rimraf');
@@ -63,9 +63,7 @@ module.exports = async (args = {}) => {
 
   // build the "templateData" object to pass to the render engines
   const templateData = {
-    title: __packageJson.name,
     env: process.env.NODE_ENV || 'development',
-    package: JSON.stringify(__packageJson),
     settings: JSON.stringify(settings)
   };
 
@@ -108,16 +106,14 @@ module.exports = async (args = {}) => {
 
       // render the view
       let result = await __bladePhp(view, {
+        packageJson: __standardizeJson(
+          require(__packageRoot(process.cwd()) + '/package.json')
+        ),
         ...templateData
       });
 
       // remove tmp folder
       __rimraf.sync(tmpDir);
-
-      // render using ejs
-      // result = renderTemplate(result, {
-      //   ...templateData
-      // });
 
       res.send(result);
     } else if (__fs.existsSync(indexHtmlPath)) {
@@ -156,7 +152,7 @@ module.exports = async (args = {}) => {
 
           // handle response
           const view = response.view || 'pages.404';
-          const content = response.content || null;
+          const data = response.data || null;
           const title = response.title || 'Page not found';
           const type = response.type || 'text/html';
 
@@ -164,13 +160,16 @@ module.exports = async (args = {}) => {
           let result;
           switch (type.toLowerCase()) {
             case 'application/json':
-              result = content;
+              result = data;
               break;
             case 'text/html':
             default:
               result = await __render(view, {
+                packageJson: __standardizeJson(
+                  require(__packageRoot(process.cwd()) + '/package.json')
+                ),
                 ...templateData,
-                ...content
+                ...data
               });
               break;
           }

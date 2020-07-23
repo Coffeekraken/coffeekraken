@@ -21,12 +21,20 @@ export default class SIframeWebComponent extends SLitHtmlWebComponent(
     autoResize: {
       default: false,
       watch: true
+    },
+    loading: {
+      default: true,
+      watch: true,
+      physical: true
     }
   };
 
   static template = (props, component, settings, lit) => {
     return lit.html`
-      ${component.$node}
+      ${component}
+      <div class="${component.className('loading')}">
+        <div class="${component.className('loading__loader')}"></div>
+      </div>
     `;
   };
 
@@ -45,12 +53,13 @@ export default class SIframeWebComponent extends SLitHtmlWebComponent(
     this.on('ready', () => {
       // check auto-resize
       if (this.prop('autoResize')) {
+        console.log('REs');
         this._initAutoResize();
       }
-    });
-
-    this.on('prop.autoResize:set', (value) => {
-      console.log('value', value);
+      // listen for load event
+      this.addEventListener('load', () => {
+        this.prop('loading', false);
+      });
     });
   }
 
@@ -92,6 +101,7 @@ export default class SIframeWebComponent extends SLitHtmlWebComponent(
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _applyResize() {
+    if (!this.prop('autoResize')) return;
     this.style.height =
       this.contentWindow.document.documentElement.scrollHeight + 'px';
   }

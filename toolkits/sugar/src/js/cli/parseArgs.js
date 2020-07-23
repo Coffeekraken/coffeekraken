@@ -79,7 +79,6 @@ export default function parseArgsString(
   let currentArgDefinition = null;
   stringArray = stringArray.filter((part) => {
     const currentArg = part.replace(/^[-]{1,2}/, '');
-
     if (part.slice(0, 2) === '--' || part.slice(0, 1) === '-') {
       const realArgName =
         getArgNameByAlias(currentArg, definitionObj) || currentArg;
@@ -113,7 +112,9 @@ export default function parseArgsString(
     } else if (lastArgObjKey) {
       const value = __parse(part);
       if (currentArgType[0].type.toLowerCase() === 'array') {
-        if (!Array.isArray(argsObj[lastArgObjKey])) argsObj[lastArgObjKey] = [];
+        if (Array.isArray(value)) argsObj[lastArgObjKey] = value;
+        else if (!Array.isArray(argsObj[lastArgObjKey]))
+          argsObj[lastArgObjKey] = [];
         if (currentArgType[0].of) {
           if (__ofType(value, currentArgType[0].of)) {
             if (
@@ -125,7 +126,7 @@ export default function parseArgsString(
             argsObj[lastArgObjKey].push(value);
           }
         } else {
-          argsObj[lastArgObjKey].push(value);
+          // argsObj[lastArgObjKey].push(value);
         }
       } else {
         argsObj[lastArgObjKey] = value;

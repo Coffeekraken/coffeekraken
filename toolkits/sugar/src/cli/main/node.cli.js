@@ -43,8 +43,6 @@ const api = {};
   for (let i = 0; i < Object.keys(files).length; i++) {
     const filepath = Object.keys(files)[i];
 
-    // console.log(filepath);
-
     if (__includes(filepath, args.ignore)) continue;
 
     // let fileContent = __fs.readFileSync(filepath).toString();

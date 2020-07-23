@@ -2,6 +2,19 @@ const __packageRoot = require('../src/node/path/packageRoot');
 
 module.exports = {
   /**
+   * @name              sugarJsonDirs
+   * @namespace         config.core
+   * @type              String
+   * @default           []
+   *
+   * Set the directories where to search for sugar.json files
+   *
+   * @since             2.0.0
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  sugarJsonDirs: [__packageRoot(__dirname), __packageRoot()],
+
+  /**
    * @name             ignoreFolders
    * @namespace         config.core
    * @type            Array<String>

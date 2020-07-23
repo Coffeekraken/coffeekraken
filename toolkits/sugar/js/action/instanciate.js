@@ -39,8 +39,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function instanciate(actionObj) {
-  console.log(actionObj);
-
   if (!actionObj.type) {
     throw new Error(`instanciate: The actionObj parameter MUST have a <cyan>type</cyan> property...`);
   }

@@ -104,7 +104,7 @@ export default function SLitHtmlWebComponent(extend = HTMLElement) {
       super(__deepMerge({}, settings));
       // generate a container for the component
       this.$container = document.createElement('div');
-      this.$container.className = `${this.metas.dashName}`;
+      this.$container.className = this.className();
       // wait until mounted to render the component first time
       this.on('mounted{1}', () => {
         // insert the container in the document
@@ -127,7 +127,7 @@ export default function SLitHtmlWebComponent(extend = HTMLElement) {
     render = __throttle(function () {
       const tpl = this.constructor.template(
         this._props,
-        this.metas,
+        this,
         this._settings,
         this.lit
       );
@@ -149,13 +149,6 @@ export default function SLitHtmlWebComponent(extend = HTMLElement) {
         $result = this.$container.querySelectorAll(path);
       }
       return $result;
-    }
-    className(cls) {
-      const hasDot = cls.match(/^\./);
-      cls = cls.replace('.', '');
-      if (cls.match(/^(--)/))
-        return `${hasDot ? '.' : ''}${this.metas.dashName}${cls}`;
-      return `${hasDot ? '.' : ''}${this.metas.dashName}__${cls}`;
     }
 
     /**

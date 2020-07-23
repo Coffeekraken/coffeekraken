@@ -25,11 +25,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function handleDispatchEventAttributes(e) {
-  console.log('e', e);
   e.preventDefault();
   const field = e.target ? e.target : e;
-  if (!field || !field.tagName) return; // console.log('COCO', field);
-
+  if (!field || !field.tagName) return;
   const dispatchEventValue = field.getAttribute('dispatch-event'); // handle the dispatchEvent value
 
   let nativeEvent = 'click';
@@ -160,7 +158,6 @@ function handleDispatchEventAttributes(e) {
 }
 
 (0, _querySelectorLive.default)('[dispatch-event]', $elm => {
-  console.log('ELM', $elm);
   $elm.addEventListener('click', handleDispatchEventAttributes);
   $elm.addEventListener('keyup', handleDispatchEventAttributes);
 });

@@ -4,20 +4,6 @@ const psList = require('ps-list');
 const __SPromise = require('../../node/promise/SPromise');
 
 module.exports = async (stringArgs = '') => {
-  // const promise = new __SPromise(() => {
-  //   console.log('COCO');
-  // });
-
-  // setTimeout(() => {
-  //   promise.resolve();
-  // });
-
-  // await promise;
-
-  // console.log('FINISHED');
-
-  // return;
-
   if (!stringArgs) {
     throw new Error(`You must specify a sugar process(s) to kill using the following format:
       - sugar util.kill server // this will kill all the sugar processes that starts with "server"

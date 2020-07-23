@@ -28,8 +28,6 @@ import __flatten from '../object/flatten';
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function instanciate(actionObj) {
-  console.log(actionObj);
-
   if (!actionObj.type) {
     throw new Error(
       `instanciate: The actionObj parameter MUST have a <cyan>type</cyan> property...`

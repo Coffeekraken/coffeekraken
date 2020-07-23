@@ -20,7 +20,7 @@ module.exports = {
      * @name          mobile
      * @namespace     config.media.queries
      * @type          Object
-     * @default       {'min-device-width': null, 'max-device-width': 639}
+     * @default       {'min-width': null, 'max-width': 639}
      *
      * Specify the media query arguments needed to target mobile
      *
@@ -28,15 +28,15 @@ module.exports = {
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     mobile: {
-      'min-device-width': null,
-      'max-device-width': 639
+      'min-width': null,
+      'max-width': 639
     },
 
     /**
      * @name          mobile-portrait
      * @namespace     config.media.queries
      * @type          Object
-     * @default       {'min-device-width': null, 'max-device-width': 480}
+     * @default       {'min-width': null, 'max-width': 480}
      *
      * Specify the media query arguments needed to target mobile-portrait
      *
@@ -44,8 +44,8 @@ module.exports = {
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     'mobile-portrait': {
-      'min-device-width': null,
-      'max-device-width': 480,
+      'min-width': null,
+      'max-width': 480,
       orientation: 'portrait'
     },
 
@@ -53,7 +53,7 @@ module.exports = {
      * @name          mobile-landscape
      * @namespace     config.media.queries
      * @type          Object
-     * @default       {'min-device-width': null, 'max-device-width': 639}
+     * @default       {'min-width': null, 'max-width': 639}
      *
      * Specify the media query arguments needed to target mobile-landscape
      *
@@ -61,8 +61,8 @@ module.exports = {
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     'mobile-landscape': {
-      'min-device-width': null,
-      'max-device-width': 639,
+      'min-width': null,
+      'max-width': 639,
       oprientation: 'landscape'
     },
 
@@ -70,7 +70,7 @@ module.exports = {
      * @name          tablet
      * @namespace     config.media.queries
      * @type          Object
-     * @default       {'min-device-width': 640, 'max-device-width': 1279}
+     * @default       {'min-width': 640, 'max-width': 1279}
      *
      * Specify the media query arguments needed to target tablet
      *
@@ -78,15 +78,15 @@ module.exports = {
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     tablet: {
-      'min-device-width': 640,
-      'max-device-width': 1279
+      'min-width': 640,
+      'max-width': 1279
     },
 
     /**
      * @name          tablet-portrait
      * @namespace     config.media.queries
      * @type          Object
-     * @default       {'min-device-width': 640, 'max-device-width': 1023}
+     * @default       {'min-width': 640, 'max-width': 1023}
      *
      * Specify the media query arguments needed to target tablet-portrait
      *
@@ -94,8 +94,8 @@ module.exports = {
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     'tablet-portrait': {
-      'min-device-width': 640,
-      'max-device-width': 1023,
+      'min-width': 640,
+      'max-width': 1023,
       orientation: 'portrait'
     },
 
@@ -103,7 +103,7 @@ module.exports = {
      * @name          tablet-landscape
      * @namespace     config.media.queries
      * @type          Object
-     * @default       {'min-device-width': 1024, 'max-device-width': 1279}
+     * @default       {'min-width': 1024, 'max-width': 1279}
      *
      * Specify the media query arguments needed to target tablet-landscape
      *
@@ -111,8 +111,8 @@ module.exports = {
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     'tablet-landscape': {
-      'min-device-width': 1024,
-      'max-device-width': 1279,
+      'min-width': 1024,
+      'max-width': 1279,
       oprientation: 'landscape'
     },
 

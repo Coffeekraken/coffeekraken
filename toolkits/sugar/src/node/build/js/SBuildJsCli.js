@@ -48,6 +48,13 @@ module.exports = class SBuildJsCli extends __SCli {
       default: __sugarConfig('build.js.outputDir') || 'dist/js',
       level: 1
     },
+    sugarJsonDirs: {
+      type: 'Array',
+      alias: 'a',
+      description: 'Specify the directory where to search for sugar.json files',
+      default: __sugarConfig('core.sugarJsonDirs'),
+      level: 1
+    },
     map: {
       type: 'Boolean',
       alias: 'm',

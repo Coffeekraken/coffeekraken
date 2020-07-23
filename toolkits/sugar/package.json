@@ -3,7 +3,7 @@
   "description": "A little sugar in your codebase",
   "version": "2.0.0",
   "homepage": "http://coffeekraken.io",
-  "author": "Coffeekraken <hello@coffeekraken.io>",
+  "author": "Coffeekraken <hello@coffeekraken.io> (https://coffeekraken.io)",
   "contributors": [
     {
       "name": "Olivier Bossel",
@@ -94,6 +94,7 @@
     "glob": "^7.1.6",
     "glob-parent": "^5.1.1",
     "glob-to-regexp": "^0.4.1",
+    "globby": "^11.0.1",
     "handlebars": "^4.7.6",
     "hotkeys-js": "^3.7.3",
     "html2canvas": "^1.0.0-rc.5",

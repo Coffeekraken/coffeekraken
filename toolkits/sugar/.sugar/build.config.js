@@ -5,8 +5,6 @@ function isInSugarPackage() {
   return __isInPackage('@coffeekraken/sugar', process.cwd(), true);
 }
 
-console.log(isInSugarPackage());
-
 module.exports = {
   scss: {
     /**

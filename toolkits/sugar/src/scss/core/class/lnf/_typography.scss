@@ -1,0 +1,36 @@
+@use 'sass:meta';
+
+@mixin classes-lnf-title() {
+
+  $formats: setting('typography.formats');
+
+  @each $key, $value in $formats {
+
+    @if class-match-namespace('sugar.lnf.typography.#{$key}') {
+      /**
+        * @name 		s-#{$key}
+        * @namespace           scss.core.class.lnf
+        * @class-namespace     sugar.lnf.typography.#{$key}
+        * @type        class
+        *
+        * Set the basic #{$key} styling
+        *
+        * @example 	html
+        * <#{$key} class="s-#{$key}">I'm a cool #{$key}</#{$key}>
+        *
+        * @since       2.0.0
+        * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+        */
+      .s-#{$key} {
+        $map: $value;
+        @each $name, $val in $map {
+          @if function-exists($name) {
+            #{$name}: meta.call(get-function($name), $val);
+          } @else {
+            #{$name}: $val;
+          }
+        }
+      }
+    }
+  }
+}

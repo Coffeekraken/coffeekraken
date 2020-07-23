@@ -1,4 +1,5 @@
 @use 'sass:meta';
+@use 'sass:string';
 
 /**
  * @name                  media
@@ -84,7 +85,7 @@
         @if $action == '>' {
           @if $key == 'max-width' or $key == 'max-device-width' {
             $argName: 'min-width';
-            @if str-index($key, '-device') != -1 {
+            @if str-index($key, '-device') != null {
               $argName: 'min-device-width';
             }
             $queryList: list-append($queryList, "(#{$argName}: #{to-px($value)+1})");
@@ -92,7 +93,7 @@
         } @else if $action == '<' {
           @if $key == 'min-width' or $key == 'min-device-width' {
             $argName: 'max-width';
-            @if str-index($key, '-device') != -1 {
+            @if str-index($key, '-device') != null {
               $argName: 'max-device-width';
             }
             $queryList: list-append($queryList, "(#{$argName}: #{to-px($value)})");

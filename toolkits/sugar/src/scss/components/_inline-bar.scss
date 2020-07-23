@@ -1,0 +1,85 @@
+/**
+ * @name            inline-bar
+ * @namespace       scss.components
+ * @type            Mixin
+ *
+ * This mixin allows you to display an inline styled bar.
+ * Pretty simple you may think but this is very usefull for somple displays like
+ * shields display, links, etc...
+ * Their's also the mixin ```inline-bar-bare``` and ```inline-bar-style``` that you
+ * can use if you need more controls.
+ *
+ * @param       {String}        [$name='s-inline-bar']       The className to use for the generation
+ *
+ * @example         html
+ * <ul class="s-inline-bar">
+ *   <li class="s-inline-bar__item">Something cool</li>
+ *   <li class="s-inline-bar__item">
+ *      <img alt="NPM" src="https://img.shields.io/npm/l/@coffeekraken/sugar?style=for-the-badge">
+ *   </li>
+ *   <li class="s-inline-bar__item">Something cool</li>
+ * </ul>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+ @mixin inline-bar(
+  $name: 's-inline-bar',
+  $spacing: 1em,
+  $align: middle
+) {
+  @include inline-bar-bare($name, $spacing, $align);
+  @include inline-bar-style($name, $spacing, $align);
+}
+@mixin inline-bar-bare(
+  $name: 's-inline-bar',
+  $spacing: 1em,
+  $align: middle
+) {
+  .#{$name} {
+    display: flex;
+    flex-direction: row;
+
+    @include media('<desktop') {
+      flex-direction: column;
+    }
+  }
+    .#{$name}__item {
+      padding-left: $spacing / 2;
+      padding-right: $spacing / 2;
+      &:first-child {
+        padding-left: 0;
+      }
+      &:last-child {
+        padding-right: 0;
+      }
+      @if $align == middle {
+        align-self: center;
+      } @else if $align == top {
+        align-self: flex-start;
+      } @else if $align == bottom {
+        align-self: flex-end;
+      }
+    }
+
+  @each $size, $value in setting('sizes') {
+
+    .#{$name}--#{$size} {
+
+    }
+
+  }
+
+}
+@mixin inline-bar-style(
+  $name: 's-inline-bar',
+  $spacing: 1em,
+  $align: middle
+) {
+  .#{$name} {
+
+  }
+    .#{$name}__item {
+
+    }
+}

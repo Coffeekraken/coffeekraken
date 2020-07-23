@@ -199,17 +199,9 @@ function SWebComponent(extend = HTMLElement) {
 
       _this._promise = new _SPromise.default(() => {}).start(); // apply the $node class
 
-      _this.classList.add(`${_this.metas.dashName}__node`); // handle props
+      const currentClassName = _this.getAttribute('class') || '';
 
-
-      for (const key in _this._settings.props) {
-        const attr = _this.getAttribute((0, _uncamelize.default)(key));
-
-        _this._props[key] = { ..._this._settings.props[key],
-          value: attr ? (0, _parse.default)(attr) : _this._settings.props[key].default,
-          previousValue: undefined
-        };
-      }
+      _this.setAttribute('class', `${currentClassName} ${_this.className(`node`)}`);
 
       _this.on('mounted{1}', () => {
         // dispatch a ready event
@@ -255,6 +247,20 @@ function SWebComponent(extend = HTMLElement) {
         this.dispatch('mounting', this); // handle props
 
         for (const key in this._settings.props) {
+          let attr = this.getAttribute((0, _uncamelize.default)(key));
+
+          if (!attr && this.hasAttribute((0, _uncamelize.default)(key))) {
+            attr = true;
+          }
+
+          this._props[key] = { ...this._settings.props[key],
+            value: attr ? (0, _parse.default)(attr) : this._settings.props[key].default,
+            previousValue: undefined
+          };
+        } // handle props
+
+
+        for (const key in this._settings.props) {
           // if need to be watches deeply
           if (this._props[key].watch) {
             this._props[key] = (0, _watch.default)(this._props[key], {
@@ -280,6 +286,7 @@ function SWebComponent(extend = HTMLElement) {
         this._handlePhysicalProps(); // dispatch mounted event
 
 
+        this._isMounted = true;
         this.dispatch('mounted', this);
       }
       /**
@@ -477,14 +484,45 @@ function SWebComponent(extend = HTMLElement) {
     }, {
       key: "attributeChangedCallback",
       value: function attributeChangedCallback(attrName, oldVal, newVal) {
+        if (!this._isMounted) return;
         if (this._settedAttributesStack[attrName]) return; // const previousValue = __parse(oldVal);
 
-        const newValue = (0, _parse.default)(newVal) || false;
-        console.log('NEW', attrName, Object.assign({}, this._props)); // set the value into the props
+        const newValue = (0, _parse.default)(newVal) || false; // set the value into the props
 
-        this.prop(attrName, newValue); // trigger a "prop" event
+        this.prop(attrName, newValue);
+      }
+      /**
+       * @name            className
+       * @type            Function
+       *
+       * This method return you a className generated depending on the
+       * webcomponent name
+       *
+       * @param       {String}      cls         The class name to use
+       * @return      {String}                  The generated class name
+       *
+       * @since       2.0.0
+       * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
 
-        this._triggerPropsEvents((0, _camelize.default)(attrName));
+    }, {
+      key: "className",
+      value: function className(cls = '') {
+        const originalName = (0, _uncamelize.default)(this.constructor.name).replace('-web-component', '');
+        const hasDot = cls.match(/^\./);
+        cls = cls.replace('.', '');
+        let finalCls;
+        if (cls.match(/^(--)/)) finalCls = `${this.metas.dashName}${cls}`;else if (cls !== '') finalCls = `${this.metas.dashName}__${cls}`;else finalCls = this.metas.dashName;
+
+        if (cls.match(/^(--)/)) {
+          finalCls = `${hasDot ? '.' : ''}${originalName}-bare${cls} ${hasDot ? '.' : ''}${finalCls}`;
+        } else if (cls !== '') {
+          finalCls = `${hasDot ? '.' : ''}${originalName}-bare__${cls} ${hasDot ? '.' : ''}${finalCls}`;
+        } else {
+          finalCls = `${hasDot ? '.' : ''}${originalName}-bare ${hasDot ? '.' : ''}${finalCls}`;
+        }
+
+        return finalCls;
       }
       /**
        * @name        prop
@@ -542,8 +580,7 @@ function SWebComponent(extend = HTMLElement) {
           value: this._props[prop].value,
           previousValue: this._props[prop].previousValue
         };
-        console.log('EV', eventObj);
-        this.dispatch(`prop.${prop}:${eventObj.action}`, eventObj);
+        this.dispatch(`prop.${prop}.${eventObj.action}`, eventObj);
       }
       /**
        * @name        _handlePhysicalProps

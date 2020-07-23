@@ -13,6 +13,4 @@ module.exports = async (stringArgs = '') => {
   if (!args.path) {
     throw new Error(`The cli action "config.get" need a "path" argument...`);
   }
-
-  console.log(await __sugarConfig(args.path));
 };

@@ -4,6 +4,6 @@
 
 @section('content')
 
-  <iframe is="s-iframe" auto-resize="true" src="/styleguide/parts/headings"></iframe>
+  <iframe is="s-cool" auto-resize="true" src="/styleguide/parts/headings"></iframe>
 
 @endsection

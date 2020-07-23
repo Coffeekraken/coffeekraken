@@ -1,0 +1,6 @@
+@import './bare';
+@import './style';
+@mixin s-iframe($name: 's-iframe') {
+  @include s-iframe-bare($name);
+  @include s-iframe-style($name);
+}

@@ -1,5 +1,6 @@
 const __SCli = require('../../cli/SCli');
 const __sugarConfig = require('../../config/sugar');
+const __packageRoot = require('../../path/packageRoot');
 
 /**
  * @name            SBuildScssCli
@@ -74,6 +75,13 @@ module.exports = class SBuildScssCli extends __SCli {
       alias: 'p',
       description: 'Generate the production ready files',
       default: __sugarConfig('build.scss.prod') || false,
+      level: 1
+    },
+    sugarJsonDirs: {
+      type: 'Array',
+      alias: 'a',
+      description: 'Specify the directory where to search for sugar.json files',
+      default: __sugarConfig('core.sugarJsonDirs'),
       level: 1
     },
     'import.sugar': {

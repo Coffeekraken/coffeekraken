@@ -16,14 +16,14 @@ module.exports = {
    * @name            font-size
    * @namespace       config.typography
    * @type            String
-   * @default         14px
+   * @default         16px
    *
    * Set the font size to use by default
    *
    * @since           1.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  'font-size': '14px',
+  'font-size': '16px',
 
   /**
    * @name            font-sizes
@@ -60,7 +60,19 @@ module.exports = {
    */
   'line-letters-count': 55,
 
-  format: {
+  /**
+   * @name            formats
+   * @namespace       config.typography
+   * @type            Object
+   * @default         {}
+   *
+   * Set the typography classes parameters like for h1, h2, etc...
+   * These will gives you access to classes formated like that: s-#{$key} => s-h1, s-h2, s-h3, etc...
+   *
+   * @since           1.0.0
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  formats: {
     h1: {
       'font-family': 'title',
       'font-size': 'bigger'

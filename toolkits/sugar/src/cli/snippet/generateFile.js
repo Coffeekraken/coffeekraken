@@ -98,7 +98,6 @@ module.exports = async (stringArgs = '') => {
     }
 
     docObjs.forEach((docObj) => {
-      //  console.log(docObj);
       const namespace = docObj.namespace || fileNamespace;
       if (!namespace || !docObj.description || !docObj.name) {
         return;

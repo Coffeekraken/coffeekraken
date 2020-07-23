@@ -58,9 +58,6 @@ module.exports = (stringArgs = '') => {
   });
 
   watcher
-    // .on('all', (e) => {
-    //   console.log('EVEN', e);
-    // })
     .on('add', (path) => {
       if (args.type.split(',').indexOf('new') === -1) return;
       console.log(`new:${__path.resolve(path)}`);

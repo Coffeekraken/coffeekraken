@@ -5,7 +5,8 @@
   "scripts": {
     "start": "npm run install-lerna && lerna bootstrap && npx lerna link && npm run init-sugar",
     "install-lerna": "(npm list -g | grep lerna > /dev/null 2>&1) || npm install -g lerna",
-    "init-sugar": "(cd toolkits/sugar && npm link && npm i)"
+    "init-sugar": "(cd toolkits/sugar && npm link && npm i)",
+    "install-all": "lerna exec --parallel -- npm i"
   },
   "pre-commit": [],
   "repository": {

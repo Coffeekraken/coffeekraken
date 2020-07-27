@@ -28,7 +28,7 @@ module.exports = class SFsOutputStreamAction extends __SActionsStreamAction {
   static definitionObj = {
     outputStack: {
       type: 'Object',
-      required: true
+      required: false
     }
   };
 
@@ -59,6 +59,13 @@ module.exports = class SFsOutputStreamAction extends __SActionsStreamAction {
     this.checkStreamObject(streamObj);
 
     return new Promise(async (resolve, reject) => {
+      if (!streamObj.outputStack || typeof streamObj.outputStack !== 'string') {
+        this.warn(
+          `The streamObj does not contain any "<cyan>outputStack</cyan>" property so no file will be saved at all...`
+        );
+        return resolve(streamObj);
+      }
+
       // loop on the files to save
       const outputStackKeys = Object.keys(streamObj.outputStack);
       for (let i = 0; i < outputStackKeys.length; i++) {

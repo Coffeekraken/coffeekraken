@@ -3,6 +3,8 @@ const __packageRoot = require('../../../path/packageRoot');
 const __sugarConfig = require('../../../config/sugar');
 const __render = require('../../../template/render');
 const __standardizeJson = require('../../../npm/standardizeJson');
+const __SBuildScssActionsStream = require('../../../build/scss/SBuildScssActionsStream');
+const __SPromise = require('../../../promise/SPromise');
 
 /**
  * @name                styleguide
@@ -32,6 +34,17 @@ module.exports = function styleguide(req, server) {
       const sugarJson = require(`${packagePath}/sugar.json`);
       if (sugarJson.views && sugarJson.views.styleguide) {
         viewPath = `${packagePath}/${sugarJson.views.styleguide}`;
+      }
+
+      // check if we have a styleguide scss file to load
+      if (sugarJson.scss && sugarJson.scss.styleguide) {
+        const actionsStream = new __SBuildScssActionsStream();
+        const styleguidePromise = actionsStream.start({
+          input: `${packagePath}/${sugarJson.scss.styleguide}`,
+          sugarJsonDirs: packagePath
+        });
+        __SPromise.log(styleguidePromise);
+        const styleguideRes = await styleguidePromise;
       }
     }
 

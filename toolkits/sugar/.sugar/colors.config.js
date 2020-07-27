@@ -48,7 +48,8 @@ module.exports = {
    * The color object format has to follow these guidelines:
    * - color (#848e91) {Color}: Specify the default color
    * - modifiers ({}) (Object): Specify the modifiers available for this color:
-   *   - light (-opacity 33%) {String}: The light modifier
+   *   - hover (-darken 10%) {String}: The hover modifier
+   *   - light (-lighten 15%) {String}: The light modifier
    *   - dark (-darken 10%) {String}: The dark modifier
    *
    * @since             2.0.0
@@ -57,7 +58,8 @@ module.exports = {
   default: {
     color: '#848e91',
     modifiers: {
-      light: '-opacity 33%',
+      hover: '-darken 10%',
+      light: '-lighten 15%',
       dark: '-darken 10%'
     }
   },
@@ -72,7 +74,8 @@ module.exports = {
    * The color object format has to follow these guidelines:
    * - color (#2b3438) {Color}: Specify the default color
    * - modifiers ({}) (Object): Specify the modifiers available for this color:
-   *   - light (-opacity 33%) {String}: The light modifier
+   *   - hover (-darken 10%) {String}: The hover modifier
+   *   - light (-lighten 15%) {String}: The light modifier
    *   - dark (-darken 10%) {String}: The dark modifier
    *
    * @since             2.0.0
@@ -81,7 +84,8 @@ module.exports = {
   title: {
     color: '#2b3438',
     modifiers: {
-      light: '-opacity 33%',
+      hover: '-darken 10%',
+      light: '-lighten 15%',
       dark: '-darken 10%'
     }
   },
@@ -96,7 +100,8 @@ module.exports = {
    * The color object format has to follow these guidelines:
    * - color (#848e91) {Color}: Specify the default color
    * - modifiers ({}) (Object): Specify the modifiers available for this color:
-   *   - light (-opacity 33%) {String}: The light modifier
+   *   - hover (-darken 10%) {String}: The hover modifier
+   *   - light (-lighten 15%) {String}: The light modifier
    *   - dark (-darken 10%) {String}: The dark modifier
    *
    * @since             2.0.0
@@ -105,7 +110,8 @@ module.exports = {
   text: {
     color: '#848e91',
     modifiers: {
-      light: '-opacity 33%',
+      hover: '-darken 10%',
+      light: '-lighten 15%',
       dark: '-darken 10%'
     }
   },
@@ -120,7 +126,8 @@ module.exports = {
    * The color object format has to follow these guidelines:
    * - color (#primary) {Color}: Specify the default color
    * - modifiers ({}) (Object): Specify the modifiers available for this color:
-   *   - light (-opacity 33%) {String}: The light modifier
+   *   - hover (-darken 10%) {String}: The hover modifier
+   *   - light (-lighten 15%) {String}: The light modifier
    *   - dark (-darken 10%) {String}: The dark modifier
    *
    * @since             2.0.0
@@ -129,7 +136,8 @@ module.exports = {
   link: {
     color: 'primary',
     modifiers: {
-      light: '-opacity 33%',
+      hover: '-darken 10%',
+      light: '-lighten 15%',
       dark: '-darken 10%'
     }
   },
@@ -144,7 +152,8 @@ module.exports = {
    * The color object format has to follow these guidelines:
    * - color (#f8f9fa) {Color}: Specify the default color
    * - modifiers ({}) (Object): Specify the modifiers available for this color:
-   *   - light (-opacity 33%) {String}: The light modifier
+   *   - hover (-darken 10%) {String}: The hover modifier
+   *   - light (-lighten 15%) {String}: The light modifier
    *   - dark (-darken 10%) {String}: The dark modifier
    *
    * @since       2.0.0
@@ -153,7 +162,8 @@ module.exports = {
   light: {
     color: '#f8f9fa',
     modifiers: {
-      light: '-opacity 33%',
+      hover: '-darken 10%',
+      light: '-lighten 15%',
       dark: '-darken 10%'
     }
   },
@@ -168,7 +178,8 @@ module.exports = {
    * The color object format has to follow these guidelines:
    * - color (#343a40) {Color}: Specify the default color
    * - modifiers ({}) (Object): Specify the modifiers available for this color:
-   *   - light (-opacity 33%) {String}: The light modifier
+   *   - hover (-darken 10%) {String}: The hover modifier
+   *   - light (-lighten 15%) {String}: The light modifier
    *   - dark (-darken 10%) {String}: The dark modifier
    *
    * @since       2.0.0
@@ -177,7 +188,8 @@ module.exports = {
   dark: {
     color: '#343a40',
     modifiers: {
-      light: '-opacity 33%',
+      hover: '-darken 10%',
+      light: '-lighten 15%',
       dark: '-darken 10%'
     }
   },
@@ -192,7 +204,8 @@ module.exports = {
    * The color object format has to follow these guidelines:
    * - color (#f2bc2b) {Color}: Specify the default color
    * - modifiers ({}) (Object): Specify the modifiers available for this color:
-   *   - light (-opacity 33%) {String}: The light modifier
+   *   - hover (-darken 10%) {String}: The hover modifier
+   *   - light (-lighten 15%) {String}: The light modifier
    *   - dark (-darken 10%) {String}: The dark modifier
    *
    * @since             2.0.0
@@ -201,7 +214,8 @@ module.exports = {
   primary: {
     color: '#f2bc2b',
     modifiers: {
-      light: '-opacity 33%',
+      hover: '-darken 10%',
+      light: '-lighten 15%',
       dark: '-darken 10%'
     }
   },
@@ -216,7 +230,8 @@ module.exports = {
    * The color object format has to follow these guidelines:
    * - color (#2b3438) {Color}: Specify the default color
    * - modifiers ({}) (Object): Specify the modifiers available for this color:
-   *   - light (-opacity 33%) {String}: The light modifier
+   *   - hover (-darken 10%) {String}: The hover modifier
+   *   - light (-lighten 15%) {String}: The light modifier
    *   - dark (-darken 10%) {String}: The dark modifier
    *
    * @since             2.0.0
@@ -225,7 +240,8 @@ module.exports = {
   secondary: {
     color: '#2b3438',
     modifiers: {
-      light: '-opacity 33%',
+      hover: '-darken 10%',
+      light: '-lighten 15%',
       dark: '-darken 10%'
     }
   },
@@ -240,7 +256,8 @@ module.exports = {
    * The color object format has to follow these guidelines:
    * - color (#5cb85c) {Color}: Specify the default color
    * - modifiers ({}) (Object): Specify the modifiers available for this color:
-   *   - light (-opacity 33%) {String}: The light modifier
+   *   - hover (-darken 10%) {String}: The hover modifier
+   *   - light (-lighten 15%) {String}: The light modifier
    *   - dark (-darken 10%) {String}: The dark modifier
    *
    * @since             2.0.0
@@ -249,7 +266,8 @@ module.exports = {
   success: {
     color: '#5cb85c',
     modifiers: {
-      light: '-opacity 33%',
+      hover: '-darken 10%',
+      light: '-lighten 15%',
       dark: '-darken 10%'
     }
   },
@@ -264,7 +282,8 @@ module.exports = {
    * The color object format has to follow these guidelines:
    * - color (#f0ad4e) {Color}: Specify the default color
    * - modifiers ({}) (Object): Specify the modifiers available for this color:
-   *   - light (-opacity 33%) {String}: The light modifier
+   *   - hover (-darken 10%) {String}: The hover modifier
+   *   - light (-lighten 15%) {String}: The light modifier
    *   - dark (-darken 10%) {String}: The dark modifier
    *
    * @since             2.0.0
@@ -273,7 +292,8 @@ module.exports = {
   warning: {
     color: '#f0ad4e',
     modifiers: {
-      light: '-opacity 33%',
+      hover: '-darken 10%',
+      light: '-lighten 15%',
       dark: '-darken 10%'
     }
   },
@@ -288,7 +308,8 @@ module.exports = {
    * The color object format has to follow these guidelines:
    * - color (#d9534f) {Color}: Specify the default color
    * - modifiers ({}) (Object): Specify the modifiers available for this color:
-   *   - light (-opacity 33%) {String}: The light modifier
+   *   - hover (-darken 10%) {String}: The hover modifier
+   *   - light (-lighten 15%) {String}: The light modifier
    *   - dark (-darken 10%) {String}: The dark modifier
    *
    * @since             2.0.0
@@ -297,7 +318,8 @@ module.exports = {
   error: {
     color: '#d9534f',
     modifiers: {
-      light: '-opacity 33%',
+      hover: '-darken 10%',
+      light: '-lighten 15%',
       dark: '-darken 10%'
     }
   },
@@ -312,7 +334,8 @@ module.exports = {
    * The color object format has to follow these guidelines:
    * - color (#2199e8) {Color}: Specify the default color
    * - modifiers ({}) (Object): Specify the modifiers available for this color:
-   *   - light (-opacity 33%) {String}: The light modifier
+   *   - hover (-darken 10%) {String}: The hover modifier
+   *   - light (-lighten 15%) {String}: The light modifier
    *   - dark (-darken 10%) {String}: The dark modifier
    *
    * @since             2.0.0
@@ -321,7 +344,8 @@ module.exports = {
   info: {
     color: '#2199e8',
     modifiers: {
-      light: '-opacity 33%',
+      hover: '-darken 10%',
+      light: '-lighten 15%',
       dark: '-darken 10%'
     }
   }

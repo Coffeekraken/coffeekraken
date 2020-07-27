@@ -14,6 +14,8 @@ const __SFsOutputStreamAction = require('../../stream/actions/SFsOutputStreamAct
  *
  * @param           {Object}          [settings={}]         The settings object to configure your instance
  *
+ * @todo        Document the streamObj required properties
+ *
  * @example         js
  * const SBuildDocMapActionsStream = require('@coffeekraken/sugar/node/build/doc/SBuildDocMapActionsStream');
  * const myStream = new SBuildDocMapActionsStream();

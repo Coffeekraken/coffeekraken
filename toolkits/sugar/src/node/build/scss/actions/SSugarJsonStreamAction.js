@@ -1,8 +1,9 @@
 const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
-const __Bundler = require('scss-bundle').Bundler;
-const __getFilename = require('../../../fs/filename');
+
 const __globby = require('globby');
 const __path = require('path');
+const __packageRoot = require('../../../path/packageRoot');
+const { stream } = require('globby');
 
 /**
  * @name                SSugarJsonStreamAction
@@ -31,7 +32,7 @@ module.exports = class SSugarJsonStreamAction extends __SActionsStreamAction {
   static definitionObj = {
     sugarJsonDirs: {
       type: 'String|Array<String>',
-      required: true
+      required: false
     }
   };
 
@@ -62,6 +63,13 @@ module.exports = class SSugarJsonStreamAction extends __SActionsStreamAction {
     this.checkStreamObject(streamObj);
 
     return new Promise(async (resolve, reject) => {
+      if (!streamObj.sugarJsonDirs) {
+        this.warn(
+          `No "<cyan>sugarJsonDirs</cyan>" has been specified so use the default value which is "<cyan>${__packageRoot()}</cyan>"...`
+        );
+        streamObj.sugarJsonDirs = [__packageRoot()];
+      }
+
       // search for sugar.json files
       let dirs = streamObj.sugarJsonDirs;
       if (!Array.isArray(dirs)) dirs = [dirs];

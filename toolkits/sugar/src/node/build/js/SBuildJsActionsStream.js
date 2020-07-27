@@ -19,6 +19,8 @@ const __path = require('path');
  *
  * @param           {Object}          [settings={}]         The settings object to configure your instance
  *
+ * @todo        Document the streamObj required properties
+ *
  * @example         js
  * const SBuildJsActionsStream = require('@coffeekraken/sugar/node/build/SBuildJsActionsStream');
  * const myStream = new SBuildJsActionsStream();

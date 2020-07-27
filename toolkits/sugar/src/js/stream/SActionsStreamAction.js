@@ -20,6 +20,7 @@ import __validateWithDefinitionObject from '../object/validateWithDefinitionObje
  * - name (null) {String}: A simple name for your stream that will be used in the logs
  * - order (null) {Array}: An array of action names that specify the order you want to execute them. If not specified, take the actions object properties order.
  * - actions ({}) {Object}: An object formated like ```{ actionName: settings }``` that contain specific settings for each actions and that will be passed as a second parameter to each actions.
+ * - cwd (process.cwd()) {String}: The current working directory to use during the stream execution
  *
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -40,7 +41,8 @@ export default class SActionStreamAction extends __SPromise {
       () => {},
       __deepMerge(
         {
-          name: null
+          name: null,
+          cwd: process.cwd()
         },
         settings
       )
@@ -76,6 +78,16 @@ export default class SActionStreamAction extends __SPromise {
    * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   checkStreamObject(streamObj) {
+    // handle "default" property of the definition object
+    Object.keys(this.constructor.definitionObj).forEach((key) => {
+      if (
+        streamObj[key] === undefined &&
+        this.constructor.definitionObj[key].default !== undefined
+      ) {
+        streamObj[key] = this.constructor.definitionObj[key].default;
+      }
+    });
+
     // validate the streamObj depending on the static definitionObj property
     const checkWithDefinitionObjectResult = __validateWithDefinitionObject(
       streamObj,
@@ -83,8 +95,6 @@ export default class SActionStreamAction extends __SPromise {
     );
     if (checkWithDefinitionObjectResult !== true) {
       throw new Error(checkWithDefinitionObjectResult);
-
-      // throwError(checkWithDefinitionObjectResult);
     }
     // throw new Error(checkWithDefinitionObjectResult);
     // this.trigger('stderr.data', checkWithDefinitionObjectResult);
@@ -107,6 +117,34 @@ export default class SActionStreamAction extends __SPromise {
    * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(streamObj, settings = {}) {}
+
+  /**
+   * @name          error
+   * @type          Function
+   *
+   * This method allows you to error a message that will be catched by the parent manager class
+   *
+   * @param       {String}        message           The message you want to error
+   *
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  error(message) {
+    this.trigger('stderr.data', `<red>✚</red> ${message}`);
+  }
+
+  /**
+   * @name          warn
+   * @type          Function
+   *
+   * This method allows you to warn a message that will be catched by the parent manager class
+   *
+   * @param       {String}        message           The message you want to warn
+   *
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  warn(message) {
+    this.trigger('stdout.data', `<yellow>⚠</yellow> ${message}`);
+  }
 
   /**
    * @name          log

@@ -103,7 +103,9 @@ module.exports = class SProcessOutput extends __SComponent {
       })
       .on('stderr.data', (data) => {
         if (data.error) {
-          if (data.error.message) {
+          if (typeof data.error === 'string') {
+            this.log(`<red>${data.error}</red>`);
+          } else if (data.error.message) {
             this.log(`<red>${data.error.message}</red>`);
           }
           if (data.error.stack) this.log(data.error.stack);

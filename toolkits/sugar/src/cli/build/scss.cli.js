@@ -6,9 +6,7 @@ const __sugarConfig = require('../../node/config/sugar');
 
 module.exports = (stringArgs = '') => {
   const args = __parseArgs(stringArgs, __SBuildScssCli.definitionObj);
-  const stream = new __SBuildScssActionsStream({
-    name: 'Build SCSS'
-  });
+  const stream = new __SBuildScssActionsStream();
   const proc = stream.start(args);
   __output(proc);
 };

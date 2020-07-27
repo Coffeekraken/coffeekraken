@@ -57,6 +57,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
  * - name (null) {String}: A simple name for your stream that will be used in the logs
  * - order (null) {Array}: An array of action names that specify the order you want to execute them. If not specified, take the actions object properties order.
  * - actions ({}) {Object}: An object formated like ```{ actionName: settings }``` that contain specific settings for each actions and that will be passed as a second parameter to each actions.
+ * - cwd (process.cwd()) {String}: The current working directory to use during the stream execution
  *
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -82,7 +83,8 @@ let SActionStreamAction = /*#__PURE__*/function (_SPromise) {
 
     // init SPromise
     _this = _super.call(this, () => {}, (0, _deepMerge.default)({
-      name: null
+      name: null,
+      cwd: process.cwd()
     }, settings));
 
     if (!_this.constructor.definitionObj) {
@@ -117,11 +119,17 @@ let SActionStreamAction = /*#__PURE__*/function (_SPromise) {
   _createClass(SActionStreamAction, [{
     key: "checkStreamObject",
     value: function checkStreamObject(streamObj) {
-      // validate the streamObj depending on the static definitionObj property
+      // handle "default" property of the definition object
+      Object.keys(this.constructor.definitionObj).forEach(key => {
+        if (streamObj[key] === undefined && this.constructor.definitionObj[key].default !== undefined) {
+          streamObj[key] = this.constructor.definitionObj[key].default;
+        }
+      }); // validate the streamObj depending on the static definitionObj property
+
       const checkWithDefinitionObjectResult = (0, _validateWithDefinitionObject.default)(streamObj, this.constructor.definitionObj);
 
       if (checkWithDefinitionObjectResult !== true) {
-        throw new Error(checkWithDefinitionObjectResult); // throwError(checkWithDefinitionObjectResult);
+        throw new Error(checkWithDefinitionObjectResult);
       } // throw new Error(checkWithDefinitionObjectResult);
       // this.trigger('stderr.data', checkWithDefinitionObjectResult);
 
@@ -146,6 +154,38 @@ let SActionStreamAction = /*#__PURE__*/function (_SPromise) {
   }, {
     key: "run",
     value: function run(streamObj, settings = {}) {}
+    /**
+     * @name          error
+     * @type          Function
+     *
+     * This method allows you to error a message that will be catched by the parent manager class
+     *
+     * @param       {String}        message           The message you want to error
+     *
+     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "error",
+    value: function error(message) {
+      this.trigger('stderr.data', `<red>✚</red> ${message}`);
+    }
+    /**
+     * @name          warn
+     * @type          Function
+     *
+     * This method allows you to warn a message that will be catched by the parent manager class
+     *
+     * @param       {String}        message           The message you want to warn
+     *
+     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "warn",
+    value: function warn(message) {
+      this.trigger('stdout.data', `<yellow>⚠</yellow> ${message}`);
+    }
     /**
      * @name          log
      * @type          Function

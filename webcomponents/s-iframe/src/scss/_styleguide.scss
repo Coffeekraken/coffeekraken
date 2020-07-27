@@ -1,0 +1,9 @@
+/* @keep */
+@import './index';
+@include s-iframe-classes();
+/* @only */
+
+
+body {
+  color: red;
+}

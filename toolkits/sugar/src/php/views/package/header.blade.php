@@ -36,8 +36,20 @@
       </li>
     </ul>
 
+    @if($currentPackageJson->scripts)
+      <h3 class="s-h3 s-m-b">NPM Scripts</h3>
+
+      <ol class="s-ul s-ul--primary s-m-b">
+        @foreach($currentPackageJson->scripts as $key => $script)
+        <li class="s-m-b-small">
+          <strong>{{ $key }}</strong>: {{ $script }}
+        </li>
+        @endforeach
+      </ol>
+    @endif
+
     @if($currentPackageJson->contributors)
-      <ul class="sugar-package-header__contributors">
+      <ul class="sugar-package-header__contributors s-m-b">
 
         @foreach($currentPackageJson->contributors as $user)
           <li class="s-user-avatar s-user-avatar--small">
@@ -57,7 +69,7 @@
     @endif
 
     @if($currentPackageJson->homepage)
-      <a class="s-btn" target="_blank" href="{{ $currentPackageJson->homepage }}">
+      <a class="s-btn s-btn--primary" target="_blank" href="{{ $currentPackageJson->homepage }}">
         Go to package homepage
       </a>
     @endif

@@ -1,0 +1,186 @@
+/**
+  * @name            ul-classes
+  * @namespace       scss.components
+  * @type            Mixin
+  *
+  * This mixin generate all the css needed to display properly some unordered lists.
+  *
+  * @feature
+  *
+  * @param       {List}      [$colors:map-keys(setting('colors'))]       The colors you want to generate
+  * @param       {List}      [$sizes:map-keys(setting('sizes'))]       The sizes you want to generate
+  * @param       {String}        [$name='s-ul']       The className to use for the generation
+  *
+  * @example         html
+  * <ol class="s-ul">
+  *   <li>I'm a cool unordered list item</li>
+  *   <li>I'm a cool unordered list item</li>
+  *   <li>I'm a cool unordered list item</li>
+  *   <li>I'm a cool unordered list item</li>
+  *   <li>I'm a cool unordered list item</li>
+  *   <li>I'm a cool unordered list item</li>
+  *   <li>I'm a cool unordered list item</li>
+  * </ol>
+  *
+  * @example           scss
+  * @include Sugar.ul-classes();
+  *
+  * @since       2.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+  @mixin ul-classes(
+    $colors: map-keys(setting('colors')),
+    $sizes: map-keys(setting('sizes')),
+    $name: 's-ul'
+  ) {
+    @include ul-bare-classes($sizes, $name);
+    @include ul-style-classes($colors, $name);
+  }
+
+
+  /**
+   * @name              ul-bare-classes
+   * @namespace         scss.components.ul
+   * @type              Mixin
+   *
+   * This mixin generate all the bare classes depending on the parameters you set.
+   *
+   * @param       {List}      [$sizes:map-keys(setting('sizes'))]       The sizes you want to generate
+   * @param       {String}      [$name='s-ul']                         The name to use for the generation of the classes
+   *
+   * @since       2.0.0
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+   @mixin ul-bare-classes(
+    $sizes: map-keys(setting('sizes')),
+    $name: 's-ul'
+  ) {
+    @each $size in $sizes {
+      /**
+       * @name              #{selector(#{$name}--#{$size})}
+       * @namespace         scss.components.ul.sizes
+       * @type              Classname
+       *
+       * This class can be applied on any ```#{$name}``` component to specify his size to ```#{$size}```
+       *
+       * @example         html
+       * <ol class="#{$name} #{selector(#{$name}--#{$size})}">
+       *    <li>I'm a cool unordered list item</li>
+       *    <li>I'm a cool unordered list item</li>
+       *    <li>I'm a cool unordered list item</li>
+       *    <li>I'm a cool unordered list item</li>
+       *    <li>I'm a cool unordered list item</li>
+       *    <li>I'm a cool unordered list item</li>
+       *    <li>I'm a cool unordered list item</li>
+       * </ol>
+       *
+       * @since       2.0.0
+       * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      .#{selector(#{$name}--#{$size})} {
+        @include ul-bare($size);
+      }
+    }
+  }
+
+
+  /**
+   * @name              ul-style-classes
+   * @namespace         scss.components.ul
+   * @type              Mixin
+   *
+   * This mixin generate all the style classes depending on the parameters you set.
+   *
+   * @param       {List}      [$colors:map-keys(setting('colors'))]       The colors you want to generate
+   * @param       {String}      [$name='s-ul']                         The name to use for the generation of the classes
+   *
+   * @since       2.0.0
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+   @mixin ul-style-classes(
+    $colors: map-keys(setting('colors')),
+    $name: 's-ul'
+  ) {
+    @each $color in $colors {
+      /**
+       * @name              #{selector(#{$name}--#{$color})}
+       * @namespace         scss.components.ul.colors
+       * @type              Classname
+       *
+       * This class can be applied on any ```#{$name}``` component to specify his color to ```#{$color}```
+       *
+       * @example         html
+       * <ol class="#{$name} #{selector(#{$name}--#{$color})}">
+       *    <li>I'm a cool unordered list item</li>
+       *    <li>I'm a cool unordered list item</li>
+       *    <li>I'm a cool unordered list item</li>
+       *    <li>I'm a cool unordered list item</li>
+       *    <li>I'm a cool unordered list item</li>
+       *    <li>I'm a cool unordered list item</li>
+       *    <li>I'm a cool unordered list item</li>
+       * </ol>
+       *
+       * @since       2.0.0
+       * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      .#{selector(#{$name}--#{$color})} {
+        @include ul-style($color);
+      }
+    }
+  }
+
+
+  /**
+   * @name              ul-bare
+   * @namespace         scss.components.ul
+   * @type              Mixin
+   *
+   * This mixin generate all the bare properties for a list depending on the parameters you set.
+   *
+   * @param       {List}      [$size=default]                 The size you want to for your list
+   *
+   * @since       2.0.0
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+   @mixin ul-bare(
+    $size: default,
+  ) {
+    display: block;
+    line-height: setting('look-and-feel.line-height');
+  }
+
+
+  /**
+   * @name              ul-style
+   * @namespace         scss.components.ul
+   * @type              Mixin
+   *
+   * This mixin generate all the style properties for a list depending on the parameters you set.
+   *
+   * @param       {List}      [$color=primary]                The color you want for your list
+   *
+   * @since       2.0.0
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  @mixin ul-style(
+    $color: primary,
+    $bullet: '\2022'
+  ) {
+    list-style: none;
+
+    & > li {
+      padding-left: 2.5em;
+      position: relative;
+
+      &::before {
+        content: $bullet;
+        font-weight: bold;
+        color: color($color);
+        display: inline-block;
+        width: 2em;
+        position: absolute;
+        top: 0; left: 0;
+        text-align: right;
+      }
+    }
+  }

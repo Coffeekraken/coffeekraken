@@ -1,63 +1,70 @@
-/**
- * @name            inline-bar
- * @namespace       scss.components
- * @type            Mixin
- *
- * This mixin allows you to display an inline styled bar.
- * Pretty simple you may think but this is very usefull for somple displays like
- * shields display, links, etc...
- * Their's also the mixin ```inline-bar-bare``` and ```inline-bar-style``` that you
- * can use if you need more controls.
- *
- * @param       {String}        [$name='s-inline-bar']       The className to use for the generation
- *
- * @example         html
- * <ul class="s-inline-bar">
- *   <li class="s-inline-bar__item">Something cool</li>
- *   <li class="s-inline-bar__item">
- *      <img alt="NPM" src="https://img.shields.io/npm/l/@coffeekraken/sugar?style=for-the-badge">
- *   </li>
- *   <li class="s-inline-bar__item">Something cool</li>
- * </ul>
- *
- * @since       2.0.0
- * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
- @mixin inline-bar(
+@mixin inline-bar(
   $name: 's-inline-bar',
-  $spacing: 1em,
-  $align: middle
+  $spacing: 1em
 ) {
-  @include inline-bar-bare($name, $spacing, $align);
-  @include inline-bar-style($name, $spacing, $align);
+  /**
+    * @name            inline-bar
+    * @namespace       scss.components
+    * @type            Mixin
+    *
+    * This mixin allows you to display an inline styled bar.
+    * Pretty simple you may think but this is very usefull for somple displays like
+    * shields display, links, etc...
+    * Their's also the mixin ```inline-bar-bare``` and ```inline-bar-style``` that you
+    * can use if you need more controls.
+    *
+    * @param       {String}        [$name='s-inline-bar']       The className to use for the generation
+    *
+    * @classes
+    * .#{$name}: Base class to apply on the container
+    * .#{$name}--center: Align the items vertically in the middle
+    * .#{$name}--top: Align the items vertically to the top
+    * .#{$name}--bottom: Align the items vertically to the bottom
+    * .#{$name} .#{$name}__item: Class to apply on each items
+    *
+    * @example         html
+    * <ul class="s-inline-bar">
+    *   <li class="s-inline-bar__item">Something cool</li>
+    *   <li class="s-inline-bar__item">
+    *      <img alt="NPM" src="https://img.shields.io/npm/l/@coffeekraken/sugar?style=for-the-badge">
+    *   </li>
+    *   <li class="s-inline-bar__item">Something cool</li>
+    * </ul>
+    *
+    * @example           scss
+    * @include Sugar.inline-bar();
+    *
+    * @since       2.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
+  @include inline-bar-bare($name, $spacing);
+  @include inline-bar-style($name, $spacing);
 }
 @mixin inline-bar-bare(
   $name: 's-inline-bar',
-  $spacing: 1em,
-  $align: middle
+  $spacing: 1em
 ) {
   .#{$name} {
+    position: relative;
     display: flex;
     flex-direction: row;
-
-    @include media('<desktop') {
-      flex-direction: column;
-    }
+    flex-wrap: wrap;
+    left: $spacing / 2 * -1;
+    width: calc(100% + #{$spacing / 2});
   }
     .#{$name}__item {
       padding-left: $spacing / 2;
       padding-right: $spacing / 2;
-      &:first-child {
-        padding-left: 0;
-      }
-      &:last-child {
-        padding-right: 0;
-      }
-      @if $align == middle {
+      margin-top: $spacing / 2;
+      margin-bottom: $spacing / 2;
+
+      .#{$name}--center &, & {
         align-self: center;
-      } @else if $align == top {
+      }
+      .#{$name}--top & {
         align-self: flex-start;
-      } @else if $align == bottom {
+      }
+      .#{$name}--bottom & {
         align-self: flex-end;
       }
     }

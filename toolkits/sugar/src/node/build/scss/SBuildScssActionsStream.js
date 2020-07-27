@@ -7,10 +7,12 @@ const __SImportsStreamAction = require('./actions/SImportsStreamAction');
 const __SBundleScssStreamAction = require('./actions/SBundleScssStreamAction');
 const __SRenderSassStreamAction = require('./actions/SRenderSassStreamAction');
 const __SPostCssStreamAction = require('./actions/SPostCssStreamAction');
-const __SGlobResolverStreamAction = require('../../stream/actions/SGlobResolverStreamAction');
 const __SSugarJsonStreamAction = require('./actions/SSugarJsonStreamAction');
+const __SFsFilesResolverStreamAction = require('../../stream/actions/SFsFilesResolverStreamAction');
+const __SFsCacheStreamAction = require('../../stream/actions/SFsCacheStreamAction');
 const __path = require('path');
 const __sugarConfig = require('../../config/sugar');
+const { stream } = require('globby');
 
 /**
  * @name            SBuildScssActionsStream
@@ -21,6 +23,8 @@ const __sugarConfig = require('../../config/sugar');
  * This class represent a pre-configured action stream to build easily some javascript files
  *
  * @param           {Object}          [settings={}]         The settings object to configure your instance
+ *
+ * @todo        Document the streamObj required properties
  *
  * @example         js
  * const SBuildScssActionsStream = require('@coffeekraken/sugar/node/build/SBuildScssActionsStream');
@@ -49,7 +53,8 @@ module.exports = class SBuildScssActionsStream extends __SActionsStream {
     // init actions stream
     super(
       {
-        globResolver: __SGlobResolverStreamAction,
+        filesResolver: __SFsFilesResolverStreamAction,
+        cacheRestore: __SFsCacheStreamAction,
         bundle: __SBundleScssStreamAction,
         sugarJson: __SSugarJsonStreamAction,
         imports: __SImportsStreamAction,
@@ -60,23 +65,18 @@ module.exports = class SBuildScssActionsStream extends __SActionsStream {
       },
       __deepMerge(
         {
-          before: (streamObj) => {
-            streamObj.jsObjectToScss = __sugarConfig('scss');
-            streamObj.globProperty = 'input';
-            return streamObj;
-          },
-          afterActions: {
-            globResolver: (streamObj) => {
-              if (streamObj.input) {
-                streamObj.filename = __getFilename(streamObj.input);
-              }
-              return streamObj;
+          name: 'Build SCSS',
+          actions: {
+            filesResolver: {
+              out: 'array'
             }
           },
+          before: (streamObj) => {
+            streamObj.jsObjectToScss = __sugarConfig('scss');
+            return streamObj;
+          },
+          afterActions: {},
           beforeActions: {
-            globResolver: (streamObj) => {
-              return streamObj;
-            },
             fsOutput: (streamObj) => {
               if (!streamObj.outputStack) streamObj.outputStack = {};
               if (streamObj.outputDir && streamObj.filename && streamObj.data) {

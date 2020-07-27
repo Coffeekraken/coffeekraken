@@ -10,7 +10,7 @@ module.exports = {
    * @since           1.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  'border-radius': '0.5em',
+  'border-radius': '0.2em',
 
   /**
    * @name            padding
@@ -75,7 +75,7 @@ module.exports = {
    * @since           1.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  'line-height': 1.4,
+  'line-height': 1.5,
 
   shadow: {
     layers: 6,

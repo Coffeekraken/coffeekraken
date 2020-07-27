@@ -1,6 +1,8 @@
 const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
 const __Bundler = require('scss-bundle').Bundler;
 const __getFilename = require('../../../fs/filename');
+const __isGlob = require('../../../is/glob');
+const __isPath = require('../../../is/path');
 
 /**
  * @name                SBundleScssStreamAction
@@ -59,6 +61,10 @@ module.exports = class SBundleScssStreamAction extends __SActionsStreamAction {
     this.checkStreamObject(streamObj);
 
     return new Promise(async (resolve, reject) => {
+      if (!__isPath(streamObj.input)) {
+        return resolve(streamObj);
+      }
+
       const bundler = new __Bundler(
         undefined,
         streamObj.input.split('/').slice(0, -1).join('/')

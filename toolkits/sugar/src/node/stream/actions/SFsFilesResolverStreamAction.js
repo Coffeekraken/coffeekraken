@@ -4,6 +4,8 @@ const __deepMerge = require('../../object/deepMerge');
 const __fs = require('fs');
 const __isDirectory = require('../../is/directory');
 const __isSymlink = require('../../is/symlink');
+const __isGlob = require('is-glob');
+const __isPath = require('../../is/path');
 
 /**
  * @name            SFindInFileStreamAction
@@ -84,6 +86,15 @@ module.exports = class SFindInFileStreamAction extends __SActionsStreamAction {
         const searchPath = inputSplits[0];
         const searchPattern = inputSplits[1] ? inputSplits[1] : null;
 
+        // check if the input path is a path or a glob
+        if (!__isGlob(searchPath) && !__isPath(searchPath, true)) {
+          filesPathes.push(searchPath);
+          this.warn(
+            `One of the passed inputs is either not a valid glob pattern, either not a valid file path and will be treated as a simple String...`
+          );
+          return;
+        }
+
         const path = __glob.sync(searchPath, {
           ignore: settings.ignoreFolders.map((f) => {
             return `**/${f}/**`;
@@ -118,6 +129,12 @@ module.exports = class SFindInFileStreamAction extends __SActionsStreamAction {
           }
         });
       });
+
+      if (!filesPathes.length) {
+        return reject(
+          `Sorry but your <primary>input</primary> streamObj property setted to "<cyan>${streamObj.input}</cyan>" does not resolve to any files...`
+        );
+      }
 
       if (settings.out === 'array') {
         filesPathes.forEach((path) => {

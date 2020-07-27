@@ -1,0 +1,197 @@
+/**
+  * @name            btn-classes
+  * @namespace       scss.components
+  * @type            Mixin
+  *
+  * This mixin generate all the css needed to display properly some buttons.
+  *
+  * @feature
+  * - Support all the registered sugar colors like ```primary```, ```secondary```, etc...
+  * - Support for sizes like ```smaller```, ```small```, ```medium```, etc...
+  * - Support disable state
+  *
+  * @param       {List}      [$colors:map-keys(setting('colors'))]       The colors you want to generate
+  * @param       {List}      [$sizes:map-keys(setting('sizes'))]       The sizes you want to generate
+  * @param       {Number}      [$base-padding: setting('look-and-feel.padding')]                 The base padding value used to interpolate the sizes
+  * @param       {String}        [$name='s-btn']       The className to use for the generation
+  *
+  * @example         html
+  * <a class="s-btn">I'm a cool button</a>
+  *
+  * @example           scss
+  * @include Sugar.btn-classes();
+  *
+  * @since       2.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+@mixin btn-classes(
+  $colors: map-keys(setting('colors')),
+  $sizes: map-keys(setting('sizes')),
+  $base-padding: setting('look-and-feel.padding'),
+  $border-radius: setting('look-and-feel.border-radius'),
+  $name: 's-btn'
+) {
+  @include btn-bare-classes($sizes, $base-padding, $name);
+  @include btn-style-classes($colors, $name);
+}
+
+/**
+ * @name              btn-bare-classes
+ * @namespace         scss.components.btn
+ * @type              Mixin
+ *
+ * This mixin generate all the bare classes depending on the parameters you set.
+ *
+ * @param       {List}      [$sizes:map-keys(setting('sizes'))]       The sizes you want to generate
+ * @param       {Number}      [$base-padding: setting('look-and-feel.padding')]                 The base padding value used to interpolate the sizes
+ * @param       {String}      [$name='s-btn']                         The name to use for the generation of the classes
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@mixin btn-bare-classes(
+  $sizes: map-keys(setting('sizes')),
+  $base-padding: setting('look-and-feel.padding'),
+  $name: 's-btn'
+) {
+  @each $size in $sizes {
+    /**
+     * @name              #{selector(#{$name}--#{$size})}
+     * @namespace         scss.components.btn.sizes
+     * @type              Classname
+     *
+     * This class can be applied on any ```#{$name}``` component to specify his size to ```#{$size}```
+     *
+     * @example         html
+     * <a class="#{$name} #{selector(#{$name}--#{$size})}">I'm a cool "#{$size}" button</a>
+     *
+     * @since       2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    .#{selector(#{$name}--#{$size})} {
+      @include btn-bare($size, $base-padding);
+    }
+  }
+}
+
+
+/**
+ * @name              btn-style-classes
+ * @namespace         scss.components.btn
+ * @type              Mixin
+ *
+ * This mixin generate all the style classes depending on the parameters you set.
+ *
+ * @param       {List}      [$colors:map-keys(setting('colors'))]       The colors you want to generate
+ * @param       {String}      [$name='s-btn']                         The name to use for the generation of the classes
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@mixin btn-style-classes(
+  $colors: map-keys(setting('colors')),
+  $name: 's-btn'
+) {
+  @each $color in $colors {
+    /**
+     * @name              #{selector(#{$name}--#{$color})}
+     * @namespace         scss.components.btn.colors
+     * @type              Classname
+     *
+     * This class can be applied on any ```#{$name}``` component to specify his color to ```#{$color}```
+     *
+     * @example         html
+     * <a class="#{$name} #{selector(#{$name}--#{$color})}">I'm a cool "#{$color}" button</a>
+     *
+     * @since       2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    .#{selector(#{$name}--#{$color})} {
+      @include btn-style($color);
+    }
+  }
+}
+
+
+/**
+ * @name              btn
+ * @namespace         scss.components.btn
+ * @type              Mixin
+ *
+ * This mixin generate all the properties for a button depending on the parameters you set.
+ *
+ * @param       {List}      [$color=primary]                The color you want for your button
+ * @param       {List}      [$size=default]                 The size you want to for your button
+ * @param       {Number}      [$base-padding: 1rem]                 The base padding value used to interpolate the sizes
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+ @mixin btn(
+  $color: primary,
+  $size: default,
+  $base-padding: setting('look-and-feel.padding')
+) {
+  @include btn-bare($size, $base-padding);
+  @include btn-style($color);
+}
+
+
+/**
+ * @name              btn-bare
+ * @namespace         scss.components.btn
+ * @type              Mixin
+ *
+ * This mixin generate all the bare properties for a button depending on the parameters you set.
+ *
+ * @param       {List}      [$size=default]                 The size you want to for your button
+ * @param       {Number}      [$base-padding: 1rem]                 The base padding value used to interpolate the sizes
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@mixin btn-bare(
+  $size: default,
+  $base-padding: setting('look-and-feel.padding'),
+) {
+  $padding: $base-padding;
+  @if length($base-padding) == 2 {
+    $padding: interpolate(nth($base-padding, 1), $size) interpolate(nth($base-padding, 2), $size);
+  } @else if length($base-padding) == 1 {
+    $padding: interpolate($base-padding, $size);
+  } @else {
+    @error("Your $base-padding parameter has to be a list of 1 or 2 numbers...");
+  }
+
+  display: inline-block;
+  padding: $padding;
+  font-size: font-size($size);
+  text-decoration: none;
+}
+
+
+/**
+ * @name              btn-style
+ * @namespace         scss.components.btn
+ * @type              Mixin
+ *
+ * This mixin generate all the style properties for a button depending on the parameters you set.
+ *
+ * @param       {List}      [$color=primary]                The color you want for your button
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@mixin btn-style(
+  $color: primary,
+  $border-radius: setting('look-and-feel.border-radius')
+) {
+  border-radius: $border-radius;
+  background-color: color($color);
+  color: white;
+  transition: transition(fast);
+
+  &:hover {
+    background-color: color($color, hover);
+  }
+}

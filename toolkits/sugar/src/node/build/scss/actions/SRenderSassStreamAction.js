@@ -64,6 +64,7 @@ module.exports = class SRenderSassStreamAction extends __SActionsStreamAction {
   run(streamObj, settings = this._settings) {
     // make sure we have a correct streamObj
     this.checkStreamObject(streamObj);
+
     return new Promise(async (resolve, reject) => {
       __sass.render(
         __deepMerge(
@@ -82,12 +83,24 @@ module.exports = class SRenderSassStreamAction extends __SActionsStreamAction {
         ),
         async function (err, result) {
           if (err) {
-            reject(err);
+            reject(err.formatted ? err.formatted : err.toString());
             return;
           }
 
-          // save the new css into "data"
-          streamObj.data = result.css.toString();
+          const resultString = result.css.toString();
+
+          // search for some "@keep @only" comments
+          const reg = /\/\*\s?@keep\s?\*\/((.|\n)*)\/\*\s?@only\s?\*\//gm;
+          const regMatches = resultString.match(reg);
+          if (regMatches && regMatches.length >= 1) {
+            const finalString = regMatches[0]
+              .replace(/\/\*\s?@keep\s?\*\//, '')
+              .replace(/\/\*\s?@only\s?\*\//, '');
+            streamObj.data = finalString;
+          } else {
+            // save the new css into "data"
+            streamObj.data = resultString;
+          }
 
           // save the map if exist into "sourcemapData"
           if (result.map) {

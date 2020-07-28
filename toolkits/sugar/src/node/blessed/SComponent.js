@@ -3,6 +3,7 @@ const __deepMerge = require('../object/deepMerge');
 const __color = require('../color/color');
 const __hotkey = require('../keyboard/hotkey');
 const __tkill = require('tree-kill');
+const __isChildProcess = require('../is/childProcess');
 
 let __activeScreen = null;
 
@@ -136,6 +137,7 @@ module.exports = class SComponent extends __blessed.box {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   attach(to = null) {
+    if (__isChildProcess()) return;
     if (to) {
       to.append(this);
       return;

@@ -19,9 +19,7 @@ module.exports = {
      * @since             2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    input: isInSugarPackage()
-      ? `${__packageRoot()}/public/src/scss/[^_]*.scss`
-      : `${__packageRoot()}/src/scss/[^_]*.scss`,
+    input: `${__packageRoot()}/src/scss/[^_]*.scss`,
 
     /**
      * @name              outputDir
@@ -34,9 +32,7 @@ module.exports = {
      * @since             2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    outputDir: isInSugarPackage()
-      ? `${__packageRoot()}/public/dist/css`
-      : `${__packageRoot()}/dist/css`,
+    outputDir: `${__packageRoot()}/dist/css`,
 
     /**
      * @name              watch
@@ -49,9 +45,7 @@ module.exports = {
      * @since             2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    watch: isInSugarPackage()
-      ? `${__packageRoot()}/public/src/scss/**/*.scss`
-      : `${__packageRoot()}/src/scss/**/*.scss`,
+    watch: `${__packageRoot()}/src/scss/**/*.scss`,
 
     /**
      * @name              style
@@ -144,11 +138,9 @@ module.exports = {
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     get input() {
-      return isInSugarPackage()
-        ? `${__packageRoot()}/public/src/js/${
-            this.pack === true ? '*' : '**/*'
-          }.js`
-        : `${__packageRoot()}/src/js/${this.pack === true ? '*' : '**/*'}.js`;
+      return `${__packageRoot()}/src/js/${
+        this.pack === true ? '*' : '**/*'
+      }.js`;
     },
 
     /**
@@ -162,9 +154,7 @@ module.exports = {
      * @since             2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    outputDir: isInSugarPackage()
-      ? `${__packageRoot()}/public/dist/js`
-      : `${__packageRoot()}/dist/js`,
+    outputDir: `${__packageRoot()}/dist/js`,
 
     /**
      * @name              watch
@@ -177,9 +167,7 @@ module.exports = {
      * @since             2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    watch: isInSugarPackage()
-      ? `${__packageRoot()}/public/src/js/**/*.js`
-      : `${__packageRoot()}/src/js/**/*.js`,
+    watch: `${__packageRoot()}/src/js/**/*.js`,
     /**
      * @name              map
      * @namespace         config.build.js
@@ -235,9 +223,7 @@ module.exports = {
      * @since             2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    input: isInSugarPackage()
-      ? `${__packageRoot()}/public/src/config/*.config.js`
-      : `${__packageRoot()}/src/config/*.config.js`,
+    input: `${__packageRoot()}/src/config/*.config.js`,
 
     /**
      * @name              outputDir
@@ -250,9 +236,7 @@ module.exports = {
      * @since             2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    outputDir: isInSugarPackage()
-      ? `${__packageRoot()}/public/dist/config`
-      : `${__packageRoot()}/dist/config`,
+    outputDir: `${__packageRoot()}/dist/config`,
 
     /**
      * @name              watch
@@ -265,9 +249,7 @@ module.exports = {
      * @since             2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    watch: isInSugarPackage()
-      ? `${__packageRoot()}/public/src/config/**/*.config.js`
-      : `${__packageRoot()}/src/config/**/*.config.js`
+    watch: `${__packageRoot()}/src/config/**/*.config.js`
   },
 
   // doc: {
@@ -327,9 +309,7 @@ module.exports = {
      * @since       2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    input: isInSugarPackage()
-      ? `${__packageRoot(__dirname)}/src/**/*:@namespace`
-      : `${__packageRoot()}/src/**/*:@namespace`,
+    input: `${__packageRoot()}/src/**/*:@namespace`,
 
     /**
      * @name          output
@@ -342,9 +322,7 @@ module.exports = {
      * @since       2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    output: isInSugarPackage()
-      ? `${__packageRoot(__dirname)}/docMap.json`
-      : `${__packageRoot()}/docMap.json`
+    output: `${__packageRoot()}/docMap.json`
   },
 
   // docNav: {
@@ -442,8 +420,6 @@ module.exports = {
      * @since             2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    watch: isInSugarPackage()
-      ? `${__packageRoot()}/public/src/views/**/*.*`
-      : `${__packageRoot()}/src/views/**/*.*`
+    watch: `${__packageRoot()}/src/views/**/*.*`
   }
 };

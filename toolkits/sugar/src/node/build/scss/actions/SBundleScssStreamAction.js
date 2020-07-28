@@ -56,7 +56,7 @@ module.exports = class SBundleScssStreamAction extends __SActionsStreamAction {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  run(streamObj, settings = this._settings) {
+  run(streamObj, settings) {
     // make sure we have a correct streamObj
     this.checkStreamObject(streamObj);
 
@@ -65,17 +65,19 @@ module.exports = class SBundleScssStreamAction extends __SActionsStreamAction {
         return resolve(streamObj);
       }
 
-      const bundler = new __Bundler(
-        undefined,
-        streamObj.input.split('/').slice(0, -1).join('/')
-      );
-      let bundledScssString = await (
-        await bundler.bundle(__getFilename(streamObj.input))
-      ).bundledContent;
+      try {
+        const bundler = new __Bundler(
+          undefined,
+          streamObj.input.split('/').slice(0, -1).join('/')
+        );
+        let bundledScssString = await (
+          await bundler.bundle(__getFilename(streamObj.input))
+        ).bundledContent;
 
-      // set the bundled content into the "data" property
-      if (streamObj.data) streamObj.data += bundledScssString;
-      else streamObj.data = bundledScssString;
+        // set the bundled content into the "data" property
+        if (streamObj.data) streamObj.data += bundledScssString;
+        else streamObj.data = bundledScssString;
+      } catch (e) {}
 
       resolve(streamObj);
     });

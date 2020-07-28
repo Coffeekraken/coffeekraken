@@ -1,9 +1,4 @@
-/* @keep */
+/* extract:data */
 @import './index';
 @include s-iframe-classes();
-/* @only */
-
-
-body {
-  color: red;
-}
+/* extract */

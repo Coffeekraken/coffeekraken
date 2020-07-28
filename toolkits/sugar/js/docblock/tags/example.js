@@ -22,15 +22,19 @@ const __upperFirst = require('../../string/upperFirst');
 
 
 function example(data) {
-  if (data.content && data.content[data.content.length - 1] === '') {
-    data.content = data.content.slice(0, -1);
-  }
+  data = [...data];
+  data = data.map(item => {
+    if (item.content && item.content[item.content.length - 1] === '') {
+      item.content = item.content.slice(0, -1);
+    }
 
-  if (!data.content) null;
-  return {
-    language: typeof data.value === 'string' ? data.value.toLowerCase() : data.value,
-    code: Array.isArray(data.content) ? data.content.join('\n').trim() : data.content
-  };
+    if (!item.content) return null;
+    return {
+      language: typeof item.value === 'string' ? item.value.toLowerCase() : item.value,
+      code: Array.isArray(item.content) ? item.content.join('\n').trim().replace(/\\@/, '@') : item.content.replace(/\\@/, '@')
+    };
+  }).filter(item => item !== null);
+  return data;
 }
 
 module.exports = exports.default;

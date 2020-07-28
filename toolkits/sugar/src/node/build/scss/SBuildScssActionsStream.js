@@ -10,6 +10,7 @@ const __SPostCssStreamAction = require('./actions/SPostCssStreamAction');
 const __SSugarJsonStreamAction = require('./actions/SSugarJsonStreamAction');
 const __SFsFilesResolverStreamAction = require('../../stream/actions/SFsFilesResolverStreamAction');
 const __SFsCacheStreamAction = require('../../stream/actions/SFsCacheStreamAction');
+const __SExtractStreamAction = require('../../stream/actions/SExtractStreamAction');
 const __path = require('path');
 const __sugarConfig = require('../../config/sugar');
 const { stream } = require('globby');
@@ -54,12 +55,13 @@ module.exports = class SBuildScssActionsStream extends __SActionsStream {
     super(
       {
         filesResolver: __SFsFilesResolverStreamAction,
-        cacheRestore: __SFsCacheStreamAction,
+        fsCache: __SFsCacheStreamAction,
         bundle: __SBundleScssStreamAction,
         sugarJson: __SSugarJsonStreamAction,
         imports: __SImportsStreamAction,
         jsConfig: __SJsObjectToScssStreamAction,
         render: __SRenderSassStreamAction,
+        extract: __SExtractStreamAction,
         postCss: __SPostCssStreamAction,
         fsOutput: __SFsOutputStreamAction
       },
@@ -75,11 +77,16 @@ module.exports = class SBuildScssActionsStream extends __SActionsStream {
             streamObj.jsObjectToScss = __sugarConfig('scss');
             return streamObj;
           },
-          afterActions: {},
+          afterActions: {
+            filesResolver: (streamObj) => {
+              streamObj.filename = __getFilename(streamObj.input);
+              return streamObj;
+            }
+          },
           beforeActions: {
-            fsOutput: (streamObj) => {
+            fsCache: (streamObj) => {
               if (!streamObj.outputStack) streamObj.outputStack = {};
-              if (streamObj.outputDir && streamObj.filename && streamObj.data) {
+              if (streamObj.outputDir && streamObj.filename) {
                 streamObj.outputStack.data = __path.resolve(
                   streamObj.outputDir,
                   streamObj.prod
@@ -87,6 +94,9 @@ module.exports = class SBuildScssActionsStream extends __SActionsStream {
                     : streamObj.filename.replace('.scss', '.css')
                 );
               }
+              return streamObj;
+            },
+            fsOutput: (streamObj) => {
               return streamObj;
             }
           }

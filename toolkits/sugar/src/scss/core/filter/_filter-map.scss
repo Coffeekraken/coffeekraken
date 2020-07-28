@@ -38,8 +38,12 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function filter-map($filter) {
-  $filters: map.keys(setting("filters"));
+  $filters: setting("filters");
   $map: ();
+  @if not $filters {
+    @return $map;
+  }
+  $filters: map.keys($filters);
   @each $f in $filter {
     // check if the filter exist in registered ones
     @if meta.type-of($f) == string and list.index($filters, $f) {

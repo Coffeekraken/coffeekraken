@@ -41,6 +41,8 @@ function _superPropBase(object, property) { while (!Object.prototype.hasOwnPrope
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 /**
  * @name          SActionStreamAction
  * @namespace           js.stream
@@ -68,6 +70,28 @@ let SActionStreamAction = /*#__PURE__*/function (_SPromise) {
   var _super = _createSuper(SActionStreamAction);
 
   /**
+   * @name            _skipNextActions
+   * @type            Number|Array<String>
+   * @private
+   *
+   * Store the next actions you want to skip
+   *
+   * @since           2.0.0
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+
+  /**
+   * @name            _registeredCallbacks
+   * @type            Array<Object>
+   * @private
+   *
+   * Store the registered callbaks
+   *
+   * @since           2.0.0
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+
+  /**
    * @name            constructor
    * @type            Function
    * @constructor
@@ -84,40 +108,49 @@ let SActionStreamAction = /*#__PURE__*/function (_SPromise) {
     // init SPromise
     _this = _super.call(this, () => {}, (0, _deepMerge.default)({
       name: null,
+      id: null,
       cwd: process.cwd()
     }, settings));
+
+    _defineProperty(_assertThisInitialized(_this), "_skipNextActions", null);
+
+    _defineProperty(_assertThisInitialized(_this), "_registeredCallbacks", []);
+
+    if (!_this._settings.id) _this._settings.id = _this.constructor.name.toLowerCase();
 
     if (!_this.constructor.definitionObj) {
       throw new Error(`Sorry but your class "${_this.constructor.name}" does not have the required "definitionObj" static property...`);
     } // check the definition object
 
 
-    const validatekDefinitionObjResult = (0, _validateDefinitionObject.default)(_this.constructor.definitionObj);
+    setTimeout(() => {
+      const validatekDefinitionObjResult = (0, _validateDefinitionObject.default)(_this.constructor.definitionObj);
 
-    if (validatekDefinitionObjResult !== true) {
-      throw new Error(validatekDefinitionObjResult);
-    }
+      if (validatekDefinitionObjResult !== true) {
+        throw new Error(validatekDefinitionObjResult);
+      }
+    });
 
     _get((_thisSuper = _assertThisInitialized(_this), _getPrototypeOf(SActionStreamAction.prototype)), "start", _thisSuper).call(_thisSuper);
 
     return _this;
   }
-  /**
-   * @name          checkStreamObject
-   * @type          Function
-   * @async
-   *
-   * This method take the streamObj object passed to the "run" method and check it depending on the definitionObj
-   * specified in the static definitionObj property.
-   *
-   * @param       {Object}        streamObj         The streamObj to check
-   *
-   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-
 
   _createClass(SActionStreamAction, [{
     key: "checkStreamObject",
+
+    /**
+     * @name          checkStreamObject
+     * @type          Function
+     * @async
+     *
+     * This method take the streamObj object passed to the "run" method and check it depending on the definitionObj
+     * specified in the static definitionObj property.
+     *
+     * @param       {Object}        streamObj         The streamObj to check
+     *
+     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
     value: function checkStreamObject(streamObj) {
       // handle "default" property of the definition object
       Object.keys(this.constructor.definitionObj).forEach(key => {
@@ -133,6 +166,51 @@ let SActionStreamAction = /*#__PURE__*/function (_SPromise) {
       } // throw new Error(checkWithDefinitionObjectResult);
       // this.trigger('stderr.data', checkWithDefinitionObjectResult);
 
+    }
+    /**
+     * @name          skipNextActions
+     * @type          Function
+     *
+     * This method allows you to tell the SActionStream class that you want to skip
+     * the next actions. If you don't specify anything, it means that you want to skip
+     * ALL the next actions. You can pass a number that mean that you want to skip x next action(s),
+     * or an array with the actions names that you want to skip.
+     *
+     * @param       {Number|Array<String>|Boolean}        [what=true]        Specify what you want to skip. Can be a number or an array of actions names to skip
+     *
+     * @since       2.0.0
+     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "skipNextActions",
+    value: function skipNextActions(what = true) {
+      this._skipNextActions = what;
+    }
+    /**
+     * @name          registerCallback
+     * @type          Function
+     *
+     * This method allows you to register some callbacks during the stream action process.
+     * You can specify when you want to register this callback like "before" or "after", and specify if
+     * it's before/after the entire stream process or a particular action.
+     *
+     * @param       {Function}        callback          The callback function to call
+     * @param       {String}          [when='after']    When you want to call this callback. Can be "before" or "after"
+     * @param       {String}          [action=null]     Specify the reference action. If not set, that's mean that the entire stream process is the reference
+     *
+     * @since       2.0.0
+     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "registerCallback",
+    value: function registerCallback(callback, when = 'after', action = null) {
+      this._registeredCallbacks.push({
+        callback,
+        when,
+        action
+      });
     }
     /**
      * @name          run
@@ -201,6 +279,11 @@ let SActionStreamAction = /*#__PURE__*/function (_SPromise) {
     key: "log",
     value: function log(message) {
       this.trigger('stdout.data', message);
+    }
+  }, {
+    key: "settings",
+    get: function () {
+      return this._settings;
     }
   }]);
 

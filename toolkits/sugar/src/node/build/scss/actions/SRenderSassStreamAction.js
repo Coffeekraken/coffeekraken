@@ -61,7 +61,7 @@ module.exports = class SRenderSassStreamAction extends __SActionsStreamAction {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  run(streamObj, settings = this._settings) {
+  run(streamObj, settings) {
     // make sure we have a correct streamObj
     this.checkStreamObject(streamObj);
 
@@ -88,19 +88,8 @@ module.exports = class SRenderSassStreamAction extends __SActionsStreamAction {
           }
 
           const resultString = result.css.toString();
-
-          // search for some "@keep @only" comments
-          const reg = /\/\*\s?@keep\s?\*\/((.|\n)*)\/\*\s?@only\s?\*\//gm;
-          const regMatches = resultString.match(reg);
-          if (regMatches && regMatches.length >= 1) {
-            const finalString = regMatches[0]
-              .replace(/\/\*\s?@keep\s?\*\//, '')
-              .replace(/\/\*\s?@only\s?\*\//, '');
-            streamObj.data = finalString;
-          } else {
-            // save the new css into "data"
-            streamObj.data = resultString;
-          }
+          // save the new css into "data"
+          streamObj.data = resultString;
 
           // save the map if exist into "sourcemapData"
           if (result.map) {

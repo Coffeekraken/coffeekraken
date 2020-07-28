@@ -281,7 +281,7 @@ module.exports = class SCommand extends __SPromise {
     ).start();
 
     setTimeout(() => {
-      if (this._settings.watch && !this._settings.run) this.watch();
+      // if (this._settings.watch && !this._settings.run) this.watch();
       if (this._settings.run) this.run();
     });
   }

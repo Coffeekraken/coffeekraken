@@ -59,7 +59,7 @@ module.exports = class SJsConfigFileToJsonStreamAction extends __SActionsStreamA
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  run(streamObj, settings = this._settings) {
+  run(streamObj, settings) {
     // make sure we have a correct streamObj
     this.checkStreamObject(streamObj);
 

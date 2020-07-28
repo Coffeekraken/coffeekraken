@@ -5,6 +5,7 @@ const __render = require('../../../template/render');
 const __standardizeJson = require('../../../npm/standardizeJson');
 const __SBuildScssActionsStream = require('../../../build/scss/SBuildScssActionsStream');
 const __SPromise = require('../../../promise/SPromise');
+const __SDocblock = require('../../../docblock/SDocblock');
 
 /**
  * @name                styleguide
@@ -24,6 +25,11 @@ module.exports = function styleguide(req, server) {
   return new Promise(async (resolve, reject) => {
     let viewPath = req.params[0].split('/').join('.');
 
+    let resultObj = {
+      view: null,
+      data: {}
+    };
+
     let currentPackageJson;
 
     // check if the passed request point to a valid coffeekraken sugar ready package
@@ -36,6 +42,9 @@ module.exports = function styleguide(req, server) {
         viewPath = `${packagePath}/${sugarJson.views.styleguide}`;
       }
 
+      resultObj.view = viewPath;
+      resultObj.data.currentPackageJson = __standardizeJson(currentPackageJson);
+
       // check if we have a styleguide scss file to load
       if (sugarJson.scss && sugarJson.scss.styleguide) {
         const actionsStream = new __SBuildScssActionsStream();
@@ -45,14 +54,16 @@ module.exports = function styleguide(req, server) {
         });
         __SPromise.log(styleguidePromise);
         const styleguideRes = await styleguidePromise;
+
+        // parsing the docblock
+        const docblock = new __SDocblock(styleguideRes.streamObj.data);
+
+        // set the blocks
+        resultObj.data.css = styleguideRes.streamObj.data;
+        resultObj.data.blocks = docblock.toObject();
       }
     }
 
-    resolve({
-      view: viewPath,
-      data: {
-        currentPackageJson: __standardizeJson(currentPackageJson)
-      }
-    });
+    resolve(resultObj);
   });
 };

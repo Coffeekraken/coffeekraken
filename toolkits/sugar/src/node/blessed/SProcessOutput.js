@@ -3,7 +3,9 @@ const __blessed = require('blessed');
 const __color = require('../color/color');
 const __SComponent = require('./SComponent');
 const __parseHtml = require('../terminal/parseHtml');
+const __parseMarkdown = require('../terminal/parseMarkdown');
 const __isChildProcess = require('../is/childProcess');
+const __stripAnsi = require('strip-ansi');
 
 /**
  * @name                  SProcessOutput
@@ -35,6 +37,18 @@ module.exports = class SProcessOutput extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _process = null;
+
+  /**
+   * @name          _content
+   * @type          Array
+   * @private
+   *
+   * Store the content depending on his formatting style like groups, etc...
+   *
+   * @since         2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _content = [];
 
   /**
    * @name          _logBox
@@ -86,10 +100,10 @@ module.exports = class SProcessOutput extends __SComponent {
       //   this.update();
       // })
       .on('close', (data) => {
-        this.log(
-          `Closing process with code <red>${data.code}</red> and signal <red>${data.signal}</red>...`
-        );
-        this.update();
+        // this.log(
+        //   `Closing process with code <red>${data.code}</red> and signal <red>${data.signal}</red>...`
+        // );
+        // this.update();
       })
       .on('stdout.data', (data) => {
         this.log(
@@ -140,7 +154,13 @@ module.exports = class SProcessOutput extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   clear() {
-    this._logBox.setContent('');
+    if (this._logBox) this._logBox.setContent('');
+  }
+
+  _processMarkdown(content) {
+    content = content.trim();
+    content = __parseMarkdown(content);
+    return content;
   }
 
   /**
@@ -154,19 +174,94 @@ module.exports = class SProcessOutput extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   log(...args) {
+    // clearTimeout(this._logInterval);
+    // this._logInterval = setTimeout(() => {
+    //   console.log(this._content);
+    //   process.exit();
+    // }, 10000);
+
+    let linesArray = [];
+
     args.forEach((arg) => {
+      if (typeof arg !== 'string') return;
+      const lines = arg.split('\n');
+      linesArray = [...linesArray, ...lines];
+    });
+
+    linesArray = linesArray.filter((a) => {
+      if (!a) return false;
+      if (__stripAnsi(a).length <= 0) return false;
+      if (typeof a !== 'string' || a.replace === undefined) return false;
+      if (a.trim() === '') return false;
+      return true;
+    });
+
+    linesArray.forEach((arg) => {
+      if (arg.includes('[?1049h')) {
+        arg = arg.slice(40);
+      } // ugly hack that need to be checked...
+
+      if (arg === '') return;
+      if (typeof arg !== 'string') arg = arg.toString();
+      if (typeof arg === 'string' && arg.trim() === '') return;
       if (typeof arg === 'string') {
-        arg = __parseHtml(arg);
+        arg = arg.trim();
       }
+
       if (!__isChildProcess()) {
-        this._logBox.pushLine(arg);
-        this._logBox.pushLine(' ');
+        // check if we have a "group" at start
+        const groupReg = /^\[(.*)\]\s?.*/;
+        const groupMatch = groupReg.exec(arg);
+
+        if (groupMatch && groupMatch[1]) {
+          // process the arg
+          arg = arg.replace(`[${groupMatch[1]}]`, '').trim();
+
+          const actualGroupObjArray = this._content.filter((item) => {
+            if (typeof item !== 'object') return false;
+            if (item.group === groupMatch[1]) return true;
+            return false;
+          });
+          let groupObj = {
+            group: groupMatch[1],
+            content: []
+          };
+          if (actualGroupObjArray.length) {
+            groupObj = actualGroupObjArray[0];
+          } else {
+            this._content.push(groupObj);
+          }
+          // append the new content to the group object
+          groupObj.content.push(this._processMarkdown(arg));
+        } else {
+          // append simply the content
+          this._content.push(this._processMarkdown(arg));
+        }
+
+        this._logBox.setContent('');
+
+        this._content.forEach((item) => {
+          if (typeof item === 'string') {
+            this._logBox.pushLine(item);
+          } else if (typeof item === 'object' && item.group) {
+            this._logBox.pushLine(
+              __parseHtml(`<primary>│ ${item.group}</primary>`)
+            );
+            this._logBox.pushLine(
+              __parseHtml(
+                `<primary>│</primary> ${item.content[item.content.length - 1]}`
+              )
+            );
+            this._logBox.pushLine(' ');
+            this._logBox.pushLine(' ');
+          }
+        });
       } else {
         console.log(arg);
-        console.log('<black> </black>');
+        // console.log('<black> </black>');
       }
     });
-    this._logBox.setScrollPerc(100);
+    if (this._logBox) this._logBox.setScrollPerc(100);
   }
 
   /**
@@ -179,6 +274,8 @@ module.exports = class SProcessOutput extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _generateUI() {
+    if (__isChildProcess()) return;
+
     this._logBox = __blessed.box({
       width: '100%',
       top: 0,
@@ -210,6 +307,7 @@ module.exports = class SProcessOutput extends __SComponent {
   }
 
   update() {
+    if (__isChildProcess()) return;
     super.update();
   }
 };

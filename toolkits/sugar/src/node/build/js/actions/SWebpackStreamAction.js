@@ -60,7 +60,7 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  run(streamObj, settings = this._settings) {
+  run(streamObj, settings) {
     settings = __deepMerge(
       {
         scss: {

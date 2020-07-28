@@ -82,7 +82,19 @@ module.exports = class SFsCacheStreamAction extends __SActionsStreamAction {
       __ensureDirSync(streamObj.cacheDir);
 
       // generate the id
-      const id = __md5.encrypt(streamObj[settings.idProperty]);
+      const id = `${this._settings.id}-${__md5.encrypt(
+        streamObj[settings.idProperty]
+      )}`;
+
+      // check if the output files exists or not
+      let outputFilesExists = true;
+      if (streamObj.outputStack) {
+        Object.keys(streamObj.outputStack).forEach((path) => {
+          if (!__fs.existsSync(path)) {
+            outputFilesExists = false;
+          }
+        });
+      }
 
       // cache file path
       const cacheFilePath = `${streamObj.cacheDir}/${id}.json`;
@@ -100,8 +112,9 @@ module.exports = class SFsCacheStreamAction extends __SActionsStreamAction {
       }
 
       // check if the cache file exists
-      if (!__fs.existsSync(cacheFilePath)) {
-        streamObj.afterCallback = generateCache;
+      // or if the output files does not exists
+      if (!__fs.existsSync(cacheFilePath) || !outputFilesExists) {
+        this.registerCallback(generateCache, 'after');
         return resolve(streamObj);
       }
 
@@ -111,15 +124,14 @@ module.exports = class SFsCacheStreamAction extends __SActionsStreamAction {
 
       // check if the input file is newer that the cache one
       if (inputStats.mtimeMs > cacheStats.mtimeMs) {
-        console.log('newser');
-        streamObj.afterCallback = generateCache;
+        this.registerCallback(generateCache, 'after');
       } else {
         // load the cache file
         const cacheJson = require(cacheFilePath);
         // restore the streamObject
         streamObj = cacheJson.streamObj;
         // specify to the ActionStream that we need to skip all the next actions
-        streamObj.skipNextActions = true;
+        this.skipNextActions();
       }
 
       resolve(streamObj);

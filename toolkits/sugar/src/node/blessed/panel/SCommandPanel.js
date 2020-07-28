@@ -16,6 +16,7 @@ const __SInputPopup = require('../popup/SInputPopup');
 const __activeSpace = require('../../core/activeSpace');
 const __SWindowBox = require('../box/SWindowBox');
 const __convert = require('../../time/convert');
+const __SProcessOutput = require('../SProcessOutput');
 
 /**
  * @name                  SCommandPanel
@@ -133,6 +134,7 @@ module.exports = class SCommandPanel extends __SComponent {
       state: 'idle',
       _settings: {}
     };
+    this._summaryFakeCommand.on = () => this._summaryFakeCommand;
     this._commands.unshift(this._summaryFakeCommand);
 
     // generate the panel object for each commands
@@ -693,8 +695,11 @@ module.exports = class SCommandPanel extends __SComponent {
           right: 0,
           clickable: true
         });
-        boxObj.$log = __blessed.box({
-          // width: '100%-4',
+        // commandInstance.on('stdout.data', (d) => {
+        //   console.log('DATA', d);
+        // });
+        boxObj.$log = new __SProcessOutput(commandInstance, {
+          width: '100%-4',
           height: 0,
           top: 2,
           left: 0,
@@ -953,35 +958,41 @@ module.exports = class SCommandPanel extends __SComponent {
       const lastProcessObj = commandInstance.lastProcessObj;
 
       if (lastProcessObj && lastProcessObj.state === 'killed') {
-        boxObj.$log.setContent(
-          __parseHtml(`<red>The process has been killed...</red>`)
-        );
+        boxObj.$log.clear();
+        boxObj.$log.log(`<red>The process has been killed...</red>`);
       } else if (lastProcessObj && lastProcessObj.state === 'error') {
-        boxObj.$log.pushLine(__parseHtml(`<red>Something went wrong...</red>`));
+        // boxObj.$log.pushLine(__parseHtml(`<red>Something went wrong...</red>`));
       } else {
-        // take care of the content of the processBox
-        boxObj.$log.setContent('');
         if (
           lastProcessObj &&
-          lastProcessObj.stderr &&
-          lastProcessObj.stderr.length
-        ) {
-          lastProcessObj.stderr.forEach((logItem) => {
-            boxObj.$log.pushLine(__parseHtml(logItem.value || logItem));
-          });
-        } else if (
-          lastProcessObj &&
           lastProcessObj.stdout &&
-          lastProcessObj.stdout.length
+          !lastProcessObj.stdout.length
         ) {
-          lastProcessObj.stdout.forEach((logItem) => {
-            boxObj.$log.pushLine(__parseHtml(logItem.value || logItem));
-          });
+          boxObj.$log.clear();
         }
+        // take care of the content of the processBox
+        // boxObj.$log.setContent('');
+        // if (
+        //   lastProcessObj &&
+        //   lastProcessObj.stderr &&
+        //   lastProcessObj.stderr.length
+        // ) {
+        //   lastProcessObj.stderr.forEach((logItem) => {
+        //     boxObj.$log.pushLine(__parseHtml(logItem.value || logItem));
+        //   });
+        // } else if (
+        //   lastProcessObj &&
+        //   lastProcessObj.stdout &&
+        //   lastProcessObj.stdout.length
+        // ) {
+        //   lastProcessObj.stdout.forEach((logItem) => {
+        //     boxObj.$log.pushLine(__parseHtml(logItem.value || logItem));
+        //   });
+        // }
       }
 
       // scroll logBox
-      boxObj.$log.setScrollPerc(100);
+      // boxObj.$log.setScrollPerc(100);
     });
   }
 

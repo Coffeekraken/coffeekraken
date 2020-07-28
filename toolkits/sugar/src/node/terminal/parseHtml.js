@@ -67,12 +67,11 @@ module.exports = function parseHtml(message) {
       strike: (tag, content) => __chalk.strike(content),
 
       h1: (tag, content) => {
-        const length = __countLine(content);
-        const width = length;
-        const rest = Math.floor(width - length);
-        return `${'-'.repeat(width)}\n${' '.repeat(
-          width
-        )}\n${content}\n${' '.repeat(width)}\n${'-'.repeat(width)}`;
+        return __chalk.underline(__chalk.bold(content)) + '\n\n';
+      },
+
+      h2: (tag, content) => {
+        return __chalk.bold(content) + '\n';
       },
 
       pSuccess: (tag, content) => {
@@ -82,6 +81,7 @@ module.exports = function parseHtml(message) {
         return parseHtml(`<red><iCross/></red> ${content}`);
       },
 
+      iWarn: (tag, content) => '⚠',
       iCheck: (tag, content) => `✓`,
       iCross: (tag, content) => `✖`,
       iClose: (tag, content) => `✖`,

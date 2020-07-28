@@ -27,6 +27,30 @@ import __validateWithDefinitionObject from '../object/validateWithDefinitionObje
  */
 export default class SActionStreamAction extends __SPromise {
   /**
+   * @name            _skipNextActions
+   * @type            Number|Array<String>
+   * @private
+   *
+   * Store the next actions you want to skip
+   *
+   * @since           2.0.0
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _skipNextActions = null;
+
+  /**
+   * @name            _registeredCallbacks
+   * @type            Array<Object>
+   * @private
+   *
+   * Store the registered callbaks
+   *
+   * @since           2.0.0
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _registeredCallbacks = [];
+
+  /**
    * @name            constructor
    * @type            Function
    * @constructor
@@ -42,11 +66,14 @@ export default class SActionStreamAction extends __SPromise {
       __deepMerge(
         {
           name: null,
+          id: null,
           cwd: process.cwd()
         },
         settings
       )
     );
+    if (!this._settings.id)
+      this._settings.id = this.constructor.name.toLowerCase();
 
     if (!this.constructor.definitionObj) {
       throw new Error(
@@ -55,14 +82,20 @@ export default class SActionStreamAction extends __SPromise {
     }
 
     // check the definition object
-    const validatekDefinitionObjResult = __validateDefinitionObject(
-      this.constructor.definitionObj
-    );
-    if (validatekDefinitionObjResult !== true) {
-      throw new Error(validatekDefinitionObjResult);
-    }
+    setTimeout(() => {
+      const validatekDefinitionObjResult = __validateDefinitionObject(
+        this.constructor.definitionObj
+      );
+      if (validatekDefinitionObjResult !== true) {
+        throw new Error(validatekDefinitionObjResult);
+      }
+    });
 
     super.start();
+  }
+
+  get settings() {
+    return this._settings;
   }
 
   /**
@@ -98,6 +131,47 @@ export default class SActionStreamAction extends __SPromise {
     }
     // throw new Error(checkWithDefinitionObjectResult);
     // this.trigger('stderr.data', checkWithDefinitionObjectResult);
+  }
+
+  /**
+   * @name          skipNextActions
+   * @type          Function
+   *
+   * This method allows you to tell the SActionStream class that you want to skip
+   * the next actions. If you don't specify anything, it means that you want to skip
+   * ALL the next actions. You can pass a number that mean that you want to skip x next action(s),
+   * or an array with the actions names that you want to skip.
+   *
+   * @param       {Number|Array<String>|Boolean}        [what=true]        Specify what you want to skip. Can be a number or an array of actions names to skip
+   *
+   * @since       2.0.0
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  skipNextActions(what = true) {
+    this._skipNextActions = what;
+  }
+
+  /**
+   * @name          registerCallback
+   * @type          Function
+   *
+   * This method allows you to register some callbacks during the stream action process.
+   * You can specify when you want to register this callback like "before" or "after", and specify if
+   * it's before/after the entire stream process or a particular action.
+   *
+   * @param       {Function}        callback          The callback function to call
+   * @param       {String}          [when='after']    When you want to call this callback. Can be "before" or "after"
+   * @param       {String}          [action=null]     Specify the reference action. If not set, that's mean that the entire stream process is the reference
+   *
+   * @since       2.0.0
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  registerCallback(callback, when = 'after', action = null) {
+    this._registeredCallbacks.push({
+      callback,
+      when,
+      action
+    });
   }
 
   /**

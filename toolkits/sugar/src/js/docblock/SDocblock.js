@@ -82,6 +82,17 @@ export default class SDocblock {
   constructor(source, settings = {}) {
     this._settings = __deepMerge(
       {
+        sortFunction: (a, b) => {
+          let $res = 0;
+          if (a.namespace && !b.namespace) res += -1;
+          if (a.type && a.type.toLowerCase() === 'class') $res += -1;
+          if (a.constructor) $res += -1;
+          if (a.private) $res += 1;
+          if (a.type && a.type.toLowerCase() === 'function') $res += -1;
+          if (a.name && b.name && a.name.length > b.name.length) $res += -1;
+          $res += 0;
+          return $res;
+        },
         filepath: null,
         to: {
           markdown: __markdown
@@ -92,6 +103,25 @@ export default class SDocblock {
     this._source = source;
     // parsing the source
     this.parse();
+  }
+
+  /**
+   * @name        sort
+   * @type        Function
+   *
+   * This method allows you to set the order in which you want to get the
+   * blocks back when using the methods like get blocks, etc...
+   *
+   * @param       {Function}      [sortFunction=null]       Specify a custom sort function you want to use. If not set, use the ```sortFunction``` setting.
+   * @return      {Array}                                   The blocks array sorted
+   *
+   * @since       2.0.0
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com>
+   */
+  sort(sortFunction = null) {
+    if (!sortFunction) sortFunction = this._settings.sortFunction;
+    this._blocks = this._blocks.sort(sortFunction);
+    return this.blocks;
   }
 
   /**
@@ -139,8 +169,25 @@ export default class SDocblock {
     // save the blocks
     this._blocks = blocksArray;
 
+    // sort the blocks
+    this.sort();
+
     // return the array of docblock blocks
-    return blocksArray;
+    return this._blocks;
+  }
+
+  /**
+   * @name          toObject
+   * @type          Function
+   *
+   * This method convert the parsed docblocks to a simple object
+   *
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com>
+   */
+  toObject() {
+    return this.blocks.map((block) => {
+      return block.toObject();
+    });
   }
 
   /**

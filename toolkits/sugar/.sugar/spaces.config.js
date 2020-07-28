@@ -29,51 +29,51 @@ module.exports = {
    * @name            default
    * @namespace       config.spaces
    * @type            String
-   * @default         2rem
+   * @default         2.5rem
    *
    * Specify the <primary>default</primary> space used for paddings and margins
    *
    * @since           1.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  default: '2rem',
+  default: '2.5rem',
 
   /**
    * @name            medium
    * @namespace       config.spaces
    * @type            String
-   * @default         3rem
+   * @default         5rem
    *
    * Specify the <primary>medium</primary> space used for paddings and margins
    *
    * @since           1.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  medium: '3rem',
+  medium: '5rem',
 
   /**
    * @name            big
    * @namespace       config.spaces
    * @type            String
-   * @default         4rem
+   * @default         10rem
    *
    * Specify the <primary>big</primary> space used for paddings and margins
    *
    * @since           1.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  big: '4rem',
+  big: '10rem',
 
   /**
    * @name            bigger
    * @namespace       config.spaces
    * @type            String
-   * @default         5rem
+   * @default         15rem
    *
    * Specify the <primary>bigger</primary> space used for paddings and margins
    *
    * @since           1.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  bigger: '5rem'
+  bigger: '15rem'
 };

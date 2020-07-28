@@ -230,6 +230,7 @@ module.exports = function spawn(
 
     // stdout data
     childProcess.stdout.on('data', (value) => {
+      // console.log('data', value.toString());
       runningProcess.stdout.push(value.toString());
       promise.trigger('stdout.data', {
         process: runningProcess,
@@ -240,6 +241,7 @@ module.exports = function spawn(
 
     // stderr data
     childProcess.stderr.on('data', (error) => {
+      // console.log(error.toString());
       runningProcess.stderr.push(error.toString());
       promise.trigger('stderr.data', {
         process: runningProcess,

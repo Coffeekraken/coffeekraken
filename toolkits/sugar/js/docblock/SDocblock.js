@@ -107,6 +107,17 @@ let SDocblock = /*#__PURE__*/function () {
     _defineProperty(this, "_to", null);
 
     this._settings = (0, _deepMerge.default)({
+      sortFunction: (a, b) => {
+        let $res = 0;
+        if (a.namespace && !b.namespace) res += -1;
+        if (a.type && a.type.toLowerCase() === 'class') $res += -1;
+        if (a.constructor) $res += -1;
+        if (a.private) $res += 1;
+        if (a.type && a.type.toLowerCase() === 'function') $res += -1;
+        if (a.name && b.name && a.name.length > b.name.length) $res += -1;
+        $res += 0;
+        return $res;
+      },
       filepath: null,
       to: {
         markdown: _index.default
@@ -117,16 +128,37 @@ let SDocblock = /*#__PURE__*/function () {
     this.parse();
   }
   /**
-   * @name        blocks
-   * @type        Array
+   * @name        sort
+   * @type        Function
    *
-   * Access the parsed blocks array
+   * This method allows you to set the order in which you want to get the
+   * blocks back when using the methods like get blocks, etc...
    *
+   * @param       {Function}      [sortFunction=null]       Specify a custom sort function you want to use. If not set, use the ```sortFunction``` setting.
+   * @return      {Array}                                   The blocks array sorted
+   *
+   * @since       2.0.0
    * @author 	Olivier Bossel <olivier.bossel@gmail.com>
    */
 
 
   _createClass(SDocblock, [{
+    key: "sort",
+    value: function sort(sortFunction = null) {
+      if (!sortFunction) sortFunction = this._settings.sortFunction;
+      this._blocks = this._blocks.sort(sortFunction);
+      return this.blocks;
+    }
+    /**
+     * @name        blocks
+     * @type        Array
+     *
+     * Access the parsed blocks array
+     *
+     * @author 	Olivier Bossel <olivier.bossel@gmail.com>
+     */
+
+  }, {
     key: "parse",
 
     /**
@@ -160,9 +192,27 @@ let SDocblock = /*#__PURE__*/function () {
       } // save the blocks
 
 
-      this._blocks = blocksArray; // return the array of docblock blocks
+      this._blocks = blocksArray; // sort the blocks
 
-      return blocksArray;
+      this.sort(); // return the array of docblock blocks
+
+      return this._blocks;
+    }
+    /**
+     * @name          toObject
+     * @type          Function
+     *
+     * This method convert the parsed docblocks to a simple object
+     *
+     * @author 	Olivier Bossel <olivier.bossel@gmail.com>
+     */
+
+  }, {
+    key: "toObject",
+    value: function toObject() {
+      return this.blocks.map(block => {
+        return block.toObject();
+      });
     }
     /**
      * @name          toMarkdown

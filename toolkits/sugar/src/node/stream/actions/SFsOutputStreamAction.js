@@ -59,7 +59,7 @@ module.exports = class SFsOutputStreamAction extends __SActionsStreamAction {
     this.checkStreamObject(streamObj);
 
     return new Promise(async (resolve, reject) => {
-      if (!streamObj.outputStack || typeof streamObj.outputStack !== 'string') {
+      if (!streamObj.outputStack || typeof streamObj.outputStack !== 'object') {
         this.warn(
           `The streamObj does not contain any "<cyan>outputStack</cyan>" property so no file will be saved at all...`
         );

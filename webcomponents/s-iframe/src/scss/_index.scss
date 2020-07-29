@@ -17,7 +17,7 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @mixin s-iframe-classes($name: 's-iframe') {
-  @include s-iframe-bare-classes(#{$name}-bare);
+  // @include s-iframe-bare-classes(#{$name}-bare);
   @include s-iframe-style-classes($name);
 }
 

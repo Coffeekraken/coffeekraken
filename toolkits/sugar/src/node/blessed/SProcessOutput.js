@@ -6,6 +6,9 @@ const __parseHtml = require('../terminal/parseHtml');
 const __parseMarkdown = require('../terminal/parseMarkdown');
 const __isChildProcess = require('../is/childProcess');
 const __stripAnsi = require('strip-ansi');
+const __countLine = require('../string/countLine');
+const __splitEvery = require('../string/splitEvery');
+const __upperFirst = require('../string/upperFirst');
 
 /**
  * @name                  SProcessOutput
@@ -71,7 +74,14 @@ module.exports = class SProcessOutput extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(process, settings = {}) {
-    const _settings = __deepMerge({}, settings);
+    const _settings = __deepMerge(
+      {
+        style: {
+          bg: 'red'
+        }
+      },
+      settings
+    );
     // extends SPanel
     super(_settings);
     // save the process
@@ -154,6 +164,7 @@ module.exports = class SProcessOutput extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   clear() {
+    this._content = [];
     if (this._logBox) this._logBox.setContent('');
   }
 
@@ -180,50 +191,59 @@ module.exports = class SProcessOutput extends __SComponent {
     //   process.exit();
     // }, 10000);
 
-    let linesArray = [];
+    // clearTimeout(this._logTimeout);
+    // this._logTimeout = setTimeout(() => {
+    // if (this._content[0] && this._content[0].includes('Frontend Express')) {
+    //   console.log(this._content);
+    // }
 
-    args.forEach((arg) => {
-      if (typeof arg !== 'string') return;
-      const lines = arg.split('\n');
-      linesArray = [...linesArray, ...lines];
-    });
+    let logsArray = args;
 
-    linesArray = linesArray.filter((a) => {
-      if (!a) return false;
-      if (__stripAnsi(a).length <= 0) return false;
+    // args.forEach((arg) => {
+    //   if (typeof arg !== 'string') return;
+    //   const lines = arg.split('\n');
+    //   linesArray = [...linesArray, ...lines];
+    // });
+
+    logsArray = logsArray.filter((a) => {
+      // if (!a) return false;
+      // if (__stripAnsi(a).length <= 0) return false;
       if (typeof a !== 'string' || a.replace === undefined) return false;
-      if (a.trim() === '') return false;
+      // if (a.trim() === '') return false;
       return true;
     });
 
-    linesArray.forEach((arg) => {
-      if (arg.includes('[?1049h')) {
-        arg = arg.slice(40);
+    let currentGroup = null;
+
+    logsArray.forEach((log) => {
+      if (log.includes('[?1049h')) {
+        log = log.slice(40);
       } // ugly hack that need to be checked...
 
-      if (arg === '') return;
-      if (typeof arg !== 'string') arg = arg.toString();
-      if (typeof arg === 'string' && arg.trim() === '') return;
-      if (typeof arg === 'string') {
-        arg = arg.trim();
-      }
+      if (typeof log !== 'string') log = log.toString();
 
       if (!__isChildProcess()) {
         // check if we have a "group" at start
-        const groupReg = /^\[(.*)\]\s?.*/;
-        const groupMatch = groupReg.exec(arg);
+        const groupReg = /^\[([a-zA-Z0-9_-]+)\].*?/g;
+        const groupMatch = groupReg.exec(log.trim());
 
-        if (groupMatch && groupMatch[1]) {
+        // console.log(groupMatch);
+
+        if (currentGroup || (groupMatch && groupMatch[1])) {
+          currentGroup = groupMatch ? groupMatch[1] : currentGroup;
+
+          // console.log(currentGroup);
+
           // process the arg
-          arg = arg.replace(`[${groupMatch[1]}]`, '').trim();
+          log = log.replace(`[${currentGroup}]`, '').trim();
 
           const actualGroupObjArray = this._content.filter((item) => {
             if (typeof item !== 'object') return false;
-            if (item.group === groupMatch[1]) return true;
+            if (item.group === currentGroup) return true;
             return false;
           });
           let groupObj = {
-            group: groupMatch[1],
+            group: currentGroup,
             content: []
           };
           if (actualGroupObjArray.length) {
@@ -232,36 +252,60 @@ module.exports = class SProcessOutput extends __SComponent {
             this._content.push(groupObj);
           }
           // append the new content to the group object
-          groupObj.content.push(this._processMarkdown(arg));
+          groupObj.content.push(this._processMarkdown(log));
         } else {
           // append simply the content
-          this._content.push(this._processMarkdown(arg));
+          this._content.push(this._processMarkdown(log));
         }
 
-        this._logBox.setContent('');
+        const processString = (string, color = 'primary') => {
+          return string;
+          if (color === 'red') string = ` <iCross/> ${string}`;
 
+          // split arg by lines
+          const argLinesArray = string.split('\n');
+          let finalLinesArray = [];
+          argLinesArray.forEach((line) => {
+            const lines = __splitEvery(line, this._logBox.width - 10);
+            finalLinesArray = [...finalLinesArray, ...lines];
+          });
+          finalLinesArray = finalLinesArray.map((line) => {
+            return __parseHtml(`<${color}>│</${color}> ${line}`);
+          });
+          return finalLinesArray.join('\n');
+        };
+
+        // console.log(this._content);
+
+        // this._createLogBox();
+        const contentArray = [];
+        // this._logBox.setContent('');
         this._content.forEach((item) => {
           if (typeof item === 'string') {
-            this._logBox.pushLine(item);
+            contentArray.push(item);
+            // this._logBox.pushLine(item);
           } else if (typeof item === 'object' && item.group) {
-            this._logBox.pushLine(
-              __parseHtml(`<primary>│ ${item.group}</primary>`)
+            const color =
+              item.group.toLowerCase() === 'error' ? 'red' : 'primary';
+            contentArray.push(
+              __parseHtml(`<${color}>│ ${__upperFirst(item.group)}</${color}>`)
             );
-            this._logBox.pushLine(
-              __parseHtml(
-                `<primary>│</primary> ${item.content[item.content.length - 1]}`
-              )
+            contentArray.push(
+              processString(item.content[item.content.length - 1], color)
             );
-            this._logBox.pushLine(' ');
-            this._logBox.pushLine(' ');
+            contentArray.push(' ');
+            contentArray.push(' ');
           }
         });
+        this._logBox.setContent(contentArray.join('\n'));
+        // this._logBox.screen.render();
       } else {
-        console.log(arg);
+        console.log(log);
         // console.log('<black> </black>');
       }
     });
     if (this._logBox) this._logBox.setScrollPerc(100);
+    // }, 100);
   }
 
   /**
@@ -275,6 +319,15 @@ module.exports = class SProcessOutput extends __SComponent {
    */
   _generateUI() {
     if (__isChildProcess()) return;
+
+    this._createLogBox();
+  }
+
+  _createLogBox() {
+    if (this._logBox) {
+      this._logBox.destroy();
+      this._logBox = null;
+    }
 
     this._logBox = __blessed.box({
       width: '100%',
@@ -307,7 +360,7 @@ module.exports = class SProcessOutput extends __SComponent {
   }
 
   update() {
-    if (__isChildProcess()) return;
+    // if (__isChildProcess()) return;
     super.update();
   }
 };

@@ -26,21 +26,6 @@ const __parseHtml = require('../terminal/parseHtml');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = (proc, settings = {}) => {
-  // if (__isChildProcess()) {
-  //   proc.on('stdout.data,stderr.data', (message) => {
-  //     console.log(message);
-  //     let msg;
-  //     if (message.value && typeof message.value === 'string') {
-  //       msg = message.value;
-  //     } else if (message.error && typeof message.error === 'string') {
-  //       msg = message.error;
-  //     } else if (typeof message === 'string') {
-  //       mgs = message;
-  //     }
-  //     msg && console.log(__parseHtml(msg));
-  //   });
-  // } else {
   const output = new __SProcessOutput(proc, settings);
   output.attach();
-  // }
 };

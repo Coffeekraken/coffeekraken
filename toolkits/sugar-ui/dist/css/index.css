@@ -26021,85 +26021,6 @@ html {
   height: 450px;
 }
 
-/**
- * @name            s-iframe-bare
- * @namespace       scss
- * @type            Class
- *
- * This class is the base one applied on container.
- *
- * @since           2.0.0
- * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-.s-iframe-bare {
-  position: relative;
-  display: block;
-  width: 100%;
-  min-height: 100px;
-}
-
-/**
- * @name          s-iframe-bare__node
- * @namespace     scss
- * @type          Class
- *
- * This class is applied on the iframe itself.
- *
- * @since         2.0.0
- * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-.s-iframe-bare__node {
-  display: block;
-  border: none;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-/**
- * @name          s-iframe-bare__loading
- * @namespace     scss
- * @type          Class
- *
- * This class is applied on the loading container that is displayed on top of the iframe.
- *
- * @since         2.0.0
- * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-.s-iframe-bare__loading {
-  pointer-events: none;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0;
-}
-[loading] + .s-iframe-bare__loading {
-  pointer-events: all;
-  opacity: 1;
-}
-
-/**
- * @name          s-iframe-bare__loading__loader
- * @namespace     scss
- * @type          Class
- *
- * This class is applied on element inside the loading container.
- * It will contain the loader itself that can be a spinner, or whatever you want...
- *
- * @since         2.0.0
- * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-.s-iframe-bare__loading__loader {
-  position: absolute !important;
-  top: 50% !important;
-  left: 50% !important;
-  transform: translate(-50%, -50%) !important;
-}
-
 .s-iframe__loading {
   background: rgba(52, 58, 64, 0.5);
 }
@@ -26115,14 +26036,14 @@ html {
   border-right: 0.3em solid rgba(242, 188, 43, 0.2);
   border-bottom: 0.3em solid rgba(242, 188, 43, 0.2);
   border-left: 0.3em solid #f2bc2b;
-  animation: spinner-u3g3vlh 1s linear 0s infinite;
+  animation: spinner-u2t7asm 1s linear 0s infinite;
 }
 .s-iframe__loading__loader, .s-iframe__loading__loader:after {
   border-radius: 50%;
   width: 1em;
   height: 1em;
 }
-@keyframes spinner-u3g3vlh {
+@keyframes spinner-u2t7asm {
   0% {
     transform: rotate(0deg);
   }

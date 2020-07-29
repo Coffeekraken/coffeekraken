@@ -1,4 +1,5 @@
 const __SExpressServerCli = require('../express/SExpressServerCli');
+const __frontendServer = require('../frontend/frontend');
 
 /**
  * @name            SFrontendServerCli
@@ -64,6 +65,26 @@ module.exports = class SFrontendServerCli extends __SExpressServerCli {
   }
 
   /**
+   * @name            childRun
+   * @type            Function
+   * @override
+   *
+   * This method is the one that will be called once you call ```run```  inside a child process.
+   * At first, the SCli class check if you are running in a child process. If not, it will
+   * generate one to run your actual logic. This function represent the code that will
+   * be actually runned.
+   *
+   * @param       {Object}        argsObj         The object of passed arguments
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  childRun(argsObj) {
+    const server = __frontendServer(argsObj);
+    return server;
+  }
+
+  /**
    * @name            run
    * @type            Function
    * @override
@@ -80,14 +101,15 @@ module.exports = class SFrontendServerCli extends __SExpressServerCli {
     const process = super.run(argsObj, includeAllArgs, false);
 
     process.on('start', () => {
-      this.log(`<green>Your Frontend Express server is up and running</green>:
+      this
+        .log(`# Your <primary>Frontend Express</primary> server is <green>up and running</green>:
 
-  Hostname        : <yellow>${this.runningArgsObj.hostname}</yellow>
-  Port            : <yellow>${this.runningArgsObj.port}</yellow>
-  Root directory  : <yellow>${this.runningArgsObj.rootDir}</yellow>
-  Views directory : <yellow>${this.runningArgsObj.viewsDir}</yellow>
-  Views engine    : <yellow>${this.runningArgsObj.viewEngine}</yellow>
-  URL             : <cyan>http://${this.runningArgsObj.hostname}:${this.runningArgsObj.port}</cyan>`);
+  - Hostname        : <yellow>${this.runningArgsObj.hostname}</yellow>
+  - Port            : <yellow>${this.runningArgsObj.port}</yellow>
+  - Root directory  : <yellow>${this.runningArgsObj.rootDir}</yellow>
+  - Views directory : <yellow>${this.runningArgsObj.viewsDir}</yellow>
+  - Views engine    : <yellow>${this.runningArgsObj.viewEngine}</yellow>
+  - URL             : <cyan>http://${this.runningArgsObj.hostname}:${this.runningArgsObj.port}</cyan>`);
     });
     return process;
   }

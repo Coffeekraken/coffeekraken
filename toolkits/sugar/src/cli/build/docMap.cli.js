@@ -5,9 +5,7 @@ const __output = require('../../node/process/output');
 
 module.exports = (stringArgs = '') => {
   const args = __parseArgs(stringArgs, __SBuildDocMapCli.definitionObj);
-  const stream = new __SBuildDocMapActionsStream({
-    name: 'Build docMap.json file'
-  });
+  const stream = new __SBuildDocMapActionsStream({});
   const proc = stream.start(args);
   __output(proc);
 };

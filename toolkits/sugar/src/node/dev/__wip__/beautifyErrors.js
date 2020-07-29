@@ -15,6 +15,7 @@ const __parseError = require('./parseError');
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function beautifyErrors() {
+  return;
   // catch the errors to prettify them
   ['unhandledRejection', 'uncaughtException'].forEach((e) => {
     process.on(e, async (err) => {

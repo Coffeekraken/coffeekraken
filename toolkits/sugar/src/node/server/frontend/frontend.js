@@ -30,7 +30,7 @@ const __render = require('../../template/render');
  */
 module.exports = async (args = {}) => {
   const settings = __deepMerge(__sugarConfig('frontend'), args);
-  const server = __expressServer(settings.express);
+  const server = __expressServer(__deepMerge(settings.express, args));
   let sNavInstance;
 
   settings.assets = __deepMap(settings.assets, (value, prop) => {
@@ -50,16 +50,6 @@ module.exports = async (args = {}) => {
       sNavInstance.addItem(menuStack[menuName]);
     });
   }
-
-  // function renderTemplate(string, data = {}) {
-  //   const lintRes = __ejsLint(string);
-  //   if (lintRes) {
-  //     throw new Error(lintRes);
-  //   }
-  //   // rendering the template
-  //   const result = __ejs.render(string, data);
-  //   return result;
-  // }
 
   // build the "templateData" object to pass to the render engines
   const templateData = {

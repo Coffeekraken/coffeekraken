@@ -9,6 +9,8 @@ var _copyTo = _interopRequireDefault(require("copy-to"));
 
 var _plainObject = _interopRequireDefault(require("../is/plainObject"));
 
+var _minimatch = _interopRequireDefault(require("minimatch"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**

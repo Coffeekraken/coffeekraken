@@ -94,7 +94,8 @@ export default class SActionStream extends __SPromise {
           after: [],
           beforeActions: {},
           afterActions: {},
-          actions: {}
+          actions: {},
+          exitOnComplete: __isChildProcess()
         },
         settings
       )
@@ -118,6 +119,9 @@ export default class SActionStream extends __SPromise {
 
     // save the actions
     this._actionsObject = actions;
+
+    // specify the exit code if the exitOnComplete setting is true
+    this._exitCode = 0;
   }
 
   /**
@@ -282,6 +286,7 @@ export default class SActionStream extends __SPromise {
               this.error(`[${this._currentActionName}] #error ${value}`);
             });
             actionInstance.on('reject', (value) => {
+              this._exitCode = 1;
               this.dispatch('reject', value);
               cancel(value);
             });
@@ -315,7 +320,7 @@ export default class SActionStream extends __SPromise {
 
           // trigger some "start" events
           this.dispatch('start', Object.assign({}, actionObj));
-          const startString = `[${actionName}] ## Starting the action "<yellow>${actionName}</yellow>" on <magenta>${streamSourcesCount}</magenta> sources`;
+          const startString = `[${actionName}] #start Starting the action "<yellow>${actionName}</yellow>" on <magenta>${streamSourcesCount}</magenta> sources`;
           this.log(startString);
 
           const _this = this;
@@ -383,14 +388,13 @@ export default class SActionStream extends __SPromise {
                   actionObj.stderr.push(
                     `#error <red>${e.name}</red>: ${e.message}`
                   );
-                  this.error(
-                    `[${actionName}] #error <red>${e.name}</red>: ${e.message}`
-                  );
+                  throw new Error(`${e.message}`);
                 } else if (typeof e === 'string') {
                   actionObj.stderr.push(e);
                   // trigger an "event"
-                  this.error(`[${actionName}] ${e}`);
+                  throw new Error(`${e}`);
                 }
+                this._exitCode = 1;
                 cancel(actionObj);
               }
 
@@ -517,7 +521,8 @@ export default class SActionStream extends __SPromise {
           if (actionObj.stderr.length) {
             const errorString = `[${actionName}] #error <red>Something went wrong during the </red>"<yellow>${actionName}</yellow>"<red> action...</red>`;
             actionObj.stderr.unshift(errorString);
-            this.error(errorString);
+            this._exitCode = 1;
+            throw new Error(errorString);
           } else {
             const successString = `[${actionName}] #success The action "<yellow>${actionName}</yellow>" has finished <green>successfully</green> on <magenta>${streamSourcesCount}</magenta> sources in <yellow>${__convert(
               actionObj.duration,
@@ -576,7 +581,7 @@ export default class SActionStream extends __SPromise {
         this.dispatch('complete', overallActionsStats);
         resolve(overallActionsStats);
 
-        // if (!__isTestEnv() && __isChildProcess()) process.exit();
+        if (this._settings.exitOnComplete) process.exit(this._exitCode);
       }
     )
       .on('cancel', () => {
@@ -591,7 +596,7 @@ export default class SActionStream extends __SPromise {
         // trigger some cancel events
         this.trigger('cancel');
         // exit process (has to be rethink)
-        // if (__isChildProcess()) process.exit();
+        if (this._settings.exitOnComplete) process.exit(this._exitCode);
       })
       .start();
 

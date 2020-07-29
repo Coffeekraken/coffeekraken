@@ -46,6 +46,19 @@ module.exports = class SComponent extends __blessed.box {
   _settings = {};
 
   /**
+   * @name                  _renderInterval
+   * @type                  Function
+   * @private
+   * @static
+   *
+   * Store the setInterval that render the screen
+   *
+   * @since         2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static _renderInterval = null;
+
+  /**
    * @name                  constructor
    * @type                  Function
    * @constructor
@@ -87,7 +100,21 @@ module.exports = class SComponent extends __blessed.box {
     }
 
     // store the settings
-    settings = __deepMerge({}, settings);
+    settings = __deepMerge(
+      {
+        style: {
+          fg: 'white',
+          bg: 'magenta',
+          border: {
+            fg: '#f0f0f0'
+          },
+          hover: {
+            bg: 'green'
+          }
+        }
+      },
+      settings
+    );
     // extends parent
     super(settings);
 
@@ -96,6 +123,11 @@ module.exports = class SComponent extends __blessed.box {
 
     // save the settings
     this._settings = settings;
+
+    // set render interval if not set already
+    if (!SComponent._renderInterval) {
+      this.setRenderInterval(100);
+    }
 
     let container;
     if (settings.container) {
@@ -126,6 +158,25 @@ module.exports = class SComponent extends __blessed.box {
         });
       }
     }
+  }
+
+  /**
+   * @name                  setRenderInterval
+   * @type                  Function
+   *
+   * This method allows you to simply change the interval timeout between the screen renders process.
+   * Note that calling this will change the GLOBAL render screen interval so use with caution...
+   *
+   * @param       {Number}          interval          The interval between screen rendering processes in ms
+   *
+   * @since           2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  setRenderInterval(interval) {
+    clearInterval(SComponent._renderInterval);
+    SComponent._renderInterval = setInterval(() => {
+      (global.screen || this.screen).render();
+    }, interval);
   }
 
   /**

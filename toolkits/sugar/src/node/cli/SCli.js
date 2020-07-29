@@ -5,7 +5,8 @@ const __SProcessOutput = require('../blessed/SProcessOutput');
 const __deepMerge = require('../object/deepMerge');
 const __parseHtml = require('../terminal/parseHtml');
 const __argsToObject = require('../cli/argsToObject');
-const __isPlainObject = require('../is/plainObject');
+const __isChildProcess = require('../is/childProcess');
+const __SPromise = require('../promise/SPromise');
 
 /**
  * @name                SCli
@@ -235,17 +236,27 @@ module.exports = class SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  run(
-    argsObj = this._settings.argsObj,
-    includeAllArgs = this._settings.includeAllArgs
-  ) {
+  run(argsObj = this._settings.argsObj, settings = {}) {
+    // make sure we have an object as args
+    argsObj = __argsToObject(argsObj, this.definitionObj);
+
+    // check if is running in a child process
+    if (__isChildProcess() && this.childRun) {
+      const childProcessPromise = new __SPromise(() => {}).start();
+      const childProcess = this.childRun(argsObj);
+      childProcessPromise.process = childProcess;
+      if (childProcess instanceof __SPromise) {
+        // __SPromise.pipe(childProcess, childProcessPromise);
+      }
+      return childProcessPromise;
+    }
+
     if (this._childProcess) {
       throw new Error(
         `You cannot spawn multiple "${this.constructor.name}" child process at the same time. Please kill the currently running one using the "kill" method...`
       );
     }
-    argsObj = __argsToObject(argsObj, this.definitionObj);
-    const commandLine = this.toString(argsObj, includeAllArgs);
+    const commandLine = this.toString(argsObj, settings.includeAllArgs);
     this._runningArgsObj = Object.assign({}, argsObj);
     this._childProcess = __spawn(commandLine, {
       id: this._settings.id,
@@ -281,18 +292,18 @@ module.exports = class SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  runWithOutput(
-    argsObj = this._settings.argsObj,
-    includeAllArgs = this._settings.includeAllArgs
-  ) {
-    const serverProcess = this.run(argsObj, includeAllArgs);
-    this._output = new __SProcessOutput(serverProcess, {});
-    serverProcess.on('before.start,before.end', () => {
-      this._output.clear();
-    });
-    this._output.attach();
-    return serverProcess;
-  }
+  // runWithOutput(
+  //   argsObj = this._settings.argsObj,
+  //   includeAllArgs = this._settings.includeAllArgs
+  // ) {
+  //   const serverProcess = this.run(argsObj, includeAllArgs);
+  //   this._output = new __SProcessOutput(serverProcess, {});
+  //   serverProcess.on('before.start,before.end', () => {
+  //     this._output.clear();
+  //   });
+  //   this._output.attach();
+  //   return serverProcess;
+  // }
 
   /**
    * @name          kill

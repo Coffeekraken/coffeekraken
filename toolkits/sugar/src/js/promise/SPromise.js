@@ -244,17 +244,13 @@ export default class SPromise extends Promise {
    */
   constructor(executorFn, settings = {}) {
     let _resolve, _reject;
-    super((resolve, reject) => {
+    const promise = super((resolve, reject) => {
       _resolve = resolve;
       _reject = reject;
     });
-    // .catch((e) => {
-    // check if we have some catch callbacks or not...
-    // if (!this._stacks || this._stacks.catch.length === 0) {
-    //   let error = e.stack || typeof e === 'object' ? JSON.stringify(e) : e;
-    //   const pe = new __prettyError();
-    //   console.log(pe.render(new Error(error)));
-    // }
+
+    // promise.catch((e) => {
+    //   console.log('ff');
     // });
 
     this._masterPromiseResolveFn = _resolve;
@@ -265,7 +261,7 @@ export default class SPromise extends Promise {
     this._settings = __deepMerge(
       {
         id: __uniqid(),
-        safeReject: true,
+        safeReject: false,
         cancelDefaultReturn: null
       },
       settings
@@ -756,8 +752,6 @@ export default class SPromise extends Promise {
     // check if the stacks is "*"
     if (typeof stacks === 'string')
       stacks = stacks.split(',').map((s) => s.trim());
-
-    // stacks.push('*');
 
     let currentStackResult = initialValue;
     for (let i = 0; i < stacks.length; i++) {

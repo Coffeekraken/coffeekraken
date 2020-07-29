@@ -53,6 +53,7 @@ module.exports = class SBuildDocActionStream extends __SActionsStream {
       },
       __deepMerge(
         {
+          name: 'Build Documentation',
           before: (streamObj) => {
             streamObj.globProperty = 'input';
             streamObj.unlink = streamObj.outputDir;

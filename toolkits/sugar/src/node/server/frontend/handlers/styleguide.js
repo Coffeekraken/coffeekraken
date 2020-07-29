@@ -6,6 +6,7 @@ const __standardizeJson = require('../../../npm/standardizeJson');
 const __SBuildScssActionsStream = require('../../../build/scss/SBuildScssActionsStream');
 const __SPromise = require('../../../promise/SPromise');
 const __SDocblock = require('../../../docblock/SDocblock');
+const __SBuildScssCommand = require('../../../build/scss/SBuildScssCommand');
 
 /**
  * @name                styleguide
@@ -47,20 +48,40 @@ module.exports = function styleguide(req, server) {
 
       // check if we have a styleguide scss file to load
       if (sugarJson.scss && sugarJson.scss.styleguide) {
-        const actionsStream = new __SBuildScssActionsStream();
-        const styleguidePromise = actionsStream.start({
-          input: `${packagePath}/${sugarJson.scss.styleguide}`,
-          sugarJsonDirs: packagePath
-        });
-        __SPromise.log(styleguidePromise);
-        const styleguideRes = await styleguidePromise;
-
+        // const actionsStream = new __SBuildScssActionsStream({
+        //   // exitOnComplete: false
+        // });
+        // const styleguidePromise = actionsStream.start({
+        //   input: `${packagePath}/${sugarJson.scss.styleguide}`,
+        //   sugarJsonDirs: packagePath
+        // });
+        // __SPromise.log(styleguidePromise);
+        // const styleguideRes = await styleguidePromise;
+        // const buildScssCli = new __SBuildScssCli({
+        //   // forceChildProcess: true
+        // });
+        // const styleguidePromise = buildScssCli.run({
+        //   input: `${packagePath}/${sugarJson.scss.styleguide}`,
+        //   sugarJsonDirs: packagePath
+        // });
+        // __SPromise.log(styleguidePromise);
+        // const styleguideRes = await styleguidePromise;
+        // console.log('RES', styleguideRes);
+        // const buildScssCommand = new __SBuildScssCommand({
+        //   // forceChildProcess: true
+        // });
+        // const styleguidePromise = buildScssCommand.run({
+        //   input: `${packagePath}/${sugarJson.scss.styleguide}`,
+        //   sugarJsonDirs: packagePath
+        // });
+        // __SPromise.log(styleguidePromise);
+        // const styleguideRes = await styleguidePromise;
+        // console.log('RES', styleguideRes);
         // parsing the docblock
-        const docblock = new __SDocblock(styleguideRes.streamObj.data);
-
-        // set the blocks
-        resultObj.data.css = styleguideRes.streamObj.data;
-        resultObj.data.blocks = docblock.toObject();
+        // const docblock = new __SDocblock(styleguideRes.streamObj.data);
+        // // set the blocks
+        // resultObj.data.css = styleguideRes.streamObj.data;
+        // resultObj.data.blocks = docblock.toObject();
       }
     }
 

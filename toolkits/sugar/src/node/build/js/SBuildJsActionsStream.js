@@ -57,6 +57,7 @@ module.exports = class SBuildJsActionsStream extends __SActionsStream {
       },
       __deepMerge(
         {
+          name: 'Build JS',
           before: (streamObj) => {
             streamObj.globProperty = 'input';
             return streamObj;

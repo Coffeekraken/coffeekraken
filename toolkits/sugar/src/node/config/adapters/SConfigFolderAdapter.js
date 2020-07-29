@@ -24,11 +24,9 @@ const __SConfigAdapter = require('./SConfigAdapter');
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-
 module.exports = class SConfigFolderAdapter extends __SConfigAdapter {
   constructor(settings = {}) {
     super(settings);
-
     this.settings.foldername = this.settings.foldername.replace(
       '[name]',
       this.name

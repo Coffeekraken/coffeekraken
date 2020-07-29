@@ -92,6 +92,10 @@ export default class SActionStreamAction extends __SPromise {
     });
 
     super.start();
+
+    // this.catch((e) => {
+    //   console.log('error');
+    // });
   }
 
   get settings() {

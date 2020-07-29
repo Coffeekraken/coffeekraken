@@ -131,7 +131,10 @@ let SActionStreamAction = /*#__PURE__*/function (_SPromise) {
       }
     });
 
-    _get((_thisSuper = _assertThisInitialized(_this), _getPrototypeOf(SActionStreamAction.prototype)), "start", _thisSuper).call(_thisSuper);
+    _get((_thisSuper = _assertThisInitialized(_this), _getPrototypeOf(SActionStreamAction.prototype)), "start", _thisSuper).call(_thisSuper); // this.catch((e) => {
+    //   console.log('error');
+    // });
+
 
     return _this;
   }

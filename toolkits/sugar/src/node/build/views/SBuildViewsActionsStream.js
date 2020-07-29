@@ -53,6 +53,7 @@ module.exports = class SBuildViewsActionsStream extends __SActionsStream {
       },
       __deepMerge(
         {
+          name: 'Build Views',
           actions: {
             filesResolver: {
               ignoreFolders: [],

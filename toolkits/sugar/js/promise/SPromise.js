@@ -278,44 +278,25 @@ let SPromise = /*#__PURE__*/function (_Promise) {
   }]);
 
   function SPromise(executorFn, settings = {}) {
-    var _this;
+    var _temp, _this;
 
     _classCallCheck(this, SPromise);
 
     let _resolve, _reject;
 
-    _this = _super.call(this, (resolve, reject) => {
+    const promise = (_temp = _this = _super.call(this, (resolve, reject) => {
       _resolve = resolve;
       _reject = reject;
-    }); // .catch((e) => {
-    // check if we have some catch callbacks or not...
-    // if (!this._stacks || this._stacks.catch.length === 0) {
-    //   let error = e.stack || typeof e === 'object' ? JSON.stringify(e) : e;
-    //   const pe = new __prettyError();
-    //   console.log(pe.render(new Error(error)));
-    // }
-    // });
-
-    _defineProperty(_assertThisInitialized(_this), "_masterPromiseResolveFn", null);
-
-    _defineProperty(_assertThisInitialized(_this), "_masterPromiseRejectFn", null);
-
-    _defineProperty(_assertThisInitialized(_this), "_executorFn", null);
-
-    _defineProperty(_assertThisInitialized(_this), "_isExecutorStarted", null);
-
-    _defineProperty(_assertThisInitialized(_this), "_settings", {});
-
-    _defineProperty(_assertThisInitialized(_this), "_status", 'pending');
-
-    _defineProperty(_assertThisInitialized(_this), "_stacks", {
+    }), _defineProperty(_assertThisInitialized(_this), "_masterPromiseResolveFn", null), _defineProperty(_assertThisInitialized(_this), "_masterPromiseRejectFn", null), _defineProperty(_assertThisInitialized(_this), "_executorFn", null), _defineProperty(_assertThisInitialized(_this), "_isExecutorStarted", null), _defineProperty(_assertThisInitialized(_this), "_settings", {}), _defineProperty(_assertThisInitialized(_this), "_status", 'pending'), _defineProperty(_assertThisInitialized(_this), "_stacks", {
       then: [],
       catch: [],
       resolve: [],
       reject: [],
       finally: [],
       cancel: []
-    });
+    }), _temp); // promise.catch((e) => {
+    //   console.log('ff');
+    // });
 
     _this._masterPromiseResolveFn = _resolve;
     _this._masterPromiseRejectFn = _reject; // save the executor function
@@ -324,7 +305,7 @@ let SPromise = /*#__PURE__*/function (_Promise) {
 
     _this._settings = (0, _deepMerge.default)({
       id: (0, _uniqid.default)(),
-      safeReject: true,
+      safeReject: false,
       cancelDefaultReturn: null
     }, settings);
     setTimeout(() => {
@@ -823,8 +804,7 @@ let SPromise = /*#__PURE__*/function (_Promise) {
     key: "_triggerStacks",
     value: async function _triggerStacks(stacks, initialValue) {
       // check if the stacks is "*"
-      if (typeof stacks === 'string') stacks = stacks.split(',').map(s => s.trim()); // stacks.push('*');
-
+      if (typeof stacks === 'string') stacks = stacks.split(',').map(s => s.trim());
       let currentStackResult = initialValue;
 
       for (let i = 0; i < stacks.length; i++) {

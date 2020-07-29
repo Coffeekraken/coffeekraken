@@ -63,6 +63,8 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
   run(streamObj, settings) {
     settings = __deepMerge(
       {
+        babel: __sugarConfig('babel'),
+        webpack: __sugarConfig('webpack'),
         scss: {
           Config: {},
           imports: null
@@ -94,7 +96,7 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
             cwd: __packageRoot(__dirname),
             filename: streamObj.filename,
             sourceMaps: true,
-            ...__sugarConfig('babel')
+            ...settings.babel
           })
           .catch((error) => {
             return reject(err);
@@ -110,8 +112,6 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
 
       const scssImportsString = __getScssImportsStrings(settings.scss.imports);
 
-      console.log(scssImportsString);
-
       const scssConfig = __jsObjectToScssMap(
         __sugarConfig('scss'),
         settings.scss.config
@@ -124,8 +124,8 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
         )}</cyan>`
       );
 
-      let webpackSettings = Object.assign({}, settings);
-      delete webpackSettings.scss;
+      let webpackSettings = Object.assign({}, settings.webpack);
+      console.log(webpackSettings);
       const compiler = __webpack(
         __deepMerge(
           {

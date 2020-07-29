@@ -74,18 +74,11 @@ module.exports = function parseHtml(message) {
         return __chalk.bold(content) + '\n';
       },
 
-      pSuccess: (tag, content) => {
-        return parseHtml(`<green><iCheck/></green> ${content}`);
-      },
-      pError: (tag, content) => {
-        return parseHtml(`<red><iCross/></red> ${content}`);
-      },
-
-      iWarn: (tag, content) => '⚠',
-      iCheck: (tag, content) => `✓`,
-      iCross: (tag, content) => `✖`,
+      iWarn: (tag, content) => parseHtml('<yellow>⚠</yellow> '),
+      iCheck: (tag, content) => parseHtml(`<green>✓</green> `),
+      iCross: (tag, content) => parseHtml(`<red>✖</red> `),
       iClose: (tag, content) => `✖`,
-      iStart: (tag, content) => `‣`,
+      iStart: (tag, content) => parseHtml(`<green>‣</green> `),
 
       date: (tag, content) =>
         new Date().getDate().toString().padStart('0', 2) +

@@ -43,16 +43,19 @@ module.exports = function parseMarkdown(message) {
     }
 
     if (m.match(/^#success\s/)) {
-      m = `<green><iCheck/></green> ${m.replace(/^#success\s/, '')}`;
+      m = `<iCheck/> ${m.replace(/^#success\s/, '')}`;
+    }
+    if (m.match(/^#start\s/)) {
+      m = `<iStart/> ${m.replace(/^#start\s/, '')}`;
     }
     if (m.match(/^#error\s/)) {
-      m = `<red><iCross/></red> ${m.replace(/^#error\s/, '')}`;
+      m = `<iCross/> ${m.replace(/^#error\s/, '')}`;
     }
     if (m.match(/^#warning\s/)) {
-      m = `<yellow><iWarn/></yellow> ${m.replace(/^#warning\s/, '')}`;
+      m = `<iWarn/> ${m.replace(/^#warning\s/, '')}`;
     }
     if (m.match(/^#warn\s/)) {
-      m = `<yellow><iWarn/></yellow> ${m.replace(/^#warn\s/, '')}`;
+      m = `<iWarn/> ${m.replace(/^#warn\s/, '')}`;
     }
 
     return __parseHtml(m.trim());

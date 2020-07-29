@@ -55,6 +55,9 @@ module.exports = function spawn(
     shell: true,
     env: {
       ...process.env,
+      CHILD_PROCESS_LEVEL: process.env.CHILD_PROCESS_LEVEL
+        ? process.env.CHILD_PROCESS_LEVEL + 1
+        : 1,
       IS_CHILD_PROCESS: true
     }
   };

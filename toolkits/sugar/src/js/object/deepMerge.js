@@ -1,5 +1,6 @@
 import __copyTo from 'copy-to';
 import __isPlainObject from '../is/plainObject';
+import M from 'minimatch';
 
 /**
  * @name                deepMerge

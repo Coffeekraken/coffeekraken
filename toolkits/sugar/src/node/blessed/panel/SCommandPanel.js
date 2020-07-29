@@ -137,33 +137,6 @@ module.exports = class SCommandPanel extends __SComponent {
     this._summaryFakeCommand.on = () => this._summaryFakeCommand;
     this._commands.unshift(this._summaryFakeCommand);
 
-    // generate the panel object for each commands
-    this._commands.forEach((commandInstance, i) => {
-      __hotkey(`${commandInstance.key}`).on('press', () => {
-        if (
-          __activeSpace.get() === `SCommandPanel.${commandInstance.key}` &&
-          commandInstance.on
-        ) {
-          if (
-            commandInstance.isRunning() &&
-            !commandInstance._settings.concurrent
-          ) {
-            commandInstance.kill();
-          } else if (!commandInstance.isRunning()) {
-            commandInstance.run();
-          }
-        } else {
-          __activeSpace.set(`SCommandPanel.${commandInstance.key}`);
-          this._selectListItem(i);
-        }
-      });
-      commandInstance._settings.onKeyPress = (instance) => {
-        if (__activeSpace.is(`SCommandPanel.${commandInstance.key}`))
-          return true;
-        return false;
-      };
-      this._boxesObjectsMap.set(commandInstance, {});
-    });
     // set the first active space to the first command key
     __activeSpace.set(`SCommandPanel.${this._commands[0].key}`);
 
@@ -181,6 +154,9 @@ module.exports = class SCommandPanel extends __SComponent {
 
     // generate the UI
     this._generateUI();
+
+    // init command boxes
+    this._initCommandBoxes();
 
     // add the first commands in the display list
     this._displayedCommands.push(this._commands[0]);
@@ -346,6 +322,7 @@ module.exports = class SCommandPanel extends __SComponent {
         } else {
           this._displayedCommands.push(item.commandInstance);
         }
+        __activeSpace.set(`SCommandPanel.${item.commandInstance.key}`);
       } else if (!this._multiSelect) {
         const displayCommandIdx = this._displayedCommands.indexOf(
           item.commandInstance
@@ -359,6 +336,161 @@ module.exports = class SCommandPanel extends __SComponent {
     });
     this._updateList();
     this.update();
+  }
+
+  /**
+   * @name          _initCommandBoxes
+   * @type          Function
+   * @private
+   *
+   * This method create all the command boxes with the log (SProcessOutput) instance, etc, and
+   * save then into the ```_boxesObjectsMap``` map
+   *
+   * @since         2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _initCommandBoxes() {
+    this._commands.forEach((commandInstance, i) => {
+      const boxObj = {};
+
+      __hotkey(`${commandInstance.key}`).on('press', () => {
+        if (
+          __activeSpace.get() === `SCommandPanel.${commandInstance.key}` &&
+          commandInstance.on
+        ) {
+          if (
+            commandInstance.isRunning() &&
+            !commandInstance._settings.concurrent
+          ) {
+            commandInstance.kill();
+          } else if (!commandInstance.isRunning() && commandInstance.run) {
+            commandInstance.run();
+          }
+        } else {
+          __activeSpace.set(`SCommandPanel.${commandInstance.key}`);
+          this._selectListItem(i);
+        }
+      });
+      commandInstance._settings.onKeyPress = (instance) => {
+        if (__activeSpace.is(`SCommandPanel.${commandInstance.key}`))
+          return true;
+        return false;
+      };
+
+      const lastProcessObj = commandInstance.lastProcessObj;
+
+      boxObj.$box = __blessed.box({
+        height: 3,
+        style: {
+          bg: __color('terminal.primary').toString(),
+          fg: __color('terminal.black').toString()
+        },
+        padding: {
+          top: 1,
+          left: 2,
+          right: 2,
+          bottom: 1
+        },
+        mouse: true,
+        keys: true,
+        tags: true,
+        top: 0,
+        left: 0,
+        right: 0,
+        clickable: true
+      });
+      boxObj.$log = new __SProcessOutput(commandInstance, {
+        width: '100%-4',
+        height: 0,
+        top: 2,
+        left: 0,
+        right: 0,
+        style: {
+          fg: 'white'
+        },
+        mouse: true,
+        keys: true,
+        clickable: false,
+        scrollable: true,
+        scrollbar: {
+          ch: ' ',
+          inverse: true
+        },
+        style: {
+          scrollbar: {
+            bg: __color('terminal.primary').toString()
+          }
+        },
+        padding: {
+          top: 1,
+          left: 2,
+          right: 2,
+          bottom: 1
+        }
+      });
+      boxObj.$actions = __blessed.box({
+        top: 0,
+        right: 0,
+        width: 'shrink',
+        height: 1,
+        style: {}
+      });
+      boxObj.$header = __blessed.box({
+        top: -1,
+        left: 0,
+        right: 0,
+        height: 3,
+        style: {
+          bg: -1,
+          fg: -1
+        },
+        padding: {
+          top: 1
+        }
+      });
+
+      boxObj.opened = null;
+      let doubleClick = false;
+
+      boxObj.$header.on('click', (mouse) => {
+        if (doubleClick === false) {
+          doubleClick = true;
+          setTimeout(() => {
+            doubleClick = false;
+          }, 500);
+          return;
+        }
+
+        if (boxObj.opened === null) {
+          boxObj.opened = true;
+          this._openCommandBox(commandInstance);
+        } else {
+          boxObj.opened = !boxObj.opened;
+          if (boxObj.opened) {
+            this._openCommandBox(commandInstance);
+          } else {
+            this._closePanelBox(commandInstance);
+          }
+        }
+        this.update();
+      });
+
+      boxObj.spinner = {
+        ora: __ora({
+          text: __parseHtml(commandInstance.title || commandInstance.name),
+          color: 'black'
+        })
+      };
+
+      boxObj.$box.append(boxObj.$header);
+      // boxObj.$box.append(boxObj.$actions);
+      boxObj.$box.append(boxObj.$log);
+
+      // append it in the logBox
+      this.$log.append(boxObj.$box);
+
+      this._boxesObjectsMap.set(commandInstance, boxObj);
+    });
   }
 
   /**
@@ -673,122 +805,6 @@ module.exports = class SCommandPanel extends __SComponent {
       const lastProcessObj = commandInstance.lastProcessObj;
       let boxObj = this._boxesObjectsMap.get(commandInstance);
 
-      // check if we have already a processBox for this process
-      if (!Object.keys(boxObj).length) {
-        boxObj.$box = __blessed.box({
-          height: 3,
-          style: {
-            bg: __color('terminal.primary').toString(),
-            fg: __color('terminal.black').toString()
-          },
-          padding: {
-            top: 1,
-            left: 2,
-            right: 2,
-            bottom: 1
-          },
-          mouse: true,
-          keys: true,
-          tags: true,
-          top: 0,
-          left: 0,
-          right: 0,
-          clickable: true
-        });
-        // commandInstance.on('stdout.data', (d) => {
-        //   console.log('DATA', d);
-        // });
-        boxObj.$log = new __SProcessOutput(commandInstance, {
-          width: '100%-4',
-          height: 0,
-          top: 2,
-          left: 0,
-          right: 0,
-          style: {
-            fg: 'white'
-          },
-          mouse: true,
-          keys: true,
-          clickable: false,
-          scrollable: true,
-          scrollbar: {
-            ch: ' ',
-            inverse: true
-          },
-          style: {
-            scrollbar: {
-              bg: __color('terminal.primary').toString()
-            }
-          },
-          padding: {
-            top: 1,
-            left: 2,
-            right: 2,
-            bottom: 1
-          }
-        });
-        boxObj.$actions = __blessed.box({
-          top: 0,
-          right: 0,
-          width: 'shrink',
-          height: 1,
-          style: {}
-        });
-        boxObj.$header = __blessed.box({
-          top: -1,
-          left: 0,
-          right: 0,
-          height: 3,
-          style: {
-            bg: -1,
-            fg: -1
-          },
-          padding: {
-            top: 1
-          }
-        });
-
-        boxObj.opened = null;
-        let doubleClick = false;
-
-        boxObj.$header.on('click', (mouse) => {
-          if (doubleClick === false) {
-            doubleClick = true;
-            setTimeout(() => {
-              doubleClick = false;
-            }, 500);
-            return;
-          }
-
-          if (boxObj.opened === null) {
-            boxObj.opened = true;
-            this._openCommandBox(commandInstance);
-          } else {
-            boxObj.opened = !boxObj.opened;
-            if (boxObj.opened) {
-              this._openCommandBox(commandInstance);
-            } else {
-              this._closePanelBox(commandInstance);
-            }
-          }
-          this.update();
-        });
-
-        boxObj.spinner = {
-          ora: __ora({
-            text: __parseHtml(commandInstance.title || commandInstance.name),
-            color: 'black'
-          })
-        };
-
-        boxObj.$box.append(boxObj.$header);
-        // boxObj.$box.append(boxObj.$actions);
-        boxObj.$box.append(boxObj.$log);
-
-        // append it in the logBox
-        this.$log.append(boxObj.$box);
-      }
-
       let boxTitle = '';
       if (commandInstance.namespace) {
         boxTitle += `<bgBlack><white> ${commandInstance.namespace} </white></bgBlack> `;
@@ -813,12 +829,11 @@ module.exports = class SCommandPanel extends __SComponent {
         boxObj.$box.screen.render();
       } else if (commandInstance.isWatching()) {
         boxObj.$box.style.bg = __color('terminal.yellow').toString();
-        // clearInterval(boxObj.spinner.interval);
-        // boxObj.spinner.interval = setInterval(() => {
-        //   boxObj.spinner.ora.text = __parseHtml(`${boxTitle} (watching)`);
-        //   boxObj.$header.setContent(boxObj.spinner.ora.frame());
-        //   boxObj.$box.screen.render();
-        // }, 50);
+        clearInterval(boxObj.spinner.interval);
+        boxObj.spinner.interval = setInterval(() => {
+          boxObj.spinner.ora.text = __parseHtml(`${boxTitle} (watching)`);
+          boxObj.$header.setContent(boxObj.spinner.ora.frame());
+        }, 50);
       } else if (lastProcessObj && lastProcessObj.state === 'success') {
         boxObj.$box.style.bg = __color('terminal.green').toString();
         clearInterval(boxObj.spinner.interval);
@@ -826,12 +841,11 @@ module.exports = class SCommandPanel extends __SComponent {
         boxObj.$box.screen.render();
       } else if (lastProcessObj && lastProcessObj.state === 'running') {
         boxObj.$box.style.bg = __color('terminal.cyan').toString();
-        // clearInterval(boxObj.spinner.interval);
-        // boxObj.spinner.interval = setInterval(() => {
-        //   boxObj.spinner.ora.text = __parseHtml(`${boxTitle}`);
-        //   boxObj.$header.setContent(boxObj.spinner.ora.frame());
-        //   boxObj.$box.screen.render();
-        // }, 50);
+        clearInterval(boxObj.spinner.interval);
+        boxObj.spinner.interval = setInterval(() => {
+          boxObj.spinner.ora.text = __parseHtml(`${boxTitle}`);
+          boxObj.$header.setContent(boxObj.spinner.ora.frame());
+        }, 50);
       } else {
         boxObj.$box.style.bg = commandInstance.color || 'white';
         boxObj.$header.setContent(__parseHtml(`<iStart/>  ${boxTitle} (idle)`));
@@ -1152,15 +1166,17 @@ module.exports = class SCommandPanel extends __SComponent {
   update() {
     if (this.isDestroyed()) return;
 
-    // init and update command boxes
-    this._updateCommandBoxesStyle();
+    setTimeout(() => {
+      // init and update command boxes
+      this._updateCommandBoxesStyle();
 
-    // update the layout
-    this._updateCommandBoxesLayout();
+      // update the layout
+      this._updateCommandBoxesLayout();
 
-    // update the content
-    this._updateCommandBoxesContent();
+      // update the content
+      this._updateCommandBoxesContent();
 
-    super.update();
+      super.update();
+    });
   }
 };

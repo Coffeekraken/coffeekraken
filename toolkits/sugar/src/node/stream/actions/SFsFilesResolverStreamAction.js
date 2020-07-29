@@ -6,7 +6,7 @@ const __isDirectory = require('../../is/directory');
 const __isSymlink = require('../../is/symlink');
 const __isGlob = require('is-glob');
 const __isPath = require('../../is/path');
-
+const __SPromise = require('../../promise/SPromise');
 /**
  * @name            SFindInFileStreamAction
  * @namespace       node.stream.actions
@@ -72,7 +72,7 @@ module.exports = class SFindInFileStreamAction extends __SActionsStreamAction {
     // make sure we have a correct streamObj
     this.checkStreamObject(streamObj);
 
-    return new Promise(async (resolve, reject) => {
+    return new __SPromise(async (resolve, reject) => {
       const filesPathes = [];
       const streamObjArray = [];
 
@@ -131,8 +131,10 @@ module.exports = class SFindInFileStreamAction extends __SActionsStreamAction {
       });
 
       if (!filesPathes.length) {
-        return reject(
-          `Sorry but your <primary>input</primary> streamObj property setted to "<cyan>${streamObj.input}</cyan>" does not resolve to any files...`
+        reject(
+          new Error(
+            `Sorry but your <primary>input</primary> streamObj property setted to "<cyan>${streamObj.input}</cyan>" does not resolve to any files...`
+          )
         );
       }
 

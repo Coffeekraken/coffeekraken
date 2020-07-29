@@ -10,9 +10,7 @@ module.exports = (stringArgs = '') => {
   __moduleAliases();
 
   const args = __parseArgs(stringArgs, __SBuildJsCli.definitionObj);
-  const stream = new __SBuildJsActionsStream({
-    name: 'Build JS'
-  });
+  const stream = new __SBuildJsActionsStream();
   const proc = stream.start(args);
   __output(proc);
 };

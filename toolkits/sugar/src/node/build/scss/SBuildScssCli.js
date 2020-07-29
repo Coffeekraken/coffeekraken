@@ -1,6 +1,8 @@
 const __SCli = require('../../cli/SCli');
 const __sugarConfig = require('../../config/sugar');
 const __packageRoot = require('../../path/packageRoot');
+const __SBuildScssActionsStream = require('../../build/scss/SBuildScssActionsStream');
+const __output = require('../../process/output');
 
 /**
  * @name            SBuildScssCli
@@ -78,7 +80,7 @@ module.exports = class SBuildScssCli extends __SCli {
       level: 1
     },
     sugarJsonDirs: {
-      type: 'Array',
+      type: 'String|Array<String>',
       alias: 'a',
       description: 'Specify the directory where to search for sugar.json files',
       default: __sugarConfig('core.sugarJsonDirs'),
@@ -109,5 +111,27 @@ module.exports = class SBuildScssCli extends __SCli {
    */
   constructor(settings = {}) {
     super(settings);
+  }
+
+  /**
+   * @name            childRun
+   * @type            Function
+   * @override
+   *
+   * This method is the one that will be called once you call ```run```  inside a child process.
+   * At first, the SCli class check if you are running in a child process. If not, it will
+   * generate one to run your actual logic. This function represent the code that will
+   * be actually runned.
+   *
+   * @param       {Object}        argsObj         The object of passed arguments
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  childRun(argsObj) {
+    const stream = new __SBuildScssActionsStream();
+    const proc = stream.start(argsObj);
+    __output(proc);
+    return proc;
   }
 };

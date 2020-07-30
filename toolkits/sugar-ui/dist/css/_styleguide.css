@@ -56,14 +56,14 @@
   border-right: 0.3em solid rgba(242, 188, 43, 0.2);
   border-bottom: 0.3em solid rgba(242, 188, 43, 0.2);
   border-left: 0.3em solid #f2bc2b;
-  animation: spinner-uoacrtw 1s linear 0s infinite;
+  animation: spinner-u7q6hr9 1s linear 0s infinite;
 }
 .s-iframe__loading__loader, .s-iframe__loading__loader:after {
   border-radius: 50%;
   width: 1em;
   height: 1em;
 }
-@keyframes spinner-uoacrtw {
+@keyframes spinner-u7q6hr9 {
   0% {
     transform: rotate(0deg);
   }

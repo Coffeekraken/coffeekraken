@@ -100,26 +100,24 @@ module.exports = class SComponent extends __blessed.box {
     }
 
     // store the settings
-    settings = __deepMerge(
-      {
-        style: {
-          fg: 'white',
-          bg: 'magenta',
-          border: {
-            fg: '#f0f0f0'
-          },
-          hover: {
-            bg: 'green'
-          }
-        }
-      },
-      settings
-    );
+    settings = __deepMerge({}, settings);
     // extends parent
     super(settings);
 
     this._screen = __activeScreen;
     global.screen = __activeScreen;
+
+    // keep track of the component status
+    this._isDisplayed = false;
+    this.on('attach', () => {
+      this._isDisplayed = true;
+      setTimeout(() => {
+        this.update();
+      }, 1000);
+    });
+    this.on('detach', () => {
+      this._isDisplayed = false;
+    });
 
     // save the settings
     this._settings = settings;
@@ -175,6 +173,7 @@ module.exports = class SComponent extends __blessed.box {
   setRenderInterval(interval) {
     clearInterval(SComponent._renderInterval);
     SComponent._renderInterval = setInterval(() => {
+      if (!this.isDisplayed()) return;
       (global.screen || this.screen).render();
     }, interval);
   }
@@ -207,6 +206,21 @@ module.exports = class SComponent extends __blessed.box {
   update() {
     if (this.isDestroyed()) return;
     if (this._screen) this._screen.render();
+  }
+
+  /**
+   * @name                isDisplayed
+   * @type                Function
+   *
+   * Check if the component is in the display list of the screen
+   *
+   * @return      {Boolean}             true if is displayed, false if not
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  isDisplayed() {
+    return this._isDisplayed;
   }
 
   /**

@@ -134,11 +134,13 @@ module.exports = async (args = {}) => {
   Object.keys(settings.handlers).forEach(async (pageName) => {
     const handlerSettings = settings.handlers[pageName];
 
+    const handlerFn = require(handlerSettings.handler);
+
     server.get(
       [`${handlerSettings.slug}/*`, `${handlerSettings.slug}`],
       async (req, res) => {
         try {
-          const response = await handlerSettings.handler(req, server);
+          const response = await handlerFn(req, server);
 
           // handle response
           const view = response.view || 'pages.404';
@@ -167,6 +169,7 @@ module.exports = async (args = {}) => {
           // send the result to the client
           res.send(result);
         } catch (e) {
+          console.log(e);
           throw new Error(e);
           // res.redirect('/404');
         }

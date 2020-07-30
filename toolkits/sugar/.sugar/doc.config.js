@@ -1,9 +1,4 @@
 const __packageRoot = require('../src/node/path/packageRoot');
-const __isInPackage = require('../node/path/isInPackage');
-
-function isInSugarPackage() {
-  return __isInPackage('@coffeekraken/sugar');
-}
 
 module.exports = {
   /**
@@ -17,7 +12,5 @@ module.exports = {
    * @since       2.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  rootDir: isInSugarPackage()
-    ? `${__packageRoot()}/public/dist/doc`
-    : `${__packageRoot()}/dist/doc`
+  rootDir: `${__packageRoot()}/dist/doc`
 };

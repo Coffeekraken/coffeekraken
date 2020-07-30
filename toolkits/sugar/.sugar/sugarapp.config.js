@@ -1,6 +1,4 @@
 const __packageJson = require('../package.json');
-const __STermAppCommandsPage = require('../src/node/termapp/pages/STermAppCommandsPage');
-const __STermAppAboutPage = require('../src/node/termapp/pages/STermAppAboutPage');
 const __packageRoot = require('../src/node/path/packageRoot');
 
 module.exports = {

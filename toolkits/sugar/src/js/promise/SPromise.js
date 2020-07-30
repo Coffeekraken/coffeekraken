@@ -183,6 +183,11 @@ export default class SPromise extends Promise {
       },
       settings
     );
+    if (
+      !(sourceSPromise instanceof SPromise) ||
+      !(destSPromise instanceof SPromise)
+    )
+      return;
     // listen for all on the source promise
     sourceSPromise.on(settings.stacks, (value, stack) => {
       // check if need to process the value
@@ -210,13 +215,17 @@ export default class SPromise extends Promise {
     // settings
     settings = __deepMerge(
       {
+        filter: null,
         stacks: 'stdout.data,stderr.data'
       },
       settings
     );
+    if (!(sourceSPromise instanceof SPromise)) return;
     // listen for all on the source promise
     sourceSPromise.on(settings.stacks, (value, stack) => {
-      console.log(value);
+      if (settings.filter && !settings.filter(value, stack)) return;
+      const msg = value.value ? value.value : value;
+      console.log(msg);
     });
   }
 

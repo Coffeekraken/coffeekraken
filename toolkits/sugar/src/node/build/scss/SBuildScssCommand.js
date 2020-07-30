@@ -1,7 +1,6 @@
 const __SCommand = require('../../terminal/SCommand');
 const __deepMerge = require('../../object/deepMerge');
 const __SBuildScssCli = require('./SBuildScssCli');
-const __sugarConfig = require('../../config/sugar');
 
 /**
  * @name              SBuildScssCommand
@@ -44,15 +43,17 @@ module.exports = class SBuildScssCommand extends __SCommand {
     // init command
     super(
       'build.scss',
-      new __SBuildScssCli(),
+      new __SBuildScssCli({
+        forceChildProcess: true
+      }),
       __deepMerge(
         {
           argsObj,
           title: 'Build SCSS',
           key: 's',
           concurrent: false,
-          namespace: 'build.scss',
-          watch: __sugarConfig('build.scss.watch')
+          namespace: 'build.scss'
+          // watch: __sugarConfig('build.scss.watch')
         },
         commandSettings
       )

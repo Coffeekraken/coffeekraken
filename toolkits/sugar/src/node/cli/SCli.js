@@ -102,7 +102,8 @@ module.exports = class SCli {
       {
         id: null,
         includeAllArgs: true,
-        argsObj: {}
+        argsObj: {},
+        forceChildProcess: false
       },
       settings
     );
@@ -237,17 +238,25 @@ module.exports = class SCli {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(argsObj = this._settings.argsObj, settings = {}) {
+    settings = __deepMerge(this._settings, settings);
+
     // make sure we have an object as args
     argsObj = __argsToObject(argsObj, this.definitionObj);
 
     // check if is running in a child process
-    if (__isChildProcess() && this.childRun) {
-      const childProcessPromise = new __SPromise(() => {}).start();
-      const childProcess = this.childRun(argsObj);
-      childProcessPromise.process = childProcess;
-      if (childProcess instanceof __SPromise) {
-        // __SPromise.pipe(childProcess, childProcessPromise);
-      }
+    if (!settings.forceChildProcess && __isChildProcess() && this.childRun) {
+      const childProcessPromise = new __SPromise(async (resolve, reject) => {
+        const childProcess = this.childRun(argsObj);
+        if (childProcess instanceof Promise) {
+          console.log('#error COCOCOC');
+          const result = await childProcess;
+          console.log('#success COC result');
+          console.log('#reso ' + result.toString());
+          return resolve(result);
+        }
+        // resolve(childProcess);
+      }).start();
+      // __SPromise.pipe(childProcess, childProcessPromise);
       return childProcessPromise;
     }
 

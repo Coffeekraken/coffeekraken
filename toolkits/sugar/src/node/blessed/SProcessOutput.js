@@ -9,6 +9,7 @@ const __stripAnsi = require('strip-ansi');
 const __countLine = require('../string/countLine');
 const __splitEvery = require('../string/splitEvery');
 const __upperFirst = require('../string/upperFirst');
+const { last } = require('lodash');
 
 /**
  * @name                  SProcessOutput
@@ -74,22 +75,15 @@ module.exports = class SProcessOutput extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(process, settings = {}) {
-    const _settings = __deepMerge(
-      {
-        style: {
-          bg: 'red'
-        }
-      },
-      settings
-    );
+    const _settings = __deepMerge(settings);
     // extends SPanel
     super(_settings);
     // save the process
     this._process = process;
     // subscribe to the process
     this._subscribeToProcess();
-    // // generate keys UI
-    this._generateUI();
+    // generate keys UI
+    this._createLogBox();
   }
 
   /**
@@ -125,26 +119,26 @@ module.exports = class SProcessOutput extends __SComponent {
         );
         this.update();
       })
-      .on('stderr.data', (data) => {
-        if (data.error) {
-          if (typeof data.error === 'string') {
-            this.log(`<red>${data.error}</red>`);
-          } else if (data.error.message) {
-            this.log(`<red>${data.error.message}</red>`);
-          }
-          if (data.error.stack) this.log(data.error.stack);
-          if (data.error.trace) this.log(data.error.trace);
-        } else {
-          this.log(
-            data.value && data.value.value
-              ? data.value.value
-              : data.value
-              ? data.value
-              : data
-          );
-        }
-        this.update();
-      })
+      // .on('stderr.data', (data) => {
+      //   if (data.error) {
+      //     if (typeof data.error === 'string') {
+      //       this.log(`<red>${data.error}</red>`);
+      //     } else if (data.error.message) {
+      //       this.log(`<red>${data.error.message}</red>`);
+      //     }
+      //     if (data.error.stack) this.log(data.error.stack);
+      //     if (data.error.trace) this.log(data.error.trace);
+      //   } else {
+      //     this.log(
+      //       data.value && data.value.value
+      //         ? data.value.value
+      //         : data.value
+      //         ? data.value
+      //         : data
+      //     );
+      //   }
+      //   this.update();
+      // })
       // subscribe to errors
       .on('error', (data) => {
         this.log(`<red>Something went wrong:</red>`);
@@ -165,7 +159,10 @@ module.exports = class SProcessOutput extends __SComponent {
    */
   clear() {
     this._content = [];
-    if (this._logBox) this._logBox.setContent('');
+    this._logBox.children.forEach((child) => {
+      child.destroy();
+    });
+    this._logBox.setContent('');
   }
 
   _processMarkdown(content) {
@@ -185,29 +182,9 @@ module.exports = class SProcessOutput extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   log(...args) {
-    // clearTimeout(this._logInterval);
-    // this._logInterval = setTimeout(() => {
-    //   console.log(this._content);
-    //   process.exit();
-    // }, 10000);
-
-    // clearTimeout(this._logTimeout);
-    // this._logTimeout = setTimeout(() => {
-    // if (this._content[0] && this._content[0].includes('Frontend Express')) {
-    //   console.log(this._content);
-    // }
-
     let logsArray = args;
 
-    // args.forEach((arg) => {
-    //   if (typeof arg !== 'string') return;
-    //   const lines = arg.split('\n');
-    //   linesArray = [...linesArray, ...lines];
-    // });
-
     logsArray = logsArray.filter((a) => {
-      // if (!a) return false;
-      // if (__stripAnsi(a).length <= 0) return false;
       if (typeof a !== 'string' || a.replace === undefined) return false;
       // if (a.trim() === '') return false;
       return true;
@@ -219,20 +196,20 @@ module.exports = class SProcessOutput extends __SComponent {
       if (log.includes('[?1049h')) {
         log = log.slice(40);
       } // ugly hack that need to be checked...
+      if (__stripAnsi(log).trim().length === 0) return;
 
       if (typeof log !== 'string') log = log.toString();
+      if (__stripAnsi(log).length == 0) return;
 
       if (!__isChildProcess()) {
         // check if we have a "group" at start
         const groupReg = /^\[([a-zA-Z0-9_-]+)\].*?/g;
+        // const groupMatch = groupReg.test(log);
         const groupMatch = groupReg.exec(log.trim());
 
-        // console.log(groupMatch);
-
+        // if (currentGroup || groupMatch) {
         if (currentGroup || (groupMatch && groupMatch[1])) {
           currentGroup = groupMatch ? groupMatch[1] : currentGroup;
-
-          // console.log(currentGroup);
 
           // process the arg
           log = log.replace(`[${currentGroup}]`, '').trim();
@@ -249,67 +226,151 @@ module.exports = class SProcessOutput extends __SComponent {
           if (actualGroupObjArray.length) {
             groupObj = actualGroupObjArray[0];
           } else {
-            this._content.push(groupObj);
+            if (this._content.indexOf(groupObj) === -1)
+              this._content.push(groupObj);
           }
           // append the new content to the group object
-          groupObj.content.push(this._processMarkdown(log));
+          const processedLog = this._processMarkdown(log);
+          if (groupObj.content.indexOf(processedLog) === -1)
+            groupObj.content.push(processedLog);
+
+          // update display
+          this.update();
         } else {
           // append simply the content
-          this._content.push(this._processMarkdown(log));
+          const processedLog = this._processMarkdown(log);
+          if (this._content.indexOf(processedLog) === -1)
+            this._content.push(processedLog);
         }
-
-        const processString = (string, color = 'primary') => {
-          return string;
-          if (color === 'red') string = ` <iCross/> ${string}`;
-
-          // split arg by lines
-          const argLinesArray = string.split('\n');
-          let finalLinesArray = [];
-          argLinesArray.forEach((line) => {
-            const lines = __splitEvery(line, this._logBox.width - 10);
-            finalLinesArray = [...finalLinesArray, ...lines];
-          });
-          finalLinesArray = finalLinesArray.map((line) => {
-            return __parseHtml(`<${color}>│</${color}> ${line}`);
-          });
-          return finalLinesArray.join('\n');
-        };
-
-        // console.log(this._content);
-
-        // this._createLogBox();
-        const contentArray = [];
-        // this._logBox.setContent('');
-        this._content.forEach((item) => {
-          if (typeof item === 'string') {
-            contentArray.push(item);
-            // this._logBox.pushLine(item);
-          } else if (typeof item === 'object' && item.group) {
-            const color =
-              item.group.toLowerCase() === 'error' ? 'red' : 'primary';
-            contentArray.push(
-              __parseHtml(`<${color}>│ ${__upperFirst(item.group)}</${color}>`)
-            );
-            contentArray.push(
-              processString(item.content[item.content.length - 1], color)
-            );
-            contentArray.push(' ');
-            contentArray.push(' ');
-          }
-        });
-        this._logBox.setContent(contentArray.join('\n'));
-        // this._logBox.screen.render();
       } else {
         console.log(log);
-        // console.log('<black> </black>');
       }
     });
-    if (this._logBox) this._logBox.setScrollPerc(100);
-    // }, 100);
   }
 
   /**
-   * @name          _generateUI
+   * @name          _simpleTextBox
+   * @type          Function
+   * @private
+   *
+   * This method take a text as input and return a blessed box
+   * representing this text to display
+   *
+   * @param       {String}        text        The text to display
+   * @return      {Blessed.box}               A blessed box instance
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _simpleTextBox(text) {
+    const $box = __blessed.box({
+      width:
+        this._logBox.width -
+        this._logBox.padding.left -
+        this._logBox.padding.right,
+      height: 'shrink',
+      style: {
+        fg: 'white'
+      },
+      scrollable: true,
+      padding: {
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0
+      },
+      content: __parseMarkdown(text)
+    });
+    // const $line = __blessed.box({
+    //   width: 1,
+    //   height: 1,
+    //   top: 0,
+    //   left: $box.padding.left * -1,
+    //   bottom: 0,
+    //   style: {
+    //     bg: __color('terminal.secondary').toString()
+    //   }
+    // });
+    $box.on('attach', () => {
+      setTimeout(() => {
+        $box.height = $box.getScrollHeight();
+        // $box.append($line);
+      });
+    });
+    return $box;
+  }
+
+  /**
+   * @name          _simpleTextBox
+   * @type          Function
+   * @private
+   *
+   * This method take a text as input and return a blessed box
+   * representing this text to display
+   *
+   * @param       {String}        text        The text to display
+   * @return      {Blessed.box}               A blessed box instance
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _groupBox(group, textsArray) {
+    const $box = __blessed.box({
+      width:
+        this._logBox.width -
+        this._logBox.padding.left -
+        this._logBox.padding.right,
+      height: 'shrink',
+      style: {
+        fg: 'white'
+      },
+      scrollable: true,
+      padding: {
+        top: 0,
+        left: 2,
+        right: 0,
+        bottom: 0
+      }
+    });
+
+    const color = group.toLowerCase().includes('error') ? 'red' : 'yellow';
+
+    const contentArray = [
+      group.toLowerCase().includes('error')
+        ? `<red>${group}</red>`
+        : `<yellow>${group}</yellow>`,
+      ...textsArray
+    ];
+
+    $box.setContent(__parseMarkdown(contentArray.join('\n')));
+
+    const $line = __blessed.box({
+      width: 1,
+      height: 1,
+      top: 0,
+      left: $box.padding.left * -1,
+      bottom: 0,
+      style: {
+        bg: 'yellow'
+      }
+    });
+
+    if (color === 'red') {
+      $line.style.bg = 'red';
+    }
+
+    $box.on('attach', () => {
+      setTimeout(() => {
+        $box.height = $box.getScrollHeight();
+        $line.height = $box.getScrollHeight();
+        $box.append($line);
+      });
+    });
+    return $box;
+  }
+
+  /**
+   * @name          _createLogBox
    * @type          Function
    * @private
    *
@@ -317,20 +378,14 @@ module.exports = class SProcessOutput extends __SComponent {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _generateUI() {
-    if (__isChildProcess()) return;
-
-    this._createLogBox();
-  }
-
   _createLogBox() {
-    if (this._logBox) {
-      this._logBox.destroy();
-      this._logBox = null;
-    }
+    // if (this._logBox) {
+    //   this._logBox.destroy();
+    //   this._logBox = null;
+    // }
 
     this._logBox = __blessed.box({
-      width: '100%',
+      width: '100%-4',
       top: 0,
       left: 0,
       right: 0,
@@ -350,8 +405,8 @@ module.exports = class SProcessOutput extends __SComponent {
       },
       padding: {
         top: 1,
-        left: 2,
-        right: 2,
+        left: 1,
+        right: 1,
         bottom: 1
       }
     });
@@ -360,7 +415,38 @@ module.exports = class SProcessOutput extends __SComponent {
   }
 
   update() {
-    // if (__isChildProcess()) return;
-    super.update();
+    if (__isChildProcess()) return;
+
+    clearTimeout(this._logTimeout);
+    this._logTimeout = setTimeout(() => {
+      if (!this.isDisplayed()) return;
+
+      let lastY = 1;
+      this._logBox.children.forEach((child) => {
+        child.destroy();
+      });
+
+      this._content.forEach((item) => {
+        try {
+          if (typeof item === 'string') {
+            const $box = this._simpleTextBox(item);
+            $box.top = lastY;
+            this._logBox.append($box);
+            lastY += $box.getScrollHeight() + 2;
+          } else if (typeof item === 'object' && item.group) {
+            const $box = this._groupBox(item.group, item.content);
+            $box.top = lastY;
+            this._logBox.append($box);
+            lastY += $box.getScrollHeight() + 2;
+          }
+        } catch (e) {
+          // throw e;
+        }
+      });
+      setTimeout(() => {
+        this._logBox.setScrollPerc(100);
+        super.update();
+      }, 100);
+    }, 200);
   }
 };

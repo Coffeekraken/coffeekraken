@@ -1,5 +1,3 @@
-const __packageRoot = require('../src/node/path/packageRoot');
-
 module.exports = {
   presets: [
     [

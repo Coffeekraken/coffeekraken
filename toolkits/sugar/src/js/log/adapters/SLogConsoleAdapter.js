@@ -58,7 +58,8 @@ export default class SLogConsoleAdapter {
           info: console.info,
           warn: console.warn,
           debug: console.debug,
-          error: console.error
+          error: console.error,
+          trace: console.trace
         }
       },
       settings
@@ -88,6 +89,9 @@ export default class SLogConsoleAdapter {
 
       // adapting the console method to use depending on the type
       switch (level) {
+        case 'trace':
+          consoleMethod = 'trace';
+          break;
         case 'error':
           consoleMethod = 'error';
           break;
@@ -105,14 +109,16 @@ export default class SLogConsoleAdapter {
       // log the message
       if (typeof message === 'string') {
         ((global || window).nativeConsole || console)[consoleMethod](
-          __consoleHtmlPreset(message)
+          '⠀' + __consoleHtmlPreset(message)
         );
       } else if (typeof message === 'object') {
         ((global || window).nativeConsole || console)[consoleMethod](
-          __formatObject(message)
+          '⠀' + __formatObject(message)
         );
       } else {
-        ((global || window).nativeConsole || console)[consoleMethod](message);
+        ((global || window).nativeConsole || console)[consoleMethod](
+          '⠀' + message
+        );
       }
 
       // resolve the promise

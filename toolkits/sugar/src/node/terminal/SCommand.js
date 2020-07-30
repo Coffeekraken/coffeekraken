@@ -272,6 +272,7 @@ module.exports = class SCommand extends __SPromise {
           summary: true,
           watch: null,
           key: null,
+          log: false,
           namespace: null,
           activeSpace: null,
           onKeyPress: null
@@ -542,6 +543,7 @@ module.exports = class SCommand extends __SPromise {
       `Starting the watch process for the command "<yellow>${this.name}</yellow>"...`
     );
     this.trigger('stdout.data', {
+      value: this.lastProcessObj.stdout[this.lastProcessObj.stdout.length - 1],
       name: this.name,
       ...this.lastProcessObj
     });
@@ -572,28 +574,28 @@ module.exports = class SCommand extends __SPromise {
       const path = data.toString().split(':')[1];
 
       if (action === 'new') {
-        this.lastProcessObj.stdout.push(
-          `A file has been <green>created</green>: <cyan>${path}</cyan>`
-        );
+        const msg = `A file has been <green>created</green>: <cyan>${path}</cyan>`;
+        this.lastProcessObj.stdout.push(msg);
         this.trigger('stdout.data', {
+          value: msg,
           name: this.name,
           ...this.lastProcessObj,
           path
         });
       } else if (action === 'update') {
-        this.lastProcessObj.stdout.push(
-          `A file has been <yellow>updated</yellow>: <cyan>${path}</cyan>`
-        );
+        const msg = `A file has been <yellow>updated</yellow>: <cyan>${path}</cyan>`;
+        this.lastProcessObj.stdout.push(msg);
         this.trigger('stdout.data', {
+          value: msg,
           name: this.name,
           ...this.lastProcessObj,
           path
         });
       } else if (action === 'delete') {
-        this.lastProcessObj.stdout.push(
-          `A file has been <red>deleted</red>: <cyan>${path}</cyan>`
-        );
+        const msg = `A file has been <red>deleted</red>: <cyan>${path}</cyan>`;
+        this.lastProcessObj.stdout.push(msg);
         this.trigger('stdout.data', {
+          value: msg,
           name: this.name,
           ...this.lastProcessObj,
           path
@@ -691,7 +693,7 @@ module.exports = class SCommand extends __SPromise {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  async run(argsObj = this._settings.argsObj, skipAsk = true) {
+  run(argsObj = this._settings.argsObj, skipAsk = true) {
     if (this._destroyed) {
       throw new Error(
         `Sorry but this command named "${this.name}" has been destroyed...`
@@ -703,102 +705,122 @@ module.exports = class SCommand extends __SPromise {
       );
     }
 
-    if (this._settings.watch) this.unwatch();
+    const promise = new __SPromise(async (resolve, reject, trigger, cancel) => {
+      if (this._settings.watch) this.unwatch();
 
-    // check if we have a before function to launch
-    if (this._settings.before && typeof this._settings.before === 'function') {
-      const result = await this._settings.before(this);
-      if (result !== true) {
-        throw new Error(result);
+      // check if we have a before function to launch
+      if (
+        this._settings.before &&
+        typeof this._settings.before === 'function'
+      ) {
+        const result = await this._settings.before(this);
+        if (result !== true) {
+          throw new Error(result);
+        }
       }
-    }
 
-    clearTimeout(this._currentProcessSuccessTimeout);
-    this._currentProcess = {};
+      clearTimeout(this._currentProcessSuccessTimeout);
+      this._currentProcess = {};
 
-    if (!skipAsk) {
+      if (!skipAsk) {
+        if (this._command instanceof __SCli) {
+          const answer = await this._ask({
+            type: 'summary',
+            items: this._buildSummaryItems(argsObj, this._command.definitionObj)
+          });
+          if (!Array.isArray(answer)) return;
+          answer.forEach((item) => {
+            argsObj[item.id] = item.value;
+          });
+        }
+      }
+
+      // notification
+      if (this._settings.notification) {
+        __notifier.notify({
+          title: this.name,
+          message: `Starting the command "${this.name}"`,
+          icon: this._settings.notification.runIconPath || false, // Absolute path (doesn't work on balloons)
+          sound: false, // Only Notification Center or Windows Toasters
+          wait: false // Wait with callback, until user action is taken against notification, does not apply to Windows Toasters as they always wait or notify-send as it does not support the wait option
+        });
+      }
+
       if (this._command instanceof __SCli) {
-        const answer = await this._ask({
-          type: 'summary',
-          items: this._buildSummaryItems(argsObj, this._command.definitionObj)
-        });
-        if (!Array.isArray(answer)) return;
-        answer.forEach((item) => {
-          argsObj[item.id] = item.value;
-        });
+        this._currentProcess.childProcessPromise = this._runSCli(argsObj);
+      } else if (typeof this._command === 'string') {
+        this._currentProcess.childProcessPromise = __spawn(
+          __replaceTokens(this._command, argsObj)
+        );
       }
-    }
 
-    // notification
-    if (this._settings.notification) {
-      __notifier.notify({
-        title: this.name,
-        message: `Starting the command "${this.name}"`,
-        icon: this._settings.notification.runIconPath || false, // Absolute path (doesn't work on balloons)
-        sound: false, // Only Notification Center or Windows Toasters
-        wait: false // Wait with callback, until user action is taken against notification, does not apply to Windows Toasters as they always wait or notify-send as it does not support the wait option
+      this._processesStack.push(this._currentProcess);
+
+      if (this._settings.log) {
+        __SPromise.log(
+          this._currentProcess.childProcessPromise,
+          this._settings.log === true ? {} : this._settings.log
+        );
+      }
+
+      // init the child process
+      this._currentProcess.childProcessPromise.on('*', (data, stack) => {
+        this._processesStack[this._processesStack.length - 1] = {
+          ...this._processesStack[this._processesStack.length - 1],
+          ...(data && data.process ? data.process : data || {})
+        };
       });
-    }
+      this._currentProcess.childProcessPromise.on('close', (data) => {
+        this._currentProcess = null;
+        console.log(`#success sss ${data.code} - ${data.signal}`);
+        // if (data.code === 0 && !data.signal) return;
+        if (this._settings.notification) {
+          __notifier.notify({
+            title: this.name,
+            message: `Command closed with code "${data.code}" and signal ${data.signal}`,
+            icon: this._settings.notification.errorIconPath || false, // Absolute path (doesn't work on balloons)
+            sound: false, // Only Notification Center or Windows Toasters
+            wait: false // Wait with callback, until user action is taken against notification, does not apply to Windows Toasters as they always wait or notify-send as it does not support the wait option
+          });
+        }
+      });
+      this._currentProcess.childProcessPromise.on('success', () => {
+        if (this._settings.notification) {
+          __notifier.notify({
+            title: this.name,
+            message: `Command finished successfully!`,
+            icon: this._settings.notification.successIconPath || false, // Absolute path (doesn't work on balloons)
+            sound: false, // Only Notification Center or Windows Toasters
+            wait: false // Wait with callback, until user action is taken against notification, does not apply to Windows Toasters as they always wait or notify-send as it does not support the wait option
+          });
+        }
+        this._currentProcessSuccessTimeout = setTimeout(() => {
+          if (this._settings.watch) this.watch();
+        }, 2000);
+      });
+      this._currentProcess.childProcessPromise.on('error', () => {
+        if (this._settings.notification) {
+          __notifier.notify({
+            title: this.name,
+            message: `Error!`,
+            icon: this._settings.notification.errorIconPath || false, // Absolute path (doesn't work on balloons)
+            sound: false, // Only Notification Center or Windows Toasters
+            wait: false // Wait with callback, until user action is taken against notification, does not apply to Windows Toasters as they always wait or notify-send as it does not support the wait option
+          });
+        }
+      });
 
-    if (this._command instanceof __SCli) {
-      this._currentProcess.childProcessPromise = this._runSCli(argsObj);
-    } else if (typeof this._command === 'string') {
-      this._currentProcess.childProcessPromise = __spawn(
-        __replaceTokens(this._command, argsObj)
-      );
-    }
-
-    this._processesStack.push(this._currentProcess);
-
-    // init the child process
-    this._currentProcess.childProcessPromise.on('*', (data, stack) => {
-      this._processesStack[this._processesStack.length - 1] = {
-        ...this._processesStack[this._processesStack.length - 1],
-        ...(data && data.process ? data.process : data || {})
-      };
-    });
-    this._currentProcess.childProcessPromise.on('close', (data) => {
-      this._currentProcess = null;
-      if (data.code === 0 && !data.signal) return;
-      if (this._settings.notification) {
-        __notifier.notify({
-          title: this.name,
-          message: `Command closed with code "${data.code}" and signal ${data.signal}`,
-          icon: this._settings.notification.errorIconPath || false, // Absolute path (doesn't work on balloons)
-          sound: false, // Only Notification Center or Windows Toasters
-          wait: false // Wait with callback, until user action is taken against notification, does not apply to Windows Toasters as they always wait or notify-send as it does not support the wait option
-        });
+      // check if we have an after function to launch
+      if (this._settings.after && typeof this._settings.after === 'function') {
+        const result = await this._settings.after(this);
+        if (result !== true) {
+          throw new Error(result);
+        }
       }
-    });
-    this._currentProcess.childProcessPromise.on('success', () => {
-      if (this._settings.notification) {
-        __notifier.notify({
-          title: this.name,
-          message: `Command finished successfully!`,
-          icon: this._settings.notification.successIconPath || false, // Absolute path (doesn't work on balloons)
-          sound: false, // Only Notification Center or Windows Toasters
-          wait: false // Wait with callback, until user action is taken against notification, does not apply to Windows Toasters as they always wait or notify-send as it does not support the wait option
-        });
-      }
-      this._currentProcessSuccessTimeout = setTimeout(() => {
-        if (this._settings.watch) this.watch();
-      }, 2000);
-    });
-    this._currentProcess.childProcessPromise.on('error', () => {
-      if (this._settings.notification) {
-        __notifier.notify({
-          title: this.name,
-          message: `Error!`,
-          icon: this._settings.notification.errorIconPath || false, // Absolute path (doesn't work on balloons)
-          sound: false, // Only Notification Center or Windows Toasters
-          wait: false // Wait with callback, until user action is taken against notification, does not apply to Windows Toasters as they always wait or notify-send as it does not support the wait option
-        });
-      }
-    });
 
-    const promise = new __SPromise((resolve, reject, trigger, cancel) => {})
-      .on('cancel,finally', () => {})
-      .start();
+      const result = await this._currentProcess.childProcessPromise;
+      resolve(result);
+    }).start();
 
     __SPromise.pipe(this._currentProcess.childProcessPromise, promise, {
       processor: (value, stacks) => {
@@ -812,14 +834,6 @@ module.exports = class SCommand extends __SPromise {
         return value;
       }
     });
-
-    // check if we have an after function to launch
-    if (this._settings.after && typeof this._settings.after === 'function') {
-      const result = await this._settings.after(this);
-      if (result !== true) {
-        throw new Error(result);
-      }
-    }
 
     // return the promise
     return promise;

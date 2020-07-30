@@ -160,7 +160,7 @@ export default class SActionStream extends __SPromise {
         await __wait(50); // ugly hack to check when have time...
 
         // starting log
-        const startString = `# Starting the stream "<cyan>${
+        const startString = `#start Starting the stream "<cyan>${
           settings.name || 'unnamed'
         }</cyan>"`;
         this.log(startString);
@@ -581,7 +581,10 @@ export default class SActionStream extends __SPromise {
         this.dispatch('complete', overallActionsStats);
         resolve(overallActionsStats);
 
-        if (this._settings.exitOnComplete) process.exit(this._exitCode);
+        if (this._settings.exitOnComplete) {
+          console.log('#error ENDNE');
+          process.exit(this._exitCode);
+        }
       }
     )
       .on('cancel', () => {
@@ -596,7 +599,10 @@ export default class SActionStream extends __SPromise {
         // trigger some cancel events
         this.trigger('cancel');
         // exit process (has to be rethink)
-        if (this._settings.exitOnComplete) process.exit(this._exitCode);
+        if (this._settings.exitOnComplete) {
+          console.log('ENDNE');
+          process.exit(this._exitCode);
+        }
       })
       .start();
 

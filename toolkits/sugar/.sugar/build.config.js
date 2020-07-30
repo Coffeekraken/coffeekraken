@@ -1,9 +1,4 @@
 const __packageRoot = require('../node/path/packageRoot');
-const __isInPackage = require('../node/path/isInPackage');
-
-function isInSugarPackage() {
-  return __isInPackage('@coffeekraken/sugar', process.cwd(), true);
-}
 
 module.exports = {
   scss: {

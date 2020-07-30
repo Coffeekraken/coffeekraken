@@ -152,6 +152,12 @@ module.exports = function spawn(
     // save the process
     __registerProcess(promise);
 
+    // before start
+    promise.trigger('beforeStart', {
+      time: Date.now(),
+      process: runningProcess
+    });
+
     // start
     runningProcess.state = 'running';
     promise.trigger('start', {
@@ -232,13 +238,20 @@ module.exports = function spawn(
     });
 
     // stdout data
-    childProcess.stdout.on('data', (value) => {
-      // console.log('data', value.toString());
-      runningProcess.stdout.push(value.toString());
-      promise.trigger('stdout.data', {
-        process: runningProcess,
-        time: Date.now(),
-        value: value.toString()
+    let triggerBuffer = 0;
+    childProcess.stdout.on('data', async (value) => {
+      const logsArray = value
+        .toString()
+        .split('⠀')
+        .filter((l) => l !== '');
+
+      logsArray.forEach(async (log) => {
+        runningProcess.stdout.push(log);
+        await promise.trigger('stdout.data', {
+          process: runningProcess,
+          time: Date.now(),
+          value: log
+        });
       });
     });
 

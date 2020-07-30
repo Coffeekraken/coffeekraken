@@ -55,9 +55,13 @@ module.exports = class SConfigFolderAdapter extends __SConfigAdapter {
 
     // load the default config if exists
     if (
+      !process.env[`SConfigFolderAdapter-${this.settings.defaultConfigPath}`] &&
       this.settings.defaultConfigPath &&
       __fs.existsSync(this.settings.defaultConfigPath)
     ) {
+      process.env[
+        `SConfigFolderAdapter-${this.settings.defaultConfigPath}`
+      ] = true;
       __fs.readdirSync(this.settings.defaultConfigPath).forEach((file) => {
         if (!file.includes(this.settings.filename.replace('[name]', '')))
           return;
@@ -68,13 +72,25 @@ module.exports = class SConfigFolderAdapter extends __SConfigAdapter {
           '/' +
           file);
       });
+      process.env[
+        `SConfigFolderAdapter-${this.settings.defaultConfigPath}`
+      ] = JSON.stringify(this._defaultConfig);
+    } else if (
+      process.env[`SConfigFolderAdapter-${this.settings.defaultConfigPath}`]
+    ) {
+      this._defaultConfig = JSON.parse(
+        process.env[`SConfigFolderAdapter-${this.settings.defaultConfigPath}`]
+      );
     }
 
     // load the app config if exists
     if (
+      !process.env[`SConfigFolderAdapter-${this.settings.appConfigPath}`] &&
+      this.settings.defaultConfigPath !== this.settings.appConfigPath &&
       this.settings.appConfigPath &&
       __fs.existsSync(this.settings.appConfigPath)
     ) {
+      process.env[`SConfigFolderAdapter-${this.settings.appConfigPath}`] = true; // intermediate value
       __fs.readdirSync(this.settings.appConfigPath).forEach((file) => {
         if (!file.includes(this.settings.filename.replace('[name]', '')))
           return;
@@ -83,13 +99,28 @@ module.exports = class SConfigFolderAdapter extends __SConfigAdapter {
           '/' +
           file);
       });
+      process.env[
+        `SConfigFolderAdapter-${this.settings.appConfigPath}`
+      ] = JSON.stringify(this._appConfig);
+    } else if (
+      process.env[`SConfigFolderAdapter-${this.settings.appConfigPath}`]
+    ) {
+      this._appConfig = JSON.parse(
+        process.env[`SConfigFolderAdapter-${this.settings.appConfigPath}`]
+      );
     }
 
     // load the user config
     if (
+      !process.env[`SConfigFolderAdapter-${this.settings.userConfigPath}`] &&
+      this.settings.defaultConfigPath !== this.settings.userConfigPath &&
+      this.settings.appConfigPath !== this.settings.userConfigPath &&
       this.settings.userConfigPath &&
       __fs.existsSync(this.settings.userConfigPath)
     ) {
+      process.env[
+        `SConfigFolderAdapter-${this.settings.userConfigPath}`
+      ] = true; // intermediate value
       __fs.readdirSync(this.settings.userConfigPath).forEach((file) => {
         if (!file.includes(this.settings.filename.replace('[name]', '')))
           return;
@@ -98,6 +129,15 @@ module.exports = class SConfigFolderAdapter extends __SConfigAdapter {
           '/' +
           file);
       });
+      process.env[
+        `SConfigFolderAdapter-${this.settings.userConfigPath}`
+      ] = JSON.stringify(this._userConfig);
+    } else if (
+      process.env[`SConfigFolderAdapter-${this.settings.userConfigPath}`]
+    ) {
+      this._userConfig = JSON.parse(
+        process.env[`SConfigFolderAdapter-${this.settings.userConfigPath}`]
+      );
     }
 
     // mix the configs and save them in the instance

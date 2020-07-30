@@ -23,23 +23,21 @@ module.exports = function parseMarkdown(message) {
   }
 
   message = message.map((m) => {
-    if (m.match(/^#\s/)) {
-      m = `<h1>${m.replace(/^#\s/, '')}</h1>`;
+    const h1Reg = /#\s(.*\n?)/g;
+    const h1Matches = m.match(h1Reg);
+    if (h1Matches) {
+      m = m.replace(
+        h1Matches[0],
+        `<h1>${h1Matches[0].replace(/^#\s/, '').trim()}</h1>`
+      );
     }
-    if (m.match(/^##\s/)) {
-      m = `<h2>${m.replace(/^##\s/, '')}</h2>`;
-    }
-    if (m.match(/^###\s/)) {
-      m = `<h3>${m.replace(/^###\s/, '')}</h3>`;
-    }
-    if (m.match(/^####\s/)) {
-      m = `<h4>${m.replace(/^####\s/, '')}</h4>`;
-    }
-    if (m.match(/^#####\s/)) {
-      m = `<h5>${m.replace(/^#####\s/, '')}</h5>`;
-    }
-    if (m.match(/^######\s/)) {
-      m = `<h6>${m.replace(/^######\s/, '')}</h6>`;
+    const h2Reg = /##\s(.*\n?)/g;
+    const h2Matches = m.match(h2Reg);
+    if (h2Matches) {
+      m = m.replace(
+        h2Matches[0],
+        `<h2>${h2Matches[0].replace(/^##\s/, '').trim()}</h2>`
+      );
     }
 
     if (m.match(/^#success\s/)) {

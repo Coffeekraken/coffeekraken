@@ -114,7 +114,7 @@ module.exports = {
        * @since         2.0.0
        * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      handler: require('../src/node/server/frontend/handlers/views')
+      handler: `${__dirname}/../src/node/server/frontend/handlers/views`
     },
 
     /**
@@ -164,7 +164,7 @@ module.exports = {
        * @since         2.0.0
        * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      handler: require('../src/node/server/frontend/handlers/doc')
+      handler: `${__dirname}/../src/node/server/frontend/handlers/doc`
     },
 
     /**
@@ -214,7 +214,7 @@ module.exports = {
        * @since         2.0.0
        * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      handler: require('../src/node/server/frontend/handlers/styleguide')
+      handler: `${__dirname}/../src/node/server/frontend/handlers/styleguide`
     },
 
     /**
@@ -264,7 +264,7 @@ module.exports = {
        * @since         2.0.0
        * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      handler: require('../src/node/server/frontend/handlers/search'),
+      handler: `${__dirname}/../src/node/server/frontend/handlers/search`,
 
       /**
        * @name        settings
@@ -282,7 +282,7 @@ module.exports = {
         rules: {
           docMap: {
             keyword: 'doc',
-            handler: require('../src/node/search/handlers/docMap'),
+            handler: `${__dirname}/../src/node/search/handlers/docMap`,
             settings: {
               filePath: `${__packageRoot()}/docMap.json`
             }

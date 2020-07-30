@@ -81,7 +81,8 @@ let SLogConsoleAdapter = /*#__PURE__*/function () {
         info: console.info,
         warn: console.warn,
         debug: console.debug,
-        error: console.error
+        error: console.error,
+        trace: console.trace
       }
     }, settings);
   }
@@ -111,6 +112,10 @@ let SLogConsoleAdapter = /*#__PURE__*/function () {
         let consoleMethod = 'log'; // adapting the console method to use depending on the type
 
         switch (level) {
+          case 'trace':
+            consoleMethod = 'trace';
+            break;
+
           case 'error':
             consoleMethod = 'error';
             break;
@@ -130,11 +135,11 @@ let SLogConsoleAdapter = /*#__PURE__*/function () {
 
 
         if (typeof message === 'string') {
-          ((global || window).nativeConsole || console)[consoleMethod]((0, _console.default)(message));
+          ((global || window).nativeConsole || console)[consoleMethod]('⠀' + (0, _console.default)(message));
         } else if (typeof message === 'object') {
-          ((global || window).nativeConsole || console)[consoleMethod]((0, _fmtObj.default)(message));
+          ((global || window).nativeConsole || console)[consoleMethod]('⠀' + (0, _fmtObj.default)(message));
         } else {
-          ((global || window).nativeConsole || console)[consoleMethod](message);
+          ((global || window).nativeConsole || console)[consoleMethod]('⠀' + message);
         } // resolve the promise
 
 

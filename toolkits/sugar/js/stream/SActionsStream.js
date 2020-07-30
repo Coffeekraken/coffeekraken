@@ -202,7 +202,7 @@ let SActionStream = /*#__PURE__*/function (_SPromise) {
         await (0, _wait.default)(50); // ugly hack to check when have time...
         // starting log
 
-        const startString = `# Starting the stream "<cyan>${settings.name || 'unnamed'}</cyan>"`;
+        const startString = `#start Starting the stream "<cyan>${settings.name || 'unnamed'}</cyan>"`;
         this.log(startString); // check if is a "before" setting function
 
         if (settings.before && settings.before.length) {
@@ -490,7 +490,11 @@ let SActionStream = /*#__PURE__*/function (_SPromise) {
 
         this.dispatch('complete', overallActionsStats);
         resolve(overallActionsStats);
-        if (this._settings.exitOnComplete) process.exit(this._exitCode);
+
+        if (this._settings.exitOnComplete) {
+          console.log('#error ENDNE');
+          process.exit(this._exitCode);
+        }
       }).on('cancel', () => {
         canceled = true; // check if the current action returned value is a promise cancelable
 
@@ -501,7 +505,10 @@ let SActionStream = /*#__PURE__*/function (_SPromise) {
 
         this.trigger('cancel'); // exit process (has to be rethink)
 
-        if (this._settings.exitOnComplete) process.exit(this._exitCode);
+        if (this._settings.exitOnComplete) {
+          console.log('ENDNE');
+          process.exit(this._exitCode);
+        }
       }).start();
       return this._currentSPromise;
     }

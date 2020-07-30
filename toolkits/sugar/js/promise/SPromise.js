@@ -216,7 +216,8 @@ let SPromise = /*#__PURE__*/function (_Promise) {
       settings = (0, _deepMerge.default)({
         stacks: '*',
         processor: null
-      }, settings); // listen for all on the source promise
+      }, settings);
+      if (!(sourceSPromise instanceof SPromise) || !(destSPromise instanceof SPromise)) return; // listen for all on the source promise
 
       sourceSPromise.on(settings.stacks, (value, stack) => {
         // check if need to process the value
@@ -245,11 +246,15 @@ let SPromise = /*#__PURE__*/function (_Promise) {
     value: function log(sourceSPromise, settings = {}) {
       // settings
       settings = (0, _deepMerge.default)({
+        filter: null,
         stacks: 'stdout.data,stderr.data'
-      }, settings); // listen for all on the source promise
+      }, settings);
+      if (!(sourceSPromise instanceof SPromise)) return; // listen for all on the source promise
 
       sourceSPromise.on(settings.stacks, (value, stack) => {
-        console.log(value);
+        if (settings.filter && !settings.filter(value, stack)) return;
+        const msg = value.value ? value.value : value;
+        console.log(msg);
       });
     }
     /**

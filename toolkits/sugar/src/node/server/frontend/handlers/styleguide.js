@@ -7,6 +7,7 @@ const __SBuildScssActionsStream = require('../../../build/scss/SBuildScssActions
 const __SPromise = require('../../../promise/SPromise');
 const __SDocblock = require('../../../docblock/SDocblock');
 const __SBuildScssCommand = require('../../../build/scss/SBuildScssCommand');
+const __SBuildScssCli = require('../../../build/scss/SBuildScssCli');
 
 /**
  * @name                styleguide
@@ -67,16 +68,23 @@ module.exports = function styleguide(req, server) {
         // __SPromise.log(styleguidePromise);
         // const styleguideRes = await styleguidePromise;
         // console.log('RES', styleguideRes);
-        // const buildScssCommand = new __SBuildScssCommand({
-        //   // forceChildProcess: true
-        // });
-        // const styleguidePromise = buildScssCommand.run({
-        //   input: `${packagePath}/${sugarJson.scss.styleguide}`,
-        //   sugarJsonDirs: packagePath
-        // });
-        // __SPromise.log(styleguidePromise);
-        // const styleguideRes = await styleguidePromise;
-        // console.log('RES', styleguideRes);
+        const buildScssCommand = new __SBuildScssCommand(
+          {},
+          {
+            log: {
+              filter: (value, stack) => {
+                const msg = (value.value || value).toString();
+                return msg.match(/^#[a-zA-Z0-9]+\s/);
+              }
+            }
+          }
+        );
+        const styleguidePromise = buildScssCommand.run({
+          input: `${packagePath}/${sugarJson.scss.styleguide}`,
+          sugarJsonDirs: packagePath
+        });
+        const styleguideRes = await styleguidePromise;
+        console.log('RES', styleguideRes);
         // parsing the docblock
         // const docblock = new __SDocblock(styleguideRes.streamObj.data);
         // // set the blocks

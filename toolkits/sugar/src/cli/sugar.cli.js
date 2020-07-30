@@ -21,9 +21,9 @@ let action = command.split('.')[1] || null;
 const args = process.argv.slice(3).join(' ') || '';
 
 // handle clean exit
-if (!__isChildProcess()) {
-  __exitCleanup();
-}
+// if (!__isChildProcess()) {
+//   __exitCleanup();
+// }
 
 // if theirs nothing as stack or action
 if (!stack) {

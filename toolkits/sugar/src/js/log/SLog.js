@@ -77,6 +77,14 @@ export default class SLog {
       settings
     );
 
+    // ensure every adapters are a class instance
+    Object.keys(this._settings.adapters).forEach((adapterName) => {
+      if (typeof this._settings.adapters[adapterName] === 'string') {
+        const cls = require(this._settings.adapters[adapterName]);
+        this._settings.adapters[adapterName] = new cls();
+      }
+    });
+
     // if needed, override the native console
     if (this._settings.overrideNativeConsole) {
       this._overrideNativeConsole();
@@ -113,6 +121,9 @@ export default class SLog {
         },
         error: function (...args) {
           _this.error(...args);
+        },
+        trace: function (...args) {
+          _this.trace(...args);
         }
       };
     })((global || window).console);
@@ -137,7 +148,9 @@ export default class SLog {
       messages = [];
     args.forEach((v) => {
       if (typeof v === 'string') {
-        if (['log', 'warn', 'info', 'error', 'debug'].indexOf(v) !== -1) {
+        if (
+          ['log', 'warn', 'info', 'error', 'debug', 'trace'].indexOf(v) !== -1
+        ) {
           level = v;
           return;
         }
@@ -297,5 +310,26 @@ export default class SLog {
   async error(message, adapters = null) {
     // call the internal _log method and return his result
     return this._log(message, adapters, 'error');
+  }
+
+  /**
+   * @name            trace
+   * @type            Function
+   * @async
+   *
+   * The trace method that log a message with the "trace" level
+   *
+   * @param           {Mixed}           message             The message to log
+   * @param           {String|Array}    [adapters=null]     The list of adapters you want to use for this message. Can be an Array like ['console','mail'], or a comma separated String like "console,mail"
+   * @return          {Promise}                             A promise that will be resolved once the message has been correctly logged through all adapters
+   *
+   * @example         js
+   * await logger.trace('Something cool');
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  async trace(message, adapters = null) {
+    // call the internal _log method and return his result
+    return this._log(message, adapters, 'trace');
   }
 }

@@ -142,8 +142,13 @@ module.exports = class SCommandPanel extends __SComponent {
 
     // pipe all commands "events" to the _sPromise internal promise
     this._sPromise = new __SPromise(() => {}).start();
-    this._commands.forEach((commandInstance) => {
+    this._commands.forEach((commandInstance, i) => {
       if (!commandInstance.on) return;
+      commandInstance.on('beforeStart', () => {
+        const boxObj = this._boxesObjectsMap.get(commandInstance);
+        boxObj.$log.clear();
+        boxObj.$log.update();
+      });
       __SPromise.pipe(commandInstance, this._sPromise);
     });
 
@@ -162,9 +167,18 @@ module.exports = class SCommandPanel extends __SComponent {
     this._displayedCommands.push(this._commands[0]);
 
     // update the list continusly
-    this._updateListInterval = setInterval(this._updateList.bind(this), 100);
-    this.screen.on('destroy', () => {
-      clearInterval(this._updateListInterval);
+    // this._updateListInterval = setInterval(this._updateList.bind(this), 100);
+    // this.screen.on('destroy', () => {
+    //   clearInterval(this._updateListInterval);
+    // });
+    //
+
+    // select first list item
+    this._selectListItem(0);
+
+    // update the list
+    setTimeout(() => {
+      this._updateList();
     });
   }
 
@@ -312,6 +326,12 @@ module.exports = class SCommandPanel extends __SComponent {
    */
   _selectListItem(idx) {
     if (!this._multiSelect) this._displayedCommands = [];
+
+    // remove all the panels
+    this.$log.children.forEach((child) => {
+      child.detach();
+    });
+
     this.$list.items.forEach((item, j) => {
       if (idx === j) {
         item.selected = true;
@@ -334,7 +354,16 @@ module.exports = class SCommandPanel extends __SComponent {
         delete item.selected;
       }
     });
-    this._updateList();
+
+    this._commands.forEach((commandInstance) => {
+      let boxObj = this._boxesObjectsMap.get(commandInstance);
+      if (this._displayedCommands.indexOf(commandInstance) === -1) {
+      } else {
+        this.$log.append(boxObj.$box);
+      }
+    });
+
+    // this._updateList();
     this.update();
   }
 
@@ -402,7 +431,7 @@ module.exports = class SCommandPanel extends __SComponent {
       boxObj.$log = new __SProcessOutput(commandInstance, {
         width: '100%-4',
         height: 0,
-        top: 2,
+        top: 0,
         left: 0,
         right: 0,
         style: {
@@ -422,10 +451,10 @@ module.exports = class SCommandPanel extends __SComponent {
           }
         },
         padding: {
-          top: 1,
+          top: 0,
           left: 2,
           right: 2,
-          bottom: 1
+          bottom: 0
         }
       });
       boxObj.$actions = __blessed.box({
@@ -487,7 +516,7 @@ module.exports = class SCommandPanel extends __SComponent {
       boxObj.$box.append(boxObj.$log);
 
       // append it in the logBox
-      this.$log.append(boxObj.$box);
+      // this.$log.append(boxObj.$box);
 
       this._boxesObjectsMap.set(commandInstance, boxObj);
     });
@@ -566,8 +595,13 @@ module.exports = class SCommandPanel extends __SComponent {
     this.$list.on('select', (e, i) => {
       this._selectListItem(i);
     });
-    this.$list.items[0].active = true;
-    this.$list.items[0].selected = true;
+    this._commands.forEach((commandInstance, i) => {
+      const item = this.$list.getItem(i);
+      item.commandInstance = commandInstance;
+    });
+
+    // this.$list.items[0].active = true;
+    // this.$list.items[0].selected = true;
 
     let pressTimeout, pressInitialiser;
     const pressed = () => {
@@ -607,7 +641,7 @@ module.exports = class SCommandPanel extends __SComponent {
       bottom: 0,
       style: {
         fg: 'white',
-        bg: 'red'
+        bg: 'cyan'
       },
       mouse: true,
       keys: true,
@@ -671,7 +705,6 @@ module.exports = class SCommandPanel extends __SComponent {
     // console.log('DU', Date.now());
     this._commands.forEach((commandInstance, i) => {
       const item = this.$list.getItem(i);
-      if (!item.commandInstance) item.commandInstance = commandInstance;
 
       if (!item.$key) {
         item.$key = __blessed.box({
@@ -1023,15 +1056,15 @@ module.exports = class SCommandPanel extends __SComponent {
   _updateCommandBoxesLayout() {
     let currentTop = 0;
 
-    this._commands.forEach((commandInstance) => {
-      let boxObj = this._boxesObjectsMap.get(commandInstance);
-      if (this._displayedCommands.indexOf(commandInstance) === -1) {
-        if (!boxObj.$box) return;
-        boxObj.$box.detach();
-      } else {
-        this.$log.append(boxObj.$box);
-      }
-    });
+    // this._commands.forEach((commandInstance) => {
+    //   let boxObj = this._boxesObjectsMap.get(commandInstance);
+    //   if (this._displayedCommands.indexOf(commandInstance) === -1) {
+    //     if (!boxObj.$box) return;
+    //     boxObj.$box.detach();
+    //   } else {
+    //     this.$log.append(boxObj.$box);
+    //   }
+    // });
 
     this._displayedCommands.forEach((commandInstance, i) => {
       const boxObj = this._boxesObjectsMap.get(commandInstance);

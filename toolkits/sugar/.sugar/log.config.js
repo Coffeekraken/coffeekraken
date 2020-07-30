@@ -1,9 +1,8 @@
-const __SLogConsoleAdapter = require('../node/log/adapters/SLogConsoleAdapter');
 // TODO: doc
 
 module.exports = {
   adapters: {
-    console: new __SLogConsoleAdapter({})
+    console: `${__dirname}/../node/log/adapters/SLogConsoleAdapter`
   },
   adaptersByLevel: {
     log: null,

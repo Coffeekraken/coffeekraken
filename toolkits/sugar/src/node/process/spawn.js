@@ -2,6 +2,7 @@ const __childProcess = require('child_process');
 const __deepMerge = require('../object/deepMerge');
 const __SPromise = require('../promise/SPromise');
 const __uniqid = require('../string/uniqid');
+const __parse = require('../string/parse');
 const __hotkey = require('../keyboard/hotkey');
 const __tkill = require('tree-kill');
 const __registerProcess = require('./registerProcess');
@@ -88,7 +89,7 @@ module.exports = function spawn(
     argsArray = [],
     spawnSettings = {}
   ) {
-    const pro = new Promise(async (resolve, reject) => {
+    const pro = new __SPromise(async (resolve, reject) => {
       let result = true;
       promise.trigger(`${when}.start`, {
         time: Date.now()
@@ -165,76 +166,59 @@ module.exports = function spawn(
       process: runningProcess
     });
 
-    // close
-    childProcess.on('close', (code, signal) => {
+    let finished = false;
+    const resolveOrReject = async (what, extendObj = {}, code, signal) => {
+      if (finished) return;
+      finished = true;
+
       runningProcess.end = Date.now();
       runningProcess.duration = runningProcess.end - runningProcess.start;
 
-      const resolveOrReject = async (what, extendObj = {}) => {
-        if (settings.after) {
-          await runBeforeAfterCommand('after', command, [], spawnSettings);
-        }
-        promise.trigger('close', {
-          code,
-          signal,
-          time: Date.now(),
-          process: runningProcess
-        });
-        promise[what]({
-          ...extendObj,
-          code,
-          signal,
-          time: Date.now(),
-          process: runningProcess
-        });
-      };
+      if (settings.after) {
+        await runBeforeAfterCommand('after', command, [], spawnSettings);
+      }
+      promise[what]({
+        ...extendObj,
+        code,
+        signal,
+        time: Date.now(),
+        process: runningProcess
+      });
+    };
 
+    // close
+    childProcess.on('close', (code, signal) => {
       if (!code && signal) {
         runningProcess.state = 'killed';
-        promise.trigger('kill', {
-          code,
-          signal,
-          time: Date.now(),
-          process: runningProcess
-        });
-        resolveOrReject('reject');
+        resolveOrReject('reject', {}, code, signal);
       } else if (code === 0 && !signal) {
+        // console.log('CC');
         runningProcess.state = 'success';
-        promise.trigger('success', {
-          code,
-          signal,
-          time: Date.now(),
-          process: runningProcess
-        });
-        resolveOrReject('resolve');
+        resolveOrReject('resolve', {}, code, signal);
       } else {
         runningProcess.state = 'error';
-        promise.trigger('error', {
-          error: runningProcess.stderr.join('\n'),
+        resolveOrReject(
+          'reject',
+          {
+            error: runningProcess.stderr.join('\n')
+          },
           code,
-          signal,
-          time: Date.now(),
-          process: runningProcess
-        });
-        resolveOrReject('reject', {
-          error: runningProcess.stderr.join('\n')
-        });
+          signal
+        );
       }
     });
 
     // error
     childProcess.on('error', (error) => {
-      runningProcess.end = Date.now();
-      runningProcess.duration = runningProcess.end - runningProcess.start;
       runningProcess.state = 'error';
-      promise.trigger('error', {
-        error,
-        time: Date.now(),
-        process: runningProcess
-      });
-      resolveOrReject({
-        error
-      });
+      resolveOrReject(
+        'reject',
+        {
+          error
+        },
+        1,
+        null
+      );
     });
 
     // stdout data
@@ -245,14 +229,29 @@ module.exports = function spawn(
         .split('⠀')
         .filter((l) => l !== '');
 
-      logsArray.forEach(async (log) => {
+      // logsArray.forEach(async (log) => {
+      for (let log of logsArray) {
+        const resultReg = /^#result\s(.*)$/gm;
+        if (log.match(resultReg)) {
+          runningProcess.state = 'success';
+          resolveOrReject(
+            'resolve',
+            {
+              value: __parse(log.replace('#result ', ''))
+            },
+            0,
+            null
+          );
+          return;
+        }
+
         runningProcess.stdout.push(log);
         await promise.trigger('stdout.data', {
           process: runningProcess,
           time: Date.now(),
           value: log
         });
-      });
+      }
     });
 
     // stderr data
@@ -297,7 +296,7 @@ module.exports = function spawn(
 
   const _promiseCancel = promise.cancel.bind(promise);
   promise.cancel = () => {
-    return new Promise((resolve, reject) => {
+    return new __SPromise((resolve, reject) => {
       const pid = childProcess.pid;
       // childProcess && childProcess.kill('SIGTERM');
       // if (pid) console.log(`kill -9 ${pid}`);

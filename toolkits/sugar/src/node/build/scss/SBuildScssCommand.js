@@ -43,9 +43,7 @@ module.exports = class SBuildScssCommand extends __SCommand {
     // init command
     super(
       'build.scss',
-      new __SBuildScssCli({
-        forceChildProcess: true
-      }),
+      new __SBuildScssCli(),
       __deepMerge(
         {
           argsObj,

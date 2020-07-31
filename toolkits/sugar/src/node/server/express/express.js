@@ -4,6 +4,7 @@ const __express = require('express');
 const __uncamelize = require('../../string/uncamelize');
 const __request = require('../../http/request');
 const __packageRoot = require('../../path/packageRoot');
+const __SPromise = require('../../promise/SPromise');
 
 /**
  * @name                express
@@ -25,23 +26,29 @@ const __packageRoot = require('../../path/packageRoot');
 module.exports = (args = {}) => {
   const settings = __deepMerge(__sugarConfig('express'), args);
   const server = __express();
-  server.use(
-    settings.staticDir.replace(__packageRoot(process.cwd()), ''),
-    __express.static(settings.staticDir)
-  );
 
-  Object.keys(settings).forEach((name) => {
-    server.set(__uncamelize(name, ' ').toLowerCase(), settings[name]);
-  });
+  const promise = new __SPromise((resolve, reject, trigger, cancel) => {
+    server.use(
+      settings.staticDir.replace(__packageRoot(process.cwd()), ''),
+      __express.static(settings.staticDir)
+    );
 
-  // Object.keys(files).forEach((path) => {
-  //   const fileObj = files[path];
-  //   const namespace = fileObj.line[0].replace('@namespace', '').trim();
-  //   server.get(`/${namespace.split('.').join('/')}`, function (req, res) {
-  //     res.render(path, { title: 'Hey', message: 'Hello there!' });
-  //   });
-  // });
+    Object.keys(settings).forEach((name) => {
+      server.set(__uncamelize(name, ' ').toLowerCase(), settings[name]);
+    });
 
-  server.listen(settings.port, settings.hostname);
-  return server;
+    // Object.keys(files).forEach((path) => {
+    //   const fileObj = files[path];
+    //   const namespace = fileObj.line[0].replace('@namespace', '').trim();
+    //   server.get(`/${namespace.split('.').join('/')}`, function (req, res) {
+    //     res.render(path, { title: 'Hey', message: 'Hello there!' });
+    //   });
+    // });
+
+    server.listen(settings.port, settings.hostname);
+    // return server;
+  }).start();
+
+  promise.server = server;
+  return promise;
 };

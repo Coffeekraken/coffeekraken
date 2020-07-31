@@ -1,5 +1,7 @@
 const __SExpressServerCli = require('../express/SExpressServerCli');
 const __frontendServer = require('../frontend/frontend');
+const __isChildProcess = require('../../is/childProcess');
+const __SPromise = require('../../promise/SPromise');
 
 /**
  * @name            SFrontendServerCli
@@ -94,23 +96,26 @@ module.exports = class SFrontendServerCli extends __SExpressServerCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  run(
-    argsObj = this._settings.argsObj,
-    includeAllArgs = this._settings.includeAllArgs
-  ) {
-    const process = super.run(argsObj, includeAllArgs, false);
+  // run(argsObj = this._settings.argsObj, settings = {}) {
+  //   const process = super.run(argsObj, settings);
 
-    process.on('start', () => {
-      this
-        .log(`# Your <primary>Frontend Express</primary> server is <green>up and running</green>:
+  //   console.log(Object.getOwnPropertyNames(Object.getPrototypeOf(process)));
 
-  - Hostname        : <yellow>${this.runningArgsObj.hostname}</yellow>
-  - Port            : <yellow>${this.runningArgsObj.port}</yellow>
-  - Root directory  : <yellow>${this.runningArgsObj.rootDir}</yellow>
-  - Views directory : <yellow>${this.runningArgsObj.viewsDir}</yellow>
-  - Views engine    : <yellow>${this.runningArgsObj.viewEngine}</yellow>
-  - URL             : <cyan>http://${this.runningArgsObj.hostname}:${this.runningArgsObj.port}</cyan>`);
-    });
-    return process;
-  }
+  //   // if (__isChildProcess() && !process.on) {
+  //   //   throw process;
+  //   // }
+
+  //   //   process.on('start', () => {
+  //   //     this
+  //   //       .log(`# Your <primary>Frontend Express</primary> server is <green>up and running</green>:
+
+  //   // - Hostname        : <yellow>${this.runningArgsObj.hostname}</yellow>
+  //   // - Port            : <yellow>${this.runningArgsObj.port}</yellow>
+  //   // - Root directory  : <yellow>${this.runningArgsObj.rootDir}</yellow>
+  //   // - Views directory : <yellow>${this.runningArgsObj.viewsDir}</yellow>
+  //   // - Views engine    : <yellow>${this.runningArgsObj.viewEngine}</yellow>
+  //   // - URL             : <cyan>http://${this.runningArgsObj.hostname}:${this.runningArgsObj.port}</cyan>`);
+  //   //   });
+  //   return process;
+  // }
 };

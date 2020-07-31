@@ -49,15 +49,14 @@ module.exports = function styleguide(req, server) {
 
       // check if we have a styleguide scss file to load
       if (sugarJson.scss && sugarJson.scss.styleguide) {
-        // const actionsStream = new __SBuildScssActionsStream({
-        //   // exitOnComplete: false
-        // });
-        // const styleguidePromise = actionsStream.start({
-        //   input: `${packagePath}/${sugarJson.scss.styleguide}`,
-        //   sugarJsonDirs: packagePath
-        // });
+        const actionsStream = new __SBuildScssActionsStream({});
+        const styleguidePromise = actionsStream.start({
+          input: `${packagePath}/${sugarJson.scss.styleguide}`,
+          sugarJsonDirs: packagePath
+        });
         // __SPromise.log(styleguidePromise);
-        // const styleguideRes = await styleguidePromise;
+        const styleguideRes = await styleguidePromise;
+        console.log('RESUL', styleguideRes);
         // const buildScssCli = new __SBuildScssCli({
         //   // forceChildProcess: true
         // });
@@ -68,23 +67,24 @@ module.exports = function styleguide(req, server) {
         // __SPromise.log(styleguidePromise);
         // const styleguideRes = await styleguidePromise;
         // console.log('RES', styleguideRes);
-        const buildScssCommand = new __SBuildScssCommand(
-          {},
-          {
-            log: {
-              filter: (value, stack) => {
-                const msg = (value.value || value).toString();
-                return msg.match(/^#[a-zA-Z0-9]+\s/);
-              }
-            }
-          }
-        );
-        const styleguidePromise = buildScssCommand.run({
-          input: `${packagePath}/${sugarJson.scss.styleguide}`,
-          sugarJsonDirs: packagePath
-        });
-        const styleguideRes = await styleguidePromise;
-        console.log('RES', styleguideRes);
+        // const buildScssCommand = new __SBuildScssCommand(
+        //   {},
+        //   {
+        //     log: true
+        //     // log: {
+        //     //   filter: (value, stack) => {
+        //     //     const msg = (value.value || value).toString();
+        //     //     return msg.match(/^#[a-zA-Z0-9]+\s/);
+        //     //   }
+        //     // }
+        //   }
+        // );
+        // const styleguidePromise = buildScssCommand.run({
+        //   input: `${packagePath}/${sugarJson.scss.styleguide}`,
+        //   sugarJsonDirs: packagePath
+        // });
+        // const styleguideRes = await styleguidePromise;
+        // console.log('RES', styleguideRes);
         // parsing the docblock
         // const docblock = new __SDocblock(styleguideRes.streamObj.data);
         // // set the blocks

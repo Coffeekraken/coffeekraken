@@ -37,7 +37,9 @@ process.on('unhandledRejection', (error) => {
     console.log(errorArray.join('\n'));
     // throw error;
   } else {
-    throw error;
+    // console.log(error);
+    throw error.error || error;
+    // throw error;
   }
   return;
 });

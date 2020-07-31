@@ -129,10 +129,9 @@ module.exports = class SBuildScssCli extends __SCli {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   childRun(argsObj) {
-    const stream = new __SBuildScssActionsStream();
+    const stream = new __SBuildScssActionsStream({});
     const proc = stream.start(argsObj);
-    console.log('#success CHILD');
-    // __output(proc);
+    __output(proc);
     return proc;
   }
 };

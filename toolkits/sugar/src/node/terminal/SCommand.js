@@ -819,6 +819,7 @@ module.exports = class SCommand extends __SPromise {
       }
 
       const result = await this._currentProcess.childProcessPromise;
+
       resolve(result);
     }).start();
 

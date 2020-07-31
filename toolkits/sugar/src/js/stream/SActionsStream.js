@@ -587,23 +587,23 @@ export default class SActionStream extends __SPromise {
         }
       }
     )
-      .on('cancel', () => {
-        canceled = true;
-        // check if the current action returned value is a promise cancelable
-        if (
-          currentActionReturn instanceof Promise &&
-          typeof currentActionReturn.cancel === 'function'
-        ) {
-          currentActionReturn.cancel();
-        }
-        // trigger some cancel events
-        this.trigger('cancel');
-        // exit process (has to be rethink)
-        if (this._settings.exitOnComplete) {
-          console.log('ENDNE');
-          process.exit(this._exitCode);
-        }
-      })
+      // .on('cancel', () => {
+      //   canceled = true;
+      //   // check if the current action returned value is a promise cancelable
+      //   if (
+      //     currentActionReturn instanceof Promise &&
+      //     typeof currentActionReturn.cancel === 'function'
+      //   ) {
+      //     currentActionReturn.cancel();
+      //   }
+      //   // trigger some cancel events
+      //   this.trigger('cancel');
+      //   // exit process (has to be rethink)
+      //   if (this._settings.exitOnComplete) {
+      //     console.log('ENDNE');
+      //     process.exit(this._exitCode);
+      //   }
+      // })
       .start();
 
     return this._currentSPromise;

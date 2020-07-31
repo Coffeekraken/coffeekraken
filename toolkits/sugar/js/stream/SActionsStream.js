@@ -141,7 +141,8 @@ let SActionStream = /*#__PURE__*/function (_SPromise) {
       beforeActions: {},
       afterActions: {},
       actions: {},
-      exitOnComplete: (0, _childProcess.default)()
+      exitOnComplete: (0, _childProcess.default)(),
+      logResult: false
     }, settings));
 
     _defineProperty(_assertThisInitialized(_this2), "_actionsObject", {});
@@ -490,6 +491,10 @@ let SActionStream = /*#__PURE__*/function (_SPromise) {
 
         this.dispatch('complete', overallActionsStats);
         resolve(overallActionsStats);
+
+        if (this._settings.logResult) {
+          console.log(`#result ${JSON.stringify(streamObj)}`);
+        }
 
         if (this._settings.exitOnComplete) {
           console.log('#error ENDNE');

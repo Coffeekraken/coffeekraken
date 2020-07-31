@@ -8,12 +8,12 @@ module.exports = {
   },
   features: {
     commands: [
-      'server.frontend',
-      'build.config',
-      'build.scss',
-      'build.js',
-      'build.views',
-      'build.docMap'
+      'server.frontend'
+      // 'build.config',
+      // 'build.scss',
+      // 'build.js',
+      // 'build.views',
+      // 'build.docMap'
     ]
   },
   footer: {

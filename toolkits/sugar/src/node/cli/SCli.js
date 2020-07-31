@@ -245,19 +245,8 @@ module.exports = class SCli {
 
     // check if is running in a child process
     if (!settings.forceChildProcess && __isChildProcess() && this.childRun) {
-      const childProcessPromise = new __SPromise(async (resolve, reject) => {
-        const childProcess = this.childRun(argsObj);
-        if (childProcess instanceof Promise) {
-          console.log('#error COCOCOC');
-          const result = await childProcess;
-          console.log('#success COC result');
-          console.log('#reso ' + result.toString());
-          return resolve(result);
-        }
-        // resolve(childProcess);
-      }).start();
-      // __SPromise.pipe(childProcess, childProcessPromise);
-      return childProcessPromise;
+      const child = this.childRun(argsObj);
+      return child;
     }
 
     if (this._childProcess) {
@@ -265,13 +254,14 @@ module.exports = class SCli {
         `You cannot spawn multiple "${this.constructor.name}" child process at the same time. Please kill the currently running one using the "kill" method...`
       );
     }
+
     const commandLine = this.toString(argsObj, settings.includeAllArgs);
     this._runningArgsObj = Object.assign({}, argsObj);
     this._childProcess = __spawn(commandLine, {
       id: this._settings.id,
       before: this.constructor.beforeCommand,
       after: this.constructor.afterCommand
-    }).on('cancel,finally', () => {
+    }).on('cancel,finally', (E) => {
       this._runningArgsObj = null;
       this._childProcess = null;
     });

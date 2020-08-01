@@ -171,7 +171,7 @@ let SPromise = /*#__PURE__*/function (_Promise) {
      */
 
     /**
-     * @name                  _status
+     * @name                  _state
      * @type                  String
      * @private
      *
@@ -219,11 +219,11 @@ let SPromise = /*#__PURE__*/function (_Promise) {
       }, settings);
       if (!(sourceSPromise instanceof SPromise) || !(destSPromise instanceof SPromise)) return; // listen for all on the source promise
 
-      sourceSPromise.on(settings.stacks, (value, stack) => {
+      sourceSPromise.on(settings.stacks, (value, metas) => {
         // check if need to process the value
-        if (settings.processor) value = settings.processor(value, stack); // trigger on the destination promise
+        if (settings.processor) value = settings.processor(value, metas); // trigger on the destination promise
 
-        destSPromise.trigger(stack, value);
+        destSPromise.trigger(metas.stack, value, metas);
       });
     }
     /**
@@ -251,8 +251,8 @@ let SPromise = /*#__PURE__*/function (_Promise) {
       }, settings);
       if (!(sourceSPromise instanceof SPromise)) return; // listen for all on the source promise
 
-      sourceSPromise.on(settings.stacks, (value, stack) => {
-        if (settings.filter && !settings.filter(value, stack)) return;
+      sourceSPromise.on(settings.stacks, (value, metas) => {
+        if (settings.filter && !settings.filter(value, metas)) return;
         const msg = value.value ? value.value : value;
         console.log(msg);
       });
@@ -292,7 +292,7 @@ let SPromise = /*#__PURE__*/function (_Promise) {
     const promise = (_temp = _this = _super.call(this, (resolve, reject) => {
       _resolve = resolve;
       _reject = reject;
-    }), _defineProperty(_assertThisInitialized(_this), "_masterPromiseResolveFn", null), _defineProperty(_assertThisInitialized(_this), "_masterPromiseRejectFn", null), _defineProperty(_assertThisInitialized(_this), "_executorFn", null), _defineProperty(_assertThisInitialized(_this), "_isExecutorStarted", null), _defineProperty(_assertThisInitialized(_this), "_settings", {}), _defineProperty(_assertThisInitialized(_this), "_status", 'pending'), _defineProperty(_assertThisInitialized(_this), "_stacks", {
+    }), _defineProperty(_assertThisInitialized(_this), "_masterPromiseResolveFn", null), _defineProperty(_assertThisInitialized(_this), "_masterPromiseRejectFn", null), _defineProperty(_assertThisInitialized(_this), "_executorFn", null), _defineProperty(_assertThisInitialized(_this), "_isExecutorStarted", null), _defineProperty(_assertThisInitialized(_this), "_settings", {}), _defineProperty(_assertThisInitialized(_this), "_state", 'pending'), _defineProperty(_assertThisInitialized(_this), "_stacks", {
       then: [],
       catch: [],
       resolve: [],
@@ -314,6 +314,8 @@ let SPromise = /*#__PURE__*/function (_Promise) {
       cancelDefaultReturn: null
     }, settings);
     setTimeout(() => {
+      if (!_this._executorFn) return;
+
       if (!_this._isExecutorStarted) {
         _this._executorFn(_this._resolve.bind(_assertThisInitialized(_this)), _this._reject.bind(_assertThisInitialized(_this)), _this.trigger.bind(_assertThisInitialized(_this)), _this._cancel.bind(_assertThisInitialized(_this)));
 
@@ -323,11 +325,11 @@ let SPromise = /*#__PURE__*/function (_Promise) {
     return _this;
   }
   /**
-   * @name                    status
+   * @name                    state
    * @type                    String
    * @get
    *
-   * Access the promise status. Can be one of these:
+   * Access the promise state. Can be one of these:
    * - pending: When the promise is waiting for resolution or rejection
    * - resolved: When the promise has been resolved
    * - rejected: When the promise has been rejected
@@ -354,7 +356,7 @@ let SPromise = /*#__PURE__*/function (_Promise) {
      */
     value: function is(status) {
       const statusArray = status.split(',').map(l => l.trim());
-      if (statusArray.indexOf(this._status) !== -1) return true;
+      if (statusArray.indexOf(this._state) !== -1) return true;
       return false;
     }
     /**
@@ -371,7 +373,7 @@ let SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "isPending",
     value: function isPending() {
-      return this._status === 'pending';
+      return this._state === 'pending';
     }
     /**
      * @name                  isResolved
@@ -387,7 +389,7 @@ let SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "isResolved",
     value: function isResolved() {
-      return this._status === 'resolved';
+      return this._state === 'resolved';
     }
     /**
      * @name                  isRejected
@@ -403,7 +405,7 @@ let SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "isRejected",
     value: function isRejected() {
-      return this._status === 'rejected';
+      return this._state === 'rejected';
     }
     /**
      * @name                  isCanceled
@@ -419,7 +421,7 @@ let SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "isCanceled",
     value: function isCanceled() {
-      return this._status === 'canceled';
+      return this._state === 'canceled';
     }
     /**
      * @name                  isDestroyed
@@ -435,7 +437,7 @@ let SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "isDestroyed",
     value: function isDestroyed() {
-      return this._status === 'destroyed';
+      return this._state === 'destroyed';
     }
     /**
      * @name                    start
@@ -463,7 +465,7 @@ let SPromise = /*#__PURE__*/function (_Promise) {
         throw new Error(`Sorry but you can't call the "start" method on this SPromise cause it has been destroyed...`);
       }
 
-      if (this._isExecutorStarted) return;
+      if (this._isExecutorStarted || !this._executorFn) return this;
 
       this._executorFn.apply(this, [this._resolve.bind(this), this._reject.bind(this), this.trigger.bind(this), this._cancel.bind(this)]);
 
@@ -509,7 +511,7 @@ let SPromise = /*#__PURE__*/function (_Promise) {
     value: async function _resolve(arg, stacksOrder = 'then,resolve,finally') {
       if (this._isDestroyed) return; // update the status
 
-      this._status = 'resolved'; // exec the wanted stacks
+      this._state = 'resolved'; // exec the wanted stacks
 
       const stacksResult = await this._triggerStacks(stacksOrder, arg); // resolve the master promise
 
@@ -555,7 +557,7 @@ let SPromise = /*#__PURE__*/function (_Promise) {
     value: async function _reject(arg, stacksOrder = 'catch,reject,finally') {
       if (this._isDestroyed) return; // update the status
 
-      this._status = 'rejected'; // exec the wanted stacks
+      this._state = 'rejected'; // exec the wanted stacks
 
       const stacksResult = await this._triggerStacks(stacksOrder, arg); // resolve the master promise
 
@@ -606,7 +608,7 @@ let SPromise = /*#__PURE__*/function (_Promise) {
     value: async function _cancel(arg, stacksOrder = 'cancel') {
       if (this._isDestroyed) return; // update the status
 
-      this._status = 'canceled'; // exec the wanted stacks
+      this._state = 'canceled'; // exec the wanted stacks
 
       const stacksResult = await this._triggerStacks(stacksOrder, arg); // resolve the master promise
 
@@ -641,10 +643,10 @@ let SPromise = /*#__PURE__*/function (_Promise) {
 
   }, {
     key: "trigger",
-    value: async function trigger(what, arg) {
+    value: async function trigger(what, arg, _metas = {}) {
       if (this._isDestroyed) return; // triger the passed stacks
 
-      return this._triggerStacks(what, arg);
+      return this._triggerStacks(what, arg, _metas);
     }
     /**
      * @name            _registerNewStacks
@@ -729,7 +731,7 @@ let SPromise = /*#__PURE__*/function (_Promise) {
 
   }, {
     key: "_triggerStack",
-    value: async function _triggerStack(stack, initialValue) {
+    value: async function _triggerStack(stack, initialValue, _metas = {}) {
       let currentCallbackReturnedValue = initialValue; // console.log(this._stacks);
 
       if (!this._stacks || Object.keys(this._stacks).length === 0) return currentCallbackReturnedValue;
@@ -774,7 +776,12 @@ let SPromise = /*#__PURE__*/function (_Promise) {
 
         if (!item.callback) return currentCallbackReturnedValue; // call the callback function
 
-        let callbackResult = item.callback(currentCallbackReturnedValue, stack); // check if the callback result is a promise
+        let callbackResult = item.callback(currentCallbackReturnedValue, (0, _deepMerge.default)({
+          stack,
+          id: this._settings.id,
+          state: this._state,
+          time: Date.now()
+        }, _metas)); // check if the callback result is a promise
 
         if (Promise.resolve(callbackResult) === callbackResult) {
           callbackResult = await callbackResult;
@@ -807,22 +814,25 @@ let SPromise = /*#__PURE__*/function (_Promise) {
 
   }, {
     key: "_triggerStacks",
-    value: async function _triggerStacks(stacks, initialValue) {
-      // check if the stacks is "*"
-      if (typeof stacks === 'string') stacks = stacks.split(',').map(s => s.trim());
-      let currentStackResult = initialValue;
+    value: function _triggerStacks(stacks, initialValue, _metas = {}) {
+      return new Promise(async (resolve, reject) => {
+        await (0, _wait.default)(0); // check if the stacks is "*"
 
-      for (let i = 0; i < stacks.length; i++) {
-        const stackResult = await this._triggerStack(stacks[i], currentStackResult);
+        if (typeof stacks === 'string') stacks = stacks.split(',').map(s => s.trim());
+        let currentStackResult = initialValue;
 
-        if (stackResult !== undefined) {
-          currentStackResult = stackResult;
-        } // await this._triggerStack('*', currentStackResult, stacks[i]);
-        // this._triggerAllStack(stacks[i], currentStackResult);
+        for (let i = 0; i < stacks.length; i++) {
+          const stackResult = await this._triggerStack(stacks[i], currentStackResult, _metas);
 
-      }
+          if (stackResult !== undefined) {
+            currentStackResult = stackResult;
+          } // await this._triggerStack('*', currentStackResult, stacks[i]);
+          // this._triggerAllStack(stacks[i], currentStackResult);
 
-      return currentStackResult;
+        }
+
+        resolve(currentStackResult);
+      });
     }
     /**
      * @name                on
@@ -1138,7 +1148,7 @@ let SPromise = /*#__PURE__*/function (_Promise) {
     key: "_destroy",
     value: function _destroy() {
       // update the status
-      this._status = 'destroyed'; // destroying all the callbacks stacks registered
+      this._state = 'destroyed'; // destroying all the callbacks stacks registered
 
       delete this._stacks; // delete this._isExecutorStarted; // keep it to avoid errors in the "setTimeout" function in the masterPromise executor...
 
@@ -1149,9 +1159,9 @@ let SPromise = /*#__PURE__*/function (_Promise) {
       this._isDestroyed = true;
     }
   }, {
-    key: "status",
+    key: "state",
     get: function () {
-      return this._status;
+      return this._state;
     }
   }]);
 

@@ -12,31 +12,31 @@ const __upperFirst = require('../string/upperFirst');
 const { last } = require('lodash');
 
 /**
- * @name                  SProcessOutput
+ * @name                  SOutput
  * @namespace           node.blessed
  * @type                  Class
  *
- * This class is a simple SPanel extended one that accesp an SProcessOutput instance
- * to log the data's from and display an simple UI depending on the SProcessOutput configured keys
+ * This class is a simple SPanel extended one that accesp an SOutput instance
+ * to log the data's from and display an simple UI depending on the SOutput configured keys
  *
- * @param         {SProcessOutput}            process           The SProcessOutput instance you want to attach
- * @param         {Object}              [settings={}]     The settings object to configure your SProcessOutput
+ * @param         {SOutput}            process           The SOutput instance you want to attach
+ * @param         {Object}              [settings={}]     The settings object to configure your SOutput
  *
  * @example         js
- * const SProcessOutput = require('@coffeekraken/sugar/node/terminal/SProcessOutput');
- * const myPanel = new SProcessOutput(myProcess, {
+ * const SOutput = require('@coffeekraken/sugar/node/terminal/SOutput');
+ * const myPanel = new SOutput(myProcess, {
  *    screen: true
  * });
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SProcessOutput extends __SComponent {
+module.exports = class SOutput extends __SComponent {
   /**
    * @name          _process
-   * @type          SProcessOutput
+   * @type          SOutput
    * @private
    *
-   * Store the SProcessOutput instance
+   * Store the SOutput instance
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
@@ -109,7 +109,7 @@ module.exports = class SProcessOutput extends __SComponent {
         // );
         // this.update();
       })
-      .on('stdout.data', (data) => {
+      .on('stdout.data', (data, metas) => {
         this.log(
           data.value && data.value.value
             ? data.value.value

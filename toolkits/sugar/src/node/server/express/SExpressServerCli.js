@@ -102,12 +102,12 @@ module.exports = class SExpressServerCli extends __SCli {
     setTimeout(() => {
       this.log(`<green>Your Express server is up and running</green>:
 
-Hostname        : <yellow>${this.runningArgsObj.hostname}</yellow>
-Port            : <yellow>${this.runningArgsObj.port}</yellow>
-Root directory  : <yellow>${this.runningArgsObj.rootDir}</yellow>
-Views directory : <yellow>${this.runningArgsObj.viewsDir}</yellow>
-Views engine    : <yellow>${this.runningArgsObj.viewEngine}</yellow>
-URL             : <cyan>http://${this.runningArgsObj.hostname}:${this.runningArgsObj.port}</cyan>`);
+Hostname        : <yellow>${this.runningParamsObj.hostname}</yellow>
+Port            : <yellow>${this.runningParamsObj.port}</yellow>
+Root directory  : <yellow>${this.runningParamsObj.rootDir}</yellow>
+Views directory : <yellow>${this.runningParamsObj.viewsDir}</yellow>
+Views engine    : <yellow>${this.runningParamsObj.viewEngine}</yellow>
+URL             : <cyan>http://${this.runningParamsObj.hostname}:${this.runningParamsObj.port}</cyan>`);
     });
     return process;
   }

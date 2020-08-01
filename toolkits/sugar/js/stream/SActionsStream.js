@@ -141,8 +141,7 @@ let SActionStream = /*#__PURE__*/function (_SPromise) {
       beforeActions: {},
       afterActions: {},
       actions: {},
-      exitOnComplete: (0, _childProcess.default)(),
-      logResult: false
+      exitOnComplete: (0, _childProcess.default)()
     }, settings));
 
     _defineProperty(_assertThisInitialized(_this2), "_actionsObject", {});
@@ -492,29 +491,28 @@ let SActionStream = /*#__PURE__*/function (_SPromise) {
         this.dispatch('complete', overallActionsStats);
         resolve(overallActionsStats);
 
-        if (this._settings.logResult) {
-          console.log(`#result ${JSON.stringify(streamObj)}`);
-        }
-
         if (this._settings.exitOnComplete) {
           console.log('#error ENDNE');
           process.exit(this._exitCode);
         }
-      }).on('cancel', () => {
-        canceled = true; // check if the current action returned value is a promise cancelable
-
-        if (currentActionReturn instanceof Promise && typeof currentActionReturn.cancel === 'function') {
-          currentActionReturn.cancel();
-        } // trigger some cancel events
-
-
-        this.trigger('cancel'); // exit process (has to be rethink)
-
-        if (this._settings.exitOnComplete) {
-          console.log('ENDNE');
-          process.exit(this._exitCode);
-        }
-      }).start();
+      }) // .on('cancel', () => {
+      //   canceled = true;
+      //   // check if the current action returned value is a promise cancelable
+      //   if (
+      //     currentActionReturn instanceof Promise &&
+      //     typeof currentActionReturn.cancel === 'function'
+      //   ) {
+      //     currentActionReturn.cancel();
+      //   }
+      //   // trigger some cancel events
+      //   this.trigger('cancel');
+      //   // exit process (has to be rethink)
+      //   if (this._settings.exitOnComplete) {
+      //     console.log('ENDNE');
+      //     process.exit(this._exitCode);
+      //   }
+      // })
+      .start();
       return this._currentSPromise;
     }
     /**

@@ -1,6 +1,4 @@
-const __SProcessOutput = require('../blessed/SProcessOutput');
-const __isChildProcess = require('../is/childProcess');
-const __parseHtml = require('../terminal/parseHtml');
+const __SOutput = require('../blessed/SOutput');
 
 /**
  * @name            output
@@ -26,6 +24,6 @@ const __parseHtml = require('../terminal/parseHtml');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = (proc, settings = {}) => {
-  const output = new __SProcessOutput(proc, settings);
+  const output = new __SOutput(proc, settings);
   output.attach();
 };

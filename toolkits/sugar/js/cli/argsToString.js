@@ -11,18 +11,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @namespace           js.cli
  * @type                  Function
  *
- * This function take a simple object, a definition object and return you the string version that you can pass
+ * This function take a simple object, a definitionObj object and return you the string version that you can pass
  * directly to the command line interface
  *
  * @param       {Object}        args        The arguments object
- * @param       {Object}        definition    The definition object that has to be formated like so:
+ * @param       {Object}        definitionObj    The definitionObj object that has to be formated like so:
  * - argName: The argument name to describe
  *    - type: The type of the value supported
  *    - alias: The alias of the full name like "t", "l", etc...
  *    - default: The default value if nothing is specified
  *    - regexp: A regexp that is used to validate the passed value
  *    - validator: A function to validate the passed value. Has to return true or false
- * @param       {Boolean}     [includeAllArgs = true]       Specify if you want all the arguments in the definition object in your command line string, or if you just want the one passed in your argsObj argument
+ * @param       {Boolean}     [includeAllArgs = true]       Specify if you want all the arguments in the definitionObj object in your command line string, or if you just want the one passed in your argsObj argument
  *
  * @example       js
  * import argsToString from '@coffeekraken/sugar/js/cli/argsToString';
@@ -51,19 +51,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 // TODO: support deep object structure
 // TODO: support required args
-module.exports = function argsToString(args, definition, includeAllArgs = true) {
+module.exports = function argsToString(args, definitionObj, includeAllArgs = true) {
   if (typeof args === 'string') {
-    args = (0, _parseArgs.default)(args, definition);
+    args = (0, _parseArgs.default)(args, definitionObj);
   }
 
   const cliArray = []; // loop on passed args
 
-  Object.keys(definition).forEach(argName => {
-    const defObj = definition[argName];
+  Object.keys(definitionObj).forEach(argName => {
+    const defObj = definitionObj[argName];
     if (!defObj) return;
     if (!includeAllArgs && args[argName] === undefined) return;
     const prefix = defObj.alias ? `-${defObj.alias}` : `--${argName}`;
-    let value = args && args[argName] !== undefined ? args[argName] : definition[argName].default;
+    let value = args && args[argName] !== undefined ? args[argName] : definitionObj[argName].default;
 
     if (value === undefined || value === null || defObj.type.toLowerCase() === 'boolean' && value === false) {
       return;

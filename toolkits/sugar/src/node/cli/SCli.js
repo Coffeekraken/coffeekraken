@@ -1,7 +1,8 @@
 const __buildCommandLine = require('./buildCommandLine');
 const __validateDefinitionObject = require('./validateDefinitionObject');
 const __spawn = require('../process/spawn');
-const __SProcessOutput = require('../blessed/SProcessOutput');
+const __SOutput = require('../blessed/SOutput');
+const __SChildProcess = require('../process/SChildProcess');
 const __deepMerge = require('../object/deepMerge');
 const __parseHtml = require('../terminal/parseHtml');
 const __argsToObject = require('../cli/argsToObject');
@@ -66,7 +67,7 @@ module.exports = class SCli {
   _childProcess = null;
 
   /**
-   * @name        _runningArgsObj
+   * @name        _runningParamsObj
    * @type        Object
    * @private
    *
@@ -74,7 +75,7 @@ module.exports = class SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _runningArgsObj = {};
+  _runningParamsObj = {};
 
   /**
    * @name        _settings
@@ -100,9 +101,9 @@ module.exports = class SCli {
     // save the settings
     this._settings = __deepMerge(
       {
-        id: null,
-        includeAllArgs: true,
-        argsObj: {},
+        id: this.constructor.name,
+        includeAllParams: true,
+        defaultParamsObj: {},
         forceChildProcess: false
       },
       settings
@@ -138,7 +139,7 @@ module.exports = class SCli {
   }
 
   /**
-   * @name        runningArgsObj
+   * @name        runningParamsObj
    * @type        Object
    * @get
    *
@@ -146,8 +147,8 @@ module.exports = class SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  get runningArgsObj() {
-    return this._runningArgsObj || {};
+  get runningParamsObj() {
+    return this._runningParamsObj || {};
   }
 
   /**
@@ -191,18 +192,18 @@ module.exports = class SCli {
    *
    * This method allows you to pass an arguments object and return the builded command line string depending on the definition object.
    *
-   * @param       {Object}      argsObj         An argument object to use for the command line string generation
-   * @param       {Boolean}     [includeAllArgs=settings.includeAllArgs]       Specify if you want all the arguments in the definition object in your command line string, or if you just want the one passed in your argsObj argument
+   * @param       {Object}      paramsObj         An argument object to use for the command line string generation
+   * @param       {Boolean}     [includeAllParams=settings.includeAllParams]       Specify if you want all the arguments in the definition object in your command line string, or if you just want the one passed in your paramsObj argument
    * @return      {String}                        The generated command line string
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  toString(argsObj = {}, includeAllArgs = this._settings.includeAllArgs) {
+  toString(paramsObj = {}, includeAllParams = this._settings.includeAllParams) {
     return __buildCommandLine(
       this.commandString,
       this.definitionObj,
-      argsObj,
-      includeAllArgs
+      paramsObj,
+      includeAllParams
     );
   }
 
@@ -224,8 +225,8 @@ module.exports = class SCli {
    * You can use the "spawn" function available under the namespace "sugar.node.childProcess" in order to
    * spawn the process with already all these events setted...
    *
-   * @param       {Object}        [argsObj=settings.argsObj]      An argument object to override the default values of the definition object
-   * @param       {Boolean}     [includeAllArgs=settings.includeAllArgs]       Specify if you want all the arguments in the definition object in your command line string, or if you just want the one passed in your argsObj argument
+   * @param       {Object}        [paramsObj=settings.defaultParamsObj]      An argument object to override the default values of the definition object
+   * @param       {Boolean}     [includeAllParams=settings.includeAllParams]       Specify if you want all the arguments in the definition object in your command line string, or if you just want the one passed in your paramsObj argument
    * @return      {SPromise}                        An SPromise instance on which you can subscribe for "events" described above
    *
    * @example       js
@@ -237,15 +238,17 @@ module.exports = class SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  run(argsObj = this._settings.argsObj, settings = {}) {
+  run(paramsObj = {}, settings = {}) {
     settings = __deepMerge(this._settings, settings);
 
+    paramsObj = __deepMerge(this._settings.defaultParamsObj, paramsObj);
+
     // make sure we have an object as args
-    argsObj = __argsToObject(argsObj, this.definitionObj);
+    paramsObj = __argsToObject(paramsObj, this.definitionObj);
 
     // check if is running in a child process
     if (!settings.forceChildProcess && __isChildProcess() && this.childRun) {
-      const child = this.childRun(argsObj);
+      const child = this.childRun(paramsObj);
       return child;
     }
 
@@ -255,16 +258,26 @@ module.exports = class SCli {
       );
     }
 
-    const commandLine = this.toString(argsObj, settings.includeAllArgs);
-    this._runningArgsObj = Object.assign({}, argsObj);
-    this._childProcess = __spawn(commandLine, {
-      id: this._settings.id,
-      before: this.constructor.beforeCommand,
-      after: this.constructor.afterCommand
-    }).on('cancel,finally', (E) => {
-      this._runningArgsObj = null;
-      this._childProcess = null;
+    const childProcess = new __SChildProcess(this.commandString, {
+      id: settings.id,
+      definitionObj: this.definitionObj,
+      defaultParamsObj: settings.defaultParamsObj
     });
+
+    console.log(paramsObj);
+
+    this._childProcess = childProcess.run(paramsObj);
+
+    // const commandLine = this.toString(paramsObj, settings.includeAllParams);
+    // this._runningParamsObj = Object.assign({}, paramsObj);
+    // this._childProcess = __spawn(commandLine, {
+    //   id: this._settings.id,
+    //   before: this.constructor.beforeCommand,
+    //   after: this.constructor.afterCommand
+    // }).on('cancel,finally', (E) => {
+    //   this._runningParamsObj = null;
+    //   this._childProcess = null;
+    // });
 
     return this._childProcess;
   }
@@ -282,29 +295,6 @@ module.exports = class SCli {
   }
 
   /**
-   * @name          runWithOutput
-   * @type          Function
-   *
-   * This method run the command line and display his output
-   * in a nicely styled screen.
-   * Check the "run" method documentation for the the arguments and return values
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  // runWithOutput(
-  //   argsObj = this._settings.argsObj,
-  //   includeAllArgs = this._settings.includeAllArgs
-  // ) {
-  //   const serverProcess = this.run(argsObj, includeAllArgs);
-  //   this._output = new __SProcessOutput(serverProcess, {});
-  //   serverProcess.on('before.start,before.end', () => {
-  //     this._output.clear();
-  //   });
-  //   this._output.attach();
-  //   return serverProcess;
-  // }
-
-  /**
    * @name          kill
    * @type          Function
    * @async
@@ -319,33 +309,33 @@ module.exports = class SCli {
   }
 
   /**
-   * @name            _runningProcessArgsObject
+   * @name            _runningProcessparamsObject
    * @type            Function
    * @private
    *
    * This method take an argument object as parameter and return
    * the final argument object depending on the definitionObj and the passed object
    *
-   * @param       {Object}      [argsObj=settings.argsObj]      An argument object used for processing the final argument object one
-   * @param       {Boolean}     [includeAllArgs=settings.includeAllArgs]       Specify if you want all the arguments in the definition object in your command line string, or if you just want the one passed in your argsObj argument
+   * @param       {Object}      [paramsObj=settings.defaultParamsObj]      An argument object used for processing the final argument object one
+   * @param       {Boolean}     [includeAllParams=settings.includeAllParams]       Specify if you want all the arguments in the definition object in your command line string, or if you just want the one passed in your paramsObj argument
    * @return      {Object}              The processed args object
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  // _runningProcessArgsObject(
-  //   argsObj = {},
-  //   includeAllArgs = this._settings.includeAllArgs
+  // _runningProcessparamsObject(
+  //   paramsObj = {},
+  //   includeAllParams = this._settings.includeAllParams
   // ) {
-  //   const finalArgsObj = {};
+  //   const finalparamsObj = {};
   //   Object.keys(this.definitionObj).forEach((argName) => {
-  //     if ((!argsObj || argsObj[argName] === undefined) && !includeAllArgs)
+  //     if ((!paramsObj || paramsObj[argName] === undefined) && !includeAllParams)
   //       return;
-  //     finalArgsObj[argName] =
-  //       argsObj[argName] !== undefined
-  //         ? argsObj[argName]
+  //     finalparamsObj[argName] =
+  //       paramsObj[argName] !== undefined
+  //         ? paramsObj[argName]
   //         : this.definitionObj[argName].default;
   //   });
-  //   return finalArgsObj;
+  //   return finalparamsObj;
   // }
 
   /**
@@ -361,7 +351,7 @@ module.exports = class SCli {
   log(...args) {
     if (!this.isRunning()) return;
     args.forEach((arg) => {
-      this._childProcess.log(__parseHtml(arg));
+      // this._childProcess.log(__parseHtml(arg));
     });
   }
 };

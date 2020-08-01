@@ -125,7 +125,7 @@ export default class SPromise extends Promise {
   _settings = {};
 
   /**
-   * @name                  _status
+   * @name                  _state
    * @type                  String
    * @private
    *
@@ -138,7 +138,7 @@ export default class SPromise extends Promise {
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  _status = 'pending';
+  _state = 'pending';
 
   /**
    * @name                  _stacks
@@ -189,11 +189,11 @@ export default class SPromise extends Promise {
     )
       return;
     // listen for all on the source promise
-    sourceSPromise.on(settings.stacks, (value, stack) => {
+    sourceSPromise.on(settings.stacks, (value, metas) => {
       // check if need to process the value
-      if (settings.processor) value = settings.processor(value, stack);
+      if (settings.processor) value = settings.processor(value, metas);
       // trigger on the destination promise
-      destSPromise.trigger(stack, value);
+      destSPromise.trigger(metas.stack, value, metas);
     });
   }
 
@@ -222,8 +222,8 @@ export default class SPromise extends Promise {
     );
     if (!(sourceSPromise instanceof SPromise)) return;
     // listen for all on the source promise
-    sourceSPromise.on(settings.stacks, (value, stack) => {
-      if (settings.filter && !settings.filter(value, stack)) return;
+    sourceSPromise.on(settings.stacks, (value, metas) => {
+      if (settings.filter && !settings.filter(value, metas)) return;
       const msg = value.value ? value.value : value;
       console.log(msg);
     });
@@ -276,6 +276,7 @@ export default class SPromise extends Promise {
       settings
     );
     setTimeout(() => {
+      if (!this._executorFn) return;
       if (!this._isExecutorStarted) {
         this._executorFn(
           this._resolve.bind(this),
@@ -289,11 +290,11 @@ export default class SPromise extends Promise {
   }
 
   /**
-   * @name                    status
+   * @name                    state
    * @type                    String
    * @get
    *
-   * Access the promise status. Can be one of these:
+   * Access the promise state. Can be one of these:
    * - pending: When the promise is waiting for resolution or rejection
    * - resolved: When the promise has been resolved
    * - rejected: When the promise has been rejected
@@ -302,8 +303,8 @@ export default class SPromise extends Promise {
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  get status() {
-    return this._status;
+  get state() {
+    return this._state;
   }
 
   /**
@@ -319,7 +320,7 @@ export default class SPromise extends Promise {
    */
   is(status) {
     const statusArray = status.split(',').map((l) => l.trim());
-    if (statusArray.indexOf(this._status) !== -1) return true;
+    if (statusArray.indexOf(this._state) !== -1) return true;
     return false;
   }
 
@@ -334,7 +335,7 @@ export default class SPromise extends Promise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   isPending() {
-    return this._status === 'pending';
+    return this._state === 'pending';
   }
 
   /**
@@ -348,7 +349,7 @@ export default class SPromise extends Promise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   isResolved() {
-    return this._status === 'resolved';
+    return this._state === 'resolved';
   }
 
   /**
@@ -362,7 +363,7 @@ export default class SPromise extends Promise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   isRejected() {
-    return this._status === 'rejected';
+    return this._state === 'rejected';
   }
 
   /**
@@ -376,7 +377,7 @@ export default class SPromise extends Promise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   isCanceled() {
-    return this._status === 'canceled';
+    return this._state === 'canceled';
   }
 
   /**
@@ -390,7 +391,7 @@ export default class SPromise extends Promise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   isDestroyed() {
-    return this._status === 'destroyed';
+    return this._state === 'destroyed';
   }
 
   /**
@@ -417,7 +418,7 @@ export default class SPromise extends Promise {
         `Sorry but you can't call the "start" method on this SPromise cause it has been destroyed...`
       );
     }
-    if (this._isExecutorStarted) return;
+    if (this._isExecutorStarted || !this._executorFn) return this;
     this._executorFn.apply(this, [
       this._resolve.bind(this),
       this._reject.bind(this),
@@ -463,7 +464,7 @@ export default class SPromise extends Promise {
   async _resolve(arg, stacksOrder = 'then,resolve,finally') {
     if (this._isDestroyed) return;
     // update the status
-    this._status = 'resolved';
+    this._state = 'resolved';
     // exec the wanted stacks
     const stacksResult = await this._triggerStacks(stacksOrder, arg);
     // resolve the master promise
@@ -504,7 +505,7 @@ export default class SPromise extends Promise {
   async _reject(arg, stacksOrder = 'catch,reject,finally') {
     if (this._isDestroyed) return;
     // update the status
-    this._status = 'rejected';
+    this._state = 'rejected';
     // exec the wanted stacks
     const stacksResult = await this._triggerStacks(stacksOrder, arg);
     // resolve the master promise
@@ -552,7 +553,7 @@ export default class SPromise extends Promise {
   async _cancel(arg, stacksOrder = 'cancel') {
     if (this._isDestroyed) return;
     // update the status
-    this._status = 'canceled';
+    this._state = 'canceled';
     // exec the wanted stacks
     const stacksResult = await this._triggerStacks(stacksOrder, arg);
     // resolve the master promise
@@ -584,11 +585,11 @@ export default class SPromise extends Promise {
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  async trigger(what, arg) {
+  async trigger(what, arg, _metas = {}) {
     if (this._isDestroyed) return;
 
     // triger the passed stacks
-    return this._triggerStacks(what, arg);
+    return this._triggerStacks(what, arg, _metas);
   }
 
   /**
@@ -668,7 +669,7 @@ export default class SPromise extends Promise {
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  async _triggerStack(stack, initialValue) {
+  async _triggerStack(stack, initialValue, _metas = {}) {
     let currentCallbackReturnedValue = initialValue;
 
     // console.log(this._stacks);
@@ -727,7 +728,18 @@ export default class SPromise extends Promise {
       // make sure the stack exist
       if (!item.callback) return currentCallbackReturnedValue;
       // call the callback function
-      let callbackResult = item.callback(currentCallbackReturnedValue, stack);
+      let callbackResult = item.callback(
+        currentCallbackReturnedValue,
+        __deepMerge(
+          {
+            stack,
+            id: this._settings.id,
+            state: this._state,
+            time: Date.now()
+          },
+          _metas
+        )
+      );
       // check if the callback result is a promise
       if (Promise.resolve(callbackResult) === callbackResult) {
         callbackResult = await callbackResult;
@@ -757,25 +769,31 @@ export default class SPromise extends Promise {
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  async _triggerStacks(stacks, initialValue) {
-    // check if the stacks is "*"
-    if (typeof stacks === 'string')
-      stacks = stacks.split(',').map((s) => s.trim());
+  _triggerStacks(stacks, initialValue, _metas = {}) {
+    return new Promise(async (resolve, reject) => {
+      await __wait(0);
 
-    let currentStackResult = initialValue;
-    for (let i = 0; i < stacks.length; i++) {
-      const stackResult = await this._triggerStack(
-        stacks[i],
-        currentStackResult
-      );
-      if (stackResult !== undefined) {
-        currentStackResult = stackResult;
+      // check if the stacks is "*"
+      if (typeof stacks === 'string')
+        stacks = stacks.split(',').map((s) => s.trim());
+
+      let currentStackResult = initialValue;
+
+      for (let i = 0; i < stacks.length; i++) {
+        const stackResult = await this._triggerStack(
+          stacks[i],
+          currentStackResult,
+          _metas
+        );
+        if (stackResult !== undefined) {
+          currentStackResult = stackResult;
+        }
+        // await this._triggerStack('*', currentStackResult, stacks[i]);
+        // this._triggerAllStack(stacks[i], currentStackResult);
       }
-      // await this._triggerStack('*', currentStackResult, stacks[i]);
-      // this._triggerAllStack(stacks[i], currentStackResult);
-    }
 
-    return currentStackResult;
+      resolve(currentStackResult);
+    });
   }
 
   /**
@@ -1076,7 +1094,7 @@ export default class SPromise extends Promise {
    */
   _destroy() {
     // update the status
-    this._status = 'destroyed';
+    this._state = 'destroyed';
 
     // destroying all the callbacks stacks registered
     delete this._stacks;

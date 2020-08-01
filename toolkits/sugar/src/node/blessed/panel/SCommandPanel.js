@@ -16,7 +16,7 @@ const __SInputPopup = require('../popup/SInputPopup');
 const __activeSpace = require('../../core/activeSpace');
 const __SWindowBox = require('../box/SWindowBox');
 const __convert = require('../../time/convert');
-const __SProcessOutput = require('../SProcessOutput');
+const __SOutput = require('../SOutput');
 
 /**
  * @name                  SCommandPanel
@@ -372,7 +372,7 @@ module.exports = class SCommandPanel extends __SComponent {
    * @type          Function
    * @private
    *
-   * This method create all the command boxes with the log (SProcessOutput) instance, etc, and
+   * This method create all the command boxes with the log (SOutput) instance, etc, and
    * save then into the ```_boxesObjectsMap``` map
    *
    * @since         2.0.0
@@ -428,7 +428,7 @@ module.exports = class SCommandPanel extends __SComponent {
         right: 0,
         clickable: true
       });
-      boxObj.$log = new __SProcessOutput(commandInstance, {
+      boxObj.$log = new __SOutput(commandInstance, {
         width: '100%-4',
         height: 0,
         top: 0,

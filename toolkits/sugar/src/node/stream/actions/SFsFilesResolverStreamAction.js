@@ -51,6 +51,8 @@ module.exports = class SFindInFileStreamAction extends __SActionsStreamAction {
     super(
       __deepMerge(
         {
+          name: 'File resolver',
+          id: 'actionStream.action.fs.filesResolver',
           ignoreFolders: []
         },
         settings
@@ -69,10 +71,7 @@ module.exports = class SFindInFileStreamAction extends __SActionsStreamAction {
    */
   run(streamObj, settings = {}) {
     settings = __deepMerge(this._settings, settings);
-    // make sure we have a correct streamObj
-    this.checkStreamObject(streamObj);
-
-    return new __SPromise(async (resolve, reject) => {
+    return super.run(streamObj, async (resolve, reject) => {
       const filesPathes = [];
       const streamObjArray = [];
 

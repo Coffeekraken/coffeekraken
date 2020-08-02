@@ -1,6 +1,5 @@
 const __SExpressServerCli = require('../express/SExpressServerCli');
 const __frontendServer = require('../frontend/frontend');
-const __isChildProcess = require('../../is/childProcess');
 const __SPromise = require('../../promise/SPromise');
 
 /**
@@ -27,17 +26,6 @@ module.exports = class SFrontendServerCli extends __SExpressServerCli {
   static command = 'sugar server.frontend [arguments]';
 
   /**
-   * @name          afterCommand
-   * @type          String
-   * @static
-   *
-   * Store a command that you want to launch after the actual one
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  // static afterCommand = 'sugar util.kill server.frontend';
-
-  /**
    * @name          definitionObj
    * @type          Object
    * @static
@@ -62,60 +50,40 @@ module.exports = class SFrontendServerCli extends __SExpressServerCli {
   constructor(settings = {}) {
     super({
       id: 'server.frontend',
+      name: 'Frontend Server',
       ...settings
     });
   }
 
   /**
-   * @name            childRun
+   * @name            _run
    * @type            Function
-   * @override
+   * @private
    *
-   * This method is the one that will be called once you call ```run```  inside a child process.
-   * At first, the SCli class check if you are running in a child process. If not, it will
-   * generate one to run your actual logic. This function represent the code that will
-   * be actually runned.
+   * This method is the one that will be called once you call ```run```.
+   * The params passed are processed by the ```run``` parent method so you can
+   * confidently trust them.
+   * You MUST return an SPromise instance so that the spawned process can be
+   * managed automatically in the parent ```run``` method.
    *
    * @param       {Object}        argsObj         The object of passed arguments
+   * @param       {Object}        [settings={}]     The passed settings object
+   * @return      {SPromise}                      An SPromise instance through which the parent method can register for events like "success", "stdout.data", etc...
    *
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  childRun(argsObj) {
-    const server = __frontendServer(argsObj);
-    return server;
+  _run(argsObj, settings = {}) {
+    return new __SPromise(
+      async function (resolve, reject, trigger, cancel) {
+        const serverPromise = __frontendServer(argsObj);
+        __SPromise.pipe(serverPromise, this);
+        const res = await serverPromise;
+        resolve(res);
+      },
+      {
+        id: 'cli.server.frontend'
+      }
+    ).start();
   }
-
-  /**
-   * @name            run
-   * @type            Function
-   * @override
-   *
-   * This method simply override the default one.
-   * For arguments documentation, check the SExpressServerCli class.
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  // run(argsObj = this._settings.argsObj, settings = {}) {
-  //   const process = super.run(argsObj, settings);
-
-  //   console.log(Object.getOwnPropertyNames(Object.getPrototypeOf(process)));
-
-  //   // if (__isChildProcess() && !process.on) {
-  //   //   throw process;
-  //   // }
-
-  //   //   process.on('start', () => {
-  //   //     this
-  //   //       .log(`# Your <primary>Frontend Express</primary> server is <green>up and running</green>:
-
-  //   // - Hostname        : <yellow>${this.runningArgsObj.hostname}</yellow>
-  //   // - Port            : <yellow>${this.runningArgsObj.port}</yellow>
-  //   // - Root directory  : <yellow>${this.runningArgsObj.rootDir}</yellow>
-  //   // - Views directory : <yellow>${this.runningArgsObj.viewsDir}</yellow>
-  //   // - Views engine    : <yellow>${this.runningArgsObj.viewEngine}</yellow>
-  //   // - URL             : <cyan>http://${this.runningArgsObj.hostname}:${this.runningArgsObj.port}</cyan>`);
-  //   //   });
-  //   return process;
-  // }
 };

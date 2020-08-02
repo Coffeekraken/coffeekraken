@@ -46,6 +46,7 @@ module.exports = class SExtractStreamAction extends __SActionsStreamAction {
     super(
       __deepMerge(
         {
+          id: 'actionStream.action.extract',
           sourceProp: 'data'
         },
         settings
@@ -69,10 +70,7 @@ module.exports = class SExtractStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(streamObj, settings) {
-    // make sure we have a correct streamObj
-    this.checkStreamObject(streamObj);
-
-    return new Promise(async (resolve, reject) => {
+    return super.run(streamObj, async (resolve, reject) => {
       const reg = /\/\*\s?extract:([a-zA-Z0-9-_]+)\s?\*\/(((?!\/\*\s?extract\s?\*\/)(.|\n))*)\/\*\s?extract\s?\*\//g;
       const source = streamObj[settings.sourceProp];
       let myArray;

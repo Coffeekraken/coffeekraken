@@ -48,7 +48,14 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(settings = {}) {
-    super(settings);
+    super(
+      __deepMerge(
+        {
+          id: 'actionStream.action.js.webpack'
+        },
+        settings
+      )
+    );
   }
 
   /**
@@ -73,11 +80,7 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
       settings
     );
 
-    // make sure we have a correct streamObj
-    this.checkStreamObject(streamObj);
-
-    // return the promise for this action
-    return new Promise(async (resolve, reject) => {
+    return super.run(streamObj, async (resolve, reject) => {
       // pass over this action if we don't want to pack the files
       if (
         streamObj.pack === false ||

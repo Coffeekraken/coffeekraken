@@ -50,7 +50,14 @@ module.exports = class STerserStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(settings = {}) {
-    super(settings);
+    super(
+      __deepMerge(
+        {
+          id: 'actionStream.action.js.terser'
+        },
+        settings
+      )
+    );
   }
 
   /**
@@ -63,11 +70,7 @@ module.exports = class STerserStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(streamObj, settings) {
-    // make sure we have a correct streamObj
-    this.checkStreamObject(streamObj);
-
-    // return the promise for this action
-    return new Promise((resolve, reject) => {
+    return super.run(streamObj, (resolve, reject) => {
       // minify the "data"
 
       if (!streamObj.prod) return resolve(streamObj);

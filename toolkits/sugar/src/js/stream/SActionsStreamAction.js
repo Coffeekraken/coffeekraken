@@ -3,6 +3,7 @@ import __deepMerge from '../object/deepMerge';
 import __convert from '../time/convert';
 import __validateDefinitionObject from '../object/validateDefinitionObject';
 import __validateWithDefinitionObject from '../object/validateWithDefinitionObject';
+import __uniqid from '../string/uniqid';
 
 /**
  * @name          SActionStreamAction
@@ -66,7 +67,7 @@ export default class SActionStreamAction extends __SPromise {
       __deepMerge(
         {
           name: null,
-          id: null,
+          id: __uniqid(),
           cwd: process.cwd()
         },
         settings
@@ -194,7 +195,12 @@ export default class SActionStreamAction extends __SPromise {
    *
    * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  run(streamObj, settings = {}) {}
+  run(streamObj, promiseFn) {
+    this.checkStreamObject(streamObj);
+    return new __SPromise(promiseFn, {
+      id: this._settings.id
+    }).start();
+  }
 
   /**
    * @name          error

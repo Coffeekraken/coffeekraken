@@ -1,6 +1,7 @@
 const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
 const __globby = require('globby');
 const __path = require('path');
+const __deepMerge = require('../../../object/deepMerge');
 
 /**
  * @name                SSugarJsonStreamAction
@@ -43,7 +44,14 @@ module.exports = class SSugarJsonStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(settings = {}) {
-    super(settings);
+    super(
+      __deepMerge(
+        {
+          id: 'actionStream.action.js.sugarJs'
+        },
+        settings
+      )
+    );
   }
 
   /**
@@ -56,10 +64,7 @@ module.exports = class SSugarJsonStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(streamObj, settings) {
-    // make sure we have a correct streamObj
-    this.checkStreamObject(streamObj);
-
-    return new Promise(async (resolve, reject) => {
+    super.run(streamObj, async (resolve, reject) => {
       // search for sugar.json files
       let dirs = streamObj.sugarJsonDirs;
       if (!Array.isArray(dirs)) dirs = [dirs];

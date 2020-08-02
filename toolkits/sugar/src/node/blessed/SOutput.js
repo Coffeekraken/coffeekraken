@@ -2,14 +2,10 @@ const __deepMerge = require('../object/deepMerge');
 const __blessed = require('blessed');
 const __color = require('../color/color');
 const __SComponent = require('./SComponent');
-const __parseHtml = require('../terminal/parseHtml');
 const __parseMarkdown = require('../terminal/parseMarkdown');
 const __isChildProcess = require('../is/childProcess');
 const __stripAnsi = require('strip-ansi');
-const __countLine = require('../string/countLine');
-const __splitEvery = require('../string/splitEvery');
-const __upperFirst = require('../string/upperFirst');
-const { last } = require('lodash');
+const __trimLines = require('../string/trimLines');
 
 /**
  * @name                  SOutput
@@ -75,7 +71,13 @@ module.exports = class SOutput extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(process, settings = {}) {
-    const _settings = __deepMerge(settings);
+    const _settings = __deepMerge(
+      {
+        filter: null,
+        maxItemsByGroup: -1
+      },
+      settings
+    );
     // extends SPanel
     super(_settings);
     // save the process
@@ -110,6 +112,15 @@ module.exports = class SOutput extends __SComponent {
         // this.update();
       })
       .on('stdout.data', (data, metas) => {
+        if (
+          this._settings.filter &&
+          typeof this._settings.filter === 'function'
+        ) {
+          const res = this._settings.filter(data, metas);
+          if (res === false) return;
+          if (res !== true) data = res;
+        }
+
         this.log(
           data.value && data.value.value
             ? data.value.value
@@ -190,16 +201,26 @@ module.exports = class SOutput extends __SComponent {
       return true;
     });
 
+    let finalLogs = [];
+    logsArray.forEach((log) => {
+      const splitedLogs = log.split(/⠀+/);
+      finalLogs = [...finalLogs, ...splitedLogs];
+    });
+
     let currentGroup = null;
 
-    logsArray.forEach((log) => {
+    finalLogs.forEach((log) => {
+      // remove the potential special empty character "⠀"
+      // added by the SLogConsoleAdapter to identify new log vs
+      // one multiple lined log...
+      // log = log.replace(/^⠀+/, '');
+
       if (log.includes('[?1049h')) {
         log = log.slice(40);
       } // ugly hack that need to be checked...
       if (__stripAnsi(log).trim().length === 0) return;
 
       if (typeof log !== 'string') log = log.toString();
-      if (__stripAnsi(log).length == 0) return;
 
       if (!__isChildProcess()) {
         // check if we have a "group" at start
@@ -231,16 +252,16 @@ module.exports = class SOutput extends __SComponent {
           }
           // append the new content to the group object
           const processedLog = this._processMarkdown(log);
-          if (groupObj.content.indexOf(processedLog) === -1)
-            groupObj.content.push(processedLog);
+          // if (groupObj.content.indexOf(processedLog) === -1)
+          groupObj.content.push(processedLog);
 
           // update display
           this.update();
         } else {
           // append simply the content
           const processedLog = this._processMarkdown(log);
-          if (this._content.indexOf(processedLog) === -1)
-            this._content.push(processedLog);
+          // if (this._content.indexOf(processedLog) === -1)
+          this._content.push(processedLog);
         }
       } else {
         console.log(log);
@@ -335,14 +356,24 @@ module.exports = class SOutput extends __SComponent {
 
     const color = group.toLowerCase().includes('error') ? 'red' : 'yellow';
 
-    const contentArray = [
+    const title = __parseMarkdown(
       group.toLowerCase().includes('error')
         ? `<red>${group}</red>`
-        : `<yellow>${group}</yellow>`,
-      ...textsArray
-    ];
+        : `<yellow>${group}</yellow>`
+    );
 
-    $box.setContent(__parseMarkdown(contentArray.join('\n')));
+    if (this._settings.maxItemsByGroup === -1) {
+      $box.setContent(
+        __trimLines(`${title}
+      ${__parseMarkdown(contentArray.join('\n'))}`)
+      );
+    } else {
+      const contents = textsArray.slice(this._settings.maxItemsByGroup * -1);
+      $box.setContent(
+        __trimLines(`${title}
+      ${__parseMarkdown(contents.join('\n'))}`)
+      );
+    }
 
     const $line = __blessed.box({
       width: 1,

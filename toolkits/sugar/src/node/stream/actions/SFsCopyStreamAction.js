@@ -1,5 +1,6 @@
 const __SActionsStreamAction = require('../SActionsStreamAction');
 const __ncp = require('ncp').ncp;
+const __deepMerge = require('../../object/deepMerge');
 
 /**
  * @name            SFsCopyStreamAction
@@ -45,7 +46,14 @@ module.exports = class SFsCopyStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(settings = {}) {
-    super(settings);
+    super(
+      __deepMerge(
+        {
+          id: 'actionStream.action.fs.copy'
+        },
+        settings
+      )
+    );
   }
 
   /**
@@ -58,10 +66,7 @@ module.exports = class SFsCopyStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(streamObj, settings = this._settings) {
-    // make sure we have a correct streamObj
-    this.checkStreamObject(streamObj);
-
-    return new Promise(async (resolve, reject) => {
+    return super.run(streamObj, async (resolve, reject) => {
       __ncp(streamObj.input, streamObj.outputDir, (e) => {
         if (e) return reject(e);
         resolve(streamObj);

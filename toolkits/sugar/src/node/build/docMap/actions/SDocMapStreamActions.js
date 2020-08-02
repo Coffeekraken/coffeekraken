@@ -1,5 +1,7 @@
 const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
 const __SDocMapItem = require('../../../doc/SDocMapItem');
+const __deepMerge = require('../../../object/deepMerge');
+
 /**
  * @name                SDocMapStreamActions
  * @namespace           node.build.doc.actions
@@ -46,7 +48,14 @@ module.exports = class SDocMapStreamActions extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(settings = {}) {
-    super(settings);
+    super(
+      __deepMerge(
+        {
+          id: 'actionStream.action.docMap'
+        },
+        settings
+      )
+    );
   }
 
   /**
@@ -59,11 +68,7 @@ module.exports = class SDocMapStreamActions extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(streamObj, settings) {
-    // make sure we have a correct streamObj
-    this.checkStreamObject(streamObj);
-
-    // return the promise for this action
-    return new Promise(async (resolve, reject) => {
+    return super.run(streamObj, async (resolve, reject) => {
       // create the items array
       const itemsArray = [];
 

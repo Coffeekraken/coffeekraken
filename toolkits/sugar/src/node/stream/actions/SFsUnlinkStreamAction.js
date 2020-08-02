@@ -1,8 +1,9 @@
 const __SActionsStreamAction = require('../SActionsStreamAction');
 const __rimraf = require('rimraf');
+const __deepMerge = require('../../object/deepMerge');
 
 /**
- * @name            SUnlinkStreamAction
+ * @name            SFsUnlinkStreamAction
  * @namespace           node.stream.actions
  * @type            Class
  * @extends         SActionsStreamAction
@@ -17,7 +18,7 @@ const __rimraf = require('rimraf');
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SUnlinkStreamAction extends __SActionsStreamAction {
+module.exports = class SFsUnlinkStreamAction extends __SActionsStreamAction {
   /**
    * @name            definitionObj
    * @type             Object
@@ -44,7 +45,14 @@ module.exports = class SUnlinkStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(settings = {}) {
-    super(settings);
+    super(
+      __deepMerge(
+        {
+          id: 'actionStream.action.fs.unlink'
+        },
+        settings
+      )
+    );
   }
 
   /**
@@ -57,10 +65,7 @@ module.exports = class SUnlinkStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(streamObj, settings = this._settings) {
-    // make sure we have a correct streamObj
-    this.checkStreamObject(streamObj);
-
-    return new Promise(async (resolve, reject) => {
+    return super.run(streamObj, async (resolve, reject) => {
       __rimraf.sync(streamObj.unlink);
       delete streamObj.unlink;
       resolve(streamObj);

@@ -3,6 +3,7 @@ const __Bundler = require('scss-bundle').Bundler;
 const __getFilename = require('../../../fs/filename');
 const __isGlob = require('../../../is/glob');
 const __isPath = require('../../../is/path');
+const __deepMerge = require('../../../object/deepMerge');
 
 /**
  * @name                SBundleScssStreamAction
@@ -44,7 +45,15 @@ module.exports = class SBundleScssStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(settings = {}) {
-    super(settings);
+    super(
+      __deepMerge(
+        {
+          name: 'Bundle',
+          id: 'actionStream.action.scss.bundle'
+        },
+        settings
+      )
+    );
   }
 
   /**
@@ -57,10 +66,7 @@ module.exports = class SBundleScssStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(streamObj, settings) {
-    // make sure we have a correct streamObj
-    this.checkStreamObject(streamObj);
-
-    return new Promise(async (resolve, reject) => {
+    return super.run(streamObj, async (resolve, reject) => {
       if (!__isPath(streamObj.input)) {
         return resolve(streamObj);
       }

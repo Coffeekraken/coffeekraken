@@ -15,6 +15,8 @@ var _validateDefinitionObject = _interopRequireDefault(require("../object/valida
 
 var _validateWithDefinitionObject = _interopRequireDefault(require("../object/validateWithDefinitionObject"));
 
+var _uniqid = _interopRequireDefault(require("../string/uniqid"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -108,7 +110,7 @@ let SActionStreamAction = /*#__PURE__*/function (_SPromise) {
     // init SPromise
     _this = _super.call(this, () => {}, (0, _deepMerge.default)({
       name: null,
-      id: null,
+      id: (0, _uniqid.default)(),
       cwd: process.cwd()
     }, settings));
 
@@ -234,7 +236,12 @@ let SActionStreamAction = /*#__PURE__*/function (_SPromise) {
 
   }, {
     key: "run",
-    value: function run(streamObj, settings = {}) {}
+    value: function run(streamObj, promiseFn) {
+      this.checkStreamObject(streamObj);
+      return new _SPromise2.default(promiseFn, {
+        id: this._settings.id
+      }).start();
+    }
     /**
      * @name          error
      * @type          Function

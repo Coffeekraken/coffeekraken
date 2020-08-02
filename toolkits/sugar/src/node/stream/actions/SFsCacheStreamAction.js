@@ -5,6 +5,7 @@ const __ensureDirSync = require('../../fs/ensureDirSync');
 const __deepMerge = require('../../object/deepMerge');
 const __md5 = require('../../crypt/md5');
 const __writeJsonSync = require('../../fs/writeJsonSync');
+const { triggerAsyncId } = require('async_hooks');
 
 /**
  * @name            SFsCacheStreamAction
@@ -57,6 +58,7 @@ module.exports = class SFsCacheStreamAction extends __SActionsStreamAction {
     super(
       __deepMerge(
         {
+          id: 'actionStream.action.fs.cache',
           idProperty: 'input'
         },
         settings
@@ -74,10 +76,7 @@ module.exports = class SFsCacheStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(streamObj, settings = this._settings) {
-    // make sure we have a correct streamObj
-    this.checkStreamObject(streamObj);
-
-    return new Promise(async (resolve, reject) => {
+    return super.run(streamObj, async (resolve, reject, trigger, cancel) => {
       // make sure we have the cache directory
       __ensureDirSync(streamObj.cacheDir);
 
@@ -89,7 +88,8 @@ module.exports = class SFsCacheStreamAction extends __SActionsStreamAction {
       // check if the output files exists or not
       let outputFilesExists = true;
       if (streamObj.outputStack) {
-        Object.keys(streamObj.outputStack).forEach((path) => {
+        Object.keys(streamObj.outputStack).forEach((key) => {
+          const path = streamObj.outputStack[key];
           if (!__fs.existsSync(path)) {
             outputFilesExists = false;
           }
@@ -131,6 +131,10 @@ module.exports = class SFsCacheStreamAction extends __SActionsStreamAction {
         // restore the streamObject
         streamObj = cacheJson.streamObj;
         // specify to the ActionStream that we need to skip all the next actions
+        trigger(
+          'stdout.data',
+          `[${settings.name}] Skipping the next actions cause the data have been laoded from the cache...`
+        );
         this.skipNextActions();
       }
 

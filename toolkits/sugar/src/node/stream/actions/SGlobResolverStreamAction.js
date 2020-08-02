@@ -3,6 +3,7 @@ const __glob = require('glob');
 const __clone = require('../../object/clone');
 const __extractSame = require('../../string/extractSame');
 const __getFilename = require('../../fs/filename');
+const __deepMerge = require('../../object/deepMerge');
 
 /**
  * @name            SGlobResolverStreamAction
@@ -45,7 +46,14 @@ module.exports = class SGlobResolverStreamAction extends __SActionsStreamAction 
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(settings = {}) {
-    super(settings);
+    super(
+      __deepMerge(
+        {
+          id: 'actionStream.action.globResolver'
+        },
+        settings
+      )
+    );
   }
 
   /**
@@ -58,10 +66,7 @@ module.exports = class SGlobResolverStreamAction extends __SActionsStreamAction 
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(streamObj, settings = this._settings) {
-    // make sure we have a correct streamObj
-    this.checkStreamObject(streamObj);
-
-    return new Promise(async (resolve, reject) => {
+    return super.run(streamObj, async (resolve, reject) => {
       // resolve glob pattern
       const rootDir = streamObj[streamObj.globProperty];
       const files = __glob.sync(streamObj[streamObj.globProperty]);

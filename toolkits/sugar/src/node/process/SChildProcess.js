@@ -101,8 +101,6 @@ module.exports = class SChildProcess extends __SPromise {
       },
       settings
     );
-
-    console.log(this._settings);
   }
 
   /**

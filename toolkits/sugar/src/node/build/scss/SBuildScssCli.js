@@ -1,8 +1,8 @@
 const __SCli = require('../../cli/SCli');
 const __sugarConfig = require('../../config/sugar');
-const __packageRoot = require('../../path/packageRoot');
 const __SBuildScssActionsStream = require('../../build/scss/SBuildScssActionsStream');
-const __output = require('../../process/output');
+const __SPromise = require('../../promise/SPromise');
+const __deepMerge = require('../../object/deepMerge');
 
 /**
  * @name            SBuildScssCli
@@ -110,28 +110,47 @@ module.exports = class SBuildScssCli extends __SCli {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(settings = {}) {
-    super(settings);
+    super(
+      __deepMerge(
+        {
+          id: 'build.scss',
+          name: 'Build Scss'
+        },
+        settings
+      )
+    );
   }
 
   /**
-   * @name            childRun
+   * @name            _run
    * @type            Function
-   * @override
+   * @private
    *
-   * This method is the one that will be called once you call ```run```  inside a child process.
-   * At first, the SCli class check if you are running in a child process. If not, it will
-   * generate one to run your actual logic. This function represent the code that will
-   * be actually runned.
+   * This method is the one that will be called once you call ```run```.
+   * The params passed are processed by the ```run``` parent method so you can
+   * confidently trust them.
+   * You MUST return an SPromise instance so that the spawned process can be
+   * managed automatically in the parent ```run``` method.
    *
    * @param       {Object}        argsObj         The object of passed arguments
+   * @param       {Object}        [settings={}]     The passed settings object
+   * @return      {SPromise}                      An SPromise instance through which the parent method can register for events like "success", "stdout.data", etc...
    *
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  childRun(argsObj) {
-    const stream = new __SBuildScssActionsStream({});
-    const proc = stream.start(argsObj);
-    __output(proc);
-    return proc;
+  _run(argsObj, settings = {}) {
+    return new __SPromise(
+      async function (resolve, reject, trigger, cancel) {
+        const stream = new __SBuildScssActionsStream({});
+        const streamPromise = stream.start(argsObj);
+        __SPromise.pipe(streamPromise, this);
+        const res = await streamPromise;
+        resolve(res.streamObj.data);
+      },
+      {
+        id: 'cli.build.scss'
+      }
+    ).start();
   }
 };

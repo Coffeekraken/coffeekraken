@@ -8,6 +8,7 @@ import __isChildProcess from '../is/childProcess';
 import __isTestEnv from '../is/testEnv';
 import { before } from 'lodash';
 import __wait from '../time/wait';
+import __uniqid from '../string/uniqid';
 
 /**
  * @name          SActionStream
@@ -88,14 +89,15 @@ export default class SActionStream extends __SPromise {
       () => {},
       __deepMerge(
         {
+          id: __uniqid(),
           name: null,
           order: null,
           before: [],
           after: [],
           beforeActions: {},
           afterActions: {},
-          actions: {},
-          exitOnComplete: __isChildProcess()
+          actions: {}
+          // exitOnComplete: __isChildProcess()
         },
         settings
       )
@@ -220,6 +222,11 @@ export default class SActionStream extends __SPromise {
           let actionSettings = settings.actions
             ? settings.actions[actionName] || {}
             : {};
+
+          // make sure we have a "name" property in the actionSettings object
+          if (!actionSettings.name) {
+            actionSettings.name = actionName;
+          }
 
           let skipMessage = null,
             skipAction = 'break';
@@ -379,6 +386,7 @@ export default class SActionStream extends __SPromise {
                   currentStreamObj,
                   actionSettings
                 );
+                __SPromise.pipe(currentActionReturn, this._currentSPromise);
                 if (currentActionReturn instanceof Promise)
                   currentStreamObj = await currentActionReturn;
                 else currentStreamObj = currentActionReturn;
@@ -581,10 +589,13 @@ export default class SActionStream extends __SPromise {
         this.dispatch('complete', overallActionsStats);
         resolve(overallActionsStats);
 
-        if (this._settings.exitOnComplete) {
-          console.log('#error ENDNE');
-          process.exit(this._exitCode);
-        }
+        // if (this._settings.exitOnComplete) {
+        //   console.log('#error ENDNE');
+        //   process.exit(this._exitCode);
+        // }
+      },
+      {
+        id: this._settings.id
       }
     )
       // .on('cancel', () => {

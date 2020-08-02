@@ -25,6 +25,8 @@ var _lodash = require("lodash");
 
 var _wait = _interopRequireDefault(require("../time/wait"));
 
+var _uniqid = _interopRequireDefault(require("../string/uniqid"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -134,14 +136,15 @@ let SActionStream = /*#__PURE__*/function (_SPromise) {
 
     // init SPromise
     _this2 = _super.call(this, () => {}, (0, _deepMerge.default)({
+      id: (0, _uniqid.default)(),
       name: null,
       order: null,
       before: [],
       after: [],
       beforeActions: {},
       afterActions: {},
-      actions: {},
-      exitOnComplete: (0, _childProcess.default)()
+      actions: {} // exitOnComplete: __isChildProcess()
+
     }, settings));
 
     _defineProperty(_assertThisInitialized(_this2), "_actionsObject", {});
@@ -240,7 +243,12 @@ let SActionStream = /*#__PURE__*/function (_SPromise) {
           const actionName = actionsOrderedNames[i];
           this._currentActionName = actionName;
           let actionInstance;
-          let actionSettings = settings.actions ? settings.actions[actionName] || {} : {};
+          let actionSettings = settings.actions ? settings.actions[actionName] || {} : {}; // make sure we have a "name" property in the actionSettings object
+
+          if (!actionSettings.name) {
+            actionSettings.name = actionName;
+          }
+
           let skipMessage = null,
               skipAction = 'break';
 
@@ -362,6 +370,9 @@ let SActionStream = /*#__PURE__*/function (_SPromise) {
 
               try {
                 currentActionReturn = actionFn(currentStreamObj, actionSettings);
+
+                _SPromise2.default.pipe(currentActionReturn, this._currentSPromise);
+
                 if (currentActionReturn instanceof Promise) currentStreamObj = await currentActionReturn;else currentStreamObj = currentActionReturn;
                 currentActionReturn = null;
               } catch (e) {
@@ -489,12 +500,12 @@ let SActionStream = /*#__PURE__*/function (_SPromise) {
         this.log(completeString); // resolve this stream process
 
         this.dispatch('complete', overallActionsStats);
-        resolve(overallActionsStats);
-
-        if (this._settings.exitOnComplete) {
-          console.log('#error ENDNE');
-          process.exit(this._exitCode);
-        }
+        resolve(overallActionsStats); // if (this._settings.exitOnComplete) {
+        //   console.log('#error ENDNE');
+        //   process.exit(this._exitCode);
+        // }
+      }, {
+        id: this._settings.id
       }) // .on('cancel', () => {
       //   canceled = true;
       //   // check if the current action returned value is a promise cancelable

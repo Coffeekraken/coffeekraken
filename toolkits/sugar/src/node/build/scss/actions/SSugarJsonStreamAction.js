@@ -1,5 +1,5 @@
 const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
-
+const __deepMerge = require('../../../object/deepMerge');
 const __globby = require('globby');
 const __path = require('path');
 const __packageRoot = require('../../../path/packageRoot');
@@ -46,7 +46,15 @@ module.exports = class SSugarJsonStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(settings = {}) {
-    super(settings);
+    super(
+      __deepMerge(
+        {
+          name: 'Sugar Json',
+          id: 'actionStream.action.scss.sugarJson'
+        },
+        settings
+      )
+    );
   }
 
   /**
@@ -59,10 +67,7 @@ module.exports = class SSugarJsonStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(streamObj, settings) {
-    // make sure we have a correct streamObj
-    this.checkStreamObject(streamObj);
-
-    return new Promise(async (resolve, reject) => {
+    return super.run(streamObj, async (resolve, reject) => {
       if (!streamObj.sugarJsonDirs) {
         this.warn(
           `No "<cyan>sugarJsonDirs</cyan>" has been specified so use the default value which is "<cyan>${__packageRoot()}</cyan>"...`

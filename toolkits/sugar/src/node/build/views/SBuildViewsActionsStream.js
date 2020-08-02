@@ -2,7 +2,7 @@ const __SActionsStream = require('../../stream/SActionsStream');
 const __deepMerge = require('../../object/deepMerge');
 const __SFsFilesResolverStreamAction = require('../../stream/actions/SFsFilesResolverStreamAction');
 const __SFsReadFileStreamAction = require('../../stream/actions/SFsReadFileStreamAction');
-const __SUnlinkStreamAction = require('../../stream/actions/SUnlinkStreamAction');
+const __SFsUnlinkStreamAction = require('../../stream/actions/SFsUnlinkStreamAction');
 const __globParent = require('glob-parent');
 const __SFsOutputStreamAction = require('../../stream/actions/SFsOutputStreamAction');
 const __path = require('path');
@@ -46,7 +46,7 @@ module.exports = class SBuildViewsActionsStream extends __SActionsStream {
     // init actions stream
     super(
       {
-        unlink: __SUnlinkStreamAction,
+        unlink: __SFsUnlinkStreamAction,
         filesResolver: __SFsFilesResolverStreamAction,
         readFile: __SFsReadFileStreamAction,
         fsOutput: __SFsOutputStreamAction

@@ -1,5 +1,6 @@
 const __SCli = require('../../cli/SCli');
 const __sugarConfig = require('../../config/sugar');
+const __deepMerge = require('../../object/deepMerge');
 
 /**
  * @name            SBuildViewsCli
@@ -60,6 +61,14 @@ module.exports = class SBuildViewsCli extends __SCli {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(settings = {}) {
-    super(settings);
+    super(
+      __deepMerge(
+        {
+          id: 'build.views',
+          name: 'Build Views'
+        },
+        settings
+      )
+    );
   }
 };

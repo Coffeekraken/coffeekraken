@@ -1,13 +1,13 @@
 const __buildCommandLine = require('./buildCommandLine');
 const __validateDefinitionObject = require('./validateDefinitionObject');
 const __spawn = require('../process/spawn');
-const __SOutput = require('../blessed/SOutput');
 const __SChildProcess = require('../process/SChildProcess');
 const __deepMerge = require('../object/deepMerge');
 const __parseHtml = require('../terminal/parseHtml');
 const __argsToObject = require('../cli/argsToObject');
 const __isChildProcess = require('../is/childProcess');
 const __SPromise = require('../promise/SPromise');
+const __output = require('../process/output');
 
 /**
  * @name                SCli
@@ -56,7 +56,7 @@ const __SPromise = require('../promise/SPromise');
  */
 module.exports = class SCli {
   /**
-   * @name          _childProcess
+   * @name          _runningProcess
    * @type          SPromise
    * @private
    *
@@ -64,7 +64,7 @@ module.exports = class SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _childProcess = null;
+  _runningProcess = null;
 
   /**
    * @name        _runningParamsObj
@@ -102,9 +102,10 @@ module.exports = class SCli {
     this._settings = __deepMerge(
       {
         id: this.constructor.name,
+        name: null,
         includeAllParams: true,
-        defaultParamsObj: {},
-        forceChildProcess: false
+        output: false,
+        defaultParamsObj: {}
       },
       settings
     );
@@ -181,30 +182,17 @@ module.exports = class SCli {
         `An SCli based class like your "${this.constructor.name}" MUST have a "definitionObj" static object property...`
       );
     }
+
+    // existence of the ```_run``` method
+    if (!this._run || typeof this._run !== 'function') {
+      throw new Error(
+        `An SCli based class like your "${this.constructor.name}" MUST has a "_run" method that has to be responsible of executing your process when calling the "run" method...`
+      );
+    }
+
     // check definition object
     const definitionObjCheck = __validateDefinitionObject(this.definitionObj);
     if (definitionObjCheck !== true) throw new Error(definitionObjCheck);
-  }
-
-  /**
-   * @name          toString
-   * @type          Function
-   *
-   * This method allows you to pass an arguments object and return the builded command line string depending on the definition object.
-   *
-   * @param       {Object}      paramsObj         An argument object to use for the command line string generation
-   * @param       {Boolean}     [includeAllParams=settings.includeAllParams]       Specify if you want all the arguments in the definition object in your command line string, or if you just want the one passed in your paramsObj argument
-   * @return      {String}                        The generated command line string
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  toString(paramsObj = {}, includeAllParams = this._settings.includeAllParams) {
-    return __buildCommandLine(
-      this.commandString,
-      this.definitionObj,
-      paramsObj,
-      includeAllParams
-    );
   }
 
   /**
@@ -239,47 +227,89 @@ module.exports = class SCli {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(paramsObj = {}, settings = {}) {
-    settings = __deepMerge(this._settings, settings);
-
-    paramsObj = __deepMerge(this._settings.defaultParamsObj, paramsObj);
-
-    // make sure we have an object as args
-    paramsObj = __argsToObject(paramsObj, this.definitionObj);
-
-    // check if is running in a child process
-    if (!settings.forceChildProcess && __isChildProcess() && this.childRun) {
-      const child = this.childRun(paramsObj);
-      return child;
-    }
-
-    if (this._childProcess) {
+    if (this._runningProcess) {
       throw new Error(
-        `You cannot spawn multiple "${this.constructor.name}" child process at the same time. Please kill the currently running one using the "kill" method...`
+        `You cannot spawn multiple "${this.constructor.name}" process at the same time. Please kill the currently running one using the "kill" method...`
       );
     }
+    settings = __deepMerge(this._settings, settings);
+    // make sure we have an object as args
+    paramsObj = __deepMerge(this._settings.defaultParamsObj, paramsObj);
+    paramsObj = __argsToObject(paramsObj, this.definitionObj);
 
-    const childProcess = new __SChildProcess(this.commandString, {
-      id: settings.id,
-      definitionObj: this.definitionObj,
-      defaultParamsObj: settings.defaultParamsObj
+    if (__isChildProcess()) {
+      // run the process
+      this._runningProcess = this._run(paramsObj, settings);
+
+      if (settings.output) {
+        const outputSettings =
+          typeof settings.output === 'object' ? settings.output : {};
+        __output(this._runningProcess, outputSettings);
+      }
+
+      this._runningProcess.on('resolve', (data) => {
+        data = {
+          time: Date.now(),
+          value: data
+        };
+        return data;
+      });
+
+      return this._runningProcess;
+    } else {
+      const childProcess = new __SChildProcess(this.commandString, {
+        id: settings.id,
+        definitionObj: this.definitionObj,
+        defaultParamsObj: settings.defaultParamsObj
+      });
+
+      this._runningProcess = childProcess.run(paramsObj);
+
+      if (settings.output) {
+        const outputSettings =
+          typeof settings.output === 'object' ? settings.output : {};
+        __output(this._runningProcess, outputSettings);
+      }
+    }
+
+    this._runningProcess.trigger(
+      'stdout.data',
+      `Launching the SCli "<primary>${
+        this._settings.name || this._settings.id
+      }</primary>" process...`
+    );
+
+    // save running process params
+    this._runningParamsObj = paramsObj;
+
+    // listen for some events on the process
+    this._runningProcess.on('cancel,finally', () => {
+      this._runningProcess = null;
+      this._runningParamsObj = null;
     });
 
-    console.log(paramsObj);
+    return this._runningProcess;
+  }
 
-    this._childProcess = childProcess.run(paramsObj);
-
-    // const commandLine = this.toString(paramsObj, settings.includeAllParams);
-    // this._runningParamsObj = Object.assign({}, paramsObj);
-    // this._childProcess = __spawn(commandLine, {
-    //   id: this._settings.id,
-    //   before: this.constructor.beforeCommand,
-    //   after: this.constructor.afterCommand
-    // }).on('cancel,finally', (E) => {
-    //   this._runningParamsObj = null;
-    //   this._childProcess = null;
-    // });
-
-    return this._childProcess;
+  /**
+   * @name          toString
+   * @type          Function
+   *
+   * This method allows you to pass an arguments object and return the builded command line string depending on the definition object.
+   *
+   * @param       {Object}      paramsObj         An argument object to use for the command line string generation
+   * @param       {Boolean}     [includeAllParams=settings.includeAllParams]       Specify if you want all the arguments in the definition object in your command line string, or if you just want the one passed in your paramsObj argument
+   * @return      {String}                        The generated command line string
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  toString(paramsObj = {}, includeAllParams = this._settings.includeAllParams) {
+    return __buildCommandLine(
+      this.commandString,
+      this.definitionObj,
+      paramsObj,
+      includeAllParams
+    );
   }
 
   /**
@@ -291,7 +321,7 @@ module.exports = class SCli {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   isRunning() {
-    return this._childProcess !== null;
+    return this._runningProcess !== null;
   }
 
   /**
@@ -304,54 +334,7 @@ module.exports = class SCli {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   kill() {
-    if (!this._childProcess) return;
-    return this._childProcess.cancel();
-  }
-
-  /**
-   * @name            _runningProcessparamsObject
-   * @type            Function
-   * @private
-   *
-   * This method take an argument object as parameter and return
-   * the final argument object depending on the definitionObj and the passed object
-   *
-   * @param       {Object}      [paramsObj=settings.defaultParamsObj]      An argument object used for processing the final argument object one
-   * @param       {Boolean}     [includeAllParams=settings.includeAllParams]       Specify if you want all the arguments in the definition object in your command line string, or if you just want the one passed in your paramsObj argument
-   * @return      {Object}              The processed args object
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  // _runningProcessparamsObject(
-  //   paramsObj = {},
-  //   includeAllParams = this._settings.includeAllParams
-  // ) {
-  //   const finalparamsObj = {};
-  //   Object.keys(this.definitionObj).forEach((argName) => {
-  //     if ((!paramsObj || paramsObj[argName] === undefined) && !includeAllParams)
-  //       return;
-  //     finalparamsObj[argName] =
-  //       paramsObj[argName] !== undefined
-  //         ? paramsObj[argName]
-  //         : this.definitionObj[argName].default;
-  //   });
-  //   return finalparamsObj;
-  // }
-
-  /**
-   * @name            log
-   * @type            Function
-   *
-   * This method simulate a log coming fron the child process
-   *
-   * @param       {Mixed}       ...args       The message(s) to log
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  log(...args) {
-    if (!this.isRunning()) return;
-    args.forEach((arg) => {
-      // this._childProcess.log(__parseHtml(arg));
-    });
+    if (!this._runningProcess) return;
+    return this._runningProcess.cancel();
   }
 };

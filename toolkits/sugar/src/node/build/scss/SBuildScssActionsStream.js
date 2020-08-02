@@ -67,6 +67,7 @@ module.exports = class SBuildScssActionsStream extends __SActionsStream {
       },
       __deepMerge(
         {
+          id: 'actionStream.build.scss',
           name: 'Build SCSS',
           actions: {
             filesResolver: {

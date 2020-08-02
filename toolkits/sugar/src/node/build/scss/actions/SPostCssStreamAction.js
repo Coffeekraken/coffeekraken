@@ -7,6 +7,7 @@ const __autoprefixer = require('autoprefixer');
 const __postcssPresetEnv = require('postcss-preset-env');
 const __cssnano = require('cssnano');
 const __removeComments = require('postcss-discard-comments');
+const __deepMerge = require('../../../object/deepMerge');
 
 /**
  * @name                SPostCssStreamAction
@@ -52,7 +53,15 @@ module.exports = class SPostCssStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(settings = {}) {
-    super(settings);
+    super(
+      __deepMerge(
+        {
+          name: 'PostCSS',
+          id: 'actionStream.action.scss.postCss'
+        },
+        settings
+      )
+    );
   }
 
   /**
@@ -65,10 +74,7 @@ module.exports = class SPostCssStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(streamObj, settings) {
-    // make sure we have a correct streamObj
-    this.checkStreamObject(streamObj);
-
-    return new Promise(async (resolve, reject) => {
+    return super.run(streamObj, async (resolve, reject) => {
       if (!streamObj.prod) return resolve(streamObj);
 
       const postCssResult = await __postcss([

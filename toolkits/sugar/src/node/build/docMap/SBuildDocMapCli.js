@@ -1,6 +1,7 @@
 const __SCli = require('../../cli/SCli');
 const __sugarConfig = require('../../config/sugar');
 const __packageRoot = require('../../path/packageRoot');
+const __deepMerge = require('../../object/deepMerge');
 
 /**
  * @name            SBuildDocMapCli
@@ -63,6 +64,14 @@ module.exports = class SBuildDocMapCli extends __SCli {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(settings = {}) {
-    super(settings);
+    super(
+      __deepMerge(
+        {
+          id: 'build.docMap',
+          name: 'Build docMap.json'
+        },
+        settings
+      )
+    );
   }
 };

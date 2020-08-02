@@ -3,6 +3,7 @@ const __Bundler = require('scss-bundle').Bundler;
 const __getFilename = require('../../../fs/filename');
 const __sugarConfig = require('../../../config/sugar');
 const __getScssImportsStrings = require('../getScssImportsStrings');
+const __deepMerge = require('../../../object/deepMerge');
 
 /**
  * @name                SImportsStreamAction
@@ -44,7 +45,15 @@ module.exports = class SImportsStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(settings = {}) {
-    super(settings);
+    super(
+      __deepMerge(
+        {
+          name: 'Imports',
+          id: 'actionStream.action.scss.imports'
+        },
+        settings
+      )
+    );
   }
 
   /**
@@ -57,10 +66,7 @@ module.exports = class SImportsStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(streamObj, settings) {
-    // make sure we have a correct streamObj
-    this.checkStreamObject(streamObj);
-
-    return new Promise(async (resolve, reject) => {
+    return super.run(streamObj, async (resolve, reject) => {
       const importsStrings = __getScssImportsStrings(streamObj.imports);
 
       streamObj.data = streamObj.data

@@ -193,7 +193,10 @@ export default class SPromise extends Promise {
       // check if need to process the value
       if (settings.processor) value = settings.processor(value, metas);
       // trigger on the destination promise
-      destSPromise.trigger(metas.stack, value, metas);
+      destSPromise.trigger(metas.stack, value, {
+        ...metas,
+        level: metas.level + 1
+      });
     });
   }
 
@@ -735,7 +738,8 @@ export default class SPromise extends Promise {
             stack,
             id: this._settings.id,
             state: this._state,
-            time: Date.now()
+            time: Date.now(),
+            level: 1
           },
           _metas
         )

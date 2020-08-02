@@ -223,7 +223,9 @@ let SPromise = /*#__PURE__*/function (_Promise) {
         // check if need to process the value
         if (settings.processor) value = settings.processor(value, metas); // trigger on the destination promise
 
-        destSPromise.trigger(metas.stack, value, metas);
+        destSPromise.trigger(metas.stack, value, { ...metas,
+          level: metas.level + 1
+        });
       });
     }
     /**
@@ -780,7 +782,8 @@ let SPromise = /*#__PURE__*/function (_Promise) {
           stack,
           id: this._settings.id,
           state: this._state,
-          time: Date.now()
+          time: Date.now(),
+          level: 1
         }, _metas)); // check if the callback result is a promise
 
         if (Promise.resolve(callbackResult) === callbackResult) {

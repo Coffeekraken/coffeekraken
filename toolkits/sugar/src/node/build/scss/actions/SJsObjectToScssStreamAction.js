@@ -1,6 +1,7 @@
 const __deepMerge = require('../../../object/deepMerge');
 const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
 const __jsObjectToScssMap = require('../jsObjectToScssMap');
+const { stream } = require('globby');
 
 /**
  * @name                SJsObjectToScssStreamAction
@@ -42,7 +43,15 @@ module.exports = class SJsObjectToScssStreamAction extends __SActionsStreamActio
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(settings = {}) {
-    super(settings);
+    super(
+      __deepMerge(
+        {
+          name: 'Js Object to Scss',
+          id: 'actionStream.action.scss.jsObjectToScss'
+        },
+        settings
+      )
+    );
   }
 
   /**
@@ -55,12 +64,7 @@ module.exports = class SJsObjectToScssStreamAction extends __SActionsStreamActio
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(streamObj, settings) {
-    // make sure we have a correct streamObj
-    this.checkStreamObject(streamObj);
-
-    settings = __deepMerge({}, settings);
-
-    return new Promise(async (resolve, reject) => {
+    return super.run(streamObj, async (resolve, reject) => {
       const result = __jsObjectToScssMap(streamObj.jsObjectToScss, settings);
 
       // set or append in the "data" property

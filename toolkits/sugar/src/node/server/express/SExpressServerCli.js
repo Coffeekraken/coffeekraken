@@ -82,33 +82,33 @@ module.exports = class SExpressServerCli extends __SCli {
     super(settings);
   }
 
-  /**
-   * @name            run
-   * @type            Function
-   * @override
-   *
-   * This method simply override the default one.
-   * For arguments documentation, check the SCli class.
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  run(
-    argsObj = this._settings.argsObj,
-    includeAllArgs = this._settings.includeAllArgs,
-    log = true
-  ) {
-    const process = super.run(argsObj, includeAllArgs);
-    if (!log) return process;
-    setTimeout(() => {
-      this.log(`<green>Your Express server is up and running</green>:
+  //   /**
+  //    * @name            run
+  //    * @type            Function
+  //    * @override
+  //    *
+  //    * This method simply override the default one.
+  //    * For arguments documentation, check the SCli class.
+  //    *
+  //    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  //    */
+  //   run(
+  //     argsObj = this._settings.argsObj,
+  //     includeAllArgs = this._settings.includeAllArgs,
+  //     log = true
+  //   ) {
+  //     const process = super.run(argsObj, includeAllArgs);
+  //     if (!log) return process;
+  //     setTimeout(() => {
+  //       this.log(`<green>Your Express server is up and running</green>:
 
-Hostname        : <yellow>${this.runningParamsObj.hostname}</yellow>
-Port            : <yellow>${this.runningParamsObj.port}</yellow>
-Root directory  : <yellow>${this.runningParamsObj.rootDir}</yellow>
-Views directory : <yellow>${this.runningParamsObj.viewsDir}</yellow>
-Views engine    : <yellow>${this.runningParamsObj.viewEngine}</yellow>
-URL             : <cyan>http://${this.runningParamsObj.hostname}:${this.runningParamsObj.port}</cyan>`);
-    });
-    return process;
-  }
+  // Hostname        : <yellow>${this.runningParamsObj.hostname}</yellow>
+  // Port            : <yellow>${this.runningParamsObj.port}</yellow>
+  // Root directory  : <yellow>${this.runningParamsObj.rootDir}</yellow>
+  // Views directory : <yellow>${this.runningParamsObj.viewsDir}</yellow>
+  // Views engine    : <yellow>${this.runningParamsObj.viewEngine}</yellow>
+  // URL             : <cyan>http://${this.runningParamsObj.hostname}:${this.runningParamsObj.port}</cyan>`);
+  //     });
+  //     return process;
+  //   }
 };

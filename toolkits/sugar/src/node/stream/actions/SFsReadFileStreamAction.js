@@ -1,6 +1,7 @@
 const __SActionsStreamAction = require('../SActionsStreamAction');
 const __fs = require('fs');
 const __isDirectory = require('../../is/directory');
+const __deepMerge = require('../../object/deepMerge');
 
 /**
  * @name            SFsReadFileStreamAction
@@ -47,7 +48,14 @@ module.exports = class SFsReadFileStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(settings = {}) {
-    super(settings);
+    super(
+      __deepMerge(
+        {
+          id: 'actionStream.action.fs.readFile'
+        },
+        settings
+      )
+    );
   }
 
   /**
@@ -60,10 +68,7 @@ module.exports = class SFsReadFileStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(streamObj, settings = this._settings) {
-    // make sure we have a correct streamObj
-    this.checkStreamObject(streamObj);
-
-    return new Promise(async (resolve, reject) => {
+    return super.run(streamObj, async (resolve, reject) => {
       if (!__fs.existsSync(streamObj.input))
         throw new Error(
           `The given "<yellow>input</yellow>" streamObj file path property "<red>${streamObj}</red>" does not exists...`

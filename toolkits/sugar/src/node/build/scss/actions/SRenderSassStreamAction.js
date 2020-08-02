@@ -4,6 +4,7 @@ const __deepMerge = require('../../../object/deepMerge');
 const __packageRoot = require('../../../path/packageRoot');
 const __globImporter = require('node-sass-glob-importer');
 const __getFilename = require('../../../fs/filename');
+const __SPromise = require('../../../promise/SPromise');
 
 /**
  * @name                SRenderSassStreamAction
@@ -49,7 +50,15 @@ module.exports = class SRenderSassStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(settings = {}) {
-    super(settings);
+    super(
+      __deepMerge(
+        {
+          name: 'Render',
+          id: 'actionStream.action.scss.render'
+        },
+        settings
+      )
+    );
   }
 
   /**
@@ -62,10 +71,7 @@ module.exports = class SRenderSassStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(streamObj, settings) {
-    // make sure we have a correct streamObj
-    this.checkStreamObject(streamObj);
-
-    return new Promise(async (resolve, reject) => {
+    return super.run(streamObj, async (resolve, reject, trigger, cancel) => {
       __sass.render(
         __deepMerge(
           {

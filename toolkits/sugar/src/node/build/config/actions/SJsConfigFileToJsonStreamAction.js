@@ -6,6 +6,7 @@ const __fs = require('fs');
 const __path = require('path');
 const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
 const __SBuildJsCli = require('../../SBuildJsCli');
+const { stream } = require('globby');
 
 /**
  * @name                SJsConfigFileToJsonStreamAction
@@ -47,7 +48,14 @@ module.exports = class SJsConfigFileToJsonStreamAction extends __SActionsStreamA
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(settings = {}) {
-    super(settings);
+    super(
+      __deepMerge(
+        {
+          id: 'actionStream.action.config.configFileToJson'
+        },
+        settings
+      )
+    );
   }
 
   /**
@@ -60,11 +68,7 @@ module.exports = class SJsConfigFileToJsonStreamAction extends __SActionsStreamA
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(streamObj, settings) {
-    // make sure we have a correct streamObj
-    this.checkStreamObject(streamObj);
-
-    // return the promise for this action
-    return new Promise((resolve, reject) => {
+    return super.run(streamObj, (resolve, reject) => {
       // get the config object from input file
       const config = require(streamObj.input);
 

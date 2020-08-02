@@ -2,6 +2,7 @@ const __SActionsStreamAction = require('../SActionsStreamAction');
 const __writeFile = require('../../fs/writeFile');
 const __toString = require('../../string/toString');
 const __packageRoot = require('../../path/packageRoot');
+const __deepMerge = require('../../object/deepMerge');
 
 /**
  * @name            SFsOutputStreamAction
@@ -42,7 +43,14 @@ module.exports = class SFsOutputStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(settings = {}) {
-    super(settings);
+    super(
+      __deepMerge(
+        {
+          id: 'actionStream.action.fs.output'
+        },
+        settings
+      )
+    );
   }
 
   /**
@@ -55,10 +63,7 @@ module.exports = class SFsOutputStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(streamObj, settings = this._settings) {
-    // make sure we have a correct streamObj
-    this.checkStreamObject(streamObj);
-
-    return new Promise(async (resolve, reject) => {
+    return super.run(streamObj, async (resolve, reject) => {
       if (!streamObj.outputStack || typeof streamObj.outputStack !== 'object') {
         this.warn(
           `The streamObj does not contain any "<cyan>outputStack</cyan>" property so no file will be saved at all...`

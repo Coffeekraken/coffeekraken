@@ -169,7 +169,7 @@ let SActionStreamAction = /*#__PURE__*/function (_SPromise) {
       if (checkWithDefinitionObjectResult !== true) {
         throw new Error(checkWithDefinitionObjectResult);
       } // throw new Error(checkWithDefinitionObjectResult);
-      // this.trigger('stderr.data', checkWithDefinitionObjectResult);
+      // this.trigger('error', checkWithDefinitionObjectResult);
 
     }
     /**
@@ -256,7 +256,7 @@ let SActionStreamAction = /*#__PURE__*/function (_SPromise) {
   }, {
     key: "error",
     value: function error(message) {
-      this.trigger('stderr.data', `<red>✚</red> ${message}`);
+      this.trigger('error', `<red>✚</red> ${message}`);
     }
     /**
      * @name          warn
@@ -272,7 +272,7 @@ let SActionStreamAction = /*#__PURE__*/function (_SPromise) {
   }, {
     key: "warn",
     value: function warn(message) {
-      this.trigger('stdout.data', `<yellow>⚠</yellow> ${message}`);
+      this.trigger('log', `<yellow>⚠</yellow> ${message}`);
     }
     /**
      * @name          log
@@ -288,7 +288,7 @@ let SActionStreamAction = /*#__PURE__*/function (_SPromise) {
   }, {
     key: "log",
     value: function log(message) {
-      this.trigger('stdout.data', message);
+      this.trigger('log', message);
     }
   }, {
     key: "settings",

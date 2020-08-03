@@ -207,8 +207,7 @@ module.exports = class SCli {
    * - kill: Triggered when the process has been killed
    * - success: Triggered when the process has finished without any error
    * - error: Triggered when the process has had an error
-   * - stdout.data: Triggered when some data are pushed in the stdout channel
-   * - stderr.data: Triggered when some data are pushed in the srderr channel
+   * - log: Triggered when some data are pushed in the stdout channel
    *
    * You can use the "spawn" function available under the namespace "sugar.node.childProcess" in order to
    * spawn the process with already all these events setted...
@@ -272,12 +271,12 @@ module.exports = class SCli {
       }
     }
 
-    this._runningProcess.trigger(
-      'stdout.data',
-      `Launching the SCli "<primary>${
+    this._runningProcess.trigger('log', {
+      temp: true,
+      value: `Launching the SCli "<primary>${
         this._settings.name || this._settings.id
       }</primary>" process...`
-    );
+    });
 
     // save running process params
     this._runningParamsObj = paramsObj;

@@ -7,7 +7,7 @@ const __SOutput = require('../blessed/SOutput');
  *
  * This function simply take a SProcess compatible process instance and display the output
  * accordingly to the context where this process is running. If the output is in a childProcess,
- * it will just console.log the stdout.data, stderr.data, etc... to the terminal but if the
+ * it will just console.log the log, error, etc... to the terminal but if the
  * process is in the main terminal instance, it will be wrapped inside a blessed box instance
  * and displayed nicely.
  *

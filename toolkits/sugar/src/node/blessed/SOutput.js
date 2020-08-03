@@ -4,8 +4,12 @@ const __color = require('../color/color');
 const __SComponent = require('./SComponent');
 const __parseMarkdown = require('../terminal/parseMarkdown');
 const __isChildProcess = require('../is/childProcess');
+const __parse = require('../string/parse');
+const __toString = require('../string/toString');
 const __stripAnsi = require('strip-ansi');
 const __trimLines = require('../string/trimLines');
+const __extractValues = require('../object/extractValues');
+const { parse } = require('node-persist');
 
 /**
  * @name                  SOutput
@@ -62,6 +66,18 @@ module.exports = class SOutput extends __SComponent {
   _logBox = null;
 
   /**
+   * @name           _headerBox
+   * @type          blessed.box
+   * @private
+   *
+   * Store the header content if a log object has the property "type" to "header"
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _headerBox = null;
+
+  /**
    * @name          constructor
    * @type          Function
    * @constructor
@@ -74,6 +90,8 @@ module.exports = class SOutput extends __SComponent {
     const _settings = __deepMerge(
       {
         filter: null,
+        clearOnStart: true,
+        maxItems: -1,
         maxItemsByGroup: -1
       },
       settings
@@ -111,51 +129,112 @@ module.exports = class SOutput extends __SComponent {
         // );
         // this.update();
       })
-      .on('stdout.data', (data, metas) => {
-        if (
-          this._settings.filter &&
-          typeof this._settings.filter === 'function'
-        ) {
-          const res = this._settings.filter(data, metas);
-          if (res === false) return;
-          if (res !== true) data = res;
+      .on('*.start', () => {
+        if (this._settings.clearOnStart) {
+          this.clear();
+        }
+      })
+      .on('log', (data, metas) => {
+        if (__isChildProcess()) {
+          console.log(__toString(data));
+          return;
         }
 
-        this.log(
-          data.value && data.value.value
-            ? data.value.value
-            : data.value
-            ? data.value
-            : data
-        );
-        this.update();
-      })
-      // .on('stderr.data', (data) => {
-      //   if (data.error) {
-      //     if (typeof data.error === 'string') {
-      //       this.log(`<red>${data.error}</red>`);
-      //     } else if (data.error.message) {
-      //       this.log(`<red>${data.error.message}</red>`);
-      //     }
-      //     if (data.error.stack) this.log(data.error.stack);
-      //     if (data.error.trace) this.log(data.error.trace);
-      //   } else {
-      //     this.log(
-      //       data.value && data.value.value
-      //         ? data.value.value
-      //         : data.value
-      //         ? data.value
-      //         : data
-      //     );
-      //   }
-      //   this.update();
-      // })
-      // subscribe to errors
-      .on('error', (data) => {
-        this.log(`<red>Something went wrong:</red>`);
-        this.log(data.error ? data.error : data);
+        let logsArray = [];
+        if (typeof data === 'string') {
+          const splitedLogs = data.split(/⠀/);
+          splitedLogs.forEach((log) => {
+            if (log.trim() === '') return;
+            log = log.replace(/⠀{0,9999999}/g, '').trim();
+            const parsedLog = __parse(log);
+            if (
+              typeof parsedLog === 'object' &&
+              parsedLog.value &&
+              typeof parsedLog.value === 'string'
+            ) {
+              logsArray.push(parsedLog);
+            } else if (typeof parsedLog === 'string') {
+              logsArray.push({
+                value: parsedLog
+              });
+            }
+          });
+        } else if (
+          typeof data === 'object' &&
+          data.value &&
+          typeof data.value === 'string'
+        ) {
+          const splitedLogs = data.value.split(/⠀/);
+          splitedLogs.forEach((log) => {
+            if (log.trim() === '') return;
+            log = log.replace(/⠀{0,9999999}/g, '').trim();
+            const parsedLog = __parse(log);
+            if (
+              typeof parsedLog === 'object' &&
+              parsedLog.value &&
+              typeof parsedLog.value === 'string'
+            ) {
+              logsArray.push({
+                ...data,
+                ...parsedLog
+              });
+            } else if (typeof parsedLog === 'string') {
+              logsArray.push({
+                ...data,
+                value: parsedLog
+              });
+            }
+          });
+        }
+
+        logsArray.forEach((logObj) => {
+          // handle special logs like #clear, etc...
+          if (logObj.value === '#clear') {
+            this.clear();
+            return;
+          }
+
+          if (
+            this._settings.filter &&
+            typeof this._settings.filter === 'function'
+          ) {
+            const res = this._settings.filter(logObj, metas);
+            if (res === false) return;
+            if (res !== true) logObj = res;
+          }
+
+          setTimeout(() => {
+            this.log(logObj);
+          }, 200);
+        });
         this.update();
       });
+    // .on('error', (data) => {
+    //   if (data.error) {
+    //     if (typeof data.error === 'string') {
+    //       this.log(`<red>${data.error}</red>`);
+    //     } else if (data.error.message) {
+    //       this.log(`<red>${data.error.message}</red>`);
+    //     }
+    //     if (data.error.stack) this.log(data.error.stack);
+    //     if (data.error.trace) this.log(data.error.trace);
+    //   } else {
+    //     this.log(
+    //       data.value && data.value.value
+    //         ? data.value.value
+    //         : data.value
+    //         ? data.value
+    //         : data
+    //     );
+    //   }
+    //   this.update();
+    // })
+    // subscribe to errors
+    // .on('error', (data) => {
+    //   this.log(`<red>Something went wrong:</red>`);
+    //   this.log(data.error ? data.error : data);
+    //   this.update();
+    // });
   }
 
   /**
@@ -168,12 +247,29 @@ module.exports = class SOutput extends __SComponent {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
+  _clearTimeout = null;
+  _allowClear = true;
+  _updateTimeout = false;
   clear() {
-    this._content = [];
-    this._logBox.children.forEach((child) => {
-      child.destroy();
-    });
-    this._logBox.setContent('');
+    if (__isChildProcess()) {
+      console.log('#clear');
+    } else {
+      clearTimeout(this._clearTimeout);
+      this._clearTimeout = setTimeout(() => {
+        this._allowClear = true;
+      }, 200);
+
+      if (this._allowClear) {
+        this._allowClear = false;
+        this._content = [];
+        this.update();
+        this._updateTimeout = true;
+        setTimeout(() => {
+          this._updateTimeout = false;
+          this.update();
+        }, 200);
+      }
+    }
   }
 
   _processMarkdown(content) {
@@ -193,80 +289,78 @@ module.exports = class SOutput extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   log(...args) {
-    let logsArray = args;
+    let logsObjArray = args;
+    let currentGroup = null;
 
-    logsArray = logsArray.filter((a) => {
-      if (typeof a !== 'string' || a.replace === undefined) return false;
-      // if (a.trim() === '') return false;
+    // filter the content to remove the "temp" logs
+    this._content = this._content.filter((logObj) => {
+      if (logObj.temp) {
+        if (logObj.$box) logObj.$box.destroy();
+        return false;
+      }
       return true;
     });
 
-    let finalLogs = [];
-    logsArray.forEach((log) => {
-      const splitedLogs = log.split(/⠀+/);
-      finalLogs = [...finalLogs, ...splitedLogs];
-    });
+    logsObjArray.forEach((logObj) => {
+      if (__isChildProcess()) {
+        console.log(__toString(logObj));
+        return;
+      }
 
-    let currentGroup = null;
-
-    finalLogs.forEach((log) => {
-      // remove the potential special empty character "⠀"
-      // added by the SLogConsoleAdapter to identify new log vs
-      // one multiple lined log...
-      // log = log.replace(/^⠀+/, '');
-
-      if (log.includes('[?1049h')) {
-        log = log.slice(40);
+      if (logObj.value.includes('[?1049h')) {
+        logObj.value = logObj.value.slice(40);
       } // ugly hack that need to be checked...
-      if (__stripAnsi(log).trim().length === 0) return;
+      if (__stripAnsi(logObj.value).trim().length === 0) return;
 
-      if (typeof log !== 'string') log = log.toString();
+      if (typeof logObj.value !== 'string')
+        logObj.value = logObj.value.toString();
 
-      if (!__isChildProcess()) {
-        // check if we have a "group" at start
-        const groupReg = /^\[([a-zA-Z0-9_-]+)\].*?/g;
-        // const groupMatch = groupReg.test(log);
-        const groupMatch = groupReg.exec(log.trim());
-
-        // if (currentGroup || groupMatch) {
-        if (currentGroup || (groupMatch && groupMatch[1])) {
-          currentGroup = groupMatch ? groupMatch[1] : currentGroup;
-
-          // process the arg
-          log = log.replace(`[${currentGroup}]`, '').trim();
-
-          const actualGroupObjArray = this._content.filter((item) => {
-            if (typeof item !== 'object') return false;
-            if (item.group === currentGroup) return true;
-            return false;
-          });
-          let groupObj = {
-            group: currentGroup,
-            content: []
-          };
-          if (actualGroupObjArray.length) {
-            groupObj = actualGroupObjArray[0];
-          } else {
-            if (this._content.indexOf(groupObj) === -1)
-              this._content.push(groupObj);
-          }
-          // append the new content to the group object
-          const processedLog = this._processMarkdown(log);
-          // if (groupObj.content.indexOf(processedLog) === -1)
-          groupObj.content.push(processedLog);
-
-          // update display
-          this.update();
+      if (logObj.type && logObj.type === 'header') {
+        // generate the header box
+        this._createHeaderBox(logObj);
+      } else if (logObj.group && typeof logObj.group === 'string') {
+        const actualGroupObjArray = this._content.filter((item) => {
+          if (typeof item !== 'object') return false;
+          if (item.group === logObj.group) return true;
+          return false;
+        });
+        let groupObj = {
+          group: logObj.group,
+          content: []
+        };
+        if (actualGroupObjArray.length) {
+          groupObj = actualGroupObjArray[0];
         } else {
-          // append simply the content
-          const processedLog = this._processMarkdown(log);
-          // if (this._content.indexOf(processedLog) === -1)
-          this._content.push(processedLog);
+          if (this._content.indexOf(groupObj) === -1)
+            this._content.push(groupObj);
         }
+        // if (groupObj.content.indexOf(processedLog) === -1)
+        groupObj.content.push(logObj);
+
+        // update display
+        this.update();
       } else {
-        console.log(log);
+        // if (this._content.indexOf(processedLog) === -1)
+        this._content.push(logObj);
       }
     });
+
+    // handle the maxItems setting
+    if (this._settings.maxItems !== -1) {
+      let itemsCount = 0;
+      const newContent = [];
+      for (let i = this._content.length - 1; i >= 0; i--) {
+        const item = this._content[i];
+        newContent = [item, ...newContent];
+        itemsCount++;
+        // stop if we reach the maxItems count
+        if (itemsCount >= this._settings.maxItems) {
+          break;
+        }
+      }
+      // save the new content
+      this._content = newContent;
+    }
   }
 
   /**
@@ -363,15 +457,17 @@ module.exports = class SOutput extends __SComponent {
     );
 
     if (this._settings.maxItemsByGroup === -1) {
+      const logsString = __extractValues(textsArray, 'value').join('\n');
       $box.setContent(
         __trimLines(`${title}
-      ${__parseMarkdown(contentArray.join('\n'))}`)
+      ${__parseMarkdown(logsString)}`)
       );
     } else {
       const contents = textsArray.slice(this._settings.maxItemsByGroup * -1);
+      const logsString = __extractValues(contents, 'value').join('\n');
       $box.setContent(
         __trimLines(`${title}
-      ${__parseMarkdown(contents.join('\n'))}`)
+      ${__parseMarkdown(logsString)}`)
       );
     }
 
@@ -401,6 +497,64 @@ module.exports = class SOutput extends __SComponent {
   }
 
   /**
+   * @name          _createHeaderBox
+   * @type          Function
+   * @private
+   *
+   * This emthod take a logObj that has the property "type" to "header" and generate a
+   * header box based on the blessed.box function.
+   *
+   * @param       {Object}      logObj          The logObj to use to generate the header box
+   * @return      {blessed.box}                 Return the blessed.box instance also saved in the "_headerBox" instance property
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _createHeaderBox(logObj) {
+    this._headerBox = __blessed.box({
+      width: '100%',
+      height: 1,
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      style: {},
+      mouse: true,
+      keys: true,
+      scrollable: true,
+      scrollbar: {
+        ch: ' ',
+        inverse: true
+      },
+      border: {
+        type: 'line'
+      },
+      style: {
+        border: {
+          fg: __color('terminal.primary').toString()
+        },
+        scrollbar: {
+          bg: __color('terminal.primary').toString()
+        }
+      },
+      content: __parseMarkdown(logObj.value),
+      padding: {
+        top: 1,
+        left: 1,
+        right: 1,
+        bottom: 1
+      }
+    });
+
+    this.append(this._headerBox);
+    this._headerBox.height = this._headerBox.getScrollHeight() + 4;
+
+    this._logBox.top = this._headerBox.height;
+
+    return this._headerBox;
+  }
+
+  /**
    * @name          _createLogBox
    * @type          Function
    * @private
@@ -416,7 +570,7 @@ module.exports = class SOutput extends __SComponent {
     // }
 
     this._logBox = __blessed.box({
-      width: '100%-4',
+      width: '100%',
       top: 0,
       left: 0,
       right: 0,
@@ -435,7 +589,7 @@ module.exports = class SOutput extends __SComponent {
         }
       },
       padding: {
-        top: 1,
+        top: 0,
         left: 1,
         right: 1,
         bottom: 1
@@ -445,39 +599,49 @@ module.exports = class SOutput extends __SComponent {
     this.append(this._logBox);
   }
 
+  _logBoxChilds = [];
+  _superUpdateTimeout = null;
   update() {
     if (__isChildProcess()) return;
+    if (this._updateTimeout) return;
+    if (!this.isDisplayed()) return;
 
-    clearTimeout(this._logTimeout);
-    this._logTimeout = setTimeout(() => {
-      if (!this.isDisplayed()) return;
+    let lastY = 1;
+    this._logBoxChilds.forEach((child, i) => {
+      child.destroy();
+    });
+    this._logBoxChilds = [];
 
-      let lastY = 1;
-      this._logBox.children.forEach((child) => {
-        child.destroy();
-      });
+    if (!this._content.length) {
+      super.update();
+      return;
+    }
 
-      this._content.forEach((item) => {
-        try {
-          if (typeof item === 'string') {
-            const $box = this._simpleTextBox(item);
-            $box.top = lastY;
-            this._logBox.append($box);
-            lastY += $box.getScrollHeight() + 2;
-          } else if (typeof item === 'object' && item.group) {
-            const $box = this._groupBox(item.group, item.content);
-            $box.top = lastY;
-            this._logBox.append($box);
-            lastY += $box.getScrollHeight() + 2;
-          }
-        } catch (e) {
-          // throw e;
+    this._content.forEach((item) => {
+      try {
+        if (item.value && typeof item.value === 'string') {
+          const $box = this._simpleTextBox(item.value);
+          $box.top = lastY;
+          this._logBoxChilds.push($box);
+          this._logBox.append($box);
+          item.$box = $box;
+          lastY += $box.getScrollHeight() + 2;
+        } else if (typeof item === 'object' && item.group) {
+          const $box = this._groupBox(item.group, item.content);
+          $box.top = lastY;
+          this._logBoxChilds.push($box);
+          item.$box = $box;
+          this._logBox.append($box);
+          lastY += $box.getScrollHeight() + 2;
         }
-      });
-      setTimeout(() => {
-        this._logBox.setScrollPerc(100);
-        super.update();
-      }, 100);
-    }, 200);
+      } catch (e) {
+        throw e;
+      }
+    });
+    clearTimeout(this._superUpdateTimeout);
+    this._superUpdateTimeout = setTimeout(() => {
+      this._logBox.setScrollPerc(100);
+      super.update();
+    }, 50);
   }
 };

@@ -205,12 +205,12 @@ export default class SPromise extends Promise {
    * @type                  Function
    * @static
    *
-   * This static function allows you to log automatically the triggered stdout.data and stderr.data
+   * This static function allows you to log automatically the triggered log and error
    * events. You can specify the stacks you want to log using the ```stacks``` property in the settings object
    *
    * @param         {SPromise}      promise             The promise you want to listen for stdout and stderr events
    * @param         {Object}        [settings={}]         An object of settings to configure your log process
-   * - stacks ('stdout.data,stderr.data') {String}: Specify which stacks you want to log.
+   * - stacks ('log,error') {String}: Specify which stacks you want to log.
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
@@ -219,7 +219,7 @@ export default class SPromise extends Promise {
     settings = __deepMerge(
       {
         filter: null,
-        stacks: 'stdout.data,stderr.data'
+        stacks: 'log,error'
       },
       settings
     );

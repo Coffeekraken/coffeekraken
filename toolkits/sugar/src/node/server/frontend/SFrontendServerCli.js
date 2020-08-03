@@ -68,7 +68,7 @@ module.exports = class SFrontendServerCli extends __SExpressServerCli {
    *
    * @param       {Object}        argsObj         The object of passed arguments
    * @param       {Object}        [settings={}]     The passed settings object
-   * @return      {SPromise}                      An SPromise instance through which the parent method can register for events like "success", "stdout.data", etc...
+   * @return      {SPromise}                      An SPromise instance through which the parent method can register for events like "success", "log", etc...
    *
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

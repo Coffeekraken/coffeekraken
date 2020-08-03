@@ -135,11 +135,11 @@ let SLogConsoleAdapter = /*#__PURE__*/function () {
 
 
         if (typeof message === 'string') {
-          ((global || window).nativeConsole || console)[consoleMethod]('⠀' + (0, _console.default)(message));
+          ((global || window).nativeConsole || console)[consoleMethod]((0, _console.default)(message) + '⠀⠀⠀');
         } else if (typeof message === 'object') {
-          ((global || window).nativeConsole || console)[consoleMethod]('⠀' + (0, _fmtObj.default)(message));
+          ((global || window).nativeConsole || console)[consoleMethod]((0, _fmtObj.default)(message) + '⠀⠀⠀');
         } else {
-          ((global || window).nativeConsole || console)[consoleMethod]('⠀' + message);
+          ((global || window).nativeConsole || console)[consoleMethod](message + '⠀⠀⠀');
         } // resolve the promise
 
 

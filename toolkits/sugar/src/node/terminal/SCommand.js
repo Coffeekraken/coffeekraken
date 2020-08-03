@@ -542,7 +542,7 @@ module.exports = class SCommand extends __SPromise {
     this.lastProcessObj.stdout.push(
       `Starting the watch process for the command "<yellow>${this.name}</yellow>"...`
     );
-    this.trigger('stdout.data', {
+    this.trigger('log', {
       value: this.lastProcessObj.stdout[this.lastProcessObj.stdout.length - 1],
       name: this.name,
       ...this.lastProcessObj
@@ -576,7 +576,7 @@ module.exports = class SCommand extends __SPromise {
       if (action === 'new') {
         const msg = `A file has been <green>created</green>: <cyan>${path}</cyan>`;
         this.lastProcessObj.stdout.push(msg);
-        this.trigger('stdout.data', {
+        this.trigger('log', {
           value: msg,
           name: this.name,
           ...this.lastProcessObj,
@@ -585,7 +585,7 @@ module.exports = class SCommand extends __SPromise {
       } else if (action === 'update') {
         const msg = `A file has been <yellow>updated</yellow>: <cyan>${path}</cyan>`;
         this.lastProcessObj.stdout.push(msg);
-        this.trigger('stdout.data', {
+        this.trigger('log', {
           value: msg,
           name: this.name,
           ...this.lastProcessObj,
@@ -594,7 +594,7 @@ module.exports = class SCommand extends __SPromise {
       } else if (action === 'delete') {
         const msg = `A file has been <red>deleted</red>: <cyan>${path}</cyan>`;
         this.lastProcessObj.stdout.push(msg);
-        this.trigger('stdout.data', {
+        this.trigger('log', {
           value: msg,
           name: this.name,
           ...this.lastProcessObj,
@@ -625,7 +625,7 @@ module.exports = class SCommand extends __SPromise {
     });
     this._watchProcess.on('close', (code, signal) => {
       this._isWatching = false;
-      this.trigger('stdout.data', {
+      this.trigger('log', {
         name: this.name,
         value: `The watch process has been stopped`
       });
@@ -688,8 +688,7 @@ module.exports = class SCommand extends __SPromise {
    * - kill: Triggered when the process has been killed
    * - success: Triggered when the process has finished without any error
    * - error: Triggered when the process has had an error
-   * - stdout.data: Triggered when some data are pushed in the stdout channel
-   * - stderr.data: Triggered when some data are pushed in the srderr channel
+   * - log: Triggered when some data are pushed in the stdout channel
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */

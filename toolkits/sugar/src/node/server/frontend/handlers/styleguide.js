@@ -19,6 +19,8 @@ const __trimLines = require('../../../string/trimLines');
  * @param         {Object}          server          The express server instance
  * @return        {Promise}                         A promise that will be resolved with the response to send to the client
  *
+ * @event       server.frontend.handler.styleguide.start
+ *
  * @since       2.0.0
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
@@ -26,6 +28,8 @@ module.exports = function styleguide(req, server) {
   return new __SPromise(
     async function (resolve, reject, trigger) {
       let viewPath = req.params[0].split('/').join('.');
+
+      trigger('server.frontend.handler.styleguide.start', null);
 
       let resultObj = {
         view: null,

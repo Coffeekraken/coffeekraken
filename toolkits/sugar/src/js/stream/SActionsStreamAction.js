@@ -135,7 +135,7 @@ export default class SActionStreamAction extends __SPromise {
       throw new Error(checkWithDefinitionObjectResult);
     }
     // throw new Error(checkWithDefinitionObjectResult);
-    // this.trigger('stderr.data', checkWithDefinitionObjectResult);
+    // this.trigger('error', checkWithDefinitionObjectResult);
   }
 
   /**
@@ -213,7 +213,7 @@ export default class SActionStreamAction extends __SPromise {
    * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   error(message) {
-    this.trigger('stderr.data', `<red>✚</red> ${message}`);
+    this.trigger('error', `<red>✚</red> ${message}`);
   }
 
   /**
@@ -227,7 +227,7 @@ export default class SActionStreamAction extends __SPromise {
    * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   warn(message) {
-    this.trigger('stdout.data', `<yellow>⚠</yellow> ${message}`);
+    this.trigger('log', `<yellow>⚠</yellow> ${message}`);
   }
 
   /**
@@ -241,6 +241,6 @@ export default class SActionStreamAction extends __SPromise {
    * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   log(message) {
-    this.trigger('stdout.data', message);
+    this.trigger('log', message);
   }
 }

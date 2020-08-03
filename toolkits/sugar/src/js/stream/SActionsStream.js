@@ -170,21 +170,23 @@ export default class SActionStream extends __SPromise {
         // check if is a "before" setting function
         if (settings.before && settings.before.length) {
           const startTime = Date.now();
-          this.log(
-            `[beforeCallbacks] Executing the <cyan>${settings.before.length}</cyan> callback(s) registered before the entire actions stream process...`
-          );
+          this.log({
+            group: 'beforeCallbacks',
+            value: `Executing the <cyan>${settings.before.length}</cyan> callback(s) registered before the entire actions stream process...`
+          });
           for (let key in settings.before) {
             const fn = settings.before[key];
             streamObj = await fn(streamObj);
           }
-          this.log(
-            `[beforeCallbacks] #success The <cyan>${
+          this.log({
+            group: 'beforeCallbacks',
+            value: `#success The <cyan>${
               settings.before.length
             }</cyan> before stream callback(s) have finished <green>successfully</green> <yellow>${__convert(
               Date.now() - startTime,
               's'
             )}s</yellow>`
-          );
+          });
         }
 
         // take the actions order array
@@ -251,7 +253,9 @@ export default class SActionStream extends __SPromise {
           }
 
           if (skipMessage) {
-            this.log(skipMessage);
+            this.log({
+              value: skipMessage
+            });
             if (skipAction === 'continue') continue;
             else break;
           }
@@ -286,11 +290,17 @@ export default class SActionStream extends __SPromise {
           }
 
           if (actionInstance) {
-            actionInstance.on('stdout.data', (value) => {
-              this.log(`[${this._currentActionName}] ${value}`);
+            actionInstance.on('log', (value) => {
+              this.log({
+                group: this._currentActionName,
+                value: value
+              });
             });
-            actionInstance.on('stderr.data', (value) => {
-              this.error(`[${this._currentActionName}] #error ${value}`);
+            actionInstance.on('error', (value) => {
+              this.error({
+                group: this._currentActionName,
+                value: `#error ${value}`
+              });
             });
             actionInstance.on('reject', (value) => {
               this._exitCode = 1;
@@ -327,8 +337,11 @@ export default class SActionStream extends __SPromise {
 
           // trigger some "start" events
           this.dispatch('start', Object.assign({}, actionObj));
-          const startString = `[${actionName}] #start Starting the action "<yellow>${actionName}</yellow>" on <magenta>${streamSourcesCount}</magenta> sources`;
-          this.log(startString);
+          const startString = `#start Starting the action "<yellow>${actionName}</yellow>" on <magenta>${streamSourcesCount}</magenta> sources`;
+          this.log({
+            group: actionName,
+            value: startString
+          });
 
           const _this = this;
           const handleStreamObjArray = async (streamObjArray, actionObj) => {
@@ -353,9 +366,10 @@ export default class SActionStream extends __SPromise {
                 ];
               }
               if (settings.beforeActions[actionName].length) {
-                this.log(
-                  `[${actionName}] Executing the <cyan>${settings.beforeActions[actionName].length}</cyan> callback(s) registered before the <yellow>${actionName}</yellow> action...`
-                );
+                this.log({
+                  group: actionName,
+                  value: `Executing the <cyan>${settings.beforeActions[actionName].length}</cyan> callback(s) registered before the <yellow>${actionName}</yellow> action...`
+                });
                 for (let key in settings.beforeActions[actionName]) {
                   const beforeActionFn =
                     settings.beforeActions[actionName][key];
@@ -468,9 +482,10 @@ export default class SActionStream extends __SPromise {
                 ];
               }
               if (settings.afterActions[actionName].length) {
-                this.log(
-                  `[${actionName}] Executing the <cyan>${settings.afterActions[actionName].length}</cyan> callback(s) registered after the <yellow>${actionName}</yellow> action...`
-                );
+                this.log({
+                  group: actionName,
+                  value: `Executing the <cyan>${settings.afterActions[actionName].length}</cyan> callback(s) registered after the <yellow>${actionName}</yellow> action...`
+                });
                 if (Array.isArray(currentStreamObj)) {
                   currentStreamObj.forEach(async (strObj, i) => {
                     for (let key in settings.afterActions[actionName]) {
@@ -532,12 +547,15 @@ export default class SActionStream extends __SPromise {
             this._exitCode = 1;
             throw new Error(errorString);
           } else {
-            const successString = `[${actionName}] #success The action "<yellow>${actionName}</yellow>" has finished <green>successfully</green> on <magenta>${streamSourcesCount}</magenta> sources in <yellow>${__convert(
+            const successString = `#success The action "<yellow>${actionName}</yellow>" has finished <green>successfully</green> on <magenta>${streamSourcesCount}</magenta> sources in <yellow>${__convert(
               actionObj.duration,
               's'
             )}s</yellow>`;
             actionObj.stdout.push(successString);
-            this.log(successString);
+            this.log({
+              group: actionName,
+              value: successString
+            });
           }
         }
 
@@ -549,21 +567,23 @@ export default class SActionStream extends __SPromise {
 
         if (settings.after && settings.after.length) {
           const startTime = Date.now();
-          this.log(
-            `[afterCallbacks] Executing the <cyan>${settings.after.length}</cyan> callback(s) registered after the entire actions stream process...`
-          );
+          this.log({
+            group: 'afterCallbacks',
+            value: `Executing the <cyan>${settings.after.length}</cyan> callback(s) registered after the entire actions stream process...`
+          });
           for (let key in settings.after) {
             const fn = settings.after[key];
             streamObj = await fn(streamObj);
           }
-          this.log(
-            `[afterCallbacks] #success The <cyan>${
+          this.log({
+            group: 'afterCallbacks',
+            value: `#success The <cyan>${
               settings.after.length
             }</cyan> after stream callback(s) have finished <green>successfully</green> <yellow>${__convert(
               Date.now() - startTime,
               's'
             )}s</yellow>`
-          );
+          });
         }
 
         // complete the overall stats
@@ -583,7 +603,9 @@ export default class SActionStream extends __SPromise {
           's'
         )}s</yellow>`;
         overallActionsStats.stdout.push(completeString);
-        this.log(completeString);
+        this.log({
+          value: completeString
+        });
 
         // resolve this stream process
         this.dispatch('complete', overallActionsStats);
@@ -597,25 +619,7 @@ export default class SActionStream extends __SPromise {
       {
         id: this._settings.id
       }
-    )
-      // .on('cancel', () => {
-      //   canceled = true;
-      //   // check if the current action returned value is a promise cancelable
-      //   if (
-      //     currentActionReturn instanceof Promise &&
-      //     typeof currentActionReturn.cancel === 'function'
-      //   ) {
-      //     currentActionReturn.cancel();
-      //   }
-      //   // trigger some cancel events
-      //   this.trigger('cancel');
-      //   // exit process (has to be rethink)
-      //   if (this._settings.exitOnComplete) {
-      //     console.log('ENDNE');
-      //     process.exit(this._exitCode);
-      //   }
-      // })
-      .start();
+    ).start();
 
     return this._currentSPromise;
   }
@@ -633,17 +637,13 @@ export default class SActionStream extends __SPromise {
    */
   log(...args) {
     args.forEach((arg) => {
-      if (this._currentSPromise)
-        this._currentSPromise.trigger('stdout.data', arg);
-      this.trigger('stdout.data', arg);
+      if (this._currentSPromise) this._currentSPromise.trigger('log', arg);
+      this.trigger('log', arg);
 
       if (this._currentSPromise && this._currentActionName)
-        this._currentSPromise.trigger(
-          `${this._currentActionName}.stdout.data`,
-          arg
-        );
+        this._currentSPromise.trigger(`${this._currentActionName}.log`, arg);
       if (this._currentActionName)
-        this.trigger(`${this._currentActionName}.stdout.data`, arg);
+        this.trigger(`${this._currentActionName}.log`, arg);
     });
   }
 
@@ -660,16 +660,12 @@ export default class SActionStream extends __SPromise {
    */
   error(...args) {
     args.forEach((arg) => {
-      if (this._currentSPromise)
-        this._currentSPromise.trigger('stdout.data', arg);
-      this.trigger('stdout.data', arg);
+      if (this._currentSPromise) this._currentSPromise.trigger('log', arg);
+      this.trigger('log', arg);
       if (this._currentSPromise && this._currentActionName)
-        this._currentSPromise.trigger(
-          `${this._currentActionName}.stdout.data`,
-          arg
-        );
+        this._currentSPromise.trigger(`${this._currentActionName}.log`, arg);
       if (this._currentActionName)
-        this.trigger(`${this._currentActionName}.stdout.data`, arg);
+        this.trigger(`${this._currentActionName}.log`, arg);
     });
   }
 

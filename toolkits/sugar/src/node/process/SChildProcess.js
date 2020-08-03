@@ -325,14 +325,10 @@ module.exports = class SChildProcess extends __SPromise {
         }
 
         runningProcess.stdout.push(log.toString());
-        promise.trigger('stdout.data', {
-          time: Date.now(),
-          process: Object.assign({}, runningProcess),
+        promise.trigger('log', {
           value: log.toString()
         });
-        this.trigger(`${runningProcessId}.'stdout.data`, {
-          time: Date.now(),
-          process: Object.assign({}, runningProcess),
+        this.trigger(`${runningProcessId}.'log`, {
           value: log.toString()
         });
       });
@@ -340,15 +336,11 @@ module.exports = class SChildProcess extends __SPromise {
       // stderr data
       childProcess.stderr.on('data', (error) => {
         runningProcess.stderr.push(error.toString());
-        promise.trigger('stderr.data', {
-          time: Date.now(),
-          process: runningProcess,
+        promise.trigger('error', {
           error: error.toString(),
           value: error.toString()
         });
-        this.trigger(`${runningProcessId}.stderr.data`, {
-          time: Date.now(),
-          process: runningProcess,
+        this.trigger(`${runningProcessId}.error`, {
           error: error.toString(),
           value: error.toString()
         });
@@ -420,14 +412,10 @@ module.exports = class SChildProcess extends __SPromise {
     if (!this.runningProcess) return;
     logs.forEach((log) => {
       this.runningProcess.stdout.push(log.toString());
-      this.runningProcess.promise.trigger('stdout.data', {
-        process: runningProcess,
-        time: Date.now(),
+      this.runningProcess.promise.trigger('log', {
         value: log.toString()
       });
-      this.trigger(`${this.runningProcess.id}.stdout.data`, {
-        process: runningProcess,
-        time: Date.now(),
+      this.trigger(`${this.runningProcess.id}.log`, {
         value: log.toString()
       });
     });

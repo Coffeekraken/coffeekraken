@@ -203,10 +203,10 @@ module.exports = class SCommandPanel extends __SComponent {
         // this._logSummary(data);
         this.update();
       })
-      .on('stdout.data', (data) => {
+      .on('log', (data) => {
         this.update();
       })
-      .on('stderr.data', (data) => {
+      .on('error', (data) => {
         this.update();
       })
       .on('kill', (data) => {})

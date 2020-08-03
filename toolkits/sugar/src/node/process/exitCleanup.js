@@ -28,7 +28,6 @@ let _exitCleanupRegistered = false;
 module.exports = function exitCleanup(handler = null, settings = {}) {
   if (_exitCleanupRegistered) return;
   _exitCleanupRegistered = true;
-
   __hotkey('ctrl+c', {
     once: true
   }).on('press', async () => {
@@ -51,7 +50,7 @@ module.exports = function exitCleanup(handler = null, settings = {}) {
         const pro = __spawn('sugar util.kill all', {
           id: 'cleanup'
         })
-          .on('stdout.data,stderr.data', (value) => {
+          .on('log,error', (value) => {
             console.log(__parseHtml(`    - ${value.value}`));
           })
           .on('cancel,finally', () => {
@@ -75,7 +74,7 @@ module.exports = function exitCleanup(handler = null, settings = {}) {
                 .on('close', () => {
                   resolve();
                 })
-                .on('stdout.data,stderr.data', (value) => {
+                .on('log,error', (value) => {
                   console.log(__parseHtml(`  ${value.value}`));
                 });
             });
@@ -98,7 +97,7 @@ module.exports = function exitCleanup(handler = null, settings = {}) {
     } else {
       console.log(__parseHtml('  Cleaning the forgotten process(es)...'));
       await __spawn('sugar util.kill all')
-        .on('stdout.data,stderr.data', (value) => {
+        .on('log,error', (value) => {
           console.log(__parseHtml(`    - ${value.value}`));
         })
         .on('cancel,finally', () => {

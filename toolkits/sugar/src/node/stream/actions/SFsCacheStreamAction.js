@@ -5,7 +5,6 @@ const __ensureDirSync = require('../../fs/ensureDirSync');
 const __deepMerge = require('../../object/deepMerge');
 const __md5 = require('../../crypt/md5');
 const __writeJsonSync = require('../../fs/writeJsonSync');
-const { triggerAsyncId } = require('async_hooks');
 
 /**
  * @name            SFsCacheStreamAction
@@ -131,10 +130,10 @@ module.exports = class SFsCacheStreamAction extends __SActionsStreamAction {
         // restore the streamObject
         streamObj = cacheJson.streamObj;
         // specify to the ActionStream that we need to skip all the next actions
-        trigger(
-          'stdout.data',
-          `[${settings.name}] Skipping the next actions cause the data have been laoded from the cache...`
-        );
+        trigger('log', {
+          group: settings.name,
+          value: `Skipping the next actions cause the data have been laoded from the cache...`
+        });
         this.skipNextActions();
       }
 

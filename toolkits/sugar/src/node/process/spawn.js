@@ -104,13 +104,13 @@ module.exports = function spawn(
           id: settings.id + '.' + when,
           ...spawnSettings
         }).start();
-        pro.on('stdout.data,stderr.data', (value) => {
+        pro.on('log,error', (value) => {
           if (!value) return;
           value.value = `  - ${value.value}`;
-          promise.trigger('stdout.data', value);
+          promise.trigger('log', value);
         });
         // __SPromise.pipe(pro, promise, {
-        //   stacks: 'stdout.data,stderr.data'
+        //   stacks: 'log,error'
         // });
         result = await pro;
       }
@@ -246,7 +246,7 @@ module.exports = function spawn(
         }
 
         runningProcess.stdout.push(log);
-        await promise.trigger('stdout.data', {
+        await promise.trigger('log', {
           process: runningProcess,
           time: Date.now(),
           value: log
@@ -258,7 +258,7 @@ module.exports = function spawn(
     childProcess.stderr.on('data', (error) => {
       // console.log(error.toString());
       runningProcess.stderr.push(error.toString());
-      promise.trigger('stderr.data', {
+      promise.trigger('error', {
         process: runningProcess,
         time: Date.now(),
         error: error.toString(),
@@ -286,9 +286,7 @@ module.exports = function spawn(
   promise.log = (...args) => {
     args.forEach((arg) => {
       runningProcess.stdout.push(arg.toString());
-      promise.trigger('stdout.data', {
-        process: runningProcess,
-        time: Date.now(),
+      promise.trigger('log', {
         value: arg.toString()
       });
     });

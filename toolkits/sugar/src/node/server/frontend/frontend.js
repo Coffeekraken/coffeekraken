@@ -23,7 +23,7 @@ const __trimLines = require('../../string/trimLines');
  * @param         {Object}          [args={}]         The args object to configure the build process. Check the PhpSCli class definition object for available arguments
  * @return        {express}                       The server instance started
  *
- * @event         stdout.data       Some informations that you can or not display to your users
+ * @event         log       Some informations that you can or not display to your users
  *
  * @example       js
  * const frontendServer = require('@coffeekraken/sugar/node/server/frontend/frontend');
@@ -187,17 +187,15 @@ module.exports = (args = {}) => {
     );
   });
 
-  promise.trigger(
-    'stdout.data',
-    __trimLines(`Your <primary>Frontend Express</primary> server is <green>up and running</green>:
+  promise.trigger('log', {
+    type: 'header',
+    value: __trimLines(`Your <primary>Frontend Express</primary> server is <green>up and running</green>:
 
       - Hostname        : <yellow>${settings.hostname}</yellow>
       - Port            : <yellow>${settings.port}</yellow>
       - Root directory  : <yellow>${settings.rootDir}</yellow>
-      - Views engine    : <yellow>${settings.viewEngine}</yellow>
-      - Views directory : <yellow>${settings.viewsDir}</yellow>
       - URL             : <cyan>http://${settings.hostname}:${settings.port}</cyan>`)
-  );
+  });
 
   server.listen(settings.express.port, settings.express.hostname);
 

@@ -1,5 +1,6 @@
 import __validateWithDefinitionObject from '../object/validateWithDefinitionObject';
 import __validateDefinitionObject from './validateDefinitionObject';
+import __deepMerge from '../object/deepMerge';
 
 /**
  * @name            validateWithDefinitionObject
@@ -37,23 +38,42 @@ import __validateDefinitionObject from './validateDefinitionObject';
 export default function validateWithDefinitionObject(
   objectToCheck,
   definitionObj,
-  validateDefinitionObject = true
+  settings = {}
 ) {
+  settings = __deepMerge(
+    {
+      validateDefinitionObject: true,
+      bySteps: false
+    },
+    settings
+  );
+
+  let issues = [];
+
   // validate definition object first
-  if (validateDefinitionObject) {
+  if (settings.validateDefinitionObject) {
     const validateDefinitionObjectResult = __validateDefinitionObject(
       definitionObj
     );
-    if (validateDefinitionObjectResult !== true)
-      return validateDefinitionObjectResult;
+    if (validateDefinitionObjectResult !== true) {
+      if (settings.bySteps) return validateDefinitionObjectResult;
+    }
+    issues = [...issues, ...validateDefinitionObjectResult];
   }
 
-  return __validateWithDefinitionObject(
+  const validationResult = __validateWithDefinitionObject(
     objectToCheck,
     definitionObj,
-    (argName, argDefinition, value) => {
-      return true;
-    },
-    false // validateDefinitionOject. No need cause we already have done this in this function
+    {
+      validateDefinitionObject: false,
+      bySteps: settings.bySteps
+    }
   );
+  if (validationResult !== true) {
+    if (settings.bySteps) return validationResult;
+    issues = [...issues, ...validationResult];
+  }
+
+  if (!issues.length) return true;
+  return issues;
 }

@@ -21,8 +21,6 @@ var _plainObject = _interopRequireDefault(require("../is/plainObject"));
 
 var _deepMap = _interopRequireDefault(require("../object/deepMap"));
 
-var _validateWithDefinitionObject = _interopRequireDefault(require("../object/validateWithDefinitionObject"));
-
 var _completeArgsObject = _interopRequireDefault(require("./completeArgsObject"));
 
 var _unquote = _interopRequireDefault(require("../string/unquote"));

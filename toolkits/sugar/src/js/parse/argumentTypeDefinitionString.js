@@ -1,3 +1,5 @@
+import __upperFirst from '../string/upperFirst';
+
 /**
  * @name              argumentTypeDefinitionString
  * @namespace           js.parse
@@ -59,7 +61,7 @@ export default function argumentTypeDefinitionString(argTypeString) {
     const parts = typeDefinitionString.split('<');
 
     // get the "type"
-    const type = parts[0].toLowerCase();
+    const type = __upperFirst(parts[0]);
 
     // process the "of" part if exist
     let ofArray = null;

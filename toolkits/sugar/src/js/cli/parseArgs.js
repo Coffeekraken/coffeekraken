@@ -6,7 +6,6 @@ import __delete from '../object/delete';
 import __parseHtml from '../console/parseHtml';
 import __isPlainObject from '../is/plainObject';
 import __deepMap from '../object/deepMap';
-import __validateWithDefinitionObject from '../object/validateWithDefinitionObject';
 import __completeArgsObject from './completeArgsObject';
 import __unquote from '../string/unquote';
 import __parseArgumentTypeDefinitionString from '../parse/argumentTypeDefinitionString';

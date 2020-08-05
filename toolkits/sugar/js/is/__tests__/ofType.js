@@ -13,10 +13,28 @@ module.exports = __isOfType => {
       expect(__isOfType(12, 'Number')).toBe(true);
       expect(__isOfType(12.34, 'Number')).toBe(true);
       expect(__isOfType(12, 'Integer')).toBe(true);
-      expect(__isOfType(12.34, 'Integer')).toBe(false);
+      expect(__isOfType(12.34, 'Integer')).toEqual({
+        expected: {
+          type: 'Integer'
+        },
+        received: {
+          type: 'Number',
+          value: 12.34
+        },
+        issues: ['type']
+      });
       expect(__isOfType('Hello world', 'String')).toBe(true);
       expect(__isOfType([10, 20, 45], 'Array<Number>')).toBe(true);
-      expect(__isOfType([10, '20', 45], 'Array<Number>')).toBe(false);
+      expect(__isOfType([10, '20', 45], 'Array<Number>')).toEqual({
+        expected: {
+          type: 'Array<Number>'
+        },
+        received: {
+          type: 'Array<Integer|String>',
+          value: [10, '20', 45]
+        },
+        issues: ['type']
+      });
       expect(__isOfType([{
         something: 'cool'
       }], 'Array<Object>')).toBe(true);
@@ -27,7 +45,18 @@ module.exports = __isOfType => {
       }, 'Object<SLog>')).toBe(true);
       expect(__isOfType({
         something: 'Hello world'
-      }, 'Object<SLog>')).toBe(false);
+      }, 'Object<SLog>')).toEqual({
+        expected: {
+          type: 'Object<SLog>'
+        },
+        received: {
+          type: 'Object<String>',
+          value: {
+            something: 'Hello world'
+          }
+        },
+        issues: ['type']
+      });
     });
   });
 };

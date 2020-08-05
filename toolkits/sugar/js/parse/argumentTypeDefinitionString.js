@@ -5,6 +5,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = argumentTypeDefinitionString;
 
+var _upperFirst = _interopRequireDefault(require("../string/upperFirst"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 /**
  * @name              argumentTypeDefinitionString
  * @namespace           js.parse
@@ -66,7 +70,7 @@ function argumentTypeDefinitionString(argTypeString) {
     // split the string by <
     const parts = typeDefinitionString.split('<'); // get the "type"
 
-    const type = parts[0].toLowerCase(); // process the "of" part if exist
+    const type = (0, _upperFirst.default)(parts[0]); // process the "of" part if exist
 
     let ofArray = null;
 

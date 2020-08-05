@@ -21,6 +21,12 @@ const { parse } = require('node-persist');
  *
  * @param         {SOutput}            process           The SOutput instance you want to attach
  * @param         {Object}              [settings={}]     The settings object to configure your SOutput
+ * - filter (null) {Function}: Specify a function that will filter the logs to display. This function will receive two parameters. The data object to log and the metas object of the SPromise instance. If you return true, the log will pass the filter. If you return false, the log will not being displayed. And if you return an updated data object, the log will be the one you returned...
+ * - maxItemsByGroup (1) {Number}: Specify the number of logs to display by group
+ * - clearOnStart (true) {Boolean}: Specify if you want your output to be cleared when received any events matching this pattern: "*.start"
+ *
+ * @todo        Support the "maxItems" setting
+ * @todo        Listen for errors and display them correctly
  *
  * @example         js
  * const SOutput = require('@coffeekraken/sugar/node/terminal/SOutput');
@@ -91,8 +97,8 @@ module.exports = class SOutput extends __SComponent {
       {
         filter: null,
         clearOnStart: true,
-        maxItems: -1,
-        maxItemsByGroup: -1
+        // maxItems: -1,
+        maxItemsByGroup: 1
       },
       settings
     );
@@ -119,10 +125,6 @@ module.exports = class SOutput extends __SComponent {
   _subscribeToProcess() {
     // subscribe to data
     this._process
-      // .on('start', (data) => {
-      //   this.log(`<yellow># Starting process...</yellow>`);
-      //   this.update();
-      // })
       .on('close', (data) => {
         // this.log(
         //   `Closing process with code <red>${data.code}</red> and signal <red>${data.signal}</red>...`
@@ -229,12 +231,6 @@ module.exports = class SOutput extends __SComponent {
     //   }
     //   this.update();
     // })
-    // subscribe to errors
-    // .on('error', (data) => {
-    //   this.log(`<red>Something went wrong:</red>`);
-    //   this.log(data.error ? data.error : data);
-    //   this.update();
-    // });
   }
 
   /**
@@ -262,6 +258,11 @@ module.exports = class SOutput extends __SComponent {
       if (this._allowClear) {
         this._allowClear = false;
         this._content = [];
+        this._lastY = 1;
+        this._logBoxChilds.forEach((child, i) => {
+          child.destroy();
+        });
+        this._logBoxChilds = [];
         this.update();
         this._updateTimeout = true;
         setTimeout(() => {
@@ -336,9 +337,6 @@ module.exports = class SOutput extends __SComponent {
         }
         // if (groupObj.content.indexOf(processedLog) === -1)
         groupObj.content.push(logObj);
-
-        // update display
-        this.update();
       } else {
         // if (this._content.indexOf(processedLog) === -1)
         this._content.push(logObj);
@@ -348,7 +346,7 @@ module.exports = class SOutput extends __SComponent {
     // handle the maxItems setting
     if (this._settings.maxItems !== -1) {
       let itemsCount = 0;
-      const newContent = [];
+      let newContent = [];
       for (let i = this._content.length - 1; i >= 0; i--) {
         const item = this._content[i];
         newContent = [item, ...newContent];
@@ -361,6 +359,60 @@ module.exports = class SOutput extends __SComponent {
       // save the new content
       this._content = newContent;
     }
+
+    // update display
+    this.update();
+  }
+
+  /**
+   * @name            update
+   * @type            Function
+   *
+   * This method take the content of the this._content property and display it correctly on the screen
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _lastY = 1;
+  _logBoxChilds = [];
+  _stuperUpdateTimeout = null;
+  update() {
+    if (__isChildProcess()) return;
+    if (this._updateTimeout) return;
+    if (!this.isDisplayed()) return;
+
+    if (!this._content.length) {
+      super.update();
+      return;
+    }
+
+    this._content.forEach((item) => {
+      try {
+        if (item.$box) {
+        } else if (item.value && typeof item.value === 'string') {
+          const $box = this._simpleTextBox(item.value);
+          $box.top = this._lastY;
+          this._logBoxChilds.push($box);
+          this._logBox.append($box);
+          item.$box = $box;
+          this._lastY += $box.getScrollHeight() + 2;
+        } else if (typeof item === 'object' && item.group) {
+          const $box = this._groupBox(item.group, item.content);
+          $box.top = this._lastY;
+          this._logBoxChilds.push($box);
+          item.$box = $box;
+          this._logBox.append($box);
+          this._lastY += $box.getScrollHeight() + 2;
+        }
+      } catch (e) {
+        throw e;
+      }
+    });
+    clearTimeout(this._superUpdateTimeout);
+    this._superUpdateTimeout = setTimeout(() => {
+      this._logBox.setScrollPerc(100);
+      super.update();
+    }, 50);
   }
 
   /**
@@ -597,51 +649,5 @@ module.exports = class SOutput extends __SComponent {
     });
 
     this.append(this._logBox);
-  }
-
-  _logBoxChilds = [];
-  _superUpdateTimeout = null;
-  update() {
-    if (__isChildProcess()) return;
-    if (this._updateTimeout) return;
-    if (!this.isDisplayed()) return;
-
-    let lastY = 1;
-    this._logBoxChilds.forEach((child, i) => {
-      child.destroy();
-    });
-    this._logBoxChilds = [];
-
-    if (!this._content.length) {
-      super.update();
-      return;
-    }
-
-    this._content.forEach((item) => {
-      try {
-        if (item.value && typeof item.value === 'string') {
-          const $box = this._simpleTextBox(item.value);
-          $box.top = lastY;
-          this._logBoxChilds.push($box);
-          this._logBox.append($box);
-          item.$box = $box;
-          lastY += $box.getScrollHeight() + 2;
-        } else if (typeof item === 'object' && item.group) {
-          const $box = this._groupBox(item.group, item.content);
-          $box.top = lastY;
-          this._logBoxChilds.push($box);
-          item.$box = $box;
-          this._logBox.append($box);
-          lastY += $box.getScrollHeight() + 2;
-        }
-      } catch (e) {
-        throw e;
-      }
-    });
-    clearTimeout(this._superUpdateTimeout);
-    this._superUpdateTimeout = setTimeout(() => {
-      this._logBox.setScrollPerc(100);
-      super.update();
-    }, 50);
   }
 };

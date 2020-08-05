@@ -1,4 +1,7 @@
 import __isOfType from '../is/ofType';
+import __deepMerge from '../object/deepMerge';
+import __isClass from '../is/class';
+import __typeof from '../value/typeof';
 
 /**
  * @name          validateWithDefinitionObject
@@ -12,7 +15,8 @@ import __isOfType from '../is/ofType';
  * @param         {Mixed}       value       The value to check
  * @param         {Object}      definitionObj     THe definition object
  * @param         {String}      [name=null]     A name for the check. Usefull for debugging purpose
- * @return         {Boolean|String}           true if the check is passed, a string describing the issue if not
+ * @param       {Object}        [settings={}]         An object of settings to configure your validation process:
+ * @return         {Boolean|Array<String>}           true if the check is passed, an Array of String describing the issue if not
  *
  * @example       js
  * import validateWithDefinitionObject from '@coffeekraken/sugar/js/value/validateWithDefinitionObject';
@@ -29,21 +33,45 @@ import __isOfType from '../is/ofType';
 export default function validateWithDefinitionObject(
   value,
   definitionObj,
-  name = null
+  name = null,
+  settings = {}
 ) {
+  settings = __deepMerge({}, settings);
+
+  let issueObj = {
+    expected: definitionObj,
+    received: {
+      type: __typeof(value),
+      value
+    },
+    issues: []
+  };
+
   // validate type
-  if (value !== undefined && definitionObj.type) {
-    const isOfTypeResult = __isOfType(value, definitionObj.type, true);
+  if (definitionObj.type) {
+    const isOfTypeResult = __isOfType(value, definitionObj.type);
     if (isOfTypeResult !== true) {
-      return `${name}: ${isOfTypeResult}`;
+      issueObj = {
+        ...issueObj,
+        ...isOfTypeResult,
+        issues: [...issueObj.issues, ...isOfTypeResult.issues]
+      };
     }
   }
   // check required
   if (definitionObj.required === true) {
     if (value === null || value === undefined) {
-      return `The property "<yellow>${name}</yellow>" is <green>required</green>...`;
+      issueObj.issues.push('required');
     }
   }
 
-  return true;
+  // check allowed values
+  if (definitionObj.values && Array.isArray(definitionObj.values)) {
+    if (definitionObj.values.indexOf(value) === -1) {
+      issueObj.issues.push('values');
+    }
+  }
+
+  if (!issueObj.issues.length) return true;
+  return issueObj;
 }

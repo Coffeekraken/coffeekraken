@@ -1,5 +1,6 @@
 import __validateDefinitionObject from '../object/validateDefinitionObject';
 import __isOfType from './ofType';
+import __deepMerge from '../object/deepMerge';
 
 /**
  * @name              validateWithDefinitionObject
@@ -11,8 +12,10 @@ import __isOfType from './ofType';
  *
  * @param         {Mixed}           value         The value to check
  * @param         {Object}          definitionObj       The argument definition object
- * @param       {Boolean}       [validateDefinitionObj=true]       Specify if you want to validate the passed definition object first or not
- * @return        {String|Boolean}                Return true if all is ok, and a string describing the error if not
+ * @param       {Object}        [settings={}]         An object of settings to configure your validation process:
+ * - validateDefinitionObject (true) {Boolean}: Specify if you want to validate the passed definition object first or not
+ * - bySteps (false) {Boolean}: Specify if you want each issues returned individually or if you want all the issues at once
+ * @return        {Array<String>|Boolean}                Return true if all is ok, and an Array of String describing the error if not
  *
  * @example       js
  * import isValidateWithDefinitionObject from '@coffeekraken/sugar/js/is/validateWithDefinitionObject';
@@ -27,28 +30,46 @@ import __isOfType from './ofType';
 export default function validateWithDefinitionObject(
   value,
   argDefinitionObj,
-  validateDefinitionObj = true
+  settings = {}
 ) {
+  settings = __deepMerge(
+    {
+      validateDefinitionObj: true,
+      bySteps: false
+    },
+    settings
+  );
+
+  let issues = [];
+
   // validate the passed definition object first
-  if (validateDefinitionObj) {
+  if (settings.validateDefinitionObj) {
     const validateDefinitionObjResult = __validateDefinitionObject(
       argDefinitionObj
     );
-    if (validateDefinitionObjResult !== true)
-      return validateDefinitionObjResult;
+    if (validateDefinitionObjResult !== true) {
+      if (settings.bySteps) return validateDefinitionObjResult;
+      issues = [...issues, ...validateDefinitionObjResult];
+    }
   }
 
   // validate type
   if (value !== undefined && argDefinitionObj.type) {
     const isOfTypeResult = __isOfType(value, argDefinition.type, true);
     if (isOfTypeResult !== true) {
-      return isOfTypeResult;
+      if (settings.bySteps) return isOfTypeResult;
+      issues = [...issues, ...isOfTypeResult];
     }
   }
   // check required
   if (argDefinition.required === true) {
     if (value === null || value === undefined) {
-      return `The passed value is <green>required</green>...`;
+      if (settings.bySteps)
+        return `The passed value is <green>required</green>...`;
+      issues.push(`The passed value is <green>required</green>...`);
     }
   }
+
+  if (!issues.length) return true;
+  return issues;
 }

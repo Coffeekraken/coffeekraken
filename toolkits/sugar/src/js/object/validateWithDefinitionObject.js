@@ -3,8 +3,11 @@ import __validateDefinitionObject from './validateDefinitionObject';
 import __toString from '../string/toString';
 import __isOfType from '../is/ofType';
 import __isPlainObject from '../is/plainObject';
+import __isClass from '../is/class';
 import __get from '../object/get';
 import __validateWithDefinitionObject from '../value/validateWithDefinitionObject';
+import __deepMerge from '../object/deepMerge';
+import __parseHtml from '../console/parseHtml';
 
 /**
  * @name            validateWithDefinitionObject
@@ -17,9 +20,10 @@ import __validateWithDefinitionObject from '../value/validateWithDefinitionObjec
  *
  * @param       {Object}        objectToCheck       The object to check using the definition one
  * @param       {Object}        definitionObj       The definition object to use
- * @param       {Function}      [extendsFn=null]    Specify a function that will be called for each properties with the arguments "argName", "argDefinition" and "value" to let you the possibility to extend this validation function
- * @param       {Boolean}       [validateDefinitionObject=true]       Specify if you want to validate the passed definition object first or not
- * @return      {Boolean|String}                    Return true if all is ok, and a simple string that describe the issue if it's not
+ * @param       {Object}        [settings={}]         An object of settings to configure your validation process:
+ * - extendsFn (null) {Function}: Specify a function that will be called for each properties with the arguments "argName", "argDefinition" and "value" to let you the possibility to extend this validation function
+ * - validateDefinitionObject (true) {Boolean}: Specify if you want to validate the passed definition object first or not
+ * @return      {Boolean|Array<String>}                    Return true if all is ok, and an Array of string that describe the issue if it's not
  *
  * @example         js
  * import validateWithDefinitionObject from '@coffeekraken/sugar/js/object/validateWithDefinitionObject';
@@ -43,24 +47,45 @@ import __validateWithDefinitionObject from '../value/validateWithDefinitionObjec
 export default function validateWithDefinitionObject(
   objectToCheck,
   definitionObj,
-  extendsFn = null,
-  validateDefinitionObject = true,
+  settings = {},
   _argPath = []
 ) {
+  let issuesObj = {
+    issues: []
+  };
+
+  settings = __deepMerge(
+    {
+      validateDefinitionObject: true
+    },
+    settings
+  );
+
   // validate the passed definition object first
-  if (validateDefinitionObject) {
+  if (settings.validateDefinitionObject) {
     const validateDefinitionObjectResult = __validateDefinitionObject(
       definitionObj
     );
-    if (validateDefinitionObjectResult !== true)
-      return validateDefinitionObjectResult;
+    if (validateDefinitionObjectResult !== true) {
+      throw new Error(validateDefinitionObjectResult);
+    }
   }
 
   // loop on the definition object properties
   for (let i = 0; i < Object.keys(definitionObj).length; i++) {
     const argName = Object.keys(definitionObj)[i];
     const argDefinition = definitionObj[argName];
-    const value = __get(objectToCheck, argName);
+    let value = __get(objectToCheck, argName);
+    // get the correct value depending on the definitionObj
+    let staticIssue = false;
+    if (argDefinition.static && !__isClass(objectToCheck)) {
+      if (objectToCheck.constructor && objectToCheck.constructor[argName]) {
+        value = objectToCheck.constructor[argName];
+      } else {
+        value = null;
+        staticIssue = true;
+      }
+    }
 
     const validationRes = __validateWithDefinitionObject(
       value,
@@ -68,27 +93,46 @@ export default function validateWithDefinitionObject(
       argName
     );
 
-    if (validationRes !== true) return validationRes;
+    if (validationRes !== true) {
+      issuesObj[argName] = {
+        ...(issuesObj[argName] || {}),
+        ...(validationRes || {}),
+        issues: [
+          ...(issuesObj[argName] ? issuesObj[argName].issues || [] : []),
+          ...validationRes.issues
+        ]
+      };
+      issuesObj.issues.push(argName);
+      if (staticIssue) {
+        issuesObj[argName].issues.push('static');
+      }
+    }
 
     // check if is an extendsFn
-    if (extendsFn) {
-      const extendsFnResult = extendsFn(argName, argDefinition, value);
-      if (extendsFnResult !== true) return extendsFnResult;
+    if (settings.extendsFn) {
+      const extendsFnResult = settings.extendsFn(argName, argDefinition, value);
+      if (extendsFnResult !== true) {
+        // TODO implement an Interface to be sure of what we get back from the extendsFn
+        // issues = [...issues, ...extendsFnResult];
+      }
     }
 
+    // TODO implement the "children" support
     // check if we have some "children" properties
-    if (argDefinition.children) {
-      const childrenValidation = validateWithDefinitionObject(
-        objectToCheck[argName] || {},
-        argDefinition.children,
-        extendsFn,
-        validateDefinitionObject,
-        [..._argPath, argName]
-      );
-      if (childrenValidation !== true) return childrenValidation;
-    }
+    // if (argDefinition.children) {
+    //   const childrenValidation = validateWithDefinitionObject(
+    //     objectToCheck[argName] || {},
+    //     argDefinition.children,
+    //     settings,
+    //     [..._argPath, argName]
+    //   );
+    //   if (childrenValidation !== true) {
+    //     if (settings.bySteps) return __parseHtml(childrenValidation);
+    //     issues = [...issues, ...childrenValidation];
+    //   }
+    // }
   }
 
-  // all is good
-  return true;
+  if (!issuesObj.issues.length) return true;
+  return issuesObj;
 }

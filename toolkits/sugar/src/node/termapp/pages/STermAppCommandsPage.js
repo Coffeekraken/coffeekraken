@@ -38,7 +38,7 @@ module.exports = class STermAppCommandsPage extends __SAppPage {
     super(id, title, settings);
 
     // const scssCommand = ;
-    const panel = new __SCommandPanel('+(build|server).**');
+    const panel = new __SCommandPanel(settings.commands);
     this.append(panel);
 
     __hotkey('backspace').on('press', () => {

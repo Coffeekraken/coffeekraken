@@ -3,6 +3,8 @@ import __toString from '../string/toString';
 import __isClass from './class';
 import __isInt from './integer';
 import __upperFirst from '../string/upperFirst';
+import __typeof from '../value/typeof';
+import __typeDefinitionArrayObjectToString from '../value/typeDefinitionArrayObjectToString';
 
 /**
  * @name              ofType
@@ -14,135 +16,110 @@ import __upperFirst from '../string/upperFirst';
  *
  * @param       {Mixed}        value          The value to check
  * @param       {String}       argTypeDefinition      The argument type definition string to use for the test
- * @param       {Boolean}       [returnError=false]       Specify if you want the error string to be returned  in place of the simply false boolean
- * @return      {Boolean}                     true if the value pass the test, false if not
+ * @return      {B|Object}  N                  true if She value pBss the Sest, aF object with two sub-objects describing the issue. 1 names "expected" and the othet names "received"
  *
  * @example       js
  * import isOfType from '@coffeekraken/sugar/js/is/ofType';
  * ifOfType(true, 'Boolean'); // => true
  * isOfType(12, 'String|Number'); // => true
- * isOfType(['hello',true], 'Array<String>'); // => false
+ * isOfType(['hello',true], 'Array<String>'); // => { expected: { type: 'Array<String>' }, received: { type: 'Array<String|Boolean>' }}
  * isOfType(['hello',true], 'Array<String|Boolean>'); // => true
  *
  * @since       2.0.0
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function ofType(value, argTypeDefinition, returnError = false) {
+export default function ofType(value, argTypeDefinition) {
   let definitionArray = argTypeDefinition;
   // parsing the argument definition string
   if (typeof argTypeDefinition === 'string') {
     definitionArray = __parseArgumentTypeDefinitionString(argTypeDefinition);
   }
 
-  let error = '';
+  const typeOfValue = __typeof(value);
+  const issueObj = {
+    received: {
+      type: __typeof(value, { of: true }),
+      value
+    },
+    expected: {
+      type: __typeDefinitionArrayObjectToString(definitionArray)
+    },
+    issues: ['type']
+  };
 
   for (let i = 0; i < definitionArray.length; i++) {
     const definitionObj = definitionArray[i];
 
-    // check array
-    if (definitionObj.type === 'array') {
-      // make sure the value is an array
-      if (Array.isArray(value) && !definitionObj.of) return true;
-      else if (Array.isArray(value) && definitionObj.of) {
-      } else
-        error = `Regarding to the argument definition "<yellow>${argTypeDefinition}</yellow>", the passed value "<cyan>${__toString(
-          value
-        )}</cyan>" of type "<magenta>${typeof value}</magenta>" has to be an <green>Array</green>...`;
-    }
+    // if ((value === null || value === undefined) && definitionObj.type) {
+    //   issueObj.received.type = __typeof(value);
+    // }
 
-    // check object
-    if (definitionObj.type === 'object') {
-      if (typeof value === 'object' && !definitionObj.of) return true;
-      else if (typeof value === 'object' && definitionObj.of) {
-      } else
-        error = `Regarding to theargument definition "<yellow>${argTypeDefinition}</yellow>", the passed value "<cyan>${__toString(
-          value
-        )}</cyan>" of type "<magenta>${typeof value}</magenta>" has to be an <green>Object</green>...`;
-    }
+    // Array | Object
+    if (definitionObj.type === 'Array' || definitionObj.type === 'Object') {
+      // Array
+      if (definitionObj.type === 'Array') {
+        // make sure the value is an array
+        if (typeOfValue === 'Array' && !definitionObj.of) return true;
 
-    // check if need to check the childs
-    if (definitionObj.of && definitionObj.of.length) {
-      if (definitionObj.type === 'array' || definitionObj.type === 'object') {
+        // Object
+      } else if (definitionObj.type === 'Object') {
+        if (typeOfValue === 'Object' && !definitionObj.of) return true;
+      }
+
+      if (definitionObj.of) {
         const loopOn = Array.isArray(value)
           ? [...value.keys()]
           : Object.keys(value);
         let checkValuesResult = true;
+        const receivedTypes = [];
         loopOn.forEach((valueIndex) => {
-          if (!checkValuesResult) return;
           const valueToCheck = value[valueIndex];
-          if (!ofType(valueToCheck, definitionObj.of, false)) {
+          if (ofType(valueToCheck, definitionObj.of) !== true) {
             checkValuesResult = false;
-            let ofTypesArray = [];
-            definitionObj.of.forEach((o) => {
-              ofTypesArray.push(o.type);
-            });
-            error = `Regarding to the argument definition "<yellow>${argTypeDefinition}</yellow>", the passed value "<yellow>${__toString(
-              value
-            )}</yellow>" of type "<magenta>${typeof value}</magenta>" has to contain only "<green>${ofTypesArray.join(
-              ','
-            )}</green>"...`;
+          }
+          const typeString = __typeof(valueToCheck);
+          if (receivedTypes.indexOf(typeString) === -1) {
+            receivedTypes.push(typeString);
           }
         });
-        // if one of the values does not correspond to the definition object, return false
-        if (!checkValuesResult) {
-          return returnError ? error || false : false;
-        }
+        if (checkValuesResult) return true;
+        // if (!checkValuesResult) {
+        //   issueObj.received.type = `${typeOfValue}<${receivedTypes.join('|')}>`;
+        // }
       }
     }
 
-    // check "class"
-    if (definitionObj.type === 'class') {
+    // Class
+    else if (definitionObj.type === 'Class') {
       if (__isClass(value)) return true;
-      else
-        error = `Regarding to the argument definition "<yellow>${argTypeDefinition}</yellow>", the passed value "<cyan>${__toString(
-          value
-        )}</cyan>" of type "<magenta>${typeof value}</magenta>" has to be a <green>Class</green>...`;
     }
 
-    // check if is an integer
-    if (definitionObj.type === 'int' || definitionObj.type === 'integer') {
+    // Integer
+    else if (definitionObj.type === 'Int' || definitionObj.type === 'Integer') {
       if (__isInt(value)) return true;
-      error = `Regarding to the argument definition "<yellow>${argTypeDefinition}</yellow>", the passed value "<cyan>${__toString(
-        value
-      )}</cyan>" of type "<magenta>${typeof value}</magenta>" has to be a <green>Integer</green>...`;
     }
 
     // check default types
-    if (
-      ['boolean', 'number', 'string', 'bigint', 'symbol', 'function'].indexOf(
+    else if (
+      ['Boolean', 'Number', 'String', 'Bigint', 'Symbol', 'Function'].indexOf(
         definitionObj.type
-      ) !== -1 &&
-      typeof value === definitionObj.type
+      ) !== -1
     ) {
-      return true;
-    } else {
-      error = `Regarding to the argument definition "<yellow>${argTypeDefinition}</yellow>", the passed value "<cyan>${__toString(
-        value
-      )}</cyan>" of type "<magenta>${typeof value}</magenta>" has to be a <green>${__upperFirst(
-        definitionObj.type
-      )}</green>...`;
+      if (definitionObj.type === 'Number') {
+        const type = typeOfValue;
+        if (type === 'Number' || type === 'Integer') return true;
+      } else {
+        if (typeOfValue === definitionObj.type) return true;
+      }
     }
 
     // check for "custom" types
-    if (__isClass(value) && value.name) {
-      if (definitionObj.type === value.name.toLowerCase()) return true;
-      else
-        error = `Regarding to the argument definition "<yellow>${argTypeDefinition}</yellow>", the passed value "<cyan>${__toString(
-          value
-        )}</cyan>" of type "<magenta>${typeof value}</magenta>" has to be a <green>${__upperFirst(
-          definitionObj.type
-        )}</green>...`;
+    else if (__isClass(value) && value.name) {
+      if (definitionObj.type === value.name) return true;
     } else if (value && value.constructor && value.constructor.name) {
-      if (definitionObj.type === value.constructor.name.toLowerCase())
-        return true;
-      else
-        error = `Regarding to the argument definition "<yellow>${argTypeDefinition}</yellow>", the passed value "<cyan>${__toString(
-          value
-        )}</cyan>" of type "<magenta>${typeof value}</magenta>" has to be a <green>${__upperFirst(
-          definitionObj.type
-        )}</green>...`;
+      if (definitionObj.type === value.constructor.name) return true;
     }
   }
 
-  return returnError ? error || false : false;
+  return issueObj;
 }

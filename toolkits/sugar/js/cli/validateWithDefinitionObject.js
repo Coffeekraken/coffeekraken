@@ -9,6 +9,8 @@ var _validateWithDefinitionObject = _interopRequireDefault(require("../object/va
 
 var _validateDefinitionObject = _interopRequireDefault(require("./validateDefinitionObject"));
 
+var _deepMerge = _interopRequireDefault(require("../object/deepMerge"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -44,17 +46,35 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @since     2.0.0
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function validateWithDefinitionObject(objectToCheck, definitionObj, validateDefinitionObject = true) {
-  // validate definition object first
-  if (validateDefinitionObject) {
+function validateWithDefinitionObject(objectToCheck, definitionObj, settings = {}) {
+  settings = (0, _deepMerge.default)({
+    validateDefinitionObject: true,
+    bySteps: false
+  }, settings);
+  let issues = []; // validate definition object first
+
+  if (settings.validateDefinitionObject) {
     const validateDefinitionObjectResult = (0, _validateDefinitionObject.default)(definitionObj);
-    if (validateDefinitionObjectResult !== true) return validateDefinitionObjectResult;
+
+    if (validateDefinitionObjectResult !== true) {
+      if (settings.bySteps) return validateDefinitionObjectResult;
+    }
+
+    issues = [...issues, ...validateDefinitionObjectResult];
   }
 
-  return (0, _validateWithDefinitionObject.default)(objectToCheck, definitionObj, (argName, argDefinition, value) => {
-    return true;
-  }, false // validateDefinitionOject. No need cause we already have done this in this function
-  );
+  const validationResult = (0, _validateWithDefinitionObject.default)(objectToCheck, definitionObj, {
+    validateDefinitionObject: false,
+    bySteps: settings.bySteps
+  });
+
+  if (validationResult !== true) {
+    if (settings.bySteps) return validationResult;
+    issues = [...issues, ...validationResult];
+  }
+
+  if (!issues.length) return true;
+  return issues;
 }
 
 module.exports = exports.default;

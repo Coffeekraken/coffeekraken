@@ -278,7 +278,11 @@ module.exports = class SApp extends __SComponent {
     // check if we have already the page instance
     let currentPageInstance = this._pagesStack[sUrl.schema.schema];
     if (!currentPageInstance) {
-      currentPageInstance = new pageClass(pageObj.page.id, pageObj.page.title);
+      currentPageInstance = new pageClass(
+        pageObj.page.id,
+        pageObj.page.title,
+        pageObj.page.settings
+      );
       this._pagesStack[sUrl.schema.schema] = currentPageInstance;
     }
 

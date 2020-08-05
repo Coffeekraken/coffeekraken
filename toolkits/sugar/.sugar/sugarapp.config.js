@@ -25,63 +25,82 @@ module.exports = {
       }
     ]
   },
-  commands: {
-    'server.frontend': {
-      path: `${__packageRoot(
-        __dirname
-      )}/src/node/server/frontend/SFrontendServerCommand`,
-      argsObj: {},
-      settings: {
-        run: true,
-        statusBar: true
-      }
-    },
-    'build.config': {
-      path: `${__packageRoot(
-        __dirname
-      )}/src/node/build/config/SBuildConfigCommand`,
-      argsObj: {},
-      settings: {}
-    },
-    'build.scss': {
-      path: `${__packageRoot(__dirname)}/src/node/build/scss/SBuildScssCommand`,
-      argsObj: {},
-      settings: {
-        statusBar: true
-      }
-    },
-    'build.js': {
-      path: `${__packageRoot(__dirname)}/src/node/build/js/SBuildJsCommand`,
-      argsObj: {},
-      settings: {
-        statusBar: true
-      }
-    },
-    'build.views': {
-      path: `${__packageRoot(
-        __dirname
-      )}/src/node/build/views/SBuildViewsCommand`,
-      argsObj: {},
-      settings: {}
-    },
-    'build.docMap': {
-      path: `${__packageRoot(
-        __dirname
-      )}/src/node/build/docMap/SBuildDocMapCommand`,
-      argsObj: {},
-      settings: {}
-    }
-  },
   pages: {
     default: '/commands',
     urls: {
-      '/commands/{?namespace}': {
+      '/commands': {
         page: {
           path: `${__packageRoot(
             __dirname
           )}/src/node/termapp/pages/STermAppCommandsPage`,
           id: 'command',
-          title: 'Commands'
+          title: 'Commands',
+          settings: {
+            commands: [
+              {
+                id: 'server.frontend',
+                name: 'Frontend Server',
+                path: `${__packageRoot(
+                  __dirname
+                )}/src/node/server/frontend/SFrontendSCli`,
+                argsObj: {},
+                settings: {},
+                key: 'f',
+                watch: true,
+                run: true,
+                statusBar: true
+              },
+              {
+                id: 'build.config',
+                name: 'Build Config',
+                path: `${__packageRoot(
+                  __dirname
+                )}/src/node/build/config/SBuildConfigCommand`,
+                argsObj: {},
+                settings: {}
+              },
+              {
+                id: 'build.scss',
+                name: 'Build SCSS',
+                path: `${__packageRoot(
+                  __dirname
+                )}/src/node/build/scss/SBuildScssCommand`,
+                argsObj: {},
+                settings: {
+                  statusBar: true
+                }
+              },
+              {
+                id: 'build.js',
+                name: 'Build JS',
+                path: `${__packageRoot(
+                  __dirname
+                )}/src/node/build/js/SBuildJsCommand`,
+                argsObj: {},
+                settings: {
+                  statusBar: true
+                }
+              },
+              {
+                id: 'build.views',
+                name: 'Build Views',
+                path: `${__packageRoot(
+                  __dirname
+                )}/src/node/build/views/SBuildViewsCommand`,
+                argsObj: {},
+                settings: {}
+              },
+              {
+                id: 'build.docMap',
+                name: 'Build docMap.json',
+                path: `${__packageRoot(
+                  __dirname
+                )}/src/node/build/docMap/SBuildDocMapCommand`,
+                argsObj: {},
+                settings: {}
+              }
+            ]
+          }
         },
         defaultArgs: {},
         menu: [

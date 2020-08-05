@@ -131,8 +131,7 @@ module.exports = class SFsCacheStreamAction extends __SActionsStreamAction {
         streamObj = cacheJson.streamObj;
         // specify to the ActionStream that we need to skip all the next actions
         trigger('log', {
-          group: settings.name,
-          value: `Skipping the next actions cause the data have been laoded from the cache...`
+          value: `Skipping the next actions cause the data have been <primary>laoded from the cache</primary>...`
         });
         this.skipNextActions();
       }

@@ -2,7 +2,6 @@ import __backgroundImageLoaded from '../backgroundImageLoaded';
 import __dispatchEvent from '../dispatchEvent';
 
 describe('sugar.js.dom.backgroundImageLoaded', () => {
-
   document.body.innerHTML = `
     <style>
       .testing {
@@ -13,19 +12,23 @@ describe('sugar.js.dom.backgroundImageLoaded', () => {
   `;
   const $elm = document.querySelector('#testing');
 
-  let isLoaded = false, isError = false;
+  let isLoaded = false,
+    isError = false;
 
-  const promise = __backgroundImageLoaded($elm).then(() => {
-    isLoaded = true;
-  }).catch(e => {
-    isError = true;
-  });
+  const promise = __backgroundImageLoaded($elm)
+    .then(() => {
+      isLoaded = true;
+    })
+    .catch((e) => {
+      isError = true;
+    });
 
   __dispatchEvent(promise.__$img, 'load');
 
   it('Should detect the background image loading complete state', () => {
-    expect(isLoaded).toBe(true);
-    expect(isError).toBe(false);
+    setTimeout(() => {
+      expect(isLoaded).toBe(true);
+      expect(isError).toBe(false);
+    });
   });
-
 });

@@ -14,7 +14,7 @@ const __upperFirst = require('../../string/upperFirst');
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
 export default function example(data) {
-  data = [...data];
+  if (!Array.isArray(data)) data = [data];
   data = data
     .map((item) => {
       if (item.content && item.content[item.content.length - 1] === '') {

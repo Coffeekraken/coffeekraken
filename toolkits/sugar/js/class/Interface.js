@@ -7,9 +7,9 @@ exports.default = void 0;
 
 var _deepMerge = _interopRequireDefault(require("../object/deepMerge"));
 
-var _validateDefinitionObject = _interopRequireDefault(require("../object/validateDefinitionObject"));
+var _validateObject = _interopRequireDefault(require("../validation/object/validateObject"));
 
-var _validateWithDefinitionObject = _interopRequireDefault(require("../object/validateWithDefinitionObject"));
+var _validateObjectOutputString = _interopRequireDefault(require("../validation/object/validateObjectOutputString"));
 
 var _parseHtml = _interopRequireDefault(require("../console/parseHtml"));
 
@@ -26,23 +26,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 /**
- * @name              Interface
+ * @name              SInterface
  * @namespace           js.class
  * @type              Function
  *
  * This class allows you to define an interface that you can later apply to an object instance
  * to make sure this particular instance has all the features, methods and properties you want.
  *
- * @param         {Object}               instance                The class instance you want to check
- * @param         {Object}               interface               The interface that the class instance has to match
- * @param         {Object}                [settings={}]         An object of settings to configure your implement test:
- * - throw (false) {Boolean}: Specify if you want that an error is throwned if the test does not pass
- * @return        {Boolean}                                      true if the test pass, a string describing the error if not...
- *
  * @example         js
- * import Interface from '@coffeekraken/sugar/js/class/Interface';
- * class MyCoolInterface extends Interface {
- *    static interface = {
+ * import SInterface from '@coffeekraken/sugar/js/class/SInterface';
+ * class MyCoolInterface extends SInterface {
+ *    static definitionObj = {
  *      title: {
  *        type: 'String',
  *        required: true
@@ -65,12 +59,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com>
  */
-let Interface = /*#__PURE__*/function () {
-  function Interface() {
-    _classCallCheck(this, Interface);
+let SInterface = /*#__PURE__*/function () {
+  function SInterface() {
+    _classCallCheck(this, SInterface);
   }
 
-  _createClass(Interface, null, [{
+  _createClass(SInterface, null, [{
     key: "apply",
 
     /**
@@ -96,30 +90,20 @@ let Interface = /*#__PURE__*/function () {
      *
      * @param       {Object}                instance              The instance to apply the interface on
      * @param       {Object}               [settings={}]         An object of settings to configure your apply process
+     * - throw (false) {Boolean}: Specify if you want that an error is throwned if the test does not pass
+     * - return (String) {String}: Specify in which return you want the result back. Can be "String" of "Object".
      * @return      {Boolean|String}                              true if all is ok, a string describing the issue if not...
      *
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     value: function apply(instance, settings = {}) {
-      settings = (0, _deepMerge.default)(Interface.settings, settings);
+      settings = (0, _deepMerge.default)(SInterface.settings, settings);
       let issues = [];
       let issueObj = {
         issues: []
-      }; // const definitionObjValidationResult = __validateDefinitionObject(
-      //   this.interface
-      // );
-      // if (definitionObjValidationResult !== true)
-      //   issues = [...issues, ...definitionObjValidationResult];
-      // if (
-      //   definitionObjValidationResult !== true &&
-      //   settings.throw &&
-      //   settings.bySteps
-      // ) {
-      //   throw new Error(definitionObjValidationResult);
-      // }
-
-      const implementationValidationResult = (0, _validateWithDefinitionObject.default)(instance, this.interface);
+      };
+      const implementationValidationResult = (0, _validateObject.default)(instance, this.definitionObj, instance.name || instance.constructor.name);
 
       if (implementationValidationResult !== true) {
         issueObj = { ...issueObj,
@@ -131,32 +115,70 @@ let Interface = /*#__PURE__*/function () {
       if (!issueObj.issues.length) return true;
 
       if (settings.throw) {
-        throw new Error(issueObj);
-      } // console.log('SOSOS', issueObj);
+        throw new Error(SInterface.outputString(issueObj));
+      }
 
+      switch (settings.return.toLowerCase()) {
+        case 'object':
+          return issueObj;
+          break;
 
-      return issueObj; // let issuesString = __parseHtml(
-      //   __trimLines(`<yellow>${
-      //     instance.constructor.name
-      //   }</yellow> implementing <cyan>${this.name}</cyan> issues:
-      //   - ${issues.join('\n- ')}
-      // `)
-      // );
-      // if (settings.throw) {
-      //   throw new Error(issuesString);
-      // } else {
-      //   return issuesString;
-      // }
+        case 'string':
+        default:
+          return SInterface.outputString(issueObj);
+          break;
+      }
+    }
+    /**
+     * @name          outputString
+     * @type          Function
+     *
+     * This static method allows you to get the ```apply``` result
+     * in a readable way.
+     *
+     * @param         {Object}               resultObj               The resulting object coming from the ```apply``` method
+     * @return        {String}                                    The string version of the result
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "outputString",
+    value: function outputString(resultObj) {
+      const string = (0, _validateObjectOutputString.default)(resultObj);
+      return string;
+    }
+    /**
+     * @name          output
+     * @type          Function
+     *
+     * This static method allows you to console.log the ```apply``` result
+     * in a readable way.
+     *
+     * @param         {Object}               resultObj               The resulting object coming from the ```apply``` method
+     * @return        {String}                                    The string version of the result
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "output",
+    value: function output(resultObj) {
+      const string = (0, _validateObjectOutputString.default)(resultObj);
+      console.log(string);
     }
   }]);
 
-  return Interface;
+  return SInterface;
 }();
 
-exports.default = Interface;
+exports.default = SInterface;
 
-_defineProperty(Interface, "settings", {
-  throw: false
+_defineProperty(SInterface, "settings", {
+  throw: false,
+  return: 'String'
 });
 
 module.exports = exports.default;

@@ -22,7 +22,7 @@ const __upperFirst = require('../../string/upperFirst');
 
 
 function example(data) {
-  data = [...data];
+  if (!Array.isArray(data)) data = [data];
   data = data.map(item => {
     if (item.content && item.content[item.content.length - 1] === '') {
       item.content = item.content.slice(0, -1);

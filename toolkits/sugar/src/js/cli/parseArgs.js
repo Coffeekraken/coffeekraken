@@ -8,7 +8,7 @@ import __isPlainObject from '../is/plainObject';
 import __deepMap from '../object/deepMap';
 import __completeArgsObject from './completeArgsObject';
 import __unquote from '../string/unquote';
-import __parseArgumentTypeDefinitionString from '../parse/argumentTypeDefinitionString';
+import __parseTypeDefinitionString from '../validation/utils/parseTypeDefinitionString';
 import __ofType from '../is/ofType';
 
 /**
@@ -85,9 +85,7 @@ export default function parseArgsString(
 
       currentArgDefinition = definitionObj[realArgName];
 
-      currentArgType = __parseArgumentTypeDefinitionString(
-        currentArgDefinition.type
-      );
+      currentArgType = __parseTypeDefinitionString(currentArgDefinition.type);
 
       argsObj[realArgName] = true;
 

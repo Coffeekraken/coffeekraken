@@ -25,7 +25,7 @@ var _completeArgsObject = _interopRequireDefault(require("./completeArgsObject")
 
 var _unquote = _interopRequireDefault(require("../string/unquote"));
 
-var _argumentTypeDefinitionString = _interopRequireDefault(require("../parse/argumentTypeDefinitionString"));
+var _parseTypeDefinitionString = _interopRequireDefault(require("../validation/utils/parseTypeDefinitionString"));
 
 var _ofType = _interopRequireDefault(require("../is/ofType"));
 
@@ -93,7 +93,7 @@ function parseArgsString(string, definitionObj = {}, settings = {}) {
       const realArgName = getArgNameByAlias(currentArg, definitionObj) || currentArg;
       currentArgName = realArgName;
       currentArgDefinition = definitionObj[realArgName];
-      currentArgType = (0, _argumentTypeDefinitionString.default)(currentArgDefinition.type);
+      currentArgType = (0, _parseTypeDefinitionString.default)(currentArgDefinition.type);
       argsObj[realArgName] = true;
       return false;
     }

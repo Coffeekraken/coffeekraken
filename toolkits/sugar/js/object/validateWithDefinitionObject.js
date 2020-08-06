@@ -98,10 +98,9 @@ function validateWithDefinitionObject(objectToCheck, definitionObj, settings = {
     const validationRes = (0, _validateWithDefinitionObject.default)(value, argDefinition, argName);
 
     if (validationRes !== true) {
-      issuesObj[argName] = { ...(issuesObj[argName] || {}),
-        ...(validationRes || {}),
-        issues: [...(issuesObj[argName] ? issuesObj[argName].issues || [] : []), ...validationRes.issues]
-      };
+      issuesObj[argName] = (0, _deepMerge.default)(issuesObj[argName] || {}, validationRes || {}, {
+        array: true
+      });
       issuesObj.issues.push(argName);
 
       if (staticIssue) {

@@ -40,6 +40,8 @@ module.exports = async function firstLookup(directory, settings = {}) {
 
   let founded = await __findInFiles.find(`@namespace`, directory);
 
+  console.log(founded);
+
   const namespaceObj = {};
 
   Object.keys(founded).forEach((path) => {
@@ -48,20 +50,31 @@ module.exports = async function firstLookup(directory, settings = {}) {
 
     const content = __fs.readFileSync(path, 'utf8');
 
+    console.log(content);
+
     const docblocks = new __SDocblock(content);
     const docblock = docblocks.blocks[0] ? docblocks.blocks[0] : null;
+
+    console.log(docblock);
+
     if (!docblock) return;
     delete docblock.object.raw;
+
+    console.log(docblock.object.namespace);
 
     const name =
       docblock.object.name ||
       __getFilename(path).replace(`.${__extension(path)}`, '');
+
+    console.log(name);
 
     namespaceObj[docblock.object.namespace + '.' + name] = {
       ...docblock.object,
       path: relativePath
     };
   });
+
+  console.log(namespaceObj);
 
   return namespaceObj;
 };

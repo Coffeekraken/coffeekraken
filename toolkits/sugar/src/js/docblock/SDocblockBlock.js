@@ -16,8 +16,6 @@ import __markdownBlocks from './markdown/blocks';
 
 import __SDocblock from './SDocblock';
 
-// TODO: tests
-
 /**
  * @name          SDocblockBlock
  * @namespace           js.docblock
@@ -29,6 +27,10 @@ import __SDocblock from './SDocblock';
  *
  * @param         {String}       source      The docblock source.  Has to be a parsable docblock string
  * @param         {Object}      [settings={}]       A settings object to configure your instance
+ *
+ * @todo        tests
+ * @todo        Support "feature" tag
+ * @todo        Check the supported tags
  *
  * @example         js
  * import SDocblockBlock from '@coffeekraken/sugar/js/docblock/SDocblockBlock';

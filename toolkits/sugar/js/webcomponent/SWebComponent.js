@@ -21,7 +21,7 @@ var _paramCase = _interopRequireDefault(require("../string/paramCase"));
 
 var _uncamelize = _interopRequireDefault(require("../string/uncamelize"));
 
-var _validateWithDefinitionObject = _interopRequireDefault(require("../value/validateWithDefinitionObject"));
+var _validateValue = _interopRequireDefault(require("../validation/value/validateValue"));
 
 var _watch = _interopRequireDefault(require("../object/watch"));
 
@@ -643,7 +643,7 @@ function SWebComponent(extend = HTMLElement) {
         if (!props || props.length === 0) props = Object.keys(this._props);
         props.forEach(prop => {
           const propObj = this._props[prop];
-          const validationResult = (0, _validateWithDefinitionObject.default)(propObj.value, propObj, `${this.constructor.name}.props.${prop}`);
+          const validationResult = (0, _validateValue.default)(propObj.value, propObj, `${this.constructor.name}.props.${prop}`);
           if (validationResult !== true) throw new Error(validationResult);
         });
       }

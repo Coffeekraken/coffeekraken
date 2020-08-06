@@ -1,7 +1,7 @@
 import __get from '../object/get';
 import __set from '../object/set';
 import __deepMap from '../object/deepMap';
-import __validateWithDefinitionObject from './validateWithDefinitionObject';
+import __validateCliObject from '../validation/cli/validateCliObject';
 import __deepize from '../object/deepize';
 
 /**
@@ -39,10 +39,7 @@ export default function completeArgsObject(argsObj, definitionObj) {
   });
 
   // make sure all is ok
-  const argsValidationResult = __validateWithDefinitionObject(
-    argsObj,
-    definitionObj
-  );
+  const argsValidationResult = __validateCliObject(argsObj, definitionObj);
   if (argsValidationResult !== true) throw new Error(argsValidationResult);
 
   // return the argsObj

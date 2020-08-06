@@ -11,7 +11,7 @@ var _set = _interopRequireDefault(require("../object/set"));
 
 var _deepMap = _interopRequireDefault(require("../object/deepMap"));
 
-var _validateWithDefinitionObject = _interopRequireDefault(require("./validateWithDefinitionObject"));
+var _validateCliObject = _interopRequireDefault(require("../validation/cli/validateCliObject"));
 
 var _deepize = _interopRequireDefault(require("../object/deepize"));
 
@@ -46,7 +46,7 @@ function completeArgsObject(argsObj, definitionObj) {
     }
   }); // make sure all is ok
 
-  const argsValidationResult = (0, _validateWithDefinitionObject.default)(argsObj, definitionObj);
+  const argsValidationResult = (0, _validateCliObject.default)(argsObj, definitionObj);
   if (argsValidationResult !== true) throw new Error(argsValidationResult); // return the argsObj
 
   return (0, _deepize.default)(argsObj);

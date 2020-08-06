@@ -8,8 +8,12 @@ module.exports = __SUrlAction => {
         url: 'https://google.com'
       });
       expect(action.toJson()).toEqual({
-        target: '_blank',
-        url: 'https://google.com'
+        type: 'browser.url',
+        descriptorObj: {
+          target: '_blank',
+          url: 'https://google.com'
+        },
+        settings: {}
       });
     });
   });

@@ -27,12 +27,18 @@ describe('sugar.js.dom.detectInOutDirection', () => {
   __dispatchEvent($elm, 'mouseleave');
 
   it('Should have trigger the "in" stack correctly', () => {
-    expect(isInTriggered).toBe(true);
+    setTimeout(() => {
+      expect(isInTriggered).toBe(true);
+    });
   });
   it('Should have trigger the "out" stack correctly', () => {
-    expect(isOutTriggered).toBe(true);
+    setTimeout(() => {
+      expect(isOutTriggered).toBe(true);
+    });
   });
   it('Should have trigger the "then" stack correctly', () => {
-    expect(isThenTriggered).toBe(true);
+    setTimeout(() => {
+      expect(isThenTriggered).toBe(true);
+    });
   });
 });

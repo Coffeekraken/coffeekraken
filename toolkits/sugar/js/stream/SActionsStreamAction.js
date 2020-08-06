@@ -13,7 +13,7 @@ var _convert = _interopRequireDefault(require("../time/convert"));
 
 var _validateDefinitionObject = _interopRequireDefault(require("../object/validateDefinitionObject"));
 
-var _validateWithDefinitionObject = _interopRequireDefault(require("../object/validateWithDefinitionObject"));
+var _validateObject = _interopRequireDefault(require("../validation/object/validateObject"));
 
 var _uniqid = _interopRequireDefault(require("../string/uniqid"));
 
@@ -164,7 +164,7 @@ let SActionStreamAction = /*#__PURE__*/function (_SPromise) {
         }
       }); // validate the streamObj depending on the static definitionObj property
 
-      const checkWithDefinitionObjectResult = (0, _validateWithDefinitionObject.default)(streamObj, this.constructor.definitionObj);
+      const checkWithDefinitionObjectResult = (0, _validateObject.default)(streamObj, this.constructor.definitionObj);
 
       if (checkWithDefinitionObjectResult !== true) {
         throw new Error(checkWithDefinitionObjectResult);

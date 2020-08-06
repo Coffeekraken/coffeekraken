@@ -3,8 +3,6 @@ import __SDocblockBlock from './SDocblockBlock';
 import __handlebars from 'handlebars';
 import __markdown from './markdown/index';
 
-// TODO: tests
-
 /**
  * @name                  Dockblock
  * @namespace           js.docblock
@@ -16,6 +14,8 @@ import __markdown from './markdown/index';
  * @param       {String|Object}     source        The docblock source. Can be either a string, a filepath or an array of docblock objects
  * @param       {Object}      [settings={}]       An object of settings to configure the SDocblock instance:
  * - tags ({}) {Object}: An object representing the functions used to parse each tags. The object format is ```{ tagName: parseFn }```
+ *
+ * @todo        tests
  *
  * @example         js
  * import SDocblock from '@coffeekraken/sugar/js/docblock/SSDocblock';

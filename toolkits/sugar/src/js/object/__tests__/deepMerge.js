@@ -1,15 +1,11 @@
 module.exports = (__deepMerge) => {
-
   describe('sugar.js.object.deepMerge', () => {
-
-    it('Should merge the passed objects correctly', done => {
-
+    it('Should merge the passed objects correctly', (done) => {
       const obj1 = {
         hello: {
           world: 'hello world'
         },
-        plop: {
-        }
+        plop: {}
       };
       const obj2 = {
         hello: {
@@ -23,17 +19,14 @@ module.exports = (__deepMerge) => {
           world: 'hello world',
           coco: 'coco'
         },
-        plop: {
-        },
+        plop: {},
         yes: true
       });
 
       done();
-
     });
 
-    it('Should merge the passed objects with some classes instances correctly', done => {
-
+    it('Should merge the passed objects with some classes instances correctly', (done) => {
       class MyClass {
         classParam1 = 'hello';
         classParam2 = false;
@@ -71,11 +64,9 @@ module.exports = (__deepMerge) => {
       });
 
       done();
-
     });
 
-    it('Should leave the class instances and don\'s touch them', done => {
-
+    it("Should leave the class instances and don's touch them", (done) => {
       class MyClass {
         classParam1 = 'hello';
         classParam2 = false;
@@ -101,10 +92,30 @@ module.exports = (__deepMerge) => {
       expect(result.plop instanceof MyClass).toBe(true);
 
       done();
-
     });
 
+    it('Should merge the passed objects with some array correctly', (done) => {
+      const obj1 = {
+        plop: ['a', 'b', 'c'],
+        hello: 'world'
+      };
+      const obj2 = {
+        plop: ['a', 'b', 'd', 'e'],
+        hello: 'world'
+      };
+
+      expect(__deepMerge(obj1, obj2)).toEqual(obj2);
+
+      expect(
+        __deepMerge(obj1, obj2, {
+          array: true
+        })
+      ).toEqual({
+        plop: ['a', 'b', 'c', 'd', 'e'],
+        hello: 'world'
+      });
+
+      done();
+    });
   });
-
-
-}
+};

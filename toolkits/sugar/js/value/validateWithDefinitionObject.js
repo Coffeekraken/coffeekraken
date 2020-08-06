@@ -57,10 +57,9 @@ function validateWithDefinitionObject(value, definitionObj, name = null, setting
     const isOfTypeResult = (0, _ofType.default)(value, definitionObj.type);
 
     if (isOfTypeResult !== true) {
-      issueObj = { ...issueObj,
-        ...isOfTypeResult,
-        issues: [...issueObj.issues, ...isOfTypeResult.issues]
-      };
+      issueObj = (0, _deepMerge.default)(issueObj, isOfTypeResult, {
+        array: true
+      });
     }
   } // check required
 

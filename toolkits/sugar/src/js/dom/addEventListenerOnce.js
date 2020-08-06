@@ -11,7 +11,7 @@ import __addEventListener from './addEventListener';
  * @param    {HTMLElement}    $elm    The element to add the event listener on
  * @param    {String}    event    The event to listen for
  * @param    {Function}    [callback=null]    The callback function to call on event
- * @param    {object}    [options={}]    An options object that specifies characteristics about the event listener
+ * @param    {Boolean}    [useCapture=false]    A Boolean value that specifies whether the event should be executed in the capturing or in the bubbling phase
  * @return    {Promise}                   A promise that will be resolved once the event has been called
  *
  * @example    js
@@ -19,23 +19,45 @@ import __addEventListener from './addEventListener';
  * addEventListenerOnce(myElm, 'click', (e) => {
  *     // do something on click
  * });
- * addEventListenerOnce(myElm, 'click').then(e => {
- *    // do something on click
+ * addEventListenerOnce(myElm, 'click').on('click', (e) => {
+ *
  * });
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function addEventListenerOnce(
   $elm,
-  event,
+  eventNames,
   callback = null,
-  options = {}
+  useCapture = false
 ) {
-  const sPromise = __addEventListener($elm, event, callback, options);
-  sPromise
-    .then(() => {
-      sPromise.cancel();
-    })
-    .start();
-  return sPromise;
+  if (!Array.isArray(eventNames)) eventNames = [eventNames];
+
+  const globalPromise = new __SPromise(() => {}).start();
+
+  const eventsStack = {};
+
+  globalPromise.on('cancel,finally', () => {
+    eventNames.forEach((eventName) => {
+      eventsStack[eventName].promise.cancel();
+    });
+  });
+
+  eventNames.forEach((eventName) => {
+    const promise = __addEventListener($elm, eventName, null, useCapture);
+
+    eventsStack[eventName] = {
+      promise
+    };
+
+    promise.on(eventNames, (event) => {
+      if (callback && typeof callback === 'function') {
+        callback.apply(this, [event]);
+      }
+      globalPromise.trigger(eventName, event);
+      promise.cancel();
+    });
+  });
+
+  return globalPromise;
 }

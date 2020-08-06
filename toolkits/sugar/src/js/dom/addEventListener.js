@@ -8,35 +8,67 @@ import __SPromise from '../promise/SPromise';
  * Add an event listener on an element and return the function to remove the event listener
  *
  * @param    {HTMLElement}    $elm    The HTMLElement on which to add the event listener
- * @param    {String}    eventName    THe event name to listen to
- * @param    {Function}    callback    The callback function to call on event
- * @param    {object}    [options={}]    An options object that specifies characteristics about the event listener
- * @return    {Function}    The remove event listener function
+ * @param    {String}    eventNames    The event names to listen to. Can be a simple string like "click", multiple events like "click,focus", or an array of events like ['click','hover']
+ * @param    {Function}    callback    The callback function to call on event. The passed event
+ * @param    {Boolean}    [useCapture=false]    A Boolean value that specifies whether the event should be executed in the capturing or in the bubbling phase
+ * @return    {SPromise}                An SPromise instance on which you can listen for events or simply "cancel" the listeneing process
  *
  * @example    js
  * import addEventListener from '@coffeekraken/sugar/js/dom/addEventListener'
- * const removeEventListener = addEventListener($myCoolElm, 'click', this._myCoolFunction, this)
+ * const listener = addEventListener($myCoolElm, 'click', (event) => {
+ *    // event.type; // => click
+ * });
  * // remove the event listener
- * removeEventListener()
+ * listener.cancel();
+ *
+ * // listen for more than one event at a time
+ * addEventListener($myCoolElm, 'click,mouseover,mouseout', (event) => {
+ *    // do something depending on the event.type property
+ * }).on('mouseover', (event) => {
+ *    // do something when the event is the mouseover one
+ * });
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function addEventListener(
   $elm,
-  eventName,
+  eventNames,
   callback = null,
-  options = {}
+  useCapture = false
 ) {
-  let listenerFn = null;
+  if (!Array.isArray(eventNames))
+    eventNames = eventNames.split(',').map((e) => e.trim());
 
-  return new __SPromise((resolve, reject, trigger, cancel) => {
-    listenerFn = (...args) => {
-      if (callback) callback.apply(this, [...args]);
-      trigger('then', ...args);
+  if (callback && typeof callback === 'function') callback = callback;
+  else if (callback && typeof callback === 'boolean') useCapture = callback;
+
+  let eventsStack = {};
+
+  const promise = new __SPromise((resolve, reject, trigger, cancel) => {}).on(
+    'cancel,finally',
+    () => {
+      eventNames.forEach((eventName) => {
+        const stack = eventsStack[eventName];
+        $elm.removeEventListener(eventName, stack.callback, stack.useCapture);
+      });
+    }
+  );
+
+  eventNames.forEach((eventName) => {
+    eventsStack[eventName] = {
+      callback,
+      useCapture
     };
 
-    $elm.addEventListener(eventName, listenerFn, options);
-  }).on('cancel,finally', () => {
-    $elm.removeEventListener(eventName, listenerFn, options);
+    $elm.addEventListener(
+      eventName,
+      (event) => {
+        if (callback) callback.apply(this, [event]);
+        promise.trigger(eventName, event);
+      },
+      useCapture
+    );
   });
+
+  return promise;
 }

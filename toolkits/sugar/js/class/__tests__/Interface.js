@@ -22,6 +22,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+const __stripAnsi = require('strip-ansi');
+
 module.exports = __Interface => {
   describe('sugar.js.class.Interface', () => {
     it('Should pass the interface test correctly', () => {
@@ -57,14 +59,19 @@ module.exports = __Interface => {
 
         _defineProperty(this, "title", true);
 
-        myClassInterfaceResult = MyInterface.apply(this);
+        myClassInterfaceResult = MyInterface.apply(this, {
+          return: 'Object'
+        });
       };
 
       new MyClass();
       expect(myClassInterfaceResult).toEqual({
+        name: 'MyClass',
         doSomething: {
+          name: 'doSomething',
           expected: {
-            type: 'Function'
+            type: 'Function',
+            required: true
           },
           issues: ['type', 'required'],
           received: {
@@ -74,8 +81,10 @@ module.exports = __Interface => {
         },
         issues: ['title', 'doSomething'],
         title: {
+          name: 'title',
           expected: {
-            type: 'String'
+            type: 'String',
+            required: true
           },
           issues: ['type'],
           received: {
@@ -168,7 +177,9 @@ module.exports = __Interface => {
 
           _defineProperty(this, "title", 'Hello world');
 
-          myClassInterfaceResult = MyInterface.apply(this);
+          myClassInterfaceResult = MyInterface.apply(this, {
+            return: 'Object'
+          });
         }
 
         _createClass(MyClass, [{
@@ -181,9 +192,13 @@ module.exports = __Interface => {
 
       new MyClass();
       expect(myClassInterfaceResult).toEqual({
+        name: 'MyClass',
         doSomething: {
+          name: 'doSomething',
           expected: {
-            type: 'Function'
+            type: 'Function',
+            required: true,
+            static: true
           },
           issues: ['type', 'required', 'static'],
           received: {
@@ -273,13 +288,17 @@ module.exports = __Interface => {
 
         _defineProperty(this, "title", 'Hello world');
 
-        myClassInterfaceResult = MyInterface.apply(this);
+        myClassInterfaceResult = MyInterface.apply(this, {
+          return: 'Object'
+        });
       };
 
       new MyClass();
       expect(myClassInterfaceResult).toEqual({
+        name: 'MyClass',
         issues: ['title'],
         title: {
+          name: 'title',
           expected: {
             required: true,
             type: 'String',
@@ -328,6 +347,97 @@ module.exports = __Interface => {
 
       new MyClass();
       expect(myClassInterfaceResult).toBe(true);
+    });
+    it('Should pass the interface test correctly passing a complexe one that need to return a correct error string', () => {
+      let MyInterface = /*#__PURE__*/function (_Interface7) {
+        _inherits(MyInterface, _Interface7);
+
+        var _super7 = _createSuper(MyInterface);
+
+        function MyInterface() {
+          _classCallCheck(this, MyInterface);
+
+          return _super7.apply(this, arguments);
+        }
+
+        return MyInterface;
+      }(__Interface);
+
+      _defineProperty(MyInterface, "interface", {
+        title: {
+          type: 'String',
+          values: ['Hello', 'World'],
+          required: true
+        },
+        body: {
+          type: 'Boolean',
+          required: true
+        },
+        header: {
+          type: 'Array<String>',
+          required: true
+        },
+        footer: {
+          type: 'Object<Boolean|Number>',
+          required: true
+        },
+        medhod1: {
+          type: 'Function',
+          required: true
+        },
+        method2: {
+          type: 'Function',
+          required: true
+        },
+        staticMethod: {
+          type: 'Function',
+          required: true,
+          static: true
+        },
+        staticMethod2: {
+          type: 'Function',
+          required: true,
+          static: true
+        }
+      });
+
+      let myClassInterfaceResult;
+
+      let MyClass = /*#__PURE__*/function () {
+        function MyClass() {
+          _classCallCheck(this, MyClass);
+
+          _defineProperty(this, "title", 'Hello World');
+
+          _defineProperty(this, "body", 10);
+
+          _defineProperty(this, "header", [true, 'hello']);
+
+          _defineProperty(this, "footer", {
+            coco: 10,
+            plop: () => {}
+          });
+
+          _defineProperty(this, "method1", 'Youhou');
+
+          _defineProperty(this, "staticMethod2", 'Youhou');
+
+          myClassInterfaceResult = MyInterface.apply(this);
+        }
+
+        _createClass(MyClass, [{
+          key: "method2",
+          value: function method2() {}
+        }], [{
+          key: "staticMethod",
+          value: function staticMethod() {}
+        }]);
+
+        return MyClass;
+      }();
+
+      new MyClass();
+      expect(__stripAnsi(myClassInterfaceResult.replace(/\s/g, ''))).toBe('Objectvalidation-Name:MyClass-Errors:6-Properties:title,body,header,footer,medhod1,staticMethod2│title│-Receivedvalue:HelloWorld│-Theallowedvaluesare["Hello","World"]│body│-Receivedvalue:10│-ThevaluetypehastobeBooleanbutyoupassedInteger│header│-Receivedvalue:[true,"hello"]│-ThevaluetypehastobeArray<String>butyoupassedArray<Boolean|String>│footer│-Receivedvalue:{"coco":10}│-ThevaluetypehastobeObject<Boolean|Number>butyoupassedObject<Integer|Function>│medhod1│-Receivedvalue:undefined│-ThevaluetypehastobeFunctionbutyoupassedUndefined│-Thisvalueisrequired│staticMethod2│-Receivedvalue:null│-ThevaluetypehastobeFunctionbutyoupassedNull│-Thisvalueisrequired│-Thisvaluehastobeastaticone');
     });
   });
 };

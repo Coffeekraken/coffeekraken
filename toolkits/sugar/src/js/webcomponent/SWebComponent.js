@@ -6,7 +6,7 @@ import __when from '../dom/when';
 import __camelize from '../string/camelize';
 import __paramCase from '../string/paramCase';
 import __uncamelize from '../string/uncamelize';
-import __validateWithDefinitionObject from '../value/validateWithDefinitionObject';
+import __validateValue from '../validation/value/validateValue';
 import __watch from '../object/watch';
 import { getComponentMetas } from './register';
 import __uniqid from '../string/uniqid';
@@ -597,7 +597,7 @@ function SWebComponent(extend = HTMLElement) {
       props.forEach((prop) => {
         const propObj = this._props[prop];
 
-        const validationResult = __validateWithDefinitionObject(
+        const validationResult = __validateValue(
           propObj.value,
           propObj,
           `${this.constructor.name}.props.${prop}`

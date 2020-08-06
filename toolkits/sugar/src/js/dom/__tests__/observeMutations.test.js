@@ -1,7 +1,6 @@
 import __observeMutations from '../observeMutations';
 
 describe('sugar.js.dom.observeMutations', () => {
-
   document.body.innerHTML = `
       <div id="testing">
       </div>
@@ -9,8 +8,11 @@ describe('sugar.js.dom.observeMutations', () => {
   const $elm = document.querySelector('#testing');
   let mutationsCount = 0;
 
-  __observeMutations($elm).then(mutation => {
-    if (mutation.attributeName === 'plop' || mutation.attributeName === 'hello') {
+  __observeMutations($elm).then((mutation) => {
+    if (
+      mutation.attributeName === 'plop' ||
+      mutation.attributeName === 'hello'
+    ) {
       mutationsCount++;
     }
   });
@@ -19,7 +21,8 @@ describe('sugar.js.dom.observeMutations', () => {
   $elm.setAttribute('hello', 'world');
 
   it('Should have detect all the mutations done on the $elm', () => {
-    expect(mutationsCount).toBe(2);
+    setTimeout(() => {
+      expect(mutationsCount).toBe(2);
+    });
   });
-
 });

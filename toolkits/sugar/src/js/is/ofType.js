@@ -1,4 +1,4 @@
-import __parseArgumentTypeDefinitionString from '../parse/argumentTypeDefinitionString';
+import __parseTypeDefinitionString from '../validation/utils/parseTypeDefinitionString';
 import __toString from '../string/toString';
 import __isClass from './class';
 import __isInt from './integer';
@@ -32,7 +32,7 @@ export default function ofType(value, argTypeDefinition) {
   let definitionArray = argTypeDefinition;
   // parsing the argument definition string
   if (typeof argTypeDefinition === 'string') {
-    definitionArray = __parseArgumentTypeDefinitionString(argTypeDefinition);
+    definitionArray = __parseTypeDefinitionString(argTypeDefinition);
   }
 
   const typeOfValue = __typeof(value);

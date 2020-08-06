@@ -31,8 +31,10 @@ describe('sugar.js.dom.imagesLoaded', () => {
   __dispatchEvent($img3, 'load');
 
   it('Should detect when all the images are loaded correctly', () => {
-    expect(isLoaded).toBe(true);
-    expect(isError).toBe(false);
-    expect(imgsCount).toBe(3);
+    setTimeout(() => {
+      expect(isLoaded).toBe(true);
+      expect(isError).toBe(false);
+      expect(imgsCount).toBe(3);
+    });
   });
 });

@@ -74,7 +74,7 @@ module.exports = __deepMerge => {
       });
       done();
     });
-    it('Should leave the class instances and don\'s touch them', done => {
+    it("Should leave the class instances and don's touch them", done => {
       let MyClass = function MyClass(value) {
         _classCallCheck(this, MyClass);
 
@@ -102,6 +102,24 @@ module.exports = __deepMerge => {
       const result = __deepMerge(obj1, obj2);
 
       expect(result.plop instanceof MyClass).toBe(true);
+      done();
+    });
+    it('Should merge the passed objects with some array correctly', done => {
+      const obj1 = {
+        plop: ['a', 'b', 'c'],
+        hello: 'world'
+      };
+      const obj2 = {
+        plop: ['a', 'b', 'd', 'e'],
+        hello: 'world'
+      };
+      expect(__deepMerge(obj1, obj2)).toEqual(obj2);
+      expect(__deepMerge(obj1, obj2, {
+        array: true
+      })).toEqual({
+        plop: ['a', 'b', 'c', 'd', 'e'],
+        hello: 'world'
+      });
       done();
     });
   });

@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = ofType;
 
-var _argumentTypeDefinitionString = _interopRequireDefault(require("../parse/argumentTypeDefinitionString"));
+var _parseTypeDefinitionString = _interopRequireDefault(require("../validation/utils/parseTypeDefinitionString"));
 
 var _toString = _interopRequireDefault(require("../string/toString"));
 
@@ -47,7 +47,7 @@ function ofType(value, argTypeDefinition) {
   let definitionArray = argTypeDefinition; // parsing the argument definition string
 
   if (typeof argTypeDefinition === 'string') {
-    definitionArray = (0, _argumentTypeDefinitionString.default)(argTypeDefinition);
+    definitionArray = (0, _parseTypeDefinitionString.default)(argTypeDefinition);
   }
 
   const typeOfValue = (0, _typeof.default)(value);

@@ -43,8 +43,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-// TODO: tests
-
 /**
  * @name          SDocblockBlock
  * @namespace           js.docblock
@@ -56,6 +54,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  *
  * @param         {String}       source      The docblock source.  Has to be a parsable docblock string
  * @param         {Object}      [settings={}]       A settings object to configure your instance
+ *
+ * @todo        tests
+ * @todo        Support "feature" tag
+ * @todo        Check the supported tags
  *
  * @example         js
  * import SDocblockBlock from '@coffeekraken/sugar/js/docblock/SDocblockBlock';

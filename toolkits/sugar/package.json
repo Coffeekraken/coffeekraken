@@ -145,6 +145,7 @@
     "module-alias": "^2.2.2",
     "multiple-extend": "^0.1.2",
     "mustache": "^4.0.1",
+    "mutation-observer": "^1.0.3",
     "ncp": "^2.0.0",
     "neo-blessed": "^0.2.0",
     "node-clean-exit": "^0.2.1",

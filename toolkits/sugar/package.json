@@ -132,6 +132,8 @@
     "kill-port-process": "^2.2.1",
     "lit-html": "^1.2.1",
     "lodash": "^4.17.15",
+    "lodash.clone": "^4.5.0",
+    "lodash.clonedeep": "^4.5.0",
     "log-with-style": "^0.3.0",
     "make-dir": "^3.0.0",
     "markdown-chalk": "^2.1.0",

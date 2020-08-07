@@ -5,9 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = clone;
 
-var _clone = _interopRequireDefault(require("lodash/clone"));
+var _lodash = _interopRequireDefault(require("lodash.clone"));
 
-var _clonedeep = _interopRequireDefault(require("lodash/clonedeep"));
+var _lodash2 = _interopRequireDefault(require("lodash.clonedeep"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31,10 +31,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 function clone(object, deep = false) {
   if (deep) {
-    return (0, _clonedeep.default)(object);
+    return (0, _lodash2.default)(object);
   }
 
-  return (0, _clone.default)(object);
+  return (0, _lodash.default)(object);
 }
 
 module.exports = exports.default;

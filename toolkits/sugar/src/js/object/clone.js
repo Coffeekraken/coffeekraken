@@ -1,5 +1,5 @@
-import __clone from 'lodash/clone';
-import __deepClone from 'lodash/clonedeep';
+import __clone from 'lodash.clone';
+import __deepClone from 'lodash.clonedeep';
 
 /**
  * @name                clone

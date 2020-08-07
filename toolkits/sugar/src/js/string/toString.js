@@ -6,6 +6,7 @@ import isBoolean from '../is/boolean';
 import isRegexp from '../is/regexp';
 import isString from '../is/string';
 import isNumber from '../is/number';
+import __deepMerge from '../object/deepMerge';
 
 /**
  * @name        toString
@@ -15,6 +16,8 @@ import isNumber from '../is/number';
  * Convert passed value to a string
  *
  * @param    {Mixed}    value    The value to convert to string
+ * @param     {Object}      [settings={}]             An object of settings to configure your toString process:
+ * - beautify (false) {Boolean}: Specify if you want to beautify the output like objects, arrays, etc...
  * @return    {String}    The resulting string
  *
  * @example    js
@@ -25,7 +28,14 @@ import isNumber from '../is/number';
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function toString(value) {
+export default function toString(value, settings = {}) {
+  settings = __deepMerge(
+    {
+      beautify: false
+    },
+    settings
+  );
+
   if (isString(value)) {
     return value;
   } else if (value === null) {
@@ -38,7 +48,7 @@ export default function toString(value) {
   ) {
     return value.toString();
   } else if (isObject(value) || isArray(value) || isJson(value)) {
-    return JSON.stringify(value);
+    return JSON.stringify(value, null, settings.beautify ? 4 : 0);
   } else if (isBoolean(value)) {
     if (value) return 'true';
     else return 'false';
@@ -53,7 +63,7 @@ export default function toString(value) {
   } else {
     let returnVal;
     try {
-      returnVal = JSON.stringify(value);
+      returnVal = JSON.stringify(value, null, settings.beautify ? 4 : 0);
     } catch (e) {
       try {
         returnVal = value.toString();

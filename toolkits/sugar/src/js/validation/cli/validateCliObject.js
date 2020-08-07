@@ -4,7 +4,7 @@ import __deepMerge from '../../object/deepMerge';
 
 /**
  * @name            validateCliObject
- * @namespace           js.cli
+ * @namespace           js.validation.cli
  * @type            Function
  *
  * This function take an object, a definition object and validate this one depending on the definition...
@@ -13,6 +13,10 @@ import __deepMerge from '../../object/deepMerge';
  *
  * @param       {Object}        objectToCheck       The object to check using the definition one
  * @param       {Object}        definitionObj       The definition object to use
+ * @param       {String}        [name='unnamed']     The name used for debug
+ * @param       {Object}        [settings={}]       An object with settings to configure your validation process:
+ * - throw (true) {Boolean}: Specify if you want the process to throw an error when something went wrong
+ * - validateDefinitionObject (true) {Boolean}: Specify if you want to validate the passed definition object
  * @param       {Boolean}       [validateDefinitionObject=true]       Specify if you want to validate the passed definition object first or not
  * @return      {Boolean|String}                    Return true if all is ok, and a simple string that describe the issue if it's not
  *
@@ -40,17 +44,20 @@ import __deepMerge from '../../object/deepMerge';
 export default function validateCliObject(
   objectToCheck,
   definitionObj,
+  name = 'unnamed',
   settings = {}
 ) {
   settings = __deepMerge(
     {
-      validateDefinitionObject: true,
-      bySteps: false
+      throw: true,
+      validateDefinitionObject: true
     },
     settings
   );
 
-  let issues = [];
+  let issueObj = {
+    issues: []
+  };
 
   // validate definition object first
   if (settings.validateDefinitionObject) {
@@ -58,20 +65,35 @@ export default function validateCliObject(
       definitionObj
     );
     if (validateDefinitionObjectResult !== true) {
-      if (settings.bySteps) return validateDefinitionObjectResult;
+      throw new Error(validateDefinitionObjectResult);
     }
-    issues = [...issues, ...validateDefinitionObjectResult];
   }
 
-  const validationResult = __validateObject(objectToCheck, definitionObj, {
-    validateDefinitionObject: false,
-    bySteps: settings.bySteps
-  });
+  const validationResult = __validateObject(
+    objectToCheck,
+    definitionObj,
+    name,
+    __deepMerge(
+      {
+        extendsFn: (argName, argDefinition, value, argIssueObj) => {
+          if (
+            !argDefinition.description ||
+            typeof argDefinition.description !== 'string'
+          ) {
+            argIssueObj.issues.push('description');
+          }
+          return argIssueObj;
+        }
+      },
+      settings
+    )
+  );
   if (validationResult !== true) {
-    if (settings.bySteps) return validationResult;
-    issues = [...issues, ...validationResult];
+    issueObj = __deepMerge(issueObj, validationResult, {
+      array: true
+    });
   }
 
-  if (!issues.length) return true;
-  return issues;
+  if (!issueObj.issues.length) return true;
+  return issueObj;
 }

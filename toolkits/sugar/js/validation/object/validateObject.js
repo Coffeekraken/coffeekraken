@@ -7,8 +7,6 @@ exports.default = validateObject;
 
 var _validateObjectDefinitionObject = _interopRequireDefault(require("./validateObjectDefinitionObject"));
 
-var _toString = _interopRequireDefault(require("../../string/toString"));
-
 var _ofType = _interopRequireDefault(require("../../is/ofType"));
 
 var _plainObject = _interopRequireDefault(require("../../is/plainObject"));
@@ -22,6 +20,10 @@ var _validateValue = _interopRequireDefault(require("../value/validateValue"));
 var _deepMerge = _interopRequireDefault(require("../../object/deepMerge"));
 
 var _parseHtml = _interopRequireDefault(require("../../console/parseHtml"));
+
+var _filter = _interopRequireDefault(require("../../object/filter"));
+
+var _typeof = _interopRequireDefault(require("../../value/typeof"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -100,27 +102,42 @@ function validateObject(objectToCheck, definitionObj, name = 'unnamed', settings
     }
 
     const validationRes = (0, _validateValue.default)(value, argDefinition, argName);
+    issuesObj[argName] = {
+      name: argName,
+      received: {
+        type: (0, _typeof.default)(value),
+        value
+      },
+      expected: argDefinition,
+      issues: []
+    };
 
     if (validationRes !== true) {
-      issuesObj[argName] = (0, _deepMerge.default)(issuesObj[argName] || {}, validationRes || {}, {
+      issuesObj[argName] = (0, _deepMerge.default)(issuesObj[argName], validationRes || {}, {
         array: true
       });
-      issuesObj[argName].name = argName;
-      issuesObj.issues.push(argName);
+    }
 
-      if (staticIssue) {
-        issuesObj[argName].issues.push('static');
-      }
+    if (staticIssue) {
+      issuesObj[argName].issues.push('static');
     } // check if is an extendsFn
 
 
     if (settings.extendsFn) {
-      const extendsFnResult = settings.extendsFn(argName, argDefinition, value);
+      issuesObj[argName] = settings.extendsFn(argName, argDefinition, value, issuesObj[argName]);
+    } // filter args that have no issues
 
-      if (extendsFnResult !== true) {// TODO implement an Interface to be sure of what we get back from the extendsFn
-        // issues = [...issues, ...extendsFnResult];
+
+    issuesObj = (0, _filter.default)(issuesObj, (item, key) => {
+      if (Array.isArray(item)) return true;
+
+      if ((0, _plainObject.default)(item) && item.issues) {
+        if (!item.issues.length) return false;
+        if (issuesObj.issues.indexOf(key) === -1) issuesObj.issues.push(key);
       }
-    } // TODO implement the "children" support
+
+      return true;
+    }); // TODO implement the "children" support
     // check if we have some "children" properties
     // if (argDefinition.children) {
     //   const childrenValidation = validateObject(
@@ -134,7 +151,6 @@ function validateObject(objectToCheck, definitionObj, name = 'unnamed', settings
     //     issues = [...issues, ...childrenValidation];
     //   }
     // }
-
   }
 
   if (!issuesObj.issues.length) return true;

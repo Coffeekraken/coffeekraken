@@ -3,12 +3,11 @@ import __deepMerge from '../object/deepMerge';
 import __convert from '../time/convert';
 import __SActionsStreamAction from './SActionsStreamAction';
 import __isClass from '../is/class';
-import __checkDefinitionObj from '../cli/validateDefinitionObject';
 import __isChildProcess from '../is/childProcess';
 import __isTestEnv from '../is/testEnv';
-import { before } from 'lodash';
 import __wait from '../time/wait';
 import __uniqid from '../string/uniqid';
+import __parseHtml from '../console/parseHtml';
 
 /**
  * @name          SActionStream
@@ -109,12 +108,15 @@ export default class SActionStream extends __SPromise {
       const actionInstance = actions[actionName];
       if (
         typeof actionInstance === 'function' ||
-        actionInstance === __SActionsStreamAction ||
+        (__isClass(actionInstance) &&
+          actionInstance.constructor.name === 'SActionsStreamAction') ||
         actionInstance instanceof __SActionsStreamAction
       ) {
       } else {
         throw new Error(
-          `The value passed for the "${actionName}" action has to be either a simple function or an "SActionsStreamAction" instance. You have passed a "${typeof actionInstance}"...`
+          __parseHtml(
+            `The value passed for the "<yellow>${actionName}</yellow>" action has to be either a simple function or an "<green>SActionsStreamAction</green>" instance. You have passed a "<red>${typeof actionInstance}</red>"...`
+          )
         );
       }
     });
@@ -195,12 +197,28 @@ export default class SActionStream extends __SPromise {
           : Object.keys(this._actionsObject);
         // check the order
         actionsOrderedNames.forEach((actionName) => {
-          if (!this._actionsObject[actionName])
+          if (!this._actionsObject[actionName]) {
             throw new Error(
-              `You have specified the action "${actionName}" in your SActionsStream instance but it is not available. Here's the available actions: ${Object.keys(
-                this._actionsObject
-              ).join(',')}`
+              __parseHtml(
+                `You have specified the action "<yellow>${actionName}</yellow>" in your SActionsStream instance but it is not available. Here's the available actions: <green>${Object.keys(
+                  this._actionsObject
+                ).join(',')}</green>`
+              )
             );
+          }
+          // else if (
+          //   (this._actionsObject[actionName].constructor &&
+          //     this._actionsObject[actionName].constructor.name !==
+          //       'SActionsStreamAction') ||
+          //   (__isClass(this._actionsObject[actionName]) &&
+          //     this._actionsObject[actionName].name !== 'SActionsStreamAction')
+          // ) {
+          //   throw new Error(
+          //     __parseHtml(
+          //       `You have specified the action "<yellow>${actionName}</yellow>" in your SActionsStream instance but it seems that your passed value is not either an instance of the <green>SActionsStreamAction</green> class, either a class that extends the <green>SActionsStreamAction</green> one...`
+          //     )
+          //   );
+          // }
         });
 
         // callbacks object
@@ -420,12 +438,15 @@ export default class SActionStream extends __SPromise {
                 cancel(actionObj);
               }
 
-              if (actionInstance._skipNextActions) {
+              if (actionInstance && actionInstance._skipNextActions) {
                 skipNextActions = actionInstance._skipNextActions;
               }
 
               // check if an "afterCallback" callback has been passed in the streamObj
-              if (actionInstance._registeredCallbacks.length) {
+              if (
+                actionInstance &&
+                actionInstance._registeredCallbacks.length
+              ) {
                 actionInstance._registeredCallbacks.forEach((callbackObj) => {
                   if (!callbackObj.action) {
                     if (callbackObj.when === 'after') {

@@ -6,7 +6,7 @@ import __deepMerge from '../../object/deepMerge';
 
 /**
  * @name            validateObjectDefinitionObject
- * @namespace           js.validation.definitionObject
+ * @namespace           js.validation.object
  * @type            Function
  *
  * This function take a definition object as parameter and check if all is valid.

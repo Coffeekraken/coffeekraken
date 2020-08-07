@@ -775,7 +775,7 @@ export default class SPromise extends Promise {
    */
   _triggerStacks(stacks, initialValue, _metas = {}) {
     return new Promise(async (resolve, reject) => {
-      await __wait(0);
+      // await __wait(0);
 
       // check if the stacks is "*"
       if (typeof stacks === 'string')

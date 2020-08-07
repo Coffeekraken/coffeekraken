@@ -50,7 +50,7 @@ function trimLines(string, settings = {}) {
     if (settings.leftPadding) line = `${' '.repeat(settings.leftPadding)}${line}`;
     if (settings.rightPadding) line = `${line}${' '.repeat(settings.rightPadding)}`;
     return line;
-  }).filter(line => line !== -1).join('\n').trim();
+  }).filter(line => line !== -1).join('\n');
   return string;
 }
 

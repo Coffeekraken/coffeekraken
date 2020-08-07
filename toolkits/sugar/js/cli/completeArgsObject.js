@@ -15,6 +15,10 @@ var _validateCliObject = _interopRequireDefault(require("../validation/cli/valid
 
 var _deepize = _interopRequireDefault(require("../object/deepize"));
 
+var _deepMerge = _interopRequireDefault(require("../object/deepMerge"));
+
+var _toString = _interopRequireDefault(require("../string/toString"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -27,6 +31,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @param             {Object}            argsObj         The arguments object to complete
  * @param             {Object}            definitionObj     The definition object to use
+ * @param             {Object}            [settings={}]       An object of settings to configure your process:
+ * - throw (true) {Boolean}: Specify if you want to throw an error when the validation process fails
  * @return            {Object}                            The completed arguments object
  *
  * @example         js
@@ -35,8 +41,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @since       2.0.0
  *
  */
-function completeArgsObject(argsObj, definitionObj) {
-  argsObj = Object.assign({}, argsObj); // loop on all the arguments
+function completeArgsObject(argsObj, definitionObj, settings = {}) {
+  argsObj = Object.assign({}, argsObj);
+  settings = (0, _deepMerge.default)({
+    throw: true
+  }, settings); // loop on all the arguments
 
   Object.keys(definitionObj).forEach(argString => {
     const argDefinitionObj = definitionObj[argString]; // check if we have an argument passed in the properties
@@ -46,8 +55,8 @@ function completeArgsObject(argsObj, definitionObj) {
     }
   }); // make sure all is ok
 
-  const argsValidationResult = (0, _validateCliObject.default)(argsObj, definitionObj);
-  if (argsValidationResult !== true) throw new Error(argsValidationResult); // return the argsObj
+  const argsValidationResult = (0, _validateCliObject.default)(argsObj, definitionObj, settings);
+  if (argsValidationResult !== true && settings.throw) throw new Error((0, _toString.default)(argsValidationResult)); // return the argsObj
 
   return (0, _deepize.default)(argsObj);
 }

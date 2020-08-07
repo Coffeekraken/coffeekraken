@@ -37,7 +37,8 @@ export default function validateValueOutputString(validateValueResultObj) {
 
   issuesArray.push(
     `<yellow>│</yellow> - Received value: <yellow>${__toString(
-      validateValueResultObj.received.value
+      validateValueResultObj.received.value,
+      { beautify: true }
     )}</yellow>`
   );
 

@@ -819,8 +819,8 @@ let SPromise = /*#__PURE__*/function (_Promise) {
     key: "_triggerStacks",
     value: function _triggerStacks(stacks, initialValue, _metas = {}) {
       return new Promise(async (resolve, reject) => {
-        await (0, _wait.default)(0); // check if the stacks is "*"
-
+        // await __wait(0);
+        // check if the stacks is "*"
         if (typeof stacks === 'string') stacks = stacks.split(',').map(s => s.trim());
         let currentStackResult = initialValue;
 

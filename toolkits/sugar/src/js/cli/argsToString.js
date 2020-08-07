@@ -10,7 +10,7 @@ import __parseArgs from './parseArgs';
  * directly to the command line interface
  *
  * @param       {Object}        args        The arguments object
- * @param       {Object}        definitionObj    The definitionObj object that has to be formated like so:
+ * @param       {Object}        [definitionObj=null]    The definitionObj object that has to be formated like so:
  * - argName: The argument name to describe
  *    - type: The type of the value supported
  *    - alias: The alias of the full name like "t", "l", etc...
@@ -18,6 +18,8 @@ import __parseArgs from './parseArgs';
  *    - regexp: A regexp that is used to validate the passed value
  *    - validator: A function to validate the passed value. Has to return true or false
  * @param       {Boolean}     [includeAllArgs = true]       Specify if you want all the arguments in the definitionObj object in your command line string, or if you just want the one passed in your argsObj argument
+ *
+ * @todo            check documentation
  *
  * @example       js
  * import argsToString from '@coffeekraken/sugar/js/cli/argsToString';
@@ -50,11 +52,19 @@ import __parseArgs from './parseArgs';
 
 module.exports = function argsToString(
   args,
-  definitionObj,
+  definitionObj = null,
   includeAllArgs = true
 ) {
   if (typeof args === 'string') {
     args = __parseArgs(args, definitionObj);
+  }
+
+  if (!definitionObj) {
+    let string = '';
+    Object.keys(args).forEach((key) => {
+      string += ` --${key} ${__toString(args[key])}`;
+    });
+    return string;
   }
 
   const cliArray = [];

@@ -15,17 +15,15 @@ var _SActionsStreamAction = _interopRequireDefault(require("./SActionsStreamActi
 
 var _class = _interopRequireDefault(require("../is/class"));
 
-var _validateDefinitionObject = _interopRequireDefault(require("../cli/validateDefinitionObject"));
-
 var _childProcess = _interopRequireDefault(require("../is/childProcess"));
 
 var _testEnv = _interopRequireDefault(require("../is/testEnv"));
 
-var _lodash = require("lodash");
-
 var _wait = _interopRequireDefault(require("../time/wait"));
 
 var _uniqid = _interopRequireDefault(require("../string/uniqid"));
+
+var _parseHtml = _interopRequireDefault(require("../console/parseHtml"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -159,8 +157,8 @@ let SActionStream = /*#__PURE__*/function (_SPromise) {
     Object.keys(actions).forEach(actionName => {
       const actionInstance = actions[actionName];
 
-      if (typeof actionInstance === 'function' || actionInstance === _SActionsStreamAction.default || actionInstance instanceof _SActionsStreamAction.default) {} else {
-        throw new Error(`The value passed for the "${actionName}" action has to be either a simple function or an "SActionsStreamAction" instance. You have passed a "${typeof actionInstance}"...`);
+      if (typeof actionInstance === 'function' || (0, _class.default)(actionInstance) && actionInstance.constructor.name === 'SActionsStreamAction' || actionInstance instanceof _SActionsStreamAction.default) {} else {
+        throw new Error((0, _parseHtml.default)(`The value passed for the "<yellow>${actionName}</yellow>" action has to be either a simple function or an "<green>SActionsStreamAction</green>" instance. You have passed a "<red>${typeof actionInstance}</red>"...`));
       }
     }); // save the actions
 
@@ -230,7 +228,22 @@ let SActionStream = /*#__PURE__*/function (_SPromise) {
         const actionsOrderedNames = Array.isArray(settings.order) ? settings.order : Object.keys(this._actionsObject); // check the order
 
         actionsOrderedNames.forEach(actionName => {
-          if (!this._actionsObject[actionName]) throw new Error(`You have specified the action "${actionName}" in your SActionsStream instance but it is not available. Here's the available actions: ${Object.keys(this._actionsObject).join(',')}`);
+          if (!this._actionsObject[actionName]) {
+            throw new Error((0, _parseHtml.default)(`You have specified the action "<yellow>${actionName}</yellow>" in your SActionsStream instance but it is not available. Here's the available actions: <green>${Object.keys(this._actionsObject).join(',')}</green>`));
+          } // else if (
+          //   (this._actionsObject[actionName].constructor &&
+          //     this._actionsObject[actionName].constructor.name !==
+          //       'SActionsStreamAction') ||
+          //   (__isClass(this._actionsObject[actionName]) &&
+          //     this._actionsObject[actionName].name !== 'SActionsStreamAction')
+          // ) {
+          //   throw new Error(
+          //     __parseHtml(
+          //       `You have specified the action "<yellow>${actionName}</yellow>" in your SActionsStream instance but it seems that your passed value is not either an instance of the <green>SActionsStreamAction</green> class, either a class that extends the <green>SActionsStreamAction</green> one...`
+          //     )
+          //   );
+          // }
+
         }); // callbacks object
 
         const callbacksObj = {}; // loop on each actions
@@ -409,12 +422,12 @@ let SActionStream = /*#__PURE__*/function (_SPromise) {
                 cancel(actionObj);
               }
 
-              if (actionInstance._skipNextActions) {
+              if (actionInstance && actionInstance._skipNextActions) {
                 skipNextActions = actionInstance._skipNextActions;
               } // check if an "afterCallback" callback has been passed in the streamObj
 
 
-              if (actionInstance._registeredCallbacks.length) {
+              if (actionInstance && actionInstance._registeredCallbacks.length) {
                 actionInstance._registeredCallbacks.forEach(callbackObj => {
                   if (!callbackObj.action) {
                     if (callbackObj.when === 'after') {

@@ -108,15 +108,15 @@ let SDocblock = /*#__PURE__*/function () {
 
     this._settings = (0, _deepMerge.default)({
       sortFunction: (a, b) => {
-        let $res = 0;
-        if (a.namespace && !b.namespace) res += -1;
-        if (a.type && a.type.toLowerCase() === 'class') $res += -1;
-        if (a.constructor) $res += -1;
-        if (a.private) $res += 1;
-        if (a.type && a.type.toLowerCase() === 'function') $res += -1;
-        if (a.name && b.name && a.name.length > b.name.length) $res += -1;
-        $res += 0;
-        return $res;
+        let res = 0; // if (.object.namespace && !a.object.namespace) res -= 1;
+
+        if (b.object.namespace) res += 1;
+        if (b.object.type && b.object.type.toLowerCase() === 'class') res += 1;
+        if (b.object.constructor) res += 1;
+        if (b.object.private) res += 1;
+        if (b.object.type && b.object.type.toLowerCase() === 'function') res += 1;
+        if (a.object.name && b.object.name && b.object.name.length > a.object.name.length) res += 1;
+        return res;
       },
       filepath: null,
       to: {
@@ -135,7 +135,7 @@ let SDocblock = /*#__PURE__*/function () {
    * blocks back when using the methods like get blocks, etc...
    *
    * @param       {Function}      [sortFunction=null]       Specify a custom sort function you want to use. If not set, use the ```sortFunction``` setting.
-   * @return      {Array}                                   The blocks array sorted
+   * @return      {SDocblock}                                   The class instance itself to maintain chainability
    *
    * @since       2.0.0
    * @author 	Olivier Bossel <olivier.bossel@gmail.com>
@@ -147,7 +147,7 @@ let SDocblock = /*#__PURE__*/function () {
     value: function sort(sortFunction = null) {
       if (!sortFunction) sortFunction = this._settings.sortFunction;
       this._blocks = this._blocks.sort(sortFunction);
-      return this.blocks;
+      return this;
     }
     /**
      * @name        blocks
@@ -169,9 +169,10 @@ let SDocblock = /*#__PURE__*/function () {
      * and get back the object version of it
      *
      * @param       {String}        [string=this._source]        The string to parse
-     * @return      {Array}                     An array of SDockblock instances representing each extracted docblocks
+     * @return      {SDocblock}                     The class instance itself to maintain chainability
      *
-     * @author 	Olivier Bossel <olivier.bossel@gmail.com>
+     * @since       2.0.0
+     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     value: function parse(string = this._source) {
       // extract each docblocks
@@ -194,9 +195,9 @@ let SDocblock = /*#__PURE__*/function () {
 
       this._blocks = blocksArray; // sort the blocks
 
-      this.sort(); // return the array of docblock blocks
+      this.sort(); // return the class instance itself
 
-      return this._blocks;
+      return this;
     }
     /**
      * @name          toObject
@@ -204,7 +205,8 @@ let SDocblock = /*#__PURE__*/function () {
      *
      * This method convert the parsed docblocks to a simple object
      *
-     * @author 	Olivier Bossel <olivier.bossel@gmail.com>
+     * @since       2.0.0
+     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
 
   }, {

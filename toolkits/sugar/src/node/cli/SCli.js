@@ -1,12 +1,10 @@
 const __buildCommandLine = require('./buildCommandLine');
-const __validateDefinitionObject = require('./validateDefinitionObject');
-const __spawn = require('../process/spawn');
+const __validateCliDefinitionObject = require('../validation/cli/validateCliDefinitionObject');
 const __SChildProcess = require('../process/SChildProcess');
 const __deepMerge = require('../object/deepMerge');
 const __parseHtml = require('../terminal/parseHtml');
 const __argsToObject = require('../cli/argsToObject');
 const __isChildProcess = require('../is/childProcess');
-const __SPromise = require('../promise/SPromise');
 const __output = require('../process/output');
 
 /**
@@ -171,7 +169,9 @@ module.exports = class SCli {
       typeof this.constructor.command !== 'string'
     ) {
       throw new Error(
-        `An SCli based class like your "${this.constructor.name}" MUST have a "command" static string property...`
+        __parseHtml(
+          `An <green>SCli</green> based class like your "<yellow>${this.constructor.name}</yellow>" MUST have a "<cyan>command</cyan>" static string property...`
+        )
       );
     }
     if (
@@ -179,19 +179,25 @@ module.exports = class SCli {
       typeof this.constructor.definitionObj !== 'object'
     ) {
       throw new Error(
-        `An SCli based class like your "${this.constructor.name}" MUST have a "definitionObj" static object property...`
+        __parseHtml(
+          `An <green>SCli</green> based class like your "<yellow>${this.constructor.name}</yellow>" MUST have a "<cyan>definitionObj</cyan>" static object property...`
+        )
       );
     }
 
     // existence of the ```_run``` method
     if (!this._run || typeof this._run !== 'function') {
       throw new Error(
-        `An SCli based class like your "${this.constructor.name}" MUST has a "_run" method that has to be responsible of executing your process when calling the "run" method...`
+        __parseHtml(
+          `An <green>SCli</green> based class like your "<yellow>${this.constructor.name}</yellow>" MUST has a "<cyan>_run</cyan>" method that has to be responsible of executing your process when calling the "run" method...`
+        )
       );
     }
 
     // check definition object
-    const definitionObjCheck = __validateDefinitionObject(this.definitionObj);
+    const definitionObjCheck = __validateCliDefinitionObject(
+      this.definitionObj
+    );
     if (definitionObjCheck !== true) throw new Error(definitionObjCheck);
   }
 

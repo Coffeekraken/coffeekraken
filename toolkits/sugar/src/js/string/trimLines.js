@@ -49,8 +49,7 @@ export default function trimLines(string, settings = {}) {
       return line;
     })
     .filter((line) => line !== -1)
-    .join('\n')
-    .trim();
+    .join('\n');
 
   return string;
 }

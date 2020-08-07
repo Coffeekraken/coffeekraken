@@ -59,9 +59,12 @@ module.exports = (__SPromise) => {
       unsubscribePromise.on('unsubscribeCallbackTest', () => {
         unsubscribedCallbackTestCallCount++;
       });
-      unsubscribePromise.trigger('unsubscribeCallbackTest', true);
-      unsubscribePromise.off('unsubscribeCallbackTest');
-      unsubscribePromise.trigger('unsubscribeCallbackTest', true);
+
+      setTimeout(() => {
+        unsubscribePromise.trigger('unsubscribeCallbackTest', true);
+        unsubscribePromise.off('unsubscribeCallbackTest');
+        unsubscribePromise.trigger('unsubscribeCallbackTest', true);
+      }, 10);
 
       const res = await new __SPromise((resolve, reject, trigger, cancel) => {
         trigger('then', 'world');

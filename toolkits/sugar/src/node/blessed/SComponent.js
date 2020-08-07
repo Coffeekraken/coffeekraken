@@ -27,12 +27,12 @@ let __activeScreen = null;
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-__hotkey('ctrl+c', {
-  once: true
-}).on('press', async () => {
-  if (!global.screen) return;
-  global.screen.destroy();
-});
+// __hotkey('ctrl+c', {
+//   once: true
+// }).on('press', () => {
+//   if (!global.screen) return;
+//   global.screen.destroy();
+// });
 module.exports = class SComponent extends __blessed.box {
   /**
    * @name                  _settings

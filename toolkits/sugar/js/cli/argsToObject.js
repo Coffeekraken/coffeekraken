@@ -15,7 +15,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * directly to the command line interface
  *
  * @param       {Object|String}        argsObj        The arguments object or string
- * @param       {Object}             definitionObj    The definitionObj object that has to be formated like so:
+ * @param       {Object}             definitionObj    The definitionObj object
+ * @param       {Object}            [settings]        The settings object to configure your conversion process:
+ * - throw (true) {Boolean}: Specify if you want to throw an error when the validation process fails
+ * @return      {Object}                              The final values object
  *
  * @example       js
  * import argsToObject from '@coffeekraken/sugar/js/cli/argsToObject';
@@ -39,10 +42,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @since       2.0.0
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function argsToObject(argsObj, definitionObj) {
+module.exports = function argsToObject(argsObj, definitionObj, settings = {}) {
   if (typeof argsObj === 'string') {
     return (0, _parseArgs.default)(argsObj, definitionObj);
   }
 
-  return (0, _completeArgsObject.default)(argsObj, definitionObj);
+  return (0, _completeArgsObject.default)(argsObj, definitionObj, settings);
 };

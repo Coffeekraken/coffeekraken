@@ -1,5 +1,5 @@
 /**
- * @namespace           node.value
+ * @namespace           node.validation.value
  * @src             ../../../js/validation/value/validateValue
  * @todo            tests
  */

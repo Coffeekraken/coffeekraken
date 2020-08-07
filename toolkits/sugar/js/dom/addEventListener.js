@@ -50,14 +50,16 @@ function addEventListener($elm, eventNames, callback = null, useCapture = false)
     });
   });
   eventNames.forEach(eventName => {
-    eventsStack[eventName] = {
-      callback,
-      useCapture
-    };
-    $elm.addEventListener(eventName, event => {
+    const internalCallback = event => {
       if (callback) callback.apply(this, [event]);
       promise.trigger(eventName, event);
-    }, useCapture);
+    };
+
+    eventsStack[eventName] = {
+      callback: internalCallback,
+      useCapture
+    };
+    $elm.addEventListener(eventName, internalCallback, useCapture);
   });
   return promise;
 }

@@ -11,7 +11,7 @@ var _deepMerge = _interopRequireDefault(require("../object/deepMerge"));
 
 var _convert = _interopRequireDefault(require("../time/convert"));
 
-var _validateDefinitionObject = _interopRequireDefault(require("../object/validateDefinitionObject"));
+var _validateObjectDefinitionObject = _interopRequireDefault(require("../validation/object/validateObjectDefinitionObject"));
 
 var _validateObject = _interopRequireDefault(require("../validation/object/validateObject"));
 
@@ -126,7 +126,7 @@ let SActionStreamAction = /*#__PURE__*/function (_SPromise) {
 
 
     setTimeout(() => {
-      const validatekDefinitionObjResult = (0, _validateDefinitionObject.default)(_this.constructor.definitionObj);
+      const validatekDefinitionObjResult = (0, _validateObjectDefinitionObject.default)(_this.constructor.definitionObj);
 
       if (validatekDefinitionObjResult !== true) {
         throw new Error(validatekDefinitionObjResult);

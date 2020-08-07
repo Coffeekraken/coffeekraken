@@ -15,7 +15,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * directly to the command line interface
  *
  * @param       {Object}        args        The arguments object
- * @param       {Object}        definitionObj    The definitionObj object that has to be formated like so:
+ * @param       {Object}        [definitionObj=null]    The definitionObj object that has to be formated like so:
  * - argName: The argument name to describe
  *    - type: The type of the value supported
  *    - alias: The alias of the full name like "t", "l", etc...
@@ -23,6 +23,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *    - regexp: A regexp that is used to validate the passed value
  *    - validator: A function to validate the passed value. Has to return true or false
  * @param       {Boolean}     [includeAllArgs = true]       Specify if you want all the arguments in the definitionObj object in your command line string, or if you just want the one passed in your argsObj argument
+ *
+ * @todo            check documentation
  *
  * @example       js
  * import argsToString from '@coffeekraken/sugar/js/cli/argsToString';
@@ -51,9 +53,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 // TODO: support deep object structure
 // TODO: support required args
-module.exports = function argsToString(args, definitionObj, includeAllArgs = true) {
+module.exports = function argsToString(args, definitionObj = null, includeAllArgs = true) {
   if (typeof args === 'string') {
     args = (0, _parseArgs.default)(args, definitionObj);
+  }
+
+  if (!definitionObj) {
+    let string = '';
+    Object.keys(args).forEach(key => {
+      string += ` --${key} ${(0, _toString.default)(args[key])}`;
+    });
+    return string;
   }
 
   const cliArray = []; // loop on passed args

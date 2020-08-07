@@ -6,6 +6,7 @@ const __registerProcess = require('./registerProcess');
 const __uniqid = require('../string/uniqid');
 const __buildCommandLine = require('../cli/buildCommandLine');
 const __isPath = require('../is/path');
+const __output = require('./output');
 
 /**
  * @name              SChildProcess
@@ -16,6 +17,8 @@ const __isPath = require('../is/path');
  * which you can track the child process status using the ```on``` method to register to some
  * events like "start", "success", "error", etc...
  *
+ * @todo            doc
+ * @todo            tests
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -87,7 +90,7 @@ module.exports = class SChildProcess extends __SPromise {
         id: __uniqid(),
         definitionObj: {},
         defaultParamsObj: {},
-        method: __isPath(commandOrPath) ? 'fork' : 'spawn',
+        method: __isPath(commandOrPath, true) ? 'fork' : 'spawn',
         before: null,
         after: null,
         shell: true,
@@ -308,46 +311,54 @@ module.exports = class SChildProcess extends __SPromise {
       });
 
       // stdout data
-      childProcess.stdout.on('data', (log) => {
-        log = log.toString();
-        const resultReg = /^#result\s(.*)$/gm;
-        if (log.match(resultReg)) {
-          runningProcess.state = 'success';
-          resolveOrReject(
-            'resolve',
-            {
-              value: __parse(log.replace('#result ', ''))
-            },
-            0,
-            null
-          );
-          return;
-        }
+      if (childProcess.stdout) {
+        childProcess.stdout.on('data', (log) => {
+          log = log.toString();
+          const resultReg = /^#result\s(.*)$/gm;
+          if (log.match(resultReg)) {
+            runningProcess.state = 'success';
+            resolveOrReject(
+              'resolve',
+              {
+                value: __parse(log.replace('#result ', ''))
+              },
+              0,
+              null
+            );
+            return;
+          }
 
-        runningProcess.stdout.push(log.toString());
-        promise.trigger('log', {
-          value: log.toString()
+          runningProcess.stdout.push(log.toString());
+          promise.trigger('log', {
+            value: log.toString()
+          });
+          this.trigger(`${runningProcessId}.'log`, {
+            value: log.toString()
+          });
         });
-        this.trigger(`${runningProcessId}.'log`, {
-          value: log.toString()
-        });
-      });
+      }
 
       // stderr data
-      childProcess.stderr.on('data', (error) => {
-        runningProcess.stderr.push(error.toString());
-        promise.trigger('error', {
-          error: error.toString(),
-          value: error.toString()
+      if (childProcess.stderr) {
+        childProcess.stderr.on('data', (error) => {
+          runningProcess.stderr.push(error.toString());
+          promise.trigger('error', {
+            error: error.toString(),
+            value: error.toString()
+          });
+          this.trigger(`${runningProcessId}.error`, {
+            error: error.toString(),
+            value: error.toString()
+          });
         });
-        this.trigger(`${runningProcessId}.error`, {
-          error: error.toString(),
-          value: error.toString()
-        });
-      });
+      }
     })();
 
     return promise;
+  }
+
+  runWithOutput(params = {}, settings = {}) {
+    __output(this.run(params, settings));
   }
 
   /**

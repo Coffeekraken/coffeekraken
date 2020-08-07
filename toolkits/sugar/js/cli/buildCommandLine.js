@@ -63,7 +63,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function buildCommandLine(command, definitionObj, args = {}, includeAllArgs = true) {
   definitionObj = Object.assign({}, definitionObj); // get all the tokens
 
-  const tokens = command.match(/\[[a-zA-Z0-9-_]+\]/gm);
+  const tokens = command.match(/\[[a-zA-Z0-9-_]+\]/gm) || [];
   tokens.forEach(token => {
     const tokenName = token.replace('[', '').replace(']', '');
     if (tokenName === 'arguments') return;

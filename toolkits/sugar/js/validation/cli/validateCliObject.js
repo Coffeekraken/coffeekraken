@@ -15,7 +15,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name            validateCliObject
- * @namespace           js.cli
+ * @namespace           js.validation.cli
  * @type            Function
  *
  * This function take an object, a definition object and validate this one depending on the definition...
@@ -24,6 +24,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @param       {Object}        objectToCheck       The object to check using the definition one
  * @param       {Object}        definitionObj       The definition object to use
+ * @param       {String}        [name='unnamed']     The name used for debug
+ * @param       {Object}        [settings={}]       An object with settings to configure your validation process:
+ * - throw (true) {Boolean}: Specify if you want the process to throw an error when something went wrong
+ * - validateDefinitionObject (true) {Boolean}: Specify if you want to validate the passed definition object
  * @param       {Boolean}       [validateDefinitionObject=true]       Specify if you want to validate the passed definition object first or not
  * @return      {Boolean|String}                    Return true if all is ok, and a simple string that describe the issue if it's not
  *
@@ -48,35 +52,41 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @since     2.0.0
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function validateCliObject(objectToCheck, definitionObj, settings = {}) {
+function validateCliObject(objectToCheck, definitionObj, name = 'unnamed', settings = {}) {
   settings = (0, _deepMerge.default)({
-    validateDefinitionObject: true,
-    bySteps: false
+    throw: true,
+    validateDefinitionObject: true
   }, settings);
-  let issues = []; // validate definition object first
+  let issueObj = {
+    issues: []
+  }; // validate definition object first
 
   if (settings.validateDefinitionObject) {
     const validateDefinitionObjectResult = (0, _validateCliDefinitionObject.default)(definitionObj);
 
     if (validateDefinitionObjectResult !== true) {
-      if (settings.bySteps) return validateDefinitionObjectResult;
+      throw new Error(validateDefinitionObjectResult);
     }
-
-    issues = [...issues, ...validateDefinitionObjectResult];
   }
 
-  const validationResult = (0, _validateObject.default)(objectToCheck, definitionObj, {
-    validateDefinitionObject: false,
-    bySteps: settings.bySteps
-  });
+  const validationResult = (0, _validateObject.default)(objectToCheck, definitionObj, name, (0, _deepMerge.default)({
+    extendsFn: (argName, argDefinition, value, argIssueObj) => {
+      if (!argDefinition.description || typeof argDefinition.description !== 'string') {
+        argIssueObj.issues.push('description');
+      }
+
+      return argIssueObj;
+    }
+  }, settings));
 
   if (validationResult !== true) {
-    if (settings.bySteps) return validationResult;
-    issues = [...issues, ...validationResult];
+    issueObj = (0, _deepMerge.default)(issueObj, validationResult, {
+      array: true
+    });
   }
 
-  if (!issues.length) return true;
-  return issues;
+  if (!issueObj.issues.length) return true;
+  return issueObj;
 }
 
 module.exports = exports.default;

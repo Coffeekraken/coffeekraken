@@ -1,9 +1,9 @@
 import __validateObjectDefinitionObject from '../object/validateObjectDefinitionObject';
-import __deepMerge from '../object/deepMerge';
+import __deepMerge from '../../object/deepMerge';
 
 /**
  * @name            validateCliDefinitionObject
- * @namespace           js.cli
+ * @namespace           js.validation.cli
  * @type            Function
  *
  * This function take a definition object as parameter and check if all is valid.

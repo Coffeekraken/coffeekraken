@@ -17,7 +17,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "test": "jest",
+    "test": "jest --silent",
     "build.js": "rm -rf dist && babel src/js -d js --config-file ./.sugar/babel.config.js -w --ignore 'src/**/*.spec.js','src/**/*.test.js'"
   },
   "dependencies": {
@@ -116,6 +116,7 @@
     "is-plain-object": "^3.0.1",
     "is-valid-path": "^0.1.1",
     "jade": "^1.11.0",
+    "jest": "^26.2.2",
     "js-striphtml": "^1.1.2",
     "jsdom": "^16.2.2",
     "json-sass-vars": "^3.1.0",

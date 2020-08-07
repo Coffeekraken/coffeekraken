@@ -55,19 +55,17 @@ export default function addEventListener(
   );
 
   eventNames.forEach((eventName) => {
+    const internalCallback = (event) => {
+      if (callback) callback.apply(this, [event]);
+      promise.trigger(eventName, event);
+    };
+
     eventsStack[eventName] = {
-      callback,
+      callback: internalCallback,
       useCapture
     };
 
-    $elm.addEventListener(
-      eventName,
-      (event) => {
-        if (callback) callback.apply(this, [event]);
-        promise.trigger(eventName, event);
-      },
-      useCapture
-    );
+    $elm.addEventListener(eventName, internalCallback, useCapture);
   });
 
   return promise;

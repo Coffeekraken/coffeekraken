@@ -46,6 +46,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 function validateValue(value, definitionObj, name = 'unnamed', settings = {}) {
   settings = (0, _deepMerge.default)({}, settings);
+
+  if ((value === null || value === undefined) && definitionObj.default !== undefined) {
+    value = definitionObj.default;
+  }
+
   let issueObj = {
     expected: definitionObj,
     received: {
@@ -54,7 +59,12 @@ function validateValue(value, definitionObj, name = 'unnamed', settings = {}) {
     },
     name,
     issues: []
-  }; // validate type
+  };
+
+  if ((value === null || value === undefined) && !definitionObj.required) {
+    return true;
+  } // validate type
+
 
   if (definitionObj.type) {
     const isOfTypeResult = (0, _ofType.default)(value, definitionObj.type);

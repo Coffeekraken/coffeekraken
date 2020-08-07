@@ -2,7 +2,7 @@ import __upperFirst from '../../string/upperFirst';
 
 /**
  * @name              parseTypeDefinitionString
- * @namespace           js.parse
+ * @namespace           js.validation.utils
  * @type              Function
  *
  * Thia function take an argument type definition string like "String", "Array<String>", "Array|String", etc... and return an object that represent this.

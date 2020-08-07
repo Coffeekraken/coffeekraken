@@ -21,6 +21,8 @@ var _string = _interopRequireDefault(require("../is/string"));
 
 var _number = _interopRequireDefault(require("../is/number"));
 
+var _deepMerge = _interopRequireDefault(require("../object/deepMerge"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -31,6 +33,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * Convert passed value to a string
  *
  * @param    {Mixed}    value    The value to convert to string
+ * @param     {Object}      [settings={}]             An object of settings to configure your toString process:
+ * - beautify (false) {Boolean}: Specify if you want to beautify the output like objects, arrays, etc...
  * @return    {String}    The resulting string
  *
  * @example    js
@@ -41,7 +45,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function toString(value) {
+function toString(value, settings = {}) {
+  settings = (0, _deepMerge.default)({
+    beautify: false
+  }, settings);
+
   if ((0, _string.default)(value)) {
     return value;
   } else if (value === null) {
@@ -49,7 +57,7 @@ function toString(value) {
   } else if (typeof value === 'symbol' || typeof value === 'typedArray' || value instanceof Date || typeof value === 'color') {
     return value.toString();
   } else if ((0, _object.default)(value) || (0, _array.default)(value) || (0, _json.default)(value)) {
-    return JSON.stringify(value);
+    return JSON.stringify(value, null, settings.beautify ? 4 : 0);
   } else if ((0, _boolean.default)(value)) {
     if (value) return 'true';else return 'false';
   } else if ((0, _function.default)(value)) {
@@ -64,7 +72,7 @@ function toString(value) {
     let returnVal;
 
     try {
-      returnVal = JSON.stringify(value);
+      returnVal = JSON.stringify(value, null, settings.beautify ? 4 : 0);
     } catch (e) {
       try {
         returnVal = value.toString();

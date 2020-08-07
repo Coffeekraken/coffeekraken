@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name            validateObjectDefinitionObject
- * @namespace           js.validation.definitionObject
+ * @namespace           js.validation.object
  * @type            Function
  *
  * This function take a definition object as parameter and check if all is valid.

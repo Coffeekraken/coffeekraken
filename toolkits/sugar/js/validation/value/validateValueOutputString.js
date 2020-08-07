@@ -43,7 +43,9 @@ function validateValueOutputString(validateValueResultObj) {
     issuesArray.push(`<yellow>│</yellow> <underline><bold>${validateValueResultObj.name}</bold></underline>`);
   }
 
-  issuesArray.push(`<yellow>│</yellow> - Received value: <yellow>${(0, _toString.default)(validateValueResultObj.received.value)}</yellow>`);
+  issuesArray.push(`<yellow>│</yellow> - Received value: <yellow>${(0, _toString.default)(validateValueResultObj.received.value, {
+    beautify: true
+  })}</yellow>`);
   validateValueResultObj.issues.forEach(issue => {
     switch (issue.toLowerCase()) {
       case 'required':

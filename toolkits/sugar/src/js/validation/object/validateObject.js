@@ -1,6 +1,5 @@
 // TODO: tests
 import __validateObjectDefinitionObject from './validateObjectDefinitionObject';
-import __toString from '../../string/toString';
 import __isOfType from '../../is/ofType';
 import __isPlainObject from '../../is/plainObject';
 import __isClass from '../../is/class';
@@ -8,6 +7,8 @@ import __get from '../../object/get';
 import __validateValue from '../value/validateValue';
 import __deepMerge from '../../object/deepMerge';
 import __parseHtml from '../../console/parseHtml';
+import __filter from '../../object/filter';
+import __typeof from '../../value/typeof';
 
 /**
  * @name            validateObject
@@ -93,30 +94,48 @@ export default function validateObject(
     }
 
     const validationRes = __validateValue(value, argDefinition, argName);
+    issuesObj[argName] = {
+      name: argName,
+      received: {
+        type: __typeof(value),
+        value
+      },
+      expected: argDefinition,
+      issues: []
+    };
 
     if (validationRes !== true) {
       issuesObj[argName] = __deepMerge(
-        issuesObj[argName] || {},
+        issuesObj[argName],
         validationRes || {},
         {
           array: true
         }
       );
-      issuesObj[argName].name = argName;
-      issuesObj.issues.push(argName);
-      if (staticIssue) {
-        issuesObj[argName].issues.push('static');
-      }
+    }
+    if (staticIssue) {
+      issuesObj[argName].issues.push('static');
     }
 
     // check if is an extendsFn
     if (settings.extendsFn) {
-      const extendsFnResult = settings.extendsFn(argName, argDefinition, value);
-      if (extendsFnResult !== true) {
-        // TODO implement an Interface to be sure of what we get back from the extendsFn
-        // issues = [...issues, ...extendsFnResult];
-      }
+      issuesObj[argName] = settings.extendsFn(
+        argName,
+        argDefinition,
+        value,
+        issuesObj[argName]
+      );
     }
+
+    // filter args that have no issues
+    issuesObj = __filter(issuesObj, (item, key) => {
+      if (Array.isArray(item)) return true;
+      if (__isPlainObject(item) && item.issues) {
+        if (!item.issues.length) return false;
+        if (issuesObj.issues.indexOf(key) === -1) issuesObj.issues.push(key);
+      }
+      return true;
+    });
 
     // TODO implement the "children" support
     // check if we have some "children" properties

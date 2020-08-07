@@ -13,6 +13,7 @@ describe('sugar.js.dom.addEventListenerOnce', () => {
       if (e.detail.twice) isTriggeredTwice = true;
       done();
     });
+
     __dispatchEvent($elm, 'click', {
       first: true
     });

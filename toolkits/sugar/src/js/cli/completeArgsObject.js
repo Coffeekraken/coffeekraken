@@ -3,6 +3,8 @@ import __set from '../object/set';
 import __deepMap from '../object/deepMap';
 import __validateCliObject from '../validation/cli/validateCliObject';
 import __deepize from '../object/deepize';
+import __deepMerge from '../object/deepMerge';
+import __toString from '../string/toString';
 
 /**
  * @name                completeArgsObject
@@ -14,6 +16,8 @@ import __deepize from '../object/deepize';
  *
  * @param             {Object}            argsObj         The arguments object to complete
  * @param             {Object}            definitionObj     The definition object to use
+ * @param             {Object}            [settings={}]       An object of settings to configure your process:
+ * - throw (true) {Boolean}: Specify if you want to throw an error when the validation process fails
  * @return            {Object}                            The completed arguments object
  *
  * @example         js
@@ -22,8 +26,19 @@ import __deepize from '../object/deepize';
  * @since       2.0.0
  *
  */
-export default function completeArgsObject(argsObj, definitionObj) {
+export default function completeArgsObject(
+  argsObj,
+  definitionObj,
+  settings = {}
+) {
   argsObj = Object.assign({}, argsObj);
+
+  settings = __deepMerge(
+    {
+      throw: true
+    },
+    settings
+  );
 
   // loop on all the arguments
   Object.keys(definitionObj).forEach((argString) => {
@@ -39,8 +54,13 @@ export default function completeArgsObject(argsObj, definitionObj) {
   });
 
   // make sure all is ok
-  const argsValidationResult = __validateCliObject(argsObj, definitionObj);
-  if (argsValidationResult !== true) throw new Error(argsValidationResult);
+  const argsValidationResult = __validateCliObject(
+    argsObj,
+    definitionObj,
+    settings
+  );
+  if (argsValidationResult !== true && settings.throw)
+    throw new Error(__toString(argsValidationResult));
 
   // return the argsObj
   return __deepize(argsObj);

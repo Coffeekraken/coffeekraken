@@ -8,8 +8,8 @@ const __extension = require('../fs/extension');
 const __SDocblock = require('./SDocblock');
 
 /**
- * @name                  firstLookup
- * @namespace           node.nav
+ * @name                  firstDocblockWithNamespaceInFolder
+ * @namespace           node.docblock
  * @type                  Function
  * @async
  *
@@ -18,17 +18,20 @@ const __SDocblock = require('./SDocblock');
  *
  * @param         {String}          directory               The directory in which to search for files with the namespace tag
  * @param         {Object}          [settings={}]           A settings object to configure your navigation generation:
- * - exclude (null) {String}: Specify a glob pattern representing the files to exclude from the generation
- * @return        {SNav}                                    An SNav instance of the founded files
+ * - exclude ('**\/+(__tests__ | __wip__)\/**') {String}: Specify a glob pattern representing the files to exclude from the generation
+ * @return        {Object}                                    An object containing the docblocks holded in each namespaces as properties
  *
  * @example       js
- * const firstLookup = require('@coffeekraken/sugar/node/nav/firstLookup);
- * firstLookup('my/cool/folder');
+ * const firstDocblockWithNamespaceInFolder = require('@coffeekraken/sugar/node/nav/firstDocblockWithNamespaceInFolder);
+ * firstDocblockWithNamespaceInFolder('my/cool/folder');
  *
  * @since       2.0.0
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = async function firstLookup(directory, settings = {}) {
+module.exports = async function firstDocblockWithNamespaceInFolder(
+  directory,
+  settings = {}
+) {
   settings = __deepMerge(
     {
       exclude: '**/+(__tests__|__wip__)/**'
@@ -40,8 +43,6 @@ module.exports = async function firstLookup(directory, settings = {}) {
 
   let founded = await __findInFiles.find(`@namespace`, directory);
 
-  console.log(founded);
-
   const namespaceObj = {};
 
   Object.keys(founded).forEach((path) => {
@@ -50,31 +51,23 @@ module.exports = async function firstLookup(directory, settings = {}) {
 
     const content = __fs.readFileSync(path, 'utf8');
 
-    console.log(content);
+    // console.log(content);
 
     const docblocks = new __SDocblock(content);
     const docblock = docblocks.blocks[0] ? docblocks.blocks[0] : null;
 
-    console.log(docblock);
-
     if (!docblock) return;
     delete docblock.object.raw;
-
-    console.log(docblock.object.namespace);
 
     const name =
       docblock.object.name ||
       __getFilename(path).replace(`.${__extension(path)}`, '');
-
-    console.log(name);
 
     namespaceObj[docblock.object.namespace + '.' + name] = {
       ...docblock.object,
       path: relativePath
     };
   });
-
-  console.log(namespaceObj);
 
   return namespaceObj;
 };

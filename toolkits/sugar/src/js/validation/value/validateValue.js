@@ -40,6 +40,13 @@ export default function validateValue(
 ) {
   settings = __deepMerge({}, settings);
 
+  if (
+    (value === null || value === undefined) &&
+    definitionObj.default !== undefined
+  ) {
+    value = definitionObj.default;
+  }
+
   let issueObj = {
     expected: definitionObj,
     received: {
@@ -49,6 +56,10 @@ export default function validateValue(
     name,
     issues: []
   };
+
+  if ((value === null || value === undefined) && !definitionObj.required) {
+    return true;
+  }
 
   // validate type
   if (definitionObj.type) {

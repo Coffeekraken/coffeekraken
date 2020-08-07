@@ -37,12 +37,10 @@ describe('sugar.js.dom.addEventListener', () => {
   });
 
   it('Should have register the listener correctly and called as expected', (done) => {
-    setTimeout(() => {
-      expect(isCallbackCalled).toBe(true);
-      expect(isThenCalled).toBe(true);
-      expect(clickCount).toBe(1);
-      expect(hasBeenCanceled).toBe(true);
-      done();
-    });
+    expect(isCallbackCalled).toBe(true);
+    expect(isThenCalled).toBe(true);
+    expect(clickCount).toBe(1);
+    expect(hasBeenCanceled).toBe(true);
+    done();
   });
 });

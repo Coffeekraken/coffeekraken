@@ -1,7 +1,7 @@
 import __SPromise from '../promise/SPromise';
 import __deepMerge from '../object/deepMerge';
 import __convert from '../time/convert';
-import __validateDefinitionObject from '../object/validateDefinitionObject';
+import __validateObjectDefinitionObject from '../validation/object/validateObjectDefinitionObject';
 import __validateObject from '../validation/object/validateObject';
 import __uniqid from '../string/uniqid';
 
@@ -84,7 +84,7 @@ export default class SActionStreamAction extends __SPromise {
 
     // check the definition object
     setTimeout(() => {
-      const validatekDefinitionObjResult = __validateDefinitionObject(
+      const validatekDefinitionObjResult = __validateObjectDefinitionObject(
         this.constructor.definitionObj
       );
       if (validatekDefinitionObjResult !== true) {

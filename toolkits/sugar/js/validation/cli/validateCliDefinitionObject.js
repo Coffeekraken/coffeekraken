@@ -7,13 +7,13 @@ exports.default = validateCliDefinitionObject;
 
 var _validateObjectDefinitionObject = _interopRequireDefault(require("../object/validateObjectDefinitionObject"));
 
-var _deepMerge = _interopRequireDefault(require("../object/deepMerge"));
+var _deepMerge = _interopRequireDefault(require("../../object/deepMerge"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @name            validateCliDefinitionObject
- * @namespace           js.cli
+ * @namespace           js.validation.cli
  * @type            Function
  *
  * This function take a definition object as parameter and check if all is valid.

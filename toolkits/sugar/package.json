@@ -43,6 +43,7 @@
     "await-spawn": "^3.0.0",
     "await-to-js": "^2.1.1",
     "axios": "^0.19.2",
+    "babel-plugin-add-module-exports": "^1.0.2",
     "base-64": "^0.1.0",
     "blade": "^3.3.1",
     "blessed": "^0.1.81",

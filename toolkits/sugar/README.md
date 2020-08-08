@@ -5,6 +5,7 @@
 ![npm](https://img.shields.io/npm/l/@coffeekraken/sugar?style=flat-square)
 ![npm](https://img.shields.io/npm/v/@coffeekraken/sugar?style=flat-square)
 ![npm](https://img.shields.io/npm/dw/@coffeekraken/sugar?style=flat-square)
+![Sugar CI](https://img.shields.io/github/workflow/status/coffeekraken/coffeekraken/Sugar%20CI/dev?label=tests&style=flat-square)
 
 Sugar gives you a lot of cool stuff to enhance your codebase.
 It basically does nothing by default but let you grab what you want from it. It can be the colors management feature, as well as the spaces management, helper classes, etc...

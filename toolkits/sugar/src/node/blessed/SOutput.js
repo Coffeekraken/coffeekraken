@@ -9,7 +9,6 @@ const __toString = require('../string/toString');
 const __stripAnsi = require('strip-ansi');
 const __trimLines = require('../string/trimLines');
 const __extractValues = require('../object/extractValues');
-const { parse } = require('node-persist');
 
 /**
  * @name                  SOutput

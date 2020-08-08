@@ -5,6 +5,7 @@ const __countLine = require('../string/countLine');
  * @name                                    center
  * @namespace           node.terminal
  * @type                                    Function
+ * @test                ./__tests__/center.test.js
  *
  * Allow to center one or more lines in the terminal depending on the process.env.STDOUT_PADDING environment variable
  * Settings:

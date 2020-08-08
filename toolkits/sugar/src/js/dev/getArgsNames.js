@@ -18,7 +18,6 @@
 export default function getArgsNames(func) {
   // String representaation of the function code
   var str = func.toString();
-
   // Remove comments of the form /* ... */
   // Removing comments of the form //
   // Remove body of the function { ... }

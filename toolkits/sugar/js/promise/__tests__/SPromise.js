@@ -1,32 +1,36 @@
 "use strict";
 
-const {
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+var {
   italic
 } = require('chalk');
 
 module.exports = __SPromise => {
   describe('sugar.js.promise.SPromise', () => {
-    const finallyStack = [],
-          thenStack = [],
-          thenOnceStack = [],
-          catchStack = [],
-          catchOnceStack = [],
-          resolvedStack = [],
-          rejectedStack = [];
-    let isPassedAwait = false,
+    var finallyStack = [],
+        thenStack = [],
+        thenOnceStack = [],
+        catchStack = [],
+        catchOnceStack = [],
+        resolvedStack = [],
+        rejectedStack = [];
+    var isPassedAwait = false,
         isPassedPromiseWithPromises = false;
-    const onThenStack = [],
-          onThenCatchStack = [];
-    let promiseWithPromisesIdx = 0;
-    let unsubscribedCallbackTestCallCount = 0;
-    const secondPromiseStack = [];
-    let myPromiseCancelResult;
-    let myPromiseWithPromisesResult = null;
-    let notRegisteredrigger = false;
-    let callStarTrigger = 0;
+    var onThenStack = [],
+        onThenCatchStack = [];
+    var promiseWithPromisesIdx = 0;
+    var unsubscribedCallbackTestCallCount = 0;
+    var secondPromiseStack = [];
+    var myPromiseCancelResult;
+    var myPromiseWithPromisesResult = null;
+    var notRegisteredrigger = false;
+    var callStarTrigger = 0;
 
-    (async () => {
-      const myPromise = new __SPromise((resolve, reject, trigger, cancel) => {
+    _asyncToGenerator(function* () {
+      var myPromise = new __SPromise((resolve, reject, trigger, cancel) => {
         setTimeout(() => {
           trigger('start', 'coco');
           trigger('youhou', 'Hello');
@@ -35,7 +39,7 @@ module.exports = __SPromise => {
         callStarTrigger++;
       });
       myPromise.trigger('sss', true);
-      myPromiseCancelResult = await new __SPromise((resolve, reject, trigger, cancel) => {
+      myPromiseCancelResult = yield new __SPromise((resolve, reject, trigger, cancel) => {
         trigger('then', 'hello');
         trigger('coco', 'hey!');
         setTimeout(() => {
@@ -46,7 +50,7 @@ module.exports = __SPromise => {
       }).then(value => {
         secondPromiseStack.push(value);
       }).start();
-      const unsubscribePromise = new __SPromise(() => {}).start();
+      var unsubscribePromise = new __SPromise(() => {}).start();
       unsubscribePromise.on('unsubscribeCallbackTest', () => {
         unsubscribedCallbackTestCallCount++;
       });
@@ -55,7 +59,7 @@ module.exports = __SPromise => {
         unsubscribePromise.off('unsubscribeCallbackTest');
         unsubscribePromise.trigger('unsubscribeCallbackTest', true);
       }, 10);
-      const res = await new __SPromise((resolve, reject, trigger, cancel) => {
+      var res = yield new __SPromise((resolve, reject, trigger, cancel) => {
         trigger('then', 'world');
         trigger('then', 'hello');
         trigger('catch', 'error');
@@ -64,15 +68,15 @@ module.exports = __SPromise => {
           resolve('nelson');
         }, 100);
       }).then(value => {
-        thenStack.push(`${value}`);
+        thenStack.push("".concat(value));
       }).then(value => {
-        thenStack.push(`${value}`);
+        thenStack.push("".concat(value));
       }).then(1, value => {
-        thenOnceStack.push(`${value}`);
+        thenOnceStack.push("".concat(value));
       }).catch(error => {
-        catchStack.push(`${error}`);
+        catchStack.push("".concat(error));
       }).catch(1, error => {
-        catchOnceStack.push(`${error}`);
+        catchOnceStack.push("".concat(error));
       }).finally(value => {
         finallyStack.push(value);
       }).resolved(value => {
@@ -83,9 +87,15 @@ module.exports = __SPromise => {
         onThenCatchStack.push(value + 'onThenCatch');
       }).start();
       isPassedAwait = true;
-      myPromiseWithPromisesResult = await new __SPromise(async (resolve, reject, trigger, cancel) => {
-        resolve('coco1');
-      }).then(value => {
+      myPromiseWithPromisesResult = yield new __SPromise( /*#__PURE__*/function () {
+        var _ref2 = _asyncToGenerator(function* (resolve, reject, trigger, cancel) {
+          resolve('coco1');
+        });
+
+        return function (_x, _x2, _x3, _x4) {
+          return _ref2.apply(this, arguments);
+        };
+      }()).then(value => {
         return new Promise((resolve, reject) => {
           promiseWithPromisesIdx++;
           setTimeout(() => {

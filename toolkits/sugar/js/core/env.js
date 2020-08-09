@@ -39,7 +39,7 @@ function env(dotPath, value) {
     if (!window.process.env) window.process.env = {};
   }
 
-  const targetObj = (0, _node.default)() ? global.process.env : window.process.env;
+  var targetObj = (0, _node.default)() ? global.process.env : window.process.env;
 
   if (value === null) {
     // delete the variable

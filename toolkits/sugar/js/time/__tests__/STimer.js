@@ -1,9 +1,9 @@
 "use strict";
 
 module.exports = __STimer => {
-  let doneComplete;
-  let tickCount = 0;
-  const timer = new __STimer(1000, {
+  var doneComplete;
+  var tickCount = 0;
+  var timer = new __STimer(1000, {
     tickInterval: '100ms'
   }).on('tick', () => {
     tickCount++;

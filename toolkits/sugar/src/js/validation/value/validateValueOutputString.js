@@ -31,19 +31,28 @@ export default function validateValueOutputString(validateValueResultObj) {
 
   if (validateValueResultObj.name) {
     issuesArray.push(
-      `<yellow>│</yellow> <underline><bold>${validateValueResultObj.name}</bold></underline>`
+      `<yellow>│</yellow> <underline><bold>${validateValueResultObj.name}</bold></underline>\n<yellow>│</yellow>`
     );
   }
 
-  issuesArray.push(
-    `<yellow>│</yellow> - Received value: <yellow>${__toString(
-      validateValueResultObj.received.value,
-      { beautify: true }
-    )}</yellow>`
-  );
+  if (validateValueResultObj.received) {
+    issuesArray.push(
+      `<yellow>│</yellow> - Received value: <yellow>${__toString(
+        validateValueResultObj.received.value,
+        { beautify: true }
+      )}</yellow>`
+    );
+  }
 
   validateValueResultObj.issues.forEach((issue) => {
     switch (issue.toLowerCase()) {
+      case 'definitionobject.unknown':
+        issuesArray.push(
+          `<yellow>│</yellow> This passed definition object property "<cyan>${__toString(
+            validateValueResultObj.name || 'unnamed'
+          )}</cyan>" is not supported...`
+        );
+        break;
       case 'required':
         issuesArray.push(
           `<yellow>│</yellow> - This value is <green>required</green>`

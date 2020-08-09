@@ -23,8 +23,8 @@ exports.default = parseHsv;
  */
 function parseHsv(hsvString) {
   hsvString = hsvString.toLowerCase();
-  let string = hsvString.replace('hsv(', '').replace(')', '').replace(/\s/g, '');
-  let array = string.split(',');
+  var string = hsvString.replace('hsv(', '').replace(')', '').replace(/\s/g, '');
+  var array = string.split(',');
   return {
     h: parseFloat(array[0]),
     s: parseFloat(array[1]),

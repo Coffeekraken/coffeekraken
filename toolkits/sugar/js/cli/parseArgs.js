@@ -73,37 +73,56 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function parseArgsString(string, definitionObj = {}, settings = {}) {
+function parseArgsString(string, definitionObj, settings) {
+  if (definitionObj === void 0) {
+    definitionObj = {};
+  }
+
+  if (settings === void 0) {
+    settings = {};
+  }
+
   settings = (0, _deepMerge.default)({
     defaultObj: {}
   }, settings);
-  const argsObj = {}; // process the passed string
+  var argsObj = {}; // process the passed string
 
-  let stringArray = string.match(/(?:[^\s("|'|`)]+|("|'|`)[^("|'|`)]*("|'|`))+/gm) || [];
+  var stringArray = string.match(/(?:[^\s"|'|`]+|("|'|`)[^"|'|`]*("|'|`))+/gm) || [];
   stringArray = stringArray.map(item => {
     return (0, _unquote.default)(item);
   });
-  let currentArgName = null;
-  let currentArgType = null;
-  let currentArgDefinition = null;
+  var currentArgName = null;
+  var currentArgType = null;
+  var currentArgDefinition = null;
   stringArray = stringArray.filter(part => {
-    const currentArg = part.replace(/^[-]{1,2}/, '');
+    var currentArg = part.replace(/^[-]{1,2}/, '');
 
     if (part.slice(0, 2) === '--' || part.slice(0, 1) === '-') {
-      const realArgName = getArgNameByAlias(currentArg, definitionObj) || currentArg;
+      var realArgName = getArgNameByAlias(currentArg, definitionObj) || currentArg;
       currentArgName = realArgName;
+
+      if (!definitionObj[realArgName]) {
+        throw new Error("You try to pass an argument \"<yellow>".concat(realArgName, "</yellow>\" that is not supported. Here's the supported arguments:\n").concat(Object.keys(definitionObj).map(argName => {
+          var argDefinition = definitionObj[argName];
+          var string = "<cyan>>".concat(argName, "</cyan>: --").concat(argName);
+          if (argDefinition.alias) string += " (-".concat(argDefinition.alias, ")");
+          if (argDefinition.description) string += ": ".concat(argDefinition.description);
+          return string;
+        }).join('\n')));
+      }
+
       currentArgDefinition = definitionObj[realArgName];
       currentArgType = (0, _parseTypeDefinitionString.default)(currentArgDefinition.type);
       argsObj[realArgName] = true;
       return false;
     }
 
-    const lastArgObjKey = Object.keys(argsObj)[Object.keys(argsObj).length - 1];
+    var lastArgObjKey = Object.keys(argsObj)[Object.keys(argsObj).length - 1];
 
     if (!lastArgObjKey) {
-      for (const key in definitionObj) {
-        const obj = definitionObj[key];
-        const value = (0, _parse.default)(part);
+      for (var key in definitionObj) {
+        var obj = definitionObj[key];
+        var value = (0, _parse.default)(part);
 
         if ((0, _ofType.default)(value, obj.type)) {
           if (obj.validator && !obj.validator(value)) {
@@ -115,32 +134,32 @@ function parseArgsString(string, definitionObj = {}, settings = {}) {
         }
       }
     } else if (lastArgObjKey) {
-      const value = (0, _parse.default)(part);
+      var _value = (0, _parse.default)(part);
 
       if (currentArgType[0].type.toLowerCase() === 'array') {
-        if (Array.isArray(value)) argsObj[lastArgObjKey] = value;else if (!Array.isArray(argsObj[lastArgObjKey])) argsObj[lastArgObjKey] = [];
+        if (Array.isArray(_value)) argsObj[lastArgObjKey] = _value;else if (!Array.isArray(argsObj[lastArgObjKey])) argsObj[lastArgObjKey] = [];
 
         if (currentArgType[0].of) {
-          if ((0, _ofType.default)(value, currentArgType[0].of)) {
-            if (currentArgDefinition.validator && !currentArgDefinition.validator(value)) {
+          if ((0, _ofType.default)(_value, currentArgType[0].of)) {
+            if (currentArgDefinition.validator && !currentArgDefinition.validator(_value)) {
               return true;
             }
 
-            argsObj[lastArgObjKey].push(value);
+            argsObj[lastArgObjKey].push(_value);
           }
         } else {// argsObj[lastArgObjKey].push(value);
         }
       } else {
-        argsObj[lastArgObjKey] = value; // __set(argsObj, lastArgObjKey, value);
+        argsObj[lastArgObjKey] = _value; // __set(argsObj, lastArgObjKey, value);
       }
     }
 
     return true;
   });
-  const finalObj = {};
+  var finalObj = {};
 
-  for (let key in definitionObj) {
-    const value = argsObj[key];
+  for (var key in definitionObj) {
+    var value = argsObj[key];
 
     if (value === undefined && settings.defaultObj[key] !== undefined) {
       // __set(finalObj, key, settings.defaultObj[key]);
@@ -152,14 +171,14 @@ function parseArgsString(string, definitionObj = {}, settings = {}) {
     finalObj[key] = argsObj[key];
   }
 
-  return (0, _completeArgsObject.default)(finalObj, definitionObj);
+  return (0, _completeArgsObject.default)(finalObj, definitionObj, settings);
 }
 
 function getArgNameByAlias(alias, definitionObj) {
-  const argNames = Object.keys(definitionObj);
+  var argNames = Object.keys(definitionObj);
 
-  for (let i = 0; i < argNames.length; i++) {
-    const argDefinition = definitionObj[argNames[i]];
+  for (var i = 0; i < argNames.length; i++) {
+    var argDefinition = definitionObj[argNames[i]];
     if (argDefinition.alias && argDefinition.alias === alias) return argNames[i];
   }
 

@@ -27,8 +27,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function offsetParent(elm) {
-  const parentOffset = (0, _offset.default)(elm.parentNode);
-  const offset = (0, _offset.default)(elm);
+  var parentOffset = (0, _offset.default)(elm.parentNode);
+  var offset = (0, _offset.default)(elm);
   return {
     top: offset.top - parentOffset.top,
     left: offset.left - parentOffset.left

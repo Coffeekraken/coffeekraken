@@ -41,6 +41,18 @@ var _until = require("lit-html/directives/until.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n      <p>\n        You need to specify a static template property for your component...\n      </p>\n    "]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -92,8 +104,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * @see       https://lit-html.polymer-project.org/
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function SLitHtmlWebComponent(extend = HTMLElement) {
+function SLitHtmlWebComponent(extend) {
   var _class, _temp;
+
+  if (extend === void 0) {
+    extend = HTMLElement;
+  }
 
   return _temp = _class = /*#__PURE__*/function (_SWebComponent) {
     _inherits(SLitHtmlWebComponent, _SWebComponent);
@@ -132,8 +148,12 @@ function SLitHtmlWebComponent(extend = HTMLElement) {
      *
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    function SLitHtmlWebComponent(settings = {}) {
+    function SLitHtmlWebComponent(settings) {
       var _this;
+
+      if (settings === void 0) {
+        settings = {};
+      }
 
       _classCallCheck(this, SLitHtmlWebComponent);
 
@@ -157,7 +177,7 @@ function SLitHtmlWebComponent(extend = HTMLElement) {
       });
 
       _defineProperty(_assertThisInitialized(_this), "render", (0, _throttle.default)(function () {
-        const tpl = this.constructor.template(this._props, this, this._settings, this.lit);
+        var tpl = this.constructor.template(this._props, this, this._settings, this.lit);
         (0, _litHtml.render)(tpl, this.$container);
       }, 50));
 
@@ -189,10 +209,10 @@ function SLitHtmlWebComponent(extend = HTMLElement) {
     _createClass(SLitHtmlWebComponent, [{
       key: "$",
       value: function $(path) {
-        let $result = this.$container.querySelector(path);
+        var $result = this.$container.querySelector(path);
 
-        if (!$result && !path.includes(`.${this.metas.dashName}__`)) {
-          path = path.replace(/^\./, `.${this.metas.dashName}__`);
+        if (!$result && !path.includes(".".concat(this.metas.dashName, "__"))) {
+          path = path.replace(/^\./, ".".concat(this.metas.dashName, "__"));
           $result = this.$container.querySelector(path);
         }
 
@@ -201,10 +221,10 @@ function SLitHtmlWebComponent(extend = HTMLElement) {
     }, {
       key: "$$",
       value: function $$(path) {
-        let $result = this.$container.querySelectorAll(path);
+        var $result = this.$container.querySelectorAll(path);
 
-        if (!$result && !path.includes(`.${this.metas.dashName}__`)) {
-          path = path.replace(/^\./, `.${this.metas.dashName}__`);
+        if (!$result && !path.includes(".".concat(this.metas.dashName, "__"))) {
+          path = path.replace(/^\./, ".".concat(this.metas.dashName, "__"));
           $result = this.$container.querySelectorAll(path);
         }
 
@@ -249,11 +269,7 @@ function SLitHtmlWebComponent(extend = HTMLElement) {
     }]);
 
     return SLitHtmlWebComponent;
-  }((0, _SWebComponent2.default)(extend)), _defineProperty(_class, "template", (props, component, html) => html`
-      <p>
-        You need to specify a static template property for your component...
-      </p>
-    `), _temp;
+  }((0, _SWebComponent2.default)(extend)), _defineProperty(_class, "template", (props, component, html) => html(_templateObject())), _temp;
 }
 
 module.exports = exports.default;

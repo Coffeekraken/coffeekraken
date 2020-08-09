@@ -7,7 +7,7 @@ exports.default = void 0;
 
 /* SmtpJS.com - v3.0.0 */
 var Email = {
-  send: function (a) {
+  send: function send(a) {
     return new Promise(function (n, e) {
       a.nocache = Math.floor(1e6 * Math.random() + 1), a.Action = "Send";
       var t = JSON.stringify(a);
@@ -16,21 +16,21 @@ var Email = {
       });
     });
   },
-  ajaxPost: function (e, n, t) {
+  ajaxPost: function ajaxPost(e, n, t) {
     var a = Email.createCORSRequest("POST", e);
     a.setRequestHeader("Content-type", "application/x-www-form-urlencoded"), a.onload = function () {
       var e = a.responseText;
       null != t && t(e);
     }, a.send(n);
   },
-  ajax: function (e, n) {
+  ajax: function ajax(e, n) {
     var t = Email.createCORSRequest("GET", e);
     t.onload = function () {
       var e = t.responseText;
       null != n && n(e);
     }, t.send();
   },
-  createCORSRequest: function (e, n) {
+  createCORSRequest: function createCORSRequest(e, n) {
     var t = new XMLHttpRequest();
     return "withCredentials" in t ? t.open(e, n, !0) : "undefined" != typeof XDomainRequest ? (t = new XDomainRequest()).open(e, n) : t = null, t;
   }

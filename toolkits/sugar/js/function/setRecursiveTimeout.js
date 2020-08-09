@@ -26,10 +26,14 @@ exports.default = setRecursiveTimeout;
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function setRecursiveTimeout(fn, timeout, duration, spread = 0) {
-  let idx = 0;
-  let currentDuration = 0;
-  let timeoutFn = null;
+function setRecursiveTimeout(fn, timeout, duration, spread) {
+  if (spread === void 0) {
+    spread = 0;
+  }
+
+  var idx = 0;
+  var currentDuration = 0;
+  var timeoutFn = null;
 
   (function tick() {
     // call the function
@@ -39,7 +43,7 @@ function setRecursiveTimeout(fn, timeout, duration, spread = 0) {
     idx++; // recursive call until end
 
     if (!duration || duration === -1 || currentDuration < duration) {
-      const spreadValue = -spread + Math.round(Math.random(spread * 2));
+      var spreadValue = -spread + Math.round(Math.random(spread * 2));
       timeoutFn = setTimeout(tick, timeout + spreadValue);
     }
   })(); // return the clear function to be able to stop the timeout

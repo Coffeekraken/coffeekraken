@@ -15,6 +15,14 @@ var _mail = _interopRequireDefault(require("../htmlPresets/mail"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -45,7 +53,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-let SLogMailAdapter = /*#__PURE__*/function () {
+var SLogMailAdapter = /*#__PURE__*/function () {
   /**
    * @name          _settings
    * @type          Object
@@ -75,7 +83,11 @@ let SLogMailAdapter = /*#__PURE__*/function () {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  function SLogMailAdapter(settings = {}) {
+  function SLogMailAdapter(settings) {
+    if (settings === void 0) {
+      settings = {};
+    }
+
     _classCallCheck(this, SLogMailAdapter);
 
     _defineProperty(this, "_settings", {});
@@ -107,62 +119,73 @@ let SLogMailAdapter = /*#__PURE__*/function () {
 
   _createClass(SLogMailAdapter, [{
     key: "log",
-    value: async function log(message, level) {
-      return new Promise(async (resolve, reject) => {
-        let imageData = null;
+    value: function () {
+      var _log = _asyncToGenerator(function* (message, level) {
+        var _this = this;
 
-        if (!_node.default) {
-          const canvas = await html2canvas(document.body);
-          imageData = canvas.toDataURL('image/jpeg');
-        }
+        return new Promise( /*#__PURE__*/function () {
+          var _ref = _asyncToGenerator(function* (resolve, reject) {
+            var imageData = null;
 
-        let list = [];
-        Object.keys(this._settings.metas).forEach(metaName => {
-          list.push(`<li><strong>${metaName}</strong>: ${this._settings.metas[metaName]}</li>`);
-        });
-        const body = (0, _mail.default)(this._settings.body.replace('[content]', `
-        ${message}
-        <br /><br />
-        ${list.join('<br />')}
-      `));
+            if (!_node.default) {
+              var canvas = yield html2canvas(document.body);
+              imageData = canvas.toDataURL('image/jpeg');
+            }
 
-        const subject = this._settings.subject.replace('[level]', level);
+            var list = [];
+            Object.keys(_this._settings.metas).forEach(metaName => {
+              list.push("<li><strong>".concat(metaName, "</strong>: ").concat(_this._settings.metas[metaName], "</li>"));
+            });
+            var body = (0, _mail.default)(_this._settings.body.replace('[content]', "\n        ".concat(message, "\n        <br /><br />\n        ").concat(list.join('<br />'), "\n      ")));
 
-        let keys = Object.keys(this._settings);
-        let newobj = {};
-        keys.forEach(key => {
-          if (['host', 'username', 'password', 'to', 'from', 'securetoken'].indexOf(key.toLowerCase()) === -1) return;
-          newobj[key.charAt(0).toUpperCase() + key.slice(1)] = this._settings[key];
-        });
+            var subject = _this._settings.subject.replace('[level]', level);
 
-        try {
-          const _set = {
-            Body: body,
-            Subject: subject,
-            ...newobj
-          };
+            var keys = Object.keys(_this._settings);
+            var newobj = {};
+            keys.forEach(key => {
+              if (['host', 'username', 'password', 'to', 'from', 'securetoken'].indexOf(key.toLowerCase()) === -1) return;
+              newobj[key.charAt(0).toUpperCase() + key.slice(1)] = _this._settings[key];
+            });
 
-          if (imageData) {
-            _set['Attachments'] = [{
-              name: `screenshot.jpg`,
-              data: imageData
-            }];
-          }
+            try {
+              var _set = _objectSpread({
+                Body: body,
+                Subject: subject
+              }, newobj);
 
-          delete _set.metas;
+              if (imageData) {
+                _set['Attachments'] = [{
+                  name: "screenshot.jpg",
+                  data: imageData
+                }];
+              }
 
-          _smtp.default.send(_set).then(message => {
-            console.log('ME', message);
-            resolve(message);
-          }).catch(error => {
-            console.log('ERROR', error);
-            reject(error);
+              delete _set.metas;
+
+              _smtp.default.send(_set).then(message => {
+                console.log('ME', message);
+                resolve(message);
+              }).catch(error => {
+                console.log('ERROR', error);
+                reject(error);
+              });
+            } catch (e) {
+              console.error(e);
+            }
           });
-        } catch (e) {
-          console.error(e);
-        }
+
+          return function (_x3, _x4) {
+            return _ref.apply(this, arguments);
+          };
+        }());
       });
-    }
+
+      function log(_x, _x2) {
+        return _log.apply(this, arguments);
+      }
+
+      return log;
+    }()
   }]);
 
   return SLogMailAdapter;

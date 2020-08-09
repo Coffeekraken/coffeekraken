@@ -22,7 +22,11 @@ exports.default = em2px;
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function em2px(em, $elm = document.documentElement) {
+function em2px(em, $elm) {
+  if ($elm === void 0) {
+    $elm = document.documentElement;
+  }
+
   return em * parseFloat(getComputedStyle($elm).fontSize || '16px');
 }
 

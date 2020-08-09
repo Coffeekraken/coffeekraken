@@ -61,6 +61,7 @@ export default function completeArgsObject(
   );
   if (argsValidationResult !== true && settings.throw)
     throw new Error(__toString(argsValidationResult));
+  else if (argsValidationResult !== true) return argsValidationResult;
 
   // return the argsObj
   return __deepize(argsObj);

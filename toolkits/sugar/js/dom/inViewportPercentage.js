@@ -30,14 +30,14 @@ function inViewportPercentage(elm) {
   // if not visible at all
   if (!(0, _isVisible.default)(elm)) return 0; // calculate the visible percentage
 
-  const bounding = elm.getBoundingClientRect();
-  let percentageWidth = 100,
+  var bounding = elm.getBoundingClientRect();
+  var percentageWidth = 100,
       percentageHeight = 100; // percentageHeight
 
   if (bounding.top >= 0 && bounding.bottom <= window.innerHeight) {
     percentageHeight = 100;
   } else {
-    const elmHeight = bounding.bottom - bounding.top;
+    var elmHeight = bounding.bottom - bounding.top;
 
     if (bounding.top < 0) {
       percentageHeight -= 100 / elmHeight * (bounding.top * -1);
@@ -55,7 +55,7 @@ function inViewportPercentage(elm) {
   if (bounding.left >= 0 && bounding.right <= window.innerWidth) {
     percentageWidth = 100;
   } else {
-    const elmWidth = bounding.right - bounding.left;
+    var elmWidth = bounding.right - bounding.left;
 
     if (bounding.left < 0) {
       percentageWidth -= 100 / elmWidth * (bounding.left * -1);

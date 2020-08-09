@@ -23,7 +23,7 @@ exports.default = insertAfter;
  */
 function insertAfter(elm, refElm) {
   // next sibling of ref elm
-  const nextSibling = refElm.nextSibling;
+  var nextSibling = refElm.nextSibling;
 
   if (!nextSibling) {
     refElm.parentNode.appendChild(elm);

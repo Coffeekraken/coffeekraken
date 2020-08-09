@@ -27,8 +27,8 @@ exports.default = linkLoaded;
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function alreadyLoaded(link) {
-  const href = link.href;
-  let result = false;
+  var href = link.href;
+  var result = false;
 
   for (var i = 0; i < document.styleSheets.length; i++) {
     if (document.styleSheets[i].href && document.styleSheets[i].href.match(href)) {
@@ -41,7 +41,11 @@ function alreadyLoaded(link) {
   return result;
 }
 
-function linkLoaded(link, callback = null) {
+function linkLoaded(link, callback) {
+  if (callback === void 0) {
+    callback = null;
+  }
+
   return new Promise((resolve, reject) => {
     // check if image is already loaded
     if (alreadyLoaded(link)) {
@@ -50,7 +54,7 @@ function linkLoaded(link, callback = null) {
 
       callback != null && callback(link);
     } else {
-      const img = document.createElement('img'); // wait until loaded
+      var img = document.createElement('img'); // wait until loaded
       // console.log('CHECK LOADING', link.href);
       // we load the css into an image
       // when the image is in error more

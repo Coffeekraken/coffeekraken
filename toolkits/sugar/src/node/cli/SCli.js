@@ -6,6 +6,7 @@ const __parseHtml = require('../terminal/parseHtml');
 const __argsToObject = require('../cli/argsToObject');
 const __isChildProcess = require('../is/childProcess');
 const __output = require('../process/output');
+const __parseArgs = require('../cli/parseArgs');
 
 /**
  * @name                SCli
@@ -109,6 +110,26 @@ module.exports = class SCli {
     );
     // check integrity
     this._checkCliIntegrity();
+  }
+
+  /**
+   * @name        parseArgs
+   * @type        Function
+   * @static
+   *
+   * This static method take a simple cli configuration string and returns you
+   * an object representing each values passed.
+   * This methods uses the static definition object of the class to do his job.
+   *
+   * @param     {String}          cliString         The cli string you want to parse
+   * @return    {Object}                            The object of configuration values
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static parseArgs(cliString) {
+    if (!cliString || cliString.trim() === '') return {};
+    return __parseArgs(cliString, this.definitionObj);
   }
 
   /**

@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = on;
 
-const __SPromise = require('../promise/SPromise');
+var __SPromise = require('../promise/SPromise');
 /**
  * @name        on
  * @namespace           js.event

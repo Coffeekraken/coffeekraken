@@ -1,10 +1,10 @@
 "use strict";
 
-const __diff = require('deep-diff').diff;
+var __diff = require('deep-diff').diff;
 
-const __set = require('../../../node/object/set');
+var __set = require('../../../node/object/set');
 
-const __get = require('../../../node/object/get');
+var __get = require('../../../node/object/get');
 /**
  * @name                            deepDiff
  * @namespace           node.object
@@ -28,14 +28,14 @@ const __get = require('../../../node/object/get');
 
 
 module.exports = function deepDiff(origin, compare) {
-  const finalObject = {}; // const diffs = __diff(origin, compare, (path, key) => {
+  var finalObject = {}; // const diffs = __diff(origin, compare, (path, key) => {
   //   const p = path.length ? path.join('.') + '.' + key : key;
   //   const value = __get(origin, p);
   //   console.log(p, value);
   //   return value !== undefined || !Array.isArray(value);
   // });
 
-  const diffs = __diff(origin, compare);
+  var diffs = __diff(origin, compare);
 
   console.log(diffs);
   diffs.forEach(diff => {

@@ -43,9 +43,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function propertyProxy(obj, property, descriptor, applySetterAtStart = false) {
+function propertyProxy(obj, property, descriptor, applySetterAtStart) {
+  if (applySetterAtStart === void 0) {
+    applySetterAtStart = false;
+  }
+
   // handle property like "something.cool"
-  const objPath = property.split('.').slice(0, -1).join('.');
+  var objPath = property.split('.').slice(0, -1).join('.');
 
   if (objPath) {
     property = property.split('.').pop();
@@ -53,17 +57,17 @@ function propertyProxy(obj, property, descriptor, applySetterAtStart = false) {
   } // store the current value
 
 
-  let val = (0, _get2.default)(obj, property);
-  let currentDescriptor = Object.getOwnPropertyDescriptor(obj.prototype || obj, property); // custom setter check
+  var val = (0, _get2.default)(obj, property);
+  var currentDescriptor = Object.getOwnPropertyDescriptor(obj.prototype || obj, property); // custom setter check
 
-  const _set = value => {
+  var _set = value => {
     if (descriptor.set) {
       value = descriptor.set(value);
     } // descriptor
 
 
     if (currentDescriptor && currentDescriptor.set) {
-      let ret = currentDescriptor.set(value);
+      var ret = currentDescriptor.set(value);
 
       if (ret) {
         val = ret;
@@ -78,10 +82,10 @@ function propertyProxy(obj, property, descriptor, applySetterAtStart = false) {
 
   if (applySetterAtStart) _set(val); // make sure we have the good descriptor
 
-  let d = Object.getOwnPropertyDescriptor(obj, property);
+  var d = Object.getOwnPropertyDescriptor(obj, property);
   Object.defineProperty(obj, property, {
     get: () => {
-      let _val = val;
+      var _val = val;
 
       if (descriptor.get) {
         _val = descriptor.get(_val);

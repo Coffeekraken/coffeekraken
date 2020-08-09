@@ -9,7 +9,15 @@ var _validateObjectDefinitionObject = _interopRequireDefault(require("../object/
 
 var _deepMerge = _interopRequireDefault(require("../../object/deepMerge"));
 
+var _cliDefinitionObjectDefinition = _interopRequireDefault(require("./cliDefinitionObjectDefinition"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 /**
  * @name            validateCliDefinitionObject
@@ -20,7 +28,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @param       {Object}        definitionObj         The definition object to check
  * @param       {Object}        [settings={}]               A settings object to configure your validation process:
- * - bySteps (false) {Boolean}: Specify if you want to have issues back all at a time or each one after the other
  * @return      {Boolean|String}                             true if valid, a string with the error details if not
  *
  * @todo        tests
@@ -40,64 +47,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function validateCliDefinitionObject(definitionObj, settings = {}) {
-  settings = (0, _deepMerge.default)({
-    bySteps: false
-  }, settings);
-  let issues = [];
-  return (0, _validateObjectDefinitionObject.default)(definitionObj, {
-    extendsFn: (argName, argDefinition) => {
-      // check alias
-      if (argDefinition.alias) {
-        if (typeof argDefinition.alias !== 'string') {
-          const msg = `The "alias" property of an argument definition object has to be a String. You've passed "${__toString(argDefinition.alias)}" which is a "${typeof argDefinition.alias}" for your argument "${argName}"...`;
+function validateCliDefinitionObject(definitionObj, settings) {
+  if (settings === void 0) {
+    settings = {};
+  }
 
-          if (settings.bySteps) {
-            return msg;
-          }
-
-          issues = [...issues, msg];
-        }
-
-        if (argDefinition.alias.length !== 1) {
-          const msg = `The "alias" property of an argument definition object has to be a 1 letter String. You've passed "${argDefinition.alias}" for your argument "${argName}"...`;
-
-          if (settings.bySteps) {
-            return msg;
-          }
-
-          issues = [...issues, msg];
-        }
-      } // check description
-
-
-      if (!argDefinition.description) {
-        const msg = `The property "description" for your argument "${argName}" is missing...`;
-
-        if (settings.bySteps) {
-          return msg;
-        }
-
-        issues = [...issues, msg];
-      }
-
-      if (typeof argDefinition.description !== 'string') {
-        const msg = `The property "description" of an argument definition object has to be a String. You've passed "${__toString(argDefinition.description)}" which is a "${typeof argDefinition.description}" for your argument "${argName}"...`;
-        if (settings.bySteps) return msg;
-        issues = [...issues, msg];
-      } // check level
-
-
-      if (argDefinition.level && typeof argDefinition.level !== 'number') {
-        const msg = `The property "level" for your argument "${argName}" has to be a Number. You've passed "${__toString(argDefinition.level)}" which is a "${typeof argDefinition.level}"...`;
-        if (settings.bySteps) return msg;
-        issues = [...issues, msg];
-      }
-
-      if (!issues.length) return true;
-      return issues;
-    }
-  });
+  settings = (0, _deepMerge.default)({}, settings);
+  return (0, _validateObjectDefinitionObject.default)(definitionObj, _objectSpread(_objectSpread({}, settings), {}, {
+    definitionObj: _cliDefinitionObjectDefinition.default
+  }));
 }
 
 module.exports = exports.default;

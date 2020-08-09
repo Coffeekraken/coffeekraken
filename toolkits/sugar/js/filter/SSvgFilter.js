@@ -41,7 +41,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-let SSvgFilter = /*#__PURE__*/function () {
+var SSvgFilter = /*#__PURE__*/function () {
   /**
    * @name          constructor
    * @type          Function
@@ -105,7 +105,7 @@ let SSvgFilter = /*#__PURE__*/function () {
         delete elm.style[vendor + 'filter'];
       }); // remove from stack
 
-      let idx = this.elms.indexOf(elm);
+      var idx = this.elms.indexOf(elm);
       if (idx) this.elms.splice(idx, 1);
     }
     /**
@@ -121,15 +121,10 @@ let SSvgFilter = /*#__PURE__*/function () {
   }, {
     key: "_insertFilter",
     value: function _insertFilter() {
-      let svg = `
-			<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
-				<defs>
-				</defs>
-			</svg>
-		`;
-      let div = document.createElement('div');
+      var svg = "\n\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\">\n\t\t\t\t<defs>\n\t\t\t\t</defs>\n\t\t\t</svg>\n\t\t";
+      var div = document.createElement('div');
       div.innerHTML = svg;
-      let defs = div.querySelector('defs'); // add the filter to the svg
+      var defs = div.querySelector('defs'); // add the filter to the svg
 
       this.filter_content = '<filter id="' + this.id + '">' + this.filter_content + '</filter>';
       defs.innerHTML = this.filter_content;
@@ -170,7 +165,7 @@ let SSvgFilter = /*#__PURE__*/function () {
   }], [{
     key: "_injectFiltersContainer",
     value: function _injectFiltersContainer() {
-      let style = ['position:absolute;', 'left:-1000px;', 'top:-300px;'];
+      var style = ['position:absolute;', 'left:-1000px;', 'top:-300px;'];
 
       if (/Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor)) {
         style.push('display:none;');

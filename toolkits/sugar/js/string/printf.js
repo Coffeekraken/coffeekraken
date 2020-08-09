@@ -29,7 +29,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @see 				https://www.npmjs.com/package/sprintf-js
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function _printf(...args) {
+function _printf() {
+  for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+    args[_key] = arguments[_key];
+  }
+
   return _sprintfJs.default.sprintf.apply(null, args);
 }
 

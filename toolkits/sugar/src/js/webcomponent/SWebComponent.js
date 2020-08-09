@@ -597,11 +597,10 @@ function SWebComponent(extend = HTMLElement) {
       props.forEach((prop) => {
         const propObj = this._props[prop];
 
-        const validationResult = __validateValue(
-          propObj.value,
-          propObj,
-          `${this.constructor.name}.props.${prop}`
-        );
+        const validationResult = __validateValue(propObj.value, propObj, {
+          name: `${this.constructor.name}.props.${prop}`,
+          throw: true
+        });
         if (validationResult !== true) throw new Error(validationResult);
       });
     }

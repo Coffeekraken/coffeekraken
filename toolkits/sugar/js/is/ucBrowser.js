@@ -22,7 +22,11 @@ exports.default = isUcBrowser;
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function isUcBrowser(ua = navigator.userAgent) {
+function isUcBrowser(ua) {
+  if (ua === void 0) {
+    ua = navigator.userAgent;
+  }
+
   return ua.match(/UCBrowser/i) !== null;
 }
 

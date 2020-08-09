@@ -20,14 +20,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // imports
 // prepare a settings object to store
 // the getted settings from the css
-let settings = {}; // wait the css to be loaded
+var settings = {}; // wait the css to be loaded
 
 (0, _domReady.default)(() => {
-  let settingsElm = document.createElement('div');
+  var settingsElm = document.createElement('div');
   settingsElm.classList.add('s-settings');
   document.body.appendChild(settingsElm);
 
-  let _settings = window.getComputedStyle(settingsElm, ':after').getPropertyValue('content').trim();
+  var _settings = window.getComputedStyle(settingsElm, ':after').getPropertyValue('content').trim();
 
   if (_settings && _settings !== '' && _settings !== 'none') {
     _settings = _settings.replace(/\\"/g, '"'); // handle numbers that does not have initial 0.65

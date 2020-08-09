@@ -34,7 +34,7 @@ var _default = {
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  encrypt: function (message) {
+  encrypt: function encrypt(message) {
     if (typeof message !== 'string') message = (0, _toString.default)(message);
     return btoa(message);
   },
@@ -50,7 +50,7 @@ var _default = {
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  decrypt: function (message) {
+  decrypt: function decrypt(message) {
     message = atob(message);
     return (0, _parse.default)(message);
   }

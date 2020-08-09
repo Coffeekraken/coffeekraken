@@ -36,10 +36,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 function uid() {
   // init the uid
-  let uid = '';
-  let format = 'sha256';
-  let key = 'sugar.js.object.uid';
-  const args = (0, _filter.default)(Object.assign(arguments), item => {
+  var uid = '';
+  var format = 'sha256';
+  var key = 'sugar.js.object.uid';
+  var args = (0, _filter.default)(Object.assign(arguments), item => {
     if (typeof item === 'string') {
       if (['sha256', 'full'].indexOf(item) !== -1) {
         format = item;
@@ -65,7 +65,7 @@ function uid() {
 
     case 'sha256':
     default:
-      let hash = _crypto.default.createHash('sha256').update(uid).digest('hex').toString();
+      var hash = _crypto.default.createHash('sha256').update(uid).digest('hex').toString();
 
       return hash;
       break;

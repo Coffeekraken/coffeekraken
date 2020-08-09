@@ -23,7 +23,11 @@ exports.default = rtrim;
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function rtrim(string, needle, trimResult = true) {
+function rtrim(string, needle, trimResult) {
+  if (trimResult === void 0) {
+    trimResult = true;
+  }
+
   if (string.substr(needle.length * -1) === needle) {
     if (trimResult) {
       return string.substr(0, string.length - needle.length).trim();

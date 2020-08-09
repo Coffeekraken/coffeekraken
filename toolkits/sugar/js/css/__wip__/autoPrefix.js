@@ -31,8 +31,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function autoPrefix(style) {
-  let styleObj = typeof style === 'object' ? style : {};
-  let prefixedStyleObj = {}; // check the passed param
+  var styleObj = typeof style === 'object' ? style : {};
+  var prefixedStyleObj = {}; // check the passed param
 
   if (typeof style === 'string') {// styleObj = css.parse(style);
     // styleObj = parse(style);
@@ -61,20 +61,24 @@ function autoPrefix(style) {
 
 function parseCss(css) {
   // const reg = /[\s\S]+\{[\s\S]+\}$/gm;
-  const reg = /(\/\*\@-.*?)(?=\/\*\@-|\z)/gm;
+  var reg = /(\/\*\@-.*?)(?=\/\*\@-|\z)/gm;
   console.log(reg.exec(css));
 }
 
-function deepMap(object, handler, path = '') {
+function deepMap(object, handler, path) {
+  if (path === void 0) {
+    path = '';
+  }
+
   if (Array.isArray(object)) {
     object.forEach((item, i) => {
-      const newPath = path === '' ? `${i}` : `${path}.${i}`;
+      var newPath = path === '' ? "".concat(i) : "".concat(path, ".").concat(i);
       deepMap(item, handler, newPath);
     });
   } else if (typeof object === 'object') {
     Object.keys(object).forEach(itemName => {
-      const itemValue = object[itemName];
-      const newPath = path === '' ? `${itemName}` : `${path}.${itemName}`;
+      var itemValue = object[itemName];
+      var newPath = path === '' ? "".concat(itemName) : "".concat(path, ".").concat(itemName);
       deepMap(itemValue, handler, newPath);
     });
   } else {

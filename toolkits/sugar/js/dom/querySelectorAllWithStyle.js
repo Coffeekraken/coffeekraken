@@ -9,6 +9,12 @@ var _getStyleProperty = _interopRequireDefault(require("./getStyleProperty"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 /**
  * @name      querySelectorAllWithStyle
  * @namespace           js.dom
@@ -37,27 +43,30 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function querySelectorAllWithStyle(selector, style, settings = {}) {
-  // extend settings
-  settings = {
-    rootNode: document.body,
-    ...settings
-  }; // select all the element from the selector
+function querySelectorAllWithStyle(selector, style, settings) {
+  if (settings === void 0) {
+    settings = {};
+  }
 
-  const $elms = settings.rootNode.querySelectorAll(selector); // check that we have some nodes to process
+  // extend settings
+  settings = _objectSpread({
+    rootNode: document.body
+  }, settings); // select all the element from the selector
+
+  var $elms = settings.rootNode.querySelectorAll(selector); // check that we have some nodes to process
 
   if (!$elms.length) return []; // init the ar$Elms stack that will be returned at the end
 
-  const ar$Elms = []; // loop on each elements
+  var ar$Elms = []; // loop on each elements
 
   Array.from($elms).forEach($elm => {
     // track if the $elm match all the properties
-    let match = true; // loop on each properties of the style object
+    var match = true; // loop on each properties of the style object
     // to check it against the dom computed style
 
-    for (let key in style) {
+    for (var key in style) {
       // get the value from the computed dom node
-      const value = (0, _getStyleProperty.default)($elm, key); // true as selector
+      var value = (0, _getStyleProperty.default)($elm, key); // true as selector
 
       if (style[key] === true && !value) {
         match = false;

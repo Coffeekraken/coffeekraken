@@ -48,17 +48,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function validateObjectOutputString(validateObjectResultObj) {
-  const stringsArray = [];
-  stringsArray.push((0, _trimLines.default)(`
-  <underline><bold>Object validation</bold></underline>
-  - Name: <yellow>${validateObjectResultObj.name || 'unnamed'}</yellow>
-  - Errors: <red>${validateObjectResultObj.issues.length}</red>
-  - Propert${validateObjectResultObj.issues.length > 1 ? 'ies' : 'y'}: ${validateObjectResultObj.issues.map(v => {
-    return `<red>${v}</red>`;
-  }).join(', ')}`));
+  var stringsArray = [];
+  stringsArray.push((0, _trimLines.default)("\n  <underline><bold>Object validation</bold></underline>\n\n  - Name: <yellow>".concat(validateObjectResultObj.name || 'unnamed', "</yellow>\n  - Error").concat(validateObjectResultObj.issues.length > 1 ? 's' : '', ": <red>").concat(validateObjectResultObj.issues.length, "</red>\n  - Propert").concat(validateObjectResultObj.issues.length > 1 ? 'ies' : 'y', ": ").concat(validateObjectResultObj.issues.map(v => {
+    return "<red>".concat(v, "</red>");
+  }).join(', '))));
   validateObjectResultObj.issues.forEach(attrName => {
-    const attrIssueObj = validateObjectResultObj[attrName];
-    const string = (0, _validateValueOutputString.default)(attrIssueObj, {
+    var attrIssueObj = validateObjectResultObj[attrName];
+    var string = (0, _validateValueOutputString.default)(attrIssueObj, {
       name: attrName
     });
     stringsArray.push(string);

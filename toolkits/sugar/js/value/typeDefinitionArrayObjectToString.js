@@ -39,14 +39,14 @@ exports.default = typeDefinitionArrayObjectToString;
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function typeDefinitionArrayObjectToString(typeDefinitionArrayObj) {
-  const parts = [];
+  var parts = [];
   if (!Array.isArray(typeDefinitionArrayObj)) typeDefinitionArrayObj = [typeDefinitionArrayObj];
   typeDefinitionArrayObj.forEach(definitionObj => {
-    let part = definitionObj.type;
+    var part = definitionObj.type;
 
     if (definitionObj.of) {
-      const ofString = typeDefinitionArrayObjectToString(definitionObj.of);
-      part += `<${ofString}>`;
+      var ofString = typeDefinitionArrayObjectToString(definitionObj.of);
+      part += "<".concat(ofString, ">");
     }
 
     parts.push(part);

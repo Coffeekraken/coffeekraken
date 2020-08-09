@@ -22,8 +22,8 @@ exports.default = camelize;
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function camelize(text) {
-  let res = '';
-  const reg = /(?:^|[_-\s])(\w)/g;
+  var res = '';
+  var reg = /(?:^|[_-\s])(\w)/g;
   res = text.replace(reg, function (_, c) {
     return c ? c.toUpperCase() : '';
   });

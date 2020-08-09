@@ -23,8 +23,8 @@ exports.default = parseRgba;
  */
 function parseRgba(rgbaString) {
   rgbaString = rgbaString.toLowerCase();
-  let string = rgbaString.replace('rgba(', '').replace(')', '').replace(/\s/g, '');
-  let array = string.split(',');
+  var string = rgbaString.replace('rgba(', '').replace(')', '').replace(/\s/g, '');
+  var array = string.split(',');
   return {
     r: parseInt(array[0]),
     g: parseInt(array[1]),

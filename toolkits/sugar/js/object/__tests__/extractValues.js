@@ -3,7 +3,7 @@
 module.exports = __extractValues => {
   describe('sugar.js.object.extractValues', () => {
     it('Should extract correctly the values from an array ob objects', done => {
-      const array = [{
+      var array = [{
         hello: 'world',
         plop: 'wijwoeijfewf'
       }, {

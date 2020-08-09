@@ -39,8 +39,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function request(settings = {}) {
-  const request = new _SRequest.default(settings);
+function request(settings) {
+  if (settings === void 0) {
+    settings = {};
+  }
+
+  var request = new _SRequest.default(settings);
   return request.send();
 }
 

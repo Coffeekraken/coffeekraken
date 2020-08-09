@@ -32,9 +32,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-let isUserScrolling = false;
-let userScrollingTimeout;
-let isScrollingHappening = false;
+var isUserScrolling = false;
+var userScrollingTimeout;
+var isScrollingHappening = false;
 document.addEventListener('mousewheel', e => {
   if (!isScrollingHappening) return;
   isUserScrolling = true;
@@ -44,7 +44,27 @@ document.addEventListener('mousewheel', e => {
   }, 200);
 });
 
-function scrollTo(target, duration = 1000, easing = _easeInOutQuad.default, offset = 0, align = 'top', onFinish = null) {
+function scrollTo(target, duration, easing, offset, align, onFinish) {
+  if (duration === void 0) {
+    duration = 1000;
+  }
+
+  if (easing === void 0) {
+    easing = _easeInOutQuad.default;
+  }
+
+  if (offset === void 0) {
+    offset = 0;
+  }
+
+  if (align === void 0) {
+    align = 'top';
+  }
+
+  if (onFinish === void 0) {
+    onFinish = null;
+  }
+
   var docElem = document.documentElement; // to facilitate minification better
 
   var windowHeight = docElem.clientHeight;

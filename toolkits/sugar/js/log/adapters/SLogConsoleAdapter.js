@@ -17,6 +17,10 @@ var _fmtObj = _interopRequireDefault(require("fmt-obj"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -45,7 +49,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-let SLogConsoleAdapter = /*#__PURE__*/function () {
+var SLogConsoleAdapter = /*#__PURE__*/function () {
   /**
    * @name          _settings
    * @type          Object
@@ -68,7 +72,11 @@ let SLogConsoleAdapter = /*#__PURE__*/function () {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  function SLogConsoleAdapter(settings = {}) {
+  function SLogConsoleAdapter(settings) {
+    if (settings === void 0) {
+      settings = {};
+    }
+
     _classCallCheck(this, SLogConsoleAdapter);
 
     _defineProperty(this, "_settings", {});
@@ -106,46 +114,54 @@ let SLogConsoleAdapter = /*#__PURE__*/function () {
 
   _createClass(SLogConsoleAdapter, [{
     key: "log",
-    value: async function log(message, level) {
-      return new Promise((resolve, reject) => {
-        // init the console method to use
-        let consoleMethod = 'log'; // adapting the console method to use depending on the type
+    value: function () {
+      var _log = _asyncToGenerator(function* (message, level) {
+        return new Promise((resolve, reject) => {
+          // init the console method to use
+          var consoleMethod = 'log'; // adapting the console method to use depending on the type
 
-        switch (level) {
-          case 'trace':
-            consoleMethod = 'trace';
-            break;
+          switch (level) {
+            case 'trace':
+              consoleMethod = 'trace';
+              break;
 
-          case 'error':
-            consoleMethod = 'error';
-            break;
+            case 'error':
+              consoleMethod = 'error';
+              break;
 
-          case 'warn':
-            consoleMethod = 'warn';
-            break;
+            case 'warn':
+              consoleMethod = 'warn';
+              break;
 
-          case 'info':
-            consoleMethod = 'info';
-            break;
+            case 'info':
+              consoleMethod = 'info';
+              break;
 
-          case 'debug':
-            consoleMethod = 'debug';
-            break;
-        } // log the message
-
-
-        if (typeof message === 'string') {
-          ((global || window).nativeConsole || console)[consoleMethod]((0, _console.default)(message) + '⠀⠀⠀');
-        } else if (typeof message === 'object') {
-          ((global || window).nativeConsole || console)[consoleMethod]((0, _fmtObj.default)(message) + '⠀⠀⠀');
-        } else {
-          ((global || window).nativeConsole || console)[consoleMethod](message + '⠀⠀⠀');
-        } // resolve the promise
+            case 'debug':
+              consoleMethod = 'debug';
+              break;
+          } // log the message
 
 
-        resolve();
+          if (typeof message === 'string') {
+            ((global || window).nativeConsole || console)[consoleMethod]((0, _console.default)(message) + '⠀⠀⠀');
+          } else if (typeof message === 'object') {
+            ((global || window).nativeConsole || console)[consoleMethod]((0, _fmtObj.default)(message) + '⠀⠀⠀');
+          } else {
+            ((global || window).nativeConsole || console)[consoleMethod](message + '⠀⠀⠀');
+          } // resolve the promise
+
+
+          resolve();
+        });
       });
-    }
+
+      function log(_x, _x2) {
+        return _log.apply(this, arguments);
+      }
+
+      return log;
+    }()
   }]);
 
   return SLogConsoleAdapter;

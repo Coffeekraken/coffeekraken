@@ -21,7 +21,8 @@ module.exports = (__SInterface) => {
         title = true;
         constructor() {
           myClassInterfaceResult = MyInterface.apply(this, {
-            return: 'Object'
+            return: 'Object',
+            throw: false
           });
         }
       }
@@ -92,6 +93,7 @@ module.exports = (__SInterface) => {
         title = 'Hello world';
         constructor() {
           myClassInterfaceResult = MyInterface.apply(this, {
+            throw: false,
             return: 'Object'
           });
         }
@@ -155,7 +157,8 @@ module.exports = (__SInterface) => {
         title = 'Hello world';
         constructor() {
           myClassInterfaceResult = MyInterface.apply(this, {
-            return: 'Object'
+            return: 'Object',
+            throw: false
           });
         }
       }
@@ -252,7 +255,9 @@ module.exports = (__SInterface) => {
         };
         method1 = 'Youhou';
         constructor() {
-          myClassInterfaceResult = MyInterface.apply(this);
+          myClassInterfaceResult = MyInterface.apply(this, {
+            throw: false
+          });
         }
         method2() {}
 
@@ -262,7 +267,7 @@ module.exports = (__SInterface) => {
       new MyClass();
 
       expect(__stripAnsi(myClassInterfaceResult.replace(/\s/g, ''))).toBe(
-        'Objectvalidation-Name:MyClass-Errors:6-Properties:title,body,header,footer,medhod1,staticMethod2│title│-Receivedvalue:HelloWorld│-Theallowedvaluesare["Hello","World"]│body│-Receivedvalue:10│-ThevaluetypehastobeBooleanbutyoupassedInteger│header│-Receivedvalue:[true,"hello"]│-ThevaluetypehastobeArray<String>butyoupassedArray<Boolean|String>│footer│-Receivedvalue:{"coco":10}│-ThevaluetypehastobeObject<Boolean|Number>butyoupassedObject<Integer|Function>│medhod1│-Receivedvalue:undefined│-ThevaluetypehastobeFunctionbutyoupassedUndefined│-Thisvalueisrequired│staticMethod2│-Receivedvalue:null│-ThevaluetypehastobeFunctionbutyoupassedNull│-Thisvalueisrequired│-Thisvaluehastobeastaticone'
+        'Objectvalidation-Name:MyClass-Errors:6-Properties:title,body,header,footer,medhod1,staticMethod2│title││-Receivedvalue:HelloWorld│-Theallowedvaluesare["Hello","World"]│body││-Receivedvalue:10│-ThevaluetypehastobeBooleanbutyoupassedInteger│header││-Receivedvalue:[true,"hello"]│-ThevaluetypehastobeArray<String>butyoupassedArray<Boolean|String>│footer││-Receivedvalue:{"coco":10}│-ThevaluetypehastobeObject<Boolean|Number>butyoupassedObject<Integer|Function>│medhod1││-Receivedvalue:undefined│-ThevaluetypehastobeFunctionbutyoupassedUndefined│-Thisvalueisrequired│staticMethod2││-Receivedvalue:null│-ThevaluetypehastobeFunctionbutyoupassedNull│-Thisvalueisrequired│-Thisvaluehastobeastaticone'
       );
     });
   });

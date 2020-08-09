@@ -23,7 +23,11 @@ exports.default = isIe;
  * @return    {Boolean}    true if is ie, false if not
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function isIe(ua = navigator.userAgent) {
+function isIe(ua) {
+  if (ua === void 0) {
+    ua = navigator.userAgent;
+  }
+
   return ua.indexOf('MSIE') > -1;
 }
 

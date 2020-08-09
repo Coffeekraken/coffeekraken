@@ -9,6 +9,12 @@ var _uniqid = _interopRequireDefault(require("../string/uniqid"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 /**
  * @name                  proxy
  * @namespace           js.array
@@ -35,7 +41,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 function proxy(array) {
   if (array.__$proxied) return array;
-  const watchStack = {}; // mark that this array has already been proxied
+  var watchStack = {}; // mark that this array has already been proxied
 
   Object.defineProperty(array, '__$proxied', {
     value: true,
@@ -43,27 +49,31 @@ function proxy(array) {
     writable: false
   });
 
-  function _proxyMethod(name, ...args) {
-    const handlersStack = [];
+  function _proxyMethod(name) {
+    for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      args[_key - 1] = arguments[_key];
+    }
+
+    var handlersStack = [];
     Object.keys(watchStack).forEach(watchId => {
-      const watch = watchStack[watchId];
+      var watch = watchStack[watchId];
       if (watch.methods.indexOf(name) === -1) return;
       handlersStack.push({
         handlerFn: watch.handlerFn,
         watchObj: {
           oldValue: [...array],
-          action: `${name}`,
-          fullAction: `Array.${name}`,
+          action: "".concat(name),
+          fullAction: "Array.".concat(name),
           args
         }
       });
     });
-    const returnValue = Array.prototype[name].call(array, ...args);
+    var returnValue = Array.prototype[name].call(array, ...args);
     handlersStack.forEach(handlerObj => {
-      handlerObj.watchObj = { ...handlerObj.watchObj,
+      handlerObj.watchObj = _objectSpread(_objectSpread({}, handlerObj.watchObj), {}, {
         value: array,
         returnedValue: returnValue
-      };
+      });
       handlerObj.handlerFn(handlerObj.watchObj);
     });
     return returnValue;
@@ -71,13 +81,17 @@ function proxy(array) {
 
 
   Object.getOwnPropertyNames(Array.prototype).forEach(methodName => {
-    const unProxyMethods = ['length', 'constructor'];
+    var unProxyMethods = ['length', 'constructor'];
     if (unProxyMethods.indexOf(methodName) !== -1) return;
     Object.defineProperty(array, methodName, {
       writable: false,
       configurable: false,
       enumerable: false,
-      value: (...args) => {
+      value: function value() {
+        for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+          args[_key2] = arguments[_key2];
+        }
+
         return _proxyMethod(methodName, ...args);
       }
     });
@@ -112,7 +126,7 @@ function proxy(array) {
     enumerable: false,
     value: (methods, handlerFn) => {
       // create a watch id that we send back to the caller
-      const watchId = (0, _uniqid.default)(); // append this watch process
+      var watchId = (0, _uniqid.default)(); // append this watch process
 
       watchStack[watchId] = {
         methods,

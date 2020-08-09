@@ -57,16 +57,20 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @since       2.0.0
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function typeOf(value, settings = {}) {
+function typeOf(value, settings) {
+  if (settings === void 0) {
+    settings = {};
+  }
+
   settings = (0, _deepMerge.default)({
     of: false,
     format: 'String',
     customClass: true
   }, settings); // get the real type
 
-  let type,
+  var type,
       resultObj = {};
-  if (Array.isArray(value)) type = 'Array';else if (value === null) type = 'Null';else if (value === undefined) type = 'Undefined';else if (typeof value === 'string') type = 'String';else if ((0, _integer.default)(value)) type = 'Integer';else if (typeof value === 'number') type = 'Number';else if (typeof value === 'boolean') type = 'Boolean';else if (settings.customClass && (0, _class.default)(value) && value.name) {
+  if (Array.isArray(value)) type = 'Array';else if (value === null) type = 'Null';else if (value === undefined) type = 'Undefined';else if (typeof value === 'string') type = 'String';else if ((0, _integer.default)(value)) type = 'Integer';else if (typeof value === 'number') type = 'Number';else if (typeof value === 'boolean') type = 'Boolean';else if (value instanceof RegExp) type = 'RegExp';else if (settings.customClass && (0, _class.default)(value) && value.name) {
     type = (0, _upperFirst.default)(value.name);
   } else if (settings.customClass && value.constructor && value.constructor.name) {
     type = (0, _upperFirst.default)(value.constructor.name);
@@ -74,14 +78,14 @@ function typeOf(value, settings = {}) {
 
   resultObj.type = type; // check if need to get the "child" types
 
-  const avoidTypes = ['Null', 'Undefined', 'String', 'Integer', 'Number', 'Boolean', 'Unknown'];
+  var avoidTypes = ['Null', 'Undefined', 'String', 'Integer', 'Number', 'Boolean', 'Unknown'];
 
   if (settings.of && avoidTypes.indexOf(type) === -1) {
-    const loopOn = Array.isArray(value) ? [...value.keys()] : Object.keys(value);
-    const receivedTypes = [];
+    var loopOn = Array.isArray(value) ? [...value.keys()] : Object.keys(value);
+    var receivedTypes = [];
     loopOn.forEach(valueIndex => {
-      const valueToCheck = value[valueIndex];
-      const typeObj = typeOf(valueToCheck, {
+      var valueToCheck = value[valueIndex];
+      var typeObj = typeOf(valueToCheck, {
         format: 'Object',
         of: false,
         customClass: settings.customClass
@@ -103,7 +107,7 @@ function typeOf(value, settings = {}) {
 
     case 'string':
     default:
-      return `${resultObj.type}${resultObj.of ? `<${resultObj.of.join('|')}>` : ''}`;
+      return "".concat(resultObj.type).concat(resultObj.of ? "<".concat(resultObj.of.join('|'), ">") : '');
       break;
   }
 }

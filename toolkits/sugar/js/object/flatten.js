@@ -27,16 +27,24 @@ exports.default = flatten;
  *
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function flatten(object, separation = '.', flattenArrays = false) {
-  let toReturn = {};
+function flatten(object, separation, flattenArrays) {
+  if (separation === void 0) {
+    separation = '.';
+  }
 
-  for (let i in object) {
+  if (flattenArrays === void 0) {
+    flattenArrays = false;
+  }
+
+  var toReturn = {};
+
+  for (var i in object) {
     if (!object.hasOwnProperty(i)) continue;
 
     if (Array.isArray(object[i]) && flattenArrays || (!Array.isArray(object[i]) && typeof object[i]) == 'object') {
-      let flatObject = flatten(object[i], separation, flattenArrays);
+      var flatObject = flatten(object[i], separation, flattenArrays);
 
-      for (let x in flatObject) {
+      for (var x in flatObject) {
         if (!flatObject.hasOwnProperty(x)) continue;
         toReturn[i + separation + x] = flatObject[x];
       }

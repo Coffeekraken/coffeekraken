@@ -32,7 +32,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function getHtmlhtmlClassFromHtmlClass(htmlClass) {
   if (!htmlClass) return false;
 
-  for (let key in _htmlTagToHtmlClassMap.default) {
+  for (var key in _htmlTagToHtmlClassMap.default) {
     if (_htmlTagToHtmlClassMap.default[key] === htmlClass) return key;
   }
 

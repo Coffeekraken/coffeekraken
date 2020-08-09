@@ -26,7 +26,7 @@ _chalk.default.level = 3;
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-const tagsMap = {
+var tagsMap = {
   black: (tag, content) => _chalk.default.black(content),
   red: (tag, content) => _chalk.default.red(content),
   green: (tag, content) => _chalk.default.green(content),
@@ -55,10 +55,10 @@ const tagsMap = {
     return _chalk.default.bold(content) + '\n';
   },
   iWarn: (tag, content) => parseHtml('<yellow>⚠</yellow> '),
-  iCheck: (tag, content) => parseHtml(`<green>✓</green> `),
-  iCross: (tag, content) => parseHtml(`<red>✖</red> `),
-  iClose: (tag, content) => `✖`,
-  iStart: (tag, content) => parseHtml(`<green>‣</green> `),
+  iCheck: (tag, content) => parseHtml("<green>\u2713</green> "),
+  iCross: (tag, content) => parseHtml("<red>\u2716</red> "),
+  iClose: (tag, content) => "\u2716",
+  iStart: (tag, content) => parseHtml("<green>\u2023</green> "),
   date: (tag, content) => new Date().getDate().toString().padStart('0', 2) + '-' + (new Date().getMonth() + 1).toString().padStart('0', 2) + '-' + new Date().getFullYear().toString().padStart('0', 2),
   time: (tag, content) => new Date().getHours().toString().padStart('0', 2) + ':' + new Date().getMinutes().toString().padStart('0', 2) + ':' + new Date().getMinutes().toString().padStart('0', 2),
   day: (tag, content) => new Date().getDate().toString().padStart('0', 2),
@@ -78,7 +78,7 @@ const tagsMap = {
 exports.tagsMap = tagsMap;
 
 function parseHtml(message) {
-  let isArray = false;
+  var isArray = false;
 
   if (Array.isArray(message)) {
     isArray = true;

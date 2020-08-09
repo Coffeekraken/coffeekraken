@@ -34,15 +34,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 function resolveTokens(object) {
   // proxy the object
-  const proxiedObject = (0, _deepProxy.default)(object, getObj => {
+  var proxiedObject = (0, _deepProxy.default)(object, getObj => {
     // get the raw value
-    const rawValue = (0, _get.default)(getObj.target, getObj.key); // check if it's a string
+    var rawValue = (0, _get.default)(getObj.target, getObj.key); // check if it's a string
 
     if (typeof rawValue !== 'string') return rawValue; // check if we have some tokens
 
-    const reg = /\{([a-zA-Z0-9\.-_]+)\}/g;
-    const tokens = rawValue.match(reg);
-    let finalValue = rawValue;
+    var reg = /\{([a-zA-Z0-9\.-_]+)\}/g;
+    var tokens = rawValue.match(reg);
+    var finalValue = rawValue;
     if (!tokens) return rawValue; // console.log(tokens);
 
     tokens.forEach(token => {

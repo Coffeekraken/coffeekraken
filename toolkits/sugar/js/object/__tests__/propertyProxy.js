@@ -3,7 +3,7 @@
 module.exports = __propertyProxy => {
   describe('sugar.js.object.propertyProxy', () => {
     it('Should apply the property proxy correctly and detect the updated', done => {
-      const obj1 = {
+      var obj1 = {
         hello: {
           world: 'hello world'
         },
@@ -22,7 +22,7 @@ module.exports = __propertyProxy => {
       });
 
       obj1.hello.world = 'lorem ipsum';
-      const val = obj1.hello.world;
+      var val = obj1.hello.world;
       expect(val).toBe('get set lorem ipsum');
       done();
     });

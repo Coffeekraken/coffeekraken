@@ -45,7 +45,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function toString(value, settings = {}) {
+function toString(value, settings) {
+  if (settings === void 0) {
+    settings = {};
+  }
+
   settings = (0, _deepMerge.default)({
     beautify: false
   }, settings);
@@ -69,7 +73,7 @@ function toString(value, settings = {}) {
   } else if (value === undefined) {
     return 'undefined';
   } else {
-    let returnVal;
+    var returnVal;
 
     try {
       returnVal = JSON.stringify(value, null, settings.beautify ? 4 : 0);

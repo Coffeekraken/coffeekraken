@@ -13,7 +13,7 @@ var _parse = _interopRequireDefault(require("../string/parse"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const __encryptedMessages = {};
+var __encryptedMessages = {};
 /**
  * @name            sha512
  * @namespace           js.crypt
@@ -36,9 +36,9 @@ var _default = {
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  encrypt: function (message) {
+  encrypt: function encrypt(message) {
     if (typeof message !== 'string') message = (0, _toString.default)(message);
-    const string = (0, _sha.default)(message).toString();
+    var string = (0, _sha.default)(message).toString();
     __encryptedMessages[string] = message;
     return string;
   },
@@ -54,13 +54,13 @@ var _default = {
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  decrypt: function (message) {
+  decrypt: function decrypt(message) {
     if (!__encryptedMessages[message]) {
-      console.warn(`The message "${message}" cannot be decrypted...`);
+      console.warn("The message \"".concat(message, "\" cannot be decrypted..."));
       return;
     }
 
-    const string = __encryptedMessages[message];
+    var string = __encryptedMessages[message];
     delete __encryptedMessages[message];
     return (0, _parse.default)(string);
   }

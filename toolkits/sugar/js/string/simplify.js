@@ -31,7 +31,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @since     2.0.0
  * @author    João Filipe Ventura Coelho <joaoventura93@outlook.com>
  */
-function simplify(string, settings = {}) {
+function simplify(string, settings) {
+  if (settings === void 0) {
+    settings = {};
+  }
+
   settings = (0, _deepMerge.default)({
     specialChars: true,
     lowerCase: true,

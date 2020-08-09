@@ -51,7 +51,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-let SGradientSvgFilter = /*#__PURE__*/function (_SSvgFilter) {
+var SGradientSvgFilter = /*#__PURE__*/function (_SSvgFilter) {
   _inherits(SGradientSvgFilter, _SSvgFilter);
 
   var _super = _createSuper(SGradientSvgFilter);
@@ -69,10 +69,7 @@ let SGradientSvgFilter = /*#__PURE__*/function (_SSvgFilter) {
 
     _classCallCheck(this, SGradientSvgFilter);
 
-    _this = _super.call(this, `
-			<feImage xlink:href="" x="0" y="0" result="IMAGEFILL" preserveAspectRatio="none" />
-			<feComposite operator="in" in="IMAGEFILL" in2="SourceAlpha" />
-		`);
+    _this = _super.call(this, "\n\t\t\t<feImage xlink:href=\"\" x=\"0\" y=\"0\" result=\"IMAGEFILL\" preserveAspectRatio=\"none\" />\n\t\t\t<feComposite operator=\"in\" in=\"IMAGEFILL\" in2=\"SourceAlpha\" />\n\t\t");
     _this._image = _this.filter.querySelector('feImage');
     _this._tile = _this.filter.querySelector('feTile');
     return _this;
@@ -92,20 +89,24 @@ let SGradientSvgFilter = /*#__PURE__*/function (_SSvgFilter) {
 
   _createClass(SGradientSvgFilter, [{
     key: "linear",
-    value: function linear(colors, settings = {}) {
-      let width = settings.width || 512,
+    value: function linear(colors, settings) {
+      if (settings === void 0) {
+        settings = {};
+      }
+
+      var width = settings.width || 512,
           height = settings.height || 512,
           x0 = settings.x0 || 0,
           x1 = settings.x1 || width,
           y0 = settings.y0 || 0,
           y1 = settings.y1 || 0;
-      let can = document.createElement('canvas');
+      var can = document.createElement('canvas');
       can.setAttribute('width', width);
       can.setAttribute('height', height);
-      let ctx = can.getContext('2d'),
+      var ctx = can.getContext('2d'),
           grad = ctx.createLinearGradient(x0, y0, x1, y1); // loop on each colors
 
-      let i = 0;
+      var i = 0;
       colors.forEach(color => {
         grad.addColorStop(1 / (colors.length - 1) * i, color);
         i++;
@@ -136,8 +137,12 @@ let SGradientSvgFilter = /*#__PURE__*/function (_SSvgFilter) {
 
   }, {
     key: "radial",
-    value: function radial(colors, settings = {}) {
-      let width = settings.width || 512,
+    value: function radial(colors, settings) {
+      if (settings === void 0) {
+        settings = {};
+      }
+
+      var width = settings.width || 512,
           height = settings.height || 512,
           x0 = settings.x0 || width / 2,
           x1 = settings.x1 || width / 2,
@@ -145,13 +150,13 @@ let SGradientSvgFilter = /*#__PURE__*/function (_SSvgFilter) {
           y0 = settings.y0 || height / 2,
           y1 = settings.y1 || height / 2,
           r1 = settings.r1 || width;
-      let can = document.createElement('canvas');
+      var can = document.createElement('canvas');
       can.setAttribute('width', width);
       can.setAttribute('height', height);
-      let ctx = can.getContext('2d'),
+      var ctx = can.getContext('2d'),
           grad = ctx.createRadialGradient(x0, y0, r0, x1, y1, r1); // loop on each colors
 
-      let i = 0;
+      var i = 0;
       colors.forEach(color => {
         grad.addColorStop(1 / (colors.length - 1) * i, color);
         i++;
@@ -233,7 +238,7 @@ let SGradientSvgFilter = /*#__PURE__*/function (_SSvgFilter) {
   }, {
     key: "_setImageSize",
     value: function _setImageSize() {
-      let width = this.elms[0].offsetWidth,
+      var width = this.elms[0].offsetWidth,
           height = this.elms[0].offsetHeight;
 
       if (width >= height) {

@@ -5,9 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = param;
 
-const __parse = require('../../string/parse');
+var __parse = require('../../string/parse');
 
-const __upperFirst = require('../../string/upperFirst');
+var __upperFirst = require('../../string/upperFirst');
 /**
  * @name              param
  * @namespace           js.docblock.tags
@@ -25,16 +25,16 @@ const __upperFirst = require('../../string/upperFirst');
 
 function param(data) {
   if (!Array.isArray(data)) data = [data];
-  const res = {};
+  var res = {};
   data.forEach(param => {
     if (typeof param !== 'object' || !param.value || typeof param.value !== 'string') return;
-    const parts = param.value.split(/\s{2,20000}/).map(l => l.trim());
-    let type = parts && parts[0] ? __upperFirst(parts[0].replace('{', '').replace('}', '')) : null;
-    const variable = parts && parts[1] ? parts[1] : null;
-    const description = parts && parts[2] ? parts[2] : null;
-    let name = variable;
-    let defaultValue = undefined;
-    let variableMatch = null;
+    var parts = param.value.split(/\s{2,20000}/).map(l => l.trim());
+    var type = parts && parts[0] ? __upperFirst(parts[0].replace('{', '').replace('}', '')) : null;
+    var variable = parts && parts[1] ? parts[1] : null;
+    var description = parts && parts[2] ? parts[2] : null;
+    var name = variable;
+    var defaultValue = undefined;
+    var variableMatch = null;
     if (variable && typeof variable === 'string') variableMatch = variable.match(/^\[(.*)\]$/);
 
     if (type && type.includes('|')) {
@@ -42,7 +42,7 @@ function param(data) {
     }
 
     if (variableMatch) {
-      const variableParts = variableMatch[1].split('=');
+      var variableParts = variableMatch[1].split('=');
 
       if (variableParts.length === 2) {
         name = variableParts[0].trim();

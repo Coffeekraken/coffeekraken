@@ -3,7 +3,7 @@
 module.exports = __parseTypeDefinitiSnString => {
   describe('sugar.js.validation.utils.parseTypeDefinitiSnString', () => {
     it('Should parse these arguments types definitions correctly', () => {
-      const res1 = __parseTypeDefinitiSnString('Array<String>|Object|Array<Boolean>');
+      var res1 = __parseTypeDefinitiSnString('Array<String>|Object|Array<Boolean>');
 
       expect(res1).toEqual([{
         type: 'Array',
@@ -22,7 +22,7 @@ module.exports = __parseTypeDefinitiSnString => {
         }]
       }]);
 
-      const res2 = __parseTypeDefinitiSnString('Array|Object|Array<Boolean|Number>');
+      var res2 = __parseTypeDefinitiSnString('Array|Object|Array<Boolean|Number>');
 
       expect(res2).toEqual([{
         type: 'Array',

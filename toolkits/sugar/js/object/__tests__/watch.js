@@ -1,7 +1,7 @@
 "use strict";
 
 module.exports = __watch => {
-  let obj = {
+  var obj = {
     a: 'hello',
     b: {
       bb: 'world'
@@ -18,10 +18,10 @@ module.exports = __watch => {
       }
     }
   };
-  let doneAssign, doneUpdating, doneUpdatingDeep, doneDeleting, doneAddIntoArray, doneGlobAction, doneGlobPattern;
-  let hasUnwatchedObjectBeenWatched = false;
+  var doneAssign, doneUpdating, doneUpdatingDeep, doneDeleting, doneAddIntoArray, doneGlobAction, doneGlobPattern;
+  var hasUnwatchedObjectBeenWatched = false;
 
-  const watchedObj = __watch(obj);
+  var watchedObj = __watch(obj);
 
   watchedObj.on('coco:set', update => {
     doneAssign();
@@ -88,7 +88,7 @@ module.exports = __watch => {
     watchedObj.glob.something.other = 'plop';
   });
   test('Unwatch the watchedObject', done => {
-    const obj = watchedObj.unwatch();
+    var obj = watchedObj.unwatch();
     obj.b.plop = 'yop';
     setTimeout(() => {
       expect(hasUnwatchedObjectBeenWatched).toBe(false);

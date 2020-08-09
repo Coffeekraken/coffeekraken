@@ -30,13 +30,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function replaceTokens(string, argsObj, settings = {}) {
+function replaceTokens(string, argsObj, settings) {
+  if (settings === void 0) {
+    settings = {};
+  }
+
   settings = (0, _deepMerge.default)({
     regexp: '\\[([a-zA-Z0-9-_]+)\\]',
     stripUndefined: true
   }, settings);
-  let tokens;
-  const reg = new RegExp(settings.regexp, 'g');
+  var tokens;
+  var reg = new RegExp(settings.regexp, 'g');
 
   while (tokens = reg.exec(string)) {
     if (argsObj[tokens[1]] === undefined && !settings.stripUndefined) return;

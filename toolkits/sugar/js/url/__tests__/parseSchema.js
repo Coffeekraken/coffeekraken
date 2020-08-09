@@ -3,7 +3,7 @@
 module.exports = __parseSchema => {
   describe('sugar.js.url.parseSchema', () => {
     it('Should correctly parse the passed url using the passed schema', () => {
-      const res = __parseSchema('https://github.com/myApp/master/3', '{project:string}/{?branch:string}/{?idx:number}');
+      var res = __parseSchema('https://github.com/myApp/master/3', '{project:string}/{?branch:string}/{?idx:number}');
 
       expect(res).toEqual({
         match: true,

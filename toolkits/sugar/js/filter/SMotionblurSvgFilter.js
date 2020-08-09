@@ -58,7 +58,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-let SMotionblurSvgFilter = /*#__PURE__*/function (_SSvgFilter) {
+var SMotionblurSvgFilter = /*#__PURE__*/function (_SSvgFilter) {
   _inherits(SMotionblurSvgFilter, _SSvgFilter);
 
   var _super = _createSuper(SMotionblurSvgFilter);
@@ -101,14 +101,16 @@ let SMotionblurSvgFilter = /*#__PURE__*/function (_SSvgFilter) {
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  function SMotionblurSvgFilter(amount = 0.5) {
+  function SMotionblurSvgFilter(amount) {
     var _this;
+
+    if (amount === void 0) {
+      amount = 0.5;
+    }
 
     _classCallCheck(this, SMotionblurSvgFilter);
 
-    _this = _super.call(this, `
-			<feGaussianBlur in="SourceGraphic" stdDeviation="0,0" />
-		`); // settings
+    _this = _super.call(this, "\n\t\t\t<feGaussianBlur in=\"SourceGraphic\" stdDeviation=\"0,0\" />\n\t\t"); // settings
 
     _defineProperty(_assertThisInitialized(_this), "amount", 0.5);
 
@@ -243,7 +245,7 @@ let SMotionblurSvgFilter = /*#__PURE__*/function (_SSvgFilter) {
       // animation or move is finished
       if (!this._isMoving) return; // set the motion blur and get the moving difference
 
-      let diff = this._setMotionBlur(); // recusrive call to apply the blur with requestAnimationFrame for performances
+      var diff = this._setMotionBlur(); // recusrive call to apply the blur with requestAnimationFrame for performances
 
 
       this._animationFrame = requestAnimationFrame(() => {
@@ -264,8 +266,8 @@ let SMotionblurSvgFilter = /*#__PURE__*/function (_SSvgFilter) {
     key: "_setMotionBlur",
     value: function _setMotionBlur() {
       this._currentPos = (0, _offset.default)(this.elms[0]);
-      let xDiff = Math.abs(this._currentPos.left - this._lastPos.left) * this.amount;
-      let yDiff = Math.abs(this._currentPos.top - this._lastPos.top) * this.amount; // set the blur
+      var xDiff = Math.abs(this._currentPos.left - this._lastPos.left) * this.amount;
+      var yDiff = Math.abs(this._currentPos.top - this._lastPos.top) * this.amount; // set the blur
 
       this._blur.setAttribute('stdDeviation', xDiff + ',' + yDiff); // update lastPos
 

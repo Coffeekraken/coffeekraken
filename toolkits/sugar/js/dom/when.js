@@ -5,9 +5,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = when;
 
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 /**
  * @name                              when
@@ -45,51 +49,61 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function when($node, state, settings = {}) {
-  return new Promise(async (resolve, reject) => {
-    // check the state to detect
-    let importPromise, args;
+function when($node, state, settings) {
+  if (settings === void 0) {
+    settings = {};
+  }
 
-    switch (state) {
-      case 'attribute':
-        importPromise = Promise.resolve().then(() => _interopRequireWildcard(require('./whenAttribute')));
-        args = [$node, settings.attribute, settings.checkFn];
-        break;
+  return new Promise( /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator(function* (resolve, reject) {
+      // check the state to detect
+      var importPromise, args;
 
-      case 'inViewport':
-        importPromise = Promise.resolve().then(() => _interopRequireWildcard(require('./whenInViewport')));
-        args = [$node, settings.offset];
-        break;
+      switch (state) {
+        case 'attribute':
+          importPromise = Promise.resolve().then(() => _interopRequireWildcard(require('./whenAttribute')));
+          args = [$node, settings.attribute, settings.checkFn];
+          break;
 
-      case 'outOfViewport':
-        importPromise = Promise.resolve().then(() => _interopRequireWildcard(require('./whenOutOfViewport')));
-        args = [$node, settings.offset];
-        break;
+        case 'inViewport':
+          importPromise = Promise.resolve().then(() => _interopRequireWildcard(require('./whenInViewport')));
+          args = [$node, settings.offset];
+          break;
 
-      case 'transitionEnd':
-        importPromise = Promise.resolve().then(() => _interopRequireWildcard(require('./whenTransitionEnd')));
-        args = [$node, settings.callback];
-        break;
+        case 'outOfViewport':
+          importPromise = Promise.resolve().then(() => _interopRequireWildcard(require('./whenOutOfViewport')));
+          args = [$node, settings.offset];
+          break;
 
-      case 'visible':
-        importPromise = Promise.resolve().then(() => _interopRequireWildcard(require('./whenVisible')));
-        args = [$node, settings.callback];
-        break;
+        case 'transitionEnd':
+          importPromise = Promise.resolve().then(() => _interopRequireWildcard(require('./whenTransitionEnd')));
+          args = [$node, settings.callback];
+          break;
 
-      default:
+        case 'visible':
+          importPromise = Promise.resolve().then(() => _interopRequireWildcard(require('./whenVisible')));
+          args = [$node, settings.callback];
+          break;
+
+        default:
+          resolve($node);
+          return;
+          break;
+      } // wait until the module is loaded
+
+
+      var module = yield importPromise; // call the when... function
+
+      module.default.apply(null, args).then(() => {
+        // resolve the promise
         resolve($node);
-        return;
-        break;
-    } // wait until the module is loaded
-
-
-    const module = await importPromise; // call the when... function
-
-    module.default.apply(null, args).then(() => {
-      // resolve the promise
-      resolve($node);
+      });
     });
-  });
+
+    return function (_x, _x2) {
+      return _ref.apply(this, arguments);
+    };
+  }());
 }
 
 module.exports = exports.default;

@@ -3,7 +3,7 @@
 module.exports = __buildCommandLine => {
   describe('sugar.js.cli.buildCommandLine', () => {
     it('Should build the command line correctly', done => {
-      const command = __buildCommandLine('php [hostname]:[port] [rootDir] [arguments]', {
+      var command = __buildCommandLine('php [hostname]:[port] [rootDir] [arguments]', {
         hostname: {
           type: 'String',
           description: 'Server hostname',

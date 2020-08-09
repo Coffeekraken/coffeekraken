@@ -22,7 +22,11 @@ exports.default = pad;
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function pad(number, width, character = '0') {
+function pad(number, width, character) {
+  if (character === void 0) {
+    character = '0';
+  }
+
   number = number + '';
   return number.length >= width ? number : new Array(width - number.length + 1).join(character) + number;
 }

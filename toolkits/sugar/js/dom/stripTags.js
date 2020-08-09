@@ -22,7 +22,7 @@ exports.default = stripTags;
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function stripTags(html) {
-  const tmp = document.createElement('div');
+  var tmp = document.createElement('div');
   tmp.innerHTML = html;
   return tmp.textContent || tmp.innerText || '';
 }

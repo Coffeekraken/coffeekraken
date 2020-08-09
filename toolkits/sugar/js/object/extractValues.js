@@ -31,7 +31,7 @@ exports.default = extractValues;
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function extractValues(arrayOfObjects, keyName) {
-  const finalArray = [];
+  var finalArray = [];
   arrayOfObjects.forEach(object => {
     if (object[keyName] === undefined) return;
     finalArray.push(object[keyName]);

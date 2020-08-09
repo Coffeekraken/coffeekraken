@@ -37,7 +37,11 @@ var _default = {
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  encrypt: function (message, key = 'coffeekraken.sugar.crypt.aes') {
+  encrypt: function encrypt(message, key) {
+    if (key === void 0) {
+      key = 'coffeekraken.sugar.crypt.aes';
+    }
+
     if (typeof message !== 'string') message = (0, _toString.default)(message);
     return _aes.default.encrypt(message, key).toString();
   },
@@ -54,8 +58,12 @@ var _default = {
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  decrypt: function (message, key = 'coffeekraken.sugar.crypt.aes') {
-    let value = _aes.default.decrypt(message, key).toString(_encUtf.default);
+  decrypt: function decrypt(message, key) {
+    if (key === void 0) {
+      key = 'coffeekraken.sugar.crypt.aes';
+    }
+
+    var value = _aes.default.decrypt(message, key).toString(_encUtf.default);
 
     return (0, _parse.default)(value);
   }

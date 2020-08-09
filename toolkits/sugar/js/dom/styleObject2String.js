@@ -31,16 +31,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 function styleObject2String(styleObj) {
   // process the style object
-  let propertiesArray = [];
+  var propertiesArray = [];
 
-  for (let key in styleObj) {
-    const value = styleObj[key]; // if the value is ''
+  for (var key in styleObj) {
+    var value = styleObj[key]; // if the value is ''
     // mean that we need to get rid of
 
     if (value === undefined || value === '') {
       delete styleObj[key];
     } else {
-      propertiesArray.push(`${(0, _uncamelize.default)(key)}:${value};`);
+      propertiesArray.push("".concat((0, _uncamelize.default)(key), ":").concat(value, ";"));
     }
   } // return the css text
 

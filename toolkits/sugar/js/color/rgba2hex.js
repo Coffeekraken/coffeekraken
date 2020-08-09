@@ -24,7 +24,11 @@ exports.default = rgba2hex;
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function rgba2hex(r, g, b, a = 1) {
+function rgba2hex(r, g, b, a) {
+  if (a === void 0) {
+    a = 1;
+  }
+
   if (typeof r === 'object') {
     g = r.g;
     b = r.b;
@@ -32,7 +36,7 @@ function rgba2hex(r, g, b, a = 1) {
     r = r.r;
   }
 
-  let alpha = '';
+  var alpha = '';
 
   if (a != 1 && a != 100) {
     if (a < 1) {

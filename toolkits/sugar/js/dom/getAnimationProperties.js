@@ -49,24 +49,24 @@ function splitIfNeeded(what, separator) {
 
 function getAnimationProperties(elm) {
   // get the animation properties
-  const name = (0, _getStyleProperty.default)(elm, 'animation-name') || '';
-  const duration = (0, _getStyleProperty.default)(elm, 'animation-duration') || '0s';
-  const timingFunction = (0, _getStyleProperty.default)(elm, 'animation-timing-function') || 'linear';
-  const delay = (0, _getStyleProperty.default)(elm, 'animation-delay') || '0s';
-  const iterationCount = (0, _getStyleProperty.default)(elm, 'animation-iteration-count') || 1;
-  const direction = (0, _getStyleProperty.default)(elm, 'animation-direction') || 'normal'; // return the animation object
+  var name = (0, _getStyleProperty.default)(elm, 'animation-name') || '';
+  var duration = (0, _getStyleProperty.default)(elm, 'animation-duration') || '0s';
+  var timingFunction = (0, _getStyleProperty.default)(elm, 'animation-timing-function') || 'linear';
+  var delay = (0, _getStyleProperty.default)(elm, 'animation-delay') || '0s';
+  var iterationCount = (0, _getStyleProperty.default)(elm, 'animation-iteration-count') || 1;
+  var direction = (0, _getStyleProperty.default)(elm, 'animation-direction') || 'normal'; // return the animation object
 
-  const props = {
+  var props = {
     name: name.split(','),
     duration: duration.split(',').map(value => (0, _convert.default)(value, 'ms')),
-    delay: `${delay}`.split(',').map(value => (0, _convert.default)(value, 'ms')),
+    delay: "".concat(delay).split(',').map(value => (0, _convert.default)(value, 'ms')),
     timingFunction: timingFunction.split(','),
-    iterationCount: `${iterationCount}`.split(','),
+    iterationCount: "".concat(iterationCount).split(','),
     direction: direction.split(',')
   };
-  let totalDuration = 0;
-  let i = 0;
-  const delays = [0].concat(props.delay);
+  var totalDuration = 0;
+  var i = 0;
+  var delays = [0].concat(props.delay);
   [0].concat(props.duration).forEach(val => {
     if (val + delays[i] > totalDuration) {
       totalDuration = val + delays[i];

@@ -24,7 +24,11 @@ exports.default = hsv2rgba;
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function hsv2rgba(h, s, v, a = 1) {
+function hsv2rgba(h, s, v, a) {
+  if (a === void 0) {
+    a = 1;
+  }
+
   if (typeof h === 'object') {
     s = h.s;
     v = h.v;

@@ -22,8 +22,12 @@ exports.default = injectStyle;
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function injectStyle(style, node = document.head) {
-  const $tag = document.createElement('style');
+function injectStyle(style, node) {
+  if (node === void 0) {
+    node = document.head;
+  }
+
+  var $tag = document.createElement('style');
   $tag.type = 'text/css';
   $tag.innerHTML = style;
   node.appendChild($tag);

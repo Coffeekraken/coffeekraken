@@ -78,7 +78,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * @since     2.0.0
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-let SColor = /*#__PURE__*/function () {
+var SColor = /*#__PURE__*/function () {
   /**
    * @name                colors
    * @type                Object
@@ -166,7 +166,11 @@ let SColor = /*#__PURE__*/function () {
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  function SColor(color, settings = {}) {
+  function SColor(color, settings) {
+    if (settings === void 0) {
+      settings = {};
+    }
+
     _classCallCheck(this, SColor);
 
     _defineProperty(this, "_originalSColor", null);
@@ -409,11 +413,15 @@ let SColor = /*#__PURE__*/function () {
 
   }, {
     key: "desaturate",
-    value: function desaturate(amount, returnNewInstance = this._settings.returnNewInstance) {
+    value: function desaturate(amount, returnNewInstance) {
+      if (returnNewInstance === void 0) {
+        returnNewInstance = this._settings.returnNewInstance;
+      }
+
       amount = parseInt(amount);
 
       if (returnNewInstance) {
-        const n = new SColor(this.toHex());
+        var n = new SColor(this.toHex());
         n.s -= amount;
         return n;
       }
@@ -439,11 +447,15 @@ let SColor = /*#__PURE__*/function () {
 
   }, {
     key: "saturate",
-    value: function saturate(amount, returnNewInstance = this._settings.returnNewInstance) {
+    value: function saturate(amount, returnNewInstance) {
+      if (returnNewInstance === void 0) {
+        returnNewInstance = this._settings.returnNewInstance;
+      }
+
       amount = parseInt(amount);
 
       if (returnNewInstance) {
-        const n = new SColor(this.toHex());
+        var n = new SColor(this.toHex());
         n.s += amount;
         return n;
       }
@@ -468,9 +480,13 @@ let SColor = /*#__PURE__*/function () {
 
   }, {
     key: "grayscale",
-    value: function grayscale(returnNewInstance = this._settings.returnNewInstance) {
+    value: function grayscale(returnNewInstance) {
+      if (returnNewInstance === void 0) {
+        returnNewInstance = this._settings.returnNewInstance;
+      }
+
       if (returnNewInstance) {
-        const n = new SColor(this.toHex());
+        var n = new SColor(this.toHex());
         n.s = 0;
         return n;
       }
@@ -496,17 +512,21 @@ let SColor = /*#__PURE__*/function () {
 
   }, {
     key: "spin",
-    value: function spin(amount, returnNewInstance = this._settings.returnNewInstance) {
+    value: function spin(amount, returnNewInstance) {
+      if (returnNewInstance === void 0) {
+        returnNewInstance = this._settings.returnNewInstance;
+      }
+
       amount = parseInt(amount);
-      let hue = this.h;
-      let newHue = hue + amount;
+      var hue = this.h;
+      var newHue = hue + amount;
 
       if (newHue > 360) {
         newHue -= 360;
       }
 
       if (returnNewInstance) {
-        const n = new SColor(this.toHex());
+        var n = new SColor(this.toHex());
         n.h = newHue;
         return n;
       }
@@ -532,11 +552,15 @@ let SColor = /*#__PURE__*/function () {
 
   }, {
     key: "transparentize",
-    value: function transparentize(amount, returnNewInstance = this._settings.returnNewInstance) {
+    value: function transparentize(amount, returnNewInstance) {
+      if (returnNewInstance === void 0) {
+        returnNewInstance = this._settings.returnNewInstance;
+      }
+
       amount = parseFloat(amount);
 
       if (returnNewInstance) {
-        const n = new SColor(this.toHex());
+        var n = new SColor(this.toHex());
         n.a -= amount;
         return n;
       }
@@ -562,11 +586,15 @@ let SColor = /*#__PURE__*/function () {
 
   }, {
     key: "alpha",
-    value: function alpha(_alpha, returnNewInstance = this._settings.returnNewInstance) {
+    value: function alpha(_alpha, returnNewInstance) {
+      if (returnNewInstance === void 0) {
+        returnNewInstance = this._settings.returnNewInstance;
+      }
+
       _alpha = parseFloat(_alpha);
 
       if (returnNewInstance) {
-        const n = new SColor(this.toHex());
+        var n = new SColor(this.toHex());
         n.a = _alpha;
         return n;
       }
@@ -592,7 +620,11 @@ let SColor = /*#__PURE__*/function () {
 
   }, {
     key: "opacity",
-    value: function opacity(_opacity, returnNewInstance = this._settings.returnNewInstance) {
+    value: function opacity(_opacity, returnNewInstance) {
+      if (returnNewInstance === void 0) {
+        returnNewInstance = this._settings.returnNewInstance;
+      }
+
       return this.alpha(_opacity, returnNewInstance);
     }
     /**
@@ -613,11 +645,15 @@ let SColor = /*#__PURE__*/function () {
 
   }, {
     key: "opacify",
-    value: function opacify(amount, returnNewInstance = this._settings.returnNewInstance) {
+    value: function opacify(amount, returnNewInstance) {
+      if (returnNewInstance === void 0) {
+        returnNewInstance = this._settings.returnNewInstance;
+      }
+
       amount = parseFloat(amount);
 
       if (returnNewInstance) {
-        const n = new SColor(this.toHex());
+        var n = new SColor(this.toHex());
         n.a += amount;
         return n;
       }
@@ -643,11 +679,15 @@ let SColor = /*#__PURE__*/function () {
 
   }, {
     key: "darken",
-    value: function darken(amount, returnNewInstance = this._settings.returnNewInstance) {
+    value: function darken(amount, returnNewInstance) {
+      if (returnNewInstance === void 0) {
+        returnNewInstance = this._settings.returnNewInstance;
+      }
+
       amount = parseInt(amount);
 
       if (returnNewInstance) {
-        const n = new SColor(this.toHex());
+        var n = new SColor(this.toHex());
         n.l -= amount;
         return n;
       }
@@ -673,11 +713,15 @@ let SColor = /*#__PURE__*/function () {
 
   }, {
     key: "lighten",
-    value: function lighten(amount, returnNewInstance = this._settings.returnNewInstance) {
+    value: function lighten(amount, returnNewInstance) {
+      if (returnNewInstance === void 0) {
+        returnNewInstance = this._settings.returnNewInstance;
+      }
+
       amount = parseInt(amount);
 
       if (returnNewInstance) {
-        const n = new SColor(this.toHex());
+        var n = new SColor(this.toHex());
         n.l += amount;
         return n;
       }
@@ -721,7 +765,7 @@ let SColor = /*#__PURE__*/function () {
   }, {
     key: "toRgbaString",
     value: function toRgbaString() {
-      return `rgba(${this._r},${this._g},${this._b},${this._a})`;
+      return "rgba(".concat(this._r, ",").concat(this._g, ",").concat(this._b, ",").concat(this._a, ")");
     }
     /**
      * @name                    toHslString
@@ -740,9 +784,9 @@ let SColor = /*#__PURE__*/function () {
   }, {
     key: "toHslString",
     value: function toHslString() {
-      const hsl = this._convert2('hsl');
+      var hsl = this._convert2('hsl');
 
-      return `hsl(${hsl.h},${hsl.s},${hsl.l})`;
+      return "hsl(".concat(hsl.h, ",").concat(hsl.s, ",").concat(hsl.l, ")");
     }
     /**
      * @name                      toHsvString
@@ -761,9 +805,9 @@ let SColor = /*#__PURE__*/function () {
   }, {
     key: "toHsvString",
     value: function toHsvString() {
-      const hsv = this._convert2('hsv');
+      var hsv = this._convert2('hsv');
 
-      return `hsv(${hsv.h},${hsv.s},${hsv.v})`;
+      return "hsv(".concat(hsv.h, ",").concat(hsv.s, ",").concat(hsv.v, ")");
     }
     /**
      * @name                toString
@@ -783,7 +827,11 @@ let SColor = /*#__PURE__*/function () {
 
   }, {
     key: "toString",
-    value: function toString(format = this._settings.defaultFormat) {
+    value: function toString(format) {
+      if (format === void 0) {
+        format = this._settings.defaultFormat;
+      }
+
       switch (format) {
         case 'hex':
           return this.toHexString();
@@ -805,10 +853,10 @@ let SColor = /*#__PURE__*/function () {
     }
   }, {
     key: "r",
-    get: function () {
+    get: function get() {
       return this._r;
     },
-    set: function (value) {
+    set: function set(value) {
       value = parseInt(value);
       value = value > 255 ? 255 : value;
       this._r = value;
@@ -828,10 +876,10 @@ let SColor = /*#__PURE__*/function () {
 
   }, {
     key: "g",
-    get: function () {
+    get: function get() {
       return this._g;
     },
-    set: function (value) {
+    set: function set(value) {
       value = parseInt(value);
       value = value > 255 ? 255 : value;
       this._g = value;
@@ -851,10 +899,10 @@ let SColor = /*#__PURE__*/function () {
 
   }, {
     key: "b",
-    get: function () {
+    get: function get() {
       return this._b;
     },
-    set: function (value) {
+    set: function set(value) {
       value = parseInt(value);
       value = value > 255 ? 255 : value;
       this._b = value;
@@ -874,10 +922,10 @@ let SColor = /*#__PURE__*/function () {
 
   }, {
     key: "a",
-    get: function () {
+    get: function get() {
       return this._a;
     },
-    set: function (value) {
+    set: function set(value) {
       value = parseFloat(value);
       value = value > 1 ? 1 / 100 * value : value;
       value = value > 1 ? 1 : value;
@@ -898,16 +946,16 @@ let SColor = /*#__PURE__*/function () {
 
   }, {
     key: "l",
-    get: function () {
+    get: function get() {
       return this._convert2('hsl').l;
     },
-    set: function (value) {
-      let hsl = this._convert2('hsl');
+    set: function set(value) {
+      var hsl = this._convert2('hsl');
 
       value = parseInt(value);
       value = value > 100 ? 100 : value;
       hsl.l = value;
-      let rgba = (0, _hsl2rgba.default)(hsl.h, hsl.s, hsl.l);
+      var rgba = (0, _hsl2rgba.default)(hsl.h, hsl.s, hsl.l);
       this.r = rgba.r;
       this.g = rgba.g;
       this.b = rgba.b;
@@ -927,16 +975,16 @@ let SColor = /*#__PURE__*/function () {
 
   }, {
     key: "s",
-    get: function () {
+    get: function get() {
       return this._convert2('hsl').s;
     },
-    set: function (value) {
-      let hsl = this._convert2('hsl');
+    set: function set(value) {
+      var hsl = this._convert2('hsl');
 
       value = parseInt(value);
       value = value > 100 ? 100 : value;
       hsl.s = value;
-      let rgba = (0, _hsl2rgba.default)(hsl.h, hsl.s, hsl.l);
+      var rgba = (0, _hsl2rgba.default)(hsl.h, hsl.s, hsl.l);
       this.r = rgba.r;
       this.g = rgba.g;
       this.b = rgba.b;
@@ -956,16 +1004,16 @@ let SColor = /*#__PURE__*/function () {
 
   }, {
     key: "v",
-    get: function () {
+    get: function get() {
       return this._convert2('hsv').v;
     },
-    set: function (value) {
-      let hsv = this._convert2('hsv');
+    set: function set(value) {
+      var hsv = this._convert2('hsv');
 
       value = parseInt(value);
       value = value > 100 ? 100 : value;
       hsv.v = value;
-      let rgba = (0, _hsv2rgba.default)(hsv.h, hsv.s, hsv.v);
+      var rgba = (0, _hsv2rgba.default)(hsv.h, hsv.s, hsv.v);
       this.r = rgba.r;
       this.g = rgba.g;
       this.b = rgba.b;
@@ -985,16 +1033,16 @@ let SColor = /*#__PURE__*/function () {
 
   }, {
     key: "h",
-    get: function () {
+    get: function get() {
       return this._convert2('hsl').h;
     },
-    set: function (value) {
-      let hsl = this._convert2('hsl');
+    set: function set(value) {
+      var hsl = this._convert2('hsl');
 
       value = parseInt(value);
       value = value > 360 ? 360 : value;
       hsl.h = value;
-      let rgba = (0, _hsl2rgba.default)(hsl.h, hsl.s, hsl.l);
+      var rgba = (0, _hsl2rgba.default)(hsl.h, hsl.s, hsl.l);
       this.r = rgba.r;
       this.g = rgba.g;
       this.b = rgba.b;

@@ -33,8 +33,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function watch(target, settings = {}) {
-  const watchedObj = new _SWatch.default(target, settings);
+function watch(target, settings) {
+  if (settings === void 0) {
+    settings = {};
+  }
+
+  var watchedObj = new _SWatch.default(target, settings);
   return watchedObj;
 }
 

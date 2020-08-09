@@ -65,6 +65,7 @@ export default function typeOf(value, settings = {}) {
   else if (__isInt(value)) type = 'Integer';
   else if (typeof value === 'number') type = 'Number';
   else if (typeof value === 'boolean') type = 'Boolean';
+  else if (value instanceof RegExp) type = 'RegExp';
   else if (settings.customClass && __isClass(value) && value.name) {
     type = __upperFirst(value.name);
   } else if (

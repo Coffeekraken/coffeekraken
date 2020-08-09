@@ -19,7 +19,7 @@ exports.default = author;
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
 function author(data) {
-  const authorNfo = /^([^<(]+?)?[ \t]*(?:<([^>(]+?)>)?[ \t]*(?:\(([^)]+?)\)|$)/gm.exec(data.value);
+  var authorNfo = /^([^<(]+?)?[ \t]*(?:<([^>(]+?)>)?[ \t]*(?:\(([^)]+?)\)|$)/gm.exec(data.value);
   if (!authorNfo) return null;
   return {
     name: authorNfo[1],

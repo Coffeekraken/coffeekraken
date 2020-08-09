@@ -34,7 +34,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function trimLines(string, settings = {}) {
+function trimLines(string, settings) {
+  if (settings === void 0) {
+    settings = {};
+  }
+
   settings = (0, _deepMerge.default)({
     leftPadding: 0,
     rightPadding: 0,
@@ -47,8 +51,8 @@ function trimLines(string, settings = {}) {
       if (line === '') return -1;
     }
 
-    if (settings.leftPadding) line = `${' '.repeat(settings.leftPadding)}${line}`;
-    if (settings.rightPadding) line = `${line}${' '.repeat(settings.rightPadding)}`;
+    if (settings.leftPadding) line = "".concat(' '.repeat(settings.leftPadding)).concat(line);
+    if (settings.rightPadding) line = "".concat(line).concat(' '.repeat(settings.rightPadding));
     return line;
   }).filter(line => line !== -1).join('\n');
   return string;

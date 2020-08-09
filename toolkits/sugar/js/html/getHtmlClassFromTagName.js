@@ -31,8 +31,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 function getHtmlClassFromTagName(tagName) {
   if (!tagName) return HTMLElement;
-  const tagNameUpperFirst = (0, _upperFirst.default)(tagName);
-  if (window[`HTML${tagNameUpperFirst}Element`]) return window[`HTML${tagNameUpperFirst}Element`];
+  var tagNameUpperFirst = (0, _upperFirst.default)(tagName);
+  if (window["HTML".concat(tagNameUpperFirst, "Element")]) return window["HTML".concat(tagNameUpperFirst, "Element")];
   if (_htmlTagToHtmlClassMap.default[tagName]) return _htmlTagToHtmlClassMap.default[tagName];
   return HTMLElement;
 }

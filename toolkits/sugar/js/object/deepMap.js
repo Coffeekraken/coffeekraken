@@ -35,7 +35,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function deepMap(object, processor, settings = {}, _path = []) {
+function deepMap(object, processor, settings, _path) {
+  if (settings === void 0) {
+    settings = {};
+  }
+
+  if (_path === void 0) {
+    _path = [];
+  }
+
   settings = (0, _deepMerge.default)({
     deepFirst: false,
     processObjects: false,
@@ -48,11 +56,12 @@ function deepMap(object, processor, settings = {}, _path = []) {
         if (!settings.processObjects) return;
       }
 
-      const res = processor(object[prop], prop, [..._path, prop].join('.'));
+      var res = processor(object[prop], prop, [..._path, prop].join('.'));
       if (res === -1) delete object[prop];else object[prop] = res;
     } else {
-      const res = processor(object[prop], prop, [..._path, prop].join('.'));
-      if (res === -1) delete object[prop];else object[prop] = res;
+      var _res = processor(object[prop], prop, [..._path, prop].join('.'));
+
+      if (_res === -1) delete object[prop];else object[prop] = _res;
 
       if ((0, _plainObject.default)(object[prop]) || Array.isArray(object[prop]) && settings.handleArray) {
         object[prop] = deepMap(object[prop], processor, settings, [..._path, prop]);

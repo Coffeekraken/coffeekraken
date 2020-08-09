@@ -38,7 +38,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function splitLines(elm, tag = 'p', tagClass = 'split-lines') {
+function splitLines(elm, tag, tagClass) {
+  if (tag === void 0) {
+    tag = 'p';
+  }
+
+  if (tagClass === void 0) {
+    tagClass = 'split-lines';
+  }
+
   // apply again on resize
   window.addEventListener('resize', (0, _throttle.default)(e => {
     _splitLines(elm, tag, tagClass);
@@ -50,7 +58,7 @@ function splitLines(elm, tag = 'p', tagClass = 'split-lines') {
 }
 
 function _splitLines(elm, tag, tagClass) {
-  let string = elm._splitLinesOriginalString;
+  var string = elm._splitLinesOriginalString;
 
   if (!string) {
     string = elm.innerHTML;
@@ -59,17 +67,17 @@ function _splitLines(elm, tag, tagClass) {
 
   elm.classList.add(tagClass); // wrap each characters inside two spans
 
-  let words = string.match(/<\s*(\w+\b)(?:(?!<\s*\/\s*\1\b)[\s\S])*<\s*\/\s*\1\s*>|\S+/g);
+  var words = string.match(/<\s*(\w+\b)(?:(?!<\s*\/\s*\1\b)[\s\S])*<\s*\/\s*\1\s*>|\S+/g);
   words = (0, _map2.default)(words, word => {
-    return `<span class="s-split-lines">${word}</span>`;
+    return "<span class=\"s-split-lines\">".concat(word, "</span>");
   }).join(' ');
   elm.innerHTML = words;
-  const spans = elm.querySelectorAll('span.s-split-lines');
-  let top = null;
-  const lines = [];
-  let line = [];
+  var spans = elm.querySelectorAll('span.s-split-lines');
+  var top = null;
+  var lines = [];
+  var line = [];
   [].forEach.call(spans, spanElm => {
-    const spanTop = spanElm.getBoundingClientRect().top;
+    var spanTop = spanElm.getBoundingClientRect().top;
 
     if (top && spanTop !== top) {
       lines.push(line.join(' '));
@@ -81,7 +89,7 @@ function _splitLines(elm, tag, tagClass) {
   });
   lines.push(line.join(' '));
   elm.innerHTML = lines.map(lineStr => {
-    return `<${tag} class="${tagClass}__line">${lineStr}</${tag}>`;
+    return "<".concat(tag, " class=\"").concat(tagClass, "__line\">").concat(lineStr, "</").concat(tag, ">");
   }).join('');
 }
 

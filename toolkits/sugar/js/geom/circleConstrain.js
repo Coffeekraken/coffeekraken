@@ -38,8 +38,8 @@ function circleConstrain(center, radius, point) {
   if (dist <= radius) {
     return point;
   } else {
-    const x = point.x - center.x;
-    const y = point.y - center.y;
+    var x = point.x - center.x;
+    var y = point.y - center.y;
     var radians = Math.atan2(y, x);
     return {
       x: Math.cos(radians) * radius + center.x,

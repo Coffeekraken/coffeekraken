@@ -28,7 +28,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function whenInViewport(elm, offset = 50) {
+function whenInViewport(elm, offset) {
+  if (offset === void 0) {
+    offset = 50;
+  }
+
   return new Promise((resolve, reject) => {
     (0, _inViewport.default)(elm, {
       offset: offset

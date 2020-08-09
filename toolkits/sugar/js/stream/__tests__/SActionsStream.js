@@ -2,12 +2,16 @@
 
 module.exports = __SActionsStream => {
   describe('sugar.js.stream.SActionsStream', () => {
-    let stepsCalled = 0,
+    var stepsCalled = 0,
         action1StepCalled = 0,
         startCalled = 0,
         errorCalled = 0;
-    const stream = new __SActionsStream({
-      action1: (settings = {}) => {
+    var stream = new __SActionsStream({
+      action1: function action1(settings) {
+        if (settings === void 0) {
+          settings = {};
+        }
+
         return new Promise((resolve, reject) => {
           // console.log('action1');
           setTimeout(() => {
@@ -16,7 +20,11 @@ module.exports = __SActionsStream => {
           }, 1000);
         });
       },
-      action2: (settings = {}) => {
+      action2: function action2(settings) {
+        if (settings === void 0) {
+          settings = {};
+        }
+
         return new Promise((resolve, reject) => {
           // console.log('action2', settings);
           settings.action2 = 'world';
@@ -40,7 +48,7 @@ module.exports = __SActionsStream => {
       errorCalled++;
     });
     it('Should run the actions stream correctly', done => {
-      const streamPromise = stream.start({
+      var streamPromise = stream.start({
         something: 'yopyop'
       }).on('cancel,finally', result => {
         expect(stepsCalled).toBe(2);

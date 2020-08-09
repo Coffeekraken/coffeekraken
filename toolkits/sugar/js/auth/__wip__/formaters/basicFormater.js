@@ -1,6 +1,6 @@
 "use strict";
 
-const __base64 = require('../../../crypt/base64');
+var __base64 = require('../../../crypt/base64');
 /**
  * @name                          basicFormater
  * @namespace           node.auth.formaters
@@ -17,13 +17,13 @@ const __base64 = require('../../../crypt/base64');
 
 module.exports = function basicFormater(authInfo) {
   // build the username:password info
-  let tokenString = __base64.encrypt(`${authInfo.username}:${authInfo.password}`); // build the formated auth object
+  var tokenString = __base64.encrypt("".concat(authInfo.username, ":").concat(authInfo.password)); // build the formated auth object
 
 
   return {
     token: tokenString,
     headers: {
-      Authorization: `Basic ${tokenString}`
+      Authorization: "Basic ".concat(tokenString)
     }
   };
 };

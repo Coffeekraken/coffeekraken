@@ -32,7 +32,11 @@ exports.default = onSwipe;
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  * @see 		https://gist.github.com/SleepWalker/da5636b1abcbaff48c4d 	Based on
  */
-function onSwipe(elm, cb, threshold = 100) {
+function onSwipe(elm, cb, threshold) {
+  if (threshold === void 0) {
+    threshold = 100;
+  }
+
   var touchstartX = 0;
   var touchstartY = 0;
   var touchendX = 0;
@@ -49,7 +53,7 @@ function onSwipe(elm, cb, threshold = 100) {
   }, false);
 
   function handleGesure() {
-    const swipeNfo = {
+    var swipeNfo = {
       distanceX: Math.abs(touchendX - touchstartX),
       distanceY: Math.abs(touchendY - touchstartY)
     };

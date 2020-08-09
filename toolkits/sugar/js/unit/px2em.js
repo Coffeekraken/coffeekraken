@@ -22,7 +22,11 @@ exports.default = px2em;
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function px2em(px, $elm = document.documentElement) {
+function px2em(px, $elm) {
+  if ($elm === void 0) {
+    $elm = document.documentElement;
+  }
+
   return px / parseFloat(getComputedStyle($elm).fontSize || '16px');
 }
 

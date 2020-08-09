@@ -35,17 +35,25 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function addEventListenerOnce($elm, eventNames, callback = null, useCapture = false) {
+function addEventListenerOnce($elm, eventNames, callback, useCapture) {
+  if (callback === void 0) {
+    callback = null;
+  }
+
+  if (useCapture === void 0) {
+    useCapture = false;
+  }
+
   if (!Array.isArray(eventNames)) eventNames = [eventNames];
-  const globalPromise = new _SPromise.default(() => {}).start();
-  const eventsStack = {};
+  var globalPromise = new _SPromise.default(() => {}).start();
+  var eventsStack = {};
   globalPromise.on('cancel,finally', () => {
     eventNames.forEach(eventName => {
       eventsStack[eventName].promise.cancel();
     });
   });
   eventNames.forEach(eventName => {
-    const promise = (0, _addEventListener.default)($elm, eventName, null, useCapture);
+    var promise = (0, _addEventListener.default)($elm, eventName, null, useCapture);
     eventsStack[eventName] = {
       promise
     };

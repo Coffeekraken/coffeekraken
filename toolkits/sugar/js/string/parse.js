@@ -25,10 +25,7 @@ var _default = value => {
   if (typeof value !== 'string') return value;
 
   try {
-    return Function(`
-      "use strict";
-      return (${value});
-    `)();
+    return Function("\n      \"use strict\";\n      return (".concat(value, ");\n    "))();
   } catch (e) {
     return value;
   }

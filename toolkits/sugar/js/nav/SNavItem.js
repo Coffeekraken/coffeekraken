@@ -45,7 +45,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * @since         2.0.0
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-let SNavItem = /*#__PURE__*/function () {
+var SNavItem = /*#__PURE__*/function () {
   /**
    * @name          _settings
    * @type          Object
@@ -105,7 +105,11 @@ let SNavItem = /*#__PURE__*/function () {
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  function SNavItem(id, text, action, settings = {}) {
+  function SNavItem(id, text, action, settings) {
+    if (settings === void 0) {
+      settings = {};
+    }
+
     _classCallCheck(this, SNavItem);
 
     _defineProperty(this, "_settings", {});
@@ -160,23 +164,27 @@ let SNavItem = /*#__PURE__*/function () {
      *
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    value: function toMarkdown(settings = {}) {
+    value: function toMarkdown(settings) {
+      if (settings === void 0) {
+        settings = {};
+      }
+
       settings = (0, _deepMerge.default)(this._settings.markdown, settings);
 
       if (settings.ordered && this.index === -1) {
-        throw new Error(`You want an ordered SNavItem markdown list but this SNavItem "${this.id}" does not belong to any SNav instance...`);
+        throw new Error("You want an ordered SNavItem markdown list but this SNavItem \"".concat(this.id, "\" does not belong to any SNav instance..."));
       }
 
-      const bullet = settings.ordered ? this.index : '-';
-      let text = '';
+      var bullet = settings.ordered ? this.index : '-';
+      var text = '';
 
       if (this.action) {
-        text = `[${this.action}](${this.text || '...'})`;
+        text = "[".concat(this.action, "](").concat(this.text || '...', ")");
       } else {
         text = this.text || '...';
       }
 
-      return `${bullet} ${text}`;
+      return "".concat(bullet, " ").concat(text);
     }
     /**
      * @name          toHtml
@@ -192,26 +200,30 @@ let SNavItem = /*#__PURE__*/function () {
 
   }, {
     key: "toHtml",
-    value: function toHtml(settings = {}) {
+    value: function toHtml(settings) {
+      if (settings === void 0) {
+        settings = {};
+      }
+
       settings = (0, _deepMerge.default)(this._settings.html, settings);
 
       if (settings.ordered && this.index === -1) {
-        throw new Error(`You want an ordered SNavItem HTML list but this SNavItem "${this.id}" does not belong to any SNav instance...`);
+        throw new Error("You want an ordered SNavItem HTML list but this SNavItem \"".concat(this.id, "\" does not belong to any SNav instance..."));
       }
 
-      let text = '';
+      var text = '';
 
       if (this.action) {
-        text = `<li id="${this.id}" class="${settings.li.class}"><a href="${this.action}" class="${settings.a.class}" target="${this.target || '__self'}">${this.text || '...'}</a></li>`;
+        text = "<li id=\"".concat(this.id, "\" class=\"").concat(settings.li.class, "\"><a href=\"").concat(this.action, "\" class=\"").concat(settings.a.class, "\" target=\"").concat(this.target || '__self', "\">").concat(this.text || '...', "</a></li>");
       } else {
-        text = `<li id="${this.id}" class="${settings.li.class}">${this.text || '...'}</li>`;
+        text = "<li id=\"".concat(this.id, "\" class=\"").concat(settings.li.class, "\">").concat(this.text || '...', "</li>");
       }
 
-      return `${text}`;
+      return "".concat(text);
     }
   }, {
     key: "id",
-    get: function () {
+    get: function get() {
       return this._id;
     }
     /**
@@ -227,7 +239,7 @@ let SNavItem = /*#__PURE__*/function () {
 
   }, {
     key: "index",
-    get: function () {
+    get: function get() {
       if (!this._sNav) return -1;
       return this._sNav.getItemIndex(this);
     }
@@ -243,7 +255,7 @@ let SNavItem = /*#__PURE__*/function () {
 
   }, {
     key: "text",
-    get: function () {
+    get: function get() {
       return this._text;
     }
     /**
@@ -258,7 +270,7 @@ let SNavItem = /*#__PURE__*/function () {
 
   }, {
     key: "action",
-    get: function () {
+    get: function get() {
       return this._action;
     }
     /**
@@ -273,7 +285,7 @@ let SNavItem = /*#__PURE__*/function () {
 
   }, {
     key: "target",
-    get: function () {
+    get: function get() {
       return this._settings.target;
     }
   }]);

@@ -37,8 +37,8 @@ function wrap($elm, $wrapper) {
     $wrapper = document.createElement($wrapper);
   }
 
-  const $parent = $elm.parentNode;
-  const $sibling = $elm.nextSibling;
+  var $parent = $elm.parentNode;
+  var $sibling = $elm.nextSibling;
 
   if ($sibling) {
     $parent.insertBefore($wrapper, $sibling);

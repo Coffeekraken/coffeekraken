@@ -32,7 +32,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function domReady(cb = null) {
+function domReady(cb) {
+  if (cb === void 0) {
+    cb = null;
+  }
+
   return new Promise((resolve, reject) => {
     (0, _domready.default)(() => {
       cb && cb();

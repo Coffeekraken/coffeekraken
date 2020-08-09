@@ -47,20 +47,20 @@ function splitIfNeeded(what, separator) {
 
 function getTransitionProperties(elm) {
   // get the transition properties
-  const property = (0, _getStyleProperty.default)(elm, 'transition-property');
-  const duration = (0, _getStyleProperty.default)(elm, 'transition-duration') || 0;
-  const timingFunction = (0, _getStyleProperty.default)(elm, 'transition-timing-function');
-  const delay = (0, _getStyleProperty.default)(elm, 'transition-delay'); // return the transition object
+  var property = (0, _getStyleProperty.default)(elm, 'transition-property');
+  var duration = (0, _getStyleProperty.default)(elm, 'transition-duration') || 0;
+  var timingFunction = (0, _getStyleProperty.default)(elm, 'transition-timing-function');
+  var delay = (0, _getStyleProperty.default)(elm, 'transition-delay'); // return the transition object
 
-  const props = {
+  var props = {
     property: splitIfNeeded(property, ','),
     duration: splitIfNeeded(duration, ',').map(value => (0, _convert.default)(value, 'ms')),
     delay: splitIfNeeded(delay, ',').map(value => (0, _convert.default)(value, 'ms')),
     timingFunction: splitIfNeeded(timingFunction, ',')
   };
-  let totalDuration = 0;
-  let i = 0;
-  const delays = [0].concat(props.delay);
+  var totalDuration = 0;
+  var i = 0;
+  var delays = [0].concat(props.delay);
   [0].concat(props.duration).forEach(val => {
     if (val + delays[i] > totalDuration) {
       totalDuration = val + delays[i];

@@ -13,6 +13,8 @@ var _class = _interopRequireDefault(require("../../is/class"));
 
 var _typeof = _interopRequireDefault(require("../../value/typeof"));
 
+var _SValueValidationError = _interopRequireDefault(require("../../error/SValueValidationError"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -26,8 +28,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @param         {Mixed}       value       The value to check
  * @param         {Object}      definitionObj     THe definition object
- * @param         {String}      [name='unnamed']     A name for the check. Usefull for debugging purpose
  * @param       {Object}        [settings={}]         An object of settings to configure your validation process:
+ * - throw (true) {Boolean}: Specify if you want to throw an error when something goes wrong
+ * - name ('unnamed') {String}: Specify a name. Useful for debugging
  * @return         {Boolean|Object}           true if the check is passed, an Array of String describing the issue if not
  *
  * @todo        tests
@@ -44,20 +47,27 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function validateValue(value, definitionObj, name = 'unnamed', settings = {}) {
-  settings = (0, _deepMerge.default)({}, settings);
+function validateValue(value, definitionObj, settings) {
+  if (settings === void 0) {
+    settings = {};
+  }
+
+  settings = (0, _deepMerge.default)({
+    name: 'unnamed',
+    throw: true
+  }, settings);
 
   if ((value === null || value === undefined) && definitionObj.default !== undefined) {
     value = definitionObj.default;
   }
 
-  let issueObj = {
+  var issueObj = {
     expected: definitionObj,
     received: {
       type: (0, _typeof.default)(value),
       value
     },
-    name,
+    name: settings.name,
     issues: []
   };
 
@@ -67,7 +77,7 @@ function validateValue(value, definitionObj, name = 'unnamed', settings = {}) {
 
 
   if (definitionObj.type) {
-    const isOfTypeResult = (0, _ofType.default)(value, definitionObj.type);
+    var isOfTypeResult = (0, _ofType.default)(value, definitionObj.type);
 
     if (isOfTypeResult !== true) {
       issueObj = (0, _deepMerge.default)(issueObj, isOfTypeResult, {
@@ -91,6 +101,11 @@ function validateValue(value, definitionObj, name = 'unnamed', settings = {}) {
   }
 
   if (!issueObj.issues.length) return true;
+
+  if (settings.throw) {
+    throw new _SValueValidationError.default(issueObj);
+  }
+
   return issueObj;
 }
 

@@ -22,14 +22,18 @@ exports.default = convert;
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function convert(from, to = 'ms') {
+function convert(from, to) {
+  if (to === void 0) {
+    to = 'ms';
+  }
+
   // init the fromMs variable
-  let fromMs = from; // check if the time is a string to convert it to ms
+  var fromMs = from; // check if the time is a string to convert it to ms
 
   if (typeof from === 'string') {
-    const fromNumber = parseFloat(from);
-    const fromLength = fromNumber.toString().length;
-    const fromString = from.slice(fromLength);
+    var fromNumber = parseFloat(from);
+    var fromLength = fromNumber.toString().length;
+    var fromString = from.slice(fromLength);
 
     if (fromString === 'ms' || fromString === 'millisecond' || fromString === 'milliseconds') {
       fromMs = fromNumber;
@@ -100,7 +104,7 @@ function convert(from, to = 'ms') {
       break;
 
     default:
-      throw new Error(`You try to convert "${from}" to "${to}" but this format does not exist... The valids formats are "ms,s,m,h,d,w,month,y"...`);
+      throw new Error("You try to convert \"".concat(from, "\" to \"").concat(to, "\" but this format does not exist... The valids formats are \"ms,s,m,h,d,w,month,y\"..."));
       break;
   }
 }

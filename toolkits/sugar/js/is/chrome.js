@@ -23,7 +23,11 @@ exports.default = isChrome;
  * @return    {Boolean}    true if is chrome, false if not
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function isChrome(ua = navigator.userAgent) {
+function isChrome(ua) {
+  if (ua === void 0) {
+    ua = navigator.userAgent;
+  }
+
   return ua.indexOf('Chrome') > -1;
 }
 

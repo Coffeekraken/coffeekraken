@@ -38,10 +38,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function whenAttribute(elm, attrName, checkFn = null) {
+function whenAttribute(elm, attrName, checkFn) {
+  if (checkFn === void 0) {
+    checkFn = null;
+  }
+
   return new Promise((resolve, reject) => {
     if (elm.hasAttribute(attrName)) {
-      const value = (0, _autoCast.default)(elm.getAttribute(attrName));
+      var value = (0, _autoCast.default)(elm.getAttribute(attrName));
 
       if (checkFn && checkFn(value, value)) {
         resolve(value);
@@ -52,15 +56,15 @@ function whenAttribute(elm, attrName, checkFn = null) {
       }
     }
 
-    const obs = (0, _observeAttributes.default)(elm).then(mutation => {
+    var obs = (0, _observeAttributes.default)(elm).then(mutation => {
       if (mutation.attributeName === attrName) {
-        const value = (0, _autoCast.default)(mutation.target.getAttribute(mutation.attributeName));
+        var _value = (0, _autoCast.default)(mutation.target.getAttribute(mutation.attributeName));
 
-        if (checkFn && checkFn(value, mutation.oldValue)) {
-          resolve(value);
+        if (checkFn && checkFn(_value, mutation.oldValue)) {
+          resolve(_value);
           obs.cancel();
         } else if (!checkFn) {
-          resolve(value);
+          resolve(_value);
           obs.cancel();
         }
       }

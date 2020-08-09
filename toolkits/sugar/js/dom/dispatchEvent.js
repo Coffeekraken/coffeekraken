@@ -28,9 +28,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function dispatchEvent($target, name, data = null) {
+function dispatchEvent($target, name, data) {
+  if (data === void 0) {
+    data = null;
+  }
+
   // create new event
-  const e = new _SEvent.default(name, {
+  var e = new _SEvent.default(name, {
     detail: data,
     bubbles: true,
     cancelable: true

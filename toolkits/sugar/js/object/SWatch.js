@@ -62,7 +62,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-let SWatch = /*#__PURE__*/function () {
+var SWatch = /*#__PURE__*/function () {
   /**
    * @name                    _watchStack
    * @type                    Object
@@ -92,7 +92,11 @@ let SWatch = /*#__PURE__*/function () {
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  function SWatch(object, settings = {}) {
+  function SWatch(object, settings) {
+    if (settings === void 0) {
+      settings = {};
+    }
+
     _classCallCheck(this, SWatch);
 
     _defineProperty(this, "_watchStack", {});
@@ -106,12 +110,12 @@ let SWatch = /*#__PURE__*/function () {
     }, settings);
     this._promise = new _SPromise.default(() => {}).start();
     this._proxiedObject = (0, _deepProxy.default)(object, obj => {
-      let path = obj.path;
-      let value = obj.value;
-      let oldValue = obj.oldValue;
+      var path = obj.path;
+      var value = obj.value;
+      var oldValue = obj.oldValue;
       if (path.slice(0, 1) === '.') path = path.slice(1); // build the object to pass to the handler
 
-      const watchResult = {
+      var watchResult = {
         object: this._proxiedObject,
         path,
         action: obj.action,
@@ -122,12 +126,12 @@ let SWatch = /*#__PURE__*/function () {
 
       setTimeout(() => {
         // this._promise.trigger(`${path}`, watchResult);
-        this._promise.trigger(`${path}:${watchResult.action}`, watchResult);
+        this._promise.trigger("".concat(path, ":").concat(watchResult.action), watchResult);
       });
     }, {
       deep: this._settings.deep
     });
-    const onPropertyObj = {
+    var onPropertyObj = {
       writable: true,
       configurable: false,
       enumerable: false,
@@ -144,7 +148,7 @@ let SWatch = /*#__PURE__*/function () {
       });
     }
 
-    const unwatchPropertyObj = {
+    var unwatchPropertyObj = {
       writable: true,
       configurable: false,
       enumerable: false,

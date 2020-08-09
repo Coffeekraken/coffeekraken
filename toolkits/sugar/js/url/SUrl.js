@@ -70,7 +70,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * @see        https://www.npmjs.com/package/url-parse
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-let SUrl = /*#__PURE__*/function () {
+var SUrl = /*#__PURE__*/function () {
   /**
    * @name                _settings
    * @type                Object
@@ -117,7 +117,15 @@ let SUrl = /*#__PURE__*/function () {
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  function SUrl(url = window.document.location.href, settings = {}) {
+  function SUrl(url, settings) {
+    if (url === void 0) {
+      url = window.document.location.href;
+    }
+
+    if (settings === void 0) {
+      settings = {};
+    }
+
     _classCallCheck(this, SUrl);
 
     _defineProperty(this, "_settings", {});
@@ -201,7 +209,7 @@ let SUrl = /*#__PURE__*/function () {
     }
   }, {
     key: "schema",
-    get: function () {
+    get: function get() {
       return this._parsedSchema;
     }
     /**
@@ -215,10 +223,10 @@ let SUrl = /*#__PURE__*/function () {
 
   }, {
     key: "protocol",
-    set: function (value) {
+    set: function set(value) {
       this._parsedUrl.set('protocol', value);
     },
-    get: function () {
+    get: function get() {
       return this._parsedUrl.protocol;
     }
     /**
@@ -232,10 +240,10 @@ let SUrl = /*#__PURE__*/function () {
 
   }, {
     key: "slashes",
-    set: function (value) {
+    set: function set(value) {
       this._parsedUrl.set('slashes', value);
     },
-    get: function () {
+    get: function get() {
       return this._parsedUrl.slashes;
     }
     /**
@@ -249,10 +257,10 @@ let SUrl = /*#__PURE__*/function () {
 
   }, {
     key: "auth",
-    set: function (value) {
+    set: function set(value) {
       this._parsedUrl.set('auth', value);
     },
-    get: function () {
+    get: function get() {
       return this._parsedUrl.auth;
     }
     /**
@@ -266,10 +274,10 @@ let SUrl = /*#__PURE__*/function () {
 
   }, {
     key: "username",
-    set: function (value) {
+    set: function set(value) {
       this._parsedUrl.set('username', value);
     },
-    get: function () {
+    get: function get() {
       return this._parsedUrl.username;
     }
     /**
@@ -283,10 +291,10 @@ let SUrl = /*#__PURE__*/function () {
 
   }, {
     key: "password",
-    set: function (value) {
+    set: function set(value) {
       this._parsedUrl.set('password', value);
     },
-    get: function () {
+    get: function get() {
       return this._parsedUrl.password;
     }
     /**
@@ -300,10 +308,10 @@ let SUrl = /*#__PURE__*/function () {
 
   }, {
     key: "host",
-    set: function (value) {
+    set: function set(value) {
       this._parsedUrl.set('host', value);
     },
-    get: function () {
+    get: function get() {
       return this._parsedUrl.host;
     }
     /**
@@ -317,10 +325,10 @@ let SUrl = /*#__PURE__*/function () {
 
   }, {
     key: "hostname",
-    set: function (value) {
+    set: function set(value) {
       this._parsedUrl.set('hostname', value);
     },
-    get: function () {
+    get: function get() {
       return this._parsedUrl.hostname;
     }
     /**
@@ -334,10 +342,10 @@ let SUrl = /*#__PURE__*/function () {
 
   }, {
     key: "port",
-    set: function (value) {
+    set: function set(value) {
       this._parsedUrl.set('port', value);
     },
-    get: function () {
+    get: function get() {
       return parseInt(this._parsedUrl.port);
     }
     /**
@@ -351,12 +359,12 @@ let SUrl = /*#__PURE__*/function () {
 
   }, {
     key: "pathname",
-    set: function (value) {
+    set: function set(value) {
       this._parsedUrl.set('pathname', value);
 
       this._parseSchema();
     },
-    get: function () {
+    get: function get() {
       return this._parsedUrl.pathname;
     }
     /**
@@ -370,12 +378,12 @@ let SUrl = /*#__PURE__*/function () {
 
   }, {
     key: "pathnameArray",
-    set: function (value) {
+    set: function set(value) {
       this._parsedUrl.set('pathname', value.join('/'));
 
       this._parseSchema();
     },
-    get: function () {
+    get: function get() {
       return this._parsedUrl.pathname.split('/');
     }
     /**
@@ -389,10 +397,10 @@ let SUrl = /*#__PURE__*/function () {
 
   }, {
     key: "query",
-    set: function (value) {
+    set: function set(value) {
       this._parsedUrl.set('query', value);
     },
-    get: function () {
+    get: function get() {
       return this._parsedUrl.query;
     }
     /**
@@ -406,10 +414,10 @@ let SUrl = /*#__PURE__*/function () {
 
   }, {
     key: "queryString",
-    set: function (value) {
+    set: function set(value) {
       this._parsedUrlString.set('query', value);
     },
-    get: function () {
+    get: function get() {
       return this._parsedUrlString.query;
     }
     /**
@@ -423,10 +431,10 @@ let SUrl = /*#__PURE__*/function () {
 
   }, {
     key: "hash",
-    set: function (value) {
+    set: function set(value) {
       this._parsedUrl.set('hash', value);
     },
-    get: function () {
+    get: function get() {
       return this._parsedUrl.hash;
     }
     /**
@@ -440,12 +448,12 @@ let SUrl = /*#__PURE__*/function () {
 
   }, {
     key: "href",
-    set: function (value) {
+    set: function set(value) {
       this._parsedUrl.set('href', value);
 
       this._parseSchema();
     },
-    get: function () {
+    get: function get() {
       return this._parsedUrl.href;
     }
     /**
@@ -459,10 +467,10 @@ let SUrl = /*#__PURE__*/function () {
 
   }, {
     key: "origin",
-    set: function (value) {
+    set: function set(value) {
       this._parsedUrl.set('origin', value);
     },
-    get: function () {
+    get: function get() {
       return this._parsedUrl.origin;
     }
   }]);

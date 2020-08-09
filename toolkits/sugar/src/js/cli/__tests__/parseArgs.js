@@ -2,6 +2,45 @@ module.exports = (__parseArgs) => {
   describe('sugar.js.cli.parseArgs', () => {
     it('Should process the passed string correctly', (done) => {
       const args = __parseArgs(
+        '-n "node" -i "/Users/olivierbossel/Home/web/coffeekraken/coffeekraken/toolkits/sugar/src/node/**/!(__tests__)/!(*.test).js" -c "jest %testfile %arguments"',
+        {
+          name: {
+            type: 'String',
+            description:
+              'wifj oiefj owiej foiwej foj woiefj wioj efoiwej foijwe oifjew',
+            alias: 'n',
+            required: false
+          },
+          input: {
+            type: 'String',
+            description:
+              'wifj oiefj owiej foiwej foj woiefj wioj efoiwej foijwe oifjew',
+            alias: 'i',
+            required: false
+          },
+          command: {
+            type: 'String',
+            description:
+              'wifj oiefj owiej foiwej foj woiefj wioj efoiwej foijwe oifjew',
+            alias: 'c',
+            required: false
+          }
+        },
+        {}
+      );
+
+      expect(args).toEqual({
+        command: 'jest %testfile %arguments',
+        input:
+          '/Users/olivierbossel/Home/web/coffeekraken/coffeekraken/toolkits/sugar/src/node/**/!(__tests__)/!(*.test).js',
+        name: 'node'
+      });
+
+      done();
+    });
+
+    it('Should process the passed string correctly', (done) => {
+      const args = __parseArgs(
         'hello -i #blop -w 10 yop "hello world" -b --hello.world Nelson --help "coco yep"',
         {
           action: {

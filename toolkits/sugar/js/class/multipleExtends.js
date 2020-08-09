@@ -25,8 +25,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-var _default = (...classes) => {
-  return (0, _es.default)(...classes);
+var _default = function _default() {
+  return (0, _es.default)(...arguments);
 };
 
 exports.default = _default;

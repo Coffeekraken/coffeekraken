@@ -3,7 +3,7 @@
 module.exports = __flatten => {
   describe('sugar.js.object.flatten', () => {
     it('Should flatten the object correctly', done => {
-      const obj1 = __flatten({
+      var obj1 = __flatten({
         hello: {
           world: 'hello world'
         },

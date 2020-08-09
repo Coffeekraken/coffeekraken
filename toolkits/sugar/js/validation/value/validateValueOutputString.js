@@ -37,33 +37,40 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function validateValueOutputString(validateValueResultObj) {
-  let issuesArray = [];
+  var issuesArray = [];
 
   if (validateValueResultObj.name) {
-    issuesArray.push(`<yellow>│</yellow> <underline><bold>${validateValueResultObj.name}</bold></underline>`);
+    issuesArray.push("<yellow>\u2502</yellow> <underline><bold>".concat(validateValueResultObj.name, "</bold></underline>\n<yellow>\u2502</yellow>"));
   }
 
-  issuesArray.push(`<yellow>│</yellow> - Received value: <yellow>${(0, _toString.default)(validateValueResultObj.received.value, {
-    beautify: true
-  })}</yellow>`);
+  if (validateValueResultObj.received) {
+    issuesArray.push("<yellow>\u2502</yellow> - Received value: <yellow>".concat((0, _toString.default)(validateValueResultObj.received.value, {
+      beautify: true
+    }), "</yellow>"));
+  }
+
   validateValueResultObj.issues.forEach(issue => {
     switch (issue.toLowerCase()) {
+      case 'definitionobject.unknown':
+        issuesArray.push("<yellow>\u2502</yellow> This passed definition object property \"<cyan>".concat((0, _toString.default)(validateValueResultObj.name || 'unnamed'), "</cyan>\" is not supported..."));
+        break;
+
       case 'required':
-        issuesArray.push(`<yellow>│</yellow> - This value is <green>required</green>`);
+        issuesArray.push("<yellow>\u2502</yellow> - This value is <green>required</green>");
         break;
 
       case 'type':
-        issuesArray.push(`<yellow>│</yellow> - The value type has to be <green>${validateValueResultObj.expected.type}</green> but you passed <red>${validateValueResultObj.received.type}</red>`);
+        issuesArray.push("<yellow>\u2502</yellow> - The value type has to be <green>".concat(validateValueResultObj.expected.type, "</green> but you passed <red>").concat(validateValueResultObj.received.type, "</red>"));
         break;
 
       case 'values':
-        issuesArray.push(`<yellow>│</yellow> - The allowed values are [${validateValueResultObj.expected.values.map(v => {
-          return `"<green>${v}</green>"`;
-        }).join(', ')}]`);
+        issuesArray.push("<yellow>\u2502</yellow> - The allowed values are [".concat(validateValueResultObj.expected.values.map(v => {
+          return "\"<green>".concat(v, "</green>\"");
+        }).join(', '), "]"));
         break;
 
       case 'static':
-        issuesArray.push(`<yellow>│</yellow> - This value has to be a <green>static</green> one`);
+        issuesArray.push("<yellow>\u2502</yellow> - This value has to be a <green>static</green> one");
         break;
     }
   });

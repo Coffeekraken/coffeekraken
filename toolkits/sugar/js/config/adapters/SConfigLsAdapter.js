@@ -60,7 +60,11 @@ module.exports = /*#__PURE__*/function (_SConfigAdapter) {
 
   var _super = _createSuper(SConfigLsAdapter);
 
-  function SConfigLsAdapter(settings = {}) {
+  function SConfigLsAdapter(settings) {
+    if (settings === void 0) {
+      settings = {};
+    }
+
     _classCallCheck(this, SConfigLsAdapter);
 
     return _super.call(this, settings);
@@ -70,14 +74,18 @@ module.exports = /*#__PURE__*/function (_SConfigAdapter) {
     key: "load",
     value: function load() {
       // try to get the config from the localstorage
-      const config = (0, _parse.default)(localStorage.getItem(this._settings.name)) || {}; // mix the configs and save them in the instance
+      var config = (0, _parse.default)(localStorage.getItem(this._settings.name)) || {}; // mix the configs and save them in the instance
 
       return (0, _deepMerge.default)(config.default || {}, config.app || {}, config.user || {});
     }
   }, {
     key: "save",
-    value: function save(newConfig = {}) {
-      const baseConfig = (0, _deepMerge.default)(this._settings.defaultConfig, this._settings.appConfig);
+    value: function save(newConfig) {
+      if (newConfig === void 0) {
+        newConfig = {};
+      }
+
+      var baseConfig = (0, _deepMerge.default)(this._settings.defaultConfig, this._settings.appConfig);
       localStorage.setItem(this._settings.name, (0, _toString.default)({
         default: this._settings.defaultConfig,
         app: this._settings.appConfig,

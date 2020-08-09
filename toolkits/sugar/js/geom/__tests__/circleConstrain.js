@@ -2,7 +2,7 @@
 
 module.exports = __circleConstrain => {
   describe('sugar.js.geom.circleConstrain', () => {
-    const res = __circleConstrain({
+    var res = __circleConstrain({
       x: 20,
       y: 10
     }, 10, {

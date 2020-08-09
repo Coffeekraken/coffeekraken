@@ -9,6 +9,7 @@ import __deepMerge from '../../object/deepMerge';
 import __parseHtml from '../../console/parseHtml';
 import __filter from '../../object/filter';
 import __typeof from '../../value/typeof';
+import __SObjectValidationError from '../../error/SObjectValidationError';
 
 /**
  * @name            validateObject
@@ -23,6 +24,7 @@ import __typeof from '../../value/typeof';
  * @param       {Object}        definitionObj       The definition object to use
  * @param       {String}        [name='unnamed']    Specify a name for your object. This will be useful during the validation process
  * @param       {Object}        [settings={}]         An object of settings to configure your validation process:
+ * - throw (true) {Boolean}: Specify if you want to throw an error when something goes wrong
  * - extendsFn (null) {Function}: Specify a function that will be called for each properties with the arguments "argName", "argDefinition" and "value" to let you the possibility to extend this validation function
  * - validateDefinitionObject (true) {Boolean}: Specify if you want to validate the passed definition object first or not
  * @return      {Boolean|Array<String>}                    Return true if all is ok, and an Array of string that describe the issue if it's not
@@ -51,30 +53,31 @@ import __typeof from '../../value/typeof';
 export default function validateObject(
   objectToCheck,
   definitionObj,
-  name = 'unnamed',
   settings = {},
   _argPath = []
 ) {
-  let issuesObj = {
-    name,
-    issues: []
-  };
-
   settings = __deepMerge(
     {
+      throw: true,
+      name: 'unnamed',
       validateDefinitionObject: true
     },
     settings
   );
 
+  let issuesObj = {
+    name: settings.name,
+    issues: []
+  };
   // validate the passed definition object first
   if (settings.validateDefinitionObject) {
     const validateDefinitionObjectResult = __validateObjectDefinitionObject(
-      definitionObj
+      definitionObj,
+      {
+        throw: settings.throw,
+        name: settings.name
+      }
     );
-    if (validateDefinitionObjectResult !== true) {
-      throw new Error(validateDefinitionObjectResult);
-    }
   }
 
   // loop on the definition object properties
@@ -93,7 +96,10 @@ export default function validateObject(
       }
     }
 
-    const validationRes = __validateValue(value, argDefinition, argName);
+    const validationRes = __validateValue(value, argDefinition, {
+      name: argName,
+      throw: settings.throw
+    });
     issuesObj[argName] = {
       name: argName,
       received: {
@@ -154,5 +160,10 @@ export default function validateObject(
   }
 
   if (!issuesObj.issues.length) return true;
+
+  if (settings.throw) {
+    throw new __SObjectValidationError(issuesObj);
+  }
+
   return issuesObj;
 }

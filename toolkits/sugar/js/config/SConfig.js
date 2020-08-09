@@ -21,6 +21,10 @@ var _SConfigAdapter = _interopRequireDefault(require("./adapters/SConfigAdapter"
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -56,9 +60,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-const _SConfigLoadingByAdapter = {};
+var _SConfigLoadingByAdapter = {};
 
-let SConfig = /*#__PURE__*/function () {
+var SConfig = /*#__PURE__*/function () {
   /**
    * @name              _name
    * @type              {String}
@@ -111,7 +115,11 @@ let SConfig = /*#__PURE__*/function () {
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  function SConfig(name, settings = {}) {
+  function SConfig(name, settings) {
+    if (settings === void 0) {
+      settings = {};
+    }
+
     _classCallCheck(this, SConfig);
 
     _defineProperty(this, "_name", null);
@@ -122,13 +130,13 @@ let SConfig = /*#__PURE__*/function () {
 
     // store the name
     if (!/^[a-zA-Z0-9_-]+$/.test(name)) {
-      throw new Error(`The name of an SConfig instance can contain only letters like [a-zA-Z0-9_-]...`);
+      throw new Error("The name of an SConfig instance can contain only letters like [a-zA-Z0-9_-]...");
     } // save the settings name
 
 
     this._name = name; // save the settings
 
-    this._settings = {
+    this._settings = _objectSpread({
       adapters: [],
       defaultAdapter: null,
       allowSave: true,
@@ -137,13 +145,12 @@ let SConfig = /*#__PURE__*/function () {
       allowNew: false,
       autoLoad: true,
       autoSave: true,
-      throwErrorOnUndefinedConfig: true,
-      ...settings
-    }; // init all the adapters if needed
+      throwErrorOnUndefinedConfig: true
+    }, settings); // init all the adapters if needed
 
     this._settings.adapters.forEach(adapter => {
       if (!adapter instanceof _SConfigAdapter.default) {
-        throw new Error(`You have specified the adapter "${adapter.name || 'unknown'}" as adapter for your "${this._name}" SConfig instance but this adapter does not extends the SConfigAdapter class...`);
+        throw new Error("You have specified the adapter \"".concat(adapter.name || 'unknown', "\" as adapter for your \"").concat(this._name, "\" SConfig instance but this adapter does not extends the SConfigAdapter class..."));
       } // make sure we have a name for this adapter
 
 
@@ -187,21 +194,25 @@ let SConfig = /*#__PURE__*/function () {
 
   _createClass(SConfig, [{
     key: "load",
-    value: function load(adapter = this._settings.defaultAdapter) {
+    value: function load(adapter) {
+      if (adapter === void 0) {
+        adapter = this._settings.defaultAdapter;
+      }
+
       // make sure we load only once the config
       // if (_SConfigLoadingByAdapter[adapter]) {
       //   return null;
       // }
       // _SConfigLoadingByAdapter[adapter] = true;
       if (!this._adapters[adapter]) {
-        throw new Error(`You try to load the config from the adapter "${adapter}" but this adapter does not exists...`);
+        throw new Error("You try to load the config from the adapter \"".concat(adapter, "\" but this adapter does not exists..."));
       }
 
       if (Object.keys(this._adapters[adapter].config).length !== 0) {
         return this._adapters[adapter].config;
       }
 
-      let config = this._adapters[adapter].instance.load();
+      var config = this._adapters[adapter].instance.load();
 
       if (config instanceof Promise) {
         return new Promise(resolve => {
@@ -218,7 +229,7 @@ let SConfig = /*#__PURE__*/function () {
         this._adapters[adapter].config = config;
         return config;
       } else if (config !== null && config !== undefined) {
-        throw new Error(`SConfig: Your "load" method of the "${adapter}" adapter has to return either a plain object, or a Promise resolved with a plain object. The returned value is "${config}" which is of type "${typeof config}"...`);
+        throw new Error("SConfig: Your \"load\" method of the \"".concat(adapter, "\" adapter has to return either a plain object, or a Promise resolved with a plain object. The returned value is \"").concat(config, "\" which is of type \"").concat(typeof config, "\"..."));
       }
     }
     /**
@@ -238,16 +249,20 @@ let SConfig = /*#__PURE__*/function () {
 
   }, {
     key: "save",
-    value: function save(adapters = Object.keys(this._adapters)) {
-      if (!this._settings.allowSave) {
-        throw new Error(`You try to save the config on the "${this._name}" SConfig instance but this instance does not allow to save configs... Set the "settings.allowSave" property to allow this action...`);
+    value: function save(adapters) {
+      if (adapters === void 0) {
+        adapters = Object.keys(this._adapters);
       }
 
-      for (let i = 0; i < adapters.length; i++) {
-        const adapter = adapters[i];
+      if (!this._settings.allowSave) {
+        throw new Error("You try to save the config on the \"".concat(this._name, "\" SConfig instance but this instance does not allow to save configs... Set the \"settings.allowSave\" property to allow this action..."));
+      }
+
+      for (var i = 0; i < adapters.length; i++) {
+        var adapter = adapters[i];
 
         if (adapter && !this._adapters[adapter]) {
-          throw new Error(`You try to save the config on the "${this._name}" SConfig instance using the adapter "${adapter}" but this adapter does not exists...`);
+          throw new Error("You try to save the config on the \"".concat(this._name, "\" SConfig instance using the adapter \"").concat(adapter, "\" but this adapter does not exists..."));
         }
 
         this._adapters[adapter].instance.save(this._adapters[adapter].config);
@@ -275,18 +290,26 @@ let SConfig = /*#__PURE__*/function () {
 
   }, {
     key: "get",
-    value: function get(path, adapter = this._settings.defaultAdapter, settings = {}) {
+    value: function get(path, adapter, settings) {
+      if (adapter === void 0) {
+        adapter = this._settings.defaultAdapter;
+      }
+
+      if (settings === void 0) {
+        settings = {};
+      }
+
       settings = (0, _deepMerge.default)(this._settings, settings);
 
       if (adapter && !this._adapters[adapter]) {
-        throw new Error(`You try to get the config value "${path}" using the adapter "${adapter}" but this adapter does not exists...`);
+        throw new Error("You try to get the config value \"".concat(path, "\" using the adapter \"").concat(adapter, "\" but this adapter does not exists..."));
       }
 
       if (Object.keys(this._adapters[adapter].config).length === 0) {
         this.load();
       }
 
-      let value = (0, _get.default)(this._adapters[adapter].config, path);
+      var value = (0, _get.default)(this._adapters[adapter].config, path);
 
       if ((0, _plainObject.default)(value)) {
         value = (0, _deepMap.default)(value, (val, prop, fullPath) => {
@@ -297,8 +320,8 @@ let SConfig = /*#__PURE__*/function () {
               return val;
             }
 
-            const reg = /\[config.[a-zA-Z0-9.]+\]/gm;
-            const matches = val.match(reg);
+            var reg = /\[config.[a-zA-Z0-9.]+\]/gm;
+            var matches = val.match(reg);
 
             if (matches && matches.length) {
               if (matches.length === 1 && val === matches[0]) {
@@ -321,7 +344,7 @@ let SConfig = /*#__PURE__*/function () {
       }
 
       if (settings.throwErrorOnUndefinedConfig && value === undefined) {
-        throw new Error(`You try to get the config "${path}" on the "${this._name}" SConfig instance but this config does not exists...`);
+        throw new Error("You try to get the config \"".concat(path, "\" on the \"").concat(this._name, "\" SConfig instance but this config does not exists..."));
       }
 
       return value;
@@ -346,19 +369,23 @@ let SConfig = /*#__PURE__*/function () {
 
   }, {
     key: "set",
-    value: function set(path, value, adapters = Object.keys(this._adapters)) {
+    value: function set(path, value, adapters) {
+      if (adapters === void 0) {
+        adapters = Object.keys(this._adapters);
+      }
+
       if (!this._settings.allowSet) {
-        throw new Error(`You try to set a config value on the "${this._name}" SConfig instance but this instance does not allow to set values... Set the "settings.allowSet" property to allow this action...`);
+        throw new Error("You try to set a config value on the \"".concat(this._name, "\" SConfig instance but this instance does not allow to set values... Set the \"settings.allowSet\" property to allow this action..."));
       } // check if we allow new config or not
 
 
       if (!this._settings.allowNew && (0, _get.default)(this._adapters[this._settings.defaultAdapter].config, path) === undefined) {
-        throw new Error(`You try to set the config "${path}" on the "${this._name}" SConfig instance but this config does not exists and this instance does not allow for new config creation...`);
+        throw new Error("You try to set the config \"".concat(path, "\" on the \"").concat(this._name, "\" SConfig instance but this config does not exists and this instance does not allow for new config creation..."));
       }
 
       adapters.forEach(adapter => {
         if (adapter && !this._adapters[adapter]) {
-          throw new Error(`You try to set the config value "${path}" using the adapter "${adapter}" but this adapter does not exists...`);
+          throw new Error("You try to set the config value \"".concat(path, "\" using the adapter \"").concat(adapter, "\" but this adapter does not exists..."));
         }
 
         (0, _set.default)(this._adapters[adapter].config, path, value);

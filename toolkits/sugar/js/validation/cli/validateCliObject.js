@@ -11,6 +11,8 @@ var _validateCliDefinitionObject = _interopRequireDefault(require("./validateCli
 
 var _deepMerge = _interopRequireDefault(require("../../object/deepMerge"));
 
+var _cliDefinitionObjectDefinition = _interopRequireDefault(require("./cliDefinitionObjectDefinition"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -52,24 +54,32 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @since     2.0.0
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function validateCliObject(objectToCheck, definitionObj, name = 'unnamed', settings = {}) {
+function validateCliObject(objectToCheck, definitionObj, name, settings) {
+  if (name === void 0) {
+    name = 'unnamed';
+  }
+
+  if (settings === void 0) {
+    settings = {};
+  }
+
   settings = (0, _deepMerge.default)({
     throw: true,
     validateDefinitionObject: true
   }, settings);
-  let issueObj = {
+  var issueObj = {
     issues: []
   }; // validate definition object first
 
   if (settings.validateDefinitionObject) {
-    const validateDefinitionObjectResult = (0, _validateCliDefinitionObject.default)(definitionObj);
+    var validateDefinitionObjectResult = (0, _validateCliDefinitionObject.default)(definitionObj);
 
     if (validateDefinitionObjectResult !== true) {
       throw new Error(validateDefinitionObjectResult);
     }
   }
 
-  const validationResult = (0, _validateObject.default)(objectToCheck, definitionObj, name, (0, _deepMerge.default)({
+  var validationResult = (0, _validateObject.default)(objectToCheck, definitionObj, (0, _deepMerge.default)({
     extendsFn: (argName, argDefinition, value, argIssueObj) => {
       if (!argDefinition.description || typeof argDefinition.description !== 'string') {
         argIssueObj.issues.push('description');
@@ -77,7 +87,9 @@ function validateCliObject(objectToCheck, definitionObj, name = 'unnamed', setti
 
       return argIssueObj;
     }
-  }, settings));
+  }, settings, {
+    validateDefinitionObject: false
+  }));
 
   if (validationResult !== true) {
     issueObj = (0, _deepMerge.default)(issueObj, validationResult, {

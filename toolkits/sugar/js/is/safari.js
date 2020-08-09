@@ -23,7 +23,11 @@ exports.default = isSafari;
  * @return    {Boolean}    true if is safari, false if not
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function isSafari(ua = navigator.userAgent) {
+function isSafari(ua) {
+  if (ua === void 0) {
+    ua = navigator.userAgent;
+  }
+
   return ua.indexOf('Safari') != -1 && ua.indexOf('Chrome') == -1;
 }
 

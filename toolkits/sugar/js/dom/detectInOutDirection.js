@@ -39,8 +39,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function detectInOutDirection($elm) {
-  let mouseEnterHandler, mouseLeaveHandler;
-  const promise = new _SPromise.default((resolve, reject, trigger, cancel) => {
+  var mouseEnterHandler, mouseLeaveHandler;
+  var promise = new _SPromise.default((resolve, reject, trigger, cancel) => {
     mouseEnterHandler = e => {
       trigger('in', direction);
       trigger('then', {
@@ -67,7 +67,7 @@ function detectInOutDirection($elm) {
   return promise;
 }
 
-let oldX = 0,
+var oldX = 0,
     oldY = 0,
     threshold = 0,
     direction = null;
@@ -79,7 +79,7 @@ document.addEventListener('touchstart', e => {
 });
 
 function calculateDirection(e) {
-  let directionX = 0,
+  var directionX = 0,
       directionY = 0,
       diffX = 0,
       diffY = 0;

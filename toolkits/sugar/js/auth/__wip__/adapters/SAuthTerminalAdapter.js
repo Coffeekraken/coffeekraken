@@ -1,5 +1,9 @@
 "use strict";
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -20,15 +24,15 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-const __SAuthAdapter = require('./SAuthAdapter');
+var __SAuthAdapter = require('./SAuthAdapter');
 
-const __blessed = require('blessed');
+var __blessed = require('blessed');
 
-const __terminalKit = require('terminal-kit');
+var __terminalKit = require('terminal-kit');
 
-const __parseHtml = require('../../../terminal/parseHtml');
+var __parseHtml = require('../../../terminal/parseHtml');
 
-const __ora = require('ora');
+var __ora = require('ora');
 /**
  * @name                            STerminalAuthAdapter
  * @namespace           node.auth.adapters
@@ -112,7 +116,7 @@ module.exports = /*#__PURE__*/function (_SAuthAdapter) {
 
         this._resetScreen();
 
-        const success = __blessed.box({
+        var success = __blessed.box({
           width: '100%',
           content: __parseHtml('<green>✓ Your auth info have been validated!</green>'),
           align: 'center'
@@ -143,34 +147,42 @@ module.exports = /*#__PURE__*/function (_SAuthAdapter) {
 
   }, {
     key: "_validation",
-    value: async function _validation() {
-      if (!this._isValidating) this._isValidating = true;
+    value: function () {
+      var _validation2 = _asyncToGenerator(function* () {
+        if (!this._isValidating) this._isValidating = true;
 
-      this._resetScreen();
+        this._resetScreen();
 
-      if (!this._oraLoader) {
-        this._oraLoader = __ora('Please wait while your auth info are validated...');
-      }
+        if (!this._oraLoader) {
+          this._oraLoader = __ora('Please wait while your auth info are validated...');
+        }
 
-      const loading = __blessed.text({
-        content: this._oraLoader.frame(),
-        align: 'center'
+        var loading = __blessed.text({
+          content: this._oraLoader.frame(),
+          align: 'center'
+        });
+
+        this._container.height = 1;
+
+        this._container.append(loading);
+
+        this._screen.render();
+
+        if (this._isValidating) {
+          this._validationTimeout = setTimeout(() => {
+            this._validation();
+          }, 20);
+        }
+
+        return true;
       });
 
-      this._container.height = 1;
-
-      this._container.append(loading);
-
-      this._screen.render();
-
-      if (this._isValidating) {
-        this._validationTimeout = setTimeout(() => {
-          this._validation();
-        }, 20);
+      function _validation() {
+        return _validation2.apply(this, arguments);
       }
 
-      return true;
-    }
+      return _validation;
+    }()
     /**
      * @name                      _basic
      * @type                      Function
@@ -189,15 +201,19 @@ module.exports = /*#__PURE__*/function (_SAuthAdapter) {
 
   }, {
     key: "_basic",
-    value: function _basic(settings = {}) {
+    value: function _basic(settings) {
+      if (settings === void 0) {
+        settings = {};
+      }
+
       return new Promise((resolve, reject) => {
         this._resetScreen();
 
         this._isValidating = false;
         clearTimeout(this._validationTimeout);
-        const titleY = 0;
+        var titleY = 0;
 
-        const title = __blessed.text({
+        var title = __blessed.text({
           height: 1,
           top: titleY,
           style: {
@@ -206,9 +222,9 @@ module.exports = /*#__PURE__*/function (_SAuthAdapter) {
           content: settings.title || 'Basic auth'
         });
 
-        const infoY = settings.info ? titleY + 2 : titleY;
+        var infoY = settings.info ? titleY + 2 : titleY;
 
-        const info = __blessed.text({
+        var info = __blessed.text({
           top: infoY,
           style: {
             fg: 'white'
@@ -216,9 +232,9 @@ module.exports = /*#__PURE__*/function (_SAuthAdapter) {
           content: settings.info || ''
         });
 
-        const errorY = settings.error ? infoY + 2 : infoY;
+        var errorY = settings.error ? infoY + 2 : infoY;
 
-        const error = __blessed.text({
+        var error = __blessed.text({
           height: 1,
           top: errorY,
           style: {
@@ -227,9 +243,9 @@ module.exports = /*#__PURE__*/function (_SAuthAdapter) {
           content: settings.error || ''
         });
 
-        const usernameLabelY = errorY + 2;
+        var usernameLabelY = errorY + 2;
 
-        const usernameLabel = __blessed.text({
+        var usernameLabel = __blessed.text({
           height: 1,
           top: usernameLabelY,
           style: {
@@ -238,9 +254,9 @@ module.exports = /*#__PURE__*/function (_SAuthAdapter) {
           content: 'Username: '
         });
 
-        const usernameY = usernameLabelY + 2;
+        var usernameY = usernameLabelY + 2;
 
-        const username = __blessed.textbox({
+        var username = __blessed.textbox({
           name: 'username',
           height: 3,
           top: usernameY,
@@ -262,9 +278,9 @@ module.exports = /*#__PURE__*/function (_SAuthAdapter) {
           }
         });
 
-        const passwordLabelY = usernameY + 4;
+        var passwordLabelY = usernameY + 4;
 
-        const passwordLabel = __blessed.text({
+        var passwordLabel = __blessed.text({
           height: 1,
           top: passwordLabelY,
           style: {
@@ -273,9 +289,9 @@ module.exports = /*#__PURE__*/function (_SAuthAdapter) {
           content: 'Password: '
         });
 
-        const passwordY = passwordLabelY + 2;
+        var passwordY = passwordLabelY + 2;
 
-        const password = __blessed.textbox({
+        var password = __blessed.textbox({
           name: 'password',
           height: 3,
           top: passwordY,
@@ -298,9 +314,9 @@ module.exports = /*#__PURE__*/function (_SAuthAdapter) {
           }
         });
 
-        const buttonY = passwordY + 4;
+        var buttonY = passwordY + 4;
 
-        const button = __blessed.button({
+        var button = __blessed.button({
           height: 3,
           width: 15,
           top: buttonY,
@@ -382,15 +398,19 @@ module.exports = /*#__PURE__*/function (_SAuthAdapter) {
 
   }, {
     key: "_bearer",
-    value: function _bearer(settings = {}) {
+    value: function _bearer(settings) {
+      if (settings === void 0) {
+        settings = {};
+      }
+
       return new Promise((resolve, reject) => {
         this._resetScreen();
 
         this._isValidating = false;
         clearTimeout(this._validationTimeout);
-        const titleY = 0;
+        var titleY = 0;
 
-        const title = __blessed.text({
+        var title = __blessed.text({
           height: 1,
           top: titleY,
           style: {
@@ -399,9 +419,9 @@ module.exports = /*#__PURE__*/function (_SAuthAdapter) {
           content: settings.title || 'Bearer auth'
         });
 
-        const infoY = settings.info ? titleY + 2 : titleY;
+        var infoY = settings.info ? titleY + 2 : titleY;
 
-        const info = __blessed.text({
+        var info = __blessed.text({
           top: infoY,
           style: {
             fg: 'white'
@@ -409,9 +429,9 @@ module.exports = /*#__PURE__*/function (_SAuthAdapter) {
           content: settings.info || ''
         });
 
-        const errorY = settings.error ? infoY + 2 : infoY;
+        var errorY = settings.error ? infoY + 2 : infoY;
 
-        const error = __blessed.text({
+        var error = __blessed.text({
           top: errorY,
           style: {
             fg: 'red'
@@ -419,9 +439,9 @@ module.exports = /*#__PURE__*/function (_SAuthAdapter) {
           content: settings.error || ''
         });
 
-        const tokenLabelY = errorY + 2;
+        var tokenLabelY = errorY + 2;
 
-        const tokenLabel = __blessed.text({
+        var tokenLabel = __blessed.text({
           height: 1,
           top: tokenLabelY,
           style: {
@@ -430,9 +450,9 @@ module.exports = /*#__PURE__*/function (_SAuthAdapter) {
           content: 'Bearer token: '
         });
 
-        const tokenY = tokenLabelY + 2;
+        var tokenY = tokenLabelY + 2;
 
-        const token = __blessed.textbox({
+        var token = __blessed.textbox({
           name: 'token',
           height: 3,
           top: tokenY,
@@ -454,9 +474,9 @@ module.exports = /*#__PURE__*/function (_SAuthAdapter) {
           }
         });
 
-        const buttonY = tokenY + 4;
+        var buttonY = tokenY + 4;
 
-        const button = __blessed.button({
+        var button = __blessed.button({
           height: 3,
           width: 15,
           top: buttonY,

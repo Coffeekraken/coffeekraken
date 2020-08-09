@@ -3,6 +3,7 @@ import __validateObject from '../validation/object/validateObject';
 import __validateObjectOutputString from '../validation/object/validateObjectOutputString';
 import __parseHtml from '../console/parseHtml';
 import __trimLines from '../string/trimLines';
+import __SDefinitionObjectError from '../error/SObjectValidationError';
 
 /**
  * @name              SInterface
@@ -50,7 +51,7 @@ export default class SInterface {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   static settings = {
-    throw: false,
+    throw: true,
     return: 'String'
   };
 
@@ -84,20 +85,21 @@ export default class SInterface {
     const implementationValidationResult = __validateObject(
       instance,
       this.definitionObj,
-      instance.name || instance.constructor.name
+      {
+        throw: settings.throw,
+        name: instance.name || instance.constructor.name
+      }
     );
     if (implementationValidationResult !== true) {
-      issueObj = {
-        ...issueObj,
-        ...implementationValidationResult,
-        issues: [...issueObj.issues, ...implementationValidationResult.issues]
-      };
+      issueObj = __deepMerge(issueObj, implementationValidationResult, {
+        array: true
+      });
     }
 
     if (!issueObj.issues.length) return true;
 
     if (settings.throw) {
-      throw new Error(SInterface.outputString(issueObj));
+      throw new __SDefinitionObjectError(issueObj);
     }
 
     switch (settings.return.toLowerCase()) {
@@ -125,7 +127,8 @@ export default class SInterface {
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   static applyAndThrow(instance) {
-    SInterface.apply(instance, {
+    const apply = SInterface.apply.bind(this);
+    apply(instance, {
       throw: true
     });
   }

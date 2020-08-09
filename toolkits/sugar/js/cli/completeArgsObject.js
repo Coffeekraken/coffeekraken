@@ -41,22 +41,26 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @since       2.0.0
  *
  */
-function completeArgsObject(argsObj, definitionObj, settings = {}) {
+function completeArgsObject(argsObj, definitionObj, settings) {
+  if (settings === void 0) {
+    settings = {};
+  }
+
   argsObj = Object.assign({}, argsObj);
   settings = (0, _deepMerge.default)({
     throw: true
   }, settings); // loop on all the arguments
 
   Object.keys(definitionObj).forEach(argString => {
-    const argDefinitionObj = definitionObj[argString]; // check if we have an argument passed in the properties
+    var argDefinitionObj = definitionObj[argString]; // check if we have an argument passed in the properties
 
     if (argsObj[argString] === undefined && argDefinitionObj.default !== undefined) {
       argsObj[argString] = argDefinitionObj.default;
     }
   }); // make sure all is ok
 
-  const argsValidationResult = (0, _validateCliObject.default)(argsObj, definitionObj, settings);
-  if (argsValidationResult !== true && settings.throw) throw new Error((0, _toString.default)(argsValidationResult)); // return the argsObj
+  var argsValidationResult = (0, _validateCliObject.default)(argsObj, definitionObj, settings);
+  if (argsValidationResult !== true && settings.throw) throw new Error((0, _toString.default)(argsValidationResult));else if (argsValidationResult !== true) return argsValidationResult; // return the argsObj
 
   return (0, _deepize.default)(argsObj);
 }

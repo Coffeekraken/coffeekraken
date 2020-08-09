@@ -3,7 +3,7 @@
 module.exports = __deepMap => {
   describe('sugar.js.object.deepMap', () => {
     it('Should map the passed objects correctly', done => {
-      const obj1 = {
+      var obj1 = {
         hello: {
           world: 'hello world'
         },
@@ -12,8 +12,8 @@ module.exports = __deepMap => {
         }
       };
 
-      const res = __deepMap(obj1, (value, prop, fullPath) => {
-        return `~ ${value}`;
+      var res = __deepMap(obj1, (value, prop, fullPath) => {
+        return "~ ".concat(value);
       });
 
       expect(res).toEqual({

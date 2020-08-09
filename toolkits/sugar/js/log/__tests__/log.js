@@ -2,7 +2,7 @@
 
 module.exports = __log => {
   describe('sugar.js.log.log', () => {
-    const promises = [];
+    var promises = [];
     promises.push(__log('Hello world'));
     it('Should have resolved the 1 log promise correctly', done => {
       Promise.all(promises).then(c => {

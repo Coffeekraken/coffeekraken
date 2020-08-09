@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = cls;
 
-const __isClass = require('is-class');
+var __isClass = require('is-class');
 /**
  * @name                      class
  * @namespace           js.is
@@ -30,7 +30,7 @@ const __isClass = require('is-class');
 function cls(cls) {
   if (!Array.isArray(cls)) cls = [cls];
 
-  for (let i = 0; i < cls.length; i++) {
+  for (var i = 0; i < cls.length; i++) {
     if (!__isClass(cls[i])) return false;
   }
 

@@ -38,7 +38,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function inViewportStatusChange($elm) {
-  let isCanceled = false;
+  var isCanceled = false;
   return new _SPromise.default((resolve, reject, trigger, cancel) => {
     function _whenIn() {
       (0, _whenInViewport.default)($elm).then(() => {

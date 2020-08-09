@@ -34,7 +34,7 @@ function keysFirst(array, keys) {
     return array.indexOf(key) !== -1;
   }); // add the keys at start
 
-  let res = [].concat(keys).concat(array); // remove double items
+  var res = [].concat(keys).concat(array); // remove double items
 
   res = (0, _uniq.default)(res); // return the result
 

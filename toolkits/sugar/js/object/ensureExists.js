@@ -30,8 +30,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-var _default = (obj, path, value = {}) => {
-  const v = (0, _get.default)(obj, path);
+var _default = function _default(obj, path, value) {
+  if (value === void 0) {
+    value = {};
+  }
+
+  var v = (0, _get.default)(obj, path);
 
   if (v === undefined) {
     (0, _set.default)(obj, path, value);

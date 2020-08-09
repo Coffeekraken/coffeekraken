@@ -39,18 +39,26 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function addEventListener($elm, eventNames, callback = null, useCapture = false) {
+function addEventListener($elm, eventNames, callback, useCapture) {
+  if (callback === void 0) {
+    callback = null;
+  }
+
+  if (useCapture === void 0) {
+    useCapture = false;
+  }
+
   if (!Array.isArray(eventNames)) eventNames = eventNames.split(',').map(e => e.trim());
   if (callback && typeof callback === 'function') callback = callback;else if (callback && typeof callback === 'boolean') useCapture = callback;
-  let eventsStack = {};
-  const promise = new _SPromise.default((resolve, reject, trigger, cancel) => {}).on('cancel,finally', () => {
+  var eventsStack = {};
+  var promise = new _SPromise.default((resolve, reject, trigger, cancel) => {}).on('cancel,finally', () => {
     eventNames.forEach(eventName => {
-      const stack = eventsStack[eventName];
+      var stack = eventsStack[eventName];
       $elm.removeEventListener(eventName, stack.callback, stack.useCapture);
     });
   });
   eventNames.forEach(eventName => {
-    const internalCallback = event => {
+    var internalCallback = event => {
       if (callback) callback.apply(this, [event]);
       promise.trigger(eventName, event);
     };

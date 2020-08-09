@@ -29,7 +29,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 function loadScript($script) {
   return new _SPromise.default((resolve, reject, trigger, cancel) => {
-    let done = false;
+    var done = false;
     $script.onload = handleLoad;
     $script.onreadystatechange = handleReadyStateChange;
     $script.onerror = handleError;

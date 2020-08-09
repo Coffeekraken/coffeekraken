@@ -3,7 +3,7 @@
 // TODO check the smtp connection...
 module.exports = (__SLog, __SLogMailAdapter) => {
   describe('sugar.js.log.SLogMailAdapter', () => {
-    const logger = new __SLog({
+    var logger = new __SLog({
       adapters: {
         mail: new __SLogMailAdapter({
           // host: 'smtp.gmail.com',

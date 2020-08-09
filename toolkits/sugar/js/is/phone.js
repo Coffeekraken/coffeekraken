@@ -27,8 +27,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * }
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function isPhone(ua = navigator.userAgent) {
-  const md = new _mobileDetect.default(ua);
+function isPhone(ua) {
+  if (ua === void 0) {
+    ua = navigator.userAgent;
+  }
+
+  var md = new _mobileDetect.default(ua);
   return md.phone() !== null;
 }
 

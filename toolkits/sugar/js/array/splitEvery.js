@@ -24,7 +24,7 @@ exports.default = splitEvery;
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function splitEvery(array, every) {
-  let i,
+  var i,
       j,
       finalArray = [];
 

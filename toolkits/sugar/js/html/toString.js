@@ -23,9 +23,13 @@ exports.default = toString;
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function toString(html, deep = true) {
+function toString(html, deep) {
+  if (deep === void 0) {
+    deep = true;
+  }
+
   if (document !== undefined && document.createElement !== undefined) {
-    const cont = document.createElement('div');
+    var cont = document.createElement('div');
     cont.appendChild(html.cloneNode(deep));
     return cont.innerHTML;
   }

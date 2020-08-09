@@ -61,7 +61,11 @@ module.exports = (_temp =
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function SCacheAdapter(settings = {}) {
+function SCacheAdapter(settings) {
+  if (settings === void 0) {
+    settings = {};
+  }
+
   _classCallCheck(this, SCacheAdapter);
 
   _defineProperty(this, "_settings", {});

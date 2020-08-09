@@ -26,7 +26,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function forceRedraw($elm) {
-  const display = (0, _getStyleProperty.default)($elm, 'display');
+  var display = (0, _getStyleProperty.default)($elm, 'display');
   $elm.style.display = 'none';
   $elm.offsetHeight;
   $elm.style.display = display;

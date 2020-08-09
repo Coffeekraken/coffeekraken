@@ -9,7 +9,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 module.exports = __getMethods => {
-  let MyClass = /*#__PURE__*/function () {
+  var MyClass = /*#__PURE__*/function () {
     function MyClass(name) {
       _classCallCheck(this, MyClass);
 
@@ -33,10 +33,10 @@ module.exports = __getMethods => {
     return MyClass;
   }();
 
-  const myInstance = new MyClass('coffeekraken');
+  var myInstance = new MyClass('coffeekraken');
   describe('sugar.js.class.getMethods', () => {
     it('Should return the correct methods list from an instance', () => {
-      const res = __getMethods(myInstance);
+      var res = __getMethods(myInstance);
 
       expect(res).toEqual(['constructor', 'plop', 'testing']);
     });

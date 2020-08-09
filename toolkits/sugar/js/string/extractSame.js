@@ -25,15 +25,19 @@ exports.default = extractSame;
  * @since       2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function extractSame(string1, string2, multiple = false) {
-  // compare letter by letter
-  const extractedArray = [''];
-  const chars = string1.split('');
-  const chars2 = string2.split('');
+function extractSame(string1, string2, multiple) {
+  if (multiple === void 0) {
+    multiple = false;
+  }
 
-  for (let i = 0; i < chars.length; i++) {
-    const char = chars[i];
-    const char2 = chars2[i];
+  // compare letter by letter
+  var extractedArray = [''];
+  var chars = string1.split('');
+  var chars2 = string2.split('');
+
+  for (var i = 0; i < chars.length; i++) {
+    var char = chars[i];
+    var char2 = chars2[i];
     if (i > chars2.length - 1) break;
 
     if (char === char2) {

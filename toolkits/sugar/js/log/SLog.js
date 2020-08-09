@@ -15,6 +15,10 @@ var _plainObject = _interopRequireDefault(require("../is/plainObject"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -43,7 +47,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-let SLog = /*#__PURE__*/function () {
+var SLog = /*#__PURE__*/function () {
   /**
    * @name          _settings
    * @type          Object
@@ -68,7 +72,11 @@ let SLog = /*#__PURE__*/function () {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  function SLog(settings = {}) {
+  function SLog(settings) {
+    if (settings === void 0) {
+      settings = {};
+    }
+
     _classCallCheck(this, SLog);
 
     _defineProperty(this, "_settings", {
@@ -99,7 +107,7 @@ let SLog = /*#__PURE__*/function () {
 
     Object.keys(this._settings.adapters).forEach(adapterName => {
       if (typeof this._settings.adapters[adapterName] === 'string') {
-        const cls = require(this._settings.adapters[adapterName]);
+        var cls = require(this._settings.adapters[adapterName]);
 
         this._settings.adapters[adapterName] = new cls();
       }
@@ -125,28 +133,28 @@ let SLog = /*#__PURE__*/function () {
     key: "_overrideNativeConsole",
     value: function _overrideNativeConsole() {
       // check if need to override the native console methods
-      const _this = this;
+      var _this = this;
 
-      const newConsole = function (oldCons) {
+      var newConsole = function (oldCons) {
         (global || window).nativeConsole = Object.assign({}, oldCons);
         return {
-          log: function (...args) {
-            _this.log(...args);
+          log: function log() {
+            _this.log(...arguments);
           },
-          info: function (...args) {
-            _this.info(...args);
+          info: function info() {
+            _this.info(...arguments);
           },
-          warn: function (...args) {
-            _this.warn(...args);
+          warn: function warn() {
+            _this.warn(...arguments);
           },
-          debug: function (...args) {
-            _this.debug(...args);
+          debug: function debug() {
+            _this.debug(...arguments);
           },
-          error: function (...args) {
-            _this.error(...args);
+          error: function error() {
+            _this.error(...arguments);
           },
-          trace: function (...args) {
-            _this.trace(...args);
+          trace: function trace() {
+            _this.trace(...arguments);
           }
         };
       }((global || window).console);
@@ -168,58 +176,71 @@ let SLog = /*#__PURE__*/function () {
 
   }, {
     key: "_log",
-    value: async function _log(...args) {
-      let adapters = null,
-          level = 'log',
-          messages = [];
-      args.forEach(v => {
-        if (typeof v === 'string') {
-          if (['log', 'warn', 'info', 'error', 'debug', 'trace'].indexOf(v) !== -1) {
-            level = v;
-            return;
+    value: function () {
+      var _log2 = _asyncToGenerator(function* () {
+        var adapters = null,
+            level = 'log',
+            messages = [];
+
+        for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+          args[_key] = arguments[_key];
+        }
+
+        args.forEach(v => {
+          if (typeof v === 'string') {
+            if (['log', 'warn', 'info', 'error', 'debug', 'trace'].indexOf(v) !== -1) {
+              level = v;
+              return;
+            }
+          }
+
+          messages.push(v);
+        });
+        messages = messages.filter(m => {
+          if (m === null || m === '') return false;
+          if (typeof m === 'string' && m.trim() === '') return false;
+          return true;
+        }); // process the adapters argument
+
+        if (adapters === null) adapters = this._settings.adaptersByLevel[level];
+        if (adapters === null) adapters = Object.keys(this._settings.adapters);else if (typeof adapters === 'string') adapters = adapters.split(',').map(a => a.trim());
+        var env = (0, _env.default)('env') || (0, _env.default)('node_env') || 'production';
+
+        if (env) {
+          var adaptersByEnvironment = this._settings.adaptersByEnvironment[env];
+
+          if (adaptersByEnvironment !== null) {
+            if (typeof adaptersByEnvironment === 'string') adaptersByEnvironment = adaptersByEnvironment.split(',').map(a => a.trim());
+            adapters = adapters.filter(a => {
+              return adaptersByEnvironment.indexOf(a) !== -1;
+            });
           }
         }
 
-        messages.push(v);
-      });
-      messages = messages.filter(m => {
-        if (m === null || m === '') return false;
-        if (typeof m === 'string' && m.trim() === '') return false;
-        return true;
-      }); // process the adapters argument
+        if (!Array.isArray(adapters)) return; // init the promises stack
 
-      if (adapters === null) adapters = this._settings.adaptersByLevel[level];
-      if (adapters === null) adapters = Object.keys(this._settings.adapters);else if (typeof adapters === 'string') adapters = adapters.split(',').map(a => a.trim());
-      const env = (0, _env.default)('env') || (0, _env.default)('node_env') || 'production';
+        var adaptersLogStack = []; // loop on all the adapters to log the message
 
-      if (env) {
-        let adaptersByEnvironment = this._settings.adaptersByEnvironment[env];
+        adapters.forEach(adapterName => {
+          // check if the adapter exists
+          if (!this._settings.adapters[adapterName]) return; // loop on all messages to log
 
-        if (adaptersByEnvironment !== null) {
-          if (typeof adaptersByEnvironment === 'string') adaptersByEnvironment = adaptersByEnvironment.split(',').map(a => a.trim());
-          adapters = adapters.filter(a => {
-            return adaptersByEnvironment.indexOf(a) !== -1;
+          messages.forEach(message => {
+            // make the actual log call to this adapter and add it's result to the
+            // adaptersLogStack array
+            adaptersLogStack.push(this._settings.adapters[adapterName].log(message, level));
           });
-        }
+        }); // return the result of all the adapters promises
+
+        return Promise.all(adaptersLogStack);
+      });
+
+      function _log() {
+        return _log2.apply(this, arguments);
       }
 
-      if (!Array.isArray(adapters)) return; // init the promises stack
-
-      const adaptersLogStack = []; // loop on all the adapters to log the message
-
-      adapters.forEach(adapterName => {
-        // check if the adapter exists
-        if (!this._settings.adapters[adapterName]) return; // loop on all messages to log
-
-        messages.forEach(message => {
-          // make the actual log call to this adapter and add it's result to the
-          // adaptersLogStack array
-          adaptersLogStack.push(this._settings.adapters[adapterName].log(message, level));
-        });
-      }); // return the result of all the adapters promises
-
-      return Promise.all(adaptersLogStack);
-    }
+      return _log;
+    }()
     /**
      * @name            log
      * @type            Function
@@ -238,10 +259,18 @@ let SLog = /*#__PURE__*/function () {
 
   }, {
     key: "log",
-    value: async function log(...args) {
-      // call the internal _log method and return his result
-      return this._log(...args);
-    }
+    value: function () {
+      var _log3 = _asyncToGenerator(function* () {
+        // call the internal _log method and return his result
+        return this._log(...arguments);
+      });
+
+      function log() {
+        return _log3.apply(this, arguments);
+      }
+
+      return log;
+    }()
     /**
      * @name            info
      * @type            Function
@@ -261,10 +290,22 @@ let SLog = /*#__PURE__*/function () {
 
   }, {
     key: "info",
-    value: async function info(message, adapters = null) {
-      // call the internal _log method and return his result
-      return this._log(message, adapters, 'info');
-    }
+    value: function () {
+      var _info = _asyncToGenerator(function* (message, adapters) {
+        if (adapters === void 0) {
+          adapters = null;
+        }
+
+        // call the internal _log method and return his result
+        return this._log(message, adapters, 'info');
+      });
+
+      function info(_x, _x2) {
+        return _info.apply(this, arguments);
+      }
+
+      return info;
+    }()
     /**
      * @name            warn
      * @type            Function
@@ -284,10 +325,22 @@ let SLog = /*#__PURE__*/function () {
 
   }, {
     key: "warn",
-    value: async function warn(message, adapters = null) {
-      // call the internal _log method and return his result
-      return this._log(message, adapters, 'warn');
-    }
+    value: function () {
+      var _warn = _asyncToGenerator(function* (message, adapters) {
+        if (adapters === void 0) {
+          adapters = null;
+        }
+
+        // call the internal _log method and return his result
+        return this._log(message, adapters, 'warn');
+      });
+
+      function warn(_x3, _x4) {
+        return _warn.apply(this, arguments);
+      }
+
+      return warn;
+    }()
     /**
      * @name            debug
      * @type            Function
@@ -307,10 +360,22 @@ let SLog = /*#__PURE__*/function () {
 
   }, {
     key: "debug",
-    value: async function debug(message, adapters = null) {
-      // call the internal _log method and return his result
-      return this._log(message, adapters, 'debug');
-    }
+    value: function () {
+      var _debug = _asyncToGenerator(function* (message, adapters) {
+        if (adapters === void 0) {
+          adapters = null;
+        }
+
+        // call the internal _log method and return his result
+        return this._log(message, adapters, 'debug');
+      });
+
+      function debug(_x5, _x6) {
+        return _debug.apply(this, arguments);
+      }
+
+      return debug;
+    }()
     /**
      * @name            error
      * @type            Function
@@ -330,10 +395,22 @@ let SLog = /*#__PURE__*/function () {
 
   }, {
     key: "error",
-    value: async function error(message, adapters = null) {
-      // call the internal _log method and return his result
-      return this._log(message, adapters, 'error');
-    }
+    value: function () {
+      var _error = _asyncToGenerator(function* (message, adapters) {
+        if (adapters === void 0) {
+          adapters = null;
+        }
+
+        // call the internal _log method and return his result
+        return this._log(message, adapters, 'error');
+      });
+
+      function error(_x7, _x8) {
+        return _error.apply(this, arguments);
+      }
+
+      return error;
+    }()
     /**
      * @name            trace
      * @type            Function
@@ -353,10 +430,22 @@ let SLog = /*#__PURE__*/function () {
 
   }, {
     key: "trace",
-    value: async function trace(message, adapters = null) {
-      // call the internal _log method and return his result
-      return this._log(message, adapters, 'trace');
-    }
+    value: function () {
+      var _trace = _asyncToGenerator(function* (message, adapters) {
+        if (adapters === void 0) {
+          adapters = null;
+        }
+
+        // call the internal _log method and return his result
+        return this._log(message, adapters, 'trace');
+      });
+
+      function trace(_x9, _x10) {
+        return _trace.apply(this, arguments);
+      }
+
+      return trace;
+    }()
   }]);
 
   return SLog;

@@ -60,14 +60,22 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function buildCommandLine(command, definitionObj, args = {}, includeAllArgs = true) {
+function buildCommandLine(command, definitionObj, args, includeAllArgs) {
+  if (args === void 0) {
+    args = {};
+  }
+
+  if (includeAllArgs === void 0) {
+    includeAllArgs = true;
+  }
+
   definitionObj = Object.assign({}, definitionObj); // get all the tokens
 
-  const tokens = command.match(/\[[a-zA-Z0-9-_]+\]/gm) || [];
+  var tokens = command.match(/\[[a-zA-Z0-9-_]+\]/gm) || [];
   tokens.forEach(token => {
-    const tokenName = token.replace('[', '').replace(']', '');
+    var tokenName = token.replace('[', '').replace(']', '');
     if (tokenName === 'arguments') return;
-    const tokenValue = args && args[tokenName] !== undefined ? args[tokenName] : definitionObj[tokenName] ? definitionObj[tokenName].default : undefined;
+    var tokenValue = args && args[tokenName] !== undefined ? args[tokenName] : definitionObj[tokenName] ? definitionObj[tokenName].default : undefined;
     delete definitionObj[tokenName];
 
     if (tokenValue === undefined) {
@@ -75,11 +83,11 @@ function buildCommandLine(command, definitionObj, args = {}, includeAllArgs = tr
       return;
     }
 
-    let tokenValueString = (0, _toString.default)(tokenValue);
+    var tokenValueString = (0, _toString.default)(tokenValue);
     command = command.replace(token, tokenValueString);
   }); // args to string
 
-  const argsString = (0, _argsToString.default)(args, definitionObj, includeAllArgs).trim();
+  var argsString = (0, _argsToString.default)(args, definitionObj, includeAllArgs).trim();
   command = command.replace('[arguments]', argsString);
   return command.trim();
 }

@@ -35,20 +35,36 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function autoScrollAnchorLinks(duration = 500, offset = 0, easing = _easeInOutQuint.default, checkPathnames = true) {
+function autoScrollAnchorLinks(duration, offset, easing, checkPathnames) {
+  if (duration === void 0) {
+    duration = 500;
+  }
+
+  if (offset === void 0) {
+    offset = 0;
+  }
+
+  if (easing === void 0) {
+    easing = _easeInOutQuint.default;
+  }
+
+  if (checkPathnames === void 0) {
+    checkPathnames = true;
+  }
+
   (0, _querySelectorLive.default)('a:not([is])[href*="#"]', $link => {
     // listen for click
     $link.addEventListener('click', e => {
       // get the hash
-      const linkUrl = (0, _urlParse.default)($link.getAttribute('href'));
-      const currentUrl = (0, _urlParse.default)(); // chack that we have an hash
+      var linkUrl = (0, _urlParse.default)($link.getAttribute('href'));
+      var currentUrl = (0, _urlParse.default)(); // chack that we have an hash
 
       if (!linkUrl.hash || linkUrl.hash === '#') return; // if it's not the same pathname between the current url and the link one,
       // we do nothing and we let the link behave as he want
 
       if (checkPathnames && currentUrl.pathname !== linkUrl.pathname) return; // try to get the target from the hash
 
-      const $target = document.querySelector(linkUrl.hash); // if we don't have any target, let the link behave as he wants
+      var $target = document.querySelector(linkUrl.hash); // if we don't have any target, let the link behave as he wants
 
       if (!$target) return; // preventing the link to behave as he wants
 

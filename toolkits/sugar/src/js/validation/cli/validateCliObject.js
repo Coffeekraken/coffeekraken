@@ -1,6 +1,7 @@
 import __validateObject from '../object/validateObject';
 import __validateCliDefinitionObject from './validateCliDefinitionObject';
 import __deepMerge from '../../object/deepMerge';
+import __cliDefinitionObjectDefinition from './cliDefinitionObjectDefinition';
 
 /**
  * @name            validateCliObject
@@ -72,7 +73,6 @@ export default function validateCliObject(
   const validationResult = __validateObject(
     objectToCheck,
     definitionObj,
-    name,
     __deepMerge(
       {
         extendsFn: (argName, argDefinition, value, argIssueObj) => {
@@ -85,7 +85,10 @@ export default function validateCliObject(
           return argIssueObj;
         }
       },
-      settings
+      settings,
+      {
+        validateDefinitionObject: false
+      }
     )
   );
   if (validationResult !== true) {

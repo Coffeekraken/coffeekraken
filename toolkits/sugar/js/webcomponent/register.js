@@ -7,13 +7,13 @@ exports.define = define;
 exports.getComponentMetas = getComponentMetas;
 Object.defineProperty(exports, "SWebComponent", {
   enumerable: true,
-  get: function () {
+  get: function get() {
     return _SWebComponent.default;
   }
 });
 Object.defineProperty(exports, "SLitHtmlWebComponent", {
   enumerable: true,
-  get: function () {
+  get: function get() {
     return _SLitHtmlWebComponent.default;
   }
 });
@@ -31,25 +31,29 @@ var _htmlTagToHtmlClassMap = _interopRequireDefault(require("../html/htmlTagToHt
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const _SWebComponentStack = {};
+var _SWebComponentStack = {};
 exports.stack = _SWebComponentStack;
 
 function getComponentMetas(name) {
   return _SWebComponentStack[(0, _uncamelize.default)(name)] || {};
 }
 
-function define(name, cls, settings = {}) {
-  if (!name) throw new Error(`SWebComponent: You must define a name for your webcomponent by setting either a static "name" property on your class, of by passing a name as first parameter of the static "define" function...`);
-  let extend = null;
+function define(name, cls, settings) {
+  if (settings === void 0) {
+    settings = {};
+  }
 
-  for (let key in _htmlTagToHtmlClassMap.default) {
+  if (!name) throw new Error("SWebComponent: You must define a name for your webcomponent by setting either a static \"name\" property on your class, of by passing a name as first parameter of the static \"define\" function...");
+  var extend = null;
+
+  for (var key in _htmlTagToHtmlClassMap.default) {
     if (cls.prototype instanceof _htmlTagToHtmlClassMap.default[key]) {
       extend = key;
       break;
     }
   }
 
-  const uncamelizedName = (0, _uncamelize.default)(name);
+  var uncamelizedName = (0, _uncamelize.default)(name);
   cls.componentName = name;
   _SWebComponentStack[uncamelizedName] = {
     name,
@@ -69,6 +73,6 @@ function define(name, cls, settings = {}) {
       extends: extend
     });
   } else {
-    throw `Your browser does not support either document.registerElement or window.customElements.define webcomponents specification...`;
+    throw "Your browser does not support either document.registerElement or window.customElements.define webcomponents specification...";
   }
 }

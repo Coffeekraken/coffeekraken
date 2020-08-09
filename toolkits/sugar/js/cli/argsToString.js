@@ -53,41 +53,49 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 // TODO: support deep object structure
 // TODO: support required args
-module.exports = function argsToString(args, definitionObj = null, includeAllArgs = true) {
+module.exports = function argsToString(args, definitionObj, includeAllArgs) {
+  if (definitionObj === void 0) {
+    definitionObj = null;
+  }
+
+  if (includeAllArgs === void 0) {
+    includeAllArgs = true;
+  }
+
   if (typeof args === 'string') {
     args = (0, _parseArgs.default)(args, definitionObj);
   }
 
   if (!definitionObj) {
-    let string = '';
+    var string = '';
     Object.keys(args).forEach(key => {
-      string += ` --${key} ${(0, _toString.default)(args[key])}`;
+      string += " --".concat(key, " ").concat((0, _toString.default)(args[key]));
     });
     return string;
   }
 
-  const cliArray = []; // loop on passed args
+  var cliArray = []; // loop on passed args
 
   Object.keys(definitionObj).forEach(argName => {
-    const defObj = definitionObj[argName];
+    var defObj = definitionObj[argName];
     if (!defObj) return;
     if (!includeAllArgs && args[argName] === undefined) return;
-    const prefix = defObj.alias ? `-${defObj.alias}` : `--${argName}`;
-    let value = args && args[argName] !== undefined ? args[argName] : definitionObj[argName].default;
+    var prefix = defObj.alias ? "-".concat(defObj.alias) : "--".concat(argName);
+    var value = args && args[argName] !== undefined ? args[argName] : definitionObj[argName].default;
 
     if (value === undefined || value === null || defObj.type.toLowerCase() === 'boolean' && value === false) {
       return;
     }
 
     value = (0, _toString.default)(value);
-    if (defObj.type.toLowerCase() === 'string') value = `"${value}"`;
+    if (defObj.type.toLowerCase() === 'string') value = "\"".concat(value, "\"");
     if (defObj.type.toLowerCase() === 'boolean') value = '';
 
     if (defObj.type.toLowerCase().includes('object') || defObj.type.toLowerCase().includes('array')) {
-      value = `"${value.split('"').join("'")}"`;
+      value = "\"".concat(value.split('"').join("'"), "\"");
     }
 
-    cliArray.push(`${prefix} ${value}`);
+    cliArray.push("".concat(prefix, " ").concat(value));
   });
   return cliArray.join(' ');
 };

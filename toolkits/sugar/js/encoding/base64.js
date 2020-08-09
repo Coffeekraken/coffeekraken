@@ -32,7 +32,7 @@ var _default = {
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  encode: function (string) {
+  encode: function encode(string) {
     return btoa(string);
   },
 
@@ -47,7 +47,7 @@ var _default = {
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  decode: function (string) {
+  decode: function decode(string) {
     return atob(string);
   }
 };

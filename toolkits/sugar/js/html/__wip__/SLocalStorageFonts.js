@@ -5,6 +5,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -36,7 +40,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  *
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-let SLocalStorageFonts = /*#__PURE__*/function () {
+var SLocalStorageFonts = /*#__PURE__*/function () {
   /**
    * Settings
    * @type 	{Object}
@@ -46,7 +50,11 @@ let SLocalStorageFonts = /*#__PURE__*/function () {
    * @constructor
    * @param 		{Object} 	settings 	The settings
    */
-  function SLocalStorageFonts(settings = {}) {
+  function SLocalStorageFonts(settings) {
+    if (settings === void 0) {
+      settings = {};
+    }
+
     _classCallCheck(this, SLocalStorageFonts);
 
     _defineProperty(this, "_settings", {
@@ -76,9 +84,7 @@ let SLocalStorageFonts = /*#__PURE__*/function () {
       debug: false
     });
 
-    this._settings = { ...this._settings,
-      ...settings
-    }; // init
+    this._settings = _objectSpread(_objectSpread({}, this._settings), settings); // init
 
     this._init();
   }
@@ -91,7 +97,7 @@ let SLocalStorageFonts = /*#__PURE__*/function () {
     key: "_init",
     value: function _init() {
       // check cachebuster
-      let cb = this._settings.json_path.split('#');
+      var cb = this._settings.json_path.split('#');
 
       if (cb.length == 2) {
         this._settings.version = cb[1];
@@ -124,7 +130,7 @@ let SLocalStorageFonts = /*#__PURE__*/function () {
 
       if (!this._cache) {
         window.addEventListener('load', e => {
-          let request = new XMLHttpRequest(),
+          var request = new XMLHttpRequest(),
               response = undefined;
           request.open('GET', this._settings.json_path, true);
 
@@ -132,12 +138,12 @@ let SLocalStorageFonts = /*#__PURE__*/function () {
             if (request.status == 200) {
               try {
                 response = JSON.parse(request.responseText);
-                let fontface = '';
+                var fontface = '';
                 response.fonts.forEach(font => {
                   fontface += '@font-face{';
 
-                  for (let prop in font) {
-                    let value = font[prop];
+                  for (var prop in font) {
+                    var value = font[prop];
 
                     if (prop == 'font-family') {
                       value = '"' + value + '"';
@@ -173,7 +179,7 @@ let SLocalStorageFonts = /*#__PURE__*/function () {
     value: function _insertFonts(value) {
       this._debug('inserting fonts');
 
-      let style = document.createElement('style');
+      var style = document.createElement('style');
       style.innerHTML = value;
       document.head.appendChild(style);
     }

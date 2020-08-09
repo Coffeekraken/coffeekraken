@@ -31,7 +31,11 @@ var _default = {
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  encrypt: function (object, salt = 'coffeekraken.sugar.crypt.object') {
+  encrypt: function encrypt(object, salt) {
+    if (salt === void 0) {
+      salt = 'coffeekraken.sugar.crypt.object';
+    }
+
     return _objectEncode.default.encode_object(object, 'base64', salt);
   },
 
@@ -47,7 +51,11 @@ var _default = {
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  decrypt: function (encodedObject, salt = 'coffeekraken.sugar.crypt.object') {
+  decrypt: function decrypt(encodedObject, salt) {
+    if (salt === void 0) {
+      salt = 'coffeekraken.sugar.crypt.object';
+    }
+
     return _objectEncode.default.decode_object(encodedObject, 'base64', salt);
   }
 };

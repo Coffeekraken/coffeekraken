@@ -67,7 +67,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
  * @since       2.0.0
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-let SUrlAction = /*#__PURE__*/function (_SAction) {
+var SUrlAction = /*#__PURE__*/function (_SAction) {
   _inherits(SUrlAction, _SAction);
 
   var _super = _createSuper(SUrlAction);
@@ -82,7 +82,11 @@ let SUrlAction = /*#__PURE__*/function (_SAction) {
    * @since     2.0.0
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  function SUrlAction(descriptorObj, settings = {}) {
+  function SUrlAction(descriptorObj, settings) {
+    if (settings === void 0) {
+      settings = {};
+    }
+
     _classCallCheck(this, SUrlAction);
 
     return _super.call(this, descriptorObj, settings);
@@ -104,16 +108,16 @@ let SUrlAction = /*#__PURE__*/function (_SAction) {
   _createClass(SUrlAction, [{
     key: "run",
     value: function run() {
-      const promise = _get(_getPrototypeOf(SUrlAction.prototype), "run", this).call(this);
+      var promise = _get(_getPrototypeOf(SUrlAction.prototype), "run", this).call(this);
 
-      if (!(0, _browser.default)()) throw new Error(`SUrlAction: This action is meant to be used in a browser environment which seems to not be the case...`);
+      if (!(0, _browser.default)()) throw new Error("SUrlAction: This action is meant to be used in a browser environment which seems to not be the case...");
       setTimeout(() => {
         // switch on the target
         switch (this._descriptorObj.target) {
           case '_blank':
           case '_popup':
-            const specs = this._descriptorObj.specs || {};
-            let specsString = (0, _toQueryString.default)(specs).slice(1).split('&').join(',');
+            var specs = this._descriptorObj.specs || {};
+            var specsString = (0, _toQueryString.default)(specs).slice(1).split('&').join(',');
             window.open(this._descriptorObj.url, this._descriptorObj.name || '_blank', specsString || this._descriptorObj.target === '_popup' ? 'width=1000,height=1000' : '', this._descriptorObj.replace || false);
             break;
 

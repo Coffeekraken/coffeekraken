@@ -3,7 +3,7 @@
 module.exports = __ensureExists => {
   describe('sugar.js.object.ensureExists', () => {
     it('Should have created the passed dotted path inside the object', done => {
-      const obj1 = {
+      var obj1 = {
         hello: 'world'
       };
 

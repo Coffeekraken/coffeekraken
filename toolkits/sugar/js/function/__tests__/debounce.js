@@ -2,9 +2,9 @@
 
 module.exports = __debounce => {
   describe('sugar.js.function.debounce', () => {
-    let calledCount = 0;
+    var calledCount = 0;
 
-    const myCoolFn = __debounce(param1 => {
+    var myCoolFn = __debounce(param1 => {
       calledCount++;
     }, 100);
 

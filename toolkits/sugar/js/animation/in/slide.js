@@ -16,11 +16,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var _default = (() => {
   (0, _querySelectorLive.default)('[slide-in]', $item => {
     // generate a unique id for this node
-    const uniqClass = `slide-in-${(0, _uniqid.default)()}`;
+    var uniqClass = "slide-in-".concat((0, _uniqid.default)());
     $item.classList.add(uniqClass); // parse the slide-in value
 
-    const slideInValue = $item.getAttribute('slide-in');
-    const args = (0, _parseArgs.default)(slideInValue, {
+    var slideInValue = $item.getAttribute('slide-in');
+    var args = (0, _parseArgs.default)(slideInValue, {
       x: 'Number -x --x "0"',
       y: 'Number -y --y "0"',
       duration: 'Number -d --duration "500"',
@@ -28,41 +28,21 @@ var _default = (() => {
       when: 'String -w --when "inViewport"'
     }); // generate the animation css
 
-    const css = `
-      [slide-in].${uniqClass} {
-        opacity: 0;
-        transform: translate(${args.x.value || 0}px, ${args.y.value || 0}px);
+    var css = "\n      [slide-in].".concat(uniqClass, " {\n        opacity: 0;\n        transform: translate(").concat(args.x.value || 0, "px, ").concat(args.y.value || 0, "px);\n\n      }\n    ");
+    var cssIn = "\n      [slide-in].".concat(uniqClass, ".in {\n        transition: all ").concat(args.duration.value / 1000 || '0.5', "s;\n        opacity: 1;\n        transform: translate(0, 0);\n      }\n    "); // append the css into the section
 
-      }
-    `;
-    const cssIn = `
-      [slide-in].${uniqClass}.in {
-        transition: all ${args.duration.value / 1000 || '0.5'}s;
-        opacity: 1;
-        transform: translate(0, 0);
-      }
-    `; // append the css into the section
-
-    document.head.innerHTML += `
-      <style id="${uniqClass}">
-        ${css}
-      </style>
-    `;
+    document.head.innerHTML += "\n      <style id=\"".concat(uniqClass, "\">\n        ").concat(css, "\n      </style>\n    ");
     setTimeout(() => {
-      document.head.innerHTML += `
-        <style id="${uniqClass}-in">
-          ${cssIn}
-        </style>
-      `;
+      document.head.innerHTML += "\n        <style id=\"".concat(uniqClass, "-in\">\n          ").concat(cssIn, "\n        </style>\n      ");
     }, 100); // add the "in" class
 
     setTimeout(() => {
       $item.classList.add('in');
     }, args.delay.value);
     setTimeout(() => {
-      const $style = document.querySelector(`style#${uniqClass}`);
+      var $style = document.querySelector("style#".concat(uniqClass));
       if ($style) $style.parentNode.removeChild($style);
-      const $styleIn = document.querySelector(`style#${uniqClass}-in`);
+      var $styleIn = document.querySelector("style#".concat(uniqClass, "-in"));
       if ($styleIn) $styleIn.parentNode.removeChild($styleIn);
     }, args.delay.value + args.duration.value);
   });

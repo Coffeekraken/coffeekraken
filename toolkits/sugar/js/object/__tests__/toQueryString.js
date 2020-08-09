@@ -3,7 +3,7 @@
 module.exports = __toQueryString => {
   describe('sugar.js.object.toQueryString', () => {
     it('Should transformt the object into a correctly formatted query string', done => {
-      const obj = {
+      var obj = {
         param1: 'hello',
         param2: 'world coco'
       };

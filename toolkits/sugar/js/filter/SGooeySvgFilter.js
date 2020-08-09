@@ -50,7 +50,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-let SGooeySvgFilter = /*#__PURE__*/function (_SSvgFilter) {
+var SGooeySvgFilter = /*#__PURE__*/function (_SSvgFilter) {
   _inherits(SGooeySvgFilter, _SSvgFilter);
 
   var _super = _createSuper(SGooeySvgFilter);
@@ -65,16 +65,16 @@ let SGooeySvgFilter = /*#__PURE__*/function (_SSvgFilter) {
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  function SGooeySvgFilter(amount = 8) {
+  function SGooeySvgFilter(amount) {
     var _this;
+
+    if (amount === void 0) {
+      amount = 8;
+    }
 
     _classCallCheck(this, SGooeySvgFilter);
 
-    _this = _super.call(this, `
-			<feGaussianBlur in="SourceGraphic" stdDeviation="${amount}" result="blur" />
-			<feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 ${parseInt(amount) + 9} -9" result="gooey" />
-			<feComposite in="SourceGraphic" in2="gooey" operator="atop"/>
-		`);
+    _this = _super.call(this, "\n\t\t\t<feGaussianBlur in=\"SourceGraphic\" stdDeviation=\"".concat(amount, "\" result=\"blur\" />\n\t\t\t<feColorMatrix in=\"blur\" mode=\"matrix\" values=\"1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 ").concat(parseInt(amount) + 9, " -9\" result=\"gooey\" />\n\t\t\t<feComposite in=\"SourceGraphic\" in2=\"gooey\" operator=\"atop\"/>\n\t\t"));
     _this._blur = _this.filter.querySelector('feGaussianBlur');
     _this._color_matrix = _this.filter.querySelector('feColorMatrix');
     return _this;
@@ -91,10 +91,10 @@ let SGooeySvgFilter = /*#__PURE__*/function (_SSvgFilter) {
 
   _createClass(SGooeySvgFilter, [{
     key: "blur",
-    set: function (value) {
+    set: function set(value) {
       this._blur.setAttribute('stdDeviation', value);
     },
-    get: function () {
+    get: function get() {
       return parseFloat(this._blur.getAttribute('stdDeviation'));
     }
     /**
@@ -108,9 +108,9 @@ let SGooeySvgFilter = /*#__PURE__*/function (_SSvgFilter) {
 
   }, {
     key: "contrast",
-    set: function (value) {
+    set: function set(value) {
       // get value
-      let v = this._color_matrix.getAttribute('values'); // process
+      var v = this._color_matrix.getAttribute('values'); // process
 
 
       v = v.split(' ');
@@ -129,9 +129,9 @@ let SGooeySvgFilter = /*#__PURE__*/function (_SSvgFilter) {
 
   }, {
     key: "shrink",
-    set: function (value) {
+    set: function set(value) {
       // get value
-      let v = this._color_matrix.getAttribute('values'); // process
+      var v = this._color_matrix.getAttribute('values'); // process
 
 
       v = v.split(' ');
@@ -150,10 +150,10 @@ let SGooeySvgFilter = /*#__PURE__*/function (_SSvgFilter) {
 
   }, {
     key: "amount",
-    set: function (value) {
+    set: function set(value) {
       this._blur.setAttribute('stdDeviation', value);
 
-      this._color_matrix.setAttribute('values', `1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 ${parseInt(value) + 9} -9`);
+      this._color_matrix.setAttribute('values', "1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 ".concat(parseInt(value) + 9, " -9"));
     }
   }]);
 

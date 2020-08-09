@@ -11,6 +11,14 @@ var _toString = _interopRequireDefault(require("../../string/toString"));
 
 var _deepMerge = _interopRequireDefault(require("../../object/deepMerge"));
 
+var _typeof = _interopRequireDefault(require("../../value/typeof"));
+
+var _SDefinitionObjectError = _interopRequireDefault(require("../../error/SDefinitionObjectError"));
+
+var _validateValue = _interopRequireDefault(require("../../validation/value/validateValue"));
+
+var _definitionObjectDefinition = _interopRequireDefault(require("./definitionObjectDefinition"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // TODO: tests
@@ -24,8 +32,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @param       {Object}        definitionObj         The definition object to check
  * @param       {Object}        [settings={}]         An object of settings to configure your validation process:
- * - bySteps (false) {Boolean}: Specify if you want each issues returned individually or if you want all the issues at once
  * - extendsFn (null) {Function}: Specify a function that will be called at first to extend your validation process
+ * - name ('unnamed') {String}: Specify a name for debugging purposes
+ * - throw (true) {Boolean}: Specify if you want to throw an error if something goes wrong
+ * - definitionObj ({}) {Object}: Specify the definition object that will be used to validate the passed one... Weird I know ;)
  * @return      {Boolean|String}                             true if valid, a string with the error details if not
  *
  * @todo        tests
@@ -45,64 +55,88 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function validateObjectDefinitionObject(definitionObj, settings = {}) {
+function validateObjectDefinitionObject(definitionObj, settings) {
+  if (settings === void 0) {
+    settings = {};
+  }
+
   settings = (0, _deepMerge.default)({
-    bySteps: false,
-    extendsFn: null
-  });
-  let issues = [];
+    definitionObj: _definitionObjectDefinition.default,
+    throw: true,
+    extendsFn: null,
+    name: 'unnamed'
+  }, settings);
+  var issuesObj = {
+    name: settings.name,
+    issues: []
+  };
 
   if (!(0, _plainObject.default)(definitionObj)) {
-    const msg = `Sorry but the passed definition object has to be a plain object...`;
-    if (settings.bySteps) return msg;
-    issues = [...issues, msg];
+    issuesObj.expected = {
+      type: 'Object<Object>'
+    };
+    issuesObj.received = {
+      type: (0, _typeof.default)(definitionObj),
+      value: definitionObj
+    };
+    issuesObj.issues.push('type');
   }
 
-  const argNames = Object.keys(definitionObj);
+  var argNames = Object.keys(definitionObj);
 
   if (!argNames.length) {
-    const msg = `A definition object has to contain at least 1 argument definition...`;
-    if (settings.bySteps) return msg;
-    issues = [...issues, msg];
+    issuesObj.issues.push('arguments.required');
   }
 
-  for (let i = 0; i < argNames.length; i++) {
-    const argName = argNames[i];
-    const argDefinition = definitionObj[argName]; // check the type
+  var _loop = function _loop(i) {
+    var argName = argNames[i];
+    var argDefinition = definitionObj[argName];
+    var argIssuesObj = {
+      issues: []
+    };
+    Object.keys(argDefinition).forEach(definitionPropName => {
+      var definitionPropValue = argDefinition[definitionPropName];
+      var expectedDefinitionObj = settings.definitionObj[definitionPropName];
 
-    if (argDefinition.type === undefined) {
-      const msg = `An argument definiion object has to contain a "type" property which is not the case for your argument "${argName}"...`;
-      if (settings.bySteps) return msg;
-      issues = [...issues, msg];
-    }
-
-    if (typeof argDefinition.type !== 'string') {
-      const msg = `The "type" property of an argument definition object has to be a String. You've passed "${(0, _toString.default)(argDefinition.type)}" which is a "${typeof argDefinition.type}" for your argument "${argName}"...`;
-      if (settings.bySteps) return msg;
-      issues = [...issues, msg];
-    }
-
-    if (argDefinition.required !== undefined) {
-      if (typeof argDefinition.required !== 'boolean') {
-        const msg = `The "required" property of an argument definition object has to bo a Boolean. You've passed "${(0, _toString.default)(argDefinition.required)}" which is a "${typeof argDefinition.required}"...`;
-        if (settings.bySteps) return msg;
-        issues = [...issues, msg];
+      if (!expectedDefinitionObj) {
+        argIssuesObj.issues.push(definitionPropName);
+        argIssuesObj[definitionPropName] = {
+          issues: ['definitionObject.unknown'],
+          name: definitionPropName
+        };
+        return;
       }
-    } // if an extends function exist, call it
 
+      var definitionPropValidationResult = (0, _validateValue.default)(definitionPropValue, expectedDefinitionObj, {
+        name: argName,
+        throw: settings.throw
+      });
 
-    if (settings.extendsFn && typeof settings.extendsFn === 'function') {
-      const res = settings.extendsFn(argName, argDefinition);
-
-      if (res !== true) {
-        if (settings.bySteps) return res;
-        issues = [...issues, ...res];
+      if (definitionPropValidationResult !== true) {
+        argIssuesObj.issues.push(definitionPropName);
+        argIssuesObj[definitionPropName] = (0, _deepMerge.default)(argIssuesObj, definitionPropValidationResult, {
+          array: true
+        });
       }
+    });
+
+    if (argIssuesObj.issues.length) {
+      issuesObj.issues.push(argName);
+      issuesObj[argName] = argIssuesObj;
     }
+  };
+
+  for (var i = 0; i < argNames.length; i++) {
+    _loop(i);
   }
 
-  if (!issues.length) return true;
-  return issues;
+  if (!issuesObj.issues.length) return true;
+
+  if (settings.throw) {
+    throw new _SDefinitionObjectError.default(issuesObj);
+  }
+
+  return issuesObj;
 }
 
 module.exports = exports.default;

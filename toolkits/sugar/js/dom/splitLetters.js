@@ -75,8 +75,16 @@ function _decodeHtml(html) {
  */
 
 
-function splitLetters(elm, tag = 'span', tagClass = 'split-letters') {
-  let string = elm._splitLettersOriginalString;
+function splitLetters(elm, tag, tagClass) {
+  if (tag === void 0) {
+    tag = 'span';
+  }
+
+  if (tagClass === void 0) {
+    tagClass = 'split-letters';
+  }
+
+  var string = elm._splitLettersOriginalString;
 
   if (!string) {
     string = elm.innerHTML;
@@ -85,15 +93,15 @@ function splitLetters(elm, tag = 'span', tagClass = 'split-letters') {
 
   elm.classList.add(tagClass); // wrap each characters inside two spans
 
-  let words = string.match(/<\s*(\w+\b)(?:(?!<\s*\/\s*\1\b)[\s\S])*<\s*\/\s*\1\s*>|\S+/g); // split words
+  var words = string.match(/<\s*(\w+\b)(?:(?!<\s*\/\s*\1\b)[\s\S])*<\s*\/\s*\1\s*>|\S+/g); // split words
 
   words = (0, _map2.default)(words, word => {
-    return `<${tag} style="white-space:nowrap">${word}</${tag}>`;
+    return "<".concat(tag, " style=\"white-space:nowrap\">").concat(word, "</").concat(tag, ">");
   }).join(' ');
 
-  let letters = _decodeHtml(words).split('');
+  var letters = _decodeHtml(words).split('');
 
-  let hasTagOpened = false;
+  var hasTagOpened = false;
   letters = (0, _map2.default)(letters, letter => {
     // check if a tag has started
     if (letter === '<') hasTagOpened = true;else if (letter === '>') {
@@ -102,7 +110,7 @@ function splitLetters(elm, tag = 'span', tagClass = 'split-letters') {
     }
     if (hasTagOpened) return letter;
     if (letter === ' ') letter = '&nbsp;';
-    return `<${tag} class="${tagClass}__letter-container"><${tag} class="${tagClass}__letter">${letter}</${tag}></${tag}>`;
+    return "<".concat(tag, " class=\"").concat(tagClass, "__letter-container\"><").concat(tag, " class=\"").concat(tagClass, "__letter\">").concat(letter, "</").concat(tag, "></").concat(tag, ">");
   });
   elm.innerHTML = letters.join('');
   return elm;

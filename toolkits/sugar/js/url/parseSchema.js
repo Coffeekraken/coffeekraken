@@ -9,6 +9,12 @@ var _parse = _interopRequireDefault(require("../string/parse"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 /**
  * @name                                parseSchema
  * @namespace           js.url
@@ -64,12 +70,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 function parseSchema(url, schema) {
-  const rawSchemaString = schema;
-  const rawUrlString = url; // remove query string
+  var rawSchemaString = schema;
+  var rawUrlString = url; // remove query string
 
   url = url.split('?')[0]; // get the pathname of the url
 
-  let pathname;
+  var pathname;
 
   try {
     pathname = new URL(url).pathname;
@@ -79,19 +85,19 @@ function parseSchema(url, schema) {
 
   if (pathname.slice(0, 1) === '/') pathname = pathname.slice(1); // init the params object
 
-  const params = {};
-  const errors = {};
-  let match = true; // split the schema
+  var params = {};
+  var errors = {};
+  var match = true; // split the schema
 
-  let schemaParts = schema.split('/'); // analyze all the schema parts
+  var schemaParts = schema.split('/'); // analyze all the schema parts
 
   schemaParts = schemaParts.map(part => {
     // check if is a param
     if (part.slice(0, 1) === '{' && part.slice(-1) === '}') {
-      const isOptional = part.slice(0, 2) === '{?' || part.slice(-2) === '?}';
-      const isType = part.indexOf(':') !== -1;
-      let type = null;
-      let name = null;
+      var isOptional = part.slice(0, 2) === '{?' || part.slice(-2) === '?}';
+      var isType = part.indexOf(':') !== -1;
+      var type = null;
+      var name = null;
 
       if (isType) {
         name = part.split(':')[0].slice(1);
@@ -117,60 +123,59 @@ function parseSchema(url, schema) {
   }).filter(l => l !== '');
   schemaParts.forEach(part => {
     if (!part.name) return;
-    params[part.name] = { ...part
-    };
+    params[part.name] = _objectSpread({}, part);
     delete params[part.name].name;
   }); // loop on the schema to get the params values
   // const pathname = url.pathname.slice(1);
 
-  const splitedPathname = pathname.split('/');
+  var splitedPathname = pathname.split('/');
 
-  for (let i = 0; i < schemaParts.length; i++) {
+  for (var i = 0; i < schemaParts.length; i++) {
     // get the schema for this part
-    const schema = schemaParts[i]; // get the part to check
+    var _schema = schemaParts[i]; // get the part to check
 
-    const part = splitedPathname[i]; // if it's not an object, mean that it's a simple string part
+    var part = splitedPathname[i]; // if it's not an object, mean that it's a simple string part
 
-    if (typeof schema !== 'object') {
-      if (part !== schema) match = false;
+    if (typeof _schema !== 'object') {
+      if (part !== _schema) match = false;
       continue;
     }
 
-    if (!part && !schema.optional) {
-      let errorObj = {
+    if (!part && !_schema.optional) {
+      var errorObj = {
         type: 'optional',
-        description: `This param "${schema.name}" cannot be null...`
+        description: "This param \"".concat(_schema.name, "\" cannot be null...")
       };
-      errors[schema.name] = errorObj;
-      params[schema.name].error = errorObj;
+      errors[_schema.name] = errorObj;
+      params[_schema.name].error = errorObj;
       match = false;
       continue;
-    } else if (!part && schema.optional) {
-      params[schema.name].value = null;
+    } else if (!part && _schema.optional) {
+      params[_schema.name].value = null;
       continue;
     } // check that all correspond to the schema
 
 
-    if (schema.type) {
-      const type = schema.type;
+    if (_schema.type) {
+      var type = _schema.type;
 
       if (type !== typeof (0, _parse.default)(part)) {
         match = false;
-        const errorObj = {
+        var _errorObj = {
           type: 'type',
           requested: type,
           passed: typeof (0, _parse.default)(part),
-          description: `This param "${schema.name}" has to be a "${type}" but he's a "${typeof (0, _parse.default)(part)}"...`
+          description: "This param \"".concat(_schema.name, "\" has to be a \"").concat(type, "\" but he's a \"").concat(typeof (0, _parse.default)(part), "\"...")
         };
-        errors[schema.name] = errorObj;
-        params[schema.name].error = errorObj;
-        params[schema.name].value = (0, _parse.default)(part);
+        errors[_schema.name] = _errorObj;
+        params[_schema.name].error = _errorObj;
+        params[_schema.name].value = (0, _parse.default)(part);
         continue;
       }
     } // this part match the schema so we add it to the params
 
 
-    params[schema.name].value = (0, _parse.default)(part);
+    params[_schema.name].value = (0, _parse.default)(part);
   } // return the schema result
 
 

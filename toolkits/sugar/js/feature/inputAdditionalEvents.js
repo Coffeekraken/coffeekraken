@@ -21,7 +21,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 // TODO tests
 function handleInputAttributes(e) {
-  const field = e.target ? e.target : e;
+  var field = e.target ? e.target : e;
   if (!field || !field.tagName) return;
 
   switch (field.tagName) {

@@ -35,14 +35,14 @@ exports.default = sort;
  */
 function sort(object, sort) {
   // get the object keys
-  const keys = Object.keys(object); // sort the keys
+  var keys = Object.keys(object); // sort the keys
 
-  const sortedKeys = keys.sort((a, b) => {
+  var sortedKeys = keys.sort((a, b) => {
     // call the sort function passed as parameter
     return sort(object[a], object[b]);
   }); // create the new sorted object
 
-  const resultObj = {}; // loop on each sorted keys
+  var resultObj = {}; // loop on each sorted keys
 
   sortedKeys.forEach(k => {
     // add the property key with the object value

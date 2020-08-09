@@ -5,11 +5,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 module.exports = __constructorName => {
   describe('sugar.js.object.constructorName', () => {
     it('Should get the constructor name correctly', () => {
-      let MyCoolClass = function MyCoolClass() {
+      var MyCoolClass = function MyCoolClass() {
         _classCallCheck(this, MyCoolClass);
       };
 
-      const instance = new MyCoolClass();
+      var instance = new MyCoolClass();
       expect(__constructorName(instance)).toBe('MyCoolClass');
     });
   });

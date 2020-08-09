@@ -1,7 +1,7 @@
 "use strict";
 
 module.exports = __SWatch => {
-  let obj = {
+  var obj = {
     a: 'hello',
     b: {
       bb: 'world'
@@ -18,9 +18,9 @@ module.exports = __SWatch => {
       }
     }
   };
-  let doneAssign, doneUpdating, doneUpdatingDeep, doneDeleting, doneAddIntoArray, doneGlobAction, doneGlobPattern;
-  let hasUnwatchedObjectBeenWatched = false;
-  const watchedObj = new __SWatch(obj);
+  var doneAssign, doneUpdating, doneUpdatingDeep, doneDeleting, doneAddIntoArray, doneGlobAction, doneGlobPattern;
+  var hasUnwatchedObjectBeenWatched = false;
+  var watchedObj = new __SWatch(obj);
   watchedObj.on('coco:set', update => {
     doneAssign();
   });
@@ -77,7 +77,7 @@ module.exports = __SWatch => {
     watchedObj.glob.something.other = 'plop';
   });
   test('Unwatch the watchedObject', done => {
-    const obj = watchedObj.unwatch();
+    var obj = watchedObj.unwatch();
     obj.b.plop = 'yop';
     setTimeout(() => {
       expect(hasUnwatchedObjectBeenWatched).toBe(false);

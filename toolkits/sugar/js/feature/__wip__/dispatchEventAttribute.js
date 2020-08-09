@@ -26,19 +26,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 function handleDispatchEventAttributes(e) {
   e.preventDefault();
-  const field = e.target ? e.target : e;
+  var field = e.target ? e.target : e;
   if (!field || !field.tagName) return;
-  const dispatchEventValue = field.getAttribute('dispatch-event'); // handle the dispatchEvent value
+  var dispatchEventValue = field.getAttribute('dispatch-event'); // handle the dispatchEvent value
 
-  let nativeEvent = 'click';
-  let dispatchEventName = dispatchEventValue;
+  var nativeEvent = 'click';
+  var dispatchEventName = dispatchEventValue;
 
   if (dispatchEventValue.indexOf(':') > -1) {
     nativeEvent = dispatchEventValue.split(':')[0];
     dispatchEventName = dispatchEventValue.split(':')[1];
   }
 
-  const keyCodes = {
+  var keyCodes = {
     backspace: 8,
     tab: 9,
     enter: 13,
@@ -139,13 +139,13 @@ function handleDispatchEventAttributes(e) {
     closebracket: 221,
     singlequote: 222
   };
-  const dispatchEventData = JSON.parse(field.getAttribute('dispatch-event-data')) || {};
+  var dispatchEventData = JSON.parse(field.getAttribute('dispatch-event-data')) || {};
 
   _fastdom.default.mutate(() => {
     if (e.keyCode) {
-      const keyName = (0, _getKeyByValue.default)(keyCodes, e.keyCode);
+      var keyName = (0, _getKeyByValue.default)(keyCodes, e.keyCode);
 
-      if (nativeEvent.toLowerCase() === keyName || nativeEvent.toLowerCase() === `on${keyName.toLowerCase()}`) {
+      if (nativeEvent.toLowerCase() === keyName || nativeEvent.toLowerCase() === "on".concat(keyName.toLowerCase())) {
         (0, _dispatchEvent.default)(field, dispatchEventName, dispatchEventData);
       }
     } else {

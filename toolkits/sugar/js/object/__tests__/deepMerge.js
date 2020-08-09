@@ -7,20 +7,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 module.exports = __deepMerge => {
   describe('sugar.js.object.deepMerge', () => {
     it('Should merge the passed objects correctly', done => {
-      const obj1 = {
+      var obj1 = {
         hello: {
           world: 'hello world'
         },
         plop: {}
       };
-      const obj2 = {
+      var obj2 = {
         hello: {
           coco: 'coco'
         },
         yes: true
       };
 
-      const result = __deepMerge(obj1, obj2);
+      var result = __deepMerge(obj1, obj2);
 
       expect(result).toEqual({
         hello: {
@@ -33,7 +33,7 @@ module.exports = __deepMerge => {
       done();
     });
     it('Should merge the passed objects with some classes instances correctly', done => {
-      let MyClass = function MyClass(value) {
+      var MyClass = function MyClass(value) {
         _classCallCheck(this, MyClass);
 
         _defineProperty(this, "classParam1", 'hello');
@@ -43,14 +43,14 @@ module.exports = __deepMerge => {
         this.value = value;
       };
 
-      const myObj = new MyClass('MyClass');
-      const obj1 = {
+      var myObj = new MyClass('MyClass');
+      var obj1 = {
         hello: {
           world: 'hello world'
         },
         plop: myObj
       };
-      const obj2 = {
+      var obj2 = {
         hello: {
           coco: 'coco'
         },
@@ -60,7 +60,7 @@ module.exports = __deepMerge => {
         yes: true
       };
 
-      const result = __deepMerge(obj1, obj2);
+      var result = __deepMerge(obj1, obj2);
 
       expect(result).toEqual({
         hello: {
@@ -75,7 +75,7 @@ module.exports = __deepMerge => {
       done();
     });
     it("Should leave the class instances and don's touch them", done => {
-      let MyClass = function MyClass(value) {
+      var MyClass = function MyClass(value) {
         _classCallCheck(this, MyClass);
 
         _defineProperty(this, "classParam1", 'hello');
@@ -85,31 +85,31 @@ module.exports = __deepMerge => {
         this.value = value;
       };
 
-      const myObj = new MyClass('MyClass');
-      const obj1 = {
+      var myObj = new MyClass('MyClass');
+      var obj1 = {
         hello: {
           world: 'hello world'
         },
         plop: myObj
       };
-      const obj2 = {
+      var obj2 = {
         hello: {
           coco: 'coco'
         },
         yes: true
       };
 
-      const result = __deepMerge(obj1, obj2);
+      var result = __deepMerge(obj1, obj2);
 
       expect(result.plop instanceof MyClass).toBe(true);
       done();
     });
     it('Should merge the passed objects with some array correctly', done => {
-      const obj1 = {
+      var obj1 = {
         plop: ['a', 'b', 'c'],
         hello: 'world'
       };
-      const obj2 = {
+      var obj2 = {
         plop: ['a', 'b', 'd', 'e'],
         hello: 'world'
       };

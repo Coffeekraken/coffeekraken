@@ -32,7 +32,7 @@ function getMethods(toCheck) {
   var obj = toCheck;
 
   do {
-    const _props = Object.getOwnPropertyNames(obj);
+    var _props = Object.getOwnPropertyNames(obj);
 
     if (_props.indexOf('__defineGetter__') !== -1) continue;
     props = props.concat(_props);

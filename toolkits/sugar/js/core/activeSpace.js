@@ -42,10 +42,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @see       https://www.npmjs.com/package/minimatch
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-const _activeSpaceCallbacksStack = {};
-const _activeSpaceStack = [];
-let _activeSpaceCurrent = null;
-const activeSpaceApi = {
+var _activeSpaceCallbacksStack = {};
+var _activeSpaceStack = [];
+var _activeSpaceCurrent = null;
+var activeSpaceApi = {
   /**
    * @name                get
    * @type                Function
@@ -75,9 +75,17 @@ const activeSpaceApi = {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  set: (activeSpace, history = true, silent = false) => {
+  set: function set(activeSpace, history, silent) {
+    if (history === void 0) {
+      history = true;
+    }
+
+    if (silent === void 0) {
+      silent = false;
+    }
+
     if (!silent && (0, _isGlob.default)(activeSpace)) {
-      throw new Error(`You try to set as activeSpace this string "${activeSpace}". It seems that this string is a glob pattern and activeSpace does not have to be a glob pattern...`);
+      throw new Error("You try to set as activeSpace this string \"".concat(activeSpace, "\". It seems that this string is a glob pattern and activeSpace does not have to be a glob pattern..."));
     } // check if the passed activeSpace is the same as the last one
 
 
@@ -106,12 +114,16 @@ const activeSpaceApi = {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  append: (activeSpace, history = true) => {
+  append: function append(activeSpace, history) {
+    if (history === void 0) {
+      history = true;
+    }
+
     // get the current one
-    const currentActiveSpace = activeSpaceApi.get() || '';
-    if (currentActiveSpace !== '' && (0, _minimatch.default)(currentActiveSpace, `**.${activeSpace}`)) return activeSpaceApi.get();
-    const currentActiveSpaceArray = currentActiveSpace.split('.');
-    const activeSpaceArray = activeSpace.split('.');
+    var currentActiveSpace = activeSpaceApi.get() || '';
+    if (currentActiveSpace !== '' && (0, _minimatch.default)(currentActiveSpace, "**.".concat(activeSpace))) return activeSpaceApi.get();
+    var currentActiveSpaceArray = currentActiveSpace.split('.');
+    var activeSpaceArray = activeSpace.split('.');
     activeSpaceApi.set([...currentActiveSpaceArray, ...activeSpaceArray].join('.'), history);
     return activeSpaceApi.get();
   },
@@ -129,11 +141,15 @@ const activeSpaceApi = {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  remove: (toRemove, history = true) => {
-    // get the current
-    const currentActiveSpace = activeSpaceApi.get(); // generate new active space
+  remove: function remove(toRemove, history) {
+    if (history === void 0) {
+      history = true;
+    }
 
-    let newActiveSpace = currentActiveSpace.replace(toRemove, ''); // clean the new active space
+    // get the current
+    var currentActiveSpace = activeSpaceApi.get(); // generate new active space
+
+    var newActiveSpace = currentActiveSpace.replace(toRemove, ''); // clean the new active space
 
     if (newActiveSpace.substr(-1) === '.') newActiveSpace = newActiveSpace.slice(0, -1);
     if (newActiveSpace.substr(0, 1) === '.') newActiveSpace = newActiveSpace.substr(1); // check if we need to append in the history
@@ -176,7 +192,11 @@ const activeSpaceApi = {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  is: (activeSpaceToCheck, currentActiveSpace = activeSpaceApi.get()) => {
+  is: function is(activeSpaceToCheck, currentActiveSpace) {
+    if (currentActiveSpace === void 0) {
+      currentActiveSpace = activeSpaceApi.get();
+    }
+
     if (!currentActiveSpace) return false;
     return (0, _minimatch.default)(currentActiveSpace, activeSpaceToCheck);
   },
@@ -197,7 +217,11 @@ const activeSpaceApi = {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  on: (activeSpaceToCheck, callback, settings = {}) => {
+  on: function on(activeSpaceToCheck, callback, settings) {
+    if (settings === void 0) {
+      settings = {};
+    }
+
     settings = (0, _deepMerge.default)({
       once: false,
       count: -1

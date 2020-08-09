@@ -1,48 +1,14 @@
 const __sugarConfig = require('./config/sugar');
 const __SLog = require('./log/SLog');
-const __isChildProcess = require('./is/childProcess');
-const __packageRoot = require('./path/packageRoot');
+const __handleError = require('./error/handleError');
+const __initEnv = require('./init/initEnv');
 
-process.on('unhandledRejection', (error) => {
-  let errorArray = [`[error]`];
+// init env
+__initEnv();
 
-  if (error.name && error.name !== 'Error') {
-    errorArray.push(error.name);
-    errorArray.push('\n');
-  }
-  if (error.fileName && error.lineNumber) {
-    errorArray.push(error.fileName + ':' + error.lineNumber);
-    errorArray.push('\n');
-  }
-  if (error.stack) {
-    errorArray.push(error.message.replace(__packageRoot() + '/', ''));
-    let stack = error.stack.replace('Error: ', '').split('at ').join('\n\nat ');
-    const files = stack.match(/at\s(.*)\((.*)\)/g);
-    files.forEach((file) => {
-      const matches = file.match(/[0-9]+:[0-9]+/);
-      if (matches) {
-        file = file.replace(matches[0], `<magenta>${matches[0]}</magenta>`);
-      }
-      errorArray.push(' ');
-      errorArray.push(
-        `${file
-          .replace('(', '\n<cyan>')
-          .replace(')', '</cyan>')
-          .replace(__packageRoot() + '/', '')}`
-      );
-    });
-  } else if (error.message) errorArray.push(error.message);
-
-  if (__isChildProcess()) {
-    console.log(errorArray.join('\n'));
-    // throw error;
-  } else {
-    // console.log(error);
-    throw error.error || error;
-    // throw error;
-  }
-  return;
-});
+// handle the errors
+process.on('uncaughtException', __handleError);
+process.on('unhandledRejection', __handleError);
 
 /**
  * @name                    index

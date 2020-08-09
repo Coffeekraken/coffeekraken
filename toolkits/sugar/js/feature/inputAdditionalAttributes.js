@@ -23,8 +23,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 // TODO tests
-function handleInputAttributes(eOrElm, setDirty = true, forceDirty = false) {
-  const field = eOrElm.target ? eOrElm.target : eOrElm;
+function handleInputAttributes(eOrElm, setDirty, forceDirty) {
+  if (setDirty === void 0) {
+    setDirty = true;
+  }
+
+  if (forceDirty === void 0) {
+    forceDirty = false;
+  }
+
+  var field = eOrElm.target ? eOrElm.target : eOrElm;
   if (!field || !field.tagName) return;
 
   switch (field.tagName) {

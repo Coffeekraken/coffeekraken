@@ -1,6 +1,6 @@
 "use strict";
 
-const __countLine = require('./countLine');
+var __countLine = require('./countLine');
 /**
  * @name                          splitEvery
  * @namespace           js.string
@@ -22,33 +22,38 @@ const __countLine = require('./countLine');
 // TODO: Add support for special characters like terminal colors, html tags, etc...
 
 
-module.exports = function splitEvery(text, every, splitWords = false) {
+module.exports = function splitEvery(text, every, splitWords) {
+  if (splitWords === void 0) {
+    splitWords = false;
+  }
+
   if (splitWords) {
-    const reg = new RegExp(`.{1,${every}}`, 'g');
+    var reg = new RegExp(".{1,".concat(every, "}"), 'g');
     return [...text.matchAll(reg)].map(o => o[0]);
   } else {
-    const reg = new RegExp(`(\\x1B\[[0-9;]+m)|(\\x1B\[39m])|(<[a-zA-Z\s/]+>)`, // `(?:(?:\x1B\[[\d;]*m)*[^\x1B]){1,${every}}(?:(?:\x1B\[[\d;]*m)+$)?`,
+    var _reg = new RegExp("(\\x1B[[0-9;]+m)|(\\x1B[39m])|(<[a-zA-Zs/]+>)", // `(?:(?:\x1B\[[\d;]*m)*[^\x1B]){1,${every}}(?:(?:\x1B\[[\d;]*m)+$)?`,
     'g'); // const reg = new RegExp(`(?:(?:\033\[[0-9;]*m)*.?){1,${every}}`, 'g');
 
-    let chunks = text.split(reg).filter(m => m != '' && m != null && m != undefined).map(item => {
+
+    var chunks = text.split(_reg).filter(m => m != '' && m != null && m != undefined).map(item => {
       return item.split(/(\s{1,99999999})/g);
     });
-    let finalChunks = [];
+    var finalChunks = [];
     chunks.forEach(chunk => {
       finalChunks = [...finalChunks, ...chunk];
     });
-    let finalLines = [''];
-    let lineCount = 0;
-    let lastOpenedTag = null;
+    var finalLines = [''];
+    var lineCount = 0;
+    var lastOpenedTag = null;
     finalChunks.forEach(item => {
       if (!item) return; // console.log(item, reg.test(item));
 
-      if (reg.test(item)) {
+      if (_reg.test(item)) {
         if (item.substr(0, 2) !== '</' || item.substr(0, 4) !== '\x1B') {
           lastOpenedTag = item;
 
           if (item.substr(0, 1) !== '<') {
-            lastOpenedTag = `\x1B${lastOpenedTag}`;
+            lastOpenedTag = "\x1B".concat(lastOpenedTag);
           }
         }
 
@@ -58,12 +63,12 @@ module.exports = function splitEvery(text, every, splitWords = false) {
 
       if (lineCount + item.length > every) {
         // console.log('CHECK', item);
-        const toAdd = item.substr(0, every - lineCount - 1);
+        var toAdd = item.substr(0, every - lineCount - 1);
         finalLines[finalLines.length - 1] += toAdd;
-        const rest = lastOpenedTag + item.replace(toAdd, ''); // if (toAdd.slice(-1) !== ' ' && rest.slice(0, 1) !== ' ')
+        var rest = lastOpenedTag + item.replace(toAdd, ''); // if (toAdd.slice(-1) !== ' ' && rest.slice(0, 1) !== ' ')
         //   finalLines[finalLines.length - 1] += '-';
 
-        const restLines = splitEvery(rest, every);
+        var restLines = splitEvery(rest, every);
         finalLines = [...finalLines, ...restLines];
         lineCount = __countLine(finalLines[finalLines.length - 1]);
       } else {
@@ -79,9 +84,9 @@ module.exports = function splitEvery(text, every, splitWords = false) {
     // });
     // console.log(arr);
 
-    const words = text.split(' ');
-    let lines = [];
-    let currentLine = '';
+    var words = text.split(' ');
+    var lines = [];
+    var currentLine = '';
     words.forEach((word, i) => {
       if (currentLine.length + word.length <= every) {
         currentLine += word + ' ';

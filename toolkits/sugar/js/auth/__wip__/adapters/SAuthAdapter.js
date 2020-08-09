@@ -2,6 +2,10 @@
 
 var _temp;
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -87,19 +91,31 @@ module.exports = (_temp = /*#__PURE__*/function () {
      *
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    value: async function ask(settings = {}) {
-      // make sure the adapter support the auth type requested
-      if (!this[`_${settings.type}`]) {
-        throw new Error(`You try to ask the user for "${settings.type}" auth informations but this auth type is not supported by the current adapter...`);
-      } // get the auth info using the adapter
+    value: function () {
+      var _ask = _asyncToGenerator(function* (settings) {
+        if (settings === void 0) {
+          settings = {};
+        }
+
+        // make sure the adapter support the auth type requested
+        if (!this["_".concat(settings.type)]) {
+          throw new Error("You try to ask the user for \"".concat(settings.type, "\" auth informations but this auth type is not supported by the current adapter..."));
+        } // get the auth info using the adapter
 
 
-      const infos = await this[`_${settings.type}`](settings);
-      return infos;
-    }
+        var infos = yield this["_".concat(settings.type)](settings);
+        return infos;
+      });
+
+      function ask(_x) {
+        return _ask.apply(this, arguments);
+      }
+
+      return ask;
+    }()
   }, {
     key: "supportedAuthTypes",
-    get: function () {
+    get: function get() {
       return this._supportedAuthTypes;
     }
   }]);

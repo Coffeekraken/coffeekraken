@@ -33,7 +33,7 @@ function autoCast(string) {
   // before the window check cause window['0'] correspond to something
 
 
-  const presumedNumber = parseFloat(string);
+  var presumedNumber = parseFloat(string);
 
   if (!isNaN(presumedNumber)) {
     if (presumedNumber.toString() === string) {
@@ -50,7 +50,7 @@ function autoCast(string) {
 
 
   try {
-    const obj = eval(`(${string})`);
+    var obj = eval("(".concat(string, ")"));
     return obj;
   } catch (e) {
     // assume that the string passed is a string

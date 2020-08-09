@@ -29,9 +29,9 @@ exports.default = parseAuthorString;
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function parseAuthorString(string) {
-  const reg = /(.*)\s?<(.*)>\s?\((.*)\)/gm;
-  const matches = reg.exec(string.trim());
-  const authorObj = {};
+  var reg = /(.*)\s?<(.*)>\s?\((.*)\)/gm;
+  var matches = reg.exec(string.trim());
+  var authorObj = {};
 
   if (matches) {
     if (matches[1]) {

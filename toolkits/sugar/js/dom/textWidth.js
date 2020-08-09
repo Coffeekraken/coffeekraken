@@ -31,15 +31,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 function textWidth(source) {
   // create an element
-  const elm = document.createElement('span');
+  var elm = document.createElement('span');
   elm.style.whiteSpace = 'nowrap';
   elm.style.position = 'absolute';
   elm.style.visibility = 'hidden';
-  let text = source; // if the source if an html element
+  var text = source; // if the source if an html element
 
   if (source.tagName) {
     // set the text into the element
-    const tagName = source.tagName.toLowerCase();
+    var tagName = source.tagName.toLowerCase();
 
     switch (tagName) {
       case 'input':
@@ -53,9 +53,9 @@ function textWidth(source) {
     } // get the font properties
 
 
-    const fs = (0, _getStyleProperty.default)(source, 'font-size');
-    const ff = (0, _getStyleProperty.default)(source, 'font-family');
-    const ls = (0, _getStyleProperty.default)(source, 'letter-spacing');
+    var fs = (0, _getStyleProperty.default)(source, 'font-size');
+    var ff = (0, _getStyleProperty.default)(source, 'font-family');
+    var ls = (0, _getStyleProperty.default)(source, 'letter-spacing');
     elm.style.fontSize = fs;
     elm.style.fontFamily = ff;
     elm.style.letterSpacing = ls;
@@ -68,7 +68,7 @@ function textWidth(source) {
 
   document.body.appendChild(elm); // return the width of the element
 
-  const width = elm.offsetWidth; // remove the element from the dom
+  var width = elm.offsetWidth; // remove the element from the dom
 
   document.body.removeChild(elm); // return the width
 

@@ -40,21 +40,21 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 function instanciate(actionObj) {
   if (!actionObj.type) {
-    throw new Error(`instanciate: The actionObj parameter MUST have a <cyan>type</cyan> property...`);
+    throw new Error("instanciate: The actionObj parameter MUST have a <cyan>type</cyan> property...");
   }
 
   if (!actionObj.descriptorObj) {
-    throw new Error(`instanciate: The actionObj parameter MUST have a <cyan>descriptorObj</cyan> property of type Object...`);
+    throw new Error("instanciate: The actionObj parameter MUST have a <cyan>descriptorObj</cyan> property of type Object...");
   }
 
-  const cls = (0, _get.default)(_typeMap.default, actionObj.type);
+  var cls = (0, _get.default)(_typeMap.default, actionObj.type);
 
   if (!cls) {
-    throw new Error(`instanciate: Your passed "type" is not valid and must be one of those: ${Object.keys((0, _flatten.default)(_typeMap.default)).join(', ')}...`);
+    throw new Error("instanciate: Your passed \"type\" is not valid and must be one of those: ".concat(Object.keys((0, _flatten.default)(_typeMap.default)).join(', '), "..."));
   } // instanciate the object
 
 
-  const instance = new cls(actionObj.descriptorObj, actionObj.settings || {});
+  var instance = new cls(actionObj.descriptorObj, actionObj.settings || {});
   return instance;
 }
 

@@ -3,7 +3,7 @@
 module.exports = __geKeyByValue => {
   describe('sugar.js.object.geKeyByValue', () => {
     it('Should find the correct key passing a value', done => {
-      const obj1 = {
+      var obj1 = {
         hello: {
           world: 'hello world',
           plop: 'youhou'

@@ -29,7 +29,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @see       https://www.npmjs.com/package/lodash
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function clone(object, deep = false) {
+function clone(object, deep) {
+  if (deep === void 0) {
+    deep = false;
+  }
+
   if (deep) {
     return (0, _lodash2.default)(object);
   }

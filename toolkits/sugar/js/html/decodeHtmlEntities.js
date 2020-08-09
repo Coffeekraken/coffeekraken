@@ -23,7 +23,7 @@ exports.default = decodeHtmlEntities;
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function decodeHtmlEntities(string) {
-  const txt = document.createElement('textarea');
+  var txt = document.createElement('textarea');
   txt.innerHTML = string;
   return txt.value;
 }

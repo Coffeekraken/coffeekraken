@@ -31,9 +31,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function getTranslateProperties($elm, unit = 'px') {
+function getTranslateProperties($elm, unit) {
+  if (unit === void 0) {
+    unit = 'px';
+  }
+
   if (!window.getComputedStyle) return;
-  let idx, mat, style, transform;
+  var idx, mat, style, transform;
   style = getComputedStyle($elm);
   transform = style.transform || style.webkitTransform || style.mozTransform || style.msTransform;
   if (!transform) return {
@@ -45,7 +49,7 @@ function getTranslateProperties($elm, unit = 'px') {
 
   if (mat) {
     // preparing the value
-    let val = mat[1].replace('matrix3d(', '').replace(')', '').split(',').map(v => v.trim());
+    var val = mat[1].replace('matrix3d(', '').replace(')', '').split(',').map(v => v.trim());
     return {
       x: (0, _convert.default)(val[12], unit, $elm),
       y: (0, _convert.default)(val[13], unit, $elm),
@@ -57,11 +61,12 @@ function getTranslateProperties($elm, unit = 'px') {
 
   if (mat) {
     // preparing the value
-    let val = mat[1].replace('matrix(', '').replace(')', '').split(',').map(v => v.trim());
+    var _val = mat[1].replace('matrix(', '').replace(')', '').split(',').map(v => v.trim());
+
     return {
-      x: (0, _convert.default)(val[4], unit, $elm),
-      y: (0, _convert.default)(val[5], unit, $elm),
-      z: (0, _convert.default)(val[6], unit, $elm) || 0
+      x: (0, _convert.default)(_val[4], unit, $elm),
+      y: (0, _convert.default)(_val[5], unit, $elm),
+      z: (0, _convert.default)(_val[6], unit, $elm) || 0
     };
   }
 
@@ -69,11 +74,12 @@ function getTranslateProperties($elm, unit = 'px') {
 
   if (mat) {
     // preparing the value
-    let val = mat[1].replace('translate3d(', '').replace(')', '').split(',').map(v => v.trim());
+    var _val2 = mat[1].replace('translate3d(', '').replace(')', '').split(',').map(v => v.trim());
+
     return {
-      x: (0, _convert.default)(val[0], unit, $elm),
-      y: (0, _convert.default)(val[1], unit, $elm),
-      z: (0, _convert.default)(val[2], unit, $elm) || 0
+      x: (0, _convert.default)(_val2[0], unit, $elm),
+      y: (0, _convert.default)(_val2[1], unit, $elm),
+      z: (0, _convert.default)(_val2[2], unit, $elm) || 0
     };
   }
 
@@ -81,10 +87,11 @@ function getTranslateProperties($elm, unit = 'px') {
 
   if (mat) {
     // preparing the value
-    let val = mat[1].replace('translate(', '').replace(')', '').split(',').map(v => v.trim());
+    var _val3 = mat[1].replace('translate(', '').replace(')', '').split(',').map(v => v.trim());
+
     return {
-      x: (0, _convert.default)(val[0], unit, $elm),
-      y: (0, _convert.default)(val[1], unit, $elm),
+      x: (0, _convert.default)(_val3[0], unit, $elm),
+      y: (0, _convert.default)(_val3[1], unit, $elm),
       z: 0
     };
   }
@@ -93,25 +100,25 @@ function getTranslateProperties($elm, unit = 'px') {
 
   if (mat) {
     // preparing the value
-    const xReg = /translateX\((\S+)\)/;
-    const yReg = /translateY\((\S+)\)/;
-    const zReg = /translateZ\((\S+)\)/;
-    const xRegRes = mat[0].match(xReg);
-    const yRegRes = mat[0].match(yReg);
-    const zRegRes = mat[0].match(zReg);
-    let xRes = 0;
+    var xReg = /translateX\((\S+)\)/;
+    var yReg = /translateY\((\S+)\)/;
+    var zReg = /translateZ\((\S+)\)/;
+    var xRegRes = mat[0].match(xReg);
+    var yRegRes = mat[0].match(yReg);
+    var zRegRes = mat[0].match(zReg);
+    var xRes = 0;
 
     if (xRegRes[1]) {
       xRes = (0, _convert.default)(xRegRes[1], unit, $elm);
     }
 
-    let yRes = 0;
+    var yRes = 0;
 
     if (yRegRes[1]) {
       yRes = (0, _convert.default)(yRegRes[1], unit, $elm);
     }
 
-    let zRes = 0;
+    var zRes = 0;
 
     if (zRegRes[1]) {
       zRes = (0, _convert.default)(zRegRes[1], unit, $elm);

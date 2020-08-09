@@ -30,15 +30,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function convert(from, to = 'px', $elm) {
-  let fromUnit = 'px';
+function convert(from, to, $elm) {
+  if (to === void 0) {
+    to = 'px';
+  }
+
+  var fromUnit = 'px';
 
   if (typeof from === 'string' && parseFloat(from).toString() !== from) {
     fromUnit = from.replace(/[0-9.,]+/g, '');
   }
 
-  const fromNumber = parseFloat(from);
-  let pxValue;
+  var fromNumber = parseFloat(from);
+  var pxValue;
 
   switch (fromUnit) {
     case 'px':

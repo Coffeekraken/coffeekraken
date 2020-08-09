@@ -34,7 +34,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function closest($elm, selector) {
-  const originalElm = $elm;
+  var originalElm = $elm;
   $elm = $elm.parentNode;
 
   while ($elm && $elm != originalElm.ownerDocument) {

@@ -3,7 +3,7 @@
 module.exports = __SNavItem => {
   describe('sugar.js.nav.SNavItem', () => {
     it('Should create and update a nav item correctly', done => {
-      const navItem = new __SNavItem('myCoolItem', 'My Cool Item', 'scroll:#something', {
+      var navItem = new __SNavItem('myCoolItem', 'My Cool Item', 'scroll:#something', {
         target: '_blank'
       });
       expect(navItem.id).toBe('myCoolItem');

@@ -28,9 +28,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function whenTransitionEnd(elm, cb = null) {
+function whenTransitionEnd(elm, cb) {
+  if (cb === void 0) {
+    cb = null;
+  }
+
   return new Promise((resolve, reject) => {
-    const transition = (0, _getTransitionProperties.default)(elm);
+    var transition = (0, _getTransitionProperties.default)(elm);
     setTimeout(() => {
       resolve();
       cb && cb();

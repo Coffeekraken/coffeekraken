@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = returnTag;
 
-const __upperFirst = require('../../string/upperFirst');
+var __upperFirst = require('../../string/upperFirst');
 /**
  * @name              return
  * @namespace           js.docblock.tags
@@ -22,7 +22,7 @@ const __upperFirst = require('../../string/upperFirst');
 
 
 function returnTag(data) {
-  const stringArray = data.value.trim().split(/(?<=^\S+)\s/);
+  var stringArray = data.value.trim().split(/(?<=^\S+)\s/);
   return {
     type: stringArray[0] ? __upperFirst(stringArray[0].replace('{', '').replace('}', '').trim()) : '',
     description: stringArray[1] ? stringArray[1].trim() : ''

@@ -46,7 +46,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
-let SDocblock = /*#__PURE__*/function () {
+var SDocblock = /*#__PURE__*/function () {
   /**
    * @name              _settings
    * @type              Object
@@ -95,7 +95,11 @@ let SDocblock = /*#__PURE__*/function () {
    *
    * @author 	Olivier Bossel <olivier.bossel@gmail.com>
    */
-  function SDocblock(source, settings = {}) {
+  function SDocblock(source, settings) {
+    if (settings === void 0) {
+      settings = {};
+    }
+
     _classCallCheck(this, SDocblock);
 
     _defineProperty(this, "_settings", {});
@@ -108,7 +112,7 @@ let SDocblock = /*#__PURE__*/function () {
 
     this._settings = (0, _deepMerge.default)({
       sortFunction: (a, b) => {
-        let res = 0; // if (.object.namespace && !a.object.namespace) res -= 1;
+        var res = 0; // if (.object.namespace && !a.object.namespace) res -= 1;
 
         if (b.object.namespace) res += 1;
         if (b.object.type && b.object.type.toLowerCase() === 'class') res += 1;
@@ -144,7 +148,11 @@ let SDocblock = /*#__PURE__*/function () {
 
   _createClass(SDocblock, [{
     key: "sort",
-    value: function sort(sortFunction = null) {
+    value: function sort(sortFunction) {
+      if (sortFunction === void 0) {
+        sortFunction = null;
+      }
+
       if (!sortFunction) sortFunction = this._settings.sortFunction;
       this._blocks = this._blocks.sort(sortFunction);
       return this;
@@ -174,11 +182,15 @@ let SDocblock = /*#__PURE__*/function () {
      * @since       2.0.0
      * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    value: function parse(string = this._source) {
-      // extract each docblocks
-      const reg = /(<!--|\/\*{2})([\s\S]+?)(\*\/|-->)/g; // extracting blocks
+    value: function parse(string) {
+      if (string === void 0) {
+        string = this._source;
+      }
 
-      let blocksArray = string.match(reg);
+      // extract each docblocks
+      var reg = /(<!--|\/\*{2})([\s\S]+?)(\*\/|-->)/g; // extracting blocks
+
+      var blocksArray = string.match(reg);
 
       if (!Array.isArray(blocksArray)) {
         blocksArray = [];
@@ -245,12 +257,12 @@ let SDocblock = /*#__PURE__*/function () {
   }, {
     key: "to",
     value: function to(format) {
-      const includedTypes = [];
+      var includedTypes = [];
 
       _handlebars.default.registerHelper('include', type => {
         if (!this.blocks || !this.blocks.length) return ''; // filter blocks
 
-        const blocks = this.blocks.filter(block => {
+        var blocks = this.blocks.filter(block => {
           if (!block.object.type) return false;
           return type === '...' && includedTypes.indexOf(block.object.type.toLowerCase()) === -1 || block.object.type.toLowerCase() === type && includedTypes.indexOf(block.object.type.toLowerCase()) === -1;
         }).map(block => {
@@ -262,29 +274,29 @@ let SDocblock = /*#__PURE__*/function () {
       }); // get the blocks
 
 
-      const blocksArray = this.blocks;
+      var blocksArray = this.blocks;
       if (!blocksArray || !blocksArray.length) return ''; // check the first docblock
 
-      const firstBlock = blocksArray[0]; // get the block type
+      var firstBlock = blocksArray[0]; // get the block type
 
-      const type = firstBlock.object.type ? firstBlock.object.type.toLowerCase() : 'default'; // render the good template depending on the first block type
+      var type = firstBlock.object.type ? firstBlock.object.type.toLowerCase() : 'default'; // render the good template depending on the first block type
 
-      const template = this._settings.to[format].templates[type] || this._settings.to[format].templates.default;
-      if (!template) throw new Error(`You try to convert your docblocks into "${format}" format but the needed "${type}" template is not available for this particular format. Here's the available templates: ${Object.keys(this._settings.to[format].templates).join(',')}...`); // save the format in which converting the docblocks
+      var template = this._settings.to[format].templates[type] || this._settings.to[format].templates.default;
+      if (!template) throw new Error("You try to convert your docblocks into \"".concat(format, "\" format but the needed \"").concat(type, "\" template is not available for this particular format. Here's the available templates: ").concat(Object.keys(this._settings.to[format].templates).join(','), "...")); // save the format in which converting the docblocks
 
       this._to = format; // render the template
 
-      const compiledTemplateFn = _handlebars.default.compile(template, {
+      var compiledTemplateFn = _handlebars.default.compile(template, {
         noEscape: true
       });
 
-      const renderedTemplate = compiledTemplateFn(); // return the rendered template
+      var renderedTemplate = compiledTemplateFn(); // return the rendered template
 
       return renderedTemplate;
     }
   }, {
     key: "blocks",
-    get: function () {
+    get: function get() {
       if (!this._blocks) this.parse();
       return this._blocks;
     }

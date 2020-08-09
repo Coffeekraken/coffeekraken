@@ -3,7 +3,7 @@
 module.exports = __sort => {
   describe('sugar.js.object.sort', () => {
     it('Should sort the object correctly', done => {
-      const res = __sort({
+      var res = __sort({
         coco: {
           weight: 10
         },

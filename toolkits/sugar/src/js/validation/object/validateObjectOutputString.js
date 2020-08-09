@@ -42,8 +42,11 @@ export default function validateObjectOutputString(validateObjectResultObj) {
   stringsArray.push(
     __trimLines(`
   <underline><bold>Object validation</bold></underline>
+
   - Name: <yellow>${validateObjectResultObj.name || 'unnamed'}</yellow>
-  - Errors: <red>${validateObjectResultObj.issues.length}</red>
+  - Error${validateObjectResultObj.issues.length > 1 ? 's' : ''}: <red>${
+      validateObjectResultObj.issues.length
+    }</red>
   - Propert${
     validateObjectResultObj.issues.length > 1 ? 'ies' : 'y'
   }: ${validateObjectResultObj.issues

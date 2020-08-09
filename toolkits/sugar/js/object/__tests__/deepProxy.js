@@ -3,9 +3,9 @@
 module.exports = __deepProxy => {
   describe('sugar.js.object.deepProxy', () => {
     it('Should detect the updates in the object correctly', done => {
-      let updatesCount = 0;
+      var updatesCount = 0;
 
-      const obj1 = __deepProxy({
+      var obj1 = __deepProxy({
         hello: {
           world: 'hello world'
         },

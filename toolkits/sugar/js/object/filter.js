@@ -30,7 +30,7 @@ exports.default = filter;
  */
 function filter(object, filter) {
   // init the new object to return
-  const result = {}; // loop on the object keys
+  var result = {}; // loop on the object keys
 
   Object.keys(object).forEach(propertyName => {
     // pass the property in the filter function

@@ -13,9 +13,13 @@ var _base2 = _interopRequireDefault(require("../crypt/base64"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -25,7 +29,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-let __decryptedConfig, __decryptedMeta;
+var __decryptedConfig, __decryptedMeta;
 /**
  * @name                                            SApp
  * @namespace           js.class
@@ -46,7 +50,7 @@ let __decryptedConfig, __decryptedMeta;
  */
 
 
-let SApp = /*#__PURE__*/function () {
+var SApp = /*#__PURE__*/function () {
   /**
    * @name                __settings
    * @type                Object
@@ -86,7 +90,11 @@ let SApp = /*#__PURE__*/function () {
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  function SApp(settings = {}) {
+  function SApp(settings) {
+    if (settings === void 0) {
+      settings = {};
+    }
+
     _classCallCheck(this, SApp);
 
     _defineProperty(this, "__settings", {});
@@ -100,10 +108,9 @@ let SApp = /*#__PURE__*/function () {
     _defineProperty(this, "__log", {});
 
     // store the settings
-    this.__settings = {
-      name: 'SApp',
-      ...settings
-    }; // expose this instance in the "window" scope
+    this.__settings = _objectSpread({
+      name: 'SApp'
+    }, settings); // expose this instance in the "window" scope
 
     window[this.__settings.name] = this;
   }
@@ -126,8 +133,12 @@ let SApp = /*#__PURE__*/function () {
 
   _createClass(SApp, [{
     key: "config",
-    value: function config(path = null) {
-      let config = window['_' + this.__settings.name + 'Data'].config || {};
+    value: function config(path) {
+      if (path === void 0) {
+        path = null;
+      }
+
+      var config = window['_' + this.__settings.name + 'Data'].config || {};
 
       if ((0, _base.default)(config) && !__decryptedConfig) {
         __decryptedConfig = _base2.default.decrypt(config);
@@ -153,8 +164,12 @@ let SApp = /*#__PURE__*/function () {
 
   }, {
     key: "meta",
-    value: function meta(path = null) {
-      let meta = window['_' + this.__settings.name + 'Data'].meta || {};
+    value: function meta(path) {
+      if (path === void 0) {
+        path = null;
+      }
+
+      var meta = window['_' + this.__settings.name + 'Data'].meta || {};
 
       if ((0, _base.default)(meta) && !__decryptedMeta) {
         __decryptedMeta = _base2.default.decrypt(meta);
@@ -184,28 +199,36 @@ let SApp = /*#__PURE__*/function () {
 
   }, {
     key: "log",
-    value: function log(message, type = 'info', transports = null) {
+    value: function log(message, type, transports) {
+      if (type === void 0) {
+        type = 'info';
+      }
+
+      if (transports === void 0) {
+        transports = null;
+      }
+
       return new Promise((resolve, reject) => {
-        const _this = this; // __ensureExist('window.Squid._log');
+        var _this = this; // __ensureExist('window.Squid._log');
 
 
         Promise.all([Promise.resolve().then(() => _interopRequireWildcard(require('../log/log'))), Promise.resolve().then(() => _interopRequireWildcard(require('../log/isTransportRegistered'))), Promise.resolve().then(() => _interopRequireWildcard(require('../log/getRegisteredTransports'))), Promise.resolve().then(() => _interopRequireWildcard(require('../log/registerTransport')))]).then(modules => {
-          const __log = modules[0],
-                __isTransportRegistered = modules[1],
-                __getRegisteredTransports = modules[2],
-                __registerTransport = modules[3]; // get the transports needed for this type
+          var __log = modules[0],
+              __isTransportRegistered = modules[1],
+              __getRegisteredTransports = modules[2],
+              __registerTransport = modules[3]; // get the transports needed for this type
 
-          const configTransports = this.config('log.frontend.transportsByType')[type] ? this.config('log.frontend.transportsByType')[type].split(' ') : [];
-          let transp = transports ? transports : configTransports;
+          var configTransports = this.config('log.frontend.transportsByType')[type] ? this.config('log.frontend.transportsByType')[type].split(' ') : [];
+          var transp = transports ? transports : configTransports;
 
           if (!this.__log.sugarTransports) {
-            this.__log.sugarTransports = require.context(`@coffeekraken/sugar/js/log/transports`, true, /\.js$/, 'lazy');
+            this.__log.sugarTransports = require.context("@coffeekraken/sugar/js/log/transports", true, /\.js$/, 'lazy');
           }
 
-          const transportsImportPromises = [];
+          var transportsImportPromises = [];
           transp.forEach(t => {
-            if (this.__log.sugarTransports.keys().indexOf(`./${t}.js`) !== -1) {
-              transportsImportPromises.push(this.__log.sugarTransports(`./${t}.js`).then(m => {
+            if (this.__log.sugarTransports.keys().indexOf("./".concat(t, ".js")) !== -1) {
+              transportsImportPromises.push(this.__log.sugarTransports("./".concat(t, ".js")).then(m => {
                 if (!__isTransportRegistered.default(t)) __registerTransport.default(t, m.default || m);
               }));
             }

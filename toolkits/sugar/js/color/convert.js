@@ -37,9 +37,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function convert(input, format = 'rgba') {
+function convert(input, format) {
+  if (format === void 0) {
+    format = 'rgba';
+  }
+
   // transforming the input into rgba object
-  let rgbaObj = {};
+  var rgbaObj = {};
 
   if (typeof input === 'string') {
     rgbaObj = (0, _parse.default)(input, 'rgba');
@@ -72,17 +76,17 @@ function convert(input, format = 'rgba') {
       break;
 
     case 'rgbaString':
-      return `rgba(${rgbaObj.r},${rgbaObj.g},${rgbaObj.b},${rgbaObj.a})`;
+      return "rgba(".concat(rgbaObj.r, ",").concat(rgbaObj.g, ",").concat(rgbaObj.b, ",").concat(rgbaObj.a, ")");
       break;
 
     case 'hslString':
-      const hslObj = convert(rgbaObj, 'hsl');
-      return `hsl(${hslObj.h},${hslObj.s},${hslObj.l})`;
+      var hslObj = convert(rgbaObj, 'hsl');
+      return "hsl(".concat(hslObj.h, ",").concat(hslObj.s, ",").concat(hslObj.l, ")");
       break;
 
     case 'hsvString':
-      const hsvObj = convert(rgbaObj, 'hsv');
-      return `hsv(${hsvObj.h},${hsvObj.s},${hsvObj.v})`;
+      var hsvObj = convert(rgbaObj, 'hsv');
+      return "hsv(".concat(hsvObj.h, ",").concat(hsvObj.s, ",").concat(hsvObj.v, ")");
       break;
   } // if nothing supported
 

@@ -3,12 +3,12 @@
 module.exports = __proxy => {
   describe('sugar.js.array.proxy', () => {
     it('Should proxy an array correctly', done => {
-      const baseArray = ['a', 'b', 'c'];
+      var baseArray = ['a', 'b', 'c'];
 
-      const myArray = __proxy(baseArray);
+      var myArray = __proxy(baseArray);
 
-      let pushCount = 0;
-      let popCount = 0;
+      var pushCount = 0;
+      var popCount = 0;
       myArray.watch(['push', 'pop'], watchObj => {
         switch (watchObj.action) {
           case 'push':

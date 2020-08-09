@@ -2,7 +2,7 @@
 
 module.exports = __setRecursiveTimeout => {
   describe('sugar.js.function.setRecursiveTimeout', () => {
-    let calledCount = 0;
+    var calledCount = 0;
 
     __setRecursiveTimeout(() => {
       calledCount++;

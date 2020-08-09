@@ -42,7 +42,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-let SConfigAdapter = /*#__PURE__*/function () {
+var SConfigAdapter = /*#__PURE__*/function () {
   /**
    * @name                              _settings
    * @type                              Object
@@ -65,13 +65,17 @@ let SConfigAdapter = /*#__PURE__*/function () {
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  function SConfigAdapter(settings = {}) {
+  function SConfigAdapter(settings) {
+    if (settings === void 0) {
+      settings = {};
+    }
+
     _classCallCheck(this, SConfigAdapter);
 
     _defineProperty(this, "_settings", {});
 
     if (settings.name && !/^[a-zA-Z0-9_\-:]+$/.test(settings.name)) {
-      throw new Error(`The name of an SConfigAdapter instance can contain only letters like [a-zA-Z0-9_-:]...`);
+      throw new Error("The name of an SConfigAdapter instance can contain only letters like [a-zA-Z0-9_-:]...");
     } // store the settings
 
 
@@ -90,12 +94,12 @@ let SConfigAdapter = /*#__PURE__*/function () {
 
   _createClass(SConfigAdapter, [{
     key: "name",
-    get: function () {
+    get: function get() {
       return this._settings.name;
     },
-    set: function (value) {
+    set: function set(value) {
       if (!/^[a-zA-Z0-9_\-:]+$/.test(value)) {
-        throw new Error(`The name of an SConfigAdapter instance can contain only letters like [a-zA-Z0-9_-:]...`);
+        throw new Error("The name of an SConfigAdapter instance can contain only letters like [a-zA-Z0-9_-:]...");
       }
 
       this._settings.name = value;
@@ -112,7 +116,7 @@ let SConfigAdapter = /*#__PURE__*/function () {
 
   }, {
     key: "settings",
-    get: function () {
+    get: function get() {
       return this._settings;
     }
   }]);

@@ -15,6 +15,10 @@ var _SPromise = _interopRequireDefault(require("../promise/SPromise"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -43,7 +47,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * @since         2.0.0
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-let SNav = /*#__PURE__*/function () {
+var SNav = /*#__PURE__*/function () {
   /**
    * @name          _settings
    * @type          Object
@@ -93,7 +97,11 @@ let SNav = /*#__PURE__*/function () {
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  function SNav(id, text, itemsArray, settings = {}) {
+  function SNav(id, text, itemsArray, settings) {
+    if (settings === void 0) {
+      settings = {};
+    }
+
     _classCallCheck(this, SNav);
 
     _defineProperty(this, "_settings", {});
@@ -161,7 +169,7 @@ let SNav = /*#__PURE__*/function () {
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     value: function getItemIndex(item) {
-      const i = this.getItem(item);
+      var i = this.getItem(item);
       return this._itemsArray.indexOf(i) + 1;
     }
     /**
@@ -182,7 +190,7 @@ let SNav = /*#__PURE__*/function () {
       if (from instanceof _SNavItem.default) return from;
 
       if (typeof from === 'string') {
-        const itemArray = this._itemsArray.filter(item => {
+        var itemArray = this._itemsArray.filter(item => {
           return item.id === from;
         });
 
@@ -207,7 +215,11 @@ let SNav = /*#__PURE__*/function () {
 
   }, {
     key: "addItem",
-    value: function addItem(...items) {
+    value: function addItem() {
+      for (var _len = arguments.length, items = new Array(_len), _key = 0; _key < _len; _key++) {
+        items[_key] = arguments[_key];
+      }
+
       items.forEach(item => {
         item._sNav = this;
 
@@ -230,10 +242,14 @@ let SNav = /*#__PURE__*/function () {
 
   }, {
     key: "removeItem",
-    value: function removeItem(...items) {
+    value: function removeItem() {
+      for (var _len2 = arguments.length, items = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        items[_key2] = arguments[_key2];
+      }
+
       items.forEach(item => {
         if (item instanceof _SNavItem.default) {
-          const idx = this._itemsArray.indexOf(item);
+          var idx = this._itemsArray.indexOf(item);
 
           if (idx === -1) return;
 
@@ -243,7 +259,7 @@ let SNav = /*#__PURE__*/function () {
 
           this._itemsArray.splice(idx, 1);
         } else if (typeof item === 'string') {
-          const itemArray = this._itemsArray.filter(sNavItem => {
+          var itemArray = this._itemsArray.filter(sNavItem => {
             return sNavItem.id === item;
           });
 
@@ -281,17 +297,21 @@ let SNav = /*#__PURE__*/function () {
 
   }, {
     key: "toMarkdown",
-    value: function toMarkdown(settings = {}) {
+    value: function toMarkdown(settings) {
+      if (settings === void 0) {
+        settings = {};
+      }
+
       settings = (0, _deepMerge.default)(this._settings.markdown, settings);
-      const itemsArray = [];
+      var itemsArray = [];
 
       this._itemsArray.forEach(sNavItem => {
         if (sNavItem instanceof _SNavItem.default) {
           itemsArray.push('\t'.repeat(settings.indent) + sNavItem.toMarkdown(settings));
         } else if (sNavItem instanceof SNav) {
-          itemsArray.push(sNavItem.toMarkdown({ ...settings,
+          itemsArray.push(sNavItem.toMarkdown(_objectSpread(_objectSpread({}, settings), {}, {
             indent: settings.indent + 1
-          }));
+          })));
         }
       });
 
@@ -312,29 +332,30 @@ let SNav = /*#__PURE__*/function () {
 
   }, {
     key: "toHtml",
-    value: function toHtml(settings = {}) {
+    value: function toHtml(settings) {
+      if (settings === void 0) {
+        settings = {};
+      }
+
       settings = (0, _deepMerge.default)(this._settings.html, settings);
-      const itemsArray = [settings.ordered ? `<ol id="${this.id}" class="${settings.ol.class}">` : `<ul id="${this.id}" class="${settings.ul.class}">`];
+      var itemsArray = [settings.ordered ? "<ol id=\"".concat(this.id, "\" class=\"").concat(settings.ol.class, "\">") : "<ul id=\"".concat(this.id, "\" class=\"").concat(settings.ul.class, "\">")];
 
       this._itemsArray.forEach(sNavItem => {
         if (sNavItem instanceof _SNavItem.default) {
           itemsArray.push('\t'.repeat(settings.indent) + sNavItem.toHtml(settings));
         } else if (sNavItem instanceof SNav) {
-          itemsArray.push(`${'\t'.repeat(settings.indent)}<li class="${settings.child.class}">
-            <a href="#${sNavItem.id}" class="${settings.child_link.class}">${sNavItem.text}</a>
-${sNavItem.toHtml({ ...settings,
+          itemsArray.push("".concat('\t'.repeat(settings.indent), "<li class=\"").concat(settings.child.class, "\">\n            <a href=\"#").concat(sNavItem.id, "\" class=\"").concat(settings.child_link.class, "\">").concat(sNavItem.text, "</a>\n").concat(sNavItem.toHtml(_objectSpread(_objectSpread({}, settings), {}, {
             indent: settings.indent + 1
-          })}
-${'\t'.repeat(settings.indent)}</li>`);
+          })), "\n").concat('\t'.repeat(settings.indent), "</li>"));
         }
       });
 
-      itemsArray.push(settings.ordered ? `</ol>` : `</ul>`);
+      itemsArray.push(settings.ordered ? "</ol>" : "</ul>");
       return (0, _pretty.default)(itemsArray.join('\n'));
     }
   }, {
     key: "promise",
-    get: function () {
+    get: function get() {
       return this._promise;
     }
     /**
@@ -349,7 +370,7 @@ ${'\t'.repeat(settings.indent)}</li>`);
 
   }, {
     key: "id",
-    get: function () {
+    get: function get() {
       return this._id;
     }
     /**
@@ -364,7 +385,7 @@ ${'\t'.repeat(settings.indent)}</li>`);
 
   }, {
     key: "text",
-    get: function () {
+    get: function get() {
       return this._text;
     }
     /**
@@ -379,7 +400,7 @@ ${'\t'.repeat(settings.indent)}</li>`);
 
   }, {
     key: "items",
-    get: function () {
+    get: function get() {
       return this._itemsArray;
     }
   }]);

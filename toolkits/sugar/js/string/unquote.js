@@ -24,7 +24,11 @@ exports.default = unquote;
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function unquote(string, quotesToRemove = ['"', "'", '”', '`']) {
+function unquote(string, quotesToRemove) {
+  if (quotesToRemove === void 0) {
+    quotesToRemove = ['"', "'", '”', '`'];
+  }
+
   // trim the string just in case
   string = string.trim(); // loop on each quotes to remove
 

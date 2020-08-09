@@ -5,6 +5,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = asyncForEach;
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 /**
  * @name                              asyncForEach
  * @namespace           js.array
@@ -29,14 +33,27 @@ exports.default = asyncForEach;
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-async function asyncForEach(array, asyncFn) {
-  return new Promise(async (resolve, reject) => {
-    for (let index = 0; index < array.length; index++) {
-      await asyncFn(array[index], index, array);
-    }
+function asyncForEach(_x, _x2) {
+  return _asyncForEach.apply(this, arguments);
+}
 
-    resolve();
+function _asyncForEach() {
+  _asyncForEach = _asyncToGenerator(function* (array, asyncFn) {
+    return new Promise( /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator(function* (resolve, reject) {
+        for (var index = 0; index < array.length; index++) {
+          yield asyncFn(array[index], index, array);
+        }
+
+        resolve();
+      });
+
+      return function (_x3, _x4) {
+        return _ref.apply(this, arguments);
+      };
+    }());
   });
+  return _asyncForEach.apply(this, arguments);
 }
 
 module.exports = exports.default;

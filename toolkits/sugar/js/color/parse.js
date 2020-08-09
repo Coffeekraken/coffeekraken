@@ -41,7 +41,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function parse(color, format = 'rgba') {
+function parse(color, format) {
+  if (format === void 0) {
+    format = 'rgba';
+  }
+
   color = color.replace(/\s/g, '');
 
   if (color.indexOf('rgb') != -1) {

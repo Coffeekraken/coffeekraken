@@ -2,7 +2,7 @@
 
 module.exports = __distanceBetween => {
   describe('sugar.js.geom.distanceBetween', () => {
-    const res = __distanceBetween({
+    var res = __distanceBetween({
       x: 20,
       y: 10
     }, {

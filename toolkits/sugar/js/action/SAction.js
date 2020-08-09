@@ -66,7 +66,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-let SAction = /*#__PURE__*/function (_SPromise) {
+var SAction = /*#__PURE__*/function (_SPromise) {
   _inherits(SAction, _SPromise);
 
   var _super = _createSuper(SAction);
@@ -142,8 +142,12 @@ let SAction = /*#__PURE__*/function (_SPromise) {
 
   }]);
 
-  function SAction(descriptorObj, settings = {}) {
+  function SAction(descriptorObj, settings) {
     var _temp, _this;
+
+    if (settings === void 0) {
+      settings = {};
+    }
 
     _classCallCheck(this, SAction);
 
@@ -170,18 +174,18 @@ let SAction = /*#__PURE__*/function (_SPromise) {
   _createClass(SAction, [{
     key: "run",
     value: function run() {
-      const promise = new _SPromise2.default((resolve, reject, trigger, cancel) => {
-        SAction._promise.trigger(`${this.constructor.name}.run`, this);
+      var promise = new _SPromise2.default((resolve, reject, trigger, cancel) => {
+        SAction._promise.trigger("".concat(this.constructor.name, ".run"), this);
 
-        trigger(`run`, this);
-        this.trigger(`run`, this);
+        trigger("run", this);
+        this.trigger("run", this);
       }).start();
 
       promise.complete = () => {
-        SAction._promise.trigger(`${this.constructor.name}.complete`, this);
+        SAction._promise.trigger("".concat(this.constructor.name, ".complete"), this);
 
         promise.trigger('complete', this);
-        this.trigger(`complete`, this);
+        this.trigger("complete", this);
       };
 
       return promise;
@@ -201,17 +205,17 @@ let SAction = /*#__PURE__*/function (_SPromise) {
   }, {
     key: "toJson",
     value: function toJson() {
-      const types = (0, _flatten.default)(_typeMap.default);
-      let type = null;
+      var types = (0, _flatten.default)(_typeMap.default);
+      var type = null;
 
-      for (const key in types) {
+      for (var key in types) {
         if (types[key] === this.constructor) {
           type = key.replace('.default', '');
           break;
         }
       }
 
-      if (!type) throw new Error(`You try to convert your "<primary>${this.constructor.name}</primary>" instance to JSON but this Class is not registered into the "<cyan>js.action.typeMap</cyan>" mapping object. Please add it to it before continue...`);
+      if (!type) throw new Error("You try to convert your \"<primary>".concat(this.constructor.name, "</primary>\" instance to JSON but this Class is not registered into the \"<cyan>js.action.typeMap</cyan>\" mapping object. Please add it to it before continue..."));
       return {
         type: type,
         descriptorObj: this._descriptorObj,

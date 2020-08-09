@@ -22,12 +22,12 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __stripAnsi = require('strip-ansi');
+var __stripAnsi = require('strip-ansi');
 
 module.exports = __SInterface => {
   describe('sugar.js.class.SInterface', () => {
     it('Should pass the interface test correctly', () => {
-      let MyInterface = /*#__PURE__*/function (_SInterface) {
+      var MyInterface = /*#__PURE__*/function (_SInterface) {
         _inherits(MyInterface, _SInterface);
 
         var _super = _createSuper(MyInterface);
@@ -52,15 +52,16 @@ module.exports = __SInterface => {
         }
       });
 
-      let myClassInterfaceResult;
+      var myClassInterfaceResult;
 
-      let MyClass = function MyClass() {
+      var MyClass = function MyClass() {
         _classCallCheck(this, MyClass);
 
         _defineProperty(this, "title", true);
 
         myClassInterfaceResult = MyInterface.apply(this, {
-          return: 'Object'
+          return: 'Object',
+          throw: false
         });
       };
 
@@ -95,7 +96,7 @@ module.exports = __SInterface => {
       });
     });
     it('Should pass the interface test correctly', () => {
-      let MyInterface = /*#__PURE__*/function (_SInterface2) {
+      var MyInterface = /*#__PURE__*/function (_SInterface2) {
         _inherits(MyInterface, _SInterface2);
 
         var _super2 = _createSuper(MyInterface);
@@ -120,9 +121,9 @@ module.exports = __SInterface => {
         }
       });
 
-      let myClassInterfaceResult;
+      var myClassInterfaceResult;
 
-      let MyClass = /*#__PURE__*/function () {
+      var MyClass = /*#__PURE__*/function () {
         function MyClass() {
           _classCallCheck(this, MyClass);
 
@@ -143,7 +144,7 @@ module.exports = __SInterface => {
       expect(myClassInterfaceResult).toBe(true);
     });
     it('Should pass the interface test correctly when checking for an undefined static function', () => {
-      let MyInterface = /*#__PURE__*/function (_SInterface3) {
+      var MyInterface = /*#__PURE__*/function (_SInterface3) {
         _inherits(MyInterface, _SInterface3);
 
         var _super3 = _createSuper(MyInterface);
@@ -169,15 +170,16 @@ module.exports = __SInterface => {
         }
       });
 
-      let myClassInterfaceResult;
+      var myClassInterfaceResult;
 
-      let MyClass = /*#__PURE__*/function () {
+      var MyClass = /*#__PURE__*/function () {
         function MyClass() {
           _classCallCheck(this, MyClass);
 
           _defineProperty(this, "title", 'Hello world');
 
           myClassInterfaceResult = MyInterface.apply(this, {
+            throw: false,
             return: 'Object'
           });
         }
@@ -210,7 +212,7 @@ module.exports = __SInterface => {
       });
     });
     it('Should pass the interface test correctly when checking for an existing static function', () => {
-      let MyInterface = /*#__PURE__*/function (_SInterface4) {
+      var MyInterface = /*#__PURE__*/function (_SInterface4) {
         _inherits(MyInterface, _SInterface4);
 
         var _super4 = _createSuper(MyInterface);
@@ -236,9 +238,9 @@ module.exports = __SInterface => {
         }
       });
 
-      let myClassInterfaceResult;
+      var myClassInterfaceResult;
 
-      let MyClass = /*#__PURE__*/function () {
+      var MyClass = /*#__PURE__*/function () {
         function MyClass() {
           _classCallCheck(this, MyClass);
 
@@ -259,7 +261,7 @@ module.exports = __SInterface => {
       expect(myClassInterfaceResult).toBe(true);
     });
     it('Should pass the interface test correctly passing a value that is not in the allowed once', () => {
-      let MyInterface = /*#__PURE__*/function (_SInterface5) {
+      var MyInterface = /*#__PURE__*/function (_SInterface5) {
         _inherits(MyInterface, _SInterface5);
 
         var _super5 = _createSuper(MyInterface);
@@ -281,15 +283,16 @@ module.exports = __SInterface => {
         }
       });
 
-      let myClassInterfaceResult;
+      var myClassInterfaceResult;
 
-      let MyClass = function MyClass() {
+      var MyClass = function MyClass() {
         _classCallCheck(this, MyClass);
 
         _defineProperty(this, "title", 'Hello world');
 
         myClassInterfaceResult = MyInterface.apply(this, {
-          return: 'Object'
+          return: 'Object',
+          throw: false
         });
       };
 
@@ -313,7 +316,7 @@ module.exports = __SInterface => {
       });
     });
     it('Should pass the interface test correctly passing a value that is in the allowed once', () => {
-      let MyInterface = /*#__PURE__*/function (_SInterface6) {
+      var MyInterface = /*#__PURE__*/function (_SInterface6) {
         _inherits(MyInterface, _SInterface6);
 
         var _super6 = _createSuper(MyInterface);
@@ -335,9 +338,9 @@ module.exports = __SInterface => {
         }
       });
 
-      let myClassInterfaceResult;
+      var myClassInterfaceResult;
 
-      let MyClass = function MyClass() {
+      var MyClass = function MyClass() {
         _classCallCheck(this, MyClass);
 
         _defineProperty(this, "title", 'Hello');
@@ -349,7 +352,7 @@ module.exports = __SInterface => {
       expect(myClassInterfaceResult).toBe(true);
     });
     it('Should pass the interface test correctly passing a complexe one that need to return a correct error string', () => {
-      let MyInterface = /*#__PURE__*/function (_SInterface7) {
+      var MyInterface = /*#__PURE__*/function (_SInterface7) {
         _inherits(MyInterface, _SInterface7);
 
         var _super7 = _createSuper(MyInterface);
@@ -401,9 +404,9 @@ module.exports = __SInterface => {
         }
       });
 
-      let myClassInterfaceResult;
+      var myClassInterfaceResult;
 
-      let MyClass = /*#__PURE__*/function () {
+      var MyClass = /*#__PURE__*/function () {
         function MyClass() {
           _classCallCheck(this, MyClass);
 
@@ -422,7 +425,9 @@ module.exports = __SInterface => {
 
           _defineProperty(this, "staticMethod2", 'Youhou');
 
-          myClassInterfaceResult = MyInterface.apply(this);
+          myClassInterfaceResult = MyInterface.apply(this, {
+            throw: false
+          });
         }
 
         _createClass(MyClass, [{
@@ -437,7 +442,7 @@ module.exports = __SInterface => {
       }();
 
       new MyClass();
-      expect(__stripAnsi(myClassInterfaceResult.replace(/\s/g, ''))).toBe('Objectvalidation-Name:MyClass-Errors:6-Properties:title,body,header,footer,medhod1,staticMethod2│title│-Receivedvalue:HelloWorld│-Theallowedvaluesare["Hello","World"]│body│-Receivedvalue:10│-ThevaluetypehastobeBooleanbutyoupassedInteger│header│-Receivedvalue:[true,"hello"]│-ThevaluetypehastobeArray<String>butyoupassedArray<Boolean|String>│footer│-Receivedvalue:{"coco":10}│-ThevaluetypehastobeObject<Boolean|Number>butyoupassedObject<Integer|Function>│medhod1│-Receivedvalue:undefined│-ThevaluetypehastobeFunctionbutyoupassedUndefined│-Thisvalueisrequired│staticMethod2│-Receivedvalue:null│-ThevaluetypehastobeFunctionbutyoupassedNull│-Thisvalueisrequired│-Thisvaluehastobeastaticone');
+      expect(__stripAnsi(myClassInterfaceResult.replace(/\s/g, ''))).toBe('Objectvalidation-Name:MyClass-Errors:6-Properties:title,body,header,footer,medhod1,staticMethod2│title││-Receivedvalue:HelloWorld│-Theallowedvaluesare["Hello","World"]│body││-Receivedvalue:10│-ThevaluetypehastobeBooleanbutyoupassedInteger│header││-Receivedvalue:[true,"hello"]│-ThevaluetypehastobeArray<String>butyoupassedArray<Boolean|String>│footer││-Receivedvalue:{"coco":10}│-ThevaluetypehastobeObject<Boolean|Number>butyoupassedObject<Integer|Function>│medhod1││-Receivedvalue:undefined│-ThevaluetypehastobeFunctionbutyoupassedUndefined│-Thisvalueisrequired│staticMethod2││-Receivedvalue:null│-ThevaluetypehastobeFunctionbutyoupassedNull│-Thisvalueisrequired│-Thisvaluehastobeastaticone');
     });
   });
 };

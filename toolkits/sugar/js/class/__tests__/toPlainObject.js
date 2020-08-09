@@ -9,7 +9,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 module.exports = __toPlainObject => {
-  let MyClass = /*#__PURE__*/function () {
+  var MyClass = /*#__PURE__*/function () {
     function MyClass(name) {
       _classCallCheck(this, MyClass);
 
@@ -30,11 +30,11 @@ module.exports = __toPlainObject => {
     return MyClass;
   }();
 
-  const myInstance = new MyClass('coffeekraken');
+  var myInstance = new MyClass('coffeekraken');
   myInstance.testing('hello');
   describe('sugar.js.class.toPlainObject', () => {
     it('Should convert a simple custom class instance into a plain object', () => {
-      const plainObject = __toPlainObject(myInstance);
+      var plainObject = __toPlainObject(myInstance);
 
       expect(plainObject).toEqual({
         _settings: {

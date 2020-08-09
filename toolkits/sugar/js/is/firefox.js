@@ -23,7 +23,11 @@ exports.default = isFirefox;
  * @return    {Boolean}    true if is firefox, false if not
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function isFirefox(ua = navigator.userAgent) {
+function isFirefox(ua) {
+  if (ua === void 0) {
+    ua = navigator.userAgent;
+  }
+
   return ua.indexOf('Firefox') > -1;
 }
 

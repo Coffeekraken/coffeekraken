@@ -3,7 +3,7 @@
 module.exports = __map => {
   describe('sugar.js.object.map', () => {
     it('Should be processed correctly using the map function', done => {
-      const obj1 = {
+      var obj1 = {
         hello: {
           world: 'hello world',
           plop: 'youhou'

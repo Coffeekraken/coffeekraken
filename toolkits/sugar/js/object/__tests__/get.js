@@ -3,7 +3,7 @@
 module.exports = __get => {
   describe('sugar.js.object.get', () => {
     it('Should get the object property correctly', done => {
-      const obj1 = {
+      var obj1 = {
         hello: {
           world: 'hello world'
         },
@@ -12,9 +12,9 @@ module.exports = __get => {
         }
       };
 
-      const val1 = __get(obj1, 'hello.world');
+      var val1 = __get(obj1, 'hello.world');
 
-      const val2 = __get(obj1, 'plop.array.2');
+      var val2 = __get(obj1, 'plop.array.2');
 
       expect(val1).toBe('hello world');
       expect(val2).toBe(2);

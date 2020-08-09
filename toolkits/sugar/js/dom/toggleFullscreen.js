@@ -28,7 +28,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function toggleFullscreen(elm) {
-  const fullscreenElm = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement;
+  var fullscreenElm = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement;
 
   if (!fullscreenElm || fullscreenElm !== elm) {
     return (0, _requestFullscreen.default)(elm);

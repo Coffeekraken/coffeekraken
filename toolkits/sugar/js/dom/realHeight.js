@@ -26,7 +26,7 @@ function realHeight(elm) {
   elm.style.transition = 'none';
   elm.style.overflowY = 'scroll'; // get the actual height through the scrollHeight
 
-  const height = elm.scrollHeight; // reset the overflowY
+  var height = elm.scrollHeight; // reset the overflowY
 
   elm.style.overflowY = '';
   elm.style.transition = ''; // return the height

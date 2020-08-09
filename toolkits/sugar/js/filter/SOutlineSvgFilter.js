@@ -45,7 +45,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-let SOutlineSvgFilter = /*#__PURE__*/function (_SSvgFilter) {
+var SOutlineSvgFilter = /*#__PURE__*/function (_SSvgFilter) {
   _inherits(SOutlineSvgFilter, _SSvgFilter);
 
   var _super = _createSuper(SOutlineSvgFilter);
@@ -60,16 +60,16 @@ let SOutlineSvgFilter = /*#__PURE__*/function (_SSvgFilter) {
    *
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  function SOutlineSvgFilter(radius = 8) {
+  function SOutlineSvgFilter(radius) {
     var _this;
+
+    if (radius === void 0) {
+      radius = 8;
+    }
 
     _classCallCheck(this, SOutlineSvgFilter);
 
-    _this = _super.call(this, `
-			<feMorphology operator="dilate" radius="${radius}"
-			in="SourceGraphic" result="THICKNESS" />
-			<feComposite operator="out" in="THICKNESS" in2="SourceGraphic" ></feComposite>
-		`);
+    _this = _super.call(this, "\n\t\t\t<feMorphology operator=\"dilate\" radius=\"".concat(radius, "\"\n\t\t\tin=\"SourceGraphic\" result=\"THICKNESS\" />\n\t\t\t<feComposite operator=\"out\" in=\"THICKNESS\" in2=\"SourceGraphic\" ></feComposite>\n\t\t"));
     _this._$morphology = _this.filter.querySelector('feMorphology');
     return _this;
   }
@@ -85,10 +85,10 @@ let SOutlineSvgFilter = /*#__PURE__*/function (_SSvgFilter) {
 
   _createClass(SOutlineSvgFilter, [{
     key: "radius",
-    set: function (value) {
+    set: function set(value) {
       this._$morphology.setAttribute('radius', value);
     },
-    get: function () {
+    get: function get() {
       return parseFloat(this._$morphology.getAttribute('radius'));
     }
   }]);

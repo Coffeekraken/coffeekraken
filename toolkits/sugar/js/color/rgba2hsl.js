@@ -24,7 +24,11 @@ exports.default = rgba2hsl;
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function rgba2hsl(r, g, b, a = 1) {
+function rgba2hsl(r, g, b, a) {
+  if (a === void 0) {
+    a = 1;
+  }
+
   if (typeof r === 'object') {
     g = r.g;
     b = r.b;
@@ -33,9 +37,9 @@ function rgba2hsl(r, g, b, a = 1) {
   }
 
   r /= 255, g /= 255, b /= 255;
-  let max = Math.max(r, g, b),
+  var max = Math.max(r, g, b),
       min = Math.min(r, g, b);
-  let h,
+  var h,
       s,
       l = (max + min) / 2;
 

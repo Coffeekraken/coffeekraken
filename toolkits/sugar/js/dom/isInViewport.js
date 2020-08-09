@@ -26,12 +26,16 @@ exports.default = isInViewport;
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function isInViewport(elm, offset = 50) {
+function isInViewport(elm, offset) {
+  if (offset === void 0) {
+    offset = 50;
+  }
+
   // handle offset
-  let offsetTop = offset;
-  let offsetRight = offset;
-  let offsetBottom = offset;
-  let offsetLeft = offset;
+  var offsetTop = offset;
+  var offsetRight = offset;
+  var offsetBottom = offset;
+  var offsetLeft = offset;
 
   if (typeof offset === 'object') {
     offsetTop = offset.top || 0;
@@ -40,13 +44,13 @@ function isInViewport(elm, offset = 50) {
     offsetLeft = offset.left || 0;
   }
 
-  const containerHeight = window.innerHeight || document.documentElement.clientHeight;
-  const containerWidth = window.innerWidth || document.documentElement.clientWidth;
-  const rect = elm.getBoundingClientRect();
-  const isTopIn = rect.top - containerHeight - offsetBottom <= 0;
-  const isBottomIn = rect.bottom - offsetTop >= 0;
-  const isLeftIn = rect.left - containerWidth - offsetRight <= 0;
-  const isRightIn = rect.right - offsetLeft >= 0;
+  var containerHeight = window.innerHeight || document.documentElement.clientHeight;
+  var containerWidth = window.innerWidth || document.documentElement.clientWidth;
+  var rect = elm.getBoundingClientRect();
+  var isTopIn = rect.top - containerHeight - offsetBottom <= 0;
+  var isBottomIn = rect.bottom - offsetTop >= 0;
+  var isLeftIn = rect.left - containerWidth - offsetRight <= 0;
+  var isRightIn = rect.right - offsetLeft >= 0;
   return isTopIn && isBottomIn && isLeftIn && isRightIn;
 }
 

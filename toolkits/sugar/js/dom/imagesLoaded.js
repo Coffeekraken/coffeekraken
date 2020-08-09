@@ -37,8 +37,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 function imagesLoaded($imgs) {
   return new _SPromise.default((resolve, reject, trigger, cancel) => {
-    const promises = [],
-          loadedImages = [];
+    var promises = [],
+        loadedImages = [];
     Array.from($imgs).forEach($img => {
       promises.push((0, _imageLoaded.default)($img).then(_$img => {
         loadedImages.push(_$img);

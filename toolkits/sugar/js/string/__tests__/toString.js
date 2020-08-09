@@ -3,8 +3,8 @@
 module.exports = __toString => {
   describe('sugar.js.string.toString', () => {
     it('Should process the passed string correctly', done => {
-      const date = new Date();
-      const dateString = date.toString();
+      var date = new Date();
+      var dateString = date.toString();
       expect(__toString(true)).toBe('true');
       expect(__toString(false)).toBe('false');
       expect(__toString({

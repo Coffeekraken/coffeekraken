@@ -42,7 +42,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @since       2.0.0
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function argsToObject(argsObj, definitionObj, settings = {}) {
+module.exports = function argsToObject(argsObj, definitionObj, settings) {
+  if (settings === void 0) {
+    settings = {};
+  }
+
   if (typeof argsObj === 'string') {
     return (0, _parseArgs.default)(argsObj, definitionObj);
   }

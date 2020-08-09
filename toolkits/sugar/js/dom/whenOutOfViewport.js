@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = whenOutOfViewport;
 
-var _isInViewport = _interopRequireDefault(require("./isInViewport"));
+var _isInViewport2 = _interopRequireDefault(require("./isInViewport"));
 
 var _throttle = _interopRequireDefault(require("../function/throttle"));
 
@@ -34,10 +34,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function whenOutOfViewport(elm, offset = 50) {
+function whenOutOfViewport(elm, offset) {
+  if (offset === void 0) {
+    offset = 50;
+  }
+
   return new Promise((resolve, reject) => {
     if (window.IntersectionObserver) {
-      let isInViewport = false,
+      var isInViewport = false,
           _cb = () => {
         if (!isInViewport) {
           observer.disconnect();
@@ -45,9 +49,9 @@ function whenOutOfViewport(elm, offset = 50) {
         }
       };
 
-      const observer = new IntersectionObserver((entries, observer) => {
+      var observer = new IntersectionObserver((entries, observer) => {
         if (!entries.length) return;
-        const entry = entries[0];
+        var entry = entries[0];
 
         if (entry.intersectionRatio > 0) {
           isInViewport = true;
@@ -59,16 +63,16 @@ function whenOutOfViewport(elm, offset = 50) {
       }, {
         root: null,
         // viewport
-        rootMargin: `${offset}px`,
+        rootMargin: "".concat(offset, "px"),
         threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
       });
       observer.observe(elm);
     } else {
       // try to get the closest element that has an overflow
-      let scrollContainerElm = document;
+      var scrollContainerElm = document;
 
       if (!elm._inViewportContainer) {
-        const overflowContainer = (0, _closest.default)(elm, '[data-in-viewport-container]');
+        var overflowContainer = (0, _closest.default)(elm, '[data-in-viewport-container]');
 
         if (overflowContainer) {
           scrollContainerElm = overflowContainer;
@@ -78,19 +82,19 @@ function whenOutOfViewport(elm, offset = 50) {
         scrollContainerElm = elm._inViewportContainer;
       }
 
-      let isInViewport = true,
-          _cb = () => {
-        if (!isInViewport) {
+      var _isInViewport = true,
+          _cb2 = () => {
+        if (!_isInViewport) {
           scrollContainerElm.removeEventListener('scroll', checkViewport);
           window.removeEventListener('resize', checkViewport);
           resolve(elm);
         }
       };
 
-      let checkViewport = (0, _throttle.default)(e => {
-        isInViewport = (0, _isInViewport.default)(elm, offset);
+      var checkViewport = (0, _throttle.default)(e => {
+        _isInViewport = (0, _isInViewport2.default)(elm, offset);
 
-        _cb();
+        _cb2();
       }, 100); // listen for resize
 
       scrollContainerElm.addEventListener('scroll', checkViewport);

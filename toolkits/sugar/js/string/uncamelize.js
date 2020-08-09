@@ -22,9 +22,13 @@ exports.default = uncamelize;
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function uncamelize(text, separator = '-') {
+function uncamelize(text, separator) {
+  if (separator === void 0) {
+    separator = '-';
+  }
+
   // Replace all capital letters by separator followed by lowercase one
-  let res = '';
+  var res = '';
   res = text.replace(/[A-Z]/g, function (letter) {
     return separator + letter.toLowerCase();
   }); // Remove first separator (to avoid _hello_world name)

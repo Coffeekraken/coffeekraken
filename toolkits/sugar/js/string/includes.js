@@ -25,7 +25,7 @@ exports.default = includes;
  */
 function includes(string, values) {
   if (!Array.isArray(values)) values = values.split(',').map(t => t.trim());
-  const valuesThatExists = [];
+  var valuesThatExists = [];
   values.forEach(v => {
     if (string.includes(v)) {
       valuesThatExists.push(v);

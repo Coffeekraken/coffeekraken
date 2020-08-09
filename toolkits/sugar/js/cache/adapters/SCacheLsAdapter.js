@@ -11,6 +11,10 @@ var _SCacheAdapter2 = _interopRequireDefault(require("./SCacheAdapter"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -47,7 +51,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-let SCacheLsAdapter = /*#__PURE__*/function (_SCacheAdapter) {
+var SCacheLsAdapter = /*#__PURE__*/function (_SCacheAdapter) {
   _inherits(SCacheLsAdapter, _SCacheAdapter);
 
   var _super = _createSuper(SCacheLsAdapter);
@@ -62,7 +66,11 @@ let SCacheLsAdapter = /*#__PURE__*/function (_SCacheAdapter) {
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  function SCacheLsAdapter(settings = {}) {
+  function SCacheLsAdapter(settings) {
+    if (settings === void 0) {
+      settings = {};
+    }
+
     _classCallCheck(this, SCacheLsAdapter);
 
     return _super.call(this, (0, _deepMerge.default)({}, settings));
@@ -89,12 +97,20 @@ let SCacheLsAdapter = /*#__PURE__*/function (_SCacheAdapter) {
 
   _createClass(SCacheLsAdapter, [{
     key: "set",
-    value: async function set(name, value) {
-      // store data into localStorage
-      window.localStorage.setItem(name, value); // write has been done correctly
+    value: function () {
+      var _set = _asyncToGenerator(function* (name, value) {
+        // store data into localStorage
+        window.localStorage.setItem(name, value); // write has been done correctly
 
-      return true;
-    }
+        return true;
+      });
+
+      function set(_x, _x2) {
+        return _set.apply(this, arguments);
+      }
+
+      return set;
+    }()
     /**
      * @name                          get
      * @type                          Function
@@ -112,9 +128,17 @@ let SCacheLsAdapter = /*#__PURE__*/function (_SCacheAdapter) {
 
   }, {
     key: "get",
-    value: async function get(name) {
-      return window.localStorage.getItem(name);
-    }
+    value: function () {
+      var _get = _asyncToGenerator(function* (name) {
+        return window.localStorage.getItem(name);
+      });
+
+      function get(_x3) {
+        return _get.apply(this, arguments);
+      }
+
+      return get;
+    }()
     /**
      * @name                          delete
      * @type                          Function
@@ -132,12 +156,20 @@ let SCacheLsAdapter = /*#__PURE__*/function (_SCacheAdapter) {
 
   }, {
     key: "delete",
-    value: async function _delete(name) {
-      // delete the item from the localStorage
-      window.localStorage.removeItem(name); // return true cause all went well
+    value: function () {
+      var _delete2 = _asyncToGenerator(function* (name) {
+        // delete the item from the localStorage
+        window.localStorage.removeItem(name); // return true cause all went well
 
-      return true;
-    }
+        return true;
+      });
+
+      function _delete(_x4) {
+        return _delete2.apply(this, arguments);
+      }
+
+      return _delete;
+    }()
     /**
      * @name                          clear
      * @type                          Function
@@ -155,20 +187,28 @@ let SCacheLsAdapter = /*#__PURE__*/function (_SCacheAdapter) {
 
   }, {
     key: "clear",
-    value: async function clear(cacheName) {
-      // get all the localStorage keys to filter them
-      const keys = Object.keys(window.localStorage); // filter the keys to delete
+    value: function () {
+      var _clear = _asyncToGenerator(function* (cacheName) {
+        // get all the localStorage keys to filter them
+        var keys = Object.keys(window.localStorage); // filter the keys to delete
 
-      const keysToDelete = keys.filter(key => {
-        return key.startsWith(cacheName);
-      }); // loop on each keys to delete
+        var keysToDelete = keys.filter(key => {
+          return key.startsWith(cacheName);
+        }); // loop on each keys to delete
 
-      keysToDelete.forEach(k => {
-        window.localStorage.removeItem(k);
-      }); // return true cause all went well
+        keysToDelete.forEach(k => {
+          window.localStorage.removeItem(k);
+        }); // return true cause all went well
 
-      return true;
-    }
+        return true;
+      });
+
+      function clear(_x5) {
+        return _clear.apply(this, arguments);
+      }
+
+      return clear;
+    }()
     /**
      * @name                      keys
      * @type                      Function
@@ -187,16 +227,24 @@ let SCacheLsAdapter = /*#__PURE__*/function (_SCacheAdapter) {
 
   }, {
     key: "keys",
-    value: async function keys(cacheName) {
-      // get all the localStorage keys to filter them
-      const keys = Object.keys(window.localStorage); // filter the keys to get only the ones that bellongs to this cache instance
+    value: function () {
+      var _keys = _asyncToGenerator(function* (cacheName) {
+        // get all the localStorage keys to filter them
+        var keys = Object.keys(window.localStorage); // filter the keys to get only the ones that bellongs to this cache instance
 
-      const cacheKeys = keys.filter(key => {
-        return key.startsWith(cacheName);
-      }); // return the cache keys
+        var cacheKeys = keys.filter(key => {
+          return key.startsWith(cacheName);
+        }); // return the cache keys
 
-      return cacheKeys;
-    }
+        return cacheKeys;
+      });
+
+      function keys(_x6) {
+        return _keys.apply(this, arguments);
+      }
+
+      return keys;
+    }()
   }]);
 
   return SCacheLsAdapter;

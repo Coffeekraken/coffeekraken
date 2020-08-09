@@ -34,11 +34,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-let _observer,
+var _observer,
     _selectors = {};
 
-function querySelectorLive(selector, cb, settings = {}) {
-  const id = `${selector} - ${(0, _uniqid.default)()}`; // extend settings
+function querySelectorLive(selector, cb, settings) {
+  if (settings === void 0) {
+    settings = {};
+  }
+
+  var id = "".concat(selector, " - ").concat((0, _uniqid.default)()); // extend settings
 
   settings = Object.assign({}, {
     rootNode: document,
@@ -62,7 +66,7 @@ function querySelectorLive(selector, cb, settings = {}) {
   }
 
   function pushNewNode(node, sel) {
-    const objs = _selectors[sel];
+    var objs = _selectors[sel];
     if (!objs) return;
     objs.forEach(obj => {
       if (obj.settings.once) {
@@ -87,7 +91,7 @@ function querySelectorLive(selector, cb, settings = {}) {
         if (mutation.addedNodes) {
           [].forEach.call(mutation.addedNodes, node => {
             // get all the selectors registered
-            const selectors = Object.keys(_selectors); // loop on each selectors
+            var selectors = Object.keys(_selectors); // loop on each selectors
 
             selectors.forEach(sel => {
               if ((0, _matches.default)(node, sel)) {
@@ -96,7 +100,7 @@ function querySelectorLive(selector, cb, settings = {}) {
             });
             if (!node.querySelectorAll) return;
             selectors.forEach(sel => {
-              const nestedNodes = node.querySelectorAll(sel);
+              var nestedNodes = node.querySelectorAll(sel);
               [].forEach.call(nestedNodes, nestedNode => {
                 pushNewNode(nestedNode, sel);
               });

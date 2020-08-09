@@ -25,7 +25,7 @@ exports.default = offset;
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function offset(elm) {
-  let body, box, clientLeft, clientTop, docEl, left, scrollLeft, scrollTop, top, translates, transX, transY;
+  var body, box, clientLeft, clientTop, docEl, left, scrollLeft, scrollTop, top, translates, transX, transY;
   box = elm.getBoundingClientRect();
   body = document.body;
   docEl = document.documentElement;

@@ -36,13 +36,13 @@ function getStyleProperty(elm, property) {
   setTimeout(() => {
     elm._sComputedStyle = null;
   });
-  const computed = elm._sComputedStyle || window.getComputedStyle(elm);
+  var computed = elm._sComputedStyle || window.getComputedStyle(elm);
   elm._sComputedStyle = computed;
-  const prefixes = ['', 'webkit-', 'moz-', 'ms-', 'o-', 'khtml-'];
+  var prefixes = ['', 'webkit-', 'moz-', 'ms-', 'o-', 'khtml-'];
 
-  for (let i = 0; i < prefixes.length; i++) {
-    const prefix = prefixes[i];
-    const value = computed[(0, _camelize.default)(`${prefix}${property}`)];
+  for (var i = 0; i < prefixes.length; i++) {
+    var prefix = prefixes[i];
+    var value = computed[(0, _camelize.default)("".concat(prefix).concat(property))];
     if (value && value.trim() !== '') return (0, _autoCast.default)(value);
   }
 

@@ -35,23 +35,23 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function deepMerge(...args) {
-  let settings = {
+function deepMerge() {
+  var settings = {
     array: false,
     object: true
   };
 
   function merge(firstObj, secondObj) {
-    const newObj = {};
+    var newObj = {};
     if (!firstObj && secondObj) return secondObj;
     if (!secondObj && firstObj) return firstObj;
     if (!firstObj && !secondObj) return {};
     (0, _copyTo.default)(firstObj).override(newObj);
 
-    for (const key of Object.keys(secondObj)) {
+    for (var key of Object.keys(secondObj)) {
       // merging arrays
       if (settings.array === true && Array.isArray(firstObj[key]) && Array.isArray(secondObj[key])) {
-        let newArray = (0, _unique.default)([...firstObj[key], ...secondObj[key]]);
+        var newArray = (0, _unique.default)([...firstObj[key], ...secondObj[key]]);
         newObj[key] = newArray;
         continue;
       } // merging objects
@@ -66,7 +66,11 @@ function deepMerge(...args) {
     return newObj;
   }
 
-  let potentialSettingsObj = args[args.length - 1] || {};
+  for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+    args[_key] = arguments[_key];
+  }
+
+  var potentialSettingsObj = args[args.length - 1] || {};
 
   if (potentialSettingsObj.array && typeof potentialSettingsObj.array === 'boolean' || potentialSettingsObj.object && typeof potentialSettingsObj.object === 'boolean') {
     if (potentialSettingsObj.array !== undefined) settings.array = potentialSettingsObj.array;
@@ -74,10 +78,10 @@ function deepMerge(...args) {
     args.pop();
   }
 
-  let currentObj = {};
+  var currentObj = {};
 
-  for (let i = 0; i < args.length; i++) {
-    const toMergeObj = args[i] || {};
+  for (var i = 0; i < args.length; i++) {
+    var toMergeObj = args[i] || {};
     currentObj = merge(currentObj, toMergeObj);
   }
 

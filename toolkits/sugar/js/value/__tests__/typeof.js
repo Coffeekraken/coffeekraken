@@ -5,7 +5,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 module.exports = __typeof => {
   describe('sugar.js.value.typeof', () => {
     it('Should return the correct typeof of the passed values', () => {
-      let something;
+      var something;
       expect(__typeof(true)).toEqual('Boolean');
       expect(__typeof(10)).toEqual('Integer');
       expect(__typeof(12.3)).toEqual('Number');
@@ -30,7 +30,7 @@ module.exports = __typeof => {
       of: true
     })).toEqual('Object<String|Integer|Boolean>');
 
-    let MyCoolClass = function MyCoolClass() {
+    var MyCoolClass = function MyCoolClass() {
       _classCallCheck(this, MyCoolClass);
     };
 

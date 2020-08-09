@@ -15,9 +15,13 @@ var _node = _interopRequireDefault(require("../is/node"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -46,7 +50,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-let SCache = /*#__PURE__*/function () {
+var SCache = /*#__PURE__*/function () {
   /**
    * @name                              _name
    * @type                              String
@@ -105,7 +109,11 @@ let SCache = /*#__PURE__*/function () {
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  function SCache(settings = {}) {
+  function SCache(settings) {
+    if (settings === void 0) {
+      settings = {};
+    }
+
     _classCallCheck(this, SCache);
 
     _defineProperty(this, "_name", null);
@@ -114,19 +122,19 @@ let SCache = /*#__PURE__*/function () {
 
     _defineProperty(this, "_defaultAdaptersPaths", {
       ls: '@coffeekraken/sugar/js/cache/adapters/SCacheLsAdapter',
-      fs: `@coffeekraken/sugar/node/cache/adapters/SCacheFsAdapter`
+      fs: "@coffeekraken/sugar/node/cache/adapters/SCacheFsAdapter"
     });
 
     _defineProperty(this, "_adapter", null);
 
     // make sure we have a name
     if (!settings.name) {
-      throw new Error(`The SCache instance need a name. To set it, pass the "name" property in the "settings" object...`);
+      throw new Error("The SCache instance need a name. To set it, pass the \"name\" property in the \"settings\" object...");
     } // store the name
 
 
     if (!/^[a-zA-Z0-9_-]+$/.test(settings.name)) {
-      throw new Error(`The name of an SCache instance can contain only letters like [a-zA-Z0-9_-]...`);
+      throw new Error("The name of an SCache instance can contain only letters like [a-zA-Z0-9_-]...");
     }
 
     this._name = settings.name;
@@ -150,25 +158,33 @@ let SCache = /*#__PURE__*/function () {
 
   _createClass(SCache, [{
     key: "getAdapter",
-    value: async function getAdapter() {
-      // check if we have already an adapter setted for this instance
-      if (this._adapter) return this._adapter; // get the adapter specified in the settings
+    value: function () {
+      var _getAdapter = _asyncToGenerator(function* () {
+        // check if we have already an adapter setted for this instance
+        if (this._adapter) return this._adapter; // get the adapter specified in the settings
 
-      let adapter = this._settings.adapter; // check the type
+        var adapter = this._settings.adapter; // check the type
 
-      if (typeof adapter === 'string' && this._defaultAdaptersPaths[adapter]) {
-        let adptr = await Promise.resolve(`${
-        /* webpackChunkName: "SCacheAdapter" */
-        this._defaultAdaptersPaths[adapter]}`).then(s => _interopRequireWildcard(require(s)));
-        if (adptr.default) adptr = adptr.default;
-        this._adapter = new adptr();
-      } else if (adapter instanceof _SCacheAdapter.default) {
-        this._adapter = adapter;
-      } // return the adapter
+        if (typeof adapter === 'string' && this._defaultAdaptersPaths[adapter]) {
+          var adptr = yield Promise.resolve("".concat(
+          /* webpackChunkName: "SCacheAdapter" */
+          this._defaultAdaptersPaths[adapter])).then(s => _interopRequireWildcard(require(s)));
+          if (adptr.default) adptr = adptr.default;
+          this._adapter = new adptr();
+        } else if (adapter instanceof _SCacheAdapter.default) {
+          this._adapter = adapter;
+        } // return the adapter
 
 
-      return this._adapter;
-    }
+        return this._adapter;
+      });
+
+      function getAdapter() {
+        return _getAdapter.apply(this, arguments);
+      }
+
+      return getAdapter;
+    }()
     /**
      * @name                            get
      * @type                            Function
@@ -188,28 +204,40 @@ let SCache = /*#__PURE__*/function () {
 
   }, {
     key: "get",
-    value: async function get(name, valueOnly = true) {
-      // get the adapter
-      const adapter = await this.getAdapter(); // using the specified adapter to get the value back
+    value: function () {
+      var _get = _asyncToGenerator(function* (name, valueOnly) {
+        if (valueOnly === void 0) {
+          valueOnly = true;
+        }
 
-      const rawValue = await adapter.get(`${this._name}.${name}`); // check that we have a value back
+        // get the adapter
+        var adapter = yield this.getAdapter(); // using the specified adapter to get the value back
 
-      if (!rawValue || typeof rawValue !== 'string') return null; // parse the raw value back to an object
+        var rawValue = yield adapter.get("".concat(this._name, ".").concat(name)); // check that we have a value back
 
-      const value = adapter.parse ? adapter.parse(rawValue) : this._parse(rawValue); // check if the item is too old...
+        if (!rawValue || typeof rawValue !== 'string') return null; // parse the raw value back to an object
 
-      if (value.deleteAt !== -1 && value.deleteAt < new Date().getTime()) {
-        // this item has to be deleted
-        if (value.deleteOnExpire) await adapter.delete(name); // return null cause the item is too old
+        var value = adapter.parse ? adapter.parse(rawValue) : this._parse(rawValue); // check if the item is too old...
 
-        return null;
-      } // otherwise, this is good so return the item
-      // either the value only, or the full cache object
+        if (value.deleteAt !== -1 && value.deleteAt < new Date().getTime()) {
+          // this item has to be deleted
+          if (value.deleteOnExpire) yield adapter.delete(name); // return null cause the item is too old
+
+          return null;
+        } // otherwise, this is good so return the item
+        // either the value only, or the full cache object
 
 
-      if (valueOnly) return value.value;
-      return value;
-    }
+        if (valueOnly) return value.value;
+        return value;
+      });
+
+      function get(_x, _x2) {
+        return _get.apply(this, arguments);
+      }
+
+      return get;
+    }()
     /**
      * @name                            set
      * @type                            Function
@@ -235,36 +263,48 @@ let SCache = /*#__PURE__*/function () {
 
   }, {
     key: "set",
-    value: async function set(name, value, settings = {}) {
-      // test name
-      if (!/^[a-zA-Z0-9_\-\+]+$/.test(name)) {
-        throw new Error(`You try to set an item named "${name}" is the "${this._name}" SCache instance but an item name can contain only these characters [a-zA-Z0-9_-]...`);
-      } // get the adapter
+    value: function () {
+      var _set = _asyncToGenerator(function* (name, value, settings) {
+        if (settings === void 0) {
+          settings = {};
+        }
+
+        // test name
+        if (!/^[a-zA-Z0-9_\-\+]+$/.test(name)) {
+          throw new Error("You try to set an item named \"".concat(name, "\" is the \"").concat(this._name, "\" SCache instance but an item name can contain only these characters [a-zA-Z0-9_-]..."));
+        } // get the adapter
 
 
-      const adapter = await this.getAdapter(); // try to get the value to update it
+        var adapter = yield this.getAdapter(); // try to get the value to update it
 
-      const existingValue = await this.get(name, false); // merge the default and the item settings
+        var existingValue = yield this.get(name, false); // merge the default and the item settings
 
-      const finalSettings = (0, _deepMerge.default)({
-        ttl: this._settings.ttl,
-        deleteOnExpire: this._settings.deleteOnExpire
-      }, settings); // initial the object that will be saved in the cache
+        var finalSettings = (0, _deepMerge.default)({
+          ttl: this._settings.ttl,
+          deleteOnExpire: this._settings.deleteOnExpire
+        }, settings); // initial the object that will be saved in the cache
 
-      const deleteAt = finalSettings.ttl === -1 ? -1 : new Date().getTime() + (0, _convert.default)(typeof finalSettings.ttl === 'number' ? `${finalSettings.ttl}s` : finalSettings.ttl, 'ms');
-      const valueToSave = {
-        name,
-        value,
-        created: existingValue ? existingValue.created : new Date().getTime(),
-        updated: new Date().getTime(),
-        deleteAt,
-        settings: finalSettings
-      }; // stringify the value to save
+        var deleteAt = finalSettings.ttl === -1 ? -1 : new Date().getTime() + (0, _convert.default)(typeof finalSettings.ttl === 'number' ? "".concat(finalSettings.ttl, "s") : finalSettings.ttl, 'ms');
+        var valueToSave = {
+          name,
+          value,
+          created: existingValue ? existingValue.created : new Date().getTime(),
+          updated: new Date().getTime(),
+          deleteAt,
+          settings: finalSettings
+        }; // stringify the value to save
 
-      const stringifiedValueToSave = adapter.stringify ? adapter.stringify(valueToSave) : this._stringify(valueToSave); // use the adapter to save the value
+        var stringifiedValueToSave = adapter.stringify ? adapter.stringify(valueToSave) : this._stringify(valueToSave); // use the adapter to save the value
 
-      return adapter.set(`${this._name}.${name}`, stringifiedValueToSave);
-    }
+        return adapter.set("".concat(this._name, ".").concat(name), stringifiedValueToSave);
+      });
+
+      function set(_x3, _x4, _x5) {
+        return _set.apply(this, arguments);
+      }
+
+      return set;
+    }()
     /**
      * @name                                delete
      * @type                                Function
@@ -282,12 +322,20 @@ let SCache = /*#__PURE__*/function () {
 
   }, {
     key: "delete",
-    value: async function _delete(name) {
-      // get the adapter
-      const adapter = await this.getAdapter(); // delete the item
+    value: function () {
+      var _delete2 = _asyncToGenerator(function* (name) {
+        // get the adapter
+        var adapter = yield this.getAdapter(); // delete the item
 
-      return adapter.delete(`${this._name}.${name}`);
-    }
+        return adapter.delete("".concat(this._name, ".").concat(name));
+      });
+
+      function _delete(_x6) {
+        return _delete2.apply(this, arguments);
+      }
+
+      return _delete;
+    }()
     /**
      * @name                                clear
      * @type                                Function
@@ -304,12 +352,20 @@ let SCache = /*#__PURE__*/function () {
 
   }, {
     key: "clear",
-    value: async function clear() {
-      // get the adapter
-      const adapter = await this.getAdapter(); // clear the cache
+    value: function () {
+      var _clear = _asyncToGenerator(function* () {
+        // get the adapter
+        var adapter = yield this.getAdapter(); // clear the cache
 
-      return adapter.clear(this._name);
-    }
+        return adapter.clear(this._name);
+      });
+
+      function clear() {
+        return _clear.apply(this, arguments);
+      }
+
+      return clear;
+    }()
     /**
      * @name                                _parse
      * @type                                Function

@@ -27,13 +27,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function countLine(line, count = {}) {
+module.exports = function countLine(line, count) {
+  if (count === void 0) {
+    count = {};
+  }
+
   count = (0, _deepMerge.default)({
     htmlTags: false,
     terminalSpecialChars: false,
     newLineChars: false
   }, count);
-  let newLine = line;
+  var newLine = line;
 
   if (count.terminalSpecialChars === false) {
     newLine = (0, _stripAnsi.default)(newLine);

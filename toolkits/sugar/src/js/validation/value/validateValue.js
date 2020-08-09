@@ -2,6 +2,7 @@ import __isOfType from '../../is/ofType';
 import __deepMerge from '../../object/deepMerge';
 import __isClass from '../../is/class';
 import __typeof from '../../value/typeof';
+import __SValueValidationError from '../../error/SValueValidationError';
 
 /**
  * @name          validateValue
@@ -14,8 +15,9 @@ import __typeof from '../../value/typeof';
  *
  * @param         {Mixed}       value       The value to check
  * @param         {Object}      definitionObj     THe definition object
- * @param         {String}      [name='unnamed']     A name for the check. Usefull for debugging purpose
  * @param       {Object}        [settings={}]         An object of settings to configure your validation process:
+ * - throw (true) {Boolean}: Specify if you want to throw an error when something goes wrong
+ * - name ('unnamed') {String}: Specify a name. Useful for debugging
  * @return         {Boolean|Object}           true if the check is passed, an Array of String describing the issue if not
  *
  * @todo        tests
@@ -32,13 +34,14 @@ import __typeof from '../../value/typeof';
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function validateValue(
-  value,
-  definitionObj,
-  name = 'unnamed',
-  settings = {}
-) {
-  settings = __deepMerge({}, settings);
+export default function validateValue(value, definitionObj, settings = {}) {
+  settings = __deepMerge(
+    {
+      name: 'unnamed',
+      throw: true
+    },
+    settings
+  );
 
   if (
     (value === null || value === undefined) &&
@@ -53,7 +56,7 @@ export default function validateValue(
       type: __typeof(value),
       value
     },
-    name,
+    name: settings.name,
     issues: []
   };
 
@@ -85,5 +88,9 @@ export default function validateValue(
   }
 
   if (!issueObj.issues.length) return true;
+  if (settings.throw) {
+    throw new __SValueValidationError(issueObj);
+  }
+
   return issueObj;
 }

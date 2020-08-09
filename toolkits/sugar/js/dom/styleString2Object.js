@@ -33,13 +33,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 function styleString2Object(style) {
   if (!style || style === '') return {};
-  let obj = {};
-  const split = style.replace(/\s/g, '').split(';');
+  var obj = {};
+  var split = style.replace(/\s/g, '').split(';');
   split.forEach(statement => {
     // split statement by key value pairs
-    const spl = statement.split(':'),
-          key = (0, _camelize.default)(spl[0]),
-          value = spl[1]; // add element into object
+    var spl = statement.split(':'),
+        key = (0, _camelize.default)(spl[0]),
+        value = spl[1]; // add element into object
 
     obj[key] = (0, _autoCast.default)(value);
   }); // return the style object

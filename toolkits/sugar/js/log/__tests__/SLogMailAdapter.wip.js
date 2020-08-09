@@ -1,7 +1,7 @@
 "use strict";
 
-const __SLog = require('../SLog');
+var __SLog = require('../SLog');
 
-const __SLogMailAdapter = require('../adapters/SLogMailAdapter');
+var __SLogMailAdapter = require('../adapters/SLogMailAdapter');
 
 require('./SLogMailAdapter')(__SLog, __SLogMailAdapter);

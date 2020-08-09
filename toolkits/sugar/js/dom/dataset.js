@@ -31,17 +31,21 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function dataset($elm, key, value = null) {
+function dataset($elm, key, value) {
+  if (value === void 0) {
+    value = null;
+  }
+
   if (!$elm.getAttribute) return;
 
   if (!value) {
-    const v = $elm.dataset[key] || $elm.getAttribute('data-' + (0, _uncamelize.default)(key));
+    var v = $elm.dataset[key] || $elm.getAttribute('data-' + (0, _uncamelize.default)(key));
     return (0, _autoCast.default)(v);
   } else {
     // try to set the value
-    let dataset = $elm.dataset;
+    var _dataset = $elm.dataset;
 
-    if (dataset) {
+    if (_dataset) {
       $elm.dataset[key] = (0, _toString.default)(value);
     } else {
       // set the data through setAttribute

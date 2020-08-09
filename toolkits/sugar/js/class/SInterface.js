@@ -15,6 +15,8 @@ var _parseHtml = _interopRequireDefault(require("../console/parseHtml"));
 
 var _trimLines = _interopRequireDefault(require("../string/trimLines"));
 
+var _SObjectValidationError = _interopRequireDefault(require("../error/SObjectValidationError"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -59,7 +61,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com>
  */
-let SInterface = /*#__PURE__*/function () {
+var SInterface = /*#__PURE__*/function () {
   function SInterface() {
     _classCallCheck(this, SInterface);
   }
@@ -97,25 +99,31 @@ let SInterface = /*#__PURE__*/function () {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    value: function apply(instance, settings = {}) {
+    value: function apply(instance, settings) {
+      if (settings === void 0) {
+        settings = {};
+      }
+
       settings = (0, _deepMerge.default)(SInterface.settings, settings);
-      let issues = [];
-      let issueObj = {
+      var issues = [];
+      var issueObj = {
         issues: []
       };
-      const implementationValidationResult = (0, _validateObject.default)(instance, this.definitionObj, instance.name || instance.constructor.name);
+      var implementationValidationResult = (0, _validateObject.default)(instance, this.definitionObj, {
+        throw: settings.throw,
+        name: instance.name || instance.constructor.name
+      });
 
       if (implementationValidationResult !== true) {
-        issueObj = { ...issueObj,
-          ...implementationValidationResult,
-          issues: [...issueObj.issues, ...implementationValidationResult.issues]
-        };
+        issueObj = (0, _deepMerge.default)(issueObj, implementationValidationResult, {
+          array: true
+        });
       }
 
       if (!issueObj.issues.length) return true;
 
       if (settings.throw) {
-        throw new Error(SInterface.outputString(issueObj));
+        throw new _SObjectValidationError.default(issueObj);
       }
 
       switch (settings.return.toLowerCase()) {
@@ -146,7 +154,8 @@ let SInterface = /*#__PURE__*/function () {
   }, {
     key: "applyAndThrow",
     value: function applyAndThrow(instance) {
-      SInterface.apply(instance, {
+      var apply = SInterface.apply.bind(this);
+      apply(instance, {
         throw: true
       });
     }
@@ -168,7 +177,7 @@ let SInterface = /*#__PURE__*/function () {
   }, {
     key: "outputString",
     value: function outputString(resultObj) {
-      const string = (0, _validateObjectOutputString.default)(resultObj);
+      var string = (0, _validateObjectOutputString.default)(resultObj);
       return string;
     }
     /**
@@ -189,7 +198,7 @@ let SInterface = /*#__PURE__*/function () {
   }, {
     key: "output",
     value: function output(resultObj) {
-      const string = (0, _validateObjectOutputString.default)(resultObj);
+      var string = (0, _validateObjectOutputString.default)(resultObj);
       console.log(string);
     }
   }]);
@@ -200,7 +209,7 @@ let SInterface = /*#__PURE__*/function () {
 exports.default = SInterface;
 
 _defineProperty(SInterface, "settings", {
-  throw: false,
+  throw: true,
   return: 'String'
 });
 

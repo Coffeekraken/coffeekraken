@@ -29,13 +29,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 function parseTypeDefinitionString(argTypeString) {
   // split the string by |
-  let inDepth = 0;
-  let currentPart = '',
+  var inDepth = 0;
+  var currentPart = '',
       typesArray = [];
   argTypeString.split('').forEach(character => {
     if (character === '>') {
       if (inDepth <= 0) {
-        throw new Error(`It seems that your argument type definition string "${argTypeString}" is invalid...`);
+        throw new Error("It seems that your argument type definition string \"".concat(argTypeString, "\" is invalid..."));
       }
 
       inDepth--;
@@ -64,18 +64,18 @@ function parseTypeDefinitionString(argTypeString) {
   });
   typesArray.push(currentPart); // init the return array
 
-  const returnArray = []; // loop on each types array
+  var returnArray = []; // loop on each types array
 
   typesArray.forEach(typeDefinitionString => {
     // split the string by <
-    const parts = typeDefinitionString.split('<'); // get the "type"
+    var parts = typeDefinitionString.split('<'); // get the "type"
 
-    const type = (0, _upperFirst.default)(parts[0]); // process the "of" part if exist
+    var type = (0, _upperFirst.default)(parts[0]); // process the "of" part if exist
 
-    let ofArray = null;
+    var ofArray = null;
 
     if (parts[1]) {
-      const ofPart = parts[1].slice(0, -1);
+      var ofPart = parts[1].slice(0, -1);
       ofArray = parseTypeDefinitionString(ofPart);
     } // build the type object and add it the the returnArray
 

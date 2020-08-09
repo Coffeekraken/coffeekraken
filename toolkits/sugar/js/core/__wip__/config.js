@@ -38,11 +38,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com
  */
-let __sugarConfig = window.sConfig || localStorage.getItem('sConfig') || {}; // if (typeof __sugarConfig === 'string' && __isBase64(__sugarConfig)) __sugarConfig = __base64.decrypt(__sugarConfig);
+var __sugarConfig = window.sConfig || localStorage.getItem('sConfig') || {}; // if (typeof __sugarConfig === 'string' && __isBase64(__sugarConfig)) __sugarConfig = __base64.decrypt(__sugarConfig);
 // if (typeof __sugarConfig === 'string' && __isJson(__sugarConfig)) __sugarConfig = JSON.parse(__sugarConfig);
 
 
-var _default = (path, value = null) => {
+var _default = function _default(path, value) {
+  if (value === void 0) {
+    value = null;
+  }
+
   // process the path
   if (path === '.' || path === '' || !path) {
     path = '';
@@ -61,7 +65,7 @@ var _default = (path, value = null) => {
     return __sugarConfig;
   }
 
-  let newValue; // check if is a set or get process
+  var newValue; // check if is a set or get process
 
   if (value) {
     newValue = (0, _set.default)(__sugarConfig, path, value);
@@ -71,10 +75,10 @@ var _default = (path, value = null) => {
   } // preparing the value to set in the storage
 
 
-  let configToSave = __sugarConfig;
+  var configToSave = __sugarConfig;
   if (typeof configToSave !== 'string') configToSave = JSON.stringify(configToSave);
 
-  const encryptedConfig = _base2.default.encrypt(configToSave); // save the new settings
+  var encryptedConfig = _base2.default.encrypt(configToSave); // save the new settings
 
 
   window.sConfig = encryptedConfig;

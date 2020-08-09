@@ -2,10 +2,10 @@
 
 module.exports = (__SLog, __SLogConsoleAdapter) => {
   describe('sugar.js.log.SLogConsoleAdapter', () => {
-    const logger = new __SLog({
+    var logger = new __SLog({
       overrideNativeConsole: false
     });
-    const promises = [];
+    var promises = [];
     promises.push(logger.log('Hello world'));
     promises.push(logger.info('Hello world'));
     promises.push(logger.warn('Hello world'));

@@ -3,7 +3,7 @@
 module.exports = __delete => {
   describe('sugar.js.object.delete', () => {
     it('Should delete correctly a simple property', () => {
-      const obj = {
+      var obj = {
         hello: {
           world: 'plop'
         },
@@ -15,14 +15,14 @@ module.exports = __delete => {
       });
     });
     it('Should delete correctly a property in an array', () => {
-      const obj = {
+      var obj = {
         hello: {
           world: ['one', 'two', 'three', 'four', 'five']
         },
         plop: 'yop'
       };
 
-      const deletedObj = __delete(obj, 'hello.world.1');
+      var deletedObj = __delete(obj, 'hello.world.1');
 
       expect(deletedObj).toEqual({
         hello: {
@@ -32,7 +32,7 @@ module.exports = __delete => {
       });
     });
     it('Should delete correctly a property in an object that is inside an array', () => {
-      const obj = {
+      var obj = {
         hello: {
           world: ['one', 'two', {
             coco: 'yeah',
@@ -44,7 +44,7 @@ module.exports = __delete => {
         plop: 'yop'
       };
 
-      const deletedObj = __delete(obj, 'hello.world.2.del.branch');
+      var deletedObj = __delete(obj, 'hello.world.2.del.branch');
 
       expect(deletedObj).toEqual({
         hello: {
@@ -57,14 +57,14 @@ module.exports = __delete => {
       });
     });
     it('Should delete correctly a property in an array that is inside another array', () => {
-      const obj = {
+      var obj = {
         hello: {
           world: ['one', 'two', ['01', '02', '03', '04'], 'four', 'five']
         },
         plop: 'yop'
       };
 
-      const deletedObj = __delete(obj, 'hello.world.2.1');
+      var deletedObj = __delete(obj, 'hello.world.2.1');
 
       expect(deletedObj).toEqual({
         hello: {

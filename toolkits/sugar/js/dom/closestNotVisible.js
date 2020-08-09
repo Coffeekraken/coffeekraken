@@ -30,7 +30,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function closestNotVisible(elm) {
-  const originalElm = elm;
+  var originalElm = elm;
   elm = elm.parentNode;
 
   while (elm && elm != originalElm.ownerDocument) {

@@ -69,19 +69,37 @@ export default function parseArgsString(
 
   // process the passed string
   let stringArray =
-    string.match(/(?:[^\s("|'|`)]+|("|'|`)[^("|'|`)]*("|'|`))+/gm) || [];
+    string.match(/(?:[^\s"|'|`]+|("|'|`)[^"|'|`]*("|'|`))+/gm) || [];
   stringArray = stringArray.map((item) => {
     return __unquote(item);
   });
   let currentArgName = null;
   let currentArgType = null;
   let currentArgDefinition = null;
+
   stringArray = stringArray.filter((part) => {
     const currentArg = part.replace(/^[-]{1,2}/, '');
     if (part.slice(0, 2) === '--' || part.slice(0, 1) === '-') {
       const realArgName =
         getArgNameByAlias(currentArg, definitionObj) || currentArg;
       currentArgName = realArgName;
+
+      if (!definitionObj[realArgName]) {
+        throw new Error(
+          `You try to pass an argument "<yellow>${realArgName}</yellow>" that is not supported. Here's the supported arguments:\n${Object.keys(
+            definitionObj
+          )
+            .map((argName) => {
+              const argDefinition = definitionObj[argName];
+              let string = `<cyan>>${argName}</cyan>: --${argName}`;
+              if (argDefinition.alias) string += ` (-${argDefinition.alias})`;
+              if (argDefinition.description)
+                string += `: ${argDefinition.description}`;
+              return string;
+            })
+            .join('\n')}`
+        );
+      }
 
       currentArgDefinition = definitionObj[realArgName];
 
@@ -97,7 +115,9 @@ export default function parseArgsString(
     if (!lastArgObjKey) {
       for (const key in definitionObj) {
         const obj = definitionObj[key];
+
         const value = __parse(part);
+
         if (__ofType(value, obj.type)) {
           if (obj.validator && !obj.validator(value)) {
             continue;
@@ -108,6 +128,7 @@ export default function parseArgsString(
       }
     } else if (lastArgObjKey) {
       const value = __parse(part);
+
       if (currentArgType[0].type.toLowerCase() === 'array') {
         if (Array.isArray(value)) argsObj[lastArgObjKey] = value;
         else if (!Array.isArray(argsObj[lastArgObjKey]))
@@ -145,7 +166,7 @@ export default function parseArgsString(
     finalObj[key] = argsObj[key];
   }
 
-  return __completeArgsObject(finalObj, definitionObj);
+  return __completeArgsObject(finalObj, definitionObj, settings);
 }
 
 function getArgNameByAlias(alias, definitionObj) {

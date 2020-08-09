@@ -33,7 +33,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * @see       https://github.com/axios/axios
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-let SRequestConfig =
+var SRequestConfig =
 /**
  * @name                    url
  * @type                    String

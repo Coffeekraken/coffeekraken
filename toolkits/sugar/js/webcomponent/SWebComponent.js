@@ -37,6 +37,14 @@ var _SLitHtmlWebComponent = _interopRequireDefault(require("./SLitHtmlWebCompone
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -103,10 +111,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * @since       2.0.0
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-const _sWebComponentPromise = new _SPromise.default(() => {}).start();
+var _sWebComponentPromise = new _SPromise.default(() => {}).start();
 
-function SWebComponent(extend = HTMLElement) {
+function SWebComponent(extend) {
   var _temp;
+
+  if (extend === void 0) {
+    extend = HTMLElement;
+  }
 
   return _temp = /*#__PURE__*/function (_extend) {
     _inherits(SWebComponent, _extend);
@@ -159,7 +171,7 @@ function SWebComponent(extend = HTMLElement) {
        *
        * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      get: function () {
+      get: function get() {
         return Object.keys(this.props).map(name => (0, _uncamelize.default)(name));
       }
       /**
@@ -174,8 +186,12 @@ function SWebComponent(extend = HTMLElement) {
 
     }]);
 
-    function SWebComponent(settings = {}) {
+    function SWebComponent(settings) {
       var _this;
+
+      if (settings === void 0) {
+        settings = {};
+      }
 
       _classCallCheck(this, SWebComponent);
 
@@ -199,9 +215,9 @@ function SWebComponent(extend = HTMLElement) {
 
       _this._promise = new _SPromise.default(() => {}).start(); // apply the $node class
 
-      const currentClassName = _this.getAttribute('class') || '';
+      var currentClassName = _this.getAttribute('class') || '';
 
-      _this.setAttribute('class', `${currentClassName} ${_this.className(`node`)}`);
+      _this.setAttribute('class', "".concat(currentClassName, " ").concat(_this.className("node")));
 
       _this.on('mounted{1}', () => {
         // dispatch a ready event
@@ -242,53 +258,67 @@ function SWebComponent(extend = HTMLElement) {
        * @since       2.0.0
        * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      value: async function _mount() {
-        // dispatch mounting event
-        this.dispatch('mounting', this); // handle props
+      value: function () {
+        var _mount2 = _asyncToGenerator(function* () {
+          var _this2 = this;
 
-        for (const key in this._settings.props) {
-          let attr = this.getAttribute((0, _uncamelize.default)(key));
+          // dispatch mounting event
+          this.dispatch('mounting', this); // handle props
 
-          if (!attr && this.hasAttribute((0, _uncamelize.default)(key))) {
-            attr = true;
-          }
+          for (var key in this._settings.props) {
+            var attr = this.getAttribute((0, _uncamelize.default)(key));
 
-          this._props[key] = { ...this._settings.props[key],
-            value: attr ? (0, _parse.default)(attr) : this._settings.props[key].default,
-            previousValue: undefined
+            if (!attr && this.hasAttribute((0, _uncamelize.default)(key))) {
+              attr = true;
+            }
+
+            this._props[key] = _objectSpread(_objectSpread({}, this._settings.props[key]), {}, {
+              value: attr ? (0, _parse.default)(attr) : this._settings.props[key].default,
+              previousValue: undefined
+            });
+          } // handle props
+
+
+          var _loop = function _loop(_key) {
+            // if need to be watches deeply
+            if (_this2._props[_key].watch) {
+              _this2._props[_key] = (0, _watch.default)(_this2._props[_key], {
+                deep: _this2._props[_key].watch === 'deep'
+              });
+
+              _this2._props[_key].on('value.*:+(set|delete|push|pop)', update => {
+                if (update.path.split('.').length === 1) {
+                  _this2.prop(update.path, update.value);
+                } else {
+                  _this2.handleProp(update.path, _this2._props[_key]);
+                }
+              });
+            }
           };
-        } // handle props
+
+          for (var _key in this._settings.props) {
+            _loop(_key);
+          } // wait until the component match the mountDependencies and mountWhen status
 
 
-        for (const key in this._settings.props) {
-          // if need to be watches deeply
-          if (this._props[key].watch) {
-            this._props[key] = (0, _watch.default)(this._props[key], {
-              deep: this._props[key].watch === 'deep'
-            });
+          yield this._mountDependencies(); // check props definition
 
-            this._props[key].on('value.*:+(set|delete|push|pop)', update => {
-              if (update.path.split('.').length === 1) {
-                this.prop(update.path, update.value);
-              } else {
-                this.handleProp(update.path, this._props[key]);
-              }
-            });
-          }
-        } // wait until the component match the mountDependencies and mountWhen status
+          this._checkPropsDefinition(); // handle physical props
 
 
-        await this._mountDependencies(); // check props definition
-
-        this._checkPropsDefinition(); // handle physical props
+          this._handlePhysicalProps(); // dispatch mounted event
 
 
-        this._handlePhysicalProps(); // dispatch mounted event
+          this._isMounted = true;
+          this.dispatch('mounted', this);
+        });
 
+        function _mount() {
+          return _mount2.apply(this, arguments);
+        }
 
-        this._isMounted = true;
-        this.dispatch('mounted', this);
-      }
+        return _mount;
+      }()
       /**
        * @name          handleProp
        * @type          Function
@@ -370,22 +400,22 @@ function SWebComponent(extend = HTMLElement) {
         this._promise.trigger(name, value || this); // dispatch a general event
 
 
-        (0, _dispatch.default)(`${this.metas.dashName}.${name}`, {
+        (0, _dispatch.default)("".concat(this.metas.dashName, ".").concat(name), {
           target: this,
           value
         });
-        (0, _dispatch.default)(`${this.metas.dashName}#${this._settings.id}.${name}`, {
+        (0, _dispatch.default)("".concat(this.metas.dashName, "#").concat(this._settings.id, ".").concat(name), {
           target: this,
           value
         });
         setTimeout(() => {
           // dispatch an SWebComponent level event
-          _sWebComponentPromise.trigger(`${this.metas.dashName}.${name}`, {
+          _sWebComponentPromise.trigger("".concat(this.metas.dashName, ".").concat(name), {
             target: this,
             value
           });
 
-          _sWebComponentPromise.trigger(`${this.metas.dashName}#${this._settings.id}.${name}`, {
+          _sWebComponentPromise.trigger("".concat(this.metas.dashName, "#").concat(this._settings.id, ".").concat(name), {
             target: this,
             value
           });
@@ -416,7 +446,7 @@ function SWebComponent(extend = HTMLElement) {
       key: "_mountDependencies",
       value: function _mountDependencies() {
         return new Promise((resolve, reject) => {
-          let promises = []; // check if we have a "mountWhen" setting specified
+          var promises = []; // check if we have a "mountWhen" setting specified
 
           if (this._settings.mountWhen) {
             promises.push((0, _when.default)(this._settings.mountWhen));
@@ -424,7 +454,7 @@ function SWebComponent(extend = HTMLElement) {
 
 
           if (this._settings.mountDependencies) {
-            const depsFns = [...this._settings.mountDependencies];
+            var depsFns = [...this._settings.mountDependencies];
             depsFns.forEach(fn => {
               promises.push(fn());
             });
@@ -487,7 +517,7 @@ function SWebComponent(extend = HTMLElement) {
         if (!this._isMounted) return;
         if (this._settedAttributesStack[attrName]) return; // const previousValue = __parse(oldVal);
 
-        const newValue = (0, _parse.default)(newVal) || false; // set the value into the props
+        var newValue = (0, _parse.default)(newVal) || false; // set the value into the props
 
         this.prop(attrName, newValue);
       }
@@ -507,19 +537,23 @@ function SWebComponent(extend = HTMLElement) {
 
     }, {
       key: "className",
-      value: function className(cls = '') {
-        const originalName = (0, _uncamelize.default)(this.constructor.name).replace('-web-component', '');
-        const hasDot = cls.match(/^\./);
+      value: function className(cls) {
+        if (cls === void 0) {
+          cls = '';
+        }
+
+        var originalName = (0, _uncamelize.default)(this.constructor.name).replace('-web-component', '');
+        var hasDot = cls.match(/^\./);
         cls = cls.replace('.', '');
-        let finalCls;
-        if (cls.match(/^(--)/)) finalCls = `${this.metas.dashName}${cls}`;else if (cls !== '') finalCls = `${this.metas.dashName}__${cls}`;else finalCls = this.metas.dashName;
+        var finalCls;
+        if (cls.match(/^(--)/)) finalCls = "".concat(this.metas.dashName).concat(cls);else if (cls !== '') finalCls = "".concat(this.metas.dashName, "__").concat(cls);else finalCls = this.metas.dashName;
 
         if (cls.match(/^(--)/)) {
-          finalCls = `${hasDot ? '.' : ''}${originalName}-bare${cls} ${hasDot ? '.' : ''}${finalCls}`;
+          finalCls = "".concat(hasDot ? '.' : '').concat(originalName, "-bare").concat(cls, " ").concat(hasDot ? '.' : '').concat(finalCls);
         } else if (cls !== '') {
-          finalCls = `${hasDot ? '.' : ''}${originalName}-bare__${cls} ${hasDot ? '.' : ''}${finalCls}`;
+          finalCls = "".concat(hasDot ? '.' : '').concat(originalName, "-bare__").concat(cls, " ").concat(hasDot ? '.' : '').concat(finalCls);
         } else {
-          finalCls = `${hasDot ? '.' : ''}${originalName}-bare ${hasDot ? '.' : ''}${finalCls}`;
+          finalCls = "".concat(hasDot ? '.' : '').concat(originalName, "-bare ").concat(hasDot ? '.' : '').concat(finalCls);
         }
 
         return finalCls;
@@ -539,7 +573,11 @@ function SWebComponent(extend = HTMLElement) {
 
     }, {
       key: "prop",
-      value: function prop(_prop, value = undefined) {
+      value: function prop(_prop, value) {
+        if (value === void 0) {
+          value = undefined;
+        }
+
         // camelize the attribute name
         _prop = (0, _camelize.default)(_prop);
 
@@ -574,13 +612,13 @@ function SWebComponent(extend = HTMLElement) {
       key: "_triggerPropsEvents",
       value: function _triggerPropsEvents(prop) {
         // trigger a "prop" event
-        const eventObj = {
+        var eventObj = {
           prop,
           action: this._props[prop].previousValue !== null ? this._props[prop].value !== null ? 'set' : 'delete' : 'set',
           value: this._props[prop].value,
           previousValue: this._props[prop].previousValue
         };
-        this.dispatch(`prop.${prop}.${eventObj.action}`, eventObj);
+        this.dispatch("prop.".concat(prop, ".").concat(eventObj.action), eventObj);
       }
       /**
        * @name        _handlePhysicalProps
@@ -595,12 +633,16 @@ function SWebComponent(extend = HTMLElement) {
 
     }, {
       key: "_handlePhysicalProps",
-      value: function _handlePhysicalProps(...props) {
+      value: function _handlePhysicalProps() {
+        for (var _len = arguments.length, props = new Array(_len), _key2 = 0; _key2 < _len; _key2++) {
+          props[_key2] = arguments[_key2];
+        }
+
         if (!props || props.length === 0) props = Object.keys(this._props); // loop on each required props
 
         props.forEach(prop => {
           if (!this._props[prop].physical) return;
-          const value = this._props[prop].value; // if the value is false, remove the attributee from the dom node
+          var value = this._props[prop].value; // if the value is false, remove the attributee from the dom node
 
           if (value === undefined || value === null || value === false) {
             this.removeAttribute(prop);
@@ -613,8 +655,8 @@ function SWebComponent(extend = HTMLElement) {
             this.setAttribute(prop, (0, _toString.default)(value));
             delete this._settedAttributesStack[prop];
           } else {
-            const currentAttributeValue = this.getAttribute(prop);
-            const currentValueStringified = (0, _toString.default)(value);
+            var currentAttributeValue = this.getAttribute(prop);
+            var currentValueStringified = (0, _toString.default)(value);
 
             if (currentAttributeValue !== currentValueStringified) {
               this._settedAttributesStack[prop] = true;
@@ -639,22 +681,28 @@ function SWebComponent(extend = HTMLElement) {
 
     }, {
       key: "_checkPropsDefinition",
-      value: function _checkPropsDefinition(...props) {
+      value: function _checkPropsDefinition() {
+        for (var _len2 = arguments.length, props = new Array(_len2), _key3 = 0; _key3 < _len2; _key3++) {
+          props[_key3] = arguments[_key3];
+        }
+
         if (!props || props.length === 0) props = Object.keys(this._props);
         props.forEach(prop => {
-          const propObj = this._props[prop];
-          const validationResult = (0, _validateValue.default)(propObj.value, propObj, `${this.constructor.name}.props.${prop}`);
+          var propObj = this._props[prop];
+          var validationResult = (0, _validateValue.default)(propObj.value, propObj, {
+            name: "".concat(this.constructor.name, ".props.").concat(prop),
+            throw: true
+          });
           if (validationResult !== true) throw new Error(validationResult);
         });
       }
     }, {
       key: "metas",
-      get: function () {
-        return {
+      get: function get() {
+        return _objectSpread({
           instance: this,
-          $node: this,
-          ...this._metas
-        };
+          $node: this
+        }, this._metas);
       }
     }]);
 

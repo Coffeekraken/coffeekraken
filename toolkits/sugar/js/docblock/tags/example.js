@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = example;
 
-const __upperFirst = require('../../string/upperFirst');
+var __upperFirst = require('../../string/upperFirst');
 /**
  * @name              example
  * @namespace           js.docblock.tags

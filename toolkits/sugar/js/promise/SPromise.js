@@ -15,6 +15,14 @@ var _uniqid = _interopRequireDefault(require("../string/uniqid"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
@@ -113,7 +121,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  *
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-let SPromise = /*#__PURE__*/function (_Promise) {
+var SPromise = /*#__PURE__*/function (_Promise) {
   _inherits(SPromise, _Promise);
 
   var _super = _createSuper(SPromise);
@@ -211,7 +219,11 @@ let SPromise = /*#__PURE__*/function (_Promise) {
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    value: function pipe(sourceSPromise, destSPromise, settings = {}) {
+    value: function pipe(sourceSPromise, destSPromise, settings) {
+      if (settings === void 0) {
+        settings = {};
+      }
+
       // settings
       settings = (0, _deepMerge.default)({
         stacks: '*',
@@ -223,9 +235,9 @@ let SPromise = /*#__PURE__*/function (_Promise) {
         // check if need to process the value
         if (settings.processor) value = settings.processor(value, metas); // trigger on the destination promise
 
-        destSPromise.trigger(metas.stack, value, { ...metas,
+        destSPromise.trigger(metas.stack, value, _objectSpread(_objectSpread({}, metas), {}, {
           level: metas.level + 1
-        });
+        }));
       });
     }
     /**
@@ -245,7 +257,11 @@ let SPromise = /*#__PURE__*/function (_Promise) {
 
   }, {
     key: "log",
-    value: function log(sourceSPromise, settings = {}) {
+    value: function log(sourceSPromise, settings) {
+      if (settings === void 0) {
+        settings = {};
+      }
+
       // settings
       settings = (0, _deepMerge.default)({
         filter: null,
@@ -255,7 +271,7 @@ let SPromise = /*#__PURE__*/function (_Promise) {
 
       sourceSPromise.on(settings.stacks, (value, metas) => {
         if (settings.filter && !settings.filter(value, metas)) return;
-        const msg = value.value ? value.value : value;
+        var msg = value.value ? value.value : value;
         console.log(msg);
       });
     }
@@ -284,14 +300,18 @@ let SPromise = /*#__PURE__*/function (_Promise) {
 
   }]);
 
-  function SPromise(executorFn, settings = {}) {
+  function SPromise(executorFn, settings) {
     var _temp, _this;
+
+    if (settings === void 0) {
+      settings = {};
+    }
 
     _classCallCheck(this, SPromise);
 
-    let _resolve, _reject;
+    var _resolve, _reject;
 
-    const promise = (_temp = _this = _super.call(this, (resolve, reject) => {
+    var promise = (_temp = _this = _super.call(this, (resolve, reject) => {
       _resolve = resolve;
       _reject = reject;
     }), _defineProperty(_assertThisInitialized(_this), "_masterPromiseResolveFn", null), _defineProperty(_assertThisInitialized(_this), "_masterPromiseRejectFn", null), _defineProperty(_assertThisInitialized(_this), "_executorFn", null), _defineProperty(_assertThisInitialized(_this), "_isExecutorStarted", null), _defineProperty(_assertThisInitialized(_this), "_settings", {}), _defineProperty(_assertThisInitialized(_this), "_state", 'pending'), _defineProperty(_assertThisInitialized(_this), "_stacks", {
@@ -357,7 +377,7 @@ let SPromise = /*#__PURE__*/function (_Promise) {
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
     value: function is(status) {
-      const statusArray = status.split(',').map(l => l.trim());
+      var statusArray = status.split(',').map(l => l.trim());
       if (statusArray.indexOf(this._state) !== -1) return true;
       return false;
     }
@@ -464,7 +484,7 @@ let SPromise = /*#__PURE__*/function (_Promise) {
     key: "start",
     value: function start() {
       if (this._isDestroyed) {
-        throw new Error(`Sorry but you can't call the "start" method on this SPromise cause it has been destroyed...`);
+        throw new Error("Sorry but you can't call the \"start\" method on this SPromise cause it has been destroyed...");
       }
 
       if (this._isExecutorStarted || !this._executorFn) return this;
@@ -491,7 +511,11 @@ let SPromise = /*#__PURE__*/function (_Promise) {
 
   }, {
     key: "resolve",
-    value: function resolve(arg, stacksOrder = 'then,resolve,finally') {
+    value: function resolve(arg, stacksOrder) {
+      if (stacksOrder === void 0) {
+        stacksOrder = 'then,resolve,finally';
+      }
+
       return this._resolve(arg, stacksOrder);
     }
     /**
@@ -510,18 +534,30 @@ let SPromise = /*#__PURE__*/function (_Promise) {
 
   }, {
     key: "_resolve",
-    value: async function _resolve(arg, stacksOrder = 'then,resolve,finally') {
-      if (this._isDestroyed) return; // update the status
+    value: function () {
+      var _resolve2 = _asyncToGenerator(function* (arg, stacksOrder) {
+        if (stacksOrder === void 0) {
+          stacksOrder = 'then,resolve,finally';
+        }
 
-      this._state = 'resolved'; // exec the wanted stacks
+        if (this._isDestroyed) return; // update the status
 
-      const stacksResult = await this._triggerStacks(stacksOrder, arg); // resolve the master promise
+        this._state = 'resolved'; // exec the wanted stacks
 
-      this._masterPromiseResolveFn(stacksResult); // return the stack result
+        var stacksResult = yield this._triggerStacks(stacksOrder, arg); // resolve the master promise
+
+        this._masterPromiseResolveFn(stacksResult); // return the stack result
 
 
-      return stacksResult;
-    }
+        return stacksResult;
+      });
+
+      function _resolve(_x, _x2) {
+        return _resolve2.apply(this, arguments);
+      }
+
+      return _resolve;
+    }()
     /**
      * @name          reject
      * @type          Function
@@ -538,7 +574,11 @@ let SPromise = /*#__PURE__*/function (_Promise) {
 
   }, {
     key: "reject",
-    value: function reject(arg, stacksOrder = 'then,reject,finally') {
+    value: function reject(arg, stacksOrder) {
+      if (stacksOrder === void 0) {
+        stacksOrder = 'then,reject,finally';
+      }
+
       return this._reject(arg, stacksOrder);
     }
     /**
@@ -556,22 +596,34 @@ let SPromise = /*#__PURE__*/function (_Promise) {
 
   }, {
     key: "_reject",
-    value: async function _reject(arg, stacksOrder = 'catch,reject,finally') {
-      if (this._isDestroyed) return; // update the status
+    value: function () {
+      var _reject2 = _asyncToGenerator(function* (arg, stacksOrder) {
+        if (stacksOrder === void 0) {
+          stacksOrder = 'catch,reject,finally';
+        }
 
-      this._state = 'rejected'; // exec the wanted stacks
+        if (this._isDestroyed) return; // update the status
 
-      const stacksResult = await this._triggerStacks(stacksOrder, arg); // resolve the master promise
+        this._state = 'rejected'; // exec the wanted stacks
 
-      if (this._settings.safeReject) {
-        this._masterPromiseResolveFn(stacksResult || this._settings.cancelDefaultReturn);
-      } else {
-        this._masterPromiseRejectFn(stacksResult);
-      } // return the stack result
+        var stacksResult = yield this._triggerStacks(stacksOrder, arg); // resolve the master promise
+
+        if (this._settings.safeReject) {
+          this._masterPromiseResolveFn(stacksResult || this._settings.cancelDefaultReturn);
+        } else {
+          this._masterPromiseRejectFn(stacksResult);
+        } // return the stack result
 
 
-      return stacksResult;
-    }
+        return stacksResult;
+      });
+
+      function _reject(_x3, _x4) {
+        return _reject2.apply(this, arguments);
+      }
+
+      return _reject;
+    }()
     /**
      * @name          cancel
      * @type          Function
@@ -588,7 +640,11 @@ let SPromise = /*#__PURE__*/function (_Promise) {
 
   }, {
     key: "cancel",
-    value: function cancel(arg, stacksOrder = 'cancel') {
+    value: function cancel(arg, stacksOrder) {
+      if (stacksOrder === void 0) {
+        stacksOrder = 'cancel';
+      }
+
       return this._cancel(arg, stacksOrder);
     }
     /**
@@ -607,18 +663,30 @@ let SPromise = /*#__PURE__*/function (_Promise) {
 
   }, {
     key: "_cancel",
-    value: async function _cancel(arg, stacksOrder = 'cancel') {
-      if (this._isDestroyed) return; // update the status
+    value: function () {
+      var _cancel2 = _asyncToGenerator(function* (arg, stacksOrder) {
+        if (stacksOrder === void 0) {
+          stacksOrder = 'cancel';
+        }
 
-      this._state = 'canceled'; // exec the wanted stacks
+        if (this._isDestroyed) return; // update the status
 
-      const stacksResult = await this._triggerStacks(stacksOrder, arg); // resolve the master promise
+        this._state = 'canceled'; // exec the wanted stacks
 
-      this._masterPromiseResolveFn.apply(this, [stacksResult || null, this]); // return the stack result
+        var stacksResult = yield this._triggerStacks(stacksOrder, arg); // resolve the master promise
+
+        this._masterPromiseResolveFn.apply(this, [stacksResult || null, this]); // return the stack result
 
 
-      return stacksResult;
-    }
+        return stacksResult;
+      });
+
+      function _cancel(_x5, _x6) {
+        return _cancel2.apply(this, arguments);
+      }
+
+      return _cancel;
+    }()
     /**
      * @name          trigger
      * @type          Function
@@ -645,11 +713,23 @@ let SPromise = /*#__PURE__*/function (_Promise) {
 
   }, {
     key: "trigger",
-    value: async function trigger(what, arg, _metas = {}) {
-      if (this._isDestroyed) return; // triger the passed stacks
+    value: function () {
+      var _trigger = _asyncToGenerator(function* (what, arg, _metas) {
+        if (_metas === void 0) {
+          _metas = {};
+        }
 
-      return this._triggerStacks(what, arg, _metas);
-    }
+        if (this._isDestroyed) return; // triger the passed stacks
+
+        return this._triggerStacks(what, arg, _metas);
+      });
+
+      function trigger(_x7, _x8, _x9) {
+        return _trigger.apply(this, arguments);
+      }
+
+      return trigger;
+    }()
     /**
      * @name            _registerNewStacks
      * @type            Function
@@ -687,9 +767,9 @@ let SPromise = /*#__PURE__*/function (_Promise) {
 
   }, {
     key: "_registerCallbackInStack",
-    value: function _registerCallbackInStack(stack, ...args) {
+    value: function _registerCallbackInStack(stack) {
       if (this._isDestroyed) {
-        throw new Error(`Sorry but you can't call the "${stack}" method on this SPromise cause it has been destroyed...`);
+        throw new Error("Sorry but you can't call the \"".concat(stack, "\" method on this SPromise cause it has been destroyed..."));
       } // make sure the stack exist
 
 
@@ -699,12 +779,12 @@ let SPromise = /*#__PURE__*/function (_Promise) {
 
       if (typeof stack === 'string') stack = this._stacks[stack]; // process the args
 
-      let callback = args[0];
-      let callNumber = -1;
+      var callback = arguments.length <= 1 ? undefined : arguments[1];
+      var callNumber = -1;
 
-      if (args.length === 2 && typeof args[0] === 'number') {
-        callback = args[1];
-        callNumber = args[0];
+      if ((arguments.length <= 1 ? 0 : arguments.length - 1) === 2 && typeof (arguments.length <= 1 ? undefined : arguments[1]) === 'number') {
+        callback = arguments.length <= 2 ? undefined : arguments[2];
+        callNumber = arguments.length <= 1 ? undefined : arguments[1];
       } // make sure this is a function and register it to the _catchStack
 
 
@@ -733,72 +813,84 @@ let SPromise = /*#__PURE__*/function (_Promise) {
 
   }, {
     key: "_triggerStack",
-    value: async function _triggerStack(stack, initialValue, _metas = {}) {
-      let currentCallbackReturnedValue = initialValue; // console.log(this._stacks);
+    value: function () {
+      var _triggerStack2 = _asyncToGenerator(function* (stack, initialValue, _metas) {
+        if (_metas === void 0) {
+          _metas = {};
+        }
 
-      if (!this._stacks || Object.keys(this._stacks).length === 0) return currentCallbackReturnedValue;
-      let stackArray = [];
+        var currentCallbackReturnedValue = initialValue; // console.log(this._stacks);
 
-      if (typeof stack === 'string') {
-        // make sure the stack exist
-        // if (!this._stacks[stack]) {
-        //   this._registerNewStacks(stack);
-        // }
-        if (this._stacks[stack]) {
-          stackArray = [...stackArray, ...this._stacks[stack]];
-        } // check if the stack is a glob pattern
+        if (!this._stacks || Object.keys(this._stacks).length === 0) return currentCallbackReturnedValue;
+        var stackArray = [];
+
+        if (typeof stack === 'string') {
+          // make sure the stack exist
+          // if (!this._stacks[stack]) {
+          //   this._registerNewStacks(stack);
+          // }
+          if (this._stacks[stack]) {
+            stackArray = [...stackArray, ...this._stacks[stack]];
+          } // check if the stack is a glob pattern
 
 
-        Object.keys(this._stacks).forEach(stackName => {
-          if (stackName === stack) return;
-          const toAvoid = ['then', 'catch', 'resolve', 'reject', 'finally', 'cancel'];
-          if (toAvoid.indexOf(stack) !== -1 || toAvoid.indexOf(stackName) !== -1) return; // console.log('CHECK', stack, stackName);
+          Object.keys(this._stacks).forEach(stackName => {
+            if (stackName === stack) return;
+            var toAvoid = ['then', 'catch', 'resolve', 'reject', 'finally', 'cancel'];
+            if (toAvoid.indexOf(stack) !== -1 || toAvoid.indexOf(stackName) !== -1) return; // console.log('CHECK', stack, stackName);
 
-          if ((0, _minimatch.default)(stack, stackName)) {
-            // if (stackName === '*' && stack === 'start') {
-            //   console.log('SOMETHING GOOD', stackName, stack);
-            // }
-            // the glob pattern match the triggered stack so add it to the stack array
-            stackArray = [...stackArray, ...this._stacks[stackName]];
-          }
+            if ((0, _minimatch.default)(stack, stackName)) {
+              // if (stackName === '*' && stack === 'start') {
+              //   console.log('SOMETHING GOOD', stackName, stack);
+              // }
+              // the glob pattern match the triggered stack so add it to the stack array
+              stackArray = [...stackArray, ...this._stacks[stackName]];
+            }
+          });
+        } // filter the catchStack
+
+
+        stackArray.map(item => item.called++);
+        stackArray = stackArray.filter(item => {
+          if (item.callNumber === -1) return true;
+          if (item.called <= item.callNumber) return true;
+          return false;
         });
-      } // filter the catchStack
+
+        for (var i = 0; i < stackArray.length; i++) {
+          // get the actual item in the array
+          var item = stackArray[i]; // make sure the stack exist
+
+          if (!item.callback) return currentCallbackReturnedValue; // call the callback function
+
+          var callbackResult = item.callback(currentCallbackReturnedValue, (0, _deepMerge.default)({
+            stack,
+            id: this._settings.id,
+            state: this._state,
+            time: Date.now(),
+            level: 1
+          }, _metas)); // check if the callback result is a promise
+
+          if (Promise.resolve(callbackResult) === callbackResult) {
+            callbackResult = yield callbackResult;
+          } // if the settings tells that we have to pass each returned value to the next callback
 
 
-      stackArray.map(item => item.called++);
-      stackArray = stackArray.filter(item => {
-        if (item.callNumber === -1) return true;
-        if (item.called <= item.callNumber) return true;
-        return false;
+          if (callbackResult !== undefined) {
+            currentCallbackReturnedValue = callbackResult;
+          }
+        } // return the result
+
+
+        return currentCallbackReturnedValue;
       });
 
-      for (let i = 0; i < stackArray.length; i++) {
-        // get the actual item in the array
-        const item = stackArray[i]; // make sure the stack exist
+      function _triggerStack(_x10, _x11, _x12) {
+        return _triggerStack2.apply(this, arguments);
+      }
 
-        if (!item.callback) return currentCallbackReturnedValue; // call the callback function
-
-        let callbackResult = item.callback(currentCallbackReturnedValue, (0, _deepMerge.default)({
-          stack,
-          id: this._settings.id,
-          state: this._state,
-          time: Date.now(),
-          level: 1
-        }, _metas)); // check if the callback result is a promise
-
-        if (Promise.resolve(callbackResult) === callbackResult) {
-          callbackResult = await callbackResult;
-        } // if the settings tells that we have to pass each returned value to the next callback
-
-
-        if (callbackResult !== undefined) {
-          currentCallbackReturnedValue = callbackResult;
-        }
-      } // return the result
-
-
-      return currentCallbackReturnedValue;
-    }
+      return _triggerStack;
+    }()
     /**
      * @name          _triggerStacks
      * @type          Function
@@ -817,25 +909,37 @@ let SPromise = /*#__PURE__*/function (_Promise) {
 
   }, {
     key: "_triggerStacks",
-    value: function _triggerStacks(stacks, initialValue, _metas = {}) {
-      return new Promise(async (resolve, reject) => {
-        // await __wait(0);
-        // check if the stacks is "*"
-        if (typeof stacks === 'string') stacks = stacks.split(',').map(s => s.trim());
-        let currentStackResult = initialValue;
+    value: function _triggerStacks(stacks, initialValue, _metas) {
+      var _this2 = this;
 
-        for (let i = 0; i < stacks.length; i++) {
-          const stackResult = await this._triggerStack(stacks[i], currentStackResult, _metas);
+      if (_metas === void 0) {
+        _metas = {};
+      }
 
-          if (stackResult !== undefined) {
-            currentStackResult = stackResult;
-          } // await this._triggerStack('*', currentStackResult, stacks[i]);
-          // this._triggerAllStack(stacks[i], currentStackResult);
+      return new Promise( /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator(function* (resolve, reject) {
+          // await __wait(0);
+          // check if the stacks is "*"
+          if (typeof stacks === 'string') stacks = stacks.split(',').map(s => s.trim());
+          var currentStackResult = initialValue;
 
-        }
+          for (var i = 0; i < stacks.length; i++) {
+            var stackResult = yield _this2._triggerStack(stacks[i], currentStackResult, _metas);
 
-        resolve(currentStackResult);
-      });
+            if (stackResult !== undefined) {
+              currentStackResult = stackResult;
+            } // await this._triggerStack('*', currentStackResult, stacks[i]);
+            // this._triggerAllStack(stacks[i], currentStackResult);
+
+          }
+
+          resolve(currentStackResult);
+        });
+
+        return function (_x13, _x14) {
+          return _ref.apply(this, arguments);
+        };
+      }());
     }
     /**
      * @name                on
@@ -867,15 +971,15 @@ let SPromise = /*#__PURE__*/function (_Promise) {
     key: "on",
     value: function on(stacks, callback) {
       if (this._isDestroyed) {
-        throw new Error(`Sorry but you can't call the "on" method on this SPromise cause it has been destroyed...`);
+        throw new Error("Sorry but you can't call the \"on\" method on this SPromise cause it has been destroyed...");
       }
 
       if (typeof stacks === 'string') stacks = stacks.split(',').map(s => s.trim()); // loop on each stacks
 
       stacks.forEach(name => {
         // check if it has a callNumber specified using name:1
-        const splitedName = name.split('{');
-        let callNumber = -1;
+        var splitedName = name.split('{');
+        var callNumber = -1;
 
         if (splitedName.length === 2) {
           name = splitedName[0];
@@ -905,14 +1009,18 @@ let SPromise = /*#__PURE__*/function (_Promise) {
 
   }, {
     key: "off",
-    value: function off(name, callback = null) {
+    value: function off(name, callback) {
+      if (callback === void 0) {
+        callback = null;
+      }
+
       if (!callback) {
         delete this._stacks[name];
         return this;
       } // get the stack
 
 
-      let stack = this._stacks[name];
+      var stack = this._stacks[name];
       if (!stack) return this; // loop on the stack registered callback to finc the one to delete
 
       stack = stack.filter(item => {
@@ -956,7 +1064,11 @@ let SPromise = /*#__PURE__*/function (_Promise) {
 
   }, {
     key: "then",
-    value: function then(...args) {
+    value: function then() {
+      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
+      }
+
       if (args.length === 2 && typeof args[0] === 'function' && typeof args[1] === 'function') {
         this._masterPromiseResolveFn = args[0];
         this._masterPromiseRejectFn = args[1];
@@ -993,7 +1105,11 @@ let SPromise = /*#__PURE__*/function (_Promise) {
 
   }, {
     key: "catch",
-    value: function _catch(...args) {
+    value: function _catch() {
+      for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        args[_key2] = arguments[_key2];
+      }
+
       _get(_getPrototypeOf(SPromise.prototype), "catch", this).call(this, ...args);
 
       return this._registerCallbackInStack('catch', ...args);
@@ -1023,7 +1139,11 @@ let SPromise = /*#__PURE__*/function (_Promise) {
 
   }, {
     key: "finally",
-    value: function _finally(...args) {
+    value: function _finally() {
+      for (var _len3 = arguments.length, args = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+        args[_key3] = arguments[_key3];
+      }
+
       return this._registerCallbackInStack('finally', ...args);
     }
     /**
@@ -1051,7 +1171,11 @@ let SPromise = /*#__PURE__*/function (_Promise) {
 
   }, {
     key: "resolved",
-    value: function resolved(...args) {
+    value: function resolved() {
+      for (var _len4 = arguments.length, args = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+        args[_key4] = arguments[_key4];
+      }
+
       return this._registerCallbackInStack('resolve', ...args);
     }
     /**
@@ -1079,7 +1203,11 @@ let SPromise = /*#__PURE__*/function (_Promise) {
 
   }, {
     key: "rejected",
-    value: function rejected(...args) {
+    value: function rejected() {
+      for (var _len5 = arguments.length, args = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
+        args[_key5] = arguments[_key5];
+      }
+
       return this._registerCallbackInStack('reject', ...args);
     }
     /**
@@ -1107,7 +1235,11 @@ let SPromise = /*#__PURE__*/function (_Promise) {
 
   }, {
     key: "canceled",
-    value: function canceled(...args) {
+    value: function canceled() {
+      for (var _len6 = arguments.length, args = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
+        args[_key6] = arguments[_key6];
+      }
+
       return this._registerCallbackInStack('cancel', ...args);
     }
     /**
@@ -1134,9 +1266,9 @@ let SPromise = /*#__PURE__*/function (_Promise) {
 
   }, {
     key: "cancel",
-    value: function cancel(...args) {
+    value: function cancel() {
       if (this._isDestroyed) return;
-      return this._cancel(...args);
+      return this._cancel(...arguments);
     }
     /**
      * @name                      _destroy
@@ -1163,7 +1295,7 @@ let SPromise = /*#__PURE__*/function (_Promise) {
     }
   }, {
     key: "state",
-    get: function () {
+    get: function get() {
       return this._state;
     }
   }]);

@@ -26,7 +26,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function isSamsumgBrowser(ua = navigator.userAgent) {
+function isSamsumgBrowser(ua) {
+  if (ua === void 0) {
+    ua = navigator.userAgent;
+  }
+
   return ua.match(/SamsungBrowser/i) !== null;
 }
 

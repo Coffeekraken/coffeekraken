@@ -65,7 +65,7 @@ function toDomNodes(source) {
 
   if (typeof source === 'string') {
     // Try to get the template from the document
-    const tpl = document.querySelector(source); // if don't found anything
+    var tpl = document.querySelector(source); // if don't found anything
 
     if (!tpl) return; // process the node
 

@@ -26,8 +26,12 @@ exports.default = methodExists;
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function methodExists(instance, ...methods) {
-  const missingMethodsArray = [];
+function methodExists(instance) {
+  for (var _len = arguments.length, methods = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+    methods[_key - 1] = arguments[_key];
+  }
+
+  var missingMethodsArray = [];
   if (!Array.isArray(methods)) methods = [methods];
   methods.forEach(method => {
     if (typeof instance[method] !== 'function') missingMethodsArray.push(method);

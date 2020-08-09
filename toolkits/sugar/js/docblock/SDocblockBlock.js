@@ -67,7 +67,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
-let SDocblockBlock = /*#__PURE__*/function () {
+var SDocblockBlock = /*#__PURE__*/function () {
   /**
    * @name            tagsMap
    * @type            Object
@@ -127,7 +127,11 @@ let SDocblockBlock = /*#__PURE__*/function () {
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  function SDocblockBlock(source, settings = {}) {
+  function SDocblockBlock(source, settings) {
+    if (settings === void 0) {
+      settings = {};
+    }
+
     _classCallCheck(this, SDocblockBlock);
 
     _defineProperty(this, "_source", null);
@@ -226,16 +230,16 @@ let SDocblockBlock = /*#__PURE__*/function () {
     key: "to",
     value: function to(format) {
       // try to get the needed settings for the conversion
-      const convertionSettings = this._settings.to[format];
-      if (!convertionSettings) throw new Error(`You try to convert the docblock literals to "${format}" format but this format is not available. Here's the list of available format: ${Object.keys(this._settings.to).join(',')}...`);
+      var convertionSettings = this._settings.to[format];
+      if (!convertionSettings) throw new Error("You try to convert the docblock literals to \"".concat(format, "\" format but this format is not available. Here's the list of available format: ").concat(Object.keys(this._settings.to).join(','), "..."));
 
-      const blockTemplate = this._settings.to[format].blocks[this.object.type.toLowerCase()] || this._settings.to[format].blocks['default'];
+      var blockTemplate = this._settings.to[format].blocks[this.object.type.toLowerCase()] || this._settings.to[format].blocks['default'];
 
       if (!blockTemplate) {
-        throw new Error(`You try to convert a docblock of type "${this.object.type}" into "${format}" format but this block type is not supported. Here's the list of blocks supported in "${format}" format: ${Object.keys(convertionSettings.blocks).join(',')}...`);
+        throw new Error("You try to convert a docblock of type \"".concat(this.object.type, "\" into \"").concat(format, "\" format but this block type is not supported. Here's the list of blocks supported in \"").concat(format, "\" format: ").concat(Object.keys(convertionSettings.blocks).join(','), "..."));
       }
 
-      const compiledTemplate = _handlebars.default.compile(blockTemplate, {
+      var compiledTemplate = _handlebars.default.compile(blockTemplate, {
         noEscape: true
       });
 
@@ -257,17 +261,17 @@ let SDocblockBlock = /*#__PURE__*/function () {
     key: "parse",
     value: function parse() {
       // some variables
-      let currentTag = null;
-      let currentContent = [];
-      let currentObj = {};
-      let docblockObj = {};
-      let previousWasEmptyLine = false;
+      var currentTag = null;
+      var currentContent = [];
+      var currentObj = {};
+      var docblockObj = {};
+      var previousWasEmptyLine = false;
 
       function add() {
         if (currentContent.length) currentObj.content = currentContent;
 
         if (docblockObj.hasOwnProperty(currentTag) && !Array.isArray(docblockObj[currentTag])) {
-          const currentValue = docblockObj[currentTag];
+          var currentValue = docblockObj[currentTag];
           docblockObj[currentTag] = [currentValue];
         }
 
@@ -285,14 +289,14 @@ let SDocblockBlock = /*#__PURE__*/function () {
       } // split the block by tags
 
 
-      let lines = this._source.trim().split('\n');
+      var lines = this._source.trim().split('\n');
 
       if (!lines || !lines.length) return null;
       lines = lines.map(l => l.trim());
       lines.forEach(line => {
         // get the tag name
-        const tagNameReg = /\*[\s]?@([a-zA-Z0-9]+)/;
-        const tagNameMatch = line.match(tagNameReg);
+        var tagNameReg = /\*[\s]?@([a-zA-Z0-9]+)/;
+        var tagNameMatch = line.match(tagNameReg);
 
         if (line.replace('*', '').trim() === '') {
           if (currentContent.length > 0) {
@@ -343,19 +347,19 @@ let SDocblockBlock = /*#__PURE__*/function () {
       });
 
       if (docblockObj['src'] && (0, _node.default)() && this._settings.filepath) {
-        const __fs = require('fs');
+        var __fs = require('fs');
 
-        const __path = require('path');
+        var __path = require('path');
 
-        const absoluteFilepath = __path.resolve(this._settings.filepath, docblockObj['src']);
+        var absoluteFilepath = __path.resolve(this._settings.filepath, docblockObj['src']);
 
-        const srcValue = __fs.readFileSync(absoluteFilepath, 'utf8');
+        var srcValue = __fs.readFileSync(absoluteFilepath, 'utf8');
 
-        const srcDocblockInstance = new _SDocblock.default(srcValue);
-        const srcBlocks = srcDocblockInstance.parse();
+        var srcDocblockInstance = new _SDocblock.default(srcValue);
+        var srcBlocks = srcDocblockInstance.parse();
 
         if (srcBlocks.length) {
-          const tags = srcBlocks[0].parse();
+          var tags = srcBlocks[0].parse();
           docblockObj = (0, _deepMerge.default)(docblockObj, tags);
         }
       } // save the raw string
@@ -367,7 +371,7 @@ let SDocblockBlock = /*#__PURE__*/function () {
     }
   }, {
     key: "object",
-    get: function () {
+    get: function get() {
       return this.toObject();
     }
     /**
@@ -382,7 +386,7 @@ let SDocblockBlock = /*#__PURE__*/function () {
 
   }, {
     key: "string",
-    get: function () {
+    get: function get() {
       return this.toString();
     }
   }]);

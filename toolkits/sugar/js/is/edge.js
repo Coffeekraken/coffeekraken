@@ -23,7 +23,11 @@ exports.default = isEdge;
  * @return    {Boolean}    true if is edge, false if not
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function isEdge(ua = navigator.userAgent) {
+function isEdge(ua) {
+  if (ua === void 0) {
+    ua = navigator.userAgent;
+  }
+
   return ua.indexOf('Edg/') > -1;
 }
 

@@ -79,7 +79,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-let STimer = /*#__PURE__*/function (_SPromise) {
+var STimer = /*#__PURE__*/function (_SPromise) {
   _inherits(STimer, _SPromise);
 
   var _super = _createSuper(STimer);
@@ -183,8 +183,12 @@ let STimer = /*#__PURE__*/function (_SPromise) {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  function STimer(duration, settings = {}) {
+  function STimer(duration, settings) {
     var _thisSuper, _this;
+
+    if (settings === void 0) {
+      settings = {};
+    }
 
     _classCallCheck(this, STimer);
 
@@ -287,7 +291,11 @@ let STimer = /*#__PURE__*/function (_SPromise) {
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    value: function reset(start = false) {
+    value: function reset(start) {
+      if (start === void 0) {
+        start = false;
+      }
+
       // stop the timeout
       clearTimeout(this._tickSetTimeout); // reset the different timer elements
 
@@ -315,7 +323,11 @@ let STimer = /*#__PURE__*/function (_SPromise) {
 
   }, {
     key: "start",
-    value: function start(duration = null) {
+    value: function start(duration) {
+      if (duration === void 0) {
+        duration = null;
+      }
+
       // clear the timeout to be sure
       clearTimeout(this._tickSetTimeout); // set the duration
 
@@ -329,9 +341,9 @@ let STimer = /*#__PURE__*/function (_SPromise) {
 
       if (this._pauseTime) {
         // calculate time before new tick
-        const elapsed = this._pauseTime.getTime() - this._tickTime.getTime();
+        var elapsed = this._pauseTime.getTime() - this._tickTime.getTime();
 
-        const remaining = this._tickInterval - elapsed;
+        var remaining = this._tickInterval - elapsed;
         clearTimeout(this._tickSetTimeout);
         this._tickSetTimeout = setTimeout(() => {
           this._tick();
@@ -440,7 +452,7 @@ let STimer = /*#__PURE__*/function (_SPromise) {
     }
   }, {
     key: "remaining",
-    get: function () {
+    get: function get() {
       if (!this._startTime) return 0;
       return this._startTime.getTime() + this._duration - Date.now();
     }
@@ -457,7 +469,7 @@ let STimer = /*#__PURE__*/function (_SPromise) {
 
   }, {
     key: "duration",
-    set: function (duration) {
+    set: function set(duration) {
       duration = (0, _convert.default)(duration, 'ms');
       this._duration = duration;
 
@@ -468,7 +480,7 @@ let STimer = /*#__PURE__*/function (_SPromise) {
 
       this.trigger('duration', this);
     },
-    get: function () {
+    get: function get() {
       return this._duration;
     }
     /**
@@ -484,13 +496,13 @@ let STimer = /*#__PURE__*/function (_SPromise) {
 
   }, {
     key: "tickCount",
-    set: function (tickCount) {
+    set: function set(tickCount) {
       this._tickCount = tickCount;
       this._tickInterval = this._duration / this._tickCount; // loop on each change tick count functions
 
       this.trigger('tickCount', this);
     },
-    get: function () {
+    get: function get() {
       return this._tickCount;
     }
     /**
@@ -505,7 +517,7 @@ let STimer = /*#__PURE__*/function (_SPromise) {
 
   }, {
     key: "percentage",
-    get: function () {
+    get: function get() {
       if (!this.isStarted()) return 0;
       return 100 / this.duration * (this.duration - this.remaining);
     }

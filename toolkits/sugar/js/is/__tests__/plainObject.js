@@ -5,7 +5,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 module.exports = __testFn => {
   describe('sugar.js.is.plainObject', () => {
     it('Should detect the passed variable type correctly', () => {
-      let myClass = function myClass() {
+      var myClass = function myClass() {
         _classCallCheck(this, myClass);
       };
 

@@ -3,7 +3,7 @@
 module.exports = __set => {
   describe('sugar.js.object.set', () => {
     it('Should set the object property correctly', done => {
-      const obj1 = {
+      var obj1 = {
         hello: {
           world: 'hello world'
         },

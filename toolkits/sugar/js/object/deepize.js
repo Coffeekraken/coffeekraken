@@ -36,9 +36,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function deepize(object) {
-  const finalObject = {};
+  var finalObject = {};
 
-  for (const key in object) {
+  for (var key in object) {
     (0, _set.default)(finalObject, key, object[key]);
   }
 

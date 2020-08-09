@@ -2,23 +2,7 @@
 
 module.exports = __autoPrefix => {
   describe('sugar.js.css.autoPrefix', () => {
-    const style = `
-      .hello {
-        transition: '200ms all linear',
-        boxSizing: 'border-box',
-        display: 'flex',
-        color: 'blue'
-
-        &:after {
-          content: 'coco';
-        }
-      }
-
-      .plop {
-        content: 'hehehe';
-      }
-
-    `; // const style = {
+    var style = "\n      .hello {\n        transition: '200ms all linear',\n        boxSizing: 'border-box',\n        display: 'flex',\n        color: 'blue'\n\n        &:after {\n          content: 'coco';\n        }\n      }\n\n      .plop {\n        content: 'hehehe';\n      }\n\n    "; // const style = {
     //   transition: '200ms all linear',
     //   boxSizing: 'border-box',
     //   display: 'flex',

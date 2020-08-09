@@ -28,8 +28,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function imageLoaded($img, callback = null) {
-  let imgLoadedHandler, imgErrorHandler;
+function imageLoaded($img, callback) {
+  if (callback === void 0) {
+    callback = null;
+  }
+
+  var imgLoadedHandler, imgErrorHandler;
   return new _SPromise.default((resolve, reject, trigger, cancel) => {
     // check if image is already loaded
     if ($img.hasAttribute('src') && $img.complete) {

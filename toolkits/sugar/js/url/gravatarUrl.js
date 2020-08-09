@@ -26,8 +26,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function gravatarUrl(email, size = 200) {
-  return `https://www.gravatar.com/avatar/${_md.default.encrypt(email)}?s=${size}`;
+function gravatarUrl(email, size) {
+  if (size === void 0) {
+    size = 200;
+  }
+
+  return "https://www.gravatar.com/avatar/".concat(_md.default.encrypt(email), "?s=").concat(size);
 }
 
 module.exports = exports.default;

@@ -9,6 +9,14 @@ var _SRequest = _interopRequireDefault(require("../http/SRequest"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -44,7 +52,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * @see 		https://developers.google.com/custom-search/
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-let SGoogleCustomSearch = /*#__PURE__*/function () {
+var SGoogleCustomSearch = /*#__PURE__*/function () {
   /**
    * @name              _apiKey
    * @type              String
@@ -177,14 +185,14 @@ let SGoogleCustomSearch = /*#__PURE__*/function () {
     key: "_generateSearchUrl",
     value: function _generateSearchUrl() {
       // construct url
-      let queryString = '';
+      var queryString = '';
 
-      for (let key in this._settings) {
-        queryString += `&${key}=${this._settings[key]}`;
+      for (var key in this._settings) {
+        queryString += "&".concat(key, "=").concat(this._settings[key]);
       }
 
       queryString = queryString.substr(1);
-      queryString = `?${queryString}`; // process the url
+      queryString = "?".concat(queryString); // process the url
 
       return this._searchUrl + queryString;
     }
@@ -202,32 +210,43 @@ let SGoogleCustomSearch = /*#__PURE__*/function () {
 
   }, {
     key: "search",
-    value: async function search(keywords, settings = {}) {
-      // save the keywords into the instance
-      this._keywords = keywords; // reset the page count
+    value: function () {
+      var _search = _asyncToGenerator(function* (keywords, settings) {
+        if (settings === void 0) {
+          settings = {};
+        }
 
-      this._page = settings.page || 1; // construct query object
+        // save the keywords into the instance
+        this._keywords = keywords; // reset the page count
 
-      const num = settings.num || 10;
-      this._settings = {
-        key: this._apiKey,
-        cx: this._cx,
-        q: keywords,
-        num: num,
-        start: (this._page - 1) * num + 1,
-        ...settings
-      }; // get the url
+        this._page = settings.page || 1; // construct query object
 
-      const url = this._generateSearchUrl(); // process to the ajax query
+        var num = settings.num || 10;
+        this._settings = _objectSpread({
+          key: this._apiKey,
+          cx: this._cx,
+          q: keywords,
+          num: num,
+          start: (this._page - 1) * num + 1
+        }, settings); // get the url
+
+        var url = this._generateSearchUrl(); // process to the ajax query
 
 
-      const ajx = new _SRequest.default({
-        method: 'GET',
-        url
-      }); // launch the request end send back the promise
+        var ajx = new _SRequest.default({
+          method: 'GET',
+          url
+        }); // launch the request end send back the promise
 
-      return ajx.send();
-    }
+        return ajx.send();
+      });
+
+      function search(_x, _x2) {
+        return _search.apply(this, arguments);
+      }
+
+      return search;
+    }()
     /**
      * @name            next
      * @type            Function
@@ -242,12 +261,20 @@ let SGoogleCustomSearch = /*#__PURE__*/function () {
 
   }, {
     key: "next",
-    value: async function next() {
-      // update the page count
-      return this.search(this._keywords, { ...this._settings,
-        page: this._page + 1
+    value: function () {
+      var _next2 = _asyncToGenerator(function* () {
+        // update the page count
+        return this.search(this._keywords, _objectSpread(_objectSpread({}, this._settings), {}, {
+          page: this._page + 1
+        }));
       });
-    }
+
+      function next() {
+        return _next2.apply(this, arguments);
+      }
+
+      return next;
+    }()
     /**
      * @name            previous
      * @type            Function
@@ -262,12 +289,20 @@ let SGoogleCustomSearch = /*#__PURE__*/function () {
 
   }, {
     key: "previous",
-    value: async function previous() {
-      // update the page count
-      return this.search(this._keywords, { ...this._settings,
-        page: this._page - (this._page <= 1 ? 0 : 1)
+    value: function () {
+      var _previous = _asyncToGenerator(function* () {
+        // update the page count
+        return this.search(this._keywords, _objectSpread(_objectSpread({}, this._settings), {}, {
+          page: this._page - (this._page <= 1 ? 0 : 1)
+        }));
       });
-    }
+
+      function previous() {
+        return _previous.apply(this, arguments);
+      }
+
+      return previous;
+    }()
   }]);
 
   return SGoogleCustomSearch;

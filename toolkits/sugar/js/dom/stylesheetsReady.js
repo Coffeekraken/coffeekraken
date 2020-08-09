@@ -31,13 +31,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function stylesheetsReady(links, cb = null) {
-  let neededStylesheetsStack = links;
-  let neededStylesheetsCount = links.length;
-  let loadedStylesheedsCount = 0;
-  let loadedStylesheetsCallbacks = [];
-  let loadedStylesheedsProcess = false;
-  let stylesheetsDependenciesStatus = false;
+function stylesheetsReady(links, cb) {
+  if (cb === void 0) {
+    cb = null;
+  }
+
+  var neededStylesheetsStack = links;
+  var neededStylesheetsCount = links.length;
+  var loadedStylesheedsCount = 0;
+  var loadedStylesheetsCallbacks = [];
+  var loadedStylesheedsProcess = false;
+  var stylesheetsDependenciesStatus = false;
   return new Promise((resolve, reject) => {
     if (stylesheetsDependenciesStatus) {
       cb !== null && cb();

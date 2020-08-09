@@ -30,16 +30,20 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function whenVisible(elm, cb = null) {
+function whenVisible(elm, cb) {
+  if (cb === void 0) {
+    cb = null;
+  }
+
   return new Promise((resolve, reject) => {
     // variables
-    let isSelfVisible = false,
+    var isSelfVisible = false,
         areParentsVisible = false,
         closestNotVisible = null,
         selfObserver = null,
         parentObserver = null;
 
-    const _cb = () => {
+    var _cb = () => {
       if (isSelfVisible && areParentsVisible) {
         // process callbacks
         if (cb) cb(elm);
@@ -58,7 +62,7 @@ function whenVisible(elm, cb = null) {
     }; // function called on each transitionend, start, etc...
 
 
-    const _eventCb = e => {
+    var _eventCb = e => {
       // wait just a little time to check again
       setTimeout(() => {
         if (e.target === elm) {

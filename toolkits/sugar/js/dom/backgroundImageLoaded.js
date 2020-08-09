@@ -34,12 +34,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function backgroundImageLoaded($elm) {
-  let isCancelled = false,
+  var isCancelled = false,
       $img;
-  const promise = new _SPromise.default((resolve, reject, trigger, cancel) => {
+  var promise = new _SPromise.default((resolve, reject, trigger, cancel) => {
     // get the background-image property from computed style
-    const backgroundImage = (0, _getStyleProperty.default)($elm, 'background-image');
-    const matches = backgroundImage.match(/.*url\((.*)\).*/);
+    var backgroundImage = (0, _getStyleProperty.default)($elm, 'background-image');
+    var matches = backgroundImage.match(/.*url\((.*)\).*/);
 
     if (!matches || !matches[1]) {
       reject('No background image url found...');
@@ -47,7 +47,7 @@ function backgroundImageLoaded($elm) {
     } // process url
 
 
-    const url = (0, _unquote.default)(matches[1]); // make a new image with the image set
+    var url = (0, _unquote.default)(matches[1]); // make a new image with the image set
 
     $img = new Image();
     $img.src = url; // return the promise of image loaded

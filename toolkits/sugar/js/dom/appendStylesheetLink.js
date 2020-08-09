@@ -26,7 +26,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function appendStylesheetLink(href) {
-  const $link = document.createElement('link');
+  var $link = document.createElement('link');
   $link.type = 'text/css';
   $link.rel = 'stylesheet';
   $link.href = href;

@@ -57,7 +57,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-let SRequest = /*#__PURE__*/function () {
+var SRequest = /*#__PURE__*/function () {
   /**
    * @name                      _defaultRequestSettings
    * @type                      {SRequestConfig}
@@ -131,19 +131,19 @@ let SRequest = /*#__PURE__*/function () {
     key: "_onSuccess",
     value: function _onSuccess(response) {
       // init the final response
-      let finalResponse = response.data; // get the response content-type header
+      var finalResponse = response.data; // get the response content-type header
 
-      const contentType = response.headers['content-type'] || 'text/plain'; // try to get an hash in the settings url
+      var contentType = response.headers['content-type'] || 'text/plain'; // try to get an hash in the settings url
 
-      const hash = this._currentRequestSettings.url.indexOf('#') !== -1 ? this._currentRequestSettings.url.split('#')[1] : false; // if a hash exist, check that we are in the browser to have access to the document and querySelector method
+      var hash = this._currentRequestSettings.url.indexOf('#') !== -1 ? this._currentRequestSettings.url.split('#')[1] : false; // if a hash exist, check that we are in the browser to have access to the document and querySelector method
 
       if (contentType === 'text/html' && hash !== false && document !== undefined && document.querySelector !== undefined) {
-        const $html = (0, _strToHtml.default)(response.data);
+        var $html = (0, _strToHtml.default)(response.data);
 
         if ($html.id === hash) {
           finalResponse = (0, _toString.default)($html);
         } else {
-          const $part = $html.querySelector(`#${hash}`);
+          var $part = $html.querySelector("#".concat(hash));
 
           if ($part) {
             finalResponse = (0, _toString.default)($part);
@@ -208,7 +208,11 @@ let SRequest = /*#__PURE__*/function () {
 
   }, {
     key: "_send",
-    value: function _send(requestSettings = {}) {
+    value: function _send(requestSettings) {
+      if (requestSettings === void 0) {
+        requestSettings = {};
+      }
+
       // update request count
       this._requestsCount++; // process request settings
 
@@ -263,7 +267,11 @@ let SRequest = /*#__PURE__*/function () {
 
   }, {
     key: "send",
-    value: function send(requestSettings = {}) {
+    value: function send(requestSettings) {
+      if (requestSettings === void 0) {
+        requestSettings = {};
+      }
+
       // return a promise
       return new Promise((resolve, reject) => {
         // // check if a cache exist and if we have the content

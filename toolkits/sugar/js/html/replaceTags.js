@@ -31,39 +31,41 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function replaceTags(text, tags) {
   if (!text) text = '';
   text = (0, _toString.default)(text);
-  let oneLineText = text.replace(/\r\n/g, '|rn|');
+  var oneLineText = text.replace(/\r\n/g, '|rn|');
   oneLineText = oneLineText.replace(/\n/g, '|n|');
   oneLineText = oneLineText.replace(/\r/g, '|r|'); // loop on the tags
 
   Object.keys(tags).forEach(tagName => {
     // create the match regex
-    const reg = new RegExp(`<\s*${tagName}[^>]*>((.*?))<\\s*\/\\s*${tagName}>`, 'g'); // const reg = new RegExp(`<\s*${tagName}[^>]*>(([\S\s]+)?)<\\s*\/\\s*${tagName}>`, 'g');
+    var reg = new RegExp("<s*".concat(tagName, "[^>]*>((.*?))<\\s*/\\s*").concat(tagName, ">"), 'g'); // const reg = new RegExp(`<\s*${tagName}[^>]*>(([\S\s]+)?)<\\s*\/\\s*${tagName}>`, 'g');
 
-    const tagsArray = oneLineText.match(reg);
-    const singleReg = new RegExp(`\\s?<${tagName}\\s?\/>\\s?`, 'g');
-    const singleTagsArray = oneLineText.match(singleReg);
+    var tagsArray = oneLineText.match(reg);
+    var singleReg = new RegExp("\\s?<".concat(tagName, "\\s?/>\\s?"), 'g');
+    var singleTagsArray = oneLineText.match(singleReg);
 
     if (tagsArray) {
-      for (let i = 0; i < tagsArray.length; i++) {
-        const t = tagsArray[i];
-        const tagArgs = t.match(`<\\s*${tagName}[^>]*>((.*?))<\\s*\/\\s*${tagName}>`);
+      for (var i = 0; i < tagsArray.length; i++) {
+        var t = tagsArray[i];
+        var tagArgs = t.match("<\\s*".concat(tagName, "[^>]*>((.*?))<\\s*/\\s*").concat(tagName, ">"));
         if (!tagArgs) continue;
-        const tagToReplace = tagArgs[0];
-        const tagContent = tagArgs[1]; // call the replacement function
+        var tagToReplace = tagArgs[0];
+        var tagContent = tagArgs[1]; // call the replacement function
 
         oneLineText = oneLineText.replace(tagToReplace, tags[tagName](tagName, tagContent));
       }
     }
 
     if (singleTagsArray) {
-      for (let i = 0; i < singleTagsArray.length; i++) {
-        const t = singleTagsArray[i];
-        const tagArgs = t.match(`\\s?<${tagName}\\s?\/>\\s?`);
-        if (!tagArgs) continue;
-        const tagToReplace = tagArgs[0];
-        const tagContent = ''; // call the replacement function
+      for (var _i = 0; _i < singleTagsArray.length; _i++) {
+        var _t = singleTagsArray[_i];
 
-        oneLineText = oneLineText.replace(tagToReplace, tags[tagName](tagName, tagContent));
+        var _tagArgs = _t.match("\\s?<".concat(tagName, "\\s?/>\\s?"));
+
+        if (!_tagArgs) continue;
+        var _tagToReplace = _tagArgs[0];
+        var _tagContent = ''; // call the replacement function
+
+        oneLineText = oneLineText.replace(_tagToReplace, tags[tagName](tagName, _tagContent));
       }
     }
   });

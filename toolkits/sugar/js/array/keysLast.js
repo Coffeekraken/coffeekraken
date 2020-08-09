@@ -33,7 +33,7 @@ function keysLast(array, keys) {
     return array.indexOf(key) !== -1;
   }); // add the keys at start
 
-  let res = [].concat(array).concat(keys); // reverse the array
+  var res = [].concat(array).concat(keys); // reverse the array
 
   res = res.reverse(); // remove double items
 

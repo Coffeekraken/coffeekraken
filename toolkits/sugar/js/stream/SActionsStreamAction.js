@@ -66,7 +66,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-let SActionStreamAction = /*#__PURE__*/function (_SPromise) {
+var SActionStreamAction = /*#__PURE__*/function (_SPromise) {
   _inherits(SActionStreamAction, _SPromise);
 
   var _super = _createSuper(SActionStreamAction);
@@ -102,8 +102,12 @@ let SActionStreamAction = /*#__PURE__*/function (_SPromise) {
    *
    * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  function SActionStreamAction(settings = {}) {
+  function SActionStreamAction(settings) {
     var _thisSuper, _this;
+
+    if (settings === void 0) {
+      settings = {};
+    }
 
     _classCallCheck(this, SActionStreamAction);
 
@@ -121,12 +125,12 @@ let SActionStreamAction = /*#__PURE__*/function (_SPromise) {
     if (!_this._settings.id) _this._settings.id = _this.constructor.name.toLowerCase();
 
     if (!_this.constructor.definitionObj) {
-      throw new Error(`Sorry but your class "${_this.constructor.name}" does not have the required "definitionObj" static property...`);
+      throw new Error("Sorry but your class \"".concat(_this.constructor.name, "\" does not have the required \"definitionObj\" static property..."));
     } // check the definition object
 
 
     setTimeout(() => {
-      const validatekDefinitionObjResult = (0, _validateObjectDefinitionObject.default)(_this.constructor.definitionObj);
+      var validatekDefinitionObjResult = (0, _validateObjectDefinitionObject.default)(_this.constructor.definitionObj);
 
       if (validatekDefinitionObjResult !== true) {
         throw new Error(validatekDefinitionObjResult);
@@ -164,7 +168,7 @@ let SActionStreamAction = /*#__PURE__*/function (_SPromise) {
         }
       }); // validate the streamObj depending on the static definitionObj property
 
-      const checkWithDefinitionObjectResult = (0, _validateObject.default)(streamObj, this.constructor.definitionObj);
+      var checkWithDefinitionObjectResult = (0, _validateObject.default)(streamObj, this.constructor.definitionObj);
 
       if (checkWithDefinitionObjectResult !== true) {
         throw new Error(checkWithDefinitionObjectResult);
@@ -189,7 +193,11 @@ let SActionStreamAction = /*#__PURE__*/function (_SPromise) {
 
   }, {
     key: "skipNextActions",
-    value: function skipNextActions(what = true) {
+    value: function skipNextActions(what) {
+      if (what === void 0) {
+        what = true;
+      }
+
       this._skipNextActions = what;
     }
     /**
@@ -210,7 +218,15 @@ let SActionStreamAction = /*#__PURE__*/function (_SPromise) {
 
   }, {
     key: "registerCallback",
-    value: function registerCallback(callback, when = 'after', action = null) {
+    value: function registerCallback(callback, when, action) {
+      if (when === void 0) {
+        when = 'after';
+      }
+
+      if (action === void 0) {
+        action = null;
+      }
+
       this._registeredCallbacks.push({
         callback,
         when,
@@ -256,7 +272,7 @@ let SActionStreamAction = /*#__PURE__*/function (_SPromise) {
   }, {
     key: "error",
     value: function error(message) {
-      this.trigger('error', `<red>✚</red> ${message}`);
+      this.trigger('error', "<red>\u271A</red> ".concat(message));
     }
     /**
      * @name          warn
@@ -272,7 +288,7 @@ let SActionStreamAction = /*#__PURE__*/function (_SPromise) {
   }, {
     key: "warn",
     value: function warn(message) {
-      this.trigger('log', `<yellow>⚠</yellow> ${message}`);
+      this.trigger('log', "<yellow>\u26A0</yellow> ".concat(message));
     }
     /**
      * @name          log
@@ -292,7 +308,7 @@ let SActionStreamAction = /*#__PURE__*/function (_SPromise) {
     }
   }, {
     key: "settings",
-    get: function () {
+    get: function get() {
       return this._settings;
     }
   }]);

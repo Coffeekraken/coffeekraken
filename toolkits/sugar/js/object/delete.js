@@ -30,7 +30,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function del(object, dotPath) {
-  const parentDotPath = dotPath.split('.').slice(0, -1).join('.');
+  var parentDotPath = dotPath.split('.').slice(0, -1).join('.');
   if (!dotPath || dotPath === '' || dotPath === '.') return object;
   dotPath = dotPath.replace(/\[(\w+)\]/g, '.$1');
   dotPath = dotPath.replace(/^\./, '');
@@ -42,10 +42,12 @@ function del(object, dotPath) {
 
     if (a.length < 1) {
       if (Array.isArray(o)) {
-        const valueToDelete = o[n];
-        o = o.filter(v => {
-          return v !== valueToDelete;
-        });
+        (function () {
+          var valueToDelete = o[n];
+          o = o.filter(v => {
+            return v !== valueToDelete;
+          });
+        })();
       } else {
         delete o[n];
       }

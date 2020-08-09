@@ -11,6 +11,10 @@ var _innerHtml = _interopRequireDefault(require("../dom/innerHtml"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -30,7 +34,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * - 'SSocketDom.script': Used to add a script tag to the page
  * - 'SSocketDom.style': Used to add a style tag to the page
  */
-let SSocketDom = /*#__PURE__*/function () {
+var SSocketDom = /*#__PURE__*/function () {
   /**
    * Server URL
    * @type      String
@@ -48,7 +52,11 @@ let SSocketDom = /*#__PURE__*/function () {
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  function SSocketDom(serverUrl, settings = {}) {
+  function SSocketDom(serverUrl, settings) {
+    if (settings === void 0) {
+      settings = {};
+    }
+
     _classCallCheck(this, SSocketDom);
 
     _defineProperty(this, "_serverUrl", 'http://localhost:80');
@@ -97,9 +105,7 @@ let SSocketDom = /*#__PURE__*/function () {
 
     // save some params:
     this._serverUrl = serverUrl;
-    this._settings = { ...this._settings,
-      ...settings
-    };
+    this._settings = _objectSpread(_objectSpread({}, this._settings), settings);
   }
   /**
    * Init the Socket connection
@@ -130,7 +136,7 @@ let SSocketDom = /*#__PURE__*/function () {
   }, {
     key: "_initSocketIo",
     value: function _initSocketIo() {
-      const _this = this; // append the socket IO script:
+      var _this = this; // append the socket IO script:
 
 
       return (0, _appendScriptTag.default)('/socket.io/socket.io.js').then(() => {
@@ -151,14 +157,14 @@ let SSocketDom = /*#__PURE__*/function () {
     key: "_eventInnerHtml",
     value: function _eventInnerHtml(data, settings) {
       // try to get the node inside the document
-      let $node = settings.node;
+      var $node = settings.node;
       if (typeof $node === 'string') $node = document.querySelector($node); // switch on the action to execute
 
       switch (settings.action) {
         case 'append':
-          (0, _innerHtml.default)($node, data, { ...(settings.innerHtml || {}),
+          (0, _innerHtml.default)($node, data, _objectSpread(_objectSpread({}, settings.innerHtml || {}), {}, {
             action: 'append'
-          });
+          }));
           break;
 
         case 'replace':
@@ -166,9 +172,9 @@ let SSocketDom = /*#__PURE__*/function () {
           break;
 
         case 'prepend':
-          (0, _innerHtml.default)($node, data, { ...(settings.innerHtml || {}),
+          (0, _innerHtml.default)($node, data, _objectSpread(_objectSpread({}, settings.innerHtml || {}), {}, {
             action: 'prepend'
-          });
+          }));
           break;
       }
     }
@@ -198,7 +204,7 @@ let SSocketDom = /*#__PURE__*/function () {
   }, {
     key: "_eventContent",
     value: function _eventContent(data, settings) {
-      let $content = document.getElementById('content') || document.querySelector('[content]');
+      var $content = document.getElementById('content') || document.querySelector('[content]');
       if (!$content) return;
       (0, _innerHtml.default)($content, data, settings.innerHtml || {});
     }
@@ -221,8 +227,12 @@ let SSocketDom = /*#__PURE__*/function () {
 
   }, {
     key: "emit",
-    value: function emit(event, data = {}) {
-      this._socket.emit(`SSocketDom.${event}`, data);
+    value: function emit(event, data) {
+      if (data === void 0) {
+        data = {};
+      }
+
+      this._socket.emit("SSocketDom.".concat(event), data);
 
       return this;
     }
@@ -247,20 +257,27 @@ let SSocketDom = /*#__PURE__*/function () {
 
   }, {
     key: "registerEvent",
-    value: function registerEvent(event, handlerFn, settings = {}) {
+    value: function registerEvent(event, handlerFn, settings) {
+      var _this2 = this;
+
+      if (settings === void 0) {
+        settings = {};
+      }
+
       // save the event scoped settings in the global settings:
       this._settings.events[event] = settings; // listen for the event from the server:
 
-      this._socket.on(`SSocketDom.${event}`, (data = {}) => {
+      this._socket.on("SSocketDom.".concat(event), function (data) {
+        if (data === void 0) {
+          data = {};
+        }
+
         // grab the data from the event
-        const d = data.data; // delete the data from the event
+        var d = data.data; // delete the data from the event
 
         delete data.data; // call the handler function with the data from the server and the settings
 
-        handlerFn(d, { ...this._settings,
-          ...this._settings.events[event],
-          ...(data || {})
-        });
+        handlerFn(d, _objectSpread(_objectSpread(_objectSpread({}, _this2._settings), _this2._settings.events[event]), data || {}));
       }); // maintain chainability
 
 

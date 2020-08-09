@@ -25,6 +25,8 @@ var _filter = _interopRequireDefault(require("../../object/filter"));
 
 var _typeof = _interopRequireDefault(require("../../value/typeof"));
 
+var _SObjectValidationError = _interopRequireDefault(require("../../error/SObjectValidationError"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // TODO: tests
@@ -42,6 +44,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @param       {Object}        definitionObj       The definition object to use
  * @param       {String}        [name='unnamed']    Specify a name for your object. This will be useful during the validation process
  * @param       {Object}        [settings={}]         An object of settings to configure your validation process:
+ * - throw (true) {Boolean}: Specify if you want to throw an error when something goes wrong
  * - extendsFn (null) {Function}: Specify a function that will be called for each properties with the arguments "argName", "argDefinition" and "value" to let you the possibility to extend this validation function
  * - validateDefinitionObject (true) {Boolean}: Specify if you want to validate the passed definition object first or not
  * @return      {Boolean|Array<String>}                    Return true if all is ok, and an Array of string that describe the issue if it's not
@@ -67,30 +70,39 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @since     2.0.0
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function validateObject(objectToCheck, definitionObj, name = 'unnamed', settings = {}, _argPath = []) {
-  let issuesObj = {
-    name,
-    issues: []
-  };
+function validateObject(objectToCheck, definitionObj, settings, _argPath) {
+  if (settings === void 0) {
+    settings = {};
+  }
+
+  if (_argPath === void 0) {
+    _argPath = [];
+  }
+
   settings = (0, _deepMerge.default)({
+    throw: true,
+    name: 'unnamed',
     validateDefinitionObject: true
-  }, settings); // validate the passed definition object first
+  }, settings);
+  var issuesObj = {
+    name: settings.name,
+    issues: []
+  }; // validate the passed definition object first
 
   if (settings.validateDefinitionObject) {
-    const validateDefinitionObjectResult = (0, _validateObjectDefinitionObject.default)(definitionObj);
-
-    if (validateDefinitionObjectResult !== true) {
-      throw new Error(validateDefinitionObjectResult);
-    }
+    var validateDefinitionObjectResult = (0, _validateObjectDefinitionObject.default)(definitionObj, {
+      throw: settings.throw,
+      name: settings.name
+    });
   } // loop on the definition object properties
 
 
-  for (let i = 0; i < Object.keys(definitionObj).length; i++) {
-    const argName = Object.keys(definitionObj)[i];
-    const argDefinition = definitionObj[argName];
-    let value = (0, _get.default)(objectToCheck, argName); // get the correct value depending on the definitionObj
+  for (var i = 0; i < Object.keys(definitionObj).length; i++) {
+    var argName = Object.keys(definitionObj)[i];
+    var argDefinition = definitionObj[argName];
+    var value = (0, _get.default)(objectToCheck, argName); // get the correct value depending on the definitionObj
 
-    let staticIssue = false;
+    var staticIssue = false;
 
     if (argDefinition.static && !(0, _class.default)(objectToCheck)) {
       if (objectToCheck.constructor && objectToCheck.constructor[argName]) {
@@ -101,7 +113,10 @@ function validateObject(objectToCheck, definitionObj, name = 'unnamed', settings
       }
     }
 
-    const validationRes = (0, _validateValue.default)(value, argDefinition, argName);
+    var validationRes = (0, _validateValue.default)(value, argDefinition, {
+      name: argName,
+      throw: settings.throw
+    });
     issuesObj[argName] = {
       name: argName,
       received: {
@@ -154,6 +169,11 @@ function validateObject(objectToCheck, definitionObj, name = 'unnamed', settings
   }
 
   if (!issuesObj.issues.length) return true;
+
+  if (settings.throw) {
+    throw new _SObjectValidationError.default(issuesObj);
+  }
+
   return issuesObj;
 }
 

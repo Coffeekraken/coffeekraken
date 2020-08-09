@@ -34,13 +34,13 @@ function sendForm(form) {
   // protect
   if (!form.tagName || form.tagName.toLowerCase() !== 'form') {
     console.error('passed arguments', form);
-    throw `The "form" parameter passed to the "sendForm" function is not a form`;
+    throw "The \"form\" parameter passed to the \"sendForm\" function is not a form";
   } // get the enctype
 
 
-  const enctype = form.getAttribute('enctype') || 'application/x-www-form-urlencoded'; // encode form datas
+  var enctype = form.getAttribute('enctype') || 'application/x-www-form-urlencoded'; // encode form datas
 
-  let data = null;
+  var data = null;
 
   if (enctype === 'application/x-www-form-urlencoded') {
     // serialize the form values
@@ -50,7 +50,7 @@ function sendForm(form) {
   } // create ajax instance
 
 
-  const ajx = new _SAjax.default({
+  var ajx = new _SAjax.default({
     url: form.getAttribute('action'),
     method: form.getAttribute('method') || 'POST',
     data: data,
@@ -59,7 +59,7 @@ function sendForm(form) {
 
   form.setAttribute('loading', true); // send and return the promise
 
-  const promise = ajx.send(); // listen for the end of loading
+  var promise = ajx.send(); // listen for the end of loading
 
   promise.then(success => {
     form.removeAttribute('loading');

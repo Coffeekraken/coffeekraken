@@ -1,6 +1,6 @@
 "use strict";
 
-const __SUrlAction = require('./browser/SUrlAction');
+var __SUrlAction = require('./browser/SUrlAction');
 /**
  * @name            typeMap
  * @namespace       js.action

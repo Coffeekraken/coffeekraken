@@ -18,12 +18,20 @@ const command =
   process.argv && process.argv[2] ? process.argv[2].split(' ')[0] : '';
 let stack = command.split('.')[0];
 let action = command.split('.')[1] || null;
-const args = process.argv.slice(3).join(' ') || '';
+const args =
+  process.argv
+    .slice(3)
+    .map((arg) => {
+      if (arg.slice(0, 2) !== '--' && arg.slice(0, 1) !== '-')
+        return `"${arg}"`;
+      return arg;
+    })
+    .join(' ') || '';
 
 // handle clean exit
-// if (!__isChildProcess()) {
-//   __exitCleanup();
-// }
+if (!__isChildProcess()) {
+  __exitCleanup();
+}
 
 // if theirs nothing as stack or action
 if (!stack) {

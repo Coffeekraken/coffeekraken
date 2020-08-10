@@ -23,7 +23,7 @@ module.exports = class SPhpServerCli extends __SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static command = 'php -S [hostname]:[port] -t [rootDir] [router] [arguments]';
+  static command = 'php -S %hostname:%port -t %rootDir %router %arguments';
 
   /**
    * @name          definitionObj

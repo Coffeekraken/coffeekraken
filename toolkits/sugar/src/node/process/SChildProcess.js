@@ -225,7 +225,7 @@ module.exports = class SChildProcess extends __SPromise {
 
       // executing the actual command through the spawn node function
       const childProcess = __childProcess[settings.method || 'spawn'](
-        this._commandOrPath,
+        commandToRun,
         [],
         spawnSettings
       );
@@ -234,6 +234,7 @@ module.exports = class SChildProcess extends __SPromise {
       __hotkey('ctrl+c', {
         once: true
       }).on('press', () => {
+        // console.log('THIEHIU');
         childProcess.kill();
       });
 

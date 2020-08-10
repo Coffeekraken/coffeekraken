@@ -1,0 +1,1 @@
+{"version":3,"sources":["argsToObject.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,8BAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.cli\n * @src             ../../../js/cli/argsToObject.js\n */\nmodule.exports = require('../../../js/cli/argsToObject');\n"]}

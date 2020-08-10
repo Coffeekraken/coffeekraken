@@ -1,0 +1,1 @@
+{"version":3,"sources":["flatten.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,4BAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.object\n * @src             ../../../js/object/flatten.js\n */\nmodule.exports = require('../../../js/object/flatten');\n"]}

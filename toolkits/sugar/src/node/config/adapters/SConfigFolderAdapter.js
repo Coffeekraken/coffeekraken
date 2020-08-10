@@ -67,10 +67,13 @@ module.exports = class SConfigFolderAdapter extends __SConfigAdapter {
           return;
         if (this._defaultConfig[file.replace('.config.js', '')] !== undefined)
           return;
-        this._defaultConfig[file.replace('.config.js', '')] = require(this
-          .settings.defaultConfigPath +
-          '/' +
-          file);
+        this._defaultConfig[
+          file.replace('.config.js', '')
+        ] = require(`${this.settings.defaultConfigPath}/${file}`);
+        // this._defaultConfig[file.replace('.config.js', '')] = require(this
+        //   .settings.defaultConfigPath +
+        //   '/' +
+        //   file);
       });
       process.env[
         `SConfigFolderAdapter-${this.settings.defaultConfigPath}`
@@ -94,10 +97,13 @@ module.exports = class SConfigFolderAdapter extends __SConfigAdapter {
       __fs.readdirSync(this.settings.appConfigPath).forEach((file) => {
         if (!file.includes(this.settings.filename.replace('[name]', '')))
           return;
-        this._appConfig[file.replace('.config.js', '')] = require(this.settings
-          .appConfigPath +
-          '/' +
-          file);
+        this._defaultConfig[
+          file.replace('.config.js', '')
+        ] = require(`${this.settings.appConfigPath}/${file}`);
+        // this._appConfig[file.replace('.config.js', '')] = require(this.settings
+        //   .appConfigPath +
+        //   '/' +
+        //   file);
       });
       process.env[
         `SConfigFolderAdapter-${this.settings.appConfigPath}`
@@ -124,10 +130,13 @@ module.exports = class SConfigFolderAdapter extends __SConfigAdapter {
       __fs.readdirSync(this.settings.userConfigPath).forEach((file) => {
         if (!file.includes(this.settings.filename.replace('[name]', '')))
           return;
-        this._userConfig[file.replace('.config.js', '')] = require(this.settings
-          .userConfigPath +
-          '/' +
-          file);
+        this._defaultConfig[
+          file.replace('.config.js', '')
+        ] = require(`${this.settings.userConfigPath}/${file}`);
+        // this._userConfig[file.replace('.config.js', '')] = require(this.settings
+        //   .userConfigPath +
+        //   '/' +
+        //   file);
       });
       process.env[
         `SConfigFolderAdapter-${this.settings.userConfigPath}`

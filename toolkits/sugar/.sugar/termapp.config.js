@@ -1,5 +1,5 @@
 const __packageJson = require('../package.json');
-const __packageRoot = require('../node/path/packageRoot');
+const __packageRoot = require('../src/node/path/packageRoot');
 
 module.exports = {
   rootDir: `${__packageRoot(__dirname)}`,

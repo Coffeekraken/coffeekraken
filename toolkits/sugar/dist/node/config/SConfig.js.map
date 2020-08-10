@@ -1,0 +1,1 @@
+{"version":3,"sources":["SConfig.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,4BAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.config\n * @src             ../../../js/config/SConfig.js\n */\nmodule.exports = require('../../../js/config/SConfig');\n"]}

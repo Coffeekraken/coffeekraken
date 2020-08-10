@@ -109,21 +109,21 @@ module.exports = class SCommandPanel extends __SComponent {
 
     this._boxesObjectsMap = new Map();
 
-    // if (Array.isArray(commands)) {
-    //   this._commands = commands;
-    // } else {
-    //   throw new Error(
-    //     `It seems that the passed "commands" argument of the SCommandPanel class is not an Array of SCommand instances...`
-    //   );
-    // }
+    if (Array.isArray(commands)) {
+      this._commands = commands;
+    } else {
+      throw new Error(
+        `It seems that the passed "commands" argument of the SCommandPanel class is not an Array of SCommand instances...`
+      );
+    }
 
-    this._summaryFakeCommand = {
-      id: 'summary',
-      settings: {},
-      key: '§'
-    };
-    this._summaryFakeCommand.on = () => this._summaryFakeCommand;
-    this._commands.unshift(this._summaryFakeCommand);
+    // this._summaryFakeCommand = {
+    //   id: 'summary',
+    //   settings: {},
+    //   key: '§'
+    // };
+    // this._summaryFakeCommand.on = () => this._summaryFakeCommand;
+    // this._commands.unshift(this._summaryFakeCommand);
 
     // set the first active space to the first command key
     __activeSpace.set(`SCommandPanel.${this._commands[0].key}`);
@@ -373,25 +373,27 @@ module.exports = class SCommandPanel extends __SComponent {
     this._commands.forEach((commandObj, i) => {
       const boxObj = {};
 
-      __hotkey(`${commandObj.key}`).on('press', () => {
-        if (
-          __activeSpace.get() === `SCommandPanel.${commandObj.key}` &&
-          commandObj.instance &&
-          commandObj.instance.on
-        ) {
-          if (commandObj.instance.isRunning() && !commandObj.concurrent) {
-            commandObj.instance.kill();
-          } else if (
-            !commandObj.instance.isRunning() &&
-            commandObj.instance.run
+      if (commandObj.key) {
+        __hotkey(`${commandObj.key}`).on('press', () => {
+          if (
+            __activeSpace.get() === `SCommandPanel.${commandObj.key}` &&
+            commandObj.instance &&
+            commandObj.instance.on
           ) {
-            commandObj.instance.run();
+            if (commandObj.instance.isRunning() && !commandObj.concurrent) {
+              commandObj.instance.kill();
+            } else if (
+              !commandObj.instance.isRunning() &&
+              commandObj.instance.run
+            ) {
+              commandObj.instance.run();
+            }
+          } else {
+            __activeSpace.set(`SCommandPanel.${commandObj.key}`);
+            this._selectListItem(i);
           }
-        } else {
-          __activeSpace.set(`SCommandPanel.${commandObj.key}`);
-          this._selectListItem(i);
-        }
-      });
+        });
+      }
       // commandObj._settings.onKeyPress = (instance) => {
       //   if (__activeSpace.is(`SCommandPanel.${commandObj.key}`)) return true;
       //   return false;

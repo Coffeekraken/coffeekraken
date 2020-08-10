@@ -42,63 +42,63 @@ module.exports = {
                 name: 'Frontend Server',
                 path: `${__packageRoot(
                   __dirname
-                )}/src/node/server/frontend/SFrontendSCli`,
+                )}/src/node/server/frontend/SFrontendServerCli`,
                 argsObj: {},
                 settings: {},
                 key: 'f',
                 watch: true,
                 run: true,
                 statusBar: true
-              },
-              {
-                id: 'build.config',
-                name: 'Build Config',
-                path: `${__packageRoot(
-                  __dirname
-                )}/src/node/build/config/SBuildConfigCommand`,
-                argsObj: {},
-                settings: {}
-              },
-              {
-                id: 'build.scss',
-                name: 'Build SCSS',
-                path: `${__packageRoot(
-                  __dirname
-                )}/src/node/build/scss/SBuildScssCommand`,
-                argsObj: {},
-                settings: {
-                  statusBar: true
-                }
-              },
-              {
-                id: 'build.js',
-                name: 'Build JS',
-                path: `${__packageRoot(
-                  __dirname
-                )}/src/node/build/js/SBuildJsCommand`,
-                argsObj: {},
-                settings: {
-                  statusBar: true
-                }
-              },
-              {
-                id: 'build.views',
-                name: 'Build Views',
-                path: `${__packageRoot(
-                  __dirname
-                )}/src/node/build/views/SBuildViewsCommand`,
-                argsObj: {},
-                settings: {}
-              },
-              {
-                id: 'build.docMap',
-                name: 'Build docMap.json',
-                path: `${__packageRoot(
-                  __dirname
-                )}/src/node/build/docMap/SBuildDocMapCommand`,
-                argsObj: {},
-                settings: {}
               }
+              // {
+              //   id: 'build.config',
+              //   name: 'Build Config',
+              //   path: `${__packageRoot(
+              //     __dirname
+              //   )}/src/node/build/config/SBuildConfigCommand`,
+              //   argsObj: {},
+              //   settings: {}
+              // },
+              // {
+              //   id: 'build.scss',
+              //   name: 'Build SCSS',
+              //   path: `${__packageRoot(
+              //     __dirname
+              //   )}/src/node/build/scss/SBuildScssCommand`,
+              //   argsObj: {},
+              //   settings: {
+              //     statusBar: true
+              //   }
+              // },
+              // {
+              //   id: 'build.js',
+              //   name: 'Build JS',
+              //   path: `${__packageRoot(
+              //     __dirname
+              //   )}/src/node/build/js/SBuildJsCommand`,
+              //   argsObj: {},
+              //   settings: {
+              //     statusBar: true
+              //   }
+              // },
+              // {
+              //   id: 'build.views',
+              //   name: 'Build Views',
+              //   path: `${__packageRoot(
+              //     __dirname
+              //   )}/src/node/build/views/SBuildViewsCommand`,
+              //   argsObj: {},
+              //   settings: {}
+              // },
+              // {
+              //   id: 'build.docMap',
+              //   name: 'Build docMap.json',
+              //   path: `${__packageRoot(
+              //     __dirname
+              //   )}/src/node/build/docMap/SBuildDocMapCommand`,
+              //   argsObj: {},
+              //   settings: {}
+              // }
             ]
           }
         },

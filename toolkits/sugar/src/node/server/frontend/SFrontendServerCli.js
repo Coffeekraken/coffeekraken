@@ -23,7 +23,7 @@ module.exports = class SFrontendServerCli extends __SExpressServerCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static command = 'sugar server.frontend [arguments]';
+  static command = 'sugar server.frontend %arguments';
 
   /**
    * @name          definitionObj

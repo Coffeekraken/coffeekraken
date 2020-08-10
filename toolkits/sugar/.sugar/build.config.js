@@ -1,4 +1,4 @@
-const __packageRoot = require('../node/path/packageRoot');
+const __packageRoot = require('../src/node/path/packageRoot');
 
 module.exports = {
   scss: {
@@ -193,6 +193,74 @@ module.exports = {
     /**
      * @name              prod
      * @namespace         config.build.js
+     * @type              Boolean
+     * @default           false
+     *
+     * Specify if you want also the <primary>production</primary> versions of the compiled files.
+     * The production version are named ```[filename].prod.js```
+     *
+     * @since             2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    prod: false
+  },
+
+  node: {
+    /**
+     * @name              input
+     * @namespace         config.build.node
+     * @type              String
+     * @default           <appRoot>/src/js/*.js
+     *
+     * Specify the root folder (or file) to check for .js files to build.
+     * Glob patterns can be used
+     *
+     * @since             2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    input: `${__packageRoot()}/src/node/**/!(__wip__|__tests__)/*.{js,tsx,ts}`,
+
+    /**
+     * @name              outputDir
+     * @namespace         config.build.node
+     * @type              String
+     * @default           <appRoot>/dist/node
+     *
+     * Specify the destination folder where to put the compiled files in
+     *
+     * @since             2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    outputDir: `${__packageRoot()}/dist/node`,
+
+    /**
+     * @name              watch
+     * @namespace         config.build.node
+     * @type              String
+     * @default           src/js\/**\/*.js
+     *
+     * Set the watch files that you want to check
+     *
+     * @since             2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    watch: `${__packageRoot()}/src/node/**/*.(js|ts|tsx)`,
+    /**
+     * @name              map
+     * @namespace         config.build.node
+     * @type              Boolean
+     * @default           true
+     *
+     * Specify if you want sourcemap files to be generated
+     *
+     * @since             2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    map: true,
+
+    /**
+     * @name              prod
+     * @namespace         config.build.node
      * @type              Boolean
      * @default           false
      *

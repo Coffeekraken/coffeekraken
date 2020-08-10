@@ -1,0 +1,1 @@
+{"version":3,"sources":["convert.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,0BAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.time\n * @src             ../../../js/time/convert.js\n */\nmodule.exports = require('../../../js/time/convert');\n"]}

@@ -71,9 +71,9 @@ function buildCommandLine(command, definitionObj, args, includeAllArgs) {
 
   definitionObj = Object.assign({}, definitionObj); // get all the tokens
 
-  var tokens = command.match(/\[[a-zA-Z0-9-_]+\]/gm) || [];
+  var tokens = command.match(/\%[a-zA-Z0-9-_]+/gm) || [];
   tokens.forEach(token => {
-    var tokenName = token.replace('[', '').replace(']', '');
+    var tokenName = token.replace('%', '');
     if (tokenName === 'arguments') return;
     var tokenValue = args && args[tokenName] !== undefined ? args[tokenName] : definitionObj[tokenName] ? definitionObj[tokenName].default : undefined;
     delete definitionObj[tokenName];
@@ -88,7 +88,7 @@ function buildCommandLine(command, definitionObj, args, includeAllArgs) {
   }); // args to string
 
   var argsString = (0, _argsToString.default)(args, definitionObj, includeAllArgs).trim();
-  command = command.replace('[arguments]', argsString);
+  command = command.replace('%arguments', argsString);
   return command.trim();
 }
 

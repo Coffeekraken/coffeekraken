@@ -250,7 +250,7 @@ module.exports = class SApp extends __SComponent {
       throw new Error(
         `SApp: You try to load a page class using the path "${pageObj.page.path}" but no file exists at this location...`
       );
-    const pageClass = require(pageObj.page.path);
+    const pageClass = require(`${pageObj.page.path}`);
 
     // check if the pageObj exist
     if (!pageObj && this.config('pages.url.404')) {
@@ -336,7 +336,7 @@ module.exports = class SApp extends __SComponent {
         throw new Error(
           `SApp: You try to load a command class using the path "${commandObj.path}" but no file exists at this location...`
         );
-      const commandClass = require(commandObj.path);
+      const commandClass = require(`${commandObj.path}`);
       this._commandsStack[commandName] = new commandClass(
         commandObj.argsObj,
         commandObj.settings

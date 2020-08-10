@@ -4,6 +4,10 @@ const __deepMerge = require('../../object/deepMerge');
 const __chokidar = require('chokidar');
 const __getFilename = require('../../fs/filename');
 const __extension = require('../../fs/extension');
+const __packageRoot = require('../../path/packageRoot');
+const __fs = require('fs');
+const __argsToString = require('../../cli/argsToString');
+const __childProcess = require('child_process');
 
 /**
  * @name            SWatchFsDeamonCli
@@ -26,7 +30,7 @@ module.exports = class SWatchFsDeamonCli extends __SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static command = 'sugar deamon.fs [arguments]';
+  static command = 'sugar deamon.fs %arguments';
 
   /**
    * @name          definitionObj
@@ -108,76 +112,88 @@ module.exports = class SWatchFsDeamonCli extends __SCli {
         const runningTests = {};
 
         trigger('log', {
-          value: `#start Starting the "<yellow>${this._settings.name}</yellow>" filesystem deamon...`
+          value: `#start Starting the "<yellow>${settings.name}</yellow>" filesystem deamon...`
         });
 
-        console.log(argsObj);
+        __chokidar
+          .watch(argsObj.input, {
+            persistent: true,
+            followSymlinks: true,
+            ...settings
+          })
+          .on('ready', () => {
+            trigger('log', {
+              value: `#success The "<yellow>${settings.name}</yellow>" deamon is <green>ready</green>`
+            });
+          })
+          .on('change', (filepath) => {
+            if (runningTests[filepath]) return;
+            runningTests[filepath] = true;
 
-        // __chokidar
-        //   .watch(argsObj.input, {
-        //     persistent: true,
-        //     followSymlinks: true,
-        //     ...settings
-        //   })
-        //   .on('ready', () => {
-        //     trigger('log', {
-        //       value: `#success The "<yellow>${this._settings.name}</yellow>" deamin is <green>ready</green>`
-        //     });
-        //   })
-        //   .on('change', (filepath) => {
-        //     if (runningTests[filepath]) return;
-        //     runningTests[filepath] = true;
+            const filename = __getFilename(filepath);
+            const path = filepath.replace(`/${filename}`, '');
+            const name = filename.replace(`.${__extension(filename)}`, '');
 
-        //     const filename = __getFilename(filepath);
-        //     const path = filepath.replace(`/${filename}`, '');
-        //     const name = filename.replace(`.${__extension(filename)}`, '');
+            trigger('log', {
+              value: '#clear'
+            });
 
-        //     trigger('log', {
-        //       value: `Update detected on the file "<cyan>${path.replace(
-        //         __packageRoot(filepath) + '/',
-        //         ''
-        //       )}</cyan>"`
-        //     });
+            trigger('log', {
+              value: `Update detected on the file "<cyan>${path.replace(
+                __packageRoot(filepath) + '/',
+                ''
+              )}</cyan>"`
+            });
 
-        //     // reading the file content
-        //     const content = __fs.readFileSync(filepath, 'utf8');
-        //     const deamonReg = /\*\s?@deamon\.fs\s+(.*)/g;
-        //     const deamonMatches = content.match(deamonReg);
-        //     let command;
-        //     if (deamonMatches && deamonMatches[0]) {
-        //       command = deamonMatches[0]
-        //         .replace(/\s?\*\s?@deamon\.fs\s+/, '')
-        //         .trim();
-        //     } else {
-        //       command = argsObj.command;
-        //     }
+            // reading the file content
+            const content = __fs.readFileSync(filepath, 'utf8');
+            const deamonReg = /\*\s?@deamon\.fs\s+(.*)/g;
+            const deamonMatches = content.match(deamonReg);
+            let command;
+            if (deamonMatches && deamonMatches[0]) {
+              command = deamonMatches[0]
+                .replace(/\s?\*\s?@deamon\.fs\s+/, '')
+                .trim();
+            } else {
+              command = argsObj.command;
+            }
 
-        //     // preparing the command to run
-        //     const args = __argsToString(argsObj);
-        //     command = command
-        //       .replace('%path', path)
-        //       .replace('%name', name)
-        //       .replace('%arguments', args);
+            // preparing the command to run
+            const args = __argsToString(argsObj);
+            command = command.replace('%path', path).replace('%name', name);
 
-        //     trigger('log', {
-        //       value: `Launching the command "<magenta>${command}</magenta>"...`
-        //     });
+            trigger('log', {
+              value: `Launching the command "<magenta>${command.replace(
+                `${__packageRoot()}/`,
+                ''
+              )}</magenta>"...`
+            });
 
-        //     __childProcess
-        //       .spawn(command, null, {
-        //         // stdio: 'inherit',
-        //         shell: true
-        //       })
-        //       .on('close', () => {
-        //         trigger('log', {
-        //           value: `#success Process finished successfully`
-        //         });
-        //         delete runningTests[filepath];
-        //       })
-        //       .on('error', (e) => {
-        //         console.log('EORROROROR', e);
-        //       });
-        //   });
+            const childProcess = __childProcess
+              .spawn(command, null, {
+                stdio: 'inherit',
+                shell: true
+              })
+              .on('data', (d) => {
+                // console.log('d', data.toString());
+              })
+              .on('close', () => {
+                // trigger('log', {
+                //   value: `#success Process finished successfully`
+                // });
+                delete runningTests[filepath];
+              })
+              .on('error', (e) => {
+                console.log('EORROROROR', e);
+              });
+
+            // childProcess.stdout.on('data', (data) => {
+            //   console.log('data', data.toString());
+            // });
+            // childProcess.stderr.on('data', (data) => {
+            //   console.log('data', data.toString());
+            // });
+          });
 
         // process.stdin.resume();
       },

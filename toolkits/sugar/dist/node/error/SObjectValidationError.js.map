@@ -1,0 +1,1 @@
+{"version":3,"sources":["SObjectValidationError.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,0CAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.error\n * @src             ../../../js/error/SObjectValidationError.js\n */\nmodule.exports = require('../../../js/error/SObjectValidationError');\n"]}

@@ -40,6 +40,18 @@ export default class SActionStreamAction extends __SPromise {
   _skipNextActions = null;
 
   /**
+   * @name            _currentPromise
+   * @type            SPromise
+   * @private
+   *
+   * Store the current SPromise instance of the current running action instance
+   *
+   * @since         2.0.0
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _currentPromise = null;
+
+  /**
    * @name            _registeredCallbacks
    * @type            Array<Object>
    * @private
@@ -197,9 +209,10 @@ export default class SActionStreamAction extends __SPromise {
    */
   run(streamObj, promiseFn) {
     this.checkStreamObject(streamObj);
-    return new __SPromise(promiseFn, {
+    this._currentPromise = new __SPromise(promiseFn, {
       id: this._settings.id
     }).start();
+    return this._currentPromise;
   }
 
   /**
@@ -213,7 +226,13 @@ export default class SActionStreamAction extends __SPromise {
    * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   error(message) {
-    this.trigger('error', `<red>✚</red> ${message}`);
+    this.trigger('error', {
+      value: `<red>✚</red> ${message}`
+    });
+    if (!this._currentPromise) return;
+    this._currentPromise.trigger('log', {
+      value: `<red>✚</red> ${message}`
+    });
   }
 
   /**
@@ -227,7 +246,13 @@ export default class SActionStreamAction extends __SPromise {
    * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   warn(message) {
-    this.trigger('log', `<yellow>⚠</yellow> ${message}`);
+    this.trigger('log', {
+      value: `<yellow>⚠</yellow> ${message}`
+    });
+    if (!this._currentPromise) return;
+    this._currentPromise.trigger('log', {
+      value: `<yellow>⚠</yellow> ${message}`
+    });
   }
 
   /**
@@ -240,7 +265,19 @@ export default class SActionStreamAction extends __SPromise {
    *
    * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  log(message) {
-    this.trigger('log', message);
+  log(obj) {
+    if (typeof obj === 'string') {
+      this.trigger('log', {
+        value: obj
+      });
+      if (!this._currentPromise) return;
+      this._currentPromise.trigger('log', {
+        value: obj
+      });
+    } else {
+      this.trigger('log', obj);
+      if (!this._currentPromise) return;
+      this._currentPromise.trigger('log', obj);
+    }
   }
 }

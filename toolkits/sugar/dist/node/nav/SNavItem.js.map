@@ -1,0 +1,1 @@
+{"version":3,"sources":["SNavItem.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,0BAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.nav\n * @src               ../../../js/nav/SNavItem.js\n */\nmodule.exports = require('../../../js/nav/SNavItem');\n"]}

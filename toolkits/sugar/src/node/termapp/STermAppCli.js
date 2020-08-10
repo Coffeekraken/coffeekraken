@@ -22,7 +22,7 @@ module.exports = class STermAppCli extends __SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static command = 'sugar termapp.run [arguments]';
+  static command = 'sugar termapp.run %arguments';
 
   /**
    * @name          definitionObj

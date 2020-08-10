@@ -1,0 +1,1 @@
+{"version":3,"sources":["boolean.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,wBAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.is\n * @src               ../../../js/is/boolean.js\n */\nmodule.exports = require('../../../js/is/boolean');\n"]}

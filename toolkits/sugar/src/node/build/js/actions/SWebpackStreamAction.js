@@ -102,7 +102,7 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
             ...settings.babel
           })
           .catch((error) => {
-            return reject(err);
+            return reject(error);
           });
 
         streamObj.data = result.code;
@@ -128,7 +128,6 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
       );
 
       let webpackSettings = Object.assign({}, settings.webpack);
-      console.log(webpackSettings);
       const compiler = __webpack(
         __deepMerge(
           {
@@ -173,9 +172,24 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
                     loader: 'babel-loader',
                     options: {
                       cwd: __packageRoot(__dirname),
-                      ...__sugarConfig('babel')
+                      presets: [
+                        [
+                          '@babel/preset-env',
+                          {
+                            targets: {
+                              esmodules: true
+                            }
+                          }
+                        ]
+                      ],
+                      ...settings.babel
                     }
                   }
+                },
+                {
+                  test: /\.tsx?$/,
+                  use: 'ts-loader',
+                  exclude: /node_modules/
                 }
               ]
             },
@@ -190,6 +204,7 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
             },
             resolve: {
               symlinks: true,
+              extensions: ['.tsx', '.ts', '.js'],
               modules: [
                 'node_modules',
                 'src/js',

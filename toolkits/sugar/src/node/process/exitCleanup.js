@@ -5,6 +5,7 @@ const __fkill = require('fkill');
 const __hotkey = require('../keyboard/hotkey');
 const __spawn = require('../process/spawn');
 const __parseHtml = require('../terminal/parseHtml');
+const __keypress = require('keypress');
 
 /**
  * @name              exitCleanup
@@ -37,6 +38,8 @@ module.exports = function exitCleanup(handler = null, settings = {}) {
 
     let remainingProcessesCount = Object.keys(processes).length;
 
+    __keypress.disableMouse(process.stdout);
+
     console.log(
       __parseHtml(
         '  Cleaning your system after <primary>Sugar</primary> execution...'
@@ -67,7 +70,7 @@ module.exports = function exitCleanup(handler = null, settings = {}) {
     if (remainingProcessesCount > 0) {
       Object.keys(processes).forEach(async (key) => {
         const processObj = processes[key];
-        if (processObj.hasAfterCommand()) {
+        if (processObj.hasAfterCommand && processObj.hasAfterCommand()) {
           function waitForClose() {
             const p = new Promise((resolve) => {
               processObj

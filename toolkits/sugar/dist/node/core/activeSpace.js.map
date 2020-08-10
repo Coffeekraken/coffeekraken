@@ -1,0 +1,1 @@
+{"version":3,"sources":["activeSpace.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,8BAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.core\n * @src             ../../../js/core/activeSpace.js\n */\nmodule.exports = require('../../../js/core/activeSpace');\n"]}

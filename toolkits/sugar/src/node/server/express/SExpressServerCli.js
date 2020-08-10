@@ -23,7 +23,7 @@ module.exports = class SExpressServerCli extends __SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static command = 'sugar server.express [arguments]';
+  static command = 'sugar server.express %arguments';
 
   /**
    * @name          definitionObj

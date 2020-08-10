@@ -90,8 +90,7 @@ module.exports = class SGlobResolverStreamAction extends __SActionsStreamAction 
           .replace(/\*{1,2}/gm, '')
           .replace(/\(.*\)/gm, '')
           .replace(/(\?|!|\+|@)/gm, '');
-        if (cleanedRootDir.slice(-1) === '/')
-          cleanedRootDir = cleanedRootDir.slice(0, -1);
+        cleanedRootDir = cleanedRootDir.replace(/\/+$/, '');
 
         let outputFilePath = filePath
           .replace(cleanedRootDir, '')

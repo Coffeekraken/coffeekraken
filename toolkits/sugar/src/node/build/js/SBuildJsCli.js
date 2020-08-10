@@ -23,7 +23,7 @@ module.exports = class SBuildJsCli extends __SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static command = 'sugar build.js [arguments]';
+  static command = 'sugar build.js %arguments';
 
   /**
    * @name          definitionObj

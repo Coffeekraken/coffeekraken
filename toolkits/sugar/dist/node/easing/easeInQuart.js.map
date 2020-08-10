@@ -1,0 +1,1 @@
+{"version":3,"sources":["easeInQuart.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,gCAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.easing\n * @src             ../../../js/easing/easeInQuart.js\n */\nmodule.exports = require('../../../js/easing/easeInQuart');\n"]}

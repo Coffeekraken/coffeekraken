@@ -1,3 +1,4 @@
+const __typeof = require('../value/typeof');
 const __buildCommandLine = require('./buildCommandLine');
 const __validateCliDefinitionObject = require('../validation/cli/validateCliDefinitionObject');
 const __SChildProcess = require('../process/SChildProcess');
@@ -7,6 +8,7 @@ const __argsToObject = require('../cli/argsToObject');
 const __isChildProcess = require('../is/childProcess');
 const __output = require('../process/output');
 const __parseArgs = require('../cli/parseArgs');
+const __toString = require('../string/toString');
 
 /**
  * @name                SCli
@@ -15,7 +17,7 @@ const __parseArgs = require('../cli/parseArgs');
  *
  * This class represent a basic CLI command with his definition object, his command string, etc...
  *
- * @param       {String}        commandString         The command string that contains arguments tokens and the "[arguments]" token where you want the parsed arguments to be placed
+ * @param       {String}        commandString         The command string that contains arguments tokens and the "%arguments" token where you want the parsed arguments to be placed
  * @param       {Object}        definitionObj         The definition object that represent all the available arguments, their types, etc... Here's the definitionObj format:
  * - argName:
  *    - type (null) {String}: The argument type like "String", "Boolean", "Array", "Number" or "Object"
@@ -27,7 +29,7 @@ const __parseArgs = require('../cli/parseArgs');
  * @example         js
  * const SCli = require('@coffeekraken/sugar/js/cli/SCli');
  * class MyCli extends SCli {
- *    static command = 'php [hostname]:[port] [rootDir] [arguments]';
+ *    static command = 'php %hostname:%port %rootDir %arguments';
  *    static definitionObj = {
  *      hostname: {
  *        type: 'String',
@@ -128,7 +130,6 @@ module.exports = class SCli {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   static parseArgs(cliString) {
-    if (!cliString || cliString.trim() === '') return {};
     return __parseArgs(cliString, this.definitionObj);
   }
 

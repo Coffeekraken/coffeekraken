@@ -2,7 +2,7 @@
 
 module.exports = {
   adapters: {
-    console: `${__dirname}/../node/log/adapters/SLogConsoleAdapter`
+    console: `${__dirname}/../src/node/log/adapters/SLogConsoleAdapter`
   },
   adaptersByLevel: {
     log: null,

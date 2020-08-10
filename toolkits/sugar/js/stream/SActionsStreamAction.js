@@ -83,6 +83,17 @@ var SActionStreamAction = /*#__PURE__*/function (_SPromise) {
    */
 
   /**
+   * @name            _currentPromise
+   * @type            SPromise
+   * @private
+   *
+   * Store the current SPromise instance of the current running action instance
+   *
+   * @since         2.0.0
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+
+  /**
    * @name            _registeredCallbacks
    * @type            Array<Object>
    * @private
@@ -119,6 +130,8 @@ var SActionStreamAction = /*#__PURE__*/function (_SPromise) {
     }, settings));
 
     _defineProperty(_assertThisInitialized(_this), "_skipNextActions", null);
+
+    _defineProperty(_assertThisInitialized(_this), "_currentPromise", null);
 
     _defineProperty(_assertThisInitialized(_this), "_registeredCallbacks", []);
 
@@ -254,9 +267,10 @@ var SActionStreamAction = /*#__PURE__*/function (_SPromise) {
     key: "run",
     value: function run(streamObj, promiseFn) {
       this.checkStreamObject(streamObj);
-      return new _SPromise2.default(promiseFn, {
+      this._currentPromise = new _SPromise2.default(promiseFn, {
         id: this._settings.id
       }).start();
+      return this._currentPromise;
     }
     /**
      * @name          error
@@ -272,7 +286,14 @@ var SActionStreamAction = /*#__PURE__*/function (_SPromise) {
   }, {
     key: "error",
     value: function error(message) {
-      this.trigger('error', "<red>\u271A</red> ".concat(message));
+      this.trigger('error', {
+        value: "<red>\u271A</red> ".concat(message)
+      });
+      if (!this._currentPromise) return;
+
+      this._currentPromise.trigger('log', {
+        value: "<red>\u271A</red> ".concat(message)
+      });
     }
     /**
      * @name          warn
@@ -288,7 +309,14 @@ var SActionStreamAction = /*#__PURE__*/function (_SPromise) {
   }, {
     key: "warn",
     value: function warn(message) {
-      this.trigger('log', "<yellow>\u26A0</yellow> ".concat(message));
+      this.trigger('log', {
+        value: "<yellow>\u26A0</yellow> ".concat(message)
+      });
+      if (!this._currentPromise) return;
+
+      this._currentPromise.trigger('log', {
+        value: "<yellow>\u26A0</yellow> ".concat(message)
+      });
     }
     /**
      * @name          log
@@ -303,8 +331,22 @@ var SActionStreamAction = /*#__PURE__*/function (_SPromise) {
 
   }, {
     key: "log",
-    value: function log(message) {
-      this.trigger('log', message);
+    value: function log(obj) {
+      if (typeof obj === 'string') {
+        this.trigger('log', {
+          value: obj
+        });
+        if (!this._currentPromise) return;
+
+        this._currentPromise.trigger('log', {
+          value: obj
+        });
+      } else {
+        this.trigger('log', obj);
+        if (!this._currentPromise) return;
+
+        this._currentPromise.trigger('log', obj);
+      }
     }
   }, {
     key: "settings",

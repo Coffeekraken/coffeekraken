@@ -23,5 +23,11 @@ export default {
   },
   validator: {
     type: 'Function'
+  },
+  alias: {
+    type: 'String'
+  },
+  level: {
+    type: 'Integer'
   }
 };

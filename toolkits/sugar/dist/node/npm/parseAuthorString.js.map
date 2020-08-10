@@ -1,0 +1,1 @@
+{"version":3,"sources":["parseAuthorString.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,mCAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.npm\n * @src               ../../../js/npm/parseAuthorString.js\n */\nmodule.exports = require('../../../js/npm/parseAuthorString');\n"]}

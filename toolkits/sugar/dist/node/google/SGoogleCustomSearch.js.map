@@ -1,0 +1,1 @@
+{"version":3,"sources":["SGoogleCustomSearch.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,wCAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.google\n * @src             ../../../js/google/SGoogleCustomSearch.js\n */\nmodule.exports = require('../../../js/google/SGoogleCustomSearch');\n"]}

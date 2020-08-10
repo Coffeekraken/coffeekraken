@@ -819,8 +819,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
           _metas = {};
         }
 
-        var currentCallbackReturnedValue = initialValue; // console.log(this._stacks);
-
+        var currentCallbackReturnedValue = initialValue;
         if (!this._stacks || Object.keys(this._stacks).length === 0) return currentCallbackReturnedValue;
         var stackArray = [];
 
@@ -829,6 +828,8 @@ var SPromise = /*#__PURE__*/function (_Promise) {
           // if (!this._stacks[stack]) {
           //   this._registerNewStacks(stack);
           // }
+          if (stack === 'log') yield (0, _wait.default)();
+
           if (this._stacks[stack]) {
             stackArray = [...stackArray, ...this._stacks[stack]];
           } // check if the stack is a glob pattern

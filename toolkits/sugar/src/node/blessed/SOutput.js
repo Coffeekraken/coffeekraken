@@ -9,6 +9,7 @@ const __toString = require('../string/toString');
 const __stripAnsi = require('strip-ansi');
 const __trimLines = require('../string/trimLines');
 const __extractValues = require('../object/extractValues');
+const __SOutputProcessInterface = require('./SOutputProcessInterface');
 
 /**
  * @name                  SOutput
@@ -92,6 +93,9 @@ module.exports = class SOutput extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(process, settings = {}) {
+    // apply some interfaces
+    __SOutputProcessInterface.apply(process);
+
     const _settings = __deepMerge(
       {
         filter: null,
@@ -131,9 +135,9 @@ module.exports = class SOutput extends __SComponent {
         // this.update();
       })
       .on('*.start', () => {
-        if (this._settings.clearOnStart) {
-          this.clear();
-        }
+        // if (this._settings.clearOnStart) {
+        //   this.clear();
+        // }
       })
       .on('log', (data, metas) => {
         if (__isChildProcess()) {
@@ -195,6 +199,32 @@ module.exports = class SOutput extends __SComponent {
             return;
           }
 
+          // default logs value
+          // logObj = {
+          //   mb: 1,
+          //   mt: 0,
+          //   ...logObj
+          // };
+
+          // special syntax
+          const syntaxReg = /#[a-zA-Z0-9_-]+(:[a-zA-Z0-9\.-_]+)?/gm;
+          const syntaxMatches = logObj.value.match(syntaxReg);
+
+          if (syntaxMatches) {
+            syntaxMatches.forEach((arg) => {
+              logObj.value = logObj.value.replace(arg, '');
+
+              arg = arg.replace('#', '');
+              const splits = arg.split(':');
+              const argName = splits[0];
+              const value = splits[1] ? __parse(splits[1]) : null;
+
+              logObj[argName] = value !== null ? value : true;
+            });
+
+            logObj.value = logObj.value.trim();
+          }
+
           if (
             this._settings.filter &&
             typeof this._settings.filter === 'function'
@@ -204,11 +234,11 @@ module.exports = class SOutput extends __SComponent {
             if (res !== true) logObj = res;
           }
 
-          setTimeout(() => {
-            this.log(logObj);
-          }, 200);
+          // setTimeout(() => {
+          this.log(logObj);
+          // }, 200);
         });
-        this.update();
+        // this.update();
       });
     // .on('error', (data) => {
     //   if (data.error) {
@@ -246,6 +276,8 @@ module.exports = class SOutput extends __SComponent {
   _allowClear = true;
   _updateTimeout = false;
   clear() {
+    nativeConsole.trace('CLEAS');
+    throw 'CCO';
     if (__isChildProcess()) {
       console.log('#clear');
     } else {
@@ -295,6 +327,7 @@ module.exports = class SOutput extends __SComponent {
     // filter the content to remove the "temp" logs
     this._content = this._content.filter((logObj) => {
       if (logObj.temp) {
+        this._lastY -= logObj.$box.height;
         if (logObj.$box) logObj.$box.destroy();
         return false;
       }
@@ -377,7 +410,7 @@ module.exports = class SOutput extends __SComponent {
   _stuperUpdateTimeout = null;
   update() {
     if (__isChildProcess()) return;
-    if (this._updateTimeout) return;
+    // if (this._updateTimeout) return;
     if (!this.isDisplayed()) return;
 
     if (!this._content.length) {
@@ -390,18 +423,18 @@ module.exports = class SOutput extends __SComponent {
         if (item.$box) {
         } else if (item.value && typeof item.value === 'string') {
           const $box = this._simpleTextBox(item.value);
-          $box.top = this._lastY;
+          $box.top = this._lastY + item.mt;
           this._logBoxChilds.push($box);
           this._logBox.append($box);
           item.$box = $box;
-          this._lastY += $box.getScrollHeight() + 2;
+          this._lastY += $box.getScrollHeight() + item.mt + item.mb;
         } else if (typeof item === 'object' && item.group) {
           const $box = this._groupBox(item.group, item.content);
           $box.top = this._lastY;
           this._logBoxChilds.push($box);
           item.$box = $box;
           this._logBox.append($box);
-          this._lastY += $box.getScrollHeight() + 2;
+          this._lastY += $box.getScrollHeight() + item.mt + item.mb;
         }
       } catch (e) {
         throw e;

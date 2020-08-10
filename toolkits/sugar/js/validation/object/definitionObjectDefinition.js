@@ -29,6 +29,12 @@ var _default = {
   },
   validator: {
     type: 'Function'
+  },
+  alias: {
+    type: 'String'
+  },
+  level: {
+    type: 'Integer'
   }
 };
 exports.default = _default;

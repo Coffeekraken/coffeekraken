@@ -23,7 +23,7 @@ module.exports = class SBuildViewsCli extends __SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static command = 'sugar build.views [arguments]';
+  static command = 'sugar build.views %arguments';
 
   /**
    * @name          definitionObj

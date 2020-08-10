@@ -1,0 +1,1 @@
+{"version":3,"sources":["SDefinitionObjectError.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,0CAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.error\n * @src             ../../../js/error/SDefinitionObjectError.js\n */\nmodule.exports = require('../../../js/error/SDefinitionObjectError');\n"]}

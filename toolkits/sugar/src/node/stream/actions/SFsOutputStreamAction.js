@@ -63,7 +63,7 @@ module.exports = class SFsOutputStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(streamObj, settings = this._settings) {
-    return super.run(streamObj, async (resolve, reject) => {
+    return super.run(streamObj, async (resolve, reject, trigger) => {
       if (!streamObj.outputStack || typeof streamObj.outputStack !== 'object') {
         this.warn(
           `The streamObj does not contain any "<cyan>outputStack</cyan>" property so no file will be saved at all...`
@@ -81,9 +81,9 @@ module.exports = class SFsOutputStreamAction extends __SActionsStreamAction {
           ''
         );
         if (!streamObj[key]) continue;
-        this.log(
-          `Saving the streamObj property "<yellow>${key}</yellow>" under "<cyan>${readableOutputPath}</cyan>"`
-        );
+        trigger('log', {
+          value: `Saving the streamObj property "<yellow>${key}</yellow>" under "<cyan>${readableOutputPath}</cyan>"`
+        });
         await __writeFile(outputPath, __toString(streamObj[key]));
       }
 

@@ -1,0 +1,1 @@
+{"version":3,"sources":["error.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,uBAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.log\n * @src               ../../../js/log/error.js\n */\nmodule.exports = require('../../../js/log/error');\n"]}

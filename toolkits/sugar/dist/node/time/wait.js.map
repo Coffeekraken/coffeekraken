@@ -1,0 +1,1 @@
+{"version":3,"sources":["wait.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,uBAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.time\n * @src             ../../../js/time/wait.js\n */\nmodule.exports = require('../../../js/time/wait');\n"]}

@@ -1,0 +1,1 @@
+{"version":3,"sources":["uid.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,wBAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.object\n * @src             ../../../js/object/uid.js\n */\nmodule.exports = require('../../../js/object/uid');\n"]}

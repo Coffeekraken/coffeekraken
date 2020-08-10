@@ -1,5 +1,7 @@
 const __SWatchFsDeamonCli = require('../../node/deamon/fs/SWatchFsDeamonCli');
 const __sugarConfig = require('../../node/config/sugar');
+const __isChildProcess = require('../../node/is/childProcess');
+const __SError = require('../../node/error/SError');
 
 module.exports = (stringArgs = '') => {
   const args = __SWatchFsDeamonCli.parseArgs(stringArgs);
@@ -23,53 +25,16 @@ module.exports = (stringArgs = '') => {
     // get the values from the wanted deamon
     args.input = deamons[args.name].input;
     args.command = deamons[args.name].command;
+  } else {
+    if (!args.input || !args.command) {
+      throw new __SError(
+        `You need to specify at least a name using the "--name" parameter, or an input and command value using the "--input" and "--command" parameter...`
+      );
+    }
   }
 
-  console.log(args);
-
   const cli = new __SWatchFsDeamonCli({
-    output: {}
+    output: true
   });
   cli.run(args);
 };
-
-// // reading the file content
-// const content = __fs.readFileSync(filepath, 'utf8');
-// const testReg = /\*\s?@test\s+(.*)/g;
-// const testMatches = content.match(testReg);
-// let testfile;
-// if (testMatches && testMatches[0]) {
-//   testfile = __path.resolve(
-//     path,
-//     testMatches[0].replace(/\s?\*\s?@test\s+/, '').trim()
-//   );
-// } else {
-//   testfile = deamonObj.testfile;
-//   testfile = testfile.replace('%name', name).replace('%path', path);
-// }
-
-// // preparing the command to run
-// const runtime = deamonObj.command.split(' ')[0];
-// const config = __sugarConfig(runtime);
-// const args = __argsToString(config.cli || config);
-// let command = deamonObj.command
-//   .replace('%path', path)
-//   .replace('%name', name)
-//   .replace('%testfile', testfile)
-//   .replace('%arguments', args);
-
-// console.log(
-//   `Running the test "<yellow>${testfile.replace(
-//     `${__packageRoot(path)}/`,
-//     ''
-//   )}</yellow>"...`
-// );
-
-// __childProcess
-//   .spawn(command, null, {
-//     stdio: 'inherit',
-//     shell: true
-//   })
-//   .on('close', () => {
-//     delete runningTests[filepath];
-//   });

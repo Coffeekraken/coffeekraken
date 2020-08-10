@@ -675,8 +675,6 @@ export default class SPromise extends Promise {
   async _triggerStack(stack, initialValue, _metas = {}) {
     let currentCallbackReturnedValue = initialValue;
 
-    // console.log(this._stacks);
-
     if (!this._stacks || Object.keys(this._stacks).length === 0)
       return currentCallbackReturnedValue;
 
@@ -687,6 +685,8 @@ export default class SPromise extends Promise {
       // if (!this._stacks[stack]) {
       //   this._registerNewStacks(stack);
       // }
+
+      if (stack === 'log') await __wait();
 
       if (this._stacks[stack]) {
         stackArray = [...stackArray, ...this._stacks[stack]];

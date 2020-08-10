@@ -1,0 +1,1 @@
+{"version":3,"sources":["upperFirst.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,+BAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.string\n * @src             ../../../js/string/upperFirst.js\n */\nmodule.exports = require('../../../js/string/upperFirst');\n"]}

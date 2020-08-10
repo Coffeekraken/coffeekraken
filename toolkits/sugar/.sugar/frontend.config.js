@@ -1,6 +1,6 @@
 // const __docNav = require('../src/node/doc/docNav');
 // const __namespaceSNav = require('../src/node/nav/namespaceSNav');
-const __packageRoot = require('../node/path/packageRoot');
+const __packageRoot = require('../src/node/path/packageRoot');
 
 module.exports = {
   assets: '@config.assets',

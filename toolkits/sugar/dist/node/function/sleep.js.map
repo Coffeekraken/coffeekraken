@@ -1,0 +1,1 @@
+{"version":3,"sources":["sleep.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,4BAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.function\n * @src             ../../../js/function/debounce.js\n */\nmodule.exports = require('../../../js/function/sleep');\n"]}

@@ -1,0 +1,1 @@
+{"version":3,"sources":["SActionsStreamAction.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,yCAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.stream\n * @src             ../../../js/stream/SActionsStreamAction.js\n */\nmodule.exports = require('../../../js/stream/SActionsStreamAction');\n"]}

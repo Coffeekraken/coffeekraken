@@ -1,0 +1,1 @@
+{"version":3,"sources":["diff.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,yBAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.object\n * @src             ../../../js/object/diff.js\n */\nmodule.exports = require('../../../js/object/diff');\n"]}

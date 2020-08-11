@@ -16,15 +16,15 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-const __SActionsStream = require('../../stream/SActionsStream');
+var __SActionsStream = require('../../stream/SActionsStream');
 
-const __deepMerge = require('../../object/deepMerge');
+var __deepMerge = require('../../object/deepMerge');
 
-const __SFsFilesResolverStreamAction = require('../../stream/actions/SFsFilesResolverStreamAction');
+var __SFsFilesResolverStreamAction = require('../../stream/actions/SFsFilesResolverStreamAction');
 
-const __SDocMapStreamAction = require('./actions/SDocMapStreamActions');
+var __SDocMapStreamAction = require('./actions/SDocMapStreamActions');
 
-const __SFsOutputStreamAction = require('../../stream/actions/SFsOutputStreamAction');
+var __SFsOutputStreamAction = require('../../stream/actions/SFsOutputStreamAction');
 /**
  * @name            SBuildDocMapActionsStream
  * @namespace           node.build.docMap

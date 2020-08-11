@@ -1,6 +1,6 @@
 "use strict";
 
-const __tmpDir = require('temp-dir'); // TODO tests
+var __tmpDir = require('temp-dir'); // TODO tests
 
 /**
  * @name                            tmpDir

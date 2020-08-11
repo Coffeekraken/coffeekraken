@@ -2,6 +2,10 @@
 
 var _class, _temp;
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -24,15 +28,15 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __SCli = require('../../cli/SCli');
+var __SCli = require('../../cli/SCli');
 
-const __sugarConfig = require('../../config/sugar');
+var __sugarConfig = require('../../config/sugar');
 
-const __SBuildScssActionsStream = require('../../build/scss/SBuildScssActionsStream');
+var __SBuildScssActionsStream = require('../../build/scss/SBuildScssActionsStream');
 
-const __SPromise = require('../../promise/SPromise');
+var __SPromise = require('../../promise/SPromise');
 
-const __deepMerge = require('../../object/deepMerge');
+var __deepMerge = require('../../object/deepMerge');
 /**
  * @name            SBuildScssCli
  * @namespace           node.build.scss
@@ -119,15 +123,21 @@ module.exports = (_temp = _class = /*#__PURE__*/function (_SCli) {
         settings = {};
       }
 
-      return new __SPromise(async function (resolve, reject, trigger, cancel) {
-        const stream = new __SBuildScssActionsStream({});
-        const streamPromise = stream.start(argsObj);
+      return new __SPromise( /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator(function* (resolve, reject, trigger, cancel) {
+          var stream = new __SBuildScssActionsStream({});
+          var streamPromise = stream.start(argsObj);
 
-        __SPromise.pipe(streamPromise, this);
+          __SPromise.pipe(streamPromise, this);
 
-        const res = await streamPromise;
-        resolve(res.streamObj.data);
-      }, {
+          var res = yield streamPromise;
+          resolve(res.streamObj.data);
+        });
+
+        return function (_x, _x2, _x3, _x4) {
+          return _ref.apply(this, arguments);
+        };
+      }(), {
         id: 'cli.build.scss'
       }).start();
     }

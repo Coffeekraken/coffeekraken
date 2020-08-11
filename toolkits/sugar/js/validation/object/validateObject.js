@@ -29,7 +29,11 @@ var _SObjectValidationError = _interopRequireDefault(require("../../error/SObjec
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// TODO: tests
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 /**
  * @name            validateObject
@@ -97,7 +101,7 @@ function validateObject(objectToCheck, definitionObj, settings, _argPath) {
   } // loop on the definition object properties
 
 
-  for (var i = 0; i < Object.keys(definitionObj).length; i++) {
+  var _loop = function _loop(i) {
     var argName = Object.keys(definitionObj)[i];
     var argDefinition = definitionObj[argName];
     var value = (0, _get.default)(objectToCheck, argName); // get the correct value depending on the definitionObj
@@ -154,18 +158,26 @@ function validateObject(objectToCheck, definitionObj, settings, _argPath) {
       return true;
     }); // TODO implement the "children" support
     // check if we have some "children" properties
-    // if (argDefinition.children) {
-    //   const childrenValidation = validateObject(
-    //     objectToCheck[argName] || {},
-    //     argDefinition.children,
-    //     settings,
-    //     [..._argPath, argName]
-    //   );
-    //   if (childrenValidation !== true) {
-    //     if (settings.bySteps) return __parseHtml(childrenValidation);
-    //     issues = [...issues, ...childrenValidation];
-    //   }
-    // }
+
+    if (argDefinition.definitionObj) {
+      var childrenValidation = validateObject(objectToCheck || {}, argDefinition.definitionObj, _objectSpread(_objectSpread({}, settings), {}, {
+        throw: false
+      }), [..._argPath, argName]); // console.log('CC', childrenValidation);
+
+      if (childrenValidation !== true && childrenValidation.issues) {
+        childrenValidation.issues.forEach(issue => {
+          var issueObj = childrenValidation[issue];
+          issueObj.name = "".concat(argName, ".").concat(issueObj.name);
+          issuesObj.issues.push("".concat(argName, ".").concat(issue));
+          issuesObj["".concat(argName, ".").concat(issue)] = issueObj;
+        }); // if (settings.bySteps) return __parseHtml(childrenValidation);
+        // issues = [...issues, ...childrenValidation];
+      }
+    }
+  };
+
+  for (var i = 0; i < Object.keys(definitionObj).length; i++) {
+    _loop(i);
   }
 
   if (!issuesObj.issues.length) return true;

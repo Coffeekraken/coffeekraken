@@ -1,6 +1,7 @@
 const __SCli = require('../../cli/SCli');
 const __sugarConfig = require('../../config/sugar');
 const __deepMerge = require('../../object/deepMerge');
+const __SBuildNodeActionsStream = require('./SBuildNodeActionsStream');
 
 /**
  * @name            SBuildNodeCli
@@ -83,5 +84,11 @@ module.exports = class SBuildNodeCli extends __SCli {
         settings
       )
     );
+  }
+
+  _run(argsObj, settings = {}) {
+    const stream = new __SBuildNodeActionsStream();
+    const proc = stream.start(argsObj);
+    return proc;
   }
 };

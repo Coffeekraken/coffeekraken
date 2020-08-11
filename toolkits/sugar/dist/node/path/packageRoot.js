@@ -1,6 +1,6 @@
 "use strict";
 
-const __findPkgJson = require('find-package-json');
+var __findPkgJson = require('find-package-json');
 /**
  * @name                    packageRoot
  * @namespace           node.path
@@ -30,17 +30,17 @@ module.exports = function packageRoot(from, highest) {
     highest = false;
   }
 
-  const f = __findPkgJson(from);
+  var f = __findPkgJson(from);
 
-  let file = f.next();
+  var file = f.next();
 
   if (!highest) {
-    const filename = file.filename || false;
+    var filename = file.filename || false;
     if (!filename) return filename;
     return filename.split('/').slice(0, -1).join('/');
   }
 
-  let finalFile;
+  var finalFile;
 
   while (!file.done) {
     if (file.done) break;

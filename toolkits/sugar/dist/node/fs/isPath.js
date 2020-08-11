@@ -1,8 +1,8 @@
 "use strict";
 
-const __isValidPath = require('is-valid-path');
+var __isValidPath = require('is-valid-path');
 
-const __fs = require('fs'); // TODO tests
+var __fs = require('fs'); // TODO tests
 
 /**
  * @name                            isPath

@@ -2,6 +2,14 @@
 
 var _class, _temp2;
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -24,33 +32,33 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __childProcess = require('child_process');
+var __childProcess = require('child_process');
 
-const __deepMerge = require('../object/deepMerge');
+var __deepMerge = require('../object/deepMerge');
 
-const __SPromise = require('../promise/SPromise');
+var __SPromise = require('../promise/SPromise');
 
-const __hotkey = require('../keyboard/hotkey');
+var __hotkey = require('../keyboard/hotkey');
 
-const __uniqid = require('../string/uniqid');
+var __uniqid = require('../string/uniqid');
 
-const __argsToString = require('../cli/argsToString');
+var __argsToString = require('../cli/argsToString');
 
-const __watchCli = require('../../cli/fs/watch.cli');
+var __watchCli = require('../../cli/fs/watch.cli');
 
-const __minimatch = require('minimatch');
+var __minimatch = require('minimatch');
 
-const __SCli = require('../cli/SCli');
+var __SCli = require('../cli/SCli');
 
-const __spawn = require('../process/spawn');
+var __spawn = require('../process/spawn');
 
-const __replaceTokens = require('../string/replaceTokens');
+var __replaceTokens = require('../string/replaceTokens');
 
-const __notifier = require('node-notifier');
+var __notifier = require('node-notifier');
 
-const __packageRoot = require('../path/packageRoot');
+var __packageRoot = require('../path/packageRoot');
 
-const __path = require('path');
+var __path = require('path');
 /**
  * @name            SCommand
  * @namespace           node.terminal
@@ -216,7 +224,7 @@ module.exports = (_temp2 = _class = /*#__PURE__*/function (_SPromise) {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     value: function getCommandsByName(name) {
-      let returnCommandsArray = [];
+      var returnCommandsArray = [];
 
       SCommand._commandsStack.forEach(instance => {
         if (instance.name === name) returnCommandsArray.push(instance);
@@ -244,7 +252,7 @@ module.exports = (_temp2 = _class = /*#__PURE__*/function (_SPromise) {
   }, {
     key: "getCommandsByNamespace",
     value: function getCommandsByNamespace(namespace) {
-      let returnCommandsArray = [];
+      var returnCommandsArray = [];
       if (!namespace) return SCommand._commandsStack;
 
       SCommand._commandsStack.forEach(instance => {
@@ -278,7 +286,7 @@ module.exports = (_temp2 = _class = /*#__PURE__*/function (_SPromise) {
 
     // make sure the arguments are valid
     if (typeof command === 'string') {} else if (command instanceof __SCli) {} else {
-      throw new Error(`The "command" argument of the "SCommand" class constructor has to be one of these types: String,SCli...`);
+      throw new Error("The \"command\" argument of the \"SCommand\" class constructor has to be one of these types: String,SCli...");
     } // init subclass
 
 
@@ -374,7 +382,7 @@ module.exports = (_temp2 = _class = /*#__PURE__*/function (_SPromise) {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     value: function _initKey() {
-      __hotkey(`shift+${this._settings.key}`, {
+      __hotkey("shift+".concat(this._settings.key), {
         activeSpace: this._settings.activeSpace || null
       }).on('press', keyObj => {
         if (this.isRunning() && !this._settings.concurrent) {
@@ -392,10 +400,10 @@ module.exports = (_temp2 = _class = /*#__PURE__*/function (_SPromise) {
       }
 
       if (!definitionObj) return false;
-      const items = [];
+      var items = [];
       Object.keys(definitionObj).forEach(argName => {
-        const argDefinitionObj = definitionObj[argName];
-        const argValue = argsObj[argName] !== undefined ? argsObj[argName] : argDefinitionObj.default;
+        var argDefinitionObj = definitionObj[argName];
+        var argValue = argsObj[argName] !== undefined ? argsObj[argName] : argDefinitionObj.default;
         if (argDefinitionObj.level !== 1) return;
         items.push({
           id: argName,
@@ -452,63 +460,64 @@ module.exports = (_temp2 = _class = /*#__PURE__*/function (_SPromise) {
     key: "watch",
     value: function watch() {
       if (!this._settings.watch) {
-        throw new Error(`You try to launch the "watch" process on the command named "${this.name}" but you don't have specified the "settings.watch" configuration object...`);
+        throw new Error("You try to launch the \"watch\" process on the command named \"".concat(this.name, "\" but you don't have specified the \"settings.watch\" configuration object..."));
       }
 
       this._isWatching = true;
-      this.lastProcessObj.stdout.push(`Starting the watch process for the command "<yellow>${this.name}</yellow>"...`);
-      this.trigger('log', {
+      this.lastProcessObj.stdout.push("Starting the watch process for the command \"<yellow>".concat(this.name, "</yellow>\"..."));
+      this.trigger('log', _objectSpread({
         value: this.lastProcessObj.stdout[this.lastProcessObj.stdout.length - 1],
-        name: this.name,
-        ...this.lastProcessObj
-      });
+        name: this.name
+      }, this.lastProcessObj));
 
-      const commandLine = __argsToString({
+      var commandLine = __argsToString({
         pattern: typeof this._settings.watch === 'object' ? this._settings.watch.pattern : this._settings.watch
       }, __watchCli.definition);
 
-      this._watchProcess = __childProcess.spawn(`sugar fs.watch ${commandLine}`, {
+      this._watchProcess = __childProcess.spawn("sugar fs.watch ".concat(commandLine), {
         shell: true,
-        env: { ...process.env,
+        env: _objectSpread(_objectSpread({}, process.env), {}, {
           IS_CHILD_PROCESS: true
-        }
+        })
       });
-      let watchTimeout;
+      var watchTimeout;
 
       this._watchProcess.stdout.on('data', data => {
         // split the logged value
         if (Object.keys(data).length === 6) return; // @TODO weird protection... to check
 
-        const action = data.toString().split(':')[0];
-        const path = data.toString().split(':')[1];
+        var action = data.toString().split(':')[0];
+        var path = data.toString().split(':')[1];
 
         if (action === 'new') {
-          const msg = `A file has been <green>created</green>: <cyan>${path}</cyan>`;
+          var msg = "A file has been <green>created</green>: <cyan>".concat(path, "</cyan>");
           this.lastProcessObj.stdout.push(msg);
-          this.trigger('log', {
+          this.trigger('log', _objectSpread(_objectSpread({
             value: msg,
-            name: this.name,
-            ...this.lastProcessObj,
+            name: this.name
+          }, this.lastProcessObj), {}, {
             path
-          });
+          }));
         } else if (action === 'update') {
-          const msg = `A file has been <yellow>updated</yellow>: <cyan>${path}</cyan>`;
-          this.lastProcessObj.stdout.push(msg);
-          this.trigger('log', {
-            value: msg,
-            name: this.name,
-            ...this.lastProcessObj,
+          var _msg = "A file has been <yellow>updated</yellow>: <cyan>".concat(path, "</cyan>");
+
+          this.lastProcessObj.stdout.push(_msg);
+          this.trigger('log', _objectSpread(_objectSpread({
+            value: _msg,
+            name: this.name
+          }, this.lastProcessObj), {}, {
             path
-          });
+          }));
         } else if (action === 'delete') {
-          const msg = `A file has been <red>deleted</red>: <cyan>${path}</cyan>`;
-          this.lastProcessObj.stdout.push(msg);
-          this.trigger('log', {
-            value: msg,
-            name: this.name,
-            ...this.lastProcessObj,
+          var _msg2 = "A file has been <red>deleted</red>: <cyan>".concat(path, "</cyan>");
+
+          this.lastProcessObj.stdout.push(_msg2);
+          this.trigger('log', _objectSpread(_objectSpread({
+            value: _msg2,
+            name: this.name
+          }, this.lastProcessObj), {}, {
             path
-          });
+          }));
         }
 
         if (!this.isRunning()) {
@@ -516,7 +525,7 @@ module.exports = (_temp2 = _class = /*#__PURE__*/function (_SPromise) {
           clearTimeout(watchTimeout);
           watchTimeout = setTimeout(() => {
             // build the proper "argsObj"
-            const argsObj = {};
+            var argsObj = {};
 
             if (typeof this._settings.watch && this._settings.watch.mapToProperty) {
               argsObj[this._settings.watch.mapToProperty] = path;
@@ -542,7 +551,7 @@ module.exports = (_temp2 = _class = /*#__PURE__*/function (_SPromise) {
         this._isWatching = false;
         this.trigger('log', {
           name: this.name,
-          value: `The watch process has been stopped`
+          value: "The watch process has been stopped"
         });
       });
     }
@@ -584,7 +593,7 @@ module.exports = (_temp2 = _class = /*#__PURE__*/function (_SPromise) {
       // update the destroy state
       this._destroyed = true; // remove this command from the static commands stack
 
-      const instanceIdx = SCommand._commandsStack.indexOf(this);
+      var instanceIdx = SCommand._commandsStack.indexOf(this);
 
       if (instanceIdx !== -1) {
         SCommand._commandsStack.splice(instanceIdx, 1);
@@ -618,6 +627,8 @@ module.exports = (_temp2 = _class = /*#__PURE__*/function (_SPromise) {
   }, {
     key: "run",
     value: function run(argsObj, skipAsk) {
+      var _this3 = this;
+
       if (argsObj === void 0) {
         argsObj = this._settings.argsObj;
       }
@@ -627,137 +638,141 @@ module.exports = (_temp2 = _class = /*#__PURE__*/function (_SPromise) {
       }
 
       if (this._destroyed) {
-        throw new Error(`Sorry but this command named "${this.name}" has been destroyed...`);
+        throw new Error("Sorry but this command named \"".concat(this.name, "\" has been destroyed..."));
       }
 
       if (this.isRunning() && !this.concurrent) {
-        throw new Error(`Sorry but the command named "${this.name}" is already running...`);
+        throw new Error("Sorry but the command named \"".concat(this.name, "\" is already running..."));
       }
 
-      const promise = new __SPromise(async (resolve, reject, trigger, cancel) => {
-        if (this._settings.watch) this.unwatch(); // check if we have a before function to launch
+      var promise = new __SPromise( /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator(function* (resolve, reject, trigger, cancel) {
+          if (_this3._settings.watch) _this3.unwatch(); // check if we have a before function to launch
 
-        if (this._settings.before && typeof this._settings.before === 'function') {
-          const result = await this._settings.before(this);
+          if (_this3._settings.before && typeof _this3._settings.before === 'function') {
+            var _result = yield _this3._settings.before(_this3);
 
-          if (result !== true) {
-            throw new Error(result);
+            if (_result !== true) {
+              throw new Error(_result);
+            }
           }
-        }
 
-        clearTimeout(this._currentProcessSuccessTimeout);
-        this._currentProcess = {};
+          clearTimeout(_this3._currentProcessSuccessTimeout);
+          _this3._currentProcess = {};
 
-        if (!skipAsk) {
-          if (this._command instanceof __SCli) {
-            const answer = await this._ask({
-              type: 'summary',
-              items: this._buildSummaryItems(argsObj, this._command.definitionObj)
-            });
-            if (!Array.isArray(answer)) return;
-            answer.forEach(item => {
-              argsObj[item.id] = item.value;
+          if (!skipAsk) {
+            if (_this3._command instanceof __SCli) {
+              var answer = yield _this3._ask({
+                type: 'summary',
+                items: _this3._buildSummaryItems(argsObj, _this3._command.definitionObj)
+              });
+              if (!Array.isArray(answer)) return;
+              answer.forEach(item => {
+                argsObj[item.id] = item.value;
+              });
+            }
+          } // notification
+
+
+          if (_this3._settings.notification) {
+            __notifier.notify({
+              title: _this3.name,
+              message: "Starting the command \"".concat(_this3.name, "\""),
+              icon: _this3._settings.notification.runIconPath || false,
+              // Absolute path (doesn't work on balloons)
+              sound: false,
+              // Only Notification Center or Windows Toasters
+              wait: false // Wait with callback, until user action is taken against notification, does not apply to Windows Toasters as they always wait or notify-send as it does not support the wait option
+
             });
           }
-        } // notification
+
+          if (_this3._command instanceof __SCli) {
+            _this3._currentProcess.childProcessPromise = _this3._runSCli(argsObj);
+          } else if (typeof _this3._command === 'string') {
+            _this3._currentProcess.childProcessPromise = __spawn(__replaceTokens(_this3._command, argsObj));
+          }
+
+          _this3._processesStack.push(_this3._currentProcess);
+
+          if (_this3._settings.log) {
+            __SPromise.log(_this3._currentProcess.childProcessPromise, _this3._settings.log === true ? {} : _this3._settings.log);
+          } // init the child process
 
 
-        if (this._settings.notification) {
-          __notifier.notify({
-            title: this.name,
-            message: `Starting the command "${this.name}"`,
-            icon: this._settings.notification.runIconPath || false,
-            // Absolute path (doesn't work on balloons)
-            sound: false,
-            // Only Notification Center or Windows Toasters
-            wait: false // Wait with callback, until user action is taken against notification, does not apply to Windows Toasters as they always wait or notify-send as it does not support the wait option
-
+          _this3._currentProcess.childProcessPromise.on('*', (data, stack) => {
+            _this3._processesStack[_this3._processesStack.length - 1] = _objectSpread(_objectSpread({}, _this3._processesStack[_this3._processesStack.length - 1]), data && data.process ? data.process : data || {});
           });
-        }
 
-        if (this._command instanceof __SCli) {
-          this._currentProcess.childProcessPromise = this._runSCli(argsObj);
-        } else if (typeof this._command === 'string') {
-          this._currentProcess.childProcessPromise = __spawn(__replaceTokens(this._command, argsObj));
-        }
+          _this3._currentProcess.childProcessPromise.on('close', data => {
+            _this3._currentProcess = null;
+            console.log("#success sss ".concat(data.code, " - ").concat(data.signal)); // if (data.code === 0 && !data.signal) return;
 
-        this._processesStack.push(this._currentProcess);
+            if (_this3._settings.notification) {
+              __notifier.notify({
+                title: _this3.name,
+                message: "Command closed with code \"".concat(data.code, "\" and signal ").concat(data.signal),
+                icon: _this3._settings.notification.errorIconPath || false,
+                // Absolute path (doesn't work on balloons)
+                sound: false,
+                // Only Notification Center or Windows Toasters
+                wait: false // Wait with callback, until user action is taken against notification, does not apply to Windows Toasters as they always wait or notify-send as it does not support the wait option
 
-        if (this._settings.log) {
-          __SPromise.log(this._currentProcess.childProcessPromise, this._settings.log === true ? {} : this._settings.log);
-        } // init the child process
+              });
+            }
+          });
+
+          _this3._currentProcess.childProcessPromise.on('success', () => {
+            if (_this3._settings.notification) {
+              __notifier.notify({
+                title: _this3.name,
+                message: "Command finished successfully!",
+                icon: _this3._settings.notification.successIconPath || false,
+                // Absolute path (doesn't work on balloons)
+                sound: false,
+                // Only Notification Center or Windows Toasters
+                wait: false // Wait with callback, until user action is taken against notification, does not apply to Windows Toasters as they always wait or notify-send as it does not support the wait option
+
+              });
+            }
+
+            _this3._currentProcessSuccessTimeout = setTimeout(() => {
+              if (_this3._settings.watch) _this3.watch();
+            }, 2000);
+          });
+
+          _this3._currentProcess.childProcessPromise.on('error', () => {
+            if (_this3._settings.notification) {
+              __notifier.notify({
+                title: _this3.name,
+                message: "Error!",
+                icon: _this3._settings.notification.errorIconPath || false,
+                // Absolute path (doesn't work on balloons)
+                sound: false,
+                // Only Notification Center or Windows Toasters
+                wait: false // Wait with callback, until user action is taken against notification, does not apply to Windows Toasters as they always wait or notify-send as it does not support the wait option
+
+              });
+            }
+          }); // check if we have an after function to launch
 
 
-        this._currentProcess.childProcessPromise.on('*', (data, stack) => {
-          this._processesStack[this._processesStack.length - 1] = { ...this._processesStack[this._processesStack.length - 1],
-            ...(data && data.process ? data.process : data || {})
-          };
+          if (_this3._settings.after && typeof _this3._settings.after === 'function') {
+            var _result2 = yield _this3._settings.after(_this3);
+
+            if (_result2 !== true) {
+              throw new Error(_result2);
+            }
+          }
+
+          var result = yield _this3._currentProcess.childProcessPromise;
+          resolve(result);
         });
 
-        this._currentProcess.childProcessPromise.on('close', data => {
-          this._currentProcess = null;
-          console.log(`#success sss ${data.code} - ${data.signal}`); // if (data.code === 0 && !data.signal) return;
-
-          if (this._settings.notification) {
-            __notifier.notify({
-              title: this.name,
-              message: `Command closed with code "${data.code}" and signal ${data.signal}`,
-              icon: this._settings.notification.errorIconPath || false,
-              // Absolute path (doesn't work on balloons)
-              sound: false,
-              // Only Notification Center or Windows Toasters
-              wait: false // Wait with callback, until user action is taken against notification, does not apply to Windows Toasters as they always wait or notify-send as it does not support the wait option
-
-            });
-          }
-        });
-
-        this._currentProcess.childProcessPromise.on('success', () => {
-          if (this._settings.notification) {
-            __notifier.notify({
-              title: this.name,
-              message: `Command finished successfully!`,
-              icon: this._settings.notification.successIconPath || false,
-              // Absolute path (doesn't work on balloons)
-              sound: false,
-              // Only Notification Center or Windows Toasters
-              wait: false // Wait with callback, until user action is taken against notification, does not apply to Windows Toasters as they always wait or notify-send as it does not support the wait option
-
-            });
-          }
-
-          this._currentProcessSuccessTimeout = setTimeout(() => {
-            if (this._settings.watch) this.watch();
-          }, 2000);
-        });
-
-        this._currentProcess.childProcessPromise.on('error', () => {
-          if (this._settings.notification) {
-            __notifier.notify({
-              title: this.name,
-              message: `Error!`,
-              icon: this._settings.notification.errorIconPath || false,
-              // Absolute path (doesn't work on balloons)
-              sound: false,
-              // Only Notification Center or Windows Toasters
-              wait: false // Wait with callback, until user action is taken against notification, does not apply to Windows Toasters as they always wait or notify-send as it does not support the wait option
-
-            });
-          }
-        }); // check if we have an after function to launch
-
-
-        if (this._settings.after && typeof this._settings.after === 'function') {
-          const result = await this._settings.after(this);
-
-          if (result !== true) {
-            throw new Error(result);
-          }
-        }
-
-        const result = await this._currentProcess.childProcessPromise;
-        resolve(result);
-      }).start();
+        return function (_x, _x2, _x3, _x4) {
+          return _ref.apply(this, arguments);
+        };
+      }()).start();
 
       __SPromise.pipe(this._currentProcess.childProcessPromise, promise, {
         processor: (value, stacks) => {
@@ -813,7 +828,7 @@ module.exports = (_temp2 = _class = /*#__PURE__*/function (_SPromise) {
   }, {
     key: "_ask",
     value: function _ask(question) {
-      const _this = this;
+      var _this = this;
 
       return new __SPromise((resolve, reject, trigger, cancel) => {
         switch (question.type) {
@@ -828,7 +843,7 @@ module.exports = (_temp2 = _class = /*#__PURE__*/function (_SPromise) {
               resolve,
               reject,
               items: question.items,
-              question: question.question || `Are that command details ok for you? (y/n)`,
+              question: question.question || "Are that command details ok for you? (y/n)",
               type: 'summary'
             });
             break;
@@ -874,7 +889,7 @@ module.exports = (_temp2 = _class = /*#__PURE__*/function (_SPromise) {
 
   }, {
     key: "name",
-    get: function () {
+    get: function get() {
       return this._name;
     }
     /**
@@ -889,7 +904,7 @@ module.exports = (_temp2 = _class = /*#__PURE__*/function (_SPromise) {
 
   }, {
     key: "title",
-    get: function () {
+    get: function get() {
       return this._settings.title;
     }
     /**
@@ -904,7 +919,7 @@ module.exports = (_temp2 = _class = /*#__PURE__*/function (_SPromise) {
 
   }, {
     key: "key",
-    get: function () {
+    get: function get() {
       return this._settings.key;
     }
     /**
@@ -919,7 +934,7 @@ module.exports = (_temp2 = _class = /*#__PURE__*/function (_SPromise) {
 
   }, {
     key: "namespace",
-    get: function () {
+    get: function get() {
       return this._settings.namespace.toLowerCase();
     }
     /**
@@ -934,12 +949,12 @@ module.exports = (_temp2 = _class = /*#__PURE__*/function (_SPromise) {
 
   }, {
     key: "color",
-    get: function () {
+    get: function get() {
       return this._settings.color;
     }
   }, {
     key: "state",
-    get: function () {
+    get: function get() {
       return this.lastProcessObj ? this.lastProcessObj.state : 'idle';
     }
     /**
@@ -954,7 +969,7 @@ module.exports = (_temp2 = _class = /*#__PURE__*/function (_SPromise) {
 
   }, {
     key: "concurrent",
-    get: function () {
+    get: function get() {
       return this._settings.concurrent;
     }
     /**
@@ -969,7 +984,7 @@ module.exports = (_temp2 = _class = /*#__PURE__*/function (_SPromise) {
 
   }, {
     key: "command",
-    get: function () {
+    get: function get() {
       return this._command;
     }
     /**
@@ -984,7 +999,7 @@ module.exports = (_temp2 = _class = /*#__PURE__*/function (_SPromise) {
 
   }, {
     key: "lastProcessObj",
-    get: function () {
+    get: function get() {
       if (!this._processesStack.length) {
         if (!this._processObjWhenNoLastOne) this._processObjWhenNoLastOne = {
           stdout: [],
@@ -1007,7 +1022,7 @@ module.exports = (_temp2 = _class = /*#__PURE__*/function (_SPromise) {
 
   }, {
     key: "runningProcessObj",
-    get: function () {
+    get: function get() {
       if (this.isRunning()) return this._currentProcess;
       return null;
     }
@@ -1023,7 +1038,7 @@ module.exports = (_temp2 = _class = /*#__PURE__*/function (_SPromise) {
 
   }, {
     key: "processesStack",
-    get: function () {
+    get: function get() {
       return this._processesStack;
     }
   }]);

@@ -9,7 +9,8 @@ const __toString = require('../string/toString');
 const __stripAnsi = require('strip-ansi');
 const __trimLines = require('../string/trimLines');
 const __extractValues = require('../object/extractValues');
-const __SOutputProcessInterface = require('./SOutputProcessInterface');
+const __SOutputProcessInterface = require('./interface/SOutputProcessInterface');
+const __SOutputLogInterface = require('./interface/SOutputLogInterface');
 
 /**
  * @name                  SOutput
@@ -99,7 +100,6 @@ module.exports = class SOutput extends __SComponent {
     const _settings = __deepMerge(
       {
         filter: null,
-        clearOnStart: true,
         // maxItems: -1,
         maxItemsByGroup: 1
       },
@@ -139,106 +139,8 @@ module.exports = class SOutput extends __SComponent {
         //   this.clear();
         // }
       })
-      .on('log', (data, metas) => {
-        if (__isChildProcess()) {
-          console.log(__toString(data));
-          return;
-        }
-
-        let logsArray = [];
-        if (typeof data === 'string') {
-          const splitedLogs = data.split(/⠀/);
-          splitedLogs.forEach((log) => {
-            if (log.trim() === '') return;
-            log = log.replace(/⠀{0,9999999}/g, '').trim();
-            const parsedLog = __parse(log);
-            if (
-              typeof parsedLog === 'object' &&
-              parsedLog.value &&
-              typeof parsedLog.value === 'string'
-            ) {
-              logsArray.push(parsedLog);
-            } else if (typeof parsedLog === 'string') {
-              logsArray.push({
-                value: parsedLog
-              });
-            }
-          });
-        } else if (
-          typeof data === 'object' &&
-          data.value &&
-          typeof data.value === 'string'
-        ) {
-          const splitedLogs = data.value.split(/⠀/);
-          splitedLogs.forEach((log) => {
-            if (log.trim() === '') return;
-            log = log.replace(/⠀{0,9999999}/g, '').trim();
-            const parsedLog = __parse(log);
-            if (
-              typeof parsedLog === 'object' &&
-              parsedLog.value &&
-              typeof parsedLog.value === 'string'
-            ) {
-              logsArray.push({
-                ...data,
-                ...parsedLog
-              });
-            } else if (typeof parsedLog === 'string') {
-              logsArray.push({
-                ...data,
-                value: parsedLog
-              });
-            }
-          });
-        }
-
-        logsArray.forEach((logObj) => {
-          // handle special logs like #clear, etc...
-          if (logObj.value === '#clear') {
-            this.clear();
-            return;
-          }
-
-          // default logs value
-          // logObj = {
-          //   mb: 1,
-          //   mt: 0,
-          //   ...logObj
-          // };
-
-          // special syntax
-          const syntaxReg = /#[a-zA-Z0-9_-]+(:[a-zA-Z0-9\.-_]+)?/gm;
-          const syntaxMatches = logObj.value.match(syntaxReg);
-
-          if (syntaxMatches) {
-            syntaxMatches.forEach((arg) => {
-              logObj.value = logObj.value.replace(arg, '');
-
-              arg = arg.replace('#', '');
-              const splits = arg.split(':');
-              const argName = splits[0];
-              const value = splits[1] ? __parse(splits[1]) : null;
-
-              logObj[argName] = value !== null ? value : true;
-            });
-
-            logObj.value = logObj.value.trim();
-          }
-
-          if (
-            this._settings.filter &&
-            typeof this._settings.filter === 'function'
-          ) {
-            const res = this._settings.filter(logObj, metas);
-            if (res === false) return;
-            if (res !== true) logObj = res;
-          }
-
-          // setTimeout(() => {
-          this.log(logObj);
-          // }, 200);
-        });
-        // this.update();
+      .on('log', (...data) => {
+        this.log(...data);
       });
     // .on('error', (data) => {
     //   if (data.error) {
@@ -274,12 +176,13 @@ module.exports = class SOutput extends __SComponent {
    */
   _clearTimeout = null;
   _allowClear = true;
-  _updateTimeout = false;
   clear() {
-    nativeConsole.trace('CLEAS');
-    throw 'CCO';
     if (__isChildProcess()) {
-      console.log('#clear');
+      console.log(
+        __toString({
+          clear: true
+        })
+      );
     } else {
       clearTimeout(this._clearTimeout);
       this._clearTimeout = setTimeout(() => {
@@ -295,11 +198,6 @@ module.exports = class SOutput extends __SComponent {
         });
         this._logBoxChilds = [];
         this.update();
-        this._updateTimeout = true;
-        setTimeout(() => {
-          this._updateTimeout = false;
-          this.update();
-        }, 200);
       }
     }
   }
@@ -308,6 +206,93 @@ module.exports = class SOutput extends __SComponent {
     content = content.trim();
     content = __parseMarkdown(content);
     return content;
+  }
+
+  /**
+   * @name          _parseLog
+   * @type          Function
+   * @private
+   *
+   * This method take a simple string or a complexe data object and parse them to
+   * generate a nicely formated log object to pass to the ```log``` method.
+   *
+   * @param       {String|Object}           data           The log data to parse
+   * @return      {Array<Object>}                           An array of nicely formated log object
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _parseLog(...args) {
+    let logsArray = [];
+
+    args.forEach((data) => {
+      if (typeof data === 'string') {
+        const splitedLogs = data.split(/⠀/);
+        splitedLogs.forEach((log) => {
+          if (log.trim() === '') return;
+          log = log.replace(/⠀{0,9999999}/g, '').trim();
+          const parsedLog = __parse(log);
+          if (
+            typeof parsedLog === 'object' &&
+            parsedLog.value &&
+            typeof parsedLog.value === 'string'
+          ) {
+            parsedLog = __SOutputLogInterface.applyAndComplete(parsedLog);
+            logsArray.push(parsedLog);
+          } else if (typeof parsedLog === 'string') {
+            if (parsedLog.includes(' -v ') || parsedLog.includes(' --value ')) {
+              const args = __SOutputLogInterface.parseAndComplete(parsedLog);
+              logsArray.push(args);
+            } else {
+              const args = __SOutputLogInterface.complete({
+                value: parsedLog
+              });
+              logsArray.push(args);
+            }
+          }
+        });
+      } else if (
+        typeof data === 'object' &&
+        data.value &&
+        typeof data.value === 'string'
+      ) {
+        // apply the interface
+        data = __SOutputLogInterface.applyAndComplete(data);
+
+        const splitedLogs = data.value.split(/⠀/);
+        splitedLogs.forEach((log) => {
+          if (log.trim() === '') return;
+          log = log.replace(/⠀{0,9999999}/g, '').trim();
+          const parsedLog = __parse(log);
+          if (
+            typeof parsedLog === 'object' &&
+            parsedLog.value &&
+            typeof parsedLog.value === 'string'
+          ) {
+            __SOutputLogInterface.apply(parsedLog);
+            logsArray.push({
+              ...data,
+              ...parsedLog
+            });
+          } else if (typeof parsedLog === 'string') {
+            if (parsedLog.includes(' -v ') || parsedLog.includes(' --value ')) {
+              const args = __SOutputLogInterface.parseAndComplete(parsedLog);
+              logsArray.push({
+                ...data,
+                ...args
+              });
+            } else {
+              logsArray.push({
+                ...data,
+                value: parsedLog
+              });
+            }
+          }
+        });
+      }
+    });
+
+    return logsArray;
   }
 
   /**
@@ -321,8 +306,7 @@ module.exports = class SOutput extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   log(...args) {
-    let logsObjArray = args;
-    let currentGroup = null;
+    let logsObjArray = this._parseLog(...args);
 
     // filter the content to remove the "temp" logs
     this._content = this._content.filter((logObj) => {
@@ -335,6 +319,15 @@ module.exports = class SOutput extends __SComponent {
     });
 
     logsObjArray.forEach((logObj) => {
+      if (
+        this._settings.filter &&
+        typeof this._settings.filter === 'function'
+      ) {
+        const res = this._settings.filter(logObj);
+        if (res === false) return;
+        if (res !== true) logObj = res;
+      }
+
       if (__isChildProcess()) {
         console.log(__toString(logObj));
         return;
@@ -407,11 +400,12 @@ module.exports = class SOutput extends __SComponent {
    */
   _lastY = 1;
   _logBoxChilds = [];
-  _stuperUpdateTimeout = null;
   update() {
     if (__isChildProcess()) return;
-    // if (this._updateTimeout) return;
+    if (!this.allowRender()) return;
     if (!this.isDisplayed()) return;
+
+    this._lastY = 1;
 
     if (!this._content.length) {
       super.update();
@@ -419,32 +413,47 @@ module.exports = class SOutput extends __SComponent {
     }
 
     this._content.forEach((item) => {
-      try {
-        if (item.$box) {
-        } else if (item.value && typeof item.value === 'string') {
-          const $box = this._simpleTextBox(item.value);
-          $box.top = this._lastY + item.mt;
-          this._logBoxChilds.push($box);
-          this._logBox.append($box);
-          item.$box = $box;
-          this._lastY += $box.getScrollHeight() + item.mt + item.mb;
-        } else if (typeof item === 'object' && item.group) {
-          const $box = this._groupBox(item.group, item.content);
-          $box.top = this._lastY;
-          this._logBoxChilds.push($box);
-          item.$box = $box;
-          this._logBox.append($box);
-          this._lastY += $box.getScrollHeight() + item.mt + item.mb;
+      if (item.$box) {
+        if (item.group) {
+          let contentArray;
+          if (this._settings.maxItemsByGroup) {
+            contentArray = item.content.slice(
+              this._settings.maxItemsByGroup * -1
+            );
+          } else {
+            contentArray = item.content;
+          }
+          const logsString = __extractValues(contentArray, 'value').join('\n');
+          item.$box.setContent(
+            __trimLines(`${item.$box.title}
+               ${__parseMarkdown(logsString)}`)
+          );
+          item.$box.height = logsString.split('\n').length + 1;
+          item.$box.$line.height = logsString.split('\n').length + 1;
+        } else {
         }
-      } catch (e) {
-        throw e;
+
+        item.$box.top = this._lastY + (item.mt || 0);
+        this._lastY +=
+          item.$box.getScrollHeight() + (item.mt || 0) + (item.mb || 1);
+      } else if (item.value && typeof item.value === 'string') {
+        const $box = this._simpleTextBox(item.value);
+        $box.top = this._lastY + item.mt;
+        this._logBoxChilds.push($box);
+        this._logBox.append($box);
+        item.$box = $box;
+        this._lastY += $box.getScrollHeight() + item.mt + item.mb;
+      } else if (typeof item === 'object' && item.group) {
+        const $box = this._groupBox(item.group, item.content);
+        $box.top = this._lastY;
+        this._logBoxChilds.push($box);
+        item.$box = $box;
+        this._logBox.append($box);
+        this._lastY += $box.getScrollHeight() + 1;
       }
     });
-    clearTimeout(this._superUpdateTimeout);
-    this._superUpdateTimeout = setTimeout(() => {
-      this._logBox.setScrollPerc(100);
-      super.update();
-    }, 50);
+    this._logBox.setScrollPerc(100);
+    super.update();
   }
 
   /**
@@ -540,20 +549,22 @@ module.exports = class SOutput extends __SComponent {
         : `<yellow>${group}</yellow>`
     );
 
-    if (this._settings.maxItemsByGroup === -1) {
-      const logsString = __extractValues(textsArray, 'value').join('\n');
-      $box.setContent(
-        __trimLines(`${title}
-      ${__parseMarkdown(logsString)}`)
-      );
-    } else {
-      const contents = textsArray.slice(this._settings.maxItemsByGroup * -1);
-      const logsString = __extractValues(contents, 'value').join('\n');
-      $box.setContent(
-        __trimLines(`${title}
-      ${__parseMarkdown(logsString)}`)
-      );
-    }
+    $box.title = title;
+
+    // if (this._settings.maxItemsByGroup === -1) {
+    //   const logsString = __extractValues(textsArray, 'value').join('\n');
+    //   $box.setContent(
+    //     __trimLines(`${title}
+    //   ${__parseMarkdown(logsString)}`)
+    //   );
+    // } else {
+    //   const contents = textsArray.slice(this._settings.maxItemsByGroup * -1);
+    //   const logsString = __extractValues(contents, 'value').join('\n');
+    //   $box.setContent(
+    //     __trimLines(`${title}
+    //   ${__parseMarkdown(logsString)}`)
+    //   );
+    // }
 
     const $line = __blessed.box({
       width: 1,
@@ -569,6 +580,8 @@ module.exports = class SOutput extends __SComponent {
     if (color === 'red') {
       $line.style.bg = 'red';
     }
+
+    $box.$line = $line;
 
     $box.on('attach', () => {
       setTimeout(() => {

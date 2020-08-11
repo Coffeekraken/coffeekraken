@@ -1,6 +1,6 @@
 "use strict";
 
-const __parseHtml = require('./parseHtml'); // TODO tests
+var __parseHtml = require('./parseHtml'); // TODO tests
 
 /**
  * @name                                parseMarkdown
@@ -17,7 +17,7 @@ const __parseHtml = require('./parseHtml'); // TODO tests
 
 
 module.exports = function parseMarkdown(message) {
-  let isArray = false;
+  var isArray = false;
 
   if (Array.isArray(message)) {
     isArray = true;
@@ -26,38 +26,38 @@ module.exports = function parseMarkdown(message) {
   }
 
   message = message.map(m => {
-    const h1Reg = /#\s(.*\n?)/g;
-    const h1Matches = m.match(h1Reg);
+    var h1Reg = /#\s(.*\n?)/g;
+    var h1Matches = m.match(h1Reg);
 
     if (h1Matches) {
-      m = m.replace(h1Matches[0], `<h1>${h1Matches[0].replace(/^#\s/, '').trim()}</h1>`);
+      m = m.replace(h1Matches[0], "<h1>".concat(h1Matches[0].replace(/^#\s/, '').trim(), "</h1>"));
     }
 
-    const h2Reg = /##\s(.*\n?)/g;
-    const h2Matches = m.match(h2Reg);
+    var h2Reg = /##\s(.*\n?)/g;
+    var h2Matches = m.match(h2Reg);
 
     if (h2Matches) {
-      m = m.replace(h2Matches[0], `<h2>${h2Matches[0].replace(/^##\s/, '').trim()}</h2>`);
+      m = m.replace(h2Matches[0], "<h2>".concat(h2Matches[0].replace(/^##\s/, '').trim(), "</h2>"));
     }
 
     if (m.match(/^#success\s/)) {
-      m = `<iCheck/> ${m.replace(/^#success\s/, '')}`;
+      m = "<iCheck/> ".concat(m.replace(/^#success\s/, ''));
     }
 
     if (m.match(/^#start\s/)) {
-      m = `<iStart/> ${m.replace(/^#start\s/, '')}`;
+      m = "<iStart/> ".concat(m.replace(/^#start\s/, ''));
     }
 
     if (m.match(/^#error\s/)) {
-      m = `<iCross/> ${m.replace(/^#error\s/, '')}`;
+      m = "<iCross/> ".concat(m.replace(/^#error\s/, ''));
     }
 
     if (m.match(/^#warning\s/)) {
-      m = `<iWarn/> ${m.replace(/^#warning\s/, '')}`;
+      m = "<iWarn/> ".concat(m.replace(/^#warning\s/, ''));
     }
 
     if (m.match(/^#warn\s/)) {
-      m = `<iWarn/> ${m.replace(/^#warn\s/, '')}`;
+      m = "<iWarn/> ".concat(m.replace(/^#warn\s/, ''));
     }
 
     return __parseHtml(m.trim());

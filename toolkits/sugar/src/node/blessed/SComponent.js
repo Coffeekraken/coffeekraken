@@ -113,7 +113,7 @@ module.exports = class SComponent extends __blessed.box {
       this._isDisplayed = true;
       setTimeout(() => {
         this.update();
-      }, 1000);
+      }, 200);
     });
     this.on('detach', () => {
       this._isDisplayed = false;
@@ -122,10 +122,15 @@ module.exports = class SComponent extends __blessed.box {
     // save the settings
     this._settings = settings;
 
+    this._allowRender = true;
+    this._renderBuffer = setInterval(() => {
+      this._allowRender = true;
+    }, 100);
+
     // set render interval if not set already
-    if (!SComponent._renderInterval) {
-      this.setRenderInterval(100);
-    }
+    // if (!SComponent._renderInterval) {
+    //   this.setRenderInterval(100);
+    // }
 
     let container;
     if (settings.container) {
@@ -138,6 +143,7 @@ module.exports = class SComponent extends __blessed.box {
       once: true
     }).on('press', async () => {
       this._destroyed = true;
+      this._allowRender = false;
       this.detach();
     });
 
@@ -171,11 +177,11 @@ module.exports = class SComponent extends __blessed.box {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   setRenderInterval(interval) {
-    clearInterval(SComponent._renderInterval);
-    SComponent._renderInterval = setInterval(() => {
-      if (!this.isDisplayed()) return;
-      (global.screen || this.screen).render();
-    }, interval);
+    // clearInterval(SComponent._renderInterval);
+    // SComponent._renderInterval = setInterval(() => {
+    //   if (!this.isDisplayed()) return;
+    //   (global.screen || this.screen).render();
+    // }, interval);
   }
 
   /**
@@ -205,6 +211,14 @@ module.exports = class SComponent extends __blessed.box {
    */
   update() {
     if (this.isDestroyed()) return;
+    if (!this._allowRender) {
+      clearTimeout(this._updateTimeout);
+      this._updateTimeout = setTimeout(() => {
+        this.update();
+      }, 20);
+      return;
+    }
+    this._allowRender = false;
     if (this._screen) this._screen.render();
   }
 
@@ -234,5 +248,22 @@ module.exports = class SComponent extends __blessed.box {
    */
   isDestroyed() {
     return this._destroyed === true;
+  }
+
+  /**
+   * @name                  allowRender
+   * @type                  Function
+   *
+   * Check if the component allow a render at this particular time
+   *
+   * @since         2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  allowRender() {
+    clearTimeout(this._updateTimeout);
+    this._updateTimeout = setTimeout(() => {
+      this.update();
+    }, 20);
+    return this._allowRender;
   }
 };

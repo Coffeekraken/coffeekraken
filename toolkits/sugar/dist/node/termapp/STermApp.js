@@ -16,17 +16,17 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-const __SApp = require('../blessed/app/SApp');
+var __SApp = require('../blessed/app/SApp');
 
-const __deepMerge = require('../object/deepMerge');
+var __deepMerge = require('../object/deepMerge');
 
-const __SConfig = require('../config/SConfig');
+var __SConfig = require('../config/SConfig');
 
-const __SConfigFsAdapter = require('../config/adapters/SConfigFsAdapter');
+var __SConfigFsAdapter = require('../config/adapters/SConfigFsAdapter');
 
-const __packageRoot = require('../path/packageRoot');
+var __packageRoot = require('../path/packageRoot');
 
-const __exitCleanup = require('../process/exitCleanup');
+var __exitCleanup = require('../process/exitCleanup');
 /**
  * @name            STermApp
  * @namespace           node.termapp

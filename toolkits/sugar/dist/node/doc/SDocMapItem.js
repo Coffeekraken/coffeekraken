@@ -10,23 +10,23 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __deepMerge = require('../object/deepMerge');
+var __deepMerge = require('../object/deepMerge');
 
-const __isPath = require('../is/path');
+var __isPath = require('../is/path');
 
-const __fs = require('fs');
+var __fs = require('fs');
 
-const __SDocblock = require('../docblock/SDocblock');
+var __SDocblock = require('../docblock/SDocblock');
 
-const __path = require('path');
+var __path = require('path');
 
-const __packageRoot = require('../path/packageRoot');
+var __packageRoot = require('../path/packageRoot');
 
-const __stripTags = require('../html/striptags');
+var __stripTags = require('../html/striptags');
 
-const __getFilename = require('../fs/filename');
+var __getFilename = require('../fs/filename');
 
-const __namespace = require('../package/namespace');
+var __namespace = require('../package/namespace');
 /**
  * @name              SDocMapItem
  * @namespace           node.doc
@@ -127,7 +127,7 @@ module.exports = (_temp = /*#__PURE__*/function () {
     this._settings = __deepMerge({}, settings); // check if the passed source is a file or not
 
     if (__isPath(source, true)) {
-      let path = __packageRoot();
+      var path = __packageRoot();
 
       if (settings.output && typeof settings.output === 'string') path = settings.output.split('/').slice(0, -1).join('/');
       this._path = __path.relative(path, source);
@@ -168,9 +168,9 @@ module.exports = (_temp = /*#__PURE__*/function () {
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     value: function _buildFromDocblock() {
-      const docblock = new __SDocblock(this._source);
+      var docblock = new __SDocblock(this._source);
       if (!docblock.blocks[0]) return;
-      const firstBlock = docblock.blocks[0]; // extract the infos
+      var firstBlock = docblock.blocks[0]; // extract the infos
 
       this._namespace = __namespace(firstBlock.object.namespace || '');
       this._name = firstBlock.object.name;
@@ -207,21 +207,21 @@ module.exports = (_temp = /*#__PURE__*/function () {
     key: "_buildFromSimpleSource",
     value: function _buildFromSimpleSource() {
       // trying to get the namespace and name from comments
-      const nameReg = /(<!--|\/\/)\s@name\s+(.+)\s?(-->)?/gm;
+      var nameReg = /(<!--|\/\/)\s@name\s+(.+)\s?(-->)?/gm;
 
-      const nameMatches = this._source.match(nameReg);
+      var nameMatches = this._source.match(nameReg);
 
       if (nameMatches) {
-        const name = nameMatches[0].replace('//', '').replace('<!--', '').replace('-->', '').replace('@name', '').trim();
+        var name = nameMatches[0].replace('//', '').replace('<!--', '').replace('-->', '').replace('@name', '').trim();
         this._name = name;
       }
 
-      const namespaceReg = /(<!--|\/\/)\s@namespace\s+(.+)\s?(-->)?/gm;
+      var namespaceReg = /(<!--|\/\/)\s@namespace\s+(.+)\s?(-->)?/gm;
 
-      const namespaceMatches = this._source.match(namespaceReg);
+      var namespaceMatches = this._source.match(namespaceReg);
 
       if (namespaceMatches) {
-        const namespace = namespaceMatches[0].replace('//', '').replace('<!--', '').replace('-->', '').replace('@namespace', '').trim();
+        var namespace = namespaceMatches[0].replace('//', '').replace('<!--', '').replace('-->', '').replace('@namespace', '').trim();
         this._namespace = __namespace(namespace);
       }
 
@@ -234,7 +234,7 @@ module.exports = (_temp = /*#__PURE__*/function () {
 
       if (/^#{1,6}\s?.*/gm.exec(this._source)) {
         // extracting the titles
-        const titlesMatches = this._source.match(/^#{1,6}\s?.*/gm);
+        var titlesMatches = this._source.match(/^#{1,6}\s?.*/gm);
 
         if (titlesMatches) {
           this._name = __stripTags(titlesMatches[0]).replace(/#{1,6}/, '').trim();
@@ -243,7 +243,7 @@ module.exports = (_temp = /*#__PURE__*/function () {
     }
   }, {
     key: "name",
-    get: function () {
+    get: function get() {
       return this._name;
     }
     /**
@@ -258,7 +258,7 @@ module.exports = (_temp = /*#__PURE__*/function () {
 
   }, {
     key: "namespace",
-    get: function () {
+    get: function get() {
       return this._namespace;
     }
     /**
@@ -273,7 +273,7 @@ module.exports = (_temp = /*#__PURE__*/function () {
 
   }, {
     key: "path",
-    get: function () {
+    get: function get() {
       return this._path;
     }
   }]);

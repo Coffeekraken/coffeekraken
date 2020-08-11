@@ -1,8 +1,8 @@
 "use strict";
 
-const __packageRoot = require('./rootPath');
+var __packageRoot = require('./rootPath');
 
-const __fs = require('fs');
+var __fs = require('fs');
 /**
  * @name          json
  * @namespace     node.package
@@ -31,7 +31,7 @@ module.exports = function json(from, highest) {
     highest = false;
   }
 
-  const path = `${__packageRoot(from, highest)}/package.json`;
+  var path = "".concat(__packageRoot(from, highest), "/package.json");
   if (!__fs.existsSync(path)) return false;
   return require(path);
 };

@@ -24,34 +24,34 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __deepMerge = require('../../object/deepMerge');
+var __deepMerge = require('../../object/deepMerge');
 
-const __blessed = require('blessed');
+var __blessed = require('blessed');
 
-const __parseHtml = require('../../terminal/parseHtml');
+var __parseHtml = require('../../terminal/parseHtml');
 
-const __splitEvery = require('../../string/splitEvery');
+var __splitEvery = require('../../string/splitEvery');
 
-const __countLine = require('../../string/countLine');
+var __countLine = require('../../string/countLine');
 
-const __uniqid = require('../../string/uniqid');
+var __uniqid = require('../../string/uniqid');
 
-const __sugarConfig = require('../../config/sugar');
+var __sugarConfig = require('../../config/sugar');
 
-const {
+var {
   print,
   stringify
 } = require('q-i');
 
-const __SPromise = require('../../promise/SPromise');
+var __SPromise = require('../../promise/SPromise');
 
-const __color = require('../../color/color');
+var __color = require('../../color/color');
 
-const __hotkey = require('../../keyboard/hotkey');
+var __hotkey = require('../../keyboard/hotkey');
 
-const __clone = require('../../object/clone');
+var __clone = require('../../object/clone');
 
-const __SComponent = require('../SComponent');
+var __SComponent = require('../SComponent');
 /**
  * @name                    SLogPanel
  * @namespace           node.blessed
@@ -163,7 +163,7 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
     _defineProperty(_assertThisInitialized(_this), "_name", null);
 
     if (!/^[a-zA-Z0-9\._-\s]+$/.test(_this._settings.name)) {
-      throw new Error(`The name of an SLog instance can contain only letters like [a-zA-Z0-9_-. ]...`);
+      throw new Error("The name of an SLog instance can contain only letters like [a-zA-Z0-9_-. ]...");
     }
 
     _this._name = _this._settings.name; // render the screen
@@ -326,9 +326,9 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
 
       if (!Array.isArray(message)) message = [message];
 
-      const logSettings = __deepMerge(this._settings, settings);
+      var logSettings = __deepMerge(this._settings, settings);
 
-      let lines = [];
+      var lines = [];
       message.forEach(m => {
         // check message type
         switch (typeof m) {
@@ -339,7 +339,7 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
 
         if (Array.isArray(m)) m = stringify(m);
         m = __parseHtml(m || '');
-        let beforeLog = logSettings.beforeLog;
+        var beforeLog = logSettings.beforeLog;
 
         if (beforeLog) {
           if (typeof beforeLog === 'function') {
@@ -353,7 +353,7 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
           beforeLog = '';
         }
 
-        let beforeEachLine = logSettings.beforeEachLine;
+        var beforeEachLine = logSettings.beforeEachLine;
 
         if (beforeEachLine) {
           if (typeof beforeEachLine === 'function') {
@@ -367,11 +367,11 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
           beforeEachLine = '';
         }
 
-        let formatedBeforeEachLine = __parseHtml(beforeEachLine);
+        var formatedBeforeEachLine = __parseHtml(beforeEachLine);
 
-        let formatedBeforeLog = __parseHtml(beforeLog);
+        var formatedBeforeLog = __parseHtml(beforeLog);
 
-        let formatedMessage = m; // split lines
+        var formatedMessage = m; // split lines
 
         formatedMessage = formatedMessage.split('\n');
         formatedMessage.map((line, i) => {

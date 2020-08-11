@@ -681,13 +681,6 @@ export default class SPromise extends Promise {
     let stackArray = [];
 
     if (typeof stack === 'string') {
-      // make sure the stack exist
-      // if (!this._stacks[stack]) {
-      //   this._registerNewStacks(stack);
-      // }
-
-      if (stack === 'log') await __wait();
-
       if (this._stacks[stack]) {
         stackArray = [...stackArray, ...this._stacks[stack]];
       }

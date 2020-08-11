@@ -10,27 +10,27 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __typeof = require('../value/typeof');
+var __typeof = require('../value/typeof');
 
-const __buildCommandLine = require('./buildCommandLine');
+var __buildCommandLine = require('./buildCommandLine');
 
-const __validateCliDefinitionObject = require('../validation/cli/validateCliDefinitionObject');
+var __validateCliDefinitionObject = require('../validation/cli/validateCliDefinitionObject');
 
-const __SChildProcess = require('../process/SChildProcess');
+var __SChildProcess = require('../process/SChildProcess');
 
-const __deepMerge = require('../object/deepMerge');
+var __deepMerge = require('../object/deepMerge');
 
-const __parseHtml = require('../terminal/parseHtml');
+var __parseHtml = require('../terminal/parseHtml');
 
-const __argsToObject = require('../cli/argsToObject');
+var __argsToObject = require('../cli/argsToObject');
 
-const __isChildProcess = require('../is/childProcess');
+var __isChildProcess = require('../is/childProcess');
 
-const __output = require('../process/output');
+var __output = require('../process/output');
 
-const __parseArgs = require('../cli/parseArgs');
+var __parseArgs = require('../cli/parseArgs');
 
-const __toString = require('../string/toString');
+var __toString = require('../string/toString');
 /**
  * @name                SCli
  * @namespace           node.cli
@@ -177,20 +177,20 @@ module.exports = (_temp = /*#__PURE__*/function () {
       // );
       // check static properties
       if (!this.constructor.command || typeof this.constructor.command !== 'string') {
-        throw new Error(__parseHtml(`An <green>SCli</green> based class like your "<yellow>${this.constructor.name}</yellow>" MUST have a "<cyan>command</cyan>" static string property...`));
+        throw new Error(__parseHtml("An <green>SCli</green> based class like your \"<yellow>".concat(this.constructor.name, "</yellow>\" MUST have a \"<cyan>command</cyan>\" static string property...")));
       }
 
       if (!this.constructor.definitionObj || typeof this.constructor.definitionObj !== 'object') {
-        throw new Error(__parseHtml(`An <green>SCli</green> based class like your "<yellow>${this.constructor.name}</yellow>" MUST have a "<cyan>definitionObj</cyan>" static object property...`));
+        throw new Error(__parseHtml("An <green>SCli</green> based class like your \"<yellow>".concat(this.constructor.name, "</yellow>\" MUST have a \"<cyan>definitionObj</cyan>\" static object property...")));
       } // existence of the ```_run``` method
 
 
       if (!this._run || typeof this._run !== 'function') {
-        throw new Error(__parseHtml(`An <green>SCli</green> based class like your "<yellow>${this.constructor.name}</yellow>" MUST has a "<cyan>_run</cyan>" method that has to be responsible of executing your process when calling the "run" method...`));
+        throw new Error(__parseHtml("An <green>SCli</green> based class like your \"<yellow>".concat(this.constructor.name, "</yellow>\" MUST has a \"<cyan>_run</cyan>\" method that has to be responsible of executing your process when calling the \"run\" method...")));
       } // check definition object
 
 
-      const definitionObjCheck = __validateCliDefinitionObject(this.definitionObj);
+      var definitionObjCheck = __validateCliDefinitionObject(this.definitionObj);
 
       if (definitionObjCheck !== true) throw new Error(definitionObjCheck);
     }
@@ -237,20 +237,20 @@ module.exports = (_temp = /*#__PURE__*/function () {
       }
 
       if (this._runningProcess) {
-        throw new Error(`You cannot spawn multiple "${this.constructor.name}" process at the same time. Please kill the currently running one using the "kill" method...`);
+        throw new Error("You cannot spawn multiple \"".concat(this.constructor.name, "\" process at the same time. Please kill the currently running one using the \"kill\" method..."));
       }
 
       settings = __deepMerge(this._settings, settings); // make sure we have an object as args
 
-      paramsObj = __deepMerge(this._settings.defaultParamsObj, paramsObj);
       paramsObj = __argsToObject(paramsObj, this.definitionObj);
+      paramsObj = __deepMerge(this._settings.defaultParamsObj, paramsObj);
 
       if (__isChildProcess()) {
         // run the process
         this._runningProcess = this._run(paramsObj, settings);
 
         if (settings.output) {
-          const outputSettings = typeof settings.output === 'object' ? settings.output : {};
+          var outputSettings = typeof settings.output === 'object' ? settings.output : {};
 
           __output(this._runningProcess, outputSettings);
         }
@@ -265,7 +265,7 @@ module.exports = (_temp = /*#__PURE__*/function () {
 
         return this._runningProcess;
       } else {
-        const childProcess = new __SChildProcess(this.commandString, {
+        var childProcess = new __SChildProcess(this.commandString, {
           id: settings.id,
           definitionObj: this.definitionObj,
           defaultParamsObj: settings.defaultParamsObj
@@ -273,15 +273,15 @@ module.exports = (_temp = /*#__PURE__*/function () {
         this._runningProcess = childProcess.run(paramsObj);
 
         if (settings.output) {
-          const outputSettings = typeof settings.output === 'object' ? settings.output : {};
+          var _outputSettings = typeof settings.output === 'object' ? settings.output : {};
 
-          __output(this._runningProcess, outputSettings);
+          __output(this._runningProcess, _outputSettings);
         }
       }
 
       this._runningProcess.trigger('log', {
         temp: true,
-        value: `Launching the SCli "<primary>${this._settings.name || this._settings.id}</primary>" process...`
+        value: "Launching the SCli \"<primary>".concat(this._settings.name || this._settings.id, "</primary>\" process...")
       }); // save running process params
 
 
@@ -362,7 +362,7 @@ module.exports = (_temp = /*#__PURE__*/function () {
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    get: function () {
+    get: function get() {
       return this.constructor.command;
     }
     /**
@@ -377,7 +377,7 @@ module.exports = (_temp = /*#__PURE__*/function () {
 
   }, {
     key: "definitionObj",
-    get: function () {
+    get: function get() {
       return Object.assign({}, this.constructor.definitionObj);
     }
     /**
@@ -392,7 +392,7 @@ module.exports = (_temp = /*#__PURE__*/function () {
 
   }, {
     key: "runningParamsObj",
-    get: function () {
+    get: function get() {
       return this._runningParamsObj || {};
     }
   }], [{

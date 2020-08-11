@@ -1,6 +1,6 @@
 "use strict";
 
-const __PhpSCli = require('./SPhpServerCli');
+var __PhpSCli = require('./SPhpServerCli');
 /**
  * @name                php
  * @namespace           node.server.php
@@ -30,6 +30,6 @@ module.exports = function (args) {
     args = {};
   }
 
-  const cli = new __PhpSCli();
+  var cli = new __PhpSCli();
   return cli.spawn(args);
 };

@@ -2,6 +2,10 @@
 
 var _class, _temp;
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -28,19 +32,19 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __SActionsStreamAction = require('../SActionsStreamAction');
+var __SActionsStreamAction = require('../SActionsStreamAction');
 
-const __packageRoot = require('../../path/packageRoot');
+var __packageRoot = require('../../path/packageRoot');
 
-const __fs = require('fs');
+var __fs = require('fs');
 
-const __ensureDirSync = require('../../fs/ensureDirSync');
+var __ensureDirSync = require('../../fs/ensureDirSync');
 
-const __deepMerge = require('../../object/deepMerge');
+var __deepMerge = require('../../object/deepMerge');
 
-const __md5 = require('../../crypt/md5');
+var __md5 = require('../../crypt/md5');
 
-const __writeJsonSync = require('../../fs/writeJsonSync');
+var __writeJsonSync = require('../../fs/writeJsonSync');
 /**
  * @name            SFsCacheStreamAction
  * @namespace           node.stream.actions
@@ -109,73 +113,83 @@ module.exports = (_temp = _class = /*#__PURE__*/function (_SActionsStreamActio) 
   _createClass(SFsCacheStreamAction, [{
     key: "run",
     value: function run(streamObj, settings) {
+      var _this = this;
+
       if (settings === void 0) {
         settings = this._settings;
       }
 
-      return _get(_getPrototypeOf(SFsCacheStreamAction.prototype), "run", this).call(this, streamObj, async (resolve, reject, trigger, cancel) => {
-        // make sure we have the cache directory
-        __ensureDirSync(streamObj.cacheDir); // generate the id
+      return _get(_getPrototypeOf(SFsCacheStreamAction.prototype), "run", this).call(this, streamObj, /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator(function* (resolve, reject, trigger, cancel) {
+          // make sure we have the cache directory
+          __ensureDirSync(streamObj.cacheDir); // generate the id
 
 
-        const id = `${this._settings.id}-${__md5.encrypt(streamObj[settings.idProperty])}`; // check if the output files exists or not
+          var id = "".concat(_this._settings.id, "-").concat(__md5.encrypt(streamObj[settings.idProperty])); // check if the output files exists or not
 
-        let outputFilesExists = true;
+          var outputFilesExists = true;
 
-        if (streamObj.outputStack) {
-          Object.keys(streamObj.outputStack).forEach(key => {
-            const path = streamObj.outputStack[key];
+          if (streamObj.outputStack) {
+            Object.keys(streamObj.outputStack).forEach(key => {
+              var path = streamObj.outputStack[key];
 
-            if (!__fs.existsSync(path)) {
-              outputFilesExists = false;
-            }
-          });
-        } // cache file path
+              if (!__fs.existsSync(path)) {
+                outputFilesExists = false;
+              }
+            });
+          } // cache file path
 
 
-        const cacheFilePath = `${streamObj.cacheDir}/${id}.json`; // generate cache function
+          var cacheFilePath = "".concat(streamObj.cacheDir, "/").concat(id, ".json"); // generate cache function
 
-        function generateCache(streamObj) {
-          return new Promise((resolve, reject) => {
-            __writeJsonSync(cacheFilePath, {
-              streamObj,
-              _sugarVersion: require(`${__packageRoot(__dirname)}/package.json`).version
+          function generateCache(streamObj) {
+            return new Promise((resolve, reject) => {
+              __writeJsonSync(cacheFilePath, {
+                streamObj,
+                _sugarVersion: require("".concat(__packageRoot(__dirname), "/package.json")).version
+              });
+
+              resolve(streamObj);
+            });
+          } // check if the cache file exists
+          // or if the output files does not exists
+
+
+          if (!__fs.existsSync(cacheFilePath) || !outputFilesExists) {
+            _this.registerCallback(generateCache, 'after');
+
+            return resolve(streamObj);
+          } // get the timestamp of each files
+
+
+          var inputStats = __fs.statSync(streamObj.input);
+
+          var cacheStats = __fs.statSync(cacheFilePath); // check if the input file is newer that the cache one
+
+
+          if (inputStats.mtimeMs > cacheStats.mtimeMs) {
+            _this.registerCallback(generateCache, 'after');
+          } else {
+            // load the cache file
+            var cacheJson = require(cacheFilePath); // restore the streamObject
+
+
+            streamObj = cacheJson.streamObj; // specify to the ActionStream that we need to skip all the next actions
+
+            trigger('log', {
+              value: "Skipping the next actions cause the data have been <primary>laoded from the cache</primary>..."
             });
 
-            resolve(streamObj);
-          });
-        } // check if the cache file exists
-        // or if the output files does not exists
+            _this.skipNextActions();
+          }
 
+          resolve(streamObj);
+        });
 
-        if (!__fs.existsSync(cacheFilePath) || !outputFilesExists) {
-          this.registerCallback(generateCache, 'after');
-          return resolve(streamObj);
-        } // get the timestamp of each files
-
-
-        const inputStats = __fs.statSync(streamObj.input);
-
-        const cacheStats = __fs.statSync(cacheFilePath); // check if the input file is newer that the cache one
-
-
-        if (inputStats.mtimeMs > cacheStats.mtimeMs) {
-          this.registerCallback(generateCache, 'after');
-        } else {
-          // load the cache file
-          const cacheJson = require(cacheFilePath); // restore the streamObject
-
-
-          streamObj = cacheJson.streamObj; // specify to the ActionStream that we need to skip all the next actions
-
-          trigger('log', {
-            value: `Skipping the next actions cause the data have been <primary>laoded from the cache</primary>...`
-          });
-          this.skipNextActions();
-        }
-
-        resolve(streamObj);
-      });
+        return function (_x, _x2, _x3, _x4) {
+          return _ref.apply(this, arguments);
+        };
+      }());
     }
   }]);
 
@@ -188,6 +202,6 @@ module.exports = (_temp = _class = /*#__PURE__*/function (_SActionsStreamActio) 
   cacheDir: {
     type: 'String',
     required: true,
-    default: `${__packageRoot()}/.cache/SFsCacheStreamAction`
+    default: "".concat(__packageRoot(), "/.cache/SFsCacheStreamAction")
   }
 }), _temp);

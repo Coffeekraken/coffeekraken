@@ -27,12 +27,12 @@ module.exports = function header(title, description, infos) {
     infos = {};
   }
 
-  const columns = process.env.STDOUT_COLUMNS || process.stdout.columns;
-  let message = '<br/>';
+  var columns = process.env.STDOUT_COLUMNS || process.stdout.columns;
+  var message = '<br/>';
   message += '<br/>';
-  message += `${'#'.repeat(columns)}`;
+  message += "".concat('#'.repeat(columns));
   message += '<br/>';
-  message += `<red>${title}</red>`;
+  message += "<red>".concat(title, "</red>");
   message += '<br/>';
   message += '<br/> ';
 
@@ -44,12 +44,12 @@ module.exports = function header(title, description, infos) {
 
 
   Object.keys(infos).forEach(key => {
-    message += `<bold><cyan>${key.charAt(0).toUpperCase() + key.slice(1)}</cyan></bold>: ${infos[key]}\n`;
+    message += "<bold><cyan>".concat(key.charAt(0).toUpperCase() + key.slice(1), "</cyan></bold>: ").concat(infos[key], "\n");
   });
   message += '<br/>';
   message += '<br/>';
   message += '\n';
-  message += `${'#'.repeat(columns)}`;
+  message += "".concat('#'.repeat(columns));
   message += '<br/>'; // return the message
 
   return message;

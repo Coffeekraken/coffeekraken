@@ -1,6 +1,6 @@
 "use strict";
 
-const __packageRoot = require('../path/packageRoot');
+var __packageRoot = require('../path/packageRoot');
 /**
  * @name          rootPath
  * @namespace     node.package

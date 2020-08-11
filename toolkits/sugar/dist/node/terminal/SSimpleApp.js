@@ -20,23 +20,23 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-const __SApp = require('./SApp');
+var __SApp = require('./SApp');
 
-const __SHeader = require('./SHeader');
+var __SHeader = require('./SHeader');
 
-const __deepMerge = require('../object/deepMerge');
+var __deepMerge = require('../object/deepMerge');
 
-const __blessed = require('blessed');
+var __blessed = require('blessed');
 
-const __parseHtml = require('./parseHtml');
+var __parseHtml = require('./parseHtml');
 
-const __splitEvery = require('../string/splitEvery');
+var __splitEvery = require('../string/splitEvery');
 
-const __countLine = require('../string/countLine');
+var __countLine = require('../string/countLine');
 
-const __parseSchema = require('../url/parseSchema');
+var __parseSchema = require('../url/parseSchema');
 
-const __sugarConfig = require('../config/sugar');
+var __sugarConfig = require('../config/sugar');
 /**
  * @name                    SSimpleApp
  * @namespace           node.terminal
@@ -101,19 +101,19 @@ module.exports = /*#__PURE__*/function (_SApp) {
     key: "_layout",
     value: function _layout(content) {
       // make a container box
-      const container = __blessed.box({
+      var container = __blessed.box({
         width: '100%',
         height: '100%'
       }); // preparing the menu
 
 
-      let menuString = '';
+      var menuString = '';
       Object.keys(this._settings.menu).forEach((url, i) => {
-        const menuObj = this._settings.menu[url];
-        menuString += this.isActive(url) ? `<bgBlack> ${menuObj.title} </bgBlack>` : `<black> ${menuObj.title} </black>`;
+        var menuObj = this._settings.menu[url];
+        menuString += this.isActive(url) ? "<bgBlack> ".concat(menuObj.title, " </bgBlack>") : "<black> ".concat(menuObj.title, " </black>");
       });
-      let headerContent = `<black>Coffeekraken Sugar</black>\n` + `{right}${menuString}{/right}`;
-      const header = new __SHeader(headerContent, {
+      var headerContent = "<black>Coffeekraken Sugar</black>\n" + "{right}".concat(menuString, "{/right}");
+      var header = new __SHeader(headerContent, {
         blessed: {
           style: {
             bg: __sugarConfig('colors.primary.color')

@@ -135,25 +135,21 @@ var SActionStreamAction = /*#__PURE__*/function (_SPromise) {
 
     _defineProperty(_assertThisInitialized(_this), "_registeredCallbacks", []);
 
-    if (!_this._settings.id) _this._settings.id = _this.constructor.name.toLowerCase();
+    if (!_this._settings.id) _this._settings.id = _this.constructor.name.toLowerCase(); // if (
+    //   !this.constructor.definitionObj ||
+    //   !Object.keys(this.constructor.definitionObj).length
+    // ) {
+    //   throw new Error(
+    //     `Sorry but your class "<yellow>${this.constructor.name}</yellow>" does not have the required <yellow>static</yellow> <cyan>definitionObj</cyan> property...`
+    //   );
+    // }
+    // check the definition object
 
-    if (!_this.constructor.definitionObj) {
-      throw new Error("Sorry but your class \"".concat(_this.constructor.name, "\" does not have the required \"definitionObj\" static property..."));
-    } // check the definition object
+    if (_this.constructor.definitionObj) {
+      (0, _validateObjectDefinitionObject.default)(_this.constructor.definitionObj);
+    }
 
-
-    setTimeout(() => {
-      var validatekDefinitionObjResult = (0, _validateObjectDefinitionObject.default)(_this.constructor.definitionObj);
-
-      if (validatekDefinitionObjResult !== true) {
-        throw new Error(validatekDefinitionObjResult);
-      }
-    });
-
-    _get((_thisSuper = _assertThisInitialized(_this), _getPrototypeOf(SActionStreamAction.prototype)), "start", _thisSuper).call(_thisSuper); // this.catch((e) => {
-    //   console.log('error');
-    // });
-
+    _get((_thisSuper = _assertThisInitialized(_this), _getPrototypeOf(SActionStreamAction.prototype)), "start", _thisSuper).call(_thisSuper);
 
     return _this;
   }
@@ -174,20 +170,17 @@ var SActionStreamAction = /*#__PURE__*/function (_SPromise) {
      * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     value: function checkStreamObject(streamObj) {
-      // handle "default" property of the definition object
+      if (!this.constructor.definitionObj) return true; // handle "default" property of the definition object
+
       Object.keys(this.constructor.definitionObj).forEach(key => {
         if (streamObj[key] === undefined && this.constructor.definitionObj[key].default !== undefined) {
           streamObj[key] = this.constructor.definitionObj[key].default;
         }
       }); // validate the streamObj depending on the static definitionObj property
 
-      var checkWithDefinitionObjectResult = (0, _validateObject.default)(streamObj, this.constructor.definitionObj);
-
-      if (checkWithDefinitionObjectResult !== true) {
-        throw new Error(checkWithDefinitionObjectResult);
-      } // throw new Error(checkWithDefinitionObjectResult);
-      // this.trigger('error', checkWithDefinitionObjectResult);
-
+      if (this.constructor.definitionObj) {
+        (0, _validateObject.default)(streamObj, this.constructor.definitionObj);
+      }
     }
     /**
      * @name          skipNextActions

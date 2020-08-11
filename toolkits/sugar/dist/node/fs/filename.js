@@ -1,6 +1,6 @@
 "use strict";
 
-const __extension = require('./extension'); // TODO tests
+var __extension = require('./extension'); // TODO tests
 
 /**
  * @name                       filename
@@ -26,7 +26,7 @@ module.exports = function filename(path, withExtension) {
     withExtension = true;
   }
 
-  let filename = path.split('/').pop();
+  var filename = path.split('/').pop();
 
   if (!withExtension) {
     filename = filename.replace(__extension(filename), '');

@@ -103,6 +103,13 @@ export default class SActionStream extends __SPromise {
     );
     super.start();
 
+    // check that we have a definition object defined
+    // if (!this.constructor.definitionObj) {
+    //   throw new Error(
+    //     `You class "<yellow>${this.constructor.name}</yellow>" has to have a <yellow>static</yellow> <cyan>definitionObj</cyan> property defined...`
+    //   );
+    // }
+
     // check the actions
     Object.keys(actions).forEach((actionName) => {
       const actionInstance = actions[actionName];
@@ -424,16 +431,18 @@ export default class SActionStream extends __SPromise {
                 else currentStreamObj = currentActionReturn;
                 currentActionReturn = null;
               } catch (e) {
-                if (typeof e === 'object') {
-                  actionObj.stderr.push(
-                    `#error <red>${e.name}</red>: ${e.message}`
-                  );
-                  throw new Error(`${e.message}`);
-                } else if (typeof e === 'string') {
-                  actionObj.stderr.push(e);
-                  // trigger an "event"
-                  throw new Error(`${e}`);
-                }
+                // if (typeof e === 'object') {
+                //   throw e;
+                //   actionObj.stderr.push(
+                //     `#error <red>${e.name}</red>: ${e.message}`
+                //   );
+                //   throw new Error(`${e.message}`);
+                // } else if (typeof e === 'string') {
+                //   actionObj.stderr.push(e);
+                //   // trigger an "event"
+                //   throw new Error(`${e}`);
+                // }
+                throw e;
                 this._exitCode = 1;
                 cancel(actionObj);
               }
@@ -631,11 +640,6 @@ export default class SActionStream extends __SPromise {
         // resolve this stream process
         this.dispatch('complete', overallActionsStats);
         resolve(overallActionsStats);
-
-        // if (this._settings.exitOnComplete) {
-        //   console.log('#error ENDNE');
-        //   process.exit(this._exitCode);
-        // }
       },
       {
         id: this._settings.id

@@ -20,15 +20,15 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-const __fs = require('fs');
+var __fs = require('fs');
 
-const __deepMerge = require('../../object/deepMerge');
+var __deepMerge = require('../../object/deepMerge');
 
-const __writeFileSync = require('../../fs/writeFileSync');
+var __writeFileSync = require('../../fs/writeFileSync');
 
-const __diff = require('../../object/diff');
+var __diff = require('../../object/diff');
 
-const __SConfigAdapter = require('./SConfigAdapter');
+var __SConfigAdapter = require('./SConfigAdapter');
 /**
  * @name                  SConfigFolderAdapter
  * @namespace           node.config.adapters
@@ -79,59 +79,59 @@ module.exports = /*#__PURE__*/function (_SConfigAdapter) {
       this._appConfig = {};
       this._userConfig = {}; // load the default config if exists
 
-      if (!process.env[`SConfigFolderAdapter-${this.settings.defaultConfigPath}`] && this.settings.defaultConfigPath && __fs.existsSync(this.settings.defaultConfigPath)) {
-        process.env[`SConfigFolderAdapter-${this.settings.defaultConfigPath}`] = true;
+      if (!process.env["SConfigFolderAdapter-".concat(this.settings.defaultConfigPath)] && this.settings.defaultConfigPath && __fs.existsSync(this.settings.defaultConfigPath)) {
+        process.env["SConfigFolderAdapter-".concat(this.settings.defaultConfigPath)] = true;
 
         __fs.readdirSync(this.settings.defaultConfigPath).forEach(file => {
           if (!file.includes(this.settings.filename.replace('[name]', ''))) return;
           if (this._defaultConfig[file.replace('.config.js', '')] !== undefined) return;
-          this._defaultConfig[file.replace('.config.js', '')] = require(`${this.settings.defaultConfigPath}/${file}`); // this._defaultConfig[file.replace('.config.js', '')] = require(this
+          this._defaultConfig[file.replace('.config.js', '')] = require("".concat(this.settings.defaultConfigPath, "/").concat(file)); // this._defaultConfig[file.replace('.config.js', '')] = require(this
           //   .settings.defaultConfigPath +
           //   '/' +
           //   file);
         });
 
-        process.env[`SConfigFolderAdapter-${this.settings.defaultConfigPath}`] = JSON.stringify(this._defaultConfig);
-      } else if (process.env[`SConfigFolderAdapter-${this.settings.defaultConfigPath}`]) {
-        this._defaultConfig = JSON.parse(process.env[`SConfigFolderAdapter-${this.settings.defaultConfigPath}`]);
+        process.env["SConfigFolderAdapter-".concat(this.settings.defaultConfigPath)] = JSON.stringify(this._defaultConfig);
+      } else if (process.env["SConfigFolderAdapter-".concat(this.settings.defaultConfigPath)]) {
+        this._defaultConfig = JSON.parse(process.env["SConfigFolderAdapter-".concat(this.settings.defaultConfigPath)]);
       } // load the app config if exists
 
 
-      if (!process.env[`SConfigFolderAdapter-${this.settings.appConfigPath}`] && this.settings.defaultConfigPath !== this.settings.appConfigPath && this.settings.appConfigPath && __fs.existsSync(this.settings.appConfigPath)) {
-        process.env[`SConfigFolderAdapter-${this.settings.appConfigPath}`] = true; // intermediate value
+      if (!process.env["SConfigFolderAdapter-".concat(this.settings.appConfigPath)] && this.settings.defaultConfigPath !== this.settings.appConfigPath && this.settings.appConfigPath && __fs.existsSync(this.settings.appConfigPath)) {
+        process.env["SConfigFolderAdapter-".concat(this.settings.appConfigPath)] = true; // intermediate value
 
         __fs.readdirSync(this.settings.appConfigPath).forEach(file => {
           if (!file.includes(this.settings.filename.replace('[name]', ''))) return;
-          this._defaultConfig[file.replace('.config.js', '')] = require(`${this.settings.appConfigPath}/${file}`); // this._appConfig[file.replace('.config.js', '')] = require(this.settings
+          this._defaultConfig[file.replace('.config.js', '')] = require("".concat(this.settings.appConfigPath, "/").concat(file)); // this._appConfig[file.replace('.config.js', '')] = require(this.settings
           //   .appConfigPath +
           //   '/' +
           //   file);
         });
 
-        process.env[`SConfigFolderAdapter-${this.settings.appConfigPath}`] = JSON.stringify(this._appConfig);
-      } else if (process.env[`SConfigFolderAdapter-${this.settings.appConfigPath}`]) {
-        this._appConfig = JSON.parse(process.env[`SConfigFolderAdapter-${this.settings.appConfigPath}`]);
+        process.env["SConfigFolderAdapter-".concat(this.settings.appConfigPath)] = JSON.stringify(this._appConfig);
+      } else if (process.env["SConfigFolderAdapter-".concat(this.settings.appConfigPath)]) {
+        this._appConfig = JSON.parse(process.env["SConfigFolderAdapter-".concat(this.settings.appConfigPath)]);
       } // load the user config
 
 
-      if (!process.env[`SConfigFolderAdapter-${this.settings.userConfigPath}`] && this.settings.defaultConfigPath !== this.settings.userConfigPath && this.settings.appConfigPath !== this.settings.userConfigPath && this.settings.userConfigPath && __fs.existsSync(this.settings.userConfigPath)) {
-        process.env[`SConfigFolderAdapter-${this.settings.userConfigPath}`] = true; // intermediate value
+      if (!process.env["SConfigFolderAdapter-".concat(this.settings.userConfigPath)] && this.settings.defaultConfigPath !== this.settings.userConfigPath && this.settings.appConfigPath !== this.settings.userConfigPath && this.settings.userConfigPath && __fs.existsSync(this.settings.userConfigPath)) {
+        process.env["SConfigFolderAdapter-".concat(this.settings.userConfigPath)] = true; // intermediate value
 
         __fs.readdirSync(this.settings.userConfigPath).forEach(file => {
           if (!file.includes(this.settings.filename.replace('[name]', ''))) return;
-          this._defaultConfig[file.replace('.config.js', '')] = require(`${this.settings.userConfigPath}/${file}`); // this._userConfig[file.replace('.config.js', '')] = require(this.settings
+          this._defaultConfig[file.replace('.config.js', '')] = require("".concat(this.settings.userConfigPath, "/").concat(file)); // this._userConfig[file.replace('.config.js', '')] = require(this.settings
           //   .userConfigPath +
           //   '/' +
           //   file);
         });
 
-        process.env[`SConfigFolderAdapter-${this.settings.userConfigPath}`] = JSON.stringify(this._userConfig);
-      } else if (process.env[`SConfigFolderAdapter-${this.settings.userConfigPath}`]) {
-        this._userConfig = JSON.parse(process.env[`SConfigFolderAdapter-${this.settings.userConfigPath}`]);
+        process.env["SConfigFolderAdapter-".concat(this.settings.userConfigPath)] = JSON.stringify(this._userConfig);
+      } else if (process.env["SConfigFolderAdapter-".concat(this.settings.userConfigPath)]) {
+        this._userConfig = JSON.parse(process.env["SConfigFolderAdapter-".concat(this.settings.userConfigPath)]);
       } // mix the configs and save them in the instance
 
 
-      const n = __deepMerge(this._defaultConfig, this._appConfig, this._userConfig);
+      var n = __deepMerge(this._defaultConfig, this._appConfig, this._userConfig);
 
       return n;
     }
@@ -143,17 +143,15 @@ module.exports = /*#__PURE__*/function (_SConfigAdapter) {
       }
 
       if (!this.settings.userConfigPath) {
-        throw new Error(`You try to save the config "${this.name}" but the "settings.userConfigPath" is not set...`);
+        throw new Error("You try to save the config \"".concat(this.name, "\" but the \"settings.userConfigPath\" is not set..."));
       }
 
-      const baseConfig = __deepMerge(this._defaultConfig, this._appConfig);
+      var baseConfig = __deepMerge(this._defaultConfig, this._appConfig);
 
       Object.keys(baseConfig).forEach(name => {
-        const configToSave = __diff(baseConfig[name], newConfig[name] || {});
+        var configToSave = __diff(baseConfig[name], newConfig[name] || {});
 
-        let newConfigString = `
-      module.exports = ${JSON.stringify(configToSave)};
-    `; // write the new config file
+        var newConfigString = "\n      module.exports = ".concat(JSON.stringify(configToSave), ";\n    "); // write the new config file
 
         __writeFileSync(this.settings.userConfigPath + '/' + this.settings.filename.replace('[name]', name), newConfigString);
       });

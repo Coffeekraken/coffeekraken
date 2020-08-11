@@ -28,11 +28,11 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __deepMerge = require('../../../object/deepMerge');
+var __deepMerge = require('../../../object/deepMerge');
 
-const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
+var __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
 
-const __terser = require('terser');
+var __terser = require('terser');
 /**
  * @name                STerserStreamAction
  * @namespace           node.build.js.actions
@@ -101,7 +101,7 @@ module.exports = (_temp = _class = /*#__PURE__*/function (_SActionsStreamActio) 
         // minify the "data"
         if (!streamObj.prod) return resolve(streamObj);
 
-        const terserResult = __terser.minify(streamObj.data, __deepMerge({
+        var terserResult = __terser.minify(streamObj.data, __deepMerge({
           output: {
             comments: false
           },

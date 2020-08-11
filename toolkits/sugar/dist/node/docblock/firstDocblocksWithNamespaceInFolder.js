@@ -1,20 +1,30 @@
 "use strict";
 
-const __deepMerge = require('../object/deepMerge');
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-const __findInFiles = require('find-in-files');
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
-const __minimatch = require('minimatch');
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __fs = require('fs');
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
-const __path = require('path');
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-const __getFilename = require('../fs/filename');
+var __deepMerge = require('../object/deepMerge');
 
-const __extension = require('../fs/extension');
+var __findInFiles = require('find-in-files');
 
-const __SDocblock = require('./SDocblock');
+var __minimatch = require('minimatch');
+
+var __fs = require('fs');
+
+var __path = require('path');
+
+var __getFilename = require('../fs/filename');
+
+var __extension = require('../fs/extension');
+
+var __SDocblock = require('./SDocblock');
 /**
  * @name                  firstDocblockWithNamespaceInFolder
  * @namespace           node.docblock
@@ -38,35 +48,43 @@ const __SDocblock = require('./SDocblock');
  */
 
 
-module.exports = async function firstDocblockWithNamespaceInFolder(directory, settings) {
-  if (settings === void 0) {
-    settings = {};
+module.exports = /*#__PURE__*/function () {
+  var _firstDocblockWithNamespaceInFolder = _asyncToGenerator(function* (directory, settings) {
+    if (settings === void 0) {
+      settings = {};
+    }
+
+    settings = __deepMerge({
+      exclude: '**/+(__tests__|__wip__)/**'
+    }, settings);
+    if (!__fs.existsSync(directory)) return {};
+    var founded = yield __findInFiles.find("@namespace", directory);
+    var namespaceObj = {};
+    Object.keys(founded).forEach(path => {
+      var relativePath = __path.relative(directory, path);
+
+      if (__minimatch(relativePath, settings.exclude)) return;
+
+      var content = __fs.readFileSync(path, 'utf8'); // console.log(content);
+
+
+      var docblocks = new __SDocblock(content);
+      var docblock = docblocks.blocks[0] ? docblocks.blocks[0] : null;
+      if (!docblock) return;
+      delete docblock.object.raw;
+
+      var name = docblock.object.name || __getFilename(path).replace(".".concat(__extension(path)), '');
+
+      namespaceObj[docblock.object.namespace + '.' + name] = _objectSpread(_objectSpread({}, docblock.object), {}, {
+        path: relativePath
+      });
+    });
+    return namespaceObj;
+  });
+
+  function firstDocblockWithNamespaceInFolder(_x, _x2) {
+    return _firstDocblockWithNamespaceInFolder.apply(this, arguments);
   }
 
-  settings = __deepMerge({
-    exclude: '**/+(__tests__|__wip__)/**'
-  }, settings);
-  if (!__fs.existsSync(directory)) return {};
-  let founded = await __findInFiles.find(`@namespace`, directory);
-  const namespaceObj = {};
-  Object.keys(founded).forEach(path => {
-    const relativePath = __path.relative(directory, path);
-
-    if (__minimatch(relativePath, settings.exclude)) return;
-
-    const content = __fs.readFileSync(path, 'utf8'); // console.log(content);
-
-
-    const docblocks = new __SDocblock(content);
-    const docblock = docblocks.blocks[0] ? docblocks.blocks[0] : null;
-    if (!docblock) return;
-    delete docblock.object.raw;
-
-    const name = docblock.object.name || __getFilename(path).replace(`.${__extension(path)}`, '');
-
-    namespaceObj[docblock.object.namespace + '.' + name] = { ...docblock.object,
-      path: relativePath
-    };
-  });
-  return namespaceObj;
-};
+  return firstDocblockWithNamespaceInFolder;
+}();

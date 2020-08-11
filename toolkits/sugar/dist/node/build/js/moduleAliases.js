@@ -1,14 +1,14 @@
 "use strict";
 
-const __moduleAlias = require('module-alias');
+var __moduleAlias = require('module-alias');
 
-const __glob = require('glob');
+var __glob = require('glob');
 
-const __path = require('path');
+var __path = require('path');
 
-const __fs = require('fs');
+var __fs = require('fs');
 
-const __packageRoot = require('../../path/packageRoot');
+var __packageRoot = require('../../path/packageRoot');
 /**
  * @name          moduleAliases
  * @namespace           node.build.js
@@ -30,17 +30,17 @@ module.exports = function moduleAliases(rootDir) {
     rootDir = __packageRoot(process.cwd(), true);
   }
 
-  const globPattern = `${rootDir}/*/**/package.json`;
+  var globPattern = "".concat(rootDir, "/*/**/package.json");
 
-  const modulePathes = __glob.sync(globPattern, {
+  var modulePathes = __glob.sync(globPattern, {
     ignore: '**/node_modules/**'
   });
 
   modulePathes.forEach(path => {
-    const packageJson = require(path);
+    var packageJson = require(path);
 
-    const name = packageJson.name;
-    const folderPath = path.split('/').slice(0, -1).join('/');
+    var name = packageJson.name;
+    var folderPath = path.split('/').slice(0, -1).join('/');
 
     __moduleAlias.addAlias(name, __path.resolve(folderPath));
   });

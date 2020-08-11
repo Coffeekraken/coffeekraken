@@ -1,10 +1,10 @@
 "use strict";
 
-const __deepMerge = require('../../object/deepMerge');
+var __deepMerge = require('../../object/deepMerge');
 
-const __SPopup = require('../popup/SPopup');
+var __SPopup = require('../popup/SPopup');
 
-const __SSummaryList = require('./SSummaryList');
+var __SSummaryList = require('./SSummaryList');
 /**
  * @name                      summaryListPopup
  * @namespace           node.blessed.list
@@ -47,11 +47,11 @@ module.exports = function summaryListPopup(settings) {
     description: null,
     items: []
   }, settings);
-  const $popupBox = new __SPopup({
+  var $popupBox = new __SPopup({
     title: settings.title,
     description: settings.description
   });
-  const $summaryListBox = new __SSummaryList(settings.items, {});
+  var $summaryListBox = new __SSummaryList(settings.items, {});
   $popupBox.append($summaryListBox);
   $summaryListBox.promise.on('finally,cancel', () => {
     $popupBox.remove($summaryListBox);

@@ -1,8 +1,8 @@
 "use strict";
 
-const __getSize = require('get-folder-size');
+var __getSize = require('get-folder-size');
 
-const __filesize = require('filesize'); // TODO tests
+var __filesize = require('filesize'); // TODO tests
 
 /**
  * @name                            folderSize

@@ -1,12 +1,12 @@
 "use strict";
 
-const __sugarConfig = require('../../../config/sugar');
+var __sugarConfig = require('../../../config/sugar');
 
-const __fs = require('fs');
+var __fs = require('fs');
 
-const __marked = require('marked');
+var __marked = require('marked');
 
-const __jsDom = require('jsdom').JSDOM;
+var __jsDom = require('jsdom').JSDOM;
 /**
  * @name                doc
  * @namespace           node.server.frontend.handlers
@@ -26,21 +26,21 @@ const __jsDom = require('jsdom').JSDOM;
 module.exports = function doc(req, server) {
   return new Promise((resolve, reject) => {
     // get the path
-    const docPath = __sugarConfig('doc.rootDir');
+    var docPath = __sugarConfig('doc.rootDir');
 
-    const filePath = `${docPath}/${req.params[0]}.md`;
+    var filePath = "".concat(docPath, "/").concat(req.params[0], ".md");
 
-    let title = __sugarConfig('frontend.pages.doc.title'); // try to read the doc file
+    var title = __sugarConfig('frontend.pages.doc.title'); // try to read the doc file
     // if (!__fs.existsSync(filePath)) return reject('404');
     // read the file
 
 
-    const mdData = __fs.readFileSync(filePath, 'utf8'); // convert to html
+    var mdData = __fs.readFileSync(filePath, 'utf8'); // convert to html
 
 
-    const htmlData = __marked(mdData);
+    var htmlData = __marked(mdData);
 
-    const $dom = new __jsDom(htmlData);
+    var $dom = new __jsDom(htmlData);
     title = title.replace('[title]', $dom.window.document.querySelector('h1').textContent || ''); // let content = `
     //     <my-component param1="hello world"></my-component>
     //   `;
@@ -49,7 +49,7 @@ module.exports = function doc(req, server) {
     resolve({
       view: 'pages.doc',
       title,
-      content: `<div class="marked">${htmlData}</div>` // content
+      content: "<div class=\"marked\">".concat(htmlData, "</div>") // content
 
     });
   });

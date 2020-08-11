@@ -85,7 +85,7 @@ function validateObjectDefinitionObject(definitionObj, settings) {
   var argNames = Object.keys(definitionObj);
 
   if (!argNames.length) {
-    issuesObj.issues.push('arguments.required');
+    throw new Error("Sorry but a <yellow>definition object</yellow> has to have at least 1 property declared..."); // issuesObj.issues.push('arguments.required');
   }
 
   var _loop = function _loop(i) {

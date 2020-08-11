@@ -1,6 +1,6 @@
 "use strict";
 
-const __SOutput = require('../blessed/SOutput');
+var __SOutput = require('../blessed/SOutput');
 /**
  * @name            output
  * @namespace           node.process
@@ -31,6 +31,6 @@ module.exports = function (proc, settings) {
     settings = {};
   }
 
-  const output = new __SOutput(proc, settings);
+  var output = new __SOutput(proc, settings);
   output.attach();
 };

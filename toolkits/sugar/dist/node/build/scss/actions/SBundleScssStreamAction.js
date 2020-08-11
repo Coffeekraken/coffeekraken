@@ -2,6 +2,10 @@
 
 var _class, _temp;
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -28,17 +32,17 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
+var __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
 
-const __Bundler = require('scss-bundle').Bundler;
+var __Bundler = require('scss-bundle').Bundler;
 
-const __getFilename = require('../../../fs/filename');
+var __getFilename = require('../../../fs/filename');
 
-const __isGlob = require('../../../is/glob');
+var __isGlob = require('../../../is/glob');
 
-const __isPath = require('../../../is/path');
+var __isPath = require('../../../is/path');
 
-const __deepMerge = require('../../../object/deepMerge');
+var __deepMerge = require('../../../object/deepMerge');
 /**
  * @name                SBundleScssStreamAction
  * @namespace           node.build.scss.actions
@@ -104,20 +108,26 @@ module.exports = (_temp = _class = /*#__PURE__*/function (_SActionsStreamActio) 
   _createClass(SBundleScssStreamAction, [{
     key: "run",
     value: function run(streamObj, settings) {
-      return _get(_getPrototypeOf(SBundleScssStreamAction.prototype), "run", this).call(this, streamObj, async (resolve, reject) => {
-        if (!__isPath(streamObj.input)) {
-          return resolve(streamObj);
-        }
+      return _get(_getPrototypeOf(SBundleScssStreamAction.prototype), "run", this).call(this, streamObj, /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator(function* (resolve, reject) {
+          if (!__isPath(streamObj.input)) {
+            return resolve(streamObj);
+          }
 
-        try {
-          const bundler = new __Bundler(undefined, streamObj.input.split('/').slice(0, -1).join('/'));
-          let bundledScssString = await (await bundler.bundle(__getFilename(streamObj.input))).bundledContent; // set the bundled content into the "data" property
+          try {
+            var bundler = new __Bundler(undefined, streamObj.input.split('/').slice(0, -1).join('/'));
+            var bundledScssString = yield (yield bundler.bundle(__getFilename(streamObj.input))).bundledContent; // set the bundled content into the "data" property
 
-          if (streamObj.data) streamObj.data += bundledScssString;else streamObj.data = bundledScssString;
-        } catch (e) {}
+            if (streamObj.data) streamObj.data += bundledScssString;else streamObj.data = bundledScssString;
+          } catch (e) {}
 
-        resolve(streamObj);
-      });
+          resolve(streamObj);
+        });
+
+        return function (_x, _x2) {
+          return _ref.apply(this, arguments);
+        };
+      }());
     }
   }]);
 

@@ -1,6 +1,6 @@
 "use strict";
 
-const __fs = require('fs-extra'); // TODO tests
+var __fs = require('fs-extra'); // TODO tests
 
 /**
  * @name        ensureFileSync

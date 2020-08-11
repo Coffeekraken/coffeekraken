@@ -2,6 +2,12 @@
 
 var _temp;
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _readOnlyError(name) { throw new Error("\"" + name + "\" is read-only"); }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -28,29 +34,31 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __deepMerge = require('../object/deepMerge');
+var __deepMerge = require('../object/deepMerge');
 
-const __blessed = require('blessed');
+var __blessed = require('blessed');
 
-const __color = require('../color/color');
+var __color = require('../color/color');
 
-const __SComponent = require('./SComponent');
+var __SComponent = require('./SComponent');
 
-const __parseMarkdown = require('../terminal/parseMarkdown');
+var __parseMarkdown = require('../terminal/parseMarkdown');
 
-const __isChildProcess = require('../is/childProcess');
+var __isChildProcess = require('../is/childProcess');
 
-const __parse = require('../string/parse');
+var __parse = require('../string/parse');
 
-const __toString = require('../string/toString');
+var __toString = require('../string/toString');
 
-const __stripAnsi = require('strip-ansi');
+var __stripAnsi = require('strip-ansi');
 
-const __trimLines = require('../string/trimLines');
+var __trimLines = require('../string/trimLines');
 
-const __extractValues = require('../object/extractValues');
+var __extractValues = require('../object/extractValues');
 
-const __SOutputProcessInterface = require('./SOutputProcessInterface');
+var __SOutputProcessInterface = require('./interface/SOutputProcessInterface');
+
+var __SOutputLogInterface = require('./interface/SOutputLogInterface');
 /**
  * @name                  SOutput
  * @namespace           node.blessed
@@ -146,9 +154,8 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
     // apply some interfaces
     __SOutputProcessInterface.apply(process);
 
-    const _settings = __deepMerge({
+    var _settings = __deepMerge({
       filter: null,
-      clearOnStart: true,
       // maxItems: -1,
       maxItemsByGroup: 1
     }, settings); // extends SPanel
@@ -168,13 +175,9 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
 
     _defineProperty(_assertThisInitialized(_this), "_allowClear", true);
 
-    _defineProperty(_assertThisInitialized(_this), "_updateTimeout", false);
-
     _defineProperty(_assertThisInitialized(_this), "_lastY", 1);
 
     _defineProperty(_assertThisInitialized(_this), "_logBoxChilds", []);
-
-    _defineProperty(_assertThisInitialized(_this), "_stuperUpdateTimeout", null);
 
     _this._process = process; // subscribe to the process
 
@@ -200,6 +203,8 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
   _createClass(SOutput, [{
     key: "_subscribeToProcess",
     value: function _subscribeToProcess() {
+      var _this2 = this;
+
       // subscribe to data
       this._process.on('close', data => {// this.log(
         //   `Closing process with code <red>${data.code}</red> and signal <red>${data.signal}</red>...`
@@ -208,89 +213,8 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
       }).on('*.start', () => {// if (this._settings.clearOnStart) {
         //   this.clear();
         // }
-      }).on('log', (data, metas) => {
-        if (__isChildProcess()) {
-          console.log(__toString(data));
-          return;
-        }
-
-        let logsArray = [];
-
-        if (typeof data === 'string') {
-          const splitedLogs = data.split(/⠀/);
-          splitedLogs.forEach(log => {
-            if (log.trim() === '') return;
-            log = log.replace(/⠀{0,9999999}/g, '').trim();
-
-            const parsedLog = __parse(log);
-
-            if (typeof parsedLog === 'object' && parsedLog.value && typeof parsedLog.value === 'string') {
-              logsArray.push(parsedLog);
-            } else if (typeof parsedLog === 'string') {
-              logsArray.push({
-                value: parsedLog
-              });
-            }
-          });
-        } else if (typeof data === 'object' && data.value && typeof data.value === 'string') {
-          const splitedLogs = data.value.split(/⠀/);
-          splitedLogs.forEach(log => {
-            if (log.trim() === '') return;
-            log = log.replace(/⠀{0,9999999}/g, '').trim();
-
-            const parsedLog = __parse(log);
-
-            if (typeof parsedLog === 'object' && parsedLog.value && typeof parsedLog.value === 'string') {
-              logsArray.push({ ...data,
-                ...parsedLog
-              });
-            } else if (typeof parsedLog === 'string') {
-              logsArray.push({ ...data,
-                value: parsedLog
-              });
-            }
-          });
-        }
-
-        logsArray.forEach(logObj => {
-          // handle special logs like #clear, etc...
-          if (logObj.value === '#clear') {
-            this.clear();
-            return;
-          } // default logs value
-          // logObj = {
-          //   mb: 1,
-          //   mt: 0,
-          //   ...logObj
-          // };
-          // special syntax
-
-
-          const syntaxReg = /#[a-zA-Z0-9_-]+(:[a-zA-Z0-9\.-_]+)?/gm;
-          const syntaxMatches = logObj.value.match(syntaxReg);
-
-          if (syntaxMatches) {
-            syntaxMatches.forEach(arg => {
-              logObj.value = logObj.value.replace(arg, '');
-              arg = arg.replace('#', '');
-              const splits = arg.split(':');
-              const argName = splits[0];
-              const value = splits[1] ? __parse(splits[1]) : null;
-              logObj[argName] = value !== null ? value : true;
-            });
-            logObj.value = logObj.value.trim();
-          }
-
-          if (this._settings.filter && typeof this._settings.filter === 'function') {
-            const res = this._settings.filter(logObj, metas);
-
-            if (res === false) return;
-            if (res !== true) logObj = res;
-          } // setTimeout(() => {
-
-
-          this.log(logObj); // }, 200);
-        }); // this.update();
+      }).on('log', function () {
+        _this2.log(...arguments);
       }); // .on('error', (data) => {
       //   if (data.error) {
       //     if (typeof data.error === 'string') {
@@ -327,11 +251,10 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
   }, {
     key: "clear",
     value: function clear() {
-      nativeConsole.trace('CLEAS');
-      throw 'CCO';
-
       if (__isChildProcess()) {
-        console.log('#clear');
+        console.log(__toString({
+          clear: true
+        }));
       } else {
         clearTimeout(this._clearTimeout);
         this._clearTimeout = setTimeout(() => {
@@ -349,11 +272,6 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
 
           this._logBoxChilds = [];
           this.update();
-          this._updateTimeout = true;
-          setTimeout(() => {
-            this._updateTimeout = false;
-            this.update();
-          }, 200);
         }
       }
     }
@@ -363,6 +281,88 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
       content = content.trim();
       content = __parseMarkdown(content);
       return content;
+    }
+    /**
+     * @name          _parseLog
+     * @type          Function
+     * @private
+     *
+     * This method take a simple string or a complexe data object and parse them to
+     * generate a nicely formated log object to pass to the ```log``` method.
+     *
+     * @param       {String|Object}           data           The log data to parse
+     * @return      {Array<Object>}                           An array of nicely formated log object
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "_parseLog",
+    value: function _parseLog() {
+      var logsArray = [];
+
+      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
+      }
+
+      args.forEach(data => {
+        if (typeof data === 'string') {
+          var splitedLogs = data.split(/⠀/);
+          splitedLogs.forEach(log => {
+            if (log.trim() === '') return;
+            log = log.replace(/⠀{0,9999999}/g, '').trim();
+
+            var parsedLog = __parse(log);
+
+            if (typeof parsedLog === 'object' && parsedLog.value && typeof parsedLog.value === 'string') {
+              parsedLog = (_readOnlyError("parsedLog"), __SOutputLogInterface.applyAndComplete(parsedLog));
+              logsArray.push(parsedLog);
+            } else if (typeof parsedLog === 'string') {
+              if (parsedLog.includes(' -v ') || parsedLog.includes(' --value ')) {
+                var _args = __SOutputLogInterface.parseAndComplete(parsedLog);
+
+                logsArray.push(_args);
+              } else {
+                var _args2 = __SOutputLogInterface.complete({
+                  value: parsedLog
+                });
+
+                logsArray.push(_args2);
+              }
+            }
+          });
+        } else if (typeof data === 'object' && data.value && typeof data.value === 'string') {
+          // apply the interface
+          data = __SOutputLogInterface.applyAndComplete(data);
+
+          var _splitedLogs = data.value.split(/⠀/);
+
+          _splitedLogs.forEach(log => {
+            if (log.trim() === '') return;
+            log = log.replace(/⠀{0,9999999}/g, '').trim();
+
+            var parsedLog = __parse(log);
+
+            if (typeof parsedLog === 'object' && parsedLog.value && typeof parsedLog.value === 'string') {
+              __SOutputLogInterface.apply(parsedLog);
+
+              logsArray.push(_objectSpread(_objectSpread({}, data), parsedLog));
+            } else if (typeof parsedLog === 'string') {
+              if (parsedLog.includes(' -v ') || parsedLog.includes(' --value ')) {
+                var _args3 = __SOutputLogInterface.parseAndComplete(parsedLog);
+
+                logsArray.push(_objectSpread(_objectSpread({}, data), _args3));
+              } else {
+                logsArray.push(_objectSpread(_objectSpread({}, data), {}, {
+                  value: parsedLog
+                }));
+              }
+            }
+          });
+        }
+      });
+      return logsArray;
     }
     /**
      * @name          log
@@ -378,12 +378,8 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
   }, {
     key: "log",
     value: function log() {
-      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-        args[_key] = arguments[_key];
-      }
+      var logsObjArray = this._parseLog(...arguments); // filter the content to remove the "temp" logs
 
-      let logsObjArray = args;
-      let currentGroup = null; // filter the content to remove the "temp" logs
 
       this._content = this._content.filter(logObj => {
         if (logObj.temp) {
@@ -395,6 +391,13 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
         return true;
       });
       logsObjArray.forEach(logObj => {
+        if (this._settings.filter && typeof this._settings.filter === 'function') {
+          var res = this._settings.filter(logObj);
+
+          if (res === false) return;
+          if (res !== true) logObj = res;
+        }
+
         if (__isChildProcess()) {
           console.log(__toString(logObj));
           return;
@@ -412,13 +415,13 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
           // generate the header box
           this._createHeaderBox(logObj);
         } else if (logObj.group && typeof logObj.group === 'string') {
-          const actualGroupObjArray = this._content.filter(item => {
+          var actualGroupObjArray = this._content.filter(item => {
             if (typeof item !== 'object') return false;
             if (item.group === logObj.group) return true;
             return false;
           });
 
-          let groupObj = {
+          var groupObj = {
             group: logObj.group,
             content: []
           };
@@ -438,11 +441,11 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
       }); // handle the maxItems setting
 
       if (this._settings.maxItems !== -1) {
-        let itemsCount = 0;
-        let newContent = [];
+        var itemsCount = 0;
+        var newContent = [];
 
-        for (let i = this._content.length - 1; i >= 0; i--) {
-          const item = this._content[i];
+        for (var i = this._content.length - 1; i >= 0; i--) {
+          var item = this._content[i];
           newContent = [item, ...newContent];
           itemsCount++; // stop if we reach the maxItems count
 
@@ -471,9 +474,10 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
   }, {
     key: "update",
     value: function update() {
-      if (__isChildProcess()) return; // if (this._updateTimeout) return;
-
+      if (__isChildProcess()) return;
+      if (!this.allowRender()) return;
       if (!this.isDisplayed()) return;
+      this._lastY = 1;
 
       if (!this._content.length) {
         _get(_getPrototypeOf(SOutput.prototype), "update", this).call(this);
@@ -482,42 +486,54 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
       }
 
       this._content.forEach(item => {
-        try {
-          if (item.$box) {} else if (item.value && typeof item.value === 'string') {
-            const $box = this._simpleTextBox(item.value);
+        if (item.$box) {
+          if (item.group) {
+            var contentArray;
 
-            $box.top = this._lastY + item.mt;
+            if (this._settings.maxItemsByGroup) {
+              contentArray = item.content.slice(this._settings.maxItemsByGroup * -1);
+            } else {
+              contentArray = item.content;
+            }
 
-            this._logBoxChilds.push($box);
+            var logsString = __extractValues(contentArray, 'value').join('\n');
 
-            this._logBox.append($box);
+            item.$box.setContent(__trimLines("".concat(item.$box.title, "\n               ").concat(__parseMarkdown(logsString))));
+            item.$box.height = logsString.split('\n').length + 1;
+            item.$box.$line.height = logsString.split('\n').length + 1;
+          } else {}
 
-            item.$box = $box;
-            this._lastY += $box.getScrollHeight() + item.mt + item.mb;
-          } else if (typeof item === 'object' && item.group) {
-            const $box = this._groupBox(item.group, item.content);
+          item.$box.top = this._lastY + (item.mt || 0);
+          this._lastY += item.$box.getScrollHeight() + (item.mt || 0) + (item.mb || 1);
+        } else if (item.value && typeof item.value === 'string') {
+          var $box = this._simpleTextBox(item.value);
 
-            $box.top = this._lastY;
+          $box.top = this._lastY + item.mt;
 
-            this._logBoxChilds.push($box);
+          this._logBoxChilds.push($box);
 
-            item.$box = $box;
+          this._logBox.append($box);
 
-            this._logBox.append($box);
+          item.$box = $box;
+          this._lastY += $box.getScrollHeight() + item.mt + item.mb;
+        } else if (typeof item === 'object' && item.group) {
+          var _$box = this._groupBox(item.group, item.content);
 
-            this._lastY += $box.getScrollHeight() + item.mt + item.mb;
-          }
-        } catch (e) {
-          throw e;
+          _$box.top = this._lastY;
+
+          this._logBoxChilds.push(_$box);
+
+          item.$box = _$box;
+
+          this._logBox.append(_$box);
+
+          this._lastY += _$box.getScrollHeight() + 1;
         }
       });
 
-      clearTimeout(this._superUpdateTimeout);
-      this._superUpdateTimeout = setTimeout(() => {
-        this._logBox.setScrollPerc(100);
+      this._logBox.setScrollPerc(100);
 
-        _get(_getPrototypeOf(SOutput.prototype), "update", this).call(this);
-      }, 50);
+      _get(_getPrototypeOf(SOutput.prototype), "update", this).call(this);
     }
     /**
      * @name          _simpleTextBox
@@ -537,7 +553,7 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
   }, {
     key: "_simpleTextBox",
     value: function _simpleTextBox(text) {
-      const $box = __blessed.box({
+      var $box = __blessed.box({
         width: this._logBox.width - this._logBox.padding.left - this._logBox.padding.right,
         height: 'shrink',
         style: {
@@ -588,7 +604,7 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
   }, {
     key: "_groupBox",
     value: function _groupBox(group, textsArray) {
-      const $box = __blessed.box({
+      var $box = __blessed.box({
         width: this._logBox.width - this._logBox.padding.left - this._logBox.padding.right,
         height: 'shrink',
         style: {
@@ -603,25 +619,26 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
         }
       });
 
-      const color = group.toLowerCase().includes('error') ? 'red' : 'yellow';
+      var color = group.toLowerCase().includes('error') ? 'red' : 'yellow';
 
-      const title = __parseMarkdown(group.toLowerCase().includes('error') ? `<red>${group}</red>` : `<yellow>${group}</yellow>`);
+      var title = __parseMarkdown(group.toLowerCase().includes('error') ? "<red>".concat(group, "</red>") : "<yellow>".concat(group, "</yellow>"));
 
-      if (this._settings.maxItemsByGroup === -1) {
-        const logsString = __extractValues(textsArray, 'value').join('\n');
+      $box.title = title; // if (this._settings.maxItemsByGroup === -1) {
+      //   const logsString = __extractValues(textsArray, 'value').join('\n');
+      //   $box.setContent(
+      //     __trimLines(`${title}
+      //   ${__parseMarkdown(logsString)}`)
+      //   );
+      // } else {
+      //   const contents = textsArray.slice(this._settings.maxItemsByGroup * -1);
+      //   const logsString = __extractValues(contents, 'value').join('\n');
+      //   $box.setContent(
+      //     __trimLines(`${title}
+      //   ${__parseMarkdown(logsString)}`)
+      //   );
+      // }
 
-        $box.setContent(__trimLines(`${title}
-      ${__parseMarkdown(logsString)}`));
-      } else {
-        const contents = textsArray.slice(this._settings.maxItemsByGroup * -1);
-
-        const logsString = __extractValues(contents, 'value').join('\n');
-
-        $box.setContent(__trimLines(`${title}
-      ${__parseMarkdown(logsString)}`));
-      }
-
-      const $line = __blessed.box({
+      var $line = __blessed.box({
         width: 1,
         height: 1,
         top: 0,
@@ -636,6 +653,7 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
         $line.style.bg = 'red';
       }
 
+      $box.$line = $line;
       $box.on('attach', () => {
         setTimeout(() => {
           $box.height = $box.getScrollHeight();

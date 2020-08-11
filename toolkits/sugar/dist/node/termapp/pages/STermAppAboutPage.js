@@ -16,7 +16,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-const __SAppPage = require('../../blessed/app/SAppPage');
+var __SAppPage = require('../../blessed/app/SAppPage');
 /**
  * @name              STermAppAboutPage
  * @namespace           node.termapp.pages

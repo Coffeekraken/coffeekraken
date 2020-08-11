@@ -1,10 +1,10 @@
 "use strict";
 
-const __splitLineEvery = require('./__wip__/splitLineEvery');
+var __splitLineEvery = require('./__wip__/splitLineEvery');
 
-const __countLine = require('../string/countLine');
+var __countLine = require('../string/countLine');
 
-const __deepMerge = require('../object/deepMerge');
+var __deepMerge = require('../object/deepMerge');
 /**
  * @name                                          columns
  * @namespace           node.terminal
@@ -38,40 +38,40 @@ module.exports = function columns(content, settings) {
     width: process.env.STDOUT_COLUMNS || process.stdout.columns,
     padding: process.env.STDOUT_PADDING || 3
   }, settings);
-  const maxWidth = settings.width - settings.padding * 2;
-  const maxColumnWidth = Math.round(maxWidth / content.length);
-  const lines = [];
-  const splitedContent = {};
+  var maxWidth = settings.width - settings.padding * 2;
+  var maxColumnWidth = Math.round(maxWidth / content.length);
+  var lines = [];
+  var splitedContent = {};
   content.forEach((c, i) => {
-    const columnsPadding = i === 0 ? settings.padding : i === content.length - 1 ? settings.padding : settings.padding * 2;
+    var columnsPadding = i === 0 ? settings.padding : i === content.length - 1 ? settings.padding : settings.padding * 2;
 
-    let lines = __splitLineEvery(c, maxColumnWidth - columnsPadding);
+    var lines = __splitLineEvery(c, maxColumnWidth - columnsPadding);
 
     splitedContent['column_' + i] = {
       lines: lines,
       padding: columnsPadding
     };
   });
-  let biggestColumnHeight = 0;
+  var biggestColumnHeight = 0;
   Object.keys(splitedContent).forEach(columnName => {
     if (splitedContent[columnName].lines.length > biggestColumnHeight) {
       biggestColumnHeight = splitedContent[columnName].lines.length;
     }
   });
 
-  for (let i = 0; i < biggestColumnHeight; i++) {
-    let currentLine = '';
+  var _loop = function _loop(i) {
+    var currentLine = '';
     Object.keys(splitedContent).forEach((columnName, j) => {
-      const hasColumnLeftAndRightPadding = j === 0 ? false : j === content.length - 1 ? false : true;
-      const paddingSide = j === 0 ? 'right' : j === content.length - 1 ? 'left' : null;
-      const currentColumn = splitedContent[columnName];
-      const columnLinesArray = currentColumn.lines;
+      var hasColumnLeftAndRightPadding = j === 0 ? false : j === content.length - 1 ? false : true;
+      var paddingSide = j === 0 ? 'right' : j === content.length - 1 ? 'left' : null;
+      var currentColumn = splitedContent[columnName];
+      var columnLinesArray = currentColumn.lines;
 
       if (i > columnLinesArray.length - 1) {
         currentLine += ' '.repeat(maxColumnWidth);
       } else {
-        const columnContentString = columnLinesArray[i];
-        let restOfLineCount = maxColumnWidth - __countLine(columnContentString || '') - (hasColumnLeftAndRightPadding ? settings.padding * 2 : settings.padding);
+        var columnContentString = columnLinesArray[i];
+        var restOfLineCount = maxColumnWidth - __countLine(columnContentString || '') - (hasColumnLeftAndRightPadding ? settings.padding * 2 : settings.padding);
 
         if (hasColumnLeftAndRightPadding) {
           currentLine += ' '.repeat(settings.padding) + columnContentString + ' '.repeat(restOfLineCount) + ' '.repeat(settings.padding);
@@ -86,6 +86,10 @@ module.exports = function columns(content, settings) {
     });
     lines.push(currentLine);
     currentLine = '';
+  };
+
+  for (var i = 0; i < biggestColumnHeight; i++) {
+    _loop(i);
   }
 
   return lines.join('\n');

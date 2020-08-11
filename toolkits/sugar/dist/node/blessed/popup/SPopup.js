@@ -1,5 +1,11 @@
 "use strict";
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -24,21 +30,21 @@ function _superPropBase(object, property) { while (!Object.prototype.hasOwnPrope
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-const __blessed = require('blessed');
+var __blessed = require('blessed');
 
-const __SComponent = require('../SComponent');
+var __SComponent = require('../SComponent');
 
-const __deepMerge = require('../../object/deepMerge');
+var __deepMerge = require('../../object/deepMerge');
 
-const __parseHtml = require('../../terminal/parseHtml');
+var __parseHtml = require('../../terminal/parseHtml');
 
-const __color = require('../../color/color');
+var __color = require('../../color/color');
 
-const __escapeStack = require('../../terminal/escapeStack');
+var __escapeStack = require('../../terminal/escapeStack');
 
-const __activeSpace = require('../../core/activeSpace');
+var __activeSpace = require('../../core/activeSpace');
 
-const __SPromise = require('../../promise/SPromise');
+var __SPromise = require('../../promise/SPromise');
 /**
  * @name                  SPopup
  * @namespace           node.blessed.popup
@@ -144,34 +150,33 @@ module.exports = /*#__PURE__*/function (_SComponent) {
     }, settings));
 
     if (_this._settings.title) {
-      _this.$title = __blessed.box({
-        style: _this._settings.style,
-        ..._this._settings.$title,
+      _this.$title = __blessed.box(_objectSpread(_objectSpread({
+        style: _this._settings.style
+      }, _this._settings.$title), {}, {
         content: __parseHtml(_this._settings.title)
-      });
+      }));
     }
 
     if (_this._settings.description) {
-      _this.$description = __blessed.box({ ..._this._settings.$description,
+      _this.$description = __blessed.box(_objectSpread(_objectSpread({}, _this._settings.$description), {}, {
         top: _this.$title ? _this.$title.height : 0,
         content: __parseHtml(_this._settings.description)
-      });
+      }));
     }
 
     if (_this.$title) _get((_thisSuper = _assertThisInitialized(_this), _getPrototypeOf(SPopup.prototype)), "append", _thisSuper).call(_thisSuper, _this.$title);
     if (_this.$description) _get((_thisSuper2 = _assertThisInitialized(_this), _getPrototypeOf(SPopup.prototype)), "append", _thisSuper2).call(_thisSuper2, _this.$description);
-    let contentTop = 0;
+    var contentTop = 0;
     if (_this.$title) contentTop += _this.$title.height;
     if (_this.$description) contentTop += _this.$description.height;
-    _this.$content = __blessed.box({
+    _this.$content = __blessed.box(_objectSpread({
       top: contentTop,
       style: {
         scrollbar: {
           bg: _this._settings.style.bg || __color('terminal.primary').toString()
         }
-      },
-      ...(_this._settings.$content || {})
-    });
+      }
+    }, _this._settings.$content || {}));
     _this.promise = new __SPromise(() => {}).start();
 
     _get((_thisSuper3 = _assertThisInitialized(_this), _getPrototypeOf(SPopup.prototype)), "append", _thisSuper3).call(_thisSuper3, _this.$content);
@@ -180,7 +185,7 @@ module.exports = /*#__PURE__*/function (_SComponent) {
 
     __activeSpace.append(_this._settings.id);
 
-    const escape = __escapeStack(() => {
+    var escape = __escapeStack(() => {
       __activeSpace.previous();
 
       escape.cancel();
@@ -225,8 +230,8 @@ module.exports = /*#__PURE__*/function (_SComponent) {
     key: "update",
     value: function update() {
       this.height = this.$content.getScrollHeight() + 7;
-      this.top = `50%-${Math.round(this.height / 2)}`;
-      this.left = `50%-${Math.round(this.width / 2)}`;
+      this.top = "50%-".concat(Math.round(this.height / 2));
+      this.left = "50%-".concat(Math.round(this.width / 2));
 
       _get(_getPrototypeOf(SPopup.prototype), "update", this).call(this);
     }

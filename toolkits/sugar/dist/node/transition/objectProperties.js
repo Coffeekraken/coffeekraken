@@ -1,14 +1,14 @@
 "use strict";
 
-const __deepMerge = require('../object/deepMerge');
+var __deepMerge = require('../object/deepMerge');
 
-const __convert = require('../time/convert');
+var __convert = require('../time/convert');
 
-const __STimer = require('../time/STimer');
+var __STimer = require('../time/STimer');
 
-const __availableEasingsArray = require('../easing/availableEasingsArray');
+var __availableEasingsArray = require('../easing/availableEasingsArray');
 
-const __SPromise = require('../promise/SPromise'); // TODO: tests
+var __SPromise = require('../promise/SPromise'); // TODO: tests
 
 /**
  * @name              objectProperties
@@ -46,19 +46,19 @@ module.exports = function objectProperties(startObj, targetObj, settings) {
       round: true
     }, settings);
 
-    const availableEasingsArray = __availableEasingsArray();
+    var availableEasingsArray = __availableEasingsArray();
 
-    const duration = __convert(settings.duration, 'ms');
+    var duration = __convert(settings.duration, 'ms');
 
-    let stepsCount = settings.stepsCount;
-    let stepsInterval = settings.stepsInterval; // check the easing wanted
+    var stepsCount = settings.stepsCount;
+    var stepsInterval = settings.stepsInterval; // check the easing wanted
 
     if (availableEasingsArray.indexOf(settings.easing) === -1) {
-      throw new Error(`You have specified "${settings.easing}" as easing for your transition object properties call but the available easings are "${availableEasingsArray.join(',')}"...`);
+      throw new Error("You have specified \"".concat(settings.easing, "\" as easing for your transition object properties call but the available easings are \"").concat(availableEasingsArray.join(','), "\"..."));
     } // require the easing function
 
 
-    const easingFn = require(`../easing/${settings.easing}`); // check if we have a steps passed, or calculate automatically
+    var easingFn = require("../easing/".concat(settings.easing)); // check if we have a steps passed, or calculate automatically
 
 
     if (!stepsCount && !stepsInterval) {
@@ -68,19 +68,19 @@ module.exports = function objectProperties(startObj, targetObj, settings) {
     } // build the start and target object that we will "transition"
 
 
-    const startTransitionObj = {},
-          targetTransitionObj = {};
+    var startTransitionObj = {},
+        targetTransitionObj = {};
     Object.keys(startObj).forEach(prop => {
       if (typeof startObj[prop] === 'number' && typeof targetObj[prop] === 'number') {
         startTransitionObj[prop] = startObj[prop];
         targetTransitionObj[prop] = targetObj[prop];
       }
     });
-    const currentTransitionObj = {};
-    const timer = new __STimer(settings.duration, {
+    var currentTransitionObj = {};
+    var timer = new __STimer(settings.duration, {
       tickCount: stepsCount
     }).on('tick', () => {
-      const returnedTransitionObj = {}; // loop on each object properties
+      var returnedTransitionObj = {}; // loop on each object properties
 
       Object.keys(startTransitionObj).forEach(prop => {
         if (!currentTransitionObj[prop]) {
@@ -92,13 +92,13 @@ module.exports = function objectProperties(startObj, targetObj, settings) {
           };
         }
 
-        const easingValue = easingFn(1 / 100 * timer.percentage);
-        const currentEasedValue = currentTransitionObj[prop].valueDifference * easingValue; // const currentEasedValue =
+        var easingValue = easingFn(1 / 100 * timer.percentage);
+        var currentEasedValue = currentTransitionObj[prop].valueDifference * easingValue; // const currentEasedValue =
         //   (currentTransitionObj[prop].valueDifference / 100) *
         //   timer.percentage *
         //   easingValue;
 
-        let newValue = currentTransitionObj[prop].startValue + currentEasedValue;
+        var newValue = currentTransitionObj[prop].startValue + currentEasedValue;
         if (settings.round) newValue = Math.round(newValue); // save the current value
 
         currentTransitionObj[prop].currentValue = newValue; // set the property in the returned transition object

@@ -1,18 +1,18 @@
 "use strict";
 
-const __sugarConfig = require('../../config/sugar');
+var __sugarConfig = require('../../config/sugar');
 
-const __deepMerge = require('../../object/deepMerge');
+var __deepMerge = require('../../object/deepMerge');
 
-const __express = require('express');
+var __express = require('express');
 
-const __uncamelize = require('../../string/uncamelize');
+var __uncamelize = require('../../string/uncamelize');
 
-const __request = require('../../http/request');
+var __request = require('../../http/request');
 
-const __packageRoot = require('../../path/packageRoot');
+var __packageRoot = require('../../path/packageRoot');
 
-const __SPromise = require('../../promise/SPromise');
+var __SPromise = require('../../promise/SPromise');
 /**
  * @name                express
  * @namespace           node.server.express
@@ -37,11 +37,11 @@ module.exports = function (args) {
     args = {};
   }
 
-  const settings = __deepMerge(__sugarConfig('express'), args);
+  var settings = __deepMerge(__sugarConfig('express'), args);
 
-  const server = __express();
+  var server = __express();
 
-  const promise = new __SPromise((resolve, reject, trigger, cancel) => {
+  var promise = new __SPromise((resolve, reject, trigger, cancel) => {
     server.use(settings.staticDir.replace(__packageRoot(process.cwd()), ''), __express.static(settings.staticDir));
     Object.keys(settings).forEach(name => {
       server.set(__uncamelize(name, ' ').toLowerCase(), settings[name]);

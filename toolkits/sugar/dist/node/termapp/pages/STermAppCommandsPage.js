@@ -20,13 +20,13 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __SAppPage = require('../../blessed/app/SAppPage');
+var __SAppPage = require('../../blessed/app/SAppPage');
 
-const __SCommandPanel = require('../../blessed/panel/SCommandPanel');
+var __SCommandPanel = require('../../blessed/panel/SCommandPanel');
 
-const __SInputPopup = require('../../blessed/popup/SInputPopup');
+var __SInputPopup = require('../../blessed/popup/SInputPopup');
 
-const __hotkey = require('../../keyboard/hotkey');
+var __hotkey = require('../../keyboard/hotkey');
 /**
  * @name              STermAppCommandsPage
  * @namespace           node.termapp.pages
@@ -74,7 +74,7 @@ module.exports = (_temp = _class = /*#__PURE__*/function (_SAppPage) {
 
     _this = _super.call(this, id, title, settings); // const scssCommand = ;
 
-    const panel = new __SCommandPanel(settings.commands);
+    var panel = new __SCommandPanel(settings.commands);
 
     _this.append(panel);
 

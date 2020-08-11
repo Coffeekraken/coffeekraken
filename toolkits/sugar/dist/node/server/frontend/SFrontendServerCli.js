@@ -2,6 +2,14 @@
 
 var _class, _temp;
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -24,11 +32,11 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __SExpressServerCli = require('../express/SExpressServerCli');
+var __SExpressServerCli = require('../express/SExpressServerCli');
 
-const __frontendServer = require('../frontend/frontend');
+var __frontendServer = require('../frontend/frontend');
 
-const __SPromise = require('../../promise/SPromise');
+var __SPromise = require('../../promise/SPromise');
 /**
  * @name            SFrontendServerCli
  * @namespace           node.server.frontend
@@ -83,11 +91,10 @@ module.exports = (_temp = _class = /*#__PURE__*/function (_SExpressServerCli) {
 
     _classCallCheck(this, SFrontendServerCli);
 
-    return _super.call(this, {
+    return _super.call(this, _objectSpread({
       id: 'server.frontend',
-      name: 'Frontend Server',
-      ...settings
-    });
+      name: 'Frontend Server'
+    }, settings));
   }
   /**
    * @name            _run
@@ -116,19 +123,24 @@ module.exports = (_temp = _class = /*#__PURE__*/function (_SExpressServerCli) {
         settings = {};
       }
 
-      return new __SPromise(async function (resolve, reject, trigger, cancel) {
-        const serverPromise = __frontendServer(argsObj);
+      return new __SPromise( /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator(function* (resolve, reject, trigger, cancel) {
+          var serverPromise = __frontendServer(argsObj);
 
-        __SPromise.pipe(serverPromise, this);
+          __SPromise.pipe(serverPromise, this);
 
-        const res = await serverPromise;
-        resolve(res);
-      }, {
+          var res = yield serverPromise;
+          resolve(res);
+        });
+
+        return function (_x, _x2, _x3, _x4) {
+          return _ref.apply(this, arguments);
+        };
+      }(), {
         id: 'cli.server.frontend'
       }).start();
     }
   }]);
 
   return SFrontendServerCli;
-}(__SExpressServerCli), _defineProperty(_class, "command", 'sugar server.frontend %arguments'), _defineProperty(_class, "definitionObj", { ...__SExpressServerCli.definitionObj
-}), _temp);
+}(__SExpressServerCli), _defineProperty(_class, "command", 'sugar server.frontend %arguments'), _defineProperty(_class, "definitionObj", _objectSpread({}, __SExpressServerCli.definitionObj)), _temp);

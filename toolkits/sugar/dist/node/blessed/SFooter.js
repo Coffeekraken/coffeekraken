@@ -24,19 +24,19 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-const __blessed = require('blessed');
+var __blessed = require('blessed');
 
-const __SComponent = require('./SComponent');
+var __SComponent = require('./SComponent');
 
-const __deepMerge = require('../object/deepMerge');
+var __deepMerge = require('../object/deepMerge');
 
-const __parseHtml = require('../terminal/parseHtml');
+var __parseHtml = require('../terminal/parseHtml');
 
-const __color = require('../color/color');
+var __color = require('../color/color');
 
-const __ora = require('ora');
+var __ora = require('ora');
 
-const __countLine = require('../string/countLine');
+var __countLine = require('../string/countLine');
 /**
  * @name                  SFooter
  * @namespace           node.blessed
@@ -99,13 +99,13 @@ module.exports = /*#__PURE__*/function (_SComponent) {
     }, settings));
 
     if (_this._settings.authors.length) {
-      const authArray = [];
+      var authArray = [];
 
       _this._settings.authors.forEach(auth => {
         authArray.push(auth.name);
       });
 
-      let content = __parseHtml(` Made by <bold>${authArray.join(', ')}</bold>`);
+      var content = __parseHtml(" Made by <bold>".concat(authArray.join(', '), "</bold>"));
 
       _this._authorsBox = __blessed.box({
         top: 0,
@@ -134,7 +134,7 @@ module.exports = /*#__PURE__*/function (_SComponent) {
         bg: _this._settings.style.bg,
         fg: _this._settings.style.fg
       },
-      content: __parseHtml(`MIT ©${new Date().getFullYear()} Coffeekraken`)
+      content: __parseHtml("MIT \xA9".concat(new Date().getFullYear(), " Coffeekraken"))
     });
 
     _this.append(_this._copyrightBox);
@@ -172,10 +172,10 @@ module.exports = /*#__PURE__*/function (_SComponent) {
   _createClass(SFooter, [{
     key: "_updateStatusBar",
     value: function _updateStatusBar() {
-      let commandsStatusTextArray = [];
+      var commandsStatusTextArray = [];
 
-      for (let key in this._settings.commands) {
-        const commandInstance = this._settings.commands[key];
+      for (var key in this._settings.commands) {
+        var commandInstance = this._settings.commands[key];
 
         if (!commandInstance._footerSpinner) {
           commandInstance._footerSpinner = __ora(commandInstance.name);
@@ -183,16 +183,16 @@ module.exports = /*#__PURE__*/function (_SComponent) {
 
         if (commandInstance.state === 'running') {
           commandInstance._footerSpinner.color = 'black';
-          commandsStatusTextArray.push(`{${__color('terminal.cyan').toString()}-bg} ${commandInstance._footerSpinner.frame()} (${commandInstance.key}) {/${__color('terminal.cyan').toString()}-bg}`);
+          commandsStatusTextArray.push("{".concat(__color('terminal.cyan').toString(), "-bg} ").concat(commandInstance._footerSpinner.frame(), " (").concat(commandInstance.key, ") {/").concat(__color('terminal.cyan').toString(), "-bg}"));
         } else if (commandInstance.isWatching()) {
           commandInstance._footerSpinner.color = 'black';
-          commandsStatusTextArray.push(`{${__color('terminal.primary').toString()}-bg} ${commandInstance._footerSpinner.frame()} (${commandInstance.key}) {/${__color('terminal.primary').toString()}-bg}`);
+          commandsStatusTextArray.push("{".concat(__color('terminal.primary').toString(), "-bg} ").concat(commandInstance._footerSpinner.frame(), " (").concat(commandInstance.key, ") {/").concat(__color('terminal.primary').toString(), "-bg}"));
         } else if (commandInstance.state === 'success') {
           commandInstance._footerSpinner.color = 'black';
-          commandsStatusTextArray.push(`{${__color('terminal.green').toString()}-bg} ${commandInstance._footerSpinner.frame()} (${commandInstance.key}) {/${__color('terminal.green').toString()}-bg}`);
+          commandsStatusTextArray.push("{".concat(__color('terminal.green').toString(), "-bg} ").concat(commandInstance._footerSpinner.frame(), " (").concat(commandInstance.key, ") {/").concat(__color('terminal.green').toString(), "-bg}"));
         } else if (commandInstance.state === 'error') {
           commandInstance._footerSpinner.color = 'black';
-          commandsStatusTextArray.push(`{${__color('terminal.red').toString()}-bg} ${commandInstance._footerSpinner.frame()} (${commandInstance.key}) {/${__color('terminal.red').toString()}-bg}`);
+          commandsStatusTextArray.push("{".concat(__color('terminal.red').toString(), "-bg} ").concat(commandInstance._footerSpinner.frame(), " (").concat(commandInstance.key, ") {/").concat(__color('terminal.red').toString(), "-bg}"));
         }
       }
 

@@ -24,9 +24,9 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-const __SColor = require('../../../js/color/SColor');
+var __SColor = require('../../../js/color/SColor');
 
-const __sugarConfig = require('../config/sugar');
+var __sugarConfig = require('../config/sugar');
 /**
  * @namespace           node.color
  * @src             ../../../js/color/SColor.js
@@ -73,12 +73,12 @@ module.exports = /*#__PURE__*/function (_SColor) {
     key: "getColor",
     value: function getColor(color) {
       // try to get the color from the sugar config
-      let sugarConfigColor;
+      var sugarConfigColor;
 
       if (color.match(/terminal\./)) {
-        sugarConfigColor = __sugarConfig(`terminal.colors.${color.replace('terminal.', '')}`);
+        sugarConfigColor = __sugarConfig("terminal.colors.".concat(color.replace('terminal.', '')));
       } else {
-        sugarConfigColor = __sugarConfig(`colors.${color}`);
+        sugarConfigColor = __sugarConfig("colors.".concat(color));
       }
 
       if (sugarConfigColor && sugarConfigColor.color) return sugarConfigColor.color;

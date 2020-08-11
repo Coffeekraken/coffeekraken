@@ -24,11 +24,11 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __SPromise = require('../../promise/SPromise');
+var __SPromise = require('../../promise/SPromise');
 
-const __SComponent = require('../SComponent');
+var __SComponent = require('../SComponent');
 
-const __deepMerge = require('../../object/deepMerge');
+var __deepMerge = require('../../object/deepMerge');
 /**
  * @name                    SAppPage
  * @namespace           node.blessed.app
@@ -163,13 +163,13 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
      */
     value: function setArgs(argsObj) {
       // build an object that take all updated arguments values
-      const updatedArgsObj = {}; // loop on each new arguments
+      var updatedArgsObj = {}; // loop on each new arguments
 
       Object.keys(argsObj).forEach(argName => {
         // check if it has changed
         if (this._argsObj[argName] !== undefined && argsObj[argName] === this._argsObj[argName]) {} else {
           // trigger an "arg" event through the _promise property
-          this._promise.trigger(`arg.${argName}`, {
+          this._promise.trigger("arg.".concat(argName), {
             newValue: argsObj[argName],
             oldValue: this._argsObj[argName]
           });
@@ -208,7 +208,7 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
     value: function destroy() {}
   }, {
     key: "app",
-    get: function () {
+    get: function get() {
       return global.SAppInstance;
     }
     /**
@@ -223,7 +223,7 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
 
   }, {
     key: "id",
-    get: function () {
+    get: function get() {
       return this._id;
     }
     /**
@@ -238,7 +238,7 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
 
   }, {
     key: "title",
-    get: function () {
+    get: function get() {
       return this._title;
     }
     /**
@@ -253,7 +253,7 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
 
   }, {
     key: "persistent",
-    get: function () {
+    get: function get() {
       return this._settings.persistent;
     }
   }]);

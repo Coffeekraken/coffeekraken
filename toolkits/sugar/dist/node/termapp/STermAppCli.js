@@ -20,9 +20,9 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __SCli = require('../cli/SCli');
+var __SCli = require('../cli/SCli');
 
-const __packageRoot = require('../path/packageRoot');
+var __packageRoot = require('../path/packageRoot');
 /**
  * @name            STermAppCli
  * @namespace           node.termapp

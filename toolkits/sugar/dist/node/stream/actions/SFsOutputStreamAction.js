@@ -2,6 +2,10 @@
 
 var _class, _temp;
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -28,15 +32,15 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __SActionsStreamAction = require('../SActionsStreamAction');
+var __SActionsStreamAction = require('../SActionsStreamAction');
 
-const __writeFile = require('../../fs/writeFile');
+var __writeFile = require('../../fs/writeFile');
 
-const __toString = require('../../string/toString');
+var __toString = require('../../string/toString');
 
-const __packageRoot = require('../../path/packageRoot');
+var __packageRoot = require('../../path/packageRoot');
 
-const __deepMerge = require('../../object/deepMerge');
+var __deepMerge = require('../../object/deepMerge');
 /**
  * @name            SFsOutputStreamAction
  * @namespace           node.stream.actions
@@ -100,32 +104,42 @@ module.exports = (_temp = _class = /*#__PURE__*/function (_SActionsStreamActio) 
   _createClass(SFsOutputStreamAction, [{
     key: "run",
     value: function run(streamObj, settings) {
+      var _this = this;
+
       if (settings === void 0) {
         settings = this._settings;
       }
 
-      return _get(_getPrototypeOf(SFsOutputStreamAction.prototype), "run", this).call(this, streamObj, async (resolve, reject, trigger) => {
-        if (!streamObj.outputStack || typeof streamObj.outputStack !== 'object') {
-          this.warn(`The streamObj does not contain any "<cyan>outputStack</cyan>" property so no file will be saved at all...`);
-          return resolve(streamObj);
-        } // loop on the files to save
+      return _get(_getPrototypeOf(SFsOutputStreamAction.prototype), "run", this).call(this, streamObj, /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator(function* (resolve, reject, trigger) {
+          if (!streamObj.outputStack || typeof streamObj.outputStack !== 'object') {
+            _this.warn("The streamObj does not contain any \"<cyan>outputStack</cyan>\" property so no file will be saved at all...");
+
+            return resolve(streamObj);
+          } // loop on the files to save
 
 
-        const outputStackKeys = Object.keys(streamObj.outputStack);
+          var outputStackKeys = Object.keys(streamObj.outputStack);
 
-        for (let i = 0; i < outputStackKeys.length; i++) {
-          const key = outputStackKeys[i];
-          const outputPath = streamObj.outputStack[key];
-          const readableOutputPath = outputPath.replace(__packageRoot(process.cwd()), '');
-          if (!streamObj[key]) continue;
-          trigger('log', {
-            value: `Saving the streamObj property "<yellow>${key}</yellow>" under "<cyan>${readableOutputPath}</cyan>"`
-          });
-          await __writeFile(outputPath, __toString(streamObj[key]));
-        }
+          for (var i = 0; i < outputStackKeys.length; i++) {
+            var key = outputStackKeys[i];
+            var outputPath = streamObj.outputStack[key];
+            var readableOutputPath = outputPath.replace(__packageRoot(process.cwd()), '');
+            if (!streamObj[key]) continue;
+            trigger('log', {
+              group: settings.name,
+              value: "Saving the streamObj property \"<yellow>".concat(key, "</yellow>\" under \"<cyan>").concat(readableOutputPath, "</cyan>\"")
+            });
+            yield __writeFile(outputPath, __toString(streamObj[key]));
+          }
 
-        resolve(streamObj);
-      });
+          resolve(streamObj);
+        });
+
+        return function (_x, _x2, _x3) {
+          return _ref.apply(this, arguments);
+        };
+      }());
     }
   }]);
 

@@ -20,15 +20,15 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __deepMerge = require('../object/deepMerge');
+var __deepMerge = require('../object/deepMerge');
 
-const __blessed = require('blessed');
+var __blessed = require('blessed');
 
-const __parseHtml = require('./parseHtml');
+var __parseHtml = require('./parseHtml');
 
-const __splitEvery = require('../string/splitEvery');
+var __splitEvery = require('../string/splitEvery');
 
-const __countLine = require('../string/countLine');
+var __countLine = require('../string/countLine');
 /**
  * @name                    SHeader
  * @namespace           node.terminal
@@ -94,7 +94,7 @@ module.exports = (_temp = /*#__PURE__*/function (_blessed$box) {
     _classCallCheck(this, SHeader);
 
     // save the settings
-    const _settings = __deepMerge({
+    var _settings = __deepMerge({
       blessed: {
         tags: true,
         padding: {

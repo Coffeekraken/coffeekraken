@@ -12,32 +12,19 @@ const __tmpDir = require('../../../fs/tmpDir');
 const __childProcess = require('child_process');
 
 /**
- * @name                SNodeWebpackStreamAction
+ * @name                SNodeCompilerStreamAction
  * @namespace           node.build.node.actions
  * @type                Class
  * @extends             SActionsStreamAction
  *
- * This function is responsible of passing webpack on the output files
+ * This function is responsible of passing babel, typescript, etc... on the output files
  *
  * @param       {Object}        streamObj          The streamObj object with the properties described bellow:
  * @return      {Promise}                         A simple promise that will be resolved when the process is finished
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SNodeWebpackStreamAction extends __SActionsStreamAction {
-  /**
-   * @name            definitionObj
-   * @type             Object
-   * @static
-   *
-   * Store the definition object that specify the streamObj required properties, types, etc...
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  static definitionObj = {
-    ...__SBuildNodeCli.definitionObj
-  };
-
+module.exports = class SNodeCompilerStreamAction extends __SActionsStreamAction {
   /**
    * @name            constructor
    * @type            Function
@@ -82,14 +69,13 @@ module.exports = class SNodeWebpackStreamAction extends __SActionsStreamAction {
         const filePath = `${tmpDir}/${__getFilename(streamObj.input)}`;
         const outFilePath = `${filePath}.out`;
 
-        this.log(
-          `Precessing the typescript file "<cyan>${streamObj.input.replace(
+        this.log({
+          group: settings.name,
+          value: `Precessing the <magenta>typescript</magenta> file "<cyan>${streamObj.input.replace(
             `${__packageRoot()}/`,
             ''
           )}</cyan>"...`
-        );
-
-        console.log('XXX');
+        });
 
         __fs.writeFileSync(filePath, streamObj.data);
 
@@ -106,12 +92,13 @@ module.exports = class SNodeWebpackStreamAction extends __SActionsStreamAction {
         return resolve(streamObj);
       }
 
-      this.log(
-        `Precessing the javascript file "<cyan>${streamObj.input.replace(
+      this.log({
+        group: settings.name,
+        value: `Precessing the <magenta>javascript</magenta> file "<cyan>${streamObj.input.replace(
           `${__packageRoot()}/`,
           ''
         )}</cyan>"...`
-      );
+      });
 
       const result = await __babel
         .transformAsync(streamObj.data, {

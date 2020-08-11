@@ -28,23 +28,23 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __webpack = require('webpack');
+var __webpack = require('webpack');
 
-const __getFilename = require('../../../fs/filename');
+var __getFilename = require('../../../fs/filename');
 
-const __packageRoot = require('../../../path/packageRoot');
+var __packageRoot = require('../../../path/packageRoot');
 
-const __deepMerge = require('../../../object/deepMerge');
+var __deepMerge = require('../../../object/deepMerge');
 
-const __fs = require('fs');
+var __fs = require('fs');
 
-const __path = require('path');
+var __path = require('path');
 
-const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
+var __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
 
-const __SBuildJsCli = require('../../SBuildJsCli');
+var __SBuildJsCli = require('../../SBuildJsCli');
 
-const {
+var {
   stream
 } = require('globby');
 /**
@@ -113,7 +113,7 @@ module.exports = (_temp = _class = /*#__PURE__*/function (_SActionsStreamActio) 
     value: function run(streamObj, settings) {
       return _get(_getPrototypeOf(SJsConfigFileToJsonStreamAction.prototype), "run", this).call(this, streamObj, (resolve, reject) => {
         // get the config object from input file
-        const config = require(streamObj.input); // transform the config to JSON
+        var config = require(streamObj.input); // transform the config to JSON
 
 
         streamObj.data = JSON.stringify(config, null, 4); // resolve the action

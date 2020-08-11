@@ -1,6 +1,6 @@
 "use strict";
 
-const __isPath = require('../fs/isPath');
+var __isPath = require('../fs/isPath');
 /**
  * @name                            path
  * @namespace           node.is

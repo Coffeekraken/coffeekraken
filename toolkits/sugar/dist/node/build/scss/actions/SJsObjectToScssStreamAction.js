@@ -2,6 +2,10 @@
 
 var _class, _temp;
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -28,13 +32,13 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __deepMerge = require('../../../object/deepMerge');
+var __deepMerge = require('../../../object/deepMerge');
 
-const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
+var __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
 
-const __jsObjectToScssMap = require('../jsObjectToScssMap');
+var __jsObjectToScssMap = require('../jsObjectToScssMap');
 
-const {
+var {
   stream
 } = require('globby');
 /**
@@ -102,14 +106,20 @@ module.exports = (_temp = _class = /*#__PURE__*/function (_SActionsStreamActio) 
   _createClass(SJsObjectToScssStreamAction, [{
     key: "run",
     value: function run(streamObj, settings) {
-      return _get(_getPrototypeOf(SJsObjectToScssStreamAction.prototype), "run", this).call(this, streamObj, async (resolve, reject) => {
-        const result = __jsObjectToScssMap(streamObj.jsObjectToScss, settings); // set or append in the "data" property
+      return _get(_getPrototypeOf(SJsObjectToScssStreamAction.prototype), "run", this).call(this, streamObj, /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator(function* (resolve, reject) {
+          var result = __jsObjectToScssMap(streamObj.jsObjectToScss, settings); // set or append in the "data" property
 
 
-        if (streamObj.data) streamObj.data = result + streamObj.data;else streamObj.data = result; // resolving the action
+          if (streamObj.data) streamObj.data = result + streamObj.data;else streamObj.data = result; // resolving the action
 
-        resolve(streamObj);
-      });
+          resolve(streamObj);
+        });
+
+        return function (_x, _x2) {
+          return _ref.apply(this, arguments);
+        };
+      }());
     }
   }]);
 

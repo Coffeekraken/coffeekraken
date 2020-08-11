@@ -2,6 +2,10 @@
 
 var _class, _temp;
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -28,15 +32,15 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __SPhpServerCli = require('../php/SPhpServerCli');
+var __SPhpServerCli = require('../php/SPhpServerCli');
 
-const __packageRoot = require('../../path/packageRoot');
+var __packageRoot = require('../../path/packageRoot');
 
-const __deepMerge = require('../../object/deepMerge');
+var __deepMerge = require('../../object/deepMerge');
 
-const __argsToObject = require('../../cli/argsToObject');
+var __argsToObject = require('../../cli/argsToObject');
 
-const __sugarConfig = require('../../config/sugar');
+var __sugarConfig = require('../../config/sugar');
 /**
  * @name            SBladePhpServerCli
  * @namespace           node.server.bladePhp
@@ -106,24 +110,16 @@ module.exports = (_temp = _class = /*#__PURE__*/function (_SPhpServerCli) {
         includeAllArgs = this._settings.includeAllArgs;
       }
 
-      const args = __argsToObject(argsObj, this.definitionObj);
+      var args = __argsToObject(argsObj, this.definitionObj);
 
-      const serverArgs = __deepMerge(args.server, { ...__sugarConfig('blade.server')
-      });
+      var serverArgs = __deepMerge(args.server, _objectSpread({}, __sugarConfig('blade.server')));
 
-      serverArgs.router = `${__packageRoot(__dirname)}/src/php/blade/sBladePhpServerRouter.php`;
+      serverArgs.router = "".concat(__packageRoot(__dirname), "/src/php/blade/sBladePhpServerRouter.php");
 
-      const pro = _get(_getPrototypeOf(SBladePhpServerCli.prototype), "run", this).call(this, serverArgs, includeAllArgs, false);
+      var pro = _get(_getPrototypeOf(SBladePhpServerCli.prototype), "run", this).call(this, serverArgs, includeAllArgs, false);
 
       setTimeout(() => {
-        this.log(`<green>Your Blade PHP server is up and running</green>:
-
-Hostname              : <yellow>${this.runningArgsObj.hostname}</yellow>
-Port                  : <yellow>${this.runningArgsObj.port}</yellow>
-Root directory        : <yellow>${this.runningArgsObj.rootDir}</yellow>
-Views root directory  : <yellow>${args.rootDir}</yellow>
-Views cache directory : <yellow>${args.cacheDir}</yellow>
-API Url               : <cyan>http://${this.runningArgsObj.hostname}:${this.runningArgsObj.port}</cyan>`);
+        this.log("<green>Your Blade PHP server is up and running</green>:\n\nHostname              : <yellow>".concat(this.runningArgsObj.hostname, "</yellow>\nPort                  : <yellow>").concat(this.runningArgsObj.port, "</yellow>\nRoot directory        : <yellow>").concat(this.runningArgsObj.rootDir, "</yellow>\nViews root directory  : <yellow>").concat(args.rootDir, "</yellow>\nViews cache directory : <yellow>").concat(args.cacheDir, "</yellow>\nAPI Url               : <cyan>http://").concat(this.runningArgsObj.hostname, ":").concat(this.runningArgsObj.port, "</cyan>"));
       });
       return pro;
     }
@@ -134,17 +130,16 @@ API Url               : <cyan>http://${this.runningArgsObj.hostname}:${this.runn
   server: {
     type: 'Object',
     description: 'PHP server options',
-    children: { ...__SPhpServerCli.definitionObj
-    }
+    children: _objectSpread({}, __SPhpServerCli.definitionObj)
   },
   rootDir: {
     type: 'String',
     description: 'Blade views root directory',
-    default: __sugarConfig('views.rootDir') || `${__packageRoot(process.cwd())}/dist/views`
+    default: __sugarConfig('views.rootDir') || "".concat(__packageRoot(process.cwd()), "/dist/views")
   },
   cacheDir: {
     type: 'String',
     description: 'Blade views cache directory',
-    default: __sugarConfig('views.cacheDir') || `${__packageRoot(process.cwd())}/dist/views/.cache`
+    default: __sugarConfig('views.cacheDir') || "".concat(__packageRoot(process.cwd()), "/dist/views/.cache")
   }
 }), _temp);

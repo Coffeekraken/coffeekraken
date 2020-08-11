@@ -1,6 +1,6 @@
 "use strict";
 
-const __SBladePhpServerCli = require('./SBladePhpServerCli');
+var __SBladePhpServerCli = require('./SBladePhpServerCli');
 /**
  * @name                bladePhp
  * @namespace           node.server.bladePhp
@@ -27,6 +27,6 @@ module.exports = function (args) {
     args = {};
   }
 
-  const cli = new __SBladePhpServerCli();
+  var cli = new __SBladePhpServerCli();
   return cli.spawn(args);
 };

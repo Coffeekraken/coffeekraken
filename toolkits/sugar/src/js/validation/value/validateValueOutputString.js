@@ -80,5 +80,5 @@ export default function validateValueOutputString(validateValueResultObj) {
     }
   });
 
-  return __parseHtml(issuesArray.join('\n'));
+  return __parseHtml(issuesArray.join('\n')) + '\n';
 }

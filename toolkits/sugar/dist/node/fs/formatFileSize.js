@@ -1,6 +1,6 @@
 "use strict";
 
-const __filesize = require('filesize'); // TODO tests
+var __filesize = require('filesize'); // TODO tests
 
 /**
  * @name                                    formatFileSize

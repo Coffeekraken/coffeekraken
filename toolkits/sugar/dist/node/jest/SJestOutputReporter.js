@@ -6,14 +6,14 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-const __getFilename = require('../fs/filename');
+var __getFilename = require('../fs/filename');
 
-const __packageRoot = require('../path/packageRoot');
+var __packageRoot = require('../path/packageRoot');
 
-const __highlight = require('cli-highlight').highlight; // my-custom-reporter.js
+var __highlight = require('cli-highlight').highlight; // my-custom-reporter.js
 
 
-let SJestOutputReporter = /*#__PURE__*/function () {
+var SJestOutputReporter = /*#__PURE__*/function () {
   function SJestOutputReporter(globalConfig, options) {
     _classCallCheck(this, SJestOutputReporter);
 
@@ -24,27 +24,27 @@ let SJestOutputReporter = /*#__PURE__*/function () {
   _createClass(SJestOutputReporter, [{
     key: "onRunStart",
     value: function onRunStart(metas, vars) {
-      console.log(`<bgYellow><black> Starting tests </black></bgYellow> estimated time: <yellow>${vars.estimatedTime}s</yellow>`);
+      console.log("<bgYellow><black> Starting tests </black></bgYellow> estimated time: <yellow>".concat(vars.estimatedTime, "s</yellow>"));
     }
   }, {
     key: "onTestStart",
     value: function onTestStart(obj) {
-      console.log(`#temp #mb:0 <yellow>│</yellow> <bgCyan> ${__getFilename(obj.path)} </bgCyan> ${obj.path.replace(`${__packageRoot()}/`, '')}`);
+      console.log("#temp #mb:0 <yellow>\u2502</yellow> <bgCyan> ".concat(__getFilename(obj.path), " </bgCyan> ").concat(obj.path.replace("".concat(__packageRoot(), "/"), '')));
     }
   }, {
     key: "onTestResult",
     value: function onTestResult(obj, result) {
       // console.log('test result', result);
       if (result.numFailingTests === 0) {
-        console.log(`<yellow>│</yellow> <bgGreen><black> ${__getFilename(obj.path)} </black></bgGreen> ${obj.path.replace(`${__packageRoot()}/`, '')}`);
+        console.log("<yellow>\u2502</yellow> <bgGreen><black> ".concat(__getFilename(obj.path), " </black></bgGreen> ").concat(obj.path.replace("".concat(__packageRoot(), "/"), '')));
       } else {
-        console.log(`#mb:0 <yellow>│</yellow> <bgRed><black> ${__getFilename(obj.path)} </black></bgRed> ${obj.path.replace(`${__packageRoot()}/`, '')}`);
-        console.log(`<yellow>│</yellow>`);
+        console.log("#mb:0 <yellow>\u2502</yellow> <bgRed><black> ".concat(__getFilename(obj.path), " </black></bgRed> ").concat(obj.path.replace("".concat(__packageRoot(), "/"), '')));
+        console.log("<yellow>\u2502</yellow>");
         result.testResults.forEach(resObj => {
           if (resObj.status === 'passed') {
-            console.log(`<yellow>│</yellow> <bgGreen><black> Passed </black></bgGreen> ${resObj.title}`);
+            console.log("<yellow>\u2502</yellow> <bgGreen><black> Passed </black></bgGreen> ".concat(resObj.title));
           } else if (resObj.status === 'failed') {
-            console.log(`<yellow>│</yellow> <bgRed><black> Failed </black></bgRed> <red>${resObj.title}</red>`);
+            console.log("<yellow>\u2502</yellow> <bgRed><black> Failed </black></bgRed> <red>".concat(resObj.title, "</red>"));
           }
         });
       }
@@ -54,28 +54,28 @@ let SJestOutputReporter = /*#__PURE__*/function () {
     value: function onRunComplete(contexts, result) {
       result.testResults.forEach(resultObj => {
         if (resultObj.failureMessage) {
-          console.log(`<bgRed><black> ${resultObj.testFilePath.replace(`${__packageRoot()}/`, '')} </black></bgRed>`);
-          const lines = resultObj.failureMessage.split('\n').map((line, i) => {
+          console.log("<bgRed><black> ".concat(resultObj.testFilePath.replace("".concat(__packageRoot(), "/"), ''), " </black></bgRed>"));
+          var lines = resultObj.failureMessage.split('\n').map((line, i) => {
             if (i === 0) {
-              return `<yellow>${line}</yellow>`;
+              return "<yellow>".concat(line, "</yellow>");
             } else if (line.trim().slice(0, 8) === 'Expected') {
-              return `<green>${line}</green>`;
+              return "<green>".concat(line, "</green>");
             } else if (line.trim().slice(0, 8) === 'Received') {
-              return `<red>${line}</red>`;
+              return "<red>".concat(line, "</red>");
             } else if (line.trim().slice(0, 3) === 'at ') {
-              return `<cyan>${line}</cyan>`;
+              return "<cyan>".concat(line, "</cyan>");
             }
 
             return line;
           });
-          console.log(`<white>${lines.join('\n')}\n</white>`);
+          console.log("<white>".concat(lines.join('\n'), "\n</white>"));
         }
       });
-      const titleBg = result.numFailedTests > 0 ? 'bgRed' : 'bgGreen';
-      console.log(`<${titleBg}><black> Stats </black></${titleBg}>\n`);
-      console.log(`- <yellow>total</yellow>  tests: <yellow>${result.numTotalTests}</yellow>`);
-      console.log(`- <green>passed</green> tests: <green>${result.numPassedTests}</green>`);
-      console.log(`- <red>failed</red> tests: <red>${result.numFailedTests}</red>`);
+      var titleBg = result.numFailedTests > 0 ? 'bgRed' : 'bgGreen';
+      console.log("<".concat(titleBg, "><black> Stats </black></").concat(titleBg, ">\n"));
+      console.log("- <yellow>total</yellow>  tests: <yellow>".concat(result.numTotalTests, "</yellow>"));
+      console.log("- <green>passed</green> tests: <green>".concat(result.numPassedTests, "</green>"));
+      console.log("- <red>failed</red> tests: <red>".concat(result.numFailedTests, "</red>"));
     }
   }]);
 

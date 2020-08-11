@@ -3,7 +3,9 @@ import __validateObject from '../validation/object/validateObject';
 import __validateObjectOutputString from '../validation/object/validateObjectOutputString';
 import __parseHtml from '../console/parseHtml';
 import __trimLines from '../string/trimLines';
+import __argsToObject from '../cli/argsToObject';
 import __SDefinitionObjectError from '../error/SObjectValidationError';
+import __deepize from '../object/deepize';
 
 /**
  * @name              SInterface
@@ -75,7 +77,7 @@ export default class SInterface {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   static apply(instance, settings = {}) {
-    settings = __deepMerge(SInterface.settings, settings);
+    settings = __deepMerge(this.settings, settings);
 
     let issues = [];
     let issueObj = {
@@ -86,7 +88,7 @@ export default class SInterface {
       instance,
       this.definitionObj,
       {
-        throw: settings.throw,
+        throw: false,
         name: instance.name || instance.constructor.name
       }
     );
@@ -99,7 +101,20 @@ export default class SInterface {
     if (!issueObj.issues.length) return true;
 
     if (settings.throw) {
-      throw new __SDefinitionObjectError(issueObj);
+      const message = this.outputString(implementationValidationResult);
+      let outputArray = [];
+      if (this.title || settings.title) {
+        outputArray.push(
+          `<bold><underline>${settings.title || this.title}</underline></bold>`
+        );
+        outputArray.push('');
+      }
+      if (this.description || settings.description) {
+        outputArray.push(settings.description || this.description);
+        outputArray.push('');
+      }
+      outputArray.push(message);
+      throw outputArray.join('\n');
     }
 
     switch (settings.return.toLowerCase()) {
@@ -131,6 +146,58 @@ export default class SInterface {
     apply(instance, {
       throw: true
     });
+  }
+
+  /**
+   * @name          applyAndComplete
+   * @type          Function
+   * @static
+   *
+   * This static method allows you to complete the passed data object and apply the interface
+   * directly. If something goes wrong, it will throw an error, otherwise, return the
+   * completed object
+   *
+   * @since       2.0.0
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static applyAndComplete(object) {
+    const completedObject = this.complete(object);
+    this.applyAndThrow(completedObject);
+    return completedObject;
+  }
+
+  /**
+   * @name          complete
+   * @type          Function
+   * @static
+   *
+   * This static method allows you to pass an object to complete with the "default" values
+   * of the definition object if needed
+   *
+   * @param         {Object}            data              The data object to complete
+   * @return        {Object}                              The completed data object
+   *
+   * @since         2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static complete(data) {
+    const argsObj = Object.assign({}, data);
+
+    // loop on all the arguments
+    Object.keys(this.definitionObj).forEach((argString) => {
+      const argDefinitionObj = this.definitionObj[argString];
+
+      // check if we have an argument passed in the properties
+      if (
+        argsObj[argString] === undefined &&
+        argDefinitionObj.default !== undefined
+      ) {
+        argsObj[argString] = argDefinitionObj.default;
+      }
+    });
+
+    // return the argsObj
+    return __deepize(argsObj);
   }
 
   /**
@@ -169,5 +236,45 @@ export default class SInterface {
   static output(resultObj) {
     const string = __validateObjectOutputString(resultObj);
     console.log(string);
+  }
+
+  /**
+   * @name                parse
+   * @type                Function
+   * @static
+   *
+   * This method take a string like "-v 'something' --temp" and convert it into an object of arguments
+   * depending on the definition object of this interface
+   *
+   * @param       {String}            string            The string to parse
+   * @return      {Object}                              The object of arguments values
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static parse(string) {
+    const args = __argsToObject(string, this.definitionObj);
+    return args;
+  }
+
+  /**
+   * @name                parseAndComplete
+   * @type                Function
+   * @static
+   *
+   * This method take a string like "-v 'something' --temp" and convert it into an object of arguments
+   * depending on the definition object of this interface.
+   * It will also complete the data object obtained with the "default" values if needed
+   *
+   * @param       {String}            string            The string to parse
+   * @return      {Object}                              The object of arguments values
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static parseAndComplete(string) {
+    let args = __argsToObject(string, this.definitionObj);
+    args = this.complete(args);
+    return args;
   }
 }

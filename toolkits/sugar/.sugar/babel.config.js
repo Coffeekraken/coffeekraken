@@ -1,4 +1,14 @@
 module.exports = {
+  presets: [
+    [
+      '@babel/preset-env',
+      {
+        targets: {
+          esmodules: true
+        }
+      }
+    ]
+  ],
   plugins: [
     'add-module-exports',
     '@babel/plugin-proposal-class-properties',

@@ -24,9 +24,9 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
+var __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
 
-const __SDocblock = require('../../../docblock/SDocblock');
+var __SDocblock = require('../../../docblock/SDocblock');
 /**
  * @name                SDocblocksObjectsToMarkdownStreamAction
  * @namespace           node.build.doc.actions
@@ -99,7 +99,7 @@ module.exports = (_temp = _class = /*#__PURE__*/function (_SActionsStreamActio) 
       return new Promise((resolve, reject) => {
         // convert the objects to markdown
         // console.log(streamObj.data);
-        const docblockInstance = new __SDocblock(streamObj.data, {
+        var docblockInstance = new __SDocblock(streamObj.data, {
           filepath: streamObj.input
         });
         streamObj.data = docblockInstance.toMarkdown();

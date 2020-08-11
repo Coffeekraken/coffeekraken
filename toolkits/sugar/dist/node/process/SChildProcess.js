@@ -2,6 +2,14 @@
 
 var _temp2;
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -24,23 +32,23 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __SPromise = require('../promise/SPromise');
+var __SPromise = require('../promise/SPromise');
 
-const __deepMerge = require('../object/deepMerge');
+var __deepMerge = require('../object/deepMerge');
 
-const __childProcess = require('child_process');
+var __childProcess = require('child_process');
 
-const __hotkey = require('../keyboard/hotkey');
+var __hotkey = require('../keyboard/hotkey');
 
-const __registerProcess = require('./registerProcess');
+var __registerProcess = require('./registerProcess');
 
-const __uniqid = require('../string/uniqid');
+var __uniqid = require('../string/uniqid');
 
-const __buildCommandLine = require('../cli/buildCommandLine');
+var __buildCommandLine = require('../cli/buildCommandLine');
 
-const __isPath = require('../is/path');
+var __isPath = require('../is/path');
 
-const __output = require('./output');
+var __output = require('./output');
 /**
  * @name              SChildProcess
  * @namespace         node.process
@@ -136,10 +144,10 @@ module.exports = (_temp2 = /*#__PURE__*/function (_SPromise) {
       before: null,
       after: null,
       shell: true,
-      env: { ...process.env,
+      env: _objectSpread(_objectSpread({}, process.env), {}, {
         CHILD_PROCESS_LEVEL: process.env.CHILD_PROCESS_LEVEL ? process.env.CHILD_PROCESS_LEVEL + 1 : 1,
         IS_CHILD_PROCESS: true
-      }
+      })
     }, settings);
     return _this;
   }
@@ -185,21 +193,27 @@ module.exports = (_temp2 = /*#__PURE__*/function (_SPromise) {
         settings = {};
       }
 
-      const promise = new __SPromise(async (resolve, reject, trigger, cancel) => {}).start();
+      var promise = new __SPromise( /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator(function* (resolve, reject, trigger, cancel) {});
 
-      (async () => {
-        let runningProcessId = settings.id || __uniqid();
+        return function (_x, _x2, _x3, _x4) {
+          return _ref.apply(this, arguments);
+        };
+      }()).start();
 
-        settings = __deepMerge(this._settings, settings); // build the command to run depending on the passed command in the constructor and the params
+      _asyncToGenerator(function* () {
+        var runningProcessId = settings.id || __uniqid();
 
-        const paramsToRun = __deepMerge(settings.defaultParamsObj, params); // console.log(paramsToRun, this._commandOrPath, settings.definitionObj);
+        settings = __deepMerge(_this2._settings, settings); // build the command to run depending on the passed command in the constructor and the params
+
+        var paramsToRun = __deepMerge(settings.defaultParamsObj, params); // console.log(paramsToRun, this._commandOrPath, settings.definitionObj);
 
 
-        const commandToRun = __buildCommandLine(this._commandOrPath, settings.definitionObj, paramsToRun); // initialize the runningProcess object
+        var commandToRun = __buildCommandLine(_this2._commandOrPath, settings.definitionObj, paramsToRun); // initialize the runningProcess object
 
 
-        const runningProcess = {
-          instanceId: this._settings.id,
+        var runningProcess = {
+          instanceId: _this2._settings.id,
           id: runningProcessId,
           promise: promise,
           settings: Object.assign({}, settings),
@@ -208,7 +222,7 @@ module.exports = (_temp2 = /*#__PURE__*/function (_SPromise) {
           duration: null,
           stdout: [],
           stderr: [],
-          rawCommand: this._commandOrPath,
+          rawCommand: _this2._commandOrPath,
           params: paramsToRun,
           command: commandToRun,
           state: 'running',
@@ -216,12 +230,12 @@ module.exports = (_temp2 = /*#__PURE__*/function (_SPromise) {
           after: null
         }; // adding the runningProcess in the stack
 
-        this._processesStack.push(runningProcess); // execute the "before" SChildProcess instance if setted
+        _this2._processesStack.push(runningProcess); // execute the "before" SChildProcess instance if setted
 
 
         if (settings.before) {
           if (!settings.before instanceof SChildProcess) {
-            throw new Error(`The passed "<cyan>settings.before</cyan>" setting has to be an instance of the "<primary>SChildProcess</primary>" class...`);
+            throw new Error("The passed \"<cyan>settings.before</cyan>\" setting has to be an instance of the \"<primary>SChildProcess</primary>\" class...");
           } // trigger a "before" event
 
 
@@ -229,16 +243,18 @@ module.exports = (_temp2 = /*#__PURE__*/function (_SPromise) {
             time: Date.now(),
             process: Object.assign({}, runningProcess)
           });
-          this.trigger(`${runningProcessId}.before`, {
+
+          _this2.trigger("".concat(runningProcessId, ".before"), {
             time: Date.now(),
             process: Object.assign({}, runningProcess)
           }); // running the before child process
 
-          runningProcess.before = await settings.before.run();
+
+          runningProcess.before = yield settings.before.run();
         } // extracting the spawn settings from the global settings object
 
 
-        const spawnSettings = Object.assign({}, settings);
+        var spawnSettings = Object.assign({}, settings);
         ['id', 'definitionObj', 'defaultParamsObj', 'method', 'before', 'after'].forEach(key => {
           delete spawnSettings[key];
         }); // trigger a "start" event
@@ -247,12 +263,14 @@ module.exports = (_temp2 = /*#__PURE__*/function (_SPromise) {
           time: Date.now(),
           process: Object.assign({}, runningProcess)
         });
-        this.trigger(`${runningProcessId}.start`, {
+
+        _this2.trigger("".concat(runningProcessId, ".start"), {
           time: Date.now(),
           process: Object.assign({}, runningProcess)
         }); // executing the actual command through the spawn node function
 
-        const childProcess = __childProcess[settings.method || 'spawn'](commandToRun, [], spawnSettings); // listen for ctrl+c to kill the child process
+
+        var childProcess = __childProcess[settings.method || 'spawn'](commandToRun, [], spawnSettings); // listen for ctrl+c to kill the child process
 
 
         __hotkey('ctrl+c', {
@@ -266,44 +284,49 @@ module.exports = (_temp2 = /*#__PURE__*/function (_SPromise) {
         __registerProcess(childProcess, runningProcess.id); // close
 
 
-        let finished = false;
+        var finished = false;
 
-        const resolveOrReject = async function (what, extendObj, code, signal) {
-          if (extendObj === void 0) {
-            extendObj = {};
-          }
+        var resolveOrReject = /*#__PURE__*/function () {
+          var _ref3 = _asyncToGenerator(function* (what, extendObj, code, signal) {
+            if (extendObj === void 0) {
+              extendObj = {};
+            }
 
-          if (finished) return;
-          finished = true;
-          runningProcess.end = Date.now();
-          runningProcess.duration = runningProcess.end - runningProcess.start;
+            if (finished) return;
+            finished = true;
+            runningProcess.end = Date.now();
+            runningProcess.duration = runningProcess.end - runningProcess.start;
 
-          if (settings.after) {
-            if (!settings.after instanceof SChildProcess) {
-              throw new Error(`The passed "<cyan>settings.after</cyan>" setting has to be an instance of the "<primary>SChildProcess</primary>" class...`);
-            } // trigger a "after" event
-
-
-            promise.trigger('after', {
-              time: Date.now(),
-              process: Object.assign({}, runningProcess)
-            });
-
-            _this2.trigger(`${runningProcessId}.after`, {
-              time: Date.now(),
-              process: Object.assign({}, runningProcess)
-            }); // running the after child process
+            if (settings.after) {
+              if (!settings.after instanceof SChildProcess) {
+                throw new Error("The passed \"<cyan>settings.after</cyan>\" setting has to be an instance of the \"<primary>SChildProcess</primary>\" class...");
+              } // trigger a "after" event
 
 
-            runningProcess.after = await settings.after.run();
-          }
+              promise.trigger('after', {
+                time: Date.now(),
+                process: Object.assign({}, runningProcess)
+              });
 
-          promise[what]({ ...runningProcess,
-            ...extendObj,
-            code,
-            signal
+              _this2.trigger("".concat(runningProcessId, ".after"), {
+                time: Date.now(),
+                process: Object.assign({}, runningProcess)
+              }); // running the after child process
+
+
+              runningProcess.after = yield settings.after.run();
+            }
+
+            promise[what](_objectSpread(_objectSpread(_objectSpread({}, runningProcess), extendObj), {}, {
+              code,
+              signal
+            }));
           });
-        };
+
+          return function resolveOrReject(_x5, _x6, _x7, _x8) {
+            return _ref3.apply(this, arguments);
+          };
+        }();
 
         childProcess.on('close', (code, signal) => {
           if (!code && signal) {
@@ -330,7 +353,7 @@ module.exports = (_temp2 = /*#__PURE__*/function (_SPromise) {
         if (childProcess.stdout) {
           childProcess.stdout.on('data', log => {
             log = log.toString();
-            const resultReg = /^#result\s(.*)$/gm;
+            var resultReg = /^#result\s(.*)$/gm;
 
             if (log.match(resultReg)) {
               runningProcess.state = 'success';
@@ -344,7 +367,8 @@ module.exports = (_temp2 = /*#__PURE__*/function (_SPromise) {
             promise.trigger('log', {
               value: log.toString()
             });
-            this.trigger(`${runningProcessId}.'log`, {
+
+            _this2.trigger("".concat(runningProcessId, ".'log"), {
               value: log.toString()
             });
           });
@@ -358,7 +382,8 @@ module.exports = (_temp2 = /*#__PURE__*/function (_SPromise) {
               error: error.toString(),
               value: error.toString()
             });
-            this.trigger(`${runningProcessId}.error`, {
+
+            _this2.trigger("".concat(runningProcessId, ".error"), {
               error: error.toString(),
               value: error.toString()
             });
@@ -452,14 +477,14 @@ module.exports = (_temp2 = /*#__PURE__*/function (_SPromise) {
         this.runningProcess.promise.trigger('log', {
           value: log.toString()
         });
-        this.trigger(`${this.runningProcess.id}.log`, {
+        this.trigger("".concat(this.runningProcess.id, ".log"), {
           value: log.toString()
         });
       });
     }
   }, {
     key: "runningProcess",
-    get: function () {
+    get: function get() {
       return this._processesStack.length ? this._processesStack[this._processesStack.length - 1] : null;
     }
   }]);

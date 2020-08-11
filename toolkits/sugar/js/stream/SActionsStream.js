@@ -163,7 +163,13 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
 
     _defineProperty(_assertThisInitialized(_this2), "_currentActionName", null);
 
-    _get((_thisSuper = _assertThisInitialized(_this2), _getPrototypeOf(SActionStream.prototype)), "start", _thisSuper).call(_thisSuper); // check the actions
+    _get((_thisSuper = _assertThisInitialized(_this2), _getPrototypeOf(SActionStream.prototype)), "start", _thisSuper).call(_thisSuper); // check that we have a definition object defined
+    // if (!this.constructor.definitionObj) {
+    //   throw new Error(
+    //     `You class "<yellow>${this.constructor.name}</yellow>" has to have a <yellow>static</yellow> <cyan>definitionObj</cyan> property defined...`
+    //   );
+    // }
+    // check the actions
 
 
     Object.keys(actions).forEach(actionName => {
@@ -443,15 +449,18 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
                     if (currentActionReturn instanceof Promise) currentStreamObj = yield currentActionReturn;else currentStreamObj = currentActionReturn;
                     currentActionReturn = null;
                   } catch (e) {
-                    if (typeof e === 'object') {
-                      actionObj.stderr.push("#error <red>".concat(e.name, "</red>: ").concat(e.message));
-                      throw new Error("".concat(e.message));
-                    } else if (typeof e === 'string') {
-                      actionObj.stderr.push(e); // trigger an "event"
-
-                      throw new Error("".concat(e));
-                    }
-
+                    // if (typeof e === 'object') {
+                    //   throw e;
+                    //   actionObj.stderr.push(
+                    //     `#error <red>${e.name}</red>: ${e.message}`
+                    //   );
+                    //   throw new Error(`${e.message}`);
+                    // } else if (typeof e === 'string') {
+                    //   actionObj.stderr.push(e);
+                    //   // trigger an "event"
+                    //   throw new Error(`${e}`);
+                    // }
+                    throw e;
                     _this3._exitCode = 1;
                     cancel(actionObj);
                   }
@@ -617,10 +626,7 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
 
           _this3.dispatch('complete', overallActionsStats);
 
-          resolve(overallActionsStats); // if (this._settings.exitOnComplete) {
-          //   console.log('#error ENDNE');
-          //   process.exit(this._exitCode);
-          // }
+          resolve(overallActionsStats);
         });
 
         return function (_x, _x2, _x3, _x4) {

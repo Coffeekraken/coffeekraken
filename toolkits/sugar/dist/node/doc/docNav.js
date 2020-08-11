@@ -1,26 +1,26 @@
 "use strict";
 
-const __fs = require('fs');
+var __fs = require('fs');
 
-const __SNav = require('../nav/SNav');
+var __SNav = require('../nav/SNav');
 
-const __SNavItem = require('../nav/SNavItem');
+var __SNavItem = require('../nav/SNavItem');
 
-const __isJson = require('../is/json');
+var __isJson = require('../is/json');
 
-const __isPath = require('../is/path');
+var __isPath = require('../is/path');
 
-const __ensureExists = require('../object/ensureExists');
+var __ensureExists = require('../object/ensureExists');
 
-const __get = require('../object/get');
+var __get = require('../object/get');
 
-const __set = require('../object/set');
+var __set = require('../object/set');
 
-const __paramCase = require('../string/paramCase');
+var __paramCase = require('../string/paramCase');
 
-const __deepMerge = require('../object/deepMerge');
+var __deepMerge = require('../object/deepMerge');
 
-const __sugarConfig = require('../config/sugar');
+var __sugarConfig = require('../config/sugar');
 /**
  * @name              docNav
  * @namespace           node.doc
@@ -47,7 +47,7 @@ const __sugarConfig = require('../config/sugar');
 
 module.exports = function docNav(docMap, settings) {
   if (docMap === void 0) {
-    docMap = `${__sugarConfig('doc.rootDir')}/docMap.json`;
+    docMap = "".concat(__sugarConfig('doc.rootDir'), "/docMap.json");
   }
 
   if (settings === void 0) {
@@ -59,7 +59,7 @@ module.exports = function docNav(docMap, settings) {
     id: 'doc',
     text: 'Documentation'
   }, settings);
-  let finalNavObj = new __SNav(settings.id, settings.text, []);
+  var finalNavObj = new __SNav(settings.id, settings.text, []);
 
   if (!__isJson(docMap) && !__isPath(docMap, true)) {
     // throw new Error(
@@ -68,19 +68,19 @@ module.exports = function docNav(docMap, settings) {
     return finalNavObj;
   }
 
-  let json = docMap;
+  var json = docMap;
 
-  if (__isPath(`${docMap}/docMap.json`, true)) {
-    json = JSON.parse(__fs.readFileSync(`${docMap}/docMap.json`, 'utf8'));
+  if (__isPath("".concat(docMap, "/docMap.json"), true)) {
+    json = JSON.parse(__fs.readFileSync("".concat(docMap, "/docMap.json"), 'utf8'));
   } else if (__isPath(docMap, true)) {
     json = JSON.parse(__fs.readFileSync(docMap, 'utf8'));
   }
 
-  const navObj = {};
+  var navObj = {};
   Object.keys(json.flat).forEach(path => {
-    const item = json.flat[path];
+    var item = json.flat[path];
 
-    __ensureExists(navObj, `${item.namespace}.${item.name}`, null);
+    __ensureExists(navObj, "".concat(item.namespace, ".").concat(item.name), null);
   });
 
   function deep(currentNavInstance, dotPath) {
@@ -89,17 +89,17 @@ module.exports = function docNav(docMap, settings) {
     }
 
     // get nav items in the navObj
-    const navItem = __get(navObj, dotPath);
+    var navItem = __get(navObj, dotPath);
 
     if (navItem === null) {
-      const docMapItem = json.flat[dotPath];
-      const sNavItem = new __SNavItem(__paramCase(dotPath), docMapItem.title, settings.url.replace('[path]', docMapItem.path));
+      var docMapItem = json.flat[dotPath];
+      var sNavItem = new __SNavItem(__paramCase(dotPath), docMapItem.title, settings.url.replace('[path]', docMapItem.path));
       currentNavInstance.addItem(sNavItem);
     } else if (typeof navItem === 'object') {
       Object.keys(navItem).forEach(navKey => {
-        let newDotKey = dotPath.split('.').filter(i => i !== '');
+        var newDotKey = dotPath.split('.').filter(i => i !== '');
         newDotKey = [...newDotKey, navKey].join('.');
-        const navInstance = new __SNav(__paramCase(newDotKey), newDotKey, []);
+        var navInstance = new __SNav(__paramCase(newDotKey), newDotKey, []);
         currentNavInstance.addItem(navInstance);
         deep(navInstance, newDotKey);
       });

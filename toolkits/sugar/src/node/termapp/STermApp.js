@@ -1,9 +1,6 @@
+require('../index');
 const __SApp = require('../blessed/app/SApp');
 const __deepMerge = require('../object/deepMerge');
-const __SConfig = require('../config/SConfig');
-const __SConfigFsAdapter = require('../config/adapters/SConfigFsAdapter');
-const __packageRoot = require('../path/packageRoot');
-const __exitCleanup = require('../process/exitCleanup');
 
 /**
  * @name            STermApp
@@ -31,9 +28,6 @@ module.exports = class STermApp extends __SApp {
    */
   constructor(settings = {}) {
     settings = __deepMerge({}, settings);
-
-    // exit cleanup
-    __exitCleanup();
 
     super(__deepMerge({}, settings));
   }

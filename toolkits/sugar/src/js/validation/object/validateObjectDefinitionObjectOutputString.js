@@ -66,6 +66,13 @@ export default function validateObjectDefinitionObjectOutputString(
       return;
     }
 
+    if (
+      !validateObjectDefinitionObjectResultObj[attrName] ||
+      !validateObjectDefinitionObjectResultObj[attrName].issues
+    ) {
+      return;
+    }
+
     validateObjectDefinitionObjectResultObj[attrName].issues.forEach(
       (issueName) => {
         const attrIssueObj =

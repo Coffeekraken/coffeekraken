@@ -1,4 +1,4 @@
-#!/usr/bin/env node --trace-warnings
+#!/usr/bin/env node --trace-warnings --trace-uncaught
 
 require('../node/index');
 const __isChildProcess = require('../node/is/childProcess');

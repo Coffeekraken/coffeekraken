@@ -88,27 +88,20 @@ export default class SActionStreamAction extends __SPromise {
     if (!this._settings.id)
       this._settings.id = this.constructor.name.toLowerCase();
 
-    if (!this.constructor.definitionObj) {
-      throw new Error(
-        `Sorry but your class "${this.constructor.name}" does not have the required "definitionObj" static property...`
-      );
-    }
+    // if (
+    //   !this.constructor.definitionObj ||
+    //   !Object.keys(this.constructor.definitionObj).length
+    // ) {
+    //   throw new Error(
+    //     `Sorry but your class "<yellow>${this.constructor.name}</yellow>" does not have the required <yellow>static</yellow> <cyan>definitionObj</cyan> property...`
+    //   );
+    // }
 
     // check the definition object
-    setTimeout(() => {
-      const validatekDefinitionObjResult = __validateObjectDefinitionObject(
-        this.constructor.definitionObj
-      );
-      if (validatekDefinitionObjResult !== true) {
-        throw new Error(validatekDefinitionObjResult);
-      }
-    });
-
+    if (this.constructor.definitionObj) {
+      __validateObjectDefinitionObject(this.constructor.definitionObj);
+    }
     super.start();
-
-    // this.catch((e) => {
-    //   console.log('error');
-    // });
   }
 
   get settings() {
@@ -128,6 +121,8 @@ export default class SActionStreamAction extends __SPromise {
    * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   checkStreamObject(streamObj) {
+    if (!this.constructor.definitionObj) return true;
+
     // handle "default" property of the definition object
     Object.keys(this.constructor.definitionObj).forEach((key) => {
       if (
@@ -139,15 +134,9 @@ export default class SActionStreamAction extends __SPromise {
     });
 
     // validate the streamObj depending on the static definitionObj property
-    const checkWithDefinitionObjectResult = __validateObject(
-      streamObj,
-      this.constructor.definitionObj
-    );
-    if (checkWithDefinitionObjectResult !== true) {
-      throw new Error(checkWithDefinitionObjectResult);
+    if (this.constructor.definitionObj) {
+      __validateObject(streamObj, this.constructor.definitionObj);
     }
-    // throw new Error(checkWithDefinitionObjectResult);
-    // this.trigger('error', checkWithDefinitionObjectResult);
   }
 
   /**

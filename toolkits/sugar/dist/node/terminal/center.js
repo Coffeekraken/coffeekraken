@@ -1,8 +1,8 @@
 "use strict";
 
-const __deepMerge = require('../object/deepMerge');
+var __deepMerge = require('../object/deepMerge');
 
-const __countLine = require('../string/countLine');
+var __countLine = require('../string/countLine');
 /**
  * @name                                    center
  * @namespace           node.terminal
@@ -33,10 +33,10 @@ module.exports = function center(text, settings) {
   settings = __deepMerge({
     spaceChar: '~'
   }, settings);
-  const maxWidth = process.stdout.columns - (process.env.STDOUT_PADDING || 0) * 2;
-  let lines = Array.isArray(text) ? text : text.split('\n');
+  var maxWidth = process.stdout.columns - (process.env.STDOUT_PADDING || 0) * 2;
+  var lines = Array.isArray(text) ? text : text.split('\n');
   lines = lines.map(l => {
-    const lineLenght = __countLine(l);
+    var lineLenght = __countLine(l);
 
     return (' '.repeat(Math.round(maxWidth / 2 - lineLenght / 2)) + l).split(settings.spaceChar).join(' ');
   });

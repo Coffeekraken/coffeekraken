@@ -20,17 +20,17 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-const __fs = require('fs');
+var __fs = require('fs');
 
-const __deepMerge = require('../../object/deepMerge');
+var __deepMerge = require('../../object/deepMerge');
 
-const __tmpDir = require('../../fs/tmpDir');
+var __tmpDir = require('../../fs/tmpDir');
 
-const __writeFileSync = require('../../fs/writeFileSync');
+var __writeFileSync = require('../../fs/writeFileSync');
 
-const __diff = require('../../object/diff');
+var __diff = require('../../object/diff');
 
-const __SConfigAdapter = require('./SConfigAdapter');
+var __SConfigAdapter = require('./SConfigAdapter');
 /**
  * @name                  SConfigFsAdapter
  * @namespace           node.config.adapters
@@ -69,8 +69,8 @@ module.exports = /*#__PURE__*/function (_SConfigAdapter) {
       name: null,
       filename: '[name].config.js',
       defaultConfigPath: null,
-      appConfigPath: `${process.cwd()}/[filename]`,
-      userConfigPath: `${__tmpDir()}/[filename]`
+      appConfigPath: "".concat(process.cwd(), "/[filename]"),
+      userConfigPath: "".concat(__tmpDir(), "/[filename]")
     }, settings);
     _this = _super.call(this, settings);
     _this.settings.filename = _this.settings.filename.replace('[name]', _this.name);
@@ -88,17 +88,17 @@ module.exports = /*#__PURE__*/function (_SConfigAdapter) {
       this._userConfig = {}; // load the default config if exists
 
       if (this.settings.defaultConfigPath && __fs.existsSync(this.settings.defaultConfigPath)) {
-        this._defaultConfig = require(`${this.settings.defaultConfigPath}`);
+        this._defaultConfig = require("".concat(this.settings.defaultConfigPath));
       } // load the app config if exists
 
 
       if (this.settings.appConfigPath && __fs.existsSync(this.settings.appConfigPath)) {
-        this._appConfig = require(`${this.settings.appConfigPath}`);
+        this._appConfig = require("".concat(this.settings.appConfigPath));
       } // load the user config
 
 
       if (this.settings.userConfigPath && __fs.existsSync(this.settings.userConfigPath)) {
-        this._userConfig = require(`${this.settings.userConfigPath}`);
+        this._userConfig = require("".concat(this.settings.userConfigPath));
       } // mix the configs and save them in the instance
 
 
@@ -112,15 +112,13 @@ module.exports = /*#__PURE__*/function (_SConfigAdapter) {
       }
 
       if (!this.settings.userConfigPath) {
-        throw new Error(`You try to save the config "${this.name}" but the "settings.userConfigPath" is not set...`);
+        throw new Error("You try to save the config \"".concat(this.name, "\" but the \"settings.userConfigPath\" is not set..."));
       }
 
-      const baseConfig = __deepMerge(this._defaultConfig, this._appConfig);
+      var baseConfig = __deepMerge(this._defaultConfig, this._appConfig);
 
       newConfig = __diff(baseConfig, newConfig);
-      let newConfigString = `
-      module.exports = ${JSON.stringify(newConfig)};
-    `; // write the new config file
+      var newConfigString = "\n      module.exports = ".concat(JSON.stringify(newConfig), ";\n    "); // write the new config file
 
       __writeFileSync(this.settings.userConfigPath, newConfigString);
 

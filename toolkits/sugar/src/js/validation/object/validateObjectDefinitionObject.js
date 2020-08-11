@@ -71,7 +71,10 @@ export default function validateObjectDefinitionObject(
   }
   const argNames = Object.keys(definitionObj);
   if (!argNames.length) {
-    issuesObj.issues.push('arguments.required');
+    throw new Error(
+      `Sorry but a <yellow>definition object</yellow> has to have at least 1 property declared...`
+    );
+    // issuesObj.issues.push('arguments.required');
   }
   for (let i = 0; i < argNames.length; i++) {
     const argName = argNames[i];

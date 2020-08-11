@@ -16,37 +16,37 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-const __SActionsStream = require('../../stream/SActionsStream');
+var __SActionsStream = require('../../stream/SActionsStream');
 
-const __deepMerge = require('../../object/deepMerge');
+var __deepMerge = require('../../object/deepMerge');
 
-const __getFilename = require('../../fs/filename');
+var __getFilename = require('../../fs/filename');
 
-const __SFsOutputStreamAction = require('../../stream/actions/SFsOutputStreamAction');
+var __SFsOutputStreamAction = require('../../stream/actions/SFsOutputStreamAction');
 
-const __SJsObjectToScssStreamAction = require('./actions/SJsObjectToScssStreamAction');
+var __SJsObjectToScssStreamAction = require('./actions/SJsObjectToScssStreamAction');
 
-const __SImportsStreamAction = require('./actions/SImportsStreamAction');
+var __SImportsStreamAction = require('./actions/SImportsStreamAction');
 
-const __SBundleScssStreamAction = require('./actions/SBundleScssStreamAction');
+var __SBundleScssStreamAction = require('./actions/SBundleScssStreamAction');
 
-const __SRenderSassStreamAction = require('./actions/SRenderSassStreamAction');
+var __SRenderSassStreamAction = require('./actions/SRenderSassStreamAction');
 
-const __SPostCssStreamAction = require('./actions/SPostCssStreamAction');
+var __SPostCssStreamAction = require('./actions/SPostCssStreamAction');
 
-const __SSugarJsonStreamAction = require('./actions/SSugarJsonStreamAction');
+var __SSugarJsonStreamAction = require('./actions/SSugarJsonStreamAction');
 
-const __SFsFilesResolverStreamAction = require('../../stream/actions/SFsFilesResolverStreamAction');
+var __SFsFilesResolverStreamAction = require('../../stream/actions/SFsFilesResolverStreamAction');
 
-const __SFsCacheStreamAction = require('../../stream/actions/SFsCacheStreamAction');
+var __SFsCacheStreamAction = require('../../stream/actions/SFsCacheStreamAction');
 
-const __SExtractStreamAction = require('../../stream/actions/SExtractStreamAction');
+var __SExtractStreamAction = require('../../stream/actions/SExtractStreamAction');
 
-const __path = require('path');
+var __path = require('path');
 
-const __sugarConfig = require('../../config/sugar');
+var __sugarConfig = require('../../config/sugar');
 
-const {
+var {
   stream
 } = require('globby');
 /**

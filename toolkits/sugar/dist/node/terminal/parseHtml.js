@@ -1,14 +1,14 @@
 "use strict";
 
-const __replaceTags = require('../html/replaceTags');
+var __replaceTags = require('../html/replaceTags');
 
-const __sugarConfig = require('../config/sugar');
+var __sugarConfig = require('../config/sugar');
 
-const __upperFirst = require('../string/upperFirst');
+var __upperFirst = require('../string/upperFirst');
 
-const __chalk = require('chalk');
+var __chalk = require('chalk');
 
-const __tagsMap = require('../../../js/console/parseHtml').tagsMap;
+var __tagsMap = require('../../../js/console/parseHtml').tagsMap;
 
 __chalk.level = 3; // TODO tests
 
@@ -26,7 +26,7 @@ __chalk.level = 3; // TODO tests
  */
 
 module.exports = function parseHtml(message) {
-  let isArray = false;
+  var isArray = false;
 
   if (Array.isArray(message)) {
     isArray = true;
@@ -34,23 +34,23 @@ module.exports = function parseHtml(message) {
     message = [message];
   }
 
-  const tagsMap = Object.assign({}, __tagsMap);
-  const sugarColors = Object.keys(__sugarConfig('colors')).filter(c => c !== 'terminal');
-  const terminalColors = Object.keys(__sugarConfig('terminal.colors'));
-  const colorsObj = {};
+  var tagsMap = Object.assign({}, __tagsMap);
+  var sugarColors = Object.keys(__sugarConfig('colors')).filter(c => c !== 'terminal');
+  var terminalColors = Object.keys(__sugarConfig('terminal.colors'));
+  var colorsObj = {};
   sugarColors.forEach(name => {
-    colorsObj[name] = __sugarConfig(`colors.${name}.color`);
+    colorsObj[name] = __sugarConfig("colors.".concat(name, ".color"));
   });
   terminalColors.forEach(name => {
-    colorsObj[name] = __sugarConfig(`terminal.colors.${name}.color`);
+    colorsObj[name] = __sugarConfig("terminal.colors.".concat(name, ".color"));
   });
   message = message.map(m => {
     Object.keys(colorsObj).forEach(c => {
-      const cValue = colorsObj[c];
+      var cValue = colorsObj[c];
 
       tagsMap[c] = (tag, content) => __chalk.hex(cValue)(content);
 
-      tagsMap[`bg${__upperFirst(c)}`] = (tag, content) => __chalk.bgHex(cValue)(content);
+      tagsMap["bg".concat(__upperFirst(c))] = (tag, content) => __chalk.bgHex(cValue)(content);
     });
     return __replaceTags(m, tagsMap);
   });

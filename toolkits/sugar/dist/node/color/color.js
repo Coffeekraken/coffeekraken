@@ -1,6 +1,6 @@
 "use strict";
 
-const __SColor = require('./SColor');
+var __SColor = require('./SColor');
 /**
  * @name                color
  * @namespace           node.color

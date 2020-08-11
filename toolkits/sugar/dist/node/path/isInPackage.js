@@ -1,8 +1,8 @@
 "use strict";
 
-const __packageRoot = require('./packageRoot');
+var __packageRoot = require('./packageRoot');
 
-const __fs = require('fs');
+var __fs = require('fs');
 /**
  * @name                    isInPackage
  * @namespace           node.path
@@ -33,23 +33,23 @@ module.exports = function isInPackage(name, from, highest) {
     highest = false;
   }
 
-  const packageRoot = __packageRoot(from);
+  var packageRoot = __packageRoot(from);
 
   if (!packageRoot) return false;
-  if (!__fs.existsSync(`${packageRoot}/package.json`)) return false;
+  if (!__fs.existsSync("".concat(packageRoot, "/package.json"))) return false;
 
-  const pkg = require(`${packageRoot}/package.json`);
+  var pkg = require("".concat(packageRoot, "/package.json"));
 
-  let names = name;
+  var names = name;
   if (typeof names === 'string') names = names.split(',').map(f => f.trim());
 
-  for (let i = 0; i < names.length; i++) {
+  for (var i = 0; i < names.length; i++) {
     if (names[i] === pkg.name) {
       return true;
     }
   }
 
-  let newPath = packageRoot.split('/').slice(0, -1) // .filter((i) => i !== '')
+  var newPath = packageRoot.split('/').slice(0, -1) // .filter((i) => i !== '')
   .join('/'); // no package found... check if we need to check higher
 
   if (highest) {

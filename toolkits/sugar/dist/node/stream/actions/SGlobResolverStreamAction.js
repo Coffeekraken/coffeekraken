@@ -2,6 +2,10 @@
 
 var _class, _temp;
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -28,17 +32,17 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __SActionsStreamAction = require('../SActionsStreamAction');
+var __SActionsStreamAction = require('../SActionsStreamAction');
 
-const __glob = require('glob');
+var __glob = require('glob');
 
-const __clone = require('../../object/clone');
+var __clone = require('../../object/clone');
 
-const __extractSame = require('../../string/extractSame');
+var __extractSame = require('../../string/extractSame');
 
-const __getFilename = require('../../fs/filename');
+var __getFilename = require('../../fs/filename');
 
-const __deepMerge = require('../../object/deepMerge');
+var __deepMerge = require('../../object/deepMerge');
 /**
  * @name            SGlobResolverStreamAction
  * @namespace           node.stream.actions
@@ -108,32 +112,38 @@ module.exports = (_temp = _class = /*#__PURE__*/function (_SActionsStreamActio) 
         settings = this._settings;
       }
 
-      return _get(_getPrototypeOf(SGlobResolverStreamAction.prototype), "run", this).call(this, streamObj, async (resolve, reject) => {
-        // resolve glob pattern
-        const rootDir = streamObj[streamObj.globProperty];
+      return _get(_getPrototypeOf(SGlobResolverStreamAction.prototype), "run", this).call(this, streamObj, /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator(function* (resolve, reject) {
+          // resolve glob pattern
+          var rootDir = streamObj[streamObj.globProperty];
 
-        const files = __glob.sync(streamObj[streamObj.globProperty]); // build the streamObj stack
+          var files = __glob.sync(streamObj[streamObj.globProperty]); // build the streamObj stack
 
 
-        const streamObjArray = []; // loop on each files founded
+          var streamObjArray = []; // loop on each files founded
 
-        files.forEach(filePath => {
-          const newStreamObj = __clone(streamObj);
+          files.forEach(filePath => {
+            var newStreamObj = __clone(streamObj);
 
-          newStreamObj[streamObj.globProperty] = filePath;
-          let cleanedRootDir = rootDir;
-          cleanedRootDir = cleanedRootDir.replace(__getFilename(cleanedRootDir), '');
-          cleanedRootDir = cleanedRootDir.replace(/\[.*\]/gm, '').replace(/\*{1,2}/gm, '').replace(/\(.*\)/gm, '').replace(/(\?|!|\+|@)/gm, '');
-          cleanedRootDir = cleanedRootDir.replace(/\/+$/, '');
-          let outputFilePath = filePath.replace(cleanedRootDir, '').replace(__getFilename(filePath), '');
-          if (outputFilePath.slice(0, 1) === '/') outputFilePath = outputFilePath.slice(1);
-          newStreamObj.outputDir = newStreamObj.outputDir + '/' + outputFilePath;
-          if (newStreamObj.outputDir.slice(-1) === '/') newStreamObj.outputDir = newStreamObj.outputDir.slice(0, -1);
-          delete newStreamObj.globProperty;
-          streamObjArray.push(newStreamObj);
+            newStreamObj[streamObj.globProperty] = filePath;
+            var cleanedRootDir = rootDir;
+            cleanedRootDir = cleanedRootDir.replace(__getFilename(cleanedRootDir), '');
+            cleanedRootDir = cleanedRootDir.replace(/\[.*\]/gm, '').replace(/\*{1,2}/gm, '').replace(/\(.*\)/gm, '').replace(/(\?|!|\+|@)/gm, '');
+            cleanedRootDir = cleanedRootDir.replace(/\/+$/, '');
+            var outputFilePath = filePath.replace(cleanedRootDir, '').replace(__getFilename(filePath), '');
+            if (outputFilePath.slice(0, 1) === '/') outputFilePath = outputFilePath.slice(1);
+            newStreamObj.outputDir = newStreamObj.outputDir + '/' + outputFilePath;
+            if (newStreamObj.outputDir.slice(-1) === '/') newStreamObj.outputDir = newStreamObj.outputDir.slice(0, -1);
+            delete newStreamObj.globProperty;
+            streamObjArray.push(newStreamObj);
+          });
+          resolve(streamObjArray);
         });
-        resolve(streamObjArray);
-      });
+
+        return function (_x, _x2) {
+          return _ref.apply(this, arguments);
+        };
+      }());
     }
   }]);
 

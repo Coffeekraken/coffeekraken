@@ -20,13 +20,13 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __SCli = require('../../cli/SCli');
+var __SCli = require('../../cli/SCli');
 
-const __sugarConfig = require('../../config/sugar');
+var __sugarConfig = require('../../config/sugar');
 
-const __packageRoot = require('../../path/packageRoot');
+var __packageRoot = require('../../path/packageRoot');
 
-const __deepMerge = require('../../object/deepMerge');
+var __deepMerge = require('../../object/deepMerge');
 /**
  * @name            SBuildDocMapCli
  * @namespace       node.build.docMap
@@ -100,7 +100,7 @@ module.exports = (_temp = _class = /*#__PURE__*/function (_SCli) {
     type: 'String',
     alias: 'o',
     description: 'Output file path',
-    default: __sugarConfig('build.docMap.output') || `${__packageRoot()}/docMap.json`,
+    default: __sugarConfig('build.docMap.output') || "".concat(__packageRoot(), "/docMap.json"),
     level: 1
   }
 }), _temp);

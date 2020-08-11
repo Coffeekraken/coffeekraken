@@ -1,8 +1,8 @@
 "use strict";
 
-const __jsonSass = require('json-sass-vars');
+var __jsonSass = require('json-sass-vars');
 
-const __deepMerge = require('../../object/deepMerge');
+var __deepMerge = require('../../object/deepMerge');
 
 module.exports = function jsObjectToScssMap(object, settings) {
   if (settings === void 0) {
@@ -13,37 +13,37 @@ module.exports = function jsObjectToScssMap(object, settings) {
     settingsVariable: '$sugarUserSettings',
     quoteKeys: ['src', 'import', 'font-family', 'defaultAction']
   }, settings);
-  const jsObject = object;
+  var jsObject = object;
 
-  let scssConfigString = __jsonSass.convertJs(jsObject);
+  var scssConfigString = __jsonSass.convertJs(jsObject);
 
-  scssConfigString = `${settings.settingsVariable}: ${scssConfigString};`;
+  scssConfigString = "".concat(settings.settingsVariable, ": ").concat(scssConfigString, ";");
   scssConfigString.split('\n').forEach(line => {
     line = line.trim();
-    const isComma = line.substr(-1) === ',';
+    var isComma = line.substr(-1) === ',';
 
     if (isComma) {
       line = line.slice(0, -1);
     }
 
-    const prop = line.split(':')[0];
-    let value = line.split(':').slice(1).join(':').trim();
+    var prop = line.split(':')[0];
+    var value = line.split(':').slice(1).join(':').trim();
     if (prop === '),' || prop === ')' || value === '(') return; // process arrays
 
-    const arrayReg = /^\((.*)\),?/;
-    const arrayMatches = value.match(arrayReg);
+    var arrayReg = /^\((.*)\),?/;
+    var arrayMatches = value.match(arrayReg);
 
     if (arrayMatches) {
-      const res = arrayMatches[1].split(',').map(val => {
-        return `'${val.trim()}'`;
+      var res = arrayMatches[1].split(',').map(val => {
+        return "'".concat(val.trim(), "'");
       }).join(', ');
       value = value.replace(arrayMatches[1], res);
-      scssConfigString = scssConfigString.replace(line, `${prop}: ${value}`);
+      scssConfigString = scssConfigString.replace(line, "".concat(prop, ": ").concat(value));
       return;
     }
 
     if (settings.quoteKeys.indexOf(prop) === -1) return;
-    scssConfigString = scssConfigString.replace(line, `${prop}: "${value}"`);
+    scssConfigString = scssConfigString.replace(line, "".concat(prop, ": \"").concat(value, "\""));
   }); // set or append in the "data" property
 
   return scssConfigString;

@@ -68,11 +68,11 @@ export default function parseArgsString(
   const argsObj = {};
 
   // process the passed string
-  let stringArray =
-    string.match(/(?:[^\s"|'|`]+|("|'|`)[^"|'|`]*("|'|`))+/gm) || [];
+  let stringArray = string.match(/(?:[^\s"'`]+|("'`)[^"'`]*("'`))+/gm) || [];
   stringArray = stringArray.map((item) => {
     return __unquote(item);
   });
+
   let currentArgName = null;
   let currentArgType = null;
   let currentArgDefinition = null;

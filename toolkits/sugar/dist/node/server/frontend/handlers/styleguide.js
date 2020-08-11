@@ -1,22 +1,26 @@
 "use strict";
 
-const __fs = require('fs');
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
-const __packageRoot = require('../../../path/packageRoot');
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-const __sugarConfig = require('../../../config/sugar');
+var __fs = require('fs');
 
-const __render = require('../../../template/render');
+var __packageRoot = require('../../../path/packageRoot');
 
-const __standardizeJson = require('../../../npm/standardizeJson');
+var __sugarConfig = require('../../../config/sugar');
 
-const __SPromise = require('../../../promise/SPromise');
+var __render = require('../../../template/render');
 
-const __SDocblock = require('../../../docblock/SDocblock');
+var __standardizeJson = require('../../../npm/standardizeJson');
 
-const __SBuildScssCli = require('../../../build/scss/SBuildScssCli');
+var __SPromise = require('../../../promise/SPromise');
 
-const __trimLines = require('../../../string/trimLines');
+var __SDocblock = require('../../../docblock/SDocblock');
+
+var __SBuildScssCli = require('../../../build/scss/SBuildScssCli');
+
+var __trimLines = require('../../../string/trimLines');
 /**
  * @name                styleguide
  * @namespace           node.server.frontend.handlers
@@ -36,51 +40,57 @@ const __trimLines = require('../../../string/trimLines');
 
 
 module.exports = function styleguide(req, server) {
-  return new __SPromise(async function (resolve, reject, trigger) {
-    let viewPath = req.params[0].split('/').join('.');
-    trigger('server.frontend.handler.styleguide.start', null);
-    let resultObj = {
-      view: null,
-      data: {}
+  return new __SPromise( /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator(function* (resolve, reject, trigger) {
+      var viewPath = req.params[0].split('/').join('.');
+      trigger('server.frontend.handler.styleguide.start', null);
+      var resultObj = {
+        view: null,
+        data: {}
+      };
+      var currentPackageJson; // check if the passed request point to a valid coffeekraken sugar ready package
+
+      var pr = __packageRoot();
+
+      var packagePath = "".concat(pr, "/node_modules/").concat(req.params[0]);
+
+      if (__fs.existsSync("".concat(packagePath, "/sugar.json"))) {
+        currentPackageJson = require("".concat(packagePath, "/package.json"));
+
+        var sugarJson = require("".concat(packagePath, "/sugar.json"));
+
+        if (sugarJson.views && sugarJson.views.styleguide) {
+          viewPath = "".concat(packagePath, "/").concat(sugarJson.views.styleguide);
+        }
+
+        resultObj.view = viewPath;
+        resultObj.data.currentPackageJson = __standardizeJson(currentPackageJson); // check if we have a styleguide scss file to load
+
+        if (sugarJson.scss && sugarJson.scss.styleguide) {
+          var buildScssCli = new __SBuildScssCli({});
+          var styleguidePromise = buildScssCli.run({
+            input: "".concat(packagePath, "/").concat(sugarJson.scss.styleguide),
+            sugarJsonDirs: packagePath
+          });
+
+          __SPromise.pipe(styleguidePromise, this);
+
+          var styleguideRes = yield styleguidePromise; // parsing the docblock
+
+          var docblock = new __SDocblock(styleguideRes.value); // set the blocks
+
+          resultObj.data.css = styleguideRes.value;
+          resultObj.data.blocks = docblock.toObject();
+        }
+      }
+
+      resolve(resultObj);
+    });
+
+    return function (_x, _x2, _x3) {
+      return _ref.apply(this, arguments);
     };
-    let currentPackageJson; // check if the passed request point to a valid coffeekraken sugar ready package
-
-    const pr = __packageRoot();
-
-    const packagePath = `${pr}/node_modules/${req.params[0]}`;
-
-    if (__fs.existsSync(`${packagePath}/sugar.json`)) {
-      currentPackageJson = require(`${packagePath}/package.json`);
-
-      const sugarJson = require(`${packagePath}/sugar.json`);
-
-      if (sugarJson.views && sugarJson.views.styleguide) {
-        viewPath = `${packagePath}/${sugarJson.views.styleguide}`;
-      }
-
-      resultObj.view = viewPath;
-      resultObj.data.currentPackageJson = __standardizeJson(currentPackageJson); // check if we have a styleguide scss file to load
-
-      if (sugarJson.scss && sugarJson.scss.styleguide) {
-        const buildScssCli = new __SBuildScssCli({});
-        const styleguidePromise = buildScssCli.run({
-          input: `${packagePath}/${sugarJson.scss.styleguide}`,
-          sugarJsonDirs: packagePath
-        });
-
-        __SPromise.pipe(styleguidePromise, this);
-
-        const styleguideRes = await styleguidePromise; // parsing the docblock
-
-        const docblock = new __SDocblock(styleguideRes.value); // set the blocks
-
-        resultObj.data.css = styleguideRes.value;
-        resultObj.data.blocks = docblock.toObject();
-      }
-    }
-
-    resolve(resultObj);
-  }, {
+  }(), {
     id: 'server.handler.styleguide'
   }).start();
 };

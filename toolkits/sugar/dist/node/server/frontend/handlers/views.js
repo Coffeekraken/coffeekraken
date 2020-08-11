@@ -1,8 +1,12 @@
 "use strict";
 
-const __sugarConfig = require('../../../config/sugar');
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
-const __request = require('../../../http/request');
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+var __sugarConfig = require('../../../config/sugar');
+
+var __request = require('../../../http/request');
 /**
  * @name                views
  * @namespace           node.server.frontend.handlers
@@ -20,22 +24,28 @@ const __request = require('../../../http/request');
 
 
 module.exports = function views(req, server) {
-  return new Promise(async (resolve, reject) => {
-    const viewEngine = server.get('view engine');
+  return new Promise( /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator(function* (resolve, reject) {
+      var viewEngine = server.get('view engine');
 
-    if (viewEngine === 'bladePhp') {
-      const bladeSettings = __sugarConfig('blade');
+      if (viewEngine === 'bladePhp') {
+        var bladeSettings = __sugarConfig('blade');
 
-      const viewsSettings = __sugarConfig('views');
+        var viewsSettings = __sugarConfig('views');
 
-      const renderedView = await __request({
-        url: `http://${bladeSettings.server.hostname}:${bladeSettings.server.port}${req.path.substr(6)}?rootDir=${viewsSettings.rootDir}&cacheDir=${viewsSettings.cacheDir}`,
-        method: 'POST'
-      }).catch(e => {
-        console.log(e);
-      });
-      resolve(renderedView.data);
-    } // resolve(path);
+        var renderedView = yield __request({
+          url: "http://".concat(bladeSettings.server.hostname, ":").concat(bladeSettings.server.port).concat(req.path.substr(6), "?rootDir=").concat(viewsSettings.rootDir, "&cacheDir=").concat(viewsSettings.cacheDir),
+          method: 'POST'
+        }).catch(e => {
+          console.log(e);
+        });
+        resolve(renderedView.data);
+      } // resolve(path);
 
-  });
+    });
+
+    return function (_x, _x2) {
+      return _ref.apply(this, arguments);
+    };
+  }());
 };

@@ -16,21 +16,21 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-const __SActionsStream = require('../../stream/SActionsStream');
+var __SActionsStream = require('../../stream/SActionsStream');
 
-const __deepMerge = require('../../object/deepMerge');
+var __deepMerge = require('../../object/deepMerge');
 
-const __SFsFilesResolverStreamAction = require('../../stream/actions/SFsFilesResolverStreamAction');
+var __SFsFilesResolverStreamAction = require('../../stream/actions/SFsFilesResolverStreamAction');
 
-const __SFsReadFileStreamAction = require('../../stream/actions/SFsReadFileStreamAction');
+var __SFsReadFileStreamAction = require('../../stream/actions/SFsReadFileStreamAction');
 
-const __SFsUnlinkStreamAction = require('../../stream/actions/SFsUnlinkStreamAction');
+var __SFsUnlinkStreamAction = require('../../stream/actions/SFsUnlinkStreamAction');
 
-const __globParent = require('glob-parent');
+var __globParent = require('glob-parent');
 
-const __SFsOutputStreamAction = require('../../stream/actions/SFsOutputStreamAction');
+var __SFsOutputStreamAction = require('../../stream/actions/SFsOutputStreamAction');
 
-const __path = require('path');
+var __path = require('path');
 /**
  * @name            SBuildViewsActionsStream
  * @namespace           node.build.views
@@ -100,7 +100,7 @@ module.exports = /*#__PURE__*/function (_SActionsStream) {
       },
       beforeActions: {
         fsOutput: streamObj => {
-          let outputPath = streamObj.input.replace(streamObj.inputDir, '');
+          var outputPath = streamObj.input.replace(streamObj.inputDir, '');
           if (outputPath.slice(0, 1) === '/') outputPath = outputPath.slice(1);
           if (!streamObj.outputStack) streamObj.outputStack = {};
 

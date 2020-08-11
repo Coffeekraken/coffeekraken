@@ -82,6 +82,7 @@ module.exports = class SFsOutputStreamAction extends __SActionsStreamAction {
         );
         if (!streamObj[key]) continue;
         trigger('log', {
+          group: settings.name,
           value: `Saving the streamObj property "<yellow>${key}</yellow>" under "<cyan>${readableOutputPath}</cyan>"`
         });
         await __writeFile(outputPath, __toString(streamObj[key]));

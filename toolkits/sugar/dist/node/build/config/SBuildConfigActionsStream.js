@@ -16,23 +16,23 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-const __SActionsStream = require('../../stream/SActionsStream');
+var __SActionsStream = require('../../stream/SActionsStream');
 
-const __SJsConfigFileToJsonStreamAction = require('./config/SJsConfigFileToJsonStreamAction');
+var __SJsConfigFileToJsonStreamAction = require('./config/SJsConfigFileToJsonStreamAction');
 
-const __glob = require('glob');
+var __glob = require('glob');
 
-const __SPromise = require('../../promise/SPromise');
+var __SPromise = require('../../promise/SPromise');
 
-const __deepMerge = require('../../object/deepMerge');
+var __deepMerge = require('../../object/deepMerge');
 
-const __getFilename = require('../../fs/filename');
+var __getFilename = require('../../fs/filename');
 
-const __SFsOutputStreamAction = require('../../stream/actions/SFsOutputStreamAction');
+var __SFsOutputStreamAction = require('../../stream/actions/SFsOutputStreamAction');
 
-const __SGlobResolverStreamAction = require('../../stream/actions/SGlobResolverStreamAction');
+var __SGlobResolverStreamAction = require('../../stream/actions/SGlobResolverStreamAction');
 
-const __path = require('path');
+var __path = require('path');
 /**
  * @name            SBuildConfigActionsStream
  * @namespace       node.build.config

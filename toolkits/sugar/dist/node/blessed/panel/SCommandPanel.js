@@ -28,43 +28,43 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __deepMerge = require('../../object/deepMerge');
+var __deepMerge = require('../../object/deepMerge');
 
-const __blessed = require('blessed');
+var __blessed = require('blessed');
 
-const __color = require('../../color/color');
+var __color = require('../../color/color');
 
-const __SComponent = require('../SComponent');
+var __SComponent = require('../SComponent');
 
-const __summaryListPopup = require('../list/summaryListPopup');
+var __summaryListPopup = require('../list/summaryListPopup');
 
-const __ora = require('ora');
+var __ora = require('ora');
 
-const __countLine = require('../../string/countLine');
+var __countLine = require('../../string/countLine');
 
-const __parseHtml = require('../../terminal/parseHtml');
+var __parseHtml = require('../../terminal/parseHtml');
 
-const __isOdd = require('../../is/odd');
+var __isOdd = require('../../is/odd');
 
-const __SPromise = require('../../promise/SPromise');
+var __SPromise = require('../../promise/SPromise');
 
-const __SCommand = require('../../terminal/SCommand');
+var __SCommand = require('../../terminal/SCommand');
 
-const __transitionObjectProperties = require('../../transition/objectProperties');
+var __transitionObjectProperties = require('../../transition/objectProperties');
 
-const __SPopup = require('../../blessed/popup/SPopup');
+var __SPopup = require('../../blessed/popup/SPopup');
 
-const __hotkey = require('../../keyboard/hotkey');
+var __hotkey = require('../../keyboard/hotkey');
 
-const __SInputPopup = require('../popup/SInputPopup');
+var __SInputPopup = require('../popup/SInputPopup');
 
-const __activeSpace = require('../../core/activeSpace');
+var __activeSpace = require('../../core/activeSpace');
 
-const __SWindowBox = require('../box/SWindowBox');
+var __SWindowBox = require('../box/SWindowBox');
 
-const __convert = require('../../time/convert');
+var __convert = require('../../time/convert');
 
-const __SOutput = require('../SOutput');
+var __SOutput = require('../SOutput');
 /**
  * @name                  SCommandPanel
  * @namespace           node.blessed
@@ -159,7 +159,7 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
 
     _classCallCheck(this, SCommandPanel);
 
-    const _settings = __deepMerge({}, settings); // extends SPanel
+    var _settings = __deepMerge({}, settings); // extends SPanel
 
 
     _this = _super.call(this, _settings);
@@ -179,7 +179,7 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
     if (Array.isArray(commands)) {
       _this._commands = commands;
     } else {
-      throw new Error(`It seems that the passed "commands" argument of the SCommandPanel class is not an Array of SCommand instances...`);
+      throw new Error("It seems that the passed \"commands\" argument of the SCommandPanel class is not an Array of SCommand instances...");
     } // this._summaryFakeCommand = {
     //   id: 'summary',
     //   settings: {},
@@ -190,14 +190,14 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
     // set the first active space to the first command key
 
 
-    __activeSpace.set(`SCommandPanel.${_this._commands[0].key}`); // pipe all commands "events" to the _sPromise internal promise
+    __activeSpace.set("SCommandPanel.".concat(_this._commands[0].key)); // pipe all commands "events" to the _sPromise internal promise
 
 
     _this._sPromise = new __SPromise(() => {}).start();
 
     _this._commands.forEach((commandObj, i) => {
       // instanciate the command instance
-      const commandClass = require(commandObj.path);
+      var commandClass = require(commandObj.path);
 
       commandObj.instance = new commandClass(commandObj.settings); // commandObj.instance.on('beforeStart', () => {
       //   // const boxObj = this._boxesObjectsMap.get(commandObj);
@@ -294,23 +294,23 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
   }, {
     key: "_logSummary",
     value: function _logSummary(event) {
-      let log = '';
+      var log = '';
 
       switch (event.process.state) {
         case 'running':
-          log = `- <primary>${event.name}</primary> has been <cyan>started</cyan>`;
+          log = "- <primary>".concat(event.name, "</primary> has been <cyan>started</cyan>");
           break;
 
         case 'error':
-          log = `<red><iCross/></red> <primary>${event.name}</primary> is in <red>error</red>`;
+          log = "<red><iCross/></red> <primary>".concat(event.name, "</primary> is in <red>error</red>");
           break;
 
         case 'success':
-          log = `<green><iCheck/></green> <primary>${event.name}</primary> has been finished <green>successfully</green> in <cyan>${__convert(event.process.duration, 's')}s</cyan>`;
+          log = "<green><iCheck/></green> <primary>".concat(event.name, "</primary> has been finished <green>successfully</green> in <cyan>").concat(__convert(event.process.duration, 's'), "s</cyan>");
           break;
 
         case 'killed':
-          log = `<red><iCross/></red> <primary>${event.name}</primary> has been <red>killed</red>`;
+          log = "<red><iCross/></red> <primary>".concat(event.name, "</primary> has been <red>killed</red>");
           break;
       }
 
@@ -334,9 +334,9 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
   }, {
     key: "summary",
     value: function summary(commandObj, items) {
-      const summaryListPopup = __summaryListPopup({
-        title: `Run command <bgBlack><bold><primary> ${commandObj.name} </primary></bold></bgBlack> | Are these properties ok?`,
-        description: `<bold><cyan>${commandObj.command}</cyan></bold>`,
+      var summaryListPopup = __summaryListPopup({
+        title: "Run command <bgBlack><bold><primary> ".concat(commandObj.name, " </primary></bold></bgBlack> | Are these properties ok?"),
+        description: "<bold><cyan>".concat(commandObj.command, "</cyan></bold>"),
         items
       });
 
@@ -393,7 +393,7 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
           item.selected = true;
           item.active = true;
 
-          const itemIdx = this._displayedCommands.indexOf(item.commandObj);
+          var itemIdx = this._displayedCommands.indexOf(item.commandObj);
 
           if (itemIdx != -1) {
             this._displayedCommands.splice(itemIdx, 1);
@@ -401,9 +401,9 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
             this._displayedCommands.push(item.commandObj);
           }
 
-          __activeSpace.set(`SCommandPanel.${item.commandObj.key}`);
+          __activeSpace.set("SCommandPanel.".concat(item.commandObj.key));
         } else if (!this._multiSelect) {
-          const displayCommandIdx = this._displayedCommands.indexOf(item.commandObj);
+          var displayCommandIdx = this._displayedCommands.indexOf(item.commandObj);
 
           if (displayCommandIdx !== -1) {
             this._displayedCommands.splice(displayCommandIdx, 1);
@@ -415,7 +415,7 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
       });
 
       this._commands.forEach(commandObj => {
-        let boxObj = this._boxesObjectsMap.get(commandObj);
+        var boxObj = this._boxesObjectsMap.get(commandObj);
 
         if (this._displayedCommands.indexOf(commandObj) === -1) {} else {
           this.$log.append(boxObj.$box);
@@ -441,18 +441,18 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
     key: "_initCommandBoxes",
     value: function _initCommandBoxes() {
       this._commands.forEach((commandObj, i) => {
-        const boxObj = {};
+        var boxObj = {};
 
         if (commandObj.key) {
-          __hotkey(`${commandObj.key}`).on('press', () => {
-            if (__activeSpace.get() === `SCommandPanel.${commandObj.key}` && commandObj.instance && commandObj.instance.on) {
+          __hotkey("".concat(commandObj.key)).on('press', () => {
+            if (__activeSpace.get() === "SCommandPanel.".concat(commandObj.key) && commandObj.instance && commandObj.instance.on) {
               if (commandObj.instance.isRunning() && !commandObj.concurrent) {
                 commandObj.instance.kill();
               } else if (!commandObj.instance.isRunning() && commandObj.instance.run) {
                 commandObj.instance.run();
               }
             } else {
-              __activeSpace.set(`SCommandPanel.${commandObj.key}`);
+              __activeSpace.set("SCommandPanel.".concat(commandObj.key));
 
               this._selectListItem(i);
             }
@@ -533,7 +533,7 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
           }
         });
         commandObj.opened = null;
-        let doubleClick = false;
+        var doubleClick = false;
         commandObj.$header.on('click', mouse => {
           if (doubleClick === false) {
             doubleClick = true;
@@ -583,11 +583,11 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
   }, {
     key: "_generateUI",
     value: function _generateUI() {
-      const medias = {
+      var medias = {
         0: 20,
         180: 15
       };
-      const itemsArray = [];
+      var itemsArray = [];
 
       this._commands.forEach(commandObj => {
         commandObj._spinner = {
@@ -596,18 +596,18 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
             color: 'black'
           })
         };
-        let name = commandObj.name;
+        var name = commandObj.name;
         itemsArray.push(name);
       });
 
-      let media;
+      var media;
       Object.keys(medias).forEach(width => {
         if (this.screen.width >= parseInt(width)) {
           media = medias[width];
         }
       });
       this.$list = __blessed.list({
-        width: `${media}%-1`,
+        width: "".concat(media, "%-1"),
         top: 0,
         left: 0,
         right: 0,
@@ -643,15 +643,15 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
       });
 
       this._commands.forEach((commandObj, i) => {
-        const item = this.$list.getItem(i);
+        var item = this.$list.getItem(i);
         item.commandObj = commandObj;
       }); // this.$list.items[0].active = true;
       // this.$list.items[0].selected = true;
 
 
-      let pressTimeout, pressInitialiser;
+      var pressTimeout, pressInitialiser;
 
-      const pressed = () => {
+      var pressed = () => {
         this._multiSelect = true;
         setTimeout(() => {
           this._multiSelect = false;
@@ -683,9 +683,9 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
       });
 
       this.$log = __blessed.box({
-        width: `${100 - media}%`,
+        width: "".concat(100 - media, "%"),
         top: 0,
-        left: `${media}%+1`,
+        left: "".concat(media, "%+1"),
         right: 0,
         bottom: 0,
         style: {
@@ -712,8 +712,8 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
         }
       });
 
-      const handleListActiveAndSelectedProperty = direction => {
-        let activeItemIdx = null;
+      var handleListActiveAndSelectedProperty = direction => {
+        var activeItemIdx = null;
         this.$list.items.forEach((item, i) => {
           if (activeItemIdx !== null) return;
           if (item.active) activeItemIdx = i;
@@ -755,7 +755,7 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
     value: function _updateList() {
       // console.log('DU', Date.now());
       this._commands.forEach((commandObj, i) => {
-        const item = this.$list.getItem(i);
+        var item = this.$list.getItem(i);
 
         if (!item.$key) {
           item.$key = __blessed.box({
@@ -812,14 +812,14 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
           right: 0
         };
         item.top = i * 2;
-        let key = `${commandObj.key}`;
+        var key = "".concat(commandObj.key);
         item.$key.setContent(key);
-        let name = commandObj.name;
+        var name = commandObj.name;
 
         if (commandObj.instance.state === 'running' || commandObj.instance.isWatching()) {
           commandObj._spinner.ora.text = '';
           commandObj._spinner.ora.color = 'yellow';
-          name = `${commandObj.name}`;
+          name = "".concat(commandObj.name);
           if (commandObj.instance.state === 'running') commandObj._spinner.ora.color = 'cyan';
           if (commandObj.instance.state === 'error') commandObj._spinner.ora.color = 'red'; // if (commandObj.state === 'success')
           //   commandObj._spinner.ora.color = 'green';
@@ -827,11 +827,11 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
 
           item.$state.setContent(commandObj._spinner.ora.frame());
         } else if (commandObj.instance.state === 'error') {
-          name = `${commandObj.name}`;
+          name = "".concat(commandObj.name);
           item.$state.setContent('×');
           item.$state.style.fg = __color('terminal.red').toString(); // item.$state.style.bg = __color('terminal.red').toString();
         } else if (commandObj.instance.state === 'success') {
-          name = `${commandObj.name}`;
+          name = "".concat(commandObj.name);
           item.$state.setContent('✔');
           item.$state.style.fg = __color('terminal.green').toString(); // item.$state.style.bg = __color('terminal.white').toString();
         } else {
@@ -839,10 +839,10 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
         }
 
         if (item.active) {
-          name = `> ${name}`;
+          name = "> ".concat(name);
         }
 
-        let spaces = Math.round(this.$list.width - __countLine(name) - 1);
+        var spaces = Math.round(this.$list.width - __countLine(name) - 1);
         if (spaces < 0) spaces = 0;
         name = name + ' '.repeat(spaces);
 
@@ -882,45 +882,45 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
     key: "_updateCommandBoxesStyle",
     value: function _updateCommandBoxesStyle() {
       this._displayedCommands.forEach(commandObj => {
-        let boxTitle = '';
+        var boxTitle = '';
 
         if (commandObj.id) {
-          boxTitle += `<bgBlack><white> ${commandObj.id} </white></bgBlack> `;
+          boxTitle += "<bgBlack><white> ".concat(commandObj.id, " </white></bgBlack> ");
         }
 
-        boxTitle += `<bold>${commandObj.title || commandObj.name}</bold>`;
+        boxTitle += "<bold>".concat(commandObj.title || commandObj.name, "</bold>");
 
         if (commandObj.instance.lastProcessObj && commandObj.instance.lastProcessObj.duration) {
-          boxTitle += ` <italic>${commandObj.instance.lastProcessObj.duration / 1000}s</italic>`;
+          boxTitle += " <italic>".concat(commandObj.instance.lastProcessObj.duration / 1000, "s</italic>");
         }
 
         if (commandObj.instance.lastProcessObj && (commandObj.instance.lastProcessObj.state === 'error' || commandObj.instance.lastProcessObj.state === 'killed')) {
           commandObj.$box.style.bg = __color('terminal.red').toString();
           clearInterval(commandObj.spinner.interval);
-          commandObj.$header.setContent(__parseHtml(`<iCross/>  ${boxTitle} (${commandObj.instance.lastProcessObj.state})`));
+          commandObj.$header.setContent(__parseHtml("<iCross/>  ".concat(boxTitle, " (").concat(commandObj.instance.lastProcessObj.state, ")")));
           commandObj.$box.screen.render();
         } else if (commandObj.instance.isWatching()) {
           commandObj.$box.style.bg = __color('terminal.yellow').toString();
           clearInterval(commandObj.spinner.interval);
           commandObj.spinner.interval = setInterval(() => {
-            commandObj.spinner.ora.text = __parseHtml(`${boxTitle} (watching)`);
+            commandObj.spinner.ora.text = __parseHtml("".concat(boxTitle, " (watching)"));
             commandObj.$header.setContent(commandObj.spinner.ora.frame());
           }, 50);
         } else if (commandObj.instance.lastProcessObj && commandObj.instance.lastProcessObj.state === 'success') {
           commandObj.$box.style.bg = __color('terminal.green').toString();
           clearInterval(commandObj.spinner.interval);
-          commandObj.$header.setContent(__parseHtml(`<iCheck/>  ${boxTitle}`));
+          commandObj.$header.setContent(__parseHtml("<iCheck/>  ".concat(boxTitle)));
           commandObj.$box.screen.render();
         } else if (commandObj.instance.lastProcessObj && commandObj.instance.lastProcessObj.state === 'running') {
           commandObj.$box.style.bg = __color('terminal.cyan').toString();
           clearInterval(commandObj.spinner.interval);
           commandObj.spinner.interval = setInterval(() => {
-            commandObj.spinner.ora.text = __parseHtml(`${boxTitle}`);
+            commandObj.spinner.ora.text = __parseHtml("".concat(boxTitle));
             commandObj.$header.setContent(commandObj.spinner.ora.frame());
           }, 50);
         } else {
           commandObj.$box.style.bg = 'white';
-          commandObj.$header.setContent(__parseHtml(`<iStart/>  ${boxTitle} (idle)`));
+          commandObj.$header.setContent(__parseHtml("<iStart/>  ".concat(boxTitle, " (idle)")));
           commandObj.$box.screen.render();
         }
 
@@ -1035,11 +1035,11 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
     key: "_updateCommandBoxesContent",
     value: function _updateCommandBoxesContent() {
       this._displayedCommands.forEach((commandObj, i) => {
-        const lastProcessObj = commandObj.instance.lastProcessObj;
+        var lastProcessObj = commandObj.instance.lastProcessObj;
 
         if (lastProcessObj && lastProcessObj.state === 'killed') {
           commandObj.$log.clear();
-          commandObj.$log.log(`<red>The process has been killed...</red>`);
+          commandObj.$log.log("<red>The process has been killed...</red>");
         } else if (lastProcessObj && lastProcessObj.state === 'error') {// commandObj.$log.pushLine(__parseHtml(`<red>Something went wrong...</red>`));
         } else {
           if (lastProcessObj && lastProcessObj.stdout && !lastProcessObj.stdout.length) {
@@ -1083,7 +1083,7 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
   }, {
     key: "_updateCommandBoxesLayout",
     value: function _updateCommandBoxesLayout() {
-      let currentTop = 0; // this._commands.forEach((commandObj) => {
+      var currentTop = 0; // this._commands.forEach((commandObj) => {
       //   let boxObj = this._boxesObjectsMap.get(commandObj);
       //   if (this._displayedCommands.indexOf(commandObj) === -1) {
       //     if (!boxObj.$box) return;
@@ -1094,15 +1094,15 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
       // });
 
       this._displayedCommands.forEach((commandObj, i) => {
-        const lastProcessObj = commandObj.instance.lastProcessObj;
-        let layout = 'default';
+        var lastProcessObj = commandObj.instance.lastProcessObj;
+        var layout = 'default';
         if (this._displayedCommands.length === 2) layout = 'two';
         if (this._displayedCommands.length === 3) layout = 'three';
         if (this._displayedCommands.length === 4) layout = 'four';
         if (this._displayedCommands.length === 5) layout = 'five';
         if (this._displayedCommands.length === 6) layout = 'six';
         if (this._displayedCommands.length === 7) layout = 'seven';
-        let width, height, top, left, right, bottom;
+        var width, height, top, left, right, bottom;
 
         switch (layout) {
           case 'two':
@@ -1156,7 +1156,7 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
               width = i === 1 ? '33%-1' : '33%';
               height = '50%';
               top = 0;
-              left = i * 33 + `%${i === 1 ? '+2' : i === 2 ? '+3' : ''}`; // right = i === 0 ? '50%+1' : 0;
+              left = i * 33 + "%".concat(i === 1 ? '+2' : i === 2 ? '+3' : ''); // right = i === 0 ? '50%+1' : 0;
             } else {
               width = '50%-1'; // height = '50%';
 
@@ -1172,12 +1172,12 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
               width = i === 1 ? '33%-1' : '33%';
               height = '50%';
               top = 0;
-              left = i * 33 + `%${i === 1 ? '+2' : i === 2 ? '+3' : ''}`; // right = i === 0 ? '50%+1' : 0;
+              left = i * 33 + "%".concat(i === 1 ? '+2' : i === 2 ? '+3' : ''); // right = i === 0 ? '50%+1' : 0;
             } else {
               width = i === 4 ? '33%-1' : '33%'; // height = '50%';
 
               top = '50%+1';
-              left = (i - 3) * 33 + `%${i === 4 ? '+2' : i === 5 ? '+3' : ''}`; // left = i === 3 ? 0 : '50%+1';
+              left = (i - 3) * 33 + "%".concat(i === 4 ? '+2' : i === 5 ? '+3' : ''); // left = i === 3 ? 0 : '50%+1';
               // right = i === 3 ? '50%+1' : 0;
             }
 
@@ -1188,12 +1188,12 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
               width = '25%';
               height = '50%';
               top = 0;
-              left = i * 25 + `%${i === 1 ? '+2' : i === 2 ? '+3' : i === 3 ? '+5' : ''}`; // right = i === 0 ? '50%+1' : 0;
+              left = i * 25 + "%".concat(i === 1 ? '+2' : i === 2 ? '+3' : i === 3 ? '+5' : ''); // right = i === 0 ? '50%+1' : 0;
             } else {
               width = i === 5 ? '33%-1' : '33%'; // height = '50%';
 
               top = '50%+1';
-              left = (i - 4) * 33 + `%${i === 5 ? '+2' : i === 6 ? '+3' : ''}`; // left = i === 3 ? 0 : '50%+1';
+              left = (i - 4) * 33 + "%".concat(i === 5 ? '+2' : i === 6 ? '+3' : ''); // left = i === 3 ? 0 : '50%+1';
               // right = i === 3 ? '50%+1' : 0;
             }
 

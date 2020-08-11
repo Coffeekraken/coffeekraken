@@ -25,11 +25,11 @@ export default class SError extends Error {
 
         ${stackArray.join('\n')}`)
       );
-      this.syscall = null;
-      this.code = null;
-      this.property = null;
+      // this.syscall = null;
+      // this.code = null;
+      // this.property = null;
       this.message = errorString;
-      this.stack = null;
+      // this.stack = null;
       this.name = this.constructor.name;
     } catch (e) {}
   }

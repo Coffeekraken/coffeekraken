@@ -2,6 +2,10 @@
 
 var _temp;
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -28,29 +32,29 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __blessed = require('blessed');
+var __blessed = require('blessed');
 
-const __SComponent = require('../SComponent');
+var __SComponent = require('../SComponent');
 
-const __deepMerge = require('../../object/deepMerge');
+var __deepMerge = require('../../object/deepMerge');
 
-const __parseHtml = require('../../terminal/parseHtml');
+var __parseHtml = require('../../terminal/parseHtml');
 
-const __countLine = require('../../string/countLine');
+var __countLine = require('../../string/countLine');
 
-const __hotkey = require('../../keyboard/hotkey');
+var __hotkey = require('../../keyboard/hotkey');
 
-const __color = require('../../color/color');
+var __color = require('../../color/color');
 
-const __SPromise = require('../../promise/SPromise');
+var __SPromise = require('../../promise/SPromise');
 
-const __SInput = require('../form/SInput');
+var __SInput = require('../form/SInput');
 
-const __multiple = require('../../class/multipleExtends');
+var __multiple = require('../../class/multipleExtends');
 
-const __activeSpace = require('../../core/activeSpace');
+var __activeSpace = require('../../core/activeSpace');
 
-const __escapeStack = require('../../terminal/escapeStack');
+var __escapeStack = require('../../terminal/escapeStack');
 /**
  * @name                  SSummaryList
  * @namespace           node.blessed.list
@@ -171,12 +175,11 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
 
     _defineProperty(_assertThisInitialized(_this), "_items", []);
 
-    _this.$list = __blessed.list({
+    _this.$list = __blessed.list(_objectSpread({
       keys: false,
       mouse: false,
-      interactive: true,
-      ..._this._settings
-    });
+      interactive: true
+    }, _this._settings));
 
     _this.append(_this.$list); // save the items
 
@@ -235,7 +238,7 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
   _createClass(SSummaryList, [{
     key: "_initHotkeys",
     value: function _initHotkeys() {
-      let escapeStackPromise;
+      var escapeStackPromise;
       this._escapeHotkey = __hotkey('escape', {
         activeSpace: '**.summaryList'
       }).on('press', key => {
@@ -341,7 +344,7 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
   }, {
     key: "getLongestListItemName",
     value: function getLongestListItemName() {
-      let longestItemText = '';
+      var longestItemText = '';
 
       this._items.forEach(item => {
         if (longestItemText.length < item.text.length) longestItemText = item.text;
@@ -388,15 +391,15 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
   }, {
     key: "_buildBlessedListItemsArray",
     value: function _buildBlessedListItemsArray() {
-      const longestItemText = this.getLongestListItemName();
+      var longestItemText = this.getLongestListItemName();
 
-      let listItems = this._items.map((item, i) => {
-        let value = this._items[i].value !== undefined ? this._items[i].value : item.default;
+      var listItems = this._items.map((item, i) => {
+        var value = this._items[i].value !== undefined ? this._items[i].value : item.default;
         if (this._editingItemIdx === i) value = '';
         return __parseHtml((i === this._selectedItemIdx ? ' ' : '') + item.text + ' '.repeat(longestItemText.length - item.text.length) + ' '.repeat(i === this._selectedItemIdx ? 4 : 5) + '<yellow>' + value + '</yellow>');
       });
 
-      listItems.push((this._selectedItemIdx === this._items.length ? ' ' : '') + __parseHtml(`<bold>Validate!</bold>`) + (this._selectedItemIdx === this._items.length ? ' ' : ''));
+      listItems.push((this._selectedItemIdx === this._items.length ? ' ' : '') + __parseHtml("<bold>Validate!</bold>") + (this._selectedItemIdx === this._items.length ? ' ' : ''));
       return listItems;
     }
     /**
@@ -412,7 +415,7 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
   }, {
     key: "_rebuildList",
     value: function _rebuildList() {
-      let listItems = this._buildBlessedListItemsArray();
+      var listItems = this._buildBlessedListItemsArray();
 
       this.$list.clearItems();
       this.$list.setItems(listItems);
@@ -422,7 +425,7 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
       this.$list.items.forEach(item => {
         item.style.bg = __color('terminal.black').toString();
       });
-      const selectedItem = this.$list.items[this._selectedItemIdx];
+      var selectedItem = this.$list.items[this._selectedItemIdx];
 
       if (!this._isEditing) {
         selectedItem.style.bg = __color('terminal.cyan').toString();

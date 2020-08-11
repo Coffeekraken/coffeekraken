@@ -2,6 +2,10 @@
 
 var _temp;
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -10,13 +14,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __deepMerge = require('../object/deepMerge');
+var __deepMerge = require('../object/deepMerge');
 
-const __SPromise = require('../promise/SPromise');
+var __SPromise = require('../promise/SPromise');
 
-const __SCommand = require('./SCommand');
+var __SCommand = require('./SCommand');
 
-const __sugarConfig = require('../config/sugar');
+var __sugarConfig = require('../config/sugar');
 /**
  * @name                    SProcess
  * @namespace           node.terminal
@@ -96,7 +100,7 @@ module.exports = (_temp = /*#__PURE__*/function () {
     _defineProperty(this, "_commands", {});
 
     // save the settings
-    const _settings = __deepMerge({}, settings); // init the SPromise class
+    var _settings = __deepMerge({}, settings); // init the SPromise class
 
 
     this._promise = new __SPromise((resolve, reject, trigger, cancel) => {
@@ -111,10 +115,10 @@ module.exports = (_temp = /*#__PURE__*/function () {
       commands = [commands];
     }
 
-    let newCommandsObj = {};
+    var newCommandsObj = {};
     commands.forEach((command, i) => {
       if (typeof command === 'string') {
-        newCommandsObj[`command${i + 1}`] = {
+        newCommandsObj["command".concat(i + 1)] = {
           command,
           color: Object.keys(__sugarConfig('terminal.colors'))[i + 1].color || 'yellow',
           run: true
@@ -122,9 +126,7 @@ module.exports = (_temp = /*#__PURE__*/function () {
       } else if (typeof command === 'object' && command.command && command.name) {
         newCommandsObj[command.name] = command;
       } else if (typeof command === 'object') {
-        newCommandsObj = { ...newCommandsObj,
-          ...command
-        };
+        newCommandsObj = _objectSpread(_objectSpread({}, newCommandsObj), command);
       }
     });
     commands = newCommandsObj; // save commands
@@ -132,7 +134,7 @@ module.exports = (_temp = /*#__PURE__*/function () {
     this._biggestCommandName = Object.keys(commands)[0];
     Object.keys(commands).forEach(commandName => {
       if (commandName.length > this._biggestCommandName.length) this._biggestCommandName = commandName;
-      const commandObj = commands[commandName];
+      var commandObj = commands[commandName];
 
       if (commandObj instanceof __SCommand) {
         this._commands[commandName] = commandObj;
@@ -140,7 +142,7 @@ module.exports = (_temp = /*#__PURE__*/function () {
         if (typeof commandObj === 'string') {
           this._commands[commandName] = new __SCommand(commandName, commandObj, {});
         } else if (typeof commandObj === 'object' && commandObj.command) {
-          const commandSettings = Object.assign({}, commandObj);
+          var commandSettings = Object.assign({}, commandObj);
           delete commandSettings.command;
           this._commands[commandName] = new __SCommand(commandName, commandObj.command, commandSettings || {});
         }
@@ -168,7 +170,7 @@ module.exports = (_temp = /*#__PURE__*/function () {
     value: function _pipeCommandsPromises() {
       // loop on each commands
       Object.keys(this._commands).forEach(name => {
-        const command = this._commands[name];
+        var command = this._commands[name];
 
         __SPromise.pipe(command, this);
       });
@@ -207,12 +209,12 @@ module.exports = (_temp = /*#__PURE__*/function () {
     value: function run(command) {
       if (typeof command === 'string') {
         if (!this._commands[command]) {
-          throw new Error(`You try to launch the command named "${command}" but it does not exists in this SProcess instance. Here's the available commands:\n${Object.keys(this._commands).join('\n- ')}`);
+          throw new Error("You try to launch the command named \"".concat(command, "\" but it does not exists in this SProcess instance. Here's the available commands:\n").concat(Object.keys(this._commands).join('\n- ')));
         }
 
         command = this._commands[command];
       } else if (!command.run) {
-        throw new Error(`You try to launch a command but it seems that the passed one is not an instance of the SCommand class...`);
+        throw new Error("You try to launch a command but it seems that the passed one is not an instance of the SCommand class...");
       } // return the promise
 
 
@@ -220,9 +222,9 @@ module.exports = (_temp = /*#__PURE__*/function () {
     }
   }, {
     key: "biggestCommandName",
-    get: function () {
-      let biggestCommandName = Object.keys(this.commands) || '';
-      const biggestName = Object.keys(this.commands).forEach(name => {
+    get: function get() {
+      var biggestCommandName = Object.keys(this.commands) || '';
+      var biggestName = Object.keys(this.commands).forEach(name => {
         if (name.length > biggestCommandName.length) biggestCommandName = name;
       });
       return biggestCommandName;
@@ -239,7 +241,7 @@ module.exports = (_temp = /*#__PURE__*/function () {
 
   }, {
     key: "commands",
-    get: function () {
+    get: function get() {
       return this._commands;
     }
   }]);

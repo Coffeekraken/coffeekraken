@@ -135,10 +135,7 @@ module.exports = class SWatchFsDeamonCli extends __SCli {
             const name = filename.replace(`.${__extension(filename)}`, '');
 
             trigger('log', {
-              value: '#clear'
-            });
-
-            trigger('log', {
+              clear: true,
               value: `Update detected on the file "<cyan>${path.replace(
                 __packageRoot(filepath) + '/',
                 ''
@@ -174,25 +171,15 @@ module.exports = class SWatchFsDeamonCli extends __SCli {
                 stdio: 'inherit',
                 shell: true
               })
-              .on('data', (d) => {
-                // console.log('d', data.toString());
-              })
               .on('close', () => {
-                // trigger('log', {
-                //   value: `#success Process finished successfully`
-                // });
+                trigger('log', {
+                  value: `#success Process finished successfully`
+                });
                 delete runningTests[filepath];
               })
               .on('error', (e) => {
                 console.log('EORROROROR', e);
               });
-
-            // childProcess.stdout.on('data', (data) => {
-            //   console.log('data', data.toString());
-            // });
-            // childProcess.stderr.on('data', (data) => {
-            //   console.log('data', data.toString());
-            // });
           });
 
         // process.stdin.resume();

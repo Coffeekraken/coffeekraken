@@ -145,18 +145,29 @@ export default function validateObject(
 
     // TODO implement the "children" support
     // check if we have some "children" properties
-    // if (argDefinition.children) {
-    //   const childrenValidation = validateObject(
-    //     objectToCheck[argName] || {},
-    //     argDefinition.children,
-    //     settings,
-    //     [..._argPath, argName]
-    //   );
-    //   if (childrenValidation !== true) {
-    //     if (settings.bySteps) return __parseHtml(childrenValidation);
-    //     issues = [...issues, ...childrenValidation];
-    //   }
-    // }
+    if (argDefinition.definitionObj) {
+      const childrenValidation = validateObject(
+        objectToCheck || {},
+        argDefinition.definitionObj,
+        {
+          ...settings,
+          throw: false
+        },
+        [..._argPath, argName]
+      );
+      // console.log('CC', childrenValidation);
+      if (childrenValidation !== true && childrenValidation.issues) {
+        childrenValidation.issues.forEach((issue) => {
+          const issueObj = childrenValidation[issue];
+          issueObj.name = `${argName}.${issueObj.name}`;
+          issuesObj.issues.push(`${argName}.${issue}`);
+          issuesObj[`${argName}.${issue}`] = issueObj;
+        });
+
+        // if (settings.bySteps) return __parseHtml(childrenValidation);
+        // issues = [...issues, ...childrenValidation];
+      }
+    }
   }
 
   if (!issuesObj.issues.length) return true;

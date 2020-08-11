@@ -1,5 +1,9 @@
 "use strict";
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -20,17 +24,17 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-const __deepMerge = require('../../object/deepMerge');
+var __deepMerge = require('../../object/deepMerge');
 
-const __tmpDir = require('../../fs/tmpDir');
+var __tmpDir = require('../../fs/tmpDir');
 
-const __fs = require('fs');
+var __fs = require('fs');
 
-const __ensureDirSync = require('../../fs/ensureDirSync');
+var __ensureDirSync = require('../../fs/ensureDirSync');
 
-const __removeSync = require('../../fs/removeSync');
+var __removeSync = require('../../fs/removeSync');
 
-const __SCacheAdapter = require('../../../../js/cache/adapters/SCacheAdapter');
+var __SCacheAdapter = require('../../../../js/cache/adapters/SCacheAdapter');
 /**
  * @name                                SCacheFsAdapter
  * @namespace           node.fs.cacheAdapters
@@ -73,7 +77,7 @@ module.exports = /*#__PURE__*/function (_SCacheAdapter) {
     _classCallCheck(this, SCacheFsAdapter);
 
     return _super.call(this, __deepMerge({
-      path: `${__tmpDir()}/SCache`
+      path: "".concat(__tmpDir(), "/SCache")
     }, settings));
   }
   /**
@@ -98,18 +102,26 @@ module.exports = /*#__PURE__*/function (_SCacheAdapter) {
 
   _createClass(SCacheFsAdapter, [{
     key: "set",
-    value: async function set(name, value) {
-      // generate the item fs name
-      const fsName = `${name.replace('.', '/')}.json`; // ensure we have the folder
+    value: function () {
+      var _set = _asyncToGenerator(function* (name, value) {
+        // generate the item fs name
+        var fsName = "".concat(name.replace('.', '/'), ".json"); // ensure we have the folder
 
-      __ensureDirSync(`${this._settings.path}/${fsName.split('/').slice(0, -1).join('/')}`); // write the json file
-
-
-      __fs.writeFileSync(`${this._settings.path}/${fsName}`, value); // write has been done correctly
+        __ensureDirSync("".concat(this._settings.path, "/").concat(fsName.split('/').slice(0, -1).join('/'))); // write the json file
 
 
-      return true;
-    }
+        __fs.writeFileSync("".concat(this._settings.path, "/").concat(fsName), value); // write has been done correctly
+
+
+        return true;
+      });
+
+      function set(_x, _x2) {
+        return _set.apply(this, arguments);
+      }
+
+      return set;
+    }()
     /**
      * @name                          get
      * @type                          Function
@@ -127,14 +139,22 @@ module.exports = /*#__PURE__*/function (_SCacheAdapter) {
 
   }, {
     key: "get",
-    value: async function get(name) {
-      // generate the item fs name
-      const fsName = `${name.replace('.', '/')}.json`; // check that the file exists
+    value: function () {
+      var _get = _asyncToGenerator(function* (name) {
+        // generate the item fs name
+        var fsName = "".concat(name.replace('.', '/'), ".json"); // check that the file exists
 
-      if (!__fs.existsSync(`${this._settings.path}/${fsName}`)) return null; // read the json file
+        if (!__fs.existsSync("".concat(this._settings.path, "/").concat(fsName))) return null; // read the json file
 
-      return __fs.readFileSync(`${this._settings.path}/${fsName}`, 'utf8');
-    }
+        return __fs.readFileSync("".concat(this._settings.path, "/").concat(fsName), 'utf8');
+      });
+
+      function get(_x3) {
+        return _get.apply(this, arguments);
+      }
+
+      return get;
+    }()
     /**
      * @name                          delete
      * @type                          Function
@@ -152,12 +172,20 @@ module.exports = /*#__PURE__*/function (_SCacheAdapter) {
 
   }, {
     key: "delete",
-    value: async function _delete(name) {
-      // generate the item fs name
-      const fsName = `${name.replace('.', '/')}.json`; // read the json file
+    value: function () {
+      var _delete2 = _asyncToGenerator(function* (name) {
+        // generate the item fs name
+        var fsName = "".concat(name.replace('.', '/'), ".json"); // read the json file
 
-      return __fs.unlinkSync(`${this._settings.path}/${fsName}`);
-    }
+        return __fs.unlinkSync("".concat(this._settings.path, "/").concat(fsName));
+      });
+
+      function _delete(_x4) {
+        return _delete2.apply(this, arguments);
+      }
+
+      return _delete;
+    }()
     /**
      * @name                          clear
      * @type                          Function
@@ -175,10 +203,18 @@ module.exports = /*#__PURE__*/function (_SCacheAdapter) {
 
   }, {
     key: "clear",
-    value: async function clear(cacheName) {
-      // read the json file
-      return __removeSync(`${this._settings.path}/${cacheName}`);
-    }
+    value: function () {
+      var _clear = _asyncToGenerator(function* (cacheName) {
+        // read the json file
+        return __removeSync("".concat(this._settings.path, "/").concat(cacheName));
+      });
+
+      function clear(_x5) {
+        return _clear.apply(this, arguments);
+      }
+
+      return clear;
+    }()
   }]);
 
   return SCacheFsAdapter;

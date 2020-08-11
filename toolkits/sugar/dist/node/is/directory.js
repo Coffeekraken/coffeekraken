@@ -1,6 +1,6 @@
 "use strict";
 
-const __fs = require('fs');
+var __fs = require('fs');
 /**
  * @name            directory
  * @namespace           node.is

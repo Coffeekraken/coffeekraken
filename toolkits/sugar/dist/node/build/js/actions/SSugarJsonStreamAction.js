@@ -2,6 +2,10 @@
 
 var _class, _temp;
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -28,13 +32,13 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
+var __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
 
-const __globby = require('globby');
+var __globby = require('globby');
 
-const __path = require('path');
+var __path = require('path');
 
-const __deepMerge = require('../../../object/deepMerge');
+var __deepMerge = require('../../../object/deepMerge');
 /**
  * @name                SSugarJsonStreamAction
  * @namespace           node.build.js.actions
@@ -100,31 +104,34 @@ module.exports = (_temp = _class = /*#__PURE__*/function (_SActionsStreamActio) 
   _createClass(SSugarJsonStreamAction, [{
     key: "run",
     value: function run(streamObj, settings) {
-      _get(_getPrototypeOf(SSugarJsonStreamAction.prototype), "run", this).call(this, streamObj, async (resolve, reject) => {
-        // search for sugar.json files
-        let dirs = streamObj.sugarJsonDirs;
-        if (!Array.isArray(dirs)) dirs = [dirs];
-        let files = [];
+      _get(_getPrototypeOf(SSugarJsonStreamAction.prototype), "run", this).call(this, streamObj, /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator(function* (resolve, reject) {
+          // search for sugar.json files
+          var dirs = streamObj.sugarJsonDirs;
+          if (!Array.isArray(dirs)) dirs = [dirs];
+          var files = [];
 
-        for (let dir of dirs) {
-          files = [...files, ...__globby.sync([`${dir}/sugar.json`, `${dir}/node_modules/*/sugar.json`, `${dir}/node_modules/*/*/sugar.json`])];
-        } // read each sugar files
+          for (var dir of dirs) {
+            files = [...files, ...__globby.sync(["".concat(dir, "/sugar.json"), "".concat(dir, "/node_modules/*/sugar.json"), "".concat(dir, "/node_modules/*/*/sugar.json")])];
+          } // read each sugar files
 
 
-        files.forEach(filePath => {
-          const sugarJson = require(filePath);
+          files.forEach(filePath => {
+            var sugarJson = require(filePath);
 
-          const sugarJsonPath = __path.dirname(filePath);
+            var sugarJsonPath = __path.dirname(filePath);
 
-          if (sugarJson.js && sugarJson.js.main) {
-            streamObj.data = `
-            import "${sugarJsonPath}/${sugarJson.js.main}";
-            ${streamObj.data};
-          `;
-          }
+            if (sugarJson.js && sugarJson.js.main) {
+              streamObj.data = "\n            import \"".concat(sugarJsonPath, "/").concat(sugarJson.js.main, "\";\n            ").concat(streamObj.data, ";\n          ");
+            }
+          });
+          resolve(streamObj);
         });
-        resolve(streamObj);
-      });
+
+        return function (_x, _x2) {
+          return _ref.apply(this, arguments);
+        };
+      }());
     }
   }]);
 

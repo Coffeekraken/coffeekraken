@@ -2,6 +2,14 @@
 
 var _temp;
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -24,25 +32,25 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __childProcess = require('child_process');
+var __childProcess = require('child_process');
 
-const __deepMerge = require('../object/deepMerge');
+var __deepMerge = require('../object/deepMerge');
 
-const __blessed = require('blessed');
+var __blessed = require('blessed');
 
-const __parseHtml = require('./parseHtml');
+var __parseHtml = require('./parseHtml');
 
-const __splitEvery = require('../string/splitEvery');
+var __splitEvery = require('../string/splitEvery');
 
-const __countLine = require('../string/countLine');
+var __countLine = require('../string/countLine');
 
-const __parseSchema = require('../url/parseSchema');
+var __parseSchema = require('../url/parseSchema');
 
-const __sugarConfig = require('../config/sugar');
+var __sugarConfig = require('../config/sugar');
 
-const __SPanel = require('../terminal/SPanel');
+var __SPanel = require('../terminal/SPanel');
 
-const __packageRoot = require('../path/packageRoot');
+var __packageRoot = require('../path/packageRoot');
 /**
  * @name                    SApp
  * @namespace           node.terminal
@@ -118,7 +126,7 @@ module.exports = (_temp = /*#__PURE__*/function (_blessed$screen) {
     _classCallCheck(this, SApp);
 
     // save the settings
-    const _settings = __deepMerge({
+    var _settings = __deepMerge({
       blessed: {
         screen: {
           smartCSR: true
@@ -175,15 +183,15 @@ module.exports = (_temp = /*#__PURE__*/function (_blessed$screen) {
     key: "_getRouteObj",
     value: function _getRouteObj(url) {
       // loop on each routes
-      for (let i = 0; i < Object.keys(this._settings.routes).length; i++) {
+      for (var i = 0; i < Object.keys(this._settings.routes).length; i++) {
         // copmpare the url to the route
-        const parsedSchema = __parseSchema(url, Object.keys(this._settings.routes)[i]);
+        var parsedSchema = __parseSchema(url, Object.keys(this._settings.routes)[i]);
 
         if (parsedSchema.match) {
-          return { ...this._settings.routes[Object.keys(this._settings.routes)[i]],
+          return _objectSpread(_objectSpread({}, this._settings.routes[Object.keys(this._settings.routes)[i]]), {}, {
             url,
             params: parsedSchema.params
-          };
+          });
         }
       } // by default, return false
 
@@ -203,10 +211,10 @@ module.exports = (_temp = /*#__PURE__*/function (_blessed$screen) {
     key: "nextMenu",
     value: function nextMenu() {
       // get the actual menu item index
-      const menuUrls = Object.keys(this._settings.menu);
-      const currentMenuItemIndex = menuUrls.indexOf(this._currentUrl);
+      var menuUrls = Object.keys(this._settings.menu);
+      var currentMenuItemIndex = menuUrls.indexOf(this._currentUrl);
       if (currentMenuItemIndex === -1 || currentMenuItemIndex === menuUrls.length - 1) return;
-      const nextMenuItemUrl = menuUrls[currentMenuItemIndex + 1]; // go to the next menu item
+      var nextMenuItemUrl = menuUrls[currentMenuItemIndex + 1]; // go to the next menu item
 
       this.goTo(nextMenuItemUrl);
     }
@@ -223,10 +231,10 @@ module.exports = (_temp = /*#__PURE__*/function (_blessed$screen) {
     key: "previousMenu",
     value: function previousMenu() {
       // get the actual menu item index
-      const menuUrls = Object.keys(this._settings.menu);
-      const currentMenuItemIndex = menuUrls.indexOf(this._currentUrl);
+      var menuUrls = Object.keys(this._settings.menu);
+      var currentMenuItemIndex = menuUrls.indexOf(this._currentUrl);
       if (currentMenuItemIndex === -1 || currentMenuItemIndex === 0) return;
-      const previousMenuItemUrl = menuUrls[currentMenuItemIndex - 1]; // go to the next menu item
+      var previousMenuItemUrl = menuUrls[currentMenuItemIndex - 1]; // go to the next menu item
 
       this.goTo(previousMenuItemUrl);
     }
@@ -246,7 +254,7 @@ module.exports = (_temp = /*#__PURE__*/function (_blessed$screen) {
     key: "goTo",
     value: function goTo(url) {
       // get the current route object
-      const routeObj = this._getRouteObj(url); // if something goes wrong
+      var routeObj = this._getRouteObj(url); // if something goes wrong
 
 
       if (!routeObj) return false; // save the current url
@@ -286,54 +294,62 @@ module.exports = (_temp = /*#__PURE__*/function (_blessed$screen) {
 
   }, {
     key: "_renderLayout",
-    value: async function _renderLayout(routeObj) {
-      let contentPanel, contentProcess;
+    value: function () {
+      var _renderLayout2 = _asyncToGenerator(function* (routeObj) {
+        var contentPanel, contentProcess;
 
-      if (!this._currentPanes[routeObj.url]) {
-        this._currentPanes[routeObj.url] = {}; // creating the panel to host the logs
+        if (!this._currentPanes[routeObj.url]) {
+          this._currentPanes[routeObj.url] = {}; // creating the panel to host the logs
 
-        contentPanel = new __SPanel({
-          beforeLog: () => {
-            return '<blue><time/></blue> ';
-          }
-        }); // switch between the content types that can be:
-        // - string: Launch a new child process with the specified command
+          contentPanel = new __SPanel({
+            beforeLog: () => {
+              return '<blue><time/></blue> ';
+            }
+          }); // switch between the content types that can be:
+          // - string: Launch a new child process with the specified command
 
-        const content = await routeObj.content(routeObj.params);
+          var content = yield routeObj.content(routeObj.params);
 
-        if (typeof content === 'string') {
-          contentProcess = __childProcess.spawn(content, [], {
-            env: { ...process.env,
-              IS_CHILD_PROCESS: true
-            },
-            detached: true,
-            cwd: __packageRoot(process.cwd()),
-            shell: true
-          });
-          contentProcess.stdout.on('data', data => {
-            contentPanel.log(data.toString().split('~').filter(m => m !== ''));
-          });
-          contentProcess.stderr.on('data', data => {
-            contentPanel.log(data.toString().split('~').filter(m => m !== ''));
-          });
-        } // store the content panel and process for later
-
-
-        this._currentPanes[routeObj.url].process = contentProcess;
-        this._currentPanes[routeObj.url].panel = contentPanel;
-      } else {
-        // restore the content panel and process
-        contentPanel = this._currentPanes[routeObj.url].panel;
-        contentProcess = this._currentPanes[routeObj.url].process;
-      } // getting the overall layout
+          if (typeof content === 'string') {
+            contentProcess = __childProcess.spawn(content, [], {
+              env: _objectSpread(_objectSpread({}, process.env), {}, {
+                IS_CHILD_PROCESS: true
+              }),
+              detached: true,
+              cwd: __packageRoot(process.cwd()),
+              shell: true
+            });
+            contentProcess.stdout.on('data', data => {
+              contentPanel.log(data.toString().split('~').filter(m => m !== ''));
+            });
+            contentProcess.stderr.on('data', data => {
+              contentPanel.log(data.toString().split('~').filter(m => m !== ''));
+            });
+          } // store the content panel and process for later
 
 
-      const layout = await this._settings.layout(contentPanel); // rendering the layout to the terminal
+          this._currentPanes[routeObj.url].process = contentProcess;
+          this._currentPanes[routeObj.url].panel = contentPanel;
+        } else {
+          // restore the content panel and process
+          contentPanel = this._currentPanes[routeObj.url].panel;
+          contentProcess = this._currentPanes[routeObj.url].process;
+        } // getting the overall layout
 
-      this.append(layout); // render the screen
 
-      this.render();
-    }
+        var layout = yield this._settings.layout(contentPanel); // rendering the layout to the terminal
+
+        this.append(layout); // render the screen
+
+        this.render();
+      });
+
+      function _renderLayout(_x) {
+        return _renderLayout2.apply(this, arguments);
+      }
+
+      return _renderLayout;
+    }()
   }]);
 
   return SApp;

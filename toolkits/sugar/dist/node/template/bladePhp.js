@@ -1,14 +1,14 @@
 "use strict";
 
-const __execPhp = require('exec-php');
+var __execPhp = require('exec-php');
 
-const __deepMerge = require('../object/deepMerge');
+var __deepMerge = require('../object/deepMerge');
 
-const __sugarConfig = require('../config/sugar');
+var __sugarConfig = require('../config/sugar');
 
-const __fs = require('fs');
+var __fs = require('fs');
 
-const __path = require('path');
+var __path = require('path');
 /**
  * @name                      bladePhp
  * @namespace                 node.template
@@ -50,7 +50,7 @@ module.exports = function (view, data, settings) {
     cacheDir: __sugarConfig('views.cacheDir')
   }, settings);
 
-  const sugarViewsDir = __path.resolve(`${__dirname}/../../php/views`); // const viewPath = `${settings.rootDir}/${view
+  var sugarViewsDir = __path.resolve("".concat(__dirname, "/../../php/views")); // const viewPath = `${settings.rootDir}/${view
   //   .replace('.blade.php', '')
   //   .split('.')
   //   .join('/')}.blade.php`;
@@ -79,7 +79,7 @@ module.exports = function (view, data, settings) {
 
       php.compile([settings.rootDir, sugarViewsDir, '/'], view.replace('.blade.php', '').split('/').join('.'), data, settings.cacheDir, (error, result, output, printed) => {
         // get the best result possible
-        const ret = result || printed || output || error; // resolve the promise with the best result possible
+        var ret = result || printed || output || error; // resolve the promise with the best result possible
 
         resolve(ret);
       });

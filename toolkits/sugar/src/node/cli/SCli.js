@@ -9,6 +9,8 @@ const __isChildProcess = require('../is/childProcess');
 const __output = require('../process/output');
 const __parseArgs = require('../cli/parseArgs');
 const __toString = require('../string/toString');
+const __SPromise = require('../promise/SPromise');
+const __SProcessInterface = require('../process/interface/SProcessInterface');
 
 /**
  * @name                SCli
@@ -55,7 +57,7 @@ const __toString = require('../string/toString');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SCli {
+module.exports = class SCli extends __SPromise {
   /**
    * @name          _runningProcess
    * @type          SPromise
@@ -79,17 +81,6 @@ module.exports = class SCli {
   _runningParamsObj = {};
 
   /**
-   * @name        _settings
-   * @type        Object
-   * @private
-   *
-   * Store the instance settings
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _settings = {};
-
-  /**
    * @name        constructor
    * @type        Function
    * @constructor
@@ -100,9 +91,8 @@ module.exports = class SCli {
    */
   constructor(settings = {}) {
     // save the settings
-    this._settings = __deepMerge(
+    settings = __deepMerge(
       {
-        id: this.constructor.name,
         name: null,
         includeAllParams: true,
         output: false,
@@ -110,6 +100,10 @@ module.exports = class SCli {
       },
       settings
     );
+
+    super(null, settings).start();
+    if (!this._settings.id) this._settings.id = this.constructor.name;
+
     // check integrity
     this._checkCliIntegrity();
   }
@@ -131,6 +125,20 @@ module.exports = class SCli {
    */
   static parseArgs(cliString) {
     return __parseArgs(cliString, this.definitionObj);
+  }
+
+  /**
+   * @name        process
+   * @type        Object
+   * @get
+   *
+   * Access the current process
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get process() {
+    return this._runningProcess;
   }
 
   /**
@@ -217,10 +225,7 @@ module.exports = class SCli {
     }
 
     // check definition object
-    const definitionObjCheck = __validateCliDefinitionObject(
-      this.definitionObj
-    );
-    if (definitionObjCheck !== true) throw new Error(definitionObjCheck);
+    __validateCliDefinitionObject(this.definitionObj);
   }
 
   /**
@@ -259,14 +264,18 @@ module.exports = class SCli {
         `You cannot spawn multiple "${this.constructor.name}" process at the same time. Please kill the currently running one using the "kill" method...`
       );
     }
+
     settings = __deepMerge(this._settings, settings);
     // make sure we have an object as args
-    paramsObj = __deepMerge(this._settings.defaultParamsObj, paramsObj);
     paramsObj = __argsToObject(paramsObj, this.definitionObj);
+    paramsObj = __deepMerge(this._settings.defaultParamsObj, paramsObj);
 
     if (__isChildProcess()) {
       // run the process
       this._runningProcess = this._run(paramsObj, settings);
+
+      // Apply the SProcessInterface on the getted process
+      __SProcessInterface.apply(this._runningProcess);
 
       if (settings.output) {
         const outputSettings =
@@ -279,6 +288,7 @@ module.exports = class SCli {
           time: Date.now(),
           value: data
         };
+        this._runningProcess = null;
         return data;
       });
 
@@ -291,6 +301,12 @@ module.exports = class SCli {
       });
 
       this._runningProcess = childProcess.run(paramsObj);
+
+      this._runningProcess
+        .on('error', () => {})
+        .on('resolve', () => {
+          this._runningProcess = null;
+        });
 
       if (settings.output) {
         const outputSettings =

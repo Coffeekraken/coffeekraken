@@ -2,6 +2,10 @@
 
 var _class, _temp;
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -24,19 +28,19 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __blessed = require('blessed');
+var __blessed = require('blessed');
 
-const __deepMerge = require('../object/deepMerge');
+var __deepMerge = require('../object/deepMerge');
 
-const __color = require('../color/color');
+var __color = require('../color/color');
 
-const __hotkey = require('../keyboard/hotkey');
+var __hotkey = require('../keyboard/hotkey');
 
-const __tkill = require('tree-kill');
+var __tkill = require('tree-kill');
 
-const __isChildProcess = require('../is/childProcess');
+var __isChildProcess = require('../is/childProcess');
 
-let __activeScreen = null;
+var __activeScreen = null;
 /**
  * @name                  SComponent
  * @namespace           node.blessed
@@ -155,7 +159,7 @@ module.exports = (_temp = _class = /*#__PURE__*/function (_blessed$box) {
       _this._isDisplayed = true;
       setTimeout(() => {
         _this.update();
-      }, 1000);
+      }, 200);
     });
 
     _this.on('detach', () => {
@@ -163,13 +167,16 @@ module.exports = (_temp = _class = /*#__PURE__*/function (_blessed$box) {
     }); // save the settings
 
 
-    _this._settings = settings; // set render interval if not set already
+    _this._settings = settings;
+    _this._allowRender = true;
+    _this._renderBuffer = setInterval(() => {
+      _this._allowRender = true;
+    }, 100); // set render interval if not set already
+    // if (!SComponent._renderInterval) {
+    //   this.setRenderInterval(100);
+    // }
 
-    if (!SComponent._renderInterval) {
-      _this.setRenderInterval(100);
-    }
-
-    let container;
+    var container;
 
     if (settings.container) {
       container = __blessed.box(settings.container);
@@ -180,11 +187,12 @@ module.exports = (_temp = _class = /*#__PURE__*/function (_blessed$box) {
 
     __hotkey('ctrl+c', {
       once: true
-    }).on('press', async () => {
+    }).on('press', /*#__PURE__*/_asyncToGenerator(function* () {
       _this._destroyed = true;
+      _this._allowRender = false;
 
       _this.detach();
-    });
+    }));
 
     if (_this._settings.appendToScreen) {
       (__activeScreen.container || __activeScreen).append(_assertThisInitialized(_this));
@@ -220,12 +228,11 @@ module.exports = (_temp = _class = /*#__PURE__*/function (_blessed$box) {
 
   _createClass(SComponent, [{
     key: "setRenderInterval",
-    value: function setRenderInterval(interval) {
-      clearInterval(SComponent._renderInterval);
-      SComponent._renderInterval = setInterval(() => {
-        if (!this.isDisplayed()) return;
-        (global.screen || this.screen).render();
-      }, interval);
+    value: function setRenderInterval(interval) {// clearInterval(SComponent._renderInterval);
+      // SComponent._renderInterval = setInterval(() => {
+      //   if (!this.isDisplayed()) return;
+      //   (global.screen || this.screen).render();
+      // }, interval);
     }
     /**
      * @name                  attach
@@ -265,6 +272,16 @@ module.exports = (_temp = _class = /*#__PURE__*/function (_blessed$box) {
     key: "update",
     value: function update() {
       if (this.isDestroyed()) return;
+
+      if (!this._allowRender) {
+        clearTimeout(this._updateTimeout);
+        this._updateTimeout = setTimeout(() => {
+          this.update();
+        }, 20);
+        return;
+      }
+
+      this._allowRender = false;
       if (this._screen) this._screen.render();
     }
     /**
@@ -298,6 +315,25 @@ module.exports = (_temp = _class = /*#__PURE__*/function (_blessed$box) {
     key: "isDestroyed",
     value: function isDestroyed() {
       return this._destroyed === true;
+    }
+    /**
+     * @name                  allowRender
+     * @type                  Function
+     *
+     * Check if the component allow a render at this particular time
+     *
+     * @since         2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "allowRender",
+    value: function allowRender() {
+      clearTimeout(this._updateTimeout);
+      this._updateTimeout = setTimeout(() => {
+        this.update();
+      }, 20);
+      return this._allowRender;
     }
   }]);
 

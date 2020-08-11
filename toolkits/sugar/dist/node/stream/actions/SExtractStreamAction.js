@@ -2,6 +2,10 @@
 
 var _class, _temp;
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -28,19 +32,19 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __SActionsStreamAction = require('../SActionsStreamAction');
+var __SActionsStreamAction = require('../SActionsStreamAction');
 
-const __packageRoot = require('../../path/packageRoot');
+var __packageRoot = require('../../path/packageRoot');
 
-const __fs = require('fs');
+var __fs = require('fs');
 
-const __ensureDirSync = require('../../fs/ensureDirSync');
+var __ensureDirSync = require('../../fs/ensureDirSync');
 
-const __deepMerge = require('../../object/deepMerge');
+var __deepMerge = require('../../object/deepMerge');
 
-const __md5 = require('../../crypt/md5');
+var __md5 = require('../../crypt/md5');
 
-const __writeJsonSync = require('../../fs/writeJsonSync');
+var __writeJsonSync = require('../../fs/writeJsonSync');
 /**
  * @name            SExtractStreamAction
  * @namespace           node.stream.actions
@@ -117,19 +121,25 @@ module.exports = (_temp = _class = /*#__PURE__*/function (_SActionsStreamActio) 
   _createClass(SExtractStreamAction, [{
     key: "run",
     value: function run(streamObj, settings) {
-      return _get(_getPrototypeOf(SExtractStreamAction.prototype), "run", this).call(this, streamObj, async (resolve, reject) => {
-        const reg = /\/\*\s?extract:([a-zA-Z0-9-_]+)\s?\*\/(((?!\/\*\s?extract\s?\*\/)(.|\n))*)\/\*\s?extract\s?\*\//g;
-        const source = streamObj[settings.sourceProp];
-        let myArray;
+      return _get(_getPrototypeOf(SExtractStreamAction.prototype), "run", this).call(this, streamObj, /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator(function* (resolve, reject) {
+          var reg = /\/\*\s?extract:([a-zA-Z0-9-_]+)\s?\*\/(((?!\/\*\s?extract\s?\*\/)(.|\n))*)\/\*\s?extract\s?\*\//g;
+          var source = streamObj[settings.sourceProp];
+          var myArray;
 
-        while ((myArray = reg.exec(source)) !== null) {
-          const prop = myArray[1];
-          const string = myArray[2];
-          streamObj[prop] = string;
-        }
+          while ((myArray = reg.exec(source)) !== null) {
+            var prop = myArray[1];
+            var string = myArray[2];
+            streamObj[prop] = string;
+          }
 
-        resolve(streamObj);
-      });
+          resolve(streamObj);
+        });
+
+        return function (_x, _x2) {
+          return _ref.apply(this, arguments);
+        };
+      }());
     }
   }]);
 

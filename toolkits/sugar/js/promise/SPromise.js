@@ -824,12 +824,6 @@ var SPromise = /*#__PURE__*/function (_Promise) {
         var stackArray = [];
 
         if (typeof stack === 'string') {
-          // make sure the stack exist
-          // if (!this._stacks[stack]) {
-          //   this._registerNewStacks(stack);
-          // }
-          if (stack === 'log') yield (0, _wait.default)();
-
           if (this._stacks[stack]) {
             stackArray = [...stackArray, ...this._stacks[stack]];
           } // check if the stack is a glob pattern

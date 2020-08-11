@@ -2,6 +2,10 @@
 
 var _temp;
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -10,19 +14,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __deepMerge = require('../object/deepMerge');
+var __deepMerge = require('../object/deepMerge');
 
-const __SPromise = require('../promise/SPromise');
+var __SPromise = require('../promise/SPromise');
 
-const __isPath = require('../is/path');
+var __isPath = require('../is/path');
 
-const __semver = require('semver');
+var __semver = require('semver');
 
-const __os = require('os');
+var __os = require('os');
 
-const __childProcess = require('child_process');
+var __childProcess = require('child_process');
 
-const __awaitSpawn = require('await-spawn');
+var __awaitSpawn = require('await-spawn');
 /**
  * @name                    SDependency
  * @namespace           node.dependency
@@ -116,7 +120,7 @@ module.exports = (_temp = /*#__PURE__*/function () {
     this._name = name; // check that the dep file path is a valid file
 
     if (!__isPath(depFilepath, true)) {
-      throw new Error(`Sorry but the passed dependency file path "${depFilepath}" does not exist...`);
+      throw new Error("Sorry but the passed dependency file path \"".concat(depFilepath, "\" does not exist..."));
     } // save the dependency filepath
 
 
@@ -140,10 +144,10 @@ module.exports = (_temp = /*#__PURE__*/function () {
   _createClass(SDependency, [{
     key: "_loadDepFile",
     value: function _loadDepFile() {
-      const depJson = require(this._depFilepath);
+      var depJson = require(this._depFilepath);
 
       if (!depJson[__os.platform]) {
-        throw new Error(`Sorry but this ${this._name} dependency is not supported for your "${__os.platform}" platform... Here's the platforms supported:\n- ${Object.keys(depJson).join('\n- ')}`);
+        throw new Error("Sorry but this ".concat(this._name, " dependency is not supported for your \"").concat(__os.platform, "\" platform... Here's the platforms supported:\n- ").concat(Object.keys(depJson).join('\n- ')));
       }
 
       this._depJson = depJson[__os.platform];
@@ -169,13 +173,13 @@ module.exports = (_temp = /*#__PURE__*/function () {
 
       return new __SPromise((resolve, reject, trigger, cancel) => {
         // get the available versions to install
-        const versionsArray = Object.keys(this._depJson); // set the version to install
+        var versionsArray = Object.keys(this._depJson); // set the version to install
 
-        let versionToInstall = null; // if a version is passed, check if it is supported by the dependency json
+        var versionToInstall = null; // if a version is passed, check if it is supported by the dependency json
 
         if (version) {
           if (versionsArray.indexOf(version) === -1) {
-            throw new Error(`Sorry but you have asked to install the ${this._name} version "${version}" but this version is not available. Here's the available versions that you can install:\n- ${versionsArray.join('\n- ')}`);
+            throw new Error("Sorry but you have asked to install the ".concat(this._name, " version \"").concat(version, "\" but this version is not available. Here's the available versions that you can install:\n- ").concat(versionsArray.join('\n- ')));
           }
 
           versionToInstall = version;
@@ -184,7 +188,7 @@ module.exports = (_temp = /*#__PURE__*/function () {
         } // get the install script for this version
 
 
-        const installCommands = [...this._depJson[versionToInstall].install]; // execute the commands for the installation
+        var installCommands = [...this._depJson[versionToInstall].install]; // execute the commands for the installation
 
         this._execCommands(installCommands);
       });
@@ -209,26 +213,32 @@ module.exports = (_temp = /*#__PURE__*/function () {
   }, {
     key: "_execCommands",
     value: function _execCommands(commands) {
-      return new __SPromise(async (resolve, reject, trigger, cancel) => {
-        commands = [...commands];
+      return new __SPromise( /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator(function* (resolve, reject, trigger, cancel) {
+          commands = [...commands];
 
-        for (let i = 0; i < commands.length; i++) {
-          const child = __awaitSpawn(commands[i], {
-            shell: true
-          });
+          for (var i = 0; i < commands.length; i++) {
+            var child = __awaitSpawn(commands[i], {
+              shell: true
+            });
 
-          child.catch(e => {
-            trigger('error', e);
-          });
-          child.child.stdout.on('data', value => {
-            trigger('data', value);
-          });
-          child.child.stderr.on('data', error => {
-            trigger('error', error);
-          });
-          await child;
-        }
-      }, {
+            child.catch(e => {
+              trigger('error', e);
+            });
+            child.child.stdout.on('data', value => {
+              trigger('data', value);
+            });
+            child.child.stderr.on('data', error => {
+              trigger('error', error);
+            });
+            yield child;
+          }
+        });
+
+        return function (_x, _x2, _x3, _x4) {
+          return _ref.apply(this, arguments);
+        };
+      }(), {
         stacks: 'data,error'
       }).start();
     }

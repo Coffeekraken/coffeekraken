@@ -54,12 +54,12 @@ var SError = /*#__PURE__*/function (_Error) {
       stack.split(/\s+?at\s/).forEach(l => {
         stackArray.push("at <cyan>".concat(l.replace(packageRoot, ''), "</cyan>"));
       });
-      var errorString = (0, _trimLines.default)((0, _parseHtml.default)("<underline><bold><red>".concat(_this.constructor.name, "</red></bold></underline>\n\n        ").concat(message, "\n\n        ").concat(stackArray.join('\n'))));
-      _this.syscall = null;
-      _this.code = null;
-      _this.property = null;
-      _this.message = errorString;
-      _this.stack = null;
+      var errorString = (0, _trimLines.default)((0, _parseHtml.default)("<underline><bold><red>".concat(_this.constructor.name, "</red></bold></underline>\n\n        ").concat(message, "\n\n        ").concat(stackArray.join('\n')))); // this.syscall = null;
+      // this.code = null;
+      // this.property = null;
+
+      _this.message = errorString; // this.stack = null;
+
       _this.name = _this.constructor.name;
     } catch (e) {}
 

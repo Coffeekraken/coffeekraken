@@ -1,14 +1,14 @@
 "use strict";
 
-const __SConfig = require('./SConfig');
+var __SConfig = require('./SConfig');
 
-const __SConfigFolderAdapter = require('./adapters/SConfigFolderAdapter');
+var __SConfigFolderAdapter = require('./adapters/SConfigFolderAdapter');
 
-const __path = require('path');
+var __path = require('path');
 
-const __packageRoot = require('../path/packageRoot');
+var __packageRoot = require('../path/packageRoot');
 
-const __resolveTokens = require('../object/resolveTokens');
+var __resolveTokens = require('../object/resolveTokens');
 /**
  * @name                  sugar
  * @namespace           node.config
@@ -29,7 +29,7 @@ const __resolveTokens = require('../object/resolveTokens');
  */
 
 
-let sugarConfigInstance;
+var sugarConfigInstance;
 
 module.exports = function sugar(dotPath) {
   if (!sugarConfigInstance) {
@@ -39,7 +39,7 @@ module.exports = function sugar(dotPath) {
         foldername: '.sugar',
         filename: '[name].config.js',
         defaultConfigPath: __path.resolve(__dirname, '../../../[foldername]'),
-        appConfigPath: `${__packageRoot(process.cwd())}/[foldername]`,
+        appConfigPath: "".concat(__packageRoot(process.cwd()), "/[foldername]"),
         userConfigPath: null
       })]
     });

@@ -1,10 +1,10 @@
 "use strict";
 
-const __downloadsFolder = require('downloads-folder');
+var __downloadsFolder = require('downloads-folder');
 
-const __path = require('path');
+var __path = require('path');
 
-const __download = require('download-file'); // TODO tests
+var __download = require('download-file'); // TODO tests
 
 /**
  * @name              downloadFile
@@ -38,18 +38,18 @@ module.exports = function (downloadUrl, destinationPath, callback) {
   }
 
   return new Promise((resolve, reject) => {
-    let fileStreamDest;
+    var fileStreamDest;
 
-    let parsedDestinationPath = __path.parse(destinationPath);
+    var parsedDestinationPath = __path.parse(destinationPath);
 
-    let parsedDownloadUrl = __path.parse(downloadUrl);
+    var parsedDownloadUrl = __path.parse(downloadUrl);
 
     if (parsedDestinationPath.ext) {
       fileStreamDest = destination;
     } else if (destinationPath.slice(-1) === '/' && parsedDownloadUrl.base) {
       fileStreamDest = destinationPath + parsedDownloadUrl.base;
     } else if (parsedDownloadUrl.base) {
-      fileStreamDest = `${destinationPath}/${parsedDownloadUrl.base}`;
+      fileStreamDest = "".concat(destinationPath, "/").concat(parsedDownloadUrl.base);
     } // download the file
 
 

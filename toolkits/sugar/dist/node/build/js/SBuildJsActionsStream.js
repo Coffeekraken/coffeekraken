@@ -16,25 +16,25 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-const __SActionsStream = require('../../stream/SActionsStream');
+var __SActionsStream = require('../../stream/SActionsStream');
 
-const __SWebpackStreamAction = require('./actions/SWebpackStreamAction');
+var __SWebpackStreamAction = require('./actions/SWebpackStreamAction');
 
-const __STerserStreamAction = require('./actions/STerserStreamAction');
+var __STerserStreamAction = require('./actions/STerserStreamAction');
 
-const __SFsReadFileStreamAction = require('../../stream/actions/SFsReadFileStreamAction');
+var __SFsReadFileStreamAction = require('../../stream/actions/SFsReadFileStreamAction');
 
-const __deepMerge = require('../../object/deepMerge');
+var __deepMerge = require('../../object/deepMerge');
 
-const __getFilename = require('../../fs/filename');
+var __getFilename = require('../../fs/filename');
 
-const __SFsOutputStreamAction = require('../../stream/actions/SFsOutputStreamAction');
+var __SFsOutputStreamAction = require('../../stream/actions/SFsOutputStreamAction');
 
-const __SGlobResolverStreamAction = require('../../stream/actions/SGlobResolverStreamAction');
+var __SGlobResolverStreamAction = require('../../stream/actions/SGlobResolverStreamAction');
 
-const __SSugarJsonStreamAction = require('./actions/SSugarJsonStreamAction');
+var __SSugarJsonStreamAction = require('./actions/SSugarJsonStreamAction');
 
-const __path = require('path');
+var __path = require('path');
 /**
  * @name            SBuildJsActionsStream
  * @namespace           node.build.js

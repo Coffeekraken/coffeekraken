@@ -1,20 +1,24 @@
 "use strict";
 
-const __deepMerge = require('../object/deepMerge');
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
-const __getRegisteredProcessed = require('./getRegisteredProcesses');
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-const __clear = require('clear');
+var __deepMerge = require('../object/deepMerge');
 
-const __fkill = require('fkill');
+var __getRegisteredProcessed = require('./getRegisteredProcesses');
 
-const __hotkey = require('../keyboard/hotkey');
+var __clear = require('clear');
 
-const __spawn = require('../process/spawn');
+var __fkill = require('fkill');
 
-const __parseHtml = require('../terminal/parseHtml');
+var __hotkey = require('../keyboard/hotkey');
 
-const __keypress = require('keypress');
+var __spawn = require('../process/spawn');
+
+var __parseHtml = require('../terminal/parseHtml');
+
+var __keypress = require('keypress');
 /**
  * @name              exitCleanup
  * @namespace           node.process
@@ -35,7 +39,7 @@ const __keypress = require('keypress');
  */
 
 
-let _exitCleanupRegistered = false;
+var _exitCleanupRegistered = false;
 
 module.exports = function exitCleanup(handler, settings) {
   if (handler === void 0) {
@@ -51,68 +55,81 @@ module.exports = function exitCleanup(handler, settings) {
 
   __hotkey('ctrl+c', {
     once: true
-  }).on('press', async () => {
+  }).on('press', /*#__PURE__*/_asyncToGenerator(function* () {
     // check if all processes are closed
-    const processes = __getRegisteredProcessed();
+    var processes = __getRegisteredProcessed();
 
-    const processesCount = Object.keys(processes).length;
-    let remainingProcessesCount = Object.keys(processes).length;
+    var processesCount = Object.keys(processes).length;
+    var remainingProcessesCount = Object.keys(processes).length;
 
     __keypress.disableMouse(process.stdout);
 
     console.log(__parseHtml('  Cleaning your system after <primary>Sugar</primary> execution...'));
 
-    async function processKilled() {
-      remainingProcessesCount--;
+    function processKilled() {
+      return _processKilled.apply(this, arguments);
+    }
 
-      if (remainingProcessesCount <= 0) {
-        console.log(__parseHtml('  Cleaning the forgotten process(es)...'));
+    function _processKilled() {
+      _processKilled = _asyncToGenerator(function* () {
+        remainingProcessesCount--;
 
-        const pro = __spawn('sugar util.kill all', {
-          id: 'cleanup'
-        }).on('log,error', value => {
-          console.log(__parseHtml(`    - ${value.value}`));
-        }).on('cancel,finally', () => {
-          console.log(__parseHtml(`  All of the <cyan>${processesCount}</cyan> process(es) have been <green>successfully</green> closed`));
-          process.exit();
-        });
-      }
+        if (remainingProcessesCount <= 0) {
+          console.log(__parseHtml('  Cleaning the forgotten process(es)...'));
+
+          var pro = __spawn('sugar util.kill all', {
+            id: 'cleanup'
+          }).on('log,error', value => {
+            console.log(__parseHtml("    - ".concat(value.value)));
+          }).on('cancel,finally', () => {
+            console.log(__parseHtml("  All of the <cyan>".concat(processesCount, "</cyan> process(es) have been <green>successfully</green> closed")));
+            process.exit();
+          });
+        }
+      });
+      return _processKilled.apply(this, arguments);
     }
 
     if (remainingProcessesCount > 0) {
-      Object.keys(processes).forEach(async key => {
-        const processObj = processes[key];
+      Object.keys(processes).forEach( /*#__PURE__*/function () {
+        var _ref2 = _asyncToGenerator(function* (key) {
+          var processObj = processes[key];
 
-        if (processObj.hasAfterCommand && processObj.hasAfterCommand()) {
-          function waitForClose() {
-            const p = new Promise(resolve => {
-              processObj.on('close', () => {
-                resolve();
-              }).on('log,error', value => {
-                console.log(__parseHtml(`  ${value.value}`));
+          if (processObj.hasAfterCommand && processObj.hasAfterCommand()) {
+            function waitForClose() {
+              var p = new Promise(resolve => {
+                processObj.on('close', () => {
+                  resolve();
+                }).on('log,error', value => {
+                  console.log(__parseHtml("  ".concat(value.value)));
+                });
               });
-            });
-            return p;
-          }
+              return p;
+            }
 
-          await waitForClose();
-          processKilled();
-        } else if (!processObj.exitCode && process.pid !== processObj.pid) {
-          console.log(__parseHtml(`  Killing the process with the PID <cyan>${processObj.pid}</cyan>`));
-          await __fkill(processObj.pid);
-          processKilled();
-        } else {
-          processKilled();
-        }
-      });
+            yield waitForClose();
+            processKilled();
+          } else if (!processObj.exitCode && process.pid !== processObj.pid) {
+            console.log(__parseHtml("  Killing the process with the PID <cyan>".concat(processObj.pid, "</cyan>")));
+            yield __fkill(processObj.pid);
+            processKilled();
+          } else {
+            processKilled();
+          }
+        });
+
+        return function (_x) {
+          return _ref2.apply(this, arguments);
+        };
+      }());
     } else {
       console.log(__parseHtml('  Cleaning the forgotten process(es)...'));
-      await __spawn('sugar util.kill all').on('log,error', value => {
-        console.log(__parseHtml(`    - ${value.value}`));
+      yield __spawn('sugar util.kill all').on('log,error', value => {
+        console.log(__parseHtml("    - ".concat(value.value)));
       }).on('cancel,finally', () => {
-        console.log(__parseHtml(`  All of the <cyan>${processesCount}</cyan> process(es) have been <green>successfully</green> closed`));
+        console.log(__parseHtml("  All of the <cyan>".concat(processesCount, "</cyan> process(es) have been <green>successfully</green> closed")));
         process.exit();
       });
     }
-  });
+  }));
 };

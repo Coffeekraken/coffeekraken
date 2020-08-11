@@ -24,29 +24,29 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-const __blessed = require('blessed');
+var __blessed = require('blessed');
 
-const __SComponent = require('../SComponent');
+var __SComponent = require('../SComponent');
 
-const __deepMerge = require('../../object/deepMerge');
+var __deepMerge = require('../../object/deepMerge');
 
-const __parseHtml = require('../../terminal/parseHtml');
+var __parseHtml = require('../../terminal/parseHtml');
 
-const __countLine = require('../../string/countLine');
+var __countLine = require('../../string/countLine');
 
-const __hotkey = require('../../keyboard/hotkey');
+var __hotkey = require('../../keyboard/hotkey');
 
-const __color = require('../../color/color');
+var __color = require('../../color/color');
 
-const __SPromise = require('../../promise/SPromise');
+var __SPromise = require('../../promise/SPromise');
 
-const __SInput = require('../form/SInput');
+var __SInput = require('../form/SInput');
 
-const __multiple = require('../../class/multipleExtends');
+var __multiple = require('../../class/multipleExtends');
 
-const __activeSpace = require('../../core/activeSpace');
+var __activeSpace = require('../../core/activeSpace');
 
-const __escapeStack = require('../../terminal/escapeStack');
+var __escapeStack = require('../../terminal/escapeStack');
 /**
  * @name                  SWindowBox
  * @namespace           node.blessed.box

@@ -1,26 +1,36 @@
 "use strict";
 
-const __childProcess = require('child_process');
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
-const __deepMerge = require('../object/deepMerge');
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-const __SPromise = require('../promise/SPromise');
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-const __uniqid = require('../string/uniqid');
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
-const __parse = require('../string/parse');
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __hotkey = require('../keyboard/hotkey');
+var __childProcess = require('child_process');
 
-const __tkill = require('tree-kill');
+var __deepMerge = require('../object/deepMerge');
 
-const __registerProcess = require('./registerProcess');
+var __SPromise = require('../promise/SPromise');
 
-const __getRegisteredProcesses = require('./getRegisteredProcesses');
+var __uniqid = require('../string/uniqid');
 
-const __wait = require('../time/wait');
+var __parse = require('../string/parse');
 
-const __clone = require('../object/clone');
+var __hotkey = require('../keyboard/hotkey');
+
+var __tkill = require('tree-kill');
+
+var __registerProcess = require('./registerProcess');
+
+var __getRegisteredProcesses = require('./getRegisteredProcesses');
+
+var __wait = require('../time/wait');
+
+var __clone = require('../object/clone');
 /**
  * @name                                spawn
  * @namespace           node.process
@@ -51,8 +61,8 @@ module.exports = function spawn(command, argsOrSettings, settings) {
     settings = null;
   }
 
-  let childProcess;
-  const runningProcess = {
+  var childProcess;
+  var runningProcess = {
     id: __uniqid(),
     start: Date.now(),
     end: null,
@@ -63,16 +73,16 @@ module.exports = function spawn(command, argsOrSettings, settings) {
     state: 'idle',
     args: Array.isArray(argsOrSettings) ? argsOrSettings : []
   };
-  let argsArray = [];
-  const defaultSettings = {
+  var argsArray = [];
+  var defaultSettings = {
     lazy: false,
     before: null,
     after: null,
     shell: true,
-    env: { ...process.env,
+    env: _objectSpread(_objectSpread({}, process.env), {}, {
       CHILD_PROCESS_LEVEL: process.env.CHILD_PROCESS_LEVEL ? process.env.CHILD_PROCESS_LEVEL + 1 : 1,
       IS_CHILD_PROCESS: true
-    }
+    })
   };
 
   if (typeof argsOrSettings === 'object') {
@@ -86,7 +96,7 @@ module.exports = function spawn(command, argsOrSettings, settings) {
   }
 
   if (settings.id) runningProcess.id = settings.id;
-  const promise = new __SPromise((resolve, reject, trigger, cancel) => {
+  var promise = new __SPromise((resolve, reject, trigger, cancel) => {
     // check if not lazy
     if (settings.lazy === false) run();
   }, {
@@ -102,159 +112,185 @@ module.exports = function spawn(command, argsOrSettings, settings) {
       spawnSettings = {};
     }
 
-    const pro = new __SPromise(async (resolve, reject) => {
-      let result = true;
-      promise.trigger(`${when}.start`, {
-        time: Date.now()
+    var pro = new __SPromise( /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator(function* (resolve, reject) {
+        var result = true;
+        promise.trigger("".concat(when, ".start"), {
+          time: Date.now()
+        });
+        promise.log("Cleaning the <cyan>".concat(runningProcess.id, "</cyan>..."));
+
+        if (typeof settings[when] === 'function') {
+          result = yield settings[when](command, argsArray, spawnSettings);
+        } else if (typeof settings[when] === 'string') {
+          var _pro = spawn(settings[when], [], _objectSpread({
+            id: settings.id + '.' + when
+          }, spawnSettings)).start();
+
+          _pro.on('log,error', value => {
+            if (!value) return;
+            value.value = "  - ".concat(value.value);
+            promise.trigger('log', value);
+          }); // __SPromise.pipe(pro, promise, {
+          //   stacks: 'log,error'
+          // });
+
+
+          result = yield _pro;
+        }
+
+        yield __wait(1500);
+        promise.trigger("".concat(when, ".end"), {
+          time: Date.now()
+        });
+        resolve(result);
       });
-      promise.log(`Cleaning the <cyan>${runningProcess.id}</cyan>...`);
 
-      if (typeof settings[when] === 'function') {
-        result = await settings[when](command, argsArray, spawnSettings);
-      } else if (typeof settings[when] === 'string') {
-        const pro = spawn(settings[when], [], {
-          id: settings.id + '.' + when,
-          ...spawnSettings
-        }).start();
-        pro.on('log,error', value => {
-          if (!value) return;
-          value.value = `  - ${value.value}`;
-          promise.trigger('log', value);
-        }); // __SPromise.pipe(pro, promise, {
-        //   stacks: 'log,error'
-        // });
-
-        result = await pro;
-      }
-
-      await __wait(1500);
-      promise.trigger(`${when}.end`, {
-        time: Date.now()
-      });
-      resolve(result);
-    });
+      return function (_x, _x2) {
+        return _ref.apply(this, arguments);
+      };
+    }());
     return pro;
   }
 
-  async function run() {
-    const spawnSettings = __clone(settings);
+  function run() {
+    return _run.apply(this, arguments);
+  }
 
-    delete spawnSettings.lazy;
-    delete spawnSettings.before;
-    delete spawnSettings.after;
-    delete spawnSettings.id;
+  function _run() {
+    _run = _asyncToGenerator(function* () {
+      var spawnSettings = __clone(settings);
 
-    if (settings.before) {
-      const res = await runBeforeAfterCommand('before', command, [], spawnSettings);
-    }
+      delete spawnSettings.lazy;
+      delete spawnSettings.before;
+      delete spawnSettings.after;
+      delete spawnSettings.id;
 
-    childProcess = __childProcess.spawn(command, argsArray, spawnSettings);
-    promise.childProcess = childProcess; // runningProcess.childProcess = childProcess;
-
-    __hotkey('ctrl+c', {
-      once: true
-    }).on('press', () => {
-      childProcess.kill();
-    }); // save the process
-
-
-    __registerProcess(promise); // before start
-
-
-    promise.trigger('beforeStart', {
-      time: Date.now(),
-      process: runningProcess
-    }); // start
-
-    runningProcess.state = 'running';
-    promise.trigger('start', {
-      time: Date.now(),
-      process: runningProcess
-    });
-    let finished = false;
-
-    const resolveOrReject = async function (what, extendObj, code, signal) {
-      if (extendObj === void 0) {
-        extendObj = {};
+      if (settings.before) {
+        var res = yield runBeforeAfterCommand('before', command, [], spawnSettings);
       }
 
-      if (finished) return;
-      finished = true;
-      runningProcess.end = Date.now();
-      runningProcess.duration = runningProcess.end - runningProcess.start;
+      childProcess = __childProcess.spawn(command, argsArray, spawnSettings);
+      promise.childProcess = childProcess; // runningProcess.childProcess = childProcess;
 
-      if (settings.after) {
-        await runBeforeAfterCommand('after', command, [], spawnSettings);
-      }
+      __hotkey('ctrl+c', {
+        once: true
+      }).on('press', () => {
+        childProcess.kill();
+      }); // save the process
 
-      promise[what]({ ...extendObj,
-        code,
-        signal,
+
+      __registerProcess(promise); // before start
+
+
+      promise.trigger('beforeStart', {
+        time: Date.now(),
+        process: runningProcess
+      }); // start
+
+      runningProcess.state = 'running';
+      promise.trigger('start', {
         time: Date.now(),
         process: runningProcess
       });
-    }; // close
+      var finished = false;
+
+      var resolveOrReject = /*#__PURE__*/function () {
+        var _ref2 = _asyncToGenerator(function* (what, extendObj, code, signal) {
+          if (extendObj === void 0) {
+            extendObj = {};
+          }
+
+          if (finished) return;
+          finished = true;
+          runningProcess.end = Date.now();
+          runningProcess.duration = runningProcess.end - runningProcess.start;
+
+          if (settings.after) {
+            yield runBeforeAfterCommand('after', command, [], spawnSettings);
+          }
+
+          promise[what](_objectSpread(_objectSpread({}, extendObj), {}, {
+            code,
+            signal,
+            time: Date.now(),
+            process: runningProcess
+          }));
+        });
+
+        return function resolveOrReject(_x3, _x4, _x5, _x6) {
+          return _ref2.apply(this, arguments);
+        };
+      }(); // close
 
 
-    childProcess.on('close', (code, signal) => {
-      if (!code && signal) {
-        runningProcess.state = 'killed';
-        resolveOrReject('reject', {}, code, signal);
-      } else if (code === 0 && !signal) {
-        // console.log('CC');
-        runningProcess.state = 'success';
-        resolveOrReject('resolve', {}, code, signal);
-      } else {
+      childProcess.on('close', (code, signal) => {
+        if (!code && signal) {
+          runningProcess.state = 'killed';
+          resolveOrReject('reject', {}, code, signal);
+        } else if (code === 0 && !signal) {
+          // console.log('CC');
+          runningProcess.state = 'success';
+          resolveOrReject('resolve', {}, code, signal);
+        } else {
+          runningProcess.state = 'error';
+          resolveOrReject('reject', {
+            error: runningProcess.stderr.join('\n')
+          }, code, signal);
+        }
+      }); // error
+
+      childProcess.on('error', error => {
         runningProcess.state = 'error';
         resolveOrReject('reject', {
-          error: runningProcess.stderr.join('\n')
-        }, code, signal);
-      }
-    }); // error
+          error
+        }, 1, null);
+      }); // stdout data
 
-    childProcess.on('error', error => {
-      runningProcess.state = 'error';
-      resolveOrReject('reject', {
-        error
-      }, 1, null);
-    }); // stdout data
+      var triggerBuffer = 0;
+      childProcess.stdout.on('data', /*#__PURE__*/function () {
+        var _ref3 = _asyncToGenerator(function* (value) {
+          var logsArray = value.toString().split('⠀').filter(l => l !== ''); // logsArray.forEach(async (log) => {
 
-    let triggerBuffer = 0;
-    childProcess.stdout.on('data', async value => {
-      const logsArray = value.toString().split('⠀').filter(l => l !== ''); // logsArray.forEach(async (log) => {
+          for (var log of logsArray) {
+            var resultReg = /^#result\s(.*)$/gm;
 
-      for (let log of logsArray) {
-        const resultReg = /^#result\s(.*)$/gm;
+            if (log.match(resultReg)) {
+              runningProcess.state = 'success';
+              resolveOrReject('resolve', {
+                value: __parse(log.replace('#result ', ''))
+              }, 0, null);
+              return;
+            }
 
-        if (log.match(resultReg)) {
-          runningProcess.state = 'success';
-          resolveOrReject('resolve', {
-            value: __parse(log.replace('#result ', ''))
-          }, 0, null);
-          return;
-        }
+            runningProcess.stdout.push(log);
+            yield promise.trigger('log', {
+              process: runningProcess,
+              time: Date.now(),
+              value: log
+            });
+          }
+        });
 
-        runningProcess.stdout.push(log);
-        await promise.trigger('log', {
+        return function (_x7) {
+          return _ref3.apply(this, arguments);
+        };
+      }()); // stderr data
+
+      childProcess.stderr.on('data', error => {
+        // console.log(error.toString());
+        runningProcess.stderr.push(error.toString());
+        promise.trigger('error', {
           process: runningProcess,
           time: Date.now(),
-          value: log
+          error: error.toString(),
+          value: error.toString()
         });
-      }
-    }); // stderr data
+      }); // return the promise
 
-    childProcess.stderr.on('data', error => {
-      // console.log(error.toString());
-      runningProcess.stderr.push(error.toString());
-      promise.trigger('error', {
-        process: runningProcess,
-        time: Date.now(),
-        error: error.toString(),
-        value: error.toString()
-      });
-    }); // return the promise
-
-    return promise;
+      return promise;
+    });
+    return _run.apply(this, arguments);
   }
 
   promise.run = run;
@@ -280,11 +316,11 @@ module.exports = function spawn(command, argsOrSettings, settings) {
     });
   };
 
-  const _promiseCancel = promise.cancel.bind(promise);
+  var _promiseCancel = promise.cancel.bind(promise);
 
   promise.cancel = () => {
     return new __SPromise((resolve, reject) => {
-      const pid = childProcess.pid; // childProcess && childProcess.kill('SIGTERM');
+      var pid = childProcess.pid; // childProcess && childProcess.kill('SIGTERM');
       // if (pid) console.log(`kill -9 ${pid}`);
       // __childProcess.spawn(`kill -9 ${pid}`);
 

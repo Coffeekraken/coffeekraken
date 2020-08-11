@@ -1,8 +1,8 @@
 "use strict";
 
-const __isChildProcess = require('../is/childProcess');
+var __isChildProcess = require('../is/childProcess');
 
-const __packageRoot = require('../path/packageRoot');
+var __packageRoot = require('../path/packageRoot');
 /**
  * @name                    handleError
  * @namespace               node.error
@@ -23,7 +23,7 @@ const __packageRoot = require('../path/packageRoot');
 
 
 module.exports = function handleError(error) {
-  let errorArray = [];
+  var errorArray = [];
 
   if (error.name && error.name !== 'Error') {
     errorArray.push(error.name);
@@ -37,17 +37,17 @@ module.exports = function handleError(error) {
 
   if (error.stack) {
     errorArray.push(error.message.replace(__packageRoot() + '/', ''));
-    let stack = error.stack.replace('Error: ', '').split('at ').join('\n\nat ');
-    const files = stack.match(/at\s(.*)\((.*)\)/g);
+    var stack = error.stack.replace('Error: ', '').split('at ').join('\n\nat ');
+    var files = stack.match(/at\s(.*)\((.*)\)/g);
     files.forEach(file => {
-      const matches = file.match(/[0-9]+:[0-9]+/);
+      var matches = file.match(/[0-9]+:[0-9]+/);
 
       if (matches) {
-        file = file.replace(matches[0], `<magenta>${matches[0]}</magenta>`);
+        file = file.replace(matches[0], "<magenta>".concat(matches[0], "</magenta>"));
       }
 
       errorArray.push(' ');
-      errorArray.push(`${file.replace('(', '\n<cyan>').replace(')', '</cyan>').replace(__packageRoot() + '/', '')}`);
+      errorArray.push("".concat(file.replace('(', '\n<cyan>').replace(')', '</cyan>').replace(__packageRoot() + '/', '')));
     });
   } else if (error.message) errorArray.push(error.message);
 

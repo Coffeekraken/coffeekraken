@@ -2,6 +2,10 @@
 
 var _temp;
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -28,29 +32,29 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __blessed = require('blessed');
+var __blessed = require('blessed');
 
-const __deepMerge = require('../../object/deepMerge');
+var __deepMerge = require('../../object/deepMerge');
 
-const __color = require('../../color/color');
+var __color = require('../../color/color');
 
-const __SComponent = require('../SComponent');
+var __SComponent = require('../SComponent');
 
-const __SHeader = require('../SHeader');
+var __SHeader = require('../SHeader');
 
-const __SFooter = require('../SFooter');
+var __SFooter = require('../SFooter');
 
-const __activeSpace = require('../../core/activeSpace');
+var __activeSpace = require('../../core/activeSpace');
 
-const __SUrl = require('../../url/SUrl');
+var __SUrl = require('../../url/SUrl');
 
-const __sugarConfig = require('../../config/sugar');
+var __sugarConfig = require('../../config/sugar');
 
-const __get = require('../../object/get');
+var __get = require('../../object/get');
 
-const __fs = require('fs');
+var __fs = require('fs');
 
-const __filter = require('../../object/filter');
+var __filter = require('../../object/filter');
 /**
  * @name                  SApp
  * @namespace           node.blessed.app
@@ -145,7 +149,7 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
 
     _defineProperty(_assertThisInitialized(_this), "_commandsStack", {});
 
-    if (global.SAppInstance) throw new Error(`Only 1 instance of the SApp class can be instanciated at the same time...`);
+    if (global.SAppInstance) throw new Error("Only 1 instance of the SApp class can be instanciated at the same time...");
     global.SAppInstance = _assertThisInitialized(_this); // check if their some "commands" specified in the config
 
     if (_this.config('commands') && Object.keys(_this.config('commands')).length) {
@@ -153,28 +157,26 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
     }
 
     if (_this._settings.header) {
-      _this._headerBox = new __SHeader({
+      _this._headerBox = new __SHeader(_objectSpread({
         style: {
           bg: __color('terminal.primary').toString(),
           fg: __color('terminal.black').toString()
-        },
-        ..._this._settings.header
-      });
+        }
+      }, _this._settings.header));
 
       _this.append(_this._headerBox, true);
     }
 
     if (_this._settings.footer) {
-      _this._footerBox = new __SFooter({
+      _this._footerBox = new __SFooter(_objectSpread({
         style: {
           bg: __color('terminal.primary').toString(),
           fg: __color('terminal.black').toString()
         },
         commands: __filter(_this._commandsStack, commandInstance => {
           return commandInstance._settings.statusBar === true;
-        }),
-        ..._this._settings.footer
-      });
+        })
+      }, _this._settings.footer));
 
       _this.append(_this._footerBox, true);
     }
@@ -247,10 +249,10 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
       }
 
       // loop on the pages urls available in the config
-      const urlsKeys = Object.keys(this.config('pages.urls'));
+      var urlsKeys = Object.keys(this.config('pages.urls'));
 
-      for (let i = 0; i < urlsKeys.length; i++) {
-        const sUrl = new __SUrl(url, {
+      for (var i = 0; i < urlsKeys.length; i++) {
+        var sUrl = new __SUrl(url, {
           schema: urlsKeys[i]
         });
 
@@ -298,10 +300,10 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
         history = true;
       }
 
-      const pageObj = this.config(`pages.urls.${sUrl.schema.schema}`);
-      if (!__fs.existsSync(pageObj.page.path.replace('.js', '') + '.js')) throw new Error(`SApp: You try to load a page class using the path "${pageObj.page.path}" but no file exists at this location...`);
+      var pageObj = this.config("pages.urls.".concat(sUrl.schema.schema));
+      if (!__fs.existsSync(pageObj.page.path.replace('.js', '') + '.js')) throw new Error("SApp: You try to load a page class using the path \"".concat(pageObj.page.path, "\" but no file exists at this location..."));
 
-      const pageClass = require(`${pageObj.page.path}`); // check if the pageObj exist
+      var pageClass = require("".concat(pageObj.page.path)); // check if the pageObj exist
 
 
       if (!pageObj && this.config('pages.url.404')) {
@@ -309,18 +311,18 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
         this.goTo('/404');
         return;
       } else if (!pageObj) {
-        throw new Error(`The requested page "${url}" does not exists and you don't have any 404 page defined in your @config.pages configuration...`);
+        throw new Error("The requested page \"".concat(url, "\" does not exists and you don't have any 404 page defined in your @config.pages configuration..."));
       } // append the new url to the history
 
 
       if (history) this._historyArray.push(sUrl); // generate active space string depending on the url.
 
-      const activeSpaceString = sUrl.href.split('/').filter(i => i !== '').join('.'); // set the activeSpace
+      var activeSpaceString = sUrl.href.split('/').filter(i => i !== '').join('.'); // set the activeSpace
 
       __activeSpace.set(activeSpaceString); // check if we have already the page instance
 
 
-      let currentPageInstance = this._pagesStack[sUrl.schema.schema];
+      var currentPageInstance = this._pagesStack[sUrl.schema.schema];
 
       if (!currentPageInstance) {
         currentPageInstance = new pageClass(pageObj.page.id, pageObj.page.title, pageObj.page.settings);
@@ -328,11 +330,11 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
       } // set args on the page
 
 
-      const argsObj = {};
+      var argsObj = {};
 
       if (sUrl.schema.params) {
         Object.keys(sUrl.schema.params).forEach(paramName => {
-          let argValue = sUrl.schema.params[paramName].value;
+          var argValue = sUrl.schema.params[paramName].value;
           if (argValue === null) argValue = pageObj.defaultArgs[paramName];
           argsObj[paramName] = argValue;
         });
@@ -341,7 +343,7 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
       currentPageInstance.setArgs(argsObj); // get the previous page and check if we need to destroy it
 
       if (this.previousUrlObj) {
-        const previousPageInstance = this._pagesStack[this.previousUrlObj.schema.schema];
+        var previousPageInstance = this._pagesStack[this.previousUrlObj.schema.schema];
 
         if (previousPageInstance !== currentPageInstance) {
           if (previousPageInstance) previousPageInstance.detach();
@@ -370,14 +372,14 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
   }, {
     key: "_initCommands",
     value: function _initCommands() {
-      const commandsObj = this.config('commands');
+      var commandsObj = this.config('commands');
       Object.keys(commandsObj).forEach(commandName => {
         // filter commands using the features.commands config
         if (this.config('features.commands').indexOf(commandName) === -1) return;
-        const commandObj = commandsObj[commandName];
-        if (!__fs.existsSync(commandObj.path.replace('.js', '') + '.js')) throw new Error(`SApp: You try to load a command class using the path "${commandObj.path}" but no file exists at this location...`);
+        var commandObj = commandsObj[commandName];
+        if (!__fs.existsSync(commandObj.path.replace('.js', '') + '.js')) throw new Error("SApp: You try to load a command class using the path \"".concat(commandObj.path, "\" but no file exists at this location..."));
 
-        const commandClass = require(`${commandObj.path}`);
+        var commandClass = require("".concat(commandObj.path));
 
         this._commandsStack[commandName] = new commandClass(commandObj.argsObj, commandObj.settings);
       });
@@ -509,7 +511,7 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
     }
   }, {
     key: "currentUrlObj",
-    get: function () {
+    get: function get() {
       if (!this._historyArray.length) return null;
       return this._historyArray[this._historyArray.length - 1];
     }
@@ -525,7 +527,7 @@ module.exports = (_temp = /*#__PURE__*/function (_SComponent) {
 
   }, {
     key: "previousUrlObj",
-    get: function () {
+    get: function get() {
       if (this._historyArray.length < 2) return null;
       return this._historyArray[this._historyArray.length - 2];
     }

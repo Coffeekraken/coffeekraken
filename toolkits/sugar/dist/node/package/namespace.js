@@ -1,12 +1,12 @@
 "use strict";
 
-const __json = require('./json');
+var __json = require('./json');
 
-const __deepMerge = require('../object/deepMerge');
+var __deepMerge = require('../object/deepMerge');
 
-const __getFilename = require('../fs/filename');
+var __getFilename = require('../fs/filename');
 
-const __sugarConfig = require('../config/sugar');
+var __sugarConfig = require('../config/sugar');
 /**
  * @name          namespace
  * @namespace     node.package
@@ -35,23 +35,23 @@ module.exports = function namespace(path, settings) {
 
   settings = __deepMerge(__sugarConfig('core.namespace') || {}, settings); // get the package json content
 
-  const json = __json(settings.context || process.cwd());
+  var json = __json(settings.context || process.cwd());
 
-  let packageName = '',
+  var packageName = '',
       packageVersion = '';
   if (json && json.name) packageName = json.name.replace('@', '').split('/').join('.').trim();
   if (json && json.version) packageVersion = json.version.split('.').join('-'); // sanitize the passed path
 
-  let sanitizedPath = path;
+  var sanitizedPath = path;
 
-  const filename = __getFilename(path);
+  var filename = __getFilename(path);
 
   if (filename && sanitizedPath.split('/').length > 1) {
     sanitizedPath = sanitizedPath.replace('/' + filename, '').replace(filename, '');
   }
 
   sanitizedPath = sanitizedPath.split(' ').join('').split('/').join('.');
-  let resultNamespace = settings.pattern.replace('{package.name}', packageName).replace('{package.version}', packageVersion).replace('{path}', sanitizedPath).trim();
+  var resultNamespace = settings.pattern.replace('{package.name}', packageName).replace('{package.version}', packageVersion).replace('{path}', sanitizedPath).trim();
   resultNamespace = resultNamespace.split('...').join('.').split('..').join('.');
   return resultNamespace;
 };

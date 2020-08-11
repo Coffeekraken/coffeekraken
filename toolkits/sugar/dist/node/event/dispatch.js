@@ -1,6 +1,6 @@
 "use strict";
 
-const __SPromise = require('../promise/SPromise');
+var __SPromise = require('../promise/SPromise');
 /**
  * @name        dispatch
  * @namespace           node.event

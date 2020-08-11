@@ -1,18 +1,24 @@
 "use strict";
 
-const __deepMerge = require('../../object/deepMerge');
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-const __packageRoot = require('../../path/packageRoot');
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
-const __fs = require('fs');
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __Fuse = require('fuse.js');
+var __deepMerge = require('../../object/deepMerge');
 
-const __SSearchResultItem = require('../SSearchResultItem');
+var __packageRoot = require('../../path/packageRoot');
 
-const __searchQueryParser = require('search-query-parser');
+var __fs = require('fs');
 
-const __SUrlAction = require('../../action/browser/SUrlAction');
+var __Fuse = require('fuse.js');
+
+var __SSearchResultItem = require('../SSearchResultItem');
+
+var __searchQueryParser = require('search-query-parser');
+
+var __SUrlAction = require('../../action/browser/SUrlAction');
 /**
  * @name                search
  * @namespace           node.search.handlers
@@ -42,7 +48,7 @@ module.exports = function search(searchString, settings) {
     }
   }, settings);
 
-  let queryObj = __searchQueryParser.parse(searchString.trim(), {
+  var queryObj = __searchQueryParser.parse(searchString.trim(), {
     keywords: ['name', 'namespace', 'path']
   });
 
@@ -57,30 +63,29 @@ module.exports = function search(searchString, settings) {
   return new Promise((resolve, reject) => {
     // load the docmap
     if (!__fs.existsSync(settings.filePath)) {
-      throw new Error(`You try to make a research using the <primary>docMap</primary> search handler but it seems that your configuration point to a file that does not exists "<cyan>${settings.filePath}</cyan>"...`);
+      throw new Error("You try to make a research using the <primary>docMap</primary> search handler but it seems that your configuration point to a file that does not exists \"<cyan>".concat(settings.filePath, "</cyan>\"..."));
     }
 
-    const docMap = require(settings.filePath);
+    var docMap = require(settings.filePath);
 
-    const fuse = new __Fuse(docMap, {
+    var fuse = new __Fuse(docMap, {
       includeScore: true,
       includeMatches: true,
       minMatchCharLength: 2,
       shouldSort: true,
       keys: Object.keys(queryObj)
     });
-    const operators = [];
+    var operators = [];
     Object.keys(queryObj).forEach(key => {
       operators.push({
         [key]: queryObj[key]
       });
     });
-    const pathsArray = [];
-    const results = fuse.search({
+    var pathsArray = [];
+    var results = fuse.search({
       $and: operators
     }).map(item => {
-      return { ...item.item
-      };
+      return _objectSpread({}, item.item);
     }).filter(item => {
       if (pathsArray.indexOf(item.path) === -1) {
         pathsArray.push(item.path);
@@ -89,7 +94,7 @@ module.exports = function search(searchString, settings) {
 
       return false;
     }).map(item => {
-      let action;
+      var action;
 
       if (typeof settings.action === 'function') {
         action = settings.action(item);

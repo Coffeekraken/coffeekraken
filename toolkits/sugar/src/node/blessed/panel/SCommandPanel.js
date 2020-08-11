@@ -17,6 +17,7 @@ const __activeSpace = require('../../core/activeSpace');
 const __SWindowBox = require('../box/SWindowBox');
 const __convert = require('../../time/convert');
 const __SOutput = require('../SOutput');
+const __SAppCommandInterface = require('../interface/SAppCommandInterface');
 
 /**
  * @name                  SCommandPanel
@@ -134,6 +135,11 @@ module.exports = class SCommandPanel extends __SComponent {
       // instanciate the command instance
       const commandClass = require(commandObj.path);
       commandObj.instance = new commandClass(commandObj.settings);
+
+      __SAppCommandInterface.apply(commandObj.instance, {
+        title: `SCommandPanel "${commandObj.name}"`,
+        description: `The passed instance for the "${commandObj.name} (${commandObj.id})" does not fit the SAppCommandInterface`
+      });
 
       // commandObj.instance.on('beforeStart', () => {
       //   // const boxObj = this._boxesObjectsMap.get(commandObj);
@@ -347,10 +353,9 @@ module.exports = class SCommandPanel extends __SComponent {
     });
 
     this._commands.forEach((commandObj) => {
-      let boxObj = this._boxesObjectsMap.get(commandObj);
       if (this._displayedCommands.indexOf(commandObj) === -1) {
       } else {
-        this.$log.append(boxObj.$box);
+        this.$log.append(commandObj.$box);
       }
     });
 

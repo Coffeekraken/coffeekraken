@@ -1,6 +1,6 @@
 "use strict";
 
-const __isInPackage = require('../path/isInPackage');
+var __isInPackage = require('../path/isInPackage');
 /**
  * @name            inPackage
  * @namespace           node.is

@@ -1,8 +1,8 @@
 "use strict";
 
-const __SPromise = require('../promise/SPromise');
+var __SPromise = require('../promise/SPromise');
 
-const __hotkey = require('../keyboard/hotkey');
+var __hotkey = require('../keyboard/hotkey');
 /**
  * @name                          escapeStack
  * @namespace           node.blessed
@@ -26,15 +26,15 @@ const __hotkey = require('../keyboard/hotkey');
  */
 
 
-const escapeStackStack = [];
-let hotkeyInitiated = false;
+var escapeStackStack = [];
+var hotkeyInitiated = false;
 
 module.exports = function escapeStack(callback) {
   if (callback === void 0) {
     callback = null;
   }
 
-  const promise = new __SPromise((resolve, reject, trigger, cancel) => {});
+  var promise = new __SPromise((resolve, reject, trigger, cancel) => {});
 
   if (!hotkeyInitiated) {
     hotkeyInitiated = true;
@@ -43,7 +43,7 @@ module.exports = function escapeStack(callback) {
       disableWhenEditingForm: false
     }).on('press', key => {
       if (escapeStackStack.length === 0) return;
-      const lastPromise = escapeStackStack[escapeStackStack.length - 1];
+      var lastPromise = escapeStackStack[escapeStackStack.length - 1];
       lastPromise.resolve();
       escapeStackStack.splice(-1, 1);
     });

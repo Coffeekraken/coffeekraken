@@ -2,6 +2,10 @@
 
 var _class, _temp;
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -28,17 +32,17 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
+var __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
 
-const __Bundler = require('scss-bundle').Bundler;
+var __Bundler = require('scss-bundle').Bundler;
 
-const __getFilename = require('../../../fs/filename');
+var __getFilename = require('../../../fs/filename');
 
-const __sugarConfig = require('../../../config/sugar');
+var __sugarConfig = require('../../../config/sugar');
 
-const __getScssImportsStrings = require('../getScssImportsStrings');
+var __getScssImportsStrings = require('../getScssImportsStrings');
 
-const __deepMerge = require('../../../object/deepMerge');
+var __deepMerge = require('../../../object/deepMerge');
 /**
  * @name                SImportsStreamAction
  * @namespace           node.build.scss.actions
@@ -104,32 +108,31 @@ module.exports = (_temp = _class = /*#__PURE__*/function (_SActionsStreamActio) 
   _createClass(SImportsStreamAction, [{
     key: "run",
     value: function run(streamObj, settings) {
-      return _get(_getPrototypeOf(SImportsStreamAction.prototype), "run", this).call(this, streamObj, async (resolve, reject) => {
-        const importsStrings = __getScssImportsStrings(streamObj.imports);
+      return _get(_getPrototypeOf(SImportsStreamAction.prototype), "run", this).call(this, streamObj, /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator(function* (resolve, reject) {
+          var importsStrings = __getScssImportsStrings(streamObj.imports);
 
-        streamObj.data = streamObj.data ? `
-        ${importsStrings.prepend}
-        ${streamObj.data}
-        ${importsStrings.append}
-      ` : importsString.prepend + importsStrings.append;
-        const atUseReg = /\s?@use.+/gm;
-        const atUseMatches = streamObj.data.match(atUseReg);
+          streamObj.data = streamObj.data ? "\n        ".concat(importsStrings.prepend, "\n        ").concat(streamObj.data, "\n        ").concat(importsStrings.append, "\n      ") : importsString.prepend + importsStrings.append;
+          var atUseReg = /\s?@use.+/gm;
+          var atUseMatches = streamObj.data.match(atUseReg);
 
-        if (atUseMatches) {
-          // remove all the lines from the string
-          atUseMatches.forEach(atUseLine => {
-            streamObj.data = streamObj.data.replace(atUseLine, '');
-          }); // prepend all the @use statements
+          if (atUseMatches) {
+            // remove all the lines from the string
+            atUseMatches.forEach(atUseLine => {
+              streamObj.data = streamObj.data.replace(atUseLine, '');
+            }); // prepend all the @use statements
 
-          streamObj.data = `
-          ${atUseMatches.join('\n')}
-          ${streamObj.data}
-        `;
-        } // resolve the action
+            streamObj.data = "\n          ".concat(atUseMatches.join('\n'), "\n          ").concat(streamObj.data, "\n        ");
+          } // resolve the action
 
 
-        resolve(streamObj);
-      });
+          resolve(streamObj);
+        });
+
+        return function (_x, _x2) {
+          return _ref.apply(this, arguments);
+        };
+      }());
     }
   }]);
 

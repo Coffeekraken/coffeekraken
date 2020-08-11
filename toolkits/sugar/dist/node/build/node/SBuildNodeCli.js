@@ -4,6 +4,10 @@ var _class, _temp;
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -20,11 +24,13 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __SCli = require('../../cli/SCli');
+var __SCli = require('../../cli/SCli');
 
-const __sugarConfig = require('../../config/sugar');
+var __sugarConfig = require('../../config/sugar');
 
-const __deepMerge = require('../../object/deepMerge');
+var __deepMerge = require('../../object/deepMerge');
+
+var __SBuildNodeActionsStream = require('./SBuildNodeActionsStream');
 /**
  * @name            SBuildNodeCli
  * @namespace           node.build.node
@@ -84,6 +90,19 @@ module.exports = (_temp = _class = /*#__PURE__*/function (_SCli) {
       name: 'Build Node'
     }, settings));
   }
+
+  _createClass(SBuildNodeCli, [{
+    key: "_run",
+    value: function _run(argsObj, settings) {
+      if (settings === void 0) {
+        settings = {};
+      }
+
+      var stream = new __SBuildNodeActionsStream();
+      var proc = stream.start(argsObj);
+      return proc;
+    }
+  }]);
 
   return SBuildNodeCli;
 }(__SCli), _defineProperty(_class, "command", 'sugar build.node %arguments'), _defineProperty(_class, "definitionObj", {

@@ -2,6 +2,14 @@
 
 var _class, _temp;
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -28,23 +36,23 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __SActionsStreamAction = require('../SActionsStreamAction');
+var __SActionsStreamAction = require('../SActionsStreamAction');
 
-const __glob = require('glob');
+var __glob = require('glob');
 
-const __deepMerge = require('../../object/deepMerge');
+var __deepMerge = require('../../object/deepMerge');
 
-const __fs = require('fs');
+var __fs = require('fs');
 
-const __isDirectory = require('../../is/directory');
+var __isDirectory = require('../../is/directory');
 
-const __isSymlink = require('../../is/symlink');
+var __isSymlink = require('../../is/symlink');
 
-const __isGlob = require('is-glob');
+var __isGlob = require('is-glob');
 
-const __isPath = require('../../is/path');
+var __isPath = require('../../is/path');
 
-const __SPromise = require('../../promise/SPromise');
+var __SPromise = require('../../promise/SPromise');
 /**
  * @name            SFindInFileStreamAction
  * @namespace       node.stream.actions
@@ -112,83 +120,93 @@ module.exports = (_temp = _class = /*#__PURE__*/function (_SActionsStreamActio) 
   _createClass(SFindInFileStreamAction, [{
     key: "run",
     value: function run(streamObj, settings) {
+      var _this = this;
+
       if (settings === void 0) {
         settings = {};
       }
 
       settings = __deepMerge(this._settings, settings);
-      return _get(_getPrototypeOf(SFindInFileStreamAction.prototype), "run", this).call(this, streamObj, async (resolve, reject) => {
-        const filesPathes = [];
-        const streamObjArray = [];
-        const inputs = Array.isArray(streamObj.input) ? streamObj.input : [streamObj.input];
-        inputs.forEach(input => {
-          // extract the pattern to search
-          const inputSplits = input.split(':');
-          const searchPath = inputSplits[0];
-          const searchPattern = inputSplits[1] ? inputSplits[1] : null; // check if the input path is a path or a glob
+      return _get(_getPrototypeOf(SFindInFileStreamAction.prototype), "run", this).call(this, streamObj, /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator(function* (resolve, reject) {
+          var filesPathes = [];
+          var streamObjArray = [];
+          var inputs = Array.isArray(streamObj.input) ? streamObj.input : [streamObj.input];
+          inputs.forEach(input => {
+            // extract the pattern to search
+            var inputSplits = input.split(':');
+            var searchPath = inputSplits[0];
+            var searchPattern = inputSplits[1] ? inputSplits[1] : null; // check if the input path is a path or a glob
 
-          if (!__isGlob(searchPath) && !__isPath(searchPath, true)) {
-            filesPathes.push(searchPath);
-            this.warn(`One of the passed inputs is either not a valid glob pattern, either not a valid file path and will be treated as a simple String...`);
-            return;
-          }
+            if (!__isGlob(searchPath) && !__isPath(searchPath, true)) {
+              filesPathes.push(searchPath);
 
-          const path = __glob.sync(searchPath, {
-            ignore: settings.ignoreFolders.map(f => {
-              return `**/${f}/**`;
-            })
-          });
+              _this.warn("One of the passed inputs is either not a valid glob pattern, either not a valid file path and will be treated as a simple String...");
 
-          const reg = new RegExp(`\s?${searchPattern}\s?`, 'gm');
-          path.forEach(p => {
-            if (__isDirectory(p)) {
-              const filesPathArray = __glob.sync(`${p}/*.*`);
+              return;
+            }
 
-              filesPathArray.forEach(filePath => {
-                if (searchPattern) {
-                  const content = __fs.readFileSync(filePath, 'utf8');
+            var path = __glob.sync(searchPath, {
+              ignore: settings.ignoreFolders.map(f => {
+                return "**/".concat(f, "/**");
+              })
+            });
 
-                  const matches = content.match(reg);
+            var reg = new RegExp("s?".concat(searchPattern, "s?"), 'gm');
+            path.forEach(p => {
+              if (__isDirectory(p)) {
+                var filesPathArray = __glob.sync("".concat(p, "/*.*"));
 
-                  if (matches) {
+                filesPathArray.forEach(filePath => {
+                  if (searchPattern) {
+                    var content = __fs.readFileSync(filePath, 'utf8');
+
+                    var matches = content.match(reg);
+
+                    if (matches) {
+                      filesPathes.push(filePath);
+                    }
+                  } else {
                     filesPathes.push(filePath);
                   }
+                });
+              } else if (!__isSymlink(p)) {
+                if (searchPattern) {
+                  var content = __fs.readFileSync(p, 'utf8');
+
+                  var matches = content.match(reg);
+
+                  if (matches) {
+                    filesPathes.push(p);
+                  }
                 } else {
-                  filesPathes.push(filePath);
-                }
-              });
-            } else if (!__isSymlink(p)) {
-              if (searchPattern) {
-                const content = __fs.readFileSync(p, 'utf8');
-
-                const matches = content.match(reg);
-
-                if (matches) {
                   filesPathes.push(p);
                 }
-              } else {
-                filesPathes.push(p);
               }
-            }
+            });
           });
+
+          if (!filesPathes.length) {
+            reject(new Error("Sorry but your <primary>input</primary> streamObj property setted to \"<cyan>".concat(streamObj.input, "</cyan>\" does not resolve to any files...")));
+          }
+
+          if (settings.out === 'array') {
+            filesPathes.forEach(path => {
+              streamObjArray.push(Object.assign({}, _objectSpread(_objectSpread({}, streamObj), {}, {
+                input: path
+              })));
+            });
+            resolve(streamObjArray);
+          } else {
+            streamObj[settings.property || 'files'] = filesPathes;
+            resolve(streamObj);
+          }
         });
 
-        if (!filesPathes.length) {
-          reject(new Error(`Sorry but your <primary>input</primary> streamObj property setted to "<cyan>${streamObj.input}</cyan>" does not resolve to any files...`));
-        }
-
-        if (settings.out === 'array') {
-          filesPathes.forEach(path => {
-            streamObjArray.push(Object.assign({}, { ...streamObj,
-              input: path
-            }));
-          });
-          resolve(streamObjArray);
-        } else {
-          streamObj[settings.property || 'files'] = filesPathes;
-          resolve(streamObj);
-        }
-      });
+        return function (_x, _x2) {
+          return _ref.apply(this, arguments);
+        };
+      }());
     }
   }]);
 

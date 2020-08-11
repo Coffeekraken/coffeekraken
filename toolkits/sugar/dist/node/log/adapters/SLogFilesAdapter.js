@@ -5,6 +5,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -13,13 +17,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __deepMerge = require('../../object/deepMerge');
+var __deepMerge = require('../../object/deepMerge');
 
-const __prependFile = require('prepend-file');
+var __prependFile = require('prepend-file');
 
-const __makeDir = require('make-dir');
+var __makeDir = require('make-dir');
 
-const __filesPreset = require('../htmlPresets/files');
+var __filesPreset = require('../htmlPresets/files');
 /**
  * @name                    SLogFilesAdapter
  * @namespace           js.log
@@ -41,7 +45,7 @@ const __filesPreset = require('../htmlPresets/files');
  */
 
 
-let SLogFilesAdapter = /*#__PURE__*/function () {
+var SLogFilesAdapter = /*#__PURE__*/function () {
   /**
    * @name          _settings
    * @type          Object
@@ -98,20 +102,28 @@ let SLogFilesAdapter = /*#__PURE__*/function () {
 
   _createClass(SLogFilesAdapter, [{
     key: "log",
-    value: async function log(message, level) {
-      return new Promise((resolve, reject) => {
-        // ensure the log directory exist
-        __makeDir.sync(this._settings.path); // prepend the new log
+    value: function () {
+      var _log = _asyncToGenerator(function* (message, level) {
+        return new Promise((resolve, reject) => {
+          // ensure the log directory exist
+          __makeDir.sync(this._settings.path); // prepend the new log
 
 
-        const newLog = `# ${new Date().toISOString()}\n# ${__filesPreset(message)}\n\n`;
+          var newLog = "# ".concat(new Date().toISOString(), "\n# ").concat(__filesPreset(message), "\n\n");
 
-        __prependFile.sync(`${this._settings.path}/${level}.log`, newLog); // resolving the file logging
+          __prependFile.sync("".concat(this._settings.path, "/").concat(level, ".log"), newLog); // resolving the file logging
 
 
-        resolve();
+          resolve();
+        });
       });
-    }
+
+      function log(_x, _x2) {
+        return _log.apply(this, arguments);
+      }
+
+      return log;
+    }()
   }]);
 
   return SLogFilesAdapter;

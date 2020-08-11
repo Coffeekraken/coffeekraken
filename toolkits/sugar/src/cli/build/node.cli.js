@@ -4,8 +4,6 @@ const __output = require('../../node/process/output');
 const __sugarConfig = require('../../node/config/sugar');
 
 module.exports = (stringArgs = '') => {
-  const stream = new __SBuildNodeActionsStream();
-  const args = __SBuildNodeCli.parseArgs(stringArgs);
-  const proc = stream.start(args);
-  __output(proc);
+  const cli = new __SBuildNodeCli();
+  __output(cli.run(stringArgs));
 };

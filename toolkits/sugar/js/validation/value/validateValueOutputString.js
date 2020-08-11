@@ -74,7 +74,7 @@ function validateValueOutputString(validateValueResultObj) {
         break;
     }
   });
-  return (0, _parseHtml.default)(issuesArray.join('\n'));
+  return (0, _parseHtml.default)(issuesArray.join('\n')) + '\n';
 }
 
 module.exports = exports.default;

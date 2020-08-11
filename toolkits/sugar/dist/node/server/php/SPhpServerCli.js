@@ -28,11 +28,11 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __SCli = require('../../cli/SCli');
+var __SCli = require('../../cli/SCli');
 
-const __packageRoot = require('../../path/packageRoot');
+var __packageRoot = require('../../path/packageRoot');
 
-const __sugarConfig = require('../../config/sugar');
+var __sugarConfig = require('../../config/sugar');
 /**
  * @name            SPhpServerCli
  * @namespace           node.server.php
@@ -116,16 +116,11 @@ module.exports = (_temp = _class = /*#__PURE__*/function (_SCli) {
         log = true;
       }
 
-      const pro = _get(_getPrototypeOf(SPhpServerCli.prototype), "run", this).call(this, argsObj, includeAllArgs);
+      var pro = _get(_getPrototypeOf(SPhpServerCli.prototype), "run", this).call(this, argsObj, includeAllArgs);
 
       if (!log) return pro;
       setTimeout(() => {
-        this.log(`<green>Your PHP server is up and running</green>:
-
-Hostname       : <yellow>${this.runningArgsObj.hostname}</yellow>
-Port           : <yellow>${this.runningArgsObj.port}</yellow>
-Root directory : <yellow>${this.runningArgsObj.rootDir}</yellow>
-URL            : <cyan>http://${this.runningArgsObj.hostname}:${this.runningArgsObj.port}</cyan>`);
+        this.log("<green>Your PHP server is up and running</green>:\n\nHostname       : <yellow>".concat(this.runningArgsObj.hostname, "</yellow>\nPort           : <yellow>").concat(this.runningArgsObj.port, "</yellow>\nRoot directory : <yellow>").concat(this.runningArgsObj.rootDir, "</yellow>\nURL            : <cyan>http://").concat(this.runningArgsObj.hostname, ":").concat(this.runningArgsObj.port, "</cyan>"));
       });
       return pro;
     }
@@ -182,7 +177,7 @@ URL            : <cyan>http://${this.runningArgsObj.hostname}:${this.runningArgs
   define: {
     type: 'String',
     alias: 'd',
-    description: `Define INI entry foo with value 'bar'`,
+    description: "Define INI entry foo with value 'bar'",
     level: 2
   },
   extended: {

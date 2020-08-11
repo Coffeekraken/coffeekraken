@@ -24,13 +24,13 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-const __deepMerge = require('../../object/deepMerge');
+var __deepMerge = require('../../object/deepMerge');
 
-const __SInput = require('../form/SInput');
+var __SInput = require('../form/SInput');
 
-const __SPopup = require('./SPopup');
+var __SPopup = require('./SPopup');
 
-const __activeSpace = require('../../core/activeSpace');
+var __activeSpace = require('../../core/activeSpace');
 /**
  * @name                  SInputPopup
  * @namespace           node.blessed.popup

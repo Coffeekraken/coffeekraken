@@ -10,23 +10,23 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __deepMerge = require('../object/deepMerge');
+var __deepMerge = require('../object/deepMerge');
 
-const __isPath = require('../is/path');
+var __isPath = require('../is/path');
 
-const __fs = require('fs');
+var __fs = require('fs');
 
-const __SDocblock = require('../docblock/SDocblock');
+var __SDocblock = require('../docblock/SDocblock');
 
-const __path = require('path');
+var __path = require('path');
 
-const __packageRoot = require('../path/packageRoot');
+var __packageRoot = require('../path/packageRoot');
 
-const __stripTags = require('../html/striptags');
+var __stripTags = require('../html/striptags');
 
-const __getFilename = require('../fs/filename');
+var __getFilename = require('../fs/filename');
 
-const __namespace = require('../package/namespace');
+var __namespace = require('../package/namespace');
 /**
  * @name              SSearchResultItem
  * @namespace           node.search
@@ -148,7 +148,7 @@ module.exports = (_temp = /*#__PURE__*/function () {
     }
   }, {
     key: "title",
-    get: function () {
+    get: function get() {
       return this._title;
     }
     /**
@@ -163,7 +163,7 @@ module.exports = (_temp = /*#__PURE__*/function () {
 
   }, {
     key: "description",
-    get: function () {
+    get: function get() {
       return this._description;
     }
     /**
@@ -178,7 +178,7 @@ module.exports = (_temp = /*#__PURE__*/function () {
 
   }, {
     key: "action",
-    get: function () {
+    get: function get() {
       return this._action;
     }
   }]);

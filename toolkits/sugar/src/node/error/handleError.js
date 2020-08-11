@@ -1,5 +1,7 @@
 const __isChildProcess = require('../is/childProcess');
 const __packageRoot = require('../path/packageRoot');
+const __SError = require('../error/SError');
+const __parseHtml = require('../terminal/parseHtml');
 
 /**
  * @name                    handleError
@@ -51,6 +53,9 @@ module.exports = function handleError(error) {
   if (__isChildProcess()) {
     console.log(errorArray.join('\n'));
   } else {
-    throw error.error || error;
+    throw __parseHtml(error.error || error);
+    const serror = new __SError(error.error || error);
+    console.log(serror.message);
+    process.exit();
   }
 };

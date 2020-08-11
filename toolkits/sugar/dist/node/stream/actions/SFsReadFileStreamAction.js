@@ -2,6 +2,10 @@
 
 var _class, _temp;
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -28,13 +32,13 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const __SActionsStreamAction = require('../SActionsStreamAction');
+var __SActionsStreamAction = require('../SActionsStreamAction');
 
-const __fs = require('fs');
+var __fs = require('fs');
 
-const __isDirectory = require('../../is/directory');
+var __isDirectory = require('../../is/directory');
 
-const __deepMerge = require('../../object/deepMerge');
+var __deepMerge = require('../../object/deepMerge');
 /**
  * @name            SFsReadFileStreamAction
  * @namespace           node.stream.actions
@@ -103,12 +107,18 @@ module.exports = (_temp = _class = /*#__PURE__*/function (_SActionsStreamActio) 
         settings = this._settings;
       }
 
-      return _get(_getPrototypeOf(SFsReadFileStreamAction.prototype), "run", this).call(this, streamObj, async (resolve, reject) => {
-        if (!__fs.existsSync(streamObj.input)) throw new Error(`The given "<yellow>input</yellow>" streamObj file path property "<red>${streamObj}</red>" does not exists...`);
-        if (__isDirectory(streamObj.input)) return resolve(streamObj);
-        streamObj[streamObj.dataProperty || SFsReadFileStreamAction.definitionObj.dataProperty.default] = __fs.readFileSync(streamObj.input, 'utf8');
-        resolve(streamObj);
-      });
+      return _get(_getPrototypeOf(SFsReadFileStreamAction.prototype), "run", this).call(this, streamObj, /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator(function* (resolve, reject) {
+          if (!__fs.existsSync(streamObj.input)) throw new Error("The given \"<yellow>input</yellow>\" streamObj file path property \"<red>".concat(streamObj, "</red>\" does not exists..."));
+          if (__isDirectory(streamObj.input)) return resolve(streamObj);
+          streamObj[streamObj.dataProperty || SFsReadFileStreamAction.definitionObj.dataProperty.default] = __fs.readFileSync(streamObj.input, 'utf8');
+          resolve(streamObj);
+        });
+
+        return function (_x, _x2) {
+          return _ref.apply(this, arguments);
+        };
+      }());
     }
   }]);
 

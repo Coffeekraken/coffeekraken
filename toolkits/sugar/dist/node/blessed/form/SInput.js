@@ -16,19 +16,19 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-const __blessed = require('blessed');
+var __blessed = require('blessed');
 
-const __SComponent = require('../SComponent');
+var __SComponent = require('../SComponent');
 
-const __deepMerge = require('../../object/deepMerge');
+var __deepMerge = require('../../object/deepMerge');
 
-const __SPromise = require('../../promise/SPromise');
+var __SPromise = require('../../promise/SPromise');
 
-const __color = require('../../color/color');
+var __color = require('../../color/color');
 
-const __escapeStack = require('../../terminal/escapeStack');
+var __escapeStack = require('../../terminal/escapeStack');
 
-const __activeSpace = require('../../core/activeSpace');
+var __activeSpace = require('../../core/activeSpace');
 /**
  * @name                  SInput
  * @namespace           node.blessed.input
@@ -74,7 +74,7 @@ module.exports = /*#__PURE__*/function (_SComponent) {
 
     _classCallCheck(this, SInput);
 
-    const inputSettings = __deepMerge({
+    var inputSettings = __deepMerge({
       focus: true,
       placeholder: null,
       width: '100%',
@@ -122,10 +122,10 @@ module.exports = /*#__PURE__*/function (_SComponent) {
     _this.$input.on('attach', () => {
       setTimeout(() => {
         if (inputSettings.focus) _this.$input.focus();
-        let placeholderPressed = false;
+        var placeholderPressed = false;
 
         if (inputSettings.placeholder) {
-          const placeholder = inputSettings.placeholder.toString();
+          var placeholder = inputSettings.placeholder.toString();
 
           if (inputSettings.width === 'auto') {
             _this.$input.width = placeholder.length + _this.$input.padding.left + _this.$input.padding.right + 2;
@@ -134,7 +134,7 @@ module.exports = /*#__PURE__*/function (_SComponent) {
           _this.$input.setValue(placeholder);
         }
 
-        let isBackspace = false;
+        var isBackspace = false;
 
         _this.$input.onceKey('backspace,space,escape', () => {
           isBackspace = true;

@@ -1,12 +1,12 @@
 "use strict";
 
-const __sugarConfig = require('../../config/sugar');
+var __sugarConfig = require('../../config/sugar');
 
-const __isInPackage = require('../../path/isInPackage');
+var __isInPackage = require('../../path/isInPackage');
 
-const __packageRoot = require('../../path/packageRoot');
+var __packageRoot = require('../../path/packageRoot');
 
-const __path = require('path');
+var __path = require('path');
 /**
  * @name            getScssImportsStrings
  * @namespace       node.build.scss
@@ -27,20 +27,16 @@ module.exports = function getScssImportsStrings(array) {
   }
 
   if (!array) array = __sugarConfig('build.scss.imports');
-  let importsStrings = {
+  var importsStrings = {
     prepend: '',
     append: ''
   };
   array.forEach(importItem => {
     if (typeof importItem === 'string') {
       if (importItem === 'sugar') {
-        const path = __isInPackage('coffeekraken', process.cwd(), true) ? __path.resolve(__packageRoot(__dirname, true), 'toolkits/sugar/index') : '@coffeekraken/sugar/index';
-        importsStrings.prepend += `
-          @use "${path}" as Sugar;
-          @include Sugar.setup($sugarUserSettings);
-          @include Sugar.init();
-        `;
-        importsStrings.append += ``;
+        var path = __isInPackage('coffeekraken', process.cwd(), true) ? __path.resolve(__packageRoot(__dirname, true), 'toolkits/sugar/index') : '@coffeekraken/sugar/index';
+        importsStrings.prepend += "\n          @use \"".concat(path, "\" as Sugar;\n          @include Sugar.setup($sugarUserSettings);\n          @include Sugar.init();\n        ");
+        importsStrings.append += "";
       }
     }
   });

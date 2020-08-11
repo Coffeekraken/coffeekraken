@@ -1,6 +1,6 @@
 "use strict";
 
-const __uniquid = require('../string/uniqid');
+var __uniquid = require('../string/uniqid');
 /**
  * @name              registerProcess
  * @namespace           node.process

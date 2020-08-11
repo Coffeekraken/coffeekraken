@@ -16,13 +16,13 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-const __SCommand = require('../../terminal/SCommand');
+var __SCommand = require('../../terminal/SCommand');
 
-const __deepMerge = require('../../object/deepMerge');
+var __deepMerge = require('../../object/deepMerge');
 
-const __SBuildDocNavCli = require('./SBuildDocNavCli');
+var __SBuildDocNavCli = require('./SBuildDocNavCli');
 
-const __sugarConfig = require('../../config/sugar');
+var __sugarConfig = require('../../config/sugar');
 /**
  * @name              SBuildDocNavCommand
  * @namespace         node.build.docNav

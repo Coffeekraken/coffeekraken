@@ -16,23 +16,23 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-const __SActionsStream = require('../../stream/SActionsStream');
+var __SActionsStream = require('../../stream/SActionsStream');
 
-const __deepMerge = require('../../object/deepMerge');
+var __deepMerge = require('../../object/deepMerge');
 
-const __getFilename = require('../../fs/filename');
+var __getFilename = require('../../fs/filename');
 
-const __SFsOutputStreamAction = require('../../stream/actions/SFsOutputStreamAction');
+var __SFsOutputStreamAction = require('../../stream/actions/SFsOutputStreamAction');
 
-const __SFsReadFileStreamAction = require('../../stream/actions/SFsReadFileStreamAction');
+var __SFsReadFileStreamAction = require('../../stream/actions/SFsReadFileStreamAction');
 
-const __SGlobResolverStreamAction = require('../../stream/actions/SGlobResolverStreamAction');
+var __SGlobResolverStreamAction = require('../../stream/actions/SGlobResolverStreamAction');
 
-const __SDocblockObjectsToMarkdownStreamAction = require('./actions/SDocblocksObjectsToMarkdownStreamAction');
+var __SDocblockObjectsToMarkdownStreamAction = require('./actions/SDocblocksObjectsToMarkdownStreamAction');
 
-const __SUnlinkStreamAction = require('../../stream/actions/SUnlinkStreamAction');
+var __SUnlinkStreamAction = require('../../stream/actions/SUnlinkStreamAction');
 
-const __path = require('path');
+var __path = require('path');
 /**
  * @name            SBuildDocActionStream
  * @namespace           node.build.doc

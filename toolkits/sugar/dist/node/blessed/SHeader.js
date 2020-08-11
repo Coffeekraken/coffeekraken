@@ -24,15 +24,15 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-const __blessed = require('blessed');
+var __blessed = require('blessed');
 
-const __SComponent = require('./SComponent');
+var __SComponent = require('./SComponent');
 
-const __deepMerge = require('../object/deepMerge');
+var __deepMerge = require('../object/deepMerge');
 
-const __parseHtml = require('../terminal/parseHtml');
+var __parseHtml = require('../terminal/parseHtml');
 
-const __color = require('../color/color');
+var __color = require('../color/color');
 /**
  * @name                  SComponent
  * @namespace           node.blessed

@@ -108,8 +108,6 @@ module.exports = class SCommandPanel extends __SComponent {
     // extends SPanel
     super(_settings);
 
-    this._boxesObjectsMap = new Map();
-
     if (Array.isArray(commands)) {
       this._commands = commands;
     } else {
@@ -189,42 +187,41 @@ module.exports = class SCommandPanel extends __SComponent {
    * @since     2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _subscribeToCommandsEvents() {
-    // subscribe to data
-    this._sPromise
-      .on('start,success,error', (data) => {
-        this._logSummary(data);
-        this.update();
-      })
-      .on('close', (data) => {
-        // this._logSummary(data);
-        this.update();
-      })
-      .on('log', (data) => {
-        this.update();
-      })
-      .on('error', (data) => {
-        this.update();
-      })
-      .on('kill', (data) => {})
-      // subscribe to errors
-      .on('error', (data) => {});
-    // subscribe to ask
-    // .on('ask', async (question) => {
-    //   if (question.type === 'summary') {
-    //     const summary = this.summary(
-    //       question.commandObj,
-    //       question.items
-    //     );
-    //     summary.on('cancel', () => {
-    //       question.reject && question.reject();
-    //     });
-    //     summary.on('resolve', (answer) => {
-    //       question.resolve && question.resolve(answer);
-    //     });
-    //   }
-    // });
-  }
+  // _subscribeToCommandsEvents() {
+  //   // subscribe to data
+  //   this._sPromise
+  //     .on('start,success,error', (data) => {
+  //       this.update();
+  //     })
+  //     .on('close', (data) => {
+  //       this.update();
+  //     })
+  //     .on('log', (data) => {
+  //       console.log('HEY');
+  //       this.update();
+  //     })
+  //     .on('error', (data) => {
+  //       this.update();
+  //     })
+  //     .on('kill', (data) => {})
+  //     // subscribe to errors
+  //     .on('error', (data) => {});
+  //   // subscribe to ask
+  //   // .on('ask', async (question) => {
+  //   //   if (question.type === 'summary') {
+  //   //     const summary = this.summary(
+  //   //       question.commandObj,
+  //   //       question.items
+  //   //     );
+  //   //     summary.on('cancel', () => {
+  //   //       question.reject && question.reject();
+  //   //     });
+  //   //     summary.on('resolve', (answer) => {
+  //   //       question.resolve && question.resolve(answer);
+  //   //     });
+  //   //   }
+  //   // });
+  // }
 
   /**
    * @name          _logSummary
@@ -237,33 +234,33 @@ module.exports = class SCommandPanel extends __SComponent {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _logSummary(event) {
-    let log = '';
-    switch (event.process.state) {
-      case 'running':
-        log = `- <primary>${event.name}</primary> has been <cyan>started</cyan>`;
-        break;
-      case 'error':
-        log = `<red><iCross/></red> <primary>${event.name}</primary> is in <red>error</red>`;
-        break;
-      case 'success':
-        log = `<green><iCheck/></green> <primary>${
-          event.name
-        }</primary> has been finished <green>successfully</green> in <cyan>${__convert(
-          event.process.duration,
-          's'
-        )}s</cyan>`;
-        break;
-      case 'killed':
-        log = `<red><iCross/></red> <primary>${event.name}</primary> has been <red>killed</red>`;
-        break;
-    }
-    if (event.name !== this._logPreviousCommand && this._logPreviousCommand)
-      this._summaryFakeCommand.lastProcessObj.stdout.push(' ');
-    this._summaryFakeCommand.lastProcessObj.stdout.push(__parseHtml(log));
-    this.update();
-    this._logPreviousCommand = event.name;
-  }
+  // _logSummary(event) {
+  //   let log = '';
+  //   switch (event.process.state) {
+  //     case 'running':
+  //       log = `- <primary>${event.name}</primary> has been <cyan>started</cyan>`;
+  //       break;
+  //     case 'error':
+  //       log = `<red><iCross/></red> <primary>${event.name}</primary> is in <red>error</red>`;
+  //       break;
+  //     case 'success':
+  //       log = `<green><iCheck/></green> <primary>${
+  //         event.name
+  //       }</primary> has been finished <green>successfully</green> in <cyan>${__convert(
+  //         event.process.duration,
+  //         's'
+  //       )}s</cyan>`;
+  //       break;
+  //     case 'killed':
+  //       log = `<red><iCross/></red> <primary>${event.name}</primary> has been <red>killed</red>`;
+  //       break;
+  //   }
+  //   if (event.name !== this._logPreviousCommand && this._logPreviousCommand)
+  //     this._summaryFakeCommand.lastProcessObj.stdout.push(' ');
+  //   this._summaryFakeCommand.lastProcessObj.stdout.push(__parseHtml(log));
+  //   this.update();
+  //   this._logPreviousCommand = event.name;
+  // }
 
   /**
    * @name          summary
@@ -274,15 +271,15 @@ module.exports = class SCommandPanel extends __SComponent {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  summary(commandObj, items) {
-    const summaryListPopup = __summaryListPopup({
-      title: `Run command <bgBlack><bold><primary> ${commandObj.name} </primary></bold></bgBlack> | Are these properties ok?`,
-      description: `<bold><cyan>${commandObj.command}</cyan></bold>`,
-      items
-    });
-    summaryListPopup.attach(this);
-    return summaryListPopup;
-  }
+  // summary(commandObj, items) {
+  //   const summaryListPopup = __summaryListPopup({
+  //     title: `Run command <bgBlack><bold><primary> ${commandObj.name} </primary></bold></bgBlack> | Are these properties ok?`,
+  //     description: `<bold><cyan>${commandObj.command}</cyan></bold>`,
+  //     items
+  //   });
+  //   summaryListPopup.attach(this);
+  //   return summaryListPopup;
+  // }
 
   // /**
   //  * @name          _clearCommands
@@ -385,10 +382,13 @@ module.exports = class SCommandPanel extends __SComponent {
             commandObj.instance &&
             commandObj.instance.on
           ) {
-            if (commandObj.instance.isRunning() && !commandObj.concurrent) {
+            if (
+              commandObj.instance.state == 'running' &&
+              !commandObj.concurrent
+            ) {
               commandObj.instance.kill();
             } else if (
-              !commandObj.instance.isRunning() &&
+              commandObj.instance.state != 'running' &&
               commandObj.instance.run
             ) {
               commandObj.instance.run();
@@ -755,7 +755,7 @@ module.exports = class SCommandPanel extends __SComponent {
       let name = commandObj.name;
       if (
         commandObj.instance.state === 'running' ||
-        commandObj.instance.isWatching()
+        commandObj.instance.state === 'watching'
       ) {
         commandObj._spinner.ora.text = '';
         commandObj._spinner.ora.color = 'yellow';
@@ -800,7 +800,7 @@ module.exports = class SCommandPanel extends __SComponent {
         item.style.fg = __color('terminal.cyan').toString();
       } else if (item.active || item.selected) {
         item.style.fg = __color('terminal.primary').toString();
-      } else if (commandObj.instance.isWatching()) {
+      } else if (commandObj.instance.state === 'watching') {
         item.style.fg = __color('terminal.white').toString();
       } else if (commandObj.instance.state === 'error') {
         item.style.fg = __color('terminal.red').toString();
@@ -853,7 +853,7 @@ module.exports = class SCommandPanel extends __SComponent {
           )
         );
         commandObj.$box.screen.render();
-      } else if (commandObj.instance.isWatching()) {
+      } else if (commandObj.instance.state === 'watching') {
         commandObj.$box.style.bg = __color('terminal.yellow').toString();
         clearInterval(commandObj.spinner.interval);
         commandObj.spinner.interval = setInterval(() => {

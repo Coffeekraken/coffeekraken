@@ -1,1 +1,0 @@
-{"version":3,"sources":["deepProxy.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,8BAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.object\n * @src             ../../../js/object/deepProxy.js\n */\nmodule.exports = require('../../../js/object/deepProxy');\n"]}

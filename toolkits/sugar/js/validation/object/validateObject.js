@@ -86,10 +86,12 @@ function validateObject(objectToCheck, definitionObj, settings, _argPath) {
   settings = (0, _deepMerge.default)({
     throw: true,
     name: 'unnamed',
+    interface: null,
     validateDefinitionObject: true
   }, settings);
   var issuesObj = {
     name: settings.name,
+    interface: settings.interface,
     issues: []
   }; // validate the passed definition object first
 
@@ -139,6 +141,40 @@ function validateObject(objectToCheck, definitionObj, settings, _argPath) {
 
     if (staticIssue) {
       issuesObj[argName].issues.push('static');
+    } // handle "lazy" properties
+
+
+    if (argDefinition.lazy && objectToCheck[argName] === null || objectToCheck[argName] === undefined) {
+      if (!objectToCheck.__validateObjectObservedProperties) {
+        Object.defineProperty(objectToCheck, '__validateObjectObservedProperties', {
+          value: [],
+          writable: true,
+          enumerable: false
+        });
+      }
+
+      if (objectToCheck.__validateObjectObservedProperties.indexOf(argName) !== -1) {} else {
+        var descriptor = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(objectToCheck), argName);
+
+        objectToCheck.__validateObjectObservedProperties.push(argName);
+
+        Object.defineProperty(objectToCheck, argName, {
+          set: value => {
+            // validate the passed value
+            var validationResult = (0, _validateValue.default)(value, argDefinition, _objectSpread(_objectSpread({}, settings), {}, {
+              throw: true,
+              name: "".concat(settings.name, ".").concat(argName)
+            }));
+            if (descriptor && descriptor.set) return descriptor.set(value);
+            objectToCheck["__".concat(argName)] = value;
+            return value;
+          },
+          get: () => {
+            if (descriptor && descriptor.get) descriptor.get();
+            return objectToCheck["__".concat(argName)];
+          }
+        });
+      }
     } // check if is an extendsFn
 
 
@@ -159,7 +195,7 @@ function validateObject(objectToCheck, definitionObj, settings, _argPath) {
     }); // TODO implement the "children" support
     // check if we have some "children" properties
 
-    if (argDefinition.definitionObj) {
+    if (argDefinition.definitionObj && (argDefinition.required || objectToCheck !== null && objectToCheck !== undefined)) {
       var childrenValidation = validateObject(objectToCheck || {}, argDefinition.definitionObj, _objectSpread(_objectSpread({}, settings), {}, {
         throw: false
       }), [..._argPath, argName]); // console.log('CC', childrenValidation);

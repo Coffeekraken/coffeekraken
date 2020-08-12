@@ -6,6 +6,9 @@ import __trimLines from '../string/trimLines';
 import __argsToObject from '../cli/argsToObject';
 import __SDefinitionObjectError from '../error/SObjectValidationError';
 import __deepize from '../object/deepize';
+import __isClass from '../is/class';
+import __SError from '../error/SError';
+import __getExtendsStack from '../class/getExtendsStack';
 
 /**
  * @name              SInterface
@@ -83,39 +86,69 @@ export default class SInterface {
     let issueObj = {
       issues: []
     };
+    let implementationValidationResult;
 
-    const implementationValidationResult = __validateObject(
-      instance,
-      this.definitionObj,
-      {
-        throw: false,
-        name: instance.name || instance.constructor.name
-      }
-    );
-    if (implementationValidationResult !== true) {
-      issueObj = __deepMerge(issueObj, implementationValidationResult, {
-        array: true
+    // extends array
+    if (this.extendsArray && Array.isArray(this.extendsArray)) {
+      const extendsStack = __getExtendsStack(instance);
+      this.extendsArray.forEach((cls) => {
+        if (extendsStack.indexOf(cls) === -1) {
+          throw new __SError(
+            `Your class|instance "<yellow>${
+              instance.name || instance.constructor.name
+            }</yellow>" that implements the "<cyan>${
+              this.name
+            }</cyan>" interface has to extend the "<green>${cls}</green>" class...`
+          );
+        }
       });
+    }
+
+    // implements array
+    if (this.implementsArray && Array.isArray(this.implementsArray)) {
+      this.implements(instance, this.implementsArray, settings);
+    }
+
+    // definition object
+    if (this.definitionObj) {
+      implementationValidationResult = __validateObject(
+        instance,
+        this.definitionObj,
+        {
+          throw: false,
+          name: instance.name || instance.constructor.name,
+          interface: settings.interface
+        }
+      );
+      if (implementationValidationResult !== true) {
+        issueObj = __deepMerge(issueObj, implementationValidationResult, {
+          array: true
+        });
+      }
     }
 
     if (!issueObj.issues.length) return true;
 
     if (settings.throw) {
-      const message = this.outputString(implementationValidationResult);
-      let outputArray = [];
-      if (this.title || settings.title) {
-        outputArray.push(
-          `<bold><underline>${settings.title || this.title}</underline></bold>`
-        );
-        outputArray.push('');
-      }
-      if (this.description || settings.description) {
-        outputArray.push(settings.description || this.description);
-        outputArray.push('');
-      }
-      outputArray.push(message);
-      throw outputArray.join('\n');
+      throw new __SError(this.outputString(issueObj, settings));
     }
+
+    // if (settings.throw) {
+    //   const message = this.outputString(implementationValidationResult);
+    //   let outputArray = [];
+    //   if (this.title || settings.title) {
+    //     outputArray.push(
+    //       `<bold><underline>${settings.title || this.title}</underline></bold>`
+    //     );
+    //     outputArray.push('');
+    //   }
+    //   if (this.description || settings.description) {
+    //     outputArray.push(settings.description || this.description);
+    //     outputArray.push('');
+    //   }
+    //   outputArray.push(message);
+    //   throw outputArray.join('\n');
+    // }
 
     switch (settings.return.toLowerCase()) {
       case 'object':
@@ -123,7 +156,7 @@ export default class SInterface {
         break;
       case 'string':
       default:
-        return SInterface.outputString(issueObj);
+        return SInterface.outputString(issueObj, settings);
         break;
     }
   }
@@ -141,9 +174,10 @@ export default class SInterface {
    * @since       2.0.0
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static applyAndThrow(instance) {
+  static applyAndThrow(instance, settings = {}) {
     const apply = SInterface.apply.bind(this);
     apply(instance, {
+      ...settings,
       throw: true
     });
   }
@@ -160,10 +194,48 @@ export default class SInterface {
    * @since       2.0.0
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static applyAndComplete(object) {
-    const completedObject = this.complete(object);
-    this.applyAndThrow(completedObject);
+  static applyAndComplete(object, settings = {}) {
+    const completedObject = this.complete(object, settings);
+    this.applyAndThrow(completedObject, settings);
     return completedObject;
+  }
+
+  /**
+   * @name          implements
+   * @type          Function
+   * @static
+   *
+   * This static method allows you to tell that a particular instance of a class implements
+   * one or more interfaces. This allows you after to specify the property "implements" with an array
+   * of SInterface classes that you want your property to implements
+   *
+   * @param         {SInterface}          ...interfaces           The interfaces you want to implements
+   *
+   * @since         2.0.0
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static implements(instance, interfaces, settings = {}) {
+    if (!Array.isArray(interfaces)) interfaces = [interfaces];
+
+    if (__isClass(instance)) {
+      class ImplementsMiddleClass extends instance {
+        constructor(...args) {
+          super(...args);
+          SInterface.implements(this, interfaces, settings);
+        }
+      }
+      return ImplementsMiddleClass;
+    }
+
+    // make sure the instance has all the interfaces requirements
+    interfaces.forEach((Interface) => {
+      Interface.apply(instance, {
+        ...settings,
+        interface: Interface.name
+      });
+    });
+    // save the interfaces that you want to implements into the instance
+    instance.__interfaces = interfaces;
   }
 
   /**
@@ -180,7 +252,7 @@ export default class SInterface {
    * @since         2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static complete(data) {
+  static complete(data, settings = {}) {
     const argsObj = Object.assign({}, data);
 
     // loop on all the arguments
@@ -214,9 +286,10 @@ export default class SInterface {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static outputString(resultObj) {
+  static outputString(resultObj, settings = {}) {
+    const headerString = this._outputHeaderString(settings);
     const string = __validateObjectOutputString(resultObj);
-    return string;
+    return __trimLines(`${headerString}${string}`);
   }
 
   /**
@@ -233,9 +306,35 @@ export default class SInterface {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static output(resultObj) {
-    const string = __validateObjectOutputString(resultObj);
+  static output(resultObj, settings = {}) {
+    const string = this.outputString(resultObj, settings);
     console.log(string);
+  }
+
+  /**
+   * @name                _outputHeaderString
+   * @type                Function
+   * @private
+   *
+   * This method simply generate the output header depending on the passed settings like:
+   * - title: The title you want to display
+   * - description: A description to explain a little bit more the issue
+   *
+   * @since           2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static _outputHeaderString(settings = {}) {
+    let array = [];
+    if (settings.title) {
+      array.push(`<red><underline>${settings.title}</underline></red>`);
+      array.push(' ');
+    }
+    if (settings.description) {
+      array.push(`${settings.description}`);
+      array.push(' ');
+    }
+
+    return array.join('\n');
   }
 
   /**

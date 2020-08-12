@@ -1,1 +1,0 @@
-{"version":3,"sources":["toPlainObject.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,iCAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.class\n * @src             ../../../js/class/toPlainObject.js\n */\nmodule.exports = require('../../../js/class/toPlainObject');\n"]}

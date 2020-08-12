@@ -46,7 +46,6 @@ export default function ofType(value, argTypeDefinition) {
     },
     issues: ['type']
   };
-
   for (let i = 0; i < definitionArray.length; i++) {
     const definitionObj = definitionArray[i];
 
@@ -115,11 +114,33 @@ export default function ofType(value, argTypeDefinition) {
 
     // check for "custom" types
     else if (__isClass(value) && value.name) {
-      if (definitionObj.type === value.name) return true;
+      const classesStack = getBaseClass(value);
+      if (classesStack.indexOf(definitionObj.type) !== -1) return true;
     } else if (value && value.constructor && value.constructor.name) {
       if (definitionObj.type === value.constructor.name) return true;
     }
   }
 
   return issueObj;
+}
+
+function getBaseClass(targetClass) {
+  const stack = [];
+
+  if (targetClass instanceof Function) {
+    let baseClass = targetClass;
+
+    while (baseClass) {
+      const newBaseClass = Object.getPrototypeOf(baseClass);
+
+      if (newBaseClass && newBaseClass !== Object && newBaseClass.name) {
+        stack.push(newBaseClass.name);
+        baseClass = newBaseClass;
+      } else {
+        break;
+      }
+    }
+
+    return stack;
+  }
 }

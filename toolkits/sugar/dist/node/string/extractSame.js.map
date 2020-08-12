@@ -1,1 +1,0 @@
-{"version":3,"sources":["extractSame.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,gCAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.string\n * @src             ../../../js/string/extractSame.js\n */\nmodule.exports = require('../../../js/string/extractSame');\n"]}

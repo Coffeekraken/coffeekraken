@@ -1,1 +1,0 @@
-{"version":3,"sources":["array.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,sBAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.is\n * @src               ../../../js/is/array.js\n */\nmodule.exports = require('../../../js/is/array');\n"]}

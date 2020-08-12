@@ -719,7 +719,8 @@ var SPromise = /*#__PURE__*/function (_Promise) {
           _metas = {};
         }
 
-        if (this._isDestroyed) return; // triger the passed stacks
+        if (this._isDestroyed) return;
+        if (what.includes('log')) yield (0, _wait.default)(0); // triger the passed stacks
 
         return this._triggerStacks(what, arg, _metas);
       });

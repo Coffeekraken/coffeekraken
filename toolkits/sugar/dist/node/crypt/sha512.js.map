@@ -1,1 +1,0 @@
-{"version":3,"sources":["sha512.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,0BAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.crypt\n * @src             ../../../js/crypt/sha512.js\n */\nmodule.exports = require('../../../js/crypt/sha512');\n"]}

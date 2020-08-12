@@ -1,1 +1,0 @@
-{"version":3,"sources":["typeof.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;;AAKAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,0BAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.value\n * @src             ../../../js/value/typeof.js\n * @todo            tests\n */\nmodule.exports = require('../../../js/value/typeof');\n"]}

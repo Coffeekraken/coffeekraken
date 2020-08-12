@@ -1,1 +1,0 @@
-{"version":3,"sources":["yyyymmddDate.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,6BAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.is\n * @src               ../../../js/is/yyyymmddDate.js\n */\nmodule.exports = require('../../../js/is/yyyymmddDate');\n"]}

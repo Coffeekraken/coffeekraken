@@ -118,9 +118,13 @@ export default function typeOf(value, settings = {}) {
       break;
     case 'string':
     default:
-      return `${resultObj.type}${
-        resultObj.of ? `<${resultObj.of.join('|')}>` : ''
-      }`;
+      if (settings.of && resultObj.of && resultObj.of.length) {
+        return `${resultObj.type}${
+          resultObj.of ? `<${resultObj.of.join('|')}>` : ''
+        }`;
+      } else {
+        return `${resultObj.type}`;
+      }
       break;
   }
 }

@@ -60,6 +60,7 @@ export default function validateObject(
     {
       throw: true,
       name: 'unnamed',
+      interface: null,
       validateDefinitionObject: true
     },
     settings
@@ -67,8 +68,10 @@ export default function validateObject(
 
   let issuesObj = {
     name: settings.name,
+    interface: settings.interface,
     issues: []
   };
+
   // validate the passed definition object first
   if (settings.validateDefinitionObject) {
     const validateDefinitionObjectResult = __validateObjectDefinitionObject(
@@ -123,6 +126,52 @@ export default function validateObject(
       issuesObj[argName].issues.push('static');
     }
 
+    // handle "lazy" properties
+    if (
+      (argDefinition.lazy && objectToCheck[argName] === null) ||
+      objectToCheck[argName] === undefined
+    ) {
+      if (!objectToCheck.__validateObjectObservedProperties) {
+        Object.defineProperty(
+          objectToCheck,
+          '__validateObjectObservedProperties',
+          {
+            value: [],
+            writable: true,
+            enumerable: false
+          }
+        );
+      }
+      if (
+        objectToCheck.__validateObjectObservedProperties.indexOf(argName) !== -1
+      ) {
+      } else {
+        const descriptor = Object.getOwnPropertyDescriptor(
+          Object.getPrototypeOf(objectToCheck),
+          argName
+        );
+        objectToCheck.__validateObjectObservedProperties.push(argName);
+        Object.defineProperty(objectToCheck, argName, {
+          set: (value) => {
+            // validate the passed value
+            const validationResult = __validateValue(value, argDefinition, {
+              ...settings,
+              throw: true,
+              name: `${settings.name}.${argName}`
+            });
+
+            if (descriptor && descriptor.set) return descriptor.set(value);
+            objectToCheck[`__${argName}`] = value;
+            return value;
+          },
+          get: () => {
+            if (descriptor && descriptor.get) descriptor.get();
+            return objectToCheck[`__${argName}`];
+          }
+        });
+      }
+    }
+
     // check if is an extendsFn
     if (settings.extendsFn) {
       issuesObj[argName] = settings.extendsFn(
@@ -145,7 +194,11 @@ export default function validateObject(
 
     // TODO implement the "children" support
     // check if we have some "children" properties
-    if (argDefinition.definitionObj) {
+    if (
+      argDefinition.definitionObj &&
+      (argDefinition.required ||
+        (objectToCheck !== null && objectToCheck !== undefined))
+    ) {
       const childrenValidation = validateObject(
         objectToCheck || {},
         argDefinition.definitionObj,

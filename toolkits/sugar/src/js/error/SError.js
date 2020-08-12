@@ -12,9 +12,17 @@ export default class SError extends Error {
       const packageRoot = __packageRoot();
       let stack = this.stack;
       let stackArray = [];
-      stack.split(/\s+?at\s/).forEach((l) => {
-        stackArray.push(`at <cyan>${l.replace(packageRoot, '')}</cyan>`);
-      });
+      stack
+        .split(/\s+?at\s/)
+        .filter((l) => {
+          if (l.trim() === 'Error') return false;
+          return true;
+        })
+        .forEach((l) => {
+          stackArray.push(
+            `<cyan>│</cyan> at <cyan>${l.replace(packageRoot, '')}</cyan>`
+          );
+        });
 
       const errorString = __trimLines(
         __parseHtml(`<underline><bold><red>${
@@ -22,6 +30,7 @@ export default class SError extends Error {
         }</red></bold></underline>
 
         ${message}
+        <cyan><underline>Stack</underline></cyan>
 
         ${stackArray.join('\n')}`)
       );

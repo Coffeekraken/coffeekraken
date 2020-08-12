@@ -1,1 +1,0 @@
-{"version":3,"sources":["number.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,uBAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.is\n * @src               ../../../js/is/number.js\n */\nmodule.exports = require('../../../js/is/number');\n"]}

@@ -1,1 +1,0 @@
-{"version":3,"sources":["watch.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,0BAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.object\n * @src             ../../../js/object/watch.js\n */\nmodule.exports = require('../../../js/object/watch');\n"]}

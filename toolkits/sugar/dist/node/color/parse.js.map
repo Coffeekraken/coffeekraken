@@ -1,1 +1,0 @@
-{"version":3,"sources":["parse.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,yBAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.color\n * @src             ../../../js/color/parse.js\n */\nmodule.exports = require('../../../js/color/parse');\n"]}

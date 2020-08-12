@@ -73,6 +73,10 @@ function validateValue(value, definitionObj, settings) {
 
   if ((value === null || value === undefined) && !definitionObj.required) {
     return true;
+  }
+
+  if (definitionObj.lazy) {
+    issueObj.issues.push('lazy');
   } // validate type
 
 

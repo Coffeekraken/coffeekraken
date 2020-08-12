@@ -21,7 +21,31 @@ var _SObjectValidationError = _interopRequireDefault(require("../error/SObjectVa
 
 var _deepize = _interopRequireDefault(require("../object/deepize"));
 
+var _class = _interopRequireDefault(require("../is/class"));
+
+var _SError = _interopRequireDefault(require("../error/SError"));
+
+var _getExtendsStack = _interopRequireDefault(require("../class/getExtendsStack"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (typeof call === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -113,36 +137,58 @@ var SInterface = /*#__PURE__*/function () {
       var issueObj = {
         issues: []
       };
-      var implementationValidationResult = (0, _validateObject.default)(instance, this.definitionObj, {
-        throw: false,
-        name: instance.name || instance.constructor.name
-      });
+      var implementationValidationResult; // extends array
 
-      if (implementationValidationResult !== true) {
-        issueObj = (0, _deepMerge.default)(issueObj, implementationValidationResult, {
-          array: true
+      if (this.extendsArray && Array.isArray(this.extendsArray)) {
+        var extendsStack = (0, _getExtendsStack.default)(instance);
+        this.extendsArray.forEach(cls => {
+          if (extendsStack.indexOf(cls) === -1) {
+            throw new _SError.default("Your class|instance \"<yellow>".concat(instance.name || instance.constructor.name, "</yellow>\" that implements the \"<cyan>").concat(this.name, "</cyan>\" interface has to extend the \"<green>").concat(cls, "</green>\" class..."));
+          }
         });
+      } // implements array
+
+
+      if (this.implementsArray && Array.isArray(this.implementsArray)) {
+        this.implements(instance, this.implementsArray, settings);
+      } // definition object
+
+
+      if (this.definitionObj) {
+        implementationValidationResult = (0, _validateObject.default)(instance, this.definitionObj, {
+          throw: false,
+          name: instance.name || instance.constructor.name,
+          interface: settings.interface
+        });
+
+        if (implementationValidationResult !== true) {
+          issueObj = (0, _deepMerge.default)(issueObj, implementationValidationResult, {
+            array: true
+          });
+        }
       }
 
       if (!issueObj.issues.length) return true;
 
       if (settings.throw) {
-        var message = this.outputString(implementationValidationResult);
-        var outputArray = [];
+        throw new _SError.default(this.outputString(issueObj, settings));
+      } // if (settings.throw) {
+      //   const message = this.outputString(implementationValidationResult);
+      //   let outputArray = [];
+      //   if (this.title || settings.title) {
+      //     outputArray.push(
+      //       `<bold><underline>${settings.title || this.title}</underline></bold>`
+      //     );
+      //     outputArray.push('');
+      //   }
+      //   if (this.description || settings.description) {
+      //     outputArray.push(settings.description || this.description);
+      //     outputArray.push('');
+      //   }
+      //   outputArray.push(message);
+      //   throw outputArray.join('\n');
+      // }
 
-        if (this.title || settings.title) {
-          outputArray.push("<bold><underline>".concat(settings.title || this.title, "</underline></bold>"));
-          outputArray.push('');
-        }
-
-        if (this.description || settings.description) {
-          outputArray.push(settings.description || this.description);
-          outputArray.push('');
-        }
-
-        outputArray.push(message);
-        throw outputArray.join('\n');
-      }
 
       switch (settings.return.toLowerCase()) {
         case 'object':
@@ -151,7 +197,7 @@ var SInterface = /*#__PURE__*/function () {
 
         case 'string':
         default:
-          return SInterface.outputString(issueObj);
+          return SInterface.outputString(issueObj, settings);
           break;
       }
     }
@@ -171,11 +217,15 @@ var SInterface = /*#__PURE__*/function () {
 
   }, {
     key: "applyAndThrow",
-    value: function applyAndThrow(instance) {
+    value: function applyAndThrow(instance, settings) {
+      if (settings === void 0) {
+        settings = {};
+      }
+
       var apply = SInterface.apply.bind(this);
-      apply(instance, {
+      apply(instance, _objectSpread(_objectSpread({}, settings), {}, {
         throw: true
-      });
+      }));
     }
     /**
      * @name          applyAndComplete
@@ -192,10 +242,73 @@ var SInterface = /*#__PURE__*/function () {
 
   }, {
     key: "applyAndComplete",
-    value: function applyAndComplete(object) {
-      var completedObject = this.complete(object);
-      this.applyAndThrow(completedObject);
+    value: function applyAndComplete(object, settings) {
+      if (settings === void 0) {
+        settings = {};
+      }
+
+      var completedObject = this.complete(object, settings);
+      this.applyAndThrow(completedObject, settings);
       return completedObject;
+    }
+    /**
+     * @name          implements
+     * @type          Function
+     * @static
+     *
+     * This static method allows you to tell that a particular instance of a class implements
+     * one or more interfaces. This allows you after to specify the property "implements" with an array
+     * of SInterface classes that you want your property to implements
+     *
+     * @param         {SInterface}          ...interfaces           The interfaces you want to implements
+     *
+     * @since         2.0.0
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "implements",
+    value: function _implements(instance, interfaces, settings) {
+      if (settings === void 0) {
+        settings = {};
+      }
+
+      if (!Array.isArray(interfaces)) interfaces = [interfaces];
+
+      if ((0, _class.default)(instance)) {
+        var ImplementsMiddleClass = /*#__PURE__*/function (_instance) {
+          _inherits(ImplementsMiddleClass, _instance);
+
+          var _super = _createSuper(ImplementsMiddleClass);
+
+          function ImplementsMiddleClass() {
+            var _this;
+
+            _classCallCheck(this, ImplementsMiddleClass);
+
+            for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+              args[_key] = arguments[_key];
+            }
+
+            _this = _super.call(this, ...args);
+            SInterface.implements(_assertThisInitialized(_this), interfaces, settings);
+            return _this;
+          }
+
+          return ImplementsMiddleClass;
+        }(instance);
+
+        return ImplementsMiddleClass;
+      } // make sure the instance has all the interfaces requirements
+
+
+      interfaces.forEach(Interface => {
+        Interface.apply(instance, _objectSpread(_objectSpread({}, settings), {}, {
+          interface: Interface.name
+        }));
+      }); // save the interfaces that you want to implements into the instance
+
+      instance.__interfaces = interfaces;
     }
     /**
      * @name          complete
@@ -214,7 +327,11 @@ var SInterface = /*#__PURE__*/function () {
 
   }, {
     key: "complete",
-    value: function complete(data) {
+    value: function complete(data, settings) {
+      if (settings === void 0) {
+        settings = {};
+      }
+
       var argsObj = Object.assign({}, data); // loop on all the arguments
 
       Object.keys(this.definitionObj).forEach(argString => {
@@ -244,9 +361,15 @@ var SInterface = /*#__PURE__*/function () {
 
   }, {
     key: "outputString",
-    value: function outputString(resultObj) {
+    value: function outputString(resultObj, settings) {
+      if (settings === void 0) {
+        settings = {};
+      }
+
+      var headerString = this._outputHeaderString(settings);
+
       var string = (0, _validateObjectOutputString.default)(resultObj);
-      return string;
+      return (0, _trimLines.default)("".concat(headerString).concat(string));
     }
     /**
      * @name          output
@@ -265,9 +388,47 @@ var SInterface = /*#__PURE__*/function () {
 
   }, {
     key: "output",
-    value: function output(resultObj) {
-      var string = (0, _validateObjectOutputString.default)(resultObj);
+    value: function output(resultObj, settings) {
+      if (settings === void 0) {
+        settings = {};
+      }
+
+      var string = this.outputString(resultObj, settings);
       console.log(string);
+    }
+    /**
+     * @name                _outputHeaderString
+     * @type                Function
+     * @private
+     *
+     * This method simply generate the output header depending on the passed settings like:
+     * - title: The title you want to display
+     * - description: A description to explain a little bit more the issue
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "_outputHeaderString",
+    value: function _outputHeaderString(settings) {
+      if (settings === void 0) {
+        settings = {};
+      }
+
+      var array = [];
+
+      if (settings.title) {
+        array.push("<red><underline>".concat(settings.title, "</underline></red>"));
+        array.push(' ');
+      }
+
+      if (settings.description) {
+        array.push("".concat(settings.description));
+        array.push(' ');
+      }
+
+      return array.join('\n');
     }
     /**
      * @name                parse

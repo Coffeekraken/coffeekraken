@@ -10,11 +10,14 @@ const __output = require('../process/output');
 const __parseArgs = require('../cli/parseArgs');
 const __toString = require('../string/toString');
 const __SPromise = require('../promise/SPromise');
-const __SProcessInterface = require('../process/interface/SProcessInterface');
+const __SCliInterface = require('./interface/SCliInterface');
+const __SInterface = require('../class/SInterface');
+const __sugarHeading = require('../ascii/sugarHeading');
 
 /**
  * @name                SCli
  * @namespace           node.cli
+ * @implements          SCliInterface
  * @type                Class
  *
  * This class represent a basic CLI command with his definition object, his command string, etc...
@@ -57,7 +60,7 @@ const __SProcessInterface = require('../process/interface/SProcessInterface');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SCli extends __SPromise {
+class SCli extends __SPromise {
   /**
    * @name          _runningProcess
    * @type          SPromise
@@ -100,7 +103,6 @@ module.exports = class SCli extends __SPromise {
       },
       settings
     );
-
     super(null, settings).start();
     if (!this._settings.id) this._settings.id = this.constructor.name;
 
@@ -215,15 +217,6 @@ module.exports = class SCli extends __SPromise {
       );
     }
 
-    // existence of the ```_run``` method
-    if (!this._run || typeof this._run !== 'function') {
-      throw new Error(
-        __parseHtml(
-          `An <green>SCli</green> based class like your "<yellow>${this.constructor.name}</yellow>" MUST has a "<cyan>_run</cyan>" method that has to be responsible of executing your process when calling the "run" method...`
-        )
-      );
-    }
-
     // check definition object
     __validateCliDefinitionObject(this.definitionObj);
   }
@@ -272,10 +265,14 @@ module.exports = class SCli extends __SPromise {
 
     if (__isChildProcess()) {
       // run the process
-      this._runningProcess = this._run(paramsObj, settings);
+      const SProcessInstance = this.constructor.processClass;
+      this._runningProcess = new SProcessInstance(settings);
 
       // Apply the SProcessInterface on the getted process
-      __SProcessInterface.apply(this._runningProcess);
+      // __SCliInterface.apply(this._runningProcess);
+
+      // run the process
+      this._runningProcess.run(paramsObj);
 
       if (settings.output) {
         const outputSettings =
@@ -283,14 +280,14 @@ module.exports = class SCli extends __SPromise {
         __output(this._runningProcess, outputSettings);
       }
 
-      this._runningProcess.on('resolve', (data) => {
-        data = {
-          time: Date.now(),
-          value: data
-        };
-        this._runningProcess = null;
-        return data;
-      });
+      // this._runningProcess.on('close', (data) => {
+      //   data = {
+      //     time: Date.now(),
+      //     value: data
+      //   };
+      //   this._runningProcess = null;
+      //   return data;
+      // });
 
       return this._runningProcess;
     } else {
@@ -302,8 +299,13 @@ module.exports = class SCli extends __SPromise {
 
       this._runningProcess = childProcess.run(paramsObj);
 
+      // pipe events from the childProcess
+      __SPromise.pipe(this._runningProcess, this);
+
       this._runningProcess
-        .on('error', () => {})
+        .on('error', () => {
+          console.log('CPLP');
+        })
         .on('resolve', () => {
           this._runningProcess = null;
         });
@@ -315,18 +317,23 @@ module.exports = class SCli extends __SPromise {
       }
     }
 
-    this._runningProcess.trigger('log', {
+    const launchingLogObj = {
       temp: true,
-      value: `Launching the SCli "<primary>${
+      value: `<yellow>${__sugarHeading}</yellow>\n\nLaunching the SCli "<primary>${
         this._settings.name || this._settings.id
       }</primary>" process...`
-    });
+    };
+    this.trigger('log', launchingLogObj);
+    this._runningProcess.trigger('log', launchingLogObj);
 
     // save running process params
     this._runningParamsObj = paramsObj;
 
     // listen for some events on the process
     this._runningProcess.on('cancel,finally', () => {
+      this.trigger('log', {
+        value: 'PLOP'
+      });
       this._runningProcess = null;
       this._runningParamsObj = null;
     });
@@ -380,4 +387,6 @@ module.exports = class SCli extends __SPromise {
     if (!this._runningProcess) return;
     return this._runningProcess.cancel();
   }
-};
+}
+
+module.exports = __SInterface.implements(SCli, __SCliInterface);

@@ -1,1 +1,0 @@
-{"version":3,"sources":["camelize.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,6BAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.string\n * @src             ../../../js/string/camelize.js\n */\nmodule.exports = require('../../../js/string/camelize');\n"]}

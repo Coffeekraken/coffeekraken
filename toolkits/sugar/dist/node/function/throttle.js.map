@@ -1,1 +1,0 @@
-{"version":3,"sources":["throttle.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,+BAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.function\n * @src             ../../../js/function/throttle.js\n */\nmodule.exports = require('../../../js/function/throttle');\n"]}

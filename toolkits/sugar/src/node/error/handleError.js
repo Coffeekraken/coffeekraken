@@ -21,41 +21,11 @@ const __parseHtml = require('../terminal/parseHtml');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function handleError(error) {
-  let errorArray = [];
-
-  if (error.name && error.name !== 'Error') {
-    errorArray.push(error.name);
-    errorArray.push('\n');
-  }
-  if (error.fileName && error.lineNumber) {
-    errorArray.push(error.fileName + ':' + error.lineNumber);
-    errorArray.push('\n');
-  }
-  if (error.stack) {
-    errorArray.push(error.message.replace(__packageRoot() + '/', ''));
-    let stack = error.stack.replace('Error: ', '').split('at ').join('\n\nat ');
-    const files = stack.match(/at\s(.*)\((.*)\)/g);
-    files.forEach((file) => {
-      const matches = file.match(/[0-9]+:[0-9]+/);
-      if (matches) {
-        file = file.replace(matches[0], `<magenta>${matches[0]}</magenta>`);
-      }
-      errorArray.push(' ');
-      errorArray.push(
-        `${file
-          .replace('(', '\n<cyan>')
-          .replace(')', '</cyan>')
-          .replace(__packageRoot() + '/', '')}`
-      );
-    });
-  } else if (error.message) errorArray.push(error.message);
-
   if (__isChildProcess()) {
-    console.log(errorArray.join('\n'));
+    console.log(error.toString());
   } else {
-    throw __parseHtml(error.error || error);
-    const serror = new __SError(error.error || error);
-    console.log(serror.message);
-    process.exit();
+    error.message = __parseHtml(error.message);
+    error.stack = '';
+    throw error;
   }
 };

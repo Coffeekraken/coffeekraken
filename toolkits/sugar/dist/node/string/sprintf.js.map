@@ -1,1 +1,0 @@
-{"version":3,"sources":["sprintf.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,4BAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.string\n * @src             ../../../js/string/sprintf.js\n */\nmodule.exports = require('../../../js/string/sprintf');\n"]}

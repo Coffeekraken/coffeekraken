@@ -591,6 +591,8 @@ export default class SPromise extends Promise {
   async trigger(what, arg, _metas = {}) {
     if (this._isDestroyed) return;
 
+    if (what.includes('log')) await __wait(0);
+
     // triger the passed stacks
     return this._triggerStacks(what, arg, _metas);
   }

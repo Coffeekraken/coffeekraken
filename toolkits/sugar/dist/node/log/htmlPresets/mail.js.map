@@ -1,1 +1,0 @@
-{"version":3,"sources":["mail.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,qCAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.log.htmlPresets\n * @src               ../../../../js/log/htmlPresets/mail.js\n */\nmodule.exports = require('../../../../js/log/htmlPresets/mail');\n"]}

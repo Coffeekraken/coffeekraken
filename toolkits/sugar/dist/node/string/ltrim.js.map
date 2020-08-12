@@ -1,1 +1,0 @@
-{"version":3,"sources":["ltrim.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,0BAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.string\n * @src             ../../../js/string/ltrim.js\n */\nmodule.exports = require('../../../js/string/ltrim');\n"]}

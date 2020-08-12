@@ -1,5 +1,7 @@
 import __parseHtml from '../../console/parseHtml';
 import __toString from '../../string/toString';
+import __deepMerge from '../../object/deepMerge';
+import validateObjectDefinitionObject from '../object/validateObjectDefinitionObject';
 
 /**
  * @name                validateValueOutputString
@@ -26,13 +28,19 @@ import __toString from '../../string/toString';
  * @since       2.0.0
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function validateValueOutputString(validateValueResultObj) {
+export default function validateValueOutputString(
+  validateValueResultObj,
+  settings = {}
+) {
   let issuesArray = [];
 
-  if (validateValueResultObj.name) {
-    issuesArray.push(
-      `<yellow>│</yellow> <underline><bold>${validateValueResultObj.name}</bold></underline>\n<yellow>│</yellow>`
-    );
+  settings = __deepMerge({
+    name: settings.name || validateValueResultObj.name,
+    interface: settings.interface || validateValueResultObj.interface
+  });
+
+  if (settings.name) {
+    issuesArray.push(`<yellow>│</yellow> ${settings.name}\n<yellow>│</yellow>`);
   }
 
   if (validateValueResultObj.received) {
@@ -70,6 +78,11 @@ export default function validateValueOutputString(validateValueResultObj) {
               return `"<green>${v}</green>"`;
             })
             .join(', ')}]`
+        );
+        break;
+      case 'lazy':
+        issuesArray.push(
+          `<yellow>│</yellow> - This property is specified as a <yellow>lazy</yellow> one`
         );
         break;
       case 'static':

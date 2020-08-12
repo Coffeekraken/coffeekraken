@@ -260,10 +260,10 @@ module.exports = class SComponent extends __blessed.box {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   allowRender() {
-    clearTimeout(this._updateTimeout);
-    this._updateTimeout = setTimeout(() => {
-      this.update();
-    }, 20);
+    // clearTimeout(this._updateTimeout);
+    // this._updateTimeout = setTimeout(() => {
+    //   this.update();
+    // }, 20);
     return this._allowRender;
   }
 };

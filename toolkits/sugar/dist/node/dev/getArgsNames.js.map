@@ -1,1 +1,0 @@
-{"version":3,"sources":["getArgsNames.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,8BAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.dev\n * @src             ../../../js/dev/getArgsNames.js\n */\nmodule.exports = require('../../../js/dev/getArgsNames');\n"]}

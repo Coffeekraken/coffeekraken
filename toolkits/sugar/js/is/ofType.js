@@ -130,7 +130,8 @@ function ofType(value, argTypeDefinition) {
             }
           } // check for "custom" types
           else if ((0, _class.default)(value) && value.name) {
-              if (definitionObj.type === value.name) return {
+              var classesStack = getBaseClass(value);
+              if (classesStack.indexOf(definitionObj.type) !== -1) return {
                 v: true
               };
             } else if (value && value.constructor && value.constructor.name) {
@@ -147,6 +148,27 @@ function ofType(value, argTypeDefinition) {
   }
 
   return issueObj;
+}
+
+function getBaseClass(targetClass) {
+  var stack = [];
+
+  if (targetClass instanceof Function) {
+    var baseClass = targetClass;
+
+    while (baseClass) {
+      var newBaseClass = Object.getPrototypeOf(baseClass);
+
+      if (newBaseClass && newBaseClass !== Object && newBaseClass.name) {
+        stack.push(newBaseClass.name);
+        baseClass = newBaseClass;
+      } else {
+        break;
+      }
+    }
+
+    return stack;
+  }
 }
 
 module.exports = exports.default;

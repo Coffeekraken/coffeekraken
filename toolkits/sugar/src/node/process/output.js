@@ -23,7 +23,7 @@ const __SOutput = require('../blessed/SOutput');
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = (proc, settings = {}) => {
-  const output = new __SOutput(proc, settings);
+module.exports = (source, settings = {}) => {
+  const output = new __SOutput(source, settings);
   output.attach();
 };

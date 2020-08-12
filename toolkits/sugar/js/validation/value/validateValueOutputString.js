@@ -9,6 +9,10 @@ var _parseHtml = _interopRequireDefault(require("../../console/parseHtml"));
 
 var _toString = _interopRequireDefault(require("../../string/toString"));
 
+var _deepMerge = _interopRequireDefault(require("../../object/deepMerge"));
+
+var _validateObjectDefinitionObject = _interopRequireDefault(require("../object/validateObjectDefinitionObject"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -36,11 +40,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @since       2.0.0
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function validateValueOutputString(validateValueResultObj) {
-  var issuesArray = [];
+function validateValueOutputString(validateValueResultObj, settings) {
+  if (settings === void 0) {
+    settings = {};
+  }
 
-  if (validateValueResultObj.name) {
-    issuesArray.push("<yellow>\u2502</yellow> <underline><bold>".concat(validateValueResultObj.name, "</bold></underline>\n<yellow>\u2502</yellow>"));
+  var issuesArray = [];
+  settings = (0, _deepMerge.default)({
+    name: settings.name || validateValueResultObj.name,
+    interface: settings.interface || validateValueResultObj.interface
+  });
+
+  if (settings.name) {
+    issuesArray.push("<yellow>\u2502</yellow> ".concat(settings.name, "\n<yellow>\u2502</yellow>"));
   }
 
   if (validateValueResultObj.received) {
@@ -67,6 +79,10 @@ function validateValueOutputString(validateValueResultObj) {
         issuesArray.push("<yellow>\u2502</yellow> - The allowed values are [".concat(validateValueResultObj.expected.values.map(v => {
           return "\"<green>".concat(v, "</green>\"");
         }).join(', '), "]"));
+        break;
+
+      case 'lazy':
+        issuesArray.push("<yellow>\u2502</yellow> - This property is specified as a <yellow>lazy</yellow> one");
         break;
 
       case 'static':

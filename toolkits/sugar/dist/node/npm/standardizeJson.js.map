@@ -1,1 +1,0 @@
-{"version":3,"sources":["standardizeJson.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,iCAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.npm\n * @src               ../../../js/npm/standardizeJson.js\n */\nmodule.exports = require('../../../js/npm/standardizeJson');\n"]}

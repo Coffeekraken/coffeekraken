@@ -64,6 +64,10 @@ export default function validateValue(value, definitionObj, settings = {}) {
     return true;
   }
 
+  if (definitionObj.lazy) {
+    issueObj.issues.push('lazy');
+  }
+
   // validate type
   if (definitionObj.type) {
     const isOfTypeResult = __isOfType(value, definitionObj.type);

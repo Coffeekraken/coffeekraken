@@ -1,1 +1,0 @@
-{"version":3,"sources":["STest.ts"],"names":["coco","require","plop","console","log"],"mappings":";;AAAA,IAAMA,IAAI,GAAGC,OAAO,CAAC,UAAD,CAApB;;AACA,IAAMC,IAAI,GAAGD,OAAO,CAAC,WAAD,CAApB;;AAEAE,OAAO,CAACC,GAAR,CAAY,MAAZ","sourcesContent":["const coco = require('chokidar');\nconst plop = require('./SOutput');\n\nconsole.log('COCO');\n"]}

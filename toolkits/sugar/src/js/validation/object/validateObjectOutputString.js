@@ -1,6 +1,7 @@
 import __validateValueOutputString from '../value/validateValueOutputString';
 import __parseHtml from '../../console/parseHtml';
 import __trimLines from '../../string/trimLines';
+import validateObjectDefinitionObject from './validateObjectDefinitionObject';
 
 /**
  * @name                validateObjectOutputString
@@ -41,17 +42,22 @@ export default function validateObjectOutputString(validateObjectResultObj) {
 
   stringsArray.push(
     __trimLines(`
-  <underline><bold>Object validation</bold></underline>
+  <underline><green>Object validation</green></underline>
 
-  - Name: <yellow>${validateObjectResultObj.name || 'unnamed'}</yellow>
-  - Error${validateObjectResultObj.issues.length > 1 ? 's' : ''}: <red>${
-      validateObjectResultObj.issues.length
-    }</red>
-  - Propert${
-    validateObjectResultObj.issues.length > 1 ? 'ies' : 'y'
-  }: ${validateObjectResultObj.issues
+  ${
+    validateObjectResultObj.interface
+      ? `- Interface:  <cyan>${validateObjectResultObj.interface}</cyan>`
+      : ''
+  }
+  - Name:       <yellow>${validateObjectResultObj.name || 'unnamed'}</yellow>
+  - Error${validateObjectResultObj.issues.length > 1 ? 's' : ''}:${
+      validateObjectResultObj.issues.length > 1 ? '' : ' '
+    }     <red>${validateObjectResultObj.issues.length}</red>
+  - Propert${validateObjectResultObj.issues.length > 1 ? 'ies' : 'y'}:${
+      validateObjectResultObj.issues.length > 1 ? '' : '  '
+    } ${validateObjectResultObj.issues
       .map((v) => {
-        return `<red>${v}</red>`;
+        return `<magenta>${v}</magenta>`;
       })
       .join(', ')}`)
   );
@@ -59,7 +65,8 @@ export default function validateObjectOutputString(validateObjectResultObj) {
   validateObjectResultObj.issues.forEach((attrName) => {
     const attrIssueObj = validateObjectResultObj[attrName];
     const string = __validateValueOutputString(attrIssueObj, {
-      name: attrName
+      interface: validateObjectResultObj.interface,
+      name: `<yellow>${validateObjectResultObj.name}</yellow>.<magenta>${attrName}</magenta>`
     });
     stringsArray.push(string);
   });

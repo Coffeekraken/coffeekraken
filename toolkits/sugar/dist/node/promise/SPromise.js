@@ -1,7 +1,0 @@
-"use strict";
-
-/**
- * @namespace           node.promise
- * @src             ../../../js/promise/SPromise.js
- */
-module.exports = require('../../../js/promise/SPromise');

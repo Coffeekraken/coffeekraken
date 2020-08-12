@@ -1,1 +1,0 @@
-{"version":3,"sources":["edge.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,qBAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.is\n * @src               ../../../js/is/edge.js\n */\nmodule.exports = require('../../../js/is/edge');\n"]}

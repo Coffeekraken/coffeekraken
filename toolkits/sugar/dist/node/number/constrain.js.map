@@ -1,1 +1,0 @@
-{"version":3,"sources":["constrain.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,8BAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.number\n * @src               ../../../js/number/constrain.js\n */\nmodule.exports = require('../../../js/number/constrain');\n"]}

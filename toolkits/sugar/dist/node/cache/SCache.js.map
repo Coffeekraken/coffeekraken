@@ -1,1 +1,0 @@
-{"version":3,"sources":["SCache.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,0BAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.cache\n * @src             ../../../js/cache/SCache.js\n */\nmodule.exports = require('../../../js/cache/SCache');\n"]}

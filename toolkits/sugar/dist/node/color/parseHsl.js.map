@@ -1,1 +1,0 @@
-{"version":3,"sources":["parseHsl.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,4BAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.color\n * @src             ../../../js/color/parseHsl.js\n */\nmodule.exports = require('../../../js/color/parseHsl');\n"]}

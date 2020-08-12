@@ -51,10 +51,13 @@ var SError = /*#__PURE__*/function (_Error) {
       var packageRoot = (0, _packageRoot.default)();
       var stack = _this.stack;
       var stackArray = [];
-      stack.split(/\s+?at\s/).forEach(l => {
-        stackArray.push("at <cyan>".concat(l.replace(packageRoot, ''), "</cyan>"));
+      stack.split(/\s+?at\s/).filter(l => {
+        if (l.trim() === 'Error') return false;
+        return true;
+      }).forEach(l => {
+        stackArray.push("<cyan>\u2502</cyan> at <cyan>".concat(l.replace(packageRoot, ''), "</cyan>"));
       });
-      var errorString = (0, _trimLines.default)((0, _parseHtml.default)("<underline><bold><red>".concat(_this.constructor.name, "</red></bold></underline>\n\n        ").concat(message, "\n\n        ").concat(stackArray.join('\n')))); // this.syscall = null;
+      var errorString = (0, _trimLines.default)((0, _parseHtml.default)("<underline><bold><red>".concat(_this.constructor.name, "</red></bold></underline>\n\n        ").concat(message, "\n        <cyan><underline>Stack</underline></cyan>\n\n        ").concat(stackArray.join('\n')))); // this.syscall = null;
       // this.code = null;
       // this.property = null;
 

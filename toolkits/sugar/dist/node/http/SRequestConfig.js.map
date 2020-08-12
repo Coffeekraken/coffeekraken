@@ -1,1 +1,0 @@
-{"version":3,"sources":["SRequestConfig.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,iCAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.http\n * @src               ../../../js/http/SRequestConfig.js\n */\nmodule.exports = require('../../../js/http/SRequestConfig');\n"]}

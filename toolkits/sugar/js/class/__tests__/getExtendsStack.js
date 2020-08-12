@@ -1,18 +1,5 @@
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _SError2 = _interopRequireDefault(require("./SError"));
-
-var _validateObjectOutputString = _interopRequireDefault(require("../validation/object/validateObjectOutputString"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -27,21 +14,47 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-var SObjectValidationError = /*#__PURE__*/function (_SError) {
-  _inherits(SObjectValidationError, _SError);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-  var _super = _createSuper(SObjectValidationError);
+module.exports = __getExtendsStack => {
+  var MyClass = function MyClass() {
+    _classCallCheck(this, MyClass);
+  };
 
-  function SObjectValidationError(issuesObj) {
-    _classCallCheck(this, SObjectValidationError);
+  var MyOtherClass = /*#__PURE__*/function (_MyClass) {
+    _inherits(MyOtherClass, _MyClass);
 
-    console.log(issuesObj);
-    var string = (0, _validateObjectOutputString.default)(issuesObj);
-    return _super.call(this, string);
-  }
+    var _super = _createSuper(MyOtherClass);
 
-  return SObjectValidationError;
-}(_SError2.default);
+    function MyOtherClass() {
+      _classCallCheck(this, MyOtherClass);
 
-exports.default = SObjectValidationError;
-module.exports = exports.default;
+      return _super.apply(this, arguments);
+    }
+
+    return MyOtherClass;
+  }(MyClass);
+
+  var FinalClass = /*#__PURE__*/function (_MyOtherClass) {
+    _inherits(FinalClass, _MyOtherClass);
+
+    var _super2 = _createSuper(FinalClass);
+
+    function FinalClass() {
+      _classCallCheck(this, FinalClass);
+
+      return _super2.apply(this, arguments);
+    }
+
+    return FinalClass;
+  }(MyOtherClass);
+
+  describe('sugar.js.class.getExtendsStack', () => {
+    it('Should return the correct extends stack', () => {
+      expect(__getExtendsStack(FinalClass)).toEqual(['MyOtherClass', 'MyClass']);
+    });
+    it('Should return the correct extends stack from an instance', () => {
+      expect(__getExtendsStack(new FinalClass())).toEqual(['MyOtherClass', 'MyClass']);
+    });
+  });
+};

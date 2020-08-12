@@ -1,1 +1,0 @@
-{"version":3,"sources":["SLog.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,sBAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.log\n * @src               ../../../js/log/SLog.js\n */\nmodule.exports = require('../../../js/log/SLog');\n"]}

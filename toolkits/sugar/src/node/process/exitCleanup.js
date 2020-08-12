@@ -6,6 +6,9 @@ const __hotkey = require('../keyboard/hotkey');
 const __spawn = require('../process/spawn');
 const __parseHtml = require('../terminal/parseHtml');
 const __keypress = require('keypress');
+const __wait = require('../time/wait');
+const __SOutput = require('../blessed/SOutput');
+const __sugarHeading = require('../ascii/sugarHeading');
 
 /**
  * @name              exitCleanup
@@ -34,83 +37,98 @@ module.exports = function exitCleanup(handler = null, settings = {}) {
   }).on('press', async () => {
     // check if all processes are closed
     const processes = __getRegisteredProcessed();
-    const processesCount = Object.keys(processes).length;
+    const remainingProcessesCount = Object.keys(processes).length;
 
-    let remainingProcessesCount = Object.keys(processes).length;
+    __hotkey('ctrl+c', {
+      once: true
+    }).on('press', () => {
+      process.exit();
+    });
 
     __keypress.disableMouse(process.stdout);
 
-    console.log(
-      __parseHtml(
-        '  Cleaning your system after <primary>Sugar</primary> execution...'
-      )
-    );
+    // destroy the screen if exists
+    if (global._screen) global._screen.destroy();
 
-    async function processKilled() {
-      remainingProcessesCount--;
-      if (remainingProcessesCount <= 0) {
-        console.log(__parseHtml('  Cleaning the forgotten process(es)...'));
-        const pro = __spawn('sugar util.kill all', {
-          id: 'cleanup'
-        })
-          .on('log,error', (value) => {
-            console.log(__parseHtml(`    - ${value.value}`));
-          })
-          .on('cancel,finally', () => {
-            console.log(
-              __parseHtml(
-                `  All of the <cyan>${processesCount}</cyan> process(es) have been <green>successfully</green> closed`
-              )
-            );
-            process.exit();
-          });
-      }
-    }
+    await __wait(50);
 
+    const $output = new __SOutput([], {});
+    $output.attach();
+
+    $output.log({
+      value: `<yellow>${__sugarHeading}</yellow>`
+    });
+
+    $output.log({
+      value: 'Cleaning your system after <primary>Sugar</primary> execution...'
+    });
+
+    // processed that have been registered during the process
     if (remainingProcessesCount > 0) {
       Object.keys(processes).forEach(async (key) => {
         const processObj = processes[key];
-        if (processObj.hasAfterCommand && processObj.hasAfterCommand()) {
-          function waitForClose() {
-            const p = new Promise((resolve) => {
-              processObj
-                .on('close', () => {
-                  resolve();
-                })
-                .on('log,error', (value) => {
-                  console.log(__parseHtml(`  ${value.value}`));
-                });
-            });
-            return p;
-          }
-          await waitForClose();
-          processKilled();
-        } else if (!processObj.exitCode && process.pid !== processObj.pid) {
-          console.log(
-            __parseHtml(
-              `  Killing the process with the PID <cyan>${processObj.pid}</cyan>`
-            )
-          );
+        // if (processObj.hasAfterCommand && processObj.hasAfterCommand()) {
+        //   function waitForClose() {
+        //     const p = new Promise((resolve) => {
+        //       processObj
+        //         .on('close', () => {
+        //           resolve();
+        //         })
+        //         .on('log,error', (value) => {
+        //           $output.log({
+        //             value: __parseHtml(`  ${value.value}`)
+        //           });
+        //         });
+        //     });
+        //     return p;
+        //   }
+        //   await waitForClose();
+        //   processKilled();
+        // } else
+        if (!processObj.exitCode && process.pid !== processObj.pid) {
+          $output.log({
+            group: key,
+            value: `Killing the process with the PID <cyan>${processObj.pid}</cyan>`
+          });
           await __fkill(processObj.pid);
-          processKilled();
+          $output.log({
+            group: key,
+            value: `#success The process has been killed <green>successfully</green>`
+          });
+          // processKilled();
         } else {
           processKilled();
         }
       });
-    } else {
-      console.log(__parseHtml('  Cleaning the forgotten process(es)...'));
-      await __spawn('sugar util.kill all')
-        .on('log,error', (value) => {
-          console.log(__parseHtml(`    - ${value.value}`));
-        })
-        .on('cancel,finally', () => {
-          console.log(
-            __parseHtml(
-              `  All of the <cyan>${processesCount}</cyan> process(es) have been <green>successfully</green> closed`
-            )
-          );
-          process.exit();
-        });
     }
+
+    // Forgotten processes
+    $output.log({
+      group: 'Forgotten processes',
+      value: 'Cleaning the forgotten process(es)...'
+    });
+    await __spawn('sugar util.kill all')
+      .on('log,error', (value) => {
+        $output.log({
+          group: 'Forgotten processes',
+          value: __parseHtml(`    - ${value.value}`)
+        });
+      })
+      .on('cancel,finally', async () => {
+        $output.log({
+          group: 'Forgotten processes',
+          value: `#success All of the forgotten process(es) have been <green>successfully</green> killed`
+        });
+
+        await __wait(20);
+
+        $output.log({
+          value: `Closing the main process in <yellow>5s</yellow>...\n- <cyan>ctrl+c</cyan> to close directly`
+        });
+
+        await __wait(5000);
+
+        process.exit();
+      });
   });
 };

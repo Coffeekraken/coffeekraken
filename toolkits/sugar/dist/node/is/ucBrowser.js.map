@@ -1,1 +1,0 @@
-{"version":3,"sources":["ucBrowser.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,0BAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.is\n * @src               ../../../js/is/ucBrowser.js\n */\nmodule.exports = require('../../../js/is/ucBrowser');\n"]}

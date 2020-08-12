@@ -187,17 +187,17 @@ module.exports = (args = {}) => {
     );
   });
 
+  server.listen(settings.express.port, settings.express.hostname);
+
   promise.trigger('log', {
     type: 'header',
     value: __trimLines(`Your <primary>Frontend Express</primary> server is <green>up and running</green>:
 
-      - Hostname        : <yellow>${settings.hostname}</yellow>
-      - Port            : <yellow>${settings.port}</yellow>
-      - Root directory  : <yellow>${settings.rootDir}</yellow>
-      - URL             : <cyan>http://${settings.hostname}:${settings.port}</cyan>`)
+        - Hostname        : <yellow>${settings.hostname}</yellow>
+        - Port            : <yellow>${settings.port}</yellow>
+        - Root directory  : <yellow>${settings.rootDir}</yellow>
+        - URL             : <cyan>http://${settings.hostname}:${settings.port}</cyan>`)
   });
-
-  server.listen(settings.express.port, settings.express.hostname);
 
   return promise;
 };

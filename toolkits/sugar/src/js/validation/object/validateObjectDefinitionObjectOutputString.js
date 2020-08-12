@@ -79,7 +79,7 @@ export default function validateObjectDefinitionObjectOutputString(
           validateObjectDefinitionObjectResultObj[attrName][issueName];
 
         const string = __validateValueOutputString(attrIssueObj, {
-          name: attrName
+          name: `${validateObjectDefinitionObjectResultObj.name}.${attrName}`
         });
         stringsArray.push(string);
       }

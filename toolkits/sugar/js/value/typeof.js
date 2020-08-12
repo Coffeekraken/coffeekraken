@@ -107,7 +107,12 @@ function typeOf(value, settings) {
 
     case 'string':
     default:
-      return "".concat(resultObj.type).concat(resultObj.of ? "<".concat(resultObj.of.join('|'), ">") : '');
+      if (settings.of && resultObj.of && resultObj.of.length) {
+        return "".concat(resultObj.type).concat(resultObj.of ? "<".concat(resultObj.of.join('|'), ">") : '');
+      } else {
+        return "".concat(resultObj.type);
+      }
+
       break;
   }
 }

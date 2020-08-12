@@ -1,1 +1,0 @@
-{"version":3,"sources":["SDocblockBlock.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,qCAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.docblock\n * @src             ../../../js/docblock/SDocblockBlock.js\n */\nmodule.exports = require('../../../js/docblock/SDocblockBlock');\n"]}

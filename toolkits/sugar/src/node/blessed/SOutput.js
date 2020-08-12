@@ -9,8 +9,9 @@ const __toString = require('../string/toString');
 const __stripAnsi = require('strip-ansi');
 const __trimLines = require('../string/trimLines');
 const __extractValues = require('../object/extractValues');
-const __SOutputProcessInterface = require('./interface/SOutputProcessInterface');
 const __SOutputLogInterface = require('./interface/SOutputLogInterface');
+const __SOutputSourceInterface = require('./interface/SOutputSourceInterface');
+const __wait = require('../time/wait');
 
 /**
  * @name                  SOutput
@@ -93,10 +94,7 @@ module.exports = class SOutput extends __SComponent {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(process, settings = {}) {
-    // apply some interfaces
-    __SOutputProcessInterface.apply(process);
-
+  constructor(source, settings = {}) {
     const _settings = __deepMerge(
       {
         filter: null,
@@ -107,16 +105,28 @@ module.exports = class SOutput extends __SComponent {
     );
     // extends SPanel
     super(_settings);
-    // save the process
-    this._process = process;
-    // subscribe to the process
-    this._subscribeToProcess();
+
+    if (!Array.isArray(source)) source = [source];
+
+    source.forEach((s) => {
+      console.log('COCOCOCO');
+
+      __SOutputSourceInterface.apply(s, {
+        title: 'SOutput source issue',
+        description:
+          'One of the passed "source" for the SOutput class does not answer the minimal requirements of the "SOutputSourceInterface"...'
+      });
+
+      // subscribe to the process
+      this._subscribeToSource(s);
+    });
+
     // generate keys UI
     this._createLogBox();
   }
 
   /**
-   * @name          _subscribeToProcess
+   * @name          _subscribeToSource
    * @type          Function
    * @private
    *
@@ -125,43 +135,34 @@ module.exports = class SOutput extends __SComponent {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _subscribeToProcess() {
+  _subscribeToSource(s) {
     // subscribe to data
-    this._process
-      .on('close', (data) => {
-        // this.log(
-        //   `Closing process with code <red>${data.code}</red> and signal <red>${data.signal}</red>...`
-        // );
-        // this.update();
+    s.on('close', (data) => {
+      this.log({
+        value: `Closing process with code <red>${data.code}</red> and signal <red>${data.signal}</red>...`
+      });
+      this.update();
+    })
+      .on('success', (data) => {
+        this.log({
+          value: `#success The process has been finished <green>successfully</green>`
+        });
+      })
+      .on('error', (error) => {
+        this.log({
+          error: true,
+          value: error.error || error
+        });
       })
       .on('*.start', () => {
-        // if (this._settings.clearOnStart) {
-        //   this.clear();
-        // }
+        this.log({
+          clear: true,
+          value: `Launching the process...`
+        });
       })
       .on('log', (...data) => {
         this.log(...data);
       });
-    // .on('error', (data) => {
-    //   if (data.error) {
-    //     if (typeof data.error === 'string') {
-    //       this.log(`<red>${data.error}</red>`);
-    //     } else if (data.error.message) {
-    //       this.log(`<red>${data.error.message}</red>`);
-    //     }
-    //     if (data.error.stack) this.log(data.error.stack);
-    //     if (data.error.trace) this.log(data.error.trace);
-    //   } else {
-    //     this.log(
-    //       data.value && data.value.value
-    //         ? data.value.value
-    //         : data.value
-    //         ? data.value
-    //         : data
-    //     );
-    //   }
-    //   this.update();
-    // })
   }
 
   /**
@@ -305,12 +306,15 @@ module.exports = class SOutput extends __SComponent {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  log(...args) {
+  async log(...args) {
+    await __wait(100);
+
     let logsObjArray = this._parseLog(...args);
 
     // filter the content to remove the "temp" logs
     this._content = this._content.filter((logObj) => {
-      if (logObj.temp) {
+      // console.log(logObj);
+      if (logObj.temp && logObj.$box) {
         this._lastY -= logObj.$box.height;
         if (logObj.$box) logObj.$box.destroy();
         return false;
@@ -452,8 +456,11 @@ module.exports = class SOutput extends __SComponent {
         this._lastY += $box.getScrollHeight() + 1;
       }
     });
-    this._logBox.setScrollPerc(100);
-    super.update();
+
+    setTimeout(() => {
+      this._logBox.setScrollPerc(100);
+      super.update();
+    }, 200);
   }
 
   /**

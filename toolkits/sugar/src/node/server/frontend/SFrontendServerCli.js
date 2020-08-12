@@ -1,6 +1,7 @@
 const __SExpressServerCli = require('../express/SExpressServerCli');
 const __frontendServer = require('../frontend/frontend');
 const __SPromise = require('../../promise/SPromise');
+const __SFrontendServerProcess = require('./SFrontendServerProcess');
 
 /**
  * @name            SFrontendServerCli
@@ -24,6 +25,17 @@ module.exports = class SFrontendServerCli extends __SExpressServerCli {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   static command = 'sugar server.frontend %arguments';
+
+  /**
+   * @name          processClass
+   * @type          SProcess
+   * @static
+   *
+   * Store the process class that will be used to run the frontend server
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static processClass = __SFrontendServerProcess;
 
   /**
    * @name          definitionObj
@@ -53,37 +65,5 @@ module.exports = class SFrontendServerCli extends __SExpressServerCli {
       name: 'Frontend Server',
       ...settings
     });
-  }
-
-  /**
-   * @name            _run
-   * @type            Function
-   * @private
-   *
-   * This method is the one that will be called once you call ```run```.
-   * The params passed are processed by the ```run``` parent method so you can
-   * confidently trust them.
-   * You MUST return an SPromise instance so that the spawned process can be
-   * managed automatically in the parent ```run``` method.
-   *
-   * @param       {Object}        argsObj         The object of passed arguments
-   * @param       {Object}        [settings={}]     The passed settings object
-   * @return      {SPromise}                      An SPromise instance through which the parent method can register for events like "success", "log", etc...
-   *
-   * @since       2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _run(argsObj, settings = {}) {
-    return new __SPromise(
-      async function (resolve, reject, trigger, cancel) {
-        const serverPromise = __frontendServer(argsObj);
-        __SPromise.pipe(serverPromise, this);
-        const res = await serverPromise;
-        resolve(res);
-      },
-      {
-        id: 'cli.server.frontend'
-      }
-    ).start();
   }
 };

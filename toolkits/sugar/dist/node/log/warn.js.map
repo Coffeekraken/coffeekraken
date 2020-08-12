@@ -1,1 +1,0 @@
-{"version":3,"sources":["warn.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,sBAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.log\n * @src               ../../../js/log/warn.js\n */\nmodule.exports = require('../../../js/log/warn');\n"]}

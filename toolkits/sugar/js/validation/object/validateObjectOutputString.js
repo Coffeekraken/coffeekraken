@@ -11,6 +11,8 @@ var _parseHtml = _interopRequireDefault(require("../../console/parseHtml"));
 
 var _trimLines = _interopRequireDefault(require("../../string/trimLines"));
 
+var _validateObjectDefinitionObject = _interopRequireDefault(require("./validateObjectDefinitionObject"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -49,13 +51,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 function validateObjectOutputString(validateObjectResultObj) {
   var stringsArray = [];
-  stringsArray.push((0, _trimLines.default)("\n  <underline><bold>Object validation</bold></underline>\n\n  - Name: <yellow>".concat(validateObjectResultObj.name || 'unnamed', "</yellow>\n  - Error").concat(validateObjectResultObj.issues.length > 1 ? 's' : '', ": <red>").concat(validateObjectResultObj.issues.length, "</red>\n  - Propert").concat(validateObjectResultObj.issues.length > 1 ? 'ies' : 'y', ": ").concat(validateObjectResultObj.issues.map(v => {
-    return "<red>".concat(v, "</red>");
+  stringsArray.push((0, _trimLines.default)("\n  <underline><green>Object validation</green></underline>\n\n  ".concat(validateObjectResultObj.interface ? "- Interface:  <cyan>".concat(validateObjectResultObj.interface, "</cyan>") : '', "\n  - Name:       <yellow>").concat(validateObjectResultObj.name || 'unnamed', "</yellow>\n  - Error").concat(validateObjectResultObj.issues.length > 1 ? 's' : '', ":").concat(validateObjectResultObj.issues.length > 1 ? '' : ' ', "     <red>").concat(validateObjectResultObj.issues.length, "</red>\n  - Propert").concat(validateObjectResultObj.issues.length > 1 ? 'ies' : 'y', ":").concat(validateObjectResultObj.issues.length > 1 ? '' : '  ', " ").concat(validateObjectResultObj.issues.map(v => {
+    return "<magenta>".concat(v, "</magenta>");
   }).join(', '))));
   validateObjectResultObj.issues.forEach(attrName => {
     var attrIssueObj = validateObjectResultObj[attrName];
     var string = (0, _validateValueOutputString.default)(attrIssueObj, {
-      name: attrName
+      interface: validateObjectResultObj.interface,
+      name: "<yellow>".concat(validateObjectResultObj.name, "</yellow>.<magenta>").concat(attrName, "</magenta>")
     });
     stringsArray.push(string);
   });

@@ -13,6 +13,7 @@ const __SInterface = require('../../class/SInterface');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = class SProcessInterface extends __SInterface {
+  static extendsArray = ['SProcess', 'SPromise'];
   static definitionObj = {
     state: {
       type: 'String',
@@ -20,10 +21,6 @@ module.exports = class SProcessInterface extends __SInterface {
       values: ['idle', 'running', 'error', 'success', 'watching']
     },
     run: {
-      type: 'Function',
-      required: true
-    },
-    flop: {
       type: 'Function',
       required: true
     }

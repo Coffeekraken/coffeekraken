@@ -1,7 +1,8 @@
 const __SInterface = require('../../class/SInterface');
 const __SOutputProcessInterface = require('./SOutputProcessInterface');
 const __SProcessInterface = require('../../process/interface/SProcessInterface');
-const SOutputLogInterface = require('./SOutputLogInterface');
+const __SOutputLogInterface = require('./SOutputLogInterface');
+const __SCliInterface = require('../../cli/interface/SCliInterface');
 
 /**
  * @name                SAppCommandInterface
@@ -16,14 +17,9 @@ const SOutputLogInterface = require('./SOutputLogInterface');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = class SAppCommandInterface extends __SInterface {
-  static definitionObj = {
-    ...__SOutputProcessInterface.definitionObj,
-    process: {
-      type: 'Object',
-      required: true,
-      definitionObj: __SProcessInterface.definitionObj
-    }
-  };
+  // static implementsArray = [__SCliInterface];
+
+  // static definitionObj = {};
 
   static title = 'SApp Command Interface';
   static description =

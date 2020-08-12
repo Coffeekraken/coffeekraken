@@ -61,7 +61,7 @@ function validateObjectDefinitionObjectOutputString(validateObjectDefinitionObje
     validateObjectDefinitionObjectResultObj[attrName].issues.forEach(issueName => {
       var attrIssueObj = validateObjectDefinitionObjectResultObj[attrName][issueName];
       var string = (0, _validateValueOutputString.default)(attrIssueObj, {
-        name: attrName
+        name: "".concat(validateObjectDefinitionObjectResultObj.name, ".").concat(attrName)
       });
       stringsArray.push(string);
     });

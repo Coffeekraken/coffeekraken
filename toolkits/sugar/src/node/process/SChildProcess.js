@@ -231,12 +231,12 @@ module.exports = class SChildProcess extends __SPromise {
       );
 
       // listen for ctrl+c to kill the child process
-      __hotkey('ctrl+c', {
-        once: true
-      }).on('press', () => {
-        // console.log('THIEHIU');
-        childProcess.kill();
-      });
+      // __hotkey('ctrl+c', {
+      //   once: true
+      // }).on('press', () => {
+      //   // console.log('THIEHIU');
+      //   // childProcess.kill();
+      // });
 
       // register this child process globally
       __registerProcess(childProcess, runningProcess.id);
@@ -271,6 +271,15 @@ module.exports = class SChildProcess extends __SPromise {
           runningProcess.after = await settings.after.run();
         }
 
+        promise.trigger(runningProcess.state, {
+          time: Date.now(),
+          process: Object.assign({}, runningProcess)
+        });
+        this.trigger(`${runningProcessId}.${runningProcess.state}`, {
+          time: Date.now(),
+          process: Object.assign({}, runningProcess)
+        });
+
         promise[what]({
           ...runningProcess,
           ...extendObj,
@@ -279,6 +288,19 @@ module.exports = class SChildProcess extends __SPromise {
         });
       };
       childProcess.on('close', (code, signal) => {
+        promise.trigger('close', {
+          time: Date.now(),
+          process: Object.assign({}, runningProcess),
+          code,
+          signal
+        });
+        this.trigger(`${runningProcessId}.close`, {
+          time: Date.now(),
+          process: Object.assign({}, runningProcess),
+          code,
+          signal
+        });
+
         if (!code && signal) {
           runningProcess.state = 'killed';
           resolveOrReject('reject', {}, code, signal);
@@ -300,6 +322,7 @@ module.exports = class SChildProcess extends __SPromise {
 
       // error
       childProcess.on('error', (error) => {
+        console.log('EOEOEOE', error);
         runningProcess.state = 'error';
         resolveOrReject(
           'reject',

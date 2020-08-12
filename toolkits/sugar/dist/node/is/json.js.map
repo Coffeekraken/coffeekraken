@@ -1,1 +1,0 @@
-{"version":3,"sources":["json.js"],"names":["module","exports","require"],"mappings":";;AAAA;;;;AAIAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,qBAAD,CAAxB","sourcesContent":["/**\n * @namespace           node.is\n * @src               ../../../js/is/json.js\n */\nmodule.exports = require('../../../js/is/json');\n"]}

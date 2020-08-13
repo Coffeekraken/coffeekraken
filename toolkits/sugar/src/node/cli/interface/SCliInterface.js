@@ -20,10 +20,15 @@ module.exports = class SCliInterface extends __SInterface {
       required: true,
       static: true
     },
-    process: {
+    definitionObj: {
       type: 'Object',
-      implements: [__SProcessInterface],
-      lazy: true
+      required: true,
+      static: true
+    },
+    command: {
+      type: 'String',
+      required: true,
+      static: true
     }
   };
 };

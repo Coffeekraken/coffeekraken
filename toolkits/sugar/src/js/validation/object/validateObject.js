@@ -1,15 +1,13 @@
 // TODO: tests
-import __validateObjectDefinitionObject from './validateObjectDefinitionObject';
-import __isOfType from '../../is/ofType';
-import __isPlainObject from '../../is/plainObject';
-import __isClass from '../../is/class';
-import __get from '../../object/get';
-import __validateValue from '../value/validateValue';
-import __deepMerge from '../../object/deepMerge';
-import __parseHtml from '../../console/parseHtml';
-import __filter from '../../object/filter';
-import __typeof from '../../value/typeof';
 import __SObjectValidationError from '../../error/SObjectValidationError';
+import __isClass from '../../is/class';
+import __isPlainObject from '../../is/plainObject';
+import __deepMerge from '../../object/deepMerge';
+import __filter from '../../object/filter';
+import __get from '../../object/get';
+import __typeof from '../../value/typeof';
+import __validateValue from '../value/validateValue';
+import __validateObjectDefinitionObject from './validateObjectDefinitionObject';
 
 /**
  * @name            validateObject
@@ -98,6 +96,19 @@ export default function validateObject(
         staticIssue = true;
       }
     }
+
+    // @TODO        find a solution to control getters and setters on classes
+    // if (argDefinition.getter) {
+    //   console.log(objectToCheck.hasOwnProperty('state'));
+    //   // if (objectToCheck.__parentProto) {
+    //   //   console.log(
+    //   //     Object.getOwnPropertyDescriptor(objectToCheck.__parentProto, argName)
+    //   //   );
+    //   // }
+    //   console.log(argName, objectToCheck.__parentProto.name);
+
+    //   console.log('GETTER');
+    // }
 
     const validationRes = __validateValue(value, argDefinition, {
       name: argName,

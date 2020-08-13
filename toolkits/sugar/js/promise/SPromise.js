@@ -5,13 +5,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _deepMerge = _interopRequireDefault(require("../object/deepMerge"));
-
 var _minimatch = _interopRequireDefault(require("minimatch"));
 
-var _wait = _interopRequireDefault(require("../time/wait"));
+var _deepMerge = _interopRequireDefault(require("../object/deepMerge"));
 
 var _uniqid = _interopRequireDefault(require("../string/uniqid"));
+
+var _wait = _interopRequireDefault(require("../time/wait"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -179,7 +179,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      */
 
     /**
-     * @name                  _state
+     * @name                  _promiseState
      * @type                  String
      * @private
      *
@@ -301,7 +301,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }]);
 
   function SPromise(executorFn, settings) {
-    var _temp, _this;
+    var _this;
 
     if (settings === void 0) {
       settings = {};
@@ -311,19 +311,31 @@ var SPromise = /*#__PURE__*/function (_Promise) {
 
     var _resolve, _reject;
 
-    var promise = (_temp = _this = _super.call(this, (resolve, reject) => {
+    _this = _super.call(this, (resolve, reject) => {
       _resolve = resolve;
       _reject = reject;
-    }), _defineProperty(_assertThisInitialized(_this), "_masterPromiseResolveFn", null), _defineProperty(_assertThisInitialized(_this), "_masterPromiseRejectFn", null), _defineProperty(_assertThisInitialized(_this), "_executorFn", null), _defineProperty(_assertThisInitialized(_this), "_isExecutorStarted", null), _defineProperty(_assertThisInitialized(_this), "_settings", {}), _defineProperty(_assertThisInitialized(_this), "_state", 'pending'), _defineProperty(_assertThisInitialized(_this), "_stacks", {
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "_masterPromiseResolveFn", null);
+
+    _defineProperty(_assertThisInitialized(_this), "_masterPromiseRejectFn", null);
+
+    _defineProperty(_assertThisInitialized(_this), "_executorFn", null);
+
+    _defineProperty(_assertThisInitialized(_this), "_isExecutorStarted", null);
+
+    _defineProperty(_assertThisInitialized(_this), "_settings", {});
+
+    _defineProperty(_assertThisInitialized(_this), "_promiseState", 'pending');
+
+    _defineProperty(_assertThisInitialized(_this), "_stacks", {
       then: [],
       catch: [],
       resolve: [],
       reject: [],
       finally: [],
       cancel: []
-    }), _temp); // promise.catch((e) => {
-    //   console.log('ff');
-    // });
+    });
 
     _this._masterPromiseResolveFn = _resolve;
     _this._masterPromiseRejectFn = _reject; // save the executor function
@@ -347,7 +359,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
     return _this;
   }
   /**
-   * @name                    state
+   * @name                    promiseState
    * @type                    String
    * @get
    *
@@ -378,7 +390,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      */
     value: function is(status) {
       var statusArray = status.split(',').map(l => l.trim());
-      if (statusArray.indexOf(this._state) !== -1) return true;
+      if (statusArray.indexOf(this._promiseState) !== -1) return true;
       return false;
     }
     /**
@@ -395,7 +407,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "isPending",
     value: function isPending() {
-      return this._state === 'pending';
+      return this._promiseState === 'pending';
     }
     /**
      * @name                  isResolved
@@ -411,7 +423,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "isResolved",
     value: function isResolved() {
-      return this._state === 'resolved';
+      return this._promiseState === 'resolved';
     }
     /**
      * @name                  isRejected
@@ -427,7 +439,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "isRejected",
     value: function isRejected() {
-      return this._state === 'rejected';
+      return this._promiseState === 'rejected';
     }
     /**
      * @name                  isCanceled
@@ -443,7 +455,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "isCanceled",
     value: function isCanceled() {
-      return this._state === 'canceled';
+      return this._promiseState === 'canceled';
     }
     /**
      * @name                  isDestroyed
@@ -459,7 +471,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "isDestroyed",
     value: function isDestroyed() {
-      return this._state === 'destroyed';
+      return this._promiseState === 'destroyed';
     }
     /**
      * @name                    start
@@ -542,7 +554,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
 
         if (this._isDestroyed) return; // update the status
 
-        this._state = 'resolved'; // exec the wanted stacks
+        this._promiseState = 'resolved'; // exec the wanted stacks
 
         var stacksResult = yield this._triggerStacks(stacksOrder, arg); // resolve the master promise
 
@@ -604,7 +616,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
 
         if (this._isDestroyed) return; // update the status
 
-        this._state = 'rejected'; // exec the wanted stacks
+        this._promiseState = 'rejected'; // exec the wanted stacks
 
         var stacksResult = yield this._triggerStacks(stacksOrder, arg); // resolve the master promise
 
@@ -671,7 +683,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
 
         if (this._isDestroyed) return; // update the status
 
-        this._state = 'canceled'; // exec the wanted stacks
+        this._promiseState = 'canceled'; // exec the wanted stacks
 
         var stacksResult = yield this._triggerStacks(stacksOrder, arg); // resolve the master promise
 
@@ -862,7 +874,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
           var callbackResult = item.callback(currentCallbackReturnedValue, (0, _deepMerge.default)({
             stack,
             id: this._settings.id,
-            state: this._state,
+            state: this._promiseState,
             time: Date.now(),
             level: 1
           }, _metas)); // check if the callback result is a promise
@@ -1279,7 +1291,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
     key: "_destroy",
     value: function _destroy() {
       // update the status
-      this._state = 'destroyed'; // destroying all the callbacks stacks registered
+      this._promiseState = 'destroyed'; // destroying all the callbacks stacks registered
 
       delete this._stacks; // delete this._isExecutorStarted; // keep it to avoid errors in the "setTimeout" function in the masterPromise executor...
 
@@ -1290,9 +1302,9 @@ var SPromise = /*#__PURE__*/function (_Promise) {
       this._isDestroyed = true;
     }
   }, {
-    key: "state",
+    key: "promiseState",
     get: function get() {
-      return this._state;
+      return this._promiseState;
     }
   }]);
 

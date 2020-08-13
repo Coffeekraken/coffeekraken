@@ -7,10 +7,13 @@ const __uniqid = require('../string/uniqid');
 const __buildCommandLine = require('../cli/buildCommandLine');
 const __isPath = require('../is/path');
 const __output = require('./output');
+const __SProcessInterface = require('../process/interface/SProcessInterface');
+const __SProcess = require('../process/SProcess');
 
 /**
  * @name              SChildProcess
  * @namespace         node.process
+ * @extends           SProcess
  * @type              Class
  *
  * This class allows you to spawn/fork some child process and having back an SPromise based instance on
@@ -23,19 +26,7 @@ const __output = require('./output');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SChildProcess extends __SPromise {
-  /**
-   * @name          _settings
-   * @type          Object
-   * @private
-   *
-   * Store the passed settings
-   *
-   * @since       2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _settings = {};
-
+class SChildProcess extends __SProcess {
   /**
    * @name          _commandOrPath
    * @type          String
@@ -83,9 +74,7 @@ module.exports = class SChildProcess extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(commandOrPath, settings = {}) {
-    super(() => {}).start();
-    this._commandOrPath = commandOrPath;
-    this._settings = __deepMerge(
+    settings = __deepMerge(
       {
         id: __uniqid(),
         definitionObj: {},
@@ -104,6 +93,8 @@ module.exports = class SChildProcess extends __SPromise {
       },
       settings
     );
+    super(settings);
+    this._commandOrPath = commandOrPath;
   }
 
   /**
@@ -139,250 +130,244 @@ module.exports = class SChildProcess extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(params = {}, settings = {}) {
-    const promise = new __SPromise(
-      async (resolve, reject, trigger, cancel) => {}
-    ).start();
+    let runningProcessId = settings.id || __uniqid();
+    settings = __deepMerge(this._settings, settings);
 
-    (async () => {
-      let runningProcessId = settings.id || __uniqid();
-      settings = __deepMerge(this._settings, settings);
+    const promise = new __SPromise(null).start();
 
-      // build the command to run depending on the passed command in the constructor and the params
-      const paramsToRun = __deepMerge(settings.defaultParamsObj, params);
-      // console.log(paramsToRun, this._commandOrPath, settings.definitionObj);
-      const commandToRun = __buildCommandLine(
-        this._commandOrPath,
-        settings.definitionObj,
-        paramsToRun
-      );
+    // build the command to run depending on the passed command in the constructor and the params
+    const paramsToRun = __deepMerge(settings.defaultParamsObj, params);
+    const commandToRun = __buildCommandLine(
+      this._commandOrPath,
+      settings.definitionObj,
+      paramsToRun
+    );
 
-      // initialize the runningProcess object
-      const runningProcess = {
-        instanceId: this._settings.id,
-        id: runningProcessId,
-        promise: promise,
-        settings: Object.assign({}, settings),
-        start: Date.now(),
-        end: null,
-        duration: null,
-        stdout: [],
-        stderr: [],
-        rawCommand: this._commandOrPath,
-        params: paramsToRun,
-        command: commandToRun,
-        state: 'running',
-        before: null,
-        after: null
-      };
+    // initialize the runningProcess object
+    this._runningProcess = {
+      instanceId: this._settings.id,
+      id: runningProcessId,
+      promise: promise,
+      settings: Object.assign({}, settings),
+      start: Date.now(),
+      end: null,
+      duration: null,
+      stdout: [],
+      stderr: [],
+      rawCommand: this._commandOrPath,
+      params: paramsToRun,
+      command: commandToRun,
+      state: 'running',
+      before: null,
+      after: null
+    };
 
-      // adding the runningProcess in the stack
-      this._processesStack.push(runningProcess);
+    // adding the runningProcess in the stack
+    this._processesStack.push(this._runningProcess);
 
-      // execute the "before" SChildProcess instance if setted
-      if (settings.before) {
-        if (!settings.before instanceof SChildProcess) {
-          throw new Error(
-            `The passed "<cyan>settings.before</cyan>" setting has to be an instance of the "<primary>SChildProcess</primary>" class...`
-          );
-        }
+    // execute the "before" SChildProcess instance if setted
+    // if (settings.before) {
+    //   if (!settings.before instanceof SChildProcess) {
+    //     throw new Error(
+    //       `The passed "<cyan>settings.before</cyan>" setting has to be an instance of the "<primary>SChildProcess</primary>" class...`
+    //     );
+    //   }
 
-        // trigger a "before" event
-        promise.trigger('before', {
-          time: Date.now(),
-          process: Object.assign({}, runningProcess)
-        });
-        this.trigger(`${runningProcessId}.before`, {
-          time: Date.now(),
-          process: Object.assign({}, runningProcess)
-        });
+    //   // trigger a "before" event
+    //   promise.trigger(`before`, {
+    //     time: Date.now(),
+    //     process: Object.assign({}, this._runningProcess)
+    //   });
 
-        // running the before child process
-        runningProcess.before = await settings.before.run();
+    //   // running the before child process
+    //   this._runningProcess.before = await settings.before.run();
+    // }
+
+    // extracting the spawn settings from the global settings object
+    const spawnSettings = Object.assign({}, settings);
+    [
+      'id',
+      'definitionObj',
+      'defaultParamsObj',
+      'method',
+      'before',
+      'after'
+    ].forEach((key) => {
+      delete spawnSettings[key];
+    });
+
+    // trigger a "start" event
+    promise.trigger(`start`, {
+      time: Date.now(),
+      process: Object.assign({}, this._runningProcess)
+    });
+
+    // executing the actual command through the spawn node function
+    this._runningProcess.childProcess = __childProcess[
+      settings.method || 'spawn'
+    ](commandToRun, [], spawnSettings);
+
+    // listen for ctrl+c to kill the child process
+    // __hotkey('ctrl+c', {
+    //   once: true
+    // }).on('press', () => {
+    //   // console.log('THIEHIU');
+    //   // childProcess.kill();
+    // });
+
+    // register this child process globally
+    __registerProcess(
+      this._runningProcess.childProcess,
+      this._runningProcess.id
+    );
+
+    // close
+    let finished = false;
+    const resolveOrReject = async (what, extendObj = {}, code, signal) => {
+      if (finished) return;
+      finished = true;
+
+      this._runningProcess.end = Date.now();
+      this._runningProcess.duration =
+        this._runningProcess.end - this._runningProcess.start;
+
+      // if (settings.after) {
+      //   if (!settings.after instanceof SChildProcess) {
+      //     throw new Error(
+      //       `The passed "<cyan>settings.after</cyan>" setting has to be an instance of the "<primary>SChildProcess</primary>" class...`
+      //     );
+      //   }
+
+      //   // trigger a "after" event
+      //   promise.trigger(`after`, {
+      //     time: Date.now(),
+      //     ...this.runningProcess
+      //   });
+
+      //   // running the after child process
+      //   this._runningProcess.after = await settings.after.run();
+      // }
+
+      promise.trigger(`${this._runningProcess.state}`, {
+        time: Date.now(),
+        ...this.runningProcess
+      });
+
+      promise[what]({
+        ...this._runningProcess,
+        ...extendObj,
+        code,
+        signal
+      });
+    };
+
+    const triggerState = () => {
+      promise.trigger(`state`, this.runningProcess.state);
+    };
+
+    this._runningProcess.childProcess.on('close', (code, signal) => {
+      if (this._isKilling || (!code && signal)) {
+        this._runningProcess.state = 'killed';
+      } else if (code === 0 && !signal) {
+        this._runningProcess.state = 'success';
+      } else {
+        this._runningProcess.state = 'error';
       }
+      triggerState();
 
-      // extracting the spawn settings from the global settings object
-      const spawnSettings = Object.assign({}, settings);
-      [
-        'id',
-        'definitionObj',
-        'defaultParamsObj',
-        'method',
-        'before',
-        'after'
-      ].forEach((key) => {
-        delete spawnSettings[key];
-      });
-
-      // trigger a "start" event
-      promise.trigger('start', {
+      promise.trigger(`close`, {
         time: Date.now(),
-        process: Object.assign({}, runningProcess)
-      });
-      this.trigger(`${runningProcessId}.start`, {
-        time: Date.now(),
-        process: Object.assign({}, runningProcess)
+        code,
+        signal,
+        ...this.runningProcess
       });
 
-      // executing the actual command through the spawn node function
-      const childProcess = __childProcess[settings.method || 'spawn'](
-        commandToRun,
-        [],
-        spawnSettings
-      );
-
-      // listen for ctrl+c to kill the child process
-      // __hotkey('ctrl+c', {
-      //   once: true
-      // }).on('press', () => {
-      //   // console.log('THIEHIU');
-      //   // childProcess.kill();
-      // });
-
-      // register this child process globally
-      __registerProcess(childProcess, runningProcess.id);
-
-      // close
-      let finished = false;
-      const resolveOrReject = async (what, extendObj = {}, code, signal) => {
-        if (finished) return;
-        finished = true;
-
-        runningProcess.end = Date.now();
-        runningProcess.duration = runningProcess.end - runningProcess.start;
-
-        if (settings.after) {
-          if (!settings.after instanceof SChildProcess) {
-            throw new Error(
-              `The passed "<cyan>settings.after</cyan>" setting has to be an instance of the "<primary>SChildProcess</primary>" class...`
-            );
-          }
-
-          // trigger a "after" event
-          promise.trigger('after', {
-            time: Date.now(),
-            process: Object.assign({}, runningProcess)
-          });
-          this.trigger(`${runningProcessId}.after`, {
-            time: Date.now(),
-            process: Object.assign({}, runningProcess)
-          });
-
-          // running the after child process
-          runningProcess.after = await settings.after.run();
-        }
-
-        promise.trigger(runningProcess.state, {
-          time: Date.now(),
-          process: Object.assign({}, runningProcess)
-        });
-        this.trigger(`${runningProcessId}.${runningProcess.state}`, {
-          time: Date.now(),
-          process: Object.assign({}, runningProcess)
-        });
-
-        promise[what]({
-          ...runningProcess,
-          ...extendObj,
-          code,
-          signal
-        });
-      };
-      childProcess.on('close', (code, signal) => {
-        promise.trigger('close', {
-          time: Date.now(),
-          process: Object.assign({}, runningProcess),
-          code,
-          signal
-        });
-        this.trigger(`${runningProcessId}.close`, {
-          time: Date.now(),
-          process: Object.assign({}, runningProcess),
-          code,
-          signal
-        });
-
-        if (!code && signal) {
-          runningProcess.state = 'killed';
-          resolveOrReject('reject', {}, code, signal);
-        } else if (code === 0 && !signal) {
-          runningProcess.state = 'success';
-          resolveOrReject('resolve', {}, code, signal);
-        } else {
-          runningProcess.state = 'error';
-          resolveOrReject(
-            'reject',
-            {
-              error: runningProcess.stderr.join('\n')
-            },
-            code,
-            signal
-          );
-        }
-      });
-
-      // error
-      childProcess.on('error', (error) => {
-        console.log('EOEOEOE', error);
-        runningProcess.state = 'error';
+      if (!code && signal) {
+        resolveOrReject('reject', {}, code, signal);
+      } else if (code === 0 && !signal) {
+        resolveOrReject('resolve', {}, code, signal);
+      } else {
         resolveOrReject(
           'reject',
           {
-            error
+            error: this._runningProcess.stderr.join('\n')
           },
-          1,
-          null
+          code,
+          signal
         );
+      }
+
+      // reset isKilling boolean
+      this._isKilling = false;
+    });
+
+    // error
+    this._runningProcess.childProcess.on('error', (error) => {
+      this._runningProcess.state = 'error';
+      triggerState();
+
+      console.log('ERROR', error);
+
+      throw error;
+    });
+
+    // stdout data
+    if (this._runningProcess.childProcess.stdout) {
+      this._runningProcess.childProcess.stdout.on('data', (log) => {
+        log = log.toString();
+
+        const resultReg = /^#result\s(.*)$/gm;
+        if (log.match(resultReg)) {
+          this._runningProcess.state = 'success';
+          triggerState();
+
+          resolveOrReject(
+            'resolve',
+            {
+              value: __parse(log.replace('#result ', ''))
+            },
+            0,
+            null
+          );
+          return;
+        }
+
+        this._runningProcess.stdout.push(log.toString());
+        promise.trigger(`log`, {
+          value: log.toString()
+        });
       });
+    }
 
-      // stdout data
-      if (childProcess.stdout) {
-        childProcess.stdout.on('data', (log) => {
-          log = log.toString();
-          const resultReg = /^#result\s(.*)$/gm;
-          if (log.match(resultReg)) {
-            runningProcess.state = 'success';
-            resolveOrReject(
-              'resolve',
-              {
-                value: __parse(log.replace('#result ', ''))
-              },
-              0,
-              null
-            );
-            return;
-          }
+    // stderr data
+    if (this._runningProcess.childProcess.stderr) {
+      this._runningProcess.childProcess.stderr.on('data', (error) => {
+        this._runningProcess.stderr.push(error.toString());
 
-          runningProcess.stdout.push(log.toString());
-          promise.trigger('log', {
-            value: log.toString()
-          });
-          this.trigger(`${runningProcessId}.'log`, {
-            value: log.toString()
-          });
-        });
-      }
+        throw error;
+      });
+    }
 
-      // stderr data
-      if (childProcess.stderr) {
-        childProcess.stderr.on('data', (error) => {
-          runningProcess.stderr.push(error.toString());
-          promise.trigger('error', {
-            error: error.toString(),
-            value: error.toString()
-          });
-          this.trigger(`${runningProcessId}.error`, {
-            error: error.toString(),
-            value: error.toString()
-          });
-        });
-      }
-    })();
-
-    return promise;
+    return super.run(promise);
   }
 
   runWithOutput(params = {}, settings = {}) {
     __output(this.run(params, settings));
+  }
+
+  /**
+   * @name            kill
+   * @type            Function
+   *
+   * This method allows you to kill the child process properly
+   *
+   * @since           2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  kill() {
+    if (!this._runningProcess) return;
+    this._isKilling = true;
+    this._runningProcess.childProcess.kill();
   }
 
   /**
@@ -395,8 +380,8 @@ module.exports = class SChildProcess extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   hasAfterCommand() {
-    return this.runningProcess
-      ? this.runningProcess.settings.after !== null
+    return this._runningProcess
+      ? this._runningProcess.settings.after !== null
       : this._settings.after !== null;
   }
 
@@ -410,8 +395,8 @@ module.exports = class SChildProcess extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   hasBeforeCommand() {
-    return this.runningProcess
-      ? this.runningProcess.settings.before !== null
+    return this._runningProcess
+      ? this._runningProcess.settings.before !== null
       : this._settings.before !== null;
   }
 
@@ -425,10 +410,10 @@ module.exports = class SChildProcess extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   isClosed() {
-    return this.runningProcess
-      ? this.runningProcess.state === 'killed' ||
-          this.runningProcess.state === 'success' ||
-          this.runningProcess.state === 'error'
+    return this._runningProcess
+      ? this._runningProcess.state === 'killed' ||
+          this._runningProcess.state === 'success' ||
+          this._runningProcess.state === 'error'
       : false;
   }
 
@@ -443,16 +428,21 @@ module.exports = class SChildProcess extends __SPromise {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  log(...logs) {
-    if (!this.runningProcess) return;
-    logs.forEach((log) => {
-      this.runningProcess.stdout.push(log.toString());
-      this.runningProcess.promise.trigger('log', {
-        value: log.toString()
-      });
-      this.trigger(`${this.runningProcess.id}.log`, {
-        value: log.toString()
-      });
-    });
-  }
-};
+  // log(...logs) {
+  //   if (!this._runningProcess) return;
+  //   logs.forEach((log) => {
+  //     this._runningProcess.stdout.push(log.toString());
+  //     this._runningProcess.promise.trigger('log', {
+  //       value: log.toString()
+  //     });
+  //     promise.trigger(`${this._runningProcess.id}.log`, {
+  //       value: log.toString()
+  //     });
+  //   });
+  // }
+}
+
+module.exports = __SProcessInterface.implements(
+  SChildProcess,
+  __SProcessInterface
+);

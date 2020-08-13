@@ -1,7 +1,6 @@
-const __SExpressServerCli = require('../express/SExpressServerCli');
-const __frontendServer = require('../frontend/frontend');
-const __SPromise = require('../../promise/SPromise');
+const __SCli = require('../../cli/SCli');
 const __SFrontendServerProcess = require('./SFrontendServerProcess');
+const __SExpressServerInterface = require('../express/interface/SExpressServerInterface');
 
 /**
  * @name            SFrontendServerCli
@@ -14,7 +13,7 @@ const __SFrontendServerProcess = require('./SFrontendServerProcess');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SFrontendServerCli extends __SExpressServerCli {
+class SFrontendServerCli extends __SCli {
   /**
    * @name          command
    * @type          String
@@ -27,6 +26,17 @@ module.exports = class SFrontendServerCli extends __SExpressServerCli {
   static command = 'sugar server.frontend %arguments';
 
   /**
+   * @name          definitionObj
+   * @type          String
+   * @static
+   *
+   * Store the cli definition object
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static definitionObj = __SExpressServerInterface.definitionObj;
+
+  /**
    * @name          processClass
    * @type          SProcess
    * @static
@@ -36,19 +46,6 @@ module.exports = class SFrontendServerCli extends __SExpressServerCli {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   static processClass = __SFrontendServerProcess;
-
-  /**
-   * @name          definitionObj
-   * @type          Object
-   * @static
-   *
-   * Store the definition object
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  static definitionObj = {
-    ...__SExpressServerCli.definitionObj
-  };
 
   /**
    * @name          constructor
@@ -66,4 +63,9 @@ module.exports = class SFrontendServerCli extends __SExpressServerCli {
       ...settings
     });
   }
-};
+}
+
+module.exports = __SExpressServerInterface.implements(
+  SFrontendServerCli,
+  __SExpressServerInterface
+);

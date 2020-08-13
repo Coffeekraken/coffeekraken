@@ -1,7 +1,7 @@
-import __deepMerge from '../object/deepMerge';
 import __minimatch from 'minimatch';
-import __wait from '../time/wait';
+import __deepMerge from '../object/deepMerge';
 import __uniqid from '../string/uniqid';
+import __wait from '../time/wait';
 
 /**
  * @name                  SPromise
@@ -125,7 +125,7 @@ export default class SPromise extends Promise {
   _settings = {};
 
   /**
-   * @name                  _state
+   * @name                  _promiseState
    * @type                  String
    * @private
    *
@@ -138,7 +138,7 @@ export default class SPromise extends Promise {
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  _state = 'pending';
+  _promiseState = 'pending';
 
   /**
    * @name                  _stacks
@@ -256,14 +256,10 @@ export default class SPromise extends Promise {
    */
   constructor(executorFn, settings = {}) {
     let _resolve, _reject;
-    const promise = super((resolve, reject) => {
+    super((resolve, reject) => {
       _resolve = resolve;
       _reject = reject;
     });
-
-    // promise.catch((e) => {
-    //   console.log('ff');
-    // });
 
     this._masterPromiseResolveFn = _resolve;
     this._masterPromiseRejectFn = _reject;
@@ -293,7 +289,7 @@ export default class SPromise extends Promise {
   }
 
   /**
-   * @name                    state
+   * @name                    promiseState
    * @type                    String
    * @get
    *
@@ -306,8 +302,8 @@ export default class SPromise extends Promise {
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  get state() {
-    return this._state;
+  get promiseState() {
+    return this._promiseState;
   }
 
   /**
@@ -323,7 +319,7 @@ export default class SPromise extends Promise {
    */
   is(status) {
     const statusArray = status.split(',').map((l) => l.trim());
-    if (statusArray.indexOf(this._state) !== -1) return true;
+    if (statusArray.indexOf(this._promiseState) !== -1) return true;
     return false;
   }
 
@@ -338,7 +334,7 @@ export default class SPromise extends Promise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   isPending() {
-    return this._state === 'pending';
+    return this._promiseState === 'pending';
   }
 
   /**
@@ -352,7 +348,7 @@ export default class SPromise extends Promise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   isResolved() {
-    return this._state === 'resolved';
+    return this._promiseState === 'resolved';
   }
 
   /**
@@ -366,7 +362,7 @@ export default class SPromise extends Promise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   isRejected() {
-    return this._state === 'rejected';
+    return this._promiseState === 'rejected';
   }
 
   /**
@@ -380,7 +376,7 @@ export default class SPromise extends Promise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   isCanceled() {
-    return this._state === 'canceled';
+    return this._promiseState === 'canceled';
   }
 
   /**
@@ -394,7 +390,7 @@ export default class SPromise extends Promise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   isDestroyed() {
-    return this._state === 'destroyed';
+    return this._promiseState === 'destroyed';
   }
 
   /**
@@ -467,7 +463,7 @@ export default class SPromise extends Promise {
   async _resolve(arg, stacksOrder = 'then,resolve,finally') {
     if (this._isDestroyed) return;
     // update the status
-    this._state = 'resolved';
+    this._promiseState = 'resolved';
     // exec the wanted stacks
     const stacksResult = await this._triggerStacks(stacksOrder, arg);
     // resolve the master promise
@@ -508,7 +504,7 @@ export default class SPromise extends Promise {
   async _reject(arg, stacksOrder = 'catch,reject,finally') {
     if (this._isDestroyed) return;
     // update the status
-    this._state = 'rejected';
+    this._promiseState = 'rejected';
     // exec the wanted stacks
     const stacksResult = await this._triggerStacks(stacksOrder, arg);
     // resolve the master promise
@@ -556,7 +552,7 @@ export default class SPromise extends Promise {
   async _cancel(arg, stacksOrder = 'cancel') {
     if (this._isDestroyed) return;
     // update the status
-    this._state = 'canceled';
+    this._promiseState = 'canceled';
     // exec the wanted stacks
     const stacksResult = await this._triggerStacks(stacksOrder, arg);
     // resolve the master promise
@@ -732,7 +728,7 @@ export default class SPromise extends Promise {
           {
             stack,
             id: this._settings.id,
-            state: this._state,
+            state: this._promiseState,
             time: Date.now(),
             level: 1
           },
@@ -1093,7 +1089,7 @@ export default class SPromise extends Promise {
    */
   _destroy() {
     // update the status
-    this._state = 'destroyed';
+    this._promiseState = 'destroyed';
 
     // destroying all the callbacks stacks registered
     delete this._stacks;

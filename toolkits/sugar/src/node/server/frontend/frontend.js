@@ -12,6 +12,7 @@ const __rimraf = require('rimraf');
 const __render = require('../../template/render');
 const __express = require('express');
 const __trimLines = require('../../string/trimLines');
+const __SError = require('../../error/SError');
 
 /**
  * @name                express
@@ -48,16 +49,16 @@ module.exports = (args = {}) => {
 
   // generate menus
   const menuStack = {};
-  if (settings.menu) {
-    sNavInstance = new __SNav('main', 'Main', []);
-    Object.keys(settings.menu).forEach(async (menuName) => {
-      // generate the menus
-      const generatorObj = settings.menu[menuName].generator;
-      menuStack[menuName] = await generatorObj.fn(generatorObj.directory);
-      // add the nav to the main navigation
-      sNavInstance.addItem(menuStack[menuName]);
-    });
-  }
+  // if (settings.menu) {
+  //   sNavInstance = new __SNav('main', 'Main', []);
+  //   Object.keys(settings.menu).forEach(async (menuName) => {
+  //     // generate the menus
+  //     const generatorObj = settings.menu[menuName].generator;
+  //     menuStack[menuName] = await generatorObj.fn(generatorObj.directory);
+  //     // add the nav to the main navigation
+  //     sNavInstance.addItem(menuStack[menuName]);
+  //   });
+  // }
 
   // build the "templateData" object to pass to the render engines
   const templateData = {
@@ -89,11 +90,11 @@ module.exports = (args = {}) => {
         );
         // generate a new view that will extends the default one provided by sugar
         const newViewContent = `
-          @extends('tmp.main')
-          @section('content')
-            ${viewContent}
-          @endsection
-        `;
+            @extends('tmp.main')
+            @section('content')
+              ${viewContent}
+            @endsection
+          `;
         __fs.writeFileSync(
           __path.resolve(tmpDir, 'index.blade.php'),
           newViewContent
@@ -130,11 +131,11 @@ module.exports = (args = {}) => {
       }
     } else {
       res.send(`You need to create at least one of these files:
-      <ul>
-        <li>${indexHtmlPath}</li>
-        <li>${indexViewPath}</li>
-      </ul>
-      `);
+        <ul>
+          <li>${indexHtmlPath}</li>
+          <li>${indexViewPath}</li>
+        </ul>
+        `);
     }
   });
 
@@ -187,17 +188,28 @@ module.exports = (args = {}) => {
     );
   });
 
-  server.listen(settings.express.port, settings.express.hostname);
+  server
+    .listen(settings.express.port, settings.express.hostname, () => {
+      setTimeout(() => {
+        promise.trigger('log', {
+          type: 'header',
+          value: __trimLines(`Your <primary>Frontend Express</primary> server is <green>up and running</green>:
 
-  promise.trigger('log', {
-    type: 'header',
-    value: __trimLines(`Your <primary>Frontend Express</primary> server is <green>up and running</green>:
+              - Hostname        : <yellow>${settings.hostname}</yellow>
+              - Port            : <yellow>${settings.port}</yellow>
+              - Root directory  : <yellow>${settings.rootDir}</yellow>
+              - URL             : <cyan>http://${settings.hostname}:${settings.port}</cyan>`)
+        });
+      }, 1000);
+    })
+    .on('error', (e) => {
+      const string = e.toString();
+      throw new __SError(`
+          Something goes wrong with your <yellow>Frontend Server Process</yellow>:
 
-        - Hostname        : <yellow>${settings.hostname}</yellow>
-        - Port            : <yellow>${settings.port}</yellow>
-        - Root directory  : <yellow>${settings.rootDir}</yellow>
-        - URL             : <cyan>http://${settings.hostname}:${settings.port}</cyan>`)
-  });
+          ${string}
+        `);
+    });
 
   return promise;
 };

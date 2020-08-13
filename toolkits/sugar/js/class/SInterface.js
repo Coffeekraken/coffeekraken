@@ -5,27 +5,23 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _getExtendsStack = _interopRequireDefault(require("../class/getExtendsStack"));
+
+var _argsToObject = _interopRequireDefault(require("../cli/argsToObject"));
+
+var _SError = _interopRequireDefault(require("../error/SError"));
+
+var _class = _interopRequireDefault(require("../is/class"));
+
+var _deepize = _interopRequireDefault(require("../object/deepize"));
+
 var _deepMerge = _interopRequireDefault(require("../object/deepMerge"));
+
+var _trimLines = _interopRequireDefault(require("../string/trimLines"));
 
 var _validateObject = _interopRequireDefault(require("../validation/object/validateObject"));
 
 var _validateObjectOutputString = _interopRequireDefault(require("../validation/object/validateObjectOutputString"));
-
-var _parseHtml = _interopRequireDefault(require("../console/parseHtml"));
-
-var _trimLines = _interopRequireDefault(require("../string/trimLines"));
-
-var _argsToObject = _interopRequireDefault(require("../cli/argsToObject"));
-
-var _SObjectValidationError = _interopRequireDefault(require("../error/SObjectValidationError"));
-
-var _deepize = _interopRequireDefault(require("../object/deepize"));
-
-var _class = _interopRequireDefault(require("../is/class"));
-
-var _SError = _interopRequireDefault(require("../error/SError"));
-
-var _getExtendsStack = _interopRequireDefault(require("../class/getExtendsStack"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -137,10 +133,17 @@ var SInterface = /*#__PURE__*/function () {
       var issueObj = {
         issues: []
       };
-      var implementationValidationResult; // extends array
+      var implementationValidationResult;
+      var extendsStack = (0, _getExtendsStack.default)(instance); // check if the passed instance base class already implements this insterface
+
+      if (instance.constructor.__interfaces && Array.isArray(instance.constructor.__interfaces)) {
+        if (instance.constructor.__interfaces.indexOf(this) !== -1) return true;
+      } else if (instance.__interfaces && Array.isArray(instance.__interfaces)) {
+        if (instance.__interfaces.indexOf(this) !== -1) return true;
+      } // extends array
+
 
       if (this.extendsArray && Array.isArray(this.extendsArray)) {
-        var extendsStack = (0, _getExtendsStack.default)(instance);
         this.extendsArray.forEach(cls => {
           if (extendsStack.indexOf(cls) === -1) {
             throw new _SError.default("Your class|instance \"<yellow>".concat(instance.name || instance.constructor.name, "</yellow>\" that implements the \"<cyan>").concat(this.name, "</cyan>\" interface has to extend the \"<green>").concat(cls, "</green>\" class..."));
@@ -155,9 +158,15 @@ var SInterface = /*#__PURE__*/function () {
 
 
       if (this.definitionObj) {
+        var name = instance.name || instance.constructor.name;
+
+        if (name === 'ImplementsMiddleClass') {
+          name = extendsStack[0];
+        }
+
         implementationValidationResult = (0, _validateObject.default)(instance, this.definitionObj, {
           throw: false,
-          name: instance.name || instance.constructor.name,
+          name,
           interface: settings.interface
         });
 
@@ -168,37 +177,42 @@ var SInterface = /*#__PURE__*/function () {
         }
       }
 
-      if (!issueObj.issues.length) return true;
+      if (!issueObj.issues.length) {
+        // save on the instance and the constructor that we implements this interface correctly
+        if (!instance.__interfaces) {
+          Object.defineProperty(instance, '__interfaces', {
+            enumerable: false,
+            writable: true,
+            value: [this]
+          });
+        } else if (Array.isArray(instance.__interfaces)) {
+          instance.__interfaces.push(this);
+        }
+
+        if (!instance.constructor.__interfaces) {
+          Object.defineProperty(instance.constructor, '__interfaces', {
+            enumerable: false,
+            writable: true,
+            value: [this]
+          });
+        } else if (Array.isArray(instance.constructor.__interfaces)) {
+          instance.constructor.__interfaces.push(this);
+        }
+
+        return true;
+      }
 
       if (settings.throw) {
         throw new _SError.default(this.outputString(issueObj, settings));
-      } // if (settings.throw) {
-      //   const message = this.outputString(implementationValidationResult);
-      //   let outputArray = [];
-      //   if (this.title || settings.title) {
-      //     outputArray.push(
-      //       `<bold><underline>${settings.title || this.title}</underline></bold>`
-      //     );
-      //     outputArray.push('');
-      //   }
-      //   if (this.description || settings.description) {
-      //     outputArray.push(settings.description || this.description);
-      //     outputArray.push('');
-      //   }
-      //   outputArray.push(message);
-      //   throw outputArray.join('\n');
-      // }
-
+      }
 
       switch (settings.return.toLowerCase()) {
         case 'object':
           return issueObj;
-          break;
 
         case 'string':
         default:
           return SInterface.outputString(issueObj, settings);
-          break;
       }
     }
     /**
@@ -223,7 +237,7 @@ var SInterface = /*#__PURE__*/function () {
       }
 
       var apply = SInterface.apply.bind(this);
-      apply(instance, _objectSpread(_objectSpread({}, settings), {}, {
+      return apply(instance, _objectSpread(_objectSpread({}, settings), {}, {
         throw: true
       }));
     }
@@ -276,6 +290,7 @@ var SInterface = /*#__PURE__*/function () {
       if (!Array.isArray(interfaces)) interfaces = [interfaces];
 
       if ((0, _class.default)(instance)) {
+        // return instance;
         var ImplementsMiddleClass = /*#__PURE__*/function (_instance) {
           _inherits(ImplementsMiddleClass, _instance);
 
@@ -291,6 +306,9 @@ var SInterface = /*#__PURE__*/function () {
             }
 
             _this = _super.call(this, ...args);
+
+            _defineProperty(_assertThisInitialized(_this), "__parentProto", instance);
+
             SInterface.implements(_assertThisInitialized(_this), interfaces, settings);
             return _this;
           }
@@ -306,9 +324,7 @@ var SInterface = /*#__PURE__*/function () {
         Interface.apply(instance, _objectSpread(_objectSpread({}, settings), {}, {
           interface: Interface.name
         }));
-      }); // save the interfaces that you want to implements into the instance
-
-      instance.__interfaces = interfaces;
+      });
     }
     /**
      * @name          complete

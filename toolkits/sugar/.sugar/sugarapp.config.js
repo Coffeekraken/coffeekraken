@@ -45,6 +45,7 @@ module.exports = {
                 )}/src/node/server/frontend/SFrontendServerCli`,
                 argsObj: {},
                 settings: {},
+                concurrent: false,
                 key: 'f',
                 watch: true,
                 run: true,

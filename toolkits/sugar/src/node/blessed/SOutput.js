@@ -109,8 +109,6 @@ module.exports = class SOutput extends __SComponent {
     if (!Array.isArray(source)) source = [source];
 
     source.forEach((s) => {
-      console.log('COCOCOCO');
-
       __SOutputSourceInterface.apply(s, {
         title: 'SOutput source issue',
         description:
@@ -149,10 +147,10 @@ module.exports = class SOutput extends __SComponent {
         });
       })
       .on('error', (error) => {
-        this.log({
-          error: true,
-          value: error.error || error
-        });
+        // this.log({
+        //   error: true,
+        //   value: error.error || error
+        // });
       })
       .on('*.start', () => {
         this.log({
@@ -616,7 +614,7 @@ module.exports = class SOutput extends __SComponent {
    */
   _createHeaderBox(logObj) {
     this._headerBox = __blessed.box({
-      width: '100%',
+      width: 'shrink',
       height: 1,
       top: 0,
       left: 0,

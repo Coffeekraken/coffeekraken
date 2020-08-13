@@ -1,14 +1,12 @@
+import __getExtendsStack from '../class/getExtendsStack';
+import __argsToObject from '../cli/argsToObject';
+import __SError from '../error/SError';
+import __isClass from '../is/class';
+import __deepize from '../object/deepize';
 import __deepMerge from '../object/deepMerge';
+import __trimLines from '../string/trimLines';
 import __validateObject from '../validation/object/validateObject';
 import __validateObjectOutputString from '../validation/object/validateObjectOutputString';
-import __parseHtml from '../console/parseHtml';
-import __trimLines from '../string/trimLines';
-import __argsToObject from '../cli/argsToObject';
-import __SDefinitionObjectError from '../error/SObjectValidationError';
-import __deepize from '../object/deepize';
-import __isClass from '../is/class';
-import __SError from '../error/SError';
-import __getExtendsStack from '../class/getExtendsStack';
 
 /**
  * @name              SInterface
@@ -88,9 +86,20 @@ export default class SInterface {
     };
     let implementationValidationResult;
 
+    const extendsStack = __getExtendsStack(instance);
+
+    // check if the passed instance base class already implements this insterface
+    if (
+      instance.constructor.__interfaces &&
+      Array.isArray(instance.constructor.__interfaces)
+    ) {
+      if (instance.constructor.__interfaces.indexOf(this) !== -1) return true;
+    } else if (instance.__interfaces && Array.isArray(instance.__interfaces)) {
+      if (instance.__interfaces.indexOf(this) !== -1) return true;
+    }
+
     // extends array
     if (this.extendsArray && Array.isArray(this.extendsArray)) {
-      const extendsStack = __getExtendsStack(instance);
       this.extendsArray.forEach((cls) => {
         if (extendsStack.indexOf(cls) === -1) {
           throw new __SError(
@@ -111,12 +120,17 @@ export default class SInterface {
 
     // definition object
     if (this.definitionObj) {
+      let name = instance.name || instance.constructor.name;
+      if (name === 'ImplementsMiddleClass') {
+        name = extendsStack[0];
+      }
+
       implementationValidationResult = __validateObject(
         instance,
         this.definitionObj,
         {
           throw: false,
-          name: instance.name || instance.constructor.name,
+          name,
           interface: settings.interface
         }
       );
@@ -127,37 +141,40 @@ export default class SInterface {
       }
     }
 
-    if (!issueObj.issues.length) return true;
+    if (!issueObj.issues.length) {
+      // save on the instance and the constructor that we implements this interface correctly
+      if (!instance.__interfaces) {
+        Object.defineProperty(instance, '__interfaces', {
+          enumerable: false,
+          writable: true,
+          value: [this]
+        });
+      } else if (Array.isArray(instance.__interfaces)) {
+        instance.__interfaces.push(this);
+      }
+      if (!instance.constructor.__interfaces) {
+        Object.defineProperty(instance.constructor, '__interfaces', {
+          enumerable: false,
+          writable: true,
+          value: [this]
+        });
+      } else if (Array.isArray(instance.constructor.__interfaces)) {
+        instance.constructor.__interfaces.push(this);
+      }
+
+      return true;
+    }
 
     if (settings.throw) {
       throw new __SError(this.outputString(issueObj, settings));
     }
 
-    // if (settings.throw) {
-    //   const message = this.outputString(implementationValidationResult);
-    //   let outputArray = [];
-    //   if (this.title || settings.title) {
-    //     outputArray.push(
-    //       `<bold><underline>${settings.title || this.title}</underline></bold>`
-    //     );
-    //     outputArray.push('');
-    //   }
-    //   if (this.description || settings.description) {
-    //     outputArray.push(settings.description || this.description);
-    //     outputArray.push('');
-    //   }
-    //   outputArray.push(message);
-    //   throw outputArray.join('\n');
-    // }
-
     switch (settings.return.toLowerCase()) {
       case 'object':
         return issueObj;
-        break;
       case 'string':
       default:
         return SInterface.outputString(issueObj, settings);
-        break;
     }
   }
 
@@ -176,7 +193,7 @@ export default class SInterface {
    */
   static applyAndThrow(instance, settings = {}) {
     const apply = SInterface.apply.bind(this);
-    apply(instance, {
+    return apply(instance, {
       ...settings,
       throw: true
     });
@@ -218,7 +235,9 @@ export default class SInterface {
     if (!Array.isArray(interfaces)) interfaces = [interfaces];
 
     if (__isClass(instance)) {
+      // return instance;
       class ImplementsMiddleClass extends instance {
+        __parentProto = instance;
         constructor(...args) {
           super(...args);
           SInterface.implements(this, interfaces, settings);
@@ -234,8 +253,6 @@ export default class SInterface {
         interface: Interface.name
       });
     });
-    // save the interfaces that you want to implements into the instance
-    instance.__interfaces = interfaces;
   }
 
   /**

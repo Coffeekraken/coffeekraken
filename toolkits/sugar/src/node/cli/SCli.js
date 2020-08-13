@@ -10,6 +10,8 @@ const __output = require('../process/output');
 const __parseArgs = require('../cli/parseArgs');
 const __toString = require('../string/toString');
 const __SPromise = require('../promise/SPromise');
+const __SProcess = require('../process/SProcess');
+const __SProcessInterface = require('../process/interface/SProcessInterface');
 const __SCliInterface = require('./interface/SCliInterface');
 const __SInterface = require('../class/SInterface');
 const __sugarHeading = require('../ascii/sugarHeading');
@@ -60,7 +62,7 @@ const __sugarHeading = require('../ascii/sugarHeading');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-class SCli extends __SPromise {
+class SCli extends __SProcess {
   /**
    * @name          _runningProcess
    * @type          SPromise
@@ -103,11 +105,9 @@ class SCli extends __SPromise {
       },
       settings
     );
-    super(null, settings).start();
-    if (!this._settings.id) this._settings.id = this.constructor.name;
+    super(settings);
 
-    // check integrity
-    this._checkCliIntegrity();
+    // if (!this._settings.id) this._settings.id = this.constructor.name;
   }
 
   /**
@@ -127,20 +127,6 @@ class SCli extends __SPromise {
    */
   static parseArgs(cliString) {
     return __parseArgs(cliString, this.definitionObj);
-  }
-
-  /**
-   * @name        process
-   * @type        Object
-   * @get
-   *
-   * Access the current process
-   *
-   * @since       2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  get process() {
-    return this._runningProcess;
   }
 
   /**
@@ -183,43 +169,15 @@ class SCli extends __SPromise {
   }
 
   /**
-   * @name        _checkCliIntegrity
-   * @type        Function
-   * @private
+   * @name          state
+   * @type          String
+   * @get
    *
-   * This method simply check that the extended SCli instance has the needed overrided methods, etc...
+   * Access the state of the SCli instance
    *
+   * @since         2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _checkCliIntegrity() {
-    // const prototypeArray = Object.getOwnPropertyNames(
-    //   Object.getPrototypeOf(this)
-    // );
-    // check static properties
-    if (
-      !this.constructor.command ||
-      typeof this.constructor.command !== 'string'
-    ) {
-      throw new Error(
-        __parseHtml(
-          `An <green>SCli</green> based class like your "<yellow>${this.constructor.name}</yellow>" MUST have a "<cyan>command</cyan>" static string property...`
-        )
-      );
-    }
-    if (
-      !this.constructor.definitionObj ||
-      typeof this.constructor.definitionObj !== 'object'
-    ) {
-      throw new Error(
-        __parseHtml(
-          `An <green>SCli</green> based class like your "<yellow>${this.constructor.name}</yellow>" MUST have a "<cyan>definitionObj</cyan>" static object property...`
-        )
-      );
-    }
-
-    // check definition object
-    __validateCliDefinitionObject(this.definitionObj);
-  }
 
   /**
    * @name          run
@@ -269,7 +227,13 @@ class SCli extends __SPromise {
       this._runningProcess = new SProcessInstance(settings);
 
       // Apply the SProcessInterface on the getted process
-      // __SCliInterface.apply(this._runningProcess);
+      __SProcessInterface.apply(this._runningProcess);
+
+      // this._runningProcess.on('log', (l) => {
+      //   console.log(
+      //     'log uwihf epuqw ofhquw un fhwfheuiqwh feuoh wqoun fhiwue hfuiwqh feui whfeu hwoehfwoieuhf iuqwh fuiwq hfui woif hweiuhof uiw2h '
+      //   );
+      // });
 
       // run the process
       this._runningProcess.run(paramsObj);
@@ -280,16 +244,7 @@ class SCli extends __SPromise {
         __output(this._runningProcess, outputSettings);
       }
 
-      // this._runningProcess.on('close', (data) => {
-      //   data = {
-      //     time: Date.now(),
-      //     value: data
-      //   };
-      //   this._runningProcess = null;
-      //   return data;
-      // });
-
-      return this._runningProcess;
+      return super.run(this._runningProcess);
     } else {
       const childProcess = new __SChildProcess(this.commandString, {
         id: settings.id,
@@ -297,16 +252,19 @@ class SCli extends __SPromise {
         defaultParamsObj: settings.defaultParamsObj
       });
 
-      this._runningProcess = childProcess.run(paramsObj);
+      childProcess.on('state', (state) => {
+        this.state = state;
+      });
 
-      // pipe events from the childProcess
-      __SPromise.pipe(this._runningProcess, this);
+      this._runningProcess = childProcess;
+
+      childProcess.run(paramsObj);
 
       this._runningProcess
-        .on('error', () => {
-          console.log('CPLP');
+        .on('error', (error) => {
+          console.log('erro', error);
         })
-        .on('resolve', () => {
+        .on('close', (args) => {
           this._runningProcess = null;
         });
 
@@ -324,21 +282,17 @@ class SCli extends __SPromise {
       }</primary>" process...`
     };
     this.trigger('log', launchingLogObj);
-    this._runningProcess.trigger('log', launchingLogObj);
 
     // save running process params
     this._runningParamsObj = paramsObj;
 
     // listen for some events on the process
     this._runningProcess.on('cancel,finally', () => {
-      this.trigger('log', {
-        value: 'PLOP'
-      });
       this._runningProcess = null;
       this._runningParamsObj = null;
     });
 
-    return this._runningProcess;
+    return super.run(this._runningProcess);
   }
 
   /**
@@ -385,8 +339,11 @@ class SCli extends __SPromise {
    */
   kill() {
     if (!this._runningProcess) return;
-    return this._runningProcess.cancel();
+    return this._runningProcess.kill();
   }
 }
 
-module.exports = __SInterface.implements(SCli, __SCliInterface);
+module.exports = __SInterface.implements(SCli, [
+  __SCliInterface,
+  __SProcessInterface
+]);

@@ -18,9 +18,13 @@ module.exports = class SProcessInterface extends __SInterface {
     state: {
       type: 'String',
       required: true,
-      values: ['idle', 'running', 'error', 'success', 'watching']
+      values: ['idle', 'running', 'killed', 'error', 'success', 'watching']
     },
     run: {
+      type: 'Function',
+      required: true
+    },
+    kill: {
       type: 'Function',
       required: true
     }

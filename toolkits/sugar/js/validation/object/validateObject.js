@@ -5,27 +5,23 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = validateObject;
 
-var _validateObjectDefinitionObject = _interopRequireDefault(require("./validateObjectDefinitionObject"));
-
-var _ofType = _interopRequireDefault(require("../../is/ofType"));
-
-var _plainObject = _interopRequireDefault(require("../../is/plainObject"));
+var _SObjectValidationError = _interopRequireDefault(require("../../error/SObjectValidationError"));
 
 var _class = _interopRequireDefault(require("../../is/class"));
 
-var _get = _interopRequireDefault(require("../../object/get"));
-
-var _validateValue = _interopRequireDefault(require("../value/validateValue"));
+var _plainObject = _interopRequireDefault(require("../../is/plainObject"));
 
 var _deepMerge = _interopRequireDefault(require("../../object/deepMerge"));
 
-var _parseHtml = _interopRequireDefault(require("../../console/parseHtml"));
-
 var _filter = _interopRequireDefault(require("../../object/filter"));
+
+var _get = _interopRequireDefault(require("../../object/get"));
 
 var _typeof = _interopRequireDefault(require("../../value/typeof"));
 
-var _SObjectValidationError = _interopRequireDefault(require("../../error/SObjectValidationError"));
+var _validateValue = _interopRequireDefault(require("../value/validateValue"));
+
+var _validateObjectDefinitionObject = _interopRequireDefault(require("./validateObjectDefinitionObject"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -117,7 +113,18 @@ function validateObject(objectToCheck, definitionObj, settings, _argPath) {
         value = null;
         staticIssue = true;
       }
-    }
+    } // @TODO        find a solution to control getters and setters on classes
+    // if (argDefinition.getter) {
+    //   console.log(objectToCheck.hasOwnProperty('state'));
+    //   // if (objectToCheck.__parentProto) {
+    //   //   console.log(
+    //   //     Object.getOwnPropertyDescriptor(objectToCheck.__parentProto, argName)
+    //   //   );
+    //   // }
+    //   console.log(argName, objectToCheck.__parentProto.name);
+    //   console.log('GETTER');
+    // }
+
 
     var validationRes = (0, _validateValue.default)(value, argDefinition, {
       name: argName,

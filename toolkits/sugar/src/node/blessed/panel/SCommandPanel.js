@@ -18,6 +18,7 @@ const __SWindowBox = require('../box/SWindowBox');
 const __convert = require('../../time/convert');
 const __SOutput = require('../SOutput');
 const __SAppCommandInterface = require('../interface/SAppCommandInterface');
+const __getExtendsStack = require('../../class/getExtendsStack');
 
 /**
  * @name                  SCommandPanel
@@ -104,7 +105,12 @@ module.exports = class SCommandPanel extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(commands, settings = {}) {
-    const _settings = __deepMerge({}, settings);
+    const _settings = __deepMerge(
+      {
+        framerate: 10
+      },
+      settings
+    );
     // extends SPanel
     super(_settings);
 
@@ -133,11 +139,6 @@ module.exports = class SCommandPanel extends __SComponent {
       // instanciate the command instance
       const commandClass = require(commandObj.path);
       commandObj.instance = new commandClass(commandObj.settings);
-
-      __SAppCommandInterface.apply(commandObj.instance, {
-        title: `SCommandPanel "${commandObj.name}"`,
-        description: `The passed instance for the "${commandObj.name} (${commandObj.id})" does not fit the SAppCommandInterface`
-      });
 
       // commandObj.instance.on('beforeStart', () => {
       //   // const boxObj = this._boxesObjectsMap.get(commandObj);
@@ -667,7 +668,7 @@ module.exports = class SCommandPanel extends __SComponent {
           this.$list.items[activeItemIdx + 1].active = true;
         }
       }
-      this._updateList();
+      // this._updateList();
     };
 
     this.screen.on('keypress', (e, key) => {
@@ -689,127 +690,7 @@ module.exports = class SCommandPanel extends __SComponent {
   }
 
   _updateList() {
-    // console.log('DU', Date.now());
-    this._commands.forEach((commandObj, i) => {
-      const item = this.$list.getItem(i);
-
-      if (!item.$key) {
-        item.$key = __blessed.box({
-          width: 3,
-          height: 1,
-          top: 0,
-          left: '100%',
-          right: 0,
-          bottom: 0,
-          style: {
-            fg: 'white'
-          },
-          mouse: false,
-          keys: false,
-          scrollable: false,
-          padding: {
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0
-          }
-        });
-        item.append(item.$key);
-      }
-
-      if (!item.$state) {
-        item.$state = __blessed.box({
-          width: 3,
-          height: 1,
-          top: 0,
-          left: '100%-3',
-          right: 0,
-          bottom: 0,
-          style: {
-            fg: 'white'
-          },
-          mouse: false,
-          keys: false,
-          scrollable: false,
-          padding: {
-            top: 0,
-            left: 1,
-            right: 0,
-            bottom: 0
-          }
-        });
-        item.append(item.$state);
-      }
-
-      item.padding = {
-        top: 0,
-        left: 0,
-        bottom: 0,
-        right: 0
-      };
-      item.top = i * 2;
-
-      let key = `${commandObj.key}`;
-      item.$key.setContent(key);
-
-      let name = commandObj.name;
-      if (
-        commandObj.instance.state === 'running' ||
-        commandObj.instance.state === 'watching'
-      ) {
-        commandObj._spinner.ora.text = '';
-        commandObj._spinner.ora.color = 'yellow';
-        name = `${commandObj.name}`;
-        if (commandObj.instance.state === 'running')
-          commandObj._spinner.ora.color = 'cyan';
-        if (commandObj.instance.state === 'error')
-          commandObj._spinner.ora.color = 'red';
-        // if (commandObj.state === 'success')
-        //   commandObj._spinner.ora.color = 'green';
-        // }
-        item.$state.setContent(commandObj._spinner.ora.frame());
-      } else if (commandObj.instance.state === 'error') {
-        name = `${commandObj.name}`;
-        item.$state.setContent('×');
-        item.$state.style.fg = __color('terminal.red').toString();
-        // item.$state.style.bg = __color('terminal.red').toString();
-      } else if (commandObj.instance.state === 'success') {
-        name = `${commandObj.name}`;
-        item.$state.setContent('✔');
-        item.$state.style.fg = __color('terminal.green').toString();
-        // item.$state.style.bg = __color('terminal.white').toString();
-      } else {
-        item.$state.setContent('-');
-      }
-
-      if (item.active) {
-        name = `> ${name}`;
-      }
-
-      let spaces = Math.round(this.$list.width - __countLine(name) - 1);
-      if (spaces < 0) spaces = 0;
-      name = name + ' '.repeat(spaces);
-
-      if (item.active || item.selected) {
-        item.style.fg = __color('terminal.primary').toString();
-      } else {
-        item.style.fg = __color('terminal.white').toString();
-      }
-
-      if (commandObj.instance.state === 'running') {
-        item.style.fg = __color('terminal.cyan').toString();
-      } else if (item.active || item.selected) {
-        item.style.fg = __color('terminal.primary').toString();
-      } else if (commandObj.instance.state === 'watching') {
-        item.style.fg = __color('terminal.white').toString();
-      } else if (commandObj.instance.state === 'error') {
-        item.style.fg = __color('terminal.red').toString();
-      } else if (commandObj.instance.state === 'success') {
-        item.style.fg = __color('terminal.green').toString();
-      }
-
-      this.$list.setItem(i, __parseHtml(name));
-    });
+    return;
 
     // console.log('END', Date.now());
   }
@@ -1205,6 +1086,9 @@ module.exports = class SCommandPanel extends __SComponent {
 
       // update the content
       this._updateCommandBoxesContent();
+
+      // update list
+      this._updateList();
 
       super.update();
     });

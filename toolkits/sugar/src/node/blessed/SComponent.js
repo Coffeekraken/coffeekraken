@@ -46,7 +46,7 @@ module.exports = class SComponent extends __blessed.box {
   _settings = {};
 
   /**
-   * @name                  _renderInterval
+   * @name                  _framerateInterval
    * @type                  Function
    * @private
    * @static
@@ -56,7 +56,7 @@ module.exports = class SComponent extends __blessed.box {
    * @since         2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static _renderInterval = null;
+  static _framerateInterval = null;
 
   /**
    * @name                  constructor
@@ -100,7 +100,13 @@ module.exports = class SComponent extends __blessed.box {
     }
 
     // store the settings
-    settings = __deepMerge({}, settings);
+    settings = __deepMerge(
+      {
+        maxRenderInterval: 100,
+        framerate: null
+      },
+      settings
+    );
     // extends parent
     super(settings);
 
@@ -123,14 +129,14 @@ module.exports = class SComponent extends __blessed.box {
     this._settings = settings;
 
     this._allowRender = true;
-    this._renderBuffer = setInterval(() => {
-      this._allowRender = true;
-    }, 100);
+    // this._renderBuffer = setInterval(() => {
+    //   this._allowRender = true;
+    // }, settings.maxRenderInterval);
 
     // set render interval if not set already
-    // if (!SComponent._renderInterval) {
-    //   this.setRenderInterval(100);
-    // }
+    if (settings.framerate && !SComponent._framerateInterval) {
+      this.setFramerate(settings.framerate);
+    }
 
     let container;
     if (settings.container) {
@@ -165,7 +171,7 @@ module.exports = class SComponent extends __blessed.box {
   }
 
   /**
-   * @name                  setRenderInterval
+   * @name                  setFramerate
    * @type                  Function
    *
    * This method allows you to simply change the interval timeout between the screen renders process.
@@ -176,12 +182,12 @@ module.exports = class SComponent extends __blessed.box {
    * @since           2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  setRenderInterval(interval) {
-    // clearInterval(SComponent._renderInterval);
-    // SComponent._renderInterval = setInterval(() => {
-    //   if (!this.isDisplayed()) return;
-    //   (global.screen || this.screen).render();
-    // }, interval);
+  setFramerate(framerate) {
+    clearInterval(SComponent._framerateInterval);
+    SComponent._framerateInterval = setInterval(() => {
+      if (!this.isDisplayed()) return;
+      this.update();
+    }, 1000 / framerate);
   }
 
   /**
@@ -209,16 +215,27 @@ module.exports = class SComponent extends __blessed.box {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
+  _renderAfterNotAllowedTimeout = null;
   update() {
     if (this.isDestroyed()) return;
     if (!this._allowRender) {
-      clearTimeout(this._updateTimeout);
-      this._updateTimeout = setTimeout(() => {
-        this.update();
-      }, 20);
+      if (!this._settings.framerate && !this._renderAfterNotAllowedTimeout) {
+        this._renderAfterNotAllowedTimeout = setTimeout(() => {
+          clearTimeout(this._renderAfterNotAllowedTimeout);
+          this.update();
+        }, 200);
+      }
       return;
     }
+
     this._allowRender = false;
+
+    clearTimeout(this._updateTimeout);
+    this._updateTimeout = setTimeout(() => {
+      this._allowRender = true;
+      if (!this._settings.framerate) this.update();
+    }, this._settings.maxRenderInterval);
+
     if (this._screen) this._screen.render();
   }
 
@@ -260,10 +277,6 @@ module.exports = class SComponent extends __blessed.box {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   allowRender() {
-    // clearTimeout(this._updateTimeout);
-    // this._updateTimeout = setTimeout(() => {
-    //   this.update();
-    // }, 20);
     return this._allowRender;
   }
 };

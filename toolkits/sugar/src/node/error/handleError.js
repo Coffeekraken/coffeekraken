@@ -2,6 +2,7 @@ const __isChildProcess = require('../is/childProcess');
 const __packageRoot = require('../path/packageRoot');
 const __SError = require('../error/SError');
 const __parseHtml = require('../terminal/parseHtml');
+const __keypress = require('keypress');
 
 /**
  * @name                    handleError
@@ -24,6 +25,7 @@ module.exports = function handleError(error) {
   if (__isChildProcess()) {
     console.log(error.toString());
   } else {
+    __keypress.disableMouse(process.stdout);
     error.message = __parseHtml(error.message);
     error.stack = '';
     throw error;

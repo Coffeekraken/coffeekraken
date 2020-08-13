@@ -1,5 +1,7 @@
 const __frontendServer = require('../frontend/frontend');
 const __SProcess = require('../../process/SProcess');
+const __SPromise = require('../../promise/SPromise');
+const __SError = require('../../error/SError');
 
 /**
  * @name            SFrontendServerProcess
@@ -40,7 +42,21 @@ module.exports = class SFrontendServerProcess extends __SProcess {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(argsObj) {
-    const frontendServerProcess = __frontendServer(argsObj);
-    __SProcess.pipe(frontendServerProcess, this);
+    const promise = __frontendServer(argsObj);
+    return super.run(promise);
+  }
+
+  /**
+   * @name          kill
+   * @type          Function
+   *
+   * Method that allows you to kill the process
+   *
+   * @since         2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  kill() {
+    this.state = 'killed';
+    this._frontendServerProcess.cancel();
   }
 };

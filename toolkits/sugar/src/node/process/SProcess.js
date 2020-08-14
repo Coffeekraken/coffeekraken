@@ -67,6 +67,39 @@ class SProcess extends __SPromise {
   }
 
   /**
+   * @name          duration
+   * @type          Number
+   *
+   * Store the process duration. 0 if no process launched
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  duration = 0;
+
+  /**
+   * @name          startTime
+   * @type          Number
+   *
+   * Store the process startTime. 0 if no process launched
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  startTime = 0;
+
+  /**
+   * @name          endTime
+   * @type          Number
+   *
+   * Store the process endTime. 0 if no process launched
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  endTime = 0;
+
+  /**
    * @name          constructor
    * @type          Function
    * @constructor
@@ -84,6 +117,36 @@ class SProcess extends __SPromise {
   }
 
   /**
+   * @name            success
+   * @type            Function
+   *
+   * This method take care of the things to do when the process
+   * has finished successfully like update the state, etc...
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  success() {
+    // update the state
+    this.state = 'success';
+  }
+
+  /**
+   * @name            kill
+   * @type            Function
+   *
+   * This method take care of the things to do when the process
+   * has beek killed like update the state, etc...
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  kill() {
+    // update the state
+    this.state = 'killed';
+  }
+
+  /**
    * @name             run
    * @type              Function
    *
@@ -97,28 +160,21 @@ class SProcess extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(processPromise) {
-    // const promise = new __SPromise(() => {}, {
-    //   id: this._settings.id,
-    //   name: this._settings.name
-    // }).start();
-
     // update the process state
     this.state = 'running';
 
-    // execute the processFn
-    // const processPromise = processFn(
-    //   promise.resolve.bind(this),
-    //   promise.reject.bind(this),
-    //   promise.trigger.bind(this),
-    //   promise.cancel.bind(this),
-    //   promise
-    // );
+    // save the start timestamp
+    this.startTime = Date.now();
+    this.endTime = 0;
+    this.duration = 0;
+
+    // listen when the process close to calculate duration
+    processPromise.on('close', () => {
+      this.endTime = Date.now();
+      this.duration = this.endTime - this.startTime;
+    });
 
     __SPromise.pipe(processPromise, this);
-    // __SPromise.pipe(processPromise, promise);
-
-    // update the process state
-    // this.state = 'success';
 
     return processPromise;
   }

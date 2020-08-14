@@ -63,7 +63,7 @@ module.exports = class SOutput extends __SComponent {
   _content = [];
 
   /**
-   * @name          _logBox
+   * @name          $logBox
    * @type          blessed.Box
    * @private
    *
@@ -71,10 +71,10 @@ module.exports = class SOutput extends __SComponent {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _logBox = null;
+  $logBox = null;
 
   /**
-   * @name           _headerBox
+   * @name           $headerBox
    * @type          blessed.box
    * @private
    *
@@ -83,7 +83,7 @@ module.exports = class SOutput extends __SComponent {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _headerBox = null;
+  $headerBox = null;
 
   /**
    * @name          constructor
@@ -137,6 +137,7 @@ module.exports = class SOutput extends __SComponent {
     // subscribe to data
     s.on('close', (data) => {
       this.log({
+        clear: true,
         value: `Closing process with code <red>${data.code}</red> and signal <red>${data.signal}</red>...`
       });
       this.update();
@@ -192,10 +193,15 @@ module.exports = class SOutput extends __SComponent {
         this._allowClear = false;
         this._content = [];
         this._lastY = 1;
-        this._logBoxChilds.forEach((child, i) => {
+        this.$logBoxChilds.forEach((child, i) => {
           child.destroy();
         });
-        this._logBoxChilds = [];
+        if (this.$headerBox) {
+          this.$headerBox.destroy();
+          this.$headerBox = null;
+          this.$logBox.top = 0;
+        }
+        this.$logBoxChilds = [];
         this.update();
       }
     }
@@ -309,6 +315,15 @@ module.exports = class SOutput extends __SComponent {
 
     let logsObjArray = this._parseLog(...args);
 
+    for (let i = 0; i < logsObjArray.length; i++) {
+      const logObj = logsObjArray[i];
+      if (logObj.clear) {
+        this.clear();
+        logsObjArray = [logObj];
+        break;
+      }
+    }
+
     // filter the content to remove the "temp" logs
     this._content = this._content.filter((logObj) => {
       // console.log(logObj);
@@ -401,7 +416,7 @@ module.exports = class SOutput extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _lastY = 1;
-  _logBoxChilds = [];
+  $logBoxChilds = [];
   update() {
     if (__isChildProcess()) return;
     if (!this.allowRender()) return;
@@ -441,22 +456,22 @@ module.exports = class SOutput extends __SComponent {
       } else if (item.value && typeof item.value === 'string') {
         const $box = this._simpleTextBox(item.value);
         $box.top = this._lastY + item.mt;
-        this._logBoxChilds.push($box);
-        this._logBox.append($box);
+        this.$logBoxChilds.push($box);
+        this.$logBox.append($box);
         item.$box = $box;
         this._lastY += $box.getScrollHeight() + item.mt + item.mb;
       } else if (typeof item === 'object' && item.group) {
         const $box = this._groupBox(item.group, item.content);
         $box.top = this._lastY;
-        this._logBoxChilds.push($box);
+        this.$logBoxChilds.push($box);
         item.$box = $box;
-        this._logBox.append($box);
+        this.$logBox.append($box);
         this._lastY += $box.getScrollHeight() + 1;
       }
     });
 
     setTimeout(() => {
-      this._logBox.setScrollPerc(100);
+      this.$logBox.setScrollPerc(100);
       super.update();
     }, 200);
   }
@@ -478,9 +493,9 @@ module.exports = class SOutput extends __SComponent {
   _simpleTextBox(text) {
     const $box = __blessed.box({
       width:
-        this._logBox.width -
-        this._logBox.padding.left -
-        this._logBox.padding.right,
+        this.$logBox.width -
+        this.$logBox.padding.left -
+        this.$logBox.padding.right,
       height: 'shrink',
       style: {
         fg: 'white'
@@ -530,9 +545,9 @@ module.exports = class SOutput extends __SComponent {
   _groupBox(group, textsArray) {
     const $box = __blessed.box({
       width:
-        this._logBox.width -
-        this._logBox.padding.left -
-        this._logBox.padding.right,
+        this.$logBox.width -
+        this.$logBox.padding.left -
+        this.$logBox.padding.right,
       height: 'shrink',
       style: {
         fg: 'white'
@@ -607,16 +622,16 @@ module.exports = class SOutput extends __SComponent {
    * header box based on the blessed.box function.
    *
    * @param       {Object}      logObj          The logObj to use to generate the header box
-   * @return      {blessed.box}                 Return the blessed.box instance also saved in the "_headerBox" instance property
+   * @return      {blessed.box}                 Return the blessed.box instance also saved in the "$headerBox" instance property
    *
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _createHeaderBox(logObj) {
-    this._headerBox = __blessed.box({
+    this.$headerBox = __blessed.box({
       width: 'shrink',
       height: 1,
-      top: 0,
+      top: 1,
       left: 0,
       right: 0,
       bottom: 0,
@@ -648,12 +663,12 @@ module.exports = class SOutput extends __SComponent {
       }
     });
 
-    this.append(this._headerBox);
-    this._headerBox.height = this._headerBox.getScrollHeight() + 4;
+    this.append(this.$headerBox);
+    this.$headerBox.height = this.$headerBox.getScrollHeight() + 4;
 
-    this._logBox.top = this._headerBox.height;
+    this.$logBox.top = this.$headerBox.height + 1;
 
-    return this._headerBox;
+    return this.$headerBox;
   }
 
   /**
@@ -666,12 +681,12 @@ module.exports = class SOutput extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _createLogBox() {
-    // if (this._logBox) {
-    //   this._logBox.destroy();
-    //   this._logBox = null;
+    // if (this.$logBox) {
+    //   this.$logBox.destroy();
+    //   this.$logBox = null;
     // }
 
-    this._logBox = __blessed.box({
+    this.$logBox = __blessed.box({
       width: '100%',
       top: 0,
       left: 0,
@@ -698,6 +713,6 @@ module.exports = class SOutput extends __SComponent {
       }
     });
 
-    this.append(this._logBox);
+    this.append(this.$logBox);
   }
 };

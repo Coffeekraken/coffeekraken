@@ -20,6 +20,18 @@ module.exports = class SProcessInterface extends __SInterface {
       required: true,
       values: ['idle', 'running', 'killed', 'error', 'success', 'watching']
     },
+    duration: {
+      type: 'Number',
+      required: true
+    },
+    startTime: {
+      type: 'Number',
+      required: true
+    },
+    endTime: {
+      type: 'Number',
+      required: true
+    },
     run: {
       type: 'Function',
       required: true

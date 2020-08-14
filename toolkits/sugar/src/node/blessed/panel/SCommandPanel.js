@@ -690,9 +690,127 @@ module.exports = class SCommandPanel extends __SComponent {
   }
 
   _updateList() {
-    return;
+    // console.log('DU', Date.now());
+    this._commands.forEach((commandObj, i) => {
+      const item = this.$list.getItem(i);
 
-    // console.log('END', Date.now());
+      if (!item.$key) {
+        item.$key = __blessed.box({
+          width: 3,
+          height: 1,
+          top: 0,
+          left: '100%',
+          right: 0,
+          bottom: 0,
+          style: {
+            fg: 'white'
+          },
+          mouse: false,
+          keys: false,
+          scrollable: false,
+          padding: {
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0
+          }
+        });
+        item.append(item.$key);
+      }
+
+      if (!item.$state) {
+        item.$state = __blessed.box({
+          width: 3,
+          height: 1,
+          top: 0,
+          left: '100%-3',
+          right: 0,
+          bottom: 0,
+          style: {
+            fg: 'white'
+          },
+          mouse: false,
+          keys: false,
+          scrollable: false,
+          padding: {
+            top: 0,
+            left: 1,
+            right: 0,
+            bottom: 0
+          }
+        });
+        item.append(item.$state);
+      }
+
+      item.padding = {
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0
+      };
+      item.top = i * 2;
+
+      let key = `${commandObj.key}`;
+      item.$key.setContent(key);
+
+      let name = commandObj.name;
+      if (
+        commandObj.instance.state === 'running' ||
+        commandObj.instance.state === 'watching'
+      ) {
+        commandObj._spinner.ora.text = '';
+        commandObj._spinner.ora.color = 'yellow';
+        name = `${commandObj.name}`;
+        if (commandObj.instance.state === 'running')
+          commandObj._spinner.ora.color = 'cyan';
+        if (commandObj.instance.state === 'error')
+          commandObj._spinner.ora.color = 'red';
+        // if (commandObj.state === 'success')
+        //   commandObj._spinner.ora.color = 'green';
+        // }
+        item.$state.setContent(commandObj._spinner.ora.frame());
+      } else if (commandObj.instance.state === 'error') {
+        name = `${commandObj.name}`;
+        item.$state.setContent('×');
+        item.$state.style.fg = __color('terminal.red').toString();
+        // item.$state.style.bg = __color('terminal.red').toString();
+      } else if (commandObj.instance.state === 'success') {
+        name = `${commandObj.name}`;
+        item.$state.setContent('✔');
+        item.$state.style.fg = __color('terminal.green').toString();
+        // item.$state.style.bg = __color('terminal.white').toString();
+      } else {
+        item.$state.setContent('-');
+      }
+
+      if (item.active) {
+        name = `> ${name}`;
+      }
+
+      let spaces = Math.round(this.$list.width - __countLine(name) - 1);
+      if (spaces < 0) spaces = 0;
+      name = name + ' '.repeat(spaces);
+
+      if (item.active || item.selected) {
+        item.style.fg = __color('terminal.primary').toString();
+      } else {
+        item.style.fg = __color('terminal.white').toString();
+      }
+
+      if (commandObj.instance.state === 'running') {
+        item.style.fg = __color('terminal.cyan').toString();
+      } else if (item.active || item.selected) {
+        item.style.fg = __color('terminal.primary').toString();
+      } else if (commandObj.instance.state === 'watching') {
+        item.style.fg = __color('terminal.white').toString();
+      } else if (commandObj.instance.state === 'error') {
+        item.style.fg = __color('terminal.red').toString();
+      } else if (commandObj.instance.state === 'success') {
+        item.style.fg = __color('terminal.green').toString();
+      }
+
+      this.$list.setItem(i, __parseHtml(name));
+    });
   }
 
   /**
@@ -712,26 +830,19 @@ module.exports = class SCommandPanel extends __SComponent {
       }
 
       boxTitle += `<bold>${commandObj.title || commandObj.name}</bold>`;
-      if (
-        commandObj.instance.lastProcessObj &&
-        commandObj.instance.lastProcessObj.duration
-      ) {
-        boxTitle += ` <italic>${
-          commandObj.instance.lastProcessObj.duration / 1000
-        }s</italic>`;
+      if (commandObj.instance && commandObj.instance.duration) {
+        boxTitle += ` <italic>${commandObj.instance.duration / 1000}s</italic>`;
       }
 
       if (
-        commandObj.instance.lastProcessObj &&
-        (commandObj.instance.lastProcessObj.state === 'error' ||
-          commandObj.instance.lastProcessObj.state === 'killed')
+        commandObj.instance &&
+        (commandObj.instance.state === 'error' ||
+          commandObj.instance.state === 'killed')
       ) {
         commandObj.$box.style.bg = __color('terminal.red').toString();
         clearInterval(commandObj.spinner.interval);
         commandObj.$header.setContent(
-          __parseHtml(
-            `<iCross/>  ${boxTitle} (${commandObj.instance.lastProcessObj.state})`
-          )
+          __parseHtml(`<iCross/>  ${boxTitle} (${commandObj.instance.state})`)
         );
         commandObj.$box.screen.render();
       } else if (commandObj.instance.state === 'watching') {
@@ -742,16 +853,16 @@ module.exports = class SCommandPanel extends __SComponent {
           commandObj.$header.setContent(commandObj.spinner.ora.frame());
         }, 50);
       } else if (
-        commandObj.instance.lastProcessObj &&
-        commandObj.instance.lastProcessObj.state === 'success'
+        commandObj.instance &&
+        commandObj.instance.state === 'success'
       ) {
         commandObj.$box.style.bg = __color('terminal.green').toString();
         clearInterval(commandObj.spinner.interval);
         commandObj.$header.setContent(__parseHtml(`<iCheck/>  ${boxTitle}`));
         commandObj.$box.screen.render();
       } else if (
-        commandObj.instance.lastProcessObj &&
-        commandObj.instance.lastProcessObj.state === 'running'
+        commandObj.instance &&
+        commandObj.instance.state === 'running'
       ) {
         commandObj.$box.style.bg = __color('terminal.cyan').toString();
         clearInterval(commandObj.spinner.interval);
@@ -881,40 +992,37 @@ module.exports = class SCommandPanel extends __SComponent {
    */
   _updateCommandBoxesContent() {
     this._displayedCommands.forEach((commandObj, i) => {
-      const lastProcessObj = commandObj.instance.lastProcessObj;
+      if (
+        commandObj.stateMessageLogged &&
+        commandObj.stateMessageLogged === commandObj.instance.state
+      )
+        return;
+      commandObj.stateMessageLogged = commandObj.instance.state;
 
-      if (lastProcessObj && lastProcessObj.state === 'killed') {
-        commandObj.$log.clear();
-        commandObj.$log.log(`<red>The process has been killed...</red>`);
-      } else if (lastProcessObj && lastProcessObj.state === 'error') {
+      if (commandObj.instance.state === 'idle') {
+        commandObj.$log.log({
+          temp: true,
+          clear: true,
+          value: `Press <yellow>${commandObj.key}</yellow> to launch the process...`
+        });
+      } else if (commandObj.instance.state === 'killed') {
+        commandObj.$log.log({
+          temp: true,
+          clear: true,
+          value: `The process has been <red>killed</red>...`
+        });
+      } else if (commandObj.instance && commandObj.instance.state === 'error') {
+        // commandObj.$log.log({
+        //   temp: true,
+        //   clear: true,
+        //   value: `The process has been <red>killed</red>...`
+        // });
         // commandObj.$log.pushLine(__parseHtml(`<red>Something went wrong...</red>`));
-      } else {
-        if (
-          lastProcessObj &&
-          lastProcessObj.stdout &&
-          !lastProcessObj.stdout.length
-        ) {
-          commandObj.$log.clear();
-        }
-        // take care of the content of the processBox
-        // commandObj.$log.setContent('');
-        // if (
-        //   lastProcessObj &&
-        //   lastProcessObj.stderr &&
-        //   lastProcessObj.stderr.length
-        // ) {
-        //   lastProcessObj.stderr.forEach((logItem) => {
-        //     commandObj.$log.pushLine(__parseHtml(logItem.value || logItem));
-        //   });
-        // } else if (
-        //   lastProcessObj &&
-        //   lastProcessObj.stdout &&
-        //   lastProcessObj.stdout.length
-        // ) {
-        //   lastProcessObj.stdout.forEach((logItem) => {
-        //     commandObj.$log.pushLine(__parseHtml(logItem.value || logItem));
-        //   });
-        // }
+      } else if (commandObj.instance.obj === 'success') {
+        commandObj.$log.log({
+          temp: true,
+          value: `The process has been terminated <green>successfully</green>!`
+        });
       }
 
       // scroll logBox

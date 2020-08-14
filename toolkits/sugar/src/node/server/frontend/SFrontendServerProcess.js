@@ -56,7 +56,7 @@ module.exports = class SFrontendServerProcess extends __SProcess {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   kill() {
-    this.state = 'killed';
     this._frontendServerProcess.cancel();
+    super.kill();
   }
 };

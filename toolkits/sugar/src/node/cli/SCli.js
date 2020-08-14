@@ -15,6 +15,7 @@ const __SProcessInterface = require('../process/interface/SProcessInterface');
 const __SCliInterface = require('./interface/SCliInterface');
 const __SInterface = require('../class/SInterface');
 const __sugarHeading = require('../ascii/sugarHeading');
+const __packageJson = require('../package/json');
 
 /**
  * @name                SCli
@@ -277,7 +278,10 @@ class SCli extends __SProcess {
 
     const launchingLogObj = {
       temp: true,
-      value: `<yellow>${__sugarHeading}</yellow>\n\nLaunching the SCli "<primary>${
+      clear: true,
+      value: `${__sugarHeading({
+        version: __packageJson(__dirname).version
+      })}\n\nLaunching the SCli "<primary>${
         this._settings.name || this._settings.id
       }</primary>" process...`
     };

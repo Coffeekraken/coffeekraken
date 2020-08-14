@@ -22,6 +22,9 @@ const __keypress = require('keypress');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function handleError(error) {
+  // @TODO     find a better solution to avoid blessed issues
+  if (error.toString().includes(`Cannot read property 'itop' of null`)) return;
+
   if (__isChildProcess()) {
     console.log(error.toString());
   } else {

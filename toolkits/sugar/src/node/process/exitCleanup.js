@@ -9,6 +9,7 @@ const __keypress = require('keypress');
 const __wait = require('../time/wait');
 const __SOutput = require('../blessed/SOutput');
 const __sugarHeading = require('../ascii/sugarHeading');
+const __packageJson = require('../package/json');
 
 /**
  * @name              exitCleanup
@@ -48,7 +49,9 @@ module.exports = function exitCleanup(handler = null, settings = {}) {
     __keypress.disableMouse(process.stdout);
 
     // destroy the screen if exists
-    if (global._screen) global._screen.destroy();
+    try {
+      if (global._screen) global._screen.destroy();
+    } catch (e) {}
 
     await __wait(50);
 
@@ -56,7 +59,9 @@ module.exports = function exitCleanup(handler = null, settings = {}) {
     $output.attach();
 
     $output.log({
-      value: `<yellow>${__sugarHeading}</yellow>`
+      value: `${__sugarHeading({
+        version: __packageJson(__dirname).version
+      })}`
     });
 
     $output.log({

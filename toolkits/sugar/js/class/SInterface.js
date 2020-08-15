@@ -283,10 +283,15 @@ var SInterface = /*#__PURE__*/function () {
   }, {
     key: "implements",
     value: function _implements(instance, interfaces, settings) {
+      if (interfaces === void 0) {
+        interfaces = null;
+      }
+
       if (settings === void 0) {
         settings = {};
       }
 
+      if (interfaces === null) interfaces = [this];
       if (!Array.isArray(interfaces)) interfaces = [interfaces];
 
       if ((0, _class.default)(instance)) {

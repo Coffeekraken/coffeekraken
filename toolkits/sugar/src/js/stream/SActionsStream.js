@@ -1,13 +1,11 @@
-import __SPromise from '../promise/SPromise';
-import __deepMerge from '../object/deepMerge';
-import __convert from '../time/convert';
-import __SActionsStreamAction from './SActionsStreamAction';
-import __isClass from '../is/class';
-import __isChildProcess from '../is/childProcess';
-import __isTestEnv from '../is/testEnv';
-import __wait from '../time/wait';
-import __uniqid from '../string/uniqid';
 import __parseHtml from '../console/parseHtml';
+import __isClass from '../is/class';
+import __deepMerge from '../object/deepMerge';
+import __SPromise from '../promise/SPromise';
+import __uniqid from '../string/uniqid';
+import __convert from '../time/convert';
+import __wait from '../time/wait';
+import __SActionsStreamAction from './SActionsStreamAction';
 
 /**
  * @name          SActionStream
@@ -19,13 +17,13 @@ import __parseHtml from '../console/parseHtml';
  * An action stream if simply some functions that are called one after the other
  * and that pass to each other some value(s) on which to work.
  * Here's all the "events" that you can subscribe on the SActionStream instance, or on the returned SPromise when calling the "start" method:
- * - start: Triggered when an action starts
+ * - start: Triggered when the overall actions stream starts
  * - {actionName}.start: Triggered when the specified action starts
- * - step: Triggered when an action is just finished
- * - {actionName}.step: Triggered when the specified action is just finished
- * - error: Triggered when something wrong has happened in any action
- * - {actionName}.error: Triggered when something wrong has happened in the specified action
- * - complete: Triggered when the stream has been completed successfully
+ * - {actionName}.reject: Triggered when the specified action has been rejected
+ * - {actionName}.complete: Triggered when the specified action has been completed
+ * - complete: Triggered when the overall actions stream has been completed
+ * - resolve: Trigerred when the overall actions stream has been completed
+ * - log: Triggered when a log message has been set
  * - cancel: Triggered when the stream has been canceled using the "cancel" method of the returned SPromise when calling the "start" method
  *
  * @param       {Object}        actions         An object of actions to execute one after the other. The object has to be formatted like ```{ actionName: actionFunction }```
@@ -159,6 +157,7 @@ export default class SActionStream extends __SPromise {
   start(streamObj = {}, settings = {}) {
     settings = __deepMerge(Object.assign({}, this._settings), settings);
     let canceled = false,
+      hasErrorsOcucred = false,
       currentActionReturn,
       skipNextActions = false;
 
@@ -175,6 +174,8 @@ export default class SActionStream extends __SPromise {
           settings.name || 'unnamed'
         }</cyan>"`;
         this.log(startString);
+        this.trigger('start', {});
+        trigger('start', {});
 
         // check if is a "before" setting function
         if (settings.before && settings.before.length) {
@@ -241,7 +242,7 @@ export default class SActionStream extends __SPromise {
           actions: {}
         };
         for (let i = 0; i < actionsOrderedNames.length; i++) {
-          if (canceled) break;
+          if (canceled || hasErrorsOcucred) break;
 
           const actionName = actionsOrderedNames[i];
           this._currentActionName = actionName;
@@ -322,14 +323,16 @@ export default class SActionStream extends __SPromise {
               });
             });
             actionInstance.on('error', (value) => {
-              this.error({
+              this.log({
+                error: true,
                 group: this._currentActionName,
-                value: `#error ${value}`
+                value: value
               });
             });
             actionInstance.on('reject', (value) => {
               this._exitCode = 1;
-              this.dispatch('reject', value);
+              this.trigger(`${this._currentActionName}.reject`, value);
+              trigger(`${this._currentActionName}.reject`, value);
               cancel(value);
             });
             actionSettings = __deepMerge(
@@ -361,7 +364,14 @@ export default class SActionStream extends __SPromise {
           countSources(currentStreamObjArray);
 
           // trigger some "start" events
-          this.dispatch('start', Object.assign({}, actionObj));
+          this.trigger(
+            `${this._currentActionName}.start`,
+            Object.assign({}, actionObj)
+          );
+          trigger(
+            `${this._currentActionName}.start`,
+            Object.assign({}, actionObj)
+          );
           const startString = `#start Starting the action "<yellow>${actionName}</yellow>" on <magenta>${streamSourcesCount}</magenta> sources`;
           this.log({
             group: actionName,
@@ -382,7 +392,7 @@ export default class SActionStream extends __SPromise {
                 currentStreamObj._isStreamObj = true;
               }
 
-              // check if is a "beforeActions" setting function
+              // check if is a "afterActions" setting function
               if (!settings.beforeActions[actionName])
                 settings.beforeActions[actionName] = [];
               else if (!Array.isArray(settings.beforeActions[actionName])) {
@@ -390,31 +400,56 @@ export default class SActionStream extends __SPromise {
                   settings.beforeActions[actionName]
                 ];
               }
-              if (settings.beforeActions[actionName].length) {
+              if (settings.beforeActions[actionName]) {
                 this.log({
                   group: actionName,
-                  value: `Executing the <cyan>${settings.beforeActions[actionName].length}</cyan> callback(s) registered before the <yellow>${actionName}</yellow> action...`
+                  value: `Executing the <cyan>${settings.beforeActions[actionName].length}</cyan> callback(s) registered after the <yellow>${actionName}</yellow> action...`
                 });
-                for (let key in settings.beforeActions[actionName]) {
-                  const beforeActionFn =
-                    settings.beforeActions[actionName][key];
-                  const beforeActionResultObj = await beforeActionFn(
-                    currentStreamObj,
-                    Object.assign({}, actionObj)
-                  );
-                  if (beforeActionResultObj && beforeActionResultObj.settings) {
-                    actionSettings = __deepMerge(
-                      actionSettings,
-                      beforeActionResultObj.settings
-                    );
-                  }
-                  if (
-                    beforeActionResultObj &&
-                    beforeActionResultObj.streamObj
-                  ) {
-                    currentStreamObj = beforeActionResultObj.streamObj;
-                  } else {
-                    currentStreamObj = beforeActionResultObj;
+                if (Array.isArray(currentStreamObj)) {
+                  currentStreamObj.forEach(async (strObj, i) => {
+                    let actionsArray = this._settings.beforeActions[actionName];
+                    if (!Array.isArray(actionsArray))
+                      actionsArray = [actionsArray];
+                    for (let i = 0; i < actionsArray.length; i++) {
+                      const fn = actionsArray[i];
+                      try {
+                        const fnResult = fn(
+                          currentStreamObj[i],
+                          Object.assign({}, actionObj)
+                        );
+                        currentStreamObj[i] = await fnResult;
+                      } catch (e) {
+                        const msg = `Something when wrong during the execution of the <yellow>beforeActions.${actionName}</yellow> function...`;
+                        this.log({
+                          error: e,
+                          value: msg
+                        });
+                        overallActionsStats.stderr.push(msg);
+                        hasErrorsOcucred = true;
+                      }
+                    }
+                  });
+                } else {
+                  let actionsArray = this._settings.beforeActions[actionName];
+                  if (!Array.isArray(actionsArray))
+                    actionsArray = [actionsArray];
+                  for (let i = 0; i < actionsArray.length; i++) {
+                    const fn = actionsArray[i];
+                    try {
+                      const fnResult = fn(
+                        currentStreamObj,
+                        Object.assign({}, actionObj)
+                      );
+                      currentStreamObj = await fnResult;
+                    } catch (e) {
+                      const msg = `Something when wrong during the execution of the <yellow>beforeActions.${actionName}</yellow> function...`;
+                      this.log({
+                        error: e,
+                        value: msg
+                      });
+                      overallActionsStats.stderr.push(msg);
+                      hasErrorsOcucred = true;
+                    }
                   }
                 }
               }
@@ -426,25 +461,24 @@ export default class SActionStream extends __SPromise {
                   actionSettings
                 );
                 __SPromise.pipe(currentActionReturn, this._currentSPromise);
-                if (currentActionReturn instanceof Promise)
+                if (currentActionReturn instanceof Promise) {
                   currentStreamObj = await currentActionReturn;
-                else currentStreamObj = currentActionReturn;
+                } else currentStreamObj = currentActionReturn;
                 currentActionReturn = null;
               } catch (e) {
+                hasErrorsOcucred = true;
+
+                throw e;
+
                 // if (typeof e === 'object') {
-                //   throw e;
-                //   actionObj.stderr.push(
-                //     `#error <red>${e.name}</red>: ${e.message}`
+                //   actionObj.stderr.push(`<red>${e.name}</red>: ${e.message}`);
+                //   overallActionsStats.stderr.push(
+                //     `<red>${e.name}</red>: ${e.message}`
                 //   );
-                //   throw new Error(`${e.message}`);
                 // } else if (typeof e === 'string') {
                 //   actionObj.stderr.push(e);
-                //   // trigger an "event"
-                //   throw new Error(`${e}`);
+                //   overallActionsStats.stderr.push(e);
                 // }
-                throw e;
-                this._exitCode = 1;
-                cancel(actionObj);
               }
 
               if (actionInstance && actionInstance._skipNextActions) {
@@ -511,30 +545,56 @@ export default class SActionStream extends __SPromise {
                   settings.afterActions[actionName]
                 ];
               }
-              if (settings.afterActions[actionName].length) {
+              if (settings.afterActions[actionName]) {
                 this.log({
                   group: actionName,
                   value: `Executing the <cyan>${settings.afterActions[actionName].length}</cyan> callback(s) registered after the <yellow>${actionName}</yellow> action...`
                 });
                 if (Array.isArray(currentStreamObj)) {
                   currentStreamObj.forEach(async (strObj, i) => {
-                    for (let key in settings.afterActions[actionName]) {
-                      const afterActionFn =
-                        settings.afterActions[actionName][key];
-                      currentStreamObj[i] = await afterActionFn(
-                        currentStreamObj[i],
-                        Object.assign({}, actionObj)
-                      );
+                    let actionsArray = this._settings.afterActions[actionName];
+                    if (!Array.isArray(actionsArray))
+                      actionsArray = [actionsArray];
+                    for (let i = 0; i < actionsArray.length; i++) {
+                      const fn = actionsArray[i];
+                      try {
+                        const fnResult = fn(
+                          currentStreamObj[i],
+                          Object.assign({}, actionObj)
+                        );
+                        currentStreamObj[i] = await fnResult;
+                      } catch (e) {
+                        const msg = `Something when wrong during the execution of the <yellow>afterActions.${actionName}</yellow> function...`;
+                        this.log({
+                          error: e,
+                          value: msg
+                        });
+                        overallActionsStats.stderr.push(msg);
+                        hasErrorsOcucred = true;
+                      }
                     }
                   });
                 } else {
-                  for (let key in settings.afterActions[actionName]) {
-                    const afterActionFn =
-                      settings.afterActions[actionName][key];
-                    currentStreamObj = await afterActionFn(
-                      currentStreamObj,
-                      Object.assign({}, actionObj)
-                    );
+                  let actionsArray = this._settings.afterActions[actionName];
+                  if (!Array.isArray(actionsArray))
+                    actionsArray = [actionsArray];
+                  for (let i = 0; i < actionsArray.length; i++) {
+                    const fn = actionsArray[i];
+                    try {
+                      const fnResult = fn(
+                        currentStreamObj,
+                        Object.assign({}, actionObj)
+                      );
+                      currentStreamObj = await fnResult;
+                    } catch (e) {
+                      const msg = `Something when wrong during the execution of the <yellow>afterActions.${actionName}</yellow> function...`;
+                      this.log({
+                        error: e,
+                        value: msg
+                      });
+                      overallActionsStats.stderr.push(msg);
+                      hasErrorsOcucred = true;
+                    }
                   }
                 }
               }
@@ -542,7 +602,7 @@ export default class SActionStream extends __SPromise {
               // replace the streamObj with the new one in the stack
               streamObjArray[j] = currentStreamObj;
 
-              if (canceled) return streamObjArray;
+              if (canceled || hasErrorsOcucred) return streamObjArray;
             }
 
             return streamObjArray;
@@ -569,7 +629,14 @@ export default class SActionStream extends __SPromise {
             actionObj
           );
           // trigger an "event"
-          this.dispatch('step', Object.assign({}, actionObj));
+          this.trigger(
+            `${this._currentActionName}.complete`,
+            Object.assign({}, actionObj)
+          );
+          trigger(
+            `${this._currentActionName}.complete`,
+            Object.assign({}, actionObj)
+          );
 
           if (actionObj.stderr.length) {
             const errorString = `[${actionName}] #error <red>Something went wrong during the </red>"<yellow>${actionName}</yellow>"<red> action...</red>`;
@@ -624,22 +691,40 @@ export default class SActionStream extends __SPromise {
           end: Date.now(),
           duration: Date.now() - overallActionsStats.start
         };
-        if (canceled) return;
 
-        const completeString = `#success The stream "<cyan>${
-          settings.name || 'unnamed'
-        }</cyan>" has finished <green>successfully</green> in <yellow>${__convert(
-          overallActionsStats.duration,
-          's'
-        )}s</yellow>`;
-        overallActionsStats.stdout.push(completeString);
-        this.log({
-          value: completeString
-        });
+        if (overallActionsStats.stderr.length || canceled || hasErrorsOcucred) {
+          const errorString = `The stream "<cyan>${
+            settings.name || 'unnamed'
+          }</cyan>" has had some issues...`;
+          overallActionsStats.stdout.push(errorString);
+          this.log({
+            error: true,
+            value: errorString
+          });
+          this.log({
+            error: true,
+            value: overallActionsStats.stderr.join('\n')
+          });
 
-        // resolve this stream process
-        this.dispatch('complete', overallActionsStats);
-        resolve(overallActionsStats);
+          this.trigger('reject', overallActionsStats);
+          trigger('reject', overallActionsStats);
+        } else {
+          const completeString = `#success The stream "<cyan>${
+            settings.name || 'unnamed'
+          }</cyan>" has finished <green>successfully</green> in <yellow>${__convert(
+            overallActionsStats.duration,
+            's'
+          )}s</yellow>`;
+          overallActionsStats.stdout.push(completeString);
+          this.log({
+            value: completeString
+          });
+
+          // resolve this stream process
+          this.trigger('complete', overallActionsStats);
+          trigger('complete', overallActionsStats);
+          resolve(overallActionsStats);
+        }
       },
       {
         id: this._settings.id
@@ -664,58 +749,6 @@ export default class SActionStream extends __SPromise {
     args.forEach((arg) => {
       if (this._currentSPromise) this._currentSPromise.trigger('log', arg);
       this.trigger('log', arg);
-
-      if (this._currentSPromise && this._currentActionName)
-        this._currentSPromise.trigger(`${this._currentActionName}.log`, arg);
-      if (this._currentActionName)
-        this.trigger(`${this._currentActionName}.log`, arg);
-    });
-  }
-
-  /**
-   * @name                  error
-   * @type                  Function
-   *
-   * THis method allows you to error something that will be passed upward through the SPromise events "stderr"
-   *
-   * @param       {String}          ...args             The messages to error
-   *
-   * @since         2.0.0
-   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  error(...args) {
-    args.forEach((arg) => {
-      if (this._currentSPromise) this._currentSPromise.trigger('log', arg);
-      this.trigger('log', arg);
-      if (this._currentSPromise && this._currentActionName)
-        this._currentSPromise.trigger(`${this._currentActionName}.log`, arg);
-      if (this._currentActionName)
-        this.trigger(`${this._currentActionName}.log`, arg);
-    });
-  }
-
-  /**
-   * @name                  dispatch
-   * @type                  Function
-   *
-   * THis method allows you to dispatch something that will be passed upward through the SPromise events "stderr"
-   *
-   * @param       {String}          ...args             The messages to dispatch
-   *
-   * @since         2.0.0
-   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  dispatch(event, ...args) {
-    args.forEach((arg) => {
-      if (this._currentSPromise) this._currentSPromise.trigger(event, arg);
-      this.trigger(event, arg);
-      if (this._currentSPromise && this._currentActionName)
-        this._currentSPromise.trigger(
-          `${this._currentActionName}.${event}`,
-          arg
-        );
-      if (this._currentActionName)
-        this.trigger(`${this._currentActionName}.${event}`, arg);
     });
   }
 }

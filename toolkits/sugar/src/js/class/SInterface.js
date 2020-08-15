@@ -231,7 +231,8 @@ export default class SInterface {
    * @since         2.0.0
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static implements(instance, interfaces, settings = {}) {
+  static implements(instance, interfaces = null, settings = {}) {
+    if (interfaces === null) interfaces = [this];
     if (!Array.isArray(interfaces)) interfaces = [interfaces];
 
     if (__isClass(instance)) {

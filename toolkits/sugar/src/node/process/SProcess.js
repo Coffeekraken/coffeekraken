@@ -13,6 +13,10 @@ const __toString = require('../string/toString');
  *
  * This class represent a process in the sugar toolkit
  *
+ * @param         {Object}          [settings={}]           An object of settings to configure your process instance:
+ * - id (process.unnamed) {String}: Specify a unique id for your particular process instance
+ * - name (Unnamed Process) {String}: Specify a name for your process instance
+ *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
@@ -152,8 +156,11 @@ class SProcess extends __SPromise {
    *
    * This method is meant to be overrided by the subclass
    * in order to run the actual process code.
+   * Your ```run``` method has to call this one at the end and pass it an SPromise instance that represent your process.
+   * This will be usefull to automate some tasks like the duration calculation, updating the state automatically,
+   * pipe the events from your process promise to this process class directly, etc...
    *
-   * @param         {Function}        processFn         The function that will be called with the SPromise parameters (resolve, reject, trigger and cancel) so you can manage the process state
+   * @param         {SPromise}        processPromise         The actual process promise representing your ongoing process. This methid will subscribe to events like "close" on the promise to actually take care of duration calculation, etc...
    * @return        {SPromise}                          An SPromise instance that you have to return in your run method
    *
    * @since         2.0.0
@@ -169,7 +176,7 @@ class SProcess extends __SPromise {
     this.duration = 0;
 
     // listen when the process close to calculate duration
-    processPromise.on('close', () => {
+    processPromise.on('close,cancel,resolve,reject', () => {
       this.endTime = Date.now();
       this.duration = this.endTime - this.startTime;
     });

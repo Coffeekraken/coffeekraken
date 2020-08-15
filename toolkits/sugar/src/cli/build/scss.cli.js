@@ -4,9 +4,10 @@ const __SBuildScssActionsStream = require('../../node/build/scss/SBuildScssActio
 const __output = require('../../node/process/output');
 
 module.exports = (stringArgs = '') => {
-  const cli = new __SBuildScssCli();
+  const cli = new __SBuildScssCli({
+    output: {}
+  });
   const proc = cli.run(stringArgs);
-  __output(proc);
 
   // const args = __parseArgs(stringArgs, __SBuildScssCli.definitionObj);
   // const stream = new __SBuildScssActionsStream({});

@@ -1,3 +1,4 @@
+const __toString = require('../../string/toString');
 const __SActionsStreamAction = require('../SActionsStreamAction');
 const __glob = require('glob');
 const __deepMerge = require('../../object/deepMerge');
@@ -7,6 +8,7 @@ const __isSymlink = require('../../is/symlink');
 const __isGlob = require('is-glob');
 const __isPath = require('../../is/path');
 const __SPromise = require('../../promise/SPromise');
+const { stream } = require('globby');
 /**
  * @name            SFindInFileStreamAction
  * @namespace       node.stream.actions

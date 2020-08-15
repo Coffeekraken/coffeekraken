@@ -527,12 +527,12 @@ export default class SPromise extends Promise {
    * This is the "cancel" method exposed on the promise itself for convinience
    *
    * @param         {Mixed}         arg       The value that you want to return back from the promise
-   * @param       {Array|String}         [stacksOrder='cancel']      This specify in which order have to be called the stacks
+   * @param       {Array|String}         [stacksOrder='cancel,finally']      This specify in which order have to be called the stacks
    * @return        {Mixed}                   Return the cancel result value passed in each stacks specified in the second parameter
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  cancel(arg, stacksOrder = 'cancel') {
+  cancel(arg, stacksOrder = 'cancel,finally') {
     return this._cancel(arg, stacksOrder);
   }
 

@@ -1,20 +1,18 @@
-const __frontendServer = require('../frontend/frontend');
 const __SProcess = require('../../process/SProcess');
-const __SPromise = require('../../promise/SPromise');
-const __SError = require('../../error/SError');
+const __SBuildScssActionsStream = require('./SBuildScssActionsStream');
 
 /**
- * @name            SFrontendServerProcess
- * @namespace           node.server.frontend
+ * @name            SBuildScssProcess
+ * @namespace           node.build.scss
  * @type            Class
  * @extends         SProcess
  *
- * This class represent the frontend server Cli based on the express server one
+ * This class represent the process that build the SCSS files into CSS
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SFrontendServerProcess extends __SProcess {
+module.exports = class SBuildScssProcess extends __SProcess {
   /**
    * @name          constructor
    * @type          Function
@@ -26,8 +24,8 @@ module.exports = class SFrontendServerProcess extends __SProcess {
    */
   constructor(settings = {}) {
     super({
-      id: 'process.server.frontend',
-      name: 'Frontend Server Process',
+      id: 'process.build.scss',
+      name: 'Build SCSS Process',
       ...settings
     });
   }
@@ -38,12 +36,17 @@ module.exports = class SFrontendServerProcess extends __SProcess {
    *
    * Method that execute the frontend server code, listen for errors, etc...
    *
+   * @param       {Object}        argsObj           The arguments object that will be passed to the underlined actions stream instance
+   * @param       {Object}        [settings={}]     An object of settings passed to the ```start``` method of the ```SBuildScssActionsStream``` instance
+   * @return      {Süromise}                        An SPomise instance representing the build process
+   *
    * @since         2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  run(argsObj) {
-    this._frontendServerProcess = __frontendServer(argsObj);
-    return super.run(this._frontendServerProcess);
+  run(argsObj, settings = {}) {
+    const actionStream = new __SBuildScssActionsStream(settings);
+    this._buildScssActionsStream = actionStream.start(argsObj);
+    return super.run(this._buildScssActionsStream);
   }
 
   /**
@@ -56,7 +59,7 @@ module.exports = class SFrontendServerProcess extends __SProcess {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   kill() {
-    this._frontendServerProcess.cancel();
+    this._buildScssActionsStream.cancel();
     super.kill();
   }
 };

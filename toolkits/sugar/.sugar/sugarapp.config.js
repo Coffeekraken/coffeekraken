@@ -8,9 +8,9 @@ module.exports = {
   },
   features: {
     commands: [
-      'server.frontend'
+      'server.frontend',
       // 'build.config',
-      // 'build.scss',
+      'build.scss'
       // 'build.js',
       // 'build.views',
       // 'build.docMap'
@@ -47,6 +47,20 @@ module.exports = {
                 settings: {},
                 concurrent: false,
                 key: 'f',
+                watch: true,
+                run: true,
+                statusBar: true
+              },
+              {
+                id: 'build.scss',
+                name: 'Build SCSS',
+                path: `${__packageRoot(
+                  __dirname
+                )}/src/node/build/scss/SBuildScssCli`,
+                argsObj: {},
+                settings: {},
+                concurrent: false,
+                key: 's',
                 watch: true,
                 run: true,
                 statusBar: true

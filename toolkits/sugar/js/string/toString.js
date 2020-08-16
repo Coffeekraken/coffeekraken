@@ -5,21 +5,21 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = toString;
 
-var _json = _interopRequireDefault(require("../is/json"));
-
-var _object = _interopRequireDefault(require("../is/object"));
-
 var _array = _interopRequireDefault(require("../is/array"));
+
+var _boolean = _interopRequireDefault(require("../is/boolean"));
 
 var _function = _interopRequireDefault(require("../is/function"));
 
-var _boolean = _interopRequireDefault(require("../is/boolean"));
+var _json = _interopRequireDefault(require("../is/json"));
+
+var _number = _interopRequireDefault(require("../is/number"));
+
+var _object = _interopRequireDefault(require("../is/object"));
 
 var _regexp = _interopRequireDefault(require("../is/regexp"));
 
 var _string = _interopRequireDefault(require("../is/string"));
-
-var _number = _interopRequireDefault(require("../is/number"));
 
 var _deepMerge = _interopRequireDefault(require("../object/deepMerge"));
 
@@ -58,6 +58,8 @@ function toString(value, settings) {
     return value;
   } else if (value === null) {
     return 'null';
+  } else if (value instanceof Error) {
+    return "".concat(value.name, ":\n\n      ").concat(value.message, "\n\n      ").concat(value.stack, "\n    ");
   } else if (typeof value === 'symbol' || typeof value === 'typedArray' || value instanceof Date || typeof value === 'color') {
     return value.toString();
   } else if ((0, _object.default)(value) || (0, _array.default)(value) || (0, _json.default)(value)) {

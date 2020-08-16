@@ -306,7 +306,7 @@ class SChildProcess extends __SProcess {
       this._runningProcess.state = 'error';
       triggerState();
 
-      console.log('ERROR', error);
+      // console.log('ERROR', error);
 
       throw error;
     });
@@ -316,25 +316,27 @@ class SChildProcess extends __SProcess {
       this._runningProcess.childProcess.stdout.on('data', (log) => {
         log = log.toString();
 
-        const resultReg = /^#result\s(.*)$/gm;
-        if (log.match(resultReg)) {
-          this._runningProcess.state = 'success';
-          triggerState();
+        // console.log('lo', log);
 
-          resolveOrReject(
-            'resolve',
-            {
-              value: __parse(log.replace('#result ', ''))
-            },
-            0,
-            null
-          );
-          return;
-        }
+        // const resultReg = /^#result\s(.*)$/gm;
+        // if (log.match(resultReg)) {
+        //   this._runningProcess.state = 'success';
+        //   triggerState();
 
-        this._runningProcess.stdout.push(log.toString());
+        //   resolveOrReject(
+        //     'resolve',
+        //     {
+        //       value: __parse(log.replace('#result ', ''))
+        //     },
+        //     0,
+        //     null
+        //   );
+        //   return;
+        // }
+
+        this._runningProcess.stdout.push(log);
         promise.trigger(`log`, {
-          value: log.toString()
+          value: log
         });
       });
     }
@@ -342,18 +344,20 @@ class SChildProcess extends __SProcess {
     // stderr data
     if (this._runningProcess.childProcess.stderr) {
       this._runningProcess.childProcess.stderr.on('data', (error) => {
-        this._runningProcess.stderr.push(error.toString());
+        error = error.toString();
 
-        throw error;
+        this._runningProcess.stderr.push(error);
+        promise.trigger(`log`, {
+          error: true,
+          value: error
+        });
       });
     }
 
     return super.run(promise);
   }
 
-  runWithOutput(params = {}, settings = {}) {
-    __output(this.run(params, settings));
-  }
+  runWithOutput(params = {}, settings = {}) {}
 
   /**
    * @name            kill

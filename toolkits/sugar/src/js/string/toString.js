@@ -1,11 +1,11 @@
-import isJson from '../is/json';
-import isObject from '../is/object';
 import isArray from '../is/array';
-import isFunction from '../is/function';
 import isBoolean from '../is/boolean';
+import isFunction from '../is/function';
+import isJson from '../is/json';
+import isNumber from '../is/number';
+import isObject from '../is/object';
 import isRegexp from '../is/regexp';
 import isString from '../is/string';
-import isNumber from '../is/number';
 import __deepMerge from '../object/deepMerge';
 
 /**
@@ -40,6 +40,13 @@ export default function toString(value, settings = {}) {
     return value;
   } else if (value === null) {
     return 'null';
+  } else if (value instanceof Error) {
+    return `${value.name}:
+
+      ${value.message}
+
+      ${value.stack}
+    `;
   } else if (
     typeof value === 'symbol' ||
     typeof value === 'typedArray' ||

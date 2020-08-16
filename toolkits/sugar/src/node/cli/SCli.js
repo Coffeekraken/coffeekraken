@@ -253,6 +253,12 @@ class SCli extends __SProcess {
         defaultParamsObj: settings.defaultParamsObj
       });
 
+      // childProcess.on('log', (e) => {
+      //   setTimeout(() => {
+      //     console.log(e);
+      //   }, 1000);
+      // });
+
       childProcess.on('state', (state) => {
         this.state = state;
       });
@@ -263,7 +269,7 @@ class SCli extends __SProcess {
 
       this._runningProcess
         .on('error', (error) => {
-          console.log('erro', error);
+          // console.log('erro', error);
         })
         .on('close', (args) => {
           this._runningProcess = null;
@@ -291,7 +297,7 @@ class SCli extends __SProcess {
     this._runningParamsObj = paramsObj;
 
     // listen for some events on the process
-    this._runningProcess.on('cancel,finally', () => {
+    this._runningProcess.on('finally', () => {
       this._runningProcess = null;
       this._runningParamsObj = null;
     });

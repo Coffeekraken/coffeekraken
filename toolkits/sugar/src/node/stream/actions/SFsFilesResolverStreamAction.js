@@ -73,7 +73,7 @@ module.exports = class SFindInFileStreamAction extends __SActionsStreamAction {
    */
   run(streamObj, settings = {}) {
     settings = __deepMerge(this._settings, settings);
-    return super.run(streamObj, async (resolve, reject) => {
+    return super.run(streamObj, (resolve, reject, trigger) => {
       const filesPathes = [];
       const streamObjArray = [];
 

@@ -5,17 +5,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _SPromise2 = _interopRequireDefault(require("../promise/SPromise"));
-
 var _deepMerge = _interopRequireDefault(require("../object/deepMerge"));
 
-var _convert = _interopRequireDefault(require("../time/convert"));
+var _SPromise2 = _interopRequireDefault(require("../promise/SPromise"));
 
-var _validateObjectDefinitionObject = _interopRequireDefault(require("../validation/object/validateObjectDefinitionObject"));
+var _uniqid = _interopRequireDefault(require("../string/uniqid"));
 
 var _validateObject = _interopRequireDefault(require("../validation/object/validateObject"));
 
-var _uniqid = _interopRequireDefault(require("../string/uniqid"));
+var _validateObjectDefinitionObject = _interopRequireDefault(require("../validation/object/validateObjectDefinitionObject"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

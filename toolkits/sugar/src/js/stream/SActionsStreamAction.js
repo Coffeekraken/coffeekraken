@@ -1,9 +1,8 @@
-import __SPromise from '../promise/SPromise';
 import __deepMerge from '../object/deepMerge';
-import __convert from '../time/convert';
-import __validateObjectDefinitionObject from '../validation/object/validateObjectDefinitionObject';
-import __validateObject from '../validation/object/validateObject';
+import __SPromise from '../promise/SPromise';
 import __uniqid from '../string/uniqid';
+import __validateObject from '../validation/object/validateObject';
+import __validateObjectDefinitionObject from '../validation/object/validateObjectDefinitionObject';
 
 /**
  * @name          SActionStreamAction

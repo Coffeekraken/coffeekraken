@@ -153,14 +153,14 @@ module.exports = class SOutput extends __SComponent {
         //   value: error.error || error
         // });
       })
-      .on('*.start', () => {
-        this.log({
-          clear: true,
-          value: `Launching the process...`
-        });
-      })
-      .on('log', (...data) => {
-        this.log(...data);
+      // .on('*.start', () => {
+      //   this.log({
+      //     clear: true,
+      //     value: `Launching the process...`
+      //   });
+      // })
+      .on('log', (data) => {
+        this.log(data);
       });
   }
 
@@ -254,6 +254,12 @@ module.exports = class SOutput extends __SComponent {
               });
               logsArray.push(args);
             }
+          } else {
+            logsArray.push({
+              value: __toString(parsedLog, {
+                beautify: true
+              })
+            });
           }
         });
       } else if (
@@ -293,6 +299,12 @@ module.exports = class SOutput extends __SComponent {
               });
             }
           }
+        });
+      } else {
+        logsArray.push({
+          value: __toString(data, {
+            beautify: true
+          })
         });
       }
     });
@@ -356,7 +368,7 @@ module.exports = class SOutput extends __SComponent {
       if (__stripAnsi(logObj.value).trim().length === 0) return;
 
       if (typeof logObj.value !== 'string')
-        logObj.value = logObj.value.toString();
+        logObj.value = __toString(logObj.value);
 
       if (logObj.type && logObj.type === 'header') {
         // generate the header box

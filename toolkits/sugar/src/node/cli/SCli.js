@@ -15,7 +15,6 @@ const __SProcessInterface = require('../process/interface/SProcessInterface');
 const __SCliInterface = require('./interface/SCliInterface');
 const __SInterface = require('../class/SInterface');
 const __sugarHeading = require('../ascii/sugarHeading');
-const __packageJson = require('../package/json');
 
 /**
  * @name                SCli
@@ -230,34 +229,24 @@ class SCli extends __SProcess {
       // Apply the SProcessInterface on the getted process
       __SProcessInterface.apply(this._runningProcess);
 
-      // this._runningProcess.on('log', (l) => {
-      //   console.log(
-      //     'log uwihf epuqw ofhquw un fhwfheuiqwh feuoh wqoun fhiwue hfuiwqh feui whfeu hwoehfwoieuhf iuqwh fuiwq hfui woif hweiuhof uiw2h '
-      //   );
-      // });
+      console.log('RUN');
 
       // run the process
       this._runningProcess.run(paramsObj);
 
-      if (settings.output) {
-        const outputSettings =
-          typeof settings.output === 'object' ? settings.output : {};
-        __output(this._runningProcess, outputSettings);
-      }
+      // if (settings.output) {
+      //   const outputSettings =
+      //     typeof settings.output === 'object' ? settings.output : {};
+      //   __output(this._runningProcess, outputSettings);
+      // }
 
-      return super.run(this._runningProcess);
+      return this._runningProcess;
     } else {
       const childProcess = new __SChildProcess(this.commandString, {
         id: settings.id,
         definitionObj: this.definitionObj,
         defaultParamsObj: settings.defaultParamsObj
       });
-
-      // childProcess.on('log', (e) => {
-      //   setTimeout(() => {
-      //     console.log(e);
-      //   }, 1000);
-      // });
 
       childProcess.on('state', (state) => {
         this.state = state;
@@ -267,23 +256,24 @@ class SCli extends __SProcess {
 
       childProcess.run(paramsObj);
 
-      this._runningProcess.on('close', (args) => {
-        this._runningProcess = null;
-      });
+      this._runningProcess
+        .on('error', (error) => {
+          console.log('erro', error);
+        })
+        .on('close', (args) => {
+          this._runningProcess = null;
+        });
 
-      if (settings.output) {
-        const outputSettings =
-          typeof settings.output === 'object' ? settings.output : {};
-        __output(this._runningProcess, outputSettings);
-      }
+      // if (settings.output) {
+      //   const outputSettings =
+      //     typeof settings.output === 'object' ? settings.output : {};
+      //   __output(this._runningProcess, outputSettings);
+      // }
     }
 
     const launchingLogObj = {
       temp: true,
-      clear: true,
-      value: `${__sugarHeading({
-        version: __packageJson(__dirname).version
-      })}\n\nLaunching the SCli "<primary>${
+      value: `<yellow>${__sugarHeading}</yellow>\n\nLaunching the SCli "<primary>${
         this._settings.name || this._settings.id
       }</primary>" process...`
     };
@@ -293,7 +283,10 @@ class SCli extends __SProcess {
     this._runningParamsObj = paramsObj;
 
     // listen for some events on the process
-    this._runningProcess.on('finally', () => {
+    this._runningProcess.on('cancel,finally', () => {
+      this.trigger('log', {
+        value: 'PLOP'
+      });
       this._runningProcess = null;
       this._runningParamsObj = null;
     });

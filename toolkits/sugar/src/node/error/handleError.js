@@ -29,13 +29,13 @@ module.exports = function handleError(error) {
   if (__isChildProcess()) {
     // console.log('XXXXXXXXX');
     // console.log(error.toString());
-    throw error;
-    // console.error(__toString(error));
+    // throw error;
+    // console.log('Unhandled error', error.message);
+    console.log(__toString(error));
   } else {
     __keypress.disableMouse(process.stdout);
     error.message = __parseHtml(error.message);
     error.stack = '';
-    console.log('SOMETHING');
-    // throw error;
+    throw error;
   }
 };

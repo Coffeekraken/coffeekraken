@@ -237,6 +237,7 @@ export default function validateObject(
   if (!issuesObj.issues.length) return true;
 
   if (settings.throw) {
+    throw new Error('OCJ');
     throw new __SObjectValidationError(issuesObj);
   }
 

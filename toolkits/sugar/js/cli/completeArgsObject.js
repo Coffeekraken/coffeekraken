@@ -5,19 +5,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = completeArgsObject;
 
-var _get = _interopRequireDefault(require("../object/get"));
-
-var _set = _interopRequireDefault(require("../object/set"));
-
-var _deepMap = _interopRequireDefault(require("../object/deepMap"));
-
-var _validateCliObject = _interopRequireDefault(require("../validation/cli/validateCliObject"));
-
 var _deepize = _interopRequireDefault(require("../object/deepize"));
 
 var _deepMerge = _interopRequireDefault(require("../object/deepMerge"));
 
 var _toString = _interopRequireDefault(require("../string/toString"));
+
+var _validateCliObject = _interopRequireDefault(require("../validation/cli/validateCliObject"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

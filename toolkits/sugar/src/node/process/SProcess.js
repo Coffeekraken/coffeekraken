@@ -181,7 +181,7 @@ class SProcess extends __SPromise {
       this.duration = this.endTime - this.startTime;
     });
 
-    __SPromise.pipe(processPromise, this);
+    // __SPromise.pipe(processPromise, this);
 
     return processPromise;
   }

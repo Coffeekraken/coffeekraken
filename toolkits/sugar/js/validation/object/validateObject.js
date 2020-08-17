@@ -226,6 +226,7 @@ function validateObject(objectToCheck, definitionObj, settings, _argPath) {
   if (!issuesObj.issues.length) return true;
 
   if (settings.throw) {
+    throw new Error('OCJ');
     throw new _SObjectValidationError.default(issuesObj);
   }
 

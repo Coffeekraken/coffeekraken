@@ -7,6 +7,7 @@ const __isDirectory = require('../../is/directory');
 const __isSymlink = require('../../is/symlink');
 const __isGlob = require('is-glob');
 const __isPath = require('../../is/path');
+const __packageRoot = require('../../path/packageRoot');
 const __SPromise = require('../../promise/SPromise');
 const __SError = require('../../error/SError');
 /**
@@ -133,7 +134,10 @@ module.exports = class SFindInFileStreamAction extends __SActionsStreamAction {
 
       if (!filesPathes.length) {
         throw new __SError(
-          `Sorry but your <primary>input</primary> streamObj property setted to "<cyan>${streamObj.input}</cyan>" does not resolve to any files...`
+          `Sorry but your <primary>input</primary> streamObj property setted to "<cyan>${streamObj.input.replace(
+            `${__packageRoot()}/`,
+            ''
+          )}</cyan>" does not resolve to any files...`
         );
       }
 

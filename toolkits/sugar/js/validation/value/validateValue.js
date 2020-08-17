@@ -5,15 +5,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = validateValue;
 
+var _SValueValidationError = _interopRequireDefault(require("../../error/SValueValidationError"));
+
 var _ofType = _interopRequireDefault(require("../../is/ofType"));
 
 var _deepMerge = _interopRequireDefault(require("../../object/deepMerge"));
 
-var _class = _interopRequireDefault(require("../../is/class"));
-
 var _typeof = _interopRequireDefault(require("../../value/typeof"));
-
-var _SValueValidationError = _interopRequireDefault(require("../../error/SValueValidationError"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -107,6 +105,7 @@ function validateValue(value, definitionObj, settings) {
   if (!issueObj.issues.length) return true;
 
   if (settings.throw) {
+    throw new Error('CCCCCCC');
     throw new _SValueValidationError.default(issueObj);
   }
 

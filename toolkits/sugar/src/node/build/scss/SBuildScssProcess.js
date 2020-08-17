@@ -1,5 +1,6 @@
 const __SProcess = require('../../process/SProcess');
 const __SBuildScssActionsStream = require('./SBuildScssActionsStream');
+const __SPromise = require('../../promise/SPromise');
 
 /**
  * @name            SBuildScssProcess
@@ -44,16 +45,18 @@ module.exports = class SBuildScssProcess extends __SProcess {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(argsObj, settings = {}) {
-    try {
-      const actionStream = new __SBuildScssActionsStream(settings);
-      this._buildScssActionsStream = actionStream.start(argsObj);
-      return super.run(this._buildScssActionsStream);
-    } catch (e) {
-      this._buildScssActionsStream.trigger('log', {
-        value: 'sssss'
-      });
-      console.log('XXX');
-    }
+    const actionStream = new __SBuildScssActionsStream(settings);
+    this._buildScssActionsStream = actionStream.start(argsObj);
+    this._buildScssActionsStream.on('log', (l) => {
+      console.log('_lo', l);
+    });
+    // __SPromise.pipe(this._buildScssActionsStream, this);
+
+    // this.on('log', (l) => {
+    //   console.log('A');
+    // });
+
+    return super.run(this._buildScssActionsStream);
   }
 
   /**

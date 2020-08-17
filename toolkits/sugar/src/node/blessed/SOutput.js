@@ -148,10 +148,11 @@ module.exports = class SOutput extends __SComponent {
         });
       })
       .on('error', (error) => {
-        // this.log({
-        //   error: true,
-        //   value: error.error || error
-        // });
+        // console.log('error', error.error);
+        this.log({
+          error: true,
+          value: error.error || error
+        });
       })
       // .on('*.start', () => {
       //   this.log({
@@ -466,6 +467,13 @@ module.exports = class SOutput extends __SComponent {
         item.$box.top = this._lastY + (item.mt || 0);
         this._lastY +=
           item.$box.getScrollHeight() + (item.mt || 0) + (item.mb || 1);
+      } else if (item.value && typeof item.value === 'string' && item.error) {
+        const $box = this._errorTextBox(item.value);
+        $box.top = this._lastY + item.mt;
+        this.$logBoxChilds.push($box);
+        this.$logBox.append($box);
+        item.$box = $box;
+        this._lastY += $box.getScrollHeight() + item.mt + item.mb;
       } else if (item.value && typeof item.value === 'string') {
         const $box = this._simpleTextBox(item.value);
         $box.top = this._lastY + item.mt;
@@ -539,6 +547,59 @@ module.exports = class SOutput extends __SComponent {
       setTimeout(() => {
         $box.height = $box.getScrollHeight();
         // $box.append($line);
+      });
+    });
+    return $box;
+  }
+
+  /**
+   * @name          _errorTextBox
+   * @type          Function
+   * @private
+   *
+   * This method take a text as input and return a blessed box
+   * representing this text to display
+   *
+   * @param       {String}        text        The text to display
+   * @return      {Blessed.box}               A blessed box instance
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _errorTextBox(text) {
+    const $box = __blessed.box({
+      width:
+        this.$logBox.width -
+        this.$logBox.padding.left -
+        this.$logBox.padding.right,
+      height: 'shrink',
+      style: {
+        fg: 'white'
+      },
+      scrollable: true,
+      padding: {
+        top: 0,
+        left: 4,
+        right: 0,
+        bottom: 0
+      },
+      content: __parseMarkdown(text)
+    });
+    const $line = __blessed.box({
+      width: 1,
+      height: 1,
+      top: 0,
+      left: $box.padding.left * -1,
+      bottom: 0,
+      style: {
+        bg: __color('terminal.red').toString()
+      }
+    });
+    $box.on('attach', () => {
+      setTimeout(() => {
+        $box.height = $box.getScrollHeight();
+        $line.height = $box.getScrollHeight();
+        $box.append($line);
       });
     });
     return $box;

@@ -97,7 +97,7 @@ module.exports = class SConfigFolderAdapter extends __SConfigAdapter {
       __fs.readdirSync(this.settings.appConfigPath).forEach((file) => {
         if (!file.includes(this.settings.filename.replace('[name]', '')))
           return;
-        this._defaultConfig[
+        this._appConfig[
           file.replace('.config.js', '')
         ] = require(`${this.settings.appConfigPath}/${file}`);
         // this._appConfig[file.replace('.config.js', '')] = require(this.settings
@@ -130,7 +130,7 @@ module.exports = class SConfigFolderAdapter extends __SConfigAdapter {
       __fs.readdirSync(this.settings.userConfigPath).forEach((file) => {
         if (!file.includes(this.settings.filename.replace('[name]', '')))
           return;
-        this._defaultConfig[
+        this._userConfig[
           file.replace('.config.js', '')
         ] = require(`${this.settings.userConfigPath}/${file}`);
         // this._userConfig[file.replace('.config.js', '')] = require(this.settings

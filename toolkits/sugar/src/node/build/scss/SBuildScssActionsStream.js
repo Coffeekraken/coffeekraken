@@ -55,7 +55,7 @@ module.exports = class SBuildScssActionsStream extends __SActionsStream {
     super(
       {
         filesResolver: __SFsFilesResolverStreamAction,
-        fsCache: __SFsCacheStreamAction,
+        // fsCache: __SFsCacheStreamAction,
         bundle: __SBundleScssStreamAction,
         sugarJson: __SSugarJsonStreamAction,
         imports: __SImportsStreamAction,
@@ -85,18 +85,18 @@ module.exports = class SBuildScssActionsStream extends __SActionsStream {
             }
           },
           beforeActions: {
-            fsCache: (streamObj) => {
-              if (!streamObj.outputStack) streamObj.outputStack = {};
-              if (streamObj.outputDir && streamObj.filename) {
-                streamObj.outputStack.data = __path.resolve(
-                  streamObj.outputDir,
-                  streamObj.prod
-                    ? streamObj.filename.replace('.scss', '.prod.css')
-                    : streamObj.filename.replace('.scss', '.css')
-                );
-              }
-              return streamObj;
-            },
+            // fsCache: (streamObj) => {
+            //   if (!streamObj.outputStack) streamObj.outputStack = {};
+            //   if (streamObj.outputDir && streamObj.filename) {
+            //     streamObj.outputStack.data = __path.resolve(
+            //       streamObj.outputDir,
+            //       streamObj.prod
+            //         ? streamObj.filename.replace('.scss', '.prod.css')
+            //         : streamObj.filename.replace('.scss', '.css')
+            //     );
+            //   }
+            //   return streamObj;
+            // },
             fsOutput: (streamObj) => {
               return streamObj;
             }

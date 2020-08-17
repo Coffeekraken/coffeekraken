@@ -4,6 +4,7 @@ import __isClass from '../is/class';
 import __deepMerge from '../object/deepMerge';
 import __SPromise from '../promise/SPromise';
 import __toString from '../string/toString';
+import __trimLines from '../string/trimLines';
 import __uniqid from '../string/uniqid';
 import __convert from '../time/convert';
 import __wait from '../time/wait';
@@ -91,19 +92,11 @@ export default class SActionStream extends __SPromise {
           beforeActions: {},
           afterActions: {},
           actions: {}
-          // exitOnComplete: __isChildProcess()
         },
         settings
       )
     );
     super.start();
-
-    // check that we have a definition object defined
-    // if (!this.constructor.definitionObj) {
-    //   throw new Error(
-    //     `You class "<yellow>${this.constructor.name}</yellow>" has to have a <yellow>static</yellow> <cyan>definitionObj</cyan> property defined...`
-    //   );
-    // }
 
     // check the actions
     Object.keys(actions).forEach((actionName) => {
@@ -115,7 +108,7 @@ export default class SActionStream extends __SPromise {
         actionInstance instanceof __SActionsStreamAction
       ) {
       } else {
-        throw new Error(
+        throw new __SError(
           __parseHtml(
             `The value passed for the "<yellow>${actionName}</yellow>" action has to be either a simple function or an "<green>SActionsStreamAction</green>" instance. You have passed a "<red>${typeof actionInstance}</red>"...`
           )
@@ -125,9 +118,21 @@ export default class SActionStream extends __SPromise {
 
     // save the actions
     this._actionsObject = actions;
+  }
 
-    // specify the exit code if the exitOnComplete setting is true
-    this._exitCode = 0;
+  /**
+   * @name          hasCurrentStreamErrors
+   * @type          Function
+   *
+   * This method return true or false depending if the current stream has some errors or not
+   *
+   * @return      {Boolean}           true if not errors, false if not
+   *
+   * @since       2.0.0
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  hasCurrentStreamErrors() {
+    return this._currentStream && this._currentStream.stats.stderr.length;
   }
 
   /**
@@ -152,19 +157,31 @@ export default class SActionStream extends __SPromise {
         group: 'beforeCallbacks',
         value: `Executing the <cyan>${this._currentStream.settings.before.length}</cyan> callback(s) registered before the entire actions stream process...`
       });
-      for (let key in this._currentStream.settings.before) {
-        const fn = this._currentStream.settings.before[key];
-        this._currentStream.streamObj = await fn(this._currentStream.streamObj);
+      try {
+        for (let key in this._currentStream.settings.before) {
+          const fn = this._currentStream.settings.before[key];
+          this._currentStream.streamObj = await fn(
+            this._currentStream.streamObj
+          );
+        }
+        this.log({
+          group: 'beforeCallbacks',
+          value: `#success The <cyan>${
+            this._currentStream.settings.before.length
+          }</cyan> before stream callback(s) have finished <green>successfully</green> <yellow>${__convert(
+            Date.now() - startTime,
+            's'
+          )}s</yellow>`
+        });
+      } catch (e) {
+        if (typeof e === 'object') {
+          this._currentStream.currentActionObj.stats.stderr.push(__toString(e));
+          this._currentStream.stats.stderr.push(__toString(e));
+        } else if (typeof e === 'string') {
+          this._currentStream.currentActionObj.stats.stderr.push(e);
+          this._currentStream.stats.stderr.push(e);
+        }
       }
-      this.log({
-        group: 'beforeCallbacks',
-        value: `#success The <cyan>${
-          this._currentStream.settings.before.length
-        }</cyan> before stream callback(s) have finished <green>successfully</green> <yellow>${__convert(
-          Date.now() - startTime,
-          's'
-        )}s</yellow>`
-      });
     }
 
     return this._currentStream.streamObj;
@@ -191,19 +208,31 @@ export default class SActionStream extends __SPromise {
         group: 'afterCallbacks',
         value: `Executing the <cyan>${this._currentStream.settings.after.length}</cyan> callback(s) registered after the entire actions stream process...`
       });
-      for (let key in this._currentStream.settings.after) {
-        const fn = this._currentStream.settings.after[key];
-        this._currentStream.streamObj = await fn(this._currentStream.streamObj);
+      try {
+        for (let key in this._currentStream.settings.after) {
+          const fn = this._currentStream.settings.after[key];
+          this._currentStream.streamObj = await fn(
+            this._currentStream.streamObj
+          );
+        }
+        this.log({
+          group: 'afterCallbacks',
+          value: `#success The <cyan>${
+            this._currentStream.settings.after.length
+          }</cyan> after stream callback(s) have finished <green>successfully</green> <yellow>${__convert(
+            Date.now() - startTime,
+            's'
+          )}s</yellow>`
+        });
+      } catch (e) {
+        if (typeof e === 'object') {
+          this._currentStream.currentActionObj.stats.stderr.push(__toString(e));
+          this._currentStream.stats.stderr.push(__toString(e));
+        } else if (typeof e === 'string') {
+          this._currentStream.currentActionObj.stats.stderr.push(e);
+          this._currentStream.stats.stderr.push(e);
+        }
       }
-      this.log({
-        group: 'afterCallbacks',
-        value: `#success The <cyan>${
-          this._currentStream.settings.after.length
-        }</cyan> after stream callback(s) have finished <green>successfully</green> <yellow>${__convert(
-          Date.now() - startTime,
-          's'
-        )}s</yellow>`
-      });
     }
 
     return this._currentStream.streamObj;
@@ -217,12 +246,6 @@ export default class SActionStream extends __SPromise {
 
     for (let j = 0; j < stack.length; j++) {
       let currentStreamObj = stack[j];
-      // currentStreamObj._isStreamObj = true;
-      // if (Array.isArray(currentStreamObj)) {
-      //   return await this._handleStreamObjArray(currentStreamObj, actionObj);
-      // } else {
-      //   currentStreamObj._isStreamObj = true;
-      // }
 
       // before action callbacks
       currentStreamObj = await this._beforeActionCallbacks(currentStreamObj);
@@ -233,30 +256,22 @@ export default class SActionStream extends __SPromise {
           currentStreamObj,
           this._currentStream.currentActionObj.settings
         );
-        __SPromise.pipe(currentActionReturn, this._currentStream.promise);
 
         if (currentActionReturn instanceof Promise) {
+          currentActionReturn.catch((e) => {});
+          __SPromise.pipe(currentActionReturn, this._currentStream.promise);
           this._currentStream.currentActionObj.promise = currentActionReturn;
           currentStreamObj = await currentActionReturn;
         } else currentStreamObj = currentActionReturn;
         currentActionReturn = null;
       } catch (e) {
-        // this.log('ERROR', e.toString());
         if (typeof e === 'object') {
           this._currentStream.currentActionObj.stats.stderr.push(__toString(e));
           this._currentStream.stats.stderr.push(__toString(e));
-          // this.log({
-          //   value: __toString(e)
-          // });
         } else if (typeof e === 'string') {
           this._currentStream.currentActionObj.stats.stderr.push(e);
           this._currentStream.stats.stderr.push(e);
-          // this.log({
-          //   value: e
-          // });
         }
-
-        throw e;
       }
 
       if (
@@ -350,10 +365,7 @@ export default class SActionStream extends __SPromise {
       // replace the streamObj with the new one in the stack
       stack[j] = currentStreamObj;
 
-      if (
-        this._currentStream.stats.canceled ||
-        this._currentStream.stats.stderr.length
-      ) {
+      if (this._currentStream.stats.canceled || this.hasCurrentStreamErrors()) {
         if (stack.length <= 1) {
           this._currentStream.streamObj = stack[0];
         } else {
@@ -422,26 +434,25 @@ export default class SActionStream extends __SPromise {
         value: `Executing the <cyan>${count}</cyan> callback(s) registered after the <yellow>${this._currentStream.currentActionObj.name}</yellow> action...`
       });
       if (Array.isArray(streamObj)) {
-        // streamObj.forEach(async (strObj, i) => {
-        //   let actionsArray = this._currentStream.settings.afterActions[
-        //     this._currentStream.currentActionObj.name
-        //   ];
-        //   for (let i = 0; i < actionsArray.length; i++) {
-        //     const fn = actionsArray[i];
-        //     try {
-        //       const fnResult = fn(streamObj[i], Object.assign({}, actionObj));
-        //       streamObj[i] = await fnResult;
-        //     } catch (e) {
-        //       console.log(e.toString());
-        //       const msg = `Something when wrong during the execution of the <yellow>afterActions.${this._currentStream.currentActionObj.name}</yellow> function...`;
-        //       this.log({
-        //         error: e,
-        //         value: msg
-        //       });
-        //       this._currentStream.stats.stderr.push(msg);
-        //     }
-        //   }
-        // });
+        streamObj.forEach(async (strObj, i) => {
+          let actionsArray = this._currentStream.settings.afterActions[
+            this._currentStream.currentActionObj.name
+          ];
+          for (let i = 0; i < actionsArray.length; i++) {
+            const fn = actionsArray[i];
+            try {
+              const fnResult = fn(
+                streamObj[i],
+                Object.assign({}, this._currentStream.currentActionObj)
+              );
+              streamObj[i] = await fnResult;
+            } catch (e) {
+              const msg = `Something when wrong during the execution of the <yellow>afterActions.${this._currentStream.currentActionObj.name}</yellow> function...`;
+              this._currentStream.stats.stderr.push(msg);
+              this._currentStream.stats.stderr.push(__toString(e));
+            }
+          }
+        });
       } else {
         let actionsArray = this._currentStream.settings.afterActions[
           this._currentStream.currentActionObj.name
@@ -457,11 +468,8 @@ export default class SActionStream extends __SPromise {
             streamObj = await fnResult;
           } catch (e) {
             const msg = `Something when wrong during the execution of the <yellow>afterActions.${this._currentStream.currentActionObj.name}</yellow> function...`;
-            this.log({
-              value: msg
-            });
             this._currentStream.stats.stderr.push(msg);
-            // this.log(__toString(e));
+            this._currentStream.stats.stderr.push(__toString(e));
           }
         }
       }
@@ -529,17 +537,15 @@ export default class SActionStream extends __SPromise {
           for (let i = 0; i < actionsArray.length; i++) {
             const fn = actionsArray[i];
             try {
-              const fnResult = fn(streamObj[i], Object.assign({}, actionObj));
+              const fnResult = fn(
+                streamObj[i],
+                Object.assign({}, this._currentStream.currentActionObj)
+              );
               streamObj[i] = await fnResult;
             } catch (e) {
               const msg = `Something when wrong during the execution of the <yellow>beforeActions.${this._currentStream.currentActionObj.name}</yellow> function...`;
-              this.log({
-                value: msg
-              });
               this._currentStream.stats.stderr.push(msg);
-              // this.log({
-              //   value: __toString(e)
-              // });
+              this._currentStream.stats.stderr.push(__toString(e));
             }
           }
         });
@@ -550,17 +556,15 @@ export default class SActionStream extends __SPromise {
         for (let i = 0; i < actionsArray.length; i++) {
           const fn = actionsArray[i];
           try {
-            const fnResult = fn(streamObj, Object.assign({}, actionObj));
+            const fnResult = fn(
+              streamObj,
+              Object.assign({}, this._currentStream.currentActionObj)
+            );
             streamObj = await fnResult;
           } catch (e) {
             const msg = `Something when wrong during the execution of the <yellow>beforeActions.${this._currentStream.currentActionObj.name}</yellow> function...`;
-            this.log({
-              value: msg
-            });
             this._currentStream.stats.stderr.push(msg);
-            // this.log({
-            //   value: __toString(e)
-            // });
+            this._currentStream.stats.stderr.push(__toString(e));
           }
         }
       }
@@ -576,9 +580,9 @@ export default class SActionStream extends __SPromise {
    *
    * This method launch the action stream and return an SPromise instance for this particular stream "process"
    *
-   * @param       {Object}          [streamObj={}]           An object that will be passed along all the actions and that can be updated at every steps. Make sure that your current action return what the next one need to work correctly...
-   * @param       {Object}          [settings={}]           An object of settings to override the instance level one if wanted
-   * @return      {SPromise}                                An SPromise instance for this particular stream "process" on which you can subscribe to the same "events" that on the SActionsStrean instance.
+   * @param       {Object}          [streamObj={}]           An object that will be passed along all the actions and that can be updated at every steps. Make sure that your current action return what the next one need to work correctly...
+   * @param       {Object}          [settings={}]           An object of settings to override the instance level one if wanted
+   * @return      {SPromise}                                An SPromise instance for this particular stream "process" on which you can subscribe to the same "events" that on the SActionsStrean instance.
    *
    * @example         js
    * const streamPromise = myStream.start();
@@ -616,6 +620,8 @@ export default class SActionStream extends __SPromise {
       }
     };
 
+    console.log('eeeee');
+
     // make sure the before, after, beforeAction and afterAction stacks are Arrays
     if (settings.before && !Array.isArray(settings.before))
       settings.before = [settings.before];
@@ -625,6 +631,8 @@ export default class SActionStream extends __SPromise {
     this._currentStream.promise = new __SPromise(
       async (resolve, reject, trigger, cancel) => {
         await __wait(100); // ugly hack to check when have time...
+
+        this.log('cc');
 
         // starting log
         const startString = `#start Starting the stream "<cyan>${
@@ -637,204 +645,211 @@ export default class SActionStream extends __SPromise {
         // before callbacks
         await this._beforeCallbacks();
 
-        // take the actions order array
-        const actionsOrderedNames = Array.isArray(settings.order)
-          ? settings.order
-          : Object.keys(this._actionsObject);
-        // check the order
-        actionsOrderedNames.forEach((actionName) => {
-          if (!this._actionsObject[actionName]) {
-            throw new Error(
-              __parseHtml(
-                `You have specified the action "<yellow>${actionName}</yellow>" in your SActionsStream instance but it is not available. Here's the available actions: <green>${Object.keys(
-                  this._actionsObject
-                ).join(',')}</green>`
-              )
-            );
-          }
-        });
-
-        // loop on each actions
-        streamObj._isStreamObj = true;
-        this._currentStream.stack.push(streamObj);
-
-        for (let i = 0; i < actionsOrderedNames.length; i++) {
-          if (
-            this._currentStream.canceled ||
-            this._currentStream.stats.stderr.length
-          )
-            break;
-
-          const actionName = actionsOrderedNames[i];
-          let actionInstance;
-          let actionSettings = settings.actions
-            ? settings.actions[actionName] || {}
-            : {};
-
-          // make sure we have a "name" property in the actionSettings object
-          if (!actionSettings.name) {
-            actionSettings.name = actionName;
-          }
-
-          let skipMessage = null,
-            skipAction = 'break';
-          if (this._currentStream.stats.skipNextActions === true) {
-            skipMessage = `#warning Skipping all the next actions after the "<cyan>${
-              actionsOrderedNames[i - 1]
-            }</cyan>"...`;
-            skipAction = 'break';
-          } else if (
-            Array.isArray(this._currentStream.stats.skipNextActions) &&
-            this._currentStream.stats.skipNextActions.indexOf(actionName) !== -1
-          ) {
-            skipMessage = `#warning Skipping the "<yellow>${actionName}</yellow>" action...`;
-            skipAction = 'continue';
-          } else if (
-            typeof this._currentStream.stats.skipNextActions === 'number' &&
-            this._currentStream.stats.skipNextActions > 0
-          ) {
-            this._currentStream.stats.skipNextActions--;
-            skipMessage = `#warning Skipping the "<yellow>${actionName}</yellow>" action. Reamaining action(s) to skip: <cyan>${this._currentStream.stats.skipNextActions}</cyan>...`;
-            skipAction = 'continue';
-          }
-
-          if (skipMessage) {
-            this.log({
-              value: skipMessage
-            });
-            if (skipAction === 'continue') continue;
-            else break;
-          }
-
-          // handle passed action that can be either a simple function, a extended SActionsStreamAction class or an instance of the SActionsStreamAction class
-          if (
-            __isClass(this._actionsObject[actionName]) &&
-            this._actionsObject[actionName].prototype instanceof
-              __SActionsStreamAction
-          ) {
-            actionInstance = new this._actionsObject[actionName](
-              actionSettings
-            );
-          } else {
-            throw new __SError(
-              `Your action "<yellow>${actionName}</yellow>" has to be a class extending the <cyan>SActionsStreamAction</cyan> one...`
-            );
-          }
-
-          let streamSourcesCount = 0;
-          function countSources(source) {
-            if (Array.isArray(source)) {
-              source.forEach((s) => {
-                countSources(s);
-              });
-              return;
+        if (!this.hasCurrentStreamErrors()) {
+          // take the actions order array
+          const actionsOrderedNames = Array.isArray(settings.order)
+            ? settings.order
+            : Object.keys(this._actionsObject);
+          // check the order
+          actionsOrderedNames.forEach((actionName) => {
+            if (!this._actionsObject[actionName]) {
+              this._currentStream.stats.stderr.push(
+                __parseHtml(
+                  `You have specified the action "<yellow>${actionName}</yellow>" in your SActionsStream instance but it is not available. Here's the available actions: <green>${Object.keys(
+                    this._actionsObject
+                  ).join(',')}</green>`
+                )
+              );
             }
-            if (typeof source === 'object' && source._isStreamObj)
-              streamSourcesCount++;
-          }
-          countSources(this._currentStream.stack);
-
-          this._currentStream.currentActionObj = {
-            name: actionName,
-            sourcesCount: streamSourcesCount,
-            instance: actionInstance,
-            settings: actionSettings,
-            stats: {
-              action: actionName,
-              startTime: Date.now(),
-              stderr: [],
-              stdout: []
-            }
-          };
-
-          if (this._currentStream.currentActionObj.instance) {
-            this._currentStream.currentActionObj.instance.on(
-              'reject',
-              (value) => {
-                this._exitCode = 1;
-                this.trigger(
-                  `${this._currentStream.currentActionObj.name}.reject`,
-                  value
-                );
-                trigger(
-                  `${this._currentStream.currentActionObj.name}.reject`,
-                  value
-                );
-                cancel(value);
-              }
-            );
-            actionSettings = __deepMerge(
-              this._currentStream.currentActionObj.instance._settings,
-              actionSettings
-            );
-          }
-
-          // trigger some "start" events
-          this.trigger(
-            `${this._currentStream.currentActionObj.name}.start`,
-            Object.assign({}, this._currentStream.currentActionObj)
-          );
-          trigger(
-            `${this._currentStream.currentActionObj.name}.start`,
-            Object.assign({}, this._currentStream.currentActionObj)
-          );
-          const startString = `#start Starting the action "<yellow>${this._currentStream.currentActionObj.name}</yellow>" on <magenta>${this._currentStream.currentActionObj.sourcesCount}</magenta> sources`;
-          this.log({
-            group: this._currentStream.currentActionObj.name,
-            value: startString
           });
 
-          await this._handleStreamObjArray();
+          // loop on each actions
+          streamObj._isStreamObj = true;
+          this._currentStream.stack.push(streamObj);
 
-          // complete the actionObj
-          this._currentStream.currentActionObj.stats = {
-            ...this._currentStream.currentActionObj.stats,
-            endTime: Date.now(),
-            duration:
-              Date.now() - this._currentStream.currentActionObj.stats.startTime
-          };
+          for (let i = 0; i < actionsOrderedNames.length; i++) {
+            if (this._currentStream.canceled || this.hasCurrentStreamErrors()) {
+              // this.log('stop');
+              break;
+            }
 
-          // save the result into the overall actions stats object
-          this._currentStream.stats.actions[
-            this._currentStream.currentActionObj.name
-          ] = Object.assign({}, this._currentStream.currentActionObj);
+            const actionName = actionsOrderedNames[i];
+            let actionInstance;
+            let actionSettings = settings.actions
+              ? settings.actions[actionName] || {}
+              : {};
 
-          // save the action stats into the global stream object stack
-          this._currentStream.stack.push(this._currentStream.streamObj);
+            // make sure we have a "name" property in the actionSettings object
+            if (!actionSettings.name) {
+              actionSettings.name = actionName;
+            }
 
-          // trigger an "event"
-          this.trigger(
-            `${this._currentStream.currentActionObj.name}.complete`,
-            Object.assign({}, this._currentStream.currentActionObj)
-          );
-          trigger(
-            `${this._currentStream.currentActionObj.name}.complete`,
-            Object.assign({}, this._currentStream.currentActionObj)
-          );
+            let skipMessage = null,
+              skipAction = 'break';
+            if (this._currentStream.stats.skipNextActions === true) {
+              skipMessage = `#warning Skipping all the next actions after the "<cyan>${
+                actionsOrderedNames[i - 1]
+              }</cyan>" one...`;
+              skipAction = 'break';
+            } else if (
+              Array.isArray(this._currentStream.stats.skipNextActions) &&
+              this._currentStream.stats.skipNextActions.indexOf(actionName) !==
+                -1
+            ) {
+              skipMessage = `#warning Skipping the "<yellow>${actionName}</yellow>" action...`;
+              skipAction = 'continue';
+            } else if (
+              typeof this._currentStream.stats.skipNextActions === 'number' &&
+              this._currentStream.stats.skipNextActions > 0
+            ) {
+              this._currentStream.stats.skipNextActions--;
+              skipMessage = `#warning Skipping the "<yellow>${actionName}</yellow>" action. Reamaining action(s) to skip: <cyan>${this._currentStream.stats.skipNextActions}</cyan>...`;
+              skipAction = 'continue';
+            }
 
-          if (this._currentStream.currentActionObj.stats.stderr.length) {
-            const errorString = `[${this._currentStream.currentActionObj.name}] #error <red>Something went wrong during the </red>"<yellow>${this._currentStream.currentActionObj.name}</yellow>"<red> action...</red>`;
-            this._currentStream.currentActionObj.stats.stderr.unshift(
-              errorString
+            if (skipMessage) {
+              this.log({
+                value: skipMessage
+              });
+              if (skipAction === 'continue') continue;
+              else break;
+            }
+
+            // handle passed action that can be either a simple function, a extended SActionsStreamAction class or an instance of the SActionsStreamAction class
+            if (
+              __isClass(this._actionsObject[actionName]) &&
+              this._actionsObject[actionName].prototype instanceof
+                __SActionsStreamAction
+            ) {
+              actionInstance = new this._actionsObject[actionName](
+                actionSettings
+              );
+            } else {
+              this._currentStream.stats.stderr.push(
+                `Your action "<yellow>${actionName}</yellow>" has to be a class extending the <cyan>SActionsStreamAction</cyan> one...`
+              );
+              break;
+            }
+
+            let streamSourcesCount = 0;
+            function countSources(source) {
+              if (Array.isArray(source)) {
+                source.forEach((s) => {
+                  countSources(s);
+                });
+                return;
+              }
+              if (typeof source === 'object' && source._isStreamObj)
+                streamSourcesCount++;
+            }
+            countSources(this._currentStream.stack);
+
+            this._currentStream.currentActionObj = {
+              name: actionName,
+              sourcesCount: streamSourcesCount,
+              instance: actionInstance,
+              settings: actionSettings,
+              stats: {
+                action: actionName,
+                startTime: Date.now(),
+                stderr: [],
+                stdout: []
+              }
+            };
+
+            if (this._currentStream.currentActionObj.instance) {
+              this._currentStream.currentActionObj.instance.on(
+                'reject',
+                (value) => {
+                  this.trigger(
+                    `${this._currentStream.currentActionObj.name}.reject`,
+                    value
+                  );
+                  trigger(
+                    `${this._currentStream.currentActionObj.name}.reject`,
+                    value
+                  );
+                  cancel(value);
+                }
+              );
+              actionSettings = __deepMerge(
+                this._currentStream.currentActionObj.instance._settings,
+                actionSettings
+              );
+            }
+
+            // trigger some "start" events
+            this.trigger(
+              `${this._currentStream.currentActionObj.name}.start`,
+              Object.assign({}, this._currentStream.currentActionObj)
             );
-            this._exitCode = 1;
-            throw new Error(errorString);
-          } else {
-            const successString = `#success The action "<yellow>${
-              this._currentStream.currentActionObj.name
-            }</yellow>" has finished <green>successfully</green> on <magenta>${
-              this._currentStream.currentActionObj.sourcesCount
-            }</magenta> sources in <yellow>${__convert(
-              this._currentStream.currentActionObj.stats.duration,
-              's'
-            )}s</yellow>`;
-            this._currentStream.currentActionObj.stats.stdout.push(
-              successString
+            trigger(
+              `${this._currentStream.currentActionObj.name}.start`,
+              Object.assign({}, this._currentStream.currentActionObj)
             );
+            const startString = `#start Starting the action "<yellow>${this._currentStream.currentActionObj.name}</yellow>" on <magenta>${this._currentStream.currentActionObj.sourcesCount}</magenta> sources`;
             this.log({
               group: this._currentStream.currentActionObj.name,
-              value: successString
+              value: startString
             });
+
+            await this._handleStreamObjArray();
+
+            if (this.hasCurrentStreamErrors()) {
+              break;
+            }
+
+            // complete the actionObj
+            this._currentStream.currentActionObj.stats = {
+              ...this._currentStream.currentActionObj.stats,
+              endTime: Date.now(),
+              duration:
+                Date.now() -
+                this._currentStream.currentActionObj.stats.startTime
+            };
+
+            // save the result into the overall actions stats object
+            this._currentStream.stats.actions[
+              this._currentStream.currentActionObj.name
+            ] = Object.assign({}, this._currentStream.currentActionObj);
+
+            // save the action stats into the global stream object stack
+            this._currentStream.stack.push(this._currentStream.streamObj);
+
+            // trigger an "event"
+            this.trigger(
+              `${this._currentStream.currentActionObj.name}.complete`,
+              Object.assign({}, this._currentStream.currentActionObj)
+            );
+            trigger(
+              `${this._currentStream.currentActionObj.name}.complete`,
+              Object.assign({}, this._currentStream.currentActionObj)
+            );
+
+            if (this._currentStream.currentActionObj.stats.stderr.length) {
+              const errorString = `#error <red>Something went wrong during the </red>"<yellow>${this._currentStream.currentActionObj.name}</yellow>"<red> action...</red>`;
+              this._currentStream.currentActionObj.stats.stderr.push(
+                errorString
+              );
+              this._currentStream.stats.stderr.push(errorString);
+              break;
+            } else {
+              const successString = `#success The action "<yellow>${
+                this._currentStream.currentActionObj.name
+              }</yellow>" has finished <green>successfully</green> on <magenta>${
+                this._currentStream.currentActionObj.sourcesCount
+              }</magenta> sources in <yellow>${__convert(
+                this._currentStream.currentActionObj.stats.duration,
+                's'
+              )}s</yellow>`;
+              this._currentStream.currentActionObj.stats.stdout.push(
+                successString
+              );
+              this.log({
+                group: this._currentStream.currentActionObj.name,
+                value: successString
+              });
+            }
           }
         }
 
@@ -850,7 +865,7 @@ export default class SActionStream extends __SPromise {
         };
 
         if (
-          this._currentStream.stats.stderr.length ||
+          this.hasCurrentStreamErrors() ||
           this._currentStream.stats.canceled
         ) {
           const errorString = `The stream "<cyan>${
@@ -863,7 +878,7 @@ export default class SActionStream extends __SPromise {
           });
           this.log({
             error: true,
-            value: this._currentStream.stats.stderr.join('\n')
+            value: __trimLines(this._currentStream.stats.stderr.join('\n'))
           });
 
           this.trigger('reject', this._currentStream.stats);
@@ -907,8 +922,9 @@ export default class SActionStream extends __SPromise {
    */
   log(...args) {
     args.forEach((arg) => {
-      if (this._currentStream.promise)
+      if (this._currentStream && this._currentStream.promise) {
         this._currentStream.promise.trigger('log', arg);
+      }
       this.trigger('log', arg);
     });
   }

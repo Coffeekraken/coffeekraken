@@ -1,3 +1,4 @@
+const __SError = require('../error/SError');
 const __toString = require('../string/toString');
 const __SPromise = require('../promise/SPromise');
 const __deepMerge = require('../object/deepMerge');
@@ -91,8 +92,9 @@ class SChildProcess extends __SProcess {
             : 1,
           IS_CHILD_PROCESS: true
         },
-        silent: true,
-        detached: true
+        stdio: 'inherit'
+        // silent: true,
+        // detached: true
       },
       settings
     );
@@ -165,6 +167,8 @@ class SChildProcess extends __SProcess {
       after: null
     };
 
+    // console.log(commandToRun);
+
     // adding the runningProcess in the stack
     this._processesStack.push(this._runningProcess);
 
@@ -206,16 +210,9 @@ class SChildProcess extends __SProcess {
     });
 
     // executing the actual command through the spawn node function
-    try {
-      this._runningProcess.childProcess = __childProcess[
-        settings.method || 'spawn'
-      ](commandToRun, [], spawnSettings);
-    } catch (e) {
-      promise.trigger('log', {
-        value: 'CO'
-      });
-      console.log('YOUYOU');
-    }
+    this._runningProcess.childProcess = __childProcess[
+      settings.method || 'spawn'
+    ](commandToRun, [], spawnSettings);
     // listen for ctrl+c to kill the child process
     // __hotkey('ctrl+c', {
     //   once: true
@@ -257,8 +254,15 @@ class SChildProcess extends __SProcess {
       //   this._runningProcess.after = await settings.after.run();
       // }
 
+      // console.log(this._runningProcess.stderr);
+
+      let error = null;
+      if (this._runningProcess.state === 'error') {
+        error = this._runningProcess.stderr.join('\n');
+      }
       promise.trigger(`${this._runningProcess.state}`, {
         time: Date.now(),
+        error,
         ...this.runningProcess
       });
 
@@ -280,11 +284,22 @@ class SChildProcess extends __SProcess {
     //   });
     // });
 
+    this._runningProcess.childProcess.on('error', (e) => {
+      console.log('ERRRO');
+      promise.trigger('log', {
+        value: 'CCC'
+      });
+    });
+
     this._runningProcess.childProcess.on('close', (code, signal) => {
       console.log('CLOSE');
-      console.log(this._runningProcess.stderr);
 
-      if (this._isKilling || (!code && signal)) {
+      if (this._runningProcess.stderr.length) {
+        this._runningProcess.state = 'error';
+        promise.trigger('log', {
+          value: this._runningProcess.stderr.join('\n')
+        });
+      } else if (this._isKilling || (!code && signal)) {
         this._runningProcess.state = 'killed';
       } else if (code === 0 && !signal) {
         this._runningProcess.state = 'success';
@@ -300,11 +315,11 @@ class SChildProcess extends __SProcess {
         ...this.runningProcess
       });
 
-      if (!code && signal) {
+      if (this._runningProcess.state === 'killed') {
         resolveOrReject('reject', {}, code, signal);
-      } else if (code === 0 && !signal) {
+      } else if (this._runningProcess.state === 'success') {
         resolveOrReject('resolve', {}, code, signal);
-      } else {
+      } else if (this._runningProcess.state === 'error') {
         resolveOrReject(
           'reject',
           {
@@ -319,35 +334,10 @@ class SChildProcess extends __SProcess {
       this._isKilling = false;
     });
 
-    // error
-    // this._runningProcess.childProcess.on('error', (error) => {
-    //   this._runningProcess.state = 'error';
-    //   triggerState();
-
-    //   error = __toString(error);
-
-    //   // this._runningProcess.stderr.push(error);
-    //   // promise.trigger(`log`, {
-    //   //   error,
-    //   //   value: error
-    //   // });
-
-    //   // setTimeout(() => {
-    //   //   this._runningProcess.trigger('log', {
-    //   //     value: 'CCCCCC'
-    //   //   });
-    //   // }, 2999);
-
-    //   // console.log('ERROR', Object.keys(error));
-
-    //   // throw error;
-    // });
-
     // stdout data
     if (this._runningProcess.childProcess.stdout) {
       this._runningProcess.childProcess.stdout.on('data', (log) => {
         log = log.toString();
-
         this._runningProcess.stdout.push(log);
         promise.trigger(`log`, {
           value: log
@@ -359,12 +349,8 @@ class SChildProcess extends __SProcess {
     if (this._runningProcess.childProcess.stderr) {
       this._runningProcess.childProcess.stderr.on('data', (error) => {
         error = error.toString();
-
-        this._runningProcess.stderr.push(error);
-        promise.trigger(`log`, {
-          error: true,
-          value: error
-        });
+        console.log(error);
+        throw new Error(error.toString());
       });
     }
 

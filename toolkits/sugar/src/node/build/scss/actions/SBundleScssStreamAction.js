@@ -71,19 +71,17 @@ module.exports = class SBundleScssStreamAction extends __SActionsStreamAction {
         return resolve(streamObj);
       }
 
-      try {
-        const bundler = new __Bundler(
-          undefined,
-          streamObj.input.split('/').slice(0, -1).join('/')
-        );
-        let bundledScssString = await (
-          await bundler.bundle(__getFilename(streamObj.input))
-        ).bundledContent;
+      const bundler = new __Bundler(
+        undefined,
+        streamObj.input.split('/').slice(0, -1).join('/')
+      );
+      let bundledScssString = await (
+        await bundler.bundle(__getFilename(streamObj.input))
+      ).bundledContent;
 
-        // set the bundled content into the "data" property
-        if (streamObj.data) streamObj.data += bundledScssString;
-        else streamObj.data = bundledScssString;
-      } catch (e) {}
+      // set the bundled content into the "data" property
+      if (streamObj.data) streamObj.data += bundledScssString;
+      else streamObj.data = bundledScssString;
 
       resolve(streamObj);
     });

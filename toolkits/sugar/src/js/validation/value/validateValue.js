@@ -1,8 +1,7 @@
+import __SValueValidationError from '../../error/SValueValidationError';
 import __isOfType from '../../is/ofType';
 import __deepMerge from '../../object/deepMerge';
-import __isClass from '../../is/class';
 import __typeof from '../../value/typeof';
-import __SValueValidationError from '../../error/SValueValidationError';
 
 /**
  * @name          validateValue
@@ -93,6 +92,7 @@ export default function validateValue(value, definitionObj, settings = {}) {
 
   if (!issueObj.issues.length) return true;
   if (settings.throw) {
+    throw new Error('CCCCCCC');
     throw new __SValueValidationError(issueObj);
   }
 

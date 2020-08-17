@@ -1,10 +1,7 @@
-import __get from '../object/get';
-import __set from '../object/set';
-import __deepMap from '../object/deepMap';
-import __validateCliObject from '../validation/cli/validateCliObject';
 import __deepize from '../object/deepize';
 import __deepMerge from '../object/deepMerge';
 import __toString from '../string/toString';
+import __validateCliObject from '../validation/cli/validateCliObject';
 
 /**
  * @name                completeArgsObject

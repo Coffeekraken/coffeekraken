@@ -55,7 +55,7 @@ module.exports = class SBuildScssActionsStream extends __SActionsStream {
     super(
       {
         filesResolver: __SFsFilesResolverStreamAction,
-        // fsCache: __SFsCacheStreamAction,
+        fsCache: __SFsCacheStreamAction,
         bundle: __SBundleScssStreamAction,
         sugarJson: __SSugarJsonStreamAction,
         imports: __SImportsStreamAction,
@@ -69,11 +69,6 @@ module.exports = class SBuildScssActionsStream extends __SActionsStream {
         {
           id: 'actionsStream.build.scss',
           name: 'Build SCSS',
-          actions: {
-            filesResolver: {
-              out: 'array'
-            }
-          },
           before: (streamObj) => {
             streamObj.jsObjectToScss = __sugarConfig('scss');
             return streamObj;
@@ -85,25 +80,37 @@ module.exports = class SBuildScssActionsStream extends __SActionsStream {
             }
           },
           beforeActions: {
-            // fsCache: (streamObj) => {
-            //   if (!streamObj.outputStack) streamObj.outputStack = {};
-            //   if (streamObj.outputDir && streamObj.filename) {
-            //     streamObj.outputStack.data = __path.resolve(
-            //       streamObj.outputDir,
-            //       streamObj.prod
-            //         ? streamObj.filename.replace('.scss', '.prod.css')
-            //         : streamObj.filename.replace('.scss', '.css')
-            //     );
-            //   }
-            //   return streamObj;
-            // },
+            fsCache: (streamObj) => {
+              return this._ensureOutputStack(streamObj);
+            },
             fsOutput: (streamObj) => {
-              return streamObj;
+              return this._ensureOutputStack(streamObj);
             }
           }
         },
         settings
       )
     );
+  }
+
+  _ensureOutputStack(streamObj) {
+    if (!streamObj.outputStack) streamObj.outputStack = {};
+    if (streamObj.outputDir && streamObj.filename) {
+      streamObj.outputStack.data = __path.resolve(
+        streamObj.outputDir,
+        streamObj.prod
+          ? streamObj.filename.replace('.scss', '.prod.css')
+          : streamObj.filename.replace('.scss', '.css')
+      );
+    }
+    if (streamObj.outputDir && streamObj.filename && streamObj.sourcemapData) {
+      streamObj.outputStack.sourcemapData = __path.resolve(
+        streamObj.outputDir,
+        streamObj.prod
+          ? streamObj.filename.replace('.css', '.prod.css.map')
+          : streamObj.filename.replace('.css', '.css.map')
+      );
+    }
+    return streamObj;
   }
 };

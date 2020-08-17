@@ -620,8 +620,6 @@ export default class SActionStream extends __SPromise {
       }
     };
 
-    console.log('eeeee');
-
     // make sure the before, after, beforeAction and afterAction stacks are Arrays
     if (settings.before && !Array.isArray(settings.before))
       settings.before = [settings.before];
@@ -631,8 +629,6 @@ export default class SActionStream extends __SPromise {
     this._currentStream.promise = new __SPromise(
       async (resolve, reject, trigger, cancel) => {
         await __wait(100); // ugly hack to check when have time...
-
-        this.log('cc');
 
         // starting log
         const startString = `#start Starting the stream "<cyan>${
@@ -920,6 +916,7 @@ export default class SActionStream extends __SPromise {
    * @since         2.0.0
    * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
+  _coco = 'hello';
   log(...args) {
     args.forEach((arg) => {
       if (this._currentStream && this._currentStream.promise) {

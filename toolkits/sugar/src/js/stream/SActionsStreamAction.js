@@ -87,18 +87,11 @@ export default class SActionStreamAction extends __SPromise {
     if (!this._settings.id)
       this._settings.id = this.constructor.name.toLowerCase();
 
-    // if (
-    //   !this.constructor.definitionObj ||
-    //   !Object.keys(this.constructor.definitionObj).length
-    // ) {
-    //   throw new Error(
-    //     `Sorry but your class "<yellow>${this.constructor.name}</yellow>" does not have the required <yellow>static</yellow> <cyan>definitionObj</cyan> property...`
-    //   );
-    // }
-
     // check the definition object
     if (this.constructor.definitionObj) {
-      __validateObjectDefinitionObject(this.constructor.definitionObj);
+      setTimeout(() => {
+        __validateObjectDefinitionObject(this.constructor.definitionObj);
+      });
     }
     super.start();
   }

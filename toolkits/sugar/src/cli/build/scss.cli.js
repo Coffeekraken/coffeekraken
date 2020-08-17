@@ -9,9 +9,6 @@ module.exports = (stringArgs = '') => {
   const cli = new __SBuildScssCli({
     output: {}
   });
-  // if (__isChildProcess()) {
-  //   throw 'SOMETHING';
-  // }
   const proc = cli.run(stringArgs);
 
   // const args = __parseArgs(stringArgs, __SBuildScssCli.definitionObj);

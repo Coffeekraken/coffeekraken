@@ -99,7 +99,7 @@ module.exports = class SOutput extends __SComponent {
       {
         filter: null,
         // maxItems: -1,
-        maxItemsByGroup: 1
+        maxItemsByGroup: 1000000
       },
       settings
     );
@@ -148,18 +148,11 @@ module.exports = class SOutput extends __SComponent {
         });
       })
       .on('error', (error) => {
-        // console.log('error', error.error);
         this.log({
           error: true,
           value: error.error || error
         });
       })
-      // .on('*.start', () => {
-      //   this.log({
-      //     clear: true,
-      //     value: `Launching the process...`
-      //   });
-      // })
       .on('log', (data) => {
         this.log(data);
       });
@@ -323,8 +316,8 @@ module.exports = class SOutput extends __SComponent {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  async log(...args) {
-    await __wait(100);
+  log(...args) {
+    // await __wait(100);
 
     let logsObjArray = this._parseLog(...args);
 
@@ -431,16 +424,25 @@ module.exports = class SOutput extends __SComponent {
   _lastY = 1;
   _lastContentCount = 0;
   $logBoxChilds = [];
+  _updateTimeout = null;
+  _updateCountdown = 0;
   update() {
     if (__isChildProcess()) return;
-    if (!this.allowRender()) return;
+    // if (!this.allowRender()) return;
     if (!this.isDisplayed()) return;
 
     this._lastY = 1;
 
-    if (!this._content.length) {
+    if (
+      !this._content.length // ||
+      // this._lastContentCount === this._content.length
+    ) {
       super.update();
       return;
+    }
+
+    if (this._lastContentCount !== this._content.length) {
+      this._updateCountdown = 5;
     }
 
     this._content.forEach((item) => {
@@ -491,13 +493,34 @@ module.exports = class SOutput extends __SComponent {
       }
     });
 
-    setTimeout(() => {
-      if (this._lastContentCount !== this._content.length) {
-        this.$logBox.setScrollPerc(100);
-        this._lastContentCount = this._content.length;
-      }
-      super.update();
-    }, 200);
+    this.$logBox.setScrollPerc(100);
+    this._lastContentCount = this._content.length;
+    super.update();
+    if (this._updateCountdown > 0) {
+      setTimeout(() => {
+        this.update();
+      }, 200);
+      this._updateCountdown--;
+    }
+    // setTimeout(() => {
+    //   console.log('render');
+    //   super.update();
+    //   super.update();
+    //   super.update();
+    //   super.update();
+    //   super.update();
+    //   super.update();
+    //   super.update();
+    // }, 200);
+    // await __wait(200);
+    // console.log('CCCC');
+    // super.update();
+    // await __wait(200);
+    // console.log('CCCC');
+    // super.update();
+    // await __wait(200);
+    // console.log('CCCC');
+    // super.update();
   }
 
   /**
@@ -567,6 +590,9 @@ module.exports = class SOutput extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _errorTextBox(text) {
+    // console.log('erere');
+    // return;
+
     const $box = __blessed.box({
       width:
         this.$logBox.width -
@@ -585,6 +611,7 @@ module.exports = class SOutput extends __SComponent {
       },
       content: __parseMarkdown(text)
     });
+
     const $line = __blessed.box({
       width: 1,
       height: 1,

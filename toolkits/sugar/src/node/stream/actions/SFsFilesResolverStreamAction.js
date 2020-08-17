@@ -141,7 +141,10 @@ module.exports = class SFindInFileStreamAction extends __SActionsStreamAction {
         );
       }
 
-      if (settings.out === 'array') {
+      if (settings.out === 'files') {
+        streamObj[settings.property || 'files'] = filesPathes;
+        resolve(streamObj);
+      } else {
         filesPathes.forEach((path) => {
           streamObjArray.push(
             Object.assign(
@@ -154,9 +157,6 @@ module.exports = class SFindInFileStreamAction extends __SActionsStreamAction {
           );
         });
         resolve(streamObjArray);
-      } else {
-        streamObj[settings.property || 'files'] = filesPathes;
-        resolve(streamObj);
       }
     });
   }

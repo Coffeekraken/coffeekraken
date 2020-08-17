@@ -4,8 +4,9 @@ const __STerserStreamAction = require('./actions/STerserStreamAction');
 const __SFsReadFileStreamAction = require('../../stream/actions/SFsReadFileStreamAction');
 const __deepMerge = require('../../object/deepMerge');
 const __getFilename = require('../../fs/filename');
+const __SFsFilesResolverStreamAction = require('../../stream/actions/SFsFilesResolverStreamAction');
+const __SFsCacheStreamAction = require('../../stream/actions/SFsCacheStreamAction');
 const __SFsOutputStreamAction = require('../../stream/actions/SFsOutputStreamAction');
-const __SGlobResolverStreamAction = require('../../stream/actions/SGlobResolverStreamAction');
 const __SSugarJsonStreamAction = require('./actions/SSugarJsonStreamAction');
 const __path = require('path');
 
@@ -48,22 +49,23 @@ module.exports = class SBuildJsActionsStream extends __SActionsStream {
     // init actions stream
     super(
       {
-        globResolver: __SGlobResolverStreamAction,
+        filesResolver: __SFsFilesResolverStreamAction,
+        // fsCache: __SFsCacheStreamAction,
         readFile: __SFsReadFileStreamAction,
         sugarJson: __SSugarJsonStreamAction,
-        webpack: __SWebpackStreamAction,
-        terser: __STerserStreamAction,
+        // webpack: __SWebpackStreamAction,
+        // terser: __STerserStreamAction,
         fsOutput: __SFsOutputStreamAction
       },
       __deepMerge(
         {
+          id: 'actionStream.build.js',
           name: 'Build JS',
           before: (streamObj) => {
-            streamObj.globProperty = 'input';
             return streamObj;
           },
           afterActions: {
-            globResolver: (streamObj) => {
+            filesResolver: (streamObj) => {
               if (streamObj.input) {
                 streamObj.filename = __getFilename(streamObj.input);
               }
@@ -71,33 +73,39 @@ module.exports = class SBuildJsActionsStream extends __SActionsStream {
             }
           },
           beforeActions: {
+            fsCache: (streamObj) => {
+              return this._ensureOutputStack(streamObj);
+            },
             fsOutput: (streamObj) => {
-              if (streamObj.input) {
-                streamObj.filename = __getFilename(streamObj.input);
-              }
-              if (!streamObj.outputStack) streamObj.outputStack = {};
-              if (streamObj.outputDir && streamObj.filename && streamObj.data) {
-                streamObj.outputStack.data = __path.resolve(
-                  streamObj.outputDir,
-                  streamObj.filename
-                );
-              }
-              if (
-                streamObj.outputDir &&
-                streamObj.filename &&
-                streamObj.sourcemapData
-              ) {
-                streamObj.outputStack.sourcemapData = __path.resolve(
-                  streamObj.outputDir,
-                  streamObj.filename + '.map'
-                );
-              }
-              return streamObj;
+              // console.log(streamObj);
+              // throw streamObj;
+              return this._ensureOutputStack(streamObj);
             }
           }
         },
         settings
       )
     );
+  }
+
+  _ensureOutputStack(streamObj) {
+    if (!streamObj.outputStack) streamObj.outputStack = {};
+    if (streamObj.outputDir && streamObj.filename) {
+      streamObj.outputStack.data = __path.resolve(
+        streamObj.outputDir,
+        streamObj.prod
+          ? streamObj.filename.replace('.js', '.prod.js')
+          : streamObj.filename.replace('.js', '.js')
+      );
+    }
+    if (streamObj.outputDir && streamObj.filename && streamObj.sourcemapData) {
+      streamObj.outputStack.sourcemapData = __path.resolve(
+        streamObj.outputDir,
+        streamObj.prod
+          ? streamObj.filename.replace('.js', '.prod.js.map')
+          : streamObj.filename.replace('.js', '.js.map')
+      );
+    }
+    return streamObj;
   }
 };

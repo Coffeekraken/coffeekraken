@@ -91,8 +91,8 @@ class SChildProcess extends __SProcess {
             ? process.env.CHILD_PROCESS_LEVEL + 1
             : 1,
           IS_CHILD_PROCESS: true
-        },
-        stdio: 'inherit'
+        }
+        // stdio: 'inherit'
         // silent: true,
         // detached: true
       },
@@ -284,16 +284,14 @@ class SChildProcess extends __SProcess {
     //   });
     // });
 
-    this._runningProcess.childProcess.on('error', (e) => {
-      console.log('ERRRO');
-      promise.trigger('log', {
-        value: 'CCC'
-      });
-    });
+    // this._runningProcess.childProcess.on('error', (e) => {
+    //   console.log('ERRRO');
+    //   promise.trigger('log', {
+    //     value: 'CCC'
+    //   });
+    // });
 
     this._runningProcess.childProcess.on('close', (code, signal) => {
-      console.log('CLOSE');
-
       if (this._runningProcess.stderr.length) {
         this._runningProcess.state = 'error';
         promise.trigger('log', {
@@ -349,7 +347,6 @@ class SChildProcess extends __SProcess {
     if (this._runningProcess.childProcess.stderr) {
       this._runningProcess.childProcess.stderr.on('data', (error) => {
         error = error.toString();
-        console.log(error);
         throw new Error(error.toString());
       });
     }

@@ -218,25 +218,27 @@ module.exports = class SComponent extends __blessed.box {
   _renderAfterNotAllowedTimeout = null;
   update() {
     if (this.isDestroyed()) return;
-    if (!this._allowRender) {
-      if (!this._settings.framerate && !this._renderAfterNotAllowedTimeout) {
-        this._renderAfterNotAllowedTimeout = setTimeout(() => {
-          clearTimeout(this._renderAfterNotAllowedTimeout);
-          this.update();
-        }, 200);
-      }
-      return;
+    // if (!this._allowRender) {
+    //   if (!this._settings.framerate && !this._renderAfterNotAllowedTimeout) {
+    //     this._renderAfterNotAllowedTimeout = setTimeout(() => {
+    //       clearTimeout(this._renderAfterNotAllowedTimeout);
+    //       this.update();
+    //     }, 200);
+    //   }
+    //   return;
+    // }
+
+    // this._allowRender = false;
+
+    // clearTimeout(this._updateTimeout);
+    // this._updateTimeout = setTimeout(() => {
+    //   this._allowRender = true;
+    //   if (!this._settings.framerate) this.update();
+    // }, this._settings.maxRenderInterval);
+
+    if (this._screen) {
+      this._screen.render();
     }
-
-    this._allowRender = false;
-
-    clearTimeout(this._updateTimeout);
-    this._updateTimeout = setTimeout(() => {
-      this._allowRender = true;
-      if (!this._settings.framerate) this.update();
-    }, this._settings.maxRenderInterval);
-
-    if (this._screen) this._screen.render();
   }
 
   /**

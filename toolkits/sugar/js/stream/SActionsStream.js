@@ -158,6 +158,8 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
 
     _defineProperty(_assertThisInitialized(_this), "_currentStream", null);
 
+    _defineProperty(_assertThisInitialized(_this), "_coco", 'hello');
+
     _get((_thisSuper = _assertThisInitialized(_this), _getPrototypeOf(SActionStream.prototype)), "start", _thisSuper).call(_thisSuper); // check the actions
 
 
@@ -621,17 +623,14 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
           canceled: false,
           actions: {}
         }
-      };
-      console.log('eeeee'); // make sure the before, after, beforeAction and afterAction stacks are Arrays
+      }; // make sure the before, after, beforeAction and afterAction stacks are Arrays
 
       if (settings.before && !Array.isArray(settings.before)) settings.before = [settings.before];
       if (settings.after && !Array.isArray(settings.after)) settings.after = [settings.after];
       this._currentStream.promise = new _SPromise2.default( /*#__PURE__*/function () {
         var _ref3 = _asyncToGenerator(function* (resolve, reject, trigger, cancel) {
           yield (0, _wait.default)(100); // ugly hack to check when have time...
-
-          _this4.log('cc'); // starting log
-
+          // starting log
 
           var startString = "#start Starting the stream \"<cyan>".concat(settings.name || 'unnamed', "</cyan>\"");
 

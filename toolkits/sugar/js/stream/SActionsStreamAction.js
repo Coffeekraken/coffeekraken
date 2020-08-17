@@ -133,18 +133,12 @@ var SActionStreamAction = /*#__PURE__*/function (_SPromise) {
 
     _defineProperty(_assertThisInitialized(_this), "_registeredCallbacks", []);
 
-    if (!_this._settings.id) _this._settings.id = _this.constructor.name.toLowerCase(); // if (
-    //   !this.constructor.definitionObj ||
-    //   !Object.keys(this.constructor.definitionObj).length
-    // ) {
-    //   throw new Error(
-    //     `Sorry but your class "<yellow>${this.constructor.name}</yellow>" does not have the required <yellow>static</yellow> <cyan>definitionObj</cyan> property...`
-    //   );
-    // }
-    // check the definition object
+    if (!_this._settings.id) _this._settings.id = _this.constructor.name.toLowerCase(); // check the definition object
 
     if (_this.constructor.definitionObj) {
-      (0, _validateObjectDefinitionObject.default)(_this.constructor.definitionObj);
+      setTimeout(() => {
+        (0, _validateObjectDefinitionObject.default)(_this.constructor.definitionObj);
+      });
     }
 
     _get((_thisSuper = _assertThisInitialized(_this), _getPrototypeOf(SActionStreamAction.prototype)), "start", _thisSuper).call(_thisSuper);

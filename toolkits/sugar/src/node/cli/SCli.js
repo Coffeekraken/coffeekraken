@@ -1,3 +1,4 @@
+const __packageJson = require('../package/json');
 const __typeof = require('../value/typeof');
 const __buildCommandLine = require('./buildCommandLine');
 const __validateCliDefinitionObject = require('../validation/cli/validateCliDefinitionObject');
@@ -229,18 +230,10 @@ class SCli extends __SProcess {
       // Apply the SProcessInterface on the getted process
       __SProcessInterface.apply(this._runningProcess);
 
-      console.log('RUN');
-
       // run the process
       this._runningProcess.run(paramsObj);
 
-      // if (settings.output) {
-      //   const outputSettings =
-      //     typeof settings.output === 'object' ? settings.output : {};
-      //   __output(this._runningProcess, outputSettings);
-      // }
-
-      return this._runningProcess;
+      // return this._runningProcess;
     } else {
       const childProcess = new __SChildProcess(this.commandString, {
         id: settings.id,
@@ -263,30 +256,31 @@ class SCli extends __SProcess {
         .on('close', (args) => {
           this._runningProcess = null;
         });
-
-      // if (settings.output) {
-      //   const outputSettings =
-      //     typeof settings.output === 'object' ? settings.output : {};
-      //   __output(this._runningProcess, outputSettings);
-      // }
     }
 
-    const launchingLogObj = {
-      temp: true,
-      value: `<yellow>${__sugarHeading}</yellow>\n\nLaunching the SCli "<primary>${
-        this._settings.name || this._settings.id
-      }</primary>" process...`
-    };
-    this.trigger('log', launchingLogObj);
+    if (settings.output) {
+      const outputSettings =
+        typeof settings.output === 'object' ? settings.output : {};
+      __output(this._runningProcess, outputSettings);
+    }
+
+    if (!__isChildProcess()) {
+      const launchingLogObj = {
+        // temp: true,
+        value: `${__sugarHeading({
+          version: __packageJson(__dirname).version
+        })}\n\nLaunching the SCli "<primary>${
+          this._settings.name || this._settings.id
+        }</primary>" process...`
+      };
+      this._runningProcess.trigger('log', launchingLogObj);
+    }
 
     // save running process params
     this._runningParamsObj = paramsObj;
 
     // listen for some events on the process
     this._runningProcess.on('cancel,finally', () => {
-      this.trigger('log', {
-        value: 'PLOP'
-      });
       this._runningProcess = null;
       this._runningParamsObj = null;
     });

@@ -1,6 +1,7 @@
 const __SCli = require('../../cli/SCli');
-const __sugarConfig = require('../../config/sugar');
 const __deepMerge = require('../../object/deepMerge');
+const __SBuildJsCliInterface = require('./interface/SBuildJsCliInterface');
+const __SBuildJsProcess = require('./SBuildJsProcess');
 
 /**
  * @name            SBuildJsCli
@@ -13,7 +14,7 @@ const __deepMerge = require('../../object/deepMerge');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SBuildJsCli extends __SCli {
+class SBuildJsCli extends __SCli {
   /**
    * @name          command
    * @type          String
@@ -34,50 +35,18 @@ module.exports = class SBuildJsCli extends __SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static definitionObj = {
-    input: {
-      type: 'String',
-      alias: 'i',
-      description: 'Input files glob pattern',
-      default: __sugarConfig('build.js.input') || 'src/js/*.js',
-      level: 1
-    },
-    outputDir: {
-      type: 'String',
-      alias: 'o',
-      description: 'Output directory path',
-      default: __sugarConfig('build.js.outputDir') || 'dist/js',
-      level: 1
-    },
-    sugarJsonDirs: {
-      type: 'Array',
-      alias: 'a',
-      description: 'Specify the directory where to search for sugar.json files',
-      default: __sugarConfig('core.sugarJsonDirs'),
-      level: 1
-    },
-    map: {
-      type: 'Boolean',
-      alias: 'm',
-      description: 'Generate a sourcemap file',
-      default: __sugarConfig('build.js.map'),
-      level: 1
-    },
-    pack: {
-      type: 'Boolean|Array',
-      alias: 'p',
-      description:
-        'Specify some files to pack using webpack, true to pack all the files or false to simply process them using babel',
-      default: __sugarConfig('build.js.pack'),
-      level: 1
-    },
-    prod: {
-      type: 'Boolean',
-      description: 'Generate the production ready files',
-      default: __sugarConfig('build.js.prod'),
-      level: 1
-    }
-  };
+  static definitionObj = __SBuildJsCliInterface.definitionObj;
+
+  /**
+   * @name          processClass
+   * @type          SProcess
+   * @static
+   *
+   * Store the process class that will be used to run the SCSS build process
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static processClass = __SBuildJsProcess;
 
   /**
    * @name          constructor
@@ -92,11 +61,13 @@ module.exports = class SBuildJsCli extends __SCli {
     super(
       __deepMerge(
         {
-          id: 'build.js',
-          name: 'Build Js'
+          id: 'cli.build.js',
+          name: 'Cli Build Js'
         },
         settings
       )
     );
   }
-};
+}
+
+module.exports = __SBuildJsCliInterface.implements(SBuildJsCli);

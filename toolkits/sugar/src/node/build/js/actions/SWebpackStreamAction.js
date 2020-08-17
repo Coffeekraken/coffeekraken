@@ -5,7 +5,7 @@ const __deepMerge = require('../../../object/deepMerge');
 const __fs = require('fs');
 const __path = require('path');
 const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
-const __SBuildJsCli = require('../SBuildJsCli');
+const __SBuildJSCliInterface = require('../interface/SBuildJsCliInterface');
 const __sugarConfig = require('../../../config/sugar');
 const __babel = require('@babel/core');
 const __getScssImportsStrings = require('../../scss/getScssImportsStrings');
@@ -35,7 +35,7 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   static definitionObj = {
-    ...__SBuildJsCli.definitionObj
+    ...__SBuildJSCliInterface.definitionObj
   };
 
   /**

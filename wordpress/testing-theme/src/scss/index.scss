@@ -1,0 +1,53 @@
+s-google-map {
+  min-height: 600px;
+  margin-bottom: 20px;
+}
+
+.four-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 1px 1px;
+  grid-template-areas: ". . . .";
+  margin-bottom: 20px;
+
+  & > * {
+    min-height: 200px;
+  }
+  .four-columns-01 {
+    background-color: red;
+  }
+  .four-columns-02 {
+    background-color: blue;
+  }
+  .four-columns-03 {
+    background-color: green;
+  }
+  .four-columns-04 {
+    background-color: orange;
+  }
+
+}
+
+
+.four-columns-two-rows {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 1px 1px;
+  grid-template-areas: "top top top top" "bottom-01 bottom-02 bottom-03 bottom-04";
+
+  & > * {
+    min-height: 200px;
+  }
+}
+
+.four-columns-two-rows-top { grid-area: top; background: red; }
+
+.four-columns-two-rows-bottom-01 { grid-area: bottom-01; background: blue; }
+
+.four-columns-two-rows-bottom-02 { grid-area: bottom-02; background: green; }
+
+.four-columns-two-rows-bottom-03 { grid-area: bottom-03; background: orange; }
+
+.four-columns-two-rows-bottom-04 { grid-area: bottom-04; background: cyan; }

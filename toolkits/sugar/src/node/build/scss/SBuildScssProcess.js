@@ -44,9 +44,16 @@ module.exports = class SBuildScssProcess extends __SProcess {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(argsObj, settings = {}) {
-    const actionStream = new __SBuildScssActionsStream(settings);
-    this._buildScssActionsStream = actionStream.start(argsObj);
-    return super.run(this._buildScssActionsStream);
+    try {
+      const actionStream = new __SBuildScssActionsStream(settings);
+      this._buildScssActionsStream = actionStream.start(argsObj);
+      return super.run(this._buildScssActionsStream);
+    } catch (e) {
+      this._buildScssActionsStream.trigger('log', {
+        value: 'sssss'
+      });
+      console.log('XXX');
+    }
   }
 
   /**

@@ -1,3 +1,4 @@
+const __toString = require('../string/toString');
 const __SPromise = require('../promise/SPromise');
 const __deepMerge = require('../object/deepMerge');
 const __childProcess = require('child_process');
@@ -89,7 +90,9 @@ class SChildProcess extends __SProcess {
             ? process.env.CHILD_PROCESS_LEVEL + 1
             : 1,
           IS_CHILD_PROCESS: true
-        }
+        },
+        silent: true,
+        detached: true
       },
       settings
     );
@@ -203,10 +206,16 @@ class SChildProcess extends __SProcess {
     });
 
     // executing the actual command through the spawn node function
-    this._runningProcess.childProcess = __childProcess[
-      settings.method || 'spawn'
-    ](commandToRun, [], spawnSettings);
-
+    try {
+      this._runningProcess.childProcess = __childProcess[
+        settings.method || 'spawn'
+      ](commandToRun, [], spawnSettings);
+    } catch (e) {
+      promise.trigger('log', {
+        value: 'CO'
+      });
+      console.log('YOUYOU');
+    }
     // listen for ctrl+c to kill the child process
     // __hotkey('ctrl+c', {
     //   once: true
@@ -265,7 +274,16 @@ class SChildProcess extends __SProcess {
       promise.trigger(`state`, this.runningProcess.state);
     };
 
+    // this._runningProcess.catch((e) => {
+    //   promise.trigger('log', {
+    //     value: 'plop'
+    //   });
+    // });
+
     this._runningProcess.childProcess.on('close', (code, signal) => {
+      console.log('CLOSE');
+      console.log(this._runningProcess.stderr);
+
       if (this._isKilling || (!code && signal)) {
         this._runningProcess.state = 'killed';
       } else if (code === 0 && !signal) {
@@ -302,37 +320,33 @@ class SChildProcess extends __SProcess {
     });
 
     // error
-    this._runningProcess.childProcess.on('error', (error) => {
-      this._runningProcess.state = 'error';
-      triggerState();
+    // this._runningProcess.childProcess.on('error', (error) => {
+    //   this._runningProcess.state = 'error';
+    //   triggerState();
 
-      // console.log('ERROR', error);
+    //   error = __toString(error);
 
-      throw error;
-    });
+    //   // this._runningProcess.stderr.push(error);
+    //   // promise.trigger(`log`, {
+    //   //   error,
+    //   //   value: error
+    //   // });
+
+    //   // setTimeout(() => {
+    //   //   this._runningProcess.trigger('log', {
+    //   //     value: 'CCCCCC'
+    //   //   });
+    //   // }, 2999);
+
+    //   // console.log('ERROR', Object.keys(error));
+
+    //   // throw error;
+    // });
 
     // stdout data
     if (this._runningProcess.childProcess.stdout) {
       this._runningProcess.childProcess.stdout.on('data', (log) => {
         log = log.toString();
-
-        // console.log('lo', log);
-
-        // const resultReg = /^#result\s(.*)$/gm;
-        // if (log.match(resultReg)) {
-        //   this._runningProcess.state = 'success';
-        //   triggerState();
-
-        //   resolveOrReject(
-        //     'resolve',
-        //     {
-        //       value: __parse(log.replace('#result ', ''))
-        //     },
-        //     0,
-        //     null
-        //   );
-        //   return;
-        // }
 
         this._runningProcess.stdout.push(log);
         promise.trigger(`log`, {

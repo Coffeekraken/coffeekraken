@@ -3,6 +3,7 @@ const __packageRoot = require('../path/packageRoot');
 const __SError = require('../error/SError');
 const __parseHtml = require('../terminal/parseHtml');
 const __keypress = require('keypress');
+const __toString = require('../string/toString');
 
 /**
  * @name                    handleError
@@ -26,11 +27,15 @@ module.exports = function handleError(error) {
   if (error.toString().includes(`Cannot read property 'itop' of null`)) return;
 
   if (__isChildProcess()) {
-    console.log(error.toString());
+    // console.log('XXXXXXXXX');
+    // console.log(error.toString());
+    throw error;
+    // console.error(__toString(error));
   } else {
     __keypress.disableMouse(process.stdout);
     error.message = __parseHtml(error.message);
     error.stack = '';
-    throw error;
+    console.log('SOMETHING');
+    // throw error;
   }
 };

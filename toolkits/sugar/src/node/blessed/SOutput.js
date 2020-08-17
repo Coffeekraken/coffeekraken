@@ -428,6 +428,7 @@ module.exports = class SOutput extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _lastY = 1;
+  _lastContentCount = 0;
   $logBoxChilds = [];
   update() {
     if (__isChildProcess()) return;
@@ -483,7 +484,10 @@ module.exports = class SOutput extends __SComponent {
     });
 
     setTimeout(() => {
-      this.$logBox.setScrollPerc(100);
+      if (this._lastContentCount !== this._content.length) {
+        this.$logBox.setScrollPerc(100);
+        this._lastContentCount = this._content.length;
+      }
       super.update();
     }, 200);
   }

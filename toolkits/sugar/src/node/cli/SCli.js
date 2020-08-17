@@ -267,13 +267,9 @@ class SCli extends __SProcess {
 
       childProcess.run(paramsObj);
 
-      this._runningProcess
-        .on('error', (error) => {
-          // console.log('erro', error);
-        })
-        .on('close', (args) => {
-          this._runningProcess = null;
-        });
+      this._runningProcess.on('close', (args) => {
+        this._runningProcess = null;
+      });
 
       if (settings.output) {
         const outputSettings =

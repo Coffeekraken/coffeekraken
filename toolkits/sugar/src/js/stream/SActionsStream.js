@@ -149,7 +149,7 @@ export default class SActionStream extends __SPromise {
     ) {
       const startTime = Date.now();
       this.log({
-        // group: 'beforeCallbacks',
+        group: 'beforeCallbacks',
         value: `Executing the <cyan>${this._currentStream.settings.before.length}</cyan> callback(s) registered before the entire actions stream process...`
       });
       for (let key in this._currentStream.settings.before) {
@@ -157,7 +157,7 @@ export default class SActionStream extends __SPromise {
         this._currentStream.streamObj = await fn(this._currentStream.streamObj);
       }
       this.log({
-        // group: 'beforeCallbacks',
+        group: 'beforeCallbacks',
         value: `#success The <cyan>${
           this._currentStream.settings.before.length
         }</cyan> before stream callback(s) have finished <green>successfully</green> <yellow>${__convert(
@@ -217,7 +217,7 @@ export default class SActionStream extends __SPromise {
 
     for (let j = 0; j < stack.length; j++) {
       let currentStreamObj = stack[j];
-      currentStreamObj._isStreamObj = true;
+      // currentStreamObj._isStreamObj = true;
       // if (Array.isArray(currentStreamObj)) {
       //   return await this._handleStreamObjArray(currentStreamObj, actionObj);
       // } else {
@@ -241,19 +241,22 @@ export default class SActionStream extends __SPromise {
         } else currentStreamObj = currentActionReturn;
         currentActionReturn = null;
       } catch (e) {
-        this.log('ERROR', e.toString());
-
+        // this.log('ERROR', e.toString());
         if (typeof e === 'object') {
-          this._currentStream.currentActionObj.stats.stderr.push(
-            `<red>${e.name}</red>: ${e.message}`
-          );
-          this._currentStream.stats.stderr.push(
-            `<red>${e.name}</red>: ${e.message}`
-          );
+          this._currentStream.currentActionObj.stats.stderr.push(__toString(e));
+          this._currentStream.stats.stderr.push(__toString(e));
+          // this.log({
+          //   value: __toString(e)
+          // });
         } else if (typeof e === 'string') {
           this._currentStream.currentActionObj.stats.stderr.push(e);
           this._currentStream.stats.stderr.push(e);
+          // this.log({
+          //   value: e
+          // });
         }
+
+        throw e;
       }
 
       if (
@@ -453,13 +456,12 @@ export default class SActionStream extends __SPromise {
             );
             streamObj = await fnResult;
           } catch (e) {
-            this.log(__toString(e));
             const msg = `Something when wrong during the execution of the <yellow>afterActions.${this._currentStream.currentActionObj.name}</yellow> function...`;
             this.log({
-              error: e,
               value: msg
             });
             this._currentStream.stats.stderr.push(msg);
+            // this.log(__toString(e));
           }
         }
       }
@@ -532,10 +534,12 @@ export default class SActionStream extends __SPromise {
             } catch (e) {
               const msg = `Something when wrong during the execution of the <yellow>beforeActions.${this._currentStream.currentActionObj.name}</yellow> function...`;
               this.log({
-                error: e,
                 value: msg
               });
               this._currentStream.stats.stderr.push(msg);
+              // this.log({
+              //   value: __toString(e)
+              // });
             }
           }
         });
@@ -551,10 +555,12 @@ export default class SActionStream extends __SPromise {
           } catch (e) {
             const msg = `Something when wrong during the execution of the <yellow>beforeActions.${this._currentStream.currentActionObj.name}</yellow> function...`;
             this.log({
-              error: e,
               value: msg
             });
             this._currentStream.stats.stderr.push(msg);
+            // this.log({
+            //   value: __toString(e)
+            // });
           }
         }
       }
@@ -774,7 +780,7 @@ export default class SActionStream extends __SPromise {
           );
           const startString = `#start Starting the action "<yellow>${this._currentStream.currentActionObj.name}</yellow>" on <magenta>${this._currentStream.currentActionObj.sourcesCount}</magenta> sources`;
           this.log({
-            // group: this._currentStream.currentActionObj.name,
+            group: this._currentStream.currentActionObj.name,
             value: startString
           });
 

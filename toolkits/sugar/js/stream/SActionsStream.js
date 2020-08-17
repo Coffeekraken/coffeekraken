@@ -200,7 +200,7 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
         if (this._currentStream.settings.before && this._currentStream.settings.before.length) {
           var startTime = Date.now();
           this.log({
-            // group: 'beforeCallbacks',
+            group: 'beforeCallbacks',
             value: "Executing the <cyan>".concat(this._currentStream.settings.before.length, "</cyan> callback(s) registered before the entire actions stream process...")
           });
 
@@ -210,7 +210,7 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
           }
 
           this.log({
-            // group: 'beforeCallbacks',
+            group: 'beforeCallbacks',
             value: "#success The <cyan>".concat(this._currentStream.settings.before.length, "</cyan> before stream callback(s) have finished <green>successfully</green> <yellow>").concat((0, _convert.default)(Date.now() - startTime, 's'), "s</yellow>")
           });
         }
@@ -275,8 +275,8 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
         if (!Array.isArray(this._currentStream.streamObj)) stack = [this._currentStream.streamObj];else stack = this._currentStream.streamObj;
 
         for (var j = 0; j < stack.length; j++) {
-          var currentStreamObj = stack[j];
-          currentStreamObj._isStreamObj = true; // if (Array.isArray(currentStreamObj)) {
+          var currentStreamObj = stack[j]; // currentStreamObj._isStreamObj = true;
+          // if (Array.isArray(currentStreamObj)) {
           //   return await this._handleStreamObjArray(currentStreamObj, actionObj);
           // } else {
           //   currentStreamObj._isStreamObj = true;
@@ -297,17 +297,24 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
 
             currentActionReturn = null;
           } catch (e) {
-            this.log('ERROR', e.toString());
-
+            // this.log('ERROR', e.toString());
             if (typeof e === 'object') {
-              this._currentStream.currentActionObj.stats.stderr.push("<red>".concat(e.name, "</red>: ").concat(e.message));
+              this._currentStream.currentActionObj.stats.stderr.push((0, _toString.default)(e));
 
-              this._currentStream.stats.stderr.push("<red>".concat(e.name, "</red>: ").concat(e.message));
+              this._currentStream.stats.stderr.push((0, _toString.default)(e)); // this.log({
+              //   value: __toString(e)
+              // });
+
             } else if (typeof e === 'string') {
               this._currentStream.currentActionObj.stats.stderr.push(e);
 
-              this._currentStream.stats.stderr.push(e);
+              this._currentStream.stats.stderr.push(e); // this.log({
+              //   value: e
+              // });
+
             }
+
+            throw e;
           }
 
           if (this._currentStream.currentActionObj.instance && this._currentStream.currentActionObj.instance._skipNextActions) {
@@ -426,14 +433,13 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
                 var fnResult = fn(streamObj, Object.assign({}, this._currentStream.currentActionObj));
                 streamObj = yield fnResult;
               } catch (e) {
-                this.log((0, _toString.default)(e));
                 var msg = "Something when wrong during the execution of the <yellow>afterActions.".concat(this._currentStream.currentActionObj.name, "</yellow> function...");
                 this.log({
-                  error: e,
                   value: msg
                 });
 
-                this._currentStream.stats.stderr.push(msg);
+                this._currentStream.stats.stderr.push(msg); // this.log(__toString(e));
+
               }
             }
           }
@@ -493,11 +499,13 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
                     var msg = "Something when wrong during the execution of the <yellow>beforeActions.".concat(_this2._currentStream.currentActionObj.name, "</yellow> function...");
 
                     _this2.log({
-                      error: e,
                       value: msg
                     });
 
-                    _this2._currentStream.stats.stderr.push(msg);
+                    _this2._currentStream.stats.stderr.push(msg); // this.log({
+                    //   value: __toString(e)
+                    // });
+
                   }
                 }
               });
@@ -518,11 +526,13 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
               } catch (e) {
                 var msg = "Something when wrong during the execution of the <yellow>beforeActions.".concat(this._currentStream.currentActionObj.name, "</yellow> function...");
                 this.log({
-                  error: e,
                   value: msg
                 });
 
-                this._currentStream.stats.stderr.push(msg);
+                this._currentStream.stats.stderr.push(msg); // this.log({
+                //   value: __toString(e)
+                // });
+
               }
             }
           }
@@ -712,7 +722,7 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
             var startString = "#start Starting the action \"<yellow>".concat(_this3._currentStream.currentActionObj.name, "</yellow>\" on <magenta>").concat(_this3._currentStream.currentActionObj.sourcesCount, "</magenta> sources");
 
             _this3.log({
-              // group: this._currentStream.currentActionObj.name,
+              group: _this3._currentStream.currentActionObj.name,
               value: startString
             });
 

@@ -8,7 +8,7 @@ const __isSymlink = require('../../is/symlink');
 const __isGlob = require('is-glob');
 const __isPath = require('../../is/path');
 const __SPromise = require('../../promise/SPromise');
-const { stream } = require('globby');
+const __SError = require('../../error/SError');
 /**
  * @name            SFindInFileStreamAction
  * @namespace       node.stream.actions
@@ -132,10 +132,8 @@ module.exports = class SFindInFileStreamAction extends __SActionsStreamAction {
       });
 
       if (!filesPathes.length) {
-        reject(
-          new Error(
-            `Sorry but your <primary>input</primary> streamObj property setted to "<cyan>${streamObj.input}</cyan>" does not resolve to any files...`
-          )
+        throw new __SError(
+          `Sorry but your <primary>input</primary> streamObj property setted to "<cyan>${streamObj.input}</cyan>" does not resolve to any files...`
         );
       }
 

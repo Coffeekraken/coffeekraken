@@ -138,6 +138,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
+    // _masterPromiseResolveFn = null;
 
     /**
      * @name                   _masterPromiseRejectFn
@@ -148,6 +149,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
+    // _masterPromiseRejectFn = null;
 
     /**
      * @name                  _executorFn
@@ -157,6 +159,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
+    // _executorFn = null;
 
     /**
      * @name                  _isExecutorStarted
@@ -166,6 +169,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
+    // _isExecutorStarted = null;
 
     /**
      * @name                  _settings
@@ -202,6 +206,14 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
+    // _stacks = {
+    //   then: [],
+    //   catch: [],
+    //   resolve: [],
+    //   reject: [],
+    //   finally: [],
+    //   cancel: []
+    // };
 
     /**
      * @name                  pipe
@@ -316,31 +328,57 @@ var SPromise = /*#__PURE__*/function (_Promise) {
       _reject = reject;
     });
 
-    _defineProperty(_assertThisInitialized(_this), "_masterPromiseResolveFn", null);
-
-    _defineProperty(_assertThisInitialized(_this), "_masterPromiseRejectFn", null);
-
-    _defineProperty(_assertThisInitialized(_this), "_executorFn", null);
-
-    _defineProperty(_assertThisInitialized(_this), "_isExecutorStarted", null);
-
     _defineProperty(_assertThisInitialized(_this), "_settings", {});
 
     _defineProperty(_assertThisInitialized(_this), "_promiseState", 'pending');
 
-    _defineProperty(_assertThisInitialized(_this), "_stacks", {
-      then: [],
-      catch: [],
-      resolve: [],
-      reject: [],
-      finally: [],
-      cancel: []
+    Object.defineProperty(_assertThisInitialized(_this), '_masterPromiseResolveFn', {
+      writable: true,
+      configurable: true,
+      enumerable: false,
+      value: _resolve
     });
-
-    _this._masterPromiseResolveFn = _resolve;
-    _this._masterPromiseRejectFn = _reject; // save the executor function
-
-    _this._executorFn = executorFn; // extend settings
+    Object.defineProperty(_assertThisInitialized(_this), '_masterPromiseRejectFn', {
+      writable: true,
+      configurable: true,
+      enumerable: false,
+      value: _reject
+    });
+    Object.defineProperty(_assertThisInitialized(_this), '_executorFn', {
+      writable: true,
+      configurable: true,
+      enumerable: false,
+      value: executorFn
+    });
+    Object.defineProperty(_assertThisInitialized(_this), '_isExecutorStarted', {
+      writable: true,
+      configurable: true,
+      enumerable: false,
+      value: null
+    });
+    Object.defineProperty(_assertThisInitialized(_this), '_promiseState', {
+      writable: true,
+      configurable: true,
+      enumerable: false,
+      value: 'pending'
+    });
+    Object.defineProperty(_assertThisInitialized(_this), '_stacks', {
+      writable: true,
+      configurable: true,
+      enumerable: false,
+      value: {
+        then: [],
+        catch: [],
+        resolve: [],
+        reject: [],
+        finally: [],
+        cancel: []
+      }
+    }); // this._masterPromiseResolveFn = _resolve;
+    // this._masterPromiseRejectFn = _reject;
+    // save the executor function
+    // this._executorFn = executorFn;
+    // extend settings
 
     _this._settings = (0, _deepMerge.default)({
       id: (0, _uniqid.default)(),

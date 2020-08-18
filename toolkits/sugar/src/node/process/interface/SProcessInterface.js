@@ -39,6 +39,10 @@ module.exports = class SProcessInterface extends __SInterface {
     kill: {
       type: 'Function',
       required: true
+    },
+    log: {
+      type: 'Function',
+      required: true
     }
   };
 

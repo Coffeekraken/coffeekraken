@@ -1,5 +1,7 @@
 const __SInterface = require('../../../class/SInterface');
+const __SBuildInterface = require('../../interface/SBuildInterface');
 const __sugarConfig = require('../../../config/sugar');
+const __deepMerge = require('../../../object/deepMerge');
 
 /**
  * @name                SBuildScssCliInterface
@@ -14,27 +16,15 @@ const __sugarConfig = require('../../../config/sugar');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = class SBuildScssCliInterface extends __SInterface {
-  static definitionObj = {
+  static definitionObj = __deepMerge(__SBuildInterface.definitionObj, {
     input: {
-      type: 'String',
-      alias: 'i',
-      description: 'Input files glob pattern',
-      default: __sugarConfig('build.scss.input'),
-      level: 1
+      default: __sugarConfig('build.scss.input')
     },
     outputDir: {
-      type: 'String',
-      alias: 'o',
-      description: 'Output directory path',
-      default: __sugarConfig('build.scss.outputDir'),
-      level: 1
+      default: __sugarConfig('build.scss.outputDir')
     },
     watch: {
-      type: 'String|Object',
-      alias: 'w',
-      description: 'Watch files glob pattern or settings object',
-      default: __sugarConfig('build.scss.watch'),
-      level: 1
+      default: __sugarConfig('build.scss.watch')
     },
     style: {
       type: 'String',
@@ -51,18 +41,10 @@ module.exports = class SBuildScssCliInterface extends __SInterface {
       level: 1
     },
     prod: {
-      type: 'Boolean',
-      alias: 'p',
-      description: 'Generate the production ready files',
-      default: __sugarConfig('build.scss.prod') || false,
-      level: 1
+      default: __sugarConfig('build.scss.prod') || false
     },
-    sugarJsonDirs: {
-      type: 'String|Array<String>',
-      alias: 'a',
-      description: 'Specify the directory where to search for sugar.json files',
-      default: __sugarConfig('core.sugarJsonDirs'),
-      level: 1
+    buildType: {
+      default: 'css'
     },
     'import.sugar': {
       type: 'Boolean',
@@ -76,5 +58,5 @@ module.exports = class SBuildScssCliInterface extends __SInterface {
       default: __sugarConfig('build.scss.vendor.sass') || {},
       level: 2
     }
-  };
+  });
 };

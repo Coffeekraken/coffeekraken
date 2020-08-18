@@ -7,13 +7,13 @@ const __SImportsStreamAction = require('./actions/SImportsStreamAction');
 const __SBundleScssStreamAction = require('./actions/SBundleScssStreamAction');
 const __SRenderSassStreamAction = require('./actions/SRenderSassStreamAction');
 const __SPostCssStreamAction = require('./actions/SPostCssStreamAction');
-const __SSugarJsonStreamAction = require('./actions/SSugarJsonStreamAction');
 const __SFsFilesResolverStreamAction = require('../../stream/actions/SFsFilesResolverStreamAction');
 const __SFsCacheStreamAction = require('../../stream/actions/SFsCacheStreamAction');
 const __SExtractStreamAction = require('../../stream/actions/SExtractStreamAction');
 const __path = require('path');
 const __sugarConfig = require('../../config/sugar');
-const { stream } = require('globby');
+const __SSugarJsonStreamAction = require('../actions/SSugarJsonStreamAction');
+const __SBuildScssCliInterface = require('./interface/SBuildScssCliInterface');
 
 /**
  * @name            SBuildScssActionsStream
@@ -41,6 +41,8 @@ const { stream } = require('globby');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = class SBuildScssActionsStream extends __SActionsStream {
+  static interface = __SBuildScssCliInterface;
+
   /**
    * @name        constructor
    * @type        Function

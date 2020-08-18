@@ -3,10 +3,7 @@ import '@coffeekraken/s-iframe-webcomponent';
 import './search/proxy';
 import __instanciate from '@coffeekraken/sugar/js/action/instanciate';
 import __SAction from '@coffeekraken/sugar/js/action/SAction';
-import __serialize from '@coffeekraken/sugar/js/class/serialize';
-import __deserialize from '@coffeekraken/sugar/js/class/deserialize';
 import __SUrlAction from '@coffeekraken/sugar/js/action/browser/SUrlAction';
-import SUrlAction from '@coffeekraken/sugar/src/node/action/browser/SUrlAction';
 
 // __SAction.on('*.run', (instance) => {
 //   console.log('EFJIEJFIEJFIJE', instance);

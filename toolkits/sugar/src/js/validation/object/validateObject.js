@@ -1,4 +1,5 @@
 // TODO: tests
+import __toString from '../../string/toString';
 import __SObjectValidationError from '../../error/SObjectValidationError';
 import __isClass from '../../is/class';
 import __isPlainObject from '../../is/plainObject';
@@ -86,6 +87,12 @@ export default function validateObject(
     const argName = Object.keys(definitionObj)[i];
     const argDefinition = definitionObj[argName];
     let value = __get(objectToCheck, argName);
+    if (argName === 'map') {
+      // throw objectToCheck[argName];
+      // throw __toString(, {
+      //   beautify: true
+      // });
+    }
     // get the correct value depending on the definitionObj
     let staticIssue = false;
     if (argDefinition.static && !__isClass(objectToCheck)) {
@@ -110,28 +117,34 @@ export default function validateObject(
     //   console.log('GETTER');
     // }
 
-    const validationRes = __validateValue(value, argDefinition, {
-      name: argName,
-      throw: settings.throw
-    });
-    issuesObj[argName] = {
-      name: argName,
-      received: {
-        type: __typeof(value),
-        value
-      },
-      expected: argDefinition,
-      issues: []
-    };
+    // if (typeof value === 'function') {
+    //   console.log('VA', argName, argDefinition);
+    // }
 
-    if (validationRes !== true) {
-      issuesObj[argName] = __deepMerge(
-        issuesObj[argName],
-        validationRes || {},
-        {
-          array: true
-        }
-      );
+    if (argName === 'map') {
+      const validationRes = __validateValue(value, argDefinition, {
+        name: argName,
+        throw: settings.throw
+      });
+      issuesObj[argName] = {
+        name: argName,
+        received: {
+          type: __typeof(value),
+          value
+        },
+        expected: argDefinition,
+        issues: []
+      };
+
+      if (validationRes !== true) {
+        issuesObj[argName] = __deepMerge(
+          issuesObj[argName],
+          validationRes || {},
+          {
+            array: true
+          }
+        );
+      }
     }
     if (staticIssue) {
       issuesObj[argName].issues.push('static');
@@ -237,7 +250,6 @@ export default function validateObject(
   if (!issuesObj.issues.length) return true;
 
   if (settings.throw) {
-    throw new Error('OCJ');
     throw new __SObjectValidationError(issuesObj);
   }
 

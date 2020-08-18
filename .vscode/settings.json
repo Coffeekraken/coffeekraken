@@ -1,11 +1,16 @@
 {
   "[javascript]": {
-    "editor.codeActionsOnSave": {
-      "source.organizeImports": true,
-      "source.fixAll": true,
-    },
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "eslint.enable": false
+  "search.exclude": {
+    "**/.resources": true,
+    "**/.old": true,
+    "**/.cache": true,
+    // "**/sugar/js": true,
+    "**/sugar/node": true,
+    "**/sugar/vendor": true,
+    // "js": true,
+    "node": true
+  }
 }

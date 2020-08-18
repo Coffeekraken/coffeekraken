@@ -23,6 +23,8 @@ var _validateObject = _interopRequireDefault(require("../validation/object/valid
 
 var _validateObjectOutputString = _interopRequireDefault(require("../validation/object/validateObjectOutputString"));
 
+var _typeof = _interopRequireDefault(require("../value/typeof"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
@@ -129,6 +131,13 @@ var SInterface = /*#__PURE__*/function () {
       }
 
       settings = (0, _deepMerge.default)(this.settings, settings);
+
+      if ((0, _typeof.default)(instance, {
+        customClass: false
+      }) !== 'Object') {
+        throw new _SError.default("Sorry but the \"<yellow>instance</yellow>\" argument of the \"<cyan>SInterface.apply</cyan>\" static method have to be an <green>Object</green> and you've passed an <red>".concat((0, _typeof.default)(instance), "</red>..."));
+      }
+
       var issues = [];
       var issueObj = {
         issues: []
@@ -146,7 +155,9 @@ var SInterface = /*#__PURE__*/function () {
       if (this.extendsArray && Array.isArray(this.extendsArray)) {
         this.extendsArray.forEach(cls => {
           if (extendsStack.indexOf(cls) === -1) {
-            throw new _SError.default("Your class|instance \"<yellow>".concat(instance.name || instance.constructor.name, "</yellow>\" that implements the \"<cyan>").concat(this.name, "</cyan>\" interface has to extend the \"<green>").concat(cls, "</green>\" class..."));
+            setTimeout(() => {
+              throw new _SError.default("Your class|instance \"<yellow>".concat(instance.name || instance.constructor.name, "</yellow>\" that implements the \"<cyan>").concat(this.name, "</cyan>\" interface has to extend the \"<green>").concat(cls, "</green>\" class..."));
+            });
           }
         });
       } // implements array
@@ -301,6 +312,7 @@ var SInterface = /*#__PURE__*/function () {
 
           var _super = _createSuper(ImplementsMiddleClass);
 
+          // __parentProto = instance;
           function ImplementsMiddleClass() {
             var _this;
 
@@ -311,9 +323,6 @@ var SInterface = /*#__PURE__*/function () {
             }
 
             _this = _super.call(this, ...args);
-
-            _defineProperty(_assertThisInitialized(_this), "__parentProto", instance);
-
             SInterface.implements(_assertThisInitialized(_this), interfaces, settings);
             return _this;
           }

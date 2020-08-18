@@ -2,17 +2,57 @@ const __packageRoot = require('../src/node/path/packageRoot');
 
 module.exports = {
   /**
-   * @name              sugarJsonDirs
+   * @name              sugarJson
    * @namespace         config.core
    * @type              String
    * @default           []
    *
-   * Set the directories where to search for sugar.json files
+   * Configure the ```sugar.json``` feature that have some cool features like:
+   * - Import automatically dependencies like javascript files and css once
    *
    * @since             2.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  sugarJsonDirs: [__packageRoot(__dirname), __packageRoot()],
+  sugarJson: {
+    /**
+     * @name              dirs
+     * @namespace         config.core.sugarJson
+     * @type              String|Array<String>
+     * @default           []
+     *
+     * Set the directories where to search for sugar.json files
+     *
+     * @since             2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    dirs: [__packageRoot(__dirname), __packageRoot()],
+
+    /**
+     * @name              imports
+     * @namespace         config.core.sugarJson
+     * @type              String|Array<String>
+     * @default           all
+     *
+     * Specify what you want to import. Can be "all" or an Array of NPM packages names
+     *
+     * @since             2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    imports: 'all',
+
+    /**
+     * @name              exclude
+     * @namespace         config.core.sugarJson
+     * @type              String|Array<String>
+     * @default           []
+     *
+     * Specify some NPM packages you want to exclude by adding his name into this array
+     *
+     * @since             2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    exclude: []
+  },
 
   /**
    * @name             ignoreFolders

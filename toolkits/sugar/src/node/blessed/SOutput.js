@@ -590,9 +590,6 @@ module.exports = class SOutput extends __SComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _errorTextBox(text) {
-    // console.log('erere');
-    // return;
-
     const $box = __blessed.box({
       width:
         this.$logBox.width -

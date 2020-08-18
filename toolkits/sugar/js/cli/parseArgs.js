@@ -87,7 +87,7 @@ function parseArgsString(string, definitionObj, settings) {
   }, settings);
   var argsObj = {}; // process the passed string
 
-  var stringArray = string.match(/(?:[^\s"'`]+|("'`)[^"'`]*("'`))+/gm) || [];
+  var stringArray = string.match(/(?:[^\s"]+|"[^"]*")+/gm) || [];
   stringArray = stringArray.map(item => {
     return (0, _unquote.default)(item);
   });

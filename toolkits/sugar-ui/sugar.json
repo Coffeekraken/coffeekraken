@@ -1,0 +1,9 @@
+{
+  "name": "@coffeekraken/sugar-ui",
+  "sources": {
+    "scss": [{
+      "level": "bare",
+      "path": "./src/scss/index.scss"
+    }]
+  }
+}

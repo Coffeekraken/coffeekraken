@@ -7,6 +7,7 @@ import __deepMerge from '../object/deepMerge';
 import __trimLines from '../string/trimLines';
 import __validateObject from '../validation/object/validateObject';
 import __validateObjectOutputString from '../validation/object/validateObjectOutputString';
+import __typeof from '../value/typeof';
 
 /**
  * @name              SInterface
@@ -80,6 +81,18 @@ export default class SInterface {
   static apply(instance, settings = {}) {
     settings = __deepMerge(this.settings, settings);
 
+    if (
+      __typeof(instance, {
+        customClass: false
+      }) !== 'Object'
+    ) {
+      throw new __SError(
+        `Sorry but the "<yellow>instance</yellow>" argument of the "<cyan>SInterface.apply</cyan>" static method have to be an <green>Object</green> and you've passed an <red>${__typeof(
+          instance
+        )}</red>...`
+      );
+    }
+
     let issues = [];
     let issueObj = {
       issues: []
@@ -102,13 +115,15 @@ export default class SInterface {
     if (this.extendsArray && Array.isArray(this.extendsArray)) {
       this.extendsArray.forEach((cls) => {
         if (extendsStack.indexOf(cls) === -1) {
-          throw new __SError(
-            `Your class|instance "<yellow>${
-              instance.name || instance.constructor.name
-            }</yellow>" that implements the "<cyan>${
-              this.name
-            }</cyan>" interface has to extend the "<green>${cls}</green>" class...`
-          );
+          setTimeout(() => {
+            throw new __SError(
+              `Your class|instance "<yellow>${
+                instance.name || instance.constructor.name
+              }</yellow>" that implements the "<cyan>${
+                this.name
+              }</cyan>" interface has to extend the "<green>${cls}</green>" class...`
+            );
+          });
         }
       });
     }
@@ -238,7 +253,7 @@ export default class SInterface {
     if (__isClass(instance)) {
       // return instance;
       class ImplementsMiddleClass extends instance {
-        __parentProto = instance;
+        // __parentProto = instance;
         constructor(...args) {
           super(...args);
           SInterface.implements(this, interfaces, settings);

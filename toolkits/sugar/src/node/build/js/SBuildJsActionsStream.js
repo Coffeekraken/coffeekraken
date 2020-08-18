@@ -7,7 +7,7 @@ const __getFilename = require('../../fs/filename');
 const __SFsFilesResolverStreamAction = require('../../stream/actions/SFsFilesResolverStreamAction');
 const __SFsCacheStreamAction = require('../../stream/actions/SFsCacheStreamAction');
 const __SFsOutputStreamAction = require('../../stream/actions/SFsOutputStreamAction');
-const __SSugarJsonStreamAction = require('./actions/SSugarJsonStreamAction');
+const __SSugarJsonStreamAction = require('../actions/SSugarJsonStreamAction');
 const __path = require('path');
 
 /**
@@ -50,17 +50,17 @@ module.exports = class SBuildJsActionsStream extends __SActionsStream {
     super(
       {
         filesResolver: __SFsFilesResolverStreamAction,
-        // fsCache: __SFsCacheStreamAction,
+        fsCache: __SFsCacheStreamAction,
         readFile: __SFsReadFileStreamAction,
         sugarJson: __SSugarJsonStreamAction,
-        // webpack: __SWebpackStreamAction,
-        // terser: __STerserStreamAction,
+        webpack: __SWebpackStreamAction,
+        terser: __STerserStreamAction,
         fsOutput: __SFsOutputStreamAction
       },
       __deepMerge(
         {
           id: 'actionStream.build.js',
-          name: 'Build JS',
+          name: 'Build JS Actions Stream',
           before: (streamObj) => {
             return streamObj;
           },
@@ -77,8 +77,6 @@ module.exports = class SBuildJsActionsStream extends __SActionsStream {
               return this._ensureOutputStack(streamObj);
             },
             fsOutput: (streamObj) => {
-              // console.log(streamObj);
-              // throw streamObj;
               return this._ensureOutputStack(streamObj);
             }
           }

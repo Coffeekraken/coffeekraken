@@ -67,6 +67,13 @@ export default function validateValue(value, definitionObj, settings = {}) {
     issueObj.issues.push('lazy');
   }
 
+  // check required
+  if (definitionObj.required === true) {
+    if (value === null || value === undefined) {
+      issueObj.issues.push('required');
+    }
+  }
+
   // validate type
   if (definitionObj.type) {
     const isOfTypeResult = __isOfType(value, definitionObj.type);
@@ -74,12 +81,6 @@ export default function validateValue(value, definitionObj, settings = {}) {
       issueObj = __deepMerge(issueObj, isOfTypeResult, {
         array: true
       });
-    }
-  }
-  // check required
-  if (definitionObj.required === true) {
-    if (value === null || value === undefined) {
-      issueObj.issues.push('required');
     }
   }
 
@@ -92,7 +93,6 @@ export default function validateValue(value, definitionObj, settings = {}) {
 
   if (!issueObj.issues.length) return true;
   if (settings.throw) {
-    throw new Error('CCCCCCC');
     throw new __SValueValidationError(issueObj);
   }
 

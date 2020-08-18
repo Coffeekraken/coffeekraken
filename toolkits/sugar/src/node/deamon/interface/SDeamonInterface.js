@@ -15,12 +15,7 @@ const __SProcessInterface = require('../../process/SProcess');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = class SDeamonInterface extends __SInterface {
-  static extendsArray = ['SPromise'];
-
-  static definitionObj = {
-    watch: {
-      type: 'Function',
-      required: true
-    }
-  };
+  static extendsArray = ['SProcess', 'SPromise'];
+  static implementsArray = [__SProcessInterface];
+  // static definitionObj = {};
 };

@@ -87,12 +87,13 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
         (Array.isArray(streamObj.pack) &&
           streamObj.pack.indexOf(streamObj.input) === -1)
       ) {
-        this.log(
-          `Skipping the <yellow>webpack</yellow> packaging action for the file <cyan>${streamObj.input.replace(
-            __packageRoot(),
+        this.log({
+          group: settings.name,
+          value: `Executing <yellow>babel</yellow> on the file "<cyan>${streamObj.input.replace(
+            `${__packageRoot()}/`,
             ''
-          )}</cyan> and processing file using <cyan>babel</cyan>`
-        );
+          )}</cyan>"...`
+        });
 
         const result = await __babel
           .transformAsync(streamObj.data, {
@@ -120,12 +121,13 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
         settings.scss.config
       );
 
-      this.log(
-        `Processing the <yellow>webpack</yellow> action for the file <cyan>${streamObj.input.replace(
-          __packageRoot(),
+      this.log({
+        group: settings.name,
+        value: `Packing your javascript bundle using <yellow>webpack</yellow> on the entry file "<cyan>${streamObj.input.replace(
+          `${__packageRoot()}/`,
           ''
-        )}</cyan>`
-      );
+        )}</cyan>"...`
+      });
 
       let webpackSettings = Object.assign({}, settings.webpack);
       const compiler = __webpack(

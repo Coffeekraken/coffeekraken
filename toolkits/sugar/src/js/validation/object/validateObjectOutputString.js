@@ -1,7 +1,7 @@
 import __validateValueOutputString from '../value/validateValueOutputString';
 import __parseHtml from '../../console/parseHtml';
 import __trimLines from '../../string/trimLines';
-import validateObjectDefinitionObject from './validateObjectDefinitionObject';
+import __toString from '../../string/toString';
 
 /**
  * @name                validateObjectOutputString

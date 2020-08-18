@@ -160,9 +160,7 @@ export default class SActionStream extends __SPromise {
       try {
         for (let key in this._currentStream.settings.before) {
           const fn = this._currentStream.settings.before[key];
-          this._currentStream.streamObj = await fn(
-            this._currentStream.streamObj
-          );
+          this._currentStream.streamObj = fn(this._currentStream.streamObj);
         }
         this.log({
           group: 'beforeCallbacks',
@@ -211,9 +209,12 @@ export default class SActionStream extends __SPromise {
       try {
         for (let key in this._currentStream.settings.after) {
           const fn = this._currentStream.settings.after[key];
-          this._currentStream.streamObj = await fn(
-            this._currentStream.streamObj
-          );
+          const fnResult = fn(this._currentStream.streamObj);
+          if (fnResult instanceof Promise) {
+            this._currentStream.streamObj = await fnResult;
+          } else {
+            this._currentStream.streamObj = fnResult;
+          }
         }
         this.log({
           group: 'afterCallbacks',
@@ -248,7 +249,14 @@ export default class SActionStream extends __SPromise {
       let currentStreamObj = stack[j];
 
       // before action callbacks
-      currentStreamObj = await this._beforeActionCallbacks(currentStreamObj);
+      const beforeActionCallbacksResult = this._beforeActionCallbacks(
+        currentStreamObj
+      );
+      if (beforeActionCallbacksResult instanceof Promise) {
+        currentStreamObj = await beforeActionCallbacksResult;
+      } else {
+        currentStreamObj = beforeActionCallbacksResult;
+      }
 
       // call the action and pass it the current stream object
       try {
@@ -258,8 +266,8 @@ export default class SActionStream extends __SPromise {
         );
 
         if (currentActionReturn instanceof Promise) {
-          currentActionReturn.catch((e) => {});
           __SPromise.pipe(currentActionReturn, this._currentStream.promise);
+          __SPromise.pipe(currentActionReturn, this);
           this._currentStream.currentActionObj.promise = currentActionReturn;
           currentStreamObj = await currentActionReturn;
         } else currentStreamObj = currentActionReturn;
@@ -360,7 +368,14 @@ export default class SActionStream extends __SPromise {
       }
 
       // after action callbacks
-      currentStreamObj = await this._afterActionCallbacks(currentStreamObj);
+      const afterActionCallbacksResult = this._afterActionCallbacks(
+        currentStreamObj
+      );
+      if (afterActionCallbacksResult instanceof Promise) {
+        currentStreamObj = await afterActionCallbacksResult;
+      } else {
+        currentStreamObj = afterActionCallbacksResult;
+      }
 
       // replace the streamObj with the new one in the stack
       stack[j] = currentStreamObj;
@@ -445,7 +460,11 @@ export default class SActionStream extends __SPromise {
                 streamObj[i],
                 Object.assign({}, this._currentStream.currentActionObj)
               );
-              streamObj[i] = await fnResult;
+              if (fnResult instanceof Promise) {
+                streamObj[i] = await fnResult;
+              } else {
+                streamObj[i] = fnResult;
+              }
             } catch (e) {
               const msg = `Something when wrong during the execution of the <yellow>afterActions.${this._currentStream.currentActionObj.name}</yellow> function...`;
               this._currentStream.stats.stderr.push(msg);
@@ -465,7 +484,11 @@ export default class SActionStream extends __SPromise {
               streamObj,
               Object.assign({}, this._currentStream.currentActionObj)
             );
-            streamObj = await fnResult;
+            if (fnResult instanceof Promise) {
+              streamObj = await fnResult;
+            } else {
+              streamObj = fnResult;
+            }
           } catch (e) {
             const msg = `Something when wrong during the execution of the <yellow>afterActions.${this._currentStream.currentActionObj.name}</yellow> function...`;
             this._currentStream.stats.stderr.push(msg);
@@ -541,7 +564,11 @@ export default class SActionStream extends __SPromise {
                 streamObj[i],
                 Object.assign({}, this._currentStream.currentActionObj)
               );
-              streamObj[i] = await fnResult;
+              if (fnResult instanceof Promise) {
+                streamObj[i] = await fnResult;
+              } else {
+                streamObj[i] = fnResult;
+              }
             } catch (e) {
               const msg = `Something when wrong during the execution of the <yellow>beforeActions.${this._currentStream.currentActionObj.name}</yellow> function...`;
               this._currentStream.stats.stderr.push(msg);
@@ -560,7 +587,11 @@ export default class SActionStream extends __SPromise {
               streamObj,
               Object.assign({}, this._currentStream.currentActionObj)
             );
-            streamObj = await fnResult;
+            if (fnResult instanceof Promise) {
+              streamObj = await fnResult;
+            } else {
+              streamObj = fnResult;
+            }
           } catch (e) {
             const msg = `Something when wrong during the execution of the <yellow>beforeActions.${this._currentStream.currentActionObj.name}</yellow> function...`;
             this._currentStream.stats.stderr.push(msg);
@@ -795,6 +826,31 @@ export default class SActionStream extends __SPromise {
               break;
             }
 
+            if (this.constructor.interface) {
+              // if (
+              //   this._currentStream.streamObj.map &&
+              //   typeof this._currentStream.streamObj.map === 'function'
+              // ) {
+              //   throw 'COCO';
+              // }
+
+              // throw __toString(this.constructor.interface.definitionObj, {
+              //   beautify: true
+              // });
+              const issuesString = this.constructor.interface.apply(
+                Array.isArray(this._currentStream.streamObj)
+                  ? this._currentStream.streamObj[0]
+                  : this._currentStream.streamObj,
+                { return: 'string', throw: false }
+              );
+              if (issuesString !== true) {
+                this._currentStream.stats.stderr.push(issuesString);
+                this._currentStream.currentActionObj.stats.stderr.push(
+                  issuesString
+                );
+              }
+            }
+
             // complete the actionObj
             this._currentStream.currentActionObj.stats = {
               ...this._currentStream.currentActionObj.stats,
@@ -851,6 +907,18 @@ export default class SActionStream extends __SPromise {
 
         // after callbacks
         await this._afterCallbacks();
+
+        if (this.constructor.interface) {
+          const issuesString = this.constructor.interface.apply(
+            Array.isArray(this._currentStream.streamObj)
+              ? this._currentStream.streamObj[0]
+              : this._currentStream.streamObj,
+            { return: 'string', throw: false }
+          );
+          if (issuesString !== true) {
+            this._currentStream.stats.stderr.push(issuesString);
+          }
+        }
 
         // complete the overall stats
         this._currentStream.stats = {

@@ -1,20 +1,20 @@
 const __SCli = require('../../cli/SCli');
 const __deepMerge = require('../../object/deepMerge');
-const __SBuildScssCliInterface = require('./interface/SBuildScssCliInterface');
-const __SBuildScssProcess = require('./SBuildScssProcess');
+const __SFsDeamonProcess = require('./SFsDeamonProcess');
+const __SFsDeamonInterface = require('./interface/SFsDeamonInterface');
 
 /**
- * @name            SBuildScssCli
- * @namespace           node.build.scss
+ * @name            SFsDeamonCli
+ * @namespace           node.deamon.fs
  * @type            Class
  * @extends         SCli
  *
- * This class represent the build SCSS cli
+ * This class represent the watch filesystem deamon Cli
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-class SBuildScssCli extends __SCli {
+module.exports = class SFsDeamonCli extends __SCli {
   /**
    * @name          command
    * @type          String
@@ -24,29 +24,29 @@ class SBuildScssCli extends __SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static command = 'sugar build.scss %arguments';
+  static command = 'sugar deamon.fs %arguments';
 
   /**
    * @name          definitionObj
-   * @type          Object
+   * @type          String
    * @static
    *
-   * Store the definition object
+   * Store the cli definition object
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static definitionObj = __SBuildScssCliInterface.definitionObj;
+  static definitionObj = __SFsDeamonInterface.definitionObj;
 
   /**
    * @name          processClass
    * @type          SProcess
    * @static
    *
-   * Store the process class that will be used to run the SCSS build process
+   * Store the process class that will be used to run the fs deamon
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static processClass = __SBuildScssProcess;
+  static processClass = __SFsDeamonProcess;
 
   /**
    * @name          constructor
@@ -61,14 +61,11 @@ class SBuildScssCli extends __SCli {
     super(
       __deepMerge(
         {
-          id: 'cli.build.scss',
-          name: 'Cli Build Scss'
+          id: 'deamon.fs',
+          name: 'Filesystem Deamon'
         },
         settings
       )
     );
   }
-}
-
-// module.exports = SBuildScssCli;
-module.exports = __SBuildScssCliInterface.implements(SBuildScssCli);
+};

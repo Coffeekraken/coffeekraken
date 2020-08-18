@@ -231,7 +231,7 @@ class SCli extends __SProcess {
       __SProcessInterface.apply(this._runningProcess);
 
       // run the process
-      this._runningProcess.run(paramsObj);
+      this._runningProcess.run(paramsObj, settings);
 
       // return this._runningProcess;
     } else {

@@ -1,5 +1,7 @@
 const __SInterface = require('../../../class/SInterface');
+const __SBuildInterface = require('../../interface/SBuildInterface');
 const __sugarConfig = require('../../../config/sugar');
+const __deepMerge = require('../../../object/deepMerge');
 
 /**
  * @name                SBuildJsCliInterface
@@ -14,27 +16,15 @@ const __sugarConfig = require('../../../config/sugar');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = class SBuildJsCliInterface extends __SInterface {
-  static definitionObj = {
+  static definitionObj = __deepMerge(__SBuildInterface.definitionObj, {
     input: {
-      type: 'String',
-      alias: 'i',
-      description: 'Input files glob pattern',
-      default: __sugarConfig('build.js.input'),
-      level: 1
+      default: __sugarConfig('build.js.input')
     },
     outputDir: {
-      type: 'String',
-      alias: 'o',
-      description: 'Output directory path',
-      default: __sugarConfig('build.js.outputDir'),
-      level: 1
+      default: __sugarConfig('build.js.outputDir')
     },
     watch: {
-      type: 'String|Object',
-      alias: 'w',
-      description: 'Watch files glob pattern or settings object',
-      default: __sugarConfig('build.js.watch'),
-      level: 1
+      default: __sugarConfig('build.js.watch')
     },
     map: {
       type: 'Boolean',
@@ -51,11 +41,10 @@ module.exports = class SBuildJsCliInterface extends __SInterface {
       level: 1
     },
     prod: {
-      type: 'Boolean',
-      alias: 'p',
-      description: 'Generate the production ready files',
-      default: __sugarConfig('build.js.prod') || false,
-      level: 1
+      default: __sugarConfig('build.js.prod') || false
+    },
+    buildType: {
+      default: 'js'
     }
-  };
+  });
 };

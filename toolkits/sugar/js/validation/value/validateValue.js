@@ -75,6 +75,13 @@ function validateValue(value, definitionObj, settings) {
 
   if (definitionObj.lazy) {
     issueObj.issues.push('lazy');
+  } // check required
+
+
+  if (definitionObj.required === true) {
+    if (value === null || value === undefined) {
+      issueObj.issues.push('required');
+    }
   } // validate type
 
 
@@ -85,13 +92,6 @@ function validateValue(value, definitionObj, settings) {
       issueObj = (0, _deepMerge.default)(issueObj, isOfTypeResult, {
         array: true
       });
-    }
-  } // check required
-
-
-  if (definitionObj.required === true) {
-    if (value === null || value === undefined) {
-      issueObj.issues.push('required');
     }
   } // check allowed values
 
@@ -105,7 +105,6 @@ function validateValue(value, definitionObj, settings) {
   if (!issueObj.issues.length) return true;
 
   if (settings.throw) {
-    throw new Error('CCCCCCC');
     throw new _SValueValidationError.default(issueObj);
   }
 

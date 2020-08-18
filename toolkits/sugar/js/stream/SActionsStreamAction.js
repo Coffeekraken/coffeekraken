@@ -317,21 +317,23 @@ var SActionStreamAction = /*#__PURE__*/function (_SPromise) {
   }, {
     key: "log",
     value: function log(obj) {
-      if (typeof obj === 'string') {
-        this.trigger('log', {
-          value: obj
-        });
-        if (!this._currentPromise) return;
+      setTimeout(() => {
+        if (typeof obj === 'string') {
+          this.trigger('log', {
+            value: obj
+          });
+          if (!this._currentPromise) return;
 
-        this._currentPromise.trigger('log', {
-          value: obj
-        });
-      } else {
-        this.trigger('log', obj);
-        if (!this._currentPromise) return;
+          this._currentPromise.trigger('log', {
+            value: obj
+          });
+        } else {
+          this.trigger('log', obj);
+          if (!this._currentPromise) return;
 
-        this._currentPromise.trigger('log', obj);
-      }
+          this._currentPromise.trigger('log', obj);
+        }
+      });
     }
   }, {
     key: "settings",

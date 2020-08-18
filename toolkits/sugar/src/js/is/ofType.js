@@ -65,10 +65,14 @@ export default function ofType(value, argTypeDefinition) {
         if (typeOfValue === 'Object' && !definitionObj.of) return true;
       }
 
-      if (definitionObj.of) {
+      if (
+        definitionObj.of &&
+        (Array.isArray(value) || typeof value === 'object')
+      ) {
         const loopOn = Array.isArray(value)
           ? [...value.keys()]
           : Object.keys(value);
+
         let checkValuesResult = true;
         const receivedTypes = [];
         loopOn.forEach((valueIndex) => {

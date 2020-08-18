@@ -83,7 +83,7 @@ function ofType(value, argTypeDefinition) {
         };
       }
 
-      if (definitionObj.of) {
+      if (definitionObj.of && (Array.isArray(value) || typeof value === 'object')) {
         var loopOn = Array.isArray(value) ? [...value.keys()] : Object.keys(value);
         var checkValuesResult = true;
         var receivedTypes = [];

@@ -3,6 +3,7 @@ const __SProcessInterface = require('./interface/SProcessInterface');
 const __getExtendsStack = require('../class/getExtendsStack');
 const __SError = require('../error/SError');
 const __toString = require('../string/toString');
+const __deepMerge = require('../object/deepMerge');
 
 /**
  * @name            SProcess
@@ -71,6 +72,18 @@ class SProcess extends __SPromise {
   }
 
   /**
+   * @name          _currentPromise
+   * @type          SPromise
+   * @private
+   *
+   * Store the current ```run``` returned promise
+   *
+   * @since         2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _currentPromise = null;
+
+  /**
    * @name          duration
    * @type          Number
    *
@@ -113,11 +126,14 @@ class SProcess extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(settings = {}) {
-    super(null, {
-      id: 'process.unnamed',
-      name: 'Unnamed Process',
-      ...settings
-    }).start();
+    settings = __deepMerge(
+      {
+        id: 'process.unnamed',
+        name: 'Unnamed Process'
+      },
+      settings
+    );
+    super(null, settings).start();
   }
 
   /**
@@ -183,7 +199,30 @@ class SProcess extends __SPromise {
 
     __SPromise.pipe(processPromise, this);
 
+    // save the current promise
+    this._currentPromise = processPromise;
+
     return processPromise;
+  }
+
+  /**
+   * @name          log
+   * @type          Function
+   *
+   * This method allows you to log a message that will be catched by the parent manager class
+   *
+   * @param       {String}        message           The message you want to log
+   *
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  log(...args) {
+    setTimeout(() => {
+      args.forEach((arg) => {
+        // this.trigger('log', arg);
+        if (!this._currentPromise) return;
+        this._currentPromise.trigger('log', arg);
+      });
+    });
   }
 }
 

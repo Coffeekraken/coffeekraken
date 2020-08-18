@@ -219,7 +219,7 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
           try {
             for (var key in this._currentStream.settings.before) {
               var fn = this._currentStream.settings.before[key];
-              this._currentStream.streamObj = yield fn(this._currentStream.streamObj);
+              this._currentStream.streamObj = fn(this._currentStream.streamObj);
             }
 
             this.log({
@@ -274,7 +274,13 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
           try {
             for (var key in this._currentStream.settings.after) {
               var fn = this._currentStream.settings.after[key];
-              this._currentStream.streamObj = yield fn(this._currentStream.streamObj);
+              var fnResult = fn(this._currentStream.streamObj);
+
+              if (fnResult instanceof Promise) {
+                this._currentStream.streamObj = yield fnResult;
+              } else {
+                this._currentStream.streamObj = fnResult;
+              }
             }
 
             this.log({
@@ -313,15 +319,22 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
         for (var j = 0; j < stack.length; j++) {
           var currentStreamObj = stack[j]; // before action callbacks
 
-          currentStreamObj = yield this._beforeActionCallbacks(currentStreamObj); // call the action and pass it the current stream object
+          var beforeActionCallbacksResult = this._beforeActionCallbacks(currentStreamObj);
+
+          if (beforeActionCallbacksResult instanceof Promise) {
+            currentStreamObj = yield beforeActionCallbacksResult;
+          } else {
+            currentStreamObj = beforeActionCallbacksResult;
+          } // call the action and pass it the current stream object
+
 
           try {
             var currentActionReturn = this._currentStream.currentActionObj.instance.run(currentStreamObj, this._currentStream.currentActionObj.settings);
 
             if (currentActionReturn instanceof Promise) {
-              currentActionReturn.catch(e => {});
-
               _SPromise2.default.pipe(currentActionReturn, this._currentStream.promise);
+
+              _SPromise2.default.pipe(currentActionReturn, this);
 
               this._currentStream.currentActionObj.promise = currentActionReturn;
               currentStreamObj = yield currentActionReturn;
@@ -368,7 +381,14 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
           } // after action callbacks
 
 
-          currentStreamObj = yield this._afterActionCallbacks(currentStreamObj); // replace the streamObj with the new one in the stack
+          var afterActionCallbacksResult = this._afterActionCallbacks(currentStreamObj);
+
+          if (afterActionCallbacksResult instanceof Promise) {
+            currentStreamObj = yield afterActionCallbacksResult;
+          } else {
+            currentStreamObj = afterActionCallbacksResult;
+          } // replace the streamObj with the new one in the stack
+
 
           stack[j] = currentStreamObj;
 
@@ -437,7 +457,12 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
 
                   try {
                     var fnResult = fn(streamObj[_i], Object.assign({}, _this2._currentStream.currentActionObj));
-                    streamObj[_i] = yield fnResult;
+
+                    if (fnResult instanceof Promise) {
+                      streamObj[_i] = yield fnResult;
+                    } else {
+                      streamObj[_i] = fnResult;
+                    }
                   } catch (e) {
                     var msg = "Something when wrong during the execution of the <yellow>afterActions.".concat(_this2._currentStream.currentActionObj.name, "</yellow> function...");
 
@@ -461,7 +486,12 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
 
               try {
                 var fnResult = fn(streamObj, Object.assign({}, this._currentStream.currentActionObj));
-                streamObj = yield fnResult;
+
+                if (fnResult instanceof Promise) {
+                  streamObj = yield fnResult;
+                } else {
+                  streamObj = fnResult;
+                }
               } catch (e) {
                 var msg = "Something when wrong during the execution of the <yellow>afterActions.".concat(this._currentStream.currentActionObj.name, "</yellow> function...");
 
@@ -522,7 +552,12 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
 
                   try {
                     var fnResult = fn(streamObj[_i2], Object.assign({}, _this3._currentStream.currentActionObj));
-                    streamObj[_i2] = yield fnResult;
+
+                    if (fnResult instanceof Promise) {
+                      streamObj[_i2] = yield fnResult;
+                    } else {
+                      streamObj[_i2] = fnResult;
+                    }
                   } catch (e) {
                     var msg = "Something when wrong during the execution of the <yellow>beforeActions.".concat(_this3._currentStream.currentActionObj.name, "</yellow> function...");
 
@@ -545,7 +580,12 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
 
               try {
                 var fnResult = fn(streamObj, Object.assign({}, this._currentStream.currentActionObj));
-                streamObj = yield fnResult;
+
+                if (fnResult instanceof Promise) {
+                  streamObj = yield fnResult;
+                } else {
+                  streamObj = fnResult;
+                }
               } catch (e) {
                 var msg = "Something when wrong during the execution of the <yellow>beforeActions.".concat(this._currentStream.currentActionObj.name, "</yellow> function...");
 
@@ -755,6 +795,28 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
 
               if (_this4.hasCurrentStreamErrors()) {
                 return "break";
+              }
+
+              if (_this4.constructor.interface) {
+                // if (
+                //   this._currentStream.streamObj.map &&
+                //   typeof this._currentStream.streamObj.map === 'function'
+                // ) {
+                //   throw 'COCO';
+                // }
+                // throw __toString(this.constructor.interface.definitionObj, {
+                //   beautify: true
+                // });
+                var issuesString = _this4.constructor.interface.apply(Array.isArray(_this4._currentStream.streamObj) ? _this4._currentStream.streamObj[0] : _this4._currentStream.streamObj, {
+                  return: 'string',
+                  throw: false
+                });
+
+                if (issuesString !== true) {
+                  _this4._currentStream.stats.stderr.push(issuesString);
+
+                  _this4._currentStream.currentActionObj.stats.stderr.push(issuesString);
+                }
               } // complete the actionObj
 
 
@@ -806,7 +868,19 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
           } // after callbacks
 
 
-          yield _this4._afterCallbacks(); // complete the overall stats
+          yield _this4._afterCallbacks();
+
+          if (_this4.constructor.interface) {
+            var issuesString = _this4.constructor.interface.apply(Array.isArray(_this4._currentStream.streamObj) ? _this4._currentStream.streamObj[0] : _this4._currentStream.streamObj, {
+              return: 'string',
+              throw: false
+            });
+
+            if (issuesString !== true) {
+              _this4._currentStream.stats.stderr.push(issuesString);
+            }
+          } // complete the overall stats
+
 
           _this4._currentStream.stats = _objectSpread(_objectSpread({}, _this4._currentStream.stats), {}, {
             streamObj: _this4._currentStream.streamObj,

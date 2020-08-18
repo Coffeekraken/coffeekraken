@@ -247,18 +247,20 @@ export default class SActionStreamAction extends __SPromise {
    * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   log(obj) {
-    if (typeof obj === 'string') {
-      this.trigger('log', {
-        value: obj
-      });
-      if (!this._currentPromise) return;
-      this._currentPromise.trigger('log', {
-        value: obj
-      });
-    } else {
-      this.trigger('log', obj);
-      if (!this._currentPromise) return;
-      this._currentPromise.trigger('log', obj);
-    }
+    setTimeout(() => {
+      if (typeof obj === 'string') {
+        this.trigger('log', {
+          value: obj
+        });
+        if (!this._currentPromise) return;
+        this._currentPromise.trigger('log', {
+          value: obj
+        });
+      } else {
+        this.trigger('log', obj);
+        if (!this._currentPromise) return;
+        this._currentPromise.trigger('log', obj);
+      }
+    });
   }
 }

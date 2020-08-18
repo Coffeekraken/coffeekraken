@@ -79,7 +79,7 @@ export default class SPromise extends Promise {
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  _masterPromiseResolveFn = null;
+  // _masterPromiseResolveFn = null;
 
   /**
    * @name                   _masterPromiseRejectFn
@@ -90,7 +90,7 @@ export default class SPromise extends Promise {
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  _masterPromiseRejectFn = null;
+  // _masterPromiseRejectFn = null;
 
   /**
    * @name                  _executorFn
@@ -100,7 +100,7 @@ export default class SPromise extends Promise {
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  _executorFn = null;
+  // _executorFn = null;
 
   /**
    * @name                  _isExecutorStarted
@@ -110,7 +110,7 @@ export default class SPromise extends Promise {
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  _isExecutorStarted = null;
+  // _isExecutorStarted = null;
 
   /**
    * @name                  _settings
@@ -149,14 +149,14 @@ export default class SPromise extends Promise {
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  _stacks = {
-    then: [],
-    catch: [],
-    resolve: [],
-    reject: [],
-    finally: [],
-    cancel: []
-  };
+  // _stacks = {
+  //   then: [],
+  //   catch: [],
+  //   resolve: [],
+  //   reject: [],
+  //   finally: [],
+  //   cancel: []
+  // };
 
   /**
    * @name                  pipe
@@ -261,10 +261,54 @@ export default class SPromise extends Promise {
       _reject = reject;
     });
 
-    this._masterPromiseResolveFn = _resolve;
-    this._masterPromiseRejectFn = _reject;
+    Object.defineProperty(this, '_masterPromiseResolveFn', {
+      writable: true,
+      configurable: true,
+      enumerable: false,
+      value: _resolve
+    });
+    Object.defineProperty(this, '_masterPromiseRejectFn', {
+      writable: true,
+      configurable: true,
+      enumerable: false,
+      value: _reject
+    });
+    Object.defineProperty(this, '_executorFn', {
+      writable: true,
+      configurable: true,
+      enumerable: false,
+      value: executorFn
+    });
+    Object.defineProperty(this, '_isExecutorStarted', {
+      writable: true,
+      configurable: true,
+      enumerable: false,
+      value: null
+    });
+    Object.defineProperty(this, '_promiseState', {
+      writable: true,
+      configurable: true,
+      enumerable: false,
+      value: 'pending'
+    });
+    Object.defineProperty(this, '_stacks', {
+      writable: true,
+      configurable: true,
+      enumerable: false,
+      value: {
+        then: [],
+        catch: [],
+        resolve: [],
+        reject: [],
+        finally: [],
+        cancel: []
+      }
+    });
+
+    // this._masterPromiseResolveFn = _resolve;
+    // this._masterPromiseRejectFn = _reject;
     // save the executor function
-    this._executorFn = executorFn;
+    // this._executorFn = executorFn;
     // extend settings
     this._settings = __deepMerge(
       {

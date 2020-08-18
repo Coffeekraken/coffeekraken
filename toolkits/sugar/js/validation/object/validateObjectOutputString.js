@@ -11,7 +11,7 @@ var _parseHtml = _interopRequireDefault(require("../../console/parseHtml"));
 
 var _trimLines = _interopRequireDefault(require("../../string/trimLines"));
 
-var _validateObjectDefinitionObject = _interopRequireDefault(require("./validateObjectDefinitionObject"));
+var _toString = _interopRequireDefault(require("../../string/toString"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

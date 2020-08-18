@@ -1,4 +1,4 @@
-const __SPromise = require('../promise/SPromise');
+const __SProcess = require('../process/SProcess');
 const __SDeaminInterface = require('./interface/SDeamonInterface');
 
 /**
@@ -13,7 +13,7 @@ const __SDeaminInterface = require('./interface/SDeamonInterface');
  * @ince          2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-class SDeamon extends __SPromise {
+class SDeamon extends __SProcess {
   /**
    * @name        constructor
    * @type        Function

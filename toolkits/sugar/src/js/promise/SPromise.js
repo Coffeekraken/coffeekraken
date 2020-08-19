@@ -2,6 +2,8 @@ import __minimatch from 'minimatch';
 import __deepMerge from '../object/deepMerge';
 import __uniqid from '../string/uniqid';
 import __wait from '../time/wait';
+import __toString from '../string/toString';
+import __env from '../core/env';
 
 /**
  * @name                  SPromise
@@ -628,13 +630,13 @@ export default class SPromise extends Promise {
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  async trigger(what, arg, _metas = {}) {
+  async trigger(what, arg, metas = {}) {
     if (this._isDestroyed) return;
 
     if (what.includes('log')) await __wait(0);
 
     // triger the passed stacks
-    return this._triggerStacks(what, arg, _metas);
+    return this._triggerStacks(what, arg, metas);
   }
 
   /**
@@ -714,7 +716,7 @@ export default class SPromise extends Promise {
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  async _triggerStack(stack, initialValue, _metas = {}) {
+  async _triggerStack(stack, initialValue, metas = {}) {
     let currentCallbackReturnedValue = initialValue;
 
     if (!this._stacks || Object.keys(this._stacks).length === 0)
@@ -760,6 +762,17 @@ export default class SPromise extends Promise {
       return false;
     });
 
+    const metasObj = __deepMerge(
+      {
+        stack,
+        id: this._settings.id,
+        state: this._promiseState,
+        time: Date.now(),
+        level: 1
+      },
+      metas
+    );
+
     for (let i = 0; i < stackArray.length; i++) {
       // get the actual item in the array
       const item = stackArray[i];
@@ -768,16 +781,7 @@ export default class SPromise extends Promise {
       // call the callback function
       let callbackResult = item.callback(
         currentCallbackReturnedValue,
-        __deepMerge(
-          {
-            stack,
-            id: this._settings.id,
-            state: this._promiseState,
-            time: Date.now(),
-            level: 1
-          },
-          _metas
-        )
+        metasObj
       );
       // check if the callback result is a promise
       if (Promise.resolve(callbackResult) === callbackResult) {
@@ -808,7 +812,7 @@ export default class SPromise extends Promise {
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  _triggerStacks(stacks, initialValue, _metas = {}) {
+  _triggerStacks(stacks, initialValue, metas = {}) {
     return new Promise(async (resolve, reject) => {
       // await __wait(0);
 
@@ -822,7 +826,7 @@ export default class SPromise extends Promise {
         const stackResult = await this._triggerStack(
           stacks[i],
           currentStackResult,
-          _metas
+          metas
         );
         if (stackResult !== undefined) {
           currentStackResult = stackResult;

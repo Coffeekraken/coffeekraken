@@ -16,6 +16,7 @@
  */
 export default (value) => {
   if (typeof value !== 'string') return value;
+  value = value.replace(/⠀{1,999999999999}/, '');
   try {
     return Function(`
       "use strict";

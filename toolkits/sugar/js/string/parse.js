@@ -23,6 +23,7 @@ exports.default = void 0;
  */
 var _default = value => {
   if (typeof value !== 'string') return value;
+  value = value.replace(/⠀{1,999999999999}/, '');
 
   try {
     return Function("\n      \"use strict\";\n      return (".concat(value, ");\n    "))();

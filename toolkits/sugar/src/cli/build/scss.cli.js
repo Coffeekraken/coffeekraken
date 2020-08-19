@@ -1,15 +1,10 @@
-const __parseArgs = require('../../node/cli/parseArgs');
 const __SBuildScssCli = require('../../node/build/scss/SBuildScssCli');
-const __SBuildScssActionsStream = require('../../node/build/scss/SBuildScssActionsStream');
-const __output = require('../../node/process/output');
-const __isChildProcess = require('../../node/is/childProcess');
-const __sugarConfig = require('../../node/config/sugar');
 
 module.exports = (stringArgs = '') => {
-  const cli = new __SBuildScssCli({
+  const cli = new __SBuildScssCli(stringArgs, {
     output: {}
   });
-  const proc = cli.run(stringArgs);
+  cli.run();
 
   // const args = __parseArgs(stringArgs, __SBuildScssCli.definitionObj);
   // const stream = new __SBuildScssActionsStream({});

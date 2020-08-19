@@ -11,6 +11,9 @@ const __isPath = require('../is/path');
 const __output = require('./output');
 const __SProcessInterface = require('../process/interface/SProcessInterface');
 const __SProcess = require('../process/SProcess');
+const __isChildProcess = require('../is/childProcess');
+const __parse = require('../string/parse');
+const __hasExitCleanup = require('../process/hasExitCleanup');
 
 /**
  * @name              SChildProcess
@@ -80,7 +83,9 @@ class SChildProcess extends __SProcess {
       {
         id: __uniqid(),
         definitionObj: {},
-        defaultParamsObj: {},
+        defaultParams: {},
+        killOnCtrlC: !__hasExitCleanup(),
+        pipe: false,
         method: __isPath(commandOrPath, true) ? 'fork' : 'spawn',
         before: null,
         after: null,
@@ -92,14 +97,32 @@ class SChildProcess extends __SProcess {
             : 1,
           IS_CHILD_PROCESS: true
         }
-        // stdio: 'inherit'
-        // silent: true,
-        // detached: true
       },
       settings
     );
-    super(settings);
+    settings.env.CHILD_PROCESS_PIPE =
+      typeof settings.pipe === 'boolean'
+        ? settings.pipe
+        : __toString(settings.pipe);
+
+    super({}, settings);
     this._commandOrPath = commandOrPath;
+  }
+
+  /**
+   * @name            isChildProcess
+   * @type            Function
+   * @static
+   *
+   * This method simply return true if the process is a child process.
+   *
+   * @return        {Boolean}           true if is a child process, false if not
+   *
+   * @since         2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static isChildProcess() {
+    return __isChildProcess();
   }
 
   /**
@@ -138,10 +161,8 @@ class SChildProcess extends __SProcess {
     let runningProcessId = settings.id || __uniqid();
     settings = __deepMerge(this._settings, settings);
 
-    const promise = new __SPromise(null).start();
-
     // build the command to run depending on the passed command in the constructor and the params
-    const paramsToRun = __deepMerge(settings.defaultParamsObj, params);
+    const paramsToRun = __deepMerge(settings.defaultParams, params);
     const commandToRun = __buildCommandLine(
       this._commandOrPath,
       settings.definitionObj,
@@ -152,7 +173,7 @@ class SChildProcess extends __SProcess {
     this._runningProcess = {
       instanceId: this._settings.id,
       id: runningProcessId,
-      promise: promise,
+      promise: new __SPromise(null).start(),
       settings: Object.assign({}, settings),
       start: Date.now(),
       end: null,
@@ -195,16 +216,17 @@ class SChildProcess extends __SProcess {
     [
       'id',
       'definitionObj',
-      'defaultParamsObj',
+      'defaultParams',
       'method',
       'before',
-      'after'
+      'after',
+      'noisy'
     ].forEach((key) => {
       delete spawnSettings[key];
     });
 
     // trigger a "start" event
-    promise.trigger(`start`, {
+    this._runningProcess.promise.trigger(`start`, {
       time: Date.now(),
       process: Object.assign({}, this._runningProcess)
     });
@@ -213,13 +235,15 @@ class SChildProcess extends __SProcess {
     this._runningProcess.childProcess = __childProcess[
       settings.method || 'spawn'
     ](commandToRun, [], spawnSettings);
+
     // listen for ctrl+c to kill the child process
-    // __hotkey('ctrl+c', {
-    //   once: true
-    // }).on('press', () => {
-    //   // console.log('THIEHIU');
-    //   // childProcess.kill();
-    // });
+    if (settings.killOnCtrlC) {
+      __hotkey('ctrl+c', {
+        once: true
+      }).on('press', () => {
+        this._runningProcess.childProcess.kill();
+      });
+    }
 
     // register this child process globally
     __registerProcess(
@@ -260,13 +284,13 @@ class SChildProcess extends __SProcess {
       if (this._runningProcess.state === 'error') {
         error = this._runningProcess.stderr.join('\n');
       }
-      promise.trigger(`${this._runningProcess.state}`, {
+      this._runningProcess.promise.trigger(`${this._runningProcess.state}`, {
         time: Date.now(),
         error,
         ...this.runningProcess
       });
 
-      promise[what]({
+      this._runningProcess.promise[what]({
         ...this._runningProcess,
         ...extendObj,
         code,
@@ -275,26 +299,13 @@ class SChildProcess extends __SProcess {
     };
 
     const triggerState = () => {
-      promise.trigger(`state`, this.runningProcess.state);
+      this._runningProcess.promise.trigger(`state`, this.runningProcess.state);
     };
-
-    // this._runningProcess.catch((e) => {
-    //   promise.trigger('log', {
-    //     value: 'plop'
-    //   });
-    // });
-
-    // this._runningProcess.childProcess.on('error', (e) => {
-    //   console.log('ERRRO');
-    //   promise.trigger('log', {
-    //     value: 'CCC'
-    //   });
-    // });
 
     this._runningProcess.childProcess.on('close', (code, signal) => {
       if (this._runningProcess.stderr.length) {
         this._runningProcess.state = 'error';
-        promise.trigger('log', {
+        this._runningProcess.promise.trigger('log', {
           value: this._runningProcess.stderr.join('\n')
         });
       } else if (this._isKilling || (!code && signal)) {
@@ -306,7 +317,7 @@ class SChildProcess extends __SProcess {
       }
       triggerState();
 
-      promise.trigger(`close`, {
+      this._runningProcess.promise.trigger(`close`, {
         time: Date.now(),
         code,
         signal,
@@ -335,10 +346,32 @@ class SChildProcess extends __SProcess {
     // stdout data
     if (this._runningProcess.childProcess.stdout) {
       this._runningProcess.childProcess.stdout.on('data', (log) => {
-        log = log.toString();
-        this._runningProcess.stdout.push(log);
-        promise.trigger(`log`, {
-          value: log
+        const logs = log.toString().split(/⠀{1,99999999}/);
+        logs.forEach((log) => {
+          const logObj = __parse(log);
+          // console.log(logObj);
+          // this._runningProcess.promise.trigger('log', {
+          //   value: log
+          // });
+          if (typeof logObj === 'object' && logObj.$pipe && logObj.type) {
+            switch (logObj.type) {
+              case 'SPromise':
+                this._runningProcess.promise.trigger(
+                  logObj.metas.stack,
+                  logObj.value,
+                  logObj.metas
+                );
+                break;
+            }
+            return;
+          }
+
+          // console.log(log);
+
+          this._runningProcess.stdout.push(log);
+          this._runningProcess.promise.trigger(`log`, {
+            value: log
+          });
         });
       });
     }
@@ -351,10 +384,8 @@ class SChildProcess extends __SProcess {
       });
     }
 
-    return super.run(promise);
+    return super.run(this._runningProcess.promise);
   }
-
-  runWithOutput(params = {}, settings = {}) {}
 
   /**
    * @name            kill

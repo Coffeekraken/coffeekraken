@@ -1,5 +1,4 @@
 const __SInterface = require('../../class/SInterface');
-const __SProcessInterface = require('../../process/SProcess');
 
 /**
  * @name                SDeamonInterface
@@ -15,7 +14,11 @@ const __SProcessInterface = require('../../process/SProcess');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = class SDeamonInterface extends __SInterface {
-  static extendsArray = ['SProcess', 'SPromise'];
-  static implementsArray = [__SProcessInterface];
-  // static definitionObj = {};
+  static extendsArray = ['SPromise'];
+  static definitionObj = {
+    start: {
+      type: 'Function',
+      required: true
+    }
+  };
 };

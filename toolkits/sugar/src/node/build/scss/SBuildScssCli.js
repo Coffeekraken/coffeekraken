@@ -57,12 +57,16 @@ class SBuildScssCli extends __SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(settings = {}) {
+  constructor(args = {}, settings = {}) {
     super(
+      args,
       __deepMerge(
         {
           id: 'cli.build.scss',
-          name: 'Cli Build Scss'
+          name: 'Cli Build Scss',
+          childProcess: {
+            pipe: ['log', 'update', 'add', 'unlink']
+          }
         },
         settings
       )

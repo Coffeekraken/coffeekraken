@@ -13,6 +13,8 @@ var _set = _interopRequireDefault(require("../object/set"));
 
 var _delete = _interopRequireDefault(require("../object/delete"));
 
+var _parse = _interopRequireDefault(require("../string/parse"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -45,11 +47,11 @@ function env(dotPath, value) {
     // delete the variable
     (0, _delete.default)(targetObj, dotPath.toUpperCase());
   } else if (value !== undefined) {
-    (0, _set.default)(targetObj, dotPath.toUpperCase(), value);
+    (0, _set.default)(targetObj, dotPath.toUpperCase(), (0, _parse.default)(value));
   } // return the variable value
 
 
-  return (0, _get.default)(targetObj, dotPath.toUpperCase());
+  return (0, _parse.default)((0, _get.default)(targetObj, dotPath.toUpperCase()));
 }
 
 module.exports = exports.default;

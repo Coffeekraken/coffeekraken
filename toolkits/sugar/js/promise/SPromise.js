@@ -13,6 +13,10 @@ var _uniqid = _interopRequireDefault(require("../string/uniqid"));
 
 var _wait = _interopRequireDefault(require("../time/wait"));
 
+var _toString = _interopRequireDefault(require("../string/toString"));
+
+var _env = _interopRequireDefault(require("../core/env"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -764,15 +768,15 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "trigger",
     value: function () {
-      var _trigger = _asyncToGenerator(function* (what, arg, _metas) {
-        if (_metas === void 0) {
-          _metas = {};
+      var _trigger = _asyncToGenerator(function* (what, arg, metas) {
+        if (metas === void 0) {
+          metas = {};
         }
 
         if (this._isDestroyed) return;
         if (what.includes('log')) yield (0, _wait.default)(0); // triger the passed stacks
 
-        return this._triggerStacks(what, arg, _metas);
+        return this._triggerStacks(what, arg, metas);
       });
 
       function trigger(_x7, _x8, _x9) {
@@ -865,9 +869,9 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "_triggerStack",
     value: function () {
-      var _triggerStack2 = _asyncToGenerator(function* (stack, initialValue, _metas) {
-        if (_metas === void 0) {
-          _metas = {};
+      var _triggerStack2 = _asyncToGenerator(function* (stack, initialValue, metas) {
+        if (metas === void 0) {
+          metas = {};
         }
 
         var currentCallbackReturnedValue = initialValue;
@@ -902,6 +906,13 @@ var SPromise = /*#__PURE__*/function (_Promise) {
           if (item.called <= item.callNumber) return true;
           return false;
         });
+        var metasObj = (0, _deepMerge.default)({
+          stack,
+          id: this._settings.id,
+          state: this._promiseState,
+          time: Date.now(),
+          level: 1
+        }, metas);
 
         for (var i = 0; i < stackArray.length; i++) {
           // get the actual item in the array
@@ -909,13 +920,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
 
           if (!item.callback) return currentCallbackReturnedValue; // call the callback function
 
-          var callbackResult = item.callback(currentCallbackReturnedValue, (0, _deepMerge.default)({
-            stack,
-            id: this._settings.id,
-            state: this._promiseState,
-            time: Date.now(),
-            level: 1
-          }, _metas)); // check if the callback result is a promise
+          var callbackResult = item.callback(currentCallbackReturnedValue, metasObj); // check if the callback result is a promise
 
           if (Promise.resolve(callbackResult) === callbackResult) {
             callbackResult = yield callbackResult;
@@ -955,11 +960,11 @@ var SPromise = /*#__PURE__*/function (_Promise) {
 
   }, {
     key: "_triggerStacks",
-    value: function _triggerStacks(stacks, initialValue, _metas) {
+    value: function _triggerStacks(stacks, initialValue, metas) {
       var _this2 = this;
 
-      if (_metas === void 0) {
-        _metas = {};
+      if (metas === void 0) {
+        metas = {};
       }
 
       return new Promise( /*#__PURE__*/function () {
@@ -970,7 +975,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
           var currentStackResult = initialValue;
 
           for (var i = 0; i < stacks.length; i++) {
-            var stackResult = yield _this2._triggerStack(stacks[i], currentStackResult, _metas);
+            var stackResult = yield _this2._triggerStack(stacks[i], currentStackResult, metas);
 
             if (stackResult !== undefined) {
               currentStackResult = stackResult;

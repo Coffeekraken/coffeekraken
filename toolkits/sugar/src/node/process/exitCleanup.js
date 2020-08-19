@@ -29,10 +29,10 @@ const __packageJson = require('../package/json');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-let _exitCleanupRegistered = false;
-module.exports = function exitCleanup(handler = null, settings = {}) {
-  if (_exitCleanupRegistered) return;
-  _exitCleanupRegistered = true;
+process.env.EXIT_CLEANUP = false;
+module.exports = function exitCleanup() {
+  if (process.env.EXIT_CLEANUP === true) return;
+  process.env.EXIT_CLEANUP = true;
   __hotkey('ctrl+c', {
     once: true
   }).on('press', async () => {

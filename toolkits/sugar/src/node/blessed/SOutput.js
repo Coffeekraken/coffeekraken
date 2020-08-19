@@ -135,12 +135,11 @@ module.exports = class SOutput extends __SComponent {
    */
   _subscribeToSource(s) {
     // subscribe to data
-    s.on('close', (data) => {
+    s.on('close', async (data) => {
+      await __wait();
       this.log({
-        clear: true,
         value: `Closing process with code <red>${data.code}</red> and signal <red>${data.signal}</red>...`
       });
-      this.update();
     })
       .on('success', (data) => {
         this.log({

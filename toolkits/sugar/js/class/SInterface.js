@@ -307,16 +307,16 @@ var SInterface = /*#__PURE__*/function () {
 
       if ((0, _class.default)(instance)) {
         // return instance;
-        var ImplementsMiddleClass = /*#__PURE__*/function (_instance) {
-          _inherits(ImplementsMiddleClass, _instance);
+        var SInterfaceImplementsMiddleClass = /*#__PURE__*/function (_instance) {
+          _inherits(SInterfaceImplementsMiddleClass, _instance);
 
-          var _super = _createSuper(ImplementsMiddleClass);
+          var _super = _createSuper(SInterfaceImplementsMiddleClass);
 
           // __parentProto = instance;
-          function ImplementsMiddleClass() {
+          function SInterfaceImplementsMiddleClass() {
             var _this;
 
-            _classCallCheck(this, ImplementsMiddleClass);
+            _classCallCheck(this, SInterfaceImplementsMiddleClass);
 
             for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
               args[_key] = arguments[_key];
@@ -327,10 +327,10 @@ var SInterface = /*#__PURE__*/function () {
             return _this;
           }
 
-          return ImplementsMiddleClass;
+          return SInterfaceImplementsMiddleClass;
         }(instance);
 
-        return ImplementsMiddleClass;
+        return SInterfaceImplementsMiddleClass;
       } // make sure the instance has all the interfaces requirements
 
 

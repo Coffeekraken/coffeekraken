@@ -57,12 +57,16 @@ module.exports = class SFsDeamonCli extends __SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(settings = {}) {
+  constructor(args, settings = {}) {
     super(
+      args,
       __deepMerge(
         {
           id: 'deamon.fs',
-          name: 'Filesystem Deamon'
+          name: 'Filesystem Deamon',
+          childProcess: {
+            pipe: true
+          }
         },
         settings
       )

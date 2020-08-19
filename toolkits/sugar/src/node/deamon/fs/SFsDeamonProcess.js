@@ -1,4 +1,4 @@
-const __SDeamon = require('../SDeamon');
+const __SProcess = require('../../process/SProcess');
 const __chokidar = require('chokidar');
 const __SPromise = require('../../promise/SPromise');
 const __deepMerge = require('../../object/deepMerge');
@@ -9,7 +9,7 @@ const __packageRoot = require('../../path/packageRoot');
  * @name                SFsDeamon
  * @namespace           node.deamon.fs
  * @type                Class
- * @extends             SDeamon
+ * @extends             SProcess
  *
  * This class allows you to simply launch some watch processes in order to be notified when some files are
  * updated, deleted or created on the filesystem.
@@ -30,7 +30,7 @@ const __packageRoot = require('../../path/packageRoot');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SFsDeamon extends __SDeamon {
+module.exports = class SFsDeamonProcess extends __SProcess {
   /**
    * @name          constructor
    * @type          Function
@@ -41,8 +41,9 @@ module.exports = class SFsDeamon extends __SDeamon {
    * @since         2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(settings = {}) {
+  constructor(initialParams = {}, settings = {}) {
     super(
+      initialParams,
       __deepMerge(
         {
           name: 'Filesystem Deamon'
@@ -104,7 +105,6 @@ module.exports = class SFsDeamon extends __SDeamon {
         __chokidar
           .watch(argsObj.input, {
             persistent: true,
-            // cwd: process.cwd(),
             ignoreInitial: true,
             followSymlinks: true,
             ...settings
@@ -152,7 +152,7 @@ module.exports = class SFsDeamon extends __SDeamon {
               )}</red>" <cyan>${file.size}</cyan>mb`
             });
 
-            trigger('add', file);
+            trigger('unlink', file);
           });
       },
       {

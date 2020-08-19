@@ -1,21 +1,17 @@
 const __packageJson = require('../package/json');
-const __typeof = require('../value/typeof');
 const __buildCommandLine = require('./buildCommandLine');
-const __validateCliDefinitionObject = require('../validation/cli/validateCliDefinitionObject');
 const __SChildProcess = require('../process/SChildProcess');
 const __deepMerge = require('../object/deepMerge');
-const __parseHtml = require('../terminal/parseHtml');
 const __argsToObject = require('../cli/argsToObject');
 const __isChildProcess = require('../is/childProcess');
 const __output = require('../process/output');
 const __parseArgs = require('../cli/parseArgs');
 const __toString = require('../string/toString');
-const __SPromise = require('../promise/SPromise');
-const __SProcess = require('../process/SProcess');
 const __SProcessInterface = require('../process/interface/SProcessInterface');
 const __SCliInterface = require('./interface/SCliInterface');
 const __SInterface = require('../class/SInterface');
 const __sugarHeading = require('../ascii/sugarHeading');
+const __SPromise = require('../promise/SPromise');
 
 /**
  * @name                SCli
@@ -25,14 +21,15 @@ const __sugarHeading = require('../ascii/sugarHeading');
  *
  * This class represent a basic CLI command with his definition object, his command string, etc...
  *
- * @param       {String}        commandString         The command string that contains arguments tokens and the "%arguments" token where you want the parsed arguments to be placed
- * @param       {Object}        definitionObj         The definition object that represent all the available arguments, their types, etc... Here's the definitionObj format:
- * - argName:
- *    - type (null) {String}: The argument type like "String", "Boolean", "Array", "Number" or "Object"
- *    - alias (null) {String}: A 1 letter alias for the argument to be used like "-a", "-g", etc...
- *    - description (null) {String}: A small and efficient argument description
- *    - default (null) {Mixed}: The default argument value if nothing is specified
- *    - level (1) {Number}: This represent the "importance" of the argument. An argument with level 1 is an argument often used that will be displayed in the summary command list. An argument of level 2 if less important and can be skipped.
+ * @param       {Object}        [settings={}]           An object of settings to configure your SCli instance:
+ * - id (constructor.name) {String}: A uniqid for your instance.
+ * - name (null) {String}: A name for your SCli instance like "Build SCSS", etc...
+ * - includeAllArgs (true) {Boolean}: Specify if you want to include all arguments when for example you generate the command string, etc...
+ * - output (false) {Boolean|Object}: Specify if you want your SCli instance to display automatically a nice output using the SOutput class, or you can specify this to false and handle all of this yourself using the SPromise events triggered
+ * - defaultParams ({}) {Object}: Specify some defaults for your accepted and described params of the definition object
+ * - childProcess: ({}) {Object}: Specify some settings to pass to the SChildProcess instance like "pipe", etc...
+ *
+ * @TODO            check the documentation
  *
  * @example         js
  * const SCli = require('@coffeekraken/sugar/js/cli/SCli');
@@ -56,14 +53,12 @@ const __sugarHeading = require('../ascii/sugarHeading');
  *    }
  * }
  * const myCli = new MyCli();
- * myCli.getCommandLine({
- *    port: 8888
- * }); // => php localhost:8888 .
+ * myCli.commandString; // => php localhost:8888 .
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-class SCli extends __SProcess {
+class SCli extends __SPromise {
   /**
    * @name          _runningProcess
    * @type          SPromise
@@ -95,20 +90,80 @@ class SCli extends __SProcess {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(settings = {}) {
+  constructor(initialParams = {}, settings = {}) {
     // save the settings
     settings = __deepMerge(
       {
         name: null,
         includeAllParams: true,
         output: false,
-        defaultParamsObj: {}
+        defaultParams: {},
+        childProcess: {
+          pipe: true
+        }
       },
       settings
     );
-    super(settings);
+    super(null, settings).start();
+    if (!this._settings.id) this._settings.id = this.constructor.name;
 
-    // if (!this._settings.id) this._settings.id = this.constructor.name;
+    this._paramsObj = __argsToObject(initialParams, this.definitionObj);
+    this._paramsObj = __deepMerge(
+      this._settings.defaultParams,
+      this._paramsObj
+    );
+
+    if (!this._paramsObj.forceChildProcess) {
+      // run the process
+      const SProcessInstance = this.constructor.processClass;
+      this._processInstance = new SProcessInstance(this._paramsObj, settings);
+
+      if (settings.childProcess.pipe) {
+        const stacks = Array.isArray(settings.childProcess.pipe)
+          ? settings.childProcess.pipe.join(',')
+          : '*';
+        // console.log('PIPE', stacks, this._processInstance.constructor.name);
+        this._processInstance.on(stacks, (value, metas) => {
+          console.log(
+            __toString({
+              $pipe: true,
+              type: 'SPromise',
+              value,
+              metas
+            })
+          );
+        });
+      }
+
+      // Apply the SProcessInterface on the getted process
+      __SProcessInterface.apply(this._processInstance);
+
+      // return this._runningProcess;
+    } else {
+      const childProcess = new __SChildProcess(
+        this.commandString + ' --forceChildProcess false',
+        {
+          id: settings.id,
+          definitionObj: this.definitionObj,
+          defaultParams: settings.defaultParams,
+          ...settings.childProcess
+        }
+      );
+
+      childProcess.on('state', (state) => {
+        this.state = state;
+      });
+
+      this._processInstance = childProcess;
+
+      if (settings.output) {
+        const outputSettings =
+          typeof settings.output === 'object' ? settings.output : {};
+        __output(this._processInstance, outputSettings);
+      }
+    }
+
+    __SPromise.pipe(this._processInstance, this);
   }
 
   /**
@@ -153,7 +208,19 @@ class SCli extends __SProcess {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   get definitionObj() {
-    return Object.assign({}, this.constructor.definitionObj);
+    return Object.assign(
+      {},
+      {
+        ...this.constructor.definitionObj,
+        forceChildProcess: {
+          type: 'Boolean',
+          required: true,
+          default: true,
+          description:
+            'Allows you to force the SCli class to start a new child process even if the SCli instance already runs inside one'
+        }
+      }
+    );
   }
 
   /**
@@ -170,17 +237,6 @@ class SCli extends __SProcess {
   }
 
   /**
-   * @name          state
-   * @type          String
-   * @get
-   *
-   * Access the state of the SCli instance
-   *
-   * @since         2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-
-  /**
    * @name          run
    * @type          Function
    * @async
@@ -194,11 +250,8 @@ class SCli extends __SProcess {
    * - error: Triggered when the process has had an error
    * - log: Triggered when some data are pushed in the stdout channel
    *
-   * You can use the "spawn" function available under the namespace "sugar.node.childProcess" in order to
-   * spawn the process with already all these events setted...
-   *
-   * @param       {Object}        [paramsObj=settings.defaultParamsObj]      An argument object to override the default values of the definition object
-   * @param       {Boolean}     [includeAllParams=settings.includeAllParams]       Specify if you want all the arguments in the definition object in your command line string, or if you just want the one passed in your paramsObj argument
+   * @param       {Object}        [paramsObj={}]      An argument object to override the default values of the definition object
+   * @param       {Object}        [settings={}]       Same settings object as in the constructor but for this process only
    * @return      {SPromise}                        An SPromise instance on which you can subscribe for "events" described above
    *
    * @example       js
@@ -220,53 +273,16 @@ class SCli extends __SProcess {
     settings = __deepMerge(this._settings, settings);
     // make sure we have an object as args
     paramsObj = __argsToObject(paramsObj, this.definitionObj);
-    paramsObj = __deepMerge(this._settings.defaultParamsObj, paramsObj);
+    paramsObj = __deepMerge(this._paramsObj, paramsObj);
 
-    if (__isChildProcess()) {
-      // run the process
-      const SProcessInstance = this.constructor.processClass;
-      this._runningProcess = new SProcessInstance(settings);
+    this._runningProcess = this._processInstance.run(paramsObj, settings);
 
-      // Apply the SProcessInterface on the getted process
-      __SProcessInterface.apply(this._runningProcess);
-
-      // run the process
-      this._runningProcess.run(paramsObj, settings);
-
-      // return this._runningProcess;
-    } else {
-      const childProcess = new __SChildProcess(this.commandString, {
-        id: settings.id,
-        definitionObj: this.definitionObj,
-        defaultParamsObj: settings.defaultParamsObj
-      });
-
-      childProcess.on('state', (state) => {
-        this.state = state;
-      });
-
-      this._runningProcess = childProcess;
-
-      childProcess.run(paramsObj);
-
-      this._runningProcess
-        .on('error', (error) => {
-          console.log('erro', error);
-        })
-        .on('close', (args) => {
-          this._runningProcess = null;
-        });
-    }
-
-    if (settings.output) {
-      const outputSettings =
-        typeof settings.output === 'object' ? settings.output : {};
-      __output(this._runningProcess, outputSettings);
-    }
+    this._runningProcess.on('close', (args) => {
+      this._runningProcess = null;
+    });
 
     if (!__isChildProcess()) {
       const launchingLogObj = {
-        // temp: true,
         value: `${__sugarHeading({
           version: __packageJson(__dirname).version
         })}\n\nLaunching the SCli "<primary>${
@@ -280,12 +296,26 @@ class SCli extends __SProcess {
     this._runningParamsObj = paramsObj;
 
     // listen for some events on the process
-    this._runningProcess.on('cancel,finally', () => {
+    this._runningProcess.on('finally', () => {
+      console.log(
+        __toString({
+          $pipe: true,
+          type: 'SPromise',
+          value: {
+            value: this.constructor.name
+          },
+          metas: {
+            stack: 'log'
+          }
+        })
+      );
+
+      console.log('FINA', this.constructor.name);
       this._runningProcess = null;
       this._runningParamsObj = null;
     });
 
-    return super.run(this._runningProcess);
+    return this._runningProcess;
   }
 
   /**
@@ -332,11 +362,10 @@ class SCli extends __SProcess {
    */
   kill() {
     if (!this._runningProcess) return;
-    return this._runningProcess.kill();
+    try {
+      this._runningProcess.kill();
+    } catch (e) {}
   }
 }
 
-module.exports = __SInterface.implements(SCli, [
-  __SCliInterface,
-  __SProcessInterface
-]);
+module.exports = __SCliInterface.implements(SCli);

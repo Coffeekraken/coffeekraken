@@ -1,6 +1,8 @@
 const __SProcess = require('../../process/SProcess');
 const __SBuildScssActionsStream = require('./SBuildScssActionsStream');
 const __SPromise = require('../../promise/SPromise');
+const __SFsDeamon = require('../../deamon/fs/SFsDeamon');
+const { initial } = require('lodash');
 
 /**
  * @name            SBuildScssProcess
@@ -23,12 +25,18 @@ module.exports = class SBuildScssProcess extends __SProcess {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(settings = {}) {
-    super({
+  constructor(initialParams = {}, settings = {}) {
+    super(initialParams, {
       id: 'process.build.scss',
       name: 'Build SCSS Process',
+      deamon: {
+        class: __SFsDeamon,
+        watchArgs: [initialParams.watch, settings],
+        runOn: ['update', 'add', 'unlink']
+      },
       ...settings
     });
+    this._actionStream = new __SBuildScssActionsStream(settings);
   }
 
   /**
@@ -45,9 +53,8 @@ module.exports = class SBuildScssProcess extends __SProcess {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(argsObj, settings = {}) {
-    const actionStream = new __SBuildScssActionsStream(settings);
-    this._buildScssActionsStream = actionStream.start(argsObj);
-    return super.run(this._buildScssActionsStream);
+    this._buildScssActionsStream = this._actionStream.start(argsObj);
+    return super.run(this._buildScssActionsStream, argsObj, settings);
   }
 
   /**

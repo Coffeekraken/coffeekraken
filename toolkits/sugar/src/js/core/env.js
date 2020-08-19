@@ -2,6 +2,7 @@ import __isNode from '../is/node';
 import __get from '../object/get';
 import __set from '../object/set';
 import __delete from '../object/delete';
+import __parse from '../string/parse';
 
 /**
  * @name                    env
@@ -32,8 +33,8 @@ export default function env(dotPath, value) {
     // delete the variable
     __delete(targetObj, dotPath.toUpperCase());
   } else if (value !== undefined) {
-    __set(targetObj, dotPath.toUpperCase(), value);
+    __set(targetObj, dotPath.toUpperCase(), __parse(value));
   }
   // return the variable value
-  return __get(targetObj, dotPath.toUpperCase());
+  return __parse(__get(targetObj, dotPath.toUpperCase()));
 }

@@ -252,14 +252,14 @@ export default class SInterface {
 
     if (__isClass(instance)) {
       // return instance;
-      class ImplementsMiddleClass extends instance {
+      class SInterfaceImplementsMiddleClass extends instance {
         // __parentProto = instance;
         constructor(...args) {
           super(...args);
           SInterface.implements(this, interfaces, settings);
         }
       }
-      return ImplementsMiddleClass;
+      return SInterfaceImplementsMiddleClass;
     }
 
     // make sure the instance has all the interfaces requirements

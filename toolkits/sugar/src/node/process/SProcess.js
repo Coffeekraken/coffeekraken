@@ -1,9 +1,9 @@
 const __SPromise = require('../promise/SPromise');
 const __SProcessInterface = require('./interface/SProcessInterface');
-const __getExtendsStack = require('../class/getExtendsStack');
 const __SError = require('../error/SError');
 const __toString = require('../string/toString');
 const __deepMerge = require('../object/deepMerge');
+const __SProcessDeamonSettingInterface = require('./interface/SProcessDeamonSettingInterface');
 
 /**
  * @name            SProcess
@@ -125,15 +125,42 @@ class SProcess extends __SPromise {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(settings = {}) {
+  constructor(initialParams = {}, settings = {}) {
     settings = __deepMerge(
       {
         id: 'process.unnamed',
-        name: 'Unnamed Process'
+        name: 'Unnamed Process',
+        deamon: null,
+        throw: false
       },
       settings
     );
     super(null, settings).start();
+
+    if (settings.deamon && typeof settings.deamon === 'object') {
+      __SProcessDeamonSettingInterface.apply(settings.deamon);
+
+      // init the deamon class
+      this._deamonInstance = new settings.deamon.class(
+        settings.deamon.settings || {}
+      );
+
+      const stacks = Array.isArray(settings.deamon.runOn)
+        ? settings.deamon.runOn.join(',')
+        : '*';
+      console.log('SDSD', stacks);
+      this._deamonInstance.on(stacks, (data) => {
+        console.log('DATA', data);
+      });
+
+      if (settings.deamon.watchArgs) {
+        this._deamonInstance.watch.apply(
+          this._deamonInstance,
+          settings.deamon.watchArgs
+        );
+      }
+      this._deamonInstance.start();
+    }
   }
 
   /**
@@ -182,7 +209,22 @@ class SProcess extends __SPromise {
    * @since         2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  run(processPromise) {
+  run(processPromise, argsObj = {}, settings = {}) {
+    // check that their's not another processing process
+    if (this._currentPromise) {
+      if (this._settings.throw) {
+        throw new __SError(
+          `Sorry but you cannot launch multiple processes in the sams <yellow>${this.constructor.name}</yellow> instance...`
+        );
+      } else {
+        this.log({
+          error: true,
+          value: `Sorry but you cannot launch multiple processes in the sams <yellow>${this.constructor.name}</yellow> instance...`
+        });
+      }
+      return;
+    }
+
     // update the process state
     this.state = 'running';
 
@@ -195,6 +237,7 @@ class SProcess extends __SPromise {
     processPromise.on('close,cancel,resolve,reject', () => {
       this.endTime = Date.now();
       this.duration = this.endTime - this.startTime;
+      this._currentPromise = null;
     });
 
     __SPromise.pipe(processPromise, this);

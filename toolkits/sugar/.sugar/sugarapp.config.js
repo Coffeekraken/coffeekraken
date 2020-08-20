@@ -10,8 +10,8 @@ module.exports = {
     commands: [
       'server.frontend',
       // 'build.config',
-      'build.scss'
-      // 'build.js',
+      'build.scss',
+      'build.js'
       // 'build.views',
       // 'build.docMap'
     ]
@@ -61,6 +61,20 @@ module.exports = {
                 settings: {},
                 concurrent: false,
                 key: 's',
+                watch: true,
+                run: true,
+                statusBar: true
+              },
+              {
+                id: 'build.js',
+                name: 'Build JS',
+                path: `${__packageRoot(
+                  __dirname
+                )}/src/node/build/js/SBuildJsCli`,
+                argsObj: {},
+                settings: {},
+                concurrent: false,
+                key: 'j',
                 watch: true,
                 run: true,
                 statusBar: true

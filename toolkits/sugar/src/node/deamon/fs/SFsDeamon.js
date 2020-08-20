@@ -94,39 +94,7 @@ module.exports = class SFsDeamon extends __SDeamon {
   watch(input, settings = {}) {
     settings = __deepMerge(this._settings, settings);
     const cli = new __SFsDeamonCli(settings.cli);
-    const pro = cli.run(input);
-    cli.on('update', () => {
-      console.log(
-        __toString({
-          $pipe: true,
-          type: 'SPromise',
-          value: {
-            value: 'FILELELELE'
-          },
-          metas: {
-            stack: 'log'
-          }
-        })
-      );
-
-      cli.trigger('log', {
-        value: 'cococococ'
-      });
-    });
-
-    // console.log(
-    //   __toString({
-    //     $pipe: true,
-    //     type: 'SPromise',
-    //     value: {
-    //       value: 'Coco'
-    //     },
-    //     metas: {
-    //       stack: 'log'
-    //     }
-    //   })
-    // );
-
+    cli.run(input);
     cli.on('cancel', () => {
       const idx = this._watchPromisesStack.indexOf(cli);
       if (idx === -1) return;

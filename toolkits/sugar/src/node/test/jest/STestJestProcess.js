@@ -1,19 +1,22 @@
 const __SProcess = require('../../process/SProcess');
-const __SBuildJsActionsStream = require('./SBuildJsActionsStream');
+const __SPromise = require('../../promise/SPromise');
 const __SFsDeamon = require('../../deamon/fs/SFsDeamon');
+const __buildCommandLine = require('../../cli/buildCommandLine');
+const __STestJestCliInterface = require('./interface/STestJestCliInterface');
+const __childProcess = require('child_process');
 
 /**
- * @name            SBuildJsProcess
- * @namespace           node.build.js
+ * @name            STestJestProcess
+ * @namespace           node.test.jest
  * @type            Class
  * @extends         SProcess
  *
- * This class represent the process that build the JS files
+ * This class represent the process that launch the tests on javascript files
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SBuildJsProcess extends __SProcess {
+module.exports = class STestJestProcess extends __SProcess {
   /**
    * @name          constructor
    * @type          Function
@@ -25,8 +28,8 @@ module.exports = class SBuildJsProcess extends __SProcess {
    */
   constructor(initialParams = {}, settings = {}) {
     super(initialParams, {
-      id: 'process.build.js',
-      name: 'Build JS Process',
+      id: 'process.test.jest',
+      name: 'Test Jest Process',
       deamon: {
         class: __SFsDeamon,
         watchArgs: [initialParams.watch, settings],
@@ -53,9 +56,25 @@ module.exports = class SBuildJsProcess extends __SProcess {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(argsObj, settings = {}) {
-    const actionStream = new __SBuildJsActionsStream(settings);
-    this._buildJsActionStream = actionStream.start(argsObj);
-    return super.run(this._buildJsActionStream);
+    return super.run(
+      new __SPromise((resolve, reject, trigger, cancel) => {
+        const input = argsObj.input;
+        delete argsObj.input;
+
+        const commandToRun = __buildCommandLine(
+          `jest ${input}`,
+          __STestJestCliInterface.definitionObj,
+          argsObj
+        );
+
+        __childProcess.spawnSync(commandToRun, null, {
+          stdio: 'inherit',
+          shell: true
+        });
+
+        resolve();
+      })
+    );
   }
 
   /**
@@ -68,7 +87,6 @@ module.exports = class SBuildJsProcess extends __SProcess {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   kill() {
-    this._buildJsActionStream.cancel();
     super.kill();
   }
 };

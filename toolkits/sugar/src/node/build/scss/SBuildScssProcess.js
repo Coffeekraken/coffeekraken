@@ -32,7 +32,10 @@ module.exports = class SBuildScssProcess extends __SProcess {
       deamon: {
         class: __SFsDeamon,
         watchArgs: [initialParams.watch, settings],
-        runOn: ['update', 'add', 'unlink']
+        runOn: ['update', 'add', 'unlink'],
+        processParams: (params, data) => {
+          return params;
+        }
       },
       ...settings
     });

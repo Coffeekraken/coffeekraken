@@ -56,8 +56,8 @@ class SFrontendServerCli extends __SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(settings = {}) {
-    super({
+  constructor(args = {}, settings = {}) {
+    super(args, {
       id: 'server.frontend',
       name: 'Frontend Server',
       ...settings

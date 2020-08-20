@@ -99,7 +99,7 @@ module.exports = class SOutput extends __SComponent {
       {
         filter: null,
         // maxItems: -1,
-        maxItemsByGroup: 1000000
+        maxItemsByGroup: 1
       },
       settings
     );
@@ -731,28 +731,21 @@ module.exports = class SOutput extends __SComponent {
     this.$headerBox = __blessed.box({
       width: 'shrink',
       height: 1,
-      top: 1,
-      left: 0,
-      right: 0,
+      top: 0,
+      left: 1,
+      right: 1,
       bottom: 0,
       style: {},
       mouse: true,
       keys: true,
       scrollable: true,
-      scrollbar: {
-        ch: ' ',
-        inverse: true
-      },
-      border: {
-        type: 'line'
-      },
+      // border: {
+      //   type: 'line'
+      // },
       style: {
-        border: {
-          fg: __color('terminal.primary').toString()
-        },
-        scrollbar: {
-          bg: __color('terminal.primary').toString()
-        }
+        // border: {
+        //   fg: __color('terminal.primary').toString()
+        // },
       },
       content: __parseMarkdown(logObj.value),
       padding: {
@@ -763,8 +756,26 @@ module.exports = class SOutput extends __SComponent {
       }
     });
 
+    const $line = __blessed.box({
+      height: 1,
+      bottom: 1,
+      left: 0,
+      style: {
+        fg: 'yellow'
+      }
+    });
+
+    this.$headerBox.$line = $line;
+
+    this.$headerBox.on('attach', () => {
+      setTimeout(() => {
+        this.$headerBox.height = this.$headerBox.getScrollHeight() + 4;
+        $line.setContent('_'.repeat(this.$headerBox.width));
+        this.$headerBox.append($line);
+      });
+    });
+
     this.append(this.$headerBox);
-    this.$headerBox.height = this.$headerBox.getScrollHeight() + 4;
 
     this.$logBox.top = this.$headerBox.height + 1;
 
@@ -787,7 +798,7 @@ module.exports = class SOutput extends __SComponent {
     // }
 
     this.$logBox = __blessed.box({
-      width: '100%',
+      // width: '100%-4',
       top: 0,
       left: 0,
       right: 0,
@@ -807,9 +818,9 @@ module.exports = class SOutput extends __SComponent {
       },
       padding: {
         top: 0,
-        left: 1,
-        right: 1,
-        bottom: 1
+        left: 2,
+        right: 2,
+        bottom: 0
       }
     });
 

@@ -1,20 +1,20 @@
 const __SCli = require('../../cli/SCli');
 const __deepMerge = require('../../object/deepMerge');
-const __SBuildScssCliInterface = require('./interface/SBuildScssCliInterface');
-const __SBuildScssProcess = require('./SBuildScssProcess');
+const __STestJestCliInterface = require('./interface/STestJestCliInterface');
+const __STestJestProcess = require('./STestJestProcess');
 
 /**
- * @name            SBuildScssCli
- * @namespace           node.build.scss
+ * @name            STestJestCli
+ * @namespace           node.test.jest
  * @type            Class
  * @extends         SCli
  *
- * This class represent the build SCSS cli
+ * This class represent the tests jest cli
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-class SBuildScssCli extends __SCli {
+class STestJestCli extends __SCli {
   /**
    * @name          command
    * @type          String
@@ -24,7 +24,7 @@ class SBuildScssCli extends __SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static command = 'sugar build.scss %arguments';
+  static command = 'sugar test.jest %arguments';
 
   /**
    * @name          definitionObj
@@ -35,18 +35,18 @@ class SBuildScssCli extends __SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static definitionObj = __SBuildScssCliInterface.definitionObj;
+  static definitionObj = __STestJestCliInterface.definitionObj;
 
   /**
    * @name          processClass
    * @type          SProcess
    * @static
    *
-   * Store the process class that will be used to run the SCSS build process
+   * Store the process class that will be used to run the test jest process
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static processClass = __SBuildScssProcess;
+  static processClass = __STestJestProcess;
 
   /**
    * @name          constructor
@@ -62,8 +62,8 @@ class SBuildScssCli extends __SCli {
       args,
       __deepMerge(
         {
-          id: 'cli.build.scss',
-          name: 'Cli Build Scss',
+          id: 'cli.test.jest',
+          name: 'Cli Test Jest',
           childProcess: {
             pipe: ['log', 'update', 'add', 'unlink', 'state']
           }
@@ -74,5 +74,5 @@ class SBuildScssCli extends __SCli {
   }
 }
 
-// module.exports = SBuildScssCli;
-module.exports = __SBuildScssCliInterface.implements(SBuildScssCli);
+// module.exports = STestJestCli;
+module.exports = __STestJestCliInterface.implements(STestJestCli);

@@ -148,12 +148,32 @@ class SProcess extends __SPromise {
       const stacks = Array.isArray(settings.deamon.runOn)
         ? settings.deamon.runOn.join(',')
         : '*';
-      console.log('SDSD', stacks);
       this._deamonInstance.on(stacks, (data) => {
-        console.log('DATA', data);
+        // check if a process is already running
+        if (this._currentPromise) return;
+
+        // process the initial params with the "processParams" function if exists
+        let params = Object.assign({}, initialParams);
+        if (
+          settings.deamon.processParams &&
+          typeof settings.deamon.processParams === 'function'
+        ) {
+          params = settings.deamon.processParams(params, data);
+        }
+
+        this.log({
+          clear: true,
+          value: `Restarting the process "<yellow>${
+            this._settings.name || this._settings.id
+          }</yellow>" automatically`
+        });
+
+        // launch a new process
+        this.run(params, settings);
       });
 
-      if (settings.deamon.watchArgs) {
+      // launch the deamon if all is ready
+      if (this._deamonInstance && settings.deamon.watchArgs) {
         this._deamonInstance.watch.apply(
           this._deamonInstance,
           settings.deamon.watchArgs
@@ -161,6 +181,20 @@ class SProcess extends __SPromise {
       }
       this._deamonInstance.start();
     }
+  }
+
+  /**
+   * @name            deamon
+   * @type            SDeamon
+   * @get
+   *
+   * Access the deamon used with this process. If not exist, will return undefined
+   *
+   * @since         2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get deamon() {
+    return this._deamonInstance || undefined;
   }
 
   /**
@@ -228,17 +262,34 @@ class SProcess extends __SPromise {
     // update the process state
     this.state = 'running';
 
+    if (this.deamon && this.deamon.state === 'watching') {
+      this.log({
+        value: this.deamon.logs.paused
+      });
+    }
+
     // save the start timestamp
     this.startTime = Date.now();
     this.endTime = 0;
     this.duration = 0;
 
     // listen when the process close to calculate duration
-    processPromise.on('close,cancel,resolve,reject', () => {
-      this.endTime = Date.now();
-      this.duration = this.endTime - this.startTime;
-      this._currentPromise = null;
-    });
+    processPromise
+      .on('close,resolve', () => {
+        if (this.deamon && this.deamon.state === 'watching') {
+          this.log({
+            value: this.deamon.logs.watching
+          });
+          this.state = 'watching';
+        }
+      })
+      .on('close,cancel,resolve,reject', () => {
+        this.endTime = Date.now();
+        this.duration = this.endTime - this.startTime;
+        setTimeout(() => {
+          this._currentPromise = null;
+        });
+      });
 
     __SPromise.pipe(processPromise, this);
 
@@ -261,7 +312,6 @@ class SProcess extends __SPromise {
   log(...args) {
     setTimeout(() => {
       args.forEach((arg) => {
-        // this.trigger('log', arg);
         if (!this._currentPromise) return;
         this._currentPromise.trigger('log', arg);
       });

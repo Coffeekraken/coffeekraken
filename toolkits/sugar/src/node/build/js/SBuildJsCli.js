@@ -57,12 +57,16 @@ class SBuildJsCli extends __SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(settings = {}) {
+  constructor(args = {}, settings = {}) {
     super(
+      args,
       __deepMerge(
         {
           id: 'cli.build.js',
-          name: 'Cli Build Js'
+          name: 'Cli Build Js',
+          childProcess: {
+            pipe: ['log', 'update', 'add', 'unlink', 'state']
+          }
         },
         settings
       )

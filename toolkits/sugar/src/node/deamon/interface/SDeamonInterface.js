@@ -16,9 +16,18 @@ const __SInterface = require('../../class/SInterface');
 module.exports = class SDeamonInterface extends __SInterface {
   static extendsArray = ['SPromise'];
   static definitionObj = {
-    start: {
+    logs: {
+      type: 'Object',
+      required: true
+    },
+    watch: {
       type: 'Function',
       required: true
+    },
+    state: {
+      type: 'String',
+      required: true,
+      values: ['idle', 'watching', 'error']
     }
   };
 };

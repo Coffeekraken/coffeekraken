@@ -281,11 +281,14 @@ class SCli extends __SPromise {
       this._runningProcess = null;
     });
 
+    // ${__sugarHeading({
+    //   version: __packageJson(__dirname).version
+    // })}\n\n
+
     if (!__isChildProcess()) {
       const launchingLogObj = {
-        value: `${__sugarHeading({
-          version: __packageJson(__dirname).version
-        })}\n\nLaunching the SCli "<primary>${
+        temp: true,
+        value: `Launching the SCli "<primary>${
           this._settings.name || this._settings.id
         }</primary>" process...`
       };
@@ -309,8 +312,6 @@ class SCli extends __SPromise {
           }
         })
       );
-
-      console.log('FINA', this.constructor.name);
       this._runningProcess = null;
       this._runningParamsObj = null;
     });

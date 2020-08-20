@@ -24,8 +24,8 @@ module.exports = class SFrontendServerProcess extends __SProcess {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(settings = {}) {
-    super({
+  constructor(params = {}, settings = {}) {
+    super(params, {
       id: 'process.server.frontend',
       name: 'Frontend Server Process',
       ...settings

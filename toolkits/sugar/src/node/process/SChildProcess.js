@@ -349,10 +349,6 @@ class SChildProcess extends __SProcess {
         const logs = log.toString().split(/⠀{1,99999999}/);
         logs.forEach((log) => {
           const logObj = __parse(log);
-          // console.log(logObj);
-          // this._runningProcess.promise.trigger('log', {
-          //   value: log
-          // });
           if (typeof logObj === 'object' && logObj.$pipe && logObj.type) {
             switch (logObj.type) {
               case 'SPromise':
@@ -366,8 +362,6 @@ class SChildProcess extends __SProcess {
             return;
           }
 
-          // console.log(log);
-
           this._runningProcess.stdout.push(log);
           this._runningProcess.promise.trigger(`log`, {
             value: log
@@ -376,11 +370,15 @@ class SChildProcess extends __SProcess {
       });
     }
 
+    // this._runningProcess.childProcess.on('error', (error) => {
+    //   console.log('SOMEHT', error);
+    // });
+
     // stderr data
     if (this._runningProcess.childProcess.stderr) {
       this._runningProcess.childProcess.stderr.on('data', (error) => {
-        error = error.toString();
-        throw new Error(error.toString());
+        console.log(error.toString());
+        // throw new Error(error.toString());
       });
     }
 

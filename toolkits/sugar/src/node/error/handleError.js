@@ -33,7 +33,7 @@ module.exports = function handleError(error) {
     // console.log('Unhandled error', error.message);
     // console.log(__toString(error));
   } else {
-    __keypress.disableMouse(process.stdout);
+    // __keypress.disableMouse(process.stdout);
     // error.message = __parseHtml(error.message);
     // error.stack = '';
     // throw error;

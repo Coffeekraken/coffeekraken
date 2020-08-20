@@ -84,10 +84,10 @@ module.exports = class SComponent extends __blessed.box {
         container: {
           // width: '100%',
           height: '100%',
-          top: 1,
-          left: 2,
-          right: 2,
-          bottom: 1,
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
           padding: {
             top: 0,
             left: 0,

@@ -139,19 +139,9 @@ module.exports = class SCommandPanel extends __SComponent {
       // instanciate the command instance
       const commandClass = require(commandObj.path);
       commandObj.instance = new commandClass(commandObj.settings);
-
-      // commandObj.instance.on('beforeStart', () => {
-      //   // const boxObj = this._boxesObjectsMap.get(commandObj);
-      //   // boxObj.$log.clear();
-      //   // boxObj.$log.update();
-      // });
-      // __SPromise.pipe(commandObj, this._sPromise);
     });
 
     this.promise = new __SPromise(() => {});
-
-    // subscribe to the commands instances
-    // this._subscribeToCommandsEvents();
 
     // generate the UI
     this._generateUI();
@@ -162,13 +152,6 @@ module.exports = class SCommandPanel extends __SComponent {
     // add the first commands in the display list
     this._displayedCommands.push(this._commands[0]);
 
-    // update the list continusly
-    // this._updateListInterval = setInterval(this._updateList.bind(this), 100);
-    // this.screen.on('destroy', () => {
-    //   clearInterval(this._updateListInterval);
-    // });
-    //
-
     // select first list item
     this._selectListItem(0);
 
@@ -176,53 +159,14 @@ module.exports = class SCommandPanel extends __SComponent {
     setTimeout(() => {
       this._updateList();
     });
-  }
 
-  /**
-   * @name          _subscribeToCommandsEvents
-   * @type          Function
-   * @private
-   *
-   * This method subscribe to the commands events to make corresponding action like log, etc...
-   *
-   * @since     2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  // _subscribeToCommandsEvents() {
-  //   // subscribe to data
-  //   this._sPromise
-  //     .on('start,success,error', (data) => {
-  //       this.update();
-  //     })
-  //     .on('close', (data) => {
-  //       this.update();
-  //     })
-  //     .on('log', (data) => {
-  //       console.log('HEY');
-  //       this.update();
-  //     })
-  //     .on('error', (data) => {
-  //       this.update();
-  //     })
-  //     .on('kill', (data) => {})
-  //     // subscribe to errors
-  //     .on('error', (data) => {});
-  //   // subscribe to ask
-  //   // .on('ask', async (question) => {
-  //   //   if (question.type === 'summary') {
-  //   //     const summary = this.summary(
-  //   //       question.commandObj,
-  //   //       question.items
-  //   //     );
-  //   //     summary.on('cancel', () => {
-  //   //       question.reject && question.reject();
-  //   //     });
-  //   //     summary.on('resolve', (answer) => {
-  //   //       question.resolve && question.resolve(answer);
-  //   //     });
-  //   //   }
-  //   // });
-  // }
+    // run the command that have the "run" property to true
+    this._commands.forEach((commandObj) => {
+      if (commandObj.run) {
+        commandObj.instance.run();
+      }
+    });
+  }
 
   /**
    * @name          _logSummary
@@ -280,32 +224,6 @@ module.exports = class SCommandPanel extends __SComponent {
   //   });
   //   summaryListPopup.attach(this);
   //   return summaryListPopup;
-  // }
-
-  // /**
-  //  * @name          _clearCommands
-  //  * @type          Function
-  //  * @private
-  //  *
-  //  * This method remove all the command boxes from the content panel as
-  //  * well as in the "_commands" property as well as in the "_boxesObjectsMap"
-  //  *
-  //  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-  //  */
-  // _clearCommands() {
-  //   this._commands.forEach((commandObj) => {
-  //     let boxObj = this._boxesObjectsMap.get(commandObj);
-  //     if (!boxObj.$header) return;
-  //     boxObj.$header.destroy();
-  //     boxObj.$actions.destroy();
-  //     boxObj.$log.destroy();
-  //     clearInterval(boxObj.spinner.interval);
-  //     boxObj.$box.destroy();
-  //   });
-  //   // remove all commands in the map
-  //   this._boxesObjectsMap.clear();
-  //   // reset the _commands array
-  //   this._commands = null;
   // }
 
   /**
@@ -448,8 +366,8 @@ module.exports = class SCommandPanel extends __SComponent {
         },
         padding: {
           top: 0,
-          left: 2,
-          right: 2,
+          left: 0,
+          right: 0,
           bottom: 0
         }
       });

@@ -1,9 +1,8 @@
-const __getFilename = require('../fs/filename');
-const __packageRoot = require('../path/packageRoot');
-const __highlight = require('cli-highlight').highlight;
+const __getFilename = require('../../fs/filename');
+const __packageRoot = require('../../path/packageRoot');
 
 // my-custom-reporter.js
-class SJestOutputReporter {
+class STestJestOutputReporter {
   constructor(globalConfig, options) {
     this._globalConfig = globalConfig;
     this._options = options;

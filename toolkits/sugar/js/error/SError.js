@@ -11,9 +11,15 @@ var _trimLines = _interopRequireDefault(require("../string/trimLines.js"));
 
 var _packageRoot = _interopRequireDefault(require("../path/packageRoot"));
 
+var _toString = _interopRequireDefault(require("../string/toString"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -45,29 +51,64 @@ var SError = /*#__PURE__*/function (_Error) {
 
     _classCallCheck(this, SError);
 
-    try {
-      _this = _super.call(this);
-      Error.captureStackTrace(_assertThisInitialized(_this), _this.constructor);
-      var packageRoot = (0, _packageRoot.default)();
-      var stack = _this.stack;
-      var stackArray = [];
-      stack.split(/\s+?at\s/).filter(l => {
+    _this = _super.call(this);
+    Error.captureStackTrace(_assertThisInitialized(_this), _this.constructor);
+
+    if (typeof message === 'object') {
+      if (message.syscall) _this.syscall = message.syscall;
+      if (message.code) _this.code = message.code;
+      if (message.property) _this.property = message.property;
+      if (message.message) _this.message = message.message;
+      if (message.name) _this.name = message.name;
+      if (message.stack) _this.stack = message.stack;
+    } else if (typeof message !== 'string') {
+      _this.message = (0, _trimLines.default)(message.toString());
+      _this.name = _this.constructor.name;
+      _this.stack = message.stack || [];
+      _this.code = message.code || null;
+      _this.property = message.property || null;
+      _this.syscall = message.syscall || null;
+    } else {
+      _this.message = (0, _toString.default)(message);
+      _this.name = null;
+    }
+
+    var packageRoot = (0, _packageRoot.default)();
+
+    if (_this.stack) {
+      var stack = [];
+
+      var stackArray = _this.stack.split('at ').slice(1);
+
+      stackArray.filter(l => {
         if (l.trim() === 'Error') return false;
+        if (l.trim() === '') return false;
         return true;
       }).forEach(l => {
-        stackArray.push("<cyan>\u2502</cyan> at <cyan>".concat(l.replace(packageRoot, ''), "</cyan>"));
+        stack.push("<cyan>\u2502</cyan> at <cyan>".concat(l.replace(packageRoot, ''), "</cyan>"));
       });
-      var errorString = (0, _trimLines.default)((0, _parseHtml.default)("<underline><bold><red>".concat(_this.constructor.name, "</red></bold></underline>\n\n        ").concat(message, "\n        <cyan><underline>Stack</underline></cyan>\n\n        ").concat(stackArray.join('\n')))); // this.syscall = null;
-      // this.code = null;
-      // this.property = null;
-
-      _this.message = errorString; // this.stack = null;
-
-      _this.name = _this.constructor.name;
-    } catch (e) {}
+      _this._stackString = stack.join('\n');
+    }
 
     return _this;
   }
+
+  _createClass(SError, [{
+    key: "inspect",
+    value: function inspect() {
+      return this.toString();
+    }
+  }, {
+    key: "toString",
+    value: function toString() {
+      // '⠀'
+      if (this.message.match(/___$/gm)) return this.message;
+      var string = (0, _trimLines.default)((0, _parseHtml.default)("\n      <red><underline>".concat(this.constructor.name, "</underline></red>\n\n      ").concat(this.message, "\n\n      ").concat(this._stackString, "\n    ")));
+      return string + '___';
+      return 'cc';
+      return this.message;
+    }
+  }]);
 
   return SError;
 }( /*#__PURE__*/_wrapNativeSuper(Error));

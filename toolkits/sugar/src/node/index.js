@@ -8,10 +8,12 @@ const __isChildProcess = require('./is/childProcess');
 __initEnv();
 
 // handle the errors
-if (!__isChildProcess()) {
-  // process.on('uncaughtException', __handleError);
-  // process.on('unhandledRejection', __handleError);
-}
+// if (!__isChildProcess()) {
+// process.on('uncaughtException', __handleError);
+// process.on('unhandledRejection', __handleError);
+// }
+
+__handleError();
 
 /**
  * @name                    index

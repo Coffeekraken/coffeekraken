@@ -137,9 +137,9 @@ module.exports = class SOutput extends __SComponent {
     // subscribe to data
     s.on('close', async (data) => {
       await __wait();
-      this.log({
-        value: `Closing process with code <red>${data.code}</red> and signal <red>${data.signal}</red>...`
-      });
+      // this.log({
+      //   value: `Closing process with code <red>${data.code}</red> and signal <red>${data.signal}</red>...`
+      // });
     })
       .on('success', (data) => {
         this.log({
@@ -147,10 +147,10 @@ module.exports = class SOutput extends __SComponent {
         });
       })
       .on('error', (error) => {
-        this.log({
-          error: true,
-          value: error.error || error
-        });
+        // this.log({
+        //   error: true,
+        //   value: error.error || error
+        // });
       })
       .on('log', (data) => {
         this.log(data);
@@ -264,6 +264,7 @@ module.exports = class SOutput extends __SComponent {
         data = __SOutputLogInterface.applyAndComplete(data);
 
         const splitedLogs = data.value.split(/⠀/);
+
         splitedLogs.forEach((log) => {
           if (log.trim() === '') return;
           log = log.replace(/⠀{0,9999999}/g, '').trim();
@@ -291,6 +292,12 @@ module.exports = class SOutput extends __SComponent {
                 value: parsedLog
               });
             }
+          } else {
+            logsArray.push({
+              value: __toString(parsedLog, {
+                beautify: true
+              })
+            });
           }
         });
       } else {
@@ -331,7 +338,6 @@ module.exports = class SOutput extends __SComponent {
 
     // filter the content to remove the "temp" logs
     this._content = this._content.filter((logObj) => {
-      // console.log(logObj);
       if (logObj.temp && logObj.$box) {
         this._lastY -= logObj.$box.height;
         if (logObj.$box) logObj.$box.destroy();
@@ -489,6 +495,14 @@ module.exports = class SOutput extends __SComponent {
         item.$box = $box;
         this.$logBox.append($box);
         this._lastY += $box.getScrollHeight() + 1;
+      } else {
+        const value = '' + item.value;
+        const $box = this._simpleTextBox(value);
+        $box.top = this._lastY + item.mt;
+        this.$logBoxChilds.push($box);
+        this.$logBox.append($box);
+        item.$box = $box;
+        this._lastY += $box.getScrollHeight() + item.mt + item.mb;
       }
     });
 

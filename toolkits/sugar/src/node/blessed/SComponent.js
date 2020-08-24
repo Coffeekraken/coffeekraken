@@ -4,6 +4,8 @@ const __color = require('../color/color');
 const __hotkey = require('../keyboard/hotkey');
 const __tkill = require('tree-kill');
 const __isChildProcess = require('../is/childProcess');
+const __toString = require('../string/toString');
+const __parse = require('../string/parse');
 
 let __activeScreen = null;
 

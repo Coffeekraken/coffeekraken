@@ -53,7 +53,7 @@ const __SPromise = require('../promise/SPromise');
  *    }
  * }
  * const myCli = new MyCli();
- * myCli.commandString; // => php localhost:8888 .
+ * myCli.command; // => php localhost:8888 .
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -113,7 +113,7 @@ class SCli extends __SPromise {
       this._paramsObj
     );
 
-    if (!this._paramsObj.forceChildProcess) {
+    if (!this._paramsObj.forceChildProcess || !this.command) {
       // run the process
       const SProcessInstance = this.constructor.processClass;
       this._processInstance = new SProcessInstance(this._paramsObj, settings);
@@ -140,8 +140,9 @@ class SCli extends __SPromise {
 
       // return this._runningProcess;
     } else {
+      let childCommand = this.command;
       const childProcess = new __SChildProcess(
-        this.commandString + ' --forceChildProcess false',
+        this.command + ' --forceChildProcess false',
         {
           id: settings.id,
           definitionObj: this.definitionObj,
@@ -186,7 +187,7 @@ class SCli extends __SPromise {
   }
 
   /**
-   * @name        commandString
+   * @name        command
    * @type        String
    * @get
    *
@@ -194,7 +195,7 @@ class SCli extends __SPromise {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  get commandString() {
+  get command() {
     return this.constructor.command;
   }
 
@@ -270,51 +271,43 @@ class SCli extends __SPromise {
       );
     }
 
-    settings = __deepMerge(this._settings, settings);
-    // make sure we have an object as args
-    paramsObj = __argsToObject(paramsObj, this.definitionObj);
-    paramsObj = __deepMerge(this._paramsObj, paramsObj);
+    try {
+      settings = __deepMerge(this._settings, settings);
+      // make sure we have an object as args
+      paramsObj = __argsToObject(paramsObj, this.definitionObj);
+      paramsObj = __deepMerge(this._paramsObj, paramsObj);
 
-    this._runningProcess = this._processInstance.run(paramsObj, settings);
+      this._runningProcess = this._processInstance.run(paramsObj, settings);
 
-    this._runningProcess.on('close', (args) => {
-      this._runningProcess = null;
-    });
+      this._runningProcess.on('close', (args) => {
+        this._runningProcess = null;
+      });
 
-    // ${__sugarHeading({
-    //   version: __packageJson(__dirname).version
-    // })}\n\n
+      // ${__sugarHeading({
+      //   version: __packageJson(__dirname).version
+      // })}\n\n
 
-    if (!__isChildProcess()) {
-      const launchingLogObj = {
-        temp: true,
-        value: `Launching the SCli "<primary>${
-          this._settings.name || this._settings.id
-        }</primary>" process...`
-      };
-      this._runningProcess.trigger('log', launchingLogObj);
+      if (!__isChildProcess()) {
+        const launchingLogObj = {
+          temp: true,
+          value: `Launching the SCli "<primary>${
+            this._settings.name || this._settings.id
+          }</primary>" process...`
+        };
+        this._runningProcess.trigger('log', launchingLogObj);
+      }
+
+      // save running process params
+      this._runningParamsObj = paramsObj;
+
+      // listen for some events on the process
+      this._runningProcess.on('finally', () => {
+        this._runningProcess = null;
+        this._runningParamsObj = null;
+      });
+    } catch (e) {
+      console.log('www');
     }
-
-    // save running process params
-    this._runningParamsObj = paramsObj;
-
-    // listen for some events on the process
-    this._runningProcess.on('finally', () => {
-      console.log(
-        __toString({
-          $pipe: true,
-          type: 'SPromise',
-          value: {
-            value: this.constructor.name
-          },
-          metas: {
-            stack: 'log'
-          }
-        })
-      );
-      this._runningProcess = null;
-      this._runningParamsObj = null;
-    });
 
     return this._runningProcess;
   }
@@ -333,7 +326,7 @@ class SCli extends __SPromise {
    */
   toString(paramsObj = {}, includeAllParams = this._settings.includeAllParams) {
     return __buildCommandLine(
-      this.commandString,
+      this.command,
       this.definitionObj,
       paramsObj,
       includeAllParams

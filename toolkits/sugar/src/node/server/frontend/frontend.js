@@ -148,42 +148,58 @@ module.exports = (args = {}) => {
     server.get(
       [`${handlerSettings.slug}/*`, `${handlerSettings.slug}`],
       async (req, res) => {
-        try {
-          const handlerPromise = handlerFn(req, server);
-          __SPromise.pipe(handlerPromise, promise);
-          const response = await handlerPromise;
+        const handlerPromise = handlerFn(req, server);
+        __SPromise.pipe(handlerPromise, promise);
+        const responsePromise = handlerPromise;
+        const response = await responsePromise;
 
-          // handle response
-          const view = response.view || 'pages.404';
-          const data = response.data || null;
-          const title = response.title || 'Page not found';
-          const type = response.type || 'text/html';
+        // handle response
+        const view = response.view || 'pages.404';
+        let data = response.data || null;
+        const title = response.title || 'Page not found';
+        const type = response.type || 'text/html';
 
-          // prepariong the result
-          let result;
-          switch (type.toLowerCase()) {
-            case 'application/json':
-              result = data;
-              break;
-            case 'text/html':
-            default:
-              result = await __render(view, {
-                packageJson: __standardizeJson(
-                  require(__packageRoot(process.cwd()) + '/package.json')
-                ),
-                ...templateData,
-                ...data
-              });
-              break;
-          }
+        // prepariong the result
+        let result;
+        switch (type.toLowerCase()) {
+          case 'application/json':
+            result = data;
+            break;
+          case 'text/html':
+          default:
+            data = {
+              packageJson: __standardizeJson(
+                require(__packageRoot(process.cwd()) + '/package.json')
+              ),
+              ...templateData,
+              ...data
+            };
+            const settings = {
+              rootDir: [
+                __sugarConfig('views.rootDir'),
+                __path.resolve(__dirname, 'views')
+              ]
+            };
 
-          // send the result to the client
-          res.send(result);
-        } catch (e) {
-          // console.log(e);
-          throw new Error(e);
-          // res.redirect('/404');
+            try {
+              result = await __render(view, data, settings);
+            } catch (e) {
+              result = await __render(
+                'pages.501',
+                {
+                  ...data,
+                  error: e
+                },
+                settings
+              );
+
+              console.log('::DWD');
+            }
+            break;
         }
+
+        // send the result to the client
+        res.send(result);
       }
     );
   });

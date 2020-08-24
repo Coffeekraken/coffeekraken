@@ -95,7 +95,8 @@ var SLog = /*#__PURE__*/function () {
         info: null,
         warn: null,
         debug: null,
-        error: null
+        error: null,
+        trace: null
       },
       adaptersByEnvironment: {
         test: null,
@@ -278,8 +279,7 @@ var SLog = /*#__PURE__*/function () {
      *
      * The info method that log a message with the "info" level
      *
-     * @param           {Mixed}           message             The message to log
-     * @param           {String|Array}    [adapters=null]     The list of adapters you want to use for this message. Can be an Array like ['console','mail'], or a comma separated String like "console,mail"
+     * @param           {Mixed}           ...args             The message(s) to log
      * @return          {Promise}                             A promise that will be resolved once the message has been correctly logged through all adapters
      *
      * @example         js
@@ -291,16 +291,16 @@ var SLog = /*#__PURE__*/function () {
   }, {
     key: "info",
     value: function () {
-      var _info = _asyncToGenerator(function* (message, adapters) {
-        if (adapters === void 0) {
-          adapters = null;
+      var _info = _asyncToGenerator(function* () {
+        for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+          args[_key2] = arguments[_key2];
         }
 
         // call the internal _log method and return his result
-        return this._log(message, adapters, 'info');
+        return this._log(...args, 'info');
       });
 
-      function info(_x, _x2) {
+      function info() {
         return _info.apply(this, arguments);
       }
 
@@ -313,8 +313,7 @@ var SLog = /*#__PURE__*/function () {
      *
      * The warn method that log a message with the "warn" level
      *
-     * @param           {Mixed}           message             The message to log
-     * @param           {String|Array}    [adapters=null]     The list of adapters you want to use for this message. Can be an Array like ['console','mail'], or a comma separated String like "console,mail"
+     * @param           {Mixed}           ...args             The message(s) to log
      * @return          {Promise}                             A promise that will be resolved once the message has been correctly logged through all adapters
      *
      * @example         js
@@ -326,16 +325,16 @@ var SLog = /*#__PURE__*/function () {
   }, {
     key: "warn",
     value: function () {
-      var _warn = _asyncToGenerator(function* (message, adapters) {
-        if (adapters === void 0) {
-          adapters = null;
+      var _warn = _asyncToGenerator(function* () {
+        for (var _len3 = arguments.length, args = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+          args[_key3] = arguments[_key3];
         }
 
         // call the internal _log method and return his result
-        return this._log(message, adapters, 'warn');
+        return this._log(...args, 'warn');
       });
 
-      function warn(_x3, _x4) {
+      function warn() {
         return _warn.apply(this, arguments);
       }
 
@@ -348,8 +347,7 @@ var SLog = /*#__PURE__*/function () {
      *
      * The debug method that log a message with the "debug" level
      *
-     * @param           {Mixed}           message             The message to log
-     * @param           {String|Array}    [adapters=null]     The list of adapters you want to use for this message. Can be an Array like ['console','mail'], or a comma separated String like "console,mail"
+     * @param           {Mixed}           ...args             The message(s) to log
      * @return          {Promise}                             A promise that will be resolved once the message has been correctly logged through all adapters
      *
      * @example         js
@@ -361,16 +359,16 @@ var SLog = /*#__PURE__*/function () {
   }, {
     key: "debug",
     value: function () {
-      var _debug = _asyncToGenerator(function* (message, adapters) {
-        if (adapters === void 0) {
-          adapters = null;
+      var _debug = _asyncToGenerator(function* () {
+        for (var _len4 = arguments.length, args = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+          args[_key4] = arguments[_key4];
         }
 
         // call the internal _log method and return his result
-        return this._log(message, adapters, 'debug');
+        return this._log(...args, 'debug');
       });
 
-      function debug(_x5, _x6) {
+      function debug() {
         return _debug.apply(this, arguments);
       }
 
@@ -383,8 +381,7 @@ var SLog = /*#__PURE__*/function () {
      *
      * The error method that log a message with the "error" level
      *
-     * @param           {Mixed}           message             The message to log
-     * @param           {String|Array}    [adapters=null]     The list of adapters you want to use for this message. Can be an Array like ['console','mail'], or a comma separated String like "console,mail"
+     * @param           {Mixed}           ...args             The message(s) to log
      * @return          {Promise}                             A promise that will be resolved once the message has been correctly logged through all adapters
      *
      * @example         js
@@ -396,16 +393,16 @@ var SLog = /*#__PURE__*/function () {
   }, {
     key: "error",
     value: function () {
-      var _error = _asyncToGenerator(function* (message, adapters) {
-        if (adapters === void 0) {
-          adapters = null;
+      var _error = _asyncToGenerator(function* () {
+        for (var _len5 = arguments.length, args = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
+          args[_key5] = arguments[_key5];
         }
 
         // call the internal _log method and return his result
-        return this._log(message, adapters, 'error');
+        return this._log(...args, 'error');
       });
 
-      function error(_x7, _x8) {
+      function error() {
         return _error.apply(this, arguments);
       }
 
@@ -418,8 +415,7 @@ var SLog = /*#__PURE__*/function () {
      *
      * The trace method that log a message with the "trace" level
      *
-     * @param           {Mixed}           message             The message to log
-     * @param           {String|Array}    [adapters=null]     The list of adapters you want to use for this message. Can be an Array like ['console','mail'], or a comma separated String like "console,mail"
+     * @param           {Mixed}           ...args             The message(s) to log
      * @return          {Promise}                             A promise that will be resolved once the message has been correctly logged through all adapters
      *
      * @example         js
@@ -431,16 +427,16 @@ var SLog = /*#__PURE__*/function () {
   }, {
     key: "trace",
     value: function () {
-      var _trace = _asyncToGenerator(function* (message, adapters) {
-        if (adapters === void 0) {
-          adapters = null;
+      var _trace = _asyncToGenerator(function* () {
+        for (var _len6 = arguments.length, args = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
+          args[_key6] = arguments[_key6];
         }
 
         // call the internal _log method and return his result
-        return this._log(message, adapters, 'trace');
+        return this._log(...args, 'trace');
       });
 
-      function trace(_x9, _x10) {
+      function trace() {
         return _trace.apply(this, arguments);
       }
 

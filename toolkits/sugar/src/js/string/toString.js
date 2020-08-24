@@ -7,6 +7,7 @@ import isObject from '../is/object';
 import isRegexp from '../is/regexp';
 import isString from '../is/string';
 import __deepMerge from '../object/deepMerge';
+import __SError from '../error/SError';
 
 /**
  * @name        toString
@@ -38,9 +39,16 @@ export default function toString(value, settings = {}) {
 
   if (isString(value)) {
     return value;
+  } else if (isNumber(value)) {
+    return value.toString();
   } else if (value === null) {
     return 'null';
+  } else if (value instanceof __SError) {
+    return value.toString();
   } else if (value instanceof Error) {
+    if (typeof value.toString === 'function') {
+      return value.toString();
+    }
     return `${value.name}:
 
       ${value.message}
@@ -62,8 +70,6 @@ export default function toString(value, settings = {}) {
   } else if (isFunction(value)) {
     return '' + value;
   } else if (isRegexp(value)) {
-    return value.toString();
-  } else if (isNumber(value)) {
     return value.toString();
   } else if (value === undefined) {
     return 'undefined';

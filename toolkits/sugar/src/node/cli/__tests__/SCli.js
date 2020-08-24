@@ -31,7 +31,7 @@ module.exports = (__SCli) => {
 
       const cli = new MyCli();
 
-      expect(cli.commandString).toBe('php %hostname:%port %rootDir %arguments');
+      expect(cli.command).toBe('php %hostname:%port %rootDir %arguments');
       expect(typeof cli.definitionObj).toBe('object');
 
       expect(

@@ -23,6 +23,8 @@ var _string = _interopRequireDefault(require("../is/string"));
 
 var _deepMerge = _interopRequireDefault(require("../object/deepMerge"));
 
+var _SError = _interopRequireDefault(require("../error/SError"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -56,9 +58,17 @@ function toString(value, settings) {
 
   if ((0, _string.default)(value)) {
     return value;
+  } else if ((0, _number.default)(value)) {
+    return value.toString();
   } else if (value === null) {
     return 'null';
+  } else if (value instanceof _SError.default) {
+    return value.toString();
   } else if (value instanceof Error) {
+    if (typeof value.toString === 'function') {
+      return value.toString();
+    }
+
     return "".concat(value.name, ":\n\n      ").concat(value.message, "\n\n      ").concat(value.stack, "\n    ");
   } else if (typeof value === 'symbol' || typeof value === 'typedArray' || value instanceof Date || typeof value === 'color') {
     return value.toString();
@@ -69,8 +79,6 @@ function toString(value, settings) {
   } else if ((0, _function.default)(value)) {
     return '' + value;
   } else if ((0, _regexp.default)(value)) {
-    return value.toString();
-  } else if ((0, _number.default)(value)) {
     return value.toString();
   } else if (value === undefined) {
     return 'undefined';

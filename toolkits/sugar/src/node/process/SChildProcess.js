@@ -361,7 +361,6 @@ class SChildProcess extends __SProcess {
             }
             return;
           }
-
           this._runningProcess.stdout.push(log);
           this._runningProcess.promise.trigger(`log`, {
             value: log
@@ -377,8 +376,7 @@ class SChildProcess extends __SProcess {
     // stderr data
     if (this._runningProcess.childProcess.stderr) {
       this._runningProcess.childProcess.stderr.on('data', (error) => {
-        console.log(error.toString());
-        // throw new Error(error.toString());
+        throw new __SError(error.toString());
       });
     }
 

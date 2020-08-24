@@ -270,15 +270,13 @@ var SActionStreamAction = /*#__PURE__*/function (_SPromise) {
 
   }, {
     key: "error",
-    value: function error(message) {
-      this.trigger('error', {
-        value: "<red>\u271A</red> ".concat(message)
-      });
-      if (!this._currentPromise) return;
-
-      this._currentPromise.trigger('log', {
-        value: "<red>\u271A</red> ".concat(message)
-      });
+    value: function error(message) {// this.trigger('error', {
+      //   value: `<red>✚</red> ${message}`
+      // });
+      // if (!this._currentPromise) return;
+      // this._currentPromise.trigger('log', {
+      //   value: `<red>✚</red> ${message}`
+      // });
     }
     /**
      * @name          warn

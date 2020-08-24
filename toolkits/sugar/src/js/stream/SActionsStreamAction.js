@@ -207,13 +207,13 @@ export default class SActionStreamAction extends __SPromise {
    * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   error(message) {
-    this.trigger('error', {
-      value: `<red>✚</red> ${message}`
-    });
-    if (!this._currentPromise) return;
-    this._currentPromise.trigger('log', {
-      value: `<red>✚</red> ${message}`
-    });
+    // this.trigger('error', {
+    //   value: `<red>✚</red> ${message}`
+    // });
+    // if (!this._currentPromise) return;
+    // this._currentPromise.trigger('log', {
+    //   value: `<red>✚</red> ${message}`
+    // });
   }
 
   /**

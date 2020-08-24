@@ -65,7 +65,8 @@ export default class SLog {
           info: null,
           warn: null,
           debug: null,
-          error: null
+          error: null,
+          trace: null
         },
         adaptersByEnvironment: {
           test: null,
@@ -235,8 +236,7 @@ export default class SLog {
    *
    * The info method that log a message with the "info" level
    *
-   * @param           {Mixed}           message             The message to log
-   * @param           {String|Array}    [adapters=null]     The list of adapters you want to use for this message. Can be an Array like ['console','mail'], or a comma separated String like "console,mail"
+   * @param           {Mixed}           ...args             The message(s) to log
    * @return          {Promise}                             A promise that will be resolved once the message has been correctly logged through all adapters
    *
    * @example         js
@@ -244,9 +244,9 @@ export default class SLog {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  async info(message, adapters = null) {
+  async info(...args) {
     // call the internal _log method and return his result
-    return this._log(message, adapters, 'info');
+    return this._log(...args, 'info');
   }
 
   /**
@@ -256,8 +256,7 @@ export default class SLog {
    *
    * The warn method that log a message with the "warn" level
    *
-   * @param           {Mixed}           message             The message to log
-   * @param           {String|Array}    [adapters=null]     The list of adapters you want to use for this message. Can be an Array like ['console','mail'], or a comma separated String like "console,mail"
+   * @param           {Mixed}           ...args             The message(s) to log
    * @return          {Promise}                             A promise that will be resolved once the message has been correctly logged through all adapters
    *
    * @example         js
@@ -265,9 +264,9 @@ export default class SLog {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  async warn(message, adapters = null) {
+  async warn(...args) {
     // call the internal _log method and return his result
-    return this._log(message, adapters, 'warn');
+    return this._log(...args, 'warn');
   }
 
   /**
@@ -277,8 +276,7 @@ export default class SLog {
    *
    * The debug method that log a message with the "debug" level
    *
-   * @param           {Mixed}           message             The message to log
-   * @param           {String|Array}    [adapters=null]     The list of adapters you want to use for this message. Can be an Array like ['console','mail'], or a comma separated String like "console,mail"
+   * @param           {Mixed}           ...args             The message(s) to log
    * @return          {Promise}                             A promise that will be resolved once the message has been correctly logged through all adapters
    *
    * @example         js
@@ -286,9 +284,9 @@ export default class SLog {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  async debug(message, adapters = null) {
+  async debug(...args) {
     // call the internal _log method and return his result
-    return this._log(message, adapters, 'debug');
+    return this._log(...args, 'debug');
   }
 
   /**
@@ -298,8 +296,7 @@ export default class SLog {
    *
    * The error method that log a message with the "error" level
    *
-   * @param           {Mixed}           message             The message to log
-   * @param           {String|Array}    [adapters=null]     The list of adapters you want to use for this message. Can be an Array like ['console','mail'], or a comma separated String like "console,mail"
+   * @param           {Mixed}           ...args             The message(s) to log
    * @return          {Promise}                             A promise that will be resolved once the message has been correctly logged through all adapters
    *
    * @example         js
@@ -307,9 +304,9 @@ export default class SLog {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  async error(message, adapters = null) {
+  async error(...args) {
     // call the internal _log method and return his result
-    return this._log(message, adapters, 'error');
+    return this._log(...args, 'error');
   }
 
   /**
@@ -319,8 +316,7 @@ export default class SLog {
    *
    * The trace method that log a message with the "trace" level
    *
-   * @param           {Mixed}           message             The message to log
-   * @param           {String|Array}    [adapters=null]     The list of adapters you want to use for this message. Can be an Array like ['console','mail'], or a comma separated String like "console,mail"
+   * @param           {Mixed}           ...args             The message(s) to log
    * @return          {Promise}                             A promise that will be resolved once the message has been correctly logged through all adapters
    *
    * @example         js
@@ -328,8 +324,8 @@ export default class SLog {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  async trace(message, adapters = null) {
+  async trace(...args) {
     // call the internal _log method and return his result
-    return this._log(message, adapters, 'trace');
+    return this._log(...args, 'trace');
   }
 }

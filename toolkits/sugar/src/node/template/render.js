@@ -3,6 +3,10 @@ const __getFilename = require('../fs/filename');
 const __fs = require('fs');
 const __path = require('path');
 const __getExt = require('../fs/extension');
+const __deepMerge = require('../object/deepMerge');
+const __toString = require('../string/toString');
+const __SPromise = require('../promise/SPromise');
+const __SError = require('../error/SError');
 
 /**
  * @name              render
@@ -17,7 +21,7 @@ const __getExt = require('../fs/extension');
  * @param       {String}        viewPath        The view path to compile. This has to be a dotted path like "my.cool.view" relative to the @config.views.rootDir directory
  * @param       {Object}        [data={}]       An object of data to use to compile the view correctly
  * @param       {Object}        [settings={}]   An object of settings to configure your rendering process. Here's the list of available settings:
- * - No settings for now...
+ * - rootDir (__sugarConfig('views.rootDir')) {String|Array<String>}: Specify the root directory where to search for views. Can be an array of directories in which the engine will search through if needed
  *
  * @example       js
  * const render = require('@coffeekraken/sugar/node/template/render');
@@ -28,66 +32,106 @@ const __getExt = require('../fs/extension');
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = async function render(viewPath, data = null, settings = {}) {
-  const engines = {
-    'blade.php': require('./bladePhp')
-  };
+module.exports = function render(viewPath, data = null, settings = {}) {
+  return new __SPromise(
+    async (resolve, reject, trigger, cancel) => {
+      const engines = {
+        'blade.php': require('./bladePhp')
+      };
 
-  // listing the files available in the passed view folder
-  const rootDir = __sugarConfig('views.rootDir');
-  let viewDir = viewPath;
-  Object.keys(engines).forEach((ext) => {
-    viewDir = viewDir.replace(`.${ext}`, '');
-  });
-  viewDir = viewDir.split('.').join('/');
-  const viewName = __getFilename(viewDir).trim();
-  const folderPath = viewDir.replace(viewName, '').trim();
+      settings = __deepMerge(
+        {
+          rootDir: []
+        },
+        settings
+      );
 
-  // list all the files in the folder
-  const viewToCompile = `${folderPath}${
-    __fs.readdirSync(__path.resolve(rootDir, folderPath)).filter((file) => {
-      // get the filename
-      const filename = __getFilename(file);
-      const ext = filename.split('.').slice(1).join('.');
-      if (viewName === filename.replace(`.${ext}`, '')) {
-        return true;
+      // listing the files available in the passed view folder
+      const rootDirectories = [...settings.rootDir] || [
+        ...__sugarConfig('views.rootDir')
+      ];
+
+      let viewDir = viewPath;
+      // Object.keys(engines).forEach((ext) => {
+      //   viewDir = viewDir.replace(`.${ext}`, '');
+      // });
+      viewDir = viewDir.split('.').join('/');
+      const viewName = viewDir.split('/').pop().toString();
+      const folderPath = viewDir.replace(viewName, '').trim();
+
+      let viewObj = {
+        rootDir: null,
+        view: null,
+        folder: null,
+        extension: null,
+        path: null
+      };
+      for (let dirIdx in rootDirectories) {
+        if (viewObj.name) break;
+        const dir = rootDirectories[dirIdx];
+        const filesArray = __fs.readdirSync(
+          __path.resolve(rootDirectories[dirIdx], folderPath)
+        );
+        for (let fileIdx in filesArray) {
+          const filename = __getFilename(filesArray[fileIdx]);
+          const ext = filename.split('.').slice(1).join('.');
+          if (viewName === filename.replace(`.${ext}`, '')) {
+            viewObj = {
+              rootDir: dir,
+              folder: folderPath.replace(/\/$/, ''),
+              view: viewName,
+              extension: ext,
+              path: `${folderPath.replace(/\/$/, '')}/${viewName}.${ext}`
+            };
+            break;
+          }
+        }
       }
-      return false;
-    })[0]
-  }`;
 
-  const viewToCompileExt = viewToCompile.split('.').slice(1).join('.');
-  const viewToCompileWithoutExt = viewToCompile.replace(
-    `.${viewToCompileExt}`,
-    ''
-  );
+      if (!viewObj.view || !viewObj.rootDir || !viewObj.path) {
+        return reject(
+          `It seems that the passed view "<cyan>${viewPath}</cyan>" does not exist in any specified views directories:
 
-  // check if we don't have data passed to check if we can
-  // grab them from a json or js file
-  if (!data) {
-    const jsFilePath = __path.resolve(rootDir, viewToCompileWithoutExt) + '.js';
-    const jsonFilePath =
-      __path.resolve(rootDir, viewToCompileWithoutExt) + '.json';
-    if (__fs.existsSync(jsFilePath)) {
-      data = require(jsFilePath);
-    } else if (__fs.existsSync(jsonFilePath)) {
-      data = require(jsonFilePath);
+          - ${rootDirectories.join('\n- ')}
+          `
+        );
+      }
+
+      // throw __toString(viewObj);
+
+      // // check if we don't have data passed to check if we can
+      // // grab them from a json or js file
+      // if (!data) {
+      //   const jsFilePath = __path.resolve(rootDir, viewToCompileWithoutExt) + '.js';
+      //   const jsonFilePath =
+      //     __path.resolve(rootDir, viewToCompileWithoutExt) + '.json';
+      //   if (__fs.existsSync(jsFilePath)) {
+      //     data = require(jsFilePath);
+      //   } else if (__fs.existsSync(jsonFilePath)) {
+      //     data = require(jsonFilePath);
+      //   }
+      // }
+
+      // get the engine to compile the view
+      const engineFn = engines[viewObj.extension.toLowerCase()];
+      if (!engineFn) {
+        throw new __SError(
+          `You try to render the view "<primary>${
+            viewObj.path
+          }</primary>" but these kind of views are not supported yet. Please use one of these views formats: "<cyan>${Object.keys(
+            engines
+          ).join(', ')}</cyan>"...`
+        );
+      }
+
+      // process to the rendering
+      const result = await engineFn(viewObj.path, data, settings);
+
+      // // return the result
+      resolve(result);
+    },
+    {
+      id: 'template.render'
     }
-  }
-
-  // get the engine to compile the view
-  const engineFn = engines[viewToCompileExt.toLowerCase()];
-  if (!engineFn) {
-    throw new Error(
-      `You try to render the view "<primary>${viewToCompile}</primary>" but these kind of views are not supported yet. Please use one of these views formats: "<cyan>${Object.keys(
-        engines
-      ).join(', ')}</cyan>"...`
-    );
-  }
-
-  // process to the rendering
-  const result = await engineFn(viewToCompile, data, settings);
-
-  // return the result
-  return result;
+  ).start();
 };

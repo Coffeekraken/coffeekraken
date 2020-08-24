@@ -1,6 +1,7 @@
 const __SCli = require('../../cli/SCli');
 const __SFrontendServerProcess = require('./SFrontendServerProcess');
 const __SExpressServerInterface = require('../express/interface/SExpressServerInterface');
+const __deepMerge = require('../../object/deepMerge');
 
 /**
  * @name            SFrontendServerCli
@@ -57,11 +58,19 @@ class SFrontendServerCli extends __SCli {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(args = {}, settings = {}) {
-    super(args, {
-      id: 'server.frontend',
-      name: 'Frontend Server',
-      ...settings
-    });
+    super(
+      args,
+      __deepMerge(
+        {
+          id: 'server.frontend',
+          name: 'Frontend Server',
+          childProcess: {
+            pipe: ['log']
+          }
+        },
+        settings
+      )
+    );
   }
 }
 

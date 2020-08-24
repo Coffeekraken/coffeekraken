@@ -168,56 +168,6 @@ module.exports = {
     },
 
     /**
-     * @name            styleguide
-     * @namespace       config.frontend.handlers
-     * @type            Object
-     *
-     * Store all the accessible pages of the frontend development website
-     *
-     * @since         2.0.0
-     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    styleguide: {
-      /**
-       * @name            slug
-       * @namespace       config.frontend.handlers.styleguide
-       * @type            String
-       * @default         /styleguide
-       *
-       * Specify the url slug to use for this "section"
-       *
-       * @since           2.0.0
-       * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-      slug: '/styleguide',
-
-      /**
-       * @name            title
-       * @namespace       config.frontend.handlers.styleguide
-       * @type            String
-       * @default         styleguideumentation | [title]
-       *
-       * Specify the title to use for this "section"
-       *
-       * @since         2.0.0
-       * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-      title: 'Styleguide | [title]',
-
-      /**
-       * @name            handler
-       * @namespace       config.frontend.handlers.styleguide
-       * @type            Function
-       *
-       * Specify the handler function that will take care of responding to this "section"
-       *
-       * @since         2.0.0
-       * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-      handler: `${__dirname}/../src/node/server/frontend/handlers/styleguide`
-    },
-
-    /**
      * @name            search
      * @namespace       config.frontend.handlers
      * @type            Object

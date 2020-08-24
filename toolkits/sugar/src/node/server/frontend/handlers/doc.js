@@ -1,54 +1,87 @@
-const __sugarConfig = require('../../../config/sugar');
 const __fs = require('fs');
-const __marked = require('marked');
-const __jsDom = require('jsdom').JSDOM;
+const __packageRoot = require('../../../path/packageRoot');
+const __sugarConfig = require('../../../config/sugar');
+const __render = require('../../../template/render');
+const __standardizeJson = require('../../../npm/standardizeJson');
+const __SPromise = require('../../../promise/SPromise');
+const __SDocblock = require('../../../docblock/SDocblock');
+const __SBuildScssCli = require('../../../build/scss/SBuildScssCli');
+const __trimLines = require('../../../string/trimLines');
 
 /**
- * @name                doc
+ * @name                styleguide
  * @namespace           node.server.frontend.handlers
  * @type                Function
  *
- * This function is responsible of responding to express requests made on the "doc" section
+ * This function is responsible of responding to express requests made on the "styleguide" section
  *
  * @param         {Object}          req             The express request object
  * @param         {Object}          server          The express server instance
  * @return        {Promise}                         A promise that will be resolved with the response to send to the client
  *
+ * @event       server.frontend.handler.styleguide.start
+ *
  * @since       2.0.0
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function doc(req, server) {
-  return new Promise((resolve, reject) => {
-    // get the path
-    const docPath = __sugarConfig('doc.rootDir');
-    const filePath = `${docPath}/${req.params[0]}.md`;
-    let title = __sugarConfig('frontend.pages.doc.title');
+module.exports = function styleguide(req, server) {
+  return new __SPromise(
+    async function (resolve, reject, trigger) {
+      let viewPath = req.params[0].split('/').join('.');
 
-    // try to read the doc file
-    // if (!__fs.existsSync(filePath)) return reject('404');
+      trigger('server.frontend.handler.styleguide.start', null);
 
-    // read the file
-    const mdData = __fs.readFileSync(filePath, 'utf8');
+      let resultObj = {
+        view: null,
+        data: {}
+      };
 
-    // convert to html
-    const htmlData = __marked(mdData);
+      let currentPackageJson;
 
-    const $dom = new __jsDom(htmlData);
-    title = title.replace(
-      '[title]',
-      $dom.window.document.querySelector('h1').textContent || ''
-    );
+      // check if the passed request point to a valid coffeekraken sugar ready package
+      const pr = __packageRoot();
+      const packagePath = `${pr}/node_modules/${req.params[0]}`;
 
-    // let content = `
-    //     <my-component param1="hello world"></my-component>
-    //   `;
+      if (__fs.existsSync(`${packagePath}/docMap11.json`)) {
+        // currentPackageJson = require(`${packagePath}/package.json`);
+        // const sugarJson = require(`${packagePath}/sugar.json`);
+        // if (sugarJson.views && sugarJson.views.styleguide) {
+        //   viewPath = `${packagePath}/${sugarJson.views.styleguide}`;
+        // }
+        // resultObj.view = viewPath;
+        // resultObj.data.currentPackageJson = __standardizeJson(
+        //   currentPackageJson
+        // );
+        // // check if we have a styleguide scss file to load
+        // if (sugarJson.scss && sugarJson.scss.styleguide) {
+        //   const buildScssCli = new __SBuildScssCli({});
+        //   const styleguidePromise = buildScssCli.run({
+        //     input: `${packagePath}/${sugarJson.scss.styleguide}`,
+        //     sugarJsonDirs: packagePath
+        //   });
+        //   __SPromise.pipe(styleguidePromise, this);
+        //   const styleguideRes = await styleguidePromise;
+        //   // parsing the docblock
+        //   const docblock = new __SDocblock(styleguideRes.value);
+        //   // set the blocks
+        //   resultObj.data.css = styleguideRes.value;
+        //   resultObj.data.blocks = docblock.toObject();
+        // }
+      } else {
+        resultObj = {
+          ...resultObj,
+          view: 'pages.400',
+          title: `Missing "node_modules/${req.params[0]}/docMap.json`,
+          data: {
+            body: `In order to integrate a package into the documentation system, you MUST have a "docMap.json" file at the root of your folder.`
+          }
+        };
+      }
 
-    // send back the result
-    resolve({
-      view: 'pages.doc',
-      title,
-      content: `<div class="marked">${htmlData}</div>`
-      // content
-    });
-  });
+      resolve(resultObj);
+    },
+    {
+      id: 'server.handler.styleguide'
+    }
+  ).start();
 };

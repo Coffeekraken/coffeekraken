@@ -7,6 +7,7 @@ const __packageRoot = require('../path/packageRoot');
 const __stripTags = require('../html/striptags');
 const __getFilename = require('../fs/filename');
 const __namespace = require('../package/namespace');
+const __extension = require('../fs/extension');
 
 /**
  * @name              SDocMapItem
@@ -71,11 +72,55 @@ module.exports = class SDocMapItem {
   _name = null;
 
   /**
+   * @name        _type
+   * @type        String
+   * @private
+   *
+   * Store the doc type (extension)
+   *
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _type = null;
+
+  /**
+   * @name        _rootDir
+   * @type        String
+   * @private
+   *
+   * Store the doc root directory from where the path properties is relative from
+   *
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _rootDir = null;
+
+  /**
+   * @name        _filename
+   * @type        String
+   * @private
+   *
+   * Store the doc filename
+   *
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _filename = null;
+
+  /**
+   * @name        _directory
+   * @type        String
+   * @private
+   *
+   * Store the doc directory path
+   *
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _directory = null;
+
+  /**
    * @name        _path
    * @type        String
    * @private
    *
-   * Store the doc path if is a file
+   * Store the doc path if is a file.
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
@@ -96,11 +141,18 @@ module.exports = class SDocMapItem {
 
     // check if the passed source is a file or not
     if (__isPath(source, true)) {
-      let path = __packageRoot();
+      let packageRoot = __packageRoot();
       if (settings.output && typeof settings.output === 'string')
-        path = settings.output.split('/').slice(0, -1).join('/');
-      this._path = __path.relative(path, source);
+        packageRoot = settings.output.split('/').slice(0, -1).join('/');
       this._source = __fs.readFileSync(source, 'utf8');
+      this._filename = __getFilename(source);
+      this._path = __path.relative(packageRoot, source);
+      this._directory = __path
+        .relative(packageRoot, source)
+        .replace(`/${this._filename}`, '')
+        .replace(`${this._filename}`, '');
+      this._type = this._filename.split('.').slice(1).join('.');
+      this._rootDir = '.';
     } else {
       this._source = source;
     }
@@ -125,6 +177,58 @@ module.exports = class SDocMapItem {
    */
   get name() {
     return this._name;
+  }
+
+  /**
+   * @name        rootDir
+   * @type        String
+   * @get
+   *
+   * Access the rootDir property
+   *
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get rootDir() {
+    return this._rootDir;
+  }
+
+  /**
+   * @name        filename
+   * @type        String
+   * @get
+   *
+   * Access the filename property
+   *
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get filename() {
+    return this._filename;
+  }
+
+  /**
+   * @name        directory
+   * @type        String
+   * @get
+   *
+   * Access the directory property
+   *
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get directory() {
+    return this._directory;
+  }
+
+  /**
+   * @name        type
+   * @type        String
+   * @get
+   *
+   * Access the type property
+   *
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get type() {
+    return this._type;
   }
 
   /**
@@ -164,6 +268,9 @@ module.exports = class SDocMapItem {
    */
   _buildFromDocblock() {
     const docblock = new __SDocblock(this._source);
+
+    console.log(docblock.blocks);
+
     if (!docblock.blocks[0]) return;
     const firstBlock = docblock.blocks[0];
 
@@ -184,7 +291,11 @@ module.exports = class SDocMapItem {
     return {
       name: this.name,
       namespace: this.namespace,
-      path: this.path
+      path: this.path,
+      filename: this.filename,
+      directory: this.directory,
+      rootDir: this.rootDir,
+      type: this.type
     };
   }
 
@@ -225,19 +336,22 @@ module.exports = class SDocMapItem {
     if (this._name && this._namespace) return;
 
     // make sure we have a namespace
-    if (!this._namespace && this._path) {
-      this._namespace = __namespace(this._path);
+    if (!this._namespace && this._directory) {
+      this._namespace = __namespace(this._directory) || '';
     }
 
+    if (!this.name && this.filename) this._name = this.filename;
+
     // check if its a markdown format
-    if (/^#{1,6}\s?.*/gm.exec(this._source)) {
-      // extracting the titles
-      const titlesMatches = this._source.match(/^#{1,6}\s?.*/gm);
-      if (titlesMatches) {
-        this._name = __stripTags(titlesMatches[0])
-          .replace(/#{1,6}/, '')
-          .trim();
-      }
-    }
+    // if (/^#{1,6}\s?.*/gm.exec(this._source)) {
+    //   // extracting the titles
+    //   const titlesMatches = this._source.match(/^#{1,6}\s?.*/gm);
+    //   if (titlesMatches) {
+    //     this._name = __stripTags(titlesMatches[0])
+    //       .replace(/#{1,6}/, '')
+    //       .trim();
+    //   }
+    //   console.log(this._name);
+    // }
   }
 };

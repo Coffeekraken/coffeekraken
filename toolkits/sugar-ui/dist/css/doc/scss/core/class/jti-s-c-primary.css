@@ -1,0 +1,18 @@
+
+
+/**
+  * @name       	.jti-s-c-primary
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.primary
+  * @type        class
+  *
+  * Specify the color to **primary**
+  *
+  * @example 	html
+  * <div class=".jti-s-c-primary">
+  * 	I'm in "primary" color
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */

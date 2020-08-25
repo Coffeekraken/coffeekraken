@@ -1,7 +1,6 @@
 const __sugarConfig = require('../../config/sugar');
 const __deepMerge = require('../../object/deepMerge');
 const __bladePhp = require('../../template/bladePhp');
-const __SNav = require('../../nav/SNav');
 const __deepMap = require('../../object/deepMap');
 const __packageRoot = require('../../path/packageRoot');
 const __standardizeJson = require('../../npm/standardizeJson');
@@ -36,34 +35,36 @@ const __SError = require('../../error/SError');
 module.exports = (args = {}) => {
   const settings = __deepMerge(__sugarConfig('frontend'), args);
   const server = __express();
-  let sNavInstance;
 
   const promise = new __SPromise(null, {
     id: 'server.frontend'
   }).start();
 
-  settings.assets = __deepMap(settings.assets, (value, prop) => {
-    if (prop === 'path') return value.replace(settings.express.rootDir, '');
-    return value;
-  });
-
-  // generate menus
-  const menuStack = {};
-  // if (settings.menu) {
-  //   sNavInstance = new __SNav('main', 'Main', []);
-  //   Object.keys(settings.menu).forEach(async (menuName) => {
-  //     // generate the menus
-  //     const generatorObj = settings.menu[menuName].generator;
-  //     menuStack[menuName] = await generatorObj.fn(generatorObj.directory);
-  //     // add the nav to the main navigation
-  //     sNavInstance.addItem(menuStack[menuName]);
-  //   });
-  // }
+  // load the "frontspec.json" file
+  const frontspecPath = `${__packageRoot()}/frontspec.json`;
+  let frontspec;
+  if (!__fs.existsSync(frontspecPath)) {
+    promise.trigger('log', {
+      value: `#warning It seems that you don't have any "<cyan>frontspec.json</cyan>" at the root of your package. You will miss a lot of cool features without it...`
+    });
+  } else {
+    frontspec = require(frontspecPath);
+    for (let key in frontspec.assets) {
+      for (let key1 in frontspec.assets[key]) {
+        if (frontspec.assets[key][key1].path.slice(0, 1) === '/') continue;
+        frontspec.assets[key][
+          key1
+        ].path = `/${frontspec.assets[key][key1].path}`;
+      }
+    }
+  }
 
   // build the "templateData" object to pass to the render engines
   const templateData = {
+    frontspec: JSON.stringify(frontspec),
     env: process.env.NODE_ENV || 'development',
-    settings: JSON.stringify(settings)
+    settings: JSON.stringify(settings),
+    packageJson: __standardizeJson(require(__packageRoot() + '/package.json'))
   };
 
   server.get('/', async (req, res) => {
@@ -105,9 +106,6 @@ module.exports = (args = {}) => {
 
       // render the view
       let result = await __bladePhp(view, {
-        packageJson: __standardizeJson(
-          require(__packageRoot(process.cwd()) + '/package.json')
-        ),
         ...templateData
       });
 
@@ -148,7 +146,7 @@ module.exports = (args = {}) => {
     server.get(
       [`${handlerSettings.slug}/*`, `${handlerSettings.slug}`],
       async (req, res) => {
-        const handlerPromise = handlerFn(req, server);
+        const handlerPromise = handlerFn(req, server, handlerSettings);
         __SPromise.pipe(handlerPromise, promise);
         const responsePromise = handlerPromise;
         const response = await responsePromise;
@@ -166,11 +164,7 @@ module.exports = (args = {}) => {
             result = data;
             break;
           case 'text/html':
-          default:
             data = {
-              packageJson: __standardizeJson(
-                require(__packageRoot(process.cwd()) + '/package.json')
-              ),
               ...templateData,
               ...data
             };
@@ -192,9 +186,11 @@ module.exports = (args = {}) => {
                 },
                 settings
               );
-
-              console.log('::DWD');
             }
+            break;
+          default:
+            result = data;
+            res.type(type);
             break;
         }
 

@@ -1,0 +1,29 @@
+
+
+/**
+ * @name    effect-bubble
+ * @namespace           scss.effect
+ * @type      mixin
+ *
+ * Create an arrow bubble effect
+ *
+ * @param 		{String} 			[$side=bottom] 				The side (top,right,bottom,left)
+ * @param 		{String} 			[$align=center] 			The alignement (left,center,right,top,middle,bottom)
+ * @param 		{Number} 			[$size=10px] 				The size of the arrow
+ * @param 		{Color} 			[$color=s-color(primary)] 	The color of the bubble
+ * @param 		{Number} 			[$arrow-offset=10px] 		The arrow offset from the side of the bubble
+ * @param 		{Number} 			[$border-width=0] 			The border width of the bubble
+ * @param 		{Color} 			[$border-color=null] 		The border color of the bubble
+ *
+ * @example     scss
+ * .my-cool-bubble {
+ * 		\@include Sugar.effect-bubble(
+ * 			$color : Sugar.color(secondary)
+ * 		);
+ * 		color : white;
+ * }
+ *
+ * @since       1.0.0
+ * @see 			https://codepen.io/kirkas/pen/otqyJ
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */

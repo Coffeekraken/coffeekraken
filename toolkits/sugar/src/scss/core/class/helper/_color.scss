@@ -31,7 +31,7 @@
             * @since       1.0.0
             * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
             */
-          .#{$cls} {
+          #{$cls} {
             color: color($name);
           }
         }
@@ -55,7 +55,7 @@
             * @since       1.0.0
             * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
             */
-          .#{$cls} {
+          #{$cls} {
             background-color: color($name);
           }
         }
@@ -82,7 +82,7 @@
                 * @since       1.0.0
                 * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                 */
-             .#{$cls} {
+             #{$cls} {
                 color: color($name, $mod-name);
               }
             }
@@ -106,7 +106,7 @@
                 * @since       1.0.0
                 * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                 */
-              .#{$cls} {
+              #{$cls} {
                 background-color: color($name, $mod-name);
               }
             }

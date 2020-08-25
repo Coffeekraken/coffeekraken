@@ -23,7 +23,7 @@
           * @since       1.0.0
           * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
           */
-        .#{selector("tr-#{$name}")} {
+        #{selector("tr-#{$name}")} {
           @include transition($transition);
         }
       }

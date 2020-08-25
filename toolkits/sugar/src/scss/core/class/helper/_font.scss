@@ -19,7 +19,7 @@
           * @since       1.0.0
           * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
           */
-        .#{selector("f-#{$name}")} {
+        #{selector("f-#{$name}")} {
           @include font($name);
         }
       }

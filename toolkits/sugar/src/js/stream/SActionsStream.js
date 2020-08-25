@@ -262,7 +262,10 @@ export default class SActionStream extends __SPromise {
       try {
         let currentActionReturn = this._currentStream.currentActionObj.instance.run(
           currentStreamObj,
-          this._currentStream.currentActionObj.settings
+          {
+            ...this._currentStream.currentActionObj.instance.settings,
+            ...this._currentStream.currentActionObj.settings
+          }
         );
 
         if (currentActionReturn instanceof Promise) {
@@ -627,6 +630,8 @@ export default class SActionStream extends __SPromise {
    */
   start(streamObj = {}, settings = {}) {
     settings = __deepMerge(Object.assign({}, this._settings), settings);
+
+    streamObj = Object.assign({}, streamObj);
 
     this._currentStream = {
       promise: null,

@@ -23,7 +23,7 @@
           * @since       1.0.0
           * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
           */
-        .#{$cname} {
+        #{$cname} {
           @if $name == "default" {
             &:not(p) {
               padding: space($name);
@@ -53,7 +53,7 @@
           * @since       1.0.0
           * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
           */
-        .#{$cname} {
+        #{$cname} {
           padding-bottom: space($name);
         }
       }
@@ -77,7 +77,7 @@
           * @since       1.0.0
           * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
           */
-       .#{$cname} {
+       #{$cname} {
           padding-top: space($name);
         }
       }
@@ -101,7 +101,7 @@
           * @since       1.0.0
           * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
           */
-        .#{$cname} {
+        #{$cname} {
           padding-left: space($name);
         }
       }
@@ -125,7 +125,7 @@
           * @since       1.0.0
           * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
           */
-        .#{$cname} {
+        #{$cname} {
           padding-right: space($name);
         }
       }
@@ -149,7 +149,7 @@
           * @since       1.0.0
           * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
           */
-        .#{$cname} {
+        #{$cname} {
           padding-left: space($name);
           padding-right: space($name);
         }
@@ -174,7 +174,7 @@
           * @since       1.0.0
           * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
           */
-        .#{$cname} {
+        #{$cname} {
           padding-top: space($name);
           padding-bottom: space($name);
         }

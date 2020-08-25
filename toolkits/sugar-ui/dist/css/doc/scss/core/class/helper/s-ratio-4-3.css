@@ -1,0 +1,16 @@
+
+
+/**
+* @name 		s-ratio-4-3
+* @namespace         scss.core.class.helper
+* @class-namespace     sugar.helper.ratio.4-3
+* @type        class
+*
+* Keep a 4/3 ratio on a particular element. Applied by setting height to 0 and paddingtop to 100% / 4 * 3
+*
+* @example 	html
+* <div class="s-bg-primary s-ratio-4-3"></div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/

@@ -19,7 +19,7 @@
           * @since       2.0.0
           * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
           */
-        .#{selector('s-#{$size}')} {
+        #{selector('s-#{$size}')} {
           font-size: to-rem($value);
         }
       }
@@ -42,7 +42,7 @@
           * @since       2.0.0
           * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
           */
-        .#{selector('s-t-#{$size}-rel')} {
+        #{selector('s-t-#{$size}-rel')} {
           font-size: to-em($value);
         }
       }

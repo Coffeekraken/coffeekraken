@@ -125,7 +125,10 @@ module.exports = function render(viewPath, data = null, settings = {}) {
       }
 
       // process to the rendering
-      const result = await engineFn(viewObj.path, data, settings);
+      const result = await engineFn(viewObj.path, data, {
+        ...settings,
+        rootDir: viewObj.rootDir
+      });
 
       // // return the result
       resolve(result);

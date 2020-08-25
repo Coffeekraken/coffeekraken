@@ -1,0 +1,33 @@
+
+
+/**
+ * @name      effect-hey
+ * @namespace           scss.effect
+ * @type      mixin
+ *
+ * Create a poping dot effect to catch user attention on a particular item
+ * This mixin affect the :before and :after pseudo selector of the item
+ *
+ * @param 		{String} 		[$vertical-align=top] 			Where to put the dot verticaly (top,middle,bottom)
+ * @param 		{String} 		[$align=left] 					Where to put the dot horizontaly (left,center,right)
+ * @param 		{Number} 		[$size=20px] 					The size of the dot
+ * @param 		{Color} 		[$color=primary] 				The color of the dot
+ * @param 		{Number} 		[$offset-top=0] 				The offset top
+ * @param 		{Number} 		[$offset-right=0] 				The offset right
+ * @param 		{Number} 		[$offset-bottom=0] 				The offset bottom
+ * @param 		{Number} 		[$offset-left=0] 				The offset left
+ *
+ * @example       scss
+ * .my-cool-element {
+ * 		\@include Sugar.effect-hey(
+ * 			$align : right,
+ * 			$color : secondary,
+ * 			$size : 10px,
+ * 			$offset-top : -10px,
+ * 			$offset-right : -10px
+ * 		);
+ * }
+ *
+ * @since       1.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */

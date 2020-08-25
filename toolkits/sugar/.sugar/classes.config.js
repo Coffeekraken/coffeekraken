@@ -1,6 +1,20 @@
 module.exports = {
   generate: {
     /**
+     * @name          prefix
+     * @namespace     config.classes.generate
+     * @type          String
+     * @default       null
+     *
+     * Specify a prefix that will be applied on every classes that
+     * are defined using the ```Sugar.$(...)``` function
+     *
+     * @since         2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    prefix: 'jti',
+
+    /**
      * @name          namespace
      * @namespace     config.classes.generate
      * @type          Array<String>
@@ -12,7 +26,7 @@ module.exports = {
      * @since       2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    namespace: ['sugar.lnf', 'sugar.helper'],
+    namespace: ['sugar'],
 
     /**
      * @name          icons

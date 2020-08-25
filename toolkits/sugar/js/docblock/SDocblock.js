@@ -13,6 +13,8 @@ var _handlebars = _interopRequireDefault(require("handlebars"));
 
 var _index = _interopRequireDefault(require("./markdown/index"));
 
+var _htmlFromMarkdown = _interopRequireDefault(require("../convert/html/htmlFromMarkdown"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -234,6 +236,7 @@ var SDocblock = /*#__PURE__*/function () {
      *
      * This method convert the parsed docblocks to a markdown string
      *
+     * @since       2.0.0
      * @author 	Olivier Bossel <olivier.bossel@gmail.com>
      */
 
@@ -241,6 +244,26 @@ var SDocblock = /*#__PURE__*/function () {
     key: "toMarkdown",
     value: function toMarkdown() {
       return this.to('markdown');
+    }
+    /**
+     * @name          toHtml
+     * @type          Function
+     *
+     * This method convert the parsed docblocks to an HTML string
+     *
+     * @since       2.0.0
+     * @author 	Olivier Bossel <olivier.bossel@gmail.com>
+     */
+
+  }, {
+    key: "toHtml",
+    value: function toHtml(settings) {
+      if (settings === void 0) {
+        settings = {};
+      }
+
+      var markdown = this.toMarkdown();
+      return (0, _htmlFromMarkdown.default)(markdown, settings);
     }
     /**
      * @name              to
@@ -251,6 +274,7 @@ var SDocblock = /*#__PURE__*/function () {
      * @param       {String}          format          The format in which you want to convert your docblocks.
      * @return      {String}                          The converted docblocks
      *
+     * @since       2.0.0
      * @author 	Olivier Bossel <olivier.bossel@gmail.com>
      */
 

@@ -1,3 +1,4 @@
+const __SError = require('../error/SError');
 const __execPhp = require('exec-php');
 const __deepMerge = require('../object/deepMerge');
 const __sugarConfig = require('../config/sugar');
@@ -40,25 +41,16 @@ module.exports = (view, data = {}, settings = {}) => {
 
   const sugarViewsDir = __path.resolve(`${__dirname}/../../php/views`);
 
-  // const viewPath = `${settings.rootDir}/${view
-  //   .replace('.blade.php', '')
-  //   .split('.')
-  //   .join('/')}.blade.php`;
-  // const sugarViewPath = `${sugarViewsDir}/${view
-  //   .replace('.blade.php', '')
-  //   .split('.')
-  //   .join('/')}.blade.php`;
-
-  // if (!__fs.existsSync(viewPath)) {
-  //   if (!__fs.existsSync(sugarViewPath)) {
-  //     throw new Error(
-  //       `It seems thats the view "<primary>${view}</primary>" does not exists either in your project views folder "<cyan>${settings.rootDir}</cyan>", nor in the Sugar package folder "<magenta>${sugarViewsDir}</magenta>"...`
-  //     );
-  //   }
-  //   settings.rootDir = sugarViewsDir;
-  // }
-
   if (!__fs.existsSync(settings.cacheDir)) __fs.mkdirSync(settings.cacheDir);
+
+  if (!__fs.existsSync(__path.resolve(settings.rootDir, view))) {
+    throw new __SError(
+      `It seems that the view you passed "<cyan>${__path.resolve(
+        settings.rootDir,
+        view
+      )}</cyan>" does not exists...`
+    );
+  }
 
   return new Promise((resolve, reject) => {
     // preparing the php execution
@@ -67,7 +59,7 @@ module.exports = (view, data = {}, settings = {}) => {
       __dirname + '/../../bin/php',
       (error, php, outprint) => {
         if (error) {
-          throw new Error(error);
+          throw new __SError(error);
         }
         // execute the php engine and get back the result
         php.compile(

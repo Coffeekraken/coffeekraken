@@ -1,0 +1,18 @@
+
+
+/**
+* @name 		s-show-inline
+* @namespace             scss.core.class.helper
+* @class-namespace         sugar.helper.display.show-inline
+* @type        class
+*
+* Display the element as ```inline-block```
+*
+* @example 	html
+* <div class="s-show-inline">
+* 	I'm inline displayed
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/

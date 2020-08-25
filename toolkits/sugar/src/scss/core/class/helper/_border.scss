@@ -46,7 +46,7 @@
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      .#{$cls} {
+      #{$cls} {
         border-width: $value;
       }
     }
@@ -70,7 +70,7 @@
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      .#{$cls} {
+      #{$cls} {
         border-top-width: $value;
       }
     }
@@ -94,7 +94,7 @@
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      .#{$cls} {
+      #{$cls} {
         border-right-width: $value;
       }
     }
@@ -117,7 +117,7 @@
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      .#{$cls} {
+      #{$cls} {
         border-left-width: $value;
       }
     }
@@ -141,7 +141,7 @@
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      .#{$cls} {
+      #{$cls} {
         border-bottom-width: $value;
       }
     }
@@ -165,7 +165,7 @@
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      .#{$cls} {
+      #{$cls} {
         border-left-width: $value;
         border-right-width: $value;
       }
@@ -190,7 +190,7 @@
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      .#{$cls} {
+      #{$cls} {
         border-top-width: $value;
         border-bottom-width: $value;
       }
@@ -220,7 +220,7 @@
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      .#{$cls} {
+      #{$cls} {
         border-radius: $value;
       }
     }
@@ -244,7 +244,7 @@
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      .#{$cls} {
+      #{$cls} {
         border-top-left-radius: $value;
         border-top-right-radius: $value;
       }
@@ -269,7 +269,7 @@
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      .#{$cls} {
+      #{$cls} {
         border-top-right-radius: $value;
         border-bottom-right-radius: $value;
       }
@@ -293,7 +293,7 @@
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      .#{$cls} {
+      #{$cls} {
         border-top-left-radius: $value;
         border-bottom-left-radius: $value;
       }
@@ -318,7 +318,7 @@
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      .#{$cls} {
+      #{$cls} {
         border-bottom-left-radius: $value;
         border-bottom-right-radius: $value;
       }
@@ -343,7 +343,7 @@
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      .#{$cls} {
+      #{$cls} {
         border-top-left-radius: $value;
       }
     }
@@ -367,7 +367,7 @@
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      .#{$cls} {
+      #{$cls} {
         border-top-right-radius: $value;
       }
     }
@@ -391,7 +391,7 @@
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      .#{$cls} {
+      #{$cls} {
         border-bottom-left-radius: $value;
       }
     }
@@ -415,7 +415,7 @@
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      .#{$cls} {
+      #{$cls} {
         border-bottom-right-radius: $value;
       }
     }
@@ -441,7 +441,7 @@
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .#{$cls} {
+    #{$cls} {
       border-radius: 50%;
     }
   }
@@ -465,7 +465,7 @@
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .#{$cls} {
+    #{$cls} {
       border-radius: 50rem;
     }
   }
@@ -489,7 +489,7 @@
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .#{$cls} {
+    #{$cls} {
       border-radius: 0;
     }
   }
@@ -513,7 +513,7 @@
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .#{$cls} {
+    #{$cls} {
       border-top-left-radius: 0;
       border-top-right-radius: 0;
     }
@@ -538,7 +538,7 @@
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .#{$cls} {
+    #{$cls} {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
     }
@@ -563,7 +563,7 @@
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .#{$cls} {
+    #{$cls} {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
     }
@@ -588,7 +588,7 @@
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .#{$cls} {
+    #{$cls} {
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
     }
@@ -613,7 +613,7 @@
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .#{$cls} {
+    #{$cls} {
       border-top-left-radius: 0;
     }
   }
@@ -637,7 +637,7 @@
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .#{$cls} {
+    #{$cls} {
       border-top-right-radius: 0;
     }
   }
@@ -661,7 +661,7 @@
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .#{$cls} {
+    #{$cls} {
       border-bottom-left-radius: 0;
     }
   }
@@ -685,7 +685,7 @@
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .#{$cls} {
+    #{$cls} {
       border-bottom-right-radius: 0;
     }
   }
@@ -712,7 +712,7 @@
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      .#{$cls} {
+      #{$cls} {
         border-color: color($color);
       }
     }
@@ -736,7 +736,7 @@
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      .#{$cls} {
+      #{$cls} {
         border-top-color: color($color);
       }
     }
@@ -760,7 +760,7 @@
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      .#{$cls} {
+      #{$cls} {
         border-right-color: color($color);
       }
     }
@@ -783,7 +783,7 @@
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      .#{$cls} {
+      #{$cls} {
         border-left-color: color($color);
       }
     }
@@ -807,7 +807,7 @@
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      .#{$cls} {
+      #{$cls} {
         border-bottom-color: color($color);
       }
     }
@@ -831,7 +831,7 @@
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      .#{$cls} {
+      #{$cls} {
         border-left-color: color($color);
         border-right-color: color($color);
       }
@@ -856,7 +856,7 @@
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      .#{$cls} {
+      #{$cls} {
         border-top-color: color($color);
         border-bottom-color: color($color);
       }
@@ -883,7 +883,7 @@
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .#{$cls} {
+    #{$cls} {
       border: none;
     }
   }
@@ -907,7 +907,7 @@
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .#{$cls} {
+    #{$cls} {
       border-top: none;
     }
   }
@@ -931,7 +931,7 @@
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .#{$cls} {
+    #{$cls} {
       border-right: none;
     }
   }
@@ -955,7 +955,7 @@
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .#{$cls} {
+    #{$cls} {
       border-left: none;
     }
   }
@@ -979,7 +979,7 @@
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .#{$cls} {
+    #{$cls} {
       border-bottom: none;
     }
   }
@@ -1002,7 +1002,7 @@
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .#{$cls} {
+    #{$cls} {
       border-left: none;
       border-right: none;
     }
@@ -1027,7 +1027,7 @@
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .#{$cls} {
+    #{$cls} {
       border-top: none;
       border-bottom: none;
     }

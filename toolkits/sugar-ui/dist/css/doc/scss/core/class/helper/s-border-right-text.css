@@ -1,0 +1,18 @@
+
+
+/**
+* @name 		s-border-right-text
+* @namespace           scss.core.class.helper
+* @class-namespace     sugar.helper.border.text.right
+* @type        class
+*
+* Apply the **<text>text</text>** border right color
+*
+* @example 	html
+* <div class="s-border s-border-right-text s-ratio-1-1">
+* 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
+* </div>
+*
+* @since       2.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/

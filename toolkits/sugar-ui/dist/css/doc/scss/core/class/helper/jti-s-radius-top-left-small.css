@@ -1,0 +1,18 @@
+
+
+/**
+* @name 		.jti-s-radius-top-left-small
+* @namespace           scss.core.class.helper
+* @class-namespace     sugar.helper.border.radius.small.top.left
+* @type        class
+*
+* Apply the **small** border top left radius
+*
+* @example 	html
+* <div class="s-border .jti-s-radius-top-left-small s-ratio-1-1">
+* 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
+* </div>
+*
+* @since       2.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/

@@ -82,7 +82,7 @@ module.exports = {
      * @name            pattern
      * @namespace       config.core.namespace
      * @type            String
-     * @default         {package.name}.{path}
+     * @default         {path}
      *
      * Specify a generation pattern to generate the namespace. Here's the available tokens:
      * - {package.name}: The package name specified in the package.json
@@ -92,7 +92,7 @@ module.exports = {
      * @since       2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    pattern: '{package.name}.{path}',
+    pattern: '{path}',
 
     /**
      * @name            context

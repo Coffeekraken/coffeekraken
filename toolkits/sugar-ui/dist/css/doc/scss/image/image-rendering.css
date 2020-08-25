@@ -1,0 +1,19 @@
+
+
+/**
+ * @name      image-rendering
+ * @namespace           scss.image
+ * @type      mixin
+ *
+ * Set how to render the image
+ *
+ * @param 		{String} 		[$mode=auto] 		The mode to use to render the image
+ *
+ * @example 	scss
+ * img {
+ * 	\@include Sugar.image-rendering(crips-edges);
+ * }
+ *
+ * @since       1.0.0
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */

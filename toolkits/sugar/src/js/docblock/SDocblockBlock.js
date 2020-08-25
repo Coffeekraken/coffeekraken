@@ -14,6 +14,7 @@ import __snippetTag from './tags/snippet';
 import __markdownTemplate from './markdown/templates';
 import __markdownBlocks from './markdown/blocks';
 
+import __markdownToHtml from '../convert/html/htmlFromMarkdown';
 import __SDocblock from './SDocblock';
 
 /**
@@ -283,6 +284,19 @@ export default class SDocblockBlock {
    */
   toMarkdown() {
     return this.to('markdown');
+  }
+
+  /**
+   * @name          toHtml
+   * @type          Function
+   *
+   * This method can be used to convert the docblock object to an HTML string
+   *
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  toHtml(settings = {}) {
+    const markdown = this.toMarkdown();
+    return __markdownToHtml(markdown, settings);
   }
 
   /**

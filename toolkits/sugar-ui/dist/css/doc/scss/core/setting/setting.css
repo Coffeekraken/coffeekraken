@@ -1,0 +1,21 @@
+
+
+/**
+ * @name      setting
+ * @namespace           scss.core.setting
+ * @type    function
+ *
+ * Get a settings from the global settings stack
+ *
+ * @param 				{String} 			$path 						The setting path wanted separated by dots
+ * @param 				{String} 			[$context=s-context()] 		The context name to get the setting
+ * @param 				{Mixed} 			[$default=null] 			The value to return if no value is found
+ * @return 				{Mixed} 										The setting value¨
+ *
+ * @example
+ * $font-size : Sugar.setting('typography.font-size');
+ * // etc...
+ *
+ * @since       1.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */

@@ -2,6 +2,7 @@ import __deepMerge from '../object/deepMerge';
 import __SDocblockBlock from './SDocblockBlock';
 import __handlebars from 'handlebars';
 import __markdown from './markdown/index';
+import __markdownToHtml from '../convert/html/htmlFromMarkdown';
 
 /**
  * @name                  Dockblock
@@ -205,10 +206,25 @@ export default class SDocblock {
    *
    * This method convert the parsed docblocks to a markdown string
    *
+   * @since       2.0.0
    * @author 	Olivier Bossel <olivier.bossel@gmail.com>
    */
   toMarkdown() {
     return this.to('markdown');
+  }
+
+  /**
+   * @name          toHtml
+   * @type          Function
+   *
+   * This method convert the parsed docblocks to an HTML string
+   *
+   * @since       2.0.0
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com>
+   */
+  toHtml(settings = {}) {
+    const markdown = this.toMarkdown();
+    return __markdownToHtml(markdown, settings);
   }
 
   /**
@@ -220,6 +236,7 @@ export default class SDocblock {
    * @param       {String}          format          The format in which you want to convert your docblocks.
    * @return      {String}                          The converted docblocks
    *
+   * @since       2.0.0
    * @author 	Olivier Bossel <olivier.bossel@gmail.com>
    */
   to(format) {

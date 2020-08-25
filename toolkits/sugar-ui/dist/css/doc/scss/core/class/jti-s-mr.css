@@ -1,0 +1,17 @@
+
+
+/**
+  * @name       	.jti-s-mr
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.margin.right.default
+  * @type        class
+  *
+  * Set the **right* margin to the **1** size
+  *
+  * @example 	html
+  * <div class=".jti-s-mr" style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+  * <div style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */

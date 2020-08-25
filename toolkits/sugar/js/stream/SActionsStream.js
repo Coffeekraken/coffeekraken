@@ -329,7 +329,7 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
 
 
           try {
-            var currentActionReturn = this._currentStream.currentActionObj.instance.run(currentStreamObj, this._currentStream.currentActionObj.settings);
+            var currentActionReturn = this._currentStream.currentActionObj.instance.run(currentStreamObj, _objectSpread(_objectSpread({}, this._currentStream.currentActionObj.instance.settings), this._currentStream.currentActionObj.settings));
 
             if (currentActionReturn instanceof Promise) {
               _SPromise2.default.pipe(currentActionReturn, this._currentStream.promise);
@@ -642,6 +642,7 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
       }
 
       settings = (0, _deepMerge.default)(Object.assign({}, this._settings), settings);
+      streamObj = Object.assign({}, streamObj);
       this._currentStream = {
         promise: null,
         streamObj,

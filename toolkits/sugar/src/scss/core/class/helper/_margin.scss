@@ -22,7 +22,7 @@
           * @since       1.0.0
           * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
           */
-        .#{$cname} {
+        #{$cname} {
           margin: space($name);
         }
       }
@@ -44,7 +44,7 @@
           * @since       1.0.0
           * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
           */
-        .#{$cname} {
+        #{$cname} {
           margin-bottom: space($name);
         }
       }
@@ -66,7 +66,7 @@
           * @since       1.0.0
           * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
           */
-        .#{$cname} {
+        #{$cname} {
           margin-top: space($name);
         }
       }
@@ -88,7 +88,7 @@
           * @since       1.0.0
           * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
           */
-        .#{$cname} {
+        #{$cname} {
           margin-left: space($name);
         }
       }
@@ -110,7 +110,7 @@
           * @since       1.0.0
           * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
           */
-        .#{$cname} {
+        #{$cname} {
           margin-right: space($name);
         }
       }
@@ -132,7 +132,7 @@
           * @since       1.0.0
           * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
           */
-        .#{$cname} {
+        #{$cname} {
           margin-left: space($name);
           margin-right: space($name);
         }
@@ -156,7 +156,7 @@
           * @since       1.0.0
           * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
           */
-        .#{$cname} {
+        #{$cname} {
           margin-top: space($name);
           margin-bottom: space($name);
         }

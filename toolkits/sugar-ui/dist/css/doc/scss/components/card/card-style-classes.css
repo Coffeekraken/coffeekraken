@@ -1,0 +1,15 @@
+
+
+/**
+ * @name              card-style-classes
+ * @namespace         scss.components.card
+ * @type              Mixin
+ *
+ * This mixin generate all the style classes depending on the parameters you set.
+ *
+ * @param       {Number}       [$border-radius: settings('look-and-feel.border-radius')]       The border radius you want
+ * @param       {String}      [$name='s-card']                         The name to use for the generation of the classes
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */

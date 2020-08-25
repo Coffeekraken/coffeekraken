@@ -1,0 +1,17 @@
+
+
+/**
+ * @name      vertical-rhythm-class
+ * @namespace           scss.core.typography
+ * @type    function
+ *
+ * Return the vertical-rhythm setting scope class
+ *
+ * @return 		{String} 		The vertical-rhythm scope class from settings.vertical-rhythm.scope-class
+ *
+ * @example     scss
+ * Sugar.vertical-rhythm-class(); // vr
+ *
+ * @since       1.0.0
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */

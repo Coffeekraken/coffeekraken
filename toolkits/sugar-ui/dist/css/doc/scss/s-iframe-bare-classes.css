@@ -1,0 +1,14 @@
+
+
+/**
+ * @name                  s-iframe-bare-classes
+ * @namespace             scss
+ * @type                  Mixin
+ *
+ * This mixin generate all the bare classes for the ```s-iframe``` component.
+ *
+ * @param       {String}        [$name='s-iframe-bare']       The name used to generate the classnames
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */

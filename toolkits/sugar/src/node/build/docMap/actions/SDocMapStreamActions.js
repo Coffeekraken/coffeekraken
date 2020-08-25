@@ -1,10 +1,12 @@
 const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
 const __SDocMapItem = require('../../../doc/SDocMapItem');
 const __deepMerge = require('../../../object/deepMerge');
+const __getFilename = require('../../../fs/filename');
+const __extension = require('../../../fs/extension');
 
 /**
  * @name                SDocMapStreamActions
- * @namespace           node.build.doc.actions
+ * @namespace           node.build.docMap.actions
  * @type                Class
  * @extends             SActionsStreamAction
  *
@@ -70,7 +72,7 @@ module.exports = class SDocMapStreamActions extends __SActionsStreamAction {
   run(streamObj, settings) {
     return super.run(streamObj, async (resolve, reject) => {
       // create the items array
-      const itemsArray = [];
+      const itemsObj = {};
 
       // loop on files
       streamObj.files.forEach((filePath) => {
@@ -78,10 +80,14 @@ module.exports = class SDocMapStreamActions extends __SActionsStreamAction {
         const item = new __SDocMapItem(filePath, {
           output: streamObj.output
         });
-        itemsArray.push(item.toJson());
+        if (item.namespace && item.name) {
+          itemsObj[`${item.namespace}.${item.name}`] = item.toJson();
+        } else if (item.name) {
+          itemsObj[item.name] = item.toJson();
+        }
       });
 
-      streamObj.data = JSON.stringify(itemsArray, null, 4);
+      streamObj.data = itemsObj;
 
       resolve(streamObj);
     });

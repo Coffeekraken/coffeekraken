@@ -1,0 +1,18 @@
+
+
+/**
+* @name 		s-abs-fit
+* @namespace         scss.core.class.helper
+* @class-namespace     sugar.helper.size.abs.fit
+* @type        class
+*
+* Set a size that will fit the entire parent surface by positionning it in absolute
+*
+* @example 	html
+* <div class="ratio-16-9">
+* 	<img src="https://source.unsplash.com/random" class="s-abs-fit" />
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/

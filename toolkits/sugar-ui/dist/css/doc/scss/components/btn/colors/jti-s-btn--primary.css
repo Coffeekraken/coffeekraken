@@ -1,0 +1,15 @@
+
+
+/**
+ * @name              .jti-s-btn--primary
+ * @namespace         scss.components.btn.colors
+ * @type              Classname
+ *
+ * This class can be applied on any ```s-btn``` component to specify his color to ```primary```
+ *
+ * @example         html
+ * <a class="s-btn .jti-s-btn--primary">I'm a cool "primary" button</a>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */

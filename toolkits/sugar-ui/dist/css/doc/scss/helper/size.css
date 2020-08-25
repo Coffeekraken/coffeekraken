@@ -1,0 +1,21 @@
+
+
+/**
+ * @name    size
+ * @namespace           scss.helper
+ * @type      mixin
+ *
+ * Quicky and easily set simple or complexe size to any element
+ *
+ * @param 		{String|Number} 		$size-width				The size like "cover" or "contain", or the width in number
+ * @param 		{Number} 				[$height=null] 			The height wanted
+ * @param 		{String} 				[$position=absolute] 	The position wanted if the size is "cover" or "contain"
+ *
+ * @example 	scss
+ * .my-cool-image {
+ * 	\@include Sugar.size(cover);
+ * }
+ *
+ * @since       1.0.0
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */

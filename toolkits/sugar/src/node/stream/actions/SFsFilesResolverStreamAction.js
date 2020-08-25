@@ -56,7 +56,8 @@ module.exports = class SFindInFileStreamAction extends __SActionsStreamAction {
         {
           name: 'File resolver',
           id: 'actionStream.action.fs.filesResolver',
-          ignoreFolders: []
+          ignoreFolders: [],
+          out: 'array'
         },
         settings
       )
@@ -112,10 +113,12 @@ module.exports = class SFindInFileStreamAction extends __SActionsStreamAction {
                 const content = __fs.readFileSync(filePath, 'utf8');
                 const matches = content.match(reg);
                 if (matches) {
-                  filesPathes.push(filePath);
+                  if (filesPathes.indexOf(filePath) === -1)
+                    filesPathes.push(filePath);
                 }
               } else {
-                filesPathes.push(filePath);
+                if (filesPathes.indexOf(filePath) === -1)
+                  filesPathes.push(filePath);
               }
             });
           } else if (!__isSymlink(p)) {
@@ -123,10 +126,10 @@ module.exports = class SFindInFileStreamAction extends __SActionsStreamAction {
               const content = __fs.readFileSync(p, 'utf8');
               const matches = content.match(reg);
               if (matches) {
-                filesPathes.push(p);
+                if (filesPathes.indexOf(p) === -1) filesPathes.push(p);
               }
             } else {
-              filesPathes.push(p);
+              if (filesPathes.indexOf(p) === -1) filesPathes.push(p);
             }
           }
         });
@@ -141,8 +144,8 @@ module.exports = class SFindInFileStreamAction extends __SActionsStreamAction {
         );
       }
 
-      if (settings.out === 'files') {
-        streamObj[settings.property || 'files'] = filesPathes;
+      if (settings.out !== 'array') {
+        streamObj[settings.out || 'files'] = filesPathes;
         resolve(streamObj);
       } else {
         filesPathes.forEach((path) => {

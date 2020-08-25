@@ -1,0 +1,29 @@
+
+
+/**
+  * @name            btn-classes
+  * @namespace       scss.components
+  * @type            Mixin
+  *
+  * This mixin generate all the css needed to display properly some buttons.
+  *
+  * @feature
+  * - Support all the registered sugar colors like ```primary```, ```secondary```, etc...
+  * - Support for sizes like ```smaller```, ```small```, ```medium```, etc...
+  * - Support disable state
+  *
+  * @param       {List}      [$colors:map-keys(setting('colors'))]       The colors you want to generate
+  * @param       {List}      [$sizes:map-keys(setting('sizes'))]       The sizes you want to generate
+  * @param       {Number}      [$base-padding: setting('look-and-feel.padding')]                 The base padding value used to interpolate the sizes
+  * @param       {Number}       [$border-radius: settings('look-and-feel.border-radius')]       The border radius you want
+  * @param       {String}        [$name='s-btn']       The className to use for the generation
+  *
+  * @example         html
+  * <a class="s-btn">I'm a cool button</a>
+  *
+  * @example           scss
+  * @include Sugar.btn-classes();
+  *
+  * @since       2.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */

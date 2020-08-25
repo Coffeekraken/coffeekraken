@@ -2,6 +2,7 @@ const __SCli = require('../../cli/SCli');
 const __sugarConfig = require('../../config/sugar');
 const __packageRoot = require('../../path/packageRoot');
 const __deepMerge = require('../../object/deepMerge');
+const __SBuildDocMapInterface = require('./interface/SBuildDocMapInterface');
 
 /**
  * @name            SBuildDocMapCli
@@ -35,24 +36,7 @@ module.exports = class SBuildDocMapCli extends __SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static definitionObj = {
-    input: {
-      type: 'String|Array<String>',
-      alias: 'i',
-      description: 'Input files glob pattern',
-      default: __sugarConfig('build.docMap.input') || 'src/**/*',
-      level: 1
-    },
-    output: {
-      type: 'String',
-      alias: 'o',
-      description: 'Output file path',
-      default:
-        __sugarConfig('build.docMap.output') ||
-        `${__packageRoot()}/docMap.json`,
-      level: 1
-    }
-  };
+  static definitionObj = __SBuildDocMapInterface.definitionObj;
 
   /**
    * @name          constructor
@@ -68,7 +52,10 @@ module.exports = class SBuildDocMapCli extends __SCli {
       __deepMerge(
         {
           id: 'build.docMap',
-          name: 'Build docMap.json'
+          name: 'Build docMap.json',
+          childProcess: {
+            pipe: ['log', 'state']
+          }
         },
         settings
       )

@@ -1,0 +1,17 @@
+
+
+/**
+  * @name       	.jti-s-ml-smaller
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.margin.left.smaller
+  * @type        class
+  *
+  * Set the **left** margin to the **0.3** size
+  *
+  * @example 	html
+  * <div style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+  * <div class=".jti-s-ml-smaller" style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */

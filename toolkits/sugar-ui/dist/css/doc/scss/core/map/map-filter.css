@@ -1,0 +1,32 @@
+
+
+/**
+ * @name      map-filter
+ * @namespace           scss.core.map
+ * @type      function
+ *
+ * Filter a map by key, value and the passed processor function
+ *
+ * @param           {Map}         $map          The map to process
+ * @param           {String}      $processor    The processor function name you want to invoke on each values
+ * @return          {Map}                       The filtered map
+ *
+ * @example     scss
+ * @function my-cool-function($key, value) {
+ *    @return true;
+ * }
+ * Sugar.map-filter((
+ *  'hello.world': 'Hello',
+ *  'coco.world': 'Coco',
+ *  'hello.that': 'That is cool'
+ * ), 'my-cool-function');
+ * // return that map:
+ * (
+ *  'hello.world': 'Hello',
+ *  'coco.world': 'Coco',
+ *  'hello.that': 'That is cool'
+ * )
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */

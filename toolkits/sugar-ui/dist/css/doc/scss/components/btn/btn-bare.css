@@ -1,0 +1,15 @@
+
+
+/**
+ * @name              btn-bare
+ * @namespace         scss.components.btn
+ * @type              Mixin
+ *
+ * This mixin generate all the bare properties for a button depending on the parameters you set.
+ *
+ * @param       {List}      [$size=default]                 The size you want to for your button
+ * @param       {Number}      [$base-padding: 1rem]                 The base padding value used to interpolate the sizes
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */

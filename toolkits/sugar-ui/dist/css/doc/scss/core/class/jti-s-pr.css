@@ -1,0 +1,18 @@
+
+
+/**
+  * @name       	.jti-s-pr
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.padding.right.default
+  * @type        class
+  *
+  * Set the **right** padding  to the **1** size
+  *
+  * @example 	html
+  * <div class=".jti-s-pr" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+  * 	<div style="background:#2b3438; width:100%; height:100%"></div>
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */

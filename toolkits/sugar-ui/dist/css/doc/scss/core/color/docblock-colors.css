@@ -1,0 +1,14 @@
+
+
+/**
+ * @name      docblock-colors
+ * @namespace           scss.core.color
+ * @type      mixin
+ *
+ * Print the styleguide docblocks for the registered sugar colors
+ *
+ * @example     scss
+ * @include Sugar.docblock-colors();
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */

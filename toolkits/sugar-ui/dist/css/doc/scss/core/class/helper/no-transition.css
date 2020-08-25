@@ -1,0 +1,19 @@
+
+
+/**
+* @name 		no-transition
+* @namespace         scss.core.class.helper
+* @class-namespace       sugar.helper.transition.no
+* @type        class
+*
+* Disable the transitions **only on the element**
+*
+* @example 	html
+* <div class="no-transition">
+* 	I have no more transitions
+* 	<div>But I have</div>
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/

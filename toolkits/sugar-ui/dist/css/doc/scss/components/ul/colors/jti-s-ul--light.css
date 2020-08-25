@@ -1,0 +1,23 @@
+
+
+/**
+ * @name              .jti-s-ul--light
+ * @namespace         scss.components.ul.colors
+ * @type              Classname
+ *
+ * This class can be applied on any ```s-ul``` component to specify his color to ```light```
+ *
+ * @example         html
+ * <ol class="s-ul .jti-s-ul--light">
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ * </ol>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */

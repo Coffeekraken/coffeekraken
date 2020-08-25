@@ -5,66 +5,6 @@ const __packageRoot = require('../src/node/path/packageRoot');
 module.exports = {
   assets: '@config.assets',
 
-  // menu: {
-  //   /**
-  //    * @name            doc
-  //    * @namespace       config.frontend.menu
-  //    * @type            Object
-  //    *
-  //    * List all the documentations views
-  //    *
-  //    * @since         2.0.0
-  //    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-  //    */
-  //   doc: {
-  //     /**
-  //      * @name            generator
-  //      * @namespace       config.frontend.menu.doc
-  //      * @type            Function
-  //      * @async
-  //      *
-  //      * Specify the generator function to use to generate the documentation menu tree. Has to return an SNav instance
-  //      *
-  //      * @since         2.0.0
-  //      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-  //      */
-  //     generator: {
-  //       // fn: __docNav,
-  //       fn: () => {},
-  //       directory: '@config.doc.rootDir'
-  //     }
-  //   },
-
-  //   /**
-  //    * @name            views
-  //    * @namespace       config.frontend.menu
-  //    * @type            Object
-  //    *
-  //    * List all the developed views
-  //    *
-  //    * @since         2.0.0
-  //    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-  //    */
-  //   views: {
-  //     /**
-  //      * @name            generator
-  //      * @namespace       config.frontend.menu.views
-  //      * @type            Function
-  //      * @async
-  //      *
-  //      * Specify the generator function to use to generate the views menu tree. Has to return an SNav instance
-  //      *
-  //      * @since         2.0.0
-  //      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-  //      */
-  //     generator: {
-  //       // fn: __namespaceSNav,
-  //       fn: () => {},
-  //       directory: '@config.views.rootDir'
-  //     }
-  //   }
-  // },
-
   handlers: {
     /**
      * @name            views
@@ -115,6 +55,58 @@ module.exports = {
        * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
       handler: `${__dirname}/../src/node/server/frontend/handlers/views`
+    },
+
+    /**
+     * @name            dist
+     * @namespace       config.frontend.handlers
+     * @type            Object
+     *
+     * Store all the "dist" configuration access like the slug, the title, etc...
+     *
+     * @since         2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    dist: {
+      /**
+       * @name          slug
+       * @namespace     config.frontend.handlers.dist
+       * @type          String
+       * @default       /dist
+       *
+       * Specify the url slug to use for this "section"
+       *
+       * @since         2.0.0
+       * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      slug: '/dist',
+
+      /**
+       * @name            handler
+       * @namespace       config.frontend.handlers.dist
+       * @type            Function
+       *
+       * Specify the handler function that will take care of responding to this "section"
+       *
+       * @since         2.0.0
+       * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      handler: `${__dirname}/../src/node/server/frontend/handlers/dist`,
+
+      /**
+       * @name            directories
+       * @namespace       config.frontend.handlers.dist
+       * @type            String|Array<String>
+       *
+       * Specify some directory from where the dist will be served
+       *
+       * @since         2.0.0
+       * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      directories: [
+        `${__packageRoot()}/dist`,
+        `${__packageRoot()}/node_modules`
+      ]
     },
 
     /**

@@ -1,0 +1,15 @@
+
+
+/**
+ * @name              .jti-s-btn--medium
+ * @namespace         scss.components.btn.sizes
+ * @type              Classname
+ *
+ * This class can be applied on any ```s-btn``` component to specify his size to ```medium```
+ *
+ * @example         html
+ * <a class="s-btn .jti-s-btn--medium">I'm a cool "medium" button</a>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */

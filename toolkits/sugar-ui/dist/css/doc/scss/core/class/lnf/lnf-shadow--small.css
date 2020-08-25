@@ -1,0 +1,20 @@
+
+
+/**
+* @name 		lnf-shadow--small
+* @namespace           scss.core.class.lnf
+* @class-namespace     sugar.lnf.shadow.small
+* @type        class
+*
+* Apply the small shadow to the element
+*
+* @example 	html
+* <div class="ratio-16-9">
+*    <div class="lnf-shadow--small ratio-1-1" style="width:33%">
+* 	    I'm a shadowed block
+*    </div>
+* </div>
+*
+* @since       2.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/

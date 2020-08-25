@@ -1,0 +1,16 @@
+
+
+/**
+* @name       	s-no-m
+* @namespace       scss.core.class
+* @class-namespace           sugar.helper.margin.no
+* @type        class
+*
+* Reset all margins
+*
+* @example 	html
+* <div class="s-no-m" style="display:inline-block; background:#f2bc2b; width:50px; height:50px;"></div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+*/

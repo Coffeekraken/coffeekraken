@@ -1,0 +1,19 @@
+
+
+/**
+ * @name      show-vertical-rhythm
+ * @namespace           scss.core.typography
+ * @type      mixin
+ *
+ * Display the vertical rhythme
+ *
+ * @param 			{Color}      [$color=#0ff] 		The color wanted
+ *
+ * @example     scss
+ * body {
+ * 		@include Sugar.show-vertical-rhythm();
+ * }
+ *
+ * @since       1.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */

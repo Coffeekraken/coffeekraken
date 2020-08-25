@@ -69,7 +69,7 @@
      * @since       2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    .#{selector(#{$name}--#{$size})} {
+    #{selector(#{$name}--#{$size})} {
       @include btn-bare($size, $base-padding);
     }
   }
@@ -107,7 +107,7 @@
      * @since       2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    .#{selector(#{$name}--#{$color})} {
+    #{selector(#{$name}--#{$color})} {
       @include btn-style($color);
     }
   }

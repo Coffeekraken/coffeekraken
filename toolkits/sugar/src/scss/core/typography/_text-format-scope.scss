@@ -20,8 +20,8 @@
   $sc: setting("text-format-scope-class");
   @if $sc {
     @each $cls in $sc {
-      &.#{$cls},
-      .#{$cls} & {
+      &#{$cls},
+      #{$cls} & {
         @content;
       }
     }

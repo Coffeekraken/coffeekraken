@@ -1,0 +1,20 @@
+
+
+/**
+ * @name    str-replace
+ * @namespace           scss.core.string
+ * @type      function
+ *
+ * Replace the passed string with another one in a specific string
+ *
+ * @param         {String}        $string         The string in which to replace the searched one
+ * @param         {String}        $search         The string to replace
+ * @param         {String}        [$replace=""]   The string used as replacement
+ * @return        {String}                        The processed string
+ *
+ * @example     scss
+ * Sugar.str-replace('Hello world', 'world', 'coco'); // 'Hello coco'
+ *
+ * @since       1.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */

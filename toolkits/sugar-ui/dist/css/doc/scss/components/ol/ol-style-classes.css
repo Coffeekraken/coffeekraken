@@ -1,0 +1,15 @@
+
+
+/**
+ * @name              ol-style-classes
+ * @namespace         scss.components.ol
+ * @type              Mixin
+ *
+ * This mixin generate all the style classes depending on the parameters you set.
+ *
+ * @param       {List}      [$colors:map-keys(setting('colors'))]       The colors you want to generate
+ * @param       {String}      [$name='s-ol']                         The name to use for the generation of the classes
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */

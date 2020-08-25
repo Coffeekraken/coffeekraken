@@ -31,6 +31,8 @@ var _templates = _interopRequireDefault(require("./markdown/templates"));
 
 var _blocks = _interopRequireDefault(require("./markdown/blocks"));
 
+var _htmlFromMarkdown = _interopRequireDefault(require("../convert/html/htmlFromMarkdown"));
+
 var _SDocblock = _interopRequireDefault(require("./SDocblock"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -212,6 +214,25 @@ var SDocblockBlock = /*#__PURE__*/function () {
     key: "toMarkdown",
     value: function toMarkdown() {
       return this.to('markdown');
+    }
+    /**
+     * @name          toHtml
+     * @type          Function
+     *
+     * This method can be used to convert the docblock object to an HTML string
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "toHtml",
+    value: function toHtml(settings) {
+      if (settings === void 0) {
+        settings = {};
+      }
+
+      var markdown = this.toMarkdown();
+      return (0, _htmlFromMarkdown.default)(markdown, settings);
     }
     /**
      * @name          to

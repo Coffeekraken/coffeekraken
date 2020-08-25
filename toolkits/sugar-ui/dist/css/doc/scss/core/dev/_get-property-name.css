@@ -1,0 +1,14 @@
+
+
+/**
+ * @name      _get-property-name
+ * @namespace           scss.core.dev
+ * @type      function
+ *
+ * Return the property name
+ *
+ * @param       {String}        $property         The property name to get
+ * @param       {Map}           [$keywords=()]    The
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */

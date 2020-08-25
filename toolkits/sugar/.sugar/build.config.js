@@ -247,51 +247,6 @@ module.exports = {
     watch: `${__packageRoot()}/src/config/**/*.config.js`
   },
 
-  // doc: {
-  //   /**
-  //    * @name              input
-  //    * @namespace         config.build.doc
-  //    * @type              String
-  //    * @default           <appRoot>/src/**\/*
-  //    *
-  //    * Specify the root folder (or file) to check for documentation build from docblocks
-  //    *
-  //    * @since             2.0.0
-  //    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-  //    */
-  //   input: isInSugarPackage()
-  //     ? `${__packageRoot()}/src/**/*.*`
-  //     : `${__packageRoot()}/src/**/*.*`,
-
-  //   /**
-  //    * @name              outputDir
-  //    * @namespace         config.build.doc
-  //    * @type              String
-  //    * @default           <appRoot>/dist/doc
-  //    *
-  //    * Specify the destination folder where to put the compiled files in
-  //    *
-  //    * @since             2.0.0
-  //    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-  //    */
-  //   outputDir: isInSugarPackage()
-  //     ? `${__packageRoot()}/public/dist/doc`
-  //     : `${__packageRoot()}/dist/doc`,
-
-  //   /**
-  //    * @name              watch
-  //    * @namespace         config.build.doc
-  //    * @type              String
-  //    * @default           src/**\/*
-  //    *
-  //    * Set the watch files that you want to check
-  //    *
-  //    * @since             2.0.0
-  //    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-  //    */
-  //   watch: false
-  // },
-
   docMap: {
     /**
      * @name         input
@@ -304,7 +259,26 @@ module.exports = {
      * @since       2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    input: `${__packageRoot()}/src/**/*:@namespace`,
+    input: [
+      // `${__packageRoot()}/src/**/*:@namespace`,
+      `${__packageRoot()}/README.md`
+    ],
+
+    /**
+     * @name          externalDocMaps
+     * @namespace     config.build.docMap
+     * @type          String|Array<String>
+     * @default       ['node_modules/*\/docMap.json', 'node_modules\/*\/*\/this.docMap.json']
+     *
+     * Specify some glob patterns where to search for some docMap.json files to integrate into our docMap
+     *
+     * @since         2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    externalDocMaps: [
+      `${__packageRoot()}/node_modules/*/docMap.json`,
+      `${__packageRoot()}/node_modules/*/*/docMap.json`
+    ],
 
     /**
      * @name          output
@@ -317,64 +291,21 @@ module.exports = {
      * @since       2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    output: `${__packageRoot()}/docMap.json`
+    output: `${__packageRoot()}/docMap.json`,
+
+    /**
+     * @name              watch
+     * @namespace         config.build.docMap
+     * @type              String
+     * @default           src/config\/**\/*.config.js
+     *
+     * Set the watch files that you want to check
+     *
+     * @since             2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    watch: `${__packageRoot()}/src/**/*.{js,css}`
   },
-
-  // docNav: {
-  //   /**
-  //    * @name              input
-  //    * @namespace         config.build.docNav
-  //    * @type              String|Array<String>
-  //    * @default           <appRoot>/**\/*
-  //    *
-  //    * Specify the root folder (or file) to check for docNav.json generation from docblocks
-  //    *
-  //    * @since             2.0.0
-  //    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-  //    */
-  //   input: [`${__packageRoot()}/src/**:@namespace`, '**/README.md'],
-
-  //   /**
-  //    * @name              outputDir
-  //    * @namespace         config.build.docNav
-  //    * @type              String
-  //    * @default           <appRoot>
-  //    *
-  //    * Specify the destination folder where to put the compiled files in
-  //    *
-  //    * @since             2.0.0
-  //    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-  //    */
-  //   outputDir: isInSugarPackage() ? `${__packageRoot()}` : `${__packageRoot()}`,
-
-  //   /**
-  //    * @name              watch
-  //    * @namespace         config.build.docNav
-  //    * @type              String
-  //    * @default           <appRoot>**\/*
-  //    *
-  //    * Set the watch files that you want to check
-  //    *
-  //    * @since             2.0.0
-  //    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-  //    */
-  //   watch: isInSugarPackage()
-  //     ? `${__packageRoot()}/**/*.*`
-  //     : `${__packageRoot()}/**/*.*`,
-
-  //   /**
-  //    * @name             ignoreFolders
-  //    * @namespace         config.build.docNav
-  //    * @type            Array<String>
-  //    * @default         @config.core.ignoreFolders
-  //    *
-  //    * Set the folders to exclude from searches, processing, etc...
-  //    *
-  //    * @since         2.0.0
-  //    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-  //    */
-  //   ignoreFolders: '@config.core.ignoreFolders'
-  // },
 
   views: {
     /**

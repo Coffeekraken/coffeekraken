@@ -1,0 +1,15 @@
+
+
+/**
+ * @name      normalize
+ * @namespace           scss.helper
+ * @type      mixin
+ *
+ * Print out a normalize css
+ *
+ * @example     scss
+ * @include Sugar.normalize();
+ *
+ * @since       1.0.0
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */

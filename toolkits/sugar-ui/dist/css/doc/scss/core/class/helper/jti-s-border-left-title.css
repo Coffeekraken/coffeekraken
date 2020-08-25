@@ -1,0 +1,18 @@
+
+
+/**
+* @name 		.jti-s-border-left-title
+* @namespace           scss.core.class.helper
+* @class-namespace     sugar.helper.border.title.left
+* @type        class
+*
+* Apply the **<title>title</title>** border left color
+*
+* @example 	html
+* <div class="s-border .jti-s-border-left-title s-ratio-1-1">
+* 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
+* </div>
+*
+* @since       2.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/

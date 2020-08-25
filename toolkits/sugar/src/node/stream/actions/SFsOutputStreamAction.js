@@ -3,6 +3,7 @@ const __writeFile = require('../../fs/writeFile');
 const __toString = require('../../string/toString');
 const __packageRoot = require('../../path/packageRoot');
 const __deepMerge = require('../../object/deepMerge');
+const __get = require('../../object/get');
 
 /**
  * @name            SFsOutputStreamAction
@@ -73,6 +74,7 @@ module.exports = class SFsOutputStreamAction extends __SActionsStreamAction {
 
       // loop on the files to save
       const outputStackKeys = Object.keys(streamObj.outputStack);
+
       for (let i = 0; i < outputStackKeys.length; i++) {
         const key = outputStackKeys[i];
         const outputPath = streamObj.outputStack[key];
@@ -80,12 +82,13 @@ module.exports = class SFsOutputStreamAction extends __SActionsStreamAction {
           __packageRoot(process.cwd()),
           ''
         );
-        if (!streamObj[key]) continue;
-        trigger('log', {
-          group: settings.name,
-          value: `Saving the streamObj property "<yellow>${key}</yellow>" under "<cyan>${readableOutputPath}</cyan>"`
-        });
-        await __writeFile(outputPath, __toString(streamObj[key]));
+        if (!__get(streamObj, key)) continue;
+        await __writeFile(
+          outputPath,
+          __toString(__get(streamObj, key), {
+            beautify: true
+          })
+        );
       }
 
       resolve(streamObj);

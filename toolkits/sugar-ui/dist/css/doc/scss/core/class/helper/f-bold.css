@@ -1,0 +1,16 @@
+
+
+/**
+* @name 		f-bold
+* @namespace           scss.core.class.helper
+* @class-namespace     sugar.helper.font.weight.bold
+* @type        class
+*
+* Set the font-weight to ```bold```
+*
+* @example 	html
+* This <span class="f-bold">word</span> is bold
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/

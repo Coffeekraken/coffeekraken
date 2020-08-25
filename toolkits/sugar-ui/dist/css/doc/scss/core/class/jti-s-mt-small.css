@@ -1,0 +1,17 @@
+
+
+/**
+  * @name          .jti-s-mt-small
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.margin.top.small
+  * @type        class
+  *
+  * Set the **top** margin to the **0.6** size
+  *
+  * @example 	html
+  * <div style="background:#f2bc2b; width:100px; height:5px"></div>
+  * <div class=".jti-s-mt-small" style="background:#2b3438; width:100px; height:5px"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */

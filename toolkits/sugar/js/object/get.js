@@ -31,6 +31,7 @@ var _default = (obj, path) => {
 
   while (a.length) {
     var n = a.shift();
+    if (typeof o !== 'object') return;
     if (!(n in o)) return;
     o = o[n];
   }

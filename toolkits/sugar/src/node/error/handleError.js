@@ -3,6 +3,7 @@ const __packageRoot = require('../path/packageRoot');
 const __SError = require('../error/SError');
 const __parseHtml = require('../terminal/parseHtml');
 const __keypress = require('keypress');
+const __hotkey = require('../keyboard/hotkey');
 const __toString = require('../string/toString');
 const __parse = require('../string/parse');
 const __blessed = require('blessed');
@@ -82,6 +83,14 @@ function createErrorPanel(error) {
 
   $bg.append($box);
   global.screen.append($bg);
+
+  $bg.focus();
+
+  __hotkey('escape', {
+    once: true
+  }).on('press', () => {
+    $bg.destroy();
+  });
 }
 
 function __handleChildProcessErrors(error) {

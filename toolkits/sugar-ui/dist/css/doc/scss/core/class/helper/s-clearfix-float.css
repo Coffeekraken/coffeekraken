@@ -1,0 +1,21 @@
+
+
+/**
+* @name 		s-clearfix-float
+* @namespace           scss.core.class.helper
+* @class-namespace     sugar.helper.clearfix.float
+* @type        class
+*
+* Apply the float clearfix on the element
+*
+* @example 	html
+* <div class="s-clearfix-float s-bg-primary">
+* 	<div class="s-pull-right">right pulled</div>
+* </div>
+* <div class="s-bg-primary">
+* 	<div class="s-pull-right">right pulled without clearfix</div>
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/

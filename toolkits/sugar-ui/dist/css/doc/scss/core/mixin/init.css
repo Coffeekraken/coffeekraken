@@ -1,0 +1,16 @@
+
+
+/**
+ * @name    init
+ * @namespace           scss.core.mixin
+ * @type      mixin
+ *
+ * Init the sugar toolkit.
+ * This has to be called **AFTER** all the [./_s-setup.scss] mixin call
+ * and **BEFORE** all the others sugar mixins and functions calls
+ *
+ * @example     scss
+ * \@include Sugar.init();
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */

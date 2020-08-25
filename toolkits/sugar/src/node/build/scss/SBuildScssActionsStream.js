@@ -14,6 +14,7 @@ const __path = require('path');
 const __sugarConfig = require('../../config/sugar');
 const __SSugarJsonStreamAction = require('../actions/SSugarJsonStreamAction');
 const __SBuildScssCliInterface = require('./interface/SBuildScssCliInterface');
+const __SExtractDocblocksIntoFiles = require('../../stream/actions/SExtractDocblocksIntoFilesStreamAction');
 
 /**
  * @name            SBuildScssActionsStream
@@ -63,6 +64,7 @@ module.exports = class SBuildScssActionsStream extends __SActionsStream {
         imports: __SImportsStreamAction,
         jsConfig: __SJsObjectToScssStreamAction,
         render: __SRenderSassStreamAction,
+        extractDocblocks: __SExtractDocblocksIntoFiles,
         extract: __SExtractStreamAction,
         postCss: __SPostCssStreamAction,
         fsOutput: __SFsOutputStreamAction
@@ -82,6 +84,9 @@ module.exports = class SBuildScssActionsStream extends __SActionsStream {
             }
           },
           beforeActions: {
+            extractDocblocks: (streamObj) => {
+              return this._ensureOutputStack(streamObj);
+            },
             fsCache: (streamObj) => {
               return this._ensureOutputStack(streamObj);
             },

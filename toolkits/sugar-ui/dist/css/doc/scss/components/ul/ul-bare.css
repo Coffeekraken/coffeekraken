@@ -1,0 +1,14 @@
+
+
+/**
+ * @name              ul-bare
+ * @namespace         scss.components.ul
+ * @type              Mixin
+ *
+ * This mixin generate all the bare properties for a list depending on the parameters you set.
+ *
+ * @param       {List}      [$size=default]                 The size you want to for your list
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */

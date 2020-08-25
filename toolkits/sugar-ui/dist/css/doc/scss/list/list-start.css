@@ -1,0 +1,19 @@
+
+
+/**
+ * @name    list-start
+ * @namespace           scss.list
+ * @type      mixin
+ *
+ * Start a new list
+ *
+ * @param 		{String} 		[$counter-reset=s-list] 		A counter name to reset
+ *
+ * @example     scss
+ * .my-cool-list {
+ *    Sugar.list-start();
+ * }
+ *
+ * @since       1.0.0
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */

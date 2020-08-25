@@ -1,0 +1,19 @@
+
+
+/**
+ * @name    strip-units
+ * @namespace           scss.unit
+ * @type      function
+ *
+ * Return a number without any units
+ *
+ * @param 			{Number} 		$number 		The number to process
+ * @return 			{Number} 						The number without units
+ *
+ * @example       scss
+ * Sugar.strip-units(12px); // => 12
+ * Sugar.strip-units(30rem); // => 30
+ *
+ * @since      1.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */

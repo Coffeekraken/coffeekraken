@@ -1,0 +1,12 @@
+
+
+/**
+ * @name              card-bare
+ * @namespace         scss.components.card
+ * @type              Mixin
+ *
+ * This mixin generate all the bare properties for a button depending on the parameters you set.
+ *   *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */

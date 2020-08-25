@@ -1,0 +1,28 @@
+
+
+/**
+ * @name            map-flatten
+ * @namespace       scss.core.map
+ * @type            Function
+ *
+ * This function take a map (that can be a deep one) and returns you a new map with all the
+ * properties flatten using the passed "separator"
+ *
+ * @param       {Map}       $map          The map to flatten
+ * @param       {String}    [$separator="-"]      The separator to use in final map keys
+ * @return      {Map}                 The flattened map
+ *
+ * @example       scss
+ * $map: (
+ *    something: (
+ *       cool: 'Hello world'
+ *    )
+ * )
+ * map-flatten($map);
+ * (
+ *    something-cool: 'Hello world'
+ * )
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */

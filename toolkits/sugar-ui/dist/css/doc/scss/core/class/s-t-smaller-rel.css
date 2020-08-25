@@ -1,0 +1,18 @@
+
+
+/**
+  * @name       	s-t-smaller-rel
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.text.rel.smaller
+  * @type        class
+  *
+  * Set the size **smaller** relative to my parent
+  *
+  * @example 	html
+  * <div class="s-t-smaller-rel">
+  * 	I have the size "smaller" defined relative to my parent
+  * </div>
+  *
+  * @since       2.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */

@@ -1,4 +1,4 @@
-.ck-header {
+#{Sugar.sel('ck-header')} {
   background: Sugar.color(dark);
   height: 70px;
   width: calc(100% - 100px);

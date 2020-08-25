@@ -1,0 +1,32 @@
+
+
+/**
+  * @name            ol-classes
+  * @namespace       scss.components
+  * @type            Mixin
+  *
+  * This mixin generate all the css needed to display properly some ordered lists.
+  *
+  * @feature
+  *
+  * @param       {List}      [$colors:map-keys(setting('colors'))]       The colors you want to generate
+  * @param       {List}      [$sizes:map-keys(setting('sizes'))]       The sizes you want to generate
+  * @param       {String}        [$name='s-ol']       The className to use for the generation
+  *
+  * @example         html
+  * <ol class="s-ol">
+  *   <li class="s-ol__li">I'm a cool ordered list item</li>
+  *   <li class="s-ol__li">I'm a cool ordered list item</li>
+  *   <li class="s-ol__li">I'm a cool ordered list item</li>
+  *   <li class="s-ol__li">I'm a cool ordered list item</li>
+  *   <li class="s-ol__li">I'm a cool ordered list item</li>
+  *   <li class="s-ol__li">I'm a cool ordered list item</li>
+  *   <li class="s-ol__li">I'm a cool ordered list item</li>
+  * </ol>
+  *
+  * @example           scss
+  * @include Sugar.ol-classes();
+  *
+  * @since       2.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */

@@ -1,0 +1,14 @@
+
+
+/**
+ * @name              btn-style
+ * @namespace         scss.components.btn
+ * @type              Mixin
+ *
+ * This mixin generate all the style properties for a button depending on the parameters you set.
+ *
+ * @param       {List}      [$color=primary]                The color you want for your button
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */

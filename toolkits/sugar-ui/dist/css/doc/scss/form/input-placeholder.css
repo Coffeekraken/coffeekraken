@@ -1,0 +1,19 @@
+
+
+/**
+ * @name      input-placeholder
+ * @namespace           scss.form
+ * @type      mixin
+ *
+ * Set the placeholder style for inputs, etc...
+ *
+ * @example 	scss
+ * input, textarea {
+ * 	\@include Sugar.input-placeholder() {
+ * 		color : red;
+ * 	}
+ * }
+ *
+ * @since       1.0.0
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */

@@ -63,10 +63,10 @@ module.exports = class SBuildScssActionsStream extends __SActionsStream {
         sugarJson: __SSugarJsonStreamAction,
         imports: __SImportsStreamAction,
         jsConfig: __SJsObjectToScssStreamAction,
-        render: __SRenderSassStreamAction,
-        extractDocblocks: __SExtractDocblocksIntoFiles,
-        extract: __SExtractStreamAction,
-        postCss: __SPostCssStreamAction,
+        // render: __SRenderSassStreamAction,
+        // extractDocblocks: __SExtractDocblocksIntoFiles,
+        // extract: __SExtractStreamAction,
+        // postCss: __SPostCssStreamAction,
         fsOutput: __SFsOutputStreamAction
       },
       __deepMerge(

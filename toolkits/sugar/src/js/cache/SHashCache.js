@@ -60,6 +60,7 @@ export default class SHashCache extends __SCache {
   async set(referenceObj, value, settings = {}) {
     // calculating the checksum
     const checksum = __md5(__toString(referenceObj)).toString();
+    console.log('SAVE', checksum);
     // save the value in the cache
     return super.set(checksum, value, settings);
   }

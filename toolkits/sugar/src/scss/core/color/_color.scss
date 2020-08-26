@@ -60,6 +60,7 @@
     $name: null;
   } @else if is($name, string) {
     $colorColor: setting('colors.#{$name}.color');
+    @error(setting('colors'));
   }
 
   @if $colorColor != null and is($colorColor, string) {

@@ -119,7 +119,8 @@ var SHashCache = /*#__PURE__*/function (_SCache) {
         }
 
         // calculating the checksum
-        var checksum = (0, _md.default)((0, _toString.default)(referenceObj)).toString(); // save the value in the cache
+        var checksum = (0, _md.default)((0, _toString.default)(referenceObj)).toString();
+        console.log('SAVE', checksum); // save the value in the cache
 
         return _get(_getPrototypeOf(SHashCache.prototype), "set", this).call(this, checksum, value, settings);
       });

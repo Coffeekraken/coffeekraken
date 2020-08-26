@@ -229,7 +229,6 @@ var SCache = /*#__PURE__*/function () {
         // either the value only, or the full cache object
 
 
-        console.log('al', value.value);
         if (valueOnly) return value.value;
         return value;
       });
@@ -328,8 +327,7 @@ var SCache = /*#__PURE__*/function () {
     value: function () {
       var _exists = _asyncToGenerator(function* (name) {
         // check
-        var value = yield this.get(name);
-        console.log('val', typeof value); // return the status
+        var value = yield this.get(name); // return the status
 
         if (value) return true;
         return false;

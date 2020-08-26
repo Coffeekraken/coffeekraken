@@ -1,7 +1,4 @@
 const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
-const __Bundler = require('scss-bundle').Bundler;
-const __getFilename = require('../../../fs/filename');
-const __sugarConfig = require('../../../config/sugar');
 const __getScssImportsStrings = require('../getScssImportsStrings');
 const __deepMerge = require('../../../object/deepMerge');
 
@@ -75,7 +72,7 @@ module.exports = class SImportsStreamAction extends __SActionsStreamAction {
         ${streamObj.data}
         ${importsStrings.append}
       `
-        : importsString.prepend + importsStrings.append;
+        : importsStrings.prepend + importsStrings.append;
 
       const atUseReg = /\s?@use.+/gm;
       const atUseMatches = streamObj.data.match(atUseReg);

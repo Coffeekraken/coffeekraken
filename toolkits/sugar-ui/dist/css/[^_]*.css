@@ -1,0 +1,288 @@
+$sugarUserSettings: (
+  borders: (
+    sizes: (
+      smaller: 1px,
+      small: 2px,
+      default: 5px,
+      medium: 10px,
+      big: 15px,
+      bigger: 20px
+    ),
+    radius: (
+      smaller: 2px,
+      small: 5px,
+      default: 10px,
+      medium: 20px,
+      big: 30px,
+      bigger: 40px
+    )
+  ),
+  classes: (
+    generate: (
+      prefix: jti,
+      namespace: ('sugar'),
+      icons: ('fa-user', 'fa-star')
+    )
+  ),
+  colors: (
+    default: (
+      color: #848e91,
+      modifiers: (
+        hover: -darken 10%,
+        light: -lighten 15%,
+        dark: -darken 10%
+      )
+    ),
+    title: (
+      color: #2b3438,
+      modifiers: (
+        hover: -darken 10%,
+        light: -lighten 15%,
+        dark: -darken 10%
+      )
+    ),
+    text: (
+      color: #848e91,
+      modifiers: (
+        hover: -darken 10%,
+        light: -lighten 15%,
+        dark: -darken 10%
+      )
+    ),
+    link: (
+      color: primary,
+      modifiers: (
+        hover: -darken 10%,
+        light: -lighten 15%,
+        dark: -darken 10%
+      )
+    ),
+    light: (
+      color: #f8f9fa,
+      modifiers: (
+        hover: -darken 10%,
+        light: -lighten 15%,
+        dark: -darken 10%
+      )
+    ),
+    dark: (
+      color: #343a40,
+      modifiers: (
+        hover: -darken 10%,
+        light: -lighten 15%,
+        dark: -darken 10%
+      )
+    ),
+    primary: (
+      color: #f2bc2b,
+      modifiers: (
+        hover: -darken 10%,
+        light: -lighten 15%,
+        dark: -darken 10%
+      )
+    ),
+    secondary: (
+      color: #2b3438,
+      modifiers: (
+        hover: -darken 10%,
+        light: -lighten 15%,
+        dark: -darken 10%
+      )
+    ),
+    success: (
+      color: #5cb85c,
+      modifiers: (
+        hover: -darken 10%,
+        light: -lighten 15%,
+        dark: -darken 10%
+      )
+    ),
+    warning: (
+      color: #f0ad4e,
+      modifiers: (
+        hover: -darken 10%,
+        light: -lighten 15%,
+        dark: -darken 10%
+      )
+    ),
+    error: (
+      color: #d9534f,
+      modifiers: (
+        hover: -darken 10%,
+        light: -lighten 15%,
+        dark: -darken 10%
+      )
+    ),
+    info: (
+      color: #2199e8,
+      modifiers: (
+        hover: -darken 10%,
+        light: -lighten 15%,
+        dark: -darken 10%
+      )
+    )
+  ),
+  fonts: (
+    default: (
+      font-family: "Roboto",
+      import: "https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+    ),
+    title: (
+      font-family: "Roboto",
+      font-weight: 700,
+      import: "https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap"
+    ),
+    quote: (
+      font-family: "Palatino, Times, Georgia, serif",
+      font-weight: normal,
+      font-style: normal,
+      font-display: auto,
+      cap-height: 0.65
+    ),
+    code: (
+      font-family: "Menlo, Monaco, Consolas, Courier New, monospace",
+      font-weight: normal,
+      font-style: normal,
+      font-display: auto,
+      cap-height: 0.65
+    )
+  ),
+  filters: (
+    
+  ),
+  look-and-feel: (
+    border-radius: 0.2em,
+    padding: 0.8em 1.4em,
+    padding-vertical: 0.8em,
+    padding-horizontal: 1.4em,
+    disabled-opacity: 0.5,
+    line-height: 1.5,
+    shadow: (
+      layers: 6,
+      startX: 0,
+      startY: 1px,
+      startBlur: 2px,
+      color: rgba(0,0,0,0.08)
+    )
+  ),
+  media: (
+    defaultAction: ">=",
+    queries: (
+      mobile: (
+        min-width: null,
+        max-width: 639
+      ),
+      mobile-portrait: (
+        min-width: null,
+        max-width: 480,
+        orientation: portrait
+      ),
+      mobile-landscape: (
+        min-width: null,
+        max-width: 639,
+        oprientation: landscape
+      ),
+      tablet: (
+        min-width: 640,
+        max-width: 1279
+      ),
+      tablet-portrait: (
+        min-width: 640,
+        max-width: 1023,
+        orientation: portrait
+      ),
+      tablet-landscape: (
+        min-width: 1024,
+        max-width: 1279,
+        oprientation: landscape
+      ),
+      desktop: (
+        min-width: 1280,
+        max-width: null
+      )
+    )
+  ),
+  sizes: (
+    smaller: 0.3,
+    small: 0.6,
+    default: 1,
+    medium: 1.5,
+    big: 2,
+    bigger: 3
+  ),
+  spaces: (
+    smaller: 0.5rem,
+    small: 1rem,
+    default: 2.5rem,
+    medium: 5rem,
+    big: 10rem,
+    bigger: 15rem
+  ),
+  transitions: (
+    fast: all 0.1s ease-in-out 0s,
+    default: all 0.2s ease-in-out 0s,
+    slow: all 0.5s ease-in-out 0s
+  ),
+  typography: (
+    font-family: "default",
+    font-size: 16px,
+    font-sizes: null,
+    line-letters-count: 55,
+    formats: (
+      h1: (
+        font-family: "title",
+        font-size: bigger
+      ),
+      h2: (
+        font-family: "title",
+        font-size: big
+      ),
+      h3: (
+        font-family: "title",
+        font-size: medium
+      ),
+      h4: (
+        font-family: "title",
+        font-size: default
+      ),
+      h5: (
+        font-family: "title",
+        font-size: small
+      ),
+      h6: (
+        font-family: "title",
+        font-size: smaller
+      ),
+      p: (
+        font-family: "title",
+        font-size: medium,
+        line-height: 2rem
+      ),
+      blockquote: (
+        font-family: "code",
+        font-size: default
+      ),
+      code: (
+        font-family: "code",
+        font-size: default
+      )
+    )
+  ),
+  helpers: (
+    flex: (
+      order-count: 20
+    )
+  ),
+  unit: rem,
+  reset: true,
+  border-box: true,
+  text-format-scope-class: tf,
+  vertical-rhythm-scope-class: vr
+);
+           @use "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/toolkits/sugar/index" as Sugar;
+          
+         
+          @include Sugar.setup($sugarUserSettings);
+          @include Sugar.init();
+        
+        

@@ -182,7 +182,6 @@ export default class SCache {
     }
     // otherwise, this is good so return the item
     // either the value only, or the full cache object
-    console.log('al', value.value);
     if (valueOnly) return value.value;
     return value;
   }
@@ -279,7 +278,6 @@ export default class SCache {
   async exists(name) {
     // check
     const value = await this.get(name);
-    console.log('val', typeof value);
     // return the status
     if (value) return true;
     return false;

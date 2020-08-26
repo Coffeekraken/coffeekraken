@@ -3,6 +3,7 @@ const __deepMerge = require('../../object/deepMerge');
 const __globby = require('globby');
 const __path = require('path');
 const __packageRoot = require('../../path/packageRoot');
+const { stream } = require('globby');
 
 /**
  * @name                SSugarJsonStreamAction
@@ -122,16 +123,16 @@ module.exports = class SSugarJsonStreamAction extends __SActionsStreamAction {
           if (streamObj.sugarJsonExclude.indexOf(sugarJson.name) !== -1) return;
         }
 
-        switch (streamObj.buildType) {
-          case 'js':
-            streamObj = await this._handleJs(streamObj, sugarJson, settings);
-            break;
-          case 'css':
-            streamObj = await this._handleCss(streamObj, sugarJson, settings);
-            break;
-          default:
-            break;
-        }
+        // switch (streamObj.buildType) {
+        //   case 'js':
+        //     streamObj = await this._handleJs(streamObj, sugarJson, settings);
+        //     break;
+        //   case 'css':
+        //     streamObj = await this._handleCss(streamObj, sugarJson, settings);
+        //     break;
+        //   default:
+        //     break;
+        // }
       });
 
       // resolve streamObj

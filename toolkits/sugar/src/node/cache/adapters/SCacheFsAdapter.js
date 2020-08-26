@@ -97,7 +97,6 @@ module.exports = class SCacheFsAdapter extends __SCacheAdapter {
     // generate the item fs name
     const fsName = `${this._settings.name}/${name}.json`;
     // check that the file exists
-    console.log(`${this._settings.rootDir}/${fsName}`);
     if (!__fs.existsSync(`${this._settings.rootDir}/${fsName}`)) return null;
     // read the json file
     return __fs.readFileSync(`${this._settings.rootDir}/${fsName}`, 'utf8');

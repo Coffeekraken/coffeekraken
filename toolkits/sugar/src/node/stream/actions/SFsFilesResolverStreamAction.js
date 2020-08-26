@@ -56,6 +56,7 @@ module.exports = class SFindInFileStreamAction extends __SActionsStreamAction {
         {
           name: 'File resolver',
           id: 'actionStream.action.fs.filesResolver',
+          cache: false,
           ignoreFolders: [],
           out: 'array'
         },
@@ -149,12 +150,19 @@ module.exports = class SFindInFileStreamAction extends __SActionsStreamAction {
         resolve(streamObj);
       } else {
         filesPathes.forEach((path) => {
+          const stats = __fs.statSync(path);
           streamObjArray.push(
             Object.assign(
               {},
               {
                 ...streamObj,
-                input: path
+                input: path,
+                inputStats: {
+                  size: stats.size,
+                  mtime: stats.mtime,
+                  ctime: stats.ctime,
+                  birthtime: stats.birthtime
+                }
               }
             )
           );

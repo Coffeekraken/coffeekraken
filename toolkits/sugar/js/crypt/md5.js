@@ -24,7 +24,7 @@ var __encryptedMessages = {};
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-var _default = {
+var api = {
   /**
    * @name        encrypt
    * @type          Function
@@ -65,5 +65,8 @@ var _default = {
     return (0, _parse.default)(string);
   }
 };
+_md.default.encrypt = api.encrypt;
+_md.default.decrypt = api.decrypt;
+var _default = _md.default;
 exports.default = _default;
 module.exports = exports.default;

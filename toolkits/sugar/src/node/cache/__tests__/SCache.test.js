@@ -1,10 +1,8 @@
 const SCache = require('../SCache');
 
-const cache = new SCache({
-  name: 'sugar-node-cache-SCache'
-});
+const cache = new SCache('sugar-node-cache-SCache');
 
-test('sugar.node.cache.SCache: Set an item in the cache', done => {
+test('sugar.node.cache.SCache: Set an item in the cache', (done) => {
   (async () => {
     await cache.set('myCoolItem', {
       hello: 'world'
@@ -13,7 +11,7 @@ test('sugar.node.cache.SCache: Set an item in the cache', done => {
   })();
 });
 
-test('sugar.node.cache.SCache: Get an item in the cache', done => {
+test('sugar.node.cache.SCache: Get an item in the cache', (done) => {
   (async () => {
     const item = await cache.get('myCoolItem');
     expect(item).toEqual({
@@ -23,7 +21,7 @@ test('sugar.node.cache.SCache: Get an item in the cache', done => {
   })();
 });
 
-test('sugar.node.cache.SCache: Delete an item in the cache', done => {
+test('sugar.node.cache.SCache: Delete an item in the cache', (done) => {
   (async () => {
     await cache.delete('myCoolItem');
     const item = await cache.get('myCoolItem');

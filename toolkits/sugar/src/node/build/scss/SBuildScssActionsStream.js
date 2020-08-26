@@ -58,7 +58,7 @@ module.exports = class SBuildScssActionsStream extends __SActionsStream {
     super(
       {
         filesResolver: __SFsFilesResolverStreamAction,
-        fsCache: __SFsCacheStreamAction,
+        // fsCache: __SFsCacheStreamAction,
         bundle: __SBundleScssStreamAction,
         sugarJson: __SSugarJsonStreamAction,
         imports: __SImportsStreamAction,

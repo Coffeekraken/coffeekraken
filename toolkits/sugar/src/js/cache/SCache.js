@@ -76,8 +76,8 @@ export default class SCache {
    *
    * Construct the SCache instance with the settings passed in object format. See description bellow.
    *
-   * @param         {Object}          [settings={}]
-   * The settings for the SCache instance
+   * @param         {String}        name                  A name for your cache instance. Can have only these characters: [a-zA-Z0-9_-]
+   * @param         {Object}          [settings={}]         The settings for the SCache instance
    * - ttl (-1) {Number|String}: Time to live for each cache items in seconds or in String like '10s', '20h', '300ms', etc...
    * - deleteOnExpire (true) {Boolean}: Specify if you want that the items are deleted on expire
    * - adapter (fs) {String|SCacheAdapter}: Specify the adapter to use as default one. Can be a simple string like "fs" (filesystem) or an instance of an SCacheAdapter class. Here's the available ones:
@@ -88,23 +88,24 @@ export default class SCache {
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(settings = {}) {
+  constructor(name, settings = {}) {
     // make sure we have a name
-    if (!settings.name) {
+    if (!name) {
       throw new Error(
-        `The SCache instance need a name. To set it, pass the "name" property in the "settings" object...`
+        `The SCache instance need a name. To set it, pass the "name" as the first argument of the constructor...`
       );
     }
     // store the name
-    if (!/^[a-zA-Z0-9_-]+$/.test(settings.name)) {
+    if (!/^[a-zA-Z0-9-_\.]+$/.test(name)) {
       throw new Error(
-        `The name of an SCache instance can contain only letters like [a-zA-Z0-9_-]...`
+        `The name of an SCache instance can contain only letters like <green>[a-zA-Z0-9_-.]</green> but you've passed "<red>${name}</red>"...`
       );
     }
-    this._name = settings.name;
+    this._name = name;
 
     this._settings = __deepMerge(
       {
+        name,
         ttl: -1,
         deleteOnExpire: true,
         adapter: __isNode() ? 'fs' : 'ls',
@@ -136,7 +137,7 @@ export default class SCache {
         ]
       );
       if (adptr.default) adptr = adptr.default;
-      this._adapter = new adptr();
+      this._adapter = new adptr(this._settings);
     } else if (adapter instanceof __SCacheAdapter) {
       this._adapter = adapter;
     }
@@ -165,6 +166,7 @@ export default class SCache {
     const adapter = await this.getAdapter();
     // using the specified adapter to get the value back
     const rawValue = await adapter.get(`${this._name}.${name}`);
+
     // check that we have a value back
     if (!rawValue || typeof rawValue !== 'string') return null;
     // parse the raw value back to an object
@@ -180,6 +182,7 @@ export default class SCache {
     }
     // otherwise, this is good so return the item
     // either the value only, or the full cache object
+    console.log('al', value.value);
     if (valueOnly) return value.value;
     return value;
   }
@@ -208,9 +211,9 @@ export default class SCache {
    */
   async set(name, value, settings = {}) {
     // test name
-    if (!/^[a-zA-Z0-9_\-\+]+$/.test(name)) {
+    if (!/^[a-zA-Z0-9_\-\+\.]+$/.test(name)) {
       throw new Error(
-        `You try to set an item named "${name}" is the "${this._name}" SCache instance but an item name can contain only these characters [a-zA-Z0-9_-]...`
+        `You try to set an item named "<yellow>${name}</yellow>" in the "${this._name}" SCache instance but an item name can contain only these characters <green>[a-zA-Z0-9_-.]</green> but you've passed "<red>${name}</red>"...`
       );
     }
 
@@ -256,6 +259,30 @@ export default class SCache {
 
     // use the adapter to save the value
     return adapter.set(`${this._name}.${name}`, stringifiedValueToSave);
+  }
+
+  /**
+   * @name                                exists
+   * @type                                Function
+   * @async
+   *
+   * Check if the passed cache item id exists
+   *
+   * @param                 {String}               name               The name of the item to check
+   * @return                {Boolean}                             true if exists, false if not
+   *
+   * @example           js
+   * await myCache.exists('coco'); // => true
+   *
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  async exists(name) {
+    // check
+    const value = await this.get(name);
+    console.log('val', typeof value);
+    // return the status
+    if (value) return true;
+    return false;
   }
 
   /**

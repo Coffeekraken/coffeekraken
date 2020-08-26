@@ -26,6 +26,7 @@ const __color = require('../color/color');
  * @since         2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+const errorPanels = [];
 module.exports = function handleError() {
   if (__isChildProcess()) {
     process.on('uncaughtException', __handleChildProcessErrors);
@@ -33,12 +34,16 @@ module.exports = function handleError() {
   } else {
     process.on('uncaughtException', __handleMainProcessErrors);
     process.on('unhandledRejection', __handleMainProcessErrors);
+    __hotkey('escape', {}).on('press', () => {
+      if (!errorPanels.length) return;
+      const $panel = errorPanels.pop();
+      $panel.destroy();
+    });
   }
 };
 
 function createErrorPanel(error) {
   if (!global.screen) return;
-
   const $bg = __blessed.box({
     width: '100%-10',
     height: '100%-6',
@@ -84,13 +89,9 @@ function createErrorPanel(error) {
   $bg.append($box);
   global.screen.append($bg);
 
-  $bg.focus();
+  errorPanels.push($bg);
 
-  __hotkey('escape', {
-    once: true
-  }).on('press', () => {
-    $bg.destroy();
-  });
+  $bg.focus();
 }
 
 function __handleChildProcessErrors(error) {

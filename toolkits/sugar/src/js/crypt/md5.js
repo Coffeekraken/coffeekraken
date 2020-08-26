@@ -13,7 +13,7 @@ const __encryptedMessages = {};
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default {
+const api = {
   /**
    * @name        encrypt
    * @type          Function
@@ -53,3 +53,6 @@ export default {
     return parse(string);
   }
 };
+md5.encrypt = api.encrypt;
+md5.decrypt = api.decrypt;
+export default md5;

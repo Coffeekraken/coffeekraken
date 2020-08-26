@@ -3,6 +3,8 @@ const __tmpDir = require('../../fs/tmpDir');
 const __fs = require('fs');
 const __ensureDirSync = require('../../fs/ensureDirSync');
 const __removeSync = require('../../fs/removeSync');
+const __sugarConfig = require('../../config/sugar');
+const __toString = require('../../string/toString');
 
 const __SCacheAdapter = require('../../../../js/cache/adapters/SCacheAdapter');
 
@@ -17,7 +19,7 @@ const __SCacheAdapter = require('../../../../js/cache/adapters/SCacheAdapter');
  * const cache = new SCache({
  *    ttl: 100,
  *    adapter: new SCacheFsAdapter({
- *      path: '/my/cool/folder
+ *      rootDir: '/my/cool/folder
  *    })
  * });
  *
@@ -31,6 +33,7 @@ module.exports = class SCacheFsAdapter extends __SCacheAdapter {
    * Construct the SCacheFsAdapter instance with the settings passed in object format. See description bellow.
    *
    * @param         {Object}          [settings={}]             An object to configure the SCacheFsAdapter instance. This is specific to each adapters.settings.settings...
+   * - rootDir (config.cache.fs.rootDir) {String}: Specify the root directory where to put all the files to cache
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
@@ -38,7 +41,7 @@ module.exports = class SCacheFsAdapter extends __SCacheAdapter {
     super(
       __deepMerge(
         {
-          path: `${__tmpDir()}/SCache`
+          rootDir: __sugarConfig('cache.fs.rootDir') || `${__tmpDir()}/SCache`
         },
         settings
       )
@@ -65,13 +68,13 @@ module.exports = class SCacheFsAdapter extends __SCacheAdapter {
    */
   async set(name, value) {
     // generate the item fs name
-    const fsName = `${name.replace('.', '/')}.json`;
+    const fsName = `${this._settings.name}/${name}.json`;
     // ensure we have the folder
     __ensureDirSync(
-      `${this._settings.path}/${fsName.split('/').slice(0, -1).join('/')}`
+      `${this._settings.rootDir}/${fsName.split('/').slice(0, -1).join('/')}`
     );
     // write the json file
-    __fs.writeFileSync(`${this._settings.path}/${fsName}`, value);
+    __fs.writeFileSync(`${this._settings.rootDir}/${fsName}`, value);
     // write has been done correctly
     return true;
   }
@@ -92,11 +95,12 @@ module.exports = class SCacheFsAdapter extends __SCacheAdapter {
    */
   async get(name) {
     // generate the item fs name
-    const fsName = `${name.replace('.', '/')}.json`;
+    const fsName = `${this._settings.name}/${name}.json`;
     // check that the file exists
-    if (!__fs.existsSync(`${this._settings.path}/${fsName}`)) return null;
+    console.log(`${this._settings.rootDir}/${fsName}`);
+    if (!__fs.existsSync(`${this._settings.rootDir}/${fsName}`)) return null;
     // read the json file
-    return __fs.readFileSync(`${this._settings.path}/${fsName}`, 'utf8');
+    return __fs.readFileSync(`${this._settings.rootDir}/${fsName}`, 'utf8');
   }
 
   /**
@@ -115,9 +119,9 @@ module.exports = class SCacheFsAdapter extends __SCacheAdapter {
    */
   async delete(name) {
     // generate the item fs name
-    const fsName = `${name.replace('.', '/')}.json`;
+    const fsName = `${this._settings.name}/${name}.json`;
     // read the json file
-    return __fs.unlinkSync(`${this._settings.path}/${fsName}`);
+    return __fs.unlinkSync(`${this._settings.rootDir}/${fsName}`);
   }
 
   /**
@@ -136,6 +140,6 @@ module.exports = class SCacheFsAdapter extends __SCacheAdapter {
    */
   async clear(cacheName) {
     // read the json file
-    return __removeSync(`${this._settings.path}/${cacheName}`);
+    return __removeSync(`${this._settings.rootDir}/${cacheName}`);
   }
 };

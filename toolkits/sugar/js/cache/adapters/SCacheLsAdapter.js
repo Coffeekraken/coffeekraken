@@ -100,7 +100,7 @@ var SCacheLsAdapter = /*#__PURE__*/function (_SCacheAdapter) {
     value: function () {
       var _set = _asyncToGenerator(function* (name, value) {
         // store data into localStorage
-        window.localStorage.setItem(name, value); // write has been done correctly
+        window.localStorage.setItem("".concat(this._settings.name, ".").concat(name), value); // write has been done correctly
 
         return true;
       });
@@ -130,7 +130,7 @@ var SCacheLsAdapter = /*#__PURE__*/function (_SCacheAdapter) {
     key: "get",
     value: function () {
       var _get = _asyncToGenerator(function* (name) {
-        return window.localStorage.getItem(name);
+        return window.localStorage.getItem("".concat(this._settings.name, ".").concat(name));
       });
 
       function get(_x3) {
@@ -159,7 +159,7 @@ var SCacheLsAdapter = /*#__PURE__*/function (_SCacheAdapter) {
     value: function () {
       var _delete2 = _asyncToGenerator(function* (name) {
         // delete the item from the localStorage
-        window.localStorage.removeItem(name); // return true cause all went well
+        window.localStorage.removeItem("".concat(this._settings.name, ".").concat(name)); // return true cause all went well
 
         return true;
       });
@@ -193,7 +193,7 @@ var SCacheLsAdapter = /*#__PURE__*/function (_SCacheAdapter) {
         var keys = Object.keys(window.localStorage); // filter the keys to delete
 
         var keysToDelete = keys.filter(key => {
-          return key.startsWith(cacheName);
+          return key.startsWith("".concat(cacheName, "."));
         }); // loop on each keys to delete
 
         keysToDelete.forEach(k => {
@@ -233,7 +233,7 @@ var SCacheLsAdapter = /*#__PURE__*/function (_SCacheAdapter) {
         var keys = Object.keys(window.localStorage); // filter the keys to get only the ones that bellongs to this cache instance
 
         var cacheKeys = keys.filter(key => {
-          return key.startsWith(cacheName);
+          return key.startsWith("".concat(cacheName, "."));
         }); // return the cache keys
 
         return cacheKeys;

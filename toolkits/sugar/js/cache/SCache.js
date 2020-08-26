@@ -97,8 +97,8 @@ var SCache = /*#__PURE__*/function () {
    *
    * Construct the SCache instance with the settings passed in object format. See description bellow.
    *
-   * @param         {Object}          [settings={}]
-   * The settings for the SCache instance
+   * @param         {String}        name                  A name for your cache instance. Can have only these characters: [a-zA-Z0-9_-]
+   * @param         {Object}          [settings={}]         The settings for the SCache instance
    * - ttl (-1) {Number|String}: Time to live for each cache items in seconds or in String like '10s', '20h', '300ms', etc...
    * - deleteOnExpire (true) {Boolean}: Specify if you want that the items are deleted on expire
    * - adapter (fs) {String|SCacheAdapter}: Specify the adapter to use as default one. Can be a simple string like "fs" (filesystem) or an instance of an SCacheAdapter class. Here's the available ones:
@@ -109,7 +109,7 @@ var SCache = /*#__PURE__*/function () {
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  function SCache(settings) {
+  function SCache(name, settings) {
     if (settings === void 0) {
       settings = {};
     }
@@ -128,17 +128,18 @@ var SCache = /*#__PURE__*/function () {
     _defineProperty(this, "_adapter", null);
 
     // make sure we have a name
-    if (!settings.name) {
-      throw new Error("The SCache instance need a name. To set it, pass the \"name\" property in the \"settings\" object...");
+    if (!name) {
+      throw new Error("The SCache instance need a name. To set it, pass the \"name\" as the first argument of the constructor...");
     } // store the name
 
 
-    if (!/^[a-zA-Z0-9_-]+$/.test(settings.name)) {
-      throw new Error("The name of an SCache instance can contain only letters like [a-zA-Z0-9_-]...");
+    if (!/^[a-zA-Z0-9-_\.]+$/.test(name)) {
+      throw new Error("The name of an SCache instance can contain only letters like <green>[a-zA-Z0-9_-.]</green> but you've passed \"<red>".concat(name, "</red>\"..."));
     }
 
-    this._name = settings.name;
+    this._name = name;
     this._settings = (0, _deepMerge.default)({
+      name,
       ttl: -1,
       deleteOnExpire: true,
       adapter: (0, _node.default)() ? 'fs' : 'ls',
@@ -170,7 +171,7 @@ var SCache = /*#__PURE__*/function () {
           /* webpackChunkName: "SCacheAdapter" */
           this._defaultAdaptersPaths[adapter])).then(s => _interopRequireWildcard(require(s)));
           if (adptr.default) adptr = adptr.default;
-          this._adapter = new adptr();
+          this._adapter = new adptr(this._settings);
         } else if (adapter instanceof _SCacheAdapter.default) {
           this._adapter = adapter;
         } // return the adapter
@@ -228,6 +229,7 @@ var SCache = /*#__PURE__*/function () {
         // either the value only, or the full cache object
 
 
+        console.log('al', value.value);
         if (valueOnly) return value.value;
         return value;
       });
@@ -270,8 +272,8 @@ var SCache = /*#__PURE__*/function () {
         }
 
         // test name
-        if (!/^[a-zA-Z0-9_\-\+]+$/.test(name)) {
-          throw new Error("You try to set an item named \"".concat(name, "\" is the \"").concat(this._name, "\" SCache instance but an item name can contain only these characters [a-zA-Z0-9_-]..."));
+        if (!/^[a-zA-Z0-9_\-\+\.]+$/.test(name)) {
+          throw new Error("You try to set an item named \"<yellow>".concat(name, "</yellow>\" in the \"").concat(this._name, "\" SCache instance but an item name can contain only these characters <green>[a-zA-Z0-9_-.]</green> but you've passed \"<red>").concat(name, "</red>\"..."));
         } // get the adapter
 
 
@@ -306,6 +308,40 @@ var SCache = /*#__PURE__*/function () {
       return set;
     }()
     /**
+     * @name                                exists
+     * @type                                Function
+     * @async
+     *
+     * Check if the passed cache item id exists
+     *
+     * @param                 {String}               name               The name of the item to check
+     * @return                {Boolean}                             true if exists, false if not
+     *
+     * @example           js
+     * await myCache.exists('coco'); // => true
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "exists",
+    value: function () {
+      var _exists = _asyncToGenerator(function* (name) {
+        // check
+        var value = yield this.get(name);
+        console.log('val', typeof value); // return the status
+
+        if (value) return true;
+        return false;
+      });
+
+      function exists(_x6) {
+        return _exists.apply(this, arguments);
+      }
+
+      return exists;
+    }()
+    /**
      * @name                                delete
      * @type                                Function
      *
@@ -330,7 +366,7 @@ var SCache = /*#__PURE__*/function () {
         return adapter.delete("".concat(this._name, ".").concat(name));
       });
 
-      function _delete(_x6) {
+      function _delete(_x7) {
         return _delete2.apply(this, arguments);
       }
 

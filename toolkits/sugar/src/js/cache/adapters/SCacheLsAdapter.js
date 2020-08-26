@@ -52,7 +52,7 @@ export default class SCacheLsAdapter extends __SCacheAdapter {
    */
   async set(name, value) {
     // store data into localStorage
-    window.localStorage.setItem(name, value);
+    window.localStorage.setItem(`${this._settings.name}.${name}`, value);
     // write has been done correctly
     return true;
   }
@@ -72,7 +72,7 @@ export default class SCacheLsAdapter extends __SCacheAdapter {
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   async get(name) {
-    return window.localStorage.getItem(name);
+    return window.localStorage.getItem(`${this._settings.name}.${name}`);
   }
 
   /**
@@ -91,7 +91,7 @@ export default class SCacheLsAdapter extends __SCacheAdapter {
    */
   async delete(name) {
     // delete the item from the localStorage
-    window.localStorage.removeItem(name);
+    window.localStorage.removeItem(`${this._settings.name}.${name}`);
 
     // return true cause all went well
     return true;
@@ -117,7 +117,7 @@ export default class SCacheLsAdapter extends __SCacheAdapter {
 
     // filter the keys to delete
     const keysToDelete = keys.filter((key) => {
-      return key.startsWith(cacheName);
+      return key.startsWith(`${cacheName}.`);
     });
 
     // loop on each keys to delete
@@ -150,7 +150,7 @@ export default class SCacheLsAdapter extends __SCacheAdapter {
 
     // filter the keys to get only the ones that bellongs to this cache instance
     const cacheKeys = keys.filter((key) => {
-      return key.startsWith(cacheName);
+      return key.startsWith(`${cacheName}.`);
     });
 
     // return the cache keys

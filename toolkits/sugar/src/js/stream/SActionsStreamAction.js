@@ -20,7 +20,7 @@ import __validateObjectDefinitionObject from '../validation/object/validateObjec
  * - name (null) {String}: A simple name for your stream that will be used in the logs
  * - order (null) {Array}: An array of action names that specify the order you want to execute them. If not specified, take the actions object properties order.
  * - actions ({}) {Object}: An object formated like ```{ actionName: settings }``` that contain specific settings for each actions and that will be passed as a second parameter to each actions.
- * - cwd (process.cwd()) {String}: The current working directory to use during the stream execution
+ * - cache (true) {Boolean}: Specify if this action is aware of the cache or not
  *
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -79,7 +79,7 @@ export default class SActionStreamAction extends __SPromise {
         {
           name: null,
           id: __uniqid(),
-          cwd: process.cwd()
+          cache: true
         },
         settings
       )

@@ -1,7 +1,7 @@
 
 
 /**
-  * @name       	.jti-s-c-link
+  * @name       	jti-s-c-link
   * @namespace       scss.core.class
   * @class-namespace           sugar.helper.color.link
   * @type        class
@@ -9,7 +9,7 @@
   * Specify the color to **link**
   *
   * @example 	html
-  * <div class=".jti-s-c-link">
+  * <div class="jti-s-c-link">
   * 	I'm in "link" color
   * </div>
   *

@@ -1,7 +1,7 @@
 
 
 /**
-* @name 		.jti-s-no-radius-bottom-left
+* @name 		jti-s-no-radius-bottom-left
 * @namespace           scss.core.class.helper
 * @class-namespace     sugar.helper.border.radius.no.bottom.left
 * @type        class
@@ -9,7 +9,7 @@
 * Remove the bottom left border radius
 *
 * @example 	html
-* <div class="s-border s-radius .jti-s-no-radius-bottom-left s-ratio-1-1">
+* <div class="s-border s-radius jti-s-no-radius-bottom-left s-ratio-1-1">
 * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
 * </div>
 *

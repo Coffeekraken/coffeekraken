@@ -1,0 +1,35 @@
+
+
+/**
+* @name 		jti-border-left
+* @namespace           scss.core.class.helper
+* @class-namespace     sugar.helper.border.default.left
+* @type        class
+*
+* Apply the **default** border left size
+*
+* @example 	html
+* <div class="jti-border jti-border-left jti-ratio-1-1">
+* 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
+* </div>
+*
+* @since       2.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/
+
+/**
+* @name 		jti-border-left
+* @namespace           scss.core.class.helper
+* @class-namespace     sugar.helper.border.default.left
+* @type        class
+*
+* Apply the **<default>default</default>** border left color
+*
+* @example 	html
+* <div class="jti-border jti-border-left jti-ratio-1-1">
+* 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
+* </div>
+*
+* @since       2.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/

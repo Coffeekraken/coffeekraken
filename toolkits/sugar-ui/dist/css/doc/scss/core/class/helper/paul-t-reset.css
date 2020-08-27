@@ -1,0 +1,18 @@
+
+
+/**
+* @name 		paul-t-reset
+* @namespace         scss.core.class.helper
+* @class-namespace     sugar.helper.text.reset
+* @type        class
+*
+* Reset the text (font-weight, family, color, etc...)
+*
+* @example 	html
+* <div class="paul-t-reset">
+* 	I'm reset
+* </div>
+*
+* @since       2.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/

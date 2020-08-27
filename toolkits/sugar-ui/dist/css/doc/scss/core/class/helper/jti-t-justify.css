@@ -1,0 +1,18 @@
+
+
+/**
+* @name 		jti-t-justify
+* @namespace         scss.core.class.helper
+* @class-namespace     sugar.helper.text.align.justify
+* @type        class
+*
+* Make the text justified
+*
+* @example 	html
+* <div class="jti-t-justify">
+* 	Nullam vel feugiat nunc. Phasellus facilisis, nisi sit amet viverra rhoncus, arcu risus volutpat dolor, sed euismod magna tellus ac purus. Praesent augue lorem, ullamcorper ac accumsan nec, suscipit eu.
+* </div>
+*
+* @since       2.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/

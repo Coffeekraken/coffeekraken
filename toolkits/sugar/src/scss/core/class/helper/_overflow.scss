@@ -2,7 +2,7 @@
 
   @if class-match-namespace("sugar.helper.overflow.hidden") {
     /**
-    * @name 		s-overflow-hidden
+    * @name 		#{sel(overflow-hidden)}
     * @namespace           scss.core.class.helper
     * @class-namespace     sugar.helper.overflow.hidden
     * @type        class
@@ -10,7 +10,7 @@
     * Set the overflow to hidden
     *
     * @example 	html
-    * <div class="s-overflow-hidden" style="height:3em;">
+    * <div class="#{sel(overflow-hidden)}" style="height:3em;">
     * 	<p>Hello world</p>
     * 	<p>Hello world</p>
     * 	<p>Hello world</p>
@@ -22,7 +22,7 @@
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-overflow-hidden {
+    .#{sel(overflow-hidden)} {
       overflow: hidden;
     }
   }
@@ -30,7 +30,7 @@
 
   @if class-match-namespace("sugar.helper.overflow.auto") {
     /**
-    * @name 		s-overflow-auto
+    * @name 		#{sel(overflow-auto)}
     * @namespace           scss.core.class.helper
     * @class-namespace     sugar.helper.overflow.auto
     * @type        class
@@ -38,7 +38,7 @@
     * Set the overflow to auto
     *
     * @example 	html
-    * <div class="s-overflow-auto" style="height:3em;">
+    * <div class="#{sel(overflow-auto)}" style="height:3em;">
     * 	<p>Hello world</p>
     * 	<p>Hello world</p>
     * 	<p>Hello world</p>
@@ -50,7 +50,7 @@
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-overflow-auto {
+    .#{sel(overflow-auto)} {
       overflow: auto;
     }
   }

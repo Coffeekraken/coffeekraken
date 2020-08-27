@@ -1,7 +1,7 @@
 
 
 /**
-* @name 		.jti-s-border-side-smaller
+* @name 		jti-s-border-side-smaller
 * @namespace           scss.core.class.helper
 * @class-namespace     sugar.helper.border.smaller.side
 * @type        class
@@ -9,7 +9,7 @@
 * Apply the **smaller** border side (left and right) size
 *
 * @example 	html
-* <div class="s-border .jti-s-border-side-smaller s-ratio-1-1">
+* <div class="s-border jti-s-border-side-smaller s-ratio-1-1">
 * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
 * </div>
 *

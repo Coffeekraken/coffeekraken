@@ -81,7 +81,8 @@ module.exports = function argsToString(args, definitionObj, includeAllArgs) {
     if (!defObj) return;
     if (!includeAllArgs && args[argName] === undefined) return;
     var prefix = defObj.alias ? "-".concat(defObj.alias) : "--".concat(argName);
-    var value = args && args[argName] !== undefined ? args[argName] : definitionObj[argName].default;
+    var value;
+    if (args && args[argName] !== undefined) value = args[argName];else if (definitionObj[argName] && definitionObj[argName].default) value = definitionObj[argName].default;
 
     if (value === undefined || value === null || defObj.type.toLowerCase() === 'boolean' && value === false) {
       return;

@@ -2,7 +2,7 @@
 
   @if class-match-namespace("sugar.helper.clearfix") {
     /**
-    * @name 		s-clearfix
+    * @name 		#{sel(clearfix)}
     * @namespace           scss.core.class.helper
     * @class-namespace     sugar.helper.clearfix
     * @type        class
@@ -10,23 +10,23 @@
     * Apply the micro clearfix on the element
     *
     * @example 	html
-    * <div class="s-clearfix s-bg-primary">
-    * 	<div class="s-pull-right">right pulled</div>
+    * <div class="#{sel(clearfix)} #{sel(bg-primary)}">
+    * 	<div class="#{sel(pull-right)}">right pulled</div>
     * </div>
-    * <div class="s-bg-primary">
-    * 	<div class="s-pull-right">right pulled without clearfix</div>
+    * <div class="#{sel(bg-primary)}">
+    * 	<div class="#{sel(pull-right)}">right pulled without clearfix</div>
     * </div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-clearfix {
+    .#{sel(clearfix)} {
       @include clearfix(micro);
     }
   }
   @if class-match-namespace("sugar.helper.clearfix.float") {
     /**
-    * @name 		s-clearfix-float
+    * @name 		#{sel(clearfix-float)}
     * @namespace           scss.core.class.helper
     * @class-namespace     sugar.helper.clearfix.float
     * @type        class
@@ -34,23 +34,23 @@
     * Apply the float clearfix on the element
     *
     * @example 	html
-    * <div class="s-clearfix-float s-bg-primary">
-    * 	<div class="s-pull-right">right pulled</div>
+    * <div class="#{sel(clearfix-float)} #{sel(bg-primary)}">
+    * 	<div class="#{sel(pull-right)}">right pulled</div>
     * </div>
-    * <div class="s-bg-primary">
-    * 	<div class="s-pull-right">right pulled without clearfix</div>
+    * <div class="#{sel(bg-primary)}">
+    * 	<div class="#{sel(pull-right)}">right pulled without clearfix</div>
     * </div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-clearfix-float {
+    .#{sel(clearfix-float)} {
       @include clearfix(float);
     }
   }
   @if class-match-namespace("sugar.helper.clearfix.micro") {
     /**
-    * @name 		s-clearfix-micro
+    * @name 		#{sel(clearfix-micro)}
     * @namespace           scss.core.class.helper
     * @class-namespace     sugar.helper.clearfix.micro
     * @type        class
@@ -58,23 +58,23 @@
     * Apply the micro clearfix on the element
     *
     * @example 	html
-    * <div class="s-clearfix s-bg-primary">
-    * 	<div class="s-pull-right">right pulled</div>
+    * <div class="#{sel(clearfix-micro)} #{sel(bg-primary)}">
+    * 	<div class="#{sel(pull-right)}">right pulled</div>
     * </div>
-    * <div class="s-bg-primary">
-    * 	<div class="s-pull-right">right pulled without clearfix</div>
+    * <div class="#{sel(bg-primary)}">
+    * 	<div class="#{sel(pull-right)}">right pulled without clearfix</div>
     * </div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .clearfix-micro {
+    .#{sel(clearfix-micro)} {
       @include clearfix(micro);
     }
   }
   @if class-match-namespace("sugar.helper.clearfix.overflow") {
     /**
-    * @name 		s-clearfix-overflow
+    * @name 		#{sel(clearfix-overflow)}
     * @namespace           scss.core.class.helper
     * @class-namespace     sugar.helper.clearfix.overflow
     * @type        class
@@ -82,23 +82,23 @@
     * Apply the overflow clearfix on the element
     *
     * @example 	html
-    * <div class="s-clearfix-overflow s-bg-primary">
-    * 	<div class="s-pull-right">right pulled</div>
+    * <div class="#{sel(clearfix-overflow)} #{sel(bg-primary)}">
+    * 	<div class="#{sel(pull-right)}">right pulled</div>
     * </div>
-    * <div class="s-bg-primary">
-    * 	<div class="s-pull-right">right pulled without clearfix</div>
+    * <div class="#{sel(bg-primary)}">
+    * 	<div class="#{sel(pull-right)}">right pulled without clearfix</div>
     * </div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-clearfix-overflow {
+    .#{sel(clearfix-overflow)} {
      @include clearfix(overflow);
     }
   }
   @if class-match-namespace("sugar.helper.clearfix.facebook") {
     /**
-    * @name 		s-clearfix-facebook
+    * @name 		#{sel(clearfix-facebook)}
     * @namespace           scss.core.class.helper
     * @class-namespace     sugar.helper.clearfix.facebook
     * @type        class
@@ -106,17 +106,17 @@
     * Apply the facebook clearfix on the element
     *
     * @example 	html
-    * <div class="s-clearfix-facebook s-bg-primary">
-    * 	<div class="s-pull-right">right pulled</div>
+    * <div class="#{sel(clearfix-facebook)} #{sel(bg-primary)}">
+    * 	<div class="#{sel(pull-right)}">right pulled</div>
     * </div>
-    * <div class="s-bg-primary">
-    * 	<div class="s-pull-right">right pulled without clearfix</div>
+    * <div class="#{sel(bg-primary)}">
+    * 	<div class="#{sel(pull-right)}">right pulled without clearfix</div>
     * </div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-clearfix-facebook {
+    .#{sel(clearfix-facebook)} {
       @include clearfix(facebook);
     }
   }

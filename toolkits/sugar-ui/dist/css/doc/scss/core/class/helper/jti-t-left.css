@@ -1,0 +1,18 @@
+
+
+/**
+* @name 		jti-t-left
+* @namespace         scss.core.class.helper
+* @class-namespace     sugar.helper.text.align.left
+* @type        class
+*
+* Align the text to the left
+*
+* @example 	html
+* <div class="jti-t-left">
+* 	I'm left aligned
+* </div>
+*
+* @since       2.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/

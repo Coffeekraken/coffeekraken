@@ -7,7 +7,7 @@
  * Their's also the mixin ```user-avatar-bare``` and ```user-avatar-style``` that you
  * can use if you need more controls.
  *
- * @param       {String}        [$name='s-user-avatar']       The className to use for the generation
+ * @param       {String}        [$name='user-avatar']       The className to use for the generation
  *
  * @example         html
  * <div class="s-user-avatar">
@@ -23,14 +23,14 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @mixin user-avatar(
-  $name: 's-user-avatar',
+  $name: 'user-avatar',
   $avatar-size: 150px,
   $avarar-shape: circle
 ) {
   @include user-avatar-bare($name, $avatar-size, $avarar-shape);
   @include user-avatar-style($name, $avatar-size, $avarar-shape);
 }
-@mixin user-avatar-bare($name: 's-user-avatar', $avatar-size: 150px, $avatar-shape: circle) {
+@mixin user-avatar-bare($name: 'user-avatar', $avatar-size: 150px, $avatar-shape: circle) {
   .#{$name} {
     display: inline-block;
 
@@ -64,7 +64,7 @@
   }
 
 }
-@mixin user-avatar-style($name: 's-user-avatar', $avatar-size: 150px, $avatar-shape: circle) {
+@mixin user-avatar-style($name: 'user-avatar', $avatar-size: 150px, $avatar-shape: circle) {
   .#{$name} {
 
   }

@@ -2,7 +2,7 @@
 
   @if class-match-namespace("sugar.lnf.shadow") {
     /**
-    * @name 		lnf-shadow
+    * @name 		#{sel(lnf-shadow)}
     * @namespace           scss.core.class.lnf
     * @class-namespace     sugar.lnf.shadow
     * @type        class
@@ -10,8 +10,8 @@
     * Apply the default shadow to the element
     *
     * @example 	html
-    * <div class="ratio-16-9">
-    *    <div class="lnf-shadow ratio-1-1" style="width:33%">
+    * <div class="#{sel(ratio-16-9)}">
+    *    <div class="#{sel(lnf-shadow)} ratio-1-1" style="width:33%">
     * 	    I'm a shadowed block
     *    </div>
     * </div>
@@ -19,13 +19,13 @@
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .lnf-shadow {
+    .#{sel(lnf-shadow)} {
       @include smooth-shadow();
     }
   }
   @if class-match-namespace("sugar.lnf.shadow.small") {
     /**
-    * @name 		lnf-shadow--small
+    * @name 		#{sel(lnf-shadow--small)}
     * @namespace           scss.core.class.lnf
     * @class-namespace     sugar.lnf.shadow.small
     * @type        class
@@ -33,8 +33,8 @@
     * Apply the small shadow to the element
     *
     * @example 	html
-    * <div class="ratio-16-9">
-    *    <div class="lnf-shadow--small ratio-1-1" style="width:33%">
+    * <div class="#{sel(ratio-16-9)}">
+    *    <div class="#{sel(lnf-shadow--small)} ratio-1-1" style="width:33%">
     * 	    I'm a shadowed block
     *    </div>
     * </div>
@@ -42,13 +42,13 @@
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .lnf-shadow--small {
+    .#{sel(lnf-shadow--small)} {
       @include smooth-shadow($layers: 3);
     }
   }
   @if class-match-namespace("sugar.lnf.shadow.big") {
     /**
-    * @name 		lnf-shadow--big
+    * @name 		#{sel(lnf-shadow--big)}
     * @namespace           scss.core.class.lnf
     * @class-namespace     sugar.lnf.shadow.big
     * @type        class
@@ -56,8 +56,8 @@
     * Apply the big shadow to the element
     *
     * @example 	html
-    * <div class="ratio-16-9">
-    *    <div class="lnf-shadow--big ratio-1-1" style="width:33%">
+    * <div class="#{sel(ratio-16-9)}">
+    *    <div class="#{sel(lnf-shadow--big)} ratio-1-1" style="width:33%">
     * 	    I'm a shadowed block
     *    </div>
     * </div>
@@ -65,7 +65,7 @@
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .lnf-shadow--big {
+    .#{sel(lnf-shadow--big)} {
       @include smooth-shadow($layers: 9);
     }
   }

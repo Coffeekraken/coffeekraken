@@ -1,7 +1,7 @@
 
 
 /**
-  * @name       	.jti-s-bg-link
+  * @name       	jti-s-bg-link
   * @namespace       scss.core.class
   * @class-namespace           sugar.helper.color.link.bg
   * @type        class
@@ -9,7 +9,7 @@
   * Specify the background color to **link**
   *
   * @example 	html
-  * <div class=".jti-s-bg-link p" style="color:white">
+  * <div class="jti-s-bg-link p" style="color:white">
   * 	My background color is "link"
   * </div>
   *

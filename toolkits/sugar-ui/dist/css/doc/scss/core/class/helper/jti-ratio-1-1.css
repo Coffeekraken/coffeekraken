@@ -1,0 +1,16 @@
+
+
+/**
+* @name 		jti-ratio-1-1
+* @namespace         scss.core.class.helper
+* @class-namespace     sugar.helper.ratio.1-1
+* @type        class
+*
+* Keep a 1/1 ratio on a particular element. Applied by setting height to 0 and paddingtop to 100%
+*
+* @example 	html
+* <div class="jti-bg-primary jti-ratio-1-1"></div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/

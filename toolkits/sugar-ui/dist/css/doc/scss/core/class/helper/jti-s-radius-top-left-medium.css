@@ -1,7 +1,7 @@
 
 
 /**
-* @name 		.jti-s-radius-top-left-medium
+* @name 		jti-s-radius-top-left-medium
 * @namespace           scss.core.class.helper
 * @class-namespace     sugar.helper.border.radius.medium.top.left
 * @type        class
@@ -9,7 +9,7 @@
 * Apply the **medium** border top left radius
 *
 * @example 	html
-* <div class="s-border .jti-s-radius-top-left-medium s-ratio-1-1">
+* <div class="s-border jti-s-radius-top-left-medium s-ratio-1-1">
 * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
 * </div>
 *

@@ -1,7 +1,7 @@
 
 
 /**
-* @name 		.jti-s-border-bottom-primary
+* @name 		jti-s-border-bottom-primary
 * @namespace           scss.core.class.helper
 * @class-namespace     sugar.helper.border.primary.bottom
 * @type        class
@@ -9,7 +9,7 @@
 * Apply the **<primary>primary</primary>** border bottom color
 *
 * @example 	html
-* <div class="s-border .jti-s-border-bottom-primary s-ratio-1-1">
+* <div class="s-border jti-s-border-bottom-primary s-ratio-1-1">
 * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
 * </div>
 *

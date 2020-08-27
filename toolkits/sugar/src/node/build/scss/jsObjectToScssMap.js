@@ -41,7 +41,11 @@ module.exports = function jsObjectToScssMap(object, settings = {}) {
       scssConfigString = scssConfigString.replace(line, `${prop}: ${value}`);
       return;
     }
-    if (settings.quoteKeys.indexOf(prop) === -1) return;
+    if (
+      settings.quoteKeys.indexOf(prop) === -1
+      // && value.split(' ').length === 1
+    )
+      return;
     scssConfigString = scssConfigString.replace(line, `${prop}: "${value}"`);
   });
 

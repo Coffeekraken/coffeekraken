@@ -1,7 +1,7 @@
 
 
 /**
-* @name 		.jti-s-border-top-title
+* @name 		jti-s-border-top-title
 * @namespace           scss.core.class.helper
 * @class-namespace     sugar.helper.border.title.top
 * @type        class
@@ -9,7 +9,7 @@
 * Apply the **<title>title</title>** border top color
 *
 * @example 	html
-* <div class="s-border .jti-s-border-top-title s-ratio-1-1">
+* <div class="s-border jti-s-border-top-title s-ratio-1-1">
 * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
 * </div>
 *

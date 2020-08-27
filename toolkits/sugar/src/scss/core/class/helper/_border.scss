@@ -2,7 +2,7 @@
 
   // @if class-match-namespace("sugar.helper.border") {
   //   /**
-  //   * @name 		s-border
+  //   * @name 		#{sel(border)}
   //   * @namespace           scss.core.class.helper
   //   * @class-namespace     sugar.helper.border
   //   * @type        class
@@ -10,18 +10,18 @@
   //   * Apply the default borders
   //   *
   //   * @example 	html
-  //   * <div class="s-border s-ratio-1-1">
+  //   * <div class="#{sel(border)} #{sel(ratio-1-1)}">
   //   * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
   //   * </div>
   //   *
   //   * @since       2.0.0
   //   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
   //   */
-  //   .s-border {
+  //   .#{sel(border)} {
   //     border: setting('borders.default') solid color(default);
   //   }
   // }
-  [class*="s-border"] {
+  [class*="#{sel(border)}"] {
     border: setting('borders.default') solid color(default);
   }
 
@@ -29,7 +29,7 @@
   @each $size, $value in $bordersSizes {
 
     @if class-match-namespace("sugar.helper.border.#{$size}") {
-      $cls: selector('s-border-#{$size}');
+      $cls: selector('border-#{$size}');
       /**
       * @name 		#{$cls}
       * @namespace           scss.core.class.helper
@@ -39,21 +39,21 @@
       * Apply the **#{$size}** border size
       *
       * @example 	html
-      * <div class="s-border #{$cls} s-ratio-1-1">
+      * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
       * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
       * </div>
       *
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      #{$cls} {
+      .#{$cls} {
         border-width: $value;
       }
     }
 
 
     @if class-match-namespace("sugar.helper.border.#{$size}.top") {
-      $cls: selector('s-border-top-#{$size}');
+      $cls: selector('border-top-#{$size}');
       /**
       * @name 		#{$cls}
       * @namespace           scss.core.class.helper
@@ -63,21 +63,21 @@
       * Apply the **#{$size}** border top size
       *
       * @example 	html
-      * <div class="s-border #{$cls} s-ratio-1-1">
+      * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
       * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
       * </div>
       *
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      #{$cls} {
+      .#{$cls} {
         border-top-width: $value;
       }
     }
 
 
     @if class-match-namespace("sugar.helper.border.#{$size}.right") {
-      $cls: selector('s-border-right-#{$size}');
+      $cls: selector('border-right-#{$size}');
       /**
       * @name 		#{$cls}
       * @namespace           scss.core.class.helper
@@ -87,20 +87,20 @@
       * Apply the **#{$size}** border right size
       *
       * @example 	html
-      * <div class="s-border #{$cls} s-ratio-1-1">
+      * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
       * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
       * </div>
       *
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      #{$cls} {
+      .#{$cls} {
         border-right-width: $value;
       }
     }
 
     @if class-match-namespace("sugar.helper.border.#{$size}.left") {
-      $cls: selector('s-border-left-#{$size}');
+      $cls: selector('border-left-#{$size}');
       /**
       * @name 		#{$cls}
       * @namespace           scss.core.class.helper
@@ -110,21 +110,21 @@
       * Apply the **#{$size}** border left size
       *
       * @example 	html
-      * <div class="s-border #{$cls} s-ratio-1-1">
+      * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
       * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
       * </div>
       *
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      #{$cls} {
+      .#{$cls} {
         border-left-width: $value;
       }
     }
 
 
     @if class-match-namespace("sugar.helper.border.#{$size}.bottom") {
-      $cls: selector('s-border-bottom-#{$size}');
+      $cls: selector('border-bottom-#{$size}');
       /**
       * @name 		#{$cls}
       * @namespace           scss.core.class.helper
@@ -134,21 +134,21 @@
       * Apply the **#{$size}** border bottom size
       *
       * @example 	html
-      * <div class="s-border #{$cls} s-ratio-1-1">
+      * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
       * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
       * </div>
       *
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      #{$cls} {
+      .#{$cls} {
         border-bottom-width: $value;
       }
     }
 
 
     @if class-match-namespace("sugar.helper.border.#{$size}.side") {
-      $cls: selector('s-border-side-#{$size}');
+      $cls: selector('border-side-#{$size}');
       /**
       * @name 		#{$cls}
       * @namespace           scss.core.class.helper
@@ -158,14 +158,14 @@
       * Apply the **#{$size}** border side (left and right) size
       *
       * @example 	html
-      * <div class="s-border #{$cls} s-ratio-1-1">
+      * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
       * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
       * </div>
       *
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      #{$cls} {
+      .#{$cls} {
         border-left-width: $value;
         border-right-width: $value;
       }
@@ -173,7 +173,7 @@
 
 
     @if class-match-namespace("sugar.helper.border.#{$size}.y") {
-      $cls: selector('s-border-y-#{$size}');
+      $cls: selector('border-y-#{$size}');
       /**
       * @name 		#{$cls}
       * @namespace           scss.core.class.helper
@@ -183,14 +183,14 @@
       * Apply the **#{$size}** border y (top and bottom) size
       *
       * @example 	html
-      * <div class="s-border #{$cls} s-ratio-1-1">
+      * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
       * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
       * </div>
       *
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      #{$cls} {
+      .#{$cls} {
         border-top-width: $value;
         border-bottom-width: $value;
       }
@@ -203,7 +203,7 @@
   @each $size, $value in $bordersRadius {
 
     @if class-match-namespace("sugar.helper.border.radius.#{$size}") {
-      $cls: selector('s-radius-#{$size}');
+      $cls: selector('radius-#{$size}');
       /**
       * @name 		#{$cls}
       * @namespace           scss.core.class.helper
@@ -213,21 +213,21 @@
       * Apply the **#{$size}** border radius
       *
       * @example 	html
-      * <div class="s-border #{$cls} s-ratio-1-1">
+      * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
       * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
       * </div>
       *
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      #{$cls} {
+      .#{$cls} {
         border-radius: $value;
       }
     }
 
 
     @if class-match-namespace("sugar.helper.border.radius.#{$size}.top") {
-      $cls: selector('s-radius-top-#{$size}');
+      $cls: selector('radius-top-#{$size}');
       /**
       * @name 		#{$cls}
       * @namespace           scss.core.class.helper
@@ -237,14 +237,14 @@
       * Apply the **#{$size}** border top radius
       *
       * @example 	html
-      * <div class="s-border #{$cls} s-ratio-1-1">
+      * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
       * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
       * </div>
       *
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      #{$cls} {
+      .#{$cls} {
         border-top-left-radius: $value;
         border-top-right-radius: $value;
       }
@@ -252,7 +252,7 @@
 
 
     @if class-match-namespace("sugar.helper.border.radius.#{$size}.right") {
-      $cls: selector('s-radius-right-#{$size}');
+      $cls: selector('radius-right-#{$size}');
       /**
       * @name 		#{$cls}
       * @namespace           scss.core.class.helper
@@ -262,21 +262,21 @@
       * Apply the **#{$size}** border right radius
       *
       * @example 	html
-      * <div class="s-border #{$cls} s-ratio-1-1">
+      * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
       * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
       * </div>
       *
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      #{$cls} {
+      .#{$cls} {
         border-top-right-radius: $value;
         border-bottom-right-radius: $value;
       }
     }
 
     @if class-match-namespace("sugar.helper.border.radius.#{$size}.left") {
-      $cls: selector('s-radius-left-#{$size}');
+      $cls: selector('radius-left-#{$size}');
       /**
       * @name 		#{$cls}
       * @namespace           scss.core.class.helper
@@ -286,14 +286,14 @@
       * Apply the **#{$size}** border left radius
       *
       * @example 	html
-      * <div class="s-border #{$cls} s-ratio-1-1">
+      * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
       * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
       * </div>
       *
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      #{$cls} {
+      .#{$cls} {
         border-top-left-radius: $value;
         border-bottom-left-radius: $value;
       }
@@ -301,7 +301,7 @@
 
 
     @if class-match-namespace("sugar.helper.border.radius.#{$size}.bottom") {
-      $cls: selector('s-radius-bottom-#{$size}');
+      $cls: selector('radius-bottom-#{$size}');
       /**
       * @name 		#{$cls}
       * @namespace           scss.core.class.helper
@@ -311,14 +311,14 @@
       * Apply the **#{$size}** border bottom radius
       *
       * @example 	html
-      * <div class="s-border #{$cls} s-ratio-1-1">
+      * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
       * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
       * </div>
       *
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      #{$cls} {
+      .#{$cls} {
         border-bottom-left-radius: $value;
         border-bottom-right-radius: $value;
       }
@@ -326,7 +326,7 @@
 
 
     @if class-match-namespace("sugar.helper.border.radius.#{$size}.top.left") {
-      $cls: selector('s-radius-top-left-#{$size}');
+      $cls: selector('radius-top-left-#{$size}');
       /**
       * @name 		#{$cls}
       * @namespace           scss.core.class.helper
@@ -336,21 +336,21 @@
       * Apply the **#{$size}** border top left radius
       *
       * @example 	html
-      * <div class="s-border #{$cls} s-ratio-1-1">
+      * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
       * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
       * </div>
       *
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      #{$cls} {
+      .#{$cls} {
         border-top-left-radius: $value;
       }
     }
 
 
     @if class-match-namespace("sugar.helper.border.radius.#{$size}.top.right") {
-      $cls: selector('s-radius-top-right-#{$size}');
+      $cls: selector('radius-top-right-#{$size}');
       /**
       * @name 		#{$cls}
       * @namespace           scss.core.class.helper
@@ -360,21 +360,21 @@
       * Apply the **#{$size}** border top right radius
       *
       * @example 	html
-      * <div class="s-border #{$cls} s-ratio-1-1">
+      * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
       * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
       * </div>
       *
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      #{$cls} {
+      .#{$cls} {
         border-top-right-radius: $value;
       }
     }
 
 
     @if class-match-namespace("sugar.helper.border.radius.#{$size}.bottom.left") {
-      $cls: selector('s-radius-bottom-left-#{$size}');
+      $cls: selector('radius-bottom-left-#{$size}');
       /**
       * @name 		#{$cls}
       * @namespace           scss.core.class.helper
@@ -384,21 +384,21 @@
       * Apply the **#{$size}** border bottom left radius
       *
       * @example 	html
-      * <div class="s-border #{$cls} s-ratio-1-1">
+      * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
       * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
       * </div>
       *
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      #{$cls} {
+      .#{$cls} {
         border-bottom-left-radius: $value;
       }
     }
 
 
     @if class-match-namespace("sugar.helper.border.radius.#{$size}.bottom.right") {
-      $cls: selector('s-radius-bottom-right-#{$size}');
+      $cls: selector('radius-bottom-right-#{$size}');
       /**
       * @name 		#{$cls}
       * @namespace           scss.core.class.helper
@@ -408,14 +408,14 @@
       * Apply the **#{$size}** border bottom right radius
       *
       * @example 	html
-      * <div class="s-border #{$cls} s-ratio-1-1">
+      * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
       * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
       * </div>
       *
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      #{$cls} {
+      .#{$cls} {
         border-bottom-right-radius: $value;
       }
     }
@@ -424,7 +424,7 @@
 
 
   @if class-match-namespace("sugar.helper.border.radius.circle") {
-    $cls: selector('s-radius-circle');
+    $cls: selector('radius-circle');
     /**
     * @name 		#{$cls}
     * @namespace           scss.core.class.helper
@@ -434,21 +434,21 @@
     * Apply a circle border radius
     *
     * @example 	html
-    * <div class="s-border #{$cls} s-ratio-1-1">
+    * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
     * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    #{$cls} {
+    .#{$cls} {
       border-radius: 50%;
     }
   }
 
 
   @if class-match-namespace("sugar.helper.border.radius.pill") {
-    $cls: selector('s-radius-pill');
+    $cls: selector('radius-pill');
     /**
     * @name 		#{$cls}
     * @namespace           scss.core.class.helper
@@ -458,21 +458,21 @@
     * Apply a pill style border radius
     *
     * @example 	html
-    * <div class="s-border #{$cls} s-ratio-16-9">
+    * <div class="#{sel(border)} #{$cls} s-ratio-16-9">
     * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    #{$cls} {
+    .#{$cls} {
       border-radius: 50rem;
     }
   }
 
 
   @if class-match-namespace("sugar.helper.border.radius.no") {
-    $cls: selector('s-no-radius');
+    $cls: selector('no-radius');
     /**
     * @name 		#{$cls}
     * @namespace           scss.core.class.helper
@@ -482,21 +482,21 @@
     * Remove the border radius
     *
     * @example 	html
-    * <div class="s-border s-radius #{$cls} s-ratio-1-1">
+    * <div class="#{sel(border)} #{sel(radius)} #{$cls} #{sel(ratio-1-1)}">
     * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    #{$cls} {
+    .#{$cls} {
       border-radius: 0;
     }
   }
 
 
   @if class-match-namespace("sugar.helper.border.radius.no.top") {
-    $cls: selector('s-no-radius-top');
+    $cls: selector('no-radius-top');
     /**
     * @name 		#{$cls}
     * @namespace           scss.core.class.helper
@@ -506,14 +506,14 @@
     * Remove the top border radius
     *
     * @example 	html
-    * <div class="s-border s-radius #{$cls} s-ratio-1-1">
+    * <div class="#{sel(border)} #{sel(radius)} #{$cls} #{sel(ratio-1-1)}">
     * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    #{$cls} {
+    .#{$cls} {
       border-top-left-radius: 0;
       border-top-right-radius: 0;
     }
@@ -521,7 +521,7 @@
 
 
   @if class-match-namespace("sugar.helper.border.radius.no.right") {
-    $cls: selector('s-no-radius-right');
+    $cls: selector('no-radius-right');
     /**
     * @name 		#{$cls}
     * @namespace           scss.core.class.helper
@@ -531,14 +531,14 @@
     * Remove the right border radius
     *
     * @example 	html
-    * <div class="s-border s-radius #{$cls} s-ratio-1-1">
+    * <div class="#{sel(border)} #{sel(radius)} #{$cls} #{sel(ratio-1-1)}">
     * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    #{$cls} {
+    .#{$cls} {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
     }
@@ -546,7 +546,7 @@
 
 
   @if class-match-namespace("sugar.helper.border.radius.no.left") {
-    $cls: selector('s-no-radius-left');
+    $cls: selector('no-radius-left');
     /**
     * @name 		#{$cls}
     * @namespace           scss.core.class.helper
@@ -556,14 +556,14 @@
     * Remove the left border radius
     *
     * @example 	html
-    * <div class="s-border s-radius #{$cls} s-ratio-1-1">
+    * <div class="#{sel(border)} #{sel(radius)} #{$cls} #{sel(ratio-1-1)}">
     * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    #{$cls} {
+    .#{$cls} {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
     }
@@ -571,7 +571,7 @@
 
 
   @if class-match-namespace("sugar.helper.border.radius.no.bottom") {
-    $cls: selector('s-no-radius-bottom');
+    $cls: selector('no-radius-bottom');
     /**
     * @name 		#{$cls}
     * @namespace           scss.core.class.helper
@@ -581,14 +581,14 @@
     * Remove the bottom border radius
     *
     * @example 	html
-    * <div class="s-border s-radius #{$cls} s-ratio-1-1">
+    * <div class="#{sel(border)} #{sel(radius)} #{$cls} #{sel(ratio-1-1)}">
     * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    #{$cls} {
+    .#{$cls} {
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
     }
@@ -596,7 +596,7 @@
 
 
   @if class-match-namespace("sugar.helper.border.radius.no.top.left") {
-    $cls: selector('s-no-radius-top-left');
+    $cls: selector('no-radius-top-left');
     /**
     * @name 		#{$cls}
     * @namespace           scss.core.class.helper
@@ -606,21 +606,21 @@
     * Remove the top left border radius
     *
     * @example 	html
-    * <div class="s-border s-radius #{$cls} s-ratio-1-1">
+    * <div class="#{sel(border)} #{sel(radius)} #{$cls} #{sel(ratio-1-1)}">
     * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    #{$cls} {
+    .#{$cls} {
       border-top-left-radius: 0;
     }
   }
 
 
   @if class-match-namespace("sugar.helper.border.radius.no.top.right") {
-    $cls: selector('s-no-radius-top-right');
+    $cls: selector('no-radius-top-right');
     /**
     * @name 		#{$cls}
     * @namespace           scss.core.class.helper
@@ -630,21 +630,21 @@
     * Remove the top right border radius
     *
     * @example 	html
-    * <div class="s-border s-radius #{$cls} s-ratio-1-1">
+    * <div class="#{sel(border)} #{sel(radius)} #{$cls} #{sel(ratio-1-1)}">
     * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    #{$cls} {
+    .#{$cls} {
       border-top-right-radius: 0;
     }
   }
 
 
   @if class-match-namespace("sugar.helper.border.radius.no.bottom.left") {
-    $cls: selector('s-no-radius-bottom-left');
+    $cls: selector('no-radius-bottom-left');
     /**
     * @name 		#{$cls}
     * @namespace           scss.core.class.helper
@@ -654,21 +654,21 @@
     * Remove the bottom left border radius
     *
     * @example 	html
-    * <div class="s-border s-radius #{$cls} s-ratio-1-1">
+    * <div class="#{sel(border)} #{sel(radius)} #{$cls} #{sel(ratio-1-1)}">
     * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    #{$cls} {
+    .#{$cls} {
       border-bottom-left-radius: 0;
     }
   }
 
 
   @if class-match-namespace("sugar.helper.border.radius.no.bottom.right") {
-    $cls: selector('s-no-radius-bottom-right');
+    $cls: selector('no-radius-bottom-right');
     /**
     * @name 		#{$cls}
     * @namespace           scss.core.class.helper
@@ -678,14 +678,14 @@
     * Remove the bottom right border radius
     *
     * @example 	html
-    * <div class="s-border s-radius #{$cls} s-ratio-1-1">
+    * <div class="#{sel(border)} #{sel(radius)} #{$cls} #{sel(ratio-1-1)}">
     * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    #{$cls} {
+    .#{$cls} {
       border-bottom-right-radius: 0;
     }
   }
@@ -695,7 +695,7 @@
   @each $color, $value in $colors {
 
     @if class-match-namespace("sugar.helper.border.#{$color}") {
-      $cls: selector('s-border-#{$color}');
+      $cls: selector('border-#{$color}');
       /**
       * @name 		#{$cls}
       * @namespace           scss.core.class.helper
@@ -705,21 +705,21 @@
       * Apply the **<#{$color}>#{$color}</#{$color}>** border color
       *
       * @example 	html
-      * <div class="s-border #{$cls} s-ratio-1-1">
+      * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
       * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
       * </div>
       *
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      #{$cls} {
+      .#{$cls} {
         border-color: color($color);
       }
     }
 
 
     @if class-match-namespace("sugar.helper.border.#{$color}.top") {
-      $cls: selector('s-border-top-#{$color}');
+      $cls: selector('border-top-#{$color}');
       /**
       * @name 		#{$cls}
       * @namespace           scss.core.class.helper
@@ -729,21 +729,21 @@
       * Apply the **<#{$color}>#{$color}</#{$color}>** border top color
       *
       * @example 	html
-      * <div class="s-border #{$cls} s-ratio-1-1">
+      * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
       * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
       * </div>
       *
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      #{$cls} {
+      .#{$cls} {
         border-top-color: color($color);
       }
     }
 
 
     @if class-match-namespace("sugar.helper.border.#{$color}.right") {
-      $cls: selector('s-border-right-#{$color}');
+      $cls: selector('border-right-#{$color}');
       /**
       * @name 		#{$cls}
       * @namespace           scss.core.class.helper
@@ -753,20 +753,20 @@
       * Apply the **<#{$color}>#{$color}</#{$color}>** border right color
       *
       * @example 	html
-      * <div class="s-border #{$cls} s-ratio-1-1">
+      * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
       * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
       * </div>
       *
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      #{$cls} {
+      .#{$cls} {
         border-right-color: color($color);
       }
     }
 
     @if class-match-namespace("sugar.helper.border.#{$color}.left") {
-      $cls: selector('s-border-left-#{$color}');
+      $cls: selector('border-left-#{$color}');
       /**
       * @name 		#{$cls}
       * @namespace           scss.core.class.helper
@@ -776,21 +776,21 @@
       * Apply the **<#{$color}>#{$color}</#{$color}>** border left color
       *
       * @example 	html
-      * <div class="s-border #{$cls} s-ratio-1-1">
+      * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
       * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
       * </div>
       *
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      #{$cls} {
+      .#{$cls} {
         border-left-color: color($color);
       }
     }
 
 
     @if class-match-namespace("sugar.helper.border.#{$color}.bottom") {
-      $cls: selector('s-border-bottom-#{$color}');
+      $cls: selector('border-bottom-#{$color}');
       /**
       * @name 		#{$cls}
       * @namespace           scss.core.class.helper
@@ -800,21 +800,21 @@
       * Apply the **<#{$color}>#{$color}</#{$color}>** border bottom color
       *
       * @example 	html
-      * <div class="s-border #{$cls} s-ratio-1-1">
+      * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
       * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
       * </div>
       *
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      #{$cls} {
+      .#{$cls} {
         border-bottom-color: color($color);
       }
     }
 
 
     @if class-match-namespace("sugar.helper.border.#{$color}.side") {
-      $cls: selector('s-border-side-#{$color}');
+      $cls: selector('border-side-#{$color}');
       /**
       * @name 		#{$cls}
       * @namespace           scss.core.class.helper
@@ -824,14 +824,14 @@
       * Apply the **<#{$color}>#{$color}</#{$color}>** border side (left and right) color
       *
       * @example 	html
-      * <div class="s-border #{$cls} s-ratio-1-1">
+      * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
       * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
       * </div>
       *
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      #{$cls} {
+      .#{$cls} {
         border-left-color: color($color);
         border-right-color: color($color);
       }
@@ -839,7 +839,7 @@
 
 
     @if class-match-namespace("sugar.helper.border.#{$color}.y") {
-      $cls: selector('s-border-y-#{$color}');
+      $cls: selector('border-y-#{$color}');
       /**
       * @name 		#{$cls}
       * @namespace           scss.core.class.helper
@@ -849,14 +849,14 @@
       * Apply the **<#{$color}>#{$color}</#{$color}>** border y (top and bottom) color
       *
       * @example 	html
-      * <div class="s-border #{$cls} s-ratio-1-1">
+      * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
       * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
       * </div>
       *
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      #{$cls} {
+      .#{$cls} {
         border-top-color: color($color);
         border-bottom-color: color($color);
       }
@@ -866,7 +866,7 @@
 
 
   @if class-match-namespace("sugar.helper.border.no") {
-    $cls: selector('s-no-border');
+    $cls: selector('no-border');
     /**
     * @name 		#{$cls}
     * @namespace           scss.core.class.helper
@@ -876,21 +876,21 @@
     * Remove the borders
     *
     * @example 	html
-    * <div class="s-border #{$cls} s-ratio-1-1">
+    * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
     * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    #{$cls} {
+    .#{$cls} {
       border: none;
     }
   }
 
 
   @if class-match-namespace("sugar.helper.border.no.top") {
-    $cls: selector('s-no-border-top');
+    $cls: selector('no-border-top');
     /**
     * @name 		#{$cls}
     * @namespace           scss.core.class.helper
@@ -900,21 +900,21 @@
     * Remove the top border
     *
     * @example 	html
-    * <div class="s-border #{$cls} s-ratio-1-1">
+    * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
     * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    #{$cls} {
+    .#{$cls} {
       border-top: none;
     }
   }
 
 
   @if class-match-namespace("sugar.helper.border.no.right") {
-    $cls: selector('s-no-border-right');
+    $cls: selector('no-border-right');
     /**
     * @name 		#{$cls}
     * @namespace           scss.core.class.helper
@@ -924,21 +924,21 @@
     * Remove the right border
     *
     * @example 	html
-    * <div class="s-border #{$cls} s-ratio-1-1">
+    * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
     * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    #{$cls} {
+    .#{$cls} {
       border-right: none;
     }
   }
 
 
   @if class-match-namespace("sugar.helper.border.no.left") {
-    $cls: selector('s-no-border-left');
+    $cls: selector('no-border-left');
     /**
     * @name 		#{$cls}
     * @namespace           scss.core.class.helper
@@ -948,21 +948,21 @@
     * Remove the left border
     *
     * @example 	html
-    * <div class="s-border #{$cls} s-ratio-1-1">
+    * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
     * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    #{$cls} {
+    .#{$cls} {
       border-left: none;
     }
   }
 
 
   @if class-match-namespace("sugar.helper.border.no.bottom") {
-    $cls: selector('s-no-border-bottom');
+    $cls: selector('no-border-bottom');
     /**
     * @name 		#{$cls}
     * @namespace           scss.core.class.helper
@@ -972,20 +972,20 @@
     * Remove the bottom border
     *
     * @example 	html
-    * <div class="s-border #{$cls} s-ratio-1-1">
+    * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
     * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    #{$cls} {
+    .#{$cls} {
       border-bottom: none;
     }
   }
 
   @if class-match-namespace("sugar.helper.border.no.side") {
-    $cls: selector('s-no-border-side');
+    $cls: selector('no-border-side');
     /**
     * @name 		#{$cls}
     * @namespace           scss.core.class.helper
@@ -995,14 +995,14 @@
     * Remove the side (left and right borders
     *
     * @example 	html
-    * <div class="s-border #{$cls} s-ratio-1-1">
+    * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
     * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    #{$cls} {
+    .#{$cls} {
       border-left: none;
       border-right: none;
     }
@@ -1010,7 +1010,7 @@
 
 
   @if class-match-namespace("sugar.helper.border.no.y") {
-    $cls: selector('s-no-border-y');
+    $cls: selector('no-border-y');
     /**
     * @name 		#{$cls}
     * @namespace           scss.core.class.helper
@@ -1020,14 +1020,14 @@
     * Remove the y (top and bottom) borders
     *
     * @example 	html
-    * <div class="s-border #{$cls} s-ratio-1-1">
+    * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
     * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    #{$cls} {
+    .#{$cls} {
       border-top: none;
       border-bottom: none;
     }

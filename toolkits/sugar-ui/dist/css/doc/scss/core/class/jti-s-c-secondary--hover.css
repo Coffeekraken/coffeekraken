@@ -1,7 +1,7 @@
 
 
 /**
-  * @name       	.jti-s-c-secondary--hover
+  * @name       	jti-s-c-secondary--hover
   * @namespace       scss.core.class
   * @class-namespace           sugar.helper.color.secondary.hover
   * @type        class
@@ -9,7 +9,7 @@
   * Specify the color to **secondary--hover**
   *
   * @example 	html
-  * <div class=".jti-s-c-secondary--hover">
+  * <div class="jti-s-c-secondary--hover">
   * 	I'm in "secondary--hover" color
   * </div>
   *

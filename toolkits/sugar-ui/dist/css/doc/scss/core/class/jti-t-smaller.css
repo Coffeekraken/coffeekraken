@@ -1,0 +1,18 @@
+
+
+/**
+  * @name       	jti-t-smaller
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.text.smaller
+  * @type        class
+  *
+  * Set the size **smaller** relative to the root element
+  *
+  * @example 	html
+  * <div class="jti-t-smaller">
+  * 	I have the size "smaller" defined
+  * </div>
+  *
+  * @since       2.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */

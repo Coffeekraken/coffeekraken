@@ -1,7 +1,7 @@
 
 
 /**
-  * @name       	.jti-s-bg-light
+  * @name       	jti-s-bg-light
   * @namespace       scss.core.class
   * @class-namespace           sugar.helper.color.light.bg
   * @type        class
@@ -9,7 +9,7 @@
   * Specify the background color to **light**
   *
   * @example 	html
-  * <div class=".jti-s-bg-light p" style="color:white">
+  * <div class="jti-s-bg-light p" style="color:white">
   * 	My background color is "light"
   * </div>
   *

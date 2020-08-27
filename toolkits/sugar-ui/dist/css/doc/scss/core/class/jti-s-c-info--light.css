@@ -1,7 +1,7 @@
 
 
 /**
-  * @name       	.jti-s-c-info--light
+  * @name       	jti-s-c-info--light
   * @namespace       scss.core.class
   * @class-namespace           sugar.helper.color.info.light
   * @type        class
@@ -9,7 +9,7 @@
   * Specify the color to **info--light**
   *
   * @example 	html
-  * <div class=".jti-s-c-info--light">
+  * <div class="jti-s-c-info--light">
   * 	I'm in "info--light" color
   * </div>
   *

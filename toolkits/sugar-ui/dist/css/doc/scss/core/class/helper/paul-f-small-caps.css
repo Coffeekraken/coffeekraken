@@ -1,0 +1,16 @@
+
+
+/**
+* @name 		paul-f-small-caps
+* @namespace           scss.core.class.helper
+* @class-namespace     sugar.helper.font.variant.small-caps
+* @type        class
+*
+* Set the font-variant to ```small-caps```
+*
+* @example 	html
+* This <span class="paul-f-small-caps">word</span> is small-caps
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/

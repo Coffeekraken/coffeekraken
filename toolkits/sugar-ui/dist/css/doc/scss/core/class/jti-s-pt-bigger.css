@@ -1,7 +1,7 @@
 
 
 /**
-  * @name       	.jti-s-pt-bigger
+  * @name       	jti-s-pt-bigger
   * @namespace       scss.core.class
   * @class-namespace           sugar.helper.padding.top.bigger
   * @type        class
@@ -9,7 +9,7 @@
   * Set the **top** padding to the **3** size
   *
   * @example 	html
-  * <div class=".jti-s-pt-bigger" style="border:1px solid #f2bc2b; width:150px; height:150px;">
+  * <div class="jti-s-pt-bigger" style="border:1px solid #f2bc2b; width:150px; height:150px;">
   * 	<div style="background:#2b3438; width:100%; height:100%"></div>
   * </div>
   *

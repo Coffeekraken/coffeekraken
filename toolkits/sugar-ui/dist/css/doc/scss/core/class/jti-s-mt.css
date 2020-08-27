@@ -1,7 +1,7 @@
 
 
 /**
-  * @name          .jti-s-mt
+  * @name          jti-s-mt
   * @namespace       scss.core.class
   * @class-namespace           sugar.helper.margin.top.default
   * @type        class
@@ -10,7 +10,7 @@
   *
   * @example 	html
   * <div style="background:#f2bc2b; width:100px; height:5px"></div>
-  * <div class=".jti-s-mt" style="background:#2b3438; width:100px; height:5px"></div>
+  * <div class="jti-s-mt" style="background:#2b3438; width:100px; height:5px"></div>
   *
   * @since       1.0.0
   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

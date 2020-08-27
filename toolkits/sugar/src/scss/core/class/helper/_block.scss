@@ -1,7 +1,7 @@
 @mixin classes-helper-block() {
   @if class-match-namespace('sugar.helper.block.align.center') {
     /**
-      * @name 		s-block-center
+      * @name 		#{sel(block-center)}
       * @namespace           scss.core.class.helper
       * @class-namespace     sugar.helper.block.align.center
       * @type        class
@@ -9,14 +9,14 @@
       * Set the element to as ```display:block``` and center it
       *
       * @example 	html
-      * <div class="s-block-center s-bg-primary" style="width:100px;">
+      * <div class="#{sel(block-center)} #{sel(bg-primary)}" style="width:100px;">
       * 	I'm a centered block
       * </div>
       *
       * @since       1.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-    .s-block-center {
+    .#{sel(block-center)} {
       display: block;
       margin-left: auto;
       margin-right: auto;

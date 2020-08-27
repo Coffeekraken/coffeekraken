@@ -1,0 +1,18 @@
+
+
+/**
+  * @name       	jti-bg-info--dark
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.info.dark.bg
+  * @type        class
+  *
+  * Specify the background color to **info--dark**
+  *
+  * @example 	html
+  * <div class="jti-bg-info--dark p" style="color:white">
+  * 	My background color is "info--dark"
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */

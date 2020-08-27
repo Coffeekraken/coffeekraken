@@ -1,7 +1,7 @@
 
 
 /**
-  * @name       	.jti-s-c-info--hover
+  * @name       	jti-s-c-info--hover
   * @namespace       scss.core.class
   * @class-namespace           sugar.helper.color.info.hover
   * @type        class
@@ -9,7 +9,7 @@
   * Specify the color to **info--hover**
   *
   * @example 	html
-  * <div class=".jti-s-c-info--hover">
+  * <div class="jti-s-c-info--hover">
   * 	I'm in "info--hover" color
   * </div>
   *

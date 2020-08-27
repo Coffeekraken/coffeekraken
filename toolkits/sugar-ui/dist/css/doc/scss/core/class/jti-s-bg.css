@@ -1,7 +1,7 @@
 
 
 /**
-  * @name       	.jti-s-bg
+  * @name       	jti-s-bg
   * @namespace       scss.core.class
   * @class-namespace           sugar.helper.color.default.bg
   * @type        class
@@ -9,7 +9,7 @@
   * Specify the background color to **default**
   *
   * @example 	html
-  * <div class=".jti-s-bg p" style="color:white">
+  * <div class="jti-s-bg p" style="color:white">
   * 	My background color is "default"
   * </div>
   *

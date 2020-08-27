@@ -13,7 +13,7 @@
   * @todo         Finish describing features
   *
   * @param       {Number}       [$border-radius: settings('look-and-feel.border-radius')]       The border radius you want
-  * @param       {String}        [$name='s-card']       The className to use for the generation
+  * @param       {String}        [$name='card']       The className to use for the generation
   *
   * @example         html
   * <div class="s-card">
@@ -33,7 +33,7 @@
   */
   @mixin card-classes(
     $border-radius: setting('look-and-feel.border-radius'),
-    $name: 's-card'
+    $name: 'card'
   ) {
     @include card-bare-classes($name);
     @include card-style-classes($border-radius, $name);
@@ -46,13 +46,13 @@
    *
    * This mixin generate all the bare classes depending on the parameters you set.
    *
-   * @param       {String}      [$name='s-card']                         The name to use for the generation of the classes
+   * @param       {String}      [$name='card']                         The name to use for the generation of the classes
    *
    * @since       2.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   @mixin card-bare-classes(
-    $name: 's-card'
+    $name: 'card'
   ) {
 
   }
@@ -66,14 +66,14 @@
    * This mixin generate all the style classes depending on the parameters you set.
    *
    * @param       {Number}       [$border-radius: settings('look-and-feel.border-radius')]       The border radius you want
-   * @param       {String}      [$name='s-card']                         The name to use for the generation of the classes
+   * @param       {String}      [$name='card']                         The name to use for the generation of the classes
    *
    * @since       2.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   @mixin card-style-classes(
     $border-radius: setting('look-and-feel.border-radius'),
-    $name: 's-card'
+    $name: 'card'
   ) {
 
   }

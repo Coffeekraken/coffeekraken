@@ -1,7 +1,7 @@
 
 
 /**
-  * @name       	.jti-s-bg-title
+  * @name       	jti-s-bg-title
   * @namespace       scss.core.class
   * @class-namespace           sugar.helper.color.title.bg
   * @type        class
@@ -9,7 +9,7 @@
   * Specify the background color to **title**
   *
   * @example 	html
-  * <div class=".jti-s-bg-title p" style="color:white">
+  * <div class="jti-s-bg-title p" style="color:white">
   * 	My background color is "title"
   * </div>
   *

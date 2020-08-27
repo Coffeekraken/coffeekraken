@@ -1,7 +1,7 @@
 
 
 /**
-  * @name       	.jti-s-bg-secondary
+  * @name       	jti-s-bg-secondary
   * @namespace       scss.core.class
   * @class-namespace           sugar.helper.color.secondary.bg
   * @type        class
@@ -9,7 +9,7 @@
   * Specify the background color to **secondary**
   *
   * @example 	html
-  * <div class=".jti-s-bg-secondary p" style="color:white">
+  * <div class="jti-s-bg-secondary p" style="color:white">
   * 	My background color is "secondary"
   * </div>
   *

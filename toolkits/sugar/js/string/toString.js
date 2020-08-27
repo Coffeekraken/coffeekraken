@@ -25,6 +25,8 @@ var _deepMerge = _interopRequireDefault(require("../object/deepMerge"));
 
 var _SError = _interopRequireDefault(require("../error/SError"));
 
+var _stringify = _interopRequireDefault(require("../json/stringify"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**

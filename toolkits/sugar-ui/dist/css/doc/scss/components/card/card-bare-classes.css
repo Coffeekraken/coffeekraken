@@ -7,7 +7,7 @@
  *
  * This mixin generate all the bare classes depending on the parameters you set.
  *
- * @param       {String}      [$name='s-card']                         The name to use for the generation of the classes
+ * @param       {String}      [$name='card']                         The name to use for the generation of the classes
  *
  * @since       2.0.0
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

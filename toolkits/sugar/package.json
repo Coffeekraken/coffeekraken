@@ -129,6 +129,7 @@
     "jest-useragent-mock": "^0.1.1",
     "js-striphtml": "^1.1.2",
     "jsdom": "^16.2.2",
+    "json-cyclic": "^1.0.2",
     "json-sass-vars": "^3.1.0",
     "json-to-scss": "^1.5.0",
     "jss": "^10.0.3",

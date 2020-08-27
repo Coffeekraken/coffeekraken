@@ -1,0 +1,20 @@
+
+
+/**
+* @name 		jti-flex-align-end
+* @namespace           scss.core.class.helper
+* @class-namespace     sugar.helper.flex.align.end
+* @type        class
+*
+* Apply the property ```align-items``` to **flex-end**
+*
+* @example 	html
+* <div class="jti-flex-align-end">
+*   <div>I will be aligned depending on the flex-align-{side} parent class</div>
+*   <div>I will be aligned depending on the flex-align-{side} parent class</div>
+*   <div>I will be aligned depending on the flex-align-{side} parent class</div>
+* </div>
+*
+* @since       2.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/

@@ -1,0 +1,18 @@
+
+
+/**
+* @name 		jti-user-select-all
+* @namespace           scss.core.class.helper
+* @class-namespace     sugar.helper.user-select.all
+* @type        class
+*
+* Disable the selection for this element
+*
+* @example 	html
+* <p class="jti-user-select-all">
+*   I will be all selected in 1 click
+* </p>
+*
+* @since       2.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/

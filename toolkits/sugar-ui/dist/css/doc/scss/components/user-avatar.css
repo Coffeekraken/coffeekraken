@@ -9,7 +9,7 @@
  * Their's also the mixin ```user-avatar-bare``` and ```user-avatar-style``` that you
  * can use if you need more controls.
  *
- * @param       {String}        [$name='s-user-avatar']       The className to use for the generation
+ * @param       {String}        [$name='user-avatar']       The className to use for the generation
  *
  * @example         html
  * <div class="s-user-avatar">

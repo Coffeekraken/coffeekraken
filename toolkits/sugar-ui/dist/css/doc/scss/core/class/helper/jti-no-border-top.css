@@ -1,0 +1,18 @@
+
+
+/**
+* @name 		jti-no-border-top
+* @namespace           scss.core.class.helper
+* @class-namespace     sugar.helper.border.no.top
+* @type        class
+*
+* Remove the top border
+*
+* @example 	html
+* <div class="jti-border jti-no-border-top jti-ratio-1-1">
+* 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
+* </div>
+*
+* @since       2.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/

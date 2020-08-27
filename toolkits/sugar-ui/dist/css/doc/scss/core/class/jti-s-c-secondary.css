@@ -1,7 +1,7 @@
 
 
 /**
-  * @name       	.jti-s-c-secondary
+  * @name       	jti-s-c-secondary
   * @namespace       scss.core.class
   * @class-namespace           sugar.helper.color.secondary
   * @type        class
@@ -9,7 +9,7 @@
   * Specify the color to **secondary**
   *
   * @example 	html
-  * <div class=".jti-s-c-secondary">
+  * <div class="jti-s-c-secondary">
   * 	I'm in "secondary" color
   * </div>
   *

@@ -8,7 +8,6 @@ const __SBundleScssStreamAction = require('./actions/SBundleScssStreamAction');
 const __SRenderSassStreamAction = require('./actions/SRenderSassStreamAction');
 const __SPostCssStreamAction = require('./actions/SPostCssStreamAction');
 const __SFsFilesResolverStreamAction = require('../../stream/actions/SFsFilesResolverStreamAction');
-const __SFsCacheStreamAction = require('../../stream/actions/SFsCacheStreamAction');
 const __SExtractStreamAction = require('../../stream/actions/SExtractStreamAction');
 const __path = require('path');
 const __sugarConfig = require('../../config/sugar');
@@ -58,15 +57,14 @@ module.exports = class SBuildScssActionsStream extends __SActionsStream {
     super(
       {
         filesResolver: __SFsFilesResolverStreamAction,
-        // fsCache: __SFsCacheStreamAction,
         bundle: __SBundleScssStreamAction,
         sugarJson: __SSugarJsonStreamAction,
         imports: __SImportsStreamAction,
         jsConfig: __SJsObjectToScssStreamAction,
-        // render: __SRenderSassStreamAction,
-        // extractDocblocks: __SExtractDocblocksIntoFiles,
-        // extract: __SExtractStreamAction,
-        // postCss: __SPostCssStreamAction,
+        render: __SRenderSassStreamAction,
+        extractDocblocks: __SExtractDocblocksIntoFiles,
+        extract: __SExtractStreamAction,
+        postCss: __SPostCssStreamAction,
         fsOutput: __SFsOutputStreamAction
       },
       __deepMerge(
@@ -85,9 +83,6 @@ module.exports = class SBuildScssActionsStream extends __SActionsStream {
           },
           beforeActions: {
             extractDocblocks: (streamObj) => {
-              return this._ensureOutputStack(streamObj);
-            },
-            fsCache: (streamObj) => {
               return this._ensureOutputStack(streamObj);
             },
             fsOutput: (streamObj) => {

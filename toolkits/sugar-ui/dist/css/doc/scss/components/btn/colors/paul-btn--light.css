@@ -1,0 +1,15 @@
+
+
+/**
+ * @name              paul-btn--light
+ * @namespace         scss.components.btn.colors
+ * @type              Classname
+ *
+ * This class can be applied on any ```btn``` component to specify his color to ```light```
+ *
+ * @example         html
+ * <a class="btn paul-btn--light">I'm a cool "light" button</a>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */

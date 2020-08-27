@@ -1,7 +1,7 @@
 
 
 /**
-  * @name       	.jti-s-m-bigger
+  * @name       	jti-s-m-bigger
   * @namespace       scss.core.class
   * @class-namespace           sugar.helper.margin.bigger
   * @type        class
@@ -9,7 +9,7 @@
   * Set the **margins** to the **3** size
   *
   * @example 	html
-  * <div class=".jti-s-m-bigger" style="background:#f2bc2b; width:100px; height:5px"></div>
+  * <div class="jti-s-m-bigger" style="background:#f2bc2b; width:100px; height:5px"></div>
   * <div style="background:#2b3438; width:100px; height:5px"></div>
   *
   * @since       1.0.0

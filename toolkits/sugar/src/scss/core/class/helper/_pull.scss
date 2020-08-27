@@ -2,7 +2,7 @@
 
   @if class-match-namespace("sugar.helper.pull.left") {
     /**
-    * @name 		s-pull-left
+    * @name 		#{sel(pull-left)}
     * @namespace         scss.core.class.helper
     * @class-namespace     sugar.helper.pull.left
     * @type        class
@@ -11,19 +11,19 @@
     *
     * @example 	html
     * <div>
-    * 	<span class="s-pull-left">Hello world</span>
+    * 	<span class="#{sel(pull-left)}">Hello world</span>
     * </div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-pull-left {
+    .#{sel(pull-left)} {
       float: left;
     }
   }
   @if class-match-namespace("sugar.helper.pull.right") {
     /**
-    * @name 		s-pull-right
+    * @name 		#{sel(pull-right)}
     * @namespace         scss.core.class.helper
     * @class-namespace     sugar.helper.pull.right
     * @type        class
@@ -32,20 +32,20 @@
     *
     * @example 	html
     * <div>
-    * 	<span class="s-pull-right">Hello world</span>
+    * 	<span class="#{sel(pull-right)}">Hello world</span>
     * </div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-pull-right {
+    .#{sel(pull-right)} {
       float: right;
     }
   }
 
   @if class-match-namespace("sugar.helper.pull.none") {
     /**
-    * @name 		s-pull-none
+    * @name 		#{sel(pull-none)}
     * @namespace         scss.core.class.helper
     * @class-namespace     sugar.helper.pull.none
     * @type        class
@@ -54,13 +54,13 @@
     *
     * @example 	html
     * <div>
-    * 	<span class="s-pull-none">Hello world</span>
+    * 	<span class="#{sel(pull-none)}">Hello world</span>
     * </div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-pull-none {
+    .#{sel(pull-none)} {
       float: none;
     }
   }

@@ -1,0 +1,18 @@
+
+
+/**
+* @name 		jti-fixed-top
+* @namespace         scss.core.class.helper
+* @class-namespace     sugar.helper.position.fixed.top
+* @type        class
+*
+* Set an element position as ```fixed``` top
+*
+* @example 	html
+* <div class="jti-fixed-top">
+* 	I'm fixed now
+* </div>
+*
+* @since       2.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/

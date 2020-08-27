@@ -1,7 +1,7 @@
 
 
 /**
-  * @name       	.jti-s-bg-info
+  * @name       	jti-s-bg-info
   * @namespace       scss.core.class
   * @class-namespace           sugar.helper.color.info.bg
   * @type        class
@@ -9,7 +9,7 @@
   * Specify the background color to **info**
   *
   * @example 	html
-  * <div class=".jti-s-bg-info p" style="color:white">
+  * <div class="jti-s-bg-info p" style="color:white">
   * 	My background color is "info"
   * </div>
   *

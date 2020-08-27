@@ -4,7 +4,7 @@
     "sugar.helper.pointer.events.none"
   ) {
     /**
-    * @name 		pointer-events-none
+    * @name 		#{sel(pointer-events-none)}
     * @namespace         scss.core.class.helper
     * @class-namespace     sugar.helper.pointer.event.none
     * @type        class
@@ -12,14 +12,14 @@
     * Disable any pointer events
     *
     * @example 	html
-    * <div class="pointer-events-none">
+    * <div class="#{sel(pointer-events-none)}">
     * 	I will not react to any pointer events
     * </div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .pointer-events-none {
+    .#{sel(pointer-events-none)} {
       pointer-events: none;
     }
   }
@@ -27,7 +27,7 @@
     "sugar.helper.pointer.events.all"
   ) {
     /**
-    * @name 		pointer-events-all
+    * @name 		#{sel(pointer-events-all)}
     * @namespace         scss.core.class.helper
     * @class-namespace     sugar.helper.pointer.event.all
     * @type        class
@@ -35,14 +35,14 @@
     * Disable any pointer events
     *
     * @example 	html
-    * <div class="pointer-events-all">
+    * <div class="#{sel(pointer-events-all)}">
     * 	I will not react to any pointer events
     * </div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .pointer-events-all {
+    .#{sel(pointer-events-all)} {
       pointer-events: all;
     }
   }

@@ -1,7 +1,7 @@
 
 
 /**
-  * @name       	.jti-s-bg-success
+  * @name       	jti-s-bg-success
   * @namespace       scss.core.class
   * @class-namespace           sugar.helper.color.success.bg
   * @type        class
@@ -9,7 +9,7 @@
   * Specify the background color to **success**
   *
   * @example 	html
-  * <div class=".jti-s-bg-success p" style="color:white">
+  * <div class="jti-s-bg-success p" style="color:white">
   * 	My background color is "success"
   * </div>
   *

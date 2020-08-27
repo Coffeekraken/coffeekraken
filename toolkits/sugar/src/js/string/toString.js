@@ -8,6 +8,7 @@ import isRegexp from '../is/regexp';
 import isString from '../is/string';
 import __deepMerge from '../object/deepMerge';
 import __SError from '../error/SError';
+import __stringify from '../json/stringify';
 
 /**
  * @name        toString

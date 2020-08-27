@@ -1,7 +1,7 @@
 
 
 /**
-* @name 		.jti-s-no-border-left
+* @name 		jti-s-no-border-left
 * @namespace           scss.core.class.helper
 * @class-namespace     sugar.helper.border.no.left
 * @type        class
@@ -9,7 +9,7 @@
 * Remove the left border
 *
 * @example 	html
-* <div class="s-border .jti-s-no-border-left s-ratio-1-1">
+* <div class="s-border jti-s-no-border-left s-ratio-1-1">
 * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
 * </div>
 *

@@ -1,7 +1,7 @@
 
 
 /**
-  * @name       	.jti-s-c-link--hover
+  * @name       	jti-s-c-link--hover
   * @namespace       scss.core.class
   * @class-namespace           sugar.helper.color.link.hover
   * @type        class
@@ -9,7 +9,7 @@
   * Specify the color to **link--hover**
   *
   * @example 	html
-  * <div class=".jti-s-c-link--hover">
+  * <div class="jti-s-c-link--hover">
   * 	I'm in "link--hover" color
   * </div>
   *

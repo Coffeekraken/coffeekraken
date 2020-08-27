@@ -1,5 +1,5 @@
 @mixin inline-bar(
-  $name: 's-inline-bar',
+  $name: 'inline-bar',
   $spacing: 1em
 ) {
   /**
@@ -13,7 +13,7 @@
     * Their's also the mixin ```inline-bar-bare``` and ```inline-bar-style``` that you
     * can use if you need more controls.
     *
-    * @param       {String}        [$name='s-inline-bar']       The className to use for the generation
+    * @param       {String}        [$name='inline-bar']       The className to use for the generation
     *
     * @classes
     * .#{$name}: Base class to apply on the container
@@ -41,7 +41,7 @@
   @include inline-bar-style($name, $spacing);
 }
 @mixin inline-bar-bare(
-  $name: 's-inline-bar',
+  $name: 'inline-bar',
   $spacing: 1em
 ) {
   .#{$name} {
@@ -79,7 +79,7 @@
 
 }
 @mixin inline-bar-style(
-  $name: 's-inline-bar',
+  $name: 'inline-bar',
   $spacing: 1em,
   $align: middle
 ) {

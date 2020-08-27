@@ -1,7 +1,7 @@
 
 
 /**
-* @name 		.jti-s-border-side-primary
+* @name 		jti-s-border-side-primary
 * @namespace           scss.core.class.helper
 * @class-namespace     sugar.helper.border.primary.side
 * @type        class
@@ -9,7 +9,7 @@
 * Apply the **<primary>primary</primary>** border side (left and right) color
 *
 * @example 	html
-* <div class="s-border .jti-s-border-side-primary s-ratio-1-1">
+* <div class="s-border jti-s-border-side-primary s-ratio-1-1">
 * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
 * </div>
 *

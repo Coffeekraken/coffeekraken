@@ -1,7 +1,7 @@
 
 
 /**
-  * @name       	.jti-s-c-error
+  * @name       	jti-s-c-error
   * @namespace       scss.core.class
   * @class-namespace           sugar.helper.color.error
   * @type        class
@@ -9,7 +9,7 @@
   * Specify the color to **error**
   *
   * @example 	html
-  * <div class=".jti-s-c-error">
+  * <div class="jti-s-c-error">
   * 	I'm in "error" color
   * </div>
   *

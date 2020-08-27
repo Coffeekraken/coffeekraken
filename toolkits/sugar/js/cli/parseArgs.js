@@ -145,7 +145,7 @@ function parseArgsString(string, definitionObj, settings) {
               return true;
             }
 
-            argsObj[lastArgObjKey].push(_value);
+            if (argsObj[lastArgObjKey] === _value) {} else argsObj[lastArgObjKey].push(_value);
           }
         } else {// argsObj[lastArgObjKey].push(value);
         }

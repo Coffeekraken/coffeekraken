@@ -1,0 +1,38 @@
+
+
+/**
+* @name 		paul-flex-wrap
+* @namespace           scss.core.class.helper
+* @class-namespace     sugar.helper.flex.wrap
+* @type        class
+*
+* Apply the ```flex-wrap``` property to **wrap**
+*
+* @example 	html
+* <div class="paul-flex-wrap">
+*   <div>I'm a flex item</div>
+*   <div>I'm a flex item</div>
+*   <div>I'm a flex item</div>
+*   <div>I'm a flex item</div>
+*   <div>I'm a flex item</div>
+*   <div>I'm a flex item</div>
+*   <div>I'm a flex item</div>
+*   <div>I'm a flex item</div>
+*   <div>I'm a flex item</div>
+*   <div>I'm a flex item</div>
+*   <div>I'm a flex item</div>
+*   <div>I'm a flex item</div>
+*   <div>I'm a flex item</div>
+*   <div>I'm a flex item</div>
+*   <div>I'm a flex item</div>
+*   <div>I'm a flex item</div>
+*   <div>I'm a flex item</div>
+*   <div>I'm a flex item</div>
+*   <div>I'm a flex item</div>
+*   <div>I'm a flex item</div>
+*   <div>I'm a flex item</div>
+* </div>
+*
+* @since       2.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/

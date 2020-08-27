@@ -1,7 +1,7 @@
 
 
 /**
-  * @name       	.jti-s-c-success--hover
+  * @name       	jti-s-c-success--hover
   * @namespace       scss.core.class
   * @class-namespace           sugar.helper.color.success.hover
   * @type        class
@@ -9,7 +9,7 @@
   * Specify the color to **success--hover**
   *
   * @example 	html
-  * <div class=".jti-s-c-success--hover">
+  * <div class="jti-s-c-success--hover">
   * 	I'm in "success--hover" color
   * </div>
   *

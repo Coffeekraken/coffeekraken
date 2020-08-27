@@ -14,7 +14,7 @@
 
 
         @if class-match-namespace("sugar.helper.color.#{$name}.color") {
-          $cls: unquote(selector("s-c-#{$name}"));
+          $cls: unquote(selector("c-#{$name}"));
           /**
             * @name       	#{$cls}
             * @namespace       scss.core.class
@@ -31,14 +31,14 @@
             * @since       1.0.0
             * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
             */
-          #{$cls} {
+          .#{$cls} {
             color: color($name);
           }
         }
 
 
         @if class-match-namespace("sugar.helper.color.#{$name}.bg") {
-          $cls: unquote(selector("s-bg-#{$name}"));
+          $cls: unquote(selector("bg-#{$name}"));
           /**
             * @name       	#{$cls}
             * @namespace       scss.core.class
@@ -55,7 +55,7 @@
             * @since       1.0.0
             * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
             */
-          #{$cls} {
+          .#{$cls} {
             background-color: color($name);
           }
         }
@@ -65,7 +65,7 @@
           @each $mod-name, $mod in $modifiers {
 
             @if class-match-namespace("sugar.helper.color.#{$name}.#{$mod-name}") {
-              $cls: unquote(selector("s-c-#{$name}--#{$mod-name}"));
+              $cls: unquote(selector("c-#{$name}--#{$mod-name}"));
               /**
                 * @name       	#{$cls}
                 * @namespace       scss.core.class
@@ -82,16 +82,16 @@
                 * @since       1.0.0
                 * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                 */
-             #{$cls} {
+             .#{$cls} {
                 color: color($name, $mod-name);
               }
             }
 
 
             @if class-match-namespace("sugar.helper.color.#{$name}.#{$mod-name}.bg") {
-              $cls: unquote(selector("s-bg-#{$name}--#{$mod-name}"));
+              $cls: unquote(selector("bg-#{$name}--#{$mod-name}"));
               /**
-                * @name       	{$cls}
+                * @name       	#{$cls}
                 * @namespace       scss.core.class
                 * @class-namespace           sugar.helper.color.#{$name}.#{$mod-name}.bg
                 * @type        class
@@ -106,7 +106,7 @@
                 * @since       1.0.0
                 * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                 */
-              #{$cls} {
+              .#{$cls} {
                 background-color: color($name, $mod-name);
               }
             }

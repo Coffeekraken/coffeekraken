@@ -28,97 +28,97 @@ $sugarUserSettings: (
     default: (
       color: #848e91,
       modifiers: (
-        hover: -darken 10%,
-        light: -lighten 15%,
-        dark: -darken 10%
+        hover: "-darken 10%",
+        light: "-lighten 15%",
+        dark: "-darken 10%"
       )
     ),
     title: (
       color: #2b3438,
       modifiers: (
-        hover: -darken 10%,
-        light: -lighten 15%,
-        dark: -darken 10%
+        hover: "-darken 10%",
+        light: "-lighten 15%",
+        dark: "-darken 10%"
       )
     ),
     text: (
       color: #848e91,
       modifiers: (
-        hover: -darken 10%,
-        light: -lighten 15%,
-        dark: -darken 10%
+        hover: "-darken 10%",
+        light: "-lighten 15%",
+        dark: "-darken 10%"
       )
     ),
     link: (
       color: primary,
       modifiers: (
-        hover: -darken 10%,
-        light: -lighten 15%,
-        dark: -darken 10%
+        hover: "-darken 10%",
+        light: "-lighten 15%",
+        dark: "-darken 10%"
       )
     ),
     light: (
       color: #f8f9fa,
       modifiers: (
-        hover: -darken 10%,
-        light: -lighten 15%,
-        dark: -darken 10%
+        hover: "-darken 10%",
+        light: "-lighten 15%",
+        dark: "-darken 10%"
       )
     ),
     dark: (
       color: #343a40,
       modifiers: (
-        hover: -darken 10%,
-        light: -lighten 15%,
-        dark: -darken 10%
+        hover: "-darken 10%",
+        light: "-lighten 15%",
+        dark: "-darken 10%"
       )
     ),
     primary: (
       color: #f2bc2b,
       modifiers: (
-        hover: -darken 10%,
-        light: -lighten 15%,
-        dark: -darken 10%
+        hover: "-darken 10%",
+        light: "-lighten 15%",
+        dark: "-darken 10%"
       )
     ),
     secondary: (
       color: #2b3438,
       modifiers: (
-        hover: -darken 10%,
-        light: -lighten 15%,
-        dark: -darken 10%
+        hover: "-darken 10%",
+        light: "-lighten 15%",
+        dark: "-darken 10%"
       )
     ),
     success: (
       color: #5cb85c,
       modifiers: (
-        hover: -darken 10%,
-        light: -lighten 15%,
-        dark: -darken 10%
+        hover: "-darken 10%",
+        light: "-lighten 15%",
+        dark: "-darken 10%"
       )
     ),
     warning: (
       color: #f0ad4e,
       modifiers: (
-        hover: -darken 10%,
-        light: -lighten 15%,
-        dark: -darken 10%
+        hover: "-darken 10%",
+        light: "-lighten 15%",
+        dark: "-darken 10%"
       )
     ),
     error: (
       color: #d9534f,
       modifiers: (
-        hover: -darken 10%,
-        light: -lighten 15%,
-        dark: -darken 10%
+        hover: "-darken 10%",
+        light: "-lighten 15%",
+        dark: "-darken 10%"
       )
     ),
     info: (
       color: #2199e8,
       modifiers: (
-        hover: -darken 10%,
-        light: -lighten 15%,
-        dark: -darken 10%
+        hover: "-darken 10%",
+        light: "-lighten 15%",
+        dark: "-darken 10%"
       )
     )
   ),
@@ -152,7 +152,7 @@ $sugarUserSettings: (
   ),
   look-and-feel: (
     border-radius: 0.2em,
-    padding: 0.8em 1.4em,
+    padding: "0.8em 1.4em",
     padding-vertical: 0.8em,
     padding-horizontal: 1.4em,
     disabled-opacity: 0.5,
@@ -219,9 +219,9 @@ $sugarUserSettings: (
     bigger: 15rem
   ),
   transitions: (
-    fast: all 0.1s ease-in-out 0s,
-    default: all 0.2s ease-in-out 0s,
-    slow: all 0.5s ease-in-out 0s
+    fast: "all 0.1s ease-in-out 0s",
+    default: "all 0.2s ease-in-out 0s",
+    slow: "all 0.5s ease-in-out 0s"
   ),
   typography: (
     font-family: "default",

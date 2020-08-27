@@ -1,7 +1,7 @@
 
 
 /**
-  * @name       	.jti-s-c-primary
+  * @name       	jti-s-c-primary
   * @namespace       scss.core.class
   * @class-namespace           sugar.helper.color.primary
   * @type        class
@@ -9,7 +9,7 @@
   * Specify the color to **primary**
   *
   * @example 	html
-  * <div class=".jti-s-c-primary">
+  * <div class="jti-s-c-primary">
   * 	I'm in "primary" color
   * </div>
   *

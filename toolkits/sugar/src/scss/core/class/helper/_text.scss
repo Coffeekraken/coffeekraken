@@ -4,7 +4,7 @@
     @each $size, $value in setting("sizes") {
       @if class-match-namespace("sugar.helper.text.#{$size}") {
         /**
-          * @name       	s-t-#{$size}
+          * @name       	#{sel(t-#{$size})}
           * @namespace       scss.core.class
           * @class-namespace           sugar.helper.text.#{$size}
           * @type        class
@@ -12,14 +12,14 @@
           * Set the size **#{$size}** relative to the root element
           *
           * @example 	html
-          * <div class="s-t-#{$size}">
+          * <div class="#{sel(t-#{$size})}">
           * 	I have the size "#{$size}" defined
           * </div>
           *
           * @since       2.0.0
           * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
           */
-        #{selector('s-#{$size}')} {
+        .#{sel('#{$size}')} {
           font-size: to-rem($value);
         }
       }
@@ -27,7 +27,7 @@
 
       @if class-match-namespace("sugar.helper.text.rel.#{$size}") {
         /**
-          * @name       	s-t-#{$size}-rel
+          * @name       	#{sel(t-#{$size}-rel)}
           * @namespace       scss.core.class
           * @class-namespace           sugar.helper.text.rel.#{$size}
           * @type        class
@@ -35,14 +35,14 @@
           * Set the size **#{$size}** relative to my parent
           *
           * @example 	html
-          * <div class="s-t-#{$size}-rel">
+          * <div class="#{sel(t-#{$size}-rel)}">
           * 	I have the size "#{$size}" defined relative to my parent
           * </div>
           *
           * @since       2.0.0
           * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
           */
-        #{selector('s-t-#{$size}-rel')} {
+        .#{sel('t-#{$size}-rel')} {
           font-size: to-em($value);
         }
       }
@@ -53,7 +53,7 @@
 
   @if class-match-namespace("sugar.helper.text.hidden") {
     /**
-    * @name 		s-t-hidden
+    * @name 		#{sel(t-hidden)}
     * @namespace         scss.core.class.helper
     * @class-namespace     sugar.helper.text.hidden
     * @type        class
@@ -61,20 +61,20 @@
     * Hide the text
     *
     * @example 	html
-    * <div class="s-t-hidden">
+    * <div class="#{sel(t-hidden)}">
     * 	I'm not visible
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-t-hidden {
+    .#{sel(t-hidden)} {
       @include text-hide();
     }
   }
   @if class-match-namespace("sugar.helper.text.truncate") {
     /**
-    * @name 		s-t-truncate
+    * @name 		#{sel(t-truncate)}
     * @namespace         scss.core.class.helper
     * @class-namespace     sugar.helper.text.truncate
     * @type        class
@@ -82,20 +82,20 @@
     * Hide the text
     *
     * @example 	html
-    * <div class="s-t-truncate">
+    * <div class="#{sel(t-truncate)}">
     * 	I'm truncated cause I talk a lot too much Nulla mauris eros, finibus ac faucibus et, tempus quis risus. Praesent sit amet nulla vel libero euismod sodales eu nec.
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-t-truncate {
+    .#{sel(t-truncate)} {
       @include text-truncate();
     }
   }
   @if class-match-namespace("sugar.helper.text.align.left") {
     /**
-    * @name 		s-t-left
+    * @name 		#{sel(t-left)}
     * @namespace         scss.core.class.helper
     * @class-namespace     sugar.helper.text.align.left
     * @type        class
@@ -103,20 +103,20 @@
     * Align the text to the left
     *
     * @example 	html
-    * <div class="s-t-left">
+    * <div class="#{sel(t-left)}">
     * 	I'm left aligned
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-t-left {
+    .#{sel(t-left)} {
       text-align: left;
     }
   }
   @if class-match-namespace("sugar.helper.text.align.right") {
     /**
-    * @name 		s-t-right
+    * @name 		#{sel(t-right)}
     * @namespace         scss.core.class.helper
     * @class-namespace     sugar.helper.text.align.right
     * @type        class
@@ -124,20 +124,20 @@
     * Align the text to the right
     *
     * @example 	html
-    * <div class="s-t-right">
+    * <div class="#{sel(t-right)}">
     * 	I'm right aligned
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-t-right {
+    .#{sel(t-right)} {
       text-align: right;
     }
   }
   @if class-match-namespace("sugar.helper.text.align.center") {
     /**
-    * @name 		s-t-center
+    * @name 		#{sel(t-center)}
     * @namespace         scss.core.class.helper
     * @class-namespace     sugar.helper.text.align.center
     * @type        class
@@ -145,20 +145,20 @@
     * Align the text to the center
     *
     * @example 	html
-    * <div class="s-t-center">
+    * <div class="#{sel(t-center)}">
     * 	I'm centered
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-t-center {
+    .#{sel(t-center)} {
        text-align: center;
     }
   }
   @if class-match-namespace("sugar.helper.text.align.justify") {
     /**
-    * @name 		s-t-justify
+    * @name 		#{sel(t-justify)}
     * @namespace         scss.core.class.helper
     * @class-namespace     sugar.helper.text.align.justify
     * @type        class
@@ -166,14 +166,14 @@
     * Make the text justified
     *
     * @example 	html
-    * <div class="s-t-justify">
+    * <div class="#{sel(t-justify)}">
     * 	Nullam vel feugiat nunc. Phasellus facilisis, nisi sit amet viverra rhoncus, arcu risus volutpat dolor, sed euismod magna tellus ac purus. Praesent augue lorem, ullamcorper ac accumsan nec, suscipit eu.
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-t-justify {
+    .#{sel(t-justify)} {
       text-align: justify;
     }
   }
@@ -181,7 +181,7 @@
     "sugar.helper.text.transform.lowercase"
   ) {
     /**
-    * @name 		s-t-lowercase
+    * @name 		#{sel(t-lowercase)}
     * @namespace         scss.core.class.helper
     * @class-namespace     sugar.helper.text.transform.lowercase
     * @type        class
@@ -189,14 +189,14 @@
     * Transform the text to lowercase
     *
     * @example 	html
-    * <div class="s-t-lowercase">
+    * <div class="#{sel(t-lowercase)}">
     * 	I'M LOWERCASE
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-t-lowercase {
+    .#{sel(t-lowercase)} {
       text-transform: lowercase;
     }
   }
@@ -204,7 +204,7 @@
     "sugar.helper.text.transform.uppercase"
   ) {
     /**
-    * @name 		s-t-uppercase
+    * @name 		#{sel(t-uppercase)}
     * @namespace         scss.core.class.helper
     * @class-namespace     sugar.helper.text.transform.uppercase
     * @type        class
@@ -212,14 +212,14 @@
     * Transform the text to uppercase
     *
     * @example 	html
-    * <div class="s-t-uppercase">
+    * <div class="#{sel(t-uppercase)}">
     * 	I'm uppercase
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-t-uppercase {
+    .#{sel(t-uppercase)} {
       text-transform: uppercase;
     }
   }
@@ -227,7 +227,7 @@
     "sugar.helper.text.transform.capitalize"
   ) {
     /**
-    * @name 		s-t-capitalize
+    * @name 		#{sel(t-capitalize)}
     * @namespace         scss.core.class.helper
     * @class-namespace     sugar.helper.text.transform.capitalize
     * @type        class
@@ -235,14 +235,14 @@
     * Capizalize the words
     *
     * @example 	html
-    * <div class="s-t-capitalize">
+    * <div class="#{sel(t-capitalize)}">
     * 	I'm capitalized
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-t-capitalize {
+    .#{sel(t-capitalize)} {
       text-transform: capitalize;
     }
   }
@@ -252,7 +252,7 @@
     "sugar.helper.text.weight.bold"
   ) {
     /**
-    * @name 		s-t-bold
+    * @name 		#{sel(t-bold)}
     * @namespace         scss.core.class.helper
     * @class-namespace     sugar.helper.text.weight.bold
     * @type        class
@@ -260,14 +260,14 @@
     * Make the text bold
     *
     * @example 	html
-    * <div class="s-t-bold">
+    * <div class="#{sel(t-bold)}">
     * 	I'm bold
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-t-bold {
+    .#{sel(t-bold)} {
       font-weight: bold;
     }
   }
@@ -277,7 +277,7 @@
     "sugar.helper.text.weight.bolder"
   ) {
     /**
-    * @name 		s-t-bolder
+    * @name 		#{sel(t-bolder)}
     * @namespace         scss.core.class.helper
     * @class-namespace     sugar.helper.text.weight.bolder
     * @type        class
@@ -285,14 +285,14 @@
     * Make the text bolder
     *
     * @example 	html
-    * <div class="s-t-bolder">
+    * <div class="#{sel(t-bolder)}">
     * 	I'm bolder
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-t-bolder {
+    .#{sel(t-bolder)} {
       font-weight: bolder;
     }
   }
@@ -302,7 +302,7 @@
     "sugar.helper.text.weight.normal"
   ) {
     /**
-    * @name 		s-t-normal
+    * @name 		#{sel(t-normal)}
     * @namespace         scss.core.class.helper
     * @class-namespace     sugar.helper.text.weight.normal
     * @type        class
@@ -310,14 +310,14 @@
     * Make the text normal
     *
     * @example 	html
-    * <div class="s-t-normal">
+    * <div class="#{sel(t-normal)}">
     * 	I'm normal
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-t-normal {
+    .#{sel(t-normal)} {
       font-weight: normal;
     }
   }
@@ -327,7 +327,7 @@
     "sugar.helper.text.weight.light"
   ) {
     /**
-    * @name 		s-t-light
+    * @name 		#{sel(t-light)}
     * @namespace         scss.core.class.helper
     * @class-namespace     sugar.helper.text.weight.light
     * @type        class
@@ -335,14 +335,14 @@
     * Make the text light
     *
     * @example 	html
-    * <div class="s-t-light">
+    * <div class="#{sel(t-light)}">
     * 	I'm light
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-t-light {
+    .#{sel(t-light)} {
       font-weight: 300;
     }
   }
@@ -352,7 +352,7 @@
     "sugar.helper.text.weight.lighter"
   ) {
     /**
-    * @name 		s-t-lighter
+    * @name 		#{sel(t-lighter)}
     * @namespace         scss.core.class.helper
     * @class-namespace     sugar.helper.text.weight.lighter
     * @type        class
@@ -360,14 +360,14 @@
     * Make the text lighter
     *
     * @example 	html
-    * <div class="s-t-lighter">
+    * <div class="#{sel(t-lighter)}">
     * 	I'm lighter
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-t-lighter {
+    .#{sel(t-lighter)} {
       font-weight: lighter;
     }
   }
@@ -377,7 +377,7 @@
     "sugar.helper.text.style.italic"
   ) {
     /**
-    * @name 		s-t-italic
+    * @name 		#{sel(t-italic)}
     * @namespace         scss.core.class.helper
     * @class-namespace     sugar.helper.text.style.italic
     * @type        class
@@ -385,14 +385,14 @@
     * Make the text italic
     *
     * @example 	html
-    * <div class="s-t-italic">
+    * <div class="#{sel(t-italic)}">
     * 	I'm italic
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-t-italic {
+    .#{sel(t-italic)} {
       font-style: italic;
     }
   }
@@ -405,7 +405,7 @@
       "sugar.helper.text.font.#{$name}"
     ) {
       /**
-      * @name 		s-t-#{$name}
+      * @name 		#{sel(t-#{$name})}
       * @namespace         scss.core.class.helper
       * @class-namespace     sugar.helper.text.font.#{$name}
       * @type        class
@@ -413,14 +413,14 @@
       * Apply the font "#{$name}"
       *
       * @example 	html
-      * <div class="s-t-#{$name}">
+      * <div class="#{sel(t-#{$name})}">
       * 	I'm "#{$name}"
       * </div>
       *
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-      .s-t-#{$name} {
+      .#{sel(t-#{$name})} {
         font-family: #{$name};
       }
     }
@@ -431,7 +431,7 @@
     "sugar.helper.text.reset"
   ) {
     /**
-    * @name 		s-t-reset
+    * @name 		#{sel(t-reset)}
     * @namespace         scss.core.class.helper
     * @class-namespace     sugar.helper.text.reset
     * @type        class
@@ -439,14 +439,14 @@
     * Reset the text (font-weight, family, color, etc...)
     *
     * @example 	html
-    * <div class="s-t-reset">
+    * <div class="#{sel(t-reset)}">
     * 	I'm reset
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-t-reset {
+    .#{sel(t-reset)} {
       vertical-align: baseline;
       font-weight: inherit;
       font-family: inherit;
@@ -465,7 +465,7 @@
     "sugar.helper.decoration.none"
   ) {
     /**
-    * @name 		s-t-decoration-none
+    * @name 		#{sel(t-decoration-none)}
     * @namespace         scss.core.class.helper
     * @class-namespace     sugar.helper.decoration.none
     * @type        class
@@ -473,14 +473,14 @@
     * Remove the text decoration
     *
     * @example 	html
-    * <div class="s-t-decoration-none">
+    * <div class="#{sel(t-decoration-none)}">
     * 	I don't have any decoration anymore
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-t-decoration-none {
+    .#{sel(t-decoration-none)} {
       text-decoration: none;
     }
   }
@@ -490,7 +490,7 @@
     "sugar.helper.text.decoration.underline"
   ) {
     /**
-    * @name 		s-t-underline
+    * @name 		#{sel(t-underline)}
     * @namespace         scss.core.class.helper
     * @class-namespace     sugar.helper.text.decoration.underline
     * @type        class
@@ -498,14 +498,14 @@
     * Apply the decoration underline
     *
     * @example 	html
-    * <div class="s-t-underline">
+    * <div class="#{sel(t-underline)}">
     * 	I have the decoration underline
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-t-underline {
+    .#{sel(t-underline)} {
       text-decoration: underline;
     }
   }
@@ -515,7 +515,7 @@
     "sugar.helper.text.decoration.line-through"
   ) {
     /**
-    * @name 		s-t-line-through
+    * @name 		#{sel(t-line-through)}
     * @namespace         scss.core.class.helper
     * @class-namespace     sugar.helper.text.decoration.line-through
     * @type        class
@@ -523,14 +523,14 @@
     * Apply the decoration line-through
     *
     * @example 	html
-    * <div class="s-t-line-through">
+    * <div class="#{sel(t-line-through)}">
     * 	I have the decoration line-through
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-t-line-through {
+    .#{sel(t-line-through)} {
       text-decoration: line-through;
     }
   }
@@ -540,7 +540,7 @@
     "sugar.helper.text.decoration.overline"
   ) {
     /**
-    * @name 		s-t-overline
+    * @name 		#{sel(t-overline)}
     * @namespace         scss.core.class.helper
     * @class-namespace     sugar.helper.text.decoration.overline
     * @type        class
@@ -548,14 +548,14 @@
     * Apply the decoration overline
     *
     * @example 	html
-    * <div class="s-t-overline">
+    * <div class="#{sel(t-overline)}">
     * 	I have the decoration overline
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-t-overline {
+    .#{sel(t-overline)} {
       text-decoration: overline;
     }
   }

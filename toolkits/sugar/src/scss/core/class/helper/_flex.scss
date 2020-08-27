@@ -2,7 +2,7 @@
 
   @if class-match-namespace("sugar.helper.flex") {
     /**
-    * @name 		s-flex
+    * @name 		#{sel(flex)}
     * @namespace           scss.core.class.helper
     * @class-namespace     sugar.helper.flex
     * @type        class
@@ -10,14 +10,14 @@
     * Apply the display flex styling to the element
     *
     * @example 	html
-    * <div class="s-flex">
+    * <div class="#{sel(flex)}">
     *   I'm in an element that has display flex applied
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-flex {
+    .#{sel(flex)} {
       display: flex;
     }
   }
@@ -25,7 +25,7 @@
 
   @if class-match-namespace("sugar.helper.flex-inline") {
     /**
-    * @name 		s-flex-inline
+    * @name 		#{sel(flex-inline)}
     * @namespace           scss.core.class.helper
     * @class-namespace     sugar.helper.flex-inline
     * @type        class
@@ -33,14 +33,14 @@
     * Apply the display flex-inline styling to the element
     *
     * @example 	html
-    * <div class="s-flex-inline">
+    * <div class="#{sel(flex-inline)}">
     *   I'm in an element that has display flex-inline applied
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-flex-inline {
+    .#{sel(flex-inline)} {
       display: flex-inline;
     }
   }
@@ -48,7 +48,7 @@
 
   @if class-match-namespace("sugar.helper.flex.justify.start") {
     /**
-    * @name 		s-flex-justify-start
+    * @name 		#{sel(flex-justify-start)}
     * @namespace           scss.core.class.helper
     * @class-namespace     sugar.helper.flex.justify.start
     * @type        class
@@ -56,7 +56,7 @@
     * Apply the property ```justify-content``` to **start**
     *
     * @example 	html
-    * <div class="s-flex-justify-start">
+    * <div class="#{sel(flex-justify-start)}">
     *   <div>I will be aligned depending on the flex-justify-{side} parent class</div>
     *   <div>I will be aligned depending on the flex-justify-{side} parent class</div>
     *   <div>I will be aligned depending on the flex-justify-{side} parent class</div>
@@ -65,7 +65,7 @@
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-flex-justify-start {
+    .#{sel(flex-justify-start)} {
       display: flex;
       justify-content: start;
     }
@@ -74,7 +74,7 @@
 
   @if class-match-namespace("sugar.helper.flex.justify.end") {
     /**
-    * @name 		s-flex-justify-end
+    * @name 		#{sel(flex-justify-end)}
     * @namespace           scss.core.class.helper
     * @class-namespace     sugar.helper.flex.justify.end
     * @type        class
@@ -82,7 +82,7 @@
     * Apply the property ```justify-content``` to **end**
     *
     * @example 	html
-    * <div class="s-flex-justify-end">
+    * <div class="#{sel(flex-justify-end)}">
     *   <div>I will be aligned depending on the flex-justify-{side} parent class</div>
     *   <div>I will be aligned depending on the flex-justify-{side} parent class</div>
     *   <div>I will be aligned depending on the flex-justify-{side} parent class</div>
@@ -91,7 +91,7 @@
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-flex-justify-end {
+    .#{sel(flex-justify-end)} {
       display: flex;
       justify-content: end;
     }
@@ -100,7 +100,7 @@
 
   @if class-match-namespace("sugar.helper.flex.justify.center") {
     /**
-    * @name 		s-flex-justify-center
+    * @name 		#{sel(flex-justify-center)}
     * @namespace           scss.core.class.helper
     * @class-namespace     sugar.helper.flex.justify.center
     * @type        class
@@ -108,7 +108,7 @@
     * Apply the property ```justify-content``` to **center**
     *
     * @example 	html
-    * <div class="s-flex-justify-center">
+    * <div class="#{sel(flex-justify-center)}">
     *   <div>I will be aligned depending on the flex-justify-{side} parent class</div>
     *   <div>I will be aligned depending on the flex-justify-{side} parent class</div>
     *   <div>I will be aligned depending on the flex-justify-{side} parent class</div>
@@ -117,7 +117,7 @@
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-flex-justify-center {
+    .#{sel(flex-justify-center)} {
       display: flex;
       justify-content: center;
     }
@@ -126,7 +126,7 @@
 
   @if class-match-namespace("sugar.helper.flex.justify.between") {
     /**
-    * @name 		s-flex-justify-between
+    * @name 		#{sel(flex-justify-between)}
     * @namespace           scss.core.class.helper
     * @class-namespace     sugar.helper.flex.justify.between
     * @type        class
@@ -134,7 +134,7 @@
     * Apply the property ```justify-content``` to **space-between**
     *
     * @example 	html
-    * <div class="s-flex-justify-between">
+    * <div class="#{sel(flex-justify-between)}">
     *   <div>I will be aligned depending on the flex-justify-{side} parent class</div>
     *   <div>I will be aligned depending on the flex-justify-{side} parent class</div>
     *   <div>I will be aligned depending on the flex-justify-{side} parent class</div>
@@ -143,7 +143,7 @@
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-flex-justify-between {
+    .#{sel(flex-justify-between)} {
       display: flex;
       justify-content: space-between;
     }
@@ -152,7 +152,7 @@
 
   @if class-match-namespace("sugar.helper.flex.justify.around") {
     /**
-    * @name 		s-flex-justify-around
+    * @name 		#{sel(flex-justify-around)}
     * @namespace           scss.core.class.helper
     * @class-namespace     sugar.helper.flex.justify.around
     * @type        class
@@ -160,7 +160,7 @@
     * Apply the property ```justify-content``` to **space-around**
     *
     * @example 	html
-    * <div class="s-flex-justify-around">
+    * <div class="#{sel(flex-justify-around)}">
     *   <div>I will be aligned depending on the flex-justify-{side} parent class</div>
     *   <div>I will be aligned depending on the flex-justify-{side} parent class</div>
     *   <div>I will be aligned depending on the flex-justify-{side} parent class</div>
@@ -169,7 +169,7 @@
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-flex-justify-around {
+    .#{sel(flex-justify-around)} {
       display: flex;
       justify-content: space-around;
     }
@@ -178,7 +178,7 @@
 
   @if class-match-namespace("sugar.helper.flex.align.start") {
     /**
-    * @name 		s-flex-align-start
+    * @name 		#{sel(flex-align-start)}
     * @namespace           scss.core.class.helper
     * @class-namespace     sugar.helper.flex.align.start
     * @type        class
@@ -186,7 +186,7 @@
     * Apply the property ```align-items``` to **flex-start**
     *
     * @example 	html
-    * <div class="s-flex-align-start">
+    * <div class="#{sel(flex-align-start)}">
     *   <div>I will be aligned depending on the flex-align-{side} parent class</div>
     *   <div>I will be aligned depending on the flex-align-{side} parent class</div>
     *   <div>I will be aligned depending on the flex-align-{side} parent class</div>
@@ -195,7 +195,7 @@
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-flex-align-start {
+    .#{sel(flex-align-start)} {
       display: flex;
       align-items: flex-start;
     }
@@ -204,7 +204,7 @@
 
   @if class-match-namespace("sugar.helper.flex.align.end") {
     /**
-    * @name 		s-flex-align-end
+    * @name 		#{sel(flex-align-end)}
     * @namespace           scss.core.class.helper
     * @class-namespace     sugar.helper.flex.align.end
     * @type        class
@@ -212,7 +212,7 @@
     * Apply the property ```align-items``` to **flex-end**
     *
     * @example 	html
-    * <div class="s-flex-align-end">
+    * <div class="#{sel(flex-align-end)}">
     *   <div>I will be aligned depending on the flex-align-{side} parent class</div>
     *   <div>I will be aligned depending on the flex-align-{side} parent class</div>
     *   <div>I will be aligned depending on the flex-align-{side} parent class</div>
@@ -221,7 +221,7 @@
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-flex-align-end {
+    .#{sel(flex-align-end)} {
       display: flex;
       align-items: flex-end;
     }
@@ -230,7 +230,7 @@
 
   @if class-match-namespace("sugar.helper.flex.align.center") {
     /**
-    * @name 		s-flex-align-center
+    * @name 		#{sel(flex-align-center)}
     * @namespace           scss.core.class.helper
     * @class-namespace     sugar.helper.flex.align.center
     * @type        class
@@ -238,7 +238,7 @@
     * Apply the property ```align-items``` to **center**
     *
     * @example 	html
-    * <div class="s-flex-align-center">
+    * <div class="#{sel(flex-align-center)}">
     *   <div>I will be aligned depending on the flex-align-{side} parent class</div>
     *   <div>I will be aligned depending on the flex-align-{side} parent class</div>
     *   <div>I will be aligned depending on the flex-align-{side} parent class</div>
@@ -247,7 +247,7 @@
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-flex-align-center {
+    .#{sel(flex-align-center)} {
       display: flex;
       align-items: center;
     }
@@ -256,7 +256,7 @@
 
   @if class-match-namespace("sugar.helper.flex.align.baseline") {
     /**
-    * @name 		s-flex-align-baseline
+    * @name 		#{sel(flex-align-baseline)}
     * @namespace           scss.core.class.helper
     * @class-namespace     sugar.helper.flex.align.baseline
     * @type        class
@@ -264,7 +264,7 @@
     * Apply the property ```align-items``` to **baseline**
     *
     * @example 	html
-    * <div class="s-flex-align-baseline">
+    * <div class="#{sel(flex-align-baseline)}">
     *   <div>I will be aligned depending on the flex-align-{side} parent class</div>
     *   <div>I will be aligned depending on the flex-align-{side} parent class</div>
     *   <div>I will be aligned depending on the flex-align-{side} parent class</div>
@@ -273,7 +273,7 @@
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-flex-align-baseline {
+    .#{sel(flex-align-baseline)} {
       display: flex;
       align-items: baseline;
     }
@@ -282,7 +282,7 @@
 
   @if class-match-namespace("sugar.helper.flex.align.stretch") {
     /**
-    * @name 		s-flex-align-stretch
+    * @name 		#{sel(flex-align-stretch)}
     * @namespace           scss.core.class.helper
     * @class-namespace     sugar.helper.flex.align.stretch
     * @type        class
@@ -290,7 +290,7 @@
     * Apply the property ```align-items``` to **stretch**
     *
     * @example 	html
-    * <div class="s-flex-align-stretch">
+    * <div class="#{sel(flex-align-stretch)}">
     *   <div>I will be aligned depending on the flex-align-{side} parent class</div>
     *   <div>I will be aligned depending on the flex-align-{side} parent class</div>
     *   <div>I will be aligned depending on the flex-align-{side} parent class</div>
@@ -299,7 +299,7 @@
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-flex-align-stretch {
+    .#{sel(flex-align-stretch)} {
       display: flex;
       align-items: stretch;
     }
@@ -308,7 +308,7 @@
 
   @if class-match-namespace("sugar.helper.flex.align.self.start") {
     /**
-    * @name 		s-flex-align-self-start
+    * @name 		#{sel(flex-align-self-start)}
     * @namespace           scss.core.class.helper
     * @class-namespace     sugar.helper.flex.align.self.start
     * @type        class
@@ -316,16 +316,16 @@
     * Apply the property ```align-self``` to **flex-start**
     *
     * @example 	html
-    * <div class="s-flex">
+    * <div class="#{sel(flex)}">
     *   <div>I'm a flex item</div>
-    *   <div class="s-flex-align-self-start>I'm a flex item</div>
+    *   <div class="#{sel(flex-align-self-start)}>I'm a flex item</div>
     *   <div>I'm a flex item</div>
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-flex-align-self-start {
+    .#{sel(flex-align-self-start)} {
       align-self: flex-start;
     }
   }
@@ -333,7 +333,7 @@
 
   @if class-match-namespace("sugar.helper.flex.align.self.end") {
     /**
-    * @name 		s-flex-align-self-end
+    * @name 		#{sel(flex-align-self-end)}
     * @namespace           scss.core.class.helper
     * @class-namespace     sugar.helper.flex.align.self.end
     * @type        class
@@ -341,16 +341,16 @@
     * Apply the property ```align-self``` to **flex-end**
     *
     * @example 	html
-    * <div class="s-flex">
+    * <div class="#{sel(flex)}">
     *   <div>I'm a flex item</div>
-    *   <div class="s-flex-align-self-end>I'm a flex item</div>
+    *   <div class="#{sel(flex-align-self-end)}>I'm a flex item</div>
     *   <div>I'm a flex item</div>
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-flex-align-self-end {
+    .#{sel(flex-align-self-end)} {
       align-self: flex-end;
     }
   }
@@ -358,7 +358,7 @@
 
   @if class-match-namespace("sugar.helper.flex.align.self.center") {
     /**
-    * @name 		s-flex-align-self-center
+    * @name 		#{sel(flex-align-self-center)}
     * @namespace           scss.core.class.helper
     * @class-namespace     sugar.helper.flex.align.self.center
     * @type        class
@@ -366,16 +366,16 @@
     * Apply the property ```align-self``` to **flex-center**
     *
     * @example 	html
-    * <div class="s-flex">
+    * <div class="#{sel(flex)}">
     *   <div>I'm a flex item</div>
-    *   <div class="s-flex-align-self-center>I'm a flex item</div>
+    *   <div class="#{sel(flex-align-self-center)}>I'm a flex item</div>
     *   <div>I'm a flex item</div>
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-flex-align-self-center {
+    .#{sel(flex-align-self-center)} {
       align-self: center;
     }
   }
@@ -383,7 +383,7 @@
 
   @if class-match-namespace("sugar.helper.flex.align.self.baseline") {
     /**
-    * @name 		s-flex-align-self-baseline
+    * @name 		#{sel(flex-align-self-baseline)}
     * @namespace           scss.core.class.helper
     * @class-namespace     sugar.helper.flex.align.self.baseline
     * @type        class
@@ -391,16 +391,16 @@
     * Apply the property ```align-self``` to **flex-baseline**
     *
     * @example 	html
-    * <div class="s-flex">
+    * <div class="#{sel(flex)}">
     *   <div>I'm a flex item</div>
-    *   <div class="s-flex-align-self-baseline>I'm a flex item</div>
+    *   <div class="#{sel(flex-align-self-baseline)}>I'm a flex item</div>
     *   <div>I'm a flex item</div>
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-flex-align-self-baseline {
+    .#{sel(flex-align-self-baseline)} {
       align-self: baseline;
     }
   }
@@ -408,7 +408,7 @@
 
   @if class-match-namespace("sugar.helper.flex.align.self.stretch") {
     /**
-    * @name 		s-flex-align-self-stretch
+    * @name 		#{sel(flex-align-self-stretch)}
     * @namespace           scss.core.class.helper
     * @class-namespace     sugar.helper.flex.align.self.stretch
     * @type        class
@@ -416,16 +416,16 @@
     * Apply the property ```align-self``` to **flex-stretch**
     *
     * @example 	html
-    * <div class="s-flex">
+    * <div class="#{sel(flex)}">
     *   <div>I'm a flex item</div>
-    *   <div class="s-flex-align-self-stretch>I'm a flex item</div>
+    *   <div class="#{sel(flex-align-self-stretch)}>I'm a flex item</div>
     *   <div>I'm a flex item</div>
     * </div>
     *
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-flex-align-self-stretch {
+    .#{sel(flex-align-self-stretch)} {
       align-self: stretch;
     }
   }
@@ -433,7 +433,7 @@
 
   @if class-match-namespace("sugar.helper.flex.wrap.no") {
     /**
-    * @name 		s-flex-nowrap
+    * @name 		#{sel(flex-nowrap)}
     * @namespace           scss.core.class.helper
     * @class-namespace     sugar.helper.flex.wrap.no
     * @type        class
@@ -441,7 +441,7 @@
     * Apply the ```flex-wrap``` property to **nowrap**
     *
     * @example 	html
-    * <div class="s-flex-nowrap">
+    * <div class="#{sel(flex-nowrap)}">
     *   <div>I'm a flex item</div>
     *   <div>I'm a flex item</div>
     *   <div>I'm a flex item</div>
@@ -468,7 +468,7 @@
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-flex-nowrap {
+    .#{sel(flex-nowrap)} {
       display: flex;
       flex-wrap: nowrap;
     }
@@ -477,7 +477,7 @@
 
   @if class-match-namespace("sugar.helper.flex.wrap") {
     /**
-    * @name 		s-flex-wrap
+    * @name 		#{sel(flex-wrap)}
     * @namespace           scss.core.class.helper
     * @class-namespace     sugar.helper.flex.wrap
     * @type        class
@@ -485,7 +485,7 @@
     * Apply the ```flex-wrap``` property to **wrap**
     *
     * @example 	html
-    * <div class="s-flex-wrap">
+    * <div class="#{sel(flex-wrap)}">
     *   <div>I'm a flex item</div>
     *   <div>I'm a flex item</div>
     *   <div>I'm a flex item</div>
@@ -512,7 +512,7 @@
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-flex-wrap {
+    .#{sel(flex-wrap)} {
       display: flex;
       flex-wrap: wrap;
     }
@@ -521,7 +521,7 @@
 
   @if class-match-namespace("sugar.helper.flex.wrap.reverse") {
     /**
-    * @name 		s-flex-wrap-reverse
+    * @name 		#{sel(flex-wrap-reverse)}
     * @namespace           scss.core.class.helper
     * @class-namespace     sugar.helper.flex.wrap.reverse
     * @type        class
@@ -529,7 +529,7 @@
     * Apply the ```flex-wrap``` property to **wrap-reverse**
     *
     * @example 	html
-    * <div class="s-flex-wrap-reverse">
+    * <div class="#{sel(flex-wrap-reverse)}">
     *   <div>I'm a flex item</div>
     *   <div>I'm a flex item</div>
     *   <div>I'm a flex item</div>
@@ -556,7 +556,7 @@
     * @since       2.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-flex-wrap-reverse {
+    .#{sel(flex-wrap-reverse)} {
       display: flex;
       flex-wrap: wrap-reverse;
     }
@@ -565,7 +565,7 @@
   @if class-match-namespace("sugar.helper.flex.order") {
     $orderCount: setting('helpers.flex.order-count');
     /**
-    * @name 		s-flex-order-{i}
+    * @name 		#{sel(flex-order-#{i})}
     * @namespace           scss.core.class.helper
     * @class-namespace     sugar.helper.flex.order
     * @type        class
@@ -575,12 +575,12 @@
     * changed by updating the **config.scss.helpers.flex.order-count** configuration.
     *
     * @example 	html
-    * <div class="s-flex">
+    * <div class="#{sel(flex)}">
     *   <div>I'm a flex item 0</div>
     *   <div>I'm a flex item 1</div>
     *   <div>I'm a flex item 2</div>
     *   <div>I'm a flex item 3</div>
-    *   <div class="s-flex-order-1">I'm a flex item 4</div>
+    *   <div class="#{sel(flex-order-1)}">I'm a flex item 4</div>
     *   <div>I'm a flex item 5</div>
     *   <div>I'm a flex item 6</div>
     *   <div>I'm a flex item 7</div>
@@ -592,7 +592,7 @@
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
     @for $i from 1 through $orderCount {
-      .s-flex-order-#{$i} {
+      .#{sel(flex-order-#{$i})} {
         order: $i;
       }
     }

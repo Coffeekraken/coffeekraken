@@ -1,0 +1,20 @@
+
+
+/**
+* @name 		jti-align-text-bottom
+* @namespace         scss.core.class.helper
+* @class-namespace     sugar.helper.vertical-align.text-bottom
+* @type        class
+*
+* Align vertically text-bottom
+*
+* @example 	html
+* <div class="jti-border style="height:200px">
+*   <div class="jti-align-text-bottom">
+*     Hello world
+*   </div>
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/

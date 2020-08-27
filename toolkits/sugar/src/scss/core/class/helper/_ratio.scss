@@ -2,7 +2,7 @@
 
   @if class-match-namespace("sugar.helper.ratio.21-9") {
     /**
-    * @name 		s-ratio-21-9
+    * @name 		#{sel(ratio-21-9)}
     * @namespace         scss.core.class.helper
     * @class-namespace     sugar.helper.ratio.21-9
     * @type        class
@@ -10,18 +10,18 @@
     * Keep a 16/9 ratio on a particular element. Applied by setting height to 0 and paddingtop to 100% / 21 * 9
     *
     * @example 	html
-    * <div class="s-bg-primary s-ratio-21-9"></div>
+    * <div class="#{sel(bg-primary)} #{sel(ratio-21-9)}"></div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-ratio-21-9 {
+    .#{sel(ratio-21-9)} {
      @include ratio(21/9);
     }
   }
   @if class-match-namespace("sugar.helper.ratio.9-21") {
     /**
-    * @name 		s-ratio-9-21
+    * @name 		#{sel(ratio-9-21)}
     * @namespace         scss.core.class.helper
     * @class-namespace     sugar.helper.ratio.9-21
     * @type        class
@@ -29,12 +29,12 @@
     * Keep a 16/9 ratio on a particular element. Applied by setting height to 0 and paddingtop to 100% / 9 * 21
     *
     * @example 	html
-    * <div class="s-bg-primary s-ratio-9-21"></div>
+    * <div class="#{sel(bg-primary)} #{sel(ratio-9-21)}"></div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-ratio-9-21 {
+    .#{sel(ratio-9-21)} {
      @include ratio(9/21);
     }
   }
@@ -42,7 +42,7 @@
 
   @if class-match-namespace("sugar.helper.ratio.16-9") {
     /**
-    * @name 		s-ratio-16-9
+    * @name 		#{sel(ratio-16-9)}
     * @namespace         scss.core.class.helper
     * @class-namespace     sugar.helper.ratio.16-9
     * @type        class
@@ -50,18 +50,18 @@
     * Keep a 16/9 ratio on a particular element. Applied by setting height to 0 and paddingtop to 100% / 16 * 9
     *
     * @example 	html
-    * <div class="s-bg-primary s-ratio-16-9"></div>
+    * <div class="#{sel(bg-primary)} #{sel(ratio-16-9)}"></div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-ratio-16-9 {
+    .#{sel(ratio-16-9)} {
       @include ratio(16/9);
     }
   }
   @if class-match-namespace("sugar.helper.ratio.9-16") {
     /**
-    * @name 		s-ratio-9-16
+    * @name 		#{sel(ratio-9-16)}
     * @namespace         scss.core.class.helper
     * @class-namespace     sugar.helper.ratio.9-16
     * @type        class
@@ -69,12 +69,12 @@
     * Keep a 16/9 ratio on a particular element. Applied by setting height to 0 and paddingtop to 100% / 9 * 16
     *
     * @example 	html
-    * <div class="s-bg-primary s-ratio-9-16"></div>
+    * <div class="#{sel(bg-primary)} #{sel(ratio-9-16)}"></div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-ratio-9-16 {
+    .#{sel(ratio-9-16)} {
       @include ratio(9/16);
     }
   }
@@ -82,7 +82,7 @@
 
   @if class-match-namespace("sugar.helper.ratio.4-3") {
     /**
-    * @name 		s-ratio-4-3
+    * @name 		#{sel(ratio-4-3)}
     * @namespace         scss.core.class.helper
     * @class-namespace     sugar.helper.ratio.4-3
     * @type        class
@@ -90,18 +90,18 @@
     * Keep a 4/3 ratio on a particular element. Applied by setting height to 0 and paddingtop to 100% / 4 * 3
     *
     * @example 	html
-    * <div class="s-bg-primary s-ratio-4-3"></div>
+    * <div class="#{sel(bg-primary)} #{sel(ratio-4-3)}"></div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-ratio-4-3 {
+    .#{sel(ratio-4-3)} {
       @include ratio(4/3);
     }
   }
   @if class-match-namespace("sugar.helper.ratio.3-4") {
     /**
-    * @name 		s-ratio-3-4
+    * @name 		#{sel(ratio-3-4)}
     * @namespace         scss.core.class.helper
     * @class-namespace     sugar.helper.ratio.3-4
     * @type        class
@@ -109,12 +109,12 @@
     * Keep a 3/4 ratio on a particular element. Applied by setting height to 0 and paddingtop to 100% / 3 * 4
     *
     * @example 	html
-    * <div class="s-bg-primary s-ratio-3-4"></div>
+    * <div class="#{sel(bg-primary)} #{sel(ratio-3-4)}"></div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-ratio-3-4 {
+    .#{sel(ratio-3-4)} {
       @include ratio(4/3);
     }
   }
@@ -122,7 +122,7 @@
 
   @if class-match-namespace("sugar.helper.ratio.1-1") {
     /**
-    * @name 		s-ratio-1-1
+    * @name 		#{sel(ratio-1-1)}
     * @namespace         scss.core.class.helper
     * @class-namespace     sugar.helper.ratio.1-1
     * @type        class
@@ -130,12 +130,12 @@
     * Keep a 1/1 ratio on a particular element. Applied by setting height to 0 and paddingtop to 100%
     *
     * @example 	html
-    * <div class="s-bg-primary s-ratio-1-1"></div>
+    * <div class="#{sel(bg-primary)} #{sel(ratio-1-1)}"></div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-ratio-1-1 {
+    .#{sel(ratio-1-1)} {
       @include ratio(1);
     }
   }

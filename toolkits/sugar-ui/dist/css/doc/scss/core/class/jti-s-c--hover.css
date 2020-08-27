@@ -1,7 +1,7 @@
 
 
 /**
-  * @name       	.jti-s-c--hover
+  * @name       	jti-s-c--hover
   * @namespace       scss.core.class
   * @class-namespace           sugar.helper.color.default.hover
   * @type        class
@@ -9,7 +9,7 @@
   * Specify the color to **default--hover**
   *
   * @example 	html
-  * <div class=".jti-s-c--hover">
+  * <div class="jti-s-c--hover">
   * 	I'm in "default--hover" color
   * </div>
   *

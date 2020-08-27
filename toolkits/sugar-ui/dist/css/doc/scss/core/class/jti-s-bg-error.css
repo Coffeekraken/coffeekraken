@@ -1,7 +1,7 @@
 
 
 /**
-  * @name       	.jti-s-bg-error
+  * @name       	jti-s-bg-error
   * @namespace       scss.core.class
   * @class-namespace           sugar.helper.color.error.bg
   * @type        class
@@ -9,7 +9,7 @@
   * Specify the background color to **error**
   *
   * @example 	html
-  * <div class=".jti-s-bg-error p" style="color:white">
+  * <div class="jti-s-bg-error p" style="color:white">
   * 	My background color is "error"
   * </div>
   *

@@ -75,10 +75,10 @@ module.exports = function argsToString(
     if (!includeAllArgs && args[argName] === undefined) return;
     const prefix = defObj.alias ? `-${defObj.alias}` : `--${argName}`;
 
-    let value =
-      args && args[argName] !== undefined
-        ? args[argName]
-        : definitionObj[argName].default;
+    let value;
+    if (args && args[argName] !== undefined) value = args[argName];
+    else if (definitionObj[argName] && definitionObj[argName].default)
+      value = definitionObj[argName].default;
     if (
       value === undefined ||
       value === null ||
@@ -96,6 +96,7 @@ module.exports = function argsToString(
     ) {
       value = `"${value.split('"').join("'")}"`;
     }
+
     cliArray.push(`${prefix} ${value}`);
   });
 

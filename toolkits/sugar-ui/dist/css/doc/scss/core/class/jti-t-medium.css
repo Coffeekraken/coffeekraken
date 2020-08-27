@@ -1,0 +1,18 @@
+
+
+/**
+  * @name       	jti-t-medium
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.text.medium
+  * @type        class
+  *
+  * Set the size **medium** relative to the root element
+  *
+  * @example 	html
+  * <div class="jti-t-medium">
+  * 	I have the size "medium" defined
+  * </div>
+  *
+  * @since       2.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */

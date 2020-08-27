@@ -141,7 +141,8 @@ export default function parseArgsString(
             ) {
               return true;
             }
-            argsObj[lastArgObjKey].push(value);
+            if (argsObj[lastArgObjKey] === value) {
+            } else argsObj[lastArgObjKey].push(value);
           }
         } else {
           // argsObj[lastArgObjKey].push(value);

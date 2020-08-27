@@ -10,7 +10,8 @@ import __uniqid from '../string/uniqid';
 import __convert from '../time/convert';
 import __wait from '../time/wait';
 import __SActionsStreamAction from './SActionsStreamAction';
-import __SHashCache from '../cache/SHashCache';
+import __SCache from '../cache/SCache';
+import __sha256 from '../crypt/sha256';
 
 /**
  * @name          SActionStream
@@ -71,8 +72,6 @@ export default class SActionStream extends __SPromise {
    */
   _currentStream = null;
 
-  _cachedStreamObj = null;
-
   /**
    * @name            constructor
    * @type            Function
@@ -89,7 +88,7 @@ export default class SActionStream extends __SPromise {
       __deepMerge(
         {
           id: __uniqid(),
-          cache: true,
+          cache: false,
           name: null,
           order: null,
           before: [],
@@ -121,9 +120,9 @@ export default class SActionStream extends __SPromise {
       }
     });
 
-    // init a SHashCache instance if needed
+    // init a SCache instance if needed
     if (this._settings.cache) {
-      this._sHashCache = new __SHashCache(
+      this._sCache = new __SCache(
         settings.id,
         settings.cache === true ? {} : settings.cache
       );
@@ -159,18 +158,26 @@ export default class SActionStream extends __SPromise {
     );
 
     const logActionStatus = () => {
+      let logString = `Processing <cyan>${
+        Array.isArray(this._currentStream.streamObjArray)
+          ? this._currentStream.streamObjArray.length
+          : 1
+      }</cyan> source${
+        Array.isArray(this._currentStream.streamObjArray)
+          ? this._currentStream.streamObjArray.length > 1
+            ? 's'
+            : ''
+          : ''
+      } | Processed <green>${
+        this._currentStream.currentActionObj.processed
+      }</green>`;
+      if (this._settings.cache) {
+        logString += ` | From cache: <yellow>${this._currentStream.currentActionObj.fromCache}</yellow>`;
+      }
       this.log({
         temp: true,
         group: this._currentStream.currentActionObj.name,
-        value: `Processing <cyan>${
-          Array.isArray(this._currentStream.streamObjArray)
-            ? this._currentStream.streamObjArray.length
-            : 1
-        }</cyan> sources | Processed <green>${
-          this._currentStream.currentActionObj.processed
-        }</green> | From cache: <yellow>${
-          this._currentStream.currentActionObj.fromCache
-        }</yellow>`
+        value: logString
       });
     };
 
@@ -179,25 +186,34 @@ export default class SActionStream extends __SPromise {
       const isArray = Array.isArray(streamObjOrArray);
       let streamObjArray = streamObjOrArray;
       if (!isArray) streamObjArray = [streamObjArray];
-      streamObjArray.forEach(async (streamObj) => {
-        if (streamObj.$fromCache) return;
+      for (let streamObjArrayIdx in streamObjArray) {
+        let streamObj = streamObjArray[streamObjArrayIdx];
+        // if (streamObj.$fromCache) return;
 
         // set the current action in the streamObj
         streamObj.$action = settings.type;
 
-        // // get the value from the cache if available
+        // calculate the hash of this particular action
+        const actionHash = __sha256.encrypt(
+          __toString({
+            ...__clone(streamObj),
+            settings: this._settings
+          })
+        );
+
+        // get the value from the cache if available
         if (
           (this._currentStream.currentActionObj.instance &&
             this._currentStream.currentActionObj.instance.settings.cache &&
-            this._sHashCache) ||
-          (this._sHashCache && !this._currentStream.currentActionObj.instance)
+            this._sCache) ||
+          (this._sCache && !this._currentStream.currentActionObj.instance)
         ) {
-          const isCached = await this._sHashCache.exists({
-            ...__clone(streamObj),
-            settings: this._settings
-          });
-          if (isCached) {
+          const cachedStreamObj = await this._sCache.get(actionHash);
+          if (cachedStreamObj) {
+            console.log('cached');
+            streamObj = cachedStreamObj;
             streamObj.$fromCache = true;
+            streamObjArray[streamObjArrayIdx] = streamObj;
             this._currentStream.currentActionObj.fromCache++;
             logActionStatus();
             return;
@@ -205,8 +221,10 @@ export default class SActionStream extends __SPromise {
         }
 
         const processFnArgs = [streamObj, ...settings.processFnArgs];
-        processFnArray.forEach(async (processFn) => {
-          let processFnResult = processFn.apply(null, processFnArgs);
+
+        for (let processFnArrayIdx in processFnArray) {
+          const processFn = processFnArray[processFnArrayIdx];
+          let processFnResult = processFn(...processFnArgs);
           if (settings.resultProcessor)
             processFnResult = settings.resultProcessor.bind(this)(
               processFnResult
@@ -216,14 +234,19 @@ export default class SActionStream extends __SPromise {
           } else {
             streamObj = processFnResult;
           }
-        });
+        }
 
-        this._currentStream.currentActionObj.processed++;
-        logActionStatus();
+        streamObjArray[streamObjArrayIdx] = streamObj;
+
+        if (settings.type.match(/.*\.main$/)) {
+          this._currentStream.currentActionObj.processed++;
+          logActionStatus();
+        }
 
         // save in cache
-        if (this._settings.cache) await this._saveInCache(streamObj);
-      });
+        if (this._settings.cache)
+          await this._saveInCache(actionHash, streamObj);
+      }
 
       if (isArray) return streamObjArray;
       return streamObjArray[0];
@@ -268,9 +291,14 @@ export default class SActionStream extends __SPromise {
       // call the action and pass it the current stream object
       currentStreamObj = await this._applyFnOnStreamObj(
         currentStreamObj,
-        this._currentStream.currentActionObj.instance.run.bind(
-          this._currentStream.currentActionObj.instance
-        ),
+        (...args) => {
+          return new Promise(async (resolve) => {
+            const res = await this._currentStream.currentActionObj.instance.run(
+              ...args
+            );
+            return resolve(res);
+          });
+        },
         {
           type: `${this._currentStream.currentActionObj.name}.main`,
           processFnArgs: [
@@ -282,6 +310,7 @@ export default class SActionStream extends __SPromise {
               __SPromise.pipe(fnResult, this);
               this._currentStream.currentActionObj.promise = fnResult;
             }
+            return fnResult;
           }
         }
       );
@@ -422,21 +451,15 @@ export default class SActionStream extends __SPromise {
    * @since       2.0.0
    * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  async _saveInCache(streamObj) {
+  async _saveInCache(hash, streamObj) {
     // save in cache
     if (
       (this._currentStream.currentActionObj.instance &&
         this._currentStream.currentActionObj.instance.settings.cache &&
-        this._sHashCache) ||
-      (this._sHashCache && !this._currentStream.currentActionObj.instance)
+        this._sCache) ||
+      (this._sCache && !this._currentStream.currentActionObj.instance)
     ) {
-      await this._sHashCache.set(
-        {
-          ...__clone(streamObj),
-          settings: this._settings
-        },
-        true
-      );
+      await this._sCache.set(hash, streamObj);
     }
     return true;
   }
@@ -660,18 +683,18 @@ export default class SActionStream extends __SPromise {
               break;
             }
 
-            // if (this.constructor.interface) {
-            //   const issuesString = this.constructor.interface.apply(
-            //     this._currentStream.streamObjArray[0],
-            //     { return: 'string', throw: false }
-            //   );
-            //   if (issuesString !== true) {
-            //     this._currentStream.stats.stderr.push(issuesString);
-            //     this._currentStream.currentActionObj.stats.stderr.push(
-            //       issuesString
-            //     );
-            //   }
-            // }
+            if (this.constructor.interface) {
+              const issuesString = this.constructor.interface.apply(
+                this._currentStream.streamObjArray[0],
+                { return: 'string', throw: false }
+              );
+              if (issuesString !== true) {
+                this._currentStream.stats.stderr.push(issuesString);
+                this._currentStream.currentActionObj.stats.stderr.push(
+                  issuesString
+                );
+              }
+            }
 
             // complete the actionObj
             this._currentStream.currentActionObj.stats = {
@@ -732,15 +755,15 @@ export default class SActionStream extends __SPromise {
           }
         );
 
-        // if (this.constructor.interface) {
-        //   const issuesString = this.constructor.interface.apply(
-        //     this._currentStream.streamObjArray[0],
-        //     { return: 'string', throw: false }
-        //   );
-        //   if (issuesString !== true) {
-        //     this._currentStream.stats.stderr.push(issuesString);
-        //   }
-        // }
+        if (this.constructor.interface) {
+          const issuesString = this.constructor.interface.apply(
+            this._currentStream.streamObjArray[0],
+            { return: 'string', throw: false }
+          );
+          if (issuesString !== true) {
+            this._currentStream.stats.stderr.push(issuesString);
+          }
+        }
 
         // complete the overall stats
         this._currentStream.stats = {

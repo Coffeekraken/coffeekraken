@@ -1,0 +1,17 @@
+
+
+/**
+  * @name       	jti-mb-medium
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.margin.bottom.medium
+  * @type        class
+  *
+  * Set the **bottom** margin to the **1.5** size
+  *
+  * @example 	html
+  * <div class="jti-mb-medium" style="background:#f2bc2b; width:100px; height:5px"></div>
+  * <div style="background:#2b3438; width:100px; height:5px"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */

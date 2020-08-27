@@ -1,0 +1,23 @@
+
+
+/**
+ * @name              jti-ul--dark
+ * @namespace         scss.components.ul.colors
+ * @type              Classname
+ *
+ * This class can be applied on any ```ul``` component to specify his color to ```dark```
+ *
+ * @example         html
+ * <ol class="ul jti-ul--dark">
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ * </ol>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */

@@ -1,0 +1,24 @@
+
+
+/**
+* @name 		paul-mo paul-mo--center paul-mo__content
+* @namespace         scss.core.class.helper
+* @class-namespace     sugar.helper.media.object
+* @type        class
+*
+* Famous media object class
+*
+* @example 	html
+* <div class="paul-mo">
+*   <div class="paul-mo__content">
+*     <img src="https://source.unsplash.com/random/100x100" />
+*   </div>
+*   <div class="paul-mo__content">
+*     <h2 class="paul-h3">Hello World</h2>
+*     <p class="paul-p">Phasellus fringilla aliquet justo eget pulvinar. Donec in justo leo.</p>
+*   </div>
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/

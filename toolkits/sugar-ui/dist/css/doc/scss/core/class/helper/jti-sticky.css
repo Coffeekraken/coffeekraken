@@ -1,0 +1,18 @@
+
+
+/**
+* @name 		jti-sticky
+* @namespace         scss.core.class.helper
+* @class-namespace     sugar.helper.position.sticky
+* @type        class
+*
+* Set an element position as ```sticky```
+*
+* @example 	html
+* <div class="jti-sticky">
+* 	I'm sticky now
+* </div>
+*
+* @since       2.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/

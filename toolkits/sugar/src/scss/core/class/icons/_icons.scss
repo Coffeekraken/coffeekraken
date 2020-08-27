@@ -3,19 +3,19 @@
   $icons: setting('classes.generate.icons');
   @each $name in $icons {
      /**
-      * @name 		.icon-#{$name}
+      * @name 		#{sel(icon-#{$name})}
       * @namespace       scss.core.class.icons
       * @type        class
       *
       * ```.icon-#{$name}``` icon class
       *
       * @example 	html
-      * <i class="icon-#{$name}" />
+      * <i class="#{sel(icon-#{$name})}" />
       *
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
       */
-    .icon-#{$name} {
+    .#{sel(icon-#{$name})} {
       @include icon($name);
     }
   }

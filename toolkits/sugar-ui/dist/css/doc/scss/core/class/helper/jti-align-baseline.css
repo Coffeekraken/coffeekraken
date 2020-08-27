@@ -1,0 +1,20 @@
+
+
+/**
+* @name 		.jti-align-baseline
+* @namespace         scss.core.class.helper
+* @class-namespace     sugar.helper.vertical-align.baseline
+* @type        class
+*
+* Align vertically baseline
+*
+* @example 	html
+* <div class="jti-border style="height:200px">
+*   <div class="jti-align-baseline">
+*     Hello world
+*   </div>
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/

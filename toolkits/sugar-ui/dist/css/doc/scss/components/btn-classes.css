@@ -16,7 +16,7 @@
   * @param       {List}      [$sizes:map-keys(setting('sizes'))]       The sizes you want to generate
   * @param       {Number}      [$base-padding: setting('look-and-feel.padding')]                 The base padding value used to interpolate the sizes
   * @param       {Number}       [$border-radius: settings('look-and-feel.border-radius')]       The border radius you want
-  * @param       {String}        [$name='s-btn']       The className to use for the generation
+  * @param       {String}        [$name='btn']       The className to use for the generation
   *
   * @example         html
   * <a class="s-btn">I'm a cool button</a>

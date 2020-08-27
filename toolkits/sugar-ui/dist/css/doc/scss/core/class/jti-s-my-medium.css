@@ -1,7 +1,7 @@
 
 
 /**
-  * @name       	.jti-s-my-medium
+  * @name       	jti-s-my-medium
   * @namespace       scss.core.class
   * @class-namespace           sugar.helper.margin.y.medium
   * @type        class
@@ -9,7 +9,7 @@
   * Set the **top** and **bottom** margins to the **1.5** size
   *
   * @example 	html
-  * <div class=".jti-s-my-medium" style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
+  * <div class="jti-s-my-medium" style="display:inline-block; background:#f2bc2b; width:50px; height:50px"></div>
   * <div style="display:inline-block; background:#2b3438; width:50px; height:50px"></div>
   *
   * @since       1.0.0

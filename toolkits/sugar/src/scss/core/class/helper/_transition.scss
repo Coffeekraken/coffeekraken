@@ -8,7 +8,7 @@
       @if class-match-namespace("sugar.helper.transition.#{$name}") {
 
         /**
-          * @name       	tr-#{$name}
+          * @name       	#{sel(tr-#{$name})}
           * @namespace       scss.core.class
           * @class-namespace           sugar.helper.transition.#{$name}
           * @type        class
@@ -16,14 +16,14 @@
           * Apply the transition **#{$name}**
           *
           * @example 	html
-          * <div class="tr-#{$name}">
+          * <div class="#{sel(tr-#{$name})}">
           * 	I'm transitionned with #{$name}
           * </div>
           *
           * @since       1.0.0
           * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
           */
-        #{selector("tr-#{$name}")} {
+        .#{sel("tr-#{$name}")} {
           @include transition($transition);
         }
       }

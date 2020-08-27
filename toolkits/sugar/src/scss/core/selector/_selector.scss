@@ -18,15 +18,7 @@
 @function selector($selector) {
   $prefix: setting('classes.generate.prefix');
   @if $prefix {
-    @if str-slice(selector, 1, 1) == '.' {
-      $selector: str-slice($selector, 2, 999999999);
-      $selector: '.#{$prefix}-#{$selector}';
-    } @else if str-slice($selector, 1, 1) == '#' {
-      $selector: str-slice($selector, 2, 999999999);
-      $selector: '##{$prefix}-#{$selector}';
-    } @else {
-      $selector: '.#{$prefix}-#{$selector}';
-    }
+    $selector: '#{$prefix}-#{$selector}';
   }
   $selector: str-replace($selector, "--default", "");
   $selector: str-replace($selector, "-default", "");

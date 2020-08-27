@@ -1,7 +1,7 @@
 
 
 /**
-  * @name       	.jti-s-c-primary--hover
+  * @name       	jti-s-c-primary--hover
   * @namespace       scss.core.class
   * @class-namespace           sugar.helper.color.primary.hover
   * @type        class
@@ -9,7 +9,7 @@
   * Specify the color to **primary--hover**
   *
   * @example 	html
-  * <div class=".jti-s-c-primary--hover">
+  * <div class="jti-s-c-primary--hover">
   * 	I'm in "primary--hover" color
   * </div>
   *

@@ -1,7 +1,7 @@
 @mixin classes-helper-clear() {
   @if class-match-namespace("sugar.helper.clear.left") {
     /**
-    * @name 		clear-left
+    * @name 		#{sel(clear-left)}
     * @namespace       scss.core.class.helper
     * @class-namespace     sugar.helper.clear.left
     * @type        class
@@ -9,20 +9,20 @@
     * Clear the left float on the element
     *
     * @example 	html
-    * <div class="clear-left">
+    * <div class="#{sel(clear-left)}">
     * 	I clear the left float
     * </div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .clear-left {
+    .#{sel(clear-left)} {
       clear: left;
     }
   }
   @if class-match-namespace("sugar.helper.clear.right") {
     /**
-    * @name 		clear-right
+    * @name 		#{sel(clear-right)}
     * @namespace       scss.core.class.helper
     * @class-namespace     sugar.helper.clear.right
     * @type        class
@@ -30,21 +30,21 @@
     * Clear the right float on the element
     *
     * @example 	html
-    * <div class="clear-right">
+    * <div class="#{sel(clear-right)}">
     * 	I clear the right float
     * </div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .clear-right {
+    .#{sel(clear-right)} {
       clear: right;
     }
   }
 
   @if class-match-namespace("sugar.helper.clear.both") {
     /**
-    * @name 		clear
+    * @name 		#{sel(clear)}
     * @namespace       scss.core.class.helper
     * @class-namespace     sugar.helper.clear.both
     * @type        class
@@ -52,14 +52,14 @@
     * Clear both float on the element
     *
     * @example 	html
-    * <div class="clear">
+    * <div class="#{sel(clear)}">
     * 	I clear both floats
     * </div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .clear {
+    .#{sel(clear)} {
       clear: both;
     }
   }

@@ -1,7 +1,7 @@
 
 
 /**
-  * @name       	.jti-s-c-title--light
+  * @name       	jti-s-c-title--light
   * @namespace       scss.core.class
   * @class-namespace           sugar.helper.color.title.light
   * @type        class
@@ -9,7 +9,7 @@
   * Specify the color to **title--light**
   *
   * @example 	html
-  * <div class=".jti-s-c-title--light">
+  * <div class="jti-s-c-title--light">
   * 	I'm in "title--light" color
   * </div>
   *

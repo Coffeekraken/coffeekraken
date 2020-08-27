@@ -1,0 +1,18 @@
+
+
+/**
+* @name 		jti-t-bold
+* @namespace         scss.core.class.helper
+* @class-namespace     sugar.helper.text.weight.bold
+* @type        class
+*
+* Make the text bold
+*
+* @example 	html
+* <div class="jti-t-bold">
+* 	I'm bold
+* </div>
+*
+* @since       2.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/

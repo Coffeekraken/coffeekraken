@@ -1,7 +1,7 @@
 
 
 /**
-* @name 		.jti-s-border-bigger
+* @name 		jti-s-border-bigger
 * @namespace           scss.core.class.helper
 * @class-namespace     sugar.helper.border.bigger
 * @type        class
@@ -9,7 +9,7 @@
 * Apply the **bigger** border size
 *
 * @example 	html
-* <div class="s-border .jti-s-border-bigger s-ratio-1-1">
+* <div class="s-border jti-s-border-bigger s-ratio-1-1">
 * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
 * </div>
 *

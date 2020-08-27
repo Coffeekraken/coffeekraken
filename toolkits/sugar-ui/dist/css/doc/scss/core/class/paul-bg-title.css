@@ -1,0 +1,18 @@
+
+
+/**
+  * @name       	paul-bg-title
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.title.bg
+  * @type        class
+  *
+  * Specify the background color to **title**
+  *
+  * @example 	html
+  * <div class="paul-bg-title p" style="color:white">
+  * 	My background color is "title"
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */

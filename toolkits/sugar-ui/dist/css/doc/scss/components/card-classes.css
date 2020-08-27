@@ -15,7 +15,7 @@
   * @todo         Finish describing features
   *
   * @param       {Number}       [$border-radius: settings('look-and-feel.border-radius')]       The border radius you want
-  * @param       {String}        [$name='s-card']       The className to use for the generation
+  * @param       {String}        [$name='card']       The className to use for the generation
   *
   * @example         html
   * <div class="s-card">

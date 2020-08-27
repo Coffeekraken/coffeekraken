@@ -1,7 +1,7 @@
 
 
 /**
-  * @name       	.jti-s-c-warning--dark
+  * @name       	jti-s-c-warning--dark
   * @namespace       scss.core.class
   * @class-namespace           sugar.helper.color.warning.dark
   * @type        class
@@ -9,7 +9,7 @@
   * Specify the color to **warning--dark**
   *
   * @example 	html
-  * <div class=".jti-s-c-warning--dark">
+  * <div class="jti-s-c-warning--dark">
   * 	I'm in "warning--dark" color
   * </div>
   *

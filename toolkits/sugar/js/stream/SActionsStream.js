@@ -29,7 +29,9 @@ var _wait = _interopRequireDefault(require("../time/wait"));
 
 var _SActionsStreamAction = _interopRequireDefault(require("./SActionsStreamAction"));
 
-var _SHashCache = _interopRequireDefault(require("../cache/SHashCache"));
+var _SCache = _interopRequireDefault(require("../cache/SCache"));
+
+var _sha = _interopRequireDefault(require("../crypt/sha256"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -149,7 +151,7 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
     // init SPromise
     _this = _super.call(this, () => {}, (0, _deepMerge.default)({
       id: (0, _uniqid.default)(),
-      cache: true,
+      cache: false,
       name: null,
       order: null,
       before: [],
@@ -163,8 +165,6 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
 
     _defineProperty(_assertThisInitialized(_this), "_currentStream", null);
 
-    _defineProperty(_assertThisInitialized(_this), "_cachedStreamObj", null);
-
     _get((_thisSuper = _assertThisInitialized(_this), _getPrototypeOf(SActionStream.prototype)), "start", _thisSuper).call(_thisSuper); // check the actions
 
 
@@ -174,10 +174,10 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
       if (typeof actionInstance === 'function' || (0, _class.default)(actionInstance) && actionInstance.constructor.name === 'SActionsStreamAction' || actionInstance instanceof _SActionsStreamAction.default) {} else {
         throw new _SError.default((0, _parseHtml.default)("The value passed for the \"<yellow>".concat(actionName, "</yellow>\" action has to be either a simple function or an \"<green>SActionsStreamAction</green>\" instance. You have passed a \"<red>").concat(typeof actionInstance, "</red>\"...")));
       }
-    }); // init a SHashCache instance if needed
+    }); // init a SCache instance if needed
 
     if (_this._settings.cache) {
-      _this._sHashCache = new _SHashCache.default(settings.id, settings.cache === true ? {} : settings.cache);
+      _this._sCache = new _SCache.default(settings.id, settings.cache === true ? {} : settings.cache);
     } // save the actions
 
 
@@ -206,8 +206,6 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
     key: "_applyFnOnStreamObj",
     value: function () {
       var _applyFnOnStreamObj2 = _asyncToGenerator(function* (streamObjOrArray, processFn, settings) {
-        var _this2 = this;
-
         if (settings === void 0) {
           settings = {};
         }
@@ -219,10 +217,16 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
         }, settings);
 
         var logActionStatus = () => {
+          var logString = "Processing <cyan>".concat(Array.isArray(this._currentStream.streamObjArray) ? this._currentStream.streamObjArray.length : 1, "</cyan> source").concat(Array.isArray(this._currentStream.streamObjArray) ? this._currentStream.streamObjArray.length > 1 ? 's' : '' : '', " | Processed <green>").concat(this._currentStream.currentActionObj.processed, "</green>");
+
+          if (this._settings.cache) {
+            logString += " | From cache: <yellow>".concat(this._currentStream.currentActionObj.fromCache, "</yellow>");
+          }
+
           this.log({
             temp: true,
             group: this._currentStream.currentActionObj.name,
-            value: "Processing <cyan>".concat(Array.isArray(this._currentStream.streamObjArray) ? this._currentStream.streamObjArray.length : 1, "</cyan> sources | Processed <green>").concat(this._currentStream.currentActionObj.processed, "</green> | From cache: <yellow>").concat(this._currentStream.currentActionObj.fromCache, "</yellow>")
+            value: logString
           });
         };
 
@@ -231,52 +235,59 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
           var isArray = Array.isArray(streamObjOrArray);
           var streamObjArray = streamObjOrArray;
           if (!isArray) streamObjArray = [streamObjArray];
-          streamObjArray.forEach( /*#__PURE__*/function () {
-            var _ref = _asyncToGenerator(function* (streamObj) {
-              if (streamObj.$fromCache) return; // set the current action in the streamObj
 
-              streamObj.$action = settings.type; // // get the value from the cache if available
+          for (var streamObjArrayIdx in streamObjArray) {
+            var streamObj = streamObjArray[streamObjArrayIdx]; // if (streamObj.$fromCache) return;
+            // set the current action in the streamObj
 
-              if (_this2._currentStream.currentActionObj.instance && _this2._currentStream.currentActionObj.instance.settings.cache && _this2._sHashCache || _this2._sHashCache && !_this2._currentStream.currentActionObj.instance) {
-                var isCached = yield _this2._sHashCache.exists(_objectSpread(_objectSpread({}, (0, _clone.default)(streamObj)), {}, {
-                  settings: _this2._settings
-                }));
+            streamObj.$action = settings.type; // calculate the hash of this particular action
 
-                if (isCached) {
-                  streamObj.$fromCache = true;
-                  _this2._currentStream.currentActionObj.fromCache++;
-                  logActionStatus();
-                  return;
-                }
+            var actionHash = _sha.default.encrypt((0, _toString.default)(_objectSpread(_objectSpread({}, (0, _clone.default)(streamObj)), {}, {
+              settings: this._settings
+            }))); // get the value from the cache if available
+
+
+            if (this._currentStream.currentActionObj.instance && this._currentStream.currentActionObj.instance.settings.cache && this._sCache || this._sCache && !this._currentStream.currentActionObj.instance) {
+              var cachedStreamObj = yield this._sCache.get(actionHash);
+
+              if (cachedStreamObj) {
+                console.log('cached');
+                streamObj = cachedStreamObj;
+                streamObj.$fromCache = true;
+                streamObjArray[streamObjArrayIdx] = streamObj;
+                this._currentStream.currentActionObj.fromCache++;
+                logActionStatus();
+                return;
               }
+            }
 
-              var processFnArgs = [streamObj, ...settings.processFnArgs];
-              processFnArray.forEach( /*#__PURE__*/function () {
-                var _ref2 = _asyncToGenerator(function* (processFn) {
-                  var processFnResult = processFn.apply(null, processFnArgs);
-                  if (settings.resultProcessor) processFnResult = settings.resultProcessor.bind(_this2)(processFnResult);
+            var processFnArgs = [streamObj, ...settings.processFnArgs];
 
-                  if (processFnResult instanceof Promise) {
-                    streamObj = yield processFnResult;
-                  } else {
-                    streamObj = processFnResult;
-                  }
-                });
+            for (var processFnArrayIdx in processFnArray) {
+              var _processFn = processFnArray[processFnArrayIdx];
 
-                return function (_x5) {
-                  return _ref2.apply(this, arguments);
-                };
-              }());
-              _this2._currentStream.currentActionObj.processed++;
-              logActionStatus(); // save in cache
+              var processFnResult = _processFn(...processFnArgs);
 
-              if (_this2._settings.cache) yield _this2._saveInCache(streamObj);
-            });
+              if (settings.resultProcessor) processFnResult = settings.resultProcessor.bind(this)(processFnResult);
 
-            return function (_x4) {
-              return _ref.apply(this, arguments);
-            };
-          }());
+              if (processFnResult instanceof Promise) {
+                streamObj = yield processFnResult;
+              } else {
+                streamObj = processFnResult;
+              }
+            }
+
+            streamObjArray[streamObjArrayIdx] = streamObj;
+
+            if (settings.type.match(/.*\.main$/)) {
+              this._currentStream.currentActionObj.processed++;
+              logActionStatus();
+            } // save in cache
+
+
+            if (this._settings.cache) yield this._saveInCache(actionHash, streamObj);
+          }
+
           if (isArray) return streamObjArray;
           return streamObjArray[0];
         } catch (e) {
@@ -302,6 +313,8 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
     key: "_handleStreamObjArray",
     value: function () {
       var _handleStreamObjArray2 = _asyncToGenerator(function* () {
+        var _this2 = this;
+
         var stack = this._currentStream.streamObjArray;
 
         for (var j = 0; j < stack.length; j++) {
@@ -319,7 +332,22 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
           } // call the action and pass it the current stream object
 
 
-          currentStreamObj = yield this._applyFnOnStreamObj(currentStreamObj, this._currentStream.currentActionObj.instance.run.bind(this._currentStream.currentActionObj.instance), {
+          currentStreamObj = yield this._applyFnOnStreamObj(currentStreamObj, function () {
+            for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+              args[_key] = arguments[_key];
+            }
+
+            return new Promise( /*#__PURE__*/function () {
+              var _ref = _asyncToGenerator(function* (resolve) {
+                var res = yield _this2._currentStream.currentActionObj.instance.run(...args);
+                return resolve(res);
+              });
+
+              return function (_x4) {
+                return _ref.apply(this, arguments);
+              };
+            }());
+          }, {
             type: "".concat(this._currentStream.currentActionObj.name, ".main"),
             processFnArgs: [this._currentStream.currentActionObj.instance.settings],
             resultProcessor: fnResult => {
@@ -330,6 +358,8 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
 
                 this._currentStream.currentActionObj.promise = fnResult;
               }
+
+              return fnResult;
             }
           });
 
@@ -408,18 +438,16 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
   }, {
     key: "_saveInCache",
     value: function () {
-      var _saveInCache2 = _asyncToGenerator(function* (streamObj) {
+      var _saveInCache2 = _asyncToGenerator(function* (hash, streamObj) {
         // save in cache
-        if (this._currentStream.currentActionObj.instance && this._currentStream.currentActionObj.instance.settings.cache && this._sHashCache || this._sHashCache && !this._currentStream.currentActionObj.instance) {
-          yield this._sHashCache.set(_objectSpread(_objectSpread({}, (0, _clone.default)(streamObj)), {}, {
-            settings: this._settings
-          }), true);
+        if (this._currentStream.currentActionObj.instance && this._currentStream.currentActionObj.instance.settings.cache && this._sCache || this._sCache && !this._currentStream.currentActionObj.instance) {
+          yield this._sCache.set(hash, streamObj);
         }
 
         return true;
       });
 
-      function _saveInCache(_x6) {
+      function _saveInCache(_x5, _x6) {
         return _saveInCache2.apply(this, arguments);
       }
 
@@ -492,7 +520,7 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
       if (settings.before && !Array.isArray(settings.before)) settings.before = [settings.before];
       if (settings.after && !Array.isArray(settings.after)) settings.after = [settings.after];
       this._currentStream.promise = new _SPromise2.default( /*#__PURE__*/function () {
-        var _ref3 = _asyncToGenerator(function* (resolve, reject, trigger, cancel) {
+        var _ref2 = _asyncToGenerator(function* (resolve, reject, trigger, cancel) {
           yield (0, _wait.default)(100); // ugly hack to check when have time...
           // starting log
 
@@ -604,19 +632,20 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
 
               if (_this3.hasCurrentStreamErrors()) {
                 break;
-              } // if (this.constructor.interface) {
-              //   const issuesString = this.constructor.interface.apply(
-              //     this._currentStream.streamObjArray[0],
-              //     { return: 'string', throw: false }
-              //   );
-              //   if (issuesString !== true) {
-              //     this._currentStream.stats.stderr.push(issuesString);
-              //     this._currentStream.currentActionObj.stats.stderr.push(
-              //       issuesString
-              //     );
-              //   }
-              // }
-              // complete the actionObj
+              }
+
+              if (_this3.constructor.interface) {
+                var issuesString = _this3.constructor.interface.apply(_this3._currentStream.streamObjArray[0], {
+                  return: 'string',
+                  throw: false
+                });
+
+                if (issuesString !== true) {
+                  _this3._currentStream.stats.stderr.push(issuesString);
+
+                  _this3._currentStream.currentActionObj.stats.stderr.push(issuesString);
+                }
+              } // complete the actionObj
 
 
               _this3._currentStream.currentActionObj.stats = _objectSpread(_objectSpread({}, _this3._currentStream.currentActionObj.stats), {}, {
@@ -653,16 +682,19 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
 
           currentStreamObj = yield _this3._applyFnOnStreamObj(currentStreamObj, _this3._settings.after, {
             type: 'after'
-          }); // if (this.constructor.interface) {
-          //   const issuesString = this.constructor.interface.apply(
-          //     this._currentStream.streamObjArray[0],
-          //     { return: 'string', throw: false }
-          //   );
-          //   if (issuesString !== true) {
-          //     this._currentStream.stats.stderr.push(issuesString);
-          //   }
-          // }
-          // complete the overall stats
+          });
+
+          if (_this3.constructor.interface) {
+            var _issuesString = _this3.constructor.interface.apply(_this3._currentStream.streamObjArray[0], {
+              return: 'string',
+              throw: false
+            });
+
+            if (_issuesString !== true) {
+              _this3._currentStream.stats.stderr.push(_issuesString);
+            }
+          } // complete the overall stats
+
 
           _this3._currentStream.stats = _objectSpread(_objectSpread({}, _this3._currentStream.stats), {}, {
             streamObj: _this3._currentStream.streamObjArray,
@@ -706,7 +738,7 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
         });
 
         return function (_x7, _x8, _x9, _x10) {
-          return _ref3.apply(this, arguments);
+          return _ref2.apply(this, arguments);
         };
       }(), {
         id: this._settings.id
@@ -728,8 +760,8 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
   }, {
     key: "log",
     value: function log() {
-      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-        args[_key] = arguments[_key];
+      for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        args[_key2] = arguments[_key2];
       }
 
       args.forEach(arg => {

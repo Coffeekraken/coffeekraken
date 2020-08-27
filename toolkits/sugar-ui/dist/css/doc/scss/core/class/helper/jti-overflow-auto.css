@@ -1,0 +1,23 @@
+
+
+/**
+* @name 		jti-overflow-auto
+* @namespace           scss.core.class.helper
+* @class-namespace     sugar.helper.overflow.auto
+* @type        class
+*
+* Set the overflow to auto
+*
+* @example 	html
+* <div class="jti-overflow-auto" style="height:3em;">
+* 	<p>Hello world</p>
+* 	<p>Hello world</p>
+* 	<p>Hello world</p>
+* 	<p>Hello world</p>
+* 	<p>Hello world</p>
+* 	<p>Hello world</p>
+* </div>
+*
+* @since       2.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/

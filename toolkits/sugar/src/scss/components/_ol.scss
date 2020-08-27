@@ -9,7 +9,7 @@
   *
   * @param       {List}      [$colors:map-keys(setting('colors'))]       The colors you want to generate
   * @param       {List}      [$sizes:map-keys(setting('sizes'))]       The sizes you want to generate
-  * @param       {String}        [$name='s-ol']       The className to use for the generation
+  * @param       {String}        [$name='ol']       The className to use for the generation
   *
   * @example         html
   * <ol class="s-ol">
@@ -31,7 +31,7 @@
 @mixin ol-classes(
   $colors: map-keys(setting('colors')),
   $sizes: map-keys(setting('sizes')),
-  $name: 's-ol'
+  $name: 'ol'
 ) {
   @include ol-bare-classes($sizes, $name);
   @include ol-style-classes($colors, $name);
@@ -46,14 +46,14 @@
  * This mixin generate all the bare classes depending on the parameters you set.
  *
  * @param       {List}      [$sizes:map-keys(setting('sizes'))]       The sizes you want to generate
- * @param       {String}      [$name='s-ol']                         The name to use for the generation of the classes
+ * @param       {String}      [$name='ol']                         The name to use for the generation of the classes
  *
  * @since       2.0.0
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
  @mixin ol-bare-classes(
   $sizes: map-keys(setting('sizes')),
-  $name: 's-ol'
+  $name: 'ol'
 ) {
   @each $size in $sizes {
     /**
@@ -92,14 +92,14 @@
  * This mixin generate all the style classes depending on the parameters you set.
  *
  * @param       {List}      [$colors:map-keys(setting('colors'))]       The colors you want to generate
- * @param       {String}      [$name='s-ol']                         The name to use for the generation of the classes
+ * @param       {String}      [$name='ol']                         The name to use for the generation of the classes
  *
  * @since       2.0.0
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
  @mixin ol-style-classes(
   $colors: map-keys(setting('colors')),
-  $name: 's-ol'
+  $name: 'ol'
 ) {
   @each $color in $colors {
     /**

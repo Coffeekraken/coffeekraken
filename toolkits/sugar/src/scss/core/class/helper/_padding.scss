@@ -6,7 +6,7 @@
     @each $name, $size in $sizes {
 
       @if class-match-namespace("sugar.helper.padding.#{$name}") {
-        $cname: selector("s-p-#{$name}");
+        $cname: sel("p-#{$name}");
         /**
           * @name        #{$cname}
           * @namespace       scss.core.class
@@ -23,7 +23,7 @@
           * @since       1.0.0
           * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
           */
-        #{$cname} {
+        .#{$cname} {
           @if $name == "default" {
             &:not(p) {
               padding: space($name);
@@ -36,7 +36,7 @@
 
 
       @if class-match-namespace("sugar.helper.padding.bottom.#{$name}") {
-        $cname: selector("s-pb-#{$name}");
+        $cname: sel("pb-#{$name}");
         /**
           * @name       	#{$cname}
           * @namespace       scss.core.class
@@ -53,14 +53,14 @@
           * @since       1.0.0
           * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
           */
-        #{$cname} {
+        .#{$cname} {
           padding-bottom: space($name);
         }
       }
 
 
       @if class-match-namespace("sugar.helper.padding.top.#{$name}") {
-        $cname: selector("s-pt-#{$name}");
+        $cname: sel("pt-#{$name}");
         /**
           * @name       	#{$cname}
           * @namespace       scss.core.class
@@ -77,14 +77,14 @@
           * @since       1.0.0
           * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
           */
-       #{$cname} {
+       .#{$cname} {
           padding-top: space($name);
         }
       }
 
 
       @if class-match-namespace("sugar.helper.padding.left.#{$name}") {
-        $cname: selector("s-pl-#{$name}");
+        $cname: sel("pl-#{$name}");
         /**
           * @name       	#{$cname}
           * @namespace       scss.core.class
@@ -101,14 +101,14 @@
           * @since       1.0.0
           * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
           */
-        #{$cname} {
+        .#{$cname} {
           padding-left: space($name);
         }
       }
 
 
       @if class-match-namespace("sugar.helper.padding.right.#{$name}") {
-        $cname: selector("s-pr-#{$name}");
+        $cname: sel("pr-#{$name}");
         /**
           * @name       	#{$cname}
           * @namespace       scss.core.class
@@ -125,14 +125,14 @@
           * @since       1.0.0
           * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
           */
-        #{$cname} {
+        .#{$cname} {
           padding-right: space($name);
         }
       }
 
 
       @if class-match-namespace("sugar.helper.padding.side.#{$name}") {
-        $cname: selector("s-ps-#{$name}");
+        $cname: sel("ps-#{$name}");
         /**
           * @name       	#{$cname}
           * @namespace       scss.core.class
@@ -149,7 +149,7 @@
           * @since       1.0.0
           * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
           */
-        #{$cname} {
+        .#{$cname} {
           padding-left: space($name);
           padding-right: space($name);
         }
@@ -157,7 +157,7 @@
 
 
       @if class-match-namespace("sugar.helper.padding.y.#{$name}") {
-        $cname: selector("s-py-#{$name}");
+        $cname: sel("py-#{$name}");
         /**
           * @name       	#{$cname}
           * @namespace       scss.core.class
@@ -174,7 +174,7 @@
           * @since       1.0.0
           * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
           */
-        #{$cname} {
+        .#{$cname} {
           padding-top: space($name);
           padding-bottom: space($name);
         }
@@ -185,7 +185,7 @@
 
     @if class-match-namespace("sugar.helper.padding.no.top") {
       /**
-      * @name       	s-no-pt
+      * @name       	#{sel(no-pt)}
       * @namespace       scss.core.class
       * @class-namespace           sugar.helper.padding.no.top
       * @type        class
@@ -193,12 +193,12 @@
       * Reset **top** padding
       *
       * @example 	html
-      * <div class="s-no-pt" style="display:inline-block; background:#{color(primary)}; width:50px; height:50px;"></div>
+      * <div class="#{sel(no-pt)}" style="display:inline-block; background:#{color(primary)}; width:50px; height:50px;"></div>
       *
       * @since       1.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
-      .s-no-pt {
+      .#{sel(no-pt)} {
         padding-top: 0 !important;
       }
     }
@@ -206,7 +206,7 @@
 
     @if class-match-namespace("sugar.helper.padding.no.right") {
       /**
-        * @name       	s-no-pr
+        * @name       	#{sel(no-pr)}
         * @namespace       scss.core.class
         * @class-namespace           sugar.helper.padding.no.right
         * @type        class
@@ -214,12 +214,12 @@
         * Reset **right** padding
         *
         * @example 	html
-        * <div class="s-no-pr" style="display:inline-block; background:#{color(primary)}; width:50px; height:50px;"></div>
+        * <div class="#{sel(no-pr)}" style="display:inline-block; background:#{color(primary)}; width:50px; height:50px;"></div>
         *
         * @since       1.0.0
         * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-      .s-no-pr {
+      .#{sel(no-pr)} {
         padding-right: 0 !important;
       }
     }
@@ -227,7 +227,7 @@
 
     @if class-match-namespace("sugar.helper.padding.no.bottom") {
       /**
-        * @name       	s-no-pb
+        * @name       	#{sel(no-pb)}
         * @namespace       scss.core.class
         * @class-namespace           sugar.helper.padding.no.bottom
         * @type        class
@@ -235,12 +235,12 @@
         * Reset **bottom** padding
         *
         * @example 	html
-        * <div class="s-no-pb" style="display:inline-block; background:#{color(primary)}; width:50px; height:50px;"></div>
+        * <div class="#{sel(no-pb)}" style="display:inline-block; background:#{color(primary)}; width:50px; height:50px;"></div>
         *
         * @since       1.0.0
         * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-      .s-no-pb {
+      .#{sel(no-pb)} {
         padding-bottom: 0 !important;
       }
     }
@@ -248,7 +248,7 @@
 
     @if class-match-namespace("sugar.helper.padding.no.left") {
       /**
-        * @name       	s-no-pl
+        * @name       	#{sel(no-pl)}
         * @namespace       scss.core.class
         * @class-namespace           sugar.helper.padding.no.left
         * @type        class
@@ -256,12 +256,12 @@
         * Reset **left** padding
         *
         * @example 	html
-        * <div class="s-no-pl" style="display:inline-block; background:#{color(primary)}; width:50px; height:50px;"></div>
+        * <div class="#{sel(no-pl)}" style="display:inline-block; background:#{color(primary)}; width:50px; height:50px;"></div>
         *
         * @since       1.0.0
         * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-      .s-no-pl {
+      .#{sel(no-pl)} {
         padding-left: 0 !important;
       }
     }
@@ -269,7 +269,7 @@
 
     @if class-match-namespace("sugar.helper.padding.no.side") {
       /**
-        * @name       	s-no-ps
+        * @name       	#{sel(no-ps)}
         * @namespace       scss.core.class
         * @class-namespace           sugar.helper.padding.no.side
         * @type        class
@@ -277,12 +277,12 @@
         * Reset **left** and **right** paddings
         *
         * @example 	html
-        * <div class="s-no-ps" style="display:inline-block; background:#{color(primary)}; width:50px; height:50px;"></div>
+        * <div class="#{sel(no-ps)}" style="display:inline-block; background:#{color(primary)}; width:50px; height:50px;"></div>
         *
         * @since       1.0.0
         * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-      .s-no-ps {
+      .#{sel(no-ps)} {
         padding-left: 0 !important;
         padding-right: 0 !important;
       }
@@ -291,7 +291,7 @@
 
     @if class-match-namespace("sugar.helper.padding.no.y") {
       /**
-        * @name       	s-no-py
+        * @name       	#{sel(no-py)}
         * @namespace       scss.core.class
         * @class-namespace           sugar.helper.padding.no.y
         * @type        class
@@ -299,12 +299,12 @@
         * Reset **top** and **bottom** paddings
         *
         * @example 	html
-        * <div class="s-no-py" style="display:inline-block; background:#{color(primary)}; width:50px; height:50px;"></div>
+        * <div class="#{sel(no-py)}" style="display:inline-block; background:#{color(primary)}; width:50px; height:50px;"></div>
         *
         * @since       1.0.0
         * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-      .s-no-py {
+      .#{sel(no-py)} {
         padding-top: 0 !important;
         padding-bottom: 0 !important;
       }

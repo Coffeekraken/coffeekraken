@@ -1,0 +1,18 @@
+
+
+/**
+* @name 		jti-pull-right
+* @namespace         scss.core.class.helper
+* @class-namespace     sugar.helper.pull.right
+* @type        class
+*
+* Allows you to pull an element to the right side
+*
+* @example 	html
+* <div>
+* 	<span class="jti-pull-right">Hello world</span>
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/

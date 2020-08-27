@@ -8,7 +8,7 @@
 
     @if class-match-namespace('sugar.lnf.typography.#{$key}') {
       /**
-        * @name 		s-#{$key}
+        * @name 		#{sel($key)}
         * @namespace           scss.core.class.lnf
         * @class-namespace     sugar.lnf.typography.#{$key}
         * @type        class
@@ -16,12 +16,12 @@
         * Set the basic #{$key} styling
         *
         * @example 	html
-        * <#{$key} class="s-#{$key}">I'm a cool #{$key}</#{$key}>
+        * <#{$key} class="#{sel($key)}">I'm a cool #{$key}</#{$key}>
         *
         * @since       2.0.0
         * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
         */
-      .s-#{$key} {
+      .#{sel($key)} {
         $map: $value;
         @each $name, $val in $map {
           @if function-exists($name) {

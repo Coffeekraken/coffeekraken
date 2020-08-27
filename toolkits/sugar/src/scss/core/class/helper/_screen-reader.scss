@@ -2,7 +2,7 @@
 
   @if class-match-namespace("sugar.helper.screen-reader.only") {
     /**
-    * @name 		s-sr-only
+    * @name 		#{sel(sr-only)}
     * @namespace         scss.core.class.helper
     * @class-namespace     sugar.helper.screen-reader.only
     * @type        class
@@ -11,13 +11,13 @@
     *
     * @example 	html
     * <div class="ratio-16-9">
-    * 	<img src="https://source.unsplash.com/random" class="s-abs-cover s-sr-only" />
+    * 	<img src="https://source.unsplash.com/random" class="s-abs-cover #{sel(sr-only)}" />
     * </div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-sr-only {
+    .#{sel(sr-only)} {
       @include sr-only();
     }
   }

@@ -1,0 +1,17 @@
+
+
+/**
+  * @name       	jti-m
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.margin.default
+  * @type        class
+  *
+  * Set the **margins** to the **1** size
+  *
+  * @example 	html
+  * <div class="jti-m" style="background:#f2bc2b; width:100px; height:5px"></div>
+  * <div style="background:#2b3438; width:100px; height:5px"></div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */

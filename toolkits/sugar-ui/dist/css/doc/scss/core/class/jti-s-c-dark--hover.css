@@ -1,7 +1,7 @@
 
 
 /**
-  * @name       	.jti-s-c-dark--hover
+  * @name       	jti-s-c-dark--hover
   * @namespace       scss.core.class
   * @class-namespace           sugar.helper.color.dark.hover
   * @type        class
@@ -9,7 +9,7 @@
   * Specify the color to **dark--hover**
   *
   * @example 	html
-  * <div class=".jti-s-c-dark--hover">
+  * <div class="jti-s-c-dark--hover">
   * 	I'm in "dark--hover" color
   * </div>
   *

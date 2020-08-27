@@ -2,7 +2,7 @@
 
   @if class-match-namespace("sugar.helper.display.block") {
     /**
-    * @name 		s-block
+    * @name 		#{sel(block)}
     * @namespace             scss.core.class.helper
     * @class-namespace         sugar.helper.display.block
     * @type        class
@@ -10,20 +10,20 @@
     * Display the element as ```block```
     *
     * @example 	html
-    * <div class="s-block">
+    * <div class="#{sel(block)}">
     * 	I'm displayed as block
     * </div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-block {
+    .#{sel(block)} {
       display: block;
     }
   }
   @if class-match-namespace("sugar.helper.display.inline") {
     /**
-    * @name 		s-inline
+    * @name 		#{sel(inline)}
     * @namespace             scss.core.class.helper
     * @class-namespace         sugar.helper.display.inline
     * @type        class
@@ -31,20 +31,20 @@
     * Display the element as ```inline```
     *
     * @example 	html
-    * <div class="s-inline">
+    * <div class="#{sel(inline)}">
     * 	I'm displayed as inline
     * </div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-inline {
+    .#{sel(inline)} {
      display: inline;
     }
   }
   @if class-match-namespace("sugar.helper.display.inline-block") {
     /**
-    * @name 		s-inline-block
+    * @name 		#{sel(inline-block)}
     * @namespace             scss.core.class.helper
     * @class-namespace         sugar.helper.display.inline-block
     * @type        class
@@ -52,20 +52,20 @@
     * Display the element as ```inline-block```
     *
     * @example 	html
-    * <div class="s-inline-block">
+    * <div class="#{sel(inline-block)}">
     * 	I'm displayed as inline-block
     * </div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-inline-block {
+    .#{sel(inline-block)} {
       display: inline-block;
     }
   }
   @if class-match-namespace("sugar.helper.display.show") {
     /**
-    * @name 		s-show
+    * @name 		#{sel(show)}
     * @namespace             scss.core.class.helper
     * @class-namespace         sugar.helper.display.show
     * @type        class
@@ -73,20 +73,20 @@
     * Display the element as ```block```
     *
     * @example 	html
-    * <div class="s-show">
+    * <div class="#{sel(show)}">
     * 	I'm displayed
     * </div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-show {
+    .#{sel(show)} {
       display: block;
     }
   }
   @if class-match-namespace("sugar.helper.display.show-inline") {
     /**
-    * @name 		s-show-inline
+    * @name 		#{sel(show-inline)}
     * @namespace             scss.core.class.helper
     * @class-namespace         sugar.helper.display.show-inline
     * @type        class
@@ -94,20 +94,20 @@
     * Display the element as ```inline-block```
     *
     * @example 	html
-    * <div class="s-show-inline">
+    * <div class="#{sel(show-inline)}">
     * 	I'm inline displayed
     * </div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-show-inline {
+    .#{sel(show-inline)} {
       display: inline-block;
     }
   }
   @if class-match-namespace("sugar.helper.display.hidden") {
     /**
-    * @name 		s-hidden
+    * @name 		#{sel(hidden)}
     * @namespace             scss.core.class.helper
     * @class-namespace         sugar.helper.display.hidden
     * @type        class
@@ -115,20 +115,20 @@
     * Hide the element by setting the display to ```none```
     *
     * @example 	html
-    * <div class="s-hidden">
+    * <div class="#{sel(hidden)}">
     * 	I'm hidden
     * </div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-hidden {
+    .#{sel(hidden)} {
       display: none;
     }
   }
   @if class-match-namespace("sugar.helper.display.hide") {
     /**
-    * @name 		s-hide
+    * @name 		#{sel(hide)}
     * @namespace             scss.core.class.helper
     * @class-namespace         sugar.helper.display.hide
     * @type        class
@@ -136,20 +136,20 @@
     * Hide the element by setting the display to ```none```
     *
     * @example 	html
-    * <div class="s-hide">
+    * <div class="#{sel(hide)}">
     * 	I'm hidden
     * </div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-hide {
+    .#{sel(hide)} {
       display: none;
     }
   }
   @if class-match-namespace("sugar.helper.display.visible") {
     /**
-    * @name 		s-visible
+    * @name 		#{sel(visible)}
     * @namespace             scss.core.class.helper
     * @class-namespace         sugar.helper.display.visible
     * @type        class
@@ -157,20 +157,20 @@
     * Display the element by setting the visibility to ```visible```
     *
     * @example 	html
-    * <div class="s-visible">
+    * <div class="#{sel(visible)}">
     * 	I'm visible
     * </div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-visible {
+    .#{sel(visible)} {
       visibility: visible;
     }
   }
   @if class-match-namespace("sugar.helper.display.invisible") {
     /**
-    * @name 		s-invisible
+    * @name 		#{sel(invisible)}
     * @namespace             scss.core.class.helper
     * @class-namespace         sugar.helper.display.invisible
     * @type        class
@@ -178,14 +178,14 @@
     * Display the element by setting the visibility to ```hidden```
     *
     * @example 	html
-    * <div class="s-invisible">
+    * <div class="#{sel(invisible)}">
     * 	I'm invisible
     * </div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-invisible {
+    .#{sel(invisible)} {
       visibility: hidden;
     }
   }
@@ -193,7 +193,7 @@
     "sugar.helper.display.visually-hidden"
   ) {
     /**
-    * @name 		s-visually-hidden
+    * @name 		#{sel(visually-hidden)}
     * @namespace             scss.core.class.helper
     * @class-namespace         sugar.helper.display.visually-hidden
     * @type        class
@@ -202,14 +202,14 @@
     * This class use some tricks to make the element dissapear without using some ```display:none;```, etc...
     *
     * @example 	html
-    * <div class="s-visually-hidden">
+    * <div class="#{sel(visually-hidden)}">
     * 	I'm only visually hidden
     * </div>
     *
     * @since       1.0.0
     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .s-visually-hidden {
+    .#{sel(visually-hidden)} {
      @include visually-hidden();
     }
   }

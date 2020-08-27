@@ -1,7 +1,7 @@
 
 
 /**
-  * @name       	.jti-s-c-text
+  * @name       	jti-s-c-text
   * @namespace       scss.core.class
   * @class-namespace           sugar.helper.color.text
   * @type        class
@@ -9,7 +9,7 @@
   * Specify the color to **text**
   *
   * @example 	html
-  * <div class=".jti-s-c-text">
+  * <div class="jti-s-c-text">
   * 	I'm in "text" color
   * </div>
   *

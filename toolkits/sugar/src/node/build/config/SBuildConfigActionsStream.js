@@ -53,7 +53,8 @@ module.exports = class SBuildConfigActionsStream extends __SActionsStream {
       },
       __deepMerge(
         {
-          name: 'Build Config',
+          id: 'build.config.actionsStream',
+          name: 'Build Config Actions Stream',
           before: (streamObj) => {
             streamObj.globProperty = 'input';
             return streamObj;

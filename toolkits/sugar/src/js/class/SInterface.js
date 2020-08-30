@@ -8,6 +8,7 @@ import __trimLines from '../string/trimLines';
 import __validateObject from '../validation/object/validateObject';
 import __validateObjectOutputString from '../validation/object/validateObjectOutputString';
 import __typeof from '../value/typeof';
+import __toString from '../string/toString';
 
 /**
  * @name              SInterface
@@ -81,6 +82,11 @@ export default class SInterface {
   static apply(instance, settings = {}) {
     settings = __deepMerge(this.settings, settings);
 
+    // name
+    if (!settings.name) {
+      settings.name = instance.constructor.name || instance.name;
+    }
+
     if (
       __typeof(instance, {
         customClass: false
@@ -93,9 +99,8 @@ export default class SInterface {
       );
     }
 
-    let issues = [];
     let issueObj = {
-      issues: []
+      $issues: []
     };
     let implementationValidationResult;
 
@@ -135,17 +140,12 @@ export default class SInterface {
 
     // definition object
     if (this.definitionObj) {
-      let name = instance.name || instance.constructor.name;
-      if (name === 'ImplementsMiddleClass') {
-        name = extendsStack[0];
-      }
-
       implementationValidationResult = __validateObject(
         instance,
         this.definitionObj,
         {
           throw: false,
-          name,
+          name: settings.name,
           interface: settings.interface
         }
       );
@@ -156,7 +156,7 @@ export default class SInterface {
       }
     }
 
-    if (!issueObj.issues.length) {
+    if (!issueObj.$issues.length) {
       // save on the instance and the constructor that we implements this interface correctly
       if (!instance.__interfaces) {
         Object.defineProperty(instance, '__interfaces', {
@@ -259,6 +259,30 @@ export default class SInterface {
           SInterface.implements(this, interfaces, settings);
         }
       }
+
+      if (settings.applyOnStatic) {
+        const staticFns = Object.getOwnPropertyNames(instance).filter(
+          (prop) => typeof instance[prop] === 'function'
+        );
+        // staticFns.forEach((fnName) => {
+        //   SInterfaceImplementsMiddleClass[fnName] = 'cpl';
+        //   // SInterfaceImplementsMiddleClass[fnName] = function (...args) {
+        //   //   throw fnName;
+
+        //   //   interfaces.forEach((Interface) => {
+        //   //     Interface.apply(instance, {
+        //   //       ...settings,
+        //   //       interface: Interface.name
+        //   //     });
+        //   //   });
+
+        //   //   instance[fnName](...args);
+        //   // };
+        // });
+
+        instance.prototype.apply = 'ccc';
+      }
+
       return SInterfaceImplementsMiddleClass;
     }
 
@@ -321,7 +345,7 @@ export default class SInterface {
    */
   static outputString(resultObj, settings = {}) {
     const headerString = this._outputHeaderString(settings);
-    const string = __validateObjectOutputString(resultObj);
+    const string = __validateObjectOutputString(resultObj, settings);
     return __trimLines(`${headerString}${string}`);
   }
 

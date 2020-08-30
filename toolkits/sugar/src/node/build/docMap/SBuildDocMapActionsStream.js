@@ -51,7 +51,8 @@ module.exports = class SBuildDocMapActionsStream extends __SActionsStream {
       },
       __deepMerge(
         {
-          name: 'Build docMap.json file',
+          id: 'build.docMap.actionsStream',
+          name: 'Build docMap.json Actions Stream',
           actions: {
             filesResolver: {
               ignoreFolders: [],

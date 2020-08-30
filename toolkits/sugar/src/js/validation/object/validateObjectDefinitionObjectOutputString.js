@@ -59,9 +59,9 @@ export default function validateObjectDefinitionObjectOutputString(
 
   validateObjectDefinitionObjectResultObj.issues.forEach((attrName) => {
     if (
-      attrName === 'expected' ||
-      attrName === 'received' ||
-      attrName === 'issues'
+      attrName === '$expected' ||
+      attrName === '$received' ||
+      attrName === '$issues'
     ) {
       return;
     }

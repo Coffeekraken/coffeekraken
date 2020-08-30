@@ -67,28 +67,28 @@ module.exports = __SInterface => {
 
       new MyClass();
       expect(myClassInterfaceResult).toEqual({
-        name: 'MyClass',
+        $name: 'MyClass',
         doSomething: {
-          name: 'doSomething',
-          expected: {
+          $name: 'doSomething',
+          $expected: {
             type: 'Function',
             required: true
           },
-          issues: ['type', 'required'],
-          received: {
+          $issues: ['type', 'required'],
+          $received: {
             type: 'Undefined',
             value: undefined
           }
         },
-        issues: ['title', 'doSomething'],
+        $issues: ['title', 'doSomething'],
         title: {
-          name: 'title',
-          expected: {
+          $name: 'title',
+          $expected: {
             type: 'String',
             required: true
           },
-          issues: ['type'],
-          received: {
+          $issues: ['type'],
+          $received: {
             type: 'Boolean',
             value: true
           }
@@ -194,21 +194,21 @@ module.exports = __SInterface => {
 
       new MyClass();
       expect(myClassInterfaceResult).toEqual({
-        name: 'MyClass',
+        $name: 'MyClass',
         doSomething: {
-          name: 'doSomething',
-          expected: {
+          $name: 'doSomething',
+          $expected: {
             type: 'Function',
             required: true,
             static: true
           },
-          issues: ['type', 'required', 'static'],
-          received: {
+          $issues: ['type', 'required', 'static'],
+          $received: {
             type: 'Null',
             value: null
           }
         },
-        issues: ['doSomething']
+        $issues: ['doSomething']
       });
     });
     it('Should pass the interface test correctly when checking for an existing static function', () => {
@@ -298,17 +298,17 @@ module.exports = __SInterface => {
 
       new MyClass();
       expect(myClassInterfaceResult).toEqual({
-        name: 'MyClass',
-        issues: ['title'],
+        $name: 'MyClass',
+        $issues: ['title'],
         title: {
-          name: 'title',
-          expected: {
+          $name: 'title',
+          $expected: {
             required: true,
             type: 'String',
             values: ['Hello', 'World']
           },
-          issues: ['values'],
-          received: {
+          $issues: ['values'],
+          $received: {
             type: 'String',
             value: 'Hello world'
           }

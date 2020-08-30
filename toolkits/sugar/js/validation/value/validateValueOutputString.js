@@ -47,24 +47,24 @@ function validateValueOutputString(validateValueResultObj, settings) {
 
   var issuesArray = [];
   settings = (0, _deepMerge.default)({
-    name: settings.name || validateValueResultObj.name,
-    interface: settings.interface || validateValueResultObj.interface
+    name: settings.name || validateValueResultObj.$name,
+    interface: settings.interface || validateValueResultObj.$interface
   });
 
   if (settings.name) {
     issuesArray.push("<yellow>\u2502</yellow> ".concat(settings.name, "\n<yellow>\u2502</yellow>"));
   }
 
-  if (validateValueResultObj.received) {
-    issuesArray.push("<yellow>\u2502</yellow> - Received value: <yellow>".concat((0, _toString.default)(validateValueResultObj.received.value, {
+  if (validateValueResultObj.$received) {
+    issuesArray.push("<yellow>\u2502</yellow> - Received value: <yellow>".concat((0, _toString.default)(validateValueResultObj.$received.value, {
       beautify: true
     }), "</yellow>"));
   }
 
-  validateValueResultObj.issues.forEach(issue => {
+  validateValueResultObj.$issues.forEach(issue => {
     switch (issue.toLowerCase()) {
       case 'definitionobject.unknown':
-        issuesArray.push("<yellow>\u2502</yellow> This passed definition object property \"<cyan>".concat((0, _toString.default)(validateValueResultObj.name || 'unnamed'), "</cyan>\" is not supported..."));
+        issuesArray.push("<yellow>\u2502</yellow> This passed definition object property \"<cyan>".concat((0, _toString.default)(validateValueResultObj.$name || 'unnamed'), "</cyan>\" is not supported..."));
         break;
 
       case 'required':
@@ -72,11 +72,15 @@ function validateValueOutputString(validateValueResultObj, settings) {
         break;
 
       case 'type':
-        issuesArray.push("<yellow>\u2502</yellow> - The value type has to be <green>".concat(validateValueResultObj.expected.type, "</green> but you passed <red>").concat(validateValueResultObj.received.type, "</red>"));
+        issuesArray.push("<yellow>\u2502</yellow> - The value type has to be <green>".concat(validateValueResultObj.$expected.type, "</green> but you passed <red>").concat(validateValueResultObj.$received.type, "</red>"));
+        break;
+
+      case 'description':
+        issuesArray.push("<yellow>\u2502</yellow> - It seems that you forget to set a description for this property...");
         break;
 
       case 'values':
-        issuesArray.push("<yellow>\u2502</yellow> - The allowed values are [".concat(validateValueResultObj.expected.values.map(v => {
+        issuesArray.push("<yellow>\u2502</yellow> - The allowed values are [".concat(validateValueResultObj.$expected.values.map(v => {
           return "\"<green>".concat(v, "</green>\"");
         }).join(', '), "]"));
         break;

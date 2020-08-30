@@ -25,8 +25,16 @@ export default class SError extends Error {
       this.syscall = message.syscall || null;
     } else {
       this.message = __toString(message);
-      this.name = null;
+      // this.name = null;
     }
+
+    this.message = __trimLines(
+      __parseHtml(`
+      <red><underline>${this.name || this.constructor.name}</underline></red>
+
+      ${this.message}
+    `)
+    );
 
     const packageRoot = __packageRoot();
     if (this.stack) {
@@ -39,33 +47,33 @@ export default class SError extends Error {
           return true;
         })
         .forEach((l) => {
+          if (l.trim() === '') return;
           stack.push(
             `<cyan>│</cyan> at <cyan>${l.replace(packageRoot, '')}</cyan>`
           );
         });
-      this._stackString = stack.join('\n');
+      this.message += __trimLines(__parseHtml(stack.join('')));
+      this.stack = null;
     }
   }
 
-  inspect() {
-    return this.toString();
-  }
+  // inspect() {
+  //   return this.toString();
+  // }
 
-  toString() {
-    // '⠀'
-    if (this.message.match(/___$/gm)) return this.message;
+  // toString() {
+  //   // '⠀'
+  //   // if (this.message.match(/___$/gm)) return this.message;
+  //   return 'rpl';
+  //   const string = __trimLines(
+  //     __parseHtml(`
+  //     <red><underline>${this.constructor.name}</underline></red>
 
-    const string = __trimLines(
-      __parseHtml(`
-      <red><underline>${this.constructor.name}</underline></red>
+  //     ${this.message}
 
-      ${this.message}
-
-      ${this._stackString}
-    `)
-    );
-    return string + '___';
-    return 'cc';
-    return this.message;
-  }
+  //     ${this._stackString}
+  //   `)
+  //   );
+  //   return string + '___';
+  // }
 }

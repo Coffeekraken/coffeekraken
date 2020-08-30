@@ -19,6 +19,8 @@ var _typeof = _interopRequireDefault(require("../value/typeof"));
 
 var _typeDefinitionArrayObjectToString = _interopRequireDefault(require("../value/typeDefinitionArrayObjectToString"));
 
+var _getExtendsStack = _interopRequireDefault(require("../class/getExtendsStack"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -31,13 +33,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @param       {Mixed}        value          The value to check
  * @param       {String}       argTypeDefinition      The argument type definition string to use for the test
- * @return      {B|Object}  N                  true if She value pBss the Sest, aF object with two sub-objects describing the issue. 1 names "expected" and the othet names "received"
+ * @return      {Boolean|Object}                    true if the value pass the test, an object with two sub-objects describing the issue. 1 names "$expected" and the othet names "$received"
  *
  * @example       js
  * import isOfType from '@coffeekraken/sugar/js/is/ofType';
  * ifOfType(true, 'Boolean'); // => true
  * isOfType(12, 'String|Number'); // => true
- * isOfType(['hello',true], 'Array<String>'); // => { expected: { type: 'Array<String>' }, received: { type: 'Array<String|Boolean>' }}
+ * isOfType(['hello',true], 'Array<String>'); // => { $expected: { type: 'Array<String>' }, $received: { type: 'Array<String|Boolean>' }}
  * isOfType(['hello',true], 'Array<String|Boolean>'); // => true
  *
  * @since       2.0.0
@@ -52,16 +54,16 @@ function ofType(value, argTypeDefinition) {
 
   var typeOfValue = (0, _typeof.default)(value);
   var issueObj = {
-    received: {
+    $received: {
       type: (0, _typeof.default)(value, {
         of: true
       }),
       value
     },
-    expected: {
+    $expected: {
       type: (0, _typeDefinitionArrayObjectToString.default)(definitionArray)
     },
-    issues: ['type']
+    $issues: ['type']
   };
 
   var _loop = function _loop(i) {
@@ -130,7 +132,10 @@ function ofType(value, argTypeDefinition) {
             }
           } // check for "custom" types
           else if ((0, _class.default)(value) && value.name) {
-              var classesStack = getBaseClass(value);
+              if ((0, _typeof.default)(value) === definitionObj.type) return {
+                v: true
+              };
+              var classesStack = (0, _getExtendsStack.default)(value);
               if (classesStack.indexOf(definitionObj.type) !== -1) return {
                 v: true
               };

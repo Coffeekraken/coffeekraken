@@ -62,7 +62,7 @@ class SBuildJsCli extends __SCli {
       args,
       __deepMerge(
         {
-          id: 'cli.build.js',
+          id: 'build.js.cli',
           name: 'Cli Build Js',
           childProcess: {
             pipe: ['log', 'update', 'add', 'unlink', 'state']

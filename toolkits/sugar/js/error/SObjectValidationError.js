@@ -35,7 +35,6 @@ var SObjectValidationError = /*#__PURE__*/function (_SError) {
   function SObjectValidationError(issuesObj) {
     _classCallCheck(this, SObjectValidationError);
 
-    console.log(issuesObj);
     var string = (0, _validateObjectOutputString.default)(issuesObj);
     return _super.call(this, string);
   }

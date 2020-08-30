@@ -49,16 +49,20 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @since       2.0.0
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function validateObjectOutputString(validateObjectResultObj) {
+function validateObjectOutputString(validateObjectResultObj, settings) {
+  if (settings === void 0) {
+    settings = {};
+  }
+
   var stringsArray = [];
-  stringsArray.push((0, _trimLines.default)("\n  <underline><green>Object validation</green></underline>\n\n  ".concat(validateObjectResultObj.interface ? "- Interface:  <cyan>".concat(validateObjectResultObj.interface, "</cyan>") : '', "\n  - Name:       <yellow>").concat(validateObjectResultObj.name || 'unnamed', "</yellow>\n  - Error").concat(validateObjectResultObj.issues.length > 1 ? 's' : '', ":").concat(validateObjectResultObj.issues.length > 1 ? '' : ' ', "     <red>").concat(validateObjectResultObj.issues.length, "</red>\n  - Propert").concat(validateObjectResultObj.issues.length > 1 ? 'ies' : 'y', ":").concat(validateObjectResultObj.issues.length > 1 ? '' : '  ', " ").concat(validateObjectResultObj.issues.map(v => {
+  stringsArray.push((0, _trimLines.default)("\n  <underline><green>Object validation</green></underline>\n\n  ".concat(validateObjectResultObj.$interface ? "- Interface:  <cyan>".concat(validateObjectResultObj.$interface, "</cyan>") : '', "\n  - Name:       <yellow>").concat(validateObjectResultObj.$name || 'unnamed', "</yellow>\n  - Error").concat(validateObjectResultObj.$issues.length > 1 ? 's' : '', ":").concat(validateObjectResultObj.$issues.length > 1 ? '' : ' ', "     <red>").concat(validateObjectResultObj.$issues.length, "</red>\n  - Propert").concat(validateObjectResultObj.$issues.length > 1 ? 'ies' : 'y', ":").concat(validateObjectResultObj.$issues.length > 1 ? '' : '  ', " ").concat(validateObjectResultObj.$issues.map(v => {
     return "<magenta>".concat(v, "</magenta>");
   }).join(', '))));
-  validateObjectResultObj.issues.forEach(attrName => {
+  validateObjectResultObj.$issues.forEach(attrName => {
     var attrIssueObj = validateObjectResultObj[attrName];
     var string = (0, _validateValueOutputString.default)(attrIssueObj, {
-      interface: validateObjectResultObj.interface,
-      name: "<yellow>".concat(validateObjectResultObj.name, "</yellow>.<magenta>").concat(attrName, "</magenta>")
+      interface: validateObjectResultObj.$interface,
+      name: "<yellow>".concat(validateObjectResultObj.$name, "</yellow>.<magenta>").concat(attrName, "</magenta>")
     });
     stringsArray.push(string);
   });

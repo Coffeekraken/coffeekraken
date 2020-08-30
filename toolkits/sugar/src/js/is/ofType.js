@@ -5,6 +5,7 @@ import __isInt from './integer';
 import __upperFirst from '../string/upperFirst';
 import __typeof from '../value/typeof';
 import __typeDefinitionArrayObjectToString from '../value/typeDefinitionArrayObjectToString';
+import __getExtendsStack from '../class/getExtendsStack';
 
 /**
  * @name              ofType
@@ -16,13 +17,13 @@ import __typeDefinitionArrayObjectToString from '../value/typeDefinitionArrayObj
  *
  * @param       {Mixed}        value          The value to check
  * @param       {String}       argTypeDefinition      The argument type definition string to use for the test
- * @return      {B|Object}  N                  true if She value pBss the Sest, aF object with two sub-objects describing the issue. 1 names "expected" and the othet names "received"
+ * @return      {Boolean|Object}                    true if the value pass the test, an object with two sub-objects describing the issue. 1 names "$expected" and the othet names "$received"
  *
  * @example       js
  * import isOfType from '@coffeekraken/sugar/js/is/ofType';
  * ifOfType(true, 'Boolean'); // => true
  * isOfType(12, 'String|Number'); // => true
- * isOfType(['hello',true], 'Array<String>'); // => { expected: { type: 'Array<String>' }, received: { type: 'Array<String|Boolean>' }}
+ * isOfType(['hello',true], 'Array<String>'); // => { $expected: { type: 'Array<String>' }, $received: { type: 'Array<String|Boolean>' }}
  * isOfType(['hello',true], 'Array<String|Boolean>'); // => true
  *
  * @since       2.0.0
@@ -37,14 +38,14 @@ export default function ofType(value, argTypeDefinition) {
 
   const typeOfValue = __typeof(value);
   const issueObj = {
-    received: {
+    $received: {
       type: __typeof(value, { of: true }),
       value
     },
-    expected: {
+    $expected: {
       type: __typeDefinitionArrayObjectToString(definitionArray)
     },
-    issues: ['type']
+    $issues: ['type']
   };
   for (let i = 0; i < definitionArray.length; i++) {
     const definitionObj = definitionArray[i];
@@ -118,7 +119,8 @@ export default function ofType(value, argTypeDefinition) {
 
     // check for "custom" types
     else if (__isClass(value) && value.name) {
-      const classesStack = getBaseClass(value);
+      if (__typeof(value) === definitionObj.type) return true;
+      const classesStack = __getExtendsStack(value);
       if (classesStack.indexOf(definitionObj.type) !== -1) return true;
     } else if (value && value.constructor && value.constructor.name) {
       if (definitionObj.type === value.constructor.name) return true;

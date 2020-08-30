@@ -14,26 +14,26 @@ module.exports = __isOfType => {
       expect(__isOfType(12.34, 'Number')).toBe(true);
       expect(__isOfType(12, 'Integer')).toBe(true);
       expect(__isOfType(12.34, 'Integer')).toEqual({
-        expected: {
+        $expected: {
           type: 'Integer'
         },
-        received: {
+        $received: {
           type: 'Number',
           value: 12.34
         },
-        issues: ['type']
+        $issues: ['type']
       });
       expect(__isOfType('Hello world', 'String')).toBe(true);
       expect(__isOfType([10, 20, 45], 'Array<Number>')).toBe(true);
       expect(__isOfType([10, '20', 45], 'Array<Number>')).toEqual({
-        expected: {
+        $expected: {
           type: 'Array<Number>'
         },
-        received: {
+        $received: {
           type: 'Array<Integer|String>',
           value: [10, '20', 45]
         },
-        issues: ['type']
+        $issues: ['type']
       });
       expect(__isOfType([{
         something: 'cool'
@@ -46,16 +46,16 @@ module.exports = __isOfType => {
       expect(__isOfType({
         something: 'Hello world'
       }, 'Object<SLog>')).toEqual({
-        expected: {
+        $expected: {
           type: 'Object<SLog>'
         },
-        received: {
+        $received: {
           type: 'Object<String>',
           value: {
             something: 'Hello world'
           }
         },
-        issues: ['type']
+        $issues: ['type']
       });
     });
   });

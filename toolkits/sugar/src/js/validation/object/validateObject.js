@@ -28,7 +28,7 @@ import __validateObjectDefinitionObject from './validateObjectDefinitionObject';
  * - validateDefinitionObject (true) {Boolean}: Specify if you want to validate the passed definition object first or not
  * @return      {Boolean|Array<String>}                    Return true if all is ok, and an Array of string that describe the issue if it's not
  *
- * @todo        tests
+ * @todo        tests and documentation refactoring
  *
  * @example         js
  * import validateObject from '@coffeekraken/sugar/js/validation/object/validateObject';
@@ -58,7 +58,7 @@ export default function validateObject(
   settings = __deepMerge(
     {
       throw: true,
-      name: 'unnamed',
+      name: null,
       interface: null,
       validateDefinitionObject: true
     },
@@ -66,9 +66,13 @@ export default function validateObject(
   );
 
   let issuesObj = {
-    name: settings.name,
-    interface: settings.interface,
-    issues: []
+    $name:
+      settings.name ||
+      objectToCheck.constructor.name ||
+      objectToCheck.name ||
+      'Unnamed',
+    $interface: settings.interface,
+    $issues: []
   };
 
   // validate the passed definition object first
@@ -87,12 +91,6 @@ export default function validateObject(
     const argName = Object.keys(definitionObj)[i];
     const argDefinition = definitionObj[argName];
     let value = __get(objectToCheck, argName);
-    if (argName === 'map') {
-      // throw objectToCheck[argName];
-      // throw __toString(, {
-      //   beautify: true
-      // });
-    }
     // get the correct value depending on the definitionObj
     let staticIssue = false;
     if (argDefinition.static && !__isClass(objectToCheck)) {
@@ -121,33 +119,33 @@ export default function validateObject(
     //   console.log('VA', argName, argDefinition);
     // }
 
-    if (argName === 'map') {
-      const validationRes = __validateValue(value, argDefinition, {
-        name: argName,
-        throw: settings.throw
-      });
-      issuesObj[argName] = {
-        name: argName,
-        received: {
-          type: __typeof(value),
-          value
-        },
-        expected: argDefinition,
-        issues: []
-      };
+    // if (argName === 'map') {
+    const validationRes = __validateValue(value, argDefinition, {
+      name: argName,
+      throw: settings.throw
+    });
+    issuesObj[argName] = {
+      $name: argName,
+      $received: {
+        type: __typeof(value),
+        value
+      },
+      $expected: argDefinition,
+      $issues: []
+    };
 
-      if (validationRes !== true) {
-        issuesObj[argName] = __deepMerge(
-          issuesObj[argName],
-          validationRes || {},
-          {
-            array: true
-          }
-        );
-      }
+    if (validationRes !== true) {
+      issuesObj[argName] = __deepMerge(
+        issuesObj[argName],
+        validationRes || {},
+        {
+          array: true
+        }
+      );
     }
+    // }
     if (staticIssue) {
-      issuesObj[argName].issues.push('static');
+      issuesObj[argName].$issues.push('static');
     }
 
     // handle "lazy" properties
@@ -198,6 +196,11 @@ export default function validateObject(
 
     // check if is an extendsFn
     if (settings.extendsFn) {
+      if (!issuesObj[argName]) {
+        issuesObj[argName] = {
+          $issues: []
+        };
+      }
       issuesObj[argName] = settings.extendsFn(
         argName,
         argDefinition,
@@ -209,9 +212,9 @@ export default function validateObject(
     // filter args that have no issues
     issuesObj = __filter(issuesObj, (item, key) => {
       if (Array.isArray(item)) return true;
-      if (__isPlainObject(item) && item.issues) {
-        if (!item.issues.length) return false;
-        if (issuesObj.issues.indexOf(key) === -1) issuesObj.issues.push(key);
+      if (__isPlainObject(item) && item.$issues) {
+        if (!item.$issues.length) return false;
+        if (issuesObj.$issues.indexOf(key) === -1) issuesObj.$issues.push(key);
       }
       return true;
     });
@@ -233,11 +236,11 @@ export default function validateObject(
         [..._argPath, argName]
       );
       // console.log('CC', childrenValidation);
-      if (childrenValidation !== true && childrenValidation.issues) {
-        childrenValidation.issues.forEach((issue) => {
+      if (childrenValidation !== true && childrenValidation.$issues) {
+        childrenValidation.$issues.forEach((issue) => {
           const issueObj = childrenValidation[issue];
-          issueObj.name = `${argName}.${issueObj.name}`;
-          issuesObj.issues.push(`${argName}.${issue}`);
+          issueObj.$name = `${argName}.${issueObj.name}`;
+          issuesObj.$issues.push(`${argName}.${issue}`);
           issuesObj[`${argName}.${issue}`] = issueObj;
         });
 
@@ -247,7 +250,7 @@ export default function validateObject(
     }
   }
 
-  if (!issuesObj.issues.length) return true;
+  if (!issuesObj.$issues.length) return true;
 
   if (settings.throw) {
     throw new __SObjectValidationError(issuesObj);

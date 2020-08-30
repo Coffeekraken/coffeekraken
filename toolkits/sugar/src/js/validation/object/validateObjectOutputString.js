@@ -37,7 +37,10 @@ import __toString from '../../string/toString';
  * @since       2.0.0
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function validateObjectOutputString(validateObjectResultObj) {
+export default function validateObjectOutputString(
+  validateObjectResultObj,
+  settings = {}
+) {
   const stringsArray = [];
 
   stringsArray.push(
@@ -45,28 +48,28 @@ export default function validateObjectOutputString(validateObjectResultObj) {
   <underline><green>Object validation</green></underline>
 
   ${
-    validateObjectResultObj.interface
-      ? `- Interface:  <cyan>${validateObjectResultObj.interface}</cyan>`
+    validateObjectResultObj.$interface
+      ? `- Interface:  <cyan>${validateObjectResultObj.$interface}</cyan>`
       : ''
   }
-  - Name:       <yellow>${validateObjectResultObj.name || 'unnamed'}</yellow>
-  - Error${validateObjectResultObj.issues.length > 1 ? 's' : ''}:${
-      validateObjectResultObj.issues.length > 1 ? '' : ' '
-    }     <red>${validateObjectResultObj.issues.length}</red>
-  - Propert${validateObjectResultObj.issues.length > 1 ? 'ies' : 'y'}:${
-      validateObjectResultObj.issues.length > 1 ? '' : '  '
-    } ${validateObjectResultObj.issues
+  - Name:       <yellow>${validateObjectResultObj.$name || 'unnamed'}</yellow>
+  - Error${validateObjectResultObj.$issues.length > 1 ? 's' : ''}:${
+      validateObjectResultObj.$issues.length > 1 ? '' : ' '
+    }     <red>${validateObjectResultObj.$issues.length}</red>
+  - Propert${validateObjectResultObj.$issues.length > 1 ? 'ies' : 'y'}:${
+      validateObjectResultObj.$issues.length > 1 ? '' : '  '
+    } ${validateObjectResultObj.$issues
       .map((v) => {
         return `<magenta>${v}</magenta>`;
       })
       .join(', ')}`)
   );
 
-  validateObjectResultObj.issues.forEach((attrName) => {
+  validateObjectResultObj.$issues.forEach((attrName) => {
     const attrIssueObj = validateObjectResultObj[attrName];
     const string = __validateValueOutputString(attrIssueObj, {
-      interface: validateObjectResultObj.interface,
-      name: `<yellow>${validateObjectResultObj.name}</yellow>.<magenta>${attrName}</magenta>`
+      interface: validateObjectResultObj.$interface,
+      name: `<yellow>${validateObjectResultObj.$name}</yellow>.<magenta>${attrName}</magenta>`
     });
     stringsArray.push(string);
   });

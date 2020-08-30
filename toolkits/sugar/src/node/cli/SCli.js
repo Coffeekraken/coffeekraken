@@ -140,16 +140,12 @@ class SCli extends __SPromise {
 
       // return this._runningProcess;
     } else {
-      let childCommand = this.command;
-      const childProcess = new __SChildProcess(
-        this.command + ' --forceChildProcess false',
-        {
-          id: settings.id,
-          definitionObj: this.definitionObj,
-          defaultParams: settings.defaultParams,
-          ...settings.childProcess
-        }
-      );
+      const childProcess = new __SChildProcess(this.command, {
+        id: settings.id,
+        definitionObj: this.definitionObj,
+        defaultParams: settings.defaultParams,
+        ...settings.childProcess
+      });
 
       childProcess.on('state', (state) => {
         this.state = state;
@@ -271,43 +267,43 @@ class SCli extends __SPromise {
       );
     }
 
-    try {
-      settings = __deepMerge(this._settings, settings);
-      // make sure we have an object as args
-      paramsObj = __argsToObject(paramsObj, this.definitionObj);
-      paramsObj = __deepMerge(this._paramsObj, paramsObj);
+    settings = __deepMerge(this._settings, settings);
+    // make sure we have an object as args
+    paramsObj = __argsToObject(paramsObj, this.definitionObj);
+    paramsObj = __deepMerge(this._paramsObj, paramsObj);
 
-      this._runningProcess = this._processInstance.run(paramsObj, settings);
-
-      this._runningProcess.on('close', (args) => {
-        this._runningProcess = null;
-      });
-
-      // ${__sugarHeading({
-      //   version: __packageJson(__dirname).version
-      // })}\n\n
-
-      if (!__isChildProcess()) {
-        const launchingLogObj = {
-          temp: true,
-          value: `Launching the SCli "<primary>${
-            this._settings.name || this._settings.id
-          }</primary>" process...`
-        };
-        this._runningProcess.trigger('log', launchingLogObj);
-      }
-
-      // save running process params
-      this._runningParamsObj = paramsObj;
-
-      // listen for some events on the process
-      this._runningProcess.on('finally', () => {
-        this._runningProcess = null;
-        this._runningParamsObj = null;
-      });
-    } catch (e) {
-      console.log('www');
+    if (this._processInstance instanceof __SChildProcess) {
+      paramsObj.forceChildProcess = false;
     }
+
+    this._runningProcess = this._processInstance.run(paramsObj, settings);
+
+    this._runningProcess.on('close', (args) => {
+      this._runningProcess = null;
+    });
+
+    // ${__sugarHeading({
+    //   version: __packageJson(__dirname).version
+    // })}\n\n
+
+    if (!__isChildProcess()) {
+      const launchingLogObj = {
+        temp: true,
+        value: `Launching the SCli "<primary>${
+          this._settings.name || this._settings.id
+        }</primary>" process...`
+      };
+      this._runningProcess.trigger('log', launchingLogObj);
+    }
+
+    // save running process params
+    this._runningParamsObj = paramsObj;
+
+    // listen for some events on the process
+    this._runningProcess.on('finally', () => {
+      this._runningProcess = null;
+      this._runningParamsObj = null;
+    });
 
     return this._runningProcess;
   }

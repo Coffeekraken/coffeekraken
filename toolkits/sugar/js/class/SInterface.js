@@ -25,6 +25,8 @@ var _validateObjectOutputString = _interopRequireDefault(require("../validation/
 
 var _typeof = _interopRequireDefault(require("../value/typeof"));
 
+var _toString = _interopRequireDefault(require("../string/toString"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
@@ -130,7 +132,11 @@ var SInterface = /*#__PURE__*/function () {
         settings = {};
       }
 
-      settings = (0, _deepMerge.default)(this.settings, settings);
+      settings = (0, _deepMerge.default)(this.settings, settings); // name
+
+      if (!settings.name) {
+        settings.name = instance.constructor.name || instance.name;
+      }
 
       if ((0, _typeof.default)(instance, {
         customClass: false
@@ -138,9 +144,8 @@ var SInterface = /*#__PURE__*/function () {
         throw new _SError.default("Sorry but the \"<yellow>instance</yellow>\" argument of the \"<cyan>SInterface.apply</cyan>\" static method have to be an <green>Object</green> and you've passed an <red>".concat((0, _typeof.default)(instance), "</red>..."));
       }
 
-      var issues = [];
       var issueObj = {
-        issues: []
+        $issues: []
       };
       var implementationValidationResult;
       var extendsStack = (0, _getExtendsStack.default)(instance); // check if the passed instance base class already implements this insterface
@@ -169,15 +174,9 @@ var SInterface = /*#__PURE__*/function () {
 
 
       if (this.definitionObj) {
-        var name = instance.name || instance.constructor.name;
-
-        if (name === 'ImplementsMiddleClass') {
-          name = extendsStack[0];
-        }
-
         implementationValidationResult = (0, _validateObject.default)(instance, this.definitionObj, {
           throw: false,
-          name,
+          name: settings.name,
           interface: settings.interface
         });
 
@@ -188,7 +187,7 @@ var SInterface = /*#__PURE__*/function () {
         }
       }
 
-      if (!issueObj.issues.length) {
+      if (!issueObj.$issues.length) {
         // save on the instance and the constructor that we implements this interface correctly
         if (!instance.__interfaces) {
           Object.defineProperty(instance, '__interfaces', {
@@ -330,6 +329,24 @@ var SInterface = /*#__PURE__*/function () {
           return SInterfaceImplementsMiddleClass;
         }(instance);
 
+        if (settings.applyOnStatic) {
+          var staticFns = Object.getOwnPropertyNames(instance).filter(prop => typeof instance[prop] === 'function'); // staticFns.forEach((fnName) => {
+          //   SInterfaceImplementsMiddleClass[fnName] = 'cpl';
+          //   // SInterfaceImplementsMiddleClass[fnName] = function (...args) {
+          //   //   throw fnName;
+          //   //   interfaces.forEach((Interface) => {
+          //   //     Interface.apply(instance, {
+          //   //       ...settings,
+          //   //       interface: Interface.name
+          //   //     });
+          //   //   });
+          //   //   instance[fnName](...args);
+          //   // };
+          // });
+
+          instance.prototype.apply = 'ccc';
+        }
+
         return SInterfaceImplementsMiddleClass;
       } // make sure the instance has all the interfaces requirements
 
@@ -398,7 +415,7 @@ var SInterface = /*#__PURE__*/function () {
 
       var headerString = this._outputHeaderString(settings);
 
-      var string = (0, _validateObjectOutputString.default)(resultObj);
+      var string = (0, _validateObjectOutputString.default)(resultObj, settings);
       return (0, _trimLines.default)("".concat(headerString).concat(string));
     }
     /**

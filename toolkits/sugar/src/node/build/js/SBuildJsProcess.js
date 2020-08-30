@@ -25,7 +25,7 @@ module.exports = class SBuildJsProcess extends __SProcess {
    */
   constructor(initialParams = {}, settings = {}) {
     super(initialParams, {
-      id: 'process.build.js',
+      id: 'build.js.process',
       name: 'Build JS Process',
       deamon: {
         class: __SFsDeamon,

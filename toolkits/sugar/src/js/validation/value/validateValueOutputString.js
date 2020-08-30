@@ -35,29 +35,29 @@ export default function validateValueOutputString(
   let issuesArray = [];
 
   settings = __deepMerge({
-    name: settings.name || validateValueResultObj.name,
-    interface: settings.interface || validateValueResultObj.interface
+    name: settings.name || validateValueResultObj.$name,
+    interface: settings.interface || validateValueResultObj.$interface
   });
 
   if (settings.name) {
     issuesArray.push(`<yellow>│</yellow> ${settings.name}\n<yellow>│</yellow>`);
   }
 
-  if (validateValueResultObj.received) {
+  if (validateValueResultObj.$received) {
     issuesArray.push(
       `<yellow>│</yellow> - Received value: <yellow>${__toString(
-        validateValueResultObj.received.value,
+        validateValueResultObj.$received.value,
         { beautify: true }
       )}</yellow>`
     );
   }
 
-  validateValueResultObj.issues.forEach((issue) => {
+  validateValueResultObj.$issues.forEach((issue) => {
     switch (issue.toLowerCase()) {
       case 'definitionobject.unknown':
         issuesArray.push(
           `<yellow>│</yellow> This passed definition object property "<cyan>${__toString(
-            validateValueResultObj.name || 'unnamed'
+            validateValueResultObj.$name || 'unnamed'
           )}</cyan>" is not supported...`
         );
         break;
@@ -68,12 +68,17 @@ export default function validateValueOutputString(
         break;
       case 'type':
         issuesArray.push(
-          `<yellow>│</yellow> - The value type has to be <green>${validateValueResultObj.expected.type}</green> but you passed <red>${validateValueResultObj.received.type}</red>`
+          `<yellow>│</yellow> - The value type has to be <green>${validateValueResultObj.$expected.type}</green> but you passed <red>${validateValueResultObj.$received.type}</red>`
+        );
+        break;
+      case 'description':
+        issuesArray.push(
+          `<yellow>│</yellow> - It seems that you forget to set a description for this property...`
         );
         break;
       case 'values':
         issuesArray.push(
-          `<yellow>│</yellow> - The allowed values are [${validateValueResultObj.expected.values
+          `<yellow>│</yellow> - The allowed values are [${validateValueResultObj.$expected.values
             .map((v) => {
               return `"<green>${v}</green>"`;
             })

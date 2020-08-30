@@ -51,7 +51,7 @@ module.exports = class SBuildDocMapCli extends __SCli {
     super(
       __deepMerge(
         {
-          id: 'build.docMap',
+          id: 'build.docMap.cli',
           name: 'Build docMap.json',
           childProcess: {
             pipe: ['log', 'state']

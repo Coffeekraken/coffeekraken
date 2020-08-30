@@ -84,13 +84,13 @@ module.exports = function argsToString(args, definitionObj, includeAllArgs) {
     var value;
     if (args && args[argName] !== undefined) value = args[argName];else if (definitionObj[argName] && definitionObj[argName].default) value = definitionObj[argName].default;
 
-    if (value === undefined || value === null || defObj.type.toLowerCase() === 'boolean' && value === false) {
-      return;
-    }
+    if (value === undefined || value === null // || (defObj.type.toLowerCase() === 'boolean' && value === false)
+    ) {
+        return;
+      }
 
     value = (0, _toString.default)(value);
-    if (defObj.type.toLowerCase() === 'string') value = "\"".concat(value, "\"");
-    if (defObj.type.toLowerCase() === 'boolean') value = '';
+    if (defObj.type.toLowerCase() === 'string') value = "\"".concat(value, "\""); // if (defObj.type.toLowerCase() === 'boolean') value = '';
 
     if (defObj.type.toLowerCase().includes('object') || defObj.type.toLowerCase().includes('array')) {
       value = "\"".concat(value.split('"').join("'"), "\"");

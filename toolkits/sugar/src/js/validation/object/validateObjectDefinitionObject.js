@@ -55,33 +55,35 @@ export default function validateObjectDefinitionObject(
   );
 
   let issuesObj = {
-    name: settings.name,
-    issues: []
+    $name: settings.name,
+    $issues: []
   };
 
   if (!__isPlainObj(definitionObj)) {
-    issuesObj.expected = {
+    issuesObj.$expected = {
       type: 'Object<Object>'
     };
-    issuesObj.received = {
+    issuesObj.$received = {
       type: __typeof(definitionObj),
       value: definitionObj
     };
-    issuesObj.issues.push('type');
+    issuesObj.$issues.push('type');
   }
+
   const argNames = Object.keys(definitionObj);
-  if (!argNames.length) {
-    throw new Error(
-      `Sorry but a <yellow>definition object</yellow> has to have at least 1 property declared...`
-    );
-    // issuesObj.issues.push('arguments.required');
-  }
+  // if (!argNames.length) {
+  //   throw new Error(
+  //     `Sorry but a <yellow>definition object</yellow> has to have at least 1 property declared...`
+  //   );
+  //   // issuesObj.$issues.push('arguments.required');
+  // }
+
   for (let i = 0; i < argNames.length; i++) {
     const argName = argNames[i];
     const argDefinition = definitionObj[argName];
 
     const argIssuesObj = {
-      issues: []
+      $issues: []
     };
 
     Object.keys(argDefinition).forEach((definitionPropName) => {
@@ -89,7 +91,7 @@ export default function validateObjectDefinitionObject(
       const expectedDefinitionObj = settings.definitionObj[definitionPropName];
 
       if (!expectedDefinitionObj) {
-        argIssuesObj.issues.push(definitionPropName);
+        argIssuesObj.$issues.push(definitionPropName);
         argIssuesObj[definitionPropName] = {
           issues: ['definitionObject.unknown'],
           name: definitionPropName
@@ -107,7 +109,7 @@ export default function validateObjectDefinitionObject(
       );
 
       if (definitionPropValidationResult !== true) {
-        argIssuesObj.issues.push(definitionPropName);
+        argIssuesObj.$issues.push(definitionPropName);
         argIssuesObj[definitionPropName] = __deepMerge(
           argIssuesObj,
           definitionPropValidationResult,
@@ -118,13 +120,13 @@ export default function validateObjectDefinitionObject(
       }
     });
 
-    if (argIssuesObj.issues.length) {
-      issuesObj.issues.push(argName);
+    if (argIssuesObj.$issues.length) {
+      issuesObj.$issues.push(argName);
       issuesObj[argName] = argIssuesObj;
     }
   }
 
-  if (!issuesObj.issues.length) return true;
+  if (!issuesObj.$issues.length) return true;
 
   if (settings.throw) {
     throw new __SDefinitionObjectError(issuesObj);

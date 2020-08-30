@@ -67,39 +67,40 @@ function validateObjectDefinitionObject(definitionObj, settings) {
     name: 'unnamed'
   }, settings);
   var issuesObj = {
-    name: settings.name,
-    issues: []
+    $name: settings.name,
+    $issues: []
   };
 
   if (!(0, _plainObject.default)(definitionObj)) {
-    issuesObj.expected = {
+    issuesObj.$expected = {
       type: 'Object<Object>'
     };
-    issuesObj.received = {
+    issuesObj.$received = {
       type: (0, _typeof.default)(definitionObj),
       value: definitionObj
     };
-    issuesObj.issues.push('type');
+    issuesObj.$issues.push('type');
   }
 
-  var argNames = Object.keys(definitionObj);
-
-  if (!argNames.length) {
-    throw new Error("Sorry but a <yellow>definition object</yellow> has to have at least 1 property declared..."); // issuesObj.issues.push('arguments.required');
-  }
+  var argNames = Object.keys(definitionObj); // if (!argNames.length) {
+  //   throw new Error(
+  //     `Sorry but a <yellow>definition object</yellow> has to have at least 1 property declared...`
+  //   );
+  //   // issuesObj.$issues.push('arguments.required');
+  // }
 
   var _loop = function _loop(i) {
     var argName = argNames[i];
     var argDefinition = definitionObj[argName];
     var argIssuesObj = {
-      issues: []
+      $issues: []
     };
     Object.keys(argDefinition).forEach(definitionPropName => {
       var definitionPropValue = argDefinition[definitionPropName];
       var expectedDefinitionObj = settings.definitionObj[definitionPropName];
 
       if (!expectedDefinitionObj) {
-        argIssuesObj.issues.push(definitionPropName);
+        argIssuesObj.$issues.push(definitionPropName);
         argIssuesObj[definitionPropName] = {
           issues: ['definitionObject.unknown'],
           name: definitionPropName
@@ -113,15 +114,15 @@ function validateObjectDefinitionObject(definitionObj, settings) {
       });
 
       if (definitionPropValidationResult !== true) {
-        argIssuesObj.issues.push(definitionPropName);
+        argIssuesObj.$issues.push(definitionPropName);
         argIssuesObj[definitionPropName] = (0, _deepMerge.default)(argIssuesObj, definitionPropValidationResult, {
           array: true
         });
       }
     });
 
-    if (argIssuesObj.issues.length) {
-      issuesObj.issues.push(argName);
+    if (argIssuesObj.$issues.length) {
+      issuesObj.$issues.push(argName);
       issuesObj[argName] = argIssuesObj;
     }
   };
@@ -130,7 +131,7 @@ function validateObjectDefinitionObject(definitionObj, settings) {
     _loop(i);
   }
 
-  if (!issuesObj.issues.length) return true;
+  if (!issuesObj.$issues.length) return true;
 
   if (settings.throw) {
     throw new _SDefinitionObjectError.default(issuesObj);

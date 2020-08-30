@@ -81,15 +81,15 @@ module.exports = function argsToString(
       value = definitionObj[argName].default;
     if (
       value === undefined ||
-      value === null ||
-      (defObj.type.toLowerCase() === 'boolean' && value === false)
+      value === null
+      // || (defObj.type.toLowerCase() === 'boolean' && value === false)
     ) {
       return;
     }
     value = __toString(value);
 
     if (defObj.type.toLowerCase() === 'string') value = `"${value}"`;
-    if (defObj.type.toLowerCase() === 'boolean') value = '';
+    // if (defObj.type.toLowerCase() === 'boolean') value = '';
     if (
       defObj.type.toLowerCase().includes('object') ||
       defObj.type.toLowerCase().includes('array')

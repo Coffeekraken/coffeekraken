@@ -17,10 +17,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
@@ -69,10 +65,10 @@ var SError = /*#__PURE__*/function (_Error) {
       _this.property = message.property || null;
       _this.syscall = message.syscall || null;
     } else {
-      _this.message = (0, _toString.default)(message);
-      _this.name = null;
+      _this.message = (0, _toString.default)(message); // this.name = null;
     }
 
+    _this.message = (0, _trimLines.default)((0, _parseHtml.default)("\n      <red><underline>".concat(_this.name || _this.constructor.name, "</underline></red>\n\n      ").concat(_this.message, "\n    ")));
     var packageRoot = (0, _packageRoot.default)();
 
     if (_this.stack) {
@@ -85,30 +81,31 @@ var SError = /*#__PURE__*/function (_Error) {
         if (l.trim() === '') return false;
         return true;
       }).forEach(l => {
+        if (l.trim() === '') return;
         stack.push("<cyan>\u2502</cyan> at <cyan>".concat(l.replace(packageRoot, ''), "</cyan>"));
       });
-      _this._stackString = stack.join('\n');
+      _this.message += (0, _trimLines.default)((0, _parseHtml.default)(stack.join('')));
+      _this.stack = null;
     }
 
     return _this;
-  }
+  } // inspect() {
+  //   return this.toString();
+  // }
+  // toString() {
+  //   // '⠀'
+  //   // if (this.message.match(/___$/gm)) return this.message;
+  //   return 'rpl';
+  //   const string = __trimLines(
+  //     __parseHtml(`
+  //     <red><underline>${this.constructor.name}</underline></red>
+  //     ${this.message}
+  //     ${this._stackString}
+  //   `)
+  //   );
+  //   return string + '___';
+  // }
 
-  _createClass(SError, [{
-    key: "inspect",
-    value: function inspect() {
-      return this.toString();
-    }
-  }, {
-    key: "toString",
-    value: function toString() {
-      // '⠀'
-      if (this.message.match(/___$/gm)) return this.message;
-      var string = (0, _trimLines.default)((0, _parseHtml.default)("\n      <red><underline>".concat(this.constructor.name, "</underline></red>\n\n      ").concat(this.message, "\n\n      ").concat(this._stackString, "\n    ")));
-      return string + '___';
-      return 'cc';
-      return this.message;
-    }
-  }]);
 
   return SError;
 }( /*#__PURE__*/_wrapNativeSuper(Error));

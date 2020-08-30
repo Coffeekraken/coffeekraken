@@ -13,6 +13,10 @@ var _deepMerge = _interopRequireDefault(require("../../object/deepMerge"));
 
 var _typeof = _interopRequireDefault(require("../../value/typeof"));
 
+var _node = _interopRequireDefault(require("../../is/node"));
+
+var _path = _interopRequireDefault(require("../../is/path"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -29,6 +33,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @param       {Object}        [settings={}]         An object of settings to configure your validation process:
  * - throw (true) {Boolean}: Specify if you want to throw an error when something goes wrong
  * - name ('unnamed') {String}: Specify a name. Useful for debugging
+ * - extendFn (null) {Function}: Specify a function that will be called after the default validations checks and before the return or throw statements. It will have as arguments the "value" to check, the "definitionObj" and the "settings" object. You then can make your checks and return an array of "issues" like ["path","other"], etc...
  * @return         {Boolean|Object}           true if the check is passed, an Array of String describing the issue if not
  *
  * @todo        tests
@@ -52,7 +57,8 @@ function validateValue(value, definitionObj, settings) {
 
   settings = (0, _deepMerge.default)({
     name: 'unnamed',
-    throw: true
+    throw: true,
+    extendFn: null
   }, settings);
 
   if ((value === null || value === undefined) && definitionObj.default !== undefined) {
@@ -60,13 +66,13 @@ function validateValue(value, definitionObj, settings) {
   }
 
   var issueObj = {
-    expected: definitionObj,
-    received: {
+    $expected: definitionObj,
+    $received: {
       type: (0, _typeof.default)(value),
       value
     },
-    name: settings.name,
-    issues: []
+    $name: settings.name,
+    $issues: []
   };
 
   if ((value === null || value === undefined) && !definitionObj.required) {
@@ -74,13 +80,13 @@ function validateValue(value, definitionObj, settings) {
   }
 
   if (definitionObj.lazy) {
-    issueObj.issues.push('lazy');
+    issueObj.$issues.push('lazy');
   } // check required
 
 
   if (definitionObj.required === true) {
     if (value === null || value === undefined) {
-      issueObj.issues.push('required');
+      issueObj.$issues.push('required');
     }
   } // validate type
 
@@ -98,11 +104,23 @@ function validateValue(value, definitionObj, settings) {
 
   if (definitionObj.values && Array.isArray(definitionObj.values)) {
     if (definitionObj.values.indexOf(value) === -1) {
-      issueObj.issues.push('values');
+      issueObj.$issues.push('values');
+    }
+  } // check "path" defined value
+
+
+  if (definitionObj.path && !(0, _node.default)()) {
+    if (!(0, _path.default)(value)) {
+      issueObj.$issues.push('path');
     }
   }
 
-  if (!issueObj.issues.length) return true;
+  if (settings.extendFn && typeof settings.extendFn === 'function') {
+    var additionalIssues = settings.extendFn(value, definitionObj, settings) || [];
+    issueObj.$issues = [...issueObj.$issues, ...additionalIssues];
+  }
+
+  if (!issueObj.$issues.length) return true;
 
   if (settings.throw) {
     throw new _SValueValidationError.default(issueObj);

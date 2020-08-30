@@ -28,6 +28,8 @@ const __color = require('../color/color');
  */
 const errorPanels = [];
 module.exports = function handleError() {
+  if (process.env.NODE_ENV === 'test') return;
+
   if (__isChildProcess()) {
     process.on('uncaughtException', __handleChildProcessErrors);
     process.on('unhandledRejection', __handleChildProcessErrors);
@@ -102,6 +104,10 @@ function __handleChildProcessErrors(error) {
 function __handleMainProcessErrors(error) {
   // @TODO     find a better solution to avoid blessed issues
   if (error.toString().includes(`Cannot read property 'itop' of null`)) return;
+
+  if (!global.screen) {
+    throw error;
+  }
 
   if (error instanceof Buffer) {
     error = error.toString();

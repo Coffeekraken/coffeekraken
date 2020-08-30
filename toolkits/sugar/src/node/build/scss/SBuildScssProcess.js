@@ -27,7 +27,7 @@ module.exports = class SBuildScssProcess extends __SProcess {
    */
   constructor(initialParams = {}, settings = {}) {
     super(initialParams, {
-      id: 'process.build.scss',
+      id: 'build.scss.process',
       name: 'Build SCSS Process',
       deamon: {
         class: __SFsDeamon,

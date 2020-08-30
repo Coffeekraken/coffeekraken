@@ -25,7 +25,7 @@ module.exports = class SBuildDocMapProcess extends __SProcess {
    */
   constructor(initialParams = {}, settings = {}) {
     super(initialParams, {
-      id: 'process.build.docMap',
+      id: 'build.docMap.process',
       name: 'Build docMap.json Process',
       deamon: {
         class: __SFsDeamon,

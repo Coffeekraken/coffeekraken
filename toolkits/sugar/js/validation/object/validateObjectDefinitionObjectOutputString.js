@@ -50,7 +50,7 @@ function validateObjectDefinitionObjectOutputString(validateObjectDefinitionObje
     return "<red>".concat(v, "</red>");
   }).join(', '))));
   validateObjectDefinitionObjectResultObj.issues.forEach(attrName => {
-    if (attrName === 'expected' || attrName === 'received' || attrName === 'issues') {
+    if (attrName === '$expected' || attrName === '$received' || attrName === '$issues') {
       return;
     }
 

@@ -64,8 +64,8 @@ module.exports = class SBuildConfigCli extends __SCli {
     super(
       __deepMerge(
         {
-          id: 'build.config',
-          name: 'Build Config'
+          id: 'build.config.cli',
+          name: 'Build Config Cli'
         },
         settings
       )

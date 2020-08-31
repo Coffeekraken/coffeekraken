@@ -74,6 +74,8 @@ export default function typeOf(value, settings = {}) {
     value.constructor.name
   ) {
     type = __upperFirst(value.constructor.name);
+  } else if (!settings.customClass && __isClass(value)) {
+    type = 'Class';
   } else if (typeof value === 'function') type = 'Function';
   else if (typeof value === 'object') type = 'Object';
   else type = 'Unknown';

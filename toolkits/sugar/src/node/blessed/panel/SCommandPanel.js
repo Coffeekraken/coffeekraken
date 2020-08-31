@@ -208,25 +208,6 @@ module.exports = class SCommandPanel extends __SComponent {
   // }
 
   /**
-   * @name          summary
-   * @type          Function
-   *
-   * This method display a summary list to the user with the possibility to update
-   * each data and validate
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  // summary(commandObj, items) {
-  //   const summaryListPopup = __summaryListPopup({
-  //     title: `Run command <bgBlack><bold><primary> ${commandObj.name} </primary></bold></bgBlack> | Are these properties ok?`,
-  //     description: `<bold><cyan>${commandObj.command}</cyan></bold>`,
-  //     items
-  //   });
-  //   summaryListPopup.attach(this);
-  //   return summaryListPopup;
-  // }
-
-  /**
    * @name          _selectListItem
    * @type          Function
    * @private

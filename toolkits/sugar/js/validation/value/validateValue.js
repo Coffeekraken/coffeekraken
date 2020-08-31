@@ -5,6 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = validateValue;
 
+var _get = _interopRequireDefault(require("../../object/get"));
+
 var _SValueValidationError = _interopRequireDefault(require("../../error/SValueValidationError"));
 
 var _ofType = _interopRequireDefault(require("../../is/ofType"));
@@ -17,8 +19,36 @@ var _node = _interopRequireDefault(require("../../is/node"));
 
 var _path = _interopRequireDefault(require("../../is/path"));
 
+var _toString = _interopRequireDefault(require("../../string/toString"));
+
+var _SRequiredValidation = _interopRequireDefault(require("./validation/SRequiredValidation"));
+
+var _SPathValidation = _interopRequireDefault(require("./validation/SPathValidation"));
+
+var _STypeValidation = _interopRequireDefault(require("./validation/STypeValidation"));
+
+var _SValuesValidation = _interopRequireDefault(require("./validation/SValuesValidation"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var _validationsObj = {
+  required: {
+    class: _SRequiredValidation.default,
+    args: []
+  },
+  path: {
+    class: _SPathValidation.default,
+    args: ['%definitionObj.path.exists']
+  },
+  type: {
+    class: _STypeValidation.default,
+    args: ['%definitionObj.type']
+  },
+  values: {
+    class: _SValuesValidation.default,
+    args: ['%definitionObj.values']
+  }
+};
 /**
  * @name          validateValue
  * @namespace     js.validation.value
@@ -50,6 +80,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+
 function validateValue(value, definitionObj, settings) {
   if (settings === void 0) {
     settings = {};
@@ -58,7 +89,8 @@ function validateValue(value, definitionObj, settings) {
   settings = (0, _deepMerge.default)({
     name: 'unnamed',
     throw: true,
-    extendFn: null
+    extendFn: null,
+    validationsObj: _validationsObj
   }, settings);
 
   if ((value === null || value === undefined) && definitionObj.default !== undefined) {
@@ -72,52 +104,36 @@ function validateValue(value, definitionObj, settings) {
       value
     },
     $name: settings.name,
-    $issues: []
+    $issues: [],
+    $messages: {}
   };
-
-  if ((value === null || value === undefined) && !definitionObj.required) {
-    return true;
-  }
-
-  if (definitionObj.lazy) {
-    issueObj.$issues.push('lazy');
-  } // check required
-
-
-  if (definitionObj.required === true) {
-    if (value === null || value === undefined) {
-      issueObj.$issues.push('required');
+  Object.keys(settings.validationsObj).forEach((validationName, i) => {
+    if (!_validationsObj[validationName]) {
+      issueObj.$issues.push("definitionObj.".concat(validationName, ".unknown"));
+      issueObj.$messages["definitionObj.".concat(validationName, ".unknown")] = "The specified \"<yellow>".concat(validationName, "</yellow>\" validation is <red>not supported</red>");
     }
-  } // validate type
 
+    if (!definitionObj[validationName]) return;
+    var validationObj = Object.assign({}, settings.validationsObj[validationName]);
+    validationObj.args = validationObj.args.map(arg => {
+      if (typeof arg === 'string' && arg.slice(0, 15) === '%definitionObj.') {
+        arg = definitionObj[arg.replace('%definitionObj.', '')];
+      }
 
-  if (definitionObj.type) {
-    var isOfTypeResult = (0, _ofType.default)(value, definitionObj.type);
+      return arg;
+    });
+    var validationResult = validationObj.class.apply(value, ...validationObj.args);
 
-    if (isOfTypeResult !== true) {
-      issueObj = (0, _deepMerge.default)(issueObj, isOfTypeResult, {
-        array: true
-      });
+    if (validationResult !== true) {
+      issueObj.$issues.push(validationName);
+      issueObj.$messages[validationName] = validationResult;
     }
-  } // check allowed values
-
-
-  if (definitionObj.values && Array.isArray(definitionObj.values)) {
-    if (definitionObj.values.indexOf(value) === -1) {
-      issueObj.$issues.push('values');
-    }
-  } // check "path" defined value
-
-
-  if (definitionObj.path && !(0, _node.default)()) {
-    if (!(0, _path.default)(value)) {
-      issueObj.$issues.push('path');
-    }
-  }
+  });
 
   if (settings.extendFn && typeof settings.extendFn === 'function') {
     var additionalIssues = settings.extendFn(value, definitionObj, settings) || [];
-    issueObj.$issues = [...issueObj.$issues, ...additionalIssues];
+    issueObj.$issues = [...issueObj.$issues, ...(additionalIssues.$issues || [])];
+    issueObj.$messages = [...issueObj.$messages, ...(additionalIssues.$messages || [])];
   }
 
   if (!issueObj.$issues.length) return true;

@@ -263,6 +263,7 @@ class SProcess extends __SPromise {
     this.state = 'running';
 
     if (this.deamon && this.deamon.state === 'watching') {
+      console.log('HOP');
       this.log({
         value: this.deamon.logs.paused
       });
@@ -273,10 +274,15 @@ class SProcess extends __SPromise {
     this.endTime = 0;
     this.duration = 0;
 
+    const ___this = this;
+
     // listen when the process close to calculate duration
     processPromise
-      .on('close,resolve', () => {
+      .on('close', () => {
+        if (___this === this) console.log('DDD');
+        console.log('DEDEFDEFEFEF', this._deamonInstance);
         if (this.deamon && this.deamon.state === 'watching') {
+          console.log('CIOJOIJEOJF');
           this.log({
             value: this.deamon.logs.watching
           });
@@ -319,6 +325,7 @@ class SProcess extends __SPromise {
   }
 }
 
-module.exports = __SProcessInterface.implements(SProcess, [
-  __SProcessInterface
-]);
+module.exports = SProcess;
+// module.exports = __SProcessInterface.implements(SProcess, [
+//   __SProcessInterface
+// ]);

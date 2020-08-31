@@ -11,7 +11,7 @@ var _toString = _interopRequireDefault(require("../../string/toString"));
 
 var _deepMerge = _interopRequireDefault(require("../../object/deepMerge"));
 
-var _validateObjectDefinitionObject = _interopRequireDefault(require("../object/validateObjectDefinitionObject"));
+var _node = _interopRequireDefault(require("../../is/node"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -56,42 +56,23 @@ function validateValueOutputString(validateValueResultObj, settings) {
   }
 
   if (validateValueResultObj.$received) {
-    issuesArray.push("<yellow>\u2502</yellow> - Received value: <yellow>".concat((0, _toString.default)(validateValueResultObj.$received.value, {
+    var string = "<yellow>\u2502</yellow> - Received value: <yellow>".concat((0, _toString.default)(validateValueResultObj.$received.value, {
       beautify: true
-    }), "</yellow>"));
+    }), "</yellow>");
+
+    if ((0, _node.default)()) {
+      var __packageRoot = require('@coffeekraken/sugar/node/path/packageRoot');
+
+      string = string.replace("".concat(__packageRoot(), "/"), '');
+      string = string.replace("".concat(__packageRoot(__dirname), "/"), '');
+    }
+
+    issuesArray.push(string);
   }
 
   validateValueResultObj.$issues.forEach(issue => {
-    switch (issue.toLowerCase()) {
-      case 'definitionobject.unknown':
-        issuesArray.push("<yellow>\u2502</yellow> This passed definition object property \"<cyan>".concat((0, _toString.default)(validateValueResultObj.$name || 'unnamed'), "</cyan>\" is not supported..."));
-        break;
-
-      case 'required':
-        issuesArray.push("<yellow>\u2502</yellow> - This value is <green>required</green>");
-        break;
-
-      case 'type':
-        issuesArray.push("<yellow>\u2502</yellow> - The value type has to be <green>".concat(validateValueResultObj.$expected.type, "</green> but you passed <red>").concat(validateValueResultObj.$received.type, "</red>"));
-        break;
-
-      case 'description':
-        issuesArray.push("<yellow>\u2502</yellow> - It seems that you forget to set a description for this property...");
-        break;
-
-      case 'values':
-        issuesArray.push("<yellow>\u2502</yellow> - The allowed values are [".concat(validateValueResultObj.$expected.values.map(v => {
-          return "\"<green>".concat(v, "</green>\"");
-        }).join(', '), "]"));
-        break;
-
-      case 'lazy':
-        issuesArray.push("<yellow>\u2502</yellow> - This property is specified as a <yellow>lazy</yellow> one");
-        break;
-
-      case 'static':
-        issuesArray.push("<yellow>\u2502</yellow> - This value has to be a <green>static</green> one");
-        break;
+    if (validateValueResultObj.$messages[issue]) {
+      issuesArray.push("<yellow>\u2502</yellow> - ".concat(validateValueResultObj.$messages[issue]));
     }
   });
   return (0, _parseHtml.default)(issuesArray.join('\n')) + '\n';

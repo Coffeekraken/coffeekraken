@@ -1,5 +1,4 @@
-import __SValueValidation from './SValueValidation';
-import __SValueValidationInterface from './interface/SValueValidationInterface';
+import __SValidation from '../../SValidation';
 
 /**
  * @name          SRequiredValidation
@@ -11,8 +10,12 @@ import __SValueValidationInterface from './interface/SValueValidationInterface';
  * @since       2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SRequiredValidation extends __SValueValidation {
-  static apply(value) {
-    return false;
+class SRequiredValidation extends __SValidation {
+  static message =
+    'This value is <yellow>required</yellow> and you\'ve passed "<red>%0"</red>';
+  static exec(value) {
+    return value !== null && value !== undefined;
   }
 }
+
+export default SRequiredValidation;

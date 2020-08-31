@@ -1,9 +1,35 @@
+import __get from '../../object/get';
 import __SValueValidationError from '../../error/SValueValidationError';
 import __isOfType from '../../is/ofType';
 import __deepMerge from '../../object/deepMerge';
 import __typeof from '../../value/typeof';
 import __isNode from '../../is/node';
 import __isPath from '../../is/path';
+import __toString from '../../string/toString';
+
+import __SRequiredValidation from './validation/SRequiredValidation';
+import __SPathValidation from './validation/SPathValidation';
+import __STypeValidation from './validation/STypeValidation';
+import __SValuesValidation from './validation/SValuesValidation';
+
+const _validationsObj = {
+  required: {
+    class: __SRequiredValidation,
+    args: []
+  },
+  path: {
+    class: __SPathValidation,
+    args: ['%definitionObj.path.exists']
+  },
+  type: {
+    class: __STypeValidation,
+    args: ['%definitionObj.type']
+  },
+  values: {
+    class: __SValuesValidation,
+    args: ['%definitionObj.values']
+  }
+};
 
 /**
  * @name          validateValue
@@ -41,7 +67,8 @@ export default function validateValue(value, definitionObj, settings = {}) {
     {
       name: 'unnamed',
       throw: true,
-      extendFn: null
+      extendFn: null,
+      validationsObj: _validationsObj
     },
     settings
   );
@@ -60,52 +87,52 @@ export default function validateValue(value, definitionObj, settings = {}) {
       value
     },
     $name: settings.name,
-    $issues: []
+    $issues: [],
+    $messages: {}
   };
 
-  if ((value === null || value === undefined) && !definitionObj.required) {
-    return true;
-  }
-
-  if (definitionObj.lazy) {
-    issueObj.$issues.push('lazy');
-  }
-
-  // check required
-  if (definitionObj.required === true) {
-    if (value === null || value === undefined) {
-      issueObj.$issues.push('required');
+  Object.keys(settings.validationsObj).forEach((validationName, i) => {
+    if (!_validationsObj[validationName]) {
+      issueObj.$issues.push(`definitionObj.${validationName}.unknown`);
+      issueObj.$messages[
+        `definitionObj.${validationName}.unknown`
+      ] = `The specified "<yellow>${validationName}</yellow>" validation is <red>not supported</red>`;
     }
-  }
+    if (!definitionObj[validationName]) return;
 
-  // validate type
-  if (definitionObj.type) {
-    const isOfTypeResult = __isOfType(value, definitionObj.type);
-    if (isOfTypeResult !== true) {
-      issueObj = __deepMerge(issueObj, isOfTypeResult, {
-        array: true
-      });
-    }
-  }
+    const validationObj = Object.assign(
+      {},
+      settings.validationsObj[validationName]
+    );
 
-  // check allowed values
-  if (definitionObj.values && Array.isArray(definitionObj.values)) {
-    if (definitionObj.values.indexOf(value) === -1) {
-      issueObj.$issues.push('values');
-    }
-  }
+    validationObj.args = validationObj.args.map((arg) => {
+      if (typeof arg === 'string' && arg.slice(0, 15) === '%definitionObj.') {
+        arg = definitionObj[arg.replace('%definitionObj.', '')];
+      }
+      return arg;
+    });
 
-  // check "path" defined value
-  if (definitionObj.path && !__isNode()) {
-    if (!__isPath(value)) {
-      issueObj.$issues.push('path');
+    const validationResult = validationObj.class.apply(
+      value,
+      ...validationObj.args
+    );
+    if (validationResult !== true) {
+      issueObj.$issues.push(validationName);
+      issueObj.$messages[validationName] = validationResult;
     }
-  }
+  });
 
   if (settings.extendFn && typeof settings.extendFn === 'function') {
     const additionalIssues =
       settings.extendFn(value, definitionObj, settings) || [];
-    issueObj.$issues = [...issueObj.$issues, ...additionalIssues];
+    issueObj.$issues = [
+      ...issueObj.$issues,
+      ...(additionalIssues.$issues || [])
+    ];
+    issueObj.$messages = [
+      ...issueObj.$messages,
+      ...(additionalIssues.$messages || [])
+    ];
   }
 
   if (!issueObj.$issues.length) return true;

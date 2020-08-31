@@ -108,6 +108,7 @@ class SCli extends __SPromise {
     if (!this._settings.id) this._settings.id = this.constructor.name;
 
     this._paramsObj = __argsToObject(initialParams, this.definitionObj);
+
     this._paramsObj = __deepMerge(
       this._settings.defaultParams,
       this._paramsObj
@@ -116,6 +117,7 @@ class SCli extends __SPromise {
     if (!this._paramsObj.forceChildProcess || !this.command) {
       // run the process
       const SProcessInstance = this.constructor.processClass;
+
       this._processInstance = new SProcessInstance(this._paramsObj, settings);
 
       if (settings.childProcess.pipe) {
@@ -136,7 +138,7 @@ class SCli extends __SPromise {
       }
 
       // Apply the SProcessInterface on the getted process
-      __SProcessInterface.apply(this._processInstance);
+      // __SProcessInterface.apply(this._processInstance);
 
       // return this._runningProcess;
     } else {
@@ -358,4 +360,5 @@ class SCli extends __SPromise {
   }
 }
 
+// module.exports = SCli;
 module.exports = __SCliInterface.implements(SCli);

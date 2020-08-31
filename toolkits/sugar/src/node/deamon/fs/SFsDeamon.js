@@ -93,8 +93,14 @@ module.exports = class SFsDeamon extends __SDeamon {
    */
   watch(input, settings = {}) {
     settings = __deepMerge(this._settings, settings);
-    const cli = new __SFsDeamonCli(settings.cli);
-    cli.run(input);
+    input = typeof input === 'string' ? input : input.input;
+    const cli = new __SFsDeamonCli({
+      ...settings.cli,
+      input
+    });
+    cli.run({
+      input
+    });
     cli.on('cancel', () => {
       const idx = this._watchPromisesStack.indexOf(cli);
       if (idx === -1) return;

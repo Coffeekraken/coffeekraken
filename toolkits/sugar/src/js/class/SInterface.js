@@ -87,11 +87,10 @@ export default class SInterface {
       settings.name = instance.constructor.name || instance.name;
     }
 
-    if (
-      __typeof(instance, {
-        customClass: false
-      }) !== 'Object'
-    ) {
+    const instanceType = __typeof(instance, {
+      customClass: false
+    });
+    if (instanceType !== 'Object' && instanceType !== 'Class') {
       throw new __SError(
         `Sorry but the "<yellow>instance</yellow>" argument of the "<cyan>SInterface.apply</cyan>" static method have to be an <green>Object</green> and you've passed an <red>${__typeof(
           instance
@@ -253,35 +252,32 @@ export default class SInterface {
     if (__isClass(instance)) {
       // return instance;
       class SInterfaceImplementsMiddleClass extends instance {
-        // __parentProto = instance;
         constructor(...args) {
           super(...args);
           SInterface.implements(this, interfaces, settings);
         }
       }
+      Object.defineProperty(SInterfaceImplementsMiddleClass, 'name', {
+        value: instance.name
+      });
 
-      if (settings.applyOnStatic) {
-        const staticFns = Object.getOwnPropertyNames(instance).filter(
-          (prop) => typeof instance[prop] === 'function'
-        );
-        // staticFns.forEach((fnName) => {
-        //   SInterfaceImplementsMiddleClass[fnName] = 'cpl';
-        //   // SInterfaceImplementsMiddleClass[fnName] = function (...args) {
-        //   //   throw fnName;
+      // if (settings.applyOnStatic) {
+      //   const staticFns = Object.getOwnPropertyNames(instance).filter(
+      //     (prop) => typeof instance[prop] === 'function'
+      //   );
+      //   staticFns.forEach((fnName) => {
+      //     SInterfaceImplementsMiddleClass[fnName] = function (...args) {
+      //       interfaces.forEach((Interface) => {
+      //         Interface.apply(SInterfaceImplementsMiddleClass, {
+      //           ...settings,
+      //           interface: Interface.name
+      //         });
+      //       });
 
-        //   //   interfaces.forEach((Interface) => {
-        //   //     Interface.apply(instance, {
-        //   //       ...settings,
-        //   //       interface: Interface.name
-        //   //     });
-        //   //   });
-
-        //   //   instance[fnName](...args);
-        //   // };
-        // });
-
-        instance.prototype.apply = 'ccc';
-      }
+      //       return instance[fnName](...args);
+      //     };
+      //   });
+      // }
 
       return SInterfaceImplementsMiddleClass;
     }

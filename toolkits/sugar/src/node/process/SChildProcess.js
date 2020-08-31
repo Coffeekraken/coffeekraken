@@ -232,7 +232,7 @@ class SChildProcess extends __SProcess {
     // executing the actual command through the spawn node function
     this._runningProcess.childProcess = __childProcess[
       settings.method || 'spawn'
-    ](commandToRun, [], { ...spawnSettings, stdio: 'inherit' });
+    ](commandToRun, [], spawnSettings);
 
     // listen for ctrl+c to kill the child process
     if (settings.killOnCtrlC) {
@@ -374,7 +374,8 @@ class SChildProcess extends __SProcess {
     // stderr data
     if (this._runningProcess.childProcess.stderr) {
       this._runningProcess.childProcess.stderr.on('data', (error) => {
-        throw new __SError(error.toString());
+        this._runningProcess.stderr.push(error.toString());
+        // throw new __SError(error.toString());
       });
     }
 

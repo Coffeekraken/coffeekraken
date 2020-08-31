@@ -97,13 +97,17 @@ function createErrorPanel(error) {
 }
 
 function __handleChildProcessErrors(error) {
-  error = error.toString();
-  console.error(error);
+  if (error.toString().includes(`Cannot read property 'itop' of null`)) return;
+  if (error.instanceId) return;
+  // error = error.toString();
+  console.error(__toString(error));
+  process.exit(1);
 }
 
 function __handleMainProcessErrors(error) {
   // @TODO     find a better solution to avoid blessed issues
   if (error.toString().includes(`Cannot read property 'itop' of null`)) return;
+  if (error.instanceId) return;
 
   if (!global.screen) {
     throw error;

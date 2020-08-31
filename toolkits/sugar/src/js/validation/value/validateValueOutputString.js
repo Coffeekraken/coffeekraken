@@ -1,7 +1,7 @@
 import __parseHtml from '../../console/parseHtml';
 import __toString from '../../string/toString';
 import __deepMerge from '../../object/deepMerge';
-import validateObjectDefinitionObject from '../object/validateObjectDefinitionObject';
+import __isNode from '../../is/node';
 
 /**
  * @name                validateValueOutputString
@@ -44,57 +44,25 @@ export default function validateValueOutputString(
   }
 
   if (validateValueResultObj.$received) {
-    issuesArray.push(
-      `<yellow>│</yellow> - Received value: <yellow>${__toString(
-        validateValueResultObj.$received.value,
-        { beautify: true }
-      )}</yellow>`
-    );
+    let string = `<yellow>│</yellow> - Received value: <yellow>${__toString(
+      validateValueResultObj.$received.value,
+      { beautify: true }
+    )}</yellow>`;
+
+    if (__isNode()) {
+      const __packageRoot = require('@coffeekraken/sugar/node/path/packageRoot');
+      string = string.replace(`${__packageRoot()}/`, '');
+      string = string.replace(`${__packageRoot(__dirname)}/`, '');
+    }
+
+    issuesArray.push(string);
   }
 
   validateValueResultObj.$issues.forEach((issue) => {
-    switch (issue.toLowerCase()) {
-      case 'definitionobject.unknown':
-        issuesArray.push(
-          `<yellow>│</yellow> This passed definition object property "<cyan>${__toString(
-            validateValueResultObj.$name || 'unnamed'
-          )}</cyan>" is not supported...`
-        );
-        break;
-      case 'required':
-        issuesArray.push(
-          `<yellow>│</yellow> - This value is <green>required</green>`
-        );
-        break;
-      case 'type':
-        issuesArray.push(
-          `<yellow>│</yellow> - The value type has to be <green>${validateValueResultObj.$expected.type}</green> but you passed <red>${validateValueResultObj.$received.type}</red>`
-        );
-        break;
-      case 'description':
-        issuesArray.push(
-          `<yellow>│</yellow> - It seems that you forget to set a description for this property...`
-        );
-        break;
-      case 'values':
-        issuesArray.push(
-          `<yellow>│</yellow> - The allowed values are [${validateValueResultObj.$expected.values
-            .map((v) => {
-              return `"<green>${v}</green>"`;
-            })
-            .join(', ')}]`
-        );
-        break;
-      case 'lazy':
-        issuesArray.push(
-          `<yellow>│</yellow> - This property is specified as a <yellow>lazy</yellow> one`
-        );
-        break;
-      case 'static':
-        issuesArray.push(
-          `<yellow>│</yellow> - This value has to be a <green>static</green> one`
-        );
-        break;
+    if (validateValueResultObj.$messages[issue]) {
+      issuesArray.push(
+        `<yellow>│</yellow> - ${validateValueResultObj.$messages[issue]}`
+      );
     }
   });
 

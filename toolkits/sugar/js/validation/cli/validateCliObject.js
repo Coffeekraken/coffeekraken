@@ -63,6 +63,7 @@ function validateCliObject(objectToCheck, definitionObj, name, settings) {
     settings = {};
   }
 
+  console.log('de', definitionObj);
   settings = (0, _deepMerge.default)({
     throw: true,
     validateDefinitionObject: true

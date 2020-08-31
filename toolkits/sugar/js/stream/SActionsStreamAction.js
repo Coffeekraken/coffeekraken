@@ -13,7 +13,7 @@ var _uniqid = _interopRequireDefault(require("../string/uniqid"));
 
 var _validateObject = _interopRequireDefault(require("../validation/object/validateObject"));
 
-var _validateObjectDefinitionObject = _interopRequireDefault(require("../validation/object/validateObjectDefinitionObject"));
+var _validateDefinitionObject = _interopRequireDefault(require("../validation/object/validateDefinitionObject"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -137,7 +137,9 @@ var SActionStreamAction = /*#__PURE__*/function (_SPromise) {
 
     if (_this.constructor.definitionObj) {
       setTimeout(() => {
-        (0, _validateObjectDefinitionObject.default)(_this.constructor.definitionObj);
+        (0, _validateDefinitionObject.default)(_this.constructor.definitionObj, {
+          name: "".concat(_this.constructor.name, ".definitionObj")
+        });
       });
     }
 

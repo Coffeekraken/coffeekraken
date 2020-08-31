@@ -138,9 +138,11 @@ var SInterface = /*#__PURE__*/function () {
         settings.name = instance.constructor.name || instance.name;
       }
 
-      if ((0, _typeof.default)(instance, {
+      var instanceType = (0, _typeof.default)(instance, {
         customClass: false
-      }) !== 'Object') {
+      });
+
+      if (instanceType !== 'Object' && instanceType !== 'Class') {
         throw new _SError.default("Sorry but the \"<yellow>instance</yellow>\" argument of the \"<cyan>SInterface.apply</cyan>\" static method have to be an <green>Object</green> and you've passed an <red>".concat((0, _typeof.default)(instance), "</red>..."));
       }
 
@@ -311,7 +313,6 @@ var SInterface = /*#__PURE__*/function () {
 
           var _super = _createSuper(SInterfaceImplementsMiddleClass);
 
-          // __parentProto = instance;
           function SInterfaceImplementsMiddleClass() {
             var _this;
 
@@ -329,23 +330,24 @@ var SInterface = /*#__PURE__*/function () {
           return SInterfaceImplementsMiddleClass;
         }(instance);
 
-        if (settings.applyOnStatic) {
-          var staticFns = Object.getOwnPropertyNames(instance).filter(prop => typeof instance[prop] === 'function'); // staticFns.forEach((fnName) => {
-          //   SInterfaceImplementsMiddleClass[fnName] = 'cpl';
-          //   // SInterfaceImplementsMiddleClass[fnName] = function (...args) {
-          //   //   throw fnName;
-          //   //   interfaces.forEach((Interface) => {
-          //   //     Interface.apply(instance, {
-          //   //       ...settings,
-          //   //       interface: Interface.name
-          //   //     });
-          //   //   });
-          //   //   instance[fnName](...args);
-          //   // };
-          // });
-
-          instance.prototype.apply = 'ccc';
-        }
+        Object.defineProperty(SInterfaceImplementsMiddleClass, 'name', {
+          value: instance.name
+        }); // if (settings.applyOnStatic) {
+        //   const staticFns = Object.getOwnPropertyNames(instance).filter(
+        //     (prop) => typeof instance[prop] === 'function'
+        //   );
+        //   staticFns.forEach((fnName) => {
+        //     SInterfaceImplementsMiddleClass[fnName] = function (...args) {
+        //       interfaces.forEach((Interface) => {
+        //         Interface.apply(SInterfaceImplementsMiddleClass, {
+        //           ...settings,
+        //           interface: Interface.name
+        //         });
+        //       });
+        //       return instance[fnName](...args);
+        //     };
+        //   });
+        // }
 
         return SInterfaceImplementsMiddleClass;
       } // make sure the instance has all the interfaces requirements

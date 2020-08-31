@@ -74,6 +74,8 @@ function typeOf(value, settings) {
     type = (0, _upperFirst.default)(value.name);
   } else if (settings.customClass && value.constructor && value.constructor.name) {
     type = (0, _upperFirst.default)(value.constructor.name);
+  } else if (!settings.customClass && (0, _class.default)(value)) {
+    type = 'Class';
   } else if (typeof value === 'function') type = 'Function';else if (typeof value === 'object') type = 'Object';else type = 'Unknown'; // save the type in the resultObj
 
   resultObj.type = type; // check if need to get the "child" types

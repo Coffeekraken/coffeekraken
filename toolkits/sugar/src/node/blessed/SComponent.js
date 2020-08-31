@@ -70,6 +70,16 @@ module.exports = class SComponent extends __blessed.box {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(settings = {}) {
+    // store the settings
+    settings = __deepMerge(
+      {
+        container: true,
+        maxRenderInterval: 100,
+        framerate: null
+      },
+      settings
+    );
+
     // check if need to create a screen
     if (!__activeScreen && settings.screen !== false) {
       __activeScreen = __blessed.screen({
@@ -82,8 +92,15 @@ module.exports = class SComponent extends __blessed.box {
             // ch: '█'
           },
           blink: true
-        },
-        container: {
+        }
+      });
+
+      if (settings.attach === undefined) {
+        settings.attach = true;
+      }
+
+      if (settings.container === true) {
+        settings.container = {
           // width: '100%',
           height: '100%',
           top: 0,
@@ -97,18 +114,10 @@ module.exports = class SComponent extends __blessed.box {
             bottom: 0
           },
           style: {}
-        }
-      });
+        };
+      }
     }
 
-    // store the settings
-    settings = __deepMerge(
-      {
-        maxRenderInterval: 100,
-        framerate: null
-      },
-      settings
-    );
     // extends parent
     super(settings);
 
@@ -145,6 +154,10 @@ module.exports = class SComponent extends __blessed.box {
       container = __blessed.box(settings.container);
       __activeScreen.container = container;
       __activeScreen.append(container);
+
+      __activeScreen.append = (...args) => {
+        __activeScreen.container.append(...args);
+      };
     }
 
     __hotkey('ctrl+c', {
@@ -155,11 +168,11 @@ module.exports = class SComponent extends __blessed.box {
       this.detach();
     });
 
-    if (this._settings.appendToScreen) {
+    if (this._settings.attach) {
       (__activeScreen.container || __activeScreen).append(this);
     }
 
-    if (!this._settings.appendToScreen) {
+    if (!this._settings.attach) {
       if (this.parent) {
         this.update();
       } else {
@@ -190,23 +203,6 @@ module.exports = class SComponent extends __blessed.box {
       if (!this.isDisplayed()) return;
       this.update();
     }, 1000 / framerate);
-  }
-
-  /**
-   * @name                  attach
-   * @type                  Function
-   *
-   * This method simply append the component to the generated screen
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  attach(to = null) {
-    if (__isChildProcess()) return;
-    if (to) {
-      to.append(this);
-      return;
-    }
-    (global.screen.container || global.screen).append(this);
   }
 
   /**

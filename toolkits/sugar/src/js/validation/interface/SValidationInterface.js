@@ -1,8 +1,8 @@
-const __SInterface = require('../../../../class/SInterface');
+import __SInterface from '../../class/SInterface';
 
 /**
- * @name                SValueValidationInterface
- * @namespace           js.validation.value.validation
+ * @name                SValidationInterface
+ * @namespace           js.validation.interface
  * @type                Class
  * @extends             SInterface
  *
@@ -12,7 +12,7 @@ const __SInterface = require('../../../../class/SInterface');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SValueValidationInterface extends __SInterface {
+export default class SValidationInterface extends __SInterface {
   static definitionObj = {
     apply: {
       type: 'Function',
@@ -29,4 +29,4 @@ module.exports = class SValueValidationInterface extends __SInterface {
       static: true
     }
   };
-};
+}

@@ -1,7 +1,7 @@
 import __deepize from '../object/deepize';
 import __deepMerge from '../object/deepMerge';
 import __toString from '../string/toString';
-import __validateCliObject from '../validation/cli/validateCliObject';
+import __validateObject from '../validation/object/validateObject';
 
 /**
  * @name                completeArgsObject
@@ -51,11 +51,12 @@ export default function completeArgsObject(
   });
 
   // make sure all is ok
-  const argsValidationResult = __validateCliObject(
+  const argsValidationResult = __validateObject(
     argsObj,
     definitionObj,
     settings
   );
+
   if (argsValidationResult !== true && settings.throw)
     throw new Error(__toString(argsValidationResult));
   else if (argsValidationResult !== true) return argsValidationResult;

@@ -2,7 +2,7 @@ import __deepMerge from '../object/deepMerge';
 import __SPromise from '../promise/SPromise';
 import __uniqid from '../string/uniqid';
 import __validateObject from '../validation/object/validateObject';
-import __validateObjectDefinitionObject from '../validation/object/validateObjectDefinitionObject';
+import __validateDefinitionObject from '../validation/object/validateDefinitionObject';
 
 /**
  * @name          SActionStreamAction
@@ -90,7 +90,9 @@ export default class SActionStreamAction extends __SPromise {
     // check the definition object
     if (this.constructor.definitionObj) {
       setTimeout(() => {
-        __validateObjectDefinitionObject(this.constructor.definitionObj);
+        __validateDefinitionObject(this.constructor.definitionObj, {
+          name: `${this.constructor.name}.definitionObj`
+        });
       });
     }
     super.start();

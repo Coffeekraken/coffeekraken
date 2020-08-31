@@ -11,7 +11,7 @@ var _deepMerge = _interopRequireDefault(require("../object/deepMerge"));
 
 var _toString = _interopRequireDefault(require("../string/toString"));
 
-var _validateCliObject = _interopRequireDefault(require("../validation/cli/validateCliObject"));
+var _validateObject = _interopRequireDefault(require("../validation/object/validateObject"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -53,7 +53,7 @@ function completeArgsObject(argsObj, definitionObj, settings) {
     }
   }); // make sure all is ok
 
-  var argsValidationResult = (0, _validateCliObject.default)(argsObj, definitionObj, settings);
+  var argsValidationResult = (0, _validateObject.default)(argsObj, definitionObj, settings);
   if (argsValidationResult !== true && settings.throw) throw new Error((0, _toString.default)(argsValidationResult));else if (argsValidationResult !== true) return argsValidationResult; // return the argsObj
 
   return (0, _deepize.default)(argsObj);

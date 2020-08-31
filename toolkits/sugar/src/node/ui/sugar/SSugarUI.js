@@ -1,7 +1,7 @@
 const __deepMerge = require('../../object/deepMerge');
 const __SPromise = require('../../promise/SPromise');
 const __sugarConfig = require('../../config/sugar');
-const __SSugarUiModuleInterface = require('./interface/SSugarUiModuleInterface');
+const __SSugarUiModuleConfigInterface = require('./interface/SSugarUiModuleConfigInterface');
 
 /**
  * @name            SSugarUi
@@ -59,8 +59,6 @@ module.exports = class SSugarUi extends __SPromise {
 
     // load and check each modules
     this._loadModules(__sugarConfig('sugar-ui.modules'));
-
-    console.log(this._modulesObjs);
   }
 
   /**
@@ -79,7 +77,7 @@ module.exports = class SSugarUi extends __SPromise {
   _loadModules(modulesObj) {
     // loop on all registered modules
     Object.keys(modulesObj).forEach((moduleIdx) => {
-      const moduleObj = __SSugarUiModuleInterface.applyAndComplete(
+      const moduleObj = __SSugarUiModuleConfigInterface.applyAndComplete(
         modulesObj[moduleIdx],
         {
           name: `${this.constructor.name}.modules.${moduleIdx}`

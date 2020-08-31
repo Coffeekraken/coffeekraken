@@ -5,9 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _SValueValidation2 = _interopRequireDefault(require("./SValueValidation"));
-
-var _SValueValidationInterface = _interopRequireDefault(require("./interface/SValueValidationInterface"));
+var _SValidation2 = _interopRequireDefault(require("../../SValidation"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31,6 +29,8 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 /**
  * @name          SRequiredValidation
  * @namespace     js.validation.value.validation
@@ -41,8 +41,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
  * @since       2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-var SRequiredValidation = /*#__PURE__*/function (_SValueValidation) {
-  _inherits(SRequiredValidation, _SValueValidation);
+var SRequiredValidation = /*#__PURE__*/function (_SValidation) {
+  _inherits(SRequiredValidation, _SValidation);
 
   var _super = _createSuper(SRequiredValidation);
 
@@ -53,14 +53,17 @@ var SRequiredValidation = /*#__PURE__*/function (_SValueValidation) {
   }
 
   _createClass(SRequiredValidation, null, [{
-    key: "apply",
-    value: function apply(value) {
-      return false;
+    key: "exec",
+    value: function exec(value) {
+      return value !== null && value !== undefined;
     }
   }]);
 
   return SRequiredValidation;
-}(_SValueValidation2.default);
+}(_SValidation2.default);
 
-exports.default = SRequiredValidation;
+_defineProperty(SRequiredValidation, "message", 'This value is <yellow>required</yellow> and you\'ve passed "<red>%0"</red>');
+
+var _default = SRequiredValidation;
+exports.default = _default;
 module.exports = exports.default;

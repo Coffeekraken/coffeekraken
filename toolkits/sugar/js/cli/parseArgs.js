@@ -162,13 +162,11 @@ function parseArgsString(string, definitionObj, settings) {
     var value = argsObj[key];
 
     if (value === undefined && settings.defaultObj[key] !== undefined) {
-      // __set(finalObj, key, settings.defaultObj[key]);
       finalObj[key] = settings.defaultObj[key];
       continue;
-    } // __set(finalObj, key, argsObj[key]);
-
-
-    finalObj[key] = argsObj[key];
+    } else if (argsObj[key] !== undefined) {
+      finalObj[key] = argsObj[key];
+    }
   }
 
   return (0, _completeArgsObject.default)(finalObj, definitionObj, settings);

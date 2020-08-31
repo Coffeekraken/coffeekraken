@@ -56,7 +56,6 @@ module.exports = function exitCleanup() {
     await __wait(50);
 
     const $output = new __SOutput([], {});
-    $output.attach();
 
     $output.log({
       value: `${__sugarHeading({

@@ -36,20 +36,12 @@ module.exports = function validateValue(value, definitionObj, settings = {}) {
   return __validateValue(value, definitionObj, {
     ...settings,
     extendFn: (value, definitionObj, settings) => {
-      const issues = [];
+      const issuesObj = {
+        $issues: [],
+        $messages: {}
+      };
 
-      // path check
-      if (definitionObj.path) {
-        const exists =
-          typeof definitionObj.path === 'object' &&
-          definitionObj.path.exists === true;
-        // check path
-        if (!__isPath(value, exists)) {
-          issues.push('path');
-        }
-      }
-
-      return issues;
+      return issuesObj;
     }
   });
 };

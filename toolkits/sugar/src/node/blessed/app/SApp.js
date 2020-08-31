@@ -80,7 +80,7 @@ module.exports = class SApp extends __SComponent {
       {
         id: 'sugarapp',
         name: 'Sugar',
-        appendToScreen: true,
+        attach: true,
         header: {
           title: 'Coffeekraken Sugar based application'
         },

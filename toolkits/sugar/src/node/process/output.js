@@ -25,5 +25,5 @@ const __SOutput = require('../blessed/SOutput');
  */
 module.exports = (source, settings = {}) => {
   const output = new __SOutput(source, settings);
-  output.attach();
+  return output;
 };

@@ -2,6 +2,10 @@ const __deepMerge = require('../../object/deepMerge');
 const __SPromise = require('../../promise/SPromise');
 const __sugarConfig = require('../../config/sugar');
 const __SSugarUiModuleConfigInterface = require('./interface/SSugarUiModuleConfigInterface');
+const __isClass = require('../../is/class');
+const __SError = require('../../error/SError');
+const __SSugarUiModule = require('./SSugarUiModule');
+const __SComponent = require('../../blessed/SComponent');
 
 /**
  * @name            SSugarUi
@@ -52,13 +56,44 @@ module.exports = class SSugarUi extends __SPromise {
    */
   constructor(settings = {}) {
     settings = __deepMerge({
-      id: 'ui.sugar'
+      id: 'ui.sugar',
+      name: 'Sugar UI'
     });
 
     super(null, settings).start();
 
+    // displaying the interface
+    this._createUi();
+
+    console.log('CPOKC');
+
     // load and check each modules
     this._loadModules(__sugarConfig('sugar-ui.modules'));
+  }
+
+  /**
+   * @name            _createUi
+   * @type            Function
+   * @private
+   *
+   * This method simply create the interface and return an object
+   * through which you can access all the UI elements
+   *
+   * @return      {Object}            An object storing references to all the UI elements
+   *
+   * @since        2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _createUi() {
+    const $container = new __SComponent({
+      style: {
+        bg: red
+      }
+    });
+
+    return {
+      $container
+    };
   }
 
   /**
@@ -77,12 +112,35 @@ module.exports = class SSugarUi extends __SPromise {
   _loadModules(modulesObj) {
     // loop on all registered modules
     Object.keys(modulesObj).forEach((moduleIdx) => {
-      const moduleObj = __SSugarUiModuleConfigInterface.applyAndComplete(
-        modulesObj[moduleIdx],
-        {
-          name: `${this.constructor.name}.modules.${moduleIdx}`
-        }
-      );
+      const moduleObj = modulesObj[moduleIdx];
+
+      if (moduleObj.module && moduleObj.module.slice(-3) !== '.js') {
+        moduleObj.module += '.js';
+      }
+
+      // validate module interface
+      __SSugarUiModuleConfigInterface.applyAndComplete(moduleObj, {
+        name: `${this.constructor.name}.modules.${moduleIdx}`
+      });
+
+      // require and instanciate the module class
+      const moduleClass = require(moduleObj.module);
+      if (!__isClass(moduleClass)) {
+        throw new __SError(
+          `The passed module file "<cyan>${moduleObj.module}</cyan>" does not export a <green>proper Class</green> for the module "<yellow>${moduleObj.name}</yellow>"...`
+        );
+      }
+      const settings = {
+        id: moduleObj.id,
+        name: moduleObj.name,
+        ...moduleObj.settings
+      };
+      const moduleInstance = new moduleClass(settings);
+      if (!(moduleInstance instanceof __SSugarUiModule)) {
+        throw new __SError(
+          `It seems that the passed class for your module "<yellow>${moduleObj.name}</yellow>" does not extends the sugar "<green>SSugarUiModule</green>" one...`
+        );
+      }
 
       // add the validated module in the _modulesObjArray property
       this._modulesObjs[moduleIdx] = moduleObj;

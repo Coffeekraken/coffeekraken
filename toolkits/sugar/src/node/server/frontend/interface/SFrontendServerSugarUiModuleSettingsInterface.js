@@ -1,8 +1,9 @@
 const __SInterface = require('../../../class/SInterface');
 const __sugarConfig = require('../../../config/sugar');
+const __SFrontendServerInterface = require('./SFrontendServerInterface');
 
 /**
- * @name                SSugarUiModuleConfigInterface
+ * @name                SFrontendServerSugarUiModuleSettingsInterface
  * @namespace           node.ui.sugar.interface
  * @type                Class
  * @extends             SInterface
@@ -13,8 +14,9 @@ const __sugarConfig = require('../../../config/sugar');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SSugarUiModuleConfigInterface extends __SInterface {
+module.exports = class SFrontendServerSugarUiModuleSettingsInterface extends __SInterface {
   static definitionObj = {
+    ...__SFrontendServerInterface,
     id: {
       type: 'String',
       description:
@@ -25,21 +27,6 @@ module.exports = class SSugarUiModuleConfigInterface extends __SInterface {
       type: 'String',
       description: 'The module name like "Frontend Server", etc...',
       required: true
-    },
-    module: {
-      type: 'String',
-      description: 'The SSugarUiModule based class file path.',
-      required: true,
-      path: {
-        exists: true
-      }
-    },
-    settings: {
-      type: 'Object',
-      description:
-        'An object of settings that will be passed to your module constructor',
-      required: true,
-      default: {}
     }
   };
 };

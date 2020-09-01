@@ -1,18 +1,34 @@
-export default function sugarHeading(data = {}) {
+import __deepMerge from '../object/deepMerge';
+
+export default function sugarHeading(settings = {}) {
+  settings = __deepMerge(
+    {
+      version: '2.0.0',
+      borders: true
+    },
+    settings
+  );
   let version = '';
-  if (data.version) version = `<white>${data.version}</white>`;
-  let author = 'Coffeekraken';
-  if (data.author) author = data.author;
+  if (settings.version) version = `<white>${settings.version}</white>`;
   const value = [
-    `<yellow>█</yellow>`,
-    `<yellow>█     ____                           </yellow>`,
-    `<yellow>█   / ____|</yellow><white>Coffee<cyan>kraken</cyan></white><yellow> __ _ _ __   </yellow>`,
-    // `<yellow>█   / ___| _   _  __ _  __ _ _ __   </yellow>`,
-    '<yellow>█   \\___ \\| | | |/ _` |/ _` | `__|  </yellow>',
-    `<yellow>█    ___) | |_| | (_| | (_| | |       </yellow>`,
-    `<yellow>█   |____/ \\__,_|\\__, |\\__,_|_|</yellow> ${version}    `,
-    `<yellow>█                |___/</yellow>`,
-    `<yellow>█</yellow>`
+    `<yellow>${settings.borders ? '█' : ''}</yellow>`,
+    `<yellow>${
+      settings.borders ? '█' : ''
+    }     ____                           </yellow>`,
+    `<yellow>${
+      settings.borders ? '█' : ''
+    }   / ____|</yellow><white>Coffee<cyan>kraken</cyan></white><yellow> __ _ _ __   </yellow>`,
+    `<yellow>${
+      settings.borders ? '█' : ''
+    }   \\___ \\| | | |/ _\` |/ _\` | \`__|  </yellow>`,
+    `<yellow>${
+      settings.borders ? '█' : ''
+    }    ___) | |_| | (_| | (_| | |       </yellow>`,
+    `<yellow>${
+      settings.borders ? '█' : ''
+    }   |____/ \\__,_|\\__, |\\__,_|_|</yellow> ${version}    `,
+    `<yellow>${settings.borders ? '█' : ''}                |___/</yellow>`,
+    `<yellow>${settings.borders ? '█' : ''}</yellow>`
   ].join('\n');
 
   return value;

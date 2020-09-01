@@ -73,13 +73,13 @@ module.exports = class SComponent extends __blessed.box {
     // store the settings
     settings = __deepMerge(
       {
+        screen: true,
         container: true,
         maxRenderInterval: 100,
         framerate: null
       },
       settings
     );
-
     // check if need to create a screen
     if (!__activeScreen && settings.screen !== false) {
       __activeScreen = __blessed.screen({
@@ -119,6 +119,7 @@ module.exports = class SComponent extends __blessed.box {
     }
 
     // extends parent
+    delete settings.screen;
     super(settings);
 
     this._screen = __activeScreen;

@@ -5,6 +5,71 @@ const __packageRoot = require('../src/node/path/packageRoot');
 module.exports = {
   assets: '@config.assets',
 
+  /**
+   * @name              port
+   * @namespace         config.sugar-ui.modules.frontendServer.settings
+   * @type              Number
+   * @default           3000
+   *
+   * Specify the port to use for the frontend server
+   *
+   * @since             2.0.0
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  port: 3000,
+
+  /**
+   * @name              hostname
+   * @namespace         config.sugar-ui.modules.frontendServer.settings
+   * @type              String
+   * @default           127.0.0.1
+   *
+   * Specify the hostname to use for the frontend server
+   *
+   * @since             2.0.0
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  hostname: '127.0.0.1',
+
+  /**
+   * @name              rootDir
+   * @namespace         config.sugar-ui.modules.frontendServer.settings
+   * @type              String
+   * @default           ${__packageRoot(process.cwd())}
+   *
+   * Specify the root directory to use for the frontend server
+   *
+   * @since             2.0.0
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  rootDir: `${__packageRoot(process.cwd())}`,
+
+  /**
+   * @name              staticDir
+   * @namespace         config.sugar-ui.modules.frontendServer.settings
+   * @type              String
+   * @default           ${__packageRoot(process.cwd())}/dist
+   *
+   * Specify a directory that will be served as static files
+   *
+   * @since             2.0.0
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  staticDir: `${__packageRoot(process.cwd())}/dist`,
+
+  /**
+   * @name            viewsDir
+   * @namespace       config.sugar-ui.modules.frontendServer.settings
+   * @type            String
+   * @default         ${__packageRoot(process.cwd())}/views
+   *
+   * Specify the views directory path
+   *
+   * @since         2.0.0
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  viewsDir: `${__packageRoot(process.cwd())}/views`,
+
   handlers: {
     /**
      * @name            views
@@ -232,7 +297,5 @@ module.exports = {
         }
       }
     }
-  },
-
-  express: '@config.express'
+  }
 };

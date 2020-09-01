@@ -143,8 +143,6 @@ class SProcess extends __SPromise {
     if (settings.deamon && typeof settings.deamon === 'object') {
       __SProcessDeamonSettingInterface.apply(settings.deamon);
 
-      console.log('SDSD', this._coco);
-
       // init the deamon class
       this._deamonInstance = new settings.deamon.class(
         settings.deamon.settings || {}
@@ -166,15 +164,15 @@ class SProcess extends __SPromise {
           params = settings.deamon.processParams(params, data);
         }
 
+        // launch a new process
+        this.run(params, settings);
+
         this.log({
           clear: true,
           value: `Restarting the process "<yellow>${
             this._settings.name || this._settings.id
           }</yellow>" automatically`
         });
-
-        // launch a new process
-        this.run(params, settings);
       });
 
       // launch the deamon if all is ready
@@ -184,6 +182,7 @@ class SProcess extends __SPromise {
           settings.deamon.watchArgs
         );
       }
+
       this._deamonInstance.start();
     }
   }
@@ -199,7 +198,6 @@ class SProcess extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   get deamon() {
-    console.log('GE', this._coco, this._deamonInstance);
     return this._deamonInstance || undefined;
   }
 
@@ -265,11 +263,13 @@ class SProcess extends __SPromise {
       return;
     }
 
+    // save the current promise
+    this._currentPromise = processPromise;
+
     // update the process state
     this.state = 'running';
 
     if (this.deamon && this.deamon.state === 'watching') {
-      console.log('HOP');
       this.log({
         value: this.deamon.logs.paused
       });
@@ -280,33 +280,22 @@ class SProcess extends __SPromise {
     this.endTime = 0;
     this.duration = 0;
 
-    const ___this = this;
-
     // listen when the process close to calculate duration
-    processPromise
-      .on('close', () => {
-        if (___this === this) console.log('DDD');
-        console.log('DEDEFDEFEFEF', this._coco);
-        if (this.deamon && this.deamon.state === 'watching') {
-          console.log('CIOJOIJEOJF');
-          this.log({
-            value: this.deamon.logs.watching
-          });
-          this.state = 'watching';
-        }
-      })
-      .on('close,cancel,resolve,reject', () => {
-        this.endTime = Date.now();
-        this.duration = this.endTime - this.startTime;
-        setTimeout(() => {
-          this._currentPromise = null;
+    processPromise.on('close,cancel,resolve,reject', () => {
+      this.endTime = Date.now();
+      this.duration = this.endTime - this.startTime;
+
+      if (this.deamon && this.deamon.state === 'watching') {
+        this.log({
+          value: this.deamon.logs.watching
         });
-      });
+        this.state = 'watching';
+      }
+
+      this._currentPromise = null;
+    });
 
     __SPromise.pipe(processPromise, this);
-
-    // save the current promise
-    this._currentPromise = processPromise;
 
     return processPromise;
   }
@@ -322,16 +311,16 @@ class SProcess extends __SPromise {
    * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   log(...args) {
-    setTimeout(() => {
-      args.forEach((arg) => {
-        if (!this._currentPromise) return;
-        this._currentPromise.trigger('log', arg);
-      });
+    // setTimeout(() => {
+    args.forEach((arg) => {
+      if (!this._currentPromise) return;
+      this._currentPromise.trigger('log', arg);
     });
+    // });
   }
 }
 
-module.exports = SProcess;
-// module.exports = __SProcessInterface.implements(SProcess, [
-//   __SProcessInterface
-// ]);
+// module.exports = SProcess;
+module.exports = __SProcessInterface.implements(SProcess, [
+  __SProcessInterface
+]);

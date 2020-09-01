@@ -1,3 +1,4 @@
+const __isClass = require('../is/class');
 const __packageJson = require('../package/json');
 const __buildCommandLine = require('./buildCommandLine');
 const __SChildProcess = require('../process/SChildProcess');
@@ -156,9 +157,16 @@ class SCli extends __SPromise {
       this._processInstance = childProcess;
 
       if (settings.output) {
-        const outputSettings =
-          typeof settings.output === 'object' ? settings.output : {};
-        __output(this._processInstance, outputSettings);
+        if (__isClass(settings.output)) {
+          const outputInstance = new settings.output(
+            this._processInstance,
+            this._paramsObj
+          );
+        } else {
+          const outputSettings =
+            typeof settings.output === 'object' ? settings.output : {};
+          __output(this._processInstance, outputSettings);
+        }
       }
     }
 
@@ -270,9 +278,16 @@ class SCli extends __SPromise {
     }
 
     settings = __deepMerge(this._settings, settings);
-    // make sure we have an object as args
-    paramsObj = __argsToObject(paramsObj, this.definitionObj);
-    paramsObj = __deepMerge(this._paramsObj, paramsObj);
+
+    if (typeof paramsObj === 'string') {
+      paramsObj = __argsToObject(paramsObj, this.definitionObj);
+    } else if (!paramsObj) {
+      paramsObj = Object.assign({}, this._paramsObj);
+    }
+    paramsObj = __deepMerge(
+      Object.assign({}, this._paramsObj || {}),
+      paramsObj
+    );
 
     if (this._processInstance instanceof __SChildProcess) {
       paramsObj.forceChildProcess = false;

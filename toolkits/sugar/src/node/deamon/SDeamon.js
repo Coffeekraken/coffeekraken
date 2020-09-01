@@ -96,4 +96,5 @@ class SDeamon extends __SPromise {
   }
 }
 
-module.exports = __SDeamonInterface.implements(SDeamon);
+module.exports = SDeamon;
+// module.exports = __SDeamonInterface.implements(SDeamon);

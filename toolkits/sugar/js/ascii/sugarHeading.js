@@ -5,17 +5,22 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = sugarHeading;
 
-function sugarHeading(data) {
-  if (data === void 0) {
-    data = {};
+var _deepMerge = _interopRequireDefault(require("../object/deepMerge"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function sugarHeading(settings) {
+  if (settings === void 0) {
+    settings = {};
   }
 
+  settings = (0, _deepMerge.default)({
+    version: '2.0.0',
+    borders: true
+  }, settings);
   var version = '';
-  if (data.version) version = "<white>".concat(data.version, "</white>");
-  var author = 'Coffeekraken';
-  if (data.author) author = data.author;
-  var value = ["<yellow>\u2588</yellow>", "<yellow>\u2588     ____                           </yellow>", "<yellow>\u2588   / ____|</yellow><white>Coffee<cyan>kraken</cyan></white><yellow> __ _ _ __   </yellow>", // `<yellow>█   / ___| _   _  __ _  __ _ _ __   </yellow>`,
-  '<yellow>█   \\___ \\| | | |/ _` |/ _` | `__|  </yellow>', "<yellow>\u2588    ___) | |_| | (_| | (_| | |       </yellow>", "<yellow>\u2588   |____/ \\__,_|\\__, |\\__,_|_|</yellow> ".concat(version, "    "), "<yellow>\u2588                |___/</yellow>", "<yellow>\u2588</yellow>"].join('\n');
+  if (settings.version) version = "<white>".concat(settings.version, "</white>");
+  var value = ["<yellow>".concat(settings.borders ? '█' : '', "</yellow>"), "<yellow>".concat(settings.borders ? '█' : '', "     ____                           </yellow>"), "<yellow>".concat(settings.borders ? '█' : '', "   / ____|</yellow><white>Coffee<cyan>kraken</cyan></white><yellow> __ _ _ __   </yellow>"), "<yellow>".concat(settings.borders ? '█' : '', "   \\___ \\| | | |/ _` |/ _` | `__|  </yellow>"), "<yellow>".concat(settings.borders ? '█' : '', "    ___) | |_| | (_| | (_| | |       </yellow>"), "<yellow>".concat(settings.borders ? '█' : '', "   |____/ \\__,_|\\__, |\\__,_|_|</yellow> ").concat(version, "    "), "<yellow>".concat(settings.borders ? '█' : '', "                |___/</yellow>"), "<yellow>".concat(settings.borders ? '█' : '', "</yellow>")].join('\n');
   return value;
 }
 

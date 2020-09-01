@@ -201,7 +201,7 @@ module.exports = (args = {}) => {
   });
 
   server
-    .listen(settings.express.port, settings.express.hostname, () => {
+    .listen(settings.port, settings.hostname, () => {
       setTimeout(() => {
         promise.trigger('log', {
           type: 'header',

@@ -13,7 +13,7 @@ const __SInterface = require('../../class/SInterface');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = class SProcessInterface extends __SInterface {
-  static extendsArray = ['SProcess', 'SPromise'];
+  // static extendsArray = ['SProcess', 'SPromise'];
   static definitionObj = {
     state: {
       type: 'String',

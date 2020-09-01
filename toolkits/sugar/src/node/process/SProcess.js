@@ -1,3 +1,4 @@
+const __isChildProcess = require('../is/childProcess');
 const __SPromise = require('../promise/SPromise');
 const __SProcessInterface = require('./interface/SProcessInterface');
 const __SError = require('../error/SError');
@@ -116,6 +117,8 @@ class SProcess extends __SPromise {
    */
   endTime = 0;
 
+  _coco = __isChildProcess() ? 'child' : 'main';
+
   /**
    * @name          constructor
    * @type          Function
@@ -139,6 +142,8 @@ class SProcess extends __SPromise {
 
     if (settings.deamon && typeof settings.deamon === 'object') {
       __SProcessDeamonSettingInterface.apply(settings.deamon);
+
+      console.log('SDSD', this._coco);
 
       // init the deamon class
       this._deamonInstance = new settings.deamon.class(
@@ -194,6 +199,7 @@ class SProcess extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   get deamon() {
+    console.log('GE', this._coco, this._deamonInstance);
     return this._deamonInstance || undefined;
   }
 
@@ -280,7 +286,7 @@ class SProcess extends __SPromise {
     processPromise
       .on('close', () => {
         if (___this === this) console.log('DDD');
-        console.log('DEDEFDEFEFEF', this._deamonInstance);
+        console.log('DEDEFDEFEFEF', this._coco);
         if (this.deamon && this.deamon.state === 'watching') {
           console.log('CIOJOIJEOJF');
           this.log({

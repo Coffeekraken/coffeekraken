@@ -1,6 +1,8 @@
 const __SFrontendServerSugarUiModuleSettingsInterface = require('./interface/SFrontendServerSugarUiModuleSettingsInterface');
 const __SSugarUiModule = require('../../ui/sugar/SSugarUiModule');
+const __SFrontendServerInterface = require('./interface/SFrontendServerInterface');
 const __frontend = require('../../server/frontend/frontend');
+const __deepMerge = require('../../object/deepMerge');
 
 /**
  * @name                SFrontendServerSugarUiModule
@@ -16,6 +18,8 @@ const __frontend = require('../../server/frontend/frontend');
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 module.exports = class SFrontendServerSugarUiModule extends __SSugarUiModule {
+  static interface = __SFrontendServerInterface;
+
   /**
    * @name            constructor
    * @type             Function
@@ -29,10 +33,28 @@ module.exports = class SFrontendServerSugarUiModule extends __SSugarUiModule {
   constructor(settings = {}) {
     // check the settings interface
     __SFrontendServerSugarUiModuleSettingsInterface.apply(settings);
+    super(
+      __deepMerge(
+        {
+          autorun: true
+        },
+        settings
+      )
+    );
+    this.ready();
+  }
 
-    super(settings);
-
-    this._runServer(settings);
+  /**
+   * @name          run
+   * @type          Function
+   *
+   * This method is the one called by the SugarUi main class when all is ready
+   * to run the modules. Take this as your kind of "launcher" function.
+   *
+   * @since       2.0.0
+   */
+  run() {
+    return super.run(this._runServer(this._settings));
   }
 
   /**

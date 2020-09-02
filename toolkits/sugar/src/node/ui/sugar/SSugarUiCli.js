@@ -2,6 +2,7 @@ const __SCli = require('../../cli/SCli');
 const __deepMerge = require('../../object/deepMerge');
 const __SSugarUiInterface = require('./interface/SSugarUiInterface');
 const __SSugarUiProcess = require('./SSugarUiProcess');
+const __sugarConfig = require('../../config/sugar');
 
 /**
  * @name            SSugarUiCli

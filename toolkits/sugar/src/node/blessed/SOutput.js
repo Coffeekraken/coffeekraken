@@ -106,8 +106,10 @@ module.exports = class SOutput extends __SComponent {
     // extends SPanel
     super(_settings);
 
-    if (!Array.isArray(source)) source = [source];
+    // generate keys UI
+    this._createLogBox();
 
+    if (!Array.isArray(source)) source = [source];
     source.forEach((s) => {
       __SOutputSourceInterface.apply(s, {
         title: 'SOutput source issue',
@@ -118,9 +120,6 @@ module.exports = class SOutput extends __SComponent {
       // subscribe to the process
       this._subscribeToSource(s);
     });
-
-    // generate keys UI
-    this._createLogBox();
   }
 
   /**
@@ -136,7 +135,7 @@ module.exports = class SOutput extends __SComponent {
   _subscribeToSource(s) {
     // subscribe to data
     s.on('close', async (data) => {
-      await __wait();
+      // await __wait();
       // this.log({
       //   value: `Closing process with code <red>${data.code}</red> and signal <red>${data.signal}</red>...`
       // });
@@ -368,6 +367,16 @@ module.exports = class SOutput extends __SComponent {
 
       if (typeof logObj.value !== 'string')
         logObj.value = __toString(logObj.value);
+
+      if (logObj.module && typeof logObj.module === 'object') {
+        this._content.push({
+          value: __parseMarkdown(
+            `<bgPrimary><black> ${logObj.module.name || logObj.module.id} (${
+              logObj.module.id || logObj.module.idx
+            }) </black></bgPrimary>`
+          )
+        });
+      }
 
       if (logObj.type && logObj.type === 'header') {
         // generate the header box

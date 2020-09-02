@@ -2,6 +2,10 @@ const __packageRoot = require('../src/node/path/packageRoot');
 const __sugarConfig = require('../src/node/config/sugar');
 
 module.exports = {
+  welcome: {
+    serverModule: 'frontendServer'
+  },
+
   modules: {
     frontendServer: {
       id: 'server.frontend',
@@ -11,6 +15,9 @@ module.exports = {
       module: `${__packageRoot(
         __dirname
       )}/src/node/server/frontend/SFrontendServerSugarUiModule`,
+      interface: `${__packageRoot(
+        __dirname
+      )}/src/node/server/frontend/interface/SFrontendServerInterface`,
       settings: '@config.frontend'
     }
   }

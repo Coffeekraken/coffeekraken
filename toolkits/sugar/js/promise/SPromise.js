@@ -29,10 +29,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
-
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
-
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
@@ -44,6 +40,10 @@ function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflec
 function _possibleConstructorReturn(self, call) { if (call && (typeof call === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
 
 function _wrapNativeSuper(Class) { var _cache = typeof Map === "function" ? new Map() : undefined; _wrapNativeSuper = function _wrapNativeSuper(Class) { if (Class === null || !_isNativeFunction(Class)) return Class; if (typeof Class !== "function") { throw new TypeError("Super expression must either be null or a function"); } if (typeof _cache !== "undefined") { if (_cache.has(Class)) return _cache.get(Class); _cache.set(Class, Wrapper); } function Wrapper() { return _construct(Class, arguments, _getPrototypeOf(this).constructor); } Wrapper.prototype = Object.create(Class.prototype, { constructor: { value: Wrapper, enumerable: false, writable: true, configurable: true } }); return _setPrototypeOf(Wrapper, Class); }; return _wrapNativeSuper(Class); }
 
@@ -58,6 +58,12 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+// var originalCatch = Promise.prototype.catch;
+// Promise.prototype.catch = function () {
+//   console.log('PLOP');
+//   return originalCatch.apply(this, arguments);
+// };
 
 /**
  * @name                  SPromise
@@ -243,12 +249,15 @@ var SPromise = /*#__PURE__*/function (_Promise) {
       // settings
       settings = (0, _deepMerge.default)({
         stacks: '*',
-        processor: null
+        processor: null,
+        filter: null
       }, settings);
       if (!(sourceSPromise instanceof SPromise) || !(destSPromise instanceof SPromise)) return; // listen for all on the source promise
 
       sourceSPromise.on(settings.stacks, (value, metas) => {
-        // check if need to process the value
+        // check if we have a filter setted
+        if (settings.filter && !settings.filter(value, metas)) return; // check if need to process the value
+
         if (settings.processor) value = settings.processor(value, metas); // trigger on the destination promise
 
         destSPromise.trigger(metas.stack, value, _objectSpread(_objectSpread({}, metas), {}, {
@@ -317,7 +326,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }]);
 
   function SPromise(executorFn, settings) {
-    var _this;
+    var _thisSuper, _thisSuper2, _this;
 
     if (settings === void 0) {
       settings = {};
@@ -335,6 +344,10 @@ var SPromise = /*#__PURE__*/function (_Promise) {
     _defineProperty(_assertThisInitialized(_this), "_settings", {});
 
     _defineProperty(_assertThisInitialized(_this), "_promiseState", 'pending');
+
+    _get((_thisSuper = _assertThisInitialized(_this), _getPrototypeOf(SPromise.prototype)), "catch", _thisSuper).call(_thisSuper, e => {
+      console.log('XXX');
+    });
 
     Object.defineProperty(_assertThisInitialized(_this), '_masterPromiseResolveFn', {
       writable: true,
@@ -398,6 +411,11 @@ var SPromise = /*#__PURE__*/function (_Promise) {
         _this._isExecutorStarted = true;
       }
     });
+
+    _get((_thisSuper2 = _assertThisInitialized(_this), _getPrototypeOf(SPromise.prototype)), "catch", _thisSuper2).call(_thisSuper2, e => {
+      console.error('CA', e);
+    });
+
     return _this;
   }
   /**
@@ -633,7 +651,12 @@ var SPromise = /*#__PURE__*/function (_Promise) {
         stacksOrder = 'then,reject,finally';
       }
 
-      return this._reject(arg, stacksOrder);
+      try {
+        _get(_getPrototypeOf(SPromise.prototype), "reject", this).call(this, arg);
+      } catch (e) {
+        console.log('COCOC');
+        return this._reject(arg, stacksOrder);
+      }
     }
     /**
      * @name          _reject
@@ -1153,18 +1176,11 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
+    // catch(...args) {
+    //   super.catch(...args);
+    //   return this._registerCallbackInStack('catch', ...args);
+    // }
 
-  }, {
-    key: "catch",
-    value: function _catch() {
-      for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-        args[_key2] = arguments[_key2];
-      }
-
-      _get(_getPrototypeOf(SPromise.prototype), "catch", this).call(this, ...args);
-
-      return this._registerCallbackInStack('catch', ...args);
-    }
     /**
      * @name                finally
      * @type                Function
@@ -1191,8 +1207,8 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "finally",
     value: function _finally() {
-      for (var _len3 = arguments.length, args = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-        args[_key3] = arguments[_key3];
+      for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        args[_key2] = arguments[_key2];
       }
 
       return this._registerCallbackInStack('finally', ...args);
@@ -1223,8 +1239,8 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "resolved",
     value: function resolved() {
-      for (var _len4 = arguments.length, args = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
-        args[_key4] = arguments[_key4];
+      for (var _len3 = arguments.length, args = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+        args[_key3] = arguments[_key3];
       }
 
       return this._registerCallbackInStack('resolve', ...args);
@@ -1255,8 +1271,8 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "rejected",
     value: function rejected() {
-      for (var _len5 = arguments.length, args = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
-        args[_key5] = arguments[_key5];
+      for (var _len4 = arguments.length, args = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+        args[_key4] = arguments[_key4];
       }
 
       return this._registerCallbackInStack('reject', ...args);
@@ -1287,8 +1303,8 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "canceled",
     value: function canceled() {
-      for (var _len6 = arguments.length, args = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
-        args[_key6] = arguments[_key6];
+      for (var _len5 = arguments.length, args = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
+        args[_key5] = arguments[_key5];
       }
 
       return this._registerCallbackInStack('cancel', ...args);

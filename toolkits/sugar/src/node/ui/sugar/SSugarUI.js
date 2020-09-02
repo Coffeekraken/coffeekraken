@@ -62,38 +62,56 @@ module.exports = class SSugarUi extends __SPromise {
 
     super(null, settings).start();
 
-    // displaying the interface
-    this._createUi();
-
-    console.log('CPOKC');
-
     // load and check each modules
     this._loadModules(__sugarConfig('sugar-ui.modules'));
+
+    // Pipe all the modules "events"
+    Object.keys(this._modulesObjs).forEach((moduleIdx) => {
+      const moduleObj = this._modulesObjs[moduleIdx];
+      __SPromise.pipe(moduleObj.instance, this, {
+        processor: (value, metas) => {
+          if (typeof value === 'object') {
+            value.module = {
+              id: moduleObj.id,
+              name: moduleObj.name,
+              idx: moduleIdx
+            };
+          } else {
+            value = {
+              module: {
+                id: moduleObj.id,
+                name: moduleObj.name,
+                idx: moduleIdx
+              },
+              value
+            };
+          }
+          return value;
+        }
+      });
+    });
   }
 
   /**
-   * @name            _createUi
+   * @name            _modulesReady
    * @type            Function
    * @private
    *
-   * This method simply create the interface and return an object
-   * through which you can access all the UI elements
+   * This method is called once all the modules are flagged as ready
    *
-   * @return      {Object}            An object storing references to all the UI elements
-   *
-   * @since        2.0.0
+   * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _createUi() {
-    const $container = new __SComponent({
-      style: {
-        bg: red
+  _modulesReady() {
+    for (const [key, moduleObj] of Object.entries(this._modulesObjs)) {
+      if (moduleObj.instance.autorun) {
+        try {
+          moduleObj.instance.run();
+        } catch (e) {
+          console.log('CCC');
+        }
       }
-    });
-
-    return {
-      $container
-    };
+    }
   }
 
   /**
@@ -110,6 +128,8 @@ module.exports = class SSugarUi extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _loadModules(modulesObj) {
+    // track how many modules are ready
+    let readyModulesCount = 0;
     // loop on all registered modules
     Object.keys(modulesObj).forEach((moduleIdx) => {
       const moduleObj = modulesObj[moduleIdx];
@@ -141,6 +161,17 @@ module.exports = class SSugarUi extends __SPromise {
           `It seems that the passed class for your module "<yellow>${moduleObj.name}</yellow>" does not extends the sugar "<green>SSugarUiModule</green>" one...`
         );
       }
+      moduleObj.instance = moduleInstance;
+
+      // listen for the "ready" event from the module
+      moduleInstance.on('ready', () => {
+        // update module ready count
+        readyModulesCount++;
+        // when all the modules are loaded, call the _modulesReady method
+        if (readyModulesCount >= Object.keys(modulesObj).length) {
+          this._modulesReady();
+        }
+      });
 
       // add the validated module in the _modulesObjArray property
       this._modulesObjs[moduleIdx] = moduleObj;

@@ -212,15 +212,15 @@ module.exports = (args = {}) => {
               - Root directory  : <yellow>${settings.rootDir}</yellow>
               - URL             : <cyan>http://${settings.hostname}:${settings.port}</cyan>`)
         });
-      }, 1000);
+      }, 200);
     })
     .on('error', (e) => {
       const string = e.toString();
-      throw new __SError(`
-          Something goes wrong with your <yellow>Frontend Server Process</yellow>:
+      promise.reject(`Something goes wrong with your <yellow>Frontend Server Process</yellow>:
 
-          ${string}
-        `);
+        ${string}
+      `);
+      // throw new __SError();
     });
 
   return promise;

@@ -1,4 +1,5 @@
 import __deepMerge from '../object/deepMerge';
+import __parseHtml from '../console/parseHtml';
 
 export default function sugarHeading(settings = {}) {
   settings = __deepMerge(
@@ -29,7 +30,11 @@ export default function sugarHeading(settings = {}) {
     }   |____/ \\__,_|\\__, |\\__,_|_|</yellow> ${version}    `,
     `<yellow>${settings.borders ? '█' : ''}                |___/</yellow>`,
     `<yellow>${settings.borders ? '█' : ''}</yellow>`
-  ].join('\n');
+  ]
+    .map((line) => {
+      return __parseHtml(line).trim();
+    })
+    .join('\n');
 
   return value;
 }

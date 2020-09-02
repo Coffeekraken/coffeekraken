@@ -5,6 +5,12 @@ import __wait from '../time/wait';
 import __toString from '../string/toString';
 import __env from '../core/env';
 
+// var originalCatch = Promise.prototype.catch;
+// Promise.prototype.catch = function () {
+//   console.log('PLOP');
+//   return originalCatch.apply(this, arguments);
+// };
+
 /**
  * @name                  SPromise
  * @namespace           js.promise
@@ -181,7 +187,8 @@ export default class SPromise extends Promise {
     settings = __deepMerge(
       {
         stacks: '*',
-        processor: null
+        processor: null,
+        filter: null
       },
       settings
     );
@@ -192,6 +199,8 @@ export default class SPromise extends Promise {
       return;
     // listen for all on the source promise
     sourceSPromise.on(settings.stacks, (value, metas) => {
+      // check if we have a filter setted
+      if (settings.filter && !settings.filter(value, metas)) return;
       // check if need to process the value
       if (settings.processor) value = settings.processor(value, metas);
       // trigger on the destination promise
@@ -263,6 +272,10 @@ export default class SPromise extends Promise {
       _reject = reject;
     });
 
+    super.catch((e) => {
+      console.log('XXX');
+    });
+
     Object.defineProperty(this, '_masterPromiseResolveFn', {
       writable: true,
       configurable: true,
@@ -331,6 +344,10 @@ export default class SPromise extends Promise {
         );
         this._isExecutorStarted = true;
       }
+    });
+
+    super.catch((e) => {
+      console.error('CA', e);
     });
   }
 
@@ -532,7 +549,12 @@ export default class SPromise extends Promise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   reject(arg, stacksOrder = 'then,reject,finally') {
-    return this._reject(arg, stacksOrder);
+    try {
+      super.reject(arg);
+    } catch (e) {
+      console.log('COCOC');
+      return this._reject(arg, stacksOrder);
+    }
   }
 
   /**
@@ -992,10 +1014,10 @@ export default class SPromise extends Promise {
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  catch(...args) {
-    super.catch(...args);
-    return this._registerCallbackInStack('catch', ...args);
-  }
+  // catch(...args) {
+  //   super.catch(...args);
+  //   return this._registerCallbackInStack('catch', ...args);
+  // }
 
   /**
    * @name                finally

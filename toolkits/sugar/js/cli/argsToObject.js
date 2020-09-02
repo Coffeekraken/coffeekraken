@@ -51,5 +51,5 @@ module.exports = function argsToObject(argsObj, definitionObj, settings) {
     return (0, _parseArgs.default)(argsObj, definitionObj);
   }
 
-  return (0, _completeArgsObject.default)(argsObj, definitionObj, settings);
+  return (0, _completeArgsObject.default)(argsObj || {}, definitionObj, settings);
 };

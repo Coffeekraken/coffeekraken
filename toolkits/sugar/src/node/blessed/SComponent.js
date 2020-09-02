@@ -116,6 +116,8 @@ module.exports = class SComponent extends __blessed.box {
           style: {}
         };
       }
+    } else {
+      settings.container = false;
     }
 
     // extends parent

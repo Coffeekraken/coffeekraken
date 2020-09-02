@@ -41,5 +41,6 @@ module.exports = function argsToObject(argsObj, definitionObj, settings = {}) {
   if (typeof argsObj === 'string') {
     return __parseArgs(argsObj, definitionObj);
   }
-  return __completeArgsObject(argsObj, definitionObj, settings);
+
+  return __completeArgsObject(argsObj || {}, definitionObj, settings);
 };

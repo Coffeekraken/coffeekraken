@@ -93,7 +93,7 @@ module.exports = class SNotification extends __SComponent {
         bg: 'yellow',
         fg: 'black',
         hover: {
-          bg: 'cyan',
+          bg: 'yellow',
           fg: 'black'
         }
       },

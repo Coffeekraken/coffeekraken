@@ -100,6 +100,7 @@ function __handleChildProcessErrors(error) {
   if (error.toString().includes(`Cannot read property 'itop' of null`)) return;
   if (error.instanceId) return;
   // error = error.toString();
+  if (!error) return;
   console.error(__toString(error));
   process.exit(1);
 }

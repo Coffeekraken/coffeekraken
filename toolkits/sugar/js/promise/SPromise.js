@@ -41,10 +41,6 @@ function _possibleConstructorReturn(self, call) { if (call && (typeof call === "
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
-
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
-
 function _wrapNativeSuper(Class) { var _cache = typeof Map === "function" ? new Map() : undefined; _wrapNativeSuper = function _wrapNativeSuper(Class) { if (Class === null || !_isNativeFunction(Class)) return Class; if (typeof Class !== "function") { throw new TypeError("Super expression must either be null or a function"); } if (typeof _cache !== "undefined") { if (_cache.has(Class)) return _cache.get(Class); _cache.set(Class, Wrapper); } function Wrapper() { return _construct(Class, arguments, _getPrototypeOf(this).constructor); } Wrapper.prototype = Object.create(Class.prototype, { constructor: { value: Wrapper, enumerable: false, writable: true, configurable: true } }); return _setPrototypeOf(Wrapper, Class); }; return _wrapNativeSuper(Class); }
 
 function _construct(Parent, args, Class) { if (_isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
@@ -140,48 +136,6 @@ var SPromise = /*#__PURE__*/function (_Promise) {
     key: "pipe",
 
     /**
-     * @name                   _masterPromiseResolveFn
-     * @type                    Promise
-     * @private
-     *
-     * Store the master promise resolve function
-     *
-     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-     */
-    // _masterPromiseResolveFn = null;
-
-    /**
-     * @name                   _masterPromiseRejectFn
-     * @type                    Promise
-     * @private
-     *
-     * Store the master promise reject function
-     *
-     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-     */
-    // _masterPromiseRejectFn = null;
-
-    /**
-     * @name                  _executorFn
-     * @type                  Function
-     *
-     * Store the executor function passed to the constructor
-     *
-     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-     */
-    // _executorFn = null;
-
-    /**
-     * @name                  _isExecutorStarted
-     * @type                  Boolean
-     *
-     * Store the status of the executor function. true if it has been executed, false if not...
-     *
-     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-     */
-    // _isExecutorStarted = null;
-
-    /**
      * @name                  _settings
      * @type                  Object
      * @private
@@ -208,24 +162,6 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      */
 
     /**
-     * @name                  _stacks
-     * @type                  Object
-     * @private
-     *
-     * Store the stacks callbacks
-     *
-     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-     */
-    // _stacks = {
-    //   then: [],
-    //   catch: [],
-    //   resolve: [],
-    //   reject: [],
-    //   finally: [],
-    //   cancel: []
-    // };
-
-    /**
      * @name                  pipe
      * @type                  Function
      * @static
@@ -238,6 +174,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      * @param         {Object}        [settings={}]         An object of settings to configure your pipe process
      * - stacks (*) {String}: Specify which stacks you want to pipe. By default it's all using the "*" character
      * - processor (null) {Function}: Specify a function to apply on the triggered value before triggering it on the dest SPromise. Take as arguments the value itself and the stack name. Need to return a new value
+     * - filter (null) {Function}: Specify a function to filter the "events". It will take as parameter the triggered value and the metas object. You must return true or false depending if you want to pipe the particular event or not
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
@@ -258,7 +195,18 @@ var SPromise = /*#__PURE__*/function (_Promise) {
         // check if we have a filter setted
         if (settings.filter && !settings.filter(value, metas)) return; // check if need to process the value
 
-        if (settings.processor) value = settings.processor(value, metas); // trigger on the destination promise
+        if (settings.processor) {
+          var res = settings.processor(value, metas);
+
+          if (Array.isArray(res) && res.length === 2) {
+            value = res[0];
+            metas = res[1];
+          } else {
+            value = res;
+          } // console.log('PROCESSED', metas);
+
+        } // trigger on the destination promise
+
 
         destSPromise.trigger(metas.stack, value, _objectSpread(_objectSpread({}, metas), {}, {
           level: metas.level + 1
@@ -308,8 +256,6 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      *
      * @param         {Function}          executor          The executor function that will receive the resolve and reject ones...
      * @param         {Object}            [settings={}]     An object of settings for this particular SPromise instance. Here's the available settings:
-     * - safeReject (true) {Boolean}: Specify if you prefere that your promise is "resolved" with an "Error" instance when rejected, or if you prefere the normal throw that does not resolve your promise and block the "await" statusment...
-     * - cancelDefaultReturn (null) {Mixed}: Specify what you want to return by default if you cancel your promise without any value
      *
      * @example       js
      * const promise = new SPromise((resolve, reject, trigger, cancel) => {
@@ -326,7 +272,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }]);
 
   function SPromise(executorFn, settings) {
-    var _thisSuper, _thisSuper2, _this;
+    var _this;
 
     if (settings === void 0) {
       settings = {};
@@ -337,18 +283,20 @@ var SPromise = /*#__PURE__*/function (_Promise) {
     var _resolve, _reject;
 
     _this = _super.call(this, (resolve, reject) => {
-      _resolve = resolve;
-      _reject = reject;
+      _resolve = resolve; // _reject = reject;
     });
 
     _defineProperty(_assertThisInitialized(_this), "_settings", {});
 
     _defineProperty(_assertThisInitialized(_this), "_promiseState", 'pending');
 
-    _get((_thisSuper = _assertThisInitialized(_this), _getPrototypeOf(SPromise.prototype)), "catch", _thisSuper).call(_thisSuper, e => {
-      console.log('XXX');
+    new Promise((resolve, reject) => {
+      _reject = reject; // _resolve = resolve;
+    }).catch(e => {
+      _this.trigger('error', {
+        value: e
+      });
     });
-
     Object.defineProperty(_assertThisInitialized(_this), '_masterPromiseResolveFn', {
       writable: true,
       configurable: true,
@@ -398,24 +346,17 @@ var SPromise = /*#__PURE__*/function (_Promise) {
     // extend settings
 
     _this._settings = (0, _deepMerge.default)({
-      id: (0, _uniqid.default)(),
-      safeReject: false,
-      cancelDefaultReturn: null
+      id: (0, _uniqid.default)()
     }, settings);
     setTimeout(() => {
       if (!_this._executorFn) return;
 
       if (!_this._isExecutorStarted) {
-        _this._executorFn(_this._resolve.bind(_assertThisInitialized(_this)), _this._reject.bind(_assertThisInitialized(_this)), _this.trigger.bind(_assertThisInitialized(_this)), _this._cancel.bind(_assertThisInitialized(_this)));
+        _this._executorFn(_this.resolve.bind(_assertThisInitialized(_this)), _this.reject.bind(_assertThisInitialized(_this)), _this.trigger.bind(_assertThisInitialized(_this)), _this.cancel.bind(_assertThisInitialized(_this)));
 
         _this._isExecutorStarted = true;
       }
     });
-
-    _get((_thisSuper2 = _assertThisInitialized(_this), _getPrototypeOf(SPromise.prototype)), "catch", _thisSuper2).call(_thisSuper2, e => {
-      console.error('CA', e);
-    });
-
     return _this;
   }
   /**
@@ -561,10 +502,39 @@ var SPromise = /*#__PURE__*/function (_Promise) {
 
       if (this._isExecutorStarted || !this._executorFn) return this;
 
-      this._executorFn.apply(this, [this._resolve.bind(this), this._reject.bind(this), this.trigger.bind(this), this._cancel.bind(this)]);
+      this._executorFn.apply(this, [this.resolve.bind(this), this.reject.bind(this), this.trigger.bind(this), this.cancel.bind(this)]);
 
       this._isExecutorStarted = true; // maintain chainability
 
+      return this;
+    }
+    /**
+     * @name          pipe
+     * @type          Function
+     *
+     * This method take an SPromise instance as parameter on which to pipe the
+     * specified stacks using the settings.stacks property.
+     * It is exactly the same as the static ```pipe``` method but for this
+     * particular instance.
+     *
+     * @param       {SPromise}      dest      The destination promise on which to pipe the events of this one
+     * @param       {Object}      [settings={}]    An object ob settings to configure the pipe process:
+     * - stacks (*) {String}: Specify which stacks you want to pipe. By default it's all using the "*" character
+     * - processor (null) {Function}: Specify a function to apply on the triggered value before triggering it on the dest SPromise. Take as arguments the value itself and the stack name. Need to return a new value
+     * - filter (null) {Function}: Specify a function to filter the "events". It will take as parameter the triggered value and the metas object. You must return true or false depending if you want to pipe the particular event or not
+     *
+     * @since       2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+
+  }, {
+    key: "pipe",
+    value: function pipe(dest, settings) {
+      if (settings === void 0) {
+        settings = {};
+      }
+
+      SPromise.pipe(this, dest, settings);
       return this;
     }
     /**
@@ -576,7 +546,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      *
      * @param         {Mixed}         arg       The value that you want to return back from the promise
      * @param       {Array|String}         [stacksOrder='then,resolve,finally']      This specify in which order have to be called the stacks
-     * @return        {Mixed}                   Return the resolve result value passed in each stacks specified in the second parameter
+     * @return        {SPromise}          Return the instance to maintain chainability
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
@@ -588,7 +558,9 @@ var SPromise = /*#__PURE__*/function (_Promise) {
         stacksOrder = 'then,resolve,finally';
       }
 
-      return this._resolve(arg, stacksOrder);
+      this._resolve(arg, stacksOrder);
+
+      return this;
     }
     /**
      * @name          _resolve
@@ -600,6 +572,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      *
      * @param       {Mixed}         arg           The argument that the promise user is sendind through the resolve function
      * @param       {Array|String}         [stacksOrder='then,resolve,finally']      This specify in which order have to be called the stacks
+     * @return        {Promise}                       A simple promise that will be resolved once the promise has been canceled with the cancel stack result as value
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
@@ -638,8 +611,8 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      * This is the "reject" method exposed on the promise itself for convinience
      *
      * @param         {Mixed}         arg       The value that you want to return back from the promise
-     * @param       {Array|String}         [stacksOrder='then,reject,finally']      This specify in which order have to be called the stacks
-     * @return        {Mixed}                   Return the reject result value passed in each stacks specified in the second parameter
+     * @param       {Array|String}         [stacksOrder='catch,reject,finally']      This specify in which order have to be called the stacks
+     * @return        {SPromise}          Return the instance to maintain chainability
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
@@ -648,15 +621,12 @@ var SPromise = /*#__PURE__*/function (_Promise) {
     key: "reject",
     value: function reject(arg, stacksOrder) {
       if (stacksOrder === void 0) {
-        stacksOrder = 'then,reject,finally';
+        stacksOrder = 'catch,reject,finally';
       }
 
-      try {
-        _get(_getPrototypeOf(SPromise.prototype), "reject", this).call(this, arg);
-      } catch (e) {
-        console.log('COCOC');
-        return this._reject(arg, stacksOrder);
-      }
+      this._reject(arg, stacksOrder);
+
+      return this;
     }
     /**
      * @name          _reject
@@ -666,7 +636,9 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      *
      * This is the method that will be called by the promise executor passed reject function
      *
-     * @param       {Mixed}         arg           The argument that the promise user is sendind through the reject function
+     * @param         {Mixed}         arg       The value that you want to return back from the promise
+     * @param       {Array|String}         [stacksOrder='catch,reject,finally']      This specify in which order have to be called the stacks
+     * @return        {Promise}                       A simple promise that will be resolved once the promise has been canceled with the cancel stack result as value
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
@@ -685,11 +657,8 @@ var SPromise = /*#__PURE__*/function (_Promise) {
 
         var stacksResult = yield this._triggerStacks(stacksOrder, arg); // resolve the master promise
 
-        if (this._settings.safeReject) {
-          this._masterPromiseResolveFn(stacksResult || this._settings.cancelDefaultReturn);
-        } else {
-          this._masterPromiseRejectFn(stacksResult);
-        } // return the stack result
+        this._masterPromiseRejectFn(arg); // this._masterPromiseResolveFn(stacksResult); // release the promise
+        // return the stack result
 
 
         return stacksResult;
@@ -710,7 +679,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      *
      * @param         {Mixed}         arg       The value that you want to return back from the promise
      * @param       {Array|String}         [stacksOrder='cancel,finally']      This specify in which order have to be called the stacks
-     * @return        {Mixed}                   Return the cancel result value passed in each stacks specified in the second parameter
+     * @return        {SPromise}            Return the instance to maintain chainability;
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
@@ -722,7 +691,9 @@ var SPromise = /*#__PURE__*/function (_Promise) {
         stacksOrder = 'cancel,finally';
       }
 
-      return this._cancel(arg, stacksOrder);
+      this._cancel(arg, stacksOrder);
+
+      return this;
     }
     /**
      * @name            _cancel
@@ -733,6 +704,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      * Cancel the promise execution, destroy the Promise and resolve it with the passed value without calling any callbacks
      *
      * @param         {Mixed}           arg           The argument you want to pass to the cancel callbacks
+     * @param       {Array|String}         [stacksOrder='cancel,finally']      This specify in which order have to be called the stacks
      * @return        {Promise}                       A simple promise that will be resolved once the promise has been canceled with the cancel stack result as value
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
@@ -743,7 +715,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
     value: function () {
       var _cancel2 = _asyncToGenerator(function* (arg, stacksOrder) {
         if (stacksOrder === void 0) {
-          stacksOrder = 'cancel';
+          stacksOrder = 'cancel,finally';
         }
 
         if (this._isDestroyed) return; // update the status
@@ -796,8 +768,8 @@ var SPromise = /*#__PURE__*/function (_Promise) {
           metas = {};
         }
 
-        if (this._isDestroyed) return;
-        if (what.includes('log')) yield (0, _wait.default)(0); // triger the passed stacks
+        if (this._isDestroyed) return; // if (what.includes('log')) await __wait(0);
+        // triger the passed stacks
 
         return this._triggerStacks(what, arg, metas);
       });
@@ -1143,12 +1115,15 @@ var SPromise = /*#__PURE__*/function (_Promise) {
         args[_key] = arguments[_key];
       }
 
-      if (args.length === 2 && typeof args[0] === 'function' && typeof args[1] === 'function') {
-        this._masterPromiseResolveFn = args[0];
-        this._masterPromiseRejectFn = args[1];
-        return;
-      }
-
+      // if (
+      //   args.length === 2 &&
+      //   typeof args[0] === 'function' &&
+      //   typeof args[1] === 'function'
+      // ) {
+      //   this._masterPromiseResolveFn = args[0];
+      //   this._masterPromiseRejectFn = args[1];
+      //   return;
+      // }
       return this._registerCallbackInStack('then', ...args);
     }
     /**
@@ -1176,11 +1151,17 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    // catch(...args) {
-    //   super.catch(...args);
-    //   return this._registerCallbackInStack('catch', ...args);
-    // }
 
+  }, {
+    key: "catch",
+    value: function _catch() {
+      for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        args[_key2] = arguments[_key2];
+      }
+
+      // super.catch(...args);
+      return this._registerCallbackInStack('catch', ...args);
+    }
     /**
      * @name                finally
      * @type                Function
@@ -1207,8 +1188,8 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "finally",
     value: function _finally() {
-      for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-        args[_key2] = arguments[_key2];
+      for (var _len3 = arguments.length, args = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+        args[_key3] = arguments[_key3];
       }
 
       return this._registerCallbackInStack('finally', ...args);
@@ -1239,8 +1220,8 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "resolved",
     value: function resolved() {
-      for (var _len3 = arguments.length, args = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-        args[_key3] = arguments[_key3];
+      for (var _len4 = arguments.length, args = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+        args[_key4] = arguments[_key4];
       }
 
       return this._registerCallbackInStack('resolve', ...args);
@@ -1271,8 +1252,8 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "rejected",
     value: function rejected() {
-      for (var _len4 = arguments.length, args = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
-        args[_key4] = arguments[_key4];
+      for (var _len5 = arguments.length, args = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
+        args[_key5] = arguments[_key5];
       }
 
       return this._registerCallbackInStack('reject', ...args);
@@ -1303,8 +1284,8 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "canceled",
     value: function canceled() {
-      for (var _len5 = arguments.length, args = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
-        args[_key5] = arguments[_key5];
+      for (var _len6 = arguments.length, args = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
+        args[_key6] = arguments[_key6];
       }
 
       return this._registerCallbackInStack('cancel', ...args);
@@ -1330,13 +1311,11 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
+    // cancel(...args) {
+    //   if (this._isDestroyed) return;
+    //   return this._cancel(...args);
+    // }
 
-  }, {
-    key: "cancel",
-    value: function cancel() {
-      if (this._isDestroyed) return;
-      return this._cancel(...arguments);
-    }
     /**
      * @name                      _destroy
      * @type                      Function

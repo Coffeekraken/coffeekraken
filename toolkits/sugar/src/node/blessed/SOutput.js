@@ -1,3 +1,4 @@
+const __packageRoot = require('../path/packageRoot');
 const __deepMerge = require('../object/deepMerge');
 const __blessed = require('blessed');
 const __color = require('../color/color');
@@ -99,7 +100,8 @@ module.exports = class SOutput extends __SComponent {
       {
         filter: null,
         // maxItems: -1,
-        maxItemsByGroup: 1
+        maxItemsByGroup: 1,
+        stacks: ['log', '*.log', 'warning', '*.warning', 'error', '*.error']
       },
       settings
     );
@@ -145,14 +147,18 @@ module.exports = class SOutput extends __SComponent {
           value: `#success The process has been finished <green>successfully</green>`
         });
       })
-      .on('error', (error) => {
-        // this.log({
-        //   error: true,
-        //   value: error.error || error
-        // });
-      })
-      .on('log', (data) => {
-        this.log(data);
+
+      // .on('error', (error) => {
+      //   this.log({
+      //     error: true,
+      //     ...error
+      //   });
+      // })
+      .on(this._settings.stacks.join(','), (data, metas) => {
+        this.log({
+          [metas.stack.split('.').pop()]: true,
+          ...data
+        });
       });
   }
 
@@ -321,6 +327,7 @@ module.exports = class SOutput extends __SComponent {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
+  _currentModuleId = null;
   log(...args) {
     // await __wait(100);
 
@@ -368,14 +375,20 @@ module.exports = class SOutput extends __SComponent {
       if (typeof logObj.value !== 'string')
         logObj.value = __toString(logObj.value);
 
+      // replace the package root in the log
+      // logObj.value = logObj.value.split(`${__packageRoot()}/`).join('');
+
       if (logObj.module && typeof logObj.module === 'object') {
-        this._content.push({
-          value: __parseMarkdown(
-            `<bgPrimary><black> ${logObj.module.name || logObj.module.id} (${
-              logObj.module.id || logObj.module.idx
-            }) </black></bgPrimary>`
-          )
-        });
+        if (logObj.module.id && logObj.module.id !== this._currentModuleId) {
+          this._currentModuleId = logObj.module.id;
+          this._content.push({
+            value: __parseMarkdown(
+              `<bgPrimary><black> ${logObj.module.name || logObj.module.id} (${
+                logObj.module.id || logObj.module.idx
+              }) </black></bgPrimary>`
+            )
+          });
+        }
       }
 
       if (logObj.type && logObj.type === 'header') {
@@ -485,6 +498,13 @@ module.exports = class SOutput extends __SComponent {
           item.$box.getScrollHeight() + (item.mt || 0) + (item.mb || 1);
       } else if (item.value && typeof item.value === 'string' && item.error) {
         const $box = this._errorTextBox(item.value);
+        $box.top = this._lastY + item.mt;
+        this.$logBoxChilds.push($box);
+        this.$logBox.append($box);
+        item.$box = $box;
+        this._lastY += $box.getScrollHeight() + item.mt + item.mb;
+      } else if (item.value && typeof item.value === 'string' && item.warning) {
+        const $box = this._warningTextBox(item.value);
         $box.top = this._lastY + item.mt;
         this.$logBoxChilds.push($box);
         this.$logBox.append($box);
@@ -639,6 +659,60 @@ module.exports = class SOutput extends __SComponent {
       bottom: 0,
       style: {
         bg: __color('terminal.red').toString()
+      }
+    });
+    $box.on('attach', () => {
+      setTimeout(() => {
+        $box.height = $box.getScrollHeight();
+        $line.height = $box.getScrollHeight();
+        $box.append($line);
+      });
+    });
+    return $box;
+  }
+
+  /**
+   * @name          _warningTextBox
+   * @type          Function
+   * @private
+   *
+   * This method take a text as input and return a blessed box
+   * representing this text to display
+   *
+   * @param       {String}        text        The text to display
+   * @return      {Blessed.box}               A blessed box instance
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _warningTextBox(text) {
+    const $box = __blessed.box({
+      width:
+        this.$logBox.width -
+        this.$logBox.padding.left -
+        this.$logBox.padding.right,
+      height: 'shrink',
+      style: {
+        fg: 'white'
+      },
+      scrollable: true,
+      padding: {
+        top: 0,
+        left: 4,
+        right: 0,
+        bottom: 0
+      },
+      content: __parseMarkdown(text)
+    });
+
+    const $line = __blessed.box({
+      width: 1,
+      height: 1,
+      top: 0,
+      left: $box.padding.left * -1,
+      bottom: 0,
+      style: {
+        bg: __color('terminal.yellow').toString()
       }
     });
     $box.on('attach', () => {

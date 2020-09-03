@@ -79,48 +79,6 @@ import __env from '../core/env';
  */
 export default class SPromise extends Promise {
   /**
-   * @name                   _masterPromiseResolveFn
-   * @type                    Promise
-   * @private
-   *
-   * Store the master promise resolve function
-   *
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  // _masterPromiseResolveFn = null;
-
-  /**
-   * @name                   _masterPromiseRejectFn
-   * @type                    Promise
-   * @private
-   *
-   * Store the master promise reject function
-   *
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  // _masterPromiseRejectFn = null;
-
-  /**
-   * @name                  _executorFn
-   * @type                  Function
-   *
-   * Store the executor function passed to the constructor
-   *
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  // _executorFn = null;
-
-  /**
-   * @name                  _isExecutorStarted
-   * @type                  Boolean
-   *
-   * Store the status of the executor function. true if it has been executed, false if not...
-   *
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  // _isExecutorStarted = null;
-
-  /**
    * @name                  _settings
    * @type                  Object
    * @private
@@ -149,24 +107,6 @@ export default class SPromise extends Promise {
   _promiseState = 'pending';
 
   /**
-   * @name                  _stacks
-   * @type                  Object
-   * @private
-   *
-   * Store the stacks callbacks
-   *
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  // _stacks = {
-  //   then: [],
-  //   catch: [],
-  //   resolve: [],
-  //   reject: [],
-  //   finally: [],
-  //   cancel: []
-  // };
-
-  /**
    * @name                  pipe
    * @type                  Function
    * @static
@@ -179,6 +119,7 @@ export default class SPromise extends Promise {
    * @param         {Object}        [settings={}]         An object of settings to configure your pipe process
    * - stacks (*) {String}: Specify which stacks you want to pipe. By default it's all using the "*" character
    * - processor (null) {Function}: Specify a function to apply on the triggered value before triggering it on the dest SPromise. Take as arguments the value itself and the stack name. Need to return a new value
+   * - filter (null) {Function}: Specify a function to filter the "events". It will take as parameter the triggered value and the metas object. You must return true or false depending if you want to pipe the particular event or not
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
@@ -202,7 +143,16 @@ export default class SPromise extends Promise {
       // check if we have a filter setted
       if (settings.filter && !settings.filter(value, metas)) return;
       // check if need to process the value
-      if (settings.processor) value = settings.processor(value, metas);
+      if (settings.processor) {
+        const res = settings.processor(value, metas);
+        if (Array.isArray(res) && res.length === 2) {
+          value = res[0];
+          metas = res[1];
+        } else {
+          value = res;
+        }
+        // console.log('PROCESSED', metas);
+      }
       // trigger on the destination promise
       destSPromise.trigger(metas.stack, value, {
         ...metas,
@@ -251,8 +201,6 @@ export default class SPromise extends Promise {
    *
    * @param         {Function}          executor          The executor function that will receive the resolve and reject ones...
    * @param         {Object}            [settings={}]     An object of settings for this particular SPromise instance. Here's the available settings:
-   * - safeReject (true) {Boolean}: Specify if you prefere that your promise is "resolved" with an "Error" instance when rejected, or if you prefere the normal throw that does not resolve your promise and block the "await" statusment...
-   * - cancelDefaultReturn (null) {Mixed}: Specify what you want to return by default if you cancel your promise without any value
    *
    * @example       js
    * const promise = new SPromise((resolve, reject, trigger, cancel) => {
@@ -269,11 +217,16 @@ export default class SPromise extends Promise {
     let _resolve, _reject;
     super((resolve, reject) => {
       _resolve = resolve;
-      _reject = reject;
+      // _reject = reject;
     });
 
-    super.catch((e) => {
-      console.log('XXX');
+    new Promise((resolve, reject) => {
+      _reject = reject;
+      // _resolve = resolve;
+    }).catch((e) => {
+      this.trigger('error', {
+        value: e
+      });
     });
 
     Object.defineProperty(this, '_masterPromiseResolveFn', {
@@ -327,9 +280,7 @@ export default class SPromise extends Promise {
     // extend settings
     this._settings = __deepMerge(
       {
-        id: __uniqid(),
-        safeReject: false,
-        cancelDefaultReturn: null
+        id: __uniqid()
       },
       settings
     );
@@ -337,17 +288,13 @@ export default class SPromise extends Promise {
       if (!this._executorFn) return;
       if (!this._isExecutorStarted) {
         this._executorFn(
-          this._resolve.bind(this),
-          this._reject.bind(this),
+          this.resolve.bind(this),
+          this.reject.bind(this),
           this.trigger.bind(this),
-          this._cancel.bind(this)
+          this.cancel.bind(this)
         );
         this._isExecutorStarted = true;
       }
-    });
-
-    super.catch((e) => {
-      console.error('CA', e);
     });
   }
 
@@ -482,14 +429,37 @@ export default class SPromise extends Promise {
     }
     if (this._isExecutorStarted || !this._executorFn) return this;
     this._executorFn.apply(this, [
-      this._resolve.bind(this),
-      this._reject.bind(this),
+      this.resolve.bind(this),
+      this.reject.bind(this),
       this.trigger.bind(this),
-      this._cancel.bind(this)
+      this.cancel.bind(this)
     ]);
     this._isExecutorStarted = true;
 
     // maintain chainability
+    return this;
+  }
+
+  /**
+   * @name          pipe
+   * @type          Function
+   *
+   * This method take an SPromise instance as parameter on which to pipe the
+   * specified stacks using the settings.stacks property.
+   * It is exactly the same as the static ```pipe``` method but for this
+   * particular instance.
+   *
+   * @param       {SPromise}      dest      The destination promise on which to pipe the events of this one
+   * @param       {Object}      [settings={}]    An object ob settings to configure the pipe process:
+   * - stacks (*) {String}: Specify which stacks you want to pipe. By default it's all using the "*" character
+   * - processor (null) {Function}: Specify a function to apply on the triggered value before triggering it on the dest SPromise. Take as arguments the value itself and the stack name. Need to return a new value
+   * - filter (null) {Function}: Specify a function to filter the "events". It will take as parameter the triggered value and the metas object. You must return true or false depending if you want to pipe the particular event or not
+   *
+   * @since       2.0.0
+   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   */
+  pipe(dest, settings = {}) {
+    SPromise.pipe(this, dest, settings);
     return this;
   }
 
@@ -502,12 +472,13 @@ export default class SPromise extends Promise {
    *
    * @param         {Mixed}         arg       The value that you want to return back from the promise
    * @param       {Array|String}         [stacksOrder='then,resolve,finally']      This specify in which order have to be called the stacks
-   * @return        {Mixed}                   Return the resolve result value passed in each stacks specified in the second parameter
+   * @return        {SPromise}          Return the instance to maintain chainability
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   resolve(arg, stacksOrder = 'then,resolve,finally') {
-    return this._resolve(arg, stacksOrder);
+    this._resolve(arg, stacksOrder);
+    return this;
   }
 
   /**
@@ -520,6 +491,7 @@ export default class SPromise extends Promise {
    *
    * @param       {Mixed}         arg           The argument that the promise user is sendind through the resolve function
    * @param       {Array|String}         [stacksOrder='then,resolve,finally']      This specify in which order have to be called the stacks
+   * @return        {Promise}                       A simple promise that will be resolved once the promise has been canceled with the cancel stack result as value
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
@@ -543,18 +515,14 @@ export default class SPromise extends Promise {
    * This is the "reject" method exposed on the promise itself for convinience
    *
    * @param         {Mixed}         arg       The value that you want to return back from the promise
-   * @param       {Array|String}         [stacksOrder='then,reject,finally']      This specify in which order have to be called the stacks
-   * @return        {Mixed}                   Return the reject result value passed in each stacks specified in the second parameter
+   * @param       {Array|String}         [stacksOrder='catch,reject,finally']      This specify in which order have to be called the stacks
+   * @return        {SPromise}          Return the instance to maintain chainability
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  reject(arg, stacksOrder = 'then,reject,finally') {
-    try {
-      super.reject(arg);
-    } catch (e) {
-      console.log('COCOC');
-      return this._reject(arg, stacksOrder);
-    }
+  reject(arg, stacksOrder = 'catch,reject,finally') {
+    this._reject(arg, stacksOrder);
+    return this;
   }
 
   /**
@@ -565,7 +533,9 @@ export default class SPromise extends Promise {
    *
    * This is the method that will be called by the promise executor passed reject function
    *
-   * @param       {Mixed}         arg           The argument that the promise user is sendind through the reject function
+   * @param         {Mixed}         arg       The value that you want to return back from the promise
+   * @param       {Array|String}         [stacksOrder='catch,reject,finally']      This specify in which order have to be called the stacks
+   * @return        {Promise}                       A simple promise that will be resolved once the promise has been canceled with the cancel stack result as value
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
@@ -576,13 +546,8 @@ export default class SPromise extends Promise {
     // exec the wanted stacks
     const stacksResult = await this._triggerStacks(stacksOrder, arg);
     // resolve the master promise
-    if (this._settings.safeReject) {
-      this._masterPromiseResolveFn(
-        stacksResult || this._settings.cancelDefaultReturn
-      );
-    } else {
-      this._masterPromiseRejectFn(stacksResult);
-    }
+    this._masterPromiseRejectFn(arg);
+    // this._masterPromiseResolveFn(stacksResult); // release the promise
     // return the stack result
     return stacksResult;
   }
@@ -596,12 +561,13 @@ export default class SPromise extends Promise {
    *
    * @param         {Mixed}         arg       The value that you want to return back from the promise
    * @param       {Array|String}         [stacksOrder='cancel,finally']      This specify in which order have to be called the stacks
-   * @return        {Mixed}                   Return the cancel result value passed in each stacks specified in the second parameter
+   * @return        {SPromise}            Return the instance to maintain chainability;
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   cancel(arg, stacksOrder = 'cancel,finally') {
-    return this._cancel(arg, stacksOrder);
+    this._cancel(arg, stacksOrder);
+    return this;
   }
 
   /**
@@ -613,11 +579,12 @@ export default class SPromise extends Promise {
    * Cancel the promise execution, destroy the Promise and resolve it with the passed value without calling any callbacks
    *
    * @param         {Mixed}           arg           The argument you want to pass to the cancel callbacks
+   * @param       {Array|String}         [stacksOrder='cancel,finally']      This specify in which order have to be called the stacks
    * @return        {Promise}                       A simple promise that will be resolved once the promise has been canceled with the cancel stack result as value
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  async _cancel(arg, stacksOrder = 'cancel') {
+  async _cancel(arg, stacksOrder = 'cancel,finally') {
     if (this._isDestroyed) return;
     // update the status
     this._promiseState = 'canceled';
@@ -655,7 +622,7 @@ export default class SPromise extends Promise {
   async trigger(what, arg, metas = {}) {
     if (this._isDestroyed) return;
 
-    if (what.includes('log')) await __wait(0);
+    // if (what.includes('log')) await __wait(0);
 
     // triger the passed stacks
     return this._triggerStacks(what, arg, metas);
@@ -977,15 +944,15 @@ export default class SPromise extends Promise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   then(...args) {
-    if (
-      args.length === 2 &&
-      typeof args[0] === 'function' &&
-      typeof args[1] === 'function'
-    ) {
-      this._masterPromiseResolveFn = args[0];
-      this._masterPromiseRejectFn = args[1];
-      return;
-    }
+    // if (
+    //   args.length === 2 &&
+    //   typeof args[0] === 'function' &&
+    //   typeof args[1] === 'function'
+    // ) {
+    //   this._masterPromiseResolveFn = args[0];
+    //   this._masterPromiseRejectFn = args[1];
+    //   return;
+    // }
     return this._registerCallbackInStack('then', ...args);
   }
 
@@ -1014,10 +981,10 @@ export default class SPromise extends Promise {
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  // catch(...args) {
-  //   super.catch(...args);
-  //   return this._registerCallbackInStack('catch', ...args);
-  // }
+  catch(...args) {
+    // super.catch(...args);
+    return this._registerCallbackInStack('catch', ...args);
+  }
 
   /**
    * @name                finally
@@ -1144,10 +1111,10 @@ export default class SPromise extends Promise {
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  cancel(...args) {
-    if (this._isDestroyed) return;
-    return this._cancel(...args);
-  }
+  // cancel(...args) {
+  //   if (this._isDestroyed) return;
+  //   return this._cancel(...args);
+  // }
 
   /**
    * @name                      _destroy

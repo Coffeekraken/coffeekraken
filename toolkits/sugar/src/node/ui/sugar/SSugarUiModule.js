@@ -1,5 +1,7 @@
 const __SPromise = require('../../promise/SPromise');
 const __SSugarUi = require('./SSugarUI');
+const __SError = require('../../error/SError');
+const __toString = require('../../string/toString');
 
 /**
  * @name            SSugarUiModule
@@ -69,9 +71,6 @@ module.exports = class SSugarUiModule extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   get autorun() {
-    if (this._settings.autorun) {
-      console.log('COPCOCOCOCOC');
-    }
     return this._settings.autorun;
   }
 
@@ -91,10 +90,6 @@ module.exports = class SSugarUiModule extends __SPromise {
       autorun: false,
       ...settings
     }).start();
-
-    this.trigger('log', {
-      value: 'WELCOME'
-    });
   }
 
   /**
@@ -110,7 +105,47 @@ module.exports = class SSugarUiModule extends __SPromise {
   ready() {
     setTimeout(() => {
       this.state = 'ready';
-      this.trigger('ready');
+
+      setTimeout(() => {
+        if (this.state === 'error') {
+          this.trigger('warning', {
+            value: `The module <red>${
+              this._settings.name || this._settings.id
+            }</red> cannot start correctly because of an error...`
+          });
+          return;
+        }
+
+        this.trigger('log', {
+          value: `<yellow>${
+            this._settings.name || this._settings.id
+          }</yellow> module is <green>ready</green>`
+        });
+      });
+    });
+  }
+
+  /**
+   * @name          error
+   * @type          Function
+   *
+   * This method simply notify the main SugarUi class that this module
+   * has an error
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  error() {
+    setTimeout(() => {
+      this.state = 'error';
+
+      setTimeout(() => {
+        this.trigger('log', {
+          value: `<yellow>${
+            this._settings.name || this._settings.id
+          }</yellow> module is in <red>error</red> state`
+        });
+      });
     });
   }
 
@@ -136,6 +171,25 @@ module.exports = class SSugarUiModule extends __SPromise {
         if (value.type && value.type === 'header') return false;
         return true;
       }
+    });
+
+    // update state
+    this.state = 'running';
+
+    // catch errors
+    runningProcess.on('error', (error) => {
+      // update the state
+      this.state = 'error';
+    });
+
+    // log
+    setTimeout(() => {
+      if (this.state === 'error') return;
+      this.trigger('log', {
+        value: `Starting up the module <yellow>${
+          this._settings.name || this._settings.id
+        }</yellow>...`
+      });
     });
 
     // return the running process just in case

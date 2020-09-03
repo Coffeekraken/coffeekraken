@@ -70,7 +70,73 @@ module.exports = {
    */
   viewsDir: `${__packageRoot(process.cwd())}/views`,
 
+  middlewares: {
+    frontspec: {
+      path: `${__dirname}/../src/node/server/frontend/middleware/frontspecMiddleware`,
+      settings: {}
+    },
+    env: {
+      path: `${__dirname}/../src/node/server/frontend/middleware/envMiddleware`,
+      settings: {}
+    },
+    packageJson: {
+      path: `${__dirname}/../src/node/server/frontend/middleware/packageJsonMiddleware`,
+      settings: {}
+    }
+  },
+
   handlers: {
+    /**
+     * @name            index
+     * @namespace       config.frontend.handlers
+     * @type            Object
+     *
+     * Store all the "index" configuration access like the slug, the title, etc...
+     *
+     * @since         2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    index: {
+      /**
+       * @name          slug
+       * @namespace     config.frontend.handlers.index
+       * @type          String
+       * @default       /index
+       *
+       * Specify the url slug to use for this "section"
+       *
+       * @since         2.0.0
+       * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      slug: '/',
+
+      /**
+       * @name          title
+       * @namespace     config.frontent.pages.index
+       * @type          String
+       * @default       index | [title]
+       *
+       * Specify the page title wanted. Accessible tokens:
+       * - [title]: Name of the view
+       *
+       * @since       2.0.0
+       * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      title: 'Welcome | [title]',
+
+      /**
+       * @name            handler
+       * @namespace       config.frontend.handlers.index
+       * @type            Function
+       *
+       * Specify the handler function that will take care of responding to this "section"
+       *
+       * @since         2.0.0
+       * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      handler: `${__dirname}/../src/node/server/frontend/handlers/index`
+    },
+
     /**
      * @name            views
      * @namespace       config.frontend.handlers

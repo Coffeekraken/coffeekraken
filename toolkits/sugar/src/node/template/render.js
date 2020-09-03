@@ -76,12 +76,14 @@ module.exports = function render(viewPath, data = null, settings = {}) {
           const filename = __getFilename(filesArray[fileIdx]);
           const ext = filename.split('.').slice(1).join('.');
           if (viewName === filename.replace(`.${ext}`, '')) {
+            let path = `${folderPath.replace(/\/$/, '')}/${viewName}.${ext}`;
+            if (path.slice(0, 1) === '/') path = path.slice(1);
             viewObj = {
               rootDir: dir,
               folder: folderPath.replace(/\/$/, ''),
               view: viewName,
               extension: ext,
-              path: `${folderPath.replace(/\/$/, '')}/${viewName}.${ext}`
+              path
             };
             break;
           }

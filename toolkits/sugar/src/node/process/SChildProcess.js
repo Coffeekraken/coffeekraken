@@ -327,14 +327,14 @@ class SChildProcess extends __SProcess {
       } else if (this._runningProcess.state === 'success') {
         resolveOrReject('resolve', {}, code, signal);
       } else if (this._runningProcess.state === 'error') {
-        resolveOrReject(
-          'reject',
-          {
-            error: this._runningProcess.stderr.join('\n')
-          },
-          code,
-          signal
-        );
+        // resolveOrReject(
+        //   'reject',
+        //   {
+        //     error: this._runningProcess.stderr.join('\n')
+        //   },
+        //   code,
+        //   signal
+        // );
       }
 
       // reset isKilling boolean

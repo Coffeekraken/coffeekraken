@@ -6,6 +6,7 @@ const __isClass = require('../../is/class');
 const __SError = require('../../error/SError');
 const __SSugarUiModule = require('./SSugarUiModule');
 const __SComponent = require('../../blessed/SComponent');
+const SSugarUiModule = require('./SSugarUiModule');
 
 /**
  * @name            SSugarUi
@@ -43,6 +44,60 @@ module.exports = class SSugarUi extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _modulesObjs = {};
+
+  /**
+   * @name              _modulesInError
+   * @type              Array<SSugarUiModule>
+   * @private
+   *
+   * Store all the modules that are in error
+   *
+   * @since         2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _modulesInError = [];
+
+  /**
+   * @name          state
+   * @type          String
+   * @values        loading,ready,running,error
+   * @default       loading
+   *
+   * Store the module state
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _state = 'loading';
+  get state() {
+    return this._state;
+  }
+  set state(value) {
+    this._setState(value);
+  }
+  _setState(value) {
+    if (['loading', 'ready', 'error'].indexOf(value) === -1) {
+      throw new __SError(
+        `Sorry but the "<yellow>state</yellow>" property setted to "<magenta>${__toString(
+          value
+        )}</magenta>" of your "<cyan>${
+          this.constructor.name
+        }</cyan>" class can contain only one of these values: ${[
+          'loading',
+          'ready',
+          'error'
+        ]
+          .map((i) => {
+            return `"<green>${i}</green>"`;
+          })
+          .join(', ')}`
+      );
+    }
+
+    // trigger an event
+    this.trigger('state', value);
+    this._state = value;
+  }
 
   /**
    * @name              constructor
@@ -86,7 +141,11 @@ module.exports = class SSugarUi extends __SPromise {
               value
             };
           }
-          return value;
+          metas.stack = `module.${metas.stack}`;
+
+          // console.log(metas);
+
+          return [value, metas];
         }
       });
     });
@@ -105,13 +164,24 @@ module.exports = class SSugarUi extends __SPromise {
   _modulesReady() {
     for (const [key, moduleObj] of Object.entries(this._modulesObjs)) {
       if (moduleObj.instance.autorun) {
-        try {
-          moduleObj.instance.run();
-        } catch (e) {
-          console.log('CCC');
-        }
+        moduleObj.instance.run();
       }
     }
+    this.state = 'ready';
+  }
+
+  /**
+   * @name            _modulesError
+   * @type            Function
+   * @private
+   *
+   * This method is called once a module is flagged as in error
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _modulesError() {
+    this.state = 'error';
   }
 
   /**
@@ -133,6 +203,9 @@ module.exports = class SSugarUi extends __SPromise {
     // loop on all registered modules
     Object.keys(modulesObj).forEach((moduleIdx) => {
       const moduleObj = modulesObj[moduleIdx];
+
+      // stop here if a module has error...
+      if (this._modulesInError.length) return;
 
       if (moduleObj.module && moduleObj.module.slice(-3) !== '.js') {
         moduleObj.module += '.js';
@@ -163,13 +236,19 @@ module.exports = class SSugarUi extends __SPromise {
       }
       moduleObj.instance = moduleInstance;
 
-      // listen for the "ready" event from the module
-      moduleInstance.on('ready', () => {
-        // update module ready count
-        readyModulesCount++;
-        // when all the modules are loaded, call the _modulesReady method
-        if (readyModulesCount >= Object.keys(modulesObj).length) {
-          this._modulesReady();
+      moduleInstance.on('state', (state, metas) => {
+        if (state === 'ready') {
+          if (this._modulesInError.indexOf(moduleObj) !== -1) return;
+          // update module ready count
+          readyModulesCount++;
+          // when all the modules are loaded, call the _modulesReady method
+          if (readyModulesCount >= Object.keys(modulesObj).length) {
+            this._modulesReady();
+          }
+        } else if (state === 'error') {
+          // add the module in the error modules stack
+          this._modulesInError.push(moduleObj);
+          this._modulesError();
         }
       });
 

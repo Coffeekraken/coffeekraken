@@ -9,6 +9,7 @@ const __SOutput = require('../../blessed/SOutput');
 const __color = require('../../color/color');
 const __hotkey = require('../../keyboard/hotkey');
 const __SNotification = require('../../blessed/notification/SNotification');
+const __ora = require('ora');
 
 /**
  * @name                SSugarUiOutput
@@ -54,11 +55,19 @@ module.exports = class SSugarUiOutput extends __SComponent {
       }
     });
 
-    source.on('error', (e) => {
-      console.log(e.module);
+    this._modulesReady = false;
+    source.on('state', (state) => {
+      if (state === 'ready') {
+        this._modulesReady = true;
+      }
+    });
+
+    source.on('module.error', (e) => {
+      let msg = e.value;
+      if (msg.length > 36) msg = msg.slice(0, 33) + '...';
       const $notification2 = new __SNotification(
-        'Error',
-        'this is sooooooo cool',
+        e.module.name || e.module.id,
+        msg,
         {
           bg: 'red',
           onClick: () => {
@@ -73,19 +82,6 @@ module.exports = class SSugarUiOutput extends __SComponent {
     });
 
     this.append(this.$welcome);
-
-    const $notification = new __SNotification(
-      'hello',
-      'this is sooooooo cool',
-      {
-        timeout: 2000,
-        onClick: () => {
-          console.log('CLICKD?)');
-        }
-      }
-    );
-
-    this.append($notification);
   }
 
   /**
@@ -134,29 +130,41 @@ module.exports = class SSugarUiOutput extends __SComponent {
       style: {}
     });
 
-    let text = [
-      `WebUI started at`,
-      `<bgYellow><black> http://${serverSettings.hostname}:${serverSettings.port} </black></bgYellow>`,
-      '',
-      `Console <magenta>(c)</magenta>`,
-      `<cyan>${Object.keys(initialParams.modules).length}</cyan> module${
-        Object.keys(initialParams.modules).length > 1 ? 's' : ''
-      } loaded <magenta>(m)</magenta>`
-    ];
-    let larger = 0;
-    text = text
-      .map((t) => {
-        t = __parseHtml(t);
-        const length = __countLine(t);
-        if (length > larger) larger = length;
-        return t;
-      })
-      .map((line) => {
-        line = ' '.repeat(Math.round((larger - __countLine(line)) / 2)) + line;
-        return line;
-      });
+    const spinner = __ora('Loading');
 
-    $metasBox.setContent(text.join('\n'));
+    const updateContent = () => {
+      let text = [spinner.frame()];
+      if (this._modulesReady) {
+        text = [
+          `WebUI started at`,
+          `<bgYellow><black> http://${serverSettings.hostname}:${serverSettings.port} </black></bgYellow>`,
+          '',
+          `Console <magenta>(c)</magenta>`,
+          `<cyan>${Object.keys(initialParams.modules).length}</cyan> module${
+            Object.keys(initialParams.modules).length > 1 ? 's' : ''
+          } loaded <magenta>(m)</magenta>`
+        ];
+      }
+      let larger = 0;
+      text = text
+        .map((t) => {
+          t = __parseHtml(t);
+          const length = __countLine(t);
+          if (length > larger) larger = length;
+          return t;
+        })
+        .map((line) => {
+          line =
+            ' '.repeat(Math.round((larger - __countLine(line)) / 2)) + line;
+          return line;
+        });
+
+      $metasBox.setContent(text.join('\n'));
+      $metasBox.screen.render();
+    };
+    setInterval(() => {
+      updateContent();
+    }, 10);
 
     $centeredBox.append($logo);
     $centeredBox.append($metasBox);

@@ -4,6 +4,7 @@ const __deepMerge = require('../object/deepMerge');
 const __sugarConfig = require('../config/sugar');
 const __fs = require('fs');
 const __path = require('path');
+const __SPromise = require('../promise/SPromise');
 
 /**
  * @name                      bladePhp
@@ -43,16 +44,16 @@ module.exports = (view, data = {}, settings = {}) => {
 
   if (!__fs.existsSync(settings.cacheDir)) __fs.mkdirSync(settings.cacheDir);
 
-  if (!__fs.existsSync(__path.resolve(settings.rootDir, view))) {
-    throw new __SError(
-      `It seems that the view you passed "<cyan>${__path.resolve(
-        settings.rootDir,
-        view
-      )}</cyan>" does not exists...`
-    );
-  }
+  return new __SPromise((resolve, reject, trigger) => {
+    if (!__fs.existsSync(__path.resolve(settings.rootDir, view))) {
+      return reject(
+        `It seems that the view you passed "<cyan>${__path.resolve(
+          settings.rootDir,
+          view
+        )}</cyan>" does not exists...`
+      );
+    }
 
-  return new Promise((resolve, reject) => {
     // preparing the php execution
     __execPhp(
       __dirname + '/bladePhp/compile.php',

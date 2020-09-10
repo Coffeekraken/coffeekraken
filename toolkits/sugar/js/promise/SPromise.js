@@ -29,6 +29,10 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
@@ -81,11 +85,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  *    - Expose a method called "finally" that let you register callbacks called when the "resolve" or "reject" function has been called
  *    - Expose a method called "canceled" that let you register callbacks called only when the "cancel" function has been called
  * - Every callbacks registration methods accept as first argument the number of time that your callback will be called at max. Here's some examples:
- *    - new SPromise((...)).then(value => { // do something... }).catch(error => { // do something... }).start();
- *    - new SPromise((...)).then(1, value => { // do something... }).catch(3, error => { // do something... }).start();
+ *    - new SPromise((...)).then(value => { // do something... }).catch(error => { // do something... });
+ *    - new SPromise((...)).then(1, value => { // do something... }).catch(3, error => { // do something... });
  * - Expose a method called "on" that can be used to register callbacks the same as the "then", "catch", etc... methods but you can register a same callback function to multiple callbacks type at once:
- *    - new SPromise((...)).on('then', value => { ... }).on('then,catch', value => { ... }).start();
- *    - Specify the max number of time to call your callback function like so: new SPromise((...)).on('then{2}', value => { ... }).on('then{1},catch', value => { ... }).start();
+ *    - new SPromise((...)).on('then', value => { ... }).on('then,catch', value => { ... });
+ *    - Specify the max number of time to call your callback function like so: new SPromise((...)).on('then{2}', value => { ... }).on('then{1},catch', value => { ... });
  * - A new method called "start" is exposed. This method is useful when you absolutely need that your executor function is launched right after the callbacks registrations.
  *    - If you don't call the "start" method, the executor function passed to the SPromise constructor will be called on the next javascript execution loop
  * - Support the Promises chaining through the callbacks like to:
@@ -100,7 +104,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  *        });
  *      }).then(value => {
  *        return value + 'Promise';
- *      }).start();
+ *      });
  *      console.log(result); // => helloWorldPromise
  *    ```
  *
@@ -123,7 +127,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  *    // do something just once...
  * }).catch(error => {
  *    // do something with the returned reason of failure...
- * }).start();
+ * });
  *
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
@@ -264,15 +268,19 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      *    // do something...
      * }).finally(value => {
      *    // do something...
-     * }).start();
+     * });
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
 
   }]);
 
-  function SPromise(executorFn, settings) {
+  function SPromise(executorFnOrSettings, settings) {
     var _this;
+
+    if (executorFnOrSettings === void 0) {
+      executorFnOrSettings = {};
+    }
 
     if (settings === void 0) {
       settings = {};
@@ -282,21 +290,54 @@ var SPromise = /*#__PURE__*/function (_Promise) {
 
     var _resolve, _reject;
 
+    var _trigger = function _trigger() {
+      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
+      }
+
+      setTimeout(() => {
+        _this.trigger(...args);
+      });
+    };
+
+    var _cancel = function _cancel() {
+      for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        args[_key2] = arguments[_key2];
+      }
+
+      setTimeout(() => {
+        _this.cancel(...args);
+      });
+    };
+
     _this = _super.call(this, (resolve, reject) => {
-      _resolve = resolve; // _reject = reject;
-    });
+      _resolve = resolve;
+      _reject = reject;
+      var executor = typeof executorFnOrSettings === 'function' ? executorFnOrSettings : null;
+
+      if (executor) {
+        return executor(_resolve, _reject, _trigger, _cancel);
+      }
+    }); // new Promise((resolve, reject) => {
+    //   _reject = reject;
+    //   // _resolve = resolve;
+    // })
+    //   // .then((v) => {
+    //   //   nativeConsole.log('CC', v);
+    //   // })
+    //   .catch((e) => {
+    //     this.trigger('error', {
+    //       value: e
+    //     });
+    //   });
+    // super.finally((e) => {
+    //   nativeConsole.log('FIN', e);
+    // });
 
     _defineProperty(_assertThisInitialized(_this), "_settings", {});
 
     _defineProperty(_assertThisInitialized(_this), "_promiseState", 'pending');
 
-    new Promise((resolve, reject) => {
-      _reject = reject; // _resolve = resolve;
-    }).catch(e => {
-      _this.trigger('error', {
-        value: e
-      });
-    });
     Object.defineProperty(_assertThisInitialized(_this), '_masterPromiseResolveFn', {
       writable: true,
       configurable: true,
@@ -308,18 +349,6 @@ var SPromise = /*#__PURE__*/function (_Promise) {
       configurable: true,
       enumerable: false,
       value: _reject
-    });
-    Object.defineProperty(_assertThisInitialized(_this), '_executorFn', {
-      writable: true,
-      configurable: true,
-      enumerable: false,
-      value: executorFn
-    });
-    Object.defineProperty(_assertThisInitialized(_this), '_isExecutorStarted', {
-      writable: true,
-      configurable: true,
-      enumerable: false,
-      value: null
     });
     Object.defineProperty(_assertThisInitialized(_this), '_promiseState', {
       writable: true,
@@ -339,24 +368,21 @@ var SPromise = /*#__PURE__*/function (_Promise) {
         finally: [],
         cancel: []
       }
-    }); // this._masterPromiseResolveFn = _resolve;
-    // this._masterPromiseRejectFn = _reject;
-    // save the executor function
-    // this._executorFn = executorFn;
-    // extend settings
+    }); // extend settings
 
     _this._settings = (0, _deepMerge.default)({
+      destroyTimeout: 100,
       id: (0, _uniqid.default)()
-    }, settings);
-    setTimeout(() => {
-      if (!_this._executorFn) return;
+    }, typeof executorFnOrSettings === 'object' ? executorFnOrSettings : {}, settings);
 
-      if (!_this._isExecutorStarted) {
-        _this._executorFn(_this.resolve.bind(_assertThisInitialized(_this)), _this.reject.bind(_assertThisInitialized(_this)), _this.trigger.bind(_assertThisInitialized(_this)), _this.cancel.bind(_assertThisInitialized(_this)));
+    if (_this._settings.destroyTimeout !== -1) {
+      _this.on('finally', () => {
+        setTimeout(() => {
+          _this._destroy();
+        }, _this._settings.destroyTimeout);
+      });
+    }
 
-        _this._isExecutorStarted = true;
-      }
-    });
     return _this;
   }
   /**
@@ -475,40 +501,6 @@ var SPromise = /*#__PURE__*/function (_Promise) {
       return this._promiseState === 'destroyed';
     }
     /**
-     * @name                    start
-     * @type                    Function
-     *
-     * This method is useful when you want the executor function passed to the constructor to be called directly and not
-     * as usual during the next javascript execution loop.
-     *
-     * @return          {SPromise}                  The SPromise instance to maintain chainability
-     *
-     * @example         js
-     * new SPromise((resolve, reject, trigger, cancel) => {
-     *    // do something
-     * }).then(value => {
-     *    // do something
-     * }).start();
-     *
-     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-     */
-
-  }, {
-    key: "start",
-    value: function start() {
-      if (this._isDestroyed) {
-        throw new Error("Sorry but you can't call the \"start\" method on this SPromise cause it has been destroyed...");
-      }
-
-      if (this._isExecutorStarted || !this._executorFn) return this;
-
-      this._executorFn.apply(this, [this.resolve.bind(this), this.reject.bind(this), this.trigger.bind(this), this.cancel.bind(this)]);
-
-      this._isExecutorStarted = true; // maintain chainability
-
-      return this;
-    }
-    /**
      * @name          pipe
      * @type          Function
      *
@@ -546,7 +538,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      *
      * @param         {Mixed}         arg       The value that you want to return back from the promise
      * @param       {Array|String}         [stacksOrder='then,resolve,finally']      This specify in which order have to be called the stacks
-     * @return        {SPromise}          Return the instance to maintain chainability
+     * @return        {Promise}                       A simple promise that will be resolved once the promise has been canceled with the cancel stack result as value
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
@@ -558,9 +550,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
         stacksOrder = 'then,resolve,finally';
       }
 
-      this._resolve(arg, stacksOrder);
-
-      return this;
+      return this._resolve(arg, stacksOrder);
     }
     /**
      * @name          _resolve
@@ -579,30 +569,32 @@ var SPromise = /*#__PURE__*/function (_Promise) {
 
   }, {
     key: "_resolve",
-    value: function () {
-      var _resolve2 = _asyncToGenerator(function* (arg, stacksOrder) {
-        if (stacksOrder === void 0) {
-          stacksOrder = 'then,resolve,finally';
-        }
+    value: function _resolve(arg, stacksOrder) {
+      var _this2 = this;
 
-        if (this._isDestroyed) return; // update the status
-
-        this._promiseState = 'resolved'; // exec the wanted stacks
-
-        var stacksResult = yield this._triggerStacks(stacksOrder, arg); // resolve the master promise
-
-        this._masterPromiseResolveFn(stacksResult); // return the stack result
-
-
-        return stacksResult;
-      });
-
-      function _resolve(_x, _x2) {
-        return _resolve2.apply(this, arguments);
+      if (stacksOrder === void 0) {
+        stacksOrder = 'then,resolve,finally';
       }
 
-      return _resolve;
-    }()
+      if (this._isDestroyed) return;
+      return new Promise( /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator(function* (resolve, reject) {
+          // update the status
+          _this2._promiseState = 'resolved'; // exec the wanted stacks
+
+          var stacksResult = yield _this2._triggerStacks(stacksOrder, arg); // resolve the master promise
+
+          _this2._masterPromiseResolveFn(stacksResult); // return the stack result
+
+
+          resolve(stacksResult);
+        });
+
+        return function (_x, _x2) {
+          return _ref.apply(this, arguments);
+        };
+      }());
+    }
     /**
      * @name          reject
      * @type          Function
@@ -612,7 +604,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      *
      * @param         {Mixed}         arg       The value that you want to return back from the promise
      * @param       {Array|String}         [stacksOrder='catch,reject,finally']      This specify in which order have to be called the stacks
-     * @return        {SPromise}          Return the instance to maintain chainability
+     * @return        {Promise}      A simple promise that will be resolved once the promise has been canceled with the cancel stack result as value
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
@@ -624,9 +616,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
         stacksOrder = 'catch,reject,finally';
       }
 
-      this._reject(arg, stacksOrder);
-
-      return this;
+      return this._reject(arg, stacksOrder);
     }
     /**
      * @name          _reject
@@ -645,31 +635,32 @@ var SPromise = /*#__PURE__*/function (_Promise) {
 
   }, {
     key: "_reject",
-    value: function () {
-      var _reject2 = _asyncToGenerator(function* (arg, stacksOrder) {
-        if (stacksOrder === void 0) {
-          stacksOrder = 'catch,reject,finally';
-        }
+    value: function _reject(arg, stacksOrder) {
+      var _this3 = this;
 
-        if (this._isDestroyed) return; // update the status
-
-        this._promiseState = 'rejected'; // exec the wanted stacks
-
-        var stacksResult = yield this._triggerStacks(stacksOrder, arg); // resolve the master promise
-
-        this._masterPromiseRejectFn(arg); // this._masterPromiseResolveFn(stacksResult); // release the promise
-        // return the stack result
-
-
-        return stacksResult;
-      });
-
-      function _reject(_x3, _x4) {
-        return _reject2.apply(this, arguments);
+      if (stacksOrder === void 0) {
+        stacksOrder = 'catch,reject,finally';
       }
 
-      return _reject;
-    }()
+      if (this._isDestroyed) return;
+      return new Promise( /*#__PURE__*/function () {
+        var _ref2 = _asyncToGenerator(function* (resolve, reject) {
+          // update the status
+          _this3._promiseState = 'rejected'; // exec the wanted stacks
+
+          var stacksResult = yield _this3._triggerStacks(stacksOrder, arg); // resolve the master promise
+
+          _this3._masterPromiseRejectFn(arg); // return the stack result
+
+
+          resolve(stacksResult);
+        });
+
+        return function (_x3, _x4) {
+          return _ref2.apply(this, arguments);
+        };
+      }());
+    }
     /**
      * @name          cancel
      * @type          Function
@@ -679,7 +670,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      *
      * @param         {Mixed}         arg       The value that you want to return back from the promise
      * @param       {Array|String}         [stacksOrder='cancel,finally']      This specify in which order have to be called the stacks
-     * @return        {SPromise}            Return the instance to maintain chainability;
+     * @return        {Promise}                       A simple promise that will be resolved once the promise has been canceled with the cancel stack result as value
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
@@ -691,9 +682,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
         stacksOrder = 'cancel,finally';
       }
 
-      this._cancel(arg, stacksOrder);
-
-      return this;
+      return this._cancel(arg, stacksOrder);
     }
     /**
      * @name            _cancel
@@ -712,30 +701,32 @@ var SPromise = /*#__PURE__*/function (_Promise) {
 
   }, {
     key: "_cancel",
-    value: function () {
-      var _cancel2 = _asyncToGenerator(function* (arg, stacksOrder) {
-        if (stacksOrder === void 0) {
-          stacksOrder = 'cancel,finally';
-        }
+    value: function _cancel(arg, stacksOrder) {
+      var _this4 = this;
 
-        if (this._isDestroyed) return; // update the status
-
-        this._promiseState = 'canceled'; // exec the wanted stacks
-
-        var stacksResult = yield this._triggerStacks(stacksOrder, arg); // resolve the master promise
-
-        this._masterPromiseResolveFn.apply(this, [stacksResult || null, this]); // return the stack result
-
-
-        return stacksResult;
-      });
-
-      function _cancel(_x5, _x6) {
-        return _cancel2.apply(this, arguments);
+      if (stacksOrder === void 0) {
+        stacksOrder = 'cancel,finally';
       }
 
-      return _cancel;
-    }()
+      if (this._isDestroyed) return;
+      return new Promise( /*#__PURE__*/function () {
+        var _ref3 = _asyncToGenerator(function* (resolve, reject) {
+          // update the status
+          _this4._promiseState = 'canceled'; // exec the wanted stacks
+
+          var stacksResult = yield _this4._triggerStacks(stacksOrder, arg); // resolve the master promise
+
+          _this4._masterPromiseResolveFn(stacksResult); // return the stack result
+
+
+          resolve(stacksResult);
+        });
+
+        return function (_x5, _x6) {
+          return _ref3.apply(this, arguments);
+        };
+      }());
+    }
     /**
      * @name          trigger
      * @type          Function
@@ -755,7 +746,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      *    }, 2000);
      * }).then(value => {
      *    // do something with one time "hello world", and one time "something"...
-     * }).start();
+     * });
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
@@ -763,19 +754,18 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "trigger",
     value: function () {
-      var _trigger = _asyncToGenerator(function* (what, arg, metas) {
+      var _trigger2 = _asyncToGenerator(function* (what, arg, metas) {
         if (metas === void 0) {
           metas = {};
         }
 
-        if (this._isDestroyed) return; // if (what.includes('log')) await __wait(0);
-        // triger the passed stacks
+        if (this._isDestroyed) return; // triger the passed stacks
 
         return this._triggerStacks(what, arg, metas);
       });
 
       function trigger(_x7, _x8, _x9) {
-        return _trigger.apply(this, arguments);
+        return _trigger2.apply(this, arguments);
       }
 
       return trigger;
@@ -882,12 +872,9 @@ var SPromise = /*#__PURE__*/function (_Promise) {
           Object.keys(this._stacks).forEach(stackName => {
             if (stackName === stack) return;
             var toAvoid = ['then', 'catch', 'resolve', 'reject', 'finally', 'cancel'];
-            if (toAvoid.indexOf(stack) !== -1 || toAvoid.indexOf(stackName) !== -1) return; // console.log('CHECK', stack, stackName);
+            if (toAvoid.indexOf(stack) !== -1 || toAvoid.indexOf(stackName) !== -1) return;
 
             if ((0, _minimatch.default)(stack, stackName)) {
-              // if (stackName === '*' && stack === 'start') {
-              //   console.log('SOMETHING GOOD', stackName, stack);
-              // }
               // the glob pattern match the triggered stack so add it to the stack array
               stackArray = [...stackArray, ...this._stacks[stackName]];
             }
@@ -956,21 +943,21 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "_triggerStacks",
     value: function _triggerStacks(stacks, initialValue, metas) {
-      var _this2 = this;
+      var _this5 = this;
 
       if (metas === void 0) {
         metas = {};
       }
 
       return new Promise( /*#__PURE__*/function () {
-        var _ref = _asyncToGenerator(function* (resolve, reject) {
+        var _ref4 = _asyncToGenerator(function* (resolve, reject) {
           // await __wait(0);
           // check if the stacks is "*"
           if (typeof stacks === 'string') stacks = stacks.split(',').map(s => s.trim());
           var currentStackResult = initialValue;
 
           for (var i = 0; i < stacks.length; i++) {
-            var stackResult = yield _this2._triggerStack(stacks[i], currentStackResult, metas);
+            var stackResult = yield _this5._triggerStack(stacks[i], currentStackResult, metas);
 
             if (stackResult !== undefined) {
               currentStackResult = stackResult;
@@ -983,7 +970,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
         });
 
         return function (_x13, _x14) {
-          return _ref.apply(this, arguments);
+          return _ref4.apply(this, arguments);
         };
       }());
     }
@@ -1008,7 +995,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      *    // do something with the value that is "hello world"
      * }).on('catch:1', error => {
      *    // do something that will be called only once
-     * }).start();
+     * });
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
@@ -1103,7 +1090,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      * }).then(2, value => {
      *    // do something that will be executed only twice
      *    // do something with the value passed "hola"
-     * }).start();
+     * });
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
@@ -1111,19 +1098,17 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "then",
     value: function then() {
-      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-        args[_key] = arguments[_key];
+      for (var _len3 = arguments.length, args = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+        args[_key3] = arguments[_key3];
       }
 
-      // if (
-      //   args.length === 2 &&
-      //   typeof args[0] === 'function' &&
-      //   typeof args[1] === 'function'
-      // ) {
-      //   this._masterPromiseResolveFn = args[0];
-      //   this._masterPromiseRejectFn = args[1];
-      //   return;
-      // }
+      if (args.length === 2 && typeof args[0] === 'function' && typeof args[1] === 'function') {
+        this._masterPromiseResolveFn = args[0];
+        this._masterPromiseRejectFn = args[1];
+        return;
+      } // super.then(...args);
+
+
       return this._registerCallbackInStack('then', ...args);
     }
     /**
@@ -1147,7 +1132,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      *    // do something with the value that is "hello world"
      * }).catch(1, value => {
      *    // do something that will be executed only once
-     * }).start();
+     * });
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
@@ -1155,11 +1140,12 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "catch",
     value: function _catch() {
-      for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-        args[_key2] = arguments[_key2];
+      for (var _len4 = arguments.length, args = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+        args[_key4] = arguments[_key4];
       }
 
-      // super.catch(...args);
+      _get(_getPrototypeOf(SPromise.prototype), "catch", this).call(this, ...args);
+
       return this._registerCallbackInStack('catch', ...args);
     }
     /**
@@ -1180,20 +1166,15 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      *    resolve('hello world');
      * }).finally(value => {
      *    // do something with the value that is "hello world"
-     * }).start();
+     * });
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
+    // finally(...args) {
+    //   // super.finally(...args);
+    //   return this._registerCallbackInStack('finally', ...args);
+    // }
 
-  }, {
-    key: "finally",
-    value: function _finally() {
-      for (var _len3 = arguments.length, args = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-        args[_key3] = arguments[_key3];
-      }
-
-      return this._registerCallbackInStack('finally', ...args);
-    }
     /**
      * @name                resolved
      * @type                Function
@@ -1212,7 +1193,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      *    resolve('hello world');
      * }).resolved(value => {
      *    // do something with the value that is "hello world"
-     * }).start();
+     * });
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
@@ -1220,8 +1201,8 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "resolved",
     value: function resolved() {
-      for (var _len4 = arguments.length, args = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
-        args[_key4] = arguments[_key4];
+      for (var _len5 = arguments.length, args = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
+        args[_key5] = arguments[_key5];
       }
 
       return this._registerCallbackInStack('resolve', ...args);
@@ -1244,7 +1225,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      *    resolve('hello world');
      * }).rejected(value => {
      *    // do something with the value that is "hello world"
-     * }).start();
+     * });
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
@@ -1252,8 +1233,8 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "rejected",
     value: function rejected() {
-      for (var _len5 = arguments.length, args = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
-        args[_key5] = arguments[_key5];
+      for (var _len6 = arguments.length, args = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
+        args[_key6] = arguments[_key6];
       }
 
       return this._registerCallbackInStack('reject', ...args);
@@ -1276,7 +1257,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      *    cancel('hello world');
      * }).canceled(value => {
      *    // do something with the value that is "hello world"
-     * }).start();
+     * });
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
@@ -1284,38 +1265,12 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "canceled",
     value: function canceled() {
-      for (var _len6 = arguments.length, args = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
-        args[_key6] = arguments[_key6];
+      for (var _len7 = arguments.length, args = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
+        args[_key7] = arguments[_key7];
       }
 
       return this._registerCallbackInStack('cancel', ...args);
     }
-    /**
-     * @name                cancel
-     * @type                Function
-     *
-     * This method allows the user to cancel the promise execution.
-     * This mean that the promise will be resolved but not trigger any
-     * other stacks like "resolve,reject,etc..."
-     *
-     * @param           {Mixed}         [value=null]      A value that you want to pass to the resolve promise
-     * @return          {Promise}                  A simple promise that will be resolved with the cancel stack result
-     *
-     * @example         js
-     * new SPromise((resolve, reject, trigger, cancel) => {
-     *    // do something...
-     *    cancel('hello world');
-     * }).canceled(value => {
-     *    // do something with the value that is "hello world"
-     * }).start();
-     *
-     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-     */
-    // cancel(...args) {
-    //   if (this._isDestroyed) return;
-    //   return this._cancel(...args);
-    // }
-
     /**
      * @name                      _destroy
      * @type                      Function
@@ -1331,12 +1286,10 @@ var SPromise = /*#__PURE__*/function (_Promise) {
       // update the status
       this._promiseState = 'destroyed'; // destroying all the callbacks stacks registered
 
-      delete this._stacks; // delete this._isExecutorStarted; // keep it to avoid errors in the "setTimeout" function in the masterPromise executor...
-
-      delete this._executorFn;
+      delete this._stacks;
       delete this._masterPromiseResolveFn;
       delete this._masterPromiseRejectFn;
-      delete this._masterPromise;
+      delete this._settings;
       this._isDestroyed = true;
     }
   }, {

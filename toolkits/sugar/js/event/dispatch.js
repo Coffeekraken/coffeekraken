@@ -29,7 +29,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 function trigger(name, value) {
   // check that the global SPromise exists
-  if (!window._sugarEventSPromise) window._sugarEventSPromise = new _SPromise.default(() => {}).start(); // trigger to the event
+  if (!window._sugarEventSPromise) window._sugarEventSPromise = new _SPromise.default({
+    id: 'sugarEventSPromise'
+  }); // trigger to the event
 
   window._sugarEventSPromise.trigger(name, value);
 }

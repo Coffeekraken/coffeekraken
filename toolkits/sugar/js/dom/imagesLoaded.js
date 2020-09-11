@@ -52,9 +52,7 @@ function imagesLoaded($imgs) {
         reject(error);
       }));
     });
-  }, {
-    stacks: 'img'
-  }).start();
+  });
 }
 
 module.exports = exports.default;

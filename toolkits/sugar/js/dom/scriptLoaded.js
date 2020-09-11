@@ -59,11 +59,11 @@ function loadScript($script) {
         reject(new Error(e));
       }
     }
-  }).on('cancel,finally', () => {
+  }).on('finally', () => {
     $script.onload = null;
     $script.onreadystatechange = null;
     $script.onerror = null;
-  }).start();
+  });
 }
 
 module.exports = exports.default;

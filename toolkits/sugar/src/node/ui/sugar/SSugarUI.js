@@ -115,7 +115,7 @@ module.exports = class SSugarUi extends __SPromise {
       name: 'Sugar UI'
     });
 
-    super(null, settings).start();
+    super(settings);
 
     // load and check each modules
     this._loadModules(__sugarConfig('sugar-ui.modules'));

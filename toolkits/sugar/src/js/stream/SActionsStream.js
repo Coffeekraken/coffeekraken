@@ -84,7 +84,6 @@ export default class SActionStream extends __SPromise {
   constructor(actions, settings = {}) {
     // init SPromise
     super(
-      () => {},
       __deepMerge(
         {
           id: __uniqid(),
@@ -100,7 +99,6 @@ export default class SActionStream extends __SPromise {
         settings
       )
     );
-    super.start();
 
     // check the actions
     Object.keys(actions).forEach((actionName) => {
@@ -813,7 +811,7 @@ export default class SActionStream extends __SPromise {
       {
         id: this._settings.id
       }
-    ).start();
+    );
 
     return this._currentStream.promise;
   }

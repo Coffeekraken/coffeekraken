@@ -103,7 +103,7 @@ module.exports = function spawn(
         const pro = spawn(settings[when], [], {
           id: settings.id + '.' + when,
           ...spawnSettings
-        }).start();
+        });
         pro.on('log,error', (value) => {
           if (!value) return;
           value.value = `  - ${value.value}`;

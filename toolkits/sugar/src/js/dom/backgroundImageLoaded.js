@@ -41,11 +41,9 @@ export default function backgroundImageLoaded($elm) {
     __imageLoaded($img).then(() => {
       if (!isCancelled) resolve($elm);
     });
-  })
-    .on('cancal,finally', () => {
-      isCancelled = true;
-    })
-    .start();
+  }).on('finally', () => {
+    isCancelled = true;
+  });
   promise.__$img = $img;
   return promise;
 }

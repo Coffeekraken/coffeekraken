@@ -47,5 +47,5 @@ module.exports = function dist(req, server, settings = {}) {
     {
       id: 'server.handler.dist'
     }
-  ).start();
+  );
 };

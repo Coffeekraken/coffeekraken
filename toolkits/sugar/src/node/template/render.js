@@ -138,5 +138,5 @@ module.exports = function render(viewPath, data = null, settings = {}) {
     {
       id: 'template.render'
     }
-  ).start();
+  );
 };

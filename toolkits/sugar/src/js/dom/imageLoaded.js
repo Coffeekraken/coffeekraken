@@ -45,10 +45,8 @@ export default function imageLoaded($img, callback = null) {
       };
       $img.addEventListener('error', imgErrorHandler);
     }
-  })
-    .on('cancel,finally', () => {
-      imgLoadedHandler && $img.removeEventListener('load', imgLoadedHandler);
-      imgErrorHandler && $img.removeEventListener('error', imgErrorHandler);
-    })
-    .start();
+  }).on('finally', () => {
+    imgLoadedHandler && $img.removeEventListener('load', imgLoadedHandler);
+    imgErrorHandler && $img.removeEventListener('error', imgErrorHandler);
+  });
 }

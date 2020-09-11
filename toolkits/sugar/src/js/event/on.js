@@ -21,14 +21,16 @@ const __SPromise = require('../promise/SPromise');
  * @since       2.0.0
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function on(name, callback) {
+module.exports = function on(name, callback) {
   // check that the global SPromise exists
   if (!global._sugarEventSPromise)
-    global._sugarEventSPromise = new __SPromise(() => {}).start();
+    global._sugarEventSPromise = new __SPromise({
+      id: 'sugarEventSPromise'
+    });
   // subscribe to the event
   global._sugarEventSPromise.on(name, callback);
   // return the unsubscribe function
   return () => {
     global._sugarEventSPromise.off(name, callback);
   };
-}
+};

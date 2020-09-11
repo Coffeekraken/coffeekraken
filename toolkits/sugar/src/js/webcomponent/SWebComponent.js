@@ -59,7 +59,7 @@ import __SLitHtmlWebComponent from './SLitHtmlWebComponent';
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-const _sWebComponentPromise = new __SPromise(() => {}).start();
+const _sWebComponentPromise = new __SPromise();
 
 function SWebComponent(extend = HTMLElement) {
   return class SWebComponent extends extend {
@@ -140,7 +140,7 @@ function SWebComponent(extend = HTMLElement) {
       );
 
       // create the SPromise instance
-      this._promise = new __SPromise(() => {}).start();
+      this._promise = new __SPromise();
 
       // apply the $node class
       const currentClassName = this.getAttribute('class') || '';

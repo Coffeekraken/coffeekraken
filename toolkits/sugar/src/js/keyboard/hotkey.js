@@ -57,9 +57,7 @@ export default function (hotkey, settings = {}) {
       // unsubscribe if once is truc
       if (settings.once) cancel();
     });
-  })
-    .on('finally,cancel', () => {
-      hotkeys.unbind(hotkey);
-    })
-    .start();
+  }).on('finally', () => {
+    hotkeys.unbind(hotkey);
+  });
 }

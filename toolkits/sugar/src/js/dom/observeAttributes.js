@@ -42,11 +42,9 @@ export default function (target, settings = {}) {
       // characterData : true,
       ...settings
     });
-  })
-    .on('cancel,finally', () => {
-      mutationObserver.disconnect();
-    })
-    .start();
+  }).on('finally', () => {
+    mutationObserver.disconnect();
+  });
 }
 
 /**

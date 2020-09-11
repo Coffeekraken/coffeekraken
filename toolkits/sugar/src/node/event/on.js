@@ -24,7 +24,9 @@ const __SPromise = require('../promise/SPromise');
 module.exports = function on(name, callback) {
   // check that the global SPromise exists
   if (!global._sugarEventSPromise)
-    global._sugarEventSPromise = new __SPromise(() => {}).start();
+    global._sugarEventSPromise = new __SPromise({
+      id: 'sugarEventSPromise'
+    });
   // subscribe to the event
   global._sugarEventSPromise.on(name, callback);
   // return the unsubscribe function

@@ -68,9 +68,7 @@ module.exports = class SInput extends __SComponent {
     this._escapeKeyPromise = null;
 
     this.$input = __blessed.textbox(inputSettings);
-    this.promise = new __SPromise(
-      (resolve, reject, trigger, cancel) => {}
-    ).start();
+    this.promise = new __SPromise();
 
     this.$input.height =
       inputSettings.padding.top + inputSettings.padding.bottom + 1;

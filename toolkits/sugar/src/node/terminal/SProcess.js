@@ -80,7 +80,7 @@ module.exports = class SProcess {
       this.reject = reject.bind(this);
       this.trigger = trigger.bind(this);
       this.cancel = cancel.bind(this);
-    }, {}).start();
+    });
     this.on = this._promise.on.bind(this._promise);
 
     // make sure the passed commands are valid

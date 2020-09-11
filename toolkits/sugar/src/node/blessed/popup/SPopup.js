@@ -133,7 +133,7 @@ module.exports = class SPopup extends __SComponent {
       },
       ...(this._settings.$content || {})
     });
-    this.promise = new __SPromise(() => {}).start();
+    this.promise = new __SPromise();
 
     super.append(this.$content);
     this.promise.trigger('open');

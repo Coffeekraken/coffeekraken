@@ -77,9 +77,9 @@ function _default(hotkey, settings) {
 
       if (settings.once) cancel();
     });
-  }).on('finally,cancel', () => {
+  }).on('finally', () => {
     _hotkeysJs.default.unbind(hotkey);
-  }).start();
+  });
 }
 
 module.exports = exports.default;

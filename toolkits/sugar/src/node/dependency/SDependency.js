@@ -204,6 +204,6 @@ module.exports = class SDependency {
       {
         stacks: 'data,error'
       }
-    ).start();
+    );
   }
 };

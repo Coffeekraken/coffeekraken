@@ -135,7 +135,7 @@ var SNav = /*#__PURE__*/function () {
     this._id = id;
     this._text = text; // setup the promise
 
-    this._promise = new _SPromise.default(() => {}).start(); // add the items
+    this._promise = new _SPromise.default(); // add the items
 
     itemsArray.forEach(item => {
       this.addItem(item);

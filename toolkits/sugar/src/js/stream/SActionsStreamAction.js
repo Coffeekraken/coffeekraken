@@ -74,7 +74,6 @@ export default class SActionStreamAction extends __SPromise {
   constructor(settings = {}) {
     // init SPromise
     super(
-      () => {},
       __deepMerge(
         {
           name: null,
@@ -95,7 +94,6 @@ export default class SActionStreamAction extends __SPromise {
         });
       });
     }
-    super.start();
   }
 
   get settings() {
@@ -194,7 +192,7 @@ export default class SActionStreamAction extends __SPromise {
     this.checkStreamObject(streamObj);
     this._currentPromise = new __SPromise(promiseFn, {
       id: this._settings.id
-    }).start();
+    });
     return this._currentPromise;
   }
 

@@ -50,12 +50,10 @@ export default function detectInOutDirection($elm) {
     // detect when mouseenter/leave the element
     $elm.addEventListener('mouseenter', mouseEnterHandler);
     $elm.addEventListener('mouseleave', mouseLeaveHandler);
-  })
-    .on('cancel,finally', () => {
-      $elm.removeEventListener('mouseenter', mouseEnterHandler);
-      $elm.removeEventListener('mouseleave', mouseLeaveHandler);
-    })
-    .start();
+  }).on('finally', () => {
+    $elm.removeEventListener('mouseenter', mouseEnterHandler);
+    $elm.removeEventListener('mouseleave', mouseLeaveHandler);
+  });
   return promise;
 }
 

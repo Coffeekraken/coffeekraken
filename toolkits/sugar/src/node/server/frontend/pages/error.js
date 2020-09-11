@@ -47,9 +47,9 @@ module.exports = function error(data = {}) {
   const settings = __deepMerge(__sugarConfig('frontend'), args);
   const server = __express();
 
-  const promise = new __SPromise(null, {
+  const promise = new __SPromise({
     id: 'server.frontend'
-  }).start();
+  });
 
   // build the "templateData" object to pass to the render engines
   const templateData = {

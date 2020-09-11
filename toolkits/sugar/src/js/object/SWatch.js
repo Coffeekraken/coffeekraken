@@ -79,7 +79,7 @@ export default class SWatch {
       settings
     );
 
-    this._promise = new __SPromise(() => {}).start();
+    this._promise = new __SPromise();
 
     this._proxiedObject = __deepProxy(
       object,

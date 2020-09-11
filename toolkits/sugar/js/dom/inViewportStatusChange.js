@@ -38,11 +38,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function inViewportStatusChange($elm) {
-  var isCanceled = false;
+  var isFinished = false;
   return new _SPromise.default((resolve, reject, trigger, cancel) => {
     function _whenIn() {
       (0, _whenInViewport.default)($elm).then(() => {
-        if (isCanceled) return;
+        if (isFinished) return;
         trigger('enter', $elm);
 
         _whenOut();
@@ -51,7 +51,7 @@ function inViewportStatusChange($elm) {
 
     function _whenOut() {
       (0, _whenOutOfViewport.default)($elm).then(() => {
-        if (isCanceled) return;
+        if (isFinished) return;
         trigger('exit', $elm);
 
         _whenIn();
@@ -66,9 +66,9 @@ function inViewportStatusChange($elm) {
     }
   }, {
     stacks: ['enter', 'exit']
-  }).on('cancel,finally', () => {
-    isCanceled = true;
-  }).start();
+  }).on('finally', () => {
+    isFinished = true;
+  });
 }
 
 module.exports = exports.default;

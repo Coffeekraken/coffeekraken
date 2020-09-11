@@ -45,9 +45,7 @@ export default function observeMutations($target, settings = {}) {
       });
     });
     mutationObserver.observe($target, settings);
-  })
-    .on('cancel,finally', () => {
-      mutationObserver && mutationObserver.disconnect();
-    })
-    .start();
+  }).on('finally', () => {
+    mutationObserver && mutationObserver.disconnect();
+  });
 }

@@ -172,7 +172,6 @@ export default class STimer extends __SPromise {
         settings
       )
     );
-    super.start();
   }
 
   /**

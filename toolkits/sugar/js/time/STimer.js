@@ -31,10 +31,6 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
-function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
-
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -184,7 +180,7 @@ var STimer = /*#__PURE__*/function (_SPromise) {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   function STimer(duration, settings) {
-    var _thisSuper, _this;
+    var _this;
 
     if (settings === void 0) {
       settings = {};
@@ -222,8 +218,6 @@ var STimer = /*#__PURE__*/function (_SPromise) {
     _defineProperty(_assertThisInitialized(_this), "_tickTime", null);
 
     _defineProperty(_assertThisInitialized(_this), "_pauseTime", null);
-
-    _get((_thisSuper = _assertThisInitialized(_this), _getPrototypeOf(STimer.prototype)), "start", _thisSuper).call(_thisSuper);
 
     return _this;
   }

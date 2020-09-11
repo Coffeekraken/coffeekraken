@@ -24,8 +24,7 @@ describe('sugar.js.dom.addEventListener', () => {
     })
     .on('cancel', (event) => {
       hasBeenCanceled = true;
-    })
-    .start();
+    });
 
   __dispatchEvent($elm, 'click');
 

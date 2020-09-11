@@ -157,5 +157,5 @@ module.exports = function doc(req, server, settings = {}) {
     {
       id: 'server.handler.styleguide'
     }
-  ).start();
+  );
 };

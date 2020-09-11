@@ -65,7 +65,7 @@ module.exports = class SFsDeamon extends __SDeamon {
         },
         settings
       )
-    ).start();
+    );
 
     // handle cancel
     this.on('cancel', () => {

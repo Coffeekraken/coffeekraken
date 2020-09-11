@@ -26,20 +26,20 @@ import __whenOutOfViewport from './whenOutOfViewport';
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function inViewportStatusChange($elm) {
-  let isCanceled = false;
+  let isFinished = false;
 
   return new __SPromise(
     (resolve, reject, trigger, cancel) => {
       function _whenIn() {
         __whenInViewport($elm).then(() => {
-          if (isCanceled) return;
+          if (isFinished) return;
           trigger('enter', $elm);
           _whenOut();
         });
       }
       function _whenOut() {
         __whenOutOfViewport($elm).then(() => {
-          if (isCanceled) return;
+          if (isFinished) return;
           trigger('exit', $elm);
           _whenIn();
         });
@@ -55,9 +55,7 @@ export default function inViewportStatusChange($elm) {
     {
       stacks: ['enter', 'exit']
     }
-  )
-    .on('cancel,finally', () => {
-      isCanceled = true;
-    })
-    .start();
+  ).on('finally', () => {
+    isFinished = true;
+  });
 }

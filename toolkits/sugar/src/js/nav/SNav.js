@@ -105,7 +105,7 @@ export default class SNav {
     this._text = text;
 
     // setup the promise
-    this._promise = new __SPromise(() => {}).start();
+    this._promise = new __SPromise();
 
     // add the items
     itemsArray.forEach((item) => {

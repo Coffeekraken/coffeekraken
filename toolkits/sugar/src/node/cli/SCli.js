@@ -105,7 +105,7 @@ class SCli extends __SPromise {
       },
       settings
     );
-    super(null, settings).start();
+    super(settings);
     if (!this._settings.id) this._settings.id = this.constructor.name;
 
     this._paramsObj = __argsToObject(initialParams, this.definitionObj);

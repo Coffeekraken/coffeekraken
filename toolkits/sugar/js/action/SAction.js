@@ -143,7 +143,7 @@ var SAction = /*#__PURE__*/function (_SPromise) {
   }]);
 
   function SAction(descriptorObj, settings) {
-    var _temp, _this;
+    var _this;
 
     if (settings === void 0) {
       settings = {};
@@ -151,7 +151,12 @@ var SAction = /*#__PURE__*/function (_SPromise) {
 
     _classCallCheck(this, SAction);
 
-    (_temp = _this = _super.call(this, (resolve, reject, trigger, cancel) => {}), _defineProperty(_assertThisInitialized(_this), "_settings", {}), _defineProperty(_assertThisInitialized(_this), "_descriptorObj", {}), _temp).start();
+    _this = _super.call(this, (resolve, reject, trigger, cancel) => {});
+
+    _defineProperty(_assertThisInitialized(_this), "_settings", {});
+
+    _defineProperty(_assertThisInitialized(_this), "_descriptorObj", {});
+
     _this._settings = (0, _deepMerge.default)({}, settings);
     _this._descriptorObj = descriptorObj;
     return _this;
@@ -179,7 +184,7 @@ var SAction = /*#__PURE__*/function (_SPromise) {
 
         trigger("run", this);
         this.trigger("run", this);
-      }).start();
+      });
 
       promise.complete = () => {
         SAction._promise.trigger("".concat(this.constructor.name, ".complete"), this);
@@ -229,6 +234,6 @@ var SAction = /*#__PURE__*/function (_SPromise) {
 
 exports.default = SAction;
 
-_defineProperty(SAction, "_promise", new _SPromise2.default(() => {}).start());
+_defineProperty(SAction, "_promise", new _SPromise2.default(() => {}));
 
 module.exports = exports.default;

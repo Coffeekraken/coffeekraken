@@ -59,10 +59,10 @@ function imageLoaded($img, callback) {
 
       $img.addEventListener('error', imgErrorHandler);
     }
-  }).on('cancel,finally', () => {
+  }).on('finally', () => {
     imgLoadedHandler && $img.removeEventListener('load', imgLoadedHandler);
     imgErrorHandler && $img.removeEventListener('error', imgErrorHandler);
-  }).start();
+  });
 }
 
 module.exports = exports.default;

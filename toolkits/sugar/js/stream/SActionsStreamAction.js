@@ -35,10 +35,6 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
-function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
-
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -112,7 +108,7 @@ var SActionStreamAction = /*#__PURE__*/function (_SPromise) {
    * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   function SActionStreamAction(settings) {
-    var _thisSuper, _this;
+    var _this;
 
     if (settings === void 0) {
       settings = {};
@@ -121,7 +117,7 @@ var SActionStreamAction = /*#__PURE__*/function (_SPromise) {
     _classCallCheck(this, SActionStreamAction);
 
     // init SPromise
-    _this = _super.call(this, () => {}, (0, _deepMerge.default)({
+    _this = _super.call(this, (0, _deepMerge.default)({
       name: null,
       id: (0, _uniqid.default)(),
       cache: true
@@ -142,8 +138,6 @@ var SActionStreamAction = /*#__PURE__*/function (_SPromise) {
         });
       });
     }
-
-    _get((_thisSuper = _assertThisInitialized(_this), _getPrototypeOf(SActionStreamAction.prototype)), "start", _thisSuper).call(_thisSuper);
 
     return _this;
   }
@@ -256,7 +250,7 @@ var SActionStreamAction = /*#__PURE__*/function (_SPromise) {
       this.checkStreamObject(streamObj);
       this._currentPromise = new _SPromise2.default(promiseFn, {
         id: this._settings.id
-      }).start();
+      });
       return this._currentPromise;
     }
     /**

@@ -1,10 +1,5 @@
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = on;
-
 var __SPromise = require('../promise/SPromise');
 /**
  * @name        on
@@ -29,9 +24,11 @@ var __SPromise = require('../promise/SPromise');
  */
 
 
-function on(name, callback) {
+module.exports = function on(name, callback) {
   // check that the global SPromise exists
-  if (!global._sugarEventSPromise) global._sugarEventSPromise = new __SPromise(() => {}).start(); // subscribe to the event
+  if (!global._sugarEventSPromise) global._sugarEventSPromise = new __SPromise({
+    id: 'sugarEventSPromise'
+  }); // subscribe to the event
 
   global._sugarEventSPromise.on(name, callback); // return the unsubscribe function
 
@@ -39,6 +36,4 @@ function on(name, callback) {
   return () => {
     global._sugarEventSPromise.off(name, callback);
   };
-}
-
-module.exports = exports.default;
+};

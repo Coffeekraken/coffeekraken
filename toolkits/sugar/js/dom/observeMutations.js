@@ -61,9 +61,9 @@ function observeMutations($target, settings) {
       });
     });
     mutationObserver.observe($target, settings);
-  }).on('cancel,finally', () => {
+  }).on('finally', () => {
     mutationObserver && mutationObserver.disconnect();
-  }).start();
+  });
 }
 
 module.exports = exports.default;

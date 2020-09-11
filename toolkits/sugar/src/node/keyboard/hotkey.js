@@ -113,17 +113,16 @@ module.exports = function hotkey(key, settings = {}) {
     });
   }
 
-  const promise = new __SPromise((resolve, reject, trigger, cancel) => {}, {})
+  const promise = new __SPromise()
     .on('key,press', (key) => {
       if (settings.once) {
         promise.cancel();
       }
     })
-    .on('finally,cancel', () => {
+    .on('finally', () => {
       // delete the callback from the stack
       delete hotkeyStack[uniqid];
-    })
-    .start();
+    });
 
   // save the trigger function in the stack
   hotkeyStack[uniqid] = {

@@ -48,11 +48,9 @@ export default function loadScript($script) {
         reject(new Error(e));
       }
     }
-  })
-    .on('cancel,finally', () => {
-      $script.onload = null;
-      $script.onreadystatechange = null;
-      $script.onerror = null;
-    })
-    .start();
+  }).on('finally', () => {
+    $script.onload = null;
+    $script.onreadystatechange = null;
+    $script.onerror = null;
+  });
 }

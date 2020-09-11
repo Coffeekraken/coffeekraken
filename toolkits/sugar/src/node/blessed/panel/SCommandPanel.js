@@ -134,7 +134,7 @@ module.exports = class SCommandPanel extends __SComponent {
     __activeSpace.set(`SCommandPanel.${this._commands[0].key}`);
 
     // pipe all commands "events" to the _sPromise internal promise
-    this._sPromise = new __SPromise(() => {}).start();
+    this._sPromise = new __SPromise();
     this._commands.forEach((commandObj, i) => {
       // instanciate the command instance
       const commandClass = require(commandObj.path);

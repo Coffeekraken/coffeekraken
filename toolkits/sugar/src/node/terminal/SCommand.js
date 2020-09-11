@@ -279,7 +279,7 @@ module.exports = class SCommand extends __SPromise {
         },
         settings
       )
-    ).start();
+    );
 
     setTimeout(() => {
       if (this._settings.watch && !this._settings.run) this.watch();
@@ -820,7 +820,7 @@ module.exports = class SCommand extends __SPromise {
       const result = await this._currentProcess.childProcessPromise;
 
       resolve(result);
-    }).start();
+    });
 
     __SPromise.pipe(this._currentProcess.childProcessPromise, promise, {
       processor: (value, stacks) => {
@@ -868,30 +868,24 @@ module.exports = class SCommand extends __SPromise {
    */
   _ask(question) {
     const _this = this;
-    return new __SPromise(
-      (resolve, reject, trigger, cancel) => {
-        switch (question.type) {
-          case 'summary':
-            this.trigger('ask', {
-              name: this.name,
-              get commandInstance() {
-                return _this;
-              },
-              resolve,
-              reject,
-              items: question.items,
-              question:
-                question.question ||
-                `Are that command details ok for you? (y/n)`,
-              type: 'summary'
-            });
-            break;
-        }
-      },
-      {
-        cancelDefaultReturn: '__canceled__'
+    return new __SPromise((resolve, reject, trigger, cancel) => {
+      switch (question.type) {
+        case 'summary':
+          this.trigger('ask', {
+            name: this.name,
+            get commandInstance() {
+              return _this;
+            },
+            resolve,
+            reject,
+            items: question.items,
+            question:
+              question.question || `Are that command details ok for you? (y/n)`,
+            type: 'summary'
+          });
+          break;
       }
-    ).start();
+    });
   }
 
   /**

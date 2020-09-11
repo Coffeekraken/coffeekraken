@@ -56,7 +56,7 @@ class SDeamon extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(settings = {}) {
-    super(null, settings).start();
+    super(settings);
   }
 
   /**

@@ -158,7 +158,7 @@ module.exports = class SFsDeamonProcess extends __SProcess {
       {
         id: settings.id || 'deamon.fs'
       }
-    ).start();
+    );
     return super.run(promise);
   }
 

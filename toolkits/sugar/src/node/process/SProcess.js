@@ -117,8 +117,6 @@ class SProcess extends __SPromise {
    */
   endTime = 0;
 
-  _coco = __isChildProcess() ? 'child' : 'main';
-
   /**
    * @name          constructor
    * @type          Function
@@ -138,7 +136,7 @@ class SProcess extends __SPromise {
       },
       settings
     );
-    super(null, settings).start();
+    super(settings);
 
     if (settings.deamon && typeof settings.deamon === 'object') {
       __SProcessDeamonSettingInterface.apply(settings.deamon);

@@ -122,7 +122,6 @@ module.exports = function objectProperties(startObj, targetObj, settings = {}) {
         timer.stop();
         // destroy the timer
         timer.destroy();
-      })
-      .start();
-  }).start();
+      });
+  });
 };

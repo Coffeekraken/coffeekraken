@@ -36,9 +36,9 @@ module.exports = (args = {}) => {
   const settings = __deepMerge(__sugarConfig('frontend'), args);
   const server = __express();
 
-  const promise = new __SPromise(null, {
+  const promise = new __SPromise({
     id: 'server.frontend'
-  }).start();
+  });
 
   // load the middlewares
   const middlewaresObj = settings.middlewares || {};

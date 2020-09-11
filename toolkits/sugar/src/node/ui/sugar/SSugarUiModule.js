@@ -84,12 +84,12 @@ module.exports = class SSugarUiModule extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(settings = {}) {
-    super(null, {
+    super({
       id: 'ui.sugar.module',
       name: 'Sugar UI Module',
       autorun: false,
       ...settings
-    }).start();
+    });
   }
 
   /**

@@ -35,7 +35,7 @@ import __env from '../core/env';
  *    - new SPromise((...)).then(1, value => { // do something... }).catch(3, error => { // do something... });
  * - Expose a method called "on" that can be used to register callbacks the same as the "then", "catch", etc... methods but you can register a same callback function to multiple callbacks type at once:
  *    - new SPromise((...)).on('then', value => { ... }).on('then,catch', value => { ... });
- *    - Specify the max number of time to call your callback function like so: new SPromise((...)).on('then{2}', value => { ... }).on('then{1},catch', value => { ... });
+ *    - Specify the max number of time to call your callback function like so: new SPromise((...)).on('then:2', value => { ... }).on('then:1,catch', value => { ... });
  * - A new method called "start" is exposed. This method is useful when you absolutely need that your executor function is launched right after the callbacks registrations.
  *    - If you don't call the "start" method, the executor function passed to the SPromise constructor will be called on the next javascript execution loop
  * - Support the Promises chaining through the callbacks like to:
@@ -151,45 +151,12 @@ export default class SPromise extends Promise {
         } else {
           value = res;
         }
-        // console.log('PROCESSED', metas);
       }
       // trigger on the destination promise
       destSPromise.trigger(metas.stack, value, {
         ...metas,
         level: metas.level + 1
       });
-    });
-  }
-
-  /**
-   * @name                  log
-   * @type                  Function
-   * @static
-   *
-   * This static function allows you to log automatically the triggered log and error
-   * events. You can specify the stacks you want to log using the ```stacks``` property in the settings object
-   *
-   * @param         {SPromise}      promise             The promise you want to listen for stdout and stderr events
-   * @param         {Object}        [settings={}]         An object of settings to configure your log process
-   * - stacks ('log,error') {String}: Specify which stacks you want to log.
-   *
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  static log(sourceSPromise, settings = {}) {
-    // settings
-    settings = __deepMerge(
-      {
-        filter: null,
-        stacks: 'log,error'
-      },
-      settings
-    );
-    if (!(sourceSPromise instanceof SPromise)) return;
-    // listen for all on the source promise
-    sourceSPromise.on(settings.stacks, (value, metas) => {
-      if (settings.filter && !settings.filter(value, metas)) return;
-      const msg = value.value ? value.value : value;
-      console.log(msg);
     });
   }
 
@@ -214,8 +181,18 @@ export default class SPromise extends Promise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   constructor(executorFnOrSettings = {}, settings = {}) {
-    let _resolve, _reject;
+    let _masterPromiseRejectFn, _masterPromiseResolveFn;
 
+    const _resolve = (...args) => {
+      setTimeout(() => {
+        this.resolve(...args);
+      });
+    };
+    const _reject = (...args) => {
+      setTimeout(() => {
+        this.reject(...args);
+      });
+    };
     const _trigger = (...args) => {
       setTimeout(() => {
         this.trigger(...args);
@@ -227,9 +204,16 @@ export default class SPromise extends Promise {
       });
     };
 
-    super((resolve, reject) => {
-      _resolve = resolve;
-      _reject = reject;
+    super((resolve) => {
+      _masterPromiseResolveFn = resolve;
+
+      new Promise((rejectPromiseResolve, rejectPromiseReject) => {
+        _masterPromiseRejectFn = rejectPromiseReject;
+      }).catch((e) => {
+        this.trigger(this._settings.triggerOnCatch, {
+          value: e
+        });
+      });
 
       const executor =
         typeof executorFnOrSettings === 'function'
@@ -240,34 +224,17 @@ export default class SPromise extends Promise {
       }
     });
 
-    // new Promise((resolve, reject) => {
-    //   _reject = reject;
-    //   // _resolve = resolve;
-    // })
-    //   // .then((v) => {
-    //   //   nativeConsole.log('CC', v);
-    //   // })
-    //   .catch((e) => {
-    //     this.trigger('error', {
-    //       value: e
-    //     });
-    //   });
-
-    // super.finally((e) => {
-    //   nativeConsole.log('FIN', e);
-    // });
-
     Object.defineProperty(this, '_masterPromiseResolveFn', {
       writable: true,
       configurable: true,
       enumerable: false,
-      value: _resolve
+      value: _masterPromiseResolveFn
     });
     Object.defineProperty(this, '_masterPromiseRejectFn', {
       writable: true,
       configurable: true,
       enumerable: false,
-      value: _reject
+      value: _masterPromiseRejectFn
     });
     Object.defineProperty(this, '_promiseState', {
       writable: true,
@@ -292,7 +259,8 @@ export default class SPromise extends Promise {
     // extend settings
     this._settings = __deepMerge(
       {
-        destroyTimeout: 100,
+        triggerOnCatch: 'catch',
+        destroyTimeout: 5000,
         id: __uniqid()
       },
       typeof executorFnOrSettings === 'object' ? executorFnOrSettings : {},
@@ -742,9 +710,7 @@ export default class SPromise extends Promise {
         metasObj
       );
       // check if the callback result is a promise
-      if (Promise.resolve(callbackResult) === callbackResult) {
-        callbackResult = await callbackResult;
-      }
+      callbackResult = await callbackResult;
       // if the settings tells that we have to pass each returned value to the next callback
       if (callbackResult !== undefined) {
         currentCallbackReturnedValue = callbackResult;
@@ -789,8 +755,6 @@ export default class SPromise extends Promise {
         if (stackResult !== undefined) {
           currentStackResult = stackResult;
         }
-        // await this._triggerStack('*', currentStackResult, stacks[i]);
-        // this._triggerAllStack(stacks[i], currentStackResult);
       }
 
       resolve(currentStackResult);
@@ -835,11 +799,11 @@ export default class SPromise extends Promise {
     // loop on each stacks
     stacks.forEach((name) => {
       // check if it has a callNumber specified using name:1
-      const splitedName = name.split('{');
+      const splitedName = name.split(':');
       let callNumber = -1;
       if (splitedName.length === 2) {
         name = splitedName[0];
-        callNumber = parseInt(splitedName[1].replace('}', ''));
+        callNumber = parseInt(splitedName[1]);
       }
       // calling the registration method
       this._registerCallbackInStack(name, callNumber, callback);
@@ -952,8 +916,11 @@ export default class SPromise extends Promise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   catch(...args) {
-    super.catch(...args);
-    return this._registerCallbackInStack('catch', ...args);
+    // super.catch(...args);
+    return this._registerCallbackInStack(
+      this._settings.triggerOnCatch,
+      ...args
+    );
   }
 
   /**
@@ -978,10 +945,10 @@ export default class SPromise extends Promise {
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  // finally(...args) {
-  //   // super.finally(...args);
-  //   return this._registerCallbackInStack('finally', ...args);
-  // }
+  finally(...args) {
+    // super.finally(...args);
+    return this._registerCallbackInStack('finally', ...args);
+  }
 
   /**
    * @name                resolved

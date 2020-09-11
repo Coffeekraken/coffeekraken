@@ -29,10 +29,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
-
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
-
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
@@ -89,7 +85,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  *    - new SPromise((...)).then(1, value => { // do something... }).catch(3, error => { // do something... });
  * - Expose a method called "on" that can be used to register callbacks the same as the "then", "catch", etc... methods but you can register a same callback function to multiple callbacks type at once:
  *    - new SPromise((...)).on('then', value => { ... }).on('then,catch', value => { ... });
- *    - Specify the max number of time to call your callback function like so: new SPromise((...)).on('then{2}', value => { ... }).on('then{1},catch', value => { ... });
+ *    - Specify the max number of time to call your callback function like so: new SPromise((...)).on('then:2', value => { ... }).on('then:1,catch', value => { ... });
  * - A new method called "start" is exposed. This method is useful when you absolutely need that your executor function is launched right after the callbacks registrations.
  *    - If you don't call the "start" method, the executor function passed to the SPromise constructor will be called on the next javascript execution loop
  * - Support the Promises chaining through the callbacks like to:
@@ -207,49 +203,13 @@ var SPromise = /*#__PURE__*/function (_Promise) {
             metas = res[1];
           } else {
             value = res;
-          } // console.log('PROCESSED', metas);
-
+          }
         } // trigger on the destination promise
 
 
         destSPromise.trigger(metas.stack, value, _objectSpread(_objectSpread({}, metas), {}, {
           level: metas.level + 1
         }));
-      });
-    }
-    /**
-     * @name                  log
-     * @type                  Function
-     * @static
-     *
-     * This static function allows you to log automatically the triggered log and error
-     * events. You can specify the stacks you want to log using the ```stacks``` property in the settings object
-     *
-     * @param         {SPromise}      promise             The promise you want to listen for stdout and stderr events
-     * @param         {Object}        [settings={}]         An object of settings to configure your log process
-     * - stacks ('log,error') {String}: Specify which stacks you want to log.
-     *
-     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-     */
-
-  }, {
-    key: "log",
-    value: function log(sourceSPromise, settings) {
-      if (settings === void 0) {
-        settings = {};
-      }
-
-      // settings
-      settings = (0, _deepMerge.default)({
-        filter: null,
-        stacks: 'log,error'
-      }, settings);
-      if (!(sourceSPromise instanceof SPromise)) return; // listen for all on the source promise
-
-      sourceSPromise.on(settings.stacks, (value, metas) => {
-        if (settings.filter && !settings.filter(value, metas)) return;
-        var msg = value.value ? value.value : value;
-        console.log(msg);
       });
     }
     /**
@@ -288,11 +248,31 @@ var SPromise = /*#__PURE__*/function (_Promise) {
 
     _classCallCheck(this, SPromise);
 
-    var _resolve, _reject;
+    var _masterPromiseRejectFn, _masterPromiseResolveFn;
 
-    var _trigger = function _trigger() {
+    var _resolve = function _resolve() {
       for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
         args[_key] = arguments[_key];
+      }
+
+      setTimeout(() => {
+        _this.resolve(...args);
+      });
+    };
+
+    var _reject = function _reject() {
+      for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        args[_key2] = arguments[_key2];
+      }
+
+      setTimeout(() => {
+        _this.reject(...args);
+      });
+    };
+
+    var _trigger = function _trigger() {
+      for (var _len3 = arguments.length, args = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+        args[_key3] = arguments[_key3];
       }
 
       setTimeout(() => {
@@ -301,8 +281,8 @@ var SPromise = /*#__PURE__*/function (_Promise) {
     };
 
     var _cancel = function _cancel() {
-      for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-        args[_key2] = arguments[_key2];
+      for (var _len4 = arguments.length, args = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+        args[_key4] = arguments[_key4];
       }
 
       setTimeout(() => {
@@ -310,29 +290,21 @@ var SPromise = /*#__PURE__*/function (_Promise) {
       });
     };
 
-    _this = _super.call(this, (resolve, reject) => {
-      _resolve = resolve;
-      _reject = reject;
+    _this = _super.call(this, resolve => {
+      _masterPromiseResolveFn = resolve;
+      new Promise((rejectPromiseResolve, rejectPromiseReject) => {
+        _masterPromiseRejectFn = rejectPromiseReject;
+      }).catch(e => {
+        _this.trigger(_this._settings.triggerOnCatch, {
+          value: e
+        });
+      });
       var executor = typeof executorFnOrSettings === 'function' ? executorFnOrSettings : null;
 
       if (executor) {
         return executor(_resolve, _reject, _trigger, _cancel);
       }
-    }); // new Promise((resolve, reject) => {
-    //   _reject = reject;
-    //   // _resolve = resolve;
-    // })
-    //   // .then((v) => {
-    //   //   nativeConsole.log('CC', v);
-    //   // })
-    //   .catch((e) => {
-    //     this.trigger('error', {
-    //       value: e
-    //     });
-    //   });
-    // super.finally((e) => {
-    //   nativeConsole.log('FIN', e);
-    // });
+    });
 
     _defineProperty(_assertThisInitialized(_this), "_settings", {});
 
@@ -342,13 +314,13 @@ var SPromise = /*#__PURE__*/function (_Promise) {
       writable: true,
       configurable: true,
       enumerable: false,
-      value: _resolve
+      value: _masterPromiseResolveFn
     });
     Object.defineProperty(_assertThisInitialized(_this), '_masterPromiseRejectFn', {
       writable: true,
       configurable: true,
       enumerable: false,
-      value: _reject
+      value: _masterPromiseRejectFn
     });
     Object.defineProperty(_assertThisInitialized(_this), '_promiseState', {
       writable: true,
@@ -371,7 +343,8 @@ var SPromise = /*#__PURE__*/function (_Promise) {
     }); // extend settings
 
     _this._settings = (0, _deepMerge.default)({
-      destroyTimeout: 100,
+      triggerOnCatch: 'catch',
+      destroyTimeout: 5000,
       id: (0, _uniqid.default)()
     }, typeof executorFnOrSettings === 'object' ? executorFnOrSettings : {}, settings);
 
@@ -904,10 +877,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
 
           var callbackResult = item.callback(currentCallbackReturnedValue, metasObj); // check if the callback result is a promise
 
-          if (Promise.resolve(callbackResult) === callbackResult) {
-            callbackResult = yield callbackResult;
-          } // if the settings tells that we have to pass each returned value to the next callback
-
+          callbackResult = yield callbackResult; // if the settings tells that we have to pass each returned value to the next callback
 
           if (callbackResult !== undefined) {
             currentCallbackReturnedValue = callbackResult;
@@ -961,9 +931,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
 
             if (stackResult !== undefined) {
               currentStackResult = stackResult;
-            } // await this._triggerStack('*', currentStackResult, stacks[i]);
-            // this._triggerAllStack(stacks[i], currentStackResult);
-
+            }
           }
 
           resolve(currentStackResult);
@@ -1011,12 +979,12 @@ var SPromise = /*#__PURE__*/function (_Promise) {
 
       stacks.forEach(name => {
         // check if it has a callNumber specified using name:1
-        var splitedName = name.split('{');
+        var splitedName = name.split(':');
         var callNumber = -1;
 
         if (splitedName.length === 2) {
           name = splitedName[0];
-          callNumber = parseInt(splitedName[1].replace('}', ''));
+          callNumber = parseInt(splitedName[1]);
         } // calling the registration method
 
 
@@ -1098,8 +1066,8 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "then",
     value: function then() {
-      for (var _len3 = arguments.length, args = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-        args[_key3] = arguments[_key3];
+      for (var _len5 = arguments.length, args = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
+        args[_key5] = arguments[_key5];
       }
 
       if (args.length === 2 && typeof args[0] === 'function' && typeof args[1] === 'function') {
@@ -1140,13 +1108,12 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "catch",
     value: function _catch() {
-      for (var _len4 = arguments.length, args = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
-        args[_key4] = arguments[_key4];
+      for (var _len6 = arguments.length, args = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
+        args[_key6] = arguments[_key6];
       }
 
-      _get(_getPrototypeOf(SPromise.prototype), "catch", this).call(this, ...args);
-
-      return this._registerCallbackInStack('catch', ...args);
+      // super.catch(...args);
+      return this._registerCallbackInStack(this._settings.triggerOnCatch, ...args);
     }
     /**
      * @name                finally
@@ -1170,11 +1137,17 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    // finally(...args) {
-    //   // super.finally(...args);
-    //   return this._registerCallbackInStack('finally', ...args);
-    // }
 
+  }, {
+    key: "finally",
+    value: function _finally() {
+      for (var _len7 = arguments.length, args = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
+        args[_key7] = arguments[_key7];
+      }
+
+      // super.finally(...args);
+      return this._registerCallbackInStack('finally', ...args);
+    }
     /**
      * @name                resolved
      * @type                Function
@@ -1201,8 +1174,8 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "resolved",
     value: function resolved() {
-      for (var _len5 = arguments.length, args = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
-        args[_key5] = arguments[_key5];
+      for (var _len8 = arguments.length, args = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
+        args[_key8] = arguments[_key8];
       }
 
       return this._registerCallbackInStack('resolve', ...args);
@@ -1233,8 +1206,8 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "rejected",
     value: function rejected() {
-      for (var _len6 = arguments.length, args = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
-        args[_key6] = arguments[_key6];
+      for (var _len9 = arguments.length, args = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
+        args[_key9] = arguments[_key9];
       }
 
       return this._registerCallbackInStack('reject', ...args);
@@ -1265,8 +1238,8 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "canceled",
     value: function canceled() {
-      for (var _len7 = arguments.length, args = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
-        args[_key7] = arguments[_key7];
+      for (var _len10 = arguments.length, args = new Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
+        args[_key10] = arguments[_key10];
       }
 
       return this._registerCallbackInStack('cancel', ...args);

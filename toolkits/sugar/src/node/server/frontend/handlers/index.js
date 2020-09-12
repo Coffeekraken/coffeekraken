@@ -21,7 +21,7 @@ module.exports = function index(req, res, settings = {}) {
   return new __SPromise(
     (resolve, reject, trigger) => {
       return resolve({
-        view: 'index',
+        view: 'pages.index',
         data: {
           title: `Hi there!!!`,
           body: 'Something goes wrong...'

@@ -47,46 +47,62 @@ var SError = /*#__PURE__*/function (_Error) {
 
     _classCallCheck(this, SError);
 
-    _this = _super.call(this);
+    _this = _super.call(this, message);
     Error.captureStackTrace(_assertThisInitialized(_this), _this.constructor);
-
-    if (typeof message === 'object') {
-      if (message.syscall) _this.syscall = message.syscall;
-      if (message.code) _this.code = message.code;
-      if (message.property) _this.property = message.property;
-      if (message.message) _this.message = message.message;
-      if (message.name) _this.name = message.name;
-      if (message.stack) _this.stack = message.stack;
-    } else if (typeof message !== 'string') {
-      _this.message = (0, _trimLines.default)(message.toString());
-      _this.name = _this.constructor.name;
-      _this.stack = message.stack || [];
-      _this.code = message.code || null;
-      _this.property = message.property || null;
-      _this.syscall = message.syscall || null;
-    } else {
-      _this.message = (0, _toString.default)(message); // this.name = null;
-    }
-
-    _this.message = (0, _trimLines.default)((0, _parseHtml.default)("\n      <red><underline>".concat(_this.name || _this.constructor.name, "</underline></red>\n\n      ").concat(_this.message, "\n    ")));
+    var stack = [];
     var packageRoot = (0, _packageRoot.default)();
 
-    if (_this.stack) {
-      var stack = [];
+    var stackArray = _this.stack.split(' at ').slice(1);
 
-      var stackArray = _this.stack.split('at ').slice(1);
-
-      stackArray.filter(l => {
-        if (l.trim() === 'Error') return false;
-        if (l.trim() === '') return false;
-        return true;
-      }).forEach(l => {
-        if (l.trim() === '') return;
-        stack.push("<cyan>\u2502</cyan> at <cyan>".concat(l.replace(packageRoot, ''), "</cyan>"));
-      });
-      _this.message += (0, _trimLines.default)((0, _parseHtml.default)(stack.join('')));
-      _this.stack = null;
-    }
+    stackArray.filter(l => {
+      if (l.trim() === 'Error') return false;
+      if (l.trim() === '') return false;
+      return true;
+    }).forEach(l => {
+      if (l.trim() === '') return;
+      stack.push("<cyan>\u2502</cyan> at <cyan>".concat(l.replace(packageRoot, ''), "</cyan>"));
+    });
+    _this.name = _this.constructor.name;
+    _this.message = (0, _trimLines.default)((0, _parseHtml.default)("\n      <red><underline>".concat(_this.name || _this.constructor.name, "</underline></red>\n\n      ").concat(message, "\n\n      ").concat(stack.join(''), "\n    ")));
+    var displayed = false;
+    Object.defineProperty(_assertThisInitialized(_this), 'stack', {
+      get: function get() {
+        if (displayed) return '';
+        displayed = true;
+        return this.message;
+      },
+      set: function set(value) {
+        this._stack = value;
+      }
+    });
+    _this.stack = (0, _trimLines.default)((0, _parseHtml.default)(stack.join(''))); // if (typeof message === 'object') {
+    //   if (message.syscall) this.syscall = message.syscall;
+    //   if (message.code) this.code = message.code;
+    //   if (message.property) this.property = message.property;
+    //   if (message.message) this.message = message.message;
+    //   if (message.name) this.name = message.name;
+    //   if (message.stack) this.stack = message.stack;
+    // } else if (typeof message !== 'string') {
+    //   this.message = __trimLines(message.toString());
+    //   this.name = this.constructor.name;
+    //   this.stack = message.stack || [];
+    //   this.code = message.code || null;
+    //   this.property = message.property || null;
+    //   this.syscall = message.syscall || null;
+    // } else {
+    //   this.message = __toString(message);
+    // }
+    // this.message = __trimLines(
+    //   __parseHtml(`
+    //   <red><underline>${this.name || this.constructor.name}</underline></red>
+    //   ${this.message}
+    // `)
+    // );
+    // if (this.stack) {
+    //
+    //   // this.message += '\n' + );
+    //   // this.stack = null;
+    // }
 
     return _this;
   } // inspect() {

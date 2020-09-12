@@ -12,6 +12,7 @@ const __render = require('../../template/render');
 const __express = require('express');
 const __trimLines = require('../../string/trimLines');
 const __SError = require('../../error/SError');
+const __STemplate = require('../../template/STemplate');
 
 /**
  * @name                express
@@ -93,8 +94,12 @@ module.exports = (args = {}) => {
                 __path.resolve(__dirname, 'views')
               ]
             };
+
+            const templateInstance = new __STemplate(view, {});
+
             try {
-              result = await __render(view, data, settings);
+              result = await templateInstance.render(data, settings);
+              // result = await __render(view, data, settings);
             } catch (e) {
               result = await __render(
                 'pages.501',

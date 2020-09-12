@@ -1,6 +1,6 @@
 <?php
 // require the vendors
-require_once realpath(__DIR__.'/../../../../vendor/autoload.php');
+require_once realpath(__DIR__.'/../../../../../vendor/autoload.php');
 // use Jenssegers\Blade\Blade;
 use eftec\bladeone\BladeOne;
 function compile($viewsPath, $view, $data, $tmpPath) {

@@ -4,6 +4,6 @@ const __argsToObject = require('../../node/cli/argsToObject');
 
 module.exports = (stringArgs = '') => {
   const app = new __STermApp(
-    __argsToObject(stringArgs, __STermAppCli.definitionObj)
+    __argsToObject(stringArgs, __STermAppCli.interface.definitionObj)
   );
 };

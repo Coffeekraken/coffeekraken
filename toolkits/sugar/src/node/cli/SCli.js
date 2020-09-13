@@ -36,19 +36,7 @@ const __SPromise = require('../promise/SPromise');
  * const SCli = require('@coffeekraken/sugar/js/cli/SCli');
  * class MyCli extends SCli {
  *    static command = 'php %hostname:%port %rootDir %arguments';
- *    static definitionObj = {
- *      hostname: {
- *        type: 'String',
- *        description: 'Server hostname',
- *        default: 'localhost'
- *      },
- *      port: {
- *        type: 'Number',
- *        description: 'Server port',
- *        default: 8080
- *      },
- *      // etc...
- *    }:
+ *    static interface = MyCoolSInterface;
  *    constructor(settings = {}) {
  *      super(settings);
  *    }
@@ -108,7 +96,10 @@ class SCli extends __SPromise {
     super(settings);
     if (!this._settings.id) this._settings.id = this.constructor.name;
 
-    this._paramsObj = __argsToObject(initialParams, this.definitionObj);
+    this._paramsObj = __argsToObject(
+      initialParams,
+      this.interface.definitionObj
+    );
 
     this._paramsObj = __deepMerge(
       this._settings.defaultParams,
@@ -145,7 +136,7 @@ class SCli extends __SPromise {
     } else {
       const childProcess = new __SChildProcess(this.command, {
         id: settings.id,
-        definitionObj: this.definitionObj,
+        definitionObj: this.interface.definitionObj,
         defaultParams: settings.defaultParams,
         ...settings.childProcess
       });
@@ -189,7 +180,7 @@ class SCli extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   static parseArgs(cliString) {
-    return __parseArgs(cliString, this.definitionObj);
+    return __parseArgs(cliString, this.interface.definitionObj);
   }
 
   /**
@@ -206,7 +197,7 @@ class SCli extends __SPromise {
   }
 
   /**
-   * @name        definitionObj
+   * @name        interface
    * @type        String
    * @get
    *
@@ -214,20 +205,16 @@ class SCli extends __SPromise {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  get definitionObj() {
-    return Object.assign(
-      {},
-      {
-        ...this.constructor.definitionObj,
-        forceChildProcess: {
-          type: 'Boolean',
-          required: true,
-          default: true,
-          description:
-            'Allows you to force the SCli class to start a new child process even if the SCli instance already runs inside one'
-        }
-      }
-    );
+  get interface() {
+    const int = this.constructor.interface;
+    int.definitionObj.forceChildProcess = {
+      type: 'Boolean',
+      required: true,
+      default: true,
+      description:
+        'Allows you to force the SCli class to start a new child process even if the SCli instance already runs inside one'
+    };
+    return int;
   }
 
   /**
@@ -280,7 +267,7 @@ class SCli extends __SPromise {
     settings = __deepMerge(this._settings, settings);
 
     if (typeof paramsObj === 'string') {
-      paramsObj = __argsToObject(paramsObj, this.definitionObj);
+      paramsObj = __argsToObject(paramsObj, this.interface.definitionObj);
     } else if (!paramsObj) {
       paramsObj = Object.assign({}, this._paramsObj);
     }
@@ -340,7 +327,7 @@ class SCli extends __SPromise {
   toString(paramsObj = {}, includeAllParams = this._settings.includeAllParams) {
     return __buildCommandLine(
       this.command,
-      this.definitionObj,
+      this.interface.definitionObj,
       paramsObj,
       includeAllParams
     );

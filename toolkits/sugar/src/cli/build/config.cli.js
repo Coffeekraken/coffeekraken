@@ -4,7 +4,10 @@ const __SBuildConfigActionsStream = require('../../node/build/SBuildConfigAction
 const __output = require('../../node/process/output');
 
 module.exports = (stringArgs = '') => {
-  const args = __parseArgs(stringArgs, __SBuildConfigCli.definitionObj);
+  const args = __parseArgs(
+    stringArgs,
+    __SBuildConfigCli.interface.definitionObj
+  );
   const stream = new __SBuildConfigActionsStream({});
   const proc = stream.start(args);
   __output(proc);

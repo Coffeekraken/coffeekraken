@@ -95,14 +95,12 @@ module.exports = (args = {}) => {
               ]
             };
 
-            const templateInstance = new __STemplate(view, {});
-
             try {
+              const templateInstance = new __STemplate(view, {});
               result = await templateInstance.render(data, settings);
-              // result = await __render(view, data, settings);
             } catch (e) {
-              result = await __render(
-                'pages.501',
+              const templateInstance = new __STemplate('pages.501', {});
+              result = await templateInstance.render(
                 {
                   ...data,
                   error: e

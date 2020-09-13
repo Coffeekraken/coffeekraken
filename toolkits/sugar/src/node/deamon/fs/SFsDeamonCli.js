@@ -27,7 +27,7 @@ module.exports = class SFsDeamonCli extends __SCli {
   static command = 'sugar deamon.fs %arguments';
 
   /**
-   * @name          definitionObj
+   * @name          interface
    * @type          String
    * @static
    *
@@ -35,7 +35,7 @@ module.exports = class SFsDeamonCli extends __SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static definitionObj = __SFsDeamonInterface.definitionObj;
+  static interface = __SFsDeamonInterface;
 
   /**
    * @name          processClass

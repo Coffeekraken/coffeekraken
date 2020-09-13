@@ -7,7 +7,7 @@ const __sugarConfig = require('../../node/config/sugar');
 
 module.exports = (stringArgs = '') => {
   const args = __deepMerge(
-    __argsToObject(stringArgs, __STermAppCli.definitionObj),
+    __argsToObject(stringArgs, __STermAppCli.interface.definitionObj),
     {
       name: 'sugarapp',
       configFolderPath: `${__packageRoot(__dirname)}/.sugar`

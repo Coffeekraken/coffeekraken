@@ -6,7 +6,7 @@ const __argsToObject = require('../../node/cli/argsToObject');
 module.exports = (stringArgs = '') => {
   if (__isChildProcess()) {
     const server = __expressServer(
-      __argsToObject(stringArgs, __ExpressCli.definitionObj)
+      __argsToObject(stringArgs, __ExpressCli.interface.definitionObj)
     );
     return;
   }

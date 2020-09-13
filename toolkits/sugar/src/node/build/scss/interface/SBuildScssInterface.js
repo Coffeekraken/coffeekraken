@@ -4,7 +4,7 @@ const __sugarConfig = require('../../../config/sugar');
 const __deepMerge = require('../../../object/deepMerge');
 
 /**
- * @name                SBuildScssCliInterface
+ * @name                SBuildScssInterface
  * @namespace           node.build.scss.interface
  * @type                Class
  * @extends             SInterface
@@ -15,7 +15,7 @@ const __deepMerge = require('../../../object/deepMerge');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SBuildScssCliInterface extends __SInterface {
+module.exports = class SBuildScssInterface extends __SInterface {
   static definitionObj = __deepMerge(__SBuildInterface.definitionObj, {
     input: {
       default: __sugarConfig('build.scss.input')

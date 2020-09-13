@@ -1,6 +1,6 @@
 const __SCli = require('../../cli/SCli');
-const __sugarConfig = require('../../config/sugar');
 const __deepMerge = require('../../object/deepMerge');
+const __SBuildViewsInterface = require('./interface/SBuildViewsInterface');
 
 /**
  * @name            SBuildViewsCli
@@ -26,30 +26,15 @@ module.exports = class SBuildViewsCli extends __SCli {
   static command = 'sugar build.views %arguments';
 
   /**
-   * @name          definitionObj
-   * @type          Object
+   * @name          interface
+   * @type          SInterface
    * @static
    *
    * Store the definition object
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static definitionObj = {
-    input: {
-      type: 'String',
-      alias: 'i',
-      description: 'Input files glob pattern',
-      default: __sugarConfig('build.views.input') || 'src/views/**/*.*',
-      level: 1
-    },
-    outputDir: {
-      type: 'String',
-      alias: 'o',
-      description: 'Output directory path',
-      default: __sugarConfig('build.views.outputDir') || 'dist/views',
-      level: 1
-    }
-  };
+  static interface = __SBuildViewsInterface;
 
   /**
    * @name          constructor

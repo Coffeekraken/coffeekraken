@@ -1,6 +1,4 @@
 const __packageRoot = require('../src/node/path/packageRoot');
-const __sugarConfig = require('../src/node/config/sugar');
-
 module.exports = {
   welcome: {
     serverModule: 'frontendServer'
@@ -18,7 +16,20 @@ module.exports = {
       interface: `${__packageRoot(
         __dirname
       )}/src/node/server/frontend/interface/SFrontendServerInterface`,
-      settings: '@config.frontend'
+      params: '@config.frontend'
+    },
+    buildScss: {
+      id: 'build.scss',
+      name: 'Sugar UI Build SCSS',
+      description:
+        'Watch and build the SCSS files to production ready CSS ones',
+      module: `${__packageRoot(
+        __dirname
+      )}/src/node/build/scss/SBuildScssSugarUiModule`,
+      interface: `${__packageRoot(
+        __dirname
+      )}/src/node/build/scss/interface/SBuildScssInterface`,
+      params: '@config.build.scss'
     }
   }
 };

@@ -27,7 +27,7 @@ class SFrontendServerCli extends __SCli {
   static command = 'sugar server.frontend %arguments';
 
   /**
-   * @name          definitionObj
+   * @name          interface
    * @type          String
    * @static
    *
@@ -35,7 +35,7 @@ class SFrontendServerCli extends __SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static definitionObj = __SExpressServerInterface.definitionObj;
+  static interface = __SExpressServerInterface;
 
   /**
    * @name          processClass

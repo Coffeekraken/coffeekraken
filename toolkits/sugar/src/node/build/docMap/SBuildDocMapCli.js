@@ -28,7 +28,7 @@ module.exports = class SBuildDocMapCli extends __SCli {
   static command = 'sugar build.docMap %arguments';
 
   /**
-   * @name          definitionObj
+   * @name          interface
    * @type          Object
    * @static
    *
@@ -36,7 +36,7 @@ module.exports = class SBuildDocMapCli extends __SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static definitionObj = __SBuildDocMapInterface.definitionObj;
+  static interface = __SBuildDocMapInterface;
 
   /**
    * @name          constructor

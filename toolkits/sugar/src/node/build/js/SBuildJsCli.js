@@ -1,6 +1,6 @@
 const __SCli = require('../../cli/SCli');
 const __deepMerge = require('../../object/deepMerge');
-const __SBuildJsCliInterface = require('./interface/SBuildJsCliInterface');
+const __SBuildJsInterface = require('./interface/SBuildJsInterface');
 const __SBuildJsProcess = require('./SBuildJsProcess');
 
 /**
@@ -27,7 +27,7 @@ class SBuildJsCli extends __SCli {
   static command = 'sugar build.js %arguments';
 
   /**
-   * @name          definitionObj
+   * @name          interface
    * @type          Object
    * @static
    *
@@ -35,7 +35,7 @@ class SBuildJsCli extends __SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static definitionObj = __SBuildJsCliInterface.definitionObj;
+  static interface = __SBuildJsInterface;
 
   /**
    * @name          processClass
@@ -74,4 +74,4 @@ class SBuildJsCli extends __SCli {
   }
 }
 
-module.exports = __SBuildJsCliInterface.implements(SBuildJsCli);
+module.exports = __SBuildJsInterface.implements(SBuildJsCli);

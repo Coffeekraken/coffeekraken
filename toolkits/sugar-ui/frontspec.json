@@ -3,14 +3,14 @@
     "css": {
       "default": {
         "name": "main",
-        "path": "dist/css/index.css",
+        "path": "/dist/css/index.css",
         "type": "default"
       }
     },
     "js": {
       "default": {
         "name": "main",
-        "path": "dist/js/index.js",
+        "path": "/dist/js/index.js",
         "type": "default"
       }
     }

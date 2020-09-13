@@ -149,7 +149,7 @@ class SProcess extends __SPromise {
       const stacks = Array.isArray(settings.deamon.runOn)
         ? settings.deamon.runOn.join(',')
         : '*';
-      this._deamonInstance.on(stacks, (data) => {
+      this._deamonInstance.on(stacks, (data, metas) => {
         // check if a process is already running
         if (this._currentPromise) return;
 
@@ -180,8 +180,6 @@ class SProcess extends __SPromise {
           settings.deamon.watchArgs
         );
       }
-
-      this._deamonInstance.start();
     }
   }
 

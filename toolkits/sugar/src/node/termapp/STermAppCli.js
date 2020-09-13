@@ -1,5 +1,5 @@
 const __SCli = require('../cli/SCli');
-const __packageRoot = require('../path/packageRoot');
+const __STermAppInterface = require('./interface/STermAppInterface');
 
 /**
  * @name            STermAppCli
@@ -25,7 +25,7 @@ module.exports = class STermAppCli extends __SCli {
   static command = 'sugar termapp.run %arguments';
 
   /**
-   * @name          definitionObj
+   * @name          interface
    * @type          Object
    * @static
    *
@@ -33,15 +33,7 @@ module.exports = class STermAppCli extends __SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static definitionObj = {
-    name: {
-      type: 'String',
-      alias: 'n',
-      description: 'STerm application name',
-      default: 'sugarapp',
-      level: 1
-    }
-  };
+  static interface = __STermAppInterface;
 
   /**
    * @name          constructor

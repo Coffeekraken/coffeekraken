@@ -166,7 +166,10 @@ class SChildProcess extends __SProcess {
     const commandToRun = __buildCommandLine(
       this._commandOrPath,
       settings.definitionObj,
-      paramsToRun
+      paramsToRun,
+      {
+        alias: false
+      }
     );
 
     // initialize the runningProcess object

@@ -1,4 +1,3 @@
-const __SFrontendServerSugarUiModuleSettingsInterface = require('./interface/SFrontendServerSugarUiModuleSettingsInterface');
 const __SSugarUiModule = require('../../ui/sugar/SSugarUiModule');
 const __SFrontendServerInterface = require('./interface/SFrontendServerInterface');
 const __frontend = require('../../server/frontend/frontend');
@@ -30,10 +29,10 @@ module.exports = class SFrontendServerSugarUiModule extends __SSugarUiModule {
    * @since       2.0.0
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  constructor(settings = {}) {
+  constructor(params = {}, settings = {}) {
     // check the settings interface
-    __SFrontendServerSugarUiModuleSettingsInterface.apply(settings);
     super(
+      params,
       __deepMerge(
         {
           autorun: true

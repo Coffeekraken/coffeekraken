@@ -2,7 +2,6 @@ const __SCli = require('../../cli/SCli');
 const __deepMerge = require('../../object/deepMerge');
 const __SSugarUiInterface = require('./interface/SSugarUiInterface');
 const __SSugarUiProcess = require('./SSugarUiProcess');
-const __sugarConfig = require('../../config/sugar');
 
 /**
  * @name            SSugarUiCli
@@ -28,7 +27,7 @@ class SSugarUiCli extends __SCli {
   static command = 'sugar ui.sugar %arguments';
 
   /**
-   * @name          definitionObj
+   * @name          interface
    * @type          Object
    * @static
    *
@@ -36,7 +35,7 @@ class SSugarUiCli extends __SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static definitionObj = __SSugarUiInterface.definitionObj;
+  static interface = __SSugarUiInterface;
 
   /**
    * @name          processClass

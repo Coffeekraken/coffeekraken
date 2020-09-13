@@ -1,5 +1,6 @@
 import __toString from '../string/toString';
 import __argsToString from './argsToString';
+import __deepMerge from '../object/deepMerge';
 
 /**
  * @name            buildCommandLine
@@ -15,7 +16,9 @@ import __argsToString from './argsToString';
  * @param       {String}      command         The tokenized command line to use as base
  * @param       {Object}      definitionObj   The definition object of the command to launch
  * @param       {Object}      [args={}]       An optional arguments/values object to override definition default value
- * @param       {Boolean}     [includeAllArgs = true]       Specify if you want all the arguments in the definition object in your command line string, or if you just want the one passed in your argsObj argument
+ * @param       {Object}      [settings={}]     An object of settings to configure your command line buildine process:
+ * - includeAllArgs (true) {Boolean}: Specify if you want all the arguments in the definition object in your command line string, or if you just want the one passed in your argsObj argument
+ * - alias (true) {Boolean}: Specify if you want to make use of the aliases in your generated command
  * @return      {String}                      The builded command string
  *
  * @example       js
@@ -54,8 +57,16 @@ export default function buildCommandLine(
   command,
   definitionObj,
   args = {},
-  includeAllArgs = true
+  settings = {}
 ) {
+  settings = __deepMerge(
+    {
+      includeAllArgs: true,
+      alias: true
+    },
+    settings
+  );
+
   definitionObj = Object.assign({}, definitionObj);
   // get all the tokens
   const tokens = command.match(/\%[a-zA-Z0-9-_]+/gm) || [];
@@ -78,7 +89,7 @@ export default function buildCommandLine(
   });
 
   // args to string
-  const argsString = __argsToString(args, definitionObj, includeAllArgs).trim();
+  const argsString = __argsToString(args, definitionObj, settings).trim();
   command = command.replace('%arguments', argsString);
 
   return command.trim();

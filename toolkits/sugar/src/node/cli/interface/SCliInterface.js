@@ -15,16 +15,21 @@ const __SProcessInterface = require('../../process/SProcess');
  */
 module.exports = class SCliInterface extends __SInterface {
   static definitionObj = {
+    interface: {
+      type: 'SInterface',
+      required: true,
+      static: true
+    },
     processClass: {
       type: 'SProcess',
       required: true,
       static: true
     },
-    definitionObj: {
-      type: 'Object',
-      required: true,
-      static: true
-    },
+    // definitionObj: {
+    //   type: 'Object',
+    //   required: true,
+    //   static: true
+    // },
     command: {
       type: 'String',
       required: true,

@@ -1,7 +1,7 @@
 const __SPromise = require('../../promise/SPromise');
-const __SSugarUi = require('./SSugarUI');
 const __SError = require('../../error/SError');
 const __toString = require('../../string/toString');
+const __SSugarUiModuleSettingsInterface = require('./interface/SSugarUiModuleSettingsInterface');
 
 /**
  * @name            SSugarUiModule
@@ -75,6 +75,17 @@ module.exports = class SSugarUiModule extends __SPromise {
   }
 
   /**
+   * @name          params
+   * @type          Object
+   *
+   * Store the passed module parameters
+   *
+   * @since         2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  params = {};
+
+  /**
    * @name          constructor
    * @type          Function
    * @constructor
@@ -83,13 +94,21 @@ module.exports = class SSugarUiModule extends __SPromise {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(settings = {}) {
+  constructor(params = {}, settings = {}) {
     super({
       id: 'ui.sugar.module',
       name: 'Sugar UI Module',
       autorun: false,
       ...settings
     });
+
+    __SSugarUiModuleSettingsInterface.apply(this._settings);
+
+    if (this.constructor.interface) {
+      this.constructor.interface.apply(params);
+    }
+
+    this.params = params;
   }
 
   /**

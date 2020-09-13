@@ -9,6 +9,8 @@ var _toString = _interopRequireDefault(require("../string/toString"));
 
 var _argsToString = _interopRequireDefault(require("./argsToString"));
 
+var _deepMerge = _interopRequireDefault(require("../object/deepMerge"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -25,7 +27,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @param       {String}      command         The tokenized command line to use as base
  * @param       {Object}      definitionObj   The definition object of the command to launch
  * @param       {Object}      [args={}]       An optional arguments/values object to override definition default value
- * @param       {Boolean}     [includeAllArgs = true]       Specify if you want all the arguments in the definition object in your command line string, or if you just want the one passed in your argsObj argument
+ * @param       {Object}      [settings={}]     An object of settings to configure your command line buildine process:
+ * - includeAllArgs (true) {Boolean}: Specify if you want all the arguments in the definition object in your command line string, or if you just want the one passed in your argsObj argument
+ * - alias (true) {Boolean}: Specify if you want to make use of the aliases in your generated command
  * @return      {String}                      The builded command string
  *
  * @example       js
@@ -60,15 +64,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function buildCommandLine(command, definitionObj, args, includeAllArgs) {
+function buildCommandLine(command, definitionObj, args, settings) {
   if (args === void 0) {
     args = {};
   }
 
-  if (includeAllArgs === void 0) {
-    includeAllArgs = true;
+  if (settings === void 0) {
+    settings = {};
   }
 
+  settings = (0, _deepMerge.default)({
+    includeAllArgs: true,
+    alias: true
+  }, settings);
   definitionObj = Object.assign({}, definitionObj); // get all the tokens
 
   var tokens = command.match(/\%[a-zA-Z0-9-_]+/gm) || [];
@@ -87,7 +95,7 @@ function buildCommandLine(command, definitionObj, args, includeAllArgs) {
     command = command.replace(token, tokenValueString);
   }); // args to string
 
-  var argsString = (0, _argsToString.default)(args, definitionObj, includeAllArgs).trim();
+  var argsString = (0, _argsToString.default)(args, definitionObj, settings).trim();
   command = command.replace('%arguments', argsString);
   return command.trim();
 }

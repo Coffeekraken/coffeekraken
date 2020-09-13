@@ -1,5 +1,6 @@
 import __toString from '../string/toString';
 import __parseArgs from './parseArgs';
+import __deepMerge from '../object/deepMerge';
 
 /**
  * @name                  argsToString
@@ -17,7 +18,9 @@ import __parseArgs from './parseArgs';
  *    - default: The default value if nothing is specified
  *    - regexp: A regexp that is used to validate the passed value
  *    - validator: A function to validate the passed value. Has to return true or false
- * @param       {Boolean}     [includeAllArgs = true]       Specify if you want all the arguments in the definitionObj object in your command line string, or if you just want the one passed in your argsObj argument
+ * @param       {Object}      [settings={}]               A settings object to configure your command build process:
+ * - includeAllArgs (true) {Boolean}: Specify if you want all the arguments in the definitionObj object in your command line string, or if you just want the one passed in your argsObj argument
+ * - alias (true) {Boolean}: Specify if you want to use the aliases or not in the generated command
  *
  * @todo            check documentation
  *
@@ -53,8 +56,16 @@ import __parseArgs from './parseArgs';
 module.exports = function argsToString(
   args,
   definitionObj = null,
-  includeAllArgs = true
+  settings = {}
 ) {
+  settings = __deepMerge(
+    {
+      includeAllArgs: true,
+      alias: true
+    },
+    settings
+  );
+
   if (typeof args === 'string') {
     args = __parseArgs(args, definitionObj);
   }
@@ -72,8 +83,9 @@ module.exports = function argsToString(
   Object.keys(definitionObj).forEach((argName) => {
     const defObj = definitionObj[argName];
     if (!defObj) return;
-    if (!includeAllArgs && args[argName] === undefined) return;
-    const prefix = defObj.alias ? `-${defObj.alias}` : `--${argName}`;
+    if (!settings.includeAllArgs && args[argName] === undefined) return;
+    const prefix =
+      defObj.alias && settings.alias ? `-${defObj.alias}` : `--${argName}`;
 
     let value;
     if (args && args[argName] !== undefined) value = args[argName];

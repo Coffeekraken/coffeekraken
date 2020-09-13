@@ -1,6 +1,6 @@
 const __SCli = require('../../cli/SCli');
-const __sugarConfig = require('../../config/sugar');
 const __deepMerge = require('../../object/deepMerge');
+const __SBuildConfigInterface = require('./interface/SBuildConfigInterface');
 
 /**
  * @name            SBuildConfigCli
@@ -26,7 +26,7 @@ module.exports = class SBuildConfigCli extends __SCli {
   static command = 'sugar build.config %arguments';
 
   /**
-   * @name          definitionObj
+   * @name          interface
    * @type          Object
    * @static
    *
@@ -34,22 +34,7 @@ module.exports = class SBuildConfigCli extends __SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static definitionObj = {
-    input: {
-      type: 'String',
-      alias: 'i',
-      description: 'Input files glob pattern',
-      default: __sugarConfig('build.config.input') || 'src/config/*.config.js',
-      level: 1
-    },
-    outputDir: {
-      type: 'String',
-      alias: 'o',
-      description: 'Output directory path',
-      default: __sugarConfig('build.config.outputDir') || 'dist/config',
-      level: 1
-    }
-  };
+  static interface = __SBuildConfigInterface;
 
   /**
    * @name          constructor

@@ -1,5 +1,4 @@
 const __SPromise = require('../../promise/SPromise');
-const __readJson = require('../../fs/');
 
 /**
  * @name          json

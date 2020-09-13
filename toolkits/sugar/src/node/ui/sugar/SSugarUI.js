@@ -110,10 +110,13 @@ module.exports = class SSugarUi extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(settings = {}) {
-    settings = __deepMerge({
-      id: 'ui.sugar',
-      name: 'Sugar UI'
-    });
+    settings = __deepMerge(
+      {
+        id: 'ui.sugar',
+        name: 'Sugar UI'
+      },
+      settings
+    );
 
     super(settings);
 
@@ -225,10 +228,10 @@ module.exports = class SSugarUi extends __SPromise {
       }
       const settings = {
         id: moduleObj.id,
-        name: moduleObj.name,
-        ...moduleObj.settings
+        name: moduleObj.name
       };
-      const moduleInstance = new moduleClass(settings);
+
+      const moduleInstance = new moduleClass(moduleObj.params, settings);
       if (!(moduleInstance instanceof __SSugarUiModule)) {
         throw new __SError(
           `It seems that the passed class for your module "<yellow>${moduleObj.name}</yellow>" does not extends the sugar "<green>SSugarUiModule</green>" one...`

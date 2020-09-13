@@ -7,6 +7,8 @@ const __execPhp = require('exec-php');
 const __SError = require('../../error/SError');
 const __folderPath = require('../../fs/folderPath');
 const __getFilename = require('../../fs/filename');
+const __copy = require('../../clipboard/copy');
+const __childProcess = require('child_process');
 
 /**
  * @name          SBladeTemplateEngine
@@ -108,7 +110,13 @@ module.exports = class SBladeTemplateEngine extends __STemplateEngine {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   render(viewPath, data = {}, settings = {}) {
-    settings = __deepMerge(this._settings, settings);
+    settings = __deepMerge(
+      {
+        rootDir: []
+      },
+      this._settings,
+      settings
+    );
     return new __SPromise(
       (resolve, reject, trigger, cancel) => {
         if (!__fs.existsSync(settings.cacheDir))
@@ -129,13 +137,25 @@ module.exports = class SBladeTemplateEngine extends __STemplateEngine {
             }
             const viewDirPath = __folderPath(viewPath);
             const viewFilename = __getFilename(viewPath);
+            settings.rootDir.push(viewDirPath);
             // execute the php engine and get back the result
             php.compile(
-              [viewDirPath],
+              [...settings.rootDir],
               viewFilename.replace('.blade.php', '').split('/').join('.'),
               data,
               settings.cacheDir,
-              (error, result, output, printed) => {
+              async (error, result, output, printed) => {
+                if (error) {
+                  const cmd = error
+                    .toString()
+                    .replace('Error: Command failed: ', '');
+                  const res = __childProcess.spawnSync(cmd, [], {
+                    shell: true
+                  });
+                  if (res && res.stdout) {
+                    return resolve(res.stdout.toString());
+                  }
+                }
                 // get the best result possible
                 const ret = result || printed || output || error;
                 // resolve the promise with the best result possible
@@ -146,7 +166,7 @@ module.exports = class SBladeTemplateEngine extends __STemplateEngine {
         );
       },
       {
-        // id: 'template.engines.blade'
+        id: 'template.engines.blade'
       }
     );
   }

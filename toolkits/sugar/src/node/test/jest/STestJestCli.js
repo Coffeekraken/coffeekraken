@@ -27,7 +27,7 @@ class STestJestCli extends __SCli {
   static command = 'sugar test.jest %arguments';
 
   /**
-   * @name          definitionObj
+   * @name          interface
    * @type          Object
    * @static
    *
@@ -35,7 +35,7 @@ class STestJestCli extends __SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static definitionObj = __STestJestCliInterface.definitionObj;
+  static interface = __STestJestCliInterface;
 
   /**
    * @name          processClass

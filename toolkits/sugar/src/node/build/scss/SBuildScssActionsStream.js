@@ -12,7 +12,7 @@ const __SExtractStreamAction = require('../../stream/actions/SExtractStreamActio
 const __path = require('path');
 const __sugarConfig = require('../../config/sugar');
 const __SSugarJsonStreamAction = require('../actions/SSugarJsonStreamAction');
-const __SBuildScssCliInterface = require('./interface/SBuildScssCliInterface');
+const __SBuildScssInterface = require('./interface/SBuildScssInterface');
 const __SExtractDocblocksIntoFiles = require('../../stream/actions/SExtractDocblocksIntoFilesStreamAction');
 
 /**
@@ -41,7 +41,7 @@ const __SExtractDocblocksIntoFiles = require('../../stream/actions/SExtractDocbl
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = class SBuildScssActionsStream extends __SActionsStream {
-  static interface = __SBuildScssCliInterface;
+  static interface = __SBuildScssInterface;
 
   /**
    * @name        constructor

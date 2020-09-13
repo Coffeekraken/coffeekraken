@@ -42,8 +42,6 @@ const __STemplate = require('../STemplate');
     {}
   );
 
-  console.log(res);
-
   process.exit();
   // const other = await template.render(
   //   {

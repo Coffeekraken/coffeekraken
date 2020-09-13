@@ -23,22 +23,20 @@ module.exports = function views(req, res, settings = {}) {
     (resolve, reject, trigger) => {
       let params = req.params[0].split('/');
 
-      const rootDirs = [
-        __sugarConfig('views.rootDir'),
-        __path.resolve(__dirname, '../views')
-      ];
-      if (settings.rootDir) {
-        rootDirs.unshift(settings.rootDir);
-      }
+      // const rootDirs = [
+      //   __sugarConfig('views.rootDir'),
+      //   __path.resolve(__dirname, '../views')
+      // ];
+      // if (settings.rootDir) {
+      //   rootDirs.unshift(settings.rootDir);
+      // }
 
-      for (let i = 0; i < rootDirs.length; i++) {
-        const rootDir = rootDirs[i];
-        const viewPath = __path.resolve(rootDir, params.join('/'));
-        // if (__fs.existsSync())
-        //       if (__fs.existsSync(__path.resolve(rootDir, params.join('/'))))
-      }
-
-      return false;
+      // for (let i = 0; i < rootDirs.length; i++) {
+      //   const rootDir = rootDirs[i];
+      //   const viewPath = __path.resolve(rootDir, params.join('/'));
+      //   // if (__fs.existsSync())
+      //   //       if (__fs.existsSync(__path.resolve(rootDir, params.join('/'))))
+      // }
 
       return resolve({
         view: params.join('.'),
@@ -50,7 +48,7 @@ module.exports = function views(req, res, settings = {}) {
       });
     },
     {
-      id: 'server.handler.index'
+      id: 'server.handler.views'
     }
   );
 };

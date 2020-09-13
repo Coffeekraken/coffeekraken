@@ -1,8 +1,7 @@
-module.exports = (__SCli) => {
+module.exports = (__SCli, __SInterface) => {
   describe('sugar.node.cli.SCli', () => {
     it('Check that the SCli class work correctly', () => {
-      class MyCli extends __SCli {
-        static command = 'php %hostname:%port %rootDir %arguments';
+      class MyInterface extends __SInterface {
         static definitionObj = {
           hostname: {
             type: 'String',
@@ -26,13 +25,18 @@ module.exports = (__SCli) => {
             default: true
           }
         };
+      }
+
+      class MyCli extends __SCli {
+        static command = 'php %hostname:%port %rootDir %arguments';
+        static interface = MyInterface;
         _run() {}
       }
 
       const cli = new MyCli();
 
       expect(cli.command).toBe('php %hostname:%port %rootDir %arguments');
-      expect(typeof cli.definitionObj).toBe('object');
+      expect(typeof cli.interface).toBe('object');
 
       expect(
         cli.toString({

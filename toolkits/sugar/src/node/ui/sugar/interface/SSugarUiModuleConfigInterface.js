@@ -34,10 +34,10 @@ module.exports = class SSugarUiModuleConfigInterface extends __SInterface {
         exists: true
       }
     },
-    settings: {
+    params: {
       type: 'Object',
       description:
-        'An object of settings that will be passed to your module constructor',
+        'An object of parameters that will be passed to your module constructor',
       required: true,
       default: {}
     }

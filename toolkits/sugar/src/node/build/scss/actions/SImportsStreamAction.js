@@ -27,7 +27,7 @@ module.exports = class SImportsStreamAction extends __SActionsStreamAction {
    */
   static definitionObj = {
     imports: {
-      type: 'Array<Object>',
+      type: 'Array<String>',
       required: false
     }
   };

@@ -244,7 +244,6 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
               var cachedStreamObj = yield this._sCache.get(actionHash);
 
               if (cachedStreamObj) {
-                console.log('cached');
                 streamObj = cachedStreamObj;
                 streamObj.$fromCache = true;
                 streamObjArray[streamObjArrayIdx] = streamObj;
@@ -519,7 +518,9 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
 
           var startString = "#start Starting the stream \"<cyan>".concat(settings.name || 'unnamed', "</cyan>\"");
 
-          _this3.log(startString);
+          _this3.log({
+            value: startString
+          });
 
           _this3.trigger('start', {});
 

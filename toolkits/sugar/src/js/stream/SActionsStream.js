@@ -208,7 +208,6 @@ export default class SActionStream extends __SPromise {
         ) {
           const cachedStreamObj = await this._sCache.get(actionHash);
           if (cachedStreamObj) {
-            console.log('cached');
             streamObj = cachedStreamObj;
             streamObj.$fromCache = true;
             streamObjArray[streamObjArrayIdx] = streamObj;
@@ -528,10 +527,12 @@ export default class SActionStream extends __SPromise {
         await __wait(100); // ugly hack to check when have time...
 
         // starting log
-        const startString = `#start Starting the stream "<cyan>${
+        let startString = `#start Starting the stream "<cyan>${
           settings.name || 'unnamed'
         }</cyan>"`;
-        this.log(startString);
+        this.log({
+          value: startString
+        });
         this.trigger('start', {});
         trigger('start', {});
 

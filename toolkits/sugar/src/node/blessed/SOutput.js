@@ -331,6 +331,8 @@ module.exports = class SOutput extends __SComponent {
   log(...args) {
     // await __wait(100);
 
+    console.log(args.length);
+
     let logsObjArray = this._parseLog(...args);
 
     for (let i = 0; i < logsObjArray.length; i++) {
@@ -366,6 +368,10 @@ module.exports = class SOutput extends __SComponent {
         console.log(__toString(logObj));
         return;
       }
+
+      const toStringValue = __toString(logObj.value);
+      console.log(toStringValue.length);
+      if (toStringValue.length > 4000) return;
 
       if (logObj.value.includes('[?1049h')) {
         logObj.value = logObj.value.slice(40);

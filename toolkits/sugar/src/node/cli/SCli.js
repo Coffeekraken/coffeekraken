@@ -1,3 +1,5 @@
+const __fs = require('fs');
+const __tmp = require('tmp');
 const __isClass = require('../is/class');
 const __packageJson = require('../package/json');
 const __buildCommandLine = require('./buildCommandLine');
@@ -118,14 +120,7 @@ class SCli extends __SPromise {
           : '*';
         // console.log('PIPE', stacks, this._processInstance.constructor.name);
         this._processInstance.on(stacks, (value, metas) => {
-          console.log(
-            __toString({
-              $pipe: true,
-              type: 'SPromise',
-              value,
-              metas
-            })
-          );
+          __SChildProcess.triggerParent(value, metas);
         });
       }
 

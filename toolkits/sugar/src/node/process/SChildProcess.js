@@ -1,3 +1,5 @@
+const __fs = require('fs');
+const __tmp = require('tmp');
 const __SError = require('../error/SError');
 const __toString = require('../string/toString');
 const __SPromise = require('../promise/SPromise');
@@ -107,6 +109,37 @@ class SChildProcess extends __SProcess {
 
     super({}, settings);
     this._commandOrPath = commandOrPath;
+  }
+
+  /**
+   * @name            triggerParent
+   * @type            Function
+   * @static
+   *
+   * This method allows you to "pipe" some promise from a child process to a his parent process promise
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static triggerParent(value, metas = {}) {
+    const logString = __toString({
+      $triggerParent: true,
+      value,
+      metas
+    });
+    if (logString.length >= 8192) {
+      const tmpDir = __tmp.dirSync().name;
+      const tmpName = `${tmpDir}/${metas.id}.txt`;
+      __fs.writeFileSync(tmpName, logString);
+      console.log(
+        __toString({
+          $triggerParent: true,
+          file: tmpName
+        })
+      );
+    } else {
+      console.log(logString);
+    }
   }
 
   /**
@@ -349,7 +382,13 @@ class SChildProcess extends __SProcess {
       this._runningProcess.childProcess.stdout.on('data', (log) => {
         const logs = log.toString().split(/⠀{1,99999999}/);
         logs.forEach((log) => {
-          const logObj = __parse(log);
+          let logObj = __parse(log);
+          if (typeof logObj === 'object' && logObj.$file) {
+            if (!__fs.existsSync(logObj.$file)) return;
+            const logString = __fs.readFileSync(logObj.$file, 'utf8');
+            logObj = __parse(logString);
+          }
+
           if (typeof logObj === 'object' && logObj.$pipe && logObj.type) {
             switch (logObj.type) {
               case 'SPromise':

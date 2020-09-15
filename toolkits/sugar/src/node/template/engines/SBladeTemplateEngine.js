@@ -120,13 +120,16 @@ module.exports = class SBladeTemplateEngine extends __STemplateEngine {
     return new __SPromise(
       (resolve, reject, trigger, cancel) => {
         if (!__fs.existsSync(settings.cacheDir))
-          __fs.mkdirSync(settings.cacheDir);
+          __fs.mkdirSync(settings.cacheDir, {
+            recursive: true
+          });
 
         if (!__fs.existsSync(viewPath)) {
           return reject(
             `It seems that the view you passed "<cyan>${viewPath}</cyan>" does not exists...`
           );
         }
+
         // preparing the php execution
         __execPhp(
           __dirname + '/bladePhp/compile.php',

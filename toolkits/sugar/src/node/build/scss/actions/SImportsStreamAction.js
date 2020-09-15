@@ -1,6 +1,7 @@
 const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
 const __getScssImportsStrings = require('../getScssImportsStrings');
 const __deepMerge = require('../../../object/deepMerge');
+const __SBuildScssInterface = require('../interface/SBuildScssInterface');
 
 /**
  * @name                SImportsStreamAction
@@ -17,7 +18,7 @@ const __deepMerge = require('../../../object/deepMerge');
  */
 module.exports = class SImportsStreamAction extends __SActionsStreamAction {
   /**
-   * @name            definitionObj
+   * @name            interface
    * @type             Object
    * @static
    *
@@ -25,12 +26,7 @@ module.exports = class SImportsStreamAction extends __SActionsStreamAction {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static definitionObj = {
-    imports: {
-      type: 'Array<String>',
-      required: false
-    }
-  };
+  static interface = __SBuildScssInterface;
 
   /**
    * @name            constructor

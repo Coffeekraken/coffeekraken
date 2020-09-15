@@ -65,7 +65,7 @@ module.exports = class SFsDeamonCli extends __SCli {
           id: 'deamon.fs',
           name: 'Filesystem Deamon',
           childProcess: {
-            pipe: true
+            triggerParent: true
           }
         },
         settings

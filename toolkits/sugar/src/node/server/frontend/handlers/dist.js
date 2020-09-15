@@ -36,6 +36,14 @@ module.exports = function dist(req, server, settings = {}) {
         }
       }
 
+      // if not found
+      if (!filepath) {
+        return resolve({
+          code: 404,
+          data: 'Not found'
+        });
+      }
+
       // read the file
       const content = __fs.readFileSync(filepath, 'utf8');
 

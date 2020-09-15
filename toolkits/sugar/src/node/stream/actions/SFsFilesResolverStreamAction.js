@@ -10,6 +10,17 @@ const __isPath = require('../../is/path');
 const __packageRoot = require('../../path/packageRoot');
 const __SPromise = require('../../promise/SPromise');
 const __SError = require('../../error/SError');
+const __SInterface = require('../../class/SInterface');
+
+class SFsFilesResolverStreamActionInterface extends __SInterface {
+  static definitionObj = {
+    input: {
+      type: 'String|Array<String>',
+      required: true
+    }
+  };
+}
+
 /**
  * @name            SFindInFileStreamAction
  * @namespace       node.stream.actions
@@ -26,7 +37,7 @@ const __SError = require('../../error/SError');
  */
 module.exports = class SFindInFileStreamAction extends __SActionsStreamAction {
   /**
-   * @name            definitionObj
+   * @name            interface
    * @type             Object
    * @static
    *
@@ -34,12 +45,7 @@ module.exports = class SFindInFileStreamAction extends __SActionsStreamAction {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static definitionObj = {
-    input: {
-      type: 'String|Array<String>',
-      required: true
-    }
-  };
+  static interface = SFsFilesResolverStreamActionInterface;
 
   /**
    * @name            constructor

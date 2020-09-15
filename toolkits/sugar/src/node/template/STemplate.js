@@ -17,9 +17,9 @@ const __SPromise = require('../promise/SPromise');
  * @feature       2.0.0         Support for ```bladePhp``` render engine
  * @feature       2.0.0         Simply render your template using the ```render``` method that returns you back a nice SPromise instance resolved once the template has been rendered correctly
  *
- * @param       {String}        viewPathOrTemplateString      The view doted file path relative to the ```rootDirs``` setting, or directly a template string to render using the engine specify in ```engine``` setting...
+ * @param       {String}        viewPathOrTemplateString      The view doted file path relative to the ```rootDir``` setting, or directly a template string to render using the engine specify in ```engine``` setting...
  * @param       {Object}        [settings={}]           An object of settings to configure your template rendering process:
- * - rootDirs (@config.views.rootDir) {String}: Specify either 1 rootDir in which to search for your view, or an Array of rootDirs to search in
+ * - rootDir (@config.views.rootDir) {String}: Specify either 1 rootDir in which to search for your view, or an Array of rootDir to search in
  * - engine (null) {String|STemplateEngine}: Specify the engine to use in order to render your template. By default it will try to automatically detect the engine but you can specify it yourself. Can be a string like "blade.php" that identify a registered template engine, or directly an STemplateEngine based template engine instance
  * - engineSettings ({}) {Object}: Specify some settings that will be passed to the corresponding engine
  * - defaultData ({}) {Object}: A data object to use by default when calling the ```render``` method. Can be overrided obviously in the ```render``` method
@@ -179,7 +179,7 @@ class STemplate {
     // save the settings
     this._settings = __deepMerge(
       {
-        rootDirs: [__sugarConfig('views.rootDir')],
+        rootDir: [__sugarConfig('views.rootDir')],
         engine: null,
         engineSettings: {},
         defaultData: {}
@@ -207,8 +207,8 @@ class STemplate {
         this._viewPath = viewPathOrTemplateString;
       } else if (!viewPathOrTemplateString.match(/\//gm)) {
         // doted path
-        for (let i = 0; i < this._settings.rootDirs.length; i++) {
-          const rootDir = this._settings.rootDirs[i];
+        for (let i = 0; i < this._settings.rootDir.length; i++) {
+          const rootDir = this._settings.rootDir[i];
           const viewPath = `${rootDir}/${viewPathOrTemplateString
             .split('.')
             .join('/')}.[!data]*`;
@@ -329,12 +329,12 @@ class STemplate {
   }
 }
 
-const defaultEngines = __sugarConfig('template.engines') || {};
+const defaultEngines = __sugarConfig('views.engines') || {};
 Object.keys(defaultEngines).forEach((extension) => {
   STemplate.registerEngine(extension, defaultEngines[extension]);
 });
 
-const defaultDataHandlers = __sugarConfig('template.dataHandlers') || {};
+const defaultDataHandlers = __sugarConfig('views.dataHandlers') || {};
 Object.keys(defaultDataHandlers).forEach((extension) => {
   STemplate.registerDataHandler(extension, defaultDataHandlers[extension]);
 });

@@ -8,6 +8,7 @@ const __postcssPresetEnv = require('postcss-preset-env');
 const __cssnano = require('cssnano');
 const __removeComments = require('postcss-discard-comments');
 const __deepMerge = require('../../../object/deepMerge');
+const __SBuildScssInterface = require('../interface/SBuildScssInterface');
 
 /**
  * @name                SPostCssStreamAction
@@ -24,7 +25,7 @@ const __deepMerge = require('../../../object/deepMerge');
  */
 module.exports = class SPostCssStreamAction extends __SActionsStreamAction {
   /**
-   * @name            definitionObj
+   * @name            interface
    * @type             Object
    * @static
    *
@@ -32,16 +33,7 @@ module.exports = class SPostCssStreamAction extends __SActionsStreamAction {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static definitionObj = {
-    data: {
-      type: 'String',
-      required: true
-    },
-    map: {
-      type: 'Boolean',
-      required: false
-    }
-  };
+  static interface = __SBuildScssInterface;
 
   /**
    * @name            constructor

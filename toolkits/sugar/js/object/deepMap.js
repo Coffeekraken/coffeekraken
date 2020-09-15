@@ -50,6 +50,12 @@ function deepMap(object, processor, settings, _path) {
     handleArray: true
   }, settings);
   Object.keys(object).forEach(prop => {
+    var descriptor = Object.getOwnPropertyDescriptor(object, prop);
+
+    if (descriptor.get && typeof descriptor.get === 'function' && !descriptor.set) {
+      return;
+    }
+
     if (!settings.deepFirst) {
       if ((0, _plainObject.default)(object[prop]) || Array.isArray(object[prop]) && settings.handleArray) {
         object[prop] = deepMap(object[prop], processor, settings, [..._path, prop]);

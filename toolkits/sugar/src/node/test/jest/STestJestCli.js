@@ -65,7 +65,7 @@ class STestJestCli extends __SCli {
           id: 'cli.test.jest',
           name: 'Cli Test Jest',
           childProcess: {
-            pipe: ['log', 'update', 'add', 'unlink', 'state']
+            triggerParent: ['log', 'update', 'add', 'unlink', 'state']
           }
         },
         settings

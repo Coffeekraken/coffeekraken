@@ -101,7 +101,7 @@ function __handleChildProcessErrors(error) {
   if (error.instanceId) return;
   // error = error.toString();
   if (!error) return;
-  console.error(__toString(error));
+  console.log(__toString(error));
   process.exit(1);
 }
 

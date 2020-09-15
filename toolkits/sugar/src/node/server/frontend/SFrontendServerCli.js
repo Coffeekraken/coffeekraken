@@ -65,7 +65,7 @@ class SFrontendServerCli extends __SCli {
           id: 'server.frontend',
           name: 'Frontend Server',
           childProcess: {
-            pipe: ['log']
+            triggerParent: ['log']
           }
         },
         settings

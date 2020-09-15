@@ -65,7 +65,7 @@ class SBuildScssCli extends __SCli {
           id: 'build.scss.cli',
           name: 'Cli Build Scss',
           childProcess: {
-            pipe: ['log', 'update', 'add', 'unlink', 'state']
+            triggerParent: ['log', 'update', 'add', 'unlink', 'state']
           }
         },
         settings

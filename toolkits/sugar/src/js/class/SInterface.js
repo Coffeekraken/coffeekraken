@@ -222,10 +222,20 @@ export default class SInterface {
    * directly. If something goes wrong, it will throw an error, otherwise, return the
    * completed object
    *
+   * @param       {Object}      object        The object on which to apply the interface and to complete
+   * @param       {Object}      [settings={}]     An object of settings to configure your process
+   * - duplicate (false) {Boolean}: Specify if you want to get back a new object or the passed one completed
+   *
    * @since       2.0.0
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   static applyAndComplete(object, settings = {}) {
+    settings = __deepMerge(
+      {
+        duplicate: false
+      },
+      settings
+    );
     const completedObject = this.complete(object, settings);
     this.applyAndThrow(completedObject, settings);
     return completedObject;
@@ -306,7 +316,17 @@ export default class SInterface {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   static complete(data, settings = {}) {
-    const argsObj = Object.assign({}, data);
+    settings = __deepMerge(
+      {
+        duplicate: false
+      },
+      settings
+    );
+
+    let argsObj = data;
+    if (settings.duplicate) {
+      argsObj = Object.assign({}, data);
+    }
 
     // loop on all the arguments
     Object.keys(this.definitionObj).forEach((argString) => {
@@ -428,5 +448,33 @@ export default class SInterface {
     let args = __argsToObject(string, this.definitionObj);
     args = this.complete(args);
     return args;
+  }
+
+  /**
+   * @name          extends
+   * @type          Function
+   * @static
+   *
+   * This static method allows you to start from this particular interface and to extends it
+   * by passing an object containing these properties:
+   * - definitionObj ({}) {Object}: An object to extends the static definitionObj one
+   * - settings ({}) {Object}: An object of settings to extends the static settings one
+   * @param     {Object}      extendsObj      An object to extends the static ones of the duplicated interface
+   * @return    {SInterface}                  A new SInterface class based on the extended one
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static extends(extendsObj) {
+    class ExtendedInterface extends this {}
+    ExtendedInterface.definitionObj = __deepMerge(
+      ExtendedInterface.definitionObj,
+      extendsObj.definitionObj || {}
+    );
+    ExtendedInterface.settings = __deepMerge(
+      ExtendedInterface.settings,
+      extendsObj.settings || {}
+    );
+    return ExtendedInterface;
   }
 }

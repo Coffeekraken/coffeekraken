@@ -1,9 +1,9 @@
-import '@coffeekraken/s-filtrable-input';
-import '@coffeekraken/s-iframe-webcomponent';
-import './search/proxy';
-import __instanciate from '@coffeekraken/sugar/js/action/instanciate';
-import __SAction from '@coffeekraken/sugar/js/action/SAction';
-import __SUrlAction from '@coffeekraken/sugar/js/action/browser/SUrlAction';
+// import '@coffeekraken/s-filtrable-input';
+// import '@coffeekraken/s-iframe-webcomponent';
+// import './search/proxy';
+// import __instanciate from '@coffeekraken/sugar/js/action/instanciate';
+// import __SAction from '@coffeekraken/sugar/js/action/SAction';
+// import __SUrlAction from '@coffeekraken/sugar/js/action/browser/SUrlAction';
 
 // __SAction.on('*.run', (instance) => {
 //   console.log('EFJIEJFIEJFIJE', instance);

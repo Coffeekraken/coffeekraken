@@ -34,14 +34,6 @@ module.exports = function frontspecMiddleware(settings = {}) {
         ...(res.templateData || {}),
         frontspec
       };
-      // for (let key in frontspec.assets) {
-      //   for (let key1 in frontspec.assets[key]) {
-      //     if (frontspec.assets[key][key1].path.slice(0, 1) === '/') continue;
-      //     frontspec.assets[key][
-      //       key1
-      //     ].path = `/${frontspec.assets[key][key1].path}`;
-      //   }
-      // }
     }
 
     next();

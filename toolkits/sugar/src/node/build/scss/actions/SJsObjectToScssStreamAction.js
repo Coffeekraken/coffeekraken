@@ -1,7 +1,7 @@
 const __deepMerge = require('../../../object/deepMerge');
 const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
 const __jsObjectToScssMap = require('../jsObjectToScssMap');
-const { stream } = require('globby');
+const __SBuildScssInterface = require('../interface/SBuildScssInterface');
 
 /**
  * @name                SJsObjectToScssStreamAction
@@ -18,7 +18,7 @@ const { stream } = require('globby');
  */
 module.exports = class SJsObjectToScssStreamAction extends __SActionsStreamAction {
   /**
-   * @name            definitionObj
+   * @name            interface
    * @type             Object
    * @static
    *
@@ -26,12 +26,7 @@ module.exports = class SJsObjectToScssStreamAction extends __SActionsStreamActio
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static definitionObj = {
-    jsObjectToScss: {
-      type: 'Object',
-      required: true
-    }
-  };
+  static interface = __SBuildScssInterface;
 
   /**
    * @name            constructor

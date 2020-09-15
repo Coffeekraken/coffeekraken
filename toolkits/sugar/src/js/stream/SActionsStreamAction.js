@@ -87,9 +87,9 @@ export default class SActionStreamAction extends __SPromise {
       this._settings.id = this.constructor.name.toLowerCase();
 
     // check the definition object
-    if (this.constructor.definitionObj) {
+    if (this.constructor.interface) {
       setTimeout(() => {
-        __validateDefinitionObject(this.constructor.definitionObj, {
+        __validateDefinitionObject(this.constructor.interface.definitionObj, {
           name: `${this.constructor.name}.definitionObj`
         });
       });
@@ -113,21 +113,11 @@ export default class SActionStreamAction extends __SPromise {
    * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   checkStreamObject(streamObj) {
-    if (!this.constructor.definitionObj) return true;
-
-    // handle "default" property of the definition object
-    Object.keys(this.constructor.definitionObj).forEach((key) => {
-      if (
-        streamObj[key] === undefined &&
-        this.constructor.definitionObj[key].default !== undefined
-      ) {
-        streamObj[key] = this.constructor.definitionObj[key].default;
-      }
-    });
+    if (!this.constructor.interface) return true;
 
     // validate the streamObj depending on the static definitionObj property
-    if (this.constructor.definitionObj) {
-      __validateObject(streamObj, this.constructor.definitionObj);
+    if (this.constructor.interface) {
+      streamObj = this.constructor.interface.applyAndComplete(streamObj);
     }
   }
 

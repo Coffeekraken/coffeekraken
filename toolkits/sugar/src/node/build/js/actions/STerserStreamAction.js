@@ -1,6 +1,7 @@
 const __deepMerge = require('../../../object/deepMerge');
 const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
 const __terser = require('terser');
+const __SBuildJsInterface = require('../interface/SBuildJsInterface');
 
 /**
  * @name                STerserStreamAction
@@ -17,7 +18,7 @@ const __terser = require('terser');
  */
 module.exports = class STerserStreamAction extends __SActionsStreamAction {
   /**
-   * @name            definitionObj
+   * @name            interface
    * @type             Object
    * @static
    *
@@ -25,20 +26,22 @@ module.exports = class STerserStreamAction extends __SActionsStreamAction {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static definitionObj = {
-    filename: {
-      type: 'String',
-      required: true
-    },
-    data: {
-      type: 'String',
-      required: true
-    },
-    sourcemapData: {
-      type: 'String|Object',
-      required: false
+  static interface = __SBuildJsInterface.extends({
+    definitionObj: {
+      filename: {
+        type: 'String',
+        required: true
+      },
+      data: {
+        type: 'String',
+        required: true
+      },
+      sourcemapData: {
+        type: 'String|Object',
+        required: false
+      }
     }
-  };
+  });
 
   /**
    * @name            constructor

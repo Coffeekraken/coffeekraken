@@ -30,6 +30,18 @@ module.exports = {
         __dirname
       )}/src/node/build/scss/interface/SBuildScssInterface`,
       params: '@config.build.scss'
+    },
+    buildJs: {
+      id: 'build.js',
+      name: 'Sugar UI Build JS',
+      description: 'Watch and build the JS files to production ready ones',
+      module: `${__packageRoot(
+        __dirname
+      )}/src/node/build/js/SBuildJsSugarUiModule`,
+      interface: `${__packageRoot(
+        __dirname
+      )}/src/node/build/js/interface/SBuildJsInterface`,
+      params: '@config.build.js'
     }
   }
 };

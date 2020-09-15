@@ -131,9 +131,9 @@ var SActionStreamAction = /*#__PURE__*/function (_SPromise) {
 
     if (!_this._settings.id) _this._settings.id = _this.constructor.name.toLowerCase(); // check the definition object
 
-    if (_this.constructor.definitionObj) {
+    if (_this.constructor.interface) {
       setTimeout(() => {
-        (0, _validateDefinitionObject.default)(_this.constructor.definitionObj, {
+        (0, _validateDefinitionObject.default)(_this.constructor.interface.definitionObj, {
           name: "".concat(_this.constructor.name, ".definitionObj")
         });
       });
@@ -158,16 +158,10 @@ var SActionStreamAction = /*#__PURE__*/function (_SPromise) {
      * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     value: function checkStreamObject(streamObj) {
-      if (!this.constructor.definitionObj) return true; // handle "default" property of the definition object
+      if (!this.constructor.interface) return true; // validate the streamObj depending on the static definitionObj property
 
-      Object.keys(this.constructor.definitionObj).forEach(key => {
-        if (streamObj[key] === undefined && this.constructor.definitionObj[key].default !== undefined) {
-          streamObj[key] = this.constructor.definitionObj[key].default;
-        }
-      }); // validate the streamObj depending on the static definitionObj property
-
-      if (this.constructor.definitionObj) {
-        (0, _validateObject.default)(streamObj, this.constructor.definitionObj);
+      if (this.constructor.interface) {
+        streamObj = this.constructor.interface.applyAndComplete(streamObj);
       }
     }
     /**

@@ -5,6 +5,11 @@ const __ensureDirSync = require('../../fs/ensureDirSync');
 const __deepMerge = require('../../object/deepMerge');
 const __md5 = require('../../crypt/md5');
 const __writeJsonSync = require('../../fs/writeJsonSync');
+const __SInterface = require('../../class/SInterface');
+
+class SExtractStreamActionInterface extends __SInterface {
+  static definitionObj = {};
+}
 
 /**
  * @name            SExtractStreamAction
@@ -23,7 +28,7 @@ const __writeJsonSync = require('../../fs/writeJsonSync');
  */
 module.exports = class SExtractStreamAction extends __SActionsStreamAction {
   /**
-   * @name            definitionObj
+   * @name            interface
    * @type             Object
    * @static
    *
@@ -31,7 +36,7 @@ module.exports = class SExtractStreamAction extends __SActionsStreamAction {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static definitionObj = {};
+  static interface = SExtractStreamActionInterface;
 
   /**
    * @name            constructor

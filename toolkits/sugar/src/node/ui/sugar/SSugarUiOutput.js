@@ -62,10 +62,49 @@ module.exports = class SSugarUiOutput extends __SComponent {
       }
     });
 
+    source.on('module.start', (e, m) => {
+      if (this.$console.parent) return;
+      let msg = e.value || 'Process starting...';
+      if (msg.length > 36) msg = msg.slice(0, 33) + '...';
+      const $startNotification = new __SNotification(
+        e.module.name || e.module.id,
+        msg,
+        {
+          bg: 'yellow',
+          onClick: () => {
+            if (!this.$console.parent) {
+              this.append(this.$console);
+            }
+          }
+        }
+      );
+      this.append($startNotification);
+    });
+
+    source.on('module.complete', (e, m) => {
+      if (this.$console.parent) return;
+      let msg = e.value || 'Process finished successfully';
+      if (msg.length > 36) msg = msg.slice(0, 33) + '...';
+      const $successNotification = new __SNotification(
+        e.module.name || e.module.id,
+        msg,
+        {
+          bg: 'green',
+          onClick: () => {
+            if (!this.$console.parent) {
+              this.append(this.$console);
+            }
+          }
+        }
+      );
+      this.append($successNotification);
+    });
+
     source.on('module.error', (e) => {
+      if (this.$console.parent) return;
       let msg = e.value;
       if (msg.length > 36) msg = msg.slice(0, 33) + '...';
-      const $notification2 = new __SNotification(
+      const $errorNotification = new __SNotification(
         e.module.name || e.module.id,
         msg,
         {
@@ -78,7 +117,7 @@ module.exports = class SSugarUiOutput extends __SComponent {
         }
       );
 
-      this.append($notification2);
+      this.append($errorNotification);
     });
 
     this.append(this.$welcome);
@@ -209,7 +248,7 @@ module.exports = class SSugarUiOutput extends __SComponent {
         top: 0,
         left: 0,
         right: 0,
-        bottom: 0
+        bottom: 2
       }
     });
     return $console;

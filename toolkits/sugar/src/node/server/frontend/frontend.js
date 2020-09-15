@@ -70,10 +70,11 @@ module.exports = (args = {}) => {
         response = await handlerPromise;
 
         // handle response
-        const view = response.view || 'pages.404';
+        let code = response.code || 200;
+        let view = response.view || 'pages.404';
         let data = response.data || {};
-        const title = response.title || 'Page not found';
-        const type = response.type || 'text/html';
+        let title = response.title || 'Page not found';
+        let type = response.type || 'text/html';
 
         // prepariong the result
         let result;
@@ -96,10 +97,11 @@ module.exports = (args = {}) => {
             };
 
             try {
-              const templateInstance = new __STemplate(view, {});
+              const templateInstance = new __STemplate(view, settings);
               result = await templateInstance.render(data, settings);
             } catch (e) {
-              const templateInstance = new __STemplate('pages.501', {});
+              const templateInstance = new __STemplate('pages.501', settings);
+              code = 501;
               result = await templateInstance.render(
                 {
                   ...data,
@@ -114,6 +116,9 @@ module.exports = (args = {}) => {
             res.type(type);
             break;
         }
+
+        // set the code
+        res.status(code);
 
         // send the result to the client
         res.send(result);
@@ -137,6 +142,7 @@ module.exports = (args = {}) => {
     })
     .on('error', (e) => {
       const string = e.toString();
+      console.log(string);
       promise.reject(`${string}`);
     });
 

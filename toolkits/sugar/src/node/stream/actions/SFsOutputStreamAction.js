@@ -4,6 +4,16 @@ const __toString = require('../../string/toString');
 const __packageRoot = require('../../path/packageRoot');
 const __deepMerge = require('../../object/deepMerge');
 const __get = require('../../object/get');
+const __SInterface = require('../../class/SInterface');
+
+class SFsOutputStreamActionInterface extends __SInterface {
+  static definitionObj = {
+    outputStack: {
+      type: 'Object',
+      required: false
+    }
+  };
+}
 
 /**
  * @name            SFsOutputStreamAction
@@ -19,7 +29,7 @@ const __get = require('../../object/get');
  */
 module.exports = class SFsOutputStreamAction extends __SActionsStreamAction {
   /**
-   * @name            definitionObj
+   * @name            interface
    * @type             Object
    * @static
    *
@@ -27,12 +37,7 @@ module.exports = class SFsOutputStreamAction extends __SActionsStreamAction {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static definitionObj = {
-    outputStack: {
-      type: 'Object',
-      required: false
-    }
-  };
+  static interface = SFsOutputStreamActionInterface;
 
   /**
    * @name            constructor

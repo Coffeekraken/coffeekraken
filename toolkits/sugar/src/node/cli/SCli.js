@@ -90,7 +90,7 @@ class SCli extends __SPromise {
         output: false,
         defaultParams: {},
         childProcess: {
-          pipe: true
+          triggerParent: true
         }
       },
       settings
@@ -114,11 +114,10 @@ class SCli extends __SPromise {
 
       this._processInstance = new SProcessInstance(this._paramsObj, settings);
 
-      if (settings.childProcess.pipe) {
-        const stacks = Array.isArray(settings.childProcess.pipe)
-          ? settings.childProcess.pipe.join(',')
+      if (settings.childProcess.triggerParent) {
+        const stacks = Array.isArray(settings.childProcess.triggerParent)
+          ? settings.childProcess.triggerParent.join(',')
           : '*';
-        // console.log('PIPE', stacks, this._processInstance.constructor.name);
         this._processInstance.on(stacks, (value, metas) => {
           __SChildProcess.triggerParent(value, metas);
         });

@@ -2,6 +2,21 @@ const __SActionsStreamAction = require('../SActionsStreamAction');
 const __fs = require('fs');
 const __isDirectory = require('../../is/directory');
 const __deepMerge = require('../../object/deepMerge');
+const __SInterface = require('../../class/SInterface');
+
+class SFsReadFileStreamActionInterface extends __SInterface {
+  static definitionObj = {
+    input: {
+      type: 'String',
+      required: true
+    },
+    dataProperty: {
+      type: 'String',
+      required: false,
+      default: 'data'
+    }
+  };
+}
 
 /**
  * @name            SFsReadFileStreamAction
@@ -18,7 +33,7 @@ const __deepMerge = require('../../object/deepMerge');
  */
 module.exports = class SFsReadFileStreamAction extends __SActionsStreamAction {
   /**
-   * @name            definitionObj
+   * @name            interface
    * @type             Object
    * @static
    *
@@ -26,17 +41,7 @@ module.exports = class SFsReadFileStreamAction extends __SActionsStreamAction {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static definitionObj = {
-    input: {
-      type: 'String',
-      required: true
-    },
-    dataProperty: {
-      type: 'String',
-      required: false,
-      default: 'data'
-    }
-  };
+  static interface = SFsReadFileStreamActionInterface;
 
   /**
    * @name            constructor

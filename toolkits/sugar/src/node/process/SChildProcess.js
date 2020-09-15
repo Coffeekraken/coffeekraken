@@ -87,7 +87,7 @@ class SChildProcess extends __SProcess {
         definitionObj: {},
         defaultParams: {},
         killOnCtrlC: !__hasExitCleanup(),
-        pipe: false,
+        triggerParent: false,
         method: __isPath(commandOrPath, true) ? 'fork' : 'spawn',
         before: null,
         after: null,
@@ -102,10 +102,10 @@ class SChildProcess extends __SProcess {
       },
       settings
     );
-    settings.env.CHILD_PROCESS_PIPE =
-      typeof settings.pipe === 'boolean'
-        ? settings.pipe
-        : __toString(settings.pipe);
+    settings.env.CHILD_PROCESS_TRIGGER_PARENT =
+      typeof settings.triggerParent === 'boolean'
+        ? settings.triggerParent
+        : __toString(settings.triggerParent);
 
     super({}, settings);
     this._commandOrPath = commandOrPath;
@@ -133,8 +133,7 @@ class SChildProcess extends __SProcess {
       __fs.writeFileSync(tmpName, logString);
       console.log(
         __toString({
-          $triggerParent: true,
-          file: tmpName
+          $file: tmpName
         })
       );
     } else {
@@ -383,22 +382,19 @@ class SChildProcess extends __SProcess {
         const logs = log.toString().split(/⠀{1,99999999}/);
         logs.forEach((log) => {
           let logObj = __parse(log);
+
           if (typeof logObj === 'object' && logObj.$file) {
             if (!__fs.existsSync(logObj.$file)) return;
             const logString = __fs.readFileSync(logObj.$file, 'utf8');
             logObj = __parse(logString);
           }
 
-          if (typeof logObj === 'object' && logObj.$pipe && logObj.type) {
-            switch (logObj.type) {
-              case 'SPromise':
-                this._runningProcess.promise.trigger(
-                  logObj.metas.stack,
-                  logObj.value,
-                  logObj.metas
-                );
-                break;
-            }
+          if (typeof logObj === 'object' && logObj.$triggerParent) {
+            this._runningProcess.promise.trigger(
+              logObj.metas.stack,
+              logObj.value,
+              logObj.metas
+            );
             return;
           }
           this._runningProcess.stdout.push(log);

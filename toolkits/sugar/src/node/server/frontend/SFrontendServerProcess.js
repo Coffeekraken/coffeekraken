@@ -1,7 +1,5 @@
 const __frontendServer = require('../frontend/frontend');
 const __SProcess = require('../../process/SProcess');
-const __SPromise = require('../../promise/SPromise');
-const __SError = require('../../error/SError');
 
 /**
  * @name            SFrontendServerProcess

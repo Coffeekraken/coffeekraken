@@ -4,6 +4,7 @@ const __getFilename = require('../../../fs/filename');
 const __isGlob = require('../../../is/glob');
 const __isPath = require('../../../is/path');
 const __deepMerge = require('../../../object/deepMerge');
+const __SBuildScssInterface = require('../interface/SBuildScssInterface');
 
 /**
  * @name                SBundleScssStreamAction
@@ -20,7 +21,7 @@ const __deepMerge = require('../../../object/deepMerge');
  */
 module.exports = class SBundleScssStreamAction extends __SActionsStreamAction {
   /**
-   * @name            definitionObj
+   * @name            interface
    * @type             Object
    * @static
    *
@@ -28,12 +29,7 @@ module.exports = class SBundleScssStreamAction extends __SActionsStreamAction {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static definitionObj = {
-    input: {
-      type: 'String',
-      required: true
-    }
-  };
+  static interface = __SBuildScssInterface;
 
   /**
    * @name            constructor

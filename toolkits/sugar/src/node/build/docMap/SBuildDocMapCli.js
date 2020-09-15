@@ -54,7 +54,7 @@ module.exports = class SBuildDocMapCli extends __SCli {
           id: 'build.docMap.cli',
           name: 'Build docMap.json',
           childProcess: {
-            pipe: ['log', 'state']
+            triggerParent: ['log', 'state']
           }
         },
         settings

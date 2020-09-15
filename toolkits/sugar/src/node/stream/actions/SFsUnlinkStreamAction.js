@@ -1,6 +1,16 @@
 const __SActionsStreamAction = require('../SActionsStreamAction');
 const __rimraf = require('rimraf');
 const __deepMerge = require('../../object/deepMerge');
+const __SInterface = require('../../class/SInterface');
+
+class SFsUnlinkStreamActionInterface extends __SInterface {
+  static definitionObj = {
+    unlink: {
+      type: 'String',
+      required: true
+    }
+  };
+}
 
 /**
  * @name            SFsUnlinkStreamAction
@@ -20,7 +30,7 @@ const __deepMerge = require('../../object/deepMerge');
  */
 module.exports = class SFsUnlinkStreamAction extends __SActionsStreamAction {
   /**
-   * @name            definitionObj
+   * @name            interface
    * @type             Object
    * @static
    *
@@ -28,12 +38,7 @@ module.exports = class SFsUnlinkStreamAction extends __SActionsStreamAction {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static definitionObj = {
-    unlink: {
-      type: 'String',
-      required: true
-    }
-  };
+  static interface = SFsUnlinkStreamActionInterface;
 
   /**
    * @name            constructor

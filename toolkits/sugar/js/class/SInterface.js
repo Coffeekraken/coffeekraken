@@ -262,6 +262,10 @@ var SInterface = /*#__PURE__*/function () {
      * directly. If something goes wrong, it will throw an error, otherwise, return the
      * completed object
      *
+     * @param       {Object}      object        The object on which to apply the interface and to complete
+     * @param       {Object}      [settings={}]     An object of settings to configure your process
+     * - duplicate (false) {Boolean}: Specify if you want to get back a new object or the passed one completed
+     *
      * @since       2.0.0
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
@@ -273,6 +277,9 @@ var SInterface = /*#__PURE__*/function () {
         settings = {};
       }
 
+      settings = (0, _deepMerge.default)({
+        duplicate: false
+      }, settings);
       var completedObject = this.complete(object, settings);
       this.applyAndThrow(completedObject, settings);
       return completedObject;
@@ -381,7 +388,15 @@ var SInterface = /*#__PURE__*/function () {
         settings = {};
       }
 
-      var argsObj = Object.assign({}, data); // loop on all the arguments
+      settings = (0, _deepMerge.default)({
+        duplicate: false
+      }, settings);
+      var argsObj = data;
+
+      if (settings.duplicate) {
+        argsObj = Object.assign({}, data);
+      } // loop on all the arguments
+
 
       Object.keys(this.definitionObj).forEach(argString => {
         var argDefinitionObj = this.definitionObj[argString]; // check if we have an argument passed in the properties
@@ -522,6 +537,43 @@ var SInterface = /*#__PURE__*/function () {
       var args = (0, _argsToObject.default)(string, this.definitionObj);
       args = this.complete(args);
       return args;
+    }
+    /**
+     * @name          extends
+     * @type          Function
+     * @static
+     *
+     * This static method allows you to start from this particular interface and to extends it
+     * by passing an object containing these properties:
+     * - definitionObj ({}) {Object}: An object to extends the static definitionObj one
+     * - settings ({}) {Object}: An object of settings to extends the static settings one
+     * @param     {Object}      extendsObj      An object to extends the static ones of the duplicated interface
+     * @return    {SInterface}                  A new SInterface class based on the extended one
+     *
+     * @since     2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "extends",
+    value: function _extends(extendsObj) {
+      var ExtendedInterface = /*#__PURE__*/function (_this2) {
+        _inherits(ExtendedInterface, _this2);
+
+        var _super2 = _createSuper(ExtendedInterface);
+
+        function ExtendedInterface() {
+          _classCallCheck(this, ExtendedInterface);
+
+          return _super2.apply(this, arguments);
+        }
+
+        return ExtendedInterface;
+      }(this);
+
+      ExtendedInterface.definitionObj = (0, _deepMerge.default)(ExtendedInterface.definitionObj, extendsObj.definitionObj || {});
+      ExtendedInterface.settings = (0, _deepMerge.default)(ExtendedInterface.settings, extendsObj.settings || {});
+      return ExtendedInterface;
     }
   }]);
 

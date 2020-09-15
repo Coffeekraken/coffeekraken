@@ -35,6 +35,16 @@ export default function deepMap(object, processor, settings = {}, _path = []) {
     settings
   );
   Object.keys(object).forEach((prop) => {
+    const descriptor = Object.getOwnPropertyDescriptor(object, prop);
+
+    if (
+      descriptor.get &&
+      typeof descriptor.get === 'function' &&
+      !descriptor.set
+    ) {
+      return;
+    }
+
     if (!settings.deepFirst) {
       if (
         __isPlainObject(object[prop]) ||

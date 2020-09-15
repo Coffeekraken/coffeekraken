@@ -1,6 +1,20 @@
 const __SActionsStreamAction = require('../SActionsStreamAction');
 const __ncp = require('ncp').ncp;
 const __deepMerge = require('../../object/deepMerge');
+const __SInterface = require('../../class/SInterface');
+
+class SFsCopyStreamActionInterface extends __SInterface {
+  static definitionObj = {
+    input: {
+      type: 'String',
+      required: true
+    },
+    outputDir: {
+      type: 'String',
+      required: true
+    }
+  };
+}
 
 /**
  * @name            SFsCopyStreamAction
@@ -17,7 +31,7 @@ const __deepMerge = require('../../object/deepMerge');
  */
 module.exports = class SFsCopyStreamAction extends __SActionsStreamAction {
   /**
-   * @name            definitionObj
+   * @name            interface
    * @type             Object
    * @static
    *
@@ -25,16 +39,7 @@ module.exports = class SFsCopyStreamAction extends __SActionsStreamAction {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static definitionObj = {
-    input: {
-      type: 'String',
-      required: true
-    },
-    outputDir: {
-      type: 'String',
-      required: true
-    }
-  };
+  static interface = SFsCopyStreamActionInterface;
 
   /**
    * @name            constructor

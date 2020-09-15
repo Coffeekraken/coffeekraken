@@ -5,6 +5,7 @@ const __packageRoot = require('../../../path/packageRoot');
 const __globImporter = require('node-sass-glob-importer');
 const __getFilename = require('../../../fs/filename');
 const __SPromise = require('../../../promise/SPromise');
+const __SBuildScssInterface = require('../interface/SBuildScssInterface');
 
 /**
  * @name                SRenderSassStreamAction
@@ -21,7 +22,7 @@ const __SPromise = require('../../../promise/SPromise');
  */
 module.exports = class SRenderSassStreamAction extends __SActionsStreamAction {
   /**
-   * @name            definitionObj
+   * @name            interface
    * @type             Object
    * @static
    *
@@ -29,16 +30,7 @@ module.exports = class SRenderSassStreamAction extends __SActionsStreamAction {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static definitionObj = {
-    data: {
-      type: 'String',
-      required: true
-    },
-    map: {
-      type: 'Boolean',
-      required: false
-    }
-  };
+  static interface = __SBuildScssInterface;
 
   /**
    * @name            constructor

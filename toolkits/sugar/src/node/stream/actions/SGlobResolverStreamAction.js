@@ -4,6 +4,16 @@ const __clone = require('../../object/clone');
 const __extractSame = require('../../string/extractSame');
 const __getFilename = require('../../fs/filename');
 const __deepMerge = require('../../object/deepMerge');
+const __SInterface = require('../../class/SInterface');
+
+class SGlobResolverStreamActionInterface extends __SInterface {
+  static definitionObj = {
+    globProperty: {
+      type: 'String',
+      required: true
+    }
+  };
+}
 
 /**
  * @name            SGlobResolverStreamAction
@@ -21,7 +31,7 @@ const __deepMerge = require('../../object/deepMerge');
  */
 module.exports = class SGlobResolverStreamAction extends __SActionsStreamAction {
   /**
-   * @name            definitionObj
+   * @name            interface
    * @type             Object
    * @static
    *
@@ -29,12 +39,7 @@ module.exports = class SGlobResolverStreamAction extends __SActionsStreamAction 
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static definitionObj = {
-    globProperty: {
-      type: 'String',
-      required: true
-    }
-  };
+  static interface = SGlobResolverStreamActionInterface;
 
   /**
    * @name            constructor

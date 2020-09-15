@@ -5,11 +5,12 @@ const __deepMerge = require('../../../object/deepMerge');
 const __fs = require('fs');
 const __path = require('path');
 const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
-const __SBuildJSCliInterface = require('../interface/SBuildJsCliInterface');
+const __SBuildJSInterface = require('../interface/SBuildJsInterface');
 const __sugarConfig = require('../../../config/sugar');
 const __babel = require('@babel/core');
 const __getScssImportsStrings = require('../../scss/getScssImportsStrings');
 const __jsObjectToScssMap = require('../../scss/jsObjectToScssMap');
+const __SBuildJsInterface = require('../interface/SBuildJsInterface');
 
 /**
  * @name                SWebpackStreamAction
@@ -26,7 +27,7 @@ const __jsObjectToScssMap = require('../../scss/jsObjectToScssMap');
  */
 module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
   /**
-   * @name            definitionObj
+   * @name            interface
    * @type             Object
    * @static
    *
@@ -34,9 +35,7 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static definitionObj = {
-    ...__SBuildJSCliInterface.definitionObj
-  };
+  static interface = __SBuildJSInterface;
 
   /**
    * @name            constructor

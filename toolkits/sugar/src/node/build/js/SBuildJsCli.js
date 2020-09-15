@@ -65,7 +65,7 @@ class SBuildJsCli extends __SCli {
           id: 'build.js.cli',
           name: 'Cli Build Js',
           childProcess: {
-            pipe: ['log', 'update', 'add', 'unlink', 'state']
+            triggerParent: ['log', 'update', 'add', 'unlink', 'state']
           }
         },
         settings

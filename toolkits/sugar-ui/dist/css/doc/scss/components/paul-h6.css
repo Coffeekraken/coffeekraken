@@ -1,0 +1,29 @@
+
+
+/**
+ * @name              paul-h6
+ * @namespace         scss.components
+ * @type              Classname
+ *
+ * This class can be applied on any ```h``` component to specify his size to ```6```
+ *
+ * @example         html
+ * <h6 class="paul-h6">I'm a cool "6" title</h6>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/**
+ * @name              paul-h6
+ * @namespace         scss.components
+ * @type              Classname
+ *
+ * This class can be applied on any ```h``` component
+ *
+ * @example         html
+ * <h6 class="paul-h6">I'm a cool "6" title</h6>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */

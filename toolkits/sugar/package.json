@@ -144,6 +144,7 @@
     "lodash.clone": "^4.5.0",
     "lodash.clonedeep": "^4.5.0",
     "log-with-style": "^0.3.0",
+    "lorem-ipsum": "^2.0.3",
     "make-dir": "^3.0.0",
     "markdown-chalk": "^2.1.0",
     "marked": "^1.1.0",

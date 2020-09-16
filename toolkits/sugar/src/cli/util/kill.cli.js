@@ -20,7 +20,19 @@ module.exports = async (stringArgs = '') => {
     __parseHtml(`Listing all the processes that need to be killed...`)
   );
 
-  let processesObj = await psList();
+  let processesObj;
+  try {
+    processesObj = await psList();
+  } catch(e) {
+  }
+
+  if (!processesObj) {
+    console.log(
+      __parseHtml('No processes to kill...')
+    );
+    process.exit();
+  }
+
   Object.keys(processesObj).forEach((key) => {
     const processObj = processesObj[key];
 

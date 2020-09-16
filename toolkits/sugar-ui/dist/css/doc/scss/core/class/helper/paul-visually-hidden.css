@@ -1,0 +1,19 @@
+
+
+/**
+* @name 		paul-visually-hidden
+* @namespace             scss.core.class.helper
+* @class-namespace         sugar.helper.display.visually-hidden
+* @type        class
+*
+* Hide the element from display but not for SEO.
+* This class use some tricks to make the element dissapear without using some ```display:none;```, etc...
+*
+* @example 	html
+* <div class="paul-visually-hidden">
+* 	I'm only visually hidden
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/

@@ -1,0 +1,18 @@
+
+
+/**
+* @name 		paul-invisible
+* @namespace             scss.core.class.helper
+* @class-namespace         sugar.helper.display.invisible
+* @type        class
+*
+* Display the element by setting the visibility to ```hidden```
+*
+* @example 	html
+* <div class="paul-invisible">
+* 	I'm invisible
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/

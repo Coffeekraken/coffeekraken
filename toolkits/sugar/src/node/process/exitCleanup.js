@@ -3,13 +3,13 @@ const __getRegisteredProcessed = require('./getRegisteredProcesses');
 const __clear = require('clear');
 const __fkill = require('fkill');
 const __hotkey = require('../keyboard/hotkey');
-const __spawn = require('../process/spawn');
 const __parseHtml = require('../terminal/parseHtml');
 const __keypress = require('keypress');
 const __wait = require('../time/wait');
 const __SOutput = require('../blessed/SOutput');
 const __sugarHeading = require('../ascii/sugarHeading');
 const __packageJson = require('../package/json');
+const __SChildProcess = require('../process/SChildProcess');
 
 /**
  * @name              exitCleanup
@@ -48,14 +48,12 @@ module.exports = function exitCleanup() {
 
     __keypress.disableMouse(process.stdout);
 
-    // destroy the screen if exists
-    try {
-      if (global._screen) global._screen.destroy();
-    } catch (e) {}
-
     await __wait(50);
 
-    const $output = new __SOutput([], {});
+    const $output = new __SOutput([], {
+      attach: true,
+      maxItemsByGroup: 1000
+    });
 
     $output.log({
       value: `${__sugarHeading({
@@ -71,24 +69,6 @@ module.exports = function exitCleanup() {
     if (remainingProcessesCount > 0) {
       Object.keys(processes).forEach(async (key) => {
         const processObj = processes[key];
-        // if (processObj.hasAfterCommand && processObj.hasAfterCommand()) {
-        //   function waitForClose() {
-        //     const p = new Promise((resolve) => {
-        //       processObj
-        //         .on('close', () => {
-        //           resolve();
-        //         })
-        //         .on('log,error', (value) => {
-        //           $output.log({
-        //             value: __parseHtml(`  ${value.value}`)
-        //           });
-        //         });
-        //     });
-        //     return p;
-        //   }
-        //   await waitForClose();
-        //   processKilled();
-        // } else
         if (!processObj.exitCode && process.pid !== processObj.pid) {
           $output.log({
             group: key,
@@ -101,7 +81,7 @@ module.exports = function exitCleanup() {
           });
           // processKilled();
         } else {
-          processKilled();
+          // processKilled();
         }
       });
     }
@@ -111,12 +91,16 @@ module.exports = function exitCleanup() {
       group: 'Forgotten processes',
       value: 'Cleaning the forgotten process(es)...'
     });
-    await __spawn('sugar util.kill all')
+    const childProcess = new __SChildProcess('sugar util.kill all', {});
+    await childProcess
+      .run()
       .on('log,error', (value) => {
-        $output.log({
-          group: 'Forgotten processes',
-          value: __parseHtml(`    - ${value.value}`)
-        });
+        if (value.value.includes('#success')) {
+          $output.log({
+            group: 'Forgotten processes',
+            value: value.value
+          });
+        }
       })
       .on('cancel,finally', async () => {
         $output.log({
@@ -127,7 +111,7 @@ module.exports = function exitCleanup() {
         await __wait(20);
 
         $output.log({
-          value: `Closing the main process in <yellow>5s</yellow>...\n- <cyan>ctrl+c</cyan> to close directly`
+          value: `Closing the main process in <yellow>5s</yellow>...\n<cyan>ctrl+c</cyan> to close directly`
         });
 
         await __wait(5000);

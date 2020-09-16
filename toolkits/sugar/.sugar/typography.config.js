@@ -61,6 +61,33 @@ module.exports = {
   'line-letters-count': 55,
 
   /**
+   * @name              text-format-scope-class
+   * @namespace         config.typography
+   * @type              String
+   * @default           tf
+   *
+   * Specify the scope class name to generate in order to apply the text formatting on some elements
+   *
+   * @since             1.0.0
+   * @see               https://www.npmjs.com/package/modularscale-sass
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  'text-format-scope-class': 'tf',
+
+  /**
+   * @name              vertical-rhythm-scope-class
+   * @namespace         config.typography
+   * @type              String
+   * @default           vr
+   *
+   * Specify the scope class name to generate in order to apply the vertical rhythm on some elements
+   *
+   * @since             1.0.0
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  'vertical-rhythm-scope-class': 'vr',
+
+  /**
    * @name            formats
    * @namespace       config.typography
    * @type            Object

@@ -152,6 +152,11 @@ export default class SPromise extends Promise {
           value = res;
         }
       }
+
+      if (metas.stack.includes('catch')) {
+        console.log('tri', metas.stack);
+      }
+
       // trigger on the destination promise
       destSPromise.trigger(metas.stack, value, {
         ...metas,
@@ -259,7 +264,7 @@ export default class SPromise extends Promise {
     // extend settings
     this._settings = __deepMerge(
       {
-        triggerOnCatch: 'catch',
+        triggerOnCatch: 'error',
         destroyTimeout: 5000,
         id: __uniqid()
       },

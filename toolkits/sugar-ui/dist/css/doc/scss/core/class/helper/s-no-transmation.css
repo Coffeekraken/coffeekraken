@@ -1,0 +1,19 @@
+
+
+/**
+* @name 		s-no-transmation
+* @namespace         scss.core.class.helper
+* @class-namespace       sugar.helper.transmation.no
+* @type        class
+*
+* Disable the animations and transitions **only on the element**
+*
+* @example 	html
+* <div class="s-no-transmation">
+* 	I have no more animations or transitions
+* 	<div>But I have</div>
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/

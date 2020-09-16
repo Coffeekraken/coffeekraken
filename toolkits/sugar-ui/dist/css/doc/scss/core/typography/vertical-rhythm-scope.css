@@ -5,7 +5,7 @@
  * @namespace           scss.core.typography
  * @type      mixin
  *
- * Scope the content inside the `settings.vertical-rhythm-scope-class` class
+ * Scope the content inside the `settings.typography.vertical-rhythm-scope-class` class
  *
  * @example       scss
  * .my-cool-item {

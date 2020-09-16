@@ -1,0 +1,14 @@
+
+
+/**
+ * @name              title
+ * @namespace         scss.components.title
+ * @type              Mixin
+ *
+ * This mixin generate all the properties for a title depending on the parameters you set.
+ *
+ * @param         {Number}        $level          The title level you want to generate
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */

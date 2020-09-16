@@ -1,5 +1,3 @@
-const __uniquid = require('../string/uniqid');
-
 /**
  * @name              getRegisteredProcesses
  * @namespace           node.process

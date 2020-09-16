@@ -1,0 +1,18 @@
+
+
+/**
+  * @name       	s-c--light
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.default.light
+  * @type        class
+  *
+  * Specify the color to **default--light**
+  *
+  * @example 	html
+  * <div class="s-c--light">
+  * 	I'm in "default--light" color
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */

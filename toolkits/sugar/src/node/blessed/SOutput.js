@@ -485,10 +485,14 @@ module.exports = class SOutput extends __SComponent {
           } else {
             contentArray = item.content;
           }
-          const logsString = __extractValues(contentArray, 'value').join('\n');
+          const logsString = __extractValues(contentArray, 'value')
+            .map((l) => {
+              return __parseMarkdown(l);
+            })
+            .join('\n');
           item.$box.setContent(
             __trimLines(`${item.$box.title}
-               ${__parseMarkdown(logsString)}`)
+               ${logsString}`)
           );
           item.$box.height = logsString.split('\n').length + 1;
           item.$box.$line.height = logsString.split('\n').length + 1;

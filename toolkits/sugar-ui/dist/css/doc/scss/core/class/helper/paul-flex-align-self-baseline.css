@@ -1,0 +1,20 @@
+
+
+/**
+* @name 		paul-flex-align-self-baseline
+* @namespace           scss.core.class.helper
+* @class-namespace     sugar.helper.flex.align.self.baseline
+* @type        class
+*
+* Apply the property ```align-self``` to **flex-baseline**
+*
+* @example 	html
+* <div class="paul-flex">
+*   <div>I'm a flex item</div>
+*   <div class="paul-flex-align-self-baseline>I'm a flex item</div>
+*   <div>I'm a flex item</div>
+* </div>
+*
+* @since       2.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/

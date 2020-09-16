@@ -1,0 +1,18 @@
+
+
+/**
+* @name 		paul-border-bigger
+* @namespace           scss.core.class.helper
+* @class-namespace     sugar.helper.border.bigger
+* @type        class
+*
+* Apply the **bigger** border size
+*
+* @example 	html
+* <div class="paul-border paul-border-bigger paul-ratio-1-1">
+* 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
+* </div>
+*
+* @since       2.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/

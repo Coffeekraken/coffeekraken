@@ -146,8 +146,6 @@ module.exports = class SSugarUi extends __SPromise {
           }
           metas.stack = `module.${metas.stack}`;
 
-          // console.log(metas);
-
           return [value, metas];
         }
       });

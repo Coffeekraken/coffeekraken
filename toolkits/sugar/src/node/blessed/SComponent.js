@@ -95,6 +95,10 @@ module.exports = class SComponent extends __blessed.box {
         }
       });
 
+      __activeScreen.on('destroy', () => {
+        __activeScreen = null;
+      });
+
       if (settings.attach === undefined) {
         settings.attach = true;
       }
@@ -166,6 +170,9 @@ module.exports = class SComponent extends __blessed.box {
     __hotkey('ctrl+c', {
       once: true
     }).on('press', async () => {
+      try {
+        global._screen && global._screen.destroy();
+      } catch (e) {}
       this._destroyed = true;
       this._allowRender = false;
       this.detach();

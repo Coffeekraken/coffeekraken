@@ -1,0 +1,21 @@
+
+
+/**
+* @name 		paul-clearfix-facebook
+* @namespace           scss.core.class.helper
+* @class-namespace     sugar.helper.clearfix.facebook
+* @type        class
+*
+* Apply the facebook clearfix on the element
+*
+* @example 	html
+* <div class="paul-clearfix-facebook paul-bg-primary">
+* 	<div class="paul-pull-right">right pulled</div>
+* </div>
+* <div class="paul-bg-primary">
+* 	<div class="paul-pull-right">right pulled without clearfix</div>
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/

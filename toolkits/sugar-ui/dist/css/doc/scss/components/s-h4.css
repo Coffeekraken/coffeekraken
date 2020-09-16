@@ -1,0 +1,29 @@
+
+
+/**
+ * @name              s-h4
+ * @namespace         scss.components
+ * @type              Classname
+ *
+ * This class can be applied on any ```h``` component to specify his size to ```4```
+ *
+ * @example         html
+ * <h4 class="s-h4">I'm a cool "4" title</h4>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/**
+ * @name              s-h4
+ * @namespace         scss.components
+ * @type              Classname
+ *
+ * This class can be applied on any ```h``` component
+ *
+ * @example         html
+ * <h4 class="s-h4">I'm a cool "4" title</h4>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */

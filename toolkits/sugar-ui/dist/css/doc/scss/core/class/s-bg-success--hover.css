@@ -1,0 +1,18 @@
+
+
+/**
+  * @name       	s-bg-success--hover
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.success.hover.bg
+  * @type        class
+  *
+  * Specify the background color to **success--hover**
+  *
+  * @example 	html
+  * <div class="s-bg-success--hover p" style="color:white">
+  * 	My background color is "success--hover"
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */

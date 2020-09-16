@@ -9,6 +9,7 @@ import __validateObject from '../validation/object/validateObject';
 import __validateObjectOutputString from '../validation/object/validateObjectOutputString';
 import __typeof from '../value/typeof';
 import __toString from '../string/toString';
+import __set from '../object/set';
 
 /**
  * @name              SInterface
@@ -337,12 +338,11 @@ export default class SInterface {
         argsObj[argString] === undefined &&
         argDefinitionObj.default !== undefined
       ) {
-        argsObj[argString] = argDefinitionObj.default;
+        __set(argsObj, argString, argDefinitionObj.default);
       }
     });
 
-    // return the argsObj
-    return __deepize(argsObj);
+    return argsObj;
   }
 
   /**

@@ -1,0 +1,18 @@
+
+
+/**
+  * @name       	s-t-big-rel
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.text.rel.big
+  * @type        class
+  *
+  * Set the size **big** relative to my parent
+  *
+  * @example 	html
+  * <div class="s-t-big-rel">
+  * 	I have the size "big" defined relative to my parent
+  * </div>
+  *
+  * @since       2.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */

@@ -1,0 +1,16 @@
+
+
+/**
+* @name 		paul-f-italic
+* @namespace           scss.core.class.helper
+* @class-namespace     sugar.helper.font.style.italic
+* @type        class
+*
+* Set the font-style to ```italic```
+*
+* @example 	html
+* This <span class="paul-f-italic">word</span> is italic
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/

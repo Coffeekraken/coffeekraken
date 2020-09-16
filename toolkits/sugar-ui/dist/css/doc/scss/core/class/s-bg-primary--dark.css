@@ -1,0 +1,18 @@
+
+
+/**
+  * @name       	s-bg-primary--dark
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.primary.dark.bg
+  * @type        class
+  *
+  * Specify the background color to **primary--dark**
+  *
+  * @example 	html
+  * <div class="s-bg-primary--dark p" style="color:white">
+  * 	My background color is "primary--dark"
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */

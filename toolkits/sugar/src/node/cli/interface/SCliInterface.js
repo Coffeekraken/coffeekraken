@@ -25,11 +25,6 @@ module.exports = class SCliInterface extends __SInterface {
       required: true,
       static: true
     },
-    // definitionObj: {
-    //   type: 'Object',
-    //   required: true,
-    //   static: true
-    // },
     command: {
       type: 'String',
       required: true,

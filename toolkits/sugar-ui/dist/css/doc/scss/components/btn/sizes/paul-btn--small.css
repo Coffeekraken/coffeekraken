@@ -1,0 +1,15 @@
+
+
+/**
+ * @name              paul-btn--small
+ * @namespace         scss.components.btn.sizes
+ * @type              Classname
+ *
+ * This class can be applied on any ```btn``` component to specify his size to ```small```
+ *
+ * @example         html
+ * <a class="btn paul-btn--small">I'm a cool "small" button</a>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */

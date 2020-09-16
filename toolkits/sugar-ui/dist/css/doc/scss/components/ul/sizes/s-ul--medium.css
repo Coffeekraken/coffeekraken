@@ -1,0 +1,23 @@
+
+
+/**
+ * @name              s-ul--medium
+ * @namespace         scss.components.ul.sizes
+ * @type              Classname
+ *
+ * This class can be applied on any ```ul``` component to specify his size to ```medium```
+ *
+ * @example         html
+ * <ol class="ul s-ul--medium">
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ * </ol>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */

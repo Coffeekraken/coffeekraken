@@ -1,0 +1,29 @@
+
+
+/**
+ * @name              s-h3
+ * @namespace         scss.components
+ * @type              Classname
+ *
+ * This class can be applied on any ```h``` component to specify his size to ```3```
+ *
+ * @example         html
+ * <h3 class="s-h3">I'm a cool "3" title</h3>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/**
+ * @name              s-h3
+ * @namespace         scss.components
+ * @type              Classname
+ *
+ * This class can be applied on any ```h``` component
+ *
+ * @example         html
+ * <h3 class="s-h3">I'm a cool "3" title</h3>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */

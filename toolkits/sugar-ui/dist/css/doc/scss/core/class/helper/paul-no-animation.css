@@ -1,0 +1,19 @@
+
+
+/**
+* @name 		paul-no-animation
+* @namespace         scss.core.class.helper
+* @class-namespace       sugar.helper.animation.no
+* @type        class
+*
+* Disable the animations **only on the element**
+*
+* @example 	html
+* <div class="paul-no-animation">
+* 	I have no more animations
+* 	<div>But I have</div>
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/

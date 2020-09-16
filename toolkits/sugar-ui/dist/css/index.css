@@ -2280,7 +2280,7 @@
  * @namespace           scss.core.typography
  * @type      mixin
  *
- * Scope the content inside the `settings.text-format-scope-class` class
+ * Scope the content inside the `settings.typography.text-format-scope-class` class
  *
  * @example       scss
  * .my-cool-item {
@@ -2313,7 +2313,7 @@
  * @namespace           scss.core.typography
  * @type      mixin
  *
- * Scope the content inside the `settings.vertical-rhythm-scope-class` class
+ * Scope the content inside the `settings.typography.vertical-rhythm-scope-class` class
  *
  * @example       scss
  * .my-cool-item {
@@ -2652,6 +2652,87 @@
  * This mixin generate all the style properties for a list depending on the parameters you set.
  *
  * @param       {List}      [$color=primary]                The color you want for your list
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+  * @name            title-classes
+  * @namespace       scss.components
+  * @type            Mixin
+  *
+  * This mixin generate all the css needed to display properly some titles.
+  *
+  * @param       {Number}      [$count:6]                                How many titles to generate
+  *
+  * @example         html
+  * <h1 class="h1">My title</h1>
+  * <h2 class="h2">My title</h2>
+  * <h3 class="h3">My title</h3>
+  *
+  * @example           scss
+  * @include Sugar.title-classes();
+  *
+  * @since       2.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+/**
+ * @name              title-bare-classes
+ * @namespace         scss.components
+ * @type              Mixin
+ *
+ * This mixin generate all the bare classes depending on the parameters you set.
+ *
+ * @param       {Number}      [$count:6]                                How many titles to generate
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name              title-style-classes
+ * @namespace         scss.components.btn
+ * @type              Mixin
+ *
+ * This mixin generate all the style classes depending on the parameters you set.
+ *
+ * @param       {List}      [$colors:map-keys(setting('colors'))]       The colors you want to generate
+ * @param       {String}      [$name='btn']                         The name to use for the generation of the classes
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name              title
+ * @namespace         scss.components.title
+ * @type              Mixin
+ *
+ * This mixin generate all the properties for a title depending on the parameters you set.
+ *
+ * @param         {Number}        $level          The title level you want to generate
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name              title-bare
+ * @namespace         scss.components
+ * @type              Mixin
+ *
+ * This mixin generate all the bare properties for a title depending on the parameters you set.
+ *
+ * @param       {Number}      $level          The title level you want to generate
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name              title-style
+ * @namespace         scss.components
+ * @type              Mixin
+ *
+ * This mixin generate all the style properties for a title depending on the parameters you set.
+ *
+ * @param       {Number}      $level          The title level you want to generate
  *
  * @since       2.0.0
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -4686,4 +4767,2142 @@ html {
 /**
 * Vendors
 * All external libraries needed in the project.
+*/
+/**
+* Vendors
+* All external librarie needed in the project.
+*/
+/**
+ * Setup
+ * Setup all the different parts/modules/libraries.
+ */
+/**
+* Setup
+* Setup all the different parts/modules/libraries.
+*/
+/**
+ * Utils
+ * Import all the different utils functions, mixins, classes, etc...
+ */
+/**
+* Utils
+* Import all the different utils functions, mixins, classes, etc...
+*/
+/**
+ * Generic
+ * All the generic codebase for the project like typography, resets, etc...
+ */
+/**
+* Generic
+* All the generic codebase for the project like typography, resets, etc...
+*/
+/**
+ * @name              s-h1, s-tf h1
+ * @namespace         scss.components
+ * @type              Classname
+ *
+ * This class can be applied on any ```h``` component to specify his size to ```1```
+ *
+ * @example         html
+ * <h1 class="s-h1">I'm a cool "1" title</h1>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+.s-tf h1,
+.s-h1 {
+  display: block;
+  font-size: 48px;
+}
+
+/**
+ * @name              s-h2, s-tf h2
+ * @namespace         scss.components
+ * @type              Classname
+ *
+ * This class can be applied on any ```h``` component to specify his size to ```2```
+ *
+ * @example         html
+ * <h2 class="s-h2">I'm a cool "2" title</h2>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+.s-tf h2,
+.s-h2 {
+  display: block;
+  font-size: 32px;
+}
+
+/**
+ * @name              s-h3, s-tf h3
+ * @namespace         scss.components
+ * @type              Classname
+ *
+ * This class can be applied on any ```h``` component to specify his size to ```3```
+ *
+ * @example         html
+ * <h3 class="s-h3">I'm a cool "3" title</h3>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+.s-tf h3,
+.s-h3 {
+  display: block;
+  font-size: 24px;
+}
+
+/**
+ * @name              s-h4, s-tf h4
+ * @namespace         scss.components
+ * @type              Classname
+ *
+ * This class can be applied on any ```h``` component to specify his size to ```4```
+ *
+ * @example         html
+ * <h4 class="s-h4">I'm a cool "4" title</h4>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+.s-tf h4,
+.s-h4 {
+  display: block;
+  font-size: 16px;
+}
+
+/**
+ * @name              s-h5, s-tf h5
+ * @namespace         scss.components
+ * @type              Classname
+ *
+ * This class can be applied on any ```h``` component to specify his size to ```5```
+ *
+ * @example         html
+ * <h5 class="s-h5">I'm a cool "5" title</h5>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+.s-tf h5,
+.s-h5 {
+  display: block;
+  font-size: 9.6px;
+}
+
+/**
+ * @name              s-h6, s-tf h6
+ * @namespace         scss.components
+ * @type              Classname
+ *
+ * This class can be applied on any ```h``` component to specify his size to ```6```
+ *
+ * @example         html
+ * <h6 class="s-h6">I'm a cool "6" title</h6>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+.s-tf h6,
+.s-h6 {
+  display: block;
+  font-size: 4.8px;
+}
+
+/**
+ * @name              s-h1, s-tf h1
+ * @namespace         scss.components
+ * @type              Classname
+ *
+ * This class can be applied on any ```h``` component
+ *
+ * @example         html
+ * <h1 class="s-h1">I'm a cool "1" title</h1>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+.s-tf h1,
+.s-h1 {
+  font-family: "Roboto";
+}
+
+/**
+ * @name              s-h2, s-tf h2
+ * @namespace         scss.components
+ * @type              Classname
+ *
+ * This class can be applied on any ```h``` component
+ *
+ * @example         html
+ * <h2 class="s-h2">I'm a cool "2" title</h2>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+.s-tf h2,
+.s-h2 {
+  font-family: "Roboto";
+}
+
+/**
+ * @name              s-h3, s-tf h3
+ * @namespace         scss.components
+ * @type              Classname
+ *
+ * This class can be applied on any ```h``` component
+ *
+ * @example         html
+ * <h3 class="s-h3">I'm a cool "3" title</h3>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+.s-tf h3,
+.s-h3 {
+  font-family: "Roboto";
+}
+
+/**
+ * @name              s-h4, s-tf h4
+ * @namespace         scss.components
+ * @type              Classname
+ *
+ * This class can be applied on any ```h``` component
+ *
+ * @example         html
+ * <h4 class="s-h4">I'm a cool "4" title</h4>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+.s-tf h4,
+.s-h4 {
+  font-family: "Roboto";
+}
+
+/**
+ * @name              s-h5, s-tf h5
+ * @namespace         scss.components
+ * @type              Classname
+ *
+ * This class can be applied on any ```h``` component
+ *
+ * @example         html
+ * <h5 class="s-h5">I'm a cool "5" title</h5>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+.s-tf h5,
+.s-h5 {
+  font-family: "Roboto";
+}
+
+/**
+ * @name              s-h6, s-tf h6
+ * @namespace         scss.components
+ * @type              Classname
+ *
+ * This class can be applied on any ```h``` component
+ *
+ * @example         html
+ * <h6 class="s-h6">I'm a cool "6" title</h6>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+.s-tf h6,
+.s-h6 {
+  font-family: "Roboto";
+}
+
+/**
+ * Templates
+ * All the templates level specific styling.
+ * Templates specific classes have to start with `.t-`.
+ */
+/**
+* Templates
+* All the templates level specific styling.
+*/
+/**
+ * Pages
+ * All the pages level specific styling.
+ */
+/**
+* Pages
+* All the pages level specific styling.
+*/
+/**
+ * Organisms
+ * All the organisms styling.
+ * An organism can contain other molecules or atoms and does not have to relay on his ancestors
+ * to be properly displayed.
+ * All organisms specific classes have to start with `.o-`.
+ */
+/**
+* Organisms
+* All the organisms styling.
+* An organism can contain other molecules or atoms and does not have to relay on his ancestors
+* to be properly displayed.
+*/
+/**
+  * @name            inline-bar
+  * @namespace       scss.components
+  * @type            Mixin
+  *
+  * This mixin allows you to display an inline styled bar.
+  * Pretty simple you may think but this is very usefull for somple displays like
+  * shields display, links, etc...
+  * Their's also the mixin ```inline-bar-bare``` and ```inline-bar-style``` that you
+  * can use if you need more controls.
+  *
+  * @param       {String}        [$name='inline-bar']       The className to use for the generation
+  *
+  * @classes
+  * .inline-bar: Base class to apply on the container
+  * .inline-bar--center: Align the items vertically in the middle
+  * .inline-bar--top: Align the items vertically to the top
+  * .inline-bar--bottom: Align the items vertically to the bottom
+  * .inline-bar .inline-bar__item: Class to apply on each items
+  *
+  * @example         html
+  * <ul class="s-inline-bar">
+  *   <li class="s-inline-bar__item">Something cool</li>
+  *   <li class="s-inline-bar__item">
+  *      <img alt="NPM" src="https://img.shields.io/npm/l/@coffeekraken/sugar?style=for-the-badge">
+  *   </li>
+  *   <li class="s-inline-bar__item">Something cool</li>
+  * </ul>
+  *
+  * @example           scss
+  * @include Sugar.inline-bar();
+  *
+  * @since       2.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+.inline-bar {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  left: -0.5em;
+  width: calc(100% + 0.5em);
+}
+
+.inline-bar__item {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+.inline-bar--center .inline-bar__item, .inline-bar__item {
+  align-self: center;
+}
+.inline-bar--top .inline-bar__item {
+  align-self: flex-start;
+}
+.inline-bar--bottom .inline-bar__item {
+  align-self: flex-end;
+}
+
+.marked {
+  padding: 15rem;
+}
+.marked h1,
+.marked ol, .marked ul,
+.marked blockquote, .marked pre, .marked img {
+  margin-bottom: 5rem;
+}
+.marked h2, .marked h3, .marked h4, .marked h5, .marked h6 {
+  margin-bottom: 1rem;
+}
+.marked p {
+  margin-bottom: 2.5rem;
+}
+
+/**
+ * Molecules
+ * All the molecules styling.
+ * A molecule response to the same rules has the organisms, unless they cannot contain any other molecules.
+ * It normally contains only other atoms.
+ * All molecules classes have to start with `.m-`.
+ */
+/**
+* Molecules
+* All the molecules styling.
+* A molecule response to the same rules has the organisms, unless they cannot contain any other molecules.
+* It normally contains only other atoms.
+*/
+/**
+ * @name            ol-classes
+ * @namespace       scss.07_molecules
+ * @type            Mixin
+ *
+ * Describe the ordered lists display
+ *
+ * @since       2.0.0
+ * @author      Olivier Bossel
+ */
+/**
+ * @name              s-ol--smaller
+ * @namespace         scss.components.ol.sizes
+ * @type              Classname
+ *
+ * This class can be applied on any ```ol``` component to specify his size to ```smaller```
+ *
+ * @example         html
+ * <ol class="ol s-ol--smaller">
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ * </ol>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-ol--smaller {
+  display: block;
+  line-height: 1.5;
+}
+
+/**
+ * @name              s-ol--small
+ * @namespace         scss.components.ol.sizes
+ * @type              Classname
+ *
+ * This class can be applied on any ```ol``` component to specify his size to ```small```
+ *
+ * @example         html
+ * <ol class="ol s-ol--small">
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ * </ol>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-ol--small {
+  display: block;
+  line-height: 1.5;
+}
+
+/**
+ * @name              s-ol
+ * @namespace         scss.components.ol.sizes
+ * @type              Classname
+ *
+ * This class can be applied on any ```ol``` component to specify his size to ```default```
+ *
+ * @example         html
+ * <ol class="ol s-ol">
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ * </ol>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-ol {
+  display: block;
+  line-height: 1.5;
+}
+
+/**
+ * @name              s-ol--medium
+ * @namespace         scss.components.ol.sizes
+ * @type              Classname
+ *
+ * This class can be applied on any ```ol``` component to specify his size to ```medium```
+ *
+ * @example         html
+ * <ol class="ol s-ol--medium">
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ * </ol>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-ol--medium {
+  display: block;
+  line-height: 1.5;
+}
+
+/**
+ * @name              s-ol--big
+ * @namespace         scss.components.ol.sizes
+ * @type              Classname
+ *
+ * This class can be applied on any ```ol``` component to specify his size to ```big```
+ *
+ * @example         html
+ * <ol class="ol s-ol--big">
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ * </ol>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-ol--big {
+  display: block;
+  line-height: 1.5;
+}
+
+/**
+ * @name              s-ol--bigger
+ * @namespace         scss.components.ol.sizes
+ * @type              Classname
+ *
+ * This class can be applied on any ```ol``` component to specify his size to ```bigger```
+ *
+ * @example         html
+ * <ol class="ol s-ol--bigger">
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ * </ol>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-ol--bigger {
+  display: block;
+  line-height: 1.5;
+}
+
+/**
+ * @name              s-ol
+ * @namespace         scss.components.ol.colors
+ * @type              Classname
+ *
+ * This class can be applied on any ```ol``` component to specify his color to ```default```
+ *
+ * @example         html
+ * <ol class="ol s-ol">
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ * </ol>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-ol {
+  list-style: none;
+  counter-reset: li;
+}
+s-ol > li {
+  counter-increment: li;
+  padding-left: 2.5em;
+  position: relative;
+}
+s-ol > li::before {
+  content: counter(li) ".";
+  color: #848e91;
+  display: inline-block;
+  width: 2em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: right;
+}
+
+/**
+ * @name              s-ol--title
+ * @namespace         scss.components.ol.colors
+ * @type              Classname
+ *
+ * This class can be applied on any ```ol``` component to specify his color to ```title```
+ *
+ * @example         html
+ * <ol class="ol s-ol--title">
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ * </ol>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-ol--title {
+  list-style: none;
+  counter-reset: li;
+}
+s-ol--title > li {
+  counter-increment: li;
+  padding-left: 2.5em;
+  position: relative;
+}
+s-ol--title > li::before {
+  content: counter(li) ".";
+  color: #2b3438;
+  display: inline-block;
+  width: 2em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: right;
+}
+
+/**
+ * @name              s-ol--text
+ * @namespace         scss.components.ol.colors
+ * @type              Classname
+ *
+ * This class can be applied on any ```ol``` component to specify his color to ```text```
+ *
+ * @example         html
+ * <ol class="ol s-ol--text">
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ * </ol>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-ol--text {
+  list-style: none;
+  counter-reset: li;
+}
+s-ol--text > li {
+  counter-increment: li;
+  padding-left: 2.5em;
+  position: relative;
+}
+s-ol--text > li::before {
+  content: counter(li) ".";
+  color: #848e91;
+  display: inline-block;
+  width: 2em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: right;
+}
+
+/**
+ * @name              s-ol--link
+ * @namespace         scss.components.ol.colors
+ * @type              Classname
+ *
+ * This class can be applied on any ```ol``` component to specify his color to ```link```
+ *
+ * @example         html
+ * <ol class="ol s-ol--link">
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ * </ol>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-ol--link {
+  list-style: none;
+  counter-reset: li;
+}
+s-ol--link > li {
+  counter-increment: li;
+  padding-left: 2.5em;
+  position: relative;
+}
+s-ol--link > li::before {
+  content: counter(li) ".";
+  color: #f2bc2b;
+  display: inline-block;
+  width: 2em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: right;
+}
+
+/**
+ * @name              s-ol--light
+ * @namespace         scss.components.ol.colors
+ * @type              Classname
+ *
+ * This class can be applied on any ```ol``` component to specify his color to ```light```
+ *
+ * @example         html
+ * <ol class="ol s-ol--light">
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ * </ol>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-ol--light {
+  list-style: none;
+  counter-reset: li;
+}
+s-ol--light > li {
+  counter-increment: li;
+  padding-left: 2.5em;
+  position: relative;
+}
+s-ol--light > li::before {
+  content: counter(li) ".";
+  color: #f8f9fa;
+  display: inline-block;
+  width: 2em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: right;
+}
+
+/**
+ * @name              s-ol--dark
+ * @namespace         scss.components.ol.colors
+ * @type              Classname
+ *
+ * This class can be applied on any ```ol``` component to specify his color to ```dark```
+ *
+ * @example         html
+ * <ol class="ol s-ol--dark">
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ * </ol>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-ol--dark {
+  list-style: none;
+  counter-reset: li;
+}
+s-ol--dark > li {
+  counter-increment: li;
+  padding-left: 2.5em;
+  position: relative;
+}
+s-ol--dark > li::before {
+  content: counter(li) ".";
+  color: #343a40;
+  display: inline-block;
+  width: 2em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: right;
+}
+
+/**
+ * @name              s-ol--primary
+ * @namespace         scss.components.ol.colors
+ * @type              Classname
+ *
+ * This class can be applied on any ```ol``` component to specify his color to ```primary```
+ *
+ * @example         html
+ * <ol class="ol s-ol--primary">
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ * </ol>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-ol--primary {
+  list-style: none;
+  counter-reset: li;
+}
+s-ol--primary > li {
+  counter-increment: li;
+  padding-left: 2.5em;
+  position: relative;
+}
+s-ol--primary > li::before {
+  content: counter(li) ".";
+  color: #f2bc2b;
+  display: inline-block;
+  width: 2em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: right;
+}
+
+/**
+ * @name              s-ol--secondary
+ * @namespace         scss.components.ol.colors
+ * @type              Classname
+ *
+ * This class can be applied on any ```ol``` component to specify his color to ```secondary```
+ *
+ * @example         html
+ * <ol class="ol s-ol--secondary">
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ * </ol>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-ol--secondary {
+  list-style: none;
+  counter-reset: li;
+}
+s-ol--secondary > li {
+  counter-increment: li;
+  padding-left: 2.5em;
+  position: relative;
+}
+s-ol--secondary > li::before {
+  content: counter(li) ".";
+  color: #2b3438;
+  display: inline-block;
+  width: 2em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: right;
+}
+
+/**
+ * @name              s-ol--success
+ * @namespace         scss.components.ol.colors
+ * @type              Classname
+ *
+ * This class can be applied on any ```ol``` component to specify his color to ```success```
+ *
+ * @example         html
+ * <ol class="ol s-ol--success">
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ * </ol>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-ol--success {
+  list-style: none;
+  counter-reset: li;
+}
+s-ol--success > li {
+  counter-increment: li;
+  padding-left: 2.5em;
+  position: relative;
+}
+s-ol--success > li::before {
+  content: counter(li) ".";
+  color: #5cb85c;
+  display: inline-block;
+  width: 2em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: right;
+}
+
+/**
+ * @name              s-ol--warning
+ * @namespace         scss.components.ol.colors
+ * @type              Classname
+ *
+ * This class can be applied on any ```ol``` component to specify his color to ```warning```
+ *
+ * @example         html
+ * <ol class="ol s-ol--warning">
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ * </ol>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-ol--warning {
+  list-style: none;
+  counter-reset: li;
+}
+s-ol--warning > li {
+  counter-increment: li;
+  padding-left: 2.5em;
+  position: relative;
+}
+s-ol--warning > li::before {
+  content: counter(li) ".";
+  color: #f0ad4e;
+  display: inline-block;
+  width: 2em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: right;
+}
+
+/**
+ * @name              s-ol--error
+ * @namespace         scss.components.ol.colors
+ * @type              Classname
+ *
+ * This class can be applied on any ```ol``` component to specify his color to ```error```
+ *
+ * @example         html
+ * <ol class="ol s-ol--error">
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ * </ol>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-ol--error {
+  list-style: none;
+  counter-reset: li;
+}
+s-ol--error > li {
+  counter-increment: li;
+  padding-left: 2.5em;
+  position: relative;
+}
+s-ol--error > li::before {
+  content: counter(li) ".";
+  color: #d9534f;
+  display: inline-block;
+  width: 2em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: right;
+}
+
+/**
+ * @name              s-ol--info
+ * @namespace         scss.components.ol.colors
+ * @type              Classname
+ *
+ * This class can be applied on any ```ol``` component to specify his color to ```info```
+ *
+ * @example         html
+ * <ol class="ol s-ol--info">
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ *    <li>I'm a cool ordered list item</li>
+ * </ol>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-ol--info {
+  list-style: none;
+  counter-reset: li;
+}
+s-ol--info > li {
+  counter-increment: li;
+  padding-left: 2.5em;
+  position: relative;
+}
+s-ol--info > li::before {
+  content: counter(li) ".";
+  color: #2199e8;
+  display: inline-block;
+  width: 2em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: right;
+}
+
+/**
+ * @name              s-ul--smaller
+ * @namespace         scss.components.ul.sizes
+ * @type              Classname
+ *
+ * This class can be applied on any ```ul``` component to specify his size to ```smaller```
+ *
+ * @example         html
+ * <ol class="ul s-ul--smaller">
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ * </ol>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-ul--smaller {
+  display: block;
+  line-height: 1.5;
+}
+
+/**
+ * @name              s-ul--small
+ * @namespace         scss.components.ul.sizes
+ * @type              Classname
+ *
+ * This class can be applied on any ```ul``` component to specify his size to ```small```
+ *
+ * @example         html
+ * <ol class="ul s-ul--small">
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ * </ol>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-ul--small {
+  display: block;
+  line-height: 1.5;
+}
+
+/**
+ * @name              s-ul
+ * @namespace         scss.components.ul.sizes
+ * @type              Classname
+ *
+ * This class can be applied on any ```ul``` component to specify his size to ```default```
+ *
+ * @example         html
+ * <ol class="ul s-ul">
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ * </ol>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-ul {
+  display: block;
+  line-height: 1.5;
+}
+
+/**
+ * @name              s-ul--medium
+ * @namespace         scss.components.ul.sizes
+ * @type              Classname
+ *
+ * This class can be applied on any ```ul``` component to specify his size to ```medium```
+ *
+ * @example         html
+ * <ol class="ul s-ul--medium">
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ * </ol>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-ul--medium {
+  display: block;
+  line-height: 1.5;
+}
+
+/**
+ * @name              s-ul--big
+ * @namespace         scss.components.ul.sizes
+ * @type              Classname
+ *
+ * This class can be applied on any ```ul``` component to specify his size to ```big```
+ *
+ * @example         html
+ * <ol class="ul s-ul--big">
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ * </ol>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-ul--big {
+  display: block;
+  line-height: 1.5;
+}
+
+/**
+ * @name              s-ul--bigger
+ * @namespace         scss.components.ul.sizes
+ * @type              Classname
+ *
+ * This class can be applied on any ```ul``` component to specify his size to ```bigger```
+ *
+ * @example         html
+ * <ol class="ul s-ul--bigger">
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ * </ol>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-ul--bigger {
+  display: block;
+  line-height: 1.5;
+}
+
+/**
+ * @name              s-ul
+ * @namespace         scss.components.ul.colors
+ * @type              Classname
+ *
+ * This class can be applied on any ```ul``` component to specify his color to ```default```
+ *
+ * @example         html
+ * <ol class="ul s-ul">
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ * </ol>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-ul {
+  list-style: none;
+}
+s-ul > li {
+  padding-left: 2.5em;
+  position: relative;
+}
+s-ul > li::before {
+  content: "•";
+  font-weight: bold;
+  color: #848e91;
+  display: inline-block;
+  width: 2em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: right;
+}
+
+/**
+ * @name              s-ul--title
+ * @namespace         scss.components.ul.colors
+ * @type              Classname
+ *
+ * This class can be applied on any ```ul``` component to specify his color to ```title```
+ *
+ * @example         html
+ * <ol class="ul s-ul--title">
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ * </ol>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-ul--title {
+  list-style: none;
+}
+s-ul--title > li {
+  padding-left: 2.5em;
+  position: relative;
+}
+s-ul--title > li::before {
+  content: "•";
+  font-weight: bold;
+  color: #2b3438;
+  display: inline-block;
+  width: 2em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: right;
+}
+
+/**
+ * @name              s-ul--text
+ * @namespace         scss.components.ul.colors
+ * @type              Classname
+ *
+ * This class can be applied on any ```ul``` component to specify his color to ```text```
+ *
+ * @example         html
+ * <ol class="ul s-ul--text">
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ * </ol>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-ul--text {
+  list-style: none;
+}
+s-ul--text > li {
+  padding-left: 2.5em;
+  position: relative;
+}
+s-ul--text > li::before {
+  content: "•";
+  font-weight: bold;
+  color: #848e91;
+  display: inline-block;
+  width: 2em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: right;
+}
+
+/**
+ * @name              s-ul--link
+ * @namespace         scss.components.ul.colors
+ * @type              Classname
+ *
+ * This class can be applied on any ```ul``` component to specify his color to ```link```
+ *
+ * @example         html
+ * <ol class="ul s-ul--link">
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ * </ol>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-ul--link {
+  list-style: none;
+}
+s-ul--link > li {
+  padding-left: 2.5em;
+  position: relative;
+}
+s-ul--link > li::before {
+  content: "•";
+  font-weight: bold;
+  color: #f2bc2b;
+  display: inline-block;
+  width: 2em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: right;
+}
+
+/**
+ * @name              s-ul--light
+ * @namespace         scss.components.ul.colors
+ * @type              Classname
+ *
+ * This class can be applied on any ```ul``` component to specify his color to ```light```
+ *
+ * @example         html
+ * <ol class="ul s-ul--light">
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ * </ol>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-ul--light {
+  list-style: none;
+}
+s-ul--light > li {
+  padding-left: 2.5em;
+  position: relative;
+}
+s-ul--light > li::before {
+  content: "•";
+  font-weight: bold;
+  color: #f8f9fa;
+  display: inline-block;
+  width: 2em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: right;
+}
+
+/**
+ * @name              s-ul--dark
+ * @namespace         scss.components.ul.colors
+ * @type              Classname
+ *
+ * This class can be applied on any ```ul``` component to specify his color to ```dark```
+ *
+ * @example         html
+ * <ol class="ul s-ul--dark">
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ * </ol>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-ul--dark {
+  list-style: none;
+}
+s-ul--dark > li {
+  padding-left: 2.5em;
+  position: relative;
+}
+s-ul--dark > li::before {
+  content: "•";
+  font-weight: bold;
+  color: #343a40;
+  display: inline-block;
+  width: 2em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: right;
+}
+
+/**
+ * @name              s-ul--primary
+ * @namespace         scss.components.ul.colors
+ * @type              Classname
+ *
+ * This class can be applied on any ```ul``` component to specify his color to ```primary```
+ *
+ * @example         html
+ * <ol class="ul s-ul--primary">
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ * </ol>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-ul--primary {
+  list-style: none;
+}
+s-ul--primary > li {
+  padding-left: 2.5em;
+  position: relative;
+}
+s-ul--primary > li::before {
+  content: "•";
+  font-weight: bold;
+  color: #f2bc2b;
+  display: inline-block;
+  width: 2em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: right;
+}
+
+/**
+ * @name              s-ul--secondary
+ * @namespace         scss.components.ul.colors
+ * @type              Classname
+ *
+ * This class can be applied on any ```ul``` component to specify his color to ```secondary```
+ *
+ * @example         html
+ * <ol class="ul s-ul--secondary">
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ * </ol>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-ul--secondary {
+  list-style: none;
+}
+s-ul--secondary > li {
+  padding-left: 2.5em;
+  position: relative;
+}
+s-ul--secondary > li::before {
+  content: "•";
+  font-weight: bold;
+  color: #2b3438;
+  display: inline-block;
+  width: 2em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: right;
+}
+
+/**
+ * @name              s-ul--success
+ * @namespace         scss.components.ul.colors
+ * @type              Classname
+ *
+ * This class can be applied on any ```ul``` component to specify his color to ```success```
+ *
+ * @example         html
+ * <ol class="ul s-ul--success">
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ * </ol>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-ul--success {
+  list-style: none;
+}
+s-ul--success > li {
+  padding-left: 2.5em;
+  position: relative;
+}
+s-ul--success > li::before {
+  content: "•";
+  font-weight: bold;
+  color: #5cb85c;
+  display: inline-block;
+  width: 2em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: right;
+}
+
+/**
+ * @name              s-ul--warning
+ * @namespace         scss.components.ul.colors
+ * @type              Classname
+ *
+ * This class can be applied on any ```ul``` component to specify his color to ```warning```
+ *
+ * @example         html
+ * <ol class="ul s-ul--warning">
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ * </ol>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-ul--warning {
+  list-style: none;
+}
+s-ul--warning > li {
+  padding-left: 2.5em;
+  position: relative;
+}
+s-ul--warning > li::before {
+  content: "•";
+  font-weight: bold;
+  color: #f0ad4e;
+  display: inline-block;
+  width: 2em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: right;
+}
+
+/**
+ * @name              s-ul--error
+ * @namespace         scss.components.ul.colors
+ * @type              Classname
+ *
+ * This class can be applied on any ```ul``` component to specify his color to ```error```
+ *
+ * @example         html
+ * <ol class="ul s-ul--error">
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ * </ol>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-ul--error {
+  list-style: none;
+}
+s-ul--error > li {
+  padding-left: 2.5em;
+  position: relative;
+}
+s-ul--error > li::before {
+  content: "•";
+  font-weight: bold;
+  color: #d9534f;
+  display: inline-block;
+  width: 2em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: right;
+}
+
+/**
+ * @name              s-ul--info
+ * @namespace         scss.components.ul.colors
+ * @type              Classname
+ *
+ * This class can be applied on any ```ul``` component to specify his color to ```info```
+ *
+ * @example         html
+ * <ol class="ul s-ul--info">
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ *    <li>I'm a cool unordered list item</li>
+ * </ol>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-ul--info {
+  list-style: none;
+}
+s-ul--info > li {
+  padding-left: 2.5em;
+  position: relative;
+}
+s-ul--info > li::before {
+  content: "•";
+  font-weight: bold;
+  color: #2199e8;
+  display: inline-block;
+  width: 2em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: right;
+}
+
+.user-avatar {
+  display: inline-block;
+}
+.user-avatar a {
+  text-decoration: none;
+}
+
+.user-avatar__img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
+
+.user-avatar__name {
+  display: block;
+  text-align: center;
+}
+
+.user-avatar--smaller .user-avatar__img {
+  width: 45px;
+  height: 45px;
+}
+
+.user-avatar--small .user-avatar__img {
+  width: 90px;
+  height: 90px;
+}
+
+.user-avatar--default .user-avatar__img {
+  width: 150px;
+  height: 150px;
+}
+
+.user-avatar--medium .user-avatar__img {
+  width: 225px;
+  height: 225px;
+}
+
+.user-avatar--big .user-avatar__img {
+  width: 300px;
+  height: 300px;
+}
+
+.user-avatar--bigger .user-avatar__img {
+  width: 450px;
+  height: 450px;
+}
+
+/**
+ * Atoms
+ * All the atoms styling.
+ * An atom is the most basic component. It cannot contain any other atoms or anything else and have to be context free, meaning that
+ * it need to be usable everywhere we want without having to deal with pre-defined margins, etc...
+ * All atoms specific classes have to start with `.a-`.
+ */
+/**
+* Atoms
+* All the atoms styling.
+* An atom is the most basic component. It cannot contain any other atoms or anything else and have to be context free, meaning that
+* it need to be usable everywhere we want without having to deal with pre-defined margins, etc...
+*/
+/**
+ * @name              s-btn--smaller
+ * @namespace         scss.components.btn.sizes
+ * @type              Classname
+ *
+ * This class can be applied on any ```btn``` component to specify his size to ```smaller```
+ *
+ * @example         html
+ * <a class="btn s-btn--smaller">I'm a cool "smaller" button</a>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-btn--smaller {
+  display: inline-block;
+  padding: 0.24em 0.42em;
+  font-size: 4.8px;
+  text-decoration: none;
+}
+
+/**
+ * @name              s-btn--small
+ * @namespace         scss.components.btn.sizes
+ * @type              Classname
+ *
+ * This class can be applied on any ```btn``` component to specify his size to ```small```
+ *
+ * @example         html
+ * <a class="btn s-btn--small">I'm a cool "small" button</a>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-btn--small {
+  display: inline-block;
+  padding: 0.48em 0.84em;
+  font-size: 9.6px;
+  text-decoration: none;
+}
+
+/**
+ * @name              s-btn
+ * @namespace         scss.components.btn.sizes
+ * @type              Classname
+ *
+ * This class can be applied on any ```btn``` component to specify his size to ```default```
+ *
+ * @example         html
+ * <a class="btn s-btn">I'm a cool "default" button</a>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-btn {
+  display: inline-block;
+  padding: 0.8em 1.4em;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+/**
+ * @name              s-btn--medium
+ * @namespace         scss.components.btn.sizes
+ * @type              Classname
+ *
+ * This class can be applied on any ```btn``` component to specify his size to ```medium```
+ *
+ * @example         html
+ * <a class="btn s-btn--medium">I'm a cool "medium" button</a>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-btn--medium {
+  display: inline-block;
+  padding: 1.2em 2.1em;
+  font-size: 24px;
+  text-decoration: none;
+}
+
+/**
+ * @name              s-btn--big
+ * @namespace         scss.components.btn.sizes
+ * @type              Classname
+ *
+ * This class can be applied on any ```btn``` component to specify his size to ```big```
+ *
+ * @example         html
+ * <a class="btn s-btn--big">I'm a cool "big" button</a>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-btn--big {
+  display: inline-block;
+  padding: 1.6em 2.8em;
+  font-size: 32px;
+  text-decoration: none;
+}
+
+/**
+ * @name              s-btn--bigger
+ * @namespace         scss.components.btn.sizes
+ * @type              Classname
+ *
+ * This class can be applied on any ```btn``` component to specify his size to ```bigger```
+ *
+ * @example         html
+ * <a class="btn s-btn--bigger">I'm a cool "bigger" button</a>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-btn--bigger {
+  display: inline-block;
+  padding: 2.4em 4.2em;
+  font-size: 48px;
+  text-decoration: none;
+}
+
+/**
+ * @name              s-btn
+ * @namespace         scss.components.btn.colors
+ * @type              Classname
+ *
+ * This class can be applied on any ```btn``` component to specify his color to ```default```
+ *
+ * @example         html
+ * <a class="btn s-btn">I'm a cool "default" button</a>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-btn {
+  border-radius: 0.2em;
+  background-color: #848e91;
+  color: white;
+  transition: all 0.1s ease-in-out 0s;
+}
+s-btn:hover {
+  background-color: #6b7477;
+}
+
+/**
+ * @name              s-btn--title
+ * @namespace         scss.components.btn.colors
+ * @type              Classname
+ *
+ * This class can be applied on any ```btn``` component to specify his color to ```title```
+ *
+ * @example         html
+ * <a class="btn s-btn--title">I'm a cool "title" button</a>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-btn--title {
+  border-radius: 0.2em;
+  background-color: #2b3438;
+  color: white;
+  transition: all 0.1s ease-in-out 0s;
+}
+s-btn--title:hover {
+  background-color: #15191b;
+}
+
+/**
+ * @name              s-btn--text
+ * @namespace         scss.components.btn.colors
+ * @type              Classname
+ *
+ * This class can be applied on any ```btn``` component to specify his color to ```text```
+ *
+ * @example         html
+ * <a class="btn s-btn--text">I'm a cool "text" button</a>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-btn--text {
+  border-radius: 0.2em;
+  background-color: #848e91;
+  color: white;
+  transition: all 0.1s ease-in-out 0s;
+}
+s-btn--text:hover {
+  background-color: #6b7477;
+}
+
+/**
+ * @name              s-btn--link
+ * @namespace         scss.components.btn.colors
+ * @type              Classname
+ *
+ * This class can be applied on any ```btn``` component to specify his color to ```link```
+ *
+ * @example         html
+ * <a class="btn s-btn--link">I'm a cool "link" button</a>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-btn--link {
+  border-radius: 0.2em;
+  background-color: #f2bc2b;
+  color: white;
+  transition: all 0.1s ease-in-out 0s;
+}
+s-btn--link:hover {
+  background-color: #dca40e;
+}
+
+/**
+ * @name              s-btn--light
+ * @namespace         scss.components.btn.colors
+ * @type              Classname
+ *
+ * This class can be applied on any ```btn``` component to specify his color to ```light```
+ *
+ * @example         html
+ * <a class="btn s-btn--light">I'm a cool "light" button</a>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-btn--light {
+  border-radius: 0.2em;
+  background-color: #f8f9fa;
+  color: white;
+  transition: all 0.1s ease-in-out 0s;
+}
+s-btn--light:hover {
+  background-color: #dae0e5;
+}
+
+/**
+ * @name              s-btn--dark
+ * @namespace         scss.components.btn.colors
+ * @type              Classname
+ *
+ * This class can be applied on any ```btn``` component to specify his color to ```dark```
+ *
+ * @example         html
+ * <a class="btn s-btn--dark">I'm a cool "dark" button</a>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-btn--dark {
+  border-radius: 0.2em;
+  background-color: #343a40;
+  color: white;
+  transition: all 0.1s ease-in-out 0s;
+}
+s-btn--dark:hover {
+  background-color: #1d2124;
+}
+
+/**
+ * @name              s-btn--primary
+ * @namespace         scss.components.btn.colors
+ * @type              Classname
+ *
+ * This class can be applied on any ```btn``` component to specify his color to ```primary```
+ *
+ * @example         html
+ * <a class="btn s-btn--primary">I'm a cool "primary" button</a>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-btn--primary {
+  border-radius: 0.2em;
+  background-color: #f2bc2b;
+  color: white;
+  transition: all 0.1s ease-in-out 0s;
+}
+s-btn--primary:hover {
+  background-color: #dca40e;
+}
+
+/**
+ * @name              s-btn--secondary
+ * @namespace         scss.components.btn.colors
+ * @type              Classname
+ *
+ * This class can be applied on any ```btn``` component to specify his color to ```secondary```
+ *
+ * @example         html
+ * <a class="btn s-btn--secondary">I'm a cool "secondary" button</a>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-btn--secondary {
+  border-radius: 0.2em;
+  background-color: #2b3438;
+  color: white;
+  transition: all 0.1s ease-in-out 0s;
+}
+s-btn--secondary:hover {
+  background-color: #15191b;
+}
+
+/**
+ * @name              s-btn--success
+ * @namespace         scss.components.btn.colors
+ * @type              Classname
+ *
+ * This class can be applied on any ```btn``` component to specify his color to ```success```
+ *
+ * @example         html
+ * <a class="btn s-btn--success">I'm a cool "success" button</a>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-btn--success {
+  border-radius: 0.2em;
+  background-color: #5cb85c;
+  color: white;
+  transition: all 0.1s ease-in-out 0s;
+}
+s-btn--success:hover {
+  background-color: #449d44;
+}
+
+/**
+ * @name              s-btn--warning
+ * @namespace         scss.components.btn.colors
+ * @type              Classname
+ *
+ * This class can be applied on any ```btn``` component to specify his color to ```warning```
+ *
+ * @example         html
+ * <a class="btn s-btn--warning">I'm a cool "warning" button</a>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-btn--warning {
+  border-radius: 0.2em;
+  background-color: #f0ad4e;
+  color: white;
+  transition: all 0.1s ease-in-out 0s;
+}
+s-btn--warning:hover {
+  background-color: #ec971f;
+}
+
+/**
+ * @name              s-btn--error
+ * @namespace         scss.components.btn.colors
+ * @type              Classname
+ *
+ * This class can be applied on any ```btn``` component to specify his color to ```error```
+ *
+ * @example         html
+ * <a class="btn s-btn--error">I'm a cool "error" button</a>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-btn--error {
+  border-radius: 0.2em;
+  background-color: #d9534f;
+  color: white;
+  transition: all 0.1s ease-in-out 0s;
+}
+s-btn--error:hover {
+  background-color: #c9302c;
+}
+
+/**
+ * @name              s-btn--info
+ * @namespace         scss.components.btn.colors
+ * @type              Classname
+ *
+ * This class can be applied on any ```btn``` component to specify his color to ```info```
+ *
+ * @example         html
+ * <a class="btn s-btn--info">I'm a cool "info" button</a>
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+s-btn--info {
+  border-radius: 0.2em;
+  background-color: #2199e8;
+  color: white;
+  transition: all 0.1s ease-in-out 0s;
+}
+s-btn--info:hover {
+  background-color: #147dc2;
+}
+
+/**
+ * Views
+ * Import all the views scss files
+ * This need the node-sass-glob-importer package installed :
+ * https://www.npmjs.com/package/node-sass-glob-importer
+ */
+/*** IMPORTED FILE NOT FOUND ***/
+/*** --- ***/
+/**
+ * Trumps
+ * All the things that does not fit in any others directory. Try to keep this folder has small as possible.
+ * If you have to many things in here, that mean that you probably need to refactor your codebase...
+ */
+/**
+* Trumps
+* All the things that does not fit in any others directory. Try to keep this folder has small as possible.
+* If you have to many things in here, that mean that you probably need to refactor your codebase...
 */

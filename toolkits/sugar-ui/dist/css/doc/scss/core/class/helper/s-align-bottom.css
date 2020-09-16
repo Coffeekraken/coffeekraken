@@ -1,0 +1,20 @@
+
+
+/**
+* @name 		.s-align-bottom
+* @namespace         scss.core.class.helper
+* @class-namespace     sugar.helper.vertical-align.bottom
+* @type        class
+*
+* Align vertically bottom
+*
+* @example 	html
+* <div class="s-border style="height:200px">
+*   <div class="s-align-bottom">
+*     Hello world
+*   </div>
+* </div>
+*
+* @since       1.0.0
+* @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+*/

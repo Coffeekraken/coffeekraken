@@ -142,8 +142,7 @@ module.exports = (args = {}) => {
     })
     .on('error', (e) => {
       const string = e.toString();
-      console.log(string);
-      promise.reject(`${string}`);
+      promise.reject(string);
     });
 
   return promise;

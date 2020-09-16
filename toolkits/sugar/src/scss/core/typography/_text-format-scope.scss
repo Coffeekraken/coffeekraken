@@ -3,7 +3,7 @@
  * @namespace           scss.core.typography
  * @type      mixin
  *
- * Scope the content inside the `settings.text-format-scope-class` class
+ * Scope the content inside the `settings.typography.text-format-scope-class` class
  *
  * @example       scss
  * .my-cool-item {
@@ -17,7 +17,7 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
  @mixin text-format-scope() {
-  $sc: setting("text-format-scope-class");
+  $sc: setting("typography.text-format-scope-class");
   @if $sc {
     @each $cls in $sc {
       &#{$cls},

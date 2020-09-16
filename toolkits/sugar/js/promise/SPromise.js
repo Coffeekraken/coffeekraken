@@ -204,6 +204,10 @@ var SPromise = /*#__PURE__*/function (_Promise) {
           } else {
             value = res;
           }
+        }
+
+        if (metas.stack.includes('catch')) {
+          console.log('tri', metas.stack);
         } // trigger on the destination promise
 
 
@@ -343,7 +347,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
     }); // extend settings
 
     _this._settings = (0, _deepMerge.default)({
-      triggerOnCatch: 'catch',
+      triggerOnCatch: 'error',
       destroyTimeout: 5000,
       id: (0, _uniqid.default)()
     }, typeof executorFnOrSettings === 'object' ? executorFnOrSettings : {}, settings);

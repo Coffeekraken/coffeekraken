@@ -27,6 +27,8 @@ var _typeof = _interopRequireDefault(require("../value/typeof"));
 
 var _toString = _interopRequireDefault(require("../string/toString"));
 
+var _set = _interopRequireDefault(require("../object/set"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
@@ -402,11 +404,10 @@ var SInterface = /*#__PURE__*/function () {
         var argDefinitionObj = this.definitionObj[argString]; // check if we have an argument passed in the properties
 
         if (argsObj[argString] === undefined && argDefinitionObj.default !== undefined) {
-          argsObj[argString] = argDefinitionObj.default;
+          (0, _set.default)(argsObj, argString, argDefinitionObj.default);
         }
-      }); // return the argsObj
-
-      return (0, _deepize.default)(argsObj);
+      });
+      return argsObj;
     }
     /**
      * @name          outputString

@@ -14,5 +14,5 @@
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function text-format-class() {
-  @return setting("text-format-scope-class");
+  @return setting("typography.text-format-scope-class");
 }

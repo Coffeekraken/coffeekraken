@@ -8,6 +8,7 @@ const __countLine = require('../../string/countLine');
 const __SOutput = require('../../blessed/SOutput');
 const __color = require('../../color/color');
 const __hotkey = require('../../keyboard/hotkey');
+const __packageJson = require('../../package/json');
 const __SNotification = require('../../blessed/notification/SNotification');
 const __ora = require('ora');
 
@@ -146,6 +147,7 @@ module.exports = class SSugarUiOutput extends __SComponent {
     const $centeredBox = __blessed.box({
       top: 'center',
       left: 'center',
+      width: '100%',
       style: {}
     });
 
@@ -171,14 +173,32 @@ module.exports = class SSugarUiOutput extends __SComponent {
 
     const spinner = __ora('Loading');
 
+    const packageJson = __packageJson();
+
+    const projectLine = `<bgWhite><black> ${packageJson.license} </black></bgWhite> <yellow>${packageJson.name}</yellow> <cyan>${packageJson.version}</cyan>`;
+    const byLine = `By ${packageJson.author.split(/<|\(/)[0]}`;
+    const byLineSpaces =
+      Math.round((__countLine(projectLine) - __countLine(byLine)) / 2) - 1;
+
+    const projectLines = [
+      `<yellow>${'-'.repeat(__countLine(projectLine) + 6)}</yellow>`,
+      `<yellow>|</yellow>  ${projectLine}  <yellow>|</yellow>`,
+      `<yellow>|</yellow>  ${' '.repeat(byLineSpaces)} ${byLine} ${' '.repeat(
+        byLineSpaces
+      )}  <yellow>|</yellow>`,
+      `<yellow>${'-'.repeat(__countLine(projectLine) + 6)}</yellow>`
+    ];
+
     const updateContent = () => {
-      let text = [spinner.frame()];
+      let text = [...projectLines, '', spinner.frame()];
       if (this._modulesReady) {
         text = [
-          `WebUI started at`,
+          ...projectLines,
+          ``,
+          `WebUI <green>started</green> at`,
           `<bgYellow><black> http://${serverSettings.hostname}:${serverSettings.port} </black></bgYellow>`,
           '',
-          `Console <magenta>(c)</magenta>`,
+          `Display console <magenta>(c)</magenta>`,
           `<cyan>${Object.keys(initialParams.modules).length}</cyan> module${
             Object.keys(initialParams.modules).length > 1 ? 's' : ''
           } loaded <magenta>(m)</magenta>`

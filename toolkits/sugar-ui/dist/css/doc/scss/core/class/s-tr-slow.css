@@ -1,0 +1,18 @@
+
+
+/**
+  * @name       	s-tr-slow
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.transition.slow
+  * @type        class
+  *
+  * Apply the transition **slow**
+  *
+  * @example 	html
+  * <div class="s-tr-slow">
+  * 	I'm transitionned with slow
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */

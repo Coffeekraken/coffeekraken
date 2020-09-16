@@ -1,0 +1,18 @@
+
+
+/**
+  * @name       	s-c-secondary--dark
+  * @namespace       scss.core.class
+  * @class-namespace           sugar.helper.color.secondary.dark
+  * @type        class
+  *
+  * Specify the color to **secondary--dark**
+  *
+  * @example 	html
+  * <div class="s-c-secondary--dark">
+  * 	I'm in "secondary--dark" color
+  * </div>
+  *
+  * @since       1.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */

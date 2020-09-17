@@ -4,7 +4,7 @@ const __env = require('../../../core/env');
 
 /**
  * @name            envMiddleware
- * @namespace       node.server.frontend.middleware
+ * @namespace       sugar.node.server.frontend.middleware
  * @type            Function
  *
  * This function describe the middleware that will add the "env" property to the ```res.templateData``` object

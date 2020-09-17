@@ -2,7 +2,7 @@ import __SPromise from '../promise/SPromise';
 
 /**
  * @name      observeMutations
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Observe mutations on an HTMLElement and get them through the observable subscription.

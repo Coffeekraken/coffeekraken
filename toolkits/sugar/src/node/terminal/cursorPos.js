@@ -4,7 +4,7 @@ const __terminalKit = require('terminal-kit').terminal;
 
 /**
  * @name                                      cursorPos
- * @namespace           node.terminal
+ * @namespace           sugar.node.terminal
  * @type                                      Function
  *
  * Return the terminal cursor position in {x,y} format.

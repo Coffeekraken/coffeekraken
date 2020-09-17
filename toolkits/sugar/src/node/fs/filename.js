@@ -4,7 +4,7 @@ const __extension = require('./extension');
 
 /**
  * @name                       filename
- * @namespace           node.fs
+ * @namespace           sugar.node.fs
  * @type                        Function
  *
  * Return the filename from the passed path with or without the extension

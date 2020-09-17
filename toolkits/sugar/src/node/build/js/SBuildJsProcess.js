@@ -4,7 +4,7 @@ const __SFsDeamon = require('../../deamon/fs/SFsDeamon');
 
 /**
  * @name            SBuildJsProcess
- * @namespace           node.build.js
+ * @namespace           sugar.node.build.js
  * @type            Class
  * @extends         SProcess
  *

@@ -5,7 +5,7 @@ const __path = require('path');
 
 /**
  * @name            getScssImportsStrings
- * @namespace       node.build.scss
+ * @namespace       sugar.node.build.scss
  * @type            Function
  *
  * This function simply check the @config.build.scss.imports config and return the correct imports array

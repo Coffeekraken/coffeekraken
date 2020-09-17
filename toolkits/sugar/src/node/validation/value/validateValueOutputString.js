@@ -1,5 +1,5 @@
 /**
- * @namespace           node.validation.value
+ * @namespace           sugar.node.validation.value
  * @src             ../../../js/validation/value/validateValueOutputString
  * @todo            tests
  */

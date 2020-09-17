@@ -9,7 +9,7 @@ const __countLine = require('./countLine');
 
 /**
  * @name                            SInput
- * @namespace           node.terminal
+ * @namespace           sugar.node.terminal
  * @type                            Class
  *
  * Allows you to create some simple inputs.

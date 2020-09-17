@@ -5,7 +5,7 @@ const __SSugarUiModuleSettingsInterface = require('./interface/SSugarUiModuleSet
 
 /**
  * @name            SSugarUiModule
- * @namespace           node.ui.sugar
+ * @namespace           sugar.node.ui.sugar
  * @type            Class
  * @extends         SPromise
  *

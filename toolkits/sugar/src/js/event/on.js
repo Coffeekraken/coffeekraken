@@ -2,7 +2,7 @@ const __SPromise = require('../promise/SPromise');
 
 /**
  * @name        on
- * @namespace           js.event
+ * @namespace           sugar.js.event
  * @type          Function
  *
  * This function allows you to subscribe to global events triggered by the "sugar.js.event.dispatch" function

@@ -1,6 +1,6 @@
 /**
  * @name        includes
- * @namespace           js.string
+ * @namespace           sugar.js.string
  * @type      Function
  *
  * Same as the native String.includes function but accept either an array of items

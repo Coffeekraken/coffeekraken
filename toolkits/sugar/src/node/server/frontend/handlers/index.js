@@ -5,7 +5,7 @@ const __SPromise = require('../../../promise/SPromise');
 
 /**
  * @name                index
- * @namespace           node.server.frontend.handlers
+ * @namespace           sugar.node.server.frontend.handlers
  * @type                Function
  *
  * This function is responsible of responding to express requests made on the home page

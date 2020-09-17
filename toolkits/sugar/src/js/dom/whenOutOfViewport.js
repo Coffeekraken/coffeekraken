@@ -6,7 +6,7 @@ import __closest from './closest';
 
 /**
  * @name      whenOutOfViewport
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Monitor an HTMLElement to be notified when it exit the viewport

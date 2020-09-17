@@ -5,7 +5,7 @@ import __convert from '../time/convert';
 
 /**
  * @name      getTransitionProperties
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Get the css transition properties from an HTMLElement in an object format

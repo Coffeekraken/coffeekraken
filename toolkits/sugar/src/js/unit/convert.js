@@ -5,7 +5,7 @@ import __px2rem from './px2rem';
 
 /**
  * @name                  convert
- * @namespace           js.unit
+ * @namespace           sugar.js.unit
  * @type                  Function
  *
  * Convert a passed unit to the wanted one. If the passed unit is a number and not a string like "10rem", the unit is take as pixels

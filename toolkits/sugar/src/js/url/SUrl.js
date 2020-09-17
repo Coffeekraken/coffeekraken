@@ -5,7 +5,7 @@ import __parseSchema from './parseSchema';
 
 /**
  * @name            SUrl
- * @namespace           js.url
+ * @namespace           sugar.js.url
  * @type            Class
  *
  * Simple class that is useful to parse a URL (or the current browser URL) and gives you back

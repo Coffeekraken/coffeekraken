@@ -2,7 +2,7 @@ import { paramCase } from 'param-case';
 
 /**
  * @name          paramCase
- * @namespace           js.string
+ * @namespace           sugar.js.string
  * @type          Function
  *
  * This function transform a string into a param case one like so "something-cool"

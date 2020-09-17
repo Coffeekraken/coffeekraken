@@ -6,7 +6,7 @@ import __markdownToHtml from '../convert/html/htmlFromMarkdown';
 
 /**
  * @name                  Dockblock
- * @namespace           js.docblock
+ * @namespace           sugar.js.docblock
  * @type                  Class
  *
  * This is the main class that expose the methods like "parse", etc...

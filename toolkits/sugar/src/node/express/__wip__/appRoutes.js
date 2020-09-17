@@ -1,6 +1,6 @@
 /**
  * @name                    appRoutes
- * @namespace           node.express
+ * @namespace           sugar.node.express
  * @type                    Function
  *
  * Register all the app specific routes to handle things like "/app/config", "/app/meta", etc...

@@ -2,7 +2,7 @@ import __parseAuthorString from './parseAuthorString';
 
 /**
  * @name            standardizeJson
- * @namespace       js.npm
+ * @namespace       sugar.js.npm
  * @type            Function
  *
  * This function simply take a package.json JSON formatted object and standardize

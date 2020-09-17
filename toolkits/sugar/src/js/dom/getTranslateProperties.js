@@ -2,7 +2,7 @@ import __convert from '../unit/convert';
 
 /**
  * @name      getTranslateProperties
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Get a translate properties of an HTMLElement

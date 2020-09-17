@@ -3,7 +3,7 @@
   @if class-match-namespace("sugar.helper.user-select.none") {
     /**
     * @name 		#{sel(user-select-none)}
-    * @namespace           scss.core.class.helper
+    * @namespace           sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.user-select.none
     * @type        class
     *
@@ -25,7 +25,7 @@
   @if class-match-namespace("sugar.helper.user-select.all") {
     /**
     * @name 		#{sel(user-select-all)}
-    * @namespace           scss.core.class.helper
+    * @namespace           sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.user-select.all
     * @type        class
     *
@@ -47,7 +47,7 @@
   @if class-match-namespace("sugar.helper.user-select.text") {
     /**
     * @name 		#{sel(user-select-text)}
-    * @namespace           scss.core.class.helper
+    * @namespace           sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.user-select.text
     * @type        class
     *

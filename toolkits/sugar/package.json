@@ -62,6 +62,7 @@
     "clear": "^0.1.0",
     "cli-highlight": "^2.1.4",
     "clipboardy": "^2.3.0",
+    "codemirror": "^5.57.0",
     "color-convert": "^2.0.1",
     "command-exists": "^1.2.9",
     "console-pos": "^1.0.2",

@@ -1,6 +1,6 @@
 /**
  * @name              setAuthToken
- * @namespace           node.github
+ * @namespace           sugar.node.github
  * @type               Function
  *
  * Set the github authentification token that will be used by all the sugar github related functions

@@ -8,11 +8,12 @@ const __SFsFilesResolverStreamAction = require('../../stream/actions/SFsFilesRes
 const __SFsCacheStreamAction = require('../../stream/actions/SFsCacheStreamAction');
 const __SFsOutputStreamAction = require('../../stream/actions/SFsOutputStreamAction');
 const __SSugarJsonStreamAction = require('../actions/SSugarJsonStreamAction');
+const __SDocMapStreamAction = require('../../stream/actions/SDocMapStreamAction');
 const __path = require('path');
 
 /**
  * @name            SBuildJsActionsStream
- * @namespace           node.build.js
+ * @namespace           sugar.node.build.js
  * @type            Class
  * @extends         SActionsStream
  *
@@ -55,13 +56,15 @@ module.exports = class SBuildJsActionsStream extends __SActionsStream {
         sugarJson: __SSugarJsonStreamAction,
         webpack: __SWebpackStreamAction,
         terser: __STerserStreamAction,
-        fsOutput: __SFsOutputStreamAction
+        fsOutput: __SFsOutputStreamAction,
+        docMap: __SDocMapStreamAction
       },
       __deepMerge(
         {
           id: 'build.js.actionStream',
           name: 'Build JS Actions Stream',
           before: (streamObj) => {
+            streamObj.docMapInput = streamObj.input;
             return streamObj;
           },
           afterActions: {

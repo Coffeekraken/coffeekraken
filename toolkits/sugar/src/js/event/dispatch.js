@@ -2,7 +2,7 @@ import __SPromise from '../promise/SPromise';
 
 /**
  * @name        trigger
- * @namespace           js.event
+ * @namespace           sugar.js.event
  * @type          Function
  *
  * This function can ben used to trigger an event globally.

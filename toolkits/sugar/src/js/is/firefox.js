@@ -1,6 +1,6 @@
 /**
  * @name        isFirefox
- * @namespace           js.is
+ * @namespace           sugar.js.is
  * @type      Function
  *
  * Detect if is firefox

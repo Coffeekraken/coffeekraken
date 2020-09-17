@@ -9,7 +9,7 @@ const __base64 = require('../crypt/base64');
 
 /**
  * @name                                            SApp
- * @namespace           node.class
+ * @namespace           sugar.node.class
  * @type                                            Class
  *
  * This class represent an application route class. This mean that you can create an application class that extend this one
@@ -68,7 +68,7 @@ module.exports = class SApp {
 
   /**
    * @name                        config
-   * @namespace           node.class.SApp
+   * @namespace           sugar.node.class.SApp
    * @type                        Function
    *
    * Access the configuration of the setted adapters in "settings.config". For more informations please check the SConfig adapters documentation...
@@ -101,7 +101,7 @@ module.exports = class SApp {
 
   /**
    * @name                 meta
-   * @namespace           node.class.SApp
+   * @namespace           sugar.node.class.SApp
    * @type                 Function
    *
    * Return a application meta taken from the stored datas
@@ -128,7 +128,7 @@ module.exports = class SApp {
 
   /**
    * @name               __eatData
-   * @namespace           node.class.SApp
+   * @namespace           sugar.node.class.SApp
    * @type               Function
    *
    * Search the setted sources to find the files like package.json, app.config.js, etc and build the __data object
@@ -155,7 +155,7 @@ module.exports = class SApp {
 
   /**
    * @name                   _jsContent
-   * @namespace           node.class.SApp
+   * @namespace           sugar.node.class.SApp
    * @type                   Function
    *
    * Get all the configured js files content and return it in text format
@@ -193,7 +193,7 @@ module.exports = class SApp {
 
   /**
    * @name                   _cssContent
-   * @namespace           node.class.SApp
+   * @namespace           sugar.node.class.SApp
    * @type                   Function
    *
    * Get all the configured js files content and return it in text format

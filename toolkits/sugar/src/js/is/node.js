@@ -1,6 +1,6 @@
 /**
  * @name                                      isNode
- * @namespace           js.is
+ * @namespace           sugar.js.is
  * @type                                      Function
  *
  * Check if the current script is running under node runtime or not...

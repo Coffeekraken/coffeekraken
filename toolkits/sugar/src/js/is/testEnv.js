@@ -2,7 +2,7 @@ import __env from '../core/env';
 
 /**
  * @name          testEnv
- * @namespace     js.is
+ * @namespace     sugar.js.is
  * @type          Function
  *
  * Check if the current environment is in a test process or not

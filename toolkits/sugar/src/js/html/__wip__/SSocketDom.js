@@ -3,7 +3,7 @@ import __innerHtml from '../dom/innerHtml';
 
 /**
  * @name            syncDom
- * @namespace           js.socket
+ * @namespace           sugar.js.socket
  * @type            Function
  *
  * Simply connect to a backend socket.io server and listen for specifics messages from it to refresh automatically the DOM.
@@ -26,7 +26,7 @@ class SSocketDom {
   _settings = {
     /**
      * @name      settings.node
-     * @namespace           js.class
+     * @namespace           sugar.js.class
      * @type        HTMLElement
      *
      * The root node where the html contents will be injected if no node is passed with the event
@@ -54,7 +54,7 @@ class SSocketDom {
 
     /**
      * @name          settings.events
-     * @namespace           js.class
+     * @namespace           sugar.js.class
      * @type          Object
      *
      * Save the events scoped settings objects
@@ -173,7 +173,7 @@ class SSocketDom {
 
   /**
    * @name          emit
-   * @namespace           js.class
+   * @namespace           sugar.js.class
    * @type          Function
    *
    * Emit an event with an object containing some values to pass to the server
@@ -194,7 +194,7 @@ class SSocketDom {
 
   /**
    * @name          registerEvent
-   * @namespace           js.class
+   * @namespace           sugar.js.class
    * @type          Function
    *
    * Register a new event with an handler function that will handle the event content

@@ -1,6 +1,6 @@
 /**
  * @name      prependChild
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Prepend an HTMLElement into another HTMLElement

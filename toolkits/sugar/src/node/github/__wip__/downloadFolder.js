@@ -8,7 +8,7 @@ const __mkdirp = require('mkdirp');
 
 /**
  * @name            downloadFolder
- * @namespace           node.github
+ * @namespace           sugar.node.github
  * @type            Function
  * @async
  *

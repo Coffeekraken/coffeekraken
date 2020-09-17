@@ -4,7 +4,7 @@ import __toQueryString from '../../object/toQueryString';
 
 /**
  * @name              SUrlAction
- * @namespace         js.action.browser
+ * @namespace         sugar.js.action.browser
  * @type              Class
  *
  * This class represent an URL action that let you change the user page

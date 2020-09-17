@@ -10,7 +10,7 @@ const __namespace = require('../package/namespace');
 
 /**
  * @name              SSearchResultItem
- * @namespace           node.search
+ * @namespace           sugar.node.search
  * @type              Class
  *
  * This class represent a search result with all his fields, etc...

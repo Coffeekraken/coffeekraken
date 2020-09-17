@@ -1,6 +1,6 @@
 /**
  * @name                    base64
- * @namespace           js.encoding
+ * @namespace           sugar.js.encoding
  * @type                    Object
  *
  * This return an object containing the "encode" and "decode" function that you can use

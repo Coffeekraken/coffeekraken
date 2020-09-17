@@ -1,6 +1,6 @@
 /**
  * @name                                    methodExists
- * @namespace           js.class
+ * @namespace           sugar.js.class
  * @type                                    Function
  *
  * Check if one or more methods exists on a class instance

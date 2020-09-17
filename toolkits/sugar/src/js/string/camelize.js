@@ -1,6 +1,6 @@
 /**
  * @name        camelize
- * @namespace           js.string
+ * @namespace           sugar.js.string
  * @type      Function
  *
  * Camelize a string

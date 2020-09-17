@@ -4,7 +4,7 @@ import __deepMerge from '../object/deepMerge';
 
 /**
  * @name 		            STimer
- * @namespace           js.time
+ * @namespace           sugar.js.time
  * @type                  Class
  * @extends               SPromise
  *

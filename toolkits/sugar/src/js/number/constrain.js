@@ -1,6 +1,6 @@
 /**
  * @name        constrain
- * @namespace           js.number
+ * @namespace           sugar.js.number
  * @type      Function
  *
  * Constrain a value between a min and a max value

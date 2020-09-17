@@ -1,6 +1,6 @@
 /**
  * @name      requestFullscreen
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Request fullscreen on the passed DOM element

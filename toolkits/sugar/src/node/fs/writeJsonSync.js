@@ -4,7 +4,7 @@ const __fs = require('fs-extra');
 
 /**
  * @name        writeJsonSync
- * @namespace           node.fs
+ * @namespace           sugar.node.fs
  * @type          Function
  *
  * Write a JSON file. If don't exist, will be created as well as the directory structure if needed... (sync)

@@ -3,7 +3,7 @@ const __sugarConfig = require('../../../config/sugar');
 
 /**
  * @name                SFrontendServerInterface
- * @namespace           node.server.express.interface
+ * @namespace           sugar.node.server.express.interface
  * @type                Class
  * @extends             SInterface
  *

@@ -3,7 +3,7 @@ const __countLine = require('../string/countLine');
 
 /**
  * @name                                    center
- * @namespace           node.terminal
+ * @namespace           sugar.node.terminal
  * @type                                    Function
  * @test                ./__tests__/center.test.js
  *

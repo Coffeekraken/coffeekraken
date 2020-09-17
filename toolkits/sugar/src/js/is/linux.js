@@ -2,7 +2,7 @@
 
 /**
  * @name                            linux
- * @namespace           js.is
+ * @namespace           sugar.js.is
  * @type                            Function
  *
  * Check if the app run on linux

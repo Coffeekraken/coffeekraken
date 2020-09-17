@@ -19,7 +19,7 @@ const __hasExitCleanup = require('../process/hasExitCleanup');
 
 /**
  * @name              SChildProcess
- * @namespace         node.process
+ * @namespace         sugar.node.process
  * @extends           SProcess
  * @type              Class
  *

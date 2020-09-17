@@ -1,6 +1,6 @@
 /**
  * @name      linear
- * @namespace           js.easing
+ * @namespace           sugar.js.easing
  * @type      Function
  *
  * Ease linear function

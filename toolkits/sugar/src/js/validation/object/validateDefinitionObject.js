@@ -4,7 +4,7 @@ import __validateObject from './validateObject';
 
 /**
  * @name            validateDefinitionObject
- * @namespace       js.validation.object
+ * @namespace       sugar.js.validation.object
  * @type            Function
  *
  * This function simply take a definition object and validate it

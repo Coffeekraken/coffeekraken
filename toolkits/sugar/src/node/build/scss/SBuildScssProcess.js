@@ -6,7 +6,7 @@ const { initial } = require('lodash');
 
 /**
  * @name            SBuildScssProcess
- * @namespace           node.build.scss
+ * @namespace           sugar.node.build.scss
  * @type            Class
  * @extends         SProcess
  *

@@ -3,7 +3,7 @@ import __SCacheAdapter from './SCacheAdapter';
 
 /**
  * @name                                SCacheFsAdapter
- * @namespace           node.fs.cacheAdapters
+ * @namespace           sugar.js.cache.adapters
  * @type                                Class
  *
  * A filesystem SCache adapter that allows you to store your cache items on the user system
@@ -15,6 +15,7 @@ import __SCacheAdapter from './SCacheAdapter';
  *    })
  * });
  *
+ * @since     2.0.0
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default class SCacheLsAdapter extends __SCacheAdapter {

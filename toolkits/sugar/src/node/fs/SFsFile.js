@@ -7,7 +7,7 @@ const __getFilename = require('./filename');
 
 /**
  * @name            SFsFile
- * @namespace       node.fs
+ * @namespace       sugar.node.fs
  * @type            Class
  * @implements      SFsFileInterface
  * @extends         SPromise

@@ -14,7 +14,7 @@ class SFsUnlinkStreamActionInterface extends __SInterface {
 
 /**
  * @name            SFsUnlinkStreamAction
- * @namespace           node.stream.actions
+ * @namespace           sugar.node.stream.actions
  * @type            Class
  * @extends         SActionsStreamAction
  *

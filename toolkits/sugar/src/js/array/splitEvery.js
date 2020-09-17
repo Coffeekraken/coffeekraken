@@ -1,6 +1,6 @@
 /**
  * @name                                splitEvery
- * @namespace           js.array
+ * @namespace           sugar.js.array
  * @type                                Function
  *
  * Split an array every N items

@@ -1,6 +1,6 @@
 /**
  * @name      easeInQuart
- * @namespace           js.easing
+ * @namespace           sugar.js.easing
  * @type      Function
  *
  * Ease in quart function

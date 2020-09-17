@@ -11,7 +11,7 @@ const __color = require('../color/color');
 
 /**
  * @name                    handleError
- * @namespace               node.error
+ * @namespace               sugar.node.error
  * @type                    Function
  *
  * This function take a thrown error and try to display it the best way possible.

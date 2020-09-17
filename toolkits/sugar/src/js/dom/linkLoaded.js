@@ -2,7 +2,7 @@
 
 /**
  * @name      linkLoaded
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Wait until the passed HTMLLinkElement is fully loaded

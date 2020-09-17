@@ -8,7 +8,7 @@ const __countLine = require('./countLine');
 
 /**
  * @name                            SForm
- * @namespace           node.terminal
+ * @namespace           sugar.node.terminal
  * @type                            Class
  *
  * Create a form that can contains some inputs, textarea, etc...
@@ -77,7 +77,7 @@ module.exports = class SForm extends __blessed.form {
 
   append(node) {
     if (this._style && node.setFormStyle) {
-      node.setFormStyle(this._style);
+      sugar.node.setFormStyle(this._style);
     }
     super.append(node);
   }

@@ -2,7 +2,7 @@ const __SColor = require('./SColor');
 
 /**
  * @name                color
- * @namespace           node.color
+ * @namespace           sugar.node.color
  * @type                Function
  *
  * Simple wrapper to create an SColor instance quickly

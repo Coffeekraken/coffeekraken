@@ -2,7 +2,7 @@ import __SPromise from '../promise/SPromise';
 
 /**
  * @name      imageLoaded
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Wait until the passed image is fully loaded

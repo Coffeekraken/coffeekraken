@@ -2,7 +2,7 @@ import __uniqid from '../string/uniqid';
 
 /**
  * @name                  proxy
- * @namespace           js.array
+ * @namespace           sugar.js.array
  * @type                  Function
  *
  * This function override the passed array prototype to intercept changes made through

@@ -1,6 +1,6 @@
 /**
  * @name        pad
- * @namespace           js.number
+ * @namespace           sugar.js.number
  * @type      Function
  *
  * Pad a number n of x 0 or another passed character

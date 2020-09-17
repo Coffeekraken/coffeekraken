@@ -8,7 +8,7 @@ const __SProcessDeamonSettingInterface = require('./interface/SProcessDeamonSett
 
 /**
  * @name            SProcess
- * @namespace       node.process
+ * @namespace       sugar.node.process
  * @type            Class
  * @extends         SPromise
  * @implements      SProcessInterface

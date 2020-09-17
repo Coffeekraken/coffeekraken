@@ -2,7 +2,7 @@ import __SLog from './SLog';
 
 /**
  * @name              error
- * @namespace           js.error
+ * @namespace           sugar.js.error
  * @type              Function
  *
  * This function is a simple wrapper around the SLog class that let you use the error features quickly

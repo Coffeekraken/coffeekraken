@@ -1,6 +1,6 @@
 /**
  * @name 		                SEvent
- * @namespace           js.event
+ * @namespace           sugar.js.event
  * @type                    Class
  *
  * Proxy class to create custom events that can be dispatched

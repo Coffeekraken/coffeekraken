@@ -10,7 +10,7 @@ const __countLine = require('./countLine');
 
 /**
  * @name                            SFiltrableList
- * @namespace           node.terminal
+ * @namespace           sugar.node.terminal
  * @type                            Class
  *
  * Allows you to create a nice filtrable (searchable) list input

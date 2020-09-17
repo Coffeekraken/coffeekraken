@@ -2,7 +2,7 @@ const __fs = require('fs');
 
 /**
  * @name            directory
- * @namespace           node.is
+ * @namespace           sugar.node.is
  * @type            Function
  *
  * This function check if the passed string path is a directory or not

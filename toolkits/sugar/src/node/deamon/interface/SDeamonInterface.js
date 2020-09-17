@@ -2,7 +2,7 @@ const __SInterface = require('../../class/SInterface');
 
 /**
  * @name                SDeamonInterface
- * @namespace           node.deamon.interface
+ * @namespace           sugar.node.deamon.interface
  * @type                Class
  * @extends             SInterface
  *

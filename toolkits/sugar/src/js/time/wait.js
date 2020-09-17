@@ -1,6 +1,6 @@
 /**
  * @name            wait
- * @namespace           js.time
+ * @namespace           sugar.js.time
  * @type            Function
  * @async
  *

@@ -4,7 +4,7 @@ const __getAppMeta = require('../app/getAppMetas');
 
 /**
  * @name                    setupSlackTransport
- * @namespace           node.log
+ * @namespace           sugar.node.log
  * @type                    Function
  *
  * Setup a slack transport to send your logs into a certain slack channel

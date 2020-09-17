@@ -3,7 +3,7 @@ import __isOfType from '../../../is/ofType';
 
 /**
  * @name          SValuesValidation
- * @namespace     js.validation.value.validation
+ * @namespace     sugar.js.validation.value.validation
  * @type          Class
  *
  * This class represent the "values" validation

@@ -4,7 +4,7 @@ import __closestNotVisible from './closestNotVisible';
 
 /**
  * @name      querySelectorAll
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Enhanced proxy of the Element.querySelectorAll function that let you specify

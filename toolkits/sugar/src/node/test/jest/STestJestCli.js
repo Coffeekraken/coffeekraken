@@ -5,7 +5,7 @@ const __STestJestProcess = require('./STestJestProcess');
 
 /**
  * @name            STestJestCli
- * @namespace           node.test.jest
+ * @namespace           sugar.node.test.jest
  * @type            Class
  * @extends         SCli
  *

@@ -2,7 +2,7 @@ const __SInterface = require('../../class/SInterface');
 
 /**
  * @name                SOutputSourceInterface
- * @namespace           node.blessed.interface
+ * @namespace           sugar.node.blessed.interface
  * @type                Class
  * @extends             SInterface
  *

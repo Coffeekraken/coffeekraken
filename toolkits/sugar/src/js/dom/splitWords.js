@@ -2,7 +2,7 @@ import _map from 'lodash/map';
 
 /**
  * @name      splitWords
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Split each words inside an HTMLElement by scoping them inside some tags.

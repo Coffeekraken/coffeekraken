@@ -1,6 +1,6 @@
 /**
  * @name        isBrowser
- * @namespace           js.is
+ * @namespace           sugar.js.is
  * @type      Function
  *
  * Check if the script is running inside a browser or not

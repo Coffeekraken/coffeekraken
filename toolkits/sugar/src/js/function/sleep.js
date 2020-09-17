@@ -1,6 +1,6 @@
 /**
  * @name          sleep
- * @namespace           js.function
+ * @namespace           sugar.js.function
  * @type          Function
  *
  * Simple sleep function that can be used using "await" syntax in an "async" function

@@ -4,7 +4,7 @@ const __SSummaryList = require('./SSummaryList');
 
 /**
  * @name                      summaryListPopup
- * @namespace           node.blessed.list
+ * @namespace           sugar.node.blessed.list
  * @type                      Function
  *
  * This function init and display a summary list popup and return an SPromise instance on which you can subscribe for response, etc...

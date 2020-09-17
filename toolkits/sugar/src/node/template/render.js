@@ -10,7 +10,7 @@ const __SError = require('../error/SError');
 
 /**
  * @name              render
- * @namespace         node.template
+ * @namespace         sugar.node.template
  * @type              Function
  * @async
  *

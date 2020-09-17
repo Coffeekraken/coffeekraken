@@ -3,7 +3,7 @@ import __easeing from '../easing/easeInOutQuint';
 
 /**
  * @name      scrollToLocationHash
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Scroll to the location hash if an hash is present.

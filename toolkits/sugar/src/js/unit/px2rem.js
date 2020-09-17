@@ -1,6 +1,6 @@
 /**
  * @name                    px2rem
- * @namespace           js.unit
+ * @namespace           sugar.js.unit
  * @type                    Function
  *
  * Convert rem value to a px one

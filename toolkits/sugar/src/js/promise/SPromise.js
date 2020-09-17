@@ -13,7 +13,7 @@ import __env from '../core/env';
 
 /**
  * @name                  SPromise
- * @namespace           js.promise
+ * @namespace           sugar.js.promise
  * @type                  Class
  *
  * This class works the same as the default Promise one. The difference is that you have more control on this one like

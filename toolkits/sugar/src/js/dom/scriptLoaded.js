@@ -2,7 +2,7 @@ import __SPromise from '../promise/SPromise';
 
 /**
  * @name      scriptLoaded
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Detect when a script has been fully loaded

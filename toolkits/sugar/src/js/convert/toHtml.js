@@ -5,7 +5,7 @@ import __htmlFromDocblocks from './html/htmlFromDocblocks';
 
 /**
  * @name            toHtml
- * @namespace       js.convert
+ * @namespace       sugar.js.convert
  * @type            Function
  *
  * Take a string as input and convert it to HTML.

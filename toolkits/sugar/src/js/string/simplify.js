@@ -2,7 +2,7 @@ import __deepMerge from '../object/deepMerge';
 
 /**
  * @name          simply
- * @namespace     js.string
+ * @namespace     sugar.js.string
  * @type          Function
  *
  * This function take a string with accents, etc and convert it to a more simply

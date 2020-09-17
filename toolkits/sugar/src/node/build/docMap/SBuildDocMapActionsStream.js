@@ -7,7 +7,7 @@ const __SExternalDocMapStreamAction = require('./actions/SExternalDocMapStreamAc
 
 /**
  * @name            SBuildDocMapActionsStream
- * @namespace           node.build.docMap
+ * @namespace           sugar.node.build.docMap
  * @type            Class
  * @extends         SActionsStream
  *

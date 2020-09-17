@@ -21,7 +21,7 @@ const _validationsObj = {
 
 /**
  * @name            validateObject
- * @namespace           js.validation.object
+ * @namespace           sugar.js.validation.object
  * @type            Function
  *
  * This function take an object, a definition object and validate this one depending on the definition...

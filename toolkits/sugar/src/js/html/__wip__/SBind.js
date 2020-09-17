@@ -1,6 +1,6 @@
 /**
  * @name 		SBind
- * @namespace           js.class
+ * @namespace           sugar.js.class
  * @type    Class
  *
  * This class allows to bind properties between objects, object to HTMLElement attribute and vice versa.

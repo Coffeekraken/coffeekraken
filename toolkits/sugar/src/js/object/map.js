@@ -1,6 +1,6 @@
 /**
  * @name                map
- * @namespace           js.object
+ * @namespace           sugar.js.object
  * @type                Function
  *
  * This is the same function as the "Array.map" but for objects. It will iterate over all the properties

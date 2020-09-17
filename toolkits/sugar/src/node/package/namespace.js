@@ -5,7 +5,7 @@ const __sugarConfig = require('../config/sugar');
 
 /**
  * @name          namespace
- * @namespace     node.package
+ * @namespace     sugar.node.package
  * @type          Function
  *
  * This function take a string as parameter like a path, or a doted string like "something.cool" and return you

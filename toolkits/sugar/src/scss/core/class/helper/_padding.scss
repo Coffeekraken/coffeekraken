@@ -9,7 +9,7 @@
         $cname: sel("p-#{$name}");
         /**
           * @name        #{$cname}
-          * @namespace       scss.core.class
+          * @namespace       sugar.scss.core.class
           * @class-namespace           sugar.helper.padding.#{$name}
           * @type        class
           *
@@ -39,7 +39,7 @@
         $cname: sel("pb-#{$name}");
         /**
           * @name       	#{$cname}
-          * @namespace       scss.core.class
+          * @namespace       sugar.scss.core.class
           * @class-namespace           sugar.helper.padding.bottom.#{$name}
           * @type        class
           *
@@ -63,7 +63,7 @@
         $cname: sel("pt-#{$name}");
         /**
           * @name       	#{$cname}
-          * @namespace       scss.core.class
+          * @namespace       sugar.scss.core.class
           * @class-namespace           sugar.helper.padding.top.#{$name}
           * @type        class
           *
@@ -87,7 +87,7 @@
         $cname: sel("pl-#{$name}");
         /**
           * @name       	#{$cname}
-          * @namespace       scss.core.class
+          * @namespace       sugar.scss.core.class
           * @class-namespace           sugar.helper.padding.left.#{$name}
           * @type        class
           *
@@ -111,7 +111,7 @@
         $cname: sel("pr-#{$name}");
         /**
           * @name       	#{$cname}
-          * @namespace       scss.core.class
+          * @namespace       sugar.scss.core.class
           * @class-namespace           sugar.helper.padding.right.#{$name}
           * @type        class
           *
@@ -135,7 +135,7 @@
         $cname: sel("ps-#{$name}");
         /**
           * @name       	#{$cname}
-          * @namespace       scss.core.class
+          * @namespace       sugar.scss.core.class
           * @class-namespace           sugar.helper.padding.side.#{$name}
           * @type        class
           *
@@ -160,7 +160,7 @@
         $cname: sel("py-#{$name}");
         /**
           * @name       	#{$cname}
-          * @namespace       scss.core.class
+          * @namespace       sugar.scss.core.class
           * @class-namespace           sugar.helper.padding.y.#{$name}
           * @type        class
           *
@@ -186,7 +186,7 @@
     @if class-match-namespace("sugar.helper.padding.no.top") {
       /**
       * @name       	#{sel(no-pt)}
-      * @namespace       scss.core.class
+      * @namespace       sugar.scss.core.class
       * @class-namespace           sugar.helper.padding.no.top
       * @type        class
       *
@@ -207,7 +207,7 @@
     @if class-match-namespace("sugar.helper.padding.no.right") {
       /**
         * @name       	#{sel(no-pr)}
-        * @namespace       scss.core.class
+        * @namespace       sugar.scss.core.class
         * @class-namespace           sugar.helper.padding.no.right
         * @type        class
         *
@@ -228,7 +228,7 @@
     @if class-match-namespace("sugar.helper.padding.no.bottom") {
       /**
         * @name       	#{sel(no-pb)}
-        * @namespace       scss.core.class
+        * @namespace       sugar.scss.core.class
         * @class-namespace           sugar.helper.padding.no.bottom
         * @type        class
         *
@@ -249,7 +249,7 @@
     @if class-match-namespace("sugar.helper.padding.no.left") {
       /**
         * @name       	#{sel(no-pl)}
-        * @namespace       scss.core.class
+        * @namespace       sugar.scss.core.class
         * @class-namespace           sugar.helper.padding.no.left
         * @type        class
         *
@@ -270,7 +270,7 @@
     @if class-match-namespace("sugar.helper.padding.no.side") {
       /**
         * @name       	#{sel(no-ps)}
-        * @namespace       scss.core.class
+        * @namespace       sugar.scss.core.class
         * @class-namespace           sugar.helper.padding.no.side
         * @type        class
         *
@@ -292,7 +292,7 @@
     @if class-match-namespace("sugar.helper.padding.no.y") {
       /**
         * @name       	#{sel(no-py)}
-        * @namespace       scss.core.class
+        * @namespace       sugar.scss.core.class
         * @class-namespace           sugar.helper.padding.no.y
         * @type        class
         *

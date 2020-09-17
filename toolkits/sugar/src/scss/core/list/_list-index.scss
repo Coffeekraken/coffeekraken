@@ -1,7 +1,8 @@
 @use 'sass:list';
+@use 'sass:meta';
 /**
  * @name    list-index
- * @namespace           scss.core.list
+ * @namespace           sugar.scss.core.list
  * @type      function
  *
  * Return the index of the wanted value in the passed list.
@@ -20,7 +21,7 @@
   $list: test-argument(
     'Sugar.list-index',
     'list',
-    list,
+    'list|string',
     $list
   );
   $index: test-argument(
@@ -29,5 +30,13 @@
     mixed,
     $value
   );
+
+  @if meta.type-of($list) == 'string' {
+    @if $list == $value {
+      @return 1;
+    }
+    @return -1;
+  }
+
   @return list.index($list, $value);
 }

@@ -2,7 +2,7 @@ const __isPath = require('./isPath');
 
 /**
  * @name                folderPath
- * @namespace           node.fs
+ * @namespace           sugar.node.fs
  * @type                Function
  *
  * This function returns you the folder path of the file path passed.

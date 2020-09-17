@@ -1,6 +1,6 @@
 /**
  * @name                              when
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type                              Function
  *
  * Return a promise that will be resolved when the wanted status has been applied on the passed HTMLElement.

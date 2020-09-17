@@ -3,7 +3,7 @@ const __sugarConfig = require('../../../config/sugar');
 
 /**
  * @name                STemplateEngineInterface
- * @namespace           node.template.engines.interface
+ * @namespace           sugar.node.template.engines.interface
  * @type                Class
  * @extends             SInterface
  *

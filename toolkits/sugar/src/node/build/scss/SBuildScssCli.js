@@ -5,7 +5,7 @@ const __SBuildScssProcess = require('./SBuildScssProcess');
 
 /**
  * @name            SBuildScssCli
- * @namespace           node.build.scss
+ * @namespace           sugar.node.build.scss
  * @type            Class
  * @extends         SCli
  *

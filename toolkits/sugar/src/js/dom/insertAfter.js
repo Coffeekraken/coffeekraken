@@ -1,6 +1,6 @@
 /**
  * @name      insertAfter
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Insert an HTMLElement after another HTMLElement

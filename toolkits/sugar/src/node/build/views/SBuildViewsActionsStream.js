@@ -9,7 +9,7 @@ const __path = require('path');
 
 /**
  * @name            SBuildViewsActionsStream
- * @namespace           node.build.views
+ * @namespace           sugar.node.build.views
  * @type            Class
  * @extends         SActionsStream
  *

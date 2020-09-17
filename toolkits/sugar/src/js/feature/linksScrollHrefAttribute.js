@@ -4,7 +4,7 @@ import easeInOutQuint from '../easing/easeInOutQuint';
 
 /**
  * @name 		linksScrollHrefAttribute
- * @namespace           js.feature
+ * @namespace           sugar.js.feature
  * @type      Feature
  *
  * Add the ability to set links href attribute with "scroll:#target" in order to animate the scroll to this target element

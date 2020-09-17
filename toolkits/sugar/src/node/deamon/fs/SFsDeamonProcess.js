@@ -7,7 +7,7 @@ const __packageRoot = require('../../path/packageRoot');
 
 /**
  * @name                SFsDeamon
- * @namespace           node.deamon.fs
+ * @namespace           sugar.node.deamon.fs
  * @type                Class
  * @extends             SProcess
  *

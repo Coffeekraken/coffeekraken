@@ -6,7 +6,7 @@ const __toHtml = require('../../../convert/toHtml');
 
 /**
  * @name                styleguide
- * @namespace           node.server.frontend.handlers
+ * @namespace           sugar.node.server.frontend.handlers
  * @type                Function
  *
  * This function is responsible of responding to express requests made on the "styleguide" section
@@ -155,7 +155,7 @@ module.exports = function doc(req, server, settings = {}) {
       resolve(resultObj);
     },
     {
-      id: 'server.handler.styleguide'
+      id: 'server.handler.doc'
     }
   );
 };

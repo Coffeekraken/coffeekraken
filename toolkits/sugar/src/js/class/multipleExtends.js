@@ -2,7 +2,7 @@ import __aggregation from 'aggregation/es5';
 
 /**
  * @name                multipleExtends
- * @namespace           js.class
+ * @namespace           sugar.js.class
  * @type                Function
  *
  * This function allows you to extends your class with multiple other ones.

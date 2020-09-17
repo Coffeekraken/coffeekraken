@@ -14,10 +14,11 @@ const __sugarConfig = require('../../config/sugar');
 const __SSugarJsonStreamAction = require('../actions/SSugarJsonStreamAction');
 const __SBuildScssInterface = require('./interface/SBuildScssInterface');
 const __SExtractDocblocksIntoFiles = require('../../stream/actions/SExtractDocblocksIntoFilesStreamAction');
+const __SDocMapStreamAction = require('../../stream/actions/SDocMapStreamAction');
 
 /**
  * @name            SBuildScssActionsStream
- * @namespace           node.build.scss
+ * @namespace           sugar.node.build.scss
  * @type            Class
  * @extends         SActionsStream
  *
@@ -65,7 +66,8 @@ module.exports = class SBuildScssActionsStream extends __SActionsStream {
         extractDocblocks: __SExtractDocblocksIntoFiles,
         extract: __SExtractStreamAction,
         postCss: __SPostCssStreamAction,
-        fsOutput: __SFsOutputStreamAction
+        fsOutput: __SFsOutputStreamAction,
+        docMap: __SDocMapStreamAction
       },
       __deepMerge(
         {
@@ -73,6 +75,7 @@ module.exports = class SBuildScssActionsStream extends __SActionsStream {
           name: 'Build SCSS Actions Stream',
           before: (streamObj) => {
             streamObj.jsObjectToScss = __sugarConfig('scss');
+            streamObj.docMapInput = `${streamObj.outputDir}/doc/**/*.css`;
             return streamObj;
           },
           afterActions: {

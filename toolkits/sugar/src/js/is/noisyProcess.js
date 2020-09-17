@@ -2,7 +2,7 @@ import __env from '../core/env';
 
 /**
  * @name              isNoisyProcess
- * @namespace         js.is
+ * @namespace         sugar.js.is
  * @type              Function
  *
  * This function simply return true or false depending is the process is a noisy one or not.

@@ -5,7 +5,7 @@ const __deepMerge = require('../../../object/deepMerge');
 
 /**
  * @name                SBuildConfigInterface
- * @namespace           node.build.config.interface
+ * @namespace           sugar.node.build.config.interface
  * @type                Class
  * @extends             SInterface
  *

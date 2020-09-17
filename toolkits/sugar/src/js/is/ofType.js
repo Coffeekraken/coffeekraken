@@ -9,7 +9,7 @@ import __getExtendsStack from '../class/getExtendsStack';
 
 /**
  * @name              ofType
- * @namespace           js.is
+ * @namespace           sugar.js.is
  * @type              Function
  *
  * This function take the value to check and an argument type definition string like "String", "Array<String>", etc... and return true or false depending

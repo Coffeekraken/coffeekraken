@@ -3,7 +3,7 @@ const __SDeamonInterface = require('./interface/SDeamonInterface');
 
 /**
  * @name                SDeamon
- * @namespace           node.deamon
+ * @namespace           sugar.node.deamon
  * @type                Class
  * @extends             SPromise
  * @implments           SDeamonInterface

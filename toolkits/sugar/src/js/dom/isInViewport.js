@@ -2,7 +2,7 @@
 
 /**
  * @name      isInViewport
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Check if the passed HTMLElement is in the viewport or not

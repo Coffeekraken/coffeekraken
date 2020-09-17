@@ -5,7 +5,7 @@ import __upperFirst from '../string/upperFirst';
 
 /**
  * @name          typeof
- * @namespace          js.value
+ * @namespace          sugar.js.value
  * @type          Function
  *
  * This function return the correct type of the passed value.

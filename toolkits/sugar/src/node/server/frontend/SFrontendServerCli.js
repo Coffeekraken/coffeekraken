@@ -5,7 +5,7 @@ const __deepMerge = require('../../object/deepMerge');
 
 /**
  * @name            SFrontendServerCli
- * @namespace           node.server.frontend
+ * @namespace           sugar.node.server.frontend
  * @type            Class
  * @extends         SExpressServerCli
  *

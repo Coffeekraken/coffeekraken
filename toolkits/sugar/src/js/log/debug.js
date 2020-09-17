@@ -2,7 +2,7 @@ import __SLog from './SLog';
 
 /**
  * @name              debug
- * @namespace           js.debug
+ * @namespace           sugar.js.debug
  * @type              Function
  *
  * This function is a simple wrapper around the SLog class that let you use the debug features quickly

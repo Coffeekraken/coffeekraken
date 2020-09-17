@@ -1,6 +1,6 @@
 /**
  * @name              simpleValue
- * @namespace           js.docblock.tags
+ * @namespace           sugar.js.docblock.tags
  * @type              Function
  *
  * Parse the simpleValue tag

@@ -1,6 +1,6 @@
 /**
  * @name        constructorName
- * @namespace           js.object
+ * @namespace           sugar.js.object
  * @type      Function
  *
  * Return the constructor name of the passed object

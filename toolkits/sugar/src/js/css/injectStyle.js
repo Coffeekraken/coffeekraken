@@ -1,6 +1,6 @@
 /**
  * @name            injectStyle
- * @namespace           js.css
+ * @namespace           sugar.js.css
  * @type            Function
  *
  * Inject a passed style string in the DOM

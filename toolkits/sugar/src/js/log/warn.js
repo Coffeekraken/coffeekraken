@@ -2,7 +2,7 @@ import __SLog from './SLog';
 
 /**
  * @name              warn
- * @namespace           js.warn
+ * @namespace           sugar.js.warn
  * @type              Function
  *
  * This function is a simple wrapper around the SLog class that let you use the warn features quickly

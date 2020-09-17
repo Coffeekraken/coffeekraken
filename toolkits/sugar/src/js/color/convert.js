@@ -7,7 +7,7 @@ import __rgba2hex from './rgba2hex';
 
 /**
  * @name                  convert
- * @namespace           js.color
+ * @namespace           sugar.js.color
  * @type                  Function
  *
  * This function take as input any color format like rgba Object, hsl Object, hsv Object, hex String, rgba String, hsl String or hsv String
@@ -53,28 +53,21 @@ export default function convert(input, format = 'rgba') {
   switch (format) {
     case 'rgba':
       return rgbaObj;
-      break;
     case 'hsl':
       return __rgba2hsl(rgbaObj);
-      break;
     case 'hsv':
       return __rgba2hsv(rgbaObj);
-      break;
     case 'hex':
     case 'hexString':
       return __rgba2hex(rgbaObj);
-      break;
     case 'rgbaString':
       return `rgba(${rgbaObj.r},${rgbaObj.g},${rgbaObj.b},${rgbaObj.a})`;
-      break;
     case 'hslString':
       const hslObj = convert(rgbaObj, 'hsl');
       return `hsl(${hslObj.h},${hslObj.s},${hslObj.l})`;
-      break;
     case 'hsvString':
       const hsvObj = convert(rgbaObj, 'hsv');
       return `hsv(${hsvObj.h},${hsvObj.s},${hsvObj.v})`;
-      break;
   }
 
   // if nothing supported

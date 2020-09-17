@@ -8,7 +8,7 @@ const __SPromise = require('../promise/SPromise');
 
 /**
  * @name                      bladePhp
- * @namespace                 node.template
+ * @namespace                 sugar.node.template
  * @type                      Function
  *
  * Compile a blade php view and return a promise with the

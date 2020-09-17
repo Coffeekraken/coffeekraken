@@ -4,7 +4,7 @@ import __styleObject2String from './styleObject2String';
 
 /**
  * @name      style
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Set or remove a css style property on an HTMLElement

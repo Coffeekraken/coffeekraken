@@ -1,6 +1,6 @@
 /**
  * @name        isUrl
- * @namespace           js.is
+ * @namespace           sugar.js.is
  * @type      Function
  *
  * Check if the passed value is a valid url

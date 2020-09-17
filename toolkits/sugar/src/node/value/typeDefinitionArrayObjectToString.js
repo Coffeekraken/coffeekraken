@@ -1,5 +1,5 @@
 /**
- * @namespace           node.value
+ * @namespace           sugar.node.value
  * @src             ../../../js/value/typeDefinitionArrayObjectToString.js
  * @todo            tests
  */

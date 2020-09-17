@@ -3,7 +3,7 @@ import exitFullscreen from './exitFullscreen';
 
 /**
  * @name      toggleFullscreen
- * @namespace     js.dom
+ * @namespace     sugar.js.dom
  * @type      Function
  *
  * Toggle the fullscreen mode

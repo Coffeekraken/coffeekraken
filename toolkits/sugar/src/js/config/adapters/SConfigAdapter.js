@@ -2,7 +2,7 @@ import __deepMerge from '../../object/deepMerge';
 
 /**
  * @name                                SConfigAdapter
- * @namespace           js.config.adapters
+ * @namespace           sugar.js.config.adapters
  * @type                                Class
  *
  * Base class for SCache adapters

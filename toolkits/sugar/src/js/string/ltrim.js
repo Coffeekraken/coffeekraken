@@ -1,6 +1,6 @@
 /**
  * @name        ltrim
- * @namespace           js.string
+ * @namespace           sugar.js.string
  * @type      Function
  *
  * Trim left a specified string

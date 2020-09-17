@@ -13,7 +13,7 @@ const __filter = require('../../object/filter');
 
 /**
  * @name                  SApp
- * @namespace           node.blessed.app
+ * @namespace           sugar.node.blessed.app
  * @type                  Class
  *
  * This class is the main one when you want to create a Sugar terminal based application.

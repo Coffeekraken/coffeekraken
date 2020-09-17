@@ -11,7 +11,7 @@ const __countLine = require('./countLine');
 
 /**
  * @name                            SLayout
- * @namespace           node.terminal
+ * @namespace           sugar.node.terminal
  * @type                            Class
  *
  * Create a layout in which you can render all others items.

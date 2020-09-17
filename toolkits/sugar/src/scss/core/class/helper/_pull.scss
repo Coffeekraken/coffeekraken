@@ -3,7 +3,7 @@
   @if class-match-namespace("sugar.helper.pull.left") {
     /**
     * @name 		#{sel(pull-left)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.pull.left
     * @type        class
     *
@@ -24,7 +24,7 @@
   @if class-match-namespace("sugar.helper.pull.right") {
     /**
     * @name 		#{sel(pull-right)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.pull.right
     * @type        class
     *
@@ -46,7 +46,7 @@
   @if class-match-namespace("sugar.helper.pull.none") {
     /**
     * @name 		#{sel(pull-none)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.pull.none
     * @type        class
     *

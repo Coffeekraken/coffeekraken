@@ -2,7 +2,7 @@ import SSvgFilter from './SSvgFilter';
 
 /**
  * @name 		SGradientSvgFilter
- * @namespace           js.filter
+ * @namespace           sugar.js.filter
  * @type      Class
  * @extends 		SSvgFilter
  *

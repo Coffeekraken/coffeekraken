@@ -3,7 +3,7 @@ import __set from './set';
 
 /**
  * @name                        ensureExists
- * @namespace           js.object
+ * @namespace           sugar.js.object
  * @type                        Function
  *
  * Pass a string like "my.cool.object" and the value it has to be and this function will ensure that this deep object exist

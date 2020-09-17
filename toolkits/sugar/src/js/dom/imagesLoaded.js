@@ -3,7 +3,7 @@ import __SPromise from '../promise/SPromise';
 
 /**
  * @name      imagesLoaded
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Detect when some images are loaded. This function take advantage of the SPromise class

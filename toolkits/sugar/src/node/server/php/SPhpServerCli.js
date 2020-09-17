@@ -2,7 +2,7 @@ const __SCli = require('../../cli/SCli');
 const __SPhpServerInterface = require('./interface/SPhpServerInterface');
 /**
  * @name            SPhpServerCli
- * @namespace           node.server.php
+ * @namespace           sugar.node.server.php
  * @type            Class
  * @extends         SCli
  *

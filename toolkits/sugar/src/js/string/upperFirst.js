@@ -1,6 +1,6 @@
 /**
  * @name        upperFirst
- * @namespace           js.string
+ * @namespace           sugar.js.string
  * @type      Function
  *
  * Upper first

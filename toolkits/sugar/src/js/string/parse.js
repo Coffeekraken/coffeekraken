@@ -1,6 +1,6 @@
 /**
  * @name                                  parse
- * @namespace           js.string
+ * @namespace           sugar.js.string
  * @type                                  Function
  *
  * Parse a string and convert it into his native data type like date, number, boolean, etc...

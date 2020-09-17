@@ -5,7 +5,7 @@
     @if class-match-namespace("sugar.helper.filter.#{$name}") {
       /**
         * @name       	#{sel(fi-#{$name})}
-        * @namespace       scss.core.class
+        * @namespace       sugar.scss.core.class
         * @class-namespace           sugar.helper.filter.#{$name}
         * @type        class
         *

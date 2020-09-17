@@ -1,6 +1,20 @@
 module.exports = {
   generate: {
     /**
+     * @name          scope
+     * @namespace     config.classes.generate
+     * @type          String
+     * @default       ['all']
+     *
+     * Specify a scope that you want to generate. Usually can be either "bare", "style" or "all"
+     * but these choices are not fixed and some "components" can expose more scopes
+     *
+     * @since         2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    scope: ['all'],
+
+    /**
      * @name          prefix
      * @namespace     config.classes.generate
      * @type          String

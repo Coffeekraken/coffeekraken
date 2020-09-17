@@ -2,7 +2,7 @@ import __getTransitionProperties from './getTransitionProperties';
 
 /**
  * @name      whenTransitionEnd
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Monitor an HTMLElement to be notified when his transition has ended

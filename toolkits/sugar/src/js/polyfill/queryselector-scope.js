@@ -1,6 +1,6 @@
 /**
  * @name 		queryselector-scope
- * @namespace           js.polyfill
+ * @namespace           sugar.js.polyfill
  * @type      Polyfill
  *
  * Polyfill for the :scope value in the querySelector and querySelectorAll functions

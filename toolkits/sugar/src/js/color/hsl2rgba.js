@@ -1,6 +1,6 @@
 /**
  * @name              hsl2rgba
- * @namespace           js.color
+ * @namespace           sugar.js.color
  * @type              Function
  *
  * HSL to RGBA

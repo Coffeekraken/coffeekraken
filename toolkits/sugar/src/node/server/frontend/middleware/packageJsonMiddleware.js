@@ -4,7 +4,7 @@ const __standardizeJson = require('../../../npm/standardizeJson');
 
 /**
  * @name            packageJsonMiddleware
- * @namespace       node.server.frontend.middleware
+ * @namespace       sugar.node.server.frontend.middleware
  * @type            Function
  *
  * This function describe the middleware that will fetch the ```package.json``` file at the root of

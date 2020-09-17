@@ -4,7 +4,7 @@ import __unique from '../array/unique';
 
 /**
  * @name                deepMerge
- * @namespace           js.object
+ * @namespace           sugar.js.object
  * @type                Function
  *
  * Deep merge one object with another and return the merged object result. This merging implementation support:

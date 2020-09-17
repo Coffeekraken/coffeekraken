@@ -1,6 +1,6 @@
 /**
  * @name      onSwipe
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Detect swipes gestures on touch devices.

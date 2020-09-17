@@ -1,6 +1,6 @@
 /**
  * @name              snippet
- * @namespace           js.docblock.tags
+ * @namespace           sugar.js.docblock.tags
  * @type              Function
  *
  * Parse the snippet tag

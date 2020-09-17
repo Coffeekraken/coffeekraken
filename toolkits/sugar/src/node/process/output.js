@@ -2,7 +2,7 @@ const __SOutput = require('../blessed/SOutput');
 
 /**
  * @name            output
- * @namespace           node.process
+ * @namespace           sugar.node.process
  * @type            Function
  *
  * This function simply take a SProcess compatible process instance and display the output

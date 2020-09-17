@@ -7,7 +7,7 @@ const __SApp = require('./SApp');
 
 /**
  * @name                                            SExpressApp
- * @namespace           node.class
+ * @namespace           sugar.node.class
  * @type                                            Class
  *
  * This class represent an express based application and gives you access to a lot of usefull routes like "/app/config/:path", "/app/meta/:path", etc...
@@ -51,7 +51,7 @@ module.exports = class SExpressApp extends __SApp {
 
   /**
    * @name                       _registerRoutes
-   * @namespace           node.class.SExpressApp
+   * @namespace           sugar.node.class.SExpressApp
    * @type                       Function
    * @private
    *
@@ -78,7 +78,7 @@ module.exports = class SExpressApp extends __SApp {
 
   /**
    * @name                 _startExpressServer
-   * @namespace           node.class.SExpressApp
+   * @namespace           sugar.node.class.SExpressApp
    * @type                 Function
    * @private
    *
@@ -98,7 +98,7 @@ module.exports = class SExpressApp extends __SApp {
 
   // /**
   //  * @name                          _configController
-  //  * @namespace           node.class.SExpressApp
+  //  * @namespace           sugar.node.class.SExpressApp
   //  * @type                          Function
   //  *
   //  * Return the whole configuration object or the specified value requested using the dot formated object key.
@@ -124,7 +124,7 @@ module.exports = class SExpressApp extends __SApp {
   //
   // /**
   //  * @name                          _metaController
-  //  * @namespace           node.class.SExpressApp
+  //  * @namespace           sugar.node.class.SExpressApp
   //  * @type                          Function
   //  *
   //  * Return the application meta data
@@ -150,7 +150,7 @@ module.exports = class SExpressApp extends __SApp {
 
   /**
    * @name                _jsController
-   * @namespace           node.class.SExpressApp
+   * @namespace           sugar.node.class.SExpressApp
    * @type                Function
    *
    * Handle the base javascript route that serve the global and common files
@@ -203,7 +203,7 @@ module.exports = class SExpressApp extends __SApp {
 
   /**
    * @name                _cssController
-   * @namespace           node.class.SExpressApp
+   * @namespace           sugar.node.class.SExpressApp
    * @type                Function
    *
    * Handle the base stylesheet route that serve the global and common files

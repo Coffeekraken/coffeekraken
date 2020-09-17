@@ -2,7 +2,7 @@ import __deepMerge from '../../node/object/deepMerge';
 
 /**
  * @name            replaceTokens
- * @namespace           js.string
+ * @namespace           sugar.js.string
  * @type            Function
  *
  * This function takes as parameter a tokened string like "something [cool]", an object

@@ -1,6 +1,6 @@
 /**
  * @name          typeDefinitionArrayObjectToString
- * @namespace     js.value
+ * @namespace     sugar.js.value
  * @type          Function
  *
  * This function take as parameter a type definition object like this one:

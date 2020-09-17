@@ -2,7 +2,7 @@ import easeInOutQuad from '../easing/easeInOutQuad';
 import requestAnimationFrame from './requestAnimationFrame';
 /**
  * @name      scrollTo
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Function that let you make a smooth page scroll to a specific element in the page

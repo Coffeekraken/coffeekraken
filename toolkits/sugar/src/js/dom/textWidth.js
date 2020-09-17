@@ -2,7 +2,7 @@ import __getStyleProperty from './getStyleProperty';
 
 /**
  * @name      textWidth
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Get the text width in px of a passed string or the passed HTMLElement

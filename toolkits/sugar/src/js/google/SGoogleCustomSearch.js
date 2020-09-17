@@ -2,7 +2,7 @@ import __SRequest from '../http/SRequest';
 
 /**
  * @name 		                SGoogleCustomSearch
- * @namespace           js.google
+ * @namespace           sugar.js.google
  * @type                    Class
  *
  * This class let you make with ease search requests to the google custom search service

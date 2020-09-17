@@ -14,7 +14,7 @@ const __ora = require('ora');
 
 /**
  * @name                SSugarUiOutput
- * @namespace           node.ui.sugar
+ * @namespace           sugar.node.ui.sugar
  * @type                Class
  * @extends             SComponent
  *

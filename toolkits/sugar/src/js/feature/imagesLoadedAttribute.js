@@ -1,6 +1,6 @@
 /**
  * @name 		imagesLoadedAttribute
- * @namespace           js.feature
+ * @namespace           sugar.js.feature
  * @type      Feature
  *
  * Add on every images the attribute "loaded" when it has been fully loaded. This is useful

@@ -4,6 +4,7 @@ import __flatten from '../object/flatten';
 
 /**
  * @name            instanciate
+ * @namespace       sugar.js.action
  * @type            Function
  * @static
  *

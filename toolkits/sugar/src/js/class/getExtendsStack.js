@@ -2,7 +2,7 @@ import __isClass from '../is/class';
 
 /**
  * @name            getExtendsStack
- * @namespace       js.class
+ * @namespace       sugar.js.class
  * @type            Function
  *
  * This function take a class as parameter and return an array of all the class names used to extends this one...
@@ -41,6 +41,4 @@ export default function getExtendsStack(cls) {
   }
 
   return stack;
-  // }
-  return [];
 }

@@ -6,7 +6,7 @@ const __SApi = require('./SApi');
 
 /**
  * @name                            SBitbucketApi
- * @namespace           node.api
+ * @namespace           sugar.node.api
  * @type                            Class
  *
  * Simple bitbucket api class that let you make some requests to the bitbucket services with ease

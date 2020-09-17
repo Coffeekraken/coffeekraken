@@ -16,7 +16,7 @@ const __STemplate = require('../../template/STemplate');
 
 /**
  * @name                express
- * @namespace           node.server.frontend
+ * @namespace           sugar.node.server.frontend
  * @type                Function
  *
  * This function take care of starting a frontend express based server

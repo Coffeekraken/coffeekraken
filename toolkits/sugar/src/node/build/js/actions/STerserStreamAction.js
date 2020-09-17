@@ -5,7 +5,7 @@ const __SBuildJsInterface = require('../interface/SBuildJsInterface');
 
 /**
  * @name                STerserStreamAction
- * @namespace           node.build.js.actions
+ * @namespace           sugar.node.build.js.actions
  * @type                Class
  * @extends             SActionsStreamAction
  *

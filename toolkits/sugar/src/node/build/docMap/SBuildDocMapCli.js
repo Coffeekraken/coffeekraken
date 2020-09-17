@@ -6,7 +6,7 @@ const __SBuildDocMapInterface = require('./interface/SBuildDocMapInterface');
 
 /**
  * @name            SBuildDocMapCli
- * @namespace       node.build.docMap
+ * @namespace       sugar.node.build.docMap
  * @type            Class
  * @extends         SCli
  *

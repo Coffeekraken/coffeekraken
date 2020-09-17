@@ -10,7 +10,7 @@ const SSugarUiModule = require('./SSugarUiModule');
 
 /**
  * @name            SSugarUi
- * @namespace       node.ui.sugar
+ * @namespace       sugar.node.ui.sugar
  * @type            Class
  * @extends         SPromise
  *

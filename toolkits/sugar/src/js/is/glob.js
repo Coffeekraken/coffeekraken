@@ -2,7 +2,7 @@ import __isGlob from 'is-glob';
 
 /**
  * @name                                      isGlob
- * @namespace           js.is
+ * @namespace           sugar.js.is
  * @type                                      Function
  *
  * Check if the passed string is a valid glob pattern or not

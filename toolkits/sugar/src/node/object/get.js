@@ -1,5 +1,5 @@
 /**
- * @namespace           node.object
+ * @namespace           sugar.node.object
  * @src             ../../../js/object/get.js
  */
 module.exports = require('../../../js/object/get');

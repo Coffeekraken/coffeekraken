@@ -1,6 +1,6 @@
 /**
  * @name              description
- * @namespace           js.docblock.tags
+ * @namespace           sugar.js.docblock.tags
  * @type              Function
  *
  * Parse the description tag

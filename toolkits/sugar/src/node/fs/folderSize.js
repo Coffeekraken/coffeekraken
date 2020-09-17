@@ -5,7 +5,7 @@ const __filesize = require('filesize');
 
 /**
  * @name                            folderSize
- * @namespace           node.fs
+ * @namespace           sugar.node.fs
  * @type                            Function
  * @async
  *

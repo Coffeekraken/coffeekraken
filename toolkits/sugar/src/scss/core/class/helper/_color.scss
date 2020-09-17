@@ -17,7 +17,7 @@
           $cls: unquote(selector("c-#{$name}"));
           /**
             * @name       	#{$cls}
-            * @namespace       scss.core.class
+            * @namespace       sugar.scss.core.class
             * @class-namespace           sugar.helper.color.#{$name}
             * @type        class
             *
@@ -41,7 +41,7 @@
           $cls: unquote(selector("bg-#{$name}"));
           /**
             * @name       	#{$cls}
-            * @namespace       scss.core.class
+            * @namespace       sugar.scss.core.class
             * @class-namespace           sugar.helper.color.#{$name}.bg
             * @type        class
             *
@@ -68,7 +68,7 @@
               $cls: unquote(selector("c-#{$name}--#{$mod-name}"));
               /**
                 * @name       	#{$cls}
-                * @namespace       scss.core.class
+                * @namespace       sugar.scss.core.class
                 * @class-namespace           sugar.helper.color.#{$name}.#{$mod-name}
                 * @type        class
                 *
@@ -92,7 +92,7 @@
               $cls: unquote(selector("bg-#{$name}--#{$mod-name}"));
               /**
                 * @name       	#{$cls}
-                * @namespace       scss.core.class
+                * @namespace       sugar.scss.core.class
                 * @class-namespace           sugar.helper.color.#{$name}.#{$mod-name}.bg
                 * @type        class
                 *

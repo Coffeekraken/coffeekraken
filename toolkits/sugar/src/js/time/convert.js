@@ -1,6 +1,6 @@
 /**
  * @name                                  convert
- * @namespace           js.time
+ * @namespace           sugar.js.time
  * @type                                  Function
  *
  * This function allows you to convert time like seconds, ms, hours, minutes, etc... from one format to another

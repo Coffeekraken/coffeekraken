@@ -1,6 +1,6 @@
 /**
  * @name      easeInOutQuad
- * @namespace           js.easing
+ * @namespace           sugar.js.easing
  * @type      Function
  *
  * Ease in out quad function

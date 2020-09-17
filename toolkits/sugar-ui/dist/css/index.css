@@ -92,7 +92,7 @@
  */
 /**
  * @name    init
- * @namespace           scss.core.mixin
+ * @namespace           sugar.scss.core.mixin
  * @type      mixin
  *
  * Init the sugar toolkit.
@@ -106,7 +106,7 @@
  */
 /**
  * @name      setup
- * @namespace           scss.core.mixin
+ * @namespace           sugar.scss.core.mixin
  * @type      mixin
  *
  * Setup sugar toolkit by overriding the default [settings](../_settings.scss)
@@ -132,7 +132,7 @@
  */
 /**
  * @name      setting
- * @namespace           scss.core.setting
+ * @namespace           sugar.scss.core.setting
  * @type    function
  *
  * Get a settings from the global settings stack
@@ -151,7 +151,7 @@
  */
 /**
  * @name      setting-var
- * @namespace           scss.core.setting
+ * @namespace           sugar.scss.core.setting
  * @type    function
  *
  * Get a settings from the global settings stack and return it in var(...) format
@@ -172,7 +172,7 @@
  */
 /**
  * @name      animation
- * @namespace           scss.core.mixin
+ * @namespace           sugar.scss.core.mixin
  * @type      mixin
  *
  * Print out the animation property calculated with the passed arguments
@@ -193,7 +193,7 @@
  */
 /**
  * @name    classes
- * @namespace           scss.core.class
+ * @namespace           sugar.scss.core.class
  * @type      mixin
  *
  * Print out all wanted registered classes like padding helpers, margin helpers, font helpers, etc...
@@ -209,8 +209,33 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /**
+ * @name    scope
+ * @namespace           sugar.scss.core.class
+ * @type      mixin
+ *
+ * This mixin allows you to wrap css code and specify which scope it refers to.
+ * This will allows you to generate only the css scope you want like "bare", "style" or "all"
+ *
+ * @param 			{List}<String> 			$scope 		The scope(s) that define the encapsulated css. 
+ * @param           {List}<String>        [$currentScope=setting('classes.scope')]          The current scope(s) to generate
+ *
+ * @example     scss
+ * .my-class {
+ *    \@include Sugar.scope('bare') {
+ *       width: 200px;  
+ *    } 
+ *    \@include Sugar.scope('style') {
+ *       color: red;
+ *    }
+ * }
+ * // etc...
+ *
+ * @since           2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
  * @name      color
- * @namespace           scss.core.color
+ * @namespace           sugar.scss.core.color
  * @type      function
  *
  * Get a registered color by name or wrap a new color into a sugar.color call
@@ -249,7 +274,7 @@
  */
 /**
  * @name    color-hue
- * @namespace           scss.core.color
+ * @namespace           sugar.scss.core.color
  * @type          Function
  *
  * Return the hue of the passed color
@@ -265,7 +290,7 @@
  */
 /**
  * @name      color-lightness
- * @namespace           scss.core.color
+ * @namespace           sugar.scss.core.color
  * @type          Function
  *
  * Return the lightness of the passed color
@@ -281,7 +306,7 @@
  */
 /**
  * @name    color-modifier
- * @namespace           scss.core.color
+ * @namespace           sugar.scss.core.color
  * @type      function
  *
  * Return the color in a modifier list
@@ -296,7 +321,7 @@
  */
 /**
  * @name    color-opacity
- * @namespace           scss.core.color
+ * @namespace           sugar.scss.core.color
  * @type          Function
  *
  * Return the opacity of the passed color
@@ -312,7 +337,7 @@
  */
 /**
  * @name    color-saturation
- * @namespace           scss.core.color
+ * @namespace           sugar.scss.core.color
  * @type          Function
  *
  * Return the saturation of the passed color
@@ -328,7 +353,7 @@
  */
 /**
  * @name      color-schema
- * @namespace           scss.core.color
+ * @namespace           sugar.scss.core.color
  * @type      mixin
  *
  * Print out the scoped color schema css
@@ -362,7 +387,7 @@
  */
 /**
  * @name    color-transparentize
- * @namespace           scss.core.color
+ * @namespace           sugar.scss.core.color
  * @type          Function
  *
  * Makes $color more transparent.
@@ -379,7 +404,7 @@
  */
 /**
  * @name      docblock-colors
- * @namespace           scss.core.color
+ * @namespace           sugar.scss.core.color
  * @type      mixin
  *
  * Print the styleguide docblocks for the registered sugar colors
@@ -391,7 +416,7 @@
  */
 /**
  * @name      has-color
- * @namespace           scss.core.color
+ * @namespace           sugar.scss.core.color
  * @type    function
  *
  * Check if the provided color is a registered one or not
@@ -481,7 +506,7 @@
 */
 /**
  * @name      context
- * @namespace           scss.core.context
+ * @namespace           sugar.scss.core.context
  * @type      function
  * Return the name of the context setted with the [../mixins/_context.scss] mixin
  *
@@ -503,7 +528,7 @@
  */
 /**
  * @name      context
- * @namespace           scss.core.context
+ * @namespace           sugar.scss.core.context
  * @type      mixin
  *
  * Set a context to be used inside the mixin
@@ -540,7 +565,7 @@
  */
 /**
  * @name      context-setup
- * @namespace           scss.core.context
+ * @namespace           sugar.scss.core.context
  * @type      mixin
  *
  * Register a context with a name to use it later
@@ -566,7 +591,7 @@
  */
 /**
  * @name      _check-property
- * @namespace           scss.core.dev
+ * @namespace           sugar.scss.core.dev
  * @type      function
  *
  * Check a property types and values
@@ -580,7 +605,7 @@
  */
 /**
  * @name      _get-property-name
- * @namespace           scss.core.dev
+ * @namespace           sugar.scss.core.dev
  * @type      function
  *
  * Return the property name
@@ -592,7 +617,7 @@
  */
 /**
  * @name      _get-property-type
- * @namespace           scss.core.dev
+ * @namespace           sugar.scss.core.dev
  * @type      function
  *
  * Get the property type
@@ -601,7 +626,7 @@
  */
 /**
  * @name    test-argument
- * @namespace           scss.core.dev
+ * @namespace           sugar.scss.core.dev
  * @type    function
  *
  * Test an argument passed to a function or a mixin to ensure his type, value, etc...
@@ -627,7 +652,7 @@
  */
 /**
  * @name    filter
- * @namespace           scss.core.filter
+ * @namespace           sugar.scss.core.filter
  * @type    function
  *
  * Return a list with all the filters that are passed as argument
@@ -661,7 +686,7 @@
  */
 /**
  * @name    filter-map
- * @namespace           scss.core.map
+ * @namespace           sugar.scss.core.map
  * @type      function
  *
  * Take a filter as parameter and parse it to return the {Map} corresponding
@@ -696,7 +721,7 @@
  */
 /**
  * @name      filter
- * @namespace           scss.core.filter
+ * @namespace           sugar.scss.core.filter
  * @type      mixin
  *
  * Print out a list with all the filters that are passed as argument
@@ -729,7 +754,7 @@
  */
 /**
  * @name    font-face
- * @namespace           scss.core.font
+ * @namespace           sugar.scss.core.font
  * @type      mixin
  *
  * Helper to print a font-face
@@ -753,7 +778,7 @@
  */
 /**
  * @name    font-family
- * @namespace           scss.core.font
+ * @namespace           sugar.scss.core.font
  * @type      function
  *
  * Return the font-family string or a registered font
@@ -784,7 +809,7 @@
  */
 /**
  * @name    font
- * @namespace           scss.core.font
+ * @namespace           sugar.scss.core.font
  * @type    function
  *
  * Return the font {Map} that correspond to the passed arguments
@@ -823,7 +848,7 @@
  */
 /**
  * @name      font
- * @namespace           scss.core.font
+ * @namespace           sugar.scss.core.font
  * @type      mixin
  *
  * Print all the fonts properties that correspond to the passed arguments
@@ -863,7 +888,7 @@
  */
 /**
  * @name      list-append
- * @namespace           scss.core.list
+ * @namespace           sugar.scss.core.list
  * @type      function
  *
  * Append a value to the passed list
@@ -881,7 +906,7 @@
  */
 /**
  * @name      list-first
- * @namespace           scss.core.list
+ * @namespace           sugar.scss.core.list
  * @type      function
  *
  * Return the first element of the passed list
@@ -897,7 +922,7 @@
  */
 /**
  * @name      list-implode
- * @namespace           scss.core.list
+ * @namespace           sugar.scss.core.list
  * @type      function
  *
  * Join all the list items using the passed glue and return a string
@@ -914,7 +939,7 @@
  */
 /**
  * @name    list-index
- * @namespace           scss.core.list
+ * @namespace           sugar.scss.core.list
  * @type      function
  *
  * Return the index of the wanted value in the passed list.
@@ -931,7 +956,7 @@
  */
 /**
  * @name      list-join
- * @namespace           scss.core.list
+ * @namespace           sugar.scss.core.list
  * @type      function
  *
  * Return a string representing all the list items
@@ -950,7 +975,7 @@
  */
 /**
  * @name    list-last-nth
- * @namespace           scss.core.list
+ * @namespace           sugar.scss.core.list
  * @type      function
  *
  * Return the last item of the passed list
@@ -966,7 +991,7 @@
  */
 /**
  * @name      list-length
- * @namespace           scss.core.list
+ * @namespace           sugar.scss.core.list
  * @type      function
  *
  * Return the number of item in the passed list
@@ -982,7 +1007,7 @@
  */
 /**
  * @name      list-set-nth
- * @namespace           scss.core.list
+ * @namespace           sugar.scss.core.list
  * @type      function
  *
  * Set a value in the passed list at the passed index. The original value at the passed index will be replaced with the passed value
@@ -1000,7 +1025,7 @@
  */
 /**
  * @name    list-nth
- * @namespace           scss.core.list
+ * @namespace           sugar.scss.core.list
  * @type      function
  *
  * Return the item of the list at the passed index
@@ -1017,7 +1042,7 @@
  */
 /**
  * @name      list-pop
- * @namespace           scss.core.list
+ * @namespace           sugar.scss.core.list
  * @type      function
  *
  * Remove the last item of the passed list
@@ -1033,7 +1058,7 @@
  */
 /**
  * @name    list-prepend
- * @namespace           scss.core.list
+ * @namespace           sugar.scss.core.list
  * @type      function
  *
  * Prepend a value in the passed list
@@ -1051,7 +1076,7 @@
  */
 /**
  * @name      list-remove-nth
- * @namespace           scss.core.list
+ * @namespace           sugar.scss.core.list
  * @type      function
  *
  * Remove item from list using an index
@@ -1068,7 +1093,7 @@
  */
 /**
  * @name      list-search
- * @namespace           scss.core.list
+ * @namespace           sugar.scss.core.list
  * @type      function
  *
  * Search for the passed value in the passed list and return true if exist, false if not
@@ -1085,7 +1110,7 @@
  */
 /**
  * @name    lnf
- * @namespace           scss.core.look-and-feel
+ * @namespace           sugar.scss.core.look-and-feel
  * @type    function
  *
  * Alias to the [./_look-and-feel.scss] function
@@ -1104,7 +1129,7 @@
  */
 /**
  * @name      look-and-feel
- * @namespace           scss.core.look-and-feel
+ * @namespace           sugar.scss.core.look-and-feel
  * @type    function
  *
  * Return a settings.look-and-feel stack value
@@ -1121,7 +1146,7 @@
  */
 /**
  * @name      dash-to-map
- * @namespace           scss.core.map
+ * @namespace           sugar.scss.core.map
  * @type        function
  *
  * Transform a dash notation value into a map
@@ -1143,7 +1168,7 @@
  */
 /**
  * @name      map-deep-values
- * @namespace           scss.core.map
+ * @namespace           sugar.scss.core.map
  * @type      function
  *
  * Get values of a map even if it is deep
@@ -1165,7 +1190,7 @@
  */
 /**
  * @name      map-extend
- * @namespace           scss.core.map
+ * @namespace           sugar.scss.core.map
  * @type      function
  *
  * Extend the passed map with the others passed map(s)
@@ -1191,7 +1216,7 @@
  */
 /**
  * @name      map-filter
- * @namespace           scss.core.map
+ * @namespace           sugar.scss.core.map
  * @type      function
  *
  * Filter a map by key, value and the passed processor function
@@ -1221,7 +1246,7 @@
  */
 /**
  * @name      map-filter-by-namespace
- * @namespace           scss.core.map
+ * @namespace           sugar.scss.core.map
  * @type      function
  *
  * Return all the map values that have a key that match the passed namespace
@@ -1247,7 +1272,7 @@
  */
 /**
  * @name              map-to-css-variables
- * @namespace         scss.core.map
+ * @namespace         sugar.scss.core.map
  * @type              Mixin
  *
  * THis mixin simply take a single level map and convert it to
@@ -1266,7 +1291,7 @@
  */
 /**
  * @name            map-flatten
- * @namespace       scss.core.map
+ * @namespace       sugar.scss.core.map
  * @type            Function
  *
  * This function take a map (that can be a deep one) and returns you a new map with all the
@@ -1292,7 +1317,7 @@
  */
 /**
  * @name      map-get
- * @namespace           scss.core.map
+ * @namespace           sugar.scss.core.map
  * @type      function
  *
  * Get a value in the passed map using the passed key
@@ -1312,7 +1337,7 @@
  */
 /**
  * @name     map-has-key
- * @namespace           scss.core.map
+ * @namespace           sugar.scss.core.map
  * @type      function
  *
  * Check if the passed map has the passed key. Return true if has, false if not
@@ -1332,7 +1357,7 @@
  */
 /**
  * @name  map-keys
- * @namespace           scss.core.map
+ * @namespace           sugar.scss.core.map
  * @type      function
  *
  * Return a comma separated list of the map keys
@@ -1351,7 +1376,7 @@
  */
 /**
  * @name    map-merge
- * @namespace           scss.core.map
+ * @namespace           sugar.scss.core.map
  * @type      function
  *
  * Merge the first passed map with the second passed one and return the result
@@ -1377,7 +1402,7 @@
  */
 /**
  * @name    map-remove
- * @namespace           scss.core.map
+ * @namespace           sugar.scss.core.map
  * @type      function
  *
  * Remove one or multiple keys from the passed map
@@ -1401,7 +1426,7 @@
  */
 /**
  * @name    map-set
- * @namespace           scss.core.map
+ * @namespace           sugar.scss.core.map
  * @type      function
  *
  * Set a map property with the passed value
@@ -1418,7 +1443,7 @@
  */
 /**
  * @name      math-abs
- * @namespace           scss.core.math
+ * @namespace           sugar.scss.core.math
  * @type      function
  *
  * Return the absolute version of the passed number
@@ -1434,7 +1459,7 @@
  */
 /**
  * @name      math-acos
- * @namespace           scss.core.math
+ * @namespace           sugar.scss.core.math
  * @type      function
  *
  * Calculate the cosinus inverse of the passed angle
@@ -1451,7 +1476,7 @@
  */
 /**
  * @name      math-asin
- * @namespace           scss.core.math
+ * @namespace           sugar.scss.core.math
  * @type      function
  *
  * Calculate the sinus inverse
@@ -1468,7 +1493,7 @@
  */
 /**
  * @name      math-atan
- * @namespace           scss.core.math
+ * @namespace           sugar.scss.core.math
  * @type      function
  *
  * Calculate the tangent inverse of the passed angle
@@ -1485,7 +1510,7 @@
  */
 /**
  * @name    math-ceil
- * @namespace           scss.core.math
+ * @namespace           sugar.scss.core.math
  * @type      function
  *
  * Rounds $number up to the next highest whole number
@@ -1501,7 +1526,7 @@
  */
 /**
  * @name    math-convert-angle
- * @namespace           scss.core.math
+ * @namespace           sugar.scss.core.math
  * @type      function
  *
  * Convert the passed angle into another unit like rad, deg, grad or turn
@@ -1518,7 +1543,7 @@
  */
 /**
  * @name      math-cos
- * @namespace           scss.core.math
+ * @namespace           sugar.scss.core.math
  * @type      function
  *
  * Calculate the cosinus of the passed angle
@@ -1534,7 +1559,7 @@
  */
 /**
  * @name      math-deg
- * @namespace           scss.core.math
+ * @namespace           sugar.scss.core.math
  * @type      function
  *
  * Convert the passed unitless angle to degree
@@ -1550,7 +1575,7 @@
  */
 /**
  * @name      math-even
- * @namespace           scss.core.math
+ * @namespace           sugar.scss.core.math
  * @type      function
  *
  * Convert the passed value to the closest even value
@@ -1566,7 +1591,7 @@
  */
 /**
  * @name      math-fact
- * @namespace           scss.core.math
+ * @namespace           sugar.scss.core.math
  * @type      function
  *
  * Returns the factorial of desired number
@@ -1582,7 +1607,7 @@
  */
 /**
  * @name      math-grad
- * @namespace           scss.core.math
+ * @namespace           sugar.scss.core.math
  * @type      function
  *
  * Convert the passed unitless angle to gradian
@@ -1598,7 +1623,7 @@
  */
 /**
  * @name      math-odd
- * @namespace           scss.core.math
+ * @namespace           sugar.scss.core.math
  * @type      function
  *
  * Convert the passed value to the closest odd value
@@ -1614,7 +1639,7 @@
  */
 /**
  * @name      math-percentage
- * @namespace           scss.core.math
+ * @namespace           sugar.scss.core.math
  * @type      function
  *
  * Converts a unitless $number (usually a decimal between 0 and 1) to a percentage.
@@ -1630,7 +1655,7 @@
  */
 /**
  * @name      math-pow
- * @namespace           scss.core.math
+ * @namespace           sugar.scss.core.math
  * @type      function
  *
  * Return the calculated power of the passed base using the passed exponent
@@ -1647,7 +1672,7 @@
  */
 /**
  * @name      math-rad
- * @namespace           scss.core.math
+ * @namespace           sugar.scss.core.math
  * @type      function
  *
  * Convert the passed unitless angle to radian
@@ -1663,7 +1688,7 @@
  */
 /**
  * @name    math-random
- * @namespace           scss.core.math
+ * @namespace           sugar.scss.core.math
  * @type      function
  *
  * If $limit is null, returns a random decimal number between 0 and 1.
@@ -1679,7 +1704,7 @@
  */
 /**
  * @name    render-round
- * @namespace           scss.core.math
+ * @namespace           sugar.scss.core.math
  * @type    function
  *
  * Return the passed values in the same unit but that has been rounded on the corresponding px value
@@ -1699,7 +1724,7 @@
  */
 /**
  * @name    render-round-even
- * @namespace           scss.core.math
+ * @namespace           sugar.scss.core.math
  * @type    function
  *
  * Return the passed values in the same unit but that has been even rounded on the corresponding px value
@@ -1719,7 +1744,7 @@
  */
 /**
  * @name      render-round-odd
- * @namespace           scss.core.math
+ * @namespace           sugar.scss.core.math
  * @type    function
  *
  * Return the passed values in the same unit but that has been odd rounded on the corresponding px value
@@ -1739,7 +1764,7 @@
  */
 /**
  * @name    math-round
- * @namespace           scss.core.math
+ * @namespace           sugar.scss.core.math
  * @type      function
  *
  * Rounds $number to the nearest whole number.
@@ -1755,7 +1780,7 @@
  */
 /**
  * @name    math-sin
- * @namespace           scss.core.math
+ * @namespace           sugar.scss.core.math
  * @type      function
  *
  * Calculate the sinus of the passed angle
@@ -1771,7 +1796,7 @@
  */
 /**
  * @name  math-sqrt
- * @namespace           scss.core.math
+ * @namespace           sugar.scss.core.math
  * @type      function
  *
  * Return the square root of the passed number
@@ -1787,7 +1812,7 @@
  */
 /**
  * @name      math-tan
- * @namespace           scss.core.math
+ * @namespace           sugar.scss.core.math
  * @type      function
  *
  * Calculate the tangent of the passed angle
@@ -1806,7 +1831,7 @@
  */
 /**
  * @name      math-turn
- * @namespace           scss.core.math
+ * @namespace           sugar.scss.core.math
  * @type      function
  *
  * Convert the passed unitless angle to turn
@@ -1822,7 +1847,7 @@
  */
 /**
  * @name      _
- * @namespace           scss.core.selector
+ * @namespace           sugar.scss.core.selector
  * @type    function
  *
  * Selector wrapper to be able to simply generate all of your classes with a prefix for example.
@@ -1840,7 +1865,7 @@
  */
 /**
  * @name      selector
- * @namespace           scss.core.string
+ * @namespace           sugar.scss.core.string
  * @type    function
  *
  * Process selector to avoid having --default, etc...
@@ -1857,7 +1882,7 @@
  */
 /**
  * @name    interpolate
- * @namespace           scss.core.size
+ * @namespace           sugar.scss.core.size
  * @type    function
  *
  * Return the specified or calculated value of the given stack and size
@@ -1890,7 +1915,7 @@
  */
 /**
  * @name      space
- * @namespace           scss.core.space
+ * @namespace           sugar.scss.core.space
  * @type    function
  *
  * Return a value interpolated from the settings.spaces stack
@@ -1908,7 +1933,7 @@
  */
 /**
  * @name      parse-properties
- * @namespace           scss.core.string
+ * @namespace           sugar.scss.core.string
  * @type    function
  *
  * Parse a given string/list properties and return the Map corresponding to the Map description
@@ -1936,7 +1961,7 @@
  */
 /**
  * @name      replace-tokens
- * @namespace           scss.core.string
+ * @namespace           sugar.scss.core.string
  * @type    function
  *
  * Search and replace tokens like colors #primary in a passed string, list or map
@@ -1951,7 +1976,7 @@
  */
 /**
  * @name      str-index
- * @namespace           scss.core.string
+ * @namespace           sugar.scss.core.string
  * @type      function
  *
  * Returns the first index of $substring in $string, or null if $string doesn’t contain $substring.
@@ -1968,7 +1993,7 @@
  */
 /**
  * @name    str-is-url
- * @namespace           scss.core.string
+ * @namespace           sugar.scss.core.string
  * @type      function
  *
  * Check if a string is a url or not
@@ -1984,7 +2009,7 @@
  */
 /**
  * @name    str-length
- * @namespace           scss.core.string
+ * @namespace           sugar.scss.core.string
  * @type      function
  *
  * Return the number of characters in the passed string
@@ -2000,7 +2025,7 @@
  */
 /**
  * @name    str-replace
- * @namespace           scss.core.string
+ * @namespace           sugar.scss.core.string
  * @type      function
  *
  * Replace the passed string with another one in a specific string
@@ -2018,7 +2043,7 @@
  */
 /**
  * @name    str-slice
- * @namespace           scss.core.string
+ * @namespace           sugar.scss.core.string
  * @type      function
  *
  * Returns the slice of $string starting at index $start-at and ending at index $end-at (both inclusive).
@@ -2035,7 +2060,7 @@
  */
 /**
  * @name    str-split
- * @namespace           scss.core.string
+ * @namespace           sugar.scss.core.string
  * @type      function
  *
  * Split a string using a delimiter
@@ -2052,7 +2077,7 @@
  */
 /**
  * @name    str-trim
- * @namespace           scss.core.string
+ * @namespace           sugar.scss.core.string
  * @type      function
  *
  * trim the passed string
@@ -2068,7 +2093,7 @@
  */
 /**
  * @name    str-unique-id
- * @namespace           scss.core.string
+ * @namespace           sugar.scss.core.string
  * @type      function
  *
  * Generate a unique id in string format
@@ -2083,7 +2108,7 @@
  */
 /**
  * @name      str-unquote
- * @namespace           scss.core.string
+ * @namespace           sugar.scss.core.string
  * @type      function
  *
  * Return an unquoted version of the passed string
@@ -2099,7 +2124,7 @@
  */
 /**
  * @name    str-split
- * @namespace           scss.core.string
+ * @namespace           sugar.scss.core.string
  * @type      function
  *
  * Split a string using a delimiter
@@ -2116,7 +2141,7 @@
  */
 /**
  * @name        str-url-ext
- * @namespace           scss.core.string
+ * @namespace           sugar.scss.core.string
  * @type      function
  *
  * Check if a string is a url or not
@@ -2132,7 +2157,7 @@
  */
 /**
  * @name      transition
- * @namespace           scss.core.transition
+ * @namespace           sugar.scss.core.transition
  * @type    function
  *
  * Take a transition as parameter and parse it to return the {List} corresponding
@@ -2168,7 +2193,7 @@
  */
 /**
  * @name      transition-map
- * @namespace           scss.core.transition
+ * @namespace           sugar.scss.core.transition
  * @type    function
  *
  * Take a transition as parameter and parse it to return the {Map} corresponding
@@ -2209,7 +2234,7 @@
  */
 /**
  * @name    transition
- * @namespace           scss.core.transition
+ * @namespace           sugar.scss.core.transition
  * @type      mixin
  *
  * Take a transition as parameter and print the corresponding transition property
@@ -2245,7 +2270,7 @@
  */
 /**
  * @name      show-vertical-rhythm
- * @namespace           scss.core.typography
+ * @namespace           sugar.scss.core.typography
  * @type      mixin
  *
  * Display the vertical rhythme
@@ -2262,7 +2287,7 @@
  */
 /**
  * @name      text-format-class
- * @namespace           scss.core.typography
+ * @namespace           sugar.scss.core.typography
  * @type    function
  *
  * Return the text-format setting scope class
@@ -2277,7 +2302,7 @@
  */
 /**
  * @name      text-format-scope
- * @namespace           scss.core.typography
+ * @namespace           sugar.scss.core.typography
  * @type      mixin
  *
  * Scope the content inside the `settings.typography.text-format-scope-class` class
@@ -2295,7 +2320,7 @@
  */
 /**
  * @name      vertical-rhythm-class
- * @namespace           scss.core.typography
+ * @namespace           sugar.scss.core.typography
  * @type    function
  *
  * Return the vertical-rhythm setting scope class
@@ -2310,10 +2335,10 @@
  */
 /**
  * @name      vertical-rhythm-scope
- * @namespace           scss.core.typography
+ * @namespace           sugar.scss.core.typography
  * @type      mixin
  *
- * Scope the content inside the `settings.typography.vertical-rhythm-scope-class` class
+ * Scope the content inside the `settings.typography.vertical-rhythm-class` class
  *
  * @example       scss
  * .my-cool-item {
@@ -2328,7 +2353,7 @@
  */
 /**
  * @name        var-define
- * @namespace     scss.core.var
+ * @namespace     sugar.scss.core.var
  * @type          Function
  *
  * This mixin simply take a variable name (or doted path) and generate the css code to define this variable
@@ -2344,7 +2369,7 @@
  */
 /**
  * @name        var-name
- * @namespace     scss.core.var
+ * @namespace     sugar.scss.core.var
  * @type          Function
  *
  * This function simply take a variable name (or doted path) and generate the sugar scope name for it
@@ -2360,7 +2385,7 @@
  */
 /**
  * @name              var-output
- * @namespace         scss.core.var
+ * @namespace         sugar.scss.core.var
  * @type              Mixin
  *
  * This mixin simply print out the variables that you have defined in your project
@@ -2375,7 +2400,7 @@
  */
 /**
  * @name      coffeekraken-logo
- * @namespace           scss.coffeekraken
+ * @namespace           sugar.scss.coffeekraken
  * @type      mixin
  *
  * Display a coffeekraken logo with two specified colors
@@ -2393,7 +2418,7 @@
  */
 /**
   * @name            btn-classes
-  * @namespace       scss.components
+  * @namespace       sugar.scss.components
   * @type            Mixin
   *
   * This mixin generate all the css needed to display properly some buttons.
@@ -2420,7 +2445,7 @@
   */
 /**
  * @name              btn-bare-classes
- * @namespace         scss.components.btn
+ * @namespace         sugar.scss.components.btn
  * @type              Mixin
  *
  * This mixin generate all the bare classes depending on the parameters you set.
@@ -2434,7 +2459,7 @@
  */
 /**
  * @name              btn-style-classes
- * @namespace         scss.components.btn
+ * @namespace         sugar.scss.components.btn
  * @type              Mixin
  *
  * This mixin generate all the style classes depending on the parameters you set.
@@ -2447,7 +2472,7 @@
  */
 /**
  * @name              btn
- * @namespace         scss.components.btn
+ * @namespace         sugar.scss.components.btn
  * @type              Mixin
  *
  * This mixin generate all the properties for a button depending on the parameters you set.
@@ -2461,7 +2486,7 @@
  */
 /**
  * @name              btn-bare
- * @namespace         scss.components.btn
+ * @namespace         sugar.scss.components.btn
  * @type              Mixin
  *
  * This mixin generate all the bare properties for a button depending on the parameters you set.
@@ -2474,7 +2499,7 @@
  */
 /**
  * @name              btn-style
- * @namespace         scss.components.btn
+ * @namespace         sugar.scss.components.btn
  * @type              Mixin
  *
  * This mixin generate all the style properties for a button depending on the parameters you set.
@@ -2486,7 +2511,7 @@
  */
 /**
   * @name            card-classes
-  * @namespace       scss.components
+  * @namespace       sugar.scss.components
   * @type            Mixin
   *
   * This mixin generate all the css needed to display properly some cards.
@@ -2519,7 +2544,7 @@
   */
 /**
  * @name              card-bare-classes
- * @namespace         scss.components.card
+ * @namespace         sugar.scss.components.card
  * @type              Mixin
  *
  * This mixin generate all the bare classes depending on the parameters you set.
@@ -2531,7 +2556,7 @@
  */
 /**
  * @name              card-style-classes
- * @namespace         scss.components.card
+ * @namespace         sugar.scss.components.card
  * @type              Mixin
  *
  * This mixin generate all the style classes depending on the parameters you set.
@@ -2544,7 +2569,7 @@
  */
 /**
  * @name              card
- * @namespace         scss.components.card
+ * @namespace         sugar.scss.components.card
  * @type              Mixin
  *
  * This mixin generate all the properties for a button depending on the parameters you set.
@@ -2556,7 +2581,7 @@
  */
 /**
  * @name              card-bare
- * @namespace         scss.components.card
+ * @namespace         sugar.scss.components.card
  * @type              Mixin
  *
  * This mixin generate all the bare properties for a button depending on the parameters you set.
@@ -2566,7 +2591,7 @@
  */
 /**
  * @name              card-style
- * @namespace         scss.components.card
+ * @namespace         sugar.scss.components.card
  * @type              Mixin
  *
  * This mixin generate all the style properties for a button depending on the parameters you set.
@@ -2578,7 +2603,7 @@
  */
 /**
   * @name            ol-classes
-  * @namespace       scss.components
+  * @namespace       sugar.scss.components
   * @type            Mixin
   *
   * This mixin generate all the css needed to display properly some ordered lists.
@@ -2608,7 +2633,7 @@
   */
 /**
  * @name              ol-bare-classes
- * @namespace         scss.components.ol
+ * @namespace         sugar.scss.components.ol
  * @type              Mixin
  *
  * This mixin generate all the bare classes depending on the parameters you set.
@@ -2621,7 +2646,7 @@
  */
 /**
  * @name              ol-style-classes
- * @namespace         scss.components.ol
+ * @namespace         sugar.scss.components.ol
  * @type              Mixin
  *
  * This mixin generate all the style classes depending on the parameters you set.
@@ -2634,7 +2659,7 @@
  */
 /**
  * @name              ol-bare
- * @namespace         scss.components.ol
+ * @namespace         sugar.scss.components.ol
  * @type              Mixin
  *
  * This mixin generate all the bare properties for a list depending on the parameters you set.
@@ -2646,7 +2671,7 @@
  */
 /**
  * @name              ol-style
- * @namespace         scss.components.ol
+ * @namespace         sugar.scss.components.ol
  * @type              Mixin
  *
  * This mixin generate all the style properties for a list depending on the parameters you set.
@@ -2657,13 +2682,48 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /**
+  * @name            paragraph-classes
+  * @namespace       sugar.scss.components
+  * @type            Mixin
+  *
+  * This mixin generate all the css needed to display properly some paragraphs.
+  *
+  * @param       {List<String>}      [$levels=map-keys(setting('typography.paragraphs'))]                                List all paragraphs "names" you want to generate
+  * @param          {String}        [$name='p']                 The name you want for your paragraphs
+  * @param         {List<String>}    [$scope=null]       The scope you want to generate. Usually "all", "bare" or "style"            
+  *
+  * @example         html
+  * <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec facilisis purus ac rhoncus mollis. Mauris lacinia velit purus, sit amet aliquet odio imperdiet in. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Duis rhoncus magna et dui bibendum, id suscipit dui consectetur. Nulla facilisi. Vivamus a metus nunc. Pellentesque eu lectus a velit consequat condimentum. Donec ac dolor sed enim posuere fringilla et dapibus metus. Nam id vehicula enim. In hac habitasse platea dictumst. Phasellus ultricies eros et neque blandit pulvinar. Proin nec urna auctor, porttitor ligula eu, fermentum risus. Etiam non eros blandit, pellentesque purus quis, viverra arcu.</p>
+  *
+  * @example           scss
+  * @include Sugar.paragraph-classes();
+  *
+  * @since       2.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+/**
+ * @name              paragraph
+ * @namespace         sugar.scss.components
+ * @type              Mixin
+ *
+ * This mixin generate all the properties for a paragraph depending on the parameters you set.
+ *
+ * @param         {Number}        $level          The paragraph level you want to generate
+ * @param         {List<String>}    [$scope=null]       The scope you want to generate. Usually "all", "bare" or "style"            
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
   * @name            title-classes
-  * @namespace       scss.components
+  * @namespace       sugar.scss.components
   * @type            Mixin
   *
   * This mixin generate all the css needed to display properly some titles.
   *
   * @param       {Number}      [$count:6]                                How many titles to generate
+  * @param          {String}        [$name:'h']                 The name you want for your titles
+  * @param         {List<String>}    [$scope=null]       The scope you want to generate. Usually "all", "bare" or "style"            
   *
   * @example         html
   * <h1 class="h1">My title</h1>
@@ -2677,69 +2737,21 @@
   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
   */
 /**
- * @name              title-bare-classes
- * @namespace         scss.components
- * @type              Mixin
- *
- * This mixin generate all the bare classes depending on the parameters you set.
- *
- * @param       {Number}      [$count:6]                                How many titles to generate
- *
- * @since       2.0.0
- * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-/**
- * @name              title-style-classes
- * @namespace         scss.components.btn
- * @type              Mixin
- *
- * This mixin generate all the style classes depending on the parameters you set.
- *
- * @param       {List}      [$colors:map-keys(setting('colors'))]       The colors you want to generate
- * @param       {String}      [$name='btn']                         The name to use for the generation of the classes
- *
- * @since       2.0.0
- * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-/**
  * @name              title
- * @namespace         scss.components.title
+ * @namespace         sugar.scss.components
  * @type              Mixin
  *
  * This mixin generate all the properties for a title depending on the parameters you set.
  *
  * @param         {Number}        $level          The title level you want to generate
- *
- * @since       2.0.0
- * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-/**
- * @name              title-bare
- * @namespace         scss.components
- * @type              Mixin
- *
- * This mixin generate all the bare properties for a title depending on the parameters you set.
- *
- * @param       {Number}      $level          The title level you want to generate
- *
- * @since       2.0.0
- * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-/**
- * @name              title-style
- * @namespace         scss.components
- * @type              Mixin
- *
- * This mixin generate all the style properties for a title depending on the parameters you set.
- *
- * @param       {Number}      $level          The title level you want to generate
+ * @param         {List<String>}    [$scope=null]       The scope you want to generate. Usually "all", "bare" or "style"            
  *
  * @since       2.0.0
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /**
   * @name            ul-classes
-  * @namespace       scss.components
+  * @namespace       sugar.scss.components
   * @type            Mixin
   *
   * This mixin generate all the css needed to display properly some unordered lists.
@@ -2769,7 +2781,7 @@
   */
 /**
  * @name              ul-bare-classes
- * @namespace         scss.components.ul
+ * @namespace         sugar.scss.components.ul
  * @type              Mixin
  *
  * This mixin generate all the bare classes depending on the parameters you set.
@@ -2782,7 +2794,7 @@
  */
 /**
  * @name              ul-style-classes
- * @namespace         scss.components.ul
+ * @namespace         sugar.scss.components.ul
  * @type              Mixin
  *
  * This mixin generate all the style classes depending on the parameters you set.
@@ -2795,7 +2807,7 @@
  */
 /**
  * @name              ul-bare
- * @namespace         scss.components.ul
+ * @namespace         sugar.scss.components.ul
  * @type              Mixin
  *
  * This mixin generate all the bare properties for a list depending on the parameters you set.
@@ -2807,7 +2819,7 @@
  */
 /**
  * @name              ul-style
- * @namespace         scss.components.ul
+ * @namespace         sugar.scss.components.ul
  * @type              Mixin
  *
  * This mixin generate all the style properties for a list depending on the parameters you set.
@@ -2819,7 +2831,7 @@
  */
 /**
  * @name            user-avatar
- * @namespace       scss.components
+ * @namespace       sugar.scss.components
  * @type            Mixin
  *
  * This mixin display a user-avatar with a name and an image.
@@ -2843,7 +2855,7 @@
  */
 /**
  * @name    effect-bubble
- * @namespace           scss.effect
+ * @namespace           sugar.scss.effect
  * @type      mixin
  *
  * Create an arrow bubble effect
@@ -2870,7 +2882,7 @@
  */
 /**
  * @name        effect-depth
- * @namespace           scss.effect
+ * @namespace           sugar.scss.effect
  * @type      mixin
  *
  * Generate a drop shadow depending on the depth specified
@@ -2888,7 +2900,7 @@
  */
 /**
  * @name      effect-hey
- * @namespace           scss.effect
+ * @namespace           sugar.scss.effect
  * @type      mixin
  *
  * Create a poping dot effect to catch user attention on a particular item
@@ -2919,7 +2931,7 @@
  */
 /**
  * @name    effect-long-shadow
- * @namespace           scss.effect
+ * @namespace           sugar.scss.effect
  * @type      mixin
  *
  * Generate a long shadow effect like [this](https://www.google.ch/search?q=long+shadow&espv=2&biw=2560&bih=1316&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjjne6x49LPAhVBHRQKHat8AW8Q_AUIBigB)
@@ -2949,7 +2961,7 @@
  */
 /**
  * @name      effect-side-lined
- * @namespace           scss.effect
+ * @namespace           sugar.scss.effect
  * @type      mixin
  *
  * Create side lines around an item
@@ -2976,7 +2988,7 @@
  */
 /**
  * @name      input-placeholder
- * @namespace           scss.form
+ * @namespace           sugar.scss.form
  * @type      mixin
  *
  * Set the placeholder style for inputs, etc...
@@ -2993,7 +3005,7 @@
  */
 /**
  * @name            format-marked
- * @namespace           scss.format
+ * @namespace           sugar.scss.format
  * @type            Mixin
  *
  * This mixin print the needed css to style a "marked" converted markdown to html
@@ -3009,7 +3021,7 @@
  */
 /**
  * @name      border-radius
- * @namespace           scss.helper
+ * @namespace           sugar.scss.helper
  * @type      mixin
  *
  * Apply some border radius
@@ -3040,7 +3052,7 @@
  */
 /**
  * @name  center-block
- * @namespace           scss.helper
+ * @namespace           sugar.scss.helper
  * @type      mixin
  *
  * Center a block element using margins etc...
@@ -3055,7 +3067,7 @@
  */
 /**
  * @name 	clearfix
- * @namespace           scss.helper
+ * @namespace           sugar.scss.helper
  * @type      mixin
  *
  * Apply a clearfix on the element.
@@ -3077,7 +3089,7 @@
  */
 /**
  * @name      corner
- * @namespace           scss.helper
+ * @namespace           sugar.scss.helper
  * @type      mixin
  *
  * Apply some border radius
@@ -3107,7 +3119,7 @@
  */
 /**
  * @name      fit
- * @namespace           scss.helper
+ * @namespace           sugar.scss.helper
  * @type      mixin
  *
  * Make the element fit his container.
@@ -3124,7 +3136,7 @@
  */
 /**
  * @name      is
- * @namespace           scss.helper
+ * @namespace           sugar.scss.helper
  * @type      function
  *
  * Check if the passed value is of a certain type
@@ -3176,7 +3188,7 @@
  */
 /**
  * @name      normalize
- * @namespace           scss.helper
+ * @namespace           sugar.scss.helper
  * @type      mixin
  *
  * Print out a normalize css
@@ -3189,7 +3201,7 @@
  */
 /**
  * @name      position
- * @namespace           scss.helper
+ * @namespace           sugar.scss.helper
  * @type      mixin
  *
  * Set a complexe position styling like position:absolute; top:0; left:100%; etc...
@@ -3221,7 +3233,7 @@
  */
 /**
  * @name      reset
- * @namespace           scss.helper
+ * @namespace           sugar.scss.helper
  * @type      mixin
  *
  * Print out a reset css
@@ -3234,7 +3246,7 @@
  */
 /**
  * @name      sanitize
- * @namespace           scss.helper
+ * @namespace           sugar.scss.helper
  * @type      mixin
  *
  * Print out a sanitize css
@@ -3247,7 +3259,7 @@
  */
 /**
  * @name    size
- * @namespace           scss.helper
+ * @namespace           sugar.scss.helper
  * @type      mixin
  *
  * Quicky and easily set simple or complexe size to any element
@@ -3266,7 +3278,7 @@
  */
 /**
  * @name    translate
- * @namespace           scss.helper
+ * @namespace           sugar.scss.helper
  * @type      mixin
  *
  * Quicky set some translates
@@ -3284,7 +3296,7 @@
  */
 /**
  * @name    type-of
- * @namespace           scss.helper
+ * @namespace           sugar.scss.helper
  * @type      function
  *
  * Get the type of the passed variable
@@ -3300,7 +3312,7 @@
  */
 /**
  * @name    vertical-aligner
- * @namespace           scss.helper
+ * @namespace           sugar.scss.helper
  * @type      mixin
  *
  * Vertically align content by using the inline-block middle trick
@@ -3315,7 +3327,7 @@
  */
 /**
  * @name      visually-hidden
- * @namespace           scss.helper
+ * @namespace           sugar.scss.helper
  * @type      mixin
  *
  * Hide an element only visually. This ensure that the element is still correctly displayed in the page for SEO
@@ -3398,7 +3410,7 @@
 
 /**
  * @name      icon
- * @namespace           scss.icon
+ * @namespace           sugar.scss.icon
  * @type      mixin
  *
  * Apply an icon on the element. This mixin support font-awesome and custom icons systems that have an icon name formated like "icon-{name}"
@@ -3416,7 +3428,7 @@
  */
 /**
  * @name      icons
- * @namespace           scss.icon
+ * @namespace           sugar.scss.icon
  * @type    mixin
  *
  * Generate some icon classes like .icon-$icon-name
@@ -3432,7 +3444,7 @@
  */
 /**
  * @name register-svg-icon
- * @namespace           scss.icon
+ * @namespace           sugar.scss.icon
  * @type      mixin
  *
  * Register a new icon to be used as base64 encoded url.
@@ -3449,7 +3461,7 @@
  */
 /**
  * @name      background
- * @namespace           scss.image
+ * @namespace           sugar.scss.image
  * @type      mixin
  *
  * Helper mixin to set a background image
@@ -3484,7 +3496,7 @@
  */
 /**
  * @name      image-rendering
- * @namespace           scss.image
+ * @namespace           sugar.scss.image
  * @type      mixin
  *
  * Set how to render the image
@@ -3501,7 +3513,7 @@
  */
 /**
  * @name    columns
- * @namespace           scss.layout
+ * @namespace           sugar.scss.layout
  * @type      mixin
  *
  * Create a column layout my setting each columns properties at once
@@ -3530,7 +3542,7 @@
  */
 /**
  * @name    ratio
- * @namespace           scss.layout
+ * @namespace           sugar.scss.layout
  * @type      mixin
  *
  * Apply a ratio css styling. This will apply a before or after content that will make the element keep the specified ratio.
@@ -3548,7 +3560,7 @@
  */
 /**
  * @name          link-stretched
- * @namespace     scss.link
+ * @namespace     sugar.scss.link
  * @type          Mixin
  *
  * Make a link become the size of it's parent (absolute, relative)
@@ -3559,7 +3571,7 @@
  */
 /**
  * @name      list-bullet
- * @namespace           scss.list
+ * @namespace           sugar.scss.list
  * @type      mixin
  *
  * Set how the list bullet has to be displayed.
@@ -3590,7 +3602,7 @@
  */
 /**
  * @name    list-start
- * @namespace           scss.list
+ * @namespace           sugar.scss.list
  * @type      mixin
  *
  * Start a new list
@@ -3607,7 +3619,7 @@
  */
 /**
  * @name      loader-bars
- * @namespace           scss.loader
+ * @namespace           sugar.scss.loader
  * @type      function
  *
  * Generate a full animated, single element, bars loader
@@ -3641,7 +3653,7 @@
  */
 /**
  * @name      loader-circle
- * @namespace           scss.loader
+ * @namespace           sugar.scss.loader
  * @type      Mixin
  *
  * Generate a full animated, single element, circle loader
@@ -3672,7 +3684,7 @@
  */
 /**
  * @name      loader-couch-potato
- * @namespace           scss.loader
+ * @namespace           sugar.scss.loader
  * @type      function
  *
  * Generate a full animated, single element, couch-potato style loader
@@ -3695,7 +3707,7 @@
  */
 /**
  * @name      loader-flip-ball
- * @namespace           scss.loader
+ * @namespace           sugar.scss.loader
  * @type      Mixin
  *
  * Generate a full animated, single element, flip ball style loader
@@ -3717,7 +3729,7 @@
  */
 /**
  * @name      loader-grid
- * @namespace           scss.loader
+ * @namespace           sugar.scss.loader
  * @type      function
  *
  * Generate a grid style loader
@@ -3750,7 +3762,7 @@
  */
 /**
  * @name      loader-radial
- * @namespace           scss.loader
+ * @namespace           sugar.scss.loader
  * @type      function
  *
  * Generate a radial styled loader
@@ -3776,7 +3788,7 @@
  */
 /**
  * @name      loader-spinner
- * @namespace           scss.loader
+ * @namespace           sugar.scss.loader
  * @type      function
  *
  * Generate a spinner loader
@@ -3799,7 +3811,7 @@
  */
 /**
  * @name    to-base64-url
- * @namespace           scss.meta
+ * @namespace           sugar.scss.meta
  * @type      function
  *
  * Convert the passed svg code to an embadable base64 url
@@ -3816,7 +3828,7 @@
  */
 /**
  * @name      to-base64
- * @namespace           scss.meta
+ * @namespace           sugar.scss.meta
  * @type      function
  *
  * Convert the passed svg code to base64 embedable url
@@ -3833,7 +3845,7 @@
  */
 /**
  * @name                  media
- * @namespace             scss.responsive
+ * @namespace             sugar.scss.responsive
  * @type                  Mixin
  *
  * This mixin allows you to specify easily which media (defined in the media.config.js file) has to be targeted.
@@ -3879,7 +3891,7 @@
  */
 /**
  * @name            sr-only
- * @namespace       scss.screen-reader
+ * @namespace       sugar.scss.screen-reader
  * @type            Mixin
  *
  * Make the element visible only for the screen readers
@@ -3898,7 +3910,7 @@
  */
 /**
  * @name      round-overflow
- * @namespace           scss.shape
+ * @namespace           sugar.scss.shape
  * @type      mixin
  *
  * Apply some css to have a rounded element with already an overflow on it
@@ -3921,7 +3933,7 @@
  */
 /**
  * @name        triangle
- * @namespace           scss.shape
+ * @namespace           sugar.scss.shape
  * @type      mixin
  *
  * Generate a triangle shape
@@ -3944,7 +3956,7 @@
  */
 /**
  * @name      rhythm-width
- * @namespace           scss.typography
+ * @namespace           sugar.scss.typography
  * @type      function
  *
  * Return the Map properties representation for the rhythme width
@@ -3966,7 +3978,7 @@
  */
 /**
  * @name        rhythm-width
- * @namespace           scss.typography
+ * @namespace           sugar.scss.typography
  * @type      mixin
  *
  * Print out the css on a container that will make the lines displays a maximum number of characters.
@@ -3981,7 +3993,7 @@
  */
 /**
  * @name    selection
- * @namespace           scss.typography
+ * @namespace           sugar.scss.typography
  * @type      mixin
  *
  * Set the user selection styling with ease
@@ -3997,7 +4009,7 @@
  */
 /**
  * @name      text-hide
- * @namespace           scss.typography
+ * @namespace           sugar.scss.typography
  * @type      mixin
  *
  * Hide the contained text
@@ -4012,7 +4024,7 @@
  */
 /**
  * @name      text-truncate
- * @namespace           scss.typography
+ * @namespace           sugar.scss.typography
  * @type      mixin
  *
  * Print out the style to truncate the text if needed
@@ -4027,7 +4039,7 @@
  */
 /**
  * @name      convert
- * @namespace           scss.unit
+ * @namespace           sugar.scss.unit
  * @type      function
  *
  * Convert a passed value to the wanted unit
@@ -4073,7 +4085,7 @@
  */
 /**
  * @name      is-unitless
- * @namespace           scss.unit
+ * @namespace           sugar.scss.unit
  * @type      function
  *
  * Check if the passed variable is unitless or not
@@ -4090,7 +4102,7 @@
  */
 /**
  * @name    strip-units
- * @namespace           scss.unit
+ * @namespace           sugar.scss.unit
  * @type      function
  *
  * Return a number without any units
@@ -4107,7 +4119,7 @@
  */
 /**
  * @name    to-em
- * @namespace           scss.unit
+ * @namespace           sugar.scss.unit
  * @type      function
  *
  * Convert the passed value to em
@@ -4123,7 +4135,7 @@
  */
 /**
  * @name    to-percent
- * @namespace           scss.unit
+ * @namespace           sugar.scss.unit
  * @type      function
  *
  * Convert the passed value to %
@@ -4139,7 +4151,7 @@
  */
 /**
  * @name      to-pt
- * @namespace           scss.unit
+ * @namespace           sugar.scss.unit
  * @type      function
  *
  * Convert the passed value to pt
@@ -4155,7 +4167,7 @@
  */
 /**
  * @name    to-px
- * @namespace           scss.unit
+ * @namespace           sugar.scss.unit
  * @type      function
  *
  * Convert the passed value to px
@@ -4171,7 +4183,7 @@
  */
 /**
  * @name    to-rem
- * @namespace           scss.unit
+ * @namespace           sugar.scss.unit
  * @type      function
  *
  * Convert the passed value to rem
@@ -4187,7 +4199,7 @@
  */
 /**
  * @name    unit
- * @namespace           scss.unit
+ * @namespace           sugar.scss.unit
  * @type      function
  *
  * Return the unit of the passed number
@@ -4203,7 +4215,7 @@
  */
 /**
  * @name    border-map
- * @namespace           scss.util
+ * @namespace           sugar.scss.util
  * @type      function
  *
  * Parse and return the Map respresentation of a border property
@@ -4226,7 +4238,7 @@
  */
 /**
  * @name      margin-map
- * @namespace           scss.util
+ * @namespace           sugar.scss.util
  * @type      function
  *
  * Parse and return the Map respresentation of a margin property
@@ -4245,7 +4257,7 @@
  */
 /**
  * @name      position-map
- * @namespace           scss.util
+ * @namespace           sugar.scss.util
  * @type      function
  *
  * Return the representation of a position styling like position:absolute; top:0; left:100%; etc...
@@ -4272,7 +4284,7 @@
  */
 /**
  * @name      translate-map
- * @namespace           scss.util
+ * @namespace           sugar.scss.util
  * @type      function
  *
  * Return the Map properties representation of a translate x,y and z
@@ -4797,8 +4809,8 @@ html {
 * All the generic codebase for the project like typography, resets, etc...
 */
 /**
- * @name              s-h1, s-tf h1
- * @namespace         scss.components
+ * @name              .s-h1, .s-tf h1
+ * @namespace         sugar.scss.components
  * @type              Classname
  *
  * This class can be applied on any ```h``` component to specify his size to ```1```
@@ -4813,11 +4825,12 @@ html {
 .s-h1 {
   display: block;
   font-size: 48px;
+  font-family: "Roboto";
 }
 
 /**
- * @name              s-h2, s-tf h2
- * @namespace         scss.components
+ * @name              .s-h2, .s-tf h2
+ * @namespace         sugar.scss.components
  * @type              Classname
  *
  * This class can be applied on any ```h``` component to specify his size to ```2```
@@ -4832,11 +4845,12 @@ html {
 .s-h2 {
   display: block;
   font-size: 32px;
+  font-family: "Roboto";
 }
 
 /**
- * @name              s-h3, s-tf h3
- * @namespace         scss.components
+ * @name              .s-h3, .s-tf h3
+ * @namespace         sugar.scss.components
  * @type              Classname
  *
  * This class can be applied on any ```h``` component to specify his size to ```3```
@@ -4851,11 +4865,12 @@ html {
 .s-h3 {
   display: block;
   font-size: 24px;
+  font-family: "Roboto";
 }
 
 /**
- * @name              s-h4, s-tf h4
- * @namespace         scss.components
+ * @name              .s-h4, .s-tf h4
+ * @namespace         sugar.scss.components
  * @type              Classname
  *
  * This class can be applied on any ```h``` component to specify his size to ```4```
@@ -4870,11 +4885,12 @@ html {
 .s-h4 {
   display: block;
   font-size: 16px;
+  font-family: "Roboto";
 }
 
 /**
- * @name              s-h5, s-tf h5
- * @namespace         scss.components
+ * @name              .s-h5, .s-tf h5
+ * @namespace         sugar.scss.components
  * @type              Classname
  *
  * This class can be applied on any ```h``` component to specify his size to ```5```
@@ -4889,11 +4905,12 @@ html {
 .s-h5 {
   display: block;
   font-size: 9.6px;
+  font-family: "Roboto";
 }
 
 /**
- * @name              s-h6, s-tf h6
- * @namespace         scss.components
+ * @name              .s-h6, .s-tf h6
+ * @namespace         sugar.scss.components
  * @type              Classname
  *
  * This class can be applied on any ```h``` component to specify his size to ```6```
@@ -4908,114 +4925,45 @@ html {
 .s-h6 {
   display: block;
   font-size: 4.8px;
-}
-
-/**
- * @name              s-h1, s-tf h1
- * @namespace         scss.components
- * @type              Classname
- *
- * This class can be applied on any ```h``` component
- *
- * @example         html
- * <h1 class="s-h1">I'm a cool "1" title</h1>
- *
- * @since       2.0.0
- * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-.s-tf h1,
-.s-h1 {
   font-family: "Roboto";
 }
 
 /**
- * @name              s-h2, s-tf h2
- * @namespace         scss.components
+ * @name              .s-p, .s-tf p
+ * @namespace         sugar.scss.components
  * @type              Classname
  *
- * This class can be applied on any ```h``` component
+ * This class can be applied on any ```p``` component to specify his style
  *
  * @example         html
- * <h2 class="s-h2">I'm a cool "2" title</h2>
+ * <p class="s-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec facilisis purus ac rhoncus mollis. Mauris lacinia velit purus, sit amet aliquet odio imperdiet in. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Duis rhoncus magna et dui bibendum, id suscipit dui consectetur. Nulla facilisi. Vivamus a metus nunc. Pellentesque eu lectus a velit consequat condimentum. Donec ac dolor sed enim posuere fringilla et dapibus metus. Nam id vehicula enim. In hac habitasse platea dictumst. Phasellus ultricies eros et neque blandit pulvinar. Proin nec urna auctor, porttitor ligula eu, fermentum risus. Etiam non eros blandit, pellentesque purus quis, viverra arcu.</p>
  *
  * @since       2.0.0
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-.s-tf h2,
-.s-h2 {
-  font-family: "Roboto";
+.s-tf p,
+.s-p {
+  display: block;
+  line-height: 2rem;
 }
 
 /**
- * @name              s-h3, s-tf h3
- * @namespace         scss.components
+ * @name              .s-p--head, .s-tf p.head
+ * @namespace         sugar.scss.components
  * @type              Classname
  *
- * This class can be applied on any ```h``` component
+ * This class can be applied on any ```p``` component to specify his style
  *
  * @example         html
- * <h3 class="s-h3">I'm a cool "3" title</h3>
+ * <p class="s-p--head">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec facilisis purus ac rhoncus mollis. Mauris lacinia velit purus, sit amet aliquet odio imperdiet in. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Duis rhoncus magna et dui bibendum, id suscipit dui consectetur. Nulla facilisi. Vivamus a metus nunc. Pellentesque eu lectus a velit consequat condimentum. Donec ac dolor sed enim posuere fringilla et dapibus metus. Nam id vehicula enim. In hac habitasse platea dictumst. Phasellus ultricies eros et neque blandit pulvinar. Proin nec urna auctor, porttitor ligula eu, fermentum risus. Etiam non eros blandit, pellentesque purus quis, viverra arcu.</p>
  *
  * @since       2.0.0
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-.s-tf h3,
-.s-h3 {
-  font-family: "Roboto";
-}
-
-/**
- * @name              s-h4, s-tf h4
- * @namespace         scss.components
- * @type              Classname
- *
- * This class can be applied on any ```h``` component
- *
- * @example         html
- * <h4 class="s-h4">I'm a cool "4" title</h4>
- *
- * @since       2.0.0
- * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-.s-tf h4,
-.s-h4 {
-  font-family: "Roboto";
-}
-
-/**
- * @name              s-h5, s-tf h5
- * @namespace         scss.components
- * @type              Classname
- *
- * This class can be applied on any ```h``` component
- *
- * @example         html
- * <h5 class="s-h5">I'm a cool "5" title</h5>
- *
- * @since       2.0.0
- * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-.s-tf h5,
-.s-h5 {
-  font-family: "Roboto";
-}
-
-/**
- * @name              s-h6, s-tf h6
- * @namespace         scss.components
- * @type              Classname
- *
- * This class can be applied on any ```h``` component
- *
- * @example         html
- * <h6 class="s-h6">I'm a cool "6" title</h6>
- *
- * @since       2.0.0
- * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-.s-tf h6,
-.s-h6 {
-  font-family: "Roboto";
+.s-tf p.head,
+.s-p--head {
+  display: block;
+  line-height: 3rem;
 }
 
 /**
@@ -5048,9 +4996,657 @@ html {
 * An organism can contain other molecules or atoms and does not have to relay on his ancestors
 * to be properly displayed.
 */
+/*** IMPORTED FILE NOT FOUND ***/
+/* BASICS */
+.CodeMirror {
+  /* Set height, width, borders, and global font properties here */
+  font-family: monospace;
+  height: 300px;
+  color: black;
+  direction: ltr;
+}
+
+/* PADDING */
+.CodeMirror-lines {
+  padding: 4px 0;
+  /* Vertical padding around content */
+}
+
+.CodeMirror pre.CodeMirror-line,
+.CodeMirror pre.CodeMirror-line-like {
+  padding: 0 4px;
+  /* Horizontal padding of content */
+}
+
+.CodeMirror-scrollbar-filler, .CodeMirror-gutter-filler {
+  background-color: white;
+  /* The little square between H and V scrollbars */
+}
+
+/* GUTTER */
+.CodeMirror-gutters {
+  border-right: 1px solid #ddd;
+  background-color: #f7f7f7;
+  white-space: nowrap;
+}
+
+.CodeMirror-linenumber {
+  padding: 0 3px 0 5px;
+  min-width: 20px;
+  text-align: right;
+  color: #999;
+  white-space: nowrap;
+}
+
+.CodeMirror-guttermarker {
+  color: black;
+}
+
+.CodeMirror-guttermarker-subtle {
+  color: #999;
+}
+
+/* CURSOR */
+.CodeMirror-cursor {
+  border-left: 1px solid black;
+  border-right: none;
+  width: 0;
+}
+
+/* Shown when moving in bi-directional text */
+.CodeMirror div.CodeMirror-secondarycursor {
+  border-left: 1px solid silver;
+}
+
+.cm-fat-cursor .CodeMirror-cursor {
+  width: auto;
+  border: 0 !important;
+  background: #7e7;
+}
+
+.cm-fat-cursor div.CodeMirror-cursors {
+  z-index: 1;
+}
+
+.cm-fat-cursor-mark {
+  background-color: rgba(20, 255, 20, 0.5);
+  -webkit-animation: blink 1.06s steps(1) infinite;
+  -moz-animation: blink 1.06s steps(1) infinite;
+  animation: blink 1.06s steps(1) infinite;
+}
+
+.cm-animate-fat-cursor {
+  width: auto;
+  border: 0;
+  -webkit-animation: blink 1.06s steps(1) infinite;
+  -moz-animation: blink 1.06s steps(1) infinite;
+  animation: blink 1.06s steps(1) infinite;
+  background-color: #7e7;
+}
+
+@-moz-keyframes blink {
+  50% {
+    background-color: transparent;
+  }
+}
+@-webkit-keyframes blink {
+  50% {
+    background-color: transparent;
+  }
+}
+@keyframes blink {
+  50% {
+    background-color: transparent;
+  }
+}
+/* Can style cursor different in overwrite (non-insert) mode */
+.cm-tab {
+  display: inline-block;
+  text-decoration: inherit;
+}
+
+.CodeMirror-rulers {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -50px;
+  bottom: 0;
+  overflow: hidden;
+}
+
+.CodeMirror-ruler {
+  border-left: 1px solid #ccc;
+  top: 0;
+  bottom: 0;
+  position: absolute;
+}
+
+/* DEFAULT THEME */
+.cm-s-default .cm-header {
+  color: blue;
+}
+
+.cm-s-default .cm-quote {
+  color: #090;
+}
+
+.cm-negative {
+  color: #d44;
+}
+
+.cm-positive {
+  color: #292;
+}
+
+.cm-header, .cm-strong {
+  font-weight: bold;
+}
+
+.cm-em {
+  font-style: italic;
+}
+
+.cm-link {
+  text-decoration: underline;
+}
+
+.cm-strikethrough {
+  text-decoration: line-through;
+}
+
+.cm-s-default .cm-keyword {
+  color: #708;
+}
+
+.cm-s-default .cm-atom {
+  color: #219;
+}
+
+.cm-s-default .cm-number {
+  color: #164;
+}
+
+.cm-s-default .cm-def {
+  color: #00f;
+}
+
+.cm-s-default .cm-variable-2 {
+  color: #05a;
+}
+
+.cm-s-default .cm-variable-3, .cm-s-default .cm-type {
+  color: #085;
+}
+
+.cm-s-default .cm-comment {
+  color: #a50;
+}
+
+.cm-s-default .cm-string {
+  color: #a11;
+}
+
+.cm-s-default .cm-string-2 {
+  color: #f50;
+}
+
+.cm-s-default .cm-meta {
+  color: #555;
+}
+
+.cm-s-default .cm-qualifier {
+  color: #555;
+}
+
+.cm-s-default .cm-builtin {
+  color: #30a;
+}
+
+.cm-s-default .cm-bracket {
+  color: #997;
+}
+
+.cm-s-default .cm-tag {
+  color: #170;
+}
+
+.cm-s-default .cm-attribute {
+  color: #00c;
+}
+
+.cm-s-default .cm-hr {
+  color: #999;
+}
+
+.cm-s-default .cm-link {
+  color: #00c;
+}
+
+.cm-s-default .cm-error {
+  color: #f00;
+}
+
+.cm-invalidchar {
+  color: #f00;
+}
+
+.CodeMirror-composing {
+  border-bottom: 2px solid;
+}
+
+/* Default styles for common addons */
+div.CodeMirror span.CodeMirror-matchingbracket {
+  color: #0b0;
+}
+
+div.CodeMirror span.CodeMirror-nonmatchingbracket {
+  color: #a22;
+}
+
+.CodeMirror-matchingtag {
+  background: rgba(255, 150, 0, 0.3);
+}
+
+.CodeMirror-activeline-background {
+  background: #e8f2ff;
+}
+
+/* STOP */
+/* The rest of this file contains styles related to the mechanics of
+   the editor. You probably shouldn't touch them. */
+.CodeMirror {
+  position: relative;
+  overflow: hidden;
+  background: white;
+}
+
+.CodeMirror-scroll {
+  overflow: scroll !important;
+  /* Things will break if this is overridden */
+  /* 50px is the magic margin used to hide the element's real scrollbars */
+  /* See overflow: hidden in .CodeMirror */
+  margin-bottom: -50px;
+  margin-right: -50px;
+  padding-bottom: 50px;
+  height: 100%;
+  outline: none;
+  /* Prevent dragging from highlighting the element */
+  position: relative;
+}
+
+.CodeMirror-sizer {
+  position: relative;
+  border-right: 50px solid transparent;
+}
+
+/* The fake, visible scrollbars. Used to force redraw during scrolling
+   before actual scrolling happens, thus preventing shaking and
+   flickering artifacts. */
+.CodeMirror-vscrollbar, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-gutter-filler {
+  position: absolute;
+  z-index: 6;
+  display: none;
+}
+
+.CodeMirror-vscrollbar {
+  right: 0;
+  top: 0;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.CodeMirror-hscrollbar {
+  bottom: 0;
+  left: 0;
+  overflow-y: hidden;
+  overflow-x: scroll;
+}
+
+.CodeMirror-scrollbar-filler {
+  right: 0;
+  bottom: 0;
+}
+
+.CodeMirror-gutter-filler {
+  left: 0;
+  bottom: 0;
+}
+
+.CodeMirror-gutters {
+  position: absolute;
+  left: 0;
+  top: 0;
+  min-height: 100%;
+  z-index: 3;
+}
+
+.CodeMirror-gutter {
+  white-space: normal;
+  height: 100%;
+  display: inline-block;
+  vertical-align: top;
+  margin-bottom: -50px;
+}
+
+.CodeMirror-gutter-wrapper {
+  position: absolute;
+  z-index: 4;
+  background: none !important;
+  border: none !important;
+}
+
+.CodeMirror-gutter-background {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 4;
+}
+
+.CodeMirror-gutter-elt {
+  position: absolute;
+  cursor: default;
+  z-index: 4;
+}
+
+.CodeMirror-gutter-wrapper ::selection {
+  background-color: transparent;
+}
+
+.CodeMirror-gutter-wrapper ::-moz-selection {
+  background-color: transparent;
+}
+
+.CodeMirror-lines {
+  cursor: text;
+  min-height: 1px;
+  /* prevents collapsing before first draw */
+}
+
+.CodeMirror pre.CodeMirror-line,
+.CodeMirror pre.CodeMirror-line-like {
+  /* Reset some styles that the rest of the page might have set */
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  border-width: 0;
+  background: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  margin: 0;
+  white-space: pre;
+  word-wrap: normal;
+  line-height: inherit;
+  color: inherit;
+  z-index: 2;
+  position: relative;
+  overflow: visible;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-variant-ligatures: contextual;
+  font-variant-ligatures: contextual;
+}
+
+.CodeMirror-wrap pre.CodeMirror-line,
+.CodeMirror-wrap pre.CodeMirror-line-like {
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  word-break: normal;
+}
+
+.CodeMirror-linebackground {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 0;
+}
+
+.CodeMirror-linewidget {
+  position: relative;
+  z-index: 2;
+  padding: 0.1px;
+  /* Force widget margins to stay inside of the container */
+}
+
+.CodeMirror-rtl pre {
+  direction: rtl;
+}
+
+.CodeMirror-code {
+  outline: none;
+}
+
+/* Force content-box sizing for the elements where we expect it */
+.CodeMirror-scroll,
+.CodeMirror-sizer,
+.CodeMirror-gutter,
+.CodeMirror-gutters,
+.CodeMirror-linenumber {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+.CodeMirror-measure {
+  position: absolute;
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+.CodeMirror-cursor {
+  position: absolute;
+  pointer-events: none;
+}
+
+.CodeMirror-measure pre {
+  position: static;
+}
+
+div.CodeMirror-cursors {
+  visibility: hidden;
+  position: relative;
+  z-index: 3;
+}
+
+div.CodeMirror-dragcursors {
+  visibility: visible;
+}
+
+.CodeMirror-focused div.CodeMirror-cursors {
+  visibility: visible;
+}
+
+.CodeMirror-selected {
+  background: #d9d9d9;
+}
+
+.CodeMirror-focused .CodeMirror-selected {
+  background: #d7d4f0;
+}
+
+.CodeMirror-crosshair {
+  cursor: crosshair;
+}
+
+.CodeMirror-line::selection, .CodeMirror-line > span::selection, .CodeMirror-line > span > span::selection {
+  background: #d7d4f0;
+}
+
+.CodeMirror-line::-moz-selection, .CodeMirror-line > span::-moz-selection, .CodeMirror-line > span > span::-moz-selection {
+  background: #d7d4f0;
+}
+
+.cm-searching {
+  background-color: #ffa;
+  background-color: rgba(255, 255, 0, 0.4);
+}
+
+/* Used to force a border model for a node */
+.cm-force-border {
+  padding-right: 0.1px;
+}
+
+@media print {
+  /* Hide the cursor when printing */
+  .CodeMirror div.CodeMirror-cursors {
+    visibility: hidden;
+  }
+}
+/* See issue #2901 */
+.cm-tab-wrap-hack:after {
+  content: "";
+}
+
+/* Help users use markselection to safely style text background */
+span.CodeMirror-selectedtext {
+  background: none;
+}
+
+/*** --- ***/
+/*** IMPORTED FILE NOT FOUND ***/
+/* Based on arcticicestudio's Nord theme */
+/* https://github.com/arcticicestudio/nord */
+.cm-s-nord.CodeMirror {
+  background: #2e3440;
+  color: #d8dee9;
+}
+
+.cm-s-nord div.CodeMirror-selected {
+  background: #434c5e;
+}
+
+.cm-s-nord .CodeMirror-line::selection, .cm-s-nord .CodeMirror-line > span::selection, .cm-s-nord .CodeMirror-line > span > span::selection {
+  background: #3b4252;
+}
+
+.cm-s-nord .CodeMirror-line::-moz-selection, .cm-s-nord .CodeMirror-line > span::-moz-selection, .cm-s-nord .CodeMirror-line > span > span::-moz-selection {
+  background: #3b4252;
+}
+
+.cm-s-nord .CodeMirror-gutters {
+  background: #2e3440;
+  border-right: 0px;
+}
+
+.cm-s-nord .CodeMirror-guttermarker {
+  color: #4c566a;
+}
+
+.cm-s-nord .CodeMirror-guttermarker-subtle {
+  color: #4c566a;
+}
+
+.cm-s-nord .CodeMirror-linenumber {
+  color: #4c566a;
+}
+
+.cm-s-nord .CodeMirror-cursor {
+  border-left: 1px solid #f8f8f0;
+}
+
+.cm-s-nord span.cm-comment {
+  color: #4c566a;
+}
+
+.cm-s-nord span.cm-atom {
+  color: #b48ead;
+}
+
+.cm-s-nord span.cm-number {
+  color: #b48ead;
+}
+
+.cm-s-nord span.cm-comment.cm-attribute {
+  color: #97b757;
+}
+
+.cm-s-nord span.cm-comment.cm-def {
+  color: #bc9262;
+}
+
+.cm-s-nord span.cm-comment.cm-tag {
+  color: #bc6283;
+}
+
+.cm-s-nord span.cm-comment.cm-type {
+  color: #5998a6;
+}
+
+.cm-s-nord span.cm-property, .cm-s-nord span.cm-attribute {
+  color: #8FBCBB;
+}
+
+.cm-s-nord span.cm-keyword {
+  color: #81A1C1;
+}
+
+.cm-s-nord span.cm-builtin {
+  color: #81A1C1;
+}
+
+.cm-s-nord span.cm-string {
+  color: #A3BE8C;
+}
+
+.cm-s-nord span.cm-variable {
+  color: #d8dee9;
+}
+
+.cm-s-nord span.cm-variable-2 {
+  color: #d8dee9;
+}
+
+.cm-s-nord span.cm-variable-3, .cm-s-nord span.cm-type {
+  color: #d8dee9;
+}
+
+.cm-s-nord span.cm-def {
+  color: #8FBCBB;
+}
+
+.cm-s-nord span.cm-bracket {
+  color: #81A1C1;
+}
+
+.cm-s-nord span.cm-tag {
+  color: #bf616a;
+}
+
+.cm-s-nord span.cm-header {
+  color: #b48ead;
+}
+
+.cm-s-nord span.cm-link {
+  color: #b48ead;
+}
+
+.cm-s-nord span.cm-error {
+  background: #bf616a;
+  color: #f8f8f0;
+}
+
+.cm-s-nord .CodeMirror-activeline-background {
+  background: #3b4252;
+}
+
+.cm-s-nord .CodeMirror-matchingbracket {
+  text-decoration: underline;
+  color: white !important;
+}
+
+/*** --- ***/
+.CodeMirror {
+  height: auto;
+}
+
+.CodeMirror-lines {
+  padding: 20px 0;
+}
+
 /**
   * @name            inline-bar
-  * @namespace       scss.components
+  * @namespace       sugar.scss.components
   * @type            Mixin
   *
   * This mixin allows you to display an inline styled bar.
@@ -5138,7 +5734,7 @@ html {
 */
 /**
  * @name            ol-classes
- * @namespace       scss.07_molecules
+ * @namespace       sugar-ui.scss.07_molecules
  * @type            Mixin
  *
  * Describe the ordered lists display
@@ -5148,7 +5744,7 @@ html {
  */
 /**
  * @name              s-ol--smaller
- * @namespace         scss.components.ol.sizes
+ * @namespace         sugar.scss.components.ol.sizes
  * @type              Classname
  *
  * This class can be applied on any ```ol``` component to specify his size to ```smaller```
@@ -5174,7 +5770,7 @@ s-ol--smaller {
 
 /**
  * @name              s-ol--small
- * @namespace         scss.components.ol.sizes
+ * @namespace         sugar.scss.components.ol.sizes
  * @type              Classname
  *
  * This class can be applied on any ```ol``` component to specify his size to ```small```
@@ -5200,7 +5796,7 @@ s-ol--small {
 
 /**
  * @name              s-ol
- * @namespace         scss.components.ol.sizes
+ * @namespace         sugar.scss.components.ol.sizes
  * @type              Classname
  *
  * This class can be applied on any ```ol``` component to specify his size to ```default```
@@ -5226,7 +5822,7 @@ s-ol {
 
 /**
  * @name              s-ol--medium
- * @namespace         scss.components.ol.sizes
+ * @namespace         sugar.scss.components.ol.sizes
  * @type              Classname
  *
  * This class can be applied on any ```ol``` component to specify his size to ```medium```
@@ -5252,7 +5848,7 @@ s-ol--medium {
 
 /**
  * @name              s-ol--big
- * @namespace         scss.components.ol.sizes
+ * @namespace         sugar.scss.components.ol.sizes
  * @type              Classname
  *
  * This class can be applied on any ```ol``` component to specify his size to ```big```
@@ -5278,7 +5874,7 @@ s-ol--big {
 
 /**
  * @name              s-ol--bigger
- * @namespace         scss.components.ol.sizes
+ * @namespace         sugar.scss.components.ol.sizes
  * @type              Classname
  *
  * This class can be applied on any ```ol``` component to specify his size to ```bigger```
@@ -5304,7 +5900,7 @@ s-ol--bigger {
 
 /**
  * @name              s-ol
- * @namespace         scss.components.ol.colors
+ * @namespace         sugar.scss.components.ol.colors
  * @type              Classname
  *
  * This class can be applied on any ```ol``` component to specify his color to ```default```
@@ -5345,7 +5941,7 @@ s-ol > li::before {
 
 /**
  * @name              s-ol--title
- * @namespace         scss.components.ol.colors
+ * @namespace         sugar.scss.components.ol.colors
  * @type              Classname
  *
  * This class can be applied on any ```ol``` component to specify his color to ```title```
@@ -5386,7 +5982,7 @@ s-ol--title > li::before {
 
 /**
  * @name              s-ol--text
- * @namespace         scss.components.ol.colors
+ * @namespace         sugar.scss.components.ol.colors
  * @type              Classname
  *
  * This class can be applied on any ```ol``` component to specify his color to ```text```
@@ -5427,7 +6023,7 @@ s-ol--text > li::before {
 
 /**
  * @name              s-ol--link
- * @namespace         scss.components.ol.colors
+ * @namespace         sugar.scss.components.ol.colors
  * @type              Classname
  *
  * This class can be applied on any ```ol``` component to specify his color to ```link```
@@ -5468,7 +6064,7 @@ s-ol--link > li::before {
 
 /**
  * @name              s-ol--light
- * @namespace         scss.components.ol.colors
+ * @namespace         sugar.scss.components.ol.colors
  * @type              Classname
  *
  * This class can be applied on any ```ol``` component to specify his color to ```light```
@@ -5509,7 +6105,7 @@ s-ol--light > li::before {
 
 /**
  * @name              s-ol--dark
- * @namespace         scss.components.ol.colors
+ * @namespace         sugar.scss.components.ol.colors
  * @type              Classname
  *
  * This class can be applied on any ```ol``` component to specify his color to ```dark```
@@ -5550,7 +6146,7 @@ s-ol--dark > li::before {
 
 /**
  * @name              s-ol--primary
- * @namespace         scss.components.ol.colors
+ * @namespace         sugar.scss.components.ol.colors
  * @type              Classname
  *
  * This class can be applied on any ```ol``` component to specify his color to ```primary```
@@ -5591,7 +6187,7 @@ s-ol--primary > li::before {
 
 /**
  * @name              s-ol--secondary
- * @namespace         scss.components.ol.colors
+ * @namespace         sugar.scss.components.ol.colors
  * @type              Classname
  *
  * This class can be applied on any ```ol``` component to specify his color to ```secondary```
@@ -5632,7 +6228,7 @@ s-ol--secondary > li::before {
 
 /**
  * @name              s-ol--success
- * @namespace         scss.components.ol.colors
+ * @namespace         sugar.scss.components.ol.colors
  * @type              Classname
  *
  * This class can be applied on any ```ol``` component to specify his color to ```success```
@@ -5673,7 +6269,7 @@ s-ol--success > li::before {
 
 /**
  * @name              s-ol--warning
- * @namespace         scss.components.ol.colors
+ * @namespace         sugar.scss.components.ol.colors
  * @type              Classname
  *
  * This class can be applied on any ```ol``` component to specify his color to ```warning```
@@ -5714,7 +6310,7 @@ s-ol--warning > li::before {
 
 /**
  * @name              s-ol--error
- * @namespace         scss.components.ol.colors
+ * @namespace         sugar.scss.components.ol.colors
  * @type              Classname
  *
  * This class can be applied on any ```ol``` component to specify his color to ```error```
@@ -5755,7 +6351,7 @@ s-ol--error > li::before {
 
 /**
  * @name              s-ol--info
- * @namespace         scss.components.ol.colors
+ * @namespace         sugar.scss.components.ol.colors
  * @type              Classname
  *
  * This class can be applied on any ```ol``` component to specify his color to ```info```
@@ -5796,7 +6392,7 @@ s-ol--info > li::before {
 
 /**
  * @name              s-ul--smaller
- * @namespace         scss.components.ul.sizes
+ * @namespace         sugar.scss.components.ul.sizes
  * @type              Classname
  *
  * This class can be applied on any ```ul``` component to specify his size to ```smaller```
@@ -5822,7 +6418,7 @@ s-ul--smaller {
 
 /**
  * @name              s-ul--small
- * @namespace         scss.components.ul.sizes
+ * @namespace         sugar.scss.components.ul.sizes
  * @type              Classname
  *
  * This class can be applied on any ```ul``` component to specify his size to ```small```
@@ -5848,7 +6444,7 @@ s-ul--small {
 
 /**
  * @name              s-ul
- * @namespace         scss.components.ul.sizes
+ * @namespace         sugar.scss.components.ul.sizes
  * @type              Classname
  *
  * This class can be applied on any ```ul``` component to specify his size to ```default```
@@ -5874,7 +6470,7 @@ s-ul {
 
 /**
  * @name              s-ul--medium
- * @namespace         scss.components.ul.sizes
+ * @namespace         sugar.scss.components.ul.sizes
  * @type              Classname
  *
  * This class can be applied on any ```ul``` component to specify his size to ```medium```
@@ -5900,7 +6496,7 @@ s-ul--medium {
 
 /**
  * @name              s-ul--big
- * @namespace         scss.components.ul.sizes
+ * @namespace         sugar.scss.components.ul.sizes
  * @type              Classname
  *
  * This class can be applied on any ```ul``` component to specify his size to ```big```
@@ -5926,7 +6522,7 @@ s-ul--big {
 
 /**
  * @name              s-ul--bigger
- * @namespace         scss.components.ul.sizes
+ * @namespace         sugar.scss.components.ul.sizes
  * @type              Classname
  *
  * This class can be applied on any ```ul``` component to specify his size to ```bigger```
@@ -5952,7 +6548,7 @@ s-ul--bigger {
 
 /**
  * @name              s-ul
- * @namespace         scss.components.ul.colors
+ * @namespace         sugar.scss.components.ul.colors
  * @type              Classname
  *
  * This class can be applied on any ```ul``` component to specify his color to ```default```
@@ -5992,7 +6588,7 @@ s-ul > li::before {
 
 /**
  * @name              s-ul--title
- * @namespace         scss.components.ul.colors
+ * @namespace         sugar.scss.components.ul.colors
  * @type              Classname
  *
  * This class can be applied on any ```ul``` component to specify his color to ```title```
@@ -6032,7 +6628,7 @@ s-ul--title > li::before {
 
 /**
  * @name              s-ul--text
- * @namespace         scss.components.ul.colors
+ * @namespace         sugar.scss.components.ul.colors
  * @type              Classname
  *
  * This class can be applied on any ```ul``` component to specify his color to ```text```
@@ -6072,7 +6668,7 @@ s-ul--text > li::before {
 
 /**
  * @name              s-ul--link
- * @namespace         scss.components.ul.colors
+ * @namespace         sugar.scss.components.ul.colors
  * @type              Classname
  *
  * This class can be applied on any ```ul``` component to specify his color to ```link```
@@ -6112,7 +6708,7 @@ s-ul--link > li::before {
 
 /**
  * @name              s-ul--light
- * @namespace         scss.components.ul.colors
+ * @namespace         sugar.scss.components.ul.colors
  * @type              Classname
  *
  * This class can be applied on any ```ul``` component to specify his color to ```light```
@@ -6152,7 +6748,7 @@ s-ul--light > li::before {
 
 /**
  * @name              s-ul--dark
- * @namespace         scss.components.ul.colors
+ * @namespace         sugar.scss.components.ul.colors
  * @type              Classname
  *
  * This class can be applied on any ```ul``` component to specify his color to ```dark```
@@ -6192,7 +6788,7 @@ s-ul--dark > li::before {
 
 /**
  * @name              s-ul--primary
- * @namespace         scss.components.ul.colors
+ * @namespace         sugar.scss.components.ul.colors
  * @type              Classname
  *
  * This class can be applied on any ```ul``` component to specify his color to ```primary```
@@ -6232,7 +6828,7 @@ s-ul--primary > li::before {
 
 /**
  * @name              s-ul--secondary
- * @namespace         scss.components.ul.colors
+ * @namespace         sugar.scss.components.ul.colors
  * @type              Classname
  *
  * This class can be applied on any ```ul``` component to specify his color to ```secondary```
@@ -6272,7 +6868,7 @@ s-ul--secondary > li::before {
 
 /**
  * @name              s-ul--success
- * @namespace         scss.components.ul.colors
+ * @namespace         sugar.scss.components.ul.colors
  * @type              Classname
  *
  * This class can be applied on any ```ul``` component to specify his color to ```success```
@@ -6312,7 +6908,7 @@ s-ul--success > li::before {
 
 /**
  * @name              s-ul--warning
- * @namespace         scss.components.ul.colors
+ * @namespace         sugar.scss.components.ul.colors
  * @type              Classname
  *
  * This class can be applied on any ```ul``` component to specify his color to ```warning```
@@ -6352,7 +6948,7 @@ s-ul--warning > li::before {
 
 /**
  * @name              s-ul--error
- * @namespace         scss.components.ul.colors
+ * @namespace         sugar.scss.components.ul.colors
  * @type              Classname
  *
  * This class can be applied on any ```ul``` component to specify his color to ```error```
@@ -6392,7 +6988,7 @@ s-ul--error > li::before {
 
 /**
  * @name              s-ul--info
- * @namespace         scss.components.ul.colors
+ * @namespace         sugar.scss.components.ul.colors
  * @type              Classname
  *
  * This class can be applied on any ```ul``` component to specify his color to ```info```
@@ -6494,7 +7090,7 @@ s-ul--info > li::before {
 */
 /**
  * @name              s-btn--smaller
- * @namespace         scss.components.btn.sizes
+ * @namespace         sugar.scss.components.btn.sizes
  * @type              Classname
  *
  * This class can be applied on any ```btn``` component to specify his size to ```smaller```
@@ -6514,7 +7110,7 @@ s-btn--smaller {
 
 /**
  * @name              s-btn--small
- * @namespace         scss.components.btn.sizes
+ * @namespace         sugar.scss.components.btn.sizes
  * @type              Classname
  *
  * This class can be applied on any ```btn``` component to specify his size to ```small```
@@ -6534,7 +7130,7 @@ s-btn--small {
 
 /**
  * @name              s-btn
- * @namespace         scss.components.btn.sizes
+ * @namespace         sugar.scss.components.btn.sizes
  * @type              Classname
  *
  * This class can be applied on any ```btn``` component to specify his size to ```default```
@@ -6554,7 +7150,7 @@ s-btn {
 
 /**
  * @name              s-btn--medium
- * @namespace         scss.components.btn.sizes
+ * @namespace         sugar.scss.components.btn.sizes
  * @type              Classname
  *
  * This class can be applied on any ```btn``` component to specify his size to ```medium```
@@ -6574,7 +7170,7 @@ s-btn--medium {
 
 /**
  * @name              s-btn--big
- * @namespace         scss.components.btn.sizes
+ * @namespace         sugar.scss.components.btn.sizes
  * @type              Classname
  *
  * This class can be applied on any ```btn``` component to specify his size to ```big```
@@ -6594,7 +7190,7 @@ s-btn--big {
 
 /**
  * @name              s-btn--bigger
- * @namespace         scss.components.btn.sizes
+ * @namespace         sugar.scss.components.btn.sizes
  * @type              Classname
  *
  * This class can be applied on any ```btn``` component to specify his size to ```bigger```
@@ -6614,7 +7210,7 @@ s-btn--bigger {
 
 /**
  * @name              s-btn
- * @namespace         scss.components.btn.colors
+ * @namespace         sugar.scss.components.btn.colors
  * @type              Classname
  *
  * This class can be applied on any ```btn``` component to specify his color to ```default```
@@ -6637,7 +7233,7 @@ s-btn:hover {
 
 /**
  * @name              s-btn--title
- * @namespace         scss.components.btn.colors
+ * @namespace         sugar.scss.components.btn.colors
  * @type              Classname
  *
  * This class can be applied on any ```btn``` component to specify his color to ```title```
@@ -6660,7 +7256,7 @@ s-btn--title:hover {
 
 /**
  * @name              s-btn--text
- * @namespace         scss.components.btn.colors
+ * @namespace         sugar.scss.components.btn.colors
  * @type              Classname
  *
  * This class can be applied on any ```btn``` component to specify his color to ```text```
@@ -6683,7 +7279,7 @@ s-btn--text:hover {
 
 /**
  * @name              s-btn--link
- * @namespace         scss.components.btn.colors
+ * @namespace         sugar.scss.components.btn.colors
  * @type              Classname
  *
  * This class can be applied on any ```btn``` component to specify his color to ```link```
@@ -6706,7 +7302,7 @@ s-btn--link:hover {
 
 /**
  * @name              s-btn--light
- * @namespace         scss.components.btn.colors
+ * @namespace         sugar.scss.components.btn.colors
  * @type              Classname
  *
  * This class can be applied on any ```btn``` component to specify his color to ```light```
@@ -6729,7 +7325,7 @@ s-btn--light:hover {
 
 /**
  * @name              s-btn--dark
- * @namespace         scss.components.btn.colors
+ * @namespace         sugar.scss.components.btn.colors
  * @type              Classname
  *
  * This class can be applied on any ```btn``` component to specify his color to ```dark```
@@ -6752,7 +7348,7 @@ s-btn--dark:hover {
 
 /**
  * @name              s-btn--primary
- * @namespace         scss.components.btn.colors
+ * @namespace         sugar.scss.components.btn.colors
  * @type              Classname
  *
  * This class can be applied on any ```btn``` component to specify his color to ```primary```
@@ -6775,7 +7371,7 @@ s-btn--primary:hover {
 
 /**
  * @name              s-btn--secondary
- * @namespace         scss.components.btn.colors
+ * @namespace         sugar.scss.components.btn.colors
  * @type              Classname
  *
  * This class can be applied on any ```btn``` component to specify his color to ```secondary```
@@ -6798,7 +7394,7 @@ s-btn--secondary:hover {
 
 /**
  * @name              s-btn--success
- * @namespace         scss.components.btn.colors
+ * @namespace         sugar.scss.components.btn.colors
  * @type              Classname
  *
  * This class can be applied on any ```btn``` component to specify his color to ```success```
@@ -6821,7 +7417,7 @@ s-btn--success:hover {
 
 /**
  * @name              s-btn--warning
- * @namespace         scss.components.btn.colors
+ * @namespace         sugar.scss.components.btn.colors
  * @type              Classname
  *
  * This class can be applied on any ```btn``` component to specify his color to ```warning```
@@ -6844,7 +7440,7 @@ s-btn--warning:hover {
 
 /**
  * @name              s-btn--error
- * @namespace         scss.components.btn.colors
+ * @namespace         sugar.scss.components.btn.colors
  * @type              Classname
  *
  * This class can be applied on any ```btn``` component to specify his color to ```error```
@@ -6867,7 +7463,7 @@ s-btn--error:hover {
 
 /**
  * @name              s-btn--info
- * @namespace         scss.components.btn.colors
+ * @namespace         sugar.scss.components.btn.colors
  * @type              Classname
  *
  * This class can be applied on any ```btn``` component to specify his color to ```info```

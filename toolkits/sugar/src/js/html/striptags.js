@@ -2,7 +2,7 @@ import __striptags from 'striptags';
 
 /**
  * @name        striptags
- * @namespace           js.html
+ * @namespace           sugar.js.html
  * @type      Function
  *
  * Strip tags of an html string.

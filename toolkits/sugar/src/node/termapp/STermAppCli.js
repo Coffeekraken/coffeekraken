@@ -3,7 +3,7 @@ const __STermAppInterface = require('./interface/STermAppInterface');
 
 /**
  * @name            STermAppCli
- * @namespace           node.termapp
+ * @namespace           sugar.node.termapp
  * @type            Class
  * @extends         SCli
  *

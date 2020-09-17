@@ -4,7 +4,7 @@ const __SBuildConfigInterface = require('./interface/SBuildConfigInterface');
 
 /**
  * @name            SBuildConfigCli
- * @namespace           node.build.config
+ * @namespace           sugar.node.build.config
  * @type            Class
  * @extends         SCli
  *

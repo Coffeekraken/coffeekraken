@@ -2,7 +2,7 @@ import ltrim from '../string/ltrim';
 
 /**
  * @name        queryStringToObject
- * @namespace           js.url
+ * @namespace           sugar.js.url
  * @type      Function
  *
  * Transform a query string into his object (key => pairs) representation

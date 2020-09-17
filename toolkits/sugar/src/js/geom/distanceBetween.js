@@ -1,6 +1,6 @@
 /**
  * @name 		distanceBetween
- * @namespace           js.geom.2d
+ * @namespace           sugar.js.geom.2d
  * @type      Function
  *
  * Get the distance between two points

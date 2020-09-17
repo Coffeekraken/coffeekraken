@@ -18,7 +18,7 @@ const __SPromise = require('../promise/SPromise');
 
 /**
  * @name                SCli
- * @namespace           node.cli
+ * @namespace           sugar.node.cli
  * @implements          SCliInterface
  * @type                Class
  *

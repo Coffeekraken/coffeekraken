@@ -1,6 +1,6 @@
 /**
  * @name                          get
- * @namespace           js.object
+ * @namespace           sugar.js.object
  * @type                          Function
  *
  * Retreive an object value using a dotted path like "myObject.myProperty.myValue"

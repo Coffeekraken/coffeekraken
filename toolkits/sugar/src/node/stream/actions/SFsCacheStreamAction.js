@@ -23,7 +23,7 @@ class SFsCacheStreamActionInterface extends __SInterface {
 
 /**
  * @name            SFsCacheStreamAction
- * @namespace           node.stream.actions
+ * @namespace           sugar.node.stream.actions
  * @type            Class
  * @extends         SActionsStreamAction
  *

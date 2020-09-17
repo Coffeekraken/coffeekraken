@@ -1,6 +1,6 @@
 /**
  * @name            parseAuthorString
- * @namespace       js.npm
+ * @namespace       sugar.js.npm
  * @type            Function
  *
  * This function simply take an author string like "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)" and

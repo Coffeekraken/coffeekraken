@@ -3,7 +3,7 @@ import __completeArgsObject from './completeArgsObject';
 
 /**
  * @name                  argsToObject
- * @namespace           js.cli
+ * @namespace           sugar.js.cli
  * @type                  Function
  *
  * This function take a simple object, a definitionObj object and return you the string version that you can pass

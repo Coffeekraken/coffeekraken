@@ -3,7 +3,7 @@ import { decycle } from 'json-cyclic';
 
 /**
  * @name            stringify
- * @namespace       js.json
+ * @namespace       sugar.js.json
  * @type            Function
  *
  * This function do the same as the ```JSON.stringify``` one but add some features.

@@ -2,7 +2,7 @@ const __sugarConfig = require('../config/sugar');
 
 /**
  * @name            classname
- * @namespace       node.css
+ * @namespace       sugar.node.css
  * @type            Function
  *
  * This function take a classname you want to generate and returns you the prefixed (if prefix exists in config.classes) classname

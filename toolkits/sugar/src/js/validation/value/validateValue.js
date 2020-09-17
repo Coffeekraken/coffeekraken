@@ -33,7 +33,7 @@ const _validationsObj = {
 
 /**
  * @name          validateValue
- * @namespace     js.validation.value
+ * @namespace     sugar.js.validation.value
  * @type          Function
  *
  * This function take a value and check if it correspond to the passed definition object.

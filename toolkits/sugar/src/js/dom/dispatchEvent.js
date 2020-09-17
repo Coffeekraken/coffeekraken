@@ -2,7 +2,7 @@ import __SEvent from '../event/SEvent';
 
 /**
  * @name      dispatchEvent
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Helper to quickly display an event with some optional data attached to it

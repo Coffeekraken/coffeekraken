@@ -1,6 +1,6 @@
 /**
  * @name      realHeight
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Return the full height of an element that has maybe a max-height, etc...

@@ -2,7 +2,7 @@
 
 /**
  * @name                    extension
- * @namespace           node.fs
+ * @namespace           sugar.node.fs
  * @type                    Function
  *
  * Return the passed file path extension

@@ -2,7 +2,7 @@ import __get from './get';
 
 /**
  * @name                                        set
- * @namespace           js.object
+ * @namespace           sugar.js.object
  * @type                                        Function
  *
  * Set an object value using a dotted object path like "myObject.myProperty.myValue" to set his position

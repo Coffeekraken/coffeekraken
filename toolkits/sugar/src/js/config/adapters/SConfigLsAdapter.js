@@ -9,7 +9,7 @@ import __diff from '../../object/diff';
 
 /**
  * @name                  SConfigLsAdapter
- * @namespace           js.config.adapters
+ * @namespace           sugar.js.config.adapters
  * @type                  Class
  *
  * This Local Storage adapter for the SConfig class let you define a name for your config and then you can just

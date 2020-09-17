@@ -3,7 +3,7 @@ const __SProcess = require('../../process/SProcess');
 
 /**
  * @name            SFrontendServerProcess
- * @namespace           node.server.frontend
+ * @namespace           sugar.node.server.frontend
  * @type            Class
  * @extends         SProcess
  *

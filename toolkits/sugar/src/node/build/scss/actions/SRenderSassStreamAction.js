@@ -9,7 +9,7 @@ const __SBuildScssInterface = require('../interface/SBuildScssInterface');
 
 /**
  * @name                SRenderSassStreamAction
- * @namespace           node.build.scss.actions
+ * @namespace           sugar.node.build.scss.actions
  * @type                Class
  * @extends             SActionsStreamAction
  *

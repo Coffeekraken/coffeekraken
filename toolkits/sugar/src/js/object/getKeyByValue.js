@@ -1,6 +1,6 @@
 /**
  * @name          getKeyByValue
- * @namespace           js.object
+ * @namespace           sugar.js.object
  * @type          Function
  *
  * Return the key that correspond to the passed value in the passed object

@@ -9,7 +9,7 @@ const __SDocblock = require('./SDocblock');
 
 /**
  * @name                  firstDocblockWithNamespaceInFolder
- * @namespace           node.docblock
+ * @namespace           sugar.node.docblock
  * @type                  Function
  * @async
  *

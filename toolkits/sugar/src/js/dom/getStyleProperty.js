@@ -3,7 +3,7 @@ import autoCast from '../string/autoCast';
 
 /**
  * @name      getStyleProperty
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Get a style property on the passed element through the computed style.

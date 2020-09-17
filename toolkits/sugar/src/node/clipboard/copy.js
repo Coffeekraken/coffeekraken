@@ -3,7 +3,7 @@ const __toString = require('../string/toString');
 
 /**
  * @name            copy
- * @namespace       node.clipboard
+ * @namespace       sugar.node.clipboard
  * @type            Function
  *
  * Simple function to copy things into the system clipboard.

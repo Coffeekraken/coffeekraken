@@ -1,6 +1,6 @@
 /**
  * @name        lowerFirst
- * @namespace           js.string
+ * @namespace           sugar.js.string
  * @type      Function
  *
  * Lower first letter

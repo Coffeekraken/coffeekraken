@@ -2,7 +2,7 @@ const __SAppPage = require('../../blessed/app/SAppPage');
 
 /**
  * @name              STermAppAboutPage
- * @namespace           node.termapp.pages
+ * @namespace           sugar.node.termapp.pages
  * @type              Class
  * @extends           SAppPage
  *

@@ -4,7 +4,7 @@ const __tmpDir = require('temp-dir');
 
 /**
  * @name                            tmpDir
- * @namespace           node.fs
+ * @namespace           sugar.node.fs
  * @type                            Function
  *
  * Return the os temp directory path

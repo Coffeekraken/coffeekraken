@@ -6,7 +6,7 @@ import __deepMerge from '../object/deepMerge';
 
 /**
  * @name                            deepProxy
- * @namespace           js.object
+ * @namespace           sugar.js.object
  * @type                            Function
  *
  * This function allows you to add Proxy to an object in deep fashion.

@@ -11,7 +11,7 @@ const __multiple = require('../class/multipleExtends');
 
 /**
  * @name                  SSidePanel
- * @namespace           node.blessed.panel
+ * @namespace           sugar.node.blessed.panel
  * @type                  Class
  *
  * This class gives you the ability to create a side panel (left, right, tom, bottom) that can contain any other content

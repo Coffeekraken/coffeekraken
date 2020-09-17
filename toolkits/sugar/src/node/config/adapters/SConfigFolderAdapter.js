@@ -7,7 +7,7 @@ const __SConfigAdapter = require('./SConfigAdapter');
 
 /**
  * @name                  SConfigFolderAdapter
- * @namespace           node.config.adapters
+ * @namespace           sugar.node.config.adapters
  * @type                  Class
  *
  * This adapter let you specify a folder in which to put all the config files and access it normaly as you would with the SConfig system.

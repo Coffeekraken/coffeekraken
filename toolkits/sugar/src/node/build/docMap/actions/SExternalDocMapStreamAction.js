@@ -7,7 +7,7 @@ const __getFilename = require('../../../fs/filename');
 
 /**
  * @name                SExternalDocMapStreamAction
- * @namespace           node.build.docMap.actions
+ * @namespace           sugar.node.build.docMap.actions
  * @type                Class
  * @extends             SActionsStreamAction
  *

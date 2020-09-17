@@ -1,6 +1,6 @@
 /**
  * @name                              asyncForEach
- * @namespace           js.array
+ * @namespace           sugar.js.array
  * @type                              Function
  *
  * Allow to make some async foreach on your arrays

@@ -3,7 +3,7 @@ import __countLine from './countLine';
 
 /**
  * @name                                        crop
- * @namespace           js.string
+ * @namespace           sugar.js.string
  * @type                                        Function
  *
  * Allows you to crop a string at a certain length (this length take care of the croping characters like "...")

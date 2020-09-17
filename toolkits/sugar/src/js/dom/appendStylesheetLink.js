@@ -2,7 +2,7 @@ import linkLoaded from './linkLoaded';
 
 /**
  * @name        appendStylesheetLink
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Append a stylesheet link to the page head

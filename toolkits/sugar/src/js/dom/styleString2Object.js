@@ -3,7 +3,7 @@ import __autoCast from '../string/autoCast';
 
 /**
  * @name      styleString2Object
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Transform a style string to an object representation

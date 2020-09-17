@@ -7,7 +7,7 @@ import __toString from '../string/toString';
 
 /**
  * @name                                SHashCache
- * @namespace           js.cache
+ * @namespace           sugar.js.cache
  * @type                                Class
  * @extends           SCache
  *
@@ -23,6 +23,7 @@ import __toString from '../string/toString';
  * });
  * cache.set('myCoolCacheItem', someData);
  *
+ * @since     2.0.0
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default class SHashCache extends __SCache {

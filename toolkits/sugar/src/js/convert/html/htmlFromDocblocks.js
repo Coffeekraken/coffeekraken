@@ -4,7 +4,7 @@ import __SDocblock from '../../docblock/SDocblock';
 
 /**
  * @name            htmlFromDocblocks
- * @namespace       js.convert
+ * @namespace       sugar.js.convert
  * @type            Function
  *
  * Take a markdown string as input and convert it to HTML.

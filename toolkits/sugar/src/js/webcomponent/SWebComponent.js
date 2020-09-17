@@ -16,7 +16,7 @@ import __SLitHtmlWebComponent from './SLitHtmlWebComponent';
 
 /**
  * @name              SWebComponent
- * @namespace           js.webcomponent
+ * @namespace           sugar.js.webcomponent
  * @type              Class
  * @extends           HTMLElement
  *

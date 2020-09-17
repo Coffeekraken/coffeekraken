@@ -1,6 +1,6 @@
 /**
  * @name                          toPlainObject
- * @namespace           js.class
+ * @namespace          sugar.js.class
  * @type                          Function
  *
  * This function take a instance as parameter and return a plain object of it

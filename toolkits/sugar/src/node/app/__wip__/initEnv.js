@@ -4,7 +4,7 @@ const __fs = require('fs');
 
 /**
  * @name                          initEnv
- * @namespace           node.app
+ * @namespace           sugar.node.app
  * @type                          Function
  *
  * Init the node environment by initialising "dotenv", "envinfo" and beautify the errors display.

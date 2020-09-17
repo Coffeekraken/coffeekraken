@@ -1,7 +1,7 @@
 import _get from 'lodash/get';
 /**
  * @name        propertyProxy
- * @namespace           js.object
+ * @namespace           sugar.js.object
  * @type      Function
  *
  * Create a proxy for and object property.

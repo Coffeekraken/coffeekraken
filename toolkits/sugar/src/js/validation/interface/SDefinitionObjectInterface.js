@@ -2,7 +2,7 @@ import __validateObject from '../object/validateObject';
 
 /**
  * @name                SDefinitionObjectInterface
- * @namespace           js.validation.object.interface
+ * @namespace           sugar.js.validation.object.interface
  * @type                Class
  * @extends             SInterface
  *

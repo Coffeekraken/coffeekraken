@@ -2,7 +2,7 @@ import __deepMerge from '../../object/deepMerge';
 
 /**
  * @name                                SCacheAdapter
- * @namespace           js.cache.cacheAdapters
+ * @namespace           sugar.js.cache.cacheAdapters
  * @type                                Class
  *
  * Base class for SCache adapters
@@ -28,6 +28,7 @@ import __deepMerge from '../../object/deepMerge';
  *    }
  * }
  *
+ * @since     2.0.0
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = class SCacheAdapter {

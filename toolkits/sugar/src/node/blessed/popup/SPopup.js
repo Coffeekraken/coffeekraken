@@ -9,7 +9,7 @@ const __SPromise = require('../../promise/SPromise');
 
 /**
  * @name                  SPopup
- * @namespace           node.blessed.popup
+ * @namespace           sugar.node.blessed.popup
  * @type                  Class
  *
  * This class is the base one for all the sugar blessed components like input, panel, etc...

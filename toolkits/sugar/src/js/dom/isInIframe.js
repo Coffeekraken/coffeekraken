@@ -2,7 +2,7 @@
 
 /**
  * @name      isInIframe
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Check if the page is loaded inside an iframe

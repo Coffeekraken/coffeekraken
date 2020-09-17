@@ -2,7 +2,7 @@ import __SPromise from '../promise/SPromise';
 
 /**
  * @name      detectInOutDirection
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Detect the mouse direction when entered on the passed element. The direction can be up, down, left or right and will be passed to the two callbacks available.

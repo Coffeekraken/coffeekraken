@@ -5,7 +5,7 @@ const __SFsDeamonInterface = require('./interface/SFsDeamonInterface');
 
 /**
  * @name            SFsDeamonCli
- * @namespace           node.deamon.fs
+ * @namespace           sugar.node.deamon.fs
  * @type            Class
  * @extends         SCli
  *

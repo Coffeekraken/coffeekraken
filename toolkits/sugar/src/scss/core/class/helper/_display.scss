@@ -3,7 +3,7 @@
   @if class-match-namespace("sugar.helper.display.block") {
     /**
     * @name 		#{sel(block)}
-    * @namespace             scss.core.class.helper
+    * @namespace             sugar.scss.core.class.helper
     * @class-namespace         sugar.helper.display.block
     * @type        class
     *
@@ -24,7 +24,7 @@
   @if class-match-namespace("sugar.helper.display.inline") {
     /**
     * @name 		#{sel(inline)}
-    * @namespace             scss.core.class.helper
+    * @namespace             sugar.scss.core.class.helper
     * @class-namespace         sugar.helper.display.inline
     * @type        class
     *
@@ -45,7 +45,7 @@
   @if class-match-namespace("sugar.helper.display.inline-block") {
     /**
     * @name 		#{sel(inline-block)}
-    * @namespace             scss.core.class.helper
+    * @namespace             sugar.scss.core.class.helper
     * @class-namespace         sugar.helper.display.inline-block
     * @type        class
     *
@@ -66,7 +66,7 @@
   @if class-match-namespace("sugar.helper.display.show") {
     /**
     * @name 		#{sel(show)}
-    * @namespace             scss.core.class.helper
+    * @namespace             sugar.scss.core.class.helper
     * @class-namespace         sugar.helper.display.show
     * @type        class
     *
@@ -87,7 +87,7 @@
   @if class-match-namespace("sugar.helper.display.show-inline") {
     /**
     * @name 		#{sel(show-inline)}
-    * @namespace             scss.core.class.helper
+    * @namespace             sugar.scss.core.class.helper
     * @class-namespace         sugar.helper.display.show-inline
     * @type        class
     *
@@ -108,7 +108,7 @@
   @if class-match-namespace("sugar.helper.display.hidden") {
     /**
     * @name 		#{sel(hidden)}
-    * @namespace             scss.core.class.helper
+    * @namespace             sugar.scss.core.class.helper
     * @class-namespace         sugar.helper.display.hidden
     * @type        class
     *
@@ -129,7 +129,7 @@
   @if class-match-namespace("sugar.helper.display.hide") {
     /**
     * @name 		#{sel(hide)}
-    * @namespace             scss.core.class.helper
+    * @namespace             sugar.scss.core.class.helper
     * @class-namespace         sugar.helper.display.hide
     * @type        class
     *
@@ -150,7 +150,7 @@
   @if class-match-namespace("sugar.helper.display.visible") {
     /**
     * @name 		#{sel(visible)}
-    * @namespace             scss.core.class.helper
+    * @namespace             sugar.scss.core.class.helper
     * @class-namespace         sugar.helper.display.visible
     * @type        class
     *
@@ -171,7 +171,7 @@
   @if class-match-namespace("sugar.helper.display.invisible") {
     /**
     * @name 		#{sel(invisible)}
-    * @namespace             scss.core.class.helper
+    * @namespace             sugar.scss.core.class.helper
     * @class-namespace         sugar.helper.display.invisible
     * @type        class
     *
@@ -194,7 +194,7 @@
   ) {
     /**
     * @name 		#{sel(visually-hidden)}
-    * @namespace             scss.core.class.helper
+    * @namespace             sugar.scss.core.class.helper
     * @class-namespace         sugar.helper.display.visually-hidden
     * @type        class
     *

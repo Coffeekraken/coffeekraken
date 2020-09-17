@@ -7,7 +7,7 @@ import scrollTo from './scrollTo';
 
 /**
  * @name        autoScrollAnchorLinks
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Listen for links contains an hash to init them for scroll to target on click

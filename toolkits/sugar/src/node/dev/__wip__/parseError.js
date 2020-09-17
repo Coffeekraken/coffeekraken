@@ -1,6 +1,6 @@
 /**
  * @name                                  parseError
- * @namespace           node.dev
+ * @namespace           sugar.node.dev
  * @type                                  Function
  *
  * Parse an error throwed in the terminal and return a nicely formated object like this:

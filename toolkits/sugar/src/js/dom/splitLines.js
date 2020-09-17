@@ -3,7 +3,7 @@ import __throttle from '../function/throttle';
 
 /**
  * @name      splitLines
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Split each lines inside an HTMLElement by scoping them inside some tags.

@@ -14,7 +14,7 @@ const __SBuildJsInterface = require('../interface/SBuildJsInterface');
 
 /**
  * @name                SWebpackStreamAction
- * @namespace           node.build.js.actions
+ * @namespace           sugar.node.build.js.actions
  * @type                Class
  * @extends             SActionsStreamAction
  *

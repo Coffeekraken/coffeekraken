@@ -2,7 +2,7 @@ import __parseString from '../string/parse';
 
 /**
  * @name                                parseSchema
- * @namespace           js.url
+ * @namespace           sugar.js.url
  * @type                                Function
  *
  * This function take two arguments. The first one is the url to parse and the second is a schema to scan the url with.

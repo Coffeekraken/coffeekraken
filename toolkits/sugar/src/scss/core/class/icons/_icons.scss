@@ -4,7 +4,7 @@
   @each $name in $icons {
      /**
       * @name 		#{sel(icon-#{$name})}
-      * @namespace       scss.core.class.icons
+      * @namespace       sugar.scss.core.class.icons
       * @type        class
       *
       * ```.icon-#{$name}``` icon class

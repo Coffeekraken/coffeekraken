@@ -8,7 +8,7 @@ const __countLine = require('../string/countLine');
 
 /**
  * @name                  SFooter
- * @namespace           node.blessed
+ * @namespace           sugar.node.blessed
  * @type                  Class
  *
  * This class represent a footer that you can add to your blessed based UI

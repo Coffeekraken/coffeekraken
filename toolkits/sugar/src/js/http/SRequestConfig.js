@@ -2,7 +2,7 @@ import __convert from '../time/convert';
 
 /**
  * @name 	              	SRequestConfig
- * @namespace           js.http
+ * @namespace           sugar.js.http
  * @type                  Class
  *
  * Class that represent an ajax request that will be passed to an SRequest instance.

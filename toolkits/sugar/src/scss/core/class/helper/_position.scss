@@ -3,7 +3,7 @@
   @if class-match-namespace("sugar.helper.position.relative") {
     /**
     * @name 		#{sel(relative)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.position.relative
     * @type        class
     *
@@ -26,7 +26,7 @@
   @if class-match-namespace("sugar.helper.position.absolute") {
     /**
     * @name 		#{sel(absolute)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.position.absolute
     * @type        class
     *
@@ -49,7 +49,7 @@
   @if class-match-namespace("sugar.helper.position.fixed") {
     /**
     * @name 		#{sel(fixed)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.position.fixed
     * @type        class
     *
@@ -74,7 +74,7 @@
   @if class-match-namespace("sugar.helper.position.fixed.top") {
     /**
     * @name 		#{sel(fixed-top)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.position.fixed.top
     * @type        class
     *
@@ -99,7 +99,7 @@
   @if class-match-namespace("sugar.helper.position.fixed.bottom") {
     /**
     * @name 		#{sel(fixed-bottom)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.position.fixed.bottom
     * @type        class
     *
@@ -124,7 +124,7 @@
   @if class-match-namespace("sugar.helper.position.sticky") {
     /**
     * @name 		#{sel(sticky)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.position.sticky
     * @type        class
     *
@@ -149,7 +149,7 @@
   @if class-match-namespace("sugar.helper.position.sticky.top") {
     /**
     * @name 		#{sel(sticky-top)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.position.sticky.top
     * @type        class
     *

@@ -5,7 +5,7 @@ import __isNode from '../is/node';
 
 /**
  * @name                                SCache
- * @namespace           js.cache
+ * @namespace           sugar.js.cache
  * @type                                Class
  *
  * Gives you the ability to manage cache through some defaults available adapters or using yours.
@@ -20,6 +20,7 @@ import __isNode from '../is/node';
  * });
  * cache.set('myCoolCacheItem', someData);
  *
+ * @since     2.0.0
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default class SCache {

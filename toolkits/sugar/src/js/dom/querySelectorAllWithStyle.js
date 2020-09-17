@@ -2,7 +2,7 @@ import getStyleProperty from './getStyleProperty';
 
 /**
  * @name      querySelectorAllWithStyle
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Select all node that match the style object passed as parameter

@@ -1,9 +1,9 @@
 /**
  * @name      vertical-rhythm-scope
- * @namespace           scss.core.typography
+ * @namespace           sugar.scss.core.typography
  * @type      mixin
  *
- * Scope the content inside the `settings.typography.vertical-rhythm-scope-class` class
+ * Scope the content inside the `settings.typography.vertical-rhythm-class` class
  *
  * @example       scss
  * .my-cool-item {
@@ -17,7 +17,7 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @mixin vertical-rhythm-scope() {
-  $sc: setting("typography.vertical-rhythm-scope-class");
+  $sc: setting("typography.vertical-rhythm-class");
   @if $sc {
     @each $cls in $sc {
       &#{$cls},

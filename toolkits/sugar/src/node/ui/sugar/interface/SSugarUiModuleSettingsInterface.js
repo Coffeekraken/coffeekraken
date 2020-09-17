@@ -1,7 +1,7 @@
 const __SInterface = require('../../../class/SInterface');
 /**
  * @name                SSugarUiModuleSettingsInterface
- * @namespace           node.ui.sugar.interface
+ * @namespace           sugar.node.ui.sugar.interface
  * @type                Class
  * @extends             SInterface
  *

@@ -6,7 +6,7 @@ const __extension = require('../../../fs/extension');
 
 /**
  * @name                SDocMapStreamActions
- * @namespace           node.build.docMap.actions
+ * @namespace           sugar.node.build.docMap.actions
  * @type                Class
  * @extends             SActionsStreamAction
  *

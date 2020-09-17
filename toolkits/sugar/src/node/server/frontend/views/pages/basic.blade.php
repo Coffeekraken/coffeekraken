@@ -3,15 +3,26 @@
 
 @section('content')
 
-  <section class="{{ $tf->class }}">
+    @foreach($sections as $section)
+        
+        <section>
 
-    <h1>{{ $h1->value }}</h1>
-    <h2>{{ $h2->value }}</h2>
-    <h3>{{ $h3->value }}</h3>
-    <h4>{{ $h4->value }}</h4>
-    <h5>{{ $h5->value }}</h5>
-    <h6>{{ $h6->value }}</h6>
+            <h2 class="s-h2">{{ $section->title }}</h2>
+            <p class="s-p">{{ $section->description }}</p>
 
-  </section>
+            @foreach($section->samples as $sample)
+
+
+                <h3 class="s-h3">
+                    <code class="css"></code>
+                </h3>
+                {!! $sample->code !!}
+                <textarea id="editor">{!! $sample->code !!}</textarea>
+
+            @endforeach
+
+        </section>
+
+    @endforeach
 
 @endsection

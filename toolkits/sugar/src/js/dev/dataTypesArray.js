@@ -2,7 +2,7 @@ import __isNode from '../is/node';
 
 /**
  * @name                    dataTypesArray
- * @namespace           js.dev
+ * @namespace           sugar.js.dev
  * @type                    Array
  *
  * This is just a list of data types available in the

@@ -2,7 +2,7 @@ const __SPromise = require('../promise/SPromise');
 
 /**
  * @name        dispatch
- * @namespace           node.event
+ * @namespace           sugar.node.event
  * @type          Function
  *
  * This function can ben used to dispatch an event globally.

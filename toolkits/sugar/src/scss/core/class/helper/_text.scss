@@ -5,7 +5,7 @@
       @if class-match-namespace("sugar.helper.text.#{$size}") {
         /**
           * @name       	#{sel(t-#{$size})}
-          * @namespace       scss.core.class
+          * @namespace       sugar.scss.core.class
           * @class-namespace           sugar.helper.text.#{$size}
           * @type        class
           *
@@ -28,7 +28,7 @@
       @if class-match-namespace("sugar.helper.text.rel.#{$size}") {
         /**
           * @name       	#{sel(t-#{$size}-rel)}
-          * @namespace       scss.core.class
+          * @namespace       sugar.scss.core.class
           * @class-namespace           sugar.helper.text.rel.#{$size}
           * @type        class
           *
@@ -54,7 +54,7 @@
   @if class-match-namespace("sugar.helper.text.hidden") {
     /**
     * @name 		#{sel(t-hidden)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.text.hidden
     * @type        class
     *
@@ -75,7 +75,7 @@
   @if class-match-namespace("sugar.helper.text.truncate") {
     /**
     * @name 		#{sel(t-truncate)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.text.truncate
     * @type        class
     *
@@ -96,7 +96,7 @@
   @if class-match-namespace("sugar.helper.text.align.left") {
     /**
     * @name 		#{sel(t-left)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.text.align.left
     * @type        class
     *
@@ -117,7 +117,7 @@
   @if class-match-namespace("sugar.helper.text.align.right") {
     /**
     * @name 		#{sel(t-right)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.text.align.right
     * @type        class
     *
@@ -138,7 +138,7 @@
   @if class-match-namespace("sugar.helper.text.align.center") {
     /**
     * @name 		#{sel(t-center)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.text.align.center
     * @type        class
     *
@@ -159,7 +159,7 @@
   @if class-match-namespace("sugar.helper.text.align.justify") {
     /**
     * @name 		#{sel(t-justify)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.text.align.justify
     * @type        class
     *
@@ -182,7 +182,7 @@
   ) {
     /**
     * @name 		#{sel(t-lowercase)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.text.transform.lowercase
     * @type        class
     *
@@ -205,7 +205,7 @@
   ) {
     /**
     * @name 		#{sel(t-uppercase)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.text.transform.uppercase
     * @type        class
     *
@@ -228,7 +228,7 @@
   ) {
     /**
     * @name 		#{sel(t-capitalize)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.text.transform.capitalize
     * @type        class
     *
@@ -253,7 +253,7 @@
   ) {
     /**
     * @name 		#{sel(t-bold)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.text.weight.bold
     * @type        class
     *
@@ -278,7 +278,7 @@
   ) {
     /**
     * @name 		#{sel(t-bolder)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.text.weight.bolder
     * @type        class
     *
@@ -303,7 +303,7 @@
   ) {
     /**
     * @name 		#{sel(t-normal)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.text.weight.normal
     * @type        class
     *
@@ -328,7 +328,7 @@
   ) {
     /**
     * @name 		#{sel(t-light)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.text.weight.light
     * @type        class
     *
@@ -353,7 +353,7 @@
   ) {
     /**
     * @name 		#{sel(t-lighter)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.text.weight.lighter
     * @type        class
     *
@@ -378,7 +378,7 @@
   ) {
     /**
     * @name 		#{sel(t-italic)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.text.style.italic
     * @type        class
     *
@@ -406,7 +406,7 @@
     ) {
       /**
       * @name 		#{sel(t-#{$name})}
-      * @namespace         scss.core.class.helper
+      * @namespace         sugar.scss.core.class.helper
       * @class-namespace     sugar.helper.text.font.#{$name}
       * @type        class
       *
@@ -432,7 +432,7 @@
   ) {
     /**
     * @name 		#{sel(t-reset)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.text.reset
     * @type        class
     *
@@ -466,7 +466,7 @@
   ) {
     /**
     * @name 		#{sel(t-decoration-none)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.decoration.none
     * @type        class
     *
@@ -491,7 +491,7 @@
   ) {
     /**
     * @name 		#{sel(t-underline)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.text.decoration.underline
     * @type        class
     *
@@ -516,7 +516,7 @@
   ) {
     /**
     * @name 		#{sel(t-line-through)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.text.decoration.line-through
     * @type        class
     *
@@ -541,7 +541,7 @@
   ) {
     /**
     * @name 		#{sel(t-overline)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.text.decoration.overline
     * @type        class
     *

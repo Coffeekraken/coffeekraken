@@ -3,7 +3,7 @@ const __sugarConfig = require('../../config/sugar');
 
 /**
  * @name                SBuildInterface
- * @namespace           node.build.interface
+ * @namespace           sugar.node.build.interface
  * @type                Class
  * @extends             SInterface
  *

@@ -2,7 +2,7 @@ const __fs = require('fs');
 
 /**
  * @name            symlink
- * @namespace           node.is
+ * @namespace           sugar.node.is
  * @type            Function
  *
  * This function check if the passed string path is a sySlink or not

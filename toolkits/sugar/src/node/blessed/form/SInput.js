@@ -8,7 +8,7 @@ const __activeSpace = require('../../core/activeSpace');
 
 /**
  * @name                  SInput
- * @namespace           node.blessed.input
+ * @namespace           sugar.node.blessed.input
  * @type                  Class
  *
  * This class represent a simple input

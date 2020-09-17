@@ -6,7 +6,7 @@ const __packageRoot = require('../../path/packageRoot');
 
 /**
  * @name          moduleAliases
- * @namespace           node.build.js
+ * @namespace           sugar.node.build.js
  * @type          Function
  *
  * This function simply check for all the packages inside the passed rootDir

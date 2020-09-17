@@ -23,7 +23,7 @@ class SFsFilesResolverStreamActionInterface extends __SInterface {
 
 /**
  * @name            SFindInFileStreamAction
- * @namespace       node.stream.actions
+ * @namespace       sugar.node.stream.actions
  * @type            Class
  * @extends         SActionsStreamAction
  *

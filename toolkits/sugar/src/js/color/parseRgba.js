@@ -1,6 +1,6 @@
 /**
  * @name                        parseRgba
- * @namespace           js.color
+ * @namespace           sugar.js.color
  * @type                        Function
  *
  * Parse RGBA string and return an object

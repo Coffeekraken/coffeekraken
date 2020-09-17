@@ -3,6 +3,10 @@ import __trimLines from '../string/trimLines.js';
 import __packageRoot from '../path/packageRoot';
 import __toString from '../string/toString';
 
+/**
+ * @todo    Doc
+ */
+
 export default class SError extends Error {
   constructor(message) {
     super(message);

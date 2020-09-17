@@ -5,7 +5,7 @@ import parse from '../string/parse';
 
 /**
  * @name            aes
- * @namespace           js.crypt
+ * @namespace           sugar.js.crypt
  * @type            Object
  *
  * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the aes algorithm

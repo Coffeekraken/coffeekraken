@@ -5,7 +5,7 @@ const __deepMerge = require('../../../object/deepMerge');
 
 /**
  * @name                SBuildViewsInterface
- * @namespace           node.build.views.interface
+ * @namespace           sugar.node.build.views.interface
  * @type                Class
  * @extends             SInterface
  *

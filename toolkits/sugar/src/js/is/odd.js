@@ -1,6 +1,6 @@
 /**
  * @name        isOdd
- * @namespace           js.is
+ * @namespace           sugar.js.is
  * @type      Function
  *
  * Check if a number is odd or not

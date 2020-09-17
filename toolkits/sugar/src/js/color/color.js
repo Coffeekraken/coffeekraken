@@ -2,7 +2,7 @@ import __SColor from './SColor';
 
 /**
  * @name                color
- * @namespace           js.color
+ * @namespace           sugar.js.color
  * @type                Function
  *
  * Simple wrapper to create an SColor instance quickly

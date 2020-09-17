@@ -3,7 +3,7 @@
   @if class-match-namespace("sugar.helper.clearfix") {
     /**
     * @name 		#{sel(clearfix)}
-    * @namespace           scss.core.class.helper
+    * @namespace           sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.clearfix
     * @type        class
     *
@@ -27,7 +27,7 @@
   @if class-match-namespace("sugar.helper.clearfix.float") {
     /**
     * @name 		#{sel(clearfix-float)}
-    * @namespace           scss.core.class.helper
+    * @namespace           sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.clearfix.float
     * @type        class
     *
@@ -51,7 +51,7 @@
   @if class-match-namespace("sugar.helper.clearfix.micro") {
     /**
     * @name 		#{sel(clearfix-micro)}
-    * @namespace           scss.core.class.helper
+    * @namespace           sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.clearfix.micro
     * @type        class
     *
@@ -75,7 +75,7 @@
   @if class-match-namespace("sugar.helper.clearfix.overflow") {
     /**
     * @name 		#{sel(clearfix-overflow)}
-    * @namespace           scss.core.class.helper
+    * @namespace           sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.clearfix.overflow
     * @type        class
     *
@@ -99,7 +99,7 @@
   @if class-match-namespace("sugar.helper.clearfix.facebook") {
     /**
     * @name 		#{sel(clearfix-facebook)}
-    * @namespace           scss.core.class.helper
+    * @namespace           sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.clearfix.facebook
     * @type        class
     *

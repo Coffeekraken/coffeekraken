@@ -4,7 +4,7 @@ const __parseHtml = require('./parseHtml');
 
 /**
  * @name                                parseMarkdown
- * @namespace           node.terminal
+ * @namespace           sugar.node.terminal
  * @type                                Function
  *
  * Parse the simple markdown tags to format the terminal message

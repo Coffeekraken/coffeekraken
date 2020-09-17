@@ -2,7 +2,7 @@ import __deepMerge from '../object/deepMerge';
 
 /**
  * @name          trimLines
- * @namespace     js.string
+ * @namespace     sugar.js.string
  * @type          Function
  *
  * This function take a string and trim each lines

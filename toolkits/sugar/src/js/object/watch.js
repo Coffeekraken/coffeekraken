@@ -3,7 +3,7 @@ import __uniqid from '../string/uniqid';
 
 /**
  * @name                      watch
- * @namespace           js.object
+ * @namespace           sugar.js.object
  * @type                      Function
  *
  * This method is a simple wrapper around the SWatch class that allows you to watch some action on object and arrays

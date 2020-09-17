@@ -3,7 +3,7 @@ import __isEqual from 'is-equal';
 
 /**
  * @name                      diff
- * @namespace           js.object
+ * @namespace           sugar.js.object
  * @type                      Function
  *
  * This function take two objects and return an object that contains only what has been changed between the two.

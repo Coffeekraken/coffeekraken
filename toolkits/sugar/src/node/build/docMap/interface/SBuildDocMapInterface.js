@@ -5,7 +5,7 @@ const __deepMerge = require('../../../object/deepMerge');
 
 /**
  * @name                SBuildDocMapInterface
- * @namespace           node.build.docMap.interface
+ * @namespace           sugar.node.build.docMap.interface
  * @type                Class
  * @extends             SInterface
  *

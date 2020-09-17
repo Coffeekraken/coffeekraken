@@ -1,6 +1,6 @@
 /**
  * @name            toString
- * @namespace           js.html
+ * @namespace           sugar.js.html
  * @type      Function
  *
  * Return the string version of a dom node or the dom node and his children

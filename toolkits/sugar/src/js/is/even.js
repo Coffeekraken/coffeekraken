@@ -1,6 +1,6 @@
 /**
  * @name        isEven
- * @namespace           js.is
+ * @namespace           sugar.js.is
  * @type      Function
  *
  * Check if a number is even or not

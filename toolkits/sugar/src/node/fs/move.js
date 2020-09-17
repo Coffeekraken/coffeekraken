@@ -4,7 +4,7 @@ const __fs = require('fs-extra');
 
 /**
  * @name        move
- * @namespace           node.fs
+ * @namespace           sugar.node.fs
  * @type          Function
  *
  * Moves a file or directory, even across devices (async)

@@ -3,7 +3,7 @@ const __SSugarUi = require('./SSugarUI');
 
 /**
  * @name            SSugarUiProcess
- * @namespace           node.ui.sugar
+ * @namespace           sugar.node.ui.sugar
  * @type            Class
  * @extends         SProcess
  *

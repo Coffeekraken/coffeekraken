@@ -4,7 +4,7 @@ const __fs = require('fs-extra');
 
 /**
  * @name        ensureDir
- * @namespace           node.fs
+ * @namespace           sugar.node.fs
  * @type          Function
  * @async
  *

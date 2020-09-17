@@ -3,7 +3,7 @@ const __parseError = require('./parseError');
 
 /**
  * @name                              beautifyErrors
- * @namespace           node.dev
+ * @namespace           sugar.node.dev
  * @type                              Function
  *
  * Catch the basic errors from the node process and render them to be more readable

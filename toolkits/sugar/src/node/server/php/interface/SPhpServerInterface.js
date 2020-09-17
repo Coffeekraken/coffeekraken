@@ -3,7 +3,7 @@ const __sugarConfig = require('../../../config/sugar');
 
 /**
  * @name                SPhpServerInterface
- * @namespace           node.server.php.interface
+ * @namespace           sugar.node.server.php.interface
  * @type                Class
  * @extends             SInterface
  *

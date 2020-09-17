@@ -7,7 +7,7 @@ const __childProcess = require('child_process');
 
 /**
  * @name            STestJestProcess
- * @namespace           node.test.jest
+ * @namespace           sugar.node.test.jest
  * @type            Class
  * @extends         SProcess
  *

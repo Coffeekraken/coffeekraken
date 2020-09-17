@@ -2,7 +2,7 @@ import __sprintf from 'sprintf-js';
 
 /**
  * @name        printf
- * @namespace           js.string
+ * @namespace           sugar.js.string
  * @type      Function
  *
  * printf php equavalent

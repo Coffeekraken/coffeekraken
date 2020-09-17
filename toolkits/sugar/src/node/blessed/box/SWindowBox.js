@@ -13,7 +13,7 @@ const __escapeStack = require('../../terminal/escapeStack');
 
 /**
  * @name                  SWindowBox
- * @namespace           node.blessed.box
+ * @namespace           sugar.node.blessed.box
  * @type                  Class
  *
  * This class gives you the ability to display windowed style boxes with a header, a body and a footer

@@ -1,5 +1,5 @@
 /**
- * @namespace           node.validation.object
+ * @namespace           sugar.node.validation.object
  * @src             ../../../js/validation/object/validateObjectOutputString
  */
 module.exports = require('../../../../js/validation/object/validateObjectOutputString');

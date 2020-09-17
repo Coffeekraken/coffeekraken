@@ -3,7 +3,7 @@
   @if class-match-namespace("sugar.helper.vertical-align.top") {
     /**
     * @name 		.#{sel(align-top)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.vertical-align.top
     * @type        class
     *
@@ -28,7 +28,7 @@
   @if class-match-namespace("sugar.helper.vertical-align.bottom") {
     /**
     * @name 		.#{sel(align-bottom)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.vertical-align.bottom
     * @type        class
     *
@@ -53,7 +53,7 @@
   @if class-match-namespace("sugar.helper.vertical-align.middle") {
     /**
     * @name 		.#{sel(align-middle)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.vertical-align.middle
     * @type        class
     *
@@ -77,7 +77,7 @@
   @if class-match-namespace("sugar.helper.vertical-align.baseline") {
     /**
     * @name 		.#{sel(align-baseline)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.vertical-align.baseline
     * @type        class
     *
@@ -102,7 +102,7 @@
   @if class-match-namespace("sugar.helper.vertical-align.text-top") {
     /**
     * @name 		#{sel(align-text-top)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.vertical-align.text-top
     * @type        class
     *
@@ -127,7 +127,7 @@
   @if class-match-namespace("sugar.helper.vertical-align.text-bottom") {
     /**
     * @name 		#{sel(align-text-bottom)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.vertical-align.text-bottom
     * @type        class
     *

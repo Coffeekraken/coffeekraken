@@ -1,6 +1,8 @@
 const __SActionsStreamAction = require('../SActionsStreamAction');
 const __packageRoot = require('../../path/packageRoot');
+const __packageJson = require('../../package/json');
 const __fs = require('fs');
+const __removeSync = require('../../fs/removeSync');
 const __ensureDirSync = require('../../fs/ensureDirSync');
 const __deepMerge = require('../../object/deepMerge');
 const __md5 = require('../../crypt/md5');
@@ -22,7 +24,7 @@ class SExtractDocblocksIntoFilesInterface extends __SInterface {
 
 /**
  * @name            SExtractDocblocksIntoFiles
- * @namespace           node.stream.actions
+ * @namespace           sugar.node.stream.actions
  * @type            Class
  * @extends         SActionsStreamAction
  *
@@ -90,6 +92,11 @@ module.exports = class SExtractDocblocksIntoFiles extends __SActionsStreamAction
       streamObj.extractDocblocksIntoFiles = {};
       let currentNamespace = null;
 
+      __removeSync(`${streamObj.outputDir}/doc`);
+
+      const packageJson = __packageJson();
+      const packageName = packageJson.name.split('/').slice(-1)[0];
+
       blocks.forEach((block, i) => {
         const namespaceReg = /\s?@namespace\s{1,9999999}([a-zA-Z0-9_.-]+)\s/gm;
         const namespaceMatches = block.match(namespaceReg);
@@ -102,6 +109,9 @@ module.exports = class SExtractDocblocksIntoFiles extends __SActionsStreamAction
         namespace = namespace.replace('@namespace', '').trim();
         name = name.replace('@name', '').trim();
         const fullName = `${namespace}.${name}`.split('.').join('/');
+
+        const packageNameReg = new RegExp(`^${packageName}.`, 'gm');
+        if (!fullName.match(packageNameReg)) return;
 
         if (!streamObj.extractDocblocksIntoFiles[fullName])
           streamObj.extractDocblocksIntoFiles[fullName] = '';

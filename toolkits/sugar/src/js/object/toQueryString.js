@@ -1,6 +1,6 @@
 /**
  * @name        toQueryString
- * @namespace           js.object
+ * @namespace           sugar.js.object
  * @type      Function
  *
  * Transform an object (key => pairs) to a query string like "?var1=value1&var2"

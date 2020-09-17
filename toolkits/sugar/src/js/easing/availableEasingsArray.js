@@ -1,6 +1,6 @@
 /**
  * @name            availableEasingsArray
- * @namespace           js.easing
+ * @namespace           sugar.js.easing
  * @type            Function
  *
  * This function simply return back an array of all the available easings function in the sugar toolkit

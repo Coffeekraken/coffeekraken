@@ -2,7 +2,7 @@ const __SPromise = require('../../promise/SPromise');
 
 /**
  * @name          json
- * @namespace     node.template.dataHandlers
+ * @namespace     sugar.node.template.dataHandlers
  * @type          Function
  *
  * This function simply take the .data.json file path and return

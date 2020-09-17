@@ -2,7 +2,7 @@ import scriptLoaded from './scriptLoaded';
 
 /**
  * @name        appendScriptTag
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Append a script tag either to the head or the body

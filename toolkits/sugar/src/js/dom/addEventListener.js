@@ -2,7 +2,7 @@ import __SPromise from '../promise/SPromise';
 
 /**
  * @name        addEventListener
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Add an event listener on an element and return the function to remove the event listener

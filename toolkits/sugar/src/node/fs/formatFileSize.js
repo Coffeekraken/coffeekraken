@@ -4,7 +4,7 @@ const __filesize = require('filesize');
 
 /**
  * @name                                    formatFileSize
- * @namespace           node.fs
+ * @namespace           sugar.node.fs
  * @type                                    Function
  *
  * Transform into human readable string a file size from a number (float or integer) or string.

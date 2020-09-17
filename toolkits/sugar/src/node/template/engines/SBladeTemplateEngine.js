@@ -12,7 +12,7 @@ const __childProcess = require('child_process');
 
 /**
  * @name          SBladeTemplateEngine
- * @namespace     node.template.engines
+ * @namespace     sugar.node.template.engines
  * @type          Class
  *
  * This class represent the blade php template engine that you can use by itself through this class, or through the ```STemplate``` class

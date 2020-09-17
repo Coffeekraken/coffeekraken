@@ -3,7 +3,7 @@ import __deepMerge from '../object/deepMerge';
 
 /**
  * @name            deepMap
- * @namespace           js.object
+ * @namespace           sugar.js.object
  * @type            Function
  *
  * This function is the same as the "map" one. The only difference is that this one goes deep into the object

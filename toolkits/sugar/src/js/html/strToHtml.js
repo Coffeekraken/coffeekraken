@@ -1,6 +1,6 @@
 /**
  * @name        strToHtml
- * @namespace           js.html
+ * @namespace           sugar.js.html
  * @type      Function
  *
  * Return the html (dom) version of a string

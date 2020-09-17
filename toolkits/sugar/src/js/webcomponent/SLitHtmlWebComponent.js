@@ -18,7 +18,7 @@ import { until } from 'lit-html/directives/until.js';
 
 /**
  * @name              SLitHtmlWebComponent
- * @namespace           js.webcomponent
+ * @namespace           sugar.js.webcomponent
  * @type              Class
  * @extends           SWebComponent
  *

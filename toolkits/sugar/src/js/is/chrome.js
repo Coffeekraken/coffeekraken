@@ -1,6 +1,6 @@
 /**
  * @name        isChrome
- * @namespace           js.is
+ * @namespace           sugar.js.is
  * @type      Function
  *
  * Detect if is chrome

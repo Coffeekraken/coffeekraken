@@ -4,7 +4,7 @@ __chalk.level = 3;
 
 /**
  * @name                                parseHtml
- * @namespace           js.console
+ * @namespace          sugar.js.console
  * @type                                Function
  *
  * Parse the simple html tags to format the console message

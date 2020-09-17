@@ -4,7 +4,7 @@ const __isClass = require('../is/class');
 
 /**
  * @name                                SRouter
- * @namespace           node.terminal
+ * @namespace           sugar.node.terminal
  * @type                                Class
  *
  * Provide a simple router class to switch between pages in the terminal

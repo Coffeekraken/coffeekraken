@@ -7,7 +7,7 @@ const { stream } = require('globby');
 
 /**
  * @name                SSugarJsonStreamAction
- * @namespace           node.build.actions
+ * @namespace           sugar.node.build.actions
  * @type                Class
  * @extends             SActionsStreamAction
  *

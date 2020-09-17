@@ -61,7 +61,7 @@ module.exports = {
   'line-letters-count': 55,
 
   /**
-   * @name              text-format-scope-class
+   * @name              text-format-class
    * @namespace         config.typography
    * @type              String
    * @default           tf
@@ -72,10 +72,10 @@ module.exports = {
    * @see               https://www.npmjs.com/package/modularscale-sass
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  'text-format-scope-class': 'tf',
+  'text-format-class': 'tf',
 
   /**
-   * @name              vertical-rhythm-scope-class
+   * @name              vertical-rhythm-class
    * @namespace         config.typography
    * @type              String
    * @default           vr
@@ -85,10 +85,10 @@ module.exports = {
    * @since             1.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  'vertical-rhythm-scope-class': 'vr',
+  'vertical-rhythm-class': 'vr',
 
   /**
-   * @name            formats
+   * @name            titles
    * @namespace       config.typography
    * @type            Object
    * @default         {}
@@ -99,7 +99,7 @@ module.exports = {
    * @since           1.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  formats: {
+  titles: {
     h1: {
       'font-family': 'title',
       'font-size': 'bigger'
@@ -123,19 +123,40 @@ module.exports = {
     h6: {
       'font-family': 'title',
       'font-size': 'smaller'
-    },
-    p: {
+    }
+  },
+
+  /**
+   * @name            paragraphs
+   * @namespace       config.typography
+   * @type            Object
+   * @default         {}
+   *
+   * Set the typography classes parameters like for all the paragraphs.
+   * These will gives you access to classes formated like that: s-p--#{$key} => s-p, s-p--head, etc...
+   *
+   * @since           1.0.0
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  paragraphs: {
+    default: {
       'font-family': 'title',
       'font-size': 'medium',
       'line-height': '2rem'
     },
-    blockquote: {
-      'font-family': 'code',
-      'font-size': 'default'
-    },
-    code: {
-      'font-family': 'code',
-      'font-size': 'default'
+    head: {
+      'font-family': 'default',
+      'font-size': 'big',
+      'line-height': '3rem'
     }
   }
+  // blockquote: {
+  //   'font-family': 'code',
+  //   'font-size': 'default'
+  // },
+  // code: {
+  //   'font-family': 'code',
+  //   'font-size': 'default'
+  // }
+  // }
 };

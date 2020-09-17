@@ -13,7 +13,7 @@ import __set from '../object/set';
 
 /**
  * @name              SInterface
- * @namespace           js.class
+ * @namespace           sugar.js.class
  * @type              Function
  *
  * This class allows you to define an interface that you can later apply to an object instance

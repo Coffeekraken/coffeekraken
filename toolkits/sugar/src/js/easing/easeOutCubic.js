@@ -1,6 +1,6 @@
 /**
  * @name      easeOutCubic
- * @namespace           js.easing
+ * @namespace           sugar.js.easing
  * @type      Function
  *
  * Ease out cubic function

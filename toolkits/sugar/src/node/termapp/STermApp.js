@@ -4,7 +4,7 @@ const __deepMerge = require('../object/deepMerge');
 
 /**
  * @name            STermApp
- * @namespace           node.termapp
+ * @namespace           sugar.node.termapp
  * @type            Class
  * @extends         SApp
  *

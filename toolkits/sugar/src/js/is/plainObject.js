@@ -2,7 +2,7 @@ import __isPlainObject from 'is-plain-object';
 
 /**
  * @name                      plainObject
- * @namespace           js.is
+ * @namespace           sugar.js.is
  * @type                      Function
  *
  * Check if the passed object (or array of objects) is/are plain object(s)

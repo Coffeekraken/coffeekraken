@@ -1,6 +1,6 @@
 /**
   * @name            btn-classes
-  * @namespace       scss.components
+  * @namespace       sugar.scss.components
   * @type            Mixin
   *
   * This mixin generate all the css needed to display properly some buttons.
@@ -38,7 +38,7 @@
 
 /**
  * @name              btn-bare-classes
- * @namespace         scss.components.btn
+ * @namespace         sugar.scss.components.btn
  * @type              Mixin
  *
  * This mixin generate all the bare classes depending on the parameters you set.
@@ -58,7 +58,7 @@
   @each $size in $sizes {
     /**
      * @name              #{selector(#{$name}--#{$size})}
-     * @namespace         scss.components.btn.sizes
+     * @namespace         sugar.scss.components.btn.sizes
      * @type              Classname
      *
      * This class can be applied on any ```#{$name}``` component to specify his size to ```#{$size}```
@@ -78,7 +78,7 @@
 
 /**
  * @name              btn-style-classes
- * @namespace         scss.components.btn
+ * @namespace         sugar.scss.components.btn
  * @type              Mixin
  *
  * This mixin generate all the style classes depending on the parameters you set.
@@ -96,7 +96,7 @@
   @each $color in $colors {
     /**
      * @name              #{selector(#{$name}--#{$color})}
-     * @namespace         scss.components.btn.colors
+     * @namespace         sugar.scss.components.btn.colors
      * @type              Classname
      *
      * This class can be applied on any ```#{$name}``` component to specify his color to ```#{$color}```
@@ -116,7 +116,7 @@
 
 /**
  * @name              btn
- * @namespace         scss.components.btn
+ * @namespace         sugar.scss.components.btn
  * @type              Mixin
  *
  * This mixin generate all the properties for a button depending on the parameters you set.
@@ -140,7 +140,7 @@
 
 /**
  * @name              btn-bare
- * @namespace         scss.components.btn
+ * @namespace         sugar.scss.components.btn
  * @type              Mixin
  *
  * This mixin generate all the bare properties for a button depending on the parameters you set.
@@ -173,7 +173,7 @@
 
 /**
  * @name              btn-style
- * @namespace         scss.components.btn
+ * @namespace         sugar.scss.components.btn
  * @type              Mixin
  *
  * This mixin generate all the style properties for a button depending on the parameters you set.

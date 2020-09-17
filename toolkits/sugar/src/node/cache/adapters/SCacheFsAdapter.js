@@ -10,7 +10,7 @@ const __SCacheAdapter = require('../../../../js/cache/adapters/SCacheAdapter');
 
 /**
  * @name                                SCacheFsAdapter
- * @namespace           node.fs.cacheAdapters
+ * @namespace           sugar.node.fs.cacheAdapters
  * @type                                Class
  *
  * A filesystem SCache adapter that allows you to store your cache items on the user system

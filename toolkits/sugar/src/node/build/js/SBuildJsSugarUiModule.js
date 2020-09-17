@@ -5,7 +5,7 @@ const __SBuildJsProcess = require('./SBuildJsProcess');
 
 /**
  * @name                SBuildJsSugarUiModule
- * @namespace           node.build.js
+ * @namespace           sugar.node.build.js
  * @type                Class
  * @extends             SSugarUiModule
  *

@@ -1,6 +1,6 @@
 /**
  * @name        decodeHtmlEntities
- * @namespace           js.string
+ * @namespace           sugar.js.string
  * @type      Function
  *
  * Decode an htmlentities encoded string

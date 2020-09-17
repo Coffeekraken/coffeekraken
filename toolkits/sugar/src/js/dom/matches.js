@@ -1,6 +1,6 @@
 /**
  * @name      matches
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Polyfill for the Element.matches function

@@ -26,7 +26,7 @@ function processNodeElm(elm) {
 
 /**
  * @name      toDomNodes
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Return a usable nodeTree from a variable source like selector, an html string, an html template tag or a node that will be cloned.

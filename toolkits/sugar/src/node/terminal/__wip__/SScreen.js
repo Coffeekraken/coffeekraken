@@ -11,7 +11,7 @@ const __countLine = require('./countLine');
 
 /**
  * @name                            STerminalScreen
- * @namespace           node.terminal
+ * @namespace           sugar.node.terminal
  * @type                            Class
  *
  * Create a screen in which you can render all others items.

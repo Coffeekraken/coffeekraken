@@ -1,6 +1,6 @@
 /**
  * @name                    parseHsl
- * @namespace           js.color
+ * @namespace           sugar.js.color
  * @type                    Function
  *
  * Parse HSL

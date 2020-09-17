@@ -5,7 +5,7 @@ const __sugarConfig = require('../../config/sugar');
 
 /**
  * @name              SBuildViewsCommand
- * @namespace           node.build.views
+ * @namespace           sugar.node.build.views
  * @type              SCommand
  *
  * This class represent a command used to watch and build views files

@@ -1,0 +1,9 @@
+[
+    {
+        "path": "../../src/js/index.js",
+        "name": "coco",
+        "namespace": "sugar-ui.coco",
+        "type": "Function",
+        "description": "Hola"
+    }
+]

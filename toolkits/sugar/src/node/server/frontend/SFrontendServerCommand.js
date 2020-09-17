@@ -4,7 +4,7 @@ const __SFrontentServerCli = require('./SFrontendServerCli');
 
 /**
  * @name              SFrontendServerCommand
- * @namespace           node.server.express
+ * @namespace           sugar.node.server.express
  * @type              SCommand
  *
  * This class represent a command used start an Express server locally.

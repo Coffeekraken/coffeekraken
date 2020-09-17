@@ -3,7 +3,7 @@ import __addEventListener from './addEventListener';
 
 /**
  * @name        addEventListenerOnce
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Add an event listener that will be trigerred only once

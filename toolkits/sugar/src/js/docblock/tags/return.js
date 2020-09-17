@@ -2,7 +2,7 @@ const __upperFirst = require('../../string/upperFirst');
 
 /**
  * @name              return
- * @namespace           js.docblock.tags
+ * @namespace           sugar.js.docblock.tags
  * @type              Function
  *
  * Parse the return tag

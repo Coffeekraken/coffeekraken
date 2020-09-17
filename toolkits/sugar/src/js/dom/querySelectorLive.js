@@ -3,7 +3,7 @@ import matches from './matches';
 
 /**
  * @name      querySelectorLive
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Observe the dom to get all the elements that matches a passed css selector at any point in time.

@@ -1,6 +1,6 @@
 /**
  * @name      selector
- * @namespace           scss.core.string
+ * @namespace           sugar.scss.core.string
  * @type    function
  *
  * Process selector to avoid having --default, etc...
@@ -15,13 +15,13 @@
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@function selector($selector) {
-  $prefix: setting('classes.generate.prefix');
+@function selector($selector, $prefix: setting('classes.generate.prefix')) {
   @if $prefix {
     $selector: '#{$prefix}-#{$selector}';
   }
   $selector: str-replace($selector, "--default", "");
   $selector: str-replace($selector, "-default", "");
   $selector: str-replace($selector, ".default", "");
+  $selector: str-replace($selector, "default", "");
   @return $selector;
 }

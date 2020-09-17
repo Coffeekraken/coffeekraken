@@ -9,7 +9,7 @@ const __countLine = require('./countLine');
 
 /**
  * @name                            list
- * @namespace           node.terminal
+ * @namespace           sugar.node.terminal
  * @type                            Function
  *
  * Allows you to create some lists either selectable or not

@@ -1,6 +1,6 @@
 /**
  * @name      easeOutQuint
- * @namespace           js.easing
+ * @namespace           sugar.js.easing
  * @type      Function
  *
  * Ease out quint function

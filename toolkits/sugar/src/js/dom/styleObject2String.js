@@ -2,7 +2,7 @@ import __uncamelize from '../string/uncamelize';
 
 /**
  * @name      styleObject2String
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Transform a style object to inline string separated by ;

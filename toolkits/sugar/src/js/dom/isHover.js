@@ -2,7 +2,7 @@
 
 /**
  * @name      isHover
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Check if the mouse is hover the passed HTMLElement

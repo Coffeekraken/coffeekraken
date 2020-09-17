@@ -1,6 +1,6 @@
 /**
  * @name                              flatten
- * @namespace           js.object
+ * @namespace           sugar.js.object
  * @type                              Function
  *
  * Transform the passed multiple level object into a single level one

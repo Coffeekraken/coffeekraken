@@ -2,7 +2,7 @@ import __SInterface from '../../class/SInterface';
 
 /**
  * @name                SValidationInterface
- * @namespace           js.validation.interface
+ * @namespace           sugar.js.validation.interface
  * @type                Class
  * @extends             SInterface
  *

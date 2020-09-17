@@ -2,7 +2,7 @@ const __clipboardy = require('clipboardy');
 
 /**
  * @name            paste
- * @namespace       node.clipboard
+ * @namespace       sugar.node.clipboard
  * @type            Function
  *
  * Simple function to paste things from the system clipboard.

@@ -4,7 +4,7 @@ const __SBuildDocMapActionsStream = require('./SBuildDocMapActionsStream');
 
 /**
  * @name            SBuildDocMapProcess
- * @namespace           node.build.docMap
+ * @namespace           sugar.node.build.docMap
  * @type            Class
  * @extends         SProcess
  *

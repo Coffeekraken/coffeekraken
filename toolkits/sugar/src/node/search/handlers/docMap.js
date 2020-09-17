@@ -8,7 +8,7 @@ const __SUrlAction = require('../../action/browser/SUrlAction');
 
 /**
  * @name                search
- * @namespace           node.search.handlers
+ * @namespace           sugar.node.search.handlers
  * @type                Function
  *
  * This function is responsible of handling the docMap search

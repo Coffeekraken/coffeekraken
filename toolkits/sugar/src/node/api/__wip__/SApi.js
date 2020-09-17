@@ -11,7 +11,7 @@ const __isPlainObject = require('../is/plainObject');
 
 /**
  * @name                            SApi
- * @namespace           node.api
+ * @namespace           sugar.node.api
  * @type                            Class
  *
  * Base class that extends all the S...Api classes. This class gives some features like:

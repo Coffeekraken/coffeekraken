@@ -22,7 +22,7 @@ const __getExtendsStack = require('../../class/getExtendsStack');
 
 /**
  * @name                  SCommandPanel
- * @namespace           node.blessed
+ * @namespace           sugar.node.blessed
  * @type                  Class
  *
  * This class is a simple SPanel extended one that accesp an SCommandPanel instance

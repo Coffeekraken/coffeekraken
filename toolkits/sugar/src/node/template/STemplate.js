@@ -9,7 +9,7 @@ const __SPromise = require('../promise/SPromise');
 
 /**
  * @name          STemplate
- * @namespace     node.template
+ * @namespace     sugar.node.template
  * @type          Class
  *
  * This class represent a template that can be rendered using all the supported render engines listed in the features bellow.

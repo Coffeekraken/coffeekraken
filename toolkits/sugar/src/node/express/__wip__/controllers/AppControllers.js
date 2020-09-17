@@ -1,7 +1,7 @@
 module.exports = {
   /**
    * @name                          config
-   * @namespace           node.express.controllers.AppControllers
+   * @namespace           sugar.node.express.controllers.AppControllers
    * @type                          Function
    *
    * Return the whole configuration object or the specified value requested using the dot formated object key.
@@ -25,7 +25,7 @@ module.exports = {
 
   /**
    * @name                          meta
-   * @namespace           node.express.controllers.AppControllers
+   * @namespace           sugar.node.express.controllers.AppControllers
    * @type                          Function
    *
    * Return the application meta data
@@ -49,7 +49,7 @@ module.exports = {
 
   /**
    * @name                js
-   * @namespace           node.express.controllers.AppControllers
+   * @namespace           sugar.node.express.controllers.AppControllers
    * @type                Function
    *
    * Handle the base javascript route that serve the global and common files

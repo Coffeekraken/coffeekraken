@@ -10,7 +10,7 @@ const { stream } = require('globby');
 
 /**
  * @name                SJsConfigFileToJsonStreamAction
- * @namespace           node.build.config.actions
+ * @namespace           sugar.node.build.config.actions
  * @type                Class
  * @extends             SActionsStreamAction
  *

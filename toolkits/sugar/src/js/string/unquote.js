@@ -1,6 +1,6 @@
 /**
  * @name        unquote
- * @namespace           js.string
+ * @namespace           sugar.js.string
  * @type      Function
  *
  * Remove the quotes of a string

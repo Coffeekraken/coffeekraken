@@ -7,7 +7,7 @@ import forceRedraw from '../dom/forceRedraw';
 
 /**
  * @name 		SMotionblurSvgFilter
- * @namespace           js.filter
+ * @namespace           sugar.js.filter
  * @type      Class
  *
  * This class represent a motion blur svg filter that will blur your

@@ -2,7 +2,7 @@ const __packageRoot = require('../path/packageRoot');
 
 /**
  * @name          rootPath
- * @namespace     node.package
+ * @namespace     sugar.node.package
  * @type          Function
  *
  * This function return the absolute path of your current working package

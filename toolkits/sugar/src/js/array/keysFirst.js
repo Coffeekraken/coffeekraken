@@ -2,7 +2,7 @@ import uniq from 'lodash/uniq';
 
 /**
  * @name        keysFirst
- * @namespace           js.array
+ * @namespace           sugar.js.array
  * @type      Function
  *
  * Make sure the passed array start with the passed keys

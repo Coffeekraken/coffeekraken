@@ -1,7 +1,7 @@
 import MobileDetect from 'mobile-detect';
 /**
  * @name        isPhone
- * @namespace           js.is
+ * @namespace           sugar.js.is
  * @type      Function
  *
  * Detect if is a phone device

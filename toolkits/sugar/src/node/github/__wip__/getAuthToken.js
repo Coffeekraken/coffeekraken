@@ -1,6 +1,6 @@
 /**
  * @name        getAuthToken
- * @namespace           node.github
+ * @namespace           sugar.node.github
  * @type        Function
  *
  * Get back the authentification informations (username, token) setted using the 'setAuthToken' function

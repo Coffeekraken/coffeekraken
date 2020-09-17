@@ -1,6 +1,6 @@
 /**
  * @name              unique
- * @namespace           js.array
+ * @namespace           sugar.js.array
  * @type                  Function
  *
  * This function simply take an array as parameter and return a new one

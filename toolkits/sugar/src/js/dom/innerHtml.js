@@ -7,7 +7,7 @@ import __convert from '../time/convert';
 
 /**
  * @name            innerHtml
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type            Function
  *
  * Change the content of a Node with the possibility to animate the change using one of these animations:

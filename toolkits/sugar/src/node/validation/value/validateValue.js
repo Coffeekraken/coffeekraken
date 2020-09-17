@@ -3,7 +3,7 @@ const __isPath = require('../../fs/isPath');
 
 /**
  * @name            validateValue
- * @namespace       node.validation.value
+ * @namespace       sugar.node.validation.value
  * @type            Function
  *
  * This method simply take a value to validate and a definitionObject

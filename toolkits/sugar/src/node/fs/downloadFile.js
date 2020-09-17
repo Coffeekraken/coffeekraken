@@ -6,7 +6,7 @@ const __download = require('download-file');
 
 /**
  * @name              downloadFile
- * @namespace           node.fs
+ * @namespace           sugar.node.fs
  * @type              Function
  *
  * Download a file and save it on the file system

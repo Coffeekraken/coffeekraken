@@ -2,7 +2,7 @@
   @if class-match-namespace("sugar.helper.clear.left") {
     /**
     * @name 		#{sel(clear-left)}
-    * @namespace       scss.core.class.helper
+    * @namespace       sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.clear.left
     * @type        class
     *
@@ -23,7 +23,7 @@
   @if class-match-namespace("sugar.helper.clear.right") {
     /**
     * @name 		#{sel(clear-right)}
-    * @namespace       scss.core.class.helper
+    * @namespace       sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.clear.right
     * @type        class
     *
@@ -45,7 +45,7 @@
   @if class-match-namespace("sugar.helper.clear.both") {
     /**
     * @name 		#{sel(clear)}
-    * @namespace       scss.core.class.helper
+    * @namespace       sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.clear.both
     * @type        class
     *

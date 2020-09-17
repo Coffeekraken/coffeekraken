@@ -2,7 +2,7 @@ const __SInterface = require('../../class/SInterface');
 
 /**
  * @name                SFsFileInterface
- * @namespace           node.fs.interface
+ * @namespace           sugar.node.fs.interface
  * @type                Class
  * @extends             SInterface
  *

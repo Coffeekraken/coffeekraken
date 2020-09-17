@@ -4,7 +4,7 @@ const __fs = require('fs-extra');
 
 /**
  * @name        copySync
- * @namespace           node.fs
+ * @namespace           sugar.node.fs
  * @type          Function
  *
  * Copy a file or directory (sync)

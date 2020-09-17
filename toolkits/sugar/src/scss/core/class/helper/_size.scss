@@ -3,7 +3,7 @@
   @if class-match-namespace("sugar.helper.size.abs.cover") {
     /**
     * @name 		#{sel(abs-cover)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.size.abs.cover
     * @type        class
     *
@@ -24,7 +24,7 @@
   @if class-match-namespace("sugar.helper.size.abs.contain") {
     /**
     * @name 		#{sel(abs-contain)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.size.abs.contain
     * @type        class
     *
@@ -45,7 +45,7 @@
   @if class-match-namespace("sugar.helper.size.abs.fit") {
     /**
     * @name 		#{sel(abs-fit)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.size.abs.fit
     * @type        class
     *

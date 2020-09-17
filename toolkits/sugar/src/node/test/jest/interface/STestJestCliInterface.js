@@ -5,7 +5,7 @@ const __deepMerge = require('../../../object/deepMerge');
 
 /**
  * @name                STestJestCliInterface
- * @namespace           node.test.jest.interface
+ * @namespace           sugar.node.test.jest.interface
  * @type                Class
  * @extends             SInterface
  *

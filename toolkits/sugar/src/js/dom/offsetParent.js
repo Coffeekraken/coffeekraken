@@ -1,7 +1,7 @@
 import __offset from './offset';
 /**
  * @name      offsetParent
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Get the offset top and left of the passed element from his parent top left point

@@ -9,7 +9,7 @@ import __typeMap from './typeMap';
 
 /**
  * @name 		                    SAction
- * @namespace           js.action
+ * @namespace           sugar.js.action
  * @type                        Class
  *
  * This class represent an action. An action is something that happened depending on

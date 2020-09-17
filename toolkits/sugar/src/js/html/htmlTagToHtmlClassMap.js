@@ -1,6 +1,6 @@
 /**
  * @name            HtmlTagToHtmlClassMap
- * @namespace       js.html
+ * @namespace       sugar.js.html
  * @type            Object
  *
  * This export an object mapping the HTML tag name to his corresponding HTML class (object not css class)

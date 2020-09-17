@@ -2,7 +2,7 @@ import __set from './set';
 
 /**
  * @name                      delete
- * @namespace           js.object
+ * @namespace           sugar.js.object
  * @type                      Function
  *
  * Delete an object property using a dotPath like "something.else"

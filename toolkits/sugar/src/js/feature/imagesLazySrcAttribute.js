@@ -5,7 +5,7 @@ import querySelectorLive from '../dom/querySelectorLive';
 
 /**
  * @name 		imagesLazySrcAttribute
- * @namespace           js.feature
+ * @namespace           sugar.js.feature
  * @type      Feature
  *
  * Add support for the `lazy-src` attribute on `img` elements.

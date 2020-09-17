@@ -4,7 +4,7 @@ const __colorConvert = require('color-convert');
 
 /**
  * @name                                    image
- * @namespace           node.terminal
+ * @namespace           sugar.node.terminal
  * @type                                    Function
  *
  * Load and display an image with simple options like width, height, etc...

@@ -20,7 +20,7 @@ class SFsReadFileStreamActionInterface extends __SInterface {
 
 /**
  * @name            SFsReadFileStreamAction
- * @namespace           node.stream.actions
+ * @namespace           sugar.node.stream.actions
  * @type            Class
  * @extends         SActionsStreamAction
  *

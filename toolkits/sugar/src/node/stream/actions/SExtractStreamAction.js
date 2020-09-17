@@ -13,7 +13,7 @@ class SExtractStreamActionInterface extends __SInterface {
 
 /**
  * @name            SExtractStreamAction
- * @namespace           node.stream.actions
+ * @namespace           sugar.node.stream.actions
  * @type            Class
  * @extends         SActionsStreamAction
  *

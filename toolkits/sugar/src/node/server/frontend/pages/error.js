@@ -2,7 +2,7 @@ const __deepMerge = require('../../../object/deepMerge');
 
 /**
  * @name                error
- * @namespace           node.server.frontend.pages
+ * @namespace           sugar.node.server.frontend.pages
  * @type                Function
  *
  * This function simply return the 404 page content to send to the user

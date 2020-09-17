@@ -4,7 +4,7 @@ import __isGlob from 'is-glob';
 
 /**
  * @name                    activeSpace
- * @namespace           js.core
+ * @namespace           sugar.js.core
  * @type                    Object
  *
  * This object expose some functions that are usefull to manage the "active" space of your application.

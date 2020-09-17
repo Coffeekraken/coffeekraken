@@ -1,11 +1,13 @@
 /**
   * @name            title-classes
-  * @namespace       scss.components
+  * @namespace       sugar.scss.components
   * @type            Mixin
   *
   * This mixin generate all the css needed to display properly some titles.
   *
   * @param       {Number}      [$count:6]                                How many titles to generate
+  * @param          {String}        [$name:'h']                 The name you want for your titles
+  * @param         {List<String>}    [$scope=null]       The scope you want to generate. Usually "all", "bare" or "style"            
   *
   * @example         html
   * <h1 class="#{sel(h1)}">My title</h1>
@@ -20,146 +22,62 @@
   */
   @mixin title-classes(
     $count: 6,
-    $name: 'h'
+    $name: 'h',
+    $scope: null
   ) {
-    @include title-bare-classes($count, $name);
-    @include title-style-classes($count, $name);
-  }
-  
-  /**
-   * @name              title-bare-classes
-   * @namespace         scss.components
-   * @type              Mixin
-   *
-   * This mixin generate all the bare classes depending on the parameters you set.
-   *
-   * @param       {Number}      [$count:6]                                How many titles to generate
-   *
-   * @since       2.0.0
-   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  @mixin title-bare-classes(
-    $count: 6,
-    $name: 'h'
-  ) {
-    @for $i from 1 through $count {
-      /**
-       * @name              #{sel(#{$name}#{$i})}, #{sel(#{text-format-class()})} h#{$i}
-       * @namespace         scss.components
-       * @type              Classname
-       *
-       * This class can be applied on any ```#{$name}``` component to specify his size to ```#{$i}```
-       *
-       * @example         html
-       * <h#{$i} class="#{sel(#{$name}#{$i})}">I'm a cool "#{$i}" title</h#{$i}>
-       *
-       * @since       2.0.0
-       * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-      .#{sel(#{text-format-class()})} h#{$i},
-      .#{sel(#{$name}#{$i})} {
-        @include title-bare($i);
-      }
-    }
-  }
-  
-  
-  /**
-   * @name              title-style-classes
-   * @namespace         scss.components.btn
-   * @type              Mixin
-   *
-   * This mixin generate all the style classes depending on the parameters you set.
-   *
-   * @param       {List}      [$colors:map-keys(setting('colors'))]       The colors you want to generate
-   * @param       {String}      [$name='btn']                         The name to use for the generation of the classes
-   *
-   * @since       2.0.0
-   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  @mixin title-style-classes(
-    $count: 6,
-    $name: 'h'
-  ) {
-    @for $i from 1 through $count {
-      /**
-       * @name              #{sel(#{$name}#{$i})}, #{sel(#{text-format-class()})} h#{$i}
-       * @namespace         scss.components
-       * @type              Classname
-       *
-       * This class can be applied on any ```#{$name}``` component
-       *
-       * @example         html
-       * <h#{$i} class="#{sel(#{$name}#{$i})}">I'm a cool "#{$i}" title</h#{$i}>
-       *
-       * @since       2.0.0
-       * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
+
+   @for $i from 1 through $count {
+   /**
+    * @name              .#{sel(#{$name}#{$i})}, .#{sel(#{text-format-class()})} h#{$i}
+    * @namespace         sugar.scss.components
+    * @type              Classname
+    *
+    * This class can be applied on any ```#{$name}``` component to specify his size to ```#{$i}```
+    *
+    * @example         html
+    * <h#{$i} class="#{sel(#{$name}#{$i})}">I'm a cool "#{$i}" title</h#{$i}>
+    *
+    * @since       2.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    */
     .#{sel(#{text-format-class()})} h#{$i},
     .#{sel(#{$name}#{$i})} {
-        @include title-style($i);
-      }
+       @include title($i, $scope);
     }
   }
+}
   
-  
-  /**
-   * @name              title
-   * @namespace         scss.components.title
-   * @type              Mixin
-   *
-   * This mixin generate all the properties for a title depending on the parameters you set.
-   *
-   * @param         {Number}        $level          The title level you want to generate
-   *
-   * @since       2.0.0
-   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-   @mixin title(
-    $level
-  ) {
-    @include title-bare($level);
-    @include title-style($level);
-  }
-  
-  
-  /**
-   * @name              title-bare
-   * @namespace         scss.components
-   * @type              Mixin
-   *
-   * This mixin generate all the bare properties for a title depending on the parameters you set.
-   *
-   * @param       {Number}      $level          The title level you want to generate
-   *
-   * @since       2.0.0
-   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  @mixin title-bare(
-    $level
-  ) {
-    display: block;
-    $size: setting('typography.formats.h#{$level}.font-size');
-    font-size: font-size($size);
-  }
-  
-  
-  /**
-   * @name              title-style
-   * @namespace         scss.components
-   * @type              Mixin
-   *
-   * This mixin generate all the style properties for a title depending on the parameters you set.
-   *
-   * @param       {Number}      $level          The title level you want to generate
-   *
-   * @since       2.0.0
-   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  @mixin title-style(
-    $level
-  ) {
-    $family: setting('typography.formats.h#{$level}.font-family');
-    font-family: font-family($family);
-  }
-  
+/**
+ * @name              title
+ * @namespace         sugar.scss.components
+ * @type              Mixin
+ *
+ * This mixin generate all the properties for a title depending on the parameters you set.
+ *
+ * @param         {Number}        $level          The title level you want to generate
+ * @param         {List<String>}    [$scope=null]       The scope you want to generate. Usually "all", "bare" or "style"            
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@mixin title(
+  $level,
+  $scope: null
+) {
+    @include scope('bare', $scope) {
+        display: block;
+        $size: setting('typography.titles.h#{$level}.font-size');
+        font-size: font-size($size);
+    }
+    @include scope('style', $scope) {
+        $family: setting('typography.titles.h#{$level}.font-family');
+        font-family: font-family($family);
+
+        $props: setting('typography.titles.h#{$level}');
+        @each $prop in map-keys($props) {
+            @if $prop != 'font-size' and $prop != 'font-family' {
+                #{$prop}: map-get($props, $prop);
+            }
+        }
+    }
+}

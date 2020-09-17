@@ -1,6 +1,6 @@
 /**
  * @name        isUcBrowser
- * @namespace           js.is
+ * @namespace           sugar.js.is
  * @type      Function
  *
  * Detect if is the UC stock browser that is running the page

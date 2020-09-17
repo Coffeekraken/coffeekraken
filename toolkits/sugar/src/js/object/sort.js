@@ -1,6 +1,6 @@
 /**
  * @name                                sort
- * @namespace           js.object
+ * @namespace           sugar.js.object
  * @type                                Function
  *
  * Sort an object properties the same way as the Array.sort do it

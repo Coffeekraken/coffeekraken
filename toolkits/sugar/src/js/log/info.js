@@ -2,7 +2,7 @@ import __SLog from './SLog';
 
 /**
  * @name              info
- * @namespace           js.info
+ * @namespace           sugar.js.info
  * @type              Function
  *
  * This function is a simple wrapper around the SLog class that let you use the info features quickly

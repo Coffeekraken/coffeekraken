@@ -3,7 +3,7 @@ const __fs = require('fs');
 
 /**
  * @name            frontspecMiddleware
- * @namespace       node.server.frontend.middleware
+ * @namespace       sugar.node.server.frontend.middleware
  * @type            Function
  *
  * This function describe the middleware that will fetch the ```frontspec.json``` file at the root of

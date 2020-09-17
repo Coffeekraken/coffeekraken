@@ -8,7 +8,7 @@ function _decodeHtml(html) {
 
 /**
  * @name      splitLetters
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Split each letters inside an HTMLElement by scoping them inside multiple tags.

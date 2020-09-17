@@ -3,7 +3,7 @@ import __isNode from '../is/node';
 
 /**
  * @name          SValidation
- * @namespace     js.validation.value.validation
+ * @namespace     sugar.js.validation.value.validation
  * @type          Class
  *
  * This class represent the base validation class

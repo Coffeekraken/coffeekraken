@@ -18,7 +18,7 @@ class SFsCopyStreamActionInterface extends __SInterface {
 
 /**
  * @name            SFsCopyStreamAction
- * @namespace           node.stream.actions
+ * @namespace           sugar.node.stream.actions
  * @type            Class
  * @extends         SActionsStreamAction
  *

@@ -1,6 +1,6 @@
 /**
  * @name      domReady
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Wait that the dom is ready before resolving the promise

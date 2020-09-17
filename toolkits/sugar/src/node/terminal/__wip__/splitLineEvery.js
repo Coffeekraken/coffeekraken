@@ -1,6 +1,6 @@
 /**
  * @name                                splitLineEvery
- * @namespace           node.terminal
+ * @namespace           sugar.node.terminal
  * @type                                Function
  *
  * Split a line every x characters but does not count the characters like \u011b and the tags like <red> etc...

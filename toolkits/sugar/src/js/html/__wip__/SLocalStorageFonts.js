@@ -1,6 +1,6 @@
 /**
  * @name 		SLocalStorageFonts
- * @namespace           js.class
+ * @namespace           sugar.js.class
  * @type    Class
  *
  * This class allows to easily store and load custom fonts from the localStorage

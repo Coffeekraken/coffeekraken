@@ -5,7 +5,7 @@
       @if class-match-namespace("sugar.helper.font.family.#{$name}") {
         /**
           * @name       	  #{sel(f-#{$name})}
-          * @namespace       scss.core.class
+          * @namespace       sugar.scss.core.class
           * @class-namespace           sugar.helper.font.family.#{$name}
           * @type        class
           *
@@ -29,7 +29,7 @@
   @if class-match-namespace("sugar.helper.font.weight.bold") {
     /**
     * @name 		#{sel(f-bold)}
-    * @namespace           scss.core.class.helper
+    * @namespace           sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.font.weight.bold
     * @type        class
     *
@@ -48,7 +48,7 @@
   @if class-match-namespace("sugar.helper.font.weight.lighter") {
     /**
     * @name 		#{sel(f-lighter)}
-    * @namespace           scss.core.class.helper
+    * @namespace           sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.font.weight.lighter
     * @type        class
     *
@@ -67,7 +67,7 @@
   @if class-match-namespace("sugar.helper.font.weight.bolder") {
     /**
     * @name 		#{sel(f-bolder)}
-    * @namespace           scss.core.class.helper
+    * @namespace           sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.font.weight.bolder
     * @type        class
     *
@@ -86,7 +86,7 @@
   @if class-match-namespace("sugar.helper.font.weight.normal") {
     /**
     * @name 		#{sel(f-normal)}
-    * @namespace           scss.core.class.helper
+    * @namespace           sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.font.weight.normal
     * @type        class
     *
@@ -108,7 +108,7 @@
   @if class-match-namespace("sugar.helper.font.style.italic") {
     /**
     * @name 		#{sel(f-italic)}
-    * @namespace           scss.core.class.helper
+    * @namespace           sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.font.style.italic
     * @type        class
     *
@@ -127,7 +127,7 @@
   @if class-match-namespace("sugar.helper.font.style.oblique") {
     /**
     * @name 		#{sel(f-oblique)}
-    * @namespace           scss.core.class.helper
+    * @namespace           sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.font.style.oblique
     * @type        class
     *
@@ -148,7 +148,7 @@
   ) {
     /**
     * @name 		#{sel(f-small-caps)}
-    * @namespace           scss.core.class.helper
+    * @namespace           sugar.scss.core.class.helper
     * @class-namespace     sugar.helper.font.variant.small-caps
     * @type        class
     *

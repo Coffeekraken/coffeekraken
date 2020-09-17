@@ -1,6 +1,6 @@
 /**
  * @name        isOpera
- * @namespace           js.is
+ * @namespace           sugar.js.is
  * @type      Function
  *
  * Detect if is opera

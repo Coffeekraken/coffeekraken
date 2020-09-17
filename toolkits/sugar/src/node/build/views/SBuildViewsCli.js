@@ -4,7 +4,7 @@ const __SBuildViewsInterface = require('./interface/SBuildViewsInterface');
 
 /**
  * @name            SBuildViewsCli
- * @namespace           node.build.views
+ * @namespace           sugar.node.build.views
  * @type            Class
  * @extends         SCli
  *

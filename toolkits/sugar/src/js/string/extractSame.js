@@ -1,6 +1,6 @@
 /**
  * @name              extractSame
- * @namespace           js.string
+ * @namespace           sugar.js.string
  * @type              Function
  *
  * This function return you what has been find the same in the two passed string.

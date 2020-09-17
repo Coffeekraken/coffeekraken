@@ -2,7 +2,7 @@ const __packageRoot = require('../path/packageRoot');
 
 /**
  * @name                initEnv
- * @namespace           node.init
+ * @namespace           sugar.node.init
  * @type                Function
  *
  * This function "simply" init some environment variables that can be useful.

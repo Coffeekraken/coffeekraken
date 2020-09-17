@@ -1,6 +1,6 @@
 /**
  * @name        emptyNode
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type        Function
  *
  * Empty a node by removing each childs one after the other

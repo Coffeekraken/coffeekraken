@@ -6,7 +6,7 @@ const __SCliInterface = require('../../cli/interface/SCliInterface');
 
 /**
  * @name                SAppCommandInterface
- * @namespace           node.blessed.interface
+ * @namespace           sugar.node.blessed.interface
  * @type                Class
  * @extends             SInterface
  *

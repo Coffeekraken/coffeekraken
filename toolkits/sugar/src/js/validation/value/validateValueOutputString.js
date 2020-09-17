@@ -5,7 +5,7 @@ import __isNode from '../../is/node';
 
 /**
  * @name                validateValueOutputString
- * @namespace           js.validation.value
+ * @namespace           sugar.js.validation.value
  * @type                Function
  *
  * This function take the resulting object of the ```validateValue``` one and transform it into

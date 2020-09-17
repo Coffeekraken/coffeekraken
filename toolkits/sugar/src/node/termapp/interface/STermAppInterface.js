@@ -2,7 +2,7 @@ const __SInterface = require('../../../class/SInterface');
 
 /**
  * @name                STermAppInterface
- * @namespace           node.termapp.interface
+ * @namespace           sugar.node.termapp.interface
  * @type                Class
  * @extends             SInterface
  *

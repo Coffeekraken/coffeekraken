@@ -1,7 +1,7 @@
 import linkLoaded from './linkLoaded';
 /**
  * @name      stylesheetsReady
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Wait until all the HTMLLinkElement's are properly loaded

@@ -13,7 +13,7 @@ const __SChildProcess = require('../process/SChildProcess');
 
 /**
  * @name              exitCleanup
- * @namespace           node.process
+ * @namespace           sugar.node.process
  * @type              Function
  *
  * This function register a handler on process exit and try to clean all the child process, etc...

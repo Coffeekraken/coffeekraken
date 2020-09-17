@@ -2,7 +2,7 @@ const __findPkgJson = require('find-package-json');
 
 /**
  * @name                    packageRoot
- * @namespace           node.path
+ * @namespace           sugar.node.path
  * @type                    Function
  *
  * Return the path to either the first finded package root going up the folders, or the highest package root finded

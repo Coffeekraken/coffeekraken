@@ -5,7 +5,7 @@ const __path = require('path');
 
 /**
  * @name                dist
- * @namespace           node.server.frontend.handlers
+ * @namespace           sugar.node.server.frontend.handlers
  * @type                Function
  *
  * This function is responsible of responding to express requests made on the "dist" section

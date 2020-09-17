@@ -2,7 +2,7 @@ import { sprintf as _sprintf } from 'sprintf-js';
 
 /**
  * @name        sprintf
- * @namespace           js.string
+ * @namespace           sugar.js.string
  * @type      Function
  *
  * Javascript implementation of the sprintf php function.

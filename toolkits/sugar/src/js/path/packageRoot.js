@@ -2,7 +2,7 @@ import __env from '../core/env';
 
 /**
  * @name                  packageRoot
- * @namespace             js.path
+ * @namespace             sugar.js.path
  * @type                  Function
  * @env                   development
  *

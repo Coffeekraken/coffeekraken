@@ -4,7 +4,7 @@ import __toString from '../string/toString';
 
 /**
  * @name      dataset
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Get or set a value on the passed element with the passed name

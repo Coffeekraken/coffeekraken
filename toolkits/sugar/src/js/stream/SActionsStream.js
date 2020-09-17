@@ -15,7 +15,7 @@ import __sha256 from '../crypt/sha256';
 
 /**
  * @name          SActionStream
- * @namespace           js.stream
+ * @namespace           sugar.js.stream
  * @type          Class
  * @extends       SPromise
  *

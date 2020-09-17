@@ -4,7 +4,7 @@ const __sugarConfig = require('../../config/sugar');
 
 /**
  * @name          STemplateEngine
- * @namespace     node.template.engines
+ * @namespace     sugar.node.template.engines
  * @type          Class
  *
  * This class represent the base for a compatible ```STemplate``` engine

@@ -1,6 +1,6 @@
 /**
  * @name        autoCast
- * @namespace           js.string
+ * @namespace           sugar.js.string
  * @type      Function
  *
  * Auto cast the string into the correct variable type

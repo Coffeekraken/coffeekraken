@@ -7,7 +7,7 @@ import __whenOutOfViewport from './whenOutOfViewport';
 
 /**
  * @name      inViewportStatusChange
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Monitor when the passed element enter or exit the viewport

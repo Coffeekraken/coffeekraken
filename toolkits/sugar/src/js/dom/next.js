@@ -2,7 +2,7 @@ import __matches from './matches';
 
 /**
  * @name      next
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Browse the passed element next siblings to find the first element that matches the passed selector

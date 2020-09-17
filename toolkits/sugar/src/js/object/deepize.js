@@ -1,7 +1,7 @@
 import __set from './set';
 /**
  * @name          deepize
- * @namespace     js.object
+ * @namespace     sugar.js.object
  * @type          Function
  *
  * This function simply take an object like this one:

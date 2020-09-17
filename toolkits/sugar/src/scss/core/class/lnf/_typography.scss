@@ -9,7 +9,7 @@
     @if class-match-namespace('sugar.lnf.typography.#{$key}') {
       /**
         * @name 		#{sel($key)}
-        * @namespace           scss.core.class.lnf
+        * @namespace           sugar.scss.core.class.lnf
         * @class-namespace     sugar.lnf.typography.#{$key}
         * @type        class
         *

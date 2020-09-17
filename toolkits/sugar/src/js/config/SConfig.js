@@ -11,7 +11,7 @@ import __SConfigAdapter from './adapters/SConfigAdapter';
 
 /**
  * @name                                            config
- * @namespace           js.config
+ * @namespace           sugar.js.config
  * @type                                            Class
  *
  * This class allows you to quickly access/update some configuration depending on the data adapters specified.

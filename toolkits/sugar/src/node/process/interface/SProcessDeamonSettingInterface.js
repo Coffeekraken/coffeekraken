@@ -2,7 +2,7 @@ const __SInterface = require('../../class/SInterface');
 
 /**
  * @name                SProcessDeamonSettingInterface
- * @namespace           node.process.interface
+ * @namespace           sugar.node.process.interface
  * @type                Class
  * @extends             SInterface
  *

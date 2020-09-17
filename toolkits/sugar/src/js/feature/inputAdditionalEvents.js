@@ -3,7 +3,7 @@ import __dispatchEvent from '../dom/dispatchEvent';
 
 /**
  * @name 		handleInputAttributes
- * @namespace           js.feature
+ * @namespace           sugar.js.feature
  * @type      Feature
  *
  * Add some events on some DOM Elements. Here's the list:

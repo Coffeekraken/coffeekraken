@@ -1,6 +1,6 @@
 /**
  * @name            extractValues
- * @namespace       js.object
+ * @namespace       sugar.js.object
  * @type            Function
  *
  * This function take an array of objects and a key name as parameters and return an array containing

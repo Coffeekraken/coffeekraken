@@ -4,7 +4,7 @@ const __deepMerge = require('../object/deepMerge');
 
 /**
  * @name                                          columns
- * @namespace           node.terminal
+ * @namespace           sugar.node.terminal
  * @type                                          Function
  *
  * Display your content using columns. The number of columns is defined by the number of items in the content array

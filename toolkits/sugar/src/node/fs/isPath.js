@@ -5,7 +5,7 @@ const __fs = require('fs');
 
 /**
  * @name                            isPath
- * @namespace           node.fs
+ * @namespace           sugar.node.fs
  * @type                            Function
  *
  * Check if the passed string is a valid path or not

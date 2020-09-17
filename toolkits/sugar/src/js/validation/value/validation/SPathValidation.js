@@ -4,7 +4,7 @@ import __isNode from '../../../is/node';
 
 /**
  * @name          SPathValidation
- * @namespace     js.validation.value.validation
+ * @namespace     sugar.js.validation.value.validation
  * @type          Class
  *
  * This class represent the "required" validation

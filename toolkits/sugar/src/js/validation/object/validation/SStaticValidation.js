@@ -3,7 +3,7 @@ import __isClass from '../../../is/class';
 
 /**
  * @name          SStaticValidation
- * @namespace     js.validation.value.validation
+ * @namespace     sugar.js.validation.value.validation
  * @type          Class
  *
  * This class represent the "static" validation

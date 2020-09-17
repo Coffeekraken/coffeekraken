@@ -3,7 +3,7 @@ const __fs = require('fs');
 
 /**
  * @name          json
- * @namespace     node.package
+ * @namespace     sugar.node.package
  * @type          Function
  *
  * This function return you the package.json of the current working package into object format

@@ -2,7 +2,7 @@ const __SColor = require('../../../js/color/SColor');
 const __sugarConfig = require('../config/sugar');
 
 /**
- * @namespace           node.color
+ * @namespace           sugar.node.color
  * @src             ../../../js/color/SColor.js
  * @extends         SColor
  */

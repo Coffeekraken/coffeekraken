@@ -2,7 +2,7 @@ import MobileDetect from 'mobile-detect';
 
 /**
  * @name        isSamsumgBrowser
- * @namespace           js.is
+ * @namespace           sugar.js.is
  * @type      Function
  *
  * Detect if is the samsung stock browser that is running the page

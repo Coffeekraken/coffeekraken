@@ -3,7 +3,7 @@ import __SPromise from '../promise/SPromise';
 
 /**
  * @name      removeClassOnAnimationEnd
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Remove some class on animation end

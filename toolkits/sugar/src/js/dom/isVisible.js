@@ -1,6 +1,6 @@
 /**
  * @name      isVisible
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Check if the passed HTMLElement is visible or not.

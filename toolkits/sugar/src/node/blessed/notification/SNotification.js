@@ -7,7 +7,7 @@ const __SComponent = require('../SComponent');
 
 /**
  * @name                    SNotification
- * @namespace           node.blessed.notification
+ * @namespace           sugar.node.blessed.notification
  * @type                    Class
  *
  * This class represent a notification that will be in a corner of the terminal

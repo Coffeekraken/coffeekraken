@@ -1,6 +1,6 @@
 /**
  * @name      wrapInner
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Wrap the content of the passed `$parent` inside a the passed HTMLElement `$wrapper`

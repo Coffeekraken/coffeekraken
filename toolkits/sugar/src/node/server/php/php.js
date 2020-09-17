@@ -2,7 +2,7 @@ const __PhpSCli = require('./SPhpServerCli');
 
 /**
  * @name                php
- * @namespace           node.server.php
+ * @namespace           sugar.node.server.php
  * @type                Function
  *
  * This function take care of starting a local php server on which you can subscribe for different "events"

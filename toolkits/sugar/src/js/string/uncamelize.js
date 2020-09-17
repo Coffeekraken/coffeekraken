@@ -1,6 +1,6 @@
 /**
  * @name        uncamelize
- * @namespace           js.string
+ * @namespace           sugar.js.string
  * @type      Function
  *
  * Uncamelize a string

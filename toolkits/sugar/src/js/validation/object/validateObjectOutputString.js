@@ -5,7 +5,7 @@ import __toString from '../../string/toString';
 
 /**
  * @name                validateObjectOutputString
- * @namespace           js.validation.object
+ * @namespace           sugar.js.validation.object
  * @type                Function
  *
  * This function take the resulting object of the ```validateObject``` one and transform it into

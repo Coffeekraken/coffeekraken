@@ -3,7 +3,7 @@ import __closestNotVisible from './closestNotVisible';
 
 /**
  * @name      whenVisible
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Monitor an HTMLElement to be notified when it is visible

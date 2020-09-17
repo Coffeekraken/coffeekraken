@@ -2,7 +2,7 @@ const __SUrlAction = require('./browser/SUrlAction');
 
 /**
  * @name            typeMap
- * @namespace       js.action
+ * @namespace       sugar.js.action
  * @type            Object
  *
  * Object that map a string "type" like "url", "login", etc... to his proper SAction class

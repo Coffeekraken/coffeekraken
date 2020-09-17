@@ -17,7 +17,7 @@ class SFsOutputStreamActionInterface extends __SInterface {
 
 /**
  * @name            SFsOutputStreamAction
- * @namespace           node.stream.actions
+ * @namespace           sugar.node.stream.actions
  * @type            Class
  * @extends         SActionsStreamAction
  *

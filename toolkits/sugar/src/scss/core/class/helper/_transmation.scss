@@ -3,7 +3,7 @@
   @if class-match-namespace("sugar.helper.transition.no") {
     /**
     * @name 		#{sel(no-transition)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace       sugar.helper.transition.no
     * @type        class
     *
@@ -29,7 +29,7 @@
   @if class-match-namespace("sugar.helper.transition.clear") {
     /**
     * @name 		#{sel(clear-transition)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace       sugar.helper.transition.clear
     * @type        class
     *
@@ -58,7 +58,7 @@
   @if class-match-namespace("sugar.helper.animation.no") {
     /**
     * @name 		#{sel(no-animation)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace       sugar.helper.animation.no
     * @type        class
     *
@@ -84,7 +84,7 @@
   @if class-match-namespace("sugar.helper.animation.clear") {
     /**
     * @name 		#{sel(clear-animation)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace       sugar.helper.animation.clear
     * @type        class
     *
@@ -113,7 +113,7 @@
   @if class-match-namespace("sugar.helper.transmation.no") {
     /**
     * @name 		#{sel(no-transmation)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace       sugar.helper.transmation.no
     * @type        class
     *
@@ -142,7 +142,7 @@
   ) {
     /**
     * @name 		#{sel(clear-transmation)}
-    * @namespace         scss.core.class.helper
+    * @namespace         sugar.scss.core.class.helper
     * @class-namespace       sugar.helper.transmation.clear
     * @type        class
     *

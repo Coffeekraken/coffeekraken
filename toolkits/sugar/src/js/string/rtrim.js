@@ -1,6 +1,6 @@
 /**
  * @name        rtrim
- * @namespace           js.string
+ * @namespace           sugar.js.string
  * @type      Function
  *
  * Trim right a specified string

@@ -2,7 +2,7 @@ import __getStyleProperty from './getStyleProperty';
 
 /**
  * @name      forceRedraw
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Force the element to be painted again in case of visual issues

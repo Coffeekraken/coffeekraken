@@ -2,7 +2,7 @@ import __replaceTags from '../../html/replaceTags';
 
 /**
  * @name                              mail
- * @namespace           js.log.htmlPresets
+ * @namespace           sugar.js.log.htmlPresets
  * @type                              Function
  *
  * Replace all the "log" html tags like "<red>", "<bold>", etc... with the corresponding syntax for mail formating

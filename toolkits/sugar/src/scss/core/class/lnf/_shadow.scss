@@ -3,7 +3,7 @@
   @if class-match-namespace("sugar.lnf.shadow") {
     /**
     * @name 		#{sel(lnf-shadow)}
-    * @namespace           scss.core.class.lnf
+    * @namespace           sugar.scss.core.class.lnf
     * @class-namespace     sugar.lnf.shadow
     * @type        class
     *
@@ -26,7 +26,7 @@
   @if class-match-namespace("sugar.lnf.shadow.small") {
     /**
     * @name 		#{sel(lnf-shadow--small)}
-    * @namespace           scss.core.class.lnf
+    * @namespace           sugar.scss.core.class.lnf
     * @class-namespace     sugar.lnf.shadow.small
     * @type        class
     *
@@ -49,7 +49,7 @@
   @if class-match-namespace("sugar.lnf.shadow.big") {
     /**
     * @name 		#{sel(lnf-shadow--big)}
-    * @namespace           scss.core.class.lnf
+    * @namespace           sugar.scss.core.class.lnf
     * @class-namespace     sugar.lnf.shadow.big
     * @type        class
     *

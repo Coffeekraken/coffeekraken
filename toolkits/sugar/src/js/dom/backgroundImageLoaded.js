@@ -5,7 +5,7 @@ import __SPromise from '../promise/SPromise';
 
 /**
  * @name        backgroundImageLoaded
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Detect when a background image has been loaded on an HTMLElement

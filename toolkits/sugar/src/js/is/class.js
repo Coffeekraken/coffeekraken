@@ -2,7 +2,7 @@ const __isClass = require('is-class');
 
 /**
  * @name                      class
- * @namespace           js.is
+ * @namespace           sugar.js.is
  * @type                      Function
  *
  * Check if the passed variable (or array of variables) is/are plain variable(s)

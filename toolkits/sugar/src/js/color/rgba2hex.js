@@ -1,6 +1,6 @@
 /**
  * @name                rgba2hex
- * @namespace           js.color
+ * @namespace           sugar.js.color
  * @type                Function
  *
  * RGBA to HEX

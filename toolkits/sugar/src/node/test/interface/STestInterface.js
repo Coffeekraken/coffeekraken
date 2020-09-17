@@ -4,7 +4,7 @@ const __deepMerge = require('../../object/deepMerge');
 
 /**
  * @name                STestInterface
- * @namespace           node.test.interface
+ * @namespace           sugar.node.test.interface
  * @type                Class
  * @extends             SInterface
  *

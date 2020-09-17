@@ -1,6 +1,6 @@
 /**
  * @name                        filter
- * @namespace           js.object
+ * @namespace           sugar.js.object
  * @type                        Function
  *
  * Allow to filter an object using a function. It works the same as the filter method on the Array object type.

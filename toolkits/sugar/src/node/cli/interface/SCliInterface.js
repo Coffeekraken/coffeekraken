@@ -3,7 +3,7 @@ const __SProcessInterface = require('../../process/SProcess');
 
 /**
  * @name                SCliInterface
- * @namespace           node.blessed.interface
+ * @namespace           sugar.node.blessed.interface
  * @type                Class
  * @extends             SInterface
  *

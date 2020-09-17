@@ -12,7 +12,7 @@ import __stringify from '../json/stringify';
 
 /**
  * @name        toString
- * @namespace           js.string
+ * @namespace           sugar.js.string
  * @type      Function
  *
  * Convert passed value to a string

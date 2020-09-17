@@ -11,7 +11,7 @@ const __extension = require('../fs/extension');
 
 /**
  * @name              SDocMapItem
- * @namespace           node.doc
+ * @namespace           sugar.node.doc
  * @type              Class
  *
  * This class represent a docMap item object

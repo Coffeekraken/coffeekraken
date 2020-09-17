@@ -1,6 +1,6 @@
 /**
  * @name      text-format-class
- * @namespace           scss.core.typography
+ * @namespace           sugar.scss.core.typography
  * @type    function
  *
  * Return the text-format setting scope class
@@ -14,5 +14,5 @@
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function text-format-class() {
-  @return setting("typography.text-format-scope-class");
+  @return setting("typography.text-format-class");
 }

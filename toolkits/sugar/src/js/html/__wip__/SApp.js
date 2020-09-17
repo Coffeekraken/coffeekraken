@@ -6,7 +6,7 @@ let __decryptedConfig, __decryptedMeta;
 
 /**
  * @name                                            SApp
- * @namespace           js.class
+ * @namespace           sugar.js.class
  * @type                                            Class
  *
  * This class represent an application route class. This mean that you can create an application class that extend this one
@@ -80,7 +80,7 @@ export default class SApp {
 
   /**
    * @name                            config
-   * @namespace           js.class.SApp
+   * @namespace           sugar.js.class.SApp
    * @type                            Function
    *
    * Get a configuration value from the backend using an ajax call
@@ -103,7 +103,7 @@ export default class SApp {
 
   /**
    * @name                            meta
-   * @namespace           js.class.SApp
+   * @namespace           sugar.js.class.SApp
    * @type                            Function
    *
    * Usefull function that give you back an application meta taken depending on your passed dotted object path

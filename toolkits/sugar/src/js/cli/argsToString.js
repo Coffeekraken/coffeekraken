@@ -4,7 +4,7 @@ import __deepMerge from '../object/deepMerge';
 
 /**
  * @name                  argsToString
- * @namespace           js.cli
+ * @namespace           sugar.js.cli
  * @type                  Function
  *
  * This function take a simple object, a definitionObj object and return you the string version that you can pass
